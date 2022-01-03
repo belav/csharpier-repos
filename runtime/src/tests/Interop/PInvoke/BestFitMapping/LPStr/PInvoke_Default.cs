@@ -115,8 +115,10 @@ public partial class PInvoke_Default
 
     private static LPStrTestStruct GetInvalidStruct() =>
         new LPStrTestStruct() { str = InvalidString };
+
     private static LPStrTestStruct GetUnmappableStruct() =>
         new LPStrTestStruct() { str = UnmappableString };
+
     private static LPStrTestStruct GetValidStruct() => new LPStrTestStruct() { str = ValidString };
 
     private static unsafe void RunTest(bool bestFitMapping, bool throwOnUnmappableChar)

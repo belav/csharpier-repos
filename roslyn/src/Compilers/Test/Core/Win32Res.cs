@@ -19,10 +19,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     {
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern IntPtr FindResource(IntPtr hModule, string lpName, string lpType);
+
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern IntPtr LoadResource(IntPtr hModule, IntPtr hResInfo);
+
         [DllImport("kernel32.dll")]
         private static extern IntPtr LockResource(IntPtr hResData);
+
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern uint SizeofResource(IntPtr hModule, IntPtr hResInfo);
 

@@ -23,6 +23,7 @@ namespace Benchstone.BenchI
             public Node Left;
             public Node Right;
             public int Val;
+
             public Node(int n)
             {
                 Left = null;

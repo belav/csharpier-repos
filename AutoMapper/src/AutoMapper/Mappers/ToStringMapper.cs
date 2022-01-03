@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
+
 namespace AutoMapper.Internal.Mappers
 {
     using static Expression;
+
     public class ToStringMapper : IObjectMapper
     {
         public bool IsMatch(in TypePair context) => context.DestinationType == typeof(string);
+
         public Expression MapExpression(
             IGlobalConfiguration configurationProvider,
             ProfileMap profileMap,
@@ -24,6 +27,7 @@ namespace AutoMapper.Internal.Mappers
               ? EnumToString(sourceExpression, sourceType, toStringCall)
               : toStringCall;
         }
+
         private static Expression EnumToString(
             Expression sourceExpression,
             Type sourceType,

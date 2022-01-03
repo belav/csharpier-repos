@@ -637,6 +637,7 @@ namespace System.IO.Compression
         {
             _mode = mode;
         }
+
         public BadWrappedStream(Mode mode, byte[] buffer) : base(buffer)
         {
             _mode = mode;
@@ -670,7 +671,9 @@ namespace System.IO.Compression
         }
 
         public override void Write(byte[] buffer, int offset, int count) { }
+
         public override void Flush() { }
+
         public override bool CanRead
         {
             get { return true; }
@@ -692,10 +695,12 @@ namespace System.IO.Compression
             get { throw new NotSupportedException(); }
             set { throw new NotSupportedException(); }
         }
+
         public override long Seek(long offset, SeekOrigin origin)
         {
             throw new NotSupportedException();
         }
+
         public override void SetLength(long value)
         {
             throw new NotSupportedException();
@@ -737,7 +742,9 @@ namespace System.IO.Compression
             AsyncCallback callback,
             object state
         ) => TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
+
         public override int EndRead(IAsyncResult asyncResult) => TaskToApm.End<int>(asyncResult);
+
         public override IAsyncResult BeginWrite(
             byte[] buffer,
             int offset,
@@ -745,6 +752,7 @@ namespace System.IO.Compression
             AsyncCallback callback,
             object state
         ) => TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
+
         public override void EndWrite(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
 
         public override async Task<int> ReadAsync(

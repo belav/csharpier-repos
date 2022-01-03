@@ -3057,6 +3057,7 @@ namespace System.ComponentModel.Composition
 
             ExceptionAssert.Throws<InvalidOperationException>(() => container.Compose(batch));
         }
+
         private static Expression<Func<ExportDefinition, bool>> ConstraintFromContract(
             string contractName
         )
@@ -3327,8 +3328,11 @@ namespace System.ComponentModel.Composition
         }
 
         public interface IMefCollection { }
+
         public interface IMefCollection<TC, TP> : IList<TC>, IMefCollection where TC : TP { }
+
         public class BaseClass { }
+
         public class DerivedClass : BaseClass { }
 
         [Export("UsingWhereClause", typeof(IMefCollection<,>))]

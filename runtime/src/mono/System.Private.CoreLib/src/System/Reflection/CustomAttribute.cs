@@ -37,6 +37,7 @@ namespace System.Reflection
     internal static class CustomAttribute
     {
         private static Assembly? corlib;
+
         [ThreadStatic]
         private static Dictionary<Type, AttributeUsageAttribute>? usage_cache;
 

@@ -38,6 +38,7 @@ namespace DefaultNamespace
     internal class GCQueue
     {
         internal static Queue G_Queue;
+
         public static int Main(string[] args)
         {
             int iRep = 0;

@@ -34,6 +34,7 @@ namespace System.Data
         private bool _allowNull = true;
         private string? _caption;
         private string _columnName;
+
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicProperties
                 | DynamicallyAccessedMemberTypes.PublicFields

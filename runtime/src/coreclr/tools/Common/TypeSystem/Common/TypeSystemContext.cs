@@ -691,6 +691,7 @@ namespace Internal.TypeSystem
         private class SignatureVariableHashtable : LockFreeReaderHashtable<uint, SignatureVariable>
         {
             private TypeSystemContext _context;
+
             public SignatureVariableHashtable(TypeSystemContext context)
             {
                 _context = context;

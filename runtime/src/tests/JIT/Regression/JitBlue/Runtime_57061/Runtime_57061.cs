@@ -15,6 +15,7 @@ struct S0
     public uint F2;
     public short F3;
     public ulong F4;
+
     public S0(bool f0, bool f1, uint f2, short f3, ulong f4) : this()
     {
         F0 = f0;
@@ -57,6 +58,7 @@ public class Runtime_57061
     static C1 s_37;
     static sbyte s_56;
     static S3 s_60;
+
     public static int Main()
     {
         uint vr2 = default(uint);

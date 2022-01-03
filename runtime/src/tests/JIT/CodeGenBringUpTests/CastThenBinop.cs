@@ -24,11 +24,13 @@ public class Test_CastThenBinop
     {
         return (long)(a - 2) & (long)(b + 1);
     }
+
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
     static long UpcastAnd_SideEffect(int a, int b, out int a1, out int b1)
     {
         return (long)(a1 = a) & (long)(b1 = b);
     }
+
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
     static int DowncastAnd_Overflow(int a, int b)
     {
@@ -44,6 +46,7 @@ public class Test_CastThenBinop
     // I can only seem to reproduce the bug when _xorLeft and _xorRight are fields
     static sbyte _xorLeft = 0;
     static sbyte _xorRight = -1;
+
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
     static ushort UpcastXor_SignExtension()
     {

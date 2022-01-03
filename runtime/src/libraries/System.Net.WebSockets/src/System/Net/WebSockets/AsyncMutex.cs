@@ -20,6 +20,7 @@ namespace System.Threading
         /// If the value is less than or equal to 0, the mutex is held and requires fallback to enter it.
         /// </remarks>
         private int _gate = 1;
+
         /// <summary>Secondary check guarded by the lock to indicate whether the mutex is acquired.</summary>
         /// <remarks>
         /// This is only meaningful after having updated <see cref="_gate"/> via interlockeds and taken the appropriate path.
@@ -32,6 +33,7 @@ namespace System.Threading
         /// with an initial count of 0.
         /// </remarks>
         private bool _lockedSemaphoreFull = true;
+
         /// <summary>The tail of the double-linked circular waiting queue.</summary>
         /// <remarks>
         /// Waiters are added at the tail.
@@ -238,6 +240,7 @@ namespace System.Threading
         {
             public Waiter(AsyncMutex owner)
                 : base(TaskCreationOptions.RunContinuationsAsynchronously) => Owner = owner;
+
             public AsyncMutex Owner { get; }
             public CancellationTokenRegistration CancellationRegistration { get; set; }
             public Waiter? Next { get; set; }

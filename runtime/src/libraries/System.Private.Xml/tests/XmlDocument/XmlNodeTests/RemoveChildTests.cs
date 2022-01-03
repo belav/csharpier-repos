@@ -15,6 +15,7 @@ namespace System.Xml.Tests
             XmlNodeType.Text,
             XmlNodeType.Comment
         };
+
         private enum InsertType
         {
             InsertBefore,

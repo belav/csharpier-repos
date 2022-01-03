@@ -18,6 +18,7 @@ namespace System.Globalization
     {
         // The current state of the state machine for parsing Hebrew numbers.
         internal HebrewNumber.HS state;
+
         // The current value of the Hebrew number.
         // The final value is determined when state is FoundEndOfHebrewNumber.
         internal int result;
@@ -246,6 +247,7 @@ namespace System.Globalization
         {
             internal HebrewToken token;
             internal short value;
+
             internal HebrewValue(HebrewToken token, short value)
             {
                 this.token = token;

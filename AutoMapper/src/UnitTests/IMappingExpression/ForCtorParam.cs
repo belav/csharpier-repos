@@ -19,6 +19,7 @@ namespace AutoMapper.UnitTests
             public string Key { get; }
             public string Value { get; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 c =>
@@ -26,6 +27,7 @@ namespace AutoMapper.UnitTests
                         .ForCtorParam("value1", o => o.MapFrom("Value"))
                         .ForCtorParam("key1", o => o.MapFrom("Key"))
             );
+
         [Fact]
         public void Should_map_ok()
         {
@@ -34,23 +36,28 @@ namespace AutoMapper.UnitTests
             destination.Value.ShouldBe("2");
         }
     }
+
     public class ForCtorParam_MapFrom_ProjectTo : AutoMapperSpecBase
     {
         public class Source
         {
             public string Value1 { get; set; }
         }
+
         public class Destination
         {
             public Destination(string value) => Value = value;
+
             public string Value { get; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 c =>
                     c.CreateProjection<Source, Destination>()
                         .ForCtorParam("value", o => o.MapFrom(s => s.Value1))
             );
+
         [Fact]
         public void Should_map_ok()
         {
@@ -61,6 +68,7 @@ namespace AutoMapper.UnitTests
             destination.Value.ShouldBe("Core");
         }
     }
+
     public class When_configuring__non_generic_ctor_param_members : AutoMapperSpecBase
     {
         public class Source

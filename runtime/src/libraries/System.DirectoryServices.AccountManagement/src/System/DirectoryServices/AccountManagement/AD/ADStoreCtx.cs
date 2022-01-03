@@ -732,6 +732,7 @@ namespace System.DirectoryServices.AccountManagement
             if (commitChanges)
                 de.CommitChanges();
         }
+
         /// <summary>
         /// Read the Account Control From the Directory entry.  If the control is read then set or
         /// clear bit 0x2 corresponding to the enable parameter
@@ -805,6 +806,7 @@ namespace System.DirectoryServices.AccountManagement
                 throw ExceptionHelper.GetExceptionFromCOMException(e);
             }
         }
+
         /// <summary>
         /// Apply all changed properties on the principal to the Directory Entry.
         /// Reset the changed status on all the properties
@@ -1137,6 +1139,7 @@ namespace System.DirectoryServices.AccountManagement
 
             SDSUtils.ChangePassword(de, oldPassword, newPassword);
         }
+
         /// <summary>
         /// Expire password by setting pwdLastSet to 0
         /// </summary>

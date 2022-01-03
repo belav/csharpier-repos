@@ -15,14 +15,17 @@ namespace AutoMapper.UnitTests.Bug
             {
                 public InnerSource InnerSource { get; set; }
             }
+
             class InnerSource
             {
                 public int Value { get; set; }
             }
+
             class Destination
             {
                 public int InnerSourceValue { get; set; }
             }
+
             protected override MapperConfiguration Configuration =>
                 new MapperConfiguration(
                     c =>
@@ -32,6 +35,7 @@ namespace AutoMapper.UnitTests.Bug
                         c.CreateMap<Source, Destination>();
                     }
                 );
+
             [Fact]
             public void Should_not_validate() =>
                 Should
@@ -42,17 +46,20 @@ namespace AutoMapper.UnitTests.Bug
                     .UnmappedPropertyNames.Single()
                     .ShouldBe(nameof(Destination.InnerSourceValue));
         }
+
         public class ExactMatchNamingConvention : NonValidatingSpecBase
         {
             class Source
             {
                 public string Name { get; set; }
             }
+
             class Destination
             {
                 public string Name { get; set; }
                 public string COMPANY_Name { get; set; }
             }
+
             protected override MapperConfiguration Configuration =>
                 new MapperConfiguration(
                     cfg =>
@@ -62,6 +69,7 @@ namespace AutoMapper.UnitTests.Bug
                         cfg.CreateMap<Source, Destination>();
                     }
                 );
+
             [Fact]
             public void Should_not_use_pascal_naming_convention() =>
                 new Action(
@@ -70,6 +78,7 @@ namespace AutoMapper.UnitTests.Bug
                     0
                 ].UnmappedPropertyNames.ShouldContain("COMPANY_Name");
         }
+
         public class Neda
         {
             public string cmok { get; set; }

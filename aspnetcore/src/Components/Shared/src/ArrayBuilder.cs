@@ -10,14 +10,19 @@ using System.Runtime.CompilerServices;
 
 #if IGNITOR
 namespace Ignitor;
+
 #elif BLAZOR_WEBVIEW
 namespace Microsoft.AspNetCore.Components.WebView;
+
 #elif COMPONENTS_SERVER
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
+
 #elif JS_INTEROP
 namespace Microsoft.JSInterop.Infrastructure;
+
 #else
 namespace Microsoft.AspNetCore.Components.RenderTree;
+
 #endif
 
 /// <summary>

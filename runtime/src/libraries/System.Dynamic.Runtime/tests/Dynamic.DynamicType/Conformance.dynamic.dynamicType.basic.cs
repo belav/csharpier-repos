@@ -23,6 +23,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
     public class Test
     {
         public delegate int Foo();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -62,6 +63,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
     public class Test
     {
         public delegate int Foo(int x);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -101,6 +103,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
     public class Test
     {
         public delegate int Foo(dynamic x);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -141,6 +144,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
     public class Test
     {
         public delegate int Foo(dynamic x);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -190,6 +194,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
     public class Test
     {
         public delegate int Foo(dynamic x);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -229,6 +234,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
     public class Test
     {
         public delegate int Foo();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -268,9 +274,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
 
     public delegate int Foo2(object x);
     public delegate int Bar2(dynamic d);
+
     public class Test
     {
         public delegate int Foo(dynamic x);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -327,9 +335,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
 
     public delegate int Foo2(object x);
     public delegate int Bar2(dynamic d);
+
     public class Test
     {
         public delegate int Foo(dynamic x);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -380,6 +390,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.anonm
     {
         public delegate int Foo(object x);
         public delegate int Bar2(dynamic d);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -435,6 +446,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.argum
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -476,6 +488,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.argum
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1697,6 +1710,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1727,6 +1741,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.boxin
     public struct Value
     {
         public int X;
+
         public void MutateX(int x)
         {
             this.X = x;
@@ -2046,6 +2061,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.colle
     public class Collect : System.Collections.IEnumerable
     {
         public static int Status;
+
         public void Add(int x)
         {
             Collect.Status += 1;
@@ -2079,6 +2095,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
     public class Test
     {
         public delegate void Foo(object o);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2100,6 +2117,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
     public class Test
     {
         public delegate void Foo(dynamic o);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2135,6 +2153,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
     public class Test
     {
         public delegate dynamic Foo();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2172,6 +2191,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
     public class Test
     {
         public delegate dynamic Foo();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2211,6 +2231,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
         public delegate void Foo(dynamic o);
         public static event Foo myEvent;
         private static int s_status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2256,6 +2277,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.dlgat
         public delegate void Foo(object o);
         public static event Foo myEvent;
         private static int s_status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2316,11 +2338,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     public delegate void MyEventHandler1(object sender, EventArgs e);
     public delegate void MyEventHandler2(dynamic sender);
     public delegate void MyEventHandler3(dynamic d1, dynamic d2, EventArgs e);
+
     public class MyEvent
     {
         public event MyEventHandler1 myEvent1;
         internal event MyEventHandler2 myEvent2;
         public event MyEventHandler3 myEvent3;
+
         public void Fire1(EventArgs e)
         {
             if (myEvent1 != null)
@@ -2343,6 +2367,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     public class Test
     {
         private int _result = -1;
+
         public void EventReceiver1(dynamic sender, EventArgs e)
         {
             _result = 1;
@@ -2427,11 +2452,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     public delegate void MyEventHandler1(dynamic sender, EventArgs e);
     public delegate void MyEventHandler2(dynamic sender);
     public delegate void MyEventHandler3(object d1, dynamic d2, EventArgs e);
+
     public abstract class MyEvent1
     {
         internal abstract event MyEventHandler1 myEvent1;
         internal virtual event MyEventHandler2 myEvent2;
         public event MyEventHandler3 myEvent3;
+
         internal void Fire2(EventArgs e)
         {
             if (myEvent2 != null)
@@ -2449,6 +2476,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     {
         internal override event MyEventHandler1 myEvent1;
         new internal event MyEventHandler2 myEvent2;
+
         // public event MyEventHandler3 myEvent3;
         public void Fire1(EventArgs e)
         {
@@ -2466,6 +2494,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     public class Test
     {
         private int _result = -1;
+
         public void EventReceiver1(object sender, EventArgs e)
         {
             _result = 1;
@@ -2569,6 +2598,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     public class A
     {
         public event EventHandler E;
+
         public static void EventH(object sender, EventArgs e) { }
 
         public static void DynamicCSharpRunTest()
@@ -2663,6 +2693,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
         public virtual event EventHandler E4;
         internal override event EventHandler E5;
         private event EventHandler E6;
+
         /// <summary>
         /// not related to prop, just more negative scenarios
         /// </summary>
@@ -2777,6 +2808,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     {
         private new event EventHandler E1;
         public override event EventHandler E4;
+
         /// <summary>
         /// not related to prop, just more negative scenarios
         /// </summary>
@@ -2845,6 +2877,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.evnt0
     {
         public delegate void MyEvent();
         public event MyEvent XX;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2936,6 +2969,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.expli
     public class MyClass
     {
         public int Field;
+
         public static explicit operator MyClass(int x)
         {
             return new MyClass() { Field = x };
@@ -3142,6 +3176,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
         public class MyClass
         {
             public int Field;
+
             public int GetNumber()
             {
                 return Field;
@@ -3178,6 +3213,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
         public class MyClass
         {
             public int Field;
+
             public int GetNumber()
             {
                 return Field;
@@ -3197,6 +3233,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
     public class Test
     {
         private static object s_foo = ((dynamic)new MyClass() { Field = 3 }).Field;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -3213,6 +3250,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
         public class MyClass
         {
             public int Field;
+
             public int GetNumber()
             {
                 return Field;
@@ -3232,6 +3270,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
     public class Test
     {
         private static object s_foo = ((MyClass)((dynamic)new MyClass() { Field = 3 }))[3];
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -3248,6 +3287,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
         public class MyClass
         {
             public int Field;
+
             public int GetNumber()
             {
                 return Field;
@@ -3267,6 +3307,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
     public class Test
     {
         private static dynamic s_foo = (new MyClass() { Field = 3 });
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -3283,6 +3324,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.initi
         public class MyClass
         {
             public int Field;
+
             public int GetNumber()
             {
                 return Field;
@@ -3420,6 +3462,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     using System.Linq.Expressions;
 
     public delegate dynamic D(long x, object y);
+
     public class Test
     {
         [Fact]
@@ -3578,6 +3621,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     // <Code>
 
     public delegate dynamic D(object p1, char p2);
+
     public class Test
     {
         [Fact]
@@ -3635,6 +3679,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
     public class Test
     {
         private static int s_status = 0;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -4065,6 +4110,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
         public class Class2
         {
             public int Field;
+
             public static implicit operator Class2(Class1 p1)
             {
                 return new Class2() { Field = p1.Field + 1 };
@@ -4110,6 +4156,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.lambd
         public class Class2
         {
             public int Field;
+
             public static explicit operator Class2(Class1 p1)
             {
                 return new Class2() { Field = p1.Field + 1 };
@@ -4896,6 +4943,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.commo
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate001.operate001
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title> Operator -.</Title>
     // <Description>
     // </Description>
@@ -5027,6 +5075,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate002.operate002
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title> Operator +.</Title>
     // <Description>
     // </Description>
@@ -5151,6 +5200,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate003.operate003
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title> Operator ~.</Title>
     // <Description>
     // </Description>
@@ -5258,6 +5308,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate004.operate004
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title> Operator !.</Title>
     // <Description>
     // </Description>
@@ -5337,6 +5388,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate005.operate005
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title> Operator ++.</Title>
     // <Description>
     // </Description>
@@ -5544,6 +5596,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate005a.operate005a
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title> Operator ++.</Title>
     // <Description>
     // </Description>
@@ -5751,6 +5804,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate006.operate006
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title> Operator --.</Title>
     // <Description>
     // </Description>
@@ -5960,6 +6014,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate006a.operate006a
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title> Operator --.</Title>
     // <Description>
     // </Description>
@@ -6168,6 +6223,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate007.operate007
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Bool logical Operator &, | , ^</Title>
     // <Description>
     // </Description>
@@ -6327,6 +6383,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate007a.operate007a
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Bool logical Operator &=, |= , ^=, Compound assignment</Title>
     // <Description>
     // </Description>
@@ -6553,6 +6610,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate007b.operate007b
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Bool logical Operator &=, |= , ^=, Compound assignment</Title>
     // <Description>
     // dynamic op literals -
@@ -6709,6 +6767,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate008.operate008
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Conditional logical operators ||, &&</Title>
     // <Description>
     // </Description>
@@ -6820,6 +6879,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate008a.operate008a
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Conditional logical operators ||, &&</Title>
     // <Description>
     // dynamic op literals
@@ -7032,6 +7092,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate009.operate009
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Null coalescing ??</Title>
     // <Description>
     // </Description>
@@ -7137,6 +7198,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate009a.operate009a
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Null coalescing ??</Title>
     // <Description>
     // dynamic op literals
@@ -7982,6 +8044,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     public struct MyStruct2
     {
         private int _f1;
+
         public MyStruct2(int p1)
         {
             _f1 = p1;
@@ -8474,6 +8537,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate012.operate012
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Relational operator</Title>
     // <Description>
     // </Description>
@@ -8595,6 +8659,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate012a.operate012a
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Relational operator</Title>
     // <Description>
     // dynamic op literals
@@ -8727,6 +8792,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate012b.operate012b
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Relational operator</Title>
     // <Description>
     // dynamic op literals
@@ -8886,6 +8952,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate013.operate013
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Arithmetic operator</Title>
     // <Description>
     // </Description>
@@ -9064,6 +9131,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate013a.operate013a
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Arithmetic operator, Compound assignment</Title>
     // <Description>dynamic does NOT keep nullable info either non-nullable Type or null object
     // </Description>
@@ -9277,6 +9345,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate013b.operate013b
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Arithmetic operator</Title>
     // <Description>
     // dynamic op literals
@@ -9443,6 +9512,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.operate014.operate014
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.common.common;
+
     // <Title>Short circuiting operators</Title>
     // <Description>
     // </Description>
@@ -9453,6 +9523,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
     public class Test
     {
         public static bool isHit = false;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -9775,6 +9846,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
         public static bool isCallFalse = false;
         public static bool isCallOpAnd = false;
         public static bool isCallOpOr = false;
+
         public static void ClearFlags()
         {
             isCallConvert = false;
@@ -10862,6 +10934,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.nulla
     public class Program
     {
         public static int Status = 0;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -10899,6 +10972,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.nulla
     public class Program
     {
         public static int Status = 0;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -10935,6 +11009,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.field
         public static dynamic c2 = 4;
         public dynamic c3 = 4;
         public dynamic c4 = 4;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -10969,6 +11044,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.field
     public class P
     {
         public dynamic i = 0;
+
         public void Foo()
         {
             ++i;

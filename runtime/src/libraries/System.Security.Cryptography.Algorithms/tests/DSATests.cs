@@ -339,10 +339,13 @@ namespace System.Security.Cryptography.Algorithms.Tests
         {
             public override byte[] CreateSignature(byte[] rgbHash) =>
                 throw new NotImplementedException();
+
             public override void ImportParameters(DSAParameters parameters) =>
                 throw new NotImplementedException();
+
             public override DSAParameters ExportParameters(bool includePrivateParameters) =>
                 throw new NotImplementedException();
+
             public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature) =>
                 throw new NotImplementedException();
 
@@ -352,8 +355,10 @@ namespace System.Security.Cryptography.Algorithms.Tests
                 int count,
                 HashAlgorithmName hashAlgorithm
             ) => base.HashData(data, offset, count, hashAlgorithm);
+
             public new byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) =>
                 base.HashData(data, hashAlgorithm);
+
             public new bool TryHashData(
                 ReadOnlySpan<byte> source,
                 Span<byte> destination,
@@ -367,15 +372,20 @@ namespace System.Security.Cryptography.Algorithms.Tests
             private readonly DSA _dsa;
 
             public OverrideAbstractDSA(DSA dsa) => _dsa = dsa;
+
             protected override void Dispose(bool disposing) => _dsa.Dispose();
 
             public override byte[] CreateSignature(byte[] rgbHash) => _dsa.CreateSignature(rgbHash);
+
             public override DSAParameters ExportParameters(bool includePrivateParameters) =>
                 _dsa.ExportParameters(includePrivateParameters);
+
             public override void ImportParameters(DSAParameters parameters) =>
                 _dsa.ImportParameters(parameters);
+
             public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature) =>
                 _dsa.VerifySignature(rgbHash, rgbSignature);
+
             protected override byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) =>
                 (byte[])_dsa.GetType()
                     .GetMethod(
@@ -386,6 +396,7 @@ namespace System.Security.Cryptography.Algorithms.Tests
                         null
                     )
                     .Invoke(_dsa, new object[] { data, hashAlgorithm });
+
             protected override byte[] HashData(
                 byte[] data,
                 int offset,

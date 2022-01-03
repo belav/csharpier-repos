@@ -55,6 +55,7 @@ namespace Castle.DynamicProxy.Tests.BugsReported
     {
         void Bar();
     }
+
     public interface ISub2 : IBase
     {
         void Baz();

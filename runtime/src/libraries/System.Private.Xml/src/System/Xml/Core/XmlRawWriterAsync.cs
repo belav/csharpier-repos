@@ -178,6 +178,7 @@ namespace System.Xml
         {
             return Task.CompletedTask;
         }
+
         internal virtual Task WriteXmlDeclarationAsync(string xmldecl)
         {
             return Task.CompletedTask;

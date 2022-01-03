@@ -226,6 +226,7 @@ namespace System.Reflection.Internal.Tests
         private class TestOnceDisposable : IDisposable
         {
             private int _i;
+
             public void Dispose() => Assert.Equal(1, Interlocked.Increment(ref _i));
         }
 

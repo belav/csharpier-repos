@@ -25,6 +25,7 @@ public class T
         }
         return (true);
     }
+
     static Object[] o = new Object[5];
 
     public static int Main()

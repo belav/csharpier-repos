@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 namespace AutoMapper.Configuration.Conventions
 {
     public interface ISourceToDestinationNameMapper
@@ -14,6 +15,7 @@ namespace AutoMapper.Configuration.Conventions
             string nameToSearch
         );
     }
+
     public interface IParentSourceToDestinationNameMapper
     {
         List<ISourceToDestinationNameMapper> NamedMappers { get; }
@@ -24,6 +26,7 @@ namespace AutoMapper.Configuration.Conventions
             string nameToSearch
         );
     }
+
     public sealed class DefaultName : ISourceToDestinationNameMapper
     {
         public MemberInfo GetMatchingMemberInfo(
@@ -33,10 +36,12 @@ namespace AutoMapper.Configuration.Conventions
             string nameToSearch
         ) => sourceTypeDetails.GetMember(nameToSearch);
     }
+
     public class ParentSourceToDestinationNameMapper : IParentSourceToDestinationNameMapper
     {
         public List<ISourceToDestinationNameMapper> NamedMappers { get; } =
             new List<ISourceToDestinationNameMapper> { new DefaultName() };
+
         public MemberInfo GetMatchingMemberInfo(
             TypeDetails sourceTypeDetails,
             Type destType,
@@ -59,12 +64,14 @@ namespace AutoMapper.Configuration.Conventions
             return memberInfo;
         }
     }
+
     public class PrePostfixName : ISourceToDestinationNameMapper
     {
         public List<string> Prefixes { get; } = new List<string>();
         public List<string> Postfixes { get; } = new List<string>();
         public List<string> DestinationPrefixes { get; } = new List<string>();
         public List<string> DestinationPostfixes { get; } = new List<string>();
+
         public MemberInfo GetMatchingMemberInfo(
             TypeDetails sourceTypeDetails,
             Type destType,
@@ -89,6 +96,7 @@ namespace AutoMapper.Configuration.Conventions
             return null;
         }
     }
+
     public class ReplaceName : ISourceToDestinationNameMapper
     {
         private readonly List<MemberNameReplacer> _memberNameReplacers =
@@ -99,6 +107,7 @@ namespace AutoMapper.Configuration.Conventions
             _memberNameReplacers.Add(new MemberNameReplacer(original, newValue));
             return this;
         }
+
         public MemberInfo GetMatchingMemberInfo(
             TypeDetails sourceTypeDetails,
             Type destType,
@@ -129,6 +138,7 @@ namespace AutoMapper.Configuration.Conventions
             }
             return null;
         }
+
         private string[] PossibleNames(string nameToSearch) =>
             _memberNameReplacers
                 .Select(r => nameToSearch.Replace(r.OriginalValue, r.NewValue))
@@ -144,6 +154,7 @@ namespace AutoMapper.Configuration.Conventions
                 )
                 .ToArray();
     }
+
     public class MemberNameReplacer
     {
         public MemberNameReplacer(string originalValue, string newValue)

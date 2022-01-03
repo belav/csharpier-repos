@@ -30,6 +30,7 @@ public class NonGen
         this.genStruct = t;
         return t;
     }
+
     object Dummy(object u)
     {
         this.u = u;
@@ -48,6 +49,7 @@ public class GenTest
     {
         InternalTest();
     }
+
     public bool Test_Positive007()
     {
         try
@@ -67,6 +69,7 @@ public class Test_Positive007
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

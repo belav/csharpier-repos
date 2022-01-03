@@ -2,17 +2,12 @@ using System;
 using System.Reflection;
 using System.Reflection.Emit;
 
-public class Parent
-{
-}
+public class Parent { }
 
-public class Foo : Parent
-{
-}
+public class Foo : Parent { }
 
-public class Bar : Parent
-{
-}
+public class Bar : Parent { }
+
 class Driver
 {
     public static int Main(string[] args)

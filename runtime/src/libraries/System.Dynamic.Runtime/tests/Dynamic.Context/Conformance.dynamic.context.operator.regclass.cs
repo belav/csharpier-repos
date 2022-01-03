@@ -9,6 +9,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public class MyClass
     {
         public int Field = 0;
+
         public static MyEnum?[] operator -(MyClass p1, dynamic[] p2)
         {
             return new MyEnum?[] { MyEnum.First, null };
@@ -232,6 +233,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public struct MyStruct
     {
         public int Number;
+
         public static decimal? operator !=(MyStruct p1, dynamic p2)
         {
             return decimal.MinValue;
@@ -705,6 +707,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public class Test
     {
         private delegate int MyDec(MyStruct?[] msa);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -754,6 +757,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public class Test
     {
         private delegate int MyDec(MyStruct?[] msa);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1003,6 +1007,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     {
         private static dynamic s_dy = new MyClass();
         private static bool? s_result = default(bool) & s_dy;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1070,6 +1075,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public class Test
     {
         private static MyEnum? s_result;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1111,6 +1117,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     {
         private static MyClass s_mc = new MyClass();
         private float _field;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1162,6 +1169,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     {
         private static int s_a = 0;
         private static MyClass s_mc = new MyClass();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1240,6 +1248,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public class Test
     {
         private MyClass _result;
+
         public Test()
         {
             dynamic dy1 = new MyClass() { Field = 1 };
@@ -1276,6 +1285,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public class Test
     {
         private static MyClass s_result;
+
         static Test()
         {
             dynamic dy1 = new MyClass() { Field = 1 };
@@ -1395,6 +1405,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     {
         private static MyEnum[] s_field = null;
         public static object locker = new object();
+
         ~Test()
         {
             lock (locker)
@@ -1891,6 +1902,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     {
         private object[] _field1;
         private dynamic _field2;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1965,6 +1977,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         private decimal? _field1;
         private int? _field2;
         private byte _field3;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2140,6 +2153,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     {
         private static MyClass s_myclass;
         private static MyEnum s_myenum;
+
         static Test()
         {
             MyStruct mc = new MyStruct();
@@ -2348,6 +2362,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     {
         private static dynamic s_dy = new MyStruct();
         private ulong[] _result = s_dy;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2378,6 +2393,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     {
         private static dynamic s_dy = new MyStruct() { Number = 5 };
         private volatile byte _result = !s_dy;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2696,6 +2712,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public class Test
     {
         private dynamic _result;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2746,6 +2763,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public class Test
     {
         private static int s_a = 0;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2793,6 +2811,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public class Test
     {
         private dynamic _result;
+
         public Test()
         {
             byte?[] p1 = null;
@@ -2828,6 +2847,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public class Test
     {
         private static dynamic s_result;
+
         static Test()
         {
             decimal? p1 = null;
@@ -2866,6 +2886,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     {
         private static dynamic s_field;
         public static object locker = new object();
+
         ~Test()
         {
             lock (locker)
@@ -3040,6 +3061,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public struct MyClass
     {
         public int Field;
+
         public static MyEnum?[] operator -(MyClass p1, dynamic[] p2)
         {
             return new MyEnum?[] { MyEnum.First, null };
@@ -3262,6 +3284,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public struct MyStruct
     {
         public int Number;
+
         public static decimal? operator !=(MyStruct p1, dynamic p2)
         {
             return decimal.MinValue;
@@ -3472,6 +3495,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrct023.regstrct023
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclass.regstrctoperate.regstrctoperate;
+
     // <Title> Tests regular struct operator used in property set.</Title>
     // <Description>
     // </Description>
@@ -3482,6 +3506,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     public class Test
     {
         private dynamic[] _result;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

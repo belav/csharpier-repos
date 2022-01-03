@@ -139,8 +139,10 @@ namespace ILCompiler.DependencyAnalysis
                 HelperId == other.HelperId
                 && DictionaryOwner == other.DictionaryOwner
                 && Target.Equals(other.Target);
+
             public override bool Equals(object obj) =>
                 obj is ReadyToRunGenericHelperKey && Equals((ReadyToRunGenericHelperKey)obj);
+
             public override int GetHashCode()
             {
                 int hashCode = (int)HelperId * 0x5498341 + 0x832424;
@@ -164,8 +166,10 @@ namespace ILCompiler.DependencyAnalysis
             public bool Equals(ModuleAndIntValueKey other) =>
                 IntValue == other.IntValue
                 && ((Module == null && other.Module == null) || Module.Equals(other.Module));
+
             public override bool Equals(object obj) =>
                 obj is ModuleAndIntValueKey && Equals((ModuleAndIntValueKey)obj);
+
             public override int GetHashCode()
             {
                 int hashCode = IntValue * 0x5498341 + 0x832424;

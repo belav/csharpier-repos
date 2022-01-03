@@ -7,10 +7,12 @@ namespace intf
             return 1;
         }
     }
+
     public interface B
     {
         int method();
     }
+
     public class C : A, B
     {
         static int Main()

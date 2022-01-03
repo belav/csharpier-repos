@@ -17,6 +17,7 @@ public struct S0 : I0
     public sbyte F2;
     public int F4;
     public bool F5;
+
     public S0(bool f5) : this() { }
 
     public S1 M34(S1[] arg0)
@@ -31,6 +32,7 @@ public struct S1 : I0, I3
     public S0 F1;
     public S0 F2;
     public S0 F3;
+
     public S1(S0 f1, S0 f2, S0 f3) : this() { }
 }
 
@@ -44,6 +46,7 @@ public class Runtime_58293
         new S1[] { new S1(new S0(false), new S0(false), new S0(true)) }
     };
     public static I3[][] s_42;
+
     public static int Main()
     {
         s_rt = new C();
@@ -153,6 +156,7 @@ public interface I
 {
     void WriteLine<T>(T val);
 }
+
 public class C : I
 {
     public void WriteLine<T>(T val)

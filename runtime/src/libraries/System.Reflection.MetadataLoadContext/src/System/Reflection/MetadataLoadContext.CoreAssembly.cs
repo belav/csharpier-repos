@@ -86,6 +86,7 @@ namespace System.Reflection
         /// the corresponding elements will be null.
         /// </summary>
         internal CoreTypes GetAllFoundCoreTypes() => _coreTypes;
+
         private readonly CoreTypes _coreTypes;
 
         //
@@ -94,6 +95,7 @@ namespace System.Reflection
         //
         internal Binder GetDefaultBinder() =>
             _lazyDefaultBinder ?? (_lazyDefaultBinder = new DefaultBinder(this));
+
         private volatile Binder? _lazyDefaultBinder;
     }
 }

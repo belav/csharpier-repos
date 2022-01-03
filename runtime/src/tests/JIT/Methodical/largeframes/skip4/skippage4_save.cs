@@ -16,6 +16,7 @@ namespace BigFrames
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(65496)]
         public Object o1;
     }

@@ -191,10 +191,12 @@ namespace System.Xml.Xsl.XsltOld
         {
             get { return XPathResultType.Any; }
         }
+
         object IXsltContextVariable.Evaluate(XsltContext xsltContext)
         {
             return ((XsltCompileContext)xsltContext).EvaluateVariable(this);
         }
+
         bool IXsltContextVariable.IsLocal
         {
             get

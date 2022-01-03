@@ -9,6 +9,7 @@ using System.Xml;
 public class CustomUrlResolver : XmlUrlResolver
 {
     private ITestOutputHelper _output;
+
     public CustomUrlResolver(ITestOutputHelper output)
     {
         _output = output;
@@ -24,6 +25,7 @@ public class CustomUrlResolver : XmlUrlResolver
 public class CustomNullResolver : XmlUrlResolver
 {
     private ITestOutputHelper _output;
+
     public CustomNullResolver(ITestOutputHelper output)
     {
         _output = output;

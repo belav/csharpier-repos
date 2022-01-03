@@ -604,13 +604,16 @@ namespace System.Threading.ThreadPools.Tests
         private sealed class SimpleWorkItem : IThreadPoolWorkItem
         {
             private readonly Action _action;
+
             public SimpleWorkItem(Action action) => _action = action;
+
             public void Execute() => _action();
         }
 
         private sealed class InvalidWorkItemAndTask : Task, IThreadPoolWorkItem
         {
             public InvalidWorkItemAndTask(Action action) : base(action) { }
+
             public void Execute() { }
         }
 

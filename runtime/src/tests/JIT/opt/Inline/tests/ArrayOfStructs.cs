@@ -16,6 +16,7 @@ public class Test_ArrayOfStructs
         array[0].x = 3;
         return array[0].x;
     }
+
     public static int Main()
     {
         try

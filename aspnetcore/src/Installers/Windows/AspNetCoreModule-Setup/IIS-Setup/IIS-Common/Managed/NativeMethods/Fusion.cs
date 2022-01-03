@@ -45,6 +45,7 @@ namespace Microsoft.Web.Utility.PInvoke.Fusion
 
         [PreserveSig()]
         int GetVersion(out int versionHi, out int versionLow);
+
         [PreserveSig()]
         int IsEqual(IAssemblyName pAsmName, int cmpFlags);
 
@@ -73,6 +74,7 @@ namespace Microsoft.Web.Utility.PInvoke.Fusion
             [MarshalAs(UnmanagedType.LPWStr)] string assemblyName,
             ref AssemblyInfo assemblyInfo
         );
+
         [PreserveSig()]
         int Reserved(
             int flags,
@@ -80,6 +82,7 @@ namespace Microsoft.Web.Utility.PInvoke.Fusion
             out object ppAsmItem,
             [MarshalAs(UnmanagedType.LPWStr)] string assemblyName
         );
+
         [PreserveSig()]
         int Reserved(out object ppAsmScavenger);
 
@@ -97,6 +100,7 @@ namespace Microsoft.Web.Utility.PInvoke.Fusion
         public int cbAssemblyInfo; // size of this structure for future expansion
         public int assemblyFlags;
         public long assemblySizeInKB;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string currentAssemblyPath;
         public int cchBuf; // size of path buf.
@@ -120,6 +124,7 @@ namespace Microsoft.Web.Utility.PInvoke.Fusion
 
         [PreserveSig()]
         int Reset();
+
         [PreserveSig()]
         int Clone(out IAssemblyEnum ppEnum);
     }

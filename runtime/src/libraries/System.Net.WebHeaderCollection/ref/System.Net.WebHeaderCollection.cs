@@ -50,6 +50,7 @@ namespace System.Net
         Translate = 39,
         UserAgent = 40,
     }
+
     public enum HttpResponseHeader
     {
         CacheControl = 0,
@@ -83,16 +84,19 @@ namespace System.Net
         Vary = 28,
         WwwAuthenticate = 29,
     }
+
     public partial class WebHeaderCollection
         : System.Collections.Specialized.NameValueCollection,
           System.Collections.IEnumerable,
           System.Runtime.Serialization.ISerializable
     {
         public WebHeaderCollection() { }
+
         protected WebHeaderCollection(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         public override string[] AllKeys
         {
             get { throw null; }
@@ -115,63 +119,88 @@ namespace System.Net
         {
             get { throw null; }
         }
+
         public void Add(System.Net.HttpRequestHeader header, string? value) { }
+
         public void Add(System.Net.HttpResponseHeader header, string? value) { }
+
         public void Add(string header) { }
+
         public override void Add(string name, string? value) { }
+
         protected void AddWithoutValidate(string headerName, string? headerValue) { }
+
         public override void Clear() { }
+
         public override string? Get(int index)
         {
             throw null;
         }
+
         public override string? Get(string? name)
         {
             throw null;
         }
+
         public override System.Collections.IEnumerator GetEnumerator()
         {
             throw null;
         }
+
         public override string GetKey(int index)
         {
             throw null;
         }
+
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         public override string[]? GetValues(int index)
         {
             throw null;
         }
+
         public override string[]? GetValues(string header)
         {
             throw null;
         }
+
         public static bool IsRestricted(string headerName)
         {
             throw null;
         }
+
         public static bool IsRestricted(string headerName, bool response)
         {
             throw null;
         }
+
         public override void OnDeserialization(object? sender) { }
+
         public void Remove(System.Net.HttpRequestHeader header) { }
+
         public void Remove(System.Net.HttpResponseHeader header) { }
+
         public override void Remove(string name) { }
+
         public void Set(System.Net.HttpRequestHeader header, string? value) { }
+
         public void Set(System.Net.HttpResponseHeader header, string? value) { }
+
         public override void Set(string name, string? value) { }
+
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         public byte[] ToByteArray()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;

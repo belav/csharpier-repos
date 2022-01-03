@@ -30,11 +30,13 @@ public class C<T> : IPos<T>, INeg<T>
 }
 
 enum intEnum : int { }
+
 enum uintEnum : uint { }
 
 class Test_vsw543506
 {
     public static bool pass;
+
     public static void IsInstShouldFail<T>(object o)
     {
         Console.WriteLine("cast from " + o.GetType() + " to  " + typeof(T));

@@ -67,6 +67,7 @@ namespace RemotingTest
     class R2
     {
         string sTest;
+
         public R2()
         {
             sTest = "R2";
@@ -82,6 +83,7 @@ namespace RemotingTest
     class R2_MBV
     {
         string sTest;
+
         public R2_MBV()
         {
             sTest = "R2";

@@ -364,6 +364,7 @@ namespace Microsoft.CodeAnalysis
                 // the compilation with stale trees around, answering true is still important.
                 public override bool CanUpdateCompilationWithStaleGeneratedTreesIfGeneratorsGiveSameOutput =>
                     true;
+
                 public override GeneratorDriver? TransformGeneratorDriver(
                     GeneratorDriver generatorDriver
                 )

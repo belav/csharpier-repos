@@ -27,6 +27,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 s_loadFailuresAreErrors++;
             }
+
             public void Dispose()
             {
                 s_loadFailuresAreErrors--;

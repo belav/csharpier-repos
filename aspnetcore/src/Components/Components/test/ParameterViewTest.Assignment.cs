@@ -603,6 +603,7 @@ public partial class ParameterViewTest
     {
         [Parameter]
         public int IntProp { get; set; }
+
         [Parameter]
         public string StringProp { get; set; }
 
@@ -665,6 +666,7 @@ public partial class ParameterViewTest
     {
         [Parameter]
         public object MyValue { get; set; }
+
         [Parameter]
         public object Myvalue { get; set; }
     }
@@ -679,10 +681,13 @@ public partial class ParameterViewTest
     {
         [Parameter]
         public int IntProp { get; set; }
+
         [Parameter]
         public string StringProp { get; set; }
+
         [Parameter]
         public object ObjectProp { get; set; }
+
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, object> CaptureUnmatchedValues { get; set; }
     }
@@ -691,6 +696,7 @@ public partial class ParameterViewTest
     {
         [CascadingParameter]
         public string Cascading { get; set; }
+
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, object> CaptureUnmatchedValues { get; set; }
     }
@@ -699,6 +705,7 @@ public partial class ParameterViewTest
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object> CaptureUnmatchedValuesProp1 { get; set; }
+
         [Parameter(CaptureUnmatchedValues = true)]
         public IDictionary<string, object> CaptureUnmatchedValuesProp2 { get; set; }
     }

@@ -28,9 +28,13 @@ interface IGeneric<T>
 class Generic<S> : IGeneric<S>
 {
     void IGeneric<S>.Method<U, Z>(S s, U u) { }
+
     void IGeneric<S>.Method<U>(S s) { }
+
     void IGeneric<S>.Method<U>(U u, S s) { }
+
     void IGeneric<S>.Method<U>(S s, ref U u) { }
+
     S IGeneric<S>.Method<U>(S s1, S s2)
     {
         return s1;
@@ -42,9 +46,13 @@ class Generic<S> : IGeneric<S>
 class Constructed : IGeneric<int>
 {
     void IGeneric<int>.Method<U, Z>(int i, U u) { }
+
     void IGeneric<int>.Method<U>(int i) { }
+
     void IGeneric<int>.Method<U>(U u, int i) { }
+
     void IGeneric<int>.Method<U>(int i, ref U u) { }
+
     int IGeneric<int>.Method<U>(int i1, int i2)
     {
         return i1;

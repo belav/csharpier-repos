@@ -18,11 +18,13 @@ namespace System.Speech.Recognition
         {
             _sapiRecognizer = new SapiRecognizer(SapiRecognizer.RecognizerType.Shared);
         }
+
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing && !_disposed)
@@ -115,18 +117,22 @@ namespace System.Speech.Recognition
         {
             RecoBase.LoadGrammar(grammar);
         }
+
         public void LoadGrammarAsync(Grammar grammar)
         {
             RecoBase.LoadGrammarAsync(grammar);
         }
+
         public void UnloadGrammar(Grammar grammar)
         {
             RecoBase.UnloadGrammar(grammar);
         }
+
         public void UnloadAllGrammars()
         {
             RecoBase.UnloadAllGrammars();
         }
+
         public RecognitionResult EmulateRecognize(string inputText)
         {
             if (Enabled)
@@ -138,6 +144,7 @@ namespace System.Speech.Recognition
                 throw new InvalidOperationException(SR.Get(SRID.RecognizerNotEnabled));
             }
         }
+
         public RecognitionResult EmulateRecognize(string inputText, CompareOptions compareOptions)
         {
             if (Enabled)
@@ -149,6 +156,7 @@ namespace System.Speech.Recognition
                 throw new InvalidOperationException(SR.Get(SRID.RecognizerNotEnabled));
             }
         }
+
         public RecognitionResult EmulateRecognize(
             RecognizedWordUnit[] wordUnits,
             CompareOptions compareOptions
@@ -163,6 +171,7 @@ namespace System.Speech.Recognition
                 throw new InvalidOperationException(SR.Get(SRID.RecognizerNotEnabled));
             }
         }
+
         public void EmulateRecognizeAsync(string inputText)
         {
             if (Enabled)
@@ -174,6 +183,7 @@ namespace System.Speech.Recognition
                 throw new InvalidOperationException(SR.Get(SRID.RecognizerNotEnabled));
             }
         }
+
         public void EmulateRecognizeAsync(string inputText, CompareOptions compareOptions)
         {
             if (Enabled)
@@ -185,6 +195,7 @@ namespace System.Speech.Recognition
                 throw new InvalidOperationException(SR.Get(SRID.RecognizerNotEnabled));
             }
         }
+
         public void EmulateRecognizeAsync(
             RecognizedWordUnit[] wordUnits,
             CompareOptions compareOptions
@@ -205,10 +216,12 @@ namespace System.Speech.Recognition
         {
             RecoBase.RequestRecognizerUpdate();
         }
+
         public void RequestRecognizerUpdate(object userToken)
         {
             RecoBase.RequestRecognizerUpdate(userToken);
         }
+
         public void RequestRecognizerUpdate(
             object userToken,
             TimeSpan audioPositionAheadToRaiseUpdate

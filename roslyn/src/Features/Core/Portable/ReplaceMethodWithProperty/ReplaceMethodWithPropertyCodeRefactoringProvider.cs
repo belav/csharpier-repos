@@ -137,6 +137,7 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             HasGetPrefix(identifier.ValueText);
 
         private static bool HasGetPrefix(string text) => HasPrefix(text, GetPrefix);
+
         private static bool HasPrefix(string text, string prefix) =>
             text.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
             && text.Length > prefix.Length

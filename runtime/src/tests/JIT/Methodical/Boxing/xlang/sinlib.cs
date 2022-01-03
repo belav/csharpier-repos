@@ -8,6 +8,7 @@ namespace SinCalcLib
     public struct PiVal
     {
         public double Value;
+
         public PiVal(double v)
         {
             Value = v;

@@ -148,7 +148,9 @@ CommonKey3:CommonKey4=IniValue6";
         private class NotVeryGoodFileProvider : IFileProvider
         {
             public IDirectoryContents GetDirectoryContents(string subpath) => null;
+
             public IFileInfo GetFileInfo(string subpath) => null;
+
             public IChangeToken Watch(string filter) => null;
         }
 
@@ -160,13 +162,16 @@ CommonKey3:CommonKey4=IniValue6";
             public long Length => throw new NotImplementedException();
             public string Name => throw new NotImplementedException();
             public string PhysicalPath => throw new NotImplementedException();
+
             public Stream CreateReadStream() => throw new NotImplementedException();
         }
 
         private class AlwaysMissingFileProvider : IFileProvider
         {
             public IDirectoryContents GetDirectoryContents(string subpath) => null;
+
             public IFileInfo GetFileInfo(string subpath) => null;
+
             public IChangeToken Watch(string filter) => null;
         }
 

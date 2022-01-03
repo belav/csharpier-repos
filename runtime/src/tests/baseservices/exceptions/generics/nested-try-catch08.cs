@@ -3,23 +3,39 @@
 using System;
 
 public struct ValX0 { }
+
 public struct ValY0 { }
+
 public struct ValX1<T> { }
+
 public struct ValY1<T> { }
+
 public struct ValX2<T, U> { }
+
 public struct ValY2<T, U> { }
+
 public struct ValX3<T, U, V> { }
+
 public struct ValY3<T, U, V> { }
+
 public class RefX0 { }
+
 public class RefY0 { }
+
 public class RefX1<T> { }
+
 public class RefY1<T> { }
+
 public class RefX2<T, U> { }
+
 public class RefY2<T, U> { }
+
 public class RefX3<T, U, V> { }
+
 public class RefY3<T, U, V> { }
 
 public class GenException<T> : Exception { }
+
 public class Gen<T>
 {
     public void InternalExceptionTest(bool throwException)
@@ -62,6 +78,7 @@ public class Test_nested_try_catch08
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

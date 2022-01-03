@@ -13,6 +13,7 @@ namespace System.Xml.Xsl.XsltOld
         private XmlQualifiedName? _mode;
         private Stylesheet? _stylesheet;
         private const int TemplateProcessed = 2;
+
         internal override void Compile(Compiler compiler)
         {
             CheckEmpty(compiler);

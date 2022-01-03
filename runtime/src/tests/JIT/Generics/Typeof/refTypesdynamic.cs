@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 class X<T>
 {
     public static int x_count = 1;
+
     public virtual void incCount()
     {
         if (typeof(T) == typeof(class_int))
@@ -66,6 +67,7 @@ class class_void
 class A : X<class_int>
 {
     public static int a_count = 1;
+
     public override void incCount()
     {
         a_count *= 17;
@@ -75,6 +77,7 @@ class A : X<class_int>
 class B : X<class_string>
 {
     public static int b_count = 1;
+
     public override void incCount()
     {
         b_count *= 19;
@@ -84,6 +87,7 @@ class B : X<class_string>
 class C : A
 {
     public static int c_count = 1;
+
     public override void incCount()
     {
         c_count *= 23;
@@ -93,6 +97,7 @@ class C : A
 class D : B
 {
     public static int d_count = 1;
+
     public override void incCount()
     {
         d_count *= 31;
@@ -102,6 +107,7 @@ class D : B
 sealed class CS : A
 {
     public static int cs_count = 1;
+
     public override void incCount()
     {
         cs_count *= 37;
@@ -111,6 +117,7 @@ sealed class CS : A
 sealed class DS : B
 {
     public static int ds_count = 1;
+
     public override void incCount()
     {
         ds_count *= 41;
@@ -120,6 +127,7 @@ sealed class DS : B
 class mainMethod
 {
     public static bool failed = false;
+
     public static void checkGetType<T>(X<T> x)
     {
         if (x.GetType() == typeof(DS))
@@ -178,6 +186,7 @@ class mainMethod
         if (x is DS)
             (new DS()).incCount();
     }
+
     public static void checkAs<T>(X<T> x)
     {
         X<X<class_double>> x6 = x as X<X<class_double>>;
@@ -217,6 +226,7 @@ class mainMethod
         if (ds != null)
             (new DS()).incCount();
     }
+
     public static void checkGetTypeStringCast(X<class_string> x)
     {
         if (x.GetType() == typeof(DS))
@@ -230,6 +240,7 @@ class mainMethod
         if (x.GetType() == null)
             ((X<class_string>)x).incCount();
     }
+
     public static void checkGetTypeIntCast(X<class_int> x)
     {
         if (x.GetType() == typeof(CS))
@@ -243,6 +254,7 @@ class mainMethod
         if (x.GetType() == null)
             ((X<class_int>)x).incCount();
     }
+
     public static void checkIsStringCast(X<class_string> x)
     {
         if (x is X<class_string>)
@@ -254,6 +266,7 @@ class mainMethod
         if (x is DS)
             ((DS)x).incCount();
     }
+
     public static void checkIsIntCast(X<class_int> x)
     {
         if (x is X<class_int>)
@@ -265,6 +278,7 @@ class mainMethod
         if (x is CS)
             ((CS)x).incCount();
     }
+
     public static void checkAsStringCast(X<class_string> x)
     {
         X<class_string> x2 = x as X<class_string>;
@@ -280,6 +294,7 @@ class mainMethod
         if (ds != null)
             ((DS)x).incCount();
     }
+
     public static void checkAsIntCast(X<class_int> x)
     {
         X<class_int> x1 = x as X<class_int>;

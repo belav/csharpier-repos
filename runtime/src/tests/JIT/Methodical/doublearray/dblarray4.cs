@@ -18,6 +18,7 @@ using System.Runtime.InteropServices;
 internal class DblArray4
 {
     private static int s_LOH_GEN = 0;
+
     public static int Main()
     {
         if (RuntimeInformation.ProcessArchitecture == Architecture.X86)

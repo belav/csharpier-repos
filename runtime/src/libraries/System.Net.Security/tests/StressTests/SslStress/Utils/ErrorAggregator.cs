@@ -153,6 +153,7 @@ namespace SslStress.Utils
             public bool Equals(T? left, T? right) =>
                 left != null
                 && left.Equals(right, StructuralComparisons.StructuralEqualityComparer);
+
             public int GetHashCode([DisallowNull] T value) =>
                 value.GetHashCode(StructuralComparisons.StructuralEqualityComparer);
         }

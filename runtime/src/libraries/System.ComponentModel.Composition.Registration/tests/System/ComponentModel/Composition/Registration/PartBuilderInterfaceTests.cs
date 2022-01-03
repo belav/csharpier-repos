@@ -11,9 +11,13 @@ namespace System.ComponentModel.Composition.Registration.Tests
     public class PartBuilderInterfaceTests
     {
         public interface IFirst { }
+
         public interface ISecond { }
+
         public interface IThird { }
+
         public interface IFourth { }
+
         public interface IFifth : IFourth { }
 
         public class Standard : IFirst, ISecond, IThird, IFifth
@@ -35,24 +39,34 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             [ImportMany]
             public IEnumerable<IFirst> First;
+
             [ImportMany]
             public IEnumerable<ISecond> Second;
+
             [ImportMany]
             public IEnumerable<IThird> Third;
+
             [ImportMany]
             public IEnumerable<IFourth> Fourth;
+
             [ImportMany]
             public IEnumerable<IFifth> Fifth;
+
             [Import(AllowDefault = true)]
             public Base Base;
+
             [Import(AllowDefault = true)]
             public Derived Derived;
+
             [Import(AllowDefault = true)]
             public Dippy Dippy;
+
             [Import(AllowDefault = true)]
             public Standard Standard;
+
             [Import(AllowDefault = true)]
             public IDisposable Disposable;
+
             [Import(AllowDefault = true)]
             public BareClass BareClass;
         }

@@ -9,16 +9,19 @@ namespace System.Text.Encodings.Web
     public abstract partial class HtmlEncoder : System.Text.Encodings.Web.TextEncoder
     {
         protected HtmlEncoder() { }
+
         public static System.Text.Encodings.Web.HtmlEncoder Default
         {
             get { throw null; }
         }
+
         public static System.Text.Encodings.Web.HtmlEncoder Create(
             System.Text.Encodings.Web.TextEncoderSettings settings
         )
         {
             throw null;
         }
+
         public static System.Text.Encodings.Web.HtmlEncoder Create(
             params System.Text.Unicode.UnicodeRange[] allowedRanges
         )
@@ -26,9 +29,11 @@ namespace System.Text.Encodings.Web
             throw null;
         }
     }
+
     public abstract partial class JavaScriptEncoder : System.Text.Encodings.Web.TextEncoder
     {
         protected JavaScriptEncoder() { }
+
         public static System.Text.Encodings.Web.JavaScriptEncoder Default
         {
             get { throw null; }
@@ -37,12 +42,14 @@ namespace System.Text.Encodings.Web
         {
             get { throw null; }
         }
+
         public static System.Text.Encodings.Web.JavaScriptEncoder Create(
             System.Text.Encodings.Web.TextEncoderSettings settings
         )
         {
             throw null;
         }
+
         public static System.Text.Encodings.Web.JavaScriptEncoder Create(
             params System.Text.Unicode.UnicodeRange[] allowedRanges
         )
@@ -50,26 +57,32 @@ namespace System.Text.Encodings.Web
             throw null;
         }
     }
+
     public abstract partial class TextEncoder
     {
         protected TextEncoder() { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         public abstract int MaxOutputCharactersPerInputCharacter { get; }
+
         public virtual void Encode(
             System.IO.TextWriter output,
             char[] value,
             int startIndex,
             int characterCount
         ) { }
+
         public void Encode(System.IO.TextWriter output, string value) { }
+
         public virtual void Encode(
             System.IO.TextWriter output,
             string value,
             int startIndex,
             int characterCount
         ) { }
+
         public virtual System.Buffers.OperationStatus Encode(
             System.ReadOnlySpan<char> source,
             System.Span<char> destination,
@@ -80,10 +93,12 @@ namespace System.Text.Encodings.Web
         {
             throw null;
         }
+
         public virtual string Encode(string value)
         {
             throw null;
         }
+
         public virtual System.Buffers.OperationStatus EncodeUtf8(
             System.ReadOnlySpan<byte> utf8Source,
             System.Span<byte> utf8Destination,
@@ -94,11 +109,13 @@ namespace System.Text.Encodings.Web
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         public unsafe abstract int FindFirstCharacterToEncode(char* text, int textLength);
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -106,6 +123,7 @@ namespace System.Text.Encodings.Web
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
@@ -116,46 +134,65 @@ namespace System.Text.Encodings.Web
             int bufferLength,
             out int numberOfCharactersWritten
         );
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         public abstract bool WillEncode(int unicodeScalar);
     }
+
     public partial class TextEncoderSettings
     {
         public TextEncoderSettings() { }
+
         public TextEncoderSettings(System.Text.Encodings.Web.TextEncoderSettings other) { }
+
         public TextEncoderSettings(params System.Text.Unicode.UnicodeRange[] allowedRanges) { }
+
         public virtual void AllowCharacter(char character) { }
+
         public virtual void AllowCharacters(params char[] characters) { }
+
         public virtual void AllowCodePoints(
             System.Collections.Generic.IEnumerable<int> codePoints
         ) { }
+
         public virtual void AllowRange(System.Text.Unicode.UnicodeRange range) { }
+
         public virtual void AllowRanges(params System.Text.Unicode.UnicodeRange[] ranges) { }
+
         public virtual void Clear() { }
+
         public virtual void ForbidCharacter(char character) { }
+
         public virtual void ForbidCharacters(params char[] characters) { }
+
         public virtual void ForbidRange(System.Text.Unicode.UnicodeRange range) { }
+
         public virtual void ForbidRanges(params System.Text.Unicode.UnicodeRange[] ranges) { }
+
         public virtual System.Collections.Generic.IEnumerable<int> GetAllowedCodePoints()
         {
             throw null;
         }
     }
+
     public abstract partial class UrlEncoder : System.Text.Encodings.Web.TextEncoder
     {
         protected UrlEncoder() { }
+
         public static System.Text.Encodings.Web.UrlEncoder Default
         {
             get { throw null; }
         }
+
         public static System.Text.Encodings.Web.UrlEncoder Create(
             System.Text.Encodings.Web.TextEncoderSettings settings
         )
         {
             throw null;
         }
+
         public static System.Text.Encodings.Web.UrlEncoder Create(
             params System.Text.Unicode.UnicodeRange[] allowedRanges
         )
@@ -164,11 +201,13 @@ namespace System.Text.Encodings.Web
         }
     }
 }
+
 namespace System.Text.Unicode
 {
     public sealed partial class UnicodeRange
     {
         public UnicodeRange(int firstCodePoint, int length) { }
+
         public int FirstCodePoint
         {
             get { throw null; }
@@ -177,6 +216,7 @@ namespace System.Text.Unicode
         {
             get { throw null; }
         }
+
         public static System.Text.Unicode.UnicodeRange Create(
             char firstCharacter,
             char lastCharacter
@@ -185,6 +225,7 @@ namespace System.Text.Unicode
             throw null;
         }
     }
+
     public static partial class UnicodeRanges
     {
         public static System.Text.Unicode.UnicodeRange All

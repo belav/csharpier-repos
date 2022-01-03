@@ -372,6 +372,7 @@ namespace System.Xml.Serialization
             ilg.Ldarg(0);
             ilg.Call(XmlSerializationWriter_WriteEndElement);
         }
+
         private void WriteEndElement(string source)
         {
             MethodInfo XmlSerializationWriter_WriteEndElement =
@@ -2773,6 +2774,7 @@ namespace System.Xml.Serialization
         {
             RaCodeGen.WriteArrayLocalDecl(typeName, variableName, initValue, arrayTypeDesc);
         }
+
         private void WriteTypeCompare(string variable, Type type)
         {
             RaCodeGen.WriteTypeCompare(variable, type, ilg);
@@ -2783,6 +2785,7 @@ namespace System.Xml.Serialization
         {
             RaCodeGen.WriteInstanceOf(source, type, ilg);
         }
+
         private void WriteArrayTypeCompare(string variable, Type arrayType)
         {
             RaCodeGen.WriteArrayTypeCompare(variable, arrayType, ilg);
@@ -2905,10 +2908,12 @@ namespace System.Xml.Serialization
                 return $"typeof({typeFullName})";
             }
         }
+
         internal string GetStringForMember(string obj, string memberName, TypeDesc typeDesc)
         {
             return $"{obj}.@{memberName}";
         }
+
         internal SourceInfo GetSourceForMember(
             string obj,
             MemberMapping member,
@@ -2918,6 +2923,7 @@ namespace System.Xml.Serialization
         {
             return GetSourceForMember(obj, member, member.MemberInfo, typeDesc, ilg);
         }
+
         internal SourceInfo GetSourceForMember(
             string obj,
             MemberMapping member,
@@ -2939,6 +2945,7 @@ namespace System.Xml.Serialization
         {
             ilg.Ldc(Enum.Parse(type, memberName, false));
         }
+
         internal string GetStringForArrayMember(
             string? arrayName,
             string subscript,
@@ -2949,6 +2956,7 @@ namespace System.Xml.Serialization
                 return $"{arrayName}[{subscript}]";
             }
         }
+
         internal string GetStringForMethod(string obj, string typeFullName, string memberName)
         {
             return $"{obj}.{memberName}(";
@@ -3208,6 +3216,7 @@ namespace System.Xml.Serialization
                 initValue.ILG.Stloc(local);
             }
         }
+
         internal void WriteTypeCompare(string variable, Type type, CodeGenerator ilg)
         {
             Debug.Assert(type != null);
@@ -3216,6 +3225,7 @@ namespace System.Xml.Serialization
             ilg.Ldc(type);
             ilg.Ceq();
         }
+
         internal void WriteArrayTypeCompare(string variable, Type arrayType, CodeGenerator ilg)
         {
             {

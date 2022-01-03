@@ -53,7 +53,9 @@ namespace System.Collections.Specialized
         }
 
         public bool Contains(object key) => ContainsKey((string)key);
+
         public bool ContainsKey(string key) => _contents.ContainsKey(key);
+
         public bool ContainsValue(string? value) => _contents.ContainsValue(value);
 
         public void CopyTo(KeyValuePair<string, string?>[] array, int arrayIndex)
@@ -64,6 +66,7 @@ namespace System.Collections.Specialized
         public void CopyTo(Array array, int index) => ((IDictionary)_contents).CopyTo(array, index);
 
         public bool Remove(string key) => _contents.Remove(key);
+
         public void Remove(object key) => Remove((string)key);
 
         public bool Remove(KeyValuePair<string, string?> item)
@@ -81,7 +84,9 @@ namespace System.Collections.Specialized
 
         public IEnumerator<KeyValuePair<string, string?>> GetEnumerator() =>
             _contents.GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => _contents.GetEnumerator();
+
         IDictionaryEnumerator IDictionary.GetEnumerator() => _contents.GetEnumerator();
     }
 }

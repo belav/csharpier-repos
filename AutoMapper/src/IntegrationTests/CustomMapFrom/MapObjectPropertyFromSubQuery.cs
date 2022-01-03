@@ -7,6 +7,7 @@ using Xunit;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq.Expressions;
+
 namespace AutoMapper.IntegrationTests
 {
     public class MemberWithSubQueryProjections : AutoMapperSpecBase
@@ -19,31 +20,38 @@ namespace AutoMapper.IntegrationTests
             public string LastName { get; set; }
             public ICollection<Item> Items { get; set; }
         }
+
         public class Item
         {
             public int Id { get; set; }
             public int Code { get; set; }
         }
+
         public class ItemModel
         {
             public int Id { get; set; }
             public int Code { get; set; }
         }
+
         public class CustomerViewModel
         {
             public CustomerNameModel Name { get; set; }
             public ItemModel FirstItem { get; set; }
         }
+
         public class CustomerNameModel
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
         }
+
         public class Context : DbContext
         {
             public Context() => Database.SetInitializer(new DatabaseInitializer());
+
             public DbSet<Customer> Customers { get; set; }
         }
+
         public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
         {
             protected override void Seed(Context context)
@@ -65,6 +73,7 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -82,6 +91,7 @@ namespace AutoMapper.IntegrationTests
                     cfg.CreateProjection<Item, ItemModel>();
                 }
             );
+
         [Fact]
         public void Should_work()
         {
@@ -96,6 +106,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class MemberWithSubQueryProjectionsNoMap : AutoMapperSpecBase
     {
         public class Customer
@@ -106,26 +117,32 @@ namespace AutoMapper.IntegrationTests
             public string LastName { get; set; }
             public ICollection<Item> Items { get; set; }
         }
+
         public class Item
         {
             public int Id { get; set; }
             public int Code { get; set; }
         }
+
         public class ItemModel
         {
             public int Id { get; set; }
             public int Code { get; set; }
         }
+
         public class CustomerViewModel
         {
             public string Name { get; set; }
             public ItemModel FirstItem { get; set; }
         }
+
         public class Context : DbContext
         {
             public Context() => Database.SetInitializer(new DatabaseInitializer());
+
             public DbSet<Customer> Customers { get; set; }
         }
+
         public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
         {
             protected override void Seed(Context context)
@@ -147,6 +164,7 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -163,6 +181,7 @@ namespace AutoMapper.IntegrationTests
                     cfg.CreateProjection<Item, ItemModel>();
                 }
             );
+
         [Fact]
         public void Should_work()
         {
@@ -176,6 +195,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class MapObjectPropertyFromSubQueryTypeNameMax : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration =>
@@ -250,6 +270,7 @@ namespace AutoMapper.IntegrationTests
             public bool ECommercePublished { get; set; }
             public virtual ICollection<Article> Articles { get; set; }
             public int Value { get; }
+
             [NotMapped]
             public int NotMappedValue { get; set; }
             public virtual List<Article> OtherArticles { get; }
@@ -521,6 +542,7 @@ namespace AutoMapper.IntegrationTests
             public bool ECommercePublished { get; set; }
             public virtual ICollection<Article> Articles { get; set; }
             public int Value { get; }
+
             [NotMapped]
             public int NotMappedValue { get; set; }
             public virtual List<Article> OtherArticles { get; }
@@ -1021,10 +1043,13 @@ namespace AutoMapper.IntegrationTests
         {
             [ForeignKey(nameof(CrossConnectId))]
             public virtual Cable CrossConnect { get; set; }
+
             [Column(Order = 0), Key]
             public int CrossConnectId { get; set; }
+
             [Column(Order = 1), Key]
             public string Name { get; set; }
+
             [ForeignKey(nameof(RackId))]
             public virtual Rack Rack { get; set; }
             public int? RackId { get; set; }
@@ -1040,6 +1065,7 @@ namespace AutoMapper.IntegrationTests
         public class Rack
         {
             public int RackId { get; set; }
+
             [ForeignKey(nameof(DataHallId))]
             public virtual DataHall DataHall { get; set; }
             public int DataHallId { get; set; }
@@ -1149,32 +1175,38 @@ namespace AutoMapper.IntegrationTests
             public int Id { get; set; }
             public string Name { get; set; }
         }
+
         public class Brand
         {
             public int Id { get; set; }
             public List<Owner> Owners { get; set; } = new List<Owner>();
         }
+
         public class Product
         {
             public int Id { get; set; }
             public Brand Brand { get; set; }
         }
+
         public class ProductReview
         {
             public int Id { get; set; }
             public Product Product { get; set; }
         }
+
         /* Destination types */
         public class ProductReviewDto
         {
             public int Id { get; set; }
             public BrandDto Brand { get; set; }
         }
+
         public class BrandDto
         {
             public int Id { get; set; }
             public OwnerDto Owner { get; set; }
         }
+
         public class OwnerDto
         {
             public int Id { get; set; }
@@ -1187,6 +1219,7 @@ namespace AutoMapper.IntegrationTests
             {
                 Database.SetInitializer(new Initializer());
             }
+
             public DbSet<Owner> Owners { get; set; }
             public DbSet<Product> Products { get; set; }
             public DbSet<Brand> Brands { get; set; }

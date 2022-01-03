@@ -94,15 +94,18 @@ internal class Class1
     // use very unique rules to ensure these operators get invoked
     public static bool operator ==(Class1 left, Class1 right) =>
         left.Name == "left" && right.Name == "right";
+
     public static bool operator !=(Class1 left, Class1 right) =>
         !(left.Name == "left" && right.Name == "right");
 
     public static bool operator ==(Class1 left, Class2 right) =>
         left.Name == "left" && right.Name == "right";
+
     public static bool operator !=(Class1 left, Class2 right) =>
         !(left.Name == "left" && right.Name == "right");
 
     public static bool operator ==(Class1 left, Class3 right) => left.Name == right.Name;
+
     public static bool operator !=(Class1 left, Class3 right) => left.Name == right.Name;
 }
 

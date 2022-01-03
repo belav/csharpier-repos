@@ -808,6 +808,7 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         private class Callback
         {
             private readonly TaskCompletionSource<object?> _callbackCompletedTaskSource = new();
+
             /// <summary>
             /// Task that can be awaited for the all callbacks to complete.
             /// </summary>

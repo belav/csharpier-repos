@@ -37,6 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         internal override AnonymousFunctionExpressionSyntax WithAsyncKeywordCore(
             SyntaxToken asyncKeyword
         ) => WithAsyncKeyword(asyncKeyword);
+
         public new AnonymousMethodExpressionSyntax WithAsyncKeyword(SyntaxToken asyncKeyword) =>
             this.Update(
                 asyncKeyword,

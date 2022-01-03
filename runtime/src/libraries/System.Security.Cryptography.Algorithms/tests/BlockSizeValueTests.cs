@@ -58,6 +58,7 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             return BlockSizeValue;
         }
     }
+
     public class HMACSHA1Test : HMACSHA1
     {
         public int GetBlockSizeValue()
@@ -66,6 +67,7 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             return BlockSizeValue;
         }
     }
+
     public class HMACSHA256Test : HMACSHA256
     {
         public int GetBlockSizeValue()
@@ -74,6 +76,7 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             return BlockSizeValue;
         }
     }
+
     public class HMACSHA384Test : HMACSHA384
     {
         public int GetBlockSizeValue()
@@ -82,6 +85,7 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             return BlockSizeValue;
         }
     }
+
     public class HMACSHA512Test : HMACSHA512
     {
         public int GetBlockSizeValue()

@@ -31,11 +31,13 @@ namespace System.Reflection.TypeLoading.Ecma
             TypeDefinitionHandle handle,
             byte rawTypeKind
         ) => handle.ToTypeString(reader);
+
         public string GetTypeFromReference(
             MetadataReader reader,
             TypeReferenceHandle handle,
             byte rawTypeKind
         ) => handle.ToTypeString(reader);
+
         public string GetTypeFromSpecification(
             MetadataReader reader,
             TypeContext genericContext,
@@ -44,9 +46,12 @@ namespace System.Reflection.TypeLoading.Ecma
         ) => handle.ToTypeString(reader, genericContext);
 
         public string GetSZArrayType(string elementType) => elementType + "[]";
+
         public string GetArrayType(string elementType, ArrayShape shape) =>
             elementType + Helpers.ComputeArraySuffix(shape.Rank, multiDim: true);
+
         public string GetByReferenceType(string elementType) => elementType + "&";
+
         public string GetPointerType(string elementType) => elementType + "*";
 
         public string GetGenericInstantiation(
@@ -69,12 +74,15 @@ namespace System.Reflection.TypeLoading.Ecma
 
         public string GetGenericTypeParameter(TypeContext genericContext, int index) =>
             genericContext.GetGenericTypeArgumentOrNull(index)?.ToString() ?? ("!" + index);
+
         public string GetGenericMethodParameter(TypeContext genericContext, int index) =>
             genericContext.GetGenericMethodArgumentOrNull(index)?.ToString() ?? ("!!" + index);
 
         public string GetFunctionPointerType(MethodSignature<string> signature) => "?";
+
         public string GetModifiedType(string modifier, string unmodifiedType, bool isRequired) =>
             unmodifiedType;
+
         public string GetPinnedType(string elementType) => elementType;
 
         public string GetPrimitiveType(PrimitiveTypeCode typeCode)

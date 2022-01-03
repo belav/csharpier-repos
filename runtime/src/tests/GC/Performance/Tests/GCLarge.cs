@@ -203,6 +203,7 @@ internal class LargeGC
 internal class SmallGC
 {
     public LargeGC m_pLarge;
+
     public SmallGC(int HasLargeObj)
     {
         if (HasLargeObj == 1)
@@ -210,6 +211,7 @@ internal class SmallGC
         else
             m_pLarge = null;
     }
+
     public virtual void AttachSmallObjects()
     {
         m_pLarge.AttachSmallObjects(this);

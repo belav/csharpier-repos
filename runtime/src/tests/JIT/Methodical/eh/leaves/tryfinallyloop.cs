@@ -31,6 +31,7 @@ namespace hello
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         static public void inTry()
         {
             Console.WriteLine("in Try\n");
@@ -41,6 +42,7 @@ namespace hello
         {
             Console.WriteLine("in Finally\n");
         }
+
         static public int Main(string[] args)
         {
             int i = 0;

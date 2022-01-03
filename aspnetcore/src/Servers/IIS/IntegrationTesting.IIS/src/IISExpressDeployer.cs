@@ -565,8 +565,10 @@ public class IISExpressDeployer : IISDeployerBase
     private class WindowsNativeMethods
     {
         internal delegate bool EnumWindowProc(IntPtr hwnd, IntPtr lParam);
+
         [DllImport("user32.dll")]
         internal static extern uint GetWindowThreadProcessId(IntPtr hwnd, out uint lpdwProcessId);
+
         [DllImport("user32.dll")]
         internal static extern bool PostMessage(
             HandleRef hWnd,
@@ -574,8 +576,10 @@ public class IISExpressDeployer : IISDeployerBase
             IntPtr wParam,
             IntPtr lParam
         );
+
         [DllImport("user32.dll")]
         internal static extern bool EnumWindows(EnumWindowProc callback, IntPtr lParam);
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern int GetClassName(IntPtr hWnd, char[] lpClassName, int nMaxCount);
     }

@@ -6,11 +6,13 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+
 namespace AutoMapper.Execution
 {
     using Internal;
     using static Expression;
     using static Internal.ReflectionHelper;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class ExpressionBuilder
     {
@@ -126,6 +128,7 @@ namespace AutoMapper.Execution
             }
             return ToType(mapExpression, typePair.DestinationType);
         }
+
         public static Expression NullCheckSource(
             ProfileMap profileMap,
             Expression sourceParameter,
@@ -218,6 +221,7 @@ namespace AutoMapper.Execution
                 return ObjectFactory.GenerateConstructorExpression(destinationType);
             }
         }
+
         public static Expression ContextMap(
             in TypePair typePair,
             Expression sourceParameter,
@@ -237,6 +241,7 @@ namespace AutoMapper.Execution
                 Constant(memberMap, typeof(MemberMap))
             );
         }
+
         public static Expression CheckContext(TypeMap typeMap)
         {
             if (typeMap.MaxDepth > 0 || typeMap.PreserveReferences)
@@ -245,10 +250,12 @@ namespace AutoMapper.Execution
             }
             return null;
         }
+
         public static Expression OverMaxDepth(TypeMap typeMap) =>
             typeMap?.MaxDepth > 0
                 ? Expression.Call(ContextParameter, OverTypeDepthMethod, Constant(typeMap))
                 : null;
+
         public static Expression NullSubstitute(
             this MemberMap memberMap,
             Expression sourceExpression
@@ -257,6 +264,7 @@ namespace AutoMapper.Execution
                 sourceExpression,
                 ToType(Constant(memberMap.NullSubstitute), sourceExpression.Type)
             );
+
         public static Expression ApplyTransformers(this MemberMap memberMap, Expression source)
         {
             var perMember = memberMap.ValueTransformers;
@@ -286,12 +294,15 @@ namespace AutoMapper.Execution
                             )
                     );
         }
+
         public static LambdaExpression Lambda(this MemberInfo member) => new[] { member }.Lambda();
+
         public static LambdaExpression Lambda(this MemberInfo[] members)
         {
             var source = Parameter(members[0].DeclaringType, "source");
             return Expression.Lambda(members.Chain(source), source);
         }
+
         public static Expression Chain(this MemberInfo[] members, Expression target)
         {
             foreach (var member in members)
@@ -312,8 +323,10 @@ namespace AutoMapper.Execution
             }
             return target;
         }
+
         public static MemberInfo[] GetMembersChain(this LambdaExpression lambda) =>
             lambda.Body.GetChain().ToMemberInfos();
+
         public static MemberInfo GetMember(this LambdaExpression lambda) =>
             (
                 lambda?.Body is MemberExpression memberExpression
@@ -321,6 +334,7 @@ namespace AutoMapper.Execution
             )
                 ? memberExpression.Member
                 : null;
+
         public static MemberInfo[] ToMemberInfos(this Stack<Member> chain)
         {
             var members = new MemberInfo[chain.Count];
@@ -331,6 +345,7 @@ namespace AutoMapper.Execution
             }
             return members;
         }
+
         public static Stack<Member> GetChain(this Expression expression)
         {
             var stack = new Stack<Member>();
@@ -363,6 +378,7 @@ namespace AutoMapper.Execution
             }
             return stack;
         }
+
         public static IEnumerable<MemberExpression> GetMemberExpressions(this Expression expression)
         {
             if (expression is not MemberExpression memberExpression)
@@ -374,6 +390,7 @@ namespace AutoMapper.Execution
                 .Select(m => m.Expression as MemberExpression)
                 .TakeWhile(m => m != null);
         }
+
         public static bool IsMemberPath(this LambdaExpression lambda, out Stack<Member> members)
         {
             Expression currentExpression = null;
@@ -388,8 +405,10 @@ namespace AutoMapper.Execution
             }
             return currentExpression == lambda.Body;
         }
+
         public static LambdaExpression MemberAccessLambda(Type type, string memberPath) =>
             GetMemberPath(type, memberPath).Lambda();
+
         public static Expression ForEach(
             ParameterExpression loopVar,
             Expression collection,
@@ -488,27 +507,34 @@ namespace AutoMapper.Execution
                 return TryFinally(body, disposeCall);
             }
         }
+
         // Expression.Property(string) is inefficient because it does a case insensitive match
         public static MemberExpression Property(Expression target, string name) =>
             Expression.Property(target, target.Type.GetProperty(name));
+
         // Expression.Call(string) is inefficient because it does a case insensitive match
         public static MethodCallExpression Call(
             Expression target,
             string name,
             params Expression[] arguments
         ) => Expression.Call(target, target.Type.GetMethod(name), arguments);
+
         public static Expression ToObject(this Expression expression) =>
             expression.Type.IsValueType ? Convert(expression, typeof(object)) : expression;
+
         public static Expression ToType(Expression expression, Type type) =>
             expression.Type == type ? expression : Convert(expression, type);
+
         public static Expression ReplaceParameters(
             this LambdaExpression initialLambda,
             params Expression[] newParameters
         ) => new ParameterReplaceVisitor().Replace(initialLambda, newParameters);
+
         public static Expression ConvertReplaceParameters(
             this LambdaExpression initialLambda,
             params Expression[] newParameters
         ) => new ConvertParameterReplaceVisitor().Replace(initialLambda, newParameters);
+
         private static Expression Replace(
             this ParameterReplaceVisitor visitor,
             LambdaExpression initialLambda,
@@ -523,8 +549,10 @@ namespace AutoMapper.Execution
             }
             return newLambda;
         }
+
         public static Expression Replace(this Expression exp, Expression old, Expression replace) =>
             new ReplaceVisitor(old, replace).Visit(exp);
+
         public static Expression NullCheck(
             this Expression expression,
             Type destinationType = null,
@@ -585,6 +613,7 @@ namespace AutoMapper.Execution
                     _ => sourceExpression,
                 };
         }
+
         public static Expression IfNullElse(
             this Expression expression,
             Expression then,
@@ -601,34 +630,41 @@ namespace AutoMapper.Execution
                           : @else
                   )
                 : Condition(ReferenceEqual(expression, Null), then, ToType(@else, then.Type));
+
         class ReplaceVisitorBase : ExpressionVisitor
         {
             protected Expression _oldNode;
             protected Expression _newNode;
+
             public virtual void Replace(Expression oldNode, Expression newNode)
             {
                 _oldNode = oldNode;
                 _newNode = newNode;
             }
         }
+
         class ReplaceVisitor : ReplaceVisitorBase
         {
             public ReplaceVisitor(Expression oldNode, Expression newNode) =>
                 Replace(oldNode, newNode);
+
             public override Expression Visit(Expression node) =>
                 _oldNode == node ? _newNode : base.Visit(node);
         }
+
         class ParameterReplaceVisitor : ReplaceVisitorBase
         {
             protected override Expression VisitParameter(ParameterExpression node) =>
                 _oldNode == node ? _newNode : base.VisitParameter(node);
         }
+
         class ConvertParameterReplaceVisitor : ParameterReplaceVisitor
         {
             public override void Replace(Expression oldNode, Expression newNode) =>
                 base.Replace(oldNode, ToType(newNode, oldNode.Type));
         }
     }
+
     public readonly struct Member
     {
         public Member(Expression expression, MemberInfo memberInfo, Expression target)
@@ -637,6 +673,7 @@ namespace AutoMapper.Execution
             MemberInfo = memberInfo;
             Target = target;
         }
+
         public readonly Expression Expression;
         public readonly MemberInfo MemberInfo;
         public readonly Expression Target;

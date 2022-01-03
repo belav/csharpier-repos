@@ -15,6 +15,7 @@ public enum TestEnum
 public class AA
 {
     public bool[,,] m_abField1;
+
     public static Array Static1()
     {
         byte local1 = (new byte[12u, 37u, 25u, 121u][,,,])[46, 37, 101, 94][
@@ -36,6 +37,7 @@ public class AA
             Math.Max(71, 35)
         ];
     }
+
     public static byte[,] Static2()
     {
         AA.Static1();

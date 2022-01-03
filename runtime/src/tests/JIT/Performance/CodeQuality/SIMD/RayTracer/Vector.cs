@@ -27,6 +27,7 @@ internal struct Vector
     {
         _simdVector = new Vector3((float)x, (float)y, (float)z);
     }
+
     public Vector(string str)
     {
         string[] nums = str.Split(',');
@@ -34,6 +35,7 @@ internal struct Vector
             throw new ArgumentException();
         _simdVector = new Vector3(float.Parse(nums[0]), float.Parse(nums[1]), float.Parse(nums[2]));
     }
+
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
     public static Vector Times(double n, Vector v)
     {
@@ -41,6 +43,7 @@ internal struct Vector
         result._simdVector = (float)n * v._simdVector;
         return result;
     }
+
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
     public static Vector Minus(Vector v1, Vector v2)
     {
@@ -48,6 +51,7 @@ internal struct Vector
         result._simdVector = v1._simdVector - v2._simdVector;
         return result;
     }
+
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
     public static Vector Plus(Vector v1, Vector v2)
     {
@@ -55,16 +59,19 @@ internal struct Vector
         result._simdVector = v1._simdVector + v2._simdVector;
         return result;
     }
+
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
     public static float Dot(Vector v1, Vector v2)
     {
         return Vector3.Dot(v1._simdVector, v2._simdVector);
     }
+
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
     public static float Mag(Vector v)
     {
         return (float)Math.Sqrt(Dot(v, v));
     }
+
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
     public static Vector Norm(Vector v)
     {
@@ -72,6 +79,7 @@ internal struct Vector
         float div = mag == 0 ? float.PositiveInfinity : 1 / mag;
         return Times(div, v);
     }
+
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
     public static Vector Cross(Vector v1, Vector v2)
     {
@@ -81,6 +89,7 @@ internal struct Vector
             ((v1.X * v2.Y) - (v1.Y * v2.X))
         );
     }
+
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
     public static bool Equals(Vector v1, Vector v2)
     {

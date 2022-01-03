@@ -11,9 +11,11 @@ namespace System.CodeDom.Tests
     {
         protected override CodeParameterDeclarationExpressionCollection Ctor() =>
             new CodeParameterDeclarationExpressionCollection();
+
         protected override CodeParameterDeclarationExpressionCollection CtorArray(
             CodeParameterDeclarationExpression[] array
         ) => new CodeParameterDeclarationExpressionCollection(array);
+
         protected override CodeParameterDeclarationExpressionCollection CtorCollection(
             CodeParameterDeclarationExpressionCollection collection
         ) => new CodeParameterDeclarationExpressionCollection(collection);
@@ -25,6 +27,7 @@ namespace System.CodeDom.Tests
             CodeParameterDeclarationExpressionCollection collection,
             int index
         ) => collection[index];
+
         protected override void SetItem(
             CodeParameterDeclarationExpressionCollection collection,
             int index,
@@ -35,6 +38,7 @@ namespace System.CodeDom.Tests
             CodeParameterDeclarationExpressionCollection collection,
             CodeParameterDeclarationExpression[] array
         ) => collection.AddRange(array);
+
         protected override void AddRange(
             CodeParameterDeclarationExpressionCollection collection,
             CodeParameterDeclarationExpressionCollection value
@@ -60,6 +64,7 @@ namespace System.CodeDom.Tests
             CodeParameterDeclarationExpressionCollection collection,
             CodeParameterDeclarationExpression value
         ) => collection.IndexOf(value);
+
         protected override bool Contains(
             CodeParameterDeclarationExpressionCollection collection,
             CodeParameterDeclarationExpression value

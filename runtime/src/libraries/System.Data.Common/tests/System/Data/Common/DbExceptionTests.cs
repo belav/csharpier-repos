@@ -44,8 +44,11 @@ namespace System.Data.Common.Tests
         private class CustomDbException : DbException
         {
             public CustomDbException() { }
+
             public CustomDbException(string message) : base(message) { }
+
             public CustomDbException(string message, int errorCode) : base(message, errorCode) { }
+
             public CustomDbException(string message, Exception innerException)
                 : base(message, innerException) { }
         }

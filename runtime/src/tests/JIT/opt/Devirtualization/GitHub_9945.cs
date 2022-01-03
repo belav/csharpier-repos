@@ -6,10 +6,12 @@ using System;
 public class Base
 {
     public int value;
+
     public void B0()
     {
         value += 12;
     }
+
     public virtual void B1()
     {
         value += 33;
@@ -22,8 +24,11 @@ public class Base
 public class D1 : Base
 {
     public virtual void MA() { }
+
     public virtual void MB() { }
+
     public virtual void MC() { }
+
     public virtual void MD() { }
 
     public virtual void M1()
@@ -35,8 +40,11 @@ public class D1 : Base
 public class D2 : Base
 {
     public virtual void MA() { }
+
     public virtual void MB() { }
+
     public virtual void MC() { }
+
     public virtual void MD() { }
 
     public virtual void M1()

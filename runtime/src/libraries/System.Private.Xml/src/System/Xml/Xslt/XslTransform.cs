@@ -50,6 +50,7 @@ namespace System.Xml.Xsl
         {
             Load(stylesheet, CreateDefaultResolver());
         }
+
         public void Load(XmlReader stylesheet, XmlResolver? resolver)
         {
             if (stylesheet == null)
@@ -63,6 +64,7 @@ namespace System.Xml.Xsl
         {
             Load(stylesheet, CreateDefaultResolver());
         }
+
         public void Load(IXPathNavigable stylesheet, XmlResolver? resolver)
         {
             if (stylesheet == null)
@@ -168,6 +170,7 @@ namespace System.Xml.Xsl
         {
             Transform(input, args, output, _DocumentResolver);
         }
+
         public void Transform(
             XPathNavigator input,
             XsltArgumentList? args,
@@ -249,6 +252,7 @@ namespace System.Xml.Xsl
             }
             return Transform(input.CreateNavigator()!, args, _DocumentResolver);
         }
+
         public void Transform(
             IXPathNavigable input,
             XsltArgumentList? args,

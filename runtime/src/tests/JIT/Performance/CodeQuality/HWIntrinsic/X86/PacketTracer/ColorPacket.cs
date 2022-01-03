@@ -13,6 +13,7 @@ internal static class ColorPacket256Helper
 {
     private static readonly Vector256<float> One = Vector256.Create(1.0f);
     private static readonly Vector256<float> Max = Vector256.Create(255.0f);
+
     public static Int32RGBPacket256 ConvertToIntRGB(this VectorPacket256 colors)
     {
         var rsMask = Compare(colors.Xs, One, FloatComparisonMode.OrderedGreaterThanNonSignaling);

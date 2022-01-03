@@ -19,6 +19,7 @@ namespace ILCompiler.Sorting.Implementation
         where TCompareAsEqualAction : ICompareAsEqualAction
     {
         internal const int ParallelSortThreshold = 4000; // Number empirically measured by compiling
+
         // a large composite binary
 
         public static void ParallelSortApi(TDataStructure arrayToSort, TComparer comparer)

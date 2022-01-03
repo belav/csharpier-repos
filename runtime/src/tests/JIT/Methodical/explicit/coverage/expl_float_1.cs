@@ -35,6 +35,7 @@ internal struct AA
     {
         return arg;
     }
+
     public static float call_target_ref(ref float arg)
     {
         return arg;

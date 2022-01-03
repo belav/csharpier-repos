@@ -277,6 +277,7 @@ public class Ex
 
         return 0;
     }
+
     public static int Main()
     {
         return test();

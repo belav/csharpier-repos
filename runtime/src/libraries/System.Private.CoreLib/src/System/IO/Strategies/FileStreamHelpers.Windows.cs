@@ -464,6 +464,7 @@ namespace System.IO.Strategies
         {
             /// <summary>Sentinel object used to indicate that the I/O operation has completed before being awaited.</summary>
             private static readonly Action s_sentinel = () => { };
+
             /// <summary>Cached delegate to IOCallback.</summary>
             internal static readonly IOCompletionCallback s_callback = IOCallback;
 
@@ -471,16 +472,20 @@ namespace System.IO.Strategies
 
             /// <summary>Tracked position representing the next location from which to read.</summary>
             internal long _position;
+
             /// <summary>The current native overlapped pointer.  This changes for each operation.</summary>
             internal NativeOverlapped* _nativeOverlapped;
+
             /// <summary>
             /// null if the operation is still in progress,
             /// s_sentinel if the I/O operation completed before the await,
             /// s_callback if it completed after the await yielded.
             /// </summary>
             internal Action? _continuation;
+
             /// <summary>Last error code from completed operation.</summary>
             internal uint _errorCode;
+
             /// <summary>Last number of read bytes from completed operation.</summary>
             internal uint _numBytes;
 
@@ -534,9 +539,13 @@ namespace System.IO.Strategies
             }
 
             public AsyncCopyToAwaitable GetAwaiter() => this;
+
             public bool IsCompleted => ReferenceEquals(_continuation, s_sentinel);
+
             public void GetResult() { }
+
             public void OnCompleted(Action continuation) => UnsafeOnCompleted(continuation);
+
             public void UnsafeOnCompleted(Action continuation)
             {
                 if (

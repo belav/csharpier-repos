@@ -36,6 +36,7 @@ namespace System.Xml.Tests
             DataReader.Close();
             return base.Terminate(objParam);
         }
+
         private bool VerifyInvalidReadBase64(
             int iBufferSize,
             int iIndex,

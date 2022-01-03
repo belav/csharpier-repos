@@ -41,6 +41,7 @@ namespace System.Collections.Concurrent
 
         /// <summary>Initial length of the segments used in the queue.</summary>
         private const int InitialSegmentLength = 32;
+
         /// <summary>
         /// Maximum length of the segments used in the queue.  This is a somewhat arbitrary limit:
         /// larger means that as long as we don't exceed the size, we avoid allocating more segments,
@@ -53,8 +54,10 @@ namespace System.Collections.Concurrent
         /// and any operations that need to get a consistent view of them.
         /// </summary>
         private readonly object _crossSegmentLock;
+
         /// <summary>The current tail segment.</summary>
         private volatile ConcurrentQueueSegment<T> _tail;
+
         /// <summary>The current head segment.</summary>
         private volatile ConcurrentQueueSegment<T> _head; // SOS's ThreadPool command depends on this name
 

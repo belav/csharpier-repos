@@ -28,6 +28,7 @@ namespace System.Runtime.Serialization
         XmlObjectSerializerWriteContext context,
         CollectionDataContract dataContract
     );
+
     internal sealed class XmlFormatWriterGenerator
     {
         private readonly CriticalHelper _helper;

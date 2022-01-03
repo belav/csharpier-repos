@@ -9,6 +9,7 @@ namespace System.Runtime.Serialization
     public abstract partial class DataContractResolver
     {
         protected DataContractResolver() { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -18,6 +19,7 @@ namespace System.Runtime.Serialization
             System.Type? declaredType,
             System.Runtime.Serialization.DataContractResolver knownTypeResolver
         );
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -29,36 +31,44 @@ namespace System.Runtime.Serialization
             out System.Xml.XmlDictionaryString? typeNamespace
         );
     }
+
     public sealed partial class DataContractSerializer
         : System.Runtime.Serialization.XmlObjectSerializer
     {
         public DataContractSerializer(System.Type type) { }
+
         public DataContractSerializer(
             System.Type type,
             System.Collections.Generic.IEnumerable<System.Type>? knownTypes
         ) { }
+
         public DataContractSerializer(
             System.Type type,
             System.Runtime.Serialization.DataContractSerializerSettings? settings
         ) { }
+
         public DataContractSerializer(System.Type type, string rootName, string rootNamespace) { }
+
         public DataContractSerializer(
             System.Type type,
             string rootName,
             string rootNamespace,
             System.Collections.Generic.IEnumerable<System.Type>? knownTypes
         ) { }
+
         public DataContractSerializer(
             System.Type type,
             System.Xml.XmlDictionaryString rootName,
             System.Xml.XmlDictionaryString rootNamespace
         ) { }
+
         public DataContractSerializer(
             System.Type type,
             System.Xml.XmlDictionaryString rootName,
             System.Xml.XmlDictionaryString rootNamespace,
             System.Collections.Generic.IEnumerable<System.Type>? knownTypes
         ) { }
+
         public System.Runtime.Serialization.DataContractResolver? DataContractResolver
         {
             get { throw null; }
@@ -83,6 +93,7 @@ namespace System.Runtime.Serialization
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -90,6 +101,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -97,6 +109,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -107,6 +120,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -118,6 +132,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -125,6 +140,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -132,14 +148,17 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public override void WriteEndObject(System.Xml.XmlDictionaryWriter writer) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public override void WriteEndObject(System.Xml.XmlWriter writer) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -148,10 +167,12 @@ namespace System.Runtime.Serialization
             object? graph,
             System.Runtime.Serialization.DataContractResolver? dataContractResolver
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public override void WriteObject(System.Xml.XmlWriter writer, object? graph) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -159,10 +180,12 @@ namespace System.Runtime.Serialization
             System.Xml.XmlDictionaryWriter writer,
             object? graph
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public override void WriteObjectContent(System.Xml.XmlWriter writer, object? graph) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -170,11 +193,13 @@ namespace System.Runtime.Serialization
             System.Xml.XmlDictionaryWriter writer,
             object? graph
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public override void WriteStartObject(System.Xml.XmlWriter writer, object? graph) { }
     }
+
     public static partial class DataContractSerializerExtensions
     {
         public static System.Runtime.Serialization.ISerializationSurrogateProvider? GetSerializationSurrogateProvider(
@@ -183,14 +208,17 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         public static void SetSerializationSurrogateProvider(
             this System.Runtime.Serialization.DataContractSerializer serializer,
             System.Runtime.Serialization.ISerializationSurrogateProvider? provider
         ) { }
     }
+
     public partial class DataContractSerializerSettings
     {
         public DataContractSerializerSettings() { }
+
         public System.Runtime.Serialization.DataContractResolver? DataContractResolver
         {
             get { throw null; }
@@ -232,29 +260,36 @@ namespace System.Runtime.Serialization
             set { }
         }
     }
+
     public partial class ExportOptions
     {
         public ExportOptions() { }
+
         public System.Collections.ObjectModel.Collection<System.Type> KnownTypes
         {
             get { throw null; }
         }
     }
+
     public sealed partial class ExtensionDataObject
     {
         internal ExtensionDataObject() { }
     }
+
     public partial interface IExtensibleDataObject
     {
         System.Runtime.Serialization.ExtensionDataObject? ExtensionData { get; set; }
     }
+
     public abstract partial class XmlObjectSerializer
     {
         protected XmlObjectSerializer() { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public abstract bool IsStartObject(System.Xml.XmlDictionaryReader reader);
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -262,6 +297,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -269,6 +305,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -276,6 +313,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -283,6 +321,7 @@ namespace System.Runtime.Serialization
             System.Xml.XmlDictionaryReader reader,
             bool verifyObjectName
         );
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -290,6 +329,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -297,26 +337,32 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public abstract void WriteEndObject(System.Xml.XmlDictionaryWriter writer);
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public virtual void WriteEndObject(System.Xml.XmlWriter writer) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public virtual void WriteObject(System.IO.Stream stream, object? graph) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public virtual void WriteObject(System.Xml.XmlDictionaryWriter writer, object? graph) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public virtual void WriteObject(System.Xml.XmlWriter writer, object? graph) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -324,34 +370,41 @@ namespace System.Runtime.Serialization
             System.Xml.XmlDictionaryWriter writer,
             object? graph
         );
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public virtual void WriteObjectContent(System.Xml.XmlWriter writer, object? graph) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public abstract void WriteStartObject(System.Xml.XmlDictionaryWriter writer, object? graph);
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public virtual void WriteStartObject(System.Xml.XmlWriter writer, object? graph) { }
     }
+
     public static partial class XmlSerializableServices
     {
         public static void AddDefaultSchema(
             System.Xml.Schema.XmlSchemaSet schemas,
             System.Xml.XmlQualifiedName typeQName
         ) { }
+
         public static System.Xml.XmlNode[] ReadNodes(System.Xml.XmlReader xmlReader)
         {
             throw null;
         }
+
         public static void WriteNodes(
             System.Xml.XmlWriter xmlWriter,
             System.Xml.XmlNode?[]? nodes
         ) { }
     }
+
     public static partial class XPathQueryGenerator
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -366,6 +419,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -378,10 +432,13 @@ namespace System.Runtime.Serialization
             throw null;
         }
     }
+
     public partial class XsdDataContractExporter
     {
         public XsdDataContractExporter() { }
+
         public XsdDataContractExporter(System.Xml.Schema.XmlSchemaSet? schemas) { }
+
         public System.Runtime.Serialization.ExportOptions? Options
         {
             get { throw null; }
@@ -391,6 +448,7 @@ namespace System.Runtime.Serialization
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -400,6 +458,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -407,6 +466,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -414,20 +474,24 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public void Export(
             System.Collections.Generic.ICollection<System.Reflection.Assembly> assemblies
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public void Export(System.Collections.Generic.ICollection<System.Type> types) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
         public void Export(System.Type type) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -435,6 +499,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -442,6 +507,7 @@ namespace System.Runtime.Serialization
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the required types are preserved."
         )]
@@ -451,6 +517,7 @@ namespace System.Runtime.Serialization
         }
     }
 }
+
 namespace System.Xml
 {
     public partial interface IFragmentCapableXmlDictionaryWriter
@@ -460,11 +527,13 @@ namespace System.Xml
         void StartFragment(System.IO.Stream stream, bool generateSelfContainedTextFragment);
         void WriteFragment(byte[] buffer, int offset, int count);
     }
+
     public partial interface IStreamProvider
     {
         System.IO.Stream GetStream();
         void ReleaseStream(System.IO.Stream stream);
     }
+
     public partial interface IXmlBinaryReaderInitializer
     {
         void SetInput(
@@ -484,6 +553,7 @@ namespace System.Xml
             System.Xml.OnXmlDictionaryReaderClose? onClose
         );
     }
+
     public partial interface IXmlBinaryWriterInitializer
     {
         void SetOutput(
@@ -493,6 +563,7 @@ namespace System.Xml
             bool ownsStream
         );
     }
+
     public partial interface IXmlDictionary
     {
         bool TryLookup(
@@ -511,6 +582,7 @@ namespace System.Xml
                 out System.Xml.XmlDictionaryString? result
         );
     }
+
     public partial interface IXmlTextReaderInitializer
     {
         void SetInput(
@@ -528,19 +600,28 @@ namespace System.Xml
             System.Xml.OnXmlDictionaryReaderClose? onClose
         );
     }
+
     public partial interface IXmlTextWriterInitializer
     {
         void SetOutput(System.IO.Stream stream, System.Text.Encoding encoding, bool ownsStream);
     }
+
     public delegate void OnXmlDictionaryReaderClose(System.Xml.XmlDictionaryReader reader);
+
     public partial class UniqueId
     {
         public UniqueId() { }
+
         public UniqueId(byte[] guid) { }
+
         public UniqueId(byte[] guid, int offset) { }
+
         public UniqueId(char[] chars, int offset, int count) { }
+
         public UniqueId(System.Guid guid) { }
+
         public UniqueId(string value) { }
+
         public int CharArrayLength
         {
             get { throw null; }
@@ -549,49 +630,61 @@ namespace System.Xml
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public static bool operator ==(System.Xml.UniqueId? id1, System.Xml.UniqueId? id2)
         {
             throw null;
         }
+
         public static bool operator !=(System.Xml.UniqueId? id1, System.Xml.UniqueId? id2)
         {
             throw null;
         }
+
         public int ToCharArray(char[] chars, int offset)
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public bool TryGetGuid(byte[] buffer, int offset)
         {
             throw null;
         }
+
         public bool TryGetGuid(out System.Guid guid)
         {
             throw null;
         }
     }
+
     public partial class XmlBinaryReaderSession : System.Xml.IXmlDictionary
     {
         public XmlBinaryReaderSession() { }
+
         public System.Xml.XmlDictionaryString Add(int id, string value)
         {
             throw null;
         }
+
         public void Clear() { }
+
         public bool TryLookup(
             int key,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
@@ -600,6 +693,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public bool TryLookup(
             string value,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
@@ -608,6 +702,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public bool TryLookup(
             System.Xml.XmlDictionaryString value,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
@@ -617,27 +712,35 @@ namespace System.Xml
             throw null;
         }
     }
+
     public partial class XmlBinaryWriterSession
     {
         public XmlBinaryWriterSession() { }
+
         public void Reset() { }
+
         public virtual bool TryAdd(System.Xml.XmlDictionaryString value, out int key)
         {
             throw null;
         }
     }
+
     public partial class XmlDictionary : System.Xml.IXmlDictionary
     {
         public XmlDictionary() { }
+
         public XmlDictionary(int capacity) { }
+
         public static System.Xml.IXmlDictionary Empty
         {
             get { throw null; }
         }
+
         public virtual System.Xml.XmlDictionaryString Add(string value)
         {
             throw null;
         }
+
         public virtual bool TryLookup(
             int key,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
@@ -646,6 +749,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual bool TryLookup(
             string value,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
@@ -654,6 +758,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual bool TryLookup(
             System.Xml.XmlDictionaryString value,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
@@ -663,9 +768,11 @@ namespace System.Xml
             throw null;
         }
     }
+
     public abstract partial class XmlDictionaryReader : System.Xml.XmlReader
     {
         protected XmlDictionaryReader() { }
+
         public virtual bool CanCanonicalize
         {
             get { throw null; }
@@ -674,6 +781,7 @@ namespace System.Xml
         {
             get { throw null; }
         }
+
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
             byte[] buffer,
             int offset,
@@ -684,6 +792,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
             byte[] buffer,
             int offset,
@@ -695,6 +804,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
             byte[] buffer,
             int offset,
@@ -707,6 +817,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
             byte[] buffer,
             int offset,
@@ -716,6 +827,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
             byte[] buffer,
             System.Xml.XmlDictionaryReaderQuotas quotas
@@ -723,6 +835,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
             System.IO.Stream stream,
             System.Xml.IXmlDictionary? dictionary,
@@ -731,6 +844,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
             System.IO.Stream stream,
             System.Xml.IXmlDictionary? dictionary,
@@ -740,6 +854,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
             System.IO.Stream stream,
             System.Xml.IXmlDictionary? dictionary,
@@ -750,6 +865,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateBinaryReader(
             System.IO.Stream stream,
             System.Xml.XmlDictionaryReaderQuotas quotas
@@ -757,12 +873,14 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateDictionaryReader(
             System.Xml.XmlReader reader
         )
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
             byte[] buffer,
             int offset,
@@ -773,6 +891,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
             byte[] buffer,
             int offset,
@@ -784,6 +903,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
             byte[] buffer,
             int offset,
@@ -797,6 +917,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
             byte[] buffer,
             int offset,
@@ -807,6 +928,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
             System.IO.Stream stream,
             System.Text.Encoding encoding,
@@ -815,6 +937,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
             System.IO.Stream stream,
             System.Text.Encoding[] encodings,
@@ -824,6 +947,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
             System.IO.Stream stream,
             System.Text.Encoding[] encodings,
@@ -835,6 +959,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateMtomReader(
             System.IO.Stream stream,
             System.Text.Encoding[] encodings,
@@ -843,6 +968,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateTextReader(
             byte[] buffer,
             int offset,
@@ -854,6 +980,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateTextReader(
             byte[] buffer,
             int offset,
@@ -863,6 +990,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateTextReader(
             byte[] buffer,
             System.Xml.XmlDictionaryReaderQuotas quotas
@@ -870,6 +998,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateTextReader(
             System.IO.Stream stream,
             System.Text.Encoding? encoding,
@@ -879,6 +1008,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryReader CreateTextReader(
             System.IO.Stream stream,
             System.Xml.XmlDictionaryReaderQuotas quotas
@@ -886,7 +1016,9 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual void EndCanonicalization() { }
+
         public virtual string? GetAttribute(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
@@ -894,14 +1026,17 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual void GetNonAtomizedNames(out string localName, out string namespaceUri)
         {
             throw null;
         }
+
         public virtual int IndexOfLocalName(string[] localNames, string namespaceUri)
         {
             throw null;
         }
+
         public virtual int IndexOfLocalName(
             System.Xml.XmlDictionaryString[] localNames,
             System.Xml.XmlDictionaryString namespaceUri
@@ -909,28 +1044,34 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual bool IsLocalName(string localName)
         {
             throw null;
         }
+
         public virtual bool IsLocalName(System.Xml.XmlDictionaryString localName)
         {
             throw null;
         }
+
         public virtual bool IsNamespaceUri(string namespaceUri)
         {
             throw null;
         }
+
         public virtual bool IsNamespaceUri(System.Xml.XmlDictionaryString namespaceUri)
         {
             throw null;
         }
+
         public virtual bool IsStartArray(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out System.Type? type
         )
         {
             throw null;
         }
+
         public virtual bool IsStartElement(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
@@ -938,17 +1079,23 @@ namespace System.Xml
         {
             throw null;
         }
+
         protected bool IsTextNode(System.Xml.XmlNodeType nodeType)
         {
             throw null;
         }
+
         public virtual void MoveToStartElement() { }
+
         public virtual void MoveToStartElement(string name) { }
+
         public virtual void MoveToStartElement(string localName, string namespaceUri) { }
+
         public virtual void MoveToStartElement(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
         ) { }
+
         public virtual int ReadArray(
             string localName,
             string namespaceUri,
@@ -959,6 +1106,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             string localName,
             string namespaceUri,
@@ -969,6 +1117,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             string localName,
             string namespaceUri,
@@ -979,6 +1128,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             string localName,
             string namespaceUri,
@@ -989,6 +1139,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             string localName,
             string namespaceUri,
@@ -999,6 +1150,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             string localName,
             string namespaceUri,
@@ -1009,6 +1161,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             string localName,
             string namespaceUri,
@@ -1019,6 +1172,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             string localName,
             string namespaceUri,
@@ -1029,6 +1183,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             string localName,
             string namespaceUri,
@@ -1039,6 +1194,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             string localName,
             string namespaceUri,
@@ -1049,6 +1205,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri,
@@ -1059,6 +1216,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri,
@@ -1069,6 +1227,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri,
@@ -1079,6 +1238,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri,
@@ -1089,6 +1249,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri,
@@ -1099,6 +1260,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri,
@@ -1109,6 +1271,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri,
@@ -1119,6 +1282,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri,
@@ -1129,6 +1293,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri,
@@ -1139,6 +1304,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri,
@@ -1149,10 +1315,12 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual bool[] ReadBooleanArray(string localName, string namespaceUri)
         {
             throw null;
         }
+
         public virtual bool[] ReadBooleanArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
@@ -1160,6 +1328,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public override object ReadContentAs(
             System.Type type,
             System.Xml.IXmlNamespaceResolver? namespaceResolver
@@ -1167,34 +1336,42 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual byte[] ReadContentAsBase64()
         {
             throw null;
         }
+
         public virtual byte[] ReadContentAsBinHex()
         {
             throw null;
         }
+
         protected byte[] ReadContentAsBinHex(int maxByteArrayContentLength)
         {
             throw null;
         }
+
         public virtual int ReadContentAsChars(char[] chars, int offset, int count)
         {
             throw null;
         }
+
         public override decimal ReadContentAsDecimal()
         {
             throw null;
         }
+
         public override float ReadContentAsFloat()
         {
             throw null;
         }
+
         public virtual System.Guid ReadContentAsGuid()
         {
             throw null;
         }
+
         public virtual void ReadContentAsQualifiedName(
             out string localName,
             out string namespaceUri
@@ -1202,18 +1379,22 @@ namespace System.Xml
         {
             throw null;
         }
+
         public override string ReadContentAsString()
         {
             throw null;
         }
+
         protected string ReadContentAsString(int maxStringContentLength)
         {
             throw null;
         }
+
         public virtual string ReadContentAsString(string[] strings, out int index)
         {
             throw null;
         }
+
         public virtual string ReadContentAsString(
             System.Xml.XmlDictionaryString[] strings,
             out int index
@@ -1221,18 +1402,22 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual System.TimeSpan ReadContentAsTimeSpan()
         {
             throw null;
         }
+
         public virtual System.Xml.UniqueId ReadContentAsUniqueId()
         {
             throw null;
         }
+
         public virtual System.DateTime[] ReadDateTimeArray(string localName, string namespaceUri)
         {
             throw null;
         }
+
         public virtual System.DateTime[] ReadDateTimeArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
@@ -1240,10 +1425,12 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual decimal[] ReadDecimalArray(string localName, string namespaceUri)
         {
             throw null;
         }
+
         public virtual decimal[] ReadDecimalArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
@@ -1251,10 +1438,12 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual double[] ReadDoubleArray(string localName, string namespaceUri)
         {
             throw null;
         }
+
         public virtual double[] ReadDoubleArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
@@ -1262,69 +1451,88 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual byte[] ReadElementContentAsBase64()
         {
             throw null;
         }
+
         public virtual byte[] ReadElementContentAsBinHex()
         {
             throw null;
         }
+
         public override bool ReadElementContentAsBoolean()
         {
             throw null;
         }
+
         public override System.DateTime ReadElementContentAsDateTime()
         {
             throw null;
         }
+
         public override decimal ReadElementContentAsDecimal()
         {
             throw null;
         }
+
         public override double ReadElementContentAsDouble()
         {
             throw null;
         }
+
         public override float ReadElementContentAsFloat()
         {
             throw null;
         }
+
         public virtual System.Guid ReadElementContentAsGuid()
         {
             throw null;
         }
+
         public override int ReadElementContentAsInt()
         {
             throw null;
         }
+
         public override long ReadElementContentAsLong()
         {
             throw null;
         }
+
         public override string ReadElementContentAsString()
         {
             throw null;
         }
+
         public virtual System.TimeSpan ReadElementContentAsTimeSpan()
         {
             throw null;
         }
+
         public virtual System.Xml.UniqueId ReadElementContentAsUniqueId()
         {
             throw null;
         }
+
         public virtual void ReadFullStartElement() { }
+
         public virtual void ReadFullStartElement(string name) { }
+
         public virtual void ReadFullStartElement(string localName, string namespaceUri) { }
+
         public virtual void ReadFullStartElement(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
         ) { }
+
         public virtual System.Guid[] ReadGuidArray(string localName, string namespaceUri)
         {
             throw null;
         }
+
         public virtual System.Guid[] ReadGuidArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
@@ -1332,10 +1540,12 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual short[] ReadInt16Array(string localName, string namespaceUri)
         {
             throw null;
         }
+
         public virtual short[] ReadInt16Array(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
@@ -1343,10 +1553,12 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int[] ReadInt32Array(string localName, string namespaceUri)
         {
             throw null;
         }
+
         public virtual int[] ReadInt32Array(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
@@ -1354,10 +1566,12 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual long[] ReadInt64Array(string localName, string namespaceUri)
         {
             throw null;
         }
+
         public virtual long[] ReadInt64Array(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
@@ -1365,10 +1579,12 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual float[] ReadSingleArray(string localName, string namespaceUri)
         {
             throw null;
         }
+
         public virtual float[] ReadSingleArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
@@ -1376,22 +1592,27 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual void ReadStartElement(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
         ) { }
+
         public override string ReadString()
         {
             throw null;
         }
+
         protected string ReadString(int maxStringContentLength)
         {
             throw null;
         }
+
         public virtual System.TimeSpan[] ReadTimeSpanArray(string localName, string namespaceUri)
         {
             throw null;
         }
+
         public virtual System.TimeSpan[] ReadTimeSpanArray(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString namespaceUri
@@ -1399,23 +1620,28 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual int ReadValueAsBase64(byte[] buffer, int offset, int count)
         {
             throw null;
         }
+
         public virtual void StartCanonicalization(
             System.IO.Stream stream,
             bool includeComments,
             string[]? inclusivePrefixes
         ) { }
+
         public virtual bool TryGetArrayLength(out int count)
         {
             throw null;
         }
+
         public virtual bool TryGetBase64ContentLength(out int length)
         {
             throw null;
         }
+
         public virtual bool TryGetLocalNameAsDictionaryString(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Xml.XmlDictionaryString? localName
@@ -1423,6 +1649,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual bool TryGetNamespaceUriAsDictionaryString(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Xml.XmlDictionaryString? namespaceUri
@@ -1430,6 +1657,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual bool TryGetValueAsDictionaryString(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Xml.XmlDictionaryString? value
@@ -1438,37 +1666,44 @@ namespace System.Xml
             throw null;
         }
     }
+
     public sealed partial class XmlDictionaryReaderQuotas
     {
         public XmlDictionaryReaderQuotas() { }
+
         public static System.Xml.XmlDictionaryReaderQuotas Max
         {
             get { throw null; }
         }
+
         [System.ComponentModel.DefaultValueAttribute(16384)]
         public int MaxArrayLength
         {
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.DefaultValueAttribute(4096)]
         public int MaxBytesPerRead
         {
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.DefaultValueAttribute(32)]
         public int MaxDepth
         {
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.DefaultValueAttribute(16384)]
         public int MaxNameTableCharCount
         {
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.DefaultValueAttribute(8192)]
         public int MaxStringContentLength
         {
@@ -1479,8 +1714,10 @@ namespace System.Xml
         {
             get { throw null; }
         }
+
         public void CopyTo(System.Xml.XmlDictionaryReaderQuotas quotas) { }
     }
+
     [System.FlagsAttribute]
     public enum XmlDictionaryReaderQuotaTypes
     {
@@ -1490,9 +1727,11 @@ namespace System.Xml
         MaxBytesPerRead = 8,
         MaxNameTableCharCount = 16,
     }
+
     public partial class XmlDictionaryString
     {
         public XmlDictionaryString(System.Xml.IXmlDictionary dictionary, string value, int key) { }
+
         public System.Xml.IXmlDictionary Dictionary
         {
             get { throw null; }
@@ -1509,22 +1748,27 @@ namespace System.Xml
         {
             get { throw null; }
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public abstract partial class XmlDictionaryWriter : System.Xml.XmlWriter
     {
         protected XmlDictionaryWriter() { }
+
         public virtual bool CanCanonicalize
         {
             get { throw null; }
         }
+
         public static System.Xml.XmlDictionaryWriter CreateBinaryWriter(System.IO.Stream stream)
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryWriter CreateBinaryWriter(
             System.IO.Stream stream,
             System.Xml.IXmlDictionary? dictionary
@@ -1532,6 +1776,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryWriter CreateBinaryWriter(
             System.IO.Stream stream,
             System.Xml.IXmlDictionary? dictionary,
@@ -1540,6 +1785,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryWriter CreateBinaryWriter(
             System.IO.Stream stream,
             System.Xml.IXmlDictionary? dictionary,
@@ -1549,12 +1795,14 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryWriter CreateDictionaryWriter(
             System.Xml.XmlWriter writer
         )
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryWriter CreateMtomWriter(
             System.IO.Stream stream,
             System.Text.Encoding encoding,
@@ -1564,6 +1812,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryWriter CreateMtomWriter(
             System.IO.Stream stream,
             System.Text.Encoding encoding,
@@ -1577,10 +1826,12 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryWriter CreateTextWriter(System.IO.Stream stream)
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryWriter CreateTextWriter(
             System.IO.Stream stream,
             System.Text.Encoding encoding
@@ -1588,6 +1839,7 @@ namespace System.Xml
         {
             throw null;
         }
+
         public static System.Xml.XmlDictionaryWriter CreateTextWriter(
             System.IO.Stream stream,
             System.Text.Encoding encoding,
@@ -1596,12 +1848,15 @@ namespace System.Xml
         {
             throw null;
         }
+
         public virtual void EndCanonicalization() { }
+
         public virtual void StartCanonicalization(
             System.IO.Stream stream,
             bool includeComments,
             string[]? inclusivePrefixes
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             string localName,
@@ -1610,6 +1865,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             string localName,
@@ -1618,6 +1874,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             string localName,
@@ -1626,6 +1883,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             string localName,
@@ -1634,6 +1892,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             string localName,
@@ -1642,6 +1901,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             string localName,
@@ -1650,6 +1910,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             string localName,
@@ -1658,6 +1919,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             string localName,
@@ -1666,6 +1928,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             string localName,
@@ -1674,6 +1937,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             string localName,
@@ -1682,6 +1946,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
@@ -1690,6 +1955,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
@@ -1698,6 +1964,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
@@ -1706,6 +1973,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
@@ -1714,6 +1982,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
@@ -1722,6 +1991,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
@@ -1730,6 +2000,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
@@ -1738,6 +2009,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
@@ -1746,6 +2018,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
@@ -1754,6 +2027,7 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public virtual void WriteArray(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
@@ -1762,17 +2036,20 @@ namespace System.Xml
             int offset,
             int count
         ) { }
+
         public void WriteAttributeString(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri,
             string? value
         ) { }
+
         public void WriteAttributeString(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri,
             string? value
         ) { }
+
         public override System.Threading.Tasks.Task WriteBase64Async(
             byte[] buffer,
             int index,
@@ -1781,61 +2058,82 @@ namespace System.Xml
         {
             throw null;
         }
+
         public void WriteElementString(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri,
             string? value
         ) { }
+
         public void WriteElementString(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri,
             string? value
         ) { }
+
         public virtual void WriteNode(System.Xml.XmlDictionaryReader reader, bool defattr) { }
+
         public override void WriteNode(System.Xml.XmlReader reader, bool defattr) { }
+
         public virtual void WriteQualifiedName(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri
         ) { }
+
         public virtual void WriteStartAttribute(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri
         ) { }
+
         public void WriteStartAttribute(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri
         ) { }
+
         public virtual void WriteStartElement(
             string? prefix,
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri
         ) { }
+
         public void WriteStartElement(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? namespaceUri
         ) { }
+
         public virtual void WriteString(System.Xml.XmlDictionaryString? value) { }
+
         protected virtual void WriteTextNode(
             System.Xml.XmlDictionaryReader reader,
             bool isAttribute
         ) { }
+
         public virtual void WriteValue(System.Guid value) { }
+
         public virtual void WriteValue(System.TimeSpan value) { }
+
         public virtual void WriteValue(System.Xml.IStreamProvider value) { }
+
         public virtual void WriteValue(System.Xml.UniqueId value) { }
+
         public virtual void WriteValue(System.Xml.XmlDictionaryString? value) { }
+
         public virtual System.Threading.Tasks.Task WriteValueAsync(System.Xml.IStreamProvider value)
         {
             throw null;
         }
+
         public virtual void WriteXmlAttribute(string localName, string? value) { }
+
         public virtual void WriteXmlAttribute(
             System.Xml.XmlDictionaryString localName,
             System.Xml.XmlDictionaryString? value
         ) { }
+
         public virtual void WriteXmlnsAttribute(string? prefix, string namespaceUri) { }
+
         public virtual void WriteXmlnsAttribute(
             string? prefix,
             System.Xml.XmlDictionaryString namespaceUri

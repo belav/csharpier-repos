@@ -9,6 +9,7 @@ using System.Diagnostics;
 namespace System.Xml.Xsl.Xslt
 {
     using StringConcat = System.Xml.Xsl.Runtime.StringConcat;
+
     //         a) Forward only, one pass.
     //         b) You should call MoveToFirstChildren on nonempty element node. (or may be skip)
 
@@ -700,11 +701,13 @@ namespace System.Xml.Xsl.Xslt
         {
             private readonly string _prefix;
             private readonly string _localName;
+
             public DelayedQName(ref Record rec)
             {
                 _prefix = rec.prefix;
                 _localName = rec.localName;
             }
+
             public static implicit operator string(DelayedQName qn)
             {
                 return qn._prefix.Length == 0 ? qn._localName : (qn._prefix + ':' + qn._localName);
@@ -729,18 +732,22 @@ namespace System.Xml.Xsl.Xslt
         {
             return Ref.Equal(ns, NamespaceUri);
         }
+
         public bool IsKeyword(string kwd)
         {
             return Ref.Equal(kwd, LocalName);
         }
+
         public bool IsXsltNamespace()
         {
             return IsNs(_atoms.UriXsl);
         }
+
         public bool IsNullNamespace()
         {
             return IsNs(string.Empty);
         }
+
         public bool IsXsltKeyword(string kwd)
         {
             return IsKeyword(kwd) && IsXsltNamespace();
@@ -825,6 +832,7 @@ namespace System.Xml.Xsl.Xslt
             }
             SetVersion(version);
         }
+
         private void SetVersion(double version)
         {
             if (_compiler.Version == 0)
@@ -857,6 +865,7 @@ namespace System.Xml.Xsl.Xslt
         {
             public string name;
             public int flags;
+
             public XsltAttribute(string name, int flags)
             {
                 this.name = name;
@@ -865,6 +874,7 @@ namespace System.Xml.Xsl.Xslt
         }
 
         private XsltAttribute[]? _attributes;
+
         // Mapping of attribute names as they ordered in 'attributes' array
         // to there's numbers in actual stylesheet as they ordered in 'records' array
         private readonly int[] _xsltAttributeNumber = new int[21];
@@ -1485,6 +1495,7 @@ namespace System.Xml.Xsl.Xslt
                 }
             }
         }
+
         internal struct Record
         {
             public string localName;

@@ -40,6 +40,7 @@ namespace System.Reflection
         {
             return m_declaringType;
         }
+
         internal abstract RuntimeModule GetRuntimeModule();
         #endregion
 

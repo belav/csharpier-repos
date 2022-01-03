@@ -3,6 +3,7 @@
 
 
 using System;
+
 internal unsafe class testout1
 {
     private static double s_a3_0 = 134217728.0;

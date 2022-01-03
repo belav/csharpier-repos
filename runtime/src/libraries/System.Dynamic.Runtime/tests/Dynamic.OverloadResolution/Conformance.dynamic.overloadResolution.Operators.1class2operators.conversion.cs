@@ -14,6 +14,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(float p1)
         {
             return new Target() { Field = 1 };
@@ -56,6 +57,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static explicit operator Target(string x)
         {
             return new Target() { Field = 1 };
@@ -103,6 +105,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field = 4;
+
         public static implicit operator int(Target p1)
         {
             return p1;
@@ -145,6 +148,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static explicit operator decimal(Target p1)
         {
             p1.Field = 2;
@@ -316,6 +320,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(int x)
         {
             return new Target() { Field = 1 };
@@ -358,6 +363,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(int x)
         {
             return new Target() { Field = 1 };
@@ -578,6 +584,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static explicit operator Target(int x)
         {
             return new Target() { Field = 1 };
@@ -627,6 +634,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(int x)
         {
             return new Target() { Field = 1 };
@@ -676,6 +684,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static explicit operator Target(myStruct x)
         {
             return new Target() { Field = 1 };
@@ -725,6 +734,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public static int Status = 0;
+
         public static implicit operator Target(ValueType x)
         {
             Target.Status = 1;
@@ -774,6 +784,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(myStruct x)
         {
             return new Target() { Field = 1 };
@@ -821,6 +832,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static explicit operator Target(MyStruct x)
         {
             return new Target() { Field = 1 };
@@ -871,6 +883,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static explicit operator Target(Base x)
         {
             return new Target() { Field = 1 };
@@ -921,6 +934,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public static int Status;
+
         public static implicit operator Base(Target x)
         {
             Target.Status = 1;
@@ -973,6 +987,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(Base x)
         {
             return new Target() { Field = 1 };
@@ -1028,6 +1043,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static explicit operator Target(Derived x)
         {
             return new Target() { Field = 2 };
@@ -1083,6 +1099,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(Base2 x)
         {
             return new Target() { Field = 1 };
@@ -1441,6 +1458,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Base
     {
         public int Field;
+
         public static implicit operator int(Base b)
         {
             if (b.Field == 2)

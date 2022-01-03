@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 
 public abstract class AComponent { }
+
 public class Component : AComponent { }
 
 public abstract class Abstract

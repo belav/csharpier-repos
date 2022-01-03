@@ -4,6 +4,7 @@ using System.Reflection;
 class T
 {
     const int count = 10000;
+
     static int Main()
     {
         int res,

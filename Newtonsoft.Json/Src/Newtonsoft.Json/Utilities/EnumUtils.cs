@@ -149,6 +149,7 @@ namespace Newtonsoft.Json.Utilities
         // Used by Newtonsoft.Json.Schema
         private static CamelCaseNamingStrategy _camelCaseNamingStrategy =
             new CamelCaseNamingStrategy();
+
         public static bool TryToString(
             Type enumType,
             object value,

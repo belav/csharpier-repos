@@ -20,6 +20,7 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
         private volatile ConnectionState _connectionState = ConnectionState.Connecting;
 
         public ConnectionState State => _connectionState;
+
         public Client(int processId, IAgent agent)
         {
             _processId = processId;

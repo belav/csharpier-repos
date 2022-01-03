@@ -5,6 +5,7 @@
 namespace DefaultNamespace
 {
     using System;
+
     public class jitbug
     {
         public static UInt16 f()

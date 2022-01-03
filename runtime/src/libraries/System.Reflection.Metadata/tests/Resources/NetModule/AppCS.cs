@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 [assembly: System.Reflection.AssemblyVersion("1.2.3.4")]
 [assembly: System.Reflection.AssemblyCulture("")]
 
+
 namespace AppCS
 {
     public class App
@@ -61,10 +62,12 @@ namespace AppCS
     {
         CT ContraFooProp { set; }
     }
+
     public interface ICoVar<out CO>
     {
         CO CoFooMethod();
     }
+
     interface INormal<T>
     {
         T NormalFoo(T t);
@@ -95,6 +98,7 @@ namespace AppCS
     }
 
     class Animal { }
+
     class Tiger : Animal { }
 
     public class Test

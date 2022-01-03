@@ -21,6 +21,7 @@ namespace BigFrames
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(12284)]
         public int i2;
     }

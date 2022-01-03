@@ -17,12 +17,17 @@ namespace System.Net
         Basic = 8,
         Anonymous = 32768,
     }
+
     public sealed partial class Cookie
     {
         public Cookie() { }
+
         public Cookie(string name, string? value) { }
+
         public Cookie(string name, string? value, string? path) { }
+
         public Cookie(string name, string? value, string? path, string? domain) { }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Comment
         {
@@ -39,6 +44,7 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Domain
         {
@@ -65,12 +71,14 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Path
         {
             get { throw null; }
             set { }
         }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Port
         {
@@ -86,6 +94,7 @@ namespace System.Net
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Value
         {
@@ -97,21 +106,25 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
         )
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public partial class CookieCollection
         : System.Collections.Generic.ICollection<System.Net.Cookie>,
           System.Collections.Generic.IEnumerable<System.Net.Cookie>,
@@ -120,6 +133,7 @@ namespace System.Net
           System.Collections.IEnumerable
     {
         public CookieCollection() { }
+
         public int Count
         {
             get { throw null; }
@@ -144,36 +158,50 @@ namespace System.Net
         {
             get { throw null; }
         }
+
         public void Add(System.Net.Cookie cookie) { }
+
         public void Add(System.Net.CookieCollection cookies) { }
+
         public void Clear() { }
+
         public bool Contains(System.Net.Cookie cookie)
         {
             throw null;
         }
+
         public void CopyTo(System.Array array, int index) { }
+
         public void CopyTo(System.Net.Cookie[] array, int index) { }
+
         public System.Collections.IEnumerator GetEnumerator()
         {
             throw null;
         }
+
         public bool Remove(System.Net.Cookie cookie)
         {
             throw null;
         }
+
         System.Collections.Generic.IEnumerator<System.Net.Cookie> System.Collections.Generic.IEnumerable<System.Net.Cookie>.GetEnumerator()
         {
             throw null;
         }
     }
+
     public partial class CookieContainer
     {
         public const int DefaultCookieLengthLimit = 4096;
         public const int DefaultCookieLimit = 300;
         public const int DefaultPerDomainCookieLimit = 20;
+
         public CookieContainer() { }
+
         public CookieContainer(int capacity) { }
+
         public CookieContainer(int capacity, int perDomainCapacity, int maxCookieSize) { }
+
         public int Capacity
         {
             get { throw null; }
@@ -193,48 +221,62 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         public void Add(System.Net.Cookie cookie) { }
+
         public void Add(System.Net.CookieCollection cookies) { }
+
         public void Add(System.Uri uri, System.Net.Cookie cookie) { }
+
         public void Add(System.Uri uri, System.Net.CookieCollection cookies) { }
+
         public string GetCookieHeader(System.Uri uri)
         {
             throw null;
         }
+
         public System.Net.CookieCollection GetCookies(System.Uri uri)
         {
             throw null;
         }
+
         public System.Net.CookieCollection GetAllCookies()
         {
             throw null;
         }
+
         public void SetCookies(System.Uri uri, string cookieHeader) { }
     }
+
     public partial class CookieException
         : System.FormatException,
           System.Runtime.Serialization.ISerializable
     {
         public CookieException() { }
+
         protected CookieException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
     }
+
     public partial class CredentialCache
         : System.Collections.IEnumerable,
           System.Net.ICredentials,
           System.Net.ICredentialsByHost
     {
         public CredentialCache() { }
+
         public static System.Net.ICredentials DefaultCredentials
         {
             get { throw null; }
@@ -243,17 +285,20 @@ namespace System.Net
         {
             get { throw null; }
         }
+
         public void Add(
             string host,
             int port,
             string authenticationType,
             System.Net.NetworkCredential credential
         ) { }
+
         public void Add(
             System.Uri uriPrefix,
             string authType,
             System.Net.NetworkCredential cred
         ) { }
+
         public System.Net.NetworkCredential? GetCredential(
             string host,
             int port,
@@ -262,17 +307,22 @@ namespace System.Net
         {
             throw null;
         }
+
         public System.Net.NetworkCredential? GetCredential(System.Uri uriPrefix, string authType)
         {
             throw null;
         }
+
         public System.Collections.IEnumerator GetEnumerator()
         {
             throw null;
         }
+
         public void Remove(string? host, int port, string? authenticationType) { }
+
         public void Remove(System.Uri? uriPrefix, string? authType) { }
     }
+
     [System.FlagsAttribute]
     public enum DecompressionMethods
     {
@@ -282,11 +332,14 @@ namespace System.Net
         Deflate = 2,
         Brotli = 4,
     }
+
     public partial class DnsEndPoint : System.Net.EndPoint
     {
         public DnsEndPoint(string host, int port) { }
+
         public DnsEndPoint(string host, int port, System.Net.Sockets.AddressFamily addressFamily)
         { }
+
         public override System.Net.Sockets.AddressFamily AddressFamily
         {
             get { throw null; }
@@ -299,37 +352,45 @@ namespace System.Net
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
         )
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public abstract partial class EndPoint
     {
         protected EndPoint() { }
+
         public virtual System.Net.Sockets.AddressFamily AddressFamily
         {
             get { throw null; }
         }
+
         public virtual System.Net.EndPoint Create(System.Net.SocketAddress socketAddress)
         {
             throw null;
         }
+
         public virtual System.Net.SocketAddress Serialize()
         {
             throw null;
         }
     }
+
     public enum HttpStatusCode
     {
         Continue = 100,
@@ -399,6 +460,7 @@ namespace System.Net
         NotExtended = 510,
         NetworkAuthenticationRequired = 511,
     }
+
     public static partial class HttpVersion
     {
         public static readonly System.Version Unknown;
@@ -407,10 +469,12 @@ namespace System.Net
         public static readonly System.Version Version20;
         public static readonly System.Version Version30;
     }
+
     public partial interface ICredentials
     {
         System.Net.NetworkCredential? GetCredential(System.Uri uri, string authType);
     }
+
     public partial interface ICredentialsByHost
     {
         System.Net.NetworkCredential? GetCredential(
@@ -419,6 +483,7 @@ namespace System.Net
             string authenticationType
         );
     }
+
     public partial class IPAddress
     {
         public static readonly System.Net.IPAddress Any;
@@ -428,11 +493,17 @@ namespace System.Net
         public static readonly System.Net.IPAddress IPv6None;
         public static readonly System.Net.IPAddress Loopback;
         public static readonly System.Net.IPAddress None;
+
         public IPAddress(byte[] address) { }
+
         public IPAddress(byte[] address, long scopeid) { }
+
         public IPAddress(long newAddress) { }
+
         public IPAddress(System.ReadOnlySpan<byte> address) { }
+
         public IPAddress(System.ReadOnlySpan<byte> address, long scopeid) { }
+
         [System.ObsoleteAttribute(
             "IPAddress.Address is address family dependent and has been deprecated. Use IPAddress.Equals to perform comparisons."
         )]
@@ -474,72 +545,89 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
         )
         {
             throw null;
         }
+
         public byte[] GetAddressBytes()
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public static short HostToNetworkOrder(short host)
         {
             throw null;
         }
+
         public static int HostToNetworkOrder(int host)
         {
             throw null;
         }
+
         public static long HostToNetworkOrder(long host)
         {
             throw null;
         }
+
         public static bool IsLoopback(System.Net.IPAddress address)
         {
             throw null;
         }
+
         public System.Net.IPAddress MapToIPv4()
         {
             throw null;
         }
+
         public System.Net.IPAddress MapToIPv6()
         {
             throw null;
         }
+
         public static short NetworkToHostOrder(short network)
         {
             throw null;
         }
+
         public static int NetworkToHostOrder(int network)
         {
             throw null;
         }
+
         public static long NetworkToHostOrder(long network)
         {
             throw null;
         }
+
         public static System.Net.IPAddress Parse(System.ReadOnlySpan<char> ipSpan)
         {
             throw null;
         }
+
         public static System.Net.IPAddress Parse(string ipString)
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public bool TryFormat(System.Span<char> destination, out int charsWritten)
         {
             throw null;
         }
+
         public static bool TryParse(
             System.ReadOnlySpan<char> ipSpan,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
@@ -548,6 +636,7 @@ namespace System.Net
         {
             throw null;
         }
+
         public static bool TryParse(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] string? ipString,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
@@ -556,17 +645,22 @@ namespace System.Net
         {
             throw null;
         }
+
         public bool TryWriteBytes(System.Span<byte> destination, out int bytesWritten)
         {
             throw null;
         }
     }
+
     public partial class IPEndPoint : System.Net.EndPoint
     {
         public const int MaxPort = 65535;
         public const int MinPort = 0;
+
         public IPEndPoint(long address, int port) { }
+
         public IPEndPoint(System.Net.IPAddress address, int port) { }
+
         public System.Net.IPAddress Address
         {
             get { throw null; }
@@ -581,36 +675,44 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         public override System.Net.EndPoint Create(System.Net.SocketAddress socketAddress)
         {
             throw null;
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? comparand
         )
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public static System.Net.IPEndPoint Parse(System.ReadOnlySpan<char> s)
         {
             throw null;
         }
+
         public static System.Net.IPEndPoint Parse(string s)
         {
             throw null;
         }
+
         public override System.Net.SocketAddress Serialize()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public static bool TryParse(
             System.ReadOnlySpan<char> s,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
@@ -619,6 +721,7 @@ namespace System.Net
         {
             throw null;
         }
+
         public static bool TryParse(
             string s,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
@@ -628,37 +731,46 @@ namespace System.Net
             throw null;
         }
     }
+
     public partial interface IWebProxy
     {
         System.Net.ICredentials? Credentials { get; set; }
         System.Uri? GetProxy(System.Uri destination);
         bool IsBypassed(System.Uri host);
     }
+
     public partial class NetworkCredential : System.Net.ICredentials, System.Net.ICredentialsByHost
     {
         public NetworkCredential() { }
+
         [System.CLSCompliantAttribute(false)]
         public NetworkCredential(string? userName, System.Security.SecureString? password) { }
+
         [System.CLSCompliantAttribute(false)]
         public NetworkCredential(
             string? userName,
             System.Security.SecureString? password,
             string? domain
         ) { }
+
         public NetworkCredential(string? userName, string? password) { }
+
         public NetworkCredential(string? userName, string? password, string? domain) { }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Domain
         {
             get { throw null; }
             set { }
         }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string Password
         {
             get { throw null; }
             set { }
         }
+
         [System.CLSCompliantAttribute(false)]
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public System.Security.SecureString SecurePassword
@@ -666,12 +778,14 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string UserName
         {
             get { throw null; }
             set { }
         }
+
         public System.Net.NetworkCredential GetCredential(
             string? host,
             int port,
@@ -680,6 +794,7 @@ namespace System.Net
         {
             throw null;
         }
+
         public System.Net.NetworkCredential GetCredential(
             System.Uri? uri,
             string? authenticationType
@@ -688,10 +803,13 @@ namespace System.Net
             throw null;
         }
     }
+
     public partial class SocketAddress
     {
         public SocketAddress(System.Net.Sockets.AddressFamily family) { }
+
         public SocketAddress(System.Net.Sockets.AddressFamily family, int size) { }
+
         public System.Net.Sockets.AddressFamily Family
         {
             get { throw null; }
@@ -705,27 +823,33 @@ namespace System.Net
         {
             get { throw null; }
         }
+
         public override bool Equals(object? comparand)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public abstract partial class TransportContext
     {
         protected TransportContext() { }
+
         public abstract System.Security.Authentication.ExtendedProtection.ChannelBinding? GetChannelBinding(
             System.Security.Authentication.ExtendedProtection.ChannelBindingKind kind
         );
     }
 }
+
 namespace System.Net.Cache
 {
     public enum RequestCacheLevel
@@ -738,20 +862,25 @@ namespace System.Net.Cache
         Reload = 5,
         NoCacheNoStore = 6,
     }
+
     public partial class RequestCachePolicy
     {
         public RequestCachePolicy() { }
+
         public RequestCachePolicy(System.Net.Cache.RequestCacheLevel level) { }
+
         public System.Net.Cache.RequestCacheLevel Level
         {
             get { throw null; }
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
 }
+
 namespace System.Net.NetworkInformation
 {
     public partial class IPAddressCollection
@@ -760,6 +889,7 @@ namespace System.Net.NetworkInformation
           System.Collections.IEnumerable
     {
         protected internal IPAddressCollection() { }
+
         public virtual int Count
         {
             get { throw null; }
@@ -772,27 +902,35 @@ namespace System.Net.NetworkInformation
         {
             get { throw null; }
         }
+
         public virtual void Add(System.Net.IPAddress address) { }
+
         public virtual void Clear() { }
+
         public virtual bool Contains(System.Net.IPAddress address)
         {
             throw null;
         }
+
         public virtual void CopyTo(System.Net.IPAddress[] array, int offset) { }
+
         public virtual System.Collections.Generic.IEnumerator<System.Net.IPAddress> GetEnumerator()
         {
             throw null;
         }
+
         public virtual bool Remove(System.Net.IPAddress address)
         {
             throw null;
         }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
     }
 }
+
 namespace System.Net.Security
 {
     public enum AuthenticationLevel
@@ -801,6 +939,7 @@ namespace System.Net.Security
         MutualAuthRequested = 1,
         MutualAuthRequired = 2,
     }
+
     [System.FlagsAttribute]
     public enum SslPolicyErrors
     {
@@ -810,6 +949,7 @@ namespace System.Net.Security
         RemoteCertificateChainErrors = 4,
     }
 }
+
 namespace System.Net.Sockets
 {
     public enum AddressFamily
@@ -848,6 +988,7 @@ namespace System.Net.Sockets
         Packet = 65536,
         ControllerAreaNetwork = 65537,
     }
+
     public enum SocketError
     {
         SocketError = -1,
@@ -898,14 +1039,18 @@ namespace System.Net.Sockets
         NoRecovery = 11003,
         NoData = 11004,
     }
+
     public partial class SocketException : System.ComponentModel.Win32Exception
     {
         public SocketException() { }
+
         public SocketException(int errorCode) { }
+
         protected SocketException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         public override int ErrorCode
         {
             get { throw null; }
@@ -920,6 +1065,7 @@ namespace System.Net.Sockets
         }
     }
 }
+
 namespace System.Security.Authentication
 {
     public enum CipherAlgorithmType
@@ -935,6 +1081,7 @@ namespace System.Security.Authentication
         Aes = 26129,
         Rc4 = 26625,
     }
+
     public enum ExchangeAlgorithmType
     {
         None = 0,
@@ -942,6 +1089,7 @@ namespace System.Security.Authentication
         RsaKeyX = 41984,
         DiffieHellman = 43522,
     }
+
     public enum HashAlgorithmType
     {
         None = 0,
@@ -951,6 +1099,7 @@ namespace System.Security.Authentication
         Sha384 = 32781,
         Sha512 = 32782,
     }
+
     [System.FlagsAttribute]
     public enum SslProtocols
     {
@@ -967,15 +1116,19 @@ namespace System.Security.Authentication
         Tls13 = 12288,
     }
 }
+
 namespace System.Security.Authentication.ExtendedProtection
 {
     public abstract partial class ChannelBinding
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         protected ChannelBinding() : base(default(bool)) { }
+
         protected ChannelBinding(bool ownsHandle) : base(default(bool)) { }
+
         public abstract int Size { get; }
     }
+
     public enum ChannelBindingKind
     {
         Unknown = 0,

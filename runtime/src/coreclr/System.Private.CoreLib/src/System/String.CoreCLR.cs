@@ -15,12 +15,14 @@ namespace System
         // Set extra byte for odd-sized strings that came from interop as BSTR.
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal extern void SetTrailByte(byte data);
+
         // Try to retrieve the extra byte - returns false if not present.
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal extern bool TryGetTrailByte(out byte data);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern string Intern();
+
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern string? IsInterned();
 

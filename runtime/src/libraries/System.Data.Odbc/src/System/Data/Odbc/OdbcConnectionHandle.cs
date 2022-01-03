@@ -214,6 +214,7 @@ namespace System.Data.Odbc
             //Debug.Assert((HandleState.Connected == _handleState) || (HandleState.TransactionInProgress == _handleState), "not expected HandleState.Connected");
             return retcode;
         }
+
         private ODBC32.RetCode Connect(string connectionString)
         {
             Debug.Assert(

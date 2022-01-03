@@ -675,6 +675,7 @@ namespace System.Net.Sockets
 
         private int _currentReadTimeout = -1;
         private int _currentWriteTimeout = -1;
+
         internal void SetSocketTimeoutOption(SocketShutdown mode, int timeout, bool silent)
         {
             if (timeout < 0)

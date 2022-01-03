@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using Roslyn.Utilities;
+
 namespace Microsoft.CodeAnalysis
 {
     internal class DeclarationComputer

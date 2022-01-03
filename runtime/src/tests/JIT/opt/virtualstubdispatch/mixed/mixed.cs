@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal interface ITest1
 {
     int f1();
@@ -21,10 +22,12 @@ internal interface IBase1
 {
     int f3();
 }
+
 internal interface IDerived1 : IBase1
 {
     int f4();
 }
+
 internal interface IDerived2 : IBase1
 {
     int f5();
@@ -41,6 +44,7 @@ internal interface IBase
     int f2b { get; }
     int f2c { get; }
 }
+
 internal interface IDerived : IBase
 {
     new int f2a();
@@ -57,10 +61,12 @@ internal interface ITest5
 internal class C : ITest5
 {
     private int _code;
+
     public C()
     {
         _code = this.GetHashCode();
     }
+
     public int f6()
     {
         GC.Collect();
@@ -71,6 +77,7 @@ internal class C : ITest5
         else
             return 13;
     }
+
     public int f7()
     {
         GC.Collect();
@@ -81,6 +88,7 @@ internal class C : ITest5
         else
             return 14;
     }
+
     public int f8()
     {
         GC.Collect();
@@ -91,6 +99,7 @@ internal class C : ITest5
         else
             return 16;
     }
+
     public virtual int f9()
     {
         GC.Collect();
@@ -106,10 +115,12 @@ internal class C : ITest5
 internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDerived2, IDerived
 {
     private int _code;
+
     public CTest()
     {
         _code = this.GetHashCode();
     }
+
     int ITest1.f1()
     {
         GC.Collect();
@@ -120,6 +131,7 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
         else
             return 1;
     }
+
     public int f1()
     {
         GC.Collect();
@@ -155,6 +167,7 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
                 return 4;
         }
     }
+
     int IDerived.f2a()
     {
         GC.Collect();
@@ -165,6 +178,7 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
         else
             return 5;
     }
+
     public int f2b
     {
         get
@@ -178,6 +192,7 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
                 return 6;
         }
     }
+
     int IDerived.f2b()
     {
         GC.Collect();
@@ -188,6 +203,7 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
         else
             return 7;
     }
+
     public int f2c
     {
         get
@@ -201,6 +217,7 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
                 return 8;
         }
     }
+
     int IDerived.f2c()
     {
         GC.Collect();
@@ -222,6 +239,7 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
         else
             return 10;
     }
+
     int IDerived1.f4()
     {
         GC.Collect();
@@ -232,6 +250,7 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
         else
             return 11;
     }
+
     int IDerived2.f5()
     {
         GC.Collect();
@@ -264,6 +283,7 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
         else
             return 17;
     }
+
     override public int f9()
     {
         GC.Collect();

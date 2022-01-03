@@ -10,16 +10,19 @@ class Tests
         v += 1;
         Console.WriteLine("Test.F1");
     }
+
     static void F2()
     {
         v += 2;
         Console.WriteLine("Test.F2");
     }
+
     static void F4()
     {
         v += 4;
         Console.WriteLine("Test.F4");
     }
+
     static void F8()
     {
         v += 8;
@@ -32,6 +35,7 @@ class Tests
     }
 
     static int v = 0;
+
     static bool check_is_expected_v(SimpleDelegate d, int expected_v)
     {
         v = 0;

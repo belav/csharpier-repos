@@ -407,6 +407,7 @@ namespace System.Xml.Schema
                 elements = _undeclaredElementDecls;
             }
         }
+
         //
         // IDtdInfo interface
         //

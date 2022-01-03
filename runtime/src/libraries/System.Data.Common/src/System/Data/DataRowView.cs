@@ -245,7 +245,9 @@ namespace System.Data
 
         #region ICustomTypeDescriptor
         AttributeCollection ICustomTypeDescriptor.GetAttributes() => new AttributeCollection(null);
+
         string? ICustomTypeDescriptor.GetClassName() => null;
+
         string? ICustomTypeDescriptor.GetComponentName() => null;
 
         [RequiresUnreferencedCode(

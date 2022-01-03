@@ -917,6 +917,7 @@ namespace System.Transactions.Tests
                 get { return s_trace; }
                 set { s_trace = value; }
             }
+
             public static void Trace(string stringToTrace, params object[] args)
             {
                 if (s_trace)

@@ -13,9 +13,12 @@ namespace AutoMapper.UnitTests.Projection
         {
             public TestContext() : base() =>
                 Database.SetInitializer<TestContext>(new DatabaseInitializer());
+
             public DbSet<Source> Sources { get; set; }
         }
+
         const string _badGreeting = "GRRRRR";
+
         public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
         {
             protected override void Seed(TestContext testContext)
@@ -24,6 +27,7 @@ namespace AutoMapper.UnitTests.Projection
                 base.Seed(testContext);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 x =>
@@ -34,6 +38,7 @@ namespace AutoMapper.UnitTests.Projection
                 }
             );
         const string _niceGreeting = "Hello";
+
         [Fact]
         public void Direct_assignability_shouldnt_trump_custom_projection()
         {
@@ -42,6 +47,7 @@ namespace AutoMapper.UnitTests.Projection
                 ProjectTo<Target>(context.Sources).Single().Greeting.ShouldBe(_niceGreeting);
             }
         }
+
         public class Source
         {
             public int Id { get; set; }
@@ -49,30 +55,36 @@ namespace AutoMapper.UnitTests.Projection
             public int Number { get; set; }
             public SourceChild Child { get; set; }
         }
+
         public class SourceChild
         {
             public int Id { get; set; }
             public string Greeting { get; set; }
         }
+
         class Target
         {
             public string Greeting { get; set; }
             public int? Number { get; set; }
             public TargetChild Child { get; set; }
         }
+
         class TargetChild
         {
             public string Greeting { get; set; }
         }
     }
+
     public class CustomProjectionCustomClasses : AutoMapperSpecBase
     {
         public class TestContext : DbContext
         {
             public TestContext() : base() =>
                 Database.SetInitializer<TestContext>(new DatabaseInitializer());
+
             public DbSet<Source> Sources { get; set; }
         }
+
         public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
         {
             protected override void Seed(TestContext testContext)
@@ -81,6 +93,7 @@ namespace AutoMapper.UnitTests.Projection
                 base.Seed(testContext);
             }
         }
+
         const string _niceGreeting = "Hello";
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
@@ -91,6 +104,7 @@ namespace AutoMapper.UnitTests.Projection
                     x.CreateProjection<SourceChild, TargetChild>();
                 }
             );
+
         [Fact]
         public void Should_work()
         {
@@ -99,6 +113,7 @@ namespace AutoMapper.UnitTests.Projection
                 ProjectTo<Target>(context.Sources).Single().Greeting.ShouldBe(_niceGreeting);
             }
         }
+
         public class Source
         {
             public int Id { get; set; }
@@ -106,30 +121,36 @@ namespace AutoMapper.UnitTests.Projection
             public int Number { get; set; }
             public SourceChild Child { get; set; }
         }
+
         public class SourceChild
         {
             public int Id { get; set; }
             public string Greeting { get; set; }
         }
+
         class Target
         {
             public string Greeting { get; set; }
             public int? Number { get; set; }
             public TargetChild Child { get; set; }
         }
+
         class TargetChild
         {
             public string Greeting { get; set; }
         }
     }
+
     public class CustomProjectionChildClasses : AutoMapperSpecBase
     {
         public class TestContext : DbContext
         {
             public TestContext() : base() =>
                 Database.SetInitializer<TestContext>(new DatabaseInitializer());
+
             public DbSet<Source> Sources { get; set; }
         }
+
         public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
         {
             protected override void Seed(TestContext testContext)
@@ -138,6 +159,7 @@ namespace AutoMapper.UnitTests.Projection
                 base.Seed(testContext);
             }
         }
+
         const string _niceGreeting = "Hello";
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
@@ -148,6 +170,7 @@ namespace AutoMapper.UnitTests.Projection
                         .ConvertUsing(s => new TargetChild { Greeting = _niceGreeting });
                 }
             );
+
         [Fact]
         public void Should_work()
         {
@@ -156,6 +179,7 @@ namespace AutoMapper.UnitTests.Projection
                 ProjectTo<Target>(context.Sources).Single().Child.Greeting.ShouldBe(_niceGreeting);
             }
         }
+
         public class Source
         {
             public int Id { get; set; }
@@ -163,17 +187,20 @@ namespace AutoMapper.UnitTests.Projection
             public int Number { get; set; }
             public SourceChild Child { get; set; }
         }
+
         public class SourceChild
         {
             public int Id { get; set; }
             public string Greeting { get; set; }
         }
+
         class Target
         {
             public string Greeting { get; set; }
             public int? Number { get; set; }
             public TargetChild Child { get; set; }
         }
+
         class TargetChild
         {
             public string Greeting { get; set; }

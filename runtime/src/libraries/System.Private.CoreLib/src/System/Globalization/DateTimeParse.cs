@@ -847,6 +847,7 @@ namespace System
                 DS.TX_NNN
             },
         };
+
         // End        NumEnd      NumAmPm     NumSpace    NumDaySep   NumTimesep  MonthEnd    MonthSpace  MonthDSep   NumDateSuff NumTimeSuff     DayOfWeek     YearSpace   YearDateSep YearEnd     TimeZone    Era        UTCMark
 
         internal const string GMTName = "GMT";
@@ -6339,6 +6340,7 @@ namespace System
             Trace($"Lex return {message}, DS.{dps}");
 #endif // _LOGGING
         }
+
         [Conditional("_LOGGING")]
         private static void PTSTraceExit(DS dps, bool passed)
         {
@@ -6348,6 +6350,7 @@ namespace System
             Trace($"ProcessTerminalState {(passed ? "passed" : "failed")} @ DS.{dps}");
 #endif // _LOGGING
         }
+
         [Conditional("_LOGGING")]
         private static void TPTraceExit(string message, DS dps)
         {
@@ -6357,6 +6360,7 @@ namespace System
             Trace($"TryParse return {message}, DS.{dps}");
 #endif // _LOGGING
         }
+
         [Conditional("_LOGGING")]
         private static void DTFITrace(DateTimeFormatInfo dtfi)
         {
@@ -6430,8 +6434,10 @@ namespace System
             buffer.Append(s);
             return buffer.ToString();
         }
+
         // return a string in the form: "Sun"
         private static string Hex(string str) => Hex((ReadOnlySpan<char>)str);
+
         private static string Hex(ReadOnlySpan<char> str)
         {
             StringBuilder buffer = new StringBuilder();
@@ -6446,6 +6452,7 @@ namespace System
             buffer.Append('"');
             return buffer.ToString();
         }
+
         // return an unicode escaped string form of char c
         private static string Hex(char c)
         {
@@ -6489,6 +6496,7 @@ namespace System
         internal char m_current;
 
         private readonly CompareInfo m_info;
+
         // Flag to indicate if we encouter an digit, we should check for token or not.
         // In some cultures, such as mn-MN, it uses "\x0031\x00a0\x0434\x04af\x0433\x044d\x044d\x0440\x00a0\x0441\x0430\x0440" in month names.
         private readonly bool m_checkDigitToken;
@@ -7217,6 +7225,7 @@ namespace System
         internal int Year;
         internal int Month;
         internal int Day;
+
         //
         // Set time default to 00:00:00.
         //

@@ -439,6 +439,7 @@ namespace Tracing.Tests.Common
     {
         private static string IpcRootPath { get; } =
             OperatingSystem.IsWindows() ? @"\\.\pipe\" : Path.GetTempPath();
+
         public static Stream GetStandardTransport(int processId)
         {
             try

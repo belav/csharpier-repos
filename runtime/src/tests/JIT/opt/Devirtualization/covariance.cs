@@ -11,6 +11,7 @@ interface I<in T>
 class X<T> : I<T>
 {
     int c = 0;
+
     int I<T>.A(T t)
     {
         return ++c;

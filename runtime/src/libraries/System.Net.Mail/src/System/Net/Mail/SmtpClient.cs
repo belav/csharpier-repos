@@ -60,8 +60,10 @@ namespace System.Net.Mail
         internal string _clientDomain;
         private bool _disposed;
         private ServicePoint? _servicePoint;
+
         // (async only) For when only some recipients fail.  We still send the e-mail to the others.
         private SmtpFailedRecipientException? _failedRecipientException;
+
         // ports above this limit are invalid
         private const int MaxPortValue = 65535;
         public event SendCompletedEventHandler? SendCompleted;

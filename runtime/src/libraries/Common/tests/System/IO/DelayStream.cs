@@ -25,6 +25,7 @@ namespace System.IO
             if (disposing)
                 _innerStream.Dispose();
         }
+
         public override ValueTask DisposeAsync() => _innerStream.DisposeAsync();
 
         public int DelayMilliseconds
@@ -152,8 +153,10 @@ namespace System.IO
             get => _innerStream.Position;
             set => _innerStream.Position = value;
         }
+
         public override long Seek(long offset, SeekOrigin origin) =>
             _innerStream.Seek(offset, origin);
+
         public override void SetLength(long value) => _innerStream.SetLength(value);
 
         public override int ReadTimeout

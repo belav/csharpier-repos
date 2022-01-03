@@ -10,14 +10,17 @@ namespace System.Linq
     {
         internal EnumerableExecutor() { }
     }
+
     public partial class EnumerableExecutor<T> : System.Linq.EnumerableExecutor
     {
         public EnumerableExecutor(System.Linq.Expressions.Expression expression) { }
     }
+
     public abstract partial class EnumerableQuery
     {
         internal EnumerableQuery() { }
     }
+
     public partial class EnumerableQuery<T>
         : System.Linq.EnumerableQuery,
           System.Collections.Generic.IEnumerable<T>,
@@ -32,10 +35,12 @@ namespace System.Linq
             "Enumerating in-memory collections as IQueryable can require unreferenced code because expressions referencing IQueryable extension methods can get rebound to IEnumerable extension methods. The IEnumerable extension methods could be trimmed causing the application to fail at runtime."
         )]
         public EnumerableQuery(System.Collections.Generic.IEnumerable<T> enumerable) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Enumerating in-memory collections as IQueryable can require unreferenced code because expressions referencing IQueryable extension methods can get rebound to IEnumerable extension methods. The IEnumerable extension methods could be trimmed causing the application to fail at runtime."
         )]
         public EnumerableQuery(System.Linq.Expressions.Expression expression) { }
+
         System.Type System.Linq.IQueryable.ElementType
         {
             get { throw null; }
@@ -48,41 +53,49 @@ namespace System.Linq
         {
             get { throw null; }
         }
+
         System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()
         {
             throw null;
         }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
+
         System.Linq.IQueryable System.Linq.IQueryProvider.CreateQuery(
             System.Linq.Expressions.Expression expression
         )
         {
             throw null;
         }
+
         System.Linq.IQueryable<TElement> System.Linq.IQueryProvider.CreateQuery<TElement>(
             System.Linq.Expressions.Expression expression
         )
         {
             throw null;
         }
+
         object System.Linq.IQueryProvider.Execute(System.Linq.Expressions.Expression expression)
         {
             throw null;
         }
+
         TElement System.Linq.IQueryProvider.Execute<TElement>(
             System.Linq.Expressions.Expression expression
         )
         {
             throw null;
         }
+
         public override string? ToString()
         {
             throw null;
         }
     }
+
     public static partial class Queryable
     {
         public static TSource Aggregate<TSource>(
@@ -92,6 +105,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TAccumulate Aggregate<TSource, TAccumulate>(
             this System.Linq.IQueryable<TSource> source,
             TAccumulate seed,
@@ -100,6 +114,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TResult Aggregate<TSource, TAccumulate, TResult>(
             this System.Linq.IQueryable<TSource> source,
             TAccumulate seed,
@@ -109,6 +124,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool All<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -116,10 +132,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool Any<TSource>(this System.Linq.IQueryable<TSource> source)
         {
             throw null;
         }
+
         public static bool Any<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -127,6 +145,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Append<TSource>(
             this System.Linq.IQueryable<TSource> source,
             TSource element
@@ -134,6 +153,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Enumerating in-memory collections as IQueryable can require unreferenced code because expressions referencing IQueryable extension methods can get rebound to IEnumerable extension methods. The IEnumerable extension methods could be trimmed causing the application to fail at runtime."
         )]
@@ -141,6 +161,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Enumerating in-memory collections as IQueryable can require unreferenced code because expressions referencing IQueryable extension methods can get rebound to IEnumerable extension methods. The IEnumerable extension methods could be trimmed causing the application to fail at runtime."
         )]
@@ -150,46 +171,57 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal Average(this System.Linq.IQueryable<decimal> source)
         {
             throw null;
         }
+
         public static double Average(this System.Linq.IQueryable<double> source)
         {
             throw null;
         }
+
         public static double Average(this System.Linq.IQueryable<int> source)
         {
             throw null;
         }
+
         public static double Average(this System.Linq.IQueryable<long> source)
         {
             throw null;
         }
+
         public static decimal? Average(this System.Linq.IQueryable<decimal?> source)
         {
             throw null;
         }
+
         public static double? Average(this System.Linq.IQueryable<double?> source)
         {
             throw null;
         }
+
         public static double? Average(this System.Linq.IQueryable<int?> source)
         {
             throw null;
         }
+
         public static double? Average(this System.Linq.IQueryable<long?> source)
         {
             throw null;
         }
+
         public static float? Average(this System.Linq.IQueryable<float?> source)
         {
             throw null;
         }
+
         public static float Average(this System.Linq.IQueryable<float> source)
         {
             throw null;
         }
+
         public static decimal Average<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, decimal>> selector
@@ -197,6 +229,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double Average<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, double>> selector
@@ -204,6 +237,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double Average<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, int>> selector
@@ -211,6 +245,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double Average<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, long>> selector
@@ -218,6 +253,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal? Average<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, decimal?>> selector
@@ -225,6 +261,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double? Average<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, double?>> selector
@@ -232,6 +269,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double? Average<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, int?>> selector
@@ -239,6 +277,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double? Average<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, long?>> selector
@@ -246,6 +285,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static float? Average<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, float?>> selector
@@ -253,6 +293,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static float Average<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, float>> selector
@@ -260,12 +301,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> Cast<TResult>(
             this System.Linq.IQueryable source
         )
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource[]> Chunk<TSource>(
             this System.Linq.IQueryable<TSource> source,
             int size
@@ -273,6 +316,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Concat<TSource>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TSource> source2
@@ -280,6 +324,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool Contains<TSource>(
             this System.Linq.IQueryable<TSource> source,
             TSource item
@@ -287,6 +332,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool Contains<TSource>(
             this System.Linq.IQueryable<TSource> source,
             TSource item,
@@ -295,10 +341,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static int Count<TSource>(this System.Linq.IQueryable<TSource> source)
         {
             throw null;
         }
+
         public static int Count<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -306,12 +354,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> DefaultIfEmpty<TSource>(
             this System.Linq.IQueryable<TSource> source
         )
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> DefaultIfEmpty<TSource>(
             this System.Linq.IQueryable<TSource> source,
             TSource defaultValue
@@ -319,6 +369,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> DistinctBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector
@@ -326,6 +377,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> DistinctBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector,
@@ -334,12 +386,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Distinct<TSource>(
             this System.Linq.IQueryable<TSource> source
         )
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Distinct<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
@@ -347,6 +401,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? ElementAtOrDefault<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Index index
@@ -354,6 +409,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? ElementAtOrDefault<TSource>(
             this System.Linq.IQueryable<TSource> source,
             int index
@@ -361,6 +417,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource ElementAt<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Index index
@@ -368,6 +425,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource ElementAt<TSource>(
             this System.Linq.IQueryable<TSource> source,
             int index
@@ -375,6 +433,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> ExceptBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TKey> source2,
@@ -383,6 +442,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> ExceptBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TKey> source2,
@@ -392,6 +452,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Except<TSource>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TSource> source2
@@ -399,6 +460,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Except<TSource>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TSource> source2,
@@ -407,10 +469,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? FirstOrDefault<TSource>(this System.Linq.IQueryable<TSource> source)
         {
             throw null;
         }
+
         public static TSource? FirstOrDefault<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -418,6 +482,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource FirstOrDefault<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate,
@@ -426,6 +491,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource FirstOrDefault<TSource>(
             this System.Linq.IQueryable<TSource> source,
             TSource defaultValue
@@ -433,10 +499,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource First<TSource>(this System.Linq.IQueryable<TSource> source)
         {
             throw null;
         }
+
         public static TSource First<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -444,6 +512,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<System.Linq.IGrouping<TKey, TSource>> GroupBy<
             TSource,
             TKey
@@ -454,6 +523,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<System.Linq.IGrouping<TKey, TSource>> GroupBy<
             TSource,
             TKey
@@ -465,6 +535,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<System.Linq.IGrouping<TKey, TElement>> GroupBy<
             TSource,
             TKey,
@@ -477,6 +548,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<System.Linq.IGrouping<TKey, TElement>> GroupBy<
             TSource,
             TKey,
@@ -490,6 +562,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> GroupBy<TSource, TKey, TResult>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector,
@@ -502,6 +575,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> GroupBy<TSource, TKey, TResult>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector,
@@ -515,6 +589,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> GroupBy<TSource, TKey, TElement, TResult>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector,
@@ -528,6 +603,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> GroupBy<TSource, TKey, TElement, TResult>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector,
@@ -542,6 +618,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(
             this System.Linq.IQueryable<TOuter> outer,
             System.Collections.Generic.IEnumerable<TInner> inner,
@@ -556,6 +633,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> GroupJoin<TOuter, TInner, TKey, TResult>(
             this System.Linq.IQueryable<TOuter> outer,
             System.Collections.Generic.IEnumerable<TInner> inner,
@@ -571,6 +649,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> IntersectBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TKey> source2,
@@ -579,6 +658,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> IntersectBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TKey> source2,
@@ -588,6 +668,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Intersect<TSource>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TSource> source2
@@ -595,6 +676,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Intersect<TSource>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TSource> source2,
@@ -603,6 +685,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> Join<TOuter, TInner, TKey, TResult>(
             this System.Linq.IQueryable<TOuter> outer,
             System.Collections.Generic.IEnumerable<TInner> inner,
@@ -613,6 +696,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> Join<TOuter, TInner, TKey, TResult>(
             this System.Linq.IQueryable<TOuter> outer,
             System.Collections.Generic.IEnumerable<TInner> inner,
@@ -624,10 +708,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? LastOrDefault<TSource>(this System.Linq.IQueryable<TSource> source)
         {
             throw null;
         }
+
         public static TSource? LastOrDefault<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -635,6 +721,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource LastOrDefault<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate,
@@ -643,6 +730,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource LastOrDefault<TSource>(
             this System.Linq.IQueryable<TSource> source,
             TSource defaultValue
@@ -650,10 +738,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource Last<TSource>(this System.Linq.IQueryable<TSource> source)
         {
             throw null;
         }
+
         public static TSource Last<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -661,10 +751,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static long LongCount<TSource>(this System.Linq.IQueryable<TSource> source)
         {
             throw null;
         }
+
         public static long LongCount<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -672,6 +764,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? MaxBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector
@@ -679,6 +772,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? MaxBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector,
@@ -687,10 +781,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? Max<TSource>(this System.Linq.IQueryable<TSource> source)
         {
             throw null;
         }
+
         public static TSource? Max<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Collections.Generic.IComparer<TSource>? comparer
@@ -698,6 +794,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TResult? Max<TSource, TResult>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TResult>> selector
@@ -705,6 +802,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? MinBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector
@@ -712,6 +810,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? MinBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector,
@@ -720,10 +819,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? Min<TSource>(this System.Linq.IQueryable<TSource> source)
         {
             throw null;
         }
+
         public static TSource? Min<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Collections.Generic.IComparer<TSource>? comparer
@@ -731,6 +832,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TResult? Min<TSource, TResult>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TResult>> selector
@@ -738,12 +840,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> OfType<TResult>(
             this System.Linq.IQueryable source
         )
         {
             throw null;
         }
+
         public static System.Linq.IOrderedQueryable<TSource> OrderByDescending<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector
@@ -751,6 +855,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedQueryable<TSource> OrderByDescending<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector,
@@ -759,6 +864,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedQueryable<TSource> OrderBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector
@@ -766,6 +872,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedQueryable<TSource> OrderBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector,
@@ -774,6 +881,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Prepend<TSource>(
             this System.Linq.IQueryable<TSource> source,
             TSource element
@@ -781,12 +889,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Reverse<TSource>(
             this System.Linq.IQueryable<TSource> source
         )
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> SelectMany<TSource, TResult>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<
@@ -797,6 +907,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> SelectMany<TSource, TResult>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<
@@ -808,6 +919,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> SelectMany<TSource, TCollection, TResult>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<
@@ -823,6 +935,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> SelectMany<TSource, TCollection, TResult>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<
@@ -839,6 +952,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> Select<TSource, TResult>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, int, TResult>> selector
@@ -846,6 +960,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> Select<TSource, TResult>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TResult>> selector
@@ -853,6 +968,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool SequenceEqual<TSource>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TSource> source2
@@ -860,6 +976,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool SequenceEqual<TSource>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TSource> source2,
@@ -868,10 +985,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? SingleOrDefault<TSource>(this System.Linq.IQueryable<TSource> source)
         {
             throw null;
         }
+
         public static TSource? SingleOrDefault<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -879,6 +998,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource SingleOrDefault<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate,
@@ -887,6 +1007,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource SingleOrDefault<TSource>(
             this System.Linq.IQueryable<TSource> source,
             TSource defaultValue
@@ -894,10 +1015,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource Single<TSource>(this System.Linq.IQueryable<TSource> source)
         {
             throw null;
         }
+
         public static TSource Single<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -905,6 +1028,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> SkipLast<TSource>(
             this System.Linq.IQueryable<TSource> source,
             int count
@@ -912,6 +1036,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> SkipWhile<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -919,6 +1044,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> SkipWhile<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, int, bool>> predicate
@@ -926,6 +1052,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Skip<TSource>(
             this System.Linq.IQueryable<TSource> source,
             int count
@@ -933,46 +1060,57 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal Sum(this System.Linq.IQueryable<decimal> source)
         {
             throw null;
         }
+
         public static double Sum(this System.Linq.IQueryable<double> source)
         {
             throw null;
         }
+
         public static int Sum(this System.Linq.IQueryable<int> source)
         {
             throw null;
         }
+
         public static long Sum(this System.Linq.IQueryable<long> source)
         {
             throw null;
         }
+
         public static decimal? Sum(this System.Linq.IQueryable<decimal?> source)
         {
             throw null;
         }
+
         public static double? Sum(this System.Linq.IQueryable<double?> source)
         {
             throw null;
         }
+
         public static int? Sum(this System.Linq.IQueryable<int?> source)
         {
             throw null;
         }
+
         public static long? Sum(this System.Linq.IQueryable<long?> source)
         {
             throw null;
         }
+
         public static float? Sum(this System.Linq.IQueryable<float?> source)
         {
             throw null;
         }
+
         public static float Sum(this System.Linq.IQueryable<float> source)
         {
             throw null;
         }
+
         public static decimal Sum<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, decimal>> selector
@@ -980,6 +1118,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double Sum<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, double>> selector
@@ -987,6 +1126,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static int Sum<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, int>> selector
@@ -994,6 +1134,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static long Sum<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, long>> selector
@@ -1001,6 +1142,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal? Sum<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, decimal?>> selector
@@ -1008,6 +1150,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double? Sum<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, double?>> selector
@@ -1015,6 +1158,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static int? Sum<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, int?>> selector
@@ -1022,6 +1166,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static long? Sum<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, long?>> selector
@@ -1029,6 +1174,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static float? Sum<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, float?>> selector
@@ -1036,6 +1182,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static float Sum<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, float>> selector
@@ -1043,6 +1190,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> TakeLast<TSource>(
             this System.Linq.IQueryable<TSource> source,
             int count
@@ -1050,6 +1198,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> TakeWhile<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -1057,6 +1206,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> TakeWhile<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, int, bool>> predicate
@@ -1064,6 +1214,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Take<TSource>(
             this System.Linq.IQueryable<TSource> source,
             int count
@@ -1071,6 +1222,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Take<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Range range
@@ -1078,6 +1230,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedQueryable<TSource> ThenByDescending<TSource, TKey>(
             this System.Linq.IOrderedQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector
@@ -1085,6 +1238,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedQueryable<TSource> ThenByDescending<TSource, TKey>(
             this System.Linq.IOrderedQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector,
@@ -1093,6 +1247,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedQueryable<TSource> ThenBy<TSource, TKey>(
             this System.Linq.IOrderedQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector
@@ -1100,6 +1255,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedQueryable<TSource> ThenBy<TSource, TKey>(
             this System.Linq.IOrderedQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, TKey>> keySelector,
@@ -1108,6 +1264,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> UnionBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TSource> source2,
@@ -1116,6 +1273,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> UnionBy<TSource, TKey>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TSource> source2,
@@ -1125,6 +1283,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Union<TSource>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TSource> source2
@@ -1132,6 +1291,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Union<TSource>(
             this System.Linq.IQueryable<TSource> source1,
             System.Collections.Generic.IEnumerable<TSource> source2,
@@ -1140,6 +1300,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Where<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, bool>> predicate
@@ -1147,6 +1308,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TSource> Where<TSource>(
             this System.Linq.IQueryable<TSource> source,
             System.Linq.Expressions.Expression<System.Func<TSource, int, bool>> predicate
@@ -1154,6 +1316,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<(TFirst First, TSecond Second)> Zip<TFirst, TSecond>(
             this System.Linq.IQueryable<TFirst> source1,
             System.Collections.Generic.IEnumerable<TSecond> source2
@@ -1161,6 +1324,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<(TFirst First, TSecond Second, TThird Third)> Zip<
             TFirst,
             TSecond,
@@ -1173,6 +1337,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IQueryable<TResult> Zip<TFirst, TSecond, TResult>(
             this System.Linq.IQueryable<TFirst> source1,
             System.Collections.Generic.IEnumerable<TSecond> source2,

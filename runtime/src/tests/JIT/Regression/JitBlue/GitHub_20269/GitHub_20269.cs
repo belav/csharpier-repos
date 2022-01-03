@@ -17,6 +17,7 @@ namespace GitHub_20269
     class Program
     {
         static int i;
+
         static int Main(string[] args)
         {
             i = 1;

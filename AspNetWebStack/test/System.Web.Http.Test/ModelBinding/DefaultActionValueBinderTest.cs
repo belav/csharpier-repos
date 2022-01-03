@@ -395,6 +395,7 @@ namespace System.Web.Http.ModelBinding
         class Widget
         {
         }
+
         private void Action_Closest_Attribute_Wins([FromUri] Widget i) { }
 
         [Fact]
@@ -478,6 +479,7 @@ namespace System.Web.Http.ModelBinding
             private class CustomBinding : HttpParameterBinding
             {
                 public CustomBinding() : base(new Mock<HttpParameterDescriptor>().Object) { }
+
                 public override Threading.Tasks.Task ExecuteBindingAsync(
                     Metadata.ModelMetadataProvider metadataProvider,
                     HttpActionContext actionContext,
@@ -579,6 +581,7 @@ namespace System.Web.Http.ModelBinding
         public class ComplexTypeWithStringConverter
         {
             public string Data { get; set; }
+
             public ComplexTypeWithStringConverter(string data)
             {
                 Data = data;

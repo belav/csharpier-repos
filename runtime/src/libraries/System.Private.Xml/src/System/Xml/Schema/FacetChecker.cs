@@ -971,6 +971,7 @@ namespace System.Xml.Schema
                     match = m;
                     replacement = r;
                 }
+
                 internal char match;
                 internal string replacement;
             };
@@ -986,6 +987,7 @@ namespace System.Xml.Schema
                 new Map('w', "\\p{_xmlW}"),
                 new Map('W', "\\P{_xmlW}"),
             };
+
             private static string Preprocess(string pattern)
             {
                 StringBuilder bufBld = new StringBuilder();
@@ -1082,50 +1084,62 @@ namespace System.Xml.Schema
             CheckWhitespaceFacets(ref parseString, datatype);
             return CheckPatternFacets(datatype.Restriction, parseString);
         }
+
         internal virtual Exception? CheckValueFacets(object value, XmlSchemaDatatype datatype)
         {
             return null;
         }
+
         internal virtual Exception? CheckValueFacets(decimal value, XmlSchemaDatatype datatype)
         {
             return null;
         }
+
         internal virtual Exception? CheckValueFacets(long value, XmlSchemaDatatype datatype)
         {
             return null;
         }
+
         internal virtual Exception? CheckValueFacets(int value, XmlSchemaDatatype datatype)
         {
             return null;
         }
+
         internal virtual Exception? CheckValueFacets(short value, XmlSchemaDatatype datatype)
         {
             return null;
         }
+
         internal virtual Exception? CheckValueFacets(DateTime value, XmlSchemaDatatype datatype)
         {
             return null;
         }
+
         internal virtual Exception? CheckValueFacets(double value, XmlSchemaDatatype datatype)
         {
             return null;
         }
+
         internal virtual Exception? CheckValueFacets(float value, XmlSchemaDatatype datatype)
         {
             return null;
         }
+
         internal virtual Exception? CheckValueFacets(string value, XmlSchemaDatatype datatype)
         {
             return null;
         }
+
         internal virtual Exception? CheckValueFacets(byte[] value, XmlSchemaDatatype datatype)
         {
             return null;
         }
+
         internal virtual Exception? CheckValueFacets(TimeSpan value, XmlSchemaDatatype datatype)
         {
             return null;
         }
+
         internal virtual Exception? CheckValueFacets(
             XmlQualifiedName value,
             XmlSchemaDatatype datatype
@@ -1174,6 +1188,7 @@ namespace System.Xml.Schema
                     break;
             }
         }
+
         internal Exception? CheckPatternFacets(RestrictionFacets? restriction, string value)
         {
             if (restriction != null && (restriction.Flags & RestrictionFlags.Pattern) != 0)
@@ -1408,11 +1423,13 @@ namespace System.Xml.Schema
             decimal decimalValue = (decimal)value;
             return CheckValueFacets(decimalValue, datatype);
         }
+
         internal override Exception? CheckValueFacets(short value, XmlSchemaDatatype datatype)
         {
             decimal decimalValue = (decimal)value;
             return CheckValueFacets(decimalValue, datatype);
         }
+
         internal override bool MatchEnumeration(
             object value,
             ArrayList enumeration,
@@ -1441,6 +1458,7 @@ namespace System.Xml.Schema
             }
             return false;
         }
+
         internal Exception? CheckTotalAndFractionDigits(
             decimal value,
             int totalDigits,
@@ -1544,6 +1562,7 @@ namespace System.Xml.Schema
             double doubleValue = (double)value;
             return CheckValueFacets(doubleValue, datatype);
         }
+
         internal override bool MatchEnumeration(
             object value,
             ArrayList enumeration,
@@ -1556,6 +1575,7 @@ namespace System.Xml.Schema
                 datatype.ValueConverter
             );
         }
+
         private bool MatchEnumeration(
             double value,
             ArrayList enumeration,
@@ -1641,6 +1661,7 @@ namespace System.Xml.Schema
             }
             return null;
         }
+
         internal override bool MatchEnumeration(
             object value,
             ArrayList enumeration,
@@ -2006,6 +2027,7 @@ namespace System.Xml.Schema
             }
             return null;
         }
+
         internal override bool MatchEnumeration(
             object value,
             ArrayList enumeration,
@@ -2094,6 +2116,7 @@ namespace System.Xml.Schema
             }
             return null;
         }
+
         internal override bool MatchEnumeration(
             object value,
             ArrayList enumeration,

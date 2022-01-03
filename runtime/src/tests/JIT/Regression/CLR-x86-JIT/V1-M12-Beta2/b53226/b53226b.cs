@@ -14,6 +14,7 @@ namespace Test
             byte bb = __refvalue((b ? __makeref(b) : tr), byte);
             return 0;
         }
+
         private static int Main()
         {
             try

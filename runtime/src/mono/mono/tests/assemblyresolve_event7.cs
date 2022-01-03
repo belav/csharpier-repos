@@ -50,6 +50,7 @@ namespace AssemblyResolveTest
 
         static int I = 0;
         static int ExcCount = 0;
+
         static int Main(string[] args)
         {
             AppDomain currentDomain = AppDomain.CurrentDomain;

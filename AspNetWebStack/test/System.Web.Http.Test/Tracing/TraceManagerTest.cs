@@ -438,6 +438,7 @@ namespace System.Web.Http.Tracing
                 _order = order;
                 _expectedOrder = expectedOrder;
             }
+
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken

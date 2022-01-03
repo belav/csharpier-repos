@@ -267,6 +267,7 @@ namespace System.Tests
     public class ClassWithMixedCaseInterfaces : MixedInterface, mixedInterface { }
 
     public interface MixedInterface { }
+
     public interface mixedInterface { }
 
     public class ClassWithTwoSameNameInterfaces : Interface1, Inner.Interface1 { }
@@ -278,11 +279,15 @@ namespace System.Tests
     namespace Inner
     {
         public interface Interface1 { }
+
         public interface Interface2 { }
+
         public interface Interface3 { }
     }
 }
 
 public interface Interface1 { }
+
 public interface Interface2 { }
+
 public interface Interface3 { }

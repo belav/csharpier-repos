@@ -289,6 +289,7 @@ namespace System.Security.Principal
         //
 
         private IdentifierAuthority _identifierAuthority;
+
         // values guaranteed to be non-null on account of CreateFromParts()
         // method called by every constructor in this class.
         private int[] _subAuthorities;

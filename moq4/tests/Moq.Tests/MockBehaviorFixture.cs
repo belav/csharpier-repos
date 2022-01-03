@@ -252,6 +252,7 @@ namespace Moq.Tests
             public abstract string DoReturnString();
 
             public void DoNonVirtual() { }
+
             public virtual void DoVirtual() { }
 
             public int NonVirtualGet()

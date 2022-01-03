@@ -20,6 +20,7 @@ namespace Microsoft.Extensions.Logging.Console
 
 #pragma warning disable CS0618
         private ConsoleLoggerFormat _format = ConsoleLoggerFormat.Default;
+
         /// <summary>
         /// Gets or sets log message format. Defaults to <see cref="ConsoleLoggerFormat.Default" />.
         /// </summary>

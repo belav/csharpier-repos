@@ -13,14 +13,18 @@ namespace System.DirectoryServices
     public sealed class DirectoryServicesPermission : ResourcePermissionBase
     {
         public DirectoryServicesPermission() { }
+
         public DirectoryServicesPermission(
             DirectoryServicesPermissionEntry[]? permissionAccessEntries
         ) { }
+
         public DirectoryServicesPermission(PermissionState state) { }
+
         public DirectoryServicesPermission(
             DirectoryServicesPermissionAccess permissionAccess,
             string? path
         ) { }
+
         public DirectoryServicesPermissionEntryCollection? PermissionEntries { get; }
     }
 }

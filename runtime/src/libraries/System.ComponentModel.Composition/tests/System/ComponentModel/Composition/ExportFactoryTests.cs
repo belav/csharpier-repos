@@ -384,6 +384,7 @@ namespace Tests.Integration
 
             [Import]
             private ExportFactory<Apple> AppleFactory { get; set; }
+
             internal Apple GrowApple()
             {
                 var apple = this.AppleFactory.CreateExport();

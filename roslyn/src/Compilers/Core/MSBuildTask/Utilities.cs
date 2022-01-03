@@ -87,6 +87,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 );
             }
         }
+
         /// <summary>
         /// Returns true if the string can be successfully converted to a bool,
         /// such as "on" or "yes"

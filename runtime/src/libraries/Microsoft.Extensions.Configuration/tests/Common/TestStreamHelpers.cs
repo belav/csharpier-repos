@@ -65,6 +65,7 @@ namespace Microsoft.Extensions.Configuration.Test
         private class TestFileProvider : IFileProvider
         {
             private string _data;
+
             public TestFileProvider(string str)
             {
                 _data = str;

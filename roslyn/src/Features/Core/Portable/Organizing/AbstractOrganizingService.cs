@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.Organizing
     internal abstract class AbstractOrganizingService : IOrganizingService
     {
         private readonly IEnumerable<ISyntaxOrganizer> _organizers;
+
         protected AbstractOrganizingService(IEnumerable<ISyntaxOrganizer> organizers) =>
             _organizers = organizers.ToImmutableArrayOrEmpty();
 

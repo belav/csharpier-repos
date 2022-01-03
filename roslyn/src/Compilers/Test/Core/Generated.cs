@@ -16,12 +16,14 @@ namespace Roslyn.Test.Utilities
         {
             public string FileName { get; }
             public byte[] ImageBytes { get; }
+
             public ReferenceInfo(string fileName, byte[] imageBytes)
             {
                 FileName = fileName;
                 ImageBytes = imageBytes;
             }
         }
+
         public static class ResourcesNet20
         {
             private static byte[] _mscorlib;
@@ -44,6 +46,7 @@ namespace Roslyn.Test.Utilities
                     new ReferenceInfo("Microsoft.VisualBasic.dll", MicrosoftVisualBasic),
                 };
         }
+
         public static class Net20
         {
             public static PortableExecutableReference mscorlib { get; } =
@@ -62,6 +65,7 @@ namespace Roslyn.Test.Utilities
                         filePath: "Microsoft.VisualBasic.dll"
                     );
         }
+
         public static class ResourcesNet35
         {
             private static byte[] _SystemCore;
@@ -70,6 +74,7 @@ namespace Roslyn.Test.Utilities
             public static ReferenceInfo[] All =>
                 new[] { new ReferenceInfo("System.Core.dll", SystemCore), };
         }
+
         public static class Net35
         {
             public static PortableExecutableReference SystemCore { get; } =
@@ -77,6 +82,7 @@ namespace Roslyn.Test.Utilities
                     .CreateFromImage(ResourcesNet35.SystemCore)
                     .GetReference(display: "System.Core.dll (net35)", filePath: "System.Core.dll");
         }
+
         public static class ResourcesNet40
         {
             private static byte[] _mscorlib;
@@ -122,6 +128,7 @@ namespace Roslyn.Test.Utilities
                     new ReferenceInfo("Microsoft.CSharp.dll", MicrosoftCSharp),
                 };
         }
+
         public static class Net40
         {
             public static PortableExecutableReference mscorlib { get; } =
@@ -166,6 +173,7 @@ namespace Roslyn.Test.Utilities
                         filePath: "Microsoft.CSharp.dll"
                     );
         }
+
         public static class ResourcesNet451
         {
             private static byte[] _mscorlib;
@@ -291,6 +299,7 @@ namespace Roslyn.Test.Utilities
                     new ReferenceInfo("System.Threading.Tasks.dll", SystemThreadingTasks),
                 };
         }
+
         public static class Net451
         {
             public static PortableExecutableReference mscorlib { get; } =
@@ -412,6 +421,7 @@ namespace Roslyn.Test.Utilities
                         filePath: "System.Threading.Tasks.dll"
                     );
         }
+
         public static class ResourcesNet461
         {
             private static byte[] _mscorlib;
@@ -456,6 +466,7 @@ namespace Roslyn.Test.Utilities
                     new ReferenceInfo("Microsoft.VisualBasic.dll", MicrosoftVisualBasic),
                 };
         }
+
         public static class Net461
         {
             public static PortableExecutableReference mscorlib { get; } =
@@ -499,6 +510,7 @@ namespace Roslyn.Test.Utilities
                         filePath: "Microsoft.VisualBasic.dll"
                     );
         }
+
         public static class ResourcesMicrosoftCSharp
         {
             private static byte[] _Netstandard10;
@@ -520,6 +532,7 @@ namespace Roslyn.Test.Utilities
                     new ReferenceInfo("Netstandard13Lib.dll", Netstandard13Lib),
                 };
         }
+
         public static class MicrosoftCSharp
         {
             public static PortableExecutableReference Netstandard10 { get; } =
@@ -537,6 +550,7 @@ namespace Roslyn.Test.Utilities
                         filePath: "Netstandard13Lib.dll"
                     );
         }
+
         public static class ResourcesMicrosoftVisualBasic
         {
             private static byte[] _Netstandard11;
@@ -548,6 +562,7 @@ namespace Roslyn.Test.Utilities
             public static ReferenceInfo[] All =>
                 new[] { new ReferenceInfo("Netstandard11.dll", Netstandard11), };
         }
+
         public static class MicrosoftVisualBasic
         {
             public static PortableExecutableReference Netstandard11 { get; } =
@@ -558,6 +573,7 @@ namespace Roslyn.Test.Utilities
                         filePath: "Netstandard11.dll"
                     );
         }
+
         public static class ResourcesSystemThreadingTasksExtensions
         {
             private static byte[] _PortableLib;
@@ -579,6 +595,7 @@ namespace Roslyn.Test.Utilities
                     new ReferenceInfo("NetStandard20Lib.dll", NetStandard20Lib),
                 };
         }
+
         public static class SystemThreadingTasksExtensions
         {
             public static PortableExecutableReference PortableLib { get; } =
@@ -596,6 +613,7 @@ namespace Roslyn.Test.Utilities
                         filePath: "NetStandard20Lib.dll"
                     );
         }
+
         public static class ResourcesBuildExtensions
         {
             private static byte[] _NetStandardToNet461;
@@ -607,6 +625,7 @@ namespace Roslyn.Test.Utilities
             public static ReferenceInfo[] All =>
                 new[] { new ReferenceInfo("NetStandardToNet461.dll", NetStandardToNet461), };
         }
+
         public static class BuildExtensions
         {
             public static PortableExecutableReference NetStandardToNet461 { get; } =

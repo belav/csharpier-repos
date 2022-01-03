@@ -3,12 +3,14 @@
 //
 
 using System;
+
 class r4NaNdiv
 {
     //user-defined class that overloads operator /
     public class numHolder
     {
         float f_num;
+
         public numHolder(float f_num)
         {
             this.f_num = Convert.ToSingle(f_num);

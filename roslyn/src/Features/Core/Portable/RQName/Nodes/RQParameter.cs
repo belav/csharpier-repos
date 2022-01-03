@@ -9,6 +9,7 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
     internal abstract class RQParameter
     {
         public readonly RQType Type;
+
         public RQParameter(RQType type)
         {
             Type = type;

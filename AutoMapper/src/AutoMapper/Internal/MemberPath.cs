@@ -7,11 +7,13 @@ using System.Reflection;
 namespace AutoMapper.Internal
 {
     using Execution;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public struct MemberPath : IEquatable<MemberPath>
     {
         public static readonly MemberPath Empty = new MemberPath(Array.Empty<MemberInfo>());
         public readonly MemberInfo[] Members;
+
         public MemberPath(Stack<Member> members) : this(members.ToMemberInfos()) { }
 
         public MemberPath(MemberInfo[] members) => Members = members;

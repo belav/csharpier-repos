@@ -872,18 +872,22 @@ namespace BasicEventSourceTests
     {
         public EventSourceTestSelfDescribingOnly()
             : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
+
         public void EventByteArrayInt(byte[] array, int anInt)
         {
             WriteEvent(1, array, anInt);
         }
+
         public void EventUserDataInt(UserData aClass, int anInt)
         {
             WriteEvent(2, aClass, anInt);
         }
+
         public void EventNullableIntInt(int? nullableInt, int anInt)
         {
             WriteEvent(3, nullableInt, anInt);
         }
+
         public void EventNullableDateTimeInt(DateTime? nullableDate, int anInt)
         {
             WriteEvent(4, nullableDate, anInt);

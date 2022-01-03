@@ -676,6 +676,7 @@ namespace Baz
                 inlineDescription: "Foo"
             );
         }
+
         public static IEnumerable<object[]> TypeParameterWithRefTypeData =>
             CombineWithReferenceTypeData(
                 (new[] { "IEnumerable<string>", "int", "Bat", "Bat" }).Select(

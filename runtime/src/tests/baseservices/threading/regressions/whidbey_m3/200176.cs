@@ -20,6 +20,7 @@ public class Stop
         }
         return 100;
     }
+
     public void RunTest(object foo)
     {
         try

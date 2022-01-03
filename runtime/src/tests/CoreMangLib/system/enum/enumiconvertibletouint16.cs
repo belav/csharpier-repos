@@ -234,6 +234,7 @@ public class EnumIConvertibleToUint16
         white = UInt16.MaxValue,
         red = -0,
     }
+
     enum e_test : long
     {
         itemA = -123,

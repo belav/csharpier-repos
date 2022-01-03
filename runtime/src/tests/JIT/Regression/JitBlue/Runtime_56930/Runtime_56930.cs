@@ -8,6 +8,7 @@ namespace Runtime_56930
     class C0
     {
         public int F1;
+
         public C0(int f1)
         {
             F1 = f1;

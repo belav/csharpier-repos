@@ -1368,14 +1368,17 @@ namespace System.Reflection.Emit
         {
             return false;
         }
+
         protected override bool IsByRefImpl()
         {
             return false;
         }
+
         protected override bool IsPointerImpl()
         {
             return false;
         }
+
         protected override bool IsPrimitiveImpl()
         {
             return false;
@@ -1576,6 +1579,7 @@ namespace System.Reflection.Emit
 
         public override int GenericParameterPosition => m_genParamPos;
         public override MethodBase? DeclaringMethod => m_declMeth;
+
         public override Type GetGenericTypeDefinition()
         {
             if (IsGenericTypeDefinition)

@@ -223,6 +223,7 @@ namespace Microsoft.EntityFrameworkCore
             public DbSet<Unicorn> Unicorns { get; set; }
 
             public DbSet<EarthPony> EarthPonies { get; set; }
+
             // ReSharper restore UnusedAutoPropertyAccessor.Local
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)

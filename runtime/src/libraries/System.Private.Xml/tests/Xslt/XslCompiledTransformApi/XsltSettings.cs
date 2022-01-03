@@ -15,6 +15,7 @@ namespace System.Xml.Tests
     public class CXsltSettings : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CXsltSettings(ITestOutputHelper output) : base(output)
         {
             _output = output;

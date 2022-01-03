@@ -146,6 +146,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             SyntaxToken token,
             CancellationToken cancellationToken
         );
+
 #nullable disable
 
         bool IsInsideNameOfExpression(

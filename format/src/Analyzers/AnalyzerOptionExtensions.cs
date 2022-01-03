@@ -20,6 +20,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal static string GetDiagnosticIdBasedDotnetAnalyzerDiagnosticSeverityKey(
             string diagnosticId
         ) => $"{DotnetDiagnosticPrefix}.{diagnosticId}.{SeveritySuffix}";
+
         internal static string GetCategoryBasedDotnetAnalyzerDiagnosticSeverityKey(
             string category
         ) => $"{DotnetAnalyzerDiagnosticPrefix}.{CategoryPrefix}-{category}.{SeveritySuffix}";

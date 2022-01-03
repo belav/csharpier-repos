@@ -25,6 +25,7 @@ namespace System.Speech.Internal.SapiInterop
 
         private WeakReference _eventNotifyReference;
     }
+
     /// Dispatches events from ISpEventSource to DispatchEventDelegate on a thread
     /// compatible with the application model of the thread that created this object.
     internal class EventNotify

@@ -27,8 +27,10 @@ public class AutobahnExpectations
 
     public AutobahnExpectations Fail(params string[] caseSpecs) =>
         Expect(Expectation.Fail, caseSpecs);
+
     public AutobahnExpectations NonStrict(params string[] caseSpecs) =>
         Expect(Expectation.NonStrict, caseSpecs);
+
     public AutobahnExpectations OkOrFail(params string[] caseSpecs) =>
         Expect(Expectation.OkOrFail, caseSpecs);
 

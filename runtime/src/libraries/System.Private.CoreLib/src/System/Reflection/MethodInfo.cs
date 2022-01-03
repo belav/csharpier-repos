@@ -19,6 +19,7 @@ namespace System.Reflection
         {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
         }
+
         public virtual MethodInfo GetGenericMethodDefinition()
         {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
@@ -40,6 +41,7 @@ namespace System.Reflection
         {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
         }
+
         public virtual Delegate CreateDelegate(Type delegateType, object? target)
         {
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
@@ -53,6 +55,7 @@ namespace System.Reflection
             (T)CreateDelegate(typeof(T), target);
 
         public override bool Equals(object? obj) => base.Equals(obj);
+
         public override int GetHashCode() => base.GetHashCode();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

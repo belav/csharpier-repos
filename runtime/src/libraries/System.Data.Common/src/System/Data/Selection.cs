@@ -1204,6 +1204,7 @@ namespace System.Data
             }
             return -1;
         }
+
         internal static bool ContainsReference<T>(List<T?> list, T item) where T : class
         {
             return (0 <= IndexOfReference(list, item));

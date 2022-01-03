@@ -15,6 +15,7 @@ class Test<T> where T : Exception
 public class Program
 {
     delegate void Action();
+
     static void ExpectedException<T>(Action action) where T : Exception
     {
         try

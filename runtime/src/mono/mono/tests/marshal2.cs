@@ -31,14 +31,17 @@ public class Tests
         public bool bool1;
         public bool bool2;
         public int b;
+
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public short[] a1;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 4)]
         public string s1;
         public SimpleStruct2 emb1;
         public SimpleObj emb2;
         public string s2;
         public double x;
+
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
         public char[] a2;
     }
@@ -218,8 +221,10 @@ public class Tests
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 8)]
         public string Field1;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string Field2;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 14)]
         public string Field3;
     }

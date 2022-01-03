@@ -118,6 +118,7 @@ namespace Castle.DynamicProxy.Internal
                 Method = method;
                 Type = type;
             }
+
             public MethodInfo Method { get; }
 
             public Type Type { get; }

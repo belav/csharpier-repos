@@ -117,6 +117,7 @@ namespace AutoMapper.IntegrationTests.Net4
                     baseDTO.Sub.Sub1.ShouldBe("sub1");
                 }
             }
+
             [Fact]
             public void MapShouldThrow() =>
                 new Action(() => Mapper.Map<SubDTO>(new Sub()))

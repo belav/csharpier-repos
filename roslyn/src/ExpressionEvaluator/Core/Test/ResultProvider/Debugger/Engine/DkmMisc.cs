@@ -47,10 +47,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
     {
         None = 0
     }
+
     public enum DkmEvaluationResultTypeModifierFlags
     {
         None = 0
     }
+
     public class DkmDataAddress { }
 }
 

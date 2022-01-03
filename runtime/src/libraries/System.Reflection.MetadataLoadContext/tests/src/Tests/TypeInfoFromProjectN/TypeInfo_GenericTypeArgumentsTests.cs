@@ -389,30 +389,44 @@ namespace System.Reflection.Tests
 
     //Metadata for Reflection
     public interface Test_I { }
+
     public interface Test_IG<TI> { }
+
     public interface Test_IG2<TI, VI> { }
 
     public struct Test_S { }
+
     public struct Test_SG<TS> { }
+
     public struct Test_SG2<TS, VS> { }
 
     public struct Test_SI : Test_I { }
+
     public struct Test_SIG<TS> : Test_IG<TS> { }
+
     public struct Test_SIG2<TS, VS> : Test_IG2<TS, VS> { }
 
     public struct Test_SI_Int : Test_IG<int> { }
+
     public struct Test_SIG_Int<TS> : Test_IG2<TS, int> { }
+
     public struct Test_SIG_Int_Int : Test_IG2<int, int> { }
 
     public class Test_C { }
+
     public class Test_CG<T> { }
+
     public class Test_CG2<T, V> { }
 
     public class Test_CI : Test_I { }
+
     public class Test_CIG<T> : Test_IG<T> { }
+
     public class Test_CIG2<T, V> : Test_IG2<T, V> { }
 
     public class Test_CI_Int : Test_IG<int> { }
+
     public class Test_CIG_Int<T> : Test_CG2<T, int> { }
+
     public class Test_CIG_Int_Int : Test_CG2<int, int> { }
 }

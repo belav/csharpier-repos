@@ -31,10 +31,12 @@ namespace System.Xml.XPath
         public abstract double ValueAsDouble { get; }
         public abstract int ValueAsInt { get; }
         public abstract long ValueAsLong { get; }
+
         public virtual object ValueAs(Type returnType)
         {
             return ValueAs(returnType, null);
         }
+
         public abstract object ValueAs(Type returnType, IXmlNamespaceResolver? nsResolver);
     }
 }

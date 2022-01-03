@@ -460,6 +460,7 @@ namespace MonoTests.System.Drawing
                 return ByteArrayToString(hash);
             }
         }
+
         public string RotateIndexedBmp(Bitmap src, RotateFlipType type)
         {
             int pixels_per_byte;
@@ -1235,6 +1236,7 @@ namespace MonoTests.System.Drawing
                 }
             }
         }
+
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void DefaultFormat1()
         {

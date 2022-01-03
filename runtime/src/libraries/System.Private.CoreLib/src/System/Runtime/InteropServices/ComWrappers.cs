@@ -91,6 +91,7 @@ namespace System.Runtime.InteropServices
             /// </summary>
             public IntPtr Vtable;
         }
+
         /// <summary>
         /// ABI for function dispatch of a COM interface.
         /// </summary>

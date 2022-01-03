@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading;
+
 //Regression for DevDiv Bugs 48020
 namespace ExchangeAdd
 {
@@ -68,7 +69,9 @@ namespace ExchangeAdd
         private int numberOfIterations;
         private int valueToAdd;
         private int valueToSubtract;
+
         public ThreadSafe() : this(100, 100) { }
+
         public ThreadSafe(int loops, int iAdd)
         {
             signal = new ManualResetEvent(false);
@@ -91,6 +94,7 @@ namespace ExchangeAdd
                 Interlocked.Add(ref totalValue, valueToSubtract);
             }
         }
+
         public int Expected
         {
             get { return (0); }

@@ -21,5 +21,6 @@ public class ClassC
 {
     internal int fld;
     internal static int sfld;
+
     internal void Test() { }
 }

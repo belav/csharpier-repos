@@ -15,6 +15,7 @@ namespace System.Security.Cryptography.Dsa.Tests
     {
         public override byte[] SignData(DSA dsa, byte[] data, HashAlgorithmName hashAlgorithm) =>
             dsa.SignData(data, hashAlgorithm);
+
         public override bool VerifyData(
             DSA dsa,
             byte[] data,
@@ -111,6 +112,7 @@ namespace System.Security.Cryptography.Dsa.Tests
     {
         public override byte[] SignData(DSA dsa, byte[] data, HashAlgorithmName hashAlgorithm) =>
             dsa.SignData(new MemoryStream(data), hashAlgorithm);
+
         public override bool VerifyData(
             DSA dsa,
             byte[] data,

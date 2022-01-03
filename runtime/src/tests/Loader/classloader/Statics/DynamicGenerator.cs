@@ -4,6 +4,7 @@
 using System;
 using System.Reflection;
 using System.Reflection.Emit;
+
 // this class tries to return a delegate wrapping up a dynamic method created through reflection.emit or LCG
 // the dynamic method is doing a ldsfld operation
 // calling the method should return expected field value back
@@ -12,6 +13,7 @@ public interface IDynGen
     Delegate CreateDynGetValue(FieldInfo fi, bool useLCG);
     Delegate CreateDynSetValue(FieldInfo fi, bool useLCG);
 }
+
 public class DynamicGenerator<G> : IDynGen
 {
     public delegate G DynGetValue();
@@ -23,6 +25,7 @@ public class DynamicGenerator<G> : IDynGen
     TypeBuilder typeb2 = null;
     static int tcount = 0;
     static int mcount = 0;
+
     public DynamicGenerator()
     {
         asmb = AppDomain.CurrentDomain.DefineDynamicAssembly(
@@ -34,6 +37,7 @@ public class DynamicGenerator<G> : IDynGen
         typeb2 = modb.DefineType("t2" + mcount);
         mcount = 0;
     }
+
     public Delegate CreateDynGetValue(FieldInfo fi, bool useLCG)
     {
         ILGenerator ilgen = null;
@@ -65,6 +69,7 @@ public class DynamicGenerator<G> : IDynGen
             return Delegate.CreateDelegate(typeof(DynGetValue), mi);
         }
     }
+
     public Delegate CreateDynSetValue(FieldInfo fi, bool useLCG)
     {
         ILGenerator ilgen = null;

@@ -73,10 +73,12 @@ namespace AutoMapper.UnitTests.Bug
             where Z : EventArgs
         {
             private object _owner;
+
             public CollectionController(object owner)
             {
                 _owner = owner;
             }
+
             public IEnumerable<T> Models { get; set; }
             public K? SelectedID { get; set; }
         }
@@ -174,10 +176,12 @@ namespace AutoMapper.UnitTests.Bug
             where Z : EventArgs
         {
             private object _owner;
+
             public CollectionController(object owner)
             {
                 _owner = owner;
             }
+
             public IEnumerable<T> Models { get; set; }
             public K? SelectedID { get; set; }
         }

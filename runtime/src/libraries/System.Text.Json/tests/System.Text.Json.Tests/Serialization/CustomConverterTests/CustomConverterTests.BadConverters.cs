@@ -9,7 +9,9 @@ namespace System.Text.Json.Serialization.Tests
     public static partial class CustomConverterTests
     {
         private class PocoWithNoBaseClass { }
+
         private class DerivedCustomer : Customer { }
+
         private class SuccessException : Exception { }
 
         private class BadCustomerConverter : JsonConverter<Customer>
@@ -667,11 +669,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             public override bool CanConvert(Type typeToConvert) =>
                 typeToConvert == typeof(double) || typeToConvert == typeof(double?);
+
             public override double Read(
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
             ) => reader.GetDouble();
+
             public override void Write(
                 Utf8JsonWriter writer,
                 double value,
@@ -686,11 +690,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             public override bool CanConvert(Type typeToConvert) =>
                 typeToConvert == typeof(double) || typeToConvert == typeof(double?);
+
             public override double? Read(
                 ref Utf8JsonReader reader,
                 Type typeToConvert,
                 JsonSerializerOptions options
             ) => reader.GetDouble();
+
             public override void Write(
                 Utf8JsonWriter writer,
                 double? value,

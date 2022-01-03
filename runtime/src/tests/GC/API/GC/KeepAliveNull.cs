@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 public class Test_KeepAliveNull
 {
     public static bool visited;
+
     public class Dummy
     {
         ~Dummy()

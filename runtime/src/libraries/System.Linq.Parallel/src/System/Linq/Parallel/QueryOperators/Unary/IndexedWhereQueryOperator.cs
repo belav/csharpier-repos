@@ -163,6 +163,7 @@ namespace System.Linq.Parallel
             private readonly Func<TInputOutput, int, bool> _predicate; // The predicate used for filtering.
             private readonly CancellationToken _cancellationToken;
             private Shared<int>? _outputLoopCount;
+
             //-----------------------------------------------------------------------------------
             // Instantiates a new enumerator.
             //

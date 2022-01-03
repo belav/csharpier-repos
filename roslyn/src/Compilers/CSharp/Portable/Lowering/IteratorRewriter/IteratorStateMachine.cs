@@ -83,6 +83,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsRecord => false;
         internal override bool IsRecordStruct => false;
+
         internal override bool HasPossibleWellKnownCloneMethod() => false;
     }
 }

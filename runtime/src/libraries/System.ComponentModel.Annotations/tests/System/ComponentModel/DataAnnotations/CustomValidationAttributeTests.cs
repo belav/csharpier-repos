@@ -512,6 +512,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             public static ValidationResult CorrectValidationMethodOneArgDateTime(
                 DateTime dateTime
             ) => ValidationResult.Success;
+
             public static ValidationResult CorrectValidationMethodOneArgInt(int i) =>
                 ValidationResult.Success;
         }
@@ -560,7 +561,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public class AllowMultipleClass
         {
             public void Method1() { }
+
             public void Method2() { }
+
             public void Method3() { }
         }
     }

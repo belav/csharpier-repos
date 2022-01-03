@@ -102,6 +102,7 @@ namespace System.Resources.Tests
         class SimpleResourceReader : IResourceReader
         {
             Hashtable data;
+
             public SimpleResourceReader()
             {
                 data = new Hashtable();

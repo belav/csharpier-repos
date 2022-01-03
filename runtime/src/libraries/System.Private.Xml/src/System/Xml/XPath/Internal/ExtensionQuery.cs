@@ -20,6 +20,7 @@ namespace MS.Internal.Xml.XPath
             this.prefix = prefix;
             this.name = name;
         }
+
         protected ExtensionQuery(ExtensionQuery other) : base(other)
         {
             this.prefix = other.prefix;

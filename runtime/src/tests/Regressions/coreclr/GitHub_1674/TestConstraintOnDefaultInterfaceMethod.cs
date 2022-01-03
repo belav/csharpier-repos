@@ -31,9 +31,13 @@ namespace TestConstraint
             public void Foo<T2>() where T2 : T1 =>
                 Console.WriteLine($"Works for type: {typeof(T1)}");
         }
+
         public class Worky : IBuggy<int> { }
+
         public class Worky2 : IBuggy<object> { }
+
         public class Buggy : IBuggy<Open> { }
+
         public class Open { }
 
         private interface ILogEntry

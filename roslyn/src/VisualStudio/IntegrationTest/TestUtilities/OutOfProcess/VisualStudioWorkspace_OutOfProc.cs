@@ -21,6 +21,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         {
             _inProc = CreateInProcComponent<VisualStudioWorkspace_InProc>(visualStudioInstance);
         }
+
         public void SetOptionInfer(string projectName, bool value)
         {
             _inProc.SetOptionInfer(projectName, value);

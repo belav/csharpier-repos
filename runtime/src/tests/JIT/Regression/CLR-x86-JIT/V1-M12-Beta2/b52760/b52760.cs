@@ -13,6 +13,7 @@ namespace Test
             ulong loc = 10;
             return loc *= loc;
         }
+
         static int Main()
         {
             AA_Static1();

@@ -368,6 +368,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             public ReportDiagnostic UnusedValueExpressionStatementSeverity { get; }
             public UnusedValuePreference UnusedValueAssignmentPreference { get; }
             public ReportDiagnostic UnusedValueAssignmentSeverity { get; }
+
             public bool IsComputingUnusedParams(ISymbol symbol) =>
                 ShouldReportUnusedParameters(
                     symbol,

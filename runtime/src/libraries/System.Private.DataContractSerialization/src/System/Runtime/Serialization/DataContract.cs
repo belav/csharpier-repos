@@ -747,6 +747,7 @@ namespace System.Runtime.Serialization
                 }
                 return type;
             }
+
             private static RuntimeTypeHandle GetDataContractAdapterTypeHandle(
                 RuntimeTypeHandle typeHandle
             )
@@ -2786,8 +2787,10 @@ namespace System.Runtime.Serialization
     {
         int GetParameterCount();
         IList<int> GetNestedParameterCounts();
+
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         string GetParameterName(int paramIndex);
+
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         string GetNamespaces();
         string GetGenericTypeName();
@@ -2803,6 +2806,7 @@ namespace System.Runtime.Serialization
         private readonly string _genericTypeName;
         private readonly object[] _genericParams; //Type or DataContract
         private readonly IList<int> _nestedParamCounts;
+
         internal GenericNameProvider(Type type)
             : this(
                 DataContract.GetClrTypeFullName(type.GetGenericTypeDefinition()),

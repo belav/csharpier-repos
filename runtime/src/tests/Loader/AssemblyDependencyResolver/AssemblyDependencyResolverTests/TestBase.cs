@@ -55,6 +55,7 @@ namespace AssemblyDependencyResolverTests
         }
 
         private int _retValue = 100;
+
         private void RunSingleTest(Action test, string testName = null)
         {
             testName = testName ?? test.Method.Name;

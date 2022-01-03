@@ -57,18 +57,23 @@ namespace System.Data.SqlTypes
         /// <summary>
         /// </summary>
         public static readonly int IgnoreCase = 0x1;
+
         /// <summary>
         /// </summary>
         public static readonly int IgnoreWidth = 0x10;
+
         /// <summary>
         /// </summary>
         public static readonly int IgnoreNonSpace = 0x2;
+
         /// <summary>
         /// </summary>
         public static readonly int IgnoreKanaType = 0x8;
+
         /// <summary>
         /// </summary>
         public static readonly int BinarySort = 0x8000;
+
         /// <summary>
         /// </summary>
         public static readonly int BinarySort2 = 0x4000;

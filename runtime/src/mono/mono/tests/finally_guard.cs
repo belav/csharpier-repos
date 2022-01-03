@@ -284,6 +284,7 @@ class Driver
             result |= 0x100;
         return result;
     }
+
     /////////////////////////////////////////////////////
 
     static int Main(string[] args)

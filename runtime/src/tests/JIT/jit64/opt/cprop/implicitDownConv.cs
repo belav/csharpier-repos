@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 internal class Program
 {
     private static int s_result = 100;
+
     private static int Main()
     {
         Test(1L << 32);

@@ -66,6 +66,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     Fixer,
                     forFixMultipleContext: true
                 );
+
             protected override string DiagnosticIdForEquivalenceKey =>
                 _forFixMultipleContext ? string.Empty : _diagnostic.Id;
 

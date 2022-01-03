@@ -64,7 +64,9 @@ namespace ExchangeAdd
         private int totalValue = 0;
         private int numberOfIterations;
         private int valueToAdd;
+
         public ThreadSafe() : this(100, 100) { }
+
         public ThreadSafe(int loops, int iAdd)
         {
             signal = new ManualResetEvent(false);
@@ -83,6 +85,7 @@ namespace ExchangeAdd
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Add(ref totalValue, valueToAdd);
         }
+
         public int Expected
         {
             get { return (numberOfIterations * valueToAdd); }

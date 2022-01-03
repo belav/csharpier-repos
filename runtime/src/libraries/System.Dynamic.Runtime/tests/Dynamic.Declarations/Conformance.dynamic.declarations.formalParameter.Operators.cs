@@ -10,6 +10,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         public class MyClass
         {
             public int Field;
+
             public static MyClass operator +(dynamic d, MyClass x)
             {
                 return new MyClass() { Field = 3 };
@@ -42,6 +43,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         public class MyClass
         {
             public int Field;
+
             public static MyClass operator &(MyClass x, dynamic d)
             {
                 return new MyClass() { Field = 3 };

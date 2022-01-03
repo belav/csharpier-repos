@@ -188,6 +188,7 @@ namespace JsonToItemsTaskFactory
 
             private JsonModelRoot? jsonModel;
             public string TaskName { get; }
+
             public JsonToItemsTask(string taskName, bool logDebugTask = false)
             {
                 TaskName = taskName;
@@ -408,6 +409,7 @@ namespace JsonToItemsTaskFactory
         public class JsonModelItem
         {
             public string Identity { get; }
+
             // n.b. will  be deserialized case insensitive
             public Dictionary<string, string>? Metadata { get; }
 
@@ -434,12 +436,14 @@ namespace JsonToItemsTaskFactory
                     return null!;
                 return new Dictionary<string, string>(dict, StringComparer.OrdinalIgnoreCase);
             }
+
             public override void Write(
                 Utf8JsonWriter writer,
                 Dictionary<string, string>? value,
                 JsonSerializerOptions options
             ) => JsonSerializer.Serialize(writer, value, options);
         }
+
         public class JsonModelItemConverter : JsonConverter<JsonModelItem>
         {
             public JsonModelItemConverter() { }
@@ -484,6 +488,7 @@ namespace JsonToItemsTaskFactory
                         throw new NotSupportedException();
                 }
             }
+
             public override void Write(
                 Utf8JsonWriter writer,
                 JsonModelItem value,

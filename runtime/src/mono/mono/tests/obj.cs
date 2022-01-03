@@ -10,10 +10,12 @@ public class TestObj
     {
         boh = 2;
     }
+
     public int amethod()
     {
         return boh;
     }
+
     public static int Main()
     {
         TestObj obj = new TestObj();

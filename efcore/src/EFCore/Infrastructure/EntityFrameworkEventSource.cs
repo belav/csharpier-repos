@@ -37,6 +37,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         private PollingCounter? _totalOptimisticConcurrencyFailuresCounter;
 
         private IncrementingPollingCounter? _optimisticConcurrencyFailuresPerSecondCounter;
+
         // ReSharper restore NotAccessedField.Local
 
         /// <summary>

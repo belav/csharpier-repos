@@ -26,6 +26,7 @@ public class ResetAuthenticatorModel : PageModel
         _userManager = userManager;
         _logger = logger;
     }
+
     public async Task<IActionResult> OnGet()
     {
         var user = await _userManager.GetUserAsync(User);

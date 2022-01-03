@@ -9,6 +9,7 @@ public class Tests
         Console.WriteLine("Test failed");
         return arr;
     }
+
     public static int Main(String[] args)
     {
         try

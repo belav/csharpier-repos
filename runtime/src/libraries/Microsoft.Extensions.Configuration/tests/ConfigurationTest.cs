@@ -864,10 +864,15 @@ namespace Microsoft.Extensions.Configuration.Test
                 IEnumerable<string> earlierKeys,
                 string parentPath
             ) => throw new NotImplementedException();
+
             public Primitives.IChangeToken GetReloadToken() => null;
+
             public void Load() { }
+
             public void Set(string key, string value) => throw new NotImplementedException();
+
             public bool TryGet(string key, out string value) => throw new NotImplementedException();
+
             public IConfigurationProvider Build(IConfigurationBuilder builder) => this;
         }
 

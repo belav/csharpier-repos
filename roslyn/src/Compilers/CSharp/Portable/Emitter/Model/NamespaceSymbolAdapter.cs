@@ -33,6 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private NamespaceSymbolAdapter _lazyAdapter;
 
         protected sealed override SymbolAdapter GetCciAdapterImpl() => GetCciAdapter();
+
         internal new NamespaceSymbolAdapter GetCciAdapter()
         {
             if (_lazyAdapter is null)

@@ -9,13 +9,16 @@ namespace System.Reflection.Context
     public abstract partial class CustomReflectionContext : System.Reflection.ReflectionContext
     {
         protected CustomReflectionContext() { }
+
         protected CustomReflectionContext(System.Reflection.ReflectionContext source) { }
+
         protected virtual System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> AddProperties(
             System.Type type
         )
         {
             throw null;
         }
+
         protected System.Reflection.PropertyInfo CreateProperty(
             System.Type propertyType,
             string name,
@@ -25,6 +28,7 @@ namespace System.Reflection.Context
         {
             throw null;
         }
+
         protected System.Reflection.PropertyInfo CreateProperty(
             System.Type propertyType,
             string name,
@@ -37,6 +41,7 @@ namespace System.Reflection.Context
         {
             throw null;
         }
+
         protected virtual System.Collections.Generic.IEnumerable<object> GetCustomAttributes(
             System.Reflection.MemberInfo member,
             System.Collections.Generic.IEnumerable<object> declaredAttributes
@@ -44,6 +49,7 @@ namespace System.Reflection.Context
         {
             throw null;
         }
+
         protected virtual System.Collections.Generic.IEnumerable<object> GetCustomAttributes(
             System.Reflection.ParameterInfo parameter,
             System.Collections.Generic.IEnumerable<object> declaredAttributes
@@ -51,10 +57,12 @@ namespace System.Reflection.Context
         {
             throw null;
         }
+
         public override System.Reflection.Assembly MapAssembly(System.Reflection.Assembly assembly)
         {
             throw null;
         }
+
         public override System.Reflection.TypeInfo MapType(System.Reflection.TypeInfo type)
         {
             throw null;

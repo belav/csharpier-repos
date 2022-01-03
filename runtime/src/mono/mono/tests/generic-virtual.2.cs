@@ -1,6 +1,7 @@
 using System;
 
 public class ClassA { }
+
 public class ClassB { }
 
 public delegate string[] StringArrayDelegate();

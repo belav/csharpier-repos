@@ -18,8 +18,10 @@ public class IcallTableGenerator : Task
 {
     [Required]
     public string? RuntimeIcallTableFile { get; set; }
+
     [Required]
     public ITaskItem[]? Assemblies { get; set; }
+
     [Required, NotNull]
     public string? OutputPath { get; set; }
 

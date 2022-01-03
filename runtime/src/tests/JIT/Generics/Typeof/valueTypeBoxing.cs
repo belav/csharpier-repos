@@ -20,6 +20,7 @@ interface B : X { }
 struct C : A
 {
     public static int c_count = 1;
+
     public void incCount()
     {
         c_count *= 23;
@@ -29,6 +30,7 @@ struct C : A
 struct D : B
 {
     public static int d_count = 1;
+
     public void incCount()
     {
         d_count *= 31;
@@ -38,10 +40,12 @@ struct D : B
 struct CSS : A
 {
     public static int cs_count = 1;
+
     public void incCount()
     {
         cs_count *= 37;
     }
+
     public void readInput(int input)
     {
         cs_count = cs_count += input;
@@ -51,10 +55,12 @@ struct CSS : A
 struct DSS : B
 {
     public static int ds_count = 1;
+
     public void incCount()
     {
         ds_count *= 41;
     }
+
     public void readInput(int input)
     {
         ds_count = ds_count += input;
@@ -76,6 +82,7 @@ enum DS
 struct mainMethod
 {
     public static bool failed = false;
+
     public static void checkGetTypeValueType(System.ValueType x)
     {
         if (x.GetType() == typeof(D))

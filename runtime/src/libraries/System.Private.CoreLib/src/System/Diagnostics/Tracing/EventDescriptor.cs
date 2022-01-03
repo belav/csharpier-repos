@@ -20,18 +20,25 @@ namespace System.Diagnostics.Tracing
         #region private
         [FieldOffset(0)]
         private readonly int m_traceloggingId;
+
         [FieldOffset(0)]
         private readonly ushort m_id;
+
         [FieldOffset(2)]
         private readonly byte m_version;
+
         [FieldOffset(3)]
         private readonly byte m_channel;
+
         [FieldOffset(4)]
         private readonly byte m_level;
+
         [FieldOffset(5)]
         private readonly byte m_opcode;
+
         [FieldOffset(6)]
         private readonly ushort m_task;
+
         [FieldOffset(8)]
         private readonly long m_keywords;
         #endregion

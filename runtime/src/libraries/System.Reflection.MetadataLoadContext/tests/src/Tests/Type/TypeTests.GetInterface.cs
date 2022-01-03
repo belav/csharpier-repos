@@ -137,22 +137,32 @@ namespace System.Reflection.Tests
         }
 
         private class NoInterfaces { }
+
         private class Foo : IFoo1, IFoo2, IFoo3 { }
+
         private class Foo1 : IFoo1 { }
+
         private class Hoo1 : Ns.Inner.IHoo1 { }
+
         private class TwoFoo1 : IFoo1, Ns.Inner.IFoo1 { }
+
         private class FooMixedCase : IFoo1, IFoO1 { }
     }
 
     internal interface IFoo1 { }
+
     internal interface IFoo2 { }
+
     internal interface IFoo3 { }
+
     internal interface IFoO1 { }
 
     namespace Ns.Inner
     {
         internal interface IHoo1 { }
+
         internal interface IHoo2 { }
+
         internal interface IHoo3 { }
 
         internal interface IFoo1 { }

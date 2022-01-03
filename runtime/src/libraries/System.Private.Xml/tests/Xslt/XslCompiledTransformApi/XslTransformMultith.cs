@@ -19,6 +19,7 @@ namespace System.Xml.Tests
         public XslCompiledTransform xsltSameInstance; // Used for same instance testing of XsltArgumentList
 
         private ITestOutputHelper _output;
+
         public SameInstanceXslTransformTestCase(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -40,6 +41,7 @@ namespace System.Xml.Tests
         private XmlReader _xrData; // Loads XML File
 
         private ITestOutputHelper _output;
+
         public SameInstanceXslTransformReader(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -333,6 +335,7 @@ namespace System.Xml.Tests
         private XmlReader _xrData; // Loads XML file
 
         private ITestOutputHelper _output;
+
         public SameInstanceXslTransformWriter(ITestOutputHelper output) : base(output)
         {
             _output = output;

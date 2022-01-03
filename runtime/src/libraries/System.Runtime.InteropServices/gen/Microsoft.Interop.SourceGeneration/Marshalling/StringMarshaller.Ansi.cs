@@ -210,10 +210,12 @@ namespace Microsoft.Interop
             SyntaxToken byteLengthIdentifier,
             out bool allocationRequiresByteLength
         ) => throw new NotImplementedException();
+
         protected override ExpressionSyntax GenerateByteLengthCalculationExpression(
             TypePositionInfo info,
             StubCodeContext context
         ) => throw new NotImplementedException();
+
         protected override StatementSyntax GenerateStackallocOnlyValueMarshalling(
             TypePositionInfo info,
             StubCodeContext context,

@@ -50,9 +50,11 @@ namespace System.Runtime.InteropServices.ComTypes
             out IMoniker? ppmkComposite
         );
         void Enum([MarshalAs(UnmanagedType.Bool)] bool fForward, out IEnumMoniker? ppenumMoniker);
+
         [PreserveSig]
         int IsEqual(IMoniker pmkOtherMoniker);
         void Hash(out int pdwHash);
+
         [PreserveSig]
         int IsRunning(IBindCtx pbc, IMoniker? pmkToLeft, IMoniker? pmkNewlyRunning);
         void GetTimeOfLastChange(IBindCtx pbc, IMoniker? pmkToLeft, out FILETIME pFileTime);
@@ -71,6 +73,7 @@ namespace System.Runtime.InteropServices.ComTypes
             out int pchEaten,
             out IMoniker ppmkOut
         );
+
         [PreserveSig]
         int IsSystemMoniker(out int pdwMksys);
     }

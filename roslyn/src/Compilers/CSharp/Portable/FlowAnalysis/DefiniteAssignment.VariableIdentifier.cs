@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal readonly struct VariableIdentifier : IEquatable<VariableIdentifier>
         {
             public readonly Symbol Symbol;
+
             /// <summary>
             /// Indicates whether this variable is nested inside another tracked variable.
             /// For instance, if a field `x` of a struct is a tracked variable, the symbol is not sufficient

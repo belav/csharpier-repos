@@ -23,22 +23,27 @@ namespace System.Buffers
     {
         /// <summary>The number of buckets (array sizes) in the pool, one for each array length, starting from length 16.</summary>
         private const int NumBuckets = 27; // Utilities.SelectBucketIndex(1024 * 1024 * 1024 + 1)
+
         /// <summary>Maximum number of per-core stacks to use per array size.</summary>
         private const int MaxPerCorePerArraySizeStacks = 64; // selected to avoid needing to worry about processor groups
+
         /// <summary>The maximum number of buffers to store in a bucket's global queue.</summary>
         private const int MaxBuffersPerArraySizePerCore = 8;
 
         /// <summary>A per-thread array of arrays, to cache one array per array size per thread.</summary>
         [ThreadStatic]
         private static ThreadLocalArray[]? t_tlsBuckets;
+
         /// <summary>Used to keep track of all thread local buckets for trimming if needed.</summary>
         private readonly ConditionalWeakTable<ThreadLocalArray[], object?> _allTlsBuckets =
             new ConditionalWeakTable<ThreadLocalArray[], object?>();
+
         /// <summary>
         /// An array of per-core array stacks. The slots are lazily initialized to avoid creating
         /// lots of overhead for unused array sizes.
         /// </summary>
         private readonly PerCoreLockedStacks?[] _buckets = new PerCoreLockedStacks[NumBuckets];
+
         /// <summary>Whether the callback to trim arrays in response to memory pressure has been created.</summary>
         private int _trimCallbackCreated;
 
@@ -330,6 +335,7 @@ namespace System.Buffers
                 Environment.ProcessorCount,
                 MaxPerCorePerArraySizeStacks
             );
+
             /// <summary>The stacks.</summary>
             private readonly LockedStack[] _perCoreStacks;
 
@@ -402,8 +408,10 @@ namespace System.Buffers
         {
             /// <summary>The arrays in the stack.</summary>
             private readonly T[]?[] _arrays = new T[MaxBuffersPerArraySizePerCore][];
+
             /// <summary>Number of arrays stored in <see cref="_arrays"/>.</summary>
             private int _count;
+
             /// <summary>Timestamp set by Trim when it sees this as 0.</summary>
             private int _millisecondsTimestamp;
 
@@ -551,6 +559,7 @@ namespace System.Buffers
         {
             /// <summary>The stored array.</summary>
             public T[]? Array;
+
             /// <summary>Environment.TickCount timestamp for when this array was observed by Trim.</summary>
             public int MillisecondsTimeStamp;
 

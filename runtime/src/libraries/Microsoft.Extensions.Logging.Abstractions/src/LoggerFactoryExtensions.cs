@@ -25,6 +25,7 @@ namespace Microsoft.Extensions.Logging
             }
             return new Logger<T>(factory);
         }
+
         /// <summary>
         /// Creates a new <see cref="ILogger"/> instance using the full name of the given <paramref name="type"/>.
         /// </summary>

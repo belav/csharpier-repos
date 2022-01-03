@@ -106,20 +106,29 @@ namespace System.Runtime.InteropServices.JavaScript
         public ArrayBuffer Buffer => (ArrayBuffer)GetObjectProperty("buffer");
 
         public void Fill(U value) => Invoke("fill", value);
+
         public void Fill(U value, int start) => Invoke("fill", value, start);
+
         public void Fill(U value, int start, int end) => Invoke("fill", value, start, end);
 
         public void Set(Array array) => Invoke("set", array);
+
         public void Set(Array array, int offset) => Invoke("set", array, offset);
+
         public void Set(ITypedArray typedArray) => Invoke("set", typedArray);
+
         public void Set(ITypedArray typedArray, int offset) => Invoke("set", typedArray, offset);
 
         public T Slice() => (T)Invoke("slice");
+
         public T Slice(int begin) => (T)Invoke("slice", begin);
+
         public T Slice(int begin, int end) => (T)Invoke("slice", begin, end);
 
         public T SubArray() => (T)Invoke("subarray");
+
         public T SubArray(int begin) => (T)Invoke("subarray", begin);
+
         public T SubArray(int begin, int end) => (T)Invoke("subarray", begin, end);
 
         public U? this[int i]

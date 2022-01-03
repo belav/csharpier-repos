@@ -16,6 +16,7 @@ namespace Microsoft.Extensions.Logging
         }
     }
 }
+
 namespace Microsoft.Extensions.Logging.Debug
 {
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("Debug")]
@@ -24,10 +25,12 @@ namespace Microsoft.Extensions.Logging.Debug
           System.IDisposable
     {
         public DebugLoggerProvider() { }
+
         public Microsoft.Extensions.Logging.ILogger CreateLogger(string name)
         {
             throw null;
         }
+
         public void Dispose() { }
     }
 }

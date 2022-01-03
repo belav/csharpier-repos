@@ -17,15 +17,18 @@ namespace System.Data
         {
             public string LocalName;
             public string? NamespaceURI;
+
             public XmlNodeIdentety(string localName, string? namespaceURI)
             {
                 LocalName = localName;
                 NamespaceURI = namespaceURI;
             }
+
             public override int GetHashCode()
             {
                 return LocalName.GetHashCode();
             }
+
             public override bool Equals([NotNullWhen(true)] object? obj)
             {
                 XmlNodeIdentety id = (XmlNodeIdentety)obj!;
@@ -47,7 +50,9 @@ namespace System.Data
         internal sealed class XmlNodeIdHashtable : Hashtable
         {
             private readonly XmlNodeIdentety _id = new XmlNodeIdentety(string.Empty, string.Empty);
+
             public XmlNodeIdHashtable(int capacity) : base(capacity) { }
+
             public object? this[XmlNode node]
             {
                 get
@@ -93,6 +98,7 @@ namespace System.Data
         {
             public DataTable TableSchema;
             public XmlNodeIdHashtable ColumnsSchemaMap;
+
             public TableSchemaInfo(DataTable tableSchema)
             {
                 TableSchema = tableSchema;
@@ -139,6 +145,7 @@ namespace System.Data
             Debug.Assert(nameTable != null, "NameTable can't be null");
             BuildIdentityMap(nameTable, dataTable);
         }
+
         internal static bool IsMappedColumn(DataColumn c)
         {
             return (c.ColumnMapping != MappingType.Hidden);
@@ -473,6 +480,7 @@ namespace System.Data
 
             return tableList;
         }
+
         // Used to infer schema and top most node
 
         public object? GetColumnSchema(XmlNode node, bool fIgnoreNamespace)

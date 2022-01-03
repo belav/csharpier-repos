@@ -32,6 +32,7 @@ namespace System.Text.Json
         {
             get { return _parent?.GetJsonTokenType(_idx) ?? JsonTokenType.None; }
         }
+
         /// <summary>
         ///   The <see cref="JsonValueKind"/> that the value is.
         /// </summary>

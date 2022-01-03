@@ -42,6 +42,7 @@ namespace System.Text.RegularExpressions
         private List<string>? _capnamelist;
 
         private RegexOptions _options;
+
         // NOTE: _optionsStack is ValueListBuilder<int> to ensure that
         //       ArrayPool<int>.Shared, not ArrayPool<RegexOptions>.Shared,
         //       will be created if the stackalloc'd capacity is ever exceeded.

@@ -11,6 +11,7 @@ namespace System.Web.Http
         {
             return null;
         }
+
         public List<User> GetUsers()
         {
             return null;
@@ -28,50 +29,62 @@ namespace System.Web.Http
         {
             return null;
         }
+
         public User GetUserByNameAndAge(string name, int age)
         {
             return null;
         }
+
         public User GetUserByNameAgeAndSsn(string name, int age, int ssn)
         {
             return null;
         }
+
         public User GetUserByNameIdAndSsn(string name, int id, int ssn)
         {
             return null;
         }
+
         public User GetUserByNameAndSsn(string name, int ssn)
         {
             return null;
         }
+
         public User PostUser(User user)
         {
             return null;
         }
+
         public User PostUserByNameAndAge(string name, int age)
         {
             return null;
         }
+
         public User PostUserByName(string name)
         {
             return null;
         }
+
         public User PostUserByNameAndAddress(string name, UserAddress address)
         {
             return null;
         }
+
         public User DeleteUserByOptName(string name = null)
         {
             return null;
         }
+
         public User DeleteUserByIdAndOptName(int id, string name = "DefaultName")
         {
             return null;
         }
+
         public User DeleteUserByIdNameAndAge(int id, string name, int age)
         {
             return null;
         }
+
         public User DeleteUserById_Email_OptName_OptPhone(
             int id,
             string email,
@@ -81,6 +94,7 @@ namespace System.Web.Http
         {
             return null;
         }
+
         public User DeleteUserById_Email_Height_OptName_OptPhone(
             int id,
             string email,
@@ -91,7 +105,9 @@ namespace System.Web.Http
         {
             return null;
         }
+
         public void Head_Id_OptSize_OptIndex(int id, int size = 10, int index = 0) { }
+
         public void Head() { }
     }
 }

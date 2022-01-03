@@ -123,6 +123,7 @@ namespace VirtualStaticInterfaceMethodTestGen
         {
             tw.WriteLine($".assembly extern {assemblyName} {{}}");
         }
+
         static void EmitAssemblyRecord(TextWriter tw, string assemblyName)
         {
             tw.WriteLine($".assembly {assemblyName} {{}}");

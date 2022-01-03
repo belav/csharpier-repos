@@ -20,6 +20,7 @@ namespace System.Net.Test.Common
             !string.IsNullOrEmpty(
                 Environment.GetEnvironmentVariable("DOTNET_RUNTIME_ENTERPRISETESTS_ENABLED")
             );
+
         // Folowing credentials are used only in docker scenario, it is not leaking any secrets.
         public static NetworkCredential ValidNetworkCredentials =>
             new NetworkCredential("user1", "PLACEHOLDERcorrect20");

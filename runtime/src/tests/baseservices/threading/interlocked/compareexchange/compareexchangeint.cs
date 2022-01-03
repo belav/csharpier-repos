@@ -49,7 +49,9 @@ namespace Exchange
         private int totalValue = 0;
         private int numberOfIterations;
         private int valueToAdd;
+
         public ThreadSafe() : this(100, 100) { }
+
         public ThreadSafe(int loops, int addend)
         {
             signal = new ManualResetEvent(false);
@@ -68,6 +70,7 @@ namespace Exchange
             for (int i = 0; i < numberOfIterations; i++)
                 AddToTotal(valueToAdd);
         }
+
         public int Expected
         {
             get { return (numberOfIterations * valueToAdd); }
@@ -76,6 +79,7 @@ namespace Exchange
         {
             get { return totalValue; }
         }
+
         private int AddToTotal(int addend)
         {
             int initialValue,

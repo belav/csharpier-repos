@@ -108,6 +108,7 @@ namespace AutoMapper.IntegrationTests.Net4
             {
                 Database.SetInitializer<TestContext>(new DatabaseInitializer());
             }
+
             public DbSet<Class1> Class1Set { get; set; }
             public DbSet<Class2> Class2Set { get; set; }
             public DbSet<Class3> Class3Set { get; set; }

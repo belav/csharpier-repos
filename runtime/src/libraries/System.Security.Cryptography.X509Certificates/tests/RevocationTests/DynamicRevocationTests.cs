@@ -634,6 +634,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                 }
             }
         }
+
         [Theory]
         [MemberData(nameof(PolicyErrorsNotTimeValidData))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/31249", PlatformSupport.AppleCrypto)]

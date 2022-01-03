@@ -84,6 +84,7 @@ namespace Castle.Components.DictionaryAdapter
         protected abstract bool TryRealize(out TNode node);
 
         public event EventHandler Realized;
+
         protected virtual void OnRealized()
         {
             var handler = Realized;

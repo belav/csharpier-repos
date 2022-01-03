@@ -22,14 +22,17 @@ namespace Roslyn.Test.Performance.Utilities
         /// back to the runner.
         /// </summary>
         public static PerfTest[] ResultTests = null;
+
         /// <summary>
         /// The logger that is being used by the process.
         /// </summary>
         public static ILogger Logger = new ConsoleAndFileLogger();
+
         /// <summary>
         /// True if the logger should be verbose.
         /// </summary>
         public static bool IsVerbose = true;
+
         /// <summary>
         /// True if a runner is orchestrating the test runs.
         /// </summary>
@@ -67,18 +70,22 @@ namespace Roslyn.Test.Performance.Utilities
             /// The path to the executable that was run.
             /// </summary>
             public string ExecutablePath { get; set; }
+
             /// <summary>
             /// The arguments that were passed to the process.
             /// </summary>
             public string Args { get; set; }
+
             /// <summary>
             /// The exit code of the process.
             /// </summary>
             public int Code { get; set; }
+
             /// <summary>
             /// The entire standard-out of the process.
             /// </summary>
             public string StdOut { get; set; }
+
             /// <summary>
             /// The entire standard-error of the process.
             /// </summary>
@@ -89,6 +96,7 @@ namespace Roslyn.Test.Performance.Utilities
             /// than zero.
             /// </summary>
             public bool Failed => Code != 0;
+
             /// <summary>
             /// True if the command returned an exit code of 0.
             /// </summary>

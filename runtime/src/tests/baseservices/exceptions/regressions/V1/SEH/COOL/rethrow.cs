@@ -20,6 +20,7 @@ public class UserException1 : Exception
         new int ExceptionId;
 
         public UserException2() { }
+
         public UserException2(int id) : base(id)
         {
             ExceptionId = id;
@@ -41,6 +42,7 @@ public class UserException1 : Exception
                 new int ExceptionId;
 
                 public UserException4() { }
+
                 public UserException4(int id) : base(id)
                 {
                     ExceptionId = id;

@@ -414,11 +414,13 @@ namespace System.Drawing.Printing
             {
                 get { return this; }
             }
+
             [EditorBrowsable(EditorBrowsableState.Never)]
             public int Add(PaperSource? paperSource)
             {
                 return _PaperSources.Add(paperSource);
             }
+
             public void CopyTo(PaperSource[] paperSources, int index)
             {
                 throw new NotImplementedException();
@@ -476,11 +478,13 @@ namespace System.Drawing.Printing
             {
                 get { return this; }
             }
+
             [EditorBrowsable(EditorBrowsableState.Never)]
             public int Add(PaperSize? paperSize)
             {
                 return _PaperSizes.Add(paperSize);
             }
+
             public void CopyTo(PaperSize[] paperSizes, int index)
             {
                 throw new NotImplementedException();
@@ -538,11 +542,13 @@ namespace System.Drawing.Printing
             {
                 get { return this; }
             }
+
             [EditorBrowsable(EditorBrowsableState.Never)]
             public int Add(PrinterResolution? printerResolution)
             {
                 return _PrinterResolutions.Add(printerResolution);
             }
+
             public void CopyTo(PrinterResolution[] printerResolutions, int index)
             {
                 throw new NotImplementedException();
@@ -605,11 +611,13 @@ namespace System.Drawing.Printing
             {
                 get { return (_Strings[index] as string)!; }
             }
+
             [EditorBrowsable(EditorBrowsableState.Never)]
             public int Add(string value)
             {
                 return _Strings.Add(value);
             }
+
             public void CopyTo(string[] strings, int index)
             {
                 throw new NotImplementedException();

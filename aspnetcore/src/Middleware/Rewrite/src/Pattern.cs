@@ -8,6 +8,7 @@ namespace Microsoft.AspNetCore.Rewrite;
 internal class Pattern
 {
     public IList<PatternSegment> PatternSegments { get; }
+
     public Pattern(IList<PatternSegment> patternSegments)
     {
         PatternSegments = patternSegments;

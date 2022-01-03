@@ -3,6 +3,7 @@
 
 // static field
 using System;
+
 namespace Precise
 {
     class Driver

@@ -34,8 +34,10 @@ namespace NS.Module
         {
             SField = p;
         }
+
         private ModClass SField;
         internal ushort SProp { get; set; }
+
         public ulong SM()
         {
             return 0;
@@ -50,10 +52,12 @@ namespace NS.Module
             get { return prop; }
             set { prop = value; }
         }
+
         public ModIDerive CM(int p1 = 0, uint p2 = 1, long p3 = 2)
         {
             return null;
         }
+
         public string this[string s]
         {
             get { return s; }

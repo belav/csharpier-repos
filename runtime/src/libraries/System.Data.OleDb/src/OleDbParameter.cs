@@ -206,6 +206,7 @@ namespace System.Data.OleDb
                 }
             }
         }
+
         private bool ShouldSerializePrecision()
         {
             return (0 != _precision);
@@ -238,6 +239,7 @@ namespace System.Data.OleDb
                 }
             }
         }
+
         private bool ShouldSerializeScale()
         {
             return ShouldSerializeScale(_scale);

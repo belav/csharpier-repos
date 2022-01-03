@@ -551,6 +551,7 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         public class ClassWithInterface : INonGenericInterface { }
+
         public struct StructWithInterface : INonGenericInterface { }
 
         public enum SByteEnum : sbyte
@@ -558,16 +559,19 @@ namespace System.Runtime.InteropServices.Tests
             Value1,
             Value2
         }
+
         public enum Int16Enum : short
         {
             Value1,
             Value2
         }
+
         public enum Int32Enum : int
         {
             Value1,
             Value2
         }
+
         public enum Int64Enum : long
         {
             Value1,
@@ -579,16 +583,19 @@ namespace System.Runtime.InteropServices.Tests
             Value1,
             Value2
         }
+
         public enum UInt16Enum : ushort
         {
             Value1,
             Value2
         }
+
         public enum UInt32Enum : uint
         {
             Value1,
             Value2
         }
+
         public enum UInt64Enum : ulong
         {
             Value1,

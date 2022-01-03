@@ -70,8 +70,11 @@ public abstract class JsonSerializerApiValidation
     internal partial class MyDummyContext : JsonSerializerContext
     {
         public MyDummyContext() : base(new JsonSerializerOptions()) { }
+
         public MyDummyContext(JsonSerializerOptions options) : base(options) { }
+
         public override JsonTypeInfo? GetTypeInfo(Type type) => throw new NotImplementedException();
+
         protected override JsonSerializerOptions? GeneratedSerializerOptions => null;
     }
 

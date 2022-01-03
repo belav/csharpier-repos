@@ -57,6 +57,7 @@ class Runtime_40440
         v[1, 2, 3] = e;
         return UseArrayElementAsCallArgument(v, e);
     }
+
     static bool CheckVector2()
     {
         var v = new Vector2[4, 4, 4];

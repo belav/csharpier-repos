@@ -21,12 +21,14 @@ namespace SafeHandleTests
         public class ThrowingCustomMarshaler : ICustomMarshaler
         {
             public void CleanUpManagedData(object ManagedObj) { }
+
             public void CleanUpNativeData(IntPtr pNativeData) { }
 
             public int GetNativeDataSize() => IntPtr.Size;
 
             public IntPtr MarshalManagedToNative(object ManagedObj) =>
                 throw new NotImplementedException();
+
             public object MarshalNativeToManaged(IntPtr pNativeData)
             {
                 // Cause an exception during the unmarshal phase of the IL stub.

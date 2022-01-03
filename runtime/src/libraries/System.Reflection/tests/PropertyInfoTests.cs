@@ -630,8 +630,11 @@ namespace System.Reflection.Tests
             }
 
             public enum ShortEnum : short { }
+
             public enum IntEnum { }
+
             public enum LongEnum : long { }
+
             public ShortEnum ShortEnumProperty { get; set; }
             public IntEnum IntEnumProperty { get; set; }
             public LongEnum LongEnumProperty { get; set; }

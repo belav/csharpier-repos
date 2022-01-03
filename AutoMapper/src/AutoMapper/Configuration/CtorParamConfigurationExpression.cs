@@ -15,6 +15,7 @@ namespace AutoMapper.Configuration
         /// <param name="sourceMembersPath">Property name referencing the source member to map against. Or a dot separated member path.</param>
         void MapFrom(string sourceMembersPath);
     }
+
     public interface ICtorParamConfigurationExpression<TSource> : ICtorParamConfigurationExpression
     {
         /// <summary>
@@ -31,11 +32,13 @@ namespace AutoMapper.Configuration
         /// <param name="resolver">Custom func</param>
         void MapFrom<TMember>(Func<TSource, ResolutionContext, TMember> resolver);
     }
+
     public interface ICtorParameterConfiguration
     {
         string CtorParamName { get; }
         void Configure(TypeMap typeMap);
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class CtorParamConfigurationExpression<TSource, TDestination>
         : ICtorParamConfigurationExpression<TSource>,

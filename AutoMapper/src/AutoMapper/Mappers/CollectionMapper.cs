@@ -6,12 +6,14 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Collections.Specialized;
 using System.Linq;
+
 namespace AutoMapper.Internal.Mappers
 {
     using Execution;
     using static Execution.ExpressionBuilder;
     using static Expression;
     using static ReflectionHelper;
+
     public class CollectionMapper : IObjectMapperInfo
     {
         public TypePair GetAssociatedTypes(in TypePair context) =>
@@ -19,8 +21,10 @@ namespace AutoMapper.Internal.Mappers
                 GetElementType(context.SourceType),
                 GetElementType(context.DestinationType)
             );
+
         public bool IsMatch(in TypePair context) =>
             context.SourceType.IsCollection() && context.DestinationType.IsCollection();
+
         public Expression MapExpression(
             IGlobalConfiguration configurationProvider,
             ProfileMap profileMap,
@@ -191,11 +195,13 @@ namespace AutoMapper.Internal.Mappers
                 }
             }
         }
+
         private static Expression CreateNameValueCollection(Expression sourceExpression) =>
             New(
                 typeof(NameValueCollection).GetConstructor(new[] { typeof(NameValueCollection) }),
                 sourceExpression
             );
+
         static class ArrayMapper
         {
             private static readonly MethodInfo ToArrayMethod = typeof(Enumerable).GetStaticMethod(
@@ -211,6 +217,7 @@ namespace AutoMapper.Internal.Mappers
             );
             private static readonly MethodInfo MapMultidimensionalMethod =
                 typeof(ArrayMapper).GetStaticMethod(nameof(MapMultidimensional));
+
             private static Array MapMultidimensional(
                 Array source,
                 Type destinationElementType,
@@ -231,6 +238,7 @@ namespace AutoMapper.Internal.Mappers
                 }
                 return destinationArray;
             }
+
             public static Expression MapToArray(
                 IGlobalConfiguration configurationProvider,
                 ProfileMap profileMap,
@@ -341,15 +349,18 @@ namespace AutoMapper.Internal.Mappers
             }
         }
     }
+
     public class MultidimensionalArrayFiller
     {
         private readonly int[] _indices;
         private readonly Array _destination;
+
         public MultidimensionalArrayFiller(Array destination)
         {
             _indices = new int[destination.Rank];
             _destination = destination;
         }
+
         public void NewValue(object value)
         {
             var dimension = _destination.Rank - 1;

@@ -143,18 +143,25 @@ namespace Microsoft.Win32
         {
             [MarshalAs(UnmanagedType.U2)]
             public short Year;
+
             [MarshalAs(UnmanagedType.U2)]
             public short Month;
+
             [MarshalAs(UnmanagedType.U2)]
             public short DayOfWeek;
+
             [MarshalAs(UnmanagedType.U2)]
             public short Day;
+
             [MarshalAs(UnmanagedType.U2)]
             public short Hour;
+
             [MarshalAs(UnmanagedType.U2)]
             public short Minute;
+
             [MarshalAs(UnmanagedType.U2)]
             public short Second;
+
             [MarshalAs(UnmanagedType.U2)]
             public short Milliseconds;
         }
@@ -167,50 +174,73 @@ namespace Microsoft.Win32
         {
             [FieldOffset(0)]
             public uint UInteger;
+
             [FieldOffset(0)]
             public int Integer;
+
             [FieldOffset(0)]
             public byte UInt8;
+
             [FieldOffset(0)]
             public short Short;
+
             [FieldOffset(0)]
             public ushort UShort;
+
             [FieldOffset(0)]
             public uint Bool;
+
             [FieldOffset(0)]
             public byte ByteVal;
+
             [FieldOffset(0)]
             public byte SByte;
+
             [FieldOffset(0)]
             public ulong ULong;
+
             [FieldOffset(0)]
             public long Long;
+
             [FieldOffset(0)]
             public float Single;
+
             [FieldOffset(0)]
             public double Double;
+
             [FieldOffset(0)]
             public IntPtr StringVal;
+
             [FieldOffset(0)]
             public IntPtr AnsiString;
+
             [FieldOffset(0)]
             public IntPtr SidVal;
+
             [FieldOffset(0)]
             public IntPtr Binary;
+
             [FieldOffset(0)]
             public IntPtr Reference;
+
             [FieldOffset(0)]
             public IntPtr Handle;
+
             [FieldOffset(0)]
             public IntPtr GuidReference;
+
             [FieldOffset(0)]
             public ulong FileTime;
+
             [FieldOffset(0)]
             public IntPtr SystemTime;
+
             [FieldOffset(0)]
             public IntPtr SizeT;
+
             [FieldOffset(8)]
             public uint Count; // number of elements (not length) in bytes.
+
             [FieldOffset(12)]
             public uint Type;
         }
@@ -394,8 +424,10 @@ namespace Microsoft.Win32
         {
             [MarshalAs(UnmanagedType.LPWStr)]
             public string Server;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string User;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string Domain;
             public CoTaskMemUnicodeSafeHandle Password;
@@ -693,8 +725,10 @@ namespace Microsoft.Win32
         {
             [MarshalAs(UnmanagedType.LPWStr), FieldOffset(0)]
             public string StringVal;
+
             [FieldOffset(8)]
             public uint Count;
+
             [FieldOffset(12)]
             public uint Type;
         };

@@ -16,6 +16,7 @@ namespace System.Speech.Recognition.SrgsGrammar
     {
         #region Constructors
         public SrgsSubset(string text) : this(text, SubsetMatchingMode.Subsequence) { }
+
         public SrgsSubset(string text, SubsetMatchingMode matchingMode)
         {
             Helpers.ThrowIfEmptyOrNull(text, nameof(text));

@@ -36,8 +36,10 @@ namespace System.Reflection.TypeLoading
         // Naming
         public sealed override AssemblyName GetName(bool copiedName) =>
             GetAssemblyNameDataNoCopy().CreateAssemblyName();
+
         internal AssemblyNameData GetAssemblyNameDataNoCopy() =>
             _lazyAssemblyNameData ?? (_lazyAssemblyNameData = ComputeNameData());
+
         protected abstract AssemblyNameData ComputeNameData();
         private volatile AssemblyNameData? _lazyAssemblyNameData;
 
@@ -74,17 +76,20 @@ namespace System.Reflection.TypeLoading
         // Custom Attributes
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
+
         public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
 
         // Apis to retrieved types physically defined in this module.
         public sealed override Type[] GetTypes() =>
             IsSingleModule ? ManifestModule.GetTypes() : base.GetTypes();
+
         public sealed override IEnumerable<TypeInfo> DefinedTypes => GetDefinedRoTypes()!;
 
         private IEnumerable<RoType>? GetDefinedRoTypes() =>
             IsSingleModule
                 ? GetRoManifestModule().GetDefinedRoTypes()
                 : MultiModuleGetDefinedRoTypes();
+
         private IEnumerable<RoType> MultiModuleGetDefinedRoTypes()
         {
             foreach (RoModule module in ComputeRoModules(getResourceModules: false))
@@ -149,6 +154,7 @@ namespace System.Reflection.TypeLoading
             bool ignoreCase,
             out Exception? e
         ) => GetTypeCore(ns.ToUtf8(), name.ToUtf8(), ignoreCase, out e);
+
         internal RoDefinitionType? GetTypeCore(
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name,
@@ -189,6 +195,7 @@ namespace System.Reflection.TypeLoading
 
         private AssemblyNameData[] GetReferencedAssembliesNoCopy() =>
             _lazyAssemblyReferences ?? (_lazyAssemblyReferences = ComputeAssemblyReferences());
+
         protected abstract AssemblyNameData[] ComputeAssemblyReferences();
         private volatile AssemblyNameData[]? _lazyAssemblyReferences;
 
@@ -211,6 +218,7 @@ namespace System.Reflection.TypeLoading
         public abstract override ManifestResourceInfo? GetManifestResourceInfo(string resourceName);
         public abstract override string[] GetManifestResourceNames();
         public abstract override Stream? GetManifestResourceStream(string name);
+
         public sealed override Stream? GetManifestResourceStream(Type type, string name)
         {
             StringBuilder sb = new StringBuilder();
@@ -245,6 +253,7 @@ namespace System.Reflection.TypeLoading
         // Satellite assemblies
         public sealed override Assembly GetSatelliteAssembly(CultureInfo culture) =>
             throw new NotSupportedException(SR.NotSupported_SatelliteAssembly);
+
         public sealed override Assembly GetSatelliteAssembly(
             CultureInfo culture,
             Version? version
@@ -253,10 +262,13 @@ namespace System.Reflection.TypeLoading
         // Operations that are invalid for ReflectionOnly objects.
         public sealed override object[] GetCustomAttributes(bool inherit) =>
             throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
+
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
+
         public sealed override bool IsDefined(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
+
         // Compat quirk: Why ArgumentException instead of InvalidOperationException?
         public sealed override object CreateInstance(
             string typeName,

@@ -8,6 +8,7 @@ using System;
 internal class MatrixCls
 {
     public double[,] arr;
+
     public MatrixCls(int n, int m)
     {
         arr = new double[n, m];
@@ -17,6 +18,7 @@ internal class MatrixCls
 internal class classarr
 {
     private static double s_tolerance = 0.0000000000001;
+
     public static bool AreEqual(double left, double right)
     {
         return Math.Abs(left - right) < s_tolerance;

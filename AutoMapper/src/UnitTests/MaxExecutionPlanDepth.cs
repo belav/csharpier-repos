@@ -93,6 +93,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<Source6, Destination6>();
                 }
             );
+
         [Fact]
         public void Should_set_inline_accordingly()
         {

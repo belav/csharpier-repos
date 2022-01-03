@@ -19180,6 +19180,7 @@ public class C2 : C11<int>, I1<int>
 
         private static string UnaryOperatorName(string op) =>
             OperatorFacts.UnaryOperatorNameFromSyntaxKindIfAny(SyntaxFactory.ParseToken(op).Kind());
+
         private static string BinaryOperatorName(string op) =>
             op switch
             {

@@ -832,24 +832,30 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Entry point projects
             public TestProjectFixture PortableAppFixture { get; }
             public TestProjectFixture PortableAppWithExceptionFixture { get; }
+
             // Entry point with missing reference assembly
             public TestProjectFixture PortableAppWithMissingRefFixture { get; }
 
             // Correct startup hooks
             public TestProjectFixture StartupHookFixture { get; }
             public TestProjectFixture StartupHookWithOverloadFixture { get; }
+
             // Missing startup hook type (no StartupHook type defined)
             public TestProjectFixture StartupHookWithoutStartupHookTypeFixture { get; }
+
             // Missing startup hook method (no Initialize method defined)
             public TestProjectFixture StartupHookWithoutInitializeMethodFixture { get; }
+
             // Invalid startup hook assembly
             public TestProjectFixture StartupHookStartupHookInvalidAssemblyFixture { get; }
+
             // Invalid startup hooks (incorrect signatures)
             public TestProjectFixture StartupHookWithNonPublicMethodFixture { get; }
             public TestProjectFixture StartupHookWithInstanceMethodFixture { get; }
             public TestProjectFixture StartupHookWithParameterFixture { get; }
             public TestProjectFixture StartupHookWithReturnTypeFixture { get; }
             public TestProjectFixture StartupHookWithMultipleIncorrectSignaturesFixture { get; }
+
             // Valid startup hooks with incorrect behavior
             public TestProjectFixture StartupHookWithDependencyFixture { get; }
 

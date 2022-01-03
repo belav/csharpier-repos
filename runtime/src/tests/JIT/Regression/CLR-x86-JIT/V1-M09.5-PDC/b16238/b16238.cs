@@ -36,6 +36,7 @@ namespace DefaultNamespace
         public uint m_field1 = 91;
 #pragma warning restore 0414
         public static int m_static1 = 34041;
+
         public uint Method1(bool param1)
         {
             int local2 = 135;
@@ -50,6 +51,7 @@ namespace DefaultNamespace
             return 49548;
             /* 6 operator(s) emitted */
         }
+
         public static int Main()
         {
             new BB().Method1(false);

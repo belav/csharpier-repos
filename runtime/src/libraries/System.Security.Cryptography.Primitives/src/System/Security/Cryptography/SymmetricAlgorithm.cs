@@ -459,8 +459,10 @@ namespace System.Security.Cryptography
         protected int BlockSizeValue;
         protected int FeedbackSizeValue;
         protected int KeySizeValue;
+
         [MaybeNull]
         protected KeySizes[] LegalBlockSizesValue = null!;
+
         [MaybeNull]
         protected KeySizes[] LegalKeySizesValue = null!;
     }

@@ -14,17 +14,22 @@ namespace System.Composition.Convention.Tests
         public interface IFirst { }
 
         private interface IFoo { }
+
         private class FooImpl
         {
             public string P1 { get; set; }
             public string P2 { get; set; }
             public IEnumerable<IFoo> P3 { get; set; }
         }
+
         private class FooImplWithConstructors
         {
             public FooImplWithConstructors() { }
+
             public FooImplWithConstructors(int id) { }
+
             public FooImplWithConstructors(IEnumerable<IFoo> ids) { }
+
             public FooImplWithConstructors(int id, string name) { }
         }
 
@@ -35,6 +40,7 @@ namespace System.Composition.Convention.Tests
 
             [Import("P1", AllowDefault = true)]
             public string P1 { get; set; }
+
             [Import("P2", AllowDefault = true)]
             public string P2 { get; set; }
 
@@ -42,6 +48,7 @@ namespace System.Composition.Convention.Tests
             {
                 return 1;
             }
+
             public void OnImportsSatisfiedInvalidArgs(int arg1) { }
 
             public void OnImportsSatisfied1()
@@ -62,6 +69,7 @@ namespace System.Composition.Convention.Tests
 
             [Import("P1", AllowDefault = true)]
             public string P1 { get; set; }
+
             [Import("P2", AllowDefault = true)]
             public string P2 { get; set; }
 
@@ -69,6 +77,7 @@ namespace System.Composition.Convention.Tests
             {
                 return 1;
             }
+
             public void OnImportsSatisfiedInvalidArgs(int arg1) { }
 
             [OnImportsSatisfied]
@@ -85,6 +94,7 @@ namespace System.Composition.Convention.Tests
 
             [Import("P1", AllowDefault = true)]
             public string P1 { get; set; }
+
             [Import("P2", AllowDefault = true)]
             public string P2 { get; set; }
 
@@ -92,6 +102,7 @@ namespace System.Composition.Convention.Tests
             {
                 return 1;
             }
+
             public void OnImportsSatisfiedInvalidArgs(int arg1) { }
 
             public void OnImportsSatisfied()
@@ -115,6 +126,7 @@ namespace System.Composition.Convention.Tests
 
             [Export("P1")]
             public string P1 { get; set; }
+
             [Export("P2")]
             public string P2 { get; set; }
         }

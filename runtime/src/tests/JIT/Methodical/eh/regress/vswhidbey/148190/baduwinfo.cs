@@ -6,6 +6,7 @@ using System;
 class Test_baduwinfo
 {
     private static TestUtil.TestLog testLog;
+
     static Test_baduwinfo()
     {
         // Create test writer object to hold expected output
@@ -56,6 +57,7 @@ class Test_baduwinfo
         // Create and initialize test log object
         testLog = new TestUtil.TestLog(expectedOut);
     }
+
     public static int bar(
         int i1,
         int i2,
@@ -328,6 +330,7 @@ class Test_baduwinfo
 
         throw new System.Exception("Expected Test Exception");
     }
+
     public static int foo()
     {
         int ret = 1;
@@ -383,6 +386,7 @@ class Test_baduwinfo
         }
         return ret;
     }
+
     public static int Main()
     {
         String s = "Test1";

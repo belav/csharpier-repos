@@ -346,6 +346,7 @@ namespace System.Data.Common
         {
             return DateTimeOffset.Parse(value, formatProvider);
         }
+
         // this should not be called for XmlSerialization
         public static object ChangeTypeForDefaultValue(
             object value,

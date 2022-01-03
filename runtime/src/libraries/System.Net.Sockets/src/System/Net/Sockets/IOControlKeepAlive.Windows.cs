@@ -18,6 +18,7 @@ namespace System.Net.Sockets
             SafeSocketHandle,
             IOControlKeepAlive
         > s_socketKeepAliveTable = new ConditionalWeakTable<SafeSocketHandle, IOControlKeepAlive>();
+
         [ThreadStatic]
         private static byte[]? s_keepAliveValuesBuffer;
 

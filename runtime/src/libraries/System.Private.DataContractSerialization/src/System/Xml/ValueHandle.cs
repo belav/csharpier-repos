@@ -115,6 +115,7 @@ namespace System.Xml
         {
             SetValue(ValueHandleType.QName, key, prefix);
         }
+
         public void SetValue(ValueHandleType type, int offset, int length)
         {
             _type = type;
@@ -417,6 +418,7 @@ namespace System.Xml
                 return XmlConverter.ToGuid(_bufferReader.Buffer, _offset, _length);
             return XmlConverter.ToGuid(GetString());
         }
+
         public override string ToString()
         {
             return GetString();
@@ -910,6 +912,7 @@ namespace System.Xml
             length = 0;
             return false;
         }
+
         private string GetCharsText()
         {
             DiagnosticUtility.DebugAssert(_type == ValueHandleType.UTF8, "");

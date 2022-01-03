@@ -2058,6 +2058,7 @@ namespace Baz
             var markup = CreateMarkupForSingleProject(file2, file1, LanguageNames.CSharp);
             await VerifyTypeImportItemIsAbsentAsync(markup, "Bar", inlineDescription: "Foo");
         }
+
         private static void AssertRelativeOrder(
             List<string> expectedTypesInRelativeOrder,
             ImmutableArray<CompletionItem> allCompletionItems

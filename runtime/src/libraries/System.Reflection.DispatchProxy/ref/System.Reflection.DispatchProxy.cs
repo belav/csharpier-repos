@@ -9,6 +9,7 @@ namespace System.Reflection
     public abstract partial class DispatchProxy
     {
         protected DispatchProxy() { }
+
         public static T Create<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
@@ -22,6 +23,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         protected abstract object? Invoke(
             System.Reflection.MethodInfo? targetMethod,
             object?[]? args

@@ -23,6 +23,7 @@ namespace System.ComponentModel.Composition.Hosting
     {
         // narrow lock
         private readonly Lock? _stateLock;
+
         // wide lock
         private static readonly object _compositionLock = new object();
 

@@ -133,6 +133,7 @@ namespace Castle.DynamicProxy.Tests
             Assert.IsNotNull(type.Namespace);
             Assert.AreEqual("Castle.Proxies", type.Namespace);
         }
+
         [Test]
         public void DYNPROXY_99_InterfaceProxyWithoutTargetHasNamespace()
         {

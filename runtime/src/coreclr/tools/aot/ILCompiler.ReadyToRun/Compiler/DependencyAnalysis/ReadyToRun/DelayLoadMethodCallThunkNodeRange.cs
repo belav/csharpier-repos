@@ -24,17 +24,21 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public override bool StaticDependenciesAreComputed => true;
         public int Offset => 0;
         public bool RepresentsIndirectionCell => false;
+
         public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
             NodeFactory context
         ) => null;
+
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(
             NodeFactory context
         ) => null;
+
         public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
             List<DependencyNodeCore<NodeFactory>> markedNodes,
             int firstNode,
             NodeFactory context
         ) => null;
+
         protected override string GetName(NodeFactory context) =>
             "DelayLoadMethodCallThunkNodeRange";
 

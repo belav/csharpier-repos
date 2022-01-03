@@ -2,6 +2,7 @@ using AutoMapper.Execution;
 using AutoMapper.Internal;
 using System.ComponentModel;
 using System.Linq.Expressions;
+
 namespace AutoMapper.QueryableExtensions.Impl
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -12,6 +13,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             TypeMap memberTypeMap,
             Expression resolvedSource
         ) => memberTypeMap?.CustomMapExpression != null;
+
         public Expression Project(
             IGlobalConfiguration configuration,
             MemberMap memberMap,

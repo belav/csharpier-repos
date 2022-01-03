@@ -1663,6 +1663,7 @@ namespace System.Xml.Tests
                 }
                 Assert.True(utils.CompareReader("<Root><![CDATA[<![CDATA[]]></Root>"));
             }
+
             // CData state machine
             [Theory]
             [XmlWriterInlineData]
@@ -3927,6 +3928,7 @@ namespace System.Xml.Tests
                     value.Add("string", "123");
                 }
             }
+
             private object[] _dates = new object[]
             {
                 new DateTimeOffset(

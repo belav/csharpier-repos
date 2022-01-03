@@ -9,6 +9,7 @@ namespace System.DirectoryServices
             DirectoryServicesPermissionAccess permissionAccess,
             string? path
         ) { }
+
         public string? Path { get; }
         public DirectoryServicesPermissionAccess PermissionAccess { get; }
     }

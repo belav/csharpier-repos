@@ -1343,6 +1343,7 @@ class Class : ContainsStatic
 
             comp.VerifyDiagnostics();
         }
+
         [Fact]
         public void MultiLevelPropertyImplementation()
         {

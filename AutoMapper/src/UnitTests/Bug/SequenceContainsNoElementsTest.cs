@@ -32,10 +32,12 @@ namespace AutoMapper.UnitTests.Bug
     public class People : IEnumerable
     {
         private readonly Person[] people;
+
         public People(Person[] people)
         {
             this.people = people;
         }
+
         public IEnumerator GetEnumerator() => people.GetEnumerator();
     }
 

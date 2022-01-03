@@ -4,6 +4,7 @@
 
 //COMMAND LINE: csc /nologo /optimize+ /debug- /w:0 bug.cs
 using System;
+
 public struct AA
 {
     static int Main()

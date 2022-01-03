@@ -73,6 +73,7 @@ namespace System.Runtime.Serialization
         }
 
         internal static string AddDefaultSchemaMethodName = "AddDefaultSchema";
+
         public static void AddDefaultSchema(XmlSchemaSet schemas, XmlQualifiedName typeQName)
         {
             if (schemas == null)

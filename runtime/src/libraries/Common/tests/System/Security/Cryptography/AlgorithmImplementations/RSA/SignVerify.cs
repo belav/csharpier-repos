@@ -18,12 +18,14 @@ namespace System.Security.Cryptography.Rsa.Tests
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
         ) => rsa.SignData(data, hashAlgorithm, padding);
+
         protected override byte[] SignHash(
             RSA rsa,
             byte[] hash,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
         ) => rsa.SignHash(hash, hashAlgorithm, padding);
+
         protected override bool VerifyData(
             RSA rsa,
             byte[] data,
@@ -31,6 +33,7 @@ namespace System.Security.Cryptography.Rsa.Tests
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding
         ) => rsa.VerifyData(data, signature, hashAlgorithm, padding);
+
         protected override bool VerifyHash(
             RSA rsa,
             byte[] hash,

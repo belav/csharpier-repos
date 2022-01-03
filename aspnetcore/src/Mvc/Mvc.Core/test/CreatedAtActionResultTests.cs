@@ -79,6 +79,7 @@ public class CreatedAtActionResultTests
 
         return new ActionContext(httpContext, routeData, new ActionDescriptor());
     }
+
     private static HttpContext GetHttpContext()
     {
         var httpContext = new DefaultHttpContext();

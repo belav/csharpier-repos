@@ -3,6 +3,7 @@
 //
 
 using System;
+
 class test1
 {
     public struct VT
@@ -10,7 +11,9 @@ class test1
         public short a1;
         public double a5;
     }
+
     static float[,,] arr3d = new float[5, 20, 4];
+
     public static double Func(VT vt, short a4, double a6)
     {
         arr3d[4, 0, 3] = 16.0F;
@@ -30,6 +33,7 @@ class test1
         );
         return retval;
     }
+
     public static int Main()
     {
         VT vt = new VT();

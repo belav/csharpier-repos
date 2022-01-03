@@ -555,6 +555,7 @@ namespace System.Data.OleDb
                 }
             }
         }
+
         private void CloseInternalParameters()
         {
             Debug.Assert(null != _connection, "no connection, CloseInternalParameters");

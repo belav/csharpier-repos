@@ -148,6 +148,7 @@ namespace System.Net.Test.Common
             return http3Options;
         }
     }
+
     public class Http3Options : GenericLoopbackOptions
     {
         public int MaxUnidirectionalStreams { get; set; }

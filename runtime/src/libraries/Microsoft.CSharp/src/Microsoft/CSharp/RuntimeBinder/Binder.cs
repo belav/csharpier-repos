@@ -18,6 +18,7 @@ namespace Microsoft.CSharp.RuntimeBinder
     {
         internal const string TrimmerWarning =
             "Using dynamic types might cause types or members to be removed by trimmer.";
+
         //////////////////////////////////////////////////////////////////////
 
         /// <summary>

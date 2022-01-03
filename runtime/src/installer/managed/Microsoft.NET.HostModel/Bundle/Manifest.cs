@@ -67,10 +67,12 @@ namespace Microsoft.NET.HostModel.Bundle
         // with path-names so that the AppHost can use it in
         // extraction path.
         public string BundleID { get; private set; }
+
         //Same as Path.GetRandomFileName
         private const int BundleIdLength = 12;
         private SHA256 bundleHash = SHA256.Create();
         public readonly uint BundleMajorVersion;
+
         // The Minor version is currently unused, and is always zero
         public const uint BundleMinorVersion = 0;
         private FileEntry DepsJsonEntry;

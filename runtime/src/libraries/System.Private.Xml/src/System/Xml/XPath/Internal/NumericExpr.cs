@@ -36,6 +36,7 @@ namespace MS.Internal.Xml.XPath
             _opnd1 = opnd1;
             _opnd2 = opnd2;
         }
+
         private NumericExpr(NumericExpr other) : base(other)
         {
             _op = other._op;
@@ -57,6 +58,7 @@ namespace MS.Internal.Xml.XPath
                 XmlConvert.ToXPathDouble(_opnd2.Evaluate(nodeIterator))
             );
         }
+
         private static double GetValue(Operator.Op op, double n1, double n2)
         {
             Debug.Assert(

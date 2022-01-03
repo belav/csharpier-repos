@@ -21,6 +21,7 @@ internal class Sample1
         else
             return y;
     }
+
     private static int Main(string[] args)
     {
         bool failed = false;

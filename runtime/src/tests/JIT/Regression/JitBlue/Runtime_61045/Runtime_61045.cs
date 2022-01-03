@@ -17,6 +17,7 @@ using System.Runtime.CompilerServices;
 public class Runtime_61045
 {
     public static byte[] s_1;
+
     public static int Main()
     {
         try

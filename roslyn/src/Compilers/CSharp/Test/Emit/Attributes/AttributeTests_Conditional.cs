@@ -126,6 +126,7 @@ public class Test
     public static void Main() {}
 }
 ";
+
         private void CommonSourceValidatorForCondAttrType(ModuleSymbol module)
         {
             CommonValidatorForCondAttrType(module, isFromSource: true);

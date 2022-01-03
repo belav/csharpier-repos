@@ -15,10 +15,12 @@ namespace SinCalc
             private object _term;
 
             public double fact;
+
             public double get_powX()
             {
                 return _powX;
             }
+
             public void set_powX(double val)
             {
                 _powX = val;

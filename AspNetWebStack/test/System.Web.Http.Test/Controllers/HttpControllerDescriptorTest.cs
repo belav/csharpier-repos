@@ -307,6 +307,7 @@ namespace System.Web.Http
         class VerifyControllerDescriptorAttribute : Attribute, IControllerConfiguration
         {
             public static Type ControllerType;
+
             public void Initialize(
                 HttpControllerSettings settings,
                 HttpControllerDescriptor controllerDescriptor

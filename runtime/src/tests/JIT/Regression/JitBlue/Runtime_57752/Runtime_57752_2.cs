@@ -16,6 +16,7 @@
 public class Runtime_57752_2
 {
     internal static ulong s_46;
+
     public static int Main()
     {
         M53(ref s_46, ref s_46);

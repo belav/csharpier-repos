@@ -106,6 +106,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected abstract ParameterListSyntax GetParameterList();
 
         protected abstract bool AllowRefOrOut { get; }
+
 #nullable disable
 
         internal sealed override void AfterAddingTypeMembersChecks(

@@ -38,6 +38,7 @@ internal class AA
     {
         return arg;
     }
+
     public static double call_target_ref(ref double arg)
     {
         return arg;

@@ -93,6 +93,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     // <Code>
 
     public delegate void MyDel(int i);
+
     public class Test
     {
         public int flag = 0;
@@ -286,6 +287,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public class Test
     {
         public int Field;
+
         public static explicit operator Test(int[] i)
         {
             return new Test() { Field = 10 };
@@ -357,6 +359,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public struct Test
     {
         public int Field;
+
         public static Test op_Addition<T>(Test p1, T p2)
         {
             return new Test() { Field = p1.Field };
@@ -417,6 +420,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public class Test
     {
         public int Field;
+
         public static dynamic operator >(Test p1, dynamic p2)
         {
             return 0;
@@ -478,6 +482,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
         }
 
         public int Field;
+
         public static dynamic operator >=(Test p1, dynamic p2)
         {
             return 0;
@@ -618,6 +623,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public class Test : Base
     {
         public int Field;
+
         public static Test operator *(Test t, dynamic p1)
         {
             p1 = new Test() { Field = 10 };
@@ -672,6 +678,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public class Test
     {
         public int Field;
+
         public static bool operator true(Test p1)
         {
             return true;
@@ -786,6 +793,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public class Test : Base<Test>
     {
         public int Field;
+
         public static bool operator !(Test t)
         {
             return true;
@@ -830,6 +838,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public class Test : Base<Test>
     {
         public int Field;
+
         public static Test operator ++(Test t)
         {
             return new Test() { Field = t.Field + 1 };
@@ -877,6 +886,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     {
         public int Field;
         public dynamic d = default(dynamic);
+
         public static Test operator ~(Test t)
         {
             return new Test() { Field = -t.Field };
@@ -922,6 +932,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.SpecialNames.opspecial0
     public partial class Test
     {
         public int Field;
+
         public static Test operator >>(Test t, int i)
         {
             return new Test() { Field = i + t.Field };

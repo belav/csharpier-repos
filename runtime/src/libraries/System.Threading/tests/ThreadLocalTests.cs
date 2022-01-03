@@ -224,6 +224,7 @@ namespace System.Threading.Tests
         {
             private object _foo;
             private WeakReference _wFoo;
+
             [MethodImplAttribute(MethodImplOptions.NoInlining)]
             private void Method()
             {
@@ -569,10 +570,12 @@ namespace System.Threading.Tests
         private class SetMreOnFinalize
         {
             private ManualResetEventSlim _mres;
+
             public SetMreOnFinalize(ManualResetEventSlim mres)
             {
                 _mres = mres;
             }
+
             ~SetMreOnFinalize()
             {
                 _mres.Set();

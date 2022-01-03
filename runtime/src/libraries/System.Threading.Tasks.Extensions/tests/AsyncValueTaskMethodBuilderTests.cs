@@ -846,6 +846,7 @@ namespace System.Threading.Tasks.Tests
         private struct DelegateStateMachine : IAsyncStateMachine
         {
             internal Action MoveNextDelegate;
+
             public void MoveNext() => MoveNextDelegate?.Invoke();
 
             public void SetStateMachine(IAsyncStateMachine stateMachine) { }

@@ -197,10 +197,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
 
             NodeFactory _factory;
+
             public bool Equals(MethodGCInfoNode a, MethodGCInfoNode b)
             {
                 return a.EncodeDataCore(_factory).SequenceEqual(b.EncodeDataCore(_factory));
             }
+
             public int GetHashCode(MethodGCInfoNode node)
             {
                 HashCode hashcode = new HashCode();

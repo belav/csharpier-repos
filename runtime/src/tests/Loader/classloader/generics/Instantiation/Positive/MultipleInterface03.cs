@@ -19,6 +19,7 @@ class GenInt : IGenX<int[]>, IGenY<int>
     {
         return "IGenX.m";
     }
+
     string IGenY<int>.m(int[] tArr)
     {
         return "IGenY.m";
@@ -31,6 +32,7 @@ class GenString : IGenX<string[]>, IGenY<string>
     {
         return "IGenX.m";
     }
+
     string IGenY<string>.m(string[] tArr)
     {
         return "IGenY.m";
@@ -41,6 +43,7 @@ public class Test_MultipleInterface03
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

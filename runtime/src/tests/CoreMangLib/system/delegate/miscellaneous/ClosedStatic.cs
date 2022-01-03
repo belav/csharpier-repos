@@ -11,10 +11,12 @@ class Program
     {
         this.scale = scale;
     }
+
     public static decimal getfunc(Program prog, int constituent)
     {
         return new decimal(constituent / prog.scale);
     }
+
     static int Main(string[] args)
     {
         int result = -1;

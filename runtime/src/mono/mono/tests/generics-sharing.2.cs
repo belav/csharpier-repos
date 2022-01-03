@@ -7,7 +7,9 @@ namespace GenericSharingTest
     public delegate int IntVoidDelegate();
 
     public class ClassA { }
+
     public class ClassB { }
+
     public class ClassC { }
 
     public class GenExc<T> : Exception { }

@@ -18,6 +18,7 @@ namespace Microsoft.AspNetCore.Components
             bool isInvariantCulture,
             string format
         ) { }
+
         public string ChangeAttribute
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -50,6 +51,7 @@ namespace Microsoft.AspNetCore.Components
         }
     }
 }
+
 namespace Microsoft.AspNetCore.Components.Forms
 {
     public static partial class EditContextFieldClassExtensions
@@ -61,6 +63,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         {
             throw null;
         }
+
         public static string FieldCssClass<TField>(
             this Microsoft.AspNetCore.Components.Forms.EditContext editContext,
             System.Linq.Expressions.Expression<System.Func<TField>> accessor
@@ -69,9 +72,11 @@ namespace Microsoft.AspNetCore.Components.Forms
             throw null;
         }
     }
+
     public partial class EditForm : Microsoft.AspNetCore.Components.ComponentBase
     {
         public EditForm() { }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute(CaptureUnmatchedValues = true)]
         public System.Collections.Generic.IReadOnlyDictionary<string, object> AdditionalAttributes
         {
@@ -80,6 +85,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public Microsoft.AspNetCore.Components.RenderFragment<Microsoft.AspNetCore.Components.Forms.EditContext> ChildContent
         {
@@ -88,6 +94,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public Microsoft.AspNetCore.Components.Forms.EditContext EditContext
         {
@@ -96,6 +103,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public object Model
         {
@@ -104,6 +112,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> OnInvalidSubmit
         {
@@ -112,6 +121,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> OnSubmit
         {
@@ -120,6 +130,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Forms.EditContext> OnValidSubmit
         {
@@ -128,14 +139,18 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
         ) { }
+
         protected override void OnParametersSet() { }
     }
+
     public abstract partial class InputBase<TValue> : Microsoft.AspNetCore.Components.ComponentBase
     {
         protected InputBase() { }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute(CaptureUnmatchedValues = true)]
         public System.Collections.Generic.IReadOnlyDictionary<string, object> AdditionalAttributes
         {
@@ -172,6 +187,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public TValue Value
         {
@@ -180,6 +196,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public Microsoft.AspNetCore.Components.EventCallback<TValue> ValueChanged
         {
@@ -188,6 +205,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public System.Linq.Expressions.Expression<System.Func<TValue>> ValueExpression
         {
@@ -196,28 +214,34 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         protected virtual string FormatValueAsString(TValue value)
         {
             throw null;
         }
+
         public override System.Threading.Tasks.Task SetParametersAsync(
             Microsoft.AspNetCore.Components.ParameterView parameters
         )
         {
             throw null;
         }
+
         protected abstract bool TryParseValueFromString(
             string value,
             out TValue result,
             out string validationErrorMessage
         );
     }
+
     public partial class InputCheckbox : Microsoft.AspNetCore.Components.Forms.InputBase<bool>
     {
         public InputCheckbox() { }
+
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
         ) { }
+
         protected override bool TryParseValueFromString(
             string value,
             out bool result,
@@ -227,9 +251,11 @@ namespace Microsoft.AspNetCore.Components.Forms
             throw null;
         }
     }
+
     public partial class InputDate<TValue> : Microsoft.AspNetCore.Components.Forms.InputBase<TValue>
     {
         public InputDate() { }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public string ParsingErrorMessage
         {
@@ -238,13 +264,16 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
         ) { }
+
         protected override string FormatValueAsString(TValue value)
         {
             throw null;
         }
+
         protected override bool TryParseValueFromString(
             string value,
             out TValue result,
@@ -254,10 +283,12 @@ namespace Microsoft.AspNetCore.Components.Forms
             throw null;
         }
     }
+
     public partial class InputNumber<TValue>
         : Microsoft.AspNetCore.Components.Forms.InputBase<TValue>
     {
         public InputNumber() { }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public string ParsingErrorMessage
         {
@@ -266,13 +297,16 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
         ) { }
+
         protected override string FormatValueAsString(TValue value)
         {
             throw null;
         }
+
         protected override bool TryParseValueFromString(
             string value,
             out TValue result,
@@ -282,10 +316,12 @@ namespace Microsoft.AspNetCore.Components.Forms
             throw null;
         }
     }
+
     public partial class InputSelect<TValue>
         : Microsoft.AspNetCore.Components.Forms.InputBase<TValue>
     {
         public InputSelect() { }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public Microsoft.AspNetCore.Components.RenderFragment ChildContent
         {
@@ -294,9 +330,11 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
         ) { }
+
         protected override bool TryParseValueFromString(
             string value,
             out TValue result,
@@ -306,12 +344,15 @@ namespace Microsoft.AspNetCore.Components.Forms
             throw null;
         }
     }
+
     public partial class InputText : Microsoft.AspNetCore.Components.Forms.InputBase<string>
     {
         public InputText() { }
+
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
         ) { }
+
         protected override bool TryParseValueFromString(
             string value,
             out string result,
@@ -321,12 +362,15 @@ namespace Microsoft.AspNetCore.Components.Forms
             throw null;
         }
     }
+
     public partial class InputTextArea : Microsoft.AspNetCore.Components.Forms.InputBase<string>
     {
         public InputTextArea() { }
+
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
         ) { }
+
         protected override bool TryParseValueFromString(
             string value,
             out string result,
@@ -336,11 +380,13 @@ namespace Microsoft.AspNetCore.Components.Forms
             throw null;
         }
     }
+
     public partial class ValidationMessage<TValue>
         : Microsoft.AspNetCore.Components.ComponentBase,
           System.IDisposable
     {
         public ValidationMessage() { }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute(CaptureUnmatchedValues = true)]
         public System.Collections.Generic.IReadOnlyDictionary<string, object> AdditionalAttributes
         {
@@ -349,6 +395,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public System.Linq.Expressions.Expression<System.Func<TValue>> For
         {
@@ -357,18 +404,24 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
         ) { }
+
         protected virtual void Dispose(bool disposing) { }
+
         protected override void OnParametersSet() { }
+
         void System.IDisposable.Dispose() { }
     }
+
     public partial class ValidationSummary
         : Microsoft.AspNetCore.Components.ComponentBase,
           System.IDisposable
     {
         public ValidationSummary() { }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute(CaptureUnmatchedValues = true)]
         public System.Collections.Generic.IReadOnlyDictionary<string, object> AdditionalAttributes
         {
@@ -377,19 +430,25 @@ namespace Microsoft.AspNetCore.Components.Forms
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
         ) { }
+
         protected virtual void Dispose(bool disposing) { }
+
         protected override void OnParametersSet() { }
+
         void System.IDisposable.Dispose() { }
     }
 }
+
 namespace Microsoft.AspNetCore.Components.RenderTree
 {
     public sealed partial class WebEventDescriptor
     {
         public WebEventDescriptor() { }
+
         public int BrowserRendererId
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -420,11 +479,13 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         }
     }
 }
+
 namespace Microsoft.AspNetCore.Components.Routing
 {
     public partial class NavLink : Microsoft.AspNetCore.Components.ComponentBase, System.IDisposable
     {
         public NavLink() { }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public string ActiveClass
         {
@@ -433,6 +494,7 @@ namespace Microsoft.AspNetCore.Components.Routing
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute(CaptureUnmatchedValues = true)]
         public System.Collections.Generic.IReadOnlyDictionary<string, object> AdditionalAttributes
         {
@@ -441,6 +503,7 @@ namespace Microsoft.AspNetCore.Components.Routing
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public Microsoft.AspNetCore.Components.RenderFragment ChildContent
         {
@@ -456,6 +519,7 @@ namespace Microsoft.AspNetCore.Components.Routing
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         [Microsoft.AspNetCore.Components.ParameterAttribute]
         public Microsoft.AspNetCore.Components.Routing.NavLinkMatch Match
         {
@@ -464,19 +528,25 @@ namespace Microsoft.AspNetCore.Components.Routing
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
             set { }
         }
+
         protected override void BuildRenderTree(
             Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder
         ) { }
+
         public void Dispose() { }
+
         protected override void OnInitialized() { }
+
         protected override void OnParametersSet() { }
     }
+
     public enum NavLinkMatch
     {
         Prefix = 0,
         All = 1,
     }
 }
+
 namespace Microsoft.AspNetCore.Components.Web
 {
     [Microsoft.AspNetCore.Components.BindElementAttribute("select", null, "value", "onchange")]
@@ -596,9 +666,11 @@ namespace Microsoft.AspNetCore.Components.Web
     public static partial class BindAttributes
     {
     }
+
     public partial class ClipboardEventArgs : System.EventArgs
     {
         public ClipboardEventArgs() { }
+
         public string Type
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -607,9 +679,11 @@ namespace Microsoft.AspNetCore.Components.Web
             set { }
         }
     }
+
     public partial class DataTransfer
     {
         public DataTransfer() { }
+
         public string DropEffect
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -646,9 +720,11 @@ namespace Microsoft.AspNetCore.Components.Web
             set { }
         }
     }
+
     public partial class DataTransferItem
     {
         public DataTransferItem() { }
+
         public string Kind
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -664,9 +740,11 @@ namespace Microsoft.AspNetCore.Components.Web
             set { }
         }
     }
+
     public partial class DragEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs
     {
         public DragEventArgs() { }
+
         public Microsoft.AspNetCore.Components.Web.DataTransfer DataTransfer
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -675,9 +753,11 @@ namespace Microsoft.AspNetCore.Components.Web
             set { }
         }
     }
+
     public partial class ErrorEventArgs : System.EventArgs
     {
         public ErrorEventArgs() { }
+
         public int Colno
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -714,6 +794,7 @@ namespace Microsoft.AspNetCore.Components.Web
             set { }
         }
     }
+
     [Microsoft.AspNetCore.Components.EventHandlerAttribute(
         "onabort",
         typeof(Microsoft.AspNetCore.Components.Web.ProgressEventArgs),
@@ -1263,9 +1344,11 @@ namespace Microsoft.AspNetCore.Components.Web
     public static partial class EventHandlers
     {
     }
+
     public partial class FocusEventArgs : System.EventArgs
     {
         public FocusEventArgs() { }
+
         public string Type
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -1274,9 +1357,11 @@ namespace Microsoft.AspNetCore.Components.Web
             set { }
         }
     }
+
     public partial class KeyboardEventArgs : System.EventArgs
     {
         public KeyboardEventArgs() { }
+
         public bool AltKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -1341,9 +1426,11 @@ namespace Microsoft.AspNetCore.Components.Web
             set { }
         }
     }
+
     public partial class MouseEventArgs : System.EventArgs
     {
         public MouseEventArgs() { }
+
         public bool AltKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -1429,9 +1516,11 @@ namespace Microsoft.AspNetCore.Components.Web
             set { }
         }
     }
+
     public partial class PointerEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs
     {
         public PointerEventArgs() { }
+
         public float Height
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -1489,9 +1578,11 @@ namespace Microsoft.AspNetCore.Components.Web
             set { }
         }
     }
+
     public partial class ProgressEventArgs : System.EventArgs
     {
         public ProgressEventArgs() { }
+
         public bool LengthComputable
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -1521,9 +1612,11 @@ namespace Microsoft.AspNetCore.Components.Web
             set { }
         }
     }
+
     public partial class TouchEventArgs : System.EventArgs
     {
         public TouchEventArgs() { }
+
         public bool AltKey
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -1588,9 +1681,11 @@ namespace Microsoft.AspNetCore.Components.Web
             set { }
         }
     }
+
     public partial class TouchPoint
     {
         public TouchPoint() { }
+
         public double ClientX
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]
@@ -1641,6 +1736,7 @@ namespace Microsoft.AspNetCore.Components.Web
             set { }
         }
     }
+
     public static partial class WebEventCallbackFactoryEventArgsExtensions
     {
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> Create(
@@ -1651,6 +1747,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.DragEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1659,6 +1756,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ErrorEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1667,6 +1765,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.FocusEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1675,6 +1774,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.KeyboardEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1683,6 +1783,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1691,6 +1792,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1699,6 +1801,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ProgressEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1707,6 +1810,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.TouchEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1715,6 +1819,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.WheelEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1723,6 +1828,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1734,6 +1840,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.DragEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1745,6 +1852,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ErrorEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1756,6 +1864,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.FocusEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1767,6 +1876,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.KeyboardEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1778,6 +1888,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1789,6 +1900,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.PointerEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1800,6 +1912,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.ProgressEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1811,6 +1924,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.TouchEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1822,6 +1936,7 @@ namespace Microsoft.AspNetCore.Components.Web
         {
             throw null;
         }
+
         public static Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.WheelEventArgs> Create(
             this Microsoft.AspNetCore.Components.EventCallbackFactory factory,
             object receiver,
@@ -1834,6 +1949,7 @@ namespace Microsoft.AspNetCore.Components.Web
             throw null;
         }
     }
+
     public static partial class WebRenderTreeBuilderExtensions
     {
         public static void AddEventPreventDefaultAttribute(
@@ -1842,6 +1958,7 @@ namespace Microsoft.AspNetCore.Components.Web
             string eventName,
             bool value
         ) { }
+
         public static void AddEventStopPropagationAttribute(
             this Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder,
             int sequence,
@@ -1849,9 +1966,11 @@ namespace Microsoft.AspNetCore.Components.Web
             bool value
         ) { }
     }
+
     public partial class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs
     {
         public WheelEventArgs() { }
+
         public long DeltaMode
         {
             [System.Runtime.CompilerServices.CompilerGeneratedAttribute]

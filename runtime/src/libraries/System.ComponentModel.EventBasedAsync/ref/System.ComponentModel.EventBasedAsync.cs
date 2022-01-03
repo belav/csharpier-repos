@@ -10,6 +10,7 @@ namespace System.ComponentModel
     {
         public AsyncCompletedEventArgs(System.Exception? error, bool cancelled, object? userState)
         { }
+
         public bool Cancelled
         {
             get { throw null; }
@@ -22,15 +23,19 @@ namespace System.ComponentModel
         {
             get { throw null; }
         }
+
         protected void RaiseExceptionIfNecessary() { }
     }
+
     public delegate void AsyncCompletedEventHandler(
         object? sender,
         System.ComponentModel.AsyncCompletedEventArgs e
     );
+
     public sealed partial class AsyncOperation
     {
         internal AsyncOperation() { }
+
         public System.Threading.SynchronizationContext SynchronizationContext
         {
             get { throw null; }
@@ -39,11 +44,16 @@ namespace System.ComponentModel
         {
             get { throw null; }
         }
+
         ~AsyncOperation() { }
+
         public void OperationCompleted() { }
+
         public void Post(System.Threading.SendOrPostCallback d, object? arg) { }
+
         public void PostOperationCompleted(System.Threading.SendOrPostCallback d, object? arg) { }
     }
+
     public static partial class AsyncOperationManager
     {
         [System.ComponentModel.EditorBrowsableAttribute(
@@ -54,6 +64,7 @@ namespace System.ComponentModel
             get { throw null; }
             set { }
         }
+
         public static System.ComponentModel.AsyncOperation CreateOperation(
             object? userSuppliedState
         )
@@ -61,9 +72,11 @@ namespace System.ComponentModel
             throw null;
         }
     }
+
     public partial class BackgroundWorker : System.ComponentModel.Component
     {
         public BackgroundWorker() { }
+
         public bool CancellationPending
         {
             get { throw null; }
@@ -97,23 +110,34 @@ namespace System.ComponentModel
             add { }
             remove { }
         }
+
         public void CancelAsync() { }
+
         protected override void Dispose(bool disposing) { }
+
         protected virtual void OnDoWork(System.ComponentModel.DoWorkEventArgs e) { }
+
         protected virtual void OnProgressChanged(
             System.ComponentModel.ProgressChangedEventArgs e
         ) { }
+
         protected virtual void OnRunWorkerCompleted(
             System.ComponentModel.RunWorkerCompletedEventArgs e
         ) { }
+
         public void ReportProgress(int percentProgress) { }
+
         public void ReportProgress(int percentProgress, object? userState) { }
+
         public void RunWorkerAsync() { }
+
         public void RunWorkerAsync(object? argument) { }
     }
+
     public partial class DoWorkEventArgs : System.ComponentModel.CancelEventArgs
     {
         public DoWorkEventArgs(object? argument) { }
+
         public object? Argument
         {
             get { throw null; }
@@ -124,13 +148,16 @@ namespace System.ComponentModel
             set { }
         }
     }
+
     public delegate void DoWorkEventHandler(
         object? sender,
         System.ComponentModel.DoWorkEventArgs e
     );
+
     public partial class ProgressChangedEventArgs : System.EventArgs
     {
         public ProgressChangedEventArgs(int progressPercentage, object? userState) { }
+
         public int ProgressPercentage
         {
             get { throw null; }
@@ -140,18 +167,22 @@ namespace System.ComponentModel
             get { throw null; }
         }
     }
+
     public delegate void ProgressChangedEventHandler(
         object? sender,
         System.ComponentModel.ProgressChangedEventArgs e
     );
+
     public partial class RunWorkerCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
         public RunWorkerCompletedEventArgs(object? result, System.Exception? error, bool cancelled)
             : base(default(System.Exception), default(bool), default(object)) { }
+
         public object? Result
         {
             get { throw null; }
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -160,6 +191,7 @@ namespace System.ComponentModel
             get { throw null; }
         }
     }
+
     public delegate void RunWorkerCompletedEventHandler(
         object? sender,
         System.ComponentModel.RunWorkerCompletedEventArgs e

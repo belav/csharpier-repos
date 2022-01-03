@@ -4,7 +4,9 @@
 using System;
 
 public class Base { }
+
 public class Sub : Base { }
+
 public struct GVal<T> { }
 
 public class TestClass
@@ -23,6 +25,7 @@ public class TestClass
             Console.WriteLine("Test Failed at location: {0} @ count {1} ", location, iTestCount);
         }
     }
+
     public static Type LoadTypeInternal(string testType)
     {
         switch (testType)

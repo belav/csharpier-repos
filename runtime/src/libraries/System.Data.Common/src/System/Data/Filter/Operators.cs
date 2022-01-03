@@ -31,6 +31,7 @@ namespace System.Data
         internal const int GreaterOrEqual = 10; // >=
         internal const int LessOrEqual = 11; // <=
         internal const int NotEqual = 12; // <>
+
         /* End of Comparison (relational) operators */
 
         internal const int Is = 13;
@@ -41,8 +42,10 @@ namespace System.Data
         internal const int Minus = 16; // -
         internal const int Multiply = 17; // *
         internal const int Divide = 18; // /
+
         //internal final static int IntegerDiv = 19;    // \
         internal const int Modulo = 20; // %
+
         //internal final static int Exponent = 21;    // **
         /* End of arithmetic operators */
 
@@ -51,11 +54,13 @@ namespace System.Data
         internal const int BitwiseOr = 23; // |
         internal const int BitwiseXor = 24; // ^
         internal const int BitwiseNot = 25; // ~
+
         /* End of bitwise operators */
 
         /* Beginning of logical operators */
         internal const int And = 26; // AND
         internal const int Or = 27; // OR
+
         // internal final static int Not is in the unary ops
         /* End of logical operators */
 
@@ -81,10 +86,12 @@ namespace System.Data
         {
             return (op == Plus || op == Minus || op == Multiply || op == Divide || op == Modulo);
         }
+
         internal static bool IsLogical(int op)
         {
             return (op == And || op == Or || op == Not || op == Is || op == IsNot);
         }
+
         internal static bool IsRelational(int op)
         {
             return ((EqualTo <= op) && (op <= NotEqual));

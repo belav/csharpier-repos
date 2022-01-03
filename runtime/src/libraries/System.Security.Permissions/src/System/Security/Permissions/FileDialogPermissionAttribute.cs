@@ -15,8 +15,10 @@ namespace System.Security.Permissions
     {
         public FileDialogPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
         { }
+
         public bool Open { get; set; }
         public bool Save { get; set; }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);

@@ -22,14 +22,17 @@ namespace System.Collections.Concurrent
 
         /// <summary>The array of items in this queue.  Each slot contains the item in that slot and its "sequence number".</summary>
         internal readonly Slot[] _slots; // SOS's ThreadPool command depends on this name
+
         /// <summary>Mask for quickly accessing a position within the queue's array.</summary>
         internal readonly int _slotsMask;
+
         /// <summary>The head and tail positions, with padding to help avoid false sharing contention.</summary>
         /// <remarks>Dequeuing happens from the head, enqueuing happens at the tail.</remarks>
         internal PaddedHeadAndTail _headAndTail; // mutable struct: do not make this readonly
 
         /// <summary>Indicates whether the segment has been marked such that dequeues don't overwrite the removed data.</summary>
         internal bool _preservedForObservation;
+
         /// <summary>Indicates whether the segment has been marked such that no additional items may be enqueued.</summary>
         internal bool _frozenForEnqueues;
 #pragma warning disable 0649 // some builds don't assign to this field
@@ -352,6 +355,7 @@ namespace System.Collections.Concurrent
         {
             /// <summary>The item.</summary>
             public T? Item; // SOS's ThreadPool command depends on this being at the beginning of the struct when T is a reference type
+
             /// <summary>The sequence number for this slot, used to synchronize between enqueuers and dequeuers.</summary>
             public int SequenceNumber;
         }
@@ -364,6 +368,7 @@ namespace System.Collections.Concurrent
     {
         [FieldOffset(1 * Internal.PaddingHelpers.CACHE_LINE_SIZE)]
         public int Head;
+
         [FieldOffset(2 * Internal.PaddingHelpers.CACHE_LINE_SIZE)]
         public int Tail;
     }

@@ -12,10 +12,12 @@ namespace AutoMapper.UnitTests
         class Source
         {
         }
+
         class Destination
         {
             public int Value { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 c =>
@@ -24,12 +26,15 @@ namespace AutoMapper.UnitTests
                     c.CreateMap<Source, Destination>();
                 }
             );
+
         [Fact]
         public void It_should_be_used() => Map<Destination>(new Source()).Value.ShouldBe(12);
     }
+
     public static class BarExtensions
     {
         public static int GetValue(this object obj) => 12;
+
         public static string GetSimpleName(
             this When_null_is_passed_to_an_extension_method.Bar source
         )
@@ -230,9 +235,12 @@ namespace AutoMapper.UnitTests
         public class Source
         {
             public IEnumerable<int> Values { get; set; }
+
             public int OtherValue() => 42;
+
             public string StringValue;
         }
+
         public class Destination
         {
             public int ValuesCount { get; set; }
@@ -240,6 +248,7 @@ namespace AutoMapper.UnitTests
             public string StringValue;
             public string AnotherStringValue;
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(
                 cfg =>
@@ -249,6 +258,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap<Source, Destination>();
                 }
             );
+
         [Fact]
         public void Should_fail_validation()
         {

@@ -798,6 +798,7 @@ namespace Microsoft.Extensions.Caching.Memory
         private class TestKey
         {
             public override bool Equals(object obj) => true;
+
             public override int GetHashCode() => 0;
         }
     }

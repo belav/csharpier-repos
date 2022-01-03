@@ -298,6 +298,7 @@ namespace System.Net.Http
 
                 public override bool CanRead => true;
                 public override bool CanWrite => false;
+
                 public override ValueTask WriteAsync(
                     ReadOnlyMemory<byte> buffer,
                     CancellationToken cancellationToken
@@ -402,6 +403,7 @@ namespace System.Net.Http
 
                     public override bool CanRead => true;
                     public override bool CanWrite => false;
+
                     public override ValueTask WriteAsync(
                         ReadOnlyMemory<byte> buffer,
                         CancellationToken cancellationToken

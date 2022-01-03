@@ -89,6 +89,7 @@ namespace AutoMapper
         }
 #endif
     }
+
     public class DuplicateTypeMapConfigurationException : Exception
     {
         public TypeMapConfigErrors[] Errors { get; }
@@ -127,6 +128,7 @@ namespace AutoMapper
 
         public override string Message { get; }
     }
+
     public class AutoMapperConfigurationException : Exception
     {
         public TypeMapConfigErrors[] Errors { get; }

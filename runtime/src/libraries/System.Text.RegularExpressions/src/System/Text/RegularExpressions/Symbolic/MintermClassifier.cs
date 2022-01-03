@@ -25,6 +25,7 @@ namespace System.Text.RegularExpressions.Symbolic
 
         /// <summary>Array providing fast mapping from an ASCII character (the array index) to its corresponding minterm ID.</summary>
         private readonly int[] _ascii;
+
         /// <summary>A multi-terminal BDD for mapping any non-ASCII character to its associated minterm ID.</summary>
         /// <remarks>
         /// The use of a multi-terminal BDD here is an implementation detail.  Should we decide its important to optimize non-ASCII inputs further,

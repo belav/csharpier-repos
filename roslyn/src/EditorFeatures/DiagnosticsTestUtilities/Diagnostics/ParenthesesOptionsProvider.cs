@@ -15,6 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
     public sealed class ParenthesesOptionsProvider
     {
         private readonly string _language;
+
         public ParenthesesOptionsProvider(string language)
         {
             _language = language;

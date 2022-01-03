@@ -53,6 +53,7 @@ namespace VirtualStaticInterfaceMethodTestGen
                 this.CallInterfaceTypeInstantiation = CallInterfaceTypeInstantiation;
                 this.InterfaceImplementationApproach = InterfaceImplementationApproach;
             }
+
             public readonly string ScenarioName;
             public readonly string InterfaceReturnType;
             public readonly string InterfaceTypeGenericParams;
@@ -69,6 +70,7 @@ namespace VirtualStaticInterfaceMethodTestGen
             public readonly InterfaceImplementationApproach InterfaceImplementationApproach;
 
             public override string ToString() => ScenarioName;
+
             public static IEnumerable<TestScenario> GetScenarios()
             {
                 int scenarioIndex = 1;
@@ -274,6 +276,7 @@ namespace VirtualStaticInterfaceMethodTestGen
         {
             tw.WriteLine($".assembly extern {assemblyName} {{}}");
         }
+
         static void EmitAssemblyRecord(TextWriter tw, string assemblyName)
         {
             tw.WriteLine($".assembly {assemblyName} {{}}");
@@ -375,6 +378,7 @@ namespace VirtualStaticInterfaceMethodTestGen
                 return typeName;
             }
         }
+
         static void Main(string[] args)
         {
             int maxCases = Int32.MaxValue;

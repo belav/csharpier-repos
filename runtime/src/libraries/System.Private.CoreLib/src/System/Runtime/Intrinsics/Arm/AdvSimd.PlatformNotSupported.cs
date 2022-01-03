@@ -1039,6 +1039,7 @@ namespace System.Runtime.Intrinsics.Arm
             {
                 throw new PlatformNotSupportedException();
             }
+
             /// <summary>
             /// float64x2_t vrndpq_f64 (float64x2_t a)
             ///   A64: FRINTP Vd.2D, Vn.2D

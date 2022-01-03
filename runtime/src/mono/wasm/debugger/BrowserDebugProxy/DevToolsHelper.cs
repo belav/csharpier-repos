@@ -260,6 +260,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         public string StackId { get; private set; }
         public string Condition { get; private set; }
         public bool ConditionAlreadyEvaluatedWithError { get; set; }
+
         public static bool TryParseId(string stackId, out int id)
         {
             id = -1;
@@ -366,6 +367,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             new Dictionary<string, JObject>();
         public Dictionary<string, JObject> ObjectFields { get; } =
             new Dictionary<string, JObject>();
+
         public PerScopeCache(JArray objectValues)
         {
             foreach (var objectValue in objectValues)
@@ -373,6 +375,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 ObjectFields[objectValue["name"].Value<string>()] = objectValue.Value<JObject>();
             }
         }
+
         public PerScopeCache() { }
     }
 }

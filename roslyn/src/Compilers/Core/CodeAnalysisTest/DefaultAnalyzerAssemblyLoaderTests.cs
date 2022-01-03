@@ -25,6 +25,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
     public class AssemblyLoadTestFixtureCollection : ICollectionFixture<AssemblyLoadTestFixture>
     {
         public const string Name = nameof(AssemblyLoadTestFixtureCollection);
+
         private AssemblyLoadTestFixtureCollection() { }
     }
 
@@ -38,6 +39,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
         private readonly ITestOutputHelper _output;
         private readonly AssemblyLoadTestFixture _testFixture;
+
         public DefaultAnalyzerAssemblyLoaderTests(
             ITestOutputHelper output,
             AssemblyLoadTestFixture testFixture

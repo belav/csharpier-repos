@@ -24,6 +24,7 @@ namespace MS.Internal.Xml.XPath
     {
         public PreSiblingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
             : base(qyInput, name, prefix, typeTest) { }
+
         private PreSiblingQuery(PreSiblingQuery other) : base(other) { }
 
         private static bool NotVisited(XPathNavigator nav, List<XPathNavigator> parentStk)
@@ -94,6 +95,7 @@ namespace MS.Internal.Xml.XPath
         {
             return new PreSiblingQuery(this);
         }
+
         public override QueryProps Properties
         {
             get { return base.Properties | QueryProps.Reverse; }

@@ -18,6 +18,7 @@ public class Test_GetTotalAllocatedBytes
             this.precise = precise;
             this.imprecise = imprecise;
         }
+
         public readonly long precise;
         public readonly long imprecise;
     }

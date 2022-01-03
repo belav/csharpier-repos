@@ -713,10 +713,12 @@ namespace System
         /// The current <see cref="ValueTuple{T1, T2, T3}"/> instance's first component.
         /// </summary>
         public T1 Item1;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3}"/> instance's second component.
         /// </summary>
         public T2 Item2;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3}"/> instance's third component.
         /// </summary>
@@ -934,14 +936,17 @@ namespace System
         /// The current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance's first component.
         /// </summary>
         public T1 Item1;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance's second component.
         /// </summary>
         public T2 Item2;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance's third component.
         /// </summary>
         public T3 Item3;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance's fourth component.
         /// </summary>
@@ -1184,18 +1189,22 @@ namespace System
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance's first component.
         /// </summary>
         public T1 Item1;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance's second component.
         /// </summary>
         public T2 Item2;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance's third component.
         /// </summary>
         public T3 Item3;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance's fourth component.
         /// </summary>
         public T4 Item4;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance's fifth component.
         /// </summary>
@@ -1457,22 +1466,27 @@ namespace System
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's first component.
         /// </summary>
         public T1 Item1;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's second component.
         /// </summary>
         public T2 Item2;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's third component.
         /// </summary>
         public T3 Item3;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's fourth component.
         /// </summary>
         public T4 Item4;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's fifth component.
         /// </summary>
         public T5 Item5;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's sixth component.
         /// </summary>
@@ -1754,26 +1768,32 @@ namespace System
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's first component.
         /// </summary>
         public T1 Item1;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's second component.
         /// </summary>
         public T2 Item2;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's third component.
         /// </summary>
         public T3 Item3;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's fourth component.
         /// </summary>
         public T4 Item4;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's fifth component.
         /// </summary>
         public T5 Item5;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's sixth component.
         /// </summary>
         public T6 Item6;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's seventh component.
         /// </summary>
@@ -2075,30 +2095,37 @@ namespace System
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's first component.
         /// </summary>
         public T1 Item1;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's second component.
         /// </summary>
         public T2 Item2;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's third component.
         /// </summary>
         public T3 Item3;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's fourth component.
         /// </summary>
         public T4 Item4;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's fifth component.
         /// </summary>
         public T5 Item5;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's sixth component.
         /// </summary>
         public T6 Item6;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's seventh component.
         /// </summary>
         public T7 Item7;
+
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's eighth component.
         /// </summary>

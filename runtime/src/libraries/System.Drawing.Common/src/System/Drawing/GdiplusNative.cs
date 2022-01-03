@@ -2916,9 +2916,11 @@ namespace System.Drawing
             public IntPtr DebugEventCallback;
 
             public bool SuppressBackgroundThread; // FALSE unless you're prepared to call
+
             // the hook/unhook functions properly
 
             public bool SuppressExternalCodecs; // FALSE unless you want GDI+ only to use
+
             // its internal image codecs.
 
             public static StartupInput GetDefault()

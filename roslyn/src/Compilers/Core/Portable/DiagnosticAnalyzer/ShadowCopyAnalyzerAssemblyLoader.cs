@@ -111,6 +111,7 @@ namespace Microsoft.CodeAnalysis
             string shadowCopyPath = CopyFileAndResources(fullPath, assemblyDirectory);
             return shadowCopyPath;
         }
+
 #nullable disable
 
         private static string CopyFileAndResources(string fullPath, string assemblyDirectory)

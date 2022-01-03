@@ -20,6 +20,7 @@ public sealed class LargeException : Exception
 public sealed class LargeExceptionTest
 {
     private uint size = 0;
+
     public LargeExceptionTest(uint size)
     {
         this.size = size;

@@ -10,10 +10,12 @@ class TestException : Exception
     string y;
 
     public TestException() { }
+
     public TestException(int _x)
     {
         x = _x;
     }
+
     public TestException(string _y)
     {
         y = _y;
@@ -23,7 +25,9 @@ class TestException : Exception
 class TestCases
 {
     static void Throw() => throw new TestException();
+
     static void Throw(int x) => throw new TestException(x);
+
     static void Throw(string y) => throw new TestException(y);
 
     static int MayThrow(int x)

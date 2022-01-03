@@ -14,6 +14,7 @@ namespace System.Xml.Tests
     public class CNullArgumentTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CNullArgumentTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -378,6 +379,7 @@ namespace System.Xml.Tests
     public class CXmlResolverTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CXmlResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -802,6 +804,7 @@ namespace System.Xml.Tests
     public class CLoadTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -1731,6 +1734,7 @@ namespace System.Xml.Tests
     public class CLoadXmlResolverTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadXmlResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -2527,6 +2531,7 @@ namespace System.Xml.Tests
     public class CLoadUrlResolverTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadUrlResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -2639,6 +2644,7 @@ namespace System.Xml.Tests
     public class CLoadStringTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadStringTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -2741,6 +2747,7 @@ namespace System.Xml.Tests
     public class CLoadXPathNavigableTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadXPathNavigableTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -2855,6 +2862,7 @@ namespace System.Xml.Tests
     public class CLoadReaderTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadReaderTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -3120,6 +3128,7 @@ namespace System.Xml.Tests
     public class CTransformTestGeneric : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CTransformTestGeneric(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -3679,6 +3688,7 @@ namespace System.Xml.Tests
     public class CTransformResolverTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CTransformResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -4085,6 +4095,7 @@ namespace System.Xml.Tests
     public class CTransformStrStrTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CTransformStrStrTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -4484,6 +4495,7 @@ namespace System.Xml.Tests
     public class CTransformStrStrResolverTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CTransformStrStrResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -4571,6 +4583,7 @@ namespace System.Xml.Tests
     public class CNDP1_1SP1Test : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CNDP1_1SP1Test(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -4736,7 +4749,9 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
     internal sealed class AllowDefaultResolverContext : IDisposable
     {
         private const string SwitchName = "Switch.System.Xml.AllowDefaultResolver";
+
         public AllowDefaultResolverContext() => AppContext.SetSwitch(SwitchName, isEnabled: true);
+
         public void Dispose() => AppContext.SetSwitch(SwitchName, isEnabled: false);
     }
 

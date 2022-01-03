@@ -49,6 +49,7 @@ namespace System
         [RequiresUnreferencedCode("The target method might be removed")]
         public static Delegate CreateDelegate(Type type, object target, string method) =>
             CreateDelegate(type, target, method, ignoreCase: false, throwOnBindFailure: true)!;
+
         [RequiresUnreferencedCode("The target method might be removed")]
         public static Delegate CreateDelegate(
             Type type,
@@ -63,6 +64,7 @@ namespace System
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
             string method
         ) => CreateDelegate(type, target, method, ignoreCase: false, throwOnBindFailure: true)!;
+
         public static Delegate CreateDelegate(
             Type type,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,

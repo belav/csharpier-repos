@@ -5,18 +5,21 @@ struct Point
     public int x,
         y,
         z;
+
     public Point(int x, int y)
     {
         this.x = x;
         this.y = y;
         this.z = 5;
     }
+
     public static Point get_zerop()
     {
         Point p = new Point(0, 0);
         p.z = 0;
         return p;
     }
+
     public static int struct_param(Point p)
     {
         if (p.x != p.y || p.y != p.z || p.z != 0)

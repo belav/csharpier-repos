@@ -8,6 +8,7 @@ struct S0
     public ulong F3;
     public ushort F5;
     public bool F7;
+
     public S0(uint f1) : this()
     {
         F1 = f1;

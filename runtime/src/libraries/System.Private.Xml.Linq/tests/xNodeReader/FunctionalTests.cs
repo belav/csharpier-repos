@@ -441,6 +441,7 @@ namespace CoreXml.Test.XLinq
                     }
                 );
             }
+
             public partial class TCDispose : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCDispose
@@ -463,6 +464,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCDepth : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCDepth
@@ -502,6 +504,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCNamespace : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCNamespace
@@ -579,6 +582,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCLookupNamespace : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCLookupNamespace
@@ -688,6 +692,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCHasValue : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCHasValue
@@ -814,6 +819,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCIsEmptyElement2 : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCIsEmptyElement2
@@ -939,6 +945,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCXmlSpace : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCXmlSpace
@@ -991,6 +998,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCXmlLang : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCXmlLang
@@ -1058,6 +1066,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCSkip : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCSkip
@@ -1199,6 +1208,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCBaseURI : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCBaseURI
@@ -1274,6 +1284,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCAttributeAccess : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCAttributeAccess
@@ -1328,6 +1339,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCThisName : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCThisName
@@ -1473,6 +1485,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCMoveToAttributeReader : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCMoveToAttributeReader
@@ -1495,6 +1508,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCGetAttributeOrdinal : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCGetAttributeOrdinal
@@ -1541,6 +1555,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCGetAttributeName : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCGetAttributeName
@@ -1671,6 +1686,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCThisOrdinal : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCThisOrdinal
@@ -1717,6 +1733,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCMoveToAttributeOrdinal : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCMoveToAttributeOrdinal
@@ -1797,6 +1814,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCMoveToFirstAttribute : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCMoveToFirstAttribute
@@ -1872,6 +1890,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCMoveToNextAttribute : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCMoveToNextAttribute
@@ -1947,6 +1966,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCAttributeTest : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCAttributeTest
@@ -2035,6 +2055,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCXmlns : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCXmlns
@@ -2092,6 +2113,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCXmlnsPrefix : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCXmlnsPrefix
@@ -2145,6 +2167,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadState : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadState
@@ -2198,6 +2221,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadInnerXml : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadInnerXml
@@ -2368,6 +2392,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCMoveToContent : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCMoveToContent
@@ -2426,6 +2451,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCIsStartElement : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCIsStartElement
@@ -2542,6 +2568,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadStartElement : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadStartElement
@@ -2691,6 +2718,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadEndElement : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadEndElement
@@ -2805,6 +2833,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class ErrorConditions : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+ErrorConditions
@@ -3023,6 +3052,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCXMLIntegrityBase : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCXMLIntegrityBase
@@ -3330,6 +3360,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadContentAsBase64 : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadContentAsBase64
@@ -3521,6 +3552,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadElementContentAsBase64 : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadElementContentAsBase64
@@ -3722,6 +3754,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadContentAsBinHex : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadContentAsBinHex
@@ -3892,6 +3925,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadElementContentAsBinHex : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadElementContentAsBinHex
@@ -4060,6 +4094,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class CReaderTestModule : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+CReaderTestModule
@@ -4104,6 +4139,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadOuterXml : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadOuterXml
@@ -4292,6 +4328,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadSubtree : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadSubtree
@@ -4570,6 +4607,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadToDescendant : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadToDescendant
@@ -4820,6 +4858,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadToFollowing : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadToFollowing
@@ -5014,6 +5053,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadToNextSibling : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadToNextSibling
@@ -5175,6 +5215,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class TCReadValue : BridgeHelpers
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+TCReadValue
@@ -5449,6 +5490,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class XNodeReaderAPI : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+XNodeReaderTests+XNodeReaderAPI

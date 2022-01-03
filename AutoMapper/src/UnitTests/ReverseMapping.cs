@@ -14,10 +14,12 @@ namespace AutoMapper.UnitTests
         {
             public Guid Id { get; set; }
         }
+
         class Destination
         {
             public Guid Id { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 c =>
@@ -26,6 +28,7 @@ namespace AutoMapper.UnitTests
                         .ReverseMap()
             );
     }
+
     public class InvalidReverseMap : NonValidatingSpecBase
     {
         public class One
@@ -443,6 +446,7 @@ namespace AutoMapper.UnitTests
             public Regex SplittingExpression { get; } = new Regex(@"\p{Lu}[a-z0-9]*(?=_?)");
 
             public string SeparatorCharacter => "_";
+
             public string ReplaceValue(Match match)
             {
                 return match.Value;
@@ -502,6 +506,7 @@ namespace AutoMapper.UnitTests
         {
             public int Value { get; set; }
         }
+
         public class Destination
         {
             public int Value { get; set; }
@@ -535,6 +540,7 @@ namespace AutoMapper.UnitTests
         {
             public int Value { get; set; }
         }
+
         public class Destination
         {
             public int Value { get; set; }
@@ -574,6 +580,7 @@ namespace AutoMapper.UnitTests
             public int Value { get; set; }
             public int Value2 { get; set; }
         }
+
         public class Destination
         {
             public int Value { get; set; }
@@ -604,6 +611,7 @@ namespace AutoMapper.UnitTests
             public int Value { get; set; }
             public int Value2 { get; set; }
         }
+
         public class Destination
         {
             public int Value { get; set; }
@@ -636,6 +644,7 @@ namespace AutoMapper.UnitTests
             public int Value { get; set; }
             public int Value2 { get; set; }
         }
+
         public class Destination
         {
             public int Value { get; set; }
@@ -754,6 +763,7 @@ namespace AutoMapper.UnitTests
         {
             public T Value { get; set; }
         }
+
         public class Destination<T>
         {
             public T Value { get; set; }
@@ -787,6 +797,7 @@ namespace AutoMapper.UnitTests
             public T Value { get; set; }
             public string StringValue { get; set; }
         }
+
         public class Destination<T>
         {
             public T Value2 { get; set; }

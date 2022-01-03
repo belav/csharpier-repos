@@ -41,6 +41,7 @@ public class Ex
 
         return res;
     }
+
     public static int Main()
     {
         int catched = 0;

@@ -31,6 +31,7 @@ namespace System.IO.Enumeration
 
         // Used for creating full paths
         private char[]? _pathBuffer;
+
         // Used to get the raw entry data
         private byte[]? _entryBuffer;
 

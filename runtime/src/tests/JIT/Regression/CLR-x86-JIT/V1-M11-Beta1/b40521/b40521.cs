@@ -26,6 +26,7 @@ namespace Test
                 catch (Exception) { }
             }
         }
+
         public static int Main()
         {
             try

@@ -522,6 +522,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static Location GetParameterLocation(ParameterSymbol parameter) =>
             parameter.GetNonNullSyntaxNode().Location;
+
 #nullable disable
 
         private static void CheckParameterModifiers(

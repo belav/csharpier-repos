@@ -148,6 +148,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return base.EarlyDecodeWellKnownAttribute(ref arguments);
         }
+
 #nullable disable
 
         /// <summary>

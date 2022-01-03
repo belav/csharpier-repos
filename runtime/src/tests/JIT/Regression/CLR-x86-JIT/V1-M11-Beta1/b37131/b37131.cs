@@ -18,10 +18,12 @@ namespace Test
         {
             return 0;
         }
+
         static bool[] AA_Static4(ref int param3, int[] param4)
         {
             return null;
         }
+
         static float[] BB_Static1(int param4)
         {
             return null;

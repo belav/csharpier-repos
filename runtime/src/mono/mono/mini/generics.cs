@@ -1188,6 +1188,7 @@ class Tests
     struct Record : Foo2<Record>.IRecord
     {
         int counter;
+
         int Foo2<Record>.IRecord.DoSomething()
         {
             return counter++;

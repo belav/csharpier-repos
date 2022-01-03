@@ -12,6 +12,7 @@ namespace Repro
     {
         void Problem();
     }
+
     class Base<T1> : Interface<T1>
     {
         void Interface<T1>.Problem()
@@ -20,14 +21,17 @@ namespace Repro
             throw new Exception();
         }
     }
+
     class Derived<U> : Base<int>, Interface<U>
     {
         void Interface<U>.Problem()
         {
             Console.WriteLine("Derived`2.Method()");
         }
+
         ~Derived() { }
     }
+
     class FinalClass : Derived<int>, Interface<string>, Interface<int>
     {
         void Interface<string>.Problem()
@@ -36,6 +40,7 @@ namespace Repro
             throw new Exception();
         }
     }
+
     class Program
     {
         public static void Main()

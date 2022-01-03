@@ -273,6 +273,7 @@ namespace System.Data.Common
         {
             Add(ObjectToString(keyword), value!);
         }
+
         public void Add(string keyword, object value)
         {
             this[keyword] = value;
@@ -311,6 +312,7 @@ namespace System.Data.Common
         {
             return ContainsKey(ObjectToString(keyword));
         }
+
         public virtual bool ContainsKey(string keyword)
         {
             ADP.CheckArgumentNull(keyword, nameof(keyword));
@@ -364,6 +366,7 @@ namespace System.Data.Common
             );
             return Collection.GetEnumerator();
         }
+
         IDictionaryEnumerator IDictionary.GetEnumerator()
         {
             DataCommonEventSource.Log.Trace(
@@ -390,6 +393,7 @@ namespace System.Data.Common
         {
             Remove(ObjectToString(keyword));
         }
+
         public virtual bool Remove(string keyword)
         {
             DataCommonEventSource.Log.Trace(
@@ -680,6 +684,7 @@ namespace System.Data.Common
             Type thisType = GetType();
             return TypeDescriptor.GetClassName(this, true);
         }
+
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",
@@ -692,6 +697,7 @@ namespace System.Data.Common
             Type thisType = GetType();
             return TypeDescriptor.GetComponentName(this, true);
         }
+
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",
@@ -701,6 +707,7 @@ namespace System.Data.Common
         {
             return TypeDescriptor.GetAttributes(this, true);
         }
+
         [RequiresUnreferencedCode(
             "Editors registered in TypeDescriptor.AddEditorTable may be trimmed."
         )]
@@ -708,6 +715,7 @@ namespace System.Data.Common
         {
             return TypeDescriptor.GetEditor(this, editorBaseType, true);
         }
+
         [RequiresUnreferencedCode(
             "Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All."
         )]
@@ -715,6 +723,7 @@ namespace System.Data.Common
         {
             return TypeDescriptor.GetConverter(this, true);
         }
+
         [RequiresUnreferencedCode(
             "PropertyDescriptor's PropertyType cannot be statically discovered."
         )]
@@ -722,6 +731,7 @@ namespace System.Data.Common
         {
             return TypeDescriptor.GetDefaultProperty(this, true);
         }
+
         [RequiresUnreferencedCode(
             "PropertyDescriptor's PropertyType cannot be statically discovered."
         )]
@@ -729,6 +739,7 @@ namespace System.Data.Common
         {
             return GetProperties();
         }
+
         [RequiresUnreferencedCode(
             "PropertyDescriptor's PropertyType cannot be statically discovered. The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type."
         )]
@@ -736,6 +747,7 @@ namespace System.Data.Common
         {
             return GetProperties(attributes);
         }
+
         [RequiresUnreferencedCode(
             "The built-in EventDescriptor implementation uses Reflection which requires unreferenced code."
         )]
@@ -743,6 +755,7 @@ namespace System.Data.Common
         {
             return TypeDescriptor.GetDefaultEvent(this, true);
         }
+
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",
@@ -755,6 +768,7 @@ namespace System.Data.Common
             Type thisType = GetType();
             return TypeDescriptor.GetEvents(this, true);
         }
+
         [RequiresUnreferencedCode(
             "The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type."
         )]
@@ -762,6 +776,7 @@ namespace System.Data.Common
         {
             return TypeDescriptor.GetEvents(this, attributes, true);
         }
+
         object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor? pd)
         {
             return this;

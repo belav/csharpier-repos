@@ -8,6 +8,7 @@ namespace OmmitedDTOModel3
         {
             this.Entities11 = new EntityDTO11();
         }
+
         public EntityDTO11 Entities11 { get; set; }
     }
 }

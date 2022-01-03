@@ -223,6 +223,7 @@ namespace TestLibrary
             Assert.Equal(0, Ntdll.RtlGetVersionEx(out Ntdll.RTL_OSVERSIONINFOEX osvi));
             return osvi.dwMajorVersion;
         }
+
         internal static uint GetWindowsMinorVersion()
         {
             if (!IsWindows)
@@ -233,6 +234,7 @@ namespace TestLibrary
             Assert.Equal(0, Ntdll.RtlGetVersionEx(out Ntdll.RTL_OSVERSIONINFOEX osvi));
             return osvi.dwMinorVersion;
         }
+
         internal static uint GetWindowsBuildNumber()
         {
             if (!IsWindows)

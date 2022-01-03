@@ -7,6 +7,7 @@ public class T
         int i;
         Console.WriteLine("Got single arg " + arg);
     }
+
     static public void method(int nargs, params string[] args)
     {
         int i;
@@ -15,6 +16,7 @@ public class T
         for (i = 0; i < nargs; ++i)
             Console.WriteLine(args[i]);
     }
+
     public static int Main()
     {
         method(1, "hello");

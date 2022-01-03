@@ -300,6 +300,7 @@ namespace Legacy.Support
         {
             WaitForPredicate(predicate, maxWait, string.Format(errorMessageFormat, formatArgs));
         }
+
         public static void WaitForPredicate(Predicate predicate, int maxWait, string errorMessage)
         {
             Stopwatch stopWatch = Stopwatch.StartNew();

@@ -392,6 +392,7 @@ namespace System.Drawing.Drawing2D.Tests
                 };
             }
         }
+
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Rectangle_Angle_IsAngleScalable_TestData))]
         public void Ctor_Rectangle_Color_Color_Angle_IsAngleScalable(

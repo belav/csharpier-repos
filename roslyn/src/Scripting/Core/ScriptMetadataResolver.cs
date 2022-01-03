@@ -91,7 +91,9 @@ namespace Microsoft.CodeAnalysis.Scripting
         ) => _resolver.ResolveReference(reference, baseFilePath, properties);
 
         public bool Equals(ScriptMetadataResolver? other) => _resolver.Equals(other);
+
         public override bool Equals(object? other) => Equals(other as ScriptMetadataResolver);
+
         public override int GetHashCode() => _resolver.GetHashCode();
     }
 }

@@ -509,6 +509,7 @@ namespace System.Xml
                 return attr.Value;
             return null;
         }
+
         public string? GetAttribute(string name, string ns)
         {
             if (_bCreatedOnAttribute)
@@ -642,6 +643,7 @@ namespace System.Xml
         {
             return MoveToAttribute(name, string.Empty);
         }
+
         private bool MoveToAttributeFromElement(XmlElement elem, string name, string ns)
         {
             XmlAttribute? attr = null;
@@ -1147,6 +1149,7 @@ namespace System.Xml
         private int _curDepth; // depth of attrNav ( also functions as reader's depth )
         private ReadState _readState; // current reader's state
         private bool _fEOF; // flag to show if reaches the end of file
+
         //mark to the state that EntityReference node is supposed to be resolved
         private bool _bResolveEntity;
         private bool _bStartFromDocument;
@@ -1519,6 +1522,7 @@ namespace System.Xml
         {
             return Read(false);
         }
+
         private bool Read(bool fSkipChildren)
         {
             if (_fEOF)

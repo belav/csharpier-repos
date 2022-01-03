@@ -472,6 +472,7 @@ public class C
 "
             );
         }
+
         [WorkItem(546412, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546412")]
         [ConditionalFact(typeof(DesktopOnly))]
         public void TestBug15818()
@@ -584,6 +585,7 @@ class C
 "
             );
         }
+
         [WorkItem(546853, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546853")]
         [Fact]
         public void TestBug16981b()
@@ -12910,6 +12912,7 @@ class C1
 }";
             var compilation = CompileAndVerify(source, expectedOutput: "null;null;C1;");
         }
+
         [WorkItem(543091, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543091")]
         [Fact()]
         public void EmitAttributeOnPartialMethodParameter()

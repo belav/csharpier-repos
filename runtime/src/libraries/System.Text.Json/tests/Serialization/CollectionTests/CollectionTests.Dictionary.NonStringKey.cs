@@ -195,6 +195,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             private Dictionary<TKey, TValue> _dictionary => BuildDictionary();
             protected abstract TKey Key { get; }
+
             private Dictionary<TKey, TValue> BuildDictionary()
             {
                 return new Dictionary<TKey, TValue>() { { Key, default } };
@@ -709,12 +710,14 @@ namespace System.Text.Json.Serialization.Tests
         public class FixedNamingPolicy : JsonNamingPolicy
         {
             public const string FixedName = nameof(FixedName);
+
             public override string ConvertName(string name) => FixedName;
         }
 
         public class SuffixNamingPolicy : JsonNamingPolicy
         {
             public const string Suffix = "_Suffix";
+
             public override string ConvertName(string name) => name + Suffix;
         }
 
@@ -840,6 +843,7 @@ namespace System.Text.Json.Serialization.Tests
                 Type typeToConvert,
                 JsonSerializerOptions options
             ) => throw new NotImplementedException();
+
             public override void Write(
                 Utf8JsonWriter writer,
                 ClassWithIDictionary value,

@@ -144,6 +144,7 @@ namespace Generic.Dictionary
     public class DummyRefType
     {
         public int Value { get; set; }
+
         public override bool Equals(object obj)
         {
             return ((DummyRefType)obj).Equals(this.Value);

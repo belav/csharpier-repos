@@ -1076,6 +1076,7 @@ namespace System.Collections.Tests
         private class FixedHashCodeProvider : IHashCodeProvider
         {
             public int FixedHashCode;
+
             public int GetHashCode(object obj) => FixedHashCode;
         }
 

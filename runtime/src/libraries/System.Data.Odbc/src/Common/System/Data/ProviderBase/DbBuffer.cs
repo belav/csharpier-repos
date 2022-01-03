@@ -666,6 +666,7 @@ namespace System.Data.ProviderBase
             ReadBytes(offset, buffer, 0, 16);
             return new Guid(buffer);
         }
+
         internal void WriteGuid(int offset, Guid value)
         {
             // faster than Marshal.Copy(value.GetByteArray()
@@ -682,6 +683,7 @@ namespace System.Data.ProviderBase
                 unchecked((ushort)buffer[2])
             ); // Day
         }
+
         internal void WriteDate(int offset, DateTime value)
         {
             short[] buffer = new short[3]
@@ -703,6 +705,7 @@ namespace System.Data.ProviderBase
                 unchecked((ushort)buffer[2])
             ); // Seconds
         }
+
         internal void WriteTime(int offset, TimeSpan value)
         {
             short[] buffer = new short[3]
@@ -729,6 +732,7 @@ namespace System.Data.ProviderBase
             ); // Seconds
             return value.AddTicks(ticks / 100);
         }
+
         internal void WriteDateTime(int offset, DateTime value)
         {
             int ticks = (int)(value.Ticks % 10000000L) * 100;

@@ -9,8 +9,10 @@ internal class AA
 {
     [FieldOffset(12)]
     public ulong tmp1;
+
     [FieldOffset(5)]
     public sbyte tmp2;
+
     [FieldOffset(0)]
     public byte tmp3;
 
@@ -19,6 +21,7 @@ internal class AA
 
     [FieldOffset(40)]
     public uint tmp4;
+
     [FieldOffset(38)]
     public byte tmp5;
 
@@ -44,6 +47,7 @@ internal class AA
     {
         return arg;
     }
+
     public static short call_target_ref(ref short arg)
     {
         return arg;

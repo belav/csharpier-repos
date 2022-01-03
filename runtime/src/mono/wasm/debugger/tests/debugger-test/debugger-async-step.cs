@@ -11,6 +11,7 @@ namespace DebuggerTests
     public class AsyncStepClass
     {
         static HttpClient client = new HttpClient();
+
         public static async Task TestAsyncStepOut()
         {
             await TestAsyncStepOut2("foobar");

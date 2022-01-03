@@ -124,6 +124,7 @@ namespace Microsoft.CodeAnalysis.Differencing
                 }
             }
         }
+
         private bool DescendIntoChildren(SyntaxNode node) =>
             !IsLambdaBodyStatementOrExpression(node) && !HasLabel(node);
 

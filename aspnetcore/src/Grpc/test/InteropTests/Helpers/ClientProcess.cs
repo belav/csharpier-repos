@@ -45,7 +45,9 @@ public class ClientProcess : IDisposable
     }
 
     public Task WaitForReadyAsync() => _startTcs.Task;
+
     public Task WaitForExitAsync() => _processEx.Exited;
+
     public int ExitCode => _process.ExitCode;
     public bool IsReady => _startTcs.Task.IsCompletedSuccessfully;
 

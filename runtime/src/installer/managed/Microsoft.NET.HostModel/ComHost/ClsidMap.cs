@@ -22,8 +22,10 @@ namespace Microsoft.NET.HostModel.ComHost
         {
             [JsonPropertyName("type")]
             public string Type { get; set; }
+
             [JsonPropertyName("assembly")]
             public string Assembly { get; set; }
+
             [JsonPropertyName("progid")]
             public string ProgId { get; set; }
         }

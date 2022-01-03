@@ -32,6 +32,7 @@ namespace System.Xml.Xsl.XsltOld
 
         // Current position in the list
         private BuilderInfo? _currentInfo;
+
         // Builder state
         private bool _popScope;
         private int _recordState;

@@ -23,6 +23,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         {
             get { return current_send; }
         }
+
         public DevToolsQueue(WebSocket sock)
         {
             this.Ws = sock;

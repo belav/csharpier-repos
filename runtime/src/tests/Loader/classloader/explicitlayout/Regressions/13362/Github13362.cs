@@ -22,6 +22,7 @@ namespace ClrIssueRepro
         // Commenting out either one of these fields fixes things!?
         [FieldOffset(0)]
         public string _sstring0 = "string0";
+
         [FieldOffset(16)]
         public string _sstring1 = "string1";
     }

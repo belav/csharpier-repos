@@ -14,6 +14,7 @@ namespace OmmitedDTOModel3
             //this.Entities14 = new EntityDTO14();
             //Entities16 = new EntityDTO16();
         }
+
         public EntityDTO20 Entities20 { get; set; }
         public EntityDTO16 Entities16 { get; set; }
         public EntityDTO14 Entities14 { get; set; }

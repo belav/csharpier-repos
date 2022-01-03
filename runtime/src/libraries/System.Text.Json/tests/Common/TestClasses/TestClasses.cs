@@ -717,6 +717,7 @@ namespace System.Text.Json.Serialization.Tests
         public int MyInt { get; set; }
         public Dictionary<string, string> MyDictionary { get; set; }
     }
+
     public class OuterClassHavingPropertiesDefinedAfterClassWithDictionary
     {
         public double MyDouble { get; set; }

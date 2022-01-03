@@ -17,6 +17,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             Trailers,
             Untyped
         }
+
         private HeadersType _headersType;
         private HttpResponseHeaders.Enumerator _headersEnumerator;
         private HttpResponseTrailers.Enumerator _trailersEnumerator;

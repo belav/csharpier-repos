@@ -20,6 +20,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 Value = value;
             }
+
             public int Value { get; set; }
         }
 
@@ -65,6 +66,7 @@ namespace AutoMapper.UnitTests.Bug
     {
         int[,] _source;
         MultidimensionalArrayFiller _filler;
+
         protected override void Establish_context()
         {
             _source = new int[4, 3];

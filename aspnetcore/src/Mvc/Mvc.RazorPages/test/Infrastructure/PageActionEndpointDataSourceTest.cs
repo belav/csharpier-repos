@@ -47,6 +47,7 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
         // Assert
         Assert.Empty(endpoints);
     }
+
     [Fact]
     public void Endpoints_AppliesConventions()
     {

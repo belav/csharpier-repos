@@ -5,20 +5,35 @@
 using System;
 
 public struct ValX0 { }
+
 public struct ValY0 { }
+
 public struct ValX1<T> { }
+
 public struct ValY1<T> { }
+
 public struct ValX2<T, U> { }
+
 public struct ValY2<T, U> { }
+
 public struct ValX3<T, U, V> { }
+
 public struct ValY3<T, U, V> { }
+
 public class RefX0 { }
+
 public class RefY0 { }
+
 public class RefX1<T> { }
+
 public class RefY1<T> { }
+
 public class RefX2<T, U> { }
+
 public class RefY2<T, U> { }
+
 public class RefX3<T, U, V> { }
+
 public class RefY3<T, U, V> { }
 
 public struct Gen<T>
@@ -39,6 +54,7 @@ public struct Gen<T>
     {
         t = Fld2;
     }
+
     public static void PassAsParameter(T t1, T t2)
     {
         T temp = t1;
@@ -56,6 +72,7 @@ public class Test_static_passing_struct01
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

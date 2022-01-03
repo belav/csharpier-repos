@@ -114,6 +114,7 @@ namespace ILCompiler.Reflection.ReadyToRun
 
         public bool TryGetValue(string exportName, out int rva) =>
             _namedExportRva.TryGetValue(exportName, out rva);
+
         public bool TryGetValue(int ordinal, out int rva) =>
             _ordinalRva.TryGetValue(ordinal, out rva);
     }

@@ -14,6 +14,7 @@ namespace System.Data.OleDb
     internal sealed class OleDbConnectionFactory : DbConnectionFactory
     {
         private OleDbConnectionFactory() : base() { }
+
         // At this time, the OleDb Managed Provider doesn't have any connection pool
         // counters because we'd only confuse people with "non-pooled" connections
         // that are actually being pooled by the native pooler.

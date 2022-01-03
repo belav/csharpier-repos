@@ -20,6 +20,7 @@ namespace CoreXml.Test.XLinq
             public partial class TCEOFHandling : BridgeHelpers
             {
                 private XmlDiff _diff = null;
+
                 public TCEOFHandling()
                 {
                     _diff = new XmlDiff();

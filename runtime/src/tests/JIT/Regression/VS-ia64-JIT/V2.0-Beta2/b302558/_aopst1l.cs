@@ -72,6 +72,7 @@ public class App
         Console.WriteLine("Passed.");
         return 100;
     }
+
     public static char m_chFwd1;
     public static short m_shFwd2;
     public static String[,][][] m_axFwd3;

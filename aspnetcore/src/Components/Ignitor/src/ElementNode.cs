@@ -25,6 +25,7 @@ public class ElementNode : ContainerNode
         _properties = new Dictionary<string, object>(StringComparer.Ordinal);
         _events = new Dictionary<string, ElementEventDescriptor>(StringComparer.Ordinal);
     }
+
     public string TagName { get; }
 
     public IReadOnlyDictionary<string, object> Attributes => _attributes;

@@ -10,63 +10,79 @@ namespace Microsoft.Win32.SafeHandles
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         protected SafeNCryptHandle() : base(default(bool)) { }
+
         protected SafeNCryptHandle(
             System.IntPtr handle,
             System.Runtime.InteropServices.SafeHandle parentHandle
         ) : base(default(bool)) { }
+
         public override bool IsInvalid
         {
             get { throw null; }
         }
+
         protected override bool ReleaseHandle()
         {
             throw null;
         }
+
         protected abstract bool ReleaseNativeHandle();
     }
+
     public sealed partial class SafeNCryptKeyHandle : Microsoft.Win32.SafeHandles.SafeNCryptHandle
     {
         public SafeNCryptKeyHandle() { }
+
         public SafeNCryptKeyHandle(
             System.IntPtr handle,
             System.Runtime.InteropServices.SafeHandle parentHandle
         ) { }
+
         protected override bool ReleaseNativeHandle()
         {
             throw null;
         }
     }
+
     public sealed partial class SafeNCryptProviderHandle
         : Microsoft.Win32.SafeHandles.SafeNCryptHandle
     {
         public SafeNCryptProviderHandle() { }
+
         protected override bool ReleaseNativeHandle()
         {
             throw null;
         }
     }
+
     public sealed partial class SafeNCryptSecretHandle
         : Microsoft.Win32.SafeHandles.SafeNCryptHandle
     {
         public SafeNCryptSecretHandle() { }
+
         protected override bool ReleaseNativeHandle()
         {
             throw null;
         }
     }
 }
+
 namespace System.Security.Cryptography
 {
     public sealed partial class AesCng : System.Security.Cryptography.Aes
     {
         public AesCng() { }
+
         public AesCng(string keyName) { }
+
         public AesCng(string keyName, System.Security.Cryptography.CngProvider provider) { }
+
         public AesCng(
             string keyName,
             System.Security.Cryptography.CngProvider provider,
             System.Security.Cryptography.CngKeyOpenOptions openOptions
         ) { }
+
         public override byte[] Key
         {
             get { throw null; }
@@ -77,10 +93,12 @@ namespace System.Security.Cryptography
             get { throw null; }
             set { }
         }
+
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor()
         {
             throw null;
         }
+
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor(
             byte[] rgbKey,
             byte[]? rgbIV
@@ -88,10 +106,12 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor()
         {
             throw null;
         }
+
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor(
             byte[] rgbKey,
             byte[]? rgbIV
@@ -99,14 +119,19 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         protected override void Dispose(bool disposing) { }
+
         public override void GenerateIV() { }
+
         public override void GenerateKey() { }
     }
+
     public sealed partial class CngAlgorithm
         : System.IEquatable<System.Security.Cryptography.CngAlgorithm>
     {
         public CngAlgorithm(string algorithm) { }
+
         public string Algorithm
         {
             get { throw null; }
@@ -167,12 +192,14 @@ namespace System.Security.Cryptography
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Security.Cryptography.CngAlgorithm? other
@@ -180,10 +207,12 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public static bool operator ==(
             System.Security.Cryptography.CngAlgorithm? left,
             System.Security.Cryptography.CngAlgorithm? right
@@ -191,6 +220,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static bool operator !=(
             System.Security.Cryptography.CngAlgorithm? left,
             System.Security.Cryptography.CngAlgorithm? right
@@ -198,15 +228,18 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public sealed partial class CngAlgorithmGroup
         : System.IEquatable<System.Security.Cryptography.CngAlgorithmGroup>
     {
         public CngAlgorithmGroup(string algorithmGroup) { }
+
         public string AlgorithmGroup
         {
             get { throw null; }
@@ -231,12 +264,14 @@ namespace System.Security.Cryptography
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Security.Cryptography.CngAlgorithmGroup? other
@@ -244,10 +279,12 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public static bool operator ==(
             System.Security.Cryptography.CngAlgorithmGroup? left,
             System.Security.Cryptography.CngAlgorithmGroup? right
@@ -255,6 +292,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static bool operator !=(
             System.Security.Cryptography.CngAlgorithmGroup? left,
             System.Security.Cryptography.CngAlgorithmGroup? right
@@ -262,11 +300,13 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     [System.FlagsAttribute]
     public enum CngExportPolicies
     {
@@ -276,9 +316,11 @@ namespace System.Security.Cryptography
         AllowArchiving = 4,
         AllowPlaintextArchiving = 8,
     }
+
     public sealed partial class CngKey : System.IDisposable
     {
         internal CngKey() { }
+
         public System.Security.Cryptography.CngAlgorithm Algorithm
         {
             get { throw null; }
@@ -336,12 +378,14 @@ namespace System.Security.Cryptography
         {
             get { throw null; }
         }
+
         public static System.Security.Cryptography.CngKey Create(
             System.Security.Cryptography.CngAlgorithm algorithm
         )
         {
             throw null;
         }
+
         public static System.Security.Cryptography.CngKey Create(
             System.Security.Cryptography.CngAlgorithm algorithm,
             string? keyName
@@ -349,6 +393,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static System.Security.Cryptography.CngKey Create(
             System.Security.Cryptography.CngAlgorithm algorithm,
             string? keyName,
@@ -357,16 +402,21 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public void Delete() { }
+
         public void Dispose() { }
+
         public static bool Exists(string keyName)
         {
             throw null;
         }
+
         public static bool Exists(string keyName, System.Security.Cryptography.CngProvider provider)
         {
             throw null;
         }
+
         public static bool Exists(
             string keyName,
             System.Security.Cryptography.CngProvider provider,
@@ -375,10 +425,12 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public byte[] Export(System.Security.Cryptography.CngKeyBlobFormat format)
         {
             throw null;
         }
+
         public System.Security.Cryptography.CngProperty GetProperty(
             string name,
             System.Security.Cryptography.CngPropertyOptions options
@@ -386,6 +438,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public bool HasProperty(
             string name,
             System.Security.Cryptography.CngPropertyOptions options
@@ -393,6 +446,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static System.Security.Cryptography.CngKey Import(
             byte[] keyBlob,
             System.Security.Cryptography.CngKeyBlobFormat format
@@ -400,6 +454,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static System.Security.Cryptography.CngKey Import(
             byte[] keyBlob,
             System.Security.Cryptography.CngKeyBlobFormat format,
@@ -408,6 +463,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static System.Security.Cryptography.CngKey Open(
             Microsoft.Win32.SafeHandles.SafeNCryptKeyHandle keyHandle,
             System.Security.Cryptography.CngKeyHandleOpenOptions keyHandleOpenOptions
@@ -415,10 +471,12 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static System.Security.Cryptography.CngKey Open(string keyName)
         {
             throw null;
         }
+
         public static System.Security.Cryptography.CngKey Open(
             string keyName,
             System.Security.Cryptography.CngProvider provider
@@ -426,6 +484,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static System.Security.Cryptography.CngKey Open(
             string keyName,
             System.Security.Cryptography.CngProvider provider,
@@ -434,12 +493,15 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public void SetProperty(System.Security.Cryptography.CngProperty property) { }
     }
+
     public sealed partial class CngKeyBlobFormat
         : System.IEquatable<System.Security.Cryptography.CngKeyBlobFormat>
     {
         public CngKeyBlobFormat(string format) { }
+
         public static System.Security.Cryptography.CngKeyBlobFormat EccFullPrivateBlob
         {
             get { throw null; }
@@ -476,12 +538,14 @@ namespace System.Security.Cryptography
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Security.Cryptography.CngKeyBlobFormat? other
@@ -489,10 +553,12 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public static bool operator ==(
             System.Security.Cryptography.CngKeyBlobFormat? left,
             System.Security.Cryptography.CngKeyBlobFormat? right
@@ -500,6 +566,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static bool operator !=(
             System.Security.Cryptography.CngKeyBlobFormat? left,
             System.Security.Cryptography.CngKeyBlobFormat? right
@@ -507,11 +574,13 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     [System.FlagsAttribute]
     public enum CngKeyCreationOptions
     {
@@ -519,9 +588,11 @@ namespace System.Security.Cryptography
         MachineKey = 32,
         OverwriteExistingKey = 128,
     }
+
     public sealed partial class CngKeyCreationParameters
     {
         public CngKeyCreationParameters() { }
+
         public System.Security.Cryptography.CngExportPolicies? ExportPolicy
         {
             get { throw null; }
@@ -557,12 +628,14 @@ namespace System.Security.Cryptography
             set { }
         }
     }
+
     [System.FlagsAttribute]
     public enum CngKeyHandleOpenOptions
     {
         None = 0,
         EphemeralKey = 1,
     }
+
     [System.FlagsAttribute]
     public enum CngKeyOpenOptions
     {
@@ -571,6 +644,7 @@ namespace System.Security.Cryptography
         MachineKey = 32,
         Silent = 64,
     }
+
     [System.FlagsAttribute]
     public enum CngKeyUsages
     {
@@ -580,10 +654,12 @@ namespace System.Security.Cryptography
         KeyAgreement = 4,
         AllUsages = 16777215,
     }
+
     public partial struct CngProperty : System.IEquatable<System.Security.Cryptography.CngProperty>
     {
         private object _dummy;
         private int _dummyPrimitive;
+
         public CngProperty(
             string name,
             byte[]? value,
@@ -592,6 +668,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public readonly string Name
         {
             get { throw null; }
@@ -600,24 +677,29 @@ namespace System.Security.Cryptography
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public bool Equals(System.Security.Cryptography.CngProperty other)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public byte[]? GetValue()
         {
             throw null;
         }
+
         public static bool operator ==(
             System.Security.Cryptography.CngProperty left,
             System.Security.Cryptography.CngProperty right
@@ -625,6 +707,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static bool operator !=(
             System.Security.Cryptography.CngProperty left,
             System.Security.Cryptography.CngProperty right
@@ -633,11 +716,13 @@ namespace System.Security.Cryptography
             throw null;
         }
     }
+
     public sealed partial class CngPropertyCollection
         : System.Collections.ObjectModel.Collection<System.Security.Cryptography.CngProperty>
     {
         public CngPropertyCollection() { }
     }
+
     [System.FlagsAttribute]
     public enum CngPropertyOptions
     {
@@ -645,10 +730,12 @@ namespace System.Security.Cryptography
         None = 0,
         CustomProperty = 1073741824,
     }
+
     public sealed partial class CngProvider
         : System.IEquatable<System.Security.Cryptography.CngProvider>
     {
         public CngProvider(string provider) { }
+
         public static System.Security.Cryptography.CngProvider MicrosoftPlatformCryptoProvider
         {
             get { throw null; }
@@ -665,12 +752,14 @@ namespace System.Security.Cryptography
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 System.Security.Cryptography.CngProvider? other
@@ -678,10 +767,12 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public static bool operator ==(
             System.Security.Cryptography.CngProvider? left,
             System.Security.Cryptography.CngProvider? right
@@ -689,6 +780,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static bool operator !=(
             System.Security.Cryptography.CngProvider? left,
             System.Security.Cryptography.CngProvider? right
@@ -696,29 +788,35 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public sealed partial class CngUIPolicy
     {
         public CngUIPolicy(System.Security.Cryptography.CngUIProtectionLevels protectionLevel) { }
+
         public CngUIPolicy(
             System.Security.Cryptography.CngUIProtectionLevels protectionLevel,
             string? friendlyName
         ) { }
+
         public CngUIPolicy(
             System.Security.Cryptography.CngUIProtectionLevels protectionLevel,
             string? friendlyName,
             string? description
         ) { }
+
         public CngUIPolicy(
             System.Security.Cryptography.CngUIProtectionLevels protectionLevel,
             string? friendlyName,
             string? description,
             string? useContext
         ) { }
+
         public CngUIPolicy(
             System.Security.Cryptography.CngUIProtectionLevels protectionLevel,
             string? friendlyName,
@@ -726,6 +824,7 @@ namespace System.Security.Cryptography
             string? useContext,
             string? creationTitle
         ) { }
+
         public string? CreationTitle
         {
             get { throw null; }
@@ -747,6 +846,7 @@ namespace System.Security.Cryptography
             get { throw null; }
         }
     }
+
     [System.FlagsAttribute]
     public enum CngUIProtectionLevels
     {
@@ -754,11 +854,15 @@ namespace System.Security.Cryptography
         ProtectKey = 1,
         ForceHighProtection = 2,
     }
+
     public sealed partial class DSACng : System.Security.Cryptography.DSA
     {
         public DSACng() { }
+
         public DSACng(int keySize) { }
+
         public DSACng(System.Security.Cryptography.CngKey key) { }
+
         public System.Security.Cryptography.CngKey Key
         {
             get { throw null; }
@@ -775,17 +879,21 @@ namespace System.Security.Cryptography
         {
             get { throw null; }
         }
+
         public override byte[] CreateSignature(byte[] rgbHash)
         {
             throw null;
         }
+
         protected override void Dispose(bool disposing) { }
+
         public override System.Security.Cryptography.DSAParameters ExportParameters(
             bool includePrivateParameters
         )
         {
             throw null;
         }
+
         protected override byte[] HashData(
             byte[] data,
             int offset,
@@ -795,6 +903,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         protected override byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
@@ -802,20 +911,27 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override void ImportParameters(
             System.Security.Cryptography.DSAParameters parameters
         ) { }
+
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature)
         {
             throw null;
         }
     }
+
     public sealed partial class ECDiffieHellmanCng : System.Security.Cryptography.ECDiffieHellman
     {
         public ECDiffieHellmanCng() { }
+
         public ECDiffieHellmanCng(int keySize) { }
+
         public ECDiffieHellmanCng(System.Security.Cryptography.CngKey key) { }
+
         public ECDiffieHellmanCng(System.Security.Cryptography.ECCurve curve) { }
+
         public System.Security.Cryptography.CngAlgorithm HashAlgorithm
         {
             get { throw null; }
@@ -868,6 +984,7 @@ namespace System.Security.Cryptography
         {
             get { throw null; }
         }
+
         public override byte[] DeriveKeyFromHash(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
@@ -877,6 +994,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override byte[] DeriveKeyFromHmac(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
@@ -887,16 +1005,19 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public byte[] DeriveKeyMaterial(System.Security.Cryptography.CngKey otherPartyPublicKey)
         {
             throw null;
         }
+
         public override byte[] DeriveKeyMaterial(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey
         )
         {
             throw null;
         }
+
         public override byte[] DeriveKeyTls(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey,
             byte[] prfLabel,
@@ -905,62 +1026,77 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public Microsoft.Win32.SafeHandles.SafeNCryptSecretHandle DeriveSecretAgreementHandle(
             System.Security.Cryptography.CngKey otherPartyPublicKey
         )
         {
             throw null;
         }
+
         public Microsoft.Win32.SafeHandles.SafeNCryptSecretHandle DeriveSecretAgreementHandle(
             System.Security.Cryptography.ECDiffieHellmanPublicKey otherPartyPublicKey
         )
         {
             throw null;
         }
+
         protected override void Dispose(bool disposing) { }
+
         public override System.Security.Cryptography.ECParameters ExportExplicitParameters(
             bool includePrivateParameters
         )
         {
             throw null;
         }
+
         public override System.Security.Cryptography.ECParameters ExportParameters(
             bool includePrivateParameters
         )
         {
             throw null;
         }
+
         public void FromXmlString(
             string xml,
             System.Security.Cryptography.ECKeyXmlFormat format
         ) { }
+
         public override void GenerateKey(System.Security.Cryptography.ECCurve curve) { }
+
         public override void ImportParameters(
             System.Security.Cryptography.ECParameters parameters
         ) { }
+
         public string ToXmlString(System.Security.Cryptography.ECKeyXmlFormat format)
         {
             throw null;
         }
     }
+
     public sealed partial class ECDiffieHellmanCngPublicKey
         : System.Security.Cryptography.ECDiffieHellmanPublicKey
     {
         // ECDiffieHellmanPublicKey parameter-less ctor only exist on .NET Framework 4.7+
         private ECDiffieHellmanCngPublicKey() : base(null) { }
+
         public System.Security.Cryptography.CngKeyBlobFormat BlobFormat
         {
             get { throw null; }
         }
+
         protected override void Dispose(bool disposing) { }
+
         public override System.Security.Cryptography.ECParameters ExportExplicitParameters()
         {
             throw null;
         }
+
         public override System.Security.Cryptography.ECParameters ExportParameters()
         {
             throw null;
         }
+
         public static System.Security.Cryptography.ECDiffieHellmanPublicKey FromByteArray(
             byte[] publicKeyBlob,
             System.Security.Cryptography.CngKeyBlobFormat format
@@ -968,33 +1104,42 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public static System.Security.Cryptography.ECDiffieHellmanCngPublicKey FromXmlString(
             string xml
         )
         {
             throw null;
         }
+
         public System.Security.Cryptography.CngKey Import()
         {
             throw null;
         }
+
         public override string ToXmlString()
         {
             throw null;
         }
     }
+
     public enum ECDiffieHellmanKeyDerivationFunction
     {
         Hash = 0,
         Hmac = 1,
         Tls = 2,
     }
+
     public sealed partial class ECDsaCng : System.Security.Cryptography.ECDsa
     {
         public ECDsaCng() { }
+
         public ECDsaCng(int keySize) { }
+
         public ECDsaCng(System.Security.Cryptography.CngKey key) { }
+
         public ECDsaCng(System.Security.Cryptography.ECCurve curve) { }
+
         public System.Security.Cryptography.CngAlgorithm HashAlgorithm
         {
             get { throw null; }
@@ -1013,24 +1158,30 @@ namespace System.Security.Cryptography
         {
             get { throw null; }
         }
+
         protected override void Dispose(bool disposing) { }
+
         public override System.Security.Cryptography.ECParameters ExportExplicitParameters(
             bool includePrivateParameters
         )
         {
             throw null;
         }
+
         public override System.Security.Cryptography.ECParameters ExportParameters(
             bool includePrivateParameters
         )
         {
             throw null;
         }
+
         public void FromXmlString(
             string xml,
             System.Security.Cryptography.ECKeyXmlFormat format
         ) { }
+
         public override void GenerateKey(System.Security.Cryptography.ECCurve curve) { }
+
         protected override byte[] HashData(
             byte[] data,
             int offset,
@@ -1040,6 +1191,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         protected override byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
@@ -1047,55 +1199,70 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override void ImportParameters(
             System.Security.Cryptography.ECParameters parameters
         ) { }
+
         public byte[] SignData(byte[] data)
         {
             throw null;
         }
+
         public byte[] SignData(byte[] data, int offset, int count)
         {
             throw null;
         }
+
         public byte[] SignData(System.IO.Stream data)
         {
             throw null;
         }
+
         public override byte[] SignHash(byte[] hash)
         {
             throw null;
         }
+
         public string ToXmlString(System.Security.Cryptography.ECKeyXmlFormat format)
         {
             throw null;
         }
+
         public bool VerifyData(byte[] data, byte[] signature)
         {
             throw null;
         }
+
         public bool VerifyData(byte[] data, int offset, int count, byte[] signature)
         {
             throw null;
         }
+
         public bool VerifyData(System.IO.Stream data, byte[] signature)
         {
             throw null;
         }
+
         public override bool VerifyHash(byte[] hash, byte[] signature)
         {
             throw null;
         }
     }
+
     public enum ECKeyXmlFormat
     {
         Rfc4050 = 0,
     }
+
     public sealed partial class RSACng : System.Security.Cryptography.RSA
     {
         public RSACng() { }
+
         public RSACng(int keySize) { }
+
         public RSACng(System.Security.Cryptography.CngKey key) { }
+
         public System.Security.Cryptography.CngKey Key
         {
             get { throw null; }
@@ -1104,6 +1271,7 @@ namespace System.Security.Cryptography
         {
             get { throw null; }
         }
+
         public override byte[] Decrypt(
             byte[] data,
             System.Security.Cryptography.RSAEncryptionPadding padding
@@ -1111,7 +1279,9 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         protected override void Dispose(bool disposing) { }
+
         public override byte[] Encrypt(
             byte[] data,
             System.Security.Cryptography.RSAEncryptionPadding padding
@@ -1119,12 +1289,14 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override System.Security.Cryptography.RSAParameters ExportParameters(
             bool includePrivateParameters
         )
         {
             throw null;
         }
+
         protected override byte[] HashData(
             byte[] data,
             int offset,
@@ -1134,6 +1306,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         protected override byte[] HashData(
             System.IO.Stream data,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm
@@ -1141,9 +1314,11 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override void ImportParameters(
             System.Security.Cryptography.RSAParameters parameters
         ) { }
+
         public override byte[] SignHash(
             byte[] hash,
             System.Security.Cryptography.HashAlgorithmName hashAlgorithm,
@@ -1152,6 +1327,7 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override bool VerifyHash(
             byte[] hash,
             byte[] signature,
@@ -1162,16 +1338,21 @@ namespace System.Security.Cryptography
             throw null;
         }
     }
+
     public sealed partial class TripleDESCng : System.Security.Cryptography.TripleDES
     {
         public TripleDESCng() { }
+
         public TripleDESCng(string keyName) { }
+
         public TripleDESCng(string keyName, System.Security.Cryptography.CngProvider provider) { }
+
         public TripleDESCng(
             string keyName,
             System.Security.Cryptography.CngProvider provider,
             System.Security.Cryptography.CngKeyOpenOptions openOptions
         ) { }
+
         public override byte[] Key
         {
             get { throw null; }
@@ -1182,10 +1363,12 @@ namespace System.Security.Cryptography
             get { throw null; }
             set { }
         }
+
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor()
         {
             throw null;
         }
+
         public override System.Security.Cryptography.ICryptoTransform CreateDecryptor(
             byte[] rgbKey,
             byte[]? rgbIV
@@ -1193,10 +1376,12 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor()
         {
             throw null;
         }
+
         public override System.Security.Cryptography.ICryptoTransform CreateEncryptor(
             byte[] rgbKey,
             byte[]? rgbIV
@@ -1204,8 +1389,11 @@ namespace System.Security.Cryptography
         {
             throw null;
         }
+
         protected override void Dispose(bool disposing) { }
+
         public override void GenerateIV() { }
+
         public override void GenerateKey() { }
     }
 }

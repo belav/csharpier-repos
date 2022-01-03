@@ -63,9 +63,11 @@ namespace ComWrappersTests.GlobalInstance
 
         private const string IID_IDISPATCH = "00020400-0000-0000-C000-000000000046";
         private const string IID_IINSPECTABLE = "AF86E2E0-B12D-4c6a-9C5A-D7AA65101E90";
+
         class TestEx : Test
         {
             public readonly Guid[] Interfaces;
+
             public TestEx(params string[] iids)
             {
                 Interfaces = new Guid[iids.Length];
@@ -78,6 +80,7 @@ namespace ComWrappersTests.GlobalInstance
         {
             private delegate int _AddRef(IntPtr This);
             private delegate int _Release(IntPtr This);
+
             private struct IUnknownWrapperVtbl
             {
                 public IntPtr QueryInterface;
@@ -407,6 +410,7 @@ namespace ComWrappersTests.GlobalInstance
         }
 
         private delegate int UpdateTestObject<T>(T testObj, int i, out T ret) where T : class;
+
         private static void ValidateInterfaceMarshaler<T>(
             UpdateTestObject<T> func,
             bool shouldSucceed,

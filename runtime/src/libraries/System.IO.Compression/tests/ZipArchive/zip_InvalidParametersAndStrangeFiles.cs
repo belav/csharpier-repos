@@ -12,6 +12,7 @@ namespace System.IO.Compression.Tests
     {
         private static readonly int s_bufferSize = 10240;
         private static readonly string s_tamperedFileName = "binary.wmv";
+
         private static void ConstructorThrows<TException>(
             Func<ZipArchive> constructor,
             string Message

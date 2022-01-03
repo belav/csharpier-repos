@@ -3,6 +3,4 @@
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-public interface IJsonHelper
-{
-}
+public interface IJsonHelper { }

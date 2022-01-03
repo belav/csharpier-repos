@@ -391,6 +391,7 @@ namespace ILCompiler.PEWriter
             sizeof(int)
             + // BaseOfCode
             sizeof(long); // PE32:  BaseOfData (int), ImageBase (int)
+
         // PE32+: ImageBase (long)
         const int OffsetOfChecksum =
             OffsetOfSectionAlign

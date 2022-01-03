@@ -1,6 +1,7 @@
 using System;
 
 public class GenA<T> { };
+
 public class GenB<T> : GenA<GenB<GenB<T>>> { };
 
 public class GenC<T>

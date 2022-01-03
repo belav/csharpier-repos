@@ -124,6 +124,7 @@ namespace Microsoft.CodeAnalysis
 
         private static readonly Func<ProjectId, Solution, Project> s_createProjectFunction =
             CreateProject;
+
         private static Project CreateProject(ProjectId projectId, Solution solution)
         {
             var state = solution.State.GetProjectState(projectId);

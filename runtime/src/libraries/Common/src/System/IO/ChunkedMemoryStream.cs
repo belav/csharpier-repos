@@ -126,21 +126,27 @@ namespace System.IO
         public override bool CanSeek => false;
         public override bool CanWrite => true;
         public override long Length => _totalLength;
+
         public override void Flush() { }
+
         public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
         public override long Position
         {
             get { throw new NotSupportedException(); }
             set { throw new NotSupportedException(); }
         }
+
         public override int Read(byte[] buffer, int offset, int count)
         {
             throw new NotSupportedException();
         }
+
         public override long Seek(long offset, SeekOrigin origin)
         {
             throw new NotSupportedException();
         }
+
         public override void SetLength(long value)
         {
             if (_currentChunk != null)

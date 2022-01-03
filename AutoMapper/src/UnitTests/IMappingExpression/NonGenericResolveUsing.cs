@@ -11,6 +11,7 @@ namespace AutoMapper.UnitTests
         public class Source
         {
         }
+
         public class Destination
         {
             public int Value { get; set; }

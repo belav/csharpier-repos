@@ -84,11 +84,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 // This writer wants the done emitted as a schema terminator
                 return false;
             }
+
             public void EmitLong(long value, long previousValue)
             {
                 if (_actuallyCaptureOutput)
                     _longs.Add(value - previousValue);
             }
+
             public void EmitType(
                 TypeSystemEntityOrUnknown type,
                 TypeSystemEntityOrUnknown previousValue

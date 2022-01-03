@@ -110,12 +110,14 @@ namespace Newtonsoft.Json.Tests.Serialization
         }
 
         public interface ITest { }
+
         public class MyTest : ITest { }
 
         public class MyClass1
         {
             [JsonProperty("myint")]
             public int MyInt { get; set; }
+
             [JsonProperty("Mybool")]
             public bool Mybool { get; set; }
         }

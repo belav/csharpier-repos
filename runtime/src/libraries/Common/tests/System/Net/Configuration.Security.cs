@@ -50,6 +50,7 @@ namespace System.Net.Test.Common
 
             public static string HostsFileNamesInstalled =>
                 GetValue("DOTNET_TEST_NET_SECURITY_HOSTS_FILE_INSTALLED");
+
             // Allows packet captures.
             public static string SecurityForceSocketStreams =>
                 GetValue("DOTNET_TEST_NET_SECURITY_FORCE_SOCKET_STREAMS");

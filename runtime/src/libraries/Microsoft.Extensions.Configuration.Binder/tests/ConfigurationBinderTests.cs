@@ -314,6 +314,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
 
             Assert.Equal(expectedMessage, ex.Message);
         }
+
         [Fact]
         public void ThrowsIfPropertyInConfigMissingInNestedModel()
         {

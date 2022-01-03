@@ -46,6 +46,7 @@ namespace System.Net.WebSockets
             ReceiveFromNetwork = 3,
             IndicateReceiveComplete = 4,
         }
+
         internal enum BufferType : uint
         {
             None = 0x00000000,

@@ -16,6 +16,7 @@ internal static partial class Interop
             CharSet = CharSet.Ansi
         )]
         private static partial SafeEcKeyHandle CryptoNative_EcKeyCreateByOid(string oid);
+
         internal static SafeEcKeyHandle? EcKeyCreateByOid(string oid)
         {
             SafeEcKeyHandle handle = CryptoNative_EcKeyCreateByOid(oid);
@@ -43,6 +44,7 @@ internal static partial class Interop
             SafeEcKeyHandle ecKey,
             out int keySize
         );
+
         internal static int EcKeyGetSize(SafeEcKeyHandle key)
         {
             int keySize;

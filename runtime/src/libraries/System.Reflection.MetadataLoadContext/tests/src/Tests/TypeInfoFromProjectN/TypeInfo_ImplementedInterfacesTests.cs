@@ -137,21 +137,31 @@ namespace System.Reflection.Tests
 
     //Metadata for Reflection
     public interface ImI1 { }
+
     public interface I0 { }
+
     public interface I21 : ImI1 { }
+
     public interface I3<T> { }
 
     public struct S1 : I21 { }
 
     public class C1 : I0 { }
+
     public class D1 : C1, I21 { }
+
     public class D2<T> : C1, I21 { }
+
     public class D3<T> : C1, I3<T> { }
+
     public class D4<T> : C1, I3<string> { }
 
     public class E1<T> where T : ImI1 { }
+
     public class E2<T> where T : C1, I21 { }
+
     public class E3<T> where T : C1, I3<T> { }
+
     public class E4<T> where T : C1, I3<int> { }
 
     public enum MyEnum1

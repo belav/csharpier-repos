@@ -25,6 +25,7 @@ namespace System
     {
         /// <summary>A byref or a native ptr.</summary>
         internal readonly ByReference<T> _pointer;
+
         /// <summary>The number of elements this ReadOnlySpan contains.</summary>
         private readonly int _length;
 
@@ -219,6 +220,7 @@ namespace System
         {
             /// <summary>The span being enumerated.</summary>
             private readonly ReadOnlySpan<T> _span;
+
             /// <summary>The next index to yield.</summary>
             private int _index;
 

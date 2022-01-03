@@ -1969,6 +1969,7 @@ namespace System.Data
                 reader.Read();
             }
         }
+
         internal void ReadEndElement(XmlReader reader)
         {
             while (reader.NodeType == XmlNodeType.Whitespace)

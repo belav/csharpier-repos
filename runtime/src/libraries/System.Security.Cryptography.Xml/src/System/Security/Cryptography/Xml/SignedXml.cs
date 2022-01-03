@@ -33,6 +33,7 @@ namespace System.Security.Cryptography.Xml
 
         // Built in canonicalization algorithm URIs
         private static IList<string> s_knownCanonicalizationMethods;
+
         // Built in transform algorithm URIs (excluding canonicalization URIs)
         private static IList<string> s_defaultSafeTransformMethods;
 
@@ -930,6 +931,7 @@ namespace System.Security.Cryptography.Xml
         private sealed class ReferenceLevelSortOrder : IComparer
         {
             private ArrayList _references;
+
             public ReferenceLevelSortOrder() { }
 
             public ArrayList References

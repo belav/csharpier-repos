@@ -47,6 +47,7 @@ namespace Test
             }
             catch (OtherException) { }
         }
+
         private static int Main()
         {
             try

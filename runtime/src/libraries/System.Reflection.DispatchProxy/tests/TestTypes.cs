@@ -194,6 +194,7 @@ public abstract class Abstract_TestDispatchProxy : DispatchProxy
 public class NoDefaultCtor_TestDispatchProxy : DispatchProxy
 {
     private NoDefaultCtor_TestDispatchProxy() { }
+
     protected override object Invoke(MethodInfo targetMethod, object[] args)
     {
         throw new InvalidOperationException();

@@ -49,10 +49,12 @@ namespace System.Management
     public class ManagementClass : ManagementObject
     {
         private MethodDataCollection methods;
+
         protected override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// Internal factory for classes, used when deriving a class
         /// or cloning a class. For these purposes we always mark

@@ -26,6 +26,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     public class C
     {
         public delegate void Foo<in T>(T t);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -95,6 +96,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     public class C
     {
         public delegate void Foo<in T>(T t);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -137,6 +139,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     public class C
     {
         public delegate T Foo<out T>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -194,6 +197,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     public class C
     {
         public delegate T Foo<out T>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -560,6 +564,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     public class C
     {
         public delegate void Foo<in T>(T t);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -621,6 +626,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     public class C
     {
         public delegate void Foo<in T>(T t);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -655,6 +661,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     public class C
     {
         public delegate T Foo<out T>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -704,6 +711,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
     public class C
     {
         public delegate T Foo<out T>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

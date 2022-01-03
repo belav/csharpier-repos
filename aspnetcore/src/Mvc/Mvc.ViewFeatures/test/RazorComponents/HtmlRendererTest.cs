@@ -989,6 +989,7 @@ public class HtmlRendererTest
     {
         [Parameter]
         public bool Nested { get; set; }
+
         [Parameter]
         public int Value { get; set; }
 

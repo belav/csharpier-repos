@@ -243,6 +243,7 @@ public class Tests
         else
             Console.WriteLine("Success: {0} {1}", childSameModObj.GetType().Name, result);
     }
+
     public void TestModNecessary()
     {
         var result = (string)invokeParentSig.Invoke(null, new Object[] { childNoModObj });
@@ -251,6 +252,7 @@ public class Tests
         else
             Console.WriteLine("Success: {0} {1}", childNoModObj.GetType().Name, result);
     }
+
     public void TestModReqSameAsOpt()
     {
         var result = (string)invokeParentSig.Invoke(null, new Object[] { childOptModObj });
@@ -259,6 +261,7 @@ public class Tests
         else
             Console.WriteLine("Success: {0} {1}", childOptModObj.GetType().Name, result);
     }
+
     public void TestModReqMulti()
     {
         var result = (string)invokeParentForwardSig.Invoke(null, new Object[] { childForwardObj });
@@ -273,6 +276,7 @@ public class Tests
                 result
             );
     }
+
     public void TestModReqMultiNoOrder()
     {
         var result = (string)invokeParentForwardSig.Invoke(null, new Object[] { childBackwardObj });

@@ -458,8 +458,10 @@ namespace System.Threading.Tasks
         {
             /// <summary>The caller-provided cancellation token.</summary>
             private readonly CancellationToken _externalCancellationToken;
+
             /// <summary>Registration with caller-provided cancellation token.</summary>
             protected readonly CancellationTokenRegistration _registration;
+
             /// <summary>
             /// The delegate to invoke on each worker to run the enumerator processing loop.
             /// </summary>
@@ -468,20 +470,25 @@ namespace System.Threading.Tasks
             /// method rather than async void, even though the worker body catches all exceptions and the returned Task is ignored.
             /// </remarks>
             private readonly Func<object, Task> _taskBody;
+
             /// <summary>The <see cref="TaskScheduler"/> on which all work should be performed.</summary>
             private readonly TaskScheduler _scheduler;
+
             /// <summary>The <see cref="ExecutionContext"/> present at the time of the ForEachAsync invocation.  This is only used if on the default scheduler.</summary>
             private readonly ExecutionContext? _executionContext;
 
             /// <summary>The number of outstanding workers.  When this hits 0, the operation has completed.</summary>
             private int _completionRefCount;
+
             /// <summary>Any exceptions incurred during execution.</summary>
             private List<Exception>? _exceptions;
+
             /// <summary>The number of workers that may still be created.</summary>
             private int _remainingDop;
 
             /// <summary>The delegate to invoke for each element yielded by the enumerator.</summary>
             public readonly Func<TSource, CancellationToken, ValueTask> LoopBody;
+
             /// <summary>The internal token source used to cancel pending work.</summary>
             public readonly CancellationTokenSource Cancellation = new CancellationTokenSource();
 

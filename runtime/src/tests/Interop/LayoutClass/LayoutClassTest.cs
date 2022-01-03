@@ -76,6 +76,7 @@ namespace PInvokeTests
             c = num;
             i = num;
         }
+
         public ExpClass(DialogResult t, double dnum)
         {
             type = t;
@@ -83,6 +84,7 @@ namespace PInvokeTests
             i = 0;
             c = dnum;
         }
+
         public ExpClass(DialogResult t, bool bnum)
         {
             type = t;

@@ -107,6 +107,7 @@ public class TcpConnection : ConnectionContext, IConnectionInherentKeepAliveFeat
             _application.Input.Complete(sendError);
         }
     }
+
     private async Task DoReceive()
     {
         Exception error = null;

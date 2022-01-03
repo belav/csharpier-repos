@@ -17,6 +17,7 @@ namespace System.Text.RegularExpressions.Symbolic
     {
         /// <summary>Lookup table used for ASCII characters.</summary>
         private readonly bool[] _ascii;
+
         /// <summary>BDD used for non-ASCII characters.</summary>
         private readonly BDD _nonAscii;
 

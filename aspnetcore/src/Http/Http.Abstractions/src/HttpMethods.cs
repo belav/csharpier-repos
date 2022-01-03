@@ -22,34 +22,42 @@ public static class HttpMethods
     /// HTTP "CONNECT" method.
     /// </summary>
     public static readonly string Connect = "CONNECT";
+
     /// <summary>
     /// HTTP "DELETE" method.
     /// </summary>
     public static readonly string Delete = "DELETE";
+
     /// <summary>
     /// HTTP "GET" method.
     /// </summary>
     public static readonly string Get = "GET";
+
     /// <summary>
     /// HTTP "HEAD" method.
     /// </summary>
     public static readonly string Head = "HEAD";
+
     /// <summary>
     /// HTTP "OPTIONS" method.
     /// </summary>
     public static readonly string Options = "OPTIONS";
+
     /// <summary>
     /// HTTP "PATCH" method.
     /// </summary>
     public static readonly string Patch = "PATCH";
+
     /// <summary>
     /// HTTP "POST" method.
     /// </summary>
     public static readonly string Post = "POST";
+
     /// <summary>
     /// HTTP "PUT" method.
     /// </summary>
     public static readonly string Put = "PUT";
+
     /// <summary>
     /// HTTP "TRACE" method.
     /// </summary>

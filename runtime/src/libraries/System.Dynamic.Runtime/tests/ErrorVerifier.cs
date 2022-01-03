@@ -189,6 +189,7 @@ public class ErrorVerifier
     private static Assembly s_asm;
     private static ResourceManager s_rm1;
     private static ResourceManager s_rm2;
+
     public static string GetErrorElement(ErrorElementId id)
     {
         return string.Empty;

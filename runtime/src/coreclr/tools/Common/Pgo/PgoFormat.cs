@@ -189,8 +189,11 @@ namespace Internal.Pgo
             }
 
             void IDisposable.Dispose() { }
+
             IEnumerator<long> IEnumerable<long>.GetEnumerator() => this;
+
             IEnumerator IEnumerable.GetEnumerator() => this;
+
             void IEnumerator.Reset() => throw new NotImplementedException();
         }
 
@@ -585,6 +588,7 @@ namespace Internal.Pgo
             }
 
             public bool Equals(PgoSchemaElem x, PgoSchemaElem y) => Compare(x, y) == 0;
+
             int IEqualityComparer<PgoSchemaElem>.GetHashCode(PgoSchemaElem obj) =>
                 obj.ILOffset
                 ^ ((int)(obj.InstrumentationKind & PgoInstrumentationKind.DescriptorMask) << 20);

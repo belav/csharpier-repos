@@ -14,6 +14,7 @@ namespace System.Xml.Schema
             Min,
             Max
         };
+
         private decimal _minOccurs = decimal.One;
         private decimal _maxOccurs = decimal.One;
         private Occurs _flags = Occurs.None;

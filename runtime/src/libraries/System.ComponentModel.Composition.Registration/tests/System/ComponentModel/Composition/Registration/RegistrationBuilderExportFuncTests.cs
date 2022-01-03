@@ -9,11 +9,13 @@ namespace System.ComponentModel.Composition.Registration.Tests
     public class RegistrationBuilderExportFuncUnitTests
     {
         public interface IFoo { }
+
         public class Class1
         {
             [Import]
             public Func<IFoo> Foo { get; set; }
         }
+
         public class Factory
         {
             [Export]

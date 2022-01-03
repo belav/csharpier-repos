@@ -549,6 +549,7 @@ namespace System.Xml.Tests
 
             return base.Terminate(objParam);
         }
+
         private bool VerifyInvalidReadBinHex(
             int iBufferSize,
             int iIndex,

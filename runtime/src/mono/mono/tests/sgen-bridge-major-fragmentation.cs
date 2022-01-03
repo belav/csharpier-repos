@@ -46,6 +46,7 @@ class Driver
     {
         Console.WriteLine("[" + DateTime.Now + "] " + message);
     }
+
     //we fill 16Mb worth of stuff, eg, 256k objects
     const int major_fill = 1024 * 256;
 

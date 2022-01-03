@@ -467,10 +467,12 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             private ScopeDelegateLogger _logger;
             private IExternalScopeProvider _scopeProvider;
+
             public ScopeDelegateLoggerProvider(ScopeDelegateLogger logger)
             {
                 _logger = logger;
             }
+
             public ILogger CreateLogger(string categoryName)
             {
                 _logger.ScopeProvider = _scopeProvider;
@@ -489,10 +491,12 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             private Action<List<object>> _logDelegate;
             internal IExternalScopeProvider ScopeProvider { get; set; }
+
             public ScopeDelegateLogger(Action<List<object>> logDelegate)
             {
                 _logDelegate = logDelegate;
             }
+
             public IDisposable BeginScope<TState>(TState state)
             {
                 Scopes.Add(state);

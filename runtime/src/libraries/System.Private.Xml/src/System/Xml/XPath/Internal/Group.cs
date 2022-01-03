@@ -13,6 +13,7 @@ namespace MS.Internal.Xml.XPath
         {
             _groupNode = groupNode;
         }
+
         public override AstType Type
         {
             get { return AstType.Group; }

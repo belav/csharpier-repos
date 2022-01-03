@@ -43,6 +43,7 @@ namespace System.Net.Mail.Tests
                 $"\"{UnicodeDisplayName}\" <{Address}>"
             };
         }
+
         public static IEnumerable<object[]> MailAddressTestDataQuotes()
         {
             var displayNamesWithQuotes = new[]

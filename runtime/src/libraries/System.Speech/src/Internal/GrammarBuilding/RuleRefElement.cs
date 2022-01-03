@@ -34,6 +34,7 @@ namespace System.Speech.Internal.GrammarBuilding
             }
             return _semanticKey == refObj._semanticKey && _rule.Equals(refObj._rule);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();

@@ -460,6 +460,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 }
             }
         }
+
         [Flags]
         private enum VirtualnessModifiers
         {

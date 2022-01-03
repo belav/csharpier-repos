@@ -22,6 +22,7 @@ namespace System.Collections.ObjectModel
 
         [NonSerialized]
         private KeyCollection? _keys;
+
         [NonSerialized]
         private ValueCollection? _values;
 
@@ -352,6 +353,7 @@ namespace System.Collections.ObjectModel
             {
                 throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
             }
+
             public IEnumerator<TValue> GetEnumerator() => _collection.GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_collection).GetEnumerator();

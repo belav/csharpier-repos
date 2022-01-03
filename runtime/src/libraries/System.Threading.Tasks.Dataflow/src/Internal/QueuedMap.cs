@@ -40,15 +40,19 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             /// <summary>Terminator index.</summary>
             private const int TERMINATOR_INDEX = -1;
+
             /// <summary>
             /// The queue where the items will be stored.
             /// The key of each entry is the index of the next entry in the queue.
             /// </summary>
             private readonly List<KeyValuePair<int, T>> _storage;
+
             /// <summary>Index of the first queue item.</summary>
             private int _headIndex = TERMINATOR_INDEX;
+
             /// <summary>Index of the last queue item.</summary>
             private int _tailIndex = TERMINATOR_INDEX;
+
             /// <summary>Index of the first free slot.</summary>
             private int _freeIndex = TERMINATOR_INDEX;
 
@@ -176,6 +180,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>The queue of elements.</summary>
         private readonly ArrayBasedLinkedQueue<KeyValuePair<TKey, TValue>> _queue;
+
         /// <summary>A map from key to index into the list.</summary>
         /// <remarks>The correctness of this map relies on the list only having elements removed from its end.</remarks>
         private readonly Dictionary<TKey, int> _mapKeyToIndex;

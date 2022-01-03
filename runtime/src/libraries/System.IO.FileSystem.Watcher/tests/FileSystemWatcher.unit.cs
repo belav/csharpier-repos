@@ -905,6 +905,7 @@ namespace System.IO.Tests
             Assert.Equal(3, watcher.Filters.Count);
             Assert.Equal(new string[] { "foo", "*.pdb", "*.dll" }, watcher.Filters);
         }
+
         [Fact]
         public void IndexOfEmptyStringFilters()
         {

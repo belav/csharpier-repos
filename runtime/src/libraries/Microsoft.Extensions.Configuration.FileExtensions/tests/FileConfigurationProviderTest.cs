@@ -153,6 +153,7 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
                 (PhysicalPath, Exists) = (physicalPath, exists);
 
             public Stream CreateReadStream() => new MemoryStream();
+
             public bool Exists { get; set; }
             public bool IsDirectory => false;
             public DateTimeOffset LastModified => default;

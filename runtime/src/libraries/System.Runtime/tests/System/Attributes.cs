@@ -21,6 +21,8 @@ using System.Runtime.InteropServices;
 using Xunit;
 
 [module: Debuggable(true, false)]
+
+
 namespace System.Tests
 {
     public class AttributeIsDefinedTests
@@ -718,6 +720,7 @@ namespace System.Tests
                 () => Attribute.GetCustomAttribute(element, attributeType)
             );
         }
+
         [Fact]
         public static void PositiveTest2()
         {
@@ -783,6 +786,7 @@ namespace System.Tests
                 () => Attribute.GetCustomAttribute(element, attributeType, true)
             );
         }
+
         [Fact]
         public static void PositiveTest3()
         {
@@ -837,6 +841,7 @@ namespace System.Tests
                     )
             );
         }
+
         [Fact]
         public static void PositiveTest4()
         {
@@ -945,6 +950,7 @@ namespace System.Tests
                     (DebuggableAttribute)Attribute.GetCustomAttribute(clsType.Module, attributeType)
             );
         }
+
         [Fact]
         public static void PositiveTest6()
         {
@@ -1007,6 +1013,7 @@ namespace System.Tests
                     )
             );
         }
+
         [Fact]
         public static void PositiveTest7()
         {
@@ -1066,6 +1073,7 @@ namespace System.Tests
                     )
             );
         }
+
         [Fact]
         public static void PositiveTest8()
         {
@@ -1148,6 +1156,7 @@ namespace System.Tests
             );
         }
     }
+
     [AttributeUsage(AttributeTargets.All)]
     public class TestAttribute : Attribute
     {
@@ -1172,7 +1181,9 @@ namespace System.Tests
     {
         [Obsolete("This method is obsolete.use method2 instead")]
         public void method1() { }
+
         public void method2() { }
+
         public string method3(string strVal)
         {
             return strVal;
@@ -1262,15 +1273,18 @@ namespace System.Tests
             }
         }
     }
+
     [AttributeUsage(AttributeTargets.Parameter)]
     public class ArgumentUsageAttribute : Attribute
     {
         public static object _guid = 0xdead;
         protected string usageMsg;
+
         public ArgumentUsageAttribute(string UsageMsg)
         {
             this.usageMsg = UsageMsg;
         }
+
         public string Message
         {
             get { return usageMsg; }
@@ -1283,6 +1297,7 @@ namespace System.Tests
             get { return _guid; }
         }
     }
+
     public class BaseClass
     {
         public virtual void TestMethod(
@@ -1290,6 +1305,7 @@ namespace System.Tests
             params string[] strList
         ) { }
     }
+
     public class DerivedClass : BaseClass
     {
         public override void TestMethod(
@@ -1297,10 +1313,12 @@ namespace System.Tests
             [ArgumentUsage("for test again")] params string[] strList
         ) { }
     }
+
     public class DerivedAttribute1 : Attribute
     {
         public DerivedAttribute1() { }
     }
+
     public class myClass
     {
     }
@@ -1321,6 +1339,7 @@ namespace System.Tests
     {
         public void Do() { }
     }
+
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     internal class MyCustomAttribute : Attribute
     {
@@ -1336,6 +1355,7 @@ namespace System.Tests
             get { return _info; }
         }
     }
+
     [AttributeUsage(AttributeTargets.Class)]
     internal class YourCustomAttribute : Attribute
     {

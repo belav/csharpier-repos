@@ -185,6 +185,7 @@ namespace System
         private sealed class NoEscape : TypeNames.ATypeName, ITypeIdentifier
         {
             private readonly string simpleName;
+
             internal NoEscape(string simpleName)
             {
                 this.simpleName = simpleName;

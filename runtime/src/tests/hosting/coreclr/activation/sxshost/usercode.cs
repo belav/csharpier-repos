@@ -8,6 +8,8 @@ using System.Reflection;
 #endif
 
 [assembly: AssemblyVersion("5.6.7.8")]
+
+
 public class EventSink
 {
     static public int Click(int x, int y)

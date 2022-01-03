@@ -5,19 +5,33 @@
 namespace System
 {
     public class Object { }
+
     public struct Byte { }
+
     public struct Int16 { }
+
     public struct Int32 { }
+
     public struct Int64 { }
+
     public struct Single { }
+
     public struct Double { }
+
     public struct Char { }
+
     public struct Boolean { }
+
     public struct SByte { }
+
     public struct UInt16 { }
+
     public struct UInt32 { }
+
     public struct UInt64 { }
+
     public struct IntPtr { }
+
     public struct UIntPtr { }
 
     // LEAVE THIS CLASS INTACT
@@ -46,19 +60,28 @@ namespace System
 
 
     }
+
     public class Delegate { }
+
     public class MulticastDelegate { }
+
     public class Array
     {
         public int Length { get; set; }
     }
+
     public class Exception { }
+
     public class Type { }
+
     public class ValueType { }
+
     public class Enum { }
+
     public struct Void { }
 
     public struct RuntimeTypeHandle { }
+
     public struct RuntimeFieldHandle { }
 
     public interface IDisposable { }
@@ -70,6 +93,7 @@ namespace System
     public sealed class AttributeUsageAttribute : Attribute
     {
         public AttributeUsageAttribute(AttributeTargets validOn) { }
+
         public bool AllowMultiple { get; set; }
         public bool Inherited { get; set; }
         public AttributeTargets ValidOn { get; set; }
@@ -102,6 +126,7 @@ namespace System
 namespace System.Collections
 {
     public interface IEnumerable { }
+
     public interface IEnumerator { }
 }
 

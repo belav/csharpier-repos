@@ -841,6 +841,7 @@ namespace System.Data.Tests.SqlTypes
         {
             Assert.Equal((byte)0, SqlBoolean.Zero.ByteValue);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {

@@ -33,6 +33,7 @@ namespace System.Security.Cryptography
         }
 
         public override ICryptoTransform CreateDecryptor() => _impl.CreateDecryptor();
+
         public override ICryptoTransform CreateEncryptor() => _impl.CreateEncryptor();
 
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) =>
@@ -63,6 +64,7 @@ namespace System.Security.Cryptography
         }
 
         public override void GenerateIV() => _impl.GenerateIV();
+
         public override void GenerateKey() => _impl.GenerateKey();
 
         public override byte[] IV

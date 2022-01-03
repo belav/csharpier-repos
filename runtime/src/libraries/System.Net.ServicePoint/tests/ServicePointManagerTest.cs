@@ -535,12 +535,16 @@ namespace System.Net.Tests
         private sealed class FixedWebProxy : IWebProxy
         {
             private readonly Uri _proxyAddress;
+
             public FixedWebProxy(string proxyAddress)
             {
                 _proxyAddress = new Uri(proxyAddress);
             }
+
             public Uri GetProxy(Uri destination) => _proxyAddress;
+
             public bool IsBypassed(Uri host) => false;
+
             public ICredentials Credentials { get; set; }
         }
     }

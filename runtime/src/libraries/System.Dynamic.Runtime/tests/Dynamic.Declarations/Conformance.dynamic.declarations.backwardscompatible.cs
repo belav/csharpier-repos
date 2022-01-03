@@ -47,6 +47,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     public class C
     {
         private int _dynamic = 1;
+
         public int M()
         {
             _dynamic = 2;
@@ -229,6 +230,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         }
 
         public int i = 0;
+
         public static int operator +(dynamic v1, dynamic v2)
         {
             return v1.i + v2.i;
@@ -481,6 +483,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     public class Test
     {
         private static dynamic s_v = new dynamic();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -515,6 +518,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     {
         private static dynamic s_v1 = new dynamic();
         private static dynamic s_v2;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -554,6 +558,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     public class Test
     {
         private static dynamic s_v1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -589,6 +594,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     public class G<T> where T : new()
     {
         public T V = new T();
+
         public R M<R>() where R : new()
         {
             return new R();
@@ -766,6 +772,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 
     internal delegate dynamic D(dynamic v);
+
     public class Test
     {
         [Fact]

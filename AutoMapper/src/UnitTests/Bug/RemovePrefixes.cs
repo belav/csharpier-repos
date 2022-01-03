@@ -11,6 +11,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int GetNumber { get; set; }
         }
+
         class Destination
         {
             public int Number { get; set; }

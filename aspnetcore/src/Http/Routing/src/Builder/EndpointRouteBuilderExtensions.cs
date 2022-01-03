@@ -24,6 +24,7 @@ public static class EndpointRouteBuilderExtensions
     private static readonly string[] PutVerb = new[] { "PUT" };
     private static readonly string[] DeleteVerb = new[] { "DELETE" };
     private static readonly string[] PatchVerb = new[] { "PATCH" };
+
     /// <summary>
     /// Adds a <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that matches HTTP GET requests
     /// for the specified pattern.

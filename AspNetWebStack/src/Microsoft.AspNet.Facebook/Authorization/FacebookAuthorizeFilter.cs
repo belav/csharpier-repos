@@ -22,6 +22,7 @@ namespace Microsoft.AspNet.Facebook.Authorization
         private static readonly Uri FacebookUri = new Uri("https://www.facebook.com/");
         private static readonly Uri DefaultAuthorizationRedirectUrl = FacebookUri;
         private static readonly Uri DefaultCannotCreateCookiesRedirectPath = FacebookUri;
+
         // Facebook Missing Permissions, shortened version to not add excessively long query string parameters to the url.
         private const string MissingPermissionsQueryName = "__fb_mps";
 

@@ -2143,6 +2143,7 @@ namespace System.Reflection.Emit.Tests
     }
 
     class PrivateAttribute : Attribute { }
+
     public class NotAnAttribute { }
 
     public class Primitives : Attribute
@@ -2300,11 +2301,18 @@ namespace System.Reflection.Emit.Tests
     }
 
     public enum SByteEnum : sbyte { }
+
     public enum ByteEnum : byte { }
+
     public enum ShortEnum : short { }
+
     public enum UShortEnum : ushort { }
+
     public enum IntEnum : int { }
+
     public enum UIntEnum : uint { }
+
     public enum LongEnum : long { }
+
     public enum ULongEnum : ulong { }
 }

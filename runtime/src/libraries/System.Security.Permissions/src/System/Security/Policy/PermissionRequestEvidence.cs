@@ -11,6 +11,7 @@ namespace System.Security.Policy
             PermissionSet optional,
             PermissionSet denied
         ) { }
+
         public PermissionSet DeniedPermissions
         {
             get { return default(PermissionSet); }
@@ -23,10 +24,12 @@ namespace System.Security.Policy
         {
             get { return default(PermissionSet); }
         }
+
         public PermissionRequestEvidence Copy()
         {
             return default(PermissionRequestEvidence);
         }
+
         public override string ToString() => base.ToString();
     }
 }

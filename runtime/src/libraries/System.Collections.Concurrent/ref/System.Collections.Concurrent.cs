@@ -15,14 +15,18 @@ namespace System.Collections.Concurrent
           System.IDisposable
     {
         public BlockingCollection() { }
+
         public BlockingCollection(
             System.Collections.Concurrent.IProducerConsumerCollection<T> collection
         ) { }
+
         public BlockingCollection(
             System.Collections.Concurrent.IProducerConsumerCollection<T> collection,
             int boundedCapacity
         ) { }
+
         public BlockingCollection(int boundedCapacity) { }
+
         public int BoundedCapacity
         {
             get { throw null; }
@@ -47,8 +51,11 @@ namespace System.Collections.Concurrent
         {
             get { throw null; }
         }
+
         public void Add(T item) { }
+
         public void Add(T item, System.Threading.CancellationToken cancellationToken) { }
+
         public static int AddToAny(
             System.Collections.Concurrent.BlockingCollection<T>[] collections,
             T item
@@ -56,6 +63,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static int AddToAny(
             System.Collections.Concurrent.BlockingCollection<T>[] collections,
             T item,
@@ -64,37 +72,49 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public void CompleteAdding() { }
+
         public void CopyTo(T[] array, int index) { }
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
+
         public System.Collections.Generic.IEnumerable<T> GetConsumingEnumerable()
         {
             throw null;
         }
+
         public System.Collections.Generic.IEnumerable<T> GetConsumingEnumerable(
             System.Threading.CancellationToken cancellationToken
         )
         {
             throw null;
         }
+
         System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()
         {
             throw null;
         }
+
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
+
         public T Take()
         {
             throw null;
         }
+
         public T Take(System.Threading.CancellationToken cancellationToken)
         {
             throw null;
         }
+
         public static int TakeFromAny(
             System.Collections.Concurrent.BlockingCollection<T>[] collections,
             out T? item
@@ -102,6 +122,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static int TakeFromAny(
             System.Collections.Concurrent.BlockingCollection<T>[] collections,
             out T? item,
@@ -110,18 +131,22 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public T[] ToArray()
         {
             throw null;
         }
+
         public bool TryAdd(T item)
         {
             throw null;
         }
+
         public bool TryAdd(T item, int millisecondsTimeout)
         {
             throw null;
         }
+
         public bool TryAdd(
             T item,
             int millisecondsTimeout,
@@ -130,10 +155,12 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public bool TryAdd(T item, System.TimeSpan timeout)
         {
             throw null;
         }
+
         public static int TryAddToAny(
             System.Collections.Concurrent.BlockingCollection<T>[] collections,
             T item
@@ -141,6 +168,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static int TryAddToAny(
             System.Collections.Concurrent.BlockingCollection<T>[] collections,
             T item,
@@ -149,6 +177,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static int TryAddToAny(
             System.Collections.Concurrent.BlockingCollection<T>[] collections,
             T item,
@@ -158,6 +187,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static int TryAddToAny(
             System.Collections.Concurrent.BlockingCollection<T>[] collections,
             T item,
@@ -166,12 +196,14 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public bool TryTake(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T item
         )
         {
             throw null;
         }
+
         public bool TryTake(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T item,
             int millisecondsTimeout
@@ -179,6 +211,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public bool TryTake(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T item,
             int millisecondsTimeout,
@@ -187,6 +220,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public bool TryTake(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T item,
             System.TimeSpan timeout
@@ -194,6 +228,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static int TryTakeFromAny(
             System.Collections.Concurrent.BlockingCollection<T>[] collections,
             out T? item
@@ -201,6 +236,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static int TryTakeFromAny(
             System.Collections.Concurrent.BlockingCollection<T>[] collections,
             out T? item,
@@ -209,6 +245,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static int TryTakeFromAny(
             System.Collections.Concurrent.BlockingCollection<T>[] collections,
             out T? item,
@@ -218,6 +255,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static int TryTakeFromAny(
             System.Collections.Concurrent.BlockingCollection<T>[] collections,
             out T? item,
@@ -227,6 +265,7 @@ namespace System.Collections.Concurrent
             throw null;
         }
     }
+
     public partial class ConcurrentBag<T>
         : System.Collections.Concurrent.IProducerConsumerCollection<T>,
           System.Collections.Generic.IEnumerable<T>,
@@ -235,7 +274,9 @@ namespace System.Collections.Concurrent
           System.Collections.IEnumerable
     {
         public ConcurrentBag() { }
+
         public ConcurrentBag(System.Collections.Generic.IEnumerable<T> collection) { }
+
         public int Count
         {
             get { throw null; }
@@ -252,32 +293,42 @@ namespace System.Collections.Concurrent
         {
             get { throw null; }
         }
+
         public void Add(T item) { }
+
         public void Clear() { }
+
         public void CopyTo(T[] array, int index) { }
+
         public System.Collections.Generic.IEnumerator<T> GetEnumerator()
         {
             throw null;
         }
+
         bool System.Collections.Concurrent.IProducerConsumerCollection<T>.TryAdd(T item)
         {
             throw null;
         }
+
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
+
         public T[] ToArray()
         {
             throw null;
         }
+
         public bool TryPeek(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T result
         )
         {
             throw null;
         }
+
         public bool TryTake(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T result
         )
@@ -285,6 +336,7 @@ namespace System.Collections.Concurrent
             throw null;
         }
     }
+
     public partial class ConcurrentDictionary<TKey, TValue>
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
                   TKey,
@@ -305,12 +357,14 @@ namespace System.Collections.Concurrent
           System.Collections.IEnumerable where TKey : notnull
     {
         public ConcurrentDictionary() { }
+
         public ConcurrentDictionary(
             System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
                     TKey,
                     TValue
                 >> collection
         ) { }
+
         public ConcurrentDictionary(
             System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
                     TKey,
@@ -318,8 +372,10 @@ namespace System.Collections.Concurrent
                 >> collection,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
         ) { }
+
         public ConcurrentDictionary(System.Collections.Generic.IEqualityComparer<TKey>? comparer)
         { }
+
         public ConcurrentDictionary(
             int concurrencyLevel,
             System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
@@ -328,12 +384,15 @@ namespace System.Collections.Concurrent
                 >> collection,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
         ) { }
+
         public ConcurrentDictionary(int concurrencyLevel, int capacity) { }
+
         public ConcurrentDictionary(
             int concurrencyLevel,
             int capacity,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
         ) { }
+
         public System.Collections.Generic.IEqualityComparer<TKey> Comparer
         {
             get { throw null; }
@@ -409,6 +468,7 @@ namespace System.Collections.Concurrent
         {
             get { throw null; }
         }
+
         public TValue AddOrUpdate(
             TKey key,
             System.Func<TKey, TValue> addValueFactory,
@@ -417,6 +477,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public TValue AddOrUpdate(
             TKey key,
             TValue addValue,
@@ -425,6 +486,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public TValue AddOrUpdate<TArg>(
             TKey key,
             System.Func<TKey, TArg, TValue> addValueFactory,
@@ -434,11 +496,14 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public void Clear() { }
+
         public bool ContainsKey(TKey key)
         {
             throw null;
         }
+
         public System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
                 TKey,
                 TValue
@@ -446,14 +511,17 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public TValue GetOrAdd(TKey key, System.Func<TKey, TValue> valueFactory)
         {
             throw null;
         }
+
         public TValue GetOrAdd(TKey key, TValue value)
         {
             throw null;
         }
+
         public TValue GetOrAdd<TArg>(
             TKey key,
             System.Func<TKey, TArg, TValue> valueFactory,
@@ -462,10 +530,12 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
                 TKey,
                 TValue
             >>.Add(System.Collections.Generic.KeyValuePair<TKey, TValue> keyValuePair) { }
+
         bool System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
                 TKey,
                 TValue
@@ -473,10 +543,12 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
                 TKey,
                 TValue
             >>.CopyTo(System.Collections.Generic.KeyValuePair<TKey, TValue>[] array, int index) { }
+
         bool System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
                 TKey,
                 TValue
@@ -484,34 +556,45 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         void System.Collections.Generic.IDictionary<TKey, TValue>.Add(TKey key, TValue value) { }
+
         bool System.Collections.Generic.IDictionary<TKey, TValue>.Remove(TKey key)
         {
             throw null;
         }
+
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+
         void System.Collections.IDictionary.Add(object key, object? value) { }
+
         bool System.Collections.IDictionary.Contains(object key)
         {
             throw null;
         }
+
         System.Collections.IDictionaryEnumerator System.Collections.IDictionary.GetEnumerator()
         {
             throw null;
         }
+
         void System.Collections.IDictionary.Remove(object key) { }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
+
         public System.Collections.Generic.KeyValuePair<TKey, TValue>[] ToArray()
         {
             throw null;
         }
+
         public bool TryAdd(TKey key, TValue value)
         {
             throw null;
         }
+
         public bool TryGetValue(
             TKey key,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TValue value
@@ -519,10 +602,12 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public bool TryRemove(System.Collections.Generic.KeyValuePair<TKey, TValue> item)
         {
             throw null;
         }
+
         public bool TryRemove(
             TKey key,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TValue value
@@ -530,11 +615,13 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public bool TryUpdate(TKey key, TValue newValue, TValue comparisonValue)
         {
             throw null;
         }
     }
+
     public partial class ConcurrentQueue<T>
         : System.Collections.Concurrent.IProducerConsumerCollection<T>,
           System.Collections.Generic.IEnumerable<T>,
@@ -543,7 +630,9 @@ namespace System.Collections.Concurrent
           System.Collections.IEnumerable
     {
         public ConcurrentQueue() { }
+
         public ConcurrentQueue(System.Collections.Generic.IEnumerable<T> collection) { }
+
         public int Count
         {
             get { throw null; }
@@ -560,38 +649,49 @@ namespace System.Collections.Concurrent
         {
             get { throw null; }
         }
+
         public void Clear() { }
+
         public void CopyTo(T[] array, int index) { }
+
         public void Enqueue(T item) { }
+
         public System.Collections.Generic.IEnumerator<T> GetEnumerator()
         {
             throw null;
         }
+
         bool System.Collections.Concurrent.IProducerConsumerCollection<T>.TryAdd(T item)
         {
             throw null;
         }
+
         bool System.Collections.Concurrent.IProducerConsumerCollection<T>.TryTake(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T item
         )
         {
             throw null;
         }
+
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
+
         public T[] ToArray()
         {
             throw null;
         }
+
         public bool TryDequeue(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T result
         )
         {
             throw null;
         }
+
         public bool TryPeek(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T result
         )
@@ -599,6 +699,7 @@ namespace System.Collections.Concurrent
             throw null;
         }
     }
+
     public partial class ConcurrentStack<T>
         : System.Collections.Concurrent.IProducerConsumerCollection<T>,
           System.Collections.Generic.IEnumerable<T>,
@@ -607,7 +708,9 @@ namespace System.Collections.Concurrent
           System.Collections.IEnumerable
     {
         public ConcurrentStack() { }
+
         public ConcurrentStack(System.Collections.Generic.IEnumerable<T> collection) { }
+
         public int Count
         {
             get { throw null; }
@@ -624,61 +727,78 @@ namespace System.Collections.Concurrent
         {
             get { throw null; }
         }
+
         public void Clear() { }
+
         public void CopyTo(T[] array, int index) { }
+
         public System.Collections.Generic.IEnumerator<T> GetEnumerator()
         {
             throw null;
         }
+
         public void Push(T item) { }
+
         public void PushRange(T[] items) { }
+
         public void PushRange(T[] items, int startIndex, int count) { }
+
         bool System.Collections.Concurrent.IProducerConsumerCollection<T>.TryAdd(T item)
         {
             throw null;
         }
+
         bool System.Collections.Concurrent.IProducerConsumerCollection<T>.TryTake(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T item
         )
         {
             throw null;
         }
+
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
+
         public T[] ToArray()
         {
             throw null;
         }
+
         public bool TryPeek(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T result
         )
         {
             throw null;
         }
+
         public bool TryPop(
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T result
         )
         {
             throw null;
         }
+
         public int TryPopRange(T[] items)
         {
             throw null;
         }
+
         public int TryPopRange(T[] items, int startIndex, int count)
         {
             throw null;
         }
     }
+
     [System.FlagsAttribute]
     public enum EnumerablePartitionerOptions
     {
         None = 0,
         NoBuffering = 1,
     }
+
     public partial interface IProducerConsumerCollection<T>
         : System.Collections.Generic.IEnumerable<T>,
           System.Collections.ICollection,
@@ -689,6 +809,7 @@ namespace System.Collections.Concurrent
         bool TryAdd(T item);
         bool TryTake([System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out T item);
     }
+
     public abstract partial class OrderablePartitioner<TSource>
         : System.Collections.Concurrent.Partitioner<TSource>
     {
@@ -697,6 +818,7 @@ namespace System.Collections.Concurrent
             bool keysOrderedAcrossPartitions,
             bool keysNormalized
         ) { }
+
         public bool KeysNormalized
         {
             get { throw null; }
@@ -709,10 +831,12 @@ namespace System.Collections.Concurrent
         {
             get { throw null; }
         }
+
         public override System.Collections.Generic.IEnumerable<TSource> GetDynamicPartitions()
         {
             throw null;
         }
+
         public virtual System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
                 long,
                 TSource
@@ -720,10 +844,12 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public abstract System.Collections.Generic.IList<System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
                     long,
                     TSource
                 >>> GetOrderablePartitions(int partitionCount);
+
         public override System.Collections.Generic.IList<System.Collections.Generic.IEnumerator<TSource>> GetPartitions(
             int partitionCount
         )
@@ -731,6 +857,7 @@ namespace System.Collections.Concurrent
             throw null;
         }
     }
+
     public static partial class Partitioner
     {
         public static System.Collections.Concurrent.OrderablePartitioner<System.Tuple<
@@ -740,6 +867,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static System.Collections.Concurrent.OrderablePartitioner<System.Tuple<
                 int,
                 int
@@ -747,6 +875,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static System.Collections.Concurrent.OrderablePartitioner<System.Tuple<
                 long,
                 long
@@ -754,6 +883,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static System.Collections.Concurrent.OrderablePartitioner<System.Tuple<
                 long,
                 long
@@ -761,12 +891,14 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static System.Collections.Concurrent.OrderablePartitioner<TSource> Create<TSource>(
             System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static System.Collections.Concurrent.OrderablePartitioner<TSource> Create<TSource>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Collections.Concurrent.EnumerablePartitionerOptions partitionerOptions
@@ -774,6 +906,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static System.Collections.Concurrent.OrderablePartitioner<TSource> Create<TSource>(
             System.Collections.Generic.IList<TSource> list,
             bool loadBalance
@@ -781,6 +914,7 @@ namespace System.Collections.Concurrent
         {
             throw null;
         }
+
         public static System.Collections.Concurrent.OrderablePartitioner<TSource> Create<TSource>(
             TSource[] array,
             bool loadBalance
@@ -789,17 +923,21 @@ namespace System.Collections.Concurrent
             throw null;
         }
     }
+
     public abstract partial class Partitioner<TSource>
     {
         protected Partitioner() { }
+
         public virtual bool SupportsDynamicPartitions
         {
             get { throw null; }
         }
+
         public virtual System.Collections.Generic.IEnumerable<TSource> GetDynamicPartitions()
         {
             throw null;
         }
+
         public abstract System.Collections.Generic.IList<System.Collections.Generic.IEnumerator<TSource>> GetPartitions(
             int partitionCount
         );

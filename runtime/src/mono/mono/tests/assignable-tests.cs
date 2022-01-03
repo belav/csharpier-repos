@@ -6,10 +6,12 @@ namespace Test
     {
         void method();
     }
+
     public interface B : A
     {
         void method2();
     }
+
     public class test
     {
         public static int Main()

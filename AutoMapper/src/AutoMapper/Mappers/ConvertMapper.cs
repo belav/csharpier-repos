@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Linq.Expressions;
+
 namespace AutoMapper.Internal.Mappers
 {
     using static Expression;
+
     public class ConvertMapper : IObjectMapper
     {
         public static bool IsPrimitive(Type type) =>
             type.IsPrimitive || type == typeof(string) || type == typeof(decimal);
+
         public bool IsMatch(in TypePair types) =>
             (types.SourceType == typeof(string) && types.DestinationType == typeof(DateTime))
             || (IsPrimitive(types.SourceType) && IsPrimitive(types.DestinationType));
+
         public Expression MapExpression(
             IGlobalConfiguration configurationProvider,
             ProfileMap profileMap,

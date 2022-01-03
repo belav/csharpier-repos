@@ -411,18 +411,22 @@ namespace System.ComponentModel.Composition
             public class IntCollection : IEnumerable
             {
                 List<int> ints = new List<int>();
+
                 public void Add(int item)
                 {
                     ints.Add(item);
                 }
+
                 public void Clear()
                 {
                     ints.Clear();
                 }
+
                 public bool Remove(int item)
                 {
                     return ints.Remove(item);
                 }
+
                 public IEnumerator GetEnumerator()
                 {
                     return ints.GetEnumerator();
@@ -615,6 +619,7 @@ namespace System.ComponentModel.Composition
         public class CollectionTypeWithNoIList<T> : ICollection<T>
         {
             private int _count = 0;
+
             public CollectionTypeWithNoIList() { }
 
             public void Add(T item)

@@ -126,6 +126,7 @@ namespace System.Diagnostics.Tracing
         {
             Payload = payload;
         }
+
         public IncrementingCounterPayload Payload { get; set; }
     }
 }

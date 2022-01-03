@@ -17,9 +17,12 @@ namespace System.Reflection.TypeLoading
         }
 
         protected sealed override bool IsArrayImpl() => false;
+
         public sealed override bool IsSZArray => false;
         public sealed override bool IsVariableBoundArray => false;
+
         protected sealed override bool IsByRefImpl() => true;
+
         protected sealed override bool IsPointerImpl() => false;
 
         public sealed override int GetArrayRank() =>
@@ -31,12 +34,14 @@ namespace System.Reflection.TypeLoading
         protected sealed override string Suffix => "&";
 
         protected sealed override RoType? ComputeBaseTypeWithoutDesktopQuirk() => null;
+
         protected sealed override IEnumerable<RoType> ComputeDirectlyImplementedInterfaces() =>
             Array.Empty<RoType>();
 
         internal sealed override IEnumerable<ConstructorInfo> GetConstructorsCore(
             NameFilter? filter
         ) => Array.Empty<ConstructorInfo>();
+
         internal sealed override IEnumerable<MethodInfo> GetMethodsCore(
             NameFilter? filter,
             Type reflectedType

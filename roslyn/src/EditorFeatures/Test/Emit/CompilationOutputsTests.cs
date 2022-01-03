@@ -31,8 +31,10 @@ namespace Microsoft.CodeAnalysis.Emit.UnitTests
 
             public override string AssemblyDisplayPath => "assembly";
             public override string PdbDisplayPath => "pdb";
+
             protected override Stream? OpenAssemblyStream() =>
                 (_openAssemblyStream ?? throw new NotImplementedException()).Invoke();
+
             protected override Stream? OpenPdbStream() =>
                 (_openPdbStream ?? throw new NotImplementedException()).Invoke();
         }

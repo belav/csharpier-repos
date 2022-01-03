@@ -6,9 +6,11 @@ using System.Runtime.CompilerServices;
 using AutoMapper.Configuration;
 using AutoMapper.Configuration.Conventions;
 using AutoMapper.Internal;
+
 namespace AutoMapper
 {
     using static Execution.ExpressionBuilder;
+
     public interface IProfileConfiguration
     {
         IReadOnlyCollection<IMemberConfiguration> MemberConfigurations { get; }
@@ -60,6 +62,7 @@ namespace AutoMapper
         IReadOnlyCollection<ITypeMapConfiguration> OpenTypeMapConfigs { get; }
         IReadOnlyCollection<ValueTransformerConfiguration> ValueTransformers { get; }
     }
+
     /// <summary>
     ///     Provides a named configuration for maps. Naming conventions become scoped per profile.
     /// </summary>
@@ -89,6 +92,7 @@ namespace AutoMapper
             memberConfiguration.NameMapper.NamedMappers.Add(_prePostfixName);
             _memberConfigurations.Add(memberConfiguration);
         }
+
         protected Profile(string profileName, Action<IProfileExpression> configurationAction)
             : this(profileName) => configurationAction(this);
 
@@ -157,10 +161,12 @@ namespace AutoMapper
                 }
             );
         }
+
         public IProjectionExpression<TSource, TDestination> CreateProjection<
             TSource,
             TDestination
         >() => CreateProjection<TSource, TDestination>(MemberList.Destination);
+
         public IProjectionExpression<TSource, TDestination> CreateProjection<TSource, TDestination>(
             MemberList memberList
         ) =>
@@ -168,11 +174,14 @@ namespace AutoMapper
                 memberList,
                 projection: true
             );
+
         public IMappingExpression<TSource, TDestination> CreateMap<TSource, TDestination>() =>
             CreateMapCore<TSource, TDestination>(MemberList.Destination);
+
         public IMappingExpression<TSource, TDestination> CreateMap<TSource, TDestination>(
             MemberList memberList
         ) => CreateMapCore<TSource, TDestination>(memberList);
+
         private IMappingExpression<TSource, TDestination> CreateMapCore<TSource, TDestination>(
             MemberList memberList,
             bool projection = false
@@ -202,28 +211,37 @@ namespace AutoMapper
             }
             return map;
         }
+
         public void ClearPrefixes() => _prePostfixName.Prefixes.Clear();
+
         public void ReplaceMemberName(string original, string newValue) =>
             DefaultMemberConfig.AddName<ReplaceName>(_ => _.AddReplace(original, newValue));
+
         public void RecognizePrefixes(params string[] prefixes) =>
             _prePostfixName.Prefixes.AddRange(prefixes);
+
         public void RecognizePostfixes(params string[] postfixes) =>
             _prePostfixName.Postfixes.AddRange(postfixes);
+
         public void RecognizeDestinationPrefixes(params string[] prefixes) =>
             _prePostfixName.DestinationPrefixes.AddRange(prefixes);
+
         public void RecognizeDestinationPostfixes(params string[] postfixes) =>
             _prePostfixName.DestinationPostfixes.AddRange(postfixes);
+
         public void AddGlobalIgnore(string propertyNameStartingWith)
         {
             _globalIgnores ??= new();
             _globalIgnores.Add(propertyNameStartingWith);
         }
+
         IMemberConfiguration IProfileExpressionInternal.AddMemberConfiguration()
         {
             var condition = new MemberConfiguration();
             _memberConfigurations.Add(condition);
             return condition;
         }
+
         public void IncludeSourceExtensionMethods(Type type)
         {
             _sourceExtensionMethods ??= new();

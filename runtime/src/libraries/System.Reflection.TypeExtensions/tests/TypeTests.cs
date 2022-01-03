@@ -797,6 +797,7 @@ namespace System.Reflection.Tests
                 );
             }
         }
+
         public static IEnumerable<object[]> GetMethods_TestData()
         {
             yield return new object[]
@@ -2734,23 +2735,35 @@ namespace System.Reflection.Tests
         internal static int InternalStaticField;
 
         public TI_Class() { }
+
         protected TI_Class(int i) { }
+
         private TI_Class(int i, int j) { }
+
         internal TI_Class(int i, int j, int k) { }
 
         public void PublicMethod() { }
+
         protected void ProtectedMethod() { }
+
         private void PrivateMethod() { }
+
         internal void InternalMethod() { }
 
         public static void PublicStaticMethod() { }
+
         protected static void ProtectedStaticMethod() { }
+
         private static void PrivateStaticMethod() { }
+
         internal static void InternalStaticMethod() { }
 
         public class PublicNestedType { }
+
         protected class ProtectedNestedType { }
+
         private class PrivateNestedType { }
+
         internal class InternalNestedType { }
 
         public int PublicProperty
@@ -3072,7 +3085,9 @@ namespace System.Reflection.Tests
     }
 
     internal interface TI_Interface1 { }
+
     internal interface TI_Interface2 { }
+
     internal interface TI_Interface3
     {
         void DoSomething();
@@ -3081,6 +3096,7 @@ namespace System.Reflection.Tests
     internal struct TI_StructWithInterface : TI_Interface1 { }
 
     internal struct TI_Struct { }
+
     internal struct TI_StructWithInterfaces : TI_Interface1, TI_Interface3
     {
         public void DoSomething() { }
@@ -3092,11 +3108,15 @@ namespace System.Reflection.Tests
     }
 
     internal class TI_BaseClassWithInterface : TI_Interface1, TI_Interface2 { }
+
     internal class TI_SubClassWithInterface : TI_BaseClassWithInterface { }
+
     internal class TI_GenericSubClassWithInterface<T> : TI_SubClassWithInterface { }
 
     internal class TI_GenericBaseClass<T> { }
+
     internal class TI_GenericSubClass<T> : TI_GenericBaseClass<T> { }
+
     internal class TI_GenericSubSubClass<T> : TI_GenericSubClass<T> { }
 
     internal class TI_GenericSubClassWithConstraints<T>
@@ -3113,10 +3133,12 @@ namespace System.Reflection.Tests
         {
             get { throw null; }
         }
+
         public static bool IsNullOrEmpty(string value)
         {
             throw null;
         }
+
         internal char FirstChar
         {
             get { throw null; }
@@ -3134,58 +3156,72 @@ namespace System.Reflection.Tests
         {
             throw null;
         }
+
         public int CompareTo(int value)
         {
             throw null;
         }
+
         public override bool Equals(object obj)
         {
             throw null;
         }
+
         public bool Equals(int obj)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public string ToString(string format)
         {
             throw null;
         }
+
         public string ToString(IFormatProvider provider)
         {
             throw null;
         }
+
         public string ToString(string format, IFormatProvider provider)
         {
             throw null;
         }
+
         public static int Parse(string s)
         {
             throw null;
         }
+
         public static int Parse(string s, NumberStyles style)
         {
             throw null;
         }
+
         public static int Parse(string s, IFormatProvider provider)
         {
             throw null;
         }
+
         public static int Parse(string s, NumberStyles style, IFormatProvider provider)
         {
             throw null;
         }
+
         public static bool TryParse(string s, out int result)
         {
             throw null;
         }
+
         public static bool TryParse(
             string s,
             NumberStyles style,
@@ -3195,66 +3231,82 @@ namespace System.Reflection.Tests
         {
             throw null;
         }
+
         public TypeCode GetTypeCode()
         {
             throw null;
         }
+
         bool IConvertible.ToBoolean(IFormatProvider provider)
         {
             throw null;
         }
+
         char IConvertible.ToChar(IFormatProvider provider)
         {
             throw null;
         }
+
         sbyte IConvertible.ToSByte(IFormatProvider provider)
         {
             throw null;
         }
+
         byte IConvertible.ToByte(IFormatProvider provider)
         {
             throw null;
         }
+
         short IConvertible.ToInt16(IFormatProvider provider)
         {
             throw null;
         }
+
         ushort IConvertible.ToUInt16(IFormatProvider provider)
         {
             throw null;
         }
+
         int IConvertible.ToInt32(IFormatProvider provider)
         {
             throw null;
         }
+
         uint IConvertible.ToUInt32(IFormatProvider provider)
         {
             throw null;
         }
+
         long IConvertible.ToInt64(IFormatProvider provider)
         {
             throw null;
         }
+
         ulong IConvertible.ToUInt64(IFormatProvider provider)
         {
             throw null;
         }
+
         float IConvertible.ToSingle(IFormatProvider provider)
         {
             throw null;
         }
+
         double IConvertible.ToDouble(IFormatProvider provider)
         {
             throw null;
         }
+
         decimal IConvertible.ToDecimal(IFormatProvider provider)
         {
             throw null;
         }
+
         DateTime IConvertible.ToDateTime(IFormatProvider provider)
         {
             throw null;
         }
+
         object IConvertible.ToType(Type type, IFormatProvider provider)
         {
             throw null;
@@ -3264,7 +3316,9 @@ namespace System.Reflection.Tests
     namespace CustomNamespace
     {
         internal abstract class TI_AbstractBaseClass { }
+
         internal abstract class TI_AbstractSubClass : TI_AbstractBaseClass { }
+
         internal class TI_SubClass : TI_AbstractSubClass { }
     }
 

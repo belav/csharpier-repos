@@ -1139,6 +1139,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         {
             AuthenticationScheme = authenticationScheme;
         }
+
         public BlobTokenValidator(string authenticationScheme, Action<string> tokenValidator)
         {
             AuthenticationScheme = authenticationScheme;

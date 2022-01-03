@@ -7,6 +7,7 @@ namespace System.Security.Cryptography.Tests
     {
 #if NETCOREAPP
         public CurveDef() { }
+
         public ECCurve Curve;
         public ECCurve.ECCurveType CurveType;
         public int KeySize;

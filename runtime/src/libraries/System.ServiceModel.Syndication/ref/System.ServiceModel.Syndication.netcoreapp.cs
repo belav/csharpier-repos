@@ -32,6 +32,7 @@ namespace System.ServiceModel.Syndication
             set { }
         }
     }
+
     public abstract partial class SyndicationFeedFormatter
     {
         public System.ServiceModel.Syndication.TryParseDateTimeCallback DateTimeParser
@@ -45,9 +46,11 @@ namespace System.ServiceModel.Syndication
             set { }
         }
     }
+
     public partial class SyndicationTextInput
     {
         public SyndicationTextInput() { }
+
         public string Description
         {
             get { throw null; }
@@ -69,6 +72,7 @@ namespace System.ServiceModel.Syndication
             set { }
         }
     }
+
     public delegate bool TryParseDateTimeCallback(
         System.ServiceModel.Syndication.XmlDateTimeData data,
         out System.DateTimeOffset dateTimeOffset
@@ -77,10 +81,12 @@ namespace System.ServiceModel.Syndication
         System.ServiceModel.Syndication.XmlUriData data,
         out System.Uri uri
     );
+
     public partial struct XmlDateTimeData
     {
         private object _dummy;
         private int _dummyPrimitive;
+
         public XmlDateTimeData(
             string dateTimeString,
             System.Xml.XmlQualifiedName elementQualifiedName
@@ -88,6 +94,7 @@ namespace System.ServiceModel.Syndication
         {
             throw null;
         }
+
         public readonly string DateTimeString
         {
             get { throw null; }
@@ -97,10 +104,12 @@ namespace System.ServiceModel.Syndication
             get { throw null; }
         }
     }
+
     public partial struct XmlUriData
     {
         private object _dummy;
         private int _dummyPrimitive;
+
         public XmlUriData(
             string uriString,
             System.UriKind uriKind,
@@ -109,6 +118,7 @@ namespace System.ServiceModel.Syndication
         {
             throw null;
         }
+
         public readonly System.Xml.XmlQualifiedName ElementQualifiedName
         {
             get { throw null; }

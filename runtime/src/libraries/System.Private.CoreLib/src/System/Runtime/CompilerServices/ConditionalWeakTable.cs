@@ -443,6 +443,7 @@ namespace System.Runtime.CompilerServices
         private struct Entry
         {
             public DependentHandle depHnd; // Holds key and value using a weak reference for the key and a strong reference
+
             // for the value that is traversed only if the key is reachable without going through the value.
             public int HashCode; // Cached copy of key's hashcode
             public int Next; // Index of next entry, -1 if last

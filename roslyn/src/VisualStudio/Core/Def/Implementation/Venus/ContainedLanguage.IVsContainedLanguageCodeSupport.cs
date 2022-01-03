@@ -331,6 +331,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         );
 
         private const int FACILITY_ITF = 4;
+
         private static int MakeHResult(uint sev, uint facility, uint code) =>
             unchecked((int)((sev << 31) | (facility << 16) | code));
 

@@ -229,6 +229,7 @@ public class EnumIConvertibleToSingle
         white = 3,
         red,
     }
+
     enum e_test : long
     {
         itemA = -4,

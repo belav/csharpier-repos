@@ -6,6 +6,7 @@ using System;
 public struct GS1<T>
 {
     public T t;
+
     public GS1(T t)
     {
         this.t = t;

@@ -51,6 +51,7 @@ namespace AutoMapper.IntegrationTests
             {
                 Database.SetInitializer(new Initializer());
             }
+
             public DbSet<QueryableInterfaceImpl> Entities { get; set; }
         }
 

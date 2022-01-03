@@ -115,8 +115,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             public MyJsonContextThatSetsOptionsInParameterlessCtor()
                 : base(new JsonSerializerOptions()) { }
+
             public override JsonTypeInfo? GetTypeInfo(Type type) =>
                 throw new NotImplementedException();
+
             protected override JsonSerializerOptions? GeneratedSerializerOptions => null;
         }
     }

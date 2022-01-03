@@ -10,15 +10,20 @@ namespace System.IO.Tests
     {
         protected override FileAttributes GetAttributes(string path) =>
             new DirectoryInfo(path).Attributes;
+
         protected override void SetAttributes(string path, FileAttributes attributes) =>
             new DirectoryInfo(path).Attributes = attributes;
+
         protected override string CreateItem(
             string path = null,
             [CallerMemberName] string memberName = null,
             [CallerLineNumber] int lineNumber = 0
         ) => Directory.CreateDirectory(path ?? GetTestFilePath()).FullName;
+
         protected override DirectoryInfo CreateInfo(string path) => new DirectoryInfo(path);
+
         protected override void DeleteItem(string path) => Directory.Delete(path);
+
         protected override bool IsDirectory => true;
 
         [Theory]

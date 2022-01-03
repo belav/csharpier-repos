@@ -1087,6 +1087,7 @@ namespace System.ServiceModel.Syndication.Tests
         public class Formatter : SyndicationItemFormatter
         {
             public Formatter() : base() { }
+
             public Formatter(SyndicationItem itemToWrite) : base(itemToWrite) { }
 
             public static SyndicationCategory CreateCategoryEntryPoint(SyndicationItem item) =>

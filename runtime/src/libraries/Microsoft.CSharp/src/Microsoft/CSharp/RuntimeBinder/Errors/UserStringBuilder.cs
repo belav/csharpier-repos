@@ -67,6 +67,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
 
             return ErrId(id);
         }
+
         /*
          * Create a fill-in string describing a parameter list.
          * Does NOT include ()
@@ -108,6 +109,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
         {
             ErrAppendString(string.Format(CultureInfo.InvariantCulture, format, args));
         }
+
         private void ErrAppendName(Name name)
         {
             if (name == NameManager.GetPredefinedName(PredefinedName.PN_INDEXERINTERNAL))
@@ -291,6 +293,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             );
             ErrAppendChar(']');
         }
+
         private void ErrAppendProperty(PropertySymbol prop, SubstContext pctx)
         {
             ErrAppendParentSym(prop, pctx);

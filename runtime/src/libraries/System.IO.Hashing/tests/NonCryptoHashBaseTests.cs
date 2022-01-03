@@ -491,6 +491,7 @@ namespace System.IO.Hashing.Tests
             NonCryptographicHashAlgorithm hash = new CountingAlgorithm();
             Assert.Throws<NotSupportedException>(() => hash.GetHashCode());
         }
+
         private sealed class CountingAlgorithm : NonCryptographicHashAlgorithm
         {
             private int _count;

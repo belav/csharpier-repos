@@ -11,25 +11,39 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+
 public class TopLevelType { }
 
 namespace SampleMetadata
 {
     public interface Interface1 { }
+
     public interface Interface2 { }
+
     public interface Interface3 { }
+
     public interface Interface4 { }
+
     public interface Interface5 { }
+
     public interface Interface123 : Interface1, Interface2, Interface3 { }
+
     public interface InterfaceI5 : Interface5 { }
+
     public interface InterfaceII5 : InterfaceI5 { }
+
     public interface IGeneric1<T> { }
+
     public interface IGeneric2<T> { }
 
     public class GenericClass1<T> { }
+
     public class GenericClass2<T, U> { }
+
     public class GenericClass3<T, U, V> { }
+
     public class GenericClass4<T, U> : IGeneric1<T>, IGeneric2<U> { }
+
     public class GenericClass5<T, U, V, W, X> { }
 
     public class OuterType1
@@ -45,33 +59,48 @@ namespace SampleMetadata
     }
 
     public class Base1 { }
+
     public class Derived1 : Base1 { }
+
     public class Derived2 : GenericClass1<int> { }
+
     public class Derived3<T, U> : GenericClass2<U, T> { }
 
     public class CInterfaceImplementerI1I2 : Interface1, Interface2 { }
+
     public class CInterfaceImplementerC12I2I3
         : CInterfaceImplementerI1I2,
           Interface2,
           Interface3 { }
+
     public class CInterfaceImplementerI123 : Interface123 { }
+
     public class CInterfaceImplementerII5 : InterfaceII5 { }
 
     public interface IConstrained1 { }
+
     public interface IConstrained2<I> { }
+
     public class CConstrained1 { }
 
     public class GenericClassWithNoConstraint<T> { }
+
     public class GenericClassWithClassConstraint<T> where T : class { }
+
     public class GenericClassWithStructConstraint<T> where T : struct { }
+
     public class GenericClassWithNewConstraint<T> where T : new() { }
+
     public class GenericClassWithTypeConstraints<T>
         where T : CConstrained1, IConstrained1, IConstrained2<T> { }
+
     public class GenericClassWithInterfaceConstraints<T>
         where T : IConstrained1, IConstrained2<T> { }
+
     public class GenericClassWithQuirkyConstraints1<T, U>
         where T : U
         where U : CConstrained1, IConstrained1 { }
+
     public class GenericClassWithQuirkyConstraints2<T, U>
         where T : U
         where U : class, IConstrained1 { }
@@ -84,12 +113,19 @@ namespace SampleMetadata
     }
 
     public enum EU1 : byte { }
+
     public enum EI1 : sbyte { }
+
     public enum EU2 : ushort { }
+
     public enum EI2 : short { }
+
     public enum EU4 : uint { }
+
     public enum EI4 : int { }
+
     public enum EU8 : ulong { }
+
     public enum EI8 : long { }
 
     public class GenericEnumContainer<T>
@@ -221,10 +257,15 @@ namespace SampleMetadata
     public class ParametersWithDefaultValues
     {
         public void Foo1(int i) { }
+
         public void Foo2([Optional] int i) { }
+
         public void Foo3(int i = 42) { }
+
         public void Foo4(short s = -34) { }
+
         public void Foo5(decimal d = 1234m) { }
+
         public void Foo6([DateTimeConstant(ticks: 8736726782)] DateTime dt) { }
     }
 
@@ -244,18 +285,22 @@ namespace SampleMetadata
         {
             Argument = x;
         }
+
         public SampleCustomAttribute(string x)
         {
             Argument = x;
         }
+
         public SampleCustomAttribute(Type x)
         {
             Argument = x;
         }
+
         public SampleCustomAttribute(object x)
         {
             Argument = x;
         }
+
         public SampleCustomAttribute(object[] x)
         {
             Argument = x;
@@ -348,7 +393,9 @@ namespace SampleMetadata
     }
 
     public ref struct SampleByRefLikeStruct1 { }
+
     public ref struct SampleByRefLikeStruct2<T> { }
+
     [SampleCustom("Yeah")]
     public ref struct SampleByRefLikeStruct3 { }
 
@@ -511,7 +558,9 @@ namespace SampleMetadata
         public ExerciseCallingConventions() { }
 
         public void InstanceMethod() { }
+
         public static void StaticMethod() { }
+
         public virtual void VirtualMethod() { }
 
         static ExerciseCallingConventions() { }
@@ -606,62 +655,77 @@ namespace SampleMetadata
     {
         public class SameNamedType { }
     }
+
     namespace NS1
     {
         public class SameNamedType { }
     }
+
     namespace NS2
     {
         public class SameNamedType { }
     }
+
     namespace NS3
     {
         public class SameNamedType { }
     }
+
     namespace NS4
     {
         public class SameNamedType { }
     }
+
     namespace NS5
     {
         public class SameNamedType { }
     }
+
     namespace NS6
     {
         public class SameNamedType { }
     }
+
     namespace NS7
     {
         public class SameNamedType { }
     }
+
     namespace NS8
     {
         public class SameNamedType { }
     }
+
     namespace NS9
     {
         public class SameNamedType { }
     }
+
     namespace NS10
     {
         public class SameNamedType { }
     }
+
     namespace NS11
     {
         public class SameNamedType { }
     }
+
     namespace NS12
     {
         public class SameNamedType { }
     }
+
     namespace NS13
     {
         public class SameNamedType { }
     }
+
     namespace NS14
     {
         public class SameNamedType { }
     }
+
     namespace NS15
     {
         public class SameNamedType { }

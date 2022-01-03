@@ -628,6 +628,7 @@ namespace System.Runtime.CompilerServices
     }
 }
 ";
+
         protected static void AssertEmpty(SymbolInfo info)
         {
             Assert.NotEqual(default, info);

@@ -24,6 +24,7 @@ namespace System.Speech.Recognition
             _audioDuration = audioDuration;
             _rawAudioData = rawAudioData;
         }
+
         public SpeechAudioFormatInfo Format
         {
             get { return _audioFormat; }

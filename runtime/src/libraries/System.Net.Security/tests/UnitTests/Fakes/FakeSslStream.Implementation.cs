@@ -57,6 +57,7 @@ namespace System.Net.Security
         private bool RemoteCertRequired => default;
 
         private void CloseInternal() { }
+
         //
         // This method assumes that a SSPI context is already in a good shape.
         // For example it is either a fresh context or already authenticated context that needs renegotiation.
@@ -81,13 +82,16 @@ namespace System.Net.Security
         internal bool IsValidContext => default;
         internal bool IsServer => default;
         internal SslConnectionInfo ConnectionInfo => default;
+
         internal ChannelBinding GetChannelBinding(ChannelBindingKind kind) => default;
+
         internal X509Certificate LocalServerCertificate => default;
         internal X509Certificate RemoteCertificate => default;
         internal bool IsRemoteCertificateAvailable => default;
         internal SslApplicationProtocol NegotiatedApplicationProtocol => default;
         internal X509Certificate LocalClientCertificate => default;
         internal X509RevocationMode CheckCertRevocationStatus => default;
+
         internal ProtocolToken CreateShutdownToken() => default;
 
         internal static X509Certificate2? FindCertificateWithPrivateKey(
@@ -106,6 +110,7 @@ namespace System.Net.Security
         {
             Payload = null;
         }
+
         internal byte[] Payload;
     }
 }

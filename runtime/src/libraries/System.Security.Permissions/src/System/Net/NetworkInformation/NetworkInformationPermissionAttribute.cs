@@ -25,7 +25,9 @@ namespace System.Net.NetworkInformation
     public sealed class NetworkInformationPermissionAttribute : CodeAccessSecurityAttribute
     {
         public NetworkInformationPermissionAttribute(SecurityAction action) : base(action) { }
+
         public string Access { get; set; }
+
         public override IPermission CreatePermission() => null;
     }
 }

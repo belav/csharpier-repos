@@ -198,6 +198,7 @@ namespace Internal.TypeVerifier
         {
             public TypeDesc InterfaceType { get; set; }
             public InterfaceImplementation InterfaceImplementation { get; set; }
+
             public bool Equals(InterfaceMetadataObjects other)
             {
                 return other.InterfaceType == InterfaceType;

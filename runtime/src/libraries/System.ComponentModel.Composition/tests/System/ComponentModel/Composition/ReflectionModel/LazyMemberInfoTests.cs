@@ -290,6 +290,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public class LazyMemberTestClass
         {
             public LazyMemberTestClass() { }
+
             public string Property { get; set; }
             public string SetProperty
             {
@@ -300,10 +301,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 get { return null; }
             }
             public string Field;
+
             public void Method()
             {
                 this.Event(this, new EventArgs());
             }
+
             public event EventHandler Event;
         }
     }

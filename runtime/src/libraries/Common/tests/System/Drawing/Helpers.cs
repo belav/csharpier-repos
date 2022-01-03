@@ -122,7 +122,9 @@ namespace System.Drawing
         }
 
         public static string GetTestBitmapPath(string fileName) => GetTestPath("bitmaps", fileName);
+
         public static string GetTestFontPath(string fileName) => GetTestPath("fonts", fileName);
+
         public static string GetTestColorProfilePath(string fileName) =>
             GetTestPath("colorProfiles", fileName);
 

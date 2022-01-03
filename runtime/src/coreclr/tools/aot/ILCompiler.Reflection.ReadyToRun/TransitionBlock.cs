@@ -77,6 +77,7 @@ namespace ILCompiler.Reflection.ReadyToRun
             public override int PointerSize => 4;
             public override int NumArgumentRegisters => 2;
             public override int NumCalleeSavedRegisters => 4;
+
             // Argument registers, callee-save registers, return address
             public override int SizeOfTransitionBlock =>
                 SizeOfArgumentRegisters + SizeOfCalleeSavedRegisters + PointerSize;
@@ -101,10 +102,13 @@ namespace ILCompiler.Reflection.ReadyToRun
             public static readonly TransitionBlock Instance = new X64WindowsTransitionBlock();
 
             public override int PointerSize => 8;
+
             // RCX, RDX, R8, R9
             public override int NumArgumentRegisters => 4;
+
             // RDI, RSI, RBX, RBP, R12, R13, R14, R15
             public override int NumCalleeSavedRegisters => 8;
+
             // Callee-saved registers, return address
             public override int SizeOfTransitionBlock => SizeOfCalleeSavedRegisters + PointerSize;
             public override int OffsetOfArgumentRegisters => SizeOfTransitionBlock;
@@ -115,10 +119,13 @@ namespace ILCompiler.Reflection.ReadyToRun
             public static readonly TransitionBlock Instance = new X64UnixTransitionBlock();
 
             public override int PointerSize => 8;
+
             // RDI, RSI, RDX, RCX, R8, R9
             public override int NumArgumentRegisters => 6;
+
             // R12, R13, R14, R15, RBX, RBP
             public override int NumCalleeSavedRegisters => 6;
+
             // Argument registers, callee-saved registers, return address
             public override int SizeOfTransitionBlock =>
                 SizeOfArgumentRegisters + SizeOfCalleeSavedRegisters + PointerSize;
@@ -130,10 +137,13 @@ namespace ILCompiler.Reflection.ReadyToRun
             public static readonly TransitionBlock Instance = new ArmTransitionBlock();
 
             public override int PointerSize => 4;
+
             // R0, R1, R2, R3
             public override int NumArgumentRegisters => 4;
+
             // R4, R5, R6, R7, R8, R9, R10, R11, R14
             public override int NumCalleeSavedRegisters => 9;
+
             // Callee-saves, argument registers
             public override int SizeOfTransitionBlock =>
                 SizeOfCalleeSavedRegisters + SizeOfArgumentRegisters;
@@ -145,10 +155,13 @@ namespace ILCompiler.Reflection.ReadyToRun
             public static readonly TransitionBlock Instance = new Arm64TransitionBlock();
 
             public override int PointerSize => 8;
+
             // X0 .. X7
             public override int NumArgumentRegisters => 8;
+
             // X29, X30, X19, X20, X21, X22, X23, X24, X25, X26, X27, X28
             public override int NumCalleeSavedRegisters => 12;
+
             // Callee-saves, padding, m_x8RetBuffReg, argument registers
             public override int SizeOfTransitionBlock =>
                 SizeOfCalleeSavedRegisters + 2 * PointerSize + SizeOfArgumentRegisters;

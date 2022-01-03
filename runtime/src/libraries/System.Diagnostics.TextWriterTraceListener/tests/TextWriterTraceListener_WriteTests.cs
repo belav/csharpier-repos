@@ -29,6 +29,7 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         : TextWriterTraceListener_WriteTestsBase
     {
         private readonly Stream _stream;
+
         public TextWriterTraceListener_WriteTestsCtorStream()
         {
             CommonUtilities.DeleteFile(_fileName);

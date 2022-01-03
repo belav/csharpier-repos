@@ -17,6 +17,7 @@ handler.SslOptions.ClientCertificates = new X509CertificateCollection(
 
 using var client = new HttpClient(handler);
 client.DefaultRequestVersion = HttpVersion.Version20;
+
 // HttpVersion.Version30;
 client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
 

@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly bool _isExpressionBodied;
 #nullable enable
         private readonly TypeSymbol? _explicitInterfaceType;
+
 #nullable disable
 
         protected SourceUserDefinedOperatorSymbolBase(
@@ -418,6 +419,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
 #nullable enable
         protected sealed override TypeSymbol? ExplicitInterfaceType => _explicitInterfaceType;
+
 #nullable disable
 
         private void CheckValueParameters(BindingDiagnosticBag diagnostics)

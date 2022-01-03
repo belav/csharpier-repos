@@ -441,18 +441,24 @@ namespace System.Reflection.Tests
         private class Twin1
         {
             public Twin1() { }
+
             public int Field1;
             public Action Event1;
+
             public void Method1() { }
+
             public int Property1 { get; set; }
         }
 
         private class Twin2
         {
             public Twin2() { }
+
             public int Field1;
             public Action Event1;
+
             public void Method1() { }
+
             public int Property1 { get; set; }
         }
 
@@ -650,14 +656,18 @@ namespace System.Reflection.Tests
         private class TestClassWithGenericMethod<T>
         {
             public void Moo(T t) { }
+
             public void Moo<M>(M m) { }
         }
 
         private class TestClass
         {
             public void Foo() { }
+
             public void Foo(object o) { }
+
             public void Foo(string s) { }
+
             public void Bar() { }
         }
 
@@ -667,34 +677,46 @@ namespace System.Reflection.Tests
         {
             [Marker(1)]
             public void Foo(object o) { }
+
             [Marker(2)]
             public void Foo(int i) { }
+
             [Marker(3)]
             public void Foo(T t) { }
+
             [Marker(4)]
             public void Foo(double d) { }
+
             [Marker(5)]
             public void Foo(string s) { }
+
             [Marker(6)]
             public void Foo(int[] s) { }
+
             [Marker(7)]
             public void Foo<U>(U t) { }
+
             [Marker(8)]
             public void Foo<U>(T t) { }
+
             [Marker(9)]
             public void Foo<U, V>(T t) { }
 
             [Marker(101)]
             public GenericTestClass() { }
+
             [Marker(102)]
             public GenericTestClass(T t) { }
+
             [Marker(103)]
             public GenericTestClass(int t) { }
 
             [Marker(201)]
             public int Field1;
+
             [Marker(202)]
             public int Field2;
+
             [Marker(203)]
             public T Field3;
 
@@ -704,12 +726,14 @@ namespace System.Reflection.Tests
                 get { throw null; }
                 set { throw null; }
             }
+
             [Marker(302)]
             public int Property2
             {
                 get { throw null; }
                 set { throw null; }
             }
+
             [Marker(303)]
             public T Property3
             {
@@ -723,12 +747,14 @@ namespace System.Reflection.Tests
                 add { }
                 remove { }
             }
+
             [Marker(402)]
             public event Action<int> Event2
             {
                 add { }
                 remove { }
             }
+
             [Marker(403)]
             public event Action<T> Event3
             {
@@ -795,9 +821,11 @@ namespace System.Reflection.Tests
             private int PrivateField;
 
             public SampleClass(bool y) { }
+
             private SampleClass(int x) { }
 
             public void PublicMethod() { }
+
             private void PrivateMethod() { }
 
             public int PublicProp { get; set; }

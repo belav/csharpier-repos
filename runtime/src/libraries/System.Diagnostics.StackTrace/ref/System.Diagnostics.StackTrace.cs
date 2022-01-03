@@ -9,28 +9,39 @@ namespace System.Diagnostics
     public partial class StackFrame
     {
         public const int OFFSET_UNKNOWN = -1;
+
         public StackFrame() { }
+
         public StackFrame(bool needFileInfo) { }
+
         public StackFrame(int skipFrames) { }
+
         public StackFrame(int skipFrames, bool needFileInfo) { }
+
         public StackFrame(string? fileName, int lineNumber) { }
+
         public StackFrame(string? fileName, int lineNumber, int colNumber) { }
+
         public virtual int GetFileColumnNumber()
         {
             throw null;
         }
+
         public virtual int GetFileLineNumber()
         {
             throw null;
         }
+
         public virtual string? GetFileName()
         {
             throw null;
         }
+
         public virtual int GetILOffset()
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Metadata for the method might be incomplete or removed"
         )]
@@ -38,15 +49,18 @@ namespace System.Diagnostics
         {
             throw null;
         }
+
         public virtual int GetNativeOffset()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public static partial class StackFrameExtensions
     {
         public static System.IntPtr GetNativeImageBase(
@@ -55,57 +69,77 @@ namespace System.Diagnostics
         {
             throw null;
         }
+
         public static System.IntPtr GetNativeIP(this System.Diagnostics.StackFrame stackFrame)
         {
             throw null;
         }
+
         public static bool HasILOffset(this System.Diagnostics.StackFrame stackFrame)
         {
             throw null;
         }
+
         public static bool HasMethod(this System.Diagnostics.StackFrame stackFrame)
         {
             throw null;
         }
+
         public static bool HasNativeImage(this System.Diagnostics.StackFrame stackFrame)
         {
             throw null;
         }
+
         public static bool HasSource(this System.Diagnostics.StackFrame stackFrame)
         {
             throw null;
         }
     }
+
     public partial class StackTrace
     {
         public const int METHODS_TO_SKIP = 0;
+
         public StackTrace() { }
+
         public StackTrace(bool fNeedFileInfo) { }
+
         public StackTrace(System.Diagnostics.StackFrame frame) { }
+
         public StackTrace(System.Exception e) { }
+
         public StackTrace(System.Exception e, bool fNeedFileInfo) { }
+
         public StackTrace(System.Exception e, int skipFrames) { }
+
         public StackTrace(System.Exception e, int skipFrames, bool fNeedFileInfo) { }
+
         public StackTrace(int skipFrames) { }
+
         public StackTrace(int skipFrames, bool fNeedFileInfo) { }
+
         public virtual int FrameCount
         {
             get { throw null; }
         }
+
         public virtual System.Diagnostics.StackFrame? GetFrame(int index)
         {
             throw null;
         }
+
         public virtual System.Diagnostics.StackFrame[] GetFrames()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
 }
+
 namespace System.Diagnostics.SymbolStore
 {
     public partial interface ISymbolBinder
@@ -119,6 +153,7 @@ namespace System.Diagnostics.SymbolStore
             string searchPath
         );
     }
+
     public partial interface ISymbolBinder1
     {
         System.Diagnostics.SymbolStore.ISymbolReader? GetReader(
@@ -127,6 +162,7 @@ namespace System.Diagnostics.SymbolStore
             string searchPath
         );
     }
+
     public partial interface ISymbolDocument
     {
         System.Guid CheckSumAlgorithmId { get; }
@@ -140,11 +176,13 @@ namespace System.Diagnostics.SymbolStore
         byte[] GetCheckSum();
         byte[] GetSourceRange(int startLine, int startColumn, int endLine, int endColumn);
     }
+
     public partial interface ISymbolDocumentWriter
     {
         void SetCheckSum(System.Guid algorithmId, byte[] checkSum);
         void SetSource(byte[] source);
     }
+
     public partial interface ISymbolMethod
     {
         System.Diagnostics.SymbolStore.ISymbolScope RootScope { get; }
@@ -177,12 +215,14 @@ namespace System.Diagnostics.SymbolStore
             int[]? columns
         );
     }
+
     public partial interface ISymbolNamespace
     {
         string Name { get; }
         System.Diagnostics.SymbolStore.ISymbolNamespace[] GetNamespaces();
         System.Diagnostics.SymbolStore.ISymbolVariable[] GetVariables();
     }
+
     public partial interface ISymbolReader
     {
         System.Diagnostics.SymbolStore.SymbolToken UserEntryPoint { get; }
@@ -212,6 +252,7 @@ namespace System.Diagnostics.SymbolStore
             System.Diagnostics.SymbolStore.SymbolToken parent
         );
     }
+
     public partial interface ISymbolScope
     {
         int EndOffset { get; }
@@ -222,6 +263,7 @@ namespace System.Diagnostics.SymbolStore
         System.Diagnostics.SymbolStore.ISymbolVariable[] GetLocals();
         System.Diagnostics.SymbolStore.ISymbolNamespace[] GetNamespaces();
     }
+
     public partial interface ISymbolVariable
     {
         int AddressField1 { get; }
@@ -234,6 +276,7 @@ namespace System.Diagnostics.SymbolStore
         int StartOffset { get; }
         byte[] GetSignature();
     }
+
     public partial interface ISymbolWriter
     {
         void Close();
@@ -315,6 +358,7 @@ namespace System.Diagnostics.SymbolStore
         void SetUserEntryPoint(System.Diagnostics.SymbolStore.SymbolToken entryMethod);
         void UsingNamespace(string fullName);
     }
+
     public enum SymAddressKind
     {
         ILOffset = 1,
@@ -328,31 +372,38 @@ namespace System.Diagnostics.SymbolStore
         BitField = 9,
         NativeSectionOffset = 10,
     }
+
     public readonly partial struct SymbolToken
     {
         private readonly int _dummyPrimitive;
+
         public SymbolToken(int val)
         {
             throw null;
         }
+
         public bool Equals(System.Diagnostics.SymbolStore.SymbolToken obj)
         {
             throw null;
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public int GetToken()
         {
             throw null;
         }
+
         public static bool operator ==(
             System.Diagnostics.SymbolStore.SymbolToken a,
             System.Diagnostics.SymbolStore.SymbolToken b
@@ -360,6 +411,7 @@ namespace System.Diagnostics.SymbolStore
         {
             throw null;
         }
+
         public static bool operator !=(
             System.Diagnostics.SymbolStore.SymbolToken a,
             System.Diagnostics.SymbolStore.SymbolToken b
@@ -368,11 +420,14 @@ namespace System.Diagnostics.SymbolStore
             throw null;
         }
     }
+
     public partial class SymDocumentType
     {
         public static readonly System.Guid Text;
+
         public SymDocumentType() { }
     }
+
     public partial class SymLanguageType
     {
         public static readonly System.Guid Basic;
@@ -386,11 +441,14 @@ namespace System.Diagnostics.SymbolStore
         public static readonly System.Guid MCPlusPlus;
         public static readonly System.Guid Pascal;
         public static readonly System.Guid SMC;
+
         public SymLanguageType() { }
     }
+
     public partial class SymLanguageVendor
     {
         public static readonly System.Guid Microsoft;
+
         public SymLanguageVendor() { }
     }
 }

@@ -26,13 +26,17 @@ namespace System.IO.Tests
         }
 
         protected string GetRandomFileName() => GetTestFileName() + ".txt";
+
         protected string GetRandomLinkName() => GetTestFileName() + ".link";
+
         protected string GetRandomDirName() => GetTestFileName() + "_dir";
 
         protected string GetRandomFilePath() =>
             Path.Join(ActualTestDirectory.Value, GetRandomFileName());
+
         protected string GetRandomLinkPath() =>
             Path.Join(ActualTestDirectory.Value, GetRandomLinkName());
+
         protected string GetRandomDirPath() =>
             Path.Join(ActualTestDirectory.Value, GetRandomDirName());
 

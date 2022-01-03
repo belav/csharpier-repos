@@ -33,6 +33,7 @@ public unsafe class Tests
         public bool b;
         public bool c;
         public string d;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string d2;
     }
@@ -44,6 +45,7 @@ public unsafe class Tests
         public bool b;
         public bool c;
         public string d;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string d2;
     }
@@ -76,8 +78,10 @@ public unsafe class Tests
     {
         public int a;
         public SimpleDelegate del;
+
         [MarshalAs(UnmanagedType.FunctionPtr)]
         public SimpleDelegate del2;
+
         [MarshalAs(UnmanagedType.FunctionPtr)]
         public SimpleDelegate del3;
     }
@@ -111,6 +115,7 @@ public unsafe class Tests
         {
             this.i = i;
         }
+
         public int i;
     }
 
@@ -461,6 +466,7 @@ public unsafe class Tests
 
     [DllImport("libtest", EntryPoint = "mono_test_marshal_asany_out")]
     static extern void mono_test_asany_out([MarshalAs(UnmanagedType.AsAny)] [Out] object obj);
+
     [DllImport("libtest", EntryPoint = "mono_test_marshal_asany_inout")]
     static extern void mono_test_asany_inout([MarshalAs(UnmanagedType.AsAny)] [In, Out] object obj);
 
@@ -1875,8 +1881,10 @@ public unsafe class Tests
     struct BoolStruct
     {
         public int i;
+
         [MarshalAs(UnmanagedType.I1)]
         public bool b1;
+
         [MarshalAs(UnmanagedType.VariantBool)]
         public bool b2;
         public bool b3;

@@ -29,6 +29,7 @@ public class SocketAwaitable : ICriticalNotifyCompletion
     }
 
     public SocketAwaitable GetAwaiter() => this;
+
     public bool IsCompleted => ReferenceEquals(_callback, _callbackCompleted);
 
     public int GetResult()

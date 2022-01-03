@@ -66,6 +66,7 @@ namespace System.Reflection.Internal
         }
 
         public override void Dispose() => _data.Dispose();
+
         public unsafe override byte* Pointer => _data.Pointer;
         public override int Size => _size;
     }

@@ -34,6 +34,7 @@ namespace XmlCoreTest.Common
                 WriteByte((byte)((c >> 8) & 0xFF));
             }
         }
+
         public void WriteChar(char c)
         {
             WriteByte((byte)(c & 0xFF));
@@ -64,11 +65,13 @@ namespace XmlCoreTest.Common
         public static string END_TAG = "?>";
 
         private const int _4K = 4096;
+
         // count values (useful for cases like tagContent = "attr%1='val%1' "
         public int count = 0;
         public int bufferBoundaryLength;
 
         private static bool s_debug = false;
+
         // flag for replacing tagContent % with count values
         public bool replaceFlag = false;
 
@@ -80,6 +83,7 @@ namespace XmlCoreTest.Common
         public string startText = null;
         public string endText = null;
         public string tagContent = null;
+
         // for the iterative tagContent
         public string iterContent = null;
         public StringBuilder nodeValue = new StringBuilder();

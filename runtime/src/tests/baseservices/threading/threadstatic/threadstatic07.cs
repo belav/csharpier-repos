@@ -14,14 +14,19 @@ public class Sensor
 {
     [ThreadStatic]
     static int A = 1;
+
     [ThreadStatic]
     static int B = 2;
+
     [ThreadStatic]
     static int C = 3;
+
     [ThreadStatic]
     static int D = 4;
+
     [ThreadStatic]
     static DateTime T = DateTime.Now;
+
     [ThreadStatic]
     static String S = "John Stockton";
 
@@ -35,14 +40,19 @@ public class Sensor
 
     [ThreadStatic]
     static int AAA = 5;
+
     [ThreadStatic]
     static int BBB = 6;
+
     [ThreadStatic]
     static int CCC = 7;
+
     [ThreadStatic]
     static int DDD = 8;
+
     [ThreadStatic]
     static DateTime TTT = DateTime.Now;
+
     [ThreadStatic]
     static String SSS = "Olden Polynice";
 

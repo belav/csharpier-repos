@@ -83,6 +83,7 @@ namespace System.Speech.Internal.SapiInterop
                 }
             );
         }
+
         internal void SetPropertyString(string name, string value)
         {
             _proxy.Invoke2(

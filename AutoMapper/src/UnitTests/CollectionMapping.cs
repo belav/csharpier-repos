@@ -22,7 +22,9 @@ namespace AutoMapper.UnitTests
                 _enumerator = new CustomEnumerator(base.GetEnumerator(), this);
                 return _enumerator;
             }
+
             public bool Disposed { get; set; }
+
             public class EnumeratorBase
             {
                 public EnumeratorBase(IEnumerator<T> enumerator, CustomList<T> list)
@@ -30,17 +32,22 @@ namespace AutoMapper.UnitTests
                     Enumerator = enumerator;
                     List = list;
                 }
+
                 public IEnumerator<T> Enumerator { get; }
                 public CustomList<T> List { get; }
                 public T Current => Enumerator.Current;
+
                 public void Dispose()
                 {
                     Enumerator.Dispose();
                     List.Disposed = true;
                 }
+
                 public bool MoveNext() => Enumerator.MoveNext();
+
                 public void Reset() => Enumerator.Reset();
             }
+
             public class CustomEnumerator : EnumeratorBase, IDisposable
             {
                 public CustomEnumerator(IEnumerator<T> enumerator, CustomList<T> list)
@@ -58,6 +65,7 @@ namespace AutoMapper.UnitTests
             source.Disposed.ShouldBeTrue();
         }
     }
+
     public class Enumerator_non_disposable_struct : AutoMapperSpecBase
     {
         class CustomList<T> : List<T>
@@ -69,7 +77,9 @@ namespace AutoMapper.UnitTests
                 _enumerator = new CustomEnumerator(base.GetEnumerator(), this);
                 return _enumerator;
             }
+
             public bool Disposed { get; set; }
+
             public struct CustomEnumerator
             {
                 public CustomEnumerator(IEnumerator<T> enumerator, CustomList<T> list)
@@ -77,15 +87,19 @@ namespace AutoMapper.UnitTests
                     Enumerator = enumerator;
                     List = list;
                 }
+
                 public IEnumerator<T> Enumerator { get; }
                 public CustomList<T> List { get; }
                 public T Current => Enumerator.Current;
+
                 public void Dispose()
                 {
                     Enumerator.Dispose();
                     List.Disposed = true;
                 }
+
                 public bool MoveNext() => Enumerator.MoveNext();
+
                 public void Reset() => Enumerator.Reset();
             }
         }
@@ -100,6 +114,7 @@ namespace AutoMapper.UnitTests
             source.Disposed.ShouldBeFalse();
         }
     }
+
     public class Enumerator_dispose : AutoMapperSpecBase
     {
         class CustomList<T> : List<T>
@@ -111,20 +126,26 @@ namespace AutoMapper.UnitTests
                 _enumerator = new CustomEnumerator(base.GetEnumerator());
                 return _enumerator;
             }
+
             public bool Disposed => _enumerator.Disposed;
+
             class CustomEnumerator : IEnumerator<T>
             {
                 public CustomEnumerator(IEnumerator<T> enumerator) => Enumerator = enumerator;
+
                 public bool Disposed { get; set; }
                 public IEnumerator<T> Enumerator { get; }
                 public T Current => Enumerator.Current;
                 object IEnumerator.Current => Enumerator.Current;
+
                 public void Dispose()
                 {
                     Enumerator.Dispose();
                     Disposed = true;
                 }
+
                 public bool MoveNext() => Enumerator.MoveNext();
+
                 public void Reset() => Enumerator.Reset();
             }
         }
@@ -151,20 +172,26 @@ namespace AutoMapper.UnitTests
                 _enumerator = new CustomEnumerator(base.GetEnumerator());
                 return _enumerator;
             }
+
             public bool Disposed => _enumerator.Disposed;
+
             class CustomEnumerator : IEnumerator<T>
             {
                 public CustomEnumerator(IEnumerator<T> enumerator) => Enumerator = enumerator;
+
                 public bool Disposed { get; set; }
                 public IEnumerator<T> Enumerator { get; }
                 public T Current => Enumerator.Current;
                 object IEnumerator.Current => Enumerator.Current;
+
                 public void Dispose()
                 {
                     Enumerator.Dispose();
                     Disposed = true;
                 }
+
                 public bool MoveNext() => throw new NotImplementedException();
+
                 public void Reset() => Enumerator.Reset();
             }
         }
@@ -195,7 +222,9 @@ namespace AutoMapper.UnitTests
                 _enumerator = new CustomEnumerator(base.GetEnumerator(), this);
                 return _enumerator;
             }
+
             public bool Disposed { get; set; }
+
             public struct CustomEnumerator : IEnumerator<T>
             {
                 public CustomEnumerator(IEnumerator<T> enumerator, CustomList<T> list)
@@ -203,16 +232,20 @@ namespace AutoMapper.UnitTests
                     Enumerator = enumerator;
                     List = list;
                 }
+
                 public IEnumerator<T> Enumerator { get; }
                 public CustomList<T> List { get; }
                 public T Current => Enumerator.Current;
                 object IEnumerator.Current => Enumerator.Current;
+
                 public void Dispose()
                 {
                     Enumerator.Dispose();
                     List.Disposed = true;
                 }
+
                 public bool MoveNext() => Enumerator.MoveNext();
+
                 public void Reset() => Enumerator.Reset();
             }
         }
@@ -239,7 +272,9 @@ namespace AutoMapper.UnitTests
                 _enumerator = new CustomEnumerator(base.GetEnumerator(), this);
                 return _enumerator;
             }
+
             public bool Disposed { get; set; }
+
             public struct CustomEnumerator : IEnumerator<T>
             {
                 public CustomEnumerator(IEnumerator<T> enumerator, CustomList<T> list)
@@ -247,16 +282,20 @@ namespace AutoMapper.UnitTests
                     Enumerator = enumerator;
                     List = list;
                 }
+
                 public IEnumerator<T> Enumerator { get; }
                 public T Current => Enumerator.Current;
                 object IEnumerator.Current => Enumerator.Current;
                 public CustomList<T> List { get; }
+
                 public void Dispose()
                 {
                     Enumerator.Dispose();
                     List.Disposed = true;
                 }
+
                 public bool MoveNext() => throw new NotImplementedException();
+
                 public void Reset() => Enumerator.Reset();
             }
         }
@@ -319,7 +358,9 @@ namespace AutoMapper.UnitTests
     public class When_mapping_to_member_typed_as_IEnumerable : AutoMapperSpecBase
     {
         public class SourceItem { }
+
         public class DestItem { }
+
         public class SourceA
         {
             public IEnumerable<SourceItem> Items { get; set; }
@@ -418,13 +459,16 @@ namespace AutoMapper.UnitTests
         {
             public IEnumerable<string> MyCollection { get; } = new[] { "one", "two" };
         }
+
         public class Destination
         {
             public IEnumerable<string> MyCollection { get; } =
                 new ReadOnlyCollection<string>(new string[0]);
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>());
+
         [Fact]
         public void Should_fail() =>
             new Action(() => Mapper.Map(new Source(), new Destination()))
@@ -633,18 +677,22 @@ namespace AutoMapper.UnitTests
         {
             public IEnumerable<SourceItem> Items { get; set; }
         }
+
         public class Destination
         {
             public IEnumerable<DestinationItemBase> Items { get; set; }
         }
+
         public class SourceItem
         {
             public int Value { get; set; }
         }
+
         public class DestinationItemBase
         {
             public int Value { get; set; }
         }
+
         public class SpecificDestinationItem : DestinationItemBase
         {
         }
@@ -709,12 +757,14 @@ namespace AutoMapper.UnitTests
         BarDTO _destination;
 
         public struct Foo { }
+
         public struct Bar
         {
             public IEnumerable<Foo> Foos { get; set; }
         }
 
         public struct FooDTO { }
+
         public struct BarDTO
         {
             public IEnumerable<FooDTO> Foos { get; set; }
@@ -1047,6 +1097,7 @@ namespace AutoMapper.UnitTests
                 public int Value { get; set; }
             }
         }
+
         public class Dest
         {
             public ICollection<Item> Items { get; set; } = new HashSet<Item>();

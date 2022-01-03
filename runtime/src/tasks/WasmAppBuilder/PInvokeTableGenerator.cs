@@ -15,6 +15,7 @@ public class PInvokeTableGenerator : Task
 {
     [Required, NotNull]
     public string[]? Modules { get; set; }
+
     [Required, NotNull]
     public string[]? Assemblies { get; set; }
 

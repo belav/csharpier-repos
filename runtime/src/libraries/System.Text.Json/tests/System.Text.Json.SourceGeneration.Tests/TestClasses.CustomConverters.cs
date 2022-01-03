@@ -272,6 +272,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                 Type typeToConvert,
                 JsonSerializerOptions options
             ) => new NestedPoco { Value = reader.GetInt32() };
+
             public override void Write(
                 Utf8JsonWriter writer,
                 NestedPoco value,

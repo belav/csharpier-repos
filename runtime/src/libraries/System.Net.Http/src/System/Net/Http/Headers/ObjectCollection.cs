@@ -27,6 +27,7 @@ namespace System.Net.Http.Headers
 
         /// <summary>null, a T, or a T[].</summary>
         internal object? _items;
+
         /// <summary>Number of elements stored in the collection.</summary>
         internal int _size;
 
@@ -149,7 +150,9 @@ namespace System.Net.Http.Headers
         }
 
         public Enumerator GetEnumerator() => new Enumerator(this);
+
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public struct Enumerator : IEnumerator<T>

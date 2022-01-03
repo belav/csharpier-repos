@@ -577,40 +577,48 @@ namespace System.Tests
             {
                 Flag.Reset(100);
             }
+
             private ClassWithPrivateCtor()
             {
                 Flag.Increase(200);
             }
+
             public ClassWithPrivateCtor(int i)
             {
                 Flag.Increase(300);
             }
         }
+
         class ClassWithPrivateCtor2
         {
             static ClassWithPrivateCtor2()
             {
                 Flag.Reset(100);
             }
+
             private ClassWithPrivateCtor2()
             {
                 Flag.Increase(200);
             }
+
             public ClassWithPrivateCtor2(int i)
             {
                 Flag.Increase(300);
             }
         }
+
         class ClassWithPrivateCtor3
         {
             static ClassWithPrivateCtor3()
             {
                 Flag.Reset(100);
             }
+
             private ClassWithPrivateCtor3()
             {
                 Flag.Increase(200);
             }
+
             public ClassWithPrivateCtor3(int i)
             {
                 Flag.Increase(300);
@@ -634,28 +642,36 @@ namespace System.Tests
         public class IsTestedAttribute : Attribute
         {
             private bool flag;
+
             public IsTestedAttribute(bool flag)
             {
                 this.flag = flag;
             }
         }
+
         [IsTestedAttribute(false)]
         class ClassWithIsTestedAttribute { }
+
         [Serializable]
         class ClassWithSerializableAttribute { }
+
         [IsTestedAttribute(false)]
         class MBRWithIsTestedAttribute : MarshalByRefObject { }
+
         class Flag
         {
             public static int cnt = 0;
+
             public static void Reset(int i)
             {
                 cnt = i;
             }
+
             public static void Increase(int i)
             {
                 cnt += i;
             }
+
             public static bool Equal(int i)
             {
                 return cnt == i;

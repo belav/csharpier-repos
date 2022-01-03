@@ -14,8 +14,10 @@ namespace System.Security.Permissions
     public sealed partial class UIPermissionAttribute : CodeAccessSecurityAttribute
     {
         public UIPermissionAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+
         public UIPermissionClipboard Clipboard { get; set; }
         public UIPermissionWindow Window { get; set; }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);

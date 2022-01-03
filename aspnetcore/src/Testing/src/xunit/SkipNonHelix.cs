@@ -30,5 +30,6 @@ public class SkipNonHelixAttribute : Attribute, ITestCondition
     }
 
     public static bool OnHelix() => !string.IsNullOrEmpty(GetTargetHelixQueue());
+
     public static string GetTargetHelixQueue() => Environment.GetEnvironmentVariable("helix");
 }

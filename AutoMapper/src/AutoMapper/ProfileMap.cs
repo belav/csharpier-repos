@@ -13,6 +13,7 @@ using AutoMapper.Internal;
 namespace AutoMapper
 {
     using static Expression;
+
     [DebuggerDisplay("{Name}")]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class ProfileMap
@@ -22,6 +23,7 @@ namespace AutoMapper
         private Dictionary<Type, TypeDetails> _typeDetails;
         private ConcurrentDictionaryWrapper<Type, TypeDetails> _runtimeTypeDetails;
         private readonly IMemberConfiguration[] _memberConfigurations;
+
         public ProfileMap(
             IProfileConfiguration profile,
             IGlobalConfigurationExpression configuration = null
@@ -127,14 +129,17 @@ namespace AutoMapper
                 }
             }
         }
+
         public int OpenTypeMapsCount => _openTypeMapConfigs.Count;
         public int TypeMapsCount { get; private set; }
+
         internal void Clear()
         {
             _typeDetails = null;
             _typeMapConfigs = null;
             _runtimeTypeDetails = new(TypeDetailsFactory, 2 * _openTypeMapConfigs.Count);
         }
+
         public bool AllowNullCollections { get; }
         public bool AllowNullDestinationValues { get; }
         public bool ConstructorMappingEnabled { get; }
@@ -156,6 +161,7 @@ namespace AutoMapper
         public List<string> Prefixes { get; }
         public List<string> Postfixes { get; }
         public IReadOnlyCollection<ValueTransformerConfiguration> ValueTransformers { get; }
+
         public TypeDetails CreateTypeDetails(Type type)
         {
             if (_typeDetails == null)
@@ -170,7 +176,9 @@ namespace AutoMapper
             _typeDetails.Add(type, typeDetails);
             return typeDetails;
         }
+
         private TypeDetails TypeDetailsFactory(Type type) => new(type, this);
+
         public void Register(IGlobalConfiguration configurationProvider)
         {
             foreach (var config in _typeMapConfigs)
@@ -182,6 +190,7 @@ namespace AutoMapper
                 }
             }
         }
+
         public void Configure(IGlobalConfiguration configurationProvider)
         {
             foreach (var typeMapConfiguration in _typeMapConfigs)
@@ -193,6 +202,7 @@ namespace AutoMapper
                 }
             }
         }
+
         private void BuildTypeMap(
             IGlobalConfiguration configurationProvider,
             ITypeMapConfiguration config
@@ -207,6 +217,7 @@ namespace AutoMapper
             config.Configure(typeMap);
             configurationProvider.RegisterTypeMap(typeMap);
         }
+
         private void Configure(
             ITypeMapConfiguration typeMapConfiguration,
             IGlobalConfiguration configurationProvider
@@ -219,6 +230,7 @@ namespace AutoMapper
             }
             Configure(typeMap, configurationProvider);
         }
+
         private static void IncludeAllDerived(
             IGlobalConfiguration configurationProvider,
             TypeMap typeMap
@@ -238,6 +250,7 @@ namespace AutoMapper
                 typeMap.IncludeDerivedTypes(derivedMap.Types);
             }
         }
+
         private void Configure(TypeMap typeMap, IGlobalConfiguration configurationProvider)
         {
             foreach (var action in AllTypeMapActions)
@@ -262,6 +275,7 @@ namespace AutoMapper
             ApplyDerivedMaps(typeMap, typeMap, configurationProvider);
             ApplyMemberMaps(typeMap, configurationProvider);
         }
+
         public TypeMap CreateClosedGenericTypeMap(
             ITypeMapConfiguration openMapConfig,
             in TypePair closedTypes,
@@ -303,8 +317,10 @@ namespace AutoMapper
             }
             return closedMap;
         }
+
         public ITypeMapConfiguration GetGenericMap(in TypePair genericPair) =>
             _openTypeMapConfigs.GetOrDefault(genericPair);
+
         private void ApplyBaseMaps(
             TypeMap derivedMap,
             TypeMap currentMap,
@@ -322,6 +338,7 @@ namespace AutoMapper
                 ApplyBaseMaps(derivedMap, baseMap, configurationProvider);
             }
         }
+
         private void ApplyMemberMaps(TypeMap currentMap, IGlobalConfiguration configurationProvider)
         {
             if (!currentMap.HasIncludedMembers)
@@ -345,6 +362,7 @@ namespace AutoMapper
                 }
             }
         }
+
         private void ApplyDerivedMaps(
             TypeMap baseMap,
             TypeMap typeMap,
@@ -358,6 +376,7 @@ namespace AutoMapper
                 ApplyDerivedMaps(baseMap, derivedMap, configurationProvider);
             }
         }
+
         public bool MapDestinationPropertyToSource(
             TypeDetails sourceTypeDetails,
             Type destType,
@@ -390,11 +409,14 @@ namespace AutoMapper
             }
             return false;
         }
+
         public bool AllowsNullDestinationValuesFor(MemberMap memberMap = null) =>
             memberMap?.AllowNull ?? AllowNullDestinationValues;
+
         public bool AllowsNullCollectionsFor(MemberMap memberMap = null) =>
             memberMap?.AllowNull ?? AllowNullCollections;
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     [DebuggerDisplay("{MemberExpression}, {TypeMap}")]
     public class IncludedMember : IEquatable<IncludedMember>
@@ -409,6 +431,7 @@ namespace AutoMapper
                 ),
                 memberExpression
             ) { }
+
         private IncludedMember(
             TypeMap typeMap,
             LambdaExpression memberExpression,
@@ -421,6 +444,7 @@ namespace AutoMapper
             Variable = variable;
             ProjectToCustomSource = projectToCustomSource;
         }
+
         public IncludedMember Chain(IncludedMember other)
         {
             if (other == null)
@@ -434,17 +458,22 @@ namespace AutoMapper
                 Chain(MemberExpression, other.MemberExpression)
             );
         }
+
         public static LambdaExpression Chain(
             LambdaExpression customSource,
             LambdaExpression lambda
         ) => Lambda(lambda.ReplaceParameters(customSource.Body), customSource.Parameters);
+
         public TypeMap TypeMap { get; }
         public LambdaExpression MemberExpression { get; }
         public ParameterExpression Variable { get; }
         public LambdaExpression ProjectToCustomSource { get; }
+
         public LambdaExpression Chain(LambdaExpression lambda) =>
             Lambda(lambda.ReplaceParameters(Variable), lambda.Parameters);
+
         public bool Equals(IncludedMember other) => TypeMap == other?.TypeMap;
+
         public override int GetHashCode() => TypeMap.GetHashCode();
     }
 }

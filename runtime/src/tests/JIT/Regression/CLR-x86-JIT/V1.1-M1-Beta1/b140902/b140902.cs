@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal unsafe class testout1
 {
     public struct VT_0_8_5
@@ -16,6 +17,7 @@ internal unsafe class testout1
         public float a7_0_8_5;
         public double a8_0_8_5;
         public double a9_0_8_5;
+
         public VT_0_8_5(int i)
         {
             a0_0_8_5 = 1;
@@ -41,6 +43,7 @@ internal unsafe class testout1
         public double a6_0_8_4;
         public double a7_0_8_4;
         public float a8_0_8_4;
+
         public VT_0_8_4(int i)
         {
             a0_0_8_4 = 1;
@@ -64,6 +67,7 @@ internal unsafe class testout1
         public float a7_0_8_3;
         public double a8_0_8_3;
         public double a9_0_8_3;
+
         public VT_0_8_3(int i)
         {
             a0_0_8_3 = 1;
@@ -87,6 +91,7 @@ internal unsafe class testout1
         public double a6_0_8_2;
         public float a7_0_8_2;
         public double a8_0_8_2;
+
         public VT_0_8_2(int i)
         {
             a0_0_8_2 = 1;
@@ -111,6 +116,7 @@ internal unsafe class testout1
         public double a6_0_8_1;
         public double a7_0_8_1;
         public double a8_0_8_1;
+
         public VT_0_8_1(int i)
         {
             a0_0_8_1 = 1;
@@ -135,6 +141,7 @@ internal unsafe class testout1
         public double a6_0_7_8;
         public double a7_0_7_8;
         public double a9_0_7_8;
+
         public VT_0_7_8(int i)
         {
             a0_0_7_8 = 1;
@@ -158,6 +165,7 @@ internal unsafe class testout1
         public float a6_0_7_7;
         public float a7_0_7_7;
         public float a9_0_7_7;
+
         public VT_0_7_7(int i)
         {
             a0_0_7_7 = 1;
@@ -182,6 +190,7 @@ internal unsafe class testout1
         public float a6_0_7_6;
         public float a7_0_7_6;
         public double a9_0_7_6;
+
         public VT_0_7_6(int i)
         {
             a0_0_7_6 = 1;
@@ -204,6 +213,7 @@ internal unsafe class testout1
         public double a5_0_7_5;
         public float a6_0_7_5;
         public double a8_0_7_5;
+
         public VT_0_7_5(int i)
         {
             a0_0_7_5 = 1;
@@ -227,6 +237,7 @@ internal unsafe class testout1
         public float a7_0_7_4;
         public double a8_0_7_4;
         public float a9_0_7_4;
+
         public VT_0_7_4(int i)
         {
             a0_0_7_4 = 1;
@@ -254,6 +265,7 @@ internal unsafe class testout1
         public Decimal a7_0_7_3;
         public float a8_0_7_3;
         public long a9_0_7_3;
+
         public VT_0_7_3(int i)
         {
             a0_0_7_3 = 1;
@@ -278,6 +290,7 @@ internal unsafe class testout1
         public double a5_0_7_2;
         public long a6_0_7_2;
         public double a7_0_7_2;
+
         public VT_0_7_2(int i)
         {
             a0_0_7_2 = 1;
@@ -302,6 +315,7 @@ internal unsafe class testout1
         public float a7_0_7_1;
         public float a8_0_7_1;
         public short a9_0_7_1;
+
         public VT_0_7_1(int i)
         {
             a0_0_7_1 = 1;
@@ -326,6 +340,7 @@ internal unsafe class testout1
         public double a6_0_6_5;
         public short a7_0_6_5;
         public double a8_0_6_5;
+
         public VT_0_6_5(int i)
         {
             a0_0_6_5 = 1;
@@ -349,6 +364,7 @@ internal unsafe class testout1
         public double a6_0_6_4;
         public long a7_0_6_4;
         public short a9_0_6_4;
+
         public VT_0_6_4(int i)
         {
             a0_0_6_4 = 1;
@@ -375,6 +391,7 @@ internal unsafe class testout1
         public double a7_0_6_3;
         public int a8_0_6_3;
         public short a9_0_6_3;
+
         public VT_0_6_3(int i)
         {
             a0_0_6_3 = 1;
@@ -401,6 +418,7 @@ internal unsafe class testout1
         public float a7_0_6_2;
         public float a8_0_6_2;
         public float a9_0_6_2;
+
         public VT_0_6_2(int i)
         {
             a0_0_6_2 = 1;
@@ -427,6 +445,7 @@ internal unsafe class testout1
         public Decimal a7_0_6_1;
         public Decimal a8_0_6_1;
         public long a9_0_6_1;
+
         public VT_0_6_1(int i)
         {
             a0_0_6_1 = 1;
@@ -452,6 +471,7 @@ internal unsafe class testout1
         public double a6_0_5_7;
         public double a7_0_5_7;
         public double a8_0_5_7;
+
         public VT_0_5_7(int i)
         {
             a0_0_5_7 = 1;
@@ -476,6 +496,7 @@ internal unsafe class testout1
         public double a6_0_5_6;
         public double a7_0_5_6;
         public int a8_0_5_6;
+
         public VT_0_5_6(int i)
         {
             a0_0_5_6 = 1;
@@ -501,6 +522,7 @@ internal unsafe class testout1
         public long a7_0_5_5;
         public double a8_0_5_5;
         public double a9_0_5_5;
+
         public VT_0_5_5(int i)
         {
             a1_0_5_5 = 1;
@@ -527,6 +549,7 @@ internal unsafe class testout1
         public long a7_0_5_4;
         public float a8_0_5_4;
         public double a9_0_5_4;
+
         public VT_0_5_4(int i)
         {
             a0_0_5_4 = 1;
@@ -550,6 +573,7 @@ internal unsafe class testout1
         public short a3_0_5_3;
         public short a4_0_5_3;
         public float a5_0_5_3;
+
         public VT_0_5_3(int i)
         {
             a0_0_5_3 = 1;
@@ -572,6 +596,7 @@ internal unsafe class testout1
         public long a6_0_5_2;
         public double a7_0_5_2;
         public long a9_0_5_2;
+
         public VT_0_5_2(int i)
         {
             a0_0_5_2 = 1;
@@ -597,6 +622,7 @@ internal unsafe class testout1
         public double a6_0_5_1;
         public int a7_0_5_1;
         public double a8_0_5_1;
+
         public VT_0_5_1(int i)
         {
             a0_0_5_1 = 1;
@@ -623,6 +649,7 @@ internal unsafe class testout1
         public double a7_0_4_5;
         public float a8_0_4_5;
         public double a9_0_4_5;
+
         public VT_0_4_5(int i)
         {
             a0_0_4_5 = 1;
@@ -650,6 +677,7 @@ internal unsafe class testout1
         public double a7_0_4_4;
         public double a8_0_4_4;
         public double a9_0_4_4;
+
         public VT_0_4_4(int i)
         {
             a0_0_4_4 = 1;
@@ -677,6 +705,7 @@ internal unsafe class testout1
         public double a7_0_4_3;
         public float a8_0_4_3;
         public float a9_0_4_3;
+
         public VT_0_4_3(int i)
         {
             a0_0_4_3 = 1;
@@ -704,6 +733,7 @@ internal unsafe class testout1
         public double a7_0_4_2;
         public float a8_0_4_2;
         public double a9_0_4_2;
+
         public VT_0_4_2(int i)
         {
             a0_0_4_2 = 1;
@@ -730,6 +760,7 @@ internal unsafe class testout1
         public double a7_0_4_1;
         public double a8_0_4_1;
         public double a9_0_4_1;
+
         public VT_0_4_1(int i)
         {
             a0_0_4_1 = 1;
@@ -755,6 +786,7 @@ internal unsafe class testout1
         public int a7_0_3_8;
         public long a8_0_3_8;
         public double a9_0_3_8;
+
         public VT_0_3_8(int i)
         {
             a0_0_3_8 = 1;
@@ -781,6 +813,7 @@ internal unsafe class testout1
         public double a7_0_3_7;
         public double a8_0_3_7;
         public Decimal a9_0_3_7;
+
         public VT_0_3_7(int i)
         {
             a0_0_3_7 = 1;
@@ -806,6 +839,7 @@ internal unsafe class testout1
         public Decimal a5_0_3_6;
         public Decimal a6_0_3_6;
         public double a7_0_3_6;
+
         public VT_0_3_6(int i)
         {
             a0_0_3_6 = 1;
@@ -829,6 +863,7 @@ internal unsafe class testout1
         public long a7_0_3_5;
         public long a8_0_3_5;
         public int a9_0_3_5;
+
         public VT_0_3_5(int i)
         {
             a0_0_3_5 = 1;
@@ -845,6 +880,7 @@ internal unsafe class testout1
     public struct VT_0_3_4
     {
         public double a0_0_3_4;
+
         public VT_0_3_4(int i)
         {
             a0_0_3_4 = 1;
@@ -861,6 +897,7 @@ internal unsafe class testout1
         public int a7_0_3_3;
         public long a8_0_3_3;
         public double a9_0_3_3;
+
         public VT_0_3_3(int i)
         {
             a0_0_3_3 = 1;
@@ -883,6 +920,7 @@ internal unsafe class testout1
         public double a7_0_3_2;
         public long a8_0_3_2;
         public double a9_0_3_2;
+
         public VT_0_3_2(int i)
         {
             a1_0_3_2 = 1;
@@ -907,6 +945,7 @@ internal unsafe class testout1
         public double a7_0_3_1;
         public double a8_0_3_1;
         public short a9_0_3_1;
+
         public VT_0_3_1(int i)
         {
             a0_0_3_1 = 1;
@@ -932,6 +971,7 @@ internal unsafe class testout1
         public float a6_0_2_7;
         public double a8_0_2_7;
         public double a9_0_2_7;
+
         public VT_0_2_7(int i)
         {
             a0_0_2_7 = 1;
@@ -957,6 +997,7 @@ internal unsafe class testout1
         public double a7_0_2_6;
         public double a8_0_2_6;
         public Decimal a9_0_2_6;
+
         public VT_0_2_6(int i)
         {
             a0_0_2_6 = 1;
@@ -981,6 +1022,7 @@ internal unsafe class testout1
         public long a4_0_2_5;
         public long a6_0_2_5;
         public double a7_0_2_5;
+
         public VT_0_2_5(int i)
         {
             a0_0_2_5 = 1;
@@ -1005,6 +1047,7 @@ internal unsafe class testout1
         public long a7_0_2_4;
         public short a8_0_2_4;
         public double a9_0_2_4;
+
         public VT_0_2_4(int i)
         {
             a0_0_2_4 = 1;
@@ -1032,6 +1075,7 @@ internal unsafe class testout1
         public float a7_0_2_3;
         public int a8_0_2_3;
         public int a9_0_2_3;
+
         public VT_0_2_3(int i)
         {
             a0_0_2_3 = 1;
@@ -1056,6 +1100,7 @@ internal unsafe class testout1
         public double a5_0_2_2;
         public int a6_0_2_2;
         public double a8_0_2_2;
+
         public VT_0_2_2(int i)
         {
             a1_0_2_2 = 1;
@@ -1077,6 +1122,7 @@ internal unsafe class testout1
         public short a7_0_2_1;
         public Decimal a8_0_2_1;
         public double a9_0_2_1;
+
         public VT_0_2_1(int i)
         {
             a2_0_2_1 = 1;
@@ -1101,6 +1147,7 @@ internal unsafe class testout1
         public long a7_0_1_9;
         public int a8_0_1_9;
         public int a9_0_1_9;
+
         public VT_0_1_9(int i)
         {
             a0_0_1_9 = 1;
@@ -1127,6 +1174,7 @@ internal unsafe class testout1
         public double a7_0_1_8;
         public double a8_0_1_8;
         public double a9_0_1_8;
+
         public VT_0_1_8(int i)
         {
             a0_0_1_8 = 1;
@@ -1150,6 +1198,7 @@ internal unsafe class testout1
         public double a6_0_1_7;
         public double a8_0_1_7;
         public double a9_0_1_7;
+
         public VT_0_1_7(int i)
         {
             a1_0_1_7 = 1;
@@ -1165,6 +1214,7 @@ internal unsafe class testout1
     public struct VT_0_1_6
     {
         public float a0_0_1_6;
+
         public VT_0_1_6(int i)
         {
             a0_0_1_6 = 1;
@@ -1182,6 +1232,7 @@ internal unsafe class testout1
         public double a6_0_1_5;
         public float a7_0_1_5;
         public short a8_0_1_5;
+
         public VT_0_1_5(int i)
         {
             a0_0_1_5 = 1;
@@ -1208,6 +1259,7 @@ internal unsafe class testout1
         public float a7_0_1_4;
         public double a8_0_1_4;
         public float a9_0_1_4;
+
         public VT_0_1_4(int i)
         {
             a0_0_1_4 = 1;
@@ -1234,6 +1286,7 @@ internal unsafe class testout1
         public double a7_0_1_3;
         public double a8_0_1_3;
         public float a9_0_1_3;
+
         public VT_0_1_3(int i)
         {
             a0_0_1_3 = 1;
@@ -1258,6 +1311,7 @@ internal unsafe class testout1
         public double a6_0_1_2;
         public double a7_0_1_2;
         public double a8_0_1_2;
+
         public VT_0_1_2(int i)
         {
             a0_0_1_2 = 1;
@@ -1281,6 +1335,7 @@ internal unsafe class testout1
         public long a5_0_1_1;
         public short a6_0_1_1;
         public float a7_0_1_1;
+
         public VT_0_1_1(int i)
         {
             a0_0_1_1 = 1;
@@ -1300,6 +1355,7 @@ internal unsafe class testout1
         public double a2_0_8;
         public double a3_0_8;
         public double a4_0_8;
+
         public VT_0_8(int i)
         {
             a1_0_8 = 1;
@@ -1313,6 +1369,7 @@ internal unsafe class testout1
     {
         public double a0_0_7;
         public double a1_0_7;
+
         public VT_0_7(int i)
         {
             a0_0_7 = 1;
@@ -1326,6 +1383,7 @@ internal unsafe class testout1
         public short a2_0_6;
         public long a3_0_6;
         public long a4_0_6;
+
         public VT_0_6(int i)
         {
             a1_0_6 = 1;
@@ -1339,6 +1397,7 @@ internal unsafe class testout1
     {
         public double a0_0_5;
         public long a2_0_5;
+
         public VT_0_5(int i)
         {
             a0_0_5 = 1;
@@ -1353,6 +1412,7 @@ internal unsafe class testout1
         public float a2_0_4;
         public int a3_0_4;
         public int a4_0_4;
+
         public VT_0_4(int i)
         {
             a0_0_4 = 1;
@@ -1367,6 +1427,7 @@ internal unsafe class testout1
     {
         public short a0_0_3;
         public double a1_0_3;
+
         public VT_0_3(int i)
         {
             a0_0_3 = 1;
@@ -1379,6 +1440,7 @@ internal unsafe class testout1
         public float a0_0_2;
         public Decimal a1_0_2;
         public short a2_0_2;
+
         public VT_0_2(int i)
         {
             a0_0_2 = 1;
@@ -1390,6 +1452,7 @@ internal unsafe class testout1
     public struct VT_0_1
     {
         public double a0_0_1;
+
         public VT_0_1(int i)
         {
             a0_0_1 = 1;
@@ -1401,6 +1464,7 @@ internal unsafe class testout1
 #pragma warning disable 0414
         public long a0_0;
         public short a1_0;
+
         public VT_0(int i)
         {
             a0_0 = 1;
@@ -1408,143 +1472,174 @@ internal unsafe class testout1
         }
 #pragma warning restore 0414
     }
+
     public class CL_0_8_4
     {
         public double a3_0_8_4 = 137438953472.0;
         public double a9_0_8_4 = -56.0;
     }
+
     public class CL_0_8_3
     {
         public float a2_0_8_3 = -384.0F;
         public double a4_0_8_3 = 16547840.0;
     }
+
     public class CL_0_8_2
     {
         public double a3_0_8_2 = 512.0;
         public double a9_0_8_2 = -917504.0;
     }
+
     public class CL_0_7_8
     {
         public double a4_0_7_8 = -1.7603123260121192E-12;
         public double a8_0_7_8 = 536870912.0;
     }
+
     public class CL_0_7_7
     {
         public float a2_0_7_7 = 8.0F;
         public float a8_0_7_7 = -0.248046875F;
     }
+
     public class CL_0_7_5
     {
         public double a4_0_7_5 = 16.0;
         public double a7_0_7_5 = 0.0;
     }
+
     public class CL_0_7_2
     {
         public long a3_0_7_2 = 2445617325383090176L;
     }
+
     public class CL_0_6_5
     {
         public long a4_0_6_5 = 3080521243871412224L;
     }
+
     public class CL_0_6_2
     {
         public float a6_0_6_2 = 4.76837158E-07F;
     }
+
     public class CL_0_5_7
     {
         public double a1_0_5_7 = 1.75;
         public double a9_0_5_7 = -2.0;
     }
+
     public class CL_0_5_6
     {
         public int a9_0_5_6 = 1560824385;
     }
+
     public class CL_0_5_5
     {
         public double a0_0_5_5 = 16.253968253968253;
     }
+
     public class CL_0_5_2
     {
         public long a8_0_5_2 = 5439199909968347136L;
     }
+
     public class CL_0_5_1
     {
         public double a9_0_5_1 = 245983.75;
     }
+
     public class CL_0_4_1
     {
         public double a2_0_4_1 = 64.0;
     }
+
     public class CL_0_3_8
     {
         public double a5_0_3_8 = 3.0517578125E-05;
     }
+
     public class CL_0_3_5
     {
         public double a4_0_3_5 = 134217728.0;
         public int a6_0_3_5 = 1870715748;
     }
+
     public class CL_0_3_3
     {
         public long a6_0_3_3 = 3283994940217303564L;
     }
+
     public class CL_0_3_2
     {
         public long a0_0_3_2 = 6351L;
         public double a6_0_3_2 = 0.0;
     }
+
     public class CL_0_2_7
     {
         public float a5_0_2_7 = -131072.0F;
     }
+
     public class CL_0_2_5
     {
         public short a8_0_2_5 = 27397;
         public double a9_0_2_5 = 0.0030739403006968188;
     }
+
     public class CL_0_2_2
     {
         public double a0_0_2_2 = 0.0;
         public double a7_0_2_2 = 4.76837158203125E-07;
         public double a9_0_2_2 = -9.3132257461547852E-10;
     }
+
     public class CL_0_2_1
     {
         public double a0_0_2_1 = 1.1368683772161603E-13;
         public Decimal a6_0_2_1 = -0.25M;
     }
+
     public class CL_0_1_8
     {
         public float a5_0_1_8 = 131072.0F;
     }
+
     public class CL_0_1_7
     {
         public double a0_0_1_7 = 8.0;
         public double a3_0_1_7 = 0.0001220703125;
         public float a7_0_1_7 = 0.0009765625F;
     }
+
     public class CL_0_1_3
     {
         public double a3_0_1_3 = 3.2077259913039331E-05;
     }
+
     public class CL_0_1_2
     {
         public float a1_0_1_2 = 16384.0F;
         public double a9_0_1_2 = 3.8028666124278704E-05;
     }
+
     public class CL_0_1_1
     {
         public int a8_0_1_1 = 1;
         public float a9_0_1_1 = -0.5625F;
     }
+
     public class CL_0_8
     {
         public double[] arr1d_0_8 = new double[20];
     }
+
     public class CL_0_6
     {
         public long a0_0_6 = 7522304951616825076L;
     }
+
     public class CL_0_5
     {
         public int a1_0_5 = 629344189;
@@ -5891,6 +5986,7 @@ internal unsafe class testout1
     public static double val_0_8_3_dummy;
     public static double val_0_8_2_dummy;
     public static double val_0_8_1_dummy;
+
     public static double Func_0_8()
     {
         vtstatic_0_8.a1_0_8 = 128.0F;
@@ -5970,6 +6066,7 @@ internal unsafe class testout1
     public static double val_0_7_6_dummy;
     public static double val_0_7_5_dummy;
     public static double val_0_7_4_dummy;
+
     public static double Func_0_7()
     {
         VT_0_7 vt_0_7 = new VT_0_7(1);
@@ -6141,6 +6238,7 @@ internal unsafe class testout1
     public static double val_0_5_4_dummy;
     public static double val_0_5_2_dummy;
     public static double val_0_5_1_dummy;
+
     public static double Func_0_5()
     {
         vtstatic_0_5.a0_0_5 = 16.125984251968504;
@@ -6185,6 +6283,7 @@ internal unsafe class testout1
     public static double val_0_4_3_dummy;
     public static double val_0_4_2_dummy;
     public static double val_0_4_1_dummy;
+
     public static double Func_0_4()
     {
         VT_0_4 vt_0_4 = new VT_0_4(1);
@@ -6347,6 +6446,7 @@ internal unsafe class testout1
 
     public static double val_0_8_dummy;
     public static double val_0_7_dummy;
+
     public static double Func_0()
     {
         VT_0 vt_0 = new VT_0(1);

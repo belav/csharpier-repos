@@ -4749,6 +4749,7 @@ namespace System.Web.Mvc.Html.Test
         {
             public FooModel inner { get; set; }
         }
+
         private class FooModel
         {
             public string foo { get; set; }

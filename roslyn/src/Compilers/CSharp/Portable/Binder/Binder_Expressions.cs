@@ -1156,6 +1156,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics
             );
         }
+
 #nullable disable
 
         private BoundExpression BindRefExpression(
@@ -2066,6 +2067,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return false;
             }
         }
+
 #nullable disable
 
         internal static ConstantValue GetConstantSizeOf(TypeSymbol type)
@@ -4535,6 +4537,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             int paramNum = result.ParameterFromArgument(arg);
             return parameters[paramNum];
         }
+
 #nullable disable
 
         private static TypeWithAnnotations GetCorrespondingParameterTypeWithAnnotations(
@@ -6603,6 +6606,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 WasCompilerGenerated = wasCompilerGenerated
             };
         }
+
 #nullable disable
 
         private BoundObjectInitializerExpressionBase BindInitializerExpression(
@@ -12581,6 +12585,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return result;
             }
         }
+
 #nullable disable
 
         internal static bool ReportDelegateInvokeUseSiteDiagnostic(

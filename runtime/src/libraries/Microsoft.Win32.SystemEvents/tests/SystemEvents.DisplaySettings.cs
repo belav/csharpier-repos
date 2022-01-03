@@ -14,6 +14,7 @@ namespace Microsoft.Win32.SystemEventsTests
         {
             SendMessage(User32.WM_DISPLAYCHANGE, IntPtr.Zero, IntPtr.Zero);
         }
+
         private void SendReflectedMessage()
         {
             SendMessage(User32.WM_REFLECT + User32.WM_DISPLAYCHANGE, IntPtr.Zero, IntPtr.Zero);

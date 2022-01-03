@@ -47,6 +47,7 @@ class Program
         {
             ConstructorCallCount++;
         }
+
         public override void Write<TState>(
             in LogEntry<TState> logEntry,
             IExternalScopeProvider scopeProvider,

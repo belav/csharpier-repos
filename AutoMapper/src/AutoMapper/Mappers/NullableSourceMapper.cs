@@ -1,11 +1,13 @@
 using System;
 using System.Linq.Expressions;
 using AutoMapper.Execution;
+
 namespace AutoMapper.Internal.Mappers
 {
     public class NullableSourceMapper : IObjectMapperInfo
     {
         public bool IsMatch(in TypePair context) => context.SourceType.IsNullableType();
+
         public Expression MapExpression(
             IGlobalConfiguration configurationProvider,
             ProfileMap profileMap,
@@ -20,8 +22,10 @@ namespace AutoMapper.Internal.Mappers
                 memberMap,
                 destExpression
             );
+
         public TypePair GetAssociatedTypes(in TypePair initialTypes) =>
             GetAssociatedTypes(initialTypes.SourceType, initialTypes.DestinationType);
+
         TypePair GetAssociatedTypes(Type sourceType, Type destinationType) =>
             new TypePair(Nullable.GetUnderlyingType(sourceType), destinationType);
     }

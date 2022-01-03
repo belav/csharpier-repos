@@ -44,6 +44,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 Visit(node);
                 visitCount++;
             }
+
             public override void Visit(SyntaxNode node)
             {
                 // TODO: PointerMemberAccessExpression
@@ -657,6 +658,7 @@ namespace Microsoft.WebAssembly.Diagnostics
     internal class ReturnAsErrorException : Exception
     {
         public Result Error { get; }
+
         public ReturnAsErrorException(JObject error) => Error = Result.Err(error);
 
         public ReturnAsErrorException(string message, string className)

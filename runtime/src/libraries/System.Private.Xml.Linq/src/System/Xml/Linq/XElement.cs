@@ -144,6 +144,7 @@ namespace System.Xml.Linq
             // constructor (which doesn't do any processing) and then themselves
             // do the async processing.  This is because ctors can't be 'async'.
         }
+
         private struct AsyncConstructionSentry { }
 
         internal XElement(XmlReader r, LoadOptions o)

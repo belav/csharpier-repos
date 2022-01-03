@@ -184,6 +184,7 @@ namespace Microsoft.Interop
     {
         private const short VARIANT_TRUE = -1;
         private const short VARIANT_FALSE = 0;
+
         public VariantBoolMarshaller()
             : base(
                 PredefinedType(Token(SyntaxKind.ShortKeyword)),

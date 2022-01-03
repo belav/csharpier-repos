@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 // HostingStartup's in the primary assembly are run automatically.
 [assembly: HostingStartup(typeof(SampleStartups.StartupInjection))]
 
+
 namespace SampleStartups;
 
 public class StartupInjection : IHostingStartup

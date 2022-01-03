@@ -10,6 +10,7 @@ namespace System.Web.Http
     public static class ScenarioHelper
     {
         public static string BaseAddress = "http://localhost";
+
         public static async Task RunTestAsync(
             string controllerName,
             string routeSuffix,

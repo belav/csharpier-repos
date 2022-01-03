@@ -17,6 +17,7 @@ public struct AA
 {
     public A m_a;
     public B m_b;
+
     public AA(int a, int b)
     {
         m_a.m_aval = a;
@@ -35,6 +36,7 @@ internal class TestApp
     {
         return AA.get_pb(px)->m_bval;
     }
+
     private static unsafe int Main()
     {
         AA loc_x = new AA(0, 100);

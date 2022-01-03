@@ -7,5 +7,6 @@ using System;
 public class Base
 {
     public virtual void BANana(int x) { }
+
     public virtual void banANA(string x) { }
 }

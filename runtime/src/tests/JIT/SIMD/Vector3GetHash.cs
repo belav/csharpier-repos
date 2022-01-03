@@ -26,6 +26,7 @@ internal partial class VectorTest
                 throw new Exception("Assert.Equal failed");
             }
         }
+
         public static void NotEqual(float f1, float f2)
         {
             if (f1 == f2)
@@ -34,6 +35,7 @@ internal partial class VectorTest
             }
         }
     }
+
     public struct SimpleVector3
     {
         public static void Vector3GetHashCodeTest()

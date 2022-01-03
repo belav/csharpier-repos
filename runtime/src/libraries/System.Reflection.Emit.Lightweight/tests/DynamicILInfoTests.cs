@@ -326,6 +326,7 @@ namespace System.Reflection.Emit.Tests
             {
                 list = new List<T>();
             }
+
             public void Add(T val)
             {
                 list.Add(val);
@@ -1076,8 +1077,11 @@ namespace System.Reflection.Emit.Tests
         }
 
         private static bool MyRule(int value) => value > 10;
+
         private bool MyRule(string value) => value.Length > 10;
+
         private delegate bool Satisfy<T>(T item);
+
         private class Finder
         {
             public static T Find<T>(T[] items, Satisfy<T> standard)

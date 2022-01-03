@@ -1101,6 +1101,7 @@ namespace System.DirectoryServices.AccountManagement
                 new ToLdapConverterDelegate(UACToLdapConverter)
             }
         };
+
         /*/
         ///*******  Mapping table for perf testing...
                 static object[,] propertyMappingTableRaw =

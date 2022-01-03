@@ -7,6 +7,7 @@ public interface I<W>
 {
     string Method();
 }
+
 public class MyBase<U, V> : I<U>
 {
     string I<U>.Method()
@@ -14,6 +15,7 @@ public class MyBase<U, V> : I<U>
         return "MyBase.Method()";
     }
 }
+
 public class MyClass<T> : MyBase<string, T>, I<T>
 {
     string I<T>.Method()

@@ -244,11 +244,15 @@ namespace CSharpSyntaxGenerator.Grammar
         }
 
         public override string ToString() => Text;
+
         public int CompareTo(Production other) =>
             StringComparer.Ordinal.Compare(this.Text, other.Text);
+
         public Production Prefix(string prefix) => new Production(prefix + this, ReferencedRules);
+
         public Production Suffix(string suffix, bool when = true) =>
             when ? new Production(this + suffix, ReferencedRules) : this;
+
         public Production Parenthesize(bool when = true) => when ? Prefix("(").Suffix(")") : this;
     }
 }

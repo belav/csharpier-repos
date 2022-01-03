@@ -36,6 +36,7 @@ namespace System.Xml.Tests
         protected bool _isInProc; // Is the current test run in proc or /Host None?
 
         private static ITestOutputHelper s_output;
+
         public XsltcTestCaseBase(ITestOutputHelper output)
         {
             s_output = output;

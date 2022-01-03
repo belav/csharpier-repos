@@ -8,9 +8,11 @@ using System;
 public class Test_keepalivescope
 {
     public static int returnValue = 0;
+
     public class Dummy
     {
         public static bool visited;
+
         ~Dummy()
         {
             //Console.WriteLine("In Finalize() of Dummy");

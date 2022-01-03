@@ -26,6 +26,7 @@ namespace Test
                 }
             } while (param1[2]);
         }
+
         static int Main()
         {
             try

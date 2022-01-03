@@ -14,6 +14,7 @@ namespace Internal.TypeSystem
         /// </summary>
         TypeDesc _specificCanonCache;
         TypeDesc _universalCanonCache;
+
         TypeDesc GetCachedCanonValue(CanonicalFormKind kind)
         {
             switch (kind)

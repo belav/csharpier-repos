@@ -1104,11 +1104,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             public int Value { get; set; }
         }
+
         [Owned]
         private class Owned220729
         {
             public Other20729 Other { get; set; }
         }
+
         private class Other20729
         {
             public int Id { get; set; }
@@ -1221,6 +1223,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Assert.Equal(3, query.Count);
             }
         }
+
         [ConditionalFact]
         public virtual void Except_combines_nullability_of_entity_shapers()
         {
@@ -1265,6 +1268,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Assert.Single(query);
             }
         }
+
         [ConditionalFact]
         public virtual void Intersect_combines_nullability_of_entity_shapers()
         {
@@ -1591,6 +1595,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             public StatusMapCode23593 Id { get; set; }
         }
+
         private class StatusMapEvent23593
         {
             public StatusMapCode23593 Id { get; set; }
@@ -1648,6 +1653,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             public UserTypes23926 Type { get; set; }
             public string Name { get; set; }
         }
+
         private enum UserTypes23926
         {
             User,

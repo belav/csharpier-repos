@@ -16,14 +16,17 @@ using System.Runtime.InteropServices;
 public class Foo
 {
     public int i = 42;
+
     public int getI()
     {
         return i;
     }
 }
+
 public class Bar
 {
     private int i = 1;
+
     public int getI()
     {
         return i;
@@ -34,6 +37,7 @@ public struct WrapFoo
 {
     public Foo o;
 }
+
 public struct WrapBar
 {
     public Bar o;
@@ -44,8 +48,10 @@ public struct MyUnion1
 {
     [FieldOffset(0)]
     public int i;
+
     [FieldOffset(0)]
     public WrapBar o;
+
     [FieldOffset(0)]
     public WrapBar o2;
 }
@@ -55,8 +61,10 @@ public struct MyUnion2
 {
     [FieldOffset(0)]
     public int i;
+
     [FieldOffset(0)]
     public WrapFoo o;
+
     [FieldOffset(0)]
     public WrapFoo o2;
 }
@@ -86,6 +94,7 @@ public class Test
             return 101;
         }
     }
+
     public static void Go()
     {
         MyUnion2 u2;

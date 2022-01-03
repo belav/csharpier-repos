@@ -84,6 +84,7 @@ namespace System.Net.Sockets
         private unsafe NativeOverlapped* _pendingOverlappedForCancellation;
 
         private PinState _pinState;
+
         private enum PinState : byte
         {
             None = 0,

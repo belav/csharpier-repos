@@ -12,16 +12,21 @@ namespace System.IO.Compression
     {
         public override Stream CreateStream(Stream stream, CompressionMode mode) =>
             new GZipStream(stream, mode);
+
         public override Stream CreateStream(Stream stream, CompressionMode mode, bool leaveOpen) =>
             new GZipStream(stream, mode, leaveOpen);
+
         public override Stream CreateStream(Stream stream, CompressionLevel level) =>
             new GZipStream(stream, level);
+
         public override Stream CreateStream(
             Stream stream,
             CompressionLevel level,
             bool leaveOpen
         ) => new GZipStream(stream, level, leaveOpen);
+
         public override Stream BaseStream(Stream stream) => ((GZipStream)stream).BaseStream;
+
         protected override string CompressedTestFile(string uncompressedPath) =>
             Path.Combine("GZipTestData", Path.GetFileName(uncompressedPath) + ".gz");
 
@@ -367,7 +372,9 @@ namespace System.IO.Compression
         {
             public bool ReadArrayInvoked = false,
                 WriteArrayInvoked = false;
+
             internal DerivedGZipStream(Stream stream, CompressionMode mode) : base(stream, mode) { }
+
             internal DerivedGZipStream(Stream stream, CompressionMode mode, bool leaveOpen)
                 : base(stream, mode, leaveOpen) { }
 

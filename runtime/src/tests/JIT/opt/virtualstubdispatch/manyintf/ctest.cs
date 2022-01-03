@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 namespace VirtFunc
 {
     class CTest : ITest1, ITest2, ITest3, ITest4, ITest5, ITest6, ITest7, ITest8, ITest9, ITest10
@@ -10,162 +11,202 @@ namespace VirtFunc
         {
             return 1;
         }
+
         public int f1b(int a)
         {
             return 1 + a;
         }
+
         public decimal f1c()
         {
             return 1;
         }
+
         public string f1d()
         {
             return "1";
         }
+
         public int f2a()
         {
             return 2;
         }
+
         public int f2b(int a)
         {
             return 2 + a;
         }
+
         public decimal f2c()
         {
             return 2;
         }
+
         public string f2d()
         {
             return "2";
         }
+
         public int f3a()
         {
             return 3;
         }
+
         public int f3b(int a)
         {
             return 3 + a;
         }
+
         public decimal f3c()
         {
             return 3;
         }
+
         public string f3d()
         {
             return "3";
         }
+
         public int f4a()
         {
             return 4;
         }
+
         public int f4b(int a)
         {
             return 4 + a;
         }
+
         public decimal f4c()
         {
             return 4;
         }
+
         public string f4d()
         {
             return "4";
         }
+
         public int f5a()
         {
             return 5;
         }
+
         public int f5b(int a)
         {
             return 5 + a;
         }
+
         public decimal f5c()
         {
             return 5;
         }
+
         public string f5d()
         {
             return "5";
         }
+
         public int f6a()
         {
             return 6;
         }
+
         public int f6b(int a)
         {
             return 6 + a;
         }
+
         public decimal f6c()
         {
             return 6;
         }
+
         public string f6d()
         {
             return "6";
         }
+
         public int f7a()
         {
             return 7;
         }
+
         public int f7b(int a)
         {
             return 7 + a;
         }
+
         public decimal f7c()
         {
             return 7;
         }
+
         public string f7d()
         {
             return "7";
         }
+
         public int f8a()
         {
             return 8;
         }
+
         public int f8b(int a)
         {
             return 8 + a;
         }
+
         public decimal f8c()
         {
             return 8;
         }
+
         public string f8d()
         {
             return "8";
         }
+
         public int f9a()
         {
             return 9;
         }
+
         public int f9b(int a)
         {
             return 9 + a;
         }
+
         public decimal f9c()
         {
             return 9;
         }
+
         public string f9d()
         {
             return "9";
         }
+
         public int f10a()
         {
             return 10;
         }
+
         public int f10b(int a)
         {
             return 10 + a;
         }
+
         public decimal f10c()
         {
             return 10;
         }
+
         public string f10d()
         {
             return "10";
         }
+
         static int Main()
         {
             CTest c = new CTest();

@@ -76,6 +76,7 @@ namespace System.Reflection.Emit
         private Dictionary<string, Type> _typeBuilderDict = null!;
         internal ModuleBuilderData _moduleData = null!;
         internal InternalModuleBuilder _internalModuleBuilder;
+
         // This is the "external" AssemblyBuilder
         // only the "external" ModuleBuilder has this set
         private readonly AssemblyBuilder _assemblyBuilder;

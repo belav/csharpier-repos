@@ -528,6 +528,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         public class TestClass { }
+
         public enum TestEnum { }
     }
 }

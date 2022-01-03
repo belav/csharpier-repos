@@ -90,5 +90,6 @@ namespace System.Reflection.Emit.Tests
     }
 
     public class MakeGenericTypeClass { }
+
     public interface MakeGenericTypeInterface { }
 }

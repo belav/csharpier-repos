@@ -2,16 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal unsafe class bug1
 {
     public struct VT1
     {
         public double a;
     }
+
     public static double f(double* a0)
     {
         return *a0;
     }
+
     public static int Main()
     {
         VT1 vt = new VT1();

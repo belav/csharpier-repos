@@ -29,6 +29,7 @@ namespace MS.Internal.Xml.XPath
         {
             return new IteratorFilter(this);
         }
+
         public override XPathNavigator? Current
         {
             get { return _innerIterator.Current; }

@@ -585,6 +585,7 @@ namespace System.Text
                 }
             }
         }
+
         public override int GetMaxCharCount(int byteCount)
         {
             if (byteCount < 0 || byteCount > int.MaxValue / 4 * 3 - 2)

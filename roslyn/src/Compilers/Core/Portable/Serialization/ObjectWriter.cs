@@ -113,19 +113,32 @@ namespace Roslyn.Utilities
         }
 
         public void WriteBoolean(bool value) => _writer.Write(value);
+
         public void WriteByte(byte value) => _writer.Write(value);
+
         // written as ushort because BinaryWriter fails on chars that are unicode surrogates
         public void WriteChar(char ch) => _writer.Write((ushort)ch);
+
         public void WriteDecimal(decimal value) => _writer.Write(value);
+
         public void WriteDouble(double value) => _writer.Write(value);
+
         public void WriteSingle(float value) => _writer.Write(value);
+
         public void WriteInt32(int value) => _writer.Write(value);
+
         public void WriteInt64(long value) => _writer.Write(value);
+
         public void WriteSByte(sbyte value) => _writer.Write(value);
+
         public void WriteInt16(short value) => _writer.Write(value);
+
         public void WriteUInt32(uint value) => _writer.Write(value);
+
         public void WriteUInt64(ulong value) => _writer.Write(value);
+
         public void WriteUInt16(ushort value) => _writer.Write(value);
+
         public void WriteString(string? value) => WriteStringValue(value);
 
         /// <summary>
@@ -139,6 +152,7 @@ namespace Roslyn.Utilities
 
             [FieldOffset(0)]
             public long Low64;
+
             [FieldOffset(8)]
             public long High64;
         }

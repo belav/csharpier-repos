@@ -17,6 +17,7 @@ namespace Microsoft.VisualBasic
         NormalNoFocus = (short)4,
         MinimizedNoFocus = (short)6,
     }
+
     public enum CallType
     {
         Method = 1,
@@ -24,12 +25,14 @@ namespace Microsoft.VisualBasic
         Let = 4,
         Set = 8,
     }
+
     public sealed partial class Collection
         : System.Collections.ICollection,
           System.Collections.IEnumerable,
           System.Collections.IList
     {
         public Collection() { }
+
         public int Count
         {
             get { throw null; }
@@ -38,6 +41,7 @@ namespace Microsoft.VisualBasic
         {
             get { throw null; }
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
@@ -74,45 +78,61 @@ namespace Microsoft.VisualBasic
             get { throw null; }
             set { }
         }
+
         public void Add(
             object? Item,
             string? Key = null,
             object? Before = null,
             object? After = null
         ) { }
+
         public void Clear() { }
+
         public bool Contains(string Key)
         {
             throw null;
         }
+
         public System.Collections.IEnumerator GetEnumerator()
         {
             throw null;
         }
+
         public void Remove(int Index) { }
+
         public void Remove(string Key) { }
+
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
+
         int System.Collections.IList.Add(object? value)
         {
             throw null;
         }
+
         void System.Collections.IList.Clear() { }
+
         bool System.Collections.IList.Contains(object? value)
         {
             throw null;
         }
+
         int System.Collections.IList.IndexOf(object? value)
         {
             throw null;
         }
+
         void System.Collections.IList.Insert(int index, object? value) { }
+
         void System.Collections.IList.Remove(object? value) { }
+
         void System.Collections.IList.RemoveAt(int index) { }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class,
         Inherited = false,
@@ -121,9 +141,13 @@ namespace Microsoft.VisualBasic
     public sealed partial class ComClassAttribute : System.Attribute
     {
         public ComClassAttribute() { }
+
         public ComClassAttribute(string? _ClassID) { }
+
         public ComClassAttribute(string? _ClassID, string? _InterfaceID) { }
+
         public ComClassAttribute(string? _ClassID, string? _InterfaceID, string? _EventId) { }
+
         public string? ClassID
         {
             get { throw null; }
@@ -142,15 +166,18 @@ namespace Microsoft.VisualBasic
             set { }
         }
     }
+
     public enum CompareMethod
     {
         Binary = 0,
         Text = 1,
     }
+
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class Constants
     {
         internal Constants() { }
+
         public const Microsoft.VisualBasic.MsgBoxResult vbAbort =
             Microsoft.VisualBasic.MsgBoxResult.Abort;
         public const Microsoft.VisualBasic.MsgBoxStyle vbAbortRetryIgnore =
@@ -253,6 +280,7 @@ namespace Microsoft.VisualBasic
             Microsoft.VisualBasic.MsgBoxStyle.MsgBoxSetForeground;
         public const Microsoft.VisualBasic.VbStrConv vbNarrow =
             Microsoft.VisualBasic.VbStrConv.Narrow;
+
         [System.ObsoleteAttribute(
             "vbNewLine has been deprecated. For a carriage return and line feed, use vbCrLf. For the current platform's newline, use System.Environment.NewLine."
         )]
@@ -342,6 +370,7 @@ namespace Microsoft.VisualBasic
         public const Microsoft.VisualBasic.MsgBoxStyle vbYesNoCancel =
             Microsoft.VisualBasic.MsgBoxStyle.YesNoCancel;
     }
+
     public sealed partial class ControlChars
     {
         public const char Back = '\b';
@@ -354,12 +383,15 @@ namespace Microsoft.VisualBasic
         public const char Quote = '"';
         public const char Tab = '\t';
         public const char VerticalTab = '\v';
+
         public ControlChars() { }
     }
+
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class Conversion
     {
         internal Conversion() { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Expression's underlying type cannot be statically analyzed and its members may be trimmed"
         )]
@@ -373,6 +405,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Expression's underlying type cannot be statically analyzed and its members may be trimmed"
         )]
@@ -380,171 +413,211 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static string ErrorToString()
         {
             throw null;
         }
+
         public static string ErrorToString(int ErrorNumber)
         {
             throw null;
         }
+
         public static decimal Fix(decimal Number)
         {
             throw null;
         }
+
         public static double Fix(double Number)
         {
             throw null;
         }
+
         public static short Fix(short Number)
         {
             throw null;
         }
+
         public static int Fix(int Number)
         {
             throw null;
         }
+
         public static long Fix(long Number)
         {
             throw null;
         }
+
         public static object Fix(object Number)
         {
             throw null;
         }
+
         public static float Fix(float Number)
         {
             throw null;
         }
+
         public static string Hex(byte Number)
         {
             throw null;
         }
+
         public static string Hex(short Number)
         {
             throw null;
         }
+
         public static string Hex(int Number)
         {
             throw null;
         }
+
         public static string Hex(long Number)
         {
             throw null;
         }
+
         public static string Hex(object Number)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static string Hex(sbyte Number)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static string Hex(ushort Number)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static string Hex(uint Number)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static string Hex(ulong Number)
         {
             throw null;
         }
+
         public static decimal Int(decimal Number)
         {
             throw null;
         }
+
         public static double Int(double Number)
         {
             throw null;
         }
+
         public static short Int(short Number)
         {
             throw null;
         }
+
         public static int Int(int Number)
         {
             throw null;
         }
+
         public static long Int(long Number)
         {
             throw null;
         }
+
         public static object Int(object Number)
         {
             throw null;
         }
+
         public static float Int(float Number)
         {
             throw null;
         }
+
         public static string Oct(byte Number)
         {
             throw null;
         }
+
         public static string Oct(short Number)
         {
             throw null;
         }
+
         public static string Oct(int Number)
         {
             throw null;
         }
+
         public static string Oct(long Number)
         {
             throw null;
         }
+
         public static string Oct(object Number)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static string Oct(sbyte Number)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static string Oct(ushort Number)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static string Oct(uint Number)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static string Oct(ulong Number)
         {
             throw null;
         }
+
         public static string Str(object Number)
         {
             throw null;
         }
+
         public static int Val(char Expression)
         {
             throw null;
         }
+
         public static double Val(object? Expression)
         {
             throw null;
         }
+
         public static double Val(string? InputStr)
         {
             throw null;
         }
     }
+
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class DateAndTime
     {
         internal DateAndTime() { }
+
         public static string DateString
         {
             get { throw null; }
@@ -577,6 +650,7 @@ namespace Microsoft.VisualBasic
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
             set { }
         }
+
         public static System.DateTime DateAdd(
             Microsoft.VisualBasic.DateInterval Interval,
             double Number,
@@ -585,10 +659,12 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static System.DateTime DateAdd(string Interval, double Number, object? DateValue)
         {
             throw null;
         }
+
         public static long DateDiff(
             Microsoft.VisualBasic.DateInterval Interval,
             System.DateTime Date1,
@@ -601,6 +677,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static long DateDiff(
             string Interval,
             object? Date1,
@@ -613,6 +690,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static int DatePart(
             Microsoft.VisualBasic.DateInterval Interval,
             System.DateTime DateValue,
@@ -624,6 +702,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static int DatePart(
             string Interval,
             object? DateValue,
@@ -635,46 +714,57 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static System.DateTime DateSerial(int Year, int Month, int Day)
         {
             throw null;
         }
+
         public static System.DateTime DateValue(string StringDate)
         {
             throw null;
         }
+
         public static int Day(System.DateTime DateValue)
         {
             throw null;
         }
+
         public static int Hour(System.DateTime TimeValue)
         {
             throw null;
         }
+
         public static int Minute(System.DateTime TimeValue)
         {
             throw null;
         }
+
         public static int Month(System.DateTime DateValue)
         {
             throw null;
         }
+
         public static string MonthName(int Month, bool Abbreviate = false)
         {
             throw null;
         }
+
         public static int Second(System.DateTime TimeValue)
         {
             throw null;
         }
+
         public static System.DateTime TimeSerial(int Hour, int Minute, int Second)
         {
             throw null;
         }
+
         public static System.DateTime TimeValue(string StringTime)
         {
             throw null;
         }
+
         public static int Weekday(
             System.DateTime DateValue,
             Microsoft.VisualBasic.FirstDayOfWeek DayOfWeek =
@@ -683,6 +773,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static string WeekdayName(
             int Weekday,
             bool Abbreviate = false,
@@ -692,11 +783,13 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static int Year(System.DateTime DateValue)
         {
             throw null;
         }
     }
+
     public enum DateFormat
     {
         GeneralDate = 0,
@@ -705,6 +798,7 @@ namespace Microsoft.VisualBasic
         LongTime = 3,
         ShortTime = 4,
     }
+
     public enum DateInterval
     {
         Year = 0,
@@ -718,14 +812,17 @@ namespace Microsoft.VisualBasic
         Minute = 8,
         Second = 9,
     }
+
     public enum DueDate
     {
         EndOfPeriod = 0,
         BegOfPeriod = 1,
     }
+
     public sealed partial class ErrObject
     {
         internal ErrObject() { }
+
         public string Description
         {
             get { throw null; }
@@ -759,11 +856,14 @@ namespace Microsoft.VisualBasic
             get { throw null; }
             set { }
         }
+
         public void Clear() { }
+
         public System.Exception? GetException()
         {
             throw null;
         }
+
         public void Raise(
             int Number,
             object? Source = null,
@@ -772,6 +872,7 @@ namespace Microsoft.VisualBasic
             object? HelpContext = null
         ) { }
     }
+
     [System.FlagsAttribute]
     public enum FileAttribute
     {
@@ -783,28 +884,36 @@ namespace Microsoft.VisualBasic
         Directory = 16,
         Archive = 32,
     }
+
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class FileSystem
     {
         internal FileSystem() { }
+
         public static void ChDir(string Path) { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void ChDrive(char Drive) { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void ChDrive(string? Drive) { }
+
         public static string CurDir()
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static string CurDir(char Drive)
         {
             throw null;
         }
+
         public static string Dir()
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static string Dir(
             string PathName,
@@ -814,20 +923,26 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static bool EOF(int FileNumber)
         {
             throw null;
         }
+
         public static Microsoft.VisualBasic.OpenMode FileAttr(int FileNumber)
         {
             throw null;
         }
+
         public static void FileClose(params int[] FileNumbers) { }
+
         public static void FileCopy(string Source, string Destination) { }
+
         public static System.DateTime FileDateTime(string PathName)
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The target object type could not be statically analyzed and may be trimmed"
         )]
@@ -838,42 +953,54 @@ namespace Microsoft.VisualBasic
             bool ArrayIsDynamic = false,
             bool StringIsFixedLength = false
         ) { }
+
         public static void FileGet(int FileNumber, ref bool Value, long RecordNumber = (long)-1) { }
+
         public static void FileGet(int FileNumber, ref byte Value, long RecordNumber = (long)-1) { }
+
         public static void FileGet(int FileNumber, ref char Value, long RecordNumber = (long)-1) { }
+
         public static void FileGet(
             int FileNumber,
             ref System.DateTime Value,
             long RecordNumber = (long)-1
         ) { }
+
         public static void FileGet(
             int FileNumber,
             ref decimal Value,
             long RecordNumber = (long)-1
         ) { }
+
         public static void FileGet(
             int FileNumber,
             ref double Value,
             long RecordNumber = (long)-1
         ) { }
+
         public static void FileGet(
             int FileNumber,
             ref short Value,
             long RecordNumber = (long)-1
         ) { }
+
         public static void FileGet(int FileNumber, ref int Value, long RecordNumber = (long)-1) { }
+
         public static void FileGet(int FileNumber, ref long Value, long RecordNumber = (long)-1) { }
+
         public static void FileGet(
             int FileNumber,
             ref float Value,
             long RecordNumber = (long)-1
         ) { }
+
         public static void FileGet(
             int FileNumber,
             ref string Value,
             long RecordNumber = (long)-1,
             bool StringIsFixedLength = false
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The target object type could not be statically analyzed and may be trimmed"
         )]
@@ -882,6 +1009,7 @@ namespace Microsoft.VisualBasic
             ref System.ValueType Value,
             long RecordNumber = (long)-1
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The target object type could not be statically analyzed and may be trimmed"
         )]
@@ -890,10 +1018,12 @@ namespace Microsoft.VisualBasic
             ref object Value,
             long RecordNumber = (long)-1
         ) { }
+
         public static long FileLen(string PathName)
         {
             throw null;
         }
+
         public static void FileOpen(
             int FileNumber,
             string FileName,
@@ -902,6 +1032,7 @@ namespace Microsoft.VisualBasic
             Microsoft.VisualBasic.OpenShare Share = Microsoft.VisualBasic.OpenShare.Default,
             int RecordLength = -1
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The origin object type could not be statically analyzed and may be trimmed"
         )]
@@ -912,26 +1043,38 @@ namespace Microsoft.VisualBasic
             bool ArrayIsDynamic = false,
             bool StringIsFixedLength = false
         ) { }
+
         public static void FilePut(int FileNumber, bool Value, long RecordNumber = (long)-1) { }
+
         public static void FilePut(int FileNumber, byte Value, long RecordNumber = (long)-1) { }
+
         public static void FilePut(int FileNumber, char Value, long RecordNumber = (long)-1) { }
+
         public static void FilePut(
             int FileNumber,
             System.DateTime Value,
             long RecordNumber = (long)-1
         ) { }
+
         public static void FilePut(int FileNumber, decimal Value, long RecordNumber = (long)-1) { }
+
         public static void FilePut(int FileNumber, double Value, long RecordNumber = (long)-1) { }
+
         public static void FilePut(int FileNumber, short Value, long RecordNumber = (long)-1) { }
+
         public static void FilePut(int FileNumber, int Value, long RecordNumber = (long)-1) { }
+
         public static void FilePut(int FileNumber, long Value, long RecordNumber = (long)-1) { }
+
         public static void FilePut(int FileNumber, float Value, long RecordNumber = (long)-1) { }
+
         public static void FilePut(
             int FileNumber,
             string Value,
             long RecordNumber = (long)-1,
             bool StringIsFixedLength = false
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The origin object type could not be statically analyzed and may be trimmed"
         )]
@@ -940,10 +1083,12 @@ namespace Microsoft.VisualBasic
             System.ValueType Value,
             long RecordNumber = (long)-1
         ) { }
+
         [System.ObsoleteAttribute(
             "FileSystem.FilePut has been deprecated. Use FilePutObject to write Object types, or coerce FileNumber and RecordNumber to Integer for writing non-Object types."
         )]
         public static void FilePut(object FileNumber, object Value, object RecordNumber) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The origin object type could not be statically analyzed and may be trimmed"
         )]
@@ -952,30 +1097,46 @@ namespace Microsoft.VisualBasic
             object Value,
             long RecordNumber = (long)-1
         ) { }
+
         public static void FileWidth(int FileNumber, int RecordWidth) { }
+
         public static int FreeFile()
         {
             throw null;
         }
+
         public static Microsoft.VisualBasic.FileAttribute GetAttr(string PathName)
         {
             throw null;
         }
+
         public static void Input(int FileNumber, ref bool Value) { }
+
         public static void Input(int FileNumber, ref byte Value) { }
+
         public static void Input(int FileNumber, ref char Value) { }
+
         public static void Input(int FileNumber, ref System.DateTime Value) { }
+
         public static void Input(int FileNumber, ref decimal Value) { }
+
         public static void Input(int FileNumber, ref double Value) { }
+
         public static void Input(int FileNumber, ref short Value) { }
+
         public static void Input(int FileNumber, ref int Value) { }
+
         public static void Input(int FileNumber, ref long Value) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The target object type could not be statically analyzed and may be trimmed"
         )]
         public static void Input(int FileNumber, ref object Value) { }
+
         public static void Input(int FileNumber, ref float Value) { }
+
         public static void Input(int FileNumber, ref string Value) { }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
@@ -983,78 +1144,104 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static void Kill(string PathName) { }
+
         public static string LineInput(int FileNumber)
         {
             throw null;
         }
+
         public static long Loc(int FileNumber)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static void Lock(int FileNumber) { }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static void Lock(int FileNumber, long Record) { }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static void Lock(int FileNumber, long FromRecord, long ToRecord) { }
+
         public static long LOF(int FileNumber)
         {
             throw null;
         }
+
         public static void MkDir(string Path) { }
+
         public static void Print(int FileNumber, params object[] Output) { }
+
         public static void PrintLine(int FileNumber, params object[] Output) { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void Rename(string OldPath, string NewPath) { }
+
         public static void Reset() { }
+
         public static void RmDir(string Path) { }
+
         public static long Seek(int FileNumber)
         {
             throw null;
         }
+
         public static void Seek(int FileNumber, long Position) { }
+
         public static void SetAttr(
             string PathName,
             Microsoft.VisualBasic.FileAttribute Attributes
         ) { }
+
         public static Microsoft.VisualBasic.SpcInfo SPC(short Count)
         {
             throw null;
         }
+
         public static Microsoft.VisualBasic.TabInfo TAB()
         {
             throw null;
         }
+
         public static Microsoft.VisualBasic.TabInfo TAB(short Column)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static void Unlock(int FileNumber) { }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static void Unlock(int FileNumber, long Record) { }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("macos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static void Unlock(int FileNumber, long FromRecord, long ToRecord) { }
+
         public static void Write(int FileNumber, params object[] Output) { }
+
         public static void WriteLine(int FileNumber, params object[] Output) { }
     }
+
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class Financial
     {
         internal Financial() { }
+
         public static double DDB(
             double Cost,
             double Salvage,
@@ -1065,6 +1252,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static double FV(
             double Rate,
             double NPer,
@@ -1075,6 +1263,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static double IPmt(
             double Rate,
             double Per,
@@ -1086,14 +1275,17 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static double IRR(ref double[] ValueArray, double Guess = 0.1)
         {
             throw null;
         }
+
         public static double MIRR(ref double[] ValueArray, double FinanceRate, double ReinvestRate)
         {
             throw null;
         }
+
         public static double NPer(
             double Rate,
             double Pmt,
@@ -1104,10 +1296,12 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static double NPV(double Rate, ref double[] ValueArray)
         {
             throw null;
         }
+
         public static double Pmt(
             double Rate,
             double NPer,
@@ -1118,6 +1312,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static double PPmt(
             double Rate,
             double Per,
@@ -1129,6 +1324,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static double PV(
             double Rate,
             double NPer,
@@ -1139,6 +1335,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static double Rate(
             double NPer,
             double Pmt,
@@ -1150,15 +1347,18 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static double SLN(double Cost, double Salvage, double Life)
         {
             throw null;
         }
+
         public static double SYD(double Cost, double Salvage, double Life, double Period)
         {
             throw null;
         }
     }
+
     public enum FirstDayOfWeek
     {
         System = 0,
@@ -1170,6 +1370,7 @@ namespace Microsoft.VisualBasic
         Friday = 6,
         Saturday = 7,
     }
+
     public enum FirstWeekOfYear
     {
         System = 0,
@@ -1177,6 +1378,7 @@ namespace Microsoft.VisualBasic
         FirstFourDays = 2,
         FirstFullWeek = 3,
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class,
         AllowMultiple = false,
@@ -1189,87 +1391,110 @@ namespace Microsoft.VisualBasic
     {
         public HideModuleNameAttribute() { }
     }
+
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class Information
     {
         internal Information() { }
+
         public static int Erl()
         {
             throw null;
         }
+
         public static Microsoft.VisualBasic.ErrObject Err()
         {
             throw null;
         }
+
         public static bool IsArray(object? VarName)
         {
             throw null;
         }
+
         public static bool IsDate(object? Expression)
         {
             throw null;
         }
+
         public static bool IsDBNull(object? Expression)
         {
             throw null;
         }
+
         public static bool IsError(object? Expression)
         {
             throw null;
         }
+
         public static bool IsNothing(object? Expression)
         {
             throw null;
         }
+
         public static bool IsNumeric(object? Expression)
         {
             throw null;
         }
+
         public static bool IsReference(object? Expression)
         {
             throw null;
         }
+
         public static int LBound(System.Array Array, int Rank = 1)
         {
             throw null;
         }
+
         public static int QBColor(int Color)
         {
             throw null;
         }
+
         public static int RGB(int Red, int Green, int Blue)
         {
             throw null;
         }
+
         public static string? SystemTypeName(string? VbName)
         {
             throw null;
         }
+
         public static string TypeName(object? VarName)
         {
             throw null;
         }
+
         public static int UBound(System.Array Array, int Rank = 1)
         {
             throw null;
         }
+
         public static Microsoft.VisualBasic.VariantType VarType(object? VarName)
         {
             throw null;
         }
+
         public static string? VbTypeName(string? UrtName)
         {
             throw null;
         }
     }
+
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class Interaction
     {
         internal Interaction() { }
+
         public static void AppActivate(int ProcessId) { }
+
         public static void AppActivate(string Title) { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void Beep() { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The type of ObjectRef cannot be statically analyzed and its members may be trimmed."
         )]
@@ -1282,14 +1507,17 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static object? Choose(double Index, params object?[] Choice)
         {
             throw null;
         }
+
         public static string Command()
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The COM object to be created cannot be statically analyzed and may be trimmed"
         )]
@@ -1298,25 +1526,30 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void DeleteSetting(
             string AppName,
             string? Section = null,
             string? Key = null
         ) { }
+
         public static string Environ(string? Expression)
         {
             throw null;
         }
+
         public static string Environ(int Expression)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static string[,]? GetAllSettings(string AppName, string Section)
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The COM component to be returned cannot be statically analyzed and may be trimmed"
         )]
@@ -1325,6 +1558,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static string? GetSetting(
             string AppName,
@@ -1335,10 +1569,12 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static object? IIf(bool Expression, object? TruePart, object? FalsePart)
         {
             throw null;
         }
+
         public static string InputBox(
             string Prompt,
             string Title = "",
@@ -1349,6 +1585,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static MsgBoxResult MsgBox(
             object Prompt,
             MsgBoxStyle Buttons = MsgBoxStyle.ApplicationModal,
@@ -1357,10 +1594,12 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static string Partition(long Number, long Start, long Stop, long Interval)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void SaveSetting(
             string AppName,
@@ -1368,6 +1607,7 @@ namespace Microsoft.VisualBasic
             string Key,
             string Setting
         ) { }
+
         public static int Shell(
             string PathName,
             AppWinStyle Style = AppWinStyle.MinimizedFocus,
@@ -1377,11 +1617,13 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static object? Switch(params object?[]? VarExpr)
         {
             throw null;
         }
     }
+
     public enum MsgBoxResult
     {
         Ok = 1,
@@ -1392,6 +1634,7 @@ namespace Microsoft.VisualBasic
         Yes = 6,
         No = 7,
     }
+
     [System.FlagsAttribute]
     public enum MsgBoxStyle
     {
@@ -1415,6 +1658,7 @@ namespace Microsoft.VisualBasic
         MsgBoxRight = 524288,
         MsgBoxRtlReading = 1048576,
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class,
         AllowMultiple = false,
@@ -1431,6 +1675,7 @@ namespace Microsoft.VisualBasic
             string disposeInstanceMethodName,
             string defaultInstanceAlias
         ) { }
+
         public string CreateMethod
         {
             get { throw null; }
@@ -1448,6 +1693,7 @@ namespace Microsoft.VisualBasic
             get { throw null; }
         }
     }
+
     public enum OpenAccess
     {
         Default = -1,
@@ -1455,6 +1701,7 @@ namespace Microsoft.VisualBasic
         Write = 2,
         ReadWrite = 3,
     }
+
     public enum OpenMode
     {
         Input = 1,
@@ -1463,6 +1710,7 @@ namespace Microsoft.VisualBasic
         Append = 8,
         Binary = 32,
     }
+
     public enum OpenShare
     {
         Default = -1,
@@ -1471,6 +1719,7 @@ namespace Microsoft.VisualBasic
         LockRead = 2,
         Shared = 3,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -1478,34 +1727,42 @@ namespace Microsoft.VisualBasic
     {
         public short Count;
     }
+
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class Strings
     {
         internal Strings() { }
+
         public static int Asc(char String)
         {
             throw null;
         }
+
         public static int Asc(string String)
         {
             throw null;
         }
+
         public static int AscW(char String)
         {
             throw null;
         }
+
         public static int AscW(string String)
         {
             throw null;
         }
+
         public static char Chr(int CharCode)
         {
             throw null;
         }
+
         public static char ChrW(int CharCode)
         {
             throw null;
         }
+
         public static string[]? Filter(
             object?[] Source,
             string? Match,
@@ -1517,6 +1774,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static string[]? Filter(
             string?[] Source,
             string? Match,
@@ -1528,10 +1786,12 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static string Format(object? Expression, string? Style = "")
         {
             throw null;
         }
+
         public static string FormatCurrency(
             object? Expression,
             int NumDigitsAfterDecimal = -1,
@@ -1544,6 +1804,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static string FormatDateTime(
             System.DateTime Expression,
             Microsoft.VisualBasic.DateFormat NamedFormat =
@@ -1552,6 +1813,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static string FormatNumber(
             object? Expression,
             int NumDigitsAfterDecimal = -1,
@@ -1564,6 +1826,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static string FormatPercent(
             object? Expression,
             int NumDigitsAfterDecimal = -1,
@@ -1576,10 +1839,12 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static char GetChar(string str, int Index)
         {
             throw null;
         }
+
         public static int InStr(
             int Start,
             string? String1,
@@ -1591,6 +1856,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static int InStr(
             string? String1,
             string? String2,
@@ -1601,6 +1867,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static int InStrRev(
             string? StringCheck,
             string? StringMatch,
@@ -1612,63 +1879,78 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static string? Join(object?[] SourceArray, string? Delimiter = " ")
         {
             throw null;
         }
+
         public static string? Join(string?[] SourceArray, string? Delimiter = " ")
         {
             throw null;
         }
+
         public static char LCase(char Value)
         {
             throw null;
         }
+
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("Value")]
         public static string? LCase(string? Value)
         {
             throw null;
         }
+
         public static string Left(string? str, int Length)
         {
             throw null;
         }
+
         public static int Len(bool Expression)
         {
             throw null;
         }
+
         public static int Len(byte Expression)
         {
             throw null;
         }
+
         public static int Len(char Expression)
         {
             throw null;
         }
+
         public static int Len(System.DateTime Expression)
         {
             throw null;
         }
+
         public static int Len(decimal Expression)
         {
             throw null;
         }
+
         public static int Len(double Expression)
         {
             throw null;
         }
+
         public static int Len(short Expression)
         {
             throw null;
         }
+
         public static int Len(int Expression)
         {
             throw null;
         }
+
         public static int Len(long Expression)
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object's type cannot be statically analyzed and its members may be trimmed"
         )]
@@ -1676,50 +1958,61 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static int Len(sbyte Expression)
         {
             throw null;
         }
+
         public static int Len(float Expression)
         {
             throw null;
         }
+
         public static int Len(string? Expression)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static int Len(ushort Expression)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static int Len(uint Expression)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static int Len(ulong Expression)
         {
             throw null;
         }
+
         public static string LSet(string? Source, int Length)
         {
             throw null;
         }
+
         public static string LTrim(string? str)
         {
             throw null;
         }
+
         public static string? Mid(string? str, int Start)
         {
             throw null;
         }
+
         public static string Mid(string? str, int Start, int Length)
         {
             throw null;
         }
+
         public static string? Replace(
             string? Expression,
             string? Find,
@@ -1733,22 +2026,27 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static string Right(string? str, int Length)
         {
             throw null;
         }
+
         public static string RSet(string? Source, int Length)
         {
             throw null;
         }
+
         public static string RTrim(string? str)
         {
             throw null;
         }
+
         public static string Space(int Number)
         {
             throw null;
         }
+
         public static string[] Split(
             string? Expression,
             string? Delimiter = " ",
@@ -1760,6 +2058,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static int StrComp(
             string? String1,
             string? String2,
@@ -1770,6 +2069,7 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static string? StrConv(
             string? str,
@@ -1779,35 +2079,43 @@ namespace Microsoft.VisualBasic
         {
             throw null;
         }
+
         public static string StrDup(int Number, char Character)
         {
             throw null;
         }
+
         public static object StrDup(int Number, object Character)
         {
             throw null;
         }
+
         public static string StrDup(int Number, string Character)
         {
             throw null;
         }
+
         public static string StrReverse(string? Expression)
         {
             throw null;
         }
+
         public static string Trim(string? str)
         {
             throw null;
         }
+
         public static char UCase(char Value)
         {
             throw null;
         }
+
         public static string UCase(string? Value)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -1815,12 +2123,14 @@ namespace Microsoft.VisualBasic
     {
         public short Column;
     }
+
     public enum TriState
     {
         UseDefault = -2,
         True = -1,
         False = 0,
     }
+
     public enum VariantType
     {
         Empty = 0,
@@ -1844,6 +2154,7 @@ namespace Microsoft.VisualBasic
         UserDefinedType = 36,
         Array = 8192,
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field,
         Inherited = false,
@@ -1852,7 +2163,9 @@ namespace Microsoft.VisualBasic
     public sealed partial class VBFixedArrayAttribute : System.Attribute
     {
         public VBFixedArrayAttribute(int UpperBound1) { }
+
         public VBFixedArrayAttribute(int UpperBound1, int UpperBound2) { }
+
         public int[] Bounds
         {
             get { throw null; }
@@ -1862,6 +2175,7 @@ namespace Microsoft.VisualBasic
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field,
         Inherited = false,
@@ -1870,26 +2184,33 @@ namespace Microsoft.VisualBasic
     public sealed partial class VBFixedStringAttribute : System.Attribute
     {
         public VBFixedStringAttribute(int Length) { }
+
         public int Length
         {
             get { throw null; }
         }
     }
+
     [Microsoft.VisualBasic.CompilerServices.StandardModuleAttribute]
     public sealed partial class VBMath
     {
         internal VBMath() { }
+
         public static void Randomize() { }
+
         public static void Randomize(double Number) { }
+
         public static float Rnd()
         {
             throw null;
         }
+
         public static float Rnd(float Number)
         {
             throw null;
         }
     }
+
     [System.FlagsAttribute]
     public enum VbStrConv
     {
@@ -1906,6 +2227,7 @@ namespace Microsoft.VisualBasic
         LinguisticCasing = 1024,
     }
 }
+
 namespace Microsoft.VisualBasic.CompilerServices
 {
     [System.ComponentModel.EditorBrowsableAttribute(
@@ -1914,66 +2236,79 @@ namespace Microsoft.VisualBasic.CompilerServices
     public sealed partial class BooleanType
     {
         internal BooleanType() { }
+
         public static bool FromObject(object? Value)
         {
             throw null;
         }
+
         public static bool FromString(string? Value)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class ByteType
     {
         internal ByteType() { }
+
         public static byte FromObject(object? Value)
         {
             throw null;
         }
+
         public static byte FromString(string? Value)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class CharArrayType
     {
         internal CharArrayType() { }
+
         public static char[] FromObject(object? Value)
         {
             throw null;
         }
+
         public static char[] FromString(string? Value)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class CharType
     {
         internal CharType() { }
+
         public static char FromObject(object? Value)
         {
             throw null;
         }
+
         public static char FromString(string? Value)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class Conversions
     {
         internal Conversions() { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Expression origin object cannot be statically analyzed and may be trimmed"
         )]
@@ -1987,6 +2322,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.ObsoleteAttribute(
             "FallbackUserDefinedConversion has been deprecated and is not supported.",
             true
@@ -2004,145 +2340,180 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static string FromCharAndCount(char Value, int Count)
         {
             throw null;
         }
+
         public static string FromCharArray(char[] Value)
         {
             throw null;
         }
+
         public static string FromCharArraySubset(char[] Value, int StartIndex, int Length)
         {
             throw null;
         }
+
         public static bool ToBoolean(object? Value)
         {
             throw null;
         }
+
         public static bool ToBoolean(string? Value)
         {
             throw null;
         }
+
         public static byte ToByte(object? Value)
         {
             throw null;
         }
+
         public static byte ToByte(string? Value)
         {
             throw null;
         }
+
         public static char ToChar(object? Value)
         {
             throw null;
         }
+
         public static char ToChar(string? Value)
         {
             throw null;
         }
+
         public static char[] ToCharArrayRankOne(object? Value)
         {
             throw null;
         }
+
         public static char[] ToCharArrayRankOne(string? Value)
         {
             throw null;
         }
+
         public static System.DateTime ToDate(object? Value)
         {
             throw null;
         }
+
         public static System.DateTime ToDate(string? Value)
         {
             throw null;
         }
+
         public static decimal ToDecimal(bool Value)
         {
             throw null;
         }
+
         public static decimal ToDecimal(object? Value)
         {
             throw null;
         }
+
         public static decimal ToDecimal(string? Value)
         {
             throw null;
         }
+
         public static double ToDouble(object? Value)
         {
             throw null;
         }
+
         public static double ToDouble(string? Value)
         {
             throw null;
         }
+
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("Value")]
         public static T? ToGenericParameter<T>(object? Value)
         {
             throw null;
         }
+
         public static int ToInteger(object? Value)
         {
             throw null;
         }
+
         public static int ToInteger(string? Value)
         {
             throw null;
         }
+
         public static long ToLong(object? Value)
         {
             throw null;
         }
+
         public static long ToLong(string? Value)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static sbyte ToSByte(object? Value)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static sbyte ToSByte(string? Value)
         {
             throw null;
         }
+
         public static short ToShort(object? Value)
         {
             throw null;
         }
+
         public static short ToShort(string? Value)
         {
             throw null;
         }
+
         public static float ToSingle(object? Value)
         {
             throw null;
         }
+
         public static float ToSingle(string? Value)
         {
             throw null;
         }
+
         public static string ToString(bool Value)
         {
             throw null;
         }
+
         public static string ToString(byte Value)
         {
             throw null;
         }
+
         public static string ToString(char Value)
         {
             throw null;
         }
+
         public static string ToString(System.DateTime Value)
         {
             throw null;
         }
+
         public static string ToString(decimal Value)
         {
             throw null;
         }
+
         public static string ToString(
             decimal Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -2150,10 +2521,12 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static string ToString(double Value)
         {
             throw null;
         }
+
         public static string ToString(
             double Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -2161,26 +2534,32 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static string ToString(short Value)
         {
             throw null;
         }
+
         public static string ToString(int Value)
         {
             throw null;
         }
+
         public static string ToString(long Value)
         {
             throw null;
         }
+
         public static string? ToString(object? Value)
         {
             throw null;
         }
+
         public static string ToString(float Value)
         {
             throw null;
         }
+
         public static string ToString(
             float Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -2188,61 +2567,73 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static string ToString(uint Value)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static string ToString(ulong Value)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static uint ToUInteger(object? Value)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static uint ToUInteger(string? Value)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static ulong ToULong(object? Value)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static ulong ToULong(string? Value)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static ushort ToUShort(object? Value)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public static ushort ToUShort(string? Value)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class DateType
     {
         internal DateType() { }
+
         public static System.DateTime FromObject(object? Value)
         {
             throw null;
         }
+
         public static System.DateTime FromString(string? Value)
         {
             throw null;
         }
+
         public static System.DateTime FromString(
             string? Value,
             System.Globalization.CultureInfo? culture
@@ -2251,20 +2642,24 @@ namespace Microsoft.VisualBasic.CompilerServices
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class DecimalType
     {
         internal DecimalType() { }
+
         public static decimal FromBoolean(bool Value)
         {
             throw null;
         }
+
         public static decimal FromObject(object? Value)
         {
             throw null;
         }
+
         public static decimal FromObject(
             object? Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -2272,10 +2667,12 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static decimal FromString(string? Value)
         {
             throw null;
         }
+
         public static decimal FromString(
             string? Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -2283,6 +2680,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static decimal Parse(
             string Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -2291,6 +2689,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class,
         AllowMultiple = false,
@@ -2303,16 +2702,19 @@ namespace Microsoft.VisualBasic.CompilerServices
     {
         public DesignerGeneratedAttribute() { }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class DoubleType
     {
         internal DoubleType() { }
+
         public static double FromObject(object? Value)
         {
             throw null;
         }
+
         public static double FromObject(
             object? Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -2320,10 +2722,12 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static double FromString(string? Value)
         {
             throw null;
         }
+
         public static double FromString(
             string? Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -2331,10 +2735,12 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static double Parse(string Value)
         {
             throw null;
         }
+
         public static double Parse(
             string Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -2343,6 +2749,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -2350,27 +2757,32 @@ namespace Microsoft.VisualBasic.CompilerServices
     {
         public IncompleteInitialization() { }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class IntegerType
     {
         internal IntegerType() { }
+
         public static int FromObject(object? Value)
         {
             throw null;
         }
+
         public static int FromString(string? Value)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class LateBinding
     {
         internal LateBinding() { }
+
         [System.Diagnostics.DebuggerHiddenAttribute]
         [System.Diagnostics.DebuggerStepThroughAttribute]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2387,6 +2799,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             string?[]? paramnames,
             bool[]? CopyBack
         ) { }
+
         [System.Diagnostics.DebuggerHiddenAttribute]
         [System.Diagnostics.DebuggerStepThroughAttribute]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2406,6 +2819,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.DebuggerHiddenAttribute]
         [System.Diagnostics.DebuggerStepThroughAttribute]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2415,12 +2829,14 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.DebuggerHiddenAttribute]
         [System.Diagnostics.DebuggerStepThroughAttribute]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
         )]
         public static void LateIndexSet(object o, object?[] args, string?[]? paramnames) { }
+
         [System.Diagnostics.DebuggerHiddenAttribute]
         [System.Diagnostics.DebuggerStepThroughAttribute]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2433,6 +2849,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             bool OptimisticSet,
             bool RValueBase
         ) { }
+
         [System.Diagnostics.DebuggerHiddenAttribute]
         [System.Diagnostics.DebuggerStepThroughAttribute]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2448,6 +2865,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             object?[]? args,
             string?[]? paramnames
         ) { }
+
         [System.Diagnostics.DebuggerHiddenAttribute]
         [System.Diagnostics.DebuggerStepThroughAttribute]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -2466,12 +2884,14 @@ namespace Microsoft.VisualBasic.CompilerServices
             bool RValueBase
         ) { }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class LikeOperator
     {
         internal LikeOperator() { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The types of source and pattern cannot be statically analyzed so the like operator may be trimmed"
         )]
@@ -2483,6 +2903,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static bool LikeString(
             string? Source,
             string? Pattern,
@@ -2492,27 +2913,32 @@ namespace Microsoft.VisualBasic.CompilerServices
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class LongType
     {
         internal LongType() { }
+
         public static long FromObject(object? Value)
         {
             throw null;
         }
+
         public static long FromString(string? Value)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class NewLateBinding
     {
         internal NewLateBinding() { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2530,6 +2956,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2546,6 +2973,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2561,6 +2989,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             object[] Arguments,
             string[] ArgumentNames
         ) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2578,6 +3007,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             bool OptimisticSet,
             bool RValueBase
         ) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2597,6 +3027,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2616,6 +3047,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2624,6 +3056,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
         )]
         public static void FallbackSet(object Instance, string MemberName, object[] Arguments) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2641,6 +3074,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             bool OptimisticSet,
             bool RValueBase
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
         )]
@@ -2657,6 +3091,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2672,6 +3107,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
         )]
@@ -2687,6 +3123,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -2702,6 +3139,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
         )]
@@ -2713,6 +3151,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
         )]
@@ -2721,6 +3160,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             object?[]? Arguments,
             string?[]? ArgumentNames
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
         )]
@@ -2731,6 +3171,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             bool OptimisticSet,
             bool RValueBase
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
         )]
@@ -2742,6 +3183,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             string?[]? ArgumentNames,
             System.Type[]? TypeArguments
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
         )]
@@ -2756,6 +3198,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             bool RValueBase,
             Microsoft.VisualBasic.CallType CallType
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Late binding is dynamic and cannot be statically analyzed. The referenced types and members may be trimmed"
         )]
@@ -2770,19 +3213,23 @@ namespace Microsoft.VisualBasic.CompilerServices
             bool RValueBase
         ) { }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class ObjectFlowControl
     {
         internal ObjectFlowControl() { }
+
         public static void CheckForSyncLockOnValueType(object? Expression) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
         public sealed partial class ForLoopControl
         {
             internal ForLoopControl() { }
+
             [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
                 "The types of the parameters cannot be statically analyzed and may be trimmed"
             )]
@@ -2797,10 +3244,12 @@ namespace Microsoft.VisualBasic.CompilerServices
             {
                 throw null;
             }
+
             public static bool ForNextCheckDec(decimal count, decimal limit, decimal StepValue)
             {
                 throw null;
             }
+
             [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
                 "The types of the parameters cannot be statically analyzed and may be trimmed"
             )]
@@ -2812,50 +3261,61 @@ namespace Microsoft.VisualBasic.CompilerServices
             {
                 throw null;
             }
+
             public static bool ForNextCheckR4(float count, float limit, float StepValue)
             {
                 throw null;
             }
+
             public static bool ForNextCheckR8(double count, double limit, double StepValue)
             {
                 throw null;
             }
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class ObjectType
     {
         public ObjectType() { }
+
         public static object AddObj(object? o1, object? o2)
         {
             throw null;
         }
+
         public static object BitAndObj(object? obj1, object? obj2)
         {
             throw null;
         }
+
         public static object BitOrObj(object? obj1, object? obj2)
         {
             throw null;
         }
+
         public static object BitXorObj(object? obj1, object? obj2)
         {
             throw null;
         }
+
         public static object DivObj(object? o1, object? o2)
         {
             throw null;
         }
+
         public static object GetObjectValuePrimitive(object? o)
         {
             throw null;
         }
+
         public static object IDivObj(object? o1, object? o2)
         {
             throw null;
         }
+
         public static bool LikeObj(
             object? vLeft,
             object? vRight,
@@ -2864,61 +3324,75 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static object ModObj(object? o1, object? o2)
         {
             throw null;
         }
+
         public static object MulObj(object? o1, object? o2)
         {
             throw null;
         }
+
         public static object NegObj(object? obj)
         {
             throw null;
         }
+
         public static object NotObj(object? obj)
         {
             throw null;
         }
+
         public static int ObjTst(object? o1, object? o2, bool TextCompare)
         {
             throw null;
         }
+
         public static object PlusObj(object? obj)
         {
             throw null;
         }
+
         public static object PowObj(object? obj1, object? obj2)
         {
             throw null;
         }
+
         public static object ShiftLeftObj(object? o1, int amount)
         {
             throw null;
         }
+
         public static object ShiftRightObj(object? o1, int amount)
         {
             throw null;
         }
+
         public static object StrCatObj(object? vLeft, object? vRight)
         {
             throw null;
         }
+
         public static object SubObj(object? o1, object? o2)
         {
             throw null;
         }
+
         public static object XorObj(object? obj1, object? obj2)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class Operators
     {
         internal Operators() { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -2926,6 +3400,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -2933,6 +3408,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -2940,6 +3416,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -2947,6 +3424,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -2958,6 +3436,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -2965,6 +3444,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -2972,6 +3452,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -2979,10 +3460,12 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static int CompareString(string? Left, string? Right, bool TextCompare)
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -2990,6 +3473,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3001,6 +3485,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3012,6 +3497,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3023,6 +3509,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3034,6 +3521,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3045,6 +3533,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3056,6 +3545,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3063,6 +3553,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3070,6 +3561,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.ObsoleteAttribute(
             "FallbackInvokeUserDefinedOperator has been deprecated and is not supported.",
             true
@@ -3081,6 +3573,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3088,6 +3581,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3095,6 +3589,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3102,6 +3597,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3109,6 +3605,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3116,6 +3613,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3123,6 +3621,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3130,6 +3629,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3137,6 +3637,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3144,6 +3645,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3151,6 +3653,7 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The object types cannot be statically analyzed so their operators may be trimmed"
         )]
@@ -3159,6 +3662,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Parameter,
         Inherited = false,
@@ -3171,6 +3675,7 @@ namespace Microsoft.VisualBasic.CompilerServices
     {
         public OptionCompareAttribute() { }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class,
         Inherited = false,
@@ -3183,46 +3688,58 @@ namespace Microsoft.VisualBasic.CompilerServices
     {
         public OptionTextAttribute() { }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class ProjectData
     {
         internal ProjectData() { }
+
         public static void ClearProjectError() { }
+
         public static System.Exception CreateProjectError(int hr)
         {
             throw null;
         }
+
         public static void EndApp() { }
+
         public static void SetProjectError(System.Exception? ex) { }
+
         public static void SetProjectError(System.Exception? ex, int lErl) { }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class ShortType
     {
         internal ShortType() { }
+
         public static short FromObject(object? Value)
         {
             throw null;
         }
+
         public static short FromString(string? Value)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class SingleType
     {
         internal SingleType() { }
+
         public static float FromObject(object? Value)
         {
             throw null;
         }
+
         public static float FromObject(
             object? Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -3230,10 +3747,12 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static float FromString(string? Value)
         {
             throw null;
         }
+
         public static float FromString(
             string? Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -3242,6 +3761,7 @@ namespace Microsoft.VisualBasic.CompilerServices
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class,
         Inherited = false,
@@ -3254,40 +3774,49 @@ namespace Microsoft.VisualBasic.CompilerServices
     {
         public StandardModuleAttribute() { }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class StaticLocalInitFlag
     {
         public short State;
+
         public StaticLocalInitFlag() { }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class StringType
     {
         internal StringType() { }
+
         public static string FromBoolean(bool Value)
         {
             throw null;
         }
+
         public static string FromByte(byte Value)
         {
             throw null;
         }
+
         public static string FromChar(char Value)
         {
             throw null;
         }
+
         public static string FromDate(System.DateTime Value)
         {
             throw null;
         }
+
         public static string FromDecimal(decimal Value)
         {
             throw null;
         }
+
         public static string FromDecimal(
             decimal Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -3295,10 +3824,12 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static string FromDouble(double Value)
         {
             throw null;
         }
+
         public static string FromDouble(
             double Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -3306,27 +3837,33 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static string FromInteger(int Value)
         {
             throw null;
         }
+
         public static string FromLong(long Value)
         {
             throw null;
         }
+
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("Value")]
         public static string? FromObject(object? Value)
         {
             throw null;
         }
+
         public static string FromShort(short Value)
         {
             throw null;
         }
+
         public static string FromSingle(float Value)
         {
             throw null;
         }
+
         public static string FromSingle(
             float Value,
             System.Globalization.NumberFormatInfo? NumberFormat
@@ -3334,16 +3871,19 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static void MidStmtStr(
             ref string? sDest,
             int StartPosition,
             int MaxInsertLength,
             string sInsert
         ) { }
+
         public static int StrCmp(string? sLeft, string? sRight, bool TextCompare)
         {
             throw null;
         }
+
         public static bool StrLike(
             string? Source,
             string? Pattern,
@@ -3352,36 +3892,43 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static bool StrLikeBinary(string? Source, string? Pattern)
         {
             throw null;
         }
+
         public static bool StrLikeText(string? Source, string? Pattern)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class Utils
     {
         internal Utils() { }
+
         public static System.Array CopyArray(System.Array arySrc, System.Array aryDest)
         {
             throw null;
         }
+
         public static string GetResourceString(string ResourceKey, params string?[] Args)
         {
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class Versioned
     {
         internal Versioned() { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The method name cannot and type cannot be statically analyzed so it may be trimmed"
         )]
@@ -3394,24 +3941,29 @@ namespace Microsoft.VisualBasic.CompilerServices
         {
             throw null;
         }
+
         public static bool IsNumeric(object? Expression)
         {
             throw null;
         }
+
         public static string? SystemTypeName(string? VbName)
         {
             throw null;
         }
+
         public static string TypeName(object? Expression)
         {
             throw null;
         }
+
         public static string? VbTypeName(string? SystemName)
         {
             throw null;
         }
     }
 }
+
 namespace Microsoft.VisualBasic.FileIO
 {
     public enum DeleteDirectoryOption
@@ -3419,14 +3971,17 @@ namespace Microsoft.VisualBasic.FileIO
         ThrowIfDirectoryNonEmpty = 4,
         DeleteAllContents = 5,
     }
+
     public enum FieldType
     {
         Delimited = 0,
         FixedWidth = 1,
     }
+
     public partial class FileSystem
     {
         public FileSystem() { }
+
         public static string CurrentDirectory
         {
             get { throw null; }
@@ -3436,83 +3991,102 @@ namespace Microsoft.VisualBasic.FileIO
         {
             get { throw null; }
         }
+
         public static string CombinePath(string baseDirectory, string? relativePath)
         {
             throw null;
         }
+
         public static void CopyDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName
         ) { }
+
         public static void CopyDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName,
             Microsoft.VisualBasic.FileIO.UIOption showUI
         ) { }
+
         public static void CopyDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.UICancelOption onUserCancel
         ) { }
+
         public static void CopyDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName,
             bool overwrite
         ) { }
+
         public static void CopyFile(string sourceFileName, string destinationFileName) { }
+
         public static void CopyFile(
             string sourceFileName,
             string destinationFileName,
             Microsoft.VisualBasic.FileIO.UIOption showUI
         ) { }
+
         public static void CopyFile(
             string sourceFileName,
             string destinationFileName,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.UICancelOption onUserCancel
         ) { }
+
         public static void CopyFile(
             string sourceFileName,
             string destinationFileName,
             bool overwrite
         ) { }
+
         public static void CreateDirectory(string directory) { }
+
         public static void DeleteDirectory(
             string directory,
             Microsoft.VisualBasic.FileIO.DeleteDirectoryOption onDirectoryNotEmpty
         ) { }
+
         public static void DeleteDirectory(
             string directory,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.RecycleOption recycle
         ) { }
+
         public static void DeleteDirectory(
             string directory,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.RecycleOption recycle,
             Microsoft.VisualBasic.FileIO.UICancelOption onUserCancel
         ) { }
+
         public static void DeleteFile(string file) { }
+
         public static void DeleteFile(
             string file,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.RecycleOption recycle
         ) { }
+
         public static void DeleteFile(
             string file,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.RecycleOption recycle,
             Microsoft.VisualBasic.FileIO.UICancelOption onUserCancel
         ) { }
+
         public static bool DirectoryExists(string directory)
         {
             throw null;
         }
+
         public static bool FileExists(string file)
         {
             throw null;
         }
+
         public static System.Collections.ObjectModel.ReadOnlyCollection<string> FindInFiles(
             string directory,
             string containsText,
@@ -3522,6 +4096,7 @@ namespace Microsoft.VisualBasic.FileIO
         {
             throw null;
         }
+
         public static System.Collections.ObjectModel.ReadOnlyCollection<string> FindInFiles(
             string directory,
             string containsText,
@@ -3532,12 +4107,14 @@ namespace Microsoft.VisualBasic.FileIO
         {
             throw null;
         }
+
         public static System.Collections.ObjectModel.ReadOnlyCollection<string> GetDirectories(
             string directory
         )
         {
             throw null;
         }
+
         public static System.Collections.ObjectModel.ReadOnlyCollection<string> GetDirectories(
             string directory,
             Microsoft.VisualBasic.FileIO.SearchOption searchType,
@@ -3546,24 +4123,29 @@ namespace Microsoft.VisualBasic.FileIO
         {
             throw null;
         }
+
         public static System.IO.DirectoryInfo GetDirectoryInfo(string directory)
         {
             throw null;
         }
+
         public static System.IO.DriveInfo GetDriveInfo(string drive)
         {
             throw null;
         }
+
         public static System.IO.FileInfo GetFileInfo(string file)
         {
             throw null;
         }
+
         public static System.Collections.ObjectModel.ReadOnlyCollection<string> GetFiles(
             string directory
         )
         {
             throw null;
         }
+
         public static System.Collections.ObjectModel.ReadOnlyCollection<string> GetFiles(
             string directory,
             Microsoft.VisualBasic.FileIO.SearchOption searchType,
@@ -3572,59 +4154,72 @@ namespace Microsoft.VisualBasic.FileIO
         {
             throw null;
         }
+
         public static string GetName(string path)
         {
             throw null;
         }
+
         public static string GetParentPath(string path)
         {
             throw null;
         }
+
         public static string GetTempFileName()
         {
             throw null;
         }
+
         public static void MoveDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName
         ) { }
+
         public static void MoveDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName,
             Microsoft.VisualBasic.FileIO.UIOption showUI
         ) { }
+
         public static void MoveDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.UICancelOption onUserCancel
         ) { }
+
         public static void MoveDirectory(
             string sourceDirectoryName,
             string destinationDirectoryName,
             bool overwrite
         ) { }
+
         public static void MoveFile(string sourceFileName, string destinationFileName) { }
+
         public static void MoveFile(
             string sourceFileName,
             string destinationFileName,
             Microsoft.VisualBasic.FileIO.UIOption showUI
         ) { }
+
         public static void MoveFile(
             string sourceFileName,
             string destinationFileName,
             Microsoft.VisualBasic.FileIO.UIOption showUI,
             Microsoft.VisualBasic.FileIO.UICancelOption onUserCancel
         ) { }
+
         public static void MoveFile(
             string sourceFileName,
             string destinationFileName,
             bool overwrite
         ) { }
+
         public static Microsoft.VisualBasic.FileIO.TextFieldParser OpenTextFieldParser(string file)
         {
             throw null;
         }
+
         public static Microsoft.VisualBasic.FileIO.TextFieldParser OpenTextFieldParser(
             string file,
             params int[] fieldWidths
@@ -3632,6 +4227,7 @@ namespace Microsoft.VisualBasic.FileIO
         {
             throw null;
         }
+
         public static Microsoft.VisualBasic.FileIO.TextFieldParser OpenTextFieldParser(
             string file,
             params string[] delimiters
@@ -3639,10 +4235,12 @@ namespace Microsoft.VisualBasic.FileIO
         {
             throw null;
         }
+
         public static System.IO.StreamReader OpenTextFileReader(string file)
         {
             throw null;
         }
+
         public static System.IO.StreamReader OpenTextFileReader(
             string file,
             System.Text.Encoding encoding
@@ -3650,10 +4248,12 @@ namespace Microsoft.VisualBasic.FileIO
         {
             throw null;
         }
+
         public static System.IO.StreamWriter OpenTextFileWriter(string file, bool append)
         {
             throw null;
         }
+
         public static System.IO.StreamWriter OpenTextFileWriter(
             string file,
             bool append,
@@ -3662,22 +4262,30 @@ namespace Microsoft.VisualBasic.FileIO
         {
             throw null;
         }
+
         public static byte[] ReadAllBytes(string file)
         {
             throw null;
         }
+
         public static string ReadAllText(string file)
         {
             throw null;
         }
+
         public static string ReadAllText(string file, System.Text.Encoding encoding)
         {
             throw null;
         }
+
         public static void RenameDirectory(string directory, string newName) { }
+
         public static void RenameFile(string file, string newName) { }
+
         public static void WriteAllBytes(string file, byte[] data, bool append) { }
+
         public static void WriteAllText(string file, string text, bool append) { }
+
         public static void WriteAllText(
             string file,
             string text,
@@ -3685,9 +4293,11 @@ namespace Microsoft.VisualBasic.FileIO
             System.Text.Encoding encoding
         ) { }
     }
+
     public partial class MalformedLineException : System.Exception
     {
         public MalformedLineException() { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
@@ -3695,14 +4305,19 @@ namespace Microsoft.VisualBasic.FileIO
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public MalformedLineException(string? message) { }
+
         public MalformedLineException(string? message, System.Exception? innerException) { }
+
         public MalformedLineException(string? message, long lineNumber) { }
+
         public MalformedLineException(
             string? message,
             long lineNumber,
             System.Exception? innerException
         ) { }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Always
         )]
@@ -3711,6 +4326,7 @@ namespace Microsoft.VisualBasic.FileIO
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
@@ -3718,24 +4334,29 @@ namespace Microsoft.VisualBasic.FileIO
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public enum RecycleOption
     {
         DeletePermanently = 2,
         SendToRecycleBin = 3,
     }
+
     public enum SearchOption
     {
         SearchTopLevelOnly = 2,
         SearchAllSubDirectories = 3,
     }
+
     public partial class SpecialDirectories
     {
         public SpecialDirectories() { }
+
         public static string AllUsersApplicationData
         {
             get { throw null; }
@@ -3773,29 +4394,38 @@ namespace Microsoft.VisualBasic.FileIO
             get { throw null; }
         }
     }
+
     public partial class TextFieldParser : System.IDisposable
     {
         public TextFieldParser(System.IO.Stream stream) { }
+
         public TextFieldParser(System.IO.Stream stream, System.Text.Encoding defaultEncoding) { }
+
         public TextFieldParser(
             System.IO.Stream stream,
             System.Text.Encoding defaultEncoding,
             bool detectEncoding
         ) { }
+
         public TextFieldParser(
             System.IO.Stream stream,
             System.Text.Encoding defaultEncoding,
             bool detectEncoding,
             bool leaveOpen
         ) { }
+
         public TextFieldParser(System.IO.TextReader reader) { }
+
         public TextFieldParser(string path) { }
+
         public TextFieldParser(string path, System.Text.Encoding defaultEncoding) { }
+
         public TextFieldParser(
             string path,
             System.Text.Encoding defaultEncoding,
             bool detectEncoding
         ) { }
+
         public string[]? CommentTokens
         {
             get { throw null; }
@@ -3823,6 +4453,7 @@ namespace Microsoft.VisualBasic.FileIO
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
@@ -3831,6 +4462,7 @@ namespace Microsoft.VisualBasic.FileIO
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
@@ -3848,20 +4480,26 @@ namespace Microsoft.VisualBasic.FileIO
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
         public void Close() { }
+
         protected virtual void Dispose(bool disposing) { }
+
         ~TextFieldParser() { }
+
         public string? PeekChars(int numberOfChars)
         {
             throw null;
         }
+
         public string[]? ReadFields()
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
@@ -3869,6 +4507,7 @@ namespace Microsoft.VisualBasic.FileIO
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
@@ -3876,15 +4515,20 @@ namespace Microsoft.VisualBasic.FileIO
         {
             throw null;
         }
+
         public void SetDelimiters(params string[]? delimiters) { }
+
         public void SetFieldWidths(params int[]? fieldWidths) { }
+
         void System.IDisposable.Dispose() { }
     }
+
     public enum UICancelOption
     {
         DoNothing = 2,
         ThrowException = 3,
     }
+
     public enum UIOption
     {
         OnlyErrorDialogs = 2,

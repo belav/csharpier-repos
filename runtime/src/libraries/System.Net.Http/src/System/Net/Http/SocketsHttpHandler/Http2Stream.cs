@@ -42,6 +42,7 @@ namespace System.Net.Http
             private readonly Http2Connection _connection;
             private readonly HttpRequestMessage _request;
             private HttpResponseMessage? _response;
+
             /// <summary>Stores any trailers received after returning the response content to the caller.</summary>
             private HttpResponseHeaders? _trailers;
 
@@ -82,8 +83,10 @@ namespace System.Net.Http
             /// </summary>
             private ManualResetValueTaskSourceCore<bool> _waitSource =
                 new ManualResetValueTaskSourceCore<bool> { RunContinuationsAsynchronously = true }; // mutable struct, do not make this readonly
+
             /// <summary>Cancellation registration used to cancel the <see cref="_waitSource"/>.</summary>
             private CancellationTokenRegistration _waitSourceCancellation;
+
             /// <summary>
             /// Whether code has requested or is about to request a wait be performed and thus requires a call to SetResult to complete it.
             /// This is read and written while holding the lock so that most operations on _waitSource don't need to be.
@@ -1582,12 +1585,14 @@ namespace System.Net.Http
             // associated with the implementation is just delegated to the ManualResetValueTaskSourceCore.
             ValueTaskSourceStatus IValueTaskSource.GetStatus(short token) =>
                 _waitSource.GetStatus(token);
+
             void IValueTaskSource.OnCompleted(
                 Action<object?> continuation,
                 object? state,
                 short token,
                 ValueTaskSourceOnCompletedFlags flags
             ) => _waitSource.OnCompleted(continuation, state, token, flags);
+
             void IValueTaskSource.GetResult(short token)
             {
                 Debug.Assert(!Monitor.IsEntered(SyncObject));

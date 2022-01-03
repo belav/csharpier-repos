@@ -1895,6 +1895,7 @@ namespace System.Reflection.Tests
                 typeof(string)
             };
         }
+
         [Theory]
         [MemberData(nameof(DifferentContextTestData))]
         public void NullabilityDifferentContextTest(
@@ -2254,24 +2255,31 @@ namespace System.Reflection.Tests
 #nullable disable
         [AllowNull]
         public string PropertyDisabledAllowNull { get; set; }
+
         [MaybeNull]
         public string PropertyDisabledMaybeNull { get; set; }
         public string PropertyDisabled { get; set; }
+
         public ref string RefReturnUnknown(ref string id)
         {
             return ref id;
         }
+
 #nullable enable
         [AllowNull]
         public string PropertyEnabledAllowNull { get; set; }
+
         [NotNull]
         public string? PropertyEnabledNotNull { get; set; } = null!;
+
         [DisallowNull]
         public string? PropertyEnabledDisallowNull { get; set; } = null!;
+
         [MaybeNull]
         public string PropertyEnabledMaybeNull { get; set; }
         public string? PropertyEnabledNullable { get; set; }
         public string PropertyEnabledNonNullable { get; set; } = null!;
+
         bool NotNullWhenParameter(
             [DisallowNull] string? disallowNull,
             [NotNullWhen(true)] ref string? notNullWhen,
@@ -2280,6 +2288,7 @@ namespace System.Reflection.Tests
         {
             return false;
         }
+
         public bool MaybeNullParameters(
             [MaybeNull] string maybeNull,
             [MaybeNullWhen(false)] out string maybeNullWhen,
@@ -2289,6 +2298,7 @@ namespace System.Reflection.Tests
             maybeNullWhen = null;
             return false;
         }
+
         public string? AllowNullParameter(
             [AllowNull] string allowNull,
             [NotNullIfNotNull("allowNull")] string? notNullIfNotNull
@@ -2296,6 +2306,7 @@ namespace System.Reflection.Tests
         {
             return null;
         }
+
         [return: NotNullIfNotNull("nullable")]
         public string? NullableNotNullIfNotNullReturn(
             string? nullable,
@@ -2305,25 +2316,30 @@ namespace System.Reflection.Tests
             readNotNull = string.Empty;
             return null!;
         }
+
         public ref string? RefReturnNullable([AllowNull] ref string id)
         {
             return ref id!;
         }
+
         [return: MaybeNull]
         public ref string RefReturnMaybeNull([DisallowNull] ref string? id)
         {
             return ref id;
         }
+
         [return: NotNull]
         public ref string? RefReturnNotNull([NotNull] ref string? id)
         {
             id = string.Empty;
             return ref id!;
         }
+
         public ref string RefReturnNotNullable([MaybeNull] ref string id)
         {
             return ref id;
         }
+
         public bool TryGetOutParameters(
             string id,
             [NotNullWhen(true)] out string? value,
@@ -2334,6 +2350,7 @@ namespace System.Reflection.Tests
             value2 = null;
             return false;
         }
+
         public IEnumerable<Tuple<
                 (string name, object? value),
                 object
@@ -2345,16 +2362,21 @@ namespace System.Reflection.Tests
 #nullable disable
         [AllowNull]
         public string PropertyDisabledAllowNull { get; set; }
+
         [MaybeNull]
         public string PropertyDisabledMaybeNull { get; set; }
         public string PropertyDisabled { get; set; }
+
 #nullable enable
         [AllowNull]
         public string PropertyEnabledAllowNull { get; set; }
+
         [NotNull]
         public string? PropertyEnabledNotNull { get; set; } = null!;
+
         [DisallowNull]
         public string? PropertyEnabledDisallowNull { get; set; } = null!;
+
         [MaybeNull]
         public string PropertyEnabledMaybeNull { get; set; }
         public string? PropertyEnabledNullable { get; set; }
@@ -2376,39 +2398,54 @@ namespace System.Reflection.Tests
         public int FieldValueTypeUnknown;
 
         public event EventHandler EventUnknown;
+
         public string[] MethodReturnsUnknown() => null!;
+
         public void MethodParametersUnknown(string s, IDictionary<Type, string[]> dict) { }
+
 #nullable enable
         public TypeWithNotNullContext? PropertyNullable { get; set; }
         public TypeWithNotNullContext? PropertyNullableReadOnly { get; }
         private NullabilityInfoContextTests PropertyNonNullable { get; set; } = null!;
         internal float PropertyValueType { get; set; }
         protected long? PropertyValueTypeNullable { get; set; }
+
         [DisallowNull]
         public int? PropertyValueTypeDisallowNull { get; set; }
+
         [NotNull]
         protected int? PropertyValueTypeNotNull { get; set; }
+
         [MaybeNull]
         public byte PropertyValueTypeMaybeNull { get; set; }
+
         [AllowNull]
         public byte PropertyValueTypeAllowNull { get; set; }
+
         [DisallowNull]
         public string? PropertyDisallowNull { get; set; }
+
         [AllowNull]
         public string PropertyAllowNull { get; set; }
+
         [NotNull]
         public string? PropertyNotNull { get; set; }
+
         [MaybeNull]
         public string PropertyMaybeNull { get; set; }
+
         // only AllowNull matter
         [AllowNull, DisallowNull]
         public string PropertyAllowNull2 { get; set; }
+
         // only DisallowNull matter
         [AllowNull, DisallowNull]
         public string? PropertyDisallowNull2 { get; set; }
+
         // only NotNull matter
         [NotNull, MaybeNull]
         public string? PropertyNotNull2 { get; set; }
+
         // only MaybeNull matter
         [NotNull, MaybeNull]
         public string PropertyMaybeNull2 { get; set; }
@@ -2444,63 +2481,89 @@ namespace System.Reflection.Tests
         protected static NullabilityInfoContextTests FieldNonNullable = null!;
         public static double FieldValueTypeNotNull;
         public readonly int? FieldValueTypeNullable;
+
         [DisallowNull]
         public string? FieldDisallowNull;
+
         [AllowNull]
         public string FieldAllowNull;
+
         [NotNull]
         string? FieldNotNull = null;
+
         [MaybeNull]
         public string FieldMaybeNull;
+
         [AllowNull, DisallowNull]
         public string FieldAllowNull2;
+
         [AllowNull, DisallowNull]
         public string? FieldDisallowNull2;
+
         [NotNull, MaybeNull]
         internal string? FieldNotNull2;
+
         [NotNull, MaybeNull]
         public string FieldMaybeNull2;
 
         public event EventHandler? EventNullable;
         public event EventHandler EventNotNull = null!;
+
         public string?[] MethodReturnsNullNon() => null!;
+
         public string?[]? MethodReturnsNullNull() => null;
+
         public string[]? MethodReturnsNonNull() => null;
+
         [return: NotNull, MaybeNull]
         public string[]? MethodReturnsNonNotNull() => null!; // only NotNull is applicable
+
         [return: MaybeNull]
         public string[] MethodReturnsNonMaybeNull() => null;
+
         public string[] MethodReturnsNonNon() => null!;
+
         public Tuple<string?, string>? MethodReturnsTupleNullNonNull() => null;
+
         public Tuple<string?, int> MethodReturnsTupleNullNonNot() => null!;
+
         public (int?, string)? MethodReturnsValueTupleNullNonNull() => null;
+
         public (string?, string) MethodReturnsValueTupleNullNonNon() => (null, string.Empty);
+
         public IEnumerable<Tuple<
                 (string name, object? value),
                 int
             >?> MethodReturnsEnumerableNonTupleNonNonNullValueTupleNonNullNon() => null!;
+
         public IEnumerable<Tuple<
                 (string? name, object value)?,
                 int
             >?>? MethodReturnsEnumerableNullTupleNullNonNullValueTupleNullNonNull() => null!;
+
         public IEnumerable<Tuple<
                 Tuple<string, object?>,
                 int
             >?> MethodReturnsEnumerableNonTupleNonNonNullTupleNonNullNon() => null!;
+
         public IEnumerable<GenericStruct<
                 Tuple<string, object?>?,
                 int
             >?>? MethodReturnsEnumerableNullStructNullNonNullTupleNonNullNull() => null;
+
         public IEnumerable<Tuple<
                 GenericStruct<string, object?>?,
                 int
             >?>? MethodReturnsEnumerableNullTupleNullNonNullStructNonNullNull() => null;
+
         public IEnumerable<(GenericStruct<
                 string,
                 object?
             > str, int? count)> MethodReturnsEnumerableNonValueTupleNonNullNonStructNonNullNon() =>
             null!;
+
         public void MethodNullNonNullNonNon(string? s, IDictionary<Type, string?[]> dict) { }
+
         public void MethodNonNullNonNullNotNull(
             string s,
             [NotNull] IDictionary<Type, string[]?>? dict
@@ -2508,7 +2571,9 @@ namespace System.Reflection.Tests
         {
             dict = new Dictionary<Type, string[]?>();
         }
+
         public void MethodNullNonNullNullNon(string? s, IDictionary<Type, string?[]?> dict) { }
+
         public void MethodAllowNullNonNonNonNull(
             [AllowNull] string s,
             IDictionary<Type, string[]>? dict
@@ -2525,18 +2590,25 @@ namespace System.Reflection.Tests
         public Tuple<T, string, TypeWithNotNullContext> PropertyTupleUnknown { get; set; }
         private IDictionary<Type, T[]> PropertyDictionaryUnknown { get; set; }
         public T FieldUnknown;
+
         public T MethodReturnsUnknown() => default!;
+
         public void MethodParametersUnknown(T s, IDictionary<Type, T> dict) { }
+
 #nullable enable
 
         public T PropertyNonNullable { get; set; } = default!;
         public T? PropertyNullable { get; set; }
+
         [DisallowNull]
         public T PropertyDisallowNull { get; set; } = default!;
+
         [NotNull]
         public T PropertyNotNull { get; set; } = default!;
+
         [MaybeNull]
         public T PropertyMaybeNull { get; set; }
+
         [AllowNull]
         public T PropertyAllowNull { get; set; }
         internal T?[]? PropertyArrayNullNull { get; set; }
@@ -2557,26 +2629,37 @@ namespace System.Reflection.Tests
 
         static T? FieldNullable = default;
         public T FieldNonNullable = default!;
+
         [DisallowNull]
         public T? FieldDisallowNull;
+
         [AllowNull]
         protected T FieldAllowNull;
+
         [NotNull]
         public T? FieldNotNull = default;
+
         [MaybeNull]
         protected internal T FieldMaybeNull = default!;
         public List<T> FieldListOfT = default!;
         public Dictionary<string, T> FieldDictionaryStringToT = default!;
 
         public T MethodReturnsGeneric() => default!;
+
         public T? MethodReturnsNullGeneric() => default;
+
         [return: NotNull]
         public T MethodReturnsGenericNotNull() => default!;
+
         [return: MaybeNull]
         public T MethodReturnsGenericMaybeNull() => default;
+
         public List<T?> MethodNonNullListNullGeneric() => null!;
+
         public List<T>? MethodNullListNonNullGeneric() => null;
+
         public void MethodArgsNullGenericNullDictValueGeneric(T? s, IDictionary<Type, T>? dict) { }
+
         public void MethodArgsGenericDictValueNullGeneric(T s, IDictionary<string, T?> dict) { }
     }
 
@@ -2585,6 +2668,7 @@ namespace System.Reflection.Tests
 #nullable disable
         public T FieldUnknown;
         public T PropertyUnknown { get; set; }
+
 #nullable enable
 
         public T FieldNullableEnabled = default!;
@@ -2598,6 +2682,7 @@ namespace System.Reflection.Tests
 #nullable disable
         public T FieldUnknown;
         public T PropertyUnknown { get; set; }
+
 #nullable enable
 
         public T FieldNullableEnabled;

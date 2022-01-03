@@ -36,6 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         {
             return this;
         }
+
         object IPreviewPaneService.GetPreviewPane(
             DiagnosticData data,
             IReadOnlyList<object> previewContent

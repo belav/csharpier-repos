@@ -15,6 +15,7 @@ namespace System.Security.Permissions
     {
         public RegistryPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
         { }
+
         [Obsolete(
             "RegistryPermissionAttribute.Add has been deprecated. Use ViewAndModify instead."
         )]
@@ -25,6 +26,7 @@ namespace System.Security.Permissions
         public string ViewAccessControl { get; set; }
         public string ViewAndModify { get; set; }
         public string Write { get; set; }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);

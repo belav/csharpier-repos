@@ -12,6 +12,7 @@ namespace System.Text.Json.Reflection
     {
         private readonly IFieldSymbol _field;
         private readonly MetadataLoadContextInternal _metadataLoadContext;
+
         public FieldInfoWrapper(
             IFieldSymbol parameter,
             MetadataLoadContextInternal metadataLoadContext

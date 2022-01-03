@@ -38,6 +38,7 @@ public class HealthCheckPublisherHostedServiceTest
             DefaultHealthCheckService.EventIds.HealthCheckEndName
         );
     }
+
     private static class HealthCheckPublisherEventIds
     {
         public static readonly EventId HealthCheckPublisherProcessingBegin = new EventId(

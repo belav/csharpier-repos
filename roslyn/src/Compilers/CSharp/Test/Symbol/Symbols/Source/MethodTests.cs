@@ -2283,6 +2283,7 @@ public class C
             Assert.Equal(keywordPos, span.Start);
             Assert.Equal(parenPos, span.End);
         }
+
         [WorkItem(787708, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/787708")]
         [Fact]
         public void PartialAsyncMethodInTypeWithAttributes()

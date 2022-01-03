@@ -242,6 +242,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         public TreeDumperNode(string text) : this(text, null, null) { }
+
         public object? Value { get; }
         public string Text { get; }
         public IEnumerable<TreeDumperNode> Children { get; }

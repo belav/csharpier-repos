@@ -54,6 +54,7 @@ public class AA<TA, TB, TC, TD, TE, TF>
     where TE : IComparable
 {
     public TC m_aguiGeneric1;
+
     public short[][][] Method1(uint[,,,] param1, ref TestEnum param2)
     {
         uint local1 = ((uint)(((ulong)(17.0f))));
@@ -170,6 +171,7 @@ public class AA<TA, TB, TC, TD, TE, TF>
             (new short[36u][])
         };
     }
+
     public static ulong Static1(TF param1)
     {
         byte local5 = ((byte)(((long)(69.0))));
@@ -271,6 +273,7 @@ public class AA<TA, TB, TC, TD, TE, TF>
         for (App.m_dblFwd7++; App.m_bFwd2; App.m_chFwd9 += '\x69') { }
         return ((ulong)(105));
     }
+
     public static char[] Static2(ulong param1, short param2, ref uint param3, ref TA param4)
     {
         long[,,,,][,,][][,,,] local9 = (new long[((uint)(5.0)), 24u, 65u, 9u, 29u][,,][][,,,]);
@@ -345,6 +348,7 @@ public class AA<TA, TB, TC, TD, TE, TF>
         param1 *= (param1 >> ((ushort)(30)));
         return new char[] { (local10 = local10), local10, (local10 = local10), '\x7e' };
     }
+
     public static sbyte[][][,,,,][][,,] Static3(TestEnum param1, short param2)
     {
         param1 = param1;
@@ -365,6 +369,7 @@ public class AA<TA, TB, TC, TD, TE, TF>
         param2 = (param2 /= (param2 = param2));
         return (new sbyte[36u][][,,,,][][,,]);
     }
+
     public static long[][,,] Static4(char param1)
     {
         sbyte[][] local17 = ((sbyte[][])(((Array)(null))));
@@ -373,6 +378,7 @@ public class AA<TA, TB, TC, TD, TE, TF>
         byte local20 = ((byte)(((sbyte)(90u))));
         return (new long[15u][,,]);
     }
+
     public static int Static5(
         ref TE param1,
         ref char[][,,,] param2,
@@ -467,6 +473,7 @@ public class AA<TA, TB, TC, TD, TE, TF>
 public struct BB
 {
     public char[][,] m_achField1;
+
     public void Method1(
         ref uint[][][,] param1,
         ref String[][] param2,
@@ -673,6 +680,7 @@ public class App
         Console.WriteLine("Passed.");
         return 100;
     }
+
     public static byte m_byFwd1;
     public static bool m_bFwd2;
     public static int m_iFwd3;

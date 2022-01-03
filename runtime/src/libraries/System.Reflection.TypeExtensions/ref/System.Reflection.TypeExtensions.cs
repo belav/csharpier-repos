@@ -15,12 +15,14 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.Module[] GetModules(
             this System.Reflection.Assembly assembly
         )
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Types might be removed"
         )]
@@ -29,6 +31,7 @@ namespace System.Reflection
             throw null;
         }
     }
+
     public static partial class EventInfoExtensions
     {
         public static System.Reflection.MethodInfo? GetAddMethod(
@@ -37,6 +40,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo? GetAddMethod(
             this System.Reflection.EventInfo eventInfo,
             bool nonPublic
@@ -44,12 +48,14 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo? GetRaiseMethod(
             this System.Reflection.EventInfo eventInfo
         )
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo? GetRaiseMethod(
             this System.Reflection.EventInfo eventInfo,
             bool nonPublic
@@ -57,12 +63,14 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo? GetRemoveMethod(
             this System.Reflection.EventInfo eventInfo
         )
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo? GetRemoveMethod(
             this System.Reflection.EventInfo eventInfo,
             bool nonPublic
@@ -71,17 +79,20 @@ namespace System.Reflection
             throw null;
         }
     }
+
     public static partial class MemberInfoExtensions
     {
         public static int GetMetadataToken(this System.Reflection.MemberInfo member)
         {
             throw null;
         }
+
         public static bool HasMetadataToken(this System.Reflection.MemberInfo member)
         {
             throw null;
         }
     }
+
     public static partial class MethodInfoExtensions
     {
         public static System.Reflection.MethodInfo GetBaseDefinition(
@@ -91,17 +102,20 @@ namespace System.Reflection
             throw null;
         }
     }
+
     public static partial class ModuleExtensions
     {
         public static System.Guid GetModuleVersionId(this System.Reflection.Module module)
         {
             throw null;
         }
+
         public static bool HasModuleVersionId(this System.Reflection.Module module)
         {
             throw null;
         }
     }
+
     public static partial class PropertyInfoExtensions
     {
         public static System.Reflection.MethodInfo[] GetAccessors(
@@ -110,6 +124,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo[] GetAccessors(
             this System.Reflection.PropertyInfo property,
             bool nonPublic
@@ -117,12 +132,14 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo? GetGetMethod(
             this System.Reflection.PropertyInfo property
         )
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo? GetGetMethod(
             this System.Reflection.PropertyInfo property,
             bool nonPublic
@@ -130,12 +147,14 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo? GetSetMethod(
             this System.Reflection.PropertyInfo property
         )
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo? GetSetMethod(
             this System.Reflection.PropertyInfo property,
             bool nonPublic
@@ -144,6 +163,7 @@ namespace System.Reflection
             throw null;
         }
     }
+
     public static partial class TypeExtensions
     {
         public static System.Reflection.ConstructorInfo? GetConstructor(
@@ -156,6 +176,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.ConstructorInfo[] GetConstructors(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -165,6 +186,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.ConstructorInfo[] GetConstructors(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors
@@ -176,6 +198,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MemberInfo[] GetDefaultMembers(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -190,6 +213,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.EventInfo? GetEvent(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
@@ -200,6 +224,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.EventInfo? GetEvent(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicEvents
@@ -212,6 +237,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.EventInfo[] GetEvents(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
@@ -221,6 +247,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.EventInfo[] GetEvents(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicEvents
@@ -232,6 +259,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.FieldInfo? GetField(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
@@ -242,6 +270,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.FieldInfo? GetField(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicFields
@@ -254,6 +283,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.FieldInfo[] GetFields(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
@@ -263,6 +293,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.FieldInfo[] GetFields(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicFields
@@ -274,10 +305,12 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Type[] GetGenericArguments(this System.Type type)
         {
             throw null;
         }
+
         public static System.Type[] GetInterfaces(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.Interfaces
@@ -287,6 +320,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MemberInfo[] GetMember(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -302,6 +336,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MemberInfo[] GetMember(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
@@ -313,6 +348,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MemberInfo[] GetMembers(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -327,6 +363,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MemberInfo[] GetMembers(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
@@ -337,6 +374,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo? GetMethod(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
@@ -347,6 +385,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo? GetMethod(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods
@@ -359,6 +398,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo? GetMethod(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
@@ -370,6 +410,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo[] GetMethods(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
@@ -379,6 +420,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.MethodInfo[] GetMethods(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods
@@ -390,6 +432,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Type? GetNestedType(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicNestedTypes
@@ -402,6 +445,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Type[] GetNestedTypes(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicNestedTypes
@@ -413,6 +457,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.PropertyInfo[] GetProperties(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
@@ -422,6 +467,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.PropertyInfo[] GetProperties(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
@@ -433,6 +479,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.PropertyInfo? GetProperty(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
@@ -443,6 +490,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.PropertyInfo? GetProperty(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
@@ -455,6 +503,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.PropertyInfo? GetProperty(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
@@ -466,6 +515,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static System.Reflection.PropertyInfo? GetProperty(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
@@ -478,6 +528,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static bool IsAssignableFrom(
             this System.Type type,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] System.Type? c
@@ -485,6 +536,7 @@ namespace System.Reflection
         {
             throw null;
         }
+
         public static bool IsInstanceOfType(
             this System.Type type,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? o

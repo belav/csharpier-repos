@@ -60,8 +60,11 @@ namespace Roslyn.Test.Utilities
         }
 
         public override bool ResolveMissingAssemblies => true;
+
         public override bool Equals(object other) => true;
+
         public override int GetHashCode() => 1;
+
         public override ImmutableArray<PortableExecutableReference> ResolveReference(
             string reference,
             string baseFilePath,

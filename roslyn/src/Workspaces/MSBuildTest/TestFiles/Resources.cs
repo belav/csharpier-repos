@@ -76,6 +76,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.TestFiles
 
         public static byte[] GetBytes(string name) =>
             GetOrLoadValue(name, s_bytesLoader, ref s_bytesCache);
+
         public static string GetText(string name) =>
             GetOrLoadValue(name, s_textLoader, ref s_textCache);
 

@@ -863,6 +863,7 @@ namespace System.Xml.Schema
                 new XsdBuildFunction(BuildAnnotated_Id)
             ),
         };
+
         //
         // XSD Schema entries
         //

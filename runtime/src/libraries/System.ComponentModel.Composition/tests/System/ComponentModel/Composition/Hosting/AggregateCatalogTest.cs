@@ -515,6 +515,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         public interface IFoo { }
+
         public interface IBar { }
 
         [Export(typeof(IFoo))]

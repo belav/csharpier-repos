@@ -56,6 +56,7 @@ namespace System.Transactions
 
             return new TransactionException(message, innerException);
         }
+
         internal static TransactionException CreateTransactionStateException(
             Exception? innerException
         )
@@ -289,6 +290,7 @@ namespace System.Transactions
 
             return new TransactionAbortedException(message, innerException);
         }
+
         /// <summary>
         ///
         /// </summary>

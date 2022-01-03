@@ -24,6 +24,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private static readonly AnalyzerAssemblyLoader s_analyzerLoader =
             new DefaultAnalyzerAssemblyLoader();
         private readonly AssemblyLoadTestFixture _testFixture;
+
         public AnalyzerFileReferenceTests(AssemblyLoadTestFixture testFixture)
         {
             _testFixture = testFixture;
@@ -735,6 +736,7 @@ public class Generator : ISourceGenerator
             {
                 get { throw new NotImplementedException(); }
             }
+
             public override void Initialize(AnalysisContext context)
             {
                 throw new NotImplementedException();
@@ -748,6 +750,7 @@ public class Generator : ISourceGenerator
             {
                 get { throw new NotImplementedException(); }
             }
+
             public override void Initialize(AnalysisContext context)
             {
                 throw new NotImplementedException();
@@ -761,6 +764,7 @@ public class Generator : ISourceGenerator
             {
                 get { throw new NotImplementedException(); }
             }
+
             public override void Initialize(AnalysisContext context)
             {
                 throw new NotImplementedException();
@@ -772,6 +776,7 @@ public class Generator : ISourceGenerator
         {
             public void Execute(GeneratorExecutionContext context) =>
                 throw new NotImplementedException();
+
             public void Initialize(GeneratorInitializationContext context) =>
                 throw new NotImplementedException();
         }
@@ -785,6 +790,7 @@ public class Generator : ISourceGenerator
                 {
                     get { throw new NotImplementedException(); }
                 }
+
                 public override void Initialize(AnalysisContext context)
                 {
                     throw new NotImplementedException();
@@ -796,6 +802,7 @@ public class Generator : ISourceGenerator
             {
                 public void Execute(GeneratorExecutionContext context) =>
                     throw new NotImplementedException();
+
                 public void Initialize(GeneratorInitializationContext context) =>
                     throw new NotImplementedException();
             }
@@ -826,6 +833,7 @@ public class Generator : ISourceGenerator
         {
             get { throw new NotImplementedException(); }
         }
+
         public override void Initialize(AnalysisContext context)
         {
             throw new NotImplementedException();
@@ -841,6 +849,7 @@ public class Generator : ISourceGenerator
         {
             get { throw new NotImplementedException(); }
         }
+
         public override void Initialize(AnalysisContext context)
         {
             throw new NotImplementedException();
@@ -854,6 +863,7 @@ public class Generator : ISourceGenerator
         {
             get { throw new NotImplementedException(); }
         }
+
         public override void Initialize(AnalysisContext context)
         {
             throw new NotImplementedException();
@@ -865,6 +875,7 @@ public class Generator : ISourceGenerator
     {
         public void Execute(GeneratorExecutionContext context) =>
             throw new NotImplementedException();
+
         public void Initialize(GeneratorInitializationContext context) =>
             throw new NotImplementedException();
     }
@@ -873,6 +884,7 @@ public class Generator : ISourceGenerator
     {
         public void Execute(GeneratorExecutionContext context) =>
             throw new NotImplementedException();
+
         public void Initialize(GeneratorInitializationContext context) =>
             throw new NotImplementedException();
     }
@@ -882,6 +894,7 @@ public class Generator : ISourceGenerator
     {
         public virtual void Execute(GeneratorExecutionContext context) =>
             throw new NotImplementedException();
+
         public void Initialize(GeneratorInitializationContext context) =>
             throw new NotImplementedException();
     }

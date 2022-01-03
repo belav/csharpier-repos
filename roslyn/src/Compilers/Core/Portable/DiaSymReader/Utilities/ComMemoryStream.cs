@@ -100,6 +100,7 @@ namespace Microsoft.DiaSymReader
                 remainingBytes -= bytesToCopy;
             }
         }
+
         private static unsafe void ZeroMemory(byte* dest, int count)
         {
             var p = dest;

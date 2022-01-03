@@ -11,6 +11,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
     {
         private TOptions _options;
         private event Action<TOptions, string> _onChange;
+
         public TestFormatterOptionsMonitor(TOptions options)
         {
             _options = options;

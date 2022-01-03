@@ -177,6 +177,7 @@ namespace System.Reflection.Emit
             sb.Append(')');
             return sb.ToString();
         }
+
         //
         // MethodBase members
         //

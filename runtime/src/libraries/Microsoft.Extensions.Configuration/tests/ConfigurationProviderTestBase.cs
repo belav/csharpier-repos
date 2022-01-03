@@ -528,6 +528,7 @@ Section3:
             }
 
             public static implicit operator TestKeyValue(string value) => new TestKeyValue(value);
+
             public static implicit operator TestKeyValue(string[] values) =>
                 new TestKeyValue(values);
 

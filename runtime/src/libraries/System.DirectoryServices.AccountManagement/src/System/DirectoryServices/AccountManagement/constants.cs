@@ -31,6 +31,7 @@ namespace System.DirectoryServices.AccountManagement
         public static int LDAP_PORT = 389;
         internal static DateTime defaultUtcTime = new DateTime(1601, 1, 1, 0, 0, 0);
     }
+
     // The string constants used internally to specify each property
     internal static class PropertyNames
     {
@@ -90,6 +91,7 @@ namespace System.DirectoryServices.AccountManagement
             "AuthenticablePrincipal.AccountInfo.HomeDirectory";
         internal const string AcctInfoHomeDrive = "AuthenticablePrincipal.AccountInfo.HomeDrive";
         internal const string AcctInfoScriptPath = "AuthenticablePrincipal.AccountInfo.ScriptPath";
+
         // This property is not publicly exposed but is used be a ReadOnlySearchFilter.
         internal const string AcctInfoExpiredAccount = "AuthenticablePrincipal.AccountInfoExpired";
 

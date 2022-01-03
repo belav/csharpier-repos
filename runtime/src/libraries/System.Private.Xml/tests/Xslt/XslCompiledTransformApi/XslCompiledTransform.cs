@@ -20,6 +20,7 @@ namespace System.Xml.Tests
     public class ReflectionTestCaseBase : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public ReflectionTestCaseBase(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -102,6 +103,7 @@ namespace System.Xml.Tests
     public class CLoadMethInfoTest : ReflectionTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadMethInfoTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -154,6 +156,7 @@ namespace System.Xml.Tests
     public class CNullArgumentTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CNullArgumentTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -513,10 +516,12 @@ namespace System.Xml.Tests
     public class CXmlResolverTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CXmlResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
         }
+
         //[Variation(id = 1, Desc = "Set XmlResolver property to null, load style sheet with import/include, should not affect transform")]
         [InlineData(XslInputType.Reader, ReaderType.XmlValidatingReader)]
         [InlineData(XslInputType.URI, ReaderType.XmlValidatingReader)]
@@ -817,6 +822,7 @@ namespace System.Xml.Tests
     public class CLoadTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CLoadTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -1624,6 +1630,7 @@ namespace System.Xml.Tests
     public class CLoadXmlResolverTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CLoadXmlResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -2422,6 +2429,7 @@ namespace System.Xml.Tests
     public class CLoadUrlResolverTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CLoadUrlResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -2531,6 +2539,7 @@ namespace System.Xml.Tests
     public class CLoadStringTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CLoadStringTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -2653,6 +2662,7 @@ namespace System.Xml.Tests
     public class CLoadXPathNavigableTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CLoadXPathNavigableTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -2773,6 +2783,7 @@ namespace System.Xml.Tests
     public class CLoadReaderTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CLoadReaderTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -3177,6 +3188,7 @@ namespace System.Xml.Tests
     public class CTransformTestGeneric : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CTransformTestGeneric(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -3843,6 +3855,7 @@ namespace System.Xml.Tests
     public class CTransformResolverTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CTransformResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -4321,6 +4334,7 @@ namespace System.Xml.Tests
     public class CTransformStrStrTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CTransformStrStrTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -4699,6 +4713,7 @@ namespace System.Xml.Tests
     public class CTransformStrStrResolverTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CTransformStrStrResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -4815,6 +4830,7 @@ namespace System.Xml.Tests
     public class CTransformConstructorWihtFourParametersTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CTransformConstructorWihtFourParametersTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -5167,6 +5183,7 @@ namespace System.Xml.Tests
     public class CNDP1_1SP1Test : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CNDP1_1SP1Test(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -5318,6 +5335,7 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
     public class CTransformRegressionTest : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CTransformRegressionTest(ITestOutputHelper output) : base(output)
         {
             _output = output;

@@ -498,6 +498,7 @@ namespace DebuggerTests
                 }
             );
         }
+
         [Theory]
         [InlineData("A", 10, "20", true)]
         [InlineData("A", 10, "error", false)]

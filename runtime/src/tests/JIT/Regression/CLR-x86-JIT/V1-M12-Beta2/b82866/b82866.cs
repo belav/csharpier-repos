@@ -3,11 +3,14 @@
 //
 
 using System;
+
 public class AA
 {
     static AA m_xStatic3;
     static long m_lFwd5;
+
     void Method1(ref long param1) { }
+
     static int Main()
     {
         try
@@ -20,6 +23,7 @@ public class AA
             return 100;
         }
     }
+
     static void Main1()
     {
         long local12 = m_lFwd5;

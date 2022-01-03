@@ -9,6 +9,7 @@ namespace Test
     public struct AA
     {
         public static bool m_bFwd2;
+
         public static int Main()
         {
             try
@@ -21,6 +22,7 @@ namespace Test
                 return 100;
             }
         }
+
         public static void Main1()
         {
             try

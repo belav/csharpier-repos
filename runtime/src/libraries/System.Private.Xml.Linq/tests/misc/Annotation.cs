@@ -579,6 +579,7 @@ namespace System.Xml.Linq.Tests
     namespace DifferentNamespace
     {
         public class A { }
+
         public class B : A { }
     }
 }

@@ -130,8 +130,10 @@ namespace System.Tests
             private int[] _data;
 
             public CustomRangeTester(int[] data) => _data = data;
+
             public int Length => _data.Length;
             public int this[int index] => _data[index];
+
             public CustomRangeTester Slice(int start, int length) =>
                 new CustomRangeTester(_data.AsSpan(start, length).ToArray());
 

@@ -81,6 +81,7 @@ namespace System.ComponentModel.Design.Serialization.Tests
                 () => new InstanceDescriptor(ci, arguments, false)
             );
         }
+
         [Fact]
         public void Ctor_StaticConstructor_ThrowsArgumentException()
         {
@@ -282,6 +283,7 @@ namespace System.ComponentModel.Design.Serialization.Tests
             public void Method(int i) { }
 
             public static int IntMethod() => 1;
+
             public static string StaticMethod(int i) => i.ToString();
         }
 

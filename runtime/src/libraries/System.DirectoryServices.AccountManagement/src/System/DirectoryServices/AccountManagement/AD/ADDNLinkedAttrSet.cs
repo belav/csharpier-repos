@@ -1636,8 +1636,10 @@ namespace System.DirectoryServices.AccountManagement
         // This contains a list of employees built while enumerating the current group.  These are FSP objects in the current domain and need to
         // be translated to find out the domain that holds the actual object.
         private List<DirectoryEntry> _foreignMembersCurrentGroup = new List<DirectoryEntry>();
+
         // List of objects from the group tha are actual fake group objects.
         private List<DirectoryEntry> _fakePrincipalMembers = new List<DirectoryEntry>();
+
         // list of SIDs + store that have been translated.  These could be any principal object
         private SidList _foreignMembersToReturn;
 

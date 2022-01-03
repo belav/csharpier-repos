@@ -35,6 +35,7 @@ namespace System.Collections.Generic
         public static IEnumerable<string> GetDefaultAssets(
             this IEnumerable<RuntimeAssetGroup> self
         ) => GetAssets(self, string.Empty);
+
         public static IEnumerable<string> GetRuntimeAssets(
             this IEnumerable<RuntimeAssetGroup> self,
             string runtime
@@ -67,6 +68,7 @@ namespace System.Collections.Generic
         public static IEnumerable<RuntimeFile> GetDefaultRuntimeFileAssets(
             this IEnumerable<RuntimeAssetGroup> self
         ) => GetRuntimeFiles(self, string.Empty);
+
         public static IEnumerable<RuntimeFile> GetRuntimeFileAssets(
             this IEnumerable<RuntimeAssetGroup> self,
             string runtime

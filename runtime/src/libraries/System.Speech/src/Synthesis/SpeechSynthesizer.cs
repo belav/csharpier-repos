@@ -21,6 +21,7 @@ namespace System.Speech.Synthesis
         {
             Dispose(false);
         }
+
         public void Dispose()
         {
             Dispose(true);
@@ -49,18 +50,22 @@ namespace System.Speech.Synthesis
             }
             VoiceSynthesizer.Voice = ttsVoice;
         }
+
         public void SelectVoiceByHints(VoiceGender gender)
         {
             SelectVoiceByHints(gender, VoiceAge.NotSet, 1, CultureInfo.CurrentUICulture);
         }
+
         public void SelectVoiceByHints(VoiceGender gender, VoiceAge age)
         {
             SelectVoiceByHints(gender, age, 1, CultureInfo.CurrentUICulture);
         }
+
         public void SelectVoiceByHints(VoiceGender gender, VoiceAge age, int voiceAlternate)
         {
             SelectVoiceByHints(gender, age, voiceAlternate, CultureInfo.CurrentUICulture);
         }
+
         public void SelectVoiceByHints(
             VoiceGender gender,
             VoiceAge age,
@@ -106,6 +111,7 @@ namespace System.Speech.Synthesis
             }
             VoiceSynthesizer.Voice = ttsVoice;
         }
+
         public Prompt SpeakAsync(string textToSpeak)
         {
             Helpers.ThrowIfNull(textToSpeak, nameof(textToSpeak));
@@ -114,6 +120,7 @@ namespace System.Speech.Synthesis
             SpeakAsync(prompt);
             return prompt;
         }
+
         public void SpeakAsync(Prompt prompt)
         {
             Helpers.ThrowIfNull(prompt, nameof(prompt));
@@ -121,6 +128,7 @@ namespace System.Speech.Synthesis
             prompt.Synthesizer = this;
             VoiceSynthesizer.SpeakAsync(prompt);
         }
+
         public Prompt SpeakSsmlAsync(string textToSpeak)
         {
             Helpers.ThrowIfNull(textToSpeak, nameof(textToSpeak));
@@ -129,6 +137,7 @@ namespace System.Speech.Synthesis
             SpeakAsync(prompt);
             return prompt;
         }
+
         public Prompt SpeakAsync(PromptBuilder promptBuilder)
         {
             Helpers.ThrowIfNull(promptBuilder, nameof(promptBuilder));
@@ -137,10 +146,12 @@ namespace System.Speech.Synthesis
             SpeakAsync(prompt);
             return prompt;
         }
+
         public void Speak(string textToSpeak)
         {
             Speak(new Prompt(textToSpeak, SynthesisTextFormat.Text));
         }
+
         public void Speak(Prompt prompt)
         {
             Helpers.ThrowIfNull(prompt, nameof(prompt));
@@ -155,10 +166,12 @@ namespace System.Speech.Synthesis
             prompt._syncSpeak = true;
             VoiceSynthesizer.Speak(prompt);
         }
+
         public void Speak(PromptBuilder promptBuilder)
         {
             Speak(new Prompt(promptBuilder));
         }
+
         public void SpeakSsml(string textToSpeak)
         {
             Speak(new Prompt(textToSpeak, SynthesisTextFormat.Ssml));
@@ -206,6 +219,7 @@ namespace System.Speech.Synthesis
         {
             VoiceSynthesizer.Abort();
         }
+
         // The stream is disposed when the speech synthesizer is disposed
         public void SetOutputToWaveFile(string path)
         {
@@ -219,6 +233,7 @@ namespace System.Speech.Synthesis
                 true
             );
         }
+
         // The stream is disposed when the speech synthesizer is disposed
         public void SetOutputToWaveFile(string path, SpeechAudioFormatInfo formatInfo)
         {
@@ -233,12 +248,14 @@ namespace System.Speech.Synthesis
                 true
             );
         }
+
         public void SetOutputToWaveStream(Stream audioDestination)
         {
             Helpers.ThrowIfNull(audioDestination, nameof(audioDestination));
 
             SetOutputStream(audioDestination, null, true, false);
         }
+
         public void SetOutputToAudioStream(
             Stream audioDestination,
             SpeechAudioFormatInfo formatInfo
@@ -249,10 +266,12 @@ namespace System.Speech.Synthesis
 
             SetOutputStream(audioDestination, formatInfo, false, false);
         }
+
         public void SetOutputToDefaultAudioDevice()
         {
             SetOutputStream(null, null, true, false);
         }
+
         // The stream is disposed when the speech synthesizer is disposed
         public void SetOutputToNull()
         {
@@ -271,15 +290,18 @@ namespace System.Speech.Synthesis
             }
             _outputStream = Stream.Null;
         }
+
         // Dynamic content, use a method instead of a property to denote that fact
         public Prompt GetCurrentlySpokenPrompt()
         {
             return VoiceSynthesizer.Prompt;
         }
+
         public ReadOnlyCollection<InstalledVoice> GetInstalledVoices()
         {
             return VoiceSynthesizer.GetInstalledVoices(null);
         }
+
         public ReadOnlyCollection<InstalledVoice> GetInstalledVoices(CultureInfo culture)
         {
             Helpers.ThrowIfNull(culture, nameof(culture));
@@ -291,12 +313,14 @@ namespace System.Speech.Synthesis
 
             return VoiceSynthesizer.GetInstalledVoices(culture);
         }
+
         public void AddLexicon(Uri uri, string mediaType)
         {
             Helpers.ThrowIfNull(uri, nameof(uri));
 
             VoiceSynthesizer.AddLexicon(uri, mediaType);
         }
+
         public void RemoveLexicon(Uri uri)
         {
             Helpers.ThrowIfNull(uri, nameof(uri));
@@ -539,6 +563,7 @@ namespace System.Speech.Synthesis
             // Need to serialize into a proper wav file before closing the stream
             VoiceSynthesizer.SetOutput(stream, formatInfo, headerInfo);
         }
+
         private void Dispose(bool disposing)
         {
             if (!_isDisposed && disposing)
@@ -622,6 +647,7 @@ namespace System.Speech.Synthesis
         Speaking,
         Paused
     }
+
     [Flags]
     public enum SynthesizerEmphasis
     {

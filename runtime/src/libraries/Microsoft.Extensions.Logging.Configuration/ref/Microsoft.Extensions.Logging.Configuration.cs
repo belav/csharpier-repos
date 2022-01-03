@@ -17,6 +17,7 @@ namespace Microsoft.Extensions.Logging
         }
     }
 }
+
 namespace Microsoft.Extensions.Logging.Configuration
 {
     public partial interface ILoggerProviderConfigurationFactory
@@ -25,10 +26,12 @@ namespace Microsoft.Extensions.Logging.Configuration
             System.Type providerType
         );
     }
+
     public partial interface ILoggerProviderConfiguration<T>
     {
         Microsoft.Extensions.Configuration.IConfiguration Configuration { get; }
     }
+
     public static partial class LoggerProviderOptions
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
@@ -43,6 +46,7 @@ namespace Microsoft.Extensions.Logging.Configuration
         >(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
             where TOptions : class { }
     }
+
     public partial class LoggerProviderOptionsChangeTokenSource<TOptions, TProvider>
         : Microsoft.Extensions.Options.ConfigurationChangeTokenSource<TOptions>
     {
@@ -50,6 +54,7 @@ namespace Microsoft.Extensions.Logging.Configuration
             Microsoft.Extensions.Logging.Configuration.ILoggerProviderConfiguration<TProvider> providerConfiguration
         ) : base(default(Microsoft.Extensions.Configuration.IConfiguration)) { }
     }
+
     public static partial class LoggingBuilderConfigurationExtensions
     {
         public static void AddConfiguration(

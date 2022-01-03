@@ -35,6 +35,7 @@ namespace DllImportGenerator.UnitTests
         {
             private readonly bool _useMarshalType = false;
             private readonly bool _generateForwarders = false;
+
             public GlobalGeneratorOptions(bool useMarshalType, bool generateForwarders)
             {
                 _useMarshalType = useMarshalType;

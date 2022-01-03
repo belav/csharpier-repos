@@ -21,7 +21,9 @@ namespace Roslyn.Test.Utilities
         private TestRuntimeMetadataReferenceResolver() { }
 
         public override bool Equals(object other) => other == Instance;
+
         public override int GetHashCode() => 0;
+
         public override bool ResolveMissingAssemblies => true;
 
         public override PortableExecutableReference ResolveMissingAssembly(

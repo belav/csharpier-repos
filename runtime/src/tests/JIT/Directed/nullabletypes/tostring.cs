@@ -10,11 +10,15 @@
 using System;
 
 interface BaseInter { }
+
 interface GenInter<T> { }
 
 struct Struct { }
+
 struct ImplStruct : BaseInter { }
+
 struct OpenGenImplStruct<T> : GenInter<T> { }
+
 struct CloseGenImplStruct : GenInter<int> { }
 
 class Foo { }

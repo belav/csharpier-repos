@@ -119,6 +119,7 @@ namespace BasicEventSourceTests
             mockedCountCalled++;
             return mockedCountCalled;
         }
+
         public static int Main(string[] args)
         {
             // Create an EventListener.

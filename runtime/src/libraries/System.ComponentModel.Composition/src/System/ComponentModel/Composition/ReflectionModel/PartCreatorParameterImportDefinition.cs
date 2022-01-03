@@ -42,6 +42,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             get { return _productImportDefinition; }
         }
+
         public override bool IsConstraintSatisfiedBy(ExportDefinition exportDefinition)
         {
             if (!base.IsConstraintSatisfiedBy(exportDefinition))

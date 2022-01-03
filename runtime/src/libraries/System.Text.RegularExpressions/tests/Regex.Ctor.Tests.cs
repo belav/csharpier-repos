@@ -312,6 +312,7 @@ namespace System.Text.RegularExpressions.Tests
             yield return new object[] { @"(?>a*).", RegexOptions.None, "atomic" };
             yield return new object[] { @"(?(A)B|C)", RegexOptions.None, "conditional" };
         }
+
         [SkipOnTargetFramework(
             TargetFrameworkMonikers.NetFramework,
             "Doesn't support NonBacktracking"
@@ -423,6 +424,7 @@ namespace System.Text.RegularExpressions.Tests
         private sealed class DerivedRegex : Regex
         {
             public DerivedRegex() { }
+
             public DerivedRegex(string pattern) : base(pattern) { }
 
             public new void InitializeReferences() => base.InitializeReferences();
@@ -456,6 +458,7 @@ namespace System.Text.RegularExpressions.Tests
         private sealed class SerializableDerivedRegex : Regex
         {
             public SerializableDerivedRegex() : base("") { }
+
             public SerializableDerivedRegex(SerializationInfo info, StreamingContext context)
                 : base(info, context) { }
         }

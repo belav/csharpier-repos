@@ -386,6 +386,7 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
     }
+
     // ********************************************
     public class PrincipalContext : IDisposable
     {
@@ -1260,7 +1261,6 @@ namespace System.DirectoryServices.AccountManagement
                 return ctx;
             }
         }
-
 #endif // TESTHOOK
 
         //

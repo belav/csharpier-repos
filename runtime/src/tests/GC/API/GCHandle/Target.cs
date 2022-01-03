@@ -22,6 +22,7 @@ public class Test_Target
             return flag;
         }
     }
+
     public static int Main()
     {
         Dummy obj = new Dummy(99);

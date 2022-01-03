@@ -34,6 +34,7 @@ namespace AutoMapper.UnitTests.Bug
             Mapper.Map<DestinationClass>(source);
         }
     }
+
     public class MemberNamedTypeWrong : AutoMapperSpecBase
     {
         public class SourceClass

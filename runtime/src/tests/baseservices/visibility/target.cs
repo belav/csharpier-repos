@@ -14,6 +14,7 @@ using System.Security;
     "StructFriend, PublicKey=00240000048000009400000006020000002400005253413100040000010001000fc5993e0f511ad5e16e8b226553493e09067afc41039f70daeb94a968d664f40e69a46b617d15d3d5328be7dbedd059eb98495a3b03cb4ea4ba127444671c3c84cbc1fdc393d7e10b5ee3f31f5a29f005e5eed7e3c9c8af74f413f0004f0c2cabb22f9dd4f75a6f599784e1bab70985ef8174ca6c684278be82ce055a03ebaf"
 )]
 
+
 //
 // This file can be compiled in two ways: ALL public (ALL_PUB), or Restricted.
 //  The intention of the ALL public (ALL_PUB) is to allow a C# caller to build.
@@ -32,6 +33,7 @@ enum DefaultEnum
     VALUE1,
     VALUE3
 }
+
 public enum PublicEnum
 {
     VALUE1,
@@ -72,16 +74,23 @@ public class PublicClass
     public
 #endif
     PublicClass(int i1) { }
+
     public PublicClass(int i1, int i2) { }
 #if ALL_PUB
     public PublicClass(int i1, int i2, int i3) { }
+
     public PublicClass(int i1, int i2, int i3, int i4) { }
+
     public PublicClass(int i1, int i2, int i3, int i4, int i5) { }
+
     public PublicClass(int i1, int i2, int i3, int i4, int i5, int i6) { }
 #else
     protected PublicClass(int i1, int i2, int i3) { }
+
     internal PublicClass(int i1, int i2, int i3, int i4) { }
+
     protected internal PublicClass(int i1, int i2, int i3, int i4, int i5) { }
+
     private PublicClass(int i1, int i2, int i3, int i4, int i5, int i6) { }
 #endif
 
@@ -260,6 +269,7 @@ public class PublicClass
     {
         return 1;
     }
+
     public static int PublicStaticMethod()
     {
         return 1;
@@ -269,14 +279,17 @@ public class PublicClass
     {
         return 1;
     }
+
     public static int InternalStaticMethod()
     {
         return 1;
     }
+
     public static int ProtectedInternalStaticMethod()
     {
         return 1;
     }
+
     public static int PrivateStaticMethod()
     {
         return 1;
@@ -286,14 +299,17 @@ public class PublicClass
     {
         return 1;
     }
+
     internal static int InternalStaticMethod()
     {
         return 1;
     }
+
     protected internal static int ProtectedInternalStaticMethod()
     {
         return 1;
     }
+
     private static int PrivateStaticMethod()
     {
         return 1;
@@ -311,6 +327,7 @@ public class PublicClass
     {
         return 1;
     }
+
     public int PublicMethod()
     {
         return 1;
@@ -320,14 +337,17 @@ public class PublicClass
     {
         return 1;
     }
+
     public int InternalMethod()
     {
         return 1;
     }
+
     public int ProtectedInternalMethod()
     {
         return 1;
     }
+
     public int PrivateMethod()
     {
         return 1;
@@ -337,14 +357,17 @@ public class PublicClass
     {
         return 1;
     }
+
     internal int InternalMethod()
     {
         return 1;
     }
+
     protected internal int ProtectedInternalMethod()
     {
         return 1;
     }
+
     private int PrivateMethod()
     {
         return 1;
@@ -416,6 +439,7 @@ internal interface InternalInterface
 public
 #endif
 struct DefaultStruct { }
+
 public struct PublicStruct
 {
     //
@@ -428,6 +452,7 @@ public struct PublicStruct
     {
         defaultField = publicField = internalField = privateField = 0;
     }
+
     public PublicStruct(int i1, int i2)
     {
         defaultField = publicField = internalField = privateField = 0;
@@ -437,6 +462,7 @@ public struct PublicStruct
     {
         defaultField = publicField = internalField = privateField = 0;
     }
+
     public PublicStruct(int i1, int i2, int i3, int i4)
     {
         defaultField = publicField = internalField = privateField = 0;
@@ -446,6 +472,7 @@ public struct PublicStruct
     {
         defaultField = publicField = internalField = privateField = 0;
     }
+
     private PublicStruct(int i1, int i2, int i3, int i4)
     {
         defaultField = publicField = internalField = privateField = 0;
@@ -578,6 +605,7 @@ public struct PublicStruct
     {
         return 1;
     }
+
     public static int PublicStaticMethod()
     {
         return 1;
@@ -587,6 +615,7 @@ public struct PublicStruct
     {
         return 1;
     }
+
     public static int PrivateStaticMethod()
     {
         return 1;
@@ -596,6 +625,7 @@ public struct PublicStruct
     {
         return 1;
     }
+
     private static int PrivateStaticMethod()
     {
         return 1;
@@ -613,6 +643,7 @@ public struct PublicStruct
     {
         return 1;
     }
+
     public int PublicMethod()
     {
         return 1;
@@ -622,6 +653,7 @@ public struct PublicStruct
     {
         return 1;
     }
+
     public int PrivateMethod()
     {
         return 1;
@@ -631,6 +663,7 @@ public struct PublicStruct
     {
         return 1;
     }
+
     private int PrivateMethod()
     {
         return 1;

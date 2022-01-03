@@ -79,6 +79,7 @@ struct Large
         nine = 9;
         ten = 10;
     }
+
     public bool check()
     {
         return one == 1
@@ -97,6 +98,7 @@ struct Large
 class Sample
 {
     public int a;
+
     public Sample(int v)
     {
         a = v;
@@ -108,20 +110,28 @@ struct StructWithBigOffsets
 {
     [FieldOffset(10000)]
     public byte b;
+
     [FieldOffset(10001)]
     public sbyte sb;
+
     [FieldOffset(11000)]
     public short s;
+
     [FieldOffset(11002)]
     public ushort us;
+
     [FieldOffset(12000)]
     public uint i;
+
     [FieldOffset(12004)]
     public int si;
+
     [FieldOffset(13000)]
     public long l;
+
     [FieldOffset(14000)]
     public float f;
+
     [FieldOffset(15000)]
     public double d;
 }
@@ -353,6 +363,7 @@ class Tests
     }
 
     static Simple s_v;
+
     public static int test_5_pass_static_struct()
     {
         s_v = get_simple(1);
@@ -741,6 +752,7 @@ class Tests
             return null;
         }
     }
+
     class Duper : Super
     {
     }
@@ -1199,10 +1211,12 @@ class Tests
     struct VtypeVirtualDelStruct : IFaceVirtualDel
     {
         public int f;
+
         public int return_field_nonvirt()
         {
             return f;
         }
+
         public int return_field()
         {
             return f;
@@ -1306,6 +1320,7 @@ class Tests
     }
 
     public static int my_flags;
+
     public static int test_0_and_cmp_static()
     {
         /* various forms of test [mem], imm */
@@ -1334,6 +1349,7 @@ class Tests
     }
 
     static byte b;
+
     public static int test_0_byte_compares()
     {
         b = 0xff;
@@ -1373,6 +1389,7 @@ class Tests
     }
 
     static long x;
+
     public static int test_0_addsub_mem()
     {
         x = 0;
@@ -1390,6 +1407,7 @@ class Tests
     }
 
     static ulong y;
+
     public static int test_0_sh32_mem()
     {
         y = 0x0102130405060708;
@@ -1414,6 +1432,7 @@ class Tests
     }
 
     static uint dum_de_dum = 1;
+
     public static int test_0_long_arg_opt()
     {
         return Foo(0x1234567887654321, dum_de_dum);
@@ -1454,11 +1473,13 @@ class Tests
 
     /* from bug# 71515 */
     static int counter = 0;
+
     static bool WriteStuff()
     {
         counter = 10;
         return true;
     }
+
     public static int test_0_cond_branch_side_effects()
     {
         counter = 5;
@@ -1842,6 +1863,7 @@ class Tests
     {
         public int val;
     }
+
     static int test_2_ldobj_stobj_optization()
     {
         int i = 99;
@@ -2295,6 +2317,7 @@ class Tests
     {
         Bar
     }
+
     //https://github.com/mono/mono/issues/6666
     public static int test_0_bad_unbox_nullable_of_enum()
     {

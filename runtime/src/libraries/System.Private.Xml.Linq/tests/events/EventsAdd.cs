@@ -40,6 +40,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 new XText(" ")
             }
         };
+
         [Theory, MemberData(nameof(ExecuteXDocumentVariationParams))]
         public void ExecuteXDocumentVariation(XNode[] toAdd, XNode contextNode)
         {
@@ -96,6 +97,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 new XText("..")
             }
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XNode[] toAdd, XNode contextNode)
         {
@@ -211,6 +213,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 new XText(" ")
             }
         };
+
         [Theory, MemberData(nameof(ExecuteXDocumentVariationParams))]
         public void ExecuteXDocumentVariation(XNode[] toAdd, XNode contextNode)
         {
@@ -267,6 +270,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 new XText("..")
             }
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XNode[] toAdd, XNode contextNode)
         {
@@ -394,6 +398,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 new XText(" ")
             }
         };
+
         [Theory, MemberData(nameof(ExecuteXDocumentVariationParams))]
         public void ExecuteXDocumentVariation(XNode[] toAdd, XNode contextNode)
         {
@@ -456,6 +461,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 new XText("..")
             }
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XNode[] toAdd, XNode contextNode)
         {
@@ -628,6 +634,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 new XText(" ")
             }
         };
+
         [Theory, MemberData(nameof(ExecuteXDocumentVariationParams))]
         public void ExecuteXDocumentVariation(XNode[] toAdd, XNode contextNode)
         {
@@ -690,6 +697,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 new XText("..")
             }
         };
+
         [Theory, MemberData(nameof(VariationsForXElementParams))]
         public void ExecuteXElementVariation(XNode[] toAdd, XNode contextNode)
         {
@@ -749,6 +757,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 new XAttribute("a", "aa")
             }
         };
+
         [Theory, MemberData(nameof(ExecuteXAttributeVariationParams))]
         public void ExecuteXAttributeVariation(XAttribute[] toAdd, XAttribute contextNode)
         {

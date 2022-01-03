@@ -297,6 +297,7 @@ namespace System.Threading.Channels.Tests
         private sealed class TryWriteThrowingWriter<T> : ChannelWriter<T>
         {
             public override bool TryWrite(T item) => throw new FormatException();
+
             public override ValueTask<bool> WaitToWriteAsync(
                 CancellationToken cancellationToken = default
             ) => throw new InvalidDataException();
@@ -305,6 +306,7 @@ namespace System.Threading.Channels.Tests
         private sealed class TryReadThrowingReader<T> : ChannelReader<T>
         {
             public override bool TryRead(out T item) => throw new FieldAccessException();
+
             public override ValueTask<bool> WaitToReadAsync(
                 CancellationToken cancellationToken = default
             ) => throw new DriveNotFoundException();

@@ -19,7 +19,6 @@ class Program
     private const int Height = 248;
     private const int Iterations = 1;
     private const int MaxIterations = 1000;
-
 #else
 
     private const int RunningTime = 1000;
@@ -27,7 +26,6 @@ class Program
     private const int Height = 248;
     private const int Iterations = 7;
     private const int MaxIterations = 1000;
-
 #endif
 
     private double _framesPerSecond;

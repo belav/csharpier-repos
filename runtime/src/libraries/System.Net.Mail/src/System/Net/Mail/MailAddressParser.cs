@@ -605,6 +605,7 @@ namespace System.Net.Mail
         public readonly string DisplayName { get; }
         public readonly string User { get; }
         public readonly string Host { get; }
+
         public ParseAddressInfo(string displayName, string userName, string domain) =>
             (DisplayName, User, Host) = (displayName, userName, domain);
     }

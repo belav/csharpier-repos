@@ -5,6 +5,7 @@
 #pragma warning disable
 
 using System;
+
 class testout1
 {
     static bool static_field_bool;
@@ -13,14 +14,17 @@ class testout1
     bool mfb;
     bool mfb_false;
     bool mfb_true;
+
     static bool simple_func_bool()
     {
         return true;
     }
+
     static bool func_sb_true()
     {
         return true;
     }
+
     static bool func_sb_false()
     {
         return false;
@@ -1074,6 +1078,7 @@ class testout1
             False_Sum++;
         return (True_Sum * 2) - False_Sum;
     }
+
     static int Sub_Funclet_1()
     {
         int True_Sum = 0;
@@ -2122,6 +2127,7 @@ class testout1
             False_Sum++;
         return (True_Sum * 2) - False_Sum;
     }
+
     static int Sub_Funclet_2()
     {
         int True_Sum = 0;
@@ -3170,6 +3176,7 @@ class testout1
             False_Sum++;
         return (True_Sum * 2) - False_Sum;
     }
+
     static int Sub_Funclet_3()
     {
         int True_Sum = 0;

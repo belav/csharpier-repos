@@ -1,17 +1,21 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+
 namespace AutoMapper.Internal.Mappers
 {
     using static Expression;
     using static Execution.ExpressionBuilder;
+
     public class EnumToEnumMapper : IObjectMapper
     {
         private static readonly MethodInfo TryParseMethod = typeof(Enum).StaticGenericMethod(
             "TryParse",
             parametersCount: 3
         );
+
         public bool IsMatch(in TypePair context) => context.IsEnumToEnum();
+
         public Expression MapExpression(
             IGlobalConfiguration configurationProvider,
             ProfileMap profileMap,

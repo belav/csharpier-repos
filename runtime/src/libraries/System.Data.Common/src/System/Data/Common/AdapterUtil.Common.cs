@@ -56,6 +56,7 @@ namespace System.Data.Common
                 throw Argument(SR.Format(SR.ADP_EmptyString, parameterName));
             }
         }
+
         internal static void CheckArgumentLength(Array value, string parameterName)
         {
             CheckArgumentNull(value, parameterName);
@@ -280,6 +281,7 @@ namespace System.Data.Common
         {
             return Argument(SR.ADP_InvalidKey, parameterName);
         }
+
         internal static ArgumentException InvalidValue(string parameterName)
         {
             return Argument(SR.ADP_InvalidValue, parameterName);
@@ -400,6 +402,7 @@ namespace System.Data.Common
         {
             return Argument(SR.ADP_InvalidSourceColumn, parameter);
         }
+
         internal static Exception ColumnsAddNullAttempt(string parameter)
         {
             return CollectionNullValue(
@@ -408,6 +411,7 @@ namespace System.Data.Common
                 typeof(DataColumnMapping)
             );
         }
+
         internal static Exception ColumnsDataSetColumn(string cacheColumn)
         {
             return CollectionIndexString(
@@ -417,10 +421,12 @@ namespace System.Data.Common
                 typeof(DataColumnMappingCollection)
             );
         }
+
         internal static Exception ColumnsIndexInt32(int index, IColumnMappingCollection collection)
         {
             return CollectionIndexInt32(index, collection.GetType(), collection.Count);
         }
+
         internal static Exception ColumnsIndexSource(string srcColumn)
         {
             return CollectionIndexString(
@@ -430,18 +436,22 @@ namespace System.Data.Common
                 typeof(DataColumnMappingCollection)
             );
         }
+
         internal static Exception ColumnsIsNotParent(ICollection collection)
         {
             return ParametersIsNotParent(typeof(DataColumnMapping), collection);
         }
+
         internal static Exception ColumnsIsParent(ICollection collection)
         {
             return ParametersIsParent(typeof(DataColumnMapping), collection);
         }
+
         internal static Exception ColumnsUniqueSourceColumn(string? srcColumn)
         {
             return CollectionUniqueValue(typeof(DataColumnMapping), ADP.SourceColumn, srcColumn);
         }
+
         internal static Exception NotADataColumnMapping(object value)
         {
             return CollectionInvalidType(
@@ -458,6 +468,7 @@ namespace System.Data.Common
         {
             return Argument(SR.ADP_InvalidSourceTable, parameter);
         }
+
         internal static Exception TablesAddNullAttempt(string parameter)
         {
             return CollectionNullValue(
@@ -466,6 +477,7 @@ namespace System.Data.Common
                 typeof(DataTableMapping)
             );
         }
+
         internal static Exception TablesDataSetTable(string cacheTable)
         {
             return CollectionIndexString(
@@ -475,18 +487,22 @@ namespace System.Data.Common
                 typeof(DataTableMappingCollection)
             );
         }
+
         internal static Exception TablesIndexInt32(int index, ITableMappingCollection collection)
         {
             return CollectionIndexInt32(index, collection.GetType(), collection.Count);
         }
+
         internal static Exception TablesIsNotParent(ICollection collection)
         {
             return ParametersIsNotParent(typeof(DataTableMapping), collection);
         }
+
         internal static Exception TablesIsParent(ICollection collection)
         {
             return ParametersIsParent(typeof(DataTableMapping), collection);
         }
+
         internal static Exception TablesSourceIndex(string srcTable)
         {
             return CollectionIndexString(
@@ -496,10 +512,12 @@ namespace System.Data.Common
                 typeof(DataTableMappingCollection)
             );
         }
+
         internal static Exception TablesUniqueSourceTable(string? srcTable)
         {
             return CollectionUniqueValue(typeof(DataTableMapping), ADP.SourceTable, srcTable);
         }
+
         internal static Exception NotADataTableMapping(object value)
         {
             return CollectionInvalidType(
@@ -619,6 +637,7 @@ namespace System.Data.Common
                 parameter
             );
         }
+
         internal static Exception InvalidStartRecord(string parameter, int start)
         {
             return Argument(
@@ -626,26 +645,32 @@ namespace System.Data.Common
                 parameter
             );
         }
+
         internal static Exception FillRequires(string parameter)
         {
             return ArgumentNull(parameter);
         }
+
         internal static Exception FillRequiresSourceTableName(string parameter)
         {
             return Argument(SR.ADP_FillRequiresSourceTableName, parameter);
         }
+
         internal static Exception FillChapterAutoIncrement()
         {
             return InvalidOperation(SR.ADP_FillChapterAutoIncrement);
         }
+
         internal static InvalidOperationException MissingDataReaderFieldType(int index)
         {
             return DataAdapter(SR.Format(SR.ADP_MissingDataReaderFieldType, index));
         }
+
         internal static InvalidOperationException OnlyOneTableForStartRecordOrMaxRecords()
         {
             return DataAdapter(SR.ADP_OnlyOneTableForStartRecordOrMaxRecords);
         }
+
         //
         // DbDataAdapter.Update
         //
@@ -653,6 +678,7 @@ namespace System.Data.Common
         {
             return ArgumentNull(parameter);
         }
+
         internal static InvalidOperationException UpdateRequiresSourceTable(
             string defaultSrcTableName
         )
@@ -661,10 +687,12 @@ namespace System.Data.Common
                 SR.Format(SR.ADP_UpdateRequiresSourceTable, defaultSrcTableName)
             );
         }
+
         internal static InvalidOperationException UpdateRequiresSourceTableName(string srcTable)
         {
             return InvalidOperation(SR.Format(SR.ADP_UpdateRequiresSourceTableName, srcTable));
         }
+
         internal static ArgumentNullException UpdateRequiresDataTable(string parameter)
         {
             return ArgumentNull(parameter);
@@ -748,20 +776,24 @@ namespace System.Data.Common
             }
             return InvalidOperation(resource);
         }
+
         internal static ArgumentException UpdateMismatchRowTable(int i)
         {
             return Argument(
                 SR.Format(SR.ADP_UpdateMismatchRowTable, i.ToString(CultureInfo.InvariantCulture))
             );
         }
+
         internal static DataException RowUpdatedErrors()
         {
             return Data(SR.ADP_RowUpdatedErrors);
         }
+
         internal static DataException RowUpdatingErrors()
         {
             return Data(SR.ADP_RowUpdatingErrors);
         }
+
         internal static InvalidOperationException ResultsNotAllowedDuringBatch()
         {
             return DataAdapter(SR.ADP_ResultsNotAllowedDuringBatch);
@@ -774,38 +806,47 @@ namespace System.Data.Common
         {
             return InvalidOperation(SR.ADP_DynamicSQLJoinUnsupported);
         }
+
         internal static InvalidOperationException DynamicSQLNoTableInfo()
         {
             return InvalidOperation(SR.ADP_DynamicSQLNoTableInfo);
         }
+
         internal static InvalidOperationException DynamicSQLNoKeyInfoDelete()
         {
             return InvalidOperation(SR.ADP_DynamicSQLNoKeyInfoDelete);
         }
+
         internal static InvalidOperationException DynamicSQLNoKeyInfoUpdate()
         {
             return InvalidOperation(SR.ADP_DynamicSQLNoKeyInfoUpdate);
         }
+
         internal static InvalidOperationException DynamicSQLNoKeyInfoRowVersionDelete()
         {
             return InvalidOperation(SR.ADP_DynamicSQLNoKeyInfoRowVersionDelete);
         }
+
         internal static InvalidOperationException DynamicSQLNoKeyInfoRowVersionUpdate()
         {
             return InvalidOperation(SR.ADP_DynamicSQLNoKeyInfoRowVersionUpdate);
         }
+
         internal static InvalidOperationException DynamicSQLNestedQuote(string name, string quote)
         {
             return InvalidOperation(SR.Format(SR.ADP_DynamicSQLNestedQuote, name, quote));
         }
+
         internal static InvalidOperationException NoQuoteChange()
         {
             return InvalidOperation(SR.ADP_NoQuoteChange);
         }
+
         internal static InvalidOperationException MissingSourceCommand()
         {
             return InvalidOperation(SR.ADP_MissingSourceCommand);
         }
+
         internal static InvalidOperationException MissingSourceCommandConnection()
         {
             return InvalidOperation(SR.ADP_MissingSourceCommandConnection);

@@ -22,8 +22,10 @@ internal static class Repro
         {
             t = s;
         }
+
         public T t;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int reinterpret_cast<DestType, SrcType>(SrcType s)
     {

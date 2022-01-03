@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 namespace Microsoft.AspNetCore.Razor.Language;
+
 #pragma warning disable CS0618 // Type or member is obsolete
 internal class DefaultRazorParsingPhase : RazorEnginePhaseBase, IRazorParsingPhase
 {

@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 public class TypeOne
 {
     static int z;
+
     public void GenericMethod<T>()
     {
         int foo = 10;
@@ -44,6 +45,7 @@ public abstract class TypeTwo
         }
         finally { }
     }
+
     [DllImport("bla.dll")]
     public static extern void PInvoke();
 }
@@ -73,6 +75,7 @@ public abstract class AbsClass
         }
         finally { }
     }
+
     public abstract void AbsBla();
 }
 
@@ -90,7 +93,9 @@ public class ClassWithCCtor
 public class MethodWithLostsOfParams
 {
     static void Foo(int a, int b, int c) { }
+
     static void Foo2(int a, int b, int c) { }
+
     static void Foo3(int a, int b, int c) { }
 }
 

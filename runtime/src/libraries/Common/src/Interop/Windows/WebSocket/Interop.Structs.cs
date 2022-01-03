@@ -14,6 +14,7 @@ internal static partial class Interop
         {
             [FieldOffset(0)]
             internal DataBuffer Data;
+
             [FieldOffset(0)]
             internal CloseBuffer CloseStatus;
         }
@@ -47,6 +48,7 @@ internal static partial class Interop
             [MarshalAs(UnmanagedType.LPStr)]
             internal string Name;
             internal uint NameLength;
+
             [MarshalAs(UnmanagedType.LPStr)]
             internal string Value;
             internal uint ValueLength;

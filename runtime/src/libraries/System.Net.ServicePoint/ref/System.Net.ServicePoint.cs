@@ -11,6 +11,7 @@ namespace System.Net
         System.Net.IPEndPoint remoteEndPoint,
         int retryCount
     );
+
     [System.FlagsAttribute]
     public enum SecurityProtocolType
     {
@@ -24,9 +25,11 @@ namespace System.Net
         Tls12 = 3072,
         Tls13 = 12288,
     }
+
     public partial class ServicePoint
     {
         internal ServicePoint() { }
+
         public System.Uri Address
         {
             get { throw null; }
@@ -94,15 +97,19 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         public bool CloseConnectionGroup(string connectionGroupName)
         {
             throw null;
         }
+
         public void SetTcpKeepAlive(bool enabled, int keepAliveTime, int keepAliveInterval) { }
     }
+
     public partial class ServicePointManager
     {
         internal ServicePointManager() { }
+
         public const int DefaultNonPersistentConnectionLimit = 4;
         public const int DefaultPersistentConnectionLimit = 2;
         public static bool CheckCertificateRevocationList
@@ -125,6 +132,7 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
         public static System.Net.Security.EncryptionPolicy EncryptionPolicy
         {
@@ -165,6 +173,7 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         [System.ObsoleteAttribute(
             "WebRequest, HttpWebRequest, ServicePoint, and WebClient are obsolete. Use HttpClient instead.",
             DiagnosticId = "SYSLIB0014",
@@ -177,6 +186,7 @@ namespace System.Net
         {
             throw null;
         }
+
         [System.ObsoleteAttribute(
             "WebRequest, HttpWebRequest, ServicePoint, and WebClient are obsolete. Use HttpClient instead.",
             DiagnosticId = "SYSLIB0014",
@@ -186,6 +196,7 @@ namespace System.Net
         {
             throw null;
         }
+
         [System.ObsoleteAttribute(
             "WebRequest, HttpWebRequest, ServicePoint, and WebClient are obsolete. Use HttpClient instead.",
             DiagnosticId = "SYSLIB0014",
@@ -198,6 +209,7 @@ namespace System.Net
         {
             throw null;
         }
+
         public static void SetTcpKeepAlive(
             bool enabled,
             int keepAliveTime,

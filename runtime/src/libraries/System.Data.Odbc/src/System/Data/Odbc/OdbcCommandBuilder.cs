@@ -34,6 +34,7 @@ namespace System.Data.Odbc
         {
             return (OdbcCommand)base.GetInsertCommand();
         }
+
         public new OdbcCommand GetInsertCommand(bool useColumnsForParameterNames)
         {
             return (OdbcCommand)base.GetInsertCommand(useColumnsForParameterNames);
@@ -43,6 +44,7 @@ namespace System.Data.Odbc
         {
             return (OdbcCommand)base.GetUpdateCommand();
         }
+
         public new OdbcCommand GetUpdateCommand(bool useColumnsForParameterNames)
         {
             return (OdbcCommand)base.GetUpdateCommand(useColumnsForParameterNames);
@@ -52,6 +54,7 @@ namespace System.Data.Odbc
         {
             return (OdbcCommand)base.GetDeleteCommand();
         }
+
         public new OdbcCommand GetDeleteCommand(bool useColumnsForParameterNames)
         {
             return (OdbcCommand)base.GetDeleteCommand(useColumnsForParameterNames);
@@ -62,6 +65,7 @@ namespace System.Data.Odbc
             return "p"
                 + parameterOrdinal.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
+
         protected override string GetParameterName(string parameterName)
         {
             return parameterName;

@@ -134,6 +134,7 @@ namespace System.ComponentModel
                 _owner = owner;
                 LicenseKey = key;
             }
+
             public override string LicenseKey { get; }
 
             public override void Dispose()

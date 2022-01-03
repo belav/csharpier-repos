@@ -18,6 +18,7 @@ class Gen : IGen
         Interlocked.Increment(ref Test_thread16.Xcounter);
         evt.Set();
     }
+
     public static void ThreadPoolTest<U>()
     {
         ManualResetEvent[] evts = new ManualResetEvent[Test_thread16.nThreads];
@@ -49,6 +50,7 @@ public class Test_thread16
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

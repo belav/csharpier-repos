@@ -15,7 +15,9 @@ namespace System.Security.Permissions
     {
         public ZoneIdentityPermissionAttribute(SecurityAction action)
             : base(default(SecurityAction)) { }
+
         public SecurityZone Zone { get; set; }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);

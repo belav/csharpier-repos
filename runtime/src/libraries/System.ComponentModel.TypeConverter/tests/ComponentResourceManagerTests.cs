@@ -177,6 +177,7 @@ namespace System.ComponentModel.Tests
                 get => throw new NotImplementedException();
                 set => throw new NotImplementedException();
             }
+
             public object GetService(Type serviceType) => null;
         }
 

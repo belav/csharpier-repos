@@ -61,6 +61,7 @@ public class StringSort : StringSortStruct
     {
         return "STRING SORT";
     }
+
     public override double Run()
     {
         string[][] arraybase; /* Base pointers of array */

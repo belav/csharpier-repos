@@ -23,26 +23,32 @@ namespace Test
         {
             return "Base.VirtualFinal";
         }
+
         public virtual string VirtualNilFinal()
         {
             return "Base.VirtualNilFinal";
         }
+
         public virtual string VirtualOverrideFinal()
         {
             return "Base.VirtualOverrideFinal";
         }
+
         public virtual string VirtualNilOverride()
         {
             return "Base.VirtualNilOverride";
         }
+
         public virtual string VirtualNilNil()
         {
             return "Base.VirtualNilNil";
         }
+
         public virtual string VirtualOverrideOverride()
         {
             return "Base.VirtualOverrideOverride";
         }
+
         public virtual string VirtualOverrideNil()
         {
             return "Base.VirtualOverrideNil";
@@ -55,30 +61,37 @@ namespace Test
         {
             return "Child.AbstractFinal";
         }
+
         public override string AbstractOverrideFinal()
         {
             return "Child.AbstractOverrideFinal";
         }
+
         public override string AbstractOverrideOverride()
         {
             return "Child.AbstractOverrideOverride";
         }
+
         public override string AbstractOverrideNil()
         {
             return "Child.AbstractOverrideNil";
         }
+
         public sealed override string VirtualFinal()
         {
             return "Child.VirtualFinal";
         }
+
         public override string VirtualOverrideFinal()
         {
             return "Child.VirtualOverrideFinal";
         }
+
         public override string VirtualOverrideOverride()
         {
             return "Child.VirtualOverrideOverride";
         }
+
         public override string VirtualOverrideNil()
         {
             return "Child.VirtualOverrideNil";
@@ -113,18 +126,22 @@ namespace Test
         {
             return "GrandChild.AbstractOverrideOverride";
         }
+
         public sealed override string VirtualNilFinal()
         {
             return "GrandChild.VirtualNilFinal";
         }
+
         public sealed override string VirtualOverrideFinal()
         {
             return "GrandChild.VirtualOverrideFinal";
         }
+
         public override string VirtualOverrideOverride()
         {
             return "GrandChild.VirtualOverrideOverride";
         }
+
         public override string VirtualNilOverride()
         {
             return "GrandChild.VirtualNilOverride";

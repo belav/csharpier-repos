@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis
     public class RuleSet
     {
         private readonly string _filePath;
+
         /// <summary>
         /// The file path of the ruleset file.
         /// </summary>
@@ -27,6 +28,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         private readonly ReportDiagnostic _generalDiagnosticOption;
+
         /// <summary>
         /// The global option specified by the IncludeAll tag.
         /// </summary>
@@ -36,6 +38,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         private readonly ImmutableDictionary<string, ReportDiagnostic> _specificDiagnosticOptions;
+
         /// <summary>
         /// Individual rule ids and their associated actions.
         /// </summary>
@@ -45,6 +48,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         private readonly ImmutableArray<RuleSetInclude> _includes;
+
         /// <summary>
         /// List of rulesets included by this ruleset.
         /// </summary>

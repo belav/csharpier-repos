@@ -43,6 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private int _lazyDeclaredAccessibility = UnsetAccessibility;
 
         private readonly Flags _flags;
+
         [Flags]
         private enum Flags : byte
         {

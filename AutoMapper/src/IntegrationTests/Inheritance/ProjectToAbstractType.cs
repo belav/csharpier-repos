@@ -47,6 +47,7 @@ namespace AutoMapper.IntegrationTests.Net4
                 base.Seed(context);
             }
         }
+
         public class Context : DbContext
         {
             public Context()
@@ -87,6 +88,7 @@ namespace AutoMapper.IntegrationTests.Net4
             {
                 public Guid Id { get; set; }
             }
+
             public class Calendar : BaseDbObject
             {
                 public string Name { get; set; }
@@ -98,6 +100,7 @@ namespace AutoMapper.IntegrationTests.Net4
                 public virtual Calendar Reference { get; set; }
                 public virtual ICollection<CalendarDay> Days { get; set; }
             }
+
             public class CalendarDay : BaseDbObject
             {
                 public DateTime Date { get; set; }

@@ -21,6 +21,7 @@ namespace System.Xml.Serialization
         // this method must be called at the end of serialization
         internal void Dispose() { }
     }
+
     internal class XmlSerializationCodeGen
     {
         private readonly IndentedWriter _writer;
@@ -187,6 +188,7 @@ namespace System.Xml.Serialization
             _writer.Indent--;
             _writer.WriteLine("}");
         }
+
         internal void GeneratePublicMethods(
             string privateName,
             string publicName,

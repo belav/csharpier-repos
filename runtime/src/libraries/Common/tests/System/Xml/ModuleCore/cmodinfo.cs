@@ -22,6 +22,7 @@ namespace OLEDB.Test.ModuleCore
             set { base[key] = value; }
         }
     }
+
     ////////////////////////////////////////////////////////////////
     // CModInfo
     //
@@ -47,6 +48,7 @@ namespace OLEDB.Test.ModuleCore
             s_strCommandLine = null;
             s_hashOptions = null;
         }
+
         public static string CommandLine
         {
             // This Assert allows callers without the EnvironementPermission to use this property

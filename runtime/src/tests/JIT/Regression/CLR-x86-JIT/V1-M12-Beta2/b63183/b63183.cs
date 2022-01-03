@@ -9,6 +9,7 @@ namespace Test
     public class AA
     {
         static bool m_bFlag = false;
+
         static int Main()
         {
             bool B = false;

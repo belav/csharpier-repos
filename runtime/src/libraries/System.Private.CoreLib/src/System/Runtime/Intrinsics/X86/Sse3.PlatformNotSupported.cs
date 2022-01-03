@@ -40,6 +40,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_addsub_pd (__m128d a, __m128d b)
         ///   ADDSUBPD xmm, xmm/m128
@@ -57,6 +58,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_hadd_pd (__m128d a, __m128d b)
         ///   HADDPD xmm, xmm/m128
@@ -80,6 +82,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_hsub_pd (__m128d a, __m128d b)
         ///   HSUBPD xmm, xmm/m128
@@ -109,30 +112,37 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         public static unsafe Vector128<byte> LoadDquVector128(byte* address)
         {
             throw new PlatformNotSupportedException();
         }
+
         public static unsafe Vector128<short> LoadDquVector128(short* address)
         {
             throw new PlatformNotSupportedException();
         }
+
         public static unsafe Vector128<ushort> LoadDquVector128(ushort* address)
         {
             throw new PlatformNotSupportedException();
         }
+
         public static unsafe Vector128<int> LoadDquVector128(int* address)
         {
             throw new PlatformNotSupportedException();
         }
+
         public static unsafe Vector128<uint> LoadDquVector128(uint* address)
         {
             throw new PlatformNotSupportedException();
         }
+
         public static unsafe Vector128<long> LoadDquVector128(long* address)
         {
             throw new PlatformNotSupportedException();
         }
+
         public static unsafe Vector128<ulong> LoadDquVector128(ulong* address)
         {
             throw new PlatformNotSupportedException();

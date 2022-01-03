@@ -50,6 +50,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -97,6 +98,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -140,6 +142,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -183,6 +186,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -226,6 +230,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -271,6 +276,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -316,6 +322,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -361,6 +368,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -406,6 +414,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -450,6 +459,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -494,6 +504,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

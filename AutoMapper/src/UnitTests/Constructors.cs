@@ -13,12 +13,15 @@ namespace AutoMapper.UnitTests.Constructors
         class Source
         {
         }
+
         class Destination
         {
             public Destination(int otherValue, int value = 2) { }
+
             public int Value { get; set; }
             public int OtherValue { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 c =>
@@ -26,6 +29,7 @@ namespace AutoMapper.UnitTests.Constructors
                         .ForCtorParam("otherValue", o => o.MapFrom(s => 0))
             );
     }
+
     public class Nullable_enum_default_value : AutoMapperSpecBase
     {
         public enum SourceEnum
@@ -33,75 +37,94 @@ namespace AutoMapper.UnitTests.Constructors
             A,
             B
         }
+
         public class Source
         {
             public SourceEnum? Enum { get; set; }
         }
+
         public enum TargetEnum
         {
             A,
             B
         }
+
         public class Target
         {
             public TargetEnum? Enum { get; set; }
+
             public Target(TargetEnum? Enum = TargetEnum.A)
             {
                 this.Enum = Enum;
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(cfg => cfg.CreateMap<Source, Target>());
+
         [Fact]
         void Should_work() =>
             Mapper.Map<Target>(new Source { Enum = SourceEnum.B }).Enum.ShouldBe(TargetEnum.B);
     }
+
     public class Nullable_enum_default_value_null : AutoMapperSpecBase
     {
         public class Source
         {
         }
+
         public enum TargetEnum
         {
             A,
             B
         }
+
         public class Target
         {
             public TargetEnum? Enum { get; }
+
             public Target(TargetEnum? Enum = null)
             {
                 this.Enum = Enum;
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(cfg => cfg.CreateMap<Source, Target>());
+
         [Fact]
         void Should_work() => Mapper.Map<Target>(new Source()).Enum.ShouldBeNull();
     }
+
     public class Nullable_enum_default_value_not_null : AutoMapperSpecBase
     {
         public class Source
         {
         }
+
         public enum TargetEnum
         {
             A,
             B
         }
+
         public class Target
         {
             public TargetEnum? Enum { get; }
+
             public Target(TargetEnum? Enum = TargetEnum.B)
             {
                 this.Enum = Enum;
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(cfg => cfg.CreateMap<Source, Target>());
+
         [Fact]
         void Should_work() => Mapper.Map<Target>(new Source()).Enum.ShouldBe(TargetEnum.B);
     }
+
     public class Dynamic_constructor_mapping : AutoMapperSpecBase
     {
         public class ParentDTO<T>
@@ -693,6 +716,7 @@ namespace AutoMapper.UnitTests.Constructors
                 Latitude = latitude;
                 HorizontalAccuracy = 0;
             }
+
             public double Longitude { get; set; }
             public double Latitude { get; set; }
             public double? HorizontalAccuracy { get; set; }
@@ -741,11 +765,13 @@ namespace AutoMapper.UnitTests.Constructors
         public class GeoCoordinate
         {
             public GeoCoordinate() { }
+
             public GeoCoordinate(double longitude, double latitude, double x)
             {
                 Longitude = longitude;
                 Latitude = latitude;
             }
+
             public double Longitude { get; set; }
             public double Latitude { get; set; }
             public double? HorizontalAccuracy { get; set; }
@@ -807,6 +833,7 @@ namespace AutoMapper.UnitTests.Constructors
             private MyType _myType;
 
             public Destination() { }
+
             public Destination(MyType myType)
             {
                 _myType = myType;
@@ -858,11 +885,13 @@ namespace AutoMapper.UnitTests.Constructors
         }
 
         Destination _destination;
+
         public class Destination
         {
             private MyType _myType;
 
             private Destination() { }
+
             public Destination(MyType myType)
             {
                 _myType = myType;
@@ -912,6 +941,7 @@ namespace AutoMapper.UnitTests.Constructors
             {
                 Id = id;
             }
+
             public Guid Id { get; set; }
         }
 
@@ -1331,6 +1361,7 @@ namespace AutoMapper.UnitTests.Constructors
             _dest.Bar.ShouldBe(10);
         }
     }
+
     public class When_mapping_with_optional_parameters_and_constructor_mapping_is_disabled
         : AutoMapperSpecBase
     {
@@ -1340,8 +1371,10 @@ namespace AutoMapper.UnitTests.Constructors
             {
                 Dest = destination;
             }
+
             public Destination Dest { get; }
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(
                 cfg =>
@@ -1350,9 +1383,11 @@ namespace AutoMapper.UnitTests.Constructors
                     cfg.CreateMap<object, Destination>();
                 }
             );
+
         [Fact]
         public void Should_map_ok() => Mapper.Map<Destination>(new object()).Dest.ShouldBeNull();
     }
+
     public class UsingMappingEngineToResolveConstructorArguments
     {
         [Fact]
@@ -1829,6 +1864,7 @@ namespace AutoMapper.UnitTests.Constructors
                 Result = result;
                 Details = inner1;
             }
+
             public Dest(string result, DestInner2 inner2)
             {
                 Result = result;
@@ -1898,6 +1934,7 @@ namespace AutoMapper.UnitTests.Constructors
                 Result = result;
                 Details = inner1;
             }
+
             public Dest(string result, DestInner2 inner2)
             {
                 Result = result;

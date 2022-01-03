@@ -37,6 +37,7 @@ namespace System.Globalization
                 "DOTNET_SYSTEM_GLOBALIZATION_APPLOCALICU",
                 out value
             );
+
         private static bool TryGetStringValue(
             string switchName,
             string envVariable,

@@ -202,6 +202,7 @@ namespace System.Runtime.Serialization.Xml.Tests
                 Assert.Equal(value, s);
             }
         }
+
         private static Stream GenerateStreamFromString(string s)
         {
             var stream = new MemoryStream();
@@ -257,21 +258,33 @@ namespace System.Runtime.Serialization.Xml.Tests
             public override XmlNodeType NodeType => throw new NotImplementedException();
             public override string Prefix => throw new NotImplementedException();
             public override string Value => throw new NotImplementedException();
+
             public override string GetAttribute(int i) => throw new NotImplementedException();
+
             public override string GetAttribute(string name) => throw new NotImplementedException();
+
             public override string GetAttribute(string name, string namespaceURI) =>
                 throw new NotImplementedException();
+
             public override string LookupNamespace(string prefix) =>
                 throw new NotImplementedException();
+
             public override bool MoveToAttribute(string name) =>
                 throw new NotImplementedException();
+
             public override bool MoveToAttribute(string name, string ns) =>
                 throw new NotImplementedException();
+
             public override bool MoveToElement() => throw new NotImplementedException();
+
             public override bool MoveToFirstAttribute() => throw new NotImplementedException();
+
             public override bool MoveToNextAttribute() => throw new NotImplementedException();
+
             public override bool Read() => throw new NotImplementedException();
+
             public override bool ReadAttributeValue() => throw new NotImplementedException();
+
             public override void ResolveEntity() => throw new NotImplementedException();
         }
     }

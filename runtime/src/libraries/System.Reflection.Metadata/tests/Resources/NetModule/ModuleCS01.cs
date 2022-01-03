@@ -11,10 +11,12 @@ namespace NS.Module.CS01
     {
         public static string StaticField = "Static String Constant";
         public abstract EventLog MA01(EventArgs arg = default(EventArgs));
+
         public virtual object MA02(ref NS.Module.ModStruct p1, ulong p2 = 123 + 321)
         {
             return null;
         }
+
         public virtual NS.Module.ModIDerive MA03(
             short p1,
             EventArgs p2 = null,
@@ -28,15 +30,19 @@ namespace NS.Module.CS01
     public class ModChainB : ModChainA
     {
         internal readonly string ReadonlyField;
+
         public ModChainB()
         {
             ReadonlyField = "Readonly-String_Constant";
         }
+
         public NS.Module.ModStruct Prop { get; set; }
+
         public override EventLog MA01(EventArgs arg = null)
         {
             return null;
         }
+
         public new object MA02(ref NS.Module.ModStruct p1, ulong p2 = 0)
         {
             return null;
@@ -46,12 +52,14 @@ namespace NS.Module.CS01
     public sealed class ModChainC : ModChainB
     {
         volatile int VolatileField = 123;
+
         // overload
         public object MA02(ref NS.Module.ModStruct p1, out ulong p2, uint p3 = 0)
         {
             p2 = 0;
             return null;
         }
+
         public override NS.Module.ModIDerive MA03(
             short p1,
             EventArgs p2 = default(EventArgs),
@@ -65,10 +73,12 @@ namespace NS.Module.CS01
     public static class Extension
     {
         public static void ExtModChainA01(this ModChainA p1, string p2) { }
+
         public static void ExtModChainC01(this ModChainC p1, object p2) { }
     }
 
     public delegate void GenDele<T>(T t);
+
     namespace CS02
     {
         public interface ModIGen2<T, R>
@@ -89,10 +99,12 @@ namespace NS.Module.CS01
                 get { return null; }
                 set { }
             }
+
             public Action<T> M01(ref T t)
             {
                 return new Action<T>(MyAction);
             }
+
             public object this[T t]
             {
                 get { return null; }
@@ -109,6 +121,7 @@ namespace NS.Module.CS01
             }
             Func<T, T, Action<T>> _E01;
             GenDele<T> _E02;
+
             void MyAction(T t) { }
 
             internal void GenM<X>(X x) { }
@@ -117,10 +130,12 @@ namespace NS.Module.CS01
         public struct ModStructImplExp : ModIGen2<Expression, object>
         {
             object ModIGen2<Expression, object>.P01 { get; set; }
+
             object ModIGen2<Expression, object>.M01(ref Expression t)
             {
                 return null;
             }
+
             object ModIGen2<Expression, object>.this[Expression t]
             {
                 get { return null; }

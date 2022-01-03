@@ -17,6 +17,7 @@ namespace BinderTracingTests
     {
         public BinderTestException(string message) : base(message) { }
     }
+
     partial class BinderTracingTest
     {
         private const string AssemblyLoadFromHandlerName = "LoadFromResolveHandler";

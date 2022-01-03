@@ -80,6 +80,7 @@ public static class FailSafeDirectoryOperations
     /// <param name="path"></param>
     /// <param name="recursive"></param>
     private const int MAX_ATTEMPT = 10;
+
     public static void DeleteDirectory(string path, bool recursive)
     {
         DeleteDirectoryInfo(new DirectoryInfo(path), recursive);
@@ -187,6 +188,7 @@ public class ManageFileSystem : IDisposable
     private const int DefaultDirectoryDepth = 3;
     private const int DefaultNumberofFiles = 100;
     private const int MaxNumberOfSubDirsPerDir = 2;
+
     //@TODO
     public const string DirPrefixName = "Laks_";
 
@@ -208,8 +210,10 @@ public class ManageFileSystem : IDisposable
             DefaultNumberofFiles
         );
     }
+
     public ManageFileSystem(string startDirName)
         : this(startDirName, DefaultDirectoryDepth, DefaultNumberofFiles) { }
+
     public ManageFileSystem(string startDirName, int dirDepth, int numFiles)
     {
         Init(startDirName, dirDepth, numFiles);

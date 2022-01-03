@@ -24,6 +24,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.IDynamicObject.regr001.
     public class Program
     {
         public static int Value = 1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

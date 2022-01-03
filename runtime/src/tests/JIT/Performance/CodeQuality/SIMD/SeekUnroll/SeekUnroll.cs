@@ -73,6 +73,7 @@ public static class SeekUnroll
             ManualLoopTimes[iteration] = timer.ElapsedMilliseconds;
         }
     }
+
     static long[] ManualLoopTimes;
 
     // Function that tests one input, dispatching to either the xunit-perf

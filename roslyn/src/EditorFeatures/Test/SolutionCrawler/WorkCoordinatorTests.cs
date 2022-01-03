@@ -2377,35 +2377,43 @@ class C
             #region unused
             public bool NeedsReanalysisOnOptionChanged(object sender, OptionChangedEventArgs e) =>
                 false;
+
             public Task NewSolutionSnapshotAsync(
                 Solution solution,
                 CancellationToken cancellationToken
             ) => Task.CompletedTask;
+
             public Task DocumentOpenAsync(Document document, CancellationToken cancellationToken) =>
                 Task.CompletedTask;
+
             public Task DocumentCloseAsync(
                 Document document,
                 CancellationToken cancellationToken
             ) => Task.CompletedTask;
+
             public Task DocumentResetAsync(
                 Document document,
                 CancellationToken cancellationToken
             ) => Task.CompletedTask;
+
             public Task AnalyzeSyntaxAsync(
                 Document document,
                 InvocationReasons reasons,
                 CancellationToken cancellationToken
             ) => Task.CompletedTask;
+
             public Task AnalyzeProjectAsync(
                 Project project,
                 bool semanticsChanged,
                 InvocationReasons reasons,
                 CancellationToken cancellationToken
             ) => Task.CompletedTask;
+
             public Task RemoveDocumentAsync(
                 DocumentId documentId,
                 CancellationToken cancellationToken
             ) => Task.CompletedTask;
+
             public Task RemoveProjectAsync(
                 ProjectId projectId,
                 CancellationToken cancellationToken

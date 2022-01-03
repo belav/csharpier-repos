@@ -256,6 +256,7 @@ public class DefaultPageApplicationModelProviderTest
         public object Property2 { get; set; }
 
         public ModelWithPageModelAttribute Model => null;
+
         public override Task ExecuteAsync() => throw new NotImplementedException();
     }
 
@@ -304,6 +305,7 @@ public class DefaultPageApplicationModelProviderTest
     private class BindPropertyAttributeOnBaseModelPage : Page
     {
         public ModelLevel3 Model => null;
+
         public override Task ExecuteAsync() => throw new NotImplementedException();
     }
 
@@ -529,12 +531,16 @@ public class DefaultPageApplicationModelProviderTest
             get;
             private set;
         }
+
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.IUrlHelper Url { get; private set; }
+
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component { get; private set; }
+
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
+
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<EmptyPage> Html
         {
@@ -560,12 +566,16 @@ public class DefaultPageApplicationModelProviderTest
             get;
             private set;
         }
+
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.IUrlHelper Url { get; private set; }
+
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component { get; private set; }
+
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
+
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<EmptyPageModel> Html
         {

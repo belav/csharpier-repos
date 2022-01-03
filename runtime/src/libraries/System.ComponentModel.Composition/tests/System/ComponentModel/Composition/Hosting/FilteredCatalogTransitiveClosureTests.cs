@@ -10,8 +10,11 @@ namespace System.ComponentModel.Composition.Hosting
     public class FilteredCatalogTransitiveClosureTests
     {
         public interface IContract1 { }
+
         public interface IContract2 { }
+
         public interface IContract3 { }
+
         public interface IOther { }
 
         [Fact]

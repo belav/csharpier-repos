@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_LocallocCnstB32_Loop
 {
     const int Pass = 100;

@@ -624,7 +624,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         protected static readonly XmlKnownTypeSet KnownTypes = new XmlKnownTypeSet(typeof(_TypeA));
 
         private class UnknownType { }
+
         private class _TypeA { }
+
         private class _TypeB : _TypeA { }
     }
 }

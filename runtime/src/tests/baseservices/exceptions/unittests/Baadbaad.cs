@@ -45,6 +45,7 @@ public class TestSet
 public class BaadbaadTest
 {
     Trace _trace;
+
     public int Run()
     {
         _trace = new Trace("BaadbaadTest", "1234");
@@ -59,6 +60,7 @@ public class BaadbaadTest
         }
         return _trace.Match();
     }
+
     void DoStuff()
     {
         try

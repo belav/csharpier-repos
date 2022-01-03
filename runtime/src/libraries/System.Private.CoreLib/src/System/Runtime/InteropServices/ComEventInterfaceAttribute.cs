@@ -28,6 +28,7 @@ namespace System.Runtime.InteropServices
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
         public Type SourceInterface { get; }
+
         [DynamicallyAccessedMembers(EventProviderAccessedMemberTypes)]
         public Type EventProvider { get; }
     }

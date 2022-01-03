@@ -26,6 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly MethodSymbol _topLevelMethod;
         internal readonly SyntaxNode ScopeSyntaxOpt;
         internal readonly int ClosureOrdinal;
+
         /// <summary>
         /// The closest method/lambda that this frame is originally from. Null if nongeneric static closure.
         /// Useful because this frame's type parameters are constructed from this method and all methods containing this method.
@@ -165,6 +166,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsRecord => false;
         internal override bool IsRecordStruct => false;
+
         internal override bool HasPossibleWellKnownCloneMethod() => false;
     }
 }

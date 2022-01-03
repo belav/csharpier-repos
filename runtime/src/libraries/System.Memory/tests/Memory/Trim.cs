@@ -194,6 +194,7 @@ namespace System.MemoryTests
             }
 
             public static implicit operator Foo(int value) => new Foo { Value = value };
+
             public static implicit operator int?(Foo foo) => foo?.Value;
         }
 

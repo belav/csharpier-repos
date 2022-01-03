@@ -16,10 +16,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
         /// Text changes to make for this operation.
         /// </summary>
         public ImmutableArray<TextChange> TextChanges { get; }
+
         /// <summary>
         /// Tracking spans used to format and set the output selection after edits.
         /// </summary>
         public ImmutableArray<CommentTrackingSpan> TrackingSpans { get; }
+
         /// <summary>
         /// The type of text changes being made.
         /// This is known beforehand in some cases (comment selection)

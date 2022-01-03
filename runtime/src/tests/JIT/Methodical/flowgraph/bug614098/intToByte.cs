@@ -23,6 +23,7 @@ internal class Program
     private struct MyStruct
     {
         public ushort value;
+
         public MyStruct(ushort value)
         {
             this.value = value;

@@ -26,6 +26,7 @@ namespace System.ServiceProcess
     public class ServiceControllerPermissionAttribute : CodeAccessSecurityAttribute
     {
         public ServiceControllerPermissionAttribute(SecurityAction action) : base(action) { }
+
         public string MachineName
         {
             get => null;
@@ -41,6 +42,7 @@ namespace System.ServiceProcess
             get => null;
             set { }
         }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);

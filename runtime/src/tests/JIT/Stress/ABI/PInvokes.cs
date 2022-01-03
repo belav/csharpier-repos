@@ -13,6 +13,7 @@ namespace ABIStress
     {
         private static readonly List<DynamicMethod> s_keepRooted = new List<DynamicMethod>();
         private static readonly Dictionary<int, Callee> s_pinvokees = new Dictionary<int, Callee>();
+
         private static bool DoPInvokes(int callerIndex)
         {
             string callerName = Config.PInvokerPrefix + callerIndex;

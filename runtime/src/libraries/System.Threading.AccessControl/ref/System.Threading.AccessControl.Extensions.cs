@@ -18,6 +18,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         public static System.Threading.EventWaitHandle OpenExisting(
             string name,
             System.Security.AccessControl.EventWaitHandleRights rights
@@ -25,6 +26,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         public static bool TryOpenExisting(
             string name,
             System.Security.AccessControl.EventWaitHandleRights rights,
@@ -35,6 +37,7 @@ namespace System.Threading
             throw null;
         }
     }
+
     public static partial class MutexAcl
     {
         public static System.Threading.Mutex Create(
@@ -46,6 +49,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         public static System.Threading.Mutex OpenExisting(
             string name,
             System.Security.AccessControl.MutexRights rights
@@ -53,6 +57,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         public static bool TryOpenExisting(
             string name,
             System.Security.AccessControl.MutexRights rights,
@@ -63,6 +68,7 @@ namespace System.Threading
             throw null;
         }
     }
+
     public static partial class SemaphoreAcl
     {
         public static System.Threading.Semaphore Create(
@@ -75,6 +81,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         public static System.Threading.Semaphore OpenExisting(
             string name,
             System.Security.AccessControl.SemaphoreRights rights
@@ -82,6 +89,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         public static bool TryOpenExisting(
             string name,
             System.Security.AccessControl.SemaphoreRights rights,
@@ -92,6 +100,7 @@ namespace System.Threading
             throw null;
         }
     }
+
     public static partial class ThreadingAclExtensions
     {
         public static System.Security.AccessControl.EventWaitHandleSecurity GetAccessControl(
@@ -100,26 +109,31 @@ namespace System.Threading
         {
             throw null;
         }
+
         public static System.Security.AccessControl.MutexSecurity GetAccessControl(
             this System.Threading.Mutex mutex
         )
         {
             throw null;
         }
+
         public static System.Security.AccessControl.SemaphoreSecurity GetAccessControl(
             this System.Threading.Semaphore semaphore
         )
         {
             throw null;
         }
+
         public static void SetAccessControl(
             this System.Threading.EventWaitHandle handle,
             System.Security.AccessControl.EventWaitHandleSecurity eventSecurity
         ) { }
+
         public static void SetAccessControl(
             this System.Threading.Mutex mutex,
             System.Security.AccessControl.MutexSecurity mutexSecurity
         ) { }
+
         public static void SetAccessControl(
             this System.Threading.Semaphore semaphore,
             System.Security.AccessControl.SemaphoreSecurity semaphoreSecurity

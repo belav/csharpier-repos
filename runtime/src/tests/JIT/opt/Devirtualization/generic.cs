@@ -75,6 +75,7 @@ public class Z
     {
         return x.F();
     }
+
     static int IxG(Ix x)
     {
         return x.G();

@@ -121,6 +121,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             method = null;
             return false;
         }
+
         internal void AddPutRef(string name, ComMethodDesc method)
         {
             name = name.ToUpper(System.Globalization.CultureInfo.InvariantCulture);

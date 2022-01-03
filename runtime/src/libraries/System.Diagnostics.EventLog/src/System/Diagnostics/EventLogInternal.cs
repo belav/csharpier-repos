@@ -20,36 +20,50 @@ namespace System.Diagnostics
     {
         private EventLogEntryCollection entriesCollection;
         internal string logName;
+
         // used in monitoring for event postings.
         private int lastSeenCount;
+
         // holds the machine we're on, or null if it's the local machine
         internal readonly string machineName;
+
         // the delegate to call when an event arrives
         internal EntryWrittenEventHandler onEntryWrittenHandler;
+
         // holds onto the handle for reading
         private SafeEventLogReadHandle readHandle;
+
         // the source name - used only when writing
         internal readonly string sourceName;
+
         // holds onto the handle for writing
         private SafeEventLogWriteHandle writeHandle;
 
         private string logDisplayName;
+
         // cache system state variables
         // the initial size of the buffer (it can be made larger if necessary)
         private const int BUF_SIZE = 40000;
+
         // the number of bytes in the cache that belong to entries (not necessarily
         // the same as BUF_SIZE, because the cache only holds whole entries)
         private int bytesCached;
+
         // the actual cache buffer
         private byte[] cache;
+
         // the number of the entry at the beginning of the cache
         private int firstCachedEntry = -1;
+
         // the number of the entry that we got out of the cache most recently
         private int lastSeenEntry;
+
         // where that entry was
         private int lastSeenPos;
+
         //support for threadpool based deferred execution
         private ISynchronizeInvoke synchronizingObject;
+
         // the EventLog object that publicly exposes this instance.
         private readonly EventLog parent;
 

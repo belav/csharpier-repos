@@ -5,12 +5,16 @@ using System;
 
 // test for classes
 public class A<T> { }
+
 public class B : A<C> { }
+
 public class C : B { }
 
 // test for interfaces
 public interface IA<T> { }
+
 public interface IB : IA<D> { }
+
 public class D : IB { }
 
 class Test_test137310

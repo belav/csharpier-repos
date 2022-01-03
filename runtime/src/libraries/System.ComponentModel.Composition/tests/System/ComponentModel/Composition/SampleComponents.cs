@@ -16,21 +16,26 @@ namespace System.ComponentModel.Composition
     public class PublicComponentWithPublicExports
     {
         public const string PublicFieldExpectedValue = "PublicField";
+
         [Export("PublicField")]
         public string PublicField = PublicFieldExpectedValue;
         public const string PublicPropertyExpectedValue = "PublicProperty";
+
         [Export("PublicProperty")]
         public string PublicProperty
         {
             get { return PublicPropertyExpectedValue; }
         }
         public const string PublicMethodExpectedValue = "PublicMethod";
+
         [Export("PublicDelegate")]
         public string PublicMethod()
         {
             return PublicMethodExpectedValue;
         }
+
         public const string PublicNestedClassExpectedValue = "PublicNestedClass";
+
         [Export("PublicIGetString")]
         public class PublicNestedClass : IGetString
         {
@@ -46,10 +51,13 @@ namespace System.ComponentModel.Composition
     {
         [Import("PublicField")]
         public string PublicImportPublicField { get; set; }
+
         [Import("PublicProperty")]
         public string PublicImportPublicProperty { get; set; }
+
         [Import("PublicDelegate")]
         public Func<string> PublicImportPublicMethod { get; set; }
+
         [Import("PublicIGetString")]
         public IGetString PublicImportPublicNestedClass { get; set; }
 
@@ -79,10 +87,13 @@ namespace System.ComponentModel.Composition
     {
         [Import("PublicField")]
         internal string InternalImportPublicField { get; set; }
+
         [Import("PublicProperty")]
         internal string InternalImportPublicProperty { get; set; }
+
         [Import("PublicDelegate")]
         internal Func<string> InternalImportPublicMethod { get; set; }
+
         [Import("PublicIGetString")]
         internal IGetString InternalImportPublicNestedClass { get; set; }
 
@@ -110,21 +121,26 @@ namespace System.ComponentModel.Composition
     public class PublicComponentWithInternalExports
     {
         public const string InternalFieldExpectedValue = "InternalField";
+
         [Export("InternalField")]
         internal string InternalField = InternalFieldExpectedValue;
         public const string InternalPropertyExpectedValue = "InternalProperty";
+
         [Export("InternalProperty")]
         internal string InternalProperty
         {
             get { return InternalPropertyExpectedValue; }
         }
         public const string InternalMethodExpectedValue = "InternalMethod";
+
         [Export("InternalDelegate")]
         internal string InternalMethod()
         {
             return InternalMethodExpectedValue;
         }
+
         public const string InternalNestedClassExpectedValue = "InternalNestedClass";
+
         [Export("InternalIGetString")]
         internal class InternalNestedClass : IGetString
         {
@@ -140,10 +156,13 @@ namespace System.ComponentModel.Composition
     {
         [Import("InternalField")]
         public string PublicImportInternalField { get; set; }
+
         [Import("InternalProperty")]
         public string PublicImportInternalProperty { get; set; }
+
         [Import("InternalDelegate")]
         public Func<string> PublicImportInternalMethod { get; set; }
+
         [Import("InternalIGetString")]
         public IGetString PublicImportInternalNestedClass { get; set; }
 
@@ -173,10 +192,13 @@ namespace System.ComponentModel.Composition
     {
         [Import("InternalField")]
         internal string InternalImportInternalField { get; set; }
+
         [Import("InternalProperty")]
         internal string InternalImportInternalProperty { get; set; }
+
         [Import("InternalDelegate")]
         internal Func<string> InternalImportInternalMethod { get; set; }
+
         [Import("InternalIGetString")]
         internal IGetString InternalImportInternalNestedClass { get; set; }
 
@@ -204,21 +226,26 @@ namespace System.ComponentModel.Composition
     public class PublicComponentWithProtectedExports
     {
         public const string ProtectedFieldExpectedValue = "ProtectedField";
+
         [Export("ProtectedField")]
         protected string ProtectedField = ProtectedFieldExpectedValue;
         public const string ProtectedPropertyExpectedValue = "ProtectedProperty";
+
         [Export("ProtectedProperty")]
         protected string ProtectedProperty
         {
             get { return ProtectedPropertyExpectedValue; }
         }
         public const string ProtectedMethodExpectedValue = "ProtectedMethod";
+
         [Export("ProtectedDelegate")]
         protected string ProtectedMethod()
         {
             return ProtectedMethodExpectedValue;
         }
+
         public const string ProtectedNestedClassExpectedValue = "ProtectedNestedClass";
+
         [Export("ProtectedIGetString")]
         protected class ProtectedNestedClass : IGetString
         {
@@ -234,10 +261,13 @@ namespace System.ComponentModel.Composition
     {
         [Import("ProtectedField")]
         public string PublicImportProtectedField { get; set; }
+
         [Import("ProtectedProperty")]
         public string PublicImportProtectedProperty { get; set; }
+
         [Import("ProtectedDelegate")]
         public Func<string> PublicImportProtectedMethod { get; set; }
+
         [Import("ProtectedIGetString")]
         public IGetString PublicImportProtectedNestedClass { get; set; }
 
@@ -267,10 +297,13 @@ namespace System.ComponentModel.Composition
     {
         [Import("ProtectedField")]
         internal string InternalImportProtectedField { get; set; }
+
         [Import("ProtectedProperty")]
         internal string InternalImportProtectedProperty { get; set; }
+
         [Import("ProtectedDelegate")]
         internal Func<string> InternalImportProtectedMethod { get; set; }
+
         [Import("ProtectedIGetString")]
         internal IGetString InternalImportProtectedNestedClass { get; set; }
 
@@ -298,22 +331,27 @@ namespace System.ComponentModel.Composition
     public class PublicComponentWithProtectedInternalExports
     {
         public const string ProtectedInternalFieldExpectedValue = "ProtectedInternalField";
+
         [Export("ProtectedInternalField")]
         protected internal string ProtectedInternalField = ProtectedInternalFieldExpectedValue;
         public const string ProtectedInternalPropertyExpectedValue = "ProtectedInternalProperty";
+
         [Export("ProtectedInternalProperty")]
         protected internal string ProtectedInternalProperty
         {
             get { return ProtectedInternalPropertyExpectedValue; }
         }
         public const string ProtectedInternalMethodExpectedValue = "ProtectedInternalMethod";
+
         [Export("ProtectedInternalDelegate")]
         protected internal string ProtectedInternalMethod()
         {
             return ProtectedInternalMethodExpectedValue;
         }
+
         public const string ProtectedInternalNestedClassExpectedValue =
             "ProtectedInternalNestedClass";
+
         [Export("ProtectedInternalIGetString")]
         protected internal class ProtectedInternalNestedClass : IGetString
         {
@@ -329,10 +367,13 @@ namespace System.ComponentModel.Composition
     {
         [Import("ProtectedInternalField")]
         public string PublicImportProtectedInternalField { get; set; }
+
         [Import("ProtectedInternalProperty")]
         public string PublicImportProtectedInternalProperty { get; set; }
+
         [Import("ProtectedInternalDelegate")]
         public Func<string> PublicImportProtectedInternalMethod { get; set; }
+
         [Import("ProtectedInternalIGetString")]
         public IGetString PublicImportProtectedInternalNestedClass { get; set; }
 
@@ -362,10 +403,13 @@ namespace System.ComponentModel.Composition
     {
         [Import("ProtectedInternalField")]
         internal string InternalImportProtectedInternalField { get; set; }
+
         [Import("ProtectedInternalProperty")]
         internal string InternalImportProtectedInternalProperty { get; set; }
+
         [Import("ProtectedInternalDelegate")]
         internal Func<string> InternalImportProtectedInternalMethod { get; set; }
+
         [Import("ProtectedInternalIGetString")]
         internal IGetString InternalImportProtectedInternalNestedClass { get; set; }
 
@@ -394,18 +438,22 @@ namespace System.ComponentModel.Composition
     {
         public const string PrivateFieldExpectedValue = "PrivateField";
         public const string PrivatePropertyExpectedValue = "PrivateProperty";
+
         [Export("PrivateProperty")]
         private string PrivateProperty
         {
             get { return PrivatePropertyExpectedValue; }
         }
         public const string PrivateMethodExpectedValue = "PrivateMethod";
+
         [Export("PrivateDelegate")]
         private string PrivateMethod()
         {
             return PrivateMethodExpectedValue;
         }
+
         public const string PrivateNestedClassExpectedValue = "PrivateNestedClass";
+
         [Export("PrivateIGetString")]
         private class PrivateNestedClass : IGetString
         {
@@ -421,10 +469,13 @@ namespace System.ComponentModel.Composition
     {
         [Import("PrivateField")]
         public string PublicImportPrivateField { get; set; }
+
         [Import("PrivateProperty")]
         public string PublicImportPrivateProperty { get; set; }
+
         [Import("PrivateDelegate")]
         public Func<string> PublicImportPrivateMethod { get; set; }
+
         [Import("PrivateIGetString")]
         public IGetString PublicImportPrivateNestedClass { get; set; }
 
@@ -454,10 +505,13 @@ namespace System.ComponentModel.Composition
     {
         [Import("PrivateField")]
         internal string InternalImportPrivateField { get; set; }
+
         [Import("PrivateProperty")]
         internal string InternalImportPrivateProperty { get; set; }
+
         [Import("PrivateDelegate")]
         internal Func<string> InternalImportPrivateMethod { get; set; }
+
         [Import("PrivateIGetString")]
         internal IGetString InternalImportPrivateNestedClass { get; set; }
 
@@ -653,6 +707,7 @@ namespace System.ComponentModel.Composition
     public class DisposableExportClass : IDisposable
     {
         public bool IsDisposed { get; set; }
+
         public void Dispose()
         {
             Assert.False(IsDisposed);
@@ -684,6 +739,7 @@ namespace System.ComponentModel.Composition
             get { return mySerivce; }
             set { mySerivce = value; }
         }
+
         public int GetSomeValue()
         {
             return MyService.GetSomeInt() * 2;
@@ -821,10 +877,13 @@ namespace System.ComponentModel.Composition
     {
         [Import("One")]
         public int a;
+
         [Import("Two")]
         public int b;
+
         [Import("Add")]
         public Func<int, int, int> op;
+
         [Import("Add", AllowDefault = true)]
         public Lazy<Func<int, int, int>> opInfo;
     }

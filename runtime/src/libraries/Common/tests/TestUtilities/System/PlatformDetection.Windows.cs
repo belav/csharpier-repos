@@ -181,6 +181,7 @@ namespace System
         );
 
         private static volatile Version s_windowsVersionObject;
+
         internal static Version GetWindowsVersionObject()
         {
             if (s_windowsVersionObject is null)
@@ -201,6 +202,7 @@ namespace System
         }
 
         internal static uint GetWindowsVersion() => (uint)GetWindowsVersionObject().Major;
+
         internal static uint GetWindowsMinorVersion() => (uint)GetWindowsVersionObject().Minor;
 
         internal static bool IsWindowsVersionOrLater(int major, int minor, int build = -1)

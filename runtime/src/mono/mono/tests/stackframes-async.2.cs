@@ -5,6 +5,7 @@ using System.Diagnostics;
 class MainClass
 {
     static int frame_count = 0;
+
     public static int Main(string[] args)
     {
         AsyncCallback cback = new AsyncCallback(ResolveCallback);

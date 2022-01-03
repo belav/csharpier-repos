@@ -14,7 +14,9 @@ namespace System.Runtime.Caching
     internal sealed class SRefMultiple
     {
         internal SRefMultiple(object[] targets) { }
+
         internal long ApproximateSize => 0;
+
         internal void Dispose() { }
     }
 

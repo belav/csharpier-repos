@@ -31,11 +31,13 @@ namespace System.Threading.Tasks.Dataflow
     {
         /// <summary>The target side.</summary>
         private readonly TargetCore<TInput> _target;
+
         /// <summary>
         /// Buffer used to reorder output sets that may have completed out-of-order between the target half and the source half.
         /// This specialized reordering buffer supports streaming out enumerables if the message is the next in line.
         /// </summary>
         private readonly ReorderingBuffer<IEnumerable<TOutput>>? _reorderingBuffer;
+
         /// <summary>The source side.</summary>
         private readonly SourceCore<TOutput> _source;
 
@@ -790,6 +792,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { return _target.GetDebuggingInformation().InputCount; }
         }
+
         /// <summary>Gets the number of messages waiting to be processed.  This must only be used from the debugger as it avoids taking necessary locks.</summary>
         private int OutputCountForDebugger
         {
@@ -817,8 +820,10 @@ namespace System.Threading.Tasks.Dataflow
         {
             /// <summary>The transform many block being viewed.</summary>
             private readonly TransformManyBlock<TInput, TOutput> _transformManyBlock;
+
             /// <summary>The target half of the block being viewed.</summary>
             private readonly TargetCore<TInput>.DebuggingInformation _targetDebuggingInformation;
+
             /// <summary>The source half of the block being viewed.</summary>
             private readonly SourceCore<TOutput>.DebuggingInformation _sourceDebuggingInformation;
 
@@ -840,11 +845,13 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _targetDebuggingInformation.InputQueue; }
             }
+
             /// <summary>Gets any postponed messages.</summary>
             public QueuedMap<ISourceBlock<TInput>, DataflowMessageHeader>? PostponedMessages
             {
                 get { return _targetDebuggingInformation.PostponedMessages; }
             }
+
             /// <summary>Gets the messages waiting to be received.</summary>
             public IEnumerable<TOutput> OutputQueue
             {
@@ -856,6 +863,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _targetDebuggingInformation.CurrentDegreeOfParallelism; }
             }
+
             /// <summary>Gets the task being used for output processing.</summary>
             public Task? TaskForOutputProcessing
             {
@@ -867,16 +875,19 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _targetDebuggingInformation.DataflowBlockOptions; }
             }
+
             /// <summary>Gets whether the block is declining further messages.</summary>
             public bool IsDecliningPermanently
             {
                 get { return _targetDebuggingInformation.IsDecliningPermanently; }
             }
+
             /// <summary>Gets whether the block is completed.</summary>
             public bool IsCompleted
             {
                 get { return _sourceDebuggingInformation.IsCompleted; }
             }
+
             /// <summary>Gets the block's Id.</summary>
             public int Id
             {
@@ -888,6 +899,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _sourceDebuggingInformation.LinkedTargets; }
             }
+
             /// <summary>Gets the set of all targets linked from this block.</summary>
             public ITargetBlock<TOutput>? NextMessageReservedFor
             {

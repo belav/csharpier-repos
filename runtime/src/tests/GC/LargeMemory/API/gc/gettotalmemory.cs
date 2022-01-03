@@ -6,6 +6,7 @@ using System;
 public sealed class GetTotalMemoryTest
 {
     private uint size = 0;
+
     public GetTotalMemoryTest(uint size)
     {
         this.size = size;

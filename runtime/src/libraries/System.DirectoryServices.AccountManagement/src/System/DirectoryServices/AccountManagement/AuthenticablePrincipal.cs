@@ -338,6 +338,7 @@ namespace System.DirectoryServices.AccountManagement
                 context.QueryCtx.FindByLockoutTime(time, type, typeof(T))
             );
         }
+
         protected static PrincipalSearchResult<T> FindByLogonTime<T>(
             PrincipalContext context,
             DateTime time,
@@ -350,6 +351,7 @@ namespace System.DirectoryServices.AccountManagement
                 context.QueryCtx.FindByLogonTime(time, type, typeof(T))
             );
         }
+
         protected static PrincipalSearchResult<T> FindByExpirationTime<T>(
             PrincipalContext context,
             DateTime time,
@@ -362,6 +364,7 @@ namespace System.DirectoryServices.AccountManagement
                 context.QueryCtx.FindByExpirationTime(time, type, typeof(T))
             );
         }
+
         protected static PrincipalSearchResult<T> FindByBadPasswordAttempt<T>(
             PrincipalContext context,
             DateTime time,
@@ -374,6 +377,7 @@ namespace System.DirectoryServices.AccountManagement
                 context.QueryCtx.FindByBadPasswordAttempt(time, type, typeof(T))
             );
         }
+
         protected static PrincipalSearchResult<T> FindByPasswordSetTime<T>(
             PrincipalContext context,
             DateTime time,

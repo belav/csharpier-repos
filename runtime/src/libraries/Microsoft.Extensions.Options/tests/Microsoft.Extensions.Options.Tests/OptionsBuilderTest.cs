@@ -451,6 +451,7 @@ namespace Microsoft.Extensions.Options.Tests
               IValidateOptions<FakeOptions>
         {
             private readonly string _allowed;
+
             public MultiOptionValidator(string allowed) => _allowed = allowed;
 
             public ValidateOptionsResult Validate(string name, ComplexOptions options)
@@ -501,6 +502,7 @@ namespace Microsoft.Extensions.Options.Tests
         private class DependencyValidator : IValidateOptions<ComplexOptions>
         {
             private readonly string _allowed;
+
             public DependencyValidator(IOptions<FakeOptions> _fake)
             {
                 _allowed = _fake.Value.Message;

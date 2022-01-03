@@ -267,6 +267,7 @@ namespace AutoMapper.UnitTests
             }
         }
     }
+
     public class TransformingInheritance : AutoMapperSpecBase
     {
         public class SourceBase
@@ -353,6 +354,7 @@ namespace AutoMapper.UnitTests
             dest.Value.ShouldBe("Jimmy was cool and now is straight up dope");
         }
     }
+
     public class TransformingNullable : AutoMapperSpecBase
     {
         public class Source
@@ -361,12 +363,14 @@ namespace AutoMapper.UnitTests
             public int? NotNull { get; set; }
             public int? Null { get; set; }
         }
+
         public class Dest
         {
             public int Value { get; set; }
             public int? NotNull { get; set; }
             public int? Null { get; set; }
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(
                 cfg =>
@@ -374,6 +378,7 @@ namespace AutoMapper.UnitTests
                         .AddTransform<int>(source => source + 1)
                         .AddTransform<int?>(source => source == null ? null : source + 2)
             );
+
         [Fact]
         public void Should_transform_value()
         {
@@ -383,22 +388,26 @@ namespace AutoMapper.UnitTests
             dest.NotNull.ShouldBe(2);
         }
     }
+
     public class NonGenericMemberTransformer : AutoMapperSpecBase
     {
         public class Source
         {
             public string Value { get; set; }
         }
+
         public class Dest<T>
         {
             public T Value { get; set; }
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(
                 cfg =>
                     cfg.CreateMap(typeof(Source), typeof(Dest<>))
                         .ForMember("Value", opt => opt.AddTransform(d => d + " and more"))
             );
+
         [Fact]
         public void ShouldMatchMemberType()
         {

@@ -31,6 +31,7 @@
 namespace CseTest
 {
     using System;
+
     public class Test_Main
     {
         static int Main()
@@ -318,6 +319,7 @@ namespace CseTest
             Console.WriteLine(ret);
             return ret;
         }
+
         private static int return_int(bool verbose, int input)
         {
             int ans;
@@ -336,6 +338,7 @@ namespace CseTest
             return ans;
         }
     }
+
     public class class_s
     {
         public static int a;

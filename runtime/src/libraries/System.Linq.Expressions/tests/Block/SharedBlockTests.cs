@@ -13,6 +13,7 @@ namespace System.Linq.Expressions.Tests
             yield return "Hello";
             yield return new Uri("http://example.net/");
         }
+
         private static IEnumerable<object> ConstantValues()
         {
             yield return 42;

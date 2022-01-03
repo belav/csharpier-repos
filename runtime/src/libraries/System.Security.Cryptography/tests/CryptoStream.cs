@@ -602,11 +602,13 @@ namespace System.Security.Cryptography.Tests
         private sealed class DerivedCryptoStream : CryptoStream
         {
             public bool DisposeInvoked;
+
             public DerivedCryptoStream(
                 Stream stream,
                 ICryptoTransform transform,
                 CryptoStreamMode mode
             ) : base(stream, transform, mode) { }
+
             protected override void Dispose(bool disposing)
             {
                 DisposeInvoked = true;

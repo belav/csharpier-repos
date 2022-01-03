@@ -11,6 +11,7 @@ namespace System.Reflection
         protected TypeInfo() { }
 
         TypeInfo IReflectableType.GetTypeInfo() => this;
+
         public virtual Type AsType() => this;
 
         public virtual Type[] GenericTypeParameters =>

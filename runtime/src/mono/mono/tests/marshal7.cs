@@ -59,6 +59,7 @@ public class Test
     {
         [FieldOffset(0)]
         public int a;
+
         [FieldOffset(4)]
         public ulong b;
     }
@@ -69,6 +70,7 @@ public class Test
     {
         [FieldOffset(0)]
         public int a;
+
         [FieldOffset(4)]
         public ulong b;
     }
@@ -80,6 +82,7 @@ public class Test
     {
         [FieldOffset(0)]
         public int a;
+
         [FieldOffset(3)]
         public ulong b;
     }
@@ -90,6 +93,7 @@ public class Test
     {
         [FieldOffset(0)]
         public int a;
+
         [FieldOffset(3)]
         public ulong b;
     }
@@ -99,6 +103,7 @@ public class Test
     {
         [FieldOffset(0)]
         public short a;
+
         [FieldOffset(2)]
         public int b;
     }
@@ -110,8 +115,10 @@ public class Test
     {
         [FieldOffset(0)]
         int one;
+
         [FieldOffset(4)]
         int two;
+
         [FieldOffset(8)]
         int three;
     }
@@ -123,11 +130,14 @@ public class Test
     {
         [FieldOffset(0)]
         int one;
+
         [FieldOffset(4)]
         int two;
+
         [FieldOffset(8)]
         int three;
     }
+
     static bool IsOSX()
     {
         return (int)typeof(Environment)

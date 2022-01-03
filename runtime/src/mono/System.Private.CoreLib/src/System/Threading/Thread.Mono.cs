@@ -19,9 +19,11 @@ namespace System.Threading
 #pragma warning disable 169, 414, 649
         #region Sync with metadata/object-internals.h
         private int lock_thread_id;
+
         // stores a thread handle
         private IntPtr handle;
         private IntPtr native_handle; // used only on Win32
+
         /* accessed only from unmanaged code */
         private IntPtr name;
         private int name_free; // bool
@@ -29,6 +31,7 @@ namespace System.Threading
         private ThreadState state;
         private object? abort_exc;
         private int abort_state_handle;
+
         /* thread_id is only accessed from unmanaged code */
         internal long thread_id;
         private IntPtr debugger_thread; // FIXME switch to bool as soon as CI testing with corlib version bump works
@@ -37,6 +40,7 @@ namespace System.Threading
         private int interruption_requested;
         private IntPtr longlived;
         internal bool threadpool_thread;
+
         /* These are used from managed code */
         internal byte apartment_state;
         internal int managed_id;

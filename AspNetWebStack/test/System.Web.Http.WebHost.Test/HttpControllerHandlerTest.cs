@@ -2754,6 +2754,7 @@ namespace System.Web.Http.WebHost
                 Contract.Assert(exception != null);
                 _exception = exception;
             }
+
             protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
             {
                 throw _exception;

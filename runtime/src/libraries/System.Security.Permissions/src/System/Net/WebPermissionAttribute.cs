@@ -25,6 +25,7 @@ namespace System.Net
     public sealed class WebPermissionAttribute : CodeAccessSecurityAttribute
     {
         public WebPermissionAttribute(SecurityAction action) : base(action) { }
+
         public string Accept
         {
             get { return null; }
@@ -45,6 +46,7 @@ namespace System.Net
             get { return null; }
             set { }
         }
+
         public override IPermission CreatePermission()
         {
             return null;

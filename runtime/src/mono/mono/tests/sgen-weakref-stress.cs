@@ -6,6 +6,7 @@ public class Tests
     const int thread_count = 10;
     const int weakrefs_per_thread = 5000;
     const int crash_loops = 5;
+
     public static void CrashRound()
     {
         var t = new Thread[thread_count];

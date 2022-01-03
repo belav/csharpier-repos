@@ -15,6 +15,7 @@ namespace System.Security.Permissions
     {
         public GacIdentityPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
         { }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);

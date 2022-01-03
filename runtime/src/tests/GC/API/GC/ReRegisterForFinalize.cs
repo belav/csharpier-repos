@@ -10,6 +10,7 @@ public class Test_ReRegisterForFinalize
     public class Dummy
     {
         public static int flag;
+
         ~Dummy()
         {
             Console.WriteLine("In Finalize() of Dummy");
@@ -55,6 +56,7 @@ public class Test_ReRegisterForFinalize
             }
         }
     }
+
     public static int Main()
     {
         CreateObj temp = new CreateObj();

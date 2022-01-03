@@ -4,6 +4,7 @@
 // Getter and Setter, simple, both should be inlined.
 
 using System;
+
 public class A
 {
     private int _prop;
@@ -13,6 +14,7 @@ public class A
         set { _prop = value; }
     }
 }
+
 internal class Property
 {
     public static int Main()

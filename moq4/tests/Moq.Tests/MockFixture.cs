@@ -1102,7 +1102,9 @@ namespace Moq.Tests
         }
 
         public sealed class FooSealed { }
+
         class FooService : IFooService { }
+
         interface IFooService { }
 
         public class FooWithPrivateSetter
@@ -1272,6 +1274,7 @@ namespace Moq.Tests
             public class ClassWithAccessibleAndInaccessibleMethod
             {
                 public virtual void Public() => throw new InvalidOperationException("Public");
+
                 internal virtual void Internal() => throw new InvalidOperationException("Internal");
             }
         }

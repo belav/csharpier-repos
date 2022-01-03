@@ -1110,6 +1110,7 @@ namespace System.Xml.XPath
         {
             return IsReading ? this.lineInfo.HasLineInfo() : false;
         }
+
         public virtual int LineNumber
         {
             get { return IsReading ? this.lineInfo.LineNumber : 0; }

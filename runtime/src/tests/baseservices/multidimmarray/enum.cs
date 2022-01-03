@@ -7,6 +7,7 @@ public class Test
         OK = 0,
         BUG = -1
     }
+
     static int Main(string[] args)
     {
         TestLibrary.TestFramework.BeginTestCase("Enum MultidimmArray");

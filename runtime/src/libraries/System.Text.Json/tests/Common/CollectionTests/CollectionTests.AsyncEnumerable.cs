@@ -449,6 +449,7 @@ namespace System.Text.Json.Serialization.Tests
                 }
 
                 public TElement Current => _innerEnumerator.Current;
+
                 public ValueTask DisposeAsync()
                 {
                     _enumerable.TotalDisposedEnumerators++;
@@ -489,6 +490,7 @@ namespace System.Text.Json.Serialization.Tests
                 throw new InvalidOperationException(
                     "Collection should not be enumerated synchronously."
                 );
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 

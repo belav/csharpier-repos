@@ -8,6 +8,7 @@ using System.Security.Authentication;
 using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
+
 #pragma warning disable IDE0044 // Add readonly modifier. We don't want to modify these interop types
 
 internal static unsafe class HttpApiTypes

@@ -73,8 +73,10 @@ namespace System.IO.Enumeration
 
             protected override TResult TransformEntry(ref FileSystemEntry entry) =>
                 _enumerable._transform(ref entry);
+
             protected override bool ShouldRecurseIntoEntry(ref FileSystemEntry entry) =>
                 _enumerable.ShouldRecursePredicate?.Invoke(ref entry) ?? true;
+
             protected override bool ShouldIncludeEntry(ref FileSystemEntry entry) =>
                 _enumerable.ShouldIncludePredicate?.Invoke(ref entry) ?? true;
         }

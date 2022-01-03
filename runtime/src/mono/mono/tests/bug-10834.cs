@@ -37,6 +37,7 @@ namespace Repro
             return 0;
         }
     }
+
     abstract class C<U>
     {
         public abstract int M1<T>(in T arg) where T : U, I1;
@@ -61,6 +62,7 @@ namespace Repro
     public struct S1 : I1
     {
         public int field;
+
         public void M3()
         {
             Console.WriteLine("S1:M3");

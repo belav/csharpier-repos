@@ -9,6 +9,7 @@ namespace System
     public partial class BinaryData
     {
         public BinaryData(byte[] data) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed."
         )]
@@ -17,12 +18,16 @@ namespace System
             System.Text.Json.JsonSerializerOptions? options = null,
             System.Type? type = null
         ) { }
+
         public BinaryData(System.ReadOnlyMemory<byte> data) { }
+
         public BinaryData(string data) { }
+
         public static System.BinaryData Empty
         {
             get { throw null; }
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -32,14 +37,17 @@ namespace System
         {
             throw null;
         }
+
         public static System.BinaryData FromBytes(byte[] data)
         {
             throw null;
         }
+
         public static System.BinaryData FromBytes(System.ReadOnlyMemory<byte> data)
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed."
         )]
@@ -50,10 +58,12 @@ namespace System
         {
             throw null;
         }
+
         public static System.BinaryData FromStream(System.IO.Stream stream)
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<System.BinaryData> FromStreamAsync(
             System.IO.Stream stream,
             System.Threading.CancellationToken cancellationToken =
@@ -62,10 +72,12 @@ namespace System
         {
             throw null;
         }
+
         public static System.BinaryData FromString(string data)
         {
             throw null;
         }
+
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Never
         )]
@@ -73,22 +85,27 @@ namespace System
         {
             throw null;
         }
+
         public static implicit operator System.ReadOnlyMemory<byte>(System.BinaryData? data)
         {
             throw null;
         }
+
         public static implicit operator System.ReadOnlySpan<byte>(System.BinaryData? data)
         {
             throw null;
         }
+
         public byte[] ToArray()
         {
             throw null;
         }
+
         public System.ReadOnlyMemory<byte> ToMemory()
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed."
         )]
@@ -96,10 +113,12 @@ namespace System
         {
             throw null;
         }
+
         public System.IO.Stream ToStream()
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;

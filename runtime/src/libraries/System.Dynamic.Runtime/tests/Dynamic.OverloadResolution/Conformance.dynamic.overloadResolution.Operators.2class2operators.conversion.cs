@@ -189,6 +189,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Base
     {
         public int Field;
+
         public static implicit operator Base(short x)
         {
             return new Base() { Field = x };

@@ -16,6 +16,7 @@ namespace System.Xml.Xsl.XsltOld
         private readonly Hashtable _templateNameTable = new Hashtable();
         private Hashtable? _attributeSetTable;
         private int _templateCount;
+
         //private ArrayList     preserveSpace;
         private Hashtable? _queryKeyTable;
         private ArrayList? _whitespaceList;

@@ -30,14 +30,17 @@ namespace Test
         {
             return null;
         }
+
         uint Method2(bool param1)
         {
             return 0;
         }
+
         int Method3()
         {
             return 0;
         }
+
         bool Method4()
         {
             return false;

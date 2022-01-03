@@ -15,6 +15,7 @@ namespace Roslyn.Utilities
         private readonly Dictionary<SyntaxTree, Dictionary<string, ReportDiagnostic>>? _options;
         private readonly Dictionary<SyntaxTree, GeneratedKind>? _isGenerated;
         private readonly Dictionary<string, ReportDiagnostic>? _globalOptions;
+
         public TestSyntaxTreeOptionsProvider(
             IEqualityComparer<string> comparer,
             (string? key, ReportDiagnostic diagnostic) globalOption,

@@ -14,6 +14,7 @@ namespace ForegroundGC
         static bool done = false;
         static long maxAlloc = 1024 * 1024 * 1024; //1GB max size
         static int size = 30;
+
         static int Main(string[] args)
         {
             if (args.Length > 0)

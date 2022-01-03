@@ -13,6 +13,7 @@ namespace System.ServiceModel.Syndication
     {
         private XmlBuffer _buffer;
         private int _bufferElementIndex;
+
         // extensionData and extensionDataWriter are only present on the send side
         private readonly object _extensionData;
         private readonly ExtensionDataWriter _extensionDataWriter;

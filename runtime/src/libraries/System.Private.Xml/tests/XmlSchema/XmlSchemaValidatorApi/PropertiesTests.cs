@@ -271,6 +271,7 @@ namespace System.Xml.Tests
     public class TCLineInfoProvider : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCLineInfoProvider(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -408,6 +409,7 @@ namespace System.Xml.Tests
     public class TCSourceUri : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCSourceUri(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -499,6 +501,7 @@ namespace System.Xml.Tests
     public class TCValidationEventHandling : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCValidationEventHandling(ITestOutputHelper output) : base(output)
         {
             _output = output;

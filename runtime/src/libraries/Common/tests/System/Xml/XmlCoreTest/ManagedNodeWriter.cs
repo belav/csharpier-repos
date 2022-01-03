@@ -39,12 +39,14 @@ namespace XmlCoreTest.Common
         private long _mCount = 0; //Comment Indexer
 
         private StreamWriter _textWriter = null;
+
         //Obviously performance is not a major requirement so
         //making use of out-of-box data structures to keep
         //state of the writer.
 
         //Managing the Element Stack.
         private Stack<string> _stack = null;
+
         //Managing the Node Queue.
         private StringBuilder _q = null;
 

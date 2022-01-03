@@ -143,10 +143,12 @@ namespace AutoMapper.UnitTests
             public Source Parent { get; set; }
             public Data Data { get; set; }
         }
+
         public class Data
         {
             public int? Integer { get; set; }
         }
+
         public class Destination
         {
             public int? ParentDataInteger { get; set; }
@@ -236,6 +238,7 @@ namespace AutoMapper.UnitTests
             public string Name { get; set; }
             public Address Address { get; set; }
         }
+
         public class Address
         {
             public int Id { get; set; }
@@ -243,18 +246,21 @@ namespace AutoMapper.UnitTests
             public string City { get; set; }
             public string Country { get; set; }
         }
+
         public class CustomerDTO
         {
             public int Id { get; set; }
             public string Name { get; set; }
             public string AddressCity { get; set; }
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(
                 cfg =>
                     cfg.CreateMap<Customer, CustomerDTO>(MemberList.Source)
                         .ForMember(d => d.Id, o => o.MapFrom(s => s.AnotherId))
             );
+
         [Fact]
         public void Should_validate() =>
             new Action(

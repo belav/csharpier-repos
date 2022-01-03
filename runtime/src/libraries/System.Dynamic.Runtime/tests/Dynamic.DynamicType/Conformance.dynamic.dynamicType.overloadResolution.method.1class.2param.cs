@@ -271,6 +271,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     public class Test
     {
         private delegate void Del(long x, int y);
+
         public void Method(long x, int y) { }
 
         private void Method(int x, int y) { }

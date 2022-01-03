@@ -22,7 +22,6 @@ namespace SIMD
         private const int Height = 100;
         private const int Iterations = 1;
         private const int MaxIterations = 1000;
-
 #else
 
         private const int RunningTime = 1000;
@@ -30,7 +29,6 @@ namespace SIMD
         private const int Height = 250;
         private const int Iterations = 7;
         private const int MaxIterations = 1000;
-
 #endif
 
         public RayTracerBench()

@@ -17,6 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal sealed class SimpleProgramUnitBinder : LocalScopeBinder
     {
         private readonly SimpleProgramBinder _scope;
+
         public SimpleProgramUnitBinder(Binder enclosing, SimpleProgramBinder scope)
             : base(enclosing, enclosing.Flags)
         {

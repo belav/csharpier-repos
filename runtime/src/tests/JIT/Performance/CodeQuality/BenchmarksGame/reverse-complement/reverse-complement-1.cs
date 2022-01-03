@@ -25,12 +25,14 @@ namespace BenchmarksGame
         {
             public byte[] Data;
             public int Count;
+
             public int Read(BinaryReader r)
             {
                 Data = r.ReadBytes(16384);
                 Count++;
                 return Data.Length;
             }
+
             public Index IndexOf(byte b, int o)
             {
                 return new Index { Block = Count, Pos = Array.IndexOf(Data, b, o) };
@@ -42,6 +44,7 @@ namespace BenchmarksGame
             public int Block;
             public int Pos;
             public static readonly Index None = new Index { Block = -1, Pos = -1 };
+
             public bool InBlock(Block b)
             {
                 return Block == b.Count;

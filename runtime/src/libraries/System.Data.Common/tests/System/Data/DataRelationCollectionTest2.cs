@@ -141,6 +141,7 @@ namespace System.Data.Tests
             Assert.Equal("rel1", ds.Tables[0].ChildRelations[0].RelationName);
             Assert.Equal("rel1", ds.Tables[1].ParentRelations[0].RelationName);
         }
+
         [Fact]
         public void Add_ByNameDataColumnsWithOutConstraint()
         {
@@ -175,6 +176,7 @@ namespace System.Data.Tests
             Assert.True(ds.Tables[1].ParentRelations.CanRemove(ds.Tables[1].ParentRelations[0]));
             Assert.False(ds.Relations.CanRemove(null));
         }
+
         [Fact]
         public void CanRemove_DataRelation()
         {

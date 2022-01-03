@@ -496,6 +496,7 @@ namespace System.Xml.Tests
         public class MyNameTable : XmlNameTable
         {
             private NameTable _nt = new NameTable();
+
             public override string Get(string array)
             {
                 return _nt.Get(array);

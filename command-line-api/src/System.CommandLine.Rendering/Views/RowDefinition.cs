@@ -13,6 +13,7 @@ namespace System.CommandLine.Rendering.Views
             SizeMode = sizeMode;
             Value = value;
         }
+
         public static RowDefinition Fixed(int size)
         {
             if (size < 0.0)

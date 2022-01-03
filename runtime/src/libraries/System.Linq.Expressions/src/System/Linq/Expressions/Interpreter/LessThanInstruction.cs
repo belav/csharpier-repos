@@ -260,6 +260,7 @@ namespace System.Linq.Expressions.Interpreter
                 return 1;
             }
         }
+
         public static Instruction Create(Type type, bool liftedToNull = false)
         {
             Debug.Assert(!type.IsEnum);

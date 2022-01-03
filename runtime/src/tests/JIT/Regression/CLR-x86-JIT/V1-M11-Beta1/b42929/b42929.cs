@@ -32,6 +32,7 @@ namespace Test
                 } while (AA.Static1(null, new bool[7]));
             }
         }
+
         static int Main()
         {
             try

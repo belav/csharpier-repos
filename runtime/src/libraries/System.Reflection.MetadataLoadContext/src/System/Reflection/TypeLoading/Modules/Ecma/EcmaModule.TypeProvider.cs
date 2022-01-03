@@ -23,11 +23,13 @@ namespace System.Reflection.TypeLoading.Ecma
             TypeDefinitionHandle handle,
             byte rawTypeKind
         ) => handle.ResolveTypeDef(this);
+
         public RoType GetTypeFromReference(
             MetadataReader reader,
             TypeReferenceHandle handle,
             byte rawTypeKind
         ) => handle.ResolveTypeRef(this);
+
         public RoType GetTypeFromSpecification(
             MetadataReader reader,
             TypeContext genericContext,
@@ -36,10 +38,14 @@ namespace System.Reflection.TypeLoading.Ecma
         ) => handle.ResolveTypeSpec(this, genericContext);
 
         public RoType GetSZArrayType(RoType elementType) => elementType.GetUniqueArrayType();
+
         public RoType GetArrayType(RoType elementType, ArrayShape shape) =>
             elementType.GetUniqueArrayType(shape.Rank);
+
         public RoType GetByReferenceType(RoType elementType) => elementType.GetUniqueByRefType();
+
         public RoType GetPointerType(RoType elementType) => elementType.GetUniquePointerType();
+
         public RoType GetGenericInstantiation(
             RoType genericType,
             ImmutableArray<RoType> typeArguments
@@ -55,6 +61,7 @@ namespace System.Reflection.TypeLoading.Ecma
             ?? throw new BadImageFormatException(
                 SR.Format(SR.GenericTypeParamIndexOutOfRange, index)
             );
+
         public RoType GetGenericMethodParameter(TypeContext genericContext, int index) =>
             genericContext.GetGenericMethodArgumentOrNull(index)
             ?? throw new BadImageFormatException(
@@ -63,8 +70,10 @@ namespace System.Reflection.TypeLoading.Ecma
 
         public RoType GetFunctionPointerType(MethodSignature<RoType> signature) =>
             throw new NotSupportedException(SR.NotSupported_FunctionPointers);
+
         public RoType GetModifiedType(RoType modifier, RoType unmodifiedType, bool isRequired) =>
             unmodifiedType;
+
         public RoType GetPinnedType(RoType elementType) => elementType;
 
         public RoType GetPrimitiveType(PrimitiveTypeCode typeCode) =>
@@ -74,7 +83,9 @@ namespace System.Reflection.TypeLoading.Ecma
         // ICustomAttributeTypeProvider
         //
         public RoType GetSystemType() => Loader.GetCoreType(CoreType.Type);
+
         public bool IsSystemType(RoType type) => type == Loader.TryGetCoreType(CoreType.Type);
+
         public PrimitiveTypeCode GetUnderlyingEnumType(RoType type) =>
             type.GetEnumUnderlyingPrimitiveTypeCode(Loader);
 

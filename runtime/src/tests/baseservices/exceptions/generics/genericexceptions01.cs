@@ -51,6 +51,7 @@ public class GenericExceptions
         Help.s_exceptionToThrow = new Exception();
         (new A<MyException>()).InstanceFunctionWithFewArgs();
     }
+
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.NoInlining
     )]

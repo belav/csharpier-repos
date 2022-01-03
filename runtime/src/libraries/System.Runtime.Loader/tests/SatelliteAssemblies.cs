@@ -18,6 +18,7 @@ namespace System.Runtime.Loader.Tests
             string,
             AssemblyLoadContext
         >();
+
         public SatelliteAssembliesTestsFixture()
         {
             AssemblyLoadContext satelliteAssembliesTests = new AssemblyLoadContext(
@@ -67,6 +68,7 @@ namespace System.Runtime.Loader.Tests
     public class SatelliteAssembliesTests : IClassFixture<SatelliteAssembliesTestsFixture>
     {
         Dictionary<string, AssemblyLoadContext> contexts;
+
         public SatelliteAssembliesTests(SatelliteAssembliesTestsFixture fixture)
         {
             contexts = fixture.contexts;

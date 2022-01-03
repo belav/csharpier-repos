@@ -18,6 +18,7 @@ public enum TestEnum
 public class AA
 {
     public double[][] m_adblField1;
+
     public static ulong[] Static1()
     {
         for (App.m_xFwd1 = App.m_xFwd1; App.m_bFwd2; App.m_shFwd3 -= ((short)(121.0)))
@@ -52,6 +53,7 @@ public class AA
         }
         return (new ulong[3u]);
     }
+
     public static ushort[] Static2()
     {
         for (App.m_ushFwd4 *= App.m_ushFwd4; App.m_bFwd2; App.m_dblFwd5 -= 66.0)
@@ -74,6 +76,7 @@ public class AA
         while (App.m_bFwd2) { }
         return App.m_aushFwd6;
     }
+
     public static long[] Static3()
     {
         for (App.m_sbyFwd7 *= ((sbyte)(70)); (null == new AA()); App.m_dblFwd5 += 97.0)
@@ -90,6 +93,7 @@ public class AA
         }
         return App.m_alFwd10;
     }
+
     public static short[] Static4()
     {
         byte local10 = ((byte)(55u));
@@ -122,6 +126,7 @@ public class AA
         }
         return (new short[16u]);
     }
+
     public static long[][] Static5()
     {
         byte[,,] local15 = (new byte[7u, 92u, 57u]);
@@ -134,6 +139,7 @@ public class AA
             (new long[22u])
         };
     }
+
     public static TestEnum Static6()
     {
         int local16 = 105;
@@ -160,6 +166,7 @@ public class AA
         label2:
         return 0;
     }
+
     public static double Static7()
     {
         for (App.m_sbyFwd7 = App.m_sbyFwd7; App.m_bFwd2; App.m_chFwd12++)
@@ -172,6 +179,7 @@ public class AA
         }
         return 82.0;
     }
+
     public static byte Static8()
     {
         while (App.m_bFwd2)
@@ -243,6 +251,7 @@ public class App
         catch (Exception) { }
         return 100;
     }
+
     public static Array m_xFwd1;
     public static bool m_bFwd2;
     public static short m_shFwd3;

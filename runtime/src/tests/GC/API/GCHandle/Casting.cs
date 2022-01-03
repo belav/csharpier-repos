@@ -16,6 +16,7 @@ public class Dummy
     {
         this.i = i;
     }
+
     public int i;
 }
 

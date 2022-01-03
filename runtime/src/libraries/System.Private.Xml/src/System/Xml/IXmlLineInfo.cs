@@ -16,6 +16,7 @@ namespace System.Xml
         {
             return false;
         }
+
         public virtual int LineNumber
         {
             get { return 0; }

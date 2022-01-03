@@ -35,6 +35,7 @@ namespace System.Reflection.Emit
         internal DynamicResolver? m_resolver;
 
         internal bool m_restrictedSkipVisibility;
+
         // The context when the method was created. We use this to do the RestrictedMemberAccess checks.
         // These checks are done when the method is compiled. This can happen at an arbitrary time,
         // when CreateDelegate or Invoke is called, or when another DynamicMethod executes OpCodes.Call.

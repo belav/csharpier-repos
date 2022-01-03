@@ -34,10 +34,13 @@ public class Gen<T> : GenBase<T>
 
     [FieldOffset(16)]
     public int _sint0 = 0;
+
     [FieldOffset(24)]
     public double _sdouble0 = 0;
+
     [FieldOffset(32)]
     public string _sstring0 = "string0";
+
     [FieldOffset(40)]
     public Guid _sGuid0 = new Guid();
 
@@ -46,10 +49,13 @@ public class Gen<T> : GenBase<T>
 
     [FieldOffset(72)]
     public int _sint1 = int.MaxValue;
+
     [FieldOffset(80)]
     public double _sdouble1 = double.MaxValue;
+
     [FieldOffset(88)]
     public string _sstring1 = "string1";
+
     [FieldOffset(96)]
     public Guid _sGuid1 = new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
 

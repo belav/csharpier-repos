@@ -7,6 +7,7 @@ public struct A
 {
     public int m_aval;
 };
+
 public struct B
 {
     public int m_bval;
@@ -16,6 +17,7 @@ public struct AA
 {
     public A m_a;
     public B m_b;
+
     public AA(int a, int b)
     {
         m_a.m_aval = a;
@@ -29,6 +31,7 @@ internal class TestApp
     {
         return 0;
     }
+
     private static unsafe int Main()
     {
         AA loc_x = new AA(0, 100);

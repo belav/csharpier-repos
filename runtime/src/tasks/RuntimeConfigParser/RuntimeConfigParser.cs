@@ -127,6 +127,7 @@ public class RuntimeOption
     [JsonPropertyName("configProperties")]
     public Dictionary<string, string> ConfigProperties { get; set; } =
         new Dictionary<string, string>();
+
     // everything other than configProperties
     [JsonExtensionData]
     public Dictionary<string, object> ExtensionDataSub { get; set; } =
@@ -138,6 +139,7 @@ public class Root
     // the runtimeOptions key
     [JsonPropertyName("runtimeOptions")]
     public RuntimeOption RuntimeOptions { get; set; } = new RuntimeOption();
+
     // everything other than runtimeOptions
     [JsonExtensionData]
     public Dictionary<string, object> ExtensionDataRoot { get; set; } =

@@ -26,6 +26,7 @@ namespace System.Composition.Convention.Tests
             return null;
         }
     }
+
     public class ExportInterfacesContractExclusionTests
     {
         private static readonly Type[] s_contractInterfaces = new[]

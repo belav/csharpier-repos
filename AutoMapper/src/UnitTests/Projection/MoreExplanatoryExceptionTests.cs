@@ -34,6 +34,7 @@ namespace AutoMapper.UnitTests.Projection
         class EntitySource
         {
         }
+
         class EntityDestination
         {
             public EntityDestination(object notSupported = null) { }

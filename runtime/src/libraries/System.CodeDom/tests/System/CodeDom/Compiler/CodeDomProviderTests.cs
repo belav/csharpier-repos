@@ -644,7 +644,9 @@ namespace System.CodeDom.Compiler.Tests
         {
 #pragma warning disable 0672
             public override ICodeCompiler CreateCompiler() => null;
+
             public override ICodeParser CreateParser() => null;
+
             public override ICodeGenerator CreateGenerator() => null;
 #pragma warning restore 067
         }
@@ -652,18 +654,22 @@ namespace System.CodeDom.Compiler.Tests
         protected class NoParserProvider : CodeDomProvider
         {
             public override ICodeCompiler CreateCompiler() => null;
+
             public override ICodeGenerator CreateGenerator() => null;
         }
 
         protected class CustomProvider : CodeDomProvider
         {
             private ICodeCompiler _compiler = new CustomCompiler();
+
             public override ICodeCompiler CreateCompiler() => _compiler;
 
             private ICodeGenerator _generator = new CustomGenerator();
+
             public override ICodeGenerator CreateGenerator() => _generator;
 
             private ICodeParser _parser = new CustomParser();
+
             public override ICodeParser CreateParser() => _parser;
         }
 
@@ -790,6 +796,7 @@ namespace System.CodeDom.Compiler.Tests
         protected class CustomParser : ICodeParser
         {
             public static CodeCompileUnit CompileUnit { get; } = new CodeCompileUnit();
+
             public CodeCompileUnit Parse(TextReader codeStream) => CompileUnit;
         }
     }

@@ -31,8 +31,10 @@ namespace System.Threading.Channels.Tests
 
         protected void AssertSynchronousSuccess<T>(ValueTask<T> task) =>
             Assert.True(task.IsCompletedSuccessfully);
+
         protected void AssertSynchronousSuccess(ValueTask task) =>
             Assert.True(task.IsCompletedSuccessfully);
+
         protected void AssertSynchronousSuccess(Task task) =>
             Assert.Equal(TaskStatus.RanToCompletion, task.Status);
 

@@ -22,6 +22,7 @@ namespace System.Data
         internal const string CHANGES = "changes";
         internal const string MODIFIED = "modified";
         internal const string INSERTED = "inserted";
+
         //internal const string DESCENDENT            = "descendent";
 
 
@@ -37,6 +38,7 @@ namespace System.Data
         internal const string MSD_COLUMNNAME = "ColumnName";
         internal const string MSD_CONSTRAINTNAME = "ConstraintName";
         internal const string MSD_CONSTRAINTONLY = "ConstraintOnly";
+
         //     internal const string MSD_CREATECONSTRAINTS = "CreateConstraints";
         internal const string MSD_CASESENSITIVE = "CaseSensitive";
         internal const string MSD_DATASETNAME = "DataSetName";

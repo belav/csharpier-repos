@@ -214,6 +214,7 @@ namespace System.Xml.Tests
     internal class TCReadSubtreeReader : TCReadSubtree
     {
     }
+
     [TestCase(Name = "ReadToDescendant", Desc = "CustomInheritedReader")]
     internal class TCReadToDescendantReader : TCReadToDescendant
     {

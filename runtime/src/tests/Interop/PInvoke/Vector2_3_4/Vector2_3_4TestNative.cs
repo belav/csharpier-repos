@@ -24,15 +24,19 @@ static class Vector2_3_4TestNative
 
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern Vector2 CreateVector2FromFloats(float x, float y);
+
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern Vector3 CreateVector3FromFloats(float x, float y, float z);
+
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern Vector4 CreateVector4FromFloats(float x, float y, float z, float w);
 
     [DllImport(nameof(Vector2_3_4TestNative), EntryPoint = "CreateVector2FromFloats")]
     public static extern Vector2Wrapper CreateWrappedVector2FromFloats(float x, float b);
+
     [DllImport(nameof(Vector2_3_4TestNative), EntryPoint = "CreateVector3FromFloats")]
     public static extern Vector3Wrapper CreateWrappedVector3FromFloats(float x, float y, float z);
+
     [DllImport(nameof(Vector2_3_4TestNative), EntryPoint = "CreateVector4FromFloats")]
     public static extern Vector4Wrapper CreateWrappedVector4FromFloats(
         float x,
@@ -43,8 +47,10 @@ static class Vector2_3_4TestNative
 
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern bool Vector2EqualToFloats(Vector2 vec, float x, float y);
+
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern bool Vector3EqualToFloats(Vector3 vec, float x, float y, float z);
+
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern bool Vector4EqualToFloats(Vector4 vec, float x, float y, float z, float w);
 
@@ -56,6 +62,7 @@ static class Vector2_3_4TestNative
         float newX,
         float newY
     );
+
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern bool ValidateAndChangeVector3(
         ref Vector3 dec,
@@ -66,6 +73,7 @@ static class Vector2_3_4TestNative
         float newY,
         float newZ
     );
+
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern bool ValidateAndChangeVector4(
         ref Vector4 dec,
@@ -81,8 +89,10 @@ static class Vector2_3_4TestNative
 
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern void GetVector2ForFloats(float x, float y, out Vector2 dec);
+
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern void GetVector3ForFloats(float x, float y, float z, out Vector3 dec);
+
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern void GetVector4ForFloats(
         float x,
@@ -94,6 +104,7 @@ static class Vector2_3_4TestNative
 
     [DllImport(nameof(Vector2_3_4TestNative), EntryPoint = "Vector2EqualToFloats")]
     public static extern bool WrappedVector2EqualToFloats(Vector2Wrapper vec, float x, float y);
+
     [DllImport(nameof(Vector2_3_4TestNative), EntryPoint = "Vector3EqualToFloats")]
     public static extern bool WrappedVector3EqualToFloats(
         Vector3Wrapper vec,
@@ -101,6 +112,7 @@ static class Vector2_3_4TestNative
         float y,
         float z
     );
+
     [DllImport(nameof(Vector2_3_4TestNative), EntryPoint = "Vector4EqualToFloats")]
     public static extern bool WrappedVector4EqualToFloats(
         Vector4Wrapper vec,
@@ -118,6 +130,7 @@ static class Vector2_3_4TestNative
         float newX,
         float newY
     );
+
     [DllImport(nameof(Vector2_3_4TestNative), EntryPoint = "ValidateAndChangeVector3")]
     public static extern bool ValidateAndChangeWrappedVector3(
         ref Vector3Wrapper dec,
@@ -128,6 +141,7 @@ static class Vector2_3_4TestNative
         float newY,
         float newZ
     );
+
     [DllImport(nameof(Vector2_3_4TestNative), EntryPoint = "ValidateAndChangeVector4")]
     public static extern bool ValidateAndChangeWrappedVector4(
         ref Vector4Wrapper dec,
@@ -150,11 +164,13 @@ static class Vector2_3_4TestNative
         Vector2 startingVector,
         Vector2Callback callback
     );
+
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern Vector3 PassThroughVector3ToCallback(
         Vector3 startingVector,
         Vector3Callback callback
     );
+
     [DllImport(nameof(Vector2_3_4TestNative))]
     public static extern Vector4 PassThroughVector4ToCallback(
         Vector4 startingVector,

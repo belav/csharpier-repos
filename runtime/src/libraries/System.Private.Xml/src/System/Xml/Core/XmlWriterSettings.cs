@@ -61,6 +61,7 @@ namespace System.Xml
         private string? _docTypePublic;
         private XmlStandalone _standalone;
         private bool _autoXmlDecl;
+
         public XmlWriterSettings()
         {
             Initialize();
@@ -337,6 +338,7 @@ namespace System.Xml
             || _docTypePublic != null
             || _docTypeSystem != null
             || _standalone == XmlStandalone.Yes;
+
         internal XmlWriter CreateWriter(string outputFileName)
         {
             ArgumentNullException.ThrowIfNull(outputFileName);
@@ -513,6 +515,7 @@ namespace System.Xml
         }
 
         internal bool ReadOnly { get; set; }
+
         private void CheckReadOnly([CallerMemberName] string? propertyName = null)
         {
             if (ReadOnly)

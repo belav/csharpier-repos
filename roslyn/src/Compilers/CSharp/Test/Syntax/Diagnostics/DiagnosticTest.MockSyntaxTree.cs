@@ -72,6 +72,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 throw new NotImplementedException();
             }
+
             public override bool HasCompilationUnitRoot
             {
                 get { throw new NotImplementedException(); }

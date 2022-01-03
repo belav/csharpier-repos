@@ -850,6 +850,7 @@ namespace System.Runtime.Serialization
         public const bool DefaultEmitDefaultValue = true;
         public const int DefaultOrder = 0;
         public const bool DefaultIsReference = false;
+
         // The value string.Empty aids comparisons (can do simple length checks
         //     instead of string comparison method calls in IL.)
         public static readonly string NewObjectId = string.Empty;
@@ -920,6 +921,7 @@ namespace System.Runtime.Serialization
         public const string ExtensionDataObjectFieldName = "extensionDataField";
         public const string AddMethodName = "Add";
         public const string GetCurrentMethodName = "get_Current";
+
         // NOTE: These values are used in schema below. If you modify any value, please make the same change in the schema.
         public const string SerializationNamespace =
             "http://schemas.microsoft.com/2003/10/Serialization/";

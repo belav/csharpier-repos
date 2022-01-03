@@ -28,6 +28,7 @@ internal static partial class Interop
             CharSet = CharSet.Ansi
         )]
         private static partial IntPtr CryptoNative_GetObjectDefinitionByName(string friendlyName);
+
         internal static IntPtr GetObjectDefinitionByName(string friendlyName)
         {
             IntPtr ret = CryptoNative_GetObjectDefinitionByName(friendlyName);

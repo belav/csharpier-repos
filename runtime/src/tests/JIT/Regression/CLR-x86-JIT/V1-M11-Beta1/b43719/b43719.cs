@@ -10,10 +10,12 @@ namespace Test
     {
         static uint m_uForward4;
         static float[] m_afForward3;
+
         static long Static1(ref bool param1, ref bool param2)
         {
             return new BB().m_nField1;
         }
+
         static float Static2()
         {
             return 0.0f;
@@ -21,10 +23,12 @@ namespace Test
 
         int m_nField1;
         double[] m_adField5;
+
         bool Method2()
         {
             return true;
         }
+
         void Method3(long param1, double[] param2, BB[] param4, float param5)
         {
             while (param4[0].Method2()) { }
@@ -46,6 +50,7 @@ namespace Test
                     );
             }
         }
+
         static int Main()
         {
             try

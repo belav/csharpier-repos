@@ -1402,6 +1402,7 @@ namespace System.Linq
                 )
             );
         }
+
         /// <summary>
         /// Performs in parallel a subsequent ordering of the elements in a sequence in
         /// ascending order by using a specified comparer.
@@ -1443,6 +1444,7 @@ namespace System.Linq
                 )
             );
         }
+
         /// <summary>
         /// Performs in parallel a subsequent ordering of the elements in a sequence in
         /// descending order, according to a key.
@@ -1482,6 +1484,7 @@ namespace System.Linq
                 )
             );
         }
+
         /// <summary>
         /// Performs in parallel a subsequent ordering of the elements in a sequence in descending
         /// order by using a specified comparer.

@@ -6,10 +6,12 @@ using System.Reflection;
 using AutoMapper.Execution;
 using AutoMapper.Internal;
 using AutoMapper.QueryableExtensions.Impl;
+
 namespace AutoMapper.QueryableExtensions
 {
     using MemberPaths = IEnumerable<MemberInfo[]>;
     using ParameterBag = IDictionary<string, object>;
+
     /// <summary>
     /// Queryable extensions for AutoMapper
     /// </summary>
@@ -29,6 +31,7 @@ namespace AutoMapper.QueryableExtensions
             IQueryable<TDestination> destQuery,
             IConfigurationProvider config
         ) => QueryMapperVisitor.Map(sourceQuery, destQuery, config.Internal());
+
         /// <summary>
         /// Extension method to project from a queryable using the provided mapping engine
         /// </summary>
@@ -45,6 +48,7 @@ namespace AutoMapper.QueryableExtensions
             object parameters,
             params Expression<Func<TDestination, object>>[] membersToExpand
         ) => new ProjectionExpression(source, configuration).To(parameters, membersToExpand);
+
         /// <summary>
         /// Extension method to project from a queryable using the provided mapping engine
         /// </summary>
@@ -59,6 +63,7 @@ namespace AutoMapper.QueryableExtensions
             IConfigurationProvider configuration,
             params Expression<Func<TDestination, object>>[] membersToExpand
         ) => source.ProjectTo(configuration, null, membersToExpand);
+
         /// <summary>
         /// Projects the source type to the destination type given the mapping configuration
         /// </summary>
@@ -78,6 +83,7 @@ namespace AutoMapper.QueryableExtensions
                 parameters,
                 membersToExpand
             );
+
         /// <summary>
         /// Extension method to project from a queryable using the provided mapping engine
         /// </summary>
@@ -91,6 +97,7 @@ namespace AutoMapper.QueryableExtensions
             Type destinationType,
             IConfigurationProvider configuration
         ) => source.ProjectTo(destinationType, configuration, null);
+
         /// <summary>
         /// Projects the source type to the destination type given the mapping configuration
         /// </summary>
@@ -112,6 +119,7 @@ namespace AutoMapper.QueryableExtensions
                 parameters,
                 membersToExpand
             );
+
         readonly struct ProjectionExpression
         {
             private static readonly MethodInfo SelectMethod = typeof(Queryable).StaticGenericMethod(
@@ -120,11 +128,13 @@ namespace AutoMapper.QueryableExtensions
             );
             private readonly IQueryable _source;
             private readonly IProjectionBuilder _builder;
+
             public ProjectionExpression(IQueryable source, IConfigurationProvider configuration)
             {
                 _source = source;
                 _builder = configuration.Internal().ProjectionBuilder;
             }
+
             public IQueryable<TResult> To<TResult>(
                 ParameterBag parameters,
                 string[] membersToExpand
@@ -135,10 +145,12 @@ namespace AutoMapper.QueryableExtensions
                         memberName => ReflectionHelper.GetMemberPath(typeof(TResult), memberName)
                     )
                 );
+
             public IQueryable<TResult> To<TResult>(
                 object parameters,
                 Expression<Func<TResult, object>>[] membersToExpand
             ) => ToCore<TResult>(parameters, membersToExpand.Select(MemberVisitor.GetMemberPath));
+
             public IQueryable To(
                 Type destinationType,
                 object parameters,
@@ -151,10 +163,12 @@ namespace AutoMapper.QueryableExtensions
                         memberName => ReflectionHelper.GetMemberPath(destinationType, memberName)
                     )
                 );
+
             private IQueryable<TResult> ToCore<TResult>(
                 object parameters,
                 MemberPaths memberPathsToExpand
             ) => (IQueryable<TResult>)ToCore(typeof(TResult), parameters, memberPathsToExpand);
+
             private IQueryable ToCore(
                 Type destinationType,
                 object parameters,
@@ -168,6 +182,7 @@ namespace AutoMapper.QueryableExtensions
                         memberPathsToExpand.Select(m => new MemberPath(m)).ToArray()
                     )
                     .Chain(_source, Select);
+
             private static IQueryable Select(IQueryable source, LambdaExpression lambda) =>
                 source.Provider.CreateQuery(
                     Expression.Call(
@@ -178,20 +193,24 @@ namespace AutoMapper.QueryableExtensions
                 );
         }
     }
+
     public class MemberVisitor : ExpressionVisitor
     {
         private readonly List<MemberInfo> _members = new List<MemberInfo>();
+
         public static MemberInfo[] GetMemberPath(Expression expression)
         {
             var memberVisitor = new MemberVisitor();
             memberVisitor.Visit(expression);
             return memberVisitor.MemberPath.ToArray();
         }
+
         protected override Expression VisitMember(MemberExpression node)
         {
             _members.AddRange(node.GetMemberExpressions().Select(e => e.Member));
             return node;
         }
+
         public IReadOnlyCollection<MemberInfo> MemberPath => _members;
     }
 }

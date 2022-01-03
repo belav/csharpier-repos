@@ -43,10 +43,12 @@ namespace System.Reflection.TypeLoading
 
         private IList<CustomAttributeTypedArgument> GetLatchedFixedArguments() =>
             _lazyFixedArguments ?? LazilyComputeArguments().FixedArguments;
+
         private IList<CustomAttributeNamedArgument> GetLatchedNamedArguments() =>
             _lazyNamedArguments ?? LazilyComputeArguments().NamedArguments;
 
         protected sealed override Type? ComputeAttributeType() => _constructor.DeclaringType;
+
         protected sealed override ConstructorInfo ComputeConstructor() => _constructor;
 
         private CustomAttributeArguments LazilyComputeArguments()

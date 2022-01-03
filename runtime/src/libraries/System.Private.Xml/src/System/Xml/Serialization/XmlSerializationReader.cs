@@ -1259,6 +1259,7 @@ namespace System.Xml.Serialization
                 return new XmlQualifiedName(_r.NameTable.Add(localName), ns);
             }
         }
+
         protected void UnknownAttribute(object? o, XmlAttribute attr)
         {
             UnknownAttribute(o, attr, null);
@@ -2322,6 +2323,7 @@ namespace System.Xml.Serialization
                 _name = name;
                 _td = td;
             }
+
             internal string Name
             {
                 get { return _name; }
@@ -2332,6 +2334,7 @@ namespace System.Xml.Serialization
                 get { return _td; }
             }
         }
+
         private sealed class Member
         {
             private readonly string _source;
@@ -2356,6 +2359,7 @@ namespace System.Xml.Serialization
                 int i,
                 MemberMapping mapping
             ) : this(outerClass, source, null, arrayName, i, mapping, false, null) { }
+
             internal Member(
                 XmlSerializationReaderCodeGen outerClass,
                 string source,
@@ -2364,6 +2368,7 @@ namespace System.Xml.Serialization
                 MemberMapping mapping,
                 string? choiceSource
             ) : this(outerClass, source, null, arrayName, i, mapping, false, choiceSource) { }
+
             internal Member(
                 XmlSerializationReaderCodeGen outerClass,
                 string source,
@@ -2372,6 +2377,7 @@ namespace System.Xml.Serialization
                 int i,
                 MemberMapping mapping
             ) : this(outerClass, source, arraySource, arrayName, i, mapping, false, null) { }
+
             internal Member(
                 XmlSerializationReaderCodeGen outerClass,
                 string source,
@@ -2382,6 +2388,7 @@ namespace System.Xml.Serialization
                 string? choiceSource
             ) : this(outerClass, source, arraySource, arrayName, i, mapping, false, choiceSource)
             { }
+
             internal Member(
                 XmlSerializationReaderCodeGen outerClass,
                 string source,
@@ -2390,6 +2397,7 @@ namespace System.Xml.Serialization
                 MemberMapping mapping,
                 bool multiRef
             ) : this(outerClass, source, null, arrayName, i, mapping, multiRef, null) { }
+
             internal Member(
                 XmlSerializationReaderCodeGen outerClass,
                 string source,
@@ -4853,6 +4861,7 @@ namespace System.Xml.Serialization
             }
             return false;
         }
+
         private void WriteMemberElementsIf(
             Member[] members,
             Member? anyElement,
@@ -5087,6 +5096,7 @@ namespace System.Xml.Serialization
         {
             return GetArraySource(typeDesc, arrayName, false);
         }
+
         private string GetArraySource(TypeDesc typeDesc, string arrayName, bool multiRef)
         {
             string a = arrayName;
@@ -5920,6 +5930,7 @@ namespace System.Xml.Serialization
             Writer.Indent--;
             Writer.WriteLine("}");
         }
+
         private void WriteArrayLocalDecl(
             string typeName,
             string variableName,
@@ -5929,6 +5940,7 @@ namespace System.Xml.Serialization
         {
             RaCodeGen.WriteArrayLocalDecl(typeName, variableName, initValue, arrayTypeDesc);
         }
+
         private void WriteCreateInstance(
             string escapedName,
             string source,
@@ -5938,6 +5950,7 @@ namespace System.Xml.Serialization
         {
             RaCodeGen.WriteCreateInstance(escapedName, source, useReflection, ctorInaccessible);
         }
+
         private void WriteLocalDecl(
             string typeFullName,
             string variableName,

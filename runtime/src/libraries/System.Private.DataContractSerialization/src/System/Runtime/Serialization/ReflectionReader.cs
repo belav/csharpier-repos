@@ -352,6 +352,7 @@ namespace System.Runtime.Serialization
             ClassDataContract classContract,
             ref object obj
         );
+
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         protected abstract object? ReflectionReadDictionaryItem(
             XmlReaderDelegator xmlReader,

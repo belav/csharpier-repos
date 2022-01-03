@@ -12,14 +12,17 @@ namespace System.Reflection
         {
             return Attribute.GetCustomAttribute(element, attributeType);
         }
+
         public static Attribute? GetCustomAttribute(this Module element, Type attributeType)
         {
             return Attribute.GetCustomAttribute(element, attributeType);
         }
+
         public static Attribute? GetCustomAttribute(this MemberInfo element, Type attributeType)
         {
             return Attribute.GetCustomAttribute(element, attributeType);
         }
+
         public static Attribute? GetCustomAttribute(this ParameterInfo element, Type attributeType)
         {
             return Attribute.GetCustomAttribute(element, attributeType);
@@ -29,14 +32,17 @@ namespace System.Reflection
         {
             return (T?)GetCustomAttribute(element, typeof(T));
         }
+
         public static T? GetCustomAttribute<T>(this Module element) where T : Attribute
         {
             return (T?)GetCustomAttribute(element, typeof(T));
         }
+
         public static T? GetCustomAttribute<T>(this MemberInfo element) where T : Attribute
         {
             return (T?)GetCustomAttribute(element, typeof(T));
         }
+
         public static T? GetCustomAttribute<T>(this ParameterInfo element) where T : Attribute
         {
             return (T?)GetCustomAttribute(element, typeof(T));
@@ -50,6 +56,7 @@ namespace System.Reflection
         {
             return Attribute.GetCustomAttribute(element, attributeType, inherit);
         }
+
         public static Attribute? GetCustomAttribute(
             this ParameterInfo element,
             Type attributeType,
@@ -64,6 +71,7 @@ namespace System.Reflection
         {
             return (T?)GetCustomAttribute(element, typeof(T), inherit);
         }
+
         public static T? GetCustomAttribute<T>(this ParameterInfo element, bool inherit)
             where T : Attribute
         {
@@ -76,14 +84,17 @@ namespace System.Reflection
         {
             return Attribute.GetCustomAttributes(element);
         }
+
         public static IEnumerable<Attribute> GetCustomAttributes(this Module element)
         {
             return Attribute.GetCustomAttributes(element);
         }
+
         public static IEnumerable<Attribute> GetCustomAttributes(this MemberInfo element)
         {
             return Attribute.GetCustomAttributes(element);
         }
+
         public static IEnumerable<Attribute> GetCustomAttributes(this ParameterInfo element)
         {
             return Attribute.GetCustomAttributes(element);
@@ -96,6 +107,7 @@ namespace System.Reflection
         {
             return Attribute.GetCustomAttributes(element, inherit);
         }
+
         public static IEnumerable<Attribute> GetCustomAttributes(
             this ParameterInfo element,
             bool inherit
@@ -113,6 +125,7 @@ namespace System.Reflection
         {
             return Attribute.GetCustomAttributes(element, attributeType);
         }
+
         public static IEnumerable<Attribute> GetCustomAttributes(
             this Module element,
             Type attributeType
@@ -120,6 +133,7 @@ namespace System.Reflection
         {
             return Attribute.GetCustomAttributes(element, attributeType);
         }
+
         public static IEnumerable<Attribute> GetCustomAttributes(
             this MemberInfo element,
             Type attributeType
@@ -127,6 +141,7 @@ namespace System.Reflection
         {
             return Attribute.GetCustomAttributes(element, attributeType);
         }
+
         public static IEnumerable<Attribute> GetCustomAttributes(
             this ParameterInfo element,
             Type attributeType
@@ -140,15 +155,18 @@ namespace System.Reflection
         {
             return (IEnumerable<T>)GetCustomAttributes(element, typeof(T));
         }
+
         public static IEnumerable<T> GetCustomAttributes<T>(this Module element) where T : Attribute
         {
             return (IEnumerable<T>)GetCustomAttributes(element, typeof(T));
         }
+
         public static IEnumerable<T> GetCustomAttributes<T>(this MemberInfo element)
             where T : Attribute
         {
             return (IEnumerable<T>)GetCustomAttributes(element, typeof(T));
         }
+
         public static IEnumerable<T> GetCustomAttributes<T>(this ParameterInfo element)
             where T : Attribute
         {
@@ -163,6 +181,7 @@ namespace System.Reflection
         {
             return Attribute.GetCustomAttributes(element, attributeType, inherit);
         }
+
         public static IEnumerable<Attribute> GetCustomAttributes(
             this ParameterInfo element,
             Type attributeType,
@@ -177,6 +196,7 @@ namespace System.Reflection
         {
             return (IEnumerable<T>)GetCustomAttributes(element, typeof(T), inherit);
         }
+
         public static IEnumerable<T> GetCustomAttributes<T>(
             this ParameterInfo element,
             bool inherit
@@ -191,14 +211,17 @@ namespace System.Reflection
         {
             return Attribute.IsDefined(element, attributeType);
         }
+
         public static bool IsDefined(this Module element, Type attributeType)
         {
             return Attribute.IsDefined(element, attributeType);
         }
+
         public static bool IsDefined(this MemberInfo element, Type attributeType)
         {
             return Attribute.IsDefined(element, attributeType);
         }
+
         public static bool IsDefined(this ParameterInfo element, Type attributeType)
         {
             return Attribute.IsDefined(element, attributeType);
@@ -208,6 +231,7 @@ namespace System.Reflection
         {
             return Attribute.IsDefined(element, attributeType, inherit);
         }
+
         public static bool IsDefined(this ParameterInfo element, Type attributeType, bool inherit)
         {
             return Attribute.IsDefined(element, attributeType, inherit);

@@ -127,27 +127,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public override bool IsStatic => false;
         public override bool IsAbstract => false;
         public override bool IsSealed => false;
+
         // Pointers do not support boxing, so they really have no base type.
         internal override NamedTypeSymbol? BaseTypeNoUseSiteDiagnostics => null;
+
         internal override ManagedKind GetManagedKind(
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
         ) => ManagedKind.Unmanaged;
+
         internal override ObsoleteAttributeData? ObsoleteAttributeData => null;
+
         public override void Accept(CSharpSymbolVisitor visitor) =>
             visitor.VisitFunctionPointerType(this);
+
         public override TResult Accept<TResult>(CSharpSymbolVisitor<TResult> visitor) =>
             visitor.VisitFunctionPointerType(this);
+
         public override ImmutableArray<Symbol> GetMembers() => ImmutableArray<Symbol>.Empty;
+
         public override ImmutableArray<Symbol> GetMembers(string name) =>
             ImmutableArray<Symbol>.Empty;
+
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers() =>
             ImmutableArray<NamedTypeSymbol>.Empty;
+
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name) =>
             ImmutableArray<NamedTypeSymbol>.Empty;
+
         internal override TResult Accept<TArgument, TResult>(
             CSharpSymbolVisitor<TArgument, TResult> visitor,
             TArgument a
         ) => visitor.VisitFunctionPointerType(this, a);
+
         internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
             ConsList<TypeSymbol>? basesBeingResolved = null
         ) => ImmutableArray<NamedTypeSymbol>.Empty;

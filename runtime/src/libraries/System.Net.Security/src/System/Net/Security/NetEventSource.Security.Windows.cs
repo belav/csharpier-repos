@@ -75,6 +75,7 @@ namespace System.Net
                 InitializeSecurityContext(IdOf(credential), IdOf(context), targetName, inFlags);
             }
         }
+
         [Event(
             InitializeSecurityContextId,
             Keywords = Keywords.Default,
@@ -99,6 +100,7 @@ namespace System.Net
                 AcceptSecurityContext(IdOf(credential), IdOf(context), inFlags);
             }
         }
+
         [Event(
             AcceptSecuritContextId,
             Keywords = Keywords.Default,

@@ -342,6 +342,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         private static readonly object s_nullKey = new object();
+
         protected static object KeyForConstant(ConstantValue constantValue)
         {
             Debug.Assert((object)constantValue != null);

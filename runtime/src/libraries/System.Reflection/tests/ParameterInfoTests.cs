@@ -463,15 +463,18 @@ namespace System.Reflection.Tests
         public class ParameterInfoMetadata
         {
             public void Foo1(BindingFlags bf = BindingFlags.DeclaredOnly) { }
+
             public void Foo2(
                 [CustomBindingFlags(Value = BindingFlags.IgnoreCase)] BindingFlags bf
             ) { }
+
             public void Foo3(
                 [CustomBindingFlags(Value = BindingFlags.DeclaredOnly)]
                     BindingFlags bf = BindingFlags.FlattenHierarchy
             ) { }
 
             public void MethodWithCustomAttribute([My(2)] string str, int iValue, long lValue) { }
+
             public virtual void VirtualMethodWithCustomAttributes(
                 [My(3)] int val1,
                 [My(4)] int val2,
@@ -479,7 +482,9 @@ namespace System.Reflection.Tests
             ) { }
 
             public void Method1(string str, int iValue, long lValue) { }
+
             public void Method2() { }
+
             public void MethodWithArray(string[] strArray) { }
 
             public virtual void VirtualMethod(long data) { }
@@ -488,6 +493,7 @@ namespace System.Reflection.Tests
             {
                 str = "newstring";
             }
+
             public void MethodWithOutParameter(int i, out string str)
             {
                 str = "newstring";
@@ -497,31 +503,37 @@ namespace System.Reflection.Tests
             {
                 return 1;
             }
+
             public int MethodWithDefault2(string str = "abc")
             {
                 return 1;
             }
+
             public int MethodWithDefault3(bool result = false)
             {
                 return 1;
             }
+
             public int MethodWithDefault4(char c = '\0')
             {
                 return 1;
             }
 
             public void MethodWithDefaultDateTime(DateTime arg = default(DateTime)) { }
+
             public void MethodWithDefaultNullableDateTime(DateTime? arg = default(DateTime?)) { }
 
             public void MethodWithByRefLikeArgWithDefault(MyByRefLikeStruct arg = default) { }
 
             public void MethodWithEnum(AttributeTargets arg = AttributeTargets.All) { }
+
             public void MethodWithNullableEnum(AttributeTargets? arg = AttributeTargets.All) { }
 
             public int MethodWithOptionalAndNoDefault([Optional] object o)
             {
                 return 1;
             }
+
             public int MethodWithOptionalDefaultOutInMarshalParam(
                 [MarshalAs(UnmanagedType.LPWStr)] [Out] [In] string str = ""
             )
@@ -542,6 +554,7 @@ namespace System.Reflection.Tests
         public class GenericClass<T>
         {
             public void GenericMethod(T t) { }
+
             public string GenericMethodWithDefault(int i, T t = default(T))
             {
                 return "somestring";
@@ -551,6 +564,7 @@ namespace System.Reflection.Tests
         private class MyAttribute : Attribute
         {
             public int Value { get; private set; }
+
             internal MyAttribute(int i)
             {
                 Value = i;
@@ -575,7 +589,9 @@ namespace System.Reflection.Tests
         private sealed class PretendParent
         {
             public PretendParent(int a, int b) { }
+
             public void PretendMethod(int x, int y) { }
+
             public int this[int index1, int index2]
             {
                 get { throw null; }

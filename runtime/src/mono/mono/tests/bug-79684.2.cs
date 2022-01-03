@@ -11,6 +11,7 @@ namespace Tests
             | BindingFlags.NonPublic
             | BindingFlags.Instance
             | BindingFlags.Static;
+
         public static int Main()
         {
             foreach (MethodInfo m in typeof(Type[]).GetMethods(flags))

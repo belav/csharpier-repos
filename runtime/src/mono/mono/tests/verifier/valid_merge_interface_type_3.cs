@@ -18,6 +18,7 @@ public class Foo : Parent, ParentB
     {
         Console.WriteLine("Foo::Test");
     }
+
     public void TestB()
     {
         Console.WriteLine("Foo::TestB");
@@ -30,6 +31,7 @@ public class Bar : Parent, ParentB
     {
         Console.WriteLine("Bar::Test");
     }
+
     public void TestB()
     {
         Console.WriteLine("Bar::TestB");

@@ -44,26 +44,33 @@ namespace System.Threading.Tasks.Dataflow.Internal
     {
         /// <summary>The target block using this helper.</summary>
         private readonly ITargetBlock<TInput> _owningTarget;
+
         /// <summary>The messages in this target.</summary>
         private readonly SingleProducerSingleConsumerQueue<TInput> _messages =
             new SingleProducerSingleConsumerQueue<TInput>();
+
         /// <summary>The options to use to configure this block. The target core assumes these options are immutable.</summary>
         private readonly ExecutionDataflowBlockOptions _dataflowBlockOptions;
+
         /// <summary>An action to invoke for every accepted message.</summary>
         private readonly Action<TInput> _action;
 
         /// <summary>Exceptions that may have occurred and gone unhandled during processing.  This field is lazily initialized.</summary>
         private volatile List<Exception>? _exceptions;
+
         /// <summary>Whether to stop accepting new messages.</summary>
         private volatile bool _decliningPermanently;
+
         /// <summary>A task has reserved the right to run the completion routine.</summary>
         private volatile bool _completionReserved;
+
         /// <summary>
         /// The Task currently active to process the block. This field is used to synchronize between producer and consumer,
         /// and it should not be set to null once the block completes, as doing so would allow for races where the producer
         /// gets another consumer task queued even though the block has completed.
         /// </summary>
         private volatile Task? _activeConsumer;
+
         /// <summary>A task representing the completion of the block.  This field is lazily initialized.</summary>
         private TaskCompletionSource<VoidResult>? _completionTask;
 
@@ -478,16 +485,19 @@ namespace System.Threading.Tasks.Dataflow.Internal
                       : 0;
                 }
             }
+
             /// <summary>Gets the DataflowBlockOptions used to configure this block.</summary>
             internal ExecutionDataflowBlockOptions DataflowBlockOptions
             {
                 get { return _target._dataflowBlockOptions; }
             }
+
             /// <summary>Gets whether the block is declining further messages.</summary>
             internal bool IsDecliningPermanently
             {
                 get { return _target._decliningPermanently; }
             }
+
             /// <summary>Gets whether the block is completed.</summary>
             internal bool IsCompleted
             {

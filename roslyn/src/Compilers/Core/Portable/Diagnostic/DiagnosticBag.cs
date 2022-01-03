@@ -331,6 +331,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         private static readonly ObjectPool<DiagnosticBag> s_poolInstance = CreatePool(128);
+
         private static ObjectPool<DiagnosticBag> CreatePool(int size)
         {
             return new ObjectPool<DiagnosticBag>(() => new DiagnosticBag(), size);

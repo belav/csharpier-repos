@@ -167,6 +167,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order3.or
     public class C
     {
         public delegate T Foo<S, out T, U, V>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -224,6 +225,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order4.or
     public class C
     {
         public delegate T Foo<S, out T, U, V>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -446,6 +448,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.valtype02
     public class C
     {
         public delegate T Foo<out T>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -619,6 +622,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.valtype04
     public class C
     {
         public delegate T Foo<out T>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

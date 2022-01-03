@@ -9,11 +9,13 @@ internal class TestApp
     {
         return init.q.val;
     }
+
     private static int test_0_1(int num, AA init, AA zero)
     {
         zero.q.val = num;
         return zero.q.val;
     }
+
     private static int test_0_2(int num, AA init, AA zero)
     {
         if (init.q != zero.q)
@@ -21,66 +23,81 @@ internal class TestApp
         else
             return zero.q.val;
     }
+
     private static int test_0_3(int num, AA init, AA zero)
     {
         return init.q.val < num + 1 ? 100 : -1;
     }
+
     private static int test_0_4(int num, AA init, AA zero)
     {
         return (init.q.val > zero.q.val ? 1 : 0) + 99;
     }
+
     private static int test_0_5(int num, AA init, AA zero)
     {
         return (init.q.val ^ zero.q.val) | num;
     }
+
     private static int test_0_6(int num, AA init, AA zero)
     {
         zero.q.val |= init.q.val;
         return zero.q.val & num;
     }
+
     private static int test_0_7(int num, AA init, AA zero)
     {
         return init.q.val >> zero.q.val;
     }
+
     private static int test_0_8(int num, AA init, AA zero)
     {
         return AA.a_init[init.q.val].q.val;
     }
+
     private static int test_0_9(int num, AA init, AA zero)
     {
         return AA.aa_init[num - 100, (init.q.val | 1) - 2, 1 + zero.q.val].q.val;
     }
+
     private static int test_0_10(int num, AA init, AA zero)
     {
         object bb = init.q.val;
         return (int)bb;
     }
+
     private static int test_0_11(int num, AA init, AA zero)
     {
         double dbl = init.q.val;
         return (int)dbl;
     }
+
     private static int test_0_12(int num, AA init, AA zero)
     {
         return AA.call_target(init.q).val;
     }
+
     private static int test_0_13(int num, AA init, AA zero)
     {
         return AA.call_target_ref(ref init.q).val;
     }
+
     private static int test_0_14(int num, AA init, AA zero)
     {
         return init.q.ret_code();
     }
+
     private static int test_1_0(int num, ref AA r_init, ref AA r_zero)
     {
         return r_init.q.val;
     }
+
     private static int test_1_1(int num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q.val = num;
         return r_zero.q.val;
     }
+
     private static int test_1_2(int num, ref AA r_init, ref AA r_zero)
     {
         if (r_init.q != r_zero.q)
@@ -88,66 +105,81 @@ internal class TestApp
         else
             return r_zero.q.val;
     }
+
     private static int test_1_3(int num, ref AA r_init, ref AA r_zero)
     {
         return r_init.q.val < num + 1 ? 100 : -1;
     }
+
     private static int test_1_4(int num, ref AA r_init, ref AA r_zero)
     {
         return (r_init.q.val > r_zero.q.val ? 1 : 0) + 99;
     }
+
     private static int test_1_5(int num, ref AA r_init, ref AA r_zero)
     {
         return (r_init.q.val ^ r_zero.q.val) | num;
     }
+
     private static int test_1_6(int num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q.val |= r_init.q.val;
         return r_zero.q.val & num;
     }
+
     private static int test_1_7(int num, ref AA r_init, ref AA r_zero)
     {
         return r_init.q.val >> r_zero.q.val;
     }
+
     private static int test_1_8(int num, ref AA r_init, ref AA r_zero)
     {
         return AA.a_init[r_init.q.val].q.val;
     }
+
     private static int test_1_9(int num, ref AA r_init, ref AA r_zero)
     {
         return AA.aa_init[num - 100, (r_init.q.val | 1) - 2, 1 + r_zero.q.val].q.val;
     }
+
     private static int test_1_10(int num, ref AA r_init, ref AA r_zero)
     {
         object bb = r_init.q.val;
         return (int)bb;
     }
+
     private static int test_1_11(int num, ref AA r_init, ref AA r_zero)
     {
         double dbl = r_init.q.val;
         return (int)dbl;
     }
+
     private static int test_1_12(int num, ref AA r_init, ref AA r_zero)
     {
         return AA.call_target(r_init.q).val;
     }
+
     private static int test_1_13(int num, ref AA r_init, ref AA r_zero)
     {
         return AA.call_target_ref(ref r_init.q).val;
     }
+
     private static int test_1_14(int num, ref AA r_init, ref AA r_zero)
     {
         return r_init.q.ret_code();
     }
+
     private static int test_2_0(int num)
     {
         return AA.a_init[num].q.val;
     }
+
     private static int test_2_1(int num)
     {
         AA.a_zero[num].q.val = num;
         return AA.a_zero[num].q.val;
     }
+
     private static int test_2_2(int num)
     {
         if (AA.a_init[num].q != AA.a_zero[num].q)
@@ -155,31 +187,38 @@ internal class TestApp
         else
             return AA.a_zero[num].q.val;
     }
+
     private static int test_2_3(int num)
     {
         return AA.a_init[num].q.val < num + 1 ? 100 : -1;
     }
+
     private static int test_2_4(int num)
     {
         return (AA.a_init[num].q.val > AA.a_zero[num].q.val ? 1 : 0) + 99;
     }
+
     private static int test_2_5(int num)
     {
         return (AA.a_init[num].q.val ^ AA.a_zero[num].q.val) | num;
     }
+
     private static int test_2_6(int num)
     {
         AA.a_zero[num].q.val |= AA.a_init[num].q.val;
         return AA.a_zero[num].q.val & num;
     }
+
     private static int test_2_7(int num)
     {
         return AA.a_init[num].q.val >> AA.a_zero[num].q.val;
     }
+
     private static int test_2_8(int num)
     {
         return AA.a_init[AA.a_init[num].q.val].q.val;
     }
+
     private static int test_2_9(int num)
     {
         return AA.aa_init[
@@ -188,37 +227,45 @@ internal class TestApp
             1 + AA.a_zero[num].q.val
         ].q.val;
     }
+
     private static int test_2_10(int num)
     {
         object bb = AA.a_init[num].q.val;
         return (int)bb;
     }
+
     private static int test_2_11(int num)
     {
         double dbl = AA.a_init[num].q.val;
         return (int)dbl;
     }
+
     private static int test_2_12(int num)
     {
         return AA.call_target(AA.a_init[num].q).val;
     }
+
     private static int test_2_13(int num)
     {
         return AA.call_target_ref(ref AA.a_init[num].q).val;
     }
+
     private static int test_2_14(int num)
     {
         return AA.a_init[num].q.ret_code();
     }
+
     private static int test_3_0(int num)
     {
         return AA.aa_init[0, num - 1, num / 100].q.val;
     }
+
     private static int test_3_1(int num)
     {
         AA.aa_zero[0, num - 1, num / 100].q.val = num;
         return AA.aa_zero[0, num - 1, num / 100].q.val;
     }
+
     private static int test_3_2(int num)
     {
         if (AA.aa_init[0, num - 1, num / 100].q != AA.aa_zero[0, num - 1, num / 100].q)
@@ -226,10 +273,12 @@ internal class TestApp
         else
             return AA.aa_zero[0, num - 1, num / 100].q.val;
     }
+
     private static int test_3_3(int num)
     {
         return AA.aa_init[0, num - 1, num / 100].q.val < num + 1 ? 100 : -1;
     }
+
     private static int test_3_4(int num)
     {
         return (
@@ -238,24 +287,29 @@ internal class TestApp
                     : 0
             ) + 99;
     }
+
     private static int test_3_5(int num)
     {
         return (AA.aa_init[0, num - 1, num / 100].q.val ^ AA.aa_zero[0, num - 1, num / 100].q.val)
             | num;
     }
+
     private static int test_3_6(int num)
     {
         AA.aa_zero[0, num - 1, num / 100].q.val |= AA.aa_init[0, num - 1, num / 100].q.val;
         return AA.aa_zero[0, num - 1, num / 100].q.val & num;
     }
+
     private static int test_3_7(int num)
     {
         return AA.aa_init[0, num - 1, num / 100].q.val >> AA.aa_zero[0, num - 1, num / 100].q.val;
     }
+
     private static int test_3_8(int num)
     {
         return AA.a_init[AA.aa_init[0, num - 1, num / 100].q.val].q.val;
     }
+
     private static int test_3_9(int num)
     {
         return AA.aa_init[
@@ -264,37 +318,45 @@ internal class TestApp
             1 + AA.aa_zero[0, num - 1, num / 100].q.val
         ].q.val;
     }
+
     private static int test_3_10(int num)
     {
         object bb = AA.aa_init[0, num - 1, num / 100].q.val;
         return (int)bb;
     }
+
     private static int test_3_11(int num)
     {
         double dbl = AA.aa_init[0, num - 1, num / 100].q.val;
         return (int)dbl;
     }
+
     private static int test_3_12(int num)
     {
         return AA.call_target(AA.aa_init[0, num - 1, num / 100].q).val;
     }
+
     private static int test_3_13(int num)
     {
         return AA.call_target_ref(ref AA.aa_init[0, num - 1, num / 100].q).val;
     }
+
     private static int test_3_14(int num)
     {
         return AA.aa_init[0, num - 1, num / 100].q.ret_code();
     }
+
     private static int test_4_0(int num)
     {
         return BB.f_init.q.val;
     }
+
     private static int test_4_1(int num)
     {
         BB.f_zero.q.val = num;
         return BB.f_zero.q.val;
     }
+
     private static int test_4_2(int num)
     {
         if (BB.f_init.q != BB.f_zero.q)
@@ -302,61 +364,75 @@ internal class TestApp
         else
             return BB.f_zero.q.val;
     }
+
     private static int test_4_3(int num)
     {
         return BB.f_init.q.val < num + 1 ? 100 : -1;
     }
+
     private static int test_4_4(int num)
     {
         return (BB.f_init.q.val > BB.f_zero.q.val ? 1 : 0) + 99;
     }
+
     private static int test_4_5(int num)
     {
         return (BB.f_init.q.val ^ BB.f_zero.q.val) | num;
     }
+
     private static int test_4_6(int num)
     {
         BB.f_zero.q.val |= BB.f_init.q.val;
         return BB.f_zero.q.val & num;
     }
+
     private static int test_4_7(int num)
     {
         return BB.f_init.q.val >> BB.f_zero.q.val;
     }
+
     private static int test_4_8(int num)
     {
         return AA.a_init[BB.f_init.q.val].q.val;
     }
+
     private static int test_4_9(int num)
     {
         return AA.aa_init[num - 100, (BB.f_init.q.val | 1) - 2, 1 + BB.f_zero.q.val].q.val;
     }
+
     private static int test_4_10(int num)
     {
         object bb = BB.f_init.q.val;
         return (int)bb;
     }
+
     private static int test_4_11(int num)
     {
         double dbl = BB.f_init.q.val;
         return (int)dbl;
     }
+
     private static int test_4_12(int num)
     {
         return AA.call_target(BB.f_init.q).val;
     }
+
     private static int test_4_13(int num)
     {
         return AA.call_target_ref(ref BB.f_init.q).val;
     }
+
     private static int test_4_14(int num)
     {
         return BB.f_init.q.ret_code();
     }
+
     private static int test_5_0(int num)
     {
         return ((AA)AA.b_init).q.val;
     }
+
     private static int test_6_0(int num, TypedReference tr_init)
     {
         return __refvalue(tr_init, AA).q.val;

@@ -4,6 +4,7 @@
 // long chain of methods
 
 using System;
+
 internal class test
 {
     private static int f1(

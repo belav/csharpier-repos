@@ -208,6 +208,7 @@ namespace System.Net.Http.Json.Functional.Tests
                 }
             );
         }
+
         [Fact]
         public async Task EnsureDefaultJsonSerializerOptionsAsync()
         {

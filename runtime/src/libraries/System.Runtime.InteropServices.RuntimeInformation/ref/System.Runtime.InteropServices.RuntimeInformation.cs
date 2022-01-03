@@ -15,6 +15,7 @@ namespace System.Runtime.InteropServices
         Wasm = 4,
         S390x = 5,
     }
+
     public readonly partial struct OSPlatform
         : System.IEquatable<System.Runtime.InteropServices.OSPlatform>
     {
@@ -36,24 +37,29 @@ namespace System.Runtime.InteropServices
         {
             get { throw null; }
         }
+
         public static System.Runtime.InteropServices.OSPlatform Create(string osPlatform)
         {
             throw null;
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public bool Equals(System.Runtime.InteropServices.OSPlatform other)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public static bool operator ==(
             System.Runtime.InteropServices.OSPlatform left,
             System.Runtime.InteropServices.OSPlatform right
@@ -61,6 +67,7 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public static bool operator !=(
             System.Runtime.InteropServices.OSPlatform left,
             System.Runtime.InteropServices.OSPlatform right
@@ -68,11 +75,13 @@ namespace System.Runtime.InteropServices
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public static partial class RuntimeInformation
     {
         public static string FrameworkDescription
@@ -95,6 +104,7 @@ namespace System.Runtime.InteropServices
         {
             get { throw null; }
         }
+
         public static bool IsOSPlatform(System.Runtime.InteropServices.OSPlatform osPlatform)
         {
             throw null;

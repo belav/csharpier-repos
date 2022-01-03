@@ -72,6 +72,7 @@ namespace Thunkerator
                 NativeTypeName2 = ThunkTypeName;
             }
         }
+
         public readonly string ThunkTypeName;
         public readonly string NativeTypeName;
         public readonly string NativeTypeName2;
@@ -193,6 +194,7 @@ namespace Thunkerator
             FUNCTIONS,
             IFDEFING
         }
+
         static IEnumerable<FunctionDecl> ParseInput(TextReader tr)
         {
             Dictionary<string, TypeReplacement> ThunkReturnTypes = new Dictionary<

@@ -20,6 +20,7 @@ internal class Node
         name = s;
     }
 }
+
 internal class NodeFactory
 {
     public Node Conditional(Node condition, Node trueBranch, Node falseBranch)

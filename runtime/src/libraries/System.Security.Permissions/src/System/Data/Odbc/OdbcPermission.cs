@@ -17,14 +17,18 @@ namespace System.Data.Odbc
     public sealed class OdbcPermission : DBDataPermission
     {
         public OdbcPermission() : base(default(PermissionState)) { }
+
         public OdbcPermission(PermissionState state) : base(default(PermissionState)) { }
+
         public OdbcPermission(PermissionState state, bool allowBlankPassword)
             : base(default(PermissionState)) { }
+
         public override void Add(
             string connectionString,
             string restrictions,
             KeyRestrictionBehavior behavior
         ) { }
+
         public override IPermission Copy()
         {
             return null;

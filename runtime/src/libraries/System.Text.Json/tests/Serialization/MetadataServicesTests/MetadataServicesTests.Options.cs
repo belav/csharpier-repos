@@ -113,6 +113,7 @@ namespace System.Text.Json.Tests.Serialization
         {
             public MyJsonContextThatSetsOptionsInParameterlessCtor()
                 : base(new JsonSerializerOptions()) { }
+
             public override JsonTypeInfo? GetTypeInfo(Type type) =>
                 throw new NotImplementedException();
         }

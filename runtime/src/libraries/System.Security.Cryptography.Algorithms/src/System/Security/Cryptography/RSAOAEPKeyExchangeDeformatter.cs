@@ -11,6 +11,7 @@ namespace System.Security.Cryptography
         private RSA? _rsaKey;
 
         public RSAOAEPKeyExchangeDeformatter() { }
+
         public RSAOAEPKeyExchangeDeformatter(AsymmetricAlgorithm key)
         {
             if (key == null)

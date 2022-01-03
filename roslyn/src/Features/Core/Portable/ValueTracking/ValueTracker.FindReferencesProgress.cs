@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.ValueTracking
               IStreamingProgressTracker
         {
             private readonly OperationCollector _operationCollector;
+
             public FindReferencesProgress(OperationCollector valueTrackingProgressCollector)
             {
                 _operationCollector = valueTrackingProgressCollector;

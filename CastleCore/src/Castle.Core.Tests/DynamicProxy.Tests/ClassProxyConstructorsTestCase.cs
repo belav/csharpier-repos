@@ -83,6 +83,7 @@ namespace Castle.DynamicProxy.Tests
         {
             generator.CreateClassProxy(typeof(HasCtorWithParamsStrings), new object[] { });
         }
+
         [Test]
         public void Can_pass_params_arguments_inline2()
         {

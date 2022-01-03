@@ -27,6 +27,7 @@ public class ResponseCachingPolicyProviderTests
         Assert.True(new ResponseCachingPolicyProvider().AttemptResponseCaching(context));
         Assert.Empty(sink.Writes);
     }
+
     public static TheoryData<string> NonCacheableMethods
     {
         get

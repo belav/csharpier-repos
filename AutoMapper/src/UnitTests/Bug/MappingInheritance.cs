@@ -95,14 +95,18 @@
         }
 
         public class Order : Base<Order> { }
+
         public class OnlineOrder : Order { }
+
         public class MailOrder : Order
         {
             public int NewId { get; set; }
         }
 
         public class OrderDto { }
+
         public class OnlineOrderDto : OrderDto { }
+
         public class MailOrderDto : OrderDto
         {
             public int NewId { get; set; }

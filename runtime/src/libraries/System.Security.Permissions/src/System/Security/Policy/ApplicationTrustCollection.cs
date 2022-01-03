@@ -8,6 +8,7 @@ namespace System.Security.Policy
     public sealed partial class ApplicationTrustCollection : ICollection, IEnumerable
     {
         internal ApplicationTrustCollection() { }
+
         public int Count
         {
             get { return 0; }
@@ -28,14 +29,20 @@ namespace System.Security.Policy
         {
             get { return null; }
         }
+
         public int Add(ApplicationTrust trust)
         {
             return 0;
         }
+
         public void AddRange(ApplicationTrust[] trusts) { }
+
         public void AddRange(ApplicationTrustCollection trusts) { }
+
         public void Clear() { }
+
         public void CopyTo(ApplicationTrust[] array, int index) { }
+
         public ApplicationTrustCollection Find(
             ApplicationIdentity applicationIdentity,
             ApplicationVersionMatch versionMatch
@@ -43,18 +50,25 @@ namespace System.Security.Policy
         {
             return default(ApplicationTrustCollection);
         }
+
         public ApplicationTrustEnumerator GetEnumerator()
         {
             return new ApplicationTrustEnumerator();
         }
+
         public void Remove(ApplicationTrust trust) { }
+
         public void Remove(
             ApplicationIdentity applicationIdentity,
             ApplicationVersionMatch versionMatch
         ) { }
+
         public void RemoveRange(ApplicationTrust[] trusts) { }
+
         public void RemoveRange(ApplicationTrustCollection trusts) { }
+
         void ICollection.CopyTo(Array array, int index) { }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

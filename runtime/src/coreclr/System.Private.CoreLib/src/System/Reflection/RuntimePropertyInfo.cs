@@ -96,6 +96,7 @@ namespace System.Reflection
                 return m_signature;
             }
         }
+
         internal bool EqualsSig(RuntimePropertyInfo target)
         {
             // @Asymmetry - Legacy policy is to remove duplicate properties, including hidden properties.
@@ -128,6 +129,7 @@ namespace System.Reflection
 
             return Signature.CompareSig(this.Signature, target.Signature);
         }
+
         internal BindingFlags BindingFlags => m_bindingFlags;
         #endregion
 
@@ -201,10 +203,12 @@ namespace System.Reflection
         public override int MetadataToken => m_token;
 
         public override Module Module => GetRuntimeModule();
+
         internal RuntimeModule GetRuntimeModule()
         {
             return m_declaringType.GetRuntimeModule();
         }
+
         public override bool IsCollectible => m_declaringType.IsCollectible;
         #endregion
 

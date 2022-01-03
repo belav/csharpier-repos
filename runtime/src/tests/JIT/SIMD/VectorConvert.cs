@@ -20,6 +20,7 @@ partial class VectorTest
     };
 
     static Random random;
+
     // Arrays to use for creating random Vectors.
     static Double[] doubles;
     static Single[] singles;

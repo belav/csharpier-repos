@@ -81,6 +81,7 @@ namespace System.Dynamic.Utils
             mi.IsConstructor ? mi.DeclaringType! : ((MethodInfo)mi).ReturnType;
 
         public static TypeCode GetTypeCode(this Type type) => Type.GetTypeCode(type);
+
         internal static ParameterInfo[] GetParametersCached(this MethodBase method)
         {
             CacheDict<MethodBase, ParameterInfo[]> pic = s_paramInfoCache;

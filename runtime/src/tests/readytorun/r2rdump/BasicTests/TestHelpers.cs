@@ -87,6 +87,7 @@ namespace R2RDumpTest
                 return XmlNodeFullName(x).Equals(XmlNodeFullName(y))
                     && x.InnerText.Equals(y.InnerText);
             }
+
             public int GetHashCode(XmlNode obj)
             {
                 return 0;

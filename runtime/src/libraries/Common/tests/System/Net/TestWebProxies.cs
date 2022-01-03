@@ -20,7 +20,9 @@ namespace System.Net.Test.Common
         }
 
         public ICredentials Credentials { get; set; }
+
         public Uri GetProxy(Uri destination) => _uri;
+
         public bool IsBypassed(Uri host) => _bypass;
     }
 }

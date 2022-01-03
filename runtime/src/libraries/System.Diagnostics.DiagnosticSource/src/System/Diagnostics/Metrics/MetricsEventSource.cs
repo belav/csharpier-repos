@@ -50,10 +50,12 @@ namespace System.Diagnostics.Metrics
             /// Indicates diagnostics messages from MetricsEventSource should be included.
             /// </summary>
             public const EventKeywords Messages = (EventKeywords)0x1;
+
             /// <summary>
             /// Indicates that all the time series data points should be included
             /// </summary>
             public const EventKeywords TimeSeriesValues = (EventKeywords)0x2;
+
             /// <summary>
             /// Indicates that instrument published notifications should be included
             /// </summary>

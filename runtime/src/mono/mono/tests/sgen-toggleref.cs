@@ -35,6 +35,7 @@ public struct Helper
     {
         [FieldOffset(0)]
         public ObjectWrapper AsObject;
+
         [FieldOffset(0)]
         public IntPtrWrapper AsIntPtr;
     }

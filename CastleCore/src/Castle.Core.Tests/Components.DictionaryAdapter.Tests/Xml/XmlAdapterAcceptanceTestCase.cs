@@ -253,6 +253,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         public interface IBar
         {
             IFoo Foo { get; set; }
+
             [XPath("b:Foo/@Name")]
             string FooName { get; }
         }
@@ -984,11 +985,14 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             [XmlAttribute]
             string Name { get; set; }
+
             [XmlAttribute]
             int? GamesPlayed { get; set; }
             int? MaxPlayers { get; set; }
+
             [XmlElement("AmountDue")]
             decimal Balance { get; set; }
+
             [XmlArray("Roster", IsNullable = true), XmlArrayItem("Participant"), RemoveIfEmpty]
             IBindingList<IPlayer> Players { get; }
         }
@@ -1006,18 +1010,25 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             Division Division { get; set; }
             DateTime StartsOn { get; set; }
             DateTime EndsOn { get; set; }
+
             [XPath("sum(rise:League/rise:Team/rise:AmountDue)")]
             decimal Balance { get; }
+
             [XmlElement("Address", Namespace = "Common")]
             IAddress Location { get; set; }
+
             [Key("League"), XmlArrayItem("Team")]
             IBindingList<ITeam> Teams { get; set; }
+
             [XPath("rise:League/rise:Team")]
             ITeam[] TeamsArray { get; }
+
             [XPath("rise:League/rise:Team[position()=1]/@Name")]
             string FirstTeamName { get; }
+
             [XPath("Documentation/Notes")]
             string Notes { get; set; }
+
             [XmlElement("Tag")]
             string[] Tags { get; set; }
             XmlElement ExtraStuff { get; set; }
@@ -1279,6 +1290,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
     public interface IEmployee
     {
         string Name { get; set; }
+
         [IfExists]
         IEmployee Supervisor { get; set; }
         Employment Job { get; set; }

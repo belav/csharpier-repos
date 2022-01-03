@@ -26,10 +26,12 @@ namespace System.Diagnostics.Eventing.Reader
         /// events buffer holds batched event (handles).
         /// </summary>
         private IntPtr[] _eventsBuffer;
+
         /// <summary>
         /// The current index where the function GetNextEvent is (inside the eventsBuffer).
         /// </summary>
         private int _currentIndex;
+
         /// <summary>
         /// The number of events read from the batch into the eventsBuffer
         /// </summary>

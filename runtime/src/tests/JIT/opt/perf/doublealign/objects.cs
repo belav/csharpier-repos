@@ -16,6 +16,7 @@ public class Class1
         m_d3 = d3;
         _pLink = c;
     }
+
     public double m_d1;
     public byte m_b;
     public double m_d2;

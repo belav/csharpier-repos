@@ -10329,39 +10329,50 @@ namespace System.Tests
         public class EqualsOverrider
         {
             public int Value { get; set; }
+
             public override bool Equals(object other) =>
                 other is EqualsOverrider && ((EqualsOverrider)other).Value == Value;
+
             public override int GetHashCode() => Value;
         }
 
         public class NonGenericClass1 { }
+
         public class NonGenericClass2 { }
 
         public class NonGenericSubClass2 : NonGenericClass2 { }
+
         public class NonGenericSubClass1 : NonGenericClass1 { }
 
         public class GenericClass<T> { }
+
         public struct GenericStruct<T> { }
 
         public interface NonGenericInterface1 { }
+
         public interface NonGenericInterface2 { }
+
         public interface GenericInterface<T> { }
 
         public struct StructWithNonGenericInterface1 : NonGenericInterface1 { }
+
         public struct StructWithNonGenericInterface1_2
             : NonGenericInterface1,
               NonGenericInterface2 { }
 
         public class ClassWithNonGenericInterface1 : NonGenericInterface1 { }
+
         public class ClassWithNonGenericInterface1_2
             : NonGenericInterface1,
               NonGenericInterface2 { }
 
         public interface NonGenericInterfaceWithNonGenericInterface1 : NonGenericInterface1 { }
+
         public class ClassWithNonGenericInterfaceWithNonGenericInterface1
             : NonGenericInterfaceWithNonGenericInterface1 { }
 
         public abstract class AbstractClass { }
+
         public static class StaticClass { }
 
         public enum SByteEnum : sbyte

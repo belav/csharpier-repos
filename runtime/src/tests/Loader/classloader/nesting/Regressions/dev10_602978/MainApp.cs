@@ -9,6 +9,7 @@ public class RemoteBase
     {
         string Touch();
     }
+
     protected static string UseIProtected(IProtected intrf)
     {
         return intrf.Touch();

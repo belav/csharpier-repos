@@ -40,12 +40,16 @@ namespace System.Threading.Tasks.Dataflow
     {
         /// <summary>The source side.</summary>
         private readonly BroadcastingSourceCore<T> _source;
+
         /// <summary>Bounding state for when the block is executing in bounded mode.</summary>
         private readonly BoundingStateWithPostponedAndTask<T>? _boundingState;
+
         /// <summary>Whether all future messages should be declined.</summary>
         private bool _decliningPermanently;
+
         /// <summary>A task has reserved the right to run the completion routine.</summary>
         private bool _completionReserved;
+
         /// <summary>Gets the lock used to synchronize incoming requests.</summary>
         private object IncomingLock
         {
@@ -578,6 +582,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { return _source.GetDebuggingInformation().HasValue; }
         }
+
         /// <summary>Gets a value to be used for the DebuggerDisplayAttribute.  This must not throw even if HasValue is false.</summary>
         private T ValueForDebugger
         {
@@ -605,6 +610,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             /// <summary>The BroadcastBlock being debugged.</summary>
             private readonly BroadcastBlock<T> _broadcastBlock;
+
             /// <summary>Debug info about the source side of the broadcast.</summary>
             private readonly BroadcastingSourceCore<T>.DebuggingInformation _sourceDebuggingInformation;
 
@@ -625,11 +631,13 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _sourceDebuggingInformation.InputQueue; }
             }
+
             /// <summary>Gets whether the broadcast has a current value.</summary>
             public bool HasValue
             {
                 get { return _broadcastBlock.HasValueForDebugger; }
             }
+
             /// <summary>Gets the broadcast's current value.</summary>
             public T Value
             {
@@ -647,16 +655,19 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _sourceDebuggingInformation.DataflowBlockOptions; }
             }
+
             /// <summary>Gets whether the block is declining further messages.</summary>
             public bool IsDecliningPermanently
             {
                 get { return _broadcastBlock._decliningPermanently; }
             }
+
             /// <summary>Gets whether the block is completed.</summary>
             public bool IsCompleted
             {
                 get { return _sourceDebuggingInformation.IsCompleted; }
             }
+
             /// <summary>Gets the block's Id.</summary>
             public int Id
             {
@@ -668,6 +679,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _sourceDebuggingInformation.LinkedTargets; }
             }
+
             /// <summary>Gets the set of all targets linked from this block.</summary>
             public ITargetBlock<T>? NextMessageReservedFor
             {
@@ -682,11 +694,14 @@ namespace System.Threading.Tasks.Dataflow
         {
             /// <summary>A registry used to store all linked targets and information about them.</summary>
             private readonly TargetRegistry<TOutput> _targetRegistry;
+
             /// <summary>All of the output messages queued up to be received by consumers/targets.</summary>
             private readonly Queue<TOutput> _messages = new Queue<TOutput>();
+
             /// <summary>A TaskCompletionSource that represents the completion of this block.</summary>
             private readonly TaskCompletionSource<VoidResult> _completionTask =
                 new TaskCompletionSource<VoidResult>();
+
             /// <summary>
             /// An action to be invoked on the owner block when an item is removed.
             /// This may be null if the owner block doesn't need to be notified.
@@ -698,6 +713,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _completionTask; }
             }
+
             /// <summary>Gets the object to use as the value lock.</summary>
             private object ValueLock
             {
@@ -706,27 +722,37 @@ namespace System.Threading.Tasks.Dataflow
 
             /// <summary>The source utilize this helper.</summary>
             private readonly BroadcastBlock<TOutput> _owningSource;
+
             /// <summary>The options used to configure this block's execution.</summary>
             private readonly DataflowBlockOptions _dataflowBlockOptions;
+
             /// <summary>The cloning function to use.</summary>
             private readonly Func<TOutput, TOutput>? _cloningFunction;
 
             /// <summary>An indicator whether _currentMessage has a value.</summary>
             private bool _currentMessageIsValid;
+
             /// <summary>The message currently being broadcast.</summary>
             private TOutput? _currentMessage;
+
             /// <summary>The target that the next message is reserved for, or null if nothing is reserved.</summary>
             private ITargetBlock<TOutput>? _nextMessageReservedFor;
+
             /// <summary>Whether this block should again attempt to offer messages to targets.</summary>
             private bool _enableOffering;
+
             /// <summary>Whether all future messages should be declined.</summary>
             private bool _decliningPermanently;
+
             /// <summary>The task used to process the output and offer it to targets.</summary>
             private Task? _taskForOutputProcessing;
+
             /// <summary>Exceptions that may have occurred and gone unhandled during processing.</summary>
             private List<Exception>? _exceptions;
+
             /// <summary>Counter for message IDs unique within this source block.</summary>
             private long _nextMessageId = 1; // We are going to use this value before incrementing.
+
             /// <summary>Whether someone has reserved the right to call CompleteBlockOncePossible.</summary>
             private bool _completionReserved;
 
@@ -1528,16 +1554,19 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     get { return _source._currentMessageIsValid; }
                 }
+
                 /// <summary>Gets the value of the source's current message.</summary>
                 public TOutput Value
                 {
                     get { return _source._currentMessage!; }
                 }
+
                 /// <summary>Gets the messages available for receiving.</summary>
                 public IEnumerable<TOutput> InputQueue
                 {
                     get { return _source._messages.ToList(); }
                 }
+
                 /// <summary>Gets the task being used for output processing.</summary>
                 public Task? TaskForOutputProcessing
                 {
@@ -1549,6 +1578,7 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     get { return _source._dataflowBlockOptions; }
                 }
+
                 /// <summary>Gets whether the block is completed.</summary>
                 public bool IsCompleted
                 {
@@ -1560,6 +1590,7 @@ namespace System.Threading.Tasks.Dataflow
                 {
                     get { return _source._targetRegistry; }
                 }
+
                 /// <summary>Gets the target that holds a reservation on the next message, if any.</summary>
                 public ITargetBlock<TOutput>? NextMessageReservedFor
                 {

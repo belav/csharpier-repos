@@ -14,6 +14,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int Number { get; set; }
         }
+
         class Destination
         {
             public int Number { get; set; }
@@ -23,6 +24,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int Number { get; set; }
         }
+
         class Destination1
         {
             public int Number { get; set; }
@@ -32,6 +34,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int Number { get; set; }
         }
+
         class Destination2
         {
             public int Number { get; set; }
@@ -78,11 +81,13 @@ namespace AutoMapper.UnitTests.Bug
             _destination2.Number.ShouldBe(-1);
         }
     }
+
     public class ForAllMapsWithConstructors : AutoMapperSpecBase
     {
         class Source
         {
         }
+
         class Destination
         {
             public Destination(int first, int second)
@@ -90,9 +95,11 @@ namespace AutoMapper.UnitTests.Bug
                 First = first;
                 Second = second;
             }
+
             public int First { get; }
             public int Second { get; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -102,6 +109,7 @@ namespace AutoMapper.UnitTests.Bug
                         .ForCtorParam("first", o => o.MapFrom(s => 1));
                 }
             );
+
         [Fact]
         public void Should_map_ok()
         {

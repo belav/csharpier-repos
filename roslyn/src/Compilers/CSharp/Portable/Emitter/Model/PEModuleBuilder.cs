@@ -803,6 +803,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             return seenTopLevelForwardedTypes;
         }
+
 #nullable disable
 
         private void ReportExportedTypeNameCollisions(
@@ -990,6 +991,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 stack.Free();
             }
         }
+
 #nullable disable
 
         internal IEnumerable<AssemblySymbol> GetReferencedAssembliesUsedSoFar()

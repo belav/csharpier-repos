@@ -919,6 +919,7 @@ namespace System.Numerics.Tests
             BigInteger bigInteger = new BigInteger(value);
             VerifySByteExplicitCastFromBigInteger(value, bigInteger);
         }
+
         private static void VerifySByteExplicitCastFromBigInteger(
             sbyte value,
             BigInteger bigInteger
@@ -932,6 +933,7 @@ namespace System.Numerics.Tests
             BigInteger bigInteger = new BigInteger(value);
             VerifyUInt16ExplicitCastFromBigInteger(value, bigInteger);
         }
+
         private static void VerifyUInt16ExplicitCastFromBigInteger(
             ushort value,
             BigInteger bigInteger
@@ -945,6 +947,7 @@ namespace System.Numerics.Tests
             BigInteger bigInteger = new BigInteger(value);
             VerifyInt16ExplicitCastFromBigInteger(value, bigInteger);
         }
+
         private static void VerifyInt16ExplicitCastFromBigInteger(
             short value,
             BigInteger bigInteger
@@ -958,6 +961,7 @@ namespace System.Numerics.Tests
             BigInteger bigInteger = new BigInteger(value);
             VerifyUInt32ExplicitCastFromBigInteger(value, bigInteger);
         }
+
         private static void VerifyUInt32ExplicitCastFromBigInteger(
             uint value,
             BigInteger bigInteger
@@ -971,6 +975,7 @@ namespace System.Numerics.Tests
             BigInteger bigInteger = new BigInteger(value);
             VerifyInt32ExplicitCastFromBigInteger(value, bigInteger);
         }
+
         private static void VerifyInt32ExplicitCastFromBigInteger(int value, BigInteger bigInteger)
         {
             Assert.Equal(value, (int)bigInteger);
@@ -981,6 +986,7 @@ namespace System.Numerics.Tests
             BigInteger bigInteger = new BigInteger(value);
             VerifyUInt64ExplicitCastFromBigInteger(value, bigInteger);
         }
+
         private static void VerifyUInt64ExplicitCastFromBigInteger(
             ulong value,
             BigInteger bigInteger
@@ -994,6 +1000,7 @@ namespace System.Numerics.Tests
             BigInteger bigInteger = new BigInteger(value);
             VerifyInt64ExplicitCastFromBigInteger(value, bigInteger);
         }
+
         private static void VerifyInt64ExplicitCastFromBigInteger(long value, BigInteger bigInteger)
         {
             Assert.Equal(value, (long)bigInteger);
@@ -1004,6 +1011,7 @@ namespace System.Numerics.Tests
             BigInteger bigInteger = new BigInteger(value);
             VerifySingleExplicitCastFromBigInteger(value, bigInteger);
         }
+
         private static void VerifySingleExplicitCastFromBigInteger(
             float value,
             BigInteger bigInteger
@@ -1017,6 +1025,7 @@ namespace System.Numerics.Tests
             BigInteger bigInteger = new BigInteger(value);
             VerifyDoubleExplicitCastFromBigInteger(value, bigInteger);
         }
+
         private static void VerifyDoubleExplicitCastFromBigInteger(
             double value,
             BigInteger bigInteger
@@ -1030,6 +1039,7 @@ namespace System.Numerics.Tests
             BigInteger bigInteger = new BigInteger(value);
             VerifyDecimalExplicitCastFromBigInteger(value, bigInteger);
         }
+
         private static void VerifyDecimalExplicitCastFromBigInteger(
             decimal value,
             BigInteger bigInteger

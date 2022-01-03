@@ -82,9 +82,13 @@ namespace Microsoft.DotNet.Cli.Build
         }
 
         public Command Restore(params string[] args) => Exec("restore", args);
+
         public Command Build(params string[] args) => Exec("build", args);
+
         public Command Pack(params string[] args) => Exec("pack", args);
+
         public Command Test(params string[] args) => Exec("test", args);
+
         public Command Publish(params string[] args) => Exec("publish", args);
 
         public Command Store(params string[] args) => Exec("store", args);

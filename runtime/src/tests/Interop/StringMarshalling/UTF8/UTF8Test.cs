@@ -15,6 +15,7 @@ class UTF8StringTests
         [In, Out] [MarshalAs(UnmanagedType.LPUTF8Str)] string s,
         int index
     );
+
     public static void TestInOutStringParameter(string orgString, int index)
     {
         string passedString = orgString;
@@ -33,6 +34,7 @@ class UTF8StringTests
         [Out] [MarshalAs(UnmanagedType.LPUTF8Str)] string s,
         int index
     );
+
     public static void TestOutStringParameter(string orgString, int index)
     {
         string passedString = orgString;
@@ -49,6 +51,7 @@ class UTF8StringTests
         [MarshalAs(UnmanagedType.LPUTF8Str)] out string s,
         int index
     );
+
     public static void TestStringPassByOut(string orgString, int index)
     {
         // out string
@@ -65,6 +68,7 @@ class UTF8StringTests
         [MarshalAs(UnmanagedType.LPUTF8Str)] ref string s,
         int index
     );
+
     public static void TestStringPassByRef(string orgString, int index)
     {
         string orgCopy = new string(orgString.ToCharArray());
@@ -90,6 +94,7 @@ class UTF8StringBuilderTests
         [In, Out] [MarshalAs(UnmanagedType.LPUTF8Str)] StringBuilder s,
         int index
     );
+
     public static void TestInOutStringBuilderParameter(string expectedString, int index)
     {
         StringBuilder nativeStrBuilder = new StringBuilder(expectedString);
@@ -108,6 +113,7 @@ class UTF8StringBuilderTests
         [Out] [MarshalAs(UnmanagedType.LPUTF8Str)] StringBuilder s,
         int index
     );
+
     public static void TestOutStringBuilderParameter(string expectedString, int index)
     {
         // string builder capacity
@@ -123,6 +129,7 @@ class UTF8StringBuilderTests
     [DllImport("UTF8TestNative", CallingConvention = CallingConvention.Cdecl)]
     [return: MarshalAs(UnmanagedType.LPUTF8Str, SizeConst = 512)]
     public static extern StringBuilder StringBuilderParameterReturn(int index);
+
     public static void TestReturnStringBuilder(string expectedReturn, int index)
     {
         StringBuilder nativeString = StringBuilderParameterReturn(index);

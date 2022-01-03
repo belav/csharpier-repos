@@ -9,23 +9,28 @@ internal class ratnl
 {
     private long _nmr,
         _dnm;
+
     public ratnl(long n, long d)
     {
         _nmr = n;
         _dnm = d;
     }
+
     public static ratnl operator +(ratnl a, ratnl b)
     {
         return new ratnl(a._nmr + b._nmr, a._dnm + b._nmr);
     }
+
     public static ratnl operator -(ratnl a, ratnl b)
     {
         return new ratnl(a._nmr - b._nmr, a._dnm - b._nmr);
     }
+
     public static ratnl operator *(ratnl a, ratnl b)
     {
         return new ratnl(a._nmr * b._nmr, a._dnm * b._nmr);
     }
+
     public long p_nmr
     {
         get { return _nmr; }

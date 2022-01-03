@@ -109,6 +109,7 @@ namespace WebServer
             // Success.
             return true;
         }
+
         private static bool HandleChallengeResponseAuthentication(
             HttpContext context,
             string authType,

@@ -1235,6 +1235,7 @@ public enum MonoAotModulesTableLanguage
 internal sealed class CompilerCache
 {
     public CompilerCache() => FileHashes = new();
+
     public CompilerCache(IDictionary<string, string> oldHashes) => FileHashes = new(oldHashes);
 
     [JsonPropertyName("file_hashes")]

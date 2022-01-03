@@ -155,6 +155,7 @@ public class TailCallOptTest
         {
             Value = value;
         }
+
         public readonly double Value;
     }
 
@@ -165,6 +166,7 @@ public class TailCallOptTest
             Value1 = value1;
             Value2 = value2;
         }
+
         public readonly int Value1;
         public readonly int Value2;
     }

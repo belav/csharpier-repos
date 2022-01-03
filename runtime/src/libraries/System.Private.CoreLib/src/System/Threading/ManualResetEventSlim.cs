@@ -36,6 +36,7 @@ namespace System.Threading
         private const int DEFAULT_SPIN_SP = 1;
 
         private volatile object? m_lock;
+
         // A lock used for waiting and pulsing. Lazily initialized via EnsureLockObjectCreated()
 
         private volatile ManualResetEvent? m_eventObj; // A true Win32 event used for waiting.
@@ -60,6 +61,7 @@ namespace System.Threading
         private const int NumWaitersState_BitMask = unchecked((int)0x0007FFFF); // 0000 0000 0000 0111 1111 1111 1111 1111
         private const int NumWaitersState_ShiftCount = 0;
         private const int NumWaitersState_MaxValue = (1 << 19) - 1; // 512K-1
+
         // ----------- //
 
         /// <summary>
@@ -697,6 +699,7 @@ namespace System.Threading
         private static readonly Action<object?> s_cancellationTokenCallback = new Action<object?>(
             CancellationTokenCallback
         );
+
         private static void CancellationTokenCallback(object? obj)
         {
             Debug.Assert(obj is ManualResetEventSlim, "Expected a ManualResetEventSlim");

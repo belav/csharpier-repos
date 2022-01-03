@@ -41,5 +41,6 @@ class Repro
     }
 
     class U1 { }
+
     class U2 { }
 }

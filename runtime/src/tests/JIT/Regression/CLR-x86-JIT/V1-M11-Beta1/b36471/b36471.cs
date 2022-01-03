@@ -9,6 +9,7 @@ namespace Test
     class AA
     {
         public static object[] m_axStatic2 = null;
+
         public static void Static3()
         {
             bool flag1 = false,
@@ -29,6 +30,7 @@ namespace Test
                     throw new Exception();
             } while (flag3);
         }
+
         static int Main()
         {
             try

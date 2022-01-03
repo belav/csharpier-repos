@@ -183,6 +183,7 @@ namespace System.Buffers.Text.Tests
         }
 
         public static ReadOnlySpan<byte> ToUtf8Span(this string s) => Encoding.UTF8.GetBytes(s);
+
         public static string ToUtf16String(this Span<byte> span) =>
             Encoding.UTF8.GetString(span.ToArray());
     }

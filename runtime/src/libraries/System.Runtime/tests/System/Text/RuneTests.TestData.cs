@@ -181,6 +181,7 @@ namespace System.Text.Tests
                 }
             };
         }
+
         public static IEnumerable<object[]> IsValidTestData()
         {
             foreach (

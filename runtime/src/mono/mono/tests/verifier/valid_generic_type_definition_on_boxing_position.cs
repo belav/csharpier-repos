@@ -8,6 +8,7 @@ public class Bar<T>
 public class Foo<T>
 {
     public T Test { get; set; }
+
     public int Z(Bar<T> t)
     {
         return t.Z;
@@ -17,6 +18,7 @@ public class Foo<T>
 public struct Cat<T>
 {
     T t;
+
     public void Test()
     {
         Console.WriteLine(GetType());

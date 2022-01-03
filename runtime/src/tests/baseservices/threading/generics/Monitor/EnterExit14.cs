@@ -4,11 +4,13 @@ using System;
 using System.Threading;
 
 public struct ValX1<T> { }
+
 public class RefX1<T> { }
 
 struct Gen<T>
 {
     public static object staticLock;
+
     public static void EnterExitTest<U>()
     {
         Gen<T>.staticLock = new object();
@@ -70,6 +72,7 @@ public class Test_EnterExit14
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

@@ -15,6 +15,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TAccumulate Aggregate<TSource, TAccumulate>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             TAccumulate seed,
@@ -23,6 +24,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TResult Aggregate<TSource, TAccumulate, TResult>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             TAccumulate seed,
@@ -32,6 +34,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool All<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -39,10 +42,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool Any<TSource>(this System.Collections.Generic.IEnumerable<TSource> source)
         {
             throw null;
         }
+
         public static bool Any<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -50,6 +55,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Append<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             TSource element
@@ -57,52 +63,64 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> AsEnumerable<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static decimal Average(this System.Collections.Generic.IEnumerable<decimal> source)
         {
             throw null;
         }
+
         public static double Average(this System.Collections.Generic.IEnumerable<double> source)
         {
             throw null;
         }
+
         public static double Average(this System.Collections.Generic.IEnumerable<int> source)
         {
             throw null;
         }
+
         public static double Average(this System.Collections.Generic.IEnumerable<long> source)
         {
             throw null;
         }
+
         public static decimal? Average(this System.Collections.Generic.IEnumerable<decimal?> source)
         {
             throw null;
         }
+
         public static double? Average(this System.Collections.Generic.IEnumerable<double?> source)
         {
             throw null;
         }
+
         public static double? Average(this System.Collections.Generic.IEnumerable<int?> source)
         {
             throw null;
         }
+
         public static double? Average(this System.Collections.Generic.IEnumerable<long?> source)
         {
             throw null;
         }
+
         public static float? Average(this System.Collections.Generic.IEnumerable<float?> source)
         {
             throw null;
         }
+
         public static float Average(this System.Collections.Generic.IEnumerable<float> source)
         {
             throw null;
         }
+
         public static decimal Average<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, decimal> selector
@@ -110,6 +128,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double Average<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, double> selector
@@ -117,6 +136,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double Average<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int> selector
@@ -124,6 +144,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double Average<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, long> selector
@@ -131,6 +152,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal? Average<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, decimal?> selector
@@ -138,6 +160,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double? Average<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, double?> selector
@@ -145,6 +168,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double? Average<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int?> selector
@@ -152,6 +176,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double? Average<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, long?> selector
@@ -159,6 +184,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static float? Average<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, float?> selector
@@ -166,6 +192,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static float Average<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, float> selector
@@ -173,6 +200,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<
 #nullable disable
             TResult
@@ -181,6 +209,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource[]> Chunk<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             int size
@@ -188,6 +217,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Concat<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second
@@ -195,6 +225,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool Contains<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             TSource value
@@ -202,6 +233,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool Contains<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             TSource value,
@@ -210,12 +242,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static int Count<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static int Count<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -223,12 +257,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource?> DefaultIfEmpty<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> DefaultIfEmpty<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             TSource defaultValue
@@ -236,6 +272,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> DistinctBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector
@@ -243,6 +280,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> DistinctBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
@@ -251,12 +289,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Distinct<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Distinct<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
@@ -264,6 +304,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? ElementAtOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Index index
@@ -271,6 +312,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? ElementAtOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             int index
@@ -278,6 +320,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource ElementAt<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Index index
@@ -285,6 +328,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource ElementAt<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             int index
@@ -292,10 +336,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> Empty<TResult>()
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> ExceptBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TKey> second,
@@ -304,6 +350,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> ExceptBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TKey> second,
@@ -313,6 +360,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Except<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second
@@ -320,6 +368,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Except<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second,
@@ -328,12 +377,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? FirstOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static TSource FirstOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             TSource defaultValue
@@ -341,6 +392,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? FirstOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -348,6 +400,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource FirstOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate,
@@ -356,12 +409,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource First<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static TSource First<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -369,6 +424,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<System.Linq.IGrouping<
                 TKey,
                 TSource
@@ -379,6 +435,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<System.Linq.IGrouping<
                 TKey,
                 TSource
@@ -390,6 +447,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<System.Linq.IGrouping<
                 TKey,
                 TElement
@@ -401,6 +459,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<System.Linq.IGrouping<
                 TKey,
                 TElement
@@ -413,6 +472,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> GroupBy<
             TSource,
             TKey,
@@ -429,6 +489,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> GroupBy<
             TSource,
             TKey,
@@ -446,6 +507,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> GroupBy<
             TSource,
             TKey,
@@ -464,6 +526,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> GroupBy<
             TSource,
             TKey,
@@ -483,6 +546,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> GroupJoin<
             TOuter,
             TInner,
@@ -502,6 +566,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> GroupJoin<
             TOuter,
             TInner,
@@ -522,6 +587,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> IntersectBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TKey> second,
@@ -530,6 +596,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> IntersectBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TKey> second,
@@ -539,6 +606,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Intersect<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second
@@ -546,6 +614,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Intersect<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second,
@@ -554,6 +623,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> Join<
             TOuter,
             TInner,
@@ -569,6 +639,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> Join<
             TOuter,
             TInner,
@@ -585,12 +656,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? LastOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static TSource LastOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             TSource defaultValue
@@ -598,6 +671,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? LastOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -605,6 +679,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource LastOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate,
@@ -613,12 +688,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource Last<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static TSource Last<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -626,12 +703,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static long LongCount<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static long LongCount<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -639,46 +718,57 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal Max(this System.Collections.Generic.IEnumerable<decimal> source)
         {
             throw null;
         }
+
         public static double Max(this System.Collections.Generic.IEnumerable<double> source)
         {
             throw null;
         }
+
         public static int Max(this System.Collections.Generic.IEnumerable<int> source)
         {
             throw null;
         }
+
         public static long Max(this System.Collections.Generic.IEnumerable<long> source)
         {
             throw null;
         }
+
         public static decimal? Max(this System.Collections.Generic.IEnumerable<decimal?> source)
         {
             throw null;
         }
+
         public static double? Max(this System.Collections.Generic.IEnumerable<double?> source)
         {
             throw null;
         }
+
         public static int? Max(this System.Collections.Generic.IEnumerable<int?> source)
         {
             throw null;
         }
+
         public static long? Max(this System.Collections.Generic.IEnumerable<long?> source)
         {
             throw null;
         }
+
         public static float? Max(this System.Collections.Generic.IEnumerable<float?> source)
         {
             throw null;
         }
+
         public static float Max(this System.Collections.Generic.IEnumerable<float> source)
         {
             throw null;
         }
+
         public static TSource? MaxBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector
@@ -686,6 +776,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? MaxBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
@@ -694,12 +785,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? Max<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static TSource? Max<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Collections.Generic.IComparer<TSource>? comparer
@@ -707,6 +800,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal Max<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, decimal> selector
@@ -714,6 +808,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double Max<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, double> selector
@@ -721,6 +816,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static int Max<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int> selector
@@ -728,6 +824,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static long Max<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, long> selector
@@ -735,6 +832,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal? Max<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, decimal?> selector
@@ -742,6 +840,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double? Max<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, double?> selector
@@ -749,6 +848,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static int? Max<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int?> selector
@@ -756,6 +856,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static long? Max<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, long?> selector
@@ -763,6 +864,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static float? Max<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, float?> selector
@@ -770,6 +872,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static float Max<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, float> selector
@@ -777,6 +880,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TResult? Max<TSource, TResult>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TResult> selector
@@ -784,46 +888,57 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal Min(this System.Collections.Generic.IEnumerable<decimal> source)
         {
             throw null;
         }
+
         public static double Min(this System.Collections.Generic.IEnumerable<double> source)
         {
             throw null;
         }
+
         public static int Min(this System.Collections.Generic.IEnumerable<int> source)
         {
             throw null;
         }
+
         public static long Min(this System.Collections.Generic.IEnumerable<long> source)
         {
             throw null;
         }
+
         public static decimal? Min(this System.Collections.Generic.IEnumerable<decimal?> source)
         {
             throw null;
         }
+
         public static double? Min(this System.Collections.Generic.IEnumerable<double?> source)
         {
             throw null;
         }
+
         public static int? Min(this System.Collections.Generic.IEnumerable<int?> source)
         {
             throw null;
         }
+
         public static long? Min(this System.Collections.Generic.IEnumerable<long?> source)
         {
             throw null;
         }
+
         public static float? Min(this System.Collections.Generic.IEnumerable<float?> source)
         {
             throw null;
         }
+
         public static float Min(this System.Collections.Generic.IEnumerable<float> source)
         {
             throw null;
         }
+
         public static TSource? MinBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector
@@ -831,6 +946,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? MinBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
@@ -839,12 +955,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? Min<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static TSource? Min<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Collections.Generic.IComparer<TSource>? comparer
@@ -852,6 +970,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal Min<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, decimal> selector
@@ -859,6 +978,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double Min<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, double> selector
@@ -866,6 +986,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static int Min<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int> selector
@@ -873,6 +994,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static long Min<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, long> selector
@@ -880,6 +1002,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal? Min<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, decimal?> selector
@@ -887,6 +1010,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double? Min<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, double?> selector
@@ -894,6 +1018,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static int? Min<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int?> selector
@@ -901,6 +1026,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static long? Min<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, long?> selector
@@ -908,6 +1034,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static float? Min<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, float?> selector
@@ -915,6 +1042,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static float Min<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, float> selector
@@ -922,6 +1050,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TResult? Min<TSource, TResult>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TResult> selector
@@ -929,12 +1058,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> OfType<TResult>(
             this System.Collections.IEnumerable source
         )
         {
             throw null;
         }
+
         public static System.Linq.IOrderedEnumerable<TSource> OrderByDescending<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector
@@ -942,6 +1073,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedEnumerable<TSource> OrderByDescending<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
@@ -950,6 +1082,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedEnumerable<TSource> OrderBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector
@@ -957,6 +1090,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedEnumerable<TSource> OrderBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
@@ -965,6 +1099,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Prepend<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             TSource element
@@ -972,10 +1107,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<int> Range(int start, int count)
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> Repeat<TResult>(
             TResult element,
             int count
@@ -983,12 +1120,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Reverse<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> SelectMany<TSource, TResult>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, System.Collections.Generic.IEnumerable<TResult>> selector
@@ -996,6 +1135,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> SelectMany<TSource, TResult>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int, System.Collections.Generic.IEnumerable<TResult>> selector
@@ -1003,6 +1143,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> SelectMany<
             TSource,
             TCollection,
@@ -1018,6 +1159,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> SelectMany<
             TSource,
             TCollection,
@@ -1034,6 +1176,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> Select<TSource, TResult>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int, TResult> selector
@@ -1041,6 +1184,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> Select<TSource, TResult>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TResult> selector
@@ -1048,6 +1192,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool SequenceEqual<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second
@@ -1055,6 +1200,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool SequenceEqual<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second,
@@ -1063,12 +1209,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? SingleOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static TSource SingleOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             TSource defaultValue
@@ -1076,6 +1224,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource? SingleOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -1083,6 +1232,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource SingleOrDefault<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate,
@@ -1091,12 +1241,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource Single<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static TSource Single<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -1104,6 +1256,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> SkipLast<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             int count
@@ -1111,6 +1264,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> SkipWhile<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -1118,6 +1272,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> SkipWhile<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int, bool> predicate
@@ -1125,6 +1280,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Skip<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             int count
@@ -1132,46 +1288,57 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal Sum(this System.Collections.Generic.IEnumerable<decimal> source)
         {
             throw null;
         }
+
         public static double Sum(this System.Collections.Generic.IEnumerable<double> source)
         {
             throw null;
         }
+
         public static int Sum(this System.Collections.Generic.IEnumerable<int> source)
         {
             throw null;
         }
+
         public static long Sum(this System.Collections.Generic.IEnumerable<long> source)
         {
             throw null;
         }
+
         public static decimal? Sum(this System.Collections.Generic.IEnumerable<decimal?> source)
         {
             throw null;
         }
+
         public static double? Sum(this System.Collections.Generic.IEnumerable<double?> source)
         {
             throw null;
         }
+
         public static int? Sum(this System.Collections.Generic.IEnumerable<int?> source)
         {
             throw null;
         }
+
         public static long? Sum(this System.Collections.Generic.IEnumerable<long?> source)
         {
             throw null;
         }
+
         public static float? Sum(this System.Collections.Generic.IEnumerable<float?> source)
         {
             throw null;
         }
+
         public static float Sum(this System.Collections.Generic.IEnumerable<float> source)
         {
             throw null;
         }
+
         public static decimal Sum<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, decimal> selector
@@ -1179,6 +1346,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double Sum<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, double> selector
@@ -1186,6 +1354,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static int Sum<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int> selector
@@ -1193,6 +1362,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static long Sum<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, long> selector
@@ -1200,6 +1370,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static decimal? Sum<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, decimal?> selector
@@ -1207,6 +1378,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static double? Sum<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, double?> selector
@@ -1214,6 +1386,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static int? Sum<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int?> selector
@@ -1221,6 +1394,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static long? Sum<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, long?> selector
@@ -1228,6 +1402,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static float? Sum<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, float?> selector
@@ -1235,6 +1410,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static float Sum<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, float> selector
@@ -1242,6 +1418,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> TakeLast<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             int count
@@ -1249,6 +1426,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> TakeWhile<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -1256,6 +1434,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> TakeWhile<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int, bool> predicate
@@ -1263,6 +1442,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Take<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             int count
@@ -1270,6 +1450,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Take<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Range range
@@ -1277,6 +1458,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedEnumerable<TSource> ThenByDescending<TSource, TKey>(
             this System.Linq.IOrderedEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector
@@ -1284,6 +1466,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedEnumerable<TSource> ThenByDescending<TSource, TKey>(
             this System.Linq.IOrderedEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
@@ -1292,6 +1475,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(
             this System.Linq.IOrderedEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector
@@ -1299,6 +1483,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(
             this System.Linq.IOrderedEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
@@ -1307,12 +1492,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static TSource[] ToArray<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static System.Collections.Generic.Dictionary<TKey, TSource> ToDictionary<
             TSource,
             TKey
@@ -1323,6 +1510,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.Dictionary<TKey, TSource> ToDictionary<
             TSource,
             TKey
@@ -1334,6 +1522,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.Dictionary<TKey, TElement> ToDictionary<
             TSource,
             TKey,
@@ -1346,6 +1535,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.Dictionary<TKey, TElement> ToDictionary<
             TSource,
             TKey,
@@ -1359,12 +1549,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.HashSet<TSource> ToHashSet<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static System.Collections.Generic.HashSet<TSource> ToHashSet<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Collections.Generic.IEqualityComparer<TSource>? comparer
@@ -1372,12 +1564,14 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.List<TSource> ToList<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source
         )
         {
             throw null;
         }
+
         public static System.Linq.ILookup<TKey, TSource> ToLookup<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector
@@ -1385,6 +1579,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.ILookup<TKey, TSource> ToLookup<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
@@ -1393,6 +1588,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
@@ -1401,6 +1597,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Linq.ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
@@ -1410,6 +1607,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static bool TryGetNonEnumeratedCount<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             out int count
@@ -1417,6 +1615,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> UnionBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second,
@@ -1425,6 +1624,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> UnionBy<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second,
@@ -1434,6 +1634,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Union<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second
@@ -1441,6 +1642,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Union<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> first,
             System.Collections.Generic.IEnumerable<TSource> second,
@@ -1449,6 +1651,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Where<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, bool> predicate
@@ -1456,6 +1659,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TSource> Where<TSource>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, int, bool> predicate
@@ -1463,6 +1667,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<(TFirst First, TSecond Second)> Zip<
             TFirst,
             TSecond
@@ -1473,6 +1678,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<(TFirst First, TSecond Second, TThird Third)> Zip<
             TFirst,
             TSecond,
@@ -1485,6 +1691,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<TResult> Zip<TFirst, TSecond, TResult>(
             this System.Collections.Generic.IEnumerable<TFirst> first,
             System.Collections.Generic.IEnumerable<TSecond> second,
@@ -1494,12 +1701,14 @@ namespace System.Linq
             throw null;
         }
     }
+
     public partial interface IGrouping<out TKey, out TElement>
         : System.Collections.Generic.IEnumerable<TElement>,
           System.Collections.IEnumerable
     {
         TKey Key { get; }
     }
+
     public partial interface ILookup<TKey, TElement>
         : System.Collections.Generic.IEnumerable<System.Linq.IGrouping<TKey, TElement>>,
           System.Collections.IEnumerable
@@ -1508,6 +1717,7 @@ namespace System.Linq
         System.Collections.Generic.IEnumerable<TElement> this[TKey key] { get; }
         bool Contains(TKey key);
     }
+
     public partial interface IOrderedEnumerable<out TElement>
         : System.Collections.Generic.IEnumerable<TElement>,
           System.Collections.IEnumerable
@@ -1518,12 +1728,14 @@ namespace System.Linq
             bool descending
         );
     }
+
     public partial class Lookup<TKey, TElement>
         : System.Collections.Generic.IEnumerable<System.Linq.IGrouping<TKey, TElement>>,
           System.Collections.IEnumerable,
           System.Linq.ILookup<TKey, TElement>
     {
         internal Lookup() { }
+
         public int Count
         {
             get { throw null; }
@@ -1532,6 +1744,7 @@ namespace System.Linq
         {
             get { throw null; }
         }
+
         public System.Collections.Generic.IEnumerable<TResult> ApplyResultSelector<TResult>(
             System.Func<
                 TKey,
@@ -1542,10 +1755,12 @@ namespace System.Linq
         {
             throw null;
         }
+
         public bool Contains(TKey key)
         {
             throw null;
         }
+
         public System.Collections.Generic.IEnumerator<System.Linq.IGrouping<
                 TKey,
                 TElement
@@ -1553,6 +1768,7 @@ namespace System.Linq
         {
             throw null;
         }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;

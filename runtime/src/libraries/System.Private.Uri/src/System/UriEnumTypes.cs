@@ -42,6 +42,7 @@ namespace System
         HttpRequestUrl = Scheme | Host | Port | Path | Query,
         PathAndQuery = Path | Query,
     }
+
     public enum UriFormat
     {
         UriEscaped = 1,

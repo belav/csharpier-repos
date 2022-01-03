@@ -101,6 +101,7 @@ namespace System
     public struct Int32
     {
         object value;
+
         public void Init(object o)
         {
             value = o;

@@ -77,6 +77,7 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             private JSObject? _mapIterator;
             private readonly Map _map;
+
             public MapEnumerator(Map map)
             {
                 _map = map;
@@ -165,6 +166,7 @@ namespace System.Runtime.InteropServices.JavaScript
                 _map = map;
                 _iterator = iterator;
             }
+
             public int Count => _map.Count;
 
             public bool IsSynchronized => false;

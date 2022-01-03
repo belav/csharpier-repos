@@ -35,6 +35,7 @@ namespace ABIStress
                 throw new Exception($"Type handle isn't object for scenario {scenario}");
             }
         }
+
         public static void IsTypeHandleInt(RuntimeTypeHandle rth, string scenario)
         {
             if (Type.GetTypeFromHandle(rth) != typeof(int))
@@ -43,6 +44,7 @@ namespace ABIStress
             }
         }
     }
+
     internal partial class Program
     {
         private static Dictionary<int, Callee> s_instantiatingStubCallees = new Dictionary<

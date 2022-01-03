@@ -8,8 +8,10 @@ namespace System.CodeDom.Tests
     {
         protected override CodeCommentStatementCollection Ctor() =>
             new CodeCommentStatementCollection();
+
         protected override CodeCommentStatementCollection CtorArray(CodeCommentStatement[] array) =>
             new CodeCommentStatementCollection(array);
+
         protected override CodeCommentStatementCollection CtorCollection(
             CodeCommentStatementCollection collection
         ) => new CodeCommentStatementCollection(collection);
@@ -20,6 +22,7 @@ namespace System.CodeDom.Tests
             CodeCommentStatementCollection collection,
             int index
         ) => collection[index];
+
         protected override void SetItem(
             CodeCommentStatementCollection collection,
             int index,
@@ -30,6 +33,7 @@ namespace System.CodeDom.Tests
             CodeCommentStatementCollection collection,
             CodeCommentStatement[] array
         ) => collection.AddRange(array);
+
         protected override void AddRange(
             CodeCommentStatementCollection collection,
             CodeCommentStatementCollection value
@@ -55,6 +59,7 @@ namespace System.CodeDom.Tests
             CodeCommentStatementCollection collection,
             CodeCommentStatement value
         ) => collection.IndexOf(value);
+
         protected override bool Contains(
             CodeCommentStatementCollection collection,
             CodeCommentStatement value

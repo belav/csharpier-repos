@@ -11,6 +11,7 @@ namespace MS.Internal.Xml.XPath
 
         public ChildrenQuery(Query qyInput, string name, string prefix, XPathNodeType type)
             : base(qyInput, name, prefix, type) { }
+
         protected ChildrenQuery(ChildrenQuery other) : base(other)
         {
             _iterator = Clone(other._iterator);

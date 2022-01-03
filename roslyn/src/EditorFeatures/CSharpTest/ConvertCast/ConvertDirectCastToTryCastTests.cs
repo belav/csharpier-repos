@@ -306,6 +306,7 @@ public class C
                 CodeActionValidationMode = CodeActionValidationMode.None,
             }.RunAsync();
         }
+
         [Theory]
         [InlineData("(C$$)((object)1)", "((object)1) as C")]
         [InlineData("(C)((object$$)1)", "(C)(1 as object)")]

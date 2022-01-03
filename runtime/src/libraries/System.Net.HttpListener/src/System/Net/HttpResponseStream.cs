@@ -17,6 +17,7 @@ namespace System.Net
         public override bool CanWrite => true;
 
         public override void Flush() { }
+
         public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
         public override long Length => throw new NotSupportedException(SR.net_noseek);

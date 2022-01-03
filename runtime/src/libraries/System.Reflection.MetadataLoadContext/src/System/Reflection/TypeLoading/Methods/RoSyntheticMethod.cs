@@ -35,16 +35,21 @@ namespace System.Reflection.TypeLoading
         }
 
         internal sealed override RoType GetRoDeclaringType() => _declaringType;
+
         internal sealed override RoModule GetRoModule() => GetRoDeclaringType().GetRoModule();
 
         protected sealed override string ComputeName() => _name;
+
         public sealed override int MetadataToken => 0x06000000;
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
             Array.Empty<CustomAttributeData>();
+
         protected sealed override MethodAttributes ComputeAttributes() =>
             MethodAttributes.PrivateScope | MethodAttributes.Public;
+
         protected sealed override CallingConventions ComputeCallingConvention() =>
             CallingConventions.Standard | CallingConventions.HasThis;
+
         protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() =>
             MethodImplAttributes.IL;
 
@@ -100,16 +105,21 @@ namespace System.Reflection.TypeLoading
 
         public sealed override bool IsGenericMethodDefinition => false;
         public sealed override bool IsConstructedGenericMethod => false;
+
         public sealed override MethodInfo GetGenericMethodDefinition() =>
             throw new InvalidOperationException();
+
         [RequiresUnreferencedCode(
             "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
         )]
         public sealed override MethodInfo MakeGenericMethod(params Type[] typeArguments) =>
             throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericMethodDefinition, this));
+
         protected sealed override RoType[] ComputeGenericArgumentsOrParameters() =>
             Array.Empty<RoType>();
+
         internal sealed override RoType[] GetGenericTypeArgumentsNoCopy() => Array.Empty<RoType>();
+
         internal sealed override RoType[] GetGenericTypeParametersNoCopy() => Array.Empty<RoType>();
 
         public sealed override TypeContext TypeContext => default;

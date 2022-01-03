@@ -15,6 +15,7 @@ struct S0
     public byte F3;
     public long F4;
     public uint F5;
+
     public S0(long f4) : this()
     {
         F4 = f4;
@@ -30,6 +31,7 @@ struct S1
 {
     public C0 F2;
     public S0 F8;
+
     public S1(C0 f2, S0 f8) : this()
     {
         F2 = f2;
@@ -40,6 +42,7 @@ struct S1
 struct S2
 {
     public S1 F0;
+
     public S2(S1 f0) : this()
     {
         F0 = f0;

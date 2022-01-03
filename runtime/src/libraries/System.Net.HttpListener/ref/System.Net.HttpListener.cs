@@ -9,9 +9,11 @@ namespace System.Net
     public delegate System.Net.AuthenticationSchemes AuthenticationSchemeSelector(
         System.Net.HttpListenerRequest httpRequest
     );
+
     public sealed partial class HttpListener : System.IDisposable
     {
         public HttpListener() { }
+
         public System.Net.AuthenticationSchemes AuthenticationSchemes
         {
             get { throw null; }
@@ -31,6 +33,7 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public System.Net.HttpListener.ExtendedProtectionSelector? ExtendedProtectionSelectorDelegate
         {
@@ -68,43 +71,57 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         public void Abort() { }
+
         public System.IAsyncResult BeginGetContext(System.AsyncCallback? callback, object? state)
         {
             throw null;
         }
+
         public void Close() { }
+
         public System.Net.HttpListenerContext EndGetContext(System.IAsyncResult asyncResult)
         {
             throw null;
         }
+
         public System.Net.HttpListenerContext GetContext()
         {
             throw null;
         }
+
         public System.Threading.Tasks.Task<System.Net.HttpListenerContext> GetContextAsync()
         {
             throw null;
         }
+
         public void Start() { }
+
         public void Stop() { }
+
         void System.IDisposable.Dispose() { }
+
         public delegate System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy ExtendedProtectionSelector(
             System.Net.HttpListenerRequest request
         );
     }
+
     public partial class HttpListenerBasicIdentity : System.Security.Principal.GenericIdentity
     {
         public HttpListenerBasicIdentity(string username, string password)
             : base(default(System.Security.Principal.GenericIdentity)) { }
+
         public virtual string Password
         {
             get { throw null; }
         }
     }
+
     public sealed partial class HttpListenerContext
     {
         internal HttpListenerContext() { }
+
         public System.Net.HttpListenerRequest Request
         {
             get { throw null; }
@@ -117,12 +134,14 @@ namespace System.Net
         {
             get { throw null; }
         }
+
         public System.Threading.Tasks.Task<System.Net.WebSockets.HttpListenerWebSocketContext> AcceptWebSocketAsync(
             string? subProtocol
         )
         {
             throw null;
         }
+
         public System.Threading.Tasks.Task<System.Net.WebSockets.HttpListenerWebSocketContext> AcceptWebSocketAsync(
             string? subProtocol,
             int receiveBufferSize,
@@ -131,6 +150,7 @@ namespace System.Net
         {
             throw null;
         }
+
         public System.Threading.Tasks.Task<System.Net.WebSockets.HttpListenerWebSocketContext> AcceptWebSocketAsync(
             string? subProtocol,
             int receiveBufferSize,
@@ -140,6 +160,7 @@ namespace System.Net
         {
             throw null;
         }
+
         public System.Threading.Tasks.Task<System.Net.WebSockets.HttpListenerWebSocketContext> AcceptWebSocketAsync(
             string? subProtocol,
             System.TimeSpan keepAliveInterval
@@ -148,26 +169,33 @@ namespace System.Net
             throw null;
         }
     }
+
     public partial class HttpListenerException : System.ComponentModel.Win32Exception
     {
         public HttpListenerException() { }
+
         public HttpListenerException(int errorCode) { }
+
         public HttpListenerException(int errorCode, string message) { }
+
         protected HttpListenerException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         public override int ErrorCode
         {
             get { throw null; }
         }
     }
+
     public partial class HttpListenerPrefixCollection
         : System.Collections.Generic.ICollection<string>,
           System.Collections.Generic.IEnumerable<string>,
           System.Collections.IEnumerable
     {
         internal HttpListenerPrefixCollection() { }
+
         public int Count
         {
             get { throw null; }
@@ -180,30 +208,40 @@ namespace System.Net
         {
             get { throw null; }
         }
+
         public void Add(string uriPrefix) { }
+
         public void Clear() { }
+
         public bool Contains(string uriPrefix)
         {
             throw null;
         }
+
         public void CopyTo(System.Array array, int offset) { }
+
         public void CopyTo(string[] array, int offset) { }
+
         public System.Collections.Generic.IEnumerator<string> GetEnumerator()
         {
             throw null;
         }
+
         public bool Remove(string uriPrefix)
         {
             throw null;
         }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw null;
         }
     }
+
     public sealed partial class HttpListenerRequest
     {
         internal HttpListenerRequest() { }
+
         public string[]? AcceptTypes
         {
             get { throw null; }
@@ -320,6 +358,7 @@ namespace System.Net
         {
             get { throw null; }
         }
+
         public System.IAsyncResult BeginGetClientCertificate(
             System.AsyncCallback? requestCallback,
             object? state
@@ -327,24 +366,29 @@ namespace System.Net
         {
             throw null;
         }
+
         public System.Security.Cryptography.X509Certificates.X509Certificate2? EndGetClientCertificate(
             System.IAsyncResult asyncResult
         )
         {
             throw null;
         }
+
         public System.Security.Cryptography.X509Certificates.X509Certificate2? GetClientCertificate()
         {
             throw null;
         }
+
         public System.Threading.Tasks.Task<System.Security.Cryptography.X509Certificates.X509Certificate2?> GetClientCertificateAsync()
         {
             throw null;
         }
     }
+
     public sealed partial class HttpListenerResponse : System.IDisposable
     {
         internal HttpListenerResponse() { }
+
         public System.Text.Encoding? ContentEncoding
         {
             get { throw null; }
@@ -404,20 +448,32 @@ namespace System.Net
             get { throw null; }
             set { }
         }
+
         public void Abort() { }
+
         public void AddHeader(string name, string value) { }
+
         public void AppendCookie(System.Net.Cookie cookie) { }
+
         public void AppendHeader(string name, string value) { }
+
         public void Close() { }
+
         public void Close(byte[] responseEntity, bool willBlock) { }
+
         public void CopyFrom(System.Net.HttpListenerResponse templateResponse) { }
+
         public void Redirect(string url) { }
+
         public void SetCookie(System.Net.Cookie cookie) { }
+
         void System.IDisposable.Dispose() { }
     }
+
     public partial class HttpListenerTimeoutManager
     {
         internal HttpListenerTimeoutManager() { }
+
         public System.TimeSpan DrainEntityBody
         {
             get { throw null; }
@@ -454,11 +510,13 @@ namespace System.Net
         }
     }
 }
+
 namespace System.Net.WebSockets
 {
     public partial class HttpListenerWebSocketContext : System.Net.WebSockets.WebSocketContext
     {
         internal HttpListenerWebSocketContext() { }
+
         public override System.Net.CookieCollection CookieCollection
         {
             get { throw null; }

@@ -9,6 +9,7 @@ namespace System.Reflection
             CustomAttributeNamedArgument left,
             CustomAttributeNamedArgument right
         ) => left.Equals(right);
+
         public static bool operator !=(
             CustomAttributeNamedArgument left,
             CustomAttributeNamedArgument right

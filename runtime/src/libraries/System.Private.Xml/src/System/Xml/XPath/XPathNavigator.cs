@@ -2397,10 +2397,12 @@ namespace System.Xml.XPath
         internal struct DebuggerDisplayProxy
         {
             private readonly XPathNavigator _nav;
+
             public DebuggerDisplayProxy(XPathNavigator nav)
             {
                 _nav = nav;
             }
+
             public override string ToString()
             {
                 string result = _nav.NodeType.ToString();

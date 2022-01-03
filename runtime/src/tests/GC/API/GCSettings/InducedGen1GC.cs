@@ -9,6 +9,7 @@ namespace GCLatencyTest
     public class InducedGen1GC : ILatencyTest
     {
         private int _numGen1Collections = 0;
+
         public void Test()
         {
             _numGen1Collections = GC.CollectionCount(1);

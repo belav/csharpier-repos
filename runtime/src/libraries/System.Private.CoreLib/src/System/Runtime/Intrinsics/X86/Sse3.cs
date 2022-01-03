@@ -36,6 +36,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector128<float> AddSubtract(Vector128<float> left, Vector128<float> right) =>
             AddSubtract(left, right);
+
         /// <summary>
         /// __m128d _mm_addsub_pd (__m128d a, __m128d b)
         ///   ADDSUBPD xmm, xmm/m128
@@ -53,6 +54,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> left,
             Vector128<float> right
         ) => HorizontalAdd(left, right);
+
         /// <summary>
         /// __m128d _mm_hadd_pd (__m128d a, __m128d b)
         ///   HADDPD xmm, xmm/m128
@@ -70,6 +72,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> left,
             Vector128<float> right
         ) => HorizontalSubtract(left, right);
+
         /// <summary>
         /// __m128d _mm_hsub_pd (__m128d a, __m128d b)
         ///   HSUBPD xmm, xmm/m128
@@ -92,18 +95,25 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static unsafe Vector128<sbyte> LoadDquVector128(sbyte* address) =>
             LoadDquVector128(address);
+
         public static unsafe Vector128<byte> LoadDquVector128(byte* address) =>
             LoadDquVector128(address);
+
         public static unsafe Vector128<short> LoadDquVector128(short* address) =>
             LoadDquVector128(address);
+
         public static unsafe Vector128<ushort> LoadDquVector128(ushort* address) =>
             LoadDquVector128(address);
+
         public static unsafe Vector128<int> LoadDquVector128(int* address) =>
             LoadDquVector128(address);
+
         public static unsafe Vector128<uint> LoadDquVector128(uint* address) =>
             LoadDquVector128(address);
+
         public static unsafe Vector128<long> LoadDquVector128(long* address) =>
             LoadDquVector128(address);
+
         public static unsafe Vector128<ulong> LoadDquVector128(ulong* address) =>
             LoadDquVector128(address);
 

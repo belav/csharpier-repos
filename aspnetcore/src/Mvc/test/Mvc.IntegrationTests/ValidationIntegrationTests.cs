@@ -2708,6 +2708,7 @@ public class ValidationIntegrationTests
 
         public static void SomeMethod() { }
     }
+
 #nullable restore
 
     private static void AssertRequiredError(string key, ModelError error)

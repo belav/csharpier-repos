@@ -133,6 +133,7 @@ namespace System.Reflection.Emit
         internal AssemblyBuilderData _assemblyData;
         private readonly InternalAssemblyBuilder _internalAssemblyBuilder;
         private ModuleBuilder _manifestModuleBuilder;
+
         // Set to true if the manifest module was returned by code:DefineDynamicModule to the user
         private bool _isManifestModuleUsedAsDefinedModule;
 

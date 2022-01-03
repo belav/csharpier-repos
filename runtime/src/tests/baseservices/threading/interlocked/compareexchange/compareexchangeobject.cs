@@ -46,6 +46,7 @@ namespace Exchange
         ManualResetEvent signal;
         private Object mValue;
         private int accessCount;
+
         public ThreadSafe(int arraySize)
         {
             accessCount = 0;
@@ -61,6 +62,7 @@ namespace Exchange
         {
             signal.Set();
         }
+
         public bool Success
         {
             get
@@ -84,6 +86,7 @@ namespace Exchange
                 return (accessCount == (postObjArray.Count));
             }
         }
+
         public void ChangeValue()
         {
             Object initialValue,

@@ -55,11 +55,13 @@ namespace System.Reflection.TypeLoading
 
         public sealed override EventInfo[] GetEvents(BindingFlags bindingAttr) =>
             Query<EventInfo>(bindingAttr).ToArray();
+
         public sealed override EventInfo? GetEvent(string name, BindingFlags bindingAttr) =>
             Query<EventInfo>(name, bindingAttr).Disambiguate();
 
         public sealed override FieldInfo[] GetFields(BindingFlags bindingAttr) =>
             Query<FieldInfo>(bindingAttr).ToArray();
+
         public sealed override FieldInfo? GetField(string name, BindingFlags bindingAttr) =>
             Query<FieldInfo>(name, bindingAttr).Disambiguate();
 
@@ -163,6 +165,7 @@ namespace System.Reflection.TypeLoading
 
         public sealed override Type[] GetNestedTypes(BindingFlags bindingAttr) =>
             Query<Type>(bindingAttr).ToArray();
+
         public sealed override Type? GetNestedType(string name, BindingFlags bindingAttr) =>
             Query<Type>(name, bindingAttr).Disambiguate();
 

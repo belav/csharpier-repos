@@ -793,6 +793,7 @@ namespace System.Threading
             private readonly TimerQueueTimer _timer;
 
             public TimerDebuggerTypeProxy(Timer timer) => _timer = timer._timer._timer;
+
             public TimerDebuggerTypeProxy(TimerQueueTimer timer) => _timer = timer;
 
             public DateTime? EstimatedNextTimeUtc

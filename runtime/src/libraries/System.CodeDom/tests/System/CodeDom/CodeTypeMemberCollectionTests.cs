@@ -7,8 +7,10 @@ namespace System.CodeDom.Tests
         : CodeCollectionTestBase<CodeTypeMemberCollection, CodeTypeMember>
     {
         protected override CodeTypeMemberCollection Ctor() => new CodeTypeMemberCollection();
+
         protected override CodeTypeMemberCollection CtorArray(CodeTypeMember[] array) =>
             new CodeTypeMemberCollection(array);
+
         protected override CodeTypeMemberCollection CtorCollection(
             CodeTypeMemberCollection collection
         ) => new CodeTypeMemberCollection(collection);
@@ -17,6 +19,7 @@ namespace System.CodeDom.Tests
 
         protected override CodeTypeMember GetItem(CodeTypeMemberCollection collection, int index) =>
             collection[index];
+
         protected override void SetItem(
             CodeTypeMemberCollection collection,
             int index,
@@ -27,6 +30,7 @@ namespace System.CodeDom.Tests
             CodeTypeMemberCollection collection,
             CodeTypeMember[] array
         ) => collection.AddRange(array);
+
         protected override void AddRange(
             CodeTypeMemberCollection collection,
             CodeTypeMemberCollection value
@@ -46,6 +50,7 @@ namespace System.CodeDom.Tests
 
         protected override int IndexOf(CodeTypeMemberCollection collection, CodeTypeMember value) =>
             collection.IndexOf(value);
+
         protected override bool Contains(
             CodeTypeMemberCollection collection,
             CodeTypeMember value

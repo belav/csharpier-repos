@@ -3338,6 +3338,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 body,
                 expressionBody: null
             );
+
         public static AccessorDeclarationSyntax AccessorDeclaration(
             SyntaxKind kind,
             SyntaxList<AttributeListSyntax> attributeLists,
@@ -3355,6 +3356,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 expressionBody: null,
                 semicolonToken
             );
+
         public static AccessorDeclarationSyntax AccessorDeclaration(
             SyntaxKind kind,
             SyntaxList<AttributeListSyntax> attributeLists,
@@ -3368,6 +3370,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 body: null,
                 expressionBody
             );
+
         public static AccessorDeclarationSyntax AccessorDeclaration(
             SyntaxKind kind,
             SyntaxList<AttributeListSyntax> attributeLists,

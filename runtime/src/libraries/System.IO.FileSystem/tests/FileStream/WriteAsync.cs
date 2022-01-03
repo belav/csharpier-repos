@@ -12,6 +12,7 @@ namespace System.IO.Tests
     {
         private Task WriteAsync(FileStream stream, byte[] buffer, int offset, int count) =>
             WriteAsync(stream, buffer, offset, count, CancellationToken.None);
+
         protected abstract Task WriteAsync(
             FileStream stream,
             byte[] buffer,

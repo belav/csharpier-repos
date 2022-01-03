@@ -160,6 +160,7 @@ public class RazorDirectivesTest : ParserTestBase
         // Act & Assert
         ParseDocumentTest("@custom System<", new[] { descriptor });
     }
+
     [Fact]
     public void DirectiveDescriptor_CanHandleIncompleteNamespaceTokens()
     {

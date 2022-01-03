@@ -30,6 +30,7 @@ namespace Test
                 }
             }
         }
+
         static int Main()
         {
             try

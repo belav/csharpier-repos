@@ -18,6 +18,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddXmlFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             System.Action<Microsoft.Extensions.Configuration.Xml.XmlConfigurationSource> configureSource
@@ -25,6 +26,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddXmlFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             string path
@@ -32,6 +34,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddXmlFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             string path,
@@ -40,6 +43,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddXmlFile(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             string path,
@@ -49,6 +53,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddXmlStream(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             System.IO.Stream stream
@@ -58,6 +63,7 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 }
+
 namespace Microsoft.Extensions.Configuration.Xml
 {
     public partial class XmlConfigurationProvider
@@ -66,12 +72,15 @@ namespace Microsoft.Extensions.Configuration.Xml
         public XmlConfigurationProvider(
             Microsoft.Extensions.Configuration.Xml.XmlConfigurationSource source
         ) : base(default(Microsoft.Extensions.Configuration.FileConfigurationSource)) { }
+
         public override void Load(System.IO.Stream stream) { }
     }
+
     public partial class XmlConfigurationSource
         : Microsoft.Extensions.Configuration.FileConfigurationSource
     {
         public XmlConfigurationSource() { }
+
         public override Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
         )
@@ -79,10 +88,13 @@ namespace Microsoft.Extensions.Configuration.Xml
             throw null;
         }
     }
+
     public partial class XmlDocumentDecryptor
     {
         public static readonly Microsoft.Extensions.Configuration.Xml.XmlDocumentDecryptor Instance;
+
         protected XmlDocumentDecryptor() { }
+
         public System.Xml.XmlReader CreateDecryptingXmlReader(
             System.IO.Stream input,
             System.Xml.XmlReaderSettings settings
@@ -90,6 +102,7 @@ namespace Microsoft.Extensions.Configuration.Xml
         {
             throw null;
         }
+
         protected virtual System.Xml.XmlReader DecryptDocumentAndCreateXmlReader(
             System.Xml.XmlDocument document
         )
@@ -97,13 +110,16 @@ namespace Microsoft.Extensions.Configuration.Xml
             throw null;
         }
     }
+
     public partial class XmlStreamConfigurationProvider
         : Microsoft.Extensions.Configuration.StreamConfigurationProvider
     {
         public XmlStreamConfigurationProvider(
             Microsoft.Extensions.Configuration.Xml.XmlStreamConfigurationSource source
         ) : base(default(Microsoft.Extensions.Configuration.StreamConfigurationSource)) { }
+
         public override void Load(System.IO.Stream stream) { }
+
         public static System.Collections.Generic.IDictionary<string, string> Read(
             System.IO.Stream stream,
             Microsoft.Extensions.Configuration.Xml.XmlDocumentDecryptor decryptor
@@ -112,10 +128,12 @@ namespace Microsoft.Extensions.Configuration.Xml
             throw null;
         }
     }
+
     public partial class XmlStreamConfigurationSource
         : Microsoft.Extensions.Configuration.StreamConfigurationSource
     {
         public XmlStreamConfigurationSource() { }
+
         public override Microsoft.Extensions.Configuration.IConfigurationProvider Build(
             Microsoft.Extensions.Configuration.IConfigurationBuilder builder
         )

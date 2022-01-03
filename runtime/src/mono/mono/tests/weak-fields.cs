@@ -19,16 +19,20 @@ public class OneField
 {
     int x;
 }
+
 public class Tests
 {
     static Finalizable retain;
 
     [Weak]
     public object Obj;
+
     [Weak2]
     public object Obj3;
+
     [Weak]
     public object Obj2;
+
     [Weak]
     public Finalizable Obj4;
 

@@ -34,8 +34,12 @@ class Program
     }
 
     private class ServiceA { }
+
     private class ServiceB { }
+
     private class ServiceC { }
+
     private class ServiceD { }
+
     private class ServiceE { }
 }

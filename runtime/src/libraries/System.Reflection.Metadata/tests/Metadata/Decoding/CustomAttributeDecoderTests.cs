@@ -262,30 +262,37 @@ namespace System.Reflection.Metadata.Decoding.Tests
         {
             Value = -1
         }
+
         public enum Int16Enum : short
         {
             Value = -2
         }
+
         public enum Int32Enum : int
         {
             Value = -3
         }
+
         public enum Int64Enum : long
         {
             Value = -4
         }
+
         public enum ByteEnum : sbyte
         {
             Value = 1
         }
+
         public enum UInt16Enum : ushort
         {
             Value = 2
         }
+
         public enum UInt32Enum : uint
         {
             Value = 3
         }
+
         public enum UInt64Enum : ulong
         {
             Value = 4
@@ -295,50 +302,95 @@ namespace System.Reflection.Metadata.Decoding.Tests
         public sealed class TestAttribute : Attribute
         {
             public TestAttribute() { }
+
             public TestAttribute(string x, int y, double z) { }
+
             public TestAttribute(string value) { }
+
             public TestAttribute(object value) { }
+
             public TestAttribute(sbyte value) { }
+
             public TestAttribute(short value) { }
+
             public TestAttribute(int value) { }
+
             public TestAttribute(long value) { }
+
             public TestAttribute(byte value) { }
+
             public TestAttribute(ushort value) { }
+
             public TestAttribute(uint value) { }
+
             public TestAttribute(ulong value) { }
+
             public TestAttribute(bool value) { }
+
             public TestAttribute(float value) { }
+
             public TestAttribute(double value) { }
+
             public TestAttribute(Type value) { }
+
             public TestAttribute(SByteEnum value) { }
+
             public TestAttribute(Int16Enum value) { }
+
             public TestAttribute(Int32Enum value) { }
+
             public TestAttribute(Int64Enum value) { }
+
             public TestAttribute(ByteEnum value) { }
+
             public TestAttribute(UInt16Enum value) { }
+
             public TestAttribute(UInt32Enum value) { }
+
             public TestAttribute(UInt64Enum value) { }
+
             public TestAttribute(string[] value) { }
+
             public TestAttribute(object[] value) { }
+
             public TestAttribute(sbyte[] value) { }
+
             public TestAttribute(short[] value) { }
+
             public TestAttribute(int[] value) { }
+
             public TestAttribute(long[] value) { }
+
             public TestAttribute(byte[] value) { }
+
             public TestAttribute(ushort[] value) { }
+
             public TestAttribute(uint[] value) { }
+
             public TestAttribute(ulong[] value) { }
+
             public TestAttribute(bool[] value) { }
+
             public TestAttribute(float[] value) { }
+
             public TestAttribute(double[] value) { }
+
             public TestAttribute(Type[] value) { }
+
             public TestAttribute(SByteEnum[] value) { }
+
             public TestAttribute(Int16Enum[] value) { }
+
             public TestAttribute(Int32Enum[] value) { }
+
             public TestAttribute(Int64Enum[] value) { }
+
             public TestAttribute(ByteEnum[] value) { }
+
             public TestAttribute(UInt16Enum[] value) { }
+
             public TestAttribute(UInt32Enum[] value) { }
+
             public TestAttribute(UInt64Enum[] value) { }
 
             public string StringField;

@@ -23,6 +23,7 @@ namespace System.Xml.Tests
         protected int threadCount = 5;
 
         private ITestOutputHelper _output;
+
         public CSameInstanceXslTransformTestCase(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -112,6 +113,7 @@ namespace System.Xml.Tests
         private XPathDocument _xd; // Loads XML file
 
         private ITestOutputHelper _output;
+
         public SameInstanceXslTransformReader(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -156,6 +158,7 @@ namespace System.Xml.Tests
         private XPathDocument _xd; // Loads XML file
 
         private ITestOutputHelper _output;
+
         public SameInstanceXslTransformWriter(ITestOutputHelper output) : base(output)
         {
             _output = output;

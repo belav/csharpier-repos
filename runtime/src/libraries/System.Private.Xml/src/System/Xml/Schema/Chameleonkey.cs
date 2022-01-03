@@ -15,6 +15,7 @@ namespace System.Xml.Schema
     {
         internal string targetNS;
         internal Uri chameleonLocation;
+
         // Original schema (used for reference equality only)
         //   stored only when the chameleonLocation is an empty URI in which case the location
         //   is not a good enough identification of the schema

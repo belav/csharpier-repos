@@ -13,6 +13,7 @@ using System;
 struct S1
 {
     public uint F0;
+
     public S1(uint f0) : this()
     {
         F0 = f0;
@@ -23,6 +24,7 @@ struct S2
 {
     public S1 F1;
     public int F2;
+
     public S2(S1 f1) : this()
     {
         F1 = f1;
@@ -33,6 +35,7 @@ struct S2
 public class Program
 {
     static S2[] s_11 = new S2[] { new S2(new S1(1234u)) }; // Assigns 1234 to F1.F0
+
     public static int Main()
     {
         ref S1 vr7 = ref s_11[0].F1;

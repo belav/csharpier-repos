@@ -15,12 +15,14 @@ namespace ABIStress
         internal const string InstantiatingStubPrefix = "ABIStress_InstantiatingStub_";
 
         internal static StressModes StressModes { get; set; } = StressModes.None;
+
         // The base seed. This value combined with the index of the
         // caller/pinvoker/callee will uniquely determine how it is generated
         // and which callee is used.
         internal const int Seed = 0xeadbeef;
         internal const int MinParams = 1;
         internal static int MaxParams { get; set; } = 25;
+
         // The number of callees to use. When stressing tailcalls, this is the number of tailcallee parameter lists to pregenerate.
         // These parameter lists are pregenerated because we generate tailcallers
         // by first selecting a random parameter list. A callee is then

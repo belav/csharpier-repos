@@ -53,6 +53,7 @@ class T
 class My : Attribute
 {
     public object obj;
+
     public My(object o)
     {
         obj = o;

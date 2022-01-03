@@ -24,6 +24,7 @@ namespace JitBench
         {
             Measurements = new Dictionary<Metric, double>();
         }
+
         public Dictionary<Metric, double> Measurements { get; private set; }
     }
 
@@ -34,6 +35,7 @@ namespace JitBench
             Name = name;
             Unit = unit;
         }
+
         public string Name { get; private set; }
         public string Unit { get; private set; }
 

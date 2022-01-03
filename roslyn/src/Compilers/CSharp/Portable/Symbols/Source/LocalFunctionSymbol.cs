@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private ImmutableArray<ParameterSymbol> _lazyParameters;
         private bool _lazyIsVarArg;
+
         // Initialized in two steps. Hold a copy if accessing during initialization.
         private ImmutableArray<
             ImmutableArray<TypeWithAnnotations>

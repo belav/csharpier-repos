@@ -20,6 +20,7 @@ public class CC
             } while (a);
         }
     }
+
     static int Main()
     {
         ulong ul = 0;

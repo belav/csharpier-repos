@@ -25,6 +25,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -61,6 +62,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -97,6 +99,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private static dynamic s_i = 2;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -133,6 +136,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const dynamic i = null;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -169,6 +173,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private static dynamic s_i = typeof(int?);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -310,6 +315,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const dynamic i = null;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -346,6 +352,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -417,6 +424,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -456,6 +464,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -534,6 +543,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private static int? s_i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -573,6 +583,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -650,6 +661,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

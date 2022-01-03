@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 namespace ArrayWithFunc
 {
     public delegate void RngTest();
+
     internal class Class1
     {
         private static int Main()
@@ -55,6 +56,7 @@ namespace ArrayWithFunc
             return bResult;
         }
     }
+
     internal class Modifier
     {
         public static void ModValue(ref int a)
@@ -62,10 +64,12 @@ namespace ArrayWithFunc
             a++;
             return;
         }
+
         public static int ModValue2(ref int a)
         {
             return ++a;
         }
+
         public static void ModArray(ref int[] array)
         {
             int[] array2 = new int[97];
@@ -106,6 +110,7 @@ namespace ArrayWithFunc
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
 		* Loop upper bound is modified through a function call
 		********************************************************************************************/
@@ -119,6 +124,7 @@ namespace ArrayWithFunc
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
 		* Another way to modifier loop induction variable
 		********************************************************************************************/

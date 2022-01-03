@@ -14,6 +14,7 @@ public static class TestResources
     );
 
     public static string TestCertificatePath { get; } = Path.Combine(_baseDir, "testCert.pfx");
+
     public static string GetCertPath(string name) => Path.Combine(_baseDir, name);
 
     private const int MutexTimeout = 120 * 1000;

@@ -2368,6 +2368,7 @@ namespace System.Xml.Xsl
         {
             return AddFilteredPrime(list, source, filter, false);
         }
+
         private XmlQueryCardinality AddFilteredPrime(
             List<XmlQueryType> list,
             XmlQueryType source,

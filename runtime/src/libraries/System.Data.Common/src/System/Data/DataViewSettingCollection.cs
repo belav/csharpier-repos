@@ -162,6 +162,7 @@ namespace System.Data
         {
             private readonly DataViewSettingCollection? _dataViewSettings;
             private readonly IEnumerator _tableEnumerator;
+
             public DataViewSettingsEnumerator(DataViewManager dvm)
             {
                 DataSet? ds = dvm.DataSet;
@@ -176,6 +177,7 @@ namespace System.Data
                     _tableEnumerator = Array.Empty<DataTable>().GetEnumerator();
                 }
             }
+
             public bool MoveNext() => _tableEnumerator.MoveNext();
 
             public void Reset() => _tableEnumerator.Reset();

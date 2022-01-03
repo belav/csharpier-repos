@@ -71,6 +71,7 @@ namespace System.Speech.Internal.SapiInterop
             int cb,
             IntPtr pcbWritten
         );
+
         // IStream Methods
         new void Seek(long dlibMove, int dwOrigin, IntPtr plibNewPosition);
         new void SetSize(long libNewSize);
@@ -81,6 +82,7 @@ namespace System.Speech.Internal.SapiInterop
         new void UnlockRegion(long libOffset, long cb, int dwLockType);
         new void Stat(out STATSTG pstatstg, int grfStatFlag);
         new void Clone(out IStream ppstm);
+
         // ISpStreamFormat Methods
         new void GetFormat(out Guid pguidFormatId, out IntPtr ppCoMemWaveFormatEx);
 

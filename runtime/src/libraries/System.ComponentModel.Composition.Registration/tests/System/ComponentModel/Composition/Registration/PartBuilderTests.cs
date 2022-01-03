@@ -41,13 +41,16 @@ namespace System.ComponentModel.Composition.Registration.Tests
         private class FooImplWithConstructors
         {
             public FooImplWithConstructors() { }
+
             public FooImplWithConstructors(IEnumerable<IFoo> ids) { }
+
             public FooImplWithConstructors(int id, string name) { }
         }
 
         private class FooImplWithConstructorsAmbiguous
         {
             public FooImplWithConstructorsAmbiguous(string name, int id) { }
+
             public FooImplWithConstructorsAmbiguous(int id, string name) { }
         }
 

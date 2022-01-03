@@ -181,6 +181,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 diagnostics
             );
         }
+
 #nullable disable
 
         protected abstract (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(

@@ -2892,6 +2892,7 @@ class C
 }",
                 CodeActionIndex
             );
+
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public Task TestFlowNullable_Lambda() =>
             TestInRegularAndScript1Async(
@@ -3328,6 +3329,7 @@ class C
 }",
                 CodeActionIndex
             );
+
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public Task TestExtractNullableNonNullFlowWithExplicitCastSelected() =>
             TestInRegularAndScript1Async(

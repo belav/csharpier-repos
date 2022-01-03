@@ -53,6 +53,7 @@ public class TestServer : IDisposable
 
     private Uri BaseUri => new Uri("http://localhost:" + _currentPort);
     public HttpClient HttpClient { get; private set; }
+
     public TestConnection CreateConnection() => new TestConnection(_currentPort);
 
     private static IISServerOptions _options;

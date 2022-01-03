@@ -17,6 +17,7 @@ public class Z : Io<string, string>
     {
         return "U";
     }
+
     string Io<string, string>.FromS(string s)
     {
         return "S";

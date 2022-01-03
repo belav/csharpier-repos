@@ -14,8 +14,10 @@ public struct S
 {
     [FieldOffset(16), MarshalAs(UnmanagedType.VariantBool)]
     public bool b;
+
     [FieldOffset(8)]
     public double d;
+
     [FieldOffset(0), MarshalAs(UnmanagedType.BStr)]
     public string st;
 }

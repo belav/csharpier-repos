@@ -9,6 +9,7 @@ class Derived : Base
     {
         base.method();
     }
+
     static void Main()
     {
         Derived d = new Derived();

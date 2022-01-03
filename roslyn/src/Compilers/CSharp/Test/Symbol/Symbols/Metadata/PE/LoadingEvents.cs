@@ -636,6 +636,7 @@ public class C
 
             Assert.Contains(field.AssociatedSymbol, events);
         }
+
         [Flags]
         private enum VirtualnessModifiers
         {

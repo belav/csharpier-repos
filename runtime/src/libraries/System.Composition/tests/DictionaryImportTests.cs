@@ -55,6 +55,7 @@ namespace System.Composition.UnitTests
             Values = values;
         }
     }
+
     public class DictionaryImportTests
     {
         private CompositionContext CreateContainer(params Type[] types)

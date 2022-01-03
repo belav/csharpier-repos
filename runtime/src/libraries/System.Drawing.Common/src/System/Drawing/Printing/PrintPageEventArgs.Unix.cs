@@ -35,6 +35,7 @@
 //
 using System;
 using System.Drawing;
+
 namespace System.Drawing.Printing
 {
     /// <summary>
@@ -62,6 +63,7 @@ namespace System.Drawing.Printing
             this.pageBounds = pageBounds;
             this.pageSettings = pageSettings;
         }
+
         public bool Cancel
         {
             get { return cancel; }

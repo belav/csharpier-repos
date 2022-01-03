@@ -17,19 +17,25 @@ namespace Microsoft.DotNet.PlatformAbstractions
         {
             get { throw null; }
         }
+
         public void Add(int i) { }
+
         public void Add(object? o) { }
+
         public void Add(string? s) { }
+
         public void Add<TValue>(
             TValue? value,
             System.Collections.Generic.IEqualityComparer<TValue> comparer
         ) { }
+
         public static Microsoft.DotNet.PlatformAbstractions.HashCodeCombiner Start()
         {
             throw null;
         }
     }
 }
+
 namespace Microsoft.Extensions.DependencyModel
 {
     public partial class CompilationLibrary : Microsoft.Extensions.DependencyModel.Library
@@ -51,6 +57,7 @@ namespace Microsoft.Extensions.DependencyModel
                 default(System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.Dependency>),
                 default(bool)
             ) { }
+
         public CompilationLibrary(
             string type,
             string name,
@@ -70,14 +77,17 @@ namespace Microsoft.Extensions.DependencyModel
                 default(System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.Dependency>),
                 default(bool)
             ) { }
+
         public System.Collections.Generic.IReadOnlyList<string> Assemblies
         {
             get { throw null; }
         }
+
         public System.Collections.Generic.IEnumerable<string> ResolveReferencePaths()
         {
             throw null;
         }
+
         public System.Collections.Generic.IEnumerable<string> ResolveReferencePaths(
             params Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver[] customResolvers
         )
@@ -85,6 +95,7 @@ namespace Microsoft.Extensions.DependencyModel
             throw null;
         }
     }
+
     public partial class CompilationOptions
     {
         public CompilationOptions(
@@ -101,6 +112,7 @@ namespace Microsoft.Extensions.DependencyModel
             bool? emitEntryPoint,
             bool? generateXmlDocumentation
         ) { }
+
         public bool? AllowUnsafe
         {
             get { throw null; }
@@ -154,15 +166,18 @@ namespace Microsoft.Extensions.DependencyModel
             get { throw null; }
         }
     }
+
     public readonly partial struct Dependency
         : System.IEquatable<Microsoft.Extensions.DependencyModel.Dependency>
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
+
         public Dependency(string name, string version)
         {
             throw null;
         }
+
         public readonly string Name
         {
             get { throw null; }
@@ -171,21 +186,25 @@ namespace Microsoft.Extensions.DependencyModel
         {
             get { throw null; }
         }
+
         public bool Equals(Microsoft.Extensions.DependencyModel.Dependency other)
         {
             throw null;
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
     }
+
     public partial class DependencyContext
     {
         public DependencyContext(
@@ -195,6 +214,7 @@ namespace Microsoft.Extensions.DependencyModel
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeLibrary> runtimeLibraries,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeFallbacks> runtimeGraph
         ) { }
+
         public Microsoft.Extensions.DependencyModel.CompilationOptions CompilationOptions
         {
             get { throw null; }
@@ -203,6 +223,7 @@ namespace Microsoft.Extensions.DependencyModel
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute(
             "DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case."
         )]
@@ -222,6 +243,7 @@ namespace Microsoft.Extensions.DependencyModel
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute(
             "DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case."
         )]
@@ -231,6 +253,7 @@ namespace Microsoft.Extensions.DependencyModel
         {
             throw null;
         }
+
         public Microsoft.Extensions.DependencyModel.DependencyContext Merge(
             Microsoft.Extensions.DependencyModel.DependencyContext other
         )
@@ -238,6 +261,7 @@ namespace Microsoft.Extensions.DependencyModel
             throw null;
         }
     }
+
     public static partial class DependencyContextExtensions
     {
         public static System.Collections.Generic.IEnumerable<System.Reflection.AssemblyName> GetDefaultAssemblyNames(
@@ -246,6 +270,7 @@ namespace Microsoft.Extensions.DependencyModel
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<System.Reflection.AssemblyName> GetDefaultAssemblyNames(
             this Microsoft.Extensions.DependencyModel.RuntimeLibrary self,
             Microsoft.Extensions.DependencyModel.DependencyContext context
@@ -253,12 +278,14 @@ namespace Microsoft.Extensions.DependencyModel
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<string> GetDefaultNativeAssets(
             this Microsoft.Extensions.DependencyModel.DependencyContext self
         )
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<string> GetDefaultNativeAssets(
             this Microsoft.Extensions.DependencyModel.RuntimeLibrary self,
             Microsoft.Extensions.DependencyModel.DependencyContext context
@@ -266,12 +293,14 @@ namespace Microsoft.Extensions.DependencyModel
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeFile> GetDefaultNativeRuntimeFileAssets(
             this Microsoft.Extensions.DependencyModel.DependencyContext self
         )
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeFile> GetDefaultNativeRuntimeFileAssets(
             this Microsoft.Extensions.DependencyModel.RuntimeLibrary self,
             Microsoft.Extensions.DependencyModel.DependencyContext context
@@ -279,6 +308,7 @@ namespace Microsoft.Extensions.DependencyModel
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<System.Reflection.AssemblyName> GetRuntimeAssemblyNames(
             this Microsoft.Extensions.DependencyModel.DependencyContext self,
             string runtimeIdentifier
@@ -286,6 +316,7 @@ namespace Microsoft.Extensions.DependencyModel
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<System.Reflection.AssemblyName> GetRuntimeAssemblyNames(
             this Microsoft.Extensions.DependencyModel.RuntimeLibrary self,
             Microsoft.Extensions.DependencyModel.DependencyContext context,
@@ -294,6 +325,7 @@ namespace Microsoft.Extensions.DependencyModel
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<string> GetRuntimeNativeAssets(
             this Microsoft.Extensions.DependencyModel.DependencyContext self,
             string runtimeIdentifier
@@ -301,6 +333,7 @@ namespace Microsoft.Extensions.DependencyModel
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<string> GetRuntimeNativeAssets(
             this Microsoft.Extensions.DependencyModel.RuntimeLibrary self,
             Microsoft.Extensions.DependencyModel.DependencyContext context,
@@ -309,6 +342,7 @@ namespace Microsoft.Extensions.DependencyModel
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeFile> GetRuntimeNativeRuntimeFileAssets(
             this Microsoft.Extensions.DependencyModel.DependencyContext self,
             string runtimeIdentifier
@@ -316,6 +350,7 @@ namespace Microsoft.Extensions.DependencyModel
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeFile> GetRuntimeNativeRuntimeFileAssets(
             this Microsoft.Extensions.DependencyModel.RuntimeLibrary self,
             Microsoft.Extensions.DependencyModel.DependencyContext context,
@@ -325,25 +360,32 @@ namespace Microsoft.Extensions.DependencyModel
             throw null;
         }
     }
+
     public partial class DependencyContextJsonReader
         : Microsoft.Extensions.DependencyModel.IDependencyContextReader,
           System.IDisposable
     {
         public DependencyContextJsonReader() { }
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
+
         public Microsoft.Extensions.DependencyModel.DependencyContext Read(System.IO.Stream stream)
         {
             throw null;
         }
     }
+
     public partial class DependencyContextLoader
     {
         public DependencyContextLoader() { }
+
         public static Microsoft.Extensions.DependencyModel.DependencyContextLoader Default
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresAssemblyFilesAttribute(
             "DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case."
         )]
@@ -354,18 +396,22 @@ namespace Microsoft.Extensions.DependencyModel
             throw null;
         }
     }
+
     public partial class DependencyContextWriter
     {
         public DependencyContextWriter() { }
+
         public void Write(
             Microsoft.Extensions.DependencyModel.DependencyContext context,
             System.IO.Stream stream
         ) { }
     }
+
     public partial interface IDependencyContextReader : System.IDisposable
     {
         Microsoft.Extensions.DependencyModel.DependencyContext Read(System.IO.Stream stream);
     }
+
     public partial class Library
     {
         public Library(
@@ -376,6 +422,7 @@ namespace Microsoft.Extensions.DependencyModel
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.Dependency> dependencies,
             bool serviceable
         ) { }
+
         public Library(
             string type,
             string name,
@@ -386,6 +433,7 @@ namespace Microsoft.Extensions.DependencyModel
             string? path,
             string? hashPath
         ) { }
+
         public Library(
             string type,
             string name,
@@ -397,6 +445,7 @@ namespace Microsoft.Extensions.DependencyModel
             string? hashPath,
             string? runtimeStoreManifestName = null
         ) { }
+
         public System.Collections.Generic.IReadOnlyList<Microsoft.Extensions.DependencyModel.Dependency> Dependencies
         {
             get { throw null; }
@@ -434,9 +483,11 @@ namespace Microsoft.Extensions.DependencyModel
             get { throw null; }
         }
     }
+
     public partial class ResourceAssembly
     {
         public ResourceAssembly(string path, string locale) { }
+
         public string Locale
         {
             get { throw null; }
@@ -448,9 +499,11 @@ namespace Microsoft.Extensions.DependencyModel
             set { }
         }
     }
+
     public partial class RuntimeAssembly
     {
         public RuntimeAssembly(string assemblyName, string path) { }
+
         public System.Reflection.AssemblyName Name
         {
             get { throw null; }
@@ -459,22 +512,27 @@ namespace Microsoft.Extensions.DependencyModel
         {
             get { throw null; }
         }
+
         public static Microsoft.Extensions.DependencyModel.RuntimeAssembly Create(string path)
         {
             throw null;
         }
     }
+
     public partial class RuntimeAssetGroup
     {
         public RuntimeAssetGroup(
             string? runtime,
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeFile> runtimeFiles
         ) { }
+
         public RuntimeAssetGroup(
             string? runtime,
             System.Collections.Generic.IEnumerable<string> assetPaths
         ) { }
+
         public RuntimeAssetGroup(string? runtime, params string[] assetPaths) { }
+
         public System.Collections.Generic.IReadOnlyList<string> AssetPaths
         {
             get { throw null; }
@@ -488,13 +546,16 @@ namespace Microsoft.Extensions.DependencyModel
             get { throw null; }
         }
     }
+
     public partial class RuntimeFallbacks
     {
         public RuntimeFallbacks(
             string runtime,
             System.Collections.Generic.IEnumerable<string?> fallbacks
         ) { }
+
         public RuntimeFallbacks(string runtime, params string?[] fallbacks) { }
+
         public System.Collections.Generic.IReadOnlyList<string?> Fallbacks
         {
             get { throw null; }
@@ -506,9 +567,11 @@ namespace Microsoft.Extensions.DependencyModel
             set { }
         }
     }
+
     public partial class RuntimeFile
     {
         public RuntimeFile(string path, string? assemblyVersion, string? fileVersion) { }
+
         public string? AssemblyVersion
         {
             get { throw null; }
@@ -522,6 +585,7 @@ namespace Microsoft.Extensions.DependencyModel
             get { throw null; }
         }
     }
+
     public partial class RuntimeLibrary : Microsoft.Extensions.DependencyModel.Library
     {
         public RuntimeLibrary(
@@ -543,6 +607,7 @@ namespace Microsoft.Extensions.DependencyModel
                 default(System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.Dependency>),
                 default(bool)
             ) { }
+
         public RuntimeLibrary(
             string type,
             string name,
@@ -564,6 +629,7 @@ namespace Microsoft.Extensions.DependencyModel
                 default(System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.Dependency>),
                 default(bool)
             ) { }
+
         public RuntimeLibrary(
             string type,
             string name,
@@ -586,6 +652,7 @@ namespace Microsoft.Extensions.DependencyModel
                 default(System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.Dependency>),
                 default(bool)
             ) { }
+
         public System.Collections.Generic.IReadOnlyList<Microsoft.Extensions.DependencyModel.RuntimeAssetGroup> NativeLibraryGroups
         {
             get { throw null; }
@@ -599,6 +666,7 @@ namespace Microsoft.Extensions.DependencyModel
             get { throw null; }
         }
     }
+
     public partial class TargetInfo
     {
         public TargetInfo(
@@ -607,6 +675,7 @@ namespace Microsoft.Extensions.DependencyModel
             string? runtimeSignature,
             bool isPortable
         ) { }
+
         public string Framework
         {
             get { throw null; }
@@ -625,13 +694,16 @@ namespace Microsoft.Extensions.DependencyModel
         }
     }
 }
+
 namespace Microsoft.Extensions.DependencyModel.Resolution
 {
     public partial class AppBaseCompilationAssemblyResolver
         : Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver
     {
         public AppBaseCompilationAssemblyResolver() { }
+
         public AppBaseCompilationAssemblyResolver(string basePath) { }
+
         public bool TryResolveAssemblyPaths(
             Microsoft.Extensions.DependencyModel.CompilationLibrary library,
             System.Collections.Generic.List<string>? assemblies
@@ -640,12 +712,14 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             throw null;
         }
     }
+
     public partial class CompositeCompilationAssemblyResolver
         : Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver
     {
         public CompositeCompilationAssemblyResolver(
             Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver[] resolvers
         ) { }
+
         public bool TryResolveAssemblyPaths(
             Microsoft.Extensions.DependencyModel.CompilationLibrary library,
             System.Collections.Generic.List<string>? assemblies
@@ -654,15 +728,19 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             throw null;
         }
     }
+
     public partial class DotNetReferenceAssembliesPathResolver
     {
         public static readonly string DotNetReferenceAssembliesPathEnv;
+
         public DotNetReferenceAssembliesPathResolver() { }
+
         public static string? Resolve()
         {
             throw null;
         }
     }
+
     public partial interface ICompilationAssemblyResolver
     {
         bool TryResolveAssemblyPaths(
@@ -670,11 +748,14 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             System.Collections.Generic.List<string>? assemblies
         );
     }
+
     public partial class PackageCompilationAssemblyResolver
         : Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver
     {
         public PackageCompilationAssemblyResolver() { }
+
         public PackageCompilationAssemblyResolver(string nugetPackageDirectory) { }
+
         public bool TryResolveAssemblyPaths(
             Microsoft.Extensions.DependencyModel.CompilationLibrary library,
             System.Collections.Generic.List<string>? assemblies
@@ -683,14 +764,17 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             throw null;
         }
     }
+
     public partial class ReferenceAssemblyPathResolver
         : Microsoft.Extensions.DependencyModel.Resolution.ICompilationAssemblyResolver
     {
         public ReferenceAssemblyPathResolver() { }
+
         public ReferenceAssemblyPathResolver(
             string? defaultReferenceAssembliesPath,
             string[] fallbackSearchPaths
         ) { }
+
         public bool TryResolveAssemblyPaths(
             Microsoft.Extensions.DependencyModel.CompilationLibrary library,
             System.Collections.Generic.List<string>? assemblies
@@ -700,6 +784,7 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         }
     }
 }
+
 namespace System.Collections.Generic
 {
     public static partial class CollectionExtensions
@@ -710,18 +795,21 @@ namespace System.Collections.Generic
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyModel.RuntimeAssetGroup? GetDefaultGroup(
             this System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeAssetGroup> self
         )
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeFile> GetDefaultRuntimeFileAssets(
             this System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeAssetGroup> self
         )
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<string> GetRuntimeAssets(
             this System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeAssetGroup> self,
             string runtime
@@ -729,6 +817,7 @@ namespace System.Collections.Generic
         {
             throw null;
         }
+
         public static System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeFile> GetRuntimeFileAssets(
             this System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeAssetGroup> self,
             string runtime
@@ -736,6 +825,7 @@ namespace System.Collections.Generic
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyModel.RuntimeAssetGroup? GetRuntimeGroup(
             this System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyModel.RuntimeAssetGroup> self,
             string runtime

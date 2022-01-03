@@ -12,6 +12,7 @@ namespace System.Reflection.Emit.Tests
     public class BoolAllAttribute : Attribute
     {
         private bool _s;
+
         public BoolAllAttribute(bool s)
         {
             _s = s;
@@ -22,6 +23,7 @@ namespace System.Reflection.Emit.Tests
     public class IntClassAttribute : Attribute
     {
         public int i;
+
         public IntClassAttribute(int i)
         {
             this.i = i;

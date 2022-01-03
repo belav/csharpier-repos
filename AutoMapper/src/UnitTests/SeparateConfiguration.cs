@@ -10,10 +10,12 @@
         {
             public int Value { get; set; }
         }
+
         public class Dest
         {
             public int Value { get; set; }
         }
+
         public SeparateConfiguration()
         {
             var expr = new MapperConfigurationExpression();

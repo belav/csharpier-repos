@@ -185,12 +185,16 @@ public class DependencyInjectionTest
     {
         [Inject]
         public IMyService PublicReadWrite { get; set; }
+
         [Inject]
         public IMyService PublicReadOnly { get; private set; }
+
         [Inject]
         private IMyService Private { get; set; }
+
         [Inject]
         public IMyOtherService DifferentServiceType { get; set; }
+
         [Inject]
         public MyConcreteService ConcreteServiceType { get; set; }
 
@@ -200,10 +204,13 @@ public class DependencyInjectionTest
     class HasInheritedInjectedProperty : HasInjectableProperty { }
 
     interface IMyService { }
+
     interface IMyOtherService { }
 
     class MyServiceImplementation : IMyService { }
+
     class MyOtherServiceImplementation : IMyOtherService { }
+
     class MyConcreteService { }
 
     class TestComponent : IComponent

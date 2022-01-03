@@ -59,12 +59,14 @@ namespace System.Data.Common
             TraceExceptionAsReturnValue(e);
             return e;
         }
+
         internal static InvalidOperationException InvalidOperation(string error, Exception? inner)
         {
             InvalidOperationException e = new InvalidOperationException(error, inner);
             TraceExceptionAsReturnValue(e);
             return e;
         }
+
         internal static InvalidCastException InvalidCast()
         {
             InvalidCastException e = new InvalidCastException();
@@ -197,10 +199,12 @@ namespace System.Data.Common
         {
             return ADP.InvalidOperation(SR.GetString(SR.ADP_InvalidDataDirectory));
         }
+
         internal static ArgumentException InvalidKeyname(string? parameterName)
         {
             return Argument(SR.GetString(SR.ADP_InvalidKey), parameterName);
         }
+
         internal static ArgumentException InvalidValue(string parameterName)
         {
             return Argument(SR.GetString(SR.ADP_InvalidValue), parameterName);
@@ -248,6 +252,7 @@ namespace System.Data.Common
         {
             return Provider(SR.GetString(SR.ADP_TransactionConnectionMismatch));
         }
+
         internal static InvalidOperationException TransactionRequired(string method)
         {
             return Provider(SR.GetString(SR.ADP_TransactionRequired, method));
@@ -265,6 +270,7 @@ namespace System.Data.Common
         {
             return InvalidOperation(SR.GetString(SR.ADP_ConnectionRequired, method));
         }
+
         internal static InvalidOperationException OpenConnectionRequired(
             string method,
             ConnectionState state
@@ -318,6 +324,7 @@ namespace System.Data.Common
                 ADP.CommandTimeout
             );
         }
+
         internal static Exception DeriveParametersNotSupported(IDbCommand value)
         {
             return DataAdapter(
@@ -328,6 +335,7 @@ namespace System.Data.Common
                 )
             );
         }
+
         internal static Exception UninitializedParameterSize(int index, Type dataType)
         {
             return InvalidOperation(
@@ -338,6 +346,7 @@ namespace System.Data.Common
                 )
             );
         }
+
         internal static InvalidOperationException QuotePrefixNotSet(string method)
         {
             return InvalidOperation(SR.GetString(SR.ADP_QuotePrefixNotSet, method));
@@ -350,16 +359,19 @@ namespace System.Data.Common
         {
             return InvalidOperation(SR.GetString(SR.ADP_ConnectionIsDisabled), InnerException);
         }
+
         internal static Exception ClosedConnectionError()
         {
             return InvalidOperation(SR.GetString(SR.ADP_ClosedConnectionError));
         }
+
         internal static Exception ConnectionAlreadyOpen(ConnectionState state)
         {
             return InvalidOperation(
                 SR.GetString(SR.ADP_ConnectionAlreadyOpen, ADP.ConnectionStateMsg(state))
             );
         }
+
         internal static Exception OpenConnectionPropertySet(string property, ConnectionState state)
         {
             return InvalidOperation(
@@ -370,10 +382,12 @@ namespace System.Data.Common
                 )
             );
         }
+
         internal static Exception EmptyDatabaseName()
         {
             return Argument(SR.GetString(SR.ADP_EmptyDatabaseName));
         }
+
         internal static Exception DatabaseNameTooLong()
         {
             return Argument(SR.GetString(SR.ADP_DatabaseNameTooLong));
@@ -386,6 +400,7 @@ namespace System.Data.Common
             ConnectionOptionsMissing,
             CouldNotSwitchToClosedPreviouslyOpenedState,
         }
+
         internal static Exception InternalConnectionError(ConnectionError internalError)
         {
             return InvalidOperation(
@@ -408,16 +423,19 @@ namespace System.Data.Common
         {
             return Argument(SR.GetString(SR.ADP_InvalidDataType, typecode.ToString()));
         }
+
         internal static ArgumentException UnknownDataType(Type dataType)
         {
             return Argument(SR.GetString(SR.ADP_UnknownDataType, dataType.FullName!));
         }
+
         internal static ArgumentException DbTypeNotSupported(System.Data.DbType type, Type enumtype)
         {
             return Argument(
                 SR.GetString(SR.ADP_DbTypeNotSupported, type.ToString(), enumtype.Name)
             );
         }
+
         internal static ArgumentException UnknownDataTypeCode(Type dataType, TypeCode typeCode)
         {
             return Argument(
@@ -428,6 +446,7 @@ namespace System.Data.Common
                 )
             );
         }
+
         internal static ArgumentException InvalidOffsetValue(int value)
         {
             return Argument(
@@ -437,6 +456,7 @@ namespace System.Data.Common
                 )
             );
         }
+
         internal static ArgumentException InvalidSizeValue(int value)
         {
             return Argument(
@@ -493,6 +513,7 @@ namespace System.Data.Common
         {
             return CollectionIndexInt32(index, collection.GetType(), collection.Count);
         }
+
         internal static Exception ParametersSourceIndex(
             string parameterName,
             IDataParameterCollection collection,
@@ -506,6 +527,7 @@ namespace System.Data.Common
                 collection.GetType()
             );
         }
+
         internal static Exception ParameterNull(
             string parameter,
             IDataParameterCollection collection,
@@ -514,6 +536,7 @@ namespace System.Data.Common
         {
             return CollectionNullValue(parameter, collection.GetType(), parameterType);
         }
+
         internal static Exception InvalidParameterType(
             IDataParameterCollection collection,
             Type parameterType,
@@ -532,10 +555,12 @@ namespace System.Data.Common
                 SR.GetString(SR.ADP_ParallelTransactionsNotSupported, obj.GetType().Name)
             );
         }
+
         internal static Exception TransactionZombied(IDbTransaction obj)
         {
             return InvalidOperation(SR.GetString(SR.ADP_TransactionZombied, obj.GetType().Name));
         }
+
         internal static Exception OffsetOutOfRangeException()
         {
             return InvalidOperation(SR.GetString(SR.ADP_OffsetOutOfRangeException));

@@ -108,6 +108,7 @@ namespace System.Speech.Recognition
 
         #endregion
     }
+
     [Flags]
     public enum DisplayAttributes
     {

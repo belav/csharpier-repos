@@ -16,6 +16,7 @@ namespace System.Xml.Xsl.XsltOld
         private Avt? _dataTypeAvt;
         private Avt? _orderAvt;
         private Avt? _caseOrderAvt;
+
         // Compile time precalculated AVTs
         private string? _lang;
         private XmlDataType _dataType = XmlDataType.Text;

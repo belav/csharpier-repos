@@ -18,6 +18,7 @@ namespace System.Xml
         // Member fields
         //
         private readonly XmlTextReaderImpl _impl;
+
         //
         //
         // Constructors
@@ -105,6 +106,7 @@ namespace System.Xml
             _impl = new XmlTextReaderImpl(url, nt);
             _impl.OuterReader = this;
         }
+
         //
         // XmlReader members
         //
@@ -446,6 +448,7 @@ namespace System.Xml
         {
             return _impl.ReadBinHex(array, offset, len);
         }
+
         //
         // Internal helper methods
         //

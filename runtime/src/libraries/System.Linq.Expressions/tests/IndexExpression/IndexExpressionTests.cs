@@ -792,7 +792,6 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.Property(instance, prop, Expression.Constant(0))
             );
         }
-
         // FEATURE_COMPILE
 #endif
 

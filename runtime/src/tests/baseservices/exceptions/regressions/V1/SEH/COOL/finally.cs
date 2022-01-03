@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading;
+
 public class Foo
 {
     private static int n = 0;

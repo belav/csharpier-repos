@@ -80,6 +80,7 @@ namespace System.DirectoryServices.AccountManagement
             // Caller must also populate the underlyingObject field if the P is to be used R/W
             return p;
         }
+
         // Used to implement StoreCtx.GetAsPrincipal for AD and SAM
         internal static Principal DirectoryEntryToPrincipal(
             DirectoryEntry de,
@@ -165,6 +166,7 @@ namespace System.DirectoryServices.AccountManagement
                 return ADUtils.IsOfObjectClass(de, className);
             }
         }
+
         internal static AuthenticationTypes MapOptionsToAuthTypes(ContextOptions options)
         {
             AuthenticationTypes authTypes = AuthenticationTypes.Secure;
@@ -711,6 +713,7 @@ namespace System.DirectoryServices.AccountManagement
 
             return flag;
         }
+
         internal static void AccountControlFromDirectoryEntry(
             dSPropertyCollection properties,
             string suggestedProperty,

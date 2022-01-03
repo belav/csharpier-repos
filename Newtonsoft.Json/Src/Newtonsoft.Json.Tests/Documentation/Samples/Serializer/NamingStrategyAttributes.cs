@@ -47,6 +47,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
+
             [JsonProperty(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
             public int SnakeRating { get; set; }
         }

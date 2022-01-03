@@ -142,6 +142,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 return TopObject!;
             }
         }
+
         private bool HasSurrogate(Type t)
         {
             ISurrogateSelector ignored;

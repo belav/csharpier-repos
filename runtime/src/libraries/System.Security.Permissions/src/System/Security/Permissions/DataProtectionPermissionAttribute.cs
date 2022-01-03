@@ -23,11 +23,13 @@ namespace System.Security.Permissions
     {
         public DataProtectionPermissionAttribute(SecurityAction action)
             : base(default(SecurityAction)) { }
+
         public DataProtectionPermissionFlags Flags { get; set; }
         public bool ProtectData { get; set; }
         public bool UnprotectData { get; set; }
         public bool ProtectMemory { get; set; }
         public bool UnprotectMemory { get; set; }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);

@@ -11,6 +11,7 @@ namespace KnightMove
             y;
         public int v;
     }
+
     internal struct SQ
     {
         public int visited;

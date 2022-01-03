@@ -199,6 +199,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         private byte ReadByte() => _byteArray[_position++];
+
         private sbyte ReadSByte() => (sbyte)ReadByte();
 
         private ushort ReadUInt16()

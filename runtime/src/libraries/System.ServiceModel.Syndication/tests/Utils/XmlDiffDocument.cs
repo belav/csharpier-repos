@@ -34,6 +34,7 @@ namespace System.ServiceModel.Syndication.Tests
     internal class PositionInfo : IXmlLineInfo
     {
         public virtual bool HasLineInfo() => false;
+
         public virtual int LineNumber => 0;
         public virtual int LinePosition => 0;
 
@@ -60,6 +61,7 @@ namespace System.ServiceModel.Syndication.Tests
         }
 
         public override bool HasLineInfo() => true;
+
         public override int LineNumber => _mlineInfo.LineNumber;
         public override int LinePosition => _mlineInfo.LinePosition;
     }
@@ -844,6 +846,7 @@ namespace System.ServiceModel.Syndication.Tests
                 }
             }
         }
+
         public override string GetAttribute(string localName, string namespaceURI)
         {
             if (CurrentNode is XmlDiffElement)

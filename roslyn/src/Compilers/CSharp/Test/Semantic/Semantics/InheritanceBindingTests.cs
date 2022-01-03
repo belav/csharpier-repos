@@ -10050,6 +10050,7 @@ class C2 : C1, I1, I2
             comp.VerifyDiagnostics(DiagnosticDescription.None);
             Assert.True(c2Type.Interfaces().All(iface => iface.Name == "I1" || iface.Name == "I2"));
         }
+
         [WorkItem(540451, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540451")]
         [Fact]
         public void TestImplicitImplSignatureMismatches()
@@ -11968,6 +11969,7 @@ class Test
                         .WithArguments("Explicit.I1<int, int>.Method(int, int[])")
                 );
         }
+
         [Fact]
         public void TestErrorsOverridingImplementingMember()
         {

@@ -33,10 +33,13 @@ namespace System.Net.Http
     {
         /// <summary>How frequently an operation should be initiated to clean out old pools and connections in those pools.</summary>
         private readonly TimeSpan _cleanPoolTimeout;
+
         /// <summary>The pools, indexed by endpoint.</summary>
         private readonly ConcurrentDictionary<HttpConnectionKey, HttpConnectionPool> _pools;
+
         /// <summary>Timer used to initiate cleaning of the pools.</summary>
         private readonly Timer? _cleaningTimer;
+
         /// <summary>Heart beat timer currently used for Http2 ping only.</summary>
         private readonly Timer? _heartBeatTimer;
 
@@ -51,6 +54,7 @@ namespace System.Net.Http
         /// <see cref="ConcurrentDictionary{TKey,TValue}.IsEmpty"/> call.
         /// </summary>
         private bool _timerIsRunning;
+
         /// <summary>Object used to synchronize access to state in the pool.</summary>
         private object SyncObj => _pools;
 

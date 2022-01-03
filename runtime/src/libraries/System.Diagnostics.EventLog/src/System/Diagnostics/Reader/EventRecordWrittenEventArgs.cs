@@ -12,6 +12,7 @@ namespace System.Diagnostics.Eventing.Reader
         {
             EventRecord = record;
         }
+
         internal EventRecordWrittenEventArgs(Exception exception)
         {
             EventException = exception;

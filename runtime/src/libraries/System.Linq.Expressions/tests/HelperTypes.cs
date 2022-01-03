@@ -40,6 +40,7 @@ namespace System.Linq.Expressions.Tests
         public string S;
 
         public D() { }
+
         public D(int val) : this(val, "") { }
 
         public D(int val, string s)
@@ -93,10 +94,12 @@ namespace System.Linq.Expressions.Tests
         {
             return (o is S) && Equals((S)o);
         }
+
         public bool Equals(S other)
         {
             return true;
         }
+
         public override int GetHashCode()
         {
             return 0;
@@ -118,10 +121,12 @@ namespace System.Linq.Expressions.Tests
         {
             return (o is Sp) && Equals((Sp)o);
         }
+
         public bool Equals(Sp other)
         {
             return other.I == I && other.D.Equals(D);
         }
+
         public override int GetHashCode()
         {
             return I.GetHashCode() ^ D.GetHashCode();
@@ -141,10 +146,12 @@ namespace System.Linq.Expressions.Tests
         {
             return (o is Ss) && Equals((Ss)o);
         }
+
         public bool Equals(Ss other)
         {
             return other.Val.Equals(Val);
         }
+
         public override int GetHashCode()
         {
             return Val.GetHashCode();
@@ -164,10 +171,12 @@ namespace System.Linq.Expressions.Tests
         {
             return (o is Sc) && Equals((Sc)o);
         }
+
         public bool Equals(Sc other)
         {
             return other.S == S;
         }
+
         public override int GetHashCode()
         {
             return S.GetHashCode();
@@ -189,10 +198,12 @@ namespace System.Linq.Expressions.Tests
         {
             return (o is Scs) && Equals((Scs)o);
         }
+
         public bool Equals(Scs other)
         {
             return other.S == S && other.Val.Equals(Val);
         }
+
         public override int GetHashCode()
         {
             return S.GetHashCode() ^ Val.GetHashCode();
@@ -286,6 +297,7 @@ namespace System.Linq.Expressions.Tests
 #pragma warning restore 0067
 
         public void GenericMethod<T>() { }
+
         public static void StaticMethod() { }
 
         public static readonly NonGenericClass NonGenericField = new NonGenericClass();
@@ -366,6 +378,7 @@ namespace System.Linq.Expressions.Tests
     public struct ValueTypeWithParameterlessConstructor
     {
         public readonly bool ConstructorWasRun;
+
         public ValueTypeWithParameterlessConstructor()
         {
             ConstructorWasRun = true;
@@ -375,10 +388,12 @@ namespace System.Linq.Expressions.Tests
     public struct ValueTypeWithParameterlessConstructorThatThrows
     {
         public readonly object Value;
+
         public ValueTypeWithParameterlessConstructorThatThrows()
         {
             throw new InvalidOperationException();
         }
+
         public ValueTypeWithParameterlessConstructorThatThrows(object value)
         {
             Value = value;
@@ -389,30 +404,37 @@ namespace System.Linq.Expressions.Tests
     {
         A = byte.MaxValue
     }
+
     public enum SByteEnum : sbyte
     {
         A = sbyte.MaxValue
     }
+
     public enum Int16Enum : short
     {
         A = short.MaxValue
     }
+
     public enum UInt16Enum : ushort
     {
         A = ushort.MaxValue
     }
+
     public enum Int32Enum : int
     {
         A = int.MaxValue
     }
+
     public enum UInt32Enum : uint
     {
         A = uint.MaxValue
     }
+
     public enum Int64Enum : long
     {
         A = long.MaxValue
     }
+
     public enum UInt64Enum : ulong
     {
         A = ulong.MaxValue
@@ -499,25 +521,38 @@ namespace System.Linq.Expressions.Tests
 
         public static Number operator +(Number l, Number r) =>
             new Number(unchecked(l._value + r._value));
+
         public static Number operator -(Number l, Number r) => new Number(l._value - r._value);
+
         public static Number operator *(Number l, Number r) =>
             new Number(unchecked(l._value * r._value));
+
         public static Number operator /(Number l, Number r) => new Number(l._value / r._value);
+
         public static Number operator %(Number l, Number r) => new Number(l._value % r._value);
 
         public static Number operator &(Number l, Number r) => new Number(l._value & r._value);
+
         public static Number operator |(Number l, Number r) => new Number(l._value | r._value);
+
         public static Number operator ^(Number l, Number r) => new Number(l._value ^ r._value);
 
         public static bool operator >(Number l, Number r) => l._value > r._value;
+
         public static bool operator >=(Number l, Number r) => l._value >= r._value;
+
         public static bool operator <(Number l, Number r) => l._value < r._value;
+
         public static bool operator <=(Number l, Number r) => l._value <= r._value;
+
         public static bool operator ==(Number l, Number r) => l._value == r._value;
+
         public static bool operator !=(Number l, Number r) => l._value != r._value;
 
         public override bool Equals(object obj) => obj is Number && Equals((Number)obj);
+
         public bool Equals(Number other) => _value == other._value;
+
         public override int GetHashCode() => _value;
     }
 

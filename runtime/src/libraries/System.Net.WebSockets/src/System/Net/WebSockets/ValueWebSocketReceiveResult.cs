@@ -40,6 +40,7 @@ namespace System.Net.WebSockets
 
         private static void ThrowCountOutOfRange() =>
             throw new ArgumentOutOfRangeException("count");
+
         private static void ThrowMessageTypeOutOfRange() =>
             throw new ArgumentOutOfRangeException("messageType");
     }

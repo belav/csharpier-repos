@@ -476,6 +476,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     public struct Parent
     {
         private const int x = 1;
+
         public int Foo(long? z = x)
         {
             if (z == 1)
@@ -511,6 +512,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     public struct Parent
     {
         private const string x = "test";
+
         public int Foo(string z = x)
         {
             if (z == "test")
@@ -546,6 +548,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.s
     public struct Parent
     {
         private const bool x = true;
+
         public int Foo(bool? z = x)
         {
             if ((bool)z)

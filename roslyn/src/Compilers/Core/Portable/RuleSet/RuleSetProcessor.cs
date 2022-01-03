@@ -152,6 +152,7 @@ namespace Microsoft.CodeAnalysis
                 includes.ToImmutable()
             );
         }
+
 #nullable disable
 
         /// <summary>

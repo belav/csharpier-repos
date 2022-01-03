@@ -1259,7 +1259,9 @@ namespace System.Text.RegularExpressions.Tests
                 RegexRunner.CharInSet(ch, set, category);
 
             protected override bool FindFirstChar() => throw new NotImplementedException();
+
             protected override void Go() => throw new NotImplementedException();
+
             protected override void InitTrackCount() => throw new NotImplementedException();
         }
 

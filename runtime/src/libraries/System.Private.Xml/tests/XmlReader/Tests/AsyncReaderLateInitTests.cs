@@ -196,6 +196,7 @@ namespace System.Xml.Tests
 
             public override int Read(byte[] buffer, int offset, int count) =>
                 ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
+
             public override bool CanRead => true;
             public override bool CanSeek => false;
             public override bool CanWrite => false;
@@ -205,12 +206,17 @@ namespace System.Xml.Tests
                 get => throw new NotSupportedException();
                 set => throw new NotSupportedException();
             }
+
             public override void Flush() { }
+
             public override Task FlushAsync(CancellationToken cancellationToken) =>
                 Task.CompletedTask;
+
             public override long Seek(long offset, SeekOrigin origin) =>
                 throw new NotSupportedException();
+
             public override void SetLength(long value) => throw new NotSupportedException();
+
             public override void Write(byte[] buffer, int offset, int count) =>
                 throw new NotSupportedException();
         }

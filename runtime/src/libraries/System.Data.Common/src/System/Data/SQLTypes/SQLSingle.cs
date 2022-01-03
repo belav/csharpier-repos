@@ -21,6 +21,7 @@ namespace System.Data.SqlTypes
     {
         private bool _fNotNull; // false if null
         private float _value;
+
         // constructor
         // construct a Null
         private SqlSingle(bool fNull)
@@ -258,6 +259,7 @@ namespace System.Data.SqlTypes
         {
             return x + y;
         }
+
         // Alternative method for operator -
         public static SqlSingle Subtract(SqlSingle x, SqlSingle y)
         {

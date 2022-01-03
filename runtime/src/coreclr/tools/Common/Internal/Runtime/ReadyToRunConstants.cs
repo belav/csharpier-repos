@@ -316,6 +316,7 @@ namespace Internal.ReadyToRunConstants
     public static class ReadyToRunRuntimeConstants
     {
         public const int READYTORUN_PInvokeTransitionFrameSizeInPointerUnits = 11;
+
         public static int READYTORUN_ReversePInvokeTransitionFrameSizeInPointerUnits(
             TargetArchitecture target
         ) => target == TargetArchitecture.X86 ? 5 : 2;

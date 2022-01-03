@@ -24,9 +24,12 @@ namespace System.Reflection.TypeLoading
         }
 
         protected sealed override bool IsArrayImpl() => true;
+
         public sealed override bool IsSZArray => !_multiDim;
         public sealed override bool IsVariableBoundArray => _multiDim;
+
         protected sealed override bool IsByRefImpl() => false;
+
         protected sealed override bool IsPointerImpl() => false;
 
         protected sealed override string Suffix => Helpers.ComputeArraySuffix(_rank, _multiDim);

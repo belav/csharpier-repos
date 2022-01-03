@@ -26,21 +26,25 @@ public class DevDiv_541643
     {
         return (float)i;
     }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static double GetDouble(int i)
     {
         return (double)i;
     }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int GetInt(float f)
     {
         return (int)f;
     }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int GetInt(double d)
     {
         return (int)d;
     }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int test(int count)
     {
@@ -65,6 +69,7 @@ public class DevDiv_541643
         Console.WriteLine("Result: " + result);
         return result;
     }
+
     public static int Main()
     {
         int result = test(10);

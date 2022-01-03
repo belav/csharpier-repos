@@ -1054,6 +1054,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     public class MyCollection : IEnumerable
     {
         private int[] _items;
+
         public MyCollection()
         {
             _items = new int[5] { 1, 4, 3, 2, 5 };
@@ -1068,6 +1069,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
         {
             private int _nIndex;
             private MyCollection _collection;
+
             public MyEnumerator(MyCollection coll)
             {
                 _collection = coll;
@@ -1136,6 +1138,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     public class MyCollection : IEnumerable
     {
         private int[] _items;
+
         public MyCollection()
         {
             _items = new int[5] { 1, 4, 3, 2, 5 };
@@ -1150,6 +1153,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
         {
             private int _nIndex;
             private MyCollection _collection;
+
             public MyEnumerator(MyCollection coll)
             {
                 _collection = coll;
@@ -1218,6 +1222,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     public class MyCollection : IEnumerable
     {
         private int[] _items;
+
         public MyCollection()
         {
             _items = new int[5] { 1, 4, 3, 2, 6 };
@@ -1237,6 +1242,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
         {
             private int _index;
             private MyCollection _collection;
+
             public MyEnumerator(MyCollection coll)
             {
                 _collection = coll;

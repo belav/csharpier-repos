@@ -3,6 +3,7 @@
 //
 
 using System;
+
 struct AA
 {
     static bool Static3(ulong param2)
@@ -10,6 +11,7 @@ struct AA
         bool b = false;
         return (bool)(object)(long)(byte)(b ? Convert.ToInt64(param2) : (long)param2);
     }
+
     static int Main()
     {
         try

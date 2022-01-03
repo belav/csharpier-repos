@@ -80,7 +80,9 @@ namespace System.Reflection
 
             return vsb.ToString();
         }
+
         public override int GetHashCode() => base.GetHashCode();
+
         public override bool Equals(object? obj) => obj == (object)this;
         #endregion
 

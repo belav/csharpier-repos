@@ -217,6 +217,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             analyzedArguments.Free();
             return result;
         }
+
 #nullable disable
 
         /// <summary>

@@ -10,6 +10,7 @@ namespace System.Collections.Tests
         Add,
         Delete
     }
+
     public static class TestData
     {
         public static IEnumerable<Tuple<InputAction, string>> GetData()

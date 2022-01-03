@@ -16,6 +16,7 @@ public struct ArrayStruct
         a3d = new double[size, size, size];
     }
 }
+
 public class struct1
 {
     public static Random rand;

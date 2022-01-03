@@ -21,11 +21,13 @@ internal class Test : baseclass
     {
         return a / b;
     }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public int testmethod2(int a, int b)
     {
         return a / b;
     }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public override int virtualmethod(int a, int b)
     {

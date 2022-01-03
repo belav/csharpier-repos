@@ -623,6 +623,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         [DllImport("libc")]
         private static extern int chmod(string path, int mode);
+
         [DllImport("libc")]
         private static extern uint geteuid();
 

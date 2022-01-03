@@ -55,12 +55,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 initialMarkup,
                 new TestParameters(options: options, parseOptions: parseOptions)
             );
+
         private protected Task TestMissingInRegularAndScriptAsync(
             string initialMarkup,
             string optionName,
             ParseOptions parseOptions = null
         ) =>
             TestMissingInRegularAndScriptAsync(initialMarkup, GetOptions(optionName), parseOptions);
+
         protected Task TestInRegularAndScriptAsync(
             string initialMarkup,
             string expectedMarkup,

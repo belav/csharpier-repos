@@ -195,6 +195,7 @@ namespace System.Xml.Xsl.Xslt
 
         public ProtoTemplate(XslNodeType nt, QilName? name, XslVersion xslVer)
             : base(nt, name, null, xslVer) { }
+
         public abstract string GetDebugName();
     }
 

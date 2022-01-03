@@ -140,6 +140,7 @@ public class TestingInfrastructureInheritanceTests
     private class DisposableService : IAsyncDisposable
     {
         public bool _asyncDisposed = false;
+
         public ValueTask DisposeAsync()
         {
             _asyncDisposed = true;

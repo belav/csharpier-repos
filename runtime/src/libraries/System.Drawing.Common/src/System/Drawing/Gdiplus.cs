@@ -379,11 +379,13 @@ namespace System.Drawing
             /// are the following: ENHMETAHEADER, MetaHeader, MetafileHeaderWmf, MetafileHeaderEmf.
             public int iType;
             public int nSize = 40; // ndirect.DllLib.sizeOf( this )
+
             // rclBounds was a by-value RECTL structure
             public int rclBounds_left;
             public int rclBounds_top;
             public int rclBounds_right;
             public int rclBounds_bottom;
+
             // rclFrame was a by-value RECTL structure
             public int rclFrame_left;
             public int rclFrame_top;
@@ -398,9 +400,11 @@ namespace System.Drawing
             public int nDescription;
             public int offDescription;
             public int nPalEntries;
+
             // szlDevice was a by-value SIZE structure
             public int szlDevice_cx;
             public int szlDevice_cy;
+
             // szlMillimeters was a by-value SIZE structure
             public int szlMillimeters_cx;
             public int szlMillimeters_cy;
@@ -418,10 +422,13 @@ namespace System.Drawing
         {
             // Must be 0
             public ushort idReserved;
+
             // Must be 1
             public ushort idType;
+
             // Count of entries
             public ushort idCount;
+
             // First entry (anysize array)
             public ICONDIRENTRY idEntries;
         }

@@ -559,18 +559,25 @@ namespace System.Runtime.InteropServices.Tests
     {
         [FieldOffset(0)]
         public ushort wYear;
+
         [FieldOffset(2)]
         public ushort wMonth;
+
         [FieldOffset(4)]
         public ushort wDayOfWeek;
+
         [FieldOffset(6)]
         public ushort wDay;
+
         [FieldOffset(8)]
         public ushort wHour;
+
         [FieldOffset(10)]
         public ushort wMinute;
+
         [FieldOffset(12)]
         public ushort wSecond;
+
         [FieldOffset(14)]
         public ushort wMilliseconds;
     }
@@ -598,33 +605,43 @@ namespace System.Runtime.InteropServices.Tests
     {
         [FieldOffset(0)]
         public short m_short1; // 2 bytes
+
         [FieldOffset(2)]
         public short m_short2; // 2 bytes
 
         [FieldOffset(4)]
         public byte union1_byte1; // 1 byte
+
         [FieldOffset(5)]
         public byte union1_byte2; // 1 byte
+
         [FieldOffset(6)]
         public short union1_short1; // 2 bytes
+
         [FieldOffset(8)]
         public int union1_int1; // 4 bytes
+
         [FieldOffset(12)]
         public int union1_int2; // 4 bytes
+
         [FieldOffset(16)]
         public double union1_double1; // 8 bytes
 
         [FieldOffset(4)]
         public ushort union2_ushort1; // 2 bytes
+
         [FieldOffset(6)]
         public ushort union2_ushort2; // 2 bytes
+
         [FieldOffset(8)]
         public int union3_int1; // 4 bytes
+
         [FieldOffset(8)]
         public decimal union3_decimal1; // 16 bytes
 
         [FieldOffset(24)]
         public ushort m_ushort1; // 2 bytes
+
         // 6 bytes of padding
 
         [FieldOffset(32)]
@@ -638,37 +655,45 @@ namespace System.Runtime.InteropServices.Tests
     internal struct FieldAlignmentTest
     {
         public byte m_byte1; // 1 byte
+
         // 1 byte of padding
 
         public short m_short1; // 2 bytes
         public short m_short2; // 2 bytes
+
         // 2 bytes of padding
 
         public int m_int1; // 4 bytes
         public byte m_byte2; // 1 byte
+
         // 3 bytes of padding
 
         public int m_int2; // 4 bytes
+
         // 4 bytes of padding (0 bytes on x86/Unix according System V ABI as double 4-byte aligned)
 
         public double m_double1; // 8 bytes
         public char m_char1; // 1 byte
         public char m_char2; // 1 byte
         public char m_char3; // 1 byte
+
         // 5 bytes of padding (1 byte on x86/Unix according System V ABI as double 4-byte aligned)
 
         public double m_double2; // 8 bytes
         public byte m_byte3; // 1 byte
         public byte m_byte4; // 1 byte
+
         // 6 bytes of padding
 
         public decimal m_decimal1; // 16 bytes
         public char m_char4; // 1 byte
         // 7 bytes of padding
     }
+
     struct FieldAlignmentTest_Decimal
     {
         public byte b; // 1 byte
+
         // 7 bytes of padding
 
         // The largest field in below struct is decimal (16 bytes wide).
@@ -685,6 +710,7 @@ namespace System.Runtime.InteropServices.Tests
     struct FieldAlignmentTest_Guid
     {
         public byte b; // 1 byte
+
         // 3 bytes of padding
 
         // Guid is really a struct with 4 byte alignment requirement (which is less than its byte size of 16 bytes).
@@ -697,6 +723,7 @@ namespace System.Runtime.InteropServices.Tests
     struct FieldAlignmentTest_Variant
     {
         public byte b; // 1 byte
+
         // 7 bytes of padding
 
         // Using [MarshalAs(UnmanagedType.Struct)] means that the Variant type will be used for field 'v' on native side.

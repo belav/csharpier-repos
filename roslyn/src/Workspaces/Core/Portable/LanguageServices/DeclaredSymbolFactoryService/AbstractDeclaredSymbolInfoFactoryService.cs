@@ -92,6 +92,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             string fullyQualifiedContainerName,
             CancellationToken cancellationToken
         );
+
         /// <summary>
         /// Get the name of the target type of specified extension method declaration. 
         /// The node provided must be an extension method declaration,  i.e. calling `TryGetDeclaredSymbolInfo()` 

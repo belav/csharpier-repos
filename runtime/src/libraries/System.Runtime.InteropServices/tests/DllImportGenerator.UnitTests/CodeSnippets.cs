@@ -43,6 +43,7 @@ partial class Basic
     public static partial void Method4();
 }
 ";
+
         /// <summary>
         /// Trivial declaration of GeneratedDllImport usage
         /// </summary>
@@ -178,6 +179,7 @@ unsafe partial class Test
     public static partial int* Method2();
 }
 ";
+
         /// <summary>
         /// Declaration with user defined EntryPoint.
         /// </summary>

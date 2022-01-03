@@ -142,6 +142,7 @@ namespace System.Linq.Expressions.Tests
 
         // a method with given elem_type
         protected virtual void NotifyBeginMethod(sig_elem_type elem_type) { }
+
         protected virtual void NotifyEndMethod() { }
 
         // total parameters for the method
@@ -149,10 +150,12 @@ namespace System.Linq.Expressions.Tests
 
         // starting a return type
         protected virtual void NotifyBeginRetType() { }
+
         protected virtual void NotifyEndRetType() { }
 
         // starting a parameter
         protected virtual void NotifyBeginParam() { }
+
         protected virtual void NotifyEndParam() { }
 
         // sentinel indication the location of the "..." in the method signature
@@ -163,10 +166,12 @@ namespace System.Linq.Expressions.Tests
 
         // a field with given elem_type
         protected virtual void NotifyBeginField(sig_elem_type elem_type) { }
+
         protected virtual void NotifyEndField() { }
 
         // a block of locals with given elem_type (always just LOCAL_SIG for now)
         protected virtual void NotifyBeginLocals(sig_elem_type elem_type) { }
+
         protected virtual void NotifyEndLocals() { }
 
         // count of locals with a block
@@ -174,6 +179,7 @@ namespace System.Linq.Expressions.Tests
 
         // starting a new local within a local block
         protected virtual void NotifyBeginLocal() { }
+
         protected virtual void NotifyEndLocal() { }
 
         // the only constraint available to locals at the moment is ELEMENT_TYPE_PINNED
@@ -181,10 +187,12 @@ namespace System.Linq.Expressions.Tests
 
         // a property with given element type
         protected virtual void NotifyBeginProperty(sig_elem_type elem_type) { }
+
         protected virtual void NotifyEndProperty() { }
 
         // starting array shape information for array types
         protected virtual void NotifyBeginArrayShape() { }
+
         protected virtual void NotifyEndArrayShape() { }
 
         // array rank (total number of dimensions)
@@ -192,15 +200,18 @@ namespace System.Linq.Expressions.Tests
 
         // number of dimensions with specified sizes followed by the size of each
         protected virtual void NotifyNumSizes(sig_count count) { }
+
         protected virtual void NotifySize(sig_count count) { }
 
         // BUG BUG lower bounds can be negative, how can this be encoded?
         // number of dimensions with specified lower bounds followed by lower bound of each
         protected virtual void NotifyNumLoBounds(sig_count count) { }
+
         protected virtual void NotifyLoBound(sig_count count) { }
 
         // starting a normal type (occurs in many contexts such as param, field, local, etc)
         protected virtual void NotifyBeginType() { }
+
         protected virtual void NotifyEndType() { }
 
         protected virtual void NotifyTypedByref() { }

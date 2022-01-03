@@ -1193,6 +1193,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             return pObject;
         }
+
         /////////////////////////////////////////////////////////////////////////////////
 
         private static bool IsMatchingStatic(SymWithType swt, Expr pObject)

@@ -10,11 +10,13 @@ struct Complex
     public int a,
         b,
         c;
+
     public void mul_em()
     {
         c = a * b;
     }
 };
+
 public class Complex_Array_Test
 {
     public static int Main(String[] args)

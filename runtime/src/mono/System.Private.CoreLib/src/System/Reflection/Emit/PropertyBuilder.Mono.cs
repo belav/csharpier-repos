@@ -131,22 +131,27 @@ namespace System.Reflection.Emit
         {
             return null!; // FIXME: coreclr throws
         }
+
         public override object[] GetCustomAttributes(bool inherit)
         {
             throw not_supported();
         }
+
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             throw not_supported();
         }
+
         public override MethodInfo? GetGetMethod(bool nonPublic)
         {
             return get_method;
         }
+
         public override ParameterInfo[] GetIndexParameters()
         {
             throw not_supported();
         }
+
         public override MethodInfo? GetSetMethod(bool nonPublic)
         {
             return set_method;
@@ -167,10 +172,12 @@ namespace System.Reflection.Emit
         {
             throw not_supported();
         }
+
         public override bool IsDefined(Type attributeType, bool inherit)
         {
             throw not_supported();
         }
+
         public void SetConstant(object? defaultValue)
         {
             typeb.check_not_created();

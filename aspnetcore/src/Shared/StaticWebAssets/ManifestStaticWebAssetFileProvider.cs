@@ -318,6 +318,7 @@ internal sealed class ManifestStaticWebAssetFileProvider : IFileProvider
             Name = name;
             _source = source;
         }
+
         public bool Exists => _source.Exists;
 
         public long Length => _source.Length;

@@ -177,6 +177,7 @@ namespace System.ComponentModel.Composition
         {
             Value = value;
         }
+
         public string Value { get; private set; }
     }
 

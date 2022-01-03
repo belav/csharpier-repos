@@ -114,8 +114,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public Alpha alpha = new Alpha();
+
         [DataMember]
         public Beta beta = new Beta();
+
         [DataMember]
         public Charlie charlie = new Charlie();
     }
@@ -125,8 +127,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public Beta beta1 = new Beta();
+
         [DataMember]
         public Charlie charlie = new Charlie();
+
         [DataMember]
         public Beta beta2 = new Beta();
     }
@@ -136,8 +140,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public Charlie charlie1 = new Charlie();
+
         [DataMember]
         public Beta beta = new Beta();
+
         [DataMember]
         public Charlie charlie2 = new Charlie();
     }
@@ -181,13 +187,16 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private ArrayList _arrayList = new ArrayList() { new Person() };
+
         [DataMember]
         private Dictionary<int, object> _dictionary = new Dictionary<int, object>()
         {
             { 001, new CharClass() }
         };
+
         [DataMember]
         private Hashtable _hashtable = new Hashtable() { { "one", new Version1() } };
+
         [DataMember]
         private object[] _singleDimArray = new object[] { new Employee() };
     }
@@ -823,6 +832,7 @@ namespace SerializationTestTypes
         }
 
         private static Stack<RefData> s_refStack = new Stack<RefData>();
+
         /// <summary>
         /// </summary>
         /// <param name="data"></param>
@@ -851,6 +861,7 @@ namespace SerializationTestTypes
         }
 
         public static bool supportCollectionDataContract = true;
+
         private static void FindRefUpdateRef(
             RefData refData,
             DataContract dataContract,
@@ -903,6 +914,7 @@ namespace SerializationTestTypes
                 }
             }
         }
+
         private static void FindRefHandleMembers(
             object data,
             DataContract dataContract,

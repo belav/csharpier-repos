@@ -601,6 +601,7 @@ namespace System.Drawing.Printing
             clone._printDialogDisplayed = false;
             return clone;
         }
+
         // what is done in copytohdevmode cannot give unwanted access AllPrinting permission
         internal DeviceContext CreateDeviceContext(PageSettings pageSettings)
         {

@@ -1132,7 +1132,9 @@ namespace System.Net.Http.Tests
         public class MockException : Exception
         {
             public MockException() { }
+
             public MockException(string message) : base(message) { }
+
             public MockException(string message, Exception inner) : base(message, inner) { }
         }
 
@@ -1177,6 +1179,7 @@ namespace System.Net.Http.Tests
                 return true;
             }
         }
+
         private class MockComparer : IEqualityComparer
         {
             public int EqualsCount { get; private set; }

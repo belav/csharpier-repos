@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis.Symbols
 
 #nullable disable // Skipped for now https://github.com/dotnet/roslyn/issues/39166
         Compilation DeclaringCompilation { get; }
+
 #nullable enable
 
         /// <summary>

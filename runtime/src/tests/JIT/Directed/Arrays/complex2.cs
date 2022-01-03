@@ -3,11 +3,13 @@
 //
 
 using System;
+
 public struct Yak
 {
     public Int32 a;
     private String _foo;
     public Int32 b;
+
     public void Do_Something()
     {
         _foo = a.ToString();
@@ -21,6 +23,7 @@ internal class Complex2_Array_Test
     {
         Console.Write(Odd_Variable.Length);
     }
+
     public static int Main(String[] args)
     {
         Console.WriteLine("Starting...");

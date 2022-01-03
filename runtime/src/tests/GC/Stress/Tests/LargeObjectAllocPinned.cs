@@ -4,6 +4,7 @@
 // Regression Test for Bug# 145842(Possible GC hole with byrefs into the large heap)
 
 using System;
+
 internal class LargePinned
 {
     [System.Security.SecuritySafeCritical]

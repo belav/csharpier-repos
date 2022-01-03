@@ -475,20 +475,32 @@ namespace XPathTests.FunctionalTests
             public override string BaseURI => _inner.BaseURI;
             public override bool IsEmptyElement => _inner.IsEmptyElement;
             public override string Value => _inner.Value;
+
             public override XPathNavigator Clone() => new CustomNavigator(_inner.Clone());
+
             public override bool IsSamePosition(XPathNavigator other) =>
                 _inner.IsSamePosition(Unwrap(other));
+
             public override bool MoveTo(XPathNavigator other) => _inner.MoveTo(Unwrap(other));
+
             public override bool MoveToFirstAttribute() => _inner.MoveToFirstAttribute();
+
             public override bool MoveToFirstChild() => _inner.MoveToFirstChild();
+
             public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope) =>
                 _inner.MoveToFirstNamespace(namespaceScope);
+
             public override bool MoveToId(string id) => _inner.MoveToId(id);
+
             public override bool MoveToNext() => _inner.MoveToNext();
+
             public override bool MoveToNextAttribute() => _inner.MoveToNextAttribute();
+
             public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope) =>
                 _inner.MoveToNextNamespace(namespaceScope);
+
             public override bool MoveToParent() => _inner.MoveToParent();
+
             public override bool MoveToPrevious() => _inner.MoveToPrevious();
         }
     }

@@ -45,6 +45,7 @@ namespace UnhandledExceptionTest
                 throw new ApplicationException("Invalid argument value " + value);
             }
         }
+
         public RunningMode(string runningMode)
         {
             string[] arguments = runningMode.Split(',');
@@ -135,6 +136,7 @@ namespace UnhandledExceptionTest
                 }
             }
         }
+
         public void PrintOutput()
         {
             Console.WriteLine("--- Output start: ---");
@@ -191,8 +193,10 @@ namespace UnhandledExceptionTest
         {
             return value ? "T" : "F";
         }
+
         public static readonly int MIN_CONFIG_CODE = 0;
         public static readonly int MAX_CONFIG_CODE = 255;
+
         public static TestDescription FromCode(int code)
         {
             if ((code >= MIN_CONFIG_CODE) && (code <= MAX_CONFIG_CODE))
@@ -457,6 +461,7 @@ namespace UnhandledExceptionTest
         {
             return value ? "T" : "F";
         }
+
         public void Print()
         {
             Console.WriteLine(

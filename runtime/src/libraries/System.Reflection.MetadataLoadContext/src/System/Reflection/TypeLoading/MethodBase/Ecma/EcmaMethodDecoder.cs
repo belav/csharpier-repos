@@ -25,11 +25,14 @@ namespace System.Reflection.TypeLoading.Ecma
         public RoModule GetRoModule() => _module;
 
         public string ComputeName() => MethodDefinition.Name.GetString(Reader);
+
         public int MetadataToken => _handle.GetToken();
+
         public IEnumerable<CustomAttributeData> ComputeTrueCustomAttributes() =>
             MethodDefinition.GetCustomAttributes().ToTrueCustomAttributes(_module);
 
         public int ComputeGenericParameterCount() => MethodDefinition.GetGenericParameters().Count;
+
         public RoType[] ComputeGenericArgumentsOrParameters()
         {
             GenericParameterHandleCollection gphs = MethodDefinition.GetGenericParameters();
@@ -205,6 +208,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 return _neverAccessThisExceptThroughMethodDefinitionProperty;
             }
         }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly MethodDefinition _neverAccessThisExceptThroughMethodDefinitionProperty;
     }

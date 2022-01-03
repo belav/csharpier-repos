@@ -27,21 +27,28 @@ namespace System.Threading.Tasks.Sources
         /// or null if a callback hasn't yet been provided and the operation hasn't yet completed.
         /// </summary>
         private Action<object> _continuation;
+
         /// <summary>State to pass to <see cref="_continuation"/>.</summary>
         private object _continuationState;
+
         /// <summary><see cref="ExecutionContext"/> to flow to the callback, or null if no flowing is required.</summary>
         private ExecutionContext _executionContext;
+
         /// <summary>
         /// A "captured" <see cref="SynchronizationContext"/> or <see cref="TaskScheduler"/> with which to invoke the callback,
         /// or null if no special context is required.
         /// </summary>
         private object _capturedContext;
+
         /// <summary>Whether the current operation has completed.</summary>
         private bool _completed;
+
         /// <summary>The result with which the operation succeeded, or the default value if it hasn't yet completed or failed.</summary>
         private TResult _result;
+
         /// <summary>The exception with which the operation failed, or null if it hasn't yet completed or completed successfully.</summary>
         private ExceptionDispatchInfo _error;
+
         /// <summary>The current version of this value, used to help prevent misuse.</summary>
         private short _version;
 
@@ -316,6 +323,7 @@ namespace System.Threading.Tasks.Sources
     internal static class ManualResetValueTaskSourceCoreShared // separated out of generic to avoid unnecessary duplication
     {
         internal static readonly Action<object> s_sentinel = CompletionSentinel;
+
         private static void CompletionSentinel(object _) // named method to aid debugging
         {
             Debug.Fail("The sentinel delegate should never be invoked.");

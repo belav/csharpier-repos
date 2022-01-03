@@ -13,6 +13,7 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         public uint Index { get; set; }
         public uint StartOffset { get; set; }
         public uint StopOffset { get; set; }
+
         public InterruptibleRange(uint index, uint start, uint stop)
         {
             Index = index;

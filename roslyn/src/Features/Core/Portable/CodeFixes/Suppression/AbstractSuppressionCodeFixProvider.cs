@@ -33,6 +33,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 {0} a specific target and scoped to a namespace, type, member, etc.
 
 ";
+
         protected AbstractSuppressionCodeFixProvider() { }
 
         public FixAllProvider GetFixAllProvider() => SuppressionFixAllProvider.Instance;

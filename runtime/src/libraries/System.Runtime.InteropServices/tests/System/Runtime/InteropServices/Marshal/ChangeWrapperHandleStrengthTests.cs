@@ -72,6 +72,7 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         private static void NonGenericMethod(int i) { }
+
         private delegate void NonGenericDelegate(int i);
 
         internal enum Int32Enum : int

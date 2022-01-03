@@ -55,8 +55,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
         public override IAssemblyDesc Assembly => this;
 
         public override IEnumerable<MetadataType> GetAllTypes() => _types;
+
         public override MetadataType GetGlobalModuleType() => throw new NotImplementedException();
+
         public AssemblyName GetName() => _name;
+
         private TypeRefTypeSystemType GetTypeInternal(string nameSpace, string name)
         {
             Dictionary<string, TypeRefTypeSystemType> nameToTypeDictionary = _nonNamespacedTypes;

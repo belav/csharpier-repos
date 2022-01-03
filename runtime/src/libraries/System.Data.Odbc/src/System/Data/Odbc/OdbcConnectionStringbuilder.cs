@@ -232,6 +232,7 @@ namespace System.Data.Odbc
             }
             return false;
         }
+
         private void Reset(Keywords index)
         {
             switch (index)

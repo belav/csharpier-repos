@@ -13,6 +13,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public Guid Value { get; set; }
         }
+
         class Destination
         {
             public string Value { get; set; }

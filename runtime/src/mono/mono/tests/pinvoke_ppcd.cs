@@ -20,23 +20,28 @@ public class Test_double
 {
     [DllImport("libtest", EntryPoint = "mono_return_double1")]
     public static extern double1 mono_return_double1(double1 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct double1
     {
         public double f1;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_double2")]
     public static extern double2 mono_return_double2(double2 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct double2
     {
         public double f1,
             f2;
     }
+
     // This structure is 1 element too large to use the special return
     //  rules.
     [DllImport("libtest", EntryPoint = "mono_return_double3")]
     public static extern double3 mono_return_double3(double3 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct double3
     {
@@ -44,8 +49,10 @@ public class Test_double
             f2,
             f3;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_double4")]
     public static extern double4 mono_return_double4(double4 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct double4
     {
@@ -54,8 +61,10 @@ public class Test_double
             f3,
             f4;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_double5")]
     public static extern double5 mono_return_double5(double5 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct double5
     {
@@ -65,8 +74,10 @@ public class Test_double
             f4,
             f5;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_double6")]
     public static extern double6 mono_return_double6(double6 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct double6
     {
@@ -77,8 +88,10 @@ public class Test_double
             f5,
             f6;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_double7")]
     public static extern double7 mono_return_double7(double7 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct double7
     {
@@ -90,8 +103,10 @@ public class Test_double
             f6,
             f7;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_double8")]
     public static extern double8 mono_return_double8(double8 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct double8
     {
@@ -104,10 +119,12 @@ public class Test_double
             f7,
             f8;
     }
+
     // This structure is 1 element too large to use the special parameter
     //  passing rules.
     [DllImport("libtest", EntryPoint = "mono_return_double9")]
     public static extern double9 mono_return_double9(double9 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct double9
     {
@@ -128,12 +145,15 @@ public class Test_double
     {
         public double f1;
     };
+
     public struct double2_nested2
     {
         public double f2;
     };
+
     [DllImport("libtest", EntryPoint = "mono_return_double2_nested")]
     public static extern double2_nested mono_return_double2_nested(double2_nested s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct double2_nested
     {
@@ -143,6 +163,7 @@ public class Test_double
 
     [DllImport("libtest", EntryPoint = "mono_return_double_array4")]
     public static extern double_array4 mono_return_double_array4(double_array4 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct double_array4
     {

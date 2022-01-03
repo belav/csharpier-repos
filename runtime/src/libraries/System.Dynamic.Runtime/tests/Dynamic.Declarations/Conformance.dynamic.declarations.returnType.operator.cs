@@ -130,6 +130,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
         public class MyClass
         {
             public int Field;
+
             public static dynamic operator -(MyClass d)
             {
                 return new MyClass() { Field = 3 };

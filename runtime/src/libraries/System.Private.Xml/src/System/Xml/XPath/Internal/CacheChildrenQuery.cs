@@ -31,6 +31,7 @@ namespace MS.Internal.Xml.XPath
             _positionStk = new StackInt();
             _needInput = true;
         }
+
         private CacheChildrenQuery(CacheChildrenQuery other) : base(other)
         {
             _nextInput = Clone(other._nextInput);

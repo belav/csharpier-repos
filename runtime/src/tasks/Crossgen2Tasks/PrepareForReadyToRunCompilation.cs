@@ -27,6 +27,7 @@ namespace Microsoft.NET.Build.Tasks
 
         [Required]
         public string OutputPath { get; set; }
+
         [Required]
         public bool IncludeSymbolsInSingleFile { get; set; }
 
@@ -39,6 +40,7 @@ namespace Microsoft.NET.Build.Tasks
         // and the second to create native PDBs for the compiled images (the output of the first step is an input to the second step)
         [Output]
         public ITaskItem[] ReadyToRunCompileList => _compileList.ToArray();
+
         [Output]
         public ITaskItem[] ReadyToRunSymbolsCompileList => _symbolsCompileList.ToArray();
 

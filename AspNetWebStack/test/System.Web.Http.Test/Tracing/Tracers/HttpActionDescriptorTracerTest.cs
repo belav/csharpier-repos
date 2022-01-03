@@ -296,6 +296,7 @@ namespace System.Web.Http.Tracing.Tracers
             // Assert
             mockDescriptor.Verify();
         }
+
         [Fact]
         public void Configuration_Uses_Inners()
         {

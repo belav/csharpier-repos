@@ -38,6 +38,7 @@ namespace NS
 
             await TestMissingInRegularAndScriptAsync(code);
         }
+
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsSyncNamespace)]
         public async Task NoAction_NotOnNamespaceDeclaration_FileScopedNamespace()
         {

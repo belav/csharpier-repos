@@ -292,7 +292,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.NotEqual(cv1.GetHashCode(), cv2.GetHashCode());
         }
-
 #endif
 
         [Fact]

@@ -861,6 +861,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public static explicit operator bool(myIf f)
         {
             return f.value;
@@ -987,6 +988,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public static explicit operator bool(myIf f)
         {
             return f.value;
@@ -1024,6 +1026,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public static implicit operator bool(myIf f)
         {
             return f.value;
@@ -1100,6 +1103,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public static explicit operator bool(myIf f)
         {
             return f.value;
@@ -1136,6 +1140,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public static explicit operator bool(myIf f)
         {
             return f.value;
@@ -1182,6 +1187,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public bool MyMethod()
         {
             return this.value;
@@ -1223,6 +1229,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public object MyMethod()
         {
             return this.value;
@@ -1264,6 +1271,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public object MyMethod()
         {
             Test.Status = 1;
@@ -1279,6 +1287,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class Test
     {
         public static int Status = 0;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1311,6 +1320,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public object MyMethod()
         {
             Test.Status = 1;
@@ -1326,6 +1336,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class Test
     {
         public static int Status = 0;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1358,6 +1369,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public static explicit operator bool(myIf f)
         {
             return f.value;
@@ -1448,6 +1460,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public static explicit operator bool(myIf f)
         {
             return f.value;
@@ -1520,6 +1533,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public static implicit operator bool(myIf f)
         {
             return f.value;
@@ -1564,6 +1578,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public bool MyMethod()
         {
             return this.value;
@@ -1603,6 +1618,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public static explicit operator bool(myIf f)
         {
             return f.value;
@@ -1761,6 +1777,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1793,6 +1810,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.statements.
     public class myIf
     {
         public bool value = true;
+
         public static implicit operator bool(myIf f)
         {
             return f.value;

@@ -122,6 +122,7 @@ namespace System
         }
 
         private static Version s_opensslVersion;
+
         private static Version GetOpenSslVersion()
         {
             if (s_opensslVersion == null)

@@ -37,28 +37,34 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             };
 
         public struct Struct_Empty { }
+
         public struct Struct_T<T>
         {
             public T x;
         }
+
         public struct Struct_ArrayT<T>
         {
             public Struct_ArrayT(int elementCount)
             {
                 x = new T[elementCount];
             }
+
             public T[] x;
         }
+
         public struct Struct_FixedArrayT10<T>
         {
             [VBFixedArray(9)]
             public T[] x;
         }
+
         public struct Struct_FixedArrayT10x20<T>
         {
             [VBFixedArray(9, 19)]
             public T[] x;
         }
+
         public struct Struct_FixedString10
         {
             [VBFixedString(10)]
@@ -74,6 +80,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         {
             public byte b;
             public char c;
+
             [VBFixedString(3)]
             public string s;
             public decimal d;

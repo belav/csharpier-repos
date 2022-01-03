@@ -12244,6 +12244,7 @@ namespace RoslynNullableIntRepro
                 expectedOutput: "3" + Environment.NewLine + "3" + Environment.NewLine
             );
         }
+
         [Fact, WorkItem(4027, "https://github.com/dotnet/roslyn/issues/4027")]
         public void NotSignExtendedOperand()
         {

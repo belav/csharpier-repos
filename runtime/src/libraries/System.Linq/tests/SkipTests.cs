@@ -305,6 +305,7 @@ namespace System.Linq.Tests
             var expected = new[] { 7 };
             Assert.Equal(expected, source.Skip(2).Take(1).Take(int.MaxValue));
         }
+
         [Fact]
         public void FollowWithTakeThenMassiveTakeNotIList()
         {

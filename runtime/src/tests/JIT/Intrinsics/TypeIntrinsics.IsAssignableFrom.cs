@@ -256,6 +256,7 @@ public struct Struct2
 public struct Struct3 : IDisposable
 {
     public int field1;
+
     public void Dispose() { }
 }
 

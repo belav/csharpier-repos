@@ -45,6 +45,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private readonly Location _location;
 
         private IEnumerable<string> _argumentsAsStrings;
+
         private IEnumerable<string> GetArgumentsAsStrings()
         {
             if (_argumentsAsStrings == null)

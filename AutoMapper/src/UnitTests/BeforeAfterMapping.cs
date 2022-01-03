@@ -11,6 +11,7 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
         public class Source
         {
         }
+
         public class Destination
         {
         }
@@ -70,6 +71,7 @@ namespace AutoMapper.UnitTests.BeforeAfterMapping
         public class Source
         {
         }
+
         public class Destination
         {
         }

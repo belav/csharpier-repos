@@ -40,10 +40,15 @@ public class RuntimePerformanceBenchmarkBase
     private class NullLoggerFactory : ILoggerFactory, ILogger
     {
         void ILoggerFactory.AddProvider(ILoggerProvider provider) { }
+
         ILogger ILoggerFactory.CreateLogger(string categoryName) => this;
+
         void IDisposable.Dispose() { }
+
         IDisposable ILogger.BeginScope<TState>(TState state) => null;
+
         bool ILogger.IsEnabled(LogLevel logLevel) => false;
+
         void ILogger.Log<TState>(
             LogLevel logLevel,
             EventId eventId,

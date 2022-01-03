@@ -23,6 +23,7 @@ class Program
 {
     static int Pass = 100;
     static int Fail = -1;
+
     static int Main(string[] args)
     {
         // Entry point for our repro.

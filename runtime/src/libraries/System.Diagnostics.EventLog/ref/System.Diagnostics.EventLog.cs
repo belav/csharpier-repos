@@ -9,24 +9,30 @@ namespace System.Diagnostics
     public partial class EntryWrittenEventArgs : System.EventArgs
     {
         public EntryWrittenEventArgs() { }
+
         public EntryWrittenEventArgs(System.Diagnostics.EventLogEntry entry) { }
+
         public System.Diagnostics.EventLogEntry Entry
         {
             get { throw null; }
         }
     }
+
     public delegate void EntryWrittenEventHandler(
         object sender,
         System.Diagnostics.EntryWrittenEventArgs e
     );
+
     public partial class EventInstance
     {
         public EventInstance(long instanceId, int categoryId) { }
+
         public EventInstance(
             long instanceId,
             int categoryId,
             System.Diagnostics.EventLogEntryType entryType
         ) { }
+
         public int CategoryId
         {
             get { throw null; }
@@ -43,15 +49,20 @@ namespace System.Diagnostics
             set { }
         }
     }
+
     [System.ComponentModel.DefaultEventAttribute("EntryWritten")]
     public partial class EventLog
         : System.ComponentModel.Component,
           System.ComponentModel.ISupportInitialize
     {
         public EventLog() { }
+
         public EventLog(string logName) { }
+
         public EventLog(string logName, string machineName) { }
+
         public EventLog(string logName, string machineName, string source) { }
+
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.DefaultValueAttribute(false)]
         public bool EnableRaisingEvents
@@ -59,6 +70,7 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
             System.ComponentModel.DesignerSerializationVisibility.Hidden
@@ -67,6 +79,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ComponentModel.DefaultValueAttribute("")]
         [System.ComponentModel.ReadOnlyAttribute(true)]
         [System.ComponentModel.SettingsBindableAttribute(true)]
@@ -75,11 +88,13 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.BrowsableAttribute(false)]
         public string LogDisplayName
         {
             get { throw null; }
         }
+
         [System.ComponentModel.DefaultValueAttribute(".")]
         [System.ComponentModel.ReadOnlyAttribute(true)]
         [System.ComponentModel.SettingsBindableAttribute(true)]
@@ -88,6 +103,7 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.DesignerSerializationVisibilityAttribute(
             System.ComponentModel.DesignerSerializationVisibility.Hidden
@@ -97,16 +113,19 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.BrowsableAttribute(false)]
         public int MinimumRetentionDays
         {
             get { throw null; }
         }
+
         [System.ComponentModel.BrowsableAttribute(false)]
         public System.Diagnostics.OverflowAction OverflowAction
         {
             get { throw null; }
         }
+
         [System.ComponentModel.DefaultValueAttribute("")]
         [System.ComponentModel.ReadOnlyAttribute(true)]
         [System.ComponentModel.SettingsBindableAttribute(true)]
@@ -115,6 +134,7 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.BrowsableAttribute(false)]
         [System.ComponentModel.DefaultValueAttribute(null)]
         public System.ComponentModel.ISynchronizeInvoke SynchronizingObject
@@ -127,69 +147,95 @@ namespace System.Diagnostics
             add { }
             remove { }
         }
+
         public void BeginInit() { }
+
         public void Clear() { }
+
         public void Close() { }
+
         public static void CreateEventSource(
             System.Diagnostics.EventSourceCreationData sourceData
         ) { }
+
         public static void CreateEventSource(string source, string logName) { }
+
         [System.ObsoleteAttribute(
             "EventLog.CreateEventSource has been deprecated. Use System.Diagnostics.EventLog.CreateEventSource(EventSourceCreationData sourceData) instead."
         )]
         public static void CreateEventSource(string source, string logName, string machineName) { }
+
         public static void Delete(string logName) { }
+
         public static void Delete(string logName, string machineName) { }
+
         public static void DeleteEventSource(string source) { }
+
         public static void DeleteEventSource(string source, string machineName) { }
+
         protected override void Dispose(bool disposing) { }
+
         public void EndInit() { }
+
         public static bool Exists(string logName)
         {
             throw null;
         }
+
         public static bool Exists(string logName, string machineName)
         {
             throw null;
         }
+
         public static System.Diagnostics.EventLog[] GetEventLogs()
         {
             throw null;
         }
+
         public static System.Diagnostics.EventLog[] GetEventLogs(string machineName)
         {
             throw null;
         }
+
         public static string LogNameFromSourceName(string source, string machineName)
         {
             throw null;
         }
+
         public void ModifyOverflowPolicy(
             System.Diagnostics.OverflowAction action,
             int retentionDays
         ) { }
+
         public void RegisterDisplayName(string resourceFile, long resourceId) { }
+
         public static bool SourceExists(string source)
         {
             throw null;
         }
+
         public static bool SourceExists(string source, string machineName)
         {
             throw null;
         }
+
         public void WriteEntry(string message) { }
+
         public void WriteEntry(string message, System.Diagnostics.EventLogEntryType type) { }
+
         public void WriteEntry(
             string message,
             System.Diagnostics.EventLogEntryType type,
             int eventID
         ) { }
+
         public void WriteEntry(
             string message,
             System.Diagnostics.EventLogEntryType type,
             int eventID,
             short category
         ) { }
+
         public void WriteEntry(
             string message,
             System.Diagnostics.EventLogEntryType type,
@@ -197,18 +243,22 @@ namespace System.Diagnostics
             short category,
             byte[] rawData
         ) { }
+
         public static void WriteEntry(string source, string message) { }
+
         public static void WriteEntry(
             string source,
             string message,
             System.Diagnostics.EventLogEntryType type
         ) { }
+
         public static void WriteEntry(
             string source,
             string message,
             System.Diagnostics.EventLogEntryType type,
             int eventID
         ) { }
+
         public static void WriteEntry(
             string source,
             string message,
@@ -216,6 +266,7 @@ namespace System.Diagnostics
             int eventID,
             short category
         ) { }
+
         public static void WriteEntry(
             string source,
             string message,
@@ -224,27 +275,32 @@ namespace System.Diagnostics
             short category,
             byte[] rawData
         ) { }
+
         public void WriteEvent(
             System.Diagnostics.EventInstance instance,
             byte[] data,
             params object[] values
         ) { }
+
         public void WriteEvent(
             System.Diagnostics.EventInstance instance,
             params object[] values
         ) { }
+
         public static void WriteEvent(
             string source,
             System.Diagnostics.EventInstance instance,
             byte[] data,
             params object[] values
         ) { }
+
         public static void WriteEvent(
             string source,
             System.Diagnostics.EventInstance instance,
             params object[] values
         ) { }
     }
+
     [System.ComponentModel.DesignTimeVisibleAttribute(false)]
     [System.ComponentModel.ToolboxItemAttribute(false)]
     public sealed partial class EventLogEntry
@@ -252,6 +308,7 @@ namespace System.Diagnostics
           System.Runtime.Serialization.ISerializable
     {
         internal EventLogEntry() { }
+
         public string Category
         {
             get { throw null; }
@@ -268,6 +325,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ObsoleteAttribute(
             "EventLogEntry.EventID has been deprecated. Use System.Diagnostics.EventLogEntry.InstanceId instead."
         )]
@@ -287,6 +345,7 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         [System.ComponentModel.EditorAttribute(
             "System.ComponentModel.Design.BinaryEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
             "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
@@ -315,20 +374,24 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         public bool Equals(System.Diagnostics.EventLogEntry otherEntry)
         {
             throw null;
         }
+
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
     }
+
     public partial class EventLogEntryCollection
         : System.Collections.ICollection,
           System.Collections.IEnumerable
     {
         internal EventLogEntryCollection() { }
+
         public int Count
         {
             get { throw null; }
@@ -345,13 +408,17 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         public void CopyTo(System.Diagnostics.EventLogEntry[] entries, int index) { }
+
         public System.Collections.IEnumerator GetEnumerator()
         {
             throw null;
         }
+
         void System.Collections.ICollection.CopyTo(System.Array array, int index) { }
     }
+
     public enum EventLogEntryType
     {
         Error = 1,
@@ -360,11 +427,15 @@ namespace System.Diagnostics
         SuccessAudit = 8,
         FailureAudit = 16,
     }
+
     public sealed partial class EventLogTraceListener : System.Diagnostics.TraceListener
     {
         public EventLogTraceListener() { }
+
         public EventLogTraceListener(System.Diagnostics.EventLog eventLog) { }
+
         public EventLogTraceListener(string source) { }
+
         public System.Diagnostics.EventLog EventLog
         {
             get { throw null; }
@@ -375,8 +446,11 @@ namespace System.Diagnostics
             get { throw null; }
             set { }
         }
+
         public override void Close() { }
+
         protected override void Dispose(bool disposing) { }
+
         [System.Runtime.InteropServices.ComVisibleAttribute(false)]
         public override void TraceData(
             System.Diagnostics.TraceEventCache eventCache,
@@ -385,6 +459,7 @@ namespace System.Diagnostics
             int id,
             object data
         ) { }
+
         [System.Runtime.InteropServices.ComVisibleAttribute(false)]
         public override void TraceData(
             System.Diagnostics.TraceEventCache eventCache,
@@ -393,6 +468,7 @@ namespace System.Diagnostics
             int id,
             params object[] data
         ) { }
+
         [System.Runtime.InteropServices.ComVisibleAttribute(false)]
         public override void TraceEvent(
             System.Diagnostics.TraceEventCache eventCache,
@@ -401,6 +477,7 @@ namespace System.Diagnostics
             int id,
             string message
         ) { }
+
         [System.Runtime.InteropServices.ComVisibleAttribute(false)]
         public override void TraceEvent(
             System.Diagnostics.TraceEventCache eventCache,
@@ -410,12 +487,16 @@ namespace System.Diagnostics
             string format,
             params object[] args
         ) { }
+
         public override void Write(string message) { }
+
         public override void WriteLine(string message) { }
     }
+
     public partial class EventSourceCreationData
     {
         public EventSourceCreationData(string source, string logName) { }
+
         public int CategoryCount
         {
             get { throw null; }
@@ -452,6 +533,7 @@ namespace System.Diagnostics
             set { }
         }
     }
+
     public enum OverflowAction
     {
         DoNotOverwrite = -1,
@@ -459,15 +541,18 @@ namespace System.Diagnostics
         OverwriteOlder = 1,
     }
 }
+
 namespace System.Diagnostics.Eventing.Reader
 {
     public partial class EventBookmark
     {
         internal EventBookmark() { }
     }
+
     public sealed partial class EventKeyword
     {
         internal EventKeyword() { }
+
         public string DisplayName
         {
             get { throw null; }
@@ -481,9 +566,11 @@ namespace System.Diagnostics.Eventing.Reader
             get { throw null; }
         }
     }
+
     public sealed partial class EventLevel
     {
         internal EventLevel() { }
+
         public string DisplayName
         {
             get { throw null; }
@@ -497,13 +584,16 @@ namespace System.Diagnostics.Eventing.Reader
             get { throw null; }
         }
     }
+
     public partial class EventLogConfiguration : System.IDisposable
     {
         public EventLogConfiguration(string logName) { }
+
         public EventLogConfiguration(
             string logName,
             System.Diagnostics.Eventing.Reader.EventLogSession session
         ) { }
+
         public bool IsClassicLog
         {
             get { throw null; }
@@ -583,32 +673,44 @@ namespace System.Diagnostics.Eventing.Reader
             get { throw null; }
             set { }
         }
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
+
         public void SaveChanges() { }
     }
+
     public partial class EventLogException : System.Exception
     {
         public EventLogException() { }
+
         protected EventLogException(int errorCode) { }
+
         protected EventLogException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         public EventLogException(string message) { }
+
         public EventLogException(string message, System.Exception innerException) { }
+
         public override string Message
         {
             get { throw null; }
         }
+
         public override void GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
     }
+
     public sealed partial class EventLogInformation
     {
         internal EventLogInformation() { }
+
         public int? Attributes
         {
             get { throw null; }
@@ -642,26 +744,33 @@ namespace System.Diagnostics.Eventing.Reader
             get { throw null; }
         }
     }
+
     public partial class EventLogInvalidDataException
         : System.Diagnostics.Eventing.Reader.EventLogException
     {
         public EventLogInvalidDataException() { }
+
         protected EventLogInvalidDataException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         public EventLogInvalidDataException(string message) { }
+
         public EventLogInvalidDataException(string message, System.Exception innerException) { }
     }
+
     public enum EventLogIsolation
     {
         Application = 0,
         System = 1,
         Custom = 2,
     }
+
     public sealed partial class EventLogLink
     {
         internal EventLogLink() { }
+
         public string DisplayName
         {
             get { throw null; }
@@ -675,51 +784,66 @@ namespace System.Diagnostics.Eventing.Reader
             get { throw null; }
         }
     }
+
     public enum EventLogMode
     {
         Circular = 0,
         AutoBackup = 1,
         Retain = 2,
     }
+
     public partial class EventLogNotFoundException
         : System.Diagnostics.Eventing.Reader.EventLogException
     {
         public EventLogNotFoundException() { }
+
         protected EventLogNotFoundException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         public EventLogNotFoundException(string message) { }
+
         public EventLogNotFoundException(string message, System.Exception innerException) { }
     }
+
     public partial class EventLogPropertySelector : System.IDisposable
     {
         public EventLogPropertySelector(
             System.Collections.Generic.IEnumerable<string> propertyQueries
         ) { }
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
     }
+
     public partial class EventLogProviderDisabledException
         : System.Diagnostics.Eventing.Reader.EventLogException
     {
         public EventLogProviderDisabledException() { }
+
         protected EventLogProviderDisabledException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         public EventLogProviderDisabledException(string message) { }
+
         public EventLogProviderDisabledException(string message, System.Exception innerException)
         { }
     }
+
     public partial class EventLogQuery
     {
         public EventLogQuery(string path, System.Diagnostics.Eventing.Reader.PathType pathType) { }
+
         public EventLogQuery(
             string path,
             System.Diagnostics.Eventing.Reader.PathType pathType,
             string query
         ) { }
+
         public bool ReverseDirection
         {
             get { throw null; }
@@ -736,15 +860,20 @@ namespace System.Diagnostics.Eventing.Reader
             set { }
         }
     }
+
     public partial class EventLogReader : System.IDisposable
     {
         public EventLogReader(System.Diagnostics.Eventing.Reader.EventLogQuery eventQuery) { }
+
         public EventLogReader(
             System.Diagnostics.Eventing.Reader.EventLogQuery eventQuery,
             System.Diagnostics.Eventing.Reader.EventBookmark bookmark
         ) { }
+
         public EventLogReader(string path) { }
+
         public EventLogReader(string path, System.Diagnostics.Eventing.Reader.PathType pathType) { }
+
         public int BatchSize
         {
             get { throw null; }
@@ -754,35 +883,49 @@ namespace System.Diagnostics.Eventing.Reader
         {
             get { throw null; }
         }
+
         public void CancelReading() { }
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
+
         public System.Diagnostics.Eventing.Reader.EventRecord ReadEvent()
         {
             throw null;
         }
+
         public System.Diagnostics.Eventing.Reader.EventRecord ReadEvent(System.TimeSpan timeout)
         {
             throw null;
         }
+
         public void Seek(System.Diagnostics.Eventing.Reader.EventBookmark bookmark) { }
+
         public void Seek(System.Diagnostics.Eventing.Reader.EventBookmark bookmark, long offset) { }
+
         public void Seek(System.IO.SeekOrigin origin, long offset) { }
     }
+
     public partial class EventLogReadingException
         : System.Diagnostics.Eventing.Reader.EventLogException
     {
         public EventLogReadingException() { }
+
         protected EventLogReadingException(
             System.Runtime.Serialization.SerializationInfo serializationInfo,
             System.Runtime.Serialization.StreamingContext streamingContext
         ) { }
+
         public EventLogReadingException(string message) { }
+
         public EventLogReadingException(string message, System.Exception innerException) { }
     }
+
     public partial class EventLogRecord : System.Diagnostics.Eventing.Reader.EventRecord
     {
         internal EventLogRecord() { }
+
         public override System.Guid? ActivityId
         {
             get { throw null; }
@@ -887,32 +1030,40 @@ namespace System.Diagnostics.Eventing.Reader
         {
             get { throw null; }
         }
+
         protected override void Dispose(bool disposing) { }
+
         public override string FormatDescription()
         {
             throw null;
         }
+
         public override string FormatDescription(
             System.Collections.Generic.IEnumerable<object> values
         )
         {
             throw null;
         }
+
         public System.Collections.Generic.IList<object> GetPropertyValues(
             System.Diagnostics.Eventing.Reader.EventLogPropertySelector propertySelector
         )
         {
             throw null;
         }
+
         public override string ToXml()
         {
             throw null;
         }
     }
+
     public partial class EventLogSession : System.IDisposable
     {
         public EventLogSession() { }
+
         public EventLogSession(string server) { }
+
         public EventLogSession(
             string server,
             string domain,
@@ -920,21 +1071,29 @@ namespace System.Diagnostics.Eventing.Reader
             System.Security.SecureString password,
             System.Diagnostics.Eventing.Reader.SessionAuthentication logOnType
         ) { }
+
         public static System.Diagnostics.Eventing.Reader.EventLogSession GlobalSession
         {
             get { throw null; }
         }
+
         public void CancelCurrentOperations() { }
+
         public void ClearLog(string logName) { }
+
         public void ClearLog(string logName, string backupPath) { }
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
+
         public void ExportLog(
             string path,
             System.Diagnostics.Eventing.Reader.PathType pathType,
             string query,
             string targetFilePath
         ) { }
+
         public void ExportLog(
             string path,
             System.Diagnostics.Eventing.Reader.PathType pathType,
@@ -942,12 +1101,14 @@ namespace System.Diagnostics.Eventing.Reader
             string targetFilePath,
             bool tolerateQueryErrors
         ) { }
+
         public void ExportLogAndMessages(
             string path,
             System.Diagnostics.Eventing.Reader.PathType pathType,
             string query,
             string targetFilePath
         ) { }
+
         public void ExportLogAndMessages(
             string path,
             System.Diagnostics.Eventing.Reader.PathType pathType,
@@ -956,6 +1117,7 @@ namespace System.Diagnostics.Eventing.Reader
             bool tolerateQueryErrors,
             System.Globalization.CultureInfo targetCultureInfo
         ) { }
+
         public System.Diagnostics.Eventing.Reader.EventLogInformation GetLogInformation(
             string logName,
             System.Diagnostics.Eventing.Reader.PathType pathType
@@ -963,18 +1125,22 @@ namespace System.Diagnostics.Eventing.Reader
         {
             throw null;
         }
+
         public System.Collections.Generic.IEnumerable<string> GetLogNames()
         {
             throw null;
         }
+
         public System.Collections.Generic.IEnumerable<string> GetProviderNames()
         {
             throw null;
         }
     }
+
     public sealed partial class EventLogStatus
     {
         internal EventLogStatus() { }
+
         public string LogName
         {
             get { throw null; }
@@ -984,6 +1150,7 @@ namespace System.Diagnostics.Eventing.Reader
             get { throw null; }
         }
     }
+
     public enum EventLogType
     {
         Administrative = 0,
@@ -991,19 +1158,24 @@ namespace System.Diagnostics.Eventing.Reader
         Analytical = 2,
         Debug = 3,
     }
+
     public partial class EventLogWatcher : System.IDisposable
     {
         public EventLogWatcher(System.Diagnostics.Eventing.Reader.EventLogQuery eventQuery) { }
+
         public EventLogWatcher(
             System.Diagnostics.Eventing.Reader.EventLogQuery eventQuery,
             System.Diagnostics.Eventing.Reader.EventBookmark bookmark
         ) { }
+
         public EventLogWatcher(
             System.Diagnostics.Eventing.Reader.EventLogQuery eventQuery,
             System.Diagnostics.Eventing.Reader.EventBookmark bookmark,
             bool readExistingEvents
         ) { }
+
         public EventLogWatcher(string path) { }
+
         public bool Enabled
         {
             get { throw null; }
@@ -1014,12 +1186,16 @@ namespace System.Diagnostics.Eventing.Reader
             add { }
             remove { }
         }
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
     }
+
     public sealed partial class EventMetadata
     {
         internal EventMetadata() { }
+
         public string Description
         {
             get { throw null; }
@@ -1057,9 +1233,11 @@ namespace System.Diagnostics.Eventing.Reader
             get { throw null; }
         }
     }
+
     public sealed partial class EventOpcode
     {
         internal EventOpcode() { }
+
         public string DisplayName
         {
             get { throw null; }
@@ -1073,17 +1251,21 @@ namespace System.Diagnostics.Eventing.Reader
             get { throw null; }
         }
     }
+
     public sealed partial class EventProperty
     {
         internal EventProperty() { }
+
         public object Value
         {
             get { throw null; }
         }
     }
+
     public abstract partial class EventRecord : System.IDisposable
     {
         protected EventRecord() { }
+
         public abstract System.Guid? ActivityId { get; }
         public abstract System.Diagnostics.Eventing.Reader.EventBookmark Bookmark { get; }
         public abstract int Id { get; }
@@ -1108,17 +1290,22 @@ namespace System.Diagnostics.Eventing.Reader
         public abstract System.DateTime? TimeCreated { get; }
         public abstract System.Security.Principal.SecurityIdentifier UserId { get; }
         public abstract byte? Version { get; }
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
+
         public abstract string FormatDescription();
         public abstract string FormatDescription(
             System.Collections.Generic.IEnumerable<object> values
         );
         public abstract string ToXml();
     }
+
     public sealed partial class EventRecordWrittenEventArgs : System.EventArgs
     {
         internal EventRecordWrittenEventArgs() { }
+
         public System.Exception EventException
         {
             get { throw null; }
@@ -1128,9 +1315,11 @@ namespace System.Diagnostics.Eventing.Reader
             get { throw null; }
         }
     }
+
     public sealed partial class EventTask
     {
         internal EventTask() { }
+
         public string DisplayName
         {
             get { throw null; }
@@ -1148,19 +1337,23 @@ namespace System.Diagnostics.Eventing.Reader
             get { throw null; }
         }
     }
+
     public enum PathType
     {
         LogName = 1,
         FilePath = 2,
     }
+
     public partial class ProviderMetadata : System.IDisposable
     {
         public ProviderMetadata(string providerName) { }
+
         public ProviderMetadata(
             string providerName,
             System.Diagnostics.Eventing.Reader.EventLogSession session,
             System.Globalization.CultureInfo targetCultureInfo
         ) { }
+
         public string DisplayName
         {
             get { throw null; }
@@ -1213,9 +1406,12 @@ namespace System.Diagnostics.Eventing.Reader
         {
             get { throw null; }
         }
+
         public void Dispose() { }
+
         protected virtual void Dispose(bool disposing) { }
     }
+
     public enum SessionAuthentication
     {
         Default = 0,
@@ -1223,6 +1419,7 @@ namespace System.Diagnostics.Eventing.Reader
         Kerberos = 2,
         Ntlm = 3,
     }
+
     [System.FlagsAttribute]
     public enum StandardEventKeywords : long
     {
@@ -1240,6 +1437,7 @@ namespace System.Diagnostics.Eventing.Reader
         CorrelationHint2 = (long)18014398509481984,
         EventLogClassic = (long)36028797018963968,
     }
+
     public enum StandardEventLevel
     {
         LogAlways = 0,
@@ -1249,6 +1447,7 @@ namespace System.Diagnostics.Eventing.Reader
         Informational = 4,
         Verbose = 5,
     }
+
     public enum StandardEventOpcode
     {
         Info = 0,
@@ -1263,6 +1462,7 @@ namespace System.Diagnostics.Eventing.Reader
         Send = 9,
         Receive = 240,
     }
+
     public enum StandardEventTask
     {
         None = 0,

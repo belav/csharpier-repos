@@ -18,6 +18,7 @@ namespace System.Data.OleDb
         {
         }
     }
+
     [System.ComponentModel.TypeConverterAttribute(
         typeof(OleDbConnectionStringBuilder.OleDbConnectionStringBuilderConverter)
     )]
@@ -34,6 +35,7 @@ namespace System.Data.OleDb
             get { throw null; }
             set { }
         }
+
         [System.ComponentModel.DisplayNameAttribute("Provider")]
         [System.ComponentModel.RefreshPropertiesAttribute(
             System.ComponentModel.RefreshProperties.All
@@ -46,9 +48,12 @@ namespace System.Data.OleDb
         }
 
         internal sealed class OleDbConnectionStringBuilderConverter { }
+
         internal sealed class OleDbServicesConverter { }
+
         internal sealed class OleDbProviderConverter { }
     }
+
     public sealed partial class OleDbException
     {
         [System.ComponentModel.TypeConverterAttribute(typeof(ErrorCodeConverter))]

@@ -19,6 +19,7 @@ namespace System.Xml.Xsl.Xslt
         // }
         // mode -> FocusFlags; Used to generate and call apply-imports/apply-template functions
         public Dictionary<QilName, XslFlags> ModeFlags = new Dictionary<QilName, XslFlags>();
+
         // mode -> xsl:apply-import functions for that mode
         public Dictionary<QilName, List<QilFunction>> ApplyFunctions = new Dictionary<
             QilName,
@@ -49,6 +50,7 @@ namespace System.Xml.Xsl.Xslt
         public List<WhitespaceRule>[]? WhitespaceRules = new List<WhitespaceRule>[3];
 
         public List<Template> Templates = new List<Template>(); // Templates defined on this level. Empty for RootLevel.
+
         // xsl:template/@mode -> list of @match'es
         public Dictionary<QilName, List<TemplateMatch>> TemplateMatches = new Dictionary<
             QilName,

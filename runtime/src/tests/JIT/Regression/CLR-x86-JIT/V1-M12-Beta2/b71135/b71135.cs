@@ -26,11 +26,13 @@ namespace Test
             }
             return m_abFwd6;
         }
+
         static int Main()
         {
             new App().Method1();
             return 100;
         }
+
         public static bool m_bFwd1;
         public static byte[] m_abFwd6;
     }

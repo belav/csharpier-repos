@@ -124,13 +124,16 @@ namespace Dynamic.Tests
     public class ExplicitlyImplementedInterface1 : InterfaceWithGenericMember
     {
         int InterfaceWithGenericMember.Foo<T>() => 0;
+
         public int Bar() => 1;
     }
 
     public class ExplicitlyImplementedInterface2 : InterfaceWithGenericMember
     {
         int InterfaceWithGenericMember.Foo<T>() => 0;
+
         public int Foo() => 2;
+
         public int Bar() => 1;
     }
 
@@ -143,7 +146,9 @@ namespace Dynamic.Tests
     public class ExplicitlyImplementedGenericInterface : GenericInterfaceWithNonGenericMember<int>
     {
         int GenericInterfaceWithNonGenericMember<int>.Foo() => 0;
+
         public int Foo() => 2;
+
         public int Bar() => 1;
     }
 
@@ -157,6 +162,7 @@ namespace Dynamic.Tests
         : GenericInterfaceWithGenericMember1<int>
     {
         int GenericInterfaceWithGenericMember1<int>.Foo(int i) => 0;
+
         public int Bar() => 1;
     }
 
@@ -170,10 +176,12 @@ namespace Dynamic.Tests
         : GenericInterfaceWithGenericMember2<int>
     {
         int GenericInterfaceWithGenericMember2<int>.Foo<U>() => 0;
+
         public int Bar() => 1;
     }
 
     public class BaseClass { }
+
     public class SubClass : BaseClass { }
 
     public interface GenericInInterface<in T>

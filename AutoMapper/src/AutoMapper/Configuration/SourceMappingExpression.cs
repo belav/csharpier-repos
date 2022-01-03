@@ -8,6 +8,7 @@ namespace AutoMapper.Configuration
     {
         void Configure(TypeMap typeMap);
     }
+
     /// <summary>
     /// Source member configuration options
     /// </summary>
@@ -19,6 +20,7 @@ namespace AutoMapper.Configuration
         /// </summary>
         void DoNotValidate();
     }
+
     public class SourceMappingExpression
         : ISourceMemberConfigurationExpression,
           ISourceMemberConfiguration
@@ -42,6 +44,7 @@ namespace AutoMapper.Configuration
             }
         }
     }
+
     /// <summary>
     /// Contains member configuration relating to source members
     /// </summary>

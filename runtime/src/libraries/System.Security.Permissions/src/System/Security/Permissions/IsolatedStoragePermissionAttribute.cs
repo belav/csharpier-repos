@@ -13,6 +13,7 @@ namespace System.Security.Permissions
     public abstract class IsolatedStoragePermissionAttribute : CodeAccessSecurityAttribute
     {
         protected IsolatedStoragePermissionAttribute(SecurityAction action) : base(action) { }
+
         public long UserQuota { get; set; }
         public IsolatedStorageContainment UsageAllowed { get; set; }
     }

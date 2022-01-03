@@ -30,10 +30,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Shared.Extensions.TextSpanExtensions
         private static TextSpan EmptySpan { get; } = TextSpan.FromBounds(10, 10);
 
         private static int RightBeforeStart(TextSpan span) => span.Start - 1;
+
         private static int AtStart(TextSpan span) => span.Start;
+
         private static int RightAfterStart(TextSpan span) => span.Start + 1;
+
         private static int RightBeforeEnd(TextSpan span) => span.End - 1;
+
         private static int AtEnd(TextSpan span) => span.End;
+
         private static int RightAfterEnd(TextSpan span) => span.End + 1;
 
         [Fact]

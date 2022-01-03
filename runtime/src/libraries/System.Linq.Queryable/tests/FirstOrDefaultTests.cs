@@ -87,6 +87,7 @@ namespace System.Linq.Tests
             int[] source = { 3, 7, 10, 7, 9, 2, 11, 17, 13, 8 };
             Assert.Equal(10, source.AsQueryable().FirstOrDefault(i => i % 2 == 0));
         }
+
         [Fact]
         public void PredicateTrueForSomeDefault()
         {

@@ -12,10 +12,14 @@ namespace System.Data.OleDb.Tests
             nameof(Helpers) + "." + nameof(GetIsDriverAvailable);
         public const string IsAceDriverAvailable =
             nameof(Helpers) + "." + nameof(GetIsAceDriverAvailable);
+
         public static bool GetIsDriverAvailable() => Nested.IsAvailable;
+
         public static bool GetIsAceDriverAvailable() =>
             GetIsDriverAvailable() && !PlatformDetection.Is32BitProcess;
+
         public static string ProviderName => Nested.ProviderName;
+
         public static string GetTableName(string memberName) => memberName + ".csv";
 
         private class Nested
@@ -25,7 +29,9 @@ namespace System.Data.OleDb.Tests
             public static Nested Instance => s_instance;
             private static readonly Nested s_instance = new Nested();
             private const string ExpectedProviderName = @"Microsoft.ACE.OLEDB.12.0";
+
             private Nested() { }
+
             static Nested()
             {
                 // Get the sources rowset for the SQLOLEDB enumerator

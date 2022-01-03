@@ -16,6 +16,7 @@ namespace System.IO
     {
         internal readonly List<DirectoryInfo> CreatedSubdirectories = new();
         internal readonly List<FileInfo> CreatedSubfiles = new();
+
         protected override void DeleteDirectory()
         {
             try

@@ -13,6 +13,7 @@ public class BringUpTest_ArrayObj
     class Dummy
     {
         public int field;
+
         public Dummy(int f)
         {
             field = f;

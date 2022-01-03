@@ -215,6 +215,7 @@ internal static partial class Interop
             public short dmYResolution;
             public short dmTTOption;
             public short dmCollate;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
             public string? dmFormName;
             public short dmLogPixels;

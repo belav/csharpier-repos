@@ -15,6 +15,7 @@
                 public int EntityID { get; set; }
                 public string Title { get; set; }
                 public ICollection<SubEntity> SubEntities { get; set; }
+
                 public Entity()
                 {
                     SubEntities = new HashSet<SubEntity>();

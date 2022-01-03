@@ -33,6 +33,7 @@ public class Test_MultipleInterface08
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

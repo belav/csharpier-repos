@@ -9,7 +9,9 @@
 using System;
 
 public class C : IMinusT<int> { }
+
 public class D : IMinusT<string[]> { }
+
 public class E : IMinusT<object> { }
 
 public class A5 : Test001PlusT<int>

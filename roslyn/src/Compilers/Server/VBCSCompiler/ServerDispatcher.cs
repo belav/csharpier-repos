@@ -14,6 +14,7 @@ using System.Globalization;
 using Microsoft.CodeAnalysis.CommandLine;
 using Microsoft.CodeAnalysis.Symbols;
 using Microsoft.CodeAnalysis.CSharp;
+
 namespace Microsoft.CodeAnalysis.CompilerServer
 {
     /// <summary>

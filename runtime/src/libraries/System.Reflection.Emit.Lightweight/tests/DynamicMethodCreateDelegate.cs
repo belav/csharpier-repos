@@ -205,6 +205,7 @@ namespace System.Reflection.Emit.Tests
     public class IDSubClass : IDClass
     {
         public IDSubClass(int id) : base(id) { }
+
         public IDSubClass() : base() { }
     }
 

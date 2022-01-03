@@ -134,6 +134,7 @@ namespace System.IO
         {
             _flushFunc();
         }
+
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
             return _flushAsyncFunc(cancellationToken);
@@ -153,6 +154,7 @@ namespace System.IO
         {
             return _readFunc(buffer, offset, count);
         }
+
         public override Task<int> ReadAsync(
             byte[] buffer,
             int offset,
@@ -167,6 +169,7 @@ namespace System.IO
         {
             return _seekFunc(offset, origin);
         }
+
         public override void SetLength(long value)
         {
             _setLengthFunc(value);
@@ -176,6 +179,7 @@ namespace System.IO
         {
             _writeFunc(buffer, offset, count);
         }
+
         public override Task WriteAsync(
             byte[] buffer,
             int offset,

@@ -54,6 +54,7 @@ namespace System.Data.Common
                 this[index] = (DataColumnMapping)value;
             }
         }
+
         IColumnMapping IColumnMappingCollection.Add(
             string? sourceColumnName,
             string? dataSetColumnName
@@ -61,6 +62,7 @@ namespace System.Data.Common
         {
             return Add(sourceColumnName, dataSetColumnName);
         }
+
         IColumnMapping IColumnMappingCollection.GetByDataSetColumn(string dataSetColumnName)
         {
             return GetByDataSetColumn(dataSetColumnName);

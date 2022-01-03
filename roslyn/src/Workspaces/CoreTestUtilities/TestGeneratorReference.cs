@@ -44,8 +44,10 @@ namespace Roslyn.Test.Utilities
 
         public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language) =>
             ImmutableArray<DiagnosticAnalyzer>.Empty;
+
         public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages() =>
             ImmutableArray<DiagnosticAnalyzer>.Empty;
+
         public override ImmutableArray<ISourceGenerator> GetGenerators(string language) =>
             ImmutableArray.Create(_generator);
     }

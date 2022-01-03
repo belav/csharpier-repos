@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 this.Value = value;
             }
+
             public readonly int Value;
+
             public static int GetHashCode(CacheKey key)
             {
                 return key.Value;
@@ -30,6 +32,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 this.Value = value;
             }
+
             public readonly int Value;
         }
 

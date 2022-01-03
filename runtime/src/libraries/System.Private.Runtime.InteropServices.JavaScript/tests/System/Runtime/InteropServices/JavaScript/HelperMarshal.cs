@@ -14,30 +14,35 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         internal const string INTEROP_CLASS =
             "[System.Private.Runtime.InteropServices.JavaScript.Tests]System.Runtime.InteropServices.JavaScript.Tests.HelperMarshal:";
         internal static int _i32Value;
+
         private static void InvokeI32(int a, int b)
         {
             _i32Value = a + b;
         }
 
         internal static float _f32Value;
+
         private static void InvokeFloat(float f)
         {
             _f32Value = f;
         }
 
         internal static double _f64Value;
+
         private static void InvokeDouble(double d)
         {
             _f64Value = d;
         }
 
         internal static long _i64Value;
+
         private static void InvokeLong(long l)
         {
             _i64Value = l;
         }
 
         internal static byte[] _byteBuffer;
+
         private static void MarshalArrayBuffer(ArrayBuffer buffer)
         {
             using (var bytes = new Uint8Array(buffer))
@@ -50,6 +55,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static int[] _intBuffer;
+
         private static void MarshalArrayBufferToInt32Array(ArrayBuffer buffer)
         {
             using (var ints = new Int32Array(buffer))
@@ -57,12 +63,14 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static string _stringResource;
+
         private static void InvokeString(string s)
         {
             _stringResource = s;
         }
 
         internal static string _stringResource2;
+
         private static void InvokeString2(string s)
         {
             _stringResource2 = s;
@@ -85,6 +93,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static string _marshalledString;
+
         private static string InvokeMarshalString()
         {
             _marshalledString = "Hic Sunt Dracones";
@@ -92,6 +101,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static object _object1;
+
         private static object InvokeObj1(object obj)
         {
             _object1 = obj;
@@ -99,6 +109,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static object _object2;
+
         private static object InvokeObj2(object obj)
         {
             _object2 = obj;
@@ -106,6 +117,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static object _marshalledObject;
+
         private static object InvokeMarshalObj()
         {
             _marshalledObject = new object();
@@ -119,6 +131,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         internal static int _valOne,
             _valTwo;
+
         private static void ManipulateObject(JSObject obj)
         {
             _valOne = (int)obj.Invoke("inc");
@@ -126,6 +139,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static object[] _jsObjects;
+
         private static void MinipulateObjTypes(JSObject obj)
         {
             _jsObjects = new object[4];
@@ -136,30 +150,35 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static int _jsAddFunctionResult;
+
         private static void UseFunction(JSObject obj)
         {
             _jsAddFunctionResult = (int)obj.Invoke("call", null, 10, 20);
         }
 
         internal static int _jsAddAsFunctionResult;
+
         private static void UseAsFunction(Function func)
         {
             _jsAddAsFunctionResult = (int)func.Call(null, 20, 30);
         }
 
         internal static int _intValue;
+
         private static void InvokeInt(int value)
         {
             _intValue = value;
         }
 
         internal static IntPtr _intPtrValue;
+
         private static void InvokeIntPtr(IntPtr i)
         {
             _intPtrValue = i;
         }
 
         internal static IntPtr _marshaledIntPtrValue;
+
         private static IntPtr InvokeMarshalIntPtr()
         {
             _marshaledIntPtrValue = (IntPtr)42;
@@ -167,6 +186,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static object[] _jsProperties;
+
         private static void RetrieveObjectProperties(JSObject obj)
         {
             _jsProperties = new object[4];
@@ -202,10 +222,12 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static float[] _floatBuffer;
+
         private static void MarshalFloat32Array(Float32Array buffer)
         {
             _floatBuffer = buffer.ToArray();
         }
+
         private static void MarshalArrayBufferToFloat32Array(ArrayBuffer buffer)
         {
             using (var floats = new Float32Array(buffer))
@@ -213,6 +235,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static double[] _doubleBuffer;
+
         private static void MarshalFloat64Array(Float64Array buffer)
         {
             _doubleBuffer = buffer.ToArray();
@@ -237,6 +260,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static sbyte[] _taSByte;
+
         private static void GetTypedArraySByte(JSObject obj)
         {
             _taSByte = ((Int8Array)obj.GetObjectProperty("typedArray")).ToArray();
@@ -250,6 +274,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static byte[] _taByte;
+
         private static void GetTypedArrayByte(JSObject obj)
         {
             _taByte = ((Uint8Array)obj.GetObjectProperty("dracones")).ToArray();
@@ -262,6 +287,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static short[] _taShort;
+
         private static void GetTypedArrayShort(JSObject obj)
         {
             _taShort = ((Int16Array)obj.GetObjectProperty("typedArray")).ToArray();
@@ -274,6 +300,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static ushort[] _taUShort;
+
         private static void GetTypedArrayUShort(JSObject obj)
         {
             _taUShort = ((Uint16Array)obj.GetObjectProperty("typedArray")).ToArray();
@@ -286,6 +313,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static int[] _taInt;
+
         private static void GetTypedArrayInt(JSObject obj)
         {
             _taInt = ((Int32Array)obj.GetObjectProperty("typedArray")).ToArray();
@@ -298,6 +326,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static uint[] _taUInt;
+
         private static void GetTypedArrayUInt(JSObject obj)
         {
             _taUInt = ((Uint32Array)obj.GetObjectProperty("typedArray")).ToArray();
@@ -310,6 +339,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static float[] _taFloat;
+
         private static void GetTypedArrayFloat(JSObject obj)
         {
             _taFloat = ((Float32Array)obj.GetObjectProperty("typedArray")).ToArray();
@@ -322,18 +352,21 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static double[] _taDouble;
+
         private static void GetTypedArrayDouble(JSObject obj)
         {
             _taDouble = ((Float64Array)obj.GetObjectProperty("typedArray")).ToArray();
         }
 
         private static Function _sumFunction;
+
         private static void CreateFunctionSum()
         {
             _sumFunction = new Function("a", "b", "return a + b");
         }
 
         internal static int _sumValue = 0;
+
         private static void CallFunctionSum()
         {
             if (_sumFunction == null)
@@ -342,6 +375,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         private static Function _mathMinFunction;
+
         private static void CreateFunctionApply()
         {
             var math = (JSObject)Runtime.GetGlobalObject("Math");
@@ -351,6 +385,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static int _minValue = 0;
+
         private static void CallFunctionApply()
         {
             if (_mathMinFunction == null)
@@ -359,28 +394,33 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static Uri _blobURL;
+
         public static void SetBlobUrl(string blobUrl)
         {
             _blobURL = new Uri(blobUrl);
         }
 
         internal static Uri _blobURI;
+
         public static void SetBlobAsUri(Uri blobUri)
         {
             _blobURI = blobUri;
         }
 
         internal static uint _uintValue;
+
         private static void InvokeUInt(uint value)
         {
             _uintValue = value;
         }
 
         internal static TestEnum _enumValue;
+
         private static void SetEnumValue(TestEnum value)
         {
             _enumValue = value;
         }
+
         private static TestEnum GetEnumValue()
         {
             return _enumValue;
@@ -392,6 +432,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static int _functionResultValue;
+
         private static Func<int, int, int> CreateFunctionDelegate()
         {
             return (a, b) =>
@@ -403,6 +444,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         internal static int _functionActionResultValue;
         internal static int _functionActionResultValueOfAction;
+
         private static Func<int, int, Action<int, int>> CreateFunctionDelegateWithAction()
         {
             return (a, b) =>
@@ -416,6 +458,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static int _actionResultValue;
+
         private static Action<int, int> CreateActionDelegate()
         {
             return (a1, a2) =>
@@ -447,6 +490,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         delegate void Del(string message);
         internal static string _delMethodResultValue;
+
         private static Del CreateDelegateMethod()
         {
             // Instantiate the delegate.
@@ -456,6 +500,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         delegate string Del2(string message);
         internal static string _delMethodStringResultValue;
+
         private static Del2 CreateDelegateMethodReturnString()
         {
             // Instantiate the delegate.
@@ -464,6 +509,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static string _delegateCallResult;
+
         private static Del CreateDelegateFromAnonymousMethod_VoidString()
         {
             // Instantiate the delegate.
@@ -508,6 +554,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         delegate void CustomDelStr(string s);
+
         private static CustomDelStr CreateCustomMultiCastDelegate_VoidString()
         {
             CustomDelStr hiDel,
@@ -534,6 +581,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         internal static JSObject _funcActionBufferObjectResultValue;
         internal static int _funcActionBufferResultLengthValue;
+
         private static Func<
             Uint8ClampedArray,
             Action<Uint8ClampedArray>

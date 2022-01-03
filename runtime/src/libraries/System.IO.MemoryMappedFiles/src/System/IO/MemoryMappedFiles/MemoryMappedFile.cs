@@ -134,6 +134,7 @@ namespace System.IO.MemoryMappedFiles
                 MemoryMappedFileAccess.ReadWrite
             );
         }
+
         public static MemoryMappedFile CreateFromFile(string path, FileMode mode)
         {
             return CreateFromFile(path, mode, null, DefaultSize, MemoryMappedFileAccess.ReadWrite);

@@ -108,6 +108,7 @@ public class DevDiv_545504
         Console.WriteLine("Result: " + result);
         return result;
     }
+
     public static int Main()
     {
         int result = (int)test(10);

@@ -230,6 +230,7 @@ class C
 }";
             await AssertNavigatedAsync(code, next: true);
         }
+
         [Fact, Trait(Traits.Feature, Traits.Features.GoToAdjacentMember)]
         [WorkItem(4311, "https://github.com/dotnet/roslyn/issues/4311")]
         public async Task StopsAtField()

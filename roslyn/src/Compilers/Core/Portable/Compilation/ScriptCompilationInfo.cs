@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis
 
         public ScriptCompilationInfo WithPreviousScriptCompilation(Compilation? compilation) =>
             CommonWithPreviousScriptCompilation(compilation);
+
         internal abstract ScriptCompilationInfo CommonWithPreviousScriptCompilation(
             Compilation? compilation
         );

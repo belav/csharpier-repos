@@ -147,6 +147,7 @@ namespace Microsoft.CodeAnalysis
         {
             get { return Null; }
         }
+
         // Null, Nothing and Unset are all ConstantValueNull. Null and Nothing are equivalent and represent the null and
         // nothing constants in C# and VB.  Unset indicates an uninitialized ConstantValue.
         public static ConstantValue Unset

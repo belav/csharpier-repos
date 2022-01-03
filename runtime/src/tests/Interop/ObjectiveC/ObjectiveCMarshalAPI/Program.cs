@@ -279,6 +279,7 @@ namespace ObjectiveCMarshalAPI
         private class IntException : Exception
         {
             public int Value { get; }
+
             public IntException(int value)
             {
                 this.Value = value;
@@ -292,11 +293,14 @@ namespace ObjectiveCMarshalAPI
 
         [UnmanagedCallersOnly]
         static void UCO_ThrowIntException(int a) => throw new IntException(a);
+
         [UnmanagedCallersOnly]
         static void UCO_ThrowExceptionException(int _) => throw new ExceptionException();
 
         delegate void ThrowExceptionDelegate(int a);
+
         static void DEL_ThrowIntException(int a) => throw new IntException(a);
+
         static void DEL_ThrowExceptionException(int _) => throw new ExceptionException();
 
         static unsafe delegate* unmanaged<IntPtr, void> OnUnhandledExceptionPropagationHandler(
@@ -332,6 +336,7 @@ namespace ObjectiveCMarshalAPI
                 Fptr = fptr;
                 Expected = expected;
             }
+
             public delegate* unmanaged<int, void> Fptr;
             public int Expected;
         }

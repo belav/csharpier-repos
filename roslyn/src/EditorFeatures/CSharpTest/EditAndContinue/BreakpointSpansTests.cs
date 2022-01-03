@@ -1418,6 +1418,7 @@ $$    (
 }"
             );
         }
+
         [Fact]
         public void FieldDeclarator_SingleVariable_Initializer_All3()
         {

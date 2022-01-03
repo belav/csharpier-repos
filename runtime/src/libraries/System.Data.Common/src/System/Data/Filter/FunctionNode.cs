@@ -877,6 +877,7 @@ namespace System.Data
             }
         }
     }
+
     internal enum FunctionId
     {
         none = -1,

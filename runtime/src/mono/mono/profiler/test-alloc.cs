@@ -3,6 +3,7 @@ using System;
 class T
 {
     static int count = 1000000;
+
     static void Main(string[] args)
     {
         if (args.Length > 0)

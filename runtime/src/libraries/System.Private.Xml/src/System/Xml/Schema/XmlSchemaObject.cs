@@ -58,7 +58,9 @@ namespace System.Xml.Schema
         }
 
         internal virtual void OnAdd(XmlSchemaObjectCollection container, object? item) { }
+
         internal virtual void OnRemove(XmlSchemaObjectCollection container, object? item) { }
+
         internal virtual void OnClear(XmlSchemaObjectCollection container) { }
 
         [XmlIgnore]
@@ -73,6 +75,7 @@ namespace System.Xml.Schema
         }
 
         internal virtual void SetUnhandledAttributes(XmlAttribute[] moreAttributes) { }
+
         internal virtual void AddAnnotation(XmlSchemaAnnotation annotation) { }
 
         [XmlIgnore]

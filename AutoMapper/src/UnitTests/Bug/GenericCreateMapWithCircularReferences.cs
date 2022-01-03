@@ -38,6 +38,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 this.UsersInRoles = new List<UsersInRole<T>>();
             }
+
             public virtual IList<UsersInRole<T>> UsersInRoles { get; set; }
         }
 
@@ -47,6 +48,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 this.UsersInRoles = new List<UsersInRolePoco<T>>();
             }
+
             public virtual IList<UsersInRolePoco<T>> UsersInRoles { get; set; }
         }
 
@@ -56,6 +58,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 this.UsersInRoles = new List<UsersInRole<T>>();
             }
+
             public virtual IList<UsersInRole<T>> UsersInRoles { get; set; }
         }
 
@@ -65,6 +68,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 this.UsersInRoles = new List<UsersInRolePoco<T>>();
             }
+
             public virtual IList<UsersInRolePoco<T>> UsersInRoles { get; set; }
         }
 

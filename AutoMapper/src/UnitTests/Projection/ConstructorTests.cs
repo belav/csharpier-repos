@@ -12,20 +12,25 @@ namespace AutoMapper.UnitTests.Projection
         {
             public IList<SourceItem> Items { get; set; }
         }
+
         class SourceItem
         {
             public IList<SourceValue> Values { get; set; }
         }
+
         class SourceValue
         {
             public int Value1 { get; set; }
             public int Value2 { get; set; }
         }
+
         class Destination
         {
             public Destination(DestinationItem item) => Item = item;
+
             public DestinationItem Item { get; }
         }
+
         class DestinationValue
         {
             public DestinationValue(int value1, int value2)
@@ -33,9 +38,11 @@ namespace AutoMapper.UnitTests.Projection
                 Value1 = value1;
                 Value2 = value2;
             }
+
             public int Value1 { get; }
             public int Value2 { get; }
         }
+
         class DestinationItem
         {
             public DestinationItem(DestinationValue destinationValue)
@@ -43,10 +50,12 @@ namespace AutoMapper.UnitTests.Projection
                 Value1 = destinationValue.Value1;
                 Value2 = destinationValue.Value2;
             }
+
             public int Value1 { get; }
             public int Value2 { get; }
             public IList<DestinationValue> Values { get; set; }
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(
                 cfg =>
@@ -61,6 +70,7 @@ namespace AutoMapper.UnitTests.Projection
                     cfg.CreateProjection<SourceValue, DestinationValue>();
                 }
             );
+
         [Fact]
         public void Should_construct_correctly()
         {
@@ -88,19 +98,24 @@ namespace AutoMapper.UnitTests.Projection
             firstValue.Value2.ShouldBe(2);
         }
     }
+
     public class ConstructorToString : AutoMapperSpecBase
     {
         class Source
         {
             public int Value { get; set; }
         }
+
         class Destination
         {
             public Destination(string value) => Value = value;
+
             public string Value { get; set; }
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(cfg => cfg.CreateProjection<Source, Destination>());
+
         [Fact]
         public void Should_construct_correctly() =>
             new[] { new Source { Value = 5 } }
@@ -109,6 +124,7 @@ namespace AutoMapper.UnitTests.Projection
                 .First()
                 .Value.ShouldBe("5");
     }
+
     public class ConstructorsWithCollections : AutoMapperSpecBase
     {
         class Addresses
@@ -117,26 +133,31 @@ namespace AutoMapper.UnitTests.Projection
             public string Address { get; set; }
             public ICollection<Users> Users { get; set; }
         }
+
         class Users
         {
             public int Id { get; set; }
             public Addresses FkAddress { get; set; }
         }
+
         class AddressDto
         {
             public int Id { get; }
             public string Address { get; }
+
             public AddressDto(int id, string address)
             {
                 Id = id;
                 Address = address;
             }
         }
+
         class UserDto
         {
             public int Id { get; set; }
             public AddressDto AddressDto { get; set; }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -147,6 +168,7 @@ namespace AutoMapper.UnitTests.Projection
                         .ConstructUsing(a => new AddressDto(a.Id, a.Address));
                 }
             );
+
         [Fact]
         public void Should_work() =>
             ProjectTo<UserDto>(
@@ -158,6 +180,7 @@ namespace AutoMapper.UnitTests.Projection
                 .First()
                 .AddressDto.Address.ShouldBe("address");
     }
+
     public class ConstructorTests : AutoMapperSpecBase
     {
         private Dest[] _dest;
@@ -170,12 +193,14 @@ namespace AutoMapper.UnitTests.Projection
         public class Dest
         {
             public Dest() { }
+
             public Dest(int other)
             {
                 Other = other;
             }
 
             public int Value { get; set; }
+
             [IgnoreMap]
             public int Other { get; set; }
         }
@@ -203,6 +228,7 @@ namespace AutoMapper.UnitTests.Projection
             _dest[0].Other.ShouldBe(15);
         }
     }
+
     public class NestedConstructors : AutoMapperSpecBase
     {
         public class A
@@ -210,20 +236,26 @@ namespace AutoMapper.UnitTests.Projection
             public int Id { get; set; }
             public B B { get; set; }
         }
+
         public class B
         {
             public int Id { get; set; }
         }
+
         public class DtoA
         {
             public DtoB B { get; }
+
             public DtoA(DtoB b) => B = b;
         }
+
         public class DtoB
         {
             public int Id { get; }
+
             public DtoB(int id) => Id = id;
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -232,6 +264,7 @@ namespace AutoMapper.UnitTests.Projection
                     cfg.CreateProjection<B, DtoB>();
                 }
             );
+
         [Fact]
         public void Should_project_ok() =>
             ProjectTo<DtoA>(new[] { new A { B = new B { Id = 3 } } }.AsQueryable())

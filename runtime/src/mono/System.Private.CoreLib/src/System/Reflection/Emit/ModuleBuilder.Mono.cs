@@ -75,6 +75,7 @@ namespace System.Reflection.Emit
         private byte[] guid;
         private TypeBuilder? global_type;
         private Type? global_type_created;
+
         // name_cache keys are display names
         private Dictionary<ITypeName, TypeBuilder> name_cache;
         private Dictionary<string, int> us_string_cache;
@@ -710,6 +711,7 @@ namespace System.Reflection.Emit
         {
             SetCustomAttribute(new CustomAttributeBuilder(con, binaryAttribute));
         }
+
         /*
                 internal ISymbolDocumentWriter? DefineDocument (string url, Guid language, Guid languageVendor, Guid documentType)
                 {

@@ -43,6 +43,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public class VarArgCtorOption
         {
             public int Value { get; }
+
             public VarArgCtorOption(__arglist) { }
 
             public VarArgCtorOption(int i, __arglist) { }

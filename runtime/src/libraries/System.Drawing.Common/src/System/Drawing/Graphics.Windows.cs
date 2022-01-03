@@ -26,6 +26,7 @@ namespace System.Drawing
             "GraphicsFinalization",
             "Tracks the creation and destruction of finalization"
         );
+
         internal static string GetAllocationStack()
         {
             if (GraphicsFinalization.TraceVerbose)
@@ -37,6 +38,7 @@ namespace System.Drawing
                 return "Enabled 'GraphicsFinalization' switch to see stack of allocation";
             }
         }
+
         private string allocationSite = Graphics.GetAllocationStack();
 #endif
 
@@ -506,6 +508,7 @@ namespace System.Drawing
                 )
             );
         }
+
         public void EnumerateMetafile(
             Metafile metafile,
             Point destPoint,

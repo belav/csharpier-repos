@@ -14,6 +14,7 @@ unsafe class Runtime_56743_1
     }
 
     static S* s_s;
+
     static int Foo(S s)
     {
         s_s = &s;

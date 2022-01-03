@@ -8153,9 +8153,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             public int Id { get; set; }
             public string Name { get; set; }
         }
+
         private class Eagle : Animal
         {
         }
+
         private class Shark : Animal
         {
         }

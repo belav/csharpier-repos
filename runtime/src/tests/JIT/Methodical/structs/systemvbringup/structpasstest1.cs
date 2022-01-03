@@ -30,6 +30,7 @@ namespace structinreg
         public Test2 t2;
         public long l1;
     }
+
     struct Test9
     {
         public float f3;
@@ -68,6 +69,7 @@ namespace structinreg
         public Foo2 o3;
         public Foo2 o4;
     }
+
     struct Test4
     {
         public int i1;
@@ -100,6 +102,7 @@ namespace structinreg
     {
         public int iFoo;
     }
+
     struct Test12
     {
         public Foo2 foo;

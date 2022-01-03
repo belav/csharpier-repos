@@ -316,6 +316,7 @@ namespace System.Linq.Expressions.Tests
 
         public static bool CustomGreaterThanOrEqual(object a, object b) =>
             BothNotNull(a, b) && CustomEquals(a, b) || CustomGreaterThan(a, b);
+
         public static bool CustomLessThanOrEqual(object a, object b) =>
             BothNotNull(a, b) && CustomEquals(a, b) || CustomLessThan(a, b);
 

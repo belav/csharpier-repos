@@ -1001,6 +1001,7 @@ public class InlineRouteParameterParserTests
         }
 
         public string Pattern { get; private set; }
+
         public bool Match(
             HttpContext httpContext,
             IRouter route,

@@ -13,7 +13,9 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         protected override int MacSize => 48;
 
         protected override HMAC Create() => new HMACSHA384();
+
         protected override HashAlgorithm CreateHashAlgorithm() => SHA384.Create();
+
         protected override byte[] HashDataOneShot(byte[] key, byte[] source) =>
             HMACSHA384.HashData(key, source);
 

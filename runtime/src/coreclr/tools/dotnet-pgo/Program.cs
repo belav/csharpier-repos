@@ -115,6 +115,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
     class Program
     {
         static Logger s_logger = new Logger();
+
         static int Main(string[] args)
         {
             var options = CommandLineOptions.ParseCommandLine(args);

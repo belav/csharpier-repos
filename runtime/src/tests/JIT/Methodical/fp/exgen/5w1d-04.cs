@@ -2,16 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal unsafe class testout1
 {
     public struct VT_0
     {
         public double a1_0;
+
         public VT_0(int i)
         {
             a1_0 = 1;
         }
     }
+
     public class CL_0
     {
         public double a0_0 = -1013.76;

@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// </summary>
         public static readonly SyntaxAnnotation Oblivious =
             new($"{nameof(NullableSyntaxAnnotation)}.{Oblivious}");
+
         /// <summary>
         /// For <c>string!</c> or <c>string?</c> types.
         /// </summary>

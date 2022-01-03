@@ -111,17 +111,30 @@ public class EndpointMetadataCollectionBenchmark
     }
 
     private interface IMetadata1 { }
+
     private interface IMetadata2 { }
+
     private interface IMetadata3 { }
+
     private interface IMetadata4 { }
+
     private interface IMetadata5 { }
+
     private class Metadata1 : IMetadata1 { }
+
     private class Metadata2 : IMetadata2 { }
+
     private class Metadata3 : IMetadata3 { }
+
     private class Metadata4 : IMetadata4 { }
+
     private class Metadata5 : IMetadata5 { }
+
     private class Metadata6 : IMetadata1, IMetadata2 { }
+
     private class Metadata7 : IMetadata2, IMetadata3 { }
+
     private class Metadata8 : IMetadata4, IMetadata5 { }
+
     private class Metadata9 : IMetadata1, IMetadata2 { }
 }

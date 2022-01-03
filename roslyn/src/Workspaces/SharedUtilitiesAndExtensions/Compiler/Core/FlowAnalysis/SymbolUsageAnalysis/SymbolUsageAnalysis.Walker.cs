@@ -33,6 +33,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             > _pendingWritesMap;
 
             private static readonly ObjectPool<Walker> s_visitorPool = new(() => new Walker());
+
             private Walker() { }
 
             public static void AnalyzeOperationsAndUpdateData(

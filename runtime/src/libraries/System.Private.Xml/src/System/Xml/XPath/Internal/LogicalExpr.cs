@@ -28,6 +28,7 @@ namespace MS.Internal.Xml.XPath
             _opnd1 = opnd1;
             _opnd2 = opnd2;
         }
+
         private LogicalExpr(LogicalExpr other) : base(other)
         {
             _op = other._op;
@@ -219,6 +220,7 @@ namespace MS.Internal.Xml.XPath
                 n2.Reset();
             }
         }
+
         private static bool cmpQueryNumber(Operator.Op op, object val1, object val2)
         {
             NodeSet n1 = new NodeSet(val1);
@@ -318,6 +320,7 @@ namespace MS.Internal.Xml.XPath
             );
             return (op == Operator.Op.EQ) == (n1 == n2);
         }
+
         private static bool cmpBoolBoolE(Operator.Op op, object val1, object val2)
         {
             bool n1 = (bool)val1;
@@ -398,6 +401,7 @@ namespace MS.Internal.Xml.XPath
             Debug.Fail("Unexpected Operator.op code in cmpNumberNumber()");
             return false;
         }
+
         private static bool cmpNumberNumberO(Operator.Op op, double n1, double n2)
         {
             switch (op)
@@ -414,6 +418,7 @@ namespace MS.Internal.Xml.XPath
             Debug.Fail("Unexpected Operator.op code in cmpNumberNumber()");
             return false;
         }
+
         private static bool cmpNumberNumber(Operator.Op op, object val1, object val2)
         {
             double n1 = (double)val1;
@@ -443,18 +448,21 @@ namespace MS.Internal.Xml.XPath
             );
             return (op == Operator.Op.EQ) == (n1 == n2);
         }
+
         private static bool cmpStringStringE(Operator.Op op, object val1, object val2)
         {
             string n1 = (string)val1;
             string n2 = (string)val2;
             return cmpStringStringE(op, n1, n2);
         }
+
         private static bool cmpRtfStringE(Operator.Op op, object val1, object val2)
         {
             string n1 = Rtf(val1);
             string n2 = (string)val2;
             return cmpStringStringE(op, n1, n2);
         }
+
         private static bool cmpRtfRtfE(Operator.Op op, object val1, object val2)
         {
             string n1 = Rtf(val1);
@@ -498,6 +506,7 @@ namespace MS.Internal.Xml.XPath
                 _opnd = (Query)opnd;
                 _current = null;
             }
+
             public bool MoveNext()
             {
                 _current = _opnd.Advance();

@@ -169,6 +169,7 @@ namespace structinreg
             public long z;
             public long w;
         }
+
         /* These tests are not working on non Windows CoreCLR. Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved.
         [StructLayout(LayoutKind.Sequential)]
         public struct S28
@@ -276,6 +277,7 @@ namespace structinreg
 
         [DllImport("jitstructtests_lib")]
         public static extern void InvokeCallback20(MyCallback20 callback, S20 s);
+
         /* These tests are not working on non Windows CoreCLR.  Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved.
         
         [DllImport("jitstructtests_lib")]
@@ -346,6 +348,7 @@ namespace structinreg
 
         [DllImport("jitstructtests_lib")]
         public static extern S20 InvokeCallback20R(MyCallback20 callback, S20 s);
+
         /* These tests are not working on non Windows CoreCLR.  Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved.
 
         [DllImport("jitstructtests_lib")]

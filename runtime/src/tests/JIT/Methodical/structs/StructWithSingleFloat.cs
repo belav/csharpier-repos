@@ -6,15 +6,18 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
 public class TestClass
 {
     public struct S2
     {
         public float float_2;
     }
+
     static decimal s_decimal_3 = 2.0512820512820512820512820513m;
     static S2 s_s2_16 = new S2();
     decimal decimal_3 = 2.3m;
+
     public S2 Method1(out decimal p_decimal_0)
     {
         unchecked
@@ -35,6 +38,7 @@ public class TestClass
             return;
         }
     }
+
     public static int Main(string[] args)
     {
         new TestClass().Method0();

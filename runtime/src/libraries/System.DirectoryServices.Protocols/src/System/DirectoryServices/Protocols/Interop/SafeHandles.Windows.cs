@@ -76,6 +76,7 @@ namespace System.DirectoryServices.Protocols
                 SetHandle(value);
             }
         }
+
         protected override bool ReleaseHandle()
         {
             if (handle != IntPtr.Zero)

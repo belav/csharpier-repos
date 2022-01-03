@@ -17,6 +17,7 @@ public enum TestEnum
 public class AA<TA, TB> where TA : IComparable
 {
     public TB m_agboGeneric1;
+
     public static void Static1(Array param1, ref TB param2, ulong[,,] param3, ref byte param4)
     {
         if (App.m_bFwd1)
@@ -107,6 +108,7 @@ public class AA<TA, TB> where TA : IComparable
         do { } while (App.m_bFwd1);
         ;
     }
+
     public static bool[,,,] Static2(
         bool[,][,,] param1,
         ref ulong[] param2,
@@ -203,6 +205,7 @@ public class AA<TA, TB> where TA : IComparable
         param5 = param5;
         return (new bool[38u, 121u, 77u, 3u]);
     }
+
     public static sbyte Static3(uint param1, ref short param2)
     {
         BB local29 = new BB();
@@ -225,6 +228,7 @@ public class AA<TA, TB> where TA : IComparable
         label2:
         return App.m_sbyFwd7;
     }
+
     public static int Static4(TB param1, ref Array[][,,][,,] param2, ref TB param3, char param4)
     {
         ushort[,,][,][][] local34 = (new ushort[18u, 54u, 39u][,][][]);
@@ -236,6 +240,7 @@ public class AA<TA, TB> where TA : IComparable
 public struct BB
 {
     public Array[][][,,,] m_axField1;
+
     public static void Static1(
         double[][,,] param1,
         ref bool param2,
@@ -371,6 +376,7 @@ public class App
         catch (Exception) { }
         return 100;
     }
+
     public static bool m_bFwd1;
     public static long m_lFwd2;
     public static ulong m_ulFwd3;

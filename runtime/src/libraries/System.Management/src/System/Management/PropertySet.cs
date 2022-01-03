@@ -184,6 +184,7 @@ namespace System.Management
         {
             CopyTo((Array)propertyArray, index);
         }
+
         //
         // IEnumerable
         //

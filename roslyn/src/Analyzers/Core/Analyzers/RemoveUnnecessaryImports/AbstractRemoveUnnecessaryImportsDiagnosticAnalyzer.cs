@@ -134,6 +134,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
         }
 
         public CodeActionRequestPriority RequestPriority => CodeActionRequestPriority.Normal;
+
         public bool OpenFileOnly(OptionSet options) => false;
 
         public override void Initialize(AnalysisContext context)

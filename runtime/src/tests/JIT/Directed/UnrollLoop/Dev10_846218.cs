@@ -23,6 +23,7 @@ namespace Test
     internal class DoSomething : IDoSomething
     {
         public string output = "";
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void Do(IntVec o)
         {

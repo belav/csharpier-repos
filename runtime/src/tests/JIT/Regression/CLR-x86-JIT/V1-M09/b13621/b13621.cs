@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 namespace DefaultNamespace
 {
     internal class RootMem

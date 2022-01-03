@@ -17,6 +17,7 @@ namespace System.Speech.Recognition
 
             _tag = new TagElement(value);
         }
+
         public SemanticResultValue(string phrase, object value)
         {
             Helpers.ThrowIfEmptyOrNull(phrase, nameof(phrase));
@@ -24,6 +25,7 @@ namespace System.Speech.Recognition
 
             _tag = new TagElement(new GrammarBuilderPhrase(phrase), value);
         }
+
         public SemanticResultValue(GrammarBuilder builder, object value)
         {
             Helpers.ThrowIfNull(builder, nameof(builder));

@@ -20,6 +20,7 @@ namespace System.Xml.Serialization
     internal sealed class XmlSerializationReaderILGen : XmlSerializationILGen
     {
         private readonly Dictionary<string, string> _idNames = new Dictionary<string, string>();
+
         // Mapping name->id_XXXNN field
         private readonly Dictionary<string, FieldBuilder> _idNameFields = new Dictionary<
             string,
@@ -63,6 +64,7 @@ namespace System.Xml.Serialization
                 int i,
                 MemberMapping mapping
             ) : this(outerClass, source, null, arrayName, i, mapping, false, null) { }
+
             internal Member(
                 XmlSerializationReaderILGen outerClass,
                 string source,
@@ -71,6 +73,7 @@ namespace System.Xml.Serialization
                 MemberMapping mapping,
                 string? choiceSource
             ) : this(outerClass, source, null, arrayName, i, mapping, false, choiceSource) { }
+
             internal Member(
                 XmlSerializationReaderILGen outerClass,
                 string source,
@@ -79,6 +82,7 @@ namespace System.Xml.Serialization
                 int i,
                 MemberMapping mapping
             ) : this(outerClass, source, arraySource, arrayName, i, mapping, false, null) { }
+
             internal Member(
                 XmlSerializationReaderILGen outerClass,
                 string source,
@@ -89,6 +93,7 @@ namespace System.Xml.Serialization
                 string? choiceSource
             ) : this(outerClass, source, arraySource, arrayName, i, mapping, false, choiceSource)
             { }
+
             internal Member(
                 XmlSerializationReaderILGen outerClass,
                 string source,
@@ -97,6 +102,7 @@ namespace System.Xml.Serialization
                 MemberMapping mapping,
                 bool multiRef
             ) : this(outerClass, source, null, arrayName, i, mapping, multiRef, null) { }
+
             internal Member(
                 XmlSerializationReaderILGen outerClass,
                 string source,
@@ -2006,6 +2012,7 @@ namespace System.Xml.Serialization
         {
             WriteXmlNodeEqual(source, name, ns, true);
         }
+
         [RequiresUnreferencedCode("XmlSerializationReader methods have RequiresUnreferencedCode")]
         private void WriteXmlNodeEqual(string source, string name, string? ns, bool doAndIf)
         {
@@ -2999,6 +3006,7 @@ namespace System.Xml.Serialization
         {
             return GetArraySource(typeDesc, arrayName, false);
         }
+
         private string GetArraySource(TypeDesc typeDesc, string arrayName, bool multiRef)
         {
             string a = arrayName;
@@ -3210,6 +3218,7 @@ namespace System.Xml.Serialization
         {
             WriteSourceEnd(source, elementType, elementType);
         }
+
         [RequiresUnreferencedCode("string-based IL generation")]
         private void WriteSourceEnd(string source, Type elementType, Type stackType)
         {
@@ -4052,6 +4061,7 @@ namespace System.Xml.Serialization
         {
             RaCodeGen.WriteLocalDecl(variableName, initValue);
         }
+
         private void ILGenElseString(string elseString)
         {
             MethodInfo XmlSerializationReader_UnknownNode1 =
@@ -4119,6 +4129,7 @@ namespace System.Xml.Serialization
             }
             throw Globals.NotSupported($"Unexpected: {elseString}");
         }
+
         private void ILGenParamsReadSource(string paramsReadSource)
         {
             Regex regex = NewRegex("paramsRead\\[(?<index>[0-9]+)\\]");
@@ -4133,6 +4144,7 @@ namespace System.Xml.Serialization
             }
             throw Globals.NotSupported($"Unexpected: {paramsReadSource}");
         }
+
         private void ILGenParamsReadSource(string paramsReadSource, bool value)
         {
             Regex regex = NewRegex("paramsRead\\[(?<index>[0-9]+)\\]");
@@ -4148,6 +4160,7 @@ namespace System.Xml.Serialization
             }
             throw Globals.NotSupported($"Unexpected: {paramsReadSource}");
         }
+
         private void ILGenElementElseString(string elementElseString)
         {
             if (elementElseString == "throw CreateUnknownNodeException();")

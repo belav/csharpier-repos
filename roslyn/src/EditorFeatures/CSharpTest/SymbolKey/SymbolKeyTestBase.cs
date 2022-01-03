@@ -343,6 +343,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         private class LocalSymbolDumper
         {
             private readonly CSharpCompilation _compilation;
+
             public LocalSymbolDumper(CSharpCompilation compilation) => _compilation = compilation;
 
             public void GetLocalSymbols(FieldSymbol symbol, List<ISymbol> list)

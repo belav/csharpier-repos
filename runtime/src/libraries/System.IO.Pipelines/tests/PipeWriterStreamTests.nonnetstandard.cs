@@ -258,14 +258,19 @@ namespace System.IO.Pipelines.Tests
             public NotImplementedPipeWriter() { }
 
             public override void Advance(int bytes) => throw new NotImplementedException();
+
             public override void CancelPendingFlush() => throw new NotImplementedException();
+
             public override void Complete(Exception exception = null) =>
                 throw new NotImplementedException();
+
             public override ValueTask<FlushResult> FlushAsync(
                 CancellationToken cancellationToken = default
             ) => throw new NotImplementedException();
+
             public override Memory<byte> GetMemory(int sizeHint = 0) =>
                 throw new NotImplementedException();
+
             public override Span<byte> GetSpan(int sizeHint = 0) =>
                 throw new NotImplementedException();
         }

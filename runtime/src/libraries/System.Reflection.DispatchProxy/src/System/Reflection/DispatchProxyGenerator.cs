@@ -322,6 +322,7 @@ namespace System.Reflection
         {
             private readonly ProxyAssembly _assembly;
             private readonly TypeBuilder _tb;
+
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
@@ -848,6 +849,7 @@ namespace System.Reflection
             {
                 private readonly ILGenerator _il;
                 private readonly Type[] _paramTypes;
+
                 internal ParametersArray(ILGenerator il, Type[] paramTypes)
                 {
                     _il = il;
@@ -877,6 +879,7 @@ namespace System.Reflection
             {
                 private readonly ILGenerator _il;
                 private readonly LocalBuilder _lb;
+
                 internal GenericArray(ILGenerator il, int len)
                 {
                     _il = il;

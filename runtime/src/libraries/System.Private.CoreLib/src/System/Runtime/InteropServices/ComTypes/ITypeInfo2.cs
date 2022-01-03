@@ -65,10 +65,13 @@ namespace System.Runtime.InteropServices.ComTypes
         );
         new void GetMops(int memid, out string? pBstrMops);
         new void GetContainingTypeLib(out ITypeLib ppTLB, out int pIndex);
+
         [PreserveSig]
         new void ReleaseTypeAttr(IntPtr pTypeAttr);
+
         [PreserveSig]
         new void ReleaseFuncDesc(IntPtr pFuncDesc);
+
         [PreserveSig]
         new void ReleaseVarDesc(IntPtr pVarDesc);
         void GetTypeKind(out TYPEKIND pTypeKind);
@@ -80,6 +83,7 @@ namespace System.Runtime.InteropServices.ComTypes
         void GetParamCustData(int indexFunc, int indexParam, ref Guid guid, out object pVarVal);
         void GetVarCustData(int index, ref Guid guid, out object pVarVal);
         void GetImplTypeCustData(int index, ref Guid guid, out object pVarVal);
+
         [LCIDConversion(1)]
         void GetDocumentation2(
             int memid,

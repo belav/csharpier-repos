@@ -19,6 +19,7 @@ using System.Threading.Tasks.Extensions;
 #endif
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
+
 #if TESTUTILS
 public
 #else

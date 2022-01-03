@@ -52,9 +52,11 @@ namespace System.IO.Enumeration
         /// <summary>Gets the creation time for the entry or the oldest available time stamp if the operating system does not support creation time stamps.</summary>
         /// <value>The creation time for the entry.</value>
         public DateTimeOffset CreationTimeUtc => _info->CreationTime.ToDateTimeOffset();
+
         /// <summary>Gets a datetime offset that represents the last access time in UTC.</summary>
         /// <value>The last access time in UTC.</value>
         public DateTimeOffset LastAccessTimeUtc => _info->LastAccessTime.ToDateTimeOffset();
+
         /// <summary>Gets a datetime offset that represents the last write time in UTC.</summary>
         /// <value>The last write time in UTC.</value>
         public DateTimeOffset LastWriteTimeUtc => _info->LastWriteTime.ToDateTimeOffset();

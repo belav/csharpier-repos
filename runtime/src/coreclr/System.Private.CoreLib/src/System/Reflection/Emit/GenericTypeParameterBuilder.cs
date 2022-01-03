@@ -31,6 +31,7 @@ namespace System.Reflection.Emit
         {
             return m_type.Name;
         }
+
         public override bool Equals(object? o)
         {
             GenericTypeParameterBuilder? g = o as GenericTypeParameterBuilder;
@@ -40,6 +41,7 @@ namespace System.Reflection.Emit
 
             return object.ReferenceEquals(g.m_type, m_type);
         }
+
         public override int GetHashCode()
         {
             return m_type.GetHashCode();

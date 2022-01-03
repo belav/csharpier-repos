@@ -9,10 +9,12 @@ namespace DefaultNamespace
     class BB
     {
         public static bool[] m_static1 = new bool[7];
+
         public BB[] Method1()
         {
             return new BB[7];
         }
+
         public bool[] m_field2;
     }
 

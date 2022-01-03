@@ -25,6 +25,7 @@ namespace System.ComponentModel.Design.Serialization.Tests
         {
             public override void BeginLoad(IDesignerLoaderHost host) =>
                 throw new NotImplementedException();
+
             public override void Dispose() => throw new NotImplementedException();
         }
     }

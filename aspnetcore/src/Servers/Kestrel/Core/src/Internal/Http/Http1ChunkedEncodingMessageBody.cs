@@ -19,6 +19,7 @@ internal sealed class Http1ChunkedEncodingMessageBody : Http1MessageBody
 {
     // byte consts don't have a data type annotation so we pre-cast it
     private const byte ByteCR = (byte)'\r';
+
     // "7FFFFFFF\r\n" is the largest chunk size that could be returned as an int.
     private const int MaxChunkPrefixBytes = 10;
 

@@ -18,6 +18,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         /// <inheritdoc cref="CodeDefinitionWindow_InProc.GetCurrentLineText"/>
         public string GetCurrentLineText() => _inProc.GetCurrentLineText();
+
         /// <inheritdoc cref="CodeDefinitionWindow_InProc.GetText"/>
         public string GetText() => _inProc.GetText();
 

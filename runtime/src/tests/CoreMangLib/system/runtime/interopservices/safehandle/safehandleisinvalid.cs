@@ -117,24 +117,29 @@ public class MySafeHandle : SafeHandle
     {
         this.handle = new IntPtr(100);
     }
+
     bool InvalidValue = true;
     public override bool IsInvalid
     {
         [SecurityCritical]
         get { return InvalidValue; }
     }
+
     public bool MyReleaseInvoke()
     {
         return ReleaseHandle();
     }
+
     public void MySetHandle(IntPtr iptr)
     {
         this.SetHandle(iptr);
     }
+
     public IntPtr GetHandle()
     {
         return this.handle;
     }
+
     [DllImport("kernel32")]
     private static extern bool CloseHandle(IntPtr handle);
 
@@ -150,6 +155,7 @@ public class MySafeHandle : SafeHandle
         InvalidValue = false;
         return true;
     }
+
     public bool CheckHandleIsRelease()
     {
         if (handle != IntPtr.Zero)

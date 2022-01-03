@@ -25,6 +25,7 @@ namespace System.Data.OleDb
             PersistSecurityInfo,
             OleDbServices,
         }
+
         private static readonly string[] s_validKeywords = new string[5]
         {
             DbConnectionStringKeywords.FileName,
@@ -280,10 +281,12 @@ namespace System.Data.OleDb
         {
             return DbConnectionStringBuilderUtil.ConvertToBoolean(value);
         }
+
         private static int ConvertToInt32(object value)
         {
             return DbConnectionStringBuilderUtil.ConvertToInt32(value);
         }
+
         private static string ConvertToString(object value)
         {
             return DbConnectionStringBuilderUtil.ConvertToString(value);
@@ -380,10 +383,12 @@ namespace System.Data.OleDb
         {
             base[keyword] = value.ToString(null);
         }
+
         private void SetValue(string keyword, int value)
         {
             base[keyword] = value.ToString((System.IFormatProvider?)null);
         }
+
         private void SetValue(string keyword, string value)
         {
             ADP.CheckArgumentNull(value, keyword);

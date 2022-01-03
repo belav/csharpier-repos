@@ -72,6 +72,7 @@ namespace System.CommandLine.Rendering.Tests
         {
             public int GetFormatCallCount { get; set; }
             public ConsoleFormatInfo TestInfo { get; set; }
+
             public object GetFormat(Type formatType)
             {
                 GetFormatCallCount++;

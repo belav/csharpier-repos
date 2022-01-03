@@ -24,19 +24,26 @@ namespace System.ConfigurationTests
 
             // These two are abstract
             protected override ConfigurationElement CreateNewElement() => TestElement;
+
             protected override object GetElementKey(ConfigurationElement element) =>
                 element == null ? null : "FooKey";
 
             public bool TestThrowOnDuplicate => ThrowOnDuplicate;
             public string TestElementName => ElementName;
+
             public bool TestIsElementName(string elementName) => IsElementName(elementName);
+
             public bool TestIsElementRemovable(ConfigurationElement element) =>
                 IsElementRemovable(element);
+
             public void TestBaseAdd(ConfigurationElement element) => BaseAdd(element);
+
             public void TestBaseAdd(int index, ConfigurationElement element) =>
                 BaseAdd(index, element);
+
             public ConfigurationElement TestCreateNewElement(string elementName) =>
                 CreateNewElement(elementName);
+
             public int TestBaseIndexOf(ConfigurationElement element) => BaseIndexOf(element);
         }
 

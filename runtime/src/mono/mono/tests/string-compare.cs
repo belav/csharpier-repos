@@ -38,6 +38,7 @@ namespace T
             return false;
         }
     }
+
     public class test
     {
         public static int Main()

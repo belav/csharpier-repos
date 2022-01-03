@@ -51,6 +51,7 @@ public class AuthenticationSchemeProvider : IAuthenticationSchemeProvider
 
     private readonly IDictionary<string, AuthenticationScheme> _schemes;
     private readonly List<AuthenticationScheme> _requestHandlers;
+
     // Used as a safe return value for enumeration apis
     private IEnumerable<AuthenticationScheme> _schemesCopy = Array.Empty<AuthenticationScheme>();
     private IEnumerable<AuthenticationScheme> _requestHandlersCopy =

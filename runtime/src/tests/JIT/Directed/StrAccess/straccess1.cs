@@ -39,6 +39,7 @@ internal class StrAccess1
         sb4,
         sb5,
         sb6;
+
     public static String f(ref String arg)
     {
         return arg;
@@ -54,6 +55,7 @@ internal class StrAccess1
     };
 
     public static Random rand = new Random(Seed);
+
     public static int Main()
     {
         bool passed = true;

@@ -245,6 +245,7 @@ namespace System.Management
                 return result;
             }
         }
+
         internal WmiEventSink GetNewPutSink(
             ManagementScope scope,
             object context,

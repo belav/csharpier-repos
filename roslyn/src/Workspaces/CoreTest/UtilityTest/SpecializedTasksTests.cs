@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
     public class SpecializedTasksTests
     {
         private record StateType;
+
         private record IntermediateType;
+
         private record ResultType;
 
         [Fact]

@@ -315,6 +315,7 @@ namespace Microsoft.CodeAnalysis.Scripting
     public sealed class ScriptState<T> : ScriptState
     {
         public new T ReturnValue { get; }
+
         internal override object GetReturnValue() => ReturnValue;
 
         internal ScriptState(

@@ -138,6 +138,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private ImmutableArray<(DiagnosticAnalyzer, ImmutableArray<SemanticModelAnalyzerAction>)> _lazySemanticModelActions;
         private ImmutableArray<(DiagnosticAnalyzer, ImmutableArray<SyntaxTreeAnalyzerAction>)> _lazySyntaxTreeActions;
         private ImmutableArray<(DiagnosticAnalyzer, ImmutableArray<AdditionalFileAnalyzerAction>)> _lazyAdditionalFileActions;
+
         // Compilation actions and compilation end actions have separate maps so that it is easy to
         // execute the compilation actions before the compilation end actions.
         private ImmutableArray<(DiagnosticAnalyzer, ImmutableArray<CompilationAnalyzerAction>)> _lazyCompilationActions;
@@ -1790,6 +1791,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         internal ImmutableDictionary<DiagnosticAnalyzer, TimeSpan> AnalyzerExecutionTimes =>
             AnalyzerExecutor.AnalyzerExecutionTimes;
+
         internal TimeSpan ResetAnalyzerExecutionTime(DiagnosticAnalyzer analyzer) =>
             AnalyzerExecutor.ResetAnalyzerExecutionTime(analyzer);
 
@@ -3452,6 +3454,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         protected override IGroupedAnalyzerActions EmptyGroupedActions =>
             GroupedAnalyzerActions.Empty;
+
         protected override IGroupedAnalyzerActions CreateGroupedActions(
             DiagnosticAnalyzer analyzer,
             in AnalyzerActions analyzerActions

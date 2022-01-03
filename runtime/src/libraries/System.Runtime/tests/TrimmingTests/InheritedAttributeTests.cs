@@ -5,8 +5,10 @@ using System;
 
 [AttributeUsage(AttributeTargets.Property, Inherited = true)]
 class FooAttribute : Attribute { }
+
 [AttributeUsage(AttributeTargets.Property, Inherited = true)]
 class BarAttribute : Attribute { }
+
 [AttributeUsage(AttributeTargets.Property, Inherited = true)]
 class BazAttribute : Attribute { }
 

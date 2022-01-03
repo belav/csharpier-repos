@@ -13,6 +13,7 @@ public class Runtime_54100
     static short s_32;
     static short s_33;
     static int s_45;
+
     public static int Main()
     {
         ushort[] vr4 = s_23[0];

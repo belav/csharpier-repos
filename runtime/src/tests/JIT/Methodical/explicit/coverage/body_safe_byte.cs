@@ -9,29 +9,35 @@ internal class TestApp
     {
         return init.q;
     }
+
     private static byte test_0_1(byte num, AA init, AA zero)
     {
         zero.q = num;
         return zero.q;
     }
+
     private static byte test_0_2(byte num, AA init, AA zero)
     {
         return (byte)(init.q + zero.q);
     }
+
     private static byte test_0_3(byte num, AA init, AA zero)
     {
         return (byte)checked(init.q - zero.q);
     }
+
     private static byte test_0_4(byte num, AA init, AA zero)
     {
         zero.q += num;
         return zero.q;
     }
+
     private static byte test_0_5(byte num, AA init, AA zero)
     {
         zero.q += init.q;
         return zero.q;
     }
+
     private static byte test_0_6(byte num, AA init, AA zero)
     {
         if (init.q == num)
@@ -39,80 +45,98 @@ internal class TestApp
         else
             return zero.q;
     }
+
     private static byte test_0_7(byte num, AA init, AA zero)
     {
         return (byte)(init.q < num + 1 ? 100 : -1);
     }
+
     private static byte test_0_8(byte num, AA init, AA zero)
     {
         return (byte)((init.q > zero.q ? 1 : 0) + 99);
     }
+
     private static byte test_0_9(byte num, AA init, AA zero)
     {
         return (byte)((init.q ^ zero.q) | num);
     }
+
     private static byte test_0_10(byte num, AA init, AA zero)
     {
         zero.q |= init.q;
         return (byte)(zero.q & num);
     }
+
     private static byte test_0_11(byte num, AA init, AA zero)
     {
         return (byte)(init.q >> zero.q);
     }
+
     private static byte test_0_12(byte num, AA init, AA zero)
     {
         return AA.a_init[init.q].q;
     }
+
     private static byte test_0_13(byte num, AA init, AA zero)
     {
         return AA.aa_init[num - 100, (init.q | 1) - 2, 1 + zero.q].q;
     }
+
     private static byte test_0_14(byte num, AA init, AA zero)
     {
         object bb = init.q;
         return (byte)bb;
     }
+
     private static byte test_0_15(byte num, AA init, AA zero)
     {
         double dbl = init.q;
         return (byte)dbl;
     }
+
     private static byte test_0_16(byte num, AA init, AA zero)
     {
         return AA.call_target(init.q);
     }
+
     private static byte test_0_17(byte num, AA init, AA zero)
     {
         return AA.call_target_ref(ref init.q);
     }
+
     private static byte test_1_0(byte num, ref AA r_init, ref AA r_zero)
     {
         return r_init.q;
     }
+
     private static byte test_1_1(byte num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q = num;
         return r_zero.q;
     }
+
     private static byte test_1_2(byte num, ref AA r_init, ref AA r_zero)
     {
         return (byte)(r_init.q + r_zero.q);
     }
+
     private static byte test_1_3(byte num, ref AA r_init, ref AA r_zero)
     {
         return (byte)checked(r_init.q - r_zero.q);
     }
+
     private static byte test_1_4(byte num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q += num;
         return r_zero.q;
     }
+
     private static byte test_1_5(byte num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q += r_init.q;
         return r_zero.q;
     }
+
     private static byte test_1_6(byte num, ref AA r_init, ref AA r_zero)
     {
         if (r_init.q == num)
@@ -120,80 +144,98 @@ internal class TestApp
         else
             return r_zero.q;
     }
+
     private static byte test_1_7(byte num, ref AA r_init, ref AA r_zero)
     {
         return (byte)(r_init.q < num + 1 ? 100 : -1);
     }
+
     private static byte test_1_8(byte num, ref AA r_init, ref AA r_zero)
     {
         return (byte)((r_init.q > r_zero.q ? 1 : 0) + 99);
     }
+
     private static byte test_1_9(byte num, ref AA r_init, ref AA r_zero)
     {
         return (byte)((r_init.q ^ r_zero.q) | num);
     }
+
     private static byte test_1_10(byte num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q |= r_init.q;
         return (byte)(r_zero.q & num);
     }
+
     private static byte test_1_11(byte num, ref AA r_init, ref AA r_zero)
     {
         return (byte)(r_init.q >> r_zero.q);
     }
+
     private static byte test_1_12(byte num, ref AA r_init, ref AA r_zero)
     {
         return AA.a_init[r_init.q].q;
     }
+
     private static byte test_1_13(byte num, ref AA r_init, ref AA r_zero)
     {
         return AA.aa_init[num - 100, (r_init.q | 1) - 2, 1 + r_zero.q].q;
     }
+
     private static byte test_1_14(byte num, ref AA r_init, ref AA r_zero)
     {
         object bb = r_init.q;
         return (byte)bb;
     }
+
     private static byte test_1_15(byte num, ref AA r_init, ref AA r_zero)
     {
         double dbl = r_init.q;
         return (byte)dbl;
     }
+
     private static byte test_1_16(byte num, ref AA r_init, ref AA r_zero)
     {
         return AA.call_target(r_init.q);
     }
+
     private static byte test_1_17(byte num, ref AA r_init, ref AA r_zero)
     {
         return AA.call_target_ref(ref r_init.q);
     }
+
     private static byte test_2_0(byte num)
     {
         return AA.a_init[num].q;
     }
+
     private static byte test_2_1(byte num)
     {
         AA.a_zero[num].q = num;
         return AA.a_zero[num].q;
     }
+
     private static byte test_2_2(byte num)
     {
         return (byte)(AA.a_init[num].q + AA.a_zero[num].q);
     }
+
     private static byte test_2_3(byte num)
     {
         return (byte)checked(AA.a_init[num].q - AA.a_zero[num].q);
     }
+
     private static byte test_2_4(byte num)
     {
         AA.a_zero[num].q += num;
         return AA.a_zero[num].q;
     }
+
     private static byte test_2_5(byte num)
     {
         AA.a_zero[num].q += AA.a_init[num].q;
         return AA.a_zero[num].q;
     }
+
     private static byte test_2_6(byte num)
     {
         if (AA.a_init[num].q == num)
@@ -201,82 +243,100 @@ internal class TestApp
         else
             return AA.a_zero[num].q;
     }
+
     private static byte test_2_7(byte num)
     {
         return (byte)(AA.a_init[num].q < num + 1 ? 100 : -1);
     }
+
     private static byte test_2_8(byte num)
     {
         return (byte)((AA.a_init[num].q > AA.a_zero[num].q ? 1 : 0) + 99);
     }
+
     private static byte test_2_9(byte num)
     {
         return (byte)((AA.a_init[num].q ^ AA.a_zero[num].q) | num);
     }
+
     private static byte test_2_10(byte num)
     {
         AA.a_zero[num].q |= AA.a_init[num].q;
         return (byte)(AA.a_zero[num].q & num);
     }
+
     private static byte test_2_11(byte num)
     {
         return (byte)(AA.a_init[num].q >> AA.a_zero[num].q);
     }
+
     private static byte test_2_12(byte num)
     {
         return AA.a_init[AA.a_init[num].q].q;
     }
+
     private static byte test_2_13(byte num)
     {
         return AA.aa_init[num - 100, (AA.a_init[num].q | 1) - 2, 1 + AA.a_zero[num].q].q;
     }
+
     private static byte test_2_14(byte num)
     {
         object bb = AA.a_init[num].q;
         return (byte)bb;
     }
+
     private static byte test_2_15(byte num)
     {
         double dbl = AA.a_init[num].q;
         return (byte)dbl;
     }
+
     private static byte test_2_16(byte num)
     {
         return AA.call_target(AA.a_init[num].q);
     }
+
     private static byte test_2_17(byte num)
     {
         return AA.call_target_ref(ref AA.a_init[num].q);
     }
+
     private static byte test_3_0(byte num)
     {
         return AA.aa_init[0, num - 1, num / 100].q;
     }
+
     private static byte test_3_1(byte num)
     {
         AA.aa_zero[0, num - 1, num / 100].q = num;
         return AA.aa_zero[0, num - 1, num / 100].q;
     }
+
     private static byte test_3_2(byte num)
     {
         return (byte)(AA.aa_init[0, num - 1, num / 100].q + AA.aa_zero[0, num - 1, num / 100].q);
     }
+
     private static byte test_3_3(byte num)
     {
         return (byte)checked(
             AA.aa_init[0, num - 1, num / 100].q - AA.aa_zero[0, num - 1, num / 100].q
         );
     }
+
     private static byte test_3_4(byte num)
     {
         AA.aa_zero[0, num - 1, num / 100].q += num;
         return AA.aa_zero[0, num - 1, num / 100].q;
     }
+
     private static byte test_3_5(byte num)
     {
         AA.aa_zero[0, num - 1, num / 100].q += AA.aa_init[0, num - 1, num / 100].q;
         return AA.aa_zero[0, num - 1, num / 100].q;
     }
+
     private static byte test_3_6(byte num)
     {
         if (AA.aa_init[0, num - 1, num / 100].q == num)
@@ -284,35 +344,42 @@ internal class TestApp
         else
             return AA.aa_zero[0, num - 1, num / 100].q;
     }
+
     private static byte test_3_7(byte num)
     {
         return (byte)(AA.aa_init[0, num - 1, num / 100].q < num + 1 ? 100 : -1);
     }
+
     private static byte test_3_8(byte num)
     {
         return (byte)(
             (AA.aa_init[0, num - 1, num / 100].q > AA.aa_zero[0, num - 1, num / 100].q ? 1 : 0) + 99
         );
     }
+
     private static byte test_3_9(byte num)
     {
         return (byte)(
             (AA.aa_init[0, num - 1, num / 100].q ^ AA.aa_zero[0, num - 1, num / 100].q) | num
         );
     }
+
     private static byte test_3_10(byte num)
     {
         AA.aa_zero[0, num - 1, num / 100].q |= AA.aa_init[0, num - 1, num / 100].q;
         return (byte)(AA.aa_zero[0, num - 1, num / 100].q & num);
     }
+
     private static byte test_3_11(byte num)
     {
         return (byte)(AA.aa_init[0, num - 1, num / 100].q >> AA.aa_zero[0, num - 1, num / 100].q);
     }
+
     private static byte test_3_12(byte num)
     {
         return AA.a_init[AA.aa_init[0, num - 1, num / 100].q].q;
     }
+
     private static byte test_3_13(byte num)
     {
         return AA.aa_init[
@@ -321,51 +388,62 @@ internal class TestApp
             1 + AA.aa_zero[0, num - 1, num / 100].q
         ].q;
     }
+
     private static byte test_3_14(byte num)
     {
         object bb = AA.aa_init[0, num - 1, num / 100].q;
         return (byte)bb;
     }
+
     private static byte test_3_15(byte num)
     {
         double dbl = AA.aa_init[0, num - 1, num / 100].q;
         return (byte)dbl;
     }
+
     private static byte test_3_16(byte num)
     {
         return AA.call_target(AA.aa_init[0, num - 1, num / 100].q);
     }
+
     private static byte test_3_17(byte num)
     {
         return AA.call_target_ref(ref AA.aa_init[0, num - 1, num / 100].q);
     }
+
     private static byte test_4_0(byte num)
     {
         return BB.f_init.q;
     }
+
     private static byte test_4_1(byte num)
     {
         BB.f_zero.q = num;
         return BB.f_zero.q;
     }
+
     private static byte test_4_2(byte num)
     {
         return (byte)(BB.f_init.q + BB.f_zero.q);
     }
+
     private static byte test_4_3(byte num)
     {
         return (byte)checked(BB.f_init.q - BB.f_zero.q);
     }
+
     private static byte test_4_4(byte num)
     {
         BB.f_zero.q += num;
         return BB.f_zero.q;
     }
+
     private static byte test_4_5(byte num)
     {
         BB.f_zero.q += BB.f_init.q;
         return BB.f_zero.q;
     }
+
     private static byte test_4_6(byte num)
     {
         if (BB.f_init.q == num)
@@ -373,57 +451,70 @@ internal class TestApp
         else
             return BB.f_zero.q;
     }
+
     private static byte test_4_7(byte num)
     {
         return (byte)(BB.f_init.q < num + 1 ? 100 : -1);
     }
+
     private static byte test_4_8(byte num)
     {
         return (byte)((BB.f_init.q > BB.f_zero.q ? 1 : 0) + 99);
     }
+
     private static byte test_4_9(byte num)
     {
         return (byte)((BB.f_init.q ^ BB.f_zero.q) | num);
     }
+
     private static byte test_4_10(byte num)
     {
         BB.f_zero.q |= BB.f_init.q;
         return (byte)(BB.f_zero.q & num);
     }
+
     private static byte test_4_11(byte num)
     {
         return (byte)(BB.f_init.q >> BB.f_zero.q);
     }
+
     private static byte test_4_12(byte num)
     {
         return AA.a_init[BB.f_init.q].q;
     }
+
     private static byte test_4_13(byte num)
     {
         return AA.aa_init[num - 100, (BB.f_init.q | 1) - 2, 1 + BB.f_zero.q].q;
     }
+
     private static byte test_4_14(byte num)
     {
         object bb = BB.f_init.q;
         return (byte)bb;
     }
+
     private static byte test_4_15(byte num)
     {
         double dbl = BB.f_init.q;
         return (byte)dbl;
     }
+
     private static byte test_4_16(byte num)
     {
         return AA.call_target(BB.f_init.q);
     }
+
     private static byte test_4_17(byte num)
     {
         return AA.call_target_ref(ref BB.f_init.q);
     }
+
     private static byte test_5_0(byte num)
     {
         return ((AA)AA.b_init).q;
     }
+
     private static byte test_6_0(byte num, TypedReference tr_init)
     {
         return __refvalue(tr_init, AA).q;

@@ -91,6 +91,7 @@ namespace AutoMapper.UnitTests.Tests
         {
             public override string ProfileName => "Test";
         }
+
         protected override void Establish_context()
         {
             var namingConvention = new StubNamingConvention(s => s.Value.ToLower())

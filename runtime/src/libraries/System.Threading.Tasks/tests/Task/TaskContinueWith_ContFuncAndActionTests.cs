@@ -191,6 +191,7 @@ namespace System.Threading.Tasks.Tests
                 true
             );
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void RunContinueWithTaskFuture_FaultedCanceled_OnException()
         {

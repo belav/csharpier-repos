@@ -35,6 +35,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             throw Error.NotSupported();
         }
+
         public abstract object GetValue(
             IXmlNode node,
             IDictionaryAdapter parent,

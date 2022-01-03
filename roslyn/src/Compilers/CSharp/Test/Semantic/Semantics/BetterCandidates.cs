@@ -36,6 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 parseOptions: TestOptions.WithoutImprovedOverloadCandidates
             );
         }
+
         private CSharpCompilation CreateCompilationWithBetterCandidates(
             string source,
             CSharpCompilationOptions options = null,

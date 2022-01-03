@@ -16,6 +16,7 @@ public class fall_through
                 return;
         }
     }
+
     public static void Main(string[] args)
     {
         char[] c = { 't', 'e', 's', 't' };

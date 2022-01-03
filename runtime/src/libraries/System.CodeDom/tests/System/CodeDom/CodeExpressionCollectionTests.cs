@@ -7,8 +7,10 @@ namespace System.CodeDom.Tests
         : CodeCollectionTestBase<CodeExpressionCollection, CodeExpression>
     {
         protected override CodeExpressionCollection Ctor() => new CodeExpressionCollection();
+
         protected override CodeExpressionCollection CtorArray(CodeExpression[] array) =>
             new CodeExpressionCollection(array);
+
         protected override CodeExpressionCollection CtorCollection(
             CodeExpressionCollection collection
         ) => new CodeExpressionCollection(collection);
@@ -17,6 +19,7 @@ namespace System.CodeDom.Tests
 
         protected override CodeExpression GetItem(CodeExpressionCollection collection, int index) =>
             collection[index];
+
         protected override void SetItem(
             CodeExpressionCollection collection,
             int index,
@@ -27,6 +30,7 @@ namespace System.CodeDom.Tests
             CodeExpressionCollection collection,
             CodeExpression[] array
         ) => collection.AddRange(array);
+
         protected override void AddRange(
             CodeExpressionCollection collection,
             CodeExpressionCollection value
@@ -46,6 +50,7 @@ namespace System.CodeDom.Tests
 
         protected override int IndexOf(CodeExpressionCollection collection, CodeExpression value) =>
             collection.IndexOf(value);
+
         protected override bool Contains(
             CodeExpressionCollection collection,
             CodeExpression value

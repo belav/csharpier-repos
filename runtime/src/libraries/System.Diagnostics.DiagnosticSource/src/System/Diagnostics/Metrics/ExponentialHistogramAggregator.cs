@@ -56,6 +56,7 @@ namespace System.Diagnostics.Metrics
                 Value = value;
                 Count = count;
             }
+
             public double Value;
             public int Count;
         }

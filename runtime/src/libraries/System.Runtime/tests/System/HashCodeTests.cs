@@ -445,6 +445,7 @@ public static class HashCodeTests
         public const int ConstantValue = 1234;
 
         public bool Equals(string x, string y) => false;
+
         public int GetHashCode(string obj) => ConstantValue;
     }
 

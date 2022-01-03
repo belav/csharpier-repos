@@ -25,6 +25,7 @@ namespace BenchmarksGame
         static int[] fact,
             chkSums,
             maxFlips;
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static void firstPermutation(int[] p, int[] pp, int[] count, int idx)
         {

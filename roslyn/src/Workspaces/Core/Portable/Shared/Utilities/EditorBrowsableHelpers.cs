@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Roslyn.Utilities;
+
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
     internal static class EditorBrowsableHelpers

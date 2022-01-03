@@ -3,6 +3,7 @@
 //
 
 using System;
+
 class bug1
 {
     public struct VT1
@@ -12,7 +13,9 @@ class bug1
         public double a3;
         public long a9;
     }
+
     public static VT1 vtstatic = new VT1();
+
     public static int f()
     {
         return Convert.ToInt32(
@@ -26,6 +29,7 @@ class bug1
                 )
         );
     }
+
     public static int Main()
     {
         vtstatic.a0 = 3;

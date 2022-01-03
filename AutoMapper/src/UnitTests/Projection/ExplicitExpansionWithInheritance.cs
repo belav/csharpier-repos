@@ -13,13 +13,16 @@ namespace AutoMapper.UnitTests.Projection
         abstract class EntityBase
         {
             public EntityBase() => Id = Guid.NewGuid();
+
             public Guid Id { get; set; }
             public User CreatedBy { get; set; }
             public User ModifiedBy { get; set; }
         }
 
         class User { }
+
         class Computer : EntityBase { }
+
         class Script : EntityBase
         {
             public Computer Computer { get; set; }
@@ -34,7 +37,9 @@ namespace AutoMapper.UnitTests.Projection
         }
 
         class UserModel { }
+
         class ComputerModel : EntityBaseModel { }
+
         class ScriptModel : EntityBaseModel
         {
             public ComputerModel Computer { get; set; }

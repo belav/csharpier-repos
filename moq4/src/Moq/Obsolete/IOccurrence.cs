@@ -27,6 +27,7 @@ namespace Moq.Language
         )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         IVerifies AtMostOnce();
+
         /// <summary>
 		/// The expected invocation can happen at most specified number of times.
 		/// </summary>

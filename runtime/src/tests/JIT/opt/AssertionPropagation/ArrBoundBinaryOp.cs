@@ -508,1079 +508,1946 @@ public static class Tests
     private static T Var<T>(T t) => t;
 
     public static byte Test000_cns(int index) => readOnlySpan[index & Cns(-2147483648)];
+
     public static byte Test000_var(int index) => readOnlySpan[index & Var(-2147483648)];
+
     public static byte Test001_cns(int index) => readOnlySpan[index & Cns(-2147483647)];
+
     public static byte Test001_var(int index) => readOnlySpan[index & Var(-2147483647)];
+
     public static byte Test002_cns(int index) => readOnlySpan[index & Cns(-11)];
+
     public static byte Test002_var(int index) => readOnlySpan[index & Var(-11)];
+
     public static byte Test003_cns(int index) => readOnlySpan[index & Cns(-10)];
+
     public static byte Test003_var(int index) => readOnlySpan[index & Var(-10)];
+
     public static byte Test004_cns(int index) => readOnlySpan[index & Cns(-9)];
+
     public static byte Test004_var(int index) => readOnlySpan[index & Var(-9)];
+
     public static byte Test005_cns(int index) => readOnlySpan[index & Cns(-1)];
+
     public static byte Test005_var(int index) => readOnlySpan[index & Var(-1)];
+
     public static byte Test006_cns(int index) => readOnlySpan[index & Cns(0)];
+
     public static byte Test006_var(int index) => readOnlySpan[index & Var(0)];
+
     public static byte Test007_cns(int index) => readOnlySpan[index & Cns(1)];
+
     public static byte Test007_var(int index) => readOnlySpan[index & Var(1)];
+
     public static byte Test008_cns(int index) => readOnlySpan[index & Cns(2)];
+
     public static byte Test008_var(int index) => readOnlySpan[index & Var(2)];
+
     public static byte Test009_cns(int index) => readOnlySpan[index & Cns(9)];
+
     public static byte Test009_var(int index) => readOnlySpan[index & Var(9)];
+
     public static byte Test010_cns(int index) => readOnlySpan[index & Cns(10)];
+
     public static byte Test010_var(int index) => readOnlySpan[index & Var(10)];
+
     public static byte Test011_cns(int index) => readOnlySpan[index & Cns(11)];
+
     public static byte Test011_var(int index) => readOnlySpan[index & Var(11)];
+
     public static byte Test012_cns(int index) => readOnlySpan[index & Cns(2147483646)];
+
     public static byte Test012_var(int index) => readOnlySpan[index & Var(2147483646)];
+
     public static byte Test013_cns(int index) => readOnlySpan[index & Cns(2147483647)];
+
     public static byte Test013_var(int index) => readOnlySpan[index & Var(2147483647)];
+
     public static byte Test014_cns(int index) => readOnlySpan[index % Cns(-2147483648)];
+
     public static byte Test014_var(int index) => readOnlySpan[index % Var(-2147483648)];
+
     public static byte Test015_cns(int index) => readOnlySpan[index % Cns(-2147483647)];
+
     public static byte Test015_var(int index) => readOnlySpan[index % Var(-2147483647)];
+
     public static byte Test016_cns(int index) => readOnlySpan[index % Cns(-11)];
+
     public static byte Test016_var(int index) => readOnlySpan[index % Var(-11)];
+
     public static byte Test017_cns(int index) => readOnlySpan[index % Cns(-10)];
+
     public static byte Test017_var(int index) => readOnlySpan[index % Var(-10)];
+
     public static byte Test018_cns(int index) => readOnlySpan[index % Cns(-9)];
+
     public static byte Test018_var(int index) => readOnlySpan[index % Var(-9)];
+
     public static byte Test019_cns(int index) => readOnlySpan[index % Cns(-1)];
+
     public static byte Test019_var(int index) => readOnlySpan[index % Var(-1)];
+
     public static byte Test020_cns(int index) => readOnlySpan[index % Cns(0)];
+
     public static byte Test020_var(int index) => readOnlySpan[index % Var(0)];
+
     public static byte Test021_cns(int index) => readOnlySpan[index % Cns(1)];
+
     public static byte Test021_var(int index) => readOnlySpan[index % Var(1)];
+
     public static byte Test022_cns(int index) => readOnlySpan[index % Cns(2)];
+
     public static byte Test022_var(int index) => readOnlySpan[index % Var(2)];
+
     public static byte Test023_cns(int index) => readOnlySpan[index % Cns(9)];
+
     public static byte Test023_var(int index) => readOnlySpan[index % Var(9)];
+
     public static byte Test024_cns(int index) => readOnlySpan[index % Cns(10)];
+
     public static byte Test024_var(int index) => readOnlySpan[index % Var(10)];
+
     public static byte Test025_cns(int index) => readOnlySpan[index % Cns(11)];
+
     public static byte Test025_var(int index) => readOnlySpan[index % Var(11)];
+
     public static byte Test026_cns(int index) => readOnlySpan[index % Cns(2147483646)];
+
     public static byte Test026_var(int index) => readOnlySpan[index % Var(2147483646)];
+
     public static byte Test027_cns(int index) => readOnlySpan[index % Cns(2147483647)];
+
     public static byte Test027_var(int index) => readOnlySpan[index % Var(2147483647)];
+
     public static byte Test028_cns(uint index) => readOnlySpan[(int)(index % Cns(-2147483648))];
+
     public static byte Test028_var(uint index) => readOnlySpan[(int)(index % Var(-2147483648))];
+
     public static byte Test029_cns(uint index) => readOnlySpan[(int)(index % Cns(-2147483647))];
+
     public static byte Test029_var(uint index) => readOnlySpan[(int)(index % Var(-2147483647))];
+
     public static byte Test030_cns(uint index) => readOnlySpan[(int)(index % Cns(-11))];
+
     public static byte Test030_var(uint index) => readOnlySpan[(int)(index % Var(-11))];
+
     public static byte Test031_cns(uint index) => readOnlySpan[(int)(index % Cns(-10))];
+
     public static byte Test031_var(uint index) => readOnlySpan[(int)(index % Var(-10))];
+
     public static byte Test032_cns(uint index) => readOnlySpan[(int)(index % Cns(-9))];
+
     public static byte Test032_var(uint index) => readOnlySpan[(int)(index % Var(-9))];
+
     public static byte Test033_cns(uint index) => readOnlySpan[(int)(index % Cns(-1))];
+
     public static byte Test033_var(uint index) => readOnlySpan[(int)(index % Var(-1))];
+
     public static byte Test034_cns(uint index) => readOnlySpan[(int)(index % Cns(0))];
+
     public static byte Test034_var(uint index) => readOnlySpan[(int)(index % Var(0))];
+
     public static byte Test035_cns(uint index) => readOnlySpan[(int)(index % Cns(1))];
+
     public static byte Test035_var(uint index) => readOnlySpan[(int)(index % Var(1))];
+
     public static byte Test036_cns(uint index) => readOnlySpan[(int)(index % Cns(2))];
+
     public static byte Test036_var(uint index) => readOnlySpan[(int)(index % Var(2))];
+
     public static byte Test037_cns(uint index) => readOnlySpan[(int)(index % Cns(9))];
+
     public static byte Test037_var(uint index) => readOnlySpan[(int)(index % Var(9))];
+
     public static byte Test038_cns(uint index) => readOnlySpan[(int)(index % Cns(10))];
+
     public static byte Test038_var(uint index) => readOnlySpan[(int)(index % Var(10))];
+
     public static byte Test039_cns(uint index) => readOnlySpan[(int)(index % Cns(11))];
+
     public static byte Test039_var(uint index) => readOnlySpan[(int)(index % Var(11))];
+
     public static byte Test040_cns(uint index) => readOnlySpan[(int)(index % Cns(2147483646))];
+
     public static byte Test040_var(uint index) => readOnlySpan[(int)(index % Var(2147483646))];
+
     public static byte Test041_cns(uint index) => readOnlySpan[(int)(index % Cns(2147483647))];
+
     public static byte Test041_var(uint index) => readOnlySpan[(int)(index % Var(2147483647))];
+
     public static byte Test042_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) >> Cns(-2147483648)];
+
     public static byte Test042_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) >> Var(-2147483648)];
+
     public static byte Test043_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) >> Cns(-2147483647)];
+
     public static byte Test043_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) >> Var(-2147483647)];
+
     public static byte Test044_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) >> Cns(-33)];
+
     public static byte Test044_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) >> Var(-33)];
+
     public static byte Test045_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) >> Cns(-32)];
+
     public static byte Test045_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) >> Var(-32)];
+
     public static byte Test046_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) >> Cns(-31)];
+
     public static byte Test046_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) >> Var(-31)];
+
     public static byte Test047_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) >> Cns(-1)];
+
     public static byte Test047_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) >> Var(-1)];
+
     public static byte Test048_cns(int index) => readOnlySpan[(index & Cns(-2147483648)) >> Cns(0)];
+
     public static byte Test048_var(int index) => readOnlySpan[(index & Var(-2147483648)) >> Var(0)];
+
     public static byte Test049_cns(int index) => readOnlySpan[(index & Cns(-2147483648)) >> Cns(1)];
+
     public static byte Test049_var(int index) => readOnlySpan[(index & Var(-2147483648)) >> Var(1)];
+
     public static byte Test050_cns(int index) => readOnlySpan[(index & Cns(-2147483648)) >> Cns(2)];
+
     public static byte Test050_var(int index) => readOnlySpan[(index & Var(-2147483648)) >> Var(2)];
+
     public static byte Test051_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) >> Cns(31)];
+
     public static byte Test051_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) >> Var(31)];
+
     public static byte Test052_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) >> Cns(32)];
+
     public static byte Test052_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) >> Var(32)];
+
     public static byte Test053_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) >> Cns(33)];
+
     public static byte Test053_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) >> Var(33)];
+
     public static byte Test054_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) >> Cns(2147483646)];
+
     public static byte Test054_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) >> Var(2147483646)];
+
     public static byte Test055_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) >> Cns(2147483647)];
+
     public static byte Test055_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) >> Var(2147483647)];
+
     public static byte Test056_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) >> Cns(-2147483648)];
+
     public static byte Test056_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) >> Var(-2147483648)];
+
     public static byte Test057_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) >> Cns(-2147483647)];
+
     public static byte Test057_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) >> Var(-2147483647)];
+
     public static byte Test058_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) >> Cns(-33)];
+
     public static byte Test058_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) >> Var(-33)];
+
     public static byte Test059_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) >> Cns(-32)];
+
     public static byte Test059_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) >> Var(-32)];
+
     public static byte Test060_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) >> Cns(-31)];
+
     public static byte Test060_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) >> Var(-31)];
+
     public static byte Test061_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) >> Cns(-1)];
+
     public static byte Test061_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) >> Var(-1)];
+
     public static byte Test062_cns(int index) => readOnlySpan[(index & Cns(-2147483647)) >> Cns(0)];
+
     public static byte Test062_var(int index) => readOnlySpan[(index & Var(-2147483647)) >> Var(0)];
+
     public static byte Test063_cns(int index) => readOnlySpan[(index & Cns(-2147483647)) >> Cns(1)];
+
     public static byte Test063_var(int index) => readOnlySpan[(index & Var(-2147483647)) >> Var(1)];
+
     public static byte Test064_cns(int index) => readOnlySpan[(index & Cns(-2147483647)) >> Cns(2)];
+
     public static byte Test064_var(int index) => readOnlySpan[(index & Var(-2147483647)) >> Var(2)];
+
     public static byte Test065_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) >> Cns(31)];
+
     public static byte Test065_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) >> Var(31)];
+
     public static byte Test066_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) >> Cns(32)];
+
     public static byte Test066_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) >> Var(32)];
+
     public static byte Test067_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) >> Cns(33)];
+
     public static byte Test067_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) >> Var(33)];
+
     public static byte Test068_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) >> Cns(2147483646)];
+
     public static byte Test068_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) >> Var(2147483646)];
+
     public static byte Test069_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) >> Cns(2147483647)];
+
     public static byte Test069_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) >> Var(2147483647)];
+
     public static byte Test070_cns(int index) =>
         readOnlySpan[(index & Cns(-11)) >> Cns(-2147483648)];
+
     public static byte Test070_var(int index) =>
         readOnlySpan[(index & Var(-11)) >> Var(-2147483648)];
+
     public static byte Test071_cns(int index) =>
         readOnlySpan[(index & Cns(-11)) >> Cns(-2147483647)];
+
     public static byte Test071_var(int index) =>
         readOnlySpan[(index & Var(-11)) >> Var(-2147483647)];
+
     public static byte Test072_cns(int index) => readOnlySpan[(index & Cns(-11)) >> Cns(-33)];
+
     public static byte Test072_var(int index) => readOnlySpan[(index & Var(-11)) >> Var(-33)];
+
     public static byte Test073_cns(int index) => readOnlySpan[(index & Cns(-11)) >> Cns(-32)];
+
     public static byte Test073_var(int index) => readOnlySpan[(index & Var(-11)) >> Var(-32)];
+
     public static byte Test074_cns(int index) => readOnlySpan[(index & Cns(-11)) >> Cns(-31)];
+
     public static byte Test074_var(int index) => readOnlySpan[(index & Var(-11)) >> Var(-31)];
+
     public static byte Test075_cns(int index) => readOnlySpan[(index & Cns(-11)) >> Cns(-1)];
+
     public static byte Test075_var(int index) => readOnlySpan[(index & Var(-11)) >> Var(-1)];
+
     public static byte Test076_cns(int index) => readOnlySpan[(index & Cns(-11)) >> Cns(0)];
+
     public static byte Test076_var(int index) => readOnlySpan[(index & Var(-11)) >> Var(0)];
+
     public static byte Test077_cns(int index) => readOnlySpan[(index & Cns(-11)) >> Cns(1)];
+
     public static byte Test077_var(int index) => readOnlySpan[(index & Var(-11)) >> Var(1)];
+
     public static byte Test078_cns(int index) => readOnlySpan[(index & Cns(-11)) >> Cns(2)];
+
     public static byte Test078_var(int index) => readOnlySpan[(index & Var(-11)) >> Var(2)];
+
     public static byte Test079_cns(int index) => readOnlySpan[(index & Cns(-11)) >> Cns(31)];
+
     public static byte Test079_var(int index) => readOnlySpan[(index & Var(-11)) >> Var(31)];
+
     public static byte Test080_cns(int index) => readOnlySpan[(index & Cns(-11)) >> Cns(32)];
+
     public static byte Test080_var(int index) => readOnlySpan[(index & Var(-11)) >> Var(32)];
+
     public static byte Test081_cns(int index) => readOnlySpan[(index & Cns(-11)) >> Cns(33)];
+
     public static byte Test081_var(int index) => readOnlySpan[(index & Var(-11)) >> Var(33)];
+
     public static byte Test082_cns(int index) =>
         readOnlySpan[(index & Cns(-11)) >> Cns(2147483646)];
+
     public static byte Test082_var(int index) =>
         readOnlySpan[(index & Var(-11)) >> Var(2147483646)];
+
     public static byte Test083_cns(int index) =>
         readOnlySpan[(index & Cns(-11)) >> Cns(2147483647)];
+
     public static byte Test083_var(int index) =>
         readOnlySpan[(index & Var(-11)) >> Var(2147483647)];
+
     public static byte Test084_cns(int index) =>
         readOnlySpan[(index & Cns(-10)) >> Cns(-2147483648)];
+
     public static byte Test084_var(int index) =>
         readOnlySpan[(index & Var(-10)) >> Var(-2147483648)];
+
     public static byte Test085_cns(int index) =>
         readOnlySpan[(index & Cns(-10)) >> Cns(-2147483647)];
+
     public static byte Test085_var(int index) =>
         readOnlySpan[(index & Var(-10)) >> Var(-2147483647)];
+
     public static byte Test086_cns(int index) => readOnlySpan[(index & Cns(-10)) >> Cns(-33)];
+
     public static byte Test086_var(int index) => readOnlySpan[(index & Var(-10)) >> Var(-33)];
+
     public static byte Test087_cns(int index) => readOnlySpan[(index & Cns(-10)) >> Cns(-32)];
+
     public static byte Test087_var(int index) => readOnlySpan[(index & Var(-10)) >> Var(-32)];
+
     public static byte Test088_cns(int index) => readOnlySpan[(index & Cns(-10)) >> Cns(-31)];
+
     public static byte Test088_var(int index) => readOnlySpan[(index & Var(-10)) >> Var(-31)];
+
     public static byte Test089_cns(int index) => readOnlySpan[(index & Cns(-10)) >> Cns(-1)];
+
     public static byte Test089_var(int index) => readOnlySpan[(index & Var(-10)) >> Var(-1)];
+
     public static byte Test090_cns(int index) => readOnlySpan[(index & Cns(-10)) >> Cns(0)];
+
     public static byte Test090_var(int index) => readOnlySpan[(index & Var(-10)) >> Var(0)];
+
     public static byte Test091_cns(int index) => readOnlySpan[(index & Cns(-10)) >> Cns(1)];
+
     public static byte Test091_var(int index) => readOnlySpan[(index & Var(-10)) >> Var(1)];
+
     public static byte Test092_cns(int index) => readOnlySpan[(index & Cns(-10)) >> Cns(2)];
+
     public static byte Test092_var(int index) => readOnlySpan[(index & Var(-10)) >> Var(2)];
+
     public static byte Test093_cns(int index) => readOnlySpan[(index & Cns(-10)) >> Cns(31)];
+
     public static byte Test093_var(int index) => readOnlySpan[(index & Var(-10)) >> Var(31)];
+
     public static byte Test094_cns(int index) => readOnlySpan[(index & Cns(-10)) >> Cns(32)];
+
     public static byte Test094_var(int index) => readOnlySpan[(index & Var(-10)) >> Var(32)];
+
     public static byte Test095_cns(int index) => readOnlySpan[(index & Cns(-10)) >> Cns(33)];
+
     public static byte Test095_var(int index) => readOnlySpan[(index & Var(-10)) >> Var(33)];
+
     public static byte Test096_cns(int index) =>
         readOnlySpan[(index & Cns(-10)) >> Cns(2147483646)];
+
     public static byte Test096_var(int index) =>
         readOnlySpan[(index & Var(-10)) >> Var(2147483646)];
+
     public static byte Test097_cns(int index) =>
         readOnlySpan[(index & Cns(-10)) >> Cns(2147483647)];
+
     public static byte Test097_var(int index) =>
         readOnlySpan[(index & Var(-10)) >> Var(2147483647)];
+
     public static byte Test098_cns(int index) =>
         readOnlySpan[(index & Cns(-9)) >> Cns(-2147483648)];
+
     public static byte Test098_var(int index) =>
         readOnlySpan[(index & Var(-9)) >> Var(-2147483648)];
+
     public static byte Test099_cns(int index) =>
         readOnlySpan[(index & Cns(-9)) >> Cns(-2147483647)];
+
     public static byte Test099_var(int index) =>
         readOnlySpan[(index & Var(-9)) >> Var(-2147483647)];
+
     public static byte Test100_cns(int index) => readOnlySpan[(index & Cns(-9)) >> Cns(-33)];
+
     public static byte Test100_var(int index) => readOnlySpan[(index & Var(-9)) >> Var(-33)];
+
     public static byte Test101_cns(int index) => readOnlySpan[(index & Cns(-9)) >> Cns(-32)];
+
     public static byte Test101_var(int index) => readOnlySpan[(index & Var(-9)) >> Var(-32)];
+
     public static byte Test102_cns(int index) => readOnlySpan[(index & Cns(-9)) >> Cns(-31)];
+
     public static byte Test102_var(int index) => readOnlySpan[(index & Var(-9)) >> Var(-31)];
+
     public static byte Test103_cns(int index) => readOnlySpan[(index & Cns(-9)) >> Cns(-1)];
+
     public static byte Test103_var(int index) => readOnlySpan[(index & Var(-9)) >> Var(-1)];
+
     public static byte Test104_cns(int index) => readOnlySpan[(index & Cns(-9)) >> Cns(0)];
+
     public static byte Test104_var(int index) => readOnlySpan[(index & Var(-9)) >> Var(0)];
+
     public static byte Test105_cns(int index) => readOnlySpan[(index & Cns(-9)) >> Cns(1)];
+
     public static byte Test105_var(int index) => readOnlySpan[(index & Var(-9)) >> Var(1)];
+
     public static byte Test106_cns(int index) => readOnlySpan[(index & Cns(-9)) >> Cns(2)];
+
     public static byte Test106_var(int index) => readOnlySpan[(index & Var(-9)) >> Var(2)];
+
     public static byte Test107_cns(int index) => readOnlySpan[(index & Cns(-9)) >> Cns(31)];
+
     public static byte Test107_var(int index) => readOnlySpan[(index & Var(-9)) >> Var(31)];
+
     public static byte Test108_cns(int index) => readOnlySpan[(index & Cns(-9)) >> Cns(32)];
+
     public static byte Test108_var(int index) => readOnlySpan[(index & Var(-9)) >> Var(32)];
+
     public static byte Test109_cns(int index) => readOnlySpan[(index & Cns(-9)) >> Cns(33)];
+
     public static byte Test109_var(int index) => readOnlySpan[(index & Var(-9)) >> Var(33)];
+
     public static byte Test110_cns(int index) => readOnlySpan[(index & Cns(-9)) >> Cns(2147483646)];
+
     public static byte Test110_var(int index) => readOnlySpan[(index & Var(-9)) >> Var(2147483646)];
+
     public static byte Test111_cns(int index) => readOnlySpan[(index & Cns(-9)) >> Cns(2147483647)];
+
     public static byte Test111_var(int index) => readOnlySpan[(index & Var(-9)) >> Var(2147483647)];
+
     public static byte Test112_cns(int index) =>
         readOnlySpan[(index & Cns(-1)) >> Cns(-2147483648)];
+
     public static byte Test112_var(int index) =>
         readOnlySpan[(index & Var(-1)) >> Var(-2147483648)];
+
     public static byte Test113_cns(int index) =>
         readOnlySpan[(index & Cns(-1)) >> Cns(-2147483647)];
+
     public static byte Test113_var(int index) =>
         readOnlySpan[(index & Var(-1)) >> Var(-2147483647)];
+
     public static byte Test114_cns(int index) => readOnlySpan[(index & Cns(-1)) >> Cns(-33)];
+
     public static byte Test114_var(int index) => readOnlySpan[(index & Var(-1)) >> Var(-33)];
+
     public static byte Test115_cns(int index) => readOnlySpan[(index & Cns(-1)) >> Cns(-32)];
+
     public static byte Test115_var(int index) => readOnlySpan[(index & Var(-1)) >> Var(-32)];
+
     public static byte Test116_cns(int index) => readOnlySpan[(index & Cns(-1)) >> Cns(-31)];
+
     public static byte Test116_var(int index) => readOnlySpan[(index & Var(-1)) >> Var(-31)];
+
     public static byte Test117_cns(int index) => readOnlySpan[(index & Cns(-1)) >> Cns(-1)];
+
     public static byte Test117_var(int index) => readOnlySpan[(index & Var(-1)) >> Var(-1)];
+
     public static byte Test118_cns(int index) => readOnlySpan[(index & Cns(-1)) >> Cns(0)];
+
     public static byte Test118_var(int index) => readOnlySpan[(index & Var(-1)) >> Var(0)];
+
     public static byte Test119_cns(int index) => readOnlySpan[(index & Cns(-1)) >> Cns(1)];
+
     public static byte Test119_var(int index) => readOnlySpan[(index & Var(-1)) >> Var(1)];
+
     public static byte Test120_cns(int index) => readOnlySpan[(index & Cns(-1)) >> Cns(2)];
+
     public static byte Test120_var(int index) => readOnlySpan[(index & Var(-1)) >> Var(2)];
+
     public static byte Test121_cns(int index) => readOnlySpan[(index & Cns(-1)) >> Cns(31)];
+
     public static byte Test121_var(int index) => readOnlySpan[(index & Var(-1)) >> Var(31)];
+
     public static byte Test122_cns(int index) => readOnlySpan[(index & Cns(-1)) >> Cns(32)];
+
     public static byte Test122_var(int index) => readOnlySpan[(index & Var(-1)) >> Var(32)];
+
     public static byte Test123_cns(int index) => readOnlySpan[(index & Cns(-1)) >> Cns(33)];
+
     public static byte Test123_var(int index) => readOnlySpan[(index & Var(-1)) >> Var(33)];
+
     public static byte Test124_cns(int index) => readOnlySpan[(index & Cns(-1)) >> Cns(2147483646)];
+
     public static byte Test124_var(int index) => readOnlySpan[(index & Var(-1)) >> Var(2147483646)];
+
     public static byte Test125_cns(int index) => readOnlySpan[(index & Cns(-1)) >> Cns(2147483647)];
+
     public static byte Test125_var(int index) => readOnlySpan[(index & Var(-1)) >> Var(2147483647)];
+
     public static byte Test126_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(-2147483648)];
+
     public static byte Test126_var(int index) => readOnlySpan[(index & Var(0)) >> Var(-2147483648)];
+
     public static byte Test127_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(-2147483647)];
+
     public static byte Test127_var(int index) => readOnlySpan[(index & Var(0)) >> Var(-2147483647)];
+
     public static byte Test128_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(-33)];
+
     public static byte Test128_var(int index) => readOnlySpan[(index & Var(0)) >> Var(-33)];
+
     public static byte Test129_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(-32)];
+
     public static byte Test129_var(int index) => readOnlySpan[(index & Var(0)) >> Var(-32)];
+
     public static byte Test130_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(-31)];
+
     public static byte Test130_var(int index) => readOnlySpan[(index & Var(0)) >> Var(-31)];
+
     public static byte Test131_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(-1)];
+
     public static byte Test131_var(int index) => readOnlySpan[(index & Var(0)) >> Var(-1)];
+
     public static byte Test132_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(0)];
+
     public static byte Test132_var(int index) => readOnlySpan[(index & Var(0)) >> Var(0)];
+
     public static byte Test133_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(1)];
+
     public static byte Test133_var(int index) => readOnlySpan[(index & Var(0)) >> Var(1)];
+
     public static byte Test134_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(2)];
+
     public static byte Test134_var(int index) => readOnlySpan[(index & Var(0)) >> Var(2)];
+
     public static byte Test135_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(31)];
+
     public static byte Test135_var(int index) => readOnlySpan[(index & Var(0)) >> Var(31)];
+
     public static byte Test136_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(32)];
+
     public static byte Test136_var(int index) => readOnlySpan[(index & Var(0)) >> Var(32)];
+
     public static byte Test137_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(33)];
+
     public static byte Test137_var(int index) => readOnlySpan[(index & Var(0)) >> Var(33)];
+
     public static byte Test138_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(2147483646)];
+
     public static byte Test138_var(int index) => readOnlySpan[(index & Var(0)) >> Var(2147483646)];
+
     public static byte Test139_cns(int index) => readOnlySpan[(index & Cns(0)) >> Cns(2147483647)];
+
     public static byte Test139_var(int index) => readOnlySpan[(index & Var(0)) >> Var(2147483647)];
+
     public static byte Test140_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(-2147483648)];
+
     public static byte Test140_var(int index) => readOnlySpan[(index & Var(1)) >> Var(-2147483648)];
+
     public static byte Test141_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(-2147483647)];
+
     public static byte Test141_var(int index) => readOnlySpan[(index & Var(1)) >> Var(-2147483647)];
+
     public static byte Test142_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(-33)];
+
     public static byte Test142_var(int index) => readOnlySpan[(index & Var(1)) >> Var(-33)];
+
     public static byte Test143_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(-32)];
+
     public static byte Test143_var(int index) => readOnlySpan[(index & Var(1)) >> Var(-32)];
+
     public static byte Test144_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(-31)];
+
     public static byte Test144_var(int index) => readOnlySpan[(index & Var(1)) >> Var(-31)];
+
     public static byte Test145_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(-1)];
+
     public static byte Test145_var(int index) => readOnlySpan[(index & Var(1)) >> Var(-1)];
+
     public static byte Test146_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(0)];
+
     public static byte Test146_var(int index) => readOnlySpan[(index & Var(1)) >> Var(0)];
+
     public static byte Test147_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(1)];
+
     public static byte Test147_var(int index) => readOnlySpan[(index & Var(1)) >> Var(1)];
+
     public static byte Test148_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(2)];
+
     public static byte Test148_var(int index) => readOnlySpan[(index & Var(1)) >> Var(2)];
+
     public static byte Test149_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(31)];
+
     public static byte Test149_var(int index) => readOnlySpan[(index & Var(1)) >> Var(31)];
+
     public static byte Test150_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(32)];
+
     public static byte Test150_var(int index) => readOnlySpan[(index & Var(1)) >> Var(32)];
+
     public static byte Test151_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(33)];
+
     public static byte Test151_var(int index) => readOnlySpan[(index & Var(1)) >> Var(33)];
+
     public static byte Test152_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(2147483646)];
+
     public static byte Test152_var(int index) => readOnlySpan[(index & Var(1)) >> Var(2147483646)];
+
     public static byte Test153_cns(int index) => readOnlySpan[(index & Cns(1)) >> Cns(2147483647)];
+
     public static byte Test153_var(int index) => readOnlySpan[(index & Var(1)) >> Var(2147483647)];
+
     public static byte Test154_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(-2147483648)];
+
     public static byte Test154_var(int index) => readOnlySpan[(index & Var(2)) >> Var(-2147483648)];
+
     public static byte Test155_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(-2147483647)];
+
     public static byte Test155_var(int index) => readOnlySpan[(index & Var(2)) >> Var(-2147483647)];
+
     public static byte Test156_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(-33)];
+
     public static byte Test156_var(int index) => readOnlySpan[(index & Var(2)) >> Var(-33)];
+
     public static byte Test157_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(-32)];
+
     public static byte Test157_var(int index) => readOnlySpan[(index & Var(2)) >> Var(-32)];
+
     public static byte Test158_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(-31)];
+
     public static byte Test158_var(int index) => readOnlySpan[(index & Var(2)) >> Var(-31)];
+
     public static byte Test159_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(-1)];
+
     public static byte Test159_var(int index) => readOnlySpan[(index & Var(2)) >> Var(-1)];
+
     public static byte Test160_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(0)];
+
     public static byte Test160_var(int index) => readOnlySpan[(index & Var(2)) >> Var(0)];
+
     public static byte Test161_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(1)];
+
     public static byte Test161_var(int index) => readOnlySpan[(index & Var(2)) >> Var(1)];
+
     public static byte Test162_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(2)];
+
     public static byte Test162_var(int index) => readOnlySpan[(index & Var(2)) >> Var(2)];
+
     public static byte Test163_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(31)];
+
     public static byte Test163_var(int index) => readOnlySpan[(index & Var(2)) >> Var(31)];
+
     public static byte Test164_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(32)];
+
     public static byte Test164_var(int index) => readOnlySpan[(index & Var(2)) >> Var(32)];
+
     public static byte Test165_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(33)];
+
     public static byte Test165_var(int index) => readOnlySpan[(index & Var(2)) >> Var(33)];
+
     public static byte Test166_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(2147483646)];
+
     public static byte Test166_var(int index) => readOnlySpan[(index & Var(2)) >> Var(2147483646)];
+
     public static byte Test167_cns(int index) => readOnlySpan[(index & Cns(2)) >> Cns(2147483647)];
+
     public static byte Test167_var(int index) => readOnlySpan[(index & Var(2)) >> Var(2147483647)];
+
     public static byte Test168_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(-2147483648)];
+
     public static byte Test168_var(int index) => readOnlySpan[(index & Var(9)) >> Var(-2147483648)];
+
     public static byte Test169_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(-2147483647)];
+
     public static byte Test169_var(int index) => readOnlySpan[(index & Var(9)) >> Var(-2147483647)];
+
     public static byte Test170_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(-33)];
+
     public static byte Test170_var(int index) => readOnlySpan[(index & Var(9)) >> Var(-33)];
+
     public static byte Test171_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(-32)];
+
     public static byte Test171_var(int index) => readOnlySpan[(index & Var(9)) >> Var(-32)];
+
     public static byte Test172_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(-31)];
+
     public static byte Test172_var(int index) => readOnlySpan[(index & Var(9)) >> Var(-31)];
+
     public static byte Test173_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(-1)];
+
     public static byte Test173_var(int index) => readOnlySpan[(index & Var(9)) >> Var(-1)];
+
     public static byte Test174_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(0)];
+
     public static byte Test174_var(int index) => readOnlySpan[(index & Var(9)) >> Var(0)];
+
     public static byte Test175_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(1)];
+
     public static byte Test175_var(int index) => readOnlySpan[(index & Var(9)) >> Var(1)];
+
     public static byte Test176_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(2)];
+
     public static byte Test176_var(int index) => readOnlySpan[(index & Var(9)) >> Var(2)];
+
     public static byte Test177_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(31)];
+
     public static byte Test177_var(int index) => readOnlySpan[(index & Var(9)) >> Var(31)];
+
     public static byte Test178_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(32)];
+
     public static byte Test178_var(int index) => readOnlySpan[(index & Var(9)) >> Var(32)];
+
     public static byte Test179_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(33)];
+
     public static byte Test179_var(int index) => readOnlySpan[(index & Var(9)) >> Var(33)];
+
     public static byte Test180_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(2147483646)];
+
     public static byte Test180_var(int index) => readOnlySpan[(index & Var(9)) >> Var(2147483646)];
+
     public static byte Test181_cns(int index) => readOnlySpan[(index & Cns(9)) >> Cns(2147483647)];
+
     public static byte Test181_var(int index) => readOnlySpan[(index & Var(9)) >> Var(2147483647)];
+
     public static byte Test182_cns(int index) =>
         readOnlySpan[(index & Cns(10)) >> Cns(-2147483648)];
+
     public static byte Test182_var(int index) =>
         readOnlySpan[(index & Var(10)) >> Var(-2147483648)];
+
     public static byte Test183_cns(int index) =>
         readOnlySpan[(index & Cns(10)) >> Cns(-2147483647)];
+
     public static byte Test183_var(int index) =>
         readOnlySpan[(index & Var(10)) >> Var(-2147483647)];
+
     public static byte Test184_cns(int index) => readOnlySpan[(index & Cns(10)) >> Cns(-33)];
+
     public static byte Test184_var(int index) => readOnlySpan[(index & Var(10)) >> Var(-33)];
+
     public static byte Test185_cns(int index) => readOnlySpan[(index & Cns(10)) >> Cns(-32)];
+
     public static byte Test185_var(int index) => readOnlySpan[(index & Var(10)) >> Var(-32)];
+
     public static byte Test186_cns(int index) => readOnlySpan[(index & Cns(10)) >> Cns(-31)];
+
     public static byte Test186_var(int index) => readOnlySpan[(index & Var(10)) >> Var(-31)];
+
     public static byte Test187_cns(int index) => readOnlySpan[(index & Cns(10)) >> Cns(-1)];
+
     public static byte Test187_var(int index) => readOnlySpan[(index & Var(10)) >> Var(-1)];
+
     public static byte Test188_cns(int index) => readOnlySpan[(index & Cns(10)) >> Cns(0)];
+
     public static byte Test188_var(int index) => readOnlySpan[(index & Var(10)) >> Var(0)];
+
     public static byte Test189_cns(int index) => readOnlySpan[(index & Cns(10)) >> Cns(1)];
+
     public static byte Test189_var(int index) => readOnlySpan[(index & Var(10)) >> Var(1)];
+
     public static byte Test190_cns(int index) => readOnlySpan[(index & Cns(10)) >> Cns(2)];
+
     public static byte Test190_var(int index) => readOnlySpan[(index & Var(10)) >> Var(2)];
+
     public static byte Test191_cns(int index) => readOnlySpan[(index & Cns(10)) >> Cns(31)];
+
     public static byte Test191_var(int index) => readOnlySpan[(index & Var(10)) >> Var(31)];
+
     public static byte Test192_cns(int index) => readOnlySpan[(index & Cns(10)) >> Cns(32)];
+
     public static byte Test192_var(int index) => readOnlySpan[(index & Var(10)) >> Var(32)];
+
     public static byte Test193_cns(int index) => readOnlySpan[(index & Cns(10)) >> Cns(33)];
+
     public static byte Test193_var(int index) => readOnlySpan[(index & Var(10)) >> Var(33)];
+
     public static byte Test194_cns(int index) => readOnlySpan[(index & Cns(10)) >> Cns(2147483646)];
+
     public static byte Test194_var(int index) => readOnlySpan[(index & Var(10)) >> Var(2147483646)];
+
     public static byte Test195_cns(int index) => readOnlySpan[(index & Cns(10)) >> Cns(2147483647)];
+
     public static byte Test195_var(int index) => readOnlySpan[(index & Var(10)) >> Var(2147483647)];
+
     public static byte Test196_cns(int index) =>
         readOnlySpan[(index & Cns(11)) >> Cns(-2147483648)];
+
     public static byte Test196_var(int index) =>
         readOnlySpan[(index & Var(11)) >> Var(-2147483648)];
+
     public static byte Test197_cns(int index) =>
         readOnlySpan[(index & Cns(11)) >> Cns(-2147483647)];
+
     public static byte Test197_var(int index) =>
         readOnlySpan[(index & Var(11)) >> Var(-2147483647)];
+
     public static byte Test198_cns(int index) => readOnlySpan[(index & Cns(11)) >> Cns(-33)];
+
     public static byte Test198_var(int index) => readOnlySpan[(index & Var(11)) >> Var(-33)];
+
     public static byte Test199_cns(int index) => readOnlySpan[(index & Cns(11)) >> Cns(-32)];
+
     public static byte Test199_var(int index) => readOnlySpan[(index & Var(11)) >> Var(-32)];
+
     public static byte Test200_cns(int index) => readOnlySpan[(index & Cns(11)) >> Cns(-31)];
+
     public static byte Test200_var(int index) => readOnlySpan[(index & Var(11)) >> Var(-31)];
+
     public static byte Test201_cns(int index) => readOnlySpan[(index & Cns(11)) >> Cns(-1)];
+
     public static byte Test201_var(int index) => readOnlySpan[(index & Var(11)) >> Var(-1)];
+
     public static byte Test202_cns(int index) => readOnlySpan[(index & Cns(11)) >> Cns(0)];
+
     public static byte Test202_var(int index) => readOnlySpan[(index & Var(11)) >> Var(0)];
+
     public static byte Test203_cns(int index) => readOnlySpan[(index & Cns(11)) >> Cns(1)];
+
     public static byte Test203_var(int index) => readOnlySpan[(index & Var(11)) >> Var(1)];
+
     public static byte Test204_cns(int index) => readOnlySpan[(index & Cns(11)) >> Cns(2)];
+
     public static byte Test204_var(int index) => readOnlySpan[(index & Var(11)) >> Var(2)];
+
     public static byte Test205_cns(int index) => readOnlySpan[(index & Cns(11)) >> Cns(31)];
+
     public static byte Test205_var(int index) => readOnlySpan[(index & Var(11)) >> Var(31)];
+
     public static byte Test206_cns(int index) => readOnlySpan[(index & Cns(11)) >> Cns(32)];
+
     public static byte Test206_var(int index) => readOnlySpan[(index & Var(11)) >> Var(32)];
+
     public static byte Test207_cns(int index) => readOnlySpan[(index & Cns(11)) >> Cns(33)];
+
     public static byte Test207_var(int index) => readOnlySpan[(index & Var(11)) >> Var(33)];
+
     public static byte Test208_cns(int index) => readOnlySpan[(index & Cns(11)) >> Cns(2147483646)];
+
     public static byte Test208_var(int index) => readOnlySpan[(index & Var(11)) >> Var(2147483646)];
+
     public static byte Test209_cns(int index) => readOnlySpan[(index & Cns(11)) >> Cns(2147483647)];
+
     public static byte Test209_var(int index) => readOnlySpan[(index & Var(11)) >> Var(2147483647)];
+
     public static byte Test210_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) >> Cns(-2147483648)];
+
     public static byte Test210_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) >> Var(-2147483648)];
+
     public static byte Test211_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) >> Cns(-2147483647)];
+
     public static byte Test211_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) >> Var(-2147483647)];
+
     public static byte Test212_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) >> Cns(-33)];
+
     public static byte Test212_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) >> Var(-33)];
+
     public static byte Test213_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) >> Cns(-32)];
+
     public static byte Test213_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) >> Var(-32)];
+
     public static byte Test214_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) >> Cns(-31)];
+
     public static byte Test214_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) >> Var(-31)];
+
     public static byte Test215_cns(int index) => readOnlySpan[(index & Cns(2147483646)) >> Cns(-1)];
+
     public static byte Test215_var(int index) => readOnlySpan[(index & Var(2147483646)) >> Var(-1)];
+
     public static byte Test216_cns(int index) => readOnlySpan[(index & Cns(2147483646)) >> Cns(0)];
+
     public static byte Test216_var(int index) => readOnlySpan[(index & Var(2147483646)) >> Var(0)];
+
     public static byte Test217_cns(int index) => readOnlySpan[(index & Cns(2147483646)) >> Cns(1)];
+
     public static byte Test217_var(int index) => readOnlySpan[(index & Var(2147483646)) >> Var(1)];
+
     public static byte Test218_cns(int index) => readOnlySpan[(index & Cns(2147483646)) >> Cns(2)];
+
     public static byte Test218_var(int index) => readOnlySpan[(index & Var(2147483646)) >> Var(2)];
+
     public static byte Test219_cns(int index) => readOnlySpan[(index & Cns(2147483646)) >> Cns(31)];
+
     public static byte Test219_var(int index) => readOnlySpan[(index & Var(2147483646)) >> Var(31)];
+
     public static byte Test220_cns(int index) => readOnlySpan[(index & Cns(2147483646)) >> Cns(32)];
+
     public static byte Test220_var(int index) => readOnlySpan[(index & Var(2147483646)) >> Var(32)];
+
     public static byte Test221_cns(int index) => readOnlySpan[(index & Cns(2147483646)) >> Cns(33)];
+
     public static byte Test221_var(int index) => readOnlySpan[(index & Var(2147483646)) >> Var(33)];
+
     public static byte Test222_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) >> Cns(2147483646)];
+
     public static byte Test222_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) >> Var(2147483646)];
+
     public static byte Test223_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) >> Cns(2147483647)];
+
     public static byte Test223_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) >> Var(2147483647)];
+
     public static byte Test224_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) >> Cns(-2147483648)];
+
     public static byte Test224_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) >> Var(-2147483648)];
+
     public static byte Test225_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) >> Cns(-2147483647)];
+
     public static byte Test225_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) >> Var(-2147483647)];
+
     public static byte Test226_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) >> Cns(-33)];
+
     public static byte Test226_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) >> Var(-33)];
+
     public static byte Test227_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) >> Cns(-32)];
+
     public static byte Test227_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) >> Var(-32)];
+
     public static byte Test228_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) >> Cns(-31)];
+
     public static byte Test228_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) >> Var(-31)];
+
     public static byte Test229_cns(int index) => readOnlySpan[(index & Cns(2147483647)) >> Cns(-1)];
+
     public static byte Test229_var(int index) => readOnlySpan[(index & Var(2147483647)) >> Var(-1)];
+
     public static byte Test230_cns(int index) => readOnlySpan[(index & Cns(2147483647)) >> Cns(0)];
+
     public static byte Test230_var(int index) => readOnlySpan[(index & Var(2147483647)) >> Var(0)];
+
     public static byte Test231_cns(int index) => readOnlySpan[(index & Cns(2147483647)) >> Cns(1)];
+
     public static byte Test231_var(int index) => readOnlySpan[(index & Var(2147483647)) >> Var(1)];
+
     public static byte Test232_cns(int index) => readOnlySpan[(index & Cns(2147483647)) >> Cns(2)];
+
     public static byte Test232_var(int index) => readOnlySpan[(index & Var(2147483647)) >> Var(2)];
+
     public static byte Test233_cns(int index) => readOnlySpan[(index & Cns(2147483647)) >> Cns(31)];
+
     public static byte Test233_var(int index) => readOnlySpan[(index & Var(2147483647)) >> Var(31)];
+
     public static byte Test234_cns(int index) => readOnlySpan[(index & Cns(2147483647)) >> Cns(32)];
+
     public static byte Test234_var(int index) => readOnlySpan[(index & Var(2147483647)) >> Var(32)];
+
     public static byte Test235_cns(int index) => readOnlySpan[(index & Cns(2147483647)) >> Cns(33)];
+
     public static byte Test235_var(int index) => readOnlySpan[(index & Var(2147483647)) >> Var(33)];
+
     public static byte Test236_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) >> Cns(2147483646)];
+
     public static byte Test236_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) >> Var(2147483646)];
+
     public static byte Test237_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) >> Cns(2147483647)];
+
     public static byte Test237_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) >> Var(2147483647)];
+
     public static byte Test238_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) << Cns(-2147483648)];
+
     public static byte Test238_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) << Var(-2147483648)];
+
     public static byte Test239_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) << Cns(-2147483647)];
+
     public static byte Test239_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) << Var(-2147483647)];
+
     public static byte Test240_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) << Cns(-33)];
+
     public static byte Test240_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) << Var(-33)];
+
     public static byte Test241_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) << Cns(-32)];
+
     public static byte Test241_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) << Var(-32)];
+
     public static byte Test242_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) << Cns(-31)];
+
     public static byte Test242_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) << Var(-31)];
+
     public static byte Test243_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) << Cns(-1)];
+
     public static byte Test243_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) << Var(-1)];
+
     public static byte Test244_cns(int index) => readOnlySpan[(index & Cns(-2147483648)) << Cns(0)];
+
     public static byte Test244_var(int index) => readOnlySpan[(index & Var(-2147483648)) << Var(0)];
+
     public static byte Test245_cns(int index) => readOnlySpan[(index & Cns(-2147483648)) << Cns(1)];
+
     public static byte Test245_var(int index) => readOnlySpan[(index & Var(-2147483648)) << Var(1)];
+
     public static byte Test246_cns(int index) => readOnlySpan[(index & Cns(-2147483648)) << Cns(2)];
+
     public static byte Test246_var(int index) => readOnlySpan[(index & Var(-2147483648)) << Var(2)];
+
     public static byte Test247_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) << Cns(31)];
+
     public static byte Test247_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) << Var(31)];
+
     public static byte Test248_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) << Cns(32)];
+
     public static byte Test248_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) << Var(32)];
+
     public static byte Test249_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) << Cns(33)];
+
     public static byte Test249_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) << Var(33)];
+
     public static byte Test250_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) << Cns(2147483646)];
+
     public static byte Test250_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) << Var(2147483646)];
+
     public static byte Test251_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483648)) << Cns(2147483647)];
+
     public static byte Test251_var(int index) =>
         readOnlySpan[(index & Var(-2147483648)) << Var(2147483647)];
+
     public static byte Test252_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) << Cns(-2147483648)];
+
     public static byte Test252_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) << Var(-2147483648)];
+
     public static byte Test253_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) << Cns(-2147483647)];
+
     public static byte Test253_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) << Var(-2147483647)];
+
     public static byte Test254_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) << Cns(-33)];
+
     public static byte Test254_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) << Var(-33)];
+
     public static byte Test255_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) << Cns(-32)];
+
     public static byte Test255_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) << Var(-32)];
+
     public static byte Test256_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) << Cns(-31)];
+
     public static byte Test256_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) << Var(-31)];
+
     public static byte Test257_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) << Cns(-1)];
+
     public static byte Test257_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) << Var(-1)];
+
     public static byte Test258_cns(int index) => readOnlySpan[(index & Cns(-2147483647)) << Cns(0)];
+
     public static byte Test258_var(int index) => readOnlySpan[(index & Var(-2147483647)) << Var(0)];
+
     public static byte Test259_cns(int index) => readOnlySpan[(index & Cns(-2147483647)) << Cns(1)];
+
     public static byte Test259_var(int index) => readOnlySpan[(index & Var(-2147483647)) << Var(1)];
+
     public static byte Test260_cns(int index) => readOnlySpan[(index & Cns(-2147483647)) << Cns(2)];
+
     public static byte Test260_var(int index) => readOnlySpan[(index & Var(-2147483647)) << Var(2)];
+
     public static byte Test261_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) << Cns(31)];
+
     public static byte Test261_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) << Var(31)];
+
     public static byte Test262_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) << Cns(32)];
+
     public static byte Test262_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) << Var(32)];
+
     public static byte Test263_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) << Cns(33)];
+
     public static byte Test263_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) << Var(33)];
+
     public static byte Test264_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) << Cns(2147483646)];
+
     public static byte Test264_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) << Var(2147483646)];
+
     public static byte Test265_cns(int index) =>
         readOnlySpan[(index & Cns(-2147483647)) << Cns(2147483647)];
+
     public static byte Test265_var(int index) =>
         readOnlySpan[(index & Var(-2147483647)) << Var(2147483647)];
+
     public static byte Test266_cns(int index) =>
         readOnlySpan[(index & Cns(-11)) << Cns(-2147483648)];
+
     public static byte Test266_var(int index) =>
         readOnlySpan[(index & Var(-11)) << Var(-2147483648)];
+
     public static byte Test267_cns(int index) =>
         readOnlySpan[(index & Cns(-11)) << Cns(-2147483647)];
+
     public static byte Test267_var(int index) =>
         readOnlySpan[(index & Var(-11)) << Var(-2147483647)];
+
     public static byte Test268_cns(int index) => readOnlySpan[(index & Cns(-11)) << Cns(-33)];
+
     public static byte Test268_var(int index) => readOnlySpan[(index & Var(-11)) << Var(-33)];
+
     public static byte Test269_cns(int index) => readOnlySpan[(index & Cns(-11)) << Cns(-32)];
+
     public static byte Test269_var(int index) => readOnlySpan[(index & Var(-11)) << Var(-32)];
+
     public static byte Test270_cns(int index) => readOnlySpan[(index & Cns(-11)) << Cns(-31)];
+
     public static byte Test270_var(int index) => readOnlySpan[(index & Var(-11)) << Var(-31)];
+
     public static byte Test271_cns(int index) => readOnlySpan[(index & Cns(-11)) << Cns(-1)];
+
     public static byte Test271_var(int index) => readOnlySpan[(index & Var(-11)) << Var(-1)];
+
     public static byte Test272_cns(int index) => readOnlySpan[(index & Cns(-11)) << Cns(0)];
+
     public static byte Test272_var(int index) => readOnlySpan[(index & Var(-11)) << Var(0)];
+
     public static byte Test273_cns(int index) => readOnlySpan[(index & Cns(-11)) << Cns(1)];
+
     public static byte Test273_var(int index) => readOnlySpan[(index & Var(-11)) << Var(1)];
+
     public static byte Test274_cns(int index) => readOnlySpan[(index & Cns(-11)) << Cns(2)];
+
     public static byte Test274_var(int index) => readOnlySpan[(index & Var(-11)) << Var(2)];
+
     public static byte Test275_cns(int index) => readOnlySpan[(index & Cns(-11)) << Cns(31)];
+
     public static byte Test275_var(int index) => readOnlySpan[(index & Var(-11)) << Var(31)];
+
     public static byte Test276_cns(int index) => readOnlySpan[(index & Cns(-11)) << Cns(32)];
+
     public static byte Test276_var(int index) => readOnlySpan[(index & Var(-11)) << Var(32)];
+
     public static byte Test277_cns(int index) => readOnlySpan[(index & Cns(-11)) << Cns(33)];
+
     public static byte Test277_var(int index) => readOnlySpan[(index & Var(-11)) << Var(33)];
+
     public static byte Test278_cns(int index) =>
         readOnlySpan[(index & Cns(-11)) << Cns(2147483646)];
+
     public static byte Test278_var(int index) =>
         readOnlySpan[(index & Var(-11)) << Var(2147483646)];
+
     public static byte Test279_cns(int index) =>
         readOnlySpan[(index & Cns(-11)) << Cns(2147483647)];
+
     public static byte Test279_var(int index) =>
         readOnlySpan[(index & Var(-11)) << Var(2147483647)];
+
     public static byte Test280_cns(int index) =>
         readOnlySpan[(index & Cns(-10)) << Cns(-2147483648)];
+
     public static byte Test280_var(int index) =>
         readOnlySpan[(index & Var(-10)) << Var(-2147483648)];
+
     public static byte Test281_cns(int index) =>
         readOnlySpan[(index & Cns(-10)) << Cns(-2147483647)];
+
     public static byte Test281_var(int index) =>
         readOnlySpan[(index & Var(-10)) << Var(-2147483647)];
+
     public static byte Test282_cns(int index) => readOnlySpan[(index & Cns(-10)) << Cns(-33)];
+
     public static byte Test282_var(int index) => readOnlySpan[(index & Var(-10)) << Var(-33)];
+
     public static byte Test283_cns(int index) => readOnlySpan[(index & Cns(-10)) << Cns(-32)];
+
     public static byte Test283_var(int index) => readOnlySpan[(index & Var(-10)) << Var(-32)];
+
     public static byte Test284_cns(int index) => readOnlySpan[(index & Cns(-10)) << Cns(-31)];
+
     public static byte Test284_var(int index) => readOnlySpan[(index & Var(-10)) << Var(-31)];
+
     public static byte Test285_cns(int index) => readOnlySpan[(index & Cns(-10)) << Cns(-1)];
+
     public static byte Test285_var(int index) => readOnlySpan[(index & Var(-10)) << Var(-1)];
+
     public static byte Test286_cns(int index) => readOnlySpan[(index & Cns(-10)) << Cns(0)];
+
     public static byte Test286_var(int index) => readOnlySpan[(index & Var(-10)) << Var(0)];
+
     public static byte Test287_cns(int index) => readOnlySpan[(index & Cns(-10)) << Cns(1)];
+
     public static byte Test287_var(int index) => readOnlySpan[(index & Var(-10)) << Var(1)];
+
     public static byte Test288_cns(int index) => readOnlySpan[(index & Cns(-10)) << Cns(2)];
+
     public static byte Test288_var(int index) => readOnlySpan[(index & Var(-10)) << Var(2)];
+
     public static byte Test289_cns(int index) => readOnlySpan[(index & Cns(-10)) << Cns(31)];
+
     public static byte Test289_var(int index) => readOnlySpan[(index & Var(-10)) << Var(31)];
+
     public static byte Test290_cns(int index) => readOnlySpan[(index & Cns(-10)) << Cns(32)];
+
     public static byte Test290_var(int index) => readOnlySpan[(index & Var(-10)) << Var(32)];
+
     public static byte Test291_cns(int index) => readOnlySpan[(index & Cns(-10)) << Cns(33)];
+
     public static byte Test291_var(int index) => readOnlySpan[(index & Var(-10)) << Var(33)];
+
     public static byte Test292_cns(int index) =>
         readOnlySpan[(index & Cns(-10)) << Cns(2147483646)];
+
     public static byte Test292_var(int index) =>
         readOnlySpan[(index & Var(-10)) << Var(2147483646)];
+
     public static byte Test293_cns(int index) =>
         readOnlySpan[(index & Cns(-10)) << Cns(2147483647)];
+
     public static byte Test293_var(int index) =>
         readOnlySpan[(index & Var(-10)) << Var(2147483647)];
+
     public static byte Test294_cns(int index) =>
         readOnlySpan[(index & Cns(-9)) << Cns(-2147483648)];
+
     public static byte Test294_var(int index) =>
         readOnlySpan[(index & Var(-9)) << Var(-2147483648)];
+
     public static byte Test295_cns(int index) =>
         readOnlySpan[(index & Cns(-9)) << Cns(-2147483647)];
+
     public static byte Test295_var(int index) =>
         readOnlySpan[(index & Var(-9)) << Var(-2147483647)];
+
     public static byte Test296_cns(int index) => readOnlySpan[(index & Cns(-9)) << Cns(-33)];
+
     public static byte Test296_var(int index) => readOnlySpan[(index & Var(-9)) << Var(-33)];
+
     public static byte Test297_cns(int index) => readOnlySpan[(index & Cns(-9)) << Cns(-32)];
+
     public static byte Test297_var(int index) => readOnlySpan[(index & Var(-9)) << Var(-32)];
+
     public static byte Test298_cns(int index) => readOnlySpan[(index & Cns(-9)) << Cns(-31)];
+
     public static byte Test298_var(int index) => readOnlySpan[(index & Var(-9)) << Var(-31)];
+
     public static byte Test299_cns(int index) => readOnlySpan[(index & Cns(-9)) << Cns(-1)];
+
     public static byte Test299_var(int index) => readOnlySpan[(index & Var(-9)) << Var(-1)];
+
     public static byte Test300_cns(int index) => readOnlySpan[(index & Cns(-9)) << Cns(0)];
+
     public static byte Test300_var(int index) => readOnlySpan[(index & Var(-9)) << Var(0)];
+
     public static byte Test301_cns(int index) => readOnlySpan[(index & Cns(-9)) << Cns(1)];
+
     public static byte Test301_var(int index) => readOnlySpan[(index & Var(-9)) << Var(1)];
+
     public static byte Test302_cns(int index) => readOnlySpan[(index & Cns(-9)) << Cns(2)];
+
     public static byte Test302_var(int index) => readOnlySpan[(index & Var(-9)) << Var(2)];
+
     public static byte Test303_cns(int index) => readOnlySpan[(index & Cns(-9)) << Cns(31)];
+
     public static byte Test303_var(int index) => readOnlySpan[(index & Var(-9)) << Var(31)];
+
     public static byte Test304_cns(int index) => readOnlySpan[(index & Cns(-9)) << Cns(32)];
+
     public static byte Test304_var(int index) => readOnlySpan[(index & Var(-9)) << Var(32)];
+
     public static byte Test305_cns(int index) => readOnlySpan[(index & Cns(-9)) << Cns(33)];
+
     public static byte Test305_var(int index) => readOnlySpan[(index & Var(-9)) << Var(33)];
+
     public static byte Test306_cns(int index) => readOnlySpan[(index & Cns(-9)) << Cns(2147483646)];
+
     public static byte Test306_var(int index) => readOnlySpan[(index & Var(-9)) << Var(2147483646)];
+
     public static byte Test307_cns(int index) => readOnlySpan[(index & Cns(-9)) << Cns(2147483647)];
+
     public static byte Test307_var(int index) => readOnlySpan[(index & Var(-9)) << Var(2147483647)];
+
     public static byte Test308_cns(int index) =>
         readOnlySpan[(index & Cns(-1)) << Cns(-2147483648)];
+
     public static byte Test308_var(int index) =>
         readOnlySpan[(index & Var(-1)) << Var(-2147483648)];
+
     public static byte Test309_cns(int index) =>
         readOnlySpan[(index & Cns(-1)) << Cns(-2147483647)];
+
     public static byte Test309_var(int index) =>
         readOnlySpan[(index & Var(-1)) << Var(-2147483647)];
+
     public static byte Test310_cns(int index) => readOnlySpan[(index & Cns(-1)) << Cns(-33)];
+
     public static byte Test310_var(int index) => readOnlySpan[(index & Var(-1)) << Var(-33)];
+
     public static byte Test311_cns(int index) => readOnlySpan[(index & Cns(-1)) << Cns(-32)];
+
     public static byte Test311_var(int index) => readOnlySpan[(index & Var(-1)) << Var(-32)];
+
     public static byte Test312_cns(int index) => readOnlySpan[(index & Cns(-1)) << Cns(-31)];
+
     public static byte Test312_var(int index) => readOnlySpan[(index & Var(-1)) << Var(-31)];
+
     public static byte Test313_cns(int index) => readOnlySpan[(index & Cns(-1)) << Cns(-1)];
+
     public static byte Test313_var(int index) => readOnlySpan[(index & Var(-1)) << Var(-1)];
+
     public static byte Test314_cns(int index) => readOnlySpan[(index & Cns(-1)) << Cns(0)];
+
     public static byte Test314_var(int index) => readOnlySpan[(index & Var(-1)) << Var(0)];
+
     public static byte Test315_cns(int index) => readOnlySpan[(index & Cns(-1)) << Cns(1)];
+
     public static byte Test315_var(int index) => readOnlySpan[(index & Var(-1)) << Var(1)];
+
     public static byte Test316_cns(int index) => readOnlySpan[(index & Cns(-1)) << Cns(2)];
+
     public static byte Test316_var(int index) => readOnlySpan[(index & Var(-1)) << Var(2)];
+
     public static byte Test317_cns(int index) => readOnlySpan[(index & Cns(-1)) << Cns(31)];
+
     public static byte Test317_var(int index) => readOnlySpan[(index & Var(-1)) << Var(31)];
+
     public static byte Test318_cns(int index) => readOnlySpan[(index & Cns(-1)) << Cns(32)];
+
     public static byte Test318_var(int index) => readOnlySpan[(index & Var(-1)) << Var(32)];
+
     public static byte Test319_cns(int index) => readOnlySpan[(index & Cns(-1)) << Cns(33)];
+
     public static byte Test319_var(int index) => readOnlySpan[(index & Var(-1)) << Var(33)];
+
     public static byte Test320_cns(int index) => readOnlySpan[(index & Cns(-1)) << Cns(2147483646)];
+
     public static byte Test320_var(int index) => readOnlySpan[(index & Var(-1)) << Var(2147483646)];
+
     public static byte Test321_cns(int index) => readOnlySpan[(index & Cns(-1)) << Cns(2147483647)];
+
     public static byte Test321_var(int index) => readOnlySpan[(index & Var(-1)) << Var(2147483647)];
+
     public static byte Test322_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(-2147483648)];
+
     public static byte Test322_var(int index) => readOnlySpan[(index & Var(0)) << Var(-2147483648)];
+
     public static byte Test323_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(-2147483647)];
+
     public static byte Test323_var(int index) => readOnlySpan[(index & Var(0)) << Var(-2147483647)];
+
     public static byte Test324_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(-33)];
+
     public static byte Test324_var(int index) => readOnlySpan[(index & Var(0)) << Var(-33)];
+
     public static byte Test325_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(-32)];
+
     public static byte Test325_var(int index) => readOnlySpan[(index & Var(0)) << Var(-32)];
+
     public static byte Test326_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(-31)];
+
     public static byte Test326_var(int index) => readOnlySpan[(index & Var(0)) << Var(-31)];
+
     public static byte Test327_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(-1)];
+
     public static byte Test327_var(int index) => readOnlySpan[(index & Var(0)) << Var(-1)];
+
     public static byte Test328_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(0)];
+
     public static byte Test328_var(int index) => readOnlySpan[(index & Var(0)) << Var(0)];
+
     public static byte Test329_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(1)];
+
     public static byte Test329_var(int index) => readOnlySpan[(index & Var(0)) << Var(1)];
+
     public static byte Test330_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(2)];
+
     public static byte Test330_var(int index) => readOnlySpan[(index & Var(0)) << Var(2)];
+
     public static byte Test331_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(31)];
+
     public static byte Test331_var(int index) => readOnlySpan[(index & Var(0)) << Var(31)];
+
     public static byte Test332_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(32)];
+
     public static byte Test332_var(int index) => readOnlySpan[(index & Var(0)) << Var(32)];
+
     public static byte Test333_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(33)];
+
     public static byte Test333_var(int index) => readOnlySpan[(index & Var(0)) << Var(33)];
+
     public static byte Test334_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(2147483646)];
+
     public static byte Test334_var(int index) => readOnlySpan[(index & Var(0)) << Var(2147483646)];
+
     public static byte Test335_cns(int index) => readOnlySpan[(index & Cns(0)) << Cns(2147483647)];
+
     public static byte Test335_var(int index) => readOnlySpan[(index & Var(0)) << Var(2147483647)];
+
     public static byte Test336_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(-2147483648)];
+
     public static byte Test336_var(int index) => readOnlySpan[(index & Var(1)) << Var(-2147483648)];
+
     public static byte Test337_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(-2147483647)];
+
     public static byte Test337_var(int index) => readOnlySpan[(index & Var(1)) << Var(-2147483647)];
+
     public static byte Test338_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(-33)];
+
     public static byte Test338_var(int index) => readOnlySpan[(index & Var(1)) << Var(-33)];
+
     public static byte Test339_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(-32)];
+
     public static byte Test339_var(int index) => readOnlySpan[(index & Var(1)) << Var(-32)];
+
     public static byte Test340_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(-31)];
+
     public static byte Test340_var(int index) => readOnlySpan[(index & Var(1)) << Var(-31)];
+
     public static byte Test341_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(-1)];
+
     public static byte Test341_var(int index) => readOnlySpan[(index & Var(1)) << Var(-1)];
+
     public static byte Test342_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(0)];
+
     public static byte Test342_var(int index) => readOnlySpan[(index & Var(1)) << Var(0)];
+
     public static byte Test343_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(1)];
+
     public static byte Test343_var(int index) => readOnlySpan[(index & Var(1)) << Var(1)];
+
     public static byte Test344_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(2)];
+
     public static byte Test344_var(int index) => readOnlySpan[(index & Var(1)) << Var(2)];
+
     public static byte Test345_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(31)];
+
     public static byte Test345_var(int index) => readOnlySpan[(index & Var(1)) << Var(31)];
+
     public static byte Test346_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(32)];
+
     public static byte Test346_var(int index) => readOnlySpan[(index & Var(1)) << Var(32)];
+
     public static byte Test347_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(33)];
+
     public static byte Test347_var(int index) => readOnlySpan[(index & Var(1)) << Var(33)];
+
     public static byte Test348_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(2147483646)];
+
     public static byte Test348_var(int index) => readOnlySpan[(index & Var(1)) << Var(2147483646)];
+
     public static byte Test349_cns(int index) => readOnlySpan[(index & Cns(1)) << Cns(2147483647)];
+
     public static byte Test349_var(int index) => readOnlySpan[(index & Var(1)) << Var(2147483647)];
+
     public static byte Test350_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(-2147483648)];
+
     public static byte Test350_var(int index) => readOnlySpan[(index & Var(2)) << Var(-2147483648)];
+
     public static byte Test351_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(-2147483647)];
+
     public static byte Test351_var(int index) => readOnlySpan[(index & Var(2)) << Var(-2147483647)];
+
     public static byte Test352_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(-33)];
+
     public static byte Test352_var(int index) => readOnlySpan[(index & Var(2)) << Var(-33)];
+
     public static byte Test353_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(-32)];
+
     public static byte Test353_var(int index) => readOnlySpan[(index & Var(2)) << Var(-32)];
+
     public static byte Test354_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(-31)];
+
     public static byte Test354_var(int index) => readOnlySpan[(index & Var(2)) << Var(-31)];
+
     public static byte Test355_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(-1)];
+
     public static byte Test355_var(int index) => readOnlySpan[(index & Var(2)) << Var(-1)];
+
     public static byte Test356_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(0)];
+
     public static byte Test356_var(int index) => readOnlySpan[(index & Var(2)) << Var(0)];
+
     public static byte Test357_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(1)];
+
     public static byte Test357_var(int index) => readOnlySpan[(index & Var(2)) << Var(1)];
+
     public static byte Test358_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(2)];
+
     public static byte Test358_var(int index) => readOnlySpan[(index & Var(2)) << Var(2)];
+
     public static byte Test359_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(31)];
+
     public static byte Test359_var(int index) => readOnlySpan[(index & Var(2)) << Var(31)];
+
     public static byte Test360_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(32)];
+
     public static byte Test360_var(int index) => readOnlySpan[(index & Var(2)) << Var(32)];
+
     public static byte Test361_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(33)];
+
     public static byte Test361_var(int index) => readOnlySpan[(index & Var(2)) << Var(33)];
+
     public static byte Test362_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(2147483646)];
+
     public static byte Test362_var(int index) => readOnlySpan[(index & Var(2)) << Var(2147483646)];
+
     public static byte Test363_cns(int index) => readOnlySpan[(index & Cns(2)) << Cns(2147483647)];
+
     public static byte Test363_var(int index) => readOnlySpan[(index & Var(2)) << Var(2147483647)];
+
     public static byte Test364_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(-2147483648)];
+
     public static byte Test364_var(int index) => readOnlySpan[(index & Var(9)) << Var(-2147483648)];
+
     public static byte Test365_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(-2147483647)];
+
     public static byte Test365_var(int index) => readOnlySpan[(index & Var(9)) << Var(-2147483647)];
+
     public static byte Test366_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(-33)];
+
     public static byte Test366_var(int index) => readOnlySpan[(index & Var(9)) << Var(-33)];
+
     public static byte Test367_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(-32)];
+
     public static byte Test367_var(int index) => readOnlySpan[(index & Var(9)) << Var(-32)];
+
     public static byte Test368_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(-31)];
+
     public static byte Test368_var(int index) => readOnlySpan[(index & Var(9)) << Var(-31)];
+
     public static byte Test369_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(-1)];
+
     public static byte Test369_var(int index) => readOnlySpan[(index & Var(9)) << Var(-1)];
+
     public static byte Test370_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(0)];
+
     public static byte Test370_var(int index) => readOnlySpan[(index & Var(9)) << Var(0)];
+
     public static byte Test371_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(1)];
+
     public static byte Test371_var(int index) => readOnlySpan[(index & Var(9)) << Var(1)];
+
     public static byte Test372_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(2)];
+
     public static byte Test372_var(int index) => readOnlySpan[(index & Var(9)) << Var(2)];
+
     public static byte Test373_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(31)];
+
     public static byte Test373_var(int index) => readOnlySpan[(index & Var(9)) << Var(31)];
+
     public static byte Test374_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(32)];
+
     public static byte Test374_var(int index) => readOnlySpan[(index & Var(9)) << Var(32)];
+
     public static byte Test375_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(33)];
+
     public static byte Test375_var(int index) => readOnlySpan[(index & Var(9)) << Var(33)];
+
     public static byte Test376_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(2147483646)];
+
     public static byte Test376_var(int index) => readOnlySpan[(index & Var(9)) << Var(2147483646)];
+
     public static byte Test377_cns(int index) => readOnlySpan[(index & Cns(9)) << Cns(2147483647)];
+
     public static byte Test377_var(int index) => readOnlySpan[(index & Var(9)) << Var(2147483647)];
+
     public static byte Test378_cns(int index) =>
         readOnlySpan[(index & Cns(10)) << Cns(-2147483648)];
+
     public static byte Test378_var(int index) =>
         readOnlySpan[(index & Var(10)) << Var(-2147483648)];
+
     public static byte Test379_cns(int index) =>
         readOnlySpan[(index & Cns(10)) << Cns(-2147483647)];
+
     public static byte Test379_var(int index) =>
         readOnlySpan[(index & Var(10)) << Var(-2147483647)];
+
     public static byte Test380_cns(int index) => readOnlySpan[(index & Cns(10)) << Cns(-33)];
+
     public static byte Test380_var(int index) => readOnlySpan[(index & Var(10)) << Var(-33)];
+
     public static byte Test381_cns(int index) => readOnlySpan[(index & Cns(10)) << Cns(-32)];
+
     public static byte Test381_var(int index) => readOnlySpan[(index & Var(10)) << Var(-32)];
+
     public static byte Test382_cns(int index) => readOnlySpan[(index & Cns(10)) << Cns(-31)];
+
     public static byte Test382_var(int index) => readOnlySpan[(index & Var(10)) << Var(-31)];
+
     public static byte Test383_cns(int index) => readOnlySpan[(index & Cns(10)) << Cns(-1)];
+
     public static byte Test383_var(int index) => readOnlySpan[(index & Var(10)) << Var(-1)];
+
     public static byte Test384_cns(int index) => readOnlySpan[(index & Cns(10)) << Cns(0)];
+
     public static byte Test384_var(int index) => readOnlySpan[(index & Var(10)) << Var(0)];
+
     public static byte Test385_cns(int index) => readOnlySpan[(index & Cns(10)) << Cns(1)];
+
     public static byte Test385_var(int index) => readOnlySpan[(index & Var(10)) << Var(1)];
+
     public static byte Test386_cns(int index) => readOnlySpan[(index & Cns(10)) << Cns(2)];
+
     public static byte Test386_var(int index) => readOnlySpan[(index & Var(10)) << Var(2)];
+
     public static byte Test387_cns(int index) => readOnlySpan[(index & Cns(10)) << Cns(31)];
+
     public static byte Test387_var(int index) => readOnlySpan[(index & Var(10)) << Var(31)];
+
     public static byte Test388_cns(int index) => readOnlySpan[(index & Cns(10)) << Cns(32)];
+
     public static byte Test388_var(int index) => readOnlySpan[(index & Var(10)) << Var(32)];
+
     public static byte Test389_cns(int index) => readOnlySpan[(index & Cns(10)) << Cns(33)];
+
     public static byte Test389_var(int index) => readOnlySpan[(index & Var(10)) << Var(33)];
+
     public static byte Test390_cns(int index) => readOnlySpan[(index & Cns(10)) << Cns(2147483646)];
+
     public static byte Test390_var(int index) => readOnlySpan[(index & Var(10)) << Var(2147483646)];
+
     public static byte Test391_cns(int index) => readOnlySpan[(index & Cns(10)) << Cns(2147483647)];
+
     public static byte Test391_var(int index) => readOnlySpan[(index & Var(10)) << Var(2147483647)];
+
     public static byte Test392_cns(int index) =>
         readOnlySpan[(index & Cns(11)) << Cns(-2147483648)];
+
     public static byte Test392_var(int index) =>
         readOnlySpan[(index & Var(11)) << Var(-2147483648)];
+
     public static byte Test393_cns(int index) =>
         readOnlySpan[(index & Cns(11)) << Cns(-2147483647)];
+
     public static byte Test393_var(int index) =>
         readOnlySpan[(index & Var(11)) << Var(-2147483647)];
+
     public static byte Test394_cns(int index) => readOnlySpan[(index & Cns(11)) << Cns(-33)];
+
     public static byte Test394_var(int index) => readOnlySpan[(index & Var(11)) << Var(-33)];
+
     public static byte Test395_cns(int index) => readOnlySpan[(index & Cns(11)) << Cns(-32)];
+
     public static byte Test395_var(int index) => readOnlySpan[(index & Var(11)) << Var(-32)];
+
     public static byte Test396_cns(int index) => readOnlySpan[(index & Cns(11)) << Cns(-31)];
+
     public static byte Test396_var(int index) => readOnlySpan[(index & Var(11)) << Var(-31)];
+
     public static byte Test397_cns(int index) => readOnlySpan[(index & Cns(11)) << Cns(-1)];
+
     public static byte Test397_var(int index) => readOnlySpan[(index & Var(11)) << Var(-1)];
+
     public static byte Test398_cns(int index) => readOnlySpan[(index & Cns(11)) << Cns(0)];
+
     public static byte Test398_var(int index) => readOnlySpan[(index & Var(11)) << Var(0)];
+
     public static byte Test399_cns(int index) => readOnlySpan[(index & Cns(11)) << Cns(1)];
+
     public static byte Test399_var(int index) => readOnlySpan[(index & Var(11)) << Var(1)];
+
     public static byte Test400_cns(int index) => readOnlySpan[(index & Cns(11)) << Cns(2)];
+
     public static byte Test400_var(int index) => readOnlySpan[(index & Var(11)) << Var(2)];
+
     public static byte Test401_cns(int index) => readOnlySpan[(index & Cns(11)) << Cns(31)];
+
     public static byte Test401_var(int index) => readOnlySpan[(index & Var(11)) << Var(31)];
+
     public static byte Test402_cns(int index) => readOnlySpan[(index & Cns(11)) << Cns(32)];
+
     public static byte Test402_var(int index) => readOnlySpan[(index & Var(11)) << Var(32)];
+
     public static byte Test403_cns(int index) => readOnlySpan[(index & Cns(11)) << Cns(33)];
+
     public static byte Test403_var(int index) => readOnlySpan[(index & Var(11)) << Var(33)];
+
     public static byte Test404_cns(int index) => readOnlySpan[(index & Cns(11)) << Cns(2147483646)];
+
     public static byte Test404_var(int index) => readOnlySpan[(index & Var(11)) << Var(2147483646)];
+
     public static byte Test405_cns(int index) => readOnlySpan[(index & Cns(11)) << Cns(2147483647)];
+
     public static byte Test405_var(int index) => readOnlySpan[(index & Var(11)) << Var(2147483647)];
+
     public static byte Test406_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) << Cns(-2147483648)];
+
     public static byte Test406_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) << Var(-2147483648)];
+
     public static byte Test407_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) << Cns(-2147483647)];
+
     public static byte Test407_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) << Var(-2147483647)];
+
     public static byte Test408_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) << Cns(-33)];
+
     public static byte Test408_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) << Var(-33)];
+
     public static byte Test409_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) << Cns(-32)];
+
     public static byte Test409_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) << Var(-32)];
+
     public static byte Test410_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) << Cns(-31)];
+
     public static byte Test410_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) << Var(-31)];
+
     public static byte Test411_cns(int index) => readOnlySpan[(index & Cns(2147483646)) << Cns(-1)];
+
     public static byte Test411_var(int index) => readOnlySpan[(index & Var(2147483646)) << Var(-1)];
+
     public static byte Test412_cns(int index) => readOnlySpan[(index & Cns(2147483646)) << Cns(0)];
+
     public static byte Test412_var(int index) => readOnlySpan[(index & Var(2147483646)) << Var(0)];
+
     public static byte Test413_cns(int index) => readOnlySpan[(index & Cns(2147483646)) << Cns(1)];
+
     public static byte Test413_var(int index) => readOnlySpan[(index & Var(2147483646)) << Var(1)];
+
     public static byte Test414_cns(int index) => readOnlySpan[(index & Cns(2147483646)) << Cns(2)];
+
     public static byte Test414_var(int index) => readOnlySpan[(index & Var(2147483646)) << Var(2)];
+
     public static byte Test415_cns(int index) => readOnlySpan[(index & Cns(2147483646)) << Cns(31)];
+
     public static byte Test415_var(int index) => readOnlySpan[(index & Var(2147483646)) << Var(31)];
+
     public static byte Test416_cns(int index) => readOnlySpan[(index & Cns(2147483646)) << Cns(32)];
+
     public static byte Test416_var(int index) => readOnlySpan[(index & Var(2147483646)) << Var(32)];
+
     public static byte Test417_cns(int index) => readOnlySpan[(index & Cns(2147483646)) << Cns(33)];
+
     public static byte Test417_var(int index) => readOnlySpan[(index & Var(2147483646)) << Var(33)];
+
     public static byte Test418_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) << Cns(2147483646)];
+
     public static byte Test418_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) << Var(2147483646)];
+
     public static byte Test419_cns(int index) =>
         readOnlySpan[(index & Cns(2147483646)) << Cns(2147483647)];
+
     public static byte Test419_var(int index) =>
         readOnlySpan[(index & Var(2147483646)) << Var(2147483647)];
+
     public static byte Test420_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) << Cns(-2147483648)];
+
     public static byte Test420_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) << Var(-2147483648)];
+
     public static byte Test421_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) << Cns(-2147483647)];
+
     public static byte Test421_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) << Var(-2147483647)];
+
     public static byte Test422_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) << Cns(-33)];
+
     public static byte Test422_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) << Var(-33)];
+
     public static byte Test423_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) << Cns(-32)];
+
     public static byte Test423_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) << Var(-32)];
+
     public static byte Test424_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) << Cns(-31)];
+
     public static byte Test424_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) << Var(-31)];
+
     public static byte Test425_cns(int index) => readOnlySpan[(index & Cns(2147483647)) << Cns(-1)];
+
     public static byte Test425_var(int index) => readOnlySpan[(index & Var(2147483647)) << Var(-1)];
+
     public static byte Test426_cns(int index) => readOnlySpan[(index & Cns(2147483647)) << Cns(0)];
+
     public static byte Test426_var(int index) => readOnlySpan[(index & Var(2147483647)) << Var(0)];
+
     public static byte Test427_cns(int index) => readOnlySpan[(index & Cns(2147483647)) << Cns(1)];
+
     public static byte Test427_var(int index) => readOnlySpan[(index & Var(2147483647)) << Var(1)];
+
     public static byte Test428_cns(int index) => readOnlySpan[(index & Cns(2147483647)) << Cns(2)];
+
     public static byte Test428_var(int index) => readOnlySpan[(index & Var(2147483647)) << Var(2)];
+
     public static byte Test429_cns(int index) => readOnlySpan[(index & Cns(2147483647)) << Cns(31)];
+
     public static byte Test429_var(int index) => readOnlySpan[(index & Var(2147483647)) << Var(31)];
+
     public static byte Test430_cns(int index) => readOnlySpan[(index & Cns(2147483647)) << Cns(32)];
+
     public static byte Test430_var(int index) => readOnlySpan[(index & Var(2147483647)) << Var(32)];
+
     public static byte Test431_cns(int index) => readOnlySpan[(index & Cns(2147483647)) << Cns(33)];
+
     public static byte Test431_var(int index) => readOnlySpan[(index & Var(2147483647)) << Var(33)];
+
     public static byte Test432_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) << Cns(2147483646)];
+
     public static byte Test432_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) << Var(2147483646)];
+
     public static byte Test433_cns(int index) =>
         readOnlySpan[(index & Cns(2147483647)) << Cns(2147483647)];
+
     public static byte Test433_var(int index) =>
         readOnlySpan[(index & Var(2147483647)) << Var(2147483647)];
 }

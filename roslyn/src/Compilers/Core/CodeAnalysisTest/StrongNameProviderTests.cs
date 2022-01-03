@@ -81,6 +81,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             private class VirtualStrongNameFileSystem : StrongNameFileSystem
             {
                 private readonly HashSet<string> _existingFullPaths;
+
                 public VirtualStrongNameFileSystem(HashSet<string> existingFullPaths)
                 {
                     _existingFullPaths = existingFullPaths;

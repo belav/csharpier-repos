@@ -98,6 +98,7 @@ namespace System.Speech.Synthesis.TtsEngine
             _param1 = param1;
             _param2 = param2;
         }
+
         public static bool operator ==(SpeechEventInfo event1, SpeechEventInfo event2)
         {
             return event1.EventId == event2.EventId
@@ -105,14 +106,17 @@ namespace System.Speech.Synthesis.TtsEngine
                 && event1.Param1 == event2.Param1
                 && event1.Param2 == event2.Param2;
         }
+
         public static bool operator !=(SpeechEventInfo event1, SpeechEventInfo event2)
         {
             return !(event1 == event2);
         }
+
         public bool Equals(SpeechEventInfo other)
         {
             return this == other;
         }
+
         public override bool Equals(object obj)
         {
             if (!(obj is SpeechEventInfo))
@@ -122,6 +126,7 @@ namespace System.Speech.Synthesis.TtsEngine
 
             return Equals((SpeechEventInfo)obj);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
@@ -132,6 +137,7 @@ namespace System.Speech.Synthesis.TtsEngine
         private int _param1; // Always just a numeric type - contains no unmanaged resources so does not need special clean-up.
         private IntPtr _param2; // Can be a numeric type, or pointer to string or object. Use SafeSapiLParamHandle to cleanup.
     }
+
     public interface ITtsEngineSite
     {
         void AddEvents(SpeechEventInfo[] events, int count);
@@ -144,6 +150,7 @@ namespace System.Speech.Synthesis.TtsEngine
         int Rate { get; }
         int Volume { get; }
     }
+
     public class SkipInfo
     {
         internal SkipInfo(int type, int count)
@@ -151,6 +158,7 @@ namespace System.Speech.Synthesis.TtsEngine
             _type = type;
             _count = count;
         }
+
         public int Type
         {
             get { return _type; }
@@ -161,6 +169,7 @@ namespace System.Speech.Synthesis.TtsEngine
             get { return _count; }
             set { _count = value; }
         }
+
         public SkipInfo() { }
 
         private int _type;
@@ -175,6 +184,7 @@ namespace System.Speech.Synthesis.TtsEngine
     public class TextFragment
     {
         public TextFragment() { }
+
         public FragmentState State
         {
             get { return _state; }
@@ -230,11 +240,13 @@ namespace System.Speech.Synthesis.TtsEngine
         }
 
         private FragmentState _state;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         private string _textToSpeak = string.Empty;
         private int _textOffset;
         private int _textLength;
     }
+
     [ImmutableObject(true)]
     public struct FragmentState : IEquatable<FragmentState>
     {
@@ -285,6 +297,7 @@ namespace System.Speech.Synthesis.TtsEngine
                 _phoneme = value;
             }
         }
+
         public FragmentState(
             TtsEngineAction action,
             int langId,
@@ -303,6 +316,7 @@ namespace System.Speech.Synthesis.TtsEngine
             _prosody = prosody;
             _phoneme = phonemes;
         }
+
         public static bool operator ==(FragmentState state1, FragmentState state2)
         {
             return state1.Action == state2.Action
@@ -313,14 +327,17 @@ namespace System.Speech.Synthesis.TtsEngine
                 && state1.Prosody == state2.Prosody
                 && Array.Equals(state1.Phoneme, state2.Phoneme);
         }
+
         public static bool operator !=(FragmentState state1, FragmentState state2)
         {
             return !(state1 == state2);
         }
+
         public bool Equals(FragmentState other)
         {
             return this == other;
         }
+
         public override bool Equals(object obj)
         {
             if (!(obj is FragmentState))
@@ -330,6 +347,7 @@ namespace System.Speech.Synthesis.TtsEngine
 
             return Equals((FragmentState)obj);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
@@ -343,6 +361,7 @@ namespace System.Speech.Synthesis.TtsEngine
         private Prosody _prosody;
         private char[] _phoneme;
     }
+
     [StructLayout(LayoutKind.Sequential)]
     public class Prosody
     {
@@ -371,16 +390,19 @@ namespace System.Speech.Synthesis.TtsEngine
             get { return _volume; }
             set { _volume = value; }
         }
+
         public ContourPoint[] GetContourPoints()
         {
             return _contourPoints;
         }
+
         public void SetContourPoints(ContourPoint[] points)
         {
             Helpers.ThrowIfNull(points, nameof(points));
 
             _contourPoints = (ContourPoint[])points.Clone();
         }
+
         public Prosody()
         {
             Pitch = new ProsodyNumber((int)ProsodyPitch.Default);
@@ -407,6 +429,7 @@ namespace System.Speech.Synthesis.TtsEngine
         internal ProsodyNumber _volume;
         internal ContourPoint[] _contourPoints;
     }
+
     [ImmutableObject(true)]
     public struct ContourPoint : IEquatable<ContourPoint>
     {
@@ -422,26 +445,31 @@ namespace System.Speech.Synthesis.TtsEngine
         {
             get { return _changeType; } /* internal set { _changeType = value; } */
         }
+
         public ContourPoint(float start, float change, ContourPointChangeType changeType)
         {
             _start = start;
             _change = change;
             _changeType = changeType;
         }
+
         public static bool operator ==(ContourPoint point1, ContourPoint point2)
         {
             return point1.Start.Equals(point2.Start)
                 && point1.Change.Equals(point2.Change)
                 && point1.ChangeType.Equals(point2.ChangeType);
         }
+
         public static bool operator !=(ContourPoint point1, ContourPoint point2)
         {
             return !(point1 == point2);
         }
+
         public bool Equals(ContourPoint other)
         {
             return this == other;
         }
+
         public override bool Equals(object obj)
         {
             if (!(obj is ContourPoint))
@@ -451,6 +479,7 @@ namespace System.Speech.Synthesis.TtsEngine
 
             return Equals((ContourPoint)obj);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
@@ -460,6 +489,7 @@ namespace System.Speech.Synthesis.TtsEngine
         private float _change;
         private ContourPointChangeType _changeType;
     }
+
     [ImmutableObject(true)]
     public struct ProsodyNumber : IEquatable<ProsodyNumber>
     {
@@ -484,6 +514,7 @@ namespace System.Speech.Synthesis.TtsEngine
             internal set { _unit = value; }
         }
         public const int AbsoluteNumber = int.MaxValue;
+
         public ProsodyNumber(int ssmlAttributeId)
         {
             _ssmlAttributeId = ssmlAttributeId;
@@ -491,6 +522,7 @@ namespace System.Speech.Synthesis.TtsEngine
             _isPercent = true;
             _unit = ProsodyUnit.Default;
         }
+
         public ProsodyNumber(float number)
         {
             _ssmlAttributeId = int.MaxValue;
@@ -498,6 +530,7 @@ namespace System.Speech.Synthesis.TtsEngine
             _isPercent = false;
             _unit = ProsodyUnit.Default;
         }
+
         public static bool operator ==(ProsodyNumber prosodyNumber1, ProsodyNumber prosodyNumber2)
         {
             return prosodyNumber1._ssmlAttributeId == prosodyNumber2._ssmlAttributeId
@@ -505,14 +538,17 @@ namespace System.Speech.Synthesis.TtsEngine
                 && prosodyNumber1.IsNumberPercent == prosodyNumber2.IsNumberPercent
                 && prosodyNumber1.Unit == prosodyNumber2.Unit;
         }
+
         public static bool operator !=(ProsodyNumber prosodyNumber1, ProsodyNumber prosodyNumber2)
         {
             return !(prosodyNumber1 == prosodyNumber2);
         }
+
         public bool Equals(ProsodyNumber other)
         {
             return this == other;
         }
+
         public override bool Equals(object obj)
         {
             if (!(obj is ProsodyNumber))
@@ -522,6 +558,7 @@ namespace System.Speech.Synthesis.TtsEngine
 
             return Equals((ProsodyNumber)obj);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
@@ -532,6 +569,7 @@ namespace System.Speech.Synthesis.TtsEngine
         private float _number;
         private ProsodyUnit _unit;
     }
+
     [StructLayout(LayoutKind.Sequential)]
     public class SayAs
     {
@@ -587,6 +625,7 @@ namespace System.Speech.Synthesis.TtsEngine
         StartParagraph,
         ParseUnknownTag,
     }
+
     public enum EmphasisWord : int
     {
         Default,
@@ -595,6 +634,7 @@ namespace System.Speech.Synthesis.TtsEngine
         None,
         Reduced
     }
+
     public enum EmphasisBreak : int
     {
         None = -1,
@@ -608,6 +648,7 @@ namespace System.Speech.Synthesis.TtsEngine
         /// </summary>
         Default = -7,
     }
+
     public enum ProsodyPitch
     {
         Default,
@@ -617,6 +658,7 @@ namespace System.Speech.Synthesis.TtsEngine
         High,
         ExtraHigh
     }
+
     public enum ProsodyRange
     {
         Default,
@@ -626,6 +668,7 @@ namespace System.Speech.Synthesis.TtsEngine
         High,
         ExtraHigh
     }
+
     public enum ProsodyRate
     {
         Default,
@@ -635,6 +678,7 @@ namespace System.Speech.Synthesis.TtsEngine
         Fast,
         ExtraFast
     }
+
     public enum ProsodyVolume : int
     {
         Default = -1,
@@ -645,12 +689,14 @@ namespace System.Speech.Synthesis.TtsEngine
         Loud = -6,
         ExtraLoud = -7
     }
+
     public enum ProsodyUnit : int
     {
         Default,
         Hz,
         Semitone
     }
+
     public enum TtsEventId
     {
         StartInputStream = 1,
@@ -663,6 +709,7 @@ namespace System.Speech.Synthesis.TtsEngine
         Viseme = 8,
         AudioLevel = 9, // wparam contains current output audio level
     }
+
     public enum EventParameterType
     {
         Undefined = 0x0000,
@@ -671,11 +718,13 @@ namespace System.Speech.Synthesis.TtsEngine
         Pointer = 0x0003,
         String = 0x0004
     }
+
     public enum SpeakOutputFormat
     {
         WaveFormat = 0,
         Text = 1
     }
+
     public enum ContourPointChangeType
     {
         Hz = 0,

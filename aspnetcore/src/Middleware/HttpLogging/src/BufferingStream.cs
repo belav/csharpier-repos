@@ -244,6 +244,7 @@ internal abstract class BufferingStream : Stream, IBufferWriter<byte>
     {
         throw CreateArgumentOutOfRangeException(argumentName);
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static Exception CreateArgumentOutOfRangeException(string argumentName)
     {

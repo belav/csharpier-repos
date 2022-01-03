@@ -503,6 +503,7 @@ namespace Microsoft.CodeAnalysis
 
         public Compilation WithScriptCompilationInfo(ScriptCompilationInfo? info) =>
             CommonWithScriptCompilationInfo(info);
+
         protected abstract Compilation CommonWithScriptCompilationInfo(ScriptCompilationInfo? info);
 
         #endregion

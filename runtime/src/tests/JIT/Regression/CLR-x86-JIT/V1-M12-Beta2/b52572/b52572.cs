@@ -30,6 +30,7 @@ namespace Test
                 } while (B > A);
             }
         }
+
         static int Main()
         {
             try

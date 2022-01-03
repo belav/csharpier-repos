@@ -152,10 +152,15 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         }
 
         class CustomService1 : ICustomService { }
+
         class CustomService2 : ICustomService { }
+
         class CustomService3 : ICustomService { }
+
         class CustomService4 : ICustomService { }
+
         class CustomService5 : ICustomService { }
+
         class CustomService6 : ICustomService { }
 
         [Theory]
@@ -496,6 +501,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             {
                 (sp as IDisposable).Dispose();
             }
+
             public void Dispose() { }
         }
 
@@ -547,6 +553,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 _asyncDisposable = asyncDisposable;
                 (sp as IAsyncDisposable).DisposeAsync();
             }
+
             public async ValueTask DisposeAsync()
             {
                 await _asyncDisposable.DisposeAsync();
@@ -566,6 +573,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 _disposable = disposable;
                 (sp as IDisposable).Dispose();
             }
+
             public void Dispose()
             {
                 _disposable.Dispose();
@@ -578,6 +586,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         private class OuterSingleton
         {
             public InnerSingleton InnerSingleton;
+
             public OuterSingleton(InnerSingleton innerSingleton)
             {
                 InnerSingleton = innerSingleton;
@@ -1341,6 +1350,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         private class DelayedAsyncDisposableService : IAsyncDisposable
         {
             public int DisposeCount { get; private set; }
+
             public async ValueTask DisposeAsync()
             {
                 //forces ValueTask to be asynchronous and not be immediately completed
@@ -1463,21 +1473,32 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         }
 
         private class A { }
+
         private class B { }
+
         private class C { }
+
         private class D { }
+
         private class E { }
+
         private class F { }
+
         private class G { }
+
         private class H { }
+
         private class I { }
+
         private class J { }
+
         private class Aa
         {
             public Aa(A a)
             {
                 PropertyA = a;
             }
+
             public A PropertyA { get; }
         }
     }

@@ -18,6 +18,7 @@ namespace Microsoft.Win32.SystemEventsTests
         {
             SendMessage(MessageId, IntPtr.Zero, IntPtr.Zero);
         }
+
         private void SendReflectedMessage()
         {
             SendMessage(User32.WM_REFLECT + MessageId, IntPtr.Zero, IntPtr.Zero);

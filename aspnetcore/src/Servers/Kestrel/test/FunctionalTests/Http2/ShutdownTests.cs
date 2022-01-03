@@ -20,8 +20,10 @@ using Xunit;
 
 #if SOCKETS
 namespace Microsoft.AspNetCore.Server.Kestrel.Sockets.FunctionalTests.Http2;
+
 #else
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2;
+
 #endif
 
 [OSSkipCondition(

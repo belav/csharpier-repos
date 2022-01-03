@@ -106,10 +106,15 @@ namespace Tests.Integration
         }
 
         public interface IMissing { }
+
         public interface ISingle { }
+
         public interface IMultiple { }
+
         public interface IConditional { }
+
         public class SingleImpl : ISingle { }
+
         public class MultipleImpl : IMultiple { }
 
         public class NoImportPart
@@ -307,6 +312,7 @@ namespace Tests.Integration
         }
 
         public interface ILoopA { }
+
         public interface ILoopB { }
 
         [Export(typeof(ILoopA))]

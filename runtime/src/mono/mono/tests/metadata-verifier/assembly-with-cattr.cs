@@ -19,10 +19,12 @@ using System.ComponentModel;
 [assembly: Generic(14)]
 [module: Generic(80)]
 
+
 [AttributeUsage(AttributeTargets.All)]
 public sealed class GenericAttribute : Attribute
 {
     public GenericAttribute() { }
+
     public GenericAttribute(int x) { }
 }
 

@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
             }
 
             public bool MoveNext() => ++_position < _virtualCharSequence.Length;
+
             public VirtualChar Current => _virtualCharSequence[_position];
         }
     }

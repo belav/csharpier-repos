@@ -44,6 +44,7 @@ public class DispatchTesting : Server.Contract.IDispatchTesting
         b = sum;
         return sum;
     }
+
     public double Add_Double_ReturnAndUpdateByRef(double a, ref double b)
     {
         double sum = a + b;

@@ -12,6 +12,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
     internal sealed class BasicBlockReachabilityDataFlowAnalyzer : DataFlowAnalyzer<bool>
     {
         private BitVector _visited = BitVector.Empty;
+
         private BasicBlockReachabilityDataFlowAnalyzer() { }
 
         public static BitVector Run(ControlFlowGraph controlFlowGraph)

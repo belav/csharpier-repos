@@ -805,6 +805,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.t
 
     public delegate void D();
     public delegate void GD<T>();
+
     public class Parent<T> where T : class
     {
         public int M1(object p1 = null)
@@ -963,6 +964,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.t
     public class Test
     {
         public static int FailCount = 0;
+
         public static void Eval(dynamic result, string comment)
         {
             if ((int)result != 0)

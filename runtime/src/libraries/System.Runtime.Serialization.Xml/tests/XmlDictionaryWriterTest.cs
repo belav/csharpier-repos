@@ -507,6 +507,7 @@ public static class XmlDictionaryWriterTest
             return sr.ReadToEnd();
         }
     }
+
     private static void SimulateWriteFragment(
         XmlDictionaryWriter writer,
         bool useFragmentAPI,
@@ -586,6 +587,7 @@ public static class XmlDictionaryWriterTest
     public class MemoryStreamWithBlockAsync : MemoryStream
     {
         private bool _blockAsync;
+
         public void blockAsync(bool blockAsync)
         {
             _blockAsync = blockAsync;

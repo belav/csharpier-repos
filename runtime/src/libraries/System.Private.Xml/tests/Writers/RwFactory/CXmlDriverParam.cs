@@ -70,6 +70,7 @@ namespace System.Xml.Tests
             XElement virtualNode,
             CXmlDriverParamRawNodes parentParams
         ) : base(testModuleNode, virtualNode, parentParams) { }
+
         public override XElement TestModule
         {
             get { return poriginalNode; }
@@ -83,6 +84,7 @@ namespace System.Xml.Tests
             XElement virtualNode,
             CXmlDriverParamRawNodes parentParams
         ) : base(testCaseNode, virtualNode, parentParams) { }
+
         public override XElement TestModule
         {
             get { return pparentParams.TestModule; }
@@ -100,6 +102,7 @@ namespace System.Xml.Tests
             XElement virtualNode,
             CXmlDriverParamRawNodes parentParams
         ) : base(variationNode, virtualNode, parentParams) { }
+
         public override XElement TestModule
         {
             get { return pparentParams.TestModule; }

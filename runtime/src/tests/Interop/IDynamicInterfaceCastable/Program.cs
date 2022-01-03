@@ -172,6 +172,7 @@ namespace IDynamicInterfaceCastableTests
     public class DynamicInterfaceCastableException : Exception
     {
         public static string ErrorFormat = "REQUESTED={0}";
+
         public DynamicInterfaceCastableException(RuntimeTypeHandle interfaceType)
             : base(string.Format(ErrorFormat, Type.GetTypeFromHandle(interfaceType))) { }
     }
@@ -218,6 +219,7 @@ namespace IDynamicInterfaceCastableTests
         }
 
         public static int ImplementedMethodReturnValue = -1;
+
         public int ImplementedMethod()
         {
             return ImplementedMethodReturnValue;

@@ -201,21 +201,25 @@ namespace System.Text.Json.SourceGeneration.Tests
             Type returnType,
             JsonSerializerOptions options = null
         ) => throw new NotImplementedException();
+
         protected internal override Task<T> DeserializeWrapper<T>(
             Stream utf8Json,
             JsonTypeInfo<T> jsonTypeInfo
         ) => throw new NotImplementedException();
+
         protected internal override Task SerializeWrapper<T>(
             Stream stream,
             T value,
             JsonSerializerOptions options = null
         ) => throw new NotImplementedException();
+
         protected internal override Task SerializeWrapper(
             Stream stream,
             object value,
             Type inputType,
             JsonSerializerOptions options = null
         ) => throw new NotImplementedException();
+
         protected internal override Task SerializeWrapper<T>(
             Stream stream,
             T value,

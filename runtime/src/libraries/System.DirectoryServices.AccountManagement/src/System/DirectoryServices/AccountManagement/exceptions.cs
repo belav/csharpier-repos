@@ -119,11 +119,13 @@ namespace System.DirectoryServices.AccountManagement
         {
             _errorCode = errorCode;
         }
+
         public PrincipalServerDownException(string message, Exception innerException, int errorCode)
             : base(message, innerException)
         {
             _errorCode = errorCode;
         }
+
         public PrincipalServerDownException(
             string message,
             Exception innerException,
@@ -169,6 +171,7 @@ namespace System.DirectoryServices.AccountManagement
         {
             _errorCode = errorCode;
         }
+
         public PrincipalOperationException(string message, Exception innerException, int errorCode)
             : base(message, innerException)
         {
@@ -205,6 +208,7 @@ namespace System.DirectoryServices.AccountManagement
         private const int RPC_S_OUT_OF_RESOURCES = 1721; // map to outofmemory exception
         internal const int RPC_S_SERVER_UNAVAILABLE = 1722; // map to ActiveDirectoryServerDownException
         internal const int RPC_S_CALL_FAILED = 1726; // map to ActiveDirectoryServerDownException
+
         // internal const int ERROR_DS_DRA_BAD_DN = 8439; //fix error CS0414: Warning as Error: is assigned but its value is never used
         // internal const int ERROR_DS_NAME_UNPARSEABLE = 8350; //fix error CS0414: Warning as Error: is assigned but its value is never used
         // internal const int ERROR_DS_UNKNOWN_ERROR = 8431; //fix error CS0414: Warning as Error: is assigned but its value is never used
@@ -213,6 +217,7 @@ namespace System.DirectoryServices.AccountManagement
         public const uint ERROR_HRESULT_LOGON_FAILURE = 0x8007052E;
         public const uint ERROR_HRESULT_CONSTRAINT_VIOLATION = 0x8007202f;
         public const uint ERROR_LOGON_FAILURE = 0x31;
+
         // public const uint ERROR_LDAP_INVALID_CREDENTIALS = 49; //fix error CS0414: Warning as Error: is assigned but its value is never used
         //
         // This method maps some common COM Hresults to

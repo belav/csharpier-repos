@@ -85,6 +85,7 @@ public sealed class SealedClass1
 }
 
 public sealed class SealedClass2 { }
+
 public class NotSealedClass1 { }
 
 public static class Program

@@ -295,6 +295,7 @@ namespace System.CodeDom.Tests
         }
 
         private static string s_tempDirectory = null;
+
         private static string TempDirectory()
         {
             if (s_tempDirectory == null)

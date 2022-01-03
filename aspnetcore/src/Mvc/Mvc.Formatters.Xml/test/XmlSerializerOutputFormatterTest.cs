@@ -681,6 +681,7 @@ public class XmlSerializerOutputFormatterTest
 
         public int MyProperty { get; set; }
     }
+
     private class IndentingXmlSerializerOutputFormatter : XmlSerializerOutputFormatter
     {
         public override XmlWriter CreateXmlWriter(

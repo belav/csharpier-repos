@@ -25,6 +25,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class TestClass
     {
         public int field;
+
         public static implicit operator TestClass(Base2 p1)
         {
             return new TestClass() { field = p1.field };
@@ -84,6 +85,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class TestClass
     {
         public int field;
+
         public static explicit operator TestClass(Base2 p1)
         {
             return new TestClass() { field = p1.field };
@@ -188,6 +190,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         public int field;
+
         public static implicit operator Test(string p1)
         {
             return new Test() { field = 10 };
@@ -246,6 +249,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public struct TestStruct
     {
         public int field;
+
         public static explicit operator TestStruct(Base2 p1)
         {
             return new TestStruct() { field = p1.field };
@@ -433,6 +437,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         private int _f1 = 10;
+
         public Test() { }
 
         public Test(int p1)

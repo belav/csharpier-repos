@@ -8,6 +8,7 @@ namespace JitTest
     internal class LCSO
     {
         private LCSO _m_child;
+
         public LCSO(LCSO child)
         {
             _m_child = child;

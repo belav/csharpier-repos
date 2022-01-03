@@ -21,6 +21,7 @@ namespace Test
             }
             return arr[0];
         }
+
         public static int Main()
         {
             try

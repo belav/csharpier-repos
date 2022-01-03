@@ -212,6 +212,7 @@ public static class UriHelper
             request.QueryString
         );
     }
+
     /// <summary>
     /// Returns the relative URI.
     /// </summary>

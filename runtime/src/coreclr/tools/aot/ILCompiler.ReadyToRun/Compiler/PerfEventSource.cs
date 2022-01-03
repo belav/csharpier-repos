@@ -98,6 +98,7 @@ namespace ILCompiler
         {
             WriteEvent(1);
         }
+
         [Event(2, Level = EventLevel.Informational)]
         private void LoadingStop()
         {
@@ -109,6 +110,7 @@ namespace ILCompiler
         {
             WriteEvent(3);
         }
+
         [Event(4, Level = EventLevel.Informational)]
         private void EmittingStop()
         {
@@ -120,6 +122,7 @@ namespace ILCompiler
         {
             WriteEvent(5);
         }
+
         [Event(6, Level = EventLevel.Informational)]
         private void CompilationStop()
         {
@@ -131,6 +134,7 @@ namespace ILCompiler
         {
             WriteEvent(7);
         }
+
         [Event(8, Level = EventLevel.Informational)]
         private void JitStop()
         {
@@ -142,16 +146,19 @@ namespace ILCompiler
         {
             WriteEvent(9);
         }
+
         [Event(10, Level = EventLevel.Informational)]
         private void JitMethodStop()
         {
             WriteEvent(10);
         }
+
         [Event(11, Level = EventLevel.Informational)]
         private void CommandLineProcessingStart()
         {
             WriteEvent(11);
         }
+
         [Event(12, Level = EventLevel.Informational)]
         private void CommandLineProcessingStop()
         {

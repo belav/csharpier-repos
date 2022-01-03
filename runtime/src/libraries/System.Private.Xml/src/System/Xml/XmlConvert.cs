@@ -349,6 +349,7 @@ namespace System.Xml
         private const int EncodedCharLength = 7; // ("_xFFFF_".Length);
         private static volatile Regex? s_encodeCharPattern;
         private static volatile Regex? s_decodeCharPattern;
+
         private static int FromHex(char digit)
         {
             return HexConverter.FromChar(digit);

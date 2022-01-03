@@ -13,6 +13,7 @@ public class Test_Normal
     public class Dummy
     {
         public static int flag = 0;
+
         ~Dummy()
         {
             Console.WriteLine("In Finalize() of Dummy");

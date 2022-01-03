@@ -222,6 +222,7 @@ public class MiddlewareTests
     private class TestQueueForResettableBoolean : IQueuePolicy
     {
         public ResettableBooleanCompletionSource Source;
+
         public TestQueueForResettableBoolean()
         {
             Source = new ResettableBooleanCompletionSource(TestUtils.CreateStackPolicy(1));

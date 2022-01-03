@@ -9,8 +9,11 @@ namespace AutoMapper.UnitTests.MappingInheritance
         {
             public int Value { get; set; }
         }
+
         public class B : A { }
+
         public class C : B { }
+
         public class D : A { }
 
         public class ADto
@@ -19,7 +22,9 @@ namespace AutoMapper.UnitTests.MappingInheritance
         }
 
         public class BDto : ADto { }
+
         public class CDto : BDto { }
+
         public class DDto : ADto { }
 
         protected override MapperConfiguration Configuration { get; } =

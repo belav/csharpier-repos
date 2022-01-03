@@ -171,6 +171,7 @@ namespace System.Text.Json.Serialization.Tests
             [JsonConverter(typeof(JsonStringEnumConverter))]
             public DayOfWeek WorkStart { get; set; }
             public DayOfWeek WorkEnd { get; set; }
+
             [JsonConverter(typeof(LowerCaseEnumConverter))]
             public DayOfWeek WeekEnd { get; set; }
         }

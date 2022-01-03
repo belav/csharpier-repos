@@ -57,6 +57,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             ISymbol symbol = null,
             [CallerMemberName] string callerName = null
         );
+
         protected virtual void OnOptions(
             AnalyzerOptions options,
             [CallerMemberName] string callerName = null

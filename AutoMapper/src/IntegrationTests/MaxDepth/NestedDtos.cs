@@ -54,6 +54,7 @@ namespace AutoMapper.IntegrationTests.Net4
             {
                 Database.SetInitializer<TestContext>(new DatabaseInitializer());
             }
+
             public DbSet<Art> Arts { get; set; }
         }
 

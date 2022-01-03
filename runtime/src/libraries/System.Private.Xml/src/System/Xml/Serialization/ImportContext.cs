@@ -86,6 +86,7 @@ namespace System.Xml.Serialization
         private Hashtable? _hash;
         private Hashtable? _objectCache;
         private StringCollection? _warnings;
+
         // UNDONE remove me soon, this is debug only code
         internal Hashtable looks = new Hashtable();
         private Hashtable Graph

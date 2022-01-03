@@ -56,6 +56,7 @@ namespace System.IO
             else
                 base.Flush();
         }
+
         public override Task FlushAsync(CancellationToken cancellationToken) =>
             FlushAsyncFunc != null
                 ? FlushAsyncFunc(cancellationToken)
@@ -67,6 +68,7 @@ namespace System.IO
 
         public override int Read(byte[] buffer, int offset, int count) =>
             ReadFunc != null ? ReadFunc(buffer, offset, count) : base.Read(buffer, offset, count);
+
         public override Task<int> ReadAsync(
             byte[] buffer,
             int offset,
@@ -76,6 +78,7 @@ namespace System.IO
             ReadAsyncArrayFunc != null
                 ? ReadAsyncArrayFunc(buffer, offset, count, cancellationToken)
                 : base.ReadAsync(buffer, offset, count, cancellationToken);
+
         public override ValueTask<int> ReadAsync(
             Memory<byte> buffer,
             CancellationToken cancellationToken = default
@@ -86,6 +89,7 @@ namespace System.IO
 
         public override long Seek(long offset, SeekOrigin origin) =>
             SeekFunc != null ? SeekFunc(offset, origin) : base.Seek(offset, origin);
+
         public override void SetLength(long value)
         {
             if (SetLengthFunc != null)
@@ -101,6 +105,7 @@ namespace System.IO
             else
                 base.Write(buffer, offset, count);
         }
+
         public override Task WriteAsync(
             byte[] buffer,
             int offset,
@@ -110,6 +115,7 @@ namespace System.IO
             WriteAsyncArrayFunc != null
                 ? WriteAsyncArrayFunc(buffer, offset, count, cancellationToken)
                 : base.WriteAsync(buffer, offset, count, cancellationToken);
+
         public override ValueTask WriteAsync(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default
@@ -125,6 +131,7 @@ namespace System.IO
             else
                 base.Dispose(disposing);
         }
+
         public override ValueTask DisposeAsync() =>
             DisposeAsyncFunc != null ? DisposeAsyncFunc() : base.DisposeAsync();
     }

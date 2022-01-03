@@ -13,6 +13,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public string[] ArrayOfItems { get; set; }
         }
+
         class Destination
         {
             public string[] ArrayOfItems { get; set; }

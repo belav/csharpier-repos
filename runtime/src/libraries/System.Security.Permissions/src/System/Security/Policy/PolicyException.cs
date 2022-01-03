@@ -12,9 +12,12 @@ namespace System.Security.Policy
     public partial class PolicyException : System.SystemException
     {
         public PolicyException() { }
+
         protected PolicyException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
+
         public PolicyException(string message) : base(message) { }
+
         public PolicyException(string message, Exception exception) : base(message, exception) { }
     }
 }

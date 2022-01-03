@@ -4,11 +4,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Diagnostics;
 using System.Reflection;
+
 namespace AutoMapper.Execution
 {
     using static Expression;
     using static ExpressionBuilder;
     using Internal;
+
     public class TypeMapPlanBuilder
     {
         private static readonly MethodInfo CreateProxyMethod =
@@ -21,6 +23,7 @@ namespace AutoMapper.Execution
         private readonly TypeMap _typeMap;
         private List<ParameterExpression> _propertyMapVariables;
         private List<Expression> _propertyMapExpressions;
+
         public TypeMapPlanBuilder(IGlobalConfiguration configurationProvider, TypeMap typeMap)
         {
             _configurationProvider = configurationProvider;
@@ -29,12 +32,15 @@ namespace AutoMapper.Execution
             _initialDestination = Parameter(typeMap.DestinationTypeToUse, "destination");
             _destination = Variable(_initialDestination.Type, "typeMapDestination");
         }
+
         public Type DestinationType => _destination.Type;
         public ParameterExpression Source { get; }
+
         private static AutoMapperMappingException MemberMappingError(
             Exception innerException,
             MemberMap memberMap
         ) => new AutoMapperMappingException("Error mapping types.", innerException, memberMap);
+
         public LambdaExpression CreateMapperLambda(HashSet<TypeMap> typeMapsPath)
         {
             var parameters = new[] { Source, _initialDestination, ContextParameter };
@@ -79,6 +85,7 @@ namespace AutoMapper.Execution
                 return Call(ToType(converter, converterInterfaceType), "Convert", parameters);
             }
         }
+
         private static void CheckForCycles(
             IGlobalConfiguration configurationProvider,
             TypeMap typeMap,
@@ -177,6 +184,7 @@ namespace AutoMapper.Execution
                     $"Setting PreserveReferences: {typeMap.SourceType} - {typeMap.DestinationType} => {memberTypeMap.SourceType} - {memberTypeMap.DestinationType}"
                 );
         }
+
         private Expression CreateDestinationFunc()
         {
             var newDestFunc = ToType(CreateNewDestinationFunc(), DestinationType);
@@ -200,6 +208,7 @@ namespace AutoMapper.Execution
                 _destination
             );
         }
+
         private Expression CreateAssignmentFunc(Expression createDestination)
         {
             var actions = new List<Expression> { createDestination };
@@ -267,6 +276,7 @@ namespace AutoMapper.Execution
                 return includedMembersVariables;
             }
         }
+
         private Expression TryPathMap(PathMap pathMap)
         {
             var destination =
@@ -321,6 +331,7 @@ namespace AutoMapper.Execution
                     };
             }
         }
+
         private Expression CreateMapperFunc(Expression assignmentFunc)
         {
             var mapperFunc = assignmentFunc;
@@ -335,6 +346,7 @@ namespace AutoMapper.Execution
             }
             return CheckReferencesCache(mapperFunc);
         }
+
         private Expression CheckReferencesCache(Expression valueBuilder)
         {
             if (!_typeMap.PreserveReferences)
@@ -349,6 +361,7 @@ namespace AutoMapper.Execution
             );
             return Coalesce(ToType(getCachedDestination, DestinationType), valueBuilder);
         }
+
         private Expression CreateNewDestinationFunc() =>
             _typeMap switch
             {
@@ -375,6 +388,7 @@ namespace AutoMapper.Execution
                   => ServiceLocator(DestinationType),
                 _ => ObjectFactory.GenerateConstructorExpression(DestinationType)
             };
+
         private Expression ConstructorMapping(ConstructorMap constructorMap)
         {
             var ctorArgs = constructorMap.CtorParams.Select(CreateConstructorParameterExpression);
@@ -391,6 +405,7 @@ namespace AutoMapper.Execution
                 .Concat(new[] { CheckReferencesCache(New(constructorMap.Ctor, variables)) });
             return Block(variables, body);
         }
+
         private Expression CreateConstructorParameterExpression(
             ConstructorParameterMap ctorParamMap
         )
@@ -411,6 +426,7 @@ namespace AutoMapper.Execution
             );
             return TryMemberMap(ctorParamMap, tryMap);
         }
+
         private Expression TryPropertyMap(PropertyMap propertyMap)
         {
             var propertyMapExpression = CreatePropertyMapFunc(
@@ -420,6 +436,7 @@ namespace AutoMapper.Execution
             );
             return TryMemberMap(propertyMap, propertyMapExpression);
         }
+
         private static Expression TryMemberMap(MemberMap memberMap, Expression memberMapExpression)
         {
             var newException = Call(MappingError, ExceptionParameter, Constant(memberMap));
@@ -428,6 +445,7 @@ namespace AutoMapper.Execution
                 Catch(ExceptionParameter, Throw(newException, memberMapExpression.Type))
             );
         }
+
         private Expression CreatePropertyMapFunc(
             MemberMap memberMap,
             Expression destination,
@@ -572,6 +590,7 @@ namespace AutoMapper.Execution
                 return mappedMemberVariable;
             }
         }
+
         private Expression BuildValueResolverFunc(MemberMap memberMap, Expression destValueExpr)
         {
             var customSource = GetCustomSource(memberMap);
@@ -647,10 +666,13 @@ namespace AutoMapper.Execution
                 );
             }
         }
+
         private Expression GetCustomSource(MemberMap memberMap) =>
             memberMap.IncludedMember?.Variable ?? Source;
+
         private static Expression ServiceLocator(Type type) =>
             Call(ContextParameter, ContextCreate, Constant(type));
+
         private Expression BuildResolveCall(
             Expression source,
             Expression destValueExpr,
@@ -685,6 +707,7 @@ namespace AutoMapper.Execution
                 .ToArray();
             return Call(ToType(resolverInstance, iResolverType), "Resolve", parameters);
         }
+
         private Expression BuildConvertCall(
             Expression source,
             MemberMap memberMap,

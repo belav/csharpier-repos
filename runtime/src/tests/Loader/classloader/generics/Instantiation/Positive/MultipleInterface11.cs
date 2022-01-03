@@ -19,6 +19,7 @@ class Gen<T> : IGenX<T>, IGenY<T>
     {
         return "IGenX.m";
     }
+
     string IGenY<T>.m(T t2)
     {
         return "IGenY.m";
@@ -29,6 +30,7 @@ public class Test_MultipleInterface11
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

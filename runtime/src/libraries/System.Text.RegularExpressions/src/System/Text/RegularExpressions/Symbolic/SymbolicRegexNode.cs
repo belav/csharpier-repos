@@ -13,10 +13,13 @@ namespace System.Text.RegularExpressions.Symbolic
     internal sealed class SymbolicRegexNode<S> where S : notnull
     {
         internal const string EmptyCharClass = "[]";
+
         /// <summary>Some byte other than 0 to represent true</summary>
         internal const byte TrueByte = 1;
+
         /// <summary>Some byte other than 0 to represent false</summary>
         internal const byte FalseByte = 2;
+
         /// <summary>The undefined value is the default value 0</summary>
         internal const byte UndefinedByte = 0;
 
@@ -1114,6 +1117,7 @@ namespace System.Text.RegularExpressions.Symbolic
         }
 
         private TransitionRegex<S>? _transitionRegex;
+
         /// <summary>Computes the symbolic derivative as a transition regex</summary>
         internal TransitionRegex<S> MkDerivative()
         {

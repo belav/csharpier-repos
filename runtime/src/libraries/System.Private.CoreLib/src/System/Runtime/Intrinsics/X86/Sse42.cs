@@ -51,11 +51,13 @@ namespace System.Runtime.Intrinsics.X86
         ///   CRC32 reg, reg/m8
         /// </summary>
         public static uint Crc32(uint crc, byte data) => Crc32(crc, data);
+
         /// <summary>
         /// unsigned int _mm_crc32_u16 (unsigned int crc, unsigned short v)
         ///   CRC32 reg, reg/m16
         /// </summary>
         public static uint Crc32(uint crc, ushort data) => Crc32(crc, data);
+
         /// <summary>
         /// unsigned int _mm_crc32_u32 (unsigned int crc, unsigned int v)
         ///   CRC32 reg, reg/m32

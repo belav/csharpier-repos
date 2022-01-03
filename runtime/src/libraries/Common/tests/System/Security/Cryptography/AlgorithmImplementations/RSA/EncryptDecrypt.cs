@@ -11,6 +11,7 @@ namespace System.Security.Cryptography.Rsa.Tests
     {
         protected override byte[] Encrypt(RSA rsa, byte[] data, RSAEncryptionPadding padding) =>
             rsa.Encrypt(data, padding);
+
         protected override byte[] Decrypt(RSA rsa, byte[] data, RSAEncryptionPadding padding) =>
             rsa.Decrypt(data, padding);
 

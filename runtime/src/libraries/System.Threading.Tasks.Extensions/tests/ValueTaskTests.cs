@@ -1940,6 +1940,7 @@ namespace System.Threading.Tasks.Tests
                 GetStatusFunc?.Invoke(token) ?? ValueTaskSourceStatus.Pending;
 
             public void GetResult(short token) => GetResultAction?.Invoke(token);
+
             T IValueTaskSource<T>.GetResult(short token) =>
                 GetResultFunc != null ? GetResultFunc(token) : default;
 

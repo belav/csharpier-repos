@@ -43,6 +43,7 @@ namespace System.Xml.Tests
             Exception e,
             CTestModule testModule
         ) : this(name, desc, e, tagVARIATION_STATUS.eVariationStatusAborted, testModule) { }
+
         internal CXmlDriverErrorTestCase(
             string name,
             string desc,
@@ -70,6 +71,7 @@ namespace System.Xml.Tests
     internal class CXmlDriverEmptyTestCase : CTestCase
     {
         private string _message;
+
         internal CXmlDriverEmptyTestCase(
             string name,
             string desc,

@@ -408,14 +408,17 @@ namespace System.Security.Cryptography.Algorithms.Tests
         {
             public override RSAParameters ExportParameters(bool includePrivateParameters) =>
                 throw new NotImplementedException();
+
             public override void ImportParameters(RSAParameters parameters) =>
                 throw new NotImplementedException();
+
             public new byte[] HashData(
                 byte[] data,
                 int offset,
                 int count,
                 HashAlgorithmName hashAlgorithm
             ) => base.HashData(data, offset, count, hashAlgorithm);
+
             public new byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) =>
                 base.HashData(data, hashAlgorithm);
         }
@@ -474,6 +477,7 @@ namespace System.Security.Cryptography.Algorithms.Tests
 
             public override RSAParameters ExportParameters(bool includePrivateParameters) =>
                 throw new NotImplementedException();
+
             public override void ImportParameters(RSAParameters parameters) =>
                 throw new NotImplementedException();
         }

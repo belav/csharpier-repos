@@ -12,12 +12,14 @@ namespace Test
         {
             return new double[7];
         }
+
         public static uint[] Method2(uint param1, BB param3)
         {
             double d = 0.0d;
             uint u = (uint)(param3.Method3(param3.Method3(d)[0])[0]);
             return new uint[4];
         }
+
         static int Main()
         {
             BB a = new BB();

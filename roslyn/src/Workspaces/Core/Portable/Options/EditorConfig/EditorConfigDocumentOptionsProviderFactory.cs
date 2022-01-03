@@ -34,6 +34,7 @@ namespace Microsoft.CodeAnalysis.Options.EditorConfig
             private sealed class DocumentOptions : IDocumentOptions
             {
                 private readonly ImmutableDictionary<string, string> _options;
+
                 public DocumentOptions(ImmutableDictionary<string, string> options) =>
                     _options = options;
 

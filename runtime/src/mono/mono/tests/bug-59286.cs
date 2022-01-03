@@ -1,6 +1,7 @@
 using System;
 
 class A : T { }
+
 class T
 {
     static int Main()

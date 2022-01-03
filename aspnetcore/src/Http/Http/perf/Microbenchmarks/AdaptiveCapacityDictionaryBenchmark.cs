@@ -201,6 +201,7 @@ public class AdaptiveCapacityDictionaryBenchmark
             _ = _dictTen[val.Key];
         }
     }
+
     [Benchmark]
     public void SixValues_Dict()
     {
@@ -211,6 +212,7 @@ public class AdaptiveCapacityDictionaryBenchmark
             _ = _dictTen[val.Key];
         }
     }
+
     [Benchmark]
     public void SevenValues_Dict()
     {
@@ -221,6 +223,7 @@ public class AdaptiveCapacityDictionaryBenchmark
             _ = _dictTen[val.Key];
         }
     }
+
     [Benchmark]
     public void EightValues_Dict()
     {
@@ -231,6 +234,7 @@ public class AdaptiveCapacityDictionaryBenchmark
             _ = _dictTen[val.Key];
         }
     }
+
     [Benchmark]
     public void NineValues_Dict()
     {

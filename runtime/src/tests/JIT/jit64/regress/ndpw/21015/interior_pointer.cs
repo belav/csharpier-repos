@@ -13,6 +13,7 @@ internal struct T
         S = _S;
         SomeOtherString = null;
     }
+
     //
     //For the testcase to fail, get_TheString must be inlined
     //into bar() which our current heuristics do

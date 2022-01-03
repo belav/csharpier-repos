@@ -799,6 +799,7 @@ namespace System.PrivateUri.Tests
 
                 return result.ToString();
             }
+
             public static bool IsIriAllowedSurrogate(string pair)
             {
                 bool inRange = _iriAllowedSurrogateRanges.Any(
@@ -814,6 +815,7 @@ namespace System.PrivateUri.Tests
             {
                 return _iriDisallowedBidi.Contains(c);
             }
+
             public static bool IsIriReserved(char c)
             {
                 /*

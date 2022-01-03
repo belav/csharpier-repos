@@ -9,6 +9,7 @@ public struct S_CHARArray_ByValTStr
 {
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 4)]
     public string arr;
+
     public S_CHARArray_ByValTStr(string parr)
     {
         arr = parr;

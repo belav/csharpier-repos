@@ -32,6 +32,7 @@ namespace System
         // Instead, we set a flag. Before reading a cached value, a call to CheckTerminalSettingsInvalidated
         // will invalidate the cached values if a signal has occured.
         private static int s_cursorVersion; // Gets incremented each time the cursor position changed.
+
         // Used to synchronize between lock (Console.Out) blocks.
         private static int s_cursorLeft; // Cached CursorLeft, -1 when invalid.
         private static int s_cursorTop; // Cached CursorTop, invalid when s_cursorLeft == -1.
@@ -1054,12 +1055,16 @@ namespace System
 
         /// <summary>Value used to indicate that a special character code isn't available.</summary>
         internal static byte s_posixDisableValue;
+
         /// <summary>Special control character code used to represent an erase (backspace).</summary>
         private static byte s_veraseCharacter;
+
         /// <summary>Special control character that represents the end of a line.</summary>
         internal static byte s_veolCharacter;
+
         /// <summary>Special control character that represents the end of a line.</summary>
         internal static byte s_veol2Character;
+
         /// <summary>Special control character that represents the end of a file.</summary>
         internal static byte s_veofCharacter;
 
@@ -1145,32 +1150,46 @@ namespace System
 
             /// <summary>The format string to use to change the foreground color.</summary>
             public readonly string? Foreground;
+
             /// <summary>The format string to use to change the background color.</summary>
             public readonly string? Background;
+
             /// <summary>The format string to use to reset the foreground and background colors.</summary>
             public readonly string? Reset;
+
             /// <summary>The maximum number of colors supported by the terminal.</summary>
             public readonly int MaxColors;
+
             /// <summary>The number of columns in a format.</summary>
             public readonly int Columns;
+
             /// <summary>The number of lines in a format.</summary>
             public readonly int Lines;
+
             /// <summary>The format string to use to make cursor visible.</summary>
             public readonly string? CursorVisible;
+
             /// <summary>The format string to use to make cursor invisible</summary>
             public readonly string? CursorInvisible;
+
             /// <summary>The format string to use to set the window title.</summary>
             public readonly string? Title;
+
             /// <summary>The format string to use for an audible bell.</summary>
             public readonly string? Bell;
+
             /// <summary>The format string to use to clear the terminal.</summary>
             public readonly string? Clear;
+
             /// <summary>The format string to use to set the position of the cursor.</summary>
             public readonly string? CursorAddress;
+
             /// <summary>The format string to use to move the cursor to the left.</summary>
             public readonly string? CursorLeft;
+
             /// <summary>The format string to use to clear to the end of line.</summary>
             public readonly string? ClrEol;
+
             /// <summary>The ANSI-compatible string for the Cursor Position report request.</summary>
             /// <remarks>
             /// This should really be in user string 7 in the terminfo file, but some terminfo databases
@@ -1180,6 +1199,7 @@ namespace System
             /// of outputting the sequence on some terminal that's not compatible.
             /// </remarks>
             public const string CursorPositionReport = "\x1B[6n";
+
             /// <summary>
             /// The dictionary of keystring to ConsoleKeyInfo.
             /// Only some members of the ConsoleKeyInfo are used; in particular, the actual char is ignored.
@@ -1191,8 +1211,10 @@ namespace System
 
             /// <summary> Max key length </summary>
             public readonly int MaxKeyFormatLength;
+
             /// <summary> Min key length </summary>
             public readonly int MinKeyFormatLength;
+
             /// <summary>The ANSI string used to enter "application" / "keypad transmit" mode.</summary>
             public readonly string? KeypadXmit;
 

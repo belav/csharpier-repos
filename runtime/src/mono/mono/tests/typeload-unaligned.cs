@@ -14,6 +14,7 @@ public struct X
 {
     [FieldOffset(0)]
     public short a;
+
     [FieldOffset(2)]
     public Z z; // Unaligned reference
 }

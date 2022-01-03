@@ -35,6 +35,7 @@ namespace System.Runtime.Intrinsics.X86
             /// This intrinisc is only available on 64-bit processes
             /// </summary>
             public static long ConvertToInt64(Vector128<float> value) => ConvertToInt64(value);
+
             /// <summary>
             /// __m128 _mm_cvtsi64_ss (__m128 a, __int64 b)
             ///   CVTSI2SS xmm, reg/m64

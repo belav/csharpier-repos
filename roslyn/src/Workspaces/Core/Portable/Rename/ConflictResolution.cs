@@ -48,6 +48,7 @@ namespace Microsoft.CodeAnalysis.Rename
 
 #nullable disable warnings
         public ConflictResolution(string errorMessage) : this() => ErrorMessage = errorMessage;
+
 #nullable enable warnings
 
         public ConflictResolution(

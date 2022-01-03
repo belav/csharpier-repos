@@ -16,6 +16,7 @@ public enum TestEnum
 public struct AA
 {
     public object m_objField1;
+
     public static long Static1(
         Array param1,
         ushort[,] param2,
@@ -95,6 +96,7 @@ public struct AA
         }
         return App.m_lFwd1;
     }
+
     public static TestEnum[] Static2()
     {
         AA[,] local15 = (new AA[47u, 85u]);
@@ -184,6 +186,7 @@ public class App
         catch (Exception) { }
         return 100;
     }
+
     public static long m_lFwd1;
     public static bool m_bFwd2;
     public static ulong m_ulFwd3;

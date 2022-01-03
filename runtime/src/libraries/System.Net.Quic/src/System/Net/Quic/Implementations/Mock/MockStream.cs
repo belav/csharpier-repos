@@ -198,6 +198,7 @@ namespace System.Net.Quic.Implementations.Mock
         {
             throw new NotImplementedException();
         }
+
         internal override ValueTask WriteAsync(
             ReadOnlySequence<byte> buffers,
             bool endStream,

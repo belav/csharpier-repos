@@ -455,6 +455,7 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         var responseBody = await Client.GetStringAsync("/Home/Product");
         Assert.Equal("Get Product", responseBody);
     }
+
     [Fact]
     public async Task ActionMethod_ReturningActionMethodOfT_WithBadRequest()
     {

@@ -20,6 +20,7 @@ namespace System.Drawing
         public abstract object Clone();
 
         protected internal void SetNativeBrush(IntPtr brush) => SetNativeBrushInternal(brush);
+
         internal void SetNativeBrushInternal(IntPtr brush) => _nativeBrush = brush;
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]

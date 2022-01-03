@@ -20,6 +20,7 @@ namespace ILCompiler.Reflection.ReadyToRun
     {
         private SignatureDecoder _decoder;
         public ReadyToRunFixupKind FixupKind { get; private set; }
+
         public ReadyToRunSignature(SignatureDecoder decoder, ReadyToRunFixupKind fixupKind)
         {
             _decoder = decoder;
@@ -1197,6 +1198,7 @@ namespace ILCompiler.Reflection.ReadyToRun
             );
         }
     }
+
     public class TextSignatureDecoderContext
     {
         public TextSignatureDecoderContext(

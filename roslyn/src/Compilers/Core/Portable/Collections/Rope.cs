@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis
         public abstract override string ToString();
         public abstract int Length { get; }
         protected abstract IEnumerable<char> GetChars();
+
         private Rope() { }
 
         /// <summary>
@@ -86,9 +87,13 @@ namespace Microsoft.CodeAnalysis
         private sealed class StringRope : Rope
         {
             private readonly string _value;
+
             public StringRope(string value) => _value = value;
+
             public override string ToString() => _value;
+
             public override int Length => _value.Length;
+
             protected override IEnumerable<char> GetChars() => _value;
         }
 

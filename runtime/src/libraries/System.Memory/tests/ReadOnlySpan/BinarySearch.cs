@@ -187,6 +187,7 @@ namespace System.SpanTests
             var index = span.BinarySearch(value);
             Assert.Equal(expectedIndex, index);
         }
+
         private static void TestReadOnlySpan<T, TComparable>(
             T[] array,
             TComparable value,
@@ -197,6 +198,7 @@ namespace System.SpanTests
             var index = span.BinarySearch(value);
             Assert.Equal(expectedIndex, index);
         }
+
         private static void TestIComparableSpan<T, TComparable>(
             T[] array,
             TComparable value,
@@ -207,6 +209,7 @@ namespace System.SpanTests
             var index = span.BinarySearch((IComparable<T>)value);
             Assert.Equal(expectedIndex, index);
         }
+
         private static void TestIComparableReadOnlySpan<T, TComparable>(
             T[] array,
             TComparable value,
@@ -217,6 +220,7 @@ namespace System.SpanTests
             var index = span.BinarySearch((IComparable<T>)value);
             Assert.Equal(expectedIndex, index);
         }
+
         private static void TestComparerSpan<T, TComparable>(
             T[] array,
             TComparable value,
@@ -227,6 +231,7 @@ namespace System.SpanTests
             var index = span.BinarySearch(value, Comparer<T>.Default);
             Assert.Equal(expectedIndex, index);
         }
+
         private static void TestComparerReadOnlySpan<T, TComparable>(
             T[] array,
             TComparable value,

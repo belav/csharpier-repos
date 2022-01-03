@@ -1313,6 +1313,7 @@ namespace System.Reflection.Emit
                 return t;
             }
         }
+
         /*
                 internal void GenerateDebugInfo (ISymbolWriter symbolWriter)
                 {

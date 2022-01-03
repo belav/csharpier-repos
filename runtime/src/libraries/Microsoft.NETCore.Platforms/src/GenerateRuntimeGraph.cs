@@ -418,6 +418,7 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         }
 
         private static XNamespace s_dgmlns = @"http://schemas.microsoft.com/vs/2009/dgml";
+
         private static void WriteRuntimeGraph(RuntimeGraph graph, string dependencyGraphFilePath)
         {
             var doc = new XDocument(new XElement(s_dgmlns + "DirectedGraph"));

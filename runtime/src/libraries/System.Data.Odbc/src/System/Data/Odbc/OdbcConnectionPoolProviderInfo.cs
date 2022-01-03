@@ -31,6 +31,7 @@ namespace System.Data.Odbc
 
         // SSS_WARNINGS_OFF
         private bool _noSqlCASSColumnKey;
+
         // SSS_WARNINGS_ON
 
         // flags for unsupported Functions
@@ -147,6 +148,7 @@ namespace System.Data.Odbc
             get { return _noSqlCASSColumnKey; }
             set { _noSqlCASSColumnKey = value; }
         }
+
         // SSS_WARNINGS_ON
 
         internal bool NoSqlPrimaryKeys

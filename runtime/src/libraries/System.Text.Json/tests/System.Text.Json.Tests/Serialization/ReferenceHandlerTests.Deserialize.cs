@@ -1958,6 +1958,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         private class Derived : Base { }
+
         private class Base { }
     }
 }

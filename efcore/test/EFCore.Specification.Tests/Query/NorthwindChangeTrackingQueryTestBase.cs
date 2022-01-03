@@ -228,6 +228,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal("425-882-8080", trackedEntity0.Property(c => c.Phone).OriginalValue);
             Assert.Equal("425-882-8080", trackedEntity1.Property(c => c.Phone).OriginalValue);
         }
+
         // ReSharper restore PossibleMultipleEnumeration
 
         [ConditionalFact]

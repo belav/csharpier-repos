@@ -5,6 +5,7 @@
     ParentAssemblyId = @"%%ParentAssemblyId%%",
     Version = @"1.0.0.0"
 )]
+
 namespace Microsoft.Xml.Serialization.GeneratedAssembly
 {
     public class XmlSerializationWriter1 : System.Xml.Serialization.XmlSerializationWriter
@@ -24222,6 +24223,7 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
         {
             return new XmlSerializationReader1();
         }
+
         protected override System.Xml.Serialization.XmlSerializationWriter CreateWriter()
         {
             return new XmlSerializationWriter1();
@@ -27235,6 +27237,7 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 return typedSerializers;
             }
         }
+
         public override System.Boolean CanSerialize(System.Type type)
         {
             if (type == typeof(global::TypeWithXmlElementProperty))
@@ -27452,6 +27455,7 @@ namespace Microsoft.Xml.Serialization.GeneratedAssembly
                 return true;
             return false;
         }
+
         public override System.Xml.Serialization.XmlSerializer GetSerializer(System.Type type)
         {
             if (type == typeof(global::TypeWithXmlElementProperty))

@@ -18,8 +18,10 @@ namespace System.Net.Http
 
         /// <summary>Cancellation token for the current wait operation.</summary>
         private CancellationToken _cancellationToken;
+
         /// <summary>Cancellation registration for the current wait operation.</summary>
         private CancellationTokenRegistration _registration;
+
         /// <summary><see cref="IValueTaskSource"/> implementation.</summary>
         private ManualResetValueTaskSourceCore<int> _source;
 
@@ -27,6 +29,7 @@ namespace System.Net.Http
 
         /// <summary>Amount of credit desired by this waiter.</summary>
         public int Amount;
+
         /// <summary>Next waiter in a list of waiters.</summary>
         public CreditWaiter? Next;
 
@@ -109,8 +112,10 @@ namespace System.Net.Http
             _registration.Unregister() || !_cancellationToken.CanBeCanceled;
 
         int IValueTaskSource<int>.GetResult(short token) => _source.GetResult(token);
+
         ValueTaskSourceStatus IValueTaskSource<int>.GetStatus(short token) =>
             _source.GetStatus(token);
+
         void IValueTaskSource<int>.OnCompleted(
             Action<object?> continuation,
             object? state,

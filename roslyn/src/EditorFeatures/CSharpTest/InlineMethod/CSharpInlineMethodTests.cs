@@ -949,6 +949,7 @@ public class TestClass
     }
 ##}"
             );
+
         [Fact]
         public Task TestInlineMethodWithNoElementInParamsArray() =>
             TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
@@ -1273,6 +1274,7 @@ public class TestClass
     }
 }"
             );
+
         [Fact]
         public Task TestInlineMethodWithConditionalExpression() =>
             TestVerifier.TestInRegularAndScriptInTheSameFileAsync(
@@ -2029,6 +2031,7 @@ public class TestClass
     }
 ##}"
             );
+
         [Fact]
         public Task TestInlineMethodForLambda1() =>
             TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(

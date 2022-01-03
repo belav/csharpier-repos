@@ -24,6 +24,7 @@ namespace MS.Internal.Xml.XPath
             _advance1 = true;
             _advance2 = true;
         }
+
         private UnionExpr(UnionExpr other) : base(other)
         {
             this.qy1 = Clone(other.qy1);

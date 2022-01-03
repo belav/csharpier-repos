@@ -331,6 +331,7 @@ namespace System.Management
 
             return dmtfDateTime;
         }
+
         /// <summary>
         /// <para>Converts a given DMTF time interval to <see cref='System.TimeSpan'/> object.</para>
         /// </summary>

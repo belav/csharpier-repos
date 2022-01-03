@@ -215,10 +215,12 @@ namespace ILCompiler.IBC
 
             public readonly uint Token;
             public readonly BlobType Type;
+
             public override int GetHashCode()
             {
                 return (int)(Token ^ (((uint)Type) << 4));
             }
+
             public override bool Equals(object obj)
             {
                 if (!(obj is IBCBlobKey))

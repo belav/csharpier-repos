@@ -15,7 +15,9 @@ namespace System.Security.Permissions
     {
         public UrlIdentityPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
         { }
+
         public string Url { get; set; }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);

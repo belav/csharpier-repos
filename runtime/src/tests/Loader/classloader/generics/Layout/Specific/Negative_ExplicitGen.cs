@@ -14,6 +14,7 @@ public class Gen1<T>
     // multiple fields, first generic
     [FieldOffset(0)]
     public T t;
+
     [FieldOffset(16)]
     public int _int0 = 0;
 }
@@ -40,8 +41,10 @@ public class Gen4<T>
     // multiple generic fields
     [FieldOffset(0)]
     public T t1;
+
     [FieldOffset(16)]
     public T t2;
+
     [FieldOffset(32)]
     public T t3;
 }
@@ -52,6 +55,7 @@ public struct Gen5<T>
     // multiple fields, generic is not first in a struct
     [FieldOffset(0)]
     public int t1;
+
     [FieldOffset(16)]
     public T t2;
 }
@@ -78,6 +82,7 @@ public class Gen7<T>
     // nested sequential struct inside explicit struct
     [FieldOffset(0)]
     public Gen8<int> struct_Gen8;
+
     [FieldOffset(0)]
     public T t;
 }

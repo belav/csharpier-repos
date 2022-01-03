@@ -17,6 +17,7 @@ namespace System.Security.Cryptography
     {
         // secp521r1 maxes out at 139 bytes in the DER format, so 256 should always be enough
         private const int SignatureStackBufSize = 256;
+
         // The biggest supported hash algorithm is SHA-2-512, which is only 64 bytes.
         // One power of two bigger should cover most unknown algorithms, too.
         private const int HashBufferStackSize = 128;

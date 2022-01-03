@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 [assembly: ApiConventionType(typeof(DiagnosticsAreReturned_ForControllerWithCustomConvention))]
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
     [ApiController]

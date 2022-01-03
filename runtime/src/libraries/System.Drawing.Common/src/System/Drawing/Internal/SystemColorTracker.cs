@@ -15,6 +15,7 @@ namespace System.Drawing.Internal
     {
         // when I tried the self host, it went over 500 but never over 1000.
         private const int INITIAL_SIZE = 200;
+
         // If it gets this big, I seriously miscalculated the performance of this object.
         private const int WARNING_SIZE = 100000;
         private const float EXPAND_THRESHOLD = 0.75f;

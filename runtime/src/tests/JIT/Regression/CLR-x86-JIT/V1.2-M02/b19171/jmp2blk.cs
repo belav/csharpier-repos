@@ -3,6 +3,7 @@
 //
 
 using System;
+
 public struct AA
 {
     public static int[,] Static2()

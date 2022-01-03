@@ -20,21 +20,26 @@ public class Test_float
 {
     [DllImport("libtest", EntryPoint = "mono_return_float1")]
     public static extern float1 mono_return_float1(float1 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct float1
     {
         public float f1;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_float2")]
     public static extern float2 mono_return_float2(float2 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct float2
     {
         public float f1,
             f2;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_float3")]
     public static extern float3 mono_return_float3(float3 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct float3
     {
@@ -42,8 +47,10 @@ public class Test_float
             f2,
             f3;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_float4")]
     public static extern float4 mono_return_float4(float4 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct float4
     {
@@ -52,10 +59,12 @@ public class Test_float
             f3,
             f4;
     }
+
     // This structure is 1 element too large to use the special return
     //  rules.
     [DllImport("libtest", EntryPoint = "mono_return_float5")]
     public static extern float5 mono_return_float5(float5 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct float5
     {
@@ -65,8 +74,10 @@ public class Test_float
             f4,
             f5;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_float6")]
     public static extern float6 mono_return_float6(float6 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct float6
     {
@@ -77,8 +88,10 @@ public class Test_float
             f5,
             f6;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_float7")]
     public static extern float7 mono_return_float7(float7 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct float7
     {
@@ -90,8 +103,10 @@ public class Test_float
             f6,
             f7;
     }
+
     [DllImport("libtest", EntryPoint = "mono_return_float8")]
     public static extern float8 mono_return_float8(float8 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct float8
     {
@@ -104,10 +119,12 @@ public class Test_float
             f7,
             f8;
     }
+
     // This structure is 1 element too large to use the special parameter
     //  passing rules.
     [DllImport("libtest", EntryPoint = "mono_return_float9")]
     public static extern float9 mono_return_float9(float9 s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct float9
     {
@@ -128,12 +145,15 @@ public class Test_float
     {
         public float f1;
     };
+
     public struct float4_nested2
     {
         public float f4;
     };
+
     [DllImport("libtest", EntryPoint = "mono_return_float4_nested")]
     public static extern float4_nested mono_return_float4_nested(float4_nested s, int addend);
+
     [StructLayout(LayoutKind.Sequential)]
     public struct float4_nested
     {

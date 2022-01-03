@@ -9,12 +9,14 @@ namespace MS.Internal.Xml.XPath
     {
         public XPathAncestorIterator(XPathNavigator nav, XPathNodeType type, bool matchSelf)
             : base(nav, type, matchSelf) { }
+
         public XPathAncestorIterator(
             XPathNavigator nav,
             string name,
             string namespaceURI,
             bool matchSelf
         ) : base(nav, name, namespaceURI, matchSelf) { }
+
         public XPathAncestorIterator(XPathAncestorIterator other) : base(other) { }
 
         public override bool MoveNext()

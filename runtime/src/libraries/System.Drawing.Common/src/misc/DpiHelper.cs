@@ -16,6 +16,7 @@ namespace System.Windows.Forms
     {
         private const double LogicalDpi = 96.0;
         private static bool s_isInitialized;
+
         /// <summary>
         /// The primary screen's (device) current horizontal DPI
         /// </summary>

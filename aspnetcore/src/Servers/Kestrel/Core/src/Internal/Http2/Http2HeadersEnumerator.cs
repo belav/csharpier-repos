@@ -19,6 +19,7 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         Trailers,
         Untyped
     }
+
     private HeadersType _headersType;
     private HttpResponseHeaders.Enumerator _headersEnumerator;
     private HttpResponseTrailers.Enumerator _trailersEnumerator;

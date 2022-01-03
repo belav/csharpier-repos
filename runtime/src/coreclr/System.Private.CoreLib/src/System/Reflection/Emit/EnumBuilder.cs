@@ -309,6 +309,7 @@ namespace System.Reflection.Emit
         {
             return false;
         }
+
         protected override bool IsPrimitiveImpl()
         {
             return false;

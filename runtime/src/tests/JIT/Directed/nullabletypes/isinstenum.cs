@@ -224,6 +224,7 @@ internal class Program
             Eval(0192, o is SealedClass[], false);
         }
     } // end of test case 0001
+
     private static void TestCase0002()
     {
         {
@@ -431,6 +432,7 @@ internal class Program
             Eval(0384, o is SealedClass[], false);
         }
     } // end of test case 0002
+
     private static void TestCase0003()
     {
         {

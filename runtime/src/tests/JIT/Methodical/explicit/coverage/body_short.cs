@@ -9,29 +9,35 @@ internal class TestApp
     {
         return init.q;
     }
+
     private static short test_0_1(short num, AA init, AA zero)
     {
         zero.q = num;
         return zero.q;
     }
+
     private static short test_0_2(short num, AA init, AA zero)
     {
         return (short)(init.q + zero.q);
     }
+
     private static short test_0_3(short num, AA init, AA zero)
     {
         return (short)checked(init.q - zero.q);
     }
+
     private static short test_0_4(short num, AA init, AA zero)
     {
         zero.q += num;
         return zero.q;
     }
+
     private static short test_0_5(short num, AA init, AA zero)
     {
         zero.q += init.q;
         return zero.q;
     }
+
     private static short test_0_6(short num, AA init, AA zero)
     {
         if (init.q == num)
@@ -39,80 +45,98 @@ internal class TestApp
         else
             return zero.q;
     }
+
     private static short test_0_7(short num, AA init, AA zero)
     {
         return (short)(init.q < num + 1 ? 100 : -1);
     }
+
     private static short test_0_8(short num, AA init, AA zero)
     {
         return (short)((init.q > zero.q ? 1 : 0) + 99);
     }
+
     private static short test_0_9(short num, AA init, AA zero)
     {
         return (short)((init.q ^ zero.q) | num);
     }
+
     private static short test_0_10(short num, AA init, AA zero)
     {
         zero.q |= init.q;
         return (short)(zero.q & num);
     }
+
     private static short test_0_11(short num, AA init, AA zero)
     {
         return (short)(init.q >> zero.q);
     }
+
     private static short test_0_12(short num, AA init, AA zero)
     {
         return AA.a_init[init.q].q;
     }
+
     private static short test_0_13(short num, AA init, AA zero)
     {
         return AA.aa_init[num - 100, (init.q | 1) - 2, 1 + zero.q].q;
     }
+
     private static short test_0_14(short num, AA init, AA zero)
     {
         object bb = init.q;
         return (short)bb;
     }
+
     private static short test_0_15(short num, AA init, AA zero)
     {
         double dbl = init.q;
         return (short)dbl;
     }
+
     private static short test_0_16(short num, AA init, AA zero)
     {
         return AA.call_target(init.q);
     }
+
     private static short test_0_17(short num, AA init, AA zero)
     {
         return AA.call_target_ref(ref init.q);
     }
+
     private static short test_1_0(short num, ref AA r_init, ref AA r_zero)
     {
         return r_init.q;
     }
+
     private static short test_1_1(short num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q = num;
         return r_zero.q;
     }
+
     private static short test_1_2(short num, ref AA r_init, ref AA r_zero)
     {
         return (short)(r_init.q + r_zero.q);
     }
+
     private static short test_1_3(short num, ref AA r_init, ref AA r_zero)
     {
         return (short)checked(r_init.q - r_zero.q);
     }
+
     private static short test_1_4(short num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q += num;
         return r_zero.q;
     }
+
     private static short test_1_5(short num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q += r_init.q;
         return r_zero.q;
     }
+
     private static short test_1_6(short num, ref AA r_init, ref AA r_zero)
     {
         if (r_init.q == num)
@@ -120,80 +144,98 @@ internal class TestApp
         else
             return r_zero.q;
     }
+
     private static short test_1_7(short num, ref AA r_init, ref AA r_zero)
     {
         return (short)(r_init.q < num + 1 ? 100 : -1);
     }
+
     private static short test_1_8(short num, ref AA r_init, ref AA r_zero)
     {
         return (short)((r_init.q > r_zero.q ? 1 : 0) + 99);
     }
+
     private static short test_1_9(short num, ref AA r_init, ref AA r_zero)
     {
         return (short)((r_init.q ^ r_zero.q) | num);
     }
+
     private static short test_1_10(short num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q |= r_init.q;
         return (short)(r_zero.q & num);
     }
+
     private static short test_1_11(short num, ref AA r_init, ref AA r_zero)
     {
         return (short)(r_init.q >> r_zero.q);
     }
+
     private static short test_1_12(short num, ref AA r_init, ref AA r_zero)
     {
         return AA.a_init[r_init.q].q;
     }
+
     private static short test_1_13(short num, ref AA r_init, ref AA r_zero)
     {
         return AA.aa_init[num - 100, (r_init.q | 1) - 2, 1 + r_zero.q].q;
     }
+
     private static short test_1_14(short num, ref AA r_init, ref AA r_zero)
     {
         object bb = r_init.q;
         return (short)bb;
     }
+
     private static short test_1_15(short num, ref AA r_init, ref AA r_zero)
     {
         double dbl = r_init.q;
         return (short)dbl;
     }
+
     private static short test_1_16(short num, ref AA r_init, ref AA r_zero)
     {
         return AA.call_target(r_init.q);
     }
+
     private static short test_1_17(short num, ref AA r_init, ref AA r_zero)
     {
         return AA.call_target_ref(ref r_init.q);
     }
+
     private static short test_2_0(short num)
     {
         return AA.a_init[num].q;
     }
+
     private static short test_2_1(short num)
     {
         AA.a_zero[num].q = num;
         return AA.a_zero[num].q;
     }
+
     private static short test_2_2(short num)
     {
         return (short)(AA.a_init[num].q + AA.a_zero[num].q);
     }
+
     private static short test_2_3(short num)
     {
         return (short)checked(AA.a_init[num].q - AA.a_zero[num].q);
     }
+
     private static short test_2_4(short num)
     {
         AA.a_zero[num].q += num;
         return AA.a_zero[num].q;
     }
+
     private static short test_2_5(short num)
     {
         AA.a_zero[num].q += AA.a_init[num].q;
         return AA.a_zero[num].q;
     }
+
     private static short test_2_6(short num)
     {
         if (AA.a_init[num].q == num)
@@ -201,82 +243,100 @@ internal class TestApp
         else
             return AA.a_zero[num].q;
     }
+
     private static short test_2_7(short num)
     {
         return (short)(AA.a_init[num].q < num + 1 ? 100 : -1);
     }
+
     private static short test_2_8(short num)
     {
         return (short)((AA.a_init[num].q > AA.a_zero[num].q ? 1 : 0) + 99);
     }
+
     private static short test_2_9(short num)
     {
         return (short)((AA.a_init[num].q ^ AA.a_zero[num].q) | num);
     }
+
     private static short test_2_10(short num)
     {
         AA.a_zero[num].q |= AA.a_init[num].q;
         return (short)(AA.a_zero[num].q & num);
     }
+
     private static short test_2_11(short num)
     {
         return (short)(AA.a_init[num].q >> AA.a_zero[num].q);
     }
+
     private static short test_2_12(short num)
     {
         return AA.a_init[AA.a_init[num].q].q;
     }
+
     private static short test_2_13(short num)
     {
         return AA.aa_init[num - 100, (AA.a_init[num].q | 1) - 2, 1 + AA.a_zero[num].q].q;
     }
+
     private static short test_2_14(short num)
     {
         object bb = AA.a_init[num].q;
         return (short)bb;
     }
+
     private static short test_2_15(short num)
     {
         double dbl = AA.a_init[num].q;
         return (short)dbl;
     }
+
     private static short test_2_16(short num)
     {
         return AA.call_target(AA.a_init[num].q);
     }
+
     private static short test_2_17(short num)
     {
         return AA.call_target_ref(ref AA.a_init[num].q);
     }
+
     private static short test_3_0(short num)
     {
         return AA.aa_init[0, num - 1, num / 100].q;
     }
+
     private static short test_3_1(short num)
     {
         AA.aa_zero[0, num - 1, num / 100].q = num;
         return AA.aa_zero[0, num - 1, num / 100].q;
     }
+
     private static short test_3_2(short num)
     {
         return (short)(AA.aa_init[0, num - 1, num / 100].q + AA.aa_zero[0, num - 1, num / 100].q);
     }
+
     private static short test_3_3(short num)
     {
         return (short)checked(
             AA.aa_init[0, num - 1, num / 100].q - AA.aa_zero[0, num - 1, num / 100].q
         );
     }
+
     private static short test_3_4(short num)
     {
         AA.aa_zero[0, num - 1, num / 100].q += num;
         return AA.aa_zero[0, num - 1, num / 100].q;
     }
+
     private static short test_3_5(short num)
     {
         AA.aa_zero[0, num - 1, num / 100].q += AA.aa_init[0, num - 1, num / 100].q;
         return AA.aa_zero[0, num - 1, num / 100].q;
     }
+
     private static short test_3_6(short num)
     {
         if (AA.aa_init[0, num - 1, num / 100].q == num)
@@ -284,35 +344,42 @@ internal class TestApp
         else
             return AA.aa_zero[0, num - 1, num / 100].q;
     }
+
     private static short test_3_7(short num)
     {
         return (short)(AA.aa_init[0, num - 1, num / 100].q < num + 1 ? 100 : -1);
     }
+
     private static short test_3_8(short num)
     {
         return (short)(
             (AA.aa_init[0, num - 1, num / 100].q > AA.aa_zero[0, num - 1, num / 100].q ? 1 : 0) + 99
         );
     }
+
     private static short test_3_9(short num)
     {
         return (short)(
             (AA.aa_init[0, num - 1, num / 100].q ^ AA.aa_zero[0, num - 1, num / 100].q) | num
         );
     }
+
     private static short test_3_10(short num)
     {
         AA.aa_zero[0, num - 1, num / 100].q |= AA.aa_init[0, num - 1, num / 100].q;
         return (short)(AA.aa_zero[0, num - 1, num / 100].q & num);
     }
+
     private static short test_3_11(short num)
     {
         return (short)(AA.aa_init[0, num - 1, num / 100].q >> AA.aa_zero[0, num - 1, num / 100].q);
     }
+
     private static short test_3_12(short num)
     {
         return AA.a_init[AA.aa_init[0, num - 1, num / 100].q].q;
     }
+
     private static short test_3_13(short num)
     {
         return AA.aa_init[
@@ -321,51 +388,62 @@ internal class TestApp
             1 + AA.aa_zero[0, num - 1, num / 100].q
         ].q;
     }
+
     private static short test_3_14(short num)
     {
         object bb = AA.aa_init[0, num - 1, num / 100].q;
         return (short)bb;
     }
+
     private static short test_3_15(short num)
     {
         double dbl = AA.aa_init[0, num - 1, num / 100].q;
         return (short)dbl;
     }
+
     private static short test_3_16(short num)
     {
         return AA.call_target(AA.aa_init[0, num - 1, num / 100].q);
     }
+
     private static short test_3_17(short num)
     {
         return AA.call_target_ref(ref AA.aa_init[0, num - 1, num / 100].q);
     }
+
     private static short test_4_0(short num)
     {
         return BB.f_init.q;
     }
+
     private static short test_4_1(short num)
     {
         BB.f_zero.q = num;
         return BB.f_zero.q;
     }
+
     private static short test_4_2(short num)
     {
         return (short)(BB.f_init.q + BB.f_zero.q);
     }
+
     private static short test_4_3(short num)
     {
         return (short)checked(BB.f_init.q - BB.f_zero.q);
     }
+
     private static short test_4_4(short num)
     {
         BB.f_zero.q += num;
         return BB.f_zero.q;
     }
+
     private static short test_4_5(short num)
     {
         BB.f_zero.q += BB.f_init.q;
         return BB.f_zero.q;
     }
+
     private static short test_4_6(short num)
     {
         if (BB.f_init.q == num)
@@ -373,88 +451,108 @@ internal class TestApp
         else
             return BB.f_zero.q;
     }
+
     private static short test_4_7(short num)
     {
         return (short)(BB.f_init.q < num + 1 ? 100 : -1);
     }
+
     private static short test_4_8(short num)
     {
         return (short)((BB.f_init.q > BB.f_zero.q ? 1 : 0) + 99);
     }
+
     private static short test_4_9(short num)
     {
         return (short)((BB.f_init.q ^ BB.f_zero.q) | num);
     }
+
     private static short test_4_10(short num)
     {
         BB.f_zero.q |= BB.f_init.q;
         return (short)(BB.f_zero.q & num);
     }
+
     private static short test_4_11(short num)
     {
         return (short)(BB.f_init.q >> BB.f_zero.q);
     }
+
     private static short test_4_12(short num)
     {
         return AA.a_init[BB.f_init.q].q;
     }
+
     private static short test_4_13(short num)
     {
         return AA.aa_init[num - 100, (BB.f_init.q | 1) - 2, 1 + BB.f_zero.q].q;
     }
+
     private static short test_4_14(short num)
     {
         object bb = BB.f_init.q;
         return (short)bb;
     }
+
     private static short test_4_15(short num)
     {
         double dbl = BB.f_init.q;
         return (short)dbl;
     }
+
     private static short test_4_16(short num)
     {
         return AA.call_target(BB.f_init.q);
     }
+
     private static short test_4_17(short num)
     {
         return AA.call_target_ref(ref BB.f_init.q);
     }
+
     private static short test_5_0(short num)
     {
         return ((AA)AA.b_init).q;
     }
+
     private static short test_6_0(short num, TypedReference tr_init)
     {
         return __refvalue(tr_init, AA).q;
     }
+
     private static unsafe short test_7_0(short num, void* ptr_init, void* ptr_zero)
     {
         return (*((AA*)ptr_init)).q;
     }
+
     private static unsafe short test_7_1(short num, void* ptr_init, void* ptr_zero)
     {
         (*((AA*)ptr_zero)).q = num;
         return (*((AA*)ptr_zero)).q;
     }
+
     private static unsafe short test_7_2(short num, void* ptr_init, void* ptr_zero)
     {
         return (short)((*((AA*)ptr_init)).q + (*((AA*)ptr_zero)).q);
     }
+
     private static unsafe short test_7_3(short num, void* ptr_init, void* ptr_zero)
     {
         return (short)checked((*((AA*)ptr_init)).q - (*((AA*)ptr_zero)).q);
     }
+
     private static unsafe short test_7_4(short num, void* ptr_init, void* ptr_zero)
     {
         (*((AA*)ptr_zero)).q += num;
         return (*((AA*)ptr_zero)).q;
     }
+
     private static unsafe short test_7_5(short num, void* ptr_init, void* ptr_zero)
     {
         (*((AA*)ptr_zero)).q += (*((AA*)ptr_init)).q;
         return (*((AA*)ptr_zero)).q;
     }
+
     private static unsafe short test_7_6(short num, void* ptr_init, void* ptr_zero)
     {
         if ((*((AA*)ptr_init)).q == num)
@@ -462,49 +560,60 @@ internal class TestApp
         else
             return (*((AA*)ptr_zero)).q;
     }
+
     private static unsafe short test_7_7(short num, void* ptr_init, void* ptr_zero)
     {
         return (short)((*((AA*)ptr_init)).q < num + 1 ? 100 : -1);
     }
+
     private static unsafe short test_7_8(short num, void* ptr_init, void* ptr_zero)
     {
         return (short)(((*((AA*)ptr_init)).q > (*((AA*)ptr_zero)).q ? 1 : 0) + 99);
     }
+
     private static unsafe short test_7_9(short num, void* ptr_init, void* ptr_zero)
     {
         return (short)(((*((AA*)ptr_init)).q ^ (*((AA*)ptr_zero)).q) | num);
     }
+
     private static unsafe short test_7_10(short num, void* ptr_init, void* ptr_zero)
     {
         (*((AA*)ptr_zero)).q |= (*((AA*)ptr_init)).q;
         return (short)((*((AA*)ptr_zero)).q & num);
     }
+
     private static unsafe short test_7_11(short num, void* ptr_init, void* ptr_zero)
     {
         return (short)((*((AA*)ptr_init)).q >> (*((AA*)ptr_zero)).q);
     }
+
     private static unsafe short test_7_12(short num, void* ptr_init, void* ptr_zero)
     {
         return AA.a_init[(*((AA*)ptr_init)).q].q;
     }
+
     private static unsafe short test_7_13(short num, void* ptr_init, void* ptr_zero)
     {
         return AA.aa_init[num - 100, ((*((AA*)ptr_init)).q | 1) - 2, 1 + (*((AA*)ptr_zero)).q].q;
     }
+
     private static unsafe short test_7_14(short num, void* ptr_init, void* ptr_zero)
     {
         object bb = (*((AA*)ptr_init)).q;
         return (short)bb;
     }
+
     private static unsafe short test_7_15(short num, void* ptr_init, void* ptr_zero)
     {
         double dbl = (*((AA*)ptr_init)).q;
         return (short)dbl;
     }
+
     private static unsafe short test_7_16(short num, void* ptr_init, void* ptr_zero)
     {
         return AA.call_target((*((AA*)ptr_init)).q);
     }
+
     private static unsafe short test_7_17(short num, void* ptr_init, void* ptr_zero)
     {
         return AA.call_target_ref(ref (*((AA*)ptr_init)).q);

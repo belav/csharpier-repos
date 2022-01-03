@@ -10,6 +10,7 @@ namespace DefaultNamespace
         {
             return new float[7];
         }
+
         public static int Main()
         {
             new DD().Method1();

@@ -40,6 +40,7 @@ namespace Systen.Net.Mail.Tests
         private long _messageCounter = Random.Shared.Next(1000, 2000);
 
         public readonly int Port;
+
         public SmtpClient CreateClient() => new SmtpClient("localhost", Port);
 
         public Action<Socket> OnConnected;
@@ -262,6 +263,7 @@ namespace Systen.Net.Mail.Tests
 
             private string GetHeader(string name) =>
                 Headers.TryGetValue(name, out string value) ? value : "NOT-PRESENT";
+
             public string From => GetHeader("From");
             public string To => GetHeader("To");
             public string Subject => GetHeader("Subject");

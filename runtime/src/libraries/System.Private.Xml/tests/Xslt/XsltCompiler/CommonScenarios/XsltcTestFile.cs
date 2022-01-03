@@ -11,6 +11,7 @@ namespace System.Xml.Tests
     public class XsltcTestFile : XsltcTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public XsltcTestFile(ITestOutputHelper output) : base(output)
         {
             _output = output;

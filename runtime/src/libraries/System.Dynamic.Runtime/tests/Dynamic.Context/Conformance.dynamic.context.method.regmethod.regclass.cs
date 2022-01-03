@@ -1385,6 +1385,7 @@ namespace System.Dynamic.Runtime.Tests
     public class ClassWithConstructor1
     {
         public byte[] _field;
+
         public ClassWithConstructor1()
         {
             dynamic mc = new MemberClass();
@@ -1396,6 +1397,7 @@ namespace System.Dynamic.Runtime.Tests
     {
         private dynamic _mc = new MemberClass();
         public byte[] _field;
+
         public ClassWithConstructor2()
         {
             _field = (byte[])_mc.Method_ReturnByteArr(new MyClass[] { null, null, new MyClass() });
@@ -1413,6 +1415,7 @@ namespace System.Dynamic.Runtime.Tests
             ref s_p2,
             ref s_p3
         );
+
         static ClassWithStaticConstructor() { }
     }
 }
@@ -1420,6 +1423,7 @@ namespace System.Dynamic.Runtime.Tests
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass051.regclass051
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in generic method body.</Title>
     // <Description>
     // </Description>
@@ -1460,6 +1464,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass052.regclass052
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in regular method body.</Title>
     // <Description>
     // </Description>
@@ -1499,6 +1504,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass053.regclass053
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in argument of extension method.</Title>
     // <Description>
     // </Description>
@@ -1537,6 +1543,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass054.regclass054
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in argument of regular method.</Title>
     // <Description>
     // </Description>
@@ -1578,6 +1585,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass055.regclass055
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in argument of static regular method.</Title>
     // <Description>
     // </Description>
@@ -1616,6 +1624,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass056.regclass056
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in argument of static generic method.</Title>
     // <Description>
     // </Description>
@@ -1653,6 +1662,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass057.regclass057
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in static unsafe method body.</Title>
     // <Description>
     // </Description>
@@ -1693,6 +1703,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass058.regclass058
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in unsafe regular method body.</Title>
     // <Description>
     // </Description>
@@ -1732,6 +1743,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass059.regclass059
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in static method body.</Title>
     // <Description>
     // </Description>
@@ -1890,6 +1902,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass063.regclass063
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in static method body.</Title>
     // <Description>
     // </Description>
@@ -1928,6 +1941,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass064.regclass064
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in for loop-initializer.</Title>
     // <Description>
     // </Description>
@@ -1974,6 +1988,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass065.regclass065
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in while body.</Title>
     // <Description>
     // </Description>
@@ -2009,6 +2024,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass065a.regclass065a
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in while body.</Title>
     // <Description>
     // </Description>
@@ -2046,6 +2062,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass066.regclass066
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in static method body.</Title>
     // <Description>
     // </Description>
@@ -2118,6 +2135,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass068.regclass068
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used static method body.</Title>
     // <Description>
     // </Description>
@@ -2161,6 +2179,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     public class Test
     {
         private Dictionary<int, MyStruct> _dic = new Dictionary<int, MyStruct>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2192,6 +2211,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass070.regclass070
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in dynamic method call.</Title>
     // <Description>
     // </Description>
@@ -2224,6 +2244,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass071.regclass071
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in static method body.</Title>
     // <Description>
     // </Description>
@@ -2260,6 +2281,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass072.regclass072
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in static method body and parameter contains dynamic.</Title>
     // <Description>
     // </Description>
@@ -2296,6 +2318,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass073.regclass073
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in array initializer list.</Title>
     // <Description>
     // </Description>
@@ -2353,6 +2376,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     public class Test
     {
         private dynamic _mc = new MemberClass();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2463,6 +2487,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     {
         public static MyEnum m = MyEnum.First;
         public static short result = -1;
+
         public Test() { }
 
         public static void DynamicCSharpRunTest()
@@ -2544,6 +2569,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     public class Test
     {
         private static object s_locker = new object();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2719,6 +2745,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass083.regclass083
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in static method body.</Title>
     // <Description>
     // </Description>
@@ -2751,6 +2778,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass084.regclass084
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in foreach.</Title>
     // <Description>
     // </Description>
@@ -2786,6 +2814,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass085.regclass085
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in static field init.</Title>
     // <Description>
     // </Description>
@@ -2797,6 +2826,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     {
         private static dynamic s_dy = new MemberClass();
         private static string[] s_result = (string[])s_dy.Method_ReturnStringArr(MyEnum.First);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2816,6 +2846,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass086.regclass086
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in field init.</Title>
     // <Description>
     // </Description>
@@ -2831,6 +2862,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             MyEnum.Second,
             MyEnum.Third
         );
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2851,6 +2883,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass087.regclass087
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in static constructor.</Title>
     // <Description>
     // </Description>
@@ -2862,6 +2895,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     {
         private static string[] s_result;
         private static MyEnum? s_m = MyEnum.Third;
+
         static Test()
         {
             dynamic dy = new MemberClass();
@@ -2886,6 +2920,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass088.regclass088
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in static method body.</Title>
     // <Description>
     // </Description>
@@ -2924,6 +2959,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass089.regclass089
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in object initializer.</Title>
     // <Description>
     // </Description>
@@ -2935,6 +2971,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     {
         private long _field1;
         private long? _field2;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2961,6 +2998,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass090.regclass090
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in implicitly-typed array initializer.</Title>
     // <Description>
     // </Description>
@@ -3006,6 +3044,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass091.regclass091
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular method used in == operator.</Title>
     // <Description>
     // </Description>
@@ -3041,6 +3080,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass092.regclass092
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular void method used in static method body.</Title>
     // <Description>
     // </Description>
@@ -3069,6 +3109,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass093.regclass093
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular void method used in static method body.</Title>
     // <Description>
     // </Description>
@@ -3103,6 +3144,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass094.regclass094
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular void method used in static method body.</Title>
     // <Description>
     // </Description>
@@ -3131,6 +3173,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclass095.regclass095
 {
     using ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmethod.regclass.regclassregmeth.regclassregmeth;
+
     // <Title> Tests regular class regular void method used in static method body.</Title>
     // <Description>
     // </Description>

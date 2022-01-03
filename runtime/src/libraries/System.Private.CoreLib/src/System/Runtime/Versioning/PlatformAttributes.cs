@@ -19,6 +19,7 @@ namespace System.Runtime.Versioning
         {
             PlatformName = platformName;
         }
+
         public string PlatformName { get; }
     }
 

@@ -299,6 +299,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     {
         public delegate T Foo<out T>();
         public static event Foo<Animal> e;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -342,6 +343,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     {
         public delegate void Foo<in T>(T t);
         public static event Foo<Tiger> f2;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -394,6 +396,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
         public static iVariance<Animal>[] field1;
         public static dynamic[] field2;
         public static dynamic field3;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -502,6 +505,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.assignm
     public class C
     {
         public delegate T Foo<out T>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -937,6 +941,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.assign.overloa
     public class C
     {
         public delegate void Foo<in T>(T t);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

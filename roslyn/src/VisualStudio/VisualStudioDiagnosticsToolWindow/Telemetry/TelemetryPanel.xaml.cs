@@ -155,6 +155,7 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.Telemetry
             {
                 _action = disposeAction;
             }
+
             public void Dispose()
             {
                 _action?.Invoke();

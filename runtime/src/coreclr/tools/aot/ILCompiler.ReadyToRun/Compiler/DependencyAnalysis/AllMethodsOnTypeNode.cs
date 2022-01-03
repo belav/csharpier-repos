@@ -31,6 +31,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
             NodeFactory context
         ) => null;
+
         public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
             List<DependencyNodeCore<NodeFactory>> markedNodes,
             int firstNode,

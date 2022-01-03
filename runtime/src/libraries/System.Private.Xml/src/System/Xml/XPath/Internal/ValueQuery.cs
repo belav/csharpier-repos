@@ -10,8 +10,11 @@ namespace MS.Internal.Xml.XPath
     internal abstract class ValueQuery : Query
     {
         public ValueQuery() { }
+
         protected ValueQuery(ValueQuery other) : base(other) { }
+
         public sealed override void Reset() { }
+
         public sealed override XPathNavigator Current
         {
             get { throw XPathException.Create(SR.Xp_NodeSetExpected); }
@@ -24,6 +27,7 @@ namespace MS.Internal.Xml.XPath
         {
             get { throw XPathException.Create(SR.Xp_NodeSetExpected); }
         }
+
         public sealed override XPathNavigator Advance()
         {
             throw XPathException.Create(SR.Xp_NodeSetExpected);

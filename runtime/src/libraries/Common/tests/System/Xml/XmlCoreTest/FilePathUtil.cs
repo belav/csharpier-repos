@@ -122,6 +122,7 @@ namespace XmlCoreTest.Common
         private static MyDict<string, Stream> s_XmlFileInMemoryCacheBackup = null;
 
         private static readonly object s_XmlFileMemoryCacheLock = new object();
+
         static void initXmlFileCacheIfNotYet()
         {
             lock (s_XmlFileMemoryCacheLock)

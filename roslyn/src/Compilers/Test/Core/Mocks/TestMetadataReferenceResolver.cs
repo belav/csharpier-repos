@@ -61,6 +61,7 @@ namespace Roslyn.Test.Utilities
         }
 
         public override bool Equals(object other) => true;
+
         public override int GetHashCode() => 1;
     }
 }

@@ -1244,6 +1244,7 @@ namespace BoundTreeGenerator
             field.Type.TrimEnd('?') == "TypeSymbol";
 
         private static bool TypeIsSymbol(Field field) => TypeIsSymbol(field.Type);
+
         private static bool TypeIsSymbol(string type) => type.TrimEnd('?').EndsWith("Symbol");
 
         private string StripBound(string name)

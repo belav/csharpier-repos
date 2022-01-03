@@ -23,6 +23,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
             public override string GetClassName() =>
                 SolutionExplorerShim.Source_Generator_Properties;
+
             public override string GetComponentName() => TypeName;
         }
     }

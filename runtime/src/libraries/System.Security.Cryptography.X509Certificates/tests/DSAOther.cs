@@ -15,6 +15,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         public override byte[] CreateSignature(byte[] rgbHash) => _impl.CreateSignature(rgbHash);
+
         public override void ImportParameters(DSAParameters parameters) =>
             _impl.ImportParameters(parameters);
 

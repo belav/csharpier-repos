@@ -8,35 +8,46 @@ namespace Test
     {
         [FieldOffset(0)]
         public int a;
+
         [FieldOffset(0)]
         public byte a1;
+
         [FieldOffset(1)]
         public byte a2;
+
         [FieldOffset(2)]
         public byte a3;
+
         [FieldOffset(3)]
         public byte a4;
     }
+
     [StructLayout(LayoutKind.Explicit)]
     public class Doh2
     {
         [FieldOffset(0)]
         public int a;
+
         [FieldOffset(0)]
         public byte a1;
+
         [FieldOffset(1)]
         public byte a2;
+
         [FieldOffset(2)]
         public byte a3;
+
         [FieldOffset(3)]
         public byte a4;
     }
+
     [StructLayout(LayoutKind.Explicit)]
     public class Doh3 : Doh2
     {
         [FieldOffset(0)]
         public int b;
     }
+
     public class Test
     {
         public static int Main()

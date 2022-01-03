@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 public class ClassA { };
+
 public class ClassB { };
 
 public struct GenStruct<T>

@@ -9,8 +9,10 @@ internal class AA
 {
     [FieldOffset(9)]
     public ulong tmp1;
+
     [FieldOffset(1)]
     public sbyte tmp2;
+
     [FieldOffset(13)]
     public ushort tmp3;
 
@@ -19,6 +21,7 @@ internal class AA
 
     [FieldOffset(48)]
     public int tmp4;
+
     [FieldOffset(41)]
     public float tmp5;
 
@@ -44,6 +47,7 @@ internal class AA
     {
         return arg;
     }
+
     public static double call_target_ref(ref double arg)
     {
         return arg;

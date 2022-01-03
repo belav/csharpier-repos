@@ -18,6 +18,7 @@ namespace System.Diagnostics
     public static class Ignored
     {
         public static StackTrace Method() => new StackTrace();
+
         public static StackTrace MethodWithException()
         {
             try
@@ -513,18 +514,22 @@ namespace System.Diagnostics.Tests
 
         [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
         private static StackTrace NoParameters() => new StackTrace();
+
         [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
         private static StackTrace OneParameter(int x) => new StackTrace();
+
         [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
         private static StackTrace TwoParameters(int x, string y) => new StackTrace();
 
         [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
         private static StackTrace Generic<T>() => new StackTrace();
+
         [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
         private static StackTrace Generic<T, U>() => new StackTrace();
 
         [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
         private static StackTrace InvokeIgnoredMethod() => Ignored.Method();
+
         [MethodImpl(MethodImplOptions.NoOptimization | MethodImplOptions.NoInlining)]
         private static StackTrace InvokeIgnoredMethodWithException() =>
             Ignored.MethodWithException();

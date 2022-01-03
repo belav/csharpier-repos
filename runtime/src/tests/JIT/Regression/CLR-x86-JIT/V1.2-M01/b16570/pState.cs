@@ -2,12 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal class test
 {
     public struct VT
     {
         public double a1;
         public float a4;
+
         public VT(int i)
         {
             a1 = 1;

@@ -5,14 +5,17 @@
 namespace Test
 {
     using System;
+
     class App
     {
         static void Func(ref Array param1) { }
+
         static void Main1()
         {
             Array arr = null;
             Func(ref ((Array[])arr)[0]);
         }
+
         static int Main()
         {
             try

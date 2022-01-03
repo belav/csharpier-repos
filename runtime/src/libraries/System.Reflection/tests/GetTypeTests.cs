@@ -558,17 +558,26 @@ namespace System.Reflection.Tests
         namespace MyNamespace2
         {
             public class MyClass2 { }
+
             public class MyClass3
             {
                 public class Inner { }
+
                 public class inner { }
+
                 public class iNner { }
+
                 public class inNer { }
             }
+
             public class MyClass4 { }
+
             public class mYClass4 { }
+
             public class Myclass4 { }
+
             public class myCLass4 { }
+
             public class myClAss4 { }
         }
 
@@ -582,7 +591,9 @@ namespace System.Reflection.Tests
             public class Foo { }
 
             public class Goo<T> { }
+
             public class gOo<T> { }
+
             public class goO<T> { }
         }
 

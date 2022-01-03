@@ -159,8 +159,10 @@ namespace System.Threading.Tasks.Tests
         private sealed class InlineTaskScheduler : TaskScheduler
         {
             protected override void QueueTask(Task task) => TryExecuteTask(task);
+
             protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) =>
                 TryExecuteTask(task);
+
             protected override IEnumerable<Task> GetScheduledTasks() => null;
         }
     }

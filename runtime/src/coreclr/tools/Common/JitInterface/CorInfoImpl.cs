@@ -69,6 +69,7 @@ namespace Internal.JitInterface
             public byte* pInstrumentationData;
             public HRESULT hr;
         }
+
         Dictionary<MethodDesc, PgoInstrumentationResults> _pgoResults = new Dictionary<
             MethodDesc,
             PgoInstrumentationResults
@@ -696,22 +697,31 @@ namespace Internal.JitInterface
 
         private MethodDesc HandleToObject(CORINFO_METHOD_STRUCT_* method) =>
             (MethodDesc)HandleToObject((IntPtr)method);
+
         private CORINFO_METHOD_STRUCT_* ObjectToHandle(MethodDesc method) =>
             (CORINFO_METHOD_STRUCT_*)ObjectToHandle((Object)method);
+
         private TypeDesc HandleToObject(CORINFO_CLASS_STRUCT_* type) =>
             (TypeDesc)HandleToObject((IntPtr)type);
+
         private CORINFO_CLASS_STRUCT_* ObjectToHandle(TypeDesc type) =>
             (CORINFO_CLASS_STRUCT_*)ObjectToHandle((Object)type);
+
         private FieldDesc HandleToObject(CORINFO_FIELD_STRUCT_* field) =>
             (FieldDesc)HandleToObject((IntPtr)field);
+
         private CORINFO_FIELD_STRUCT_* ObjectToHandle(FieldDesc field) =>
             (CORINFO_FIELD_STRUCT_*)ObjectToHandle((object)field);
+
         private MethodILScope HandleToObject(CORINFO_MODULE_STRUCT_* module) =>
             (MethodIL)HandleToObject((IntPtr)module);
+
         private CORINFO_MODULE_STRUCT_* ObjectToHandle(MethodILScope methodIL) =>
             (CORINFO_MODULE_STRUCT_*)ObjectToHandle((object)methodIL);
+
         private MethodSignature HandleToObject(MethodSignatureInfo* method) =>
             (MethodSignature)HandleToObject((IntPtr)method);
+
         private MethodSignatureInfo* ObjectToHandle(MethodSignature method) =>
             (MethodSignatureInfo*)ObjectToHandle((object)method);
 
@@ -1690,6 +1700,7 @@ namespace Internal.JitInterface
                 return callConv;
             }
         }
+
         private CorInfoCallConvExtension GetUnmanagedCallConv(
             MethodDesc methodDesc,
             out bool suppressGCTransition
@@ -1813,6 +1824,7 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("satisfiesMethodConstraints");
         }
+
         private bool isCompatibleDelegate(
             CORINFO_CLASS_STRUCT_* objCls,
             CORINFO_CLASS_STRUCT_* methodParentCls,
@@ -1823,10 +1835,12 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("isCompatibleDelegate");
         }
+
         private void setPatchpointInfo(PatchpointInfo* patchpointInfo)
         {
             throw new NotImplementedException("setPatchpointInfo");
         }
+
         private PatchpointInfo* getOSRInfo(ref uint ilOffset)
         {
             throw new NotImplementedException("getOSRInfo");
@@ -2208,6 +2222,7 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("isValidToken");
         }
+
         private bool isValidStringRef(CORINFO_MODULE_STRUCT_* module, uint metaTOK)
         {
             throw new NotImplementedException("isValidStringRef");
@@ -2407,10 +2422,12 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("getClassModule");
         }
+
         private CORINFO_ASSEMBLY_STRUCT_* getModuleAssembly(CORINFO_MODULE_STRUCT_* mod)
         {
             throw new NotImplementedException("getModuleAssembly");
         }
+
         private byte* getAssemblyName(CORINFO_ASSEMBLY_STRUCT_* assem)
         {
             throw new NotImplementedException("getAssemblyName");
@@ -2974,6 +2991,7 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("canCast");
         }
+
         private bool areTypesEquivalent(CORINFO_CLASS_STRUCT_* cls1, CORINFO_CLASS_STRUCT_* cls2)
         {
             throw new NotImplementedException("areTypesEquivalent");
@@ -3504,6 +3522,7 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("GetErrorHRESULT");
         }
+
         private uint GetErrorMessage(char* buffer, uint bufferLength)
         {
             throw new NotImplementedException("GetErrorMessage");
@@ -3537,6 +3556,7 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("ThrowExceptionForJitResult");
         }
+
         private void ThrowExceptionForHelper(ref CORINFO_HELPER_DESC throwHelper)
         {
             throw new NotImplementedException("ThrowExceptionForHelper");
@@ -3735,6 +3755,7 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("getThreadTLSIndex");
         }
+
         private void* getInlinedCallFrameVptr(ref void* ppIndirection)
         {
             throw new NotImplementedException("getInlinedCallFrameVptr");
@@ -3744,6 +3765,7 @@ namespace Internal.JitInterface
             CorInfoHelpFunc,
             ISymbolNode
         >();
+
         private void* getHelperFtn(CorInfoHelpFunc ftnNum, ref void* ppIndirection)
         {
             ISymbolNode entryPoint;
@@ -3833,6 +3855,7 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("GetCookieForPInvokeCalliSig");
         }
+
         private CORINFO_JUST_MY_CODE_HANDLE_* getJustMyCodeHandle(
             CORINFO_METHOD_STRUCT_* method,
             ref CORINFO_JUST_MY_CODE_HANDLE_* ppIndirection
@@ -3841,6 +3864,7 @@ namespace Internal.JitInterface
             ppIndirection = null;
             return null;
         }
+
         private void GetProfilingHandle(
             ref bool pbHookFunction,
             ref void* pProfilerHandle,
@@ -3870,10 +3894,12 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("canAccessFamily");
         }
+
         private bool isRIDClassDomainID(CORINFO_CLASS_STRUCT_* cls)
         {
             throw new NotImplementedException("isRIDClassDomainID");
         }
+
         private uint getClassDomainID(CORINFO_CLASS_STRUCT_* cls, ref void* ppIndirection)
         {
             throw new NotImplementedException("getClassDomainID");
@@ -3913,6 +3939,7 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("getVarArgsHandle");
         }
+
         private bool canGetVarArgsHandle(CORINFO_SIG_INFO* pSig)
         {
             throw new NotImplementedException("canGetVarArgsHandle");
@@ -3934,10 +3961,12 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("getFieldThreadLocalStoreID");
         }
+
         private void setOverride(IntPtr pOverride, CORINFO_METHOD_STRUCT_* currentMethod)
         {
             throw new NotImplementedException("setOverride");
         }
+
         private void addActiveDependency(
             CORINFO_MODULE_STRUCT_* moduleFrom,
             CORINFO_MODULE_STRUCT_* moduleTo
@@ -3945,6 +3974,7 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("addActiveDependency");
         }
+
         private CORINFO_METHOD_STRUCT_* GetDelegateCtor(
             CORINFO_METHOD_STRUCT_* methHnd,
             CORINFO_CLASS_STRUCT_* clsHnd,
@@ -3954,6 +3984,7 @@ namespace Internal.JitInterface
         {
             throw new NotImplementedException("GetDelegateCtor");
         }
+
         private void MethodCompileComplete(CORINFO_METHOD_STRUCT_* methHnd)
         {
             throw new NotImplementedException("MethodCompileComplete");

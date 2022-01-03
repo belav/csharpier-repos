@@ -6,6 +6,7 @@ namespace Obj
     {
         double Area();
     };
+
     class Obj : Measurable
     {
         public double Area()
@@ -13,12 +14,14 @@ namespace Obj
             return 0.0;
         }
     };
+
     class Rect : Obj
     {
         int x,
             y,
             w,
             h;
+
         public Rect(int vx, int vy, int vw, int vh)
         {
             x = vx;
@@ -26,27 +29,32 @@ namespace Obj
             w = vw;
             h = vh;
         }
+
         public new double Area()
         {
             return (double)w * h;
         }
     }
+
     class Circle : Obj
     {
         int x,
             y,
             r;
+
         public Circle(int vx, int vy, int vr)
         {
             x = vx;
             y = vy;
             r = vr;
         }
+
         public new double Area()
         {
             return r * r * System.Math.PI;
         }
     }
+
     class Test
     {
         static public int Main()

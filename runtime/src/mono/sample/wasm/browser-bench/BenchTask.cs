@@ -68,6 +68,7 @@ public abstract class BenchTask
         }
 
         public virtual void RunStep() { }
+
         public virtual async Task RunStepAsync()
         {
             await Task.CompletedTask;

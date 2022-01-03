@@ -24,6 +24,7 @@ public class TB : TA
 {
     public override B GetA() => new();
 }
+
 public class A { }
 
 public class B : A { }

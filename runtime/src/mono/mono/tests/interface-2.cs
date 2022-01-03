@@ -79,6 +79,7 @@ class Test10t : I1t, I2t, I3t, I4t
     {
         return 0;
     }
+
     public int M1t()
     {
         return 10;
@@ -89,11 +90,13 @@ public interface IName
 {
     string Name { get; }
 }
+
 public interface IOther<T>
 {
     T other { get; }
     string Name { get; }
 }
+
 public class Name1 : IName
 {
     public string Name
@@ -105,6 +108,7 @@ public class Name1 : IName
         get { return "InterfaceName"; }
     }
 }
+
 public class Name2 : IName, IOther<int>
 {
     public string Name

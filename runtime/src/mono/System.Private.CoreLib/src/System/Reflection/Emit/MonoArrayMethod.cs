@@ -73,6 +73,7 @@ namespace System.Reflection
         {
             return this; /* FIXME */
         }
+
         public override Type ReturnType
         {
             get { return ret; }
@@ -152,6 +153,7 @@ namespace System.Reflection
         {
             return CustomAttribute.GetCustomAttributes(this, inherit);
         }
+
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             return CustomAttribute.GetCustomAttributes(this, attributeType, inherit);

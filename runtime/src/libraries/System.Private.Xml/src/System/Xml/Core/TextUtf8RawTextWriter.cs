@@ -30,6 +30,7 @@ namespace System.Xml
         //
         // Ignore Xml declaration
         internal override void WriteXmlDeclaration(XmlStandalone standalone) { }
+
         internal override void WriteXmlDeclaration(string xmldecl) { }
 
         // Ignore DTD
@@ -82,7 +83,9 @@ namespace System.Xml
 
         // Ignore entities
         public override void WriteEntityRef(string name) { }
+
         public override void WriteCharEntity(char ch) { }
+
         public override void WriteSurrogateCharEntity(char lowChar, char highChar) { }
 
         // Output text content without any escaping; ignore attribute values

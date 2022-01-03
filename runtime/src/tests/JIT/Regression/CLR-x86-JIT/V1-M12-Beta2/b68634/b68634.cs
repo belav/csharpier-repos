@@ -22,6 +22,7 @@ namespace Test
                 for (; local2; new AA()) { }
             }
         }
+
         public static int Main()
         {
             try

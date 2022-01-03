@@ -29,6 +29,7 @@ namespace MS.Internal.Xml.XPath
             _nsUri = string.Empty;
             this.qyInput = qyInput;
         }
+
         protected BaseAxisQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
         {
             Debug.Assert(qyInput != null);
@@ -39,6 +40,7 @@ namespace MS.Internal.Xml.XPath
             _nameTest = prefix.Length != 0 || name.Length != 0;
             _nsUri = string.Empty;
         }
+
         protected BaseAxisQuery(BaseAxisQuery other) : base(other)
         {
             this.qyInput = Clone(other.qyInput);

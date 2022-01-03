@@ -16,10 +16,12 @@ public class DelegationRule : IDisposable
     private readonly UrlGroup _urlGroup;
     private readonly UrlGroup _sourceQueueUrlGroup;
     private bool _disposed;
+
     /// <summary>
     /// The name of the Http.Sys request queue
     /// </summary>
     public string QueueName { get; }
+
     /// <summary>
     /// The URL of the Http.Sys Url Prefix
     /// </summary>

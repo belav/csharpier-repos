@@ -8,6 +8,7 @@ namespace Test
     internal class S
     {
         private T _nvalue;
+
         public S(T t)
         {
             _nvalue = t;
@@ -24,6 +25,7 @@ namespace Test
             t.DoMethod();
             _gcref = new S(t);
         }
+
         public T(S s)
         {
             _gcref = s;

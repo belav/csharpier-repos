@@ -63,6 +63,7 @@ namespace System.Runtime.InteropServices.Tests
                 () => Marshal.GetStartComSlot(type)
             );
         }
+
         public static IEnumerable<object[]> GetStartComSlot_NotComVisibleType_TestData()
         {
             yield return new object[] { typeof(GenericClass<>) };

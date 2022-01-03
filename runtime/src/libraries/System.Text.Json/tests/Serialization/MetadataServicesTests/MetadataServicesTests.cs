@@ -131,6 +131,7 @@ namespace System.Text.Json.Tests.Serialization
         }
 
         private class MyClass { }
+
         private class MyDerivedClass : MyClass { }
 
         [Fact]
@@ -364,6 +365,7 @@ namespace System.Text.Json.Tests.Serialization
                 Type typeToConvert,
                 JsonSerializerOptions options
             ) => throw new NotImplementedException();
+
             public override void Write(
                 Utf8JsonWriter writer,
                 MyClass value,
@@ -378,6 +380,7 @@ namespace System.Text.Json.Tests.Serialization
                 Type typeToConvert,
                 JsonSerializerOptions options
             ) => throw new NotImplementedException();
+
             public override void Write(
                 Utf8JsonWriter writer,
                 MyDerivedClass value,

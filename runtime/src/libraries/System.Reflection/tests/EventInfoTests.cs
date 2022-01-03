@@ -285,7 +285,9 @@ namespace System.Reflection.Tests
         }
 
         private static void ObjectEventArgsHandler(object o, EventArgs e) { }
+
         private static void ObjectHandler(object o) { }
+
         public delegate void ObjectDelegate(object o);
 
         private static EventInfo GetEventInfo(Type declaringType, string eventName)

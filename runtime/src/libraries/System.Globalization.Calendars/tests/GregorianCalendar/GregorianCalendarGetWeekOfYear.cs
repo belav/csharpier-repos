@@ -50,6 +50,7 @@ namespace System.Globalization.Tests
 
         public static CalendarWeekRule RandomCalendarWeekRule() =>
             (CalendarWeekRule)(s_randomDataGenerator.GetInt32(-55) % 3);
+
         public static DayOfWeek RandomDayOfWeek() =>
             (DayOfWeek)(s_randomDataGenerator.GetInt32(-55) % 7);
 

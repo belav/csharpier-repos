@@ -16,11 +16,13 @@ namespace System.Runtime.Caching
         private readonly object _value;
         private readonly DateTime _utcCreated;
         private int _state;
+
         // expiration
         private DateTime _utcAbsExp;
         private TimeSpan _slidingExp;
         private ExpiresEntryRef _expiresEntryRef;
         private byte _expiresBucket; // index of the expiration list (bucket)
+
         // usage
         private readonly byte _usageBucket; // index of the usage list (== priority-1)
         private UsageEntryRef _usageEntryRef; // ref into the usage list

@@ -28,6 +28,7 @@ namespace System.Composition.UnitTests
             SetOnImportsSatisfied = Imported;
         }
     }
+
     public class ActivationEventOrderingTests : ContainerTests
     {
         [Fact]

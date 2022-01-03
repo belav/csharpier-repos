@@ -18,6 +18,7 @@ namespace MS.Internal.Xml.XPath
             _cond = cond;
             _noPosition = noPosition;
         }
+
         private FilterQuery(FilterQuery other) : base(other)
         {
             _cond = Clone(other._cond);

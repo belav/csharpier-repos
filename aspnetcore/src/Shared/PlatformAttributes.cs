@@ -22,6 +22,7 @@ abstract class OSPlatformAttribute : Attribute
     {
         PlatformName = platformName;
     }
+
     public string PlatformName { get; }
 }
 

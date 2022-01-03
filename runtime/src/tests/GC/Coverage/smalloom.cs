@@ -44,6 +44,7 @@ class TestClass
         Node head;
 
         public int NodeCount = 0;
+
         public ByteArrayList()
         {
             head = null;

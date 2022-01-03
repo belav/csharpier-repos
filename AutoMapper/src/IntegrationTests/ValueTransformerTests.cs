@@ -213,6 +213,7 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                     base.Seed(context);
                 }
             }
+
             protected override MapperConfiguration Configuration { get; } =
                 new MapperConfiguration(
                     cfg =>
@@ -276,6 +277,7 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                     base.Seed(context);
                 }
             }
+
             protected override MapperConfiguration Configuration { get; } =
                 new MapperConfiguration(
                     cfg =>
@@ -402,6 +404,7 @@ namespace AutoMapper.IntegrationTests.ValueTransformers
                     base.Seed(context);
                 }
             }
+
             protected override MapperConfiguration Configuration { get; } =
                 new MapperConfiguration(
                     cfg =>

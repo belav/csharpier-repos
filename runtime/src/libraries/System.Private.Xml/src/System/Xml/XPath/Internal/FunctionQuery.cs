@@ -19,6 +19,7 @@ namespace MS.Internal.Xml.XPath
         {
             _args = args;
         }
+
         private FunctionQuery(FunctionQuery other) : base(other)
         {
             _function = other._function;

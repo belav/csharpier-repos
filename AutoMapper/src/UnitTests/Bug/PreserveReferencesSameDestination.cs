@@ -14,6 +14,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 SelfReference = this;
             }
+
             public BaseType SelfReference { get; set; }
         }
 
@@ -23,6 +24,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 SelfReference = this;
             }
+
             public BaseTypeDto SelfReference { get; set; }
         }
 

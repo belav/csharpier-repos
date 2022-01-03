@@ -120,6 +120,7 @@ namespace System.IO.Compression
         /// <p>See also: How to choose a compression level (in comments to <code>CompressionLevel</code>.</p>
         /// </summary>
         public const int Deflate_DefaultWindowBits = -15; // Legal values are 8..15 and -8..-15. 15 is the window size,
+
         // negative val causes deflate to produce raw deflate data (no zlib header).
 
         /// <summary>
@@ -149,6 +150,7 @@ namespace System.IO.Compression
         /// <p>See also: How to choose a compression level (in comments to <code>CompressionLevel</code>.</p>
         /// </summary>
         public const int Deflate_DefaultMemLevel = 8; // Memory usage by deflate. Legal range: [1..9]. 8 is ZLib default.
+
         // More is faster and better compression with more memory usage.
         public const int Deflate_NoCompressionMemLevel = 7;
 

@@ -110,7 +110,9 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         private class EmptyLocationAssembly : Assembly
         {
             public override string Location => string.Empty;
+
             public override AssemblyName GetName() => new AssemblyName("EmptyLocation");
+
             public override Stream? GetManifestResourceStream(string name) => null;
         }
     }

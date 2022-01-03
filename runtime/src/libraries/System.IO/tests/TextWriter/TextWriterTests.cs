@@ -767,6 +767,7 @@ namespace System.IO.Tests
         {
             public Action DisposeAction;
             public override Encoding Encoding => Encoding.UTF8;
+
             protected override void Dispose(bool disposing) => DisposeAction?.Invoke();
         }
 

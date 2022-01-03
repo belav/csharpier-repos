@@ -46,6 +46,7 @@ namespace GCTest
             Console.WriteLine("Test passed.");
             return 100;
         }
+
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
@@ -55,6 +56,7 @@ namespace GCTest
             GC.WaitForPendingFinalizers();
             GC.Collect();
         }
+
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
@@ -64,6 +66,7 @@ namespace GCTest
                 s_arr[i] = new Test(i);
             CollectAndFinalize();
         }
+
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
@@ -77,6 +80,7 @@ namespace GCTest
                 s_arr[i] = null;
             }
         }
+
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
@@ -91,6 +95,7 @@ namespace GCTest
                 s_arr[i] = null;
             }
         }
+
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
@@ -105,6 +110,7 @@ namespace GCTest
                 s_arr[i] = null;
             }
         }
+
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
@@ -119,6 +125,7 @@ namespace GCTest
                 s_arr[i] = null;
             }
         }
+
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]

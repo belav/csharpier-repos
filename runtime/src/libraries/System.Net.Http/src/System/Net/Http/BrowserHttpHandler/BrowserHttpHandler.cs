@@ -39,6 +39,7 @@ namespace System.Net.Http
         private static readonly HttpRequestOptionsKey<IDictionary<string, object>> FetchOptions =
             new HttpRequestOptionsKey<IDictionary<string, object>>("WebAssemblyFetchOptions");
         private bool _allowAutoRedirect = HttpHandlerDefaults.DefaultAutomaticRedirection;
+
         // flag to determine if the _allowAutoRedirect was explicitly set or not.
         private bool _isAllowAutoRedirectTouched;
 
@@ -46,6 +47,7 @@ namespace System.Net.Http
         /// Gets whether the current Browser supports streaming responses
         /// </summary>
         private static bool StreamingSupported { get; } = GetIsStreamingSupported();
+
         private static bool GetIsStreamingSupported()
         {
             using (
@@ -446,7 +448,9 @@ namespace System.Net.Http
             public JSObject Body => (JSObject)_fetchResponse.GetObjectProperty("body");
 
             public Task<object> ArrayBuffer() => (Task<object>)_fetchResponse.Invoke("arrayBuffer");
+
             public Task<object> Text() => (Task<object>)_fetchResponse.Invoke("text");
+
             public Task<object> JSON() => (Task<object>)_fetchResponse.Invoke("json");
 
             public void Dispose()
@@ -515,6 +519,7 @@ namespace System.Net.Http
                 Stream stream,
                 TransportContext? context
             ) => SerializeToStreamAsync(stream, context, CancellationToken.None);
+
             protected override async Task SerializeToStreamAsync(
                 Stream stream,
                 TransportContext? context,
@@ -527,6 +532,7 @@ namespace System.Net.Http
                     .WriteAsync(data, cancellationToken)
                     .ConfigureAwait(continueOnCapturedContext: true);
             }
+
             protected internal override bool TryComputeLength(out long length)
             {
                 if (_data != null)

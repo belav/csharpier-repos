@@ -236,7 +236,9 @@ namespace System.Reflection.Tests
         private class MemberHolderBase<T>
         {
             public MemberHolderBase() { }
+
             public MemberHolderBase(int x) { }
+
             public int MyField1;
             public int MyField2;
             public event Action MyEvent1
@@ -249,10 +251,15 @@ namespace System.Reflection.Tests
                 add { }
                 remove { }
             }
+
             public void MyMethod1<M>() { }
+
             public void MyMethod2<M>() { }
+
             public void MyParameterizedMethod1(int x, int y) { }
+
             public void MyParameterizedMethod2(int x, int y) { }
+
             public int MyProperty1
             {
                 get { throw null!; }

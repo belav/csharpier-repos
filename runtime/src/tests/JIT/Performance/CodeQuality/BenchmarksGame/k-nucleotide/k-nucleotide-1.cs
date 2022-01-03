@@ -145,6 +145,7 @@ namespace BenchmarksGame
         private class Count
         {
             public int V;
+
             public Count(int v)
             {
                 V = v;

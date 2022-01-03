@@ -40,6 +40,7 @@ namespace Newtonsoft.Json.Linq
     {
         private JContainer? _token;
         private JContainer? _parent;
+
         // used when writer is writing single value and the value has no containing parent
         private JValue? _value;
         private JToken? _current;

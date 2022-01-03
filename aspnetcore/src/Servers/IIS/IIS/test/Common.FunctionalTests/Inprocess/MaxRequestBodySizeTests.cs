@@ -15,14 +15,18 @@ using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests.InProcess;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests.InProcess;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests.InProcess;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.InProcess;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]

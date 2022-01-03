@@ -29,6 +29,7 @@ namespace System.Text.RegularExpressions
 
         protected internal int[]? runtrack; // The backtracking stack.  Opcodes use this to store data regarding
         protected internal int runtrackpos; // what they have matched and where to backtrack to.  Each "frame" on
+
         // the stack takes the form of [CodePosition Data1 Data2...], where
         // CodePosition is the position of the current opcode and
         // the data values are all optional.  The CodePosition can be negative, and
@@ -42,6 +43,7 @@ namespace System.Text.RegularExpressions
 
         protected internal int[]? runstack; // This stack is used to track text positions across different opcodes.
         protected internal int runstackpos; // For example, in /(a*b)+/, the parentheses result in a SetMark/CaptureMark
+
         // pair. SetMark records the text position before we match a*b.  Then
         // CaptureMark uses that position to figure out where the capture starts.
         // Opcodes which push onto this stack are always paired with other opcodes
@@ -50,6 +52,7 @@ namespace System.Text.RegularExpressions
 
         protected internal int[]? runcrawl; // The crawl stack is used to keep track of captures.  Every time a group
         protected internal int runcrawlpos; // has a capture, we push its group number onto the runcrawl stack.  In
+
         // the case of a balanced match, we push BOTH groups onto the stack.
 
         protected internal int runtrackcount; // count of states that may do backtracking

@@ -24,6 +24,7 @@ namespace System.Diagnostics.Metrics
             Quantile = quantile;
             Value = value;
         }
+
         public double Quantile { get; }
         public double Value { get; }
     }

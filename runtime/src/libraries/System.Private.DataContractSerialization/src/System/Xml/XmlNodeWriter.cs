@@ -27,19 +27,23 @@ namespace System.Xml
         }
 
         public abstract void Flush();
+
         public virtual Task FlushAsync()
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(NotImplemented.ByDesign);
         }
+
         public abstract void Close();
         public abstract void WriteDeclaration();
         public abstract void WriteComment(string text);
         public abstract void WriteCData(string text);
         public abstract void WriteStartElement(string? prefix, string localName);
+
         public virtual Task WriteStartElementAsync(string? prefix, string localName)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(NotImplemented.ByDesign);
         }
+
         public virtual void WriteStartElement(
             byte[] prefixBuffer,
             int prefixOffset,
@@ -54,17 +58,22 @@ namespace System.Xml
                 Encoding.UTF8.GetString(localNameBuffer, localNameOffset, localNameLength)
             );
         }
+
         public abstract void WriteStartElement(string? prefix, XmlDictionaryString localName);
         public abstract void WriteEndStartElement(bool isEmpty);
+
         public virtual Task WriteEndStartElementAsync(bool isEmpty)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(NotImplemented.ByDesign);
         }
+
         public abstract void WriteEndElement(string? prefix, string localName);
+
         public virtual Task WriteEndElementAsync(string? prefix, string localName)
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(NotImplemented.ByDesign);
         }
+
         public virtual void WriteEndElement(
             byte[] prefixBuffer,
             int prefixOffset,
@@ -79,7 +88,9 @@ namespace System.Xml
                 Encoding.UTF8.GetString(localNameBuffer, localNameOffset, localNameLength)
             );
         }
+
         public abstract void WriteXmlnsAttribute(string? prefix, string ns);
+
         public virtual void WriteXmlnsAttribute(
             byte[] prefixBuffer,
             int prefixOffset,
@@ -94,8 +105,10 @@ namespace System.Xml
                 Encoding.UTF8.GetString(nsBuffer, nsOffset, nsLength)
             );
         }
+
         public abstract void WriteXmlnsAttribute(string? prefix, XmlDictionaryString ns);
         public abstract void WriteStartAttribute(string prefix, string localName);
+
         public virtual void WriteStartAttribute(
             byte[] prefixBuffer,
             int prefixOffset,
@@ -110,12 +123,15 @@ namespace System.Xml
                 Encoding.UTF8.GetString(localNameBuffer, localNameOffset, localNameLength)
             );
         }
+
         public abstract void WriteStartAttribute(string prefix, XmlDictionaryString localName);
         public abstract void WriteEndAttribute();
+
         public virtual Task WriteEndAttributeAsync()
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(NotImplemented.ByDesign);
         }
+
         public abstract void WriteCharEntity(int ch);
         public abstract void WriteEscapedText(string value);
         public abstract void WriteEscapedText(XmlDictionaryString value);
@@ -146,6 +162,7 @@ namespace System.Xml
             int offset,
             int count
         );
+
         public virtual Task WriteBase64TextAsync(
             byte[] trailBuffer,
             int trailCount,
@@ -156,16 +173,23 @@ namespace System.Xml
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(NotImplemented.ByDesign);
         }
+
         public abstract void WriteQualifiedName(string prefix, XmlDictionaryString localName);
 
         private sealed class XmlNullNodeWriter : XmlNodeWriter
         {
             public override void Flush() { }
+
             public override void Close() { }
+
             public override void WriteDeclaration() { }
+
             public override void WriteComment(string text) { }
+
             public override void WriteCData(string text) { }
+
             public override void WriteStartElement(string? prefix, string localName) { }
+
             public override void WriteStartElement(
                 byte[] prefixBuffer,
                 int prefixOffset,
@@ -174,12 +198,16 @@ namespace System.Xml
                 int localNameOffset,
                 int localNameLength
             ) { }
+
             public override void WriteStartElement(
                 string? prefix,
                 XmlDictionaryString localName
             ) { }
+
             public override void WriteEndStartElement(bool isEmpty) { }
+
             public override void WriteEndElement(string? prefix, string localName) { }
+
             public override void WriteEndElement(
                 byte[] prefixBuffer,
                 int prefixOffset,
@@ -188,7 +216,9 @@ namespace System.Xml
                 int localNameOffset,
                 int localNameLength
             ) { }
+
             public override void WriteXmlnsAttribute(string? prefix, string ns) { }
+
             public override void WriteXmlnsAttribute(
                 byte[] prefixBuffer,
                 int prefixOffset,
@@ -197,8 +227,11 @@ namespace System.Xml
                 int nsOffset,
                 int nsLength
             ) { }
+
             public override void WriteXmlnsAttribute(string? prefix, XmlDictionaryString ns) { }
+
             public override void WriteStartAttribute(string prefix, string localName) { }
+
             public override void WriteStartAttribute(
                 byte[] prefixBuffer,
                 int prefixOffset,
@@ -207,34 +240,60 @@ namespace System.Xml
                 int localNameOffset,
                 int localNameLength
             ) { }
+
             public override void WriteStartAttribute(
                 string prefix,
                 XmlDictionaryString localName
             ) { }
+
             public override void WriteEndAttribute() { }
+
             public override void WriteCharEntity(int ch) { }
+
             public override void WriteEscapedText(string value) { }
+
             public override void WriteEscapedText(XmlDictionaryString value) { }
+
             public override void WriteEscapedText(char[] chars, int offset, int count) { }
+
             public override void WriteEscapedText(byte[] buffer, int offset, int count) { }
+
             public override void WriteText(string value) { }
+
             public override void WriteText(XmlDictionaryString value) { }
+
             public override void WriteText(char[] chars, int offset, int count) { }
+
             public override void WriteText(byte[] buffer, int offset, int count) { }
+
             public override void WriteInt32Text(int value) { }
+
             public override void WriteInt64Text(long value) { }
+
             public override void WriteBoolText(bool value) { }
+
             public override void WriteUInt64Text(ulong value) { }
+
             public override void WriteFloatText(float value) { }
+
             public override void WriteDoubleText(double value) { }
+
             public override void WriteDecimalText(decimal value) { }
+
             public override void WriteDateTimeText(DateTime value) { }
+
             public override void WriteUniqueIdText(UniqueId value) { }
+
             public override void WriteTimeSpanText(TimeSpan value) { }
+
             public override void WriteGuidText(Guid value) { }
+
             public override void WriteStartListText() { }
+
             public override void WriteListSeparator() { }
+
             public override void WriteEndListText() { }
+
             public override void WriteBase64Text(
                 byte[] trailBuffer,
                 int trailCount,
@@ -242,6 +301,7 @@ namespace System.Xml
                 int offset,
                 int count
             ) { }
+
             public override void WriteQualifiedName(
                 string prefix,
                 XmlDictionaryString localName

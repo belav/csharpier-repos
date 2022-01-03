@@ -908,6 +908,7 @@ namespace Roslyn.Test.Utilities
             public static readonly LineComparer Instance = new LineComparer();
 
             public bool Equals(string left, string right) => left.Trim() == right.Trim();
+
             public int GetHashCode(string str) => str.Trim().GetHashCode();
         }
 

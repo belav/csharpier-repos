@@ -564,6 +564,7 @@ namespace System.Linq.Expressions.Tests
             {
                 Value = value;
             }
+
             public int Value { get; }
 
             public static BaseClass operator -(BaseClass i1, BaseClass i2) =>

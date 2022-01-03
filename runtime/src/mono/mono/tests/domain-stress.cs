@@ -59,6 +59,7 @@ class T
         }
         Console.WriteLine("Thread end " + Thread.CurrentThread.GetHashCode());
     }
+
     static int Main(string[] args)
     {
         if (args.Length > 0)

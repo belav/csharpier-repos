@@ -200,6 +200,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             }
             return true;
         }
+
         /// <summary>
         /// Designed to handle the /link and /embed switches:
         ///

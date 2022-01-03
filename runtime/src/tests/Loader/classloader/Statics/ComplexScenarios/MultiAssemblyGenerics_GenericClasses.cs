@@ -8,6 +8,7 @@ public struct G_VA<T>
     public static int S_I;
     public int I;
     public T MyT;
+
     public G_VA(int i, T t)
     {
         I = i;
@@ -21,6 +22,7 @@ public class G_CA<T>
     public static int S_I;
     public int I;
     public T MyT;
+
     public G_CA(int i, T t)
     {
         I = i;

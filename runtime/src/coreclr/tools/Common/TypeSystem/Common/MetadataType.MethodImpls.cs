@@ -27,6 +27,7 @@ namespace Internal.TypeSystem
         protected abstract MethodImplRecord[] ComputeVirtualMethodImplsForType();
 
         private MethodImplRecord[] _allVirtualMethodImplsForType;
+
         /// <summary>
         /// Get an array of all MethodImpls that pertain to overriding virtual (non-interface methods) on this type.
         /// Expected to cache results so this api can be used repeatedly.

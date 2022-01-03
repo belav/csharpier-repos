@@ -2963,8 +2963,10 @@ namespace System.Text
 
             /// <summary>The associated StringBuilder to which to append.</summary>
             internal readonly StringBuilder _stringBuilder;
+
             /// <summary>Optional provider to pass to IFormattable.ToString or ISpanFormattable.TryFormat calls.</summary>
             private readonly IFormatProvider? _provider;
+
             /// <summary>Whether <see cref="_provider"/> provides an ICustomFormatter.</summary>
             /// <remarks>
             /// Custom formatters are very rare.  We want to support them, but it's ok if we make them more expensive

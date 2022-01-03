@@ -28,6 +28,7 @@ namespace System.ComponentModel.Composition
     public class CallbackImportNotify : IPartImportsSatisfiedNotification
     {
         private Action callback;
+
         public CallbackImportNotify(Action callback)
         {
             this.callback = callback;

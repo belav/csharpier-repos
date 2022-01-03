@@ -24,7 +24,9 @@ namespace System.Reflection.TypeLoading
 
         public sealed override bool IsTypeDefinition => false;
         public sealed override bool IsGenericTypeDefinition => false;
+
         protected sealed override bool HasElementTypeImpl() => true;
+
         public sealed override bool IsConstructedGenericType => false;
         public sealed override bool IsGenericParameter => false;
         public sealed override bool IsGenericTypeParameter => false;
@@ -35,7 +37,9 @@ namespace System.Reflection.TypeLoading
         internal sealed override RoModule GetRoModule() => _elementType.GetRoModule();
 
         protected sealed override string ComputeName() => _elementType.Name + Suffix;
+
         protected sealed override string? ComputeNamespace() => _elementType.Namespace;
+
         protected sealed override string? ComputeFullName()
         {
             string? fullName = _elementType.FullName;
@@ -48,14 +52,17 @@ namespace System.Reflection.TypeLoading
 
         public sealed override MethodBase DeclaringMethod =>
             throw new InvalidOperationException(SR.Arg_NotGenericParameter);
+
         protected sealed override RoType? ComputeDeclaringType() => null;
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
             Array.Empty<CustomAttributeData>();
+
         internal sealed override bool IsCustomAttributeDefined(
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name
         ) => false;
+
         internal sealed override CustomAttributeData? TryFindCustomAttribute(
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name
@@ -67,10 +74,14 @@ namespace System.Reflection.TypeLoading
 
         public sealed override Type GetGenericTypeDefinition() =>
             throw new InvalidOperationException(SR.InvalidOperation_NotGenericType);
+
         internal sealed override RoType[] GetGenericTypeParametersNoCopy() => Array.Empty<RoType>();
+
         internal sealed override RoType[] GetGenericTypeArgumentsNoCopy() => Array.Empty<RoType>();
+
         protected internal sealed override RoType[] GetGenericArgumentsNoCopy() =>
             _elementType.GetGenericArgumentsNoCopy();
+
         [RequiresUnreferencedCode(
             "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
         )]
@@ -81,11 +92,13 @@ namespace System.Reflection.TypeLoading
             throw new InvalidOperationException(SR.Arg_NotGenericParameter);
         public sealed override int GenericParameterPosition =>
             throw new InvalidOperationException(SR.Arg_NotGenericParameter);
+
         public sealed override Type[] GetGenericParameterConstraints() =>
             throw new InvalidOperationException(SR.Arg_NotGenericParameter);
 
         public sealed override Guid GUID => Guid.Empty;
         public sealed override StructLayoutAttribute? StructLayoutAttribute => null;
+
         protected internal sealed override RoType ComputeEnumUnderlyingType() =>
             throw new ArgumentException(SR.Arg_MustBeEnum);
 
@@ -96,14 +109,17 @@ namespace System.Reflection.TypeLoading
             NameFilter? filter,
             Type reflectedType
         ) => Array.Empty<EventInfo>();
+
         internal sealed override IEnumerable<FieldInfo> GetFieldsCore(
             NameFilter? filter,
             Type reflectedType
         ) => Array.Empty<FieldInfo>();
+
         internal sealed override IEnumerable<PropertyInfo> GetPropertiesCore(
             NameFilter? filter,
             Type reflectedType
         ) => Array.Empty<PropertyInfo>();
+
         internal sealed override IEnumerable<RoType> GetNestedTypesCore(NameFilter? filter) =>
             Array.Empty<RoType>();
     }

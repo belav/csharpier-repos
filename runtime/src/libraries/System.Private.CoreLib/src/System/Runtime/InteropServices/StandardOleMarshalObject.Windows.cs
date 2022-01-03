@@ -208,6 +208,7 @@ namespace System.Runtime.InteropServices
             int mshlflags,
             out Guid pCid
         );
+
         [PreserveSig]
         int GetMarshalSizeMax(
             ref Guid riid,
@@ -217,6 +218,7 @@ namespace System.Runtime.InteropServices
             int mshlflags,
             out int pSize
         );
+
         [PreserveSig]
         int MarshalInterface(
             IntPtr pStm,
@@ -226,10 +228,13 @@ namespace System.Runtime.InteropServices
             IntPtr pvDestContext,
             int mshlflags
         );
+
         [PreserveSig]
         int UnmarshalInterface(IntPtr pStm, ref Guid riid, out IntPtr ppv);
+
         [PreserveSig]
         int ReleaseMarshalData(IntPtr pStm);
+
         [PreserveSig]
         int DisconnectObject(int dwReserved);
     }

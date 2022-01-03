@@ -11,10 +11,15 @@ namespace System.Composition.UnitTests
     public class ConstraintTests : ContainerTests
     {
         public interface IThing { }
+
         public interface IUnrelatedThings<TC, TP> : IList<TC>, IThing { }
+
         public interface IInheritedThings<TC, TP> : IList<TC>, IThing where TC : TP { }
+
         public interface ICar : IThing { }
+
         public interface IBook : IThing { }
+
         public interface IHandler<T> where T : IThing { }
 
         [Export(typeof(IHandler<>))]

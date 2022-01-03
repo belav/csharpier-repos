@@ -1398,6 +1398,7 @@ void Method()
                 position = change.Span.End;
             }
         }
+
         private SourceText GetChangesWithoutMiddle(
             SourceText original,
             Func<SourceText, SourceText> fnChange1,

@@ -71,7 +71,9 @@ namespace System.IO.Tests
         private sealed class OverridesDisposeFileStream : FileStream
         {
             public bool DisposeInvoked;
+
             public OverridesDisposeFileStream(string path, FileMode mode) : base(path, mode) { }
+
             protected override void Dispose(bool disposing)
             {
                 DisposeInvoked = true;

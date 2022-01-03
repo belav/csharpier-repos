@@ -8,7 +8,9 @@ namespace System.Reflection
         internal SignatureByRefType(SignatureType elementType) : base(elementType) { }
 
         protected sealed override bool IsArrayImpl() => false;
+
         protected sealed override bool IsByRefImpl() => true;
+
         protected sealed override bool IsPointerImpl() => false;
 
         public sealed override bool IsSZArray => false;

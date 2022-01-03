@@ -5,6 +5,7 @@ struct S0
 {
     public short F0;
     public int F1;
+
     public S0(short f0, int f1)
     {
         F0 = f0;

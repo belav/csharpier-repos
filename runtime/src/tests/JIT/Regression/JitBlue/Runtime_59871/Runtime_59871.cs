@@ -39,6 +39,7 @@ public class Runtime_59871
     {
         [FieldOffset(0)]
         public long Int64;
+
         [FieldOffset(0)]
         public DateTime DateTime;
     }

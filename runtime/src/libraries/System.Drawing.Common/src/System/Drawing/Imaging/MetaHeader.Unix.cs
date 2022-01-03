@@ -45,6 +45,7 @@ namespace System.Drawing.Imaging
         public short file_type;
         public short header_size;
         public short version;
+
         // this is unaligned and fails on the SPARC architecture (see bug #81254 for details)
         // public int file_size;
         public ushort file_size_low;

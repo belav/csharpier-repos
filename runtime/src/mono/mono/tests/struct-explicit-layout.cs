@@ -8,12 +8,16 @@ namespace Test
     {
         [FieldOffset(0)]
         public short S0;
+
         [FieldOffset(2)]
         public int I0;
+
         [FieldOffset(6)]
         public long L0;
+
         [FieldOffset(14)]
         public float F0;
+
         [FieldOffset(18)]
         public double D0;
     }

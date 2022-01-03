@@ -28,6 +28,7 @@ namespace Sample
             "System.Runtime.InteropServices.JavaScript.Function, System.Private.Runtime.InteropServices.JavaScript",
             true
         );
+
         [DynamicDependency(
             "InvokeJS(System.String)",
             "System.Runtime.InteropServices.JavaScript.Runtime",
@@ -37,6 +38,7 @@ namespace Sample
             "InvokeJS",
             new Type[] { typeof(string) }
         );
+
         [DynamicDependency(
             DynamicallyAccessedMemberTypes.PublicConstructors,
             "System.Runtime.InteropServices.JavaScript.Function",
@@ -45,6 +47,7 @@ namespace Sample
         static ConstructorInfo functionConstructor = jsRuntimeType.GetConstructor(
             new Type[] { typeof(object[]) }
         );
+
         [DynamicDependency(
             "Call()",
             "System.Runtime.InteropServices.JavaScript.Function",

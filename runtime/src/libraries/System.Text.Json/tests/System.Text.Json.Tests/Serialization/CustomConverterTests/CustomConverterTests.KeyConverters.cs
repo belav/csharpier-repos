@@ -177,6 +177,7 @@ namespace System.Text.Json.Serialization.Tests
                 Type typeToConvert,
                 JsonSerializerOptions options
             ) => throw new NotSupportedException();
+
             public override void Write(
                 Utf8JsonWriter writer,
                 string value,

@@ -1267,7 +1267,6 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.OrElse(Expression.Constant(5), Expression.Constant(5))
             );
         }
-
 #endif
 
         [Fact]
@@ -1416,15 +1415,19 @@ namespace System.Linq.Expressions.Tests
         public class NonGenericClass
         {
             public void InstanceMethod() { }
+
             public static void StaticVoidMethod() { }
 
             public static int StaticIntMethod0() => 0;
+
             public static int StaticIntMethod1(int i) => 0;
+
             public static int StaticIntMethod3(int i1, int i2, int i3) => 0;
 
             public static int StaticIntMethod2Valid(int i1, int i2) => 0;
 
             public static int StaticIntMethod2Invalid1(int i1, string i2) => 0;
+
             public static string StaticIntMethod2Invalid2(int i1, int i2) => "abc";
         }
 
@@ -1439,6 +1442,7 @@ namespace System.Linq.Expressions.Tests
             {
                 Value = value;
             }
+
             public int Value { get; }
 
             public static bool operator true(TrueFalseClass c)
@@ -1484,13 +1488,16 @@ namespace System.Linq.Expressions.Tests
             {
                 Value = value;
             }
+
             public int Value { get; }
 
             public static bool operator true(NamedMethods c) => c.Value != 0;
+
             public static bool operator false(NamedMethods c) => c.Value == 0;
 
             public static NamedMethods op_BitwiseAnd(NamedMethods c1, NamedMethods c2) =>
                 new NamedMethods(c1.Value & c2.Value);
+
             public static NamedMethods op_BitwiseOr(NamedMethods c1, NamedMethods c2) =>
                 new NamedMethods(c1.Value | c2.Value);
         }

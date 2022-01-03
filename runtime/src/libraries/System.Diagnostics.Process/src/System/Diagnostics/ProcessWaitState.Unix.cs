@@ -200,27 +200,34 @@ namespace System.Diagnostics
         /// instance concurrently.
         /// </summary>
         private readonly object _gate = new object();
+
         /// <summary>ID of the associated process.</summary>
         private readonly int _processId;
+
         /// <summary>Associated process is a child process.</summary>
         private readonly bool _isChild;
+
         /// <summary>Associated process is a child that can use the terminal.</summary>
         private readonly bool _usesTerminal;
 
         /// <summary>If a wait operation is in progress, the Task that represents it; otherwise, null.</summary>
         private Task? _waitInProgress;
+
         /// <summary>The number of alive users of this object.</summary>
         private int _outstandingRefCount;
 
         /// <summary>Whether the associated process exited.</summary>
         private bool _exited;
+
         /// <summary>If the process exited, it's exit code, or null if we were unable to determine one.</summary>
         private int? _exitCode;
+
         /// <summary>
         /// The approximate time the process exited.  We do not have the ability to know exact time a process
         /// exited, so we approximate it by storing the time that we discovered it exited.
         /// </summary>
         private DateTime _exitTime;
+
         /// <summary>A lazily-initialized event set when the process exits.</summary>
         private ManualResetEvent? _exitedEvent;
 

@@ -100,8 +100,10 @@ namespace System.Buffers.Text.Tests
 
             public override bool Equals(object obj) =>
                 obj is ReversedFormatTestDataKey other && Equals(other);
+
             public bool Equals(ReversedFormatTestDataKey other) =>
                 FormatSymbol == other.FormatSymbol && Text == other.Text;
+
             public override int GetHashCode() => FormatSymbol.GetHashCode() ^ Text.GetHashCode();
 
             public char FormatSymbol { get; }

@@ -1200,6 +1200,7 @@ namespace System.Linq.Expressions.Tests
     public class SomePublicMethodsForLdToken
     {
         public static void Bar() { }
+
         public static void Qux<T>() { }
     }
 }

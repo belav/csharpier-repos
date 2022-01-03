@@ -16,6 +16,7 @@ public class Program
     static bool Eval(byte b) => b == 100;
 
     static ulong[] s_34 = new ulong[] { 0 };
+
     public static int Main()
     {
         byte[] vr1 = new byte[] { 0 };

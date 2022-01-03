@@ -244,6 +244,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
             return false;
         }
+
         /***************************************************************************************************
 
          There exists an explicit conversion ...

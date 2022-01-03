@@ -65,6 +65,7 @@ $$"
         {
             await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
+
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotInSelectMemberExpressionOnlyADot()
         {
@@ -72,6 +73,7 @@ $$"
                 AddInsideMethod(@"var y = from x in new [] { 1,2,3 } select x.$$")
             );
         }
+
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotInSelectMemberExpression()
         {
@@ -79,6 +81,7 @@ $$"
                 AddInsideMethod(@"var y = from x in new [] { 1,2,3 } select x.i$$")
             );
         }
+
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestAfterJoinRightExpr()
         {

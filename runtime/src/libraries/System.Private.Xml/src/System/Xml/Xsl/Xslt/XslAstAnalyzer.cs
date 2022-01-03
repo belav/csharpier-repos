@@ -885,6 +885,7 @@ namespace System.Xml.Xsl.Xslt
         internal readonly struct NullErrorHelper : IErrorHelper
         {
             public void ReportError(string res, params string?[]? args) { }
+
             public void ReportWarning(string res, params string?[]? args) { }
         }
 

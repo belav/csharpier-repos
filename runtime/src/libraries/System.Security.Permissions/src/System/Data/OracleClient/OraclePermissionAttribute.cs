@@ -24,6 +24,7 @@ namespace System.Data.OracleClient
     public sealed class OraclePermissionAttribute : CodeAccessSecurityAttribute
     {
         public OraclePermissionAttribute(SecurityAction action) : base(action) { }
+
         public bool AllowBlankPassword { get; set; }
         public string ConnectionString
         {
@@ -36,12 +37,15 @@ namespace System.Data.OracleClient
             get { return null; }
             set { }
         }
+
         public override Security.IPermission CreatePermission()
         {
             return null;
         }
+
         [System.ComponentModel.EditorBrowsable(ComponentModel.EditorBrowsableState.Never)]
         public bool ShouldSerializeConnectionString() => false;
+
         [System.ComponentModel.EditorBrowsable(ComponentModel.EditorBrowsableState.Never)]
         public bool ShouldSerializeKeyRestrictions() => false;
     }

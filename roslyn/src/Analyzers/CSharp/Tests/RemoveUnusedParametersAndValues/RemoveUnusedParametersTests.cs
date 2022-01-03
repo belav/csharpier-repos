@@ -49,6 +49,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             string initialMarkup,
             ParseOptions parseOptions = null
         ) => TestDiagnosticMissingAsync(initialMarkup, options: null, parseOptions);
+
         private Task TestDiagnosticsAsync(
             string initialMarkup,
             params DiagnosticDescription[] expectedDiagnostics
@@ -59,6 +60,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                 parseOptions: null,
                 expectedDiagnostics
             );
+
         private Task TestDiagnosticMissingAsync(
             string initialMarkup,
             OptionsCollection options,
@@ -72,11 +74,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                     retainNonFixableDiagnostics: true
                 )
             );
+
         private Task TestDiagnosticsAsync(
             string initialMarkup,
             OptionsCollection options,
             params DiagnosticDescription[] expectedDiagnostics
         ) => TestDiagnosticsAsync(initialMarkup, options, parseOptions: null, expectedDiagnostics);
+
         private Task TestDiagnosticsAsync(
             string initialMarkup,
             OptionsCollection options,

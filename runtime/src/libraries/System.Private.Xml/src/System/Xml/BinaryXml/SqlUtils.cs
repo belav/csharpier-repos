@@ -327,6 +327,7 @@ namespace System.Xml
         {
             _data = v;
         }
+
         public BinXmlSqlMoney(long v)
         {
             _data = v;
@@ -381,6 +382,7 @@ namespace System.Xml
             sb.Append((char)('0' + (val / 10)));
             sb.Append((char)('0' + (val % 10)));
         }
+
         private static void Write4DigNeg(StringBuilder sb, int val)
         {
             Debug.Assert(val > -10000 && val < 10000);
@@ -596,6 +598,7 @@ namespace System.Xml
             sb.Append('Z');
             return sb.ToString();
         }
+
         public static DateTime XsdDateTimeToDateTime(long val)
         {
             int yr;
@@ -623,6 +626,7 @@ namespace System.Xml
             WriteTimeZone(sb, negTimeZ, hr, min);
             return sb.ToString();
         }
+
         public static DateTime XsdDateToDateTime(long val)
         {
             int yr;
@@ -650,6 +654,7 @@ namespace System.Xml
             sb.Append('Z');
             return sb.ToString();
         }
+
         public static DateTime XsdTimeToDateTime(long val)
         {
             int hr;
@@ -669,6 +674,7 @@ namespace System.Xml
                     : "yyyy/MM/dd\\THH:mm:ss";
             return dateTime.ToString(format, CultureInfo.InvariantCulture);
         }
+
         public static DateTime SqlDateTimeToDateTime(int dateticks, uint timeticks)
         {
             DateTime SQLBaseDate = new DateTime(1900, 1, 1);
@@ -692,6 +698,7 @@ namespace System.Xml
             DateTime dateTime = SqlSmallDateTimeToDateTime(dateticks, timeticks);
             return dateTime.ToString("yyyy/MM/dd\\THH:mm:ss", CultureInfo.InvariantCulture);
         }
+
         public static DateTime SqlSmallDateTimeToDateTime(short dateticks, ushort timeticks)
         {
             return SqlDateTimeToDateTime((int)dateticks, (uint)(timeticks * SQLTicksPerMinute));

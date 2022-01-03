@@ -2834,6 +2834,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(false, "Missing case in lambda conversion error reporting");
             diagnostics.Add(ErrorCode.ERR_InternalError, syntax.Location);
         }
+
 #nullable disable
 
         protected static void GenerateImplicitConversionError(

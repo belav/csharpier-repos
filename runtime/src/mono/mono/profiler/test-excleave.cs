@@ -4,6 +4,7 @@ class T
 {
     static int f = 0;
     static int c = 0;
+
     static void throw_ex()
     {
         try
@@ -15,6 +16,7 @@ class T
             f++;
         }
     }
+
     static void Main(string[] args)
     {
         for (int i = 0; i < 1000; ++i)

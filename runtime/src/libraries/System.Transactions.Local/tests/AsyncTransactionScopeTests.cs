@@ -2665,6 +2665,7 @@ namespace System.Transactions.Tests
                 Assert.Equal(txId, AssertAndGetCurrentTransactionId());
             }
         }
+
         private static void AssertTransactionNull()
         {
             Assert.Null(Transaction.Current);

@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
         {
             private readonly KeyValuePair<K, V>[] _store;
             private int _index;
+
             public OrderedTestDictionary(int capacity)
             {
                 _store = new KeyValuePair<K, V>[capacity];

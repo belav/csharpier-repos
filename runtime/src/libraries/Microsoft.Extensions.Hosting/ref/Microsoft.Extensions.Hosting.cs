@@ -20,6 +20,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 }
+
 namespace Microsoft.Extensions.Hosting
 {
     public enum BackgroundServiceExceptionBehavior
@@ -27,37 +28,45 @@ namespace Microsoft.Extensions.Hosting
         StopHost,
         Ignore
     }
+
     public partial class ConsoleLifetimeOptions
     {
         public ConsoleLifetimeOptions() { }
+
         public bool SuppressStatusMessages
         {
             get { throw null; }
             set { }
         }
     }
+
     public static partial class Host
     {
         public static Microsoft.Extensions.Hosting.IHostBuilder CreateDefaultBuilder()
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder CreateDefaultBuilder(string[] args)
         {
             throw null;
         }
     }
+
     public partial class HostBuilder : Microsoft.Extensions.Hosting.IHostBuilder
     {
         public HostBuilder() { }
+
         public System.Collections.Generic.IDictionary<object, object> Properties
         {
             get { throw null; }
         }
+
         public Microsoft.Extensions.Hosting.IHost Build()
         {
             throw null;
         }
+
         public Microsoft.Extensions.Hosting.IHostBuilder ConfigureAppConfiguration(
             System.Action<
                 Microsoft.Extensions.Hosting.HostBuilderContext,
@@ -67,6 +76,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public Microsoft.Extensions.Hosting.IHostBuilder ConfigureContainer<TContainerBuilder>(
             System.Action<
                 Microsoft.Extensions.Hosting.HostBuilderContext,
@@ -76,12 +86,14 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public Microsoft.Extensions.Hosting.IHostBuilder ConfigureHostConfiguration(
             System.Action<Microsoft.Extensions.Configuration.IConfigurationBuilder> configureDelegate
         )
         {
             throw null;
         }
+
         public Microsoft.Extensions.Hosting.IHostBuilder ConfigureServices(
             System.Action<
                 Microsoft.Extensions.Hosting.HostBuilderContext,
@@ -91,12 +103,14 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public Microsoft.Extensions.Hosting.IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
             Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<TContainerBuilder> factory
         )
         {
             throw null;
         }
+
         public Microsoft.Extensions.Hosting.IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
             System.Func<
                 Microsoft.Extensions.Hosting.HostBuilderContext,
@@ -107,6 +121,7 @@ namespace Microsoft.Extensions.Hosting
             throw null;
         }
     }
+
     public static partial class HostingHostBuilderExtensions
     {
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureAppConfiguration(
@@ -116,6 +131,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureContainer<TContainerBuilder>(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<TContainerBuilder> configureDelegate
@@ -123,6 +139,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureDefaults(
             this Microsoft.Extensions.Hosting.IHostBuilder builder,
             string[] args
@@ -130,6 +147,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureHostOptions(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<
@@ -140,6 +158,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureHostOptions(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<Microsoft.Extensions.Hosting.HostOptions> configureOptions
@@ -147,6 +166,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureLogging(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<
@@ -157,6 +177,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureLogging(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<Microsoft.Extensions.Logging.ILoggingBuilder> configureLogging
@@ -164,6 +185,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder ConfigureServices(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<Microsoft.Extensions.DependencyInjection.IServiceCollection> configureDelegate
@@ -171,6 +193,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatform("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatform("ios")]
@@ -184,6 +207,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatform("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatform("ios")]
@@ -196,6 +220,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatform("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatform("ios")]
@@ -206,6 +231,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatform("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatform("ios")]
@@ -217,6 +243,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder UseContentRoot(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             string contentRoot
@@ -224,6 +251,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder UseDefaultServiceProvider(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<Microsoft.Extensions.DependencyInjection.ServiceProviderOptions> configure
@@ -231,6 +259,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder UseDefaultServiceProvider(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<
@@ -241,6 +270,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder UseEnvironment(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             string environment
@@ -249,9 +279,11 @@ namespace Microsoft.Extensions.Hosting
             throw null;
         }
     }
+
     public partial class HostOptions
     {
         public HostOptions() { }
+
         public System.TimeSpan ShutdownTimeout
         {
             get { throw null; }
@@ -264,6 +296,7 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 }
+
 namespace Microsoft.Extensions.Hosting.Internal
 {
     public partial class ApplicationLifetime
@@ -273,6 +306,7 @@ namespace Microsoft.Extensions.Hosting.Internal
         public ApplicationLifetime(
             Microsoft.Extensions.Logging.ILogger<Microsoft.Extensions.Hosting.Internal.ApplicationLifetime> logger
         ) { }
+
         public System.Threading.CancellationToken ApplicationStarted
         {
             get { throw null; }
@@ -285,10 +319,14 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             get { throw null; }
         }
+
         public void NotifyStarted() { }
+
         public void NotifyStopped() { }
+
         public void StopApplication() { }
     }
+
     [System.Runtime.Versioning.UnsupportedOSPlatform("android")]
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
     [System.Runtime.Versioning.UnsupportedOSPlatform("ios")]
@@ -303,6 +341,7 @@ namespace Microsoft.Extensions.Hosting.Internal
             Microsoft.Extensions.Hosting.IHostApplicationLifetime applicationLifetime,
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.HostOptions> hostOptions
         ) { }
+
         public ConsoleLifetime(
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.ConsoleLifetimeOptions> options,
             Microsoft.Extensions.Hosting.IHostEnvironment environment,
@@ -310,13 +349,16 @@ namespace Microsoft.Extensions.Hosting.Internal
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.HostOptions> hostOptions,
             Microsoft.Extensions.Logging.ILoggerFactory loggerFactory
         ) { }
+
         public void Dispose() { }
+
         public System.Threading.Tasks.Task StopAsync(
             System.Threading.CancellationToken cancellationToken
         )
         {
             throw null;
         }
+
         public System.Threading.Tasks.Task WaitForStartAsync(
             System.Threading.CancellationToken cancellationToken
         )
@@ -324,11 +366,13 @@ namespace Microsoft.Extensions.Hosting.Internal
             throw null;
         }
     }
+
     public partial class HostingEnvironment
         : Microsoft.Extensions.Hosting.IHostEnvironment,
           Microsoft.Extensions.Hosting.IHostingEnvironment
     {
         public HostingEnvironment() { }
+
         public string ApplicationName
         {
             get { throw null; }

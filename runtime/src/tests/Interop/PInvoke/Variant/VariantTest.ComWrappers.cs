@@ -104,6 +104,7 @@ internal unsafe class ComWrappersImpl : ComWrappers
         throw new NotImplementedException();
     }
 }
+
 public struct IDispatchVtbl
 {
     internal static readonly Guid IID_IDispatch = new Guid("00020400-0000-0000-C000-000000000046");

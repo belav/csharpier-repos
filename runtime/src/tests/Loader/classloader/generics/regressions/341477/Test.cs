@@ -26,6 +26,7 @@ public class A
 public class Hello<liıİ>
 {
     public liıİ a;
+
     public Hello(liıİ t)
     {
         a = t;

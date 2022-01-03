@@ -1,14 +1,18 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+
 namespace AutoMapper.Internal.Mappers
 {
     public class ConversionOperatorMapper : IObjectMapper
     {
         private readonly string _operatorName;
+
         public ConversionOperatorMapper(string operatorName) => _operatorName = operatorName;
+
         public bool IsMatch(in TypePair context) =>
             GetConversionOperator(context.SourceType, context.DestinationType) != null;
+
         private MethodInfo GetConversionOperator(Type sourceType, Type destinationType)
         {
             foreach (
@@ -32,6 +36,7 @@ namespace AutoMapper.Internal.Mappers
                 null
             );
         }
+
         public Expression MapExpression(
             IGlobalConfiguration configurationProvider,
             ProfileMap profileMap,

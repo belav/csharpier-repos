@@ -18,6 +18,7 @@ namespace System
         }
 
         private static DateTime FromFileTimeLeapSecondsAware(ulong fileTime) => default;
+
         private static ulong ToFileTimeLeapSecondsAware(long ticks) => default;
 
         // IsValidTimeWithLeapSeconds is not expected to be called at all for now on non-Windows platforms

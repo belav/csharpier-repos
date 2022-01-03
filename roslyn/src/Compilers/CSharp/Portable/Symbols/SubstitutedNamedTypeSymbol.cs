@@ -407,6 +407,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 yield return (newBody, newImplemented);
             }
         }
+
 #nullable disable
 
         internal override IEnumerable<FieldSymbol> GetFieldsToEmit()
@@ -496,6 +497,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsRecord => _underlyingType.IsRecord;
         internal sealed override bool IsRecordStruct => _underlyingType.IsRecordStruct;
+
         internal sealed override bool HasPossibleWellKnownCloneMethod() =>
             _underlyingType.HasPossibleWellKnownCloneMethod();
     }

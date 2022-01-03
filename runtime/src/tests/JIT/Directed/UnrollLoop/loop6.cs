@@ -2,12 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal struct VT
 {
     public float one;
     public double delta;
     public double temp;
 }
+
 internal class loop6
 {
     public static int cnt;
@@ -111,6 +113,7 @@ internal class loop6
         else
             System.Console.WriteLine("f5 failed");
     }
+
     public static void f6()
     {
         VT vt;

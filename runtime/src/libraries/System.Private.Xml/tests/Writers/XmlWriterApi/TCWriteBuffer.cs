@@ -90,6 +90,7 @@ namespace System.Xml.Tests
                 buffer = newBuffer;
             }
         }
+
         public static void WriteToBuffer(ref byte[] destBuff, ref int len, byte srcByte)
         {
             ensureSpace(ref destBuff, len);

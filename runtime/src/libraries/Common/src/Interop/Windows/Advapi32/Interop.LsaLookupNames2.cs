@@ -29,6 +29,7 @@ internal static partial class Interop
         {
             internal ushort Length;
             internal ushort MaximumLength;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             internal string Buffer;
         }

@@ -125,6 +125,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strc
     public struct S
     {
         public int Field;
+
         public struct S2
         {
             public float Foo;
@@ -168,6 +169,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strc
     public struct S
     {
         public int x;
+
         public void Set(int val)
         {
             this.x = val;

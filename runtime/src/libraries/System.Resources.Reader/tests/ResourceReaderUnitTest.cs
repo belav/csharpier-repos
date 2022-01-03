@@ -22,6 +22,7 @@ namespace System.Resources.ResourceWriterTests
             { "name2", "value2" },
             { "name3", "value3" }
         };
+
         public static ResourceWriter GenerateResourceStream(
             Dictionary<string, string> inp_dict,
             MemoryStream ms
@@ -196,6 +197,7 @@ namespace System.Resources.ResourceWriterTests
                 }
             );
         }
+
         [Fact]
         public static void Exception_Enumarator_Entry()
         {
@@ -219,6 +221,7 @@ namespace System.Resources.ResourceWriterTests
                 }
             );
         }
+
         [Fact]
         public static void Exception_Enumerator_Key()
         {
@@ -242,6 +245,7 @@ namespace System.Resources.ResourceWriterTests
                 }
             );
         }
+
         [Fact]
         public static void Exception_Enumerator_Reset()
         {
@@ -265,6 +269,7 @@ namespace System.Resources.ResourceWriterTests
                 }
             );
         }
+
         [Fact]
         public static void Exception_Enumerator_Value()
         {
@@ -1952,6 +1957,7 @@ namespace System.Resources.ResourceWriterTests
                 }
             }
         }
+
         [Fact]
         public static void Exception_Corrupted_resources()
         {
@@ -2241,6 +2247,7 @@ namespace System.Resources.ResourceWriterTests
                 }
             }
         }
+
         [Fact]
         public static void Exception_Corrupted_resources1()
         {
@@ -2532,6 +2539,7 @@ namespace System.Resources.ResourceWriterTests
                 }
             }
         }
+
         [Fact]
         public static void Exception_EOF()
         {
@@ -2567,6 +2575,7 @@ namespace System.Resources.ResourceWriterTests
                 );
             }
         }
+
         [Fact]
         public static void Read_resources_withobject()
         {

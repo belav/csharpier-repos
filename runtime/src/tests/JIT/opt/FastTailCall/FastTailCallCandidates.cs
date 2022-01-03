@@ -1091,10 +1091,13 @@ public class FastTailCallCandidates
     {
         [FieldOffset(0)]
         public long a;
+
         [FieldOffset(8)]
         public long b;
+
         [FieldOffset(16)]
         public long c;
+
         [FieldOffset(24)]
         public long d;
 
@@ -1112,8 +1115,10 @@ public class FastTailCallCandidates
     {
         [FieldOffset(0)]
         public long a;
+
         [FieldOffset(8)]
         public long b;
+
         [FieldOffset(16)]
         public long c;
 

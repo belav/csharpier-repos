@@ -11,16 +11,22 @@ namespace System.DirectoryServices.Interop
     {
         [FieldOffset(0)]
         public ushort varType;
+
         [FieldOffset(2)]
         public ushort reserved1;
+
         [FieldOffset(4)]
         public ushort reserved2;
+
         [FieldOffset(6)]
         public ushort reserved3;
+
         [FieldOffset(8)]
         public short boolvalue;
+
         [FieldOffset(8)]
         public IntPtr ptr1;
+
         [FieldOffset(12)]
         public IntPtr ptr2;
     }

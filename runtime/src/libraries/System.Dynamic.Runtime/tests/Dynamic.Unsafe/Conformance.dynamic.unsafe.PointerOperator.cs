@@ -7,6 +7,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
 {
     using ManagedTests.DynamicCSharp.Test;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.arrayaccess01.arrayaccess01;
+
     // <Area> dynamic in unsafe code </Area>
     // <Title>pointer operator</Title>
     // <Description>
@@ -26,6 +27,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
         {
             Assert.AreEqual(0, MainMethod(null));
         }
+
         public static int MainMethod(string[] args)
         {
             int* ptr = stackalloc int[10];
@@ -52,6 +54,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
 {
     using ManagedTests.DynamicCSharp.Test;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.arrayaccess02.arrayaccess02;
+
     // <Area> dynamic with pointer indexer </Area>
     // <Title>pointer operator</Title>
     // <Description>
@@ -71,6 +74,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
         {
             Assert.AreEqual(0, MainMethod(null));
         }
+
         public static int MainMethod(string[] args)
         {
             int* ptr = stackalloc int[10];
@@ -114,6 +118,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
 {
     using ManagedTests.DynamicCSharp.Test;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.sizeof01.sizeof01;
+
     // <Area> dynamic in unsafe code </Area>
     // <Title>pointer operator</Title>
     // <Description>
@@ -132,6 +137,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
         {
             Assert.AreEqual(0, MainMethod(null));
         }
+
         public static int MainMethod(string[] args)
         {
             dynamic d = sizeof(int);
@@ -146,6 +152,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
 {
     using ManagedTests.DynamicCSharp.Test;
     using ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOperator.stackalloc01.stackalloc01;
+
     // <Area> dynamic in unsafe code </Area>
     // <Title>pointer operator</Title>
     // <Description>
@@ -164,6 +171,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
         {
             Assert.AreEqual(0, MainMethod(null));
         }
+
         public static int MainMethod(string[] args)
         {
             dynamic d = 10;
@@ -191,6 +199,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
 
     using System;
     using System.Security;
+
     [TestClass]
     public class TestClass
     {
@@ -208,6 +217,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
         {
             Assert.AreEqual(0, MainMethod());
         }
+
         public static unsafe int MainMethod()
         {
             int* ptr = null;

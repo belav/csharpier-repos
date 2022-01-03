@@ -445,6 +445,7 @@ namespace System.Linq.Tests
 
             Assert.Equal(8, first.Union(second).Count());
         }
+
         [Fact]
         public void CountMultipleUnion()
         {

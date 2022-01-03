@@ -83,24 +83,29 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 return key.GetHashCode();
             }
+
             protected override int GetValueHashCode(ModuleData value)
             {
                 return value.Module.GetHashCode();
             }
+
             protected override bool CompareKeyToValue(EcmaModule key, ModuleData value)
             {
                 return Object.ReferenceEquals(key, value.Module);
             }
+
             protected override bool CompareValueToValue(ModuleData value1, ModuleData value2)
             {
                 return Object.ReferenceEquals(value1.Module, value2.Module);
             }
+
             protected override ModuleData CreateValueFromKey(EcmaModule key)
             {
                 Debug.Fail("CreateValueFromKey not supported");
                 return null;
             }
         }
+
         private readonly ModuleHashtable _moduleHashtable = new ModuleHashtable();
 
         private readonly Dictionary<string, ModuleData> _simpleNameHashtable = new Dictionary<

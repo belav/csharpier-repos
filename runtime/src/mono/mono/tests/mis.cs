@@ -10,6 +10,7 @@ namespace T
     public class T
     {
         private static String docroot = "/home/dick/mono/install/html";
+
         //private static String docroot="./";
 
         private static Hashtable mime_types = new Hashtable();

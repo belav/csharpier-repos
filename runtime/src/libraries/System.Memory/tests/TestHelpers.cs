@@ -283,26 +283,37 @@ namespace System
         {
             [FieldOffset(0)]
             public short S0;
+
             [FieldOffset(2)]
             public int I0;
+
             [FieldOffset(6)]
             public long L0;
+
             [FieldOffset(14)]
             public ushort US0;
+
             [FieldOffset(16)]
             public uint UI0;
+
             [FieldOffset(20)]
             public ulong UL0;
+
             [FieldOffset(28)]
             public short S1;
+
             [FieldOffset(30)]
             public int I1;
+
             [FieldOffset(34)]
             public long L1;
+
             [FieldOffset(42)]
             public ushort US1;
+
             [FieldOffset(44)]
             public uint UI1;
+
             [FieldOffset(48)]
             public ulong UL1;
         }

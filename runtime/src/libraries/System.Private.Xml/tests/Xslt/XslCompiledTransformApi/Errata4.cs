@@ -16,6 +16,7 @@ namespace System.Xml.Tests
     public class Errata4 : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public Errata4(ITestOutputHelper output) : base(output)
         {
             _output = output;

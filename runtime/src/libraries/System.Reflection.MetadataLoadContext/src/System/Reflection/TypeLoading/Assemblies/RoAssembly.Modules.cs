@@ -15,6 +15,7 @@ namespace System.Reflection.TypeLoading
     internal abstract partial class RoAssembly
     {
         public sealed override Module? GetModule(string name) => GetRoModule(name);
+
         public sealed override Module[] GetModules(bool getResourceModules) =>
             ComputeRoModules(getResourceModules).CloneArray<Module>();
 

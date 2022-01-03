@@ -42,6 +42,7 @@ namespace System.Reflection.TypeLoading.Ecma
             FieldDefinition.GetCustomAttributes().ToTrueCustomAttributes(_module);
 
         protected sealed override int GetExplicitFieldOffset() => FieldDefinition.GetOffset();
+
         protected sealed override MarshalAsAttribute ComputeMarshalAsAttribute() =>
             FieldDefinition.GetMarshallingDescriptor().ToMarshalAsAttribute(_module);
 
@@ -68,12 +69,15 @@ namespace System.Reflection.TypeLoading.Ecma
             _handle.GetHashCode() ^ DeclaringType.GetHashCode();
 
         protected sealed override string ComputeName() => FieldDefinition.Name.GetString(Reader);
+
         protected sealed override FieldAttributes ComputeAttributes() => FieldDefinition.Attributes;
+
         protected sealed override Type ComputeFieldType() =>
             FieldDefinition.DecodeSignature(_module, TypeContext);
 
         public sealed override Type[] GetOptionalCustomModifiers() =>
             GetCustomModifiers(isRequired: false);
+
         public sealed override Type[] GetRequiredCustomModifiers() =>
             GetCustomModifiers(isRequired: true);
 
@@ -114,6 +118,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 return ref _neverAccessThisExceptThroughFieldDefinitionProperty;
             }
         }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly FieldDefinition _neverAccessThisExceptThroughFieldDefinitionProperty;
     }

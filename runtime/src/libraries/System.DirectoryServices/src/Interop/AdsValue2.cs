@@ -33,12 +33,16 @@ namespace System.DirectoryServices.Interop
         [FieldOffset(0)]
         public int /*AdsType*/
         dwType;
+
         [FieldOffset(4)]
         internal int pad;
+
         [FieldOffset(8)]
         public Ads_Pointer pointer;
+
         [FieldOffset(8)]
         public Ads_OctetString octetString;
+
         [FieldOffset(8)]
         public Ads_Generic generic;
     }

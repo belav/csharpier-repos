@@ -18,6 +18,7 @@ public abstract class ValidationAttributeAdapter<TAttribute> : IClientModelValid
     where TAttribute : ValidationAttribute
 {
     private readonly IStringLocalizer? _stringLocalizer;
+
     /// <summary>
     /// Create a new instance of <see cref="ValidationAttributeAdapter{TAttribute}"/>.
     /// </summary>

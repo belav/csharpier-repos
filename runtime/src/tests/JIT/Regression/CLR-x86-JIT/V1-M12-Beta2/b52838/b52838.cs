@@ -5,10 +5,13 @@
 namespace Test
 {
     using System;
+
     class CC
     {
         static sbyte m_sb;
+
         static void Finally() { }
+
         static void Main1()
         {
             try
@@ -31,6 +34,7 @@ namespace Test
                 Finally();
             }
         }
+
         static int Main()
         {
             try

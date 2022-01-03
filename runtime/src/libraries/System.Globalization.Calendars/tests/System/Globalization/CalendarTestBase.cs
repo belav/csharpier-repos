@@ -73,6 +73,7 @@ namespace System.Globalization.Tests
 
         private static int MinEra(Calendar calendar) =>
             calendar.GetEra(calendar.MinSupportedDateTime);
+
         private static int MaxEra(Calendar calendar) =>
             calendar.GetEra(calendar.MaxSupportedDateTime);
 

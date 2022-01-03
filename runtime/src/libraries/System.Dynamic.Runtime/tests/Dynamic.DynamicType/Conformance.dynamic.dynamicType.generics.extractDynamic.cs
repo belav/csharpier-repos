@@ -32,6 +32,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -84,6 +85,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -136,6 +138,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -196,6 +199,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -256,6 +260,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -316,6 +321,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -376,6 +382,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -432,6 +439,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -484,6 +492,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -546,6 +555,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -593,6 +603,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class C<T>
     {
         public T t;
+
         public T getT()
         {
             return t;
@@ -608,6 +619,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     {
         public T t;
         public U u;
+
         public T getT()
         {
             return t;
@@ -644,6 +656,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

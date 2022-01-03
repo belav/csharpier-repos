@@ -161,6 +161,7 @@ namespace System.Threading
             private readonly RegisteredWaitHandle[] _registeredWaits = new RegisteredWaitHandle[
                 WaitHandle.MaxWaitHandles - 1
             ];
+
             /// <summary>
             /// The raw wait handles to wait on.
             /// </summary>
@@ -170,6 +171,7 @@ namespace System.Threading
             private readonly SafeWaitHandle[] _waitHandles = new SafeWaitHandle[
                 WaitHandle.MaxWaitHandles
             ];
+
             /// <summary>
             /// The number of user-registered waits on this wait thread.
             /// </summary>
@@ -181,6 +183,7 @@ namespace System.Threading
             private readonly RegisteredWaitHandle?[] _pendingRemoves = new RegisteredWaitHandle[
                 WaitHandle.MaxWaitHandles - 1
             ];
+
             /// <summary>
             /// The number of pending removals.
             /// </summary>

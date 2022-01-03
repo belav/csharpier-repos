@@ -19,6 +19,7 @@ namespace System.Net.Http.Json.Functional.Tests
         );
 
         private class Foo { }
+
         private class Bar { }
 
         [Fact]

@@ -13,6 +13,7 @@ namespace System.Xml.Xsl.XsltOld
     {
         private VariableAction[] _variables;
         public XPathNavigator StyleSheet { get; }
+
         public DbgData(Compiler compiler)
         {
             DbgCompiler dbgCompiler = (DbgCompiler)compiler;
@@ -20,6 +21,7 @@ namespace System.Xml.Xsl.XsltOld
             _variables = dbgCompiler.LocalVariables;
             dbgCompiler.Debugger.OnInstructionCompile(this.StyleSheet);
         }
+
         internal void ReplaceVariables(VariableAction[] vars)
         {
             _variables = vars;
@@ -27,11 +29,13 @@ namespace System.Xml.Xsl.XsltOld
 
         // static Empty:
         private static readonly DbgData s_nullDbgData = new DbgData();
+
         private DbgData()
         {
             StyleSheet = null!;
             _variables = Array.Empty<VariableAction>();
         }
+
         public static DbgData Empty
         {
             get { return s_nullDbgData; }
@@ -46,6 +50,7 @@ namespace System.Xml.Xsl.XsltOld
         {
             _debugger = debugger;
         }
+
         public override IXsltDebugger Debugger
         {
             get { return _debugger; }
@@ -731,6 +736,7 @@ namespace System.Xml.Xsl.XsltOld
         private sealed class VariableActionDbg : VariableAction
         {
             internal VariableActionDbg(VariableType type) : base(type) { }
+
             private DbgData? _dbgData;
 
             internal override void Compile(Compiler compiler)
@@ -781,6 +787,7 @@ namespace System.Xml.Xsl.XsltOld
             {
                 _dbgData = new DbgData(compiler);
             }
+
             public override bool Output(Processor processor, ActionFrame frame)
             {
                 this.OnInstructionExecute(processor);
@@ -800,6 +807,7 @@ namespace System.Xml.Xsl.XsltOld
             {
                 _dbgData = new DbgData(compiler);
             }
+
             public override bool Output(Processor processor, ActionFrame frame)
             {
                 this.OnInstructionExecute(processor);

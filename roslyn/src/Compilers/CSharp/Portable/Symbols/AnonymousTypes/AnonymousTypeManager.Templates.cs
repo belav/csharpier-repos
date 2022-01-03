@@ -323,6 +323,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var typeArguments = typeDescr.Fields.SelectAsArray(f => f.Type);
             return template.Construct(typeArguments);
         }
+
 #nullable disable
 
         private AnonymousTypeTemplateSymbol CreatePlaceholderTemplate(

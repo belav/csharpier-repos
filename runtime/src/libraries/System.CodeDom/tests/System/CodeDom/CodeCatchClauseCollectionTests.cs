@@ -7,8 +7,10 @@ namespace System.CodeDom.Tests
         : CodeCollectionTestBase<CodeCatchClauseCollection, CodeCatchClause>
     {
         protected override CodeCatchClauseCollection Ctor() => new CodeCatchClauseCollection();
+
         protected override CodeCatchClauseCollection CtorArray(CodeCatchClause[] array) =>
             new CodeCatchClauseCollection(array);
+
         protected override CodeCatchClauseCollection CtorCollection(
             CodeCatchClauseCollection collection
         ) => new CodeCatchClauseCollection(collection);
@@ -19,6 +21,7 @@ namespace System.CodeDom.Tests
             CodeCatchClauseCollection collection,
             int index
         ) => collection[index];
+
         protected override void SetItem(
             CodeCatchClauseCollection collection,
             int index,
@@ -29,6 +32,7 @@ namespace System.CodeDom.Tests
             CodeCatchClauseCollection collection,
             CodeCatchClause[] array
         ) => collection.AddRange(array);
+
         protected override void AddRange(
             CodeCatchClauseCollection collection,
             CodeCatchClauseCollection value
@@ -52,6 +56,7 @@ namespace System.CodeDom.Tests
             CodeCatchClauseCollection collection,
             CodeCatchClause value
         ) => collection.IndexOf(value);
+
         protected override bool Contains(
             CodeCatchClauseCollection collection,
             CodeCatchClause value

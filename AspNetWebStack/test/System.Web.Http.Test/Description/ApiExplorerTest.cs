@@ -108,6 +108,7 @@ namespace System.Web.Http.Description
         public class IgnoreApiValuesController : ApiController
         {
             public void Get() { }
+
             public void Post() { }
         }
 

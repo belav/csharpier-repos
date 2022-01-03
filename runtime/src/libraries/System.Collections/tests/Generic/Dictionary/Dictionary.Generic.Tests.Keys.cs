@@ -12,9 +12,11 @@ namespace System.Collections.Tests
         protected override bool DefaultValueAllowed => false;
         protected override bool DuplicateValuesAllowed => false;
         protected override bool IsReadOnly => true;
+
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
         ) => new List<ModifyEnumerable>();
+
         protected override ICollection<string> GenericICollectionFactory()
         {
             return new Dictionary<string, string>().Keys;

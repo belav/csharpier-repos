@@ -126,6 +126,7 @@ namespace Castle.DynamicProxy.Tests
                 ) as ISimpleInterface;
             @interface.Do();
         }
+
         [Test]
         public void Class_with_protected_default_ctor_as_base_type_is_fine()
         {

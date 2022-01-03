@@ -20,6 +20,7 @@ namespace BinderTracingTests
         public bool Isolate { get; private set; }
         public string TestSetup { get; private set; }
         public string[] AdditionalLoadsToTrack { get; private set; }
+
         public BinderTestAttribute(
             bool isolate = false,
             string testSetup = null,

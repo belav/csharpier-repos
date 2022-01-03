@@ -33,6 +33,7 @@ public struct ComplexDT
 {
     public int iv;
     public DT vecs;
+
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
     public string str;
     public Vector3 v3;

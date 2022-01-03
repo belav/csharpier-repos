@@ -11,15 +11,19 @@ namespace System.IO.Compression
     {
         public override Stream CreateStream(Stream stream, CompressionMode mode) =>
             new BrotliStream(stream, mode);
+
         public override Stream CreateStream(Stream stream, CompressionMode mode, bool leaveOpen) =>
             new BrotliStream(stream, mode, leaveOpen);
+
         public override Stream CreateStream(Stream stream, CompressionLevel level) =>
             new BrotliStream(stream, level);
+
         public override Stream CreateStream(
             Stream stream,
             CompressionLevel level,
             bool leaveOpen
         ) => new BrotliStream(stream, level, leaveOpen);
+
         public override Stream BaseStream(Stream stream) => ((BrotliStream)stream).BaseStream;
 
         protected override bool FlushGuaranteesAllDataWritten => false;

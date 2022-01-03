@@ -16,11 +16,13 @@ namespace AutoMapper.UnitTests.Mappers
         public InnerDestination NullInner { get; }
         public InnerDestination SettableInner { get; set; }
     }
+
     class InnerDestination
     {
         public int Value { get; set; }
         public InnerDestination Child { get; set; }
     }
+
     public class When_mapping_to_StringDictionary : NonValidatingSpecBase
     {
         StringDictionary _destination;
@@ -63,6 +65,7 @@ namespace AutoMapper.UnitTests.Mappers
             _destination.Bar.ShouldBe("Bar");
             _destination.Baz.ShouldBe(0);
         }
+
         [Fact]
         public void When_mapping_inner_properties()
         {
@@ -108,6 +111,7 @@ namespace AutoMapper.UnitTests.Mappers
             _destination.Foo.ShouldBe("Foo");
             _destination.Bar.ShouldBe("Bar");
         }
+
         [Fact]
         public void Should_map_non_generic()
         {

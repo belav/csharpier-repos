@@ -32,6 +32,7 @@ namespace System.Runtime.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.Interface)] out object? ppunk
         );
         void EnumObjectParam(out IEnumString? ppenum);
+
         [PreserveSig]
         int RevokeObjectParam([MarshalAs(UnmanagedType.LPWStr)] string pszKey);
     }

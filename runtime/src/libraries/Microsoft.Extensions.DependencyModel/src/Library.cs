@@ -40,6 +40,7 @@ namespace Microsoft.Extensions.DependencyModel
                 hashPath,
                 runtimeStoreManifestName: null
             ) { }
+
         public Library(
             string type,
             string name,

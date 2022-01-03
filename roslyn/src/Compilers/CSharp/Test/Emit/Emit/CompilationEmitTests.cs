@@ -4132,6 +4132,7 @@ class C
 
             Assert.True(emitResult.Success);
         }
+
         #region "PE and metadata bits"
 
         [Fact]

@@ -37,12 +37,14 @@ namespace System.Speech.Recognition.SrgsGrammar
                 Load(reader);
             }
         }
+
         public SrgsDocument(XmlReader srgsGrammar)
         {
             Helpers.ThrowIfNull(srgsGrammar, nameof(srgsGrammar));
 
             Load(srgsGrammar);
         }
+
         public SrgsDocument(GrammarBuilder builder)
         {
             Helpers.ThrowIfNull(builder, nameof(builder));
@@ -370,6 +372,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         Voice,
         Dtmf
     }
+
     // Grammar mode.  Voice, Dtmf
     public enum SrgsPhoneticAlphabet
     {

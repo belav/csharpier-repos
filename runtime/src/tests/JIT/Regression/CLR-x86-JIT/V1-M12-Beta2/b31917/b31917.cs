@@ -9,16 +9,19 @@ namespace Test
     class AA
     {
         public int m_nField2 = 51;
+
         public static int[] Method1(int param1)
         {
             return null;
         }
+
         public static double[] Static3(object[] param1, int param2)
         {
             uint[] local5 = new uint[7];
             uint[] local6 = new uint[7];
             return BB.m_adStatic1;
         }
+
         static int Main()
         {
             try

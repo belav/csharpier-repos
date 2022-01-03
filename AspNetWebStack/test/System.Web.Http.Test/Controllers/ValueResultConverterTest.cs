@@ -74,6 +74,7 @@ namespace System.Web.Http.Controllers
         }
 
         public class Animal { }
+
         public class Dog : Animal { }
     }
 }

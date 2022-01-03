@@ -11,6 +11,7 @@ internal class MainApp
         Console.WriteLine("A_NoInline");
         throw new Exception("throw in method PrintA_Inline");
     }
+
     public static void PrintA_Inline()
     {
         Console.WriteLine("A");

@@ -86,6 +86,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         void SetRuleSetFile(string filePath);
 
         void StartBatch();
+
         [Obsolete($"Use {nameof(EndBatchAsync)}.")]
         void EndBatch();
         ValueTask EndBatchAsync();

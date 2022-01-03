@@ -29,5 +29,6 @@ namespace ConsoleApplication3
     }
 
     class A<T> { }
+
     class B<T> where T : class { }
 }

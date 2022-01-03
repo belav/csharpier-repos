@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 namespace Microsoft.CodeAnalysis
 {
     internal delegate bool EditCallback<T>(GeneratorEditContext context, T edit)

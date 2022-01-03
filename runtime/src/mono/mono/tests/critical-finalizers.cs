@@ -22,6 +22,7 @@ class Q : CriticalFinalizerObject
     static public int count = 0;
     static public int first_p_count = -1;
     static public int last_p_count = 0;
+
     ~Q()
     {
         count++;

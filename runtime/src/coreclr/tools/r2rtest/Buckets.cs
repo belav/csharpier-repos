@@ -23,6 +23,7 @@ namespace R2RTest
 
         public void AddCompilation(ProcessInfo process) =>
             Add(AnalyzeCompilationFailure(process), process);
+
         public void AddExecution(ProcessInfo process) =>
             Add(AnalyzeExecutionFailure(process), process);
 

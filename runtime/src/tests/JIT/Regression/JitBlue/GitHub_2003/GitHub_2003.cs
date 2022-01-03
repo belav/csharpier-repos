@@ -11,9 +11,11 @@ using System.Runtime.CompilerServices;
 class GitHub_2003
 {
     static byte[] byteArray;
+
     struct MyByte
     {
         private readonly byte _byte;
+
         public MyByte(byte b)
         {
             _byte = b;
@@ -25,6 +27,7 @@ class GitHub_2003
             get { return _byte; }
         }
     }
+
     static MyByte[] myByteArray;
 
     [MethodImpl(MethodImplOptions.NoInlining)]

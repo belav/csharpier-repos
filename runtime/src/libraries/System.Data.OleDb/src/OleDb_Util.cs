@@ -124,6 +124,7 @@ namespace System.Data.OleDb
                     break;
             }
         }
+
         internal static Exception CommandParameterStatus(string value, Exception inner)
         {
             if (ADP.IsEmpty(value))
@@ -132,6 +133,7 @@ namespace System.Data.OleDb
             }
             return ADP.InvalidOperation(value, inner);
         }
+
         internal static Exception UninitializedParameters(int index, OleDbType dbtype)
         {
             return ADP.InvalidOperation(
@@ -142,6 +144,7 @@ namespace System.Data.OleDb
                 )
             );
         }
+
         internal static Exception BadStatus_ParamAcc(int index, DBBindStatus status)
         {
             return ADP.DataAdapter(
@@ -152,6 +155,7 @@ namespace System.Data.OleDb
                 )
             );
         }
+
         internal static Exception NoProviderSupportForParameters(string provider, Exception? inner)
         {
             return ADP.DataAdapter(
@@ -159,6 +163,7 @@ namespace System.Data.OleDb
                 inner
             );
         }
+
         internal static Exception NoProviderSupportForSProcResetParameters(string provider)
         {
             return ADP.DataAdapter(
@@ -256,6 +261,7 @@ namespace System.Data.OleDb
                     break;
             }
         }
+
         internal static Exception PropsetSetFailure(string value, Exception inner)
         {
             if (ADP.IsEmpty(value))
@@ -272,6 +278,7 @@ namespace System.Data.OleDb
                 SR.Format(SR.OleDb_SchemaRowsetsNotSupported, "IDBSchemaRowset", provider)
             );
         }
+
         internal static OleDbException NoErrorInformation(
             string? provider,
             OleDbHResult hr,
@@ -298,14 +305,17 @@ namespace System.Data.OleDb
             ADP.TraceExceptionAsReturnValue(e);
             return e;
         }
+
         internal static InvalidOperationException MDACNotAvailable(Exception? inner)
         {
             return ADP.DataAdapter(SR.Format(SR.OleDb_MDACNotAvailable), inner);
         }
+
         internal static ArgumentException MSDASQLNotSupported()
         {
             return ADP.Argument(SR.Format(SR.OleDb_MSDASQLNotSupported));
         }
+
         internal static InvalidOperationException CommandTextNotSupported(
             string provider,
             Exception? inner
@@ -313,10 +323,12 @@ namespace System.Data.OleDb
         {
             return ADP.DataAdapter(SR.Format(SR.OleDb_CommandTextNotSupported, provider), inner);
         }
+
         internal static InvalidOperationException PossiblePromptNotUserInteractive()
         {
             return ADP.DataAdapter(SR.Format(SR.OleDb_PossiblePromptNotUserInteractive));
         }
+
         internal static InvalidOperationException ProviderUnavailable(
             string provider,
             Exception? inner
@@ -325,6 +337,7 @@ namespace System.Data.OleDb
             //return new OleDbException(SR.Format(SR.OleDb_ProviderUnavailable, provider), (int)OleDbHResult.CO_E_CLASSSTRING, inner);
             return ADP.DataAdapter(SR.Format(SR.OleDb_ProviderUnavailable, provider), inner);
         }
+
         internal static InvalidOperationException TransactionsNotSupported(
             string provider,
             Exception? inner
@@ -332,30 +345,37 @@ namespace System.Data.OleDb
         {
             return ADP.DataAdapter(SR.Format(SR.OleDb_TransactionsNotSupported, provider), inner);
         }
+
         internal static ArgumentException AsynchronousNotSupported()
         {
             return ADP.Argument(SR.Format(SR.OleDb_AsynchronousNotSupported));
         }
+
         internal static ArgumentException NoProviderSpecified()
         {
             return ADP.Argument(SR.Format(SR.OleDb_NoProviderSpecified));
         }
+
         internal static ArgumentException InvalidProviderSpecified()
         {
             return ADP.Argument(SR.Format(SR.OleDb_InvalidProviderSpecified));
         }
+
         internal static ArgumentException InvalidRestrictionsDbInfoKeywords(string parameter)
         {
             return ADP.Argument(SR.Format(SR.OleDb_InvalidRestrictionsDbInfoKeywords), parameter);
         }
+
         internal static ArgumentException InvalidRestrictionsDbInfoLiteral(string parameter)
         {
             return ADP.Argument(SR.Format(SR.OleDb_InvalidRestrictionsDbInfoLiteral), parameter);
         }
+
         internal static ArgumentException InvalidRestrictionsSchemaGuids(string parameter)
         {
             return ADP.Argument(SR.Format(SR.OleDb_InvalidRestrictionsSchemaGuids), parameter);
         }
+
         internal static ArgumentException NotSupportedSchemaTable(
             Guid schema,
             OleDbConnection connection
@@ -381,34 +401,42 @@ namespace System.Data.OleDb
         {
             return ADP.DataAdapter(SR.Format(SR.OleDb_BadAccessor));
         }
+
         internal static InvalidCastException ConversionRequired()
         {
             return ADP.InvalidCast();
         }
+
         internal static InvalidCastException CantConvertValue()
         {
             return ADP.InvalidCast(SR.Format(SR.OleDb_CantConvertValue));
         }
+
         internal static InvalidOperationException SignMismatch(Type type)
         {
             return ADP.DataAdapter(SR.Format(SR.OleDb_SignMismatch, type.Name));
         }
+
         internal static InvalidOperationException DataOverflow(Type type)
         {
             return ADP.DataAdapter(SR.Format(SR.OleDb_DataOverflow, type.Name));
         }
+
         internal static InvalidOperationException CantCreate(Type type)
         {
             return ADP.DataAdapter(SR.Format(SR.OleDb_CantCreate, type.Name));
         }
+
         internal static InvalidOperationException Unavailable(Type type)
         {
             return ADP.DataAdapter(SR.Format(SR.OleDb_Unavailable, type.Name));
         }
+
         internal static InvalidOperationException UnexpectedStatusValue(DBStatus status)
         {
             return ADP.DataAdapter(SR.Format(SR.OleDb_UnexpectedStatusValue, status.ToString()));
         }
+
         internal static InvalidOperationException GVtUnknown(int wType)
         {
             return ADP.DataAdapter(
@@ -419,6 +447,7 @@ namespace System.Data.OleDb
                 )
             );
         }
+
         internal static InvalidOperationException SVtUnknown(int wType)
         {
             return ADP.DataAdapter(
@@ -444,6 +473,7 @@ namespace System.Data.OleDb
                 )
             );
         }
+
         internal static InvalidOperationException ThreadApartmentState(Exception innerException)
         {
             return ADP.InvalidOperation(SR.Format(SR.OleDb_ThreadApartmentState), innerException);
@@ -454,6 +484,7 @@ namespace System.Data.OleDb
         {
             return ADP.Argument(SR.Format(SR.OleDb_Fill_NotADODB), parameter);
         }
+
         internal static ArgumentException Fill_EmptyRecordSet(
             string parameter,
             Exception innerException
@@ -465,6 +496,7 @@ namespace System.Data.OleDb
                 innerException
             );
         }
+
         internal static ArgumentException Fill_EmptyRecord(
             string parameter,
             Exception innerException
@@ -477,10 +509,12 @@ namespace System.Data.OleDb
         {
             return SR.Format(SR.OleDb_NoErrorMessage, ODB.ELookup(errorcode));
         }
+
         internal static string FailedGetDescription(OleDbHResult errorcode)
         {
             return SR.Format(SR.OleDb_FailedGetDescription, ODB.ELookup(errorcode));
         }
+
         internal static string FailedGetSource(OleDbHResult errorcode)
         {
             return SR.Format(SR.OleDb_FailedGetSource, ODB.ELookup(errorcode));
@@ -662,6 +696,7 @@ namespace System.Data.OleDb
         internal const int DBPROPVAL_IC_UPPER = 1;
 
         internal const int DBPROPVAL_IN_ALLOWNULL = 0x00000000;
+
         /*internal const int DBPROPVAL_IN_DISALLOWNULL  = 0x00000001;
         internal const int DBPROPVAL_IN_IGNORENULL    = 0x00000002;
         internal const int DBPROPVAL_IN_IGNOREANYNULL = 0x00000004;*/
@@ -1113,6 +1148,7 @@ namespace System.Data.OleDb
 
 #if DEBUG
         private static readonly Hashtable g_wlookpup = new Hashtable();
+
         internal static string WLookup(short id)
         {
             string? value = (string?)g_wlookpup[id];

@@ -3596,6 +3596,7 @@ Block[B2] - Exit
 ";
             VerifyFlowGraphForTest<BlockSyntax>(compilation, expectedGraph);
         }
+
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TryFlow_30()

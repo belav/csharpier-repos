@@ -199,6 +199,7 @@ public class ComponentFactoryTest
     }
 
     public class TestService1 { }
+
     public class TestService2 { }
 
     private class CustomComponentActivator<TResult> : IComponentActivator

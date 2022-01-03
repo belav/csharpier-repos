@@ -183,6 +183,7 @@ namespace GCSimulator
     public sealed class ArrayObjectContainer<T> : ObjectContainer<T> where T : LifeTime
     {
         private T[] _objContainer = null;
+
         public void Init(int numberOfObjects)
         {
             _objContainer = new T[numberOfObjects];
@@ -218,6 +219,7 @@ namespace GCSimulator
         private LifeTimeStrategy _strategy;
 
         private ObjectContainer<LifeTime> _objectContainer = null;
+
         //
 
         public void SetObjectContainer(ObjectContainer<LifeTime> objectContainer)
@@ -283,6 +285,7 @@ namespace GCSimulator
             _mediumDataCount = mdc;
             _shortDataCount = sdc;
         }
+
         public int MediumLifeTime
         {
             set { _mediumLifeTime = value; }
@@ -307,6 +310,7 @@ namespace GCSimulator
             }
             return 0;
         }
+
         public bool ShouldDie(LifeTime o, int index)
         {
             _counter++;

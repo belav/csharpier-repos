@@ -1184,6 +1184,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return left;
             }
         }
+
 #nullable disable
 
         private static void ReportUnaryOperatorError(
@@ -2982,6 +2983,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return null;
         }
+
 #nullable disable
 
         private static BinaryOperatorKind SyntaxKindToBinaryOperatorKind(SyntaxKind kind)
@@ -3263,6 +3265,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return result;
         }
+
 #nullable disable
 
         private BoundExpression BindSuppressNullableWarningExpression(
@@ -4051,6 +4054,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return BindValueKind.RValue;
             }
         }
+
 #nullable disable
 
         private BoundLiteral BindIntegralMinValConstants(
@@ -5881,6 +5885,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 hasErrors
             );
         }
+
 #nullable disable
 
         private BoundExpression BindRefConditionalOperator(

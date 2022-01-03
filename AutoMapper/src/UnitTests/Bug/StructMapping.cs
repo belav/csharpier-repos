@@ -12,6 +12,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public int Number { get; set; }
         }
+
         class Destination
         {
             public int Number { get; set; }
@@ -37,21 +38,26 @@ namespace AutoMapper.UnitTests.Bug
             _destination.Number.ShouldBe(23);
         }
     }
+
     public class DestinationStructMapping : AutoMapperSpecBase
     {
         struct Source
         {
             public int Number { get; set; }
         }
+
         struct Destination
         {
             public int Number { get; set; }
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>());
+
         [Fact]
         public void Should_work() =>
             Mapper.Map<Source, Destination>(new Source { Number = 23 }).Number.ShouldBe(23);
+
         [Fact]
         public void Should_work_with_object() =>
             (

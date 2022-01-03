@@ -96,11 +96,14 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             // Do nothing functions.  The streaming far service doesn't care about
             // any of these.
             public ValueTask OnStartedAsync(CancellationToken cancellationToken) => default;
+
             public ValueTask OnCompletedAsync(CancellationToken cancellationToken) => default;
+
             public ValueTask OnFindInDocumentStartedAsync(
                 Document document,
                 CancellationToken cancellationToken
             ) => default;
+
             public ValueTask OnFindInDocumentCompletedAsync(
                 Document document,
                 CancellationToken cancellationToken

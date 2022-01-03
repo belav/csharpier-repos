@@ -18,6 +18,7 @@ namespace System.Threading.Channels.Tests
                     AllowSynchronousContinuations = AllowSynchronousContinuations
                 }
             );
+
         protected override Channel<T> CreateFullChannel<T>()
         {
             var c = Channel.CreateBounded<T>(

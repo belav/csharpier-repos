@@ -374,8 +374,10 @@ public struct ComplexStructWithExplicitLayout
 {
     [FieldOffset(0)]
     public int IntegerField;
+
     [FieldOffset(1)]
     public byte ByteField;
+
     [FieldOffset(8)]
     public object ObjectField;
 

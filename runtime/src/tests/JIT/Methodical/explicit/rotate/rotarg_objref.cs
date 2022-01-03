@@ -16,6 +16,7 @@ namespace Rotate
             {
                 m_value = val;
             }
+
             public int m_value;
         }
 

@@ -44,6 +44,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName) =>
             throw new NotImplementedException();
+
         protected override int CompareToImpl(FieldDesc other, TypeSystemComparer comparer) =>
             throw new NotImplementedException();
     }

@@ -113,12 +113,16 @@ namespace System.Net.Test.Common
 
             public static X509Certificate2 GetServerCertificate() =>
                 new X509Certificate2(s_serverCertificate);
+
             public static X509Certificate2 GetClientCertificate() =>
                 new X509Certificate2(s_clientCertificate);
+
             public static X509Certificate2 GetNoEKUCertificate() =>
                 new X509Certificate2(s_noEKUCertificate);
+
             public static X509Certificate2 GetSelfSignedServerCertificate() =>
                 new X509Certificate2(s_selfSignedServerCertificate);
+
             public static X509Certificate2 GetSelfSignedClientCertificate() =>
                 new X509Certificate2(s_selfSignedClientCertificate);
 

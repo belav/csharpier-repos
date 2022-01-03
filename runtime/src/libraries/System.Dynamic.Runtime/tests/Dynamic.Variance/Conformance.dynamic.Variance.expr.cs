@@ -355,6 +355,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is04.is04
     public class C
     {
         private delegate void Foo<in T>(T t);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -671,6 +672,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is11.is11
     public class C
     {
         private delegate void Foo<T>(T t);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -708,6 +710,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is12.is12
     public class C
     {
         private delegate void Foo<T>(T t);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

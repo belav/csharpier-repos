@@ -17,6 +17,7 @@ using HttpStress;
 [assembly: SupportedOSPlatform("windows")]
 [assembly: SupportedOSPlatform("linux")]
 
+
 namespace HttpStress
 {
     /// <summary>

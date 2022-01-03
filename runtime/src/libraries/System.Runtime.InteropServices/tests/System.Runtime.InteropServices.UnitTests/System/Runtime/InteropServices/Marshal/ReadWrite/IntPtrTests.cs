@@ -292,6 +292,7 @@ namespace System.Runtime.InteropServices.Tests
         {
             public IntPtr pointerValue;
             public string stringValue;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 10)]
             public IntPtr[] byValueArray;
         }

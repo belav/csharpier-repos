@@ -55,6 +55,7 @@ namespace System.Speech.Recognition
                 _oneOf.Items.Add(new ItemElement(alternateChoice));
             }
         }
+
         public GrammarBuilder ToGrammarBuilder()
         {
             return new GrammarBuilder(this);

@@ -5,7 +5,9 @@
 // csc /t:library /unsafe DynamicAttribute.cs
 
 public class Base0 { }
+
 public class Base1<T> { }
+
 public class Base2<T, U> { }
 
 public class Outer<T> : Base1<dynamic>
@@ -72,14 +74,17 @@ public class Derived<T>
     {
         return x;
     }
+
     public static dynamic F2(ref dynamic x)
     {
         return x;
     }
+
     public static dynamic[] F3(dynamic[] x)
     {
         return x;
     }
+
     public static Outer<dynamic>.Inner<
         Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
         dynamic

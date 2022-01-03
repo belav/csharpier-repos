@@ -8,6 +8,7 @@ namespace GCTest
     internal class Test
     {
         private int _magic = 0x12345678;
+
         public virtual void CheckValid()
         {
             if (_magic != 0x12345678)

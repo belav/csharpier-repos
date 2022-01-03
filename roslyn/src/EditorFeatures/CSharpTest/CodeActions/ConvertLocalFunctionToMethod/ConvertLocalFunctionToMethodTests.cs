@@ -835,6 +835,7 @@ class C
 }"
             );
         }
+
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertLocalFunctionToMethod)]
         [WorkItem(35180, "https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMethodBlockSelection11()

@@ -128,6 +128,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 return ref _neverAccessThisExceptThroughCustomAttributeProperty;
             }
         }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly CustomAttribute _neverAccessThisExceptThroughCustomAttributeProperty;
     }

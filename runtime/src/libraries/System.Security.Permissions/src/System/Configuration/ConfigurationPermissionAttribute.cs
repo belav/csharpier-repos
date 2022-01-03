@@ -18,6 +18,7 @@ namespace System.Configuration
     {
         public ConfigurationPermissionAttribute(SecurityAction action)
             : base(default(SecurityAction)) { }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);

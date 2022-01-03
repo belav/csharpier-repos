@@ -64,8 +64,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                     Instance = instance;
                     Method = method;
                 }
+
                 internal readonly object Instance;
                 internal readonly MethodId Method;
+
                 internal bool Equals(InstanceAndMethod other)
                 {
                     return Instance == other.Instance && Method == other.Method;

@@ -300,6 +300,7 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         public IntPtr pszAttributeName;
         public int dwVersion;
+
         // using two int to replace long to prevent managed code packing it
         public int ftimeLastOriginatingChange1;
         public int ftimeLastOriginatingChange2;
@@ -323,6 +324,7 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         public IntPtr pszAttributeName;
         public int dwVersion;
+
         // using two int to replace long to prevent managed code packing it
         public int ftimeLastOriginatingChange1;
         public int ftimeLastOriginatingChange2;
@@ -406,14 +408,19 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         [FieldOffset(0)]
         public int Flags;
+
         [FieldOffset(4)]
         public LSA_FOREST_TRUST_RECORD_TYPE ForestTrustType;
+
         [FieldOffset(8)]
         public LARGE_INTEGER Time = null!;
+
         [FieldOffset(16)]
         public LSA_UNICODE_STRING TopLevelName = null!;
+
         [FieldOffset(16)]
         public LSA_FOREST_TRUST_BINARY_DATA Data = null!;
+
         [FieldOffset(16)]
         public LSA_FOREST_TRUST_DOMAIN_INFO? DomainInfo;
     }
@@ -584,10 +591,13 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         public DSROLE_MACHINE_ROLE MachineRole;
         public uint Flags;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string? DomainNameFlat;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string? DomainNameDns;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string? DomainForestName;
         public Guid DomainGuid;

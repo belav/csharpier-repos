@@ -82,7 +82,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.NotEqual(hash2, hash4);
             Assert.NotEqual(hash3, hash4);
         }
-
 #endif
 
         [Fact]

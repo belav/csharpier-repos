@@ -4,6 +4,7 @@
 
 using System.Collections.Immutable;
 using System.Reflection.Metadata;
+
 namespace Microsoft.CodeAnalysis
 {
     internal partial struct SymbolKey

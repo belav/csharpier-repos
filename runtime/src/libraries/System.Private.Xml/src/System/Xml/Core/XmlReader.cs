@@ -15,6 +15,7 @@ namespace System.Xml
     public abstract partial class XmlReader : IDisposable
     {
         private const uint IsTextualNodeBitmap = 0x6018; // 00 0110 0000 0001 1000
+
         // 0 None,
         // 0 Element,
         // 0 Attribute,
@@ -35,6 +36,7 @@ namespace System.Xml
         // 0 XmlDeclaration
 
         private const uint CanReadContentAsBitmap = 0x1E1BC; // 01 1110 0001 1011 1100
+
         // 0 None,
         // 0 Element,
         // 1 Attribute,
@@ -55,6 +57,7 @@ namespace System.Xml
         // 0 XmlDeclaration
 
         private const uint HasValueBitmap = 0x2659C; // 10 0110 0101 1001 1100
+
         // 0 None,
         // 0 Element,
         // 1 Attribute,
@@ -1464,6 +1467,7 @@ namespace System.Xml
         //
         // Validation support
         internal virtual XmlNamespaceManager? NamespaceManager => null;
+
         internal static bool IsTextualNode(XmlNodeType nodeType)
         {
 #if DEBUG
@@ -1777,6 +1781,7 @@ namespace System.Xml
         }
 
         internal virtual IDtdInfo? DtdInfo => null;
+
         internal static ConformanceLevel GetV1ConformanceLevel(XmlReader reader)
         {
             XmlTextReaderImpl? tri = GetXmlTextReaderImpl(reader);

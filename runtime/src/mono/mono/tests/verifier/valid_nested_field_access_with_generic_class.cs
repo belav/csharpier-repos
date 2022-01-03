@@ -12,6 +12,7 @@ public class HashSet<T>
     struct Enumerator
     {
         HashSet<T> hashset;
+
         public Enumerator(HashSet<T> hashset)
         {
             this.hashset = hashset;

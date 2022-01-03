@@ -1538,6 +1538,7 @@ namespace System.Text.Tests
     public class HighMaxCharCountEncoderFallback : EncoderFallback
     {
         public override int MaxCharCount => int.MaxValue;
+
         public override EncoderFallbackBuffer CreateFallbackBuffer() =>
             ReplacementFallback.CreateFallbackBuffer();
     }
@@ -1545,6 +1546,7 @@ namespace System.Text.Tests
     public class HighMaxCharCountDecoderFallback : DecoderFallback
     {
         public override int MaxCharCount => int.MaxValue;
+
         public override DecoderFallbackBuffer CreateFallbackBuffer() =>
             ReplacementFallback.CreateFallbackBuffer();
     }

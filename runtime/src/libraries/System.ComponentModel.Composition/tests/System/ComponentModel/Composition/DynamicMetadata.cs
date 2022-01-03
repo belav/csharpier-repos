@@ -149,10 +149,12 @@ namespace System.ComponentModel.Composition
                 return null;
             }
         }
+
         public void AddProvider(TypeDescriptionProvider provider, Type type)
         {
             Providers[type] = provider;
         }
+
         public TypeConverter GetConverter(Type type)
         {
             var ictd = GetTypeDescriptor(type, null);
@@ -182,6 +184,7 @@ namespace System.ComponentModel.Composition
         {
             AddAttribute(target, provider, MetadataStore.Container);
         }
+
         public static void AddAttribute(
             Type target,
             Func<MemberInfo, IEnumerable<Attribute>, IEnumerable<Attribute>> provider,
@@ -192,6 +195,7 @@ namespace System.ComponentModel.Composition
                 new MetadataStoreProvider(target, provider);
             RegisterTypeDescriptorInterop(target);
         }
+
         private static void RegisterTypeDescriptorInterop(Type target)
         {
             if (!registeredRedirect.ContainsKey(target))
@@ -208,6 +212,7 @@ namespace System.ComponentModel.Composition
                 TypeDescriptor.AddProvider(registeredRedirect[target], target);
             }
         }
+
         public static TypeDescriptorServices GetTypeDescriptorServicesForContainer(
             CompositionContainer container
         )
@@ -233,6 +238,7 @@ namespace System.ComponentModel.Composition
         {
             public ContainerUnawareProviderRedirect(Type forType)
                 : base(TypeDescriptor.GetProvider(forType)) { }
+
             public override ICustomTypeDescriptor GetTypeDescriptor(
                 Type objectType,
                 object instance
@@ -261,6 +267,7 @@ namespace System.ComponentModel.Composition
         private class MetadataStoreProvider : TypeDescriptionProvider
         {
             Func<MemberInfo, IEnumerable<Attribute>, IEnumerable<Attribute>> provider;
+
             public MetadataStoreProvider(
                 Type forType,
                 Func<MemberInfo, IEnumerable<Attribute>, IEnumerable<Attribute>> provider
@@ -268,6 +275,7 @@ namespace System.ComponentModel.Composition
             {
                 this.provider = provider;
             }
+
             public override ICustomTypeDescriptor GetTypeDescriptor(
                 Type objectType,
                 object instance
@@ -283,6 +291,7 @@ namespace System.ComponentModel.Composition
         {
             Type targetType;
             Func<MemberInfo, IEnumerable<Attribute>, IEnumerable<Attribute>> provider;
+
             public MetadataStoreTypeDescriptor(
                 Type targetType,
                 ICustomTypeDescriptor parent,
@@ -292,6 +301,7 @@ namespace System.ComponentModel.Composition
                 this.targetType = targetType;
                 this.provider = provider;
             }
+
             public override TypeConverter GetConverter()
             {
                 TypeConverterAttribute attribute = (TypeConverterAttribute)GetAttributes()[
@@ -307,6 +317,7 @@ namespace System.ComponentModel.Composition
                 }
                 return base.GetConverter();
             }
+
             private Type GetTypeFromName(string typeName)
             {
                 if ((typeName == null) || (typeName.Length == 0))
@@ -329,6 +340,7 @@ namespace System.ComponentModel.Composition
                 }
                 return type;
             }
+
             public override AttributeCollection GetAttributes()
             {
                 var n = new List<Attribute>();
@@ -367,6 +379,7 @@ namespace System.ComponentModel.Composition
         {
             return sourceType == typeof(string);
         }
+
         public override object ConvertTo(
             ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
@@ -376,6 +389,7 @@ namespace System.ComponentModel.Composition
         {
             return ((DynamicMetadataTestClass)value).ToString();
         }
+
         public override object ConvertFrom(
             ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
@@ -384,6 +398,7 @@ namespace System.ComponentModel.Composition
         {
             return DynamicMetadataTestClass.Get((string)value);
         }
+
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
             return destinationType == typeof(string);

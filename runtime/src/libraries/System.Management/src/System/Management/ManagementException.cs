@@ -680,6 +680,7 @@ namespace System.Management
         {
             errorCode = (ManagementStatus)info.GetValue("errorCode", typeof(ManagementStatus));
         }
+
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementException'/> class</para>
         /// </summary>

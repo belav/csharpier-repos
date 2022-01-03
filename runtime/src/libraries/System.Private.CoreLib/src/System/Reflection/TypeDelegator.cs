@@ -237,19 +237,27 @@ namespace System.Reflection
         public override bool IsVariableBoundArray => typeImpl.IsVariableBoundArray;
 
         protected override bool IsArrayImpl() => typeImpl.IsArray;
+
         protected override bool IsPrimitiveImpl() => typeImpl.IsPrimitive;
+
         protected override bool IsByRefImpl() => typeImpl.IsByRef;
+
         public override bool IsGenericTypeParameter => typeImpl.IsGenericTypeParameter;
         public override bool IsGenericMethodParameter => typeImpl.IsGenericMethodParameter;
+
         protected override bool IsPointerImpl() => typeImpl.IsPointer;
+
         protected override bool IsValueTypeImpl() => typeImpl.IsValueType;
+
         protected override bool IsCOMObjectImpl() => typeImpl.IsCOMObject;
+
         public override bool IsByRefLike => typeImpl.IsByRefLike;
         public override bool IsConstructedGenericType => typeImpl.IsConstructedGenericType;
 
         public override bool IsCollectible => typeImpl.IsCollectible;
 
         public override Type? GetElementType() => typeImpl.GetElementType();
+
         protected override bool HasElementTypeImpl() => typeImpl.HasElementType;
 
         public override Type UnderlyingSystemType => typeImpl.UnderlyingSystemType;
@@ -257,11 +265,13 @@ namespace System.Reflection
         // ICustomAttributeProvider
         public override object[] GetCustomAttributes(bool inherit) =>
             typeImpl.GetCustomAttributes(inherit);
+
         public override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
             typeImpl.GetCustomAttributes(attributeType, inherit);
 
         public override bool IsDefined(Type attributeType, bool inherit) =>
             typeImpl.IsDefined(attributeType, inherit);
+
         public override InterfaceMapping GetInterfaceMap(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods

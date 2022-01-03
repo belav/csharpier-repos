@@ -2,12 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal unsafe class testout1
 {
     public class CL_0
     {
         public double[] arr1d_0 = new double[4];
     }
+
     private static double s_a1_0 = -268862297D;
 
     public static CL_0 clstatic_0 = new CL_0();

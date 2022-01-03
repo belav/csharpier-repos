@@ -39,10 +39,12 @@ namespace System.Linq.Expressions.Compiler
             {
                 return RuntimeHelpers.GetHashCode(Value) ^ Type.GetHashCode();
             }
+
             public bool Equals(TypedConstant other)
             {
                 return object.ReferenceEquals(Value, other.Value) && Type.Equals(other.Type);
             }
+
             public override bool Equals([NotNullWhen(true)] object? obj)
             {
                 return obj is TypedConstant typedConstant && Equals(typedConstant);

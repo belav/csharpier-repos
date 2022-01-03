@@ -165,6 +165,7 @@ public sealed class ViewComponentBeforeViewExecuteEventData : EventData
         ViewComponentContext = viewComponentContext;
         View = view;
     }
+
     /// <summary>
     /// The <see cref="ActionDescriptor"/>.
     /// </summary>

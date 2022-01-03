@@ -7,6 +7,7 @@
  */
 
 using System;
+
 internal class Repro
 {
     public static bool MyEquals(object obj1, object obj2)

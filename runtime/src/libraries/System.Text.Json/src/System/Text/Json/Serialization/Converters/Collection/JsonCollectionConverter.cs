@@ -27,6 +27,7 @@ namespace System.Text.Json.Serialization
             ref ReadStack state,
             JsonSerializerOptions options
         );
+
         protected virtual void ConvertCollection(
             ref ReadStack state,
             JsonSerializerOptions options

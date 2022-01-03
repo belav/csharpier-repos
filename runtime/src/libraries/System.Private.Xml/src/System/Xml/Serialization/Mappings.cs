@@ -671,6 +671,7 @@ namespace System.Xml.Serialization
             }
             return null;
         }
+
         internal bool Declares(MemberMapping member, string? parent)
         {
             StructMapping? m;
@@ -1144,6 +1145,7 @@ namespace System.Xml.Serialization
     internal sealed class SerializableMapping : SpecialMapping
     {
         private XmlSchema? _schema;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private Type? _type;
         private bool _needSchema = true;
@@ -1162,6 +1164,7 @@ namespace System.Xml.Serialization
         private SerializableMapping? _next; // all mappings with the same qname
 
         internal SerializableMapping() { }
+
         internal SerializableMapping(MethodInfo getSchemaMethod, bool any, string? ns)
         {
             _getSchemaMethod = getSchemaMethod;

@@ -24,6 +24,7 @@ internal static partial class Interop
             public IntPtr lpClass;
             public IntPtr hkeyClass;
             public uint dwHotKey;
+
             // This is a union of hIcon and hMonitor
             public IntPtr hIconMonitor;
             public IntPtr hProcess;

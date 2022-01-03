@@ -60,6 +60,7 @@ namespace System.Xml.Serialization
     internal sealed class XmlSchemaObjectComparer : IComparer
     {
         private readonly QNameComparer _comparer = new QNameComparer();
+
         public int Compare(object? o1, object? o2)
         {
             return _comparer.Compare(NameOf((XmlSchemaObject?)o1), NameOf((XmlSchemaObject?)o2));
@@ -168,6 +169,7 @@ namespace System.Xml.Serialization
                 _w.Append(' ');
             }
         }
+
         private void WriteAttribute(string localName, string ns, string? value)
         {
             if (value == null || value.Length == 0)
@@ -180,6 +182,7 @@ namespace System.Xml.Serialization
             _w.Append('=');
             _w.Append(value);
         }
+
         private void WriteAttribute(string localName, string ns, XmlQualifiedName value)
         {
             if (value.IsEmpty)
@@ -194,11 +197,13 @@ namespace System.Xml.Serialization
             _w.Append('[');
             _w.Append(name);
         }
+
         private void WriteEndElement()
         {
             _w.Append(']');
             _indentLevel--;
         }
+
         private void NewLine()
         {
             _w.Append(Environment.NewLine);

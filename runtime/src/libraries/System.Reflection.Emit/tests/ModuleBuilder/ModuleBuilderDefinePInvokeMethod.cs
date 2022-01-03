@@ -19,6 +19,7 @@ namespace System.Reflection.Emit.Tests
             TypeBuilderDefinePInvokeMethodTests.TestData
                 .Where(dpm => dpm.NoCMods)
                 .Select(dpm => new object[] { dpm });
+
         [Theory]
         [MemberData(nameof(TheoryData1))]
         public static void TestDefinePInvokeMethod1(DpmParams p)
@@ -56,6 +57,7 @@ namespace System.Reflection.Emit.Tests
             TypeBuilderDefinePInvokeMethodTests.TestData
                 .Where(dpm => dpm.NoCMods && dpm.EntrypointName == dpm.MethodName)
                 .Select(dpm => new object[] { dpm });
+
         [Theory]
         [MemberData(nameof(TheoryData2))]
         public static void TestDefinePInvokeMethod2(DpmParams p)

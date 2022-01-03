@@ -9,6 +9,7 @@ namespace System.IO
     public sealed partial class DriveInfo : System.Runtime.Serialization.ISerializable
     {
         public DriveInfo(string driveName) { }
+
         public long AvailableFreeSpace
         {
             get { throw null; }
@@ -41,6 +42,7 @@ namespace System.IO
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.AllowNullAttribute]
         public string VolumeLabel
         {
@@ -48,29 +50,37 @@ namespace System.IO
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
             set { }
         }
+
         public static System.IO.DriveInfo[] GetDrives()
         {
             throw null;
         }
+
         void System.Runtime.Serialization.ISerializable.GetObjectData(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public partial class DriveNotFoundException : System.IO.IOException
     {
         public DriveNotFoundException() { }
+
         protected DriveNotFoundException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public DriveNotFoundException(string? message) { }
+
         public DriveNotFoundException(string? message, System.Exception? innerException) { }
     }
+
     public enum DriveType
     {
         Unknown = 0,

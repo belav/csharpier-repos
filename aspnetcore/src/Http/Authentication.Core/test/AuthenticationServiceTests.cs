@@ -354,6 +354,7 @@ public class AuthenticationServiceTests
     private class RunOnce : IClaimsTransformation
     {
         public int Ran = 0;
+
         public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
         {
             Ran++;

@@ -11,6 +11,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 public int Value { get; set; }
             }
+
             public class Destination
             {
                 private static int _callCount = 0;

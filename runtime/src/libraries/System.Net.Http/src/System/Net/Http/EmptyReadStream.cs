@@ -20,6 +20,7 @@ namespace System.Net.Http
             bool disposing
         ) { /* nop */
         }
+
         public override void Close() { /* nop */
         }
 

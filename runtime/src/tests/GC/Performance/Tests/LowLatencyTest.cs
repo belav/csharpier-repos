@@ -18,6 +18,7 @@ namespace GCTest
     {
         private static int loid = 0; // to give a "unique" identifier
         private static Stopwatch s_stopWatch = new Stopwatch();
+
         public static void Usage()
         {
             Console.WriteLine("Usage");

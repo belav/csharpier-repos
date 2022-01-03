@@ -10,6 +10,7 @@ using System.Runtime.Versioning;
 using System.Text;
 
 namespace WbemClient_v1 { }
+
 namespace WbemUtilities_v1 { }
 
 namespace System.Management
@@ -88,6 +89,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return hResult;
         }
+
         public int Get_(
             string wszName,
             int lFlags,
@@ -124,6 +126,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return hr;
         }
+
         public int Put_(string wszName, int lFlags, ref object pVal, int Type)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -132,6 +135,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int Delete_(string wszName)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -140,6 +144,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int GetNames_(
             string wszQualifierName,
             int lFlags,
@@ -160,6 +165,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int BeginEnumeration_(int lEnumFlags)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -168,6 +174,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int Next_(
             int lFlags,
             ref string strName,
@@ -192,6 +199,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int EndEnumeration_()
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -200,6 +208,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int GetPropertyQualifierSet_(
             string wszProperty,
             out IWbemQualifierSetFreeThreaded ppQualSet
@@ -222,6 +231,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return hResult;
         }
+
         public int Clone_(out IWbemClassObjectFreeThreaded ppCopy)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -236,6 +246,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return hResult;
         }
+
         public int GetObjectText_(int lFlags, out string pstrObjectText)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -249,6 +260,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int SpawnDerivedClass_(int lFlags, out IWbemClassObjectFreeThreaded ppNewClass)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -268,6 +280,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return hResult;
         }
+
         public int SpawnInstance_(int lFlags, out IWbemClassObjectFreeThreaded ppNewInstance)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -287,6 +300,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return hResult;
         }
+
         public int CompareTo_(int lFlags, IWbemClassObjectFreeThreaded pCompareTo)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -300,6 +314,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int GetPropertyOrigin_(string wszName, out string pstrClassName)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -313,6 +328,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int InheritsFrom_(string strAncestor)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -321,6 +337,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int GetMethod_(
             string wszName,
             int lFlags,
@@ -354,6 +371,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return hResult;
         }
+
         public int PutMethod_(
             string wszName,
             int lFlags,
@@ -374,6 +392,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int DeleteMethod_(string wszName)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -382,6 +401,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int BeginMethodEnumeration_(int lEnumFlags)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -390,6 +410,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int NextMethod_(
             int lFlags,
             out string pstrName,
@@ -423,6 +444,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return hResult;
         }
+
         public int EndMethodEnumeration_()
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -431,6 +453,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int GetMethodQualifierSet_(
             string wszMethod,
             out IWbemQualifierSetFreeThreaded ppQualSet
@@ -452,6 +475,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return hResult;
         }
+
         public int GetMethodOrigin_(string wszMethodName, out string pstrClassName)
         {
             if (pWbemClassObject == IntPtr.Zero)
@@ -495,6 +519,7 @@ namespace System.Management
         public static Guid IID_IWbemClassObject = new Guid("DC12A681-737F-11CF-884D-00AA004B2E24");
 
         private IntPtr pWbemQualifierSet = IntPtr.Zero;
+
         public IWbemQualifierSetFreeThreaded(IntPtr pWbemQualifierSet)
         {
             // This instance will now own a single ref count on pWbemClassObject
@@ -540,6 +565,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int Put_(string wszName, ref object pVal, int lFlavor)
         {
             if (pWbemQualifierSet == IntPtr.Zero)
@@ -554,6 +580,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int Delete_(string wszName)
         {
             if (pWbemQualifierSet == IntPtr.Zero)
@@ -562,6 +589,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int GetNames_(int lFlags, out string[] pNames)
         {
             if (pWbemQualifierSet == IntPtr.Zero)
@@ -575,6 +603,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int BeginEnumeration_(int lFlags)
         {
             if (pWbemQualifierSet == IntPtr.Zero)
@@ -583,6 +612,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int Next_(int lFlags, out string pstrName, out object pVal, out int plFlavor)
         {
             if (pWbemQualifierSet == IntPtr.Zero)
@@ -598,6 +628,7 @@ namespace System.Management
             GC.KeepAlive(this);
             return res;
         }
+
         public int EndEnumeration_()
         {
             if (pWbemQualifierSet == IntPtr.Zero)
@@ -616,6 +647,7 @@ namespace System.Management
         }
 
         private readonly string cookie;
+
         private MarshalWbemObject(string cookie)
         {
             this.cookie = cookie;
@@ -653,6 +685,7 @@ namespace System.Management
         int GetQualifierSet_(
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemQualifierSet_DoNotMarshal ppQualSet
         );
+
         [PreserveSig]
         int Get_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
@@ -661,6 +694,7 @@ namespace System.Management
             [In] [Out] ref int pType,
             [In] [Out] ref int plFlavor
         );
+
         [PreserveSig]
         int Put_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
@@ -668,8 +702,10 @@ namespace System.Management
             [In] ref object pVal,
             [In] int Type
         );
+
         [PreserveSig]
         int Delete_([In] [MarshalAs(UnmanagedType.LPWStr)] string wszName);
+
         [PreserveSig]
         int GetNames_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszQualifierName,
@@ -679,8 +715,10 @@ namespace System.Management
             [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR)]
                 out string[] pNames
         );
+
         [PreserveSig]
         int BeginEnumeration_([In] int lEnumFlags);
+
         [PreserveSig]
         int Next_(
             [In] int lFlags,
@@ -689,27 +727,33 @@ namespace System.Management
             [In] [Out] ref int pType,
             [In] [Out] ref int plFlavor
         );
+
         [PreserveSig]
         int EndEnumeration_();
+
         [PreserveSig]
         int GetPropertyQualifierSet_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszProperty,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemQualifierSet_DoNotMarshal ppQualSet
         );
+
         [PreserveSig]
         int Clone_(
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemClassObject_DoNotMarshal ppCopy
         );
+
         [PreserveSig]
         int GetObjectText_(
             [In] int lFlags,
             [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrObjectText
         );
+
         [PreserveSig]
         int SpawnDerivedClass_(
             [In] int lFlags,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemClassObject_DoNotMarshal ppNewClass
         );
+
         [PreserveSig]
         int SpawnInstance_(
             [In] int lFlags,
@@ -717,18 +761,22 @@ namespace System.Management
             [MarshalAs(UnmanagedType.Interface)]
                 out IWbemClassObject_DoNotMarshal ppNewInstance
         );
+
         [PreserveSig]
         int CompareTo_(
             [In] int lFlags,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemClassObject_DoNotMarshal pCompareTo
         );
+
         [PreserveSig]
         int GetPropertyOrigin_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
             [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrClassName
         );
+
         [PreserveSig]
         int InheritsFrom_([In] [MarshalAs(UnmanagedType.LPWStr)] string strAncestor);
+
         [PreserveSig]
         int GetMethod_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
@@ -740,6 +788,7 @@ namespace System.Management
             [MarshalAs(UnmanagedType.Interface)]
                 out IWbemClassObject_DoNotMarshal ppOutSignature
         );
+
         [PreserveSig]
         int PutMethod_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
@@ -747,10 +796,13 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemClassObject_DoNotMarshal pInSignature,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemClassObject_DoNotMarshal pOutSignature
         );
+
         [PreserveSig]
         int DeleteMethod_([In] [MarshalAs(UnmanagedType.LPWStr)] string wszName);
+
         [PreserveSig]
         int BeginMethodEnumeration_([In] int lEnumFlags);
+
         [PreserveSig]
         int NextMethod_(
             [In] int lFlags,
@@ -764,13 +816,16 @@ namespace System.Management
             [MarshalAs(UnmanagedType.Interface)]
                 ref IWbemClassObject_DoNotMarshal ppOutSignature
         );
+
         [PreserveSig]
         int EndMethodEnumeration_();
+
         [PreserveSig]
         int GetMethodQualifierSet_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszMethod,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemQualifierSet_DoNotMarshal ppQualSet
         );
+
         [PreserveSig]
         int GetMethodOrigin_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszMethodName,
@@ -791,14 +846,17 @@ namespace System.Management
             [In] [Out] ref object pVal,
             [In] [Out] ref int plFlavor
         );
+
         [PreserveSig]
         int Put_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
             [In] ref object pVal,
             [In] int lFlavor
         );
+
         [PreserveSig]
         int Delete_([In] [MarshalAs(UnmanagedType.LPWStr)] string wszName);
+
         [PreserveSig]
         int GetNames_(
             [In] int lFlags,
@@ -806,8 +864,10 @@ namespace System.Management
             [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR)]
                 out string[] pNames
         );
+
         [PreserveSig]
         int BeginEnumeration_([In] int lFlags);
+
         [PreserveSig]
         int Next_(
             [In] int lFlags,
@@ -815,6 +875,7 @@ namespace System.Management
             [In] [Out] ref object pVal,
             [In] [Out] ref int plFlavor
         );
+
         [PreserveSig]
         int EndEnumeration_();
     }
@@ -827,6 +888,7 @@ namespace System.Management
     {
         [PreserveSig]
         int Clone_([Out] [MarshalAs(UnmanagedType.Interface)] out IWbemContext ppNewCopy);
+
         [PreserveSig]
         int GetNames_(
             [In] int lFlags,
@@ -834,30 +896,37 @@ namespace System.Management
             [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR)]
                 out string[] pNames
         );
+
         [PreserveSig]
         int BeginEnumeration_([In] int lFlags);
+
         [PreserveSig]
         int Next_(
             [In] int lFlags,
             [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrName,
             [Out] out object pValue
         );
+
         [PreserveSig]
         int EndEnumeration_();
+
         [PreserveSig]
         int SetValue_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
             [In] int lFlags,
             [In] ref object pValue
         );
+
         [PreserveSig]
         int GetValue_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
             [In] int lFlags,
             [Out] out object pValue
         );
+
         [PreserveSig]
         int DeleteValue_([In] [MarshalAs(UnmanagedType.LPWStr)] string wszName, [In] int lFlags);
+
         [PreserveSig]
         int DeleteAll_();
     }
@@ -876,13 +945,16 @@ namespace System.Management
             [In] [Out] [MarshalAs(UnmanagedType.Interface)] ref IWbemServices ppWorkingNamespace,
             [In] IntPtr ppCallResult
         );
+
         [PreserveSig]
         int CancelAsyncCall_([In] [MarshalAs(UnmanagedType.Interface)] IWbemObjectSink pSink);
+
         [PreserveSig]
         int QueryObjectSink_(
             [In] int lFlags,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemObjectSink ppResponseHandler
         );
+
         [PreserveSig]
         int GetObject_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strObjectPath,
@@ -893,6 +965,7 @@ namespace System.Management
                 out IWbemClassObjectFreeThreaded ppObject,
             [In] IntPtr ppCallResult
         );
+
         [PreserveSig]
         int GetObjectAsync_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strObjectPath,
@@ -900,6 +973,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemObjectSink pResponseHandler
         );
+
         [PreserveSig]
         int PutClass_(
             [In] IntPtr pObject,
@@ -907,6 +981,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] IntPtr ppCallResult
         );
+
         [PreserveSig]
         int PutClassAsync_(
             [In] IntPtr pObject,
@@ -914,6 +989,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemObjectSink pResponseHandler
         );
+
         [PreserveSig]
         int DeleteClass_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strClass,
@@ -921,6 +997,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] IntPtr ppCallResult
         );
+
         [PreserveSig]
         int DeleteClassAsync_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strClass,
@@ -928,6 +1005,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemObjectSink pResponseHandler
         );
+
         [PreserveSig]
         int CreateClassEnum_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strSuperclass,
@@ -935,6 +1013,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IEnumWbemClassObject ppEnum
         );
+
         [PreserveSig]
         int CreateClassEnumAsync_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strSuperclass,
@@ -942,6 +1021,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemObjectSink pResponseHandler
         );
+
         [PreserveSig]
         int PutInstance_(
             [In] IntPtr pInst,
@@ -949,6 +1029,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] IntPtr ppCallResult
         );
+
         [PreserveSig]
         int PutInstanceAsync_(
             [In] IntPtr pInst,
@@ -956,6 +1037,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemObjectSink pResponseHandler
         );
+
         [PreserveSig]
         int DeleteInstance_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strObjectPath,
@@ -963,6 +1045,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] IntPtr ppCallResult
         );
+
         [PreserveSig]
         int DeleteInstanceAsync_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strObjectPath,
@@ -970,6 +1053,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemObjectSink pResponseHandler
         );
+
         [PreserveSig]
         int CreateInstanceEnum_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strFilter,
@@ -977,6 +1061,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IEnumWbemClassObject ppEnum
         );
+
         [PreserveSig]
         int CreateInstanceEnumAsync_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strFilter,
@@ -984,6 +1069,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemObjectSink pResponseHandler
         );
+
         [PreserveSig]
         int ExecQuery_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strQueryLanguage,
@@ -992,6 +1078,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IEnumWbemClassObject ppEnum
         );
+
         [PreserveSig]
         int ExecQueryAsync_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strQueryLanguage,
@@ -1000,6 +1087,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemObjectSink pResponseHandler
         );
+
         [PreserveSig]
         int ExecNotificationQuery_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strQueryLanguage,
@@ -1008,6 +1096,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IEnumWbemClassObject ppEnum
         );
+
         [PreserveSig]
         int ExecNotificationQueryAsync_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strQueryLanguage,
@@ -1016,6 +1105,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemObjectSink pResponseHandler
         );
+
         [PreserveSig]
         int ExecMethod_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strObjectPath,
@@ -1028,6 +1118,7 @@ namespace System.Management
                 out IWbemClassObjectFreeThreaded ppOutParams,
             [In] IntPtr ppCallResult
         );
+
         [PreserveSig]
         int ExecMethodAsync_(
             [In] [MarshalAs(UnmanagedType.BStr)] string strObjectPath,
@@ -1052,16 +1143,19 @@ namespace System.Management
             [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(MarshalWbemObject))]
                 out IWbemClassObjectFreeThreaded ppResultObject
         );
+
         [PreserveSig]
         int GetResultString_(
             [In] int lTimeout,
             [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrResultString
         );
+
         [PreserveSig]
         int GetResultServices_(
             [In] int lTimeout,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemServices ppServices
         );
+
         [PreserveSig]
         int GetCallStatus_([In] int lTimeout, [Out] out int plStatus);
     }
@@ -1077,6 +1171,7 @@ namespace System.Management
             [In] int lObjectCount,
             [In] [MarshalAs(UnmanagedType.LPArray)] IntPtr[] apObjArray
         );
+
         [PreserveSig]
         int SetStatus_(
             [In] int lFlags,
@@ -1094,6 +1189,7 @@ namespace System.Management
     {
         [PreserveSig]
         int Reset_();
+
         [PreserveSig]
         int Next_(
             [In] int lTimeout,
@@ -1101,13 +1197,16 @@ namespace System.Management
             [In] [Out] [MarshalAs(UnmanagedType.LPArray)] IWbemClassObject_DoNotMarshal[] apObjects,
             [Out] out uint puReturned
         );
+
         [PreserveSig]
         int NextAsync_(
             [In] uint uCount,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemObjectSink pSink
         );
+
         [PreserveSig]
         int Clone_([Out] [MarshalAs(UnmanagedType.Interface)] out IEnumWbemClassObject ppEnum);
+
         [PreserveSig]
         int Skip_([In] int lTimeout, [In] uint nCount);
     }
@@ -1126,6 +1225,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
             [Out] [MarshalAs(UnmanagedType.BStr)] out string strText
         );
+
         [PreserveSig]
         int CreateFromText_(
             [In] int lFlags,
@@ -1146,6 +1246,7 @@ namespace System.Management
         int GetQualifierSet_(
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemQualifierSet_DoNotMarshal ppQualSet
         );
+
         [PreserveSig]
         int Get_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
@@ -1154,6 +1255,7 @@ namespace System.Management
             [In] [Out] ref int pType,
             [In] [Out] ref int plFlavor
         );
+
         [PreserveSig]
         int Put_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
@@ -1161,8 +1263,10 @@ namespace System.Management
             [In] ref object pVal,
             [In] int Type
         );
+
         [PreserveSig]
         int Delete_([In] [MarshalAs(UnmanagedType.LPWStr)] string wszName);
+
         [PreserveSig]
         int GetNames_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszQualifierName,
@@ -1172,8 +1276,10 @@ namespace System.Management
             [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR)]
                 out string[] pNames
         );
+
         [PreserveSig]
         int BeginEnumeration_([In] int lEnumFlags);
+
         [PreserveSig]
         int Next_(
             [In] int lFlags,
@@ -1182,27 +1288,33 @@ namespace System.Management
             [In] [Out] ref int pType,
             [In] [Out] ref int plFlavor
         );
+
         [PreserveSig]
         int EndEnumeration_();
+
         [PreserveSig]
         int GetPropertyQualifierSet_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszProperty,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemQualifierSet_DoNotMarshal ppQualSet
         );
+
         [PreserveSig]
         int Clone_(
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemClassObject_DoNotMarshal ppCopy
         );
+
         [PreserveSig]
         int GetObjectText_(
             [In] int lFlags,
             [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrObjectText
         );
+
         [PreserveSig]
         int SpawnDerivedClass_(
             [In] int lFlags,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemClassObject_DoNotMarshal ppNewClass
         );
+
         [PreserveSig]
         int SpawnInstance_(
             [In] int lFlags,
@@ -1210,18 +1322,22 @@ namespace System.Management
             [MarshalAs(UnmanagedType.Interface)]
                 out IWbemClassObject_DoNotMarshal ppNewInstance
         );
+
         [PreserveSig]
         int CompareTo_(
             [In] int lFlags,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemClassObject_DoNotMarshal pCompareTo
         );
+
         [PreserveSig]
         int GetPropertyOrigin_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
             [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrClassName
         );
+
         [PreserveSig]
         int InheritsFrom_([In] [MarshalAs(UnmanagedType.LPWStr)] string strAncestor);
+
         [PreserveSig]
         int GetMethod_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
@@ -1233,6 +1349,7 @@ namespace System.Management
             [MarshalAs(UnmanagedType.Interface)]
                 out IWbemClassObject_DoNotMarshal ppOutSignature
         );
+
         [PreserveSig]
         int PutMethod_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
@@ -1240,10 +1357,13 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemClassObject_DoNotMarshal pInSignature,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemClassObject_DoNotMarshal pOutSignature
         );
+
         [PreserveSig]
         int DeleteMethod_([In] [MarshalAs(UnmanagedType.LPWStr)] string wszName);
+
         [PreserveSig]
         int BeginMethodEnumeration_([In] int lEnumFlags);
+
         [PreserveSig]
         int NextMethod_(
             [In] int lFlags,
@@ -1257,26 +1377,32 @@ namespace System.Management
             [MarshalAs(UnmanagedType.Interface)]
                 ref IWbemClassObject_DoNotMarshal ppOutSignature
         );
+
         [PreserveSig]
         int EndMethodEnumeration_();
+
         [PreserveSig]
         int GetMethodQualifierSet_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszMethod,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemQualifierSet_DoNotMarshal ppQualSet
         );
+
         [PreserveSig]
         int GetMethodOrigin_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszMethodName,
             [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrClassName
         );
+
         [PreserveSig]
         int GetPropertyHandle_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszPropertyName,
             [Out] out int pType,
             [Out] out int plHandle
         );
+
         [PreserveSig]
         int WritePropertyValue_([In] int lHandle, [In] int lNumBytes, [In] ref byte aData);
+
         [PreserveSig]
         int ReadPropertyValue_(
             [In] int lHandle,
@@ -1284,22 +1410,29 @@ namespace System.Management
             [Out] out int plNumBytes,
             [Out] out byte aData
         );
+
         [PreserveSig]
         int ReadDWORD_([In] int lHandle, [Out] out uint pdw);
+
         [PreserveSig]
         int WriteDWORD_([In] int lHandle, [In] uint dw);
+
         [PreserveSig]
         int ReadQWORD_([In] int lHandle, [Out] out ulong pqw);
+
         [PreserveSig]
         int WriteQWORD_([In] int lHandle, [In] ulong pw);
+
         [PreserveSig]
         int GetPropertyInfoByHandle_(
             [In] int lHandle,
             [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrName,
             [Out] out int pType
         );
+
         [PreserveSig]
         int Lock_([In] int lFlags);
+
         [PreserveSig]
         int Unlock_([In] int lFlags);
     }
@@ -1316,6 +1449,7 @@ namespace System.Management
             [In] int lFlags,
             [Out] [MarshalAs(UnmanagedType.BStr)] out string MessageText
         );
+
         [PreserveSig]
         int GetFacilityCodeText_(
             [In] [MarshalAs(UnmanagedType.Error)] int hRes,
@@ -1352,6 +1486,7 @@ namespace System.Management
             [In] int lObjectCount,
             [In] [MarshalAs(UnmanagedType.Interface)] ref IWbemClassObject_DoNotMarshal apObjArray
         );
+
         [PreserveSig]
         int SetStatus_(
             [In] int lFlags,
@@ -1359,6 +1494,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.BStr)] string strParam,
             [In] [MarshalAs(UnmanagedType.Interface)] IWbemClassObject_DoNotMarshal pObjParam
         );
+
         [PreserveSig]
         int IndicateWithSD_(
             [In] int lNumObjects,
@@ -1366,10 +1502,13 @@ namespace System.Management
             [In] int lSDLength,
             [In] ref byte pSD
         );
+
         [PreserveSig]
         int SetSinkSecurity_([In] int lSDLength, [In] ref byte pSD);
+
         [PreserveSig]
         int IsActive_();
+
         [PreserveSig]
         int GetRestrictedSink_(
             [In] int lNumQueries,
@@ -1377,6 +1516,7 @@ namespace System.Management
             [In] [MarshalAs(UnmanagedType.IUnknown)] object pCallback,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemEventSink ppSink
         );
+
         [PreserveSig]
         int SetBatchingParameters_(
             [In] int lFlags,
@@ -1393,6 +1533,7 @@ namespace System.Management
     {
         [PreserveSig]
         int GetCount_([Out] out uint puKeyCount);
+
         [PreserveSig]
         int SetKey_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
@@ -1400,6 +1541,7 @@ namespace System.Management
             [In] uint uCimType,
             [In] IntPtr pKeyVal
         );
+
         [PreserveSig]
         int SetKey2_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
@@ -1407,6 +1549,7 @@ namespace System.Management
             [In] uint uCimType,
             [In] ref object pKeyVal
         );
+
         [PreserveSig]
         int GetKey_(
             [In] uint uKeyIx,
@@ -1419,6 +1562,7 @@ namespace System.Management
             [In] [Out] IntPtr pKeyVal,
             [Out] out uint puApparentCimType
         );
+
         [PreserveSig]
         int GetKey2_(
             [In] uint uKeyIx,
@@ -1430,14 +1574,19 @@ namespace System.Management
             [In] [Out] ref object pKeyValue,
             [Out] out uint puApparentCimType
         );
+
         [PreserveSig]
         int RemoveKey_([In] [MarshalAs(UnmanagedType.LPWStr)] string wszName, [In] uint uFlags);
+
         [PreserveSig]
         int RemoveAllKeys_([In] uint uFlags);
+
         [PreserveSig]
         int MakeSingleton_([In] sbyte bSet);
+
         [PreserveSig]
         int GetInfo_([In] uint uRequestedInfo, [Out] out ulong puResponse);
+
         [PreserveSig]
         int GetText_(
             [In] int lFlags,
@@ -1455,6 +1604,7 @@ namespace System.Management
     {
         [PreserveSig]
         int SetText_([In] uint uMode, [In] [MarshalAs(UnmanagedType.LPWStr)] string pszPath);
+
         [PreserveSig]
         int GetText_(
             [In] int lFlags,
@@ -1463,10 +1613,13 @@ namespace System.Management
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U2, SizeParamIndex = 1)]
                 char[] pszText
         );
+
         [PreserveSig]
         int GetInfo_([In] uint uRequestedInfo, [Out] out ulong puResponse);
+
         [PreserveSig]
         int SetServer_([In] [MarshalAs(UnmanagedType.LPWStr)] string Name);
+
         [PreserveSig]
         int GetServer_(
             [In] [Out] ref uint puNameBufLength,
@@ -1474,8 +1627,10 @@ namespace System.Management
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U2, SizeParamIndex = 0)]
                 char[] pName
         );
+
         [PreserveSig]
         int GetNamespaceCount_([Out] out uint puCount);
+
         [PreserveSig]
         int SetNamespaceAt_(
             [In] uint uIndex,
@@ -1483,6 +1638,7 @@ namespace System.Management
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U2, SizeParamIndex = 0)]
                 char[] pszName
         );
+
         [PreserveSig]
         int GetNamespaceAt_(
             [In] uint uIndex,
@@ -1491,19 +1647,25 @@ namespace System.Management
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U2, SizeParamIndex = 1)]
                 char[] pName
         );
+
         [PreserveSig]
         int RemoveNamespaceAt_([In] uint uIndex);
+
         [PreserveSig]
         int RemoveAllNamespaces_();
+
         [PreserveSig]
         int GetScopeCount_([Out] out uint puCount);
+
         [PreserveSig]
         int SetScope_([In] uint uIndex, [In] [MarshalAs(UnmanagedType.LPWStr)] string pszClass);
+
         [PreserveSig]
         int SetScopeFromText_(
             [In] uint uIndex,
             [In] [MarshalAs(UnmanagedType.LPWStr)] string pszText
         );
+
         [PreserveSig]
         int GetScope_(
             [In] uint uIndex,
@@ -1513,6 +1675,7 @@ namespace System.Management
                 char[] pszClass,
             [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemPathKeyList pKeyList
         );
+
         [PreserveSig]
         int GetScopeAsText_(
             [In] uint uIndex,
@@ -1521,12 +1684,16 @@ namespace System.Management
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U2, SizeParamIndex = 1)]
                 char[] pszText
         );
+
         [PreserveSig]
         int RemoveScope_([In] uint uIndex);
+
         [PreserveSig]
         int RemoveAllScopes_();
+
         [PreserveSig]
         int SetClassName_([In] [MarshalAs(UnmanagedType.LPWStr)] string Name);
+
         [PreserveSig]
         int GetClassName_(
             [In] [Out] ref uint puBuffLength,
@@ -1534,25 +1701,32 @@ namespace System.Management
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U2, SizeParamIndex = 0)]
                 char[] pszName
         );
+
         [PreserveSig]
         int GetKeyList_([Out] [MarshalAs(UnmanagedType.Interface)] out IWbemPathKeyList pOut);
+
         [PreserveSig]
         int CreateClassPart_([In] int lFlags, [In] [MarshalAs(UnmanagedType.LPWStr)] string Name);
+
         [PreserveSig]
         int DeleteClassPart_([In] int lFlags);
+
         [PreserveSig]
         int IsRelative_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszMachine,
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszNamespace
         );
+
         [PreserveSig]
         int IsRelativeOrChild_(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszMachine,
             [In] [MarshalAs(UnmanagedType.LPWStr)] string wszNamespace,
             [In] int lFlags
         );
+
         [PreserveSig]
         int IsLocal_([In] [MarshalAs(UnmanagedType.LPWStr)] string wszMachine);
+
         [PreserveSig]
         int IsSameClassName_([In] [MarshalAs(UnmanagedType.LPWStr)] string wszClass);
     }
@@ -1629,6 +1803,7 @@ namespace System.Management
         WBEM_FLAG_CLASS_LOCAL_AND_OVERRIDES = unchecked((int)0x00000200),
         WBEM_MASK_CLASS_CONDITION = unchecked((int)0x00000300),
     }
+
     internal enum tag_WBEM_FLAVOR_TYPE
     {
         WBEM_FLAVOR_DONT_PROPAGATE = unchecked((int)0x00000000),
@@ -1990,6 +2165,7 @@ namespace System.Management
         private static readonly AutoResetEvent evtGo = new AutoResetEvent(false); // tells the worker to create an object on our behalf
 
         private static bool workerThreadInitialized;
+
         // Initialize worker thread
         // This is not done in a static constructor so that we don't do this in an MTA only application
         private static void InitWorkerThread()

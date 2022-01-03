@@ -55,6 +55,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
             );
 
         private ModuleVersionIdField? _mvidField;
+
         // Dictionary that maps from analysis kind to instrumentation payload field.
         private readonly ConcurrentDictionary<
             int,

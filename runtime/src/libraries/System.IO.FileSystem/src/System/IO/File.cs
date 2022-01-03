@@ -483,6 +483,7 @@ namespace System.IO
                 fs.Write(bytes, 0, bytes.Length);
             }
         }
+
         public static string[] ReadAllLines(string path)
         {
             if (path == null)

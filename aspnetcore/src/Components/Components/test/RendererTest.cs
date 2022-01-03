@@ -6804,12 +6804,16 @@ public class RendererTest
     {
         [Parameter]
         public Exception ThrowDuringRender { get; set; }
+
         [Parameter]
         public Exception ThrowDuringEventSync { get; set; }
+
         [Parameter]
         public Task ThrowDuringEventAsync { get; set; }
+
         [Parameter]
         public Exception ThrowDuringParameterSettingSync { get; set; }
+
         [Parameter]
         public Task ThrowDuringParameterSettingAsync { get; set; }
 

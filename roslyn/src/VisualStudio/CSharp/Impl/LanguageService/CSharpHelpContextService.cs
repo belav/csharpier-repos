@@ -395,6 +395,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             text = null;
             return false;
         }
+
         private static bool TryGetTextForCombinationKeyword(
             SyntaxToken token,
             ISyntaxFactsService syntaxFacts,

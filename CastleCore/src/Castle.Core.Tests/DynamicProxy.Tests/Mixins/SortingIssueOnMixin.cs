@@ -20,6 +20,7 @@ namespace Castle.DynamicProxy.Tests.Mixins
     {
         void DoSomething();
     }
+
     public interface IDomainsAs
     {
         void DoSomethingElse();
@@ -44,6 +45,7 @@ namespace Castle.DynamicProxy.Tests.Mixins
     public class MixinDomainObject
     {
         public readonly string Name;
+
         public MixinDomainObject(string name)
         {
             this.Name = name;

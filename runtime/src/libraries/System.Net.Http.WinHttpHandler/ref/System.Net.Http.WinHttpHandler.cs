@@ -12,6 +12,7 @@ namespace System.Net.Http
         UseInternalCookieStoreOnly = 1,
         UseSpecifiedCookieContainer = 2,
     }
+
     public enum WindowsProxyUsePolicy
     {
         DoNotUseProxy = 0,
@@ -19,9 +20,11 @@ namespace System.Net.Http
         UseWinInetProxy = 2,
         UseCustomProxy = 3,
     }
+
     public partial class WinHttpHandler : System.Net.Http.HttpMessageHandler
     {
         public WinHttpHandler() { }
+
         public System.Net.DecompressionMethods AutomaticDecompression
         {
             get { throw null; }
@@ -156,7 +159,9 @@ namespace System.Net.Http
             get { throw null; }
             set { }
         }
+
         protected override void Dispose(bool disposing) { }
+
         protected override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken

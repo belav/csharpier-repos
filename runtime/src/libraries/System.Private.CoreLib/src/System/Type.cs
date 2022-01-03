@@ -64,8 +64,10 @@ namespace System
 
         public virtual Type GetGenericTypeDefinition() =>
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
+
         public virtual Type[] GenericTypeArguments =>
             (IsGenericType && !IsGenericTypeDefinition) ? GetGenericArguments() : Type.EmptyTypes;
+
         public virtual Type[] GetGenericArguments() =>
             throw new NotSupportedException(SR.NotSupported_SubclassOverride);
 
@@ -73,6 +75,7 @@ namespace System
             throw new InvalidOperationException(SR.Arg_NotGenericParameter);
         public virtual GenericParameterAttributes GenericParameterAttributes =>
             throw new NotSupportedException();
+
         public virtual Type[] GetGenericParameterConstraints()
         {
             if (!IsGenericParameter)
@@ -134,11 +137,14 @@ namespace System
         public bool IsCOMObject => IsCOMObjectImpl();
         protected abstract bool IsCOMObjectImpl();
         public bool IsContextful => IsContextfulImpl();
+
         protected virtual bool IsContextfulImpl() => false;
 
         public virtual bool IsEnum => IsSubclassOf(typeof(Enum));
         public bool IsMarshalByRef => IsMarshalByRefImpl();
+
         protected virtual bool IsMarshalByRefImpl() => false;
+
         public bool IsPrimitive => IsPrimitiveImpl();
         protected abstract bool IsPrimitiveImpl();
         public bool IsValueType
@@ -150,6 +156,7 @@ namespace System
         [Intrinsic]
         public bool IsAssignableTo([NotNullWhen(true)] Type? targetType) =>
             targetType?.IsAssignableFrom(this) ?? false;
+
         protected virtual bool IsValueTypeImpl() => IsSubclassOf(typeof(ValueType));
 
         public virtual bool IsSignatureType => false;
@@ -679,6 +686,7 @@ namespace System
         public virtual MemberInfo[] GetDefaultMembers() => throw NotImplemented.ByDesign;
 
         public virtual RuntimeTypeHandle TypeHandle => throw new NotSupportedException();
+
         public static RuntimeTypeHandle GetTypeHandle(object o)
         {
             if (o == null)
@@ -721,12 +729,15 @@ namespace System
         [SupportedOSPlatform("windows")]
         public static Type? GetTypeFromCLSID(Guid clsid) =>
             GetTypeFromCLSID(clsid, null, throwOnError: false);
+
         [SupportedOSPlatform("windows")]
         public static Type? GetTypeFromCLSID(Guid clsid, bool throwOnError) =>
             GetTypeFromCLSID(clsid, null, throwOnError: throwOnError);
+
         [SupportedOSPlatform("windows")]
         public static Type? GetTypeFromCLSID(Guid clsid, string? server) =>
             GetTypeFromCLSID(clsid, server, throwOnError: false);
+
         [SupportedOSPlatform("windows")]
         public static Type? GetTypeFromCLSID(Guid clsid, string? server, bool throwOnError) =>
             Marshal.GetTypeFromCLSID(clsid, server, throwOnError);
@@ -734,12 +745,15 @@ namespace System
         [SupportedOSPlatform("windows")]
         public static Type? GetTypeFromProgID(string progID) =>
             GetTypeFromProgID(progID, null, throwOnError: false);
+
         [SupportedOSPlatform("windows")]
         public static Type? GetTypeFromProgID(string progID, bool throwOnError) =>
             GetTypeFromProgID(progID, null, throwOnError: throwOnError);
+
         [SupportedOSPlatform("windows")]
         public static Type? GetTypeFromProgID(string progID, string? server) =>
             GetTypeFromProgID(progID, server, throwOnError: false);
+
         [SupportedOSPlatform("windows")]
         public static Type? GetTypeFromProgID(string progID, string? server, bool throwOnError) =>
             Marshal.GetTypeFromProgID(progID, server, throwOnError);
@@ -784,9 +798,11 @@ namespace System
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
         public Type? GetInterface(string name) => GetInterface(name, ignoreCase: false);
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
         public abstract Type? GetInterface(string name, bool ignoreCase);
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
         public abstract Type[] GetInterfaces();
 
@@ -800,6 +816,7 @@ namespace System
 
         public virtual bool IsInstanceOfType([NotNullWhen(true)] object? o) =>
             o == null ? false : IsAssignableFrom(o.GetType());
+
         public virtual bool IsEquivalentTo([NotNullWhen(true)] Type? other) => this == other;
 
         [UnconditionalSuppressMessage(
@@ -820,6 +837,7 @@ namespace System
 
             return fields[0].FieldType;
         }
+
         public virtual Array GetEnumValues()
         {
             if (!IsEnum)
@@ -831,7 +849,9 @@ namespace System
         }
 
         public virtual Type MakeArrayType() => throw new NotSupportedException();
+
         public virtual Type MakeArrayType(int rank) => throw new NotSupportedException();
+
         public virtual Type MakeByRefType() => throw new NotSupportedException();
 
         [RequiresUnreferencedCode(
@@ -878,6 +898,7 @@ namespace System
         public override string ToString() => "Type: " + Name; // Why do we add the "Type: " prefix?
 
         public override bool Equals(object? o) => o == null ? false : Equals(o as Type);
+
         public override int GetHashCode()
         {
             Type systemType = UnderlyingSystemType;
@@ -885,6 +906,7 @@ namespace System
                 return systemType.GetHashCode();
             return base.GetHashCode();
         }
+
         public virtual bool Equals(Type? o) =>
             o == null
                 ? false
@@ -949,6 +971,7 @@ namespace System
 
         private const BindingFlags DefaultLookup =
             BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
+
         // DynamicallyAccessedMemberTypes.All keeps more data than what a member can use:
         // - Keeps info about interfaces
         // - Complete Nested types (nested type body and all its members including other nested types)

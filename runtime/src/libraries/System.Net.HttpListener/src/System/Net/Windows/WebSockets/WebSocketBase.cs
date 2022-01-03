@@ -28,6 +28,7 @@ namespace System.Net.WebSockets
         // this object and another one is still using WaitAsync. According to Dev11 358715, this should be fine as long as we are not accessing the
         // AvailableWaitHandle on this SemaphoreSlim object.
         private readonly SemaphoreSlim _sendFrameThrottle;
+
         // locking _ThisLock protects access to
         // - State
         // - _closeAsyncStartedReceive

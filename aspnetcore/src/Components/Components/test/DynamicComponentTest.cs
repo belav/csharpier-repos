@@ -144,6 +144,7 @@ public class DynamicComponentTest
     {
         [Parameter]
         public int IntProp { get; set; }
+
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 

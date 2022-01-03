@@ -92,6 +92,7 @@ class HandleRefTest
     unsafe class CollectableClass
     {
         int* PtrToChange;
+
         public CollectableClass(int* ptrToChange)
         {
             PtrToChange = ptrToChange;

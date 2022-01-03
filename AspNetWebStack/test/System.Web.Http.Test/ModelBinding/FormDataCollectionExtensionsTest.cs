@@ -97,6 +97,7 @@ namespace System.Web.Http.ModelBinding
             public int I { get; set; }
             public Point P { get; set; }
         }
+
         public class Point
         {
             public int X { get; set; }

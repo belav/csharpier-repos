@@ -19,6 +19,7 @@ namespace Benchstone.BenchF
         private struct X
         {
             public float[] A;
+
             public X(int size)
             {
                 A = new float[size];

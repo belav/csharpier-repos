@@ -40,11 +40,13 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
             public void Start() =>
                 ChangeProgressStatus(ref _progressStartCount, ProgressStatus.Started);
+
             public void Stop() =>
                 ChangeProgressStatus(ref _progressStartCount, ProgressStatus.Stopped);
 
             private void Evaluate() =>
                 ChangeProgressStatus(ref _progressEvaluateCount, ProgressStatus.Evaluating);
+
             private void Pause() =>
                 ChangeProgressStatus(ref _progressEvaluateCount, ProgressStatus.Paused);
 

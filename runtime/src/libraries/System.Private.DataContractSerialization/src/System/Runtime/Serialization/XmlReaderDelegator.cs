@@ -1323,10 +1323,12 @@ namespace System.Runtime.Serialization
         {
             get { return reader.Depth; }
         }
+
         internal string? LookupNamespace(string prefix)
         {
             return reader.LookupNamespace(prefix);
         }
+
         internal bool EOF
         {
             get { return reader.EOF; }

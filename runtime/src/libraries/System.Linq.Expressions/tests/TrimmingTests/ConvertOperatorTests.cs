@@ -73,8 +73,10 @@ internal class Class1 : IHasName
 
     public static implicit operator Class2(Class1 class1) =>
         new Class2() { Name = class1.Name + "_implicit" };
+
     public static explicit operator Class3(Class1 class1) =>
         new Class3() { Name = class1.Name + "_explicit" };
+
     public static implicit operator Class4(Class1 class1) =>
         new Class4() { Name = class1.Name + "_implicit" };
 }

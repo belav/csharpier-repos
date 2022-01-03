@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis
             @"^\s*\[(([^#;]|\\#|\\;)+)\]\s*([#;].*)?$",
             RegexOptions.Compiled
         );
+
         // Matches EditorConfig property such as "indent_style = space", see https://editorconfig.org for details
         private static readonly Regex s_propertyMatcher = new Regex(
             @"^\s*([\w\.\-_]+)\s*[=:]\s*(.*?)\s*([#;].*)?$",

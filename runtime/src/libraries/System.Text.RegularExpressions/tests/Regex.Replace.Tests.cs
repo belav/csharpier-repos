@@ -1446,6 +1446,7 @@ namespace System.Text.RegularExpressions.Tests
             string.Format("<b>{0}</b>", match.Value);
 
         private static string MatchEvaluatorBar(Match match) => "bar";
+
         private static string MatchEvaluatorPoundSign(Match match) => "#";
 
         public static IEnumerable<object[]> TestReplaceCornerCases_TestData()
@@ -1513,6 +1514,7 @@ namespace System.Text.RegularExpressions.Tests
                 }
             }
         }
+
         [Theory]
         [MemberData(nameof(TestReplaceCornerCases_TestData))]
         private void TestReplaceCornerCases(
@@ -1552,6 +1554,7 @@ namespace System.Text.RegularExpressions.Tests
                 };
             }
         }
+
         [Theory]
         [MemberData(nameof(TestReplaceWithSubstitution_TestData))]
         private void TestReplaceWithSubstitution(
@@ -1588,6 +1591,7 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[] { @"(\bis\b)", "this is it", "this IS it", options };
             }
         }
+
         [Theory]
         [MemberData(nameof(TestReplaceWithToUpperMatchEvaluator_TestData))]
         private void TestReplaceWithToUpperMatchEvaluator(

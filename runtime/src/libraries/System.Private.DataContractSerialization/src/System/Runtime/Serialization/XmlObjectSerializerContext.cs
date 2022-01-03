@@ -212,6 +212,7 @@ namespace System.Runtime.Serialization
         {
             return type;
         }
+
         internal virtual DataContractDictionary? SerializerKnownDataContracts
         {
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

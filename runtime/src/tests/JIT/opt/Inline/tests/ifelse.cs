@@ -22,6 +22,7 @@ namespace JitInliningTest
             }
         }
     }
+
     internal class IfElse
     {
         public static int Main()

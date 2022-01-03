@@ -2,11 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal unsafe class testout1
 {
     public struct VT_0_1_1_1_1_1
     {
         public int a1_0_1_1_1_1_1;
+
         public VT_0_1_1_1_1_1(int i)
         {
             a1_0_1_1_1_1_1 = 1;
@@ -16,6 +18,7 @@ internal unsafe class testout1
     public struct VT_0_1_1_1_1
     {
         public uint a1_0_1_1_1_1;
+
         public VT_0_1_1_1_1(int i)
         {
             a1_0_1_1_1_1 = 1;
@@ -25,6 +28,7 @@ internal unsafe class testout1
     public struct VT_0_1_1
     {
         public int[] arr1d_0_1_1;
+
         public VT_0_1_1(int i)
         {
             arr1d_0_1_1 = new int[9];
@@ -34,15 +38,18 @@ internal unsafe class testout1
     public struct VT_0_1
     {
         public int a1_0_1;
+
         public VT_0_1(int i)
         {
             a1_0_1 = 1;
         }
     }
+
     public class CL_0_1
     {
         public int a2_0_1 = 2111165575;
     }
+
     private static double[] s_arr1d_0_1_1_1_1_1_1_1_1_1 = new double[9];
 
     private static float[,] s_arr2d_0_1_1_1_1_1_1_1_1 = new float[3, 9];

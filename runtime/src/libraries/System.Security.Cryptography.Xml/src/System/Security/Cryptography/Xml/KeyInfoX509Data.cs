@@ -13,12 +13,16 @@ namespace System.Security.Cryptography.Xml
     {
         // An array of certificates representing the certificate chain
         private ArrayList _certificates;
+
         // An array of issuer serial structs
         private ArrayList _issuerSerials;
+
         // An array of SKIs
         private ArrayList _subjectKeyIds;
+
         // An array of subject names
         private ArrayList _subjectNames;
+
         // A raw byte data representing a certificate revocation list
         private byte[] _CRL;
 

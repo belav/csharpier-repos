@@ -2274,6 +2274,7 @@ namespace System.Data
                 }
             }
         }
+
         internal bool IsNamespaceInherited() => null == _tableNamespace;
 
         internal void CheckCascadingNamespaceConflict(string realNamespace)
@@ -2327,6 +2328,7 @@ namespace System.Data
                 );
             }
         }
+
         internal void CheckNamespaceValidityForNestedParentRelations(
             string ns,
             DataTable parentTable
@@ -7303,6 +7305,7 @@ namespace System.Data
                 reader.ReadEndElement();
             }
         }
+
         internal void ReadXDRSchema(XmlReader reader)
         {
             XmlDocument xdoc = new XmlDocument(); // we may need this to infer the schema
@@ -7733,6 +7736,7 @@ namespace System.Data
                 }
             }
         }
+
         private void CreateRelationList(List<DataTable> tableList, List<DataRelation> relationList)
         {
             foreach (DataTable table in tableList)

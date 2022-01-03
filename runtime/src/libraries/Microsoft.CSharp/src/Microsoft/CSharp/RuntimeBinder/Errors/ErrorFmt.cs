@@ -100,6 +100,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             this.eaf = eaf;
             this.sym = pSym;
         }
+
         public ErrArg(SymWithType swt)
         {
             this.eak = ErrArgKind.SymWithType;
@@ -108,6 +109,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             this.swtMemo.sym = swt.Sym;
             this.swtMemo.ats = swt.Ats;
         }
+
         public ErrArg(MethPropWithInst mpwi)
         {
             this.eak = ErrArgKind.MethWithInst;
@@ -117,30 +119,37 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
             this.mpwiMemo.ats = mpwi.Ats;
             this.mpwiMemo.typeArgs = mpwi.TypeArgs;
         }
+
         public static implicit operator ErrArg(int n)
         {
             return new ErrArg(n);
         }
+
         public static implicit operator ErrArg(CType type)
         {
             return new ErrArg(type);
         }
+
         public static implicit operator ErrArg(string psz)
         {
             return new ErrArg(psz);
         }
+
         public static implicit operator ErrArg(Name name)
         {
             return new ErrArg(name);
         }
+
         public static implicit operator ErrArg(Symbol pSym)
         {
             return new ErrArg(pSym);
         }
+
         public static implicit operator ErrArg(SymWithType swt)
         {
             return new ErrArg(swt);
         }
+
         public static implicit operator ErrArg(MethPropWithInst mpwi)
         {
             return new ErrArg(mpwi);

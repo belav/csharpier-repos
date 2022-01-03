@@ -461,6 +461,7 @@ internal static partial class Interop
                 | PERF_DELTA_COUNTER
                 | PERF_DISPLAY_PERCENT
             );
+
             //
             // The timer used is of the frequency specified in the Object header's
             //  PerfFreq field (PerfTime is ignored)

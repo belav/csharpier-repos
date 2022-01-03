@@ -16,12 +16,18 @@ namespace System.Reflection.TypeLoading
         protected RoDefinitionType() : base() { }
 
         public sealed override bool IsTypeDefinition => true;
+
         protected sealed override bool HasElementTypeImpl() => false;
+
         protected sealed override bool IsArrayImpl() => false;
+
         public sealed override bool IsSZArray => false;
         public sealed override bool IsVariableBoundArray => false;
+
         protected sealed override bool IsByRefImpl() => false;
+
         protected sealed override bool IsPointerImpl() => false;
+
         public sealed override bool IsConstructedGenericType => false;
         public sealed override bool IsGenericParameter => false;
         public sealed override bool IsGenericTypeParameter => false;
@@ -50,6 +56,7 @@ namespace System.Reflection.TypeLoading
         }
 
         public sealed override string ToString() => Loader.GetDisposedString() ?? FullName!;
+
         internal abstract int GetGenericParameterCount();
         internal abstract override RoType[] GetGenericTypeParametersNoCopy();
 
@@ -80,10 +87,12 @@ namespace System.Reflection.TypeLoading
 
         protected sealed override RoType? ComputeBaseTypeWithoutDesktopQuirk() =>
             SpecializeBaseType(Instantiation);
+
         internal abstract RoType? SpecializeBaseType(RoType[] instantiation);
 
         protected sealed override IEnumerable<RoType> ComputeDirectlyImplementedInterfaces() =>
             SpecializeInterfaces(Instantiation);
+
         internal abstract IEnumerable<RoType> SpecializeInterfaces(RoType[] instantiation);
 
         [RequiresUnreferencedCode(
@@ -241,35 +250,45 @@ namespace System.Reflection.TypeLoading
         }
 
         internal sealed override RoType? GetRoElementType() => null;
+
         public sealed override int GetArrayRank() =>
             throw new ArgumentException(SR.Argument_HasToBeArrayClass);
+
         internal sealed override RoType[] GetGenericTypeArgumentsNoCopy() => Array.Empty<RoType>();
+
         protected internal sealed override RoType[] GetGenericArgumentsNoCopy() =>
             GetGenericTypeParametersNoCopy();
+
         public sealed override GenericParameterAttributes GenericParameterAttributes =>
             throw new InvalidOperationException(SR.Arg_NotGenericParameter);
         public sealed override int GenericParameterPosition =>
             throw new InvalidOperationException(SR.Arg_NotGenericParameter);
+
         public sealed override Type[] GetGenericParameterConstraints() =>
             throw new InvalidOperationException(SR.Arg_NotGenericParameter);
+
         public sealed override MethodBase DeclaringMethod =>
             throw new InvalidOperationException(SR.Arg_NotGenericParameter);
 
         internal sealed override IEnumerable<ConstructorInfo> GetConstructorsCore(
             NameFilter? filter
         ) => SpecializeConstructors(filter, this);
+
         internal sealed override IEnumerable<MethodInfo> GetMethodsCore(
             NameFilter? filter,
             Type reflectedType
         ) => SpecializeMethods(filter, reflectedType, this);
+
         internal sealed override IEnumerable<EventInfo> GetEventsCore(
             NameFilter? filter,
             Type reflectedType
         ) => SpecializeEvents(filter, reflectedType, this);
+
         internal sealed override IEnumerable<FieldInfo> GetFieldsCore(
             NameFilter? filter,
             Type reflectedType
         ) => SpecializeFields(filter, reflectedType, this);
+
         internal sealed override IEnumerable<PropertyInfo> GetPropertiesCore(
             NameFilter? filter,
             Type reflectedType

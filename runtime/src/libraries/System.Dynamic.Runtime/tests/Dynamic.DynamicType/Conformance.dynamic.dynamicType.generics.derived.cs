@@ -192,6 +192,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         private static Assembly s_asm;
         private static ResourceManager s_rm1;
         private static ResourceManager s_rm2;
+
         public static string GetErrorElement(ErrorElementId id)
         {
             return string.Empty;
@@ -249,6 +250,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -291,6 +293,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -333,6 +336,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -375,6 +379,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -447,6 +452,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     public class C<T>
     {
         public event EventHandler E = delegate { };
+
         public static void Foo()
         {
             dynamic c = new C<T>();
@@ -455,6 +461,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
 
         // field
         private T _tt;
+
         public char Bar(T t1, T t2)
         {
             _tt = t1;
@@ -465,6 +472,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     public struct S<T, V>
     {
         public event EventHandler E;
+
         public S(EventHandler e)
         {
             E = e;
@@ -812,6 +820,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Code>
 
     public delegate int Foo<T>(T t);
+
     public class C<T>
     {
         public virtual int M(T x)
@@ -832,6 +841,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public virtual event Foo<T> ev;
+
         public virtual void Raise(T t)
         {
             ev(t);
@@ -858,6 +868,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public override event Foo<int> ev;
+
         public override void Raise(int t)
         {
             ev(t);
@@ -904,6 +915,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Code>
 
     public delegate int Foo<T>(T t);
+
     public class A
     {
         public virtual int M(int t)
@@ -938,6 +950,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public virtual event Foo<T> ev;
+
         public virtual void Raise(T t)
         {
             ev(t);
@@ -964,6 +977,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public override event Foo<int> ev;
+
         public override void Raise(int t)
         {
             ev(t);
@@ -1010,6 +1024,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Code>
 
     public delegate int Foo<T, U>(T t, U u);
+
     public class C<T, U>
     {
         public virtual int M(T t, U u)
@@ -1030,6 +1045,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public virtual event Foo<T, U> ev;
+
         public virtual void Raise(T t, U u)
         {
             ev(t, u);
@@ -1056,6 +1072,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public override event Foo<T, int> ev;
+
         public override void Raise(T t, int u)
         {
             ev(t, u);
@@ -1065,6 +1082,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     public class E : D<string>
     {
         public override event Foo<string, int> ev;
+
         public override int M(string t, int y)
         {
             return 0;
@@ -1151,6 +1169,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Code>
 
     public delegate int Foo<T, U>(T t, U u);
+
     public class A<T>
     {
     }
@@ -1175,6 +1194,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public virtual event Foo<T, U> ev;
+
         public virtual void Raise(T t, U u)
         {
             ev(t, u);
@@ -1201,6 +1221,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public override event Foo<T, A<A<long>>> ev;
+
         public override void Raise(T t, A<A<long>> u)
         {
             ev(t, u);
@@ -1210,6 +1231,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     public class E : D<A<A<string>>>
     {
         public override event Foo<A<A<string>>, A<A<long>>> ev;
+
         public override int M(A<A<string>> t, A<A<long>> y)
         {
             return 0;
@@ -1296,6 +1318,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Code>
 
     public delegate int Foo<T>(T t);
+
     public class C<T>
     {
         public virtual int M<U>(T x, U u)
@@ -1352,6 +1375,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     //<Expects Status=warning>\(33,17\).*CS0114</Expects>
 
     public delegate int Foo<T>(T t);
+
     public class C<T>
     {
         public virtual int M(T x)
@@ -1372,6 +1396,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public virtual event Foo<T> ev;
+
         public virtual void Raise(T t)
         {
             ev(t);
@@ -1398,6 +1423,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public event Foo<int> ev;
+
         public void Raise(int t)
         {
             ev(t);
@@ -1444,6 +1470,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Code>
 
     public delegate int Foo<T>(T t);
+
     public class C<T>
     {
         public virtual int M(T x)
@@ -1464,6 +1491,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public virtual event Foo<T> ev;
+
         public virtual void Raise(T t)
         {
             ev(t);
@@ -1490,6 +1518,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public new event Foo<int> ev;
+
         public new void Raise(int t)
         {
             ev(t);
@@ -1536,6 +1565,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Code>
 
     public delegate int Foo<T>(T t);
+
     public abstract class C<T>
     {
         public abstract int M(T x);
@@ -1567,6 +1597,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public override event Foo<int> ev;
+
         public override void Raise(int t)
         {
             ev(t);
@@ -1613,6 +1644,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Code>
 
     public delegate int Foo<T>(T t);
+
     public class C<T>
     {
         public virtual int M(T x)
@@ -1633,6 +1665,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public virtual event Foo<T> ev;
+
         public virtual void Raise(T t)
         {
             ev(t);
@@ -1659,6 +1692,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
         }
 
         public override event Foo<int?> ev;
+
         public override void Raise(int? t)
         {
             ev(t);

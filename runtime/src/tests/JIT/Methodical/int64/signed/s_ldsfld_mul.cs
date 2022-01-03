@@ -9,6 +9,7 @@ namespace JitTest
     {
         private static long s_op1,
             s_op2;
+
         private static bool check(long product, bool overflow)
         {
             Console.Write("Multiplying {0} and {1}...", s_op1, s_op2);

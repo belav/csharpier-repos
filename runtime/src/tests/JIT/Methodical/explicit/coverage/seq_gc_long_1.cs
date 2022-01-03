@@ -32,6 +32,7 @@ internal class AA
     {
         return arg;
     }
+
     public static long call_target_ref(ref long arg)
     {
         return arg;

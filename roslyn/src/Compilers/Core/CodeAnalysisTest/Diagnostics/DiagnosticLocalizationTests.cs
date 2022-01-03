@@ -281,6 +281,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             public class CustomResourceSet : ResourceSet
             {
                 private readonly Dictionary<string, string> _resourcesMap;
+
                 public CustomResourceSet(Dictionary<string, string> resourcesMap)
                 {
                     _resourcesMap = resourcesMap;

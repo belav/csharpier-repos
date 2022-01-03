@@ -25,24 +25,28 @@ public struct S
         this.a = a;
         this.b = b;
     }
+
     // Swapping constructor
     public S(ref S s)
     {
         this.a = s.b;
         this.b = s.a;
     }
+
     // Swapping constructor
     public S(ref U u)
     {
         this.a = u.s.b;
         this.b = u.s.a;
     }
+
     // Swapping constructor
     public unsafe S(ref V v)
     {
         this.a = v.sRef->b;
         this.b = v.sRef->a;
     }
+
     // Swapping constructor
     public unsafe S(V v)
     {
@@ -87,6 +91,7 @@ public unsafe struct V
 public class Bug
 {
     static S ss;
+
     public static unsafe int Main()
     {
         int fail = 0;

@@ -313,6 +313,7 @@ namespace ILVerification.Tests
         private sealed class TestResolver : ResolverBase
         {
             Dictionary<string, string> _simpleNameToPathMap;
+
             public TestResolver(Dictionary<string, string> simpleNameToPathMap)
             {
                 _simpleNameToPathMap = simpleNameToPathMap;

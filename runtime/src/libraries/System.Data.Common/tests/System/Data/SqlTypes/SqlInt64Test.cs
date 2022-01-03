@@ -557,6 +557,7 @@ namespace System.Data.Tests.SqlTypes
             short testShort = 14;
             Assert.Equal(14, ((SqlInt64)testShort).Value);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {

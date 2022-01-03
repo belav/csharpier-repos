@@ -41,11 +41,13 @@ namespace System
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
             set { }
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static bool CapsLock
         {
             get { throw null; }
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -67,6 +69,7 @@ namespace System
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
             set { }
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -92,6 +95,7 @@ namespace System
         {
             get { throw null; }
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -101,6 +105,7 @@ namespace System
             get { throw null; }
             set { }
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -109,6 +114,7 @@ namespace System
         {
             get { throw null; }
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -134,6 +140,7 @@ namespace System
         {
             get { throw null; }
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -142,6 +149,7 @@ namespace System
         {
             get { throw null; }
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -150,6 +158,7 @@ namespace System
         {
             get { throw null; }
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static bool NumberLock
         {
@@ -181,6 +190,7 @@ namespace System
             ]
             set { }
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -226,6 +236,7 @@ namespace System
             [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
             set { }
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -235,17 +246,21 @@ namespace System
             add { }
             remove { }
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static void Beep() { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void Beep(int frequency, int duration) { }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static void Clear() { }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -254,6 +269,7 @@ namespace System
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void MoveBufferArea(
             int sourceLeft,
@@ -263,6 +279,7 @@ namespace System
             int targetLeft,
             int targetTop
         ) { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void MoveBufferArea(
             int sourceLeft,
@@ -275,14 +292,17 @@ namespace System
             System.ConsoleColor sourceForeColor,
             System.ConsoleColor sourceBackColor
         ) { }
+
         public static System.IO.Stream OpenStandardError()
         {
             throw null;
         }
+
         public static System.IO.Stream OpenStandardError(int bufferSize)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -291,26 +311,31 @@ namespace System
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static System.IO.Stream OpenStandardInput(int bufferSize)
         {
             throw null;
         }
+
         public static System.IO.Stream OpenStandardOutput()
         {
             throw null;
         }
+
         public static System.IO.Stream OpenStandardOutput(int bufferSize)
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static int Read()
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -319,6 +344,7 @@ namespace System
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
@@ -327,78 +353,124 @@ namespace System
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static string? ReadLine()
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static void ResetColor() { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void SetBufferSize(int width, int height) { }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static void SetCursorPosition(int left, int top) { }
+
         public static void SetError(System.IO.TextWriter newError) { }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         public static void SetIn(System.IO.TextReader newIn) { }
+
         public static void SetOut(System.IO.TextWriter newOut) { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void SetWindowPosition(int left, int top) { }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static void SetWindowSize(int width, int height) { }
+
         public static void Write(bool value) { }
+
         public static void Write(char value) { }
+
         public static void Write(char[]? buffer) { }
+
         public static void Write(char[] buffer, int index, int count) { }
+
         public static void Write(decimal value) { }
+
         public static void Write(double value) { }
+
         public static void Write(int value) { }
+
         public static void Write(long value) { }
+
         public static void Write(object? value) { }
+
         public static void Write(float value) { }
+
         public static void Write(string? value) { }
+
         public static void Write(string format, object? arg0) { }
+
         public static void Write(string format, object? arg0, object? arg1) { }
+
         public static void Write(string format, object? arg0, object? arg1, object? arg2) { }
+
         public static void Write(string format, params object?[]? arg) { }
+
         [System.CLSCompliantAttribute(false)]
         public static void Write(uint value) { }
+
         [System.CLSCompliantAttribute(false)]
         public static void Write(ulong value) { }
+
         public static void WriteLine() { }
+
         public static void WriteLine(bool value) { }
+
         public static void WriteLine(char value) { }
+
         public static void WriteLine(char[]? buffer) { }
+
         public static void WriteLine(char[] buffer, int index, int count) { }
+
         public static void WriteLine(decimal value) { }
+
         public static void WriteLine(double value) { }
+
         public static void WriteLine(int value) { }
+
         public static void WriteLine(long value) { }
+
         public static void WriteLine(object? value) { }
+
         public static void WriteLine(float value) { }
+
         public static void WriteLine(string? value) { }
+
         public static void WriteLine(string format, object? arg0) { }
+
         public static void WriteLine(string format, object? arg0, object? arg1) { }
+
         public static void WriteLine(string format, object? arg0, object? arg1, object? arg2) { }
+
         public static void WriteLine(string format, params object?[]? arg) { }
+
         [System.CLSCompliantAttribute(false)]
         public static void WriteLine(uint value) { }
+
         [System.CLSCompliantAttribute(false)]
         public static void WriteLine(ulong value) { }
     }
+
     public sealed partial class ConsoleCancelEventArgs : System.EventArgs
     {
         internal ConsoleCancelEventArgs() { }
+
         public bool Cancel
         {
             get { throw null; }
@@ -409,7 +481,9 @@ namespace System
             get { throw null; }
         }
     }
+
     public delegate void ConsoleCancelEventHandler(object? sender, System.ConsoleCancelEventArgs e);
+
     public enum ConsoleColor
     {
         Black = 0,
@@ -429,6 +503,7 @@ namespace System
         Yellow = 14,
         White = 15,
     }
+
     public enum ConsoleKey
     {
         Backspace = 8,
@@ -576,9 +651,11 @@ namespace System
         Pa1 = 253,
         OemClear = 254,
     }
+
     public readonly partial struct ConsoleKeyInfo : System.IEquatable<System.ConsoleKeyInfo>
     {
         private readonly int _dummyPrimitive;
+
         public ConsoleKeyInfo(
             char keyChar,
             System.ConsoleKey key,
@@ -589,6 +666,7 @@ namespace System
         {
             throw null;
         }
+
         public System.ConsoleKey Key
         {
             get { throw null; }
@@ -601,29 +679,35 @@ namespace System
         {
             get { throw null; }
         }
+
         public bool Equals(System.ConsoleKeyInfo obj)
         {
             throw null;
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? value
         )
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public static bool operator ==(System.ConsoleKeyInfo a, System.ConsoleKeyInfo b)
         {
             throw null;
         }
+
         public static bool operator !=(System.ConsoleKeyInfo a, System.ConsoleKeyInfo b)
         {
             throw null;
         }
     }
+
     [System.FlagsAttribute]
     public enum ConsoleModifiers
     {
@@ -631,6 +715,7 @@ namespace System
         Shift = 2,
         Control = 4,
     }
+
     public enum ConsoleSpecialKey
     {
         ControlC = 0,

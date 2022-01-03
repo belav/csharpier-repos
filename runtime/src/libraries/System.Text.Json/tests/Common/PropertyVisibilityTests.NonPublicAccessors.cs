@@ -78,10 +78,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             [JsonInclude]
             public int MyInt { get; private set; }
+
             [JsonInclude]
             public string MyString { get; internal set; }
+
             [JsonInclude]
             public float MyFloat { private get; set; }
+
             [JsonInclude]
             public Uri MyUri { internal get; set; }
 
@@ -233,10 +236,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             [JsonInclude]
             public int MyInt { get; private set; }
+
             [JsonInclude]
             public string MyString { get; internal set; }
+
             [JsonInclude]
             public float MyFloat { private get; set; }
+
             [JsonInclude]
             public Uri MyUri { internal get; set; }
 
@@ -339,6 +345,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             [JsonInclude]
             public int X { get; internal set; }
+
             [JsonInclude]
             public int Y { internal get; set; }
 
@@ -373,10 +380,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             [JsonInclude]
             public int W { get; set; }
+
             [JsonInclude]
             public int X { get; internal set; }
+
             [JsonInclude]
             public int Y { get; set; }
+
             [JsonInclude]
             public int Z { private get; set; }
 

@@ -136,6 +136,7 @@ internal sealed class ReferenceReadStream : Stream
     {
         throw new NotSupportedException();
     }
+
     public override Task WriteAsync(
         byte[] buffer,
         int offset,

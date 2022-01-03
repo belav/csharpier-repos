@@ -13,6 +13,7 @@ namespace System.Collections.Tests
         protected override bool DuplicateValuesAllowed => false;
         protected override bool IsReadOnly => true;
         protected override bool DefaultValueWhenNotAllowed_Throws => true;
+
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
         ) => new List<ModifyEnumerable>();

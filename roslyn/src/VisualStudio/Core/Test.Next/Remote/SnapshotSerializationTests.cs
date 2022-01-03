@@ -34,6 +34,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
     public class AssemblyLoadTestFixtureCollection : ICollectionFixture<AssemblyLoadTestFixture>
     {
         public const string Name = nameof(AssemblyLoadTestFixtureCollection);
+
         private AssemblyLoadTestFixtureCollection() { }
     }
 
@@ -42,6 +43,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
     public class SnapshotSerializationTests
     {
         private readonly AssemblyLoadTestFixture _testFixture;
+
         public SnapshotSerializationTests(AssemblyLoadTestFixture testFixture)
         {
             _testFixture = testFixture;
@@ -1314,8 +1316,10 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             private readonly Encoding _real = Encoding.UTF8;
 
             public override string WebName => _real.WebName;
+
             public override int GetByteCount(char[] chars, int index, int count) =>
                 _real.GetByteCount(chars, index, count);
+
             public override int GetBytes(
                 char[] chars,
                 int charIndex,
@@ -1323,8 +1327,10 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 byte[] bytes,
                 int byteIndex
             ) => GetBytes(chars, charIndex, charCount, bytes, byteIndex);
+
             public override int GetCharCount(byte[] bytes, int index, int count) =>
                 GetCharCount(bytes, index, count);
+
             public override int GetChars(
                 byte[] bytes,
                 int byteIndex,
@@ -1332,7 +1338,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 char[] chars,
                 int charIndex
             ) => GetChars(bytes, byteIndex, byteCount, chars, charIndex);
+
             public override int GetMaxByteCount(int charCount) => GetMaxByteCount(charCount);
+
             public override int GetMaxCharCount(int byteCount) => GetMaxCharCount(byteCount);
         }
     }

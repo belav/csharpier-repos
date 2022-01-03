@@ -11,29 +11,35 @@ class TestApp
     {
         return init.q;
     }
+
     static double test_0_1(double num, AA init, AA zero)
     {
         zero.q = num;
         return zero.q;
     }
+
     static double test_0_2(double num, AA init, AA zero)
     {
         return init.q + zero.q;
     }
+
     static double test_0_3(double num, AA init, AA zero)
     {
         return checked(init.q - zero.q);
     }
+
     static double test_0_4(double num, AA init, AA zero)
     {
         zero.q += num;
         return zero.q;
     }
+
     static double test_0_5(double num, AA init, AA zero)
     {
         zero.q += init.q;
         return zero.q;
     }
+
     static double test_0_6(double num, AA init, AA zero)
     {
         if (init.q == num)
@@ -41,59 +47,72 @@ class TestApp
         else
             return zero.q;
     }
+
     static double test_0_7(double num, AA init, AA zero)
     {
         return init.q < num + 1 ? 100 : -1;
     }
+
     static double test_0_8(double num, AA init, AA zero)
     {
         return (init.q > zero.q ? 1 : 0) + 99;
     }
+
     static double test_0_9(double num, AA init, AA zero)
     {
         object bb = init.q;
         return (double)bb;
     }
+
     static double test_0_10(double num, AA init, AA zero)
     {
         double dbl = init.q;
         return (double)dbl;
     }
+
     static double test_0_11(double num, AA init, AA zero)
     {
         return AA.call_target(init.q);
     }
+
     static double test_0_12(double num, AA init, AA zero)
     {
         return AA.call_target_ref(ref init.q);
     }
+
     static double test_1_0(double num, ref AA r_init, ref AA r_zero)
     {
         return r_init.q;
     }
+
     static double test_1_1(double num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q = num;
         return r_zero.q;
     }
+
     static double test_1_2(double num, ref AA r_init, ref AA r_zero)
     {
         return r_init.q + r_zero.q;
     }
+
     static double test_1_3(double num, ref AA r_init, ref AA r_zero)
     {
         return checked(r_init.q - r_zero.q);
     }
+
     static double test_1_4(double num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q += num;
         return r_zero.q;
     }
+
     static double test_1_5(double num, ref AA r_init, ref AA r_zero)
     {
         r_zero.q += r_init.q;
         return r_zero.q;
     }
+
     static double test_1_6(double num, ref AA r_init, ref AA r_zero)
     {
         if (r_init.q == num)
@@ -101,59 +120,72 @@ class TestApp
         else
             return r_zero.q;
     }
+
     static double test_1_7(double num, ref AA r_init, ref AA r_zero)
     {
         return r_init.q < num + 1 ? 100 : -1;
     }
+
     static double test_1_8(double num, ref AA r_init, ref AA r_zero)
     {
         return (r_init.q > r_zero.q ? 1 : 0) + 99;
     }
+
     static double test_1_9(double num, ref AA r_init, ref AA r_zero)
     {
         object bb = r_init.q;
         return (double)bb;
     }
+
     static double test_1_10(double num, ref AA r_init, ref AA r_zero)
     {
         double dbl = r_init.q;
         return (double)dbl;
     }
+
     static double test_1_11(double num, ref AA r_init, ref AA r_zero)
     {
         return AA.call_target(r_init.q);
     }
+
     static double test_1_12(double num, ref AA r_init, ref AA r_zero)
     {
         return AA.call_target_ref(ref r_init.q);
     }
+
     static double test_2_0(double num)
     {
         return AA.a_init[(int)num].q;
     }
+
     static double test_2_1(double num)
     {
         AA.a_zero[(int)num].q = num;
         return AA.a_zero[(int)num].q;
     }
+
     static double test_2_2(double num)
     {
         return AA.a_init[(int)num].q + AA.a_zero[(int)num].q;
     }
+
     static double test_2_3(double num)
     {
         return checked(AA.a_init[(int)num].q - AA.a_zero[(int)num].q);
     }
+
     static double test_2_4(double num)
     {
         AA.a_zero[(int)num].q += num;
         return AA.a_zero[(int)num].q;
     }
+
     static double test_2_5(double num)
     {
         AA.a_zero[(int)num].q += AA.a_init[(int)num].q;
         return AA.a_zero[(int)num].q;
     }
+
     static double test_2_6(double num)
     {
         if (AA.a_init[(int)num].q == num)
@@ -161,46 +193,56 @@ class TestApp
         else
             return AA.a_zero[(int)num].q;
     }
+
     static double test_2_7(double num)
     {
         return AA.a_init[(int)num].q < num + 1 ? 100 : -1;
     }
+
     static double test_2_8(double num)
     {
         return (AA.a_init[(int)num].q > AA.a_zero[(int)num].q ? 1 : 0) + 99;
     }
+
     static double test_2_9(double num)
     {
         object bb = AA.a_init[(int)num].q;
         return (double)bb;
     }
+
     static double test_2_10(double num)
     {
         double dbl = AA.a_init[(int)num].q;
         return (double)dbl;
     }
+
     static double test_2_11(double num)
     {
         return AA.call_target(AA.a_init[(int)num].q);
     }
+
     static double test_2_12(double num)
     {
         return AA.call_target_ref(ref AA.a_init[(int)num].q);
     }
+
     static double test_3_0(double num)
     {
         return AA.aa_init[0, (int)num - 1, (int)num / 100].q;
     }
+
     static double test_3_1(double num)
     {
         AA.aa_zero[0, (int)num - 1, (int)num / 100].q = num;
         return AA.aa_zero[0, (int)num - 1, (int)num / 100].q;
     }
+
     static double test_3_2(double num)
     {
         return AA.aa_init[0, (int)num - 1, (int)num / 100].q
             + AA.aa_zero[0, (int)num - 1, (int)num / 100].q;
     }
+
     static double test_3_3(double num)
     {
         return checked(
@@ -208,17 +250,20 @@ class TestApp
             - AA.aa_zero[0, (int)num - 1, (int)num / 100].q
         );
     }
+
     static double test_3_4(double num)
     {
         AA.aa_zero[0, (int)num - 1, (int)num / 100].q += num;
         return AA.aa_zero[0, (int)num - 1, (int)num / 100].q;
     }
+
     static double test_3_5(double num)
     {
         AA.aa_zero[0, (int)num - 1, (int)num / 100].q +=
             AA.aa_init[0, (int)num - 1, (int)num / 100].q;
         return AA.aa_zero[0, (int)num - 1, (int)num / 100].q;
     }
+
     static double test_3_6(double num)
     {
         if (AA.aa_init[0, (int)num - 1, (int)num / 100].q == num)
@@ -226,10 +271,12 @@ class TestApp
         else
             return AA.aa_zero[0, (int)num - 1, (int)num / 100].q;
     }
+
     static double test_3_7(double num)
     {
         return AA.aa_init[0, (int)num - 1, (int)num / 100].q < num + 1 ? 100 : -1;
     }
+
     static double test_3_8(double num)
     {
         return (
@@ -239,51 +286,62 @@ class TestApp
                     : 0
             ) + 99;
     }
+
     static double test_3_9(double num)
     {
         object bb = AA.aa_init[0, (int)num - 1, (int)num / 100].q;
         return (double)bb;
     }
+
     static double test_3_10(double num)
     {
         double dbl = AA.aa_init[0, (int)num - 1, (int)num / 100].q;
         return (double)dbl;
     }
+
     static double test_3_11(double num)
     {
         return AA.call_target(AA.aa_init[0, (int)num - 1, (int)num / 100].q);
     }
+
     static double test_3_12(double num)
     {
         return AA.call_target_ref(ref AA.aa_init[0, (int)num - 1, (int)num / 100].q);
     }
+
     static double test_4_0(double num)
     {
         return BB.f_init.q;
     }
+
     static double test_4_1(double num)
     {
         BB.f_zero.q = num;
         return BB.f_zero.q;
     }
+
     static double test_4_2(double num)
     {
         return BB.f_init.q + BB.f_zero.q;
     }
+
     static double test_4_3(double num)
     {
         return checked(BB.f_init.q - BB.f_zero.q);
     }
+
     static double test_4_4(double num)
     {
         BB.f_zero.q += num;
         return BB.f_zero.q;
     }
+
     static double test_4_5(double num)
     {
         BB.f_zero.q += BB.f_init.q;
         return BB.f_zero.q;
     }
+
     static double test_4_6(double num)
     {
         if (BB.f_init.q == num)
@@ -291,63 +349,77 @@ class TestApp
         else
             return BB.f_zero.q;
     }
+
     static double test_4_7(double num)
     {
         return BB.f_init.q < num + 1 ? 100 : -1;
     }
+
     static double test_4_8(double num)
     {
         return (BB.f_init.q > BB.f_zero.q ? 1 : 0) + 99;
     }
+
     static double test_4_9(double num)
     {
         object bb = BB.f_init.q;
         return (double)bb;
     }
+
     static double test_4_10(double num)
     {
         double dbl = BB.f_init.q;
         return (double)dbl;
     }
+
     static double test_4_11(double num)
     {
         return AA.call_target(BB.f_init.q);
     }
+
     static double test_4_12(double num)
     {
         return AA.call_target_ref(ref BB.f_init.q);
     }
+
     static double test_5_0(double num)
     {
         return ((AA)AA.b_init).q;
     }
+
     static unsafe double test_7_0(double num, void* ptr_init, void* ptr_zero)
     {
         return (*((AA*)ptr_init)).q;
     }
+
     static unsafe double test_7_1(double num, void* ptr_init, void* ptr_zero)
     {
         (*((AA*)ptr_zero)).q = num;
         return (*((AA*)ptr_zero)).q;
     }
+
     static unsafe double test_7_2(double num, void* ptr_init, void* ptr_zero)
     {
         return (*((AA*)ptr_init)).q + (*((AA*)ptr_zero)).q;
     }
+
     static unsafe double test_7_3(double num, void* ptr_init, void* ptr_zero)
     {
         return checked((*((AA*)ptr_init)).q - (*((AA*)ptr_zero)).q);
     }
+
     static unsafe double test_7_4(double num, void* ptr_init, void* ptr_zero)
     {
         (*((AA*)ptr_zero)).q += num;
         return (*((AA*)ptr_zero)).q;
     }
+
     static unsafe double test_7_5(double num, void* ptr_init, void* ptr_zero)
     {
         (*((AA*)ptr_zero)).q += (*((AA*)ptr_init)).q;
         return (*((AA*)ptr_zero)).q;
     }
+
     static unsafe double test_7_6(double num, void* ptr_init, void* ptr_zero)
     {
         if ((*((AA*)ptr_init)).q == num)
@@ -355,28 +427,34 @@ class TestApp
         else
             return (*((AA*)ptr_zero)).q;
     }
+
     static unsafe double test_7_7(double num, void* ptr_init, void* ptr_zero)
     {
         return (*((AA*)ptr_init)).q < num + 1 ? 100 : -1;
     }
+
     static unsafe double test_7_8(double num, void* ptr_init, void* ptr_zero)
     {
         return ((*((AA*)ptr_init)).q > (*((AA*)ptr_zero)).q ? 1 : 0) + 99;
     }
+
     static unsafe double test_7_9(double num, void* ptr_init, void* ptr_zero)
     {
         object bb = (*((AA*)ptr_init)).q;
         return (double)bb;
     }
+
     static unsafe double test_7_10(double num, void* ptr_init, void* ptr_zero)
     {
         double dbl = (*((AA*)ptr_init)).q;
         return (double)dbl;
     }
+
     static unsafe double test_7_11(double num, void* ptr_init, void* ptr_zero)
     {
         return AA.call_target((*((AA*)ptr_init)).q);
     }
+
     static unsafe double test_7_12(double num, void* ptr_init, void* ptr_zero)
     {
         return AA.call_target_ref(ref (*((AA*)ptr_init)).q);

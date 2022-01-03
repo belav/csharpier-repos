@@ -250,6 +250,7 @@ namespace System.Collections.Specialized.Tests
         public class IdiotComparer : IEqualityComparer
         {
             public new bool Equals(object x, object y) => true;
+
             public int GetHashCode(object obj) => 0;
         }
     }

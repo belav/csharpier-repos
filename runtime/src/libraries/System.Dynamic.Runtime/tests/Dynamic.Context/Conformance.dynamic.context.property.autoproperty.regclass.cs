@@ -320,6 +320,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     {
         private static string s_field;
         public static object locker = new object();
+
         ~Test()
         {
             lock (locker)
@@ -632,6 +633,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     public class Test
     {
         private static char? s_charValue = 'a';
+
         static Test()
         {
             dynamic dy = new MemberClass();
@@ -1034,6 +1036,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     public class Test
     {
         public static int Return;
+
         public Test()
         {
             dynamic dy = new MemberClass();

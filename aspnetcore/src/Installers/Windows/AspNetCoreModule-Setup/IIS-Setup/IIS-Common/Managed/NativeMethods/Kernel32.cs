@@ -25,6 +25,7 @@ namespace Microsoft.Web.Management.PInvoke.Kernel32
         public int dwMinorVersion;
         public int dwBuildNumber;
         public int dwPlatformId;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
         public string szCSDVersion;
         public short wServicePackMajor;

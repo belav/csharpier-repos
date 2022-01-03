@@ -480,6 +480,7 @@ namespace System.Threading.Tasks.Tests
             private readonly ConcurrentQueue<Task> _tasks = new ConcurrentQueue<Task>();
 
             private bool _faultQueues;
+
             protected override void QueueTask(Task task)
             {
                 if (_faultQueues)

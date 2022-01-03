@@ -24,10 +24,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return new BestIndex(BestIndexKind.None, 0, 0, 0);
         }
+
         public static BestIndex HasBest(int best)
         {
             return new BestIndex(BestIndexKind.Best, best, 0, 0);
         }
+
         public static BestIndex IsAmbiguous(int ambig1, int ambig2)
         {
             return new BestIndex(BestIndexKind.Ambiguous, 0, ambig1, ambig2);

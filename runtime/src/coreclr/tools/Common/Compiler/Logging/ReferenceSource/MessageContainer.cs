@@ -333,6 +333,7 @@ namespace Mono.Linker
 
         public override bool Equals(object obj) =>
             obj is MessageContainer messageContainer && Equals(messageContainer);
+
         public override int GetHashCode() =>
             (Category, Text, Code, SubCategory, Origin).GetHashCode();
 
@@ -352,6 +353,7 @@ namespace Mono.Linker
 
         public static bool operator ==(MessageContainer lhs, MessageContainer rhs) =>
             lhs.Equals(rhs);
+
         public static bool operator !=(MessageContainer lhs, MessageContainer rhs) =>
             !lhs.Equals(rhs);
     }

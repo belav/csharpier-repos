@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Shouldly;
 using Xunit;
+
 namespace AutoMapper.UnitTests.CustomMapping
 {
     public class NullableConverter : AutoMapperSpecBase
@@ -340,6 +341,7 @@ namespace AutoMapper.UnitTests.CustomMapping
             _result.Value.Type.ShouldBe(5);
         }
     }
+
     public class When_specifying_a_type_converter_for_a_non_generic_configuration
         : NonValidatingSpecBase
     {

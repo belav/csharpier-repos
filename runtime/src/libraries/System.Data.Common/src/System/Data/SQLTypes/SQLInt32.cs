@@ -333,6 +333,7 @@ namespace System.Data.SqlTypes
         {
             return x + y;
         }
+
         // Alternative method for operator -
         public static SqlInt32 Subtract(SqlInt32 x, SqlInt32 y)
         {

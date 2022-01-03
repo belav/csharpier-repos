@@ -35,6 +35,7 @@ namespace CoreXml.Test.XLinq
 
             Assert.False(module.HasFailures, module.GetFailuresInfo());
         }
+
         public partial class MiscTests : XLinqTestCase
         {
             // Type is CoreXml.Test.XLinq.FunctionalTests+MiscTests
@@ -92,6 +93,7 @@ namespace CoreXml.Test.XLinq
                     }
                 );
             }
+
             public partial class PrefixImprovements : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+MiscTests+PrefixImprovements
@@ -211,6 +213,7 @@ namespace CoreXml.Test.XLinq
                     );
                 }
             }
+
             public partial class XNameAPI : XLinqTestCase
             {
                 // Type is CoreXml.Test.XLinq.FunctionalTests+MiscTests+XNameAPI

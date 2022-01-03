@@ -9,6 +9,7 @@ namespace hello
     class Class1
     {
         private static TestUtil.TestLog testLog;
+
         static Class1()
         {
             // Create test writer object to hold expected output

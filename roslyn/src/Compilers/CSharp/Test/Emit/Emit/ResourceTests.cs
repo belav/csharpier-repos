@@ -25,6 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
     {
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern IntPtr LoadLibraryEx(string lpFileName, IntPtr hFile, uint dwFlags);
+
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool FreeLibrary([In] IntPtr hFile);
 

@@ -44,6 +44,7 @@ namespace System.Speech.Internal.GrammarBuilding
             }
             return true;
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();

@@ -292,11 +292,13 @@ namespace System.IO.Pipes
 
             /// <summary>The pipe name for this instance.</summary>
             internal string PipeName { get; }
+
             /// <summary>Gets the shared socket used to accept connections.</summary>
             internal Socket ListeningSocket { get; }
 
             /// <summary>The maximum number of server streams allowed to use this instance concurrently.</summary>
             private readonly int _maxCount;
+
             /// <summary>The concurrent number of concurrent streams using this instance.</summary>
             private int _currentCount;
 

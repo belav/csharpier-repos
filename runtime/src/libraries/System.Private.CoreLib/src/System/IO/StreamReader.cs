@@ -33,8 +33,10 @@ namespace System.IO
         private char[] _charBuffer = null!; // only null in NullStreamReader where this is never used
         private int _charPos;
         private int _charLen;
+
         // Record the number of valid bytes in the byteBuffer, for a few checks.
         private int _byteLen;
+
         // This is used only for preamble detection
         private int _bytePos;
 

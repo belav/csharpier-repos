@@ -1487,6 +1487,7 @@ namespace Microsoft.VisualBasic
 
             Output.WriteLine();
         }
+
         protected override void GenerateLinePragmaStart(CodeLinePragma e)
         {
             Output.WriteLine();

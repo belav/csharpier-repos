@@ -32,6 +32,7 @@ namespace System.Xml
         BLOCK_WS = 64,
         HAS_NS = 128
     }
+
     internal enum AttributeProperties : uint
     {
         DEFAULT = 0,

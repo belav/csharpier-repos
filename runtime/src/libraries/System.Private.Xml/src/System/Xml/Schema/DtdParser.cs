@@ -1773,6 +1773,7 @@ namespace System.Xml
                 }
             }
         }
+
         //
         // Scanning methods - works directly with parsing buffer
         //

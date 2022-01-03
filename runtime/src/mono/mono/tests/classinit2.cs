@@ -5,8 +5,10 @@ class A
         System.Console.WriteLine("A");
         M.a_run = true;
     }
+
     public static void f() { }
 }
+
 class B
 {
     static B()
@@ -15,12 +17,15 @@ class B
         A.f();
         M.b_run = true;
     }
+
     public static void f() { }
 }
+
 class M
 {
     public static bool b_run = false;
     public static bool a_run = false;
+
     public static int Main()
     {
         B.f();

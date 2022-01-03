@@ -335,6 +335,7 @@ public class RoleStoreWithGenerics
       >
 {
     private string _loginContext;
+
     public RoleStoreWithGenerics(ContextWithGenerics context, string loginContext) : base(context)
     {
         _loginContext = loginContext;

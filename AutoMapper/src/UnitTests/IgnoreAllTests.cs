@@ -165,6 +165,7 @@ namespace AutoMapper.UnitTests
             destination.StartingWith_ShouldNotBeMapped.ShouldBe(null);
         }
     }
+
     public class IgnoreAttributeTests
     {
         public class Source
@@ -176,6 +177,7 @@ namespace AutoMapper.UnitTests
         public class Destination
         {
             public string ShouldBeMapped { get; set; }
+
             [IgnoreMap]
             public string ShouldNotBeMapped { get; set; }
         }
@@ -210,6 +212,7 @@ namespace AutoMapper.UnitTests
         public class Destination
         {
             public string ShouldBeMapped { get; set; }
+
             [IgnoreMap]
             public string ShouldNotBeMapped { get; set; }
         }

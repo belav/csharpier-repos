@@ -13,11 +13,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         public readonly TypeSymbol BuilderType;
         public readonly BoundExpression Construction;
         public readonly bool UsesBoolReturns;
+
         /// <summary>
         /// The scope of the expression that contained the interpolated string during initial binding. This is used to determine the SafeToEscape rules
         /// for the builder during lowering.
         /// </summary>
         public readonly uint ScopeOfContainingExpression;
+
         /// <summary>
         /// The placeholders that are used for <see cref="Construction"/>.
         /// </summary>

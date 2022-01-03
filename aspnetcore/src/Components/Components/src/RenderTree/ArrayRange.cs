@@ -3,8 +3,10 @@
 
 #if IGNITOR
 namespace Ignitor;
+
 #else
 namespace Microsoft.AspNetCore.Components.RenderTree;
+
 #endif
 
 /// <summary>

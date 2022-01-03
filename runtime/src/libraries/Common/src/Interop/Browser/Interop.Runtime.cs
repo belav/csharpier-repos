@@ -14,8 +14,10 @@ internal static partial class Interop
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern string InvokeJS(string str, out int exceptionalResult);
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object CompileFunction(string str, out int exceptionalResult);
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object InvokeJSWithArgs(
             int jsHandle,
@@ -23,12 +25,14 @@ internal static partial class Interop
             object?[] parms,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object GetObjectProperty(
             int jsHandle,
             string propertyName,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object SetObjectProperty(
             int jsHandle,
@@ -38,12 +42,14 @@ internal static partial class Interop
             bool hasOwnProperty,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object GetByIndex(
             int jsHandle,
             int index,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object SetByIndex(
             int jsHandle,
@@ -51,6 +57,7 @@ internal static partial class Interop
             object? value,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object GetGlobalObject(
             string? globalName,
@@ -59,14 +66,17 @@ internal static partial class Interop
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object ReleaseCSOwnedObject(int jsHandle);
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object CreateCSOwnedObject(
             string className,
             object[] parms,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object TypedArrayToArray(int jsHandle, out int exceptionalResult);
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object TypedArrayCopyTo(
             int jsHandle,
@@ -76,6 +86,7 @@ internal static partial class Interop
             int bytesPerElement,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object TypedArrayFrom(
             int arrayPtr,
@@ -85,6 +96,7 @@ internal static partial class Interop
             int type,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object TypedArrayCopyFrom(
             int jsHandle,
@@ -102,6 +114,7 @@ internal static partial class Interop
             int gcHandle,
             int optionsJsHandle
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern string? RemoveEventListener(
             int jsHandle,
@@ -109,6 +122,7 @@ internal static partial class Interop
             int gcHandle,
             bool capture
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object WebSocketSend(
             int webSocketJSHandle,
@@ -120,6 +134,7 @@ internal static partial class Interop
             out int promiseJSHandle,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object WebSocketReceive(
             int webSocketJSHandle,
@@ -130,6 +145,7 @@ internal static partial class Interop
             out int promiseJSHandle,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object WebSocketOpen(
             string uri,
@@ -139,11 +155,13 @@ internal static partial class Interop
             out int promiseJSHandle,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern string WebSocketAbort(
             int webSocketJSHandle,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object WebSocketClose(
             int webSocketJSHandle,
@@ -153,6 +171,7 @@ internal static partial class Interop
             out int promiseJSHandle,
             out int exceptionalResult
         );
+
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern string CancelPromise(int promiseJSHandle, out int exceptionalResult);
 

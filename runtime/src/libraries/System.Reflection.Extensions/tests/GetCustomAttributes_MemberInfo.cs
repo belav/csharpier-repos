@@ -364,10 +364,12 @@ namespace System.Reflection.Tests
     public class MyAttributeBase_M : Attribute
     {
         private string _name;
+
         public MyAttributeBase_M(string name)
         {
             _name = name;
         }
+
         public override string ToString()
         {
             return this.GetType() + " " + _name;

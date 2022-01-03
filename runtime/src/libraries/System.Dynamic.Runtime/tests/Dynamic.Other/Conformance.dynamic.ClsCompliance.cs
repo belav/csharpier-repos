@@ -119,6 +119,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.mixedmode
     public class MyClass<T>
     {
         public volatile dynamic vd;
+
         public static T OutMethod01<X>(T t, ref X x, out dynamic d)
         {
             d = default(object);
@@ -136,6 +137,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.mixedmode
     public struct MyStruct<U, V>
     {
         public volatile dynamic vd1;
+
         [method: System.CLSCompliant(true)]
         public MyClass<T> RefMethod01<T>(ref dynamic d, T t)
         {
@@ -166,9 +168,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.mixedmode
         dynamic method01<X>(X n);
         T Method02(dynamic n, U u);
         T method02(dynamic n, U u);
+
         [method: System.CLSCompliant(true)]
         dynamic Method03<X, Y>(out X x, ref Y y, dynamic n);
         dynamic method03<X, Y>(out X x, ref Y y, dynamic n);
+
         [event: System.CLSCompliant(false)]
         event MyDelegate01<T> MyEvent;
         event MyDelegate01<T> Myevent;
@@ -184,6 +188,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.mixedmode
         [param: System.CLSCompliant(true)] dynamic d,
         int n
     );
+
     [System.CLSCompliantAttribute(false)]
     public delegate V MyDelegate02<U, V>(U u, params dynamic[] ary);
     public delegate V myDelegate02<U, V>(U u, params dynamic[] ary);
@@ -301,6 +306,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
         public class MyClass : MyBase
         {
             public dynamic ClassIdentifier;
+
             public dynamic method01(int n, ref dynamic d)
             {
                 return default(object);
@@ -321,6 +327,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
         public class MyClass2 : MyClass
         {
             public dynamic classIdentifier;
+
             public dynamic MEthod01(int n, ref dynamic d)
             {
                 return default(object);
@@ -341,6 +348,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
         public class MyClass3<U, V> : MyClass2
         {
             public dynamic ClassIdentifier;
+
             public dynamic Method01(long n, ref dynamic d)
             {
                 return default(object);
@@ -376,6 +384,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
         public class MyBase
         {
             public dynamic[][][] array; //jagged array
+
             private dynamic Method01(int n, ref dynamic d)
             {
                 return default(object);
@@ -391,6 +400,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
         public class MyClass : MyBase
         {
             private dynamic _classIdentifier;
+
             internal dynamic method01(int n, ref dynamic d)
             {
                 return default(object);
@@ -412,6 +422,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
         {
             //public static dynamic[,,,] array1; //cube array
             private dynamic _classIdentifier;
+
             private dynamic MEthod01(int n, ref dynamic d)
             {
                 return default(object);
@@ -432,6 +443,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
         public class MyClass3<U, V> : MyClass2
         {
             protected dynamic ClassIdentifier;
+
             private dynamic Method01(long n, ref dynamic d)
             {
                 return default(object);
@@ -463,6 +475,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingkey
         public class MyClass
         {
             public dynamic @dynamic;
+
             public dynamic Method01(ref int @dynamic)
             {
                 return default(dynamic);
@@ -472,6 +485,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingkey
         public struct MyStruct
         {
             public dynamic @dynamic;
+
             public void Method02(out dynamic @dynamic)
             {
                 @dynamic = default(dynamic);
@@ -486,6 +500,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingkey
 
         public delegate void myDelegate02(params dynamic[] @dynamic);
         public delegate int @dynamic(int n);
+
         namespace MyNamespace11
         {
             public enum @dynamic
@@ -627,6 +642,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.bug89385_
         }
 
         public static int Result = -1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

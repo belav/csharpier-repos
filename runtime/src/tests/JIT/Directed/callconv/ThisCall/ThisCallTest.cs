@@ -50,8 +50,10 @@ unsafe class ThisCallNative
 
     [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
     public delegate SizeF GetSizeFn(C* c, int unused);
+
     [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
     public delegate Width GetWidthFn(C* c);
+
     [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
     public delegate IntWrapper GetHeightAsIntFn(C* c);
 
@@ -66,12 +68,16 @@ unsafe class ThisCallNative
 
     [DllImport(nameof(ThisCallNative))]
     public static extern SizeF GetSizeFromManaged(C* c);
+
     [DllImport(nameof(ThisCallNative))]
     public static extern Width GetWidthFromManaged(C* c);
+
     [DllImport(nameof(ThisCallNative))]
     public static extern IntWrapper GetHeightAsIntFromManaged(C* c);
+
     [DllImport(nameof(ThisCallNative))]
     public static extern E GetEFromManaged(C* c);
+
     [DllImport(nameof(ThisCallNative))]
     public static extern CLong GetWidthAsLongFromManaged(C* c);
 }

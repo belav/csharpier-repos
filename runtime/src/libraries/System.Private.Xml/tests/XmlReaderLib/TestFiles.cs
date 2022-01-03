@@ -152,6 +152,7 @@ namespace System.Xml.Tests
         }
 
         private static Dictionary<EREADER_TYPE, string> s_fileNameMap = null;
+
         public static string GetTestFileName(EREADER_TYPE eReaderType)
         {
             if (s_fileNameMap == null)
@@ -193,6 +194,7 @@ namespace System.Xml.Tests
             s_fileNameMap.Add(EREADER_TYPE.LBNORMALIZATION, _LbNormalization);
             s_fileNameMap.Add(EREADER_TYPE.BINARY, _BinaryXml);
         }
+
         public static void CreateTestFile(ref string strFileName, EREADER_TYPE eReaderType)
         {
             strFileName = GetTestFileName(eReaderType);
@@ -347,6 +349,7 @@ namespace System.Xml.Tests
 
             CreateGenericTestFile(strFileName);
         }
+
         public static void CreateGenericTestFile(string strFileName)
         {
             Stream s = new MemoryStream();
@@ -898,6 +901,7 @@ namespace System.Xml.Tests
             tw.Flush();
             FilePathUtil.addStream(strFileName, s);
         }
+
         public static void CreateXSLTStyleSheetWCopyTestFile(string strFileName)
         {
             Stream s = new MemoryStream();
@@ -957,6 +961,7 @@ namespace System.Xml.Tests
                 buffer = newBuffer;
             }
         }
+
         public static void WriteToBuffer(ref byte[] destBuff, ref int len, byte srcByte)
         {
             ensureSpace(ref destBuff, len);

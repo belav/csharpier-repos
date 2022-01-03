@@ -35,8 +35,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <summary>A TaskCompletionSource that represents the completion of this block.</summary>
         private readonly TaskCompletionSource<VoidResult> _completionTask =
             new TaskCompletionSource<VoidResult>();
+
         /// <summary>A registry used to store all linked targets and information about them.</summary>
         private readonly TargetRegistry<TOutput> _targetRegistry;
+
         /// <summary>The output messages queued up to be received by consumers/targets.</summary>
         /// <remarks>
         /// The queue is only ever accessed by a single producer and single consumer at a time.  On the producer side,
@@ -56,6 +58,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             get { return _completionTask; }
         }
+
         /// <summary>Gets the object to use as the value lock.</summary>
         private object ValueLock
         {
@@ -66,18 +69,22 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>The source utilizing this helper.</summary>
         private readonly ISourceBlock<TOutput> _owningSource;
+
         /// <summary>The options used to configure this block's execution.</summary>
         private readonly DataflowBlockOptions _dataflowBlockOptions;
+
         /// <summary>
         /// An action to be invoked on the owner block to stop accepting messages.
         /// This action is invoked when SourceCore encounters an exception.
         /// </summary>
         private readonly Action<ISourceBlock<TOutput>> _completeAction;
+
         /// <summary>
         /// An action to be invoked on the owner block when an item is removed.
         /// This may be null if the owner block doesn't need to be notified.
         /// </summary>
         private readonly Action<ISourceBlock<TOutput>, int>? _itemsRemovedAction;
+
         /// <summary>Item counting function</summary>
         private readonly Func<
             ISourceBlock<TOutput>,
@@ -90,16 +97,22 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>The task used to process the output and offer it to targets.</summary>
         private Task? _taskForOutputProcessing; // protected by ValueLock
+
         /// <summary>Counter for message IDs unique within this source block.</summary>
         private PaddedInt64 _nextMessageId = new PaddedInt64 { Value = 1 }; // We are going to use this value before incrementing.  Protected by ValueLock.
+
         /// <summary>The target that the next message is reserved for, or null if nothing is reserved.</summary>
         private ITargetBlock<TOutput>? _nextMessageReservedFor; // protected by OutgoingLock
+
         /// <summary>Whether all future messages should be declined.</summary>
         private bool _decliningPermanently; // Protected by ValueLock
+
         /// <summary>Whether this block should again attempt to offer messages to targets.</summary>
         private bool _enableOffering = true; // Protected by ValueLock, sometimes read with volatile reads
+
         /// <summary>Whether someone has reserved the right to call CompleteBlockOncePossible.</summary>
         private bool _completionReserved; // Protected by OutgoingLock
+
         /// <summary>Exceptions that may have occurred and gone unhandled during processing.</summary>
         private List<Exception>? _exceptions; // Protected by ValueLock, sometimes read with volatile reads
 
@@ -1214,11 +1227,13 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 get { return _source._messages.Count; }
             }
+
             /// <summary>Gets the messages available for receiving.</summary>
             internal IEnumerable<TOutput> OutputQueue
             {
                 get { return _source._messages.ToList(); }
             }
+
             /// <summary>Gets the task being used for output processing.</summary>
             internal Task? TaskForOutputProcessing
             {
@@ -1242,6 +1257,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 get { return _source._targetRegistry; }
             }
+
             /// <summary>Gets the target that holds a reservation on the next message, if any.</summary>
             internal ITargetBlock<TOutput>? NextMessageReservedFor
             {

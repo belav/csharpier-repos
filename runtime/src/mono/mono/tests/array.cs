@@ -104,6 +104,7 @@ public class Test
         a,
         b
     };
+
     public static int test_0_enum_array_casting()
     {
         var x = new Foo[10];

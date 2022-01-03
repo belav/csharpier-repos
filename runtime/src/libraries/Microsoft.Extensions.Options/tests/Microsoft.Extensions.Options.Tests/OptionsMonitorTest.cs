@@ -419,6 +419,7 @@ namespace Microsoft.Extensions.Options.Tests
         public class ChangeTokenSource<T> : IOptionsChangeTokenSource<T>
         {
             private readonly IChangeToken _changeToken;
+
             public ChangeTokenSource(IChangeToken changeToken)
             {
                 _changeToken = changeToken;

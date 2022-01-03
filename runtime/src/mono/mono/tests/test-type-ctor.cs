@@ -6,6 +6,7 @@ class Subclient
     {
         throw new Exception();
     }
+
     ~Subclient()
     {
         Console.WriteLine("in finalizer");
@@ -15,6 +16,7 @@ class Subclient
 class Test
 {
     static Subclient s;
+
     static void Main()
     {
         Console.WriteLine("testing");

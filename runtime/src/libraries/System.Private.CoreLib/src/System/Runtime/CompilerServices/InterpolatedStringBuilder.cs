@@ -24,18 +24,23 @@ namespace System.Runtime.CompilerServices
         /// since the compiler-provided base length won't include the equivalent character count.
         /// </remarks>
         private const int GuessedLengthPerHole = 11;
+
         /// <summary>Minimum size array to rent from the pool.</summary>
         /// <remarks>Same as stack-allocation size used today by string.Format.</remarks>
         private const int MinimumArrayPoolLength = 256;
 
         /// <summary>Optional provider to pass to IFormattable.ToString or ISpanFormattable.TryFormat calls.</summary>
         private readonly IFormatProvider? _provider;
+
         /// <summary>Array rented from the array pool and used to back <see cref="_chars"/>.</summary>
         private char[]? _arrayToReturnToPool;
+
         /// <summary>The span to write into.</summary>
         private Span<char> _chars;
+
         /// <summary>Position at which to write the next character.</summary>
         private int _pos;
+
         /// <summary>Whether <see cref="_provider"/> provides an ICustomFormatter.</summary>
         /// <remarks>
         /// Custom formatters are very rare.  We want to support them, but it's ok if we make them more expensive
@@ -319,6 +324,7 @@ namespace System.Runtime.CompilerServices
                 AppendLiteral(s);
             }
         }
+
         /// <summary>Writes the specified value to the builder.</summary>
         /// <param name="value">The value to write.</param>
         /// <param name="format">The format string.</param>

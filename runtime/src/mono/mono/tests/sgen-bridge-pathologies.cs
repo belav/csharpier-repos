@@ -8,6 +8,7 @@ public class Bridge
     public int __test;
     public List<object> Links = new List<object>();
     public static int fin_count;
+
     ~Bridge()
     {
         ++fin_count;

@@ -36,13 +36,18 @@ namespace ILCompiler
         class ValidTypeHashTable : LockFreeReaderHashtable<TypeDesc, TypeDesc>
         {
             protected override bool CompareKeyToValue(TypeDesc key, TypeDesc value) => key == value;
+
             protected override bool CompareValueToValue(TypeDesc value1, TypeDesc value2) =>
                 value1 == value2;
+
             protected override TypeDesc CreateValueFromKey(TypeDesc key) =>
                 EnsureLoadableTypeUncached(key);
+
             protected override int GetKeyHashCode(TypeDesc key) => key.GetHashCode();
+
             protected override int GetValueHashCode(TypeDesc value) => value.GetHashCode();
         }
+
         private readonly ValidTypeHashTable _validTypes = new ValidTypeHashTable();
 
         private static TypeDesc EnsureLoadableTypeUncached(TypeDesc type)

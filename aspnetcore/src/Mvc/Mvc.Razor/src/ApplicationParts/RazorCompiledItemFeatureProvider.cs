@@ -80,6 +80,7 @@ internal sealed class RazorCompiledItemFeatureProvider : IApplicationFeatureProv
     private sealed class HotReloadRazorCompiledItem : RazorCompiledItem
     {
         private readonly RazorCompiledItem _previous;
+
         public HotReloadRazorCompiledItem(RazorCompiledItem previous, Type type)
         {
             _previous = previous;

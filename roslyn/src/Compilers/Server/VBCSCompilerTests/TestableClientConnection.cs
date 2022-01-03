@@ -29,8 +29,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         };
 
         public void Dispose() => DisposeFunc();
+
         public Task<BuildRequest> ReadBuildRequestAsync(CancellationToken cancellationToken) =>
             ReadBuildRequestFunc(cancellationToken);
+
         public Task WriteBuildResponseAsync(
             BuildResponse response,
             CancellationToken cancellationToken

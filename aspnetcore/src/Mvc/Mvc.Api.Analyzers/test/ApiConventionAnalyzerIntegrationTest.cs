@@ -262,6 +262,7 @@ namespace Test
             }
         );
     }
+
     private class ApiConventionWith1006DiagnosticEnabledRunner : MvcDiagnosticAnalyzerRunner
     {
         public ApiConventionWith1006DiagnosticEnabledRunner() : base(new ApiConventionAnalyzer())

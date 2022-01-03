@@ -22,6 +22,7 @@ namespace System.Speech.Synthesis.TtsEngine
             IntPtr pTextFragList,
             IntPtr pOutputSite
         );
+
         [PreserveSig]
         void GetOutputFormat(
             ref Guid pTargetFmtId,

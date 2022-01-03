@@ -48,18 +48,23 @@ namespace Microsoft.CodeAnalysis.Options
             );
 
         private static readonly Func<string, Optional<bool>> s_parseBool = ParseBool;
+
         private static Optional<bool> ParseBool(string str) =>
             bool.TryParse(str, out var result) ? result : new Optional<bool>();
+
         private static readonly Func<bool, string> s_getBoolEditorConfigStringForValue =
             GetBoolEditorConfigStringForValue;
+
         private static string GetBoolEditorConfigStringForValue(bool value) =>
             value.ToString().ToLowerInvariant();
 
         private static readonly Func<string, Optional<int>> s_parseInt32 = ParseInt32;
+
         private static Optional<int> ParseInt32(string str) =>
             int.TryParse(str, out var result) ? result : new Optional<int>();
 
         private static readonly Func<string, Optional<string>> s_parseString = ParseString;
+
         private static Optional<string> ParseString(string str)
         {
             if (str.Equals("unset", StringComparison.Ordinal))
@@ -73,11 +78,13 @@ namespace Microsoft.CodeAnalysis.Options
 
         private static readonly Func<int, string> s_getInt32EditorConfigStringForValue =
             GetInt32EditorConfigStringForValue;
+
         private static string GetInt32EditorConfigStringForValue(int value) =>
             value.ToString().ToLowerInvariant();
 
         private static readonly Func<string, string> s_getStringEditorConfigStringForValue =
             GetStringEditorConfigStringForValue;
+
         private static string GetStringEditorConfigStringForValue(string value) =>
             value.ToString().Replace("\r", "\\r").Replace("\n", "\\n");
 
@@ -92,6 +99,7 @@ namespace Microsoft.CodeAnalysis.Options
             )
                 ? result
                 : new Optional<CodeStyleOption2<bool>>();
+
         private static string GetBoolCodeStyleOptionEditorConfigStringForValue(
             CodeStyleOption2<bool> value,
             CodeStyleOption2<bool> defaultValue
@@ -109,6 +117,7 @@ namespace Microsoft.CodeAnalysis.Options
             )
                 ? result
                 : new Optional<CodeStyleOption2<string>>();
+
         private static string GetStringCodeStyleOptionEditorConfigStringForValue(
             CodeStyleOption2<string> value,
             CodeStyleOption2<string> defaultValue

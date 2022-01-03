@@ -7,9 +7,13 @@
     public class ReverseMapWithInclude : SpecBase
     {
         public class Duck : Animal { }
+
         public class DuckDto : AnimalDto { }
+
         public abstract class Animal { }
+
         public abstract class AnimalDto { }
+
         public class DuckProxyClassFoo : Duck { }
 
         [Fact]

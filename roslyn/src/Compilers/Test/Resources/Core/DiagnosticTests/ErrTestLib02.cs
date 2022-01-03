@@ -15,16 +15,19 @@ namespace NS
         {
             return new A();
         }
+
         // for CS1682 - nested
         public static A.B GetB()
         {
             return null;
         }
+
         // for CS1684
         public static C GetC()
         {
             return null;
         }
+
         // for CS1714
         public static E<int> GetE()
         {

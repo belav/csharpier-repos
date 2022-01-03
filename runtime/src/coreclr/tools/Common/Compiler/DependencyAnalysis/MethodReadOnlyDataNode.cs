@@ -26,6 +26,7 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append("__readonlydata_" + nameMangler.GetMangledMethodName(_owningMethod));
         }
+
         public int Offset => 0;
         public override bool IsShareable => true;
 

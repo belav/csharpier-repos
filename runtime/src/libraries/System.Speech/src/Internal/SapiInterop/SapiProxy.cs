@@ -81,6 +81,7 @@ namespace System.Speech.Internal.SapiInterop
             {
                 Dispose(false);
             }
+
             public override void Dispose()
             {
                 try

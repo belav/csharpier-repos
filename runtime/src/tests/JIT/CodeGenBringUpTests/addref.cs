@@ -21,6 +21,7 @@ class child
         else
             return Fail;
     }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int addref(int x, ref int a)
     {

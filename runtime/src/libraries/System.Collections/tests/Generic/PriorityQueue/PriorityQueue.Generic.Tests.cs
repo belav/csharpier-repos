@@ -302,25 +302,31 @@ namespace System.Collections.Tests
 
             IEnumerator<(TElement Element, TPriority Priority)> IEnumerable<(TElement Element, TPriority Priority)>.GetEnumerator() =>
                 UnorderedItems.GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => UnorderedItems.GetEnumerator();
         }
 
         protected override IEnumerable<(TElement Element, TPriority Priority)> GenericIEnumerableFactory() =>
             new EnumerablePriorityQueue(GetPriorityComparer());
+
         protected override int Count(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable
         ) => ((EnumerablePriorityQueue)enumerable).Count;
+
         protected override void Add(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable,
             (TElement Element, TPriority Priority) value
         ) => ((EnumerablePriorityQueue)enumerable).Enqueue(value.Element, value.Priority);
+
         protected override void Clear(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable
         ) => ((EnumerablePriorityQueue)enumerable).Clear();
+
         protected override bool Contains(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable,
             (TElement Element, TPriority Priority) value
         ) => ((EnumerablePriorityQueue)enumerable).Any(elem => elem.Equals(value));
+
         protected override void CopyTo(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable,
             (TElement Element, TPriority Priority)[] array,
@@ -330,9 +336,11 @@ namespace System.Collections.Tests
                 array,
                 index
             );
+
         protected override bool Remove(
             IEnumerable<(TElement Element, TPriority Priority)> enumerable
         ) => ((EnumerablePriorityQueue)enumerable).TryDequeue(out _, out _);
+
         protected override Type IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType =>
             typeof(ArgumentOutOfRangeException);
 

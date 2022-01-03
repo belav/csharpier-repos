@@ -13,6 +13,7 @@ namespace System.Security.Cryptography
         private string? _algName;
 
         public RSAPKCS1SignatureDeformatter() { }
+
         public RSAPKCS1SignatureDeformatter(AsymmetricAlgorithm key)
         {
             if (key == null)

@@ -8538,6 +8538,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 );
             }
         }
+
 #nullable disable
 
         private static bool IsPredefinedType(SyntaxKind keyword)
@@ -9258,6 +9259,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             // in the scenario where a user accidentally surrounds their function pointer type list with parens.
             =>
             token.Kind == SyntaxKind.LessThanToken || token.Kind == SyntaxKind.OpenParenToken;
+
 #nullable disable
 
         private TypeSyntax ParsePointerTypeMods(TypeSyntax type)
@@ -10586,6 +10588,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 || this.CurrentToken.Kind == SyntaxKind.CatchKeyword
                 || this.CurrentToken.Kind == SyntaxKind.FinallyKeyword;
         }
+
         private bool IsEndOfCatchBlock()
         {
             return this.CurrentToken.Kind == SyntaxKind.CloseBraceToken

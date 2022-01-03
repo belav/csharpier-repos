@@ -85,6 +85,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.Twondo
 
     public delegate void Action<in T>(T t);
     public delegate void Meta<out T>(Action<T> action);
+
     public class C
     {
         [Fact]
@@ -139,6 +140,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
     public class C
     {
         public delegate S Foo<in T, out S, in U>(T t, U u);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -400,6 +402,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public int Status = 1;
+
         public void Foo<T>(T x, Action<T> y) //where T : new()
         {
             this.Status = 0;
@@ -440,12 +443,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public int Status = 1;
+
         public void Foo<T>(T x, MyDel<T> y) where T : new()
         {
             this.Status = 0;
         }
 
         public delegate void MyDel<in T>(T t);
+
         private static void Foo(object o) { }
 
         private static void Foo(string o) { }
@@ -498,6 +503,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public int Status = 0;
+
         public void Foo<T>(T x, IFoo<T> y) where T : new()
         {
             this.Status = 0;
@@ -551,6 +557,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public int Status = 0;
+
         public void Foo<T>(T x, IFoo<T> y) where T : class
         {
             this.Status = 0;
@@ -612,6 +619,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public int Status = 0;
+
         public void Foo<T>(T x, IFoo<T> y) where T : IFoo
         {
             this.Status = 0;
@@ -653,6 +661,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public static int Status = 0;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -693,6 +702,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class A
     {
         public static int Status = 0;
+
         public static implicit operator string(A a)
         {
             return "";
@@ -737,6 +747,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public int Status = 0;
+
         public void Foo<T>(T x, Action<T> y) where T : new()
         {
             this.Status = 0;

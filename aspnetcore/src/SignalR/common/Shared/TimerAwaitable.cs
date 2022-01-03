@@ -63,6 +63,7 @@ internal class TimerAwaitable : IDisposable, ICriticalNotifyCompletion
     }
 
     public TimerAwaitable GetAwaiter() => this;
+
     public bool IsCompleted => ReferenceEquals(_callback, _callbackCompleted);
 
     public bool GetResult()

@@ -611,6 +611,7 @@ namespace System.Net.Tests
         private class CustomChannelBinding : ChannelBinding
         {
             public override int Size => 0;
+
             protected override bool ReleaseHandle() => true;
         }
     }

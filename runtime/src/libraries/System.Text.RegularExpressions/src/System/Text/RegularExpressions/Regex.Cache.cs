@@ -39,12 +39,14 @@ namespace System.Text.RegularExpressions
 
         /// <summary>The default maximum number of items to store in the cache.</summary>
         private const int DefaultMaxCacheSize = 15;
+
         /// <summary>The maximum number of cached items to examine when we need to replace an existing one in the cache with a new one.</summary>
         /// <remarks>This is a somewhat arbitrary value, chosen to be small but at least as large as DefaultMaxCacheSize.</remarks>
         private const int MaxExamineOnDrop = 30;
 
         /// <summary>A read-through cache of one element, representing the most recently used regular expression.</summary>
         private static volatile Node? s_lastAccessed;
+
         /// <summary>The thread-safe dictionary storing all the items in the cache.</summary>
         /// <remarks>
         /// The concurrency level is initialized to 1 as we're using our own global lock for all mutations, so we don't need ConcurrentDictionary's
@@ -52,10 +54,13 @@ namespace System.Text.RegularExpressions
         /// </remarks>
         private static readonly ConcurrentDictionary<Key, Node> s_cacheDictionary =
             new ConcurrentDictionary<Key, Node>(concurrencyLevel: 1, capacity: 31);
+
         /// <summary>A list of all the items in the cache.  Protected by <see cref="SyncObj"/>.</summary>
         private static readonly List<Node> s_cacheList = new List<Node>(DefaultMaxCacheSize);
+
         /// <summary>Random number generator used to examine a subset of items when we need to drop one from a large list.  Protected by <see cref="SyncObj"/>.</summary>
         private static readonly Random s_random = new Random();
+
         /// <summary>The current maximum number of items allowed in the cache.  This rarely changes.  Mostly protected by <see cref="SyncObj"/>.</summary>
         private static int s_maxCacheSize = DefaultMaxCacheSize;
 
@@ -313,8 +318,10 @@ namespace System.Text.RegularExpressions
         {
             /// <summary>The key associated with this cached instance.</summary>
             public readonly Key Key;
+
             /// <summary>The cached Regex instance.</summary>
             public readonly Regex Regex;
+
             /// <summary>A "time" stamp representing the approximate last access time for this Regex.</summary>
             public long LastAccessStamp;
 

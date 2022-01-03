@@ -875,6 +875,7 @@ namespace System.Text.Json.Serialization.Tests
         private class Class_With_NullableUInt64_And_Float
         {
             public ulong? NullableUInt64Number { get; set; }
+
             [JsonInclude]
             public List<float> FloatNumbers;
         }
@@ -2228,6 +2229,7 @@ namespace System.Text.Json.Serialization.Tests
                 Type typeToConvert,
                 JsonSerializerOptions options
             ) => throw new NotImplementedException();
+
             public override void Write(
                 Utf8JsonWriter writer,
                 List<int> value,

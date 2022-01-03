@@ -14,6 +14,7 @@ struct winx64_struct1
     {
         a = ia;
     }
+
     public byte a;
 }
 

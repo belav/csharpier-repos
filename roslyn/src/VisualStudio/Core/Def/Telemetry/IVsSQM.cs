@@ -37,6 +37,7 @@ namespace Microsoft.VisualStudio.Shell.Interop
             [In, MarshalAs(UnmanagedType.U4)] System.UInt32 dataPointID,
             [In, MarshalAs(UnmanagedType.U4)] System.UInt32 value
         );
+
         // OBSOLETE IN SQMAPI.DLL. DO NOT CALL.
         void GetDatapoint(
             [In, MarshalAs(UnmanagedType.U4)] System.UInt32 dataPointID,
@@ -166,6 +167,7 @@ namespace Microsoft.VisualStudio.Shell.Interop
             [In] ref Guid sessionIdentifier,
             [In, MarshalAs(UnmanagedType.U4)] System.UInt32 dwSessionHandle
         );
+
         [return: MarshalAs(UnmanagedType.U4)]
         int GetSessionHandleByIdentifier([In] ref Guid sessionIdentifier);
         void GetSessionStartTime(
@@ -173,6 +175,7 @@ namespace Microsoft.VisualStudio.Shell.Interop
             [Out] out System.Runtime.InteropServices.ComTypes.FILETIME time
         );
         Guid GetGlobalSessionGuid();
+
         [return: MarshalAs(UnmanagedType.U4)]
         int GetGlobalSessionHandle();
         void SetGlobalSessionGuid([In] ref Guid pguidSessionGuid);

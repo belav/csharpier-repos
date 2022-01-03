@@ -68,7 +68,9 @@ namespace Microsoft.VisualBasic
         }
 
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) => true;
+
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context) => true;
+
         public override StandardValuesCollection GetStandardValues(
             ITypeDescriptorContext context
         ) => new StandardValuesCollection(Values);

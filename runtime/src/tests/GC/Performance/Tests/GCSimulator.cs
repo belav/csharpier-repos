@@ -32,6 +32,7 @@ namespace GCSimulator
             mediumDataCount = mdc;
             shortDataCount = sdc;
         }
+
         public int MediumLifeTime
         {
             set { mediumLifeTime = value; }
@@ -56,6 +57,7 @@ namespace GCSimulator
             }
             return 0;
         }
+
         public bool ShouldDie(LifeTime o, int index)
         {
             counter++;
@@ -236,6 +238,7 @@ namespace GCSimulator
         private static string objectGraph = "List";
 
         private static List<Thread> threadList = new List<Thread>();
+
         public static void Main(string[] args)
         {
             bool shouldContinue = ParseArgs(args);

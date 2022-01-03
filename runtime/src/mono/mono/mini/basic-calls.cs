@@ -376,6 +376,7 @@ class Tests
             return -1;
         return v2;
     }
+
     public static int test_1_handle_dup_stloc()
     {
         int index = 0;

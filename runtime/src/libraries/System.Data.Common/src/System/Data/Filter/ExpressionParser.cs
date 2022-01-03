@@ -19,6 +19,7 @@ namespace System.Data
         Object = 6,
         Date = 7,
     }
+
     /// <summary>
     ///     ExpressionParser: expression node types
     /// </summary>
@@ -88,8 +89,10 @@ namespace System.Data
          */
         private readonly char _escape = '\\';
         private readonly char _decimalSeparator = '.';
+
         //not used: private char ThousandSeparator = ',';
         private readonly char _listSeparator = ',';
+
         //not used: private char DateSeparator = '/';
         private readonly char _exponentL = 'e';
         private readonly char _exponentU = 'E';
@@ -1093,6 +1096,7 @@ namespace System.Data
             else
                 _token = Tokens.Numeric;
         }
+
         /// <summary>
         ///     Just a string of alphanumeric characters.
         /// </summary>

@@ -11,6 +11,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         internal static void ThrowArgumentOutOfRangeException(ExceptionArgument argument) =>
             throw CreateArgumentOutOfRangeException(argument);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Exception CreateArgumentOutOfRangeException(ExceptionArgument argument) =>
             new ArgumentOutOfRangeException(argument.ToString());
@@ -18,6 +19,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         internal static void ThrowArgumentNullException(ExceptionArgument argument) =>
             throw CreateArgumentNullException(argument);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Exception CreateArgumentNullException(ExceptionArgument argument) =>
             new ArgumentNullException(argument.ToString());
@@ -25,6 +27,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowInvalidOperationException_AlreadyReading() =>
             throw CreateInvalidOperationException_AlreadyReading();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateInvalidOperationException_AlreadyReading() =>
             new InvalidOperationException(SR.ReadingIsInProgress);
@@ -32,6 +35,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowInvalidOperationException_NoReadToComplete() =>
             throw CreateInvalidOperationException_NoReadToComplete();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateInvalidOperationException_NoReadToComplete() =>
             new InvalidOperationException(SR.NoReadingOperationToComplete);
@@ -39,6 +43,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowInvalidOperationException_NoConcurrentOperation() =>
             throw CreateInvalidOperationException_NoConcurrentOperation();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateInvalidOperationException_NoConcurrentOperation() =>
             new InvalidOperationException(SR.ConcurrentOperationsNotSupported);
@@ -46,6 +51,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowInvalidOperationException_GetResultNotCompleted() =>
             throw CreateInvalidOperationException_GetResultNotCompleted();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateInvalidOperationException_GetResultNotCompleted() =>
             new InvalidOperationException(SR.GetResultBeforeCompleted);
@@ -61,6 +67,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowInvalidOperationException_NoReadingAllowed() =>
             throw CreateInvalidOperationException_NoReadingAllowed();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateInvalidOperationException_NoReadingAllowed() =>
             new InvalidOperationException(SR.ReadingAfterCompleted);
@@ -68,6 +75,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowInvalidOperationException_InvalidExaminedPosition() =>
             throw CreateInvalidOperationException_InvalidExaminedPosition();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateInvalidOperationException_InvalidExaminedPosition() =>
             new InvalidOperationException(SR.InvalidExaminedPosition);
@@ -75,6 +83,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowInvalidOperationException_InvalidExaminedOrConsumedPosition() =>
             throw CreateInvalidOperationException_InvalidExaminedOrConsumedPosition();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateInvalidOperationException_InvalidExaminedOrConsumedPosition() =>
             new InvalidOperationException(SR.InvalidExaminedOrConsumedPosition);
@@ -82,6 +91,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowInvalidOperationException_AdvanceToInvalidCursor() =>
             throw CreateInvalidOperationException_AdvanceToInvalidCursor();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateInvalidOperationException_AdvanceToInvalidCursor() =>
             new InvalidOperationException(SR.AdvanceToInvalidCursor);
@@ -89,6 +99,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowInvalidOperationException_ResetIncompleteReaderWriter() =>
             throw CreateInvalidOperationException_ResetIncompleteReaderWriter();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateInvalidOperationException_ResetIncompleteReaderWriter() =>
             new InvalidOperationException(SR.ReaderAndWriterHasToBeCompleted);
@@ -96,6 +107,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowOperationCanceledException_ReadCanceled() =>
             throw CreateOperationCanceledException_ReadCanceled();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateOperationCanceledException_ReadCanceled() =>
             new OperationCanceledException(SR.ReadCanceledOnPipeReader);
@@ -103,6 +115,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowOperationCanceledException_FlushCanceled() =>
             throw CreateOperationCanceledException_FlushCanceled();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateOperationCanceledException_FlushCanceled() =>
             new OperationCanceledException(SR.FlushCanceledOnPipeWriter);
@@ -110,6 +123,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowInvalidOperationException_InvalidZeroByteRead() =>
             throw CreateInvalidOperationException_InvalidZeroByteRead();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateInvalidOperationException_InvalidZeroByteRead() =>
             new InvalidOperationException(SR.InvalidZeroByteRead);
@@ -117,6 +131,7 @@ namespace System.IO.Pipelines
         [DoesNotReturn]
         public static void ThrowNotSupported_UnflushedBytes() =>
             throw CreateNotSupportedException_UnflushedBytes();
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static Exception CreateNotSupportedException_UnflushedBytes() =>
             new NotSupportedException(SR.UnflushedBytesNotSupported);

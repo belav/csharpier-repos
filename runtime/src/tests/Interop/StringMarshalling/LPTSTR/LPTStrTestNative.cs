@@ -19,6 +19,7 @@ class LPTStrTestNative
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string str1;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string str2;
     }
@@ -35,6 +36,7 @@ class LPTStrTestNative
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string str1;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string str2;
     }
@@ -54,11 +56,13 @@ class LPTStrTestNative
 
     [DllImport(nameof(LPTStrTestNative))]
     public static extern bool MatchFuncNameAnsi(ByValStringInStructAnsi str);
+
     [DllImport(nameof(LPTStrTestNative))]
     public static extern bool MatchFuncNameUni(ByValStringInStructUnicode str);
 
     [DllImport(nameof(LPTStrTestNative))]
     public static extern void ReverseByValStringAnsi(ref ByValStringInStructAnsi str);
+
     [DllImport(nameof(LPTStrTestNative))]
     public static extern void ReverseByValStringUni(ref ByValStringInStructUnicode str);
 
@@ -67,6 +71,7 @@ class LPTStrTestNative
         ByValStringInStructAnsi str,
         out ByValStringInStructSplitAnsi strOut
     );
+
     [DllImport(nameof(LPTStrTestNative))]
     public static extern void ReverseCopyByValStringUni(
         ByValStringInStructUnicode str,

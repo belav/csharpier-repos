@@ -13,6 +13,7 @@ namespace System.Reflection.TypeLoading.Ecma
             RoType unmodifiedType,
             bool isRequired
         ) => unmodifiedType;
+
         public sealed override RoType GetPinnedType(RoType elementType) =>
             new RoPinnedType(elementType);
     }

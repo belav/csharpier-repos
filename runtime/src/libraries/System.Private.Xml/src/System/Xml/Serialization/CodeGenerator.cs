@@ -43,6 +43,7 @@ namespace System.Xml.Serialization
         private ILGenerator? _ilGen;
         private Dictionary<string, ArgBuilder>? _argList;
         private LocalScope? _currentScope;
+
         // Stores a queue of free locals available in the context of the method, keyed by
         // type and name of the local
         private Dictionary<(Type, string), Queue<LocalBuilder>>? _freeLocals;
@@ -196,6 +197,7 @@ namespace System.Xml.Serialization
             Type,
             LocalBuilder
         >();
+
         internal LocalBuilder GetTempLocal(Type type)
         {
             LocalBuilder? localTmp;
@@ -424,6 +426,7 @@ namespace System.Xml.Serialization
         }
 
         private readonly Stack<Label> _leaveLabels = new Stack<Label>();
+
         internal void BeginExceptionBlock()
         {
             _leaveLabels.Push(DefineLabel());
@@ -1117,6 +1120,7 @@ namespace System.Xml.Serialization
                 _ilGen!.Emit(opCode);
             }
         }
+
         internal void Ldelema(Type arrayElementType)
         {
             OpCode opCode = OpCodes.Ldelema;
@@ -1379,6 +1383,7 @@ namespace System.Xml.Serialization
 
         private int _initElseIfStack = -1;
         private IfState? _elseIfState;
+
         internal void InitElseIf()
         {
             Debug.Assert(_initElseIfStack == -1);
@@ -1389,6 +1394,7 @@ namespace System.Xml.Serialization
         }
 
         private int _initIfStack = -1;
+
         internal void InitIf()
         {
             Debug.Assert(_initIfStack == -1);
@@ -1464,6 +1470,7 @@ namespace System.Xml.Serialization
             public Label StartLabel;
             public Label CondLabel;
             public Label EndLabel;
+
             public WhileState(CodeGenerator ilg)
             {
                 StartLabel = ilg.DefineLabel();
@@ -1481,6 +1488,7 @@ namespace System.Xml.Serialization
         // WhileEndCondition()
         // WhileEnd()
         private Stack<WhileState>? _whileStack;
+
         internal void WhileBegin()
         {
             WhileState whileState = new WhileState(this);
@@ -1531,6 +1539,7 @@ namespace System.Xml.Serialization
         internal string Name;
         internal int Index;
         internal Type ArgType;
+
         internal ArgBuilder(string name, int index, Type argType)
         {
             this.Name = name;
@@ -1679,6 +1688,7 @@ namespace System.Xml.Serialization
     {
         public readonly MethodBuilder MethodBuilder;
         public readonly Type[] ParameterTypes;
+
         public MethodBuilderInfo(MethodBuilder methodBuilder, Type[] parameterTypes)
         {
             this.MethodBuilder = methodBuilder;

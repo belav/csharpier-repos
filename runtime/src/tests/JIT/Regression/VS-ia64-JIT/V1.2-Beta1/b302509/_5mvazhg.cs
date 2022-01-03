@@ -35,6 +35,7 @@ public class App
         Console.WriteLine("Passed.");
         return 100;
     }
+
     public static bool m_bFwd5;
     public static AA m_xFwd6;
     public static byte m_byFwd9;

@@ -246,19 +246,24 @@ public class BadHttpRequestTests : LoggedTest
             _subscription = diagnosticListener.Subscribe(this, IsEnabled);
             _callback = callback;
         }
+
         private static readonly Predicate<string> IsEnabled = (provider) =>
             provider switch
             {
                 "Microsoft.AspNetCore.Server.Kestrel.BadRequest" => true,
                 _ => false
             };
+
         public void OnNext(KeyValuePair<string, object> pair)
         {
             EventFired = true;
             _callback(pair);
         }
+
         public void OnError(Exception error) { }
+
         public void OnCompleted() { }
+
         public virtual void Dispose() => _subscription.Dispose();
     }
 

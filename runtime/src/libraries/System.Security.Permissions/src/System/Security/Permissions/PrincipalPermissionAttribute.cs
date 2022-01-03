@@ -23,9 +23,11 @@ namespace System.Security.Permissions
 #endif
         public PrincipalPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
         { }
+
         public bool Authenticated { get; set; }
         public string Name { get; set; }
         public string Role { get; set; }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);

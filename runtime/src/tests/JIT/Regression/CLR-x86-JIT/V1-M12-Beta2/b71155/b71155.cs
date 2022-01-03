@@ -9,6 +9,7 @@ namespace Test
     public struct AA
     {
         public static bool m_bFwd1;
+
         public void Method1()
         {
             if (m_bFwd1)
@@ -26,6 +27,7 @@ namespace Test
                 } while (m_bFwd1);
             }
         }
+
         static int Main()
         {
             new AA().Method1();

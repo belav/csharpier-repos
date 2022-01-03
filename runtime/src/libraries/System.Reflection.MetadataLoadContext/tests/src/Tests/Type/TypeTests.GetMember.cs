@@ -326,14 +326,18 @@ namespace System.Reflection.Tests
         private class Mixed
         {
             public Mixed() { }
+
             public event Action MyEvent
             {
                 add { }
                 remove { }
             }
             public int MyField;
+
             public void MyMethod() { }
+
             public class MyType { }
+
             public int MyProperty { get; }
         }
     }

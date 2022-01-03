@@ -396,6 +396,7 @@ public class BestFitMapping
     public static extern int GetResult();
 
     private static int Fails = 0;
+
     #region "TestMethod"
 
 

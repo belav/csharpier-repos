@@ -4,12 +4,14 @@ using System.ComponentModel;
 using System.Linq;
 using Shouldly;
 using Xunit;
+
 namespace AutoMapper.UnitTests.InterfaceMapping
 {
     public class MapToInterface : NonValidatingSpecBase
     {
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(c => c.CreateMap<object, IEnumerable<object>>());
+
         [Fact]
         public void Should_throw() =>
             new Action(() => Mapper.Map<IEnumerable<object>>(new object()))
@@ -18,6 +20,7 @@ namespace AutoMapper.UnitTests.InterfaceMapping
                     "Cannot create interface System.Collections.Generic.IEnumerable`1[System.Object]"
                 );
     }
+
     public class GenericsAndInterfaces : AutoMapperSpecBase
     {
         MyClass<ContainerClass> source = new MyClass<ContainerClass>
@@ -625,10 +628,15 @@ namespace AutoMapper.UnitTests.InterfaceMapping
         private BaseDto[] _baseDtos;
 
         public interface IBase { }
+
         public interface IDerived : IBase { }
+
         public class Base : IBase { }
+
         public class Derived : Base, IDerived { }
+
         public class BaseDto { }
+
         public class DerivedDto : BaseDto { }
 
         //and following mappings:

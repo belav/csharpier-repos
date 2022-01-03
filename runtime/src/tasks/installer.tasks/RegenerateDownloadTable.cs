@@ -45,6 +45,7 @@ namespace Microsoft.DotNet.Build.Tasks
         public ITaskItem[] Platforms { get; set; }
 
         private string Begin(string marker) => $"<!-- BEGIN {marker} -->";
+
         private string End(string marker) => $"<!-- END {marker} -->";
 
         public override bool Execute()

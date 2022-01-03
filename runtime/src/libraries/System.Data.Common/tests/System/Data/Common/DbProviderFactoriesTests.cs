@@ -12,6 +12,7 @@ namespace System.Data.Common
     public sealed class TestProviderFactory : DbProviderFactory
     {
         public static readonly TestProviderFactory Instance = new TestProviderFactory();
+
         private TestProviderFactory() { }
     }
 

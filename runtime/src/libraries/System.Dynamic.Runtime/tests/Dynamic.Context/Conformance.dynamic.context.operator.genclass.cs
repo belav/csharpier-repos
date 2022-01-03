@@ -14,6 +14,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     public class MyClass<T>
     {
         public int Field = 0;
+
         //    public static MyEnum?[] operator -(MyClass p1, dynamic[] p2) { return new MyEnum?[] { MyEnum.First, null }; }
         public static T operator ^(MyClass<T> p1, float p2)
         {
@@ -94,6 +95,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     public class MemberClassMultipleParams<T, U, V>
     {
         public int Field;
+
         public static MemberClassMultipleParams<T, U, V> operator >>(
             MemberClassMultipleParams<T, U, V> p1,
             int p2
@@ -131,6 +133,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     public class MemberClassWithClassConstraint<T> where T : class
     {
         public int Field;
+
         public static decimal[] operator |(bool? p1, MemberClassWithClassConstraint<T> p2)
         {
             return new decimal[] { decimal.MaxValue };
@@ -150,6 +153,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     public class MemberClassWithNewConstraint<T> where T : new()
     {
         public static int Status;
+
         public static bool? operator !(MemberClassWithNewConstraint<T> p1)
         {
             return true;
@@ -774,6 +778,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     public class Test
     {
         private static dynamic s_dy = new MyClass<Test>() { Field = 10 }; //implicit operator.
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -891,6 +896,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         private static MemberClassWithClassConstraint<MyClass<MyClass>> s_mc =
             new MemberClassWithClassConstraint<MyClass<MyClass>>();
         private MyEnum? _field;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -943,6 +949,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         private static int s_a = 0;
         private static MemberClassWithNewConstraint<MyClass> s_mc =
             new MemberClassWithNewConstraint<MyClass>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1163,6 +1170,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
     public class Test
     {
         private int? _field;
+
         public Test()
         {
             dynamic dy = new MemberClassWithAnotherTypeConstraint<string, string>();

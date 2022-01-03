@@ -33,6 +33,7 @@ namespace System.Net.Quic.Implementations.MsQuic
         private sealed class State
         {
             public SafeMsQuicStreamHandle Handle = null!; // set in ctor.
+
             // Roots the state in GC and it won't get collected while this exist.
             // It must be kept alive until we receive SHUTDOWN_COMPLETE event
             public GCHandle StateGCHandle;
@@ -55,6 +56,7 @@ namespace System.Net.Quic.Implementations.MsQuic
             // set when ReadState.PendingRead:
             public Memory<byte> ReceiveUserBuffer;
             public CancellationTokenRegistration ReceiveCancellationRegistration;
+
             // Resettable completions to be used for multiple calls to receive.
             public readonly ResettableCompletionSource<int> ReceiveResettableCompletionSource =
                 new ResettableCompletionSource<int>();
@@ -79,6 +81,7 @@ namespace System.Net.Quic.Implementations.MsQuic
                 new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
 
             public ShutdownState ShutdownState;
+
             // The value makes sure that we release the handles only once.
             public int ShutdownDone;
 

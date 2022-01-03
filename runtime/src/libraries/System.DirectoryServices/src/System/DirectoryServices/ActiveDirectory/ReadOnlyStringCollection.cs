@@ -18,6 +18,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
             this.InnerList.AddRange(values);
         }
+
         public string this[int index]
         {
             get

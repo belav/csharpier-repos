@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 namespace DebuggerTests
 {
     public class EvaluateTestsClass
@@ -15,6 +16,7 @@ namespace DebuggerTests
             public int c;
             public DateTime dt = new DateTime(2000, 5, 4, 3, 2, 1);
             public TestEvaluate NullIfAIsNotZero => a != 0 ? null : this;
+
             public void run(int g, int h, string a, string valString, int this_a)
             {
                 int d = g + 1;
@@ -50,6 +52,7 @@ namespace DebuggerTests
         public int b;
         public int c;
         DateTime dateTime;
+
         public void EvaluateTestsGenericStructInstanceMethod(int g, int h, string valString)
         {
             int d = g + 1;
@@ -407,22 +410,26 @@ namespace DebuggerTests
             return await Task.FromResult(default(T));
         }
     }
+
     public class EvaluateMethodTestsClass
     {
         public class ParmToTest
         {
             public int a;
             public int b;
+
             public ParmToTest()
             {
                 a = 10;
                 b = 10;
             }
+
             public string MyMethod()
             {
                 return "methodOK";
             }
         }
+
         public class TestEvaluate
         {
             public int a;
@@ -435,6 +442,7 @@ namespace DebuggerTests
             public ParmToTest ParmToTestObj => objToTest;
             public ParmToTest ParmToTestObjNull => null;
             public ParmToTest ParmToTestObjException => throw new Exception("error2");
+
             public void run(int g, int h, string a, string valString, int this_a)
             {
                 objToTest = new ParmToTest();

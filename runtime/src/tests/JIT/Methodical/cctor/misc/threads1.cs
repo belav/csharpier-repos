@@ -14,6 +14,7 @@ namespace Precise
         {
             test.b = 0xF;
         }
+
         public static int Main()
         {
             try

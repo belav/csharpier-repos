@@ -10,23 +10,28 @@ namespace ShiftTest
     {
         public ushort clm_data = 0xFFFF;
     }
+
     public struct VT
     {
         public ushort vtm_data;
     }
+
     public class ushort32Test
     {
         private static ushort s_data = 0xFFFF;
+
         public static ushort f1(ushort arg_data)
         {
             arg_data >>= 4;
             return arg_data;
         }
+
         public static ushort f2(ushort arg_data)
         {
             arg_data <<= 4;
             return arg_data;
         }
+
         public static int Main()
         {
             ushort loc_data = 0xFFFF;

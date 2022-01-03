@@ -21,6 +21,7 @@ namespace System.Dynamic.Utils
 
         protected override ParameterExpression First => _arg0;
         protected override int ElementCount => _provider.ParameterCount;
+
         protected override ParameterExpression GetElement(int index) =>
             _provider.GetParameter(index);
     }

@@ -15,6 +15,7 @@ namespace Precise
         {
             RuntimeHelpers.RunClassConstructor(typeof(test).TypeHandle);
         }
+
         public static int Main()
         {
             try

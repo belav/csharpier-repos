@@ -1112,6 +1112,7 @@ namespace System.Diagnostics
 
             return msg;
         }
+
         // CharIsPrintable used to be Char.IsPrintable, but Jay removed it and
         // is forcing people to use the Unicode categories themselves.  Copied
         // the code here.

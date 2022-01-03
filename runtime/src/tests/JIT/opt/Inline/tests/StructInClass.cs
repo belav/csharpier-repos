@@ -10,6 +10,7 @@ namespace StructInClass
     internal class StructInClass
     {
     }
+
     internal class TestClass
     {
         public struct TheStruct

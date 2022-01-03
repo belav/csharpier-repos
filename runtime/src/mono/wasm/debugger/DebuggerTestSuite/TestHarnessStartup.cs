@@ -26,6 +26,7 @@ namespace Microsoft.WebAssembly.Diagnostics
     public class TestHarnessStartup
     {
         static Regex parseConnection = new Regex(@"listening on (ws?s://[^\s]*)");
+
         public TestHarnessStartup(IConfiguration configuration)
         {
             Configuration = configuration;

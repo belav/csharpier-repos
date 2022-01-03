@@ -5,6 +5,7 @@ public delegate T Dele<T, K>(K k);
 public class Generic<T> { }
 
 public interface Foo9<T> { }
+
 public class Foo<KEY>
 {
     public VAL Method<VAL>(Generic<KEY> k)

@@ -568,6 +568,7 @@ namespace TypeSystemTests
             Assert.Equal(LayoutInt.Zero, context.UniversalCanonType.ThreadGcStaticFieldAlignment);
             Assert.Equal(LayoutInt.Zero, context.UniversalCanonType.ThreadGcStaticFieldSize);
         }
+
         [Fact]
         public void TestLayoutOfUniversalCanonType()
         {

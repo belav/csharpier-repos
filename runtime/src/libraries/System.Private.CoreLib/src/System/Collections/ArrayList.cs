@@ -2846,6 +2846,7 @@ namespace System.Collections
             private readonly int _version;
             private object? _currentElement;
             private readonly bool _isArrayList;
+
             // this object is used to indicate enumeration has not started or has terminated
             private static readonly object s_dummyObject = new object();
 

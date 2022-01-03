@@ -277,8 +277,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public TypeCode GetTypeCode() => TypeCode.Empty;
 
         public bool ToBoolean(IFormatProvider provider) => true;
+
         public byte ToByte(IFormatProvider provider) => 0;
+
         public char ToChar(IFormatProvider provider) => '\0';
+
         public DateTime ToDateTime(IFormatProvider provider) => DateTime.Now;
 
         public decimal ToDecimal(IFormatProvider provider) => 1m;
@@ -304,14 +307,19 @@ namespace System.ComponentModel.DataAnnotations.Tests
         }
 
         public long ToInt64(IFormatProvider provider) => 0;
+
         public sbyte ToSByte(IFormatProvider provider) => 0;
+
         public float ToSingle(IFormatProvider provider) => 0;
 
         public string ToString(IFormatProvider provider) => "";
+
         public object ToType(Type conversionType, IFormatProvider provider) => null;
 
         public ushort ToUInt16(IFormatProvider provider) => 0;
+
         public uint ToUInt32(IFormatProvider provider) => 0;
+
         public ulong ToUInt64(IFormatProvider provider) => 0;
     }
 

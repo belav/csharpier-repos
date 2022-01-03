@@ -14,6 +14,7 @@ namespace System.Runtime.Serialization
     public sealed partial class CollectionDataContractAttribute : System.Attribute
     {
         public CollectionDataContractAttribute() { }
+
         public bool IsItemNameSetExplicitly
         {
             get { throw null; }
@@ -69,6 +70,7 @@ namespace System.Runtime.Serialization
             set { }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Assembly | System.AttributeTargets.Module,
         Inherited = false,
@@ -77,6 +79,7 @@ namespace System.Runtime.Serialization
     public sealed partial class ContractNamespaceAttribute : System.Attribute
     {
         public ContractNamespaceAttribute(string contractNamespace) { }
+
         public string? ClrNamespace
         {
             get { throw null; }
@@ -87,6 +90,7 @@ namespace System.Runtime.Serialization
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class
             | System.AttributeTargets.Enum
@@ -97,6 +101,7 @@ namespace System.Runtime.Serialization
     public sealed partial class DataContractAttribute : System.Attribute
     {
         public DataContractAttribute() { }
+
         public bool IsNameSetExplicitly
         {
             get { throw null; }
@@ -125,6 +130,7 @@ namespace System.Runtime.Serialization
             set { }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         Inherited = false,
@@ -133,6 +139,7 @@ namespace System.Runtime.Serialization
     public sealed partial class DataMemberAttribute : System.Attribute
     {
         public DataMemberAttribute() { }
+
         public bool EmitDefaultValue
         {
             get { throw null; }
@@ -158,6 +165,7 @@ namespace System.Runtime.Serialization
             set { }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field,
         Inherited = false,
@@ -166,6 +174,7 @@ namespace System.Runtime.Serialization
     public sealed partial class EnumMemberAttribute : System.Attribute
     {
         public EnumMemberAttribute() { }
+
         public bool IsValueSetExplicitly
         {
             get { throw null; }
@@ -176,6 +185,7 @@ namespace System.Runtime.Serialization
             set { }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         Inherited = false,
@@ -185,22 +195,28 @@ namespace System.Runtime.Serialization
     {
         public IgnoreDataMemberAttribute() { }
     }
+
     public partial class InvalidDataContractException : System.Exception
     {
         public InvalidDataContractException() { }
+
         protected InvalidDataContractException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public InvalidDataContractException(string? message) { }
+
         public InvalidDataContractException(string? message, System.Exception? innerException) { }
     }
+
     public partial interface ISerializationSurrogateProvider
     {
         object GetDeserializedObject(object obj, System.Type targetType);
         object GetObjectToSerialize(object obj, System.Type targetType);
         System.Type GetSurrogateType(System.Type type);
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class | System.AttributeTargets.Struct,
         Inherited = true,
@@ -209,7 +225,9 @@ namespace System.Runtime.Serialization
     public sealed partial class KnownTypeAttribute : System.Attribute
     {
         public KnownTypeAttribute(string methodName) { }
+
         public KnownTypeAttribute(System.Type type) { }
+
         public string? MethodName
         {
             get { throw null; }

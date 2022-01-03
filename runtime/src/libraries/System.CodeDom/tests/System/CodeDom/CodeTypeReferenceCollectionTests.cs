@@ -9,8 +9,10 @@ namespace System.CodeDom.Tests
         : CodeCollectionTestBase<CodeTypeReferenceCollection, CodeTypeReference>
     {
         protected override CodeTypeReferenceCollection Ctor() => new CodeTypeReferenceCollection();
+
         protected override CodeTypeReferenceCollection CtorArray(CodeTypeReference[] array) =>
             new CodeTypeReferenceCollection(array);
+
         protected override CodeTypeReferenceCollection CtorCollection(
             CodeTypeReferenceCollection collection
         ) => new CodeTypeReferenceCollection(collection);
@@ -21,6 +23,7 @@ namespace System.CodeDom.Tests
             CodeTypeReferenceCollection collection,
             int index
         ) => collection[index];
+
         protected override void SetItem(
             CodeTypeReferenceCollection collection,
             int index,
@@ -31,6 +34,7 @@ namespace System.CodeDom.Tests
             CodeTypeReferenceCollection collection,
             CodeTypeReference[] array
         ) => collection.AddRange(array);
+
         protected override void AddRange(
             CodeTypeReferenceCollection collection,
             CodeTypeReferenceCollection value
@@ -56,6 +60,7 @@ namespace System.CodeDom.Tests
             CodeTypeReferenceCollection collection,
             CodeTypeReference value
         ) => collection.IndexOf(value);
+
         protected override bool Contains(
             CodeTypeReferenceCollection collection,
             CodeTypeReference value

@@ -19,6 +19,7 @@ namespace System.Xml.Tests
         public XsltArgumentList xsltArg1; // Shared XsltArgumentList for same instance testing
 
         private ITestOutputHelper _output;
+
         public CSameInstanceXsltArgTestCase2(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -57,6 +58,7 @@ namespace System.Xml.Tests
     public class CSameInstanceXsltArgumentListGetParam : CSameInstanceXsltArgTestCase2
     {
         private ITestOutputHelper _output;
+
         public CSameInstanceXsltArgumentListGetParam(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -158,6 +160,7 @@ namespace System.Xml.Tests
     public class CSameInstanceXsltArgumentListGetExtnObject : CSameInstanceXsltArgTestCase2
     {
         private ITestOutputHelper _output;
+
         public CSameInstanceXsltArgumentListGetExtnObject(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -256,6 +259,7 @@ namespace System.Xml.Tests
     public class CSameInstanceXsltArgumentListTransform : CSameInstanceXsltArgTestCase2
     {
         private ITestOutputHelper _output;
+
         public CSameInstanceXsltArgumentListTransform(ITestOutputHelper output) : base(output)
         {
             _output = output;

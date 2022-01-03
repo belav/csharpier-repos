@@ -593,6 +593,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         private const string Next = nameof(Next);
+
         private void SetNextProperty(Type type, object obj, object value)
         {
             type.GetProperty(Next).SetValue(obj, value);
@@ -645,6 +646,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         private class EmptyClass { }
+
         private struct EmptyStruct { }
 
         private class EmptyClassWithExtensionProperty

@@ -30,8 +30,10 @@ namespace System.IO.Compression
             yield return new object[] { Path.Combine("UncompressedTestFiles", "sum") };
             yield return new object[] { Path.Combine("UncompressedTestFiles", "xargs.1") };
         }
+
         protected virtual string UncompressedTestFile() =>
             Path.Combine("UncompressedTestFiles", "TestDocument.pdf");
+
         protected abstract string CompressedTestFile(string uncompressedPath);
     }
 

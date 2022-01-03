@@ -2022,6 +2022,7 @@ public class DataAnnotationsMetadataProviderTest
         // This test is primarily here to document the behavior.
         Assert.False(result);
     }
+
 #nullable restore
 
     [Fact]
@@ -2387,6 +2388,7 @@ public class DataAnnotationsMetadataProviderTest
     {
         public override string Property { get; set; } = string.Empty;
     }
+
 #nullable restore
 
     public class TypeImplementIInterfaceWithNonNullProperty_AsNullable

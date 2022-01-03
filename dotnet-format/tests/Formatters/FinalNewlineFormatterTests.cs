@@ -93,6 +93,7 @@ class C
 
             await AssertCodeChangedAsync(testCode, expectedCode, editorConfig);
         }
+
         [Fact]
         public async Task WhenFinalNewlineRequired_AndFinalNewlineExits_NoChange()
         {

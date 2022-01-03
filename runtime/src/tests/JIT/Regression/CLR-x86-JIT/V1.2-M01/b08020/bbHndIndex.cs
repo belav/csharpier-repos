@@ -3,6 +3,7 @@
 //
 
 using System;
+
 class AA
 {
     static void f(ref Array param)

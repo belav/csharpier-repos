@@ -67,6 +67,7 @@ namespace XmlCoreTest.Common
             {
                 readerType = type;
             }
+
             public CreateReaderParams(
                 ReaderType type,
                 ReadOverload inputType,
@@ -142,6 +143,7 @@ namespace XmlCoreTest.Common
                 false
             );
         }
+
         public static XmlReader CreateReader(
             string readerType,
             TextReader stringReader,
@@ -184,6 +186,7 @@ namespace XmlCoreTest.Common
                 false
             );
         }
+
         public static XmlReader CreateReader(
             string readerType,
             Stream stream,
@@ -237,6 +240,7 @@ namespace XmlCoreTest.Common
         {
             return CreateReader(readerType.ToString(), url, enableNormalization, null, null);
         }
+
         public static XmlReader CreateReader(
             string readerType,
             string url,
@@ -256,6 +260,7 @@ namespace XmlCoreTest.Common
         {
             return CreateReader(readerType, url, enableNormalization, eventHndlr, settings, false);
         }
+
         public static XmlReader CreateReader(
             string readerType,
             string url,
@@ -294,6 +299,7 @@ namespace XmlCoreTest.Common
                 null
             );
         }
+
         public static XmlReader CreateReader(
             string readerType,
             XmlReader underlyingReader,
@@ -320,6 +326,7 @@ namespace XmlCoreTest.Common
                 false
             );
         }
+
         public static XmlReader CreateReader(
             string readerType,
             XmlReader underlyingReader,

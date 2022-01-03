@@ -4,6 +4,7 @@
 
 // Compute distance light travels using long variables.
 using System;
+
 class Light
 {
     public static int Main(String[] args)

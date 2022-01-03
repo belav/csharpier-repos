@@ -52,11 +52,10 @@ namespace IronRuby.Runtime.Calls
 }
 
 public class Foo { }
+
 public class Bar { }
 
-public class BarToFoo : IronRuby.Runtime.Calls.ConvertToReferenceTypeAction<BarToFoo, Foo>
-{
-}
+public class BarToFoo : IronRuby.Runtime.Calls.ConvertToReferenceTypeAction<BarToFoo, Foo> { }
 
 public class Driver
 {

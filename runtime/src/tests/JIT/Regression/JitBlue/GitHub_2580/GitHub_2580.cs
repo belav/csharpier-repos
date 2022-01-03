@@ -34,10 +34,12 @@ internal static class MicrsoftNETBug
         {
             D = d;
         }
+
         public static bool operator >(S a, S b)
         {
             return a.D > b.D;
         }
+
         public static bool operator <(S a, S b)
         {
             return a.D < b.D;

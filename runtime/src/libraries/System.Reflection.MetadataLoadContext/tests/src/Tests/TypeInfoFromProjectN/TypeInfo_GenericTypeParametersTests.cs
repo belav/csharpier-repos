@@ -400,30 +400,44 @@ namespace System.Reflection.Tests
 
     //Metadata for Reflection
     public interface Test_I1 { }
+
     public interface Test_IG1<TI> { }
+
     public interface Test_IG21<TI, VI> { }
 
     public struct Test_S1 { }
+
     public struct Test_SG1<TS> { }
+
     public struct Test_SG21<TS, VS> { }
 
     public struct Test_SI1 : Test_I1 { }
+
     public struct Test_SIG1<TS> : Test_IG1<TS> { }
+
     public struct Test_SIG21<TS, VS> : Test_IG21<TS, VS> { }
 
     public struct Test_SI_Int1 : Test_IG1<int> { }
+
     public struct Test_SIG_Int1<TS> : Test_IG21<TS, int> { }
+
     public struct Test_SIG_Int_Int1 : Test_IG21<int, int> { }
 
     public class Test_C1 { }
+
     public class Test_CG1<T> { }
+
     public class Test_CG21<T, V> { }
 
     public class Test_CI1 : Test_I1 { }
+
     public class Test_CIG1<T> : Test_IG1<T> { }
+
     public class Test_CIG21<T, V> : Test_IG21<T, V> { }
 
     public class Test_CI_Int1 : Test_IG1<int> { }
+
     public class Test_CIG_Int1<T> : Test_CG21<T, int> { }
+
     public class Test_CIG_Int_Int1 : Test_CG21<int, int> { }
 }

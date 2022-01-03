@@ -8,7 +8,9 @@ using System.Threading;
 class B
 {
     public B z() => this;
+
     public bool T() => true;
+
     public virtual bool F(B b, int x) => x == 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -19,8 +21,11 @@ class B
     }
 
     public bool H(B b, int x) => G(b, x);
+
     public bool I(B b, int x) => F(b, x + 1);
+
     public bool J(B b, int x) => I(b, x);
+
     public bool K(B b, int x) => J(b, x);
 }
 

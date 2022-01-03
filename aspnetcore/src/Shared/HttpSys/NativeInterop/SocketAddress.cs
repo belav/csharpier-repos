@@ -26,6 +26,7 @@ namespace Microsoft.AspNetCore.HttpSys.Internal;
 internal class SocketAddress
 {
     private const int NumberOfIPv6Labels = 8;
+
     // Lower case hex, no leading zeros
     private const string IPv6NumberFormat = "{0:x}";
     private const char IPv6StringSeparator = ':';

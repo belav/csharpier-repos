@@ -18,10 +18,12 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
         /// Source state of the move
         /// </summary>
         public readonly int SourceState;
+
         /// <summary>
         /// Target state of the move
         /// </summary>
         public readonly int TargetState;
+
         /// <summary>
         /// Label of the move
         /// </summary>

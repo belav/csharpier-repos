@@ -15,6 +15,7 @@ class Program
     }
 
     public delegate int Delegate_TC_Int(ClassA tc);
+
     public static MethodInfo GetMethod(Type t, string method)
     {
         TypeInfo typeInfo = t.GetTypeInfo();
@@ -31,6 +32,7 @@ class Program
         }
         return result;
     }
+
     public static int Main(string[] args)
     {
         Type typeTestClass = typeof(ClassA);

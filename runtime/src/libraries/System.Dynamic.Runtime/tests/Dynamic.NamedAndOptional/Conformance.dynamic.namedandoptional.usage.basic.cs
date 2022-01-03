@@ -2094,6 +2094,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private const int C = 3;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2129,6 +2130,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private static dynamic s_C = 3;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2164,6 +2166,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private static dynamic s_C = 3;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2199,6 +2202,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private const int C = 3;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2224,6 +2228,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Parent
     {
         private static dynamic s_C = 3;
+
         public int Foo(int x)
         {
             if (x == 3)
@@ -2274,6 +2279,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private const bool C = true;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2309,6 +2315,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private static dynamic s_C = true;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2344,6 +2351,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private static dynamic s_C = true;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2379,6 +2387,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private const bool C = true;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2404,6 +2413,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Parent
     {
         private static dynamic s_C = true;
+
         public int Foo(bool x)
         {
             if (x)
@@ -2454,6 +2464,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private const bool C = true;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2489,6 +2500,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private static dynamic s_C = true;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2524,6 +2536,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private static dynamic s_C = true;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2559,6 +2572,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private const bool C = true;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2585,6 +2599,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     {
         private static dynamic s_C = true;
         public int Field = 10;
+
         public int Foo(bool x, bool y)
         {
             if (x && y)
@@ -2636,6 +2651,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private const bool C = true;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2671,6 +2687,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private static dynamic s_C = true;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2706,6 +2723,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private static dynamic s_C = true;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2732,6 +2750,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     {
         private static dynamic s_C = true;
         public static int Field = 10;
+
         public int Foo(bool x, bool y = true)
         {
             if (x && y)
@@ -2934,6 +2953,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         public int Field = 10;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -3360,6 +3380,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -3396,6 +3417,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -3432,6 +3454,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -3468,6 +3491,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

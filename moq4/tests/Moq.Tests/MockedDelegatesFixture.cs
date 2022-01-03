@@ -195,21 +195,28 @@ namespace Moq.Tests
         {
             void Invoke(out TOut1 out1);
         }
+
         public delegate void DelegateOutAction<TOut1>(out TOut1 out1);
+
         public interface TypeRefAction<TRef1>
         {
             void Invoke(ref TRef1 ref1);
         }
+
         public delegate void DelegateRefAction<TRef1>(ref TRef1 ref1);
+
         public interface TypeOutFunc<TOut1, TResult>
         {
             TResult Invoke(out TOut1 out1);
         }
+
         public delegate TResult DelegateOutFunc<TOut1, TResult>(out TOut1 out1);
+
         public interface TypeRefFunc<TRef1, TResult>
         {
             TResult Invoke(ref TRef1 ref1);
         }
+
         public delegate TResult DelegateRefFunc<TRef1, TResult>(ref TRef1 ref1);
     }
 }

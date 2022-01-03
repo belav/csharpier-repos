@@ -9,6 +9,7 @@ op1 and op2 can be static, local, class/struct member, function retval, 1D/2D/3D
 *****************************************************************************/
 
 using System;
+
 internal class overlddiv
 {
     //user-defined class that overloads operator /
@@ -21,6 +22,7 @@ internal class overlddiv
         private float _f_num;
         private double _d_num;
         private decimal _m_num;
+
         public numHolder(int i_num)
         {
             _i_num = Convert.ToInt32(i_num);
@@ -157,6 +159,7 @@ internal class overlddiv
         else
             return 16;
     }
+
     public static uint ui_f(String s)
     {
         if (s == "op1")
@@ -164,6 +167,7 @@ internal class overlddiv
         else
             return 16;
     }
+
     public static long l_f(String s)
     {
         if (s == "op1")
@@ -171,6 +175,7 @@ internal class overlddiv
         else
             return 16;
     }
+
     public static ulong ul_f(String s)
     {
         if (s == "op1")
@@ -178,6 +183,7 @@ internal class overlddiv
         else
             return 16;
     }
+
     public static float f_f(String s)
     {
         if (s == "op1")
@@ -185,6 +191,7 @@ internal class overlddiv
         else
             return 16;
     }
+
     public static double d_f(String s)
     {
         if (s == "op1")
@@ -192,6 +199,7 @@ internal class overlddiv
         else
             return 16;
     }
+
     public static decimal m_f(String s)
     {
         if (s == "op1")
@@ -199,6 +207,7 @@ internal class overlddiv
         else
             return 16;
     }
+
     public static numHolder nHldr_f(String s)
     {
         if (s == "op1")
@@ -206,6 +215,7 @@ internal class overlddiv
         else
             return new numHolder(16);
     }
+
     private class CL
     {
         public numHolder nHldr_cl_op1 = new numHolder(128);

@@ -5,6 +5,7 @@
 namespace Test
 {
     using System;
+
     class BB
     {
         public static uint m_uStatic3 = 205u;
@@ -25,6 +26,7 @@ namespace Test
                 }
             }
         }
+
         static int Main()
         {
             try

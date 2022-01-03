@@ -20,6 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
             public override string GetClassName() =>
                 SolutionExplorerShim.Source_Generated_File_Properties;
+
             public override string GetComponentName() => _sourceGeneratedFileItem.HintName;
         }
     }

@@ -13,10 +13,13 @@ namespace System.Xml.Schema
     {
         [FieldOffset(0)]
         public int State; //DFA
+
         [FieldOffset(0)]
         public int AllElementsRequired; //AllContentValidator
+
         [FieldOffset(0)]
         public int CurPosIndex; //NFAContentValidator
+
         [FieldOffset(0)]
         public int NumberOfRunningPos; //RangeContentValidator
     }

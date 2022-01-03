@@ -44,34 +44,48 @@ namespace System.Reflection.Context.Projection
 
         [return: NotNullIfNotNull("value")]
         public abstract TypeInfo? ProjectType(Type? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract Assembly? ProjectAssembly(Assembly? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract Module? ProjectModule(Module? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract FieldInfo? ProjectField(FieldInfo? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract EventInfo? ProjectEvent(EventInfo? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract ConstructorInfo? ProjectConstructor(ConstructorInfo? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract MethodInfo? ProjectMethod(MethodInfo? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract MethodBase? ProjectMethodBase(MethodBase? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract PropertyInfo? ProjectProperty(PropertyInfo? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract ParameterInfo? ProjectParameter(ParameterInfo? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract MethodBody? ProjectMethodBody(MethodBody? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract LocalVariableInfo? ProjectLocalVariable(LocalVariableInfo? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract ExceptionHandlingClause? ProjectExceptionHandlingClause(
             ExceptionHandlingClause? value
         );
+
         [return: NotNullIfNotNull("value")]
         public abstract CustomAttributeData? ProjectCustomAttributeData(CustomAttributeData? value);
+
         [return: NotNullIfNotNull("value")]
         public abstract ManifestResourceInfo? ProjectManifestResource(ManifestResourceInfo? value);
         public abstract CustomAttributeTypedArgument ProjectTypedArgument(
@@ -81,6 +95,7 @@ namespace System.Reflection.Context.Projection
             CustomAttributeNamedArgument value
         );
         public abstract InterfaceMapping ProjectInterfaceMapping(InterfaceMapping value);
+
         [return: NotNullIfNotNull("value")]
         public abstract MemberInfo? ProjectMember(MemberInfo? value);
 

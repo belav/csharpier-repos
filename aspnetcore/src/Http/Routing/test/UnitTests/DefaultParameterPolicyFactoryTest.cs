@@ -613,9 +613,7 @@ public class CustomParameterPolicyWithOnlyServiceArguments : IParameterPolicy
 
 public interface ITestService { }
 
-public class TestService : ITestService
-{
-}
+public class TestService : ITestService { }
 
 public class RegexInlineRouteConstraintWithService : RegexRouteConstraint
 {

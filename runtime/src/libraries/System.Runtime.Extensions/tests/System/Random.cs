@@ -1604,6 +1604,7 @@ namespace System.Tests
                 NextCalled;
 
             public SubRandom() { }
+
             public SubRandom(int Seed) : base(Seed) { }
 
             public double ExposeSample() => Sample();

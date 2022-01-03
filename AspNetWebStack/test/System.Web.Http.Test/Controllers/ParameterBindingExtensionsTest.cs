@@ -241,6 +241,7 @@ namespace System.Web.Http.Controllers
                 throw new NotImplementedException();
             }
         }
+
         public class CustomValueProviderFactory2 : ValueProviderFactory
         {
             public override IValueProvider GetValueProvider(HttpActionContext actionContext)

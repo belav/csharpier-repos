@@ -1042,6 +1042,7 @@ namespace System.Net.Tests
             public ICredentials Credentials { get; set; }
 
             public Uri GetProxy(Uri destination) => null;
+
             public bool IsBypassed(Uri host) => false;
         }
 
@@ -1625,8 +1626,10 @@ namespace System.Net.Tests
 
         protected override Task<byte[]> DownloadDataAsync(WebClient wc, string address) =>
             Task.Run(() => wc.DownloadData(address));
+
         protected override Task DownloadFileAsync(WebClient wc, string address, string fileName) =>
             Task.Run(() => wc.DownloadFile(address, fileName));
+
         protected override Task<string> DownloadStringAsync(WebClient wc, string address) =>
             Task.Run(() => wc.DownloadString(address));
 
@@ -1635,16 +1638,19 @@ namespace System.Net.Tests
             string address,
             byte[] data
         ) => Task.Run(() => wc.UploadData(address, data));
+
         protected override Task<byte[]> UploadFileAsync(
             WebClient wc,
             string address,
             string fileName
         ) => Task.Run(() => wc.UploadFile(address, fileName));
+
         protected override Task<string> UploadStringAsync(
             WebClient wc,
             string address,
             string data
         ) => Task.Run(() => wc.UploadString(address, data));
+
         protected override Task<byte[]> UploadValuesAsync(
             WebClient wc,
             string address,
@@ -1653,6 +1659,7 @@ namespace System.Net.Tests
 
         protected override Task<Stream> OpenReadAsync(WebClient wc, string address) =>
             Task.Run(() => wc.OpenRead(address));
+
         protected override Task<Stream> OpenWriteAsync(WebClient wc, string address) =>
             Task.Run(() => wc.OpenWrite(address));
     }
@@ -1666,8 +1673,10 @@ namespace System.Net.Tests
 
         protected override Task<byte[]> DownloadDataAsync(WebClient wc, string address) =>
             wc.DownloadDataTaskAsync(address);
+
         protected override Task DownloadFileAsync(WebClient wc, string address, string fileName) =>
             wc.DownloadFileTaskAsync(address, fileName);
+
         protected override Task<string> DownloadStringAsync(WebClient wc, string address) =>
             wc.DownloadStringTaskAsync(address);
 
@@ -1676,16 +1685,19 @@ namespace System.Net.Tests
             string address,
             byte[] data
         ) => wc.UploadDataTaskAsync(address, data);
+
         protected override Task<byte[]> UploadFileAsync(
             WebClient wc,
             string address,
             string fileName
         ) => wc.UploadFileTaskAsync(address, fileName);
+
         protected override Task<string> UploadStringAsync(
             WebClient wc,
             string address,
             string data
         ) => wc.UploadStringTaskAsync(address, data);
+
         protected override Task<byte[]> UploadValuesAsync(
             WebClient wc,
             string address,
@@ -1694,6 +1706,7 @@ namespace System.Net.Tests
 
         protected override Task<Stream> OpenReadAsync(WebClient wc, string address) =>
             wc.OpenReadTaskAsync(address);
+
         protected override Task<Stream> OpenWriteAsync(WebClient wc, string address) =>
             wc.OpenWriteTaskAsync(address);
     }

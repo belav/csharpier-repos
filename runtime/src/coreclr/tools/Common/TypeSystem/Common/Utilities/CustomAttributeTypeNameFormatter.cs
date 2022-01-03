@@ -215,6 +215,7 @@ namespace Internal.TypeSystem
             '+',
             '\\'
         };
+
         private void AppendEscapedIdentifier(StringBuilder sb, string identifier)
         {
             if (identifier.IndexOfAny(s_escapedChars) < 0)

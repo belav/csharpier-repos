@@ -4,7 +4,9 @@
 using System;
 
 internal class Base { };
+
 internal class Sibling1 : Base { };
+
 internal class Sibling2 : Base { };
 
 internal static class Repro

@@ -3,6 +3,7 @@
 //
 
 using System;
+
 struct TestValue
 {
     public int a;
@@ -17,6 +18,7 @@ class StaticValueField
     const int Pass = 100;
     const int Fail = -1;
     static TestValue sField;
+
     public static void Init()
     {
         TestValue v = new TestValue();

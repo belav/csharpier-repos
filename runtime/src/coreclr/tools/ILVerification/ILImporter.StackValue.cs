@@ -19,6 +19,7 @@ namespace Internal.IL
             PermanentHome = 1 << 2,
             ThisPtr = 1 << 3,
         }
+
         private StackValueFlags Flags;
 
         public readonly StackValueKind Kind;

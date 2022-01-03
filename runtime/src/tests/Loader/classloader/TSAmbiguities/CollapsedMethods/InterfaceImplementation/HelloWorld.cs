@@ -33,6 +33,7 @@ class A<T, U>
     {
         return "A.Print(T)";
     }
+
     public virtual string Print(U u)
     {
         return "A.Print(U)";

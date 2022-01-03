@@ -90,6 +90,7 @@ namespace System.Reflection.TypeLoading.Ecma
         private TypeContext TypeContext => _roMethodBase.TypeContext;
 
         private EcmaModule GetEcmaModule() => (EcmaModule)(_roMethodBase.MethodBase.Module);
+
         private MetadataReader Reader => GetEcmaModule().Reader;
         private MetadataLoadContext Loader => GetEcmaModule().Loader;
 
@@ -101,6 +102,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 return ref _neverAccessThisExceptThroughBlockProperty;
             }
         }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly MethodBodyBlock _neverAccessThisExceptThroughBlockProperty;
     }

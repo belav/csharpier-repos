@@ -29,6 +29,7 @@ namespace StressAllocator
             public int minsize;
             public int maxsize;
             public float percentage; //percentage of objects that fall into this bucket
+
             public SizeBucket(int min, int max, float percentObj)
             {
                 minsize = min;
@@ -49,6 +50,7 @@ namespace StressAllocator
         private const int BUCKET3_MIN = 1000;
         private const int BUCKET4_MIN = 10000;
         private const int BUCKETS_MAX = 80000;
+
         //////
         //// DEFAULT PARAMETERS
         //These parameters may be overriden by command line parameters
@@ -62,15 +64,18 @@ namespace StressAllocator
         public const float DEFAULT_BUCKET2 = 30.0F;
         public const float DEFAULT_BUCKET3 = 20.0F;
         public const float DEFAULT_BUCKET4 = 10.0F;
+
         //remaining will be allocated on Large Object Heap
         public const int DEFAULT_THREADS = 4; //number of allocating threads
         public const int THREAD_IDLE_TIME = 0; //milliseconds
         public const int MAX_REFS = 4; //max number of refernces to another object
+
         ///////////// end default parameters
 
 
         public static long timeout = 0;
         public static SizeBucket[] sizeBuckets = new SizeBucket[SIZEBUCKET_COUNT];
+
         //Default settings:
         //minimum and maximum object lifetime (milliseconds)
         public static int minLife = DEFAULT_MINLIFE;
@@ -107,15 +112,18 @@ namespace StressAllocator
         public static UInt64[] current_bucketObjCount = new UInt64[SIZEBUCKET_COUNT]; //how many objects are in each bucket
         public static UInt64 current_LOHObjects = 0;
         public static bool testDone = false;
+
         //for status output:
         //keep track of the collection count for generations 0, 1, 2
         public static int[] currentCollections = new int[3];
         public static int outputFrequency = 0; //after how many iterations the data is printed
         public static System.TimeSpan totalTime;
+
         //weak ref array that keeps track of all objects
         public static WeakReferenceCollection WR_All = new WeakReferenceCollection();
         public static ObjectWrapper dummyObject;
         public static int pointerSize = 4; //bytes
+
         [ThreadStatic]
         public static Random Rand;
 
@@ -451,6 +459,7 @@ namespace StressAllocator
             sizeBuckets[2] = new SizeBucket(BUCKET3_MIN, BUCKET4_MIN, percentBucket3);
             sizeBuckets[3] = new SizeBucket(BUCKET4_MIN, BUCKETS_MAX, percentBucket4);
         }
+
         /// Parse the arguments and also initialize values that are not set by args
         public static bool ParseArgs(string[] args)
         {
@@ -724,6 +733,7 @@ namespace StressAllocator
             public int m_lifeTime; //milliseconds
             public long m_age = 0;
             public long m_creationTime;
+
             //           public Object[] objRef = new Object[maxRef]; //references to other objects
             //       public int refCount = 0;  //how many objects point at this object
 
@@ -793,6 +803,7 @@ namespace StressAllocator
                     WR_All.Add(m_pinnedData);
                 }
             }
+
             public void CleanUp()
             {
                 if (m_pinned && !usePOH)
@@ -801,6 +812,7 @@ namespace StressAllocator
                         m_pinnedHandle.Free();
                 }
             }
+
             ~ObjectWrapper()
             {
                 CleanUp();
@@ -836,6 +848,7 @@ namespace StressAllocator
         {
             private ObjectWrapper[] _array;
             private int _size;
+
             public void Init(int numberOfObjects)
             {
                 _array = new ObjectWrapper[numberOfObjects];
@@ -845,6 +858,7 @@ namespace StressAllocator
                 }
                 _size = numberOfObjects;
             }
+
             public void SetObjectAt(ObjectWrapper o, int index)
             {
                 if (index >= _size)
@@ -880,6 +894,7 @@ namespace StressAllocator
 
                 return false;
             }
+
             public ObjectWrapper GetObjectAt(int index)
             {
                 if (index >= _size)
@@ -951,11 +966,13 @@ namespace StressAllocator
         {
             private object _WRLock;
             private List<WeakReference> _WR;
+
             public WeakReferenceCollection()
             {
                 _WRLock = new Object();
                 _WR = new List<WeakReference>();
             }
+
             public void Add(Object o)
             {
                 lock (_WRLock)
@@ -1006,6 +1023,7 @@ namespace StressAllocator
                     }
                 }
             }
+
             public int Count
             {
                 get

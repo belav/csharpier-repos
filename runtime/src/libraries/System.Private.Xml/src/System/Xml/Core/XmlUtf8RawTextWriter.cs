@@ -36,6 +36,7 @@ namespace System.Xml
 
         // buffer positions
         protected int _bufPos = 1; // buffer position starts at 1, because we need to be able to safely step back -1 in case we need to
+
         // close an empty element or in CDATA section detection of double ]; _bufBytes[0] will always be 0
         protected int _textPos = 1; // text end position; don't indent first element, pi, or comment
         protected int _contentPos; // element content end position

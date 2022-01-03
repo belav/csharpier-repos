@@ -1,10 +1,12 @@
 public class ClassA { }
+
 public struct GenStruct<T>
 {
     int field1;
     long field2;
     T field3;
 }
+
 public struct Struct
 {
     int field1;

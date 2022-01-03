@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
+
 // bug #77788
 
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -28,6 +29,7 @@ class T
                 throw new Exception("wrong str at " + i);
         }
     }
+
     static void Main()
     {
         Bogus[] arr = new Bogus[256];

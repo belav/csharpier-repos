@@ -27,6 +27,7 @@ namespace System.Xml.XmlDiff
         private XmlNamespaceManager _mngr;
 
         public XmlDiffAdvancedOptions() { }
+
         public string IgnoreNodesExpr
         {
             get { return _IgnoreNodesExpr; }

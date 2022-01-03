@@ -65,13 +65,16 @@ namespace System.Threading
 
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 3)]
             public int priorCompletionCount;
+
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 3 + sizeof(int))]
             public int priorCompletedWorkRequestsTime;
+
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 3 + sizeof(int) * 2)]
             public int nextCompletedWorkRequestsTime;
 
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 4)]
             public volatile int numRequestedWorkers;
+
             [FieldOffset(Internal.PaddingHelpers.CACHE_LINE_SIZE * 4 + sizeof(int))]
             public int gateThreadRunningState;
         }

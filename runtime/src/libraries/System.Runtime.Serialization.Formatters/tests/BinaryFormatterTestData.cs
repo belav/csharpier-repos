@@ -72,6 +72,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             "11/3/1989 04:50:29 AM",
             CultureInfo.InvariantCulture.DateTimeFormat
         );
+
         // *** AUTO UPDATED BLOBS ***
 
         public static IEnumerable<object[]> SerializableObjects_MemberData()

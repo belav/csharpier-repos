@@ -225,18 +225,22 @@ namespace System.Collections.Concurrent
         private sealed class EnumerableDropIndices : IEnumerable<TSource>, IDisposable
         {
             private readonly IEnumerable<KeyValuePair<long, TSource>> _source;
+
             public EnumerableDropIndices(IEnumerable<KeyValuePair<long, TSource>> source)
             {
                 _source = source;
             }
+
             public IEnumerator<TSource> GetEnumerator()
             {
                 return new EnumeratorDropIndices(_source.GetEnumerator());
             }
+
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return ((EnumerableDropIndices)this).GetEnumerator();
             }
+
             public void Dispose()
             {
                 IDisposable? d = _source as IDisposable;
@@ -250,14 +254,17 @@ namespace System.Collections.Concurrent
         private sealed class EnumeratorDropIndices : IEnumerator<TSource>
         {
             private readonly IEnumerator<KeyValuePair<long, TSource>> _source;
+
             public EnumeratorDropIndices(IEnumerator<KeyValuePair<long, TSource>> source)
             {
                 _source = source;
             }
+
             public bool MoveNext()
             {
                 return _source.MoveNext();
             }
+
             public TSource Current
             {
                 get { return _source.Current.Value; }
@@ -266,10 +273,12 @@ namespace System.Collections.Concurrent
             {
                 get { return ((EnumeratorDropIndices)this).Current; }
             }
+
             public void Dispose()
             {
                 _source.Dispose();
             }
+
             public void Reset()
             {
                 _source.Reset();

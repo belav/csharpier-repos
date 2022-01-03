@@ -5,20 +5,35 @@
 using System;
 
 public struct ValX0 { }
+
 public struct ValY0 { }
+
 public struct ValX1<T> { }
+
 public struct ValY1<T> { }
+
 public struct ValX2<T, U> { }
+
 public struct ValY2<T, U> { }
+
 public struct ValX3<T, U, V> { }
+
 public struct ValY3<T, U, V> { }
+
 public class RefX0 { }
+
 public class RefY0 { }
+
 public class RefX1<T> { }
+
 public class RefY1<T> { }
+
 public class RefX2<T, U> { }
+
 public class RefY2<T, U> { }
+
 public class RefX3<T, U, V> { }
+
 public class RefY3<T, U, V> { }
 
 public class GenBase<T, U>
@@ -55,6 +70,7 @@ public class GenBase<T, U>
 public class Gen<T, U> : GenBase<T, U>
 {
     public Gen(T fld1, U fld2) : base(fld1, fld2) { }
+
     new public bool InstVerify(System.Type t1, System.Type t2)
     {
         return base.InstVerify(t1, t2);
@@ -65,6 +81,7 @@ public class Test_Baseclass04
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

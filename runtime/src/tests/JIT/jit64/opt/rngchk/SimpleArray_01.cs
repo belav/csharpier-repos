@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 namespace SimpleArray_01
 {
     public delegate void RngTest();
+
     internal class Class1
     {
         private static int Main()
@@ -57,6 +58,7 @@ namespace SimpleArray_01
             return bResult;
         }
     }
+
     internal class Test
     {
         /********************************************************************************************
@@ -86,6 +88,7 @@ namespace SimpleArray_01
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
 		* RngChk is eliminated properly when reverse iterate through the array
 		********************************************************************************************/
@@ -100,6 +103,7 @@ namespace SimpleArray_01
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
 		* RngChk is not eliminated if the array is modified
 		********************************************************************************************/
@@ -116,6 +120,7 @@ namespace SimpleArray_01
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
 		* RngChk is not eliminated if the upper limit of the array is modified
 		********************************************************************************************/
@@ -132,6 +137,7 @@ namespace SimpleArray_01
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
 		* RngChk is not eliminated if induction variable is modified
 		********************************************************************************************/

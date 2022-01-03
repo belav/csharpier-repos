@@ -15,6 +15,7 @@ struct S0
 {
     public C0 F0;
     public uint F1;
+
     public S0(C0 f0) : this()
     {
         F0 = f0;
@@ -30,6 +31,7 @@ class C1
     public C0 F4;
     public sbyte F5;
     public uint F6;
+
     public C1(C0 f4, bool f7)
     {
         F4 = f4;
@@ -44,6 +46,7 @@ class C2
 class C3
 {
     public int F0;
+
     public C3(int f0) { }
 }
 

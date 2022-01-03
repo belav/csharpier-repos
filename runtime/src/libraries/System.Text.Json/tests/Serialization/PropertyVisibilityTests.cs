@@ -1410,8 +1410,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             [JsonIgnore]
             public ConcurrentDictionary<object, object> MyConcurrentDict { get; set; }
+
             [JsonIgnore]
             public IDictionary<object, object> MyIDict { get; set; }
+
             [JsonIgnore]
             public ObjectDictWrapper MyDict { get; set; }
         }
@@ -1667,6 +1669,7 @@ namespace System.Text.Json.Serialization.Tests
         private class ClassWithProperty_IgnoreConditionAlways
         {
             public string MyString { get; set; }
+
             [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
             public DateTime MyDateTime { get; set; }
             public int MyInt { get; set; }
@@ -1675,6 +1678,7 @@ namespace System.Text.Json.Serialization.Tests
         private class ClassWithProperty_IgnoreConditionAlways_Ctor
         {
             public string MyString { get; set; }
+
             [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
             public DateTime MyDateTime { get; }
             public int MyInt { get; }
@@ -1736,6 +1740,7 @@ namespace System.Text.Json.Serialization.Tests
         private class ClassWithClassProperty_IgnoreConditionWhenWritingDefault
         {
             public int Int1 { get; set; }
+
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
             public string MyString { get; set; } = "DefaultString";
             public int Int2 { get; set; }
@@ -1744,6 +1749,7 @@ namespace System.Text.Json.Serialization.Tests
         private class ClassWithClassProperty_IgnoreConditionWhenWritingDefault_Ctor
         {
             public int Int1 { get; set; }
+
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
             public string MyString { get; set; } = "DefaultString";
             public int Int2 { get; set; }
@@ -1799,6 +1805,7 @@ namespace System.Text.Json.Serialization.Tests
         private class ClassWithStructProperty_IgnoreConditionWhenWritingDefault
         {
             public int Int1 { get; set; }
+
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
             public int MyInt { get; set; }
             public int Int2 { get; set; }
@@ -1807,6 +1814,7 @@ namespace System.Text.Json.Serialization.Tests
         private struct StructWithStructProperty_IgnoreConditionWhenWritingDefault_Ctor
         {
             public int Int1 { get; set; }
+
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
             public int MyInt { get; }
             public int Int2 { get; set; }
@@ -1900,6 +1908,7 @@ namespace System.Text.Json.Serialization.Tests
         private class ClassWithStructProperty_IgnoreConditionNever
         {
             public int Int1 { get; set; }
+
             [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
             public string MyString { get; set; }
             public int Int2 { get; set; }
@@ -1908,6 +1917,7 @@ namespace System.Text.Json.Serialization.Tests
         private class ClassWithStructProperty_IgnoreConditionNever_Ctor
         {
             public int Int1 { get; set; }
+
             [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
             public string MyString { get; }
             public int Int2 { get; set; }
@@ -2227,6 +2237,7 @@ namespace System.Text.Json.Serialization.Tests
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
             public string MyString { get; set; }
             public int MyInt { get; set; }
+
             [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
             public Point_2D_Struct MyPoint { get; set; }
         }
@@ -2844,6 +2855,7 @@ namespace System.Text.Json.Serialization.Tests
             public IInterface MyProp { get; set; }
 
             public interface IInterface { }
+
             public struct MyStruct : IInterface { }
         }
 

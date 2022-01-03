@@ -12,6 +12,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public long? Number { get; set; }
         }
+
         class Destination
         {
             public long? Number { get; set; }

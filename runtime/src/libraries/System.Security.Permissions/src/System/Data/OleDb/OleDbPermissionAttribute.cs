@@ -19,6 +19,7 @@ namespace System.Data.OleDb
     public sealed class OleDbPermissionAttribute : DBDataPermissionAttribute
     {
         public OleDbPermissionAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+
         [ComponentModel.Browsable(false)]
         [ComponentModel.EditorBrowsable(ComponentModel.EditorBrowsableState.Never)]
         public string Provider
@@ -26,6 +27,7 @@ namespace System.Data.OleDb
             get { return null; }
             set { }
         }
+
         public override IPermission CreatePermission()
         {
             return null;

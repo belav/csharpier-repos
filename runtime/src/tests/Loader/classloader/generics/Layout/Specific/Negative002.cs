@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 public class GenBase<T>
 {
     T t;
+
     T Dummy(T t)
     {
         this.t = t;
@@ -35,6 +36,7 @@ public class GenTest<T>
     {
         InternalTest();
     }
+
     public bool Test_Negative002()
     {
         try
@@ -59,6 +61,7 @@ public class Test_Negative002
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

@@ -9,6 +9,7 @@ unsafe partial class GenericsNative
 {
     [DllImport(nameof(GenericsNative))]
     public static extern float? GetNullableF(bool hasValue, float value);
+
     [DllImport(nameof(GenericsNative))]
     public static extern void GetNullableFOut(bool hasValue, float value, out float? pValue);
 

@@ -426,6 +426,7 @@ namespace System.Configuration
             SerializeAs = serializeAs;
             Value = value;
         }
+
         internal SettingsSerializeAs SerializeAs;
         internal XmlNode Value;
     }

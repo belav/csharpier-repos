@@ -11,6 +11,7 @@ namespace Test
         public class ReachedCallout : Exception
         {
             public int CalloutIndex { get; private set; }
+
             public ReachedCallout(int calloutIndex) : base("ReachedCallout")
             {
                 this.CalloutIndex = calloutIndex;
@@ -25,11 +26,13 @@ namespace Test
         {
             Console.WriteLine("    REACHED: Callout0");
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static void Callout1()
         {
             Console.WriteLine("    REACHED: Callout1");
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static void Callout2()
         {

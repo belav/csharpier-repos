@@ -63,6 +63,7 @@ namespace System.ServiceModel.Syndication.Tests
         public List<AllowableDifference> AllowableDifferences { get; set; } = null;
 
         public XmlDiff Diff { get; set; }
+
         public bool Compare(string source, string target, out string diffNode)
         {
             diffNode = string.Empty;

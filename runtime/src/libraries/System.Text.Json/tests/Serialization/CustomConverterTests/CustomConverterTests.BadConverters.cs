@@ -9,7 +9,9 @@ namespace System.Text.Json.Serialization.Tests
     public static partial class CustomConverterTests
     {
         private class PocoWithNoBaseClass { }
+
         private class DerivedCustomer : Customer { }
+
         private class SuccessException : Exception { }
 
         private class BadCustomerConverter : JsonConverter<Customer>

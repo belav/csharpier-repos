@@ -104,6 +104,7 @@ public interface I1<T>
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
     sealed Type GetItemType() => typeof(T);
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     sealed Type GetItemTypeMethod<U>() => typeof(U);
 }
@@ -112,6 +113,7 @@ public interface I2
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
     sealed Type GetItemTypeNonGeneric(Type t) => t;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     sealed Type GetItemTypeGeneric<U>() => typeof(U);
 }

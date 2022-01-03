@@ -9,6 +9,7 @@ namespace System.Diagnostics
     public sealed partial class FileVersionInfo
     {
         internal FileVersionInfo() { }
+
         public string? Comments
         {
             get { throw null; }
@@ -117,10 +118,12 @@ namespace System.Diagnostics
         {
             get { throw null; }
         }
+
         public static System.Diagnostics.FileVersionInfo GetVersionInfo(string fileName)
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;

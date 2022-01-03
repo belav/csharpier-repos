@@ -149,6 +149,7 @@ namespace Castle.Components.DictionaryAdapter.Tests
             MemberB = new Member();
 
         private sealed class Node { }
+
         private sealed class Member { }
 
         private sealed class MockVirtual : VirtualObject<Node>

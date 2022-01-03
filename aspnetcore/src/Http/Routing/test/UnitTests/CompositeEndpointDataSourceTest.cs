@@ -180,6 +180,7 @@ public class CompositeEndpointDataSourceTest
         }
 
         public override IChangeToken GetChangeToken() => _token;
+
         public override IReadOnlyList<Endpoint> Endpoints => Array.Empty<Endpoint>();
     }
 }

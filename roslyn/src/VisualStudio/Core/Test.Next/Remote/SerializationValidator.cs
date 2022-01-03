@@ -69,7 +69,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             public int Count => Children.Length;
             public T this[int index] => Children[index];
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
             public IEnumerator<T> GetEnumerator() => Children.Select(t => t).GetEnumerator();
         }
 

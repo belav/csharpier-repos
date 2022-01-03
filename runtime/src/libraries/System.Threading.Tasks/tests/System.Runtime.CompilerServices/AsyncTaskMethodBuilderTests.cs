@@ -997,6 +997,7 @@ namespace System.Threading.Tasks.Tests
         {
             private int _trackedCount;
             private int _postCount;
+
             //ConcurrentQueue
             private List<Exception> _postExceptions = new List<Exception>();
 
@@ -1025,6 +1026,7 @@ namespace System.Threading.Tasks.Tests
             {
                 Interlocked.Increment(ref _trackedCount);
             }
+
             public override void OperationCompleted()
             {
                 Interlocked.Decrement(ref _trackedCount);

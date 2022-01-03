@@ -46,6 +46,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         public TypeArray TypeArgs { get; }
 
         public SYMKIND SymKind { get; }
+
         // The type containing the members. This may be a TypeParameterType or an AggregateType.
         // This may be NULL (if types is not NULL).
 

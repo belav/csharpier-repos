@@ -58,6 +58,7 @@ internal static partial class Interop
         {
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
             internal byte[] Goo;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
             // Replying address.
             internal byte[] Address;
@@ -68,8 +69,10 @@ internal static partial class Interop
         internal struct Icmp6EchoReply
         {
             internal Ipv6Address Address;
+
             // Reply IP_STATUS.
             internal uint Status;
+
             // RTT in milliseconds.
             internal uint RoundTripTime;
             internal IntPtr data;

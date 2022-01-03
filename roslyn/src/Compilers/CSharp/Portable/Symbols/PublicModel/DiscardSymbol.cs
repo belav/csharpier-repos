@@ -41,6 +41,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             _underlying.TypeWithAnnotations.ToPublicAnnotation();
 
         protected override void Accept(SymbolVisitor visitor) => visitor.VisitDiscard(this);
+
         protected override TResult? Accept<TResult>(SymbolVisitor<TResult> visitor)
             where TResult : default => visitor.VisitDiscard(this);
     }

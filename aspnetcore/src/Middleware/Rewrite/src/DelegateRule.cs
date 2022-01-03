@@ -13,5 +13,6 @@ internal class DelegateRule : IRule
     {
         _onApplyRule = onApplyRule;
     }
+
     public void ApplyRule(RewriteContext context) => _onApplyRule(context);
 }

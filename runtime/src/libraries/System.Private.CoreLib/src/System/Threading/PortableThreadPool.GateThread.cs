@@ -339,6 +339,7 @@ namespace System.Threading
 
                 public void ClearBlockingAdjustmentDelay() =>
                     _previousBlockingAdjustmentDelayMs = 0;
+
                 public bool HasBlockingAdjustmentDelay => _previousBlockingAdjustmentDelayMs != 0;
 
                 public uint GetNextDelay(int currentTimeMs)

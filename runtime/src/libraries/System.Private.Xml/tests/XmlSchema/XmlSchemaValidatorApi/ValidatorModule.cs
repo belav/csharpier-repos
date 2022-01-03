@@ -11,6 +11,7 @@ namespace System.Xml.Tests
     public class CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public CXmlSchemaValidatorTestCase(ITestOutputHelper output)
         {
             _output = output;

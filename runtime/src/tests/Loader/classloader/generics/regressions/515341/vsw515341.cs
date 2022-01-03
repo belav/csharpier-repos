@@ -7,6 +7,7 @@
 using System;
 
 public interface GenI<T> { }
+
 public struct GenS<T> : GenI<T> { }
 
 public class C

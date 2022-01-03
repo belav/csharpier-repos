@@ -3013,6 +3013,7 @@ namespace System.Xml.Xsl.Xslt
             }
             varPar.Value = value;
         }
+
         private IList<XslNode>? AddRemoveImplicitArgs(IList<XslNode>? args, XslFlags flags)
         {
             //We currently don't reuse the same argument list. So remove is not needed and will not work in this code

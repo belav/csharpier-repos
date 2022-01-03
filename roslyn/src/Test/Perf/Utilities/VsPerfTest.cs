@@ -133,6 +133,7 @@ namespace Roslyn.Test.Performance.Utilities
             _testTemplateName.Substring(0, _testTemplateName.IndexOf("Template.xml"));
         public override string MeasuredProc => "devenv";
         public override bool ProvidesScenarios => false;
+
         public override string[] GetScenarios()
         {
             throw new System.NotImplementedException();

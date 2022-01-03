@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CommandLine;
+
 namespace Microsoft.CodeAnalysis.CompilerServer
 {
     /// <summary>

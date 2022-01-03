@@ -112,6 +112,7 @@ public partial class IndexModel : PageModel
         StatusMessage = "Your profile has been updated";
         return RedirectToPage();
     }
+
     public async Task<IActionResult> OnPostSendVerificationEmailAsync()
     {
         if (!ModelState.IsValid)

@@ -17,6 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
     public class CSharpNewDocumentFormattingServiceTests : AbstractNewDocumentFormattingServiceTests
     {
         protected override string Language => LanguageNames.CSharp;
+
         protected override TestWorkspace CreateTestWorkspace(
             string testCode,
             ParseOptions? parseOptions

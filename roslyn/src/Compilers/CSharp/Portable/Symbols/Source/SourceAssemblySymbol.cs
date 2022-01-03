@@ -248,6 +248,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return fieldValue;
         }
+
 #nullable disable
 
         internal bool RuntimeCompatibilityWrapNonExceptionThrows
@@ -2121,6 +2122,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return checker.IsPossibleMatch(node, QuickAttributes.AssemblyKeyFile);
             }
         }
+
 #nullable disable
 
         /// <summary>

@@ -110,6 +110,7 @@ namespace System.DirectoryServices.AccountManagement
             [In, Out] ref Guid iid,
             [Out, MarshalAs(UnmanagedType.Interface)] out object ppObject
         );
+
         public static int ADsOpenObject(
             string path,
             string userName,
@@ -495,10 +496,13 @@ namespace System.DirectoryServices.AccountManagement
         {
             public DSROLE_MACHINE_ROLE MachineRole;
             public uint Flags;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string DomainNameFlat;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string DomainNameDns;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string DomainForestName;
             public Guid DomainGuid;
@@ -682,6 +686,7 @@ namespace System.DirectoryServices.AccountManagement
         internal sealed class AUTHZ_RM_FLAG
         {
             private AUTHZ_RM_FLAG() { }
+
             public static int AUTHZ_RM_FLAG_NO_AUDIT = 0x1;
             public static int AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION = 0x2;
             public static int AUTHZ_VALID_RM_INIT_FLAGS = (

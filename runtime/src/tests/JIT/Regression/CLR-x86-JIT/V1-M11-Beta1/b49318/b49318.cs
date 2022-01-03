@@ -23,6 +23,7 @@ namespace Test
             }
             catch (Exception) { }
         }
+
         static int Main()
         {
             try

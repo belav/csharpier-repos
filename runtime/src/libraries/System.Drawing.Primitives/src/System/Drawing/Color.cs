@@ -314,6 +314,7 @@ namespace System.Drawing
         public static Color Yellow => new Color(KnownColor.Yellow);
 
         public static Color YellowGreen => new Color(KnownColor.YellowGreen);
+
         //
         //  end "web" colors
         // -------------------------------------------------------------------

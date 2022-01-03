@@ -16,6 +16,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
         {
             private TypeSystemContext _tsc;
             private Dictionary<TypeReferenceHandle, TypeRefTypeSystemType> _resolver;
+
             public TypeRefSignatureParserProvider(
                 TypeSystemContext tsc,
                 Dictionary<TypeReferenceHandle, TypeRefTypeSystemType> resolver
@@ -68,18 +69,24 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                 }
                 return null;
             }
+
             public TypeDesc GetGenericMethodParameter(object genericContext, int index) =>
                 _tsc.GetSignatureVariable(index, method: true);
+
             public TypeDesc GetGenericTypeParameter(object genericContext, int index) =>
                 _tsc.GetSignatureVariable(index, method: false);
+
             public TypeDesc GetModifiedType(
                 TypeDesc modifier,
                 TypeDesc unmodifiedType,
                 bool isRequired
             ) => unmodifiedType;
+
             public TypeDesc GetPinnedType(TypeDesc elementType) => elementType;
+
             public TypeDesc GetPointerType(TypeDesc elementType) =>
                 (elementType != null) ? elementType.MakePointerType() : null;
+
             public TypeDesc GetPrimitiveType(PrimitiveTypeCode typeCode)
             {
                 WellKnownType wkt = 0;
@@ -143,13 +150,16 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
                 return _tsc.GetWellKnownType(wkt);
             }
+
             public TypeDesc GetSZArrayType(TypeDesc elementType) =>
                 (elementType != null) ? elementType.MakeArrayType() : null;
+
             public TypeDesc GetTypeFromDefinition(
                 MetadataReader reader,
                 TypeDefinitionHandle handle,
                 byte rawTypeKind
             ) => null;
+
             public TypeDesc GetTypeFromReference(
                 MetadataReader reader,
                 TypeReferenceHandle handle,
@@ -164,6 +174,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                 }
                 return type;
             }
+
             public TypeDesc GetTypeFromSpecification(
                 MetadataReader reader,
                 object genericContext,

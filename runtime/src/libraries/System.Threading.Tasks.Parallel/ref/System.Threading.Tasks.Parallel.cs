@@ -16,6 +16,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult For(
             int fromInclusive,
             int toExclusive,
@@ -24,6 +25,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult For(
             int fromInclusive,
             int toExclusive,
@@ -33,6 +35,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult For(
             int fromInclusive,
             int toExclusive,
@@ -42,6 +45,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult For(
             long fromInclusive,
             long toExclusive,
@@ -50,6 +54,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult For(
             long fromInclusive,
             long toExclusive,
@@ -58,6 +63,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult For(
             long fromInclusive,
             long toExclusive,
@@ -67,6 +73,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult For(
             long fromInclusive,
             long toExclusive,
@@ -76,6 +83,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource>(
             System.Collections.Concurrent.OrderablePartitioner<TSource> source,
             System.Action<TSource, System.Threading.Tasks.ParallelLoopState, long> body
@@ -83,6 +91,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource>(
             System.Collections.Concurrent.OrderablePartitioner<TSource> source,
             System.Threading.Tasks.ParallelOptions parallelOptions,
@@ -91,6 +100,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource>(
             System.Collections.Concurrent.Partitioner<TSource> source,
             System.Action<TSource, System.Threading.Tasks.ParallelLoopState> body
@@ -98,6 +108,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource>(
             System.Collections.Concurrent.Partitioner<TSource> source,
             System.Action<TSource> body
@@ -105,6 +116,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource>(
             System.Collections.Concurrent.Partitioner<TSource> source,
             System.Threading.Tasks.ParallelOptions parallelOptions,
@@ -113,6 +125,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource>(
             System.Collections.Concurrent.Partitioner<TSource> source,
             System.Threading.Tasks.ParallelOptions parallelOptions,
@@ -121,6 +134,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Action<TSource, System.Threading.Tasks.ParallelLoopState, long> body
@@ -128,6 +142,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Action<TSource, System.Threading.Tasks.ParallelLoopState> body
@@ -135,6 +150,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Action<TSource> body
@@ -142,6 +158,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Threading.Tasks.ParallelOptions parallelOptions,
@@ -150,6 +167,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Threading.Tasks.ParallelOptions parallelOptions,
@@ -158,6 +176,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Threading.Tasks.ParallelOptions parallelOptions,
@@ -166,6 +185,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource, TLocal>(
             System.Collections.Concurrent.OrderablePartitioner<TSource> source,
             System.Func<TLocal> localInit,
@@ -181,6 +201,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource, TLocal>(
             System.Collections.Concurrent.OrderablePartitioner<TSource> source,
             System.Threading.Tasks.ParallelOptions parallelOptions,
@@ -197,6 +218,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource, TLocal>(
             System.Collections.Concurrent.Partitioner<TSource> source,
             System.Func<TLocal> localInit,
@@ -206,6 +228,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource, TLocal>(
             System.Collections.Concurrent.Partitioner<TSource> source,
             System.Threading.Tasks.ParallelOptions parallelOptions,
@@ -216,6 +239,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource, TLocal>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TLocal> localInit,
@@ -231,6 +255,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource, TLocal>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TLocal> localInit,
@@ -240,6 +265,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource, TLocal>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Threading.Tasks.ParallelOptions parallelOptions,
@@ -256,6 +282,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult ForEach<TSource, TLocal>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Threading.Tasks.ParallelOptions parallelOptions,
@@ -266,6 +293,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task ForEachAsync<TSource>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, CancellationToken, ValueTask> body
@@ -273,6 +301,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task ForEachAsync<TSource>(
             System.Collections.Generic.IEnumerable<TSource> source,
             CancellationToken cancellationToken,
@@ -281,6 +310,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task ForEachAsync<TSource>(
             System.Collections.Generic.IEnumerable<TSource> source,
             System.Threading.Tasks.ParallelOptions parallelOptions,
@@ -289,6 +319,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task ForEachAsync<TSource>(
             System.Collections.Generic.IAsyncEnumerable<TSource> source,
             System.Func<TSource, CancellationToken, ValueTask> body
@@ -296,6 +327,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task ForEachAsync<TSource>(
             System.Collections.Generic.IAsyncEnumerable<TSource> source,
             CancellationToken cancellationToken,
@@ -304,6 +336,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task ForEachAsync<TSource>(
             System.Collections.Generic.IAsyncEnumerable<TSource> source,
             System.Threading.Tasks.ParallelOptions parallelOptions,
@@ -312,6 +345,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult For<TLocal>(
             int fromInclusive,
             int toExclusive,
@@ -322,6 +356,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult For<TLocal>(
             int fromInclusive,
             int toExclusive,
@@ -333,6 +368,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult For<TLocal>(
             long fromInclusive,
             long toExclusive,
@@ -343,6 +379,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Threading.Tasks.ParallelLoopResult For<TLocal>(
             long fromInclusive,
             long toExclusive,
@@ -354,12 +391,15 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static void Invoke(params System.Action[] actions) { }
+
         public static void Invoke(
             System.Threading.Tasks.ParallelOptions parallelOptions,
             params System.Action[] actions
         ) { }
     }
+
     public partial struct ParallelLoopResult
     {
         private int _dummyPrimitive;
@@ -372,9 +412,11 @@ namespace System.Threading.Tasks
             get { throw null; }
         }
     }
+
     public partial class ParallelLoopState
     {
         internal ParallelLoopState() { }
+
         public bool IsExceptional
         {
             get { throw null; }
@@ -391,12 +433,16 @@ namespace System.Threading.Tasks
         {
             get { throw null; }
         }
+
         public void Break() { }
+
         public void Stop() { }
     }
+
     public partial class ParallelOptions
     {
         public ParallelOptions() { }
+
         public System.Threading.CancellationToken CancellationToken
         {
             get { throw null; }

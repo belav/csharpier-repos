@@ -981,6 +981,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             public (string? x, int y)? NullableArgumentOfNullableStruct { get; set; }
 
             public record MyPoco { }
+
             public struct GenericStruct<T> { }
         }
 

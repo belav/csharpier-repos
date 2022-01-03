@@ -112,22 +112,27 @@ namespace Internal.JitInterface
             get { return (CorInfoType)_retType; }
             set { _retType = (byte)value; }
         }
+
         private CorInfoCallConv getCallConv()
         {
             return (CorInfoCallConv)((callConv & CorInfoCallConv.CORINFO_CALLCONV_MASK));
         }
+
         private bool hasThis()
         {
             return ((callConv & CorInfoCallConv.CORINFO_CALLCONV_HASTHIS) != 0);
         }
+
         private bool hasExplicitThis()
         {
             return ((callConv & CorInfoCallConv.CORINFO_CALLCONV_EXPLICITTHIS) != 0);
         }
+
         private uint totalILArgs()
         {
             return (uint)(numArgs + (hasThis() ? 1 : 0));
         }
+
         private bool isVarArg()
         {
             return (
@@ -135,6 +140,7 @@ namespace Internal.JitInterface
                 || (getCallConv() == CorInfoCallConv.CORINFO_CALLCONV_NATIVEVARARG)
             );
         }
+
         internal bool hasTypeArg()
         {
             return ((callConv & CorInfoCallConv.CORINFO_CALLCONV_PARAMTYPE) != 0);
@@ -535,6 +541,7 @@ namespace Internal.JitInterface
         CLASSID_ARGUMENT_HANDLE,
         CLASSID_RUNTIME_TYPE,
     }
+
     public enum CorInfoInline
     {
         INLINE_PASS = 0, // Inlining OK
@@ -826,6 +833,7 @@ namespace Internal.JitInterface
         public CORINFO_SIG_INFO args;
         public CORINFO_SIG_INFO locals;
     }
+
     //
     // what type of code region we are in
     //
@@ -903,6 +911,7 @@ namespace Internal.JitInterface
             public uint offsetOfReturnAddress;
             public uint offsetOfSPAfterProlog;
         }
+
         public InlinedCallFrameInfo inlinedCallFrameInfo;
 
         // Offsets into the Thread structure
@@ -1070,6 +1079,7 @@ namespace Internal.JitInterface
         //Verification information
         public uint verMethodFlags; // flags for CORINFO_RESOLVED_TOKEN::hMethod
         public CORINFO_SIG_INFO verSig;
+
         //All of the regular method data is the same... hMethod might not be the same as CORINFO_RESOLVED_TOKEN::hMethod
 
 
@@ -1254,6 +1264,7 @@ namespace Internal.JitInterface
         public const int SYSTEMV_MAX_NUM_FIELDS_IN_REGISTER_PASSED_STRUCT = 16; // Maximum number of fields in struct passed in registers
 
         public byte _passedInRegisters;
+
         // Whether the struct is passable/passed (this includes struct returning) in registers.
         public bool passedInRegisters
         {

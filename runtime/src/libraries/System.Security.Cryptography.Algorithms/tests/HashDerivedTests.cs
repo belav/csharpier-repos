@@ -46,42 +46,54 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         private class DerivedSHA1 : SHA1
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
 
         private class DerivedSHA256 : SHA256
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
 
         private class DerivedSHA384 : SHA384
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
 
         private class DerivedSHA512 : SHA512
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
 
         private class DerivedMD5 : MD5
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
 
         private class DerivedHMACMD5 : HMACMD5
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
     }

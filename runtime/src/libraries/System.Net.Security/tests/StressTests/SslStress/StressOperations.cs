@@ -33,10 +33,13 @@ namespace SslStress
         }
 
         public int Length { get; }
+
         public Memory<byte> AsMemory() => new Memory<byte>(_buffer, 0, Length);
+
         public Span<byte> AsSpan() => new Span<byte>(_buffer, 0, Length);
 
         public ulong Checksum => CRC.CalculateCRC(AsSpan());
+
         public void Return()
         {
             byte[] toReturn = _buffer;

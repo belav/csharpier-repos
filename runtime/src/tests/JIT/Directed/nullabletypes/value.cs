@@ -9,11 +9,15 @@
 using System;
 
 interface BaseInter { }
+
 interface GenInter<T> { }
 
 struct Struct { }
+
 struct ImplStruct : BaseInter { }
+
 struct OpenGenImplStruct<T> : GenInter<T> { }
+
 struct CloseGenImplStruct : GenInter<int> { }
 
 class Foo { }
@@ -21,6 +25,7 @@ class Foo { }
 class NullableTest1
 {
     public static int exceptionCounter = 0;
+
     //Nullable types with ?
     static int? i;
     static Struct? s;

@@ -22,6 +22,7 @@ namespace System.Speech.Recognition
         {
             Initialize(null);
         }
+
         public SpeechRecognitionEngine(CultureInfo culture)
         {
             Helpers.ThrowIfNull(culture, nameof(culture));
@@ -53,6 +54,7 @@ namespace System.Speech.Recognition
             // No match even with culture having the same parent
             throw new ArgumentException(SR.Get(SRID.RecognizerNotFound), nameof(culture));
         }
+
         public SpeechRecognitionEngine(string recognizerId)
         {
             Helpers.ThrowIfEmptyOrNull(recognizerId, nameof(recognizerId));
@@ -68,17 +70,20 @@ namespace System.Speech.Recognition
 
             throw new ArgumentException(SR.Get(SRID.RecognizerNotFound), nameof(recognizerId));
         }
+
         public SpeechRecognitionEngine(RecognizerInfo recognizerInfo)
         {
             Helpers.ThrowIfNull(recognizerInfo, nameof(recognizerInfo));
 
             Initialize(recognizerInfo);
         }
+
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing && !_disposed)
@@ -145,12 +150,14 @@ namespace System.Speech.Recognition
             get { return RecoBase.InitialSilenceTimeout; }
             set { RecoBase.InitialSilenceTimeout = value; }
         }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public TimeSpan BabbleTimeout
         {
             get { return RecoBase.BabbleTimeout; }
             set { RecoBase.BabbleTimeout = value; }
         }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public TimeSpan EndSilenceTimeout
         {
@@ -175,6 +182,7 @@ namespace System.Speech.Recognition
                 );
             }
         }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public TimeSpan EndSilenceTimeoutAmbiguous
         {
@@ -256,10 +264,12 @@ namespace System.Speech.Recognition
 
             RecoBase.SetInput(path);
         }
+
         public void SetInputToWaveStream(Stream audioSource)
         {
             RecoBase.SetInput(audioSource, null);
         }
+
         public void SetInputToAudioStream(Stream audioSource, SpeechAudioFormatInfo audioFormat)
         {
             Helpers.ThrowIfNull(audioSource, nameof(audioSource));
@@ -288,6 +298,7 @@ namespace System.Speech.Recognition
         {
             return RecoBase.Recognize(RecoBase.InitialSilenceTimeout);
         }
+
         public RecognitionResult Recognize(TimeSpan initialSilenceTimeout)
         {
             if (Grammars.Count == 0)
@@ -332,30 +343,37 @@ namespace System.Speech.Recognition
         {
             return RecoBase.QueryRecognizerSetting(settingName);
         }
+
         public void UpdateRecognizerSetting(string settingName, string updatedValue)
         {
             RecoBase.UpdateRecognizerSetting(settingName, updatedValue);
         }
+
         public void UpdateRecognizerSetting(string settingName, int updatedValue)
         {
             RecoBase.UpdateRecognizerSetting(settingName, updatedValue);
         }
+
         public void LoadGrammar(Grammar grammar)
         {
             RecoBase.LoadGrammar(grammar);
         }
+
         public void LoadGrammarAsync(Grammar grammar)
         {
             RecoBase.LoadGrammarAsync(grammar);
         }
+
         public void UnloadGrammar(Grammar grammar)
         {
             RecoBase.UnloadGrammar(grammar);
         }
+
         public void UnloadAllGrammars()
         {
             RecoBase.UnloadAllGrammars();
         }
+
         public RecognitionResult EmulateRecognize(string inputText)
         {
             return EmulateRecognize(
@@ -365,6 +383,7 @@ namespace System.Speech.Recognition
                     | CompareOptions.IgnoreWidth
             );
         }
+
         public RecognitionResult EmulateRecognize(string inputText, CompareOptions compareOptions)
         {
             if (Grammars.Count == 0)
@@ -374,6 +393,7 @@ namespace System.Speech.Recognition
 
             return RecoBase.EmulateRecognize(inputText, compareOptions);
         }
+
         public RecognitionResult EmulateRecognize(
             RecognizedWordUnit[] wordUnits,
             CompareOptions compareOptions
@@ -386,6 +406,7 @@ namespace System.Speech.Recognition
 
             return RecoBase.EmulateRecognize(wordUnits, compareOptions);
         }
+
         public void EmulateRecognizeAsync(string inputText)
         {
             EmulateRecognizeAsync(
@@ -395,6 +416,7 @@ namespace System.Speech.Recognition
                     | CompareOptions.IgnoreWidth
             );
         }
+
         public void EmulateRecognizeAsync(string inputText, CompareOptions compareOptions)
         {
             if (Grammars.Count == 0)
@@ -404,6 +426,7 @@ namespace System.Speech.Recognition
 
             RecoBase.EmulateRecognizeAsync(inputText, compareOptions);
         }
+
         public void EmulateRecognizeAsync(
             RecognizedWordUnit[] wordUnits,
             CompareOptions compareOptions
@@ -422,10 +445,12 @@ namespace System.Speech.Recognition
         {
             RecoBase.RequestRecognizerUpdate();
         }
+
         public void RequestRecognizerUpdate(object userToken)
         {
             RecoBase.RequestRecognizerUpdate(userToken);
         }
+
         public void RequestRecognizerUpdate(
             object userToken,
             TimeSpan audioPositionAheadToRaiseUpdate

@@ -45,6 +45,7 @@ public class ThreadSafe
     public string Val = string.Empty;
     private int numberOfIterations;
     private string strIn = string.Empty;
+
     public ThreadSafe(int loops, object obj)
     {
         signal = new ManualResetEvent(false);

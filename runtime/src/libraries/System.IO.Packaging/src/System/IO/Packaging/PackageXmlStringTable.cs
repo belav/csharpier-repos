@@ -240,6 +240,7 @@ namespace System.IO.Packaging
             private readonly object _nameString;
             private readonly PackageXmlEnum _namespace;
             private readonly string? _valueType;
+
             internal XmlStringTableStruct(object nameString, PackageXmlEnum ns, string? valueType)
             {
                 _nameString = nameString;

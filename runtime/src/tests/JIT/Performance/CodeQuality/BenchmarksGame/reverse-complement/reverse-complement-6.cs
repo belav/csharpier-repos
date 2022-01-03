@@ -49,7 +49,9 @@ namespace BenchmarksGame
                   ? offset
                   : read(stream, buffer, offset + bytesRead, count - bytesRead);
         }
+
         static Stream ReaderStream;
+
         static void Reader()
         {
             using (var stream = ReaderStream)
@@ -210,6 +212,7 @@ namespace BenchmarksGame
         }
 
         static Stream WriterStream;
+
         static void Writer()
         {
             using (var stream = WriterStream)

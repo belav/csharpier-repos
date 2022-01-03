@@ -36,6 +36,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> Add(Vector256<float> left, Vector256<float> right) =>
             Add(left, right);
+
         /// <summary>
         /// __m256d _mm256_add_pd (__m256d a, __m256d b)
         ///   VADDPD ymm, ymm, ymm/m256
@@ -49,6 +50,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> AddSubtract(Vector256<float> left, Vector256<float> right) =>
             AddSubtract(left, right);
+
         /// <summary>
         /// __m256d _mm256_addsub_pd (__m256d a, __m256d b)
         ///   VADDSUBPD ymm, ymm, ymm/m256
@@ -64,6 +66,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> And(Vector256<float> left, Vector256<float> right) =>
             And(left, right);
+
         /// <summary>
         /// __m256d _mm256_and_pd (__m256d a, __m256d b)
         ///   VANDPD ymm, ymm, ymm/m256
@@ -77,6 +80,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> AndNot(Vector256<float> left, Vector256<float> right) =>
             AndNot(left, right);
+
         /// <summary>
         /// __m256d _mm256_andnot_pd (__m256d a, __m256d b)
         ///   VANDNPD ymm, ymm, ymm/m256
@@ -93,6 +97,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> right,
             byte control
         ) => Blend(left, right, control);
+
         /// <summary>
         /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8)
         ///   VBLENDPD ymm, ymm, ymm/m256, imm8
@@ -112,6 +117,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> right,
             Vector256<float> mask
         ) => BlendVariable(left, right, mask);
+
         /// <summary>
         /// __m256d _mm256_blendv_pd (__m256d a, __m256d b, __m256d mask)
         ///   VBLENDVPD ymm, ymm, ymm/m256, ymm
@@ -135,6 +141,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static unsafe Vector256<float> BroadcastScalarToVector256(float* source) =>
             BroadcastScalarToVector256(source);
+
         /// <summary>
         /// __m256d _mm256_broadcast_sd (double const * mem_addr)
         ///   VBROADCASTSD ymm, m64
@@ -148,6 +155,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static unsafe Vector256<float> BroadcastVector128ToVector256(float* address) =>
             BroadcastVector128ToVector256(address);
+
         /// <summary>
         /// __m256d _mm256_broadcast_pd (__m128d const * mem_addr)
         ///   VBROADCASTF128, ymm, m128
@@ -160,6 +168,7 @@ namespace System.Runtime.Intrinsics.X86
         ///   VROUNDPS ymm, ymm/m256, imm8(10)
         /// </summary>
         public static Vector256<float> Ceiling(Vector256<float> value) => Ceiling(value);
+
         /// <summary>
         /// __m256d _mm256_ceil_pd (__m256d a)
         ///   VROUNDPD ymm, ymm/m256, imm8(10)
@@ -175,6 +184,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> right,
             FloatComparisonMode mode
         ) => Compare(left, right, mode);
+
         /// <summary>
         /// __m128d _mm_cmp_pd (__m128d a, __m128d b, const int imm8)
         ///   VCMPPD xmm, xmm, xmm/m128, imm8
@@ -184,6 +194,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> right,
             FloatComparisonMode mode
         ) => Compare(left, right, mode);
+
         /// <summary>
         /// __m256 _mm256_cmp_ps (__m256 a, __m256 b, const int imm8)
         ///   VCMPPS ymm, ymm, ymm/m256, imm8
@@ -193,6 +204,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> right,
             FloatComparisonMode mode
         ) => Compare(left, right, mode);
+
         /// <summary>
         /// __m256d _mm256_cmp_pd (__m256d a, __m256d b, const int imm8)
         ///   VCMPPD ymm, ymm, ymm/m256, imm8
@@ -212,6 +224,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => Compare(left, right, FloatComparisonMode.OrderedEqualNonSignaling);
+
         /// <summary>
         /// __m256d _mm256_cmpeq_pd (__m256d a,  __m256d b)
         ///   CMPPD ymm, ymm/m256, imm8(0)
@@ -231,6 +244,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => Compare(left, right, FloatComparisonMode.OrderedGreaterThanSignaling);
+
         /// <summary>
         /// __m256d _mm256_cmpgt_pd (__m256d a,  __m256d b)
         ///   CMPPD ymm, ymm/m256, imm8(14)
@@ -250,6 +264,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => Compare(left, right, FloatComparisonMode.OrderedGreaterThanOrEqualSignaling);
+
         /// <summary>
         /// __m256d _mm256_cmpge_pd (__m256d a,  __m256d b)
         ///   CMPPD ymm, ymm/m256, imm8(13)
@@ -269,6 +284,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => Compare(left, right, FloatComparisonMode.OrderedLessThanSignaling);
+
         /// <summary>
         /// __m256d _mm256_cmplt_pd (__m256d a,  __m256d b)
         ///   CMPPD ymm, ymm/m256, imm8(1)
@@ -288,6 +304,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => Compare(left, right, FloatComparisonMode.OrderedLessThanOrEqualSignaling);
+
         /// <summary>
         /// __m256d _mm256_cmple_pd (__m256d a,  __m256d b)
         ///   CMPPD ymm, ymm/m256, imm8(2)
@@ -307,6 +324,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => Compare(left, right, FloatComparisonMode.UnorderedNotEqualNonSignaling);
+
         /// <summary>
         /// __m256d _mm256_cmpneq_pd (__m256d a,  __m256d b)
         ///   CMPPD ymm, ymm/m256, imm8(4)
@@ -326,6 +344,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => Compare(left, right, FloatComparisonMode.UnorderedNotGreaterThanSignaling);
+
         /// <summary>
         /// __m256d _mm256_cmpngt_pd (__m256d a,  __m256d b)
         ///   CMPPD ymm, ymm/m256, imm8(10)
@@ -345,6 +364,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => Compare(left, right, FloatComparisonMode.UnorderedNotGreaterThanOrEqualSignaling);
+
         /// <summary>
         /// __m256d _mm256_cmpnge_pd (__m256d a,  __m256d b)
         ///   CMPPD ymm, ymm/m256, imm8(9)
@@ -364,6 +384,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => Compare(left, right, FloatComparisonMode.UnorderedNotLessThanSignaling);
+
         /// <summary>
         /// __m256d _mm256_cmpnlt_pd (__m256d a,  __m256d b)
         ///   CMPPD ymm, ymm/m256, imm8(5)
@@ -383,6 +404,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => Compare(left, right, FloatComparisonMode.UnorderedNotLessThanOrEqualSignaling);
+
         /// <summary>
         /// __m256d _mm256_cmpnle_pd (__m256d a,  __m256d b)
         ///   CMPPD ymm, ymm/m256, imm8(6)
@@ -402,6 +424,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => Compare(left, right, FloatComparisonMode.OrderedNonSignaling);
+
         /// <summary>
         /// __m256d _mm256_cmpord_pd (__m256d a,  __m256d b)
         ///   CMPPD ymm, ymm/m256, imm8(7)
@@ -421,6 +444,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> right,
             FloatComparisonMode mode
         ) => CompareScalar(left, right, mode);
+
         /// <summary>
         /// __m128 _mm_cmp_ss (__m128 a, __m128 b, const int imm8)
         ///   VCMPSD xmm, xmm, xmm/m64, imm8
@@ -440,6 +464,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => Compare(left, right, FloatComparisonMode.UnorderedNonSignaling);
+
         /// <summary>
         /// __m256d _mm256_cmpunord_pd (__m256d a,  __m256d b)
         ///   CMPPD ymm, ymm/m256, imm8(3)
@@ -456,30 +481,35 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector128<int> ConvertToVector128Int32(Vector256<double> value) =>
             ConvertToVector128Int32(value);
+
         /// <summary>
         /// __m128 _mm256_cvtpd_ps (__m256d a)
         ///   VCVTPD2PS xmm, ymm/m256
         /// </summary>
         public static Vector128<float> ConvertToVector128Single(Vector256<double> value) =>
             ConvertToVector128Single(value);
+
         /// <summary>
         /// __m256i _mm256_cvtps_epi32 (__m256 a)
         ///   VCVTPS2DQ ymm, ymm/m256
         /// </summary>
         public static Vector256<int> ConvertToVector256Int32(Vector256<float> value) =>
             ConvertToVector256Int32(value);
+
         /// <summary>
         /// __m256 _mm256_cvtepi32_ps (__m256i a)
         ///   VCVTDQ2PS ymm, ymm/m256
         /// </summary>
         public static Vector256<float> ConvertToVector256Single(Vector256<int> value) =>
             ConvertToVector256Single(value);
+
         /// <summary>
         /// __m256d _mm256_cvtps_pd (__m128 a)
         ///   VCVTPS2PD ymm, xmm/m128
         /// </summary>
         public static Vector256<double> ConvertToVector256Double(Vector128<float> value) =>
             ConvertToVector256Double(value);
+
         /// <summary>
         /// __m256d _mm256_cvtepi32_pd (__m128i a)
         ///   VCVTDQ2PD ymm, xmm/m128
@@ -494,6 +524,7 @@ namespace System.Runtime.Intrinsics.X86
         public static Vector128<int> ConvertToVector128Int32WithTruncation(
             Vector256<double> value
         ) => ConvertToVector128Int32WithTruncation(value);
+
         /// <summary>
         /// __m256i _mm256_cvttps_epi32 (__m256 a)
         ///   VCVTTPS2DQ ymm, ymm/m256
@@ -508,6 +539,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> Divide(Vector256<float> left, Vector256<float> right) =>
             Divide(left, right);
+
         /// <summary>
         /// __m256d _mm256_div_pd (__m256d a, __m256d b)
         ///   VDIVPD ymm, ymm, ymm/m256
@@ -531,6 +563,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> DuplicateEvenIndexed(Vector256<float> value) =>
             DuplicateEvenIndexed(value);
+
         /// <summary>
         /// __m256d _mm256_movedup_pd (__m256d a)
         ///   VMOVDDUP ymm, ymm/m256
@@ -620,6 +653,7 @@ namespace System.Runtime.Intrinsics.X86
         ///   VROUNDPS ymm, ymm/m256, imm8(9)
         /// </summary>
         public static Vector256<float> Floor(Vector256<float> value) => Floor(value);
+
         /// <summary>
         /// __m256d _mm256_floor_pd (__m256d a)
         ///   VROUNDPS ymm, ymm/m256, imm8(9)
@@ -634,6 +668,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => HorizontalAdd(left, right);
+
         /// <summary>
         /// __m256d _mm256_hadd_pd (__m256d a, __m256d b)
         ///   VHADDPD ymm, ymm, ymm/m256
@@ -651,6 +686,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> left,
             Vector256<float> right
         ) => HorizontalSubtract(left, right);
+
         /// <summary>
         /// __m256d _mm256_hsub_pd (__m256d a, __m256d b)
         ///   VHSUBPD ymm, ymm, ymm/m256
@@ -766,50 +802,59 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static unsafe Vector256<sbyte> LoadVector256(sbyte* address) =>
             LoadVector256(address);
+
         /// <summary>
         /// __m256i _mm256_loadu_si256 (__m256i const * mem_addr)
         ///   VMOVDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<byte> LoadVector256(byte* address) => LoadVector256(address);
+
         /// <summary>
         /// __m256i _mm256_loadu_si256 (__m256i const * mem_addr)
         ///   VMOVDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<short> LoadVector256(short* address) =>
             LoadVector256(address);
+
         /// <summary>
         /// __m256i _mm256_loadu_si256 (__m256i const * mem_addr)
         ///   VMOVDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<ushort> LoadVector256(ushort* address) =>
             LoadVector256(address);
+
         /// <summary>
         /// __m256i _mm256_loadu_si256 (__m256i const * mem_addr)
         ///   VMOVDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<int> LoadVector256(int* address) => LoadVector256(address);
+
         /// <summary>
         /// __m256i _mm256_loadu_si256 (__m256i const * mem_addr)
         ///   VMOVDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<uint> LoadVector256(uint* address) => LoadVector256(address);
+
         /// <summary>
         /// __m256i _mm256_loadu_si256 (__m256i const * mem_addr)
         ///   VMOVDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<long> LoadVector256(long* address) => LoadVector256(address);
+
         /// <summary>
         /// __m256i _mm256_loadu_si256 (__m256i const * mem_addr)
         ///   VMOVDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<ulong> LoadVector256(ulong* address) =>
             LoadVector256(address);
+
         /// <summary>
         /// __m256 _mm256_loadu_ps (float const * mem_addr)
         ///   VMOVUPS ymm, ymm/m256
         /// </summary>
         public static unsafe Vector256<float> LoadVector256(float* address) =>
             LoadVector256(address);
+
         /// <summary>
         /// __m256d _mm256_loadu_pd (double const * mem_addr)
         ///   VMOVUPD ymm, ymm/m256
@@ -823,54 +868,63 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static unsafe Vector256<sbyte> LoadAlignedVector256(sbyte* address) =>
             LoadAlignedVector256(address);
+
         /// <summary>
         /// __m256i _mm256_load_si256 (__m256i const * mem_addr)
         ///   VMOVDQA ymm, m256
         /// </summary>
         public static unsafe Vector256<byte> LoadAlignedVector256(byte* address) =>
             LoadAlignedVector256(address);
+
         /// <summary>
         /// __m256i _mm256_load_si256 (__m256i const * mem_addr)
         ///   VMOVDQA ymm, m256
         /// </summary>
         public static unsafe Vector256<short> LoadAlignedVector256(short* address) =>
             LoadAlignedVector256(address);
+
         /// <summary>
         /// __m256i _mm256_load_si256 (__m256i const * mem_addr)
         ///   VMOVDQA ymm, m256
         /// </summary>
         public static unsafe Vector256<ushort> LoadAlignedVector256(ushort* address) =>
             LoadAlignedVector256(address);
+
         /// <summary>
         /// __m256i _mm256_load_si256 (__m256i const * mem_addr)
         ///   VMOVDQA ymm, m256
         /// </summary>
         public static unsafe Vector256<int> LoadAlignedVector256(int* address) =>
             LoadAlignedVector256(address);
+
         /// <summary>
         /// __m256i _mm256_load_si256 (__m256i const * mem_addr)
         ///   VMOVDQA ymm, m256
         /// </summary>
         public static unsafe Vector256<uint> LoadAlignedVector256(uint* address) =>
             LoadAlignedVector256(address);
+
         /// <summary>
         /// __m256i _mm256_load_si256 (__m256i const * mem_addr)
         ///   VMOVDQA ymm, m256
         /// </summary>
         public static unsafe Vector256<long> LoadAlignedVector256(long* address) =>
             LoadAlignedVector256(address);
+
         /// <summary>
         /// __m256i _mm256_load_si256 (__m256i const * mem_addr)
         ///   VMOVDQA ymm, m256
         /// </summary>
         public static unsafe Vector256<ulong> LoadAlignedVector256(ulong* address) =>
             LoadAlignedVector256(address);
+
         /// <summary>
         /// __m256 _mm256_load_ps (float const * mem_addr)
         ///   VMOVAPS ymm, ymm/m256
         /// </summary>
         public static unsafe Vector256<float> LoadAlignedVector256(float* address) =>
             LoadAlignedVector256(address);
+
         /// <summary>
         /// __m256d _mm256_load_pd (double const * mem_addr)
         ///   VMOVAPD ymm, ymm/m256
@@ -884,42 +938,49 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static unsafe Vector256<sbyte> LoadDquVector256(sbyte* address) =>
             LoadDquVector256(address);
+
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr)
         ///   VLDDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<byte> LoadDquVector256(byte* address) =>
             LoadDquVector256(address);
+
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr)
         ///   VLDDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<short> LoadDquVector256(short* address) =>
             LoadDquVector256(address);
+
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr)
         ///   VLDDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<ushort> LoadDquVector256(ushort* address) =>
             LoadDquVector256(address);
+
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr)
         ///   VLDDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<int> LoadDquVector256(int* address) =>
             LoadDquVector256(address);
+
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr)
         ///   VLDDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<uint> LoadDquVector256(uint* address) =>
             LoadDquVector256(address);
+
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr)
         ///   VLDDQU ymm, m256
         /// </summary>
         public static unsafe Vector256<long> LoadDquVector256(long* address) =>
             LoadDquVector256(address);
+
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr)
         ///   VLDDQU ymm, m256
@@ -933,6 +994,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static unsafe Vector128<float> MaskLoad(float* address, Vector128<float> mask) =>
             MaskLoad(address, mask);
+
         /// <summary>
         /// __m128d _mm_maskload_pd (double const * mem_addr, __m128i mask)
         ///   VMASKMOVPD xmm, xmm, m128
@@ -946,6 +1008,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static unsafe Vector256<float> MaskLoad(float* address, Vector256<float> mask) =>
             MaskLoad(address, mask);
+
         /// <summary>
         /// __m256d _mm256_maskload_pd (double const * mem_addr, __m256i mask)
         ///   VMASKMOVPD ymm, ymm, m256
@@ -962,6 +1025,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<float> mask,
             Vector128<float> source
         ) => MaskStore(address, mask, source);
+
         /// <summary>
         /// void _mm_maskstore_pd (double * mem_addr, __m128i mask, __m128d a)
         ///   VMASKMOVPD m128, xmm, xmm
@@ -981,6 +1045,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> mask,
             Vector256<float> source
         ) => MaskStore(address, mask, source);
+
         /// <summary>
         /// void _mm256_maskstore_pd (double * mem_addr, __m256i mask, __m256d a)
         ///   VMASKMOVPD m256, ymm, ymm
@@ -997,6 +1062,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> Max(Vector256<float> left, Vector256<float> right) =>
             Max(left, right);
+
         /// <summary>
         /// __m256d _mm256_max_pd (__m256d a, __m256d b)
         ///   VMAXPD ymm, ymm, ymm/m256
@@ -1010,6 +1076,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> Min(Vector256<float> left, Vector256<float> right) =>
             Min(left, right);
+
         /// <summary>
         /// __m256d _mm256_min_pd (__m256d a, __m256d b)
         ///   VMINPD ymm, ymm, ymm/m256
@@ -1022,6 +1089,7 @@ namespace System.Runtime.Intrinsics.X86
         ///   VMOVMSKPS reg, ymm
         /// </summary>
         public static int MoveMask(Vector256<float> value) => MoveMask(value);
+
         /// <summary>
         /// int _mm256_movemask_pd (__m256d a)
         ///   VMOVMSKPD reg, ymm
@@ -1034,6 +1102,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> Multiply(Vector256<float> left, Vector256<float> right) =>
             Multiply(left, right);
+
         /// <summary>
         /// __m256d _mm256_mul_pd (__m256d a, __m256d b)
         ///   VMULPD ymm, ymm, ymm/m256
@@ -1047,6 +1116,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> Or(Vector256<float> left, Vector256<float> right) =>
             Or(left, right);
+
         /// <summary>
         /// __m256d _mm256_or_pd (__m256d a, __m256d b)
         ///   VORPD ymm, ymm, ymm/m256
@@ -1060,6 +1130,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector128<float> Permute(Vector128<float> value, byte control) =>
             Permute(value, control);
+
         /// <summary>
         /// __m128d _mm_permute_pd (__m128d a, int imm8)
         ///   VPERMILPD xmm, xmm, imm8
@@ -1073,6 +1144,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> Permute(Vector256<float> value, byte control) =>
             Permute(value, control);
+
         /// <summary>
         /// __m256d _mm256_permute_pd (__m256d a, int imm8)
         ///   VPERMILPD ymm, ymm, imm8
@@ -1159,6 +1231,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<ulong> right,
             byte control
         ) => Permute2x128(left, right, control);
+
         /// <summary>
         /// __m256 _mm256_permute2f128_ps (__m256 a, __m256 b, int imm8)
         ///   VPERM2F128 ymm, ymm, ymm/m256, imm8
@@ -1185,6 +1258,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector128<float> PermuteVar(Vector128<float> left, Vector128<int> control) =>
             PermuteVar(left, control);
+
         /// <summary>
         /// __m128d _mm_permutevar_pd (__m128d a, __m128i b)
         ///   VPERMILPD xmm, xmm, xmm/m128
@@ -1193,12 +1267,14 @@ namespace System.Runtime.Intrinsics.X86
             Vector128<double> left,
             Vector128<long> control
         ) => PermuteVar(left, control);
+
         /// <summary>
         /// __m256 _mm256_permutevar_ps (__m256 a, __m256i b)
         ///   VPERMILPS ymm, ymm, ymm/m256
         /// </summary>
         public static Vector256<float> PermuteVar(Vector256<float> left, Vector256<int> control) =>
             PermuteVar(left, control);
+
         /// <summary>
         /// __m256d _mm256_permutevar_pd (__m256d a, __m256i b)
         ///   VPERMILPD ymm, ymm, ymm/m256
@@ -1227,23 +1303,27 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> RoundToNearestInteger(Vector256<float> value) =>
             RoundToNearestInteger(value);
+
         /// <summary>
         /// __m256 _mm256_round_ps (__m256 a, _MM_FROUND_TO_NEG_INF | _MM_FROUND_NO_EXC)
         ///   VROUNDPS ymm, ymm/m256, imm8(9)
         /// </summary>
         public static Vector256<float> RoundToNegativeInfinity(Vector256<float> value) =>
             RoundToNegativeInfinity(value);
+
         /// <summary>
         /// __m256 _mm256_round_ps (__m256 a, _MM_FROUND_TO_POS_INF | _MM_FROUND_NO_EXC)
         ///   VROUNDPS ymm, ymm/m256, imm8(10)
         /// </summary>
         public static Vector256<float> RoundToPositiveInfinity(Vector256<float> value) =>
             RoundToPositiveInfinity(value);
+
         /// <summary>
         /// __m256 _mm256_round_ps (__m256 a, _MM_FROUND_TO_ZERO | _MM_FROUND_NO_EXC)
         ///   VROUNDPS ymm, ymm/m256, imm8(11)
         /// </summary>
         public static Vector256<float> RoundToZero(Vector256<float> value) => RoundToZero(value);
+
         /// <summary>
         /// __m256 _mm256_round_ps (__m256 a, _MM_FROUND_CUR_DIRECTION)
         ///   VROUNDPS ymm, ymm/m256, imm8(4)
@@ -1257,23 +1337,27 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<double> RoundToNearestInteger(Vector256<double> value) =>
             RoundToNearestInteger(value);
+
         /// <summary>
         /// __m256d _mm256_round_pd (__m256d a, _MM_FROUND_TO_NEG_INF | _MM_FROUND_NO_EXC)
         ///   VROUNDPD ymm, ymm/m256, imm8(9)
         /// </summary>
         public static Vector256<double> RoundToNegativeInfinity(Vector256<double> value) =>
             RoundToNegativeInfinity(value);
+
         /// <summary>
         /// __m256d _mm256_round_pd (__m256d a, _MM_FROUND_TO_POS_INF | _MM_FROUND_NO_EXC)
         ///   VROUNDPD ymm, ymm/m256, imm8(10)
         /// </summary>
         public static Vector256<double> RoundToPositiveInfinity(Vector256<double> value) =>
             RoundToPositiveInfinity(value);
+
         /// <summary>
         /// __m256d _mm256_round_pd (__m256d a, _MM_FROUND_TO_ZERO | _MM_FROUND_NO_EXC)
         ///   VROUNDPD ymm, ymm/m256, imm8(11)
         /// </summary>
         public static Vector256<double> RoundToZero(Vector256<double> value) => RoundToZero(value);
+
         /// <summary>
         /// __m256d _mm256_round_pd (__m256d a, _MM_FROUND_CUR_DIRECTION)
         ///   VROUNDPD ymm, ymm/m256, imm8(4)
@@ -1290,6 +1374,7 @@ namespace System.Runtime.Intrinsics.X86
             Vector256<float> right,
             byte control
         ) => Shuffle(value, right, control);
+
         /// <summary>
         /// __m256d _mm256_shuffle_pd (__m256d a, __m256d b, const int imm8)
         ///   VSHUFPD ymm, ymm, ymm/m256, imm8
@@ -1305,6 +1390,7 @@ namespace System.Runtime.Intrinsics.X86
         ///   VSQRTPS ymm, ymm/m256
         /// </summary>
         public static Vector256<float> Sqrt(Vector256<float> value) => Sqrt(value);
+
         /// <summary>
         /// __m256d _mm256_sqrt_pd (__m256d a)
         ///   VSQRTPD ymm, ymm/m256
@@ -1317,54 +1403,63 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static unsafe void StoreAligned(sbyte* address, Vector256<sbyte> source) =>
             StoreAligned(address, source);
+
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQA m256, ymm
         /// </summary>
         public static unsafe void StoreAligned(byte* address, Vector256<byte> source) =>
             StoreAligned(address, source);
+
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQA m256, ymm
         /// </summary>
         public static unsafe void StoreAligned(short* address, Vector256<short> source) =>
             StoreAligned(address, source);
+
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQA m256, ymm
         /// </summary>
         public static unsafe void StoreAligned(ushort* address, Vector256<ushort> source) =>
             StoreAligned(address, source);
+
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQA m256, ymm
         /// </summary>
         public static unsafe void StoreAligned(int* address, Vector256<int> source) =>
             StoreAligned(address, source);
+
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQA m256, ymm
         /// </summary>
         public static unsafe void StoreAligned(uint* address, Vector256<uint> source) =>
             StoreAligned(address, source);
+
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQA m256, ymm
         /// </summary>
         public static unsafe void StoreAligned(long* address, Vector256<long> source) =>
             StoreAligned(address, source);
+
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQA m256, ymm
         /// </summary>
         public static unsafe void StoreAligned(ulong* address, Vector256<ulong> source) =>
             StoreAligned(address, source);
+
         /// <summary>
         /// void _mm256_store_ps (float * mem_addr, __m256 a)
         ///   VMOVAPS m256, ymm
         /// </summary>
         public static unsafe void StoreAligned(float* address, Vector256<float> source) =>
             StoreAligned(address, source);
+
         /// <summary>
         /// void _mm256_store_pd (double * mem_addr, __m256d a)
         ///   VMOVAPD m256, ymm
@@ -1380,12 +1475,14 @@ namespace System.Runtime.Intrinsics.X86
             sbyte* address,
             Vector256<sbyte> source
         ) => StoreAlignedNonTemporal(address, source);
+
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a)
         ///   VMOVNTDQ m256, ymm
         /// </summary>
         public static unsafe void StoreAlignedNonTemporal(byte* address, Vector256<byte> source) =>
             StoreAlignedNonTemporal(address, source);
+
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a)
         ///   VMOVNTDQ m256, ymm
@@ -1394,6 +1491,7 @@ namespace System.Runtime.Intrinsics.X86
             short* address,
             Vector256<short> source
         ) => StoreAlignedNonTemporal(address, source);
+
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a)
         ///   VMOVNTDQ m256, ymm
@@ -1402,24 +1500,28 @@ namespace System.Runtime.Intrinsics.X86
             ushort* address,
             Vector256<ushort> source
         ) => StoreAlignedNonTemporal(address, source);
+
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a)
         ///   VMOVNTDQ m256, ymm
         /// </summary>
         public static unsafe void StoreAlignedNonTemporal(int* address, Vector256<int> source) =>
             StoreAlignedNonTemporal(address, source);
+
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a)
         ///   VMOVNTDQ m256, ymm
         /// </summary>
         public static unsafe void StoreAlignedNonTemporal(uint* address, Vector256<uint> source) =>
             StoreAlignedNonTemporal(address, source);
+
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a)
         ///   VMOVNTDQ m256, ymm
         /// </summary>
         public static unsafe void StoreAlignedNonTemporal(long* address, Vector256<long> source) =>
             StoreAlignedNonTemporal(address, source);
+
         /// <summary>
         /// void _mm256_stream_si256 (__m256i * mem_addr, __m256i a)
         ///   VMOVNTDQ m256, ymm
@@ -1428,6 +1530,7 @@ namespace System.Runtime.Intrinsics.X86
             ulong* address,
             Vector256<ulong> source
         ) => StoreAlignedNonTemporal(address, source);
+
         /// <summary>
         /// void _mm256_stream_ps (float * mem_addr, __m256 a)
         ///   MOVNTPS m256, ymm
@@ -1436,6 +1539,7 @@ namespace System.Runtime.Intrinsics.X86
             float* address,
             Vector256<float> source
         ) => StoreAlignedNonTemporal(address, source);
+
         /// <summary>
         /// void _mm256_stream_pd (double * mem_addr, __m256d a)
         ///   MOVNTPD m256, ymm
@@ -1451,54 +1555,63 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static unsafe void Store(sbyte* address, Vector256<sbyte> source) =>
             Store(address, source);
+
         /// <summary>
         /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQU m256, ymm
         /// </summary>
         public static unsafe void Store(byte* address, Vector256<byte> source) =>
             Store(address, source);
+
         /// <summary>
         /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQU m256, ymm
         /// </summary>
         public static unsafe void Store(short* address, Vector256<short> source) =>
             Store(address, source);
+
         /// <summary>
         /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQU m256, ymm
         /// </summary>
         public static unsafe void Store(ushort* address, Vector256<ushort> source) =>
             Store(address, source);
+
         /// <summary>
         /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQU m256, ymm
         /// </summary>
         public static unsafe void Store(int* address, Vector256<int> source) =>
             Store(address, source);
+
         /// <summary>
         /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQU m256, ymm
         /// </summary>
         public static unsafe void Store(uint* address, Vector256<uint> source) =>
             Store(address, source);
+
         /// <summary>
         /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQU m256, ymm
         /// </summary>
         public static unsafe void Store(long* address, Vector256<long> source) =>
             Store(address, source);
+
         /// <summary>
         /// void _mm256_storeu_si256 (__m256i * mem_addr, __m256i a)
         ///   MOVDQU m256, ymm
         /// </summary>
         public static unsafe void Store(ulong* address, Vector256<ulong> source) =>
             Store(address, source);
+
         /// <summary>
         /// void _mm256_storeu_ps (float * mem_addr, __m256 a)
         ///   MOVUPS m256, ymm
         /// </summary>
         public static unsafe void Store(float* address, Vector256<float> source) =>
             Store(address, source);
+
         /// <summary>
         /// void _mm256_storeu_pd (double * mem_addr, __m256d a)
         ///   MOVUPD m256, ymm
@@ -1512,6 +1625,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> Subtract(Vector256<float> left, Vector256<float> right) =>
             Subtract(left, right);
+
         /// <summary>
         /// __m256d _mm256_sub_pd (__m256d a, __m256d b)
         ///   VSUBPD ymm, ymm, ymm/m256
@@ -1525,6 +1639,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static bool TestC(Vector128<float> left, Vector128<float> right) =>
             TestC(left, right);
+
         /// <summary>
         /// int _mm_testc_pd (__m128d a, __m128d b)
         ///   VTESTPD xmm, xmm/m128
@@ -1604,6 +1719,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static bool TestNotZAndNotC(Vector128<float> left, Vector128<float> right) =>
             TestNotZAndNotC(left, right);
+
         /// <summary>
         /// int _mm_testnzc_pd (__m128d a, __m128d b)
         ///   VTESTPD xmm, xmm/m128
@@ -1687,6 +1803,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static bool TestZ(Vector128<float> left, Vector128<float> right) =>
             TestZ(left, right);
+
         /// <summary>
         /// int _mm_testz_pd (__m128d a, __m128d b)
         ///   VTESTPD xmm, xmm/m128
@@ -1766,6 +1883,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> UnpackHigh(Vector256<float> left, Vector256<float> right) =>
             UnpackHigh(left, right);
+
         /// <summary>
         /// __m256d _mm256_unpackhi_pd (__m256d a, __m256d b)
         ///   VUNPCKHPD ymm, ymm, ymm/m256
@@ -1781,6 +1899,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> UnpackLow(Vector256<float> left, Vector256<float> right) =>
             UnpackLow(left, right);
+
         /// <summary>
         /// __m256d _mm256_unpacklo_pd (__m256d a, __m256d b)
         ///   VUNPCKLPD ymm, ymm, ymm/m256
@@ -1796,6 +1915,7 @@ namespace System.Runtime.Intrinsics.X86
         /// </summary>
         public static Vector256<float> Xor(Vector256<float> left, Vector256<float> right) =>
             Xor(left, right);
+
         /// <summary>
         /// __m256d _mm256_xor_pd (__m256d a, __m256d b)
         ///   VXORPS ymm, ymm, ymm/m256

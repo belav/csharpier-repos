@@ -241,6 +241,7 @@ namespace System.Numerics.Tests
             array[^1] = 0xFF;
             return array;
         }
+
         private static byte[] GetRandomLengthFirstUIntMaxSecondUIntMSBMaxArray(Random random)
         {
             int gap = random.Next(0, 128);

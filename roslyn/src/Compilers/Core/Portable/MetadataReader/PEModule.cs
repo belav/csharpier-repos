@@ -106,6 +106,7 @@ namespace Microsoft.CodeAnalysis
             CrackIntInAttributeValue;
         private static readonly AttributeValueExtractor<long> s_attributeLongValueExtractor =
             CrackLongInAttributeValue;
+
         // Note: not a general purpose helper
         private static readonly AttributeValueExtractor<decimal> s_decimalValueInDecimalConstantAttributeExtractor =
             CrackDecimalInDecimalConstantAttribute;
@@ -148,6 +149,7 @@ namespace Microsoft.CodeAnalysis
             public readonly bool Sense;
             public readonly string? String;
         }
+
 #nullable disable
 
         // 'ignoreAssemblyRefs' is used by the EE only, when debugging
@@ -1420,6 +1422,7 @@ namespace Microsoft.CodeAnalysis
 
             return (default, true);
         }
+
 #nullable disable
 
         internal bool HasMaybeNullWhenOrNotNullWhenOrDoesNotReturnIfAttribute(
@@ -1838,6 +1841,7 @@ namespace Microsoft.CodeAnalysis
             blobReader = default;
             return false;
         }
+
 #nullable disable
 
         private ObsoleteAttributeData TryExtractDeprecatedDataFromAttribute(
@@ -2113,6 +2117,7 @@ namespace Microsoft.CodeAnalysis
             value = default(T);
             return false;
         }
+
 #nullable disable
 
         internal bool HasStringValuedAttribute(
@@ -2537,6 +2542,7 @@ namespace Microsoft.CodeAnalysis
             value = default(ImmutableArray<byte>);
             return false;
         }
+
 #nullable disable
 
         internal struct AttributeInfo

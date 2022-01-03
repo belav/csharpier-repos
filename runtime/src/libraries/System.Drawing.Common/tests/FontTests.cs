@@ -1236,6 +1236,7 @@ namespace System.Drawing.Tests
             public byte lfClipPrecision;
             public byte lfQuality;
             public byte lfPitchAndFamily;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
             public string lfFaceName;
         }
@@ -1415,6 +1416,7 @@ namespace System.Drawing.Tests
             public byte lfClipPrecision;
             public byte lfQuality;
             public byte lfPitchAndFamily;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
             public string lfFaceName;
         }

@@ -13,6 +13,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
     }
+
     public readonly partial struct AssemblyReference
     {
         public System.Reflection.AssemblyName GetAssemblyName()
@@ -20,6 +21,7 @@ namespace System.Reflection.Metadata
             throw null;
         }
     }
+
     public partial class ImageFormatLimitationException : System.Exception
     {
         protected ImageFormatLimitationException(

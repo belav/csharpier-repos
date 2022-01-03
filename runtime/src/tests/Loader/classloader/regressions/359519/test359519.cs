@@ -21,6 +21,7 @@ class MainClass
     public struct Root
     {
         public static byte byte1;
+
         [FieldOffset(8)]
         public Variable var1;
     }

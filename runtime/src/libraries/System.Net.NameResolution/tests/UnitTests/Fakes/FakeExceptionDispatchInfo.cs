@@ -6,7 +6,9 @@ namespace System.Runtime.ExceptionServices
     internal class ExceptionDispatchInfo
     {
         public static ExceptionDispatchInfo Capture(Exception source) => null;
+
         public static void Throw(Exception source) => throw source;
+
         public void Throw() => throw null;
     }
 }

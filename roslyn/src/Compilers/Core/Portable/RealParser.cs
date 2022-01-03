@@ -250,7 +250,9 @@ namespace Microsoft.CodeAnalysis
         private sealed class FloatFloatingPointType : FloatingPointType
         {
             public static FloatFloatingPointType Instance = new FloatFloatingPointType();
+
             private FloatFloatingPointType() { }
+
             public override ushort DenormalMantissaBits => 23;
             public override ushort ExponentBits => 8;
             public override int MaxBinaryExponent => 127;
@@ -265,7 +267,9 @@ namespace Microsoft.CodeAnalysis
         private sealed class DoubleFloatingPointType : FloatingPointType
         {
             public static DoubleFloatingPointType Instance = new DoubleFloatingPointType();
+
             private DoubleFloatingPointType() { }
+
             public override ushort DenormalMantissaBits => 52;
             public override ushort ExponentBits => 11;
             public override int MaxBinaryExponent => 1023;
@@ -856,6 +860,7 @@ namespace Microsoft.CodeAnalysis
         {
             [FieldOffset(0)]
             public uint IntData;
+
             [FieldOffset(0)]
             public float FloatData;
         }

@@ -13,12 +13,14 @@ namespace LargeArr_CrdMrk
     {
         public object oRef = null;
     }
+
     class LargeArr_CrdMrk
     {
         public static int LISTSIZE = 30000000;
         public static int ITERATIONS = 20;
         public static int STEP = 10;
         public static int SEED = 1234;
+
         static int Main(string[] args)
         {
             ParseArgs(args);
@@ -66,6 +68,7 @@ namespace LargeArr_CrdMrk
 
             return 100;
         }
+
         static void ParseArgs(string[] args)
         {
             if (args.Length > 0)

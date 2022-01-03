@@ -49,6 +49,7 @@ namespace System.Reflection.TypeLoading
         /// Returns null if the specific core type did not exist or could not be loaded. Call GetException(coreType) to get detailed info.
         /// </summary>
         public RoType? this[CoreType coreType] => _coreTypes[(int)coreType];
+
         public Exception? GetException(CoreType coreType) => _exceptions[(int)coreType];
     }
 }

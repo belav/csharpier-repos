@@ -877,8 +877,11 @@ namespace System.Diagnostics.Tests
             {
                 _callback = callback;
             }
+
             public void OnCompleted() { }
+
             public void OnError(Exception error) { }
+
             public void OnNext(T value)
             {
                 _callback(value);
@@ -954,6 +957,7 @@ namespace System.Diagnostics.Tests
                 new ConcurrentQueue<KeyValuePair<string, object>>();
 
             public void OnCompleted() { }
+
             public void OnError(Exception error) { }
 
             public void OnNext(KeyValuePair<string, object> record)

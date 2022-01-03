@@ -495,17 +495,25 @@ namespace System.Threading
         // Currently, no special handling is done for critical regions, and no special handling is necessary to ensure thread
         // affinity. If that changes, the relevant functions would instead need to delegate to RuntimeThread.
         public static void BeginCriticalRegion() { }
+
         public static void EndCriticalRegion() { }
+
         public static void BeginThreadAffinity() { }
+
         public static void EndThreadAffinity() { }
 
         public static LocalDataStoreSlot AllocateDataSlot() => LocalDataStore.AllocateSlot();
+
         public static LocalDataStoreSlot AllocateNamedDataSlot(string name) =>
             LocalDataStore.AllocateNamedSlot(name);
+
         public static LocalDataStoreSlot GetNamedDataSlot(string name) =>
             LocalDataStore.GetNamedSlot(name);
+
         public static void FreeNamedDataSlot(string name) => LocalDataStore.FreeNamedSlot(name);
+
         public static object? GetData(LocalDataStoreSlot slot) => LocalDataStore.GetData(slot);
+
         public static void SetData(LocalDataStoreSlot slot, object? data) =>
             LocalDataStore.SetData(slot, data);
 
@@ -569,64 +577,95 @@ namespace System.Threading
         }
 
         public static AppDomain GetDomain() => AppDomain.CurrentDomain;
+
         public static int GetDomainID() => 1;
+
         public override int GetHashCode() => ManagedThreadId;
+
         public void Join() => Join(-1);
+
         public bool Join(TimeSpan timeout) => Join(WaitHandle.ToTimeoutMilliseconds(timeout));
+
         public static void MemoryBarrier() => Interlocked.MemoryBarrier();
+
         public static void Sleep(TimeSpan timeout) =>
             Sleep(WaitHandle.ToTimeoutMilliseconds(timeout));
 
         public static byte VolatileRead(ref byte address) => Volatile.Read(ref address);
+
         public static double VolatileRead(ref double address) => Volatile.Read(ref address);
+
         public static short VolatileRead(ref short address) => Volatile.Read(ref address);
+
         public static int VolatileRead(ref int address) => Volatile.Read(ref address);
+
         public static long VolatileRead(ref long address) => Volatile.Read(ref address);
+
         public static IntPtr VolatileRead(ref IntPtr address) => Volatile.Read(ref address);
+
         [return: NotNullIfNotNull("address")]
         public static object? VolatileRead([NotNullIfNotNull("address")] ref object? address) =>
             Volatile.Read(ref address);
+
         [CLSCompliant(false)]
         public static sbyte VolatileRead(ref sbyte address) => Volatile.Read(ref address);
+
         public static float VolatileRead(ref float address) => Volatile.Read(ref address);
+
         [CLSCompliant(false)]
         public static ushort VolatileRead(ref ushort address) => Volatile.Read(ref address);
+
         [CLSCompliant(false)]
         public static uint VolatileRead(ref uint address) => Volatile.Read(ref address);
+
         [CLSCompliant(false)]
         public static ulong VolatileRead(ref ulong address) => Volatile.Read(ref address);
+
         [CLSCompliant(false)]
         public static UIntPtr VolatileRead(ref UIntPtr address) => Volatile.Read(ref address);
+
         public static void VolatileWrite(ref byte address, byte value) =>
             Volatile.Write(ref address, value);
+
         public static void VolatileWrite(ref double address, double value) =>
             Volatile.Write(ref address, value);
+
         public static void VolatileWrite(ref short address, short value) =>
             Volatile.Write(ref address, value);
+
         public static void VolatileWrite(ref int address, int value) =>
             Volatile.Write(ref address, value);
+
         public static void VolatileWrite(ref long address, long value) =>
             Volatile.Write(ref address, value);
+
         public static void VolatileWrite(ref IntPtr address, IntPtr value) =>
             Volatile.Write(ref address, value);
+
         public static void VolatileWrite(
             [NotNullIfNotNull("value")] ref object? address,
             object? value
         ) => Volatile.Write(ref address, value);
+
         [CLSCompliant(false)]
         public static void VolatileWrite(ref sbyte address, sbyte value) =>
             Volatile.Write(ref address, value);
+
         public static void VolatileWrite(ref float address, float value) =>
             Volatile.Write(ref address, value);
+
         [CLSCompliant(false)]
         public static void VolatileWrite(ref ushort address, ushort value) =>
             Volatile.Write(ref address, value);
+
         [CLSCompliant(false)]
         public static void VolatileWrite(ref uint address, uint value) =>
             Volatile.Write(ref address, value);
+
         [CLSCompliant(false)]
         public static void VolatileWrite(ref ulong address, ulong value) =>
             Volatile.Write(ref address, value);
+
         [CLSCompliant(false)]
         public static void VolatileWrite(ref UIntPtr address, UIntPtr value) =>
             Volatile.Write(ref address, value);

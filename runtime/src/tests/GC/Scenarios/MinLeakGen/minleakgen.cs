@@ -15,6 +15,7 @@ namespace DefaultNamespace
     {
         internal static ByteObject[] Mv_Obj = new ByteObject[1024 * 5];
         internal static ByteObject[] Mv_Obj1 = new ByteObject[1024 * 5];
+
         public static int Main(System.String[] Args)
         {
             int iRep = 0;
@@ -87,6 +88,7 @@ namespace DefaultNamespace
     public class ByteObject
     {
         internal byte[] min;
+
         public ByteObject(int size)
         {
             min = new byte[size];

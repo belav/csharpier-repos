@@ -14,10 +14,12 @@ struct X<T> : IPrint
     {
         _t = t;
     }
+
     public void Print()
     {
         Console.WriteLine(_t);
     }
+
     T _t;
 }
 

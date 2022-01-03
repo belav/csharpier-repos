@@ -40,6 +40,7 @@ namespace System.Memory.Tests.SequenceReader
     {
         public SingleSegment(T[] inputData)
             : base(ReadOnlySequenceFactory<T>.SingleSegmentFactory, inputData) { }
+
         internal SingleSegment(ReadOnlySequenceFactory<T> factory, T[] inputData)
             : base(factory, inputData) { }
 

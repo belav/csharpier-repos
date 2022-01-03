@@ -269,6 +269,7 @@ namespace HttpStress
         {
             // Representative error text of stress failure
             public string ErrorText { get; }
+
             // Operation id => failure timestamps
             public Dictionary<
                 int,
@@ -580,6 +581,7 @@ namespace HttpStress
             public bool Equals(T? left, T? right) =>
                 left != null
                 && left.Equals(right, StructuralComparisons.StructuralEqualityComparer);
+
             public int GetHashCode([DisallowNull] T value) =>
                 value.GetHashCode(StructuralComparisons.StructuralEqualityComparer);
         }

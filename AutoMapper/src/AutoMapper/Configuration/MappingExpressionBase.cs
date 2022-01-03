@@ -6,10 +6,12 @@ using System.Linq.Expressions;
 using System.Reflection;
 using AutoMapper.Features;
 using AutoMapper.Internal;
+
 namespace AutoMapper.Configuration
 {
     using static Expression;
     using Execution;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ITypeMapConfiguration
     {
@@ -21,6 +23,7 @@ namespace AutoMapper.Configuration
         ITypeMapConfiguration ReverseTypeMap { get; }
         TypeMap TypeMap { get; }
     }
+
     public abstract class MappingExpressionBase : ITypeMapConfiguration
     {
         private List<ValueTransformerConfiguration> _valueTransformers;
@@ -36,11 +39,13 @@ namespace AutoMapper.Configuration
             Type sourceType,
             Type destinationType
         ) : this(memberList, new TypePair(sourceType, destinationType)) { }
+
         protected MappingExpressionBase(MemberList memberList, in TypePair types)
         {
             _memberList = memberList;
             _types = types;
         }
+
         protected bool Projection { get; set; }
         public TypePair Types => _types;
         public bool IsReverseMap { get; set; }
@@ -59,6 +64,7 @@ namespace AutoMapper.Configuration
             _sourceMemberConfigurations ??= new();
         protected List<ICtorParameterConfiguration> CtorParamConfigurations =>
             _ctorParamConfigurations ??= new();
+
         public void Configure(TypeMap typeMap)
         {
             TypeMap = typeMap;
@@ -405,9 +411,11 @@ namespace AutoMapper.Configuration
         public TMappingExpression BeforeMap<TMappingAction>()
             where TMappingAction : IMappingAction<TSource, TDestination> =>
             BeforeMap(CallMapAction<TMappingAction>);
+
         public TMappingExpression AfterMap<TMappingAction>()
             where TMappingAction : IMappingAction<TSource, TDestination> =>
             AfterMap(CallMapAction<TMappingAction>);
+
         private static void CallMapAction<TMappingAction>(
             TSource source,
             TDestination destination,

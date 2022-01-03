@@ -50,6 +50,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // gets an identifier and sets a local before jumping into the shared `when` expression.
             private int _nextWhenNodeIdentifier = 0;
             internal LocalSymbol? _whenNodeIdentifierLocal;
+
 #nullable disable
 
             protected DecisionDagRewriter(
@@ -846,6 +847,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             private sealed class CasesComparer : IComparer<(ConstantValue value, LabelSymbol label)>
             {
                 private readonly IValueSetFactory _fac;
+
                 public CasesComparer(TypeSymbol type)
                 {
                     _fac = ValueSetFactory.ForType(type);
@@ -1402,6 +1404,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
             }
+
 #nullable disable
 
             /// <summary>

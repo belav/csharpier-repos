@@ -186,6 +186,7 @@ namespace System.Collections.Tests
 
         public static IEnumerable<object[]> GetRandomStringArrays() =>
             GenerateMemberData(random => GenArray(GenString, random));
+
         public static IEnumerable<object[]> GetRandomIntArrays() =>
             GenerateMemberData(random => GenArray(GenInt, random));
 

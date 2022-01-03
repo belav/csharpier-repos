@@ -41,9 +41,11 @@ namespace System.Net.Http.Headers
             _knownHeader == null
                 ? string.Equals(_headerName, other._headerName, StringComparison.OrdinalIgnoreCase)
                 : _knownHeader == other._knownHeader;
+
         public override int GetHashCode() =>
             _knownHeader?.GetHashCode()
             ?? StringComparer.OrdinalIgnoreCase.GetHashCode(_headerName);
+
         public override bool Equals(object? obj) => throw new InvalidOperationException(); // Ensure this is never called, to avoid boxing
 
         // Returns false for invalid header name.

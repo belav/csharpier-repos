@@ -97,6 +97,7 @@ namespace System.Net.Mime
             _writeState = writeStateInfo;
             _lineLength = lineLength;
         }
+
         protected override bool HasSpecialEncodingForCRLF => false;
 
         // no special encoding of CRLF in Base64. this method will not be used

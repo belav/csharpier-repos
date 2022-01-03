@@ -97,6 +97,7 @@ namespace AutoMapper.UnitTests.ValueTypes
             public ushort Reg1;
             public ushort Reg2;
         }
+
         public class DigiIn1
         {
             public ushort CncInfo { get; set; }

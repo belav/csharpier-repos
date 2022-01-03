@@ -298,6 +298,7 @@ namespace System.Data.Tests.SqlTypes
             Guid testGuid = new Guid("0000c864-0000-0000-0000-000007650000");
             Assert.Equal(new SqlGuid("0000c864-0000-0000-0000-000007650000"), testGuid);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {

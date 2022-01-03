@@ -24,6 +24,7 @@ namespace System.Data.Odbc
         {
             return ADP.Argument(SR.GetString(SR.Odbc_UnknownSQLType, sqltype.ToString()));
         }
+
         internal static Exception ConnectionStringTooLong()
         {
             return ADP.Argument(
@@ -33,10 +34,12 @@ namespace System.Data.Odbc
                 )
             );
         }
+
         internal static ArgumentException GetSchemaRestrictionRequired()
         {
             return ADP.Argument(SR.GetString(SR.ODBC_GetSchemaRestrictionRequired));
         }
+
         internal static ArgumentOutOfRangeException NotSupportedEnumerationValue(
             Type type,
             int value
@@ -51,6 +54,7 @@ namespace System.Data.Odbc
                 type.Name
             );
         }
+
         internal static ArgumentOutOfRangeException NotSupportedCommandType(CommandType value)
         {
 #if DEBUG
@@ -69,6 +73,7 @@ namespace System.Data.Odbc
 #endif
             return ODBC.NotSupportedEnumerationValue(typeof(CommandType), (int)value);
         }
+
         internal static ArgumentOutOfRangeException NotSupportedIsolationLevel(IsolationLevel value)
         {
 #if DEBUG
@@ -106,36 +111,43 @@ namespace System.Data.Odbc
         {
             return ADP.Argument(SR.GetString(SR.Odbc_NegativeArgument));
         }
+
         internal static Exception CantSetPropertyOnOpenConnection()
         {
             return ADP.InvalidOperation(SR.GetString(SR.Odbc_CantSetPropertyOnOpenConnection));
         }
+
         internal static Exception CantEnableConnectionpooling(ODBC32.RetCode retcode)
         {
             return ADP.DataAdapter(
                 SR.GetString(SR.Odbc_CantEnableConnectionpooling, ODBC32.RetcodeToString(retcode))
             );
         }
+
         internal static Exception CantAllocateEnvironmentHandle(ODBC32.RetCode retcode)
         {
             return ADP.DataAdapter(
                 SR.GetString(SR.Odbc_CantAllocateEnvironmentHandle, ODBC32.RetcodeToString(retcode))
             );
         }
+
         internal static Exception FailedToGetDescriptorHandle(ODBC32.RetCode retcode)
         {
             return ADP.DataAdapter(
                 SR.GetString(SR.Odbc_FailedToGetDescriptorHandle, ODBC32.RetcodeToString(retcode))
             );
         }
+
         internal static Exception NotInTransaction()
         {
             return ADP.InvalidOperation(SR.GetString(SR.Odbc_NotInTransaction));
         }
+
         internal static Exception UnknownOdbcType(OdbcType odbctype)
         {
             return ADP.InvalidEnumerationValue(typeof(OdbcType), (int)odbctype);
         }
+
         internal const string Pwd = "pwd";
 
         internal static void TraceODBC(int level, string method, ODBC32.RetCode retcode) { }
@@ -287,6 +299,7 @@ namespace System.Data.Odbc
             VARIANT_SQL_TYPE = BASE + 16,
             VARIANT_SERVER_TYPE = BASE + 17,
         }
+
         internal enum SQL_SOPT_SS // from Odbcss.h
         {
             BASE = 1225, // SQL_SOPT_SS_BASE
@@ -493,6 +506,7 @@ namespace System.Data.Odbc
             NAMED = 0, // SQL_NAMED
             UNNAMED = 1, // SQL_UNNAMED
         }
+
         // todo:move
         // internal constants
         // not odbc specific
@@ -600,6 +614,7 @@ namespace System.Data.Odbc
         internal const int SQL_NO_TOTAL = -4; // sqlext.h
 
         internal const int SQL_DEFAULT_PARAM = -5;
+
         //      internal const Int32  SQL_IGNORE         = -6;
 
         // column ordinals for SQLProcedureColumns result set
@@ -899,6 +914,7 @@ namespace System.Data.Odbc
             ADP.DecimalMaxPrecision28,
             false
         );
+
         //        private static  readonly TypeMap _Currency   = new TypeMap(OdbcType.Decimal,          DbType.Currency,              typeof(Decimal),  ODBC32.SQL_TYPE.DECIMAL,        ODBC32.SQL_C.NUMERIC,        ODBC32.SQL_C.NUMERIC,        19, ADP.DecimalMaxPrecision28, false);
         private static readonly TypeMap s_double = new TypeMap(
             OdbcType.Double,

@@ -17,6 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
         : AbstractCSharpSyntaxNodeStructureTests<DestructorDeclarationSyntax>
     {
         protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
+
         internal override AbstractSyntaxStructureProvider CreateProvider() =>
             new DestructorDeclarationStructureProvider();
 

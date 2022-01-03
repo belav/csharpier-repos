@@ -13,6 +13,7 @@ public class Help
 
     public static Object s_object = new object();
 }
+
 public class A<T> where T : Exception
 {
     public static void GenericFunctionWithManyArgs<X>(int i, int j, int k, object o)
@@ -38,6 +39,7 @@ public class A<T> where T : Exception
         }
     }
 }
+
 public class GenericExceptions
 {
     public static void GenericFunctionWithManyArgs()
@@ -50,6 +52,7 @@ public class GenericExceptions
         Help.s_exceptionToThrow = new Exception();
         A<DivideByZeroException>.GenericFunctionWithManyArgs<MyException>(1, 2, 3, Help.s_object);
     }
+
     [System.Runtime.CompilerServices.MethodImpl(
         System.Runtime.CompilerServices.MethodImplOptions.NoInlining
     )]

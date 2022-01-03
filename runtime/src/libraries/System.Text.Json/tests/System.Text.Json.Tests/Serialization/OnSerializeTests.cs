@@ -392,8 +392,11 @@ namespace System.Text.Json.Serialization.Tests
               IJsonOnSerialized
         {
             public void OnDeserialized() => Assert.True(false, "Not expected");
+
             public void OnDeserializing() => Assert.True(false, "Not expected");
+
             public void OnSerialized() => Assert.True(false, "Not expected");
+
             public void OnSerializing() => Assert.True(false, "Not expected");
         }
 
@@ -405,8 +408,11 @@ namespace System.Text.Json.Serialization.Tests
               IJsonOnSerialized
         {
             public void OnDeserialized() => Assert.True(false, "Not expected");
+
             public void OnDeserializing() => Assert.True(false, "Not expected");
+
             public void OnSerialized() => Assert.True(false, "Not expected");
+
             public void OnSerializing() => Assert.True(false, "Not expected");
         }
 

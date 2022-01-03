@@ -616,8 +616,10 @@ namespace AutoMapper.UnitTests
             public class Destination
             {
                 public int Value { get; set; }
+
                 [Ignore]
                 public string Name { get; set; }
+
                 [UseExistingValue]
                 public ChildDestination Child { get; set; }
             }
@@ -631,6 +633,7 @@ namespace AutoMapper.UnitTests
             public class ChildDestination
             {
                 public int Value { get; set; }
+
                 [Ignore]
                 public string Name { get; set; }
             }
@@ -713,6 +716,7 @@ namespace AutoMapper.UnitTests
             {
                 [MappingOrder(2)]
                 public int Value1 { get; set; }
+
                 [MappingOrder(1)]
                 public int Value2 { get; set; }
             }
@@ -938,6 +942,7 @@ namespace AutoMapper.UnitTests
         public class When_specifying_to_include_all_derived_via_attribute : NonValidatingSpecBase
         {
             public class Foo { }
+
             public class FooBar : Foo { }
 
             [AutoMap(typeof(Foo), IncludeAllDerived = true)]

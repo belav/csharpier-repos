@@ -64,7 +64,9 @@ namespace MonoBug
         }
 
         public bool MoveNext() => true;
+
         public void Reset() { }
+
         public void Dispose() { }
     }
 
@@ -75,6 +77,7 @@ namespace MonoBug
     class Program
     {
         internal static int exit_code;
+
         static int Main(string[] args)
         {
             IEnumerator<IValue<ValueBase>> it1 = new IncorrectEnumerator1<Value>();

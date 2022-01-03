@@ -5,14 +5,17 @@ using System;
 public class E<T> : Exception
 {
     T fld;
+
     public E(T x)
     {
         fld = x;
     }
+
     public T Get()
     {
         return fld;
     }
+
     public void Show()
     {
         Console.WriteLine("E<" + typeof(T) + ">(" + fld + ")");
@@ -54,6 +57,7 @@ public class M
         M test = new M();
         return test.Run();
     }
+
     public int Run()
     {
         int val = D.Test5<string>(true, 129);

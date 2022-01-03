@@ -11,6 +11,7 @@ namespace System
         System.Threading.Tasks.ValueTask DisposeAsync();
     }
 }
+
 namespace System.Collections.Generic
 {
     public partial interface IAsyncEnumerable<out T>
@@ -20,38 +21,46 @@ namespace System.Collections.Generic
                 default(System.Threading.CancellationToken)
         );
     }
+
     public partial interface IAsyncEnumerator<out T> : System.IAsyncDisposable
     {
         T Current { get; }
         System.Threading.Tasks.ValueTask<bool> MoveNextAsync();
     }
 }
+
 namespace System.Runtime.CompilerServices
 {
     public partial struct AsyncIteratorMethodBuilder
     {
         private object _dummy;
         private int _dummyPrimitive;
+
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
         )
             where TAwaiter : System.Runtime.CompilerServices.INotifyCompletion
             where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
         )
             where TAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
             where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
+
         public void Complete() { }
+
         public static System.Runtime.CompilerServices.AsyncIteratorMethodBuilder Create()
         {
             throw null;
         }
+
         public void MoveNext<TStateMachine>(ref TStateMachine stateMachine)
             where TStateMachine : System.Runtime.CompilerServices.IAsyncStateMachine { }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Method,
         Inherited = false,
@@ -63,35 +72,42 @@ namespace System.Runtime.CompilerServices
         public AsyncIteratorStateMachineAttribute(System.Type stateMachineType)
             : base(default(System.Type)) { }
     }
+
     public readonly partial struct ConfiguredAsyncDisposable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
+
         public System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable DisposeAsync()
         {
             throw null;
         }
     }
+
     public readonly partial struct ConfiguredCancelableAsyncEnumerable<T>
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
+
         public System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T> ConfigureAwait(
             bool continueOnCapturedContext
         )
         {
             throw null;
         }
+
         public System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T>.Enumerator GetAsyncEnumerator()
         {
             throw null;
         }
+
         public System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T> WithCancellation(
             System.Threading.CancellationToken cancellationToken
         )
         {
             throw null;
         }
+
         public readonly partial struct Enumerator
         {
             private readonly object _dummy;
@@ -100,22 +116,26 @@ namespace System.Runtime.CompilerServices
             {
                 get { throw null; }
             }
+
             public System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable DisposeAsync()
             {
                 throw null;
             }
+
             public System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable<bool> MoveNextAsync()
             {
                 throw null;
             }
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Parameter, Inherited = false)]
     public sealed partial class EnumeratorCancellationAttribute : System.Attribute
     {
         public EnumeratorCancellationAttribute() { }
     }
 }
+
 namespace System.Threading.Tasks
 {
     public static partial class TaskAsyncEnumerableExtensions
@@ -127,6 +147,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T> ConfigureAwait<T>(
             this System.Collections.Generic.IAsyncEnumerable<T> source,
             bool continueOnCapturedContext
@@ -134,6 +155,7 @@ namespace System.Threading.Tasks
         {
             throw null;
         }
+
         public static System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable<T> WithCancellation<T>(
             this System.Collections.Generic.IAsyncEnumerable<T> source,
             System.Threading.CancellationToken cancellationToken
@@ -143,6 +165,7 @@ namespace System.Threading.Tasks
         }
     }
 }
+
 namespace System.Threading.Tasks.Sources
 {
     public partial struct ManualResetValueTaskSourceCore<TResult>
@@ -159,22 +182,28 @@ namespace System.Threading.Tasks.Sources
         {
             get { throw null; }
         }
+
         public TResult GetResult(short token)
         {
             throw null;
         }
+
         public System.Threading.Tasks.Sources.ValueTaskSourceStatus GetStatus(short token)
         {
             throw null;
         }
+
         public void OnCompleted(
             System.Action<object> continuation,
             object state,
             short token,
             System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags flags
         ) { }
+
         public void Reset() { }
+
         public void SetException(System.Exception error) { }
+
         public void SetResult(TResult result) { }
     }
 }

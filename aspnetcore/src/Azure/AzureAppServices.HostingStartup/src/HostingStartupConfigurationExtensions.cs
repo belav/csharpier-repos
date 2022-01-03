@@ -12,6 +12,7 @@ internal static class HostingStartupConfigurationExtensions
     {
         return new ConfigurationBuilder().AddEnvironmentVariables(prefix: "ASPNETCORE_").Build();
     }
+
     public static bool IsEnabled(
         this IConfiguration configuration,
         string hostingStartupName,

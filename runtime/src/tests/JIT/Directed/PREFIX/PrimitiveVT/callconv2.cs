@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 namespace PrimitiveVT
 {
     unsafe class CallConv2
@@ -23,42 +24,51 @@ namespace PrimitiveVT
         {
             return x.m + y.m;
         }
+
         VT2B f2a(VT2A x, VT2B y)
         {
             VT2B z;
             z.m = x.m + y.m;
             return z;
         }
+
         VT2B f2b(VT2A x, VT2B y)
         {
             return f2a(x, y);
         }
+
         VT2B f2(VT2A x, VT2B y)
         {
             return f2b(x, y);
         }
+
         static uint f3(ref VT2B x, VT2B y)
         {
             return x.m - y.m;
         }
+
         VT2B f4(VT2A x, VT2B y)
         {
             VT2B z;
             z.m = x.m - y.m;
             return z;
         }
+
         static uint f5(VT2B x, VT2A y)
         {
             return x.m * y.m;
         }
+
         uint f6(VT2B[] x, VT2B y)
         {
             return x[0].m * y.m;
         }
+
         VT2B f7(VT2A x, VT2B y)
         {
             return f4(x, y);
         }
+
         float f8(VT2A x, VT2B y)
         {
             return x.m / y.m;
@@ -68,10 +78,12 @@ namespace PrimitiveVT
         {
             return new VT2B[1, 2];
         }
+
         static VT2B[,] f9()
         {
             return f9a();
         }
+
         uint f10(params VT2B[] args)
         {
             uint sum = 0;

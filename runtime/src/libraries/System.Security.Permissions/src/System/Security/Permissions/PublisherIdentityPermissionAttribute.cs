@@ -15,9 +15,11 @@ namespace System.Security.Permissions
     {
         public PublisherIdentityPermissionAttribute(SecurityAction action)
             : base(default(SecurityAction)) { }
+
         public string CertFile { get; set; }
         public string SignedFile { get; set; }
         public string X509Certificate { get; set; }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);

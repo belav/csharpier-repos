@@ -287,6 +287,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(false);
             return Conversion.NoConversion;
         }
+
 #nullable disable
 
         /// <summary>
@@ -1255,6 +1256,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return false;
             }
         }
+
 #nullable disable
 
         private Conversion ClassifyImplicitBuiltInConversionFromExpression(
@@ -2022,6 +2024,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             return IsAnonymousFunctionCompatibleWithType((UnboundLambda)source, destination)
                 == LambdaConversionResult.Success;
         }
+
 #nullable disable
 
         internal Conversion ClassifyImplicitUserDefinedConversionForV6SwitchGoverningType(
@@ -2745,6 +2748,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return false;
         }
+
 #nullable disable
 
         private Conversion ClassifyImplicitNullableConversion(
@@ -3556,6 +3560,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ref useSiteInfo
             );
         }
+
 #nullable disable
 
         public bool HasImplicitTypeParameterConversion(
@@ -4230,6 +4235,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
         }
+
 #nullable disable
 
         private bool HasIdentityOrReferenceConversion(

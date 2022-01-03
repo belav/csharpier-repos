@@ -99,6 +99,7 @@ public struct S : I
     {
         throw new Exception("this just exists to stop a compiler warning, don't call it");
     }
+
     public override int GetHashCode()
     {
         throw new Exception("this just exists to stop a compiler warning, don't call it");

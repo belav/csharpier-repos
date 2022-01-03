@@ -14,15 +14,18 @@ namespace System.Security.Permissions
     public sealed partial class PermissionSetAttribute : CodeAccessSecurityAttribute
     {
         public PermissionSetAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+
         public string File { get; set; }
         public string Hex { get; set; }
         public string Name { get; set; }
         public bool UnicodeEncoded { get; set; }
         public string XML { get; set; }
+
         public override IPermission CreatePermission()
         {
             return default(IPermission);
         }
+
         public PermissionSet CreatePermissionSet()
         {
             return default(PermissionSet);

@@ -17,6 +17,7 @@ namespace System.Speech.Recognition.SrgsGrammar
     {
         #region Constructors
         public SrgsOneOf() { }
+
         public SrgsOneOf(params string[] items) : this()
         {
             Helpers.ThrowIfNull(items, nameof(items));
@@ -34,6 +35,7 @@ namespace System.Speech.Recognition.SrgsGrammar
                 _items.Add(new SrgsItem(items[i]));
             }
         }
+
         public SrgsOneOf(params SrgsItem[] items) : this()
         {
             Helpers.ThrowIfNull(items, nameof(items));
@@ -135,6 +137,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 _items = oneOf._items;
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public SrgsItem[] AKeys
             {

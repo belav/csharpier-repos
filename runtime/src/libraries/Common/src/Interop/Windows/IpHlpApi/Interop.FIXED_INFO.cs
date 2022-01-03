@@ -17,11 +17,13 @@ internal static partial class Interop
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_HOSTNAME_LEN + 4)]
             public string hostName;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_DOMAIN_NAME_LEN + 4)]
             public string domainName;
             public IntPtr currentDnsServer; // IpAddressList*
             public IP_ADDR_STRING DnsServerList;
             public uint nodeType;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_SCOPE_ID_LEN + 4)]
             public string scopeId;
             public bool enableRouting;

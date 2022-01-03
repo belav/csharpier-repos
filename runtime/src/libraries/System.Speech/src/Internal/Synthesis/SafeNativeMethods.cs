@@ -129,6 +129,7 @@ namespace System.Speech.Internal.Synthesis
             private ushort wMid;
             private ushort wPid;
             private uint vDriverVersion;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
             internal string szPname;
             private uint dwFormats;

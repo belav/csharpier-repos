@@ -173,6 +173,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
             Workspace workspace,
             CancellationToken cancellationToken
         );
+
         [Obsolete("Override TryNavigateToAsync instead", error: false)]
         public abstract bool TryNavigateTo(
             Workspace workspace,

@@ -3,6 +3,7 @@
 //
 
 using System;
+
 class A
 {
     public static int Main()
@@ -10,6 +11,7 @@ class A
         Main1();
         return 100;
     }
+
     public static void Main1()
     {
         bool b = false;

@@ -59,6 +59,7 @@ namespace Internal.IL
         {
             public ILExceptionRegion ILRegion;
         };
+
         ExceptionRegion[] _exceptionRegions;
 
         [Flags]
@@ -71,6 +72,7 @@ namespace Internal.IL
             Constrained = 0x10,
             No = 0x20,
         }
+
         Prefix _pendingPrefix;
         TypeDesc _constrained;
 
@@ -107,6 +109,7 @@ namespace Internal.IL
             public bool HasPredecessorWithLowerOffset = false;
 
             public int ErrorCount { get; private set; }
+
             public void IncrementErrorCount()
             {
                 ErrorCount++;

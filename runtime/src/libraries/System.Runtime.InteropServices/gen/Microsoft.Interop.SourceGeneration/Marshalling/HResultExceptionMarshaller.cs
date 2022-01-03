@@ -29,6 +29,7 @@ namespace Microsoft.Interop
         // Should only be used for return value
         public ParameterSyntax AsParameter(TypePositionInfo info) =>
             throw new InvalidOperationException();
+
         public ArgumentSyntax AsArgument(TypePositionInfo info, StubCodeContext context) =>
             throw new InvalidOperationException();
 

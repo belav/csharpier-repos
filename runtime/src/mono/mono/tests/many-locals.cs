@@ -10,6 +10,7 @@ namespace Simple
             a = A;
             b = B;
         }
+
         public uint A
         {
             get { return a; }

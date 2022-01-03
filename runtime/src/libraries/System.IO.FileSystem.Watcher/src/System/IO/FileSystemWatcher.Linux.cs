@@ -234,41 +234,50 @@ namespace System.IO
             /// read to wake up in the event that the user neglects to stop raising events.
             /// </summary>
             private readonly WeakReference<FileSystemWatcher> _weakWatcher;
+
             /// <summary>
             /// The path for the primary watched directory.
             /// </summary>
             private readonly string _directoryPath;
+
             /// <summary>
             /// The inotify handle / file descriptor
             /// </summary>
             private readonly SafeFileHandle _inotifyHandle;
+
             /// <summary>
             /// Buffer used to store raw bytes read from the inotify handle.
             /// </summary>
             private readonly byte[] _buffer;
+
             /// <summary>
             /// The number of bytes read into the _buffer.
             /// </summary>
             private int _bufferAvailable;
+
             /// <summary>
             /// The next position in _buffer from which an event should be read.
             /// </summary>
             private int _bufferPos;
+
             /// <summary>
             /// Filters to use when adding a watch on directories.
             /// </summary>
             private readonly NotifyFilters _notifyFilters;
             private readonly Interop.Sys.NotifyEvents _watchFilters;
+
             /// <summary>
             /// Whether to monitor subdirectories.  Unlike Win32, inotify does not implicitly monitor subdirectories;
             /// watches must be explicitly added for those subdirectories.
             /// </summary>
             private readonly bool _includeSubdirectories;
+
             /// <summary>
             /// Token to monitor for cancellation requests, upon which processing is stopped and all
             /// state is cleaned up.
             /// </summary>
             private readonly CancellationToken _cancellationToken;
+
             /// <summary>
             /// Mapping from watch descriptor (as returned by inotify_add_watch) to state for
             /// the associated directory being watched.  Events from inotify include only relative
@@ -279,6 +288,7 @@ namespace System.IO
                 int,
                 WatchedDirectory
             >();
+
             /// <summary>
             /// Maximum length of a name returned from inotify event.
             /// </summary>

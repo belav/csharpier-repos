@@ -97,6 +97,7 @@ namespace System
             /// <summary>Reference to the <see cref="Random"/> containing this implementation instance.</summary>
             /// <remarks>Used to ensure that any calls to other virtual members are performed using the Random-derived instance, if one exists.</remarks>
             private readonly Random _parent;
+
             /// <summary>Potentially lazily-initialized algorithm backing this instance.</summary>
             private CompatPrng _prng; // mutable struct; do not make this readonly
 

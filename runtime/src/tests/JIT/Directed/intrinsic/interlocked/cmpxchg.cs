@@ -5,9 +5,11 @@
 using System;
 using System.Threading;
 using System.Runtime.CompilerServices;
+
 public class CMPXCHG
 {
     public static int g_static = -1;
+
     public static void Function(int bit, bool value)
     {
         for (; ; )
@@ -33,6 +35,7 @@ public class CMPXCHG
             }
         }
     }
+
     public static int Main()
     {
         for (int i = 0; i < 10; ++i)

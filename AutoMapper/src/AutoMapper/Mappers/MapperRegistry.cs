@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 namespace AutoMapper.Internal.Mappers
 {
     internal static class MapperRegistry

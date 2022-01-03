@@ -614,6 +614,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     public class Parent
     {
         private const int x = 1;
+
         public int Foo(int? z = x)
         {
             if (z == 1)
@@ -649,6 +650,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     public class Parent
     {
         private const int x = 1;
+
         public int Foo(bool? z = true)
         {
             if (z.Value)
@@ -684,6 +686,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     public class Parent
     {
         private const int x = 1;
+
         public int Foo(bool z = true)
         {
             if (z)
@@ -719,6 +722,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     public class Parent
     {
         private const string x = "test";
+
         public int Foo(string z = x)
         {
             if (z == "test")
@@ -754,6 +758,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     public class Parent
     {
         private const bool x = true;
+
         public int Foo(bool? z = x)
         {
             if ((bool)z)

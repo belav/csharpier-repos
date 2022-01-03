@@ -23,6 +23,7 @@ namespace System.Runtime.CompilerServices
 
         /// <summary>The wrapped task.  If the operation completed synchronously and successfully, this will be a sentinel object compared by reference identity.</summary>
         private Task<TResult>? m_task; // Debugger depends on the exact name of this field.
+
         /// <summary>The result for this builder if it's completed synchronously, in which case <see cref="m_task"/> will be <see cref="s_syncSuccessSentinel"/>.</summary>
         private TResult _result;
 

@@ -929,6 +929,7 @@ namespace System.Linq.Expressions
         /// A string like "Type {0} is a generic type definition"
         /// </summary>
         internal static string TypeIsGeneric(object? p0) => SR.Format(SR.TypeIsGeneric, p0);
+
         /// <summary>
         /// A string like "Invalid argument value"
         /// </summary>

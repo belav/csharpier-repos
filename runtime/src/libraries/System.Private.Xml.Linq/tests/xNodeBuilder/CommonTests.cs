@@ -4067,6 +4067,7 @@ namespace CoreXml.Test.XLinq
                     if (!CompareReader(doc, "<Root><![CDATA[<![CDATA[]]></Root>"))
                         throw new TestException(TestResult.Failed, "");
                 }
+
                 //[Variation(Id = 8, Desc = "CData state machine", Priority = 2)]
                 private void CData_8()
                 {

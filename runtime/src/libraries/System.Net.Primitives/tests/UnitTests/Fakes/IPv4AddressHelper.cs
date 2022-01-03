@@ -6,6 +6,7 @@ namespace System
     internal static class IPv4AddressHelper
     {
         internal const int Invalid = -1;
+
         internal static unsafe long ParseNonCanonical(
             char* name,
             int start,

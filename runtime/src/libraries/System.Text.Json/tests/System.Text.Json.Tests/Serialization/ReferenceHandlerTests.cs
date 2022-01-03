@@ -839,6 +839,7 @@ namespace System.Text.Json.Serialization.Tests
         internal class PresistentGuidReferenceHandler : ReferenceHandler
         {
             public ReferenceResolver PersistentResolver { get; set; }
+
             public override ReferenceResolver CreateResolver() => PersistentResolver;
         }
 
@@ -899,6 +900,7 @@ namespace System.Text.Json.Serialization.Tests
         class BadReferenceResolver : ReferenceResolver
         {
             private int _count;
+
             public override void AddReference(string referenceId, object value)
             {
                 throw new NotImplementedException();

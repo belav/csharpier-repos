@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
         where TCommandArgs : Microsoft.VisualStudio.Text.Editor.Commanding.EditorCommandArgs
     {
         private readonly IEnumerable<Lazy<IStreamingFindUsagesPresenter>> _streamingPresenters;
+
         //private readonly IAsynchronousOperationListener _asyncListener;
 
         internal AbstractNavigationCommandHandler(

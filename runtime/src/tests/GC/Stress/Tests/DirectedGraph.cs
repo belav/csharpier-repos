@@ -317,6 +317,7 @@ namespace DefaultNamespace
     public class Vertex
     {
         public int Name;
+
         //public bool Visited = false;
 
         public Vertex Next;

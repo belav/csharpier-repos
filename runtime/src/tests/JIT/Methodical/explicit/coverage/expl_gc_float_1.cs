@@ -9,8 +9,10 @@ internal class AA
 {
     [FieldOffset(13)]
     public long tmp1;
+
     [FieldOffset(7)]
     public long tmp2;
+
     [FieldOffset(7)]
     public long tmp3;
 
@@ -19,8 +21,10 @@ internal class AA
 
     [FieldOffset(36)]
     public int tmp4;
+
     [FieldOffset(44)]
     public long tmp5;
+
     [FieldOffset(39)]
     public uint tmp6;
 
@@ -47,6 +51,7 @@ internal class AA
     {
         return arg;
     }
+
     public static float call_target_ref(ref float arg)
     {
         return arg;

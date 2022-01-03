@@ -117,6 +117,7 @@ namespace System.Globalization
         {
             return Math.Cos(RadiansFromDegrees(degree));
         }
+
         private static double TanOfDegree(double degree)
         {
             return Math.Tan(RadiansFromDegrees(degree));

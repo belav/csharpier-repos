@@ -278,6 +278,7 @@ class Program
 }"
             );
         }
+
         [WorkItem(44572, "https://github.com/dotnet/roslyn/issues/44572")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertSwitchStatementToExpression)]
         public async Task TestImplicitConversion()

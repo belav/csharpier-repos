@@ -37,17 +37,21 @@ namespace System.Reflection.TypeLoading
         internal abstract RoModule GetRoModule();
 
         public abstract override int MetadataToken { get; }
+
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
             this.HasSameMetadataDefinitionAsCore(other);
 
         public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
+
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
 
         public sealed override object[] GetCustomAttributes(bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override bool IsDefined(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
 
@@ -85,6 +89,7 @@ namespace System.Reflection.TypeLoading
 
         public sealed override MethodImplAttributes GetMethodImplementationFlags() =>
             MethodImplementationFlags;
+
         public abstract override MethodBody? GetMethodBody();
 
         public sealed override bool ContainsGenericParameters
@@ -107,7 +112,9 @@ namespace System.Reflection.TypeLoading
 
         public sealed override ParameterInfo[] GetParameters() =>
             GetParametersNoCopy().CloneArray<ParameterInfo>();
+
         public sealed override ParameterInfo ReturnParameter => MethodSig.Return;
+
         internal RoParameter[] GetParametersNoCopy() => MethodSig.Parameters;
 
         private MethodSig<RoParameter> MethodSig =>
@@ -128,9 +135,11 @@ namespace System.Reflection.TypeLoading
 
         public sealed override Type[] GetGenericArguments() =>
             GetGenericArgumentsOrParametersNoCopy().CloneArray<Type>();
+
         internal RoType[] GetGenericArgumentsOrParametersNoCopy() =>
             _lazyGenericArgumentsOrParameters
             ?? (_lazyGenericArgumentsOrParameters = ComputeGenericArgumentsOrParameters());
+
         protected abstract RoType[] ComputeGenericArgumentsOrParameters();
         private volatile RoType[]? _lazyGenericArgumentsOrParameters;
 
@@ -144,6 +153,7 @@ namespace System.Reflection.TypeLoading
 
         public sealed override string ToString() =>
             Loader.GetDisposedString() ?? this.ToString(ComputeMethodSigStrings());
+
         protected abstract MethodSig<string> ComputeMethodSigStrings();
 
         public sealed override MethodInfo GetBaseDefinition() =>
@@ -165,18 +175,23 @@ namespace System.Reflection.TypeLoading
             object?[]? parameters,
             CultureInfo? culture
         ) => throw new InvalidOperationException(SR.Arg_ReflectionOnlyInvoke);
+
         public sealed override Delegate CreateDelegate(Type delegateType) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override Delegate CreateDelegate(Type delegateType, object? target) =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
         public sealed override RuntimeMethodHandle MethodHandle =>
             throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
 
         MethodBase IRoMethodBase.MethodBase => this;
         public MetadataLoadContext Loader => GetRoModule().Loader;
         public abstract TypeContext TypeContext { get; }
+
         Type[] IRoMethodBase.GetCustomModifiers(int position, bool isRequired) =>
             CustomModifiers[position].ExtractCustomModifiers(isRequired);
+
         string IRoMethodBase.GetMethodSigString(int position) =>
             ComputeMethodSigStrings()[position];
     }

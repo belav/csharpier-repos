@@ -10,6 +10,7 @@ namespace NetClient
     class ErrorTests
     {
         private readonly Server.Contract.Servers.ErrorMarshalTesting server;
+
         public ErrorTests()
         {
             this.server =

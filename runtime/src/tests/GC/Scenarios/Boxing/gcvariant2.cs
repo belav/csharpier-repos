@@ -15,6 +15,7 @@ namespace DefaultNamespace
     internal class GCVariant2
     {
         internal Object[] G_Vart;
+
         public static int Main(String[] Args)
         {
             int iRep = 0;

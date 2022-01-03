@@ -17,6 +17,7 @@ namespace DefaultNamespace
         {
             return false;
         }
+
         public override int GetHashCode()
         {
             return 0;
@@ -60,6 +61,7 @@ namespace DefaultNamespace
         internal const int Length = 3;
 
         internal static V2[] V2Array = new V2[Length];
+
         //	static V3[] V3Array = new V3[Length];
 
         public static int Main(String[] args)

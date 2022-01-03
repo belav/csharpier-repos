@@ -17,6 +17,7 @@ namespace ILCompiler.Reflection.ReadyToRun
     {
         public uint StartOffset;
         public uint EndOffset;
+
         // TODO: Eliminate this
         public uint VariableNumber;
         public Variable Variable { get; internal set; }
@@ -102,12 +103,14 @@ namespace ILCompiler.Reflection.ReadyToRun
     public struct VarLoc
     {
         public VarLocType VarLocType;
+
         // What's stored in the Data# fields changes based on VarLocType and will be
         // interpreted accordingly when the variable location information is dumped.
         public int Data1;
         public int Data2;
         public int Data3;
     }
+
     public class NativeVarInfoComparer : IComparer<NativeVarInfo>
     {
         public int Compare(NativeVarInfo left, NativeVarInfo right)

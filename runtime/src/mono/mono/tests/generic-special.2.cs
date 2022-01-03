@@ -25,6 +25,7 @@ public class Gen<T>
     {
         field = t;
     }
+
     public static T getField()
     {
         return field;

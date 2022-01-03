@@ -507,6 +507,7 @@ namespace Castle.DynamicProxy.Tests
         }
 
         public class Foo { }
+
         public class Bar { }
     }
 }

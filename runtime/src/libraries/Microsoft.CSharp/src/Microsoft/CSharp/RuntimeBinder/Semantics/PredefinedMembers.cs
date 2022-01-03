@@ -115,6 +115,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         Virtual,
         Instance
     }
+
     // Enum used to encode a method signature
     // A signature is encoded as a sequence of int values.
     // The grammar for signatures is:

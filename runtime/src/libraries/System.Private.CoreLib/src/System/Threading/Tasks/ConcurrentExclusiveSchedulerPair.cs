@@ -31,37 +31,48 @@ namespace System.Threading.Tasks
         /// <summary>A processing mode to denote what kinds of tasks are currently being processed on this thread.</summary>
         private readonly ThreadLocal<ProcessingMode> m_threadProcessingMode =
             new ThreadLocal<ProcessingMode>();
+
         /// <summary>The scheduler used to queue and execute "concurrent" tasks that may run concurrently with other concurrent tasks.</summary>
         private readonly ConcurrentExclusiveTaskScheduler m_concurrentTaskScheduler;
+
         /// <summary>The scheduler used to queue and execute "exclusive" tasks that must run exclusively while no other tasks for this pair are running.</summary>
         private readonly ConcurrentExclusiveTaskScheduler m_exclusiveTaskScheduler;
+
         /// <summary>The underlying task scheduler to which all work should be scheduled.</summary>
         private readonly TaskScheduler m_underlyingTaskScheduler;
+
         /// <summary>
         /// The maximum number of tasks allowed to run concurrently.  This only applies to concurrent tasks,
         /// since exclusive tasks are inherently limited to 1.
         /// </summary>
         private readonly int m_maxConcurrencyLevel;
+
         /// <summary>The maximum number of tasks we can process before recycling our runner tasks.</summary>
         private readonly int m_maxItemsPerTask;
+
         /// <summary>
         /// If positive, it represents the number of concurrently running concurrent tasks.
         /// If negative, it means an exclusive task has been scheduled.
         /// If 0, nothing has been scheduled.
         /// </summary>
         private int m_processingCount;
+
         /// <summary>Completion state for a task representing the completion of this pair.</summary>
         /// <remarks>Lazily-initialized only if the scheduler pair is shutting down or if the Completion is requested.</remarks>
         private CompletionState? m_completionState;
+
         /// <summary>Lazily-initialized work item for processing when targeting the default scheduler.</summary>
         private SchedulerWorkItem? m_threadPoolWorkItem;
 
         /// <summary>A constant value used to signal unlimited processing.</summary>
         private const int UNLIMITED_PROCESSING = -1;
+
         /// <summary>Constant used for m_processingCount to indicate that an exclusive task is being processed.</summary>
         private const int EXCLUSIVE_PROCESSING_SENTINEL = -1;
+
         /// <summary>Default MaxItemsPerTask to use for processing if none is specified.</summary>
         private const int DEFAULT_MAXITEMSPERTASK = UNLIMITED_PROCESSING;
+
         /// <summary>Default MaxConcurrencyLevel is the processor count if not otherwise specified.</summary>
         private static int DefaultMaxConcurrencyLevel => Environment.ProcessorCount;
 
@@ -281,6 +292,7 @@ namespace System.Threading.Tasks
         /// that may run concurrently with other tasks on this pair.
         /// </summary>
         public TaskScheduler ConcurrentScheduler => m_concurrentTaskScheduler;
+
         /// <summary>
         /// Gets a TaskScheduler that can be used to schedule tasks to this pair
         /// that must run exclusively with regards to other tasks on this pair.
@@ -564,8 +576,10 @@ namespace System.Threading.Tasks
             /// <summary>Whether the scheduler has had completion requested.</summary>
             /// <remarks>This variable is not volatile, so to gurantee safe reading reads, Volatile.Read is used in TryExecuteTaskInline.</remarks>
             internal bool m_completionRequested;
+
             /// <summary>Whether completion processing has been queued.</summary>
             internal bool m_completionQueued;
+
             /// <summary>Unrecoverable exceptions incurred while processing.</summary>
             internal List<Exception>? m_exceptions;
         }
@@ -601,10 +615,13 @@ namespace System.Threading.Tasks
         {
             /// <summary>The parent pair.</summary>
             private readonly ConcurrentExclusiveSchedulerPair m_pair;
+
             /// <summary>The maximum concurrency level for the scheduler.</summary>
             private readonly int m_maxConcurrencyLevel;
+
             /// <summary>The processing mode of this scheduler, exclusive or concurrent.</summary>
             private readonly ProcessingMode m_processingMode;
+
             /// <summary>Gets the queue of tasks for this scheduler.</summary>
             internal readonly IProducerConsumerQueue<Task> m_tasks;
 
@@ -803,8 +820,10 @@ namespace System.Threading.Tasks
 
                 /// <summary>Gets this pair's maximum allowed concurrency level.</summary>
                 public int MaximumConcurrencyLevel => m_taskScheduler.m_maxConcurrencyLevel;
+
                 /// <summary>Gets the tasks scheduled to this scheduler.</summary>
                 public IEnumerable<Task> ScheduledTasks => m_taskScheduler.m_tasks;
+
                 /// <summary>Gets the scheduler pair with which this scheduler is associated.</summary>
                 public ConcurrentExclusiveSchedulerPair SchedulerPair => m_taskScheduler.m_pair;
             }
@@ -826,16 +845,20 @@ namespace System.Threading.Tasks
 
             /// <summary>Gets a representation of the execution state of the pair.</summary>
             public ProcessingMode Mode => m_pair.ModeForDebugger;
+
             /// <summary>Gets the number of tasks waiting to run exclusively.</summary>
             public IEnumerable<Task> ScheduledExclusive => m_pair.m_exclusiveTaskScheduler.m_tasks;
+
             /// <summary>Gets the number of tasks waiting to run concurrently.</summary>
             public IEnumerable<Task> ScheduledConcurrent =>
                 m_pair.m_concurrentTaskScheduler.m_tasks;
+
             /// <summary>Gets the number of tasks currently being executed.</summary>
             public int CurrentlyExecutingTaskCount =>
                 (m_pair.m_processingCount == EXCLUSIVE_PROCESSING_SENTINEL)
                     ? 1
                     : m_pair.m_processingCount;
+
             /// <summary>Gets the underlying task scheduler that actually executes the tasks.</summary>
             public TaskScheduler TargetScheduler => m_pair.m_underlyingTaskScheduler;
         }

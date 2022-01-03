@@ -14,42 +14,52 @@ class T
     {
         return new int[] { 1, 2 };
     }
+
     static System.Array f1()
     {
         return new int[,] { { 2, 3 } };
     }
+
     static System.Array f2()
     {
         return new int[,,] { { { 3 } } };
     }
+
     static System.Array f3()
     {
         return new int[,,,] { { { { 4 } } } };
     }
+
     static System.Array f4()
     {
         return new int[,,,,] { { { { { 5 } } } } };
     }
+
     static System.Array f5()
     {
         return new int[,,,,,] { { { { { { 6 } } } } } };
     }
+
     static System.Array f6()
     {
         return new int[,,,,,] { { { { { { 6, 7 } } } } } };
     }
+
     static System.Array f7()
     {
         return new int[,,,,,] { { { { { { 6 }, { 7 } } } } } };
     }
+
     static System.Array f8()
     {
         return new int[,,,,,] { { { { { { 6 }, { 8 }, { 9 } } } } } };
     }
+
     static System.Array f9()
     {
         return new int[,,,,,] { { { { { { 6 }, { 8 }, { 9 } }, { { 1 }, { 2 }, { 3 } } } } } };
     }
+
     static System.Array f10()
     {
         return new int[,,,,,]
@@ -57,6 +67,7 @@ class T
             { { { { { 6, 7, 8 }, { 9, 10, 11 }, { 1, 2, 3 }, { 5, 6, 7 } } } } }
         };
     }
+
     static System.Array f11()
     {
         // Should only have one or two alloca or sub rsp (locals and localalloc are not combined, alas).

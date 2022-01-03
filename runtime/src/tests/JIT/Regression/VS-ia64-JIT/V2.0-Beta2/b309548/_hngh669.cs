@@ -5,6 +5,7 @@
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
+
 public enum TestEnum
 {
     red = 1,
@@ -16,6 +17,7 @@ public enum TestEnum
 public class AA
 {
     public static float[][,,,,] m_afStatic1;
+
     public static uint[,] Static3(ushort param1)
     {
         byte local14 = ((byte)(Math.Min(((ulong)(36.0)), ((ulong)(124.0)))));

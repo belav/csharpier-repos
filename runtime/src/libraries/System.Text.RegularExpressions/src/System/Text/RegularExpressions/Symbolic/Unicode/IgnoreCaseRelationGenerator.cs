@@ -95,6 +95,7 @@ namespace {namespacename}
         private class EquivalenceClass
         {
             public BDD _set;
+
             public EquivalenceClass(BDD set)
             {
                 _set = set;

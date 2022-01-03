@@ -12,26 +12,32 @@ internal class TestApp
             return pb->m_bval;
         }
     }
+
     private static unsafe long test_13(B* pb)
     {
         return (--pb)->m_bval;
     }
+
     private static unsafe long test_20(B* pb, long i)
     {
         return (&pb[-(i << (int)i)])->m_bval;
     }
+
     private static unsafe long test_27(AA* px)
     {
         return AA.get_pb(px)->m_bval;
     }
+
     private static unsafe long test_34(long pb)
     {
         return ((B*)checked((long)pb))->m_bval;
     }
+
     private static unsafe long test_41(B* pb)
     {
         return (pb++)[0].m_bval;
     }
+
     private static unsafe long test_48(B[,] ab, long i, long j)
     {
         fixed (B* pb = &ab[i, j])
@@ -39,15 +45,18 @@ internal class TestApp
             return pb[0].m_bval;
         }
     }
+
     private static unsafe long test_55(B* pb1)
     {
         B* pb;
         return (pb = pb1 - 8)[0].m_bval;
     }
+
     private static unsafe long test_62(B* pb, B* pb1, B* pb2)
     {
         return (pb = pb + (pb2 - pb1))[0].m_bval;
     }
+
     private static unsafe long test_69(B* pb1, bool trig)
     {
         fixed (B* pb = &AA.s_x.m_b)
@@ -55,14 +64,17 @@ internal class TestApp
             return (trig ? pb : pb1)[0].m_bval;
         }
     }
+
     private static unsafe long test_76(byte* pb)
     {
         return ((B*)(pb + 7))[0].m_bval;
     }
+
     private static unsafe long test_83(B b)
     {
         return AA.get_bv1((&b));
     }
+
     private static unsafe long test_90()
     {
         fixed (B* pb = &AA.s_x.m_b)
@@ -70,22 +82,27 @@ internal class TestApp
             return AA.get_bv1(pb);
         }
     }
+
     private static unsafe long test_97(B* pb, long i)
     {
         return AA.get_bv1((&pb[i * 2]));
     }
+
     private static unsafe long test_104(B* pb1, B* pb2)
     {
         return AA.get_bv1((pb1 >= pb2 ? pb1 : null));
     }
+
     private static unsafe long test_111(long pb)
     {
         return AA.get_bv1(((B*)pb));
     }
+
     private static unsafe long test_118(B* pb)
     {
         return AA.get_bv2(*pb);
     }
+
     private static unsafe long test_125(B[] ab, long i)
     {
         fixed (B* pb = &ab[i])
@@ -93,27 +110,33 @@ internal class TestApp
             return AA.get_bv2(*pb);
         }
     }
+
     private static unsafe long test_132(B* pb)
     {
         return AA.get_bv2(*(pb += 6));
     }
+
     private static unsafe long test_139(B* pb, long[,,] i, long ii)
     {
         return AA.get_bv2(*(&pb[++i[--ii, 0, 0]]));
     }
+
     private static unsafe long test_146(AA* px)
     {
         return AA.get_bv2(*((B*)AA.get_pb_i(px)));
     }
+
     private static unsafe long test_153(byte diff, A* pa)
     {
         return AA.get_bv2(*((B*)(((byte*)pa) + diff)));
     }
+
     private static unsafe long test_160()
     {
         AA loc_x = new AA(0, 100);
         return AA.get_bv3(ref *(&loc_x.m_b));
     }
+
     private static unsafe long test_167(B[][] ab, long i, long j)
     {
         fixed (B* pb = &ab[i][j])
@@ -121,23 +144,28 @@ internal class TestApp
             return AA.get_bv3(ref *pb);
         }
     }
+
     private static unsafe long test_174(B* pb1, long i)
     {
         B* pb;
         return AA.get_bv3(ref *(pb = (B*)(((byte*)pb1) + i * sizeof(B))));
     }
+
     private static unsafe long test_181(B* pb, long[,,] i, long ii, byte jj)
     {
         return AA.get_bv3(ref *(&pb[i[ii - jj, 0, ii - jj] = ii - 1]));
     }
+
     private static unsafe long test_188(ulong ub, byte lb)
     {
         return AA.get_bv3(ref *((B*)(ub | lb)));
     }
+
     private static unsafe long test_195(long p, long s)
     {
         return AA.get_bv3(ref *((B*)((p >> 4) | s)));
     }
+
     private static unsafe long test_202(B[] ab)
     {
         fixed (B* pb = &ab[0])
@@ -145,26 +173,32 @@ internal class TestApp
             return pb->m_bval == 100 ? 100 : 101;
         }
     }
+
     private static unsafe long test_209(B* pb)
     {
         return (++pb)->m_bval == 100 ? 100 : 101;
     }
+
     private static unsafe long test_216(B* pb, long[] i, long ii)
     {
         return (&pb[i[ii]])->m_bval == 100 ? 100 : 101;
     }
+
     private static unsafe long test_223(AA* px)
     {
         return (AA.get_pb_1(px) + 1)->m_bval == 100 ? 100 : 101;
     }
+
     private static unsafe long test_230(long pb)
     {
         return ((B*)checked(((long)pb) + 1))->m_bval == 100 ? 100 : 101;
     }
+
     private static unsafe long test_237(B* pb)
     {
         return AA.get_i1(&(pb--)->m_bval);
     }
+
     private static unsafe long test_244(AA[,] ab, long i)
     {
         long j = 0;
@@ -173,23 +207,28 @@ internal class TestApp
             return AA.get_i1(&pb->m_bval);
         }
     }
+
     private static unsafe long test_251(B* pb1, long i)
     {
         B* pb;
         return AA.get_i1(&(pb = pb1 + i)->m_bval);
     }
+
     private static unsafe long test_258(B* pb1, B* pb2)
     {
         return AA.get_i1(&(pb1 > pb2 ? pb2 : null)->m_bval);
     }
+
     private static unsafe long test_265(long pb)
     {
         return AA.get_i1(&((B*)pb)->m_bval);
     }
+
     private static unsafe long test_272(double* pb, long i)
     {
         return AA.get_i1(&((B*)(pb + i))->m_bval);
     }
+
     private static unsafe long test_279(ref B b)
     {
         fixed (B* pb = &b)
@@ -197,26 +236,32 @@ internal class TestApp
             return AA.get_i2(pb->m_bval);
         }
     }
+
     private static unsafe long test_286(B* pb)
     {
         return AA.get_i2((--pb)->m_bval);
     }
+
     private static unsafe long test_293(B* pb, long i)
     {
         return AA.get_i2((&pb[-(i << (int)i)])->m_bval);
     }
+
     private static unsafe long test_300(AA* px)
     {
         return AA.get_i2(AA.get_pb(px)->m_bval);
     }
+
     private static unsafe long test_307(long pb)
     {
         return AA.get_i2(((B*)checked((long)pb))->m_bval);
     }
+
     private static unsafe long test_314(B* pb)
     {
         return AA.get_i3(ref (pb++)->m_bval);
     }
+
     private static unsafe long test_321(B[,] ab, long i, long j)
     {
         fixed (B* pb = &ab[i, j])
@@ -224,15 +269,18 @@ internal class TestApp
             return AA.get_i3(ref pb->m_bval);
         }
     }
+
     private static unsafe long test_328(B* pb1)
     {
         B* pb;
         return AA.get_i3(ref (pb = pb1 - 8)->m_bval);
     }
+
     private static unsafe long test_335(B* pb, B* pb1, B* pb2)
     {
         return AA.get_i3(ref (pb = pb + (pb2 - pb1))->m_bval);
     }
+
     private static unsafe long test_342(B* pb1, bool trig)
     {
         fixed (B* pb = &AA.s_x.m_b)
@@ -240,14 +288,17 @@ internal class TestApp
             return AA.get_i3(ref (trig ? pb : pb1)->m_bval);
         }
     }
+
     private static unsafe long test_349(byte* pb)
     {
         return AA.get_i3(ref ((B*)(pb + 7))->m_bval);
     }
+
     private static unsafe long test_356(B b)
     {
         return AA.get_bv1((&b)) != 100 ? 99 : 100;
     }
+
     private static unsafe long test_363()
     {
         fixed (B* pb = &AA.s_x.m_b)
@@ -255,23 +306,28 @@ internal class TestApp
             return AA.get_bv1(pb) != 100 ? 99 : 100;
         }
     }
+
     private static unsafe long test_370(B* pb, long i)
     {
         return AA.get_bv1((&pb[i * 2])) != 100 ? 99 : 100;
     }
+
     private static unsafe long test_377(B* pb1, B* pb2)
     {
         return AA.get_bv1((pb1 >= pb2 ? pb1 : null)) != 100 ? 99 : 100;
     }
+
     private static unsafe long test_384(long pb)
     {
         return AA.get_bv1(((B*)pb)) != 100 ? 99 : 100;
     }
+
     private static unsafe long test_391(B* pb)
     {
         long[] e = { 100, 101 };
         return e[pb + 1 > pb ? 0 : 1];
     }
+
     private static unsafe int Main()
     {
         AA loc_x = new AA(0, 100);

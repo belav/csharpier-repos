@@ -86,6 +86,7 @@ namespace System.Xml
         private SchemaInfo? _schemaInfo;
         private XmlSchemaSet? _schemas; // schemas associated with the cache
         private bool _reportValidity;
+
         //This variable represents the actual loading status. Since, IsLoading will
         //be manipulated sometimes for adding content to EntityReference this variable
         //has been added which would always represent the loading status of document.
@@ -562,6 +563,7 @@ namespace System.Xml
                 }
             }
         }
+
         internal override bool IsValidChildType(XmlNodeType type)
         {
             switch (type)
@@ -591,6 +593,7 @@ namespace System.Xml
                     return false;
             }
         }
+
         // the function examines all the siblings before the refNode
         //  if any of the nodes has type equals to "nt", return true; otherwise, return false;
         private bool HasNodeTypeInPrevSiblings(XmlNodeType nt, XmlNode? refNode)

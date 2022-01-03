@@ -19,8 +19,10 @@ namespace System.Reflection.TypeLoading.Ecma
     internal readonly struct GuardedPEReader
     {
         private readonly MetadataLoadContext _loader;
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Don't want debugger watch windows triggering AV's if one is still around after disposal.
         private readonly PEReader _peReader;
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Don't want debugger watch windows triggering AV's if one is still around after disposal.
         private readonly MetadataReader _reader;
 

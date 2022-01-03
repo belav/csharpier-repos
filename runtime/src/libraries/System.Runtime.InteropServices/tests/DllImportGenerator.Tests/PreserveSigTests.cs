@@ -152,6 +152,7 @@ namespace DllImportGenerator.IntegrationTests
             public class DummySafeHandle : Microsoft.Win32.SafeHandles.SafeHandleMinusOneIsInvalid
             {
                 private DummySafeHandle() : base(ownsHandle: true) { }
+
                 protected override bool ReleaseHandle() => true;
             }
 

@@ -547,6 +547,7 @@ namespace System.Xml.Xsl.IlGen
             "GetParameter"
         )!;
         public static readonly MethodInfo InvokeXsltLate = GetInvokeXsltLateBoundFunction();
+
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",

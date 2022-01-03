@@ -181,6 +181,7 @@ namespace LifeTimeFX
     public sealed class ArrayObjectContainer<T> : ObjectContainer<T> where T : LifeTime
     {
         private T[] objContainer = null;
+
         public void Init(int numberOfObjects)
         {
             objContainer = new T[numberOfObjects];
@@ -216,6 +217,7 @@ namespace LifeTimeFX
         private LifeTimeStrategy strategy;
 
         private ObjectContainer<LifeTime> objectContainer = null;
+
         //
 
         public void SetObjectContainer(ObjectContainer<LifeTime> objectContainer)

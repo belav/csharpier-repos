@@ -43,6 +43,7 @@ namespace System.Reflection
         public abstract RuntimeFieldHandle FieldHandle { get; }
 
         public override bool Equals(object? obj) => base.Equals(obj);
+
         public override int GetHashCode() => base.GetHashCode();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -73,6 +74,7 @@ namespace System.Reflection
         [DebuggerStepThrough]
         public void SetValue(object? obj, object? value) =>
             SetValue(obj, value, BindingFlags.Default, Type.DefaultBinder, null);
+
         public abstract void SetValue(
             object? obj,
             object? value,
@@ -86,6 +88,7 @@ namespace System.Reflection
         {
             throw new NotSupportedException(SR.NotSupported_AbstractNonCLS);
         }
+
         [CLSCompliant(false)]
         public virtual object? GetValueDirect(TypedReference obj)
         {
@@ -101,6 +104,7 @@ namespace System.Reflection
         {
             throw NotImplemented.ByDesign;
         }
+
         public virtual Type[] GetRequiredCustomModifiers()
         {
             throw NotImplemented.ByDesign;

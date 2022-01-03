@@ -12,6 +12,7 @@ namespace System.Xml.Xsl.XsltOld
         private const int NameReady = 3;
 
         private Avt? _nameAvt;
+
         // Compile time precalculated AVT
         private string? _name;
 

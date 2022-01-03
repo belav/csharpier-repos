@@ -386,6 +386,7 @@ public class DefaultHttpContextTests
     private class DisposableThing : IDisposable
     {
         public bool Disposed { get; set; }
+
         public void Dispose()
         {
             Disposed = true;

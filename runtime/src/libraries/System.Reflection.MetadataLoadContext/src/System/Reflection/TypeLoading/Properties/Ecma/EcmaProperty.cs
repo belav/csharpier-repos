@@ -63,8 +63,10 @@ namespace System.Reflection.TypeLoading.Ecma
             _handle.GetHashCode() ^ DeclaringType.GetHashCode();
 
         protected sealed override string ComputeName() => PropertyDefinition.Name.GetString(Reader);
+
         protected sealed override PropertyAttributes ComputeAttributes() =>
             PropertyDefinition.Attributes;
+
         protected sealed override Type ComputePropertyType() =>
             PropertyDefinition.DecodeSignature(_module, TypeContext).ReturnType;
 
@@ -73,6 +75,7 @@ namespace System.Reflection.TypeLoading.Ecma
 
         public sealed override Type[] GetOptionalCustomModifiers() =>
             GetCustomModifiers(isRequired: false);
+
         public sealed override Type[] GetRequiredCustomModifiers() =>
             GetCustomModifiers(isRequired: true);
 
@@ -120,6 +123,7 @@ namespace System.Reflection.TypeLoading.Ecma
             PropertyDefinition
                 .GetAccessors()
                 .Getter.ToMethodOrNull(GetRoDeclaringType(), ReflectedType);
+
         protected sealed override RoMethod? ComputeSetterMethod() =>
             PropertyDefinition
                 .GetAccessors()
@@ -136,6 +140,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 return ref _neverAccessThisExceptThroughPropertyDefinitionProperty;
             }
         }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly PropertyDefinition _neverAccessThisExceptThroughPropertyDefinitionProperty;
     }

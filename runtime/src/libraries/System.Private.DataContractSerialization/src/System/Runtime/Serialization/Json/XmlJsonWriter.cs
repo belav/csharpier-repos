@@ -78,6 +78,7 @@ namespace System.Runtime.Serialization.Json
         private JsonNodeWriter _nodeWriter = null!; // initialized in SetOutput
         private JsonNodeType[]? _scopes;
         private string? _serverTypeValue;
+
         // Do not use this field's value anywhere other than the WriteState property.
         // It's OK to set this field's value anywhere and then change the WriteState property appropriately.
         // If it's necessary to check the WriteState outside WriteState, use the WriteState property.

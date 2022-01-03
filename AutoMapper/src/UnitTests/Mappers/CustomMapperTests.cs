@@ -6,9 +6,11 @@ using Xunit;
 using AutoMapper.Internal;
 using System.ComponentModel;
 using System.Globalization;
+
 namespace AutoMapper.UnitTests.Mappers
 {
     using static TypeDescriptor;
+
     public class When_specifying_mapping_with_the_BCL_type_converter_class : NonValidatingSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =
@@ -30,41 +32,50 @@ namespace AutoMapper.UnitTests.Mappers
         {
             public int Value { get; set; }
         }
+
         public class Destination
         {
             public int OtherValue { get; set; }
         }
+
         public class CustomTypeConverter : TypeConverter
         {
             public override bool CanConvertTo(
                 ITypeDescriptorContext context,
                 Type destinationType
             ) => destinationType == typeof(Destination);
+
             public override object ConvertTo(
                 ITypeDescriptorContext context,
                 CultureInfo culture,
                 object value,
                 Type destinationType
             ) => new Destination { OtherValue = ((Source)value).Value + 10 };
+
             public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
                 sourceType == typeof(Destination);
+
             public override object ConvertFrom(
                 ITypeDescriptorContext context,
                 System.Globalization.CultureInfo culture,
                 object value
             ) => new Source { Value = ((Destination)value).OtherValue - 10 };
         }
+
         [Fact]
         public void Should_convert_from_type_using_the_custom_type_converter() =>
             Mapper.Map<Source, Destination>(new Source { Value = 5 }).OtherValue.ShouldBe(15);
+
         [Fact]
         public void Should_convert_to_type_using_the_custom_type_converter() =>
             Mapper.Map<Destination, Source>(new Destination { OtherValue = 15 }).Value.ShouldBe(5);
+
         public class TypeConverterMapper : ObjectMapper<object, object>
         {
             public override bool IsMatch(in TypePair context) =>
                 GetConverter(context.SourceType).CanConvertTo(context.DestinationType)
                 || GetConverter(context.DestinationType).CanConvertFrom(context.SourceType);
+
             public override object Map(
                 object source,
                 object destination,
@@ -80,6 +91,7 @@ namespace AutoMapper.UnitTests.Mappers
             }
         }
     }
+
     public class When_adding_a_custom_mapper : NonValidatingSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =

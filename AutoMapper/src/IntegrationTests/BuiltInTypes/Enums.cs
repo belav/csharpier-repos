@@ -18,17 +18,21 @@ namespace AutoMapper.IntegrationTests
             public string LastName { get; set; }
             public ConsoleColor ConsoleColor { get; set; }
         }
+
         public class CustomerViewModel
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public int ConsoleColor { get; set; }
         }
+
         public class Context : DbContext
         {
             public Context() => Database.SetInitializer(new DatabaseInitializer());
+
             public DbSet<Customer> Customers { get; set; }
         }
+
         public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
         {
             protected override void Seed(Context context)
@@ -45,8 +49,10 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(cfg => cfg.CreateProjection<Customer, CustomerViewModel>());
+
         [Fact]
         public void Can_map_with_projection()
         {
@@ -58,6 +64,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class UnderlyingTypeToEnum : AutoMapperSpecBase
     {
         public class Customer
@@ -67,17 +74,21 @@ namespace AutoMapper.IntegrationTests
             public string LastName { get; set; }
             public int ConsoleColor { get; set; }
         }
+
         public class CustomerViewModel
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public ConsoleColor ConsoleColor { get; set; }
         }
+
         public class Context : DbContext
         {
             public Context() => Database.SetInitializer(new DatabaseInitializer());
+
             public DbSet<Customer> Customers { get; set; }
         }
+
         public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
         {
             protected override void Seed(Context context)
@@ -94,8 +105,10 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(cfg => cfg.CreateProjection<Customer, CustomerViewModel>());
+
         [Fact]
         public void Can_map_with_projection()
         {
@@ -107,6 +120,7 @@ namespace AutoMapper.IntegrationTests
             }
         }
     }
+
     public class EnumToEnum : AutoMapperSpecBase
     {
         public class Customer
@@ -116,17 +130,21 @@ namespace AutoMapper.IntegrationTests
             public string LastName { get; set; }
             public DayOfWeek ConsoleColor { get; set; }
         }
+
         public class CustomerViewModel
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public ConsoleColor ConsoleColor { get; set; }
         }
+
         public class Context : DbContext
         {
             public Context() => Database.SetInitializer(new DatabaseInitializer());
+
             public DbSet<Customer> Customers { get; set; }
         }
+
         public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
         {
             protected override void Seed(Context context)
@@ -143,8 +161,10 @@ namespace AutoMapper.IntegrationTests
                 base.Seed(context);
             }
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(cfg => cfg.CreateProjection<Customer, CustomerViewModel>());
+
         [Fact]
         public void Can_map_with_projection()
         {

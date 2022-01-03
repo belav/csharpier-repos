@@ -13,25 +13,33 @@ namespace System.Security.Permissions
     public sealed partial class ZoneIdentityPermission : CodeAccessPermission
     {
         public ZoneIdentityPermission(PermissionState state) { }
+
         public ZoneIdentityPermission(SecurityZone zone) { }
+
         public SecurityZone SecurityZone { get; set; }
+
         public override IPermission Copy()
         {
             return this;
         }
+
         public override void FromXml(SecurityElement esd) { }
+
         public override IPermission Intersect(IPermission target)
         {
             return default(IPermission);
         }
+
         public override bool IsSubsetOf(IPermission target)
         {
             return false;
         }
+
         public override SecurityElement ToXml()
         {
             return default(SecurityElement);
         }
+
         public override IPermission Union(IPermission target)
         {
             return default(IPermission);

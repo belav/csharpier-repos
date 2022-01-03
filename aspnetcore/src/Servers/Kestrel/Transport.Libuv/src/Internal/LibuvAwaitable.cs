@@ -37,6 +37,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         };
 
         public LibuvAwaitable<TRequest> GetAwaiter() => this;
+
         public bool IsCompleted => ReferenceEquals(_callback, _callbackCompleted);
 
         public UvWriteResult GetResult()

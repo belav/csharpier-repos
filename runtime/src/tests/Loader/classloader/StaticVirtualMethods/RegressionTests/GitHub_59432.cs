@@ -29,5 +29,6 @@ interface ISomeInterface
 class SomeClass : ISomeInterface
 {
     static int ISomeInterface.SomeStaticAbstractMethod() => 42;
+
     public static int SomeStaticMethodInClass() => 42;
 }

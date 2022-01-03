@@ -21,7 +21,9 @@ namespace System.Security.Cryptography.Pkcs
         private Rfc3161TimestampRequest() { }
 
         public int Version => _parsedData.Version;
+
         public ReadOnlyMemory<byte> GetMessageHash() => _parsedData.MessageImprint.HashedMessage;
+
         public Oid HashAlgorithmId =>
             (
                 _hashAlgorithmId ??= new Oid(
@@ -34,7 +36,9 @@ namespace System.Security.Cryptography.Pkcs
                 ? null
                 : (_requestedPolicyId ??= new Oid(_parsedData.ReqPolicy, null));
         public bool RequestSignerCertificate => _parsedData.CertReq;
+
         public ReadOnlyMemory<byte>? GetNonce() => _parsedData.Nonce;
+
         public bool HasExtensions => _parsedData.Extensions?.Length > 0;
 
         public X509ExtensionCollection GetExtensions()

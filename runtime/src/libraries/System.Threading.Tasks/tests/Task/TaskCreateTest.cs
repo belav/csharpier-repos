@@ -94,6 +94,7 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.CreateTask();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskCreateTest5()
         {
@@ -108,6 +109,7 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.ExceptionTests();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskCreateTest6()
         {
@@ -122,6 +124,7 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.ExceptionTests();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskCreateTest7()
         {
@@ -331,6 +334,7 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.StartTask();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskCreateTest21()
         {
@@ -345,6 +349,7 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.ExceptionTests();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskCreateTest22()
         {
@@ -359,6 +364,7 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.ExceptionTests();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskCreateTest23()
         {
@@ -568,6 +574,7 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.CreateTask();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskCreateTest37()
         {
@@ -582,6 +589,7 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.ExceptionTests();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskCreateTest38()
         {
@@ -596,6 +604,7 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.ExceptionTests();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskCreateTest39()
         {
@@ -610,6 +619,7 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.ExceptionTests();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskCreateTest40()
         {
@@ -624,6 +634,7 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.ExceptionTests();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskCreateTest41()
         {
@@ -638,6 +649,7 @@ namespace System.Threading.Tasks.Tests
             TaskCreateTest test = new TaskCreateTest(parameters);
             test.ExceptionTests();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskCreateTest42()
         {

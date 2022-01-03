@@ -12,6 +12,7 @@ class B
     {
         A.b_cctor_run = true;
     }
+
     public static void method() { }
 }
 
@@ -36,12 +37,14 @@ namespace Bah
         {
             Console.WriteLine("Test.F from delegate");
         }
+
         public static string G(int a)
         {
             if (a != 2)
                 throw new Exception("Something went wrong in G");
             return "G got: " + a.ToString();
         }
+
         public string H(int a)
         {
             if (a != 3)

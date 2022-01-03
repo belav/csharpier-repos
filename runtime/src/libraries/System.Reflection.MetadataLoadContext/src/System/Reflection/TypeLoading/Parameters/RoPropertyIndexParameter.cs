@@ -31,10 +31,13 @@ namespace System.Reflection.TypeLoading
             _backingParameter.CustomAttributes;
         public sealed override bool HasDefaultValue => _backingParameter.HasDefaultValue;
         public sealed override object? RawDefaultValue => _backingParameter.RawDefaultValue;
+
         public sealed override Type[] GetOptionalCustomModifiers() =>
             _backingParameter.GetOptionalCustomModifiers();
+
         public sealed override Type[] GetRequiredCustomModifiers() =>
             _backingParameter.GetRequiredCustomModifiers();
+
         public sealed override string ToString() => _backingParameter.ToString();
     }
 }

@@ -616,6 +616,7 @@ Error for double input ""{s}""
         {
             [FieldOffset(0)]
             public uint IntData;
+
             [FieldOffset(0)]
             public float FloatData;
         }

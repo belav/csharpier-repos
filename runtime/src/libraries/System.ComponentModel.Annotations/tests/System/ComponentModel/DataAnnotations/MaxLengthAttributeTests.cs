@@ -205,6 +205,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
     class GenericIEnumerableClass : IEnumerable<int>
     {
         public IEnumerator<int> GetEnumerator() => Enumerable.Empty<int>().GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
@@ -214,20 +215,33 @@ namespace System.ComponentModel.DataAnnotations.Tests
         int ICollection<uint>.Count => 0;
         bool ICollection<int>.IsReadOnly => throw new NotSupportedException();
         bool ICollection<uint>.IsReadOnly => throw new NotSupportedException();
+
         void ICollection<int>.Add(int item) => throw new NotSupportedException();
+
         void ICollection<uint>.Add(uint item) => throw new NotSupportedException();
+
         void ICollection<int>.Clear() => throw new NotSupportedException();
+
         void ICollection<uint>.Clear() => throw new NotSupportedException();
+
         bool ICollection<int>.Contains(int item) => throw new NotSupportedException();
+
         bool ICollection<uint>.Contains(uint item) => throw new NotSupportedException();
+
         void ICollection<int>.CopyTo(int[] array, int arrayIndex) =>
             throw new NotSupportedException();
+
         void ICollection<uint>.CopyTo(uint[] array, int arrayIndex) =>
             throw new NotSupportedException();
+
         IEnumerator<int> IEnumerable<int>.GetEnumerator() => throw new NotSupportedException();
+
         IEnumerator IEnumerable.GetEnumerator() => throw new NotSupportedException();
+
         IEnumerator<uint> IEnumerable<uint>.GetEnumerator() => throw new NotSupportedException();
+
         bool ICollection<int>.Remove(int item) => throw new NotSupportedException();
+
         bool ICollection<uint>.Remove(uint item) => throw new NotSupportedException();
     }
 }

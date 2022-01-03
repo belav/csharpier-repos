@@ -4150,6 +4150,7 @@ namespace System.ComponentModel
             private readonly struct DefaultTypeDescriptor : ICustomTypeDescriptor
             {
                 private readonly TypeDescriptionNode _node;
+
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
                 private readonly Type _objectType;
                 private readonly object? _instance;

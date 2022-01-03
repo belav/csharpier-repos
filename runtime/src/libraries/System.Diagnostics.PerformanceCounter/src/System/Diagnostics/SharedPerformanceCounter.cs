@@ -2066,6 +2066,7 @@ namespace System.Diagnostics
             internal int _fileMappingSize;
             private SafeMemoryMappedViewHandle _fileViewAddress;
             private SafeMemoryMappedFileHandle _fileMappingHandle;
+
             //The version of the file mapping name is independent from the
             //assembly version.
 
@@ -2321,6 +2322,7 @@ namespace System.Diagnostics
             ProcessId = pid;
             StartupTime = startTime;
         }
+
         public int ProcessId;
         public long StartupTime;
     }

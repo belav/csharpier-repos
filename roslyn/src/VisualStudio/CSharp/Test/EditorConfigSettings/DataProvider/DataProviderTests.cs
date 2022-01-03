@@ -72,6 +72,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
 
         private static IWorkspaceSettingsProviderFactory<T> GettingSettingsProviderFactoryFromWorkspaceWithNullProjectPath<T>() =>
             GetWorkspace().Services.GetRequiredService<IWorkspaceSettingsProviderFactory<T>>();
+
         private static ILanguageSettingsProviderFactory<T> GettingSettingsProviderFactoryFromLanguageServiceWithNullProjectPath<T>(
             string languageName
         ) =>

@@ -3,7 +3,9 @@
 //
 
 class A { }
+
 class B { }
+
 interface IFoo<T>
 {
     void Foo(T t);

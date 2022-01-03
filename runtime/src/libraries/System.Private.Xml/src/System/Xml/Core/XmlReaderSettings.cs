@@ -556,6 +556,7 @@ namespace System.Xml
                 (ValidationFlags & XmlSchemaValidationFlags.ProcessIdentityConstraints) != 0
             );
         }
+
         private XmlReader AddConformanceWrapper(XmlReader baseReader)
         {
             XmlReaderSettings? baseReaderSettings = baseReader.Settings;

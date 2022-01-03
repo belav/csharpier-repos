@@ -78,9 +78,12 @@ internal struct BufferSegmentStack
     private readonly struct SegmentAsValueType
     {
         private readonly BufferSegment _value;
+
         private SegmentAsValueType(BufferSegment value) => _value = value;
+
         public static implicit operator SegmentAsValueType(BufferSegment s) =>
             new SegmentAsValueType(s);
+
         public static implicit operator BufferSegment(SegmentAsValueType s) => s._value;
     }
 }

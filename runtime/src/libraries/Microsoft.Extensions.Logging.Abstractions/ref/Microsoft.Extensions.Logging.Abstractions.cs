@@ -10,10 +10,12 @@ namespace Microsoft.Extensions.Logging
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
+
         public EventId(int id, string? name = null)
         {
             throw null;
         }
+
         public int Id
         {
             get { throw null; }
@@ -22,20 +24,24 @@ namespace Microsoft.Extensions.Logging
         {
             get { throw null; }
         }
+
         public bool Equals(Microsoft.Extensions.Logging.EventId other)
         {
             throw null;
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public static bool operator ==(
             Microsoft.Extensions.Logging.EventId left,
             Microsoft.Extensions.Logging.EventId right
@@ -43,10 +49,12 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static implicit operator Microsoft.Extensions.Logging.EventId(int i)
         {
             throw null;
         }
+
         public static bool operator !=(
             Microsoft.Extensions.Logging.EventId left,
             Microsoft.Extensions.Logging.EventId right
@@ -54,16 +62,19 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public partial interface IExternalScopeProvider
     {
         void ForEachScope<TState>(System.Action<object?, TState> callback, TState state);
         System.IDisposable Push(object? state);
     }
+
     public partial interface ILogger
     {
         System.IDisposable BeginScope<TState>(TState state);
@@ -76,31 +87,38 @@ namespace Microsoft.Extensions.Logging
             System.Func<TState, System.Exception?, string> formatter
         );
     }
+
     public partial interface ILoggerFactory : System.IDisposable
     {
         void AddProvider(Microsoft.Extensions.Logging.ILoggerProvider provider);
         Microsoft.Extensions.Logging.ILogger CreateLogger(string categoryName);
     }
+
     public partial interface ILoggerProvider : System.IDisposable
     {
         Microsoft.Extensions.Logging.ILogger CreateLogger(string categoryName);
     }
+
     public partial interface ILogger<out TCategoryName> : Microsoft.Extensions.Logging.ILogger
     {
     }
+
     public partial interface ISupportExternalScope
     {
         void SetScopeProvider(Microsoft.Extensions.Logging.IExternalScopeProvider scopeProvider);
     }
+
     public partial class LogDefineOptions
     {
         public LogDefineOptions() { }
+
         public bool SkipEnabledCheck
         {
             get { throw null; }
             set { }
         }
     }
+
     public static partial class LoggerExtensions
     {
         public static System.IDisposable BeginScope(
@@ -111,6 +129,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static void Log(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.LogLevel logLevel,
@@ -119,6 +138,7 @@ namespace Microsoft.Extensions.Logging
             string? message,
             params object?[] args
         ) { }
+
         public static void Log(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.LogLevel logLevel,
@@ -126,6 +146,7 @@ namespace Microsoft.Extensions.Logging
             string? message,
             params object?[] args
         ) { }
+
         public static void Log(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.LogLevel logLevel,
@@ -133,12 +154,14 @@ namespace Microsoft.Extensions.Logging
             string? message,
             params object?[] args
         ) { }
+
         public static void Log(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.LogLevel logLevel,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogCritical(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.EventId eventId,
@@ -146,23 +169,27 @@ namespace Microsoft.Extensions.Logging
             string? message,
             params object?[] args
         ) { }
+
         public static void LogCritical(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.EventId eventId,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogCritical(
             this Microsoft.Extensions.Logging.ILogger logger,
             System.Exception? exception,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogCritical(
             this Microsoft.Extensions.Logging.ILogger logger,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogDebug(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.EventId eventId,
@@ -170,23 +197,27 @@ namespace Microsoft.Extensions.Logging
             string? message,
             params object?[] args
         ) { }
+
         public static void LogDebug(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.EventId eventId,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogDebug(
             this Microsoft.Extensions.Logging.ILogger logger,
             System.Exception? exception,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogDebug(
             this Microsoft.Extensions.Logging.ILogger logger,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogError(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.EventId eventId,
@@ -194,23 +225,27 @@ namespace Microsoft.Extensions.Logging
             string? message,
             params object?[] args
         ) { }
+
         public static void LogError(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.EventId eventId,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogError(
             this Microsoft.Extensions.Logging.ILogger logger,
             System.Exception? exception,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogError(
             this Microsoft.Extensions.Logging.ILogger logger,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogInformation(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.EventId eventId,
@@ -218,23 +253,27 @@ namespace Microsoft.Extensions.Logging
             string? message,
             params object?[] args
         ) { }
+
         public static void LogInformation(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.EventId eventId,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogInformation(
             this Microsoft.Extensions.Logging.ILogger logger,
             System.Exception? exception,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogInformation(
             this Microsoft.Extensions.Logging.ILogger logger,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogTrace(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.EventId eventId,
@@ -242,23 +281,27 @@ namespace Microsoft.Extensions.Logging
             string? message,
             params object?[] args
         ) { }
+
         public static void LogTrace(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.EventId eventId,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogTrace(
             this Microsoft.Extensions.Logging.ILogger logger,
             System.Exception? exception,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogTrace(
             this Microsoft.Extensions.Logging.ILogger logger,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogWarning(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.EventId eventId,
@@ -266,34 +309,41 @@ namespace Microsoft.Extensions.Logging
             string? message,
             params object?[] args
         ) { }
+
         public static void LogWarning(
             this Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Logging.EventId eventId,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogWarning(
             this Microsoft.Extensions.Logging.ILogger logger,
             System.Exception? exception,
             string? message,
             params object?[] args
         ) { }
+
         public static void LogWarning(
             this Microsoft.Extensions.Logging.ILogger logger,
             string? message,
             params object?[] args
         ) { }
     }
+
     public partial class LoggerExternalScopeProvider
         : Microsoft.Extensions.Logging.IExternalScopeProvider
     {
         public LoggerExternalScopeProvider() { }
+
         public void ForEachScope<TState>(System.Action<object?, TState> callback, TState state) { }
+
         public System.IDisposable Push(object? state)
         {
             throw null;
         }
     }
+
     public static partial class LoggerFactoryExtensions
     {
         public static Microsoft.Extensions.Logging.ILogger CreateLogger(
@@ -303,6 +353,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Logging.ILogger<T> CreateLogger<T>(
             this Microsoft.Extensions.Logging.ILoggerFactory factory
         )
@@ -310,6 +361,7 @@ namespace Microsoft.Extensions.Logging
             throw null;
         }
     }
+
     public static partial class LoggerMessage
     {
         public static System.Action<Microsoft.Extensions.Logging.ILogger, System.Exception?> Define(
@@ -320,6 +372,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<Microsoft.Extensions.Logging.ILogger, System.Exception?> Define(
             Microsoft.Extensions.Logging.LogLevel logLevel,
             Microsoft.Extensions.Logging.EventId eventId,
@@ -329,6 +382,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Func<
             Microsoft.Extensions.Logging.ILogger,
             System.IDisposable
@@ -336,6 +390,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Func<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -344,6 +399,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Func<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -353,6 +409,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Func<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -363,6 +420,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Func<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -374,6 +432,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Func<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -386,6 +445,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Func<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -399,6 +459,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -411,6 +472,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -424,6 +486,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -437,6 +500,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -451,6 +515,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -465,6 +530,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -480,6 +546,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -495,6 +562,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -511,6 +579,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -527,6 +596,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -544,6 +614,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -561,6 +632,7 @@ namespace Microsoft.Extensions.Logging
         {
             throw null;
         }
+
         public static System.Action<
             Microsoft.Extensions.Logging.ILogger,
             T1,
@@ -580,15 +652,18 @@ namespace Microsoft.Extensions.Logging
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Method)]
     public sealed partial class LoggerMessageAttribute : System.Attribute
     {
         public LoggerMessageAttribute() { }
+
         public LoggerMessageAttribute(
             int eventId,
             Microsoft.Extensions.Logging.LogLevel level,
             string message
         ) { }
+
         public int EventId
         {
             get { throw null; }
@@ -615,21 +690,25 @@ namespace Microsoft.Extensions.Logging
             set { }
         }
     }
+
     public partial class Logger<T>
         : Microsoft.Extensions.Logging.ILogger,
           Microsoft.Extensions.Logging.ILogger<T>
     {
         public Logger(Microsoft.Extensions.Logging.ILoggerFactory factory) { }
+
         System.IDisposable Microsoft.Extensions.Logging.ILogger.BeginScope<TState>(TState state)
         {
             throw null;
         }
+
         bool Microsoft.Extensions.Logging.ILogger.IsEnabled(
             Microsoft.Extensions.Logging.LogLevel logLevel
         )
         {
             throw null;
         }
+
         void Microsoft.Extensions.Logging.ILogger.Log<TState>(
             Microsoft.Extensions.Logging.LogLevel logLevel,
             Microsoft.Extensions.Logging.EventId eventId,
@@ -638,6 +717,7 @@ namespace Microsoft.Extensions.Logging
             System.Func<TState, System.Exception?, string> formatter
         ) { }
     }
+
     public enum LogLevel
     {
         Trace = 0,
@@ -649,6 +729,7 @@ namespace Microsoft.Extensions.Logging
         None = 6,
     }
 }
+
 namespace Microsoft.Extensions.Logging.Abstractions
 {
     public readonly partial struct LogEntry<TState>
@@ -656,6 +737,7 @@ namespace Microsoft.Extensions.Logging.Abstractions
         private readonly TState _State_k__BackingField;
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
+
         public LogEntry(
             Microsoft.Extensions.Logging.LogLevel logLevel,
             string category,
@@ -667,6 +749,7 @@ namespace Microsoft.Extensions.Logging.Abstractions
         {
             throw null;
         }
+
         public string Category
         {
             get { throw null; }
@@ -692,21 +775,26 @@ namespace Microsoft.Extensions.Logging.Abstractions
             get { throw null; }
         }
     }
+
     public partial class NullLogger : Microsoft.Extensions.Logging.ILogger
     {
         internal NullLogger() { }
+
         public static Microsoft.Extensions.Logging.Abstractions.NullLogger Instance
         {
             get { throw null; }
         }
+
         public System.IDisposable BeginScope<TState>(TState state)
         {
             throw null;
         }
+
         public bool IsEnabled(Microsoft.Extensions.Logging.LogLevel logLevel)
         {
             throw null;
         }
+
         public void Log<TState>(
             Microsoft.Extensions.Logging.LogLevel logLevel,
             Microsoft.Extensions.Logging.EventId eventId,
@@ -715,48 +803,62 @@ namespace Microsoft.Extensions.Logging.Abstractions
             System.Func<TState, System.Exception?, string> formatter
         ) { }
     }
+
     public partial class NullLoggerFactory
         : Microsoft.Extensions.Logging.ILoggerFactory,
           System.IDisposable
     {
         public static readonly Microsoft.Extensions.Logging.Abstractions.NullLoggerFactory Instance;
+
         public NullLoggerFactory() { }
+
         public void AddProvider(Microsoft.Extensions.Logging.ILoggerProvider provider) { }
+
         public Microsoft.Extensions.Logging.ILogger CreateLogger(string name)
         {
             throw null;
         }
+
         public void Dispose() { }
     }
+
     public partial class NullLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
           System.IDisposable
     {
         internal NullLoggerProvider() { }
+
         public static Microsoft.Extensions.Logging.Abstractions.NullLoggerProvider Instance
         {
             get { throw null; }
         }
+
         public Microsoft.Extensions.Logging.ILogger CreateLogger(string categoryName)
         {
             throw null;
         }
+
         public void Dispose() { }
     }
+
     public partial class NullLogger<T>
         : Microsoft.Extensions.Logging.ILogger,
           Microsoft.Extensions.Logging.ILogger<T>
     {
         public static readonly Microsoft.Extensions.Logging.Abstractions.NullLogger<T> Instance;
+
         public NullLogger() { }
+
         public System.IDisposable BeginScope<TState>(TState state)
         {
             throw null;
         }
+
         public bool IsEnabled(Microsoft.Extensions.Logging.LogLevel logLevel)
         {
             throw null;
         }
+
         public void Log<TState>(
             Microsoft.Extensions.Logging.LogLevel logLevel,
             Microsoft.Extensions.Logging.EventId eventId,

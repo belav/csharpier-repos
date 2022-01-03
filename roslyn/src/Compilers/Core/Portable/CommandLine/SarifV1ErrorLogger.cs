@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis
     internal sealed class SarifV1ErrorLogger : SarifErrorLogger, IDisposable
     {
         private readonly DiagnosticDescriptorSet _descriptors;
+
         public SarifV1ErrorLogger(
             Stream stream,
             string toolName,

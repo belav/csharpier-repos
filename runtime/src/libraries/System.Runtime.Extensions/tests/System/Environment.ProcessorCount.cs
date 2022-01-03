@@ -250,12 +250,16 @@ namespace System.Tests
         {
             [FieldOffset(0)]
             public JobObjectCpuRateControlFlags ControlFlags;
+
             [FieldOffset(4)]
             public uint CpuRate;
+
             [FieldOffset(4)]
             public uint Weight;
+
             [FieldOffset(4)]
             public ushort MinRate;
+
             [FieldOffset(6)]
             public ushort MaxRate;
         }

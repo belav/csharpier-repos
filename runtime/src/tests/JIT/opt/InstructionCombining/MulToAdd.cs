@@ -116,10 +116,12 @@ public class TestFloats
     // Case 4: field
 
     public float field1 = 3.14f;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public void TestField() => field1 *= 2;
 
     public float field2 = 3.14f;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public void TestField_var() => field2 *= Var(2);
 

@@ -1257,6 +1257,7 @@ namespace System.Xml.Xsl.XsltOld
             private readonly string _baseUri;
             private readonly int _lineNumber,
                 _linePosition;
+
             public ErrorXPathExpression(
                 string expression,
                 string baseUri,
@@ -1273,6 +1274,7 @@ namespace System.Xml.Xsl.XsltOld
             {
                 return this;
             }
+
             public override void CheckErrors()
             {
                 throw new XsltException(

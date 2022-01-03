@@ -10,6 +10,7 @@ namespace System.Diagnostics
     internal sealed partial class DiagNode<T>
     {
         public DiagNode(T value) => Value = value;
+
         public T Value;
         public DiagNode<T>? Next;
     }
@@ -149,7 +150,9 @@ namespace System.Diagnostics
 
         // Note: Some consumers use this GetEnumerator dynamically to avoid allocations.
         public Enumerator<T> GetEnumerator() => new Enumerator<T>(_first);
+
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
@@ -157,6 +160,7 @@ namespace System.Diagnostics
     internal struct Enumerator<T> : IEnumerator<T>
     {
         private DiagNode<T>? _nextNode;
+
         [AllowNull, MaybeNull]
         private T _currentItem;
 

@@ -32,6 +32,7 @@ namespace System.Web.Helpers
 ";
 
         private static readonly HtmlElement _nullSpan = HtmlElement.CreateSpan("(null)", "null");
+
         // List of chars to escape within strings
         private static readonly Dictionary<char, string> _printableEscapeChars = new Dictionary<
             char,

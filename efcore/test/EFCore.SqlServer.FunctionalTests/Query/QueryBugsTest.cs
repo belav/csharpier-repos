@@ -8758,6 +8758,7 @@ ORDER BY [t].[Id], [t].[MasterTrunk22340Id], [t].[MasterTrunk22340Id0], [f0].[Cu
             {
                 [Column(TypeName = "decimal(18,2)")]
                 public decimal Amount { get; set; }
+
                 [Column(TypeName = "decimal(18,2)")]
                 public decimal Code { get; set; }
             }
@@ -8955,6 +8956,7 @@ FROM [CycleC] AS [c]"
             public class DependentOneToOne
             {
                 public int Id { get; set; }
+
                 [ForeignKey("Principal")]
                 public int PrincipalId { get; set; }
                 public PrincipalOneToOne Principal { get; set; }
@@ -8969,6 +8971,7 @@ FROM [CycleC] AS [c]"
             public class DependentOneToMany
             {
                 public int Id { get; set; }
+
                 [ForeignKey("Principal")]
                 public int PrincipalId { get; set; }
                 public PrincipalOneToMany Principal { get; set; }
@@ -9001,6 +9004,7 @@ FROM [CycleC] AS [c]"
             public class CycleC
             {
                 public int Id { get; set; }
+
                 [ForeignKey("B")]
                 public int BId { get; set; }
                 private CycleB B { get; set; }
@@ -9159,6 +9163,7 @@ FROM [Blogs] AS [b]"
             public class Blog11835
             {
                 public int Id { get; set; }
+
                 [NotMapped]
                 public string Title { get; set; }
                 public List<Post11835> Posts { get; set; }
@@ -10028,6 +10033,7 @@ WHERE JSON_VALUE([b].[JObject], '$.Author') = N'Maumar'"
 
             public override void Post(SendOrPostCallback callback, object state) =>
                 _tasks.Add((callback, state));
+
             public void Dispose() => _tasks.CompleteAdding();
 
             void WorkLoop()
@@ -10106,6 +10112,7 @@ ORDER BY [i].[_Position];"
             public class BaseEntity12482
             {
                 public int Id { get; set; }
+
                 [Column(TypeName = "sql_variant")]
                 public object Value { get; set; }
             }
@@ -10223,6 +10230,7 @@ ORDER BY [i].[_Position];"
             public Principal23674 Principal { get; set; }
             public SingleDependent23674 SingleDependent { get; set; }
         }
+
         private class SingleDependent23674
         {
             public int Id { get; set; }
@@ -10326,6 +10334,7 @@ ORDER BY [t].[Id], [t].[Id0], [t].[Id1], [p0].[Id]"
             public DirectorEntity Director { get; set; }
             public IList<PersonImageEntity> Images { get; set; } = new List<PersonImageEntity>();
         }
+
         private class PersonImageEntity
         {
             public int Id { get; set; }
@@ -11246,6 +11255,7 @@ ORDER BY [t].[Id]"
         protected TestSqlLoggerFactory TestSqlLoggerFactory =>
             (TestSqlLoggerFactory)ListLoggerFactory;
         protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
+
         protected override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
             base.AddOptions(builder)
                 .ConfigureWarnings(

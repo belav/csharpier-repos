@@ -379,6 +379,7 @@ namespace System.Drawing
             int status = Gdip.GdipBitmapSetResolution(new HandleRef(this, nativeImage), xDpi, yDpi);
             Gdip.CheckStatus(status);
         }
+
         public Bitmap Clone(Rectangle rect, PixelFormat format)
         {
             if (rect.Width == 0 || rect.Height == 0)

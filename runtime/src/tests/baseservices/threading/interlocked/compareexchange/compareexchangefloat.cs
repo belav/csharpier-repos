@@ -51,7 +51,9 @@ namespace Exchange
         private float totalValue = 0F;
         private int numberOfIterations;
         private float valueToAdd;
+
         public ThreadSafe() : this(100, 10.12345F) { }
+
         public ThreadSafe(int loops, float addend)
         {
             signal = new ManualResetEvent(false);
@@ -70,6 +72,7 @@ namespace Exchange
             for (int i = 0; i < numberOfIterations; i++)
                 AddToTotal(valueToAdd);
         }
+
         public float Expected
         {
             get { return (numberOfIterations * valueToAdd); }
@@ -78,6 +81,7 @@ namespace Exchange
         {
             get { return totalValue; }
         }
+
         private float AddToTotal(float addend)
         {
             float initialValue,

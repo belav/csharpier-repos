@@ -788,6 +788,7 @@ namespace System.Net.Http
             SslPolicyErrors,
             bool
         >? s_dangerousAcceptAnyServerCertificateValidator;
+
         [UnsupportedOSPlatform("browser")]
         public static Func<
             HttpRequestMessage,

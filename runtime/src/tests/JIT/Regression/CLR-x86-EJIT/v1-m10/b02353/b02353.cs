@@ -216,6 +216,7 @@ namespace DefaultNamespace
         {
             m_oObject = ("Hello World");
         }
+
         internal Object m_oObject;
     }
 }

@@ -9,8 +9,10 @@ internal struct AA
 {
     [FieldOffset(13)]
     public long tmp1;
+
     [FieldOffset(7)]
     public long tmp2;
+
     [FieldOffset(7)]
     public long tmp3;
 
@@ -19,8 +21,10 @@ internal struct AA
 
     [FieldOffset(36)]
     public int tmp4;
+
     [FieldOffset(44)]
     public long tmp5;
+
     [FieldOffset(39)]
     public uint tmp6;
 
@@ -47,6 +51,7 @@ internal struct AA
     {
         return arg;
     }
+
     public static long call_target_ref(ref long arg)
     {
         return arg;

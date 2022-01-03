@@ -104,7 +104,6 @@ builder.Services.AddAuthorization(
         options.FallbackPolicy = options.DefaultPolicy;
     }
 );
-
 #elif (WindowsAuth)
 builder.Services
     .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
@@ -117,7 +116,6 @@ builder.Services.AddAuthorization(
         options.FallbackPolicy = options.DefaultPolicy;
     }
 );
-
 #endif
 builder.Services.AddRazorPages();
 #if (OrganizationalAuth || IndividualB2CAuth)
@@ -155,7 +153,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 #else
 }
-
 #endif
 
 app.UseStaticFiles();

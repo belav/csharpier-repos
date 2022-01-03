@@ -335,6 +335,7 @@ namespace Dia.Util
             public UInt32 AddressOfRawData;
             public UInt32 PointerToRawData;
         }
+
         private enum ImageDebugType : uint
         {
             IMAGE_DEBUG_TYPE_UNKNOWN = 0,

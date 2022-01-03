@@ -38,6 +38,7 @@ namespace AutoMapper.UnitTests.Bug
             return result;
         }
     }
+
     public class AutoMapperBugTest
     {
         [Fact]

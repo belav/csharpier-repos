@@ -1393,6 +1393,7 @@ namespace System.Xml
 
             return (publicId, systemId);
         }
+
         //
         // Scanning methods - works directly with parsing buffer
         //

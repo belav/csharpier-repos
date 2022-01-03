@@ -93,6 +93,7 @@ namespace System.Collections.Generic.Tests
 
             public override bool Equals(object obj) =>
                 obj is MyClass c && this.SomeInt == c.SomeInt;
+
             public override int GetHashCode() => this.SomeInt;
         }
     }

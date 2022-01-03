@@ -35,6 +35,7 @@ namespace System.Numerics.Tensors.Tests
 
                 throw new ArgumentException(nameof(TensorType));
             }
+
             public Tensor<T> CreateFromDimensions<T>(ReadOnlySpan<int> dimensions)
             {
                 switch (TensorType)

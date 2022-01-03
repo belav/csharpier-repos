@@ -25,10 +25,12 @@ namespace System
         {
             HResult = HResults.E_NOTIMPL;
         }
+
         public NotImplementedException(string? message) : base(message)
         {
             HResult = HResults.E_NOTIMPL;
         }
+
         public NotImplementedException(string? message, Exception? inner) : base(message, inner)
         {
             HResult = HResults.E_NOTIMPL;

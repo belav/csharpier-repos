@@ -21,11 +21,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             'A',
             MetadataWriter.NameLengthLimit
         );
+
         // Longest legal path name.
         private static readonly string s_longPathName = new string(
             'A',
             MetadataWriter.PathLengthLimit
         );
+
         // Longest legal local name.
         private static readonly string s_longLocalName = new string(
             'A',

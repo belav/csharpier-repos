@@ -70,6 +70,7 @@ namespace SerializationTestTypes
     public class CircularLinkDerived : CircularLink
     {
         public CircularLinkDerived() { }
+
         public CircularLinkDerived(bool inti) : base() { }
     }
 
@@ -81,6 +82,7 @@ namespace SerializationTestTypes
         public KT1Base BData;
 
         public KT1Base() { }
+
         public KT1Base(bool init)
         {
             BData = new KT1Derived();
@@ -154,6 +156,7 @@ namespace SerializationTestTypes
         public KT2Base BData;
 
         public KT2Base() { }
+
         public KT2Base(bool init)
         {
             BData = new KT2Derived();
@@ -200,6 +203,7 @@ namespace SerializationTestTypes
         public KT3BaseKTMReturnsPrivateType BData;
 
         public KT3BaseKTMReturnsPrivateType() { }
+
         public KT3BaseKTMReturnsPrivateType(bool init)
         {
             BData = new KT3DerivedPrivate();
@@ -343,6 +347,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public ArrayList List = new ArrayList();
+
         public ArrayListWithCDCFilledWithMixedTypes() { }
 
         public ArrayListWithCDCFilledWithMixedTypes(bool init)
@@ -429,6 +434,7 @@ namespace SerializationTestTypes
         public Hashtable List = new Hashtable();
 
         public DCHashtableContainerPublic() { }
+
         public DCHashtableContainerPublic(bool init)
         {
             this.List.Add(new Guid("2838c886-08d4-4cb4-9995-45f79b4359fe"), new PublicDC());
@@ -467,6 +473,7 @@ namespace SerializationTestTypes
         public Hashtable List = new Hashtable();
 
         public DCHashtableContainerMixedTypes() { }
+
         public DCHashtableContainerMixedTypes(bool init)
         {
             this.List.Add(new Guid("00000000-0000-0000-0000-000000000000"), new PublicDC());
@@ -622,7 +629,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public object GenericData;
+
         public GenericContainer() { }
+
         public GenericContainer(bool init)
         {
             GenericData = new GenericBase<SimpleBaseContainer>();
@@ -681,6 +690,7 @@ namespace SerializationTestTypes
         public object Base2;
 
         public SimpleBaseContainer() { }
+
         public SimpleBaseContainer(bool init)
         {
             Base1 = new SimpleBaseDerived();
@@ -694,6 +704,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public List<object> ListData = new List<object>();
+
         public DCListPrivateTContainer2()
         {
             ListData.Add(new PrivateDC());
@@ -705,6 +716,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private List<PrivateDC> _listData = new List<PrivateDC>();
+
         public DCListPrivateTContainer()
         {
             _listData.Add(new PrivateDC());
@@ -716,6 +728,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public List<PublicDC> ListData = new List<PublicDC>();
+
         public DCListPublicTContainer()
         {
             ListData.Add(new PublicDC());
@@ -729,6 +742,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private List<object> _listData = new List<object>();
+
         public DCListMixedTContainer()
         {
             _listData.Add(new PublicDC());
@@ -1023,7 +1037,9 @@ namespace SerializationTestTypes
     public class SampleListExplicitWithDC : IList
     {
         private List<object> _internalList = new List<object>();
+
         public SampleListExplicitWithDC() { }
+
         public SampleListExplicitWithDC(bool init)
         {
             _internalList.Add(new DateTime());
@@ -1113,6 +1129,7 @@ namespace SerializationTestTypes
     public class SampleListExplicitWithoutDC : IList
     {
         private List<object> _internalList = new List<object>();
+
         public SampleListExplicitWithoutDC() { }
 
         public SampleListExplicitWithoutDC(bool init)
@@ -1209,7 +1226,9 @@ namespace SerializationTestTypes
     public class SampleListExplicitWithCDC : IList
     {
         private List<object> _internalList = new List<object>();
+
         public SampleListExplicitWithCDC() { }
+
         public SampleListExplicitWithCDC(bool init)
         {
             _internalList.Add(new DateTime());
@@ -1305,7 +1324,9 @@ namespace SerializationTestTypes
     public class SampleListExplicitWithCDCContainsPrivateDC : IList
     {
         private List<object> _internalList = new List<object>();
+
         public SampleListExplicitWithCDCContainsPrivateDC() { }
+
         public SampleListExplicitWithCDCContainsPrivateDC(bool init)
         {
             _internalList.Add(new DateTime());
@@ -1396,6 +1417,7 @@ namespace SerializationTestTypes
     public class SampleListTImplicitWithDC : IList<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleListTImplicitWithDC() { }
 
         public SampleListTImplicitWithDC(bool init)
@@ -1477,7 +1499,9 @@ namespace SerializationTestTypes
     public class SampleListTImplicitWithoutDC : IList<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleListTImplicitWithoutDC() { }
+
         public SampleListTImplicitWithoutDC(bool init)
         {
             DC dc1 = new DC();
@@ -1562,7 +1586,9 @@ namespace SerializationTestTypes
     public class SampleListTImplicitWithCDC : IList<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleListTImplicitWithCDC() { }
+
         public SampleListTImplicitWithCDC(bool init)
         {
             DC dc1 = new DC();
@@ -1642,7 +1668,9 @@ namespace SerializationTestTypes
     public class SampleListTExplicitWithDC : IList<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleListTExplicitWithDC() { }
+
         public SampleListTExplicitWithDC(bool init)
         {
             DC dc1 = new DC();
@@ -1722,7 +1750,9 @@ namespace SerializationTestTypes
     public class SampleListTExplicitWithoutDC : IList<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleListTExplicitWithoutDC() { }
+
         public SampleListTExplicitWithoutDC(bool init)
         {
             DC dc1 = new DC();
@@ -1807,7 +1837,9 @@ namespace SerializationTestTypes
     public class SampleListTExplicitWithCDC : IList<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleListTExplicitWithCDC() { }
+
         public SampleListTExplicitWithCDC(bool init)
         {
             DC dc1 = new DC();
@@ -1893,7 +1925,9 @@ namespace SerializationTestTypes
         : IList<PublicDCClassPrivateDM>
     {
         private List<PublicDCClassPrivateDM> _internalList = new List<PublicDCClassPrivateDM>();
+
         public SampleListTExplicitWithCDCContainsPublicDCClassPrivateDM() { }
+
         public SampleListTExplicitWithCDCContainsPublicDCClassPrivateDM(bool init)
         {
             PublicDCClassPrivateDM dc1 = new PublicDCClassPrivateDM();
@@ -1981,7 +2015,9 @@ namespace SerializationTestTypes
     public class SampleListTExplicitWithCDCContainsPrivateDC : IList<PrivateDC>
     {
         private List<PrivateDC> _internalList = new List<PrivateDC>();
+
         public SampleListTExplicitWithCDCContainsPrivateDC() { }
+
         public SampleListTExplicitWithCDCContainsPrivateDC(bool init)
         {
             PrivateDC dc1 = new PrivateDC();
@@ -2061,6 +2097,7 @@ namespace SerializationTestTypes
     public class SampleICollectionTImplicitWithDC : ICollection<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleICollectionTImplicitWithDC() { }
 
         public SampleICollectionTImplicitWithDC(bool init)
@@ -2121,7 +2158,9 @@ namespace SerializationTestTypes
     public class SampleICollectionTImplicitWithoutDC : ICollection<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleICollectionTImplicitWithoutDC() { }
+
         public SampleICollectionTImplicitWithoutDC(bool init)
         {
             DC dc1 = new DC();
@@ -2185,7 +2224,9 @@ namespace SerializationTestTypes
     public class SampleICollectionTImplicitWithCDC : ICollection<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleICollectionTImplicitWithCDC() { }
+
         public SampleICollectionTImplicitWithCDC(bool init)
         {
             DC dc1 = new DC();
@@ -2244,7 +2285,9 @@ namespace SerializationTestTypes
     public class SampleICollectionTExplicitWithDC : ICollection<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleICollectionTExplicitWithDC() { }
+
         public SampleICollectionTExplicitWithDC(bool init)
         {
             DC dc1 = new DC();
@@ -2303,7 +2346,9 @@ namespace SerializationTestTypes
     public class SampleICollectionTExplicitWithoutDC : ICollection<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleICollectionTExplicitWithoutDC() { }
+
         public SampleICollectionTExplicitWithoutDC(bool init)
         {
             DC dc1 = new DC();
@@ -2367,7 +2412,9 @@ namespace SerializationTestTypes
     public class SampleICollectionTExplicitWithCDC : ICollection<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleICollectionTExplicitWithCDC() { }
+
         public SampleICollectionTExplicitWithCDC(bool init)
         {
             DC dc1 = new DC();
@@ -2431,7 +2478,9 @@ namespace SerializationTestTypes
     public class SampleICollectionTExplicitWithCDCContainsPrivateDC : ICollection<PrivateDC>
     {
         private List<PrivateDC> _internalList = new List<PrivateDC>();
+
         public SampleICollectionTExplicitWithCDCContainsPrivateDC() { }
+
         public SampleICollectionTExplicitWithCDCContainsPrivateDC(bool init)
         {
             PrivateDC dc1 = new PrivateDC();
@@ -2490,6 +2539,7 @@ namespace SerializationTestTypes
     public class SampleIEnumerableTImplicitWithDC : IEnumerable<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleIEnumerableTImplicitWithDC() { }
 
         public SampleIEnumerableTImplicitWithDC(bool init)
@@ -2515,7 +2565,9 @@ namespace SerializationTestTypes
     public class SampleIEnumerableTImplicitWithoutDC : IEnumerable<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleIEnumerableTImplicitWithoutDC() { }
+
         public SampleIEnumerableTImplicitWithoutDC(bool init)
         {
             DC dc1 = new DC();
@@ -2549,7 +2601,9 @@ namespace SerializationTestTypes
     public class SampleIEnumerableTImplicitWithCDC : IEnumerable<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleIEnumerableTImplicitWithCDC() { }
+
         public SampleIEnumerableTImplicitWithCDC(bool init)
         {
             DC dc1 = new DC();
@@ -2578,7 +2632,9 @@ namespace SerializationTestTypes
     public class SampleIEnumerableTExplicitWithDC : IEnumerable<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleIEnumerableTExplicitWithDC() { }
+
         public SampleIEnumerableTExplicitWithDC(bool init)
         {
             DC dc1 = new DC();
@@ -2602,7 +2658,9 @@ namespace SerializationTestTypes
     public class SampleIEnumerableTExplicitWithoutDC : IEnumerable<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleIEnumerableTExplicitWithoutDC() { }
+
         public SampleIEnumerableTExplicitWithoutDC(bool init)
         {
             DC dc1 = new DC();
@@ -2636,7 +2694,9 @@ namespace SerializationTestTypes
     public class SampleIEnumerableTExplicitWithCDC : IEnumerable<DC>
     {
         private List<DC> _internalList = new List<DC>();
+
         public SampleIEnumerableTExplicitWithCDC() { }
+
         public SampleIEnumerableTExplicitWithCDC(bool init)
         {
             DC dc1 = new DC();
@@ -2670,7 +2730,9 @@ namespace SerializationTestTypes
     public class SampleIEnumerableTExplicitWithCDCContainsPrivateDC : IEnumerable<PrivateDC>
     {
         private List<PrivateDC> _internalList = new List<PrivateDC>();
+
         public SampleIEnumerableTExplicitWithCDCContainsPrivateDC() { }
+
         public SampleIEnumerableTExplicitWithCDCContainsPrivateDC(bool init)
         {
             PrivateDC dc1 = new PrivateDC();
@@ -2711,6 +2773,7 @@ namespace SerializationTestTypes
             _internalList.Add(double.NegativeInfinity);
             _internalList.Add(new Guid("0c9e174e-cdd8-4b68-a70d-aaeb26c7deeb"));
         }
+
         public int Add(object value)
         {
             _internalList.Add(value);
@@ -2744,6 +2807,7 @@ namespace SerializationTestTypes
     public class SampleICollectionImplicitWithoutDC : ICollection
     {
         private List<object> _internalList = new List<object>();
+
         public SampleICollectionImplicitWithoutDC() { }
 
         public SampleICollectionImplicitWithoutDC(bool init)
@@ -2755,6 +2819,7 @@ namespace SerializationTestTypes
             _internalList.Add(double.NegativeInfinity);
             _internalList.Add(new Guid("0c9e174e-cdd8-4b68-a70d-aaeb26c7deeb"));
         }
+
         public int Add(object value)
         {
             _internalList.Add(value);
@@ -2793,6 +2858,7 @@ namespace SerializationTestTypes
     public class SampleICollectionImplicitWithCDC : ICollection
     {
         private List<object> _internalList = new List<object>();
+
         public SampleICollectionImplicitWithCDC() { }
 
         public SampleICollectionImplicitWithCDC(bool init)
@@ -2804,6 +2870,7 @@ namespace SerializationTestTypes
             _internalList.Add(double.NegativeInfinity);
             _internalList.Add(new Guid("0c9e174e-cdd8-4b68-a70d-aaeb26c7deeb"));
         }
+
         public int Add(object value)
         {
             _internalList.Add(value);
@@ -2837,7 +2904,9 @@ namespace SerializationTestTypes
     public class SampleICollectionExplicitWithDC : ICollection
     {
         private List<object> _internalList = new List<object>();
+
         public SampleICollectionExplicitWithDC() { }
+
         public SampleICollectionExplicitWithDC(bool init)
         {
             _internalList.Add(new DateTime());
@@ -2847,6 +2916,7 @@ namespace SerializationTestTypes
             _internalList.Add(double.NegativeInfinity);
             _internalList.Add(new Guid("0c9e174e-cdd8-4b68-a70d-aaeb26c7deeb"));
         }
+
         public int Add(object value)
         {
             _internalList.Add(value);
@@ -2880,6 +2950,7 @@ namespace SerializationTestTypes
     public class SampleICollectionExplicitWithoutDC : ICollection
     {
         private List<object> _internalList = new List<object>();
+
         public SampleICollectionExplicitWithoutDC() { }
 
         public SampleICollectionExplicitWithoutDC(bool init)
@@ -2930,7 +3001,9 @@ namespace SerializationTestTypes
     public class SampleICollectionExplicitWithCDC : ICollection
     {
         private List<object> _internalList = new List<object>();
+
         public SampleICollectionExplicitWithCDC() { }
+
         public SampleICollectionExplicitWithCDC(bool init)
         {
             _internalList.Add(new DateTime());
@@ -2980,6 +3053,7 @@ namespace SerializationTestTypes
     public class SampleICollectionExplicitWithCDCContainsPrivateDC : ICollection
     {
         private List<object> _internalList = new List<object>();
+
         public SampleICollectionExplicitWithCDCContainsPrivateDC() { }
 
         public SampleICollectionExplicitWithCDCContainsPrivateDC(bool init)
@@ -3038,6 +3112,7 @@ namespace SerializationTestTypes
             _internalList.Add(double.NegativeInfinity);
             _internalList.Add(new Guid("0c9e174e-cdd8-4b68-a70d-aaeb26c7deeb"));
         }
+
         public int Add(object value)
         {
             _internalList.Add(value);
@@ -3066,6 +3141,7 @@ namespace SerializationTestTypes
             _internalList.Add(double.NegativeInfinity);
             _internalList.Add(new Guid("0c9e174e-cdd8-4b68-a70d-aaeb26c7deeb"));
         }
+
         public int Add(object value)
         {
             _internalList.Add(value);
@@ -3087,6 +3163,7 @@ namespace SerializationTestTypes
     public class SampleIEnumerableImplicitWithCDC : IEnumerable
     {
         private List<object> _internalList = new List<object>();
+
         public SampleIEnumerableImplicitWithCDC() { }
 
         public SampleIEnumerableImplicitWithCDC(bool init)
@@ -3115,7 +3192,9 @@ namespace SerializationTestTypes
     public class SampleIEnumerableExplicitWithDC : IEnumerable
     {
         private List<object> _internalList = new List<object>();
+
         public SampleIEnumerableExplicitWithDC() { }
+
         public SampleIEnumerableExplicitWithDC(bool init)
         {
             _internalList.Add(new DateTime());
@@ -3141,6 +3220,7 @@ namespace SerializationTestTypes
     public class SampleIEnumerableExplicitWithoutDC : IEnumerable
     {
         private List<object> _internalList = new List<object>();
+
         public SampleIEnumerableExplicitWithoutDC() { }
 
         public SampleIEnumerableExplicitWithoutDC(bool init)
@@ -3174,7 +3254,9 @@ namespace SerializationTestTypes
     public class SampleIEnumerableExplicitWithCDC : IEnumerable
     {
         private List<object> _internalList = new List<object>();
+
         public SampleIEnumerableExplicitWithCDC() { }
+
         public SampleIEnumerableExplicitWithCDC(bool init)
         {
             _internalList.Add(new DateTime());
@@ -3207,7 +3289,9 @@ namespace SerializationTestTypes
     public class SampleIEnumerableExplicitWithCDCContainsPrivateDC : IEnumerable
     {
         private List<object> _internalList = new List<object>();
+
         public SampleIEnumerableExplicitWithCDCContainsPrivateDC() { }
+
         public SampleIEnumerableExplicitWithCDCContainsPrivateDC(bool init)
         {
             _internalList.Add(new DateTime());
@@ -3245,6 +3329,7 @@ namespace SerializationTestTypes
         private Dictionary<object, object> _data = new Dictionary<object, object>();
 
         public MyIDictionaryContainsPublicDC() { }
+
         public MyIDictionaryContainsPublicDC(bool init)
         {
             _data.Add(new PublicDC(), new PublicDC());
@@ -3443,6 +3528,7 @@ namespace SerializationTestTypes
         private Dictionary<object, object> _data = new Dictionary<object, object>();
 
         public MyIDictionaryContainsPrivateDC() { }
+
         public MyIDictionaryContainsPrivateDC(bool init)
         {
             _data.Add(new PrivateDC(), new PrivateDC());
@@ -3534,6 +3620,7 @@ namespace SerializationTestTypes
         private Dictionary<PublicDC, PublicDC> _data = new Dictionary<PublicDC, PublicDC>();
 
         public MyGenericIDictionaryKVContainsPublicDC() { }
+
         public MyGenericIDictionaryKVContainsPublicDC(bool init)
         {
             _data.Add(new PublicDC(), new PublicDC());
@@ -3684,6 +3771,7 @@ namespace SerializationTestTypes
         private Dictionary<PublicDC, PublicDC> _data = new Dictionary<PublicDC, PublicDC>();
 
         public MyGenericIDictionaryKVContainsPublicDCExplicit() { }
+
         public MyGenericIDictionaryKVContainsPublicDCExplicit(bool init)
         {
             _data.Add(new PublicDC(), new PublicDC());
@@ -3991,6 +4079,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private Dictionary<PrivateDC, PrivateDC> _dictData = new Dictionary<PrivateDC, PrivateDC>();
+
         public DCDictionaryPrivateKTContainer()
         {
             _dictData.Add(new PrivateDC(), new PrivateDC());
@@ -4002,6 +4091,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public Dictionary<PublicDC, PublicDC> DictData = new Dictionary<PublicDC, PublicDC>();
+
         public DCDictionaryPublicKTContainer()
         {
             DictData.Add(new PublicDC(), new PublicDC());
@@ -4036,6 +4126,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private Dictionary<PublicDC, PrivateDC> _dictData = new Dictionary<PublicDC, PrivateDC>();
+
         public DCDictionaryMixedKTContainer2()
         {
             _dictData.Add(new PublicDC(), new PrivateDC());
@@ -4047,6 +4138,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private Dictionary<PrivateDC, PublicDC> _dictData = new Dictionary<PrivateDC, PublicDC>();
+
         public DCDictionaryMixedKTContainer3()
         {
             _dictData.Add(new PrivateDC(), new PublicDC());
@@ -4061,6 +4153,7 @@ namespace SerializationTestTypes
             PublicDCDerivedPublic,
             PublicDC
         >();
+
         public DCDictionaryMixedKTContainer4()
         {
             DictData.Add(new PublicDCDerivedPublic(), new PublicDC());
@@ -4075,6 +4168,7 @@ namespace SerializationTestTypes
             PublicDCDerivedPrivate,
             PublicDC
         >();
+
         public DCDictionaryMixedKTContainer5()
         {
             _dictData.Add(new PublicDCDerivedPrivate(), new PublicDC());
@@ -4089,6 +4183,7 @@ namespace SerializationTestTypes
             PublicDCDerivedPublic,
             PrivateDC
         >();
+
         public DCDictionaryMixedKTContainer6()
         {
             _dictData.Add(new PublicDCDerivedPublic(), new PrivateDC());
@@ -4103,6 +4198,7 @@ namespace SerializationTestTypes
             PublicDCDerivedPrivate,
             PrivateDC
         >();
+
         public DCDictionaryMixedKTContainer7()
         {
             _dictData.Add(new PublicDCDerivedPrivate(), new PrivateDC());
@@ -4117,6 +4213,7 @@ namespace SerializationTestTypes
             PublicDCDerivedPublic,
             PublicDCDerivedPublic
         >();
+
         public DCDictionaryMixedKTContainer8()
         {
             DictData.Add(new PublicDCDerivedPublic(), new PublicDCDerivedPublic());
@@ -4129,6 +4226,7 @@ namespace SerializationTestTypes
         [DataMember]
         private Dictionary<PublicDCDerivedPrivate, PublicDCDerivedPrivate> _dictData =
             new Dictionary<PublicDCDerivedPrivate, PublicDCDerivedPrivate>();
+
         public DCDictionaryMixedKTContainer9()
         {
             _dictData.Add(new PublicDCDerivedPrivate(), new PublicDCDerivedPrivate());
@@ -4141,6 +4239,7 @@ namespace SerializationTestTypes
         [DataMember]
         private Dictionary<PublicDCDerivedPublic, PublicDCDerivedPrivate> _dictData =
             new Dictionary<PublicDCDerivedPublic, PublicDCDerivedPrivate>();
+
         public DCDictionaryMixedKTContainer10()
         {
             _dictData.Add(new PublicDCDerivedPublic(), new PublicDCDerivedPrivate());
@@ -4153,6 +4252,7 @@ namespace SerializationTestTypes
         [DataMember]
         private Dictionary<PublicDCDerivedPrivate, PublicDCDerivedPublic> _dictData =
             new Dictionary<PublicDCDerivedPrivate, PublicDCDerivedPublic>();
+
         public DCDictionaryMixedKTContainer11()
         {
             _dictData.Add(new PublicDCDerivedPrivate(), new PublicDCDerivedPublic());
@@ -4170,6 +4270,7 @@ namespace SerializationTestTypes
             PublicDCClassPrivateDM,
             PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM
         >();
+
         public DCDictionaryMixedKTContainer12()
         {
             _dictData.Add(
@@ -4184,6 +4285,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private Dictionary<KT1Base, KT2Base> _dictData = new Dictionary<KT1Base, KT2Base>();
+
         public DCDictionaryMixedKTContainer13()
         {
             _dictData.Add(new KT1Base(), new KT2Base());
@@ -4200,6 +4302,7 @@ namespace SerializationTestTypes
             PrivateIXmlSerializables,
             PrivateDefaultCtorIXmlSerializables
         >();
+
         public DCDictionaryMixedKTContainer14()
         {
             _dictData.Add(
@@ -4226,6 +4329,7 @@ namespace SerializationTestTypes
             }
             return other.Data.Equals(Data);
         }
+
         public override int GetHashCode()
         {
             return Data.GetHashCode();
@@ -4250,6 +4354,7 @@ namespace SerializationTestTypes
             }
             return other.Data.Equals(Data);
         }
+
         public override int GetHashCode()
         {
             return Data.GetHashCode();
@@ -4401,6 +4506,7 @@ namespace SerializationTestTypes
     public class PrivateDefaultCtorIXmlSerializables : IXmlSerializable
     {
         private PrivateDefaultCtorIXmlSerializables() { }
+
         public PrivateDefaultCtorIXmlSerializables(bool init) { }
 
         private byte[] _bits = System.Text.Encoding.UTF8.GetBytes("hello world");
@@ -4610,6 +4716,7 @@ namespace SerializationTestTypes
         public string Data = "Data";
 
         public PrivateDCClassPublicDM() { }
+
         public PrivateDCClassPublicDM(bool init)
         {
             Data = "No change";
@@ -4626,6 +4733,7 @@ namespace SerializationTestTypes
         {
             _data = string.Empty;
         }
+
         public PrivateDCClassPrivateDM(bool init)
         {
             _data = "No change";
@@ -4639,6 +4747,7 @@ namespace SerializationTestTypes
         public string Data;
 
         public PublicDCClassPublicDM() { }
+
         public PublicDCClassPublicDM(bool init)
         {
             Data = "No change";
@@ -4655,6 +4764,7 @@ namespace SerializationTestTypes
         {
             _data = string.Empty;
         }
+
         public PublicDCClassPrivateDM(bool init)
         {
             _data = "No change";
@@ -4668,6 +4778,7 @@ namespace SerializationTestTypes
         internal string Data;
 
         public PublicDCClassInternalDM() { }
+
         public PublicDCClassInternalDM(bool init)
         {
             Data = "No change";
@@ -4687,6 +4798,7 @@ namespace SerializationTestTypes
         internal string Data3 = string.Empty;
 
         public PublicDCClassMixedDM() { }
+
         public PublicDCClassMixedDM(bool init)
         {
             Data1 = "No change";
@@ -4732,6 +4844,7 @@ namespace SerializationTestTypes
     public class Prop_PublicDCClassPublicDM_PublicDCClassPrivateDM
     {
         private PublicDCClassPrivateDM _data;
+
         [DataMember]
         public PublicDCClassPrivateDM Data
         {
@@ -4740,6 +4853,7 @@ namespace SerializationTestTypes
         }
 
         public Prop_PublicDCClassPublicDM_PublicDCClassPrivateDM() { }
+
         public Prop_PublicDCClassPublicDM_PublicDCClassPrivateDM(bool init)
         {
             Data = new PublicDCClassPrivateDM();
@@ -4750,6 +4864,7 @@ namespace SerializationTestTypes
     public class Prop_SetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM
     {
         internal PublicDCClassPrivateDM _data;
+
         [DataMember]
         public virtual PublicDCClassPrivateDM Data
         {
@@ -4758,6 +4873,7 @@ namespace SerializationTestTypes
         }
 
         public Prop_SetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM() { }
+
         public Prop_SetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM(bool init)
         {
             Data = new PublicDCClassPrivateDM();
@@ -4768,6 +4884,7 @@ namespace SerializationTestTypes
     public class Prop_GetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM
     {
         internal PublicDCClassPrivateDM _data;
+
         [DataMember]
         public PublicDCClassPrivateDM Data
         {
@@ -4776,6 +4893,7 @@ namespace SerializationTestTypes
         }
 
         public Prop_GetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM() { }
+
         public Prop_GetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM(bool init)
         {
             Data = new PublicDCClassPrivateDM();
@@ -4795,6 +4913,7 @@ namespace SerializationTestTypes
         }
 
         public Prop_PrivateDCClassPublicDM() { }
+
         public Prop_PrivateDCClassPublicDM(bool init)
         {
             Data = "No change";
@@ -4805,6 +4924,7 @@ namespace SerializationTestTypes
     internal class Prop_PrivateDCClassPrivateDM
     {
         private string _data;
+
         [DataMember]
         private string Data
         {
@@ -4813,6 +4933,7 @@ namespace SerializationTestTypes
         }
 
         public Prop_PrivateDCClassPrivateDM() { }
+
         public Prop_PrivateDCClassPrivateDM(bool init)
         {
             Data = "No change";
@@ -4823,6 +4944,7 @@ namespace SerializationTestTypes
     public class Prop_PublicDCClassPublicDM
     {
         private string _data;
+
         [DataMember]
         public string Data
         {
@@ -4831,6 +4953,7 @@ namespace SerializationTestTypes
         }
 
         public Prop_PublicDCClassPublicDM() { }
+
         public Prop_PublicDCClassPublicDM(bool init)
         {
             Data = "No change";
@@ -4841,6 +4964,7 @@ namespace SerializationTestTypes
     public class Prop_PublicDCClassPrivateDM
     {
         private string _data;
+
         [DataMember]
         private string Data
         {
@@ -4849,6 +4973,7 @@ namespace SerializationTestTypes
         }
 
         public Prop_PublicDCClassPrivateDM() { }
+
         public Prop_PublicDCClassPrivateDM(bool init)
         {
             Data = "No change";
@@ -4859,6 +4984,7 @@ namespace SerializationTestTypes
     public class Prop_PublicDCClassInternalDM
     {
         private string _data;
+
         [DataMember]
         internal string Data
         {
@@ -4867,6 +4993,7 @@ namespace SerializationTestTypes
         }
 
         public Prop_PublicDCClassInternalDM() { }
+
         public Prop_PublicDCClassInternalDM(bool init)
         {
             Data = "No change";
@@ -4902,6 +5029,7 @@ namespace SerializationTestTypes
         }
 
         public Prop_PublicDCClassMixedDM() { }
+
         public Prop_PublicDCClassMixedDM(bool init)
         {
             Data1 = "No change";
@@ -4933,6 +5061,7 @@ namespace SerializationTestTypes
     public class Prop_SetPrivate_PublicDCClassPublicDM
     {
         internal string _data;
+
         [DataMember]
         public virtual string Data
         {
@@ -4941,6 +5070,7 @@ namespace SerializationTestTypes
         }
 
         public Prop_SetPrivate_PublicDCClassPublicDM() { }
+
         public Prop_SetPrivate_PublicDCClassPublicDM(bool init)
         {
             Data = "No change";
@@ -4951,6 +5081,7 @@ namespace SerializationTestTypes
     public class Prop_GetPrivate_PublicDCClassPublicDM
     {
         internal string _data;
+
         [DataMember]
         public string Data
         {
@@ -4959,6 +5090,7 @@ namespace SerializationTestTypes
         }
 
         public Prop_GetPrivate_PublicDCClassPublicDM() { }
+
         public Prop_GetPrivate_PublicDCClassPublicDM(bool init)
         {
             Data = "No change";
@@ -4976,6 +5108,7 @@ namespace SerializationTestTypes
         }
 
         public Derived_Override_Prop_All_Public() { }
+
         public Derived_Override_Prop_All_Public(bool init)
         {
             Data = "No change";
@@ -4993,6 +5126,7 @@ namespace SerializationTestTypes
         }
 
         public Derived_Override_Prop_Private() { }
+
         public Derived_Override_Prop_Private(bool init)
         {
             Data = "No change";
@@ -5010,6 +5144,7 @@ namespace SerializationTestTypes
         }
 
         public Derived_Override_Prop_GetPrivate_All_Public() { }
+
         public Derived_Override_Prop_GetPrivate_All_Public(bool init)
         {
             Data = "No change";
@@ -5027,6 +5162,7 @@ namespace SerializationTestTypes
         }
 
         public Derived_Override_Prop_GetPrivate_Private() { }
+
         public Derived_Override_Prop_GetPrivate_Private(bool init)
         {
             Data = "No change";
@@ -5245,6 +5381,7 @@ namespace SerializationTestTypes
         public string Data2 = "string";
 
         public CallBackSample_OnDeserialized_Public_Derived() { }
+
         [OnDeserialized]
         public void OnDeserialized(System.Runtime.Serialization.StreamingContext context) { }
     }
@@ -5922,6 +6059,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public string Data;
+
         public PublicDCStruct(bool init)
         {
             Data = "Data";
@@ -6010,6 +6148,7 @@ namespace SerializationTestTypes
         public DataTable dataTable2;
 
         public DCPublicDatasetPublic() { }
+
         public DCPublicDatasetPublic(bool init)
         {
             dataSet = new DataSet("MyData");
@@ -6146,6 +6285,7 @@ namespace SerializationTestTypes
         public DateTimeOffset[] arrayDTO;
 
         public DTOContainer() { }
+
         public DTOContainer(bool init)
         {
             lDTO.Add(DateTimeOffset.MaxValue);

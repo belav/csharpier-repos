@@ -42,6 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return _lazySignature;
             }
         }
+
         void IReference.Dispatch(MetadataVisitor visitor) =>
             visitor.Visit((IFunctionPointerTypeReference)this);
 
@@ -54,15 +55,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         INamespaceTypeReference? ITypeReference.AsNamespaceTypeReference => null;
         INestedTypeReference? ITypeReference.AsNestedTypeReference => null;
         ISpecializedNestedTypeReference? ITypeReference.AsSpecializedNestedTypeReference => null;
+
         INamespaceTypeDefinition? ITypeReference.AsNamespaceTypeDefinition(EmitContext context) =>
             null;
+
         INestedTypeDefinition? ITypeReference.AsNestedTypeDefinition(EmitContext context) => null;
+
         ITypeDefinition? ITypeReference.AsTypeDefinition(EmitContext context) => null;
+
         ITypeDefinition? ITypeReference.GetResolvedType(EmitContext context) => null;
+
         bool ITypeReference.IsValueType => AdaptedFunctionPointerTypeSymbol.IsValueType;
 
         IEnumerable<ICustomAttribute> IReference.GetAttributes(EmitContext context) =>
             SpecializedCollections.EmptyEnumerable<ICustomAttribute>();
+
         IDefinition? IReference.AsDefinition(EmitContext context) => null;
 
         /// <summary>
@@ -90,6 +97,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public ImmutableArray<IParameterTypeInformation> GetParameters(EmitContext context) =>
                 Underlying.GetParameters(context);
+
             public ITypeReference GetType(EmitContext context) => Underlying.GetType(context);
 
             public override bool Equals(object? obj)

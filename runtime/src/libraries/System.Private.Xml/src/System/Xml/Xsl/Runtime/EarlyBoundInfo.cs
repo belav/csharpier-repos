@@ -15,6 +15,7 @@ namespace System.Xml.Xsl.Runtime
     {
         private readonly string _namespaceUri; // Namespace Uri mapped to these early bound functions
         private readonly ConstructorInfo _constrInfo; // Constructor for the early bound function object
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         private readonly Type _ebType;
 

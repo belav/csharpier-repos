@@ -611,10 +611,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get { return Data.HasSignature; }
         }
+
         public bool HasExplicitReturnType(
             out RefKind refKind,
             out TypeWithAnnotations returnType
         ) => Data.HasExplicitReturnType(out refKind, out returnType);
+
         public bool HasExplicitlyTypedParameterList
         {
             get { return Data.HasExplicitlyTypedParameterList; }
@@ -623,6 +625,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get { return Data.ParameterCount; }
         }
+
         public TypeWithAnnotations InferReturnType(
             ConversionsBase conversions,
             NamedTypeSymbol delegateType,
@@ -635,6 +638,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return Data.RefKind(index);
         }
+
         public void GenerateAnonymousFunctionConversionError(
             BindingDiagnosticBag diagnostics,
             TypeSymbol targetType
@@ -642,35 +646,43 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Data.GenerateAnonymousFunctionConversionError(diagnostics, targetType);
         }
+
         public bool GenerateSummaryErrors(BindingDiagnosticBag diagnostics)
         {
             return Data.GenerateSummaryErrors(diagnostics);
         }
+
         public bool IsAsync
         {
             get { return Data.IsAsync; }
         }
         public bool IsStatic => Data.IsStatic;
+
         public SyntaxList<AttributeListSyntax> ParameterAttributes(int index)
         {
             return Data.ParameterAttributes(index);
         }
+
         public TypeWithAnnotations ParameterTypeWithAnnotations(int index)
         {
             return Data.ParameterTypeWithAnnotations(index);
         }
+
         public TypeSymbol ParameterType(int index)
         {
             return ParameterTypeWithAnnotations(index).Type;
         }
+
         public Location ParameterLocation(int index)
         {
             return Data.ParameterLocation(index);
         }
+
         public string ParameterName(int index)
         {
             return Data.ParameterName(index);
         }
+
         public bool ParameterIsDiscard(int index)
         {
             return Data.ParameterIsDiscard(index);

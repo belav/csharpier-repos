@@ -118,20 +118,25 @@ namespace Dynamic.Tests
     public class OneExplicitlyImplementedNonGenericInterface1 : NonGenericInterface1
     {
         int NonGenericInterface1.Foo() => 0;
+
         public int Bar() => 1;
     }
 
     public struct OneExplicitlyImplementedNonGenericInterface2 : NonGenericInterface1
     {
         int NonGenericInterface1.Foo() => 0;
+
         public int Foo() => 2;
+
         public int Bar() => 1;
     }
 
     public class OneExplicitlyImplementedNonGenericInterface3 : NonGenericInterface1
     {
         int NonGenericInterface1.Foo() => 0;
+
         public int Foo() => 2;
+
         public int Bar() => 1;
     }
 
@@ -140,6 +145,7 @@ namespace Dynamic.Tests
           NonGenericInterface2
     {
         int NonGenericInterface1.Foo() => 0;
+
         public int Bar() => 1;
     }
 
@@ -148,7 +154,9 @@ namespace Dynamic.Tests
           NonGenericInterface3
     {
         int NonGenericInterface1.Foo() => 0;
+
         int NonGenericInterface3.Foo() => 2;
+
         public int Bar() => 1;
     }
 

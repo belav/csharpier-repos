@@ -42,6 +42,7 @@ namespace System.ComponentModel.Composition
         string String1 { get; }
         string String2 { get; }
     }
+
     public class MetadataViewWithImplementationNoInterface
     {
         public MetadataViewWithImplementationNoInterface(IDictionary<string, object> metadata)
@@ -295,6 +296,7 @@ namespace System.ComponentModel.Composition
         {
             public AbstractClassWithConstructorMetadataView(IDictionary<string, object> metadata)
             { }
+
             public abstract object Value { get; }
         }
 

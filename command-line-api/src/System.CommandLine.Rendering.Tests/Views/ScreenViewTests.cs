@@ -158,6 +158,7 @@ namespace System.CommandLine.Rendering.Tests.Views
         private class TestSynchronizationContext : SynchronizationContext
         {
             private readonly List<Action> _postActions = new List<Action>();
+
             public void InvokePostCallbacks()
             {
                 while (_postActions.FirstOrDefault() is Action postAction)
@@ -168,6 +169,7 @@ namespace System.CommandLine.Rendering.Tests.Views
             }
 
             public int PostInvocationCount { get; private set; }
+
             public override void Post(SendOrPostCallback d, object state)
             {
                 PostInvocationCount++;

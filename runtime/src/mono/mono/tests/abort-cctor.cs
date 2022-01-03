@@ -13,6 +13,7 @@ class Driver
     {
         internal static bool gotToEnd,
             caughtException;
+
         static StaticConstructor1()
         {
             try
@@ -386,6 +387,7 @@ class Driver
     class StaticConstructor5
     {
         public static bool catched_exception = false;
+
         static StaticConstructor5()
         {
             Driver.mre1.Set();

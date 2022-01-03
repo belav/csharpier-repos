@@ -8,6 +8,7 @@ struct S0
 {
     public ulong F0;
     public sbyte F6;
+
     public S0(sbyte f6) : this()
     {
         F6 = f6;

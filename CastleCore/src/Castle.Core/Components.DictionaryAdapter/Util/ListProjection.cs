@@ -585,6 +585,7 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         public event ListChangedEventHandler ListChanged;
+
         protected virtual void OnListChanged(ListChangedEventArgs args)
         {
             var handler = ListChanged;

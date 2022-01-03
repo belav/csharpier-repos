@@ -355,6 +355,7 @@ namespace System.Net.Http.Functional.Tests
                 );
             }
         }
+
         [Theory]
         [InlineData(CancellationMode.CancelPendingRequests, false)]
         [InlineData(CancellationMode.DisposeHttpClient, false)]

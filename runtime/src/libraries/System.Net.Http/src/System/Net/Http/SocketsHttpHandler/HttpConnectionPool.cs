@@ -69,12 +69,16 @@ namespace System.Net.Http
         /// <summary>List of available HTTP/1.1 connections stored in the pool.</summary>
         private readonly List<HttpConnection> _availableHttp11Connections =
             new List<HttpConnection>();
+
         /// <summary>The maximum number of HTTP/1.1 connections allowed to be associated with the pool.</summary>
         private readonly int _maxHttp11Connections;
+
         /// <summary>The number of HTTP/1.1 connections associated with the pool, including in use, available, and pending.</summary>
         private int _associatedHttp11ConnectionCount;
+
         /// <summary>The number of HTTP/1.1 connections that are in the process of being established.</summary>
         private int _pendingHttp11ConnectionCount;
+
         /// <summary>Queue of requests waiting for an HTTP/1.1 connection.</summary>
         private RequestQueue<HttpConnection> _http11RequestQueue;
 
@@ -82,10 +86,13 @@ namespace System.Net.Http
 
         /// <summary>List of available HTTP/2 connections stored in the pool.</summary>
         private List<Http2Connection>? _availableHttp2Connections;
+
         /// <summary>The number of HTTP/2 connections associated with the pool, including in use, available, and pending.</summary>
         private int _associatedHttp2ConnectionCount;
+
         /// <summary>Indicates whether an HTTP/2 connection is in the process of being established.</summary>
         private bool _pendingHttp2Connection;
+
         /// <summary>Queue of requests waiting for an HTTP/2 connection.</summary>
         private RequestQueue<Http2Connection?> _http2RequestQueue;
 
@@ -99,6 +106,7 @@ namespace System.Net.Http
 
         /// <summary>For non-proxy connection pools, this is the host name in bytes; for proxies, null.</summary>
         private readonly byte[]? _hostHeaderValueBytes;
+
         /// <summary>Options specialized and cached for this pool and its key.</summary>
         private readonly SslClientAuthenticationOptions? _sslOptionsHttp11;
         private readonly SslClientAuthenticationOptions? _sslOptionsHttp2;
@@ -107,6 +115,7 @@ namespace System.Net.Http
 
         /// <summary>Whether the pool has been used since the last time a cleanup occurred.</summary>
         private bool _usedSinceLastCleanup = true;
+
         /// <summary>Whether the pool has been disposed.</summary>
         private bool _disposed;
 

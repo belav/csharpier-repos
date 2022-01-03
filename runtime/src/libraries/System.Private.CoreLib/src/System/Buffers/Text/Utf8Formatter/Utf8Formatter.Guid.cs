@@ -377,36 +377,52 @@ namespace System.Buffers.Text
         {
             [FieldOffset(00)]
             public Guid Guid;
+
             [FieldOffset(00)]
             public byte Byte00;
+
             [FieldOffset(01)]
             public byte Byte01;
+
             [FieldOffset(02)]
             public byte Byte02;
+
             [FieldOffset(03)]
             public byte Byte03;
+
             [FieldOffset(04)]
             public byte Byte04;
+
             [FieldOffset(05)]
             public byte Byte05;
+
             [FieldOffset(06)]
             public byte Byte06;
+
             [FieldOffset(07)]
             public byte Byte07;
+
             [FieldOffset(08)]
             public byte Byte08;
+
             [FieldOffset(09)]
             public byte Byte09;
+
             [FieldOffset(10)]
             public byte Byte10;
+
             [FieldOffset(11)]
             public byte Byte11;
+
             [FieldOffset(12)]
             public byte Byte12;
+
             [FieldOffset(13)]
             public byte Byte13;
+
             [FieldOffset(14)]
             public byte Byte14;
+
             [FieldOffset(15)]
             public byte Byte15;
         }

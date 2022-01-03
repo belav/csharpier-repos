@@ -29,6 +29,7 @@ class Program
 {
     internal static Getter resed;
     static int result;
+
     static void DoStuff()
     {
         DynamicMethod method = new DynamicMethod(

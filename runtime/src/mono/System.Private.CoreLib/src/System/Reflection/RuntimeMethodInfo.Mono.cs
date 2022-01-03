@@ -506,6 +506,7 @@ namespace System.Reflection
         {
             return CustomAttribute.GetCustomAttributes(this, inherit);
         }
+
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             return CustomAttribute.GetCustomAttributes(this, attributeType, inherit);
@@ -837,6 +838,7 @@ namespace System.Reflection
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
             HasSameMetadataDefinitionAsCore<RuntimeMethodInfo>(other);
     }
+
 #region Sync with _MonoReflectionMethod in object-internals.h
     [StructLayout(LayoutKind.Sequential)]
     internal sealed partial class RuntimeConstructorInfo : ConstructorInfo

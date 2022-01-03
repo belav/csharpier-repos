@@ -44,6 +44,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         }
 
         private bool _isInitialized;
+
         private void EnsureInitialized()
         {
             if (!_isInitialized)

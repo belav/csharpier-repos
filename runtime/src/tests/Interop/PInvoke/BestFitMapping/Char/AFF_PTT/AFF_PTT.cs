@@ -8,6 +8,7 @@ using TestLibrary;
 
 [assembly: BestFitMapping(false, ThrowOnUnmappableChar = false)]
 
+
 public class BFM_CharMarshaler
 {
     [DllImport("Char_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]

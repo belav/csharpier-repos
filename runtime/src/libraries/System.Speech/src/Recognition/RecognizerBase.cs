@@ -177,6 +177,7 @@ namespace System.Speech.Recognition
             grammar.State = GrammarState.Unloaded;
             grammar.InternalData = null;
         }
+
         internal void UnloadAllGrammars()
         {
             // Use a new collection as otherwise can't delete from current enumeration.
@@ -353,6 +354,7 @@ namespace System.Speech.Recognition
                 null
             );
         }
+
         internal void EmulateRecognizeAsync(string inputText)
         {
             Helpers.ThrowIfEmptyOrNull(inputText, nameof(inputText));
@@ -364,6 +366,7 @@ namespace System.Speech.Recognition
                 null
             );
         }
+
         internal RecognitionResult EmulateRecognize(string inputText, CompareOptions compareOptions)
         {
             Helpers.ThrowIfEmptyOrNull(inputText, nameof(inputText));
@@ -391,6 +394,7 @@ namespace System.Speech.Recognition
                 null
             );
         }
+
         internal void EmulateRecognizeAsync(string inputText, CompareOptions compareOptions)
         {
             Helpers.ThrowIfEmptyOrNull(inputText, nameof(inputText));
@@ -418,6 +422,7 @@ namespace System.Speech.Recognition
                 null
             );
         }
+
         internal RecognitionResult EmulateRecognize(
             RecognizedWordUnit[] wordUnits,
             CompareOptions compareOptions
@@ -449,6 +454,7 @@ namespace System.Speech.Recognition
                 wordUnits
             );
         }
+
         internal void EmulateRecognizeAsync(
             RecognizedWordUnit[] wordUnits,
             CompareOptions compareOptions
@@ -486,6 +492,7 @@ namespace System.Speech.Recognition
         {
             RequestRecognizerUpdate(null);
         }
+
         internal void RequestRecognizerUpdate(object userToken)
         {
             uint bookmarkId = AddBookmarkItem(userToken);
@@ -493,6 +500,7 @@ namespace System.Speech.Recognition
             // This fires the bookmark as soon as possible so we set the time as zero and don't set the SPBO_AHEAD flag.
             SapiContext.Bookmark(SPBOOKMARKOPTIONS.SPBO_PAUSE, 0, new IntPtr(bookmarkId));
         }
+
         internal void RequestRecognizerUpdate(
             object userToken,
             TimeSpan audioPositionAheadToRaiseUpdate
@@ -3257,6 +3265,7 @@ namespace System.Speech.Recognition
                 );
             }
         }
+
         /// <summary>
         /// Fire the SpeechDetected event.
         /// </summary>
@@ -3479,6 +3488,7 @@ namespace System.Speech.Recognition
 
         // Lock used to wait for all pending async grammar loads to complete before starting recognition.
         private OperationLock _waitForGrammarsToLoad = new();
+
         // Lock used to protect properties on the Grammar {Enabled, Weight etc.} from being changed while an async grammar load is in progress.
         private object _grammarDataLock = new();
 
@@ -3675,39 +3685,50 @@ namespace System.Speech.Recognition
             uint cbData,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] data
         );
+
         [PreserveSig]
         new int GetData(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             ref uint pcbData,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] data
         );
+
         [PreserveSig]
         new int SetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             [MarshalAs(UnmanagedType.LPWStr)] string value
         );
+
         [PreserveSig]
         new void GetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string pszValueName,
             [MarshalAs(UnmanagedType.LPWStr)] out string ppszValue
         );
+
         [PreserveSig]
         new int SetDWORD([MarshalAs(UnmanagedType.LPWStr)] string valueName, uint dwValue);
+
         [PreserveSig]
         new int GetDWORD([MarshalAs(UnmanagedType.LPWStr)] string pszValueName, ref uint pdwValue);
+
         [PreserveSig]
         new int OpenKey(
             [MarshalAs(UnmanagedType.LPWStr)] string pszSubKeyName,
             out ISpDataKey ppSubKey
         );
+
         [PreserveSig]
         new int CreateKey([MarshalAs(UnmanagedType.LPWStr)] string subKey, out ISpDataKey ppSubKey);
+
         [PreserveSig]
         new int DeleteKey([MarshalAs(UnmanagedType.LPWStr)] string subKey);
+
         [PreserveSig]
         new int DeleteValue([MarshalAs(UnmanagedType.LPWStr)] string valueName);
+
         [PreserveSig]
         new int EnumKeys(uint index, [MarshalAs(UnmanagedType.LPWStr)] out string ppszSubKeyName);
+
         [PreserveSig]
         new int EnumValues(uint Index, [MarshalAs(UnmanagedType.LPWStr)] out string ppszValueName);
 

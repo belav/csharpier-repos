@@ -17,28 +17,39 @@ namespace System.Threading.Channels
     {
         /// <summary>The mode used when the channel hits its bound.</summary>
         private readonly BoundedChannelFullMode _mode;
+
         /// <summary>The delegate that will be invoked when the channel hits its bound and an item is dropped from the channel.</summary>
         private readonly Action<T>? _itemDropped;
+
         /// <summary>Task signaled when the channel has completed.</summary>
         private readonly TaskCompletionSource _completion;
+
         /// <summary>The maximum capacity of the channel.</summary>
         private readonly int _bufferedCapacity;
+
         /// <summary>Items currently stored in the channel waiting to be read.</summary>
         private readonly Deque<T> _items = new Deque<T>();
+
         /// <summary>Readers waiting to read from the channel.</summary>
         private readonly Deque<AsyncOperation<T>> _blockedReaders = new Deque<AsyncOperation<T>>();
+
         /// <summary>Writers waiting to write to the channel.</summary>
         private readonly Deque<VoidAsyncOperationWithData<T>> _blockedWriters = new Deque<
             VoidAsyncOperationWithData<T>
         >();
+
         /// <summary>Linked list of WaitToReadAsync waiters.</summary>
         private AsyncOperation<bool>? _waitingReadersTail;
+
         /// <summary>Linked list of WaitToWriteAsync waiters.</summary>
         private AsyncOperation<bool>? _waitingWritersTail;
+
         /// <summary>Whether to force continuations to be executed asynchronously from producer writes.</summary>
         private readonly bool _runContinuationsAsynchronously;
+
         /// <summary>Set to non-null once Complete has been called.</summary>
         private Exception? _doneWriting;
+
         /// <summary>Gets an object used to synchronize all state on the instance.</summary>
         private object SyncObj => _items;
 

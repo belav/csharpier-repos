@@ -13,9 +13,11 @@ namespace System.Threading.Channels.Tests
     public abstract partial class ChannelTestBase : TestBase
     {
         protected Channel<int> CreateChannel() => CreateChannel<int>();
+
         protected abstract Channel<T> CreateChannel<T>();
 
         protected Channel<int> CreateFullChannel() => CreateFullChannel<int>();
+
         protected abstract Channel<T> CreateFullChannel<T>();
 
         protected virtual bool AllowSynchronousContinuations => false;
@@ -1539,8 +1541,10 @@ namespace System.Threading.Channels.Tests
         {
             protected override void QueueTask(Task task) =>
                 ThreadPool.QueueUserWorkItem(_ => TryExecuteTask(task));
+
             protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) =>
                 false;
+
             protected override IEnumerable<Task> GetScheduledTasks() => null;
         }
     }

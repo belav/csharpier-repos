@@ -81,6 +81,7 @@ namespace System.Net
                 _cookies = new CookieCollection();
             }
         }
+
         public override bool IsMutuallyAuthenticated
         {
             get { return base.IsMutuallyAuthenticated; }

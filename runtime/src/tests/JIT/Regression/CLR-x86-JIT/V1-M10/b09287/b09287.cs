@@ -7,6 +7,7 @@ namespace Default
     //@BEGINRENAME; Verify this renames
     //@ENDRENAME; Verify this renames
     using System;
+
     //
     // X class
     //

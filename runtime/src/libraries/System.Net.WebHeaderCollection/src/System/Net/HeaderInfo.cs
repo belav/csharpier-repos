@@ -8,6 +8,7 @@ namespace System.Net
         internal readonly bool IsRequestRestricted;
         internal readonly bool IsResponseRestricted;
         internal readonly Func<string, string[]> Parser;
+
         //
         // Note that the HeaderName field is not always valid, and should not
         // be used after initialization. In particular, the HeaderInfo returned

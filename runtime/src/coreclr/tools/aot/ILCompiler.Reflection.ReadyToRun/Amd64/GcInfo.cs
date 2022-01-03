@@ -38,6 +38,7 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         {
             public int Index { get; set; }
             public uint Value { get; set; }
+
             public SafePointOffset(int index, uint value)
             {
                 Index = index;

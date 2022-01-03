@@ -35,10 +35,12 @@ namespace System.Xml.Serialization
                 ^ (_name == null ? 0 : _name.GetHashCode());
         }
     }
+
     internal interface INameScope
     {
         object? this[string? name, string? ns] { get; set; }
     }
+
     internal sealed class NameTable : INameScope
     {
         private readonly Dictionary<NameKey, object?> _table = new Dictionary<NameKey, object?>();

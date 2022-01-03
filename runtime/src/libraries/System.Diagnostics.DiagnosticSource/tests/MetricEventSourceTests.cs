@@ -1563,6 +1563,7 @@ namespace System.Diagnostics.Metrics.Tests
                 .ToArray();
             Assert.Equal(0, filteredEvents.Length);
         }
+
         private void AssertCollectStartStopEventsPresent(
             EventWrittenEventArgs[] events,
             double expectedIntervalSecs,

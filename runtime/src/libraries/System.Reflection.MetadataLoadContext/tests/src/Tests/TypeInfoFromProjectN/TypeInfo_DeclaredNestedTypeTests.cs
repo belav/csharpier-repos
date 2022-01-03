@@ -129,10 +129,15 @@ namespace System.Reflection.Tests
         public static int iDeclaredNests = 6;
 
         public class NestPublic { }
+
         public class NestPublic2 { }
+
         private class NestPrivate { } // private, so not inherited
+
         internal class NestInternal { } // internal members are not inherited
+
         protected class NestProtected { }
+
         private class NestAssemblyPrivate { } // same as private, so not inherited
     }
 
@@ -141,8 +146,11 @@ namespace System.Reflection.Tests
         public static new int iDeclaredNests = 4;
 
         public new class NestPublic { }
+
         public class NestPublic3 { }
+
         public class NESTPUBLIC3 { }
+
         private class NestPrivate2 { }
     }
 

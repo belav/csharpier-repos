@@ -9,6 +9,7 @@ namespace BoxTest
     {
         public bool val;
     }
+
     internal struct MyInt
     {
         public int val;

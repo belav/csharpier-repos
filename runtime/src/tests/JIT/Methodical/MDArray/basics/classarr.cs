@@ -16,6 +16,7 @@ public class Arrayclass
         a3d = new double[size, size + 5, size + 10];
     }
 }
+
 public class class1
 {
     public static Random rand;

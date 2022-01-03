@@ -48,6 +48,7 @@ internal static partial class Interop
             IntPtr[] certs,
             int certsLen
         );
+
         internal static SafeSslHandle SSLStreamCreateWithCertificates(
             ReadOnlySpan<byte> pkcs8PrivateKey,
             PAL_KeyAlgorithm algorithm,
@@ -74,6 +75,7 @@ internal static partial class Interop
             SSLWriteCallback streamWrite,
             int appBufferSize
         );
+
         internal static void SSLStreamInitialize(
             SafeSslHandle sslHandle,
             bool isServer,
@@ -101,6 +103,7 @@ internal static partial class Interop
             SafeSslHandle sslHandle,
             [MarshalAs(UnmanagedType.LPUTF8Str)] string targetHost
         );
+
         internal static void SSLStreamSetTargetHost(SafeSslHandle sslHandle, string targetHost)
         {
             int ret = SSLStreamSetTargetHostImpl(sslHandle, targetHost);
@@ -132,6 +135,7 @@ internal static partial class Interop
             ApplicationProtocolData[] protocolData,
             int count
         );
+
         internal static unsafe void SSLStreamSetApplicationProtocols(
             SafeSslHandle sslHandle,
             List<SslApplicationProtocol> protocols
@@ -176,6 +180,7 @@ internal static partial class Interop
             ref SslProtocols protocols,
             int length
         );
+
         internal static void SSLStreamSetEnabledProtocols(
             SafeSslHandle sslHandle,
             ReadOnlySpan<SslProtocols> protocols
@@ -205,6 +210,7 @@ internal static partial class Interop
             [Out] byte[]? buf,
             ref int len
         );
+
         internal static byte[]? SSLStreamGetApplicationProtocol(SafeSslHandle ssl)
         {
             int len = 0;
@@ -230,6 +236,7 @@ internal static partial class Interop
             int length,
             out int bytesRead
         );
+
         internal static unsafe PAL_SSLStreamStatus SSLStreamRead(
             SafeSslHandle sslHandle,
             ReadOnlySpan<byte> buffer,
@@ -251,6 +258,7 @@ internal static partial class Interop
             byte* buffer,
             int length
         );
+
         internal static unsafe PAL_SSLStreamStatus SSLStreamWrite(
             SafeSslHandle sslHandle,
             ReadOnlyMemory<byte> buffer
@@ -283,6 +291,7 @@ internal static partial class Interop
             EntryPoint = "AndroidCryptoNative_SSLStreamGetProtocol"
         )]
         private static extern int SSLStreamGetProtocol(SafeSslHandle ssl, out IntPtr protocol);
+
         internal static string SSLStreamGetProtocol(SafeSslHandle ssl)
         {
             IntPtr protocolPtr;
@@ -313,6 +322,7 @@ internal static partial class Interop
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] out IntPtr[] certs,
             out int count
         );
+
         internal static IntPtr[]? SSLStreamGetPeerCertificates(SafeSslHandle ssl)
         {
             IntPtr[]? ptrs;
@@ -329,6 +339,7 @@ internal static partial class Interop
             SafeSslHandle ssl,
             out IntPtr cipherSuite
         );
+
         internal static string SSLStreamGetCipherSuite(SafeSslHandle ssl)
         {
             IntPtr cipherSuitePtr;

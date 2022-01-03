@@ -19,18 +19,22 @@ namespace JitInliningTest
             _lengthInches = length;
             _widthInches = width;
         }
+
         public float Length()
         {
             return _lengthInches;
         }
+
         public float Width()
         {
             return _widthInches;
         }
+
         float IDimensions.Length()
         {
             return _lengthInches;
         }
+
         float IDimensions.Width()
         {
             return _widthInches;

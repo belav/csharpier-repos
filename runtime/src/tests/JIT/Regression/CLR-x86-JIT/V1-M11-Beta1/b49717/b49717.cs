@@ -12,6 +12,7 @@ namespace Test
         {
             throw new Exception();
         }
+
         static int Main()
         {
             bool FALSE = true;

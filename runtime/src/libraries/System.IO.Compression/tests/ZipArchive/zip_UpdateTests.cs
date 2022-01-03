@@ -172,6 +172,7 @@ namespace System.IO.Compression.Tests
                 checkTimes: true
             );
         }
+
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
@@ -212,6 +213,7 @@ namespace System.IO.Compression.Tests
                 checkTimes: true
             );
         }
+
         [Fact]
         public static async Task OverwriteEntry()
         {

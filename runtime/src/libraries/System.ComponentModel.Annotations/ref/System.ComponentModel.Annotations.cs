@@ -10,6 +10,7 @@ namespace System.ComponentModel.DataAnnotations
         : System.ComponentModel.TypeDescriptionProvider
     {
         public AssociatedMetadataTypeTypeDescriptionProvider(System.Type type) { }
+
         public AssociatedMetadataTypeTypeDescriptionProvider(
             System.Type type,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -17,6 +18,7 @@ namespace System.ComponentModel.DataAnnotations
             )]
                 System.Type associatedMetadataType
         ) { }
+
         public override System.ComponentModel.ICustomTypeDescriptor GetTypeDescriptor(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
@@ -28,6 +30,7 @@ namespace System.ComponentModel.DataAnnotations
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false,
@@ -37,6 +40,7 @@ namespace System.ComponentModel.DataAnnotations
     public sealed partial class AssociationAttribute : System.Attribute
     {
         public AssociationAttribute(string name, string thisKey, string otherKey) { }
+
         public bool IsForeignKey
         {
             get { throw null; }
@@ -63,6 +67,7 @@ namespace System.ComponentModel.DataAnnotations
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Property, AllowMultiple = false)]
     public partial class CompareAttribute
         : System.ComponentModel.DataAnnotations.ValidationAttribute
@@ -71,6 +76,7 @@ namespace System.ComponentModel.DataAnnotations
             "The property referenced by 'otherProperty' may be trimmed. Ensure it is preserved."
         )]
         public CompareAttribute(string otherProperty) { }
+
         public string OtherProperty
         {
             get { throw null; }
@@ -83,10 +89,12 @@ namespace System.ComponentModel.DataAnnotations
         {
             get { throw null; }
         }
+
         public override string FormatErrorMessage(string name)
         {
             throw null;
         }
+
         protected override System.ComponentModel.DataAnnotations.ValidationResult? IsValid(
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
@@ -95,6 +103,7 @@ namespace System.ComponentModel.DataAnnotations
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false,
@@ -104,6 +113,7 @@ namespace System.ComponentModel.DataAnnotations
     {
         public ConcurrencyCheckAttribute() { }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -115,11 +125,13 @@ namespace System.ComponentModel.DataAnnotations
     {
         public CreditCardAttribute() : base(default(System.ComponentModel.DataAnnotations.DataType))
         { }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class
             | System.AttributeTargets.Field
@@ -138,10 +150,12 @@ namespace System.ComponentModel.DataAnnotations
                 System.Type validatorType,
             string method
         ) { }
+
         public string Method
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
         )]
@@ -149,10 +163,12 @@ namespace System.ComponentModel.DataAnnotations
         {
             get { throw null; }
         }
+
         public override string FormatErrorMessage(string name)
         {
             throw null;
         }
+
         protected override System.ComponentModel.DataAnnotations.ValidationResult? IsValid(
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
@@ -161,6 +177,7 @@ namespace System.ComponentModel.DataAnnotations
             throw null;
         }
     }
+
     public enum DataType
     {
         Custom = 0,
@@ -181,6 +198,7 @@ namespace System.ComponentModel.DataAnnotations
         PostalCode = 15,
         Upload = 16,
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Method
@@ -192,7 +210,9 @@ namespace System.ComponentModel.DataAnnotations
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         public DataTypeAttribute(System.ComponentModel.DataAnnotations.DataType dataType) { }
+
         public DataTypeAttribute(string customDataType) { }
+
         public string? CustomDataType
         {
             get { throw null; }
@@ -206,15 +226,18 @@ namespace System.ComponentModel.DataAnnotations
             get { throw null; }
             protected set { }
         }
+
         public virtual string GetDataTypeName()
         {
             throw null;
         }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class
             | System.AttributeTargets.Field
@@ -226,6 +249,7 @@ namespace System.ComponentModel.DataAnnotations
     public sealed partial class DisplayAttribute : System.Attribute
     {
         public DisplayAttribute() { }
+
         public bool AutoGenerateField
         {
             get { throw null; }
@@ -261,6 +285,7 @@ namespace System.ComponentModel.DataAnnotations
             get { throw null; }
             set { }
         }
+
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
         )]
@@ -274,39 +299,48 @@ namespace System.ComponentModel.DataAnnotations
             get { throw null; }
             set { }
         }
+
         public bool? GetAutoGenerateField()
         {
             throw null;
         }
+
         public bool? GetAutoGenerateFilter()
         {
             throw null;
         }
+
         public string? GetDescription()
         {
             throw null;
         }
+
         public string? GetGroupName()
         {
             throw null;
         }
+
         public string? GetName()
         {
             throw null;
         }
+
         public int? GetOrder()
         {
             throw null;
         }
+
         public string? GetPrompt()
         {
             throw null;
         }
+
         public string? GetShortName()
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class,
         Inherited = true,
@@ -315,9 +349,12 @@ namespace System.ComponentModel.DataAnnotations
     public partial class DisplayColumnAttribute : System.Attribute
     {
         public DisplayColumnAttribute(string displayColumn) { }
+
         public DisplayColumnAttribute(string displayColumn, string? sortColumn) { }
+
         public DisplayColumnAttribute(string displayColumn, string? sortColumn, bool sortDescending)
         { }
+
         public string DisplayColumn
         {
             get { throw null; }
@@ -331,6 +368,7 @@ namespace System.ComponentModel.DataAnnotations
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
@@ -338,6 +376,7 @@ namespace System.ComponentModel.DataAnnotations
     public partial class DisplayFormatAttribute : System.Attribute
     {
         public DisplayFormatAttribute() { }
+
         public bool ApplyFormatInEditMode
         {
             get { throw null; }
@@ -363,6 +402,7 @@ namespace System.ComponentModel.DataAnnotations
             get { throw null; }
             set { }
         }
+
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
         )]
@@ -371,11 +411,13 @@ namespace System.ComponentModel.DataAnnotations
             get { throw null; }
             set { }
         }
+
         public string? GetNullDisplayText()
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false,
@@ -384,6 +426,7 @@ namespace System.ComponentModel.DataAnnotations
     public sealed partial class EditableAttribute : System.Attribute
     {
         public EditableAttribute(bool allowEdit) { }
+
         public bool AllowEdit
         {
             get { throw null; }
@@ -394,6 +437,7 @@ namespace System.ComponentModel.DataAnnotations
             set { }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -405,11 +449,13 @@ namespace System.ComponentModel.DataAnnotations
     {
         public EmailAddressAttribute()
             : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Method
@@ -422,15 +468,18 @@ namespace System.ComponentModel.DataAnnotations
     {
         public EnumDataTypeAttribute(System.Type enumType)
             : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
+
         public System.Type EnumType
         {
             get { throw null; }
         }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -442,20 +491,24 @@ namespace System.ComponentModel.DataAnnotations
     {
         public FileExtensionsAttribute()
             : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
+
         public string Extensions
         {
             get { throw null; }
             set { }
         }
+
         public override string FormatErrorMessage(string name)
         {
             throw null;
         }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
@@ -464,12 +517,15 @@ namespace System.ComponentModel.DataAnnotations
     public sealed partial class FilterUIHintAttribute : System.Attribute
     {
         public FilterUIHintAttribute(string filterUIHint) { }
+
         public FilterUIHintAttribute(string filterUIHint, string? presentationLayer) { }
+
         public FilterUIHintAttribute(
             string filterUIHint,
             string? presentationLayer,
             params object?[] controlParameters
         ) { }
+
         public System.Collections.Generic.IDictionary<string, object?> ControlParameters
         {
             get { throw null; }
@@ -482,23 +538,27 @@ namespace System.ComponentModel.DataAnnotations
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
     }
+
     public partial interface IValidatableObject
     {
         System.Collections.Generic.IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
         );
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false,
@@ -508,6 +568,7 @@ namespace System.ComponentModel.DataAnnotations
     {
         public KeyAttribute() { }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -521,23 +582,28 @@ namespace System.ComponentModel.DataAnnotations
             "Uses reflection to get the 'Count' property on types that don't implement ICollection. This 'Count' property may be trimmed. Ensure it is preserved."
         )]
         public MaxLengthAttribute() { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Uses reflection to get the 'Count' property on types that don't implement ICollection. This 'Count' property may be trimmed. Ensure it is preserved."
         )]
         public MaxLengthAttribute(int length) { }
+
         public int Length
         {
             get { throw null; }
         }
+
         public override string FormatErrorMessage(string name)
         {
             throw null;
         }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = false)]
     public sealed partial class MetadataTypeAttribute : System.Attribute
     {
@@ -547,6 +613,7 @@ namespace System.ComponentModel.DataAnnotations
             )]
                 System.Type metadataClassType
         ) { }
+
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
         )]
@@ -555,6 +622,7 @@ namespace System.ComponentModel.DataAnnotations
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -568,19 +636,23 @@ namespace System.ComponentModel.DataAnnotations
             "Uses reflection to get the 'Count' property on types that don't implement ICollection. This 'Count' property may be trimmed. Ensure it is preserved."
         )]
         public MinLengthAttribute(int length) { }
+
         public int Length
         {
             get { throw null; }
         }
+
         public override string FormatErrorMessage(string name)
         {
             throw null;
         }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -591,11 +663,13 @@ namespace System.ComponentModel.DataAnnotations
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
         public PhoneAttribute() : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -605,7 +679,9 @@ namespace System.ComponentModel.DataAnnotations
     public partial class RangeAttribute : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         public RangeAttribute(double minimum, double maximum) { }
+
         public RangeAttribute(int minimum, int maximum) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All."
         )]
@@ -617,6 +693,7 @@ namespace System.ComponentModel.DataAnnotations
             string minimum,
             string maximum
         ) { }
+
         public bool ConvertValueInInvariantCulture
         {
             get { throw null; }
@@ -630,6 +707,7 @@ namespace System.ComponentModel.DataAnnotations
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
         )]
@@ -642,15 +720,18 @@ namespace System.ComponentModel.DataAnnotations
             get { throw null; }
             set { }
         }
+
         public override string FormatErrorMessage(string name)
         {
             throw null;
         }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -661,6 +742,7 @@ namespace System.ComponentModel.DataAnnotations
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         public RegularExpressionAttribute(string pattern) { }
+
         public int MatchTimeoutInMilliseconds
         {
             get { throw null; }
@@ -670,15 +752,18 @@ namespace System.ComponentModel.DataAnnotations
         {
             get { throw null; }
         }
+
         public override string FormatErrorMessage(string name)
         {
             throw null;
         }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -689,16 +774,19 @@ namespace System.ComponentModel.DataAnnotations
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         public RequiredAttribute() { }
+
         public bool AllowEmptyStrings
         {
             get { throw null; }
             set { }
         }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
@@ -706,11 +794,13 @@ namespace System.ComponentModel.DataAnnotations
     public partial class ScaffoldColumnAttribute : System.Attribute
     {
         public ScaffoldColumnAttribute(bool scaffold) { }
+
         public bool Scaffold
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -721,6 +811,7 @@ namespace System.ComponentModel.DataAnnotations
         : System.ComponentModel.DataAnnotations.ValidationAttribute
     {
         public StringLengthAttribute(int maximumLength) { }
+
         public int MaximumLength
         {
             get { throw null; }
@@ -730,15 +821,18 @@ namespace System.ComponentModel.DataAnnotations
             get { throw null; }
             set { }
         }
+
         public override string FormatErrorMessage(string name)
         {
             throw null;
         }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false,
@@ -748,6 +842,7 @@ namespace System.ComponentModel.DataAnnotations
     {
         public TimestampAttribute() { }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = true
@@ -755,12 +850,15 @@ namespace System.ComponentModel.DataAnnotations
     public partial class UIHintAttribute : System.Attribute
     {
         public UIHintAttribute(string uiHint) { }
+
         public UIHintAttribute(string uiHint, string? presentationLayer) { }
+
         public UIHintAttribute(
             string uiHint,
             string? presentationLayer,
             params object?[]? controlParameters
         ) { }
+
         public System.Collections.Generic.IDictionary<string, object?> ControlParameters
         {
             get { throw null; }
@@ -773,17 +871,20 @@ namespace System.ComponentModel.DataAnnotations
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field
             | System.AttributeTargets.Parameter
@@ -794,16 +895,21 @@ namespace System.ComponentModel.DataAnnotations
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
         public UrlAttribute() : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
+
         public override bool IsValid(object? value)
         {
             throw null;
         }
     }
+
     public abstract partial class ValidationAttribute : System.Attribute
     {
         protected ValidationAttribute() { }
+
         protected ValidationAttribute(System.Func<string> errorMessageAccessor) { }
+
         protected ValidationAttribute(string errorMessage) { }
+
         public string? ErrorMessage
         {
             get { throw null; }
@@ -814,6 +920,7 @@ namespace System.ComponentModel.DataAnnotations
             get { throw null; }
             set { }
         }
+
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties
                 | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
@@ -831,10 +938,12 @@ namespace System.ComponentModel.DataAnnotations
         {
             get { throw null; }
         }
+
         public virtual string FormatErrorMessage(string name)
         {
             throw null;
         }
+
         public System.ComponentModel.DataAnnotations.ValidationResult? GetValidationResult(
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
@@ -842,10 +951,12 @@ namespace System.ComponentModel.DataAnnotations
         {
             throw null;
         }
+
         public virtual bool IsValid(object? value)
         {
             throw null;
         }
+
         protected virtual System.ComponentModel.DataAnnotations.ValidationResult? IsValid(
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
@@ -853,18 +964,22 @@ namespace System.ComponentModel.DataAnnotations
         {
             throw null;
         }
+
         public void Validate(
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
         ) { }
+
         public void Validate(object? value, string name) { }
     }
+
     public sealed partial class ValidationContext : System.IServiceProvider
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of instance cannot be statically discovered."
         )]
         public ValidationContext(object instance) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of instance cannot be statically discovered."
         )]
@@ -872,6 +987,7 @@ namespace System.ComponentModel.DataAnnotations
             object instance,
             System.Collections.Generic.IDictionary<object, object?>? items
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of instance cannot be statically discovered."
         )]
@@ -880,6 +996,7 @@ namespace System.ComponentModel.DataAnnotations
             System.IServiceProvider? serviceProvider,
             System.Collections.Generic.IDictionary<object, object?>? items
         ) { }
+
         public string DisplayName
         {
             get { throw null; }
@@ -902,31 +1019,40 @@ namespace System.ComponentModel.DataAnnotations
         {
             get { throw null; }
         }
+
         public object? GetService(System.Type serviceType)
         {
             throw null;
         }
+
         public void InitializeServiceProvider(System.Func<System.Type, object?> serviceProvider) { }
     }
+
     public partial class ValidationException : System.Exception
     {
         public ValidationException() { }
+
         public ValidationException(
             System.ComponentModel.DataAnnotations.ValidationResult validationResult,
             System.ComponentModel.DataAnnotations.ValidationAttribute? validatingAttribute,
             object? value
         ) { }
+
         protected ValidationException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public ValidationException(string? message) { }
+
         public ValidationException(
             string? errorMessage,
             System.ComponentModel.DataAnnotations.ValidationAttribute? validatingAttribute,
             object? value
         ) { }
+
         public ValidationException(string? message, System.Exception? innerException) { }
+
         public System.ComponentModel.DataAnnotations.ValidationAttribute? ValidationAttribute
         {
             get { throw null; }
@@ -940,17 +1066,22 @@ namespace System.ComponentModel.DataAnnotations
             get { throw null; }
         }
     }
+
     public partial class ValidationResult
     {
         public static readonly System.ComponentModel.DataAnnotations.ValidationResult? Success;
+
         protected ValidationResult(
             System.ComponentModel.DataAnnotations.ValidationResult validationResult
         ) { }
+
         public ValidationResult(string? errorMessage) { }
+
         public ValidationResult(
             string? errorMessage,
             System.Collections.Generic.IEnumerable<string>? memberNames
         ) { }
+
         public string? ErrorMessage
         {
             get { throw null; }
@@ -960,11 +1091,13 @@ namespace System.ComponentModel.DataAnnotations
         {
             get { throw null; }
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public static partial class Validator
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -978,6 +1111,7 @@ namespace System.ComponentModel.DataAnnotations
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of instance cannot be statically discovered."
         )]
@@ -990,6 +1124,7 @@ namespace System.ComponentModel.DataAnnotations
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of validationContext.ObjectType cannot be statically discovered."
         )]
@@ -1001,6 +1136,7 @@ namespace System.ComponentModel.DataAnnotations
         {
             throw null;
         }
+
         public static bool TryValidateValue(
             object value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext,
@@ -1010,6 +1146,7 @@ namespace System.ComponentModel.DataAnnotations
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of instance cannot be statically discovered."
         )]
@@ -1017,6 +1154,7 @@ namespace System.ComponentModel.DataAnnotations
             object instance,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of instance cannot be statically discovered."
         )]
@@ -1025,6 +1163,7 @@ namespace System.ComponentModel.DataAnnotations
             System.ComponentModel.DataAnnotations.ValidationContext validationContext,
             bool validateAllProperties
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of validationContext.ObjectType cannot be statically discovered."
         )]
@@ -1032,6 +1171,7 @@ namespace System.ComponentModel.DataAnnotations
             object? value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext
         ) { }
+
         public static void ValidateValue(
             object value,
             System.ComponentModel.DataAnnotations.ValidationContext validationContext,
@@ -1039,6 +1179,7 @@ namespace System.ComponentModel.DataAnnotations
         ) { }
     }
 }
+
 namespace System.ComponentModel.DataAnnotations.Schema
 {
     [System.AttributeUsageAttribute(
@@ -1048,7 +1189,9 @@ namespace System.ComponentModel.DataAnnotations.Schema
     public partial class ColumnAttribute : System.Attribute
     {
         public ColumnAttribute() { }
+
         public ColumnAttribute(string name) { }
+
         public string? Name
         {
             get { throw null; }
@@ -1058,6 +1201,7 @@ namespace System.ComponentModel.DataAnnotations.Schema
             get { throw null; }
             set { }
         }
+
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public string? TypeName
         {
@@ -1065,11 +1209,13 @@ namespace System.ComponentModel.DataAnnotations.Schema
             set { }
         }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = false)]
     public partial class ComplexTypeAttribute : System.Attribute
     {
         public ComplexTypeAttribute() { }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
@@ -1079,17 +1225,20 @@ namespace System.ComponentModel.DataAnnotations.Schema
         public DatabaseGeneratedAttribute(
             System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption databaseGeneratedOption
         ) { }
+
         public System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption DatabaseGeneratedOption
         {
             get { throw null; }
         }
     }
+
     public enum DatabaseGeneratedOption
     {
         None = 0,
         Identity = 1,
         Computed = 2,
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
@@ -1097,11 +1246,13 @@ namespace System.ComponentModel.DataAnnotations.Schema
     public partial class ForeignKeyAttribute : System.Attribute
     {
         public ForeignKeyAttribute(string name) { }
+
         public string Name
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Field | System.AttributeTargets.Property,
         AllowMultiple = false
@@ -1109,11 +1260,13 @@ namespace System.ComponentModel.DataAnnotations.Schema
     public partial class InversePropertyAttribute : System.Attribute
     {
         public InversePropertyAttribute(string property) { }
+
         public string Property
         {
             get { throw null; }
         }
     }
+
     [System.AttributeUsageAttribute(
         System.AttributeTargets.Class
             | System.AttributeTargets.Field
@@ -1124,14 +1277,17 @@ namespace System.ComponentModel.DataAnnotations.Schema
     {
         public NotMappedAttribute() { }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.Class, AllowMultiple = false)]
     public partial class TableAttribute : System.Attribute
     {
         public TableAttribute(string name) { }
+
         public string Name
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.DisallowNullAttribute]
         public string? Schema
         {

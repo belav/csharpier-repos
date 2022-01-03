@@ -15,6 +15,7 @@ namespace Test
         {
             return null;
         }
+
         public static void Static1(
             ulong[] param1,
             ref double param2,
@@ -22,6 +23,7 @@ namespace Test
             int[] param4,
             long param5
         ) { }
+
         public static ulong[] Static3(ref double param1, ref ulong param2)
         {
             return new ulong[7];

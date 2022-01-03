@@ -11,6 +11,7 @@ public class Test_keepalivefinalize
     public class Dummy1
     {
         public static bool visited;
+
         ~Dummy1()
         {
             Console.WriteLine("In Finalize() of Dummy1");
@@ -26,6 +27,7 @@ public class Test_keepalivefinalize
     public class Dummy2
     {
         public static bool visited;
+
         ~Dummy2()
         {
             Console.WriteLine("In Finalize() of Dummy2");

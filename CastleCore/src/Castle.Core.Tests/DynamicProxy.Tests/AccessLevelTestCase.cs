@@ -127,24 +127,28 @@ namespace Castle.DynamicProxy.Tests
         public class InternalMethodClass : IMethodClass
         {
             public void InvokeMethod() => Method();
+
             internal virtual void Method() => throw new Exception();
         }
 
         public class PrivateProtectedMethodClass : IMethodClass
         {
             public void InvokeMethod() => Method();
+
             private protected virtual void Method() => throw new Exception();
         }
 
         public class ProtectedMethodClass : IMethodClass
         {
             public void InvokeMethod() => Method();
+
             protected virtual void Method() => throw new Exception();
         }
 
         public class ProtectedInternalMethodClass : IMethodClass
         {
             public void InvokeMethod() => Method();
+
             protected internal virtual void Method() => throw new Exception();
         }
     }

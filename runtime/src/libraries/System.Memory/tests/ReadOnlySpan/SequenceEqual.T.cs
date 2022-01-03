@@ -265,8 +265,11 @@ namespace System.SpanTests
         private sealed class AlwaysComparer<T> : IEqualityComparer<T>
         {
             private readonly bool _result;
+
             public AlwaysComparer(bool result) => _result = result;
+
             public bool Equals(T? x, T? y) => _result;
+
             public int GetHashCode([DisallowNull] T obj) => 0;
         }
     }

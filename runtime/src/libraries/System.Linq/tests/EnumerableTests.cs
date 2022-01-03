@@ -14,6 +14,7 @@ namespace System.Linq.Tests
             public T[] Items;
             public int CountTouched = 0;
             public int CopyToTouched = 0;
+
             public TestCollection(T[] items)
             {
                 Items = items;
@@ -28,25 +29,32 @@ namespace System.Linq.Tests
                 }
             }
             public bool IsReadOnly => false;
+
             public void Add(T item)
             {
                 throw new NotImplementedException();
             }
+
             public void Clear()
             {
                 throw new NotImplementedException();
             }
+
             public bool Contains(T item) => Items.Contains(item);
+
             public bool Remove(T item)
             {
                 throw new NotImplementedException();
             }
+
             public void CopyTo(T[] array, int arrayIndex)
             {
                 CopyToTouched++;
                 Items.CopyTo(array, arrayIndex);
             }
+
             public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)Items).GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
         }
 
@@ -67,21 +75,25 @@ namespace System.Linq.Tests
             }
             public bool IsSynchronized => false;
             public object SyncRoot => this;
+
             public void CopyTo(Array array, int index) => throw new NotImplementedException();
 
             public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)Items).GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
         }
 
         protected class TestEnumerable<T> : IEnumerable<T>
         {
             public T[] Items;
+
             public TestEnumerable(T[] items)
             {
                 Items = items;
             }
 
             public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)Items).GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
         }
 
@@ -89,6 +101,7 @@ namespace System.Linq.Tests
         {
             public T[] Items;
             public int CountTouched = 0;
+
             public TestReadOnlyCollection(T[] items)
             {
                 Items = items;
@@ -102,7 +115,9 @@ namespace System.Linq.Tests
                     return Items.Length;
                 }
             }
+
             public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)Items).GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
         }
 
@@ -305,6 +320,7 @@ namespace System.Linq.Tests
         {
             return source is ICollection<T> ? ForceNotCollection(source) : new List<T>(source);
         }
+
         protected static T[] Repeat<T>(Func<int, T> factory, int count)
         {
             T[] results = new T[count];
@@ -361,12 +377,19 @@ namespace System.Linq.Tests
 
             public int Count => CountWorker();
             public bool IsReadOnly => IsReadOnlyWorker();
+
             public void Add(T item) => AddWorker(item);
+
             public void Clear() => ClearWorker();
+
             public bool Contains(T item) => ContainsWorker(item);
+
             public bool Remove(T item) => RemoveWorker(item);
+
             public void CopyTo(T[] array, int arrayIndex) => CopyToWorker(array, arrayIndex);
+
             public IEnumerator<T> GetEnumerator() => GetEnumeratorWorker();
+
             IEnumerator IEnumerable.GetEnumerator() => NonGenericGetEnumeratorWorker();
         }
 

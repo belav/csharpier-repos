@@ -215,6 +215,7 @@ namespace CseTest
             Console.WriteLine(ret);
             return ret;
         }
+
         private static int return_int(bool verbose, int input)
         {
             int ans;

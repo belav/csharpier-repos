@@ -65,17 +65,23 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>The target block using this helper.</summary>
         private readonly ITargetBlock<TInput> _owningTarget;
+
         /// <summary>The messages in this target.</summary>
         /// <remarks>This field doubles as the IncomingLock.</remarks>
         private readonly IProducerConsumerQueue<KeyValuePair<TInput, long>> _messages;
+
         /// <summary>The options associated with this block.</summary>
         private readonly ExecutionDataflowBlockOptions _dataflowBlockOptions;
+
         /// <summary>An action to invoke for every accepted message.</summary>
         private readonly Action<KeyValuePair<TInput, long>> _callAction;
+
         /// <summary>Whether the block relies on the delegate to signal when an async operation has completed.</summary>
         private readonly TargetCoreOptions _targetCoreOptions;
+
         /// <summary>Bounding state for when the block is executing in bounded mode.</summary>
         private readonly BoundingStateWithPostponed<TInput>? _boundingState;
+
         /// <summary>The reordering buffer used by the owner.  May be null.</summary>
         private readonly IReorderingBuffer? _reorderingBuffer;
 
@@ -89,18 +95,24 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>Exceptions that may have occurred and gone unhandled during processing.</summary>
         private List<Exception>? _exceptions;
+
         /// <summary>Whether to stop accepting new messages.</summary>
         private bool _decliningPermanently;
+
         /// <summary>The number of operations (including service tasks) currently running asynchronously.</summary>
         /// <remarks>Must always be accessed from inside a lock.</remarks>
         private int _numberOfOutstandingOperations;
+
         /// <summary>The number of service tasks in async mode currently running.</summary>
         /// <remarks>Must always be accessed from inside a lock.</remarks>
         private int _numberOfOutstandingServiceTasks;
+
         /// <summary>The next available ID we can assign to a message about to be processed.</summary>
         private PaddedInt64 _nextAvailableInputMessageId; // initialized to 0... very important for a reordering buffer
+
         /// <summary>A task has reserved the right to run the completion routine.</summary>
         private bool _completionReserved;
+
         /// <summary>This counter is set by the processing loop to prevent itself from trying to keep alive.</summary>
         private int _keepAliveBanCounter;
 
@@ -1080,6 +1092,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 get { return _target._messages.Count; }
             }
+
             /// <summary>Gets the messages waiting to be processed.</summary>
             internal IEnumerable<TInput> InputQueue
             {
@@ -1112,11 +1125,13 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 get { return _target._dataflowBlockOptions; }
             }
+
             /// <summary>Gets whether the block is declining further messages.</summary>
             internal bool IsDecliningPermanently
             {
                 get { return _target._decliningPermanently; }
             }
+
             /// <summary>Gets whether the block is completed.</summary>
             internal bool IsCompleted
             {

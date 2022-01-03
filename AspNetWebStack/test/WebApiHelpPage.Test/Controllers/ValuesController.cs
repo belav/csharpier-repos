@@ -131,6 +131,7 @@ namespace WebApiHelpPageWebHost.UnitTest.Controllers
                 }
                 return base.CanConvertFrom(context, sourceType);
             }
+
             // Overrides the ConvertFrom method of TypeConverter.
             public override object ConvertFrom(
                 ITypeDescriptorContext context,
@@ -145,6 +146,7 @@ namespace WebApiHelpPageWebHost.UnitTest.Controllers
                 }
                 return base.ConvertFrom(context, culture, value);
             }
+
             // Overrides the ConvertTo method of TypeConverter.
             public override object ConvertTo(
                 ITypeDescriptorContext context,

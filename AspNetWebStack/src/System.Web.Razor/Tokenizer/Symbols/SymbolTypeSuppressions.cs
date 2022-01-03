@@ -119,6 +119,7 @@ using System.Diagnostics.CodeAnalysis;
     Justification = Justifications.SymbolTypeNames
 )]
 
+
 internal static partial class Justifications
 {
     internal const string SymbolTypeNames =

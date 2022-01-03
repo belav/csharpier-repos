@@ -111,6 +111,7 @@ namespace Microsoft.CodeAnalysis
         private sealed class ConstantValueString : ConstantValue
         {
             private readonly Rope _value;
+
             /// <summary>
             /// Some string constant values can have large costs to realize. To compensate, we realize
             /// constant values lazily, and hold onto a weak reference. If the next time we're asked for the constant

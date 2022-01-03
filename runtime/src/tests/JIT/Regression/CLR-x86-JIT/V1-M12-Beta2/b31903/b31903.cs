@@ -9,6 +9,7 @@ namespace Test
     class AA
     {
         static double m_dStatic3 = 273.31;
+
         static int Main()
         {
             try

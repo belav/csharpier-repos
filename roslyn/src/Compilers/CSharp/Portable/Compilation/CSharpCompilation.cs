@@ -72,6 +72,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private ImmutableArray<AssemblySymbol> _lazyClsComplianceDependencies;
 
         private Conversions? _conversions;
+
         /// <summary>
         /// A conversions object that ignores nullability.
         /// </summary>

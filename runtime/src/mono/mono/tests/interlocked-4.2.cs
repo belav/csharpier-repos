@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+
 public class DifferentialOperator
 {
     static void Main(string[] args)

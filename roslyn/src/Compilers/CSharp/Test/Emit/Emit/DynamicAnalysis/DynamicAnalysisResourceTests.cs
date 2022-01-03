@@ -1381,6 +1381,7 @@ class C
             public int EndLine { get; }
             public int EndColumn { get; }
             public string TextStart { get; }
+
             public SpanResult(
                 int startLine,
                 int startColumn,

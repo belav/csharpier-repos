@@ -57,6 +57,7 @@ public class AssignJagged : AssignStruct
     {
         return "ASSIGNMENT(jagged)";
     }
+
     public override double Run()
     {
         int[][][] arraybase;

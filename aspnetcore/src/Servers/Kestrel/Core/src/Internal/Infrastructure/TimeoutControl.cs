@@ -23,6 +23,7 @@ internal class TimeoutControl : ITimeoutControl, IConnectionTimeoutFeature
     private long _readTimingElapsedTicks;
     private long _readTimingBytesRead;
     private InputFlowControl? _connectionInputFlowControl;
+
     // The following are always 0 or 1 for HTTP/1.x
     private int _concurrentIncompleteRequestBodies;
     private int _concurrentAwaitingReads;

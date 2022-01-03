@@ -272,6 +272,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 
             return false;
         }
+
         private static bool IsDelegateCreationCastSafeToRemove(
             ExpressionSyntax castNode,
             ExpressionSyntax castedExpressionNode,

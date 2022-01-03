@@ -203,6 +203,7 @@ namespace System.Linq.Tests
                 () => source.Select(selector)
             );
         }
+
         [Fact]
         public void Select_SourceIsAnArray_ExecutionIsDeferred()
         {

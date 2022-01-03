@@ -267,6 +267,7 @@ namespace System.Speech.Internal.Synthesis
             _writer.WriteStartElement("sub");
             _writer.WriteAttributeString("alias", alias);
         }
+
         public object ProcessVoice(
             string name,
             CultureInfo culture,

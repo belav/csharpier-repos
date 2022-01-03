@@ -44,12 +44,18 @@ namespace Microsoft.CodeAnalysis.AddImports
 
         private bool IsSimpleUsing(TUsingOrAliasSyntax usingOrAlias) =>
             !IsAlias(usingOrAlias) && !IsStaticUsing(usingOrAlias);
+
         private bool IsAlias(TUsingOrAliasSyntax usingOrAlias) => GetAlias(usingOrAlias) != null;
+
         private bool HasAliases(SyntaxNode node) => GetUsingsAndAliases(node).Any(IsAlias);
+
         private bool HasUsings(SyntaxNode node) => GetUsingsAndAliases(node).Any(IsSimpleUsing);
+
         private bool HasStaticUsings(SyntaxNode node) =>
             GetUsingsAndAliases(node).Any(IsStaticUsing);
+
         private bool HasExterns(SyntaxNode node) => GetExterns(node).Any();
+
         private bool HasAnyImports(SyntaxNode node) =>
             GetUsingsAndAliases(node).Any() || GetExterns(node).Any();
 

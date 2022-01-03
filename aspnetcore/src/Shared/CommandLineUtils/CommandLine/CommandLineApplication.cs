@@ -176,6 +176,7 @@ internal class CommandLineApplication
     {
         Invoke = () => invoke().Result;
     }
+
     public int Execute(params string[] args)
     {
         CommandLineApplication command = this;

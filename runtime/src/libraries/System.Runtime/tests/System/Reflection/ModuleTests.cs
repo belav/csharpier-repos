@@ -11,6 +11,7 @@ using TestAttributes;
 [module: Foo]
 [module: Complicated(1, Stuff = 2)]
 
+
 namespace TestAttributes
 {
     public class FooAttribute : Attribute

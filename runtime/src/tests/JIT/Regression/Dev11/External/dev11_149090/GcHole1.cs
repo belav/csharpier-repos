@@ -14,6 +14,7 @@ namespace GcHole1
         {
             return new Enumerator();
         }
+
         IEnumerator<string> IEnumerable<string>.GetEnumerator()
         {
             return new Enumerator();
@@ -33,6 +34,7 @@ namespace GcHole1
             {
                 return;
             }
+
             void IEnumerator.Reset()
             {
                 throw new NotSupportedException();

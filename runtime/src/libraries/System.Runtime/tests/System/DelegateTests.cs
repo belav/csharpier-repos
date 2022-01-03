@@ -60,7 +60,9 @@ namespace System.Tests
         }
 
         public class A { }
+
         public class B : A { }
+
         public delegate A DynamicInvokeDelegate(
             A nonRefParam1,
             B nonRefParam2,
@@ -637,6 +639,7 @@ namespace System.Tests
 
         private delegate string StringParameter(string parameter);
         private delegate string StringWithDefaultValue(string parameter = "test");
+
         private static string StringMethod(string parameter)
         {
             return parameter;
@@ -647,6 +650,7 @@ namespace System.Tests
         private delegate CustomReferenceType ReferenceWithDefaultValue(
             CustomReferenceType parameter = null
         );
+
         private static CustomReferenceType ReferenceMethod(CustomReferenceType parameter)
         {
             return parameter;
@@ -660,6 +664,7 @@ namespace System.Tests
         private delegate CustomValueType ValueTypeWithDefaultValue(
             CustomValueType parameter = default(CustomValueType)
         );
+
         private static CustomValueType ValueTypeMethod(CustomValueType parameter)
         {
             return parameter;
@@ -668,6 +673,7 @@ namespace System.Tests
         private delegate DateTime DateTimeWithDefaultValueAttribute(
             [DateTimeConstant(42)] DateTime parameter
         );
+
         private static DateTime DateTimeMethod(DateTime parameter)
         {
             return parameter;
@@ -677,24 +683,28 @@ namespace System.Tests
             [DecimalConstant(1, 1, 2, 3, 4)] decimal parameter
         );
         private delegate decimal DecimalWithDefaultValue(decimal parameter = 3.14m);
+
         private static decimal DecimalMethod(decimal parameter)
         {
             return parameter;
         }
 
         private delegate int? NullableIntWithDefaultValue(int? parameter = null);
+
         private static int? NullableIntMethod(int? parameter)
         {
             return parameter;
         }
 
         private delegate IntEnum EnumWithDefaultValue(IntEnum parameter = IntEnum.Seven);
+
         private static IntEnum EnumMethod(IntEnum parameter = IntEnum.Seven)
         {
             return parameter;
         }
 
         private delegate object OptionalObjectParameter([Optional] object parameter);
+
         private static object ObjectMethod(object parameter)
         {
             return parameter;

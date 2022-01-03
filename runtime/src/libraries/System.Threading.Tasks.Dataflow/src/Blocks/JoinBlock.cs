@@ -32,10 +32,13 @@ namespace System.Threading.Tasks.Dataflow
     {
         /// <summary>Resources shared by all targets for this join block.</summary>
         private readonly JoinBlockTargetSharedResources _sharedResources;
+
         /// <summary>The source half of this join.</summary>
         private readonly SourceCore<Tuple<T1, T2>> _source;
+
         /// <summary>The first target.</summary>
         private readonly JoinBlockTarget<T1> _target1;
+
         /// <summary>The second target.</summary>
         private readonly JoinBlockTarget<T2> _target2;
 
@@ -275,6 +278,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             /// <summary>The JoinBlock being viewed.</summary>
             private readonly JoinBlock<T1, T2> _joinBlock;
+
             /// <summary>The source half of the block being viewed.</summary>
             private readonly SourceCore<
                 Tuple<T1, T2>
@@ -297,6 +301,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _sourceDebuggingInformation.OutputQueue; }
             }
+
             /// <summary>Gets the number of joins created thus far.</summary>
             public long JoinsCreated
             {
@@ -308,6 +313,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _joinBlock._sharedResources._taskForInputProcessing; }
             }
+
             /// <summary>Gets the task being used for output processing.</summary>
             public Task? TaskForOutputProcessing
             {
@@ -322,16 +328,19 @@ namespace System.Threading.Tasks.Dataflow
                     return (GroupingDataflowBlockOptions)_sourceDebuggingInformation.DataflowBlockOptions;
                 }
             }
+
             /// <summary>Gets whether the block is declining further messages.</summary>
             public bool IsDecliningPermanently
             {
                 get { return _joinBlock._sharedResources._decliningPermanently; }
             }
+
             /// <summary>Gets whether the block is completed.</summary>
             public bool IsCompleted
             {
                 get { return _sourceDebuggingInformation.IsCompleted; }
             }
+
             /// <summary>Gets the block's Id.</summary>
             public int Id
             {
@@ -343,6 +352,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _joinBlock._target1; }
             }
+
             /// <summary>Gets the second target.</summary>
             public ITargetBlock<T2> Target2
             {
@@ -354,6 +364,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _sourceDebuggingInformation.LinkedTargets; }
             }
+
             /// <summary>Gets the set of all targets linked from this block.</summary>
             public ITargetBlock<Tuple<T1, T2>>? NextMessageReservedFor
             {
@@ -377,12 +388,16 @@ namespace System.Threading.Tasks.Dataflow
     {
         /// <summary>Resources shared by all targets for this join block.</summary>
         private readonly JoinBlockTargetSharedResources _sharedResources;
+
         /// <summary>The source half of this join.</summary>
         private readonly SourceCore<Tuple<T1, T2, T3>> _source;
+
         /// <summary>The first target.</summary>
         private readonly JoinBlockTarget<T1> _target1;
+
         /// <summary>The second target.</summary>
         private readonly JoinBlockTarget<T2> _target2;
+
         /// <summary>The third target.</summary>
         private readonly JoinBlockTarget<T3> _target3;
 
@@ -642,6 +657,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             /// <summary>The JoinBlock being viewed.</summary>
             private readonly JoinBlock<T1, T2, T3> _joinBlock;
+
             /// <summary>The source half of the block being viewed.</summary>
             private readonly SourceCore<
                 Tuple<T1, T2, T3>
@@ -664,6 +680,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _sourceDebuggingInformation.OutputQueue; }
             }
+
             /// <summary>Gets the number of joins created thus far.</summary>
             public long JoinsCreated
             {
@@ -675,6 +692,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _joinBlock._sharedResources._taskForInputProcessing; }
             }
+
             /// <summary>Gets the task being used for output processing.</summary>
             public Task? TaskForOutputProcessing
             {
@@ -689,16 +707,19 @@ namespace System.Threading.Tasks.Dataflow
                     return (GroupingDataflowBlockOptions)_sourceDebuggingInformation.DataflowBlockOptions;
                 }
             }
+
             /// <summary>Gets whether the block is declining further messages.</summary>
             public bool IsDecliningPermanently
             {
                 get { return _joinBlock._sharedResources._decliningPermanently; }
             }
+
             /// <summary>Gets whether the block is completed.</summary>
             public bool IsCompleted
             {
                 get { return _sourceDebuggingInformation.IsCompleted; }
             }
+
             /// <summary>Gets the block's Id.</summary>
             public int Id
             {
@@ -710,11 +731,13 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _joinBlock._target1; }
             }
+
             /// <summary>Gets the second target.</summary>
             public ITargetBlock<T2> Target2
             {
                 get { return _joinBlock._target2; }
             }
+
             /// <summary>Gets the third target.</summary>
             public ITargetBlock<T3> Target3
             {
@@ -726,6 +749,7 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get { return _sourceDebuggingInformation.LinkedTargets; }
             }
+
             /// <summary>Gets the set of all targets linked from this block.</summary>
             public ITargetBlock<Tuple<T1, T2, T3>>? NextMessageReservedFor
             {
@@ -748,13 +772,17 @@ namespace System.Threading.Tasks.Dataflow.Internal
     {
         /// <summary>The shared resources used by all targets associated with the same join instance.</summary>
         private readonly JoinBlockTargetSharedResources _sharedResources;
+
         /// <summary>A task representing the completion of the block.</summary>
         private readonly TaskCompletionSource<VoidResult> _completionTask =
             new TaskCompletionSource<VoidResult>();
+
         /// <summary>Input messages for the next batch.</summary>
         private readonly Queue<T>? _messages;
+
         /// <summary>State used when in non-greedy mode.</summary>
         private readonly NonGreedyState? _nonGreedy;
+
         /// <summary>Whether this target is declining future messages.</summary>
         private bool _decliningPermanently;
 
@@ -764,8 +792,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
             /// <summary>Collection of the last postponed message per source.</summary>
             internal readonly QueuedMap<ISourceBlock<T>, DataflowMessageHeader> PostponedMessages =
                 new QueuedMap<ISourceBlock<T>, DataflowMessageHeader>();
+
             /// <summary>The currently reserved message.</summary>
             internal KeyValuePair<ISourceBlock<T>, DataflowMessageHeader> ReservedMessage;
+
             /// <summary>The currently consumed message.</summary>
             internal KeyValuePair<bool, T> ConsumedMessage;
         }
@@ -1350,6 +1380,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             get { throw new NotSupportedException(SR.NotSupported_MemberNotNeeded); }
         }
+
         /// <summary>The completion task on Join targets is only hidden from the public. It still exists for internal purposes.</summary>
         internal Task CompletionTaskInternal
         {
@@ -1378,6 +1409,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 return $"{Common.GetNameForDebugger(this)} InputCount={InputCountForDebugger}, Join=\"{(displayJoin != null ? displayJoin.Content : _sharedResources._ownerJoin)}\"";
             }
         }
+
         /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
         object IDebuggerDisplay.Content
         {
@@ -1406,6 +1438,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 get { return _joinBlockTarget._messages; }
             }
+
             /// <summary>Gets whether the block is declining further messages.</summary>
             public bool IsDecliningPermanently
             {
@@ -1423,26 +1456,34 @@ namespace System.Threading.Tasks.Dataflow.Internal
     {
         /// <summary>Whether the target is postponing messages.</summary>
         internal abstract bool IsDecliningPermanently { get; }
+
         /// <summary>Whether the target has at least one message available.</summary>
         internal abstract bool HasAtLeastOneMessageAvailable { get; }
+
         /// <summary>Whether the target has at least one message postponed.</summary>
         internal abstract bool HasAtLeastOnePostponedMessage { get; }
+
         /// <summary>Gets the number of messages available or postponed.</summary>
         internal abstract int NumberOfMessagesAvailableOrPostponed { get; }
+
         /// <summary>Gets whether the target has the highest number of messages available. (A tie yields true.)</summary>
         internal abstract bool HasTheHighestNumberOfMessagesAvailable { get; }
 
         /// <summary>Reserves a single message.</summary>
         /// <returns>Whether a message was reserved.</returns>
         internal abstract bool ReserveOneMessage();
+
         /// <summary>Consumes any previously reserved message.</summary>
         /// <returns>Whether a message was consumed.</returns>
         internal abstract bool ConsumeReservedMessage();
+
         /// <summary>Consumes up to one postponed message in greedy bounded mode.</summary>
         /// <returns>Whether a message was consumed.</returns>
         internal abstract bool ConsumeOnePostponedMessage();
+
         /// <summary>Releases any previously reserved message.</summary>
         internal abstract void ReleaseReservedMessage();
+
         /// <summary>Unconditionally clears a reserved message. This is only invoked in case of an exception.</summary>
         internal abstract void ClearReservation();
 
@@ -1455,12 +1496,14 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 releaseReservedMessages: false
             );
         }
+
         /// <summary>Internal implementation of the corresponding API method.</summary>
         internal abstract void CompleteCore(
             Exception? exception,
             bool dropPendingMessages,
             bool releaseReservedMessages
         );
+
         /// <summary>Completes the target.</summary>
         internal abstract void CompleteOncePossible();
     }
@@ -1516,22 +1559,31 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         // *** Accessible fields and properties
         internal readonly IDataflowBlock _ownerJoin;
+
         /// <summary>All of the targets associated with the join.</summary>
         internal readonly JoinBlockTargetBase[] _targets;
+
         /// <summary>The delegate to invoke when a target encounters an error.</summary>
         internal readonly Action<Exception> _exceptionAction;
+
         /// <summary>The delegate to invoke when enough messages have been consumed to fulfill the join.</summary>
         internal readonly Action _joinFilledAction;
+
         /// <summary>The options for the join.</summary>
         internal readonly GroupingDataflowBlockOptions _dataflowBlockOptions;
+
         /// <summary>Bounding state for when the block is executing in bounded mode.</summary>
         internal readonly BoundingState? _boundingState;
+
         /// <summary>Whether all targets should decline all further messages.</summary>
         internal bool _decliningPermanently;
+
         /// <summary>The task used to process messages.</summary>
         internal Task? _taskForInputProcessing;
+
         /// <summary>Whether any exceptions have been generated and stored into the source core.</summary>
         internal bool _hasExceptions;
+
         /// <summary>The number of joins this block has created.</summary>
         internal long _joinsCreated;
 

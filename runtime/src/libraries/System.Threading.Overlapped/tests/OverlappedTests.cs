@@ -78,6 +78,7 @@ public static partial class OverlappedTests
         Assert.Equal(3, obj.OffsetHigh);
         Assert.Equal(1, obj.OffsetLow);
     }
+
     [Fact]
     public static unsafe void PackNegTest()
     {
@@ -221,6 +222,7 @@ internal class AsyncHelper
     {
         return this._event.WaitOne();
     }
+
     internal unsafe void Callback(uint errorCode, uint numBytes, NativeOverlapped* _overlapped)
     {
         try

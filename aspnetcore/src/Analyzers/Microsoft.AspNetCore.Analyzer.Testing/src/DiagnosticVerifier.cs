@@ -39,6 +39,7 @@ public abstract class DiagnosticVerifier
     /// File name prefix used to generate Documents instances from source.
     /// </summary>
     protected static string DefaultFilePathPrefix = "Test";
+
     /// <summary>
     /// Project name of
     /// </summary>

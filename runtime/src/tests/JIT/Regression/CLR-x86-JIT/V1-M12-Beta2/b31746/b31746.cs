@@ -14,10 +14,12 @@ namespace Test
         {
             return false;
         }
+
         public static float[] Static1(ref float param1)
         {
             return new float[7];
         }
+
         public static double[] Static2(float param2)
         {
             return (new double[7]);

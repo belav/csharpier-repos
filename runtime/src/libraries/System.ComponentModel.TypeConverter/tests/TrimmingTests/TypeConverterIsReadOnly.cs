@@ -63,6 +63,7 @@ internal class MyTypeConverter : TypeConverter
         }
 
         public override object GetValue(object component) => null;
+
         public override void SetValue(object component, object value) { }
     }
 

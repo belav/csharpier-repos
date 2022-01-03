@@ -19,6 +19,7 @@ public class Foo
         }
     }
 }
+
 class Program
 {
     static int Main(string[] args)

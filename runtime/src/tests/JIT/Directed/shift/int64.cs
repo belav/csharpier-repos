@@ -10,23 +10,28 @@ namespace ShiftTest
     {
         public long clm_data = 0x7FFFFFFFFFFFFFFF;
     }
+
     public struct VT
     {
         public long vtm_data;
     }
+
     public class longTest
     {
         private static long s_data = 0x7FFFFFFFFFFFFFFF;
+
         public static long f1(long arg_data)
         {
             arg_data >>= 8;
             return arg_data;
         }
+
         public static long f2(long arg_data)
         {
             arg_data <<= 8;
             return arg_data;
         }
+
         public static int Main()
         {
             long loc_data = 0x7FFFFFFFFFFFFFFF;

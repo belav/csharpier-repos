@@ -13909,6 +13909,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// produce diagnostics and determine types.
             /// </summary>
             public LocalState StartingState;
+
             public LocalFunctionState(LocalState unreachableState)
                 : base(unreachableState.Clone(), unreachableState.Clone())
             {

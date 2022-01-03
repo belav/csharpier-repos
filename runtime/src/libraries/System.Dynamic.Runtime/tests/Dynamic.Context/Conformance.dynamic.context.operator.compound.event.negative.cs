@@ -15,9 +15,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Code>
 
     public delegate int Dele(int i);
+
     public class C
     {
         public event Dele E = x => x;
+
         public static int Foo(int i)
         {
             return i;
@@ -205,9 +207,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Code>
 
     public delegate int Dele(int i);
+
     public class C
     {
         public event Dele E;
+
         public static int Foo(int i)
         {
             return i;
@@ -259,9 +263,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     using System;
 
     public delegate int Dele(int i);
+
     public class C
     {
         public event Dele E;
+
         public static int Foo(int i)
         {
             return i;
@@ -340,9 +346,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Code>
 
     public delegate int Dele(int i);
+
     public class C
     {
         public event Dele E;
+
         public static int Foo(int i)
         {
             return i;
@@ -426,9 +434,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     using System;
 
     public delegate int Dele(int i);
+
     public class C
     {
         public event Dele E;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

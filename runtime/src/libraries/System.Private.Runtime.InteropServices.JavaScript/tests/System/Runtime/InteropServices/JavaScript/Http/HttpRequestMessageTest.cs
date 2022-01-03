@@ -22,6 +22,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
 #nullable enable
         private HttpRequestOptionsKey<IDictionary<string, object?>> FetchOptions =
             new HttpRequestOptionsKey<IDictionary<string, object?>>("WebAssemblyFetchOptions");
+
 #nullable disable
 
         [Fact]
@@ -235,6 +236,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
                 }
             }
         }
+
 #nullable disable
 
 #nullable enable
@@ -269,6 +271,7 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
             );
             Assert.Null(fetchOptionsValue);
         }
+
 #nullable disable
         [Theory]
         [InlineData("https://example.com")]

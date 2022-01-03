@@ -12,9 +12,11 @@ namespace System.Collections.Tests
         protected override bool DefaultValueAllowed => false;
         protected override bool DuplicateValuesAllowed => false;
         protected override bool IsReadOnly => true;
+
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
         ) => new List<ModifyEnumerable>();
+
         protected override ICollection<string> GenericICollectionFactory()
         {
             return new SortedDictionary<string, string>().Keys;
@@ -64,13 +66,16 @@ namespace System.Collections.Tests
         protected override bool DuplicateValuesAllowed => false;
         protected override bool IsReadOnly => true;
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
+
         protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
             ModifyOperation operations
         ) => new List<ModifyEnumerable>();
+
         protected override ICollection NonGenericICollectionFactory()
         {
             return (ICollection)(new SortedDictionary<string, string>().Keys);
         }
+
         protected override bool SupportsSerialization
         {
             get { return false; }

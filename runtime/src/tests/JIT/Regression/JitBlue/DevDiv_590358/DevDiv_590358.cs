@@ -34,12 +34,15 @@ namespace Repro
         struct S
         {
             public Vector2 Vector;
+
             public S(float[] numbers)
             {
                 Vector = new Vector2(numbers[0], numbers[1]);
             }
+
             public static implicit operator S(float[] numbers) => new S(numbers);
         }
+
         static int Main(string[] args)
         {
             S s = new float[] { 1.0f, 2.0f };

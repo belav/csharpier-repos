@@ -103,7 +103,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
         }
 
         public abstract class AbstractClass { }
+
         public static class StaticClass { }
+
         public interface Interface { }
 
         public static IEnumerable<object[]> GetUninitializedObject_OpenGenericClass_TestData()

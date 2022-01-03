@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         private readonly Version _minimumVersion;
 
         public VisualStudioMSBuildInstalled() : this(new Version(15, 0)) { }
+
         protected VisualStudioMSBuildInstalled(Version minimumVersion)
         {
             _minimumVersion = minimumVersion;

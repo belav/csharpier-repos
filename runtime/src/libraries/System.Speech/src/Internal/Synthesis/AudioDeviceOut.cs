@@ -29,6 +29,7 @@ namespace System.Speech.Internal.Synthesis
         {
             Dispose(false);
         }
+
         public void Dispose()
         {
             Dispose(true);
@@ -498,6 +499,7 @@ namespace System.Speech.Internal.Synthesis
             {
                 _userData = userData;
             }
+
             public void Dispose()
             {
                 if (_waveHeader != null)

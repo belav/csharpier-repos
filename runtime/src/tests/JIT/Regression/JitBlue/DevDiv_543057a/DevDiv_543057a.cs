@@ -27,6 +27,7 @@ public class DevDiv_543057
     {
         return (float)i;
     }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int test(int i, int j)
     {
@@ -64,6 +65,7 @@ public class DevDiv_543057
         Console.WriteLine("Result: " + result);
         return Pass;
     }
+
     public static int Main()
     {
         return test(5, 6);

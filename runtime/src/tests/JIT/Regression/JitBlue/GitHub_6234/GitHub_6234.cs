@@ -9,6 +9,7 @@ using System;
 internal class Program
 {
     public static int ii;
+
     private static int Main(string[] args)
     {
         int res = 0;

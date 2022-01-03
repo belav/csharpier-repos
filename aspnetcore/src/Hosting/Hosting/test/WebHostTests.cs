@@ -1193,6 +1193,7 @@ public partial class WebHostTests
     public class BadConfigureServicesStartup
     {
         public void ConfigureServices(IServiceCollection services, int gunk) { }
+
         public void Configure(IApplicationBuilder app) { }
     }
 
@@ -1318,6 +1319,7 @@ public partial class WebHostTests
             _started();
             return Task.CompletedTask;
         }
+
         public Task StopAsync(CancellationToken token)
         {
             _stopping();
@@ -1479,6 +1481,7 @@ public partial class WebHostTests
             var stringified = state.ToString();
             return this;
         }
+
         public void Log<TState>(
             LogLevel logLevel,
             EventId eventId,

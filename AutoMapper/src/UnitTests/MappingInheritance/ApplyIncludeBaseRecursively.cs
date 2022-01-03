@@ -13,6 +13,7 @@ namespace AutoMapper.UnitTests.MappingInheritance
         {
             public string Property1 { get; set; }
         }
+
         public class SubBaseEntity : BaseEntity { }
 
         public class SpecificEntity : SubBaseEntity

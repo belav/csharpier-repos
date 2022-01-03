@@ -14,6 +14,7 @@ namespace XPathTests.XPathExpressionTests
         {
             Assert.NotNull(XPathExpression.Compile(toCompile));
         }
+
         private static void NavigatorCompileTest(string toCompile)
         {
             var xml =

@@ -83,6 +83,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             }
             ;
         }
+
         private PatternSyntax ParsePattern(
             Precedence precedence,
             bool afterIs = false,

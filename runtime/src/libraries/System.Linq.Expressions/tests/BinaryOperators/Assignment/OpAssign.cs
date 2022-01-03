@@ -73,6 +73,7 @@ namespace System.Linq.Expressions.Tests
                 get { return Value; }
                 set { Value = value; }
             }
+
             public Box(T value)
             {
                 Value = value;
@@ -177,6 +178,7 @@ namespace System.Linq.Expressions.Tests
                     );
                 }
         }
+
         [Theory]
         [PerCompilationType(nameof(AssignAndEquivalentMethods))]
         public void AssignmentEquivalentsWithIndexAccess(

@@ -40,6 +40,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_abs_epi16 (__m256i a)
         ///   VPABSW ymm, ymm/m256
@@ -48,6 +49,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_abs_epi32 (__m256i a)
         ///   VPABSD ymm, ymm/m256
@@ -65,6 +67,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_add_epi8 (__m256i a, __m256i b)
         ///   VPADDB ymm, ymm, ymm/m256
@@ -73,6 +76,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_add_epi16 (__m256i a, __m256i b)
         ///   VPADDW ymm, ymm, ymm/m256
@@ -81,6 +85,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_add_epi16 (__m256i a, __m256i b)
         ///   VPADDW ymm, ymm, ymm/m256
@@ -89,6 +94,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_add_epi32 (__m256i a, __m256i b)
         ///   VPADDD ymm, ymm, ymm/m256
@@ -97,6 +103,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_add_epi32 (__m256i a, __m256i b)
         ///   VPADDD ymm, ymm, ymm/m256
@@ -105,6 +112,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_add_epi64 (__m256i a, __m256i b)
         ///   VPADDQ ymm, ymm, ymm/m256
@@ -113,6 +121,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_add_epi64 (__m256i a, __m256i b)
         ///   VPADDQ ymm, ymm, ymm/m256
@@ -130,6 +139,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_adds_epu8 (__m256i a, __m256i b)
         ///   VPADDUSB ymm, ymm, ymm/m256
@@ -138,6 +148,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_adds_epi16 (__m256i a, __m256i b)
         ///   VPADDSW ymm, ymm, ymm/m256
@@ -146,6 +157,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_adds_epu16 (__m256i a, __m256i b)
         ///   VPADDUSW ymm, ymm, ymm/m256
@@ -273,6 +285,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_and_si256 (__m256i a, __m256i b)
         ///   VPAND ymm, ymm, ymm/m256
@@ -281,6 +294,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_and_si256 (__m256i a, __m256i b)
         ///   VPAND ymm, ymm, ymm/m256
@@ -289,6 +303,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_and_si256 (__m256i a, __m256i b)
         ///   VPAND ymm, ymm, ymm/m256
@@ -297,6 +312,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_and_si256 (__m256i a, __m256i b)
         ///   VPAND ymm, ymm, ymm/m256
@@ -305,6 +321,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_and_si256 (__m256i a, __m256i b)
         ///   VPAND ymm, ymm, ymm/m256
@@ -313,6 +330,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_and_si256 (__m256i a, __m256i b)
         ///   VPAND ymm, ymm, ymm/m256
@@ -321,6 +339,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_and_si256 (__m256i a, __m256i b)
         ///   VPAND ymm, ymm, ymm/m256
@@ -338,6 +357,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b)
         ///   VPANDN ymm, ymm, ymm/m256
@@ -346,6 +366,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b)
         ///   VPANDN ymm, ymm, ymm/m256
@@ -354,6 +375,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b)
         ///   VPANDN ymm, ymm, ymm/m256
@@ -362,6 +384,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b)
         ///   VPANDN ymm, ymm, ymm/m256
@@ -370,6 +393,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b)
         ///   VPANDN ymm, ymm, ymm/m256
@@ -378,6 +402,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b)
         ///   VPANDN ymm, ymm, ymm/m256
@@ -386,6 +411,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b)
         ///   VPANDN ymm, ymm, ymm/m256
@@ -403,6 +429,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_avg_epu16 (__m256i a, __m256i b)
         ///   VPAVGW ymm, ymm, ymm/m256
@@ -420,6 +447,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8)
         ///   VPBLENDD xmm, xmm, xmm/m128, imm8
@@ -432,6 +460,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_blend_epi16 (__m256i a, __m256i b, const int imm8)
         ///   VPBLENDW ymm, ymm, ymm/m256, imm8
@@ -444,6 +473,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_blend_epi16 (__m256i a, __m256i b, const int imm8)
         ///   VPBLENDW ymm, ymm, ymm/m256, imm8
@@ -456,6 +486,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_blend_epi32 (__m256i a, __m256i b, const int imm8)
         ///   VPBLENDD ymm, ymm, ymm/m256, imm8
@@ -464,6 +495,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_blend_epi32 (__m256i a, __m256i b, const int imm8)
         ///   VPBLENDD ymm, ymm, ymm/m256, imm8
@@ -489,6 +521,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)
         ///   VPBLENDVB ymm, ymm, ymm/m256, ymm
@@ -515,6 +548,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)
         ///   VPBLENDVB ymm, ymm, ymm/m256, ymm
@@ -542,6 +576,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)
         ///   VPBLENDVB ymm, ymm, ymm/m256, ymm
@@ -569,6 +604,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)
         ///   VPBLENDVB ymm, ymm, ymm/m256, ymm
@@ -683,6 +719,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_broadcastb_epi8 (__m128i a)
         ///   VPBROADCASTB xmm, m8
@@ -702,6 +739,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_broadcastw_epi16 (__m128i a)
         ///   VPBROADCASTW xmm, m16
@@ -721,6 +759,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_broadcastd_epi32 (__m128i a)
         ///   VPBROADCASTD xmm, m32
@@ -740,6 +779,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_broadcastq_epi64 (__m128i a)
         ///   VPBROADCASTQ xmm, m64
@@ -849,6 +889,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_broadcastb_epi8 (__m128i a)
         ///   VPBROADCASTB ymm, m8
@@ -868,6 +909,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_broadcastw_epi16 (__m128i a)
         ///   VPBROADCASTW ymm, m16
@@ -887,6 +929,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_broadcastd_epi32 (__m128i a)
         ///   VPBROADCASTD ymm, m32
@@ -906,6 +949,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_broadcastq_epi64 (__m128i a)
         ///   VPBROADCASTQ ymm, m64
@@ -925,6 +969,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_broadcastsi128_si256 (__m128i a)
         ///   VBROADCASTI128 ymm, m128
@@ -934,6 +979,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_broadcastsi128_si256 (__m128i a)
         ///   VBROADCASTI128 ymm, m128
@@ -943,6 +989,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_broadcastsi128_si256 (__m128i a)
         ///   VBROADCASTI128 ymm, m128
@@ -952,6 +999,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_broadcastsi128_si256 (__m128i a)
         ///   VBROADCASTI128 ymm, m128
@@ -961,6 +1009,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_broadcastsi128_si256 (__m128i a)
         ///   VBROADCASTI128 ymm, m128
@@ -970,6 +1019,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_broadcastsi128_si256 (__m128i a)
         ///   VBROADCASTI128 ymm, m128
@@ -979,6 +1029,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_broadcastsi128_si256 (__m128i a)
         ///   VBROADCASTI128 ymm, m128
@@ -997,6 +1048,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cmpeq_epi8 (__m256i a, __m256i b)
         ///   VPCMPEQB ymm, ymm, ymm/m256
@@ -1005,6 +1057,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cmpeq_epi16 (__m256i a, __m256i b)
         ///   VPCMPEQW ymm, ymm, ymm/m256
@@ -1013,6 +1066,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cmpeq_epi16 (__m256i a, __m256i b)
         ///   VPCMPEQW ymm, ymm, ymm/m256
@@ -1024,6 +1078,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cmpeq_epi32 (__m256i a, __m256i b)
         ///   VPCMPEQD ymm, ymm, ymm/m256
@@ -1032,6 +1087,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cmpeq_epi32 (__m256i a, __m256i b)
         ///   VPCMPEQD ymm, ymm, ymm/m256
@@ -1040,6 +1096,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cmpeq_epi64 (__m256i a, __m256i b)
         ///   VPCMPEQQ ymm, ymm, ymm/m256
@@ -1048,6 +1105,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cmpeq_epi64 (__m256i a, __m256i b)
         ///   VPCMPEQQ ymm, ymm, ymm/m256
@@ -1068,6 +1126,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cmpgt_epi16 (__m256i a, __m256i b)
         ///   VPCMPGTW ymm, ymm, ymm/m256
@@ -1079,6 +1138,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cmpgt_epi32 (__m256i a, __m256i b)
         ///   VPCMPGTD ymm, ymm, ymm/m256
@@ -1087,6 +1147,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cmpgt_epi64 (__m256i a, __m256i b)
         ///   VPCMPGTQ ymm, ymm, ymm/m256
@@ -1107,6 +1168,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// int _mm256_cvtsi256_si32 (__m256i a)
         ///   MOVD reg/m32, xmm
@@ -1124,6 +1186,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a)
         ///   VPMOVZXBW ymm, xmm
@@ -1132,6 +1195,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi32 (__m128i a)
         ///   VPMOVSXBD ymm, xmm
@@ -1140,6 +1204,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi32 (__m128i a)
         ///   VPMOVZXBD ymm, xmm
@@ -1148,6 +1213,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a)
         ///   VPMOVSXWD ymm, xmm
@@ -1156,6 +1222,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi32 (__m128i a)
         ///   VPMOVZXWD ymm, xmm
@@ -1164,6 +1231,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi64 (__m128i a)
         ///   VPMOVSXBQ ymm, xmm
@@ -1172,6 +1240,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi64 (__m128i a)
         ///   VPMOVZXBQ ymm, xmm
@@ -1180,6 +1249,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi64 (__m128i a)
         ///   VPMOVSXWQ ymm, xmm
@@ -1188,6 +1258,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi64 (__m128i a)
         ///   VPMOVZXWQ ymm, xmm
@@ -1196,6 +1267,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cvtepi32_epi64 (__m128i a)
         ///   VPMOVSXDQ ymm, xmm
@@ -1204,6 +1276,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_cvtepu32_epi64 (__m128i a)
         ///   VPMOVZXDQ ymm, xmm
@@ -1221,6 +1294,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         ///   VPMOVZXBW ymm, m128
         /// The native signature does not exist. We provide this additional overload for completeness.
@@ -1229,6 +1303,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         ///   VPMOVSXBD ymm, m64
         /// The native signature does not exist. We provide this additional overload for completeness.
@@ -1237,6 +1312,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         ///   VPMOVZXBD ymm, m64
         /// The native signature does not exist. We provide this additional overload for completeness.
@@ -1245,6 +1321,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         ///   VPMOVSXWD ymm, m128
         /// The native signature does not exist. We provide this additional overload for completeness.
@@ -1253,6 +1330,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         ///   VPMOVZXWD ymm, m128
         /// The native signature does not exist. We provide this additional overload for completeness.
@@ -1261,6 +1339,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         ///   VPMOVSXBQ ymm, m32
         /// The native signature does not exist. We provide this additional overload for completeness.
@@ -1269,6 +1348,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         ///   VPMOVZXBQ ymm, m32
         /// The native signature does not exist. We provide this additional overload for completeness.
@@ -1277,6 +1357,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         ///   VPMOVSXWQ ymm, m64
         /// The native signature does not exist. We provide this additional overload for completeness.
@@ -1285,6 +1366,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         ///   VPMOVZXWQ ymm, m64
         /// The native signature does not exist. We provide this additional overload for completeness.
@@ -1293,6 +1375,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         ///   VPMOVSXDQ ymm, m128
         /// The native signature does not exist. We provide this additional overload for completeness.
@@ -1301,6 +1384,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         ///   VPMOVZXDQ ymm, m128
         /// The native signature does not exist. We provide this additional overload for completeness.
@@ -1395,6 +1479,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_i32gather_epi32 (int const* base_addr, __m128i vindex, const int scale)
         ///   VPGATHERDD xmm, vm32x, xmm
@@ -1408,6 +1493,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_i32gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale)
         ///   VPGATHERDQ xmm, vm32x, xmm
@@ -1421,6 +1507,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_i32gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale)
         ///   VPGATHERDQ xmm, vm32x, xmm
@@ -1434,6 +1521,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128 _mm_i32gather_ps (float const* base_addr, __m128i vindex, const int scale)
         ///   VGATHERDPS xmm, vm32x, xmm
@@ -1447,6 +1535,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_i32gather_pd (double const* base_addr, __m128i vindex, const int scale)
         ///   VGATHERDPD xmm, vm32x, xmm
@@ -1460,6 +1549,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_i64gather_epi32 (int const* base_addr, __m128i vindex, const int scale)
         ///   VPGATHERQD xmm, vm64x, xmm
@@ -1473,6 +1563,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_i64gather_epi32 (int const* base_addr, __m128i vindex, const int scale)
         ///   VPGATHERQD xmm, vm64x, xmm
@@ -1486,6 +1577,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_i64gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale)
         ///   VPGATHERQQ xmm, vm64x, xmm
@@ -1499,6 +1591,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_i64gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale)
         ///   VPGATHERQQ xmm, vm64x, xmm
@@ -1512,6 +1605,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128 _mm_i64gather_ps (float const* base_addr, __m128i vindex, const int scale)
         ///   VGATHERQPS xmm, vm64x, xmm
@@ -1525,6 +1619,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_i64gather_pd (double const* base_addr, __m128i vindex, const int scale)
         ///   VGATHERQPD xmm, vm64x, xmm
@@ -1538,6 +1633,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_i32gather_epi32 (int const* base_addr, __m256i vindex, const int scale)
         ///   VPGATHERDD ymm, vm32y, ymm
@@ -1551,6 +1647,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_i32gather_epi32 (int const* base_addr, __m256i vindex, const int scale)
         ///   VPGATHERDD ymm, vm32y, ymm
@@ -1564,6 +1661,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_i32gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale)
         ///   VPGATHERDQ ymm, vm32y, ymm
@@ -1577,6 +1675,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_i32gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale)
         ///   VPGATHERDQ ymm, vm32y, ymm
@@ -1590,6 +1689,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256 _mm256_i32gather_ps (float const* base_addr, __m256i vindex, const int scale)
         ///   VGATHERDPS ymm, vm32y, ymm
@@ -1603,6 +1703,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256d _mm256_i32gather_pd (double const* base_addr, __m128i vindex, const int scale)
         ///   VGATHERDPD ymm, vm32y, ymm
@@ -1616,6 +1717,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm256_i64gather_epi32 (int const* base_addr, __m256i vindex, const int scale)
         ///   VPGATHERQD xmm, vm64y, xmm
@@ -1629,6 +1731,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm256_i64gather_epi32 (int const* base_addr, __m256i vindex, const int scale)
         ///   VPGATHERQD xmm, vm64y, xmm
@@ -1642,6 +1745,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_i64gather_epi64 (__int64 const* base_addr, __m256i vindex, const int scale)
         ///   VPGATHERQQ ymm, vm64y, ymm
@@ -1655,6 +1759,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_i64gather_epi64 (__int64 const* base_addr, __m256i vindex, const int scale)
         ///   VPGATHERQQ ymm, vm64y, ymm
@@ -1668,6 +1773,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128 _mm256_i64gather_ps (float const* base_addr, __m256i vindex, const int scale)
         ///   VGATHERQPS xmm, vm64y, xmm
@@ -1681,6 +1787,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256d _mm256_i64gather_pd (double const* base_addr, __m256i vindex, const int scale)
         ///   VGATHERQPD ymm, vm64y, ymm
@@ -1710,6 +1817,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_mask_i32gather_epi32 (__m128i src, int const* base_addr, __m128i vindex, __m128i mask, const int scale)
         ///   VPGATHERDD xmm, vm32x, xmm
@@ -1725,6 +1833,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_mask_i32gather_epi64 (__m128i src, __int64 const* base_addr, __m128i vindex, __m128i mask, const int scale)
         ///   VPGATHERDQ xmm, vm32x, xmm
@@ -1740,6 +1849,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_mask_i32gather_epi64 (__m128i src, __int64 const* base_addr, __m128i vindex, __m128i mask, const int scale)
         ///   VPGATHERDQ xmm, vm32x, xmm
@@ -1755,6 +1865,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128 _mm_mask_i32gather_ps (__m128 src, float const* base_addr, __m128i vindex, __m128 mask, const int scale)
         ///   VGATHERDPS xmm, vm32x, xmm
@@ -1770,6 +1881,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_mask_i32gather_pd (__m128d src, double const* base_addr, __m128i vindex, __m128d mask, const int scale)
         ///   VGATHERDPD xmm, vm32x, xmm
@@ -1785,6 +1897,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_mask_i64gather_epi32 (__m128i src, int const* base_addr, __m128i vindex, __m128i mask, const int scale)
         ///   VPGATHERQD xmm, vm64x, xmm
@@ -1800,6 +1913,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_mask_i64gather_epi32 (__m128i src, int const* base_addr, __m128i vindex, __m128i mask, const int scale)
         ///   VPGATHERQD xmm, vm64x, xmm
@@ -1815,6 +1929,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_mask_i64gather_epi64 (__m128i src, __int64 const* base_addr, __m128i vindex, __m128i mask, const int scale)
         ///   VPGATHERQQ xmm, vm64x, xmm
@@ -1830,6 +1945,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_mask_i64gather_epi64 (__m128i src, __int64 const* base_addr, __m128i vindex, __m128i mask, const int scale)
         ///   VPGATHERQQ xmm, vm64x, xmm
@@ -1845,6 +1961,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128 _mm_mask_i64gather_ps (__m128 src, float const* base_addr, __m128i vindex, __m128 mask, const int scale)
         ///   VGATHERQPS xmm, vm64x, xmm
@@ -1860,6 +1977,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128d _mm_mask_i64gather_pd (__m128d src, double const* base_addr, __m128i vindex, __m128d mask, const int scale)
         ///   VGATHERQPD xmm, vm64x, xmm
@@ -1875,6 +1993,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_mask_i32gather_epi32 (__m256i src, int const* base_addr, __m256i vindex, __m256i mask, const int scale)
         ///   VPGATHERDD ymm, vm32y, ymm
@@ -1890,6 +2009,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_mask_i32gather_epi32 (__m256i src, int const* base_addr, __m256i vindex, __m256i mask, const int scale)
         ///   VPGATHERDD ymm, vm32y, ymm
@@ -1905,6 +2025,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_mask_i32gather_epi64 (__m256i src, __int64 const* base_addr, __m128i vindex, __m256i mask, const int scale)
         ///   VPGATHERDQ ymm, vm32y, ymm
@@ -1920,6 +2041,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_mask_i32gather_epi64 (__m256i src, __int64 const* base_addr, __m128i vindex, __m256i mask, const int scale)
         ///   VPGATHERDQ ymm, vm32y, ymm
@@ -1935,6 +2057,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256 _mm256_mask_i32gather_ps (__m256 src, float const* base_addr, __m256i vindex, __m256 mask, const int scale)
         ///   VPGATHERDPS ymm, vm32y, ymm
@@ -1950,6 +2073,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256d _mm256_mask_i32gather_pd (__m256d src, double const* base_addr, __m128i vindex, __m256d mask, const int scale)
         ///   VPGATHERDPD ymm, vm32y, ymm
@@ -1965,6 +2089,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm256_mask_i64gather_epi32 (__m128i src, int const* base_addr, __m256i vindex, __m128i mask, const int scale)
         ///   VPGATHERQD xmm, vm32y, xmm
@@ -1980,6 +2105,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm256_mask_i64gather_epi32 (__m128i src, int const* base_addr, __m256i vindex, __m128i mask, const int scale)
         ///   VPGATHERQD xmm, vm32y, xmm
@@ -1995,6 +2121,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_mask_i64gather_epi64 (__m256i src, __int64 const* base_addr, __m256i vindex, __m256i mask, const int scale)
         ///   VPGATHERQQ ymm, vm32y, ymm
@@ -2010,6 +2137,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_mask_i64gather_epi64 (__m256i src, __int64 const* base_addr, __m256i vindex, __m256i mask, const int scale)
         ///   VPGATHERQQ ymm, vm32y, ymm
@@ -2025,6 +2153,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128 _mm256_mask_i64gather_ps (__m128 src, float const* base_addr, __m256i vindex, __m128 mask, const int scale)
         ///   VGATHERQPS xmm, vm32y, xmm
@@ -2040,6 +2169,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256d _mm256_mask_i64gather_pd (__m256d src, double const* base_addr, __m256i vindex, __m256d mask, const int scale)
         ///   VGATHERQPD ymm, vm32y, ymm
@@ -2064,6 +2194,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_hadd_epi32 (__m256i a, __m256i b)
         ///   VPHADDD ymm, ymm, ymm/m256
@@ -2096,6 +2227,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_hsub_epi32 (__m256i a, __m256i b)
         ///   VPHSUBD ymm, ymm, ymm/m256
@@ -2229,6 +2361,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_stream_load_si256 (__m256i const* mem_addr)
         ///   VMOVNTDQA ymm, m256
@@ -2237,6 +2370,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_stream_load_si256 (__m256i const* mem_addr)
         ///   VMOVNTDQA ymm, m256
@@ -2245,6 +2379,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_stream_load_si256 (__m256i const* mem_addr)
         ///   VMOVNTDQA ymm, m256
@@ -2253,6 +2388,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_stream_load_si256 (__m256i const* mem_addr)
         ///   VMOVNTDQA ymm, m256
@@ -2261,6 +2397,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_stream_load_si256 (__m256i const* mem_addr)
         ///   VMOVNTDQA ymm, m256
@@ -2269,6 +2406,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_stream_load_si256 (__m256i const* mem_addr)
         ///   VMOVNTDQA ymm, m256
@@ -2277,6 +2415,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_stream_load_si256 (__m256i const* mem_addr)
         ///   VMOVNTDQA ymm, m256
@@ -2294,6 +2433,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_maskload_epi32 (int const* mem_addr, __m128i mask)
         ///   VPMASKMOVD xmm, xmm, m128
@@ -2302,6 +2442,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_maskload_epi64 (__int64 const* mem_addr, __m128i mask)
         ///   VPMASKMOVQ xmm, xmm, m128
@@ -2310,6 +2451,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_maskload_epi64 (__int64 const* mem_addr, __m128i mask)
         ///   VPMASKMOVQ xmm, xmm, m128
@@ -2327,6 +2469,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_maskload_epi32 (int const* mem_addr, __m256i mask)
         ///   VPMASKMOVD ymm, ymm, m256
@@ -2335,6 +2478,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_maskload_epi64 (__int64 const* mem_addr, __m256i mask)
         ///   VPMASKMOVQ ymm, ymm, m256
@@ -2343,6 +2487,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_maskload_epi64 (__int64 const* mem_addr, __m256i mask)
         ///   VPMASKMOVQ ymm, ymm, m256
@@ -2364,6 +2509,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_maskstore_epi32 (int* mem_addr, __m128i mask, __m128i a)
         ///   VPMASKMOVD m128, xmm, xmm
@@ -2376,6 +2522,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_maskstore_epi64 (__int64* mem_addr, __m128i mask, __m128i a)
         ///   VPMASKMOVQ m128, xmm, xmm
@@ -2388,6 +2535,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm_maskstore_epi64 (__int64* mem_addr, __m128i mask, __m128i a)
         ///   VPMASKMOVQ m128, xmm, xmm
@@ -2413,6 +2561,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm256_maskstore_epi32 (int* mem_addr, __m256i mask, __m256i a)
         ///   VPMASKMOVD m256, ymm, ymm
@@ -2425,6 +2574,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm256_maskstore_epi64 (__int64* mem_addr, __m256i mask, __m256i a)
         ///   VPMASKMOVQ m256, ymm, ymm
@@ -2437,6 +2587,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// void _mm256_maskstore_epi64 (__int64* mem_addr, __m256i mask, __m256i a)
         ///   VPMASKMOVQ m256, ymm, ymm
@@ -2482,6 +2633,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_max_epu8 (__m256i a, __m256i b)
         ///   VPMAXUB ymm, ymm, ymm/m256
@@ -2490,6 +2642,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_max_epi16 (__m256i a, __m256i b)
         ///   VPMAXSW ymm, ymm, ymm/m256
@@ -2498,6 +2651,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_max_epu16 (__m256i a, __m256i b)
         ///   VPMAXUW ymm, ymm, ymm/m256
@@ -2506,6 +2660,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_max_epi32 (__m256i a, __m256i b)
         ///   VPMAXSD ymm, ymm, ymm/m256
@@ -2514,6 +2669,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_max_epu32 (__m256i a, __m256i b)
         ///   VPMAXUD ymm, ymm, ymm/m256
@@ -2531,6 +2687,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_min_epu8 (__m256i a, __m256i b)
         ///   VPMINUB ymm, ymm, ymm/m256
@@ -2539,6 +2696,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_min_epi16 (__m256i a, __m256i b)
         ///   VPMINSW ymm, ymm, ymm/m256
@@ -2547,6 +2705,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_min_epu16 (__m256i a, __m256i b)
         ///   VPMINUW ymm, ymm, ymm/m256
@@ -2555,6 +2714,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_min_epi32 (__m256i a, __m256i b)
         ///   VPMINSD ymm, ymm, ymm/m256
@@ -2563,6 +2723,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_min_epu32 (__m256i a, __m256i b)
         ///   VPMINUD ymm, ymm, ymm/m256
@@ -2580,6 +2741,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// int _mm256_movemask_epi8 (__m256i a)
         ///   VPMOVMSKB reg, ymm
@@ -2610,6 +2772,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_mul_epu32 (__m256i a, __m256i b)
         ///   VPMULUDQ ymm, ymm, ymm/m256
@@ -2627,6 +2790,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_mulhi_epu16 (__m256i a, __m256i b)
         ///   VPMULHUW ymm, ymm, ymm/m256
@@ -2659,6 +2823,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_mullo_epi16 (__m256i a, __m256i b)
         ///   VPMULLW ymm, ymm, ymm/m256
@@ -2676,6 +2841,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_mullo_epi32 (__m256i a, __m256i b)
         ///   VPMULLD ymm, ymm, ymm/m256
@@ -2693,6 +2859,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_or_si256 (__m256i a, __m256i b)
         ///   VPOR ymm, ymm, ymm/m256
@@ -2701,6 +2868,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_or_si256 (__m256i a, __m256i b)
         ///   VPOR ymm, ymm, ymm/m256
@@ -2709,6 +2877,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_or_si256 (__m256i a, __m256i b)
         ///   VPOR ymm, ymm, ymm/m256
@@ -2717,6 +2886,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_or_si256 (__m256i a, __m256i b)
         ///   VPOR ymm, ymm, ymm/m256
@@ -2725,6 +2895,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_or_si256 (__m256i a, __m256i b)
         ///   VPOR ymm, ymm, ymm/m256
@@ -2733,6 +2904,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_or_si256 (__m256i a, __m256i b)
         ///   VPOR ymm, ymm, ymm/m256
@@ -2741,6 +2913,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_or_si256 (__m256i a, __m256i b)
         ///   VPOR ymm, ymm, ymm/m256
@@ -2761,6 +2934,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_packs_epi32 (__m256i a, __m256i b)
         ///   VPACKSSDW ymm, ymm, ymm/m256
@@ -2769,6 +2943,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_packus_epi16 (__m256i a, __m256i b)
         ///   VPACKUSWB ymm, ymm, ymm/m256
@@ -2780,6 +2955,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_packus_epi32 (__m256i a, __m256i b)
         ///   VPACKUSDW ymm, ymm, ymm/m256
@@ -2804,6 +2980,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_permute2x128_si256 (__m256i a, __m256i b, const int imm8)
         ///   VPERM2I128 ymm, ymm, ymm/m256, imm8
@@ -2816,6 +2993,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_permute2x128_si256 (__m256i a, __m256i b, const int imm8)
         ///   VPERM2I128 ymm, ymm, ymm/m256, imm8
@@ -2828,6 +3006,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_permute2x128_si256 (__m256i a, __m256i b, const int imm8)
         ///   VPERM2I128 ymm, ymm, ymm/m256, imm8
@@ -2840,6 +3019,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_permute2x128_si256 (__m256i a, __m256i b, const int imm8)
         ///   VPERM2I128 ymm, ymm, ymm/m256, imm8
@@ -2852,6 +3032,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_permute2x128_si256 (__m256i a, __m256i b, const int imm8)
         ///   VPERM2I128 ymm, ymm, ymm/m256, imm8
@@ -2864,6 +3045,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_permute2x128_si256 (__m256i a, __m256i b, const int imm8)
         ///   VPERM2I128 ymm, ymm, ymm/m256, imm8
@@ -2876,6 +3058,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_permute2x128_si256 (__m256i a, __m256i b, const int imm8)
         ///   VPERM2I128 ymm, ymm, ymm/m256, imm8
@@ -2897,6 +3080,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8)
         ///   VPERMQ ymm, ymm/m256, imm8
@@ -2905,6 +3089,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8)
         ///   VPERMPD ymm, ymm/m256, imm8
@@ -2922,6 +3107,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_permutevar8x32_epi32 (__m256i a, __m256i idx)
         ///   VPERMD ymm, ymm/m256, ymm
@@ -2930,6 +3116,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256 _mm256_permutevar8x32_ps (__m256 a, __m256i idx)
         ///   VPERMPS ymm, ymm/m256, ymm
@@ -2950,6 +3137,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sll_epi16 (__m256i a, __m128i count)
         ///   VPSLLW ymm, ymm, xmm/m128
@@ -2961,6 +3149,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sll_epi32 (__m256i a, __m128i count)
         ///   VPSLLD ymm, ymm, xmm/m128
@@ -2969,6 +3158,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sll_epi32 (__m256i a, __m128i count)
         ///   VPSLLD ymm, ymm, xmm/m128
@@ -2977,6 +3167,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sll_epi64 (__m256i a, __m128i count)
         ///   VPSLLQ ymm, ymm, xmm/m128
@@ -2985,6 +3176,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sll_epi64 (__m256i a, __m128i count)
         ///   VPSLLQ ymm, ymm, xmm/m128
@@ -3005,6 +3197,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_slli_epi16 (__m256i a, int imm8)
         ///   VPSLLW ymm, ymm, imm8
@@ -3013,6 +3206,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_slli_epi32 (__m256i a, int imm8)
         ///   VPSLLD ymm, ymm, imm8
@@ -3021,6 +3215,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_slli_epi32 (__m256i a, int imm8)
         ///   VPSLLD ymm, ymm, imm8
@@ -3029,6 +3224,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_slli_epi64 (__m256i a, int imm8)
         ///   VPSLLQ ymm, ymm, imm8
@@ -3037,6 +3233,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_slli_epi64 (__m256i a, int imm8)
         ///   VPSLLQ ymm, ymm, imm8
@@ -3057,6 +3254,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bslli_epi128 (__m256i a, const int imm8)
         ///   VPSLLDQ ymm, ymm, imm8
@@ -3068,6 +3266,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bslli_epi128 (__m256i a, const int imm8)
         ///   VPSLLDQ ymm, ymm, imm8
@@ -3079,6 +3278,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bslli_epi128 (__m256i a, const int imm8)
         ///   VPSLLDQ ymm, ymm, imm8
@@ -3090,6 +3290,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bslli_epi128 (__m256i a, const int imm8)
         ///   VPSLLDQ ymm, ymm, imm8
@@ -3098,6 +3299,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bslli_epi128 (__m256i a, const int imm8)
         ///   VPSLLDQ ymm, ymm, imm8
@@ -3109,6 +3311,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bslli_epi128 (__m256i a, const int imm8)
         ///   VPSLLDQ ymm, ymm, imm8
@@ -3120,6 +3323,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bslli_epi128 (__m256i a, const int imm8)
         ///   VPSLLDQ ymm, ymm, imm8
@@ -3143,6 +3347,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sllv_epi32 (__m256i a, __m256i count)
         ///   VPSLLVD ymm, ymm, ymm/m256
@@ -3154,6 +3359,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sllv_epi64 (__m256i a, __m256i count)
         ///   VPSLLVQ ymm, ymm, ymm/m256
@@ -3165,6 +3371,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sllv_epi64 (__m256i a, __m256i count)
         ///   VPSLLVQ ymm, ymm, ymm/m256
@@ -3188,6 +3395,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sllv_epi32 (__m128i a, __m128i count)
         ///   VPSLLVD xmm, ymm, xmm/m128
@@ -3199,6 +3407,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sllv_epi64 (__m128i a, __m128i count)
         ///   VPSLLVQ xmm, ymm, xmm/m128
@@ -3210,6 +3419,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_sllv_epi64 (__m128i a, __m128i count)
         ///   VPSLLVQ xmm, ymm, xmm/m128
@@ -3233,6 +3443,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// _mm256_sra_epi32 (__m256i a, __m128i count)
         ///   VPSRAD ymm, ymm, xmm/m128
@@ -3253,6 +3464,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srai_epi32 (__m256i a, int imm8)
         ///   VPSRAD ymm, ymm, imm8
@@ -3297,6 +3509,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srl_epi16 (__m256i a, __m128i count)
         ///   VPSRLW ymm, ymm, xmm/m128
@@ -3308,6 +3521,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srl_epi32 (__m256i a, __m128i count)
         ///   VPSRLD ymm, ymm, xmm/m128
@@ -3316,6 +3530,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srl_epi32 (__m256i a, __m128i count)
         ///   VPSRLD ymm, ymm, xmm/m128
@@ -3327,6 +3542,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srl_epi64 (__m256i a, __m128i count)
         ///   VPSRLQ ymm, ymm, xmm/m128
@@ -3338,6 +3554,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srl_epi64 (__m256i a, __m128i count)
         ///   VPSRLQ ymm, ymm, xmm/m128
@@ -3358,6 +3575,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srli_epi16 (__m256i a, int imm8)
         ///   VPSRLW ymm, ymm, imm8
@@ -3366,6 +3584,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srli_epi32 (__m256i a, int imm8)
         ///   VPSRLD ymm, ymm, imm8
@@ -3374,6 +3593,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srli_epi32 (__m256i a, int imm8)
         ///   VPSRLD ymm, ymm, imm8
@@ -3382,6 +3602,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srli_epi64 (__m256i a, int imm8)
         ///   VPSRLQ ymm, ymm, imm8
@@ -3390,6 +3611,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srli_epi64 (__m256i a, int imm8)
         ///   VPSRLQ ymm, ymm, imm8
@@ -3410,6 +3632,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8)
         ///   VPSRLDQ ymm, ymm, imm8
@@ -3421,6 +3644,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8)
         ///   VPSRLDQ ymm, ymm, imm8
@@ -3432,6 +3656,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8)
         ///   VPSRLDQ ymm, ymm, imm8
@@ -3443,6 +3668,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8)
         ///   VPSRLDQ ymm, ymm, imm8
@@ -3454,6 +3680,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8)
         ///   VPSRLDQ ymm, ymm, imm8
@@ -3465,6 +3692,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8)
         ///   VPSRLDQ ymm, ymm, imm8
@@ -3476,6 +3704,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8)
         ///   VPSRLDQ ymm, ymm, imm8
@@ -3499,6 +3728,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srlv_epi32 (__m256i a, __m256i count)
         ///   VPSRLVD ymm, ymm, ymm/m256
@@ -3510,6 +3740,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srlv_epi64 (__m256i a, __m256i count)
         ///   VPSRLVQ ymm, ymm, ymm/m256
@@ -3521,6 +3752,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_srlv_epi64 (__m256i a, __m256i count)
         ///   VPSRLVQ ymm, ymm, ymm/m256
@@ -3544,6 +3776,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srlv_epi32 (__m128i a, __m128i count)
         ///   VPSRLVD xmm, xmm, xmm/m128
@@ -3555,6 +3788,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srlv_epi64 (__m128i a, __m128i count)
         ///   VPSRLVQ xmm, xmm, xmm/m128
@@ -3566,6 +3800,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m128i _mm_srlv_epi64 (__m128i a, __m128i count)
         ///   VPSRLVQ xmm, xmm, xmm/m128
@@ -3586,6 +3821,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_shuffle_epi8 (__m256i a, __m256i b)
         ///   VPSHUFB ymm, ymm, ymm/m256
@@ -3594,6 +3830,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_shuffle_epi32 (__m256i a, const int imm8)
         ///   VPSHUFD ymm, ymm/m256, imm8
@@ -3602,6 +3839,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_shuffle_epi32 (__m256i a, const int imm8)
         ///   VPSHUFD ymm, ymm/m256, imm8
@@ -3619,6 +3857,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_shufflehi_epi16 (__m256i a, const int imm8)
         ///   VPSHUFHW ymm, ymm/m256, imm8
@@ -3636,6 +3875,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_shufflelo_epi16 (__m256i a, const int imm8)
         ///   VPSHUFLW ymm, ymm/m256, imm8
@@ -3653,6 +3893,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sign_epi16 (__m256i a, __m256i b)
         ///   VPSIGNW ymm, ymm, ymm/m256
@@ -3661,6 +3902,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sign_epi32 (__m256i a, __m256i b)
         ///   VPSIGND ymm, ymm, ymm/m256
@@ -3678,6 +3920,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sub_epi8 (__m256i a, __m256i b)
         ///   VPSUBB ymm, ymm, ymm/m256
@@ -3686,6 +3929,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sub_epi16 (__m256i a, __m256i b)
         ///   VPSUBW ymm, ymm, ymm/m256
@@ -3694,6 +3938,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sub_epi16 (__m256i a, __m256i b)
         ///   VPSUBW ymm, ymm, ymm/m256
@@ -3702,6 +3947,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sub_epi32 (__m256i a, __m256i b)
         ///   VPSUBD ymm, ymm, ymm/m256
@@ -3710,6 +3956,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sub_epi32 (__m256i a, __m256i b)
         ///   VPSUBD ymm, ymm, ymm/m256
@@ -3718,6 +3965,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sub_epi64 (__m256i a, __m256i b)
         ///   VPSUBQ ymm, ymm, ymm/m256
@@ -3726,6 +3974,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_sub_epi64 (__m256i a, __m256i b)
         ///   VPSUBQ ymm, ymm, ymm/m256
@@ -3746,6 +3995,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_subs_epi16 (__m256i a, __m256i b)
         ///   VPSUBSW ymm, ymm, ymm/m256
@@ -3757,6 +4007,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_subs_epu8 (__m256i a, __m256i b)
         ///   VPSUBUSB ymm, ymm, ymm/m256
@@ -3765,6 +4016,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_subs_epu16 (__m256i a, __m256i b)
         ///   VPSUBUSW ymm, ymm, ymm/m256
@@ -3797,6 +4049,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpackhi_epi8 (__m256i a, __m256i b)
         ///   VPUNPCKHBW ymm, ymm, ymm/m256
@@ -3805,6 +4058,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpackhi_epi16 (__m256i a, __m256i b)
         ///   VPUNPCKHWD ymm, ymm, ymm/m256
@@ -3813,6 +4067,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpackhi_epi16 (__m256i a, __m256i b)
         ///   VPUNPCKHWD ymm, ymm, ymm/m256
@@ -3821,6 +4076,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpackhi_epi32 (__m256i a, __m256i b)
         ///   VPUNPCKHDQ ymm, ymm, ymm/m256
@@ -3829,6 +4085,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpackhi_epi32 (__m256i a, __m256i b)
         ///   VPUNPCKHDQ ymm, ymm, ymm/m256
@@ -3837,6 +4094,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpackhi_epi64 (__m256i a, __m256i b)
         ///   VPUNPCKHQDQ ymm, ymm, ymm/m256
@@ -3845,6 +4103,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpackhi_epi64 (__m256i a, __m256i b)
         ///   VPUNPCKHQDQ ymm, ymm, ymm/m256
@@ -3862,6 +4121,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpacklo_epi8 (__m256i a, __m256i b)
         ///   VPUNPCKLBW ymm, ymm, ymm/m256
@@ -3870,6 +4130,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpacklo_epi16 (__m256i a, __m256i b)
         ///   VPUNPCKLWD ymm, ymm, ymm/m256
@@ -3878,6 +4139,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpacklo_epi16 (__m256i a, __m256i b)
         ///   VPUNPCKLWD ymm, ymm, ymm/m256
@@ -3886,6 +4148,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpacklo_epi32 (__m256i a, __m256i b)
         ///   VPUNPCKLDQ ymm, ymm, ymm/m256
@@ -3894,6 +4157,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpacklo_epi32 (__m256i a, __m256i b)
         ///   VPUNPCKLDQ ymm, ymm, ymm/m256
@@ -3902,6 +4166,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpacklo_epi64 (__m256i a, __m256i b)
         ///   VPUNPCKLQDQ ymm, ymm, ymm/m256
@@ -3910,6 +4175,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_unpacklo_epi64 (__m256i a, __m256i b)
         ///   VPUNPCKLQDQ ymm, ymm, ymm/m256
@@ -3927,6 +4193,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_xor_si256 (__m256i a, __m256i b)
         ///   VPXOR ymm, ymm, ymm/m256
@@ -3935,6 +4202,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_xor_si256 (__m256i a, __m256i b)
         ///   VPXOR ymm, ymm, ymm/m256
@@ -3943,6 +4211,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_xor_si256 (__m256i a, __m256i b)
         ///   VPXOR ymm, ymm, ymm/m256
@@ -3951,6 +4220,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_xor_si256 (__m256i a, __m256i b)
         ///   VPXOR ymm, ymm, ymm/m256
@@ -3959,6 +4229,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_xor_si256 (__m256i a, __m256i b)
         ///   VPXOR ymm, ymm, ymm/m256
@@ -3967,6 +4238,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_xor_si256 (__m256i a, __m256i b)
         ///   VPXOR ymm, ymm, ymm/m256
@@ -3975,6 +4247,7 @@ namespace System.Runtime.Intrinsics.X86
         {
             throw new PlatformNotSupportedException();
         }
+
         /// <summary>
         /// __m256i _mm256_xor_si256 (__m256i a, __m256i b)
         ///   VPXOR ymm, ymm, ymm/m256

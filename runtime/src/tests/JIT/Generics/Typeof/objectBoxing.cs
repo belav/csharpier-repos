@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 class X
 {
     public static int x_count = 1;
+
     public virtual void incCount()
     {
         x_count *= 2;
@@ -20,6 +21,7 @@ class X
 class A : X
 {
     public static int a_count = 1;
+
     public override void incCount()
     {
         a_count *= 17;
@@ -29,6 +31,7 @@ class A : X
 class B : X
 {
     public static int b_count = 1;
+
     public override void incCount()
     {
         b_count *= 19;
@@ -38,6 +41,7 @@ class B : X
 class C : A
 {
     public static int c_count = 1;
+
     public override void incCount()
     {
         c_count *= 23;
@@ -47,6 +51,7 @@ class C : A
 class D : B
 {
     public static int d_count = 1;
+
     public override void incCount()
     {
         d_count *= 31;
@@ -56,6 +61,7 @@ class D : B
 sealed class CS : A
 {
     public static int cs_count = 1;
+
     public override void incCount()
     {
         cs_count *= 37;
@@ -65,6 +71,7 @@ sealed class CS : A
 sealed class DS : B
 {
     public static int ds_count = 1;
+
     public override void incCount()
     {
         ds_count *= 41;
@@ -74,6 +81,7 @@ sealed class DS : B
 class mainMethod
 {
     public static bool failed = false;
+
     public static void checkGetType(System.Object x)
     {
         if (x.GetType() == typeof(DS))

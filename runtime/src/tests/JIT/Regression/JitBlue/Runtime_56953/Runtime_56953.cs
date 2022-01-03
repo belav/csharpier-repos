@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class TestClass13
 {
     // The test exposed a place where we were using uninitialized `gtUseNum` variable.
@@ -10,12 +11,15 @@ public class TestClass13
     {
         public byte byte_1;
     }
+
     public struct S2
     {
     }
+
     public struct S3
     {
     }
+
     public struct S5
     {
         public struct S5_D1_F2
@@ -24,12 +28,14 @@ public class TestClass13
             public ushort uint16_2;
         }
     }
+
     static ushort s_uint16_11 = 19036;
     static S2 s_s2_15 = new S2();
     static S3 s_s3_16 = new S3();
     static S5.S5_D1_F2 s_s5_s5_d1_f2_18 = new S5.S5_D1_F2();
     static S5 s_s5_19 = new S5();
     static int s_loopInvariant = 1;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public ushort LeafMethod11()
     {
@@ -38,6 +44,7 @@ public class TestClass13
             return s_s5_s5_d1_f2_18.uint16_2 <<= 15 | 4;
         }
     }
+
     public S3 Method4(
         ref S2 p_s2_0,
         S5.S5_D1_F2 p_s5_s5_d1_f2_1,
@@ -54,6 +61,7 @@ public class TestClass13
             return s_s3_16;
         }
     }
+
     public void Method0()
     {
         unchecked
@@ -73,6 +81,7 @@ public class TestClass13
             return;
         }
     }
+
     public static int Main(string[] args)
     {
         try

@@ -314,7 +314,6 @@ namespace System.Runtime.InteropServices
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "MarshalNative_GetHINSTANCE")]
         private static extern IntPtr GetHINSTANCE(QCallModule m);
-
 #endif // TARGET_WINDOWS
 
 

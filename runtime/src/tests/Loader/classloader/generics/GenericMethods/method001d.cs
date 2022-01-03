@@ -15,6 +15,7 @@ public class Test_method001d
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

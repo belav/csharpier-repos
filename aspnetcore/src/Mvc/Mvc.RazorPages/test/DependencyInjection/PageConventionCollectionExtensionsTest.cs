@@ -1193,6 +1193,7 @@ public class PageConventionCollectionExtensionsTest
             }
         }
     }
+
     private static void ApplyConventions(
         PageConventionCollection conventions,
         PageApplicationModel[] models

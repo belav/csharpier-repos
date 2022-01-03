@@ -414,6 +414,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             public TLocalState StateWhenFalse;
 #nullable enable
             public readonly LabelSymbol? Label;
+
 #nullable disable
 
             public PendingBranch(
@@ -925,6 +926,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             _labelsSeen.Free();
             _labelsSeen = oldPending.LabelsSeen;
         }
+
 #nullable disable
 
         #region visitors
@@ -1194,6 +1196,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return null;
         }
+
 #nullable disable
 
         public override BoundNode VisitInterpolatedString(BoundInterpolatedString node)
@@ -2765,6 +2768,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return true;
         }
+
 #nullable disable
 
         public override BoundNode VisitUnaryOperator(BoundUnaryOperator node)

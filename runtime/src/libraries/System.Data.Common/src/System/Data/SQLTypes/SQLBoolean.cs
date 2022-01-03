@@ -526,11 +526,13 @@ namespace System.Data.SqlTypes
         /// <see cref='Value'/> property of an instance of the <see cref='SqlBoolean'/> class.
         /// </summary>
         public static readonly SqlBoolean True = new SqlBoolean(true);
+
         /// <summary>
         /// Represents a false value that can be assigned to the <see cref='Value'/> property of an instance of
         /// the <see cref='SqlBoolean'/> class.
         /// </summary>
         public static readonly SqlBoolean False = new SqlBoolean(false);
+
         /// <summary>
         /// Represents a null value that can be assigned to the <see cref='Value'/> property of an instance of
         /// the <see cref='SqlBoolean'/> class.

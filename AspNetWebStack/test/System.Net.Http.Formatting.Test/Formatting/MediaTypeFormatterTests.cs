@@ -428,6 +428,7 @@ namespace System.Net.Http.Formatting
         public struct TestStruct
         {
             private int I;
+
             public TestStruct(int i)
             {
                 I = i + 1;

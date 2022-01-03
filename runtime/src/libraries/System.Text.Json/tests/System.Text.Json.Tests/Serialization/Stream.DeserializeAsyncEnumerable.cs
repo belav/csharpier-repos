@@ -148,6 +148,7 @@ namespace System.Text.Json.Serialization.Tests
             public override bool CanConvert(Type typeToConvert) =>
                 typeToConvert.IsGenericType
                 && typeof(Queue<>) == typeToConvert.GetGenericTypeDefinition();
+
             public override JsonConverter? CreateConverter(
                 Type typeToConvert,
                 JsonSerializerOptions options
@@ -164,6 +165,7 @@ namespace System.Text.Json.Serialization.Tests
             {
                 public override bool CanConvert(Type typeToConvert) =>
                     typeof(Queue<T>).IsAssignableFrom(typeToConvert);
+
                 public override Queue<T>? Read(
                     ref Utf8JsonReader reader,
                     Type typeToConvert,

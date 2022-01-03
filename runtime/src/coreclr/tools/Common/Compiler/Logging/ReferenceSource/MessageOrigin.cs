@@ -115,9 +115,12 @@ namespace Mono.Linker
 
         public override bool Equals(object obj) =>
             obj is MessageOrigin messageOrigin && Equals(messageOrigin);
+
         public override int GetHashCode() =>
             (FileName, MemberDefinition, SourceLine, SourceColumn).GetHashCode();
+
         public static bool operator ==(MessageOrigin lhs, MessageOrigin rhs) => lhs.Equals(rhs);
+
         public static bool operator !=(MessageOrigin lhs, MessageOrigin rhs) => !lhs.Equals(rhs);
 
         public int CompareTo(MessageOrigin other)

@@ -14,6 +14,7 @@ class Program
     class TestALC : AssemblyLoadContext
     {
         AssemblyLoadContext m_parentALC;
+
         public TestALC(AssemblyLoadContext parentALC) : base("test", isCollectible: true)
         {
             m_parentALC = parentALC;

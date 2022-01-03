@@ -52,6 +52,7 @@ namespace System.Tests
             Assert.Equal(4, it[3]);
             Assert.Throws<IndexOutOfRangeException>(() => it[4].ToString());
         }
+
         [Fact]
         private static void FiveTuples()
         {

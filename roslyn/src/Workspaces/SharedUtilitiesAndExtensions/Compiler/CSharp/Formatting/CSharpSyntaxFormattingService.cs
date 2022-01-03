@@ -28,7 +28,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
 #if CODE_STYLE
         public static readonly CSharpSyntaxFormattingService Instance = new();
-
 #else
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

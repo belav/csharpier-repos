@@ -9,6 +9,7 @@ using System.Threading;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Text;
+
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>

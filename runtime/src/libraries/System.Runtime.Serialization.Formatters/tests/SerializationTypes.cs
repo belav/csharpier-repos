@@ -244,18 +244,25 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
     [Serializable]
     public enum ByteEnum : byte { }
+
     [Serializable]
     public enum SByteEnum : sbyte { }
+
     [Serializable]
     public enum Int16Enum : short { }
+
     [Serializable]
     public enum UInt16Enum : ushort { }
+
     [Serializable]
     public enum Int32Enum : int { }
+
     [Serializable]
     public enum UInt32Enum : uint { }
+
     [Serializable]
     public enum Int64Enum : long { }
+
     [Serializable]
     public enum UInt64Enum : ulong { }
 
@@ -366,6 +373,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
     {
         public DerivedISerializableWithNonPublicDeserializationCtor(int value1, string value2)
             : base(value1, value2) { }
+
         private DerivedISerializableWithNonPublicDeserializationCtor(
             SerializationInfo info,
             StreamingContext context
@@ -377,6 +385,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
     {
         public int IncrementedDuringOnSerializingMethod;
         public int IncrementedDuringOnSerializedMethod;
+
         [NonSerialized]
         public int IncrementedDuringOnDeserializingMethod;
         public int IncrementedDuringOnDeserializedMethod;
@@ -405,6 +414,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
     {
         internal int DerivedIncrementedDuringOnSerializingMethod;
         internal int DerivedIncrementedDuringOnSerializedMethod;
+
         [NonSerialized]
         internal int DerivedIncrementedDuringOnDeserializingMethod;
         internal int DerivedIncrementedDuringOnDeserializedMethod;
@@ -432,6 +442,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
     public sealed class ObjRefReturnsObj : IObjectReference
     {
         public object Real;
+
         public object GetRealObject(StreamingContext context) => Real;
     }
 
@@ -486,6 +497,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
     public class ObjectWithStateAndMethod
     {
         public int State;
+
         public int GetState() => State;
     }
 

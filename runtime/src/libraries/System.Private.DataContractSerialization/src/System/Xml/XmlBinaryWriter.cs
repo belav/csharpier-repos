@@ -849,6 +849,7 @@ namespace System.Xml
         {
             WriteTextNodeWithInt64(XmlBinaryNodeType.DateTimeText, ToBinary(dt));
         }
+
         private static long ToBinary(DateTime dt)
         {
             long temp = 0;

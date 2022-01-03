@@ -15,6 +15,7 @@ namespace System.Security.Policy
     public sealed partial class StrongName : EvidenceBase, IIdentityPermissionFactory
     {
         public StrongName(StrongNamePublicKeyBlob blob, string name, Version version) { }
+
         public string Name
         {
             get { return null; }
@@ -27,16 +28,21 @@ namespace System.Security.Policy
         {
             get { return default(Version); }
         }
+
         public object Copy()
         {
             return null;
         }
+
         public IPermission CreateIdentityPermission(Evidence evidence)
         {
             return default(IPermission);
         }
+
         public override bool Equals(object o) => base.Equals(o);
+
         public override int GetHashCode() => base.GetHashCode();
+
         public override string ToString() => base.ToString();
     }
 }

@@ -48,6 +48,7 @@ namespace System.Management
 
         //parameterized constructors
         internal ManagementQuery(string query) : this(DEFAULTQUERYLANGUAGE, query) { }
+
         internal ManagementQuery(string language, string query)
         {
             QueryLanguage = language;
@@ -224,6 +225,7 @@ namespace System.Management
         /// is the default constructor.</para>
         /// </summary>
         public ObjectQuery() : base() { }
+
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ObjectQuery'/>
         /// class
@@ -231,6 +233,7 @@ namespace System.Management
         /// </summary>
         /// <param name='query'>The string representation of the query.</param>
         public ObjectQuery(string query) : base(query) { }
+
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ObjectQuery'/>
         /// class for a specific
@@ -435,12 +438,14 @@ namespace System.Management
         /// default constructor.</para>
         /// </summary>
         public EventQuery() : base() { }
+
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.EventQuery'/>
         /// class for the specified query.</para>
         /// </summary>
         /// <param name='query'>A textual representation of the event query.</param>
         public EventQuery(string query) : base(query) { }
+
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.EventQuery'/>
         /// class for the specified
@@ -3034,6 +3039,7 @@ namespace System.Management
         /// </example>
         public WqlEventQuery(string eventClassName, TimeSpan withinInterval)
             : this(eventClassName, withinInterval, null, TimeSpan.Zero, null, null) { }
+
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.WqlEventQuery'/>
         /// class with the specified

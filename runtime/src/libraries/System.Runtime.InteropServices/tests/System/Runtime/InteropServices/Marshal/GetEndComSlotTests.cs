@@ -57,6 +57,7 @@ namespace System.Runtime.InteropServices.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>(null, () => Marshal.GetEndComSlot(type));
         }
+
         public static IEnumerable<object[]> GetStartComSlot_NotComVisibleType_TestData()
         {
             yield return new object[] { typeof(GenericClass<>) };

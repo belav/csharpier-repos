@@ -23,12 +23,14 @@ public class StaticTest4
     public static object ThreadStaticValue;
     public static object StaticValue;
 }
+
 public class StaticTest5
 {
     [ThreadStatic]
     public static object ThreadStaticValue;
     public static object StaticValue;
 }
+
 public class StaticTest6
 {
     public static object StaticValue;

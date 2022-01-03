@@ -25,6 +25,7 @@ namespace System.Speech.Recognition
         private RecognitionResult _result;
         #endregion
     }
+
     [Serializable]
     public class SpeechRecognizedEventArgs : RecognitionEventArgs
     {
@@ -34,6 +35,7 @@ namespace System.Speech.Recognition
 
         #endregion
     }
+
     [Serializable]
     public class SpeechRecognitionRejectedEventArgs : RecognitionEventArgs
     {
@@ -43,6 +45,7 @@ namespace System.Speech.Recognition
 
         #endregion
     }
+
     [Serializable]
     public class SpeechHypothesizedEventArgs : RecognitionEventArgs
     {

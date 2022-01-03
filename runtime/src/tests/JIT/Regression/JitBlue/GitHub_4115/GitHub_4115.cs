@@ -16,6 +16,7 @@ namespace Issue_4115
         private GCHandle _pinHandle;
         private IntPtr _dataArrayPtr;
         public ArraySegment<byte> Data;
+
         public MyClass() { }
 
         public object Obj { get; private set; }

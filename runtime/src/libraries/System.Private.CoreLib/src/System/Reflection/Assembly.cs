@@ -81,11 +81,13 @@ namespace System.Reflection
             [RequiresUnreferencedCode("Types might be removed")]
             get => GetExportedTypes();
         }
+
         [RequiresUnreferencedCode("Types might be removed")]
         public virtual Type[] GetExportedTypes()
         {
             throw NotImplemented.ByDesign;
         }
+
         [RequiresUnreferencedCode("Types might be removed")]
         public virtual Type[] GetForwardedTypes()
         {
@@ -109,14 +111,17 @@ namespace System.Reflection
         {
             throw NotImplemented.ByDesign;
         }
+
         public virtual string[] GetManifestResourceNames()
         {
             throw NotImplemented.ByDesign;
         }
+
         public virtual Stream? GetManifestResourceStream(string name)
         {
             throw NotImplemented.ByDesign;
         }
+
         public virtual Stream? GetManifestResourceStream(Type type, string name)
         {
             throw NotImplemented.ByDesign;
@@ -125,6 +130,7 @@ namespace System.Reflection
         public bool IsFullyTrusted => true;
 
         public virtual AssemblyName GetName() => GetName(copiedName: false);
+
         public virtual AssemblyName GetName(bool copiedName)
         {
             throw NotImplemented.ByDesign;
@@ -133,9 +139,11 @@ namespace System.Reflection
         [RequiresUnreferencedCode("Types might be removed")]
         public virtual Type? GetType(string name) =>
             GetType(name, throwOnError: false, ignoreCase: false);
+
         [RequiresUnreferencedCode("Types might be removed")]
         public virtual Type? GetType(string name, bool throwOnError) =>
             GetType(name, throwOnError: throwOnError, ignoreCase: false);
+
         [RequiresUnreferencedCode("Types might be removed")]
         public virtual Type? GetType(string name, bool throwOnError, bool ignoreCase)
         {
@@ -149,6 +157,7 @@ namespace System.Reflection
 
         public virtual IEnumerable<CustomAttributeData> CustomAttributes =>
             GetCustomAttributesData();
+
         public virtual IList<CustomAttributeData> GetCustomAttributesData()
         {
             throw NotImplemented.ByDesign;
@@ -158,6 +167,7 @@ namespace System.Reflection
         {
             throw NotImplemented.ByDesign;
         }
+
         public virtual object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             throw NotImplemented.ByDesign;
@@ -228,19 +238,23 @@ namespace System.Reflection
         }
 
         public virtual Module ManifestModule => throw NotImplemented.ByDesign;
+
         public virtual Module? GetModule(string name)
         {
             throw NotImplemented.ByDesign;
         }
 
         public Module[] GetModules() => GetModules(getResourceModules: false);
+
         public virtual Module[] GetModules(bool getResourceModules)
         {
             throw NotImplemented.ByDesign;
         }
 
         public virtual IEnumerable<Module> Modules => GetLoadedModules(getResourceModules: true);
+
         public Module[] GetLoadedModules() => GetLoadedModules(getResourceModules: false);
+
         public virtual Module[] GetLoadedModules(bool getResourceModules)
         {
             throw NotImplemented.ByDesign;
@@ -256,6 +270,7 @@ namespace System.Reflection
         {
             throw NotImplemented.ByDesign;
         }
+
         public virtual Assembly GetSatelliteAssembly(CultureInfo culture, Version? version)
         {
             throw NotImplemented.ByDesign;
@@ -266,8 +281,10 @@ namespace System.Reflection
         {
             throw NotImplemented.ByDesign;
         }
+
         [RequiresAssemblyFiles(ThrowingMessageInRAF)]
         public virtual FileStream[] GetFiles() => GetFiles(getResourceModules: false);
+
         [RequiresAssemblyFiles(ThrowingMessageInRAF)]
         public virtual FileStream[] GetFiles(bool getResourceModules)
         {
@@ -296,6 +313,7 @@ namespace System.Reflection
         public virtual long HostContext => throw NotImplemented.ByDesign;
 
         public override bool Equals(object? o) => base.Equals(o);
+
         public override int GetHashCode() => base.GetHashCode();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -547,6 +565,7 @@ namespace System.Reflection
         )]
         public Module LoadModule(string moduleName, byte[]? rawModule) =>
             LoadModule(moduleName, rawModule, null);
+
         [RequiresUnreferencedCode(
             "Types and members the loaded module depends on might be removed"
         )]
@@ -571,6 +590,7 @@ namespace System.Reflection
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ReflectionOnly);
         }
+
         [Obsolete(
             Obsoletions.ReflectionOnlyLoadingMessage,
             DiagnosticId = Obsoletions.ReflectionOnlyLoadingDiagId,
@@ -583,6 +603,7 @@ namespace System.Reflection
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ReflectionOnly);
         }
+
         [Obsolete(
             Obsoletions.ReflectionOnlyLoadingMessage,
             DiagnosticId = Obsoletions.ReflectionOnlyLoadingDiagId,

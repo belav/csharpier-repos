@@ -889,6 +889,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public static int Status;
+
         public static float? operator +(Target p, ValueType x)
         {
             return 1f;
@@ -940,6 +941,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public static int Status;
+
         public static int operator -(Target p, ValueType x)
         {
             return 1;
@@ -1036,6 +1038,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public static int Status;
+
         public static float? operator ^(myStruct x, Target p)
         {
             return null;

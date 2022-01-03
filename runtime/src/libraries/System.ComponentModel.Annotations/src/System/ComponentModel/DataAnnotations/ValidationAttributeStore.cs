@@ -194,6 +194,7 @@ namespace System.ComponentModel.DataAnnotations
                 DynamicallyAccessedMemberTypes.All;
 
             private readonly object _syncRoot = new object();
+
             [DynamicallyAccessedMembers(DynamicallyAccessedTypes)]
             private readonly Type _type;
             private Dictionary<string, PropertyStoreItem>? _propertyStoreItems;

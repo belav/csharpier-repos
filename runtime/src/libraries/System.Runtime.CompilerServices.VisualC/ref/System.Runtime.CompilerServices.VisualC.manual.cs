@@ -17,6 +17,7 @@ namespace System.Runtime.CompilerServices
     {
         internal AssemblyAttributesGoHere() { }
     }
+
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
@@ -24,6 +25,7 @@ namespace System.Runtime.CompilerServices
     {
         internal AssemblyAttributesGoHereS() { }
     }
+
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
@@ -31,6 +33,7 @@ namespace System.Runtime.CompilerServices
     {
         internal AssemblyAttributesGoHereM() { }
     }
+
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
@@ -38,11 +41,13 @@ namespace System.Runtime.CompilerServices
     {
         internal AssemblyAttributesGoHereSM() { }
     }
+
     [System.AttributeUsageAttribute(System.AttributeTargets.All)]
     internal sealed class DecoratedNameAttribute : System.Attribute
     {
         public DecoratedNameAttribute(string decoratedName) { }
     }
+
     [AttributeUsageAttribute(
         AttributeTargets.Class
             | AttributeTargets.Constructor

@@ -9,6 +9,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys.FunctionalTests;
 public class DelegateSupportedConditionAttribute : Attribute, ITestCondition
 {
     private readonly bool _isSupported;
+
     public DelegateSupportedConditionAttribute(bool isSupported) => _isSupported = isSupported;
 
     public bool IsMet => HttpApi.SupportsDelegation == _isSupported;

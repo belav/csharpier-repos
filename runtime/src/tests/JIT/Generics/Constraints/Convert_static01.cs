@@ -4,17 +4,11 @@
 
 using System;
 
-public interface IFoo
-{
-}
+public interface IFoo { }
 
-public class FooClass : IFoo
-{
-}
+public class FooClass : IFoo { }
 
-public struct FooStruct : IFoo
-{
-}
+public struct FooStruct : IFoo { }
 
 public class GenClass<T> where T : IFoo
 {
@@ -31,10 +25,12 @@ public struct GenStruct<T> where T : IFoo
         return t;
     }
 }
+
 public class Test_Convert_static01
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

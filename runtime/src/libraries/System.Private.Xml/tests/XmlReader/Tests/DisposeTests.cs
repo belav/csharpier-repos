@@ -13,7 +13,9 @@ namespace System.Xml.Tests
         {
             IsDisposed = false;
         }
+
         public bool IsDisposed { get; private set; }
+
         protected override void Dispose(bool disposing)
         {
             IsDisposed = true;
@@ -36,18 +38,22 @@ namespace System.Xml.Tests
         {
             get { return default(bool); }
         }
+
         public override string GetAttribute(int i)
         {
             return default(string);
         }
+
         public override string GetAttribute(string name, string namespaceURI)
         {
             return default(string);
         }
+
         public override string GetAttribute(string name)
         {
             return default(string);
         }
+
         public override bool IsEmptyElement
         {
             get { return default(bool); }
@@ -56,30 +62,37 @@ namespace System.Xml.Tests
         {
             get { return default(string); }
         }
+
         public override string LookupNamespace(string prefix)
         {
             return default(string);
         }
+
         public override bool MoveToAttribute(string name, string ns)
         {
             return default(bool);
         }
+
         public override bool MoveToAttribute(string name)
         {
             return default(bool);
         }
+
         public override bool MoveToElement()
         {
             return default(bool);
         }
+
         public override bool MoveToFirstAttribute()
         {
             return default(bool);
         }
+
         public override bool MoveToNextAttribute()
         {
             return default(bool);
         }
+
         public override XmlNameTable NameTable
         {
             get { return default(XmlNameTable); }
@@ -96,19 +109,24 @@ namespace System.Xml.Tests
         {
             get { return default(string); }
         }
+
         public override bool Read()
         {
             return default(bool);
         }
+
         public override bool ReadAttributeValue()
         {
             return default(bool);
         }
+
         public override ReadState ReadState
         {
             get { return default(ReadState); }
         }
+
         public override void ResolveEntity() { }
+
         public override string Value
         {
             get { return default(string); }

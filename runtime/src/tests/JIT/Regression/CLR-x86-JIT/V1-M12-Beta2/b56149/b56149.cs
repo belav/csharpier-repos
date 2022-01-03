@@ -5,6 +5,7 @@
 namespace Test
 {
     using System;
+
     public class AA
     {
         static void Method1(bool param1)
@@ -24,6 +25,7 @@ namespace Test
                 }
             }
         }
+
         static int Main()
         {
             try

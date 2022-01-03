@@ -25,6 +25,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             Module = module;
             Token = token;
         }
+
         public ModuleToken(EcmaModule module, EntityHandle entityHandle)
         {
             Module = module;

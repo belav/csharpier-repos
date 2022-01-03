@@ -1240,6 +1240,7 @@ namespace System.ComponentModel.Composition
             OptionNames = name;
             OptionValues = value;
         }
+
         public string OptionNames { get; set; }
         public object OptionValues { get; set; }
     }

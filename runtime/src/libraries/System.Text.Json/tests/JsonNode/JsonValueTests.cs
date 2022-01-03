@@ -24,6 +24,7 @@ namespace System.Text.Json.Node.Tests
         }
 
         private class Polymorphic_Base { }
+
         private class Polymorphic_Derived : Polymorphic_Base { }
 
         [Fact]

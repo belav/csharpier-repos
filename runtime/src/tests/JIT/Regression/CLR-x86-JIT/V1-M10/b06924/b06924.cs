@@ -7,9 +7,11 @@ namespace AAAA
     //@BEGINRENAME; Verify this renames
     //@ENDRENAME; Verify this renames
     using System;
+
     public class CtTest
     {
         private static int iTest = 5;
+
         public static int Main(String[] args)
         {
             iTest++;

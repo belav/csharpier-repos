@@ -11,6 +11,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Expects status=success></Expects>
     // <Code>
     internal delegate int Foo(dynamic i = null);
+
     public class Test
     {
         public static int Foo2(dynamic i)
@@ -41,6 +42,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int? i = 0);
+
     public class Test
     {
         public static int Foo2(int? i)
@@ -71,6 +73,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Expects status=success></Expects>
     // <Code>
     internal delegate int Foo(int? i);
+
     public class Test
     {
         private static int Bar(int? i = 1)
@@ -117,6 +120,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Expects status=success></Expects>
     // <Code>
     internal delegate int Foo(dynamic i = default(dynamic));
+
     public class Test
     {
         private static int Bar(dynamic i = default(object))
@@ -147,6 +151,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int? i = 0);
+
     public class Test
     {
         private static int Bar(int? i = 1)
@@ -177,6 +182,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int? i = 2);
+
     public class Test
     {
         private static int Bar(int? i = 1)
@@ -211,6 +217,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Expects status=success></Expects>
     // <Code>
     internal delegate int Foo(dynamic i = null);
+
     public class Test
     {
         private static int Bar(dynamic i = null)
@@ -245,6 +252,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int? i = 3);
+
     public class Test
     {
         private static int Bar(int? i = 1)
@@ -280,6 +288,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int? i = 3, int? j = 5, string t = "test");
+
     public class Test
     {
         private static int Bar(int? i = 1, int? j = 4, string t = "test2")
@@ -316,9 +325,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Expects status=success></Expects>
     // <Code>
     internal delegate int Foo(dynamic i = null, dynamic j = null, string t = "test");
+
     public class Test
     {
         private static event Foo even;
+
         private static int Bar(dynamic i = null, dynamic j = null, string t = "test2")
         {
             if (i == 2)
@@ -350,9 +361,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int? i = 2, int? j = 5, string t = "test");
+
     public class Test
     {
         private static event Foo even;
+
         private static int Bar(int? i = 1, int? j = 4, string t = "test2")
         {
             if (i == 1)
@@ -391,9 +404,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
         dynamic j = default(dynamic),
         dynamic t = default(object)
     );
+
     public class Test
     {
         private static event Foo even;
+
         private static int Bar(
             dynamic i = default(dynamic),
             dynamic j = null,
@@ -445,9 +460,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Expects status=success></Expects>
     // <Code>
     public delegate int Foo(int? i = 2, int? j = 5, string t = "test");
+
     public class Test
     {
         private static event Foo even;
+
         private static int Bar(int? i = 1, int? j = 4, string t = "test2")
         {
             if (i == 10 && j == 20)
@@ -491,9 +508,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     //<Expects Status=warning>\(15,22\).*CS0067</Expects>
     public delegate int Foo(int? i = 3, int? j = 5, string t = "test");
     public delegate int Foo2(int? i, int? j, string t);
+
     public class Test
     {
         private static event Foo even;
+
         private static int Bar(int? i = 1, int? j = 4, string t = "test2")
         {
             if (i == 1)

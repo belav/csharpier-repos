@@ -1014,6 +1014,7 @@ public class DefaultLinkGeneratorTest : LinkGeneratorTestBase
         {
             Value = value;
         }
+
         public int Value { get; }
     }
 }

@@ -1582,6 +1582,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         class C14
         {
             static void M(int a = 1, int b = 2, int c = 3) { }
+
             static void M(long c = 1, long b = 2)
             {
                 System.Console.Write($"Second {c} {b}. ");
@@ -1669,6 +1670,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         class C15
         {
             static void M(long a = 1, long b = 2, long c = 3) { }
+
             static void M(int c = 1, int b = 2)
             {
                 System.Console.Write($"Second {c} {b}.");

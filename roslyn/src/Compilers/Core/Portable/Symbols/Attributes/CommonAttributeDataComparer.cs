@@ -20,6 +20,7 @@ namespace Microsoft.CodeAnalysis
     internal sealed class CommonAttributeDataComparer : IEqualityComparer<AttributeData>
     {
         public static CommonAttributeDataComparer Instance = new CommonAttributeDataComparer();
+
         private CommonAttributeDataComparer() { }
 
         public bool Equals(AttributeData attr1, AttributeData attr2)

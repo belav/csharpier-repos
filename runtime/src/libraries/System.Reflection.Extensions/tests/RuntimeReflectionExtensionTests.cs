@@ -497,6 +497,7 @@ namespace System.Reflection.Tests
             public abstract void SetLength(long value);
 
             public abstract void Write(byte[] buffer, int offset, int count);
+
             public virtual Task WriteAsync(byte[] buffer, int offset, int count)
             {
                 throw null;

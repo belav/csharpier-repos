@@ -12,6 +12,7 @@ namespace System.CommandLine.Suggest.Tests
     {
         public static IEnumerable<string> FilesNameWithoutExtensionUnderDotnetProfileToolsExample =
             new[] { "dotnet-suggest", "t-rex" };
+
         [Fact]
         public void Path_is_in_global_tools()
         {

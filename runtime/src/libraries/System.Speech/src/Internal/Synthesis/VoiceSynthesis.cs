@@ -138,6 +138,7 @@ namespace System.Speech.Internal.Synthesis
                 _stateChanged -= eventHandler;
             }
         }
+
         internal void SpeakAsync(Prompt prompt)
         {
             QueuePrompt(prompt);
@@ -679,6 +680,7 @@ namespace System.Speech.Internal.Synthesis
 
         // Internal event handlers
         internal EventHandler<StateChangedEventArgs> _stateChanged;
+
         // Internal event handlers
         internal EventHandler<SpeakStartedEventArgs> _speakStarted;
         internal EventHandler<SpeakCompletedEventArgs> _speakCompleted;
@@ -1859,6 +1861,7 @@ namespace System.Speech.Internal.Synthesis
                 }
             }
         }
+
         private void QueuePrompt(Prompt prompt)
         {
             // Call Sapi Speak with the appropriate flags based on mediaType
@@ -1912,6 +1915,7 @@ namespace System.Speech.Internal.Synthesis
                 new Parameters(Action.SpeakText, new ParametersSpeak(null, prompt, false, audio))
             );
         }
+
         private void SetInterest(int ttsInterest)
         {
             _ttsInterest = ttsInterest;

@@ -23,6 +23,7 @@ namespace JitInliningTest
             }
         }
     }
+
     internal class PropTest
     {
         public static int Main()

@@ -201,11 +201,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
         public override MethodImplRecord[] FindMethodsImplWithMatchingDeclName(string name) =>
             throw new NotImplementedException();
+
         public override ClassLayoutMetadata GetClassLayout() => throw new NotImplementedException();
+
         public override int GetHashCode() =>
             (Namespace != null)
                 ? HashCode.Combine(Namespace, Name, Module)
                 : HashCode.Combine(Name, Module);
+
         public override MetadataType GetNestedType(string name)
         {
             TypeRefTypeSystemType type = null;
@@ -215,6 +218,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
             }
             return type;
         }
+
         public override IEnumerable<MetadataType> GetNestedTypes()
         {
             if (_nestedType != null)
@@ -227,11 +231,15 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
         }
 
         public override IEnumerable<MethodDesc> GetMethods() => _methods;
+
         public override IEnumerable<FieldDesc> GetFields() => _fields;
+
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName) =>
             false;
+
         protected override int CompareToImpl(TypeDesc other, TypeSystemComparer comparer) =>
             throw new NotImplementedException();
+
         protected override TypeFlags ComputeTypeFlags(TypeFlags mask)
         {
             TypeFlags flags = 0;

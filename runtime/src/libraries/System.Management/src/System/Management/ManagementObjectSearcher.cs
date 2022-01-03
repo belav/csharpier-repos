@@ -184,6 +184,7 @@ namespace System.Management
             string queryString,
             EnumerationOptions options
         ) : this(new ManagementScope(scope), new ObjectQuery(queryString), options) { }
+
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObjectSearcher'/> class to be
         ///    used to invoke the specified query in the specified scope, with the specified

@@ -9,6 +9,7 @@ namespace Test
         A,
         Test
     };
+
     enum TestingEnum2
     {
         This,

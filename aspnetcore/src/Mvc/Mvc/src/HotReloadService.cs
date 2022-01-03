@@ -11,6 +11,7 @@ using Microsoft.Extensions.Primitives;
 
 [assembly: MetadataUpdateHandler(typeof(Microsoft.AspNetCore.Mvc.HotReload.HotReloadService))]
 
+
 namespace Microsoft.AspNetCore.Mvc.HotReload;
 
 internal sealed class HotReloadService : IActionDescriptorChangeProvider, IDisposable

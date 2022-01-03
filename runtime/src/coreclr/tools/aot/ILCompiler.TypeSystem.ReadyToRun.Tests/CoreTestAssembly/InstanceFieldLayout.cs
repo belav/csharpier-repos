@@ -62,8 +62,10 @@ namespace Explicit
     class Class1
     {
         static int Stat;
+
         [FieldOffset(4)]
         bool Bar;
+
         [FieldOffset(10)]
         char Baz;
     }
@@ -73,6 +75,7 @@ namespace Explicit
     {
         [FieldOffset(0)]
         int Lol;
+
         [FieldOffset(20)]
         byte Omg;
     }
@@ -82,6 +85,7 @@ namespace Explicit
     {
         [FieldOffset(0)]
         int Lol;
+
         [FieldOffset(20)]
         byte Omg;
     }
@@ -308,8 +312,11 @@ namespace IsByRefLike
 namespace EnumAlignment
 {
     public enum ByteEnum : byte { }
+
     public enum ShortEnum : short { }
+
     public enum IntEnum : int { }
+
     public enum LongEnum : long { }
 
     public struct LongIntEnumStruct

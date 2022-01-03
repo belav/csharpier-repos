@@ -7,6 +7,7 @@
 public class C
 {
     public void MC1() { }
+
     public void MC2() { }
 
     event System.Action EC1;
@@ -17,6 +18,7 @@ public class C
 public class D
 {
     public void MD1() { }
+
     public int FD1;
 
     public int PE1

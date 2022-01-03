@@ -14,6 +14,7 @@ namespace Microsoft.Extensions.Hosting
         {
             throw null;
         }
+
         public static Microsoft.Extensions.Hosting.IHostBuilder UseWindowsService(
             this Microsoft.Extensions.Hosting.IHostBuilder hostBuilder,
             System.Action<Microsoft.Extensions.Hosting.WindowsServiceLifetimeOptions> configure
@@ -22,9 +23,11 @@ namespace Microsoft.Extensions.Hosting
             throw null;
         }
     }
+
     public partial class WindowsServiceLifetimeOptions
     {
         public WindowsServiceLifetimeOptions() { }
+
         public string ServiceName
         {
             get { throw null; }
@@ -32,6 +35,7 @@ namespace Microsoft.Extensions.Hosting
         }
     }
 }
+
 namespace Microsoft.Extensions.Hosting.WindowsServices
 {
     public static partial class WindowsServiceHelpers
@@ -41,6 +45,7 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
             throw null;
         }
     }
+
     public partial class WindowsServiceLifetime
         : System.ServiceProcess.ServiceBase,
           Microsoft.Extensions.Hosting.IHostLifetime
@@ -51,6 +56,7 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
             Microsoft.Extensions.Logging.ILoggerFactory loggerFactory,
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.HostOptions> optionsAccessor
         ) { }
+
         public WindowsServiceLifetime(
             Microsoft.Extensions.Hosting.IHostEnvironment environment,
             Microsoft.Extensions.Hosting.IHostApplicationLifetime applicationLifetime,
@@ -58,16 +64,22 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.HostOptions> optionsAccessor,
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.WindowsServiceLifetimeOptions> windowsServiceOptionsAccessor
         ) { }
+
         protected override void Dispose(bool disposing) { }
+
         protected override void OnShutdown() { }
+
         protected override void OnStart(string[] args) { }
+
         protected override void OnStop() { }
+
         public System.Threading.Tasks.Task StopAsync(
             System.Threading.CancellationToken cancellationToken
         )
         {
             throw null;
         }
+
         public System.Threading.Tasks.Task WaitForStartAsync(
             System.Threading.CancellationToken cancellationToken
         )

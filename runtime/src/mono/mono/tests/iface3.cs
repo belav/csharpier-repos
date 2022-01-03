@@ -11,6 +11,7 @@ public class Base : ICommon
     {
         return 1;
     }
+
     public virtual int DoIt()
     {
         return 2;
@@ -23,6 +24,7 @@ public class Derived : Base, ICommon
     {
         return 3;
     }
+
     public new virtual int DoIt()
     {
         return 4;

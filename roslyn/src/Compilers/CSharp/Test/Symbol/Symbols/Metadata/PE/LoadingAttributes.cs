@@ -685,6 +685,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             public string[] Pos;
 
             public KeyValuePair<string, string>[] Named;
+
             public AttributeArgs(string[] p, KeyValuePair<string, string>[] n)
             {
                 this.Pos = p;

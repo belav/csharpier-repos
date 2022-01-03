@@ -814,7 +814,9 @@ namespace Microsoft.Extensions.Hosting.Tests
             {
                 _disposable?.Dispose();
             }
+
             public void OnError(Exception error) { }
+
             public void OnNext(DiagnosticListener value)
             {
                 if (value.Name == "Microsoft.Extensions.Hosting")
@@ -832,10 +834,14 @@ namespace Microsoft.Extensions.Hosting.Tests
         private class FakeFileProvider : IFileProvider, IDisposable
         {
             public bool Disposed { get; private set; }
+
             public void Dispose() => Disposed = true;
+
             public IDirectoryContents GetDirectoryContents(string subpath) =>
                 throw new NotImplementedException();
+
             public IFileInfo GetFileInfo(string subpath) => throw new NotImplementedException();
+
             public IChangeToken Watch(string filter) => throw new NotImplementedException();
         }
 

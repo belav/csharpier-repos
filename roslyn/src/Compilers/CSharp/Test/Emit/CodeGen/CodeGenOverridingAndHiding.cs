@@ -811,6 +811,7 @@ Base.get_Property",
                 }
             );
         }
+
         [Fact]
         private void TestBaseAccessForMembersHiddenInImmediateBaseClass()
         {
@@ -914,6 +915,7 @@ Base.set_Property()"
 }"
             );
         }
+
         [Fact]
         private void TestBaseAccessForMembersMissingInImmediateBaseClass()
         {
@@ -1028,6 +1030,7 @@ Base.set_Property()"
 }"
             );
         }
+
         [Fact]
         private void TestBaseAccessForObjectMembers()
         {
@@ -1098,6 +1101,7 @@ abstract class DerivedClass : BaseClass<int, long>
 }"
             );
         }
+
         [Fact]
         private void TestOverridingFinalizeImpersonator()
         {
@@ -1261,6 +1265,7 @@ Derived2.Finalize()
 }"
             );
         }
+
         [Fact]
         private void TestOverrideResolution2()
         {
@@ -1314,6 +1319,7 @@ Derived.Method<>
 Derived.Method<,>)"
             );
         }
+
         [Fact]
         private void TestOverrideResolution1()
         {
@@ -1652,6 +1658,7 @@ Base.P.Set(2)",
                 }
             );
         }
+
         [WorkItem(540214, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540214")]
         [Fact]
         private void TestEmitSynthesizedSealedGetter()
@@ -1715,6 +1722,7 @@ Derived.P.Set(2)",
                 }
             );
         }
+
         [WorkItem(540327, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540327")]
         [Fact]
         private void TestOverrideWithSealedProperty()
@@ -1794,6 +1802,7 @@ Derived.set_Property3",
                 }
             );
         }
+
         [Fact]
         private void TestOverrideWithAbstractProperty()
         {
@@ -1904,6 +1913,7 @@ Derived.set_Property2",
                 }
             );
         }
+
         [Fact]
         private void TestOverrideWithAbstractProperty2()
         {
@@ -2516,6 +2526,7 @@ class Derived2 : Base2
 
             comp.VerifyDiagnostics();
         }
+
         [WorkItem(540341, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540341")]
         [Fact]
         private void TestInternalMethods()
@@ -2572,6 +2583,7 @@ class Derived : Base2<int>
 
             comp.VerifyDiagnostics(); // No errors
         }
+
         [Fact]
         private void TestProtectedInternalMethods()
         {
@@ -2627,6 +2639,7 @@ class Derived : Base2<int>
 
             comp.VerifyDiagnostics(); // No errors
         }
+
         [Fact]
         private void TestProtectedMethods()
         {
@@ -2681,6 +2694,7 @@ class Derived : Base2<int>
                 }
             );
         }
+
         [Fact]
         private void TestPublicMethods()
         {
@@ -2736,6 +2750,7 @@ class Derived : Base2<int>
 
             comp.VerifyDiagnostics(); // No errors
         }
+
         [WorkItem(540341, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540341")]
         [Fact]
         private void TestInternalAccessors()
@@ -2994,6 +3009,7 @@ class Derived : Base<int>
 
             comp.VerifyDiagnostics(); // No errors
         }
+
         [Fact]
         private void TestProtectedInternalAccessorsInDifferentAssembly()
         {
@@ -3168,6 +3184,7 @@ class Derived : Base<int>
 
             comp.VerifyDiagnostics(); // No errors
         }
+
         [Fact]
         private void TestPublicAccessors()
         {
@@ -3239,6 +3256,7 @@ class Derived : Base<int>
 
             comp.VerifyDiagnostics(); // No errors
         }
+
         [Fact]
         private void TestOverrideOverloadedMethod()
         {
@@ -3294,6 +3312,7 @@ class Derived : Base2<int>
 
             comp.VerifyDiagnostics(); // No errors
         }
+
         [Fact]
         private void TestOverrideHidingMember()
         {
@@ -4802,6 +4821,7 @@ Derived1.Method`2",
                     .WithArguments("Y", "Outer<T>.Inner<U>.Derived1<X, Y>")
             );
         }
+
         [Fact]
         private void TestHideMethodWithModreqCustomModifiers()
         {

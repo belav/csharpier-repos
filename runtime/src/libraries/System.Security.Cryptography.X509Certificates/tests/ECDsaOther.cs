@@ -17,9 +17,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public override KeySizes[] LegalKeySizes => _impl.LegalKeySizes;
 
         public override void GenerateKey(ECCurve curve) => _impl.GenerateKey(curve);
+
         public override void ImportParameters(ECParameters parameters) =>
             _impl.ImportParameters(parameters);
+
         public override byte[] SignHash(byte[] hash) => _impl.SignHash(hash);
+
         public override bool VerifyHash(byte[] hash, byte[] signature) =>
             _impl.VerifyHash(hash, signature);
 

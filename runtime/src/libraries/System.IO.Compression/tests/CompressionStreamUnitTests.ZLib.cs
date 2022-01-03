@@ -12,16 +12,21 @@ namespace System.IO.Compression
     {
         public override Stream CreateStream(Stream stream, CompressionMode mode) =>
             new ZLibStream(stream, mode);
+
         public override Stream CreateStream(Stream stream, CompressionMode mode, bool leaveOpen) =>
             new ZLibStream(stream, mode, leaveOpen);
+
         public override Stream CreateStream(Stream stream, CompressionLevel level) =>
             new ZLibStream(stream, level);
+
         public override Stream CreateStream(
             Stream stream,
             CompressionLevel level,
             bool leaveOpen
         ) => new ZLibStream(stream, level, leaveOpen);
+
         public override Stream BaseStream(Stream stream) => ((ZLibStream)stream).BaseStream;
+
         protected override string CompressedTestFile(string uncompressedPath) =>
             Path.Combine("ZLibTestData", Path.GetFileName(uncompressedPath) + ".z");
     }

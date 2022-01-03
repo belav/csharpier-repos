@@ -546,6 +546,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 return (typeWithAnnotations.WithType(transformedType), true);
             }
         }
+
 #nullable disable
 
         private bool HasFlag => _index < _dynamicTransformFlags.Length || !_checkLength;

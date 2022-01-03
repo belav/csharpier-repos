@@ -20,6 +20,7 @@ namespace System.Web.WebPages
             new List<IWebPageRequestExecutor>();
 
         private HttpContextBase _context;
+
         // Expose the model as dynamic
         private dynamic _model;
 

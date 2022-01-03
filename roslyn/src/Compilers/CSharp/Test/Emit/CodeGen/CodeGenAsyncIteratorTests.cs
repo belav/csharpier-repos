@@ -99,6 +99,7 @@ class C
     async System.Collections.Generic.IAsyncEnumerator<int> M() { await Task.CompletedTask; yield return 3; }
 }
 ";
+
         private static void VerifyMissingMember(
             WellKnownMember member,
             params DiagnosticDescription[] expected

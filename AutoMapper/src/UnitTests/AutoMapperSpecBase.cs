@@ -16,28 +16,34 @@ namespace AutoMapper.UnitTests
     public class IgnoreMapAttribute : Attribute
     {
     }
+
     static class Utils
     {
         public static TypeMap FindTypeMapFor<TSource, TDestination>(
             this IConfigurationProvider configurationProvider
         ) => configurationProvider.Internal().FindTypeMapFor<TSource, TDestination>();
+
         public static IReadOnlyCollection<TypeMap> GetAllTypeMaps(
             this IConfigurationProvider configurationProvider
         ) => configurationProvider.Internal().GetAllTypeMaps();
+
         public static TypeMap ResolveTypeMap(
             this IConfigurationProvider configurationProvider,
             Type sourceType,
             Type destinationType
         ) => configurationProvider.Internal().ResolveTypeMap(sourceType, destinationType);
+
         public static void ForAllMaps(
             this IMapperConfigurationExpression configurationProvider,
             Action<TypeMap, IMappingExpression> configuration
         ) => configurationProvider.Internal().ForAllMaps(configuration);
+
         public static void ForAllPropertyMaps(
             this IMapperConfigurationExpression configurationProvider,
             Func<PropertyMap, bool> condition,
             Action<PropertyMap, IMemberConfigurationExpression> memberOptions
         ) => configurationProvider.Internal().ForAllPropertyMaps(condition, memberOptions);
+
         public static void AddIgnoreMapAttribute(this IMapperConfigurationExpression configuration)
         {
             configuration.ForAllMaps(
@@ -81,29 +87,37 @@ namespace AutoMapper.UnitTests
 
         protected TypeMap FindTypeMapFor<TSource, TDestination>() =>
             ConfigProvider.FindTypeMapFor<TSource, TDestination>();
+
         protected void AssertConfigurationIsValid() => ConfigProvider.AssertConfigurationIsValid();
+
         protected void AssertConfigurationIsValid<TSource, TDestination>() =>
             ConfigProvider.AssertConfigurationIsValid(
                 ConfigProvider.FindTypeMapFor<TSource, TDestination>()
             );
+
         protected void AssertConfigurationIsValid(Type sourceType, Type destinationType) =>
             ConfigProvider.AssertConfigurationIsValid(
                 ConfigProvider.FindTypeMapFor(sourceType, destinationType)
             );
+
         public void AssertConfigurationIsValid(string profileName) =>
             Configuration.Internal().AssertConfigurationIsValid(profileName);
+
         public void AssertConfigurationIsValid<TProfile>() where TProfile : Profile, new() =>
             Configuration.Internal().AssertConfigurationIsValid<TProfile>();
+
         protected IQueryable<TDestination> ProjectTo<TDestination>(
             IQueryable source,
             object parameters = null,
             params Expression<Func<TDestination, object>>[] membersToExpand
         ) => Mapper.ProjectTo(source, parameters, membersToExpand);
+
         protected IQueryable<TDestination> ProjectTo<TDestination>(
             IQueryable source,
             IDictionary<string, object> parameters,
             params string[] membersToExpand
         ) => Mapper.ProjectTo<TDestination>(source, parameters, membersToExpand);
+
         public IEnumerable<ProfileMap> GetProfiles() => Configuration.Internal().Profiles;
     }
 
@@ -126,6 +140,7 @@ namespace AutoMapper.UnitTests
 
         protected virtual void Cleanup() { }
     }
+
     public abstract class SpecBase : SpecBaseBase, IDisposable
     {
         protected SpecBase()
@@ -139,9 +154,11 @@ namespace AutoMapper.UnitTests
             Cleanup();
         }
     }
+
     class FirstOrDefaultCounter : ExpressionVisitor
     {
         public int Count;
+
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
             if (node.Method.Name == "FirstOrDefault")
@@ -150,8 +167,10 @@ namespace AutoMapper.UnitTests
             }
             return base.VisitMethodCall(node);
         }
+
         public static void Assert(IQueryable queryable, int count) =>
             Assert(queryable.Expression, count);
+
         public static void Assert(Expression expression, int count)
         {
             var firstOrDefault = new FirstOrDefaultCounter();

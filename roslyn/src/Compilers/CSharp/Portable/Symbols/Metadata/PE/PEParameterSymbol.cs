@@ -1027,6 +1027,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             return builder.ToImmutableAndFree();
         }
+
 #nullable disable
 
         internal override ImmutableHashSet<string> NotNullIfParameterNotNull

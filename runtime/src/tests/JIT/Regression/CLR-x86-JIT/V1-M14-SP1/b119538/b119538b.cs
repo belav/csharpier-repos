@@ -3,6 +3,7 @@
 //
 
 using System;
+
 class C
 {
     private string s = "This is private";

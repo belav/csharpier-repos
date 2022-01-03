@@ -14,11 +14,13 @@ namespace TestLibrary
         {
             Logging.WriteLine(str);
         }
+
         public static void LogVerbose(string str)
         {
             if (Utilities.Verbose)
                 Logging.WriteLine(str);
         }
+
         public static void LogError(string id, string msg)
         {
             Logging.WriteLine("ERROR!!!-" + id + ": " + msg);

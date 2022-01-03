@@ -143,9 +143,11 @@ namespace System.Runtime.InteropServices.ComTypes
         {
             [FieldOffset(0)]
             public IDLDESC idldesc;
+
             [FieldOffset(0)]
             public PARAMDESC paramdesc;
         }
+
         public DESCUNION desc;
     }
 
@@ -168,6 +170,7 @@ namespace System.Runtime.InteropServices.ComTypes
         {
             [FieldOffset(0)]
             public int oInst;
+
             [FieldOffset(0)]
             public IntPtr lpvarValue;
         }
@@ -193,10 +196,13 @@ namespace System.Runtime.InteropServices.ComTypes
     {
         public short wCode;
         public short wReserved;
+
         [MarshalAs(UnmanagedType.BStr)]
         public string bstrSource;
+
         [MarshalAs(UnmanagedType.BStr)]
         public string bstrDescription;
+
         [MarshalAs(UnmanagedType.BStr)]
         public string bstrHelpFile;
         public int dwHelpContext;
@@ -335,10 +341,13 @@ namespace System.Runtime.InteropServices.ComTypes
         );
         void GetMops(int memid, out string? pBstrMops);
         void GetContainingTypeLib(out ITypeLib ppTLB, out int pIndex);
+
         [PreserveSig]
         void ReleaseTypeAttr(IntPtr pTypeAttr);
+
         [PreserveSig]
         void ReleaseFuncDesc(IntPtr pFuncDesc);
+
         [PreserveSig]
         void ReleaseVarDesc(IntPtr pVarDesc);
     }

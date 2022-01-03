@@ -4,10 +4,12 @@ public class OutParm
     {
         n = 1;
     }
+
     public static void ref_param(ref int n)
     {
         n += 2;
     }
+
     public static int Main()
     {
         int n = 0;

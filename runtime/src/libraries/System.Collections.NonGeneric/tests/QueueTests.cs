@@ -174,6 +174,7 @@ namespace System.Collections.Tests
                 }
             );
         }
+
         [Fact]
         public static void Clone()
         {

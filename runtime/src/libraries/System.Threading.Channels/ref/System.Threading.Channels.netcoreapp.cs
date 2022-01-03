@@ -13,6 +13,7 @@ namespace System.Threading.Channels
             System.Runtime.Serialization.StreamingContext context
         ) { }
     }
+
     public abstract partial class ChannelReader<T>
     {
         public virtual System.Collections.Generic.IAsyncEnumerable<T> ReadAllAsync(

@@ -140,12 +140,14 @@ namespace System.Xml.Xsl.Xslt
             }
             _isSet = true;
         }
+
         public void StopFocus()
         {
             Debug.Assert(IsFocusSet, "Focus was not set");
             _isSet = false;
             _current = _position = _last = null;
         }
+
         public bool IsFocusSet
         {
             get { return _isSet; }

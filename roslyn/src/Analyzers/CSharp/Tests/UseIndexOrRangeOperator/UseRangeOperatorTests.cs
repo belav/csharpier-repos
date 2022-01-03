@@ -650,6 +650,7 @@ class C
                 FixedCode = source,
             }.RunAsync();
         }
+
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseRangeOperator)]
         public async Task TestReturnByRef()
         {

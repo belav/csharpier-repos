@@ -83,6 +83,7 @@ namespace System.Threading.Tasks.Tests
         {
             return null;
         }
+
         private object _lockObj = new object();
         private int _counter = 1; //This is used to keep track of how many scheduler tasks were created
         public ThreadLocal<int> SchedulerID = new ThreadLocal<int>(); //This is the ID of the scheduler.

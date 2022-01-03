@@ -34,8 +34,10 @@ internal static partial class Interop
             internal string comm;
             internal char state;
             internal int ppid;
+
             //internal int pgrp;
             internal int session;
+
             //internal int tty_nr;
             //internal int tpgid;
             //internal uint flags;
@@ -45,10 +47,12 @@ internal static partial class Interop
             //internal ulong cmajflt;
             internal ulong utime;
             internal ulong stime;
+
             //internal long cutime;
             //internal long cstime;
             //internal long priority;
             internal long nice;
+
             //internal long num_threads;
             //internal long itrealvalue;
             internal ulong starttime;

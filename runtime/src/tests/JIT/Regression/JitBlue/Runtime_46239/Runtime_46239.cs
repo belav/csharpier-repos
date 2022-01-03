@@ -29,6 +29,7 @@ namespace Runtime_46239
     {
         [FieldOffset(0)]
         public ulong tmp1;
+
         [FieldOffset(8)]
         public Object tmp2;
     }
@@ -38,6 +39,7 @@ namespace Runtime_46239
     {
         [FieldOffset(0)]
         public ulong tmp1;
+
         [FieldOffset(8)]
         public int tmp2;
     }

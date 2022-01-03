@@ -18,6 +18,7 @@ namespace System.Linq.Tests
             {
                 return EqualityComparer<T>.Default.Equals(x, y);
             }
+
             public int GetHashCode(T obj)
             {
                 return EqualityComparer<T>.Default.GetHashCode(obj);

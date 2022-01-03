@@ -61,8 +61,10 @@ namespace System.Threading.Tasks
 
         /// <summary>null if representing a successful synchronous completion, otherwise a <see cref="Task"/> or a <see cref="IValueTaskSource"/>.</summary>
         internal readonly object? _obj;
+
         /// <summary>Opaque value passed through to the <see cref="IValueTaskSource"/>.</summary>
         internal readonly short _token;
+
         /// <summary>true to continue on the captured context; otherwise, false.</summary>
         /// <remarks>Stored in the <see cref="ValueTask"/> rather than in the configured awaiter to utilize otherwise padding space.</remarks>
         internal readonly bool _continueOnCapturedContext;
@@ -274,6 +276,7 @@ namespace System.Threading.Tasks
 
             /// <summary>The associated <see cref="IValueTaskSource"/>.</summary>
             private IValueTaskSource? _source;
+
             /// <summary>The token to pass through to operations on <see cref="_source"/></summary>
             private readonly short _token;
 
@@ -455,12 +458,16 @@ namespace System.Threading.Tasks
     {
         /// <summary>A task canceled using `new CancellationToken(true)`. Lazily created only when first needed.</summary>
         private static volatile Task<TResult>? s_canceledTask;
+
         /// <summary>null if <see cref="_result"/> has the result, otherwise a <see cref="Task{TResult}"/> or a <see cref="IValueTaskSource{TResult}"/>.</summary>
         internal readonly object? _obj;
+
         /// <summary>The result to be used if the operation completed successfully synchronously.</summary>
         internal readonly TResult? _result;
+
         /// <summary>Opaque value passed through to the <see cref="IValueTaskSource{TResult}"/>.</summary>
         internal readonly short _token;
+
         /// <summary>true to continue on the captured context; otherwise, false.</summary>
         /// <remarks>Stored in the <see cref="ValueTask{TResult}"/> rather than in the configured awaiter to utilize otherwise padding space.</remarks>
         internal readonly bool _continueOnCapturedContext;
@@ -676,6 +683,7 @@ namespace System.Threading.Tasks
 
             /// <summary>The associated <see cref="IValueTaskSource"/>.</summary>
             private IValueTaskSource<TResult>? _source;
+
             /// <summary>The token to pass through to operations on <see cref="_source"/></summary>
             private readonly short _token;
 

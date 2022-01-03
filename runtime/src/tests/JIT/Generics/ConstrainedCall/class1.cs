@@ -3,68 +3,83 @@
 //
 
 using System;
+
 interface IncrDecr
 {
     void Incr(int a);
     void Decr(int a);
     int Val();
 }
+
 class MyInt : IncrDecr
 {
     int x;
+
     public void Incr(int a)
     {
         x += a;
     }
+
     public void Decr(int a)
     {
         x -= a;
     }
+
     public int Val()
     {
         return x;
     }
 }
+
 class MyCounter<T> where T : IncrDecr, new()
 {
     T counter = new T();
     T[] counters = new T[1];
+
     public void Increment()
     {
         counter.Incr(100);
     }
+
     public void Decrement()
     {
         counter.Decr(100);
     }
+
     public void Increment(int index)
     {
         counters[index] = new T();
         counters[index].Incr(100);
     }
+
     public void Decrement(int index)
     {
         counters[index].Decr(100);
     }
+
     public virtual void Increment2(T cnter)
     {
         cnter.Incr(100);
         counter = cnter;
     }
+
     public virtual void Decrement2(T cnter)
     {
         cnter.Decr(100);
         counter = cnter;
     }
+
     public int Val()
     {
         return counter.Val();
     }
+
     public int Val(int index)
     {
         return counters[index].Val();
     }
 }
+
 class test
 {
     public static int Main()

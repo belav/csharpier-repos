@@ -30,6 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal readonly TypeSymbol? RightConvertedTypeOpt;
 #if DEBUG
         internal abstract TreeDumperNode DumpCore();
+
         internal string Dump() => TreeDumper.DumpCompact(DumpCore());
 #endif
 

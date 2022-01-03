@@ -606,7 +606,9 @@ namespace System.Net.WebSockets
                 get => throw new NotSupportedException();
                 set => throw new NotSupportedException();
             }
+
             public Uri? GetProxy(Uri destination) => throw new NotSupportedException();
+
             public bool IsBypassed(Uri host) => throw new NotSupportedException();
         }
     }

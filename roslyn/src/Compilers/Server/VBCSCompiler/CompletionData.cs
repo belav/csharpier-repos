@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CommandLine;
 using System.IO.Pipes;
+
 namespace Microsoft.CodeAnalysis.CompilerServer
 {
     internal enum CompletionReason

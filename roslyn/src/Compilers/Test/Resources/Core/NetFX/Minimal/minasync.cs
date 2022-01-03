@@ -22,14 +22,18 @@ namespace System.Threading.Tasks
     public class Awaiter : INotifyCompletion
     {
         public void OnCompleted(Action continuation) { }
+
         public bool IsCompleted => false;
+
         public void GetResult() { }
     }
 
     public class Awaiter<T> : INotifyCompletion
     {
         public void OnCompleted(Action continuation) { }
+
         public bool IsCompleted => false;
+
         public T GetResult() => default(T);
     }
 }
@@ -58,9 +62,12 @@ namespace System.Runtime.CompilerServices
         {
             throw null;
         }
+
         public void Start<TStateMachine>(ref TStateMachine stateMachine)
             where TStateMachine : IAsyncStateMachine { }
+
         public void SetStateMachine(IAsyncStateMachine stateMachine) { }
+
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
@@ -76,6 +83,7 @@ namespace System.Runtime.CompilerServices
             where TStateMachine : IAsyncStateMachine { }
 
         public void SetResult() { }
+
         public void SetException(Exception exception) { }
     }
 
@@ -106,7 +114,9 @@ namespace System.Runtime.CompilerServices
             where TStateMachine : IAsyncStateMachine { }
 
         public Task Task => null;
+
         public void SetResult() { }
+
         public void SetException(Exception exception) { }
     }
 
@@ -117,7 +127,9 @@ namespace System.Runtime.CompilerServices
 
         public void Start<TStateMachine>(ref TStateMachine stateMachine)
             where TStateMachine : IAsyncStateMachine { }
+
         public void SetStateMachine(IAsyncStateMachine stateMachine) { }
+
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
             ref TAwaiter awaiter,
             ref TStateMachine stateMachine
@@ -133,7 +145,9 @@ namespace System.Runtime.CompilerServices
             where TStateMachine : IAsyncStateMachine { }
 
         public Task<TResult> Task => null;
+
         public void SetResult(TResult result) { }
+
         public void SetException(Exception exception) { }
     }
 }

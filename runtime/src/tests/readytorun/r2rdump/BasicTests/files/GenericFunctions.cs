@@ -6,6 +6,7 @@ namespace GenericFunctions
     struct UserDefinedStruct
     {
         int n;
+
         public UserDefinedStruct(int num)
         {
             n = num;
@@ -15,6 +16,7 @@ namespace GenericFunctions
     class UserDefinedClass
     {
         int n;
+
         public UserDefinedClass(int num)
         {
             n = num;

@@ -400,6 +400,7 @@ namespace System.Dynamic.Tests
                 int arg9,
                 int arg10
             ) => 11;
+
             public int GetValue2() => 0;
 
             public int GetValue2(int arg0) => 1;
@@ -534,7 +535,6 @@ namespace System.Dynamic.Tests
             bool equal = dX.Equals(dY);
             Assert.Equal(x == y, equal);
         }
-
 #endif
 
         public class FuncWrapper<TResult>

@@ -786,11 +786,14 @@ namespace System.Buffers
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int ArrayToSequenceEnd(int endIndex) => endIndex | ArrayEndMask;
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int MemoryManagerToSequenceStart(int startIndex) =>
             startIndex | MemoryManagerStartMask;
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int StringToSequenceStart(int startIndex) => startIndex | StringStartMask;
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int StringToSequenceEnd(int endIndex) => endIndex | StringEndMask;
     }

@@ -745,6 +745,7 @@ namespace System.Net.Http.Functional.Tests
         private sealed class NonSeekableMemoryStream : MemoryStream
         {
             public NonSeekableMemoryStream(byte[] data) : base(data) { }
+
             public override bool CanSeek => false;
         }
 

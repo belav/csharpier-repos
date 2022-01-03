@@ -9,6 +9,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     public static class Traits
     {
         public const string Editor = nameof(Editor);
+
         public static class Editors
         {
             public const string KeyProcessors = nameof(KeyProcessors);
@@ -18,6 +19,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         }
 
         public const string Feature = nameof(Feature);
+
         public static class Features
         {
             public const string AddAwait = "Refactoring.AddAwait";
@@ -398,6 +400,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         }
 
         public const string Environment = nameof(Environment);
+
         public static class Environments
         {
             public const string VSProductInstall = nameof(VSProductInstall);

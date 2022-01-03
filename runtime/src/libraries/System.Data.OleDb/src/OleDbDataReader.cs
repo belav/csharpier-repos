@@ -106,6 +106,7 @@ namespace System.Data.OleDb
             Initialize();
             _imultipleResults = (UnsafeNativeMethods.IMultipleResults?)result; // maybe null if no results
         }
+
         internal void InitializeIRowset(
             object? result,
             ChapterHandle chapterHandle,
@@ -2809,26 +2810,32 @@ namespace System.Data.OleDb
         {
             return (0 != (ODB.DBCOLUMNFLAGS_ISBOOKMARK & flags));
         }
+
         private static bool IsLong(int flags)
         {
             return (0 != (ODB.DBCOLUMNFLAGS_ISLONG & flags));
         }
+
         private static bool IsFixed(int flags)
         {
             return (0 != (ODB.DBCOLUMNFLAGS_ISFIXEDLENGTH & flags));
         }
+
         private static bool IsRowVersion(int flags)
         {
             return (0 != (ODB.DBCOLUMNFLAGS_ISROWID_DBCOLUMNFLAGS_ISROWVER & flags));
         }
+
         private static bool AllowDBNull(int flags)
         {
             return (0 != (ODB.DBCOLUMNFLAGS_ISNULLABLE & flags));
         }
+
         private static bool AllowDBNullMaybeNull(int flags)
         {
             return (0 != (ODB.DBCOLUMNFLAGS_ISNULLABLE_DBCOLUMNFLAGS_MAYBENULL & flags));
         }
+
         private static bool IsReadOnly(int flags)
         {
             return (0 == (ODB.DBCOLUMNFLAGS_WRITE_DBCOLUMNFLAGS_WRITEUNKNOWN & flags));

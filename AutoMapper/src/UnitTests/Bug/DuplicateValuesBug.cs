@@ -35,6 +35,7 @@ namespace AutoMapper.UnitTests.Bug
                 Children.Add(childObject);
             }
         }
+
         public class DuplicateValuesIssue
         {
             [Fact]

@@ -10,6 +10,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Initialization
     {
         protected override AdventureWorksContextBase CreateContext() =>
             AdventureWorksSqliteFixture.CreateContext();
+
         protected override ConventionSet CreateConventionSet() =>
             SqliteConventionSetBuilder.Build();
     }

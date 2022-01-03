@@ -971,6 +971,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(DummyRule);
+
             public override void Initialize(AnalysisContext context) { }
         }
 
@@ -988,6 +989,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Rule);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterSymbolAction(_ => { }, SymbolKind.NamedType);
@@ -1038,6 +1040,7 @@ namespace Microsoft.CodeAnalysis
         public sealed class AnalyzerWithNoSupportedDiagnostics : DiagnosticAnalyzer
         {
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
+
             public override void Initialize(AnalysisContext context) { }
         }
 
@@ -1055,6 +1058,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterCompilationAction(
@@ -1071,6 +1075,7 @@ namespace Microsoft.CodeAnalysis
         {
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create((DiagnosticDescriptor)null);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterCompilationAction(_ => { });
@@ -1093,6 +1098,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterCompilationAction(
@@ -1120,6 +1126,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterCompilationAction(
@@ -1146,9 +1153,11 @@ namespace Microsoft.CodeAnalysis
             );
 
             public AnalyzerWithInvalidDiagnosticSpan(TextSpan badSpan) => _badSpan = badSpan;
+
             public Exception ThrownException { get; set; }
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterSyntaxTreeAction(
@@ -1223,6 +1232,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterCompilationStartAction(
@@ -1272,6 +1282,7 @@ namespace Microsoft.CodeAnalysis
         {
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 throw new NotImplementedException();
+
             public override void Initialize(AnalysisContext context) { }
         }
 
@@ -1289,6 +1300,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Rule);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterSymbolAction(
@@ -1335,6 +1347,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Rule);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterSymbolAction(
@@ -1358,6 +1371,7 @@ namespace Microsoft.CodeAnalysis
         public class CompilationAnalyzerWithSeverity : DiagnosticAnalyzer
         {
             public const string DiagnosticId = "ID1000";
+
             public CompilationAnalyzerWithSeverity(DiagnosticSeverity severity, bool configurable)
             {
                 var customTags = !configurable
@@ -1428,6 +1442,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterCompilationStartAction(this.OnCompilationStart);
@@ -1503,6 +1518,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 SemaphoreSlim gate = new SemaphoreSlim(initialCount: registeredActionCounts);
@@ -1682,6 +1698,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 switch (_actionKind)
@@ -1796,6 +1813,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterOperationBlockAction(
@@ -1836,6 +1854,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 if (_doOperationBlockAnalysis)
@@ -1908,6 +1927,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterOperationAction(
@@ -1965,6 +1985,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Warning, Error, Summary);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterCompilationStartAction(this.OnCompilationStart);
@@ -2057,6 +2078,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Rule);
+
             public override void Initialize(AnalysisContext context)
             {
                 // Analyze but don't report diagnostics on generated code.
@@ -2736,6 +2758,7 @@ namespace Microsoft.CodeAnalysis
         public sealed class DiagnosticSuppressorForId : DiagnosticSuppressor
         {
             public SuppressionDescriptor SuppressionDescriptor { get; }
+
             public DiagnosticSuppressorForId(
                 string suppressedDiagnosticId,
                 string suppressionId = null
@@ -2770,6 +2793,7 @@ namespace Microsoft.CodeAnalysis
             public CancellationTokenSource CancellationTokenSource { get; } =
                 new CancellationTokenSource();
             public SuppressionDescriptor SuppressionDescriptor { get; }
+
             public DiagnosticSuppressorForId_ThrowsOperationCancelledException(
                 string suppressedDiagnosticId
             )
@@ -3007,6 +3031,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(_rule);
+
             public string GetSortedSymbolCallbacksString() =>
                 string.Join(", ", _symbolCallbacks.Select(s => s.Name).Order());
 
@@ -3099,6 +3124,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterCompilationAction(
@@ -3114,6 +3140,7 @@ namespace Microsoft.CodeAnalysis
         public sealed class NamedTypeAnalyzerWithConfigurableEnabledByDefault : DiagnosticAnalyzer
         {
             private readonly bool _throwOnAllNamedTypes;
+
             public NamedTypeAnalyzerWithConfigurableEnabledByDefault(
                 bool isEnabledByDefault,
                 DiagnosticSeverity defaultSeverity,
@@ -3135,6 +3162,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterSymbolAction(
@@ -3168,6 +3196,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(s_descriptor);
+
             public override void Initialize(AnalysisContext analysisContext)
             {
                 analysisContext.RegisterOperationAction(_ => { }, OperationKind.Invocation);
@@ -3189,6 +3218,7 @@ namespace Microsoft.CodeAnalysis
         public sealed class FieldAnalyzer : DiagnosticAnalyzer
         {
             private readonly bool _syntaxTreeAction;
+
             public FieldAnalyzer(string diagnosticId, bool syntaxTreeAction)
             {
                 _syntaxTreeAction = syntaxTreeAction;
@@ -3271,6 +3301,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(Descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 if (_registerFromInitialize)
@@ -3320,6 +3351,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(s_descriptor);
+
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterSyntaxTreeAction(

@@ -1189,6 +1189,7 @@ public class C
             await VerifyItemExistsAsync(markup, "type");
             await VerifyItemExistsAsync(markup, "myType");
         }
+
         [WorkItem(20273, "https://github.com/dotnet/roslyn/issues/20273")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task AliasWithInterfacePattern()

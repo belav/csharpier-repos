@@ -97,14 +97,19 @@ namespace System.Text
         {
             [FieldOffset(0)]
             internal char TableName; // WORD[16]
+
             [FieldOffset(0x20)]
             internal ushort Version; // WORD[4]
+
             [FieldOffset(0x28)]
             internal short CodePageCount; // WORD
+
             [FieldOffset(0x2A)]
             internal short unused1; // Add an unused WORD so that CodePages is aligned with DWORD boundary.
         }
+
         private const int CODEPAGE_DATA_FILE_HEADER_SIZE = 44;
+
         internal static unsafe void ReadCodePageDataFileHeader(
             Stream stream,
             byte[] codePageDataFileHeader
@@ -138,13 +143,17 @@ namespace System.Text
         {
             [FieldOffset(0)]
             internal char CodePageName; // WORD[16]
+
             [FieldOffset(0x20)]
             internal short CodePage; // WORD
+
             [FieldOffset(0x22)]
             internal short ByteCount; // WORD
+
             [FieldOffset(0x24)]
             internal int Offset; // DWORD
         }
+
         internal static unsafe void ReadCodePageIndex(Stream stream, byte[] codePageIndex)
         {
             stream.Read(codePageIndex, 0, codePageIndex.Length);
@@ -172,24 +181,34 @@ namespace System.Text
         {
             [FieldOffset(0)]
             internal char CodePageName; // WORD[16]
+
             [FieldOffset(0x20)]
             internal ushort VersionMajor; // WORD
+
             [FieldOffset(0x22)]
             internal ushort VersionMinor; // WORD
+
             [FieldOffset(0x24)]
             internal ushort VersionRevision; // WORD
+
             [FieldOffset(0x26)]
             internal ushort VersionBuild; // WORD
+
             [FieldOffset(0x28)]
             internal short CodePage; // WORD
+
             [FieldOffset(0x2a)]
             internal short ByteCount; // WORD     // 1 or 2 byte code page (SBCS or DBCS)
+
             [FieldOffset(0x2c)]
             internal char UnicodeReplace; // WORD     // default replacement unicode character
+
             [FieldOffset(0x2e)]
             internal ushort ByteReplace; // WORD     // default replacement bytes
         }
+
         private const int CODEPAGE_HEADER_SIZE = 48;
+
         internal static unsafe void ReadCodePageHeader(Stream stream, byte[] codePageHeader)
         {
             stream.Read(codePageHeader, 0, codePageHeader!.Length);
