@@ -52,6 +52,7 @@ internal sealed class ConcurrentPipeWriter : PipeWriter
     // We're trusting the Http2FrameWriter and Http1OutputProducer to not call into the PipeWriter after calling Abort() or Complete().
     // If an Abort() is called while a flush is in progress, we clean up after the next flush completes, and don't flush again.
     private bool _aborted;
+
     // If an Complete() is called while a flush is in progress, we clean up after the flush loop completes, and call Complete() on the inner PipeWriter.
     private Exception? _completeException;
 
@@ -407,6 +408,7 @@ internal sealed class ConcurrentPipeWriter : PipeWriter
     {
         throw CreateArgumentOutOfRangeException(argumentName);
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static Exception CreateArgumentOutOfRangeException(string argumentName)
     {

@@ -12,6 +12,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
     public sealed class SymLink : IDisposable
     {
         public string SrcPath { get; private set; }
+
         public SymLink(string src, string dest)
         {
             if (!MakeSymbolicLink(src, dest, out var errorMessage))

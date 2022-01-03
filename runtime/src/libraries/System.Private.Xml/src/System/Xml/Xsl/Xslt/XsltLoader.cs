@@ -115,6 +115,7 @@ namespace System.Xml.Xsl.Xslt
                 attributes[i].name = _atoms.NameTable.Add(attributes[i].name);
             }
         }
+
         private void AtomizeAttributes()
         {
             AtomizeAttributes(_stylesheetAttributes);
@@ -376,6 +377,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("default-validation", V2Opt),
             new XsltAttribute("input-type-annotations", V2Opt),
         };
+
         private void LoadRealStylesheet()
         {
             Debug.Assert(
@@ -537,6 +539,7 @@ namespace System.Xml.Xsl.Xslt
         {
             new XsltAttribute("href", V1Req | V2Req)
         };
+
         // SxS: This method reads resource names from source document and does not expose any resources to the caller.
         // It's OK to suppress the SxS warning.
         private void LoadImport()
@@ -607,6 +610,7 @@ namespace System.Xml.Xsl.Xslt
         {
             new XsltAttribute("elements", V1Req | V2Req)
         };
+
         private void LoadStripSpace(NsDecl? stylesheetNsList)
         {
             ContextInfo ctxInfo = _input.GetAttributes(_loadStripSpaceAttributes);
@@ -651,6 +655,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("use-character-maps", V2Opt),
             new XsltAttribute("version", V1Opt | V2Opt)
         };
+
         private void LoadOutput()
         {
             _input.GetAttributes(_outputAttributes);
@@ -989,6 +994,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("use", V1Req | V2Opt),
             new XsltAttribute("collation", V2Opt)
         };
+
         private void LoadKey(NsDecl? stylesheetNsList)
         {
             ContextInfo ctxInfo = _input.GetAttributes(_keyAttributes);
@@ -1065,6 +1071,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("pattern-separator", V1Opt | V2Opt),
             new XsltAttribute("minus-sign", V1Opt | V2Opt)
         };
+
         private void LoadDecimalFormat(NsDecl? stylesheetNsList)
         {
             const int NumCharAttrs = 8,
@@ -1193,6 +1200,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("stylesheet-prefix", V1Req | V2Req),
             new XsltAttribute("result-prefix", V1Req | V2Req)
         };
+
         private void LoadNamespaceAlias(NsDecl? stylesheetNsList)
         {
             ContextInfo ctxInfo = _input.GetAttributes(_namespaceAliasAttributes);
@@ -1265,6 +1273,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("name", V1Req | V2Req),
             new XsltAttribute("use-attribute-sets", V1Opt | V2Opt)
         };
+
         private void LoadAttributeSet(NsDecl? stylesheetNsList)
         {
             ContextInfo ctxInfo = _input.GetAttributes(_attributeSetAttributes);
@@ -1355,6 +1364,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("mode", V1Opt | V2Opt),
             new XsltAttribute("as", V2Opt)
         };
+
         private void LoadTemplate(NsDecl? stylesheetNsList)
         {
             Debug.Assert(_curTemplate == null);
@@ -1444,6 +1454,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("character", V2Req),
             new XsltAttribute("string", V2Req)
         };
+
         private void LoadCharacterMap(NsDecl stylesheetNsList)
         {
             ContextInfo ctxInfo = input.GetAttributes(characterMapAttributes);
@@ -1507,6 +1518,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("as", V2Opt),
             new XsltAttribute("override", V2Opt)
         };
+
         private void LoadFunction(NsDecl stylesheetNsList)
         {
             Debug.Assert(curTemplate == null);
@@ -1532,6 +1544,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("namespace", V2Opt),
             new XsltAttribute("schema-location", V2Opt)
         };
+
         private void LoadImportSchema()
         {
             ContextInfo ctxInfo = input.GetAttributes(importSchemaAttributes);
@@ -1548,6 +1561,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("implements-prefix", V1Req | V2Req),
             new XsltAttribute("language", V1Opt | V2Opt)
         };
+
         private void LoadMsScript(NsDecl? stylesheetNsList)
         {
             ContextInfo ctxInfo = _input.GetAttributes(_scriptAttributes);
@@ -1637,6 +1651,7 @@ namespace System.Xml.Xsl.Xslt
 
         private const int MAX_LOADINSTRUCTIONS_DEPTH = 1024;
         private int _loadInstructionsDepth;
+
         private List<XslNode> LoadInstructions(List<XslNode> content, InstructionFlags flags)
         {
             if (++_loadInstructionsDepth > MAX_LOADINSTRUCTIONS_DEPTH)
@@ -1985,6 +2000,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("select", V1Opt | V2Opt),
             new XsltAttribute("mode", V1Opt | V2Opt)
         };
+
         private XslNode XslApplyTemplates()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_applyTemplatesAttributes);
@@ -2011,6 +2027,7 @@ namespace System.Xml.Xsl.Xslt
         {
             new XsltAttribute("name", V1Req | V2Req)
         };
+
         private XslNode XslCallTemplate()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_callTemplateAttributes);
@@ -2031,6 +2048,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("type", V2Opt),
             new XsltAttribute("validation", V2Opt)
         };
+
         private XslNode XslCopy()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_copyAttributes);
@@ -2064,6 +2082,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("type", V2Opt),
             new XsltAttribute("validation", V2Opt)
         };
+
         private XslNode XslCopyOf()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_copyOfAttributes);
@@ -2095,6 +2114,7 @@ namespace System.Xml.Xsl.Xslt
         {
             new XsltAttribute("test", V1Req | V2Req)
         };
+
         private XslNode XslIf()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_ifAttributes);
@@ -2197,6 +2217,7 @@ namespace System.Xml.Xsl.Xslt
         {
             new XsltAttribute("select", V1Req | V2Req)
         };
+
         private XslNode XslForEach()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_forEachAttributes);
@@ -2217,6 +2238,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("select", V2Opt),
             new XsltAttribute("terminate", V1Opt | V2Opt)
         };
+
         private XslNode XslMessage()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_messageAttributes);
@@ -2257,6 +2279,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("grouping-separator", V1Opt | V2Opt),
             new XsltAttribute("grouping-size", V1Opt | V2Opt)
         };
+
         private XslNode XslNumber()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_numberAttributes);
@@ -2334,6 +2357,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("separator", V2Opt),
             new XsltAttribute("disable-output-escaping", V1Opt | V2Opt)
         };
+
         private XslNode XslValueOf()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_valueOfAttributes);
@@ -2439,6 +2463,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("required", 0),
             new XsltAttribute("tunnel", V2Opt)
         };
+
         private VarPar XslVarPar()
         {
             string localName = _input.LocalName;
@@ -2511,6 +2536,7 @@ namespace System.Xml.Xsl.Xslt
         {
             new XsltAttribute("select", V2Opt)
         };
+
         private XslNode XslComment()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_commentAttributes);
@@ -2545,6 +2571,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("name", V1Req | V2Req),
             new XsltAttribute("select", V2Opt)
         };
+
         private XslNode XslProcessingInstruction()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_processingInstructionAttributes);
@@ -2561,6 +2588,7 @@ namespace System.Xml.Xsl.Xslt
         {
             new XsltAttribute("disable-output-escaping", V1Opt | V2Opt)
         };
+
         private XslNode XslText()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_textAttributes);
@@ -2618,6 +2646,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("type", V2Opt),
             new XsltAttribute("validation", V2Opt)
         };
+
         private XslNode XslElement()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_elementAttributes);
@@ -2663,6 +2692,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("type", V2Opt),
             new XsltAttribute("validation", V2Opt)
         };
+
         private XslNode XslAttribute()
         {
             ContextInfo ctxInfo = _input.GetAttributes(_attributeAttributes);
@@ -2708,6 +2738,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("case-order", V1Opt | V2Opt),
             new XsltAttribute("data-type", V1Opt | V2Opt)
         };
+
         private XslNode XslSort(int sortNumber)
         {
             ContextInfo ctxInfo = _input.GetAttributes(_sortAttributes);
@@ -2761,6 +2792,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("type", V2Opt),
             new XsltAttribute("validation", V2Opt)
         };
+
         private XslNode XslDocument()
         {
             ContextInfo ctxInfo = input.GetAttributes(documentAttributes);
@@ -2785,6 +2817,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("regex", V2Req),
             new XsltAttribute("flags", V2Opt)
         };
+
         private XslNode XslAnalyzeString()
         {
             ContextInfo ctxInfo = input.GetAttributes(analyzeStringAttributes);
@@ -2879,6 +2912,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("name", V2Req),
             new XsltAttribute("select", V2Opt)
         };
+
         private XslNode XslNamespace()
         {
             ContextInfo ctxInfo = input.GetAttributes(namespaceAttributes);
@@ -2899,6 +2933,7 @@ namespace System.Xml.Xsl.Xslt
 
         // http://www.w3.org/TR/xslt20/#element-perform-sort
         XsltAttribute[] performSortAttributes = { new XsltAttribute("select", V2Opt) };
+
         private XslNode XslPerformSort()
         {
             ContextInfo ctxInfo = input.GetAttributes(performSortAttributes);
@@ -2933,6 +2968,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("group-ending-with", V2Opt),
             new XsltAttribute("collation", V2Opt)
         };
+
         private XslNode XslForEachGroup()
         {
             ContextInfo ctxInfo = input.GetAttributes(forEachGroupAttributes);
@@ -2976,6 +3012,7 @@ namespace System.Xml.Xsl.Xslt
 
         // http://www.w3.org/TR/xslt20/#element-sequence
         XsltAttribute[] sequenceAttributes = { new XsltAttribute("select", V2Req) };
+
         private XslNode XslSequence()
         {
             ContextInfo ctxInfo = input.GetAttributes(sequenceAttributes);
@@ -3045,6 +3082,7 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("use-character-maps", V2Opt), // 19
             new XsltAttribute("output-version", V2Opt) // 20
         };
+
         private XslNode XslResultDocument()
         {
             ContextInfo ctxInfo = input.GetAttributes(resultDocumentAttributes);

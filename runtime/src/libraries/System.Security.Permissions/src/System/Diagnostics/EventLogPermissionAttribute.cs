@@ -26,12 +26,14 @@ namespace System.Diagnostics
     public class EventLogPermissionAttribute : CodeAccessSecurityAttribute
     {
         public EventLogPermissionAttribute(SecurityAction action) : base(action) { }
+
         public string MachineName
         {
             get { return null; }
             set { }
         }
         public EventLogPermissionAccess PermissionAccess { get; set; }
+
         public override IPermission CreatePermission()
         {
             return null;

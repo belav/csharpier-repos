@@ -2771,6 +2771,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public int Count { get; }
         public bool IsReadOnly { get; }
+
         public int IndexOf(T item)
         {
             throw new NotImplementedException();

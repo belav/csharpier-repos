@@ -19,6 +19,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         private sealed class ExpressionExpr : Expr
         {
             public readonly Expression Expression;
+
             public ExpressionExpr(Expression e) : base(0)
             {
                 Expression = e;
@@ -27,6 +28,7 @@ namespace Microsoft.CSharp.RuntimeBinder
 
         private readonly Dictionary<ExprCall, Expression> _DictionaryOfParameters;
         private readonly Expression[] _ListOfParameters;
+
         // Counts how many EXPRSAVEs we've encountered so we know which index into the
         // parameter list we should be taking.
         private int _currentParameterIndex;

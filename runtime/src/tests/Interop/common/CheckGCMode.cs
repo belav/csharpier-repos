@@ -10,6 +10,7 @@ using Xunit;
 unsafe internal class CheckGCMode
 {
     internal static bool Enabled = false;
+
     internal static void Initialize(
         delegate* <delegate* unmanaged<int>, void> setIsInCooperativeModeFunction
     )

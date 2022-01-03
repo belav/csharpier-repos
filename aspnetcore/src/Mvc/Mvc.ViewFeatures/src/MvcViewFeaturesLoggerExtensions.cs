@@ -159,6 +159,7 @@ internal static class MvcViewFeaturesLoggerExtensions
     {
         return logger.BeginScope(new ViewComponentLogScope(context.ViewComponentDescriptor));
     }
+
 #nullable restore
 
     public static void ViewComponentExecuting(

@@ -85,10 +85,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 return null;
             }
+
             void IXmlSerializable.ReadXml(XmlReader reader)
             {
                 Text = reader.ReadString();
             }
+
             void IXmlSerializable.WriteXml(XmlWriter writer)
             {
                 writer.WriteString(Text);

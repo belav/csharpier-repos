@@ -14,6 +14,7 @@ public class HttpRequestIdentifierFeature : IHttpRequestIdentifierFeature
     // Base32 encoding - in ascii sort order for easy text based sorting
     private static readonly char[] s_encode32Chars =
         "0123456789ABCDEFGHIJKLMNOPQRSTUV".ToCharArray();
+
     // Seed the _requestId for this application instance with
     // the number of 100-nanosecond intervals that have elapsed since 12:00:00 midnight, January 1, 0001
     // for a roughly increasing _requestId over restarts

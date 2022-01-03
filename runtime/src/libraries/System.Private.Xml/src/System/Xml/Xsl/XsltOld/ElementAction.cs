@@ -16,6 +16,7 @@ namespace System.Xml.Xsl.XsltOld
         private Avt? _nsAvt;
         private bool _empty;
         private InputScopeManager? _manager;
+
         // Compile time precalculated AVTs
         private string? _name;
         private string? _nsUri;

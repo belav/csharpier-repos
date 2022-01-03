@@ -12,6 +12,7 @@ namespace System.Security.Cryptography
         {
             throw GetPlatformNotSupported();
         }
+
         public bool Accessible
         {
             get { throw GetPlatformNotSupported(); }

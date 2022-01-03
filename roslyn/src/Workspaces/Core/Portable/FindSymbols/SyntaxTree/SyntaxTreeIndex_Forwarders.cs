@@ -24,16 +24,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         public bool ProbablyContainsIdentifier(string identifier) =>
             _identifierInfo.ProbablyContainsIdentifier(identifier);
+
         public bool ProbablyContainsEscapedIdentifier(string identifier) =>
             _identifierInfo.ProbablyContainsEscapedIdentifier(identifier);
 
         public bool ContainsPredefinedType(PredefinedType type) =>
             _contextInfo.ContainsPredefinedType(type);
+
         public bool ContainsPredefinedOperator(PredefinedOperator op) =>
             _contextInfo.ContainsPredefinedOperator(op);
 
         public bool ProbablyContainsStringValue(string value) =>
             _literalInfo.ProbablyContainsStringValue(value);
+
         public bool ProbablyContainsInt64Value(long value) =>
             _literalInfo.ProbablyContainsInt64Value(value);
 

@@ -181,6 +181,7 @@ namespace System.Xml
             value = null;
             return false;
         }
+
         public override string ToString()
         {
             return GetString();
@@ -272,6 +273,7 @@ namespace System.Xml
         {
             return !s1.Equals2(xmlString2);
         }
+
         public static bool operator ==(StringHandle s1, string s2)
         {
             return s1.Equals2(s2);
@@ -299,6 +301,7 @@ namespace System.Xml
             else
                 return string.Compare(this.GetString(), that.GetString(), StringComparison.Ordinal);
         }
+
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             return Equals(obj as StringHandle);

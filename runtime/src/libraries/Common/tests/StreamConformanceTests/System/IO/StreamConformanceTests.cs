@@ -23,25 +23,34 @@ namespace System.IO.Tests
     {
         /// <summary>Gets the name of the byte[] argument to Read/Write methods.</summary>
         protected virtual string ReadWriteBufferName => "buffer";
+
         /// <summary>Gets the name of the int offset argument to Read/Write methods.</summary>
         protected virtual string ReadWriteOffsetName => "offset";
+
         /// <summary>Gets the name of the int count argument to Read/Write methods.</summary>
         protected virtual string ReadWriteCountName => "count";
+
         /// <summary>Gets the name of the IAsyncResult argument to EndRead/Write methods.</summary>
         protected virtual string ReadWriteAsyncResultName => "asyncResult";
+
         /// <summary>Gets the name of the Stream destination argument to CopyTo{Async}.</summary>
         protected virtual string CopyToStreamName => "destination";
+
         /// <summary>Gets the name of the int bufferSize argument to CopyTo{Async}.</summary>
         protected virtual string CopyToBufferSizeName => "bufferSize";
 
         /// <summary>Gets the type of exception thrown when an invalid IAsyncResult is passed to an EndRead/Write method.</summary>
         protected virtual Type InvalidIAsyncResultExceptionType => typeof(ArgumentException);
+
         /// <summary>Gets the type of exception thrown when a read or write operation is unsupported.</summary>
         protected virtual Type UnsupportedReadWriteExceptionType => typeof(NotSupportedException);
+
         /// <summary>Gets the type of exception thrown when a CopyTo{Async} operation is unsupported.</summary>
         protected virtual Type UnsupportedCopyExceptionType => typeof(NotSupportedException);
+
         /// <summary>Gets the type of exception thrown when setting a Read/WriteTimeout is unsupported.</summary>
         protected virtual Type UnsupportedTimeoutExceptionType => typeof(InvalidOperationException);
+
         /// <summary>
         /// Gets the type of exception thrown when an operation is invoked concurrently erroneously, or null if no exception
         /// is thrown (either because it's fully supported or not supported and non-deterministic).
@@ -51,17 +60,22 @@ namespace System.IO.Tests
 
         /// <summary>Gets whether the stream is expected to be seekable.</summary>
         protected virtual bool CanSeek => false;
+
         /// <summary>Gets whether the stream is expected to support timeouts.</summary>
         protected virtual bool CanTimeout => false;
+
         /// <summary>Gets whether it's expected for the Position property to be usable even if CanSeek is false.</summary>
         protected virtual bool CanGetPositionWhenCanSeekIsFalse => false;
+
         /// <summary>Gets whether read/write operations fully support cancellation.</summary>
         protected virtual bool FullyCancelableOperations => true;
+
         /// <summary>Gets whether a read operation will always try to fill the full buffer provided.</summary>
         protected virtual bool ReadsReadUntilSizeOrEof => true;
 
         /// <summary>Gets whether the stream's CanRead/Write/etc properties are expected to return false once the stream is disposed.</summary>
         protected virtual bool CansReturnFalseAfterDispose => true;
+
         /// <summary>Gets whether the Stream may be used for additional operations after a read is canceled.</summary>
         protected virtual bool UsableAfterCanceledReads => true;
         protected virtual bool CanSetLength => CanSeek;
@@ -1211,19 +1225,25 @@ namespace System.IO.Tests
         {
             protected override void QueueTask(Task task) =>
                 ThreadPool.QueueUserWorkItem(_ => TryExecuteTask(task));
+
             protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) =>
                 false;
+
             protected override IEnumerable<Task> GetScheduledTasks() => new Task[0];
         }
 
         protected readonly struct JumpToThreadPoolAwaiter : ICriticalNotifyCompletion
         {
             public JumpToThreadPoolAwaiter GetAwaiter() => this;
+
             public bool IsCompleted => false;
+
             public void OnCompleted(Action continuation) =>
                 ThreadPool.QueueUserWorkItem(_ => continuation());
+
             public void UnsafeOnCompleted(Action continuation) =>
                 ThreadPool.UnsafeQueueUserWorkItem(_ => continuation(), null);
+
             public void GetResult() { }
         }
 
@@ -1265,6 +1285,7 @@ namespace System.IO.Tests
         protected virtual bool NopFlushCompletesSynchronously => true;
 
         protected abstract Task<Stream?> CreateReadOnlyStreamCore(byte[]? initialData);
+
         protected async Task<Stream?> CreateReadOnlyStream(byte[]? initialData = null)
         {
             Stream? stream = await CreateReadOnlyStreamCore(initialData);
@@ -1282,6 +1303,7 @@ namespace System.IO.Tests
         }
 
         protected abstract Task<Stream?> CreateWriteOnlyStreamCore(byte[]? initialData);
+
         protected async Task<Stream?> CreateWriteOnlyStream(byte[]? initialData = null)
         {
             Stream? stream = await CreateWriteOnlyStreamCore(initialData);
@@ -1299,6 +1321,7 @@ namespace System.IO.Tests
         }
 
         protected abstract Task<Stream?> CreateReadWriteStreamCore(byte[]? initialData);
+
         protected async Task<Stream?> CreateReadWriteStream(byte[]? initialData = null)
         {
             Stream? stream = await CreateReadWriteStreamCore(initialData);
@@ -2226,20 +2249,26 @@ namespace System.IO.Tests
     {
         /// <summary>Gets whether ValueTasks returned from Read/WriteAsync methods are expected to be consumable only once.</summary>
         protected virtual bool ReadWriteValueTasksProtectSingleConsumption => false;
+
         /// <summary>Gets whether writes on a connected stream are expected to fail immediately after a reader is disposed.</summary>
         protected virtual bool BrokenPipePropagatedImmediately => false;
+
         /// <summary>Gets the amount of data a writer is able to buffer before blocking subsequent writes, or -1 if there's no such limit known.</summary>
         protected virtual int BufferedSize => -1;
+
         /// <summary>
         /// Gets whether the stream requires Flush{Async} to be called in order to send written data to the underlying destination.
         /// </summary>
         protected virtual bool FlushRequiredToWriteData => true;
+
         /// <summary>
         /// Gets whether the stream guarantees that all data written to it will be flushed as part of Flush{Async}.
         /// </summary>
         protected virtual bool FlushGuaranteesAllDataWritten => true;
+
         /// <summary>Gets whether reads for a count of 0 bytes block if no bytes are available to read.</summary>
         protected virtual bool BlocksOnZeroByteReads => false;
+
         /// <summary>
         /// Gets whether an otherwise bidirectional stream does not support reading/writing concurrently, e.g. due to a semaphore in the base implementation.
         /// </summary>
@@ -3655,6 +3684,7 @@ namespace System.IO.Tests
         );
         protected virtual bool WrappedUsableAfterClose => true;
         protected virtual bool SupportsLeaveOpen => true;
+
         /// <summary>
         /// Indicates whether the stream will issue a zero byte read on the underlying stream when a user performs
         /// a zero byte read and no data is currently available to return to the user.
@@ -4044,6 +4074,7 @@ namespace System.IO.Tests
 
         public static implicit operator StreamPair((Stream, Stream) streams) =>
             new StreamPair(streams);
+
         public static implicit operator (Stream, Stream)(StreamPair streams) =>
             (streams.Stream1, streams.Stream2);
 

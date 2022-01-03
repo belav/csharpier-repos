@@ -17,7 +17,9 @@ namespace System.Transactions
     public sealed class DistributedTransactionPermissionAttribute : CodeAccessSecurityAttribute
     {
         public DistributedTransactionPermissionAttribute(SecurityAction action) : base(action) { }
+
         public new bool Unrestricted { get; set; }
+
         public override IPermission CreatePermission()
         {
             return null;

@@ -22,7 +22,9 @@ namespace System.Reflection
             Array.AsReadOnly(_localVariables);
         public override int MaxStackSize => _maxStackSize;
         public override bool InitLocals => _initLocals;
+
         public override byte[] GetILAsByteArray() => _IL;
+
         public override IList<ExceptionHandlingClause> ExceptionHandlingClauses =>
             Array.AsReadOnly(_exceptionHandlingClauses);
     }

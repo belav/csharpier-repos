@@ -20,6 +20,7 @@ namespace System.Collections.Generic
     {
         [NonSerialized]
         private KeyCollection? _keys;
+
         [NonSerialized]
         private ValueCollection? _values;
 

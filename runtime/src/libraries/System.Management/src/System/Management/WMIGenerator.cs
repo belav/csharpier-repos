@@ -210,6 +210,7 @@ namespace System.Management
                 }
             }
         }
+
         private void InitializeCodeGeneration()
         {
             //First try to get the class object for the given WMI Class.
@@ -664,6 +665,7 @@ namespace System.Management
                 }
             }
         }
+
         /// <summary>
         /// This functrion initializes the public attributes and private variables
         /// list that will be used in the generated code.
@@ -994,6 +996,7 @@ namespace System.Management
                 cn.Imports.Add(new CodeNamespaceImport("Microsoft.VisualBasic"));
             }
         }
+
         /// <summary>
         /// This function generates the code for the read only property.
         /// The generated code will be of the form
@@ -1291,6 +1294,7 @@ namespace System.Management
             SysPropsClass.Comments.Add(new CodeCommentStatement(SR.CommentSystemPropertiesClass));
             return SysPropsClass;
         }
+
         /// <summary>
         /// This function will enumerate all the properties (except systemproperties)
         /// of the WMI class and will generate them as properties of the managed code
@@ -1832,6 +1836,7 @@ namespace System.Management
             // Add a function to commit the changes of the objects to WMI
             GenerateCommitMethod();
         }
+
         /// <summary>
         /// This function will process the qualifiers for a given WMI property and set the
         /// attributes of the generated property accordingly.
@@ -2067,6 +2072,7 @@ namespace System.Management
 
             return description;
         }
+
         /// <summary>
         /// This function will generate enums corresponding to the Values/Valuemap pair
         /// and for the BitValues/Bitmap pair.
@@ -2327,6 +2333,7 @@ namespace System.Management
             BitMap.Clear();
             return isEnumAdded;
         }
+
         /// <summary>
         /// This function generated the static function which s used to construct the path
         ///     private static String ConstructPath(String keyName)
@@ -2444,6 +2451,7 @@ namespace System.Management
             }
             cc.Members.Add(cmm);
         }
+
         /// <summary>
         /// This function generates the default constructor.
         /// public Cons() {
@@ -2488,6 +2496,7 @@ namespace System.Management
 
             cctor.Comments.Add(new CodeCommentStatement(SR.CommentConstructors));
         }
+
         /// <summary>
         ///This function create the constuctor which accepts the key values.
         ///public cons(UInt32 key_Key1, String key_Key2) :this(null,&lt;ClassName&gt;.ConstructPath(&lt;key1,key2&gt;),null) {
@@ -2668,6 +2677,7 @@ namespace System.Management
 
 
         }
+
         /// <summary>
         /// This function generates code for the constructor which accepts ManagementPath and GetOptions
         /// as parameters.
@@ -2706,6 +2716,7 @@ namespace System.Management
 
             cc.Members.Add(cctor);
         }
+
         /// <summary>
         /// This function generates code for the constructor which accepts Scope as a string, path as a
         /// string and GetOptions().
@@ -2746,6 +2757,7 @@ namespace System.Management
 
             cc.Members.Add(cctor);
         }
+
         /// <summary>
         /// This function generates code for the constructor which accepts ManagementScope as parameters.
         /// The generated code will look something like this
@@ -2944,6 +2956,7 @@ namespace System.Management
 
             cc.Members.Add(cctor);
         }
+
         /// <summary>
         /// This function generates code for the constructor which accepts ManagementObject as the parameter.
         /// The generated code will look something like this
@@ -5898,6 +5911,7 @@ namespace System.Management
                 return new CodeTypeReference(strType);
             }
         }
+
         /// <summary>
         /// This function is used to determine whether the given CIMTYPE can be represented as an integer.
         /// This helper function is mainly used to determine whether this type will be support by enums.
@@ -6805,6 +6819,7 @@ namespace System.Management
 
             cc.Members.Add(cmm);
         }
+
         /// <summary>
         /// Generates the functions CheckIfProperClass() which checks if the given path
         /// can be represented with the generated code
@@ -7391,6 +7406,7 @@ namespace System.Management
 
             return null;
         }
+
         /// <summary>
         /// Internal function used to create code to convert DateTime or ManagementPath to String
         /// convert a expression. Used in adding code for Property Set for DateTime and Reference properties

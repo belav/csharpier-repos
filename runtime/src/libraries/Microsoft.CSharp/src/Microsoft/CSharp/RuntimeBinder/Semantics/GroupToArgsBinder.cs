@@ -38,6 +38,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             private TypeArray _pCurrentTypeArgs;
             private TypeArray _pCurrentParameters;
             private int _nArgBest;
+
             // end of current namespaces extension method list
             private readonly GroupToArgsBinderResult _results;
             private readonly List<CandidateFunctionMember> _methList;
@@ -49,6 +50,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             private Name _pInvalidSpecifiedName;
             private Name _pNameUsedInPositionalArgument;
             private Name _pDuplicateSpecifiedName;
+
             // When we find a type with an interface, then we want to mark all other interfaces that it
             // implements as being hidden. We also want to mark object as being hidden. So stick them
             // all in this list, and then for subsequent types, if they're in this list, then we

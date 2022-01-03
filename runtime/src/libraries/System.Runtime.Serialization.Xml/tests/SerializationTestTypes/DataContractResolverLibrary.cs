@@ -237,6 +237,7 @@ namespace SerializationTestTypes
             }
             return true;
         }
+
         public override Type ResolveName(
             string typeName,
             string typeNamespace,
@@ -325,6 +326,7 @@ namespace SerializationTestTypes
     public class SimpleResolver_Ser : DataContractResolver
     {
         private static readonly string s_defaultNs = "http://schemas.datacontract.org/2004/07/";
+
         public override bool TryResolveType(
             Type dcType,
             Type declaredType,
@@ -358,6 +360,7 @@ namespace SerializationTestTypes
     public class SimpleResolver_DeSer : DataContractResolver
     {
         private static readonly string s_defaultNs = "http://schemas.datacontract.org/2004/07/";
+
         public override bool TryResolveType(
             Type dcType,
             Type declaredType,
@@ -452,6 +455,7 @@ namespace SerializationTestTypes
     public class ResolverDefaultCollections : DataContractResolver
     {
         private static readonly string s_defaultNs = "http://www.default.com";
+
         public override bool TryResolveType(
             Type dcType,
             Type declaredType,

@@ -74,21 +74,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
 
         public static implicit operator CSharpTestSource(string source) =>
             new CSharpTestSource(source);
+
         public static implicit operator CSharpTestSource(string[] source) =>
             new CSharpTestSource(source);
+
         public static implicit operator CSharpTestSource((string Source, string FileName) source) =>
             new CSharpTestSource(source);
+
         public static implicit operator CSharpTestSource(
             (string Source, string FileName)[] source
         ) => new CSharpTestSource(source);
+
         public static implicit operator CSharpTestSource(SyntaxTree source) =>
             new CSharpTestSource(source);
+
         public static implicit operator CSharpTestSource(SyntaxTree[] source) =>
             new CSharpTestSource(source);
+
         public static implicit operator CSharpTestSource(List<SyntaxTree> source) =>
             new CSharpTestSource(source.ToArray());
+
         public static implicit operator CSharpTestSource(ImmutableArray<SyntaxTree> source) =>
             new CSharpTestSource(source.ToArray());
+
         public static implicit operator CSharpTestSource(CSharpTestSource[] source) =>
             new CSharpTestSource(source);
     }

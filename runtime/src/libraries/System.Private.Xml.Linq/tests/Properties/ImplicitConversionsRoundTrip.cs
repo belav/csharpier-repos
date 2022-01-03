@@ -82,6 +82,7 @@ namespace CoreXml.Test.XLinq
                         throw new ArgumentOutOfRangeException();
                 }
             }
+
             public static object Explicit(Type ret, XElement data)
             {
                 switch (ret.Name)

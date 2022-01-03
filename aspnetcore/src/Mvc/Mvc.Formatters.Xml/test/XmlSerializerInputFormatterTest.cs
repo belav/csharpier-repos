@@ -862,6 +862,7 @@ public class XmlSerializerInputFormatterTest
     private class VerifyDisposeFileBufferingReadStream : FileBufferingReadStream
     {
         public bool Disposed { get; private set; }
+
         public VerifyDisposeFileBufferingReadStream(Stream inner, int memoryThreshold)
             : base(inner, memoryThreshold) { }
 

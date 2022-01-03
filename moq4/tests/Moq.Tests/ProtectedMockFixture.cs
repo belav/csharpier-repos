@@ -1191,7 +1191,9 @@ namespace Moq.Tests
         public class FooBase
         {
             public static void MethodForReflection() { }
+
             public static void MethodForReflection2() { }
+
             protected virtual Expression ExpressionProperty { get; set; }
 
             public void SetExpressionProperty(Expression expression)

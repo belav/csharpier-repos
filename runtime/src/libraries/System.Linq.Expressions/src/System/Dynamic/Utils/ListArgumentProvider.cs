@@ -160,6 +160,7 @@ namespace System.Dynamic.Utils
 
         protected override Expression First => _arg0;
         protected override int ElementCount => _provider.ArgumentCount;
+
         protected override Expression GetElement(int index) => _provider.GetArgument(index);
     }
 }

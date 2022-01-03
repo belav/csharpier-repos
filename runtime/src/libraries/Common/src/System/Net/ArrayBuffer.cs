@@ -61,6 +61,7 @@ namespace System.Net
         public int AvailableLength => _bytes.Length - _availableStart;
         public Span<byte> AvailableSpan => _bytes.AsSpan(_availableStart);
         public Memory<byte> AvailableMemory => _bytes.AsMemory(_availableStart);
+
         public Memory<byte> AvailableMemorySliced(int length) =>
             new Memory<byte>(_bytes, _availableStart, length);
 

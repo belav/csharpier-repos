@@ -17,10 +17,12 @@ namespace System.Collections.Generic
             private readonly SortedSet<T> _underlying;
             private readonly T? _min;
             private readonly T? _max;
+
             // keeps track of whether the count variable is up to date
             // up to date -> _countVersion = _underlying.version
             // not up to date -> _countVersion < _underlying.version
             private int _countVersion;
+
             // these exist for unbounded collections
             // for instance, you could allow this subset to be defined for i > 10. The set will throw if
             // anything <= 10 is added, but there is no upper bound. These features Head(), Tail(), were punted

@@ -25,6 +25,7 @@ namespace Test
             }
             finally { }
         }
+
         public static int Main()
         {
             try

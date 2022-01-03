@@ -13,10 +13,12 @@ namespace MS.Internal.Xml.XPath
 
         public AttributeQuery(Query qyParent, string Name, string Prefix, XPathNodeType Type)
             : base(qyParent, Name, Prefix, Type) { }
+
         private AttributeQuery(AttributeQuery other) : base(other)
         {
             _onAttribute = other._onAttribute;
         }
+
         public override void Reset()
         {
             _onAttribute = false;

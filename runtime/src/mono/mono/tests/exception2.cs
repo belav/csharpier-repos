@@ -8,6 +8,7 @@ public class Ex2
         res = 10 / a;
         return res;
     }
+
     public static int Main()
     {
         int res = 1;

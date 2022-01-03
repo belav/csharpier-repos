@@ -642,6 +642,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             );
         }
     }
+
 #nullable enable
     internal sealed class PEAssemblyBuilder : PEAssemblyBuilderBase
     {

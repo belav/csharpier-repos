@@ -297,6 +297,7 @@ namespace System.Globalization.Tests
         }
 
         private List<string> _timePatterns;
+
         private bool EnumTimeFormats(string lpTimeFormatString, IntPtr lParam)
         {
             _timePatterns.Add(ReescapeWin32String(lpTimeFormatString));
@@ -508,6 +509,7 @@ namespace System.Globalization.Tests
         }
 
         private List<int> _optionalCals = new List<int>();
+
         private bool EnumCalendarsCallback(
             string lpCalendarInfoString,
             int calendar,
@@ -538,6 +540,7 @@ namespace System.Globalization.Tests
         }
 
         private List<string> _calPatterns;
+
         private bool EnumCalendarInfoCallback(
             string lpCalendarInfoString,
             int calendar,

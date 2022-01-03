@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 namespace SimpleArray_01
 {
     public delegate void RngTest();
+
     internal class Class1
     {
         private static int Main()
@@ -56,6 +57,7 @@ namespace SimpleArray_01
             return bResult;
         }
     }
+
     internal class Test
     {
         /********************************************************************************************
@@ -117,6 +119,7 @@ namespace SimpleArray_01
                 myJaggedArray[i][0] = i;
             }
         }
+
         /********************************************************************************************
 		* RngChk is not eliminated if the upper limit of the array is modified
 		********************************************************************************************/
@@ -135,6 +138,7 @@ namespace SimpleArray_01
                 }
             }
         }
+
         /********************************************************************************************
 		* RngChk is not eliminated if induction variable is modified
 		********************************************************************************************/

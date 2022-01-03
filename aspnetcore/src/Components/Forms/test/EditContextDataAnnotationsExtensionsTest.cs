@@ -195,8 +195,10 @@ public class EditContextDataAnnotationsExtensionsTest
 #pragma warning disable 649
         [Required]
         public string ThisWillNotBeValidatedBecauseItIsAField;
+
         [Required]
         string ThisWillNotBeValidatedBecauseItIsPrivate { get; set; }
+
         [Required]
         internal string ThisWillNotBeValidatedBecauseItIsInternal { get; set; }
 #pragma warning restore 649

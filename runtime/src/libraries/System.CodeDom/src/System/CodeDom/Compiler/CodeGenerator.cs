@@ -1611,6 +1611,7 @@ namespace System.CodeDom.Compiler
         protected abstract void GenerateExpressionStatement(CodeExpressionStatement e);
         protected abstract void GenerateIterationStatement(CodeIterationStatement e);
         protected abstract void GenerateThrowExceptionStatement(CodeThrowExceptionStatement e);
+
         protected virtual void GenerateCommentStatement(CodeCommentStatement e)
         {
             if (e == null)

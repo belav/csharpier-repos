@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         }
 
         internal override byte[] ReadAllBytes(string fullPath) => ReadAllBytesFunc(fullPath);
+
         internal override FileStream CreateFileStream(
             string filePath,
             FileMode fileMode,

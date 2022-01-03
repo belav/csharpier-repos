@@ -19,6 +19,7 @@ namespace System.ComponentModel
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         private Type? _licenseProviderType;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         private readonly string? _licenseProviderName;
 

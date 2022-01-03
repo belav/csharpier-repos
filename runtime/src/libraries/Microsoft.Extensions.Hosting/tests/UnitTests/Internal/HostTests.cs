@@ -406,6 +406,7 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             private TaskCompletionSource<object> source = new TaskCompletionSource<object>();
             public bool IsStartCompleted { get; set; }
+
             public async Task StartAsync(CancellationToken cancellationToken)
             {
                 Assert.False(cancellationToken.IsCancellationRequested);
@@ -413,7 +414,9 @@ namespace Microsoft.Extensions.Hosting.Internal
                 cancellationToken.ThrowIfCancellationRequested();
                 IsStartCompleted = true;
             }
+
             public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public void ContinueStart() => source.TrySetResult(null);
         }
 
@@ -1376,6 +1379,7 @@ namespace Microsoft.Extensions.Hosting.Internal
 
             providerMock.Verify(c => c.Dispose(), Times.AtLeastOnce());
         }
+
         [Fact]
         public async Task HostCallsDisposeAsyncOnServiceProvider()
         {
@@ -1741,6 +1745,7 @@ namespace Microsoft.Extensions.Hosting.Internal
                 _started();
                 return Task.CompletedTask;
             }
+
             public Task StopAsync(CancellationToken token)
             {
                 _stopping();

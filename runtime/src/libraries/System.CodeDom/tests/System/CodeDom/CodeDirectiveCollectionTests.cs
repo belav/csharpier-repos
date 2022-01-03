@@ -7,8 +7,10 @@ namespace System.CodeDom.Tests
         : CodeCollectionTestBase<CodeDirectiveCollection, CodeDirective>
     {
         protected override CodeDirectiveCollection Ctor() => new CodeDirectiveCollection();
+
         protected override CodeDirectiveCollection CtorArray(CodeDirective[] array) =>
             new CodeDirectiveCollection(array);
+
         protected override CodeDirectiveCollection CtorCollection(
             CodeDirectiveCollection collection
         ) => new CodeDirectiveCollection(collection);
@@ -17,6 +19,7 @@ namespace System.CodeDom.Tests
 
         protected override CodeDirective GetItem(CodeDirectiveCollection collection, int index) =>
             collection[index];
+
         protected override void SetItem(
             CodeDirectiveCollection collection,
             int index,
@@ -27,6 +30,7 @@ namespace System.CodeDom.Tests
             CodeDirectiveCollection collection,
             CodeDirective[] array
         ) => collection.AddRange(array);
+
         protected override void AddRange(
             CodeDirectiveCollection collection,
             CodeDirectiveCollection value
@@ -46,6 +50,7 @@ namespace System.CodeDom.Tests
 
         protected override int IndexOf(CodeDirectiveCollection collection, CodeDirective value) =>
             collection.IndexOf(value);
+
         protected override bool Contains(CodeDirectiveCollection collection, CodeDirective value) =>
             collection.Contains(value);
 

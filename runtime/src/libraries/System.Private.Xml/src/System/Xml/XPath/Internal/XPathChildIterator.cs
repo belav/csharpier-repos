@@ -13,6 +13,7 @@ namespace MS.Internal.Xml.XPath
                 type, /*matchSelf:*/
                 false
             ) { }
+
         public XPathChildIterator(XPathNavigator nav, string name, string namespaceURI)
             : base(
                 nav,
@@ -20,6 +21,7 @@ namespace MS.Internal.Xml.XPath
                 namespaceURI, /*matchSelf:*/
                 false
             ) { }
+
         public XPathChildIterator(XPathChildIterator it) : base(it) { }
 
         public override XPathNodeIterator Clone()

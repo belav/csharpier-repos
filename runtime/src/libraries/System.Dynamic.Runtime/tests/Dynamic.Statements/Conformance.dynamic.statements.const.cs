@@ -16,6 +16,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.cnst01.
         private const object d00 = default(dynamic);
         private const dynamic d10 = default(dynamic);
         private const dynamic d20 = default(object);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -96,6 +97,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.cnst04.
         private const decimal d13 = 12.15M;
         private const bool d14 = true;
         private const MyEnum d15 = MyEnum.Second;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -252,6 +254,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         private static readonly dynamic s_d7 = "A";
         private static readonly dynamic s_d8 = null;
         private static readonly dynamic s_d9 = (byte)15;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -318,6 +321,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public readonly dynamic d7;
         public readonly dynamic d8;
         public readonly dynamic d9;
+
         public Test(
             object o0,
             dynamic o1,
@@ -419,6 +423,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         private static readonly dynamic s_d7 = "A";
         private static readonly dynamic s_d8 = null;
         private static readonly dynamic s_d9 = (sbyte)15;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -499,6 +504,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public readonly dynamic d7 = "A";
         public readonly dynamic d8 = null;
         public readonly dynamic d9 = (sbyte)15;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -582,6 +588,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public readonly dynamic d7 = "A";
         public readonly dynamic d8 = null;
         public readonly dynamic d9 = (sbyte)15;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -810,6 +817,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
         public readonly dynamic d7;
         public readonly dynamic d8;
         public readonly dynamic d9;
+
         public Test(
             object o0,
             dynamic o1,
@@ -1065,6 +1073,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
     {
         public static readonly dynamic d0 = new MyClass() { Field = 9 };
         public static readonly dynamic d1 = new MyStruct() { Field = 9 };
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1267,6 +1276,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             Array = new int[2],
             MC = new MyClass()
         };
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1395,6 +1405,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
     public class Test
     {
         public static readonly dynamic d1 = new MyStruct() { MS = new MyStruct2() { Field = 9 } };
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1522,6 +1533,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
             Array = new int[2],
             MS = new MyStruct() { Field = 9 }
         };
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1657,6 +1669,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.cnst.readonl
     public class C
     {
         public readonly dynamic str = new Struc();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

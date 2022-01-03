@@ -236,6 +236,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
         }
+
 #nullable disable
 
         private void CheckReferenceToMethodIfLocalFunction(

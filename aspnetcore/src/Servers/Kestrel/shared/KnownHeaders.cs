@@ -454,18 +454,26 @@ public class KnownHeaders
         public bool FastCount { get; set; }
         public bool EnhancedSetter { get; set; }
         public bool PrimaryHeader { get; set; }
+
         public string FlagBit() =>
             $"{"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L";
+
         public string TestBitCore(string name) =>
             $"({name} & {"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L) != 0";
+
         public string TestBit() => TestBitCore("_bits");
+
         public string TestTempBit() => TestBitCore("tempBits");
+
         public string TestNotTempBit() =>
             $"(tempBits & ~{"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L) == 0";
+
         public string TestNotBit() =>
             $"(_bits & {"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L) == 0";
+
         public string SetBit() =>
             $"_bits |= {"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L";
+
         public string ClearBit() =>
             $"_bits &= ~{"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L";
 

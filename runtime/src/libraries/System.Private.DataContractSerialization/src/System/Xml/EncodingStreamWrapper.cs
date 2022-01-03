@@ -26,6 +26,7 @@ namespace System.Xml
             UTF16BE,
             None
         }
+
         private static readonly UTF8Encoding s_safeUTF8 = new UTF8Encoding(false, false);
         private static readonly UnicodeEncoding s_safeUTF16 = new UnicodeEncoding(
             false,

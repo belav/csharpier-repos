@@ -70,6 +70,7 @@ namespace System.Threading
         {
             internal TaskNode? Prev,
                 Next;
+
             internal TaskNode()
                 : base((object?)null, TaskCreationOptions.RunContinuationsAsynchronously) { }
         }
@@ -805,12 +806,18 @@ namespace System.Threading
         private readonly struct ConfiguredNoThrowAwaiter<T> : ICriticalNotifyCompletion
         {
             private readonly Task<T> _task;
+
             public ConfiguredNoThrowAwaiter(Task<T> task) => _task = task;
+
             public ConfiguredNoThrowAwaiter<T> GetAwaiter() => this;
+
             public bool IsCompleted => _task.IsCompleted;
+
             public void GetResult() => _task.MarkExceptionsAsHandled();
+
             public void UnsafeOnCompleted(Action continuation) =>
                 _task.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(continuation);
+
             public void OnCompleted(Action continuation) =>
                 _task.ConfigureAwait(false).GetAwaiter().OnCompleted(continuation);
         }
@@ -972,6 +979,7 @@ namespace System.Threading
         /// </summary>
         private static readonly Action<object?> s_cancellationTokenCanceledEventHandler =
             new Action<object?>(CancellationTokenCanceledEventHandler);
+
         private static void CancellationTokenCanceledEventHandler(object? obj)
         {
             Debug.Assert(obj is SemaphoreSlim, "Expected a SemaphoreSlim");

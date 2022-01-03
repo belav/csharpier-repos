@@ -28,6 +28,7 @@ namespace System.Net.Mime
             new TrackingValidationObjectDictionary.ValidateAndParseValue(
                 v => new SmtpDateTime(v.ToString()!)
             );
+
         // this will throw a FormatException if the value supplied is not a valid SmtpDateTime
 
         private static readonly TrackingValidationObjectDictionary.ValidateAndParseValue s_longParser =

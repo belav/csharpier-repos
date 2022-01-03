@@ -44,6 +44,7 @@ namespace Microsoft.Win32.SafeHandles
             // The first two are common for all kinds of operations.
             private long _fileOffset;
             private CancellationToken _cancellationToken;
+
             // Used by simple reads and writes. Will be unsafely cast to a memory when performing a read.
             private ReadOnlyMemory<byte> _singleSegment;
             private IReadOnlyList<Memory<byte>>? _readScatterBuffers;
@@ -74,7 +75,9 @@ namespace Microsoft.Win32.SafeHandles
             ) => _source.OnCompleted(continuation, state, token, flags);
 
             void IValueTaskSource.GetResult(short token) => GetResult(token);
+
             int IValueTaskSource<int>.GetResult(short token) => (int)GetResult(token);
+
             public long GetResult(short token)
             {
                 try

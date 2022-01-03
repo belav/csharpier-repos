@@ -18,6 +18,7 @@ namespace System.Net.Sockets.Tests
         private readonly ITestOutputHelper _log;
 
         private IPAddress _serverAddress = IPAddress.IPv6Loopback;
+
         // Accessible directories for UWP app:
         // C:\Users\<UserName>\AppData\Local\Packages\<ApplicationPackageName>\
         private string TestFileName =

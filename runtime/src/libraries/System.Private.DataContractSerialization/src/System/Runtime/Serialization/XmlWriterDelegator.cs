@@ -517,6 +517,7 @@ namespace System.Runtime.Serialization
         {
             writer.WriteValue(value);
         }
+
         internal void WriteBoolean(bool value, XmlDictionaryString name, XmlDictionaryString? ns)
         {
             WriteStartElementPrimitive(name, ns);
@@ -544,6 +545,7 @@ namespace System.Runtime.Serialization
         {
             writer.WriteValue(value);
         }
+
         internal void WriteDecimal(decimal value, XmlDictionaryString name, XmlDictionaryString? ns)
         {
             WriteStartElementPrimitive(name, ns);
@@ -671,6 +673,7 @@ namespace System.Runtime.Serialization
         {
             writer.WriteRaw(XmlConvert.ToString(value));
         }
+
         internal void WriteUnsignedLong(
             ulong value,
             XmlDictionaryString name,

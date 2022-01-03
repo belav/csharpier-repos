@@ -16,6 +16,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             CompileError,
             RuntimeError
         }
+
         private static void AssertExplicitConvert<TSource, TTarget>(
             TSource argument,
             TTarget target,

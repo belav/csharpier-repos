@@ -12,6 +12,7 @@ namespace System.Xml.Tests
     {
         private string _sampleFileName = @"sample.xml";
         private string _sampleXml = "<root><a/></root>";
+
         private void CreateFile()
         {
             MemoryStream ms = new MemoryStream();
@@ -115,6 +116,7 @@ namespace System.Xml.Tests
                         reader.Dispose();
                 }
             }
+
             public static bool Create(TextReader input)
             {
                 XmlReader reader = null;

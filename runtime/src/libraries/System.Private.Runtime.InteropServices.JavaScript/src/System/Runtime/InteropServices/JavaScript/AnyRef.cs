@@ -24,6 +24,7 @@ namespace System.Runtime.InteropServices.JavaScript
                 ownsHandle ? GCHandleType.Weak : GCHandleType.Normal
             );
         }
+
         internal int Int32Handle => (int)(IntPtr)AnyRefHandle;
 
         protected void FreeGCHandle()

@@ -47,6 +47,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
             [MarshalAs(UnmanagedType.LPWStr)] string resourceName,
             bool embedded
         );
+
         [PreserveSig]
         int OnResourceFileRemoved([MarshalAs(UnmanagedType.LPWStr)] string filename);
 

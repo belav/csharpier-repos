@@ -866,6 +866,7 @@ class TestMergeReturnBlocks
     {
         [FieldOffset(0)]
         public int val;
+
         [FieldOffset(0)]
         public ReturnStruct s;
 
@@ -1014,6 +1015,7 @@ class TestHFAandHVA
     {
         return new Doubles2Wrapper();
     }
+
     struct Floats3Wrapper
     {
         public float f1;

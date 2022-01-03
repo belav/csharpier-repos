@@ -218,6 +218,7 @@ namespace System.Diagnostics.Tracing
         {
             Payload = payload;
         }
+
         public CounterPayload Payload { get; set; }
     }
 }

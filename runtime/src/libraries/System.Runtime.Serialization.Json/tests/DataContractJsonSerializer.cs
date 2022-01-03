@@ -4114,6 +4114,7 @@ public static partial class DataContractJsonSerializerTests
 
     private static string s_errorMsg =
         "The field/property {0} value of deserialized object is wrong";
+
     private static string getCheckFailureMsg(string propertyName)
     {
         return string.Format(s_errorMsg, propertyName);

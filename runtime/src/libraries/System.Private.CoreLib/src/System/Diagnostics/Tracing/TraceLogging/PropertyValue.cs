@@ -30,40 +30,58 @@ namespace System.Diagnostics.Tracing
         {
             [FieldOffset(0)]
             public bool AsBoolean;
+
             [FieldOffset(0)]
             public byte AsByte;
+
             [FieldOffset(0)]
             public sbyte AsSByte;
+
             [FieldOffset(0)]
             public char AsChar;
+
             [FieldOffset(0)]
             public short AsInt16;
+
             [FieldOffset(0)]
             public ushort AsUInt16;
+
             [FieldOffset(0)]
             public int AsInt32;
+
             [FieldOffset(0)]
             public uint AsUInt32;
+
             [FieldOffset(0)]
             public long AsInt64;
+
             [FieldOffset(0)]
             public ulong AsUInt64;
+
             [FieldOffset(0)]
             public IntPtr AsIntPtr;
+
             [FieldOffset(0)]
             public UIntPtr AsUIntPtr;
+
             [FieldOffset(0)]
             public float AsSingle;
+
             [FieldOffset(0)]
             public double AsDouble;
+
             [FieldOffset(0)]
             public Guid AsGuid;
+
             [FieldOffset(0)]
             public DateTime AsDateTime;
+
             [FieldOffset(0)]
             public DateTimeOffset AsDateTimeOffset;
+
             [FieldOffset(0)]
             public TimeSpan AsTimeSpan;
+
             [FieldOffset(0)]
             public decimal AsDecimal;
         }
@@ -89,35 +107,53 @@ namespace System.Diagnostics.Tracing
 
         private PropertyValue(bool value) : this(new Scalar() { AsBoolean = value }, sizeof(bool))
         { }
+
         private PropertyValue(byte value) : this(new Scalar() { AsByte = value }, sizeof(byte)) { }
+
         private PropertyValue(sbyte value) : this(new Scalar() { AsSByte = value }, sizeof(sbyte))
         { }
+
         private PropertyValue(char value) : this(new Scalar() { AsChar = value }, sizeof(char)) { }
+
         private PropertyValue(short value) : this(new Scalar() { AsInt16 = value }, sizeof(short))
         { }
+
         private PropertyValue(ushort value)
             : this(new Scalar() { AsUInt16 = value }, sizeof(ushort)) { }
+
         private PropertyValue(int value) : this(new Scalar() { AsInt32 = value }, sizeof(int)) { }
+
         private PropertyValue(uint value) : this(new Scalar() { AsUInt32 = value }, sizeof(uint))
         { }
+
         private PropertyValue(long value) : this(new Scalar() { AsInt64 = value }, sizeof(long)) { }
+
         private PropertyValue(ulong value) : this(new Scalar() { AsUInt64 = value }, sizeof(ulong))
         { }
+
         private PropertyValue(IntPtr value)
             : this(new Scalar() { AsIntPtr = value }, sizeof(IntPtr)) { }
+
         private PropertyValue(UIntPtr value)
             : this(new Scalar() { AsUIntPtr = value }, sizeof(UIntPtr)) { }
+
         private PropertyValue(float value) : this(new Scalar() { AsSingle = value }, sizeof(float))
         { }
+
         private PropertyValue(double value)
             : this(new Scalar() { AsDouble = value }, sizeof(double)) { }
+
         private PropertyValue(Guid value) : this(new Scalar() { AsGuid = value }, sizeof(Guid)) { }
+
         private PropertyValue(DateTime value)
             : this(new Scalar() { AsDateTime = value }, sizeof(DateTime)) { }
+
         private PropertyValue(DateTimeOffset value)
             : this(new Scalar() { AsDateTimeOffset = value }, sizeof(DateTimeOffset)) { }
+
         private PropertyValue(TimeSpan value)
             : this(new Scalar() { AsTimeSpan = value }, sizeof(TimeSpan)) { }
+
         private PropertyValue(decimal value)
             : this(new Scalar() { AsDecimal = value }, sizeof(decimal)) { }
 

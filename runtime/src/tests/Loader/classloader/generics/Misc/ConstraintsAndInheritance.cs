@@ -11,6 +11,7 @@ public interface I1 { }
 // Test #1
 //base type (A<T>) has constraint and child (B<T>) inherits an instantiated base type (A<int>)
 public class A<T> where T : I1 { }
+
 public class B<T> : A<I1> { }
 
 //===================================================

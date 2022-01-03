@@ -12,6 +12,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpMessageHandler(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.Func<System.Net.Http.DelegatingHandler> configureHandler
@@ -19,12 +20,14 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpMessageHandler<THandler>(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder
         ) where THandler : System.Net.Http.DelegatingHandler
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddTypedClient<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -35,6 +38,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddTypedClient<TClient>(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.Func<System.Net.Http.HttpClient, System.IServiceProvider, TClient> factory
@@ -42,6 +46,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddTypedClient<TClient>(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.Func<System.Net.Http.HttpClient, TClient> factory
@@ -49,6 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddTypedClient<
             TClient,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -61,6 +67,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder ConfigureHttpClient(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.Action<System.IServiceProvider, System.Net.Http.HttpClient> configureClient
@@ -68,6 +75,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder ConfigureHttpClient(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.Action<System.Net.Http.HttpClient> configureClient
@@ -75,6 +83,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder ConfigureHttpMessageHandlerBuilder(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.Action<Microsoft.Extensions.Http.HttpMessageHandlerBuilder> configureBuilder
@@ -82,6 +91,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder ConfigurePrimaryHttpMessageHandler(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.Func<
@@ -92,6 +102,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder ConfigurePrimaryHttpMessageHandler(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.Func<System.Net.Http.HttpMessageHandler> configureHandler
@@ -99,12 +110,14 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder ConfigurePrimaryHttpMessageHandler<THandler>(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder
         ) where THandler : System.Net.Http.HttpMessageHandler
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder RedactLoggedHeaders(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.Collections.Generic.IEnumerable<string> redactedLoggedHeaderNames
@@ -112,6 +125,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder RedactLoggedHeaders(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.Func<string, bool> shouldRedactHeaderValue
@@ -119,6 +133,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder SetHandlerLifetime(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.TimeSpan handlerLifetime
@@ -127,6 +142,7 @@ namespace Microsoft.Extensions.DependencyInjection
             throw null;
         }
     }
+
     public static partial class HttpClientFactoryServiceCollectionExtensions
     {
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddHttpClient(
@@ -135,6 +151,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             string name
@@ -142,6 +159,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             string name,
@@ -150,6 +168,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             string name,
@@ -158,6 +177,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -168,6 +188,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -180,6 +201,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -192,6 +214,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -202,6 +225,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -215,6 +239,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -228,6 +253,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             TClient,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -240,6 +266,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             TClient,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -255,6 +282,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             TClient,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -270,6 +298,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             TClient,
             TImplementation
@@ -286,6 +315,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             TClient,
             TImplementation
@@ -298,6 +328,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             TClient,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -310,6 +341,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             TClient,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -326,6 +358,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             TClient,
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -342,6 +375,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             TClient,
             TImplementation
@@ -359,6 +393,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             throw null;
         }
+
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpClient<
             TClient,
             TImplementation
@@ -373,17 +408,20 @@ namespace Microsoft.Extensions.DependencyInjection
             throw null;
         }
     }
+
     public partial interface IHttpClientBuilder
     {
         string Name { get; }
         Microsoft.Extensions.DependencyInjection.IServiceCollection Services { get; }
     }
 }
+
 namespace Microsoft.Extensions.Http
 {
     public partial class HttpClientFactoryOptions
     {
         public HttpClientFactoryOptions() { }
+
         public System.TimeSpan HandlerLifetime
         {
             get { throw null; }
@@ -414,9 +452,11 @@ namespace Microsoft.Extensions.Http
             set { }
         }
     }
+
     public abstract partial class HttpMessageHandlerBuilder
     {
         protected HttpMessageHandlerBuilder() { }
+
         public abstract System.Collections.Generic.IList<System.Net.Http.DelegatingHandler> AdditionalHandlers { get; }
         public abstract string Name { get; set; }
         public abstract System.Net.Http.HttpMessageHandler PrimaryHandler { get; set; }
@@ -426,6 +466,7 @@ namespace Microsoft.Extensions.Http
             get { throw null; }
         }
         public abstract System.Net.Http.HttpMessageHandler Build();
+
         protected internal static System.Net.Http.HttpMessageHandler CreateHandlerPipeline(
             System.Net.Http.HttpMessageHandler primaryHandler,
             System.Collections.Generic.IEnumerable<System.Net.Http.DelegatingHandler> additionalHandlers
@@ -434,12 +475,14 @@ namespace Microsoft.Extensions.Http
             throw null;
         }
     }
+
     public partial interface IHttpMessageHandlerBuilderFilter
     {
         System.Action<Microsoft.Extensions.Http.HttpMessageHandlerBuilder> Configure(
             System.Action<Microsoft.Extensions.Http.HttpMessageHandlerBuilder> next
         );
     }
+
     public partial interface ITypedHttpClientFactory<
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
@@ -450,15 +493,18 @@ namespace Microsoft.Extensions.Http
         TClient CreateClient(System.Net.Http.HttpClient httpClient);
     }
 }
+
 namespace Microsoft.Extensions.Http.Logging
 {
     public partial class LoggingHttpMessageHandler : System.Net.Http.DelegatingHandler
     {
         public LoggingHttpMessageHandler(Microsoft.Extensions.Logging.ILogger logger) { }
+
         public LoggingHttpMessageHandler(
             Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Http.HttpClientFactoryOptions options
         ) { }
+
         [System.Diagnostics.DebuggerStepThroughAttribute]
         protected override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,
@@ -468,13 +514,16 @@ namespace Microsoft.Extensions.Http.Logging
             throw null;
         }
     }
+
     public partial class LoggingScopeHttpMessageHandler : System.Net.Http.DelegatingHandler
     {
         public LoggingScopeHttpMessageHandler(Microsoft.Extensions.Logging.ILogger logger) { }
+
         public LoggingScopeHttpMessageHandler(
             Microsoft.Extensions.Logging.ILogger logger,
             Microsoft.Extensions.Http.HttpClientFactoryOptions options
         ) { }
+
         [System.Diagnostics.DebuggerStepThroughAttribute]
         protected override System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> SendAsync(
             System.Net.Http.HttpRequestMessage request,
@@ -485,6 +534,7 @@ namespace Microsoft.Extensions.Http.Logging
         }
     }
 }
+
 namespace System.Net.Http
 {
     public static partial class HttpClientFactoryExtensions
@@ -496,6 +546,7 @@ namespace System.Net.Http
             throw null;
         }
     }
+
     public static partial class HttpMessageHandlerFactoryExtensions
     {
         public static System.Net.Http.HttpMessageHandler CreateHandler(
@@ -505,10 +556,12 @@ namespace System.Net.Http
             throw null;
         }
     }
+
     public partial interface IHttpClientFactory
     {
         System.Net.Http.HttpClient CreateClient(string name);
     }
+
     public partial interface IHttpMessageHandlerFactory
     {
         System.Net.Http.HttpMessageHandler CreateHandler(string name);

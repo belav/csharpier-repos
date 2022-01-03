@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
 using System.Linq;
+
 namespace System.IO.Compression.Tests
 {
     public class ZipFile_ExtractToDirectoryFiltered : ZipFileTestBase

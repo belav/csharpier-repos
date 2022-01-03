@@ -565,6 +565,7 @@ namespace System.Collections.Tests
                 }
                 Assert.False(list.Contains(items[items.Length / 2])); //"Should not contain item"
             }
+
             public void ContainsNullWhenReference(T[] items, T value)
             {
                 if ((object)value != null)
@@ -676,6 +677,7 @@ namespace System.Collections.Tests
                 list.Clear();
                 Assert.Equal(0, list.Count); //"Should be equal to 0."
             }
+
             public void ClearMultipleTimesEmptyList(int times)
             {
                 List<T> list = new List<T>();
@@ -686,6 +688,7 @@ namespace System.Collections.Tests
                     Assert.Equal(0, list.Count); //"Should be equal to 0."
                 }
             }
+
             public void ClearNonEmptyList(T[] items)
             {
                 List<T> list = new List<T>(items);
@@ -711,6 +714,7 @@ namespace System.Collections.Tests
                 _ilist.Clear();
                 Assert.Equal(0, list.Count); //"Should be equal to 0."
             }
+
             public void NonGenericIListClearMultipleTimesEmptyList(int times)
             {
                 List<T> list = new List<T>();
@@ -722,6 +726,7 @@ namespace System.Collections.Tests
                     Assert.Equal(0, list.Count); //"Should be equal to 0."
                 }
             }
+
             public void NonGenericIListClearNonEmptyList(T[] items)
             {
                 List<T> list = new List<T>(items);

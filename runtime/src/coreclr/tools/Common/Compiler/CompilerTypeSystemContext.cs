@@ -40,24 +40,29 @@ namespace ILCompiler
             {
                 return key.GetHashCode();
             }
+
             protected override int GetValueHashCode(ModuleData value)
             {
                 return value.Module.GetHashCode();
             }
+
             protected override bool CompareKeyToValue(EcmaModule key, ModuleData value)
             {
                 return Object.ReferenceEquals(key, value.Module);
             }
+
             protected override bool CompareValueToValue(ModuleData value1, ModuleData value2)
             {
                 return Object.ReferenceEquals(value1.Module, value2.Module);
             }
+
             protected override ModuleData CreateValueFromKey(EcmaModule key)
             {
                 Debug.Fail("CreateValueFromKey not supported");
                 return null;
             }
         }
+
         private readonly ModuleHashtable _moduleHashtable = new ModuleHashtable();
 
         private class SimpleNameHashtable : LockFreeReaderHashtable<string, ModuleData>
@@ -68,24 +73,29 @@ namespace ILCompiler
             {
                 return _comparer.GetHashCode(key);
             }
+
             protected override int GetValueHashCode(ModuleData value)
             {
                 return _comparer.GetHashCode(value.SimpleName);
             }
+
             protected override bool CompareKeyToValue(string key, ModuleData value)
             {
                 return _comparer.Equals(key, value.SimpleName);
             }
+
             protected override bool CompareValueToValue(ModuleData value1, ModuleData value2)
             {
                 return _comparer.Equals(value1.SimpleName, value2.SimpleName);
             }
+
             protected override ModuleData CreateValueFromKey(string key)
             {
                 Debug.Fail("CreateValueFromKey not supported");
                 return null;
             }
         }
+
         private readonly SimpleNameHashtable _simpleNameHashtable = new SimpleNameHashtable();
 
         private readonly SharedGenericsMode _genericsMode;

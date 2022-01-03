@@ -48,6 +48,7 @@ namespace Sample
             JsonTask task;
 
             public TextSerialize(JsonTask task) => this.task = task;
+
             public override string Name => "non-ASCII text serialize";
 
             [UnconditionalSuppressMessage("Trim analysis error", "IL2026")]
@@ -59,6 +60,7 @@ namespace Sample
             JsonTask task;
 
             public TextDeserialize(JsonTask task) => this.task = task;
+
             public override string Name => "non-ASCII text deserialize";
 
             [UnconditionalSuppressMessage("Trim analysis error", "IL2026")]
@@ -71,6 +73,7 @@ namespace Sample
             JsonTask task;
 
             public SmallSerialize(JsonTask task) => this.task = task;
+
             public override string Name => "small serialize";
 
             [UnconditionalSuppressMessage("Trim analysis error", "IL2026")]
@@ -82,6 +85,7 @@ namespace Sample
             JsonTask task;
 
             public SmallDeserialize(JsonTask task) => this.task = task;
+
             public override string Name => "small deserialize";
 
             [UnconditionalSuppressMessage("Trim analysis error", "IL2026")]
@@ -94,6 +98,7 @@ namespace Sample
             JsonTask task;
 
             public LargeSerialize(JsonTask task) => this.task = task;
+
             public override string Name => "large serialize";
             public override int InitialSamples => 3;
 
@@ -106,6 +111,7 @@ namespace Sample
             JsonTask task;
 
             public LargeDeserialize(JsonTask task) => this.task = task;
+
             public override string Name => "large deserialize";
             public override int InitialSamples => 3;
 

@@ -159,18 +159,22 @@ namespace ILCompiler
             {
                 return key.GetHashCode();
             }
+
             protected override int GetValueHashCode(MethodILData value)
             {
                 return value.Method.GetHashCode();
             }
+
             protected override bool CompareKeyToValue(MethodDesc key, MethodILData value)
             {
                 return Object.ReferenceEquals(key, value.Method);
             }
+
             protected override bool CompareValueToValue(MethodILData value1, MethodILData value2)
             {
                 return Object.ReferenceEquals(value1.Method, value2.Method);
             }
+
             protected override MethodILData CreateValueFromKey(MethodDesc key)
             {
                 MethodIL methodIL = ILProvider.GetMethodIL(key);
@@ -280,6 +284,7 @@ namespace ILCompiler
         public ReadyToRunSymbolNodeFactory SymbolNodeFactory { get; }
         public ReadyToRunCompilationModuleGroupBase CompilationModuleGroup { get; }
         private readonly int _customPESectionAlignment;
+
         /// <summary>
         /// Determining whether a type's layout is fixed is a little expensive and the question can be asked many times
         /// for the same type during compilation so preserve the computed value.

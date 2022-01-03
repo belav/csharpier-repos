@@ -31,8 +31,11 @@ namespace System.Net.Http.Functional.Tests
         public IDisposable GetResult() => new WatchdogImpl(_box);
 
         public Watchdog GetAwaiter() => this;
+
         public bool IsCompleted => false;
+
         public void OnCompleted(Action continuation) => UnsafeOnCompleted(continuation);
+
         public void UnsafeOnCompleted(Action continuation)
         {
             _box = continuation.Target;

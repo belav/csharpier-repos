@@ -68,6 +68,7 @@ namespace System.Security.Cryptography
         public byte[]? Prime;
 
         private Oid _oid;
+
         /// <summary>
         /// The Oid representing the named curve. Applies only to Named curves.
         /// </summary>

@@ -76,6 +76,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 infos.Add(new CSDiagnosticInfo(code));
             }
         }
+
 #nullable disable
 
         private static bool IsNullableReference(TypeSymbol type) =>

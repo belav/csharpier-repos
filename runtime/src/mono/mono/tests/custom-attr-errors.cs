@@ -4,9 +4,11 @@ using System.Reflection;
 // this for test_0_missing_attr_on_assembly
 [assembly: MissingAttribute]
 
+
 public sealed class MyAttribute : Attribute
 {
     public Type Type { get; set; }
+
     public MyAttribute(Type t)
     {
         Type = t;
@@ -22,6 +24,7 @@ public sealed class MyAttribute : Attribute
 public sealed class My2Attribute : Attribute
 {
     public object Obj { get; set; }
+
     public My2Attribute(object t)
     {
         Obj = t;
@@ -40,6 +43,7 @@ public sealed class My3Attribute : Attribute
 }
 
 public class MyException : Exception { }
+
 public sealed class ExceptionOnCtor : Attribute
 {
     public ExceptionOnCtor()
@@ -134,6 +138,7 @@ class Tests
             return 0;
         }
     }
+
     [My2(new Type[] { typeof(DisappearingType) })]
     public static int test_0_array_of_missing_type()
     {

@@ -3,6 +3,7 @@
     using Shouldly;
     using System;
     using Xunit;
+
     public class Include : AutoMapperSpecBase
     {
         public class From
@@ -44,6 +45,7 @@
                     cfg.AllowNullDestinationValues = false;
                 }
             );
+
         [Fact]
         public void Should_map_ok()
         {
@@ -52,6 +54,7 @@
             ReferenceEquals(dest.GetType(), typeof(Concrete)).ShouldBeTrue();
         }
     }
+
     public class BaseNotMatching : AutoMapperSpecBase
     {
         public class From
@@ -59,22 +62,27 @@
             public int Value { get; set; }
             public int ChildValue { get; set; }
         }
+
         public class FromDerived : From
         {
             public int AbstractValue { get; set; }
         }
+
         public class Concrete
         {
             public int ConcreteValue { get; set; }
         }
+
         public abstract class AbstractChild : Concrete
         {
             public int AbstractValue { get; set; }
         }
+
         public class Derivation : AbstractChild
         {
             public int DerivedValue { get; set; }
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(
                 cfg =>
@@ -91,6 +99,7 @@
                         .ForMember(d => d.DerivedValue, o => o.Ignore());
                 }
             );
+
         [Fact]
         public void Derived_matches()
         {
@@ -98,6 +107,7 @@
             dest.AbstractValue.ShouldBe(42);
         }
     }
+
     public class BaseMatchingDifferentType : AutoMapperSpecBase
     {
         public class From
@@ -106,22 +116,27 @@
             public int ChildValue { get; set; }
             public DateTime AbstractValue { get; set; }
         }
+
         public class FromDerived : From
         {
             public new int AbstractValue { get; set; }
         }
+
         public class Concrete
         {
             public int ConcreteValue { get; set; }
         }
+
         public abstract class AbstractChild : Concrete
         {
             public int AbstractValue { get; set; }
         }
+
         public class Derivation : AbstractChild
         {
             public int DerivedValue { get; set; }
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(
                 cfg =>
@@ -138,6 +153,7 @@
                         .ForMember(d => d.DerivedValue, o => o.Ignore());
                 }
             );
+
         [Fact]
         public void Derived_matches()
         {
@@ -145,6 +161,7 @@
             dest.AbstractValue.ShouldBe(42);
         }
     }
+
     public class IgnoreBaseMatching : AutoMapperSpecBase
     {
         public class From
@@ -153,21 +170,26 @@
             public int ChildValue { get; set; }
             public int AbstractValue { get; set; }
         }
+
         public class FromDerived : From
         {
         }
+
         public class Concrete
         {
             public int ConcreteValue { get; set; }
         }
+
         public abstract class AbstractChild : Concrete
         {
             public int AbstractValue { get; set; }
         }
+
         public class Derivation : AbstractChild
         {
             public int DerivedValue { get; set; }
         }
+
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(
                 cfg =>
@@ -185,6 +207,7 @@
                         .ForMember(d => d.DerivedValue, o => o.Ignore());
                 }
             );
+
         [Fact]
         public void Derived_ignores()
         {

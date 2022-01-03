@@ -139,6 +139,7 @@ public class DuplexStream : Stream
     {
         WriteStream.Write(buffer, offset, count);
     }
+
     public override void WriteByte(byte value)
     {
         WriteStream.WriteByte(value);

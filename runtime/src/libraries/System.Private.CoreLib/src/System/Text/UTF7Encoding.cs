@@ -15,6 +15,7 @@ namespace System.Text
     {
         private const string base64Chars =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
         // 0123456789111111111122222222223333333333444444444455555555556666
         //              012345678901234567890123456789012345678901234567890123
 
@@ -33,11 +34,13 @@ namespace System.Text
 
         // The set of base 64 characters.
         private byte[] _base64Bytes;
+
         // The decoded bits for every base64 values. This array has a size of 128 elements.
         // The index is the code point value of the base 64 characters.  The value is -1 if
         // the code point is not a valid base 64 character.  Otherwise, the value is a value
         // from 0 ~ 63.
         private sbyte[] _base64Values;
+
         // The array to decide if a Unicode code point below 0x80 can be directly encoded in UTF7.
         // This array has a size of 128.
         private bool[] _directEncode;
@@ -925,8 +928,10 @@ namespace System.Text
         {
             /*private*/
             internal int bits;
+
             /*private*/
             internal int bitCount;
+
             /*private*/
             internal bool firstByte;
 
@@ -957,6 +962,7 @@ namespace System.Text
         {
             /*private*/
             internal int bits;
+
             /*private*/
             internal int bitCount;
 

@@ -137,6 +137,7 @@ namespace System.Speech.Recognition
                 }
             }
         }
+
         internal bool SetTextFeedback(string text, bool isSuccessfulAction)
         {
             if (_sapiRecoResult == null)
@@ -684,6 +685,7 @@ namespace System.Speech.Recognition
 
         [field: NonSerialized]
         private ISpRecoResult2 _sapiRecoResult;
+
         // Keep as members because MSS uses these fields:
         private TimeSpan? _audioPosition;
         private TimeSpan? _audioDuration;

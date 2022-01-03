@@ -23,6 +23,7 @@ internal interface IHttpOutputProducer
         bool autoChunk,
         bool appCompleted
     );
+
     // This takes ReadOnlySpan instead of ReadOnlyMemory because it always synchronously copies data before flushing.
     ValueTask<FlushResult> WriteDataToPipeAsync(
         ReadOnlySpan<byte> data,

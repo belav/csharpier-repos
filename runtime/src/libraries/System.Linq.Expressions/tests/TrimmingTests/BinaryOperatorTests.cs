@@ -56,6 +56,7 @@ internal class Class1
 
     public static Class1 operator +(Class1 left, Class2 right) =>
         new Class1($"{left.Name}+{right.Name}2");
+
     public static Class2 operator +(Class2 left, Class1 right) =>
         new Class2($"{left.Name}2+{right.Name}");
 }

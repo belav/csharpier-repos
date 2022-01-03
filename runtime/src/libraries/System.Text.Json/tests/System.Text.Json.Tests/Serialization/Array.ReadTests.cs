@@ -587,6 +587,7 @@ namespace System.Text.Json.Serialization.Tests
             public List<int> ParsedChild1 { get; set; }
             public IEnumerable<int> SkippedChild2 { get; }
             public IEnumerable<int> ParsedChild2 { get; set; }
+
             [JsonIgnore]
             public IEnumerable<int> SkippedChild3 { get; set; } // Note this has a setter.
             public IEnumerable<int> ParsedChild3 { get; set; }
@@ -641,6 +642,7 @@ namespace System.Text.Json.Serialization.Tests
             private string[] _array = null;
             private List<string> _list = null;
             private StringListWrapper _listWrapper = null;
+
             // Immutable array is a struct.
             private ImmutableArray<string> _immutableArray = default;
             private ImmutableList<string> _immutableList = null;

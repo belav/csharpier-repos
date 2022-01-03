@@ -20,46 +20,59 @@ namespace System.Xaml.Permissions
         public XamlLoadPermission(
             System.Collections.Generic.IEnumerable<System.Xaml.Permissions.XamlAccessLevel> allowedAccess
         ) { }
+
         public XamlLoadPermission(System.Security.Permissions.PermissionState state) { }
+
         public XamlLoadPermission(System.Xaml.Permissions.XamlAccessLevel allowedAccess) { }
+
         [System.Runtime.Versioning.SupportedOSPlatform("windows")]
         public System.Collections.Generic.IList<System.Xaml.Permissions.XamlAccessLevel> AllowedAccess
         {
             get { throw null; }
         }
+
         public override System.Security.IPermission Copy()
         {
             throw null;
         }
+
         public override bool Equals(object obj)
         {
             throw null;
         }
+
         public override void FromXml(System.Security.SecurityElement elem) { }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public bool Includes(System.Xaml.Permissions.XamlAccessLevel requestedAccess)
         {
             throw null;
         }
+
         public override System.Security.IPermission Intersect(System.Security.IPermission target)
         {
             throw null;
         }
+
         public override bool IsSubsetOf(System.Security.IPermission target)
         {
             throw null;
         }
+
         public bool IsUnrestricted()
         {
             throw null;
         }
+
         public override System.Security.SecurityElement ToXml()
         {
             throw null;
         }
+
         public override System.Security.IPermission Union(System.Security.IPermission other)
         {
             throw null;

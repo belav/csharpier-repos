@@ -78,6 +78,7 @@ namespace System.ComponentModel
         );
 
         private InterlockedBitVector32 _state; // Contains the state bits for this proeprty descriptor.
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         private readonly Type _componentClass; // used to determine if we should all on us or on the designer
         private readonly Type _type; // the data type of the property

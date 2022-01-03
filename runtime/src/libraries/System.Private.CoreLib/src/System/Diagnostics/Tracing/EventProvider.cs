@@ -1562,7 +1562,6 @@ namespace System.Diagnostics.Tracing
             throw new System.NotSupportedException();
         }
     }
-
 #endif
     internal sealed class NoOpEventProvider : IEventProvider
     {

@@ -35,9 +35,12 @@ namespace System.IO.Pipelines.Tests.Infrastructure
         }
 
         public override void Flush() => _ms.Flush();
+
         public override int Read(byte[] buffer, int offset, int count) =>
             _ms.Read(buffer, offset, count);
+
         public override long Seek(long offset, SeekOrigin origin) => _ms.Seek(offset, origin);
+
         public override void SetLength(long value) => _ms.SetLength(value);
 
         public override void Write(byte[] buffer, int offset, int count)

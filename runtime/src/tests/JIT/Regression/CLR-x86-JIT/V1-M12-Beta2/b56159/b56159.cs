@@ -9,6 +9,7 @@ namespace Test
     public class AA
     {
         static uint m_uFwd6;
+
         static void Method1(ref bool param5)
         {
             while (param5)
@@ -27,6 +28,7 @@ namespace Test
             }
             return;
         }
+
         static int Main()
         {
             bool b = false;

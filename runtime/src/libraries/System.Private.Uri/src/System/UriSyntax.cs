@@ -250,6 +250,7 @@ namespace System
         }
 
         private const int c_MaxCapacity = 512;
+
         //schemeStr must be in lower case!
         internal static UriParser FindOrFetchAsUnknownV1Syntax(string lwrCaseScheme)
         {

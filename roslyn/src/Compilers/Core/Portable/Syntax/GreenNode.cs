@@ -749,18 +749,22 @@ namespace Microsoft.CodeAnalysis
         {
             get { return this.RawKind; }
         }
+
         public virtual object? GetValue()
         {
             return null;
         }
+
         public virtual string GetValueText()
         {
             return string.Empty;
         }
+
         public virtual GreenNode? GetLeadingTriviaCore()
         {
             return null;
         }
+
         public virtual GreenNode? GetTrailingTriviaCore()
         {
             return null;

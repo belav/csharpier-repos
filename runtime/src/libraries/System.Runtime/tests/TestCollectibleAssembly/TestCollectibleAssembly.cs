@@ -7,16 +7,19 @@ namespace TestCollectibleAssembly
     {
         public bool MyField = false;
         public int MyProperty => 1;
+
         public int MyMethod()
         {
             return 1 * 1;
         }
+
         public T MyGenericMethod<T>(T arg1)
         {
             return arg1;
         }
 
         public static int MyStaticField = 1;
+
         public static int MyStaticMethod()
         {
             return 1 * 1;
@@ -32,6 +35,7 @@ namespace TestCollectibleAssembly
     {
         public T MyGenericField;
         public T MyGenericProperty { get; set; }
+
         public T MyGenericMethod(T arg1)
         {
             return arg1;
@@ -39,10 +43,12 @@ namespace TestCollectibleAssembly
 
         public static T MyStaticGenericField;
         public static int MyStaticField = 1;
+
         public static int MyStaticMethod()
         {
             return 1 * 1;
         }
+
         public static T MyStaticGenericMethod(T arg1)
         {
             return arg1;

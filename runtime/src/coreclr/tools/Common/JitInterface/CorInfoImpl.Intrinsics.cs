@@ -43,6 +43,7 @@ namespace Internal.JitInterface
             {
                 return key.Equals(value.Key);
             }
+
             protected override bool CompareValueToValue(
                 IntrinsicEntry value1,
                 IntrinsicEntry value2
@@ -50,15 +51,18 @@ namespace Internal.JitInterface
             {
                 return value1.Key.Equals(value2.Key);
             }
+
             protected override IntrinsicEntry CreateValueFromKey(IntrinsicKey key)
             {
                 Debug.Fail("CreateValueFromKey not supported");
                 return null;
             }
+
             protected override int GetKeyHashCode(IntrinsicKey key)
             {
                 return key.GetHashCode();
             }
+
             protected override int GetValueHashCode(IntrinsicEntry value)
             {
                 return value.Key.GetHashCode();

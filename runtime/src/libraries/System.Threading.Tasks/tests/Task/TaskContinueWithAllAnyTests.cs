@@ -1330,6 +1330,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest13()
         {
@@ -1756,6 +1757,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest31()
         {
@@ -1774,6 +1776,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest32()
         {
@@ -1792,6 +1795,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest33()
         {
@@ -1810,6 +1814,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest34()
         {
@@ -1827,6 +1832,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest35()
         {
@@ -1844,6 +1850,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskContinueWithAllAnyTest test = new TaskContinueWithAllAnyTest(parameters);
             test.RealRun();
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TaskContinueWithAllAnyTest36()
         {

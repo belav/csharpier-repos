@@ -459,6 +459,7 @@ class Program
             }
 
             public override long Length { get; }
+
             public override int Read(byte[] buffer, int offset, int count) => 0;
         }
 

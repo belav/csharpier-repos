@@ -133,6 +133,7 @@ namespace System.Data
     {
         public DataTable table;
         public XmlSchemaIdentityConstraint constraint;
+
         public ConstraintTable(DataTable t, XmlSchemaIdentityConstraint c)
         {
             table = t;
@@ -2014,11 +2015,13 @@ namespace System.Data
         private sealed class NameType : IComparable
         {
             public readonly string name;
+
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicProperties
                     | DynamicallyAccessedMemberTypes.PublicFields
             )]
             public readonly Type type;
+
             public NameType(
                 string n,
                 [DynamicallyAccessedMembers(
@@ -2031,6 +2034,7 @@ namespace System.Data
                 name = n;
                 type = t;
             }
+
             public int CompareTo(object? obj)
             {
                 return string.Compare(name, (string?)obj, StringComparison.Ordinal);
@@ -2151,6 +2155,7 @@ namespace System.Data
             NameType nt = FindNameType(dt);
             return nt.type;
         }
+
         /*  later we may need such a function
                 private Boolean IsUDSimpleType(string qname) {
                     if (udSimpleTypes == null)
@@ -3251,6 +3256,7 @@ namespace System.Data
     internal sealed class XmlIgnoreNamespaceReader : XmlNodeReader
     {
         private readonly List<string> _namespacesToIgnore;
+
         //
         // Constructor
         //

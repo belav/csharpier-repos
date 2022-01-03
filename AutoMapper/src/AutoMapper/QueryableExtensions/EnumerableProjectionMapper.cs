@@ -9,6 +9,7 @@ namespace AutoMapper.QueryableExtensions.Impl
     using static Expression;
     using static Execution.ExpressionBuilder;
     using static ReflectionHelper;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class EnumerableProjectionMapper : IProjectionMapper
     {
@@ -22,11 +23,13 @@ namespace AutoMapper.QueryableExtensions.Impl
         private static readonly MethodInfo ToListMethod = typeof(Enumerable).GetStaticMethod(
             "ToList"
         );
+
         public bool IsMatch(
             MemberMap memberMap,
             TypeMap memberTypeMap,
             Expression resolvedSource
         ) => memberMap.DestinationType.IsCollection() && memberMap.SourceType.IsCollection();
+
         public Expression Project(
             IGlobalConfiguration configuration,
             MemberMap memberMap,
@@ -69,6 +72,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             }
             return sourceExpression;
         }
+
         private static Expression Select(Expression source, LambdaExpression lambda) =>
             Call(
                 SelectMethod.MakeGenericMethod(lambda.Parameters[0].Type, lambda.ReturnType),

@@ -15,6 +15,7 @@ namespace System.Transactions.Tests
         BlockingDependent,
         RollbackDependent
     };
+
     public class CloneTxTests : IDisposable
     {
         public CloneTxTests()

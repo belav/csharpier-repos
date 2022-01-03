@@ -13,16 +13,20 @@ namespace System.Linq.Tests
         {
             // Skipping tests of double calls on GetEnumerable. Just don't do them here!
             private readonly int _count;
+
             public TrackingEnumerable(int count)
             {
                 _count = count;
             }
+
             public int Moves { get; private set; }
+
             public IEnumerator<int> GetEnumerator()
             {
                 for (int i = 0; i < _count; ++i)
                     yield return ++Moves;
             }
+
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return GetEnumerator();
@@ -33,10 +37,12 @@ namespace System.Linq.Tests
         {
             private readonly Func<T, TResult> _baseFunc;
             public int Calls { get; private set; }
+
             public CountedFunction(Func<T, TResult> baseFunc)
             {
                 _baseFunc = baseFunc;
             }
+
             public Func<T, TResult> Func
             {
                 get

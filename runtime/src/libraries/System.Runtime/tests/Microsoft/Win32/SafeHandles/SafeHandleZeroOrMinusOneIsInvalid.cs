@@ -40,6 +40,7 @@ public static class SafeHandleZeroOrMinusOneIsInvalidTests
         public TestSafeHandleMinusOneIsInvalid() : base(true) { }
 
         protected override bool ReleaseHandle() => true;
+
         public new void SetHandle(IntPtr handle) => base.SetHandle(handle);
     }
 
@@ -48,6 +49,7 @@ public static class SafeHandleZeroOrMinusOneIsInvalidTests
         public TestSafeHandleZeroOrMinusOneIsInvalid() : base(true) { }
 
         protected override bool ReleaseHandle() => true;
+
         public new void SetHandle(IntPtr handle) => base.SetHandle(handle);
     }
 }

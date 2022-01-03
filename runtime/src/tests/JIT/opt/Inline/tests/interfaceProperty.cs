@@ -26,6 +26,7 @@ namespace JitInliningTest
         {
             get { return _counter; }
         }
+
         public Employee()
         {
             _counter = ++_counter + numberOfEmployees;

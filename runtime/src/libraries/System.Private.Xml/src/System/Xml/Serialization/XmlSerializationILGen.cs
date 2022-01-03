@@ -19,13 +19,16 @@ namespace System.Xml.Serialization
             TypeMapping,
             string
         >();
+
         // Lookup name->created Method
         private readonly Dictionary<string, MethodBuilderInfo> _methodBuilders = new Dictionary<
             string,
             MethodBuilderInfo
         >();
+
         // Lookup name->created Type
         internal Dictionary<string, Type> CreatedTypes = new Dictionary<string, Type>();
+
         // Lookup name->class Member
         internal Dictionary<string, MemberInfo> memberInfos = new Dictionary<string, MemberInfo>();
         private readonly ReflectionAwareILGen _raCodeGen;
@@ -112,6 +115,7 @@ namespace System.Xml.Serialization
             string,
             Regex
         >();
+
         internal static Regex NewRegex(string pattern)
         {
             Regex? regex;
@@ -160,6 +164,7 @@ namespace System.Xml.Serialization
             System.Diagnostics.Debug.Assert(_methodBuilders.ContainsKey(methodName));
             return _methodBuilders[methodName];
         }
+
         [RequiresUnreferencedCode("calls WriteStructMethod")]
         internal virtual void GenerateMethod(TypeMapping mapping) { }
 

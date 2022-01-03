@@ -61,12 +61,15 @@ namespace System.Reflection.TypeLoading
 
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
             CustomAttributes.ToReadOnlyCollection();
+
         public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
 
         public sealed override object[] GetCustomAttributes(bool inherit) =>
             throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
+
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
+
         public sealed override bool IsDefined(Type attributeType, bool inherit) =>
             throw new InvalidOperationException(SR.Arg_ReflectionOnlyCA);
 
@@ -86,6 +89,7 @@ namespace System.Reflection.TypeLoading
             SerializationInfo info,
             StreamingContext context
         ) => throw new NotSupportedException();
+
         public abstract override void GetPEKind(
             out PortableExecutableKinds peKind,
             out ImageFileMachine machine
@@ -100,20 +104,25 @@ namespace System.Reflection.TypeLoading
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
         ) => throw new NotSupportedException(SR.NotSupported_ResolvingTokens);
+
         public sealed override MemberInfo ResolveMember(
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
         ) => throw new NotSupportedException(SR.NotSupported_ResolvingTokens);
+
         public sealed override MethodBase ResolveMethod(
             int metadataToken,
             Type[]? genericTypeArguments,
             Type[]? genericMethodArguments
         ) => throw new NotSupportedException(SR.NotSupported_ResolvingTokens);
+
         public sealed override byte[] ResolveSignature(int metadataToken) =>
             throw new NotSupportedException(SR.NotSupported_ResolvingTokens);
+
         public sealed override string ResolveString(int metadataToken) =>
             throw new NotSupportedException(SR.NotSupported_ResolvingTokens);
+
         public sealed override Type ResolveType(
             int metadataToken,
             Type[]? genericTypeArguments,
@@ -175,6 +184,7 @@ namespace System.Reflection.TypeLoading
             e = null;
             return type;
         }
+
         protected abstract RoDefinitionType? GetTypeCoreNoCache(
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name,

@@ -48,9 +48,11 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
 #if DEBUG
         internal SymbolAdapter GetCciAdapter() => GetCciAdapterImpl();
+
         protected virtual SymbolAdapter GetCciAdapterImpl() => throw ExceptionUtilities.Unreachable;
 #else
         internal Symbol AdaptedSymbol => this;
+
         internal Symbol GetCciAdapter() => this;
 #endif
 

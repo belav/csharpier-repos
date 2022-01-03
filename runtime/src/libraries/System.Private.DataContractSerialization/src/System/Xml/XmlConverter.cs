@@ -494,26 +494,32 @@ namespace System.Xml
         {
             return value ? "true" : "false";
         }
+
         public static string ToString(int value)
         {
             return XmlConvert.ToString(value);
         }
+
         public static string ToString(long value)
         {
             return XmlConvert.ToString(value);
         }
+
         public static string ToString(float value)
         {
             return XmlConvert.ToString(value);
         }
+
         public static string ToString(double value)
         {
             return XmlConvert.ToString(value);
         }
+
         public static string ToString(decimal value)
         {
             return XmlConvert.ToString(value);
         }
+
         public static string ToString(TimeSpan value)
         {
             return XmlConvert.ToString(value);
@@ -523,10 +529,12 @@ namespace System.Xml
         {
             return value.ToString();
         }
+
         public static string ToString(Guid value)
         {
             return value.ToString();
         }
+
         public static string ToString(ulong value)
         {
             return value.ToString(NumberFormatInfo.InvariantInfo);

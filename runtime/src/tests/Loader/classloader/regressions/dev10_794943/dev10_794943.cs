@@ -4,6 +4,7 @@
 using System;
 
 struct A<T> { }
+
 struct B<T> { }
 
 interface Interface<T>
@@ -25,6 +26,7 @@ class C<U, T> where U : Base<T>, Interface<T>
     {
         u.Func();
     }
+
     public static void CallInterfaceFunc(U u)
     {
         u.InterfaceFunc();
@@ -37,6 +39,7 @@ class Problem : Base<object>, Interface<object>
     {
         return new A<object>();
     }
+
     public override B<object> Func()
     {
         return new B<object>();

@@ -1393,6 +1393,7 @@ namespace System.Speech.Internal.Synthesis
             WAVE_FORMAT_ALAW = 0x0006,
             WAVE_FORMAT_MULAW = 0x0007
         }
+
         // delegates
         private delegate short[] ConvertByteShort(byte[] data, int size);
         private delegate byte[] ConvertShortByte(short[] data, int size);

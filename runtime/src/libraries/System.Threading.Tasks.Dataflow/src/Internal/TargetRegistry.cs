@@ -47,26 +47,34 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
             /// <summary>The target block reference for this entry.</summary>
             internal readonly ITargetBlock<T> Target;
+
             /// <summary>The value of the PropagateCompletion link option.</summary>
             internal readonly bool PropagateCompletion;
+
             /// <summary>Number of remaining messages to propagate.
             /// This counter is initialized to the MaxMessages option and
             /// gets decremented after each successful propagation.</summary>
             internal int RemainingMessages;
+
             /// <summary>The previous node in the list.</summary>
             internal LinkedTargetInfo? Previous;
+
             /// <summary>The next node in the list.</summary>
             internal LinkedTargetInfo? Next;
         }
 
         /// <summary>A reference to the owning source block.</summary>
         private readonly ISourceBlock<T> _owningSource;
+
         /// <summary>A mapping of targets to information about them.</summary>
         private readonly Dictionary<ITargetBlock<T>, LinkedTargetInfo> _targetInformation;
+
         /// <summary>The first node of an ordered list of targets. Messages should be offered to targets starting from First and following Next.</summary>
         private LinkedTargetInfo? _firstTarget;
+
         /// <summary>The last node of the ordered list of targets. This field is used purely as a perf optimization to avoid traversing the list for each Add.</summary>
         private LinkedTargetInfo? _lastTarget;
+
         /// <summary>Number of links with positive RemainingMessages counters.
         /// This is an optimization that allows us to skip dictionary lookup when this counter is 0.</summary>
         private int _linksWithRemainingMessages;
@@ -372,6 +380,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             /// <summary>The source that encapsulates this block.</summary>
             private readonly ISourceBlock<T> _owningSource;
+
             /// <summary>The target with which this block is associated.</summary>
             private readonly ITargetBlock<T> _target;
 
@@ -436,11 +445,13 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 get { return _owningSource.Completion; }
             }
+
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
             void IDataflowBlock.Complete()
             {
                 _target.Complete();
             }
+
             /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
             void IDataflowBlock.Fault(Exception exception)
             {
@@ -466,6 +477,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     return $"{Common.GetNameForDebugger(this)} Source=\"{(displaySource != null ? displaySource.Content : _owningSource)}\", Target=\"{(displayTarget != null ? displayTarget.Content : _target)}\"";
                 }
             }
+
             /// <summary>Gets the data to display in the debugger display attribute for this instance.</summary>
             object IDebuggerDisplay.Content
             {

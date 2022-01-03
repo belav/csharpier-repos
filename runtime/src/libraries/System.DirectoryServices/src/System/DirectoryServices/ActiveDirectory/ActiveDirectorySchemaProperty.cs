@@ -63,25 +63,31 @@ namespace System.DirectoryServices.ActiveDirectory
         private static readonly OMObjectClass s_dnOMObjectClass = new OMObjectClass(
             new byte[] { 0x2B, 0x0C, 0x02, 0x87, 0x73, 0x1C, 0x00, 0x85, 0x4A }
         );
+
         //0x2A864886F7140101010C
         private static readonly OMObjectClass s_dNWithStringOMObjectClass = new OMObjectClass(
             new byte[] { 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x14, 0x01, 0x01, 0x01, 0x0C }
         );
+
         //0x2A864886F7140101010B
         private static readonly OMObjectClass s_dNWithBinaryOMObjectClass = new OMObjectClass(
             new byte[] { 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x14, 0x01, 0x01, 0x01, 0x0B }
         );
+
         //0x2A864886F71401010106
         private static readonly OMObjectClass s_replicaLinkOMObjectClass = new OMObjectClass(
             new byte[] { 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x14, 0x01, 0x01, 0x01, 0x06 }
         );
+
         //0x2B0C0287731C00855C
         private static readonly OMObjectClass s_presentationAddressOMObjectClass =
             new OMObjectClass(new byte[] { 0x2B, 0x0C, 0x02, 0x87, 0x73, 0x1C, 0x00, 0x85, 0x5C });
+
         //0x2B0C0287731C00853E
         private static readonly OMObjectClass s_accessPointDnOMObjectClass = new OMObjectClass(
             new byte[] { 0x2B, 0x0C, 0x02, 0x87, 0x73, 0x1C, 0x00, 0x85, 0x3E }
         );
+
         //0x56060102050B1D
         private static readonly OMObjectClass s_oRNameOMObjectClass = new OMObjectClass(
             new byte[] { 0x56, 0x06, 0x01, 0x02, 0x05, 0x0B, 0x1D }

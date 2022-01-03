@@ -169,6 +169,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             throw ExceptionUtilities.Unreachable;
         }
+
 #nullable disable
 
         internal static MethodSymbol FindExplicitlyImplementedMethod(

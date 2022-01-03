@@ -432,6 +432,7 @@ namespace System.Text.RegularExpressions.Symbolic
 
         public IEnumerator<(S, SymbolicRegexNode<S>?, SymbolicRegexNode<S>)> GetEnumerator() =>
             EnumeratePaths(_builder._solver.True).GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() =>
             EnumeratePaths(_builder._solver.True).GetEnumerator();
 

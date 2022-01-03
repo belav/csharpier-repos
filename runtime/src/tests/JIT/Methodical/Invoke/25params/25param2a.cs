@@ -2,18 +2,22 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal struct VT
 {
     public int m;
 }
+
 public class CL
 {
     public int n;
+
     public CL(int a)
     {
         n = a;
     }
 }
+
 internal class test
 {
     private static int f1(

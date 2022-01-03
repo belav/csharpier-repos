@@ -233,6 +233,7 @@ namespace Roslyn.Test.Utilities
         }
 
         private static MethodInfo s_peheaderSizeMethod;
+
         private static int PEHeaderSize(bool is32Bit)
         {
             if (s_peheaderSizeMethod == null)
@@ -251,6 +252,7 @@ namespace Roslyn.Test.Utilities
         }
 
         private static ConstructorInfo s_blobCtor;
+
         private static Blob MakeBlob(byte[] buffer, int offset, int size)
         {
             if (s_blobCtor == null)
@@ -268,6 +270,7 @@ namespace Roslyn.Test.Utilities
         }
 
         private static FieldInfo s_bufferField;
+
         private static byte[] GetBlobBuffer(Blob blob)
         {
             if (s_bufferField == null)
@@ -283,6 +286,7 @@ namespace Roslyn.Test.Utilities
         }
 
         private static MethodInfo s_getContentToSignMethod;
+
         private static IEnumerable<Blob> GetContentToSign(
             BlobBuilder peImage,
             int peHeadersSize,

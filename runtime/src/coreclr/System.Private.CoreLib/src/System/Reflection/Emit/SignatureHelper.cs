@@ -239,6 +239,7 @@ namespace System.Reflection.Emit
                 optionalParameterTypeCustomModifiers
             );
         }
+
         public static SignatureHelper GetPropertySigHelper(
             Module? mod,
             CallingConventions callingConvention,
@@ -477,6 +478,7 @@ namespace System.Reflection.Emit
         {
             AddOneArgTypeHelperWorker(clsArgument, false);
         }
+
         private void AddOneArgTypeHelperWorker(Type clsArgument, bool lastWasGenericInst)
         {
             if (clsArgument.IsGenericParameter)

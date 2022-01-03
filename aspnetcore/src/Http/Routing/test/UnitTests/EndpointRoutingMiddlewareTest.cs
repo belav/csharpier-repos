@@ -210,6 +210,7 @@ public class EndpointRoutingMiddlewareTest
         {
             _onNext = onNext;
         }
+
         public void OnCompleted() { }
 
         public void OnError(Exception error) { }

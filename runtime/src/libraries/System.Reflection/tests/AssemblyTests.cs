@@ -27,6 +27,7 @@ using Xunit;
 [assembly: TypeForwardedTo(typeof(string))]
 [assembly: TypeForwardedTo(typeof(TypeInForwardedAssembly))]
 
+
 namespace System.Reflection.Tests
 {
     public class AssemblyTests : FileCleanupTestBase
@@ -1183,6 +1184,7 @@ namespace System.Reflection.Tests
     }
 
     public class AssemblyGenericPublicClass<T> { }
+
     internal class AssemblyInternalClass { }
 
     public class AssemblyClassWithPrivateCtor

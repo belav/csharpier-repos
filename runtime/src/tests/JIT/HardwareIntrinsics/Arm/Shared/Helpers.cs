@@ -592,6 +592,7 @@ namespace JIT.HardwareIntrinsics.Arm
                     BitConverter.SingleToInt32Bits(op3)
                 )
             );
+
         public static double BitwiseSelect(double op1, double op2, double op3) =>
             BitConverter.Int64BitsToDouble(
                 BitwiseSelect(

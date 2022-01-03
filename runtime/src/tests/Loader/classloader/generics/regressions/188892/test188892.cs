@@ -7,7 +7,9 @@
 using System;
 
 class C2<T> { }
+
 class C1<T> : C2<C3> { }
+
 class C3 : C1<C3> { }
 
 class Test_test188892

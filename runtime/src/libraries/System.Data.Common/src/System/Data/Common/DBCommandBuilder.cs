@@ -290,10 +290,12 @@ namespace System.Data.Common
             {
                 return (_baseParameterNames[index]);
             }
+
             internal string? GetOriginalParameterName(int index)
             {
                 return (_originalParameterNames[index]);
             }
+
             internal string? GetNullParameterName(int index)
             {
                 return (_nullParameterNames[index]);
@@ -1356,6 +1358,7 @@ namespace System.Data.Common
                 return null;
             }
         }
+
         private string? GetOriginalParameterName(int index)
         {
             if (null != _parameterNames)
@@ -1367,6 +1370,7 @@ namespace System.Data.Common
                 return null;
             }
         }
+
         private string? GetNullParameterName(int index)
         {
             if (null != _parameterNames)

@@ -44,6 +44,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
             _undoManager = undoManager;
             _renameService = renameService;
         }
+
         public string DisplayName => EditorFeaturesResources.Extract_Method;
 
         public CommandState GetCommandState(ExtractMethodCommandArgs args)

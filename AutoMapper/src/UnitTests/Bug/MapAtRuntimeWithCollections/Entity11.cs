@@ -13,6 +13,7 @@ namespace OmmitedDatabaseModel3WithCollections
             this.Entities10 = new List<Entity10>();
             this.Entities8 = new List<Entity8>();
         }
+
         public ICollection<Entity10> Entities10 { get; set; }
         public ICollection<Entity8> Entities8 { get; set; }
         public Entity8 Entity8 { get; set; }

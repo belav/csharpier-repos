@@ -32,6 +32,7 @@ public static class MountHelper
         StringBuilder uniqueVolumeName,
         int uniqueNameBufferCapacity
     );
+
     // unique volume name must be "\\?\Volume{GUID}\"
     [DllImport(
         "kernel32.dll",
@@ -41,6 +42,7 @@ public static class MountHelper
         SetLastError = true
     )]
     private static extern bool SetVolumeMountPoint(string mountPoint, string uniqueVolumeName);
+
     [DllImport(
         "kernel32.dll",
         EntryPoint = "DeleteVolumeMountPointW",

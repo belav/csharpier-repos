@@ -766,6 +766,7 @@ namespace System.IO.Pipelines.Tests
             public ThrowAfterZeroByteReadStream(byte[] buffer) : base(buffer) { }
 
             private bool _throwOnNextCallToRead;
+
             public override async Task<int> ReadAsync(
                 byte[] buffer,
                 int offset,

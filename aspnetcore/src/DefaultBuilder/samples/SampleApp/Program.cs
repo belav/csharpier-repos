@@ -116,6 +116,7 @@ public class Program
             Console.ReadKey();
         }
     }
+
     private static void DirectWebHost(string[] args)
     {
         // Using defaults with a Startup class

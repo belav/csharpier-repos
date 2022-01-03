@@ -16,6 +16,7 @@ internal class SaveTempDataFilter : IResourceFilter, IResultFilter
 {
     private static readonly Func<object, Task> OnStartingCallback = (state) =>
         OnStarting((HttpContext)state);
+
     // Internal for unit testing
     internal static readonly object SaveTempDataFilterContextKey = new object();
 

@@ -93,6 +93,7 @@ namespace Microsoft.Extensions.Hosting.WindowsServices.Internal
             internal int th32ParentProcessID;
             internal int pcPriClassBase;
             internal int dwFlags;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_PATH)]
             internal string szExeFile;
         }

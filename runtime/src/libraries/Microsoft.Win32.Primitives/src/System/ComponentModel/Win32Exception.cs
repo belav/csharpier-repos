@@ -29,6 +29,7 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class with the specified error.
         /// </summary>
         public Win32Exception(int error) : this(error, GetErrorMessage(error)) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class with the specified error and the
         /// specified detailed description.

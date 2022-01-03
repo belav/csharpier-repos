@@ -2,11 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal unsafe class testout1
 {
     public struct VT_0
     {
         public double[,] arr2d_0;
+
         public VT_0(int i)
         {
             arr2d_0 = new double[3, 6];

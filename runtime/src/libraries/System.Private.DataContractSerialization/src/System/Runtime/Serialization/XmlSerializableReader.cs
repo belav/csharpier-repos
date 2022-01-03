@@ -191,62 +191,77 @@ namespace System.Runtime.Serialization
         {
             return InnerReader.GetAttribute(name);
         }
+
         public override string? GetAttribute(string name, string? namespaceURI)
         {
             return InnerReader.GetAttribute(name, namespaceURI);
         }
+
         public override string GetAttribute(int i)
         {
             return InnerReader.GetAttribute(i);
         }
+
         public override bool MoveToAttribute(string name)
         {
             return InnerReader.MoveToAttribute(name);
         }
+
         public override bool MoveToAttribute(string name, string? ns)
         {
             return InnerReader.MoveToAttribute(name, ns);
         }
+
         public override void MoveToAttribute(int i)
         {
             InnerReader.MoveToAttribute(i);
         }
+
         public override bool MoveToFirstAttribute()
         {
             return InnerReader.MoveToFirstAttribute();
         }
+
         public override bool MoveToNextAttribute()
         {
             return InnerReader.MoveToNextAttribute();
         }
+
         public override bool MoveToElement()
         {
             return InnerReader.MoveToElement();
         }
+
         public override string? LookupNamespace(string prefix)
         {
             return InnerReader.LookupNamespace(prefix);
         }
+
         public override bool ReadAttributeValue()
         {
             return InnerReader.ReadAttributeValue();
         }
+
         public override void ResolveEntity()
         {
             InnerReader.ResolveEntity();
         }
+
         public override bool IsStartElement()
         {
             return InnerReader.IsStartElement();
         }
+
         public override bool IsStartElement(string name)
         {
             return InnerReader.IsStartElement(name);
         }
+
         public override bool IsStartElement(string localname, string ns)
         {
             return InnerReader.IsStartElement(localname, ns);
         }
+
         public override XmlNodeType MoveToContent()
         {
             return InnerReader.MoveToContent();
@@ -256,30 +271,37 @@ namespace System.Runtime.Serialization
         {
             return InnerReader.ReadContentAsObject();
         }
+
         public override bool ReadContentAsBoolean()
         {
             return InnerReader.ReadContentAsBoolean();
         }
+
         public override DateTime ReadContentAsDateTime()
         {
             return InnerReader.ReadContentAsDateTimeOffset().DateTime;
         }
+
         public override double ReadContentAsDouble()
         {
             return InnerReader.ReadContentAsDouble();
         }
+
         public override int ReadContentAsInt()
         {
             return InnerReader.ReadContentAsInt();
         }
+
         public override long ReadContentAsLong()
         {
             return InnerReader.ReadContentAsLong();
         }
+
         public override string ReadContentAsString()
         {
             return InnerReader.ReadContentAsString();
         }
+
         public override object ReadContentAs(
             Type returnType,
             IXmlNamespaceResolver? namespaceResolver
@@ -287,18 +309,22 @@ namespace System.Runtime.Serialization
         {
             return InnerReader.ReadContentAs(returnType, namespaceResolver);
         }
+
         public override int ReadContentAsBase64(byte[] buffer, int index, int count)
         {
             return InnerReader.ReadContentAsBase64(buffer, index, count);
         }
+
         public override int ReadContentAsBinHex(byte[] buffer, int index, int count)
         {
             return InnerReader.ReadContentAsBinHex(buffer, index, count);
         }
+
         public override int ReadValueChunk(char[] buffer, int index, int count)
         {
             return InnerReader.ReadValueChunk(buffer, index, count);
         }
+
         // IXmlLineInfo members
         bool IXmlLineInfo.HasLineInfo()
         {

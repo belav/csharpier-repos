@@ -187,6 +187,7 @@ namespace System.Diagnostics
             /// Indicates diagnostics messages from DiagnosticSourceEventSource should be included.
             /// </summary>
             public const EventKeywords Messages = (EventKeywords)0x1;
+
             /// <summary>
             /// Indicates that all events from all diagnostic sources should be forwarded to the EventSource using the 'Event' event.
             /// </summary>
@@ -1819,11 +1820,13 @@ namespace System.Diagnostics
                                     typeof(Func<TObject, TProperty>)
                                 );
                         }
+
                         public override object? Fetch(object? obj)
                         {
                             Debug.Assert(obj is TObject);
                             return _propertyFetch((TObject)obj);
                         }
+
                         private readonly Func<TObject, TProperty> _propertyFetch;
                     }
 
@@ -1842,6 +1845,7 @@ namespace System.Diagnostics
                                     typeof(StructFunc<TStruct, TProperty>)
                                 );
                         }
+
                         public override object? Fetch(object? obj)
                         {
                             Debug.Assert(obj is TStruct);
@@ -1850,6 +1854,7 @@ namespace System.Diagnostics
                             TStruct structObj = (TStruct)obj;
                             return _propertyFetch(ref structObj);
                         }
+
                         private readonly StructFunc<TStruct, TProperty> _propertyFetch;
                     }
 
@@ -1859,6 +1864,7 @@ namespace System.Diagnostics
                     private sealed class CurrentActivityPropertyFetch : PropertyFetch
                     {
                         public CurrentActivityPropertyFetch() : base(null) { }
+
                         public override object? Fetch(object? obj)
                         {
                             return Activity.Current;
@@ -1871,6 +1877,7 @@ namespace System.Diagnostics
                     private sealed class EnumeratePropertyFetch<ElementType> : PropertyFetch
                     {
                         public EnumeratePropertyFetch(Type type) : base(type) { }
+
                         public override object? Fetch(object? obj)
                         {
                             Debug.Assert(obj is IEnumerable<ElementType>);
@@ -1905,7 +1912,9 @@ namespace System.Diagnostics
 
             #region private
             public void OnCompleted() { }
+
             public void OnError(Exception error) { }
+
             public void OnNext(T value)
             {
                 _callback(value);
@@ -1925,6 +1934,7 @@ namespace System.Diagnostics
                 Subscription = subscription;
                 Next = next;
             }
+
             public IDisposable Subscription;
             public Subscriptions? Next;
         }

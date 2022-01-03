@@ -7,6 +7,7 @@ public class Bridge
     public static int bridges_done;
 
     public object[] links = new object[10];
+
     ~Bridge()
     {
         ++bridges_done;

@@ -2227,6 +2227,7 @@ namespace System.Data.Common
             }
             return connection;
         }
+
         private static DataRowVersion GetParameterSourceVersion(
             StatementType statementType,
             IDataParameter parameter

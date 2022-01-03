@@ -53,12 +53,16 @@ unsafe class StdCallMemberFunctionNative
 
     [DllImport(nameof(StdCallMemberFunctionNative))]
     public static extern SizeF GetSizeFromManaged(C* c);
+
     [DllImport(nameof(StdCallMemberFunctionNative))]
     public static extern Width GetWidthFromManaged(C* c);
+
     [DllImport(nameof(StdCallMemberFunctionNative))]
     public static extern IntWrapper GetHeightAsIntFromManaged(C* c);
+
     [DllImport(nameof(StdCallMemberFunctionNative))]
     public static extern E GetEFromManaged(C* c);
+
     [DllImport(nameof(StdCallMemberFunctionNative))]
     public static extern CLong GetWidthAsLongFromManaged(C* c);
 }
@@ -129,6 +133,7 @@ unsafe class StdCallMemberFunctionTest
 
         Assert.Equal((nint)instance->width, result.Value);
     }
+
     private static void Test8ByteHFAUnmanagedCallersOnly()
     {
         StdCallMemberFunctionNative.C c = CreateCWithUnmanagedCallersOnlyVTable(2.0f, 3.0f);

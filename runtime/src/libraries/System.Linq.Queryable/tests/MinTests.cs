@@ -575,6 +575,7 @@ namespace System.Linq.Tests
             };
             Assert.Equal(-132.5, source.AsQueryable().Min(e => e.num));
         }
+
         [Fact]
         public void NullNullableDoubleSourceWithSelector()
         {

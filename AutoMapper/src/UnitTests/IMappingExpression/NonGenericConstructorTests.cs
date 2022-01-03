@@ -19,12 +19,14 @@
         public class Dest
         {
             public Dest() { }
+
             public Dest(int other)
             {
                 Other = other;
             }
 
             public int Value { get; set; }
+
             [IgnoreMap]
             public int Other { get; set; }
         }

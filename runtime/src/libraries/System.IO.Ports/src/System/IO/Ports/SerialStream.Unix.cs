@@ -16,6 +16,7 @@ namespace System.IO.Ports
     internal sealed partial class SerialStream : Stream
     {
         private const int TimeoutResolution = 30;
+
         // time [ms] loop has to be idle before it stops
         private const int IOLoopIdleTimeout = 2000;
         private bool _ioLoopFinished;

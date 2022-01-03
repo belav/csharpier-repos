@@ -55,6 +55,7 @@ namespace ILCompiler.DependencyAnalysisFramework
         {
             WriteEvent(1001);
         }
+
         [Event(1002, Level = EventLevel.Informational)]
         private void GraphProcessingStop()
         {
@@ -66,6 +67,7 @@ namespace ILCompiler.DependencyAnalysisFramework
         {
             WriteEvent(1003);
         }
+
         [Event(1004, Level = EventLevel.Informational)]
         private void DependencyAnalysisStop()
         {

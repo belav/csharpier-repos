@@ -100,10 +100,12 @@ internal class LoggingMultiplexedConnectionMiddleware
             get => _inner.ConnectionClosed;
             set => _inner.ConnectionClosed = value;
         }
+
         public override ValueTask DisposeAsync()
         {
             return _inner.DisposeAsync();
         }
+
         public override EndPoint? LocalEndPoint
         {
             get => _inner.LocalEndPoint;
@@ -139,6 +141,7 @@ internal class LoggingMultiplexedConnectionMiddleware
         {
             _inner.Abort();
         }
+
         public override void Abort(ConnectionAbortedException abortReason)
         {
             _inner.Abort(abortReason);

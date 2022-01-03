@@ -657,6 +657,7 @@ namespace System.Reflection.PortableExecutable
         // internal for testing
         internal static Blob GetPrefixBlob(Blob container, Blob blob) =>
             new Blob(container.Buffer, container.Start, blob.Start - container.Start);
+
         internal static Blob GetSuffixBlob(Blob container, Blob blob) =>
             new Blob(
                 container.Buffer,

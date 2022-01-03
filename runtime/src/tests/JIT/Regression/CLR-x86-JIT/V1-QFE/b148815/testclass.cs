@@ -21,6 +21,7 @@ namespace TestClass
             }
         }
     }
+
     public struct ExpenseValues
     {
         public double AnnualPaidOutsideFunds;

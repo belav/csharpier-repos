@@ -21,6 +21,7 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
             ) { }
+
         public EventWaitHandleAccessRule(
             string identity,
             System.Security.AccessControl.EventWaitHandleRights eventRights,
@@ -34,11 +35,13 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
             ) { }
+
         public System.Security.AccessControl.EventWaitHandleRights EventWaitHandleRights
         {
             get { throw null; }
         }
     }
+
     public sealed partial class EventWaitHandleAuditRule : System.Security.AccessControl.AuditRule
     {
         public EventWaitHandleAuditRule(
@@ -54,11 +57,13 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
             ) { }
+
         public System.Security.AccessControl.EventWaitHandleRights EventWaitHandleRights
         {
             get { throw null; }
         }
     }
+
     [System.FlagsAttribute]
     public enum EventWaitHandleRights
     {
@@ -70,11 +75,13 @@ namespace System.Security.AccessControl
         Synchronize = 1048576,
         FullControl = 2031619,
     }
+
     public sealed partial class EventWaitHandleSecurity
         : System.Security.AccessControl.NativeObjectSecurity
     {
         public EventWaitHandleSecurity()
             : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+
         public override System.Type AccessRightType
         {
             get { throw null; }
@@ -87,6 +94,7 @@ namespace System.Security.AccessControl
         {
             get { throw null; }
         }
+
         public override System.Security.AccessControl.AccessRule AccessRuleFactory(
             System.Security.Principal.IdentityReference identityReference,
             int accessMask,
@@ -98,8 +106,11 @@ namespace System.Security.AccessControl
         {
             throw null;
         }
+
         public void AddAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule rule) { }
+
         public void AddAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule rule) { }
+
         public override System.Security.AccessControl.AuditRule AuditRuleFactory(
             System.Security.Principal.IdentityReference identityReference,
             int accessMask,
@@ -111,32 +122,42 @@ namespace System.Security.AccessControl
         {
             throw null;
         }
+
         public bool RemoveAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule rule)
         {
             throw null;
         }
+
         public void RemoveAccessRuleAll(
             System.Security.AccessControl.EventWaitHandleAccessRule rule
         ) { }
+
         public void RemoveAccessRuleSpecific(
             System.Security.AccessControl.EventWaitHandleAccessRule rule
         ) { }
+
         public bool RemoveAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule rule)
         {
             throw null;
         }
+
         public void RemoveAuditRuleAll(
             System.Security.AccessControl.EventWaitHandleAuditRule rule
         ) { }
+
         public void RemoveAuditRuleSpecific(
             System.Security.AccessControl.EventWaitHandleAuditRule rule
         ) { }
+
         public void ResetAccessRule(
             System.Security.AccessControl.EventWaitHandleAccessRule rule
         ) { }
+
         public void SetAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule rule) { }
+
         public void SetAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule rule) { }
     }
+
     public sealed partial class MutexAccessRule : System.Security.AccessControl.AccessRule
     {
         public MutexAccessRule(
@@ -152,6 +173,7 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
             ) { }
+
         public MutexAccessRule(
             string identity,
             System.Security.AccessControl.MutexRights eventRights,
@@ -165,11 +187,13 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
             ) { }
+
         public System.Security.AccessControl.MutexRights MutexRights
         {
             get { throw null; }
         }
     }
+
     public sealed partial class MutexAuditRule : System.Security.AccessControl.AuditRule
     {
         public MutexAuditRule(
@@ -185,11 +209,13 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
             ) { }
+
         public System.Security.AccessControl.MutexRights MutexRights
         {
             get { throw null; }
         }
     }
+
     [System.FlagsAttribute]
     public enum MutexRights
     {
@@ -201,14 +227,17 @@ namespace System.Security.AccessControl
         Synchronize = 1048576,
         FullControl = 2031617,
     }
+
     public sealed partial class MutexSecurity : System.Security.AccessControl.NativeObjectSecurity
     {
         public MutexSecurity()
             : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+
         public MutexSecurity(
             string name,
             System.Security.AccessControl.AccessControlSections includeSections
         ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+
         public override System.Type AccessRightType
         {
             get { throw null; }
@@ -221,6 +250,7 @@ namespace System.Security.AccessControl
         {
             get { throw null; }
         }
+
         public override System.Security.AccessControl.AccessRule AccessRuleFactory(
             System.Security.Principal.IdentityReference identityReference,
             int accessMask,
@@ -232,8 +262,11 @@ namespace System.Security.AccessControl
         {
             throw null;
         }
+
         public void AddAccessRule(System.Security.AccessControl.MutexAccessRule rule) { }
+
         public void AddAuditRule(System.Security.AccessControl.MutexAuditRule rule) { }
+
         public override System.Security.AccessControl.AuditRule AuditRuleFactory(
             System.Security.Principal.IdentityReference identityReference,
             int accessMask,
@@ -245,22 +278,32 @@ namespace System.Security.AccessControl
         {
             throw null;
         }
+
         public bool RemoveAccessRule(System.Security.AccessControl.MutexAccessRule rule)
         {
             throw null;
         }
+
         public void RemoveAccessRuleAll(System.Security.AccessControl.MutexAccessRule rule) { }
+
         public void RemoveAccessRuleSpecific(System.Security.AccessControl.MutexAccessRule rule) { }
+
         public bool RemoveAuditRule(System.Security.AccessControl.MutexAuditRule rule)
         {
             throw null;
         }
+
         public void RemoveAuditRuleAll(System.Security.AccessControl.MutexAuditRule rule) { }
+
         public void RemoveAuditRuleSpecific(System.Security.AccessControl.MutexAuditRule rule) { }
+
         public void ResetAccessRule(System.Security.AccessControl.MutexAccessRule rule) { }
+
         public void SetAccessRule(System.Security.AccessControl.MutexAccessRule rule) { }
+
         public void SetAuditRule(System.Security.AccessControl.MutexAuditRule rule) { }
     }
+
     public sealed partial class SemaphoreAccessRule : System.Security.AccessControl.AccessRule
     {
         public SemaphoreAccessRule(
@@ -276,6 +319,7 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
             ) { }
+
         public SemaphoreAccessRule(
             string identity,
             System.Security.AccessControl.SemaphoreRights eventRights,
@@ -289,11 +333,13 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AccessControlType)
             ) { }
+
         public System.Security.AccessControl.SemaphoreRights SemaphoreRights
         {
             get { throw null; }
         }
     }
+
     public sealed partial class SemaphoreAuditRule : System.Security.AccessControl.AuditRule
     {
         public SemaphoreAuditRule(
@@ -309,11 +355,13 @@ namespace System.Security.AccessControl
                 default(System.Security.AccessControl.PropagationFlags),
                 default(System.Security.AccessControl.AuditFlags)
             ) { }
+
         public System.Security.AccessControl.SemaphoreRights SemaphoreRights
         {
             get { throw null; }
         }
     }
+
     [System.FlagsAttribute]
     public enum SemaphoreRights
     {
@@ -325,15 +373,18 @@ namespace System.Security.AccessControl
         Synchronize = 1048576,
         FullControl = 2031619,
     }
+
     public sealed partial class SemaphoreSecurity
         : System.Security.AccessControl.NativeObjectSecurity
     {
         public SemaphoreSecurity()
             : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+
         public SemaphoreSecurity(
             string name,
             System.Security.AccessControl.AccessControlSections includeSections
         ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+
         public override System.Type AccessRightType
         {
             get { throw null; }
@@ -346,6 +397,7 @@ namespace System.Security.AccessControl
         {
             get { throw null; }
         }
+
         public override System.Security.AccessControl.AccessRule AccessRuleFactory(
             System.Security.Principal.IdentityReference identityReference,
             int accessMask,
@@ -357,8 +409,11 @@ namespace System.Security.AccessControl
         {
             throw null;
         }
+
         public void AddAccessRule(System.Security.AccessControl.SemaphoreAccessRule rule) { }
+
         public void AddAuditRule(System.Security.AccessControl.SemaphoreAuditRule rule) { }
+
         public override System.Security.AccessControl.AuditRule AuditRuleFactory(
             System.Security.Principal.IdentityReference identityReference,
             int accessMask,
@@ -370,24 +425,33 @@ namespace System.Security.AccessControl
         {
             throw null;
         }
+
         public bool RemoveAccessRule(System.Security.AccessControl.SemaphoreAccessRule rule)
         {
             throw null;
         }
+
         public void RemoveAccessRuleAll(System.Security.AccessControl.SemaphoreAccessRule rule) { }
+
         public void RemoveAccessRuleSpecific(
             System.Security.AccessControl.SemaphoreAccessRule rule
         ) { }
+
         public bool RemoveAuditRule(System.Security.AccessControl.SemaphoreAuditRule rule)
         {
             throw null;
         }
+
         public void RemoveAuditRuleAll(System.Security.AccessControl.SemaphoreAuditRule rule) { }
+
         public void RemoveAuditRuleSpecific(
             System.Security.AccessControl.SemaphoreAuditRule rule
         ) { }
+
         public void ResetAccessRule(System.Security.AccessControl.SemaphoreAccessRule rule) { }
+
         public void SetAccessRule(System.Security.AccessControl.SemaphoreAccessRule rule) { }
+
         public void SetAuditRule(System.Security.AccessControl.SemaphoreAuditRule rule) { }
     }
 }

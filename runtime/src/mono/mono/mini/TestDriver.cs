@@ -12,6 +12,7 @@ public class CategoryAttribute : Attribute
 
     public string Category { get; set; }
 }
+
 public class TestDriverReporter
 {
     public int FailedTests { get; private set; }

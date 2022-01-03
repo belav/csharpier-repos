@@ -14,11 +14,13 @@ namespace System.Threading.Channels
     {
         /// <summary>Sentinel object used in a field to indicate the operation is available for use.</summary>
         protected static readonly Action<object?> s_availableSentinel = AvailableSentinel; // named method to help with debugging
+
         private static void AvailableSentinel(object? s) =>
             Debug.Fail($"{nameof(AsyncOperation)}.{nameof(AvailableSentinel)} invoked with {s}");
 
         /// <summary>Sentinel object used in a field to indicate the operation has completed</summary>
         protected static readonly Action<object?> s_completedSentinel = CompletedSentinel; // named method to help with debugging
+
         private static void CompletedSentinel(object? s) =>
             Debug.Fail($"{nameof(AsyncOperation)}.{nameof(CompletedSentinel)} invoked with {s}");
 
@@ -44,6 +46,7 @@ namespace System.Threading.Channels
     {
         /// <summary>Registration with a provided cancellation token.</summary>
         private readonly CancellationTokenRegistration _registration;
+
         /// <summary>true if this object is pooled and reused; otherwise, false.</summary>
         /// <remarks>
         /// If the operation is cancelable, then it can't be pooled.  And if it's poolable, there must never be race conditions to complete it,
@@ -51,15 +54,19 @@ namespace System.Threading.Channels
         /// and then we may end up trying to complete an object that's used by someone else.
         /// </remarks>
         private readonly bool _pooled;
+
         /// <summary>Whether continuations should be forced to run asynchronously.</summary>
         private readonly bool _runContinuationsAsynchronously;
 
         /// <summary>Only relevant to cancelable operations; 0 if the operation hasn't had completion reserved, 1 if it has.</summary>
         private volatile int _completionReserved;
+
         /// <summary>The result of the operation.</summary>
         private TResult? _result;
+
         /// <summary>Any error that occurred during the operation.</summary>
         private ExceptionDispatchInfo? _error;
+
         /// <summary>The continuation callback.</summary>
         /// <remarks>
         /// This may be the completion sentinel if the operation has already completed.
@@ -68,12 +75,16 @@ namespace System.Threading.Channels
         /// This may be another callback if the operation has had a callback hooked up with OnCompleted.
         /// </remarks>
         private Action<object?>? _continuation;
+
         /// <summary>State object to be passed to <see cref="_continuation"/>.</summary>
         private object? _continuationState;
+
         /// <summary>Scheduling context (a <see cref="SynchronizationContext"/> or <see cref="TaskScheduler"/>) to which to queue the continuation. May be null.</summary>
         private object? _schedulingContext;
+
         /// <summary>Execution context to use when invoking <see cref="_continuation"/>. May be null.</summary>
         private ExecutionContext? _executionContext;
+
         /// <summary>The token value associated with the current operation.</summary>
         /// <remarks>
         /// IValueTaskSource operations on this instance are only valid if the provided token matches this value,
@@ -112,10 +123,13 @@ namespace System.Threading.Channels
 
         /// <summary>Gets or sets the next operation in the linked list of operations.</summary>
         public AsyncOperation<TResult>? Next { get; set; }
+
         /// <summary>Gets the cancellation token associated with this operation.</summary>
         public CancellationToken CancellationToken { get; }
+
         /// <summary>Gets a <see cref="ValueTask"/> backed by this instance and its current token.</summary>
         public ValueTask ValueTask => new ValueTask(this, _currentId);
+
         /// <summary>Gets a <see cref="ValueTask{TResult}"/> backed by this instance and its current token.</summary>
         public ValueTask<TResult> ValueTaskOfT => new ValueTask<TResult>(this, _currentId);
 

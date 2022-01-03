@@ -148,6 +148,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     public class Test
     {
         private static int s_count = 0;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -320,6 +321,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         public class InnerTest1
         {
             public int field;
+
             public static explicit operator InnerTest2(InnerTest1 t1)
             {
                 var dy = new MemberClass<InnerTest2>();
@@ -363,6 +365,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         public class InnerTest1
         {
             public int field;
+
             public static implicit operator InnerTest2(InnerTest1 t1)
             {
                 var dy = new MemberClass<InnerTest2>();
@@ -406,6 +409,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     {
         private static MemberClass<MyClass> s_mc;
         private static dynamic s_dy;
+
         static Test()
         {
             s_mc = new MemberClass<MyClass>();

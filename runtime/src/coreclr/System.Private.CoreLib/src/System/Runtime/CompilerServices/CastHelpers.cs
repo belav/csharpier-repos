@@ -35,6 +35,7 @@ namespace System.Runtime.CompilerServices
             //
             internal int _version;
             internal nuint _source;
+
             // pointers have unused lower bits due to alignment, we use one for the result
             internal nuint _targetAndResult;
         };

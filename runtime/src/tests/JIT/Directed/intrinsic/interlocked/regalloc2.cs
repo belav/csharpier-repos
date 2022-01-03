@@ -5,6 +5,7 @@
 using System;
 using System.Threading;
 using System.Runtime.CompilerServices;
+
 public class IntrinsicTest
 {
     private static int s_counter;
@@ -19,6 +20,7 @@ public class IntrinsicTest
 
     private static long s_idmp = 1111;
     private static long s_idjunk = 0;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public int GetValue()
     {

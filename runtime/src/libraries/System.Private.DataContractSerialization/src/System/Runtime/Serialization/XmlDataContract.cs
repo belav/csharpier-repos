@@ -20,6 +20,7 @@ namespace System.Runtime.Serialization
     using System.Diagnostics.CodeAnalysis;
 
     internal delegate IXmlSerializable CreateXmlSerializableDelegate();
+
     internal sealed class XmlDataContract : DataContract
     {
         private readonly XmlDataContractCriticalHelper _helper;

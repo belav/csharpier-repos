@@ -1243,6 +1243,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             return node;
         }
+
 #nullable disable
 
         protected bool IsFeatureEnabled(MessageID feature)

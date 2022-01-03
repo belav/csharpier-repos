@@ -206,6 +206,7 @@ namespace System.Xml.Xsl.XsltOld
             | BindingFlags.Public
             | BindingFlags.Instance
             | BindingFlags.Static;
+
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2075:RequiresUnreferencedCode",
@@ -873,6 +874,7 @@ namespace System.Xml.Xsl.XsltOld
         {
             public FuncCurrent()
                 : base(0, 0, XPathResultType.NodeSet, Array.Empty<XPathResultType>()) { }
+
             public override object Invoke(
                 XsltContext xsltContext,
                 object[] args,
@@ -892,6 +894,7 @@ namespace System.Xml.Xsl.XsltOld
                     XPathResultType.String,
                     new XPathResultType[] { XPathResultType.String }
                 ) { }
+
             public override object Invoke(
                 XsltContext xsltContext,
                 object[] args,
@@ -911,6 +914,7 @@ namespace System.Xml.Xsl.XsltOld
                     XPathResultType.String,
                     new XPathResultType[] { XPathResultType.NodeSet }
                 ) { }
+
             public override object Invoke(
                 XsltContext xsltContext,
                 object[] args,
@@ -946,6 +950,7 @@ namespace System.Xml.Xsl.XsltOld
                     XPathResultType.String,
                     new XPathResultType[] { XPathResultType.String }
                 ) { }
+
             public override object Invoke(
                 XsltContext xsltContext,
                 object[] args,
@@ -966,6 +971,7 @@ namespace System.Xml.Xsl.XsltOld
                     XPathResultType.Boolean,
                     new XPathResultType[] { XPathResultType.String }
                 ) { }
+
             public override object Invoke(
                 XsltContext xsltContext,
                 object[] args,
@@ -986,6 +992,7 @@ namespace System.Xml.Xsl.XsltOld
                     XPathResultType.Boolean,
                     new XPathResultType[] { XPathResultType.String }
                 ) { }
+
             public override object Invoke(
                 XsltContext xsltContext,
                 object[] args,
@@ -1054,6 +1061,7 @@ namespace System.Xml.Xsl.XsltOld
                     XPathResultType.NodeSet,
                     new XPathResultType[] { XPathResultType.String, XPathResultType.Any }
                 ) { }
+
             public override object Invoke(
                 XsltContext xsltContext,
                 object[] args,
@@ -1158,6 +1166,7 @@ namespace System.Xml.Xsl.XsltOld
                         XPathResultType.String
                     }
                 ) { }
+
             public override object Invoke(
                 XsltContext xsltContext,
                 object[] args,
@@ -1180,6 +1189,7 @@ namespace System.Xml.Xsl.XsltOld
                     XPathResultType.NodeSet,
                     new XPathResultType[] { XPathResultType.Navigator }
                 ) { }
+
             public override object Invoke(
                 XsltContext xsltContext,
                 object[] args,

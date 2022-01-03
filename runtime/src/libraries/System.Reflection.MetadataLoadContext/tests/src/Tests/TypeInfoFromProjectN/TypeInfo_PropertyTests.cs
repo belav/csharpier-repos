@@ -542,12 +542,17 @@ namespace System.Reflection.Tests
         public PublicClass() { }
 
         public void PublicMethod() { }
+
         public void overRiddenMethod() { }
+
         public void overRiddenMethod(int i) { }
+
         public void overRiddenMethod(string s) { }
+
         public void overRiddenMethod(object o) { }
 
         public static void PublicStaticMethod() { }
+
         public class PublicNestedType { }
 
         public int PublicProperty
@@ -560,15 +565,23 @@ namespace System.Reflection.Tests
     }
 
     public sealed class sealedClass { }
+
     public abstract class abstractClass { }
+
     public interface ITest { }
+
     public class TypeInfoPropertyBase { }
+
     public class TypeInfoPropertyDerived : TypeInfoPropertyBase { }
+
     public class ImplClass : ITest { }
+
     public class TypeInfoPropertyGenericClass<T> { }
+
     public class ClassWithConstraints<T, U>
         where T : TypeInfoPropertyBase, ITest
         where U : class, new() { }
+
     public enum MYENUM
     {
         one = 1,

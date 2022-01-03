@@ -417,6 +417,7 @@ namespace System.DirectoryServices.AccountManagement
 
             return match.Success;
         }
+
         // returns true if specified WinNT property's value matches filter.Value
         private delegate bool MatcherDelegate(
             FilterBase filter,

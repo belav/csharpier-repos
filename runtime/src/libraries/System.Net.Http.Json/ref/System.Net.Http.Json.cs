@@ -22,6 +22,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<object?> GetFromJsonAsync(
             this System.Net.Http.HttpClient client,
             string? requestUri,
@@ -33,6 +34,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -46,6 +48,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -60,6 +63,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<object?> GetFromJsonAsync(
             this System.Net.Http.HttpClient client,
             System.Uri? requestUri,
@@ -71,6 +75,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -84,6 +89,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -97,6 +103,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<TValue?> GetFromJsonAsync<TValue>(
             this System.Net.Http.HttpClient client,
             string? requestUri,
@@ -107,6 +114,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -119,6 +127,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -132,6 +141,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<TValue?> GetFromJsonAsync<TValue>(
             this System.Net.Http.HttpClient client,
             System.Uri? requestUri,
@@ -142,6 +152,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -154,6 +165,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -168,6 +180,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostAsJsonAsync<TValue>(
             this System.Net.Http.HttpClient client,
             string? requestUri,
@@ -179,6 +192,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -191,6 +205,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -205,6 +220,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PostAsJsonAsync<TValue>(
             this System.Net.Http.HttpClient client,
             System.Uri? requestUri,
@@ -216,6 +232,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -228,6 +245,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -242,6 +260,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PutAsJsonAsync<TValue>(
             this System.Net.Http.HttpClient client,
             string? requestUri,
@@ -253,6 +272,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -265,6 +285,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -279,6 +300,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PutAsJsonAsync<TValue>(
             this System.Net.Http.HttpClient client,
             System.Uri? requestUri,
@@ -290,6 +312,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -302,6 +325,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -316,6 +340,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PatchAsJsonAsync<TValue>(
             this System.Net.Http.HttpClient client,
             string? requestUri,
@@ -327,6 +352,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -339,6 +365,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -353,6 +380,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> PatchAsJsonAsync<TValue>(
             this System.Net.Http.HttpClient client,
             System.Uri? requestUri,
@@ -364,6 +392,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -377,6 +406,7 @@ namespace System.Net.Http.Json
             throw null;
         }
     }
+
     public static partial class HttpContentJsonExtensions
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -392,6 +422,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<object?> ReadFromJsonAsync(
             this System.Net.Http.HttpContent content,
             System.Type type,
@@ -402,6 +433,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -414,6 +446,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<T?> ReadFromJsonAsync<T>(
             this System.Net.Http.HttpContent content,
             System.Text.Json.Serialization.Metadata.JsonTypeInfo<T> jsonTypeInfo,
@@ -424,9 +457,11 @@ namespace System.Net.Http.Json
             throw null;
         }
     }
+
     public sealed partial class JsonContent : System.Net.Http.HttpContent
     {
         internal JsonContent() { }
+
         public System.Type ObjectType
         {
             get { throw null; }
@@ -435,6 +470,7 @@ namespace System.Net.Http.Json
         {
             get { throw null; }
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -447,6 +483,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "JSON serialization and deserialization might require types that cannot be statically analyzed. Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved."
         )]
@@ -458,6 +495,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
             System.Net.TransportContext? context
@@ -465,6 +503,7 @@ namespace System.Net.Http.Json
         {
             throw null;
         }
+
         protected override bool TryComputeLength(out long length)
         {
             throw null;

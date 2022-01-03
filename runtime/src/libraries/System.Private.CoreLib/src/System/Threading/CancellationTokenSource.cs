@@ -27,23 +27,29 @@ namespace System.Threading
         /// <summary>A <see cref="CancellationTokenSource"/> that's already canceled.</summary>
         internal static readonly CancellationTokenSource s_canceledSource =
             new CancellationTokenSource() { _state = NotifyingCompleteState };
+
         /// <summary>A <see cref="CancellationTokenSource"/> that's never canceled.  This isn't enforced programmatically, only by usage.  Do not cancel!</summary>
         internal static readonly CancellationTokenSource s_neverCanceledSource =
             new CancellationTokenSource();
 
         /// <summary>Delegate used with <see cref="Timer"/> to trigger cancellation of a <see cref="CancellationTokenSource"/>.</summary>
         private static readonly TimerCallback s_timerCallback = TimerCallback;
+
         private static void TimerCallback(object? state) => // separated out into a named method to improve Timer diagnostics in a debugger
             ((CancellationTokenSource)state!).NotifyCancellation(throwOnFirstException: false); // skip ThrowIfDisposed() check in Cancel()
 
         /// <summary>The current state of the CancellationTokenSource.</summary>
         private volatile int _state;
+
         /// <summary>Whether this <see cref="CancellationTokenSource"/> has been disposed.</summary>
         private bool _disposed;
+
         /// <summary>TimerQueueTimer used by CancelAfter and Timer-related ctors. Used instead of Timer to avoid extra allocations and because the rooted behavior is desired.</summary>
         private volatile TimerQueueTimer? _timer;
+
         /// <summary><see cref="System.Threading.WaitHandle"/> lazily initialized and returned from <see cref="WaitHandle"/>.</summary>
         private volatile ManualResetEvent? _kernelEvent;
+
         /// <summary>Registration state for the source.</summary>
         /// <remarks>Lazily-initialized, also serving as the lock to protect its contained state.</remarks>
         private Registrations? _registrations;
@@ -972,14 +978,19 @@ namespace System.Threading
         {
             /// <summary>The associated source.</summary>
             public readonly CancellationTokenSource Source;
+
             /// <summary>Doubly-linked list of callbacks registered with the source. Callbacks are removed during unregistration and as they're invoked.</summary>
             public CallbackNode? Callbacks;
+
             /// <summary>Singly-linked list of free nodes that can be used for subsequent callback registrations.</summary>
             public CallbackNode? FreeNodeList;
+
             /// <summary>Every callback is assigned a unique, never-reused ID.  This defines the next available ID.</summary>
             public long NextAvailableId = 1; // avoid using 0, as that's the default long value and used to represent an empty node
+
             /// <summary>Tracks the running callback to assist ctr.Dispose() to wait for the target callback to complete.</summary>
             public long ExecutingCallbackId;
+
             /// <summary>The ID of the thread currently executing the main body of CTS.Cancel()</summary>
             /// <remarks>
             /// This helps us to know if a call to ctr.Dispose() is running 'within' a cancellation callback.
@@ -987,6 +998,7 @@ namespace System.Threading
             /// that are used to actually run the callbacks.
             /// </remarks>
             public volatile int ThreadIDExecutingCallbacks = -1;
+
             /// <summary>Spin lock that protects state in the instance.</summary>
             private int _lock;
 

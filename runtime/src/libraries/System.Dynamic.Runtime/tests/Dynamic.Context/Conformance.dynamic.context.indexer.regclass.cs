@@ -805,6 +805,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
     public class Test : MemberClass
     {
         public char Field;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1384,6 +1385,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
     {
         private MyClass[] _filed1;
         private MyEnum? _filed2;
+
         public Test()
         {
             MemberClass mc = new MemberClass();
@@ -1705,6 +1707,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
     public class Test
     {
         private static MyStruct?[] s_ms;
+
         static Test()
         {
             MemberClass mc = new MemberClass();

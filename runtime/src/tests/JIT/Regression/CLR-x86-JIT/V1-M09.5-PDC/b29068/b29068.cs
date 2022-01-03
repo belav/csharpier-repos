@@ -30,6 +30,7 @@ namespace Test
             GC.Collect();
             return new float[7];
         }
+
         private static int Main()
         {
             try

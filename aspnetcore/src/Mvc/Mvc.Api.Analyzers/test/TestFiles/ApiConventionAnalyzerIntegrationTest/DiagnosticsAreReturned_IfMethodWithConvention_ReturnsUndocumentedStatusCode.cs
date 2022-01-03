@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Api.Analyzers;
     typeof(DiagnosticsAreReturned_IfMethodWithConvention_ReturnsUndocumentedStatusCodeConvention)
 )]
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
     [ApiController]

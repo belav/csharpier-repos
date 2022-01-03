@@ -28,6 +28,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abs
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -71,6 +72,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abs
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -124,6 +126,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abs
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -171,6 +174,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abs
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -214,6 +218,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.abs
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -261,6 +266,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.vir
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -308,6 +314,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.vir
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -355,6 +362,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.vir
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -411,6 +419,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.vir
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -467,6 +476,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.vir
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -520,6 +530,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.vir
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -582,6 +593,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.sim
         public abstract class Base
         {
             protected static int result = 0;
+
             public static bool Bar(object o)
             {
                 result = 1;
@@ -589,6 +601,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.sim
             }
 
             public abstract int Foo(dynamic o);
+
             public virtual int Hoo(object o)
             {
                 return 0;
@@ -747,9 +760,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.classes.sim
         public delegate int MyDel07(int p1, int p2 = -1, int p3 = -2);
         public delegate int MyDel08(object p1, byte p2 = 101);
         public delegate int MyDel09(object p1, int p2 = 1, long p3 = 2);
+
         public class Test
         {
             private static int s_result = -1;
+
             public void MyMtd01(object p1)
             {
                 s_result = 1;

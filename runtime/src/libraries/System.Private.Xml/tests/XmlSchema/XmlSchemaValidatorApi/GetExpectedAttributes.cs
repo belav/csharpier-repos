@@ -13,6 +13,7 @@ namespace System.Xml.Tests
     public class TCGetExpectedAttributes : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
+
         public TCGetExpectedAttributes(ITestOutputHelper output) : base(output)
         {
             _output = output;

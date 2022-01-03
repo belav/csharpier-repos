@@ -32,6 +32,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public string JsonString { get; set; }
         }
+
         class Destination
         {
             public dynamic Json { get; set; }

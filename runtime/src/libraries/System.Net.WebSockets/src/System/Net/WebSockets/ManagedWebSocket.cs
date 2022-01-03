@@ -38,18 +38,21 @@ namespace System.Net.WebSockets
             WebSocketState.Open,
             WebSocketState.CloseReceived
         };
+
         /// <summary>Valid states to be in when calling ReceiveAsync.</summary>
         private static readonly WebSocketState[] s_validReceiveStates =
         {
             WebSocketState.Open,
             WebSocketState.CloseSent
         };
+
         /// <summary>Valid states to be in when calling CloseOutputAsync.</summary>
         private static readonly WebSocketState[] s_validCloseOutputStates =
         {
             WebSocketState.Open,
             WebSocketState.CloseReceived
         };
+
         /// <summary>Valid states to be in when calling CloseAsync.</summary>
         private static readonly WebSocketState[] s_validCloseStates =
         {
@@ -60,13 +63,16 @@ namespace System.Net.WebSockets
 
         /// <summary>The maximum size in bytes of a message frame header that includes mask bytes.</summary>
         internal const int MaxMessageHeaderLength = 14;
+
         /// <summary>The maximum size of a control message payload.</summary>
         private const int MaxControlPayloadLength = 125;
+
         /// <summary>Length of the mask XOR'd with the payload data.</summary>
         private const int MaskLength = 4;
 
         /// <summary>The stream used to communicate with the remote server.</summary>
         private readonly Stream _stream;
+
         /// <summary>
         /// true if this is the server-side of the connection; false if it's client.
         /// This impacts masking behavior: clients always mask payloads they send and
@@ -74,21 +80,27 @@ namespace System.Net.WebSockets
         /// unmasked payloads and expect to always receive masked payloads.
         /// </summary>
         private readonly bool _isServer;
+
         /// <summary>The agreed upon subprotocol with the server.</summary>
         private readonly string? _subprotocol;
+
         /// <summary>Timer used to send periodic pings to the server, at the interval specified</summary>
         private readonly Timer? _keepAliveTimer;
+
         /// <summary>Buffer used for reading data from the network.</summary>
         private readonly Memory<byte> _receiveBuffer;
+
         /// <summary>
         /// Tracks the state of the validity of the UTF8 encoding of text payloads.  Text may be split across fragments.
         /// </summary>
         private readonly Utf8MessageState _utf8TextState = new Utf8MessageState();
+
         /// <summary>
         /// Mutex used to ensure that calls to SendFrameAsync don't run concurrently.  We don't support multiple concurrent SendAsync calls,
         /// but this is needed to support SendAsync concurrently with keep-alive pings and CloseAsync.
         /// </summary>
         private readonly AsyncMutex _sendMutex = new AsyncMutex();
+
         /// <summary>
         /// Mutex used to ensure that calls to ReceiveAsyncPrivate don't run concurrently.  We don't support multiple concurrent ReceiveAsync calls,
         /// but this is needed to support SendAsync concurrently with keep-alive pings and CloseAsync.
@@ -102,14 +114,19 @@ namespace System.Net.WebSockets
 
         /// <summary>The current state of the web socket in the protocol.</summary>
         private WebSocketState _state = WebSocketState.Open;
+
         /// <summary>true if Dispose has been called; otherwise, false.</summary>
         private bool _disposed;
+
         /// <summary>Whether we've ever sent a close frame.</summary>
         private bool _sentCloseFrame;
+
         /// <summary>Whether we've ever received a close frame.</summary>
         private bool _receivedCloseFrame;
+
         /// <summary>The reason for the close, as sent by the server, or null if not yet closed.</summary>
         private WebSocketCloseStatus? _closeStatus;
+
         /// <summary>A description of the close reason as sent by the server, or null if not yet closed.</summary>
         private string? _closeStatusDescription;
 
@@ -127,16 +144,20 @@ namespace System.Net.WebSockets
             Fin = true,
             Processed = true
         };
+
         /// <summary>The offset of the next available byte in the _receiveBuffer.</summary>
         private int _receiveBufferOffset;
+
         /// <summary>The number of bytes available in the _receiveBuffer.</summary>
         private int _receiveBufferCount;
+
         /// <summary>
         /// When dealing with partially read fragments of binary/text messages, a mask previously received may still
         /// apply, and the first new byte received may not correspond to the 0th position in the mask.  This value is
         /// the next offset into the mask that should be applied.
         /// </summary>
         private int _receivedMaskOffsetOffset;
+
         /// <summary>
         /// Temporary send buffer.  This should be released back to the ArrayPool once it's
         /// no longer needed for the current send operation.  It is stored as an instance
@@ -144,11 +165,13 @@ namespace System.Net.WebSockets
         /// various async state machine objects.
         /// </summary>
         private byte[]? _sendBuffer;
+
         /// <summary>
         /// Whether the last SendAsync had endOfMessage==false. We need to track this so that we
         /// can send the subsequent message with a continuation opcode if the last message was a fragment.
         /// </summary>
         private bool _lastSendWasFragment;
+
         /// <summary>
         /// Whether the last SendAsync had <seealso cref="WebSocketMessageFlags.DisableCompression" /> flag set.
         /// </summary>

@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
     "Microsoft.EntityFrameworkCore.SqlServer.Design.Internal.SqlServerDesignTimeServices"
 )]
 
+
 namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
 {
     /// <summary>

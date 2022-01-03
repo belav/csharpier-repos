@@ -44,6 +44,7 @@ namespace System.Text.Json.Node.Tests
         internal static class EmployeesDatabase
         {
             private static int s_id = 0;
+
             public static KeyValuePair<string, JsonNode?> GetNextEmployee()
             {
                 var employee = new JsonObject()

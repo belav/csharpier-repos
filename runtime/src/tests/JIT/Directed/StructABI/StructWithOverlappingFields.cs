@@ -14,16 +14,22 @@ namespace Opt_Error
     {
         [FieldOffset(0)]
         public int val;
+
         [FieldOffset(0)]
         public uint uval;
+
         [FieldOffset(0)]
         public float fval;
+
         [FieldOffset(0)]
         public byte b0;
+
         [FieldOffset(1)]
         public byte b1;
+
         [FieldOffset(2)]
         public byte b2;
+
         [FieldOffset(3)]
         public byte b3;
 
@@ -38,16 +44,22 @@ namespace Opt_Error
     {
         [FieldOffset(0)]
         public int val;
+
         [FieldOffset(0)]
         public uint uval;
+
         [FieldOffset(0)]
         public float fval;
+
         [FieldOffset(0)]
         public byte b0;
+
         [FieldOffset(1)]
         public byte b1;
+
         [FieldOffset(2)]
         public byte b2;
+
         [FieldOffset(3)]
         public byte b3;
 

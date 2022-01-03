@@ -736,6 +736,7 @@ namespace System.Data
                     : _currentDataRow.ItemArray.Length
             );
         }
+
         public override bool IsDBNull(int ordinal)
         {
             ValidateState(nameof(IsDBNull));

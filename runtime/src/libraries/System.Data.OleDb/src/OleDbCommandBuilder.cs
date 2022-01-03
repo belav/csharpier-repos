@@ -36,6 +36,7 @@ namespace System.Data.OleDb
         {
             return (OleDbCommand)base.GetInsertCommand();
         }
+
         public new OleDbCommand GetInsertCommand(bool useColumnsForParameterNames)
         {
             return (OleDbCommand)base.GetInsertCommand(useColumnsForParameterNames);
@@ -45,6 +46,7 @@ namespace System.Data.OleDb
         {
             return (OleDbCommand)base.GetUpdateCommand();
         }
+
         public new OleDbCommand GetUpdateCommand(bool useColumnsForParameterNames)
         {
             return (OleDbCommand)base.GetUpdateCommand(useColumnsForParameterNames);
@@ -54,6 +56,7 @@ namespace System.Data.OleDb
         {
             return (OleDbCommand)base.GetDeleteCommand();
         }
+
         public new OleDbCommand GetDeleteCommand(bool useColumnsForParameterNames)
         {
             return (OleDbCommand)base.GetDeleteCommand(useColumnsForParameterNames);
@@ -64,6 +67,7 @@ namespace System.Data.OleDb
             return "p"
                 + parameterOrdinal.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
+
         protected override string GetParameterName(string parameterName)
         {
             return parameterName;
@@ -416,6 +420,7 @@ namespace System.Data.OleDb
                 null /* use DataAdapter.SelectCommand.Connection if available */
             );
         }
+
         public string QuoteIdentifier(string unquotedIdentifier, OleDbConnection? connection)
         {
             ADP.CheckArgumentNull(unquotedIdentifier, "unquotedIdentifier");

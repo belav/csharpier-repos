@@ -1172,6 +1172,7 @@ namespace Microsoft.CodeAnalysis.Collections
         private struct Entry
         {
             public uint _hashCode;
+
             /// <summary>
             /// 0-based index of next entry in chain: -1 means end of chain
             /// also encodes whether this entry _itself_ is part of the free list by changing sign and subtracting 3,

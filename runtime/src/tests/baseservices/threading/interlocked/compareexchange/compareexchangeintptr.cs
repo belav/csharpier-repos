@@ -58,6 +58,7 @@ namespace Exchange
         {
             signal.Set();
         }
+
         public bool Success
         {
             get
@@ -75,6 +76,7 @@ namespace Exchange
                 return (accessCount == threadCount) && (mValue.ToInt32() == threadCount);
             }
         }
+
         public void ChangeValue()
         {
             IntPtr initialValue,

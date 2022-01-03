@@ -1812,6 +1812,7 @@ public static partial class XmlSerializerTests
             && grouplists.Contains("GroupBase");
         Assert.True(b);
     }
+
     private static Stream GetStreamFromString(string s)
     {
         MemoryStream stream = new MemoryStream();
@@ -2506,6 +2507,7 @@ public static partial class XmlSerializerTests
     }
 
     private static readonly string s_defaultNs = "http://tempuri.org/";
+
     private static T RoundTripWithXmlMembersMapping<T>(
         object requestBodyValue,
         string memberName,

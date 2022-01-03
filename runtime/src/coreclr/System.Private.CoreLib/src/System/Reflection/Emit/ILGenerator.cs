@@ -182,6 +182,7 @@ namespace System.Reflection.Emit
                 optionalParameterTypes
             );
         }
+
         internal virtual SignatureHelper GetMemberRefSignature(
             CallingConventions call,
             Type? returnType,

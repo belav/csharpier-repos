@@ -12,6 +12,7 @@ namespace System.Reflection
             CustomAttributeTypedArgument left,
             CustomAttributeTypedArgument right
         ) => left.Equals(right);
+
         public static bool operator !=(
             CustomAttributeTypedArgument left,
             CustomAttributeTypedArgument right
@@ -92,6 +93,7 @@ namespace System.Reflection
         }
 
         public override int GetHashCode() => base.GetHashCode();
+
         public override bool Equals(object? obj) => obj == (object)this;
 
         public Type ArgumentType => _argumentType;

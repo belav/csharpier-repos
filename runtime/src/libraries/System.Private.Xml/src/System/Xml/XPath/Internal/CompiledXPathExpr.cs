@@ -132,11 +132,13 @@ namespace MS.Internal.Xml.XPath
             {
                 _nsResolver = nsResolver;
             }
+
             //----- Namespace support -----
             public override string DefaultNamespace
             {
                 get { return string.Empty; }
             }
+
             public override string LookupNamespace(string prefix)
             {
                 Debug.Assert(prefix != null);
@@ -151,11 +153,13 @@ namespace MS.Internal.Xml.XPath
                 }
                 return ns;
             }
+
             //----- XsltContext support -----
             public override IXsltContextVariable ResolveVariable(string prefix, string name)
             {
                 throw XPathException.Create(SR.Xp_UndefinedXsltContext);
             }
+
             public override IXsltContextFunction ResolveFunction(
                 string prefix,
                 string name,
@@ -164,14 +168,17 @@ namespace MS.Internal.Xml.XPath
             {
                 throw XPathException.Create(SR.Xp_UndefinedXsltContext);
             }
+
             public override bool Whitespace
             {
                 get { return false; }
             }
+
             public override bool PreserveWhitespace(XPathNavigator node)
             {
                 return false;
             }
+
             public override int CompareDocument(string baseUri, string nextbaseUri)
             {
                 return string.CompareOrdinal(baseUri, nextbaseUri);

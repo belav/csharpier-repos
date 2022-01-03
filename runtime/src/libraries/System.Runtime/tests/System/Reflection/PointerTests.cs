@@ -11,6 +11,7 @@ namespace System.Reflection.Tests
     {
         public int* field;
         public char* Property { get; set; }
+
         public void Method(byte* ptr, int expected)
         {
             Assert.Equal(expected, unchecked((int)ptr));

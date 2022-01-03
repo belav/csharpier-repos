@@ -68,6 +68,7 @@ namespace System.Xml.Xsl.Runtime
         private string _namespaceUri; // Extension object identifier
         private string _name; // Name of this method
         private int _numArgs; // Argument count
+
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicMethods
                 | DynamicallyAccessedMemberTypes.NonPublicMethods

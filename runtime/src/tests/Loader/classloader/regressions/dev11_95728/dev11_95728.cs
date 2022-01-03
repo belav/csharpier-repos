@@ -19,6 +19,7 @@ namespace StaticFieldBug
         {
             StubClass<T>.StaticField = value;
         }
+
         public static T StaticField = default(T);
         public static T StaticProperty
         {
@@ -35,6 +36,7 @@ namespace StaticFieldBug
             Console.WriteLine("PASS (we didn't crash)!");
             return 100;
         }
+
         public static void Foo<T>(T value)
         {
             Expression<Func<int, T>> lambda;

@@ -289,8 +289,10 @@ namespace System.Reflection.Tests
 
         public void PublicVoidMethod1() =>
             AddEventHandler_RemoveEventHandler_Test_TrackingVariable += 1;
+
         protected internal void ProtectedInternalVoidMethod() =>
             AddEventHandler_RemoveEventHandler_Test_TrackingVariable += 2;
+
         public void PublicVoidMethod2() =>
             AddEventHandler_RemoveEventHandler_Test_TrackingVariable += 3;
     }

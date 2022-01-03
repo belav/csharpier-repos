@@ -750,9 +750,13 @@ namespace System.Net.Http
         private sealed class NopHeadersHandler : IHttpHeadersHandler
         {
             public static readonly NopHeadersHandler Instance = new NopHeadersHandler();
+
             void IHttpHeadersHandler.OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value) { }
+
             void IHttpHeadersHandler.OnHeadersComplete(bool endStream) { }
+
             void IHttpHeadersHandler.OnStaticIndexedHeader(int index) { }
+
             void IHttpHeadersHandler.OnStaticIndexedHeader(int index, ReadOnlySpan<byte> value) { }
         }
 

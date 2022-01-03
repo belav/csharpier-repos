@@ -2224,18 +2224,22 @@ namespace System.Xml
         {
             _nav = nav.Clone();
         }
+
         internal DocumentXPathNodeIterator_Empty(DocumentXPathNodeIterator_Empty other)
         {
             _nav = other._nav.Clone();
         }
+
         public override XPathNodeIterator Clone()
         {
             return new DocumentXPathNodeIterator_Empty(this);
         }
+
         public override bool MoveNext()
         {
             return false;
         }
+
         public override XPathNavigator Current
         {
             get { return _nav; }
@@ -2263,6 +2267,7 @@ namespace System.Xml
             _level = 0;
             _position = 0;
         }
+
         internal DocumentXPathNodeIterator_ElemDescendants(
             DocumentXPathNodeIterator_ElemDescendants other
         )
@@ -2334,6 +2339,7 @@ namespace System.Xml
         {
             Debug.Assert(((XmlNode)nav.UnderlyingObject).NodeType != XmlNodeType.Attribute);
         }
+
         internal DocumentXPathNodeIterator_AllElemChildren(
             DocumentXPathNodeIterator_AllElemChildren other
         ) : base(other) { }
@@ -2349,12 +2355,14 @@ namespace System.Xml
             return (node.NodeType == XmlNodeType.Element);
         }
     }
+
     // Iterate over all element children irrespective of the localName and namespace, include the self node when testing for localName/ns
     internal sealed class DocumentXPathNodeIterator_AllElemChildren_AndSelf
         : DocumentXPathNodeIterator_AllElemChildren
     {
         internal DocumentXPathNodeIterator_AllElemChildren_AndSelf(DocumentXPathNavigator nav)
             : base(nav) { }
+
         internal DocumentXPathNodeIterator_AllElemChildren_AndSelf(
             DocumentXPathNodeIterator_AllElemChildren_AndSelf other
         ) : base(other) { }
@@ -2379,6 +2387,7 @@ namespace System.Xml
             return base.MoveNext();
         }
     }
+
     // Iterate over all element children that have a given namespace but irrespective of the localName
     internal class DocumentXPathNodeIterator_ElemChildren_NoLocalName
         : DocumentXPathNodeIterator_ElemDescendants
@@ -2394,12 +2403,14 @@ namespace System.Xml
             Debug.Assert(Ref.Equal(nav.NameTable.Get(nsAtom), nsAtom));
             _nsAtom = nsAtom;
         }
+
         internal DocumentXPathNodeIterator_ElemChildren_NoLocalName(
             DocumentXPathNodeIterator_ElemChildren_NoLocalName other
         ) : base(other)
         {
             _nsAtom = other._nsAtom;
         }
+
         public override XPathNodeIterator Clone()
         {
             return new DocumentXPathNodeIterator_ElemChildren_NoLocalName(this);
@@ -2412,6 +2423,7 @@ namespace System.Xml
             return Ref.Equal(node.NamespaceURI, _nsAtom);
         }
     }
+
     // Iterate over all element children that have a given namespace but irrespective of the localName, include self node when checking for ns
     internal sealed class DocumentXPathNodeIterator_ElemChildren_AndSelf_NoLocalName
         : DocumentXPathNodeIterator_ElemChildren_NoLocalName
@@ -2420,6 +2432,7 @@ namespace System.Xml
             DocumentXPathNavigator nav,
             string nsAtom
         ) : base(nav, nsAtom) { }
+
         internal DocumentXPathNodeIterator_ElemChildren_AndSelf_NoLocalName(
             DocumentXPathNodeIterator_ElemChildren_AndSelf_NoLocalName other
         ) : base(other) { }
@@ -2444,6 +2457,7 @@ namespace System.Xml
             return base.MoveNext();
         }
     }
+
     // Iterate over all element children that have a given name and namespace
     internal class DocumentXPathNodeIterator_ElemChildren
         : DocumentXPathNodeIterator_ElemDescendants
@@ -2486,6 +2500,7 @@ namespace System.Xml
             return Ref.Equal(node.LocalName, localNameAtom) && Ref.Equal(node.NamespaceURI, nsAtom);
         }
     }
+
     // Iterate over all elem children and itself and check for the given localName (including the magic value "") and namespace
     internal sealed class DocumentXPathNodeIterator_ElemChildren_AndSelf
         : DocumentXPathNodeIterator_ElemChildren
@@ -2498,6 +2513,7 @@ namespace System.Xml
         {
             Debug.Assert(localNameAtom.Length > 0); // Use DocumentXPathNodeIterator_ElemChildren_AndSelf_NoLocalName if localName == String.Empty
         }
+
         internal DocumentXPathNodeIterator_ElemChildren_AndSelf(
             DocumentXPathNodeIterator_ElemChildren_AndSelf other
         ) : base(other) { }

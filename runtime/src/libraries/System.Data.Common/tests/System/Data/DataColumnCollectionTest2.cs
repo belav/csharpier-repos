@@ -228,6 +228,7 @@ namespace System.Data.Tests
             Assert.False(dt.Columns.CanRemove(dt.Columns[0]));
             Assert.True(dt.Columns.CanRemove(dt.Columns[1]));
         }
+
         [Fact]
         public void TestCanRemove_ForigenConstraint()
         {
@@ -240,6 +241,7 @@ namespace System.Data.Tests
                 ds.Tables["parent"].Columns.CanRemove(ds.Tables["child"].Columns["parentId"])
             );
         }
+
         [Fact]
         public void TestCanRemove_ParentRelations()
         {
@@ -318,6 +320,7 @@ namespace System.Data.Tests
         }
 
         private object _change_element;
+
         private void Columns_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             _counter++;

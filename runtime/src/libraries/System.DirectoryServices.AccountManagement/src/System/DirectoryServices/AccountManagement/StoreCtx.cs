@@ -13,6 +13,7 @@ namespace System.DirectoryServices.AccountManagement
     {
         ChangePassword
     }
+
     internal abstract class StoreCtx : IDisposable
     {
         //
@@ -82,6 +83,7 @@ namespace System.DirectoryServices.AccountManagement
 
         // Loads the store values from p.UnderlyingObject into p, performing schema mapping as needed.
         internal abstract void Load(Principal p);
+
         // Loads only the psecified property into the principal object.  The object should have already been persisted or searched for this to happen.
         internal abstract void Load(Principal p, string principalPropertyName);
 

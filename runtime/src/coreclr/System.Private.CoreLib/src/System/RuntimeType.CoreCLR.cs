@@ -210,6 +210,7 @@ namespace System
                 // MemberInfo caches
                 private CerHashtable<string, T[]?> m_csMemberInfos;
                 private CerHashtable<string, T[]?> m_cisMemberInfos;
+
                 // List of MemberInfos given out. When m_cacheComplete is false, it may have null entries at the end to avoid
                 // reallocating the list every time a new entry is added.
                 private T[]? m_allMembers;

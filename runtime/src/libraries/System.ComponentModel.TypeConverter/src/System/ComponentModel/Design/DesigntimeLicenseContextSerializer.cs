@@ -77,6 +77,7 @@ namespace System.ComponentModel.Design
             private Stream _stream;
             private bool _readFirstByte;
             internal byte _firstByte;
+
             public StreamWrapper(Stream stream)
             {
                 _stream = stream;

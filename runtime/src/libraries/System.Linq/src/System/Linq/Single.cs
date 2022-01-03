@@ -18,6 +18,7 @@ namespace System.Linq
 
             return single!;
         }
+
         public static TSource Single<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate

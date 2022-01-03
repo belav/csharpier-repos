@@ -1011,6 +1011,7 @@ namespace System.Data.Odbc
             _cmdState = ConnectionState.Executing;
         }
     }
+
     internal sealed class CMDWrapper
     {
         private OdbcStatementHandle? _stmt; // hStmt
@@ -1019,6 +1020,7 @@ namespace System.Data.Odbc
         internal OdbcDescriptorHandle? _hdesc; // hDesc
 
         internal CNativeBuffer? _nativeParameterBuffer; // Native memory for internal memory management
+
         // (Performance optimization)
 
         internal CNativeBuffer? _dataReaderBuf; // Reusable DataReader buffer
@@ -1103,6 +1105,7 @@ namespace System.Data.Odbc
                 handle.Dispose();
             }
         }
+
         internal void DisposeStatementHandle()
         {
             DisposeKeyInfoStatementHandle();

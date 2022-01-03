@@ -999,16 +999,19 @@ namespace System.Net.Http.Functional.Tests
             public bool ProxyUsed;
 
             public void Dispose() => Disposed = true;
+
             public Uri GetProxy(Uri destination)
             {
                 ProxyUsed = true;
                 return null;
             }
+
             public bool IsBypassed(Uri host)
             {
                 ProxyUsed = true;
                 return true;
             }
+
             public ICredentials Credentials
             {
                 get => null;

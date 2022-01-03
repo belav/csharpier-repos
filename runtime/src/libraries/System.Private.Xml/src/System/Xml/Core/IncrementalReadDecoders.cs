@@ -32,15 +32,19 @@ namespace System.Xml
         {
             get { return false; }
         }
+
         internal override void SetNextOutputBuffer(Array array, int offset, int len) { }
+
         internal override int Decode(char[] chars, int startPos, int len)
         {
             return len;
         }
+
         internal override int Decode(string str, int startPos, int len)
         {
             return len;
         }
+
         internal override void Reset() { }
     }
 

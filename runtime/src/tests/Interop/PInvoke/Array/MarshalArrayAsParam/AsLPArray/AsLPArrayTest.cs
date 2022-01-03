@@ -16,6 +16,7 @@ public class ArrayMarshal
         public long l;
         public string str;
     }
+
     public struct S2
     {
         public int i32;
@@ -488,6 +489,7 @@ public class ArrayMarshal
 
         return array;
     }
+
     private static void TestMarshalByVal_NoAttributes()
     {
         Console.WriteLine("ByVal marshaling CLR array as c-style-array no attributes");
@@ -806,6 +808,7 @@ public class ArrayMarshal
         }
         return arrS2;
     }
+
     public static void PrintS2arr(string name, S2[] arrS2)
     {
         for (int i = 0; i < arrS2.Length; i++)
@@ -824,6 +827,7 @@ public class ArrayMarshal
             Console.WriteLine("{0}[{1}].d = {2}", name, i, arrS2[i].d);
         }
     }
+
     public static bool IsCorrect(S2[] actual, S2[] expected)
     {
         if (actual.Length != expected.Length)

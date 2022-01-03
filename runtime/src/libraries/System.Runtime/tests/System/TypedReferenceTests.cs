@@ -50,6 +50,7 @@ namespace System.Tests
         class ClassWithReadOnlyField
         {
             public readonly OneStruct Value;
+
             public ClassWithReadOnlyField(OneStruct value) => Value = value;
         }
 

@@ -228,6 +228,7 @@ namespace Microsoft.EntityFrameworkCore
             public int Id { get; private set; }
 
             private List<Post24133> _posts = new();
+
             public static Blog24133 Create(IEnumerable<Post24133> posts)
             {
                 return new Blog24133 { _posts = posts.ToList() };

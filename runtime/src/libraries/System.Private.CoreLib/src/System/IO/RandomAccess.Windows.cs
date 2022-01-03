@@ -1123,12 +1123,14 @@ namespace System.IO
         private readonly struct MemoryHandler : IMemoryHandler<Memory<byte>>
         {
             public int GetLength(in Memory<byte> memory) => memory.Length;
+
             public MemoryHandle Pin(in Memory<byte> memory) => memory.Pin();
         }
 
         private readonly struct ReadOnlyMemoryHandler : IMemoryHandler<ReadOnlyMemory<byte>>
         {
             public int GetLength(in ReadOnlyMemory<byte> memory) => memory.Length;
+
             public MemoryHandle Pin(in ReadOnlyMemory<byte> memory) => memory.Pin();
         }
     }

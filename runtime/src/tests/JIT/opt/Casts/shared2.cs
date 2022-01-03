@@ -5,10 +5,15 @@ using System;
 using System.Runtime.CompilerServices;
 
 interface IBar { }
+
 interface IFoo<T> { }
+
 class C : IBar { }
+
 class C<T> : IFoo<T> { }
+
 struct S { }
+
 struct SBar : IBar { }
 
 // More tests for shared types passing through compareTypesForCast

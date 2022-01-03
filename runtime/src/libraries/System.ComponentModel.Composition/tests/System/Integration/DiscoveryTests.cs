@@ -336,6 +336,7 @@ namespace Tests.Integration
             {
                 return "SomeWhere";
             }
+
             public override int Version
             {
                 get { return 1; }
@@ -639,6 +640,7 @@ namespace Tests.Integration
         public class Addin1 : IAddin
         {
             public void LoadAddin(object application) { }
+
             public void Shutdown() { }
         }
 
@@ -646,6 +648,7 @@ namespace Tests.Integration
         public class Addin2 : IAddin
         {
             public void LoadAddin(object application) { }
+
             public void Shutdown() { }
         }
 
@@ -653,6 +656,7 @@ namespace Tests.Integration
         public class Addin3 : IAddin
         {
             public void LoadAddin(object application) { }
+
             public void Shutdown() { }
         }
 

@@ -23,14 +23,18 @@ namespace System.ComponentModel.Composition.Registration.Tests
         private class FooImplWithConstructors : IFoo
         {
             public FooImplWithConstructors() { }
+
             public FooImplWithConstructors(IEnumerable<IFoo> ids) { }
+
             public FooImplWithConstructors(int id, string name) { }
         }
 
         private class FooImplWithConstructors2 : IFoo
         {
             public FooImplWithConstructors2() { }
+
             public FooImplWithConstructors2(IEnumerable<IFoo> ids) { }
+
             public FooImplWithConstructors2(int id, string name) { }
         }
 

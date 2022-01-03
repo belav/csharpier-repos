@@ -1764,6 +1764,7 @@ namespace System.Speech.Internal.SrgsParser
             reader.Read(); // Move to next sibling
             return sb.ToString();
         }
+
         private static void ParsePropertyTag(string sTag, out string name, out object value)
         {
             // Default value

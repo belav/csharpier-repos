@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 
 [assembly: HostingStartup(typeof(TestStartupAssembly1.TestHostingStartup1))]
 
+
 namespace TestStartupAssembly1;
 
 public class TestHostingStartup1 : IHostingStartup

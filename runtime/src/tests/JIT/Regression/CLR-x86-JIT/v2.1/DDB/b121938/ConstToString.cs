@@ -21,6 +21,7 @@ public class ConstToString
         }
         return iret;
     }
+
     static int FloatConstToString()
     {
         int iret = 100;
@@ -36,6 +37,7 @@ public class ConstToString
         }
         return iret;
     }
+
     static int StringConstToString()
     {
         int iret = 100;
@@ -51,6 +53,7 @@ public class ConstToString
         }
         return iret;
     }
+
     static int BoolConstToString()
     {
         int iret = 100;
@@ -66,6 +69,7 @@ public class ConstToString
         }
         return iret;
     }
+
     static int Main()
     {
         int iret = 100;

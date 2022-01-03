@@ -29,8 +29,12 @@ public class SkipOnCIAttribute : Attribute, ITestCondition
     }
 
     public static bool OnCI() => OnHelix() || OnAzdo();
+
     public static bool OnHelix() => !string.IsNullOrEmpty(GetTargetHelixQueue());
+
     public static string GetTargetHelixQueue() => Environment.GetEnvironmentVariable("helix");
+
     public static bool OnAzdo() => !string.IsNullOrEmpty(GetIfOnAzdo());
+
     public static string GetIfOnAzdo() => Environment.GetEnvironmentVariable("AGENT_OS");
 }

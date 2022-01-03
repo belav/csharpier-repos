@@ -11,6 +11,7 @@ class Gen
         Test_thread04.Eval(typeof(U) != null);
         Interlocked.Increment(ref Test_thread04.Xcounter);
     }
+
     public static void ThreadPoolTest<U>()
     {
         Thread[] threads = new Thread[Test_thread04.nThreads];
@@ -38,6 +39,7 @@ public class Test_thread04
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

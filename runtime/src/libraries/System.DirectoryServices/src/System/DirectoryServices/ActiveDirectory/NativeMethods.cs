@@ -246,6 +246,7 @@ namespace System.DirectoryServices.ActiveDirectory
         public int minorVersion;
         public int buildNumber;
         public int platformId;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
         public string? csdVersion = null;
         public short servicePackMajor;

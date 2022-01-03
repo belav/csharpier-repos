@@ -28,12 +28,15 @@ namespace System.Reflection.TypeLoading.Ecma
         internal sealed override RoModule GetRoModule() => _ecmaModule;
 
         protected sealed override int ComputePosition() => GenericParameter.Index;
+
         protected sealed override string ComputeName() => GenericParameter.Name.GetString(Reader);
+
         public sealed override GenericParameterAttributes GenericParameterAttributes =>
             GenericParameter.Attributes;
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
             GenericParameter.GetCustomAttributes().ToTrueCustomAttributes(GetEcmaModule());
+
         internal sealed override bool IsCustomAttributeDefined(
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name
@@ -41,6 +44,7 @@ namespace System.Reflection.TypeLoading.Ecma
             GenericParameter
                 .GetCustomAttributes()
                 .IsCustomAttributeDefined(ns, name, GetEcmaModule());
+
         internal sealed override CustomAttributeData? TryFindCustomAttribute(
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name
@@ -75,7 +79,9 @@ namespace System.Reflection.TypeLoading.Ecma
         public abstract override MethodBase? DeclaringMethod { get; }
 
         internal GenericParameterHandle Handle { get; }
+
         internal EcmaModule GetEcmaModule() => _ecmaModule;
+
         internal MetadataReader Reader => GetEcmaModule().Reader;
         protected abstract TypeContext TypeContext { get; }
 
@@ -87,6 +93,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 return ref _neverAccessThisExceptThroughGenericParameterProperty;
             }
         }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly GenericParameter _neverAccessThisExceptThroughGenericParameterProperty;
     }

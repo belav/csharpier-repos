@@ -60,8 +60,10 @@ namespace System.IO.IsolatedStorage
         private sealed class OverridesDisposeIsolatedStorageFileStream : IsolatedStorageFileStream
         {
             public bool DisposeInvoked;
+
             public OverridesDisposeIsolatedStorageFileStream(string path, FileMode mode)
                 : base(path, mode) { }
+
             protected override void Dispose(bool disposing)
             {
                 DisposeInvoked = true;

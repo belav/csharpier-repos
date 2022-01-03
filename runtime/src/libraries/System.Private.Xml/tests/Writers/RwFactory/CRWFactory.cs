@@ -202,6 +202,7 @@ namespace System.Xml.Tests
         {
             CError.WriteLineIgnore(str);
         }
+
         /// <summary>
         /// This method will be called by ExecuteVariation and it will
         /// orchestrate the state.
@@ -397,10 +398,12 @@ namespace System.Xml.Tests
         {
             get { return _tr.Value; }
         }
+
         public override bool MoveToElement()
         {
             return _tr.MoveToElement();
         }
+
         public override string LocalName
         {
             get { return _tr.LocalName; }
@@ -409,14 +412,17 @@ namespace System.Xml.Tests
         {
             get { return _tr.NodeType; }
         }
+
         public override bool MoveToNextAttribute()
         {
             return _tr.MoveToNextAttribute();
         }
+
         public override bool MoveToFirstAttribute()
         {
             return _tr.MoveToFirstAttribute();
         }
+
         public override string LookupNamespace(string prefix)
         {
             return _tr.LookupNamespace(prefix);

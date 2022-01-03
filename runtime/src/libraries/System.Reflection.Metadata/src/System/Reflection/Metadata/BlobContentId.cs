@@ -114,11 +114,15 @@ namespace System.Reflection.Metadata
         }
 
         public bool Equals(BlobContentId other) => Guid == other.Guid && Stamp == other.Stamp;
+
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj is BlobContentId bcid && Equals(bcid);
+
         public override int GetHashCode() => Hash.Combine(Stamp, Guid.GetHashCode());
+
         public static bool operator ==(BlobContentId left, BlobContentId right) =>
             left.Equals(right);
+
         public static bool operator !=(BlobContentId left, BlobContentId right) =>
             !left.Equals(right);
     }

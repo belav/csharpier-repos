@@ -9,6 +9,7 @@ namespace Test
     class BB
     {
         public static uint[] m_auForward5;
+
         public static uint[] Method2()
         {
             return null;

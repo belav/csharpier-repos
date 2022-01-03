@@ -98,6 +98,7 @@ public static class TestCodeRenderingContext
     private class RenderChildrenVisitor : IntermediateNodeVisitor
     {
         private readonly CodeRenderingContext _context;
+
         public RenderChildrenVisitor(CodeRenderingContext context)
         {
             _context = context;

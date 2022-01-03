@@ -553,7 +553,9 @@ class Program
     class TestStaticBaseLookups
     {
         class C1 { }
+
         class C2 { }
+
         class C3 { }
 
         class GenHolder<T>
@@ -636,6 +638,7 @@ class Program
         }
 
         delegate void VoidGenericDelegate<T>(ref T x, T val);
+
         void VoidGeneric<T>(ref T x, T val)
         {
             x = val;
@@ -716,6 +719,7 @@ class Program
         class Foo
         {
             public readonly int Value;
+
             public Foo(int value)
             {
                 Value = value;
@@ -730,6 +734,7 @@ class Program
         class Bar
         {
             public readonly int Value;
+
             public Bar(int value)
             {
                 Value = value;
@@ -744,6 +749,7 @@ class Program
         class FooShared
         {
             public readonly int Value;
+
             public FooShared(int value)
             {
                 Value = value;
@@ -758,6 +764,7 @@ class Program
         class BarShared
         {
             public readonly int Value;
+
             public BarShared(int value)
             {
                 Value = value;
@@ -1064,6 +1071,7 @@ class Program
     class TestVirtualMethodUseTracking
     {
         class C1 { }
+
         class C2 { }
 
         class Base1<T> where T : class
@@ -1085,12 +1093,14 @@ class Program
         class Base2<T>
         {
             public virtual string Method1() => "Base2.Method1";
+
             public virtual string Method2() => "Base2.Method2";
         }
 
         class Derived2<T> : Base2<T>
         {
             public override string Method1() => "Derived2.Method1";
+
             public override string Method2() => "Derived2.Method2";
         }
 
@@ -1192,30 +1202,37 @@ class Program
             {
                 return "BaseClass.Method1";
             }
+
             public virtual string Method2(T t)
             {
                 return "BaseClass.Method2";
             }
+
             public virtual string Method3(T t)
             {
                 return "BaseClass.Method3";
             }
+
             public virtual string Method4(T t)
             {
                 return "BaseClass.Method4";
             }
+
             public virtual string GVMethod1<U>(T t, U u)
             {
                 return "BaseClass.GVMethod1";
             }
+
             public virtual string GVMethod2<U>(T t, U u)
             {
                 return "BaseClass.GVMethod2";
             }
+
             public virtual string GVMethod3<U>(T t, U u)
             {
                 return "BaseClass.GVMethod3";
             }
+
             public virtual string GVMethod4<U>(T t, U u)
             {
                 return "BaseClass.GVMethod4";
@@ -1225,6 +1242,7 @@ class Program
             {
                 return "BaseClass.IFaceMethod1";
             }
+
             public virtual string IFaceGVMethod1<U>(T t, U u)
             {
                 return "BaseClass.IFaceGVMethod1";
@@ -1243,22 +1261,27 @@ class Program
             {
                 return "DerivedClass1.Method1";
             }
+
             public override string Method2(T t)
             {
                 return "DerivedClass1.Method2";
             }
+
             public new virtual string Method3(T t)
             {
                 return "DerivedClass1.Method3";
             }
+
             public override sealed string GVMethod1<U>(T t, U u)
             {
                 return "DerivedClass1.GVMethod1";
             }
+
             public override string GVMethod2<U>(T t, U u)
             {
                 return "DerivedClass1.GVMethod2";
             }
+
             public new virtual string GVMethod3<U>(T t, U u)
             {
                 return "DerivedClass1.GVMethod3";
@@ -1282,14 +1305,17 @@ class Program
             {
                 return "DerivedClass2.Method3";
             }
+
             public override string Method4(T t)
             {
                 return "DerivedClass2.Method4";
             }
+
             public override string GVMethod3<U>(T t, U u)
             {
                 return "DerivedClass2.GVMethod3";
             }
+
             public override string GVMethod4<U>(T t, U u)
             {
                 return "DerivedClass2.GVMethod4";
@@ -1299,6 +1325,7 @@ class Program
             {
                 return "DerivedClass2.IFaceMethod1";
             }
+
             public override string IFaceGVMethod1<U>(T t, U u)
             {
                 return "DerivedClass2.IFaceGVMethod1";
@@ -1714,6 +1741,7 @@ class Program
     class TestConstrainedMethodCalls
     {
         class Atom1 { }
+
         class Atom2 { }
 
         interface IFoo<T>
@@ -1913,22 +1941,26 @@ class Program
             {
                 return "Base.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
             }
+
             public virtual string IMethod1<T>(T t1, T t2)
             {
                 return "Base.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
             }
         }
+
         class Derived : Base, IFoo<string>, IFoo<int>
         {
             public override string GMethod1<T>(T t1, T t2)
             {
                 return "Derived.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
             }
+
             string IFoo<string>.IMethod1<T>(T t1, T t2)
             {
                 return "Derived.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
             }
         }
+
         class SuperDerived : Derived, IFoo<string>, IFoo<int>
         {
             string IFoo<int>.IMethod1<T>(T t1, T t2)
@@ -1951,6 +1983,7 @@ class Program
                     + t2
                     + ")";
             }
+
             public virtual string IMethod1<T>(T t1, T t2)
             {
                 return "GenBase<"
@@ -1964,6 +1997,7 @@ class Program
                     + ")";
             }
         }
+
         class GenDerived<A> : GenBase<A>, IFoo<string>, IFoo<int>
         {
             public override string GMethod1<T>(T t1, T t2)
@@ -1978,6 +2012,7 @@ class Program
                     + t2
                     + ")";
             }
+
             string IFoo<string>.IMethod1<T>(T t1, T t2)
             {
                 return "GenDerived<"
@@ -1991,6 +2026,7 @@ class Program
                     + ")";
             }
         }
+
         class GenSuperDerived<A> : GenDerived<A>, IFoo<string>, IFoo<int>
         {
             string IFoo<int>.IMethod1<T>(T t1, T t2)
@@ -2013,28 +2049,33 @@ class Program
             {
                 return "MyStruct1.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
             }
+
             string IFoo<int>.IMethod1<T>(T t1, T t2)
             {
                 return "MyStruct1.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
             }
         }
+
         struct MyStruct2 : IFoo<string>, IFoo<int>
         {
             string IFoo<string>.IMethod1<T>(T t1, T t2)
             {
                 return "MyStruct2.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
             }
+
             public string IMethod1<T>(T t1, T t2)
             {
                 return "MyStruct2.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
             }
         }
+
         struct MyStruct3 : IFoo<string>, IFoo<int>
         {
             string IFoo<int>.IMethod1<T>(T t1, T t2)
             {
                 return "MyStruct3.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
             }
+
             public string IMethod1<T>(T t1, T t2)
             {
                 return "MyStruct3.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
@@ -2047,6 +2088,7 @@ class Program
             {
                 return "AnotherBaseClass.IFaceMethod1";
             }
+
             public virtual string IFaceGVMethod1<U>(T t, U u)
             {
                 return "AnotherBaseClass.IFaceGVMethod1";
@@ -2395,7 +2437,9 @@ class Program
     class TestFieldAccess
     {
         class ClassType { }
+
         class ClassType2 { }
+
         struct StructType { }
 
         class Foo<T>
@@ -3064,6 +3108,7 @@ class Program
         private delegate T GenericDelegate<out T>();
 
         class Base { }
+
         class Derived : Base { }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -3087,6 +3132,7 @@ class Program
         ref struct RefStruct<T>
         {
             public override bool Equals(object o) => o is Atom<T[]>;
+
             public override int GetHashCode() => 0;
 
             public override string ToString()
@@ -3278,6 +3324,7 @@ class Program
             static NeverAllocatedIndirection<T, object> s_indirection = null;
 
             public string GetString() => new NeverSeenInstantiated<T>().ToString();
+
             public string GetStringIndirect() => s_indirection.GetString();
         }
 
@@ -3291,7 +3338,9 @@ class Program
             {
                 _arr = (T)(object)new string[1] { "ohai" };
             }
+
             T _arr;
+
             public T GetArr() => _arr;
         }
 
@@ -3480,9 +3529,13 @@ public interface IFoo<T>
 {
     string IFooFunc();
 }
+
 public class MyClass0 { }
+
 public class MyClass1 { }
+
 public class MyClass2 { }
+
 public class MyGenClass1<T>
 {
     public override string ToString()
@@ -3490,6 +3543,7 @@ public class MyGenClass1<T>
         return this.GetType().ToString();
     }
 }
+
 public class MyGenClass2<T>
 {
     public override string ToString()
@@ -3497,6 +3551,7 @@ public class MyGenClass2<T>
         return this.GetType().ToString();
     }
 }
+
 public class MyGenClass3<T>
 {
     public override string ToString()
@@ -3504,6 +3559,7 @@ public class MyGenClass3<T>
         return this.GetType().ToString();
     }
 }
+
 public struct MyGenStruct1<T>
 {
     public override string ToString()
@@ -3511,27 +3567,35 @@ public struct MyGenStruct1<T>
         return this.GetType().ToString();
     }
 }
+
 public class MyIdClass0
 {
     string _id;
+
     public MyIdClass0() { }
+
     public MyIdClass0(string id)
     {
         _id = id;
     }
+
     public override string ToString()
     {
         return "MyIdClass0=" + _id;
     }
 }
+
 public class MyIdClass1
 {
     string _id;
+
     public MyIdClass1() { }
+
     public MyIdClass1(string id)
     {
         _id = id;
     }
+
     public override string ToString()
     {
         return "MyIdClass1=" + _id;
@@ -3544,8 +3608,10 @@ public class GenBase<T, U> : IFoo<T> where T : new()
     public U m_fieldU;
     public static T s_fieldT;
     public static U s_fieldU;
+
     [ThreadStatic]
     public static T st_fieldT;
+
     [ThreadStatic]
     public static U st_fieldU;
 

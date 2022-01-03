@@ -15,6 +15,7 @@ internal class RewriteRule : IRule
     public Regex InitialMatch { get; }
     public string Replacement { get; }
     public bool StopProcessing { get; }
+
     public RewriteRule(string regex, string replacement, bool stopProcessing)
     {
         if (string.IsNullOrEmpty(regex))

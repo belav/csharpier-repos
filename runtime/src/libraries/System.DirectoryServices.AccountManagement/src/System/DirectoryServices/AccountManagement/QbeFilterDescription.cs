@@ -172,6 +172,7 @@ namespace System.DirectoryServices.AccountManagement
             get { return PropertyNameStatic; }
         }
     }
+
     internal sealed class GuidFilter : FilterBase
     {
         public const string PropertyNameStatic = PropertyNames.PrincipalGuid;
@@ -180,6 +181,7 @@ namespace System.DirectoryServices.AccountManagement
             get { return PropertyNameStatic; }
         }
     }
+
     internal sealed class IdentityClaimFilter : FilterBase
     {
         public const string PropertyNameStatic = PropertyNames.PrincipalIdentityClaims;
@@ -197,6 +199,7 @@ namespace System.DirectoryServices.AccountManagement
             get { return PropertyNameStatic; }
         }
     }
+
     internal sealed class StructuralObjectClassFilter : FilterBase
     {
         public const string PropertyNameStatic = PropertyNames.PrincipalStructuralObjectClass;
@@ -205,6 +208,7 @@ namespace System.DirectoryServices.AccountManagement
             get { return PropertyNameStatic; }
         }
     }
+
     internal sealed class NameFilter : FilterBase
     {
         public const string PropertyNameStatic = PropertyNames.PrincipalName;
@@ -222,6 +226,7 @@ namespace System.DirectoryServices.AccountManagement
             get { return PropertyNameStatic; }
         }
     }
+
     internal sealed class CertificateFilter : FilterBase
     {
         public const string PropertyNameStatic = PropertyNames.AuthenticablePrincipalCertificates;

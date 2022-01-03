@@ -37,6 +37,7 @@ namespace System.Reflection.TypeLoading.Ecma
         public sealed override int MetadataToken => _handle.GetToken();
 
         protected sealed override string? ComputeName() => Parameter.Name.GetStringOrNull(Reader);
+
         protected sealed override ParameterAttributes ComputeAttributes() => Parameter.Attributes;
 
         protected sealed override IEnumerable<CustomAttributeData> GetTrueCustomAttributes() =>
@@ -74,6 +75,7 @@ namespace System.Reflection.TypeLoading.Ecma
             Parameter.GetMarshallingDescriptor().ToMarshalAsAttribute(GetEcmaModule());
 
         private EcmaModule GetEcmaModule() => _module;
+
         private MetadataReader Reader => GetEcmaModule().Reader;
         private MetadataLoadContext Loader => GetEcmaModule().Loader;
 
@@ -85,6 +87,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 return ref _neverAccessThisExceptThroughParameterProperty;
             }
         }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly Parameter _neverAccessThisExceptThroughParameterProperty;
     }

@@ -14,6 +14,7 @@ namespace System.Reflection.Context
         {
             return assembly;
         }
+
         public override TypeInfo MapType(TypeInfo type)
         {
             return type;

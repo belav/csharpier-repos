@@ -48,7 +48,9 @@ namespace Exchange
         private int newValueA = 0;
         private int newValueB = Int32.MinValue;
         private bool success;
+
         public ThreadSafe() : this(10000) { }
+
         public ThreadSafe(int loops)
         {
             success = true;
@@ -67,12 +69,14 @@ namespace Exchange
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Exchange(ref totalValue, newValueA);
         }
+
         public void ThreadWorkerB()
         {
             signal.WaitOne();
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Exchange(ref totalValue, newValueB);
         }
+
         public void ThreadChecker()
         {
             signal.WaitOne();

@@ -215,9 +215,11 @@ namespace System.Security.Cryptography.Xml.Tests
 
         static string xml =
             "<Test  attrib='at ' xmlns=\"http://www.go-mono.com/\" > \r\n &#xD; <Toto/> text &amp; </Test   >";
+
         // GOOD for Stream input
         static string c14xml2 =
             "<Test xmlns=\"http://www.go-mono.com/\" attrib=\"at \"> \n &#xD; <Toto></Toto> text &amp; </Test>";
+
         // GOOD for XmlDocument input. The difference is because once
         // xml string is loaded to XmlDocument, there is no difference
         // between \r and &#xD;, so every \r must be handled as &#xD;.

@@ -472,55 +472,70 @@ namespace System.Threading
 
         public virtual bool WaitOne(TimeSpan timeout) =>
             WaitOneNoCheck(ToTimeoutMilliseconds(timeout));
+
         public virtual bool WaitOne() => WaitOneNoCheck(-1);
+
         public virtual bool WaitOne(int millisecondsTimeout, bool exitContext) =>
             WaitOne(millisecondsTimeout);
+
         public virtual bool WaitOne(TimeSpan timeout, bool exitContext) =>
             WaitOneNoCheck(ToTimeoutMilliseconds(timeout));
 
         public static bool WaitAll(WaitHandle[] waitHandles, int millisecondsTimeout) =>
             WaitMultiple(waitHandles, true, millisecondsTimeout) != WaitTimeout;
+
         public static bool WaitAll(WaitHandle[] waitHandles, TimeSpan timeout) =>
             WaitMultiple(waitHandles, true, ToTimeoutMilliseconds(timeout)) != WaitTimeout;
+
         public static bool WaitAll(WaitHandle[] waitHandles) =>
             WaitMultiple(waitHandles, true, -1) != WaitTimeout;
+
         public static bool WaitAll(
             WaitHandle[] waitHandles,
             int millisecondsTimeout,
             bool exitContext
         ) => WaitMultiple(waitHandles, true, millisecondsTimeout) != WaitTimeout;
+
         public static bool WaitAll(WaitHandle[] waitHandles, TimeSpan timeout, bool exitContext) =>
             WaitMultiple(waitHandles, true, ToTimeoutMilliseconds(timeout)) != WaitTimeout;
 
         public static int WaitAny(WaitHandle[] waitHandles, int millisecondsTimeout) =>
             WaitMultiple(waitHandles, false, millisecondsTimeout);
+
         internal static int WaitAny(
             ReadOnlySpan<SafeWaitHandle> safeWaitHandles,
             int millisecondsTimeout
         ) => WaitAnyMultiple(safeWaitHandles, millisecondsTimeout);
+
         internal static int WaitAny(
             ReadOnlySpan<WaitHandle> waitHandles,
             int millisecondsTimeout
         ) => WaitMultiple(waitHandles, false, millisecondsTimeout);
+
         public static int WaitAny(WaitHandle[] waitHandles, TimeSpan timeout) =>
             WaitMultiple(waitHandles, false, ToTimeoutMilliseconds(timeout));
+
         public static int WaitAny(WaitHandle[] waitHandles) => WaitMultiple(waitHandles, false, -1);
+
         public static int WaitAny(
             WaitHandle[] waitHandles,
             int millisecondsTimeout,
             bool exitContext
         ) => WaitMultiple(waitHandles, false, millisecondsTimeout);
+
         public static int WaitAny(WaitHandle[] waitHandles, TimeSpan timeout, bool exitContext) =>
             WaitMultiple(waitHandles, false, ToTimeoutMilliseconds(timeout));
 
         public static bool SignalAndWait(WaitHandle toSignal, WaitHandle toWaitOn) =>
             SignalAndWait(toSignal, toWaitOn, -1);
+
         public static bool SignalAndWait(
             WaitHandle toSignal,
             WaitHandle toWaitOn,
             TimeSpan timeout,
             bool exitContext
         ) => SignalAndWait(toSignal, toWaitOn, ToTimeoutMilliseconds(timeout));
+
         public static bool SignalAndWait(
             WaitHandle toSignal,
             WaitHandle toWaitOn,

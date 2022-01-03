@@ -1303,7 +1303,6 @@ public class TemplateBinderTests
         Assert.Equal("action", r.ConstraintData.ParameterName);
         Assert.Equal("list", r.ConstraintData.ParameterValue);
     }
-
 #endif
 
     private static void RunTest(

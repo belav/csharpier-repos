@@ -19,6 +19,7 @@ namespace System.Speech.Internal.GrammarBuilding
             GrammarBuilderWildcard refObj = obj as GrammarBuilderWildcard;
             return refObj != null;
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();

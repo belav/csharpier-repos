@@ -97,6 +97,7 @@ internal static partial class RewriteMiddlewareLoggingExtensions
         EventName = "RedirectedToNonWww"
     )]
     public static partial void RedirectedToNonWww(this ILogger logger);
+
     [LoggerMessage(
         9,
         LogLevel.Information,

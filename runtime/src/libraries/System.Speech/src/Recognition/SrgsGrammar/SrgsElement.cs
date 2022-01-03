@@ -63,6 +63,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 _elements = element.Children;
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public SrgsElement[] AKeys
             {

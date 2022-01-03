@@ -199,6 +199,7 @@
                     },
                 }.AsQueryable();
             }
+
             public IQueryable<User> Users { get; }
         }
 

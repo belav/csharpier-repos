@@ -17,6 +17,7 @@ namespace System.Reflection
         [DebuggerStepThrough]
         public object Invoke(object?[]? parameters) =>
             Invoke(BindingFlags.Default, binder: null, parameters: parameters, culture: null);
+
         public abstract object Invoke(
             BindingFlags invokeAttr,
             Binder? binder,
@@ -25,6 +26,7 @@ namespace System.Reflection
         );
 
         public override bool Equals(object? obj) => base.Equals(obj);
+
         public override int GetHashCode() => base.GetHashCode();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

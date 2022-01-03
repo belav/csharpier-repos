@@ -34,8 +34,10 @@ namespace System.PrivateUri.Tests
     public sealed class TestUriParser : UriParser
     {
         public TestUriParser() : base() { }
+
         public new string GetComponents(Uri uri, UriComponents components, UriFormat format) =>
             base.GetComponents(uri, components, format);
+
         protected override void InitializeAndValidate(Uri uri, out UriFormatException parsingError)
         {
             parsingError = null;
@@ -44,19 +46,24 @@ namespace System.PrivateUri.Tests
                 base.InitializeAndValidate(uri, out parsingError);
             }
         }
+
         public new bool IsBaseOf(Uri baseUri, Uri relativeUri) =>
             base.IsBaseOf(baseUri, relativeUri);
+
         public new bool IsWellFormedOriginalString(Uri uri) => base.IsWellFormedOriginalString(uri);
+
         public new string Resolve(
             Uri baseUri,
             Uri relativeUri,
             out UriFormatException parsingError
         ) => base.Resolve(baseUri, relativeUri, out parsingError);
+
         public new UriParser OnNewUri()
         {
             OnNewUriCalled = true;
             return base.OnNewUri();
         }
+
         protected override void OnRegister(string schemeName, int defaultPort)
         {
             SchemeName = schemeName;
@@ -69,6 +76,7 @@ namespace System.PrivateUri.Tests
         public int DefaultPort { get; private set; }
 
         public int BaseInitializeAndValidateCallCount = 1;
+
         public void DangerousExposed_InitializeAndValidate(
             Uri uri,
             out UriFormatException parsingError
@@ -770,31 +778,37 @@ namespace System.PrivateUri.Tests
         {
             new FtpStyleUriParser();
         }
+
         [Fact]
         public static void FileStyleUriParser_ctor()
         {
             new FileStyleUriParser();
         }
+
         [Fact]
         public static void NewsStyleUriParser_ctor()
         {
             new NewsStyleUriParser();
         }
+
         [Fact]
         public static void GopherStyleUriParser_ctor()
         {
             new GopherStyleUriParser();
         }
+
         [Fact]
         public static void LdapStyleUriParser_ctor()
         {
             new LdapStyleUriParser();
         }
+
         [Fact]
         public static void NetPipeStyleUriParser_ctor()
         {
             new NetPipeStyleUriParser();
         }
+
         [Fact]
         public static void NetTcpStyleUriParser_ctor()
         {

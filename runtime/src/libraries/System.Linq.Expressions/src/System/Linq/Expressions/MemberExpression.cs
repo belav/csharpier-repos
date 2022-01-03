@@ -104,6 +104,7 @@ namespace System.Linq.Expressions
     internal sealed class PropertyExpression : MemberExpression
     {
         private readonly PropertyInfo _property;
+
         public PropertyExpression(Expression? expression, PropertyInfo member) : base(expression)
         {
             _property = member;

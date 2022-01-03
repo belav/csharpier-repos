@@ -16,6 +16,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public string data;
+
         [DataMember]
         public string data2;
 
@@ -46,8 +47,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public string data;
+
         [DataMember]
         public string data2;
+
         [DataMember]
         public string[] days;
 
@@ -167,8 +170,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public string data11;
+
         [DataMember]
         public string data12;
+
         [DataMember]
         public string data4;
 
@@ -358,8 +363,10 @@ namespace SerializationTestTypes
     {
         [OptionalField]
         public string data00;
+
         [OptionalField]
         public string data122;
+
         [OptionalField]
         public string data4;
 
@@ -395,6 +402,7 @@ namespace SerializationTestTypes
     public class Derived2Derived2Serializable : Derived2Serializable
     {
         public Derived2Derived2Serializable() { }
+
         public Derived2Derived2Serializable(bool init) : base(init) { }
     }
 
@@ -402,6 +410,7 @@ namespace SerializationTestTypes
     public class Derived3Derived2Serializable : Derived2Serializable
     {
         public Derived3Derived2Serializable() { }
+
         public Derived3Derived2Serializable(bool init) : base(init) { }
     }
 
@@ -411,6 +420,7 @@ namespace SerializationTestTypes
         public SimpleDCWithRef RefData;
 
         public Derived31Derived2SerializablePOCO() { }
+
         public Derived31Derived2SerializablePOCO(bool init) : base(init)
         {
             SimpleDCWithRefData = new SimpleDCWithRef(true);
@@ -422,6 +432,7 @@ namespace SerializationTestTypes
     public class Derived4Derived2Serializable : Derived3Derived2Serializable
     {
         public Derived4Derived2Serializable() { }
+
         public Derived4Derived2Serializable(bool init) : base(init) { }
     }
 
@@ -429,6 +440,7 @@ namespace SerializationTestTypes
     public class Derived5Derived2Serializable : Derived3Derived2Serializable
     {
         public Derived5Derived2Serializable() { }
+
         public Derived5Derived2Serializable(bool init) : base(init) { }
     }
 
@@ -438,6 +450,7 @@ namespace SerializationTestTypes
         public SimpleDCWithRef RefData;
 
         public Derived6Derived2SerializablePOCO() { }
+
         public Derived6Derived2SerializablePOCO(bool init) : base(init)
         {
             SimpleDCWithRefData = new SimpleDCWithRef(true);

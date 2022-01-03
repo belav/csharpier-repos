@@ -199,11 +199,14 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
         {
             internal QUIC_CREDENTIAL_TYPE Type;
             internal QUIC_CREDENTIAL_FLAGS Flags;
+
             // CredentialConfigCertificateUnion*
             internal IntPtr Certificate;
+
             [MarshalAs(UnmanagedType.LPUTF8Str)]
             internal string Principal;
             internal IntPtr Reserved; // Currently unused
+
             // TODO: define delegate for AsyncHandler and make proper use of it.
             internal IntPtr AsyncHandler;
         }
@@ -307,20 +310,26 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
         internal struct NewConnectionInfo
         {
             internal uint QuicVersion;
+
             // QUIC_ADDR
             internal IntPtr LocalAddress;
+
             // QUIC_ADDR
             internal IntPtr RemoteAddress;
             internal uint CryptoBufferLength;
             internal ushort ClientAlpnListLength;
             internal ushort ServerNameLength;
             internal byte NegotiatedAlpnLength;
+
             // byte[]
             internal IntPtr CryptoBuffer;
+
             // byte[]
             internal IntPtr ClientAlpnList;
+
             // byte[]
             internal IntPtr NegotiatedAlpn;
+
             // string
             internal IntPtr ServerName;
         }
@@ -359,6 +368,7 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
         {
             internal byte SessionResumed;
             internal byte NegotiatedAlpnLength;
+
             // byte[]
             internal IntPtr NegotiatedAlpn;
         }
@@ -615,6 +625,7 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
         {
             [FieldOffset(0)]
             internal SOCKADDR_IN Ipv4;
+
             [FieldOffset(0)]
             internal SOCKADDR_IN6 Ipv6;
 #if SOCKADDR_HAS_LENGTH

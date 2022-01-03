@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel
             );
         private readonly AssemblyLoadTestFixture _testFixture;
+
         public ShadowCopyAnalyzerAssemblyLoaderTests(AssemblyLoadTestFixture testFixture)
         {
             _testFixture = testFixture;

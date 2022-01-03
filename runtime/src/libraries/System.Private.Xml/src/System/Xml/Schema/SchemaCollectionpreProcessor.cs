@@ -26,6 +26,7 @@ namespace System.Xml.Schema
         private XmlSchemaForm _attributeFormDefault;
         private XmlSchemaDerivationMethod _blockDefault;
         private XmlSchemaDerivationMethod _finalDefault;
+
         //Dictionary<Uri, Uri> schemaLocations;
         private Hashtable? _schemaLocations;
         private Hashtable? _referenceNamespaces;

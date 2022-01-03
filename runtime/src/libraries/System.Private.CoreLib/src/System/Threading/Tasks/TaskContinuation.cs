@@ -331,8 +331,10 @@ namespace System.Threading.Tasks
     {
         /// <summary>The unstarted continuation task.</summary>
         internal Task? m_task;
+
         /// <summary>The options to use with the continuation task.</summary>
         internal readonly TaskContinuationOptions m_options;
+
         /// <summary>The task scheduler with which to run the continuation task.</summary>
         private readonly TaskScheduler m_taskScheduler;
 
@@ -463,8 +465,10 @@ namespace System.Threading.Tasks
             Debug.Assert(state is Action);
             ((Action)state)();
         };
+
         /// <summary>Cached delegate for PostAction</summary>
         private static ContextCallback? s_postActionCallback;
+
         /// <summary>The context with which to run the action.</summary>
         private readonly SynchronizationContext m_syncContext;
 
@@ -648,6 +652,7 @@ namespace System.Threading.Tasks
     {
         /// <summary>The ExecutionContext with which to run the continuation.</summary>
         private readonly ExecutionContext? m_capturedContext;
+
         /// <summary>The action to invoke.</summary>
         protected readonly Action m_action;
 

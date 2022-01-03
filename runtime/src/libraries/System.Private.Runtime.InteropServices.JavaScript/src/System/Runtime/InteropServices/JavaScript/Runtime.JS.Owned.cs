@@ -9,6 +9,7 @@ namespace System.Runtime.InteropServices.JavaScript
     public static partial class Runtime
     {
         private static object JSOwnedObjectLock = new object();
+
         // we use this to maintain identity of GCHandle for a managed object
         private static Dictionary<object, int> GCHandleFromJSOwnedObject = new Dictionary<
             object,

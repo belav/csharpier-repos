@@ -105,6 +105,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal MultiDictionary<Symbol, Symbol> explicitInterfaceImplementationMap;
 #nullable enable
             internal ImmutableDictionary<MethodSymbol, MethodSymbol>? synthesizedMethodImplMap;
+
 #nullable disable
             internal bool IsDefaultValue()
             {
@@ -701,6 +702,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return GetManagedKind(ref discardedUseSiteInfo);
             }
         }
+
 #nullable disable
 
         internal bool NeedsNullableAttribute()
@@ -3066,6 +3068,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// the forwarding method forwards to.
         /// </summary>
         internal abstract IEnumerable<(MethodSymbol Body, MethodSymbol Implemented)> SynthesizedInterfaceMethodImpls();
+
 #nullable disable
 
         protected class ExplicitInterfaceImplementationTargetMemberEqualityComparer
@@ -3075,6 +3078,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 new ExplicitInterfaceImplementationTargetMemberEqualityComparer();
 
             private ExplicitInterfaceImplementationTargetMemberEqualityComparer() { }
+
             public bool Equals(Symbol x, Symbol y)
             {
                 return x.OriginalDefinition == y.OriginalDefinition

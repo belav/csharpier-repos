@@ -71,6 +71,7 @@ public abstract class ComponentCodeGenerationTestBase : RazorBaselineIntegration
         AssertCSharpDocumentMatchesBaseline(generated.CodeDocument);
         CompileToAssembly(generated);
     }
+
     [Fact]
     public void ChildComponent_InFunctionsDirective()
     {

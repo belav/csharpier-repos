@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 //
@@ -13,6 +14,7 @@ public class Runtime_59298
             public double double_1;
         }
     }
+
     static int s_int_6 = -2;
     static S2 s_s2_16 = new S2();
     int int_6 = -2;

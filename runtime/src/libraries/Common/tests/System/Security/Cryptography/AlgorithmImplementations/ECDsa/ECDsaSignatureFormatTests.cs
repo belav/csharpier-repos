@@ -55,6 +55,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
         private static readonly KeyDescription[] s_keys = LocalGenerateTestKeys().ToArray();
 
         protected override KeyDescription[] GenerateTestKeys() => s_keys;
+
         protected override bool IsArrayBased => true;
 
         protected override byte[] SignHash(
@@ -103,6 +104,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
         private static readonly KeyDescription[] s_keys = LocalGenerateTestKeys().ToArray();
 
         protected override KeyDescription[] GenerateTestKeys() => s_keys;
+
         protected override bool IsArrayBased => true;
 
         protected override byte[] SignHash(
@@ -245,6 +247,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
         private static readonly KeyDescription[] s_keys = LocalGenerateTestKeys().ToArray();
 
         protected override KeyDescription[] GenerateTestKeys() => s_keys;
+
         protected override bool IsArrayBased => false;
 
         protected override byte[] SignHash(

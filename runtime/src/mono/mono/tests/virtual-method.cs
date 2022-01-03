@@ -6,36 +6,43 @@ namespace Obj
     {
         int H();
     }
+
     class A : Bah
     {
         public int F()
         {
             return 1;
         }
+
         public virtual int G()
         {
             return 2;
         }
+
         public int H()
         {
             return 10;
         }
     }
+
     class B : A
     {
         public new int F()
         {
             return 3;
         }
+
         public override int G()
         {
             return 4;
         }
+
         public new int H()
         {
             return 11;
         }
     }
+
     class Test
     {
         static public int Main()

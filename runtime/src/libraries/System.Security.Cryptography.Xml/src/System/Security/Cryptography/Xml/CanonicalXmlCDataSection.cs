@@ -10,6 +10,7 @@ namespace System.Security.Cryptography.Xml
     internal sealed class CanonicalXmlCDataSection : XmlCDataSection, ICanonicalizableNode
     {
         private bool _isInNodeSet;
+
         public CanonicalXmlCDataSection(
             string data,
             XmlDocument doc,

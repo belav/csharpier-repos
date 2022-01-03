@@ -38,6 +38,7 @@ namespace ILCompiler
     public class MetadataManager
     {
         protected readonly CompilerTypeSystemContext _typeSystemContext;
+
         private class PerModuleMethodsGenerated
         {
             public PerModuleMethodsGenerated(EcmaModule module)

@@ -14,6 +14,7 @@ namespace Microsoft.Extensions.DependencyModel
 
         public RuntimeFallbacks(string runtime, params string?[] fallbacks)
             : this(runtime, (IEnumerable<string?>)fallbacks) { }
+
         public RuntimeFallbacks(string runtime, IEnumerable<string?> fallbacks)
         {
             if (string.IsNullOrEmpty(runtime))

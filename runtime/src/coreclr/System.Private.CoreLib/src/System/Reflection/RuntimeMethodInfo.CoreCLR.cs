@@ -283,14 +283,17 @@ namespace System.Reflection
         public override MemberTypes MemberType => MemberTypes.Method;
         public override int MetadataToken => RuntimeMethodHandle.GetMethodDef(this);
         public override Module Module => GetRuntimeModule();
+
         internal RuntimeType GetRuntimeType()
         {
             return m_declaringType;
         }
+
         internal RuntimeModule GetRuntimeModule()
         {
             return m_declaringType.GetRuntimeModule();
         }
+
         internal RuntimeAssembly GetRuntimeAssembly()
         {
             return GetRuntimeModule().GetRuntimeAssembly();

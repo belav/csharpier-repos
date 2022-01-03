@@ -1181,6 +1181,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         }
 
         private Dictionary<string, long>? _assemblyToIdTable;
+
         private long GetAssemblyId(WriteObjectInfo objectInfo)
         {
             //use objectInfo to get assembly string with new criteria

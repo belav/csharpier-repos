@@ -8,6 +8,8 @@ using System.Runtime.InteropServices;
 using System.Security;
 
 [module: UnverifiableCodeAttribute()]
+
+
 namespace EventNS
 {
     /// <summary>
@@ -22,8 +24,10 @@ namespace EventNS
     {
         [DispId(101), PreserveSig]
         void OnEvent01();
+
         [DispId(102), PreserveSig]
         void OnEvent02(object i1);
+
         [DispId(103), PreserveSig]
         void OnEvent03(object i1, [Optional, IUnknownConstant] object i2, bool b = false);
     }
@@ -44,9 +48,12 @@ namespace EventNS
     public class NetImpl : IEvents
     {
         void IEvents.OnEvent01() { }
+
         void IEvents.OnEvent02(object i1) { }
+
         void IEvents.OnEvent03(object i1, object i2, bool b) { }
     }
+
     /// <summary>
     /// delegate
     /// </summary>

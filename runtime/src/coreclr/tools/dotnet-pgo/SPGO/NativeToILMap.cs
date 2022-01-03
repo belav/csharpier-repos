@@ -15,6 +15,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
     {
         // Native offsets in order
         private uint[] _nativeOffsets;
+
         // Map from native offset to IL offset
         private int[] _ilOffsets;
 

@@ -37,6 +37,7 @@ namespace DefaultNamespace
     class STRMAP
     {
         internal static int icFinal = 0;
+
         ~STRMAP()
         {
             STRMAP.icFinal++;

@@ -15,6 +15,7 @@ namespace System.ComponentModel.Composition.AttributedModel
         public class PartWithoutImports : IPartImportsSatisfiedNotification
         {
             public bool ImportsSatisfiedInvoked { get; private set; }
+
             public void OnImportsSatisfied()
             {
                 this.ImportsSatisfiedInvoked = true;
@@ -467,6 +468,7 @@ namespace System.ComponentModel.Composition.AttributedModel
         public ICompositionService ImportSomethingSoIGetImportCompletedCalled { get; set; }
 
         public int ImportCompletedCallCount { get; set; }
+
         public void OnImportsSatisfied()
         {
             ImportCompletedCallCount++;
@@ -476,6 +478,7 @@ namespace System.ComponentModel.Composition.AttributedModel
     public class MyNotifyImportImporter : IPartImportsSatisfiedNotification
     {
         private CompositionContainer container;
+
         public MyNotifyImportImporter(CompositionContainer container)
         {
             this.container = container;
@@ -485,6 +488,7 @@ namespace System.ComponentModel.Composition.AttributedModel
         public MyNotifyImportExporter MyNotifyImportExporter { get; set; }
 
         public int ImportCompletedCallCount { get; set; }
+
         public void OnImportsSatisfied()
         {
             ImportCompletedCallCount++;
@@ -495,6 +499,7 @@ namespace System.ComponentModel.Composition.AttributedModel
     public class LowerCaseString
     {
         public string String { get; private set; }
+
         public LowerCaseString(string s)
         {
             String = s.ToLower();
@@ -507,6 +512,7 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             UpperCaseStrings = new List<string>();
         }
+
         Collection<Lazy<LowerCaseString>> lowerCaseString = new Collection<Lazy<LowerCaseString>>();
 
         [ImportMany("LowerCaseString", AllowRecomposition = true)]

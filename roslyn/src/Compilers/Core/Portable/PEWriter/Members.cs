@@ -877,6 +877,7 @@ namespace Microsoft.Cci
         /// The method being referred to.
         /// </summary>
         IMethodDefinition? GetResolvedMethod(EmitContext context);
+
         // ^ ensures this is IMethodDefinition ==> result == this;
 
         /// <summary>
@@ -897,6 +898,7 @@ namespace Microsoft.Cci
         /// The type arguments that were used to instantiate this.GenericMethod in order to create this method.
         /// </summary>
         IEnumerable<ITypeReference> GetGenericArguments(EmitContext context);
+
         // ^ ensures result.GetEnumerator().MoveNext(); // The collection is always non empty.
 
         /// <summary>

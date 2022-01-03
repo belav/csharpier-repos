@@ -503,11 +503,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 return false;
             }
+
             public Task Completion
             {
                 get { return null; }
             }
+
             public void Complete() { }
+
             void IDataflowBlock.Fault(Exception exception)
             {
                 throw new NotSupportedException();
@@ -518,6 +521,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             private TaskCompletionSource<ITargetBlock<T>> _m_linkedTarget =
                 new TaskCompletionSource<ITargetBlock<T>>();
+
             public ITargetBlock<T> GetLinkedTarget()
             {
                 return _m_linkedTarget.Task.Result;
@@ -539,11 +543,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 item = default(T);
                 return false;
             }
+
             public bool TryReceiveAll(out System.Collections.Generic.IList<T> items)
             {
                 items = default(System.Collections.Generic.IList<T>);
                 return false;
             }
+
             public T ConsumeMessage(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target,
@@ -553,19 +559,24 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 messageConsumed = true;
                 return default(T);
             }
+
             public bool ReserveMessage(DataflowMessageHeader messageHeader, ITargetBlock<T> target)
             {
                 return false;
             }
+
             public void ReleaseReservation(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target
             ) { }
+
             public Task Completion
             {
                 get { return null; }
             }
+
             public void Complete() { }
+
             void IDataflowBlock.Fault(Exception exception)
             {
                 throw new NotSupportedException();

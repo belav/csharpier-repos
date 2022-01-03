@@ -9,6 +9,7 @@ namespace Microsoft.Extensions.Configuration
     public partial class BinderOptions
     {
         public BinderOptions() { }
+
         public bool BindNonPublicProperties
         {
             get { throw null; }
@@ -20,6 +21,7 @@ namespace Microsoft.Extensions.Configuration
             set { }
         }
     }
+
     public static partial class ConfigurationBinder
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
@@ -29,6 +31,7 @@ namespace Microsoft.Extensions.Configuration
             this Microsoft.Extensions.Configuration.IConfiguration configuration,
             object instance
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Cannot statically analyze the type of instance so its members may be trimmed"
         )]
@@ -37,6 +40,7 @@ namespace Microsoft.Extensions.Configuration
             object instance,
             System.Action<Microsoft.Extensions.Configuration.BinderOptions> configureOptions
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Cannot statically analyze the type of instance so its members may be trimmed"
         )]
@@ -45,6 +49,7 @@ namespace Microsoft.Extensions.Configuration
             string key,
             object instance
         ) { }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed."
         )]
@@ -55,6 +60,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed."
         )]
@@ -69,6 +75,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed."
         )]
@@ -83,6 +90,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed."
         )]
@@ -98,6 +106,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed."
         )]
@@ -110,6 +119,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed."
         )]
@@ -126,6 +136,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed."
         )]
@@ -138,6 +149,7 @@ namespace Microsoft.Extensions.Configuration
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed."
         )]

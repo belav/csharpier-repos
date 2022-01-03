@@ -20,6 +20,7 @@ public class Fancy
 {
     public int Foo;
     public int Bar { get; set; }
+
     public static void Types()
     {
         double dPI = System.Math.PI;
@@ -119,10 +120,12 @@ public class TestChild : TestParent
 {
     public int i = 50;
     public int GetI => i;
+
     public TestChild()
     {
         Console.WriteLine("Hi");
     }
+
     public static void TestWatchWithInheritance()
     {
         TestChild test = new TestChild();

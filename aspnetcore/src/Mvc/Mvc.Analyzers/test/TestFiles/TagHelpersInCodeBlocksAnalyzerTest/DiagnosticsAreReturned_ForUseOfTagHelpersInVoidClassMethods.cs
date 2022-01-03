@@ -8,6 +8,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
+
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(
         @"SHA1",
         @"186d75f4b59675515143af9ff43784abaabd24a9",
@@ -93,12 +94,16 @@ namespace AspNetCore
             get;
             private set;
         }
+
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.IUrlHelper Url { get; private set; }
+
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component { get; private set; }
+
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
+
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<dynamic> Html
         {

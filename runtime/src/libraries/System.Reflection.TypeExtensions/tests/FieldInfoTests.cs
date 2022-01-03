@@ -183,23 +183,29 @@ namespace System.Reflection.Tests
     public class FI_SubClass : FI_BaseClass { }
 
     public struct FI_EmptyStruct { }
+
     public class FI_EquatableClass
     {
         public int ID { get; set; }
+
         public override bool Equals(object other) => ID.Equals(((FI_EquatableClass)other).ID);
+
         public override int GetHashCode() => ID;
     }
 
     public class FI_GenericClass<T>
     {
         public T ID { get; set; }
+
         public override bool Equals(object other) => ID.Equals(((FI_GenericClass<T>)other).ID);
+
         public override int GetHashCode() => ID.GetHashCode();
 
         public class NestedClass { }
     }
 
     public interface FI_EmptyInterface { }
+
     public enum FI_Enum
     {
         Case1,

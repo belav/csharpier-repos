@@ -10,6 +10,7 @@ namespace LeafAssembly
         {
             Console.WriteLine("Static leaf constructor called in {0}", AppDomain.CurrentDomain);
         }
+
         public Leaf()
         {
             Console.WriteLine("Created leaf in {0}", AppDomain.CurrentDomain);

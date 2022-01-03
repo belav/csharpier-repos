@@ -806,6 +806,7 @@ namespace System.Collections.Immutable
 
             return self;
         }
+
         /// <summary>
         /// Filters the elements of this array to those assignable to the specified type.
         /// </summary>

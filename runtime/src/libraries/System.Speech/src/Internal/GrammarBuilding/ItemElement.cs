@@ -62,6 +62,7 @@ namespace System.Speech.Internal.GrammarBuilding
             }
             return _minRepeat == refObj._minRepeat && _maxRepeat == refObj._maxRepeat;
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();

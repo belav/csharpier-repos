@@ -4,21 +4,27 @@
 using System;
 
 public class Base { }
+
 public class Sub : Base { }
 
 public class GBase<T> { }
+
 public class GSubT<T> : GBase<T> { }
 
 public class GTU<T, U> : IPlusT<T>, IMinusT<U>, IPlusTMinusU<T, U> { }
+
 public class GTArrUArr<T, U> : IPlusT<T[]>, IMinusT<U[]>, IPlusTMinusU<T[], U[]> { }
+
 public class GRefTRefU<T, U>
     : IPlusT<IPlusT<T>>,
       IPlusT<IMinusT<U>>,
       IPlusTMinusU<IPlusT<T>, IPlusT<U>> { }
+
 public class GRefTArrRefUArr<T, U>
     : IPlusT<IPlusT<T[]>>,
       IPlusT<IMinusT<U[]>>,
       IPlusTMinusU<IPlusT<T[]>, IPlusT<U[]>> { }
+
 public class GArrRefTArrRefU<T, U>
     : IPlusT<IPlusT<T>[]>,
       IPlusT<IMinusT<U>[]>,

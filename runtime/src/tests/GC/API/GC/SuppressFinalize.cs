@@ -11,6 +11,7 @@ public class Test_SuppressFinalize
     public class Dummy
     {
         public static bool visited;
+
         ~Dummy()
         {
             Console.WriteLine("In Finalize() of Dummy");

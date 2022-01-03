@@ -13,6 +13,7 @@ namespace System.IO.Tests
         protected const string HFS = "hfs";
         public delegate void SetTime(T item, DateTime time);
         public delegate DateTime GetTime(T item);
+
         // AppContainer restricts access to DriveFormat (::GetVolumeInformation)
         private static string driveFormat = PlatformDetection.IsInAppContainer
             ? string.Empty

@@ -17,6 +17,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
     {
         [Obsolete("Call overload that takes a CancellationToken", error: false)]
         bool CanNavigateToSpan(Workspace workspace, DocumentId documentId, TextSpan textSpan);
+
         [Obsolete("Call overload that takes a CancellationToken", error: false)]
         bool CanNavigateToLineAndOffset(
             Workspace workspace,
@@ -24,6 +25,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             int lineNumber,
             int offset
         );
+
         [Obsolete("Call overload that takes a CancellationToken", error: false)]
         bool CanNavigateToPosition(
             Workspace workspace,
@@ -31,6 +33,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             int position,
             int virtualSpace = 0
         );
+
         [Obsolete("Call overload that takes a CancellationToken", error: false)]
         bool TryNavigateToSpan(
             Workspace workspace,
@@ -38,6 +41,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             TextSpan textSpan,
             OptionSet options = null
         );
+
         [Obsolete("Call overload that takes a CancellationToken", error: false)]
         bool TryNavigateToLineAndOffset(
             Workspace workspace,
@@ -46,6 +50,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             int offset,
             OptionSet options = null
         );
+
         [Obsolete("Call overload that takes a CancellationToken", error: false)]
         bool TryNavigateToPosition(
             Workspace workspace,
@@ -62,6 +67,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             TextSpan textSpan,
             CancellationToken cancellationToken
         );
+
         /// <inheritdoc cref="IDocumentNavigationService.CanNavigateToLineAndOffset"/>
         bool CanNavigateToLineAndOffset(
             Workspace workspace,
@@ -70,6 +76,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             int offset,
             CancellationToken cancellationToken
         );
+
         /// <inheritdoc cref="IDocumentNavigationService.CanNavigateToPosition"/>
         bool CanNavigateToPosition(
             Workspace workspace,
@@ -87,6 +94,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             OptionSet options,
             CancellationToken cancellationToken
         );
+
         /// <inheritdoc cref="IDocumentNavigationService.TryNavigateToLineAndOffset"/>
         bool TryNavigateToLineAndOffset(
             Workspace workspace,
@@ -96,6 +104,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
             OptionSet options,
             CancellationToken cancellationToken
         );
+
         /// <inheritdoc cref="IDocumentNavigationService.TryNavigateToPosition"/>
         bool TryNavigateToPosition(
             Workspace workspace,

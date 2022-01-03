@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [assembly: ApiConventionType(typeof(DefaultApiConventions))]
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._INPUT_
 {
     [ApiController]

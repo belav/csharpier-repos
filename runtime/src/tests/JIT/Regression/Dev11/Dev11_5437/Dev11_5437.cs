@@ -15,6 +15,7 @@ class Program
             throw new Exception("FAILED");
         }
     }
+
     static int Main()
     {
         int d = 0;

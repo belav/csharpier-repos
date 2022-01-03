@@ -34,11 +34,13 @@ namespace System.Net.Security
             s_http3Utf8,
             copy: false
         );
+
         /// <summary>Defines a <see cref="SslApplicationProtocol"/> instance for HTTP 2.0.</summary>
         public static readonly SslApplicationProtocol Http2 = new SslApplicationProtocol(
             s_http2Utf8,
             copy: false
         );
+
         /// <summary>Defines a <see cref="SslApplicationProtocol"/> instance for HTTP 1.1.</summary>
         public static readonly SslApplicationProtocol Http11 = new SslApplicationProtocol(
             s_http11Utf8,

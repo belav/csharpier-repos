@@ -15,6 +15,7 @@ namespace System.Diagnostics.Metrics
     internal struct OneTagBag
     {
         internal KeyValuePair<string, object?> Tag1;
+
         internal OneTagBag(KeyValuePair<string, object?> tag)
         {
             Tag1 = tag;
@@ -26,6 +27,7 @@ namespace System.Diagnostics.Metrics
     {
         internal KeyValuePair<string, object?> Tag1;
         internal KeyValuePair<string, object?> Tag2;
+
         internal TwoTagsBag(KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2)
         {
             Tag1 = tag1;
@@ -39,6 +41,7 @@ namespace System.Diagnostics.Metrics
         internal KeyValuePair<string, object?> Tag1;
         internal KeyValuePair<string, object?> Tag2;
         internal KeyValuePair<string, object?> Tag3;
+
         internal ThreeTagsBag(
             KeyValuePair<string, object?> tag1,
             KeyValuePair<string, object?> tag2,

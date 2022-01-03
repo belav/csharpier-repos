@@ -4,7 +4,9 @@ using System;
 using System.Threading;
 
 public struct ValX1<T> { }
+
 public class RefX1<T> { }
+
 struct Gen<T>
 {
     public static void TryEnterTest()
@@ -47,6 +49,7 @@ public class Test_TryEnter04
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;

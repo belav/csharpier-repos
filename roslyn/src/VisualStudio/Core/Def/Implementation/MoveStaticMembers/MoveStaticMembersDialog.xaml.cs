@@ -49,6 +49,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
         internal readonly struct TestAccessor
         {
             private readonly MoveStaticMembersDialog _dialog;
+
             public TestAccessor(MoveStaticMembersDialog dialog) => _dialog = dialog;
 
             public Button OKButton => _dialog.OKButton;

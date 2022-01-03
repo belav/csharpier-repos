@@ -16,6 +16,7 @@ internal class RedirectRule : IRule
     public Regex InitialMatch { get; }
     public string Replacement { get; }
     public int StatusCode { get; }
+
     public RedirectRule(string regex, string replacement, int statusCode)
     {
         if (string.IsNullOrEmpty(regex))

@@ -383,12 +383,14 @@ namespace MonoTests.System.Drawing
         {
             private readonly Bitmap _bitmap;
             public Graphics Graphics { get; }
+
             public BitmapAndGraphics(int width, int height)
             {
                 _bitmap = new Bitmap(width, height);
                 Graphics = Graphics.FromImage(_bitmap);
                 Graphics.Clip = new Region(new Rectangle(0, 0, width, height));
             }
+
             public void Dispose()
             {
                 Graphics.Dispose();
@@ -2434,6 +2436,7 @@ namespace MonoTests.System.Drawing
                 Assert.Throws<ArgumentException>(() => g.ReleaseHdcInternal(hdc));
             }
         }
+
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void TestReleaseHdc()
         {
@@ -2469,6 +2472,7 @@ namespace MonoTests.System.Drawing
                 Assert.Throws<ArgumentException>(() => g.ReleaseHdc());
             }
         }
+
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void VisibleClipBound()
         {

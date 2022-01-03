@@ -612,6 +612,7 @@ namespace System.Xml.Xsl.Qil
             Debug.Assert(args.NodeType == QilNodeType.FormalParameterList);
             return _f.Function(args, sideEffects, resultType);
         }
+
         public QilFunction Function(QilList args, QilNode defn, QilNode sideEffects)
         {
             Debug.Assert(args.NodeType == QilNodeType.FormalParameterList);

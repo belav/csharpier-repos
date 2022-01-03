@@ -148,7 +148,9 @@ namespace System.Tests
         }
 
         class ChildAttribute : ParentAttribute { }
+
         class GrandchildAttribute : ChildAttribute { }
+
         class ChildAttributeWithField : ParentAttribute
         {
             public int Field = 0;
@@ -240,6 +242,7 @@ namespace System.Tests
         private sealed class StringValueAttribute : Attribute
         {
             public string StringValue;
+
             public StringValueAttribute(string stringValue)
             {
                 StringValue = stringValue;

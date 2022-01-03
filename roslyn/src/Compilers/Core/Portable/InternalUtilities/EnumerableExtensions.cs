@@ -678,6 +678,7 @@ namespace Roslyn.Utilities
                 }
             }
         }
+
 #nullable enable
 
         internal static Dictionary<K, ImmutableArray<T>> ToDictionary<K, T>(

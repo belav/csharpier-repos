@@ -18,6 +18,7 @@ public class TestAssemblyLoadContext : AssemblyLoadContext
 {
     List<string> _privatePaths = new List<string>();
     string _applicationBase;
+
     public TestAssemblyLoadContext(
         string name,
         string applicationBase = null,

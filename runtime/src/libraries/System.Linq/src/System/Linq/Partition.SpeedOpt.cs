@@ -326,6 +326,7 @@ namespace System.Linq
             private readonly IEnumerable<TSource> _source;
             private readonly int _minIndexInclusive;
             private readonly int _maxIndexInclusive; // -1 if we want everything past _minIndexInclusive.
+
             // If this is -1, it's impossible to set a limit on the count.
             private IEnumerator<TSource>? _enumerator;
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+
 namespace integer_test
 {
     class MainClass

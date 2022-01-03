@@ -15,14 +15,17 @@ using System.Runtime.InteropServices;
 public class Foo
 {
     public int i = 42;
+
     public int getI()
     {
         return i;
     }
 }
+
 public class Bar
 {
     private int i = 1;
+
     public int getI()
     {
         return i;
@@ -34,6 +37,7 @@ public struct WrapFoo
 {
     [FieldOffset(1)]
     public int i; // partial overlap
+
     [FieldOffset(4)]
     public Foo o;
 }
@@ -43,6 +47,7 @@ public struct WrapBar
 {
     [FieldOffset(1)]
     public int i; //partial overlap
+
     [FieldOffset(4)]
     public Bar o;
 }
@@ -52,6 +57,7 @@ public struct MyUnion1
 {
     [FieldOffset(0)]
     public int i;
+
     [FieldOffset(0)]
     public WrapBar o;
 }
@@ -61,6 +67,7 @@ public struct MyUnion2
 {
     [FieldOffset(0)]
     public int i;
+
     [FieldOffset(0)]
     public WrapFoo o;
 }
@@ -91,6 +98,7 @@ public class Test
             return 101;
         }
     }
+
     public static void Go()
     {
         MyUnion2 u2;

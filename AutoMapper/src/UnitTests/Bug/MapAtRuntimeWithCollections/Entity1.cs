@@ -12,6 +12,7 @@ namespace OmmitedDatabaseModel3WithCollections
         {
             this.Entities2 = new List<Entity2>();
         }
+
         public Guid Entity17Id { get; set; }
         public Entity17 Entity17 { get; set; }
         public Guid? Entity22Id { get; set; }

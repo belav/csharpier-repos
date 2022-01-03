@@ -200,6 +200,7 @@ namespace System.Data.OleDb
             }
             return Math.Max(length, 0);
         }
+
         private void LengthValue(int value)
         {
             Debug.Assert(0 <= value, "negative LengthValue");
@@ -241,6 +242,7 @@ namespace System.Data.OleDb
                 return (DBStatus)Bindings.DBColumnAccess[IndexWithinAccessor].dwStatus;
             }
         }
+
         internal void StatusValue(DBStatus value)
         {
 #if DEBUG
@@ -278,6 +280,7 @@ namespace System.Data.OleDb
             StatusValue(DBStatus.S_ISNULL);
             RowBinding.WriteInt64(ValueOffset, 0); // safe because AlignDataSize forces 8 byte blocks
         }
+
         private void SetValueEmpty()
         {
             LengthValue(0);
@@ -448,6 +451,7 @@ namespace System.Data.OleDb
             }
             return _value!;
         }
+
         internal void Value(object? value)
         {
             if (null == value)
@@ -631,6 +635,7 @@ namespace System.Data.OleDb
             short value = RowBinding.ReadInt16(ValueOffset);
             return (0 != value);
         }
+
         private void Value_BOOL(bool value)
         {
             Debug.Assert((NativeDBType.BOOL == DbType), "Value_BOOL");
@@ -668,6 +673,7 @@ namespace System.Data.OleDb
             }
             return value;
         }
+
         private void Value_BSTR(string value)
         {
             Debug.Assert((null != value), "Value_BSTR null");
@@ -704,6 +710,7 @@ namespace System.Data.OleDb
             }
             return ((null != value) ? value : Array.Empty<byte>());
         }
+
         private void Value_ByRefBYTES(byte[] value)
         {
             Debug.Assert(null != value, "Value_ByRefBYTES null");
@@ -757,6 +764,7 @@ namespace System.Data.OleDb
             }
             return value;
         }
+
         private void Value_ByRefWSTR(string value)
         {
             Debug.Assert(null != value, "Value_ByRefWSTR null");
@@ -780,6 +788,7 @@ namespace System.Data.OleDb
             }
             RowBinding.SetByRefValue(ValueOffset, ptr);
         }
+
         private void Value_ByRefWSTR(char[] value)
         {
             Debug.Assert(null != value, "Value_ByRefWSTR null");
@@ -816,6 +825,7 @@ namespace System.Data.OleDb
             RowBinding.ReadBytes(ValueOffset, value, 0, byteCount);
             return value;
         }
+
         private void Value_BYTES(byte[] value)
         {
             Debug.Assert(null != value, "Value_BYTES null");
@@ -839,6 +849,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_CY");
             return decimal.FromOACurrency(RowBinding.ReadInt64(ValueOffset));
         }
+
         private void Value_CY(decimal value)
         {
             Debug.Assert(NativeDBType.CY == DbType, "Value_CY");
@@ -853,6 +864,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_DATE");
             return DateTime.FromOADate(RowBinding.ReadDouble(ValueOffset));
         }
+
         private void Value_DATE(DateTime value)
         {
             Debug.Assert(NativeDBType.DATE == DbType, "Value_DATE");
@@ -867,6 +879,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_DBDATE");
             return RowBinding.ReadDate(ValueOffset);
         }
+
         private void Value_DBDATE(DateTime value)
         {
             Debug.Assert(NativeDBType.DBDATE == DbType, "Value_DATE");
@@ -881,6 +894,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_DBTIME");
             return RowBinding.ReadTime(ValueOffset);
         }
+
         private void Value_DBTIME(TimeSpan value)
         {
             Debug.Assert(NativeDBType.DBTIME == DbType, "Value_DBTIME");
@@ -895,6 +909,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_DBTIMESTAMP");
             return RowBinding.ReadDateTime(ValueOffset);
         }
+
         private void Value_DBTIMESTAMP(DateTime value)
         {
             Debug.Assert(NativeDBType.DBTIMESTAMP == DbType, "Value_DBTIMESTAMP");
@@ -917,6 +932,7 @@ namespace System.Data.OleDb
                 unchecked((byte)((buffer[0] & unchecked((int)0x00FF0000)) >> 16))
             ); // scale
         }
+
         private void Value_DECIMAL(decimal value)
         {
             Debug.Assert(NativeDBType.DECIMAL == DbType, "Value_DECIMAL");
@@ -941,6 +957,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_ERROR");
             return RowBinding.ReadInt32(ValueOffset);
         }
+
         private void Value_ERROR(int value)
         {
             Debug.Assert(NativeDBType.ERROR == DbType, "Value_ERROR");
@@ -956,6 +973,7 @@ namespace System.Data.OleDb
             long tmp = RowBinding.ReadInt64(ValueOffset);
             return DateTime.FromFileTime(tmp);
         }
+
         private void Value_FILETIME(DateTime value)
         {
             Debug.Assert(NativeDBType.FILETIME == DbType, "Value_FILETIME");
@@ -971,6 +989,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_GUID");
             return RowBinding.ReadGuid(ValueOffset);
         }
+
         private void Value_GUID(Guid value)
         {
             Debug.Assert(NativeDBType.GUID == DbType, "Value_GUID");
@@ -996,6 +1015,7 @@ namespace System.Data.OleDb
             byte value = RowBinding.ReadByte(ValueOffset);
             return unchecked((sbyte)value);
         }
+
         private void Value_I1(sbyte value)
         {
             Debug.Assert(NativeDBType.I1 == DbType, "Value_I1");
@@ -1010,6 +1030,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_I2");
             return RowBinding.ReadInt16(ValueOffset);
         }
+
         private void Value_I2(short value)
         {
             Debug.Assert(NativeDBType.I2 == DbType, "Value_I2");
@@ -1024,6 +1045,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_I4");
             return RowBinding.ReadInt32(ValueOffset);
         }
+
         private void Value_I4(int value)
         {
             Debug.Assert(NativeDBType.I4 == DbType, "Value_I4");
@@ -1038,6 +1060,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_I8");
             return RowBinding.ReadInt64(ValueOffset);
         }
+
         private void Value_I8(long value)
         {
             Debug.Assert(NativeDBType.I8 == DbType, "Value_I8");
@@ -1069,6 +1092,7 @@ namespace System.Data.OleDb
             }
             return value;
         }
+
         private void Value_IDISPATCH(object value)
         {
             // UNDONE: OLE DB will IUnknown.Release input storage parameter values
@@ -1122,6 +1146,7 @@ namespace System.Data.OleDb
             }
             return value;
         }
+
         private void Value_IUNKNOWN(object value)
         {
             // UNDONE: OLE DB will IUnknown.Release input storage parameter values
@@ -1138,6 +1163,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_NUMERIC");
             return RowBinding.ReadNumeric(ValueOffset);
         }
+
         private void Value_NUMERIC(decimal value)
         {
             Debug.Assert(NativeDBType.NUMERIC == DbType, "Value_NUMERIC");
@@ -1160,6 +1186,7 @@ namespace System.Data.OleDb
 
             return RowBinding.ReadSingle(ValueOffset);
         }
+
         private void Value_R4(float value)
         {
             Debug.Assert(NativeDBType.R4 == DbType, "Value_R4");
@@ -1175,6 +1202,7 @@ namespace System.Data.OleDb
 
             return RowBinding.ReadDouble(ValueOffset);
         }
+
         private void Value_R8(double value)
         {
             Debug.Assert(NativeDBType.R8 == DbType, "Value_I4");
@@ -1189,6 +1217,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_UI1");
             return RowBinding.ReadByte(ValueOffset);
         }
+
         private void Value_UI1(byte value)
         {
             Debug.Assert(NativeDBType.UI1 == DbType, "Value_UI1");
@@ -1203,6 +1232,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_UI2");
             return unchecked((ushort)RowBinding.ReadInt16(ValueOffset));
         }
+
         private void Value_UI2(ushort value)
         {
             Debug.Assert(NativeDBType.UI2 == DbType, "Value_UI2");
@@ -1217,6 +1247,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_UI4");
             return unchecked((uint)RowBinding.ReadInt32(ValueOffset));
         }
+
         private void Value_UI4(uint value)
         {
             Debug.Assert(NativeDBType.UI4 == DbType, "Value_UI4");
@@ -1231,6 +1262,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_UI8");
             return unchecked((ulong)RowBinding.ReadInt64(ValueOffset));
         }
+
         private void Value_UI8(ulong value)
         {
             Debug.Assert(NativeDBType.UI8 == DbType, "Value_UI8");
@@ -1250,6 +1282,7 @@ namespace System.Data.OleDb
             int byteCount = Math.Min(LengthValue(), ColumnBindingMaxLen - 2);
             return RowBinding.PtrToStringUni(ValueOffset, byteCount / 2);
         }
+
         private void Value_WSTR(string value)
         {
             Debug.Assert(null != value, "Value_BYTES null");
@@ -1269,6 +1302,7 @@ namespace System.Data.OleDb
                 RowBinding.WriteCharArray(ValueOffset, chars, ValueBindingOffset, charCount);
             }
         }
+
         private void Value_WSTR(char[] value)
         {
             Debug.Assert(null != value, "Value_BYTES null");
@@ -1287,6 +1321,7 @@ namespace System.Data.OleDb
                 RowBinding.WriteCharArray(ValueOffset, value, ValueBindingOffset, charCount);
             }
         }
+
         private object Value_VARIANT()
         {
             Debug.Assert(
@@ -1296,6 +1331,7 @@ namespace System.Data.OleDb
             Debug.Assert(DBStatus.S_OK == StatusValue(), "Value_VARIANT");
             return RowBinding.GetVariantValue(ValueOffset);
         }
+
         private void Value_VARIANT(object value)
         {
             Debug.Assert(

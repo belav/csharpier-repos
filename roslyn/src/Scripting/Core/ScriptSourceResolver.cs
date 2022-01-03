@@ -52,7 +52,9 @@ namespace Microsoft.CodeAnalysis.Scripting
         }
 
         public bool Equals(ScriptSourceResolver other) => base.Equals(other);
+
         public override int GetHashCode() => base.GetHashCode();
+
         public override bool Equals(object obj) => base.Equals(obj);
     }
 }

@@ -240,6 +240,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// (i.e. even non-optional parameters can have default values).
         /// </remarks>
         internal abstract ConstantValue? ExplicitDefaultConstantValue { get; }
+
 #nullable disable
 
         /// <summary>

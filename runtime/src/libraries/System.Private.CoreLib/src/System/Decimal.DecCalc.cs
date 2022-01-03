@@ -44,16 +44,19 @@ namespace System
             // NOTE: Do not change the offsets of these fields. This structure must have the same layout as Decimal.
             [FieldOffset(0)]
             private uint uflags;
+
             [FieldOffset(4)]
             private uint uhi;
 #if BIGENDIAN
             [FieldOffset(8)]
             private uint umid;
+
             [FieldOffset(12)]
             private uint ulo;
 #else
             [FieldOffset(8)]
             private uint ulo;
+
             [FieldOffset(12)]
             private uint umid;
 #endif
@@ -102,6 +105,7 @@ namespace System
 
             // The maximum power of 10 that a 32 bit integer can store
             private const int MaxInt32Scale = 9;
+
             // The maximum power of 10 that a 64 bit integer can store
             private const int MaxInt64Scale = 19;
 
@@ -2708,13 +2712,16 @@ namespace System
             {
                 [FieldOffset(0 * 4)]
                 public uint U0;
+
                 [FieldOffset(1 * 4)]
                 public uint U1;
+
                 [FieldOffset(2 * 4)]
                 public uint U2;
 
                 [FieldOffset(0)]
                 private ulong ulo64LE;
+
                 [FieldOffset(4)]
                 private ulong uhigh64LE;
 
@@ -2757,15 +2764,19 @@ namespace System
             {
                 [FieldOffset(0 * 4)]
                 public uint U0;
+
                 [FieldOffset(1 * 4)]
                 public uint U1;
+
                 [FieldOffset(2 * 4)]
                 public uint U2;
+
                 [FieldOffset(3 * 4)]
                 public uint U3;
 
                 [FieldOffset(0 * 8)]
                 private ulong ulo64LE;
+
                 [FieldOffset(1 * 8)]
                 private ulong uhigh64LE;
 
@@ -2805,21 +2816,28 @@ namespace System
             {
                 [FieldOffset(0 * 4)]
                 public uint U0;
+
                 [FieldOffset(1 * 4)]
                 public uint U1;
+
                 [FieldOffset(2 * 4)]
                 public uint U2;
+
                 [FieldOffset(3 * 4)]
                 public uint U3;
+
                 [FieldOffset(4 * 4)]
                 public uint U4;
+
                 [FieldOffset(5 * 4)]
                 public uint U5;
 
                 [FieldOffset(0 * 8)]
                 private ulong ulo64LE;
+
                 [FieldOffset(1 * 8)]
                 private ulong umid64LE;
+
                 [FieldOffset(2 * 8)]
                 private ulong uhigh64LE;
 

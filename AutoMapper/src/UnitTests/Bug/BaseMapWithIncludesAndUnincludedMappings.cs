@@ -52,6 +52,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             public BaseB Item { get; set; }
         }
+
         public abstract class BaseA
         {
             public string Name { get; set; }
@@ -65,6 +66,7 @@ namespace AutoMapper.UnitTests.Bug
         public class ProxyOfSubA : SubA
         {
         }
+
         public class SubA : BaseA
         {
             public string Description { get; set; }

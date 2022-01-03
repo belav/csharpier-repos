@@ -12,6 +12,7 @@ using NS.Module.CS01;
 [assembly: System.Reflection.AssemblyVersion("1.2.3.4")]
 [assembly: System.Reflection.AssemblyCulture("")]
 
+
 namespace AppCS
 {
     public class App
@@ -66,10 +67,12 @@ namespace AppCS
     {
         CT ContraGooProp { set; }
     }
+
     public interface ICoVar<out CO>
     {
         CO CoGooMethod();
     }
+
     interface INormal<T>
     {
         T NormalGoo(T t);
@@ -100,6 +103,7 @@ namespace AppCS
     }
 
     class Animal { }
+
     class Tiger : Animal { }
 
     public class Test

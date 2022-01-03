@@ -12,6 +12,7 @@ namespace Microsoft.Extensions.Hosting.Tests
             Nested = new NestedOptions();
             Virtual = "complex";
         }
+
         public NestedOptions Nested { get; set; }
         public int Integer { get; set; }
         public bool Boolean { get; set; }

@@ -267,6 +267,7 @@ public class EnumIConvertibleToType
         white,
         red,
     }
+
     enum e_test : long
     {
         itemA = -123456789,

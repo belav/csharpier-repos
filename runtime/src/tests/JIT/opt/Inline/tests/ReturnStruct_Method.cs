@@ -6,6 +6,7 @@ using System;
 public struct MyStruct
 {
     public string str;
+
     public static MyStruct MakeString_Inline(string st)
     {
         MyStruct ss;

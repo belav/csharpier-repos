@@ -22,10 +22,12 @@ namespace Internal.NativeFormat
         {
             get { return _size; }
         }
+
         public void Clear()
         {
             _size = 0;
         }
+
         public void RollbackTo(int offset)
         {
             _size = offset;

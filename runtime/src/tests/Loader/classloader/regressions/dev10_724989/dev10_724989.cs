@@ -16,6 +16,7 @@ class Outer1
         }
     }
 }
+
 class Outer2
 {
     protected int field;
@@ -28,6 +29,7 @@ class Outer2
         }
     }
 }
+
 class Outer3<T>
 {
     protected int field;
@@ -40,6 +42,7 @@ class Outer3<T>
         }
     }
 }
+
 class Outer4<T>
 {
     protected int field;
@@ -58,6 +61,7 @@ class Base1
 {
     protected int field;
 }
+
 class Derived1 : Base1
 {
     public class Inner
@@ -68,10 +72,12 @@ class Derived1 : Base1
         }
     }
 }
+
 class Base2
 {
     protected int field;
 }
+
 class Derived2<T> : Base2
 {
     public class Inner
@@ -82,10 +88,12 @@ class Derived2<T> : Base2
         }
     }
 }
+
 class Base3<T>
 {
     protected int field;
 }
+
 class Derived3 : Base3<string>
 {
     public class Inner
@@ -96,10 +104,12 @@ class Derived3 : Base3<string>
         }
     }
 }
+
 class Base4<T>
 {
     protected int field;
 }
+
 class Derived4<T> : Base4<T>
 {
     public class Inner

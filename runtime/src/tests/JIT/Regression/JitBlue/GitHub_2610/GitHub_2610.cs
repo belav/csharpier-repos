@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 public struct MyValue
 {
     public long val;
+
     public MyValue(long a)
     {
         val = a;

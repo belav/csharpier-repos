@@ -17,6 +17,7 @@ namespace AutoMapper
         private List<ValueTransformerConfiguration> _valueTransformerConfigs;
         private bool? _canResolveValue;
         private Type _sourceType;
+
         public PropertyMap(
             MemberInfo destinationMember,
             Type destinationMemberType,
@@ -27,18 +28,21 @@ namespace AutoMapper
             DestinationMember = destinationMember;
             DestinationType = destinationMemberType;
         }
+
         public PropertyMap(PropertyMap inheritedMappedProperty, TypeMap typeMap)
             : this(
                 inheritedMappedProperty.DestinationMember,
                 inheritedMappedProperty.DestinationType,
                 typeMap
             ) => ApplyInheritedPropertyMap(inheritedMappedProperty);
+
         public PropertyMap(
             PropertyMap includedMemberMap,
             TypeMap typeMap,
             IncludedMember includedMember
         ) : this(includedMemberMap, typeMap) =>
             IncludedMember = includedMember.Chain(includedMemberMap.IncludedMember);
+
         public override TypeMap TypeMap { get; }
         public MemberInfo DestinationMember { get; }
         public override string DestinationName => DestinationMember.Name;
@@ -76,8 +80,10 @@ namespace AutoMapper
                     );
             protected set => _sourceType = value;
         }
+
         public void MapByConvention(IEnumerable<MemberInfo> sourceMembers) =>
             _sourceMembers = sourceMembers.ToArray();
+
         public void ApplyInheritedPropertyMap(PropertyMap inheritedMappedProperty)
         {
             if (Ignored)
@@ -123,6 +129,7 @@ namespace AutoMapper
                 );
             }
         }
+
         public override bool CanResolveValue =>
             _canResolveValue ??= !Ignored && (_sourceMembers.Length > 0 || IsResolveConfigured);
         private bool IsResolveConfigured =>
@@ -132,6 +139,7 @@ namespace AutoMapper
                 ?? CustomMapExpression
                 ?? (object)ValueConverterConfig
             ) != null;
+
         public void AddValueTransformation(
             ValueTransformerConfiguration valueTransformerConfiguration
         )

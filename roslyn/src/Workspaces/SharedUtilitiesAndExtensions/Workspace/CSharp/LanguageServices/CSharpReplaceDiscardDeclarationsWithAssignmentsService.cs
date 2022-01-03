@@ -141,6 +141,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
 
         private static bool IsDiscardDeclaration(VariableDeclaratorSyntax variable) =>
             variable.Identifier.Text == DiscardVariableName;
+
         private static bool IsDiscardDeclaration(CatchDeclarationSyntax catchDeclaration) =>
             catchDeclaration.Identifier.Text == DiscardVariableName;
 

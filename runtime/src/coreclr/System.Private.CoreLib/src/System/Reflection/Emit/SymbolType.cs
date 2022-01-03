@@ -209,6 +209,7 @@ namespace System.Reflection.Emit
         internal TypeKind m_typeKind;
         internal Type m_baseType = null!;
         internal int m_cRank; // count of dimension
+
         // If LowerBound and UpperBound is equal, that means one element.
         // If UpperBound is less than LowerBound, then the size is not specified.
         internal int[] m_iaLowerBound;

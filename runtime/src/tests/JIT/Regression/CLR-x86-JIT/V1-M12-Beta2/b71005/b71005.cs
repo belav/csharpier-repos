@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal class testout1
 {
     private static bool s_static_field_bool;
@@ -10,26 +11,32 @@ internal class testout1
     private bool _member_field_bool;
     private bool _member_field_bool_false;
     private bool _member_field_bool_true;
+
     private static bool simple_func_bool()
     {
         return true;
     }
+
     private static bool simple_func_bool_true()
     {
         return true;
     }
+
     private static bool simple_func_bool_false()
     {
         return false;
     }
+
     private static bool complex_func_bool()
     {
         return true;
     }
+
     private static bool complex_func_bool_true()
     {
         return true;
     }
+
     private static bool complex_func_bool_false()
     {
         return false;

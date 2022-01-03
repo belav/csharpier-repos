@@ -1219,12 +1219,14 @@ public class Helper
 
         return u1;
     }
+
     public static void PrintByteStruct3Byte(ByteStruct3Byte str1, string name)
     {
         Console.WriteLine("\t{0}.b1 = {1}", name, str1.b1);
         Console.WriteLine("\t{0}.b2 = {1}", name, str1.b2);
         Console.WriteLine("\t{0}.b3 = {1}", name, str1.b3);
     }
+
     public static bool ValidateByteStruct3Byte(
         ByteStruct3Byte str1,
         ByteStruct3Byte str2,
@@ -1256,10 +1258,12 @@ public class Helper
 
         return u1;
     }
+
     public static void PrintIntergerStructSequential(IntergerStructSequential str1, string name)
     {
         Console.WriteLine("\t{0}.i = {1}", name, str1.i);
     }
+
     public static bool ValidateIntergerStructSequential(
         IntergerStructSequential str1,
         IntergerStructSequential str2,
@@ -1291,10 +1295,12 @@ public static class TestFramework
     {
         Logging.WriteLine(str);
     }
+
     public static void LogError(string id, string msg)
     {
         Logging.WriteLine("ERROR!!!-" + id + ": " + msg);
     }
+
     public static void BeginScenario(string name)
     {
         Logging.WriteLine("Beginning scenario: " + name);

@@ -14,6 +14,7 @@ namespace System.Net
         private readonly HttpListenerContext _httpContext;
         private long _leftToWrite = long.MinValue;
         private bool _inOpaqueMode;
+
         // The last write needs special handling to cancel.
         private HttpResponseStreamAsyncResult? _lastWrite;
 

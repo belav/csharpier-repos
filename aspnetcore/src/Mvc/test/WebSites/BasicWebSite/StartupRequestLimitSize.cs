@@ -65,6 +65,7 @@ public class StartupRequestLimitSize
             _innerStream = innerStream;
             _maxRequestBodySizeFeature = maxRequestBodySizeFeature;
         }
+
         public override bool CanRead => _innerStream.CanRead;
 
         public override bool CanSeek => _innerStream.CanSeek;

@@ -11,6 +11,7 @@ public class List<T> { }
 public class Utils
 {
     public static int failures = 0;
+
     public static void Check(Type expected, Type actual)
     {
         if (expected != actual)
@@ -211,6 +212,7 @@ class Test7
     {
         public A fst;
         public B snd;
+
         public Pair(A a, B b)
         {
             fst = a;
@@ -222,6 +224,7 @@ class Test7
     {
         public A fst;
         public Pair<B, C> snd;
+
         public Triple(A a, B b, C c)
         {
             fst = a;
@@ -232,6 +235,7 @@ class Test7
     class P
     {
         public Triple<int, P, long> fld;
+
         public P(int x, P y, long z)
         {
             fld = new Triple<int, P, long>(x, y, z);
@@ -256,6 +260,7 @@ class Test8
     class Recursive2<A, B>
     {
         public Recursive2<A, B> f1;
+
         public Recursive2(Recursive2<A, B> a1)
         {
             f1 = a1;
@@ -267,6 +272,7 @@ class Test8
         public Mixed2<A, B> f1;
         public Mixed2<int, int> f2;
         public Mixed2<B, A> f3;
+
         public Mixed2(Mixed2<A, B> a1, Mixed2<int, int> a2, Mixed2<B, A> a3)
         {
             f1 = a1;
@@ -278,6 +284,7 @@ class Test8
     class NonRecursive2<A, B>
     {
         public NonRecursive2<int, int> f2;
+
         public NonRecursive2(NonRecursive2<int, int> a2)
         {
             f2 = a2;
@@ -287,6 +294,7 @@ class Test8
     class Expansive2<A, B>
     {
         public Expansive2<Expansive2<A, B>, B> f1;
+
         public Expansive2(Expansive2<Expansive2<A, B>, B> a1)
         {
             f1 = a1;
@@ -315,6 +323,7 @@ class Test9
     class RecursiveClass2<A>
     {
         public RecursiveStruct2<A> f2; //TODO: Assign to default value after compile supports T.default
+
         public RecursiveClass2() { }
     }
 
@@ -322,6 +331,7 @@ class Test9
     {
         public RecursiveClass2<A> f1; //TODO: Assign to default value after compile supports T.default
         public RecursiveClass2<A> f2; //TODO: Assign to default value after compile supports T.default
+
         public RecursiveStruct2(int x)
         {
             f1 = null;
@@ -332,6 +342,7 @@ class Test9
     class NonRecursiveClass2<A>
     {
         public NonRecursiveStruct2<int> f2;
+
         public NonRecursiveClass2() { }
     }
 
@@ -339,6 +350,7 @@ class Test9
     {
         public NonRecursiveClass2<int> f1;
         public NonRecursiveClass2<int> f2;
+
         public NonRecursiveStruct2(int x)
         {
             f1 = null;
@@ -349,6 +361,7 @@ class Test9
     class ExpansiveClass2<A>
     {
         public ExpansiveStruct2<ExpansiveClass2<A>> f2; //TODO: Assign to default value after compile supports T.default
+
         public ExpansiveClass2() { }
     }
 
@@ -356,6 +369,7 @@ class Test9
     {
         public ExpansiveClass2<ExpansiveStruct2<A>> f1; //TODO: Assign to default value after compile supports T.default
         public ExpansiveClass2<ExpansiveStruct2<A>> f2; //TODO: Assign to default value after compile supports T.default
+
         public ExpansiveStruct2(int x)
         {
             f1 = null;
@@ -391,12 +405,14 @@ class Test10
     class RecursiveClass1<A>
     {
         public RecursiveStruct1<A> f1;
+
         public RecursiveClass1() { }
     }
 
     struct RecursiveStruct1<A>
     {
         public RecursiveClass1<A> f1;
+
         public RecursiveStruct1(int x)
         {
             f1 = null;
@@ -406,12 +422,14 @@ class Test10
     class NonRecursiveClass1<A>
     {
         public NonRecursiveStruct1<int> f1;
+
         public NonRecursiveClass1() { }
     }
 
     struct NonRecursiveStruct1<A>
     {
         public NonRecursiveClass1<int> f1;
+
         public NonRecursiveStruct1(int x)
         {
             f1 = null;
@@ -421,12 +439,14 @@ class Test10
     class ExpansiveClass1<A>
     {
         public ExpansiveStruct1<ExpansiveClass1<A>> f1;
+
         public ExpansiveClass1() { }
     }
 
     struct ExpansiveStruct1<A>
     {
         public ExpansiveClass1<ExpansiveStruct1<A>> f1;
+
         public ExpansiveStruct1(int x)
         {
             f1 = null;

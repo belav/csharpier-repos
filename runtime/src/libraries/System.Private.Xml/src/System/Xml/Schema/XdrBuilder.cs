@@ -186,6 +186,7 @@ namespace System.Xml.Schema
                 _SchemaFlags = 0;
                 _BuildFunc = build;
             }
+
             internal XdrAttributeEntry(
                 SchemaNames.Token a,
                 XmlTokenizedType ttype,
@@ -460,6 +461,7 @@ namespace System.Xml.Schema
                 new XdrBuildFunction(XDR_BuildAttributeType_DtMinLength)
             )
         };
+
         //
         // Schema entries
         //

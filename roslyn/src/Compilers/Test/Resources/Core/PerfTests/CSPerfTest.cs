@@ -1382,11 +1382,13 @@ namespace ns1
         {
             Console.WriteLine("    c6<T, U>.ctor");
         }
+
         // Constructor
         public c6(int i) : this()
         {
             Console.WriteLine("    c6<T, U>.ctor(int i)");
         }
+
         // Constructor
         public c6(T i, List<Func<U>> j) : this(1)
         {
@@ -1433,6 +1435,7 @@ namespace ns1
             Member19,
             Member20
         }
+
         public enum E3 : short
         {
             Member1 = 1,
@@ -1488,6 +1491,7 @@ namespace ns1
 
         #region IEnumerable Implementation
         protected static IList<T> collection = new List<T>();
+
         // Implement Interface Implicitly
         public IEnumerator<T> GetEnumerator()
         {
@@ -1512,6 +1516,7 @@ namespace ns1
         #region IDisposable Implementation
         // Implement Interface Explicitly
         private System.Threading.Tasks.Task proc = default(System.Threading.Tasks.Task);
+
         void IDisposable.Dispose()
         {
             proc.Dispose();
@@ -1520,6 +1525,7 @@ namespace ns1
 
         #region IEnumerator Implementation
         private IEnumerator<T> enumerator = collection.GetEnumerator();
+
         // Implement Interface Implicitly
         public T Current
         {
@@ -1539,6 +1545,7 @@ namespace ns1
         {
             return MoveNext();
         }
+
         public bool MoveNext()
         {
             return enumerator.MoveNext();
@@ -1602,6 +1609,7 @@ namespace ns1
         {
             Console.WriteLine("    c7<T, U>.ctor()");
         }
+
         // Constructor
         public c7(int i) : base(i)
         {
@@ -1609,6 +1617,7 @@ namespace ns1
             Console.WriteLine("    c7<T, U>.ctor(int i)");
             --i;
         }
+
         // Constructor
         public c7(T i, List<Func<U>> j) : base(default(U), new List<Func<T>>())
         {
@@ -1663,6 +1672,7 @@ namespace ns1
             // Private Accessor
             private set { Console.WriteLine("    c7<T, U>.prop3.set()"); }
         }
+
         // Hide Read-Only Property
         public new U prop2
         {
@@ -1672,6 +1682,7 @@ namespace ns1
                 return default(U);
             }
         }
+
         // Hide Read-Write Property
         public new IDictionary<T, U> prop1
         {
@@ -1712,6 +1723,7 @@ namespace ns1
         {
             return collection.GetEnumerator();
         }
+
         // Re-Implement Interface Explicitly
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -1722,6 +1734,7 @@ namespace ns1
         #region ICollection Implementation
         // Implement Interface Implicitly
         private new List<U> collection = new List<U>();
+
         public void Add(U item)
         {
             collection.Add(item);
@@ -1795,6 +1808,7 @@ namespace ns1
     abstract public class c8 : i0<int>, i1<long, long>
     {
         internal int _prop1 = 0;
+
         // Implement Read-Write Property
         // Virtual Property
         virtual public int prop1
@@ -1829,6 +1843,7 @@ namespace ns1
         }
 
         List<long> __prop2 = new List<long>();
+
         // Explicitly Implement Write-Only Property
         List<long> i1<long, long>.prop2
         {
@@ -1867,8 +1882,10 @@ namespace ns1
 
         // Abstract Properties, Protected Accessor
         public abstract IList<int> prop3 { get; protected set; }
+
         // Virtual Auto-Property, Internal Accessor
         public virtual IDictionary<string, IList<int>> prop4 { internal get; set; }
+
         // Virtual Auto-Property, Protected Internal Accessor
         public virtual i2 prop5 { get; protected internal set; }
 
@@ -1878,10 +1895,12 @@ namespace ns1
         {
             Console.WriteLine("    c8.method1()");
         }
+
         public virtual void method1<TT>(long x, TT y)
         {
             Console.WriteLine("    c8.i0<int>.method1<TT>(long x, TT y)");
         }
+
         public virtual void method2()
         {
             Console.WriteLine("    c8.method2()");
@@ -1896,10 +1915,12 @@ namespace ns1
         {
             Console.WriteLine("    c8.i0<int>.method1<TT>(int x, TT y)");
         }
+
         void i0<long>.method1()
         {
             Console.WriteLine("    c8.i0<long>.method1()");
         }
+
         void i1<long, long>.method1()
         {
             Console.WriteLine("    c8.i1<long, long>.method1()");
@@ -2027,6 +2048,7 @@ namespace ns1
         {
             Console.WriteLine("    c9.method1<TT, UU>(int x, TT y, int xx, UU yy, ref TT z)");
         }
+
         // Override Abstract Method
         public override void method1<TT, UU>(long x, TT y, long xx, UU yy, ref TT z)
         {
@@ -2038,10 +2060,12 @@ namespace ns1
         {
             return _prop1.ToString();
         }
+
         public sealed override bool Equals(object obj)
         {
             return _prop1.Equals(obj);
         }
+
         public sealed override int GetHashCode()
         {
             return _prop1.GetHashCode();
@@ -2126,6 +2150,7 @@ namespace ns1
             }
         }
         Exception k;
+
         public void method1()
         {
             k = (Exception)new ArgumentException();
@@ -2134,6 +2159,7 @@ namespace ns1
         }
 
         ArgumentException e;
+
         public void method1<TT, UU>(
             int x,
             TT y,
@@ -2148,6 +2174,7 @@ namespace ns1
         }
 
         FieldAccessException f;
+
         public void method2()
         {
             f = new FieldAccessException();
@@ -2231,6 +2258,7 @@ namespace ns1
 
         [ContextStatic]
         public static string s = string.Empty;
+
         int i2.method2()
         {
             Console.WriteLine("    s0.i2.method2()");
@@ -2323,6 +2351,7 @@ namespace ns1
         }
 
         const int Value = 0;
+
         [nested.First(Value, Value = (short)Value)]
         [LoaderOptimization(LoaderOptimization.NotSpecified)]
         public void Test()
@@ -2501,6 +2530,7 @@ namespace ns1
     {
         [NonSerialized]
         internal int _i;
+
         [NonSerialized()]
         [nested.First]
         internal int _j;
@@ -2564,6 +2594,7 @@ namespace ns1
         }
 
         const long l = 2;
+
         [nested.First]
         public static void Test()
         {
@@ -2724,6 +2755,7 @@ namespace ns1
     namespace nested
     {
         using nested;
+
         [Serializable]
         struct s2 : i3<string>
         {
@@ -2816,6 +2848,7 @@ namespace ns1
                 var l = new List<string>();
                 ((i3<string>)this).method(ref l, out x, out ee, out s);
             }
+
             // Explicit Implementation
             void i3<string>.method<U>(
                 ref List<string> x,
@@ -2858,6 +2891,7 @@ namespace ns1
         public class FirstAttribute : Attribute
         {
             public int Value = (int)default(long);
+
             [First(Value = default(int))]
             [Second(value: default(short), Value = default(short))]
             [AttributeUsage(
@@ -2876,6 +2910,7 @@ namespace ns1
             {
                 new public long Value = default(int);
                 public short Value2 = (short)default(int);
+
                 // Static Constructor
                 [Second]
                 static SecondAttribute()
@@ -2887,17 +2922,20 @@ namespace ns1
                     collection.Intersect(collection.AsEnumerable());
                     Console.WriteLine("    SecondAttribute.cctor()");
                 }
+
                 [Third]
                 internal SecondAttribute()
                 {
                     Console.WriteLine("    SecondAttribute.ctor()");
                 }
+
                 [ThirdAttribute.Second]
                 internal SecondAttribute(int value)
                 {
                     Value = value;
                     Console.WriteLine("    SecondAttribute.ctor(int value)");
                 }
+
                 [ThirdAttribute.Third]
                 public SecondAttribute(int value, long value2)
                 {
@@ -2938,17 +2976,20 @@ namespace ns1
                     collection.Take(2).TakeWhile((a) => a > 0).ToArray().ToList();
                     Console.WriteLine("    ThirdAttribute.cctor()");
                 }
+
                 [ThirdAttribute.Second]
                 public ThirdAttribute()
                 {
                     Console.WriteLine("    ThirdAttribute.ctor()");
                 }
+
                 [ThirdAttribute.Third]
                 public ThirdAttribute(int value)
                 {
                     Value = (short)value;
                     Console.WriteLine("    ThirdAttribute.ctor(int value)");
                 }
+
                 [Second]
                 internal ThirdAttribute(int value, long value2)
                 {
@@ -2956,6 +2997,7 @@ namespace ns1
                     Value2 = value2;
                     Console.WriteLine("    ThirdAttribute.ctor(int value, long value2)");
                 }
+
                 public ThirdAttribute(int value, long value2, short value3)
                 {
                     Value = (byte)value;
@@ -2982,11 +3024,13 @@ namespace ns1
                 collection.CopyTo(collection, 0);
                 Console.WriteLine("    FirstAttribute.cctor()");
             }
+
             [SecondAttribute.Second]
             public FirstAttribute()
             {
                 Console.WriteLine("    FirstAttribute.ctor()");
             }
+
             [FirstAttribute.SecondAttribute.ThirdAttribute.Second(default(byte))]
             internal FirstAttribute(int value)
             {
@@ -3014,6 +3058,7 @@ namespace ns1
 
                 Console.WriteLine("    ExtensionMethods.cctor()");
             }
+
             [First]
             internal static string Stringize([FirstAttribute.SecondAttribute.Third] this s2.s1 s)
             {
@@ -3022,6 +3067,7 @@ namespace ns1
                 return (s.ToString() == s.ToString(out ss)).ToString();
             }
         }
+
         [FirstAttribute.Second]
         static class ExtensionMethods2
         {
@@ -3034,6 +3080,7 @@ namespace ns1
                 collection.Intersect(collection).Reverse().Skip(4).Single();
                 Console.WriteLine("    ExtensionMethods2.cctor()");
             }
+
             [FirstAttribute.Second]
             public static string ToString([FirstAttribute.SecondAttribute] this s2.s1 s)
             {
@@ -3042,6 +3089,7 @@ namespace ns1
                 return s.ToString(out ss);
             }
         }
+
         [FirstAttribute.SecondAttribute.Third]
         static class ExtensionMethods3
         {
@@ -3050,6 +3098,7 @@ namespace ns1
             {
                 Console.WriteLine("    ExtensionMethods3.cctor()");
             }
+
             [FirstAttribute.SecondAttribute.Third]
             public static string ToString(
                 [FirstAttribute.SecondAttribute] this s2.s1 s,
@@ -3066,6 +3115,7 @@ namespace ns1
         static class c1<T, U>
         {
             static s1 field = new s1();
+
             // Static Constructor
             static c1()
             {
@@ -3094,6 +3144,7 @@ namespace ns1
                     e = (Exception)default(ArgumentException);
                     x = default(T);
                 }
+
                 // Implicit Implementation
                 public void method<UU>(ref List<T> x, out UU y, out ArgumentException e, out s2 s)
                 {
@@ -3122,6 +3173,7 @@ namespace ns1
         }
     }
 }
+
 namespace ns1
 {
     public class LowFrequencyTest
@@ -3180,6 +3232,7 @@ namespace ns1
 
             // Lambda
             public Func<T, List<T>, U, Dictionary<List<T>, U>> func = (x, y, z) => d;
+
             // Anonymous Method
             public Del<U, T> del2 = delegate(U x, List<U> y, Dictionary<List<U>, T> z)
             {

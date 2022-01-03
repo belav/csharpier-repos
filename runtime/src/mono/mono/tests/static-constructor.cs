@@ -45,6 +45,7 @@ public class Tests
         else
             burp = 4;
     }
+
     public static int Main()
     {
         if (last != 42)

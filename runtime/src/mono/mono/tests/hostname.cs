@@ -7,6 +7,7 @@ public class A : MarshalByRefObject
     {
         Dns.GetHostByName("localhost");
     }
+
     public static void Main()
     {
         Console.WriteLine("aaa");

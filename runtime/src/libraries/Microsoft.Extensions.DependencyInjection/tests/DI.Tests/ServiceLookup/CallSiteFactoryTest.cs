@@ -961,9 +961,13 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         }
 
         class CustomService1 : ICustomService { }
+
         class CustomService2 : ICustomService { }
+
         class CustomService3 : ICustomService { }
+
         class CustomService4 : ICustomService { }
+
         class CustomService5 : ICustomService { }
 
         [Theory]
@@ -1477,15 +1481,19 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         {
             public Class1(Class2 c2) { }
         }
+
         private class Class2
         {
             public Class2(Class3 c3) { }
         }
+
         private class Class3 { }
+
         private class Class4
         {
             public Class4(Class3 c3) { }
         }
+
         private class Class5
         {
             public Class5(Class2 c2) { }
@@ -1496,15 +1504,19 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         {
             public ClassA(ClassB cb) { }
         }
+
         private class ClassB
         {
             public ClassB(ClassC<object> cc) { }
         }
+
         private class ClassC<T> { }
+
         private class ClassD
         {
             public ClassD(ClassC<string> cd) { }
         }
+
         private class ClassE
         {
             public ClassE(ClassB cb) { }
@@ -1512,6 +1524,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         // Open generic with trimming annotations
         private interface IServiceWithoutTrimmingAnnotations<T> { }
+
         private class ServiceWithTrimmingAnnotations<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
         > : IServiceWithoutTrimmingAnnotations<T> { }
@@ -1519,9 +1532,11 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         private interface IServiceWithPublicConstructors<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
         > { }
+
         private class ServiceWithPublicProperties<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
         > : IServiceWithPublicConstructors<T> { }
+
         private class ServiceWithPublicConstructors<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
         > : IServiceWithPublicConstructors<T> { }
@@ -1530,10 +1545,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             T1,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T2
         > { }
+
         private class ServiceWithTwoGenericsInvalid<
             T1,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T2
         > : IServiceWithTwoGenerics<T1, T2> { }
+
         private class ServiceWithTwoGenericsValid<
             T1,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T2
@@ -1546,6 +1563,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             )]
                 T
         > { }
+
         private class ServiceWithLessMemberTypes<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
         > : IServiceWithMoreMemberTypes<T> { }

@@ -486,6 +486,7 @@ namespace System.CommandLine.Tests.Binding
 
         internal static string NonexistentPathWithTrailingSlash() =>
             NonexistentPathWithoutTrailingSlash() + Path.DirectorySeparatorChar;
+
         internal static string NonexistentPathWithTrailingAltSlash() =>
             NonexistentPathWithoutTrailingSlash() + Path.AltDirectorySeparatorChar;
 

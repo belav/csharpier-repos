@@ -1638,6 +1638,7 @@ public class A
             }
 
             public override bool Equals(object other) => true;
+
             public override int GetHashCode() => 1;
         }
 

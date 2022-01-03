@@ -3,6 +3,7 @@
 //
 
 using System;
+
 public struct AA
 {
     public static void f()
@@ -43,5 +44,6 @@ class App
         Console.WriteLine("Passed.");
         return 100;
     }
+
     public static bool flag = true;
 }

@@ -236,6 +236,7 @@ namespace System.Xml.Xsl.XsltOld
                 _replaceNSAliasesDone = true;
             }
         }
+
         //
         // Execution
         //

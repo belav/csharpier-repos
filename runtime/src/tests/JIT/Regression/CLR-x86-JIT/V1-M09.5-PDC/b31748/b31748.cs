@@ -28,6 +28,7 @@ namespace Test
                 do { } while ((uint)param1[2] < 0);
             }
         }
+
         static int Main()
         {
             bool b = false;

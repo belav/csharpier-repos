@@ -1009,7 +1009,9 @@ namespace System.ComponentModel.Tests
                 PropertyDescriptor prop,
                 ListSortDirection direction
             ) { }
+
             protected override void RemoveSortCore() { }
+
             protected override int FindCore(PropertyDescriptor prop, object key) => 200;
         }
     }

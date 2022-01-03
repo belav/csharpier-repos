@@ -728,6 +728,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 MemberResolutionResult<TMember> result
             ) => result.WithResult(MemberAnalysisResult.WrongCallingConvention());
         }
+
 #nullable disable
 
         private bool FailsConstraintChecks(
@@ -2719,6 +2720,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     _ => false
                 };
         }
+
 #nullable disable
 
         private static void GetParameterCounts<TMember>(

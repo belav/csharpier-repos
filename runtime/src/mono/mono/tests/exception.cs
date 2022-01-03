@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+
 public static class Test
 {
     static Test()
@@ -9,9 +10,11 @@ public static class Test
 
     public static void Foo() { }
 }
+
 public class Ex
 {
     int p;
+
     public static int test2()
     {
         var m = typeof(Test).GetMethod("Foo");
@@ -35,6 +38,7 @@ public class Ex
         }
         return 1;
     }
+
     public static int test1()
     {
         Ex x = null;
@@ -78,6 +82,7 @@ public class Ex
         }
         return res;
     }
+
     public static int Main()
     {
         if (test(1) != 10)

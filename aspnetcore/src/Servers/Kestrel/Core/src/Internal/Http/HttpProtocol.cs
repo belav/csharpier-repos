@@ -60,6 +60,7 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     // Keep-alive is default for HTTP/1.1 and HTTP/2; parsing and errors will change its value
     // volatile, see: https://msdn.microsoft.com/en-us/library/x13ttww7.aspx
     protected volatile bool _keepAlive = true;
+
     // _canWriteResponseBody is set in CreateResponseHeaders.
     // If we are writing with GetMemory/Advance before calling StartAsync, assume we can write and throw away contents if we can't.
     private bool _canWriteResponseBody = true;
@@ -70,6 +71,7 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
     private BadHttpRequestException? _requestRejectedException;
 
     protected HttpVersion _httpVersion;
+
     // This should only be used by the application, not the server. This is settable on HttpRequest but we don't want that to affect
     // how Kestrel processes requests/responses.
     private string? _httpProtocol;
@@ -111,6 +113,7 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
 
     protected KestrelTrace Log => ServiceContext.Log;
     private DateHeaderValueManager DateHeaderValueManager => ServiceContext.DateHeaderValueManager;
+
     // Hold direct reference to ServerOptions since this is used very often in the request processing path
     protected KestrelServerOptions ServerOptions { get; set; } = default!;
     protected string ConnectionId => _context.ConnectionId;

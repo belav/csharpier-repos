@@ -32,6 +32,7 @@ namespace PartialCompactionTest
         {
             public int minsize;
             public int maxsize;
+
             //public float percentage;  //percentage of objects that fall into this bucket
             public SizeBucket(int min, int max)
             {
@@ -53,6 +54,7 @@ namespace PartialCompactionTest
         private const int BUCKET3_MIN = 1000;
         private const int BUCKET4_MIN = 10000;
         private const int BUCKETS_MAX = 80000;
+
         //////
 
         public const int DEFAULT_ITERATIONS = 100;
@@ -62,6 +64,7 @@ namespace PartialCompactionTest
         public static int randomSeed;
 
         public static int pointerSize = 4; //bytes
+
         [ThreadStatic]
         public static Random Rand;
 
@@ -338,6 +341,7 @@ namespace PartialCompactionTest
             }
             gcHandleArr.Clear();
         }
+
         //estimate the total number of objects in the reference graph
         public static int CountTotalObjects(List<Object> Arr)
         {
@@ -386,6 +390,7 @@ namespace PartialCompactionTest
 
             return count;
         }
+
         public static void CleanupWeakReferenceArr()
         {
             for (int k = weakList.Count - 1; k >= 0; k--)
@@ -401,6 +406,7 @@ namespace PartialCompactionTest
                 }
             }
         }
+
         public static int AllocateRegion(
             int regionSize,
             float pinnedPercentage,
@@ -453,6 +459,7 @@ namespace PartialCompactionTest
             AvgObjectSize = (double)EstimatedHeapSize / (double)EstimatedObjectCount;
             //Console.WriteLine("Avg object size " + AvgObjectSize);
         }
+
         public static void AddPinnedObject(int objSize)
         {
             gcHandleArr.Add(GCHandle.Alloc(CreateObject(objSize, true), GCHandleType.Pinned));
@@ -635,6 +642,7 @@ namespace PartialCompactionTest
             sizeBuckets[2] = new SizeBucket(BUCKET3_MIN, BUCKET4_MIN);
             sizeBuckets[3] = new SizeBucket(BUCKET4_MIN, BUCKETS_MAX);
         }
+
         /// Parse the arguments and also initialize values that are not set by args
         public static bool ParseArgs(string[] args)
         {
@@ -750,6 +758,7 @@ namespace PartialCompactionTest
             public List<Object> Spaces = new List<Object>(2500);
             public List<Object> Objects = new List<Object>(2500);
             public List<Object> Ephemeral = new List<Object>(2500);
+
             public void ReferenceEphemeralObjects()
             {
                 //create refs from ephemeral objects to gen2 objects

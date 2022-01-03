@@ -248,6 +248,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         // Left side of any assignment (for example = or ??= or *=  or += )
         bool IsLeftSideOfAnyAssignment([NotNullWhen(true)] SyntaxNode? node);
+
         // Left side of compound assignment (for example ??= or *=  or += )
         bool IsLeftSideOfCompoundAssignment([NotNullWhen(true)] SyntaxNode? node);
         SyntaxNode GetRightHandSideOfAssignment(SyntaxNode node);
@@ -369,6 +370,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         bool IsUsingDirectiveName([NotNullWhen(true)] SyntaxNode? node);
 
         bool IsAttributeName(SyntaxNode node);
+
         // Violation.  Doesn't correspond to any shared structure for vb/c#
         SyntaxList<SyntaxNode> GetAttributeLists(SyntaxNode? node);
 
@@ -453,8 +455,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         /// In VB, this includes all block statements such as a MultiLineIfBlockSyntax.
         /// </summary>
         bool IsExecutableBlock([NotNullWhen(true)] SyntaxNode? node);
+
         // Violation.  This should return a SyntaxList
         IReadOnlyList<SyntaxNode> GetExecutableBlockStatements(SyntaxNode? node);
+
         // Violation.  This is a feature level API.
         SyntaxNode? FindInnermostCommonExecutableBlock(IEnumerable<SyntaxNode> nodes);
 
@@ -495,12 +499,14 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         // Violation.  This is a feature level API.
         List<SyntaxNode> GetTopLevelAndMethodLevelMembers(SyntaxNode? root);
+
         // Violation.  This is a feature level API.
         List<SyntaxNode> GetMethodLevelMembers(SyntaxNode? root);
         SyntaxList<SyntaxNode> GetMembersOfTypeDeclaration(SyntaxNode typeDeclaration);
 
         // Violation.  This is a feature level API.
         bool ContainsInMemberBody([NotNullWhen(true)] SyntaxNode? node, TextSpan span);
+
         // Violation.  This is a feature level API.
         TextSpan GetInactiveRegionSpanAroundPosition(
             SyntaxTree tree,
@@ -530,6 +536,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             SyntaxNode? root,
             CancellationToken cancellationToken
         );
+
         // Violation.  This is a feature level API.
         bool TryGetCorrespondingOpenBrace(SyntaxToken token, out SyntaxToken openBrace);
 

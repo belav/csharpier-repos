@@ -453,6 +453,7 @@ namespace AutoMapper.UnitTests
             {
                 public Tuple<int, int> Value { get; set; }
             }
+
             public class Dest
             {
                 public Tuple<int, int> Value { get; set; }

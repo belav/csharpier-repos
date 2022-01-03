@@ -125,47 +125,67 @@ namespace System.Runtime.Serialization.Formatters.Tests
         private sealed class TestFormatter : Formatter
         {
             public new object GetNext(out long objID) => base.GetNext(out objID);
+
             public new long Schedule(object obj) => base.Schedule(obj);
+
             public new void WriteMember(string memberName, object data) =>
                 base.WriteMember(memberName, data);
+
             public new ObjectIDGenerator m_idGenerator => base.m_idGenerator;
             public new Queue m_objectQueue => base.m_objectQueue;
             public Action<string, object> WriteCallback;
 
             protected override void WriteArray(object obj, string name, Type memberType) =>
                 WriteCallback?.Invoke("WriteArray", obj);
+
             protected override void WriteBoolean(bool val, string name) =>
                 WriteCallback?.Invoke("WriteBoolean", val);
+
             protected override void WriteByte(byte val, string name) =>
                 WriteCallback?.Invoke("WriteByte", val);
+
             protected override void WriteChar(char val, string name) =>
                 WriteCallback?.Invoke("WriteChar", val);
+
             protected override void WriteDateTime(DateTime val, string name) =>
                 WriteCallback?.Invoke("WriteDateTime", val);
+
             protected override void WriteDecimal(decimal val, string name) =>
                 WriteCallback?.Invoke("WriteDecimal", val);
+
             protected override void WriteDouble(double val, string name) =>
                 WriteCallback?.Invoke("WriteDouble", val);
+
             protected override void WriteInt16(short val, string name) =>
                 WriteCallback?.Invoke("WriteInt16", val);
+
             protected override void WriteInt32(int val, string name) =>
                 WriteCallback?.Invoke("WriteInt32", val);
+
             protected override void WriteInt64(long val, string name) =>
                 WriteCallback?.Invoke("WriteInt64", val);
+
             protected override void WriteObjectRef(object obj, string name, Type memberType) =>
                 WriteCallback?.Invoke("WriteObjectRef", obj);
+
             protected override void WriteSByte(sbyte val, string name) =>
                 WriteCallback?.Invoke("WriteSByte", val);
+
             protected override void WriteSingle(float val, string name) =>
                 WriteCallback?.Invoke("WriteSingle", val);
+
             protected override void WriteTimeSpan(TimeSpan val, string name) =>
                 WriteCallback?.Invoke("WriteTimeSpan", val);
+
             protected override void WriteUInt16(ushort val, string name) =>
                 WriteCallback?.Invoke("WriteUInt16", val);
+
             protected override void WriteUInt32(uint val, string name) =>
                 WriteCallback?.Invoke("WriteUInt32", val);
+
             protected override void WriteUInt64(ulong val, string name) =>
                 WriteCallback?.Invoke("WriteUInt64", val);
+
             protected override void WriteValueType(object obj, string name, Type memberType) =>
                 WriteCallback?.Invoke("WriteValueType", obj);
 
@@ -174,6 +194,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             public override ISurrogateSelector SurrogateSelector { get; set; }
 #pragma warning disable CS0672 // Member overrides obsolete member
             public override object Deserialize(Stream serializationStream) => null;
+
             public override void Serialize(Stream serializationStream, object graph) { }
 #pragma warning restore CS0672 // Member overrides obsolete member
         }

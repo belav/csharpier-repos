@@ -140,6 +140,7 @@ namespace AutoMapper.UnitTests.Bug
             );
             config.AssertConfigurationIsValid();
         }
+
         [Fact]
         public void more_specific_map_should_override_base_mapping_with_one_parameter()
         {
@@ -246,6 +247,7 @@ namespace AutoMapper.UnitTests.Bug
             );
             config.AssertConfigurationIsValid();
         }
+
         [Fact]
         public void include_should_allow_automapper_to_select_more_specific_included_type_with_one_parameter()
         {
@@ -349,13 +351,16 @@ namespace AutoMapper.UnitTests.Bug
         class Source
         {
         }
+
         class Destination
         {
             public int Value { get; set; }
         }
+
         class DestinationDerived : Destination
         {
         }
+
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 cfg =>
@@ -367,6 +372,7 @@ namespace AutoMapper.UnitTests.Bug
                         .ForMember(d => d.Value, o => o.MapFrom(s => 2));
                 }
             );
+
         [Fact]
         public void Should_use_derived_mapfrom() =>
             Map<DestinationDerived>(new Source()).Value.ShouldBe(2);

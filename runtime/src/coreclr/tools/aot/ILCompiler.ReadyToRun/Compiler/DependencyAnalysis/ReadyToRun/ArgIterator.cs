@@ -62,12 +62,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             return _type == null && !_isByRef;
         }
+
         public bool IsValueType()
         {
             if (_isByRef)
                 return false;
             return _type.IsValueType;
         }
+
         public bool IsPointerType()
         {
             if (_isByRef)
@@ -467,10 +469,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             return _hasThis;
         }
+
         public bool IsVarArg()
         {
             return _isVarArg;
         }
+
         public int NumFixedArgs()
         {
             return _parameterTypes != null ? _parameterTypes.Length : 0;
@@ -1940,6 +1944,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         }
 
         private ParamTypeLocation _paramTypeLoc;
+
         /* X86: PARAM_TYPE_REGISTER_MASK        = 0x0030,
                 PARAM_TYPE_REGISTER_STACK       = 0x0010,
                 PARAM_TYPE_REGISTER_ECX         = 0x0020,

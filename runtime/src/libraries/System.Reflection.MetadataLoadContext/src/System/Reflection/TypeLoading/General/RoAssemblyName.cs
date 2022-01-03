@@ -74,7 +74,9 @@ namespace System.Reflection.TypeLoading
 
         public sealed override bool Equals([NotNullWhen(true)] object? obj) =>
             obj is RoAssemblyName other && Equals(other);
+
         public sealed override int GetHashCode() => Name.GetHashCode();
+
         public sealed override string ToString() => FullName;
 
         public AssemblyName ToAssemblyName()

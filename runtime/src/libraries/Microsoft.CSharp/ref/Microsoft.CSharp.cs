@@ -23,6 +23,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using dynamic types might cause types or members to be removed by trimmer."
         )]
@@ -34,6 +35,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using dynamic types might cause types or members to be removed by trimmer."
         )]
@@ -45,6 +47,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using dynamic types might cause types or members to be removed by trimmer."
         )]
@@ -57,6 +60,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using dynamic types might cause types or members to be removed by trimmer."
         )]
@@ -68,6 +72,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using dynamic types might cause types or members to be removed by trimmer."
         )]
@@ -79,6 +84,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using dynamic types might cause types or members to be removed by trimmer."
         )]
@@ -92,6 +98,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using dynamic types might cause types or members to be removed by trimmer."
         )]
@@ -103,6 +110,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using dynamic types might cause types or members to be removed by trimmer."
         )]
@@ -114,6 +122,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using dynamic types might cause types or members to be removed by trimmer."
         )]
@@ -126,6 +135,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             throw null;
         }
+
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Using dynamic types might cause types or members to be removed by trimmer."
         )]
@@ -139,12 +149,14 @@ namespace Microsoft.CSharp.RuntimeBinder
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
     public sealed partial class CSharpArgumentInfo
     {
         internal CSharpArgumentInfo() { }
+
         public static Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo Create(
             Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags flags,
             string? name
@@ -153,6 +165,7 @@ namespace Microsoft.CSharp.RuntimeBinder
             throw null;
         }
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -167,6 +180,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         IsOut = 16,
         IsStaticType = 32,
     }
+
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
@@ -184,24 +198,32 @@ namespace Microsoft.CSharp.RuntimeBinder
         ValueFromCompoundAssignment = 128,
         ResultDiscarded = 256,
     }
+
     public partial class RuntimeBinderException : System.Exception
     {
         public RuntimeBinderException() { }
+
         protected RuntimeBinderException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public RuntimeBinderException(string? message) { }
+
         public RuntimeBinderException(string? message, System.Exception? innerException) { }
     }
+
     public partial class RuntimeBinderInternalCompilerException : System.Exception
     {
         public RuntimeBinderInternalCompilerException() { }
+
         protected RuntimeBinderInternalCompilerException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
         ) { }
+
         public RuntimeBinderInternalCompilerException(string? message) { }
+
         public RuntimeBinderInternalCompilerException(
             string? message,
             System.Exception? innerException

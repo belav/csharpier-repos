@@ -1464,6 +1464,7 @@ public partial class HubConnectionTests
 
             public override void Abort(ConnectionAbortedException abortReason) =>
                 _inner.Abort(abortReason);
+
             public override void Abort() => _inner.Abort();
 
             public override ValueTask DisposeAsync() =>

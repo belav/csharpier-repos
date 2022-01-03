@@ -15,40 +15,49 @@ struct S16
 {
     public long A,
         B;
+
     public override string ToString() => $"{A}, {B}";
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public string InstanceMethod() => "Instance method";
 }
+
 struct S32
 {
     public long A,
         B,
         C,
         D;
+
     public override string ToString() => $"{A}, {B}, {C}, {D}";
 }
+
 struct SGC
 {
     public object A;
     public object B;
     public string C;
     public string D;
+
     public override string ToString() => $"{A}, {B}, {C}, {D}";
 }
+
 struct SGC2
 {
     public int A;
     public SGC B;
     public object C;
     public int D;
+
     public override string ToString() => $"{A}, ({B}), {C}, {D}";
 }
 
 class HeapInt
 {
     public int Value;
+
     public HeapInt(int val) => Value = val;
+
     public override string ToString() => $"{Value}";
 }
 
@@ -648,6 +657,7 @@ internal class Program
     }
 
     internal static int s_result;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void CalcStaticVoid(int x, int acc)
     {
@@ -1333,6 +1343,7 @@ abstract class BaseClass
     public abstract S32 CalcAbstractRetbuf(int x, int acc);
     public abstract S32 CalcAbstractRetbufOther(int x, S32 large, int acc);
 }
+
 class ClassImpl : BaseClass
 {
     private int _x;

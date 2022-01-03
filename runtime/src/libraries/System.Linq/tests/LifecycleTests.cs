@@ -315,6 +315,7 @@ namespace System.Linq.Tests
             public int EnumeratorDisposeCalls => _enumeratorDisposeCalls;
 
             public IEnumerator<T> GetEnumerator() => new Enumerator(this);
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
             private sealed class Enumerator : IEnumerator<T>

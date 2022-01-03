@@ -12,6 +12,7 @@ namespace System.Speech.Synthesis
     {
         #region Constructors
         public Prompt(string textToSpeak) : this(textToSpeak, SynthesisTextFormat.Text) { }
+
         public Prompt(PromptBuilder promptBuilder)
         {
             Helpers.ThrowIfNull(promptBuilder, nameof(promptBuilder));
@@ -39,6 +40,7 @@ namespace System.Speech.Synthesis
                     );
             }
         }
+
         internal Prompt(Uri promptFile, SynthesisMediaType media)
         {
             Helpers.ThrowIfNull(promptFile, nameof(promptFile));
@@ -164,6 +166,7 @@ namespace System.Speech.Synthesis
         Ssml = 1,
         WaveAudio
     }
+
     public enum SynthesisTextFormat
     {
         Text = 0,

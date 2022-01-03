@@ -51,6 +51,7 @@ namespace System.Runtime.InteropServices.Tests
                 dwHelpContext = 10;
                 strHelpFile = "strHelpFile";
             }
+
             public void GetTypeAttr(out IntPtr ppTypeAttr)
             {
                 throw new NotImplementedException();

@@ -26,8 +26,10 @@ internal static partial class Interop
 
         /// <summary>Path to cgroup filesystem that tells us which version of cgroup is in use.</summary>
         private const string SysFsCgroupFileSystemPath = "/sys/fs/cgroup";
+
         /// <summary>Path to mountinfo file in procfs for the current process.</summary>
         private const string ProcMountInfoFilePath = "/proc/self/mountinfo";
+
         /// <summary>Path to cgroup directory in procfs for the current process.</summary>
         private const string ProcCGroupFilePath = "/proc/self/cgroup";
 

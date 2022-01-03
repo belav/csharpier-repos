@@ -2199,12 +2199,16 @@ namespace System
 
             /// <summary>The destination buffer.</summary>
             private readonly Span<char> _destination;
+
             /// <summary>Optional provider to pass to IFormattable.ToString or ISpanFormattable.TryFormat calls.</summary>
             private readonly IFormatProvider? _provider;
+
             /// <summary>The number of characters written to <see cref="_destination"/>.</summary>
             internal int _pos;
+
             /// <summary>true if all formatting operations have succeeded; otherwise, false.</summary>
             internal bool _success;
+
             /// <summary>Whether <see cref="_provider"/> provides an ICustomFormatter.</summary>
             /// <remarks>
             /// Custom formatters are very rare.  We want to support them, but it's ok if we make them more expensive

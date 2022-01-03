@@ -90,13 +90,19 @@ namespace System.CommandLine.Rendering
             public static class Move
             {
                 public static AnsiControlCode Up(int lines = 1) => $"{Esc}[{lines.ToString()}A";
+
                 public static AnsiControlCode Down(int lines = 1) => $"{Esc}[{lines.ToString()}B";
+
                 public static AnsiControlCode Right(int columns = 1) =>
                     $"{Esc}[{columns.ToString()}C";
+
                 public static AnsiControlCode Left(int columns = 1) =>
                     $"{Esc}[{columns.ToString()}D";
+
                 public static AnsiControlCode NextLine(int line = 1) => $"{Esc}[{line.ToString()}E";
+
                 public static AnsiControlCode ToUpperLeftCorner { get; } = $"{Esc}[H";
+
                 public static AnsiControlCode ToLocation(int? left = null, int? top = null) =>
                     $"{Esc}[{top.GetValueOrDefault(1)};{left.GetValueOrDefault(1).ToString()}H";
             }

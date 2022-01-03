@@ -4,6 +4,7 @@ using Mono.Simd;
 public class SimdTests
 {
     static int ddd;
+
     static void InitByRef(out Vector4i v)
     {
         v = new Vector4i(99);
@@ -346,6 +347,7 @@ public class SimdTests
         }
         return 0;
     }
+
     public static int test_0_bug_462457()
     {
         Vector4f sum = new Vector4f(0, 0, 0, 0);
@@ -884,6 +886,7 @@ public class SimdTests
             return 2;
         return 0;
     }
+
     public static unsafe int test_0_vector2l_sub()
     {
         Vector2l a = new Vector2l(1, 6);
@@ -970,6 +973,7 @@ public class SimdTests
             return 2;
         return 0;
     }
+
     public static unsafe int test_0_vector2d_addsub()
     {
         Vector2d a = new Vector2d(1, 2);
@@ -983,6 +987,7 @@ public class SimdTests
             return 2;
         return 0;
     }
+
     public static unsafe int test_0_vector2d_hsub()
     {
         Vector2d a = new Vector2d(1, 2);
@@ -1086,6 +1091,7 @@ public class SimdTests
             return 2;
         return 0;
     }
+
     public static unsafe int test_0_vector2d_sub()
     {
         Vector2d a = new Vector2d(1, 2);
@@ -1099,6 +1105,7 @@ public class SimdTests
             return 2;
         return 0;
     }
+
     public static unsafe int test_0_vector2d_add()
     {
         Vector2d a = new Vector2d(1, 2);
@@ -1112,6 +1119,7 @@ public class SimdTests
             return 2;
         return 0;
     }
+
     public static unsafe int test_0_vector2d_xor()
     {
         Vector2d a = new Vector2d(1, 2);
@@ -1601,6 +1609,7 @@ public class SimdTests
             return 16;
         return 0;
     }
+
     public static int test_0_vector16b_avg()
     {
         Vector16b a = new Vector16b(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 120);
@@ -1965,6 +1974,7 @@ public class SimdTests
             return 4;
         return 0;
     }
+
     public static int test_0_vector4f_andn()
     {
         Vector4f a = new Vector4f(1, 2, 3, 4);
@@ -2223,6 +2233,7 @@ public class SimdTests
             return 4;
         return 0;
     }
+
     public static int test_0_vector4ui_and()
     {
         Vector4ui a = new Vector4ui(1, 2, 3, 4);
@@ -2292,6 +2303,7 @@ public class SimdTests
             return 4;
         return 0;
     }
+
     public static int test_0_vector4ui_sub()
     {
         Vector4ui a = new Vector4ui(1, 20, 3, 40);
@@ -3223,6 +3235,7 @@ public class SimdTests
         b += d;
         a += c;
     }
+
     public static int test_0_call_fp_and_simd_share_bank()
     {
         float a = 1f;
@@ -3252,6 +3265,7 @@ public class SimdTests
     }
 
     static bool ff;
+
     public static int test_3_single_block_var_is_properly_promoted()
     {
         Vector4f a = new Vector4f(4, 5, 6, 7);

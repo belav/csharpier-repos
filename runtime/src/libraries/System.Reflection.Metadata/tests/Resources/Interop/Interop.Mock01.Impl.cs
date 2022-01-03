@@ -43,6 +43,7 @@ namespace MockInterop01.Impl
         {
             return p;
         }
+
         public void UnRegister(object o) { }
 
         public void LibFunc(decimal p1, DateTime p2) { }
@@ -59,11 +60,13 @@ namespace MockInterop01.Impl
             if (OnEvent01 != null)
                 OnEvent01(p);
         }
+
         public void Fire2(InteropEnum p)
         {
             if (OnEvent02 != null)
                 OnEvent02(p);
         }
+
         public void Fire3(ComplexStruct p)
         {
             if (OnEvent03 != null)

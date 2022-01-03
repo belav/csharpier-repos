@@ -9,6 +9,8 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 
 [assembly: DefaultDllImportSearchPaths(DllImportSearchPath.SafeDirectories)]
+
+
 public class CallbackStressTest
 {
     static int s_LoopCounter = 10;

@@ -6,6 +6,7 @@ using System;
 internal class foo
 {
     private static object s_o = typeof(string);
+
     private static int Main()
     {
         bool f = typeof(string) == s_o as Type;

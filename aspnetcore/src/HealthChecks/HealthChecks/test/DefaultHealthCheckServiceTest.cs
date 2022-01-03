@@ -785,6 +785,7 @@ public class DefaultHealthCheckServiceTest
     {
         private readonly object _lock = new();
         private bool _wasUsed;
+
         public void Check()
         {
             lock (_lock)

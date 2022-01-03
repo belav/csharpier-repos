@@ -636,6 +636,7 @@ internal sealed class Rand
         int x = (int)(((long)getRand() * r) >> 31);
         return x;
     }
+
     public double getFloat()
     {
         return (double)getRand() / (double)0x7FFFFFFF;

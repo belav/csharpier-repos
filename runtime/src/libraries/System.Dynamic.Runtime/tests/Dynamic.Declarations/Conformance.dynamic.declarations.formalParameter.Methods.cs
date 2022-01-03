@@ -200,6 +200,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         private class MyClass
         {
             public void Foo(dynamic d)
@@ -238,6 +239,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         private class MyClass
         {
             public void Foo(out object d)
@@ -274,6 +276,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         private class MyClass
         {
             public void Foo(dynamic d)
@@ -313,6 +316,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         private class MyClass
         {
             public void Foo(ref dynamic d)
@@ -354,6 +358,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         public class MyClass
         {
             public void Foo(params dynamic[] d)
@@ -396,6 +401,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         public class MyClass
         {
             public void Foo(dynamic d, dynamic d2)
@@ -437,6 +443,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         public class MyClass
         {
             public void Foo(dynamic d, int d2)
@@ -477,6 +484,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         public class MyClass
         {
             public void Foo(dynamic d, dynamic d2, dynamic d3)
@@ -521,6 +529,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         public class MyClass
         {
             public MyClass(params dynamic[] d)
@@ -562,6 +571,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         private class MyClass
         {
             public static void Foo(dynamic d)
@@ -601,6 +611,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         private class MyClass
         {
             public void Foo<T>(ref dynamic d)
@@ -642,6 +653,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         public class MyClass
         {
             public void Foo<T>(T d)
@@ -688,6 +700,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Program
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -744,6 +757,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
         }
 
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -968,6 +982,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.formalPara
     public class Test
     {
         private static bool s_ok = false;
+
         public void Bar()
         {
             Test.s_ok = false;

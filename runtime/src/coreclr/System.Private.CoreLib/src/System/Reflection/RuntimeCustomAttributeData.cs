@@ -229,6 +229,7 @@ namespace System.Reflection
 
             throw new ArgumentException(SR.Argument_InvalidKindOfTypeForCA, nameof(type));
         }
+
         private static CustomAttributeType InitCustomAttributeType(RuntimeType parameterType)
         {
             CustomAttributeEncoding encodedType = TypeToCustomAttributeEncoding(parameterType);
@@ -260,6 +261,7 @@ namespace System.Reflection
                 enumName
             );
         }
+
         private static IList<CustomAttributeData> GetCustomAttributes(
             RuntimeModule module,
             int tkTarget
@@ -431,6 +433,7 @@ namespace System.Reflection
             else
                 Init(attribute);
         }
+
         private void Init(DllImportAttribute dllImport)
         {
             Type type = typeof(DllImportAttribute);
@@ -477,6 +480,7 @@ namespace System.Reflection
                 }
             );
         }
+
         private void Init(FieldOffsetAttribute fieldOffset)
         {
             m_ctor = typeof(FieldOffsetAttribute).GetConstructors(
@@ -490,6 +494,7 @@ namespace System.Reflection
             );
             m_namedArgs = Array.AsReadOnly(Array.Empty<CustomAttributeNamedArgument>());
         }
+
         private void Init(MarshalAsAttribute marshalAs)
         {
             Type type = typeof(MarshalAsAttribute);
@@ -560,6 +565,7 @@ namespace System.Reflection
 
             m_namedArgs = Array.AsReadOnly(namedArgs);
         }
+
         private void Init(TypeForwardedToAttribute forwardedTo)
         {
             Type type = typeof(TypeForwardedToAttribute);
@@ -764,6 +770,7 @@ namespace System.Reflection
                     );
             }
         }
+
         private static RuntimeType ResolveType(RuntimeModule scope, string typeName)
         {
             RuntimeType type = RuntimeTypeHandle.GetTypeByNameUsingCARules(typeName, scope);
@@ -1967,6 +1974,7 @@ namespace System.Reflection
             out bool inherited,
             out bool allowMultiple
         );
+
         private static void ParseAttributeUsageAttribute(
             ConstArray ca,
             out AttributeTargets targets,
@@ -1993,6 +2001,7 @@ namespace System.Reflection
             byte* pEndBlob,
             int* pcNamedArgs
         );
+
         private static object CreateCaObject(
             RuntimeModule module,
             RuntimeType type,
@@ -2021,6 +2030,7 @@ namespace System.Reflection
             out RuntimeType type,
             out object value
         );
+
         private static void GetPropertyOrFieldData(
             RuntimeModule module,
             ref IntPtr blobStart,
@@ -2136,6 +2146,7 @@ namespace System.Reflection
                     pcas.Add(new ComImportAttribute());
             }
         }
+
         internal static bool IsDefined(RuntimeType type, RuntimeType? caType)
         {
             bool all = caType == typeof(object) || caType == typeof(Attribute);
@@ -2181,6 +2192,7 @@ namespace System.Reflection
                     pcas.Add(new PreserveSigAttribute());
             }
         }
+
         internal static bool IsDefined(RuntimeMethodInfo method, RuntimeType? caType)
         {
             bool all = caType == typeof(object) || caType == typeof(Attribute);
@@ -2236,6 +2248,7 @@ namespace System.Reflection
                     pcas.Add(pca);
             }
         }
+
         internal static bool IsDefined(RuntimeParameterInfo parameter, RuntimeType? caType)
         {
             bool all = caType == typeof(object) || caType == typeof(Attribute);
@@ -2299,6 +2312,7 @@ namespace System.Reflection
                     pcas.Add(new NonSerializedAttribute());
             }
         }
+
         internal static bool IsDefined(RuntimeFieldInfo field, RuntimeType? caType)
         {
             bool all = caType == typeof(object) || caType == typeof(Attribute);

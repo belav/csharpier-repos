@@ -11,10 +11,12 @@ namespace AutoMapper.UnitTests.Bug
         {
             public string Address1 { get; set; }
         }
+
         public class AddressModel
         {
             public string Address1 { get; set; }
         }
+
         public class ClientModel
         {
             public AddressModel Address { get; set; }

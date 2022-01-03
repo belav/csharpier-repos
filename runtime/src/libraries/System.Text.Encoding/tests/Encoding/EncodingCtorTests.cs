@@ -105,7 +105,9 @@ namespace System.Text.Tests
         private sealed class CustomEncoding : Encoding
         {
             public CustomEncoding() : base() { }
+
             public CustomEncoding(int codePage) : base(codePage) { }
+
             public CustomEncoding(
                 int codePage,
                 EncoderFallback encoderFallback,

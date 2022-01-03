@@ -127,6 +127,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 string text,
                 CancellationToken cancellationToken
             ) => default;
+
             public ValueTask LogInfoAsync(string text, CancellationToken cancellationToken) =>
                 default;
         }

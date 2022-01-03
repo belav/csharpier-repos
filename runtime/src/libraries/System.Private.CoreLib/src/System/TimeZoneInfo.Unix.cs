@@ -1640,6 +1640,7 @@ namespace System
 
             public readonly uint Magic; // TZ_MAGIC "TZif"
             public readonly TZVersion Version; // 1 byte for a \0 or 2 or 3
+
             // public byte[15] Reserved; // reserved for future use
             public readonly uint IsGmtCount; // number of transition time flags
             public readonly uint IsStdCount; // number of transition time flags

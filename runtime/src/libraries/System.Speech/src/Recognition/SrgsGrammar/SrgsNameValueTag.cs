@@ -16,12 +16,14 @@ namespace System.Speech.Recognition.SrgsGrammar
     {
         #region Constructors
         public SrgsNameValueTag() { }
+
         public SrgsNameValueTag(object value)
         {
             Helpers.ThrowIfNull(value, nameof(value));
 
             Value = value;
         }
+
         public SrgsNameValueTag(string name, object value) : this(value)
         {
             _name = GetTrimmedName(name, "name");

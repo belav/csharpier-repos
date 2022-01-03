@@ -23,6 +23,7 @@ namespace System.Reflection.Metadata.Ecma335
             public uint Flags;
             public BlobHandle HashValue;
         }
+
         private struct ModuleRow
         {
             public ushort Generation;
@@ -31,6 +32,7 @@ namespace System.Reflection.Metadata.Ecma335
             public GuidHandle EncId;
             public GuidHandle EncBaseId;
         }
+
         private struct AssemblyRow
         {
             public uint HashAlgorithm;
@@ -40,50 +42,59 @@ namespace System.Reflection.Metadata.Ecma335
             public StringHandle AssemblyName;
             public StringHandle AssemblyCulture;
         }
+
         private struct ClassLayoutRow
         {
             public ushort PackingSize;
             public uint ClassSize;
             public int Parent;
         }
+
         private struct ConstantRow
         {
             public byte Type;
             public int Parent;
             public BlobHandle Value;
         }
+
         private struct CustomAttributeRow
         {
             public int Parent;
             public int Type;
             public BlobHandle Value;
         }
+
         private struct DeclSecurityRow
         {
             public ushort Action;
             public int Parent;
             public BlobHandle PermissionSet;
         }
+
         private struct EncLogRow
         {
             public int Token;
             public byte FuncCode;
         }
+
         private struct EncMapRow
         {
             public int Token;
         }
+
         private struct EventRow
         {
             public ushort EventFlags;
             public StringHandle Name;
             public int EventType;
         }
+
         private struct EventMapRow
         {
             public int Parent;
             public int EventList;
         }
+
         private struct ExportedTypeRow
         {
             public uint Flags;
@@ -92,38 +103,45 @@ namespace System.Reflection.Metadata.Ecma335
             public StringHandle TypeNamespace;
             public int Implementation;
         }
+
         private struct FieldLayoutRow
         {
             public int Offset;
             public int Field;
         }
+
         private struct FieldMarshalRow
         {
             public int Parent;
             public BlobHandle NativeType;
         }
+
         private struct FieldRvaRow
         {
             public int Offset;
             public int Field;
         }
+
         private struct FieldDefRow
         {
             public ushort Flags;
             public StringHandle Name;
             public BlobHandle Signature;
         }
+
         private struct FileTableRow
         {
             public uint Flags;
             public StringHandle FileName;
             public BlobHandle HashValue;
         }
+
         private struct GenericParamConstraintRow
         {
             public int Owner;
             public int Constraint;
         }
+
         private struct GenericParamRow
         {
             public ushort Number;
@@ -131,6 +149,7 @@ namespace System.Reflection.Metadata.Ecma335
             public int Owner;
             public StringHandle Name;
         }
+
         private struct ImplMapRow
         {
             public ushort MappingFlags;
@@ -138,11 +157,13 @@ namespace System.Reflection.Metadata.Ecma335
             public StringHandle ImportName;
             public int ImportScope;
         }
+
         private struct InterfaceImplRow
         {
             public int Class;
             public int Interface;
         }
+
         private struct ManifestResourceRow
         {
             public uint Offset;
@@ -150,29 +171,34 @@ namespace System.Reflection.Metadata.Ecma335
             public StringHandle Name;
             public int Implementation;
         }
+
         private struct MemberRefRow
         {
             public int Class;
             public StringHandle Name;
             public BlobHandle Signature;
         }
+
         private struct MethodImplRow
         {
             public int Class;
             public int MethodBody;
             public int MethodDecl;
         }
+
         private struct MethodSemanticsRow
         {
             public ushort Semantic;
             public int Method;
             public int Association;
         }
+
         private struct MethodSpecRow
         {
             public int Method;
             public BlobHandle Instantiation;
         }
+
         private struct MethodRow
         {
             public int BodyOffset;
@@ -182,32 +208,38 @@ namespace System.Reflection.Metadata.Ecma335
             public BlobHandle Signature;
             public int ParamList;
         }
+
         private struct ModuleRefRow
         {
             public StringHandle Name;
         }
+
         private struct NestedClassRow
         {
             public int NestedClass;
             public int EnclosingClass;
         }
+
         private struct ParamRow
         {
             public ushort Flags;
             public ushort Sequence;
             public StringHandle Name;
         }
+
         private struct PropertyMapRow
         {
             public int Parent;
             public int PropertyList;
         }
+
         private struct PropertyRow
         {
             public ushort PropFlags;
             public StringHandle Name;
             public BlobHandle Type;
         }
+
         private struct TypeDefRow
         {
             public uint Flags;
@@ -217,16 +249,19 @@ namespace System.Reflection.Metadata.Ecma335
             public int FieldList;
             public int MethodList;
         }
+
         private struct TypeRefRow
         {
             public int ResolutionScope;
             public StringHandle Name;
             public StringHandle Namespace;
         }
+
         private struct TypeSpecRow
         {
             public BlobHandle Signature;
         }
+
         private struct StandaloneSigRow
         {
             public BlobHandle Signature;
@@ -240,11 +275,13 @@ namespace System.Reflection.Metadata.Ecma335
             public BlobHandle Hash;
             public GuidHandle Language;
         }
+
         private struct MethodDebugInformationRow
         {
             public int Document;
             public BlobHandle SequencePoints;
         }
+
         private struct LocalScopeRow
         {
             public int Method;
@@ -254,27 +291,32 @@ namespace System.Reflection.Metadata.Ecma335
             public int StartOffset;
             public int Length;
         }
+
         private struct LocalVariableRow
         {
             public ushort Attributes;
             public ushort Index;
             public StringHandle Name;
         }
+
         private struct LocalConstantRow
         {
             public StringHandle Name;
             public BlobHandle Signature;
         }
+
         private struct ImportScopeRow
         {
             public int Parent;
             public BlobHandle Imports;
         }
+
         private struct StateMachineMethodRow
         {
             public int MoveNextMethod;
             public int KickoffMethod;
         }
+
         private struct CustomDebugInformationRow
         {
             public int Parent;

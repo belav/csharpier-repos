@@ -187,6 +187,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return method;
             }
         }
+
 #nullable disable
 
         /// <summary>

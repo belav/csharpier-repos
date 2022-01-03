@@ -90,7 +90,9 @@ class TestHelper
         private static uint[] s_delayValues = new uint[32];
 
         public static uint RandomShortDelay(Random rng) => (uint)rng.Next(4, 10);
+
         public static uint RandomMediumDelay(Random rng) => (uint)rng.Next(10, 15);
+
         public static uint RandomLongDelay(Random rng) => (uint)rng.Next(15, 20);
 
         public static void Delay(uint n)

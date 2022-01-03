@@ -1122,6 +1122,7 @@ namespace System
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern IRuntimeMethodInfo? _GetCurrentMethod(ref StackCrawlMark stackMark);
+
         internal static IRuntimeMethodInfo? GetCurrentMethod(ref StackCrawlMark stackMark)
         {
             return _GetCurrentMethod(ref stackMark);
@@ -1635,9 +1636,11 @@ namespace System
         {
             return ResolveTypeHandle(typeToken);
         }
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public RuntimeTypeHandle ResolveTypeHandle(int typeToken) =>
             ResolveTypeHandle(typeToken, null, null);
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public RuntimeTypeHandle ResolveTypeHandle(
             int typeToken,
@@ -1722,9 +1725,11 @@ namespace System
         {
             return ResolveMethodHandle(methodToken);
         }
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public RuntimeMethodHandle ResolveMethodHandle(int methodToken) =>
             ResolveMethodHandle(methodToken, null, null);
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public RuntimeMethodHandle ResolveMethodHandle(
             int methodToken,
@@ -1818,9 +1823,11 @@ namespace System
         {
             return ResolveFieldHandle(fieldToken);
         }
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public RuntimeFieldHandle ResolveFieldHandle(int fieldToken) =>
             ResolveFieldHandle(fieldToken, null, null);
+
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
         public RuntimeFieldHandle ResolveFieldHandle(
             int fieldToken,
@@ -2068,6 +2075,7 @@ namespace System
         internal abstract byte[] GetLocalsSignature();
         internal abstract unsafe void GetEHInfo(int EHNumber, void* exception);
         internal abstract byte[]? GetRawEHInfo();
+
         // token resolution
         internal abstract string? GetStringLiteral(int token);
         internal abstract void ResolveToken(
@@ -2077,6 +2085,7 @@ namespace System
             out IntPtr fieldHandle
         );
         internal abstract byte[]? ResolveSignature(int token, int fromMethod);
+
         //
         internal abstract MethodInfo GetDynamicMethod();
     }

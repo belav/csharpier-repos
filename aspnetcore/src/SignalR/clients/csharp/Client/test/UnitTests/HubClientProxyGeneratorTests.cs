@@ -10,9 +10,7 @@ using Xunit;
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
 [AttributeUsage(AttributeTargets.Method)]
-internal class HubClientProxyAttribute : Attribute
-{
-}
+internal class HubClientProxyAttribute : Attribute { }
 
 internal static partial class RegisterCallbackProviderExtensions
 {
@@ -33,24 +31,28 @@ public class HubClientProxyGeneratorTests
     private class MyClient : IMyClient
     {
         public int CallsOfNoArg;
+
         public void NoArg()
         {
             CallsOfNoArg += 1;
         }
 
         public List<int> CallsOfSingleArg = new();
+
         public void SingleArg(int a)
         {
             CallsOfSingleArg.Add(a);
         }
 
         public List<(int, float, int?)> CallsOfManyArgs = new();
+
         public void ManyArgs(int a, float b, int? c)
         {
             CallsOfManyArgs.Add((a, b, c));
         }
 
         public int CallsOfReturnTask;
+
         public Task ReturnTask()
         {
             CallsOfReturnTask += 1;
@@ -61,6 +63,7 @@ public class HubClientProxyGeneratorTests
     private class Disposable : IDisposable
     {
         public bool IsDisposed;
+
         public void Dispose() => IsDisposed = true;
     }
 

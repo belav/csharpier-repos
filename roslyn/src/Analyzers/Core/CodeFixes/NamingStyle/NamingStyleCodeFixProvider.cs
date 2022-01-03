@@ -176,6 +176,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.NamingStyles
                     )
                 );
             }
+
             protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
                 CancellationToken cancellationToken
             )

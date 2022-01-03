@@ -8,6 +8,7 @@ namespace System.Security.Policy
     public sealed partial class ApplicationTrust : EvidenceBase, ISecurityEncodable
     {
         public ApplicationTrust() { }
+
         public ApplicationTrust(ApplicationIdentity identity) { }
 #if NET5_0_OR_GREATER
         [Obsolete(
@@ -20,6 +21,7 @@ namespace System.Security.Policy
             PermissionSet defaultGrantSet,
             IEnumerable<StrongName> fullTrustAssemblies
         ) { }
+
         public ApplicationIdentity ApplicationIdentity { get; set; }
         public PolicyStatement DefaultGrantSet { get; set; }
         public object ExtraInfo { get; set; }
@@ -36,7 +38,9 @@ namespace System.Security.Policy
         }
         public bool IsApplicationTrustedToRun { get; set; }
         public bool Persist { get; set; }
+
         public void FromXml(SecurityElement element) { }
+
         public SecurityElement ToXml()
         {
             return default(SecurityElement);

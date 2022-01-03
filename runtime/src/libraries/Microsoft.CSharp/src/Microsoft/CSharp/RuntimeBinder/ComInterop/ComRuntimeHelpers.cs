@@ -248,6 +248,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         {
             return (IntPtr)System.Runtime.CompilerServices.Unsafe.AsPointer(ref value);
         }
+
         public static unsafe IntPtr ConvertVariantByrefToPtr(ref Variant value)
         {
             return (IntPtr)System.Runtime.CompilerServices.Unsafe.AsPointer(ref value);

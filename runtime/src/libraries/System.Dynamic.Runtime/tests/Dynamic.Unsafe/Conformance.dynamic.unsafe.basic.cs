@@ -275,6 +275,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.ctor01.ctor
     public unsafe class C
     {
         public int* p;
+
         public C(int* q)
         {
             p = q;
@@ -311,6 +312,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.ctor02.ctor
     public unsafe class C
     {
         public dynamic p;
+
         public C(dynamic q)
         {
             p = q;
@@ -347,6 +349,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.ctor03.ctor
     {
         public dynamic d;
         public int* p;
+
         public C(dynamic x, int* y)
         {
             d = x;
@@ -382,6 +385,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.dlgate01.dl
     //<Expects Status=success></Expects>
     // <Code>
     internal unsafe delegate void Foo(int* p);
+
     public unsafe class Test
     {
         [Fact]
@@ -445,6 +449,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.evnt01.evnt
     //<Expects Status=success></Expects>
     // <Code>
     internal unsafe delegate void Foo(int* p);
+
     public unsafe class Test
     {
         [Fact]
@@ -477,6 +482,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.explicit01.
     public class US
     {
         public int* p;
+
         public static explicit operator int(US u)
         {
             return 1;
@@ -623,6 +629,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.implicit01.
     public class US
     {
         public int* p;
+
         public static implicit operator int(US u)
         {
             return 1;
@@ -925,6 +932,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method05.me
     public class C
     {
         public static int field = 10;
+
         public unsafe dynamic Foo()
         {
             return 1;

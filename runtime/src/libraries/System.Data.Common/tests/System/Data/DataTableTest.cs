@@ -1486,18 +1486,21 @@ Assert.False(true);
         }
 
         private bool _tableClearedEventFired;
+
         private void OnTableCleared(object src, DataTableClearEventArgs args)
         {
             _tableClearedEventFired = true;
         }
 
         private bool _tableClearingEventFired;
+
         private void OnTableClearing(object src, DataTableClearEventArgs args)
         {
             _tableClearingEventFired = true;
         }
 
         private bool _tableNewRowAddedEventFired;
+
         private void OnTableNewRowAdded(object src, DataTableNewRowEventArgs args)
         {
             _tableNewRowAddedEventFired = true;
@@ -1788,6 +1791,7 @@ Assert.False(true);
 
         private DataRowAction _rowActionChanging = DataRowAction.Nothing;
         private DataRowAction _rowActionChanged = DataRowAction.Nothing;
+
         [Fact]
         public void AcceptChangesTest()
         {
@@ -1830,6 +1834,7 @@ Assert.False(true);
         }
 
         private bool _tableInitialized;
+
         [Fact]
         public void TableInitializedEventTest1()
         {
@@ -1901,6 +1906,7 @@ Assert.False(true);
         }
 
         private DataTable _dt;
+
         private void LocalSetup()
         {
             _dt = new DataTable("test");
@@ -2015,8 +2021,10 @@ Assert.False(true);
                 _error = err;
             }
         }
+
         private FillErrorStruct[] _fillErr = new FillErrorStruct[3];
         private int _fillErrCounter;
+
         private void FillErrorHandler(object sender, FillErrorEventArgs e)
         {
             e.Continue = _fillErr[_fillErrCounter]._contFlag;
@@ -2036,6 +2044,7 @@ Assert.False(true);
             DataTableReader dtr = _dt.CreateDataReader();
             Assert.Throws<ArgumentException>(() => dtLoad.Load(dtr));
         }
+
         [Fact]
         // Load doesn't have a third overload in System.Data
         // and is commented-out below
@@ -2259,6 +2268,7 @@ Assert.False(true);
         private bool _checkAction;
         private int _rowChagedCounter,
             _rowChangingCounter;
+
         private void rowActionInit(DataRowAction[] act)
         {
             _checkAction = true;

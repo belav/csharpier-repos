@@ -114,10 +114,12 @@ namespace System.Speech.Internal.SapiInterop
         {
             SpRecoGrammar2.SetRulePriority(name, id, priority);
         }
+
         internal void SetRuleWeight(string name, uint id, float weight)
         {
             SpRecoGrammar2.SetRuleWeight(name, id, weight);
         }
+
         internal void SetDictationWeight(float weight)
         {
             SpRecoGrammar2.SetDictationWeight(weight);

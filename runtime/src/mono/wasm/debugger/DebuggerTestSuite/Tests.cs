@@ -11,6 +11,7 @@ using Xunit;
 
 [assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly)]
 
+
 namespace DebuggerTests
 {
     public class SourceList : DebuggerTestBase

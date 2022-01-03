@@ -60,6 +60,7 @@ namespace ObjectFormatterFixtures
         public static readonly MethodInfo Arrays = typeof(Signatures).GetMethod(
             nameof(ArrayParameters)
         );
+
         public void ArrayParameters(int[] arrayOne, int[,] arrayTwo, int[,,] arrayThree) { }
     }
 
@@ -77,6 +78,7 @@ namespace ObjectFormatterFixtures
         private class Proxy
         {
             public Proxy() { }
+
             public Proxy(Node node)
             {
                 x = node.value;
@@ -109,6 +111,7 @@ namespace ObjectFormatterFixtures
         private class Proxy
         {
             public Proxy() { }
+
             public Proxy(Node c) { }
 
             public readonly int x;
@@ -260,6 +263,7 @@ namespace ObjectFormatterFixtures
         {
             return 1;
         }
+
         private int F2(short a)
         {
             return 2;

@@ -18,6 +18,7 @@
 namespace DefaultNamespace
 {
     using System;
+
     //using System.Collections.Generic;
 
     internal class RanCollect
@@ -178,6 +179,7 @@ namespace DefaultNamespace
     {
         internal DLRanBigNode[] Mv_DLink;
         internal int NodeNum;
+
         public DoubLinkBig(int Num)
         {
             NodeNum = Num;
@@ -258,11 +260,13 @@ namespace DefaultNamespace
         {
             m_Array = new Object[m_Capacity];
         }
+
         public Queue(int capacity)
         {
             m_Capacity = capacity;
             m_Array = new Object[m_Capacity];
         }
+
         public int Count
         {
             get { return m_Size; }
@@ -317,6 +321,7 @@ namespace DefaultNamespace
         {
             m_Array = new Object[m_Capacity];
         }
+
         public ArrayList(int capacity)
         {
             m_Capacity = capacity;

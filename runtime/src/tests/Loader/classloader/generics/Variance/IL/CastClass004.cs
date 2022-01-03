@@ -4,21 +4,27 @@
 using System;
 
 public class Base { }
+
 public class Sub : Base { }
 
 public class GBase<T> { }
+
 public class GSubT<T> : GBase<T> { }
 
 public struct GTU<T, U> : IPlusT<T>, IMinusT<U>, IPlusTMinusU<T, U> { }
+
 public struct GTArrUArr<T, U> : IPlusT<T[]>, IMinusT<U[]>, IPlusTMinusU<T[], U[]> { }
+
 public struct GRefTRefU<T, U>
     : IPlusT<IPlusT<T>>,
       IPlusT<IMinusT<U>>,
       IPlusTMinusU<IPlusT<T>, IPlusT<U>> { }
+
 public struct GRefTArrRefUArr<T, U>
     : IPlusT<IPlusT<T[]>>,
       IPlusT<IMinusT<U[]>>,
       IPlusTMinusU<IPlusT<T[]>, IPlusT<U[]>> { }
+
 public struct GArrRefTArrRefU<T, U>
     : IPlusT<IPlusT<T>[]>,
       IPlusT<IMinusT<U>[]>,
@@ -40,6 +46,7 @@ public class TestClass
             Console.WriteLine("Test Failed at location: {0} @ count {1} ", location, iTestCount);
         }
     }
+
     private static void CastClassUToTInternalIPlusT<T, U>(U u)
     {
         IPlusT<T> t = (IPlusT<T>)u;

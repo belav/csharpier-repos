@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 public class RefX1<T>
 {
     T _val;
+
     public RefX1(T t)
     {
         _val = t;
@@ -30,10 +31,12 @@ public class RefX1<T>
 public class Test
 {
     public static bool result = true;
+
     public static bool Eval(bool exp)
     {
         return Eval(exp, null);
     }
+
     public static bool Eval(bool exp, String errorMsg)
     {
         if (!exp)

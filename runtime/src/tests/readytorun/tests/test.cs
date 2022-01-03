@@ -393,6 +393,7 @@ public class ByteBaseClass : List<byte>
 {
     public byte BaseByte;
 }
+
 public class ByteChildClass : ByteBaseClass
 {
     public byte ChildByte;

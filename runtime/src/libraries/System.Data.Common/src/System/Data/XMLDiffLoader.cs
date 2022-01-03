@@ -288,6 +288,7 @@ namespace System.Data
 
             return;
         }
+
         private DataTable? GetTable(string tableName, string ns)
         {
             if (_tables == null)

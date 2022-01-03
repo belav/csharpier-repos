@@ -66,6 +66,7 @@ namespace HttpStress
 
         public static ulong CalculateCRC(byte[] buf) =>
             update_crc(InitialCrc, buf, buf.Length) ^ InitialCrc;
+
         public static ulong CalculateCRC(string text, Encoding? encoding = null) =>
             update_crc(InitialCrc, text, encoding) ^ InitialCrc;
 

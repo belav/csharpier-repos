@@ -14,6 +14,7 @@ namespace AutoMapper.UnitTests.Bug
             One,
             Two
         };
+
         [Flags]
         public enum Enum2
         {
@@ -32,6 +33,7 @@ namespace AutoMapper.UnitTests.Bug
             public Enum1 Prop1 { get; set; }
             public Enum2 Prop2 { get; set; }
         }
+
         public class EnumMapperTest
         {
             [Fact]

@@ -26,6 +26,7 @@ namespace System.Runtime.CompilerServices
 
             action();
         };
+
         /// <summary>The value being awaited.</summary>
         private readonly ValueTask _value;
 

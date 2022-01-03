@@ -3,6 +3,7 @@ using System;
 class P
 {
     static public int count = 0;
+
     ~P()
     {
         count++;

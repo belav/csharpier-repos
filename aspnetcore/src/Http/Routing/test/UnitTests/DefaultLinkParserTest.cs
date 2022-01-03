@@ -267,6 +267,7 @@ public class DefaultLinkParserTest : LinkParserTestBase
         {
             Value = value;
         }
+
         public int Value { get; }
     }
 }

@@ -18,11 +18,13 @@ public class HttpSysOptions
         Http503VerbosityLevel.Basic; // Http.sys default.
     private const long DefaultRequestQueueLength = 1000; // Http.sys default.
     internal static readonly int DefaultMaxAccepts = 5 * Environment.ProcessorCount;
+
     // Matches the default maxAllowedContentLength in IIS (~28.6 MB)
     // https://www.iis.net/configreference/system.webserver/security/requestfiltering/requestlimits#005
     private const long DefaultMaxRequestBodySize = 30000000;
 
     private Http503VerbosityLevel _rejectionVebosityLevel = DefaultRejectionVerbosityLevel;
+
     // The native request queue
     private long _requestQueueLength = DefaultRequestQueueLength;
     private long? _maxConnections;

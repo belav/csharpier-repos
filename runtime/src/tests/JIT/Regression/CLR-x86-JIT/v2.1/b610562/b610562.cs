@@ -8,6 +8,7 @@
 //static member is passed by ref to an interlocked method.
 
 using System;
+
 namespace VTest
 {
     class TestMain : refTest<TestMain>

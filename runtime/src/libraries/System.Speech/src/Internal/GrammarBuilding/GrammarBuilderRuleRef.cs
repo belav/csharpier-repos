@@ -31,6 +31,7 @@ namespace System.Speech.Internal.GrammarBuilding
             }
             return _uri == refObj._uri;
         }
+
         public override int GetHashCode()
         {
             return _uri.GetHashCode();

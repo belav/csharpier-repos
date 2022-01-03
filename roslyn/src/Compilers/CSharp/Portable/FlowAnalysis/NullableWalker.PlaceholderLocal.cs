@@ -47,6 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             public override int GetHashCode() => _identifier.GetHashCode();
+
             internal override SyntaxNode ScopeDesignatorOpt => null;
             public override Symbol ContainingSymbol => _containingSymbol;
             public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
@@ -61,20 +62,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             public override RefKind RefKind => RefKind.None;
             internal override SynthesizedLocalKind SynthesizedKind =>
                 throw ExceptionUtilities.Unreachable;
+
             internal override ConstantValue GetConstantValue(
                 SyntaxNode node,
                 LocalSymbol inProgress,
                 BindingDiagnosticBag diagnostics = null
             ) => null;
+
             internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(
                 BoundExpression boundInitValue
             ) => ImmutableBindingDiagnostic<AssemblySymbol>.Empty;
+
             internal override SyntaxNode GetDeclaratorSyntax() =>
                 throw ExceptionUtilities.Unreachable;
+
             internal override LocalSymbol WithSynthesizedLocalKindAndSyntax(
                 SynthesizedLocalKind kind,
                 SyntaxNode syntax
             ) => throw ExceptionUtilities.Unreachable;
+
             internal override uint ValEscapeScope => throw ExceptionUtilities.Unreachable;
             internal override uint RefEscapeScope => throw ExceptionUtilities.Unreachable;
         }

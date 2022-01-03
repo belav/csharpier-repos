@@ -46,6 +46,7 @@ namespace System.Data.Common
                 this[index] = (DataTableMapping)value;
             }
         }
+
         ITableMapping ITableMappingCollection.Add(
             string sourceTableName,
             string dataSetTableName

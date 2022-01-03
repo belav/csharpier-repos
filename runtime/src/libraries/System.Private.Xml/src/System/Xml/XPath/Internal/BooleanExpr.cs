@@ -30,6 +30,7 @@ namespace MS.Internal.Xml.XPath
             _opnd2 = opnd2;
             _isOr = (op == Operator.Op.OR);
         }
+
         private BooleanExpr(BooleanExpr other) : base(other)
         {
             _opnd1 = Clone(other._opnd1);
@@ -57,6 +58,7 @@ namespace MS.Internal.Xml.XPath
         {
             return new BooleanExpr(this);
         }
+
         public override XPathResultType StaticType
         {
             get { return XPathResultType.Boolean; }

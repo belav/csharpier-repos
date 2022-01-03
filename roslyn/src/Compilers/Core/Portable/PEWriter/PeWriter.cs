@@ -314,6 +314,7 @@ namespace Microsoft.Cci
         }
 
         private static MethodInfo s_calculateChecksumMethod;
+
         // internal for testing
         internal static uint CalculateChecksum(BlobBuilder peBlob, Blob checksumBlob)
         {
@@ -446,6 +447,7 @@ namespace Microsoft.Cci
         private sealed class ResourceSectionBuilderFromRaw : ResourceSectionBuilder
         {
             private readonly Stream _resources;
+
             public ResourceSectionBuilderFromRaw(Stream resources)
             {
                 _resources = resources;

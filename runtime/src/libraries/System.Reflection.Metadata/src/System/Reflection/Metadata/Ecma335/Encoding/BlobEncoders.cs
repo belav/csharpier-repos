@@ -817,17 +817,29 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         public void Boolean() => WriteTypeCode(SerializationTypeCode.Boolean);
+
         public void Char() => WriteTypeCode(SerializationTypeCode.Char);
+
         public void SByte() => WriteTypeCode(SerializationTypeCode.SByte);
+
         public void Byte() => WriteTypeCode(SerializationTypeCode.Byte);
+
         public void Int16() => WriteTypeCode(SerializationTypeCode.Int16);
+
         public void UInt16() => WriteTypeCode(SerializationTypeCode.UInt16);
+
         public void Int32() => WriteTypeCode(SerializationTypeCode.Int32);
+
         public void UInt32() => WriteTypeCode(SerializationTypeCode.UInt32);
+
         public void Int64() => WriteTypeCode(SerializationTypeCode.Int64);
+
         public void UInt64() => WriteTypeCode(SerializationTypeCode.UInt64);
+
         public void Single() => WriteTypeCode(SerializationTypeCode.Single);
+
         public void Double() => WriteTypeCode(SerializationTypeCode.Double);
+
         public void String() => WriteTypeCode(SerializationTypeCode.String);
 
         public void PrimitiveType(PrimitiveSerializationTypeCode type)
@@ -895,20 +907,35 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         public void Boolean() => WriteTypeCode(SignatureTypeCode.Boolean);
+
         public void Char() => WriteTypeCode(SignatureTypeCode.Char);
+
         public void SByte() => WriteTypeCode(SignatureTypeCode.SByte);
+
         public void Byte() => WriteTypeCode(SignatureTypeCode.Byte);
+
         public void Int16() => WriteTypeCode(SignatureTypeCode.Int16);
+
         public void UInt16() => WriteTypeCode(SignatureTypeCode.UInt16);
+
         public void Int32() => WriteTypeCode(SignatureTypeCode.Int32);
+
         public void UInt32() => WriteTypeCode(SignatureTypeCode.UInt32);
+
         public void Int64() => WriteTypeCode(SignatureTypeCode.Int64);
+
         public void UInt64() => WriteTypeCode(SignatureTypeCode.UInt64);
+
         public void Single() => WriteTypeCode(SignatureTypeCode.Single);
+
         public void Double() => WriteTypeCode(SignatureTypeCode.Double);
+
         public void String() => WriteTypeCode(SignatureTypeCode.String);
+
         public void IntPtr() => WriteTypeCode(SignatureTypeCode.IntPtr);
+
         public void UIntPtr() => WriteTypeCode(SignatureTypeCode.UIntPtr);
+
         public void Object() => WriteTypeCode(SignatureTypeCode.Object);
 
         /// <summary>

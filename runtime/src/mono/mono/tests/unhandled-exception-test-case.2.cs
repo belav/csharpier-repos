@@ -103,10 +103,12 @@ namespace UnhandledExceptionTest
                 }
             }
         }
+
         private static string BoolToString(bool value)
         {
             return value ? "T" : "F";
         }
+
         public void Print()
         {
             Console.WriteLine(
@@ -125,6 +127,7 @@ namespace UnhandledExceptionTest
     {
         private string configurationDescription;
         private TestConfiguration configuration;
+
         public Test(string configurationDescription)
         {
             this.configurationDescription = configurationDescription;
@@ -194,6 +197,7 @@ namespace UnhandledExceptionTest
             Test test = new Test(args[0]);
             test.Act();
         }
+
         public void Act()
         {
             configuration.Print();
@@ -235,6 +239,7 @@ namespace UnhandledExceptionTest
             Console.WriteLine("Message is {0}", ex.Message);
             Console.WriteLine("IsTerminating is set to {0}", e.IsTerminating);
         }
+
         public static void RootDomainUnhandledExceptionHandler(
             object sender,
             UnhandledExceptionEventArgs e
@@ -243,6 +248,7 @@ namespace UnhandledExceptionTest
             Console.WriteLine("MARKER-RDUE");
             PrintUnhandledException("RootDomainUnhandledExceptionHandler", sender, e);
         }
+
         public static void DifferentDomainUnhandledExceptionHandler(
             object sender,
             UnhandledExceptionEventArgs e

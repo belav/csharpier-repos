@@ -13,6 +13,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
     internal class AbstractNotifyPropertyChanged : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 

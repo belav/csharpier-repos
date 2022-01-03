@@ -16,13 +16,16 @@ namespace InterlockedTest
         int iterations;
         ManualResetEvent signal;
         Thread[] threads;
+
         public LongTest() { }
+
         public LongTest(int LoopValue, int NumberOfThreads)
         {
             threads = new Thread[NumberOfThreads];
             iterations = LoopValue;
             signal = new ManualResetEvent(false);
         }
+
         public int Inc()
         {
             sharedValue = 0;
@@ -43,6 +46,7 @@ namespace InterlockedTest
 
             return -1;
         }
+
         public int Dec()
         {
             sharedValue = iterations * threads.Length;
@@ -65,18 +69,21 @@ namespace InterlockedTest
 
             return -1;
         }
+
         private void SimpleIncrement()
         {
             signal.WaitOne();
             for (int i = 0; i < iterations; i++)
                 Interlocked.Increment(ref sharedValue);
         }
+
         private void SimpleDecrement()
         {
             signal.WaitOne();
             for (int i = 0; i < iterations; i++)
                 Interlocked.Decrement(ref sharedValue);
         }
+
         public int CheckIncReturn()
         {
             long sharedValue;
@@ -106,6 +113,7 @@ namespace InterlockedTest
 
             return rValue;
         }
+
         public int CheckDecReturn()
         {
             long sharedValue;
@@ -132,6 +140,7 @@ namespace InterlockedTest
                 rValue = 100;
             return rValue;
         }
+
         long[] LongVals = new long[5] { Int64.MinValue, Int64.MaxValue, 0, -1, 1 };
     }
 
@@ -145,12 +154,14 @@ namespace InterlockedTest
         int iterations;
         ManualResetEvent signal;
         Thread[] threads;
+
         public IntTest(int LoopValue, int NumberOfThreads)
         {
             threads = new Thread[NumberOfThreads];
             iterations = LoopValue;
             signal = new ManualResetEvent(false);
         }
+
         public int Inc()
         {
             sharedValue = 0;
@@ -173,6 +184,7 @@ namespace InterlockedTest
 
             return -1;
         }
+
         public int Dec()
         {
             sharedValue = iterations * threads.Length;
@@ -195,18 +207,21 @@ namespace InterlockedTest
 
             return -1;
         }
+
         private void SimpleIncrement()
         {
             signal.WaitOne();
             for (int i = 0; i < iterations; i++)
                 Interlocked.Increment(ref sharedValue);
         }
+
         private void SimpleDecrement()
         {
             signal.WaitOne();
             for (int i = 0; i < iterations; i++)
                 Interlocked.Decrement(ref sharedValue);
         }
+
         public int CheckIncReturn()
         {
             int sharedValue;
@@ -235,6 +250,7 @@ namespace InterlockedTest
 
             return rValue;
         }
+
         public int CheckDecReturn()
         {
             int sharedValue;
@@ -260,6 +276,7 @@ namespace InterlockedTest
                 rValue = 100;
             return rValue;
         }
+
         int[] IntVals = new int[5] { Int32.MinValue, Int32.MaxValue, 0, -1, 1 };
     }
 }

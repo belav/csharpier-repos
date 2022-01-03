@@ -180,6 +180,7 @@ namespace System.Xml.Schema
             {
                 _dvalue = new decimal[1];
             }
+
             //list
             public DecimalStruct(int dim)
             {

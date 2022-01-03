@@ -545,6 +545,7 @@ public class CascadingParameterTest
 
         [CascadingParameter]
         T CascadingParameter { get; set; }
+
         [Parameter]
         public string RegularParameter { get; set; }
 

@@ -658,6 +658,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         public class BaseClass { }
+
         public class SubClass : BaseClass { }
     }
 }

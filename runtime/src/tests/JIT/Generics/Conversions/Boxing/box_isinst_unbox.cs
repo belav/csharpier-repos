@@ -240,6 +240,7 @@ public struct Struct2<T>
 public class RefBase : IDisposable
 {
     public int a;
+
     public void Dispose() { }
 }
 

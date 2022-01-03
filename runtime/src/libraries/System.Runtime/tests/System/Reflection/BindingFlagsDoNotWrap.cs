@@ -320,9 +320,13 @@ namespace System.Reflection.Tests
         private sealed class TestClass
         {
             public TestClass() => throw new MyException2();
+
             public TestClass(int _) { }
+
             public TestClass(string s) => throw new MyException5();
+
             public static void Moo() => throw new MyException1();
+
             public static int MyProperty
             {
                 get { throw new MyException3(); }
@@ -352,10 +356,15 @@ namespace System.Reflection.Tests
         }
 
         private sealed class MyException1 : Exception { }
+
         private sealed class MyException2 : Exception { }
+
         private sealed class MyException3 : Exception { }
+
         private sealed class MyException4 : Exception { }
+
         private sealed class MyException5 : Exception { }
+
         private sealed class MyException6 : Exception { }
     }
 }

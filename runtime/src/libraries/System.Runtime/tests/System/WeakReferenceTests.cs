@@ -161,6 +161,7 @@ namespace System.Tests
         }
 
         private static ResurrectingC s_resurrectedC;
+
         private class ResurrectingC
         {
             public ResurrectingC(Latch latch)

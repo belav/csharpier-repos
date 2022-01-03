@@ -13,6 +13,7 @@ internal static class Surfaces
 {
     private static readonly ColorPacket256 White = new ColorPacket256(Vector256.Create(1.0f));
     private static readonly ColorPacket256 Black = new ColorPacket256(0.02f, 0.0f, 0.14f);
+
     // Only works with X-Z plane.
     public static readonly Surface CheckerBoard = new Surface(
         delegate(VectorPacket256 pos)

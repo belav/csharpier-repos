@@ -7659,6 +7659,7 @@ Block[B2] - Exit
                 expectedDiagnostics
             );
         }
+
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ObjectCreationFlow_22()

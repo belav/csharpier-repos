@@ -1031,6 +1031,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     {
         private static MemberClass s_mc;
         private static dynamic s_dy;
+
         static Test()
         {
             s_mc = new MemberClass();
@@ -1235,6 +1236,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         private static MemberClass s_mc;
         private static dynamic s_dy;
         private MyEnum _me = s_dy.Property_MyEnum;
+
         static Test()
         {
             s_mc = new MemberClass();

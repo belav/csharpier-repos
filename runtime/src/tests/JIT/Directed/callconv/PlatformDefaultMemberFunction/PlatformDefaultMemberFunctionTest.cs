@@ -53,12 +53,16 @@ unsafe class PlatformDefaultMemberFunctionNative
 
     [DllImport(nameof(PlatformDefaultMemberFunctionNative))]
     public static extern SizeF GetSizeFromManaged(C* c);
+
     [DllImport(nameof(PlatformDefaultMemberFunctionNative))]
     public static extern Width GetWidthFromManaged(C* c);
+
     [DllImport(nameof(PlatformDefaultMemberFunctionNative))]
     public static extern IntWrapper GetHeightAsIntFromManaged(C* c);
+
     [DllImport(nameof(PlatformDefaultMemberFunctionNative))]
     public static extern E GetEFromManaged(C* c);
+
     [DllImport(nameof(PlatformDefaultMemberFunctionNative))]
     public static extern CLong GetWidthAsLongFromManaged(C* c);
 }

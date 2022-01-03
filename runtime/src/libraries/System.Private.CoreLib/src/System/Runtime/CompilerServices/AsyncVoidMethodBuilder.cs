@@ -15,6 +15,7 @@ namespace System.Runtime.CompilerServices
     {
         /// <summary>The synchronization context associated with this operation.</summary>
         private SynchronizationContext? _synchronizationContext;
+
         /// <summary>The builder this void builder wraps.</summary>
         private AsyncTaskMethodBuilder _builder; // mutable struct: must not be readonly
 

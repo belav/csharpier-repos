@@ -19,6 +19,7 @@ namespace System.Xml.Schema
     {
         private readonly object? _particle1;
         private readonly object? _particle2;
+
         public UpaException(object? particle1, object? particle2)
         {
             _particle1 = particle1;
@@ -254,6 +255,7 @@ namespace System.Xml.Schema
     {
         public int symbol;
         public object? particle;
+
         public Position(int symbol, object? particle)
         {
             this.symbol = symbol;

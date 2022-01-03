@@ -12,6 +12,7 @@ namespace System.Security.Permissions
     public abstract partial class SecurityAttribute : Attribute
     {
         protected SecurityAttribute(SecurityAction action) { }
+
         public SecurityAction Action { get; set; }
         public bool Unrestricted { get; set; }
         public abstract IPermission? CreatePermission();

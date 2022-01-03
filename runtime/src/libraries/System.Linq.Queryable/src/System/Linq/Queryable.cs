@@ -2334,6 +2334,7 @@ namespace System.Linq
                 )
             );
         }
+
         /// <summary>Returns the maximum value in a generic <see cref="System.Linq.IQueryable{T}" />.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <param name="source">A sequence of values to determine the maximum value of.</param>

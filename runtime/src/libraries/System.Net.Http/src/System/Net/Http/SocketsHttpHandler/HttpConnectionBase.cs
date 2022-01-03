@@ -17,6 +17,7 @@ namespace System.Net.Http
     {
         /// <summary>Cached string for the last Date header received on this connection.</summary>
         private string? _lastDateHeaderValue;
+
         /// <summary>Cached string for the last Server header received on this connection.</summary>
         private string? _lastServerHeaderValue;
 

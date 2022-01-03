@@ -6,6 +6,7 @@ class Bla<T>
 {
     public T t;
 }
+
 public class Entry
 {
     public static int Main()

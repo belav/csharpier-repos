@@ -48,15 +48,19 @@ namespace System.Runtime.CompilerServices
             }
 
             public override string Format => _format;
+
             public override object?[] GetArguments()
             {
                 return _arguments;
             }
+
             public override int ArgumentCount => _arguments.Length;
+
             public override object? GetArgument(int index)
             {
                 return _arguments[index];
             }
+
             public override string ToString(IFormatProvider? formatProvider)
             {
                 return string.Format(formatProvider, _format, _arguments);

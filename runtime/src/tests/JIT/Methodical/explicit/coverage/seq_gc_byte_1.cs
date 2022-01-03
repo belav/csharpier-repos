@@ -34,6 +34,7 @@ internal class AA
     {
         return arg;
     }
+
     public static byte call_target_ref(ref byte arg)
     {
         return arg;

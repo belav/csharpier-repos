@@ -6,6 +6,7 @@ public class App
     const string assemblyName = "gactestlib";
     const string assemblyVersion = "1.0.0.0";
     const string assemblyPublicKeyToken = "537eab56aa911cb7"; /* see testkey.snk */
+
     public static int Main(string[] args)
     {
         TestAssemblyLoad();

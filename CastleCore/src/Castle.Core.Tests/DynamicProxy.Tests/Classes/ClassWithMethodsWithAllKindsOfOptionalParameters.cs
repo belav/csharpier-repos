@@ -140,7 +140,9 @@ namespace Castle.DynamicProxy.Tests.Classes
         public virtual void MethodWithOptionalNonDefaultNullableDecimalParameter(
             decimal? d = 3m
         ) { }
+
         public void MethodWithOptionalNullableEnumParameter(ConsoleColor? c = null) { }
+
         public void MethodWithOptionalNonDefaultNullableEnumParameter(
             ConsoleColor? c = ConsoleColor.Cyan
         ) { }

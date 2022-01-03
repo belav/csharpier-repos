@@ -16,10 +16,12 @@ namespace System.Security.Permissions
     {
         public KeyContainerPermissionAccessEntry Current { get; }
         object IEnumerator.Current { get; }
+
         public bool MoveNext()
         {
             return false;
         }
+
         public void Reset() { }
     }
 }

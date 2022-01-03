@@ -13,6 +13,7 @@ using System.Reflection.Metadata;
 
 [assembly: MetadataUpdateHandler(typeof(Microsoft.Extensions.Internal.PropertyHelper))]
 
+
 namespace Microsoft.Extensions.Internal;
 
 internal class PropertyHelper

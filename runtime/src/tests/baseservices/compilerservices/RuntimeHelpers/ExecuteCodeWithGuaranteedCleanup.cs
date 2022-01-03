@@ -8,20 +8,25 @@ class GCD
 {
     private int _val = -2;
     private int _exitcode = -1;
+
     public GCD() { }
+
     public int GetExitCode()
     {
         return _exitcode;
     }
+
     public void g()
     {
         throw new System.Exception("TryCode test");
     }
+
     public void TryCode0(object obj)
     {
         _val = (int)obj;
         g();
     }
+
     public void CleanupCode0(object obj, bool excpThrown)
     {
         if (excpThrown && ((int)obj == _val))

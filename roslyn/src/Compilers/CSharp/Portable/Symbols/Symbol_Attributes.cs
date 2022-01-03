@@ -226,6 +226,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             return true;
         }
+
 #nullable disable
 
         /// <summary>
@@ -504,6 +505,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             diagnostics.Free();
             return lazyAttributesStoredOnThisThread;
         }
+
 #nullable disable
 
         private void RecordPresenceOfBadAttributes(
@@ -783,6 +785,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return arguments.HasDecodedData ? arguments.DecodedData : null;
         }
+
 #nullable disable
 
         private void EarlyDecodeWellKnownAttributeTypes(

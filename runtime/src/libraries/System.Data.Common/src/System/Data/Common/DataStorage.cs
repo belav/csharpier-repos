@@ -649,6 +649,7 @@ namespace System.Data.Common
             int storeIndex
         );
         protected abstract void SetStorage(object store, BitArray nullbits);
+
         protected void SetNullStorage(BitArray nullbits)
         {
             _dbNullBits = nullbits;

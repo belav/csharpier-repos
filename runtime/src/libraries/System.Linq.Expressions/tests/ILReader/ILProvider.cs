@@ -40,11 +40,17 @@ namespace System.Linq.Expressions.Tests
         );
 
         public int GetStartAddress() => Invoke<int>(s_miGetStartAddress);
+
         public int GetEndAddress() => Invoke<int>(s_miGetEndAddress);
+
         public int GetNumberOfCatches() => Invoke<int>(s_miGetNumberOfCatches);
+
         public int[] GetCatchAddresses() => Invoke<int[]>(s_miGetCatchAddresses);
+
         public int[] GetCatchEndAddresses() => Invoke<int[]>(s_miGetCatchEndAddresses);
+
         public Type[] GetCatchClass() => Invoke<Type[]>(s_miGetCatchClass);
+
         public int[] GetExceptionTypes() => Invoke<int[]>(s_miGetExceptionTypes);
 
         private readonly object _exceptionInfo;
@@ -88,6 +94,7 @@ namespace System.Linq.Expressions.Tests
 
         private static MethodInfo GetMethodInfo(string name) =>
             s_tyExceptionInfo.GetMethodAssert(name);
+
         private T Invoke<T>(MethodInfo method, params object[] args) =>
             (T)method.Invoke(_exceptionInfo, args);
     }

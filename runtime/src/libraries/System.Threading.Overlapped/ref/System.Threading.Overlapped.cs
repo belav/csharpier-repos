@@ -12,6 +12,7 @@ namespace System.Threading
         uint numBytes,
         System.Threading.NativeOverlapped* pOVERLAP
     );
+
     public partial struct NativeOverlapped
     {
         public System.IntPtr EventHandle;
@@ -20,20 +21,25 @@ namespace System.Threading
         public int OffsetHigh;
         public int OffsetLow;
     }
+
     public partial class Overlapped
     {
         public Overlapped() { }
+
         [System.ObsoleteAttribute(
             "This constructor is not 64-bit compatible and has been deprecated. Use the constructor that accepts an IntPtr for the event handle instead."
         )]
         public Overlapped(int offsetLo, int offsetHi, int hEvent, System.IAsyncResult? ar) { }
+
         public Overlapped(int offsetLo, int offsetHi, System.IntPtr hEvent, System.IAsyncResult? ar)
         { }
+
         public System.IAsyncResult? AsyncResult
         {
             get { throw null; }
             set { }
         }
+
         [System.ObsoleteAttribute(
             "Overlapped.EventHandle is not 64-bit compatible and has been deprecated. Use EventHandleIntPtr instead."
         )]
@@ -57,8 +63,10 @@ namespace System.Threading
             get { throw null; }
             set { }
         }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe static void Free(System.Threading.NativeOverlapped* nativeOverlappedPtr) { }
+
         [System.CLSCompliantAttribute(false)]
         [System.ObsoleteAttribute(
             "This overload is not safe and has been deprecated. Use Pack(IOCompletionCallback?, object?) instead."
@@ -69,6 +77,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe System.Threading.NativeOverlapped* Pack(
             System.Threading.IOCompletionCallback? iocb,
@@ -77,6 +86,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe static System.Threading.Overlapped Unpack(
             System.Threading.NativeOverlapped* nativeOverlappedPtr
@@ -84,6 +94,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         [System.ObsoleteAttribute(
             "This overload is not safe and has been deprecated. Use UnsafePack(IOCompletionCallback?, object?) instead."
@@ -94,6 +105,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe System.Threading.NativeOverlapped* UnsafePack(
             System.Threading.IOCompletionCallback? iocb,
@@ -103,6 +115,7 @@ namespace System.Threading
             throw null;
         }
     }
+
     public sealed partial class PreAllocatedOverlapped : System.IDisposable
     {
         [System.CLSCompliantAttribute(false)]
@@ -111,8 +124,11 @@ namespace System.Threading
             object? state,
             object? pinData
         ) { }
+
         public void Dispose() { }
+
         ~PreAllocatedOverlapped() { }
+
         [System.CLSCompliantAttribute(false)]
         public static System.Threading.PreAllocatedOverlapped UnsafeCreate(
             System.Threading.IOCompletionCallback callback,
@@ -123,13 +139,16 @@ namespace System.Threading
             throw null;
         }
     }
+
     public sealed partial class ThreadPoolBoundHandle : System.IDisposable
     {
         internal ThreadPoolBoundHandle() { }
+
         public System.Runtime.InteropServices.SafeHandle Handle
         {
             get { throw null; }
         }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe System.Threading.NativeOverlapped* AllocateNativeOverlapped(
             System.Threading.IOCompletionCallback callback,
@@ -139,6 +158,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe System.Threading.NativeOverlapped* AllocateNativeOverlapped(
             System.Threading.PreAllocatedOverlapped preAllocated
@@ -146,15 +166,19 @@ namespace System.Threading
         {
             throw null;
         }
+
         public static System.Threading.ThreadPoolBoundHandle BindHandle(
             System.Runtime.InteropServices.SafeHandle handle
         )
         {
             throw null;
         }
+
         public void Dispose() { }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe void FreeNativeOverlapped(System.Threading.NativeOverlapped* overlapped) { }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe static object? GetNativeOverlappedState(
             System.Threading.NativeOverlapped* overlapped
@@ -162,6 +186,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         public unsafe System.Threading.NativeOverlapped* UnsafeAllocateNativeOverlapped(
             System.Threading.IOCompletionCallback callback,

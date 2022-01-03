@@ -36,6 +36,7 @@ internal partial class DefaultHealthCheckService : HealthCheckService
         // actually tries to **run** health checks would be real baaaaad.
         ValidateRegistrations(_options.Value.Registrations);
     }
+
     public override async Task<HealthReport> CheckHealthAsync(
         Func<HealthCheckRegistration, bool>? predicate,
         CancellationToken cancellationToken = default

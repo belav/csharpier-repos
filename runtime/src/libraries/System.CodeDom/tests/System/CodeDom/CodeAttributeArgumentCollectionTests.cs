@@ -8,9 +8,11 @@ namespace System.CodeDom.Tests
     {
         protected override CodeAttributeArgumentCollection Ctor() =>
             new CodeAttributeArgumentCollection();
+
         protected override CodeAttributeArgumentCollection CtorArray(
             CodeAttributeArgument[] array
         ) => new CodeAttributeArgumentCollection(array);
+
         protected override CodeAttributeArgumentCollection CtorCollection(
             CodeAttributeArgumentCollection collection
         ) => new CodeAttributeArgumentCollection(collection);
@@ -22,6 +24,7 @@ namespace System.CodeDom.Tests
             CodeAttributeArgumentCollection collection,
             int index
         ) => collection[index];
+
         protected override void SetItem(
             CodeAttributeArgumentCollection collection,
             int index,
@@ -32,6 +35,7 @@ namespace System.CodeDom.Tests
             CodeAttributeArgumentCollection collection,
             CodeAttributeArgument[] array
         ) => collection.AddRange(array);
+
         protected override void AddRange(
             CodeAttributeArgumentCollection collection,
             CodeAttributeArgumentCollection value
@@ -57,6 +61,7 @@ namespace System.CodeDom.Tests
             CodeAttributeArgumentCollection collection,
             CodeAttributeArgument value
         ) => collection.IndexOf(value);
+
         protected override bool Contains(
             CodeAttributeArgumentCollection collection,
             CodeAttributeArgument value

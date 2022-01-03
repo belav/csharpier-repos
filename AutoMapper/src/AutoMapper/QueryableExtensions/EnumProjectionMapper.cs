@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 namespace AutoMapper.QueryableExtensions.Impl
 {
     using static Expression;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class EnumProjectionMapper : IProjectionMapper
     {
@@ -16,6 +17,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             Expression resolvedSource,
             LetPropertyMaps letPropertyMaps
         ) => Convert(resolvedSource, memberMap.DestinationType);
+
         public bool IsMatch(MemberMap memberMap, TypeMap memberTypeMap, Expression resolvedSource)
         {
             var types = memberMap.Types();

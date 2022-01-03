@@ -45,10 +45,12 @@ namespace Test
         };
 
         private static readonly Random Generator = new Random(Seed);
+
         private static string GetString()
         {
             return "Text";
         }
+
         public int Field1 = ((Generator.Next(5, 8) == 10) ? 10 : 20);
         public string Field2 = (GetString() ?? "NeededToFallBack");
         public Func<int> Field3 = () => Generator.Next(5, 8);

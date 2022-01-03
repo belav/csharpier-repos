@@ -33,11 +33,13 @@ namespace System.Reflection.TypeLoading.Ecma
             TypeDefinitionHandle handle,
             byte rawTypeKind
         ) => _typeProvider.GetTypeFromDefinition(reader, handle, rawTypeKind);
+
         public RoType GetTypeFromReference(
             MetadataReader reader,
             TypeReferenceHandle handle,
             byte rawTypeKind
         ) => _typeProvider.GetTypeFromReference(reader, handle, rawTypeKind);
+
         public RoType GetTypeFromSpecification(
             MetadataReader reader,
             TypeContext genericContext,
@@ -47,12 +49,16 @@ namespace System.Reflection.TypeLoading.Ecma
 
         public RoType GetSZArrayType(RoType elementType) =>
             _typeProvider.GetSZArrayType(elementType.SkipTypeWrappers());
+
         public RoType GetArrayType(RoType elementType, ArrayShape shape) =>
             _typeProvider.GetArrayType(elementType.SkipTypeWrappers(), shape);
+
         public RoType GetByReferenceType(RoType elementType) =>
             _typeProvider.GetByReferenceType(elementType.SkipTypeWrappers());
+
         public RoType GetPointerType(RoType elementType) =>
             _typeProvider.GetPointerType(elementType.SkipTypeWrappers());
+
         public RoType GetGenericInstantiation(
             RoType genericType,
             ImmutableArray<RoType> typeArguments
@@ -71,6 +77,7 @@ namespace System.Reflection.TypeLoading.Ecma
 
         public RoType GetGenericTypeParameter(TypeContext genericContext, int index) =>
             _typeProvider.GetGenericTypeParameter(genericContext, index);
+
         public RoType GetGenericMethodParameter(TypeContext genericContext, int index) =>
             _typeProvider.GetGenericMethodParameter(genericContext, index);
 

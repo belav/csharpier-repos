@@ -87,6 +87,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
             CompilationStartAnalysisContext context,
             CompilationAnalyzer compilationAnalyzer
         );
+
         public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
 

@@ -57,6 +57,7 @@ namespace Internal.TypeSystem.Interop
         BlittableValueClassWithCopyCtor,
         Invalid
     }
+
     public enum MarshalDirection
     {
         Forward, // safe-to-unsafe / managed-to-native
@@ -154,6 +155,7 @@ namespace Internal.TypeSystem.Interop
         public bool Return;
         public bool IsManagedByRef; // Whether managed argument is passed by ref
         public bool IsNativeByRef; // Whether native argument is passed by byref
+
         // There are special cases (such as LpStruct, and class) that
         // isNativeByRef != IsManagedByRef
         public MarshalDirection MarshalDirection;
@@ -789,6 +791,7 @@ namespace Internal.TypeSystem.Interop
         }
 
         protected virtual void AllocManagedToNative(ILCodeStream codeStream) { }
+
         protected virtual void TransformManagedToNative(ILCodeStream codeStream)
         {
             LoadManagedValue(codeStream);
@@ -796,6 +799,7 @@ namespace Internal.TypeSystem.Interop
         }
 
         protected virtual void ClearManagedTransform(ILCodeStream codeStream) { }
+
         protected virtual void AllocNativeToManaged(ILCodeStream codeStream) { }
 
         protected virtual void TransformNativeToManaged(ILCodeStream codeStream)
@@ -935,7 +939,9 @@ namespace Internal.TypeSystem.Interop
     class VoidReturnMarshaller : Marshaller
     {
         protected override void EmitMarshalReturnValueManagedToNative() { }
+
         protected override void EmitMarshalReturnValueNativeToManaged() { }
+
         public override void LoadReturnValue(ILCodeStream codeStream)
         {
             Debug.Assert(Return);
@@ -1495,6 +1501,7 @@ namespace Internal.TypeSystem.Interop
     class BooleanMarshaller : Marshaller
     {
         private int _trueValue;
+
         public BooleanMarshaller(int trueValue = 1)
         {
             _trueValue = trueValue;

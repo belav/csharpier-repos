@@ -54,33 +54,43 @@ class Program
     }
 
     private class ServiceA { }
+
     private class ServiceB { }
+
     private interface IServiceC { }
+
     private class ServiceC : IServiceC { }
 
     public interface IServiceD { }
+
     public interface IServiceE
     {
         IServiceD ServiceD { get; }
     }
+
     public interface IServiceF
     {
         IServiceE ServiceE { get; }
     }
+
     public class ServiceD : IServiceD
     {
     }
+
     public class ServiceE : IServiceE
     {
         public IServiceD ServiceD { get; }
+
         public ServiceE(IServiceD d)
         {
             ServiceD = d;
         }
     }
+
     public class ServiceF : IServiceF
     {
         public IServiceE ServiceE { get; }
+
         public ServiceF(IServiceE e)
         {
             ServiceE = e;
@@ -88,10 +98,14 @@ class Program
     }
 
     public class Logger<T> { }
+
     public interface IServiceG { }
+
     public class ServiceG : IServiceG { }
 
     public interface IServiceH { }
+
     public class ServiceH1 : IServiceH { }
+
     public class ServiceH2 : IServiceH { }
 }

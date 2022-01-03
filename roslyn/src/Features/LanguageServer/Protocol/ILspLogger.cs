@@ -23,10 +23,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         private NoOpLspLogger() { }
 
         public void TraceException(Exception exception) { }
+
         public void TraceInformation(string message) { }
+
         public void TraceWarning(string message) { }
+
         public void TraceError(string message) { }
+
         public void TraceStart(string message) { }
+
         public void TraceStop(string message) { }
     }
 }

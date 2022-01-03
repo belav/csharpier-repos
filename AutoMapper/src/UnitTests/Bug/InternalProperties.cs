@@ -13,6 +13,7 @@ namespace AutoMapper.UnitTests.Bug
         {
             internal int Number { get; set; }
         }
+
         class Destination
         {
             internal int Number { get; set; }

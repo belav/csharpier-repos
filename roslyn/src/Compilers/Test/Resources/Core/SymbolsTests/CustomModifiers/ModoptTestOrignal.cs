@@ -24,6 +24,7 @@ namespace Metadata
         {
             return 22;
         }
+
         // 2
         public virtual byte /*modopt*/
         M2(
@@ -50,12 +51,14 @@ namespace Metadata
         {
             return 11;
         }
+
         // 1
         public virtual byte /*modopt*/
         M3(byte t, byte v)
         {
             return 51;
         }
+
         // 1 - modreq (Not participate in OR)
         public virtual byte /*modreq*/
         M4(byte t, byte v)
@@ -72,12 +75,14 @@ namespace Metadata
         {
             get { return "2 modopts"; }
         }
+
         // 1
         public virtual string /*modopt*/
         P1
         {
             get { return "1 modopt"; }
         }
+
         // not-in
         public virtual string /*modreq*/
         P2
@@ -85,6 +90,7 @@ namespace Metadata
             get { return "1 modreq"; }
         }
     }
+
     //
     public interface IGooAmbiguous<T, R>
     {
@@ -93,9 +99,11 @@ namespace Metadata
             T /*modreq*/
             t
         );
+
         // 1
         R /*modopt*/
         M1(T t);
+
         // 1
         R M2(
             T /*modopt*/
@@ -111,6 +119,7 @@ namespace Metadata
             T /*modopt*/
             t
         );
+
         // 1
         string /*modopt*/
         M1<T>(T t);

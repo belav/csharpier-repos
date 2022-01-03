@@ -76,6 +76,7 @@ internal class LoggingHttpMessageHandler : DelegatingHandler
         {
             _sendingHttpRequest(logger, requestMethod, requestUrl, null);
         }
+
         public static void UnsuccessfulHttpResponse(
             ILogger logger,
             HttpStatusCode statusCode,

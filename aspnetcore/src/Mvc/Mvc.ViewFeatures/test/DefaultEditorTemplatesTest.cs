@@ -1818,8 +1818,10 @@ public class DefaultEditorTemplatesTest
 
         [Display(Order = 23)]
         public string OrderedProperty3 { get; set; }
+
         [Display(Order = 23)]
         public string OrderedProperty2 { get; set; }
+
         [Display(Order = 23)]
         public string OrderedProperty1 { get; set; }
     }

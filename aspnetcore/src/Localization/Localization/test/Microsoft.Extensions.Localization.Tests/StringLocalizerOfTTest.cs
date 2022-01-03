@@ -129,5 +129,6 @@ public class StringLocalizerOfTTest
     }
 
     private class BaseType { }
+
     private class DerivedType : BaseType { }
 }

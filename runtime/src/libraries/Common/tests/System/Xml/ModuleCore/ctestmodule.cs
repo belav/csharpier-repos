@@ -97,6 +97,7 @@ namespace OLEDB.Test.ModuleCore
             get { return Attribute.Modified; }
             set { Attribute.Modified = value; }
         }
+
         public override int Init(object o)
         {
             //Delegate

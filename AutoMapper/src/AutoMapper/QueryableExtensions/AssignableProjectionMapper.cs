@@ -13,6 +13,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             TypeMap memberTypeMap,
             Expression resolvedSource
         ) => memberMap.DestinationType.IsAssignableFrom(resolvedSource.Type);
+
         public Expression Project(
             IGlobalConfiguration configuration,
             MemberMap memberMap,

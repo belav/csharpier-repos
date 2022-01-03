@@ -163,6 +163,7 @@ namespace System.Xml.Schema
         private readonly NameTable _nametable;
         private string? _targetNamespace;
         private readonly XmlNamespaceManager _namespaceManager;
+
         //private Hashtable schemas;    //contains collection of schemas before they get added to the XmlSchemaSet xsc
         //private bool bRefine = false; //indicates if we are going to infer or refine schema when InferSchema is called
         private readonly ArrayList _schemaList;
@@ -1182,6 +1183,7 @@ namespace System.Xml.Schema
             }
             return effectiveSchemaType;
         }
+
         /// <summary>
         /// Verifies that the current element has its corresponding element in the sequence and order is the same.
         /// If the order is not the same, it changes the particle from Sequence to Sequence with Choice.
@@ -1419,6 +1421,7 @@ namespace System.Xml.Schema
                 throw new XmlSchemaInferenceException(SR.SchInf_noseq, 0, 0);
             }
         }
+
         internal void ProcessAttributes(
             ref XmlSchemaElement xse,
             XmlSchemaType? effectiveSchemaType,
@@ -2822,6 +2825,7 @@ namespace System.Xml.Schema
                 return TF_string;
             }
         }
+
         private XmlSchemaElement CreateNewElementforChoice(XmlSchemaElement copyElement)
         {
             XmlSchemaElement newElement = new XmlSchemaElement();

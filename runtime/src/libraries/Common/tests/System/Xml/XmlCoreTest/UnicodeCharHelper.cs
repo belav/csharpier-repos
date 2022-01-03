@@ -29,16 +29,19 @@ namespace XmlCoreTest.Common
     {
         private static CharType[] s_charTypeTable = new CharType[0x10000];
         private static CharType _currentCharType = CharType.None;
+
         static UnicodeCharHelper()
         {
             InitializeFourthEditionCharTypeTable();
         }
+
         //#region Fourth Edition Table
         static CharType CurrentCharType
         {
             get { return _currentCharType; }
             set { _currentCharType = value; }
         }
+
         static void addCharRange(char[] charrange)
         {
             if (charrange == null)
@@ -51,6 +54,7 @@ namespace XmlCoreTest.Common
                 s_charTypeTable[c] |= CurrentCharType;
             }
         }
+
         private static void InitializeFourthEditionCharTypeTable()
         {
             CurrentCharType = CharType.XmlChar; // ranges

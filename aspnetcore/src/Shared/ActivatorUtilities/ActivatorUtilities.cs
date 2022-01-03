@@ -13,8 +13,10 @@ using System.Runtime.ExceptionServices;
 using Microsoft.Extensions.Internal;
 
 namespace Microsoft.Extensions.DependencyInjection;
+
 #else
 namespace Microsoft.Extensions.Internal;
+
 #endif
 
 /// <summary>

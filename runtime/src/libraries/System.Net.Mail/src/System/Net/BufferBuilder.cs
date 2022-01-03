@@ -99,7 +99,9 @@ namespace System.Net.Mail
         }
 
         internal int Length => _offset;
+
         internal byte[] GetBuffer() => _buffer;
+
         internal void Reset()
         {
             _offset = 0;

@@ -167,6 +167,7 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>Cached skip states from the initial state of <see cref="_dotStarredPattern"/> for the 5 possible previous character kinds.</summary>
         private readonly DfaMatchingState<TSetType>?[] _prefixSkipStates =
             new DfaMatchingState<TSetType>[CharKind.CharKindCount];
+
         /// <summary>Cached skip states from the initial state of Ar for the 5 possible previous character kinds.</summary>
         private readonly DfaMatchingState<TSetType>?[] _reversePrefixSkipStates =
             new DfaMatchingState<TSetType>[CharKind.CharKindCount];

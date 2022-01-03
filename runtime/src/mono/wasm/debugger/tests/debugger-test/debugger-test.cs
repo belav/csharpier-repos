@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+
 public partial class Math
 { //Only append content to this class as the test suite depends on line info
     public static int IntAdd(int a, int b)
@@ -125,6 +126,7 @@ public partial class Math
         }
 
         Math m = new Math();
+
         public async System.Threading.Tasks.Task<bool> AsyncMethod0(string s, int i)
         {
             string local0 = "value0";
@@ -330,12 +332,14 @@ public partial class Math
     }
 
     public delegate void DelegateWithVoidReturn(GenericStruct<int[]> gs);
+
     public static void DelegateTargetWithVoidReturn(GenericStruct<int[]> gs) { }
 
     public delegate GenericStruct<bool[]> DelegateForSignatureTest(
         Math m,
         GenericStruct<GenericStruct<int[]>> gs
     );
+
     static bool DelegateTargetForNestedFunc<T>(T arg) => true;
 
     public struct SimpleStruct
@@ -449,6 +453,7 @@ public class DebuggerTest
         object oo0 = oo;
         Console.WriteLine($"break here");
     }
+
     public static async System.Threading.Tasks.Task BoxedTypeObjectTestAsync()
     {
         int i = 5;
@@ -602,6 +607,7 @@ public class HiddenSequencePointTest
         Console.WriteLine("third line");
         MethodWithHiddenLinesAtTheEnd();
     }
+
     public static void StepOverHiddenSP2()
     {
         Console.WriteLine("StepOverHiddenSP2");
@@ -619,6 +625,7 @@ public class HiddenSequencePointTest
 public class LoadDebuggerTestALC
 {
     static System.Reflection.Assembly loadedAssembly;
+
     public static void LoadLazyAssemblyInALC(string asm_base64, string pdb_base64)
     {
         var context = new System.Runtime.Loader.AssemblyLoadContext("testContext", true);
@@ -633,6 +640,7 @@ public class LoadDebuggerTestALC
         );
         Console.WriteLine($"Loaded - {loadedAssembly}");
     }
+
     public static void RunMethodInALC(string type_name, string method_name)
     {
         var myType = loadedAssembly.GetType(type_name);
@@ -650,6 +658,7 @@ public class TestHotReload
     static byte[] dmeta_data2_bytes;
     static byte[] dil_data2_bytes;
     static byte[] dpdb_data2_bytes;
+
     public static void LoadLazyHotReload(
         string asm_base64,
         string pdb_base64,
@@ -678,6 +687,7 @@ public class TestHotReload
         );
         Console.WriteLine($"Loaded - {loadedAssembly}");
     }
+
     public static void RunMethod(string className, string methodName)
     {
         var ty = typeof(System.Reflection.Metadata.MetadataUpdater);
@@ -743,7 +753,9 @@ public class TestHotReload
 public class Something
 {
     public string Name { get; set; }
+
     public Something() => Name = "Same of something";
+
     public override string ToString() => Name;
 }
 
@@ -755,6 +767,7 @@ public class Foo
     public string Lorem { get; set; } = "Safe";
     public string Ipsum { get; set; } = "Side";
     public Something What { get; } = new Something();
+
     public int Bart()
     {
         int ret;
@@ -764,6 +777,7 @@ public class Foo
             ret = 1;
         return ret;
     }
+
     public static void RunBart()
     {
         Foo foo = new Foo();
@@ -771,6 +785,7 @@ public class Foo
         Console.WriteLine(foo.OtherBar());
         foo.OtherBarAsync().Wait(10);
     }
+
     public bool OtherBar()
     {
         var a = 1;
@@ -784,6 +799,7 @@ public class Foo
         var g = TimeSpan.TryParseExact(y, @"ss\.fff", null, out var ts3) && x.Contains('S');
         return d && e == true;
     }
+
     public async System.Threading.Tasks.Task OtherBarAsync()
     {
         var a = 1;
@@ -798,6 +814,7 @@ public class Foo
         Console.WriteLine(g);
         await System.Threading.Tasks.Task.CompletedTask;
     }
+
     public async System.Threading.Tasks.Task<bool> AsyncMethod()
     {
         await System.Threading.Tasks.Task.Delay(1);
@@ -856,6 +873,7 @@ public class SteppingInto
 {
     static int currentCount = 0;
     static MyIncrementer incrementer = new MyIncrementer();
+
     public static void MethodToStep()
     {
         currentCount = incrementer.Increment(currentCount);

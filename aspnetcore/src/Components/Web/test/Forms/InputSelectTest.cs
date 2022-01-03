@@ -244,6 +244,7 @@ public class InputSelectTest
             get => base.CurrentValueAsString;
             set => base.CurrentValueAsString = value;
         }
+
         public async Task SetCurrentValueAsStringAsync(string value)
         {
             // This is equivalent to the subclass writing to CurrentValueAsString

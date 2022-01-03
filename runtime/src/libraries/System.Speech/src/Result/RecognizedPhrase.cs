@@ -1547,6 +1547,7 @@ namespace System.Speech.Recognition
             {
                 return $"'rule={_rule}";
             }
+
             internal Grammar _grammar;
             internal string _rule;
             internal string _name;
@@ -1558,6 +1559,7 @@ namespace System.Speech.Recognition
             internal RuleNode _next;
             internal RuleNode _child;
         }
+
         [DebuggerDisplay(
             "Name={_name} node={_ruleNode._rule} value={_value != null && _value.Value != null ? _value.Value.ToString() : \"\"}"
         )]

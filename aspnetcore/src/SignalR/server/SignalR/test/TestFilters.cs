@@ -11,6 +11,7 @@ namespace Microsoft.AspNetCore.SignalR.Tests;
 public class VerifyMethodFilter : IHubFilter
 {
     private readonly TcsService _service;
+
     public VerifyMethodFilter(TcsService tcsService)
     {
         _service = tcsService;
@@ -53,6 +54,7 @@ public class VerifyMethodFilter : IHubFilter
 public class SyncPointFilter : IHubFilter
 {
     private readonly SyncPoint[] _syncPoint;
+
     public SyncPointFilter(SyncPoint[] syncPoints)
     {
         Debug.Assert(syncPoints.Length == 3);
@@ -100,6 +102,7 @@ public class FilterCounter
 public class CounterFilter : IHubFilter
 {
     private readonly FilterCounter _counter;
+
     public CounterFilter(FilterCounter counter)
     {
         _counter = counter;

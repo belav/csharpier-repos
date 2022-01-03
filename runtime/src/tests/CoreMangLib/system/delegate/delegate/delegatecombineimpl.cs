@@ -4,6 +4,7 @@
 using System;
 using System.Globalization;
 using System.Collections;
+
 //create for delegate combine(delegate a,delagate b) testing
 namespace DelegateTest
 {
@@ -14,6 +15,7 @@ namespace DelegateTest
     {
         const string c_StartWrok = "Start";
         const string c_Working = "Working";
+
         enum identify_null
         {
             c_Start_null_true,
@@ -22,8 +24,10 @@ namespace DelegateTest
             c_Working_null_false,
             c_Start_null_false_duplicate
         }
+
         booldelegate starkWork;
         booldelegate working;
+
         public static int Main()
         {
             DelegateCombineImpl delegateCombineImpl = new DelegateCombineImpl();
@@ -87,6 +91,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest2()
@@ -119,6 +124,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest3()
@@ -151,6 +157,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest4()
@@ -183,6 +190,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest5()
@@ -213,6 +221,7 @@ namespace DelegateTest
 
             return retVal;
         }
+
         private bool CombineImpl(booldelegate delegatesrc, identify_null start)
         {
             DelegateCombineImpl delctor = new DelegateCombineImpl();
@@ -283,6 +292,7 @@ namespace DelegateTest
                 return false;
         }
     }
+
     //create testclass for provding test method and test target.
     class TestClass
     {
@@ -291,11 +301,13 @@ namespace DelegateTest
             TestLibrary.TestFramework.LogInformation("StartWork_Bool method  is running .");
             return true;
         }
+
         public bool Working_Bool()
         {
             TestLibrary.TestFramework.LogInformation("Working_Bool method  is running .");
             return true;
         }
+
         public void CompleteWork_Void()
         {
             TestLibrary.TestFramework.LogInformation("CompleteWork_Void method  is running .");

@@ -7468,6 +7468,7 @@ class C1
 "
             );
         }
+
         [Fact]
         public void ConditionalBoolExpr02ba()
         {

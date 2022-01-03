@@ -118,6 +118,7 @@ public class Tree
 
         return currRank;
     }
+
     private void RotateLeft(ref Node x)
     {
         //Swing pointers around for rotation
@@ -139,6 +140,7 @@ public class Tree
         //Update incoming reference
         x = r;
     }
+
     private void RotateRight(ref Node x)
     {
         //Swing pointers around for rotation

@@ -25,6 +25,7 @@ namespace System.Xml
 
         private DataSetMapper _mapper;
         internal Hashtable _pointers; // Hastable w/ all pointer objects used by this XmlDataDocument. Hashtable are guaranteed to work OK w/ one writer and mutiple readers, so as long as we guarantee
+
         // that there is at most one thread in AddPointer we are OK.
         private int _countAddPointer; // Approximate count of how many times AddPointer was called since the last time we removed the unused pointer objects from pointers hashtable.
         private ArrayList _columnChangeList;
@@ -38,9 +39,11 @@ namespace System.Xml
         private bool _isFoliationEnabled; // true if we should create and reveal the virtual nodes, false if we should reveal only the physical stored nodes
         private bool _optimizeStorage; // false if we should only have foilated regions.
         private ElementState _autoFoliationState; // When XmlBoundElement will foliate because of member functions, this will contain the foliation mode: usually this is
+
         // ElementState.StrongFoliation, however when foliation occurs due to DataDocumentNavigator operations (InsertNode for example),
         // it is usually ElementState.WeakFoliation
         private bool _fAssociateDataRow; // if true, CreateElement will create and associate data rows w/ the newly created XmlBoundElement.
+
         // If false, then CreateElement will just create the XmlBoundElement nodes. This is usefull for Loading case,
         // when CreateElement is called by DOM.
         private object _foliationLock;
@@ -86,6 +89,7 @@ namespace System.Xml
                 Debug.Fail("Pointer not present");
 #endif
         }
+
         // This function attaches the DataSet to XmlDataDocument
         // We also register a special listener (OnDataRowCreatedSpecial) to DataSet, so we know when we should setup all regular listeners (OnDataRowCreated, OnColumnChanging, etc).
         // We need to do this because of the following scenario:
@@ -530,6 +534,7 @@ namespace System.Xml
             Debug.Assert(docElem.LastChild == docElem.FirstChild);
             return docElem;
         }
+
         // This function ensures that the special listeners are un-subscribed, the permanent listeners are subscribed and
         // CreateElement will attach DataRows to newly created XmlBoundElement.
         // It should be called when we have special listeners hooked and we need to change from the special-listeners mode to the
@@ -1002,6 +1007,7 @@ namespace System.Xml
 
             return true;
         }
+
         private bool IsFoliated(XmlBoundElement be)
         {
             return be.IsFoliated;
@@ -2287,6 +2293,7 @@ namespace System.Xml
             if (args.PropertyName == "DataSetName")
                 throw new InvalidOperationException(SR.DataDom_DataSetNameChange);
         }
+
         private void OnColumnPropertyChanging(object? oColumn, PropertyChangedEventArgs args)
         {
             if (args.PropertyName == "ColumnName")
@@ -2296,6 +2303,7 @@ namespace System.Xml
             if (args.PropertyName == "ColumnMapping")
                 throw new InvalidOperationException(SR.DataDom_ColumnMappingChange);
         }
+
         private void OnTablePropertyChanging(object? oTable, PropertyChangedEventArgs args)
         {
             if (args.PropertyName == "TableName")
@@ -2303,6 +2311,7 @@ namespace System.Xml
             if (args.PropertyName == "Namespace")
                 throw new InvalidOperationException(SR.DataDom_TableNamespaceChange);
         }
+
         private void OnTableColumnsChanging(
             object? oColumnsCollection,
             CollectionChangeEventArgs args
@@ -2832,6 +2841,7 @@ namespace System.Xml
                     node = node.ParentNode;
             }
         }
+
         private bool IsRowLive(DataRow row)
         {
             return (
@@ -2893,6 +2903,7 @@ namespace System.Xml
             // Assert that all sub-regions are assoc w/ "live" rows
             AssertLiveRows(node);
         }
+
         // "node" was inserting into a disconnected tree from oldParent==null state
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         private void OnNodeInsertedInFragment(XmlNode node)
@@ -3224,6 +3235,7 @@ namespace System.Xml
                 IsFoliationEnabled = wasFoliationEnabled;
             }
         }
+
         [System.Diagnostics.Conditional("DEBUG")]
         private void AssertNonLiveRows(XmlNode node)
         {
@@ -3252,6 +3264,7 @@ namespace System.Xml
         {
             throw new NotSupportedException(SR.DataDom_NotSupport_GetElementById);
         }
+
         public override XmlNodeList GetElementsByTagName(string name)
         {
             // Retrieving nodes from the returned nodelist may cause foliation which causes new nodes to be created,
@@ -3325,6 +3338,7 @@ namespace System.Xml
             }
             return retValue;
         }
+
         private bool IsSelfRelatedDataTable(DataTable rootTable)
         {
             List<DataTable> tableList = new List<DataTable>();
@@ -3367,6 +3381,7 @@ namespace System.Xml
             }
             return retValue;
         }
+
         private bool TablesAreOrdered(DataSet ds)
         {
             foreach (DataTable dt in ds.Tables)

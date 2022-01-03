@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+
 namespace AutoMapper
 {
     using static Expression;
     using Execution;
     using Internal;
+
     /// <summary>
     /// The base class for member maps (property, constructor and path maps).
     /// </summary>
@@ -16,6 +18,7 @@ namespace AutoMapper
     public class MemberMap
     {
         protected MemberMap() { }
+
         public static readonly MemberMap Instance = new MemberMap();
         public virtual TypeMap TypeMap => default;
         public virtual Type SourceType
@@ -31,7 +34,9 @@ namespace AutoMapper
             get => default;
             protected set { }
         }
+
         public virtual TypePair Types() => new TypePair(SourceType, DestinationType);
+
         public virtual bool CanResolveValue
         {
             get => default;
@@ -99,11 +104,13 @@ namespace AutoMapper
         public MemberInfo SourceMember =>
             CustomMapExpression.GetMember() ?? SourceMembers.LastOrDefault();
         public bool MustUseDestination => UseDestinationValue is true || !CanBeSet;
+
         public void MapFrom(LambdaExpression sourceMember)
         {
             CustomMapExpression = sourceMember;
             Ignored = false;
         }
+
         public void MapFrom(string sourceMembersPath)
         {
             var mapExpression = TypeMap.SourceType.IsGenericTypeDefinition
@@ -113,16 +120,21 @@ namespace AutoMapper
                 : ExpressionBuilder.MemberAccessLambda(TypeMap.SourceType, sourceMembersPath);
             MapFrom(mapExpression);
         }
+
         public override string ToString() => DestinationName;
+
         public Expression ChainSourceMembers(
             Expression source,
             Type destinationType,
             Expression defaultValue
         ) => SourceMembers.Chain(source).NullCheck(destinationType, defaultValue);
+
         public bool AllowsNullDestinationValues() =>
             TypeMap.Profile.AllowsNullDestinationValuesFor(this);
+
         public bool AllowsNullCollections() => TypeMap.Profile.AllowsNullCollectionsFor(this);
     }
+
     public class ValueResolverConfiguration
     {
         public object Instance { get; }
@@ -142,21 +154,26 @@ namespace AutoMapper
             Instance = instance;
             InterfaceType = interfaceType;
         }
+
         public Type ResolvedType => InterfaceType.GenericTypeArguments.Last();
     }
+
     public readonly struct ValueTransformerConfiguration
     {
         public readonly Type ValueType;
         public readonly LambdaExpression TransformerExpression;
+
         public ValueTransformerConfiguration(Type valueType, LambdaExpression transformerExpression)
         {
             ValueType = valueType;
             TransformerExpression = transformerExpression;
         }
+
         public bool IsMatch(MemberMap memberMap) =>
             ValueType.IsAssignableFrom(memberMap.SourceType)
             && memberMap.DestinationType.IsAssignableFrom(ValueType);
     }
+
     public static class ValueTransformerConfigurationExtensions
     {
         /// <summary>

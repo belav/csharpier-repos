@@ -29,6 +29,7 @@ namespace DllImportGenerator.IntegrationTests
                 long p,
                 long q
             );
+
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "add_integers_stdcall")]
             [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvStdcall) })]
             public static partial long AddLongsStdcall(

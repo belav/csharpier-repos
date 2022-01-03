@@ -338,6 +338,7 @@ namespace System.Net
         }
 
         private static uint GetBlockIndex(uint offset) => offset / BlockSize;
+
         private static uint GetOffsetInBlock(uint offset) => offset % BlockSize;
 
         public bool IsEmpty => _length == 0;

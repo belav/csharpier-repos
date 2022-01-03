@@ -17,6 +17,7 @@ public class AA
 {
     public bool[][,][,,][][][][] m_abField1;
     public static float m_fStatic1;
+
     public static ushort Static1(
         ref char[,,] param1,
         ref byte[,,] param2,
@@ -71,6 +72,7 @@ public class AA
         param1[74, 65, ((int)(AA.m_fStatic1))] = '\x30';
         return ((ushort)(33u));
     }
+
     public static uint Static2(String[,] param1, double param2, ref long param3)
     {
         for (App.m_iFwd5 -= 20; (87.0 == param2); App.m_chFwd6 /= '\x2e')
@@ -123,6 +125,7 @@ public class AA
         param1[106, ((int)('\x40'))] = "34";
         return 17u;
     }
+
     public static byte Static3(
         ref byte param1,
         ref char param2,
@@ -136,6 +139,7 @@ public class AA
     {
         return param1;
     }
+
     public static double[,,] Static4(
         Array[][,,] param1,
         long param2,
@@ -152,6 +156,7 @@ public class AA
         ushort local19 = ((ushort)(77.0f));
         return (new double[48u, 34u, 29u]);
     }
+
     public static sbyte[][,] Static5(
         double[] param1,
         ref char param2,
@@ -336,6 +341,7 @@ public class App
         Console.WriteLine("Passed.");
         return 100;
     }
+
     public static short m_shFwd1;
     public static bool m_bFwd2;
     public static long m_lFwd3;

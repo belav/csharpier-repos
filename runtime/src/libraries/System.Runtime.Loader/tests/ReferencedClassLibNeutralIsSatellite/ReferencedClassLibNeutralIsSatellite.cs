@@ -6,6 +6,7 @@ using System.Globalization;
 
 [assembly: NeutralResourcesLanguage("es", UltimateResourceFallbackLocation.Satellite)]
 
+
 namespace ReferencedClassLibNeutralIsSatellite
 {
     public class Program

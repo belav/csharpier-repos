@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         ) =>
             CreateCompilation(source, parseOptions: TestOptions.RegularPreview)
                 .VerifyDiagnostics(expected);
+
         internal CompilationVerifier VerifyInPreview(
             CSharpTestSource source,
             string expectedOutput,

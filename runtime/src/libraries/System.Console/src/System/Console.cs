@@ -19,6 +19,7 @@ namespace System
         // in particular when input is redirected and data may be consumed from a larger source. This 4K default size is the
         // same as is currently used by most other environments/languages tried.
         internal const int ReadBufferSize = 4096;
+
         // There's no visible functional impact to the write buffer size, and as we auto flush on every write,
         // there's little benefit to having a large buffer.  So we use a smaller buffer size to reduce working set.
         private const int WriteBufferSize = 256;

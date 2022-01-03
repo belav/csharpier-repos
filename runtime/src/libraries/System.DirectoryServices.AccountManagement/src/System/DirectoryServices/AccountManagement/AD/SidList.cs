@@ -380,6 +380,7 @@ namespace System.DirectoryServices.AccountManagement
         public IntPtr pSid = IntPtr.Zero;
         public string name;
         public string sidIssuerName;
+
         //
         // IDisposable
         //

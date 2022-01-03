@@ -170,6 +170,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         [FieldOffset(20)]
         internal int _valueOffset;
+
         [FieldOffset(24)]
         internal int _varInt;
 

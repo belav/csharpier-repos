@@ -228,6 +228,7 @@ namespace System.Xml
 
             return true;
         }
+
         protected XmlCommentNode MoveToComment()
         {
             if (_commentNode == null)
@@ -278,6 +279,7 @@ namespace System.Xml
             MoveToNode(_whitespaceTextNode);
             return _whitespaceTextNode;
         }
+
         protected XmlElementNode ElementNode
         {
             get
@@ -390,6 +392,7 @@ namespace System.Xml
         {
             return AddAttribute(QNameType.Normal, true);
         }
+
         protected XmlAttributeNode AddXmlnsAttribute(Namespace ns)
         {
             if (!ns.Prefix.IsEmpty && ns.Uri.IsEmpty)
@@ -442,6 +445,7 @@ namespace System.Xml
                 }
             }
         }
+
         protected bool OutsideRootElement
         {
             get { return _depth == 0; }
@@ -694,6 +698,7 @@ namespace System.Xml
                 return null;
             return attributeNode.ValueAsString;
         }
+
         public sealed override bool IsEmptyElement
         {
             get { return _node.IsEmptyElement; }
@@ -869,6 +874,7 @@ namespace System.Xml
         {
             MoveToNode(GetAttributeNode(index));
         }
+
         public override bool MoveToAttribute(string name)
         {
             XmlNode? attributeNode = GetAttributeNode(name);
@@ -1049,6 +1055,7 @@ namespace System.Xml
                 );
             return _node.IsLocalName(localName);
         }
+
         public override bool IsNamespaceUri(string namespaceUri)
         {
             if (namespaceUri == null)
@@ -1066,6 +1073,7 @@ namespace System.Xml
                 );
             return _node.IsNamespaceUri(namespaceUri);
         }
+
         public override sealed bool IsStartElement()
         {
             XmlNodeType nodeType = _node.NodeType;
@@ -1345,6 +1353,7 @@ namespace System.Xml
                 return s;
             }
         }
+
         public override void ReadStartElement()
         {
             if (_node.NodeType != XmlNodeType.Element)
@@ -2671,6 +2680,7 @@ namespace System.Xml
                     return this.Namespace.Prefix == localName && ns.Value == xmlnsNamespace;
                 }
             }
+
             public bool IsPrefixAndLocalName(string prefix, string localName)
             {
                 if (_qnameType == QNameType.Normal)
@@ -2731,6 +2741,7 @@ namespace System.Xml
                     return false;
                 }
             }
+
             public string ValueAsString
             {
                 get
@@ -2984,6 +2995,7 @@ namespace System.Xml
                     0
                 ) { }
         }
+
         protected sealed class XmlEndOfFileNode : XmlNode
         {
             public XmlEndOfFileNode(XmlBufferReader bufferReader)
@@ -3399,6 +3411,7 @@ namespace System.Xml
                     return XmlNamespace;
                 return null;
             }
+
             public Namespace? LookupNamespace(string prefix)
             {
                 PrefixHandleType shortPrefix;
@@ -3463,6 +3476,7 @@ namespace System.Xml
                 }
             }
         }
+
         protected sealed class Namespace
         {
             private readonly PrefixHandle _prefix;
@@ -3519,6 +3533,7 @@ namespace System.Xml
                 }
                 return false;
             }
+
             public StringHandle Uri
             {
                 get { return _uri; }

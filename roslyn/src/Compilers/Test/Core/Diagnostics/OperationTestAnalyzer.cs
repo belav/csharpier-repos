@@ -2325,6 +2325,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 );
             }
         }
+
         public sealed override void Initialize(AnalysisContext context)
         {
             context.RegisterOperationAction(

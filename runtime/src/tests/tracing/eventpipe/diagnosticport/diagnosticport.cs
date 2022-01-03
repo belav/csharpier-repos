@@ -21,6 +21,7 @@ namespace Tracing.Tests.DiagnosticPortValidation
     public class DiagnosticPortValidation
     {
         private static readonly int s_NumberOfPorts = 4;
+
         public static async Task<bool> TEST_MultipleConnectPortsNoSuspend()
         {
             bool fSuccess = true;

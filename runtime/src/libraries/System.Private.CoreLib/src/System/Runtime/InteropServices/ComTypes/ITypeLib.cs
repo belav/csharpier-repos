@@ -50,6 +50,7 @@ namespace System.Runtime.InteropServices.ComTypes
             out int dwHelpContext,
             out string strHelpFile
         );
+
         [return: MarshalAs(UnmanagedType.Bool)]
         bool IsName([MarshalAs(UnmanagedType.LPWStr)] string szNameBuf, int lHashVal);
         void FindName(
@@ -59,6 +60,7 @@ namespace System.Runtime.InteropServices.ComTypes
             [MarshalAs(UnmanagedType.LPArray), Out] int[] rgMemId,
             ref short pcFound
         );
+
         [PreserveSig]
         void ReleaseTLibAttr(IntPtr pTLibAttr);
     }

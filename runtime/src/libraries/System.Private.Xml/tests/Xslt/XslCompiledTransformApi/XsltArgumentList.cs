@@ -19,6 +19,7 @@ namespace System.Xml.Tests
     public class CArgIntegrity : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CArgIntegrity(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -639,6 +640,7 @@ namespace System.Xml.Tests
     public class CArgGetExtObj : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CArgGetExtObj(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -1151,6 +1153,7 @@ namespace System.Xml.Tests
     public class CArgAddParam : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CArgAddParam(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -2676,6 +2679,7 @@ namespace System.Xml.Tests
     public class CArgAddParamMisc : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CArgAddParamMisc(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -7396,6 +7400,7 @@ namespace System.Xml.Tests
     public class CArgAddExtObj : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CArgAddExtObj(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -10353,6 +10358,7 @@ namespace System.Xml.Tests
     public class ExObj : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public ExObj(int i, ITestOutputHelper output) : base(output)
         {
             count = 0;
@@ -10392,6 +10398,7 @@ namespace System.Xml.Tests
         private string _baseline = string.Empty;
 
         private ITestOutputHelper _output;
+
         public CArgRemoveParam(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -11348,6 +11355,7 @@ namespace System.Xml.Tests
     public class CArgRemoveExtObj : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CArgRemoveExtObj(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -11854,6 +11862,7 @@ namespace System.Xml.Tests
     public class CArgClear : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public CArgClear(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -12225,6 +12234,7 @@ namespace System.Xml.Tests
         public string OutFile = string.Empty;
 
         private ITestOutputHelper _output;
+
         public XsltEvents(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -12353,6 +12363,7 @@ namespace System.Xml.Tests
     public class XPathNodeIteratorTests : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
+
         public XPathNodeIteratorTests(ITestOutputHelper output) : base(output)
         {
             _output = output;

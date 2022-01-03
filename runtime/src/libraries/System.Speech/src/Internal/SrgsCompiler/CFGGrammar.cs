@@ -126,6 +126,7 @@ namespace System.Speech.Internal.SrgsCompiler
                 }
                 // Else SAPI 5.0 syntax grammar - parameters set to zero
             }
+
             internal static bool IsCfg(Stream stream, out int cfgLength)
             {
                 cfgLength = 0;

@@ -66,6 +66,7 @@ namespace System.Xml.Xsl.Xslt
         {
             private new readonly XPathQilFactory f;
             private QilNode? _fixup;
+
             public PathConvertor(XPathQilFactory f) : base(f.BaseFactory)
             {
                 this.f = f;
@@ -94,6 +95,7 @@ namespace System.Xml.Xsl.Xslt
                 }
                 return n;
             }
+
             // Filers that travers Content being converted to global travers:
             // Filter($j= ... Filter($i = Content(fixup), ...))  -> Filter($j= ... Filter($i = Loop($j = DesendentOrSelf(Root(fixup)), Content($j), ...)))
             protected override QilNode VisitLoop(QilLoop n)

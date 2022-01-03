@@ -52,6 +52,7 @@ namespace LargeObjectTest
     public class Test
     {
         public static int ExitCode = 1;
+
         public static int Main()
         {
             int loop = 0;

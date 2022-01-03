@@ -638,6 +638,7 @@ namespace CoreXml.Test.XLinq
                 return false;
             return true;
         }
+
         public override bool CompareAttributes(XElement n1, XElement n2)
         {
             XAttribute xa1,

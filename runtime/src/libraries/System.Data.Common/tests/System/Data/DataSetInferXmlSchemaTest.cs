@@ -62,13 +62,16 @@ namespace System.Data.Tests
     <el4 attr4='val4' attrD='valD'>4</el4>
   </el2>
 </el1>";
+
         // mixed content
         private string _xml10 = "<root>Here is a <b>mixed</b> content.</root>";
+
         // xml:space support
         private string _xml11 =
             @"<root xml:space='preserve'>
    <child_after_significant_space />
 </root>";
+
         // This is useless ... since xml:space becomes a DataColumn here.
         //        string xml12 = "<root xml:space='preserve'>     </root>";
         // The result is silly under MS.NET. It never ignores comment, so
@@ -80,6 +83,7 @@ namespace System.Data.Tests
 
         // simple namespace/prefix support
         private string _xml14 = "<p:root xmlns:p='urn:foo'>test string</p:root>";
+
         // two tables that have the same content type.
         private string _xml15 =
             @"<root>
@@ -92,6 +96,7 @@ namespace System.Data.Tests
         <col2_2>test2</col2_2>
 </table2>
 </root>";
+
         // foo cannot be both table chikd and root child
         private string _xml16 =
             @"<root>
@@ -105,8 +110,10 @@ namespace System.Data.Tests
 <foo></foo>
 <bar />
 </root>";
+
         // simple namespace support
         private string _xml17 = @"<root xmlns='urn:foo' />";
+
         // conflict between simple and complex type element col
         private string _xml18 =
             @"<set>
@@ -117,6 +124,7 @@ namespace System.Data.Tests
 <col>simple text here.</col>
 </table>
 </set>";
+
         // variant of xml18: complex column appeared latter
         private string _xml19 =
             @"<set>
@@ -127,6 +135,7 @@ namespace System.Data.Tests
 </col>
 </table>
 </set>";
+
         // conflict check (actually it is not conflict) on two "col" tables
         private string _xml20 =
             @"<set>
@@ -137,6 +146,7 @@ namespace System.Data.Tests
 <col attr='value' />
 </table>
 </set>";
+
         // conflict between the attribute and the child element
         private string _xml21 =
             @"<set>
@@ -146,9 +156,11 @@ namespace System.Data.Tests
 </col>
 </table>
 </set>";
+
         // simple nest
         private string _xml22 =
             "<set><table><col><descendant/></col></table><table2><col2>v2</col2></table2></set>";
+
         /*
           // simple diffgram
           string xml23 = @"<set>

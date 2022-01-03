@@ -15,14 +15,17 @@ class T : B
     {
         return 1;
     }
+
     static int stuff(int a)
     {
         return 0;
     }
+
     static int stuff(char a)
     {
         return 1;
     }
+
     static int Main()
     {
         Type t = typeof(T);

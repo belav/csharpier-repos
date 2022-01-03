@@ -429,10 +429,15 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
         }
 
         public int FReserved1(uint dwReserved, uint message, IntPtr wParam, IntPtr lParam) => S_OK;
+
         public int FPreTranslateMessage(MSG[] pMsg) => S_OK;
+
         public void OnEnterState(uint uStateID, int fEnter) { }
+
         public void OnAppActivate(int fActive, uint dwOtherThreadID) { }
+
         public void OnLoseActivation() { }
+
         public void OnActivationChange(
             IOleComponent pic,
             int fSameComponent,
@@ -441,10 +446,15 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             OLECHOSTINFO[] pchostinfo,
             uint dwReserved
         ) { }
+
         public int FContinueMessageLoop(uint uReason, IntPtr pvLoopData, MSG[] pMsgPeeked) => S_OK;
+
         public int FQueryTerminate(int fPromptUser) => 1; //true
+
         public void Terminate() { }
+
         public IntPtr HwndGetWindow(uint dwWhich, uint dwReserved) => IntPtr.Zero;
+
         public int OnInterveningUnitBlockingLinkedUndo() => E_FAIL;
     }
 }

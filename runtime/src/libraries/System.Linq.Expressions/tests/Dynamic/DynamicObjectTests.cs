@@ -30,6 +30,7 @@ namespace System.Dynamic.Tests
             public virtual int VirtualReadonlyProperty => 1;
 
             public virtual int VirtualMethod(int argument) => argument;
+
             public int HideProperty { get; set; }
 
             public int HideMethod(int argument) => argument;

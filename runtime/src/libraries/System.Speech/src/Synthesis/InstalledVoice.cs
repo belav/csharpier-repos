@@ -50,6 +50,7 @@ namespace System.Speech.Synthesis
                 && VoiceInfo.Gender == ti2.VoiceInfo.Gender
                 && VoiceInfo.Culture.Equals(ti2.VoiceInfo.Culture);
         }
+
         public override int GetHashCode()
         {
             return VoiceInfo.Name.GetHashCode();

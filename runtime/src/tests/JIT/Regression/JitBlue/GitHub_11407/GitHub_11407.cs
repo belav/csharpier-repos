@@ -17,6 +17,7 @@ class GitHub_11407
             b3,
             b4;
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static foo getfoo()
     {

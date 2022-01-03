@@ -178,6 +178,7 @@ namespace JIT.HardwareIntrinsics.X86
                 return (void*)(((ulong)buffer + expectedAlighment - 1) & ~(expectedAlighment - 1));
             }
         }
+
         private struct TestStruct
         {
             public Vector256<Int32> _fld0;

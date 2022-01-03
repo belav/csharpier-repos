@@ -36,6 +36,7 @@ class Test_pumpFromCctor
 {
     // We can increase this number to fill up more memory.
     const int numMfos = 10;
+
     // We can increase this number to cause more
     // post-finalization work to be done.
     const int maxIterations = 10;

@@ -11,16 +11,20 @@ namespace AutoMapper.UnitTests.MappingInheritance
         int beforeMapCount;
 
         public abstract class BaseBaseSource { }
+
         public class BaseSource : BaseBaseSource
         {
             public string Foo { get; set; }
         }
+
         public class Source : BaseSource { }
 
         public abstract class BaseBaseDest
         {
         }
+
         public class BaseDest : BaseBaseDest { }
+
         public class Dest : BaseDest { }
 
         protected override MapperConfiguration Configuration =>
@@ -56,16 +60,20 @@ namespace AutoMapper.UnitTests.MappingInheritance
         int beforeMapCount;
 
         public abstract class BaseBaseSource { }
+
         public class BaseSource : BaseBaseSource
         {
             public string Foo { get; set; }
         }
+
         public class Source : BaseSource { }
 
         public abstract class BaseBaseDest
         {
         }
+
         public class BaseDest : BaseBaseDest { }
+
         public class Dest : BaseDest { }
 
         protected override MapperConfiguration Configuration =>
@@ -100,12 +108,14 @@ namespace AutoMapper.UnitTests.MappingInheritance
         {
             public string Prop { get; set; }
         }
+
         public class Class : BaseClass { }
 
         public class BaseDto
         {
             public string DifferentProp { get; set; }
         }
+
         public class Dto : BaseDto { }
 
         [Fact]

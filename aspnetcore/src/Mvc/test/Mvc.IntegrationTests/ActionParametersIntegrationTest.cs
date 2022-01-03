@@ -980,6 +980,7 @@ public class ActionParameterIntegrationTest
             X = x;
             Y = y;
         }
+
         public double X { get; }
         public double Y { get; }
     }
@@ -996,6 +997,7 @@ public class ActionParameterIntegrationTest
         {
             Id = id;
         }
+
         public string City { get; set; }
         public int Id { get; }
     }

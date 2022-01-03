@@ -2944,6 +2944,7 @@ namespace Newtonsoft.Json
                 MatchValueWithTrailingSeparator(JsonConvert.PositiveInfinity)
             );
         }
+
         private object ParseNumberPositiveInfinity(ReadType readType, bool matched)
         {
             if (matched)

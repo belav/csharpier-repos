@@ -1437,6 +1437,7 @@ namespace System.Text.Json.Serialization.Tests
         public class ClassWithIgnoreAttributeDictionary
         {
             public Dictionary<string, int> Parsed1 { get; set; }
+
             [JsonIgnore]
             public Dictionary<string, int> Skipped2 { get; set; } // Note this has a setter.
             public Dictionary<string, int> Parsed3 { get; set; }
@@ -2257,18 +2258,21 @@ namespace System.Text.Json.Serialization.Tests
         public class ClassWithoutParameterlessCtor
         {
             public ClassWithoutParameterlessCtor(int num) { }
+
             public string Name { get; set; }
         }
 
         public class ClassWithInternalParameterlessConstructor
         {
             internal ClassWithInternalParameterlessConstructor() { }
+
             public string Name { get; set; }
         }
 
         public class ClassWithPrivateParameterlessConstructor
         {
             private ClassWithPrivateParameterlessConstructor() { }
+
             public string Name { get; set; }
         }
 

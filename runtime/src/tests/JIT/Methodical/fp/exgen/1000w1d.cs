@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal unsafe class testout1
 {
     public struct VT_0
@@ -56,6 +57,7 @@ internal unsafe class testout1
         public Decimal a475_0;
         public ulong a492_0;
         public double a493_0;
+
         public VT_0(int i)
         {
             a8_0 = 1;
@@ -110,6 +112,7 @@ internal unsafe class testout1
             arr3d_0 = new int[5, 1001, 4];
         }
     }
+
     public class CL_0
     {
         public double[] arr1d_0 = new double[1001];
@@ -159,6 +162,7 @@ internal unsafe class testout1
         public double a490_0 = -0.99999021874968164;
         public long a498_0 = 3897661216L;
     }
+
     private static int[] s_arr1d_0 = new int[1001];
     private static long s_a15_0 = 2453101149405660275L;
     private static double s_a44_0 = -574497545.01935112;

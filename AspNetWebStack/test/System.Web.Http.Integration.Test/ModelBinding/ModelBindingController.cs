@@ -294,6 +294,7 @@ namespace System.Web.Http.ModelBinding
     public class RequestHeaderValueProvider : IValueProvider
     {
         HttpActionContext _actionContext;
+
         public RequestHeaderValueProvider(HttpActionContext actionContext)
         {
             _actionContext = actionContext;

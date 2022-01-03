@@ -76,6 +76,7 @@ namespace System.Speech.AudioFormat
                     break;
             }
         }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public SpeechAudioFormatInfo(
             EncodingFormat encodingFormat,
@@ -112,6 +113,7 @@ namespace System.Speech.AudioFormat
             _averageBytesPerSecond = averageBytesPerSecond;
             _blockAlign = (short)blockAlign;
         }
+
         public SpeechAudioFormatInfo(
             int samplesPerSecond,
             AudioBitsPerSample bitsPerSample,
@@ -131,11 +133,13 @@ namespace System.Speech.AudioFormat
         {
             get { return _averageBytesPerSecond; }
         }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public int BitsPerSample
         {
             get { return _bitsPerSample; }
         }
+
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public int BlockAlign
         {
@@ -161,6 +165,7 @@ namespace System.Speech.AudioFormat
         {
             return (byte[])_formatSpecificData.Clone();
         }
+
         public override bool Equals(object obj)
         {
             SpeechAudioFormatInfo refObj = obj as SpeechAudioFormatInfo;
@@ -195,6 +200,7 @@ namespace System.Speech.AudioFormat
             }
             return true;
         }
+
         public override int GetHashCode()
         {
             return _averageBytesPerSecond.GetHashCode();
@@ -248,6 +254,7 @@ namespace System.Speech.AudioFormat
         Mono = 1,
         Stereo = 2
     }
+
     public enum AudioBitsPerSample
     {
         Eight = 8,

@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 namespace AutoMapper.QueryableExtensions.Impl
 {
     using static Expression;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class MappedTypeProjectionMapper : IProjectionMapper
     {
@@ -14,6 +15,7 @@ namespace AutoMapper.QueryableExtensions.Impl
             TypeMap memberTypeMap,
             Expression resolvedSource
         ) => memberTypeMap != null;
+
         public Expression Project(
             IGlobalConfiguration configuration,
             MemberMap memberMap,

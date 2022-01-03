@@ -807,6 +807,7 @@ public class DefaultAuthorizationServiceTests
     }
 
     public class CustomRequirement : IAuthorizationRequirement { }
+
     public class CustomHandler : AuthorizationHandler<CustomRequirement>
     {
         public bool Invoked { get; set; }

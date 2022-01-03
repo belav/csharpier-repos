@@ -10,15 +10,18 @@ namespace System.Threading
     {
         void Execute();
     }
+
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public sealed partial class RegisteredWaitHandle : System.MarshalByRefObject
     {
         internal RegisteredWaitHandle() { }
+
         public bool Unregister(System.Threading.WaitHandle? waitObject)
         {
             throw null;
         }
     }
+
     public static partial class ThreadPool
     {
         public static long CompletedWorkItemCount
@@ -33,6 +36,7 @@ namespace System.Threading
         {
             get { throw null; }
         }
+
         [System.ObsoleteAttribute(
             "ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead."
         )]
@@ -41,31 +45,38 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public static bool BindHandle(System.Runtime.InteropServices.SafeHandle osHandle)
         {
             throw null;
         }
+
         public static void GetAvailableThreads(out int workerThreads, out int completionPortThreads)
         {
             throw null;
         }
+
         public static void GetMaxThreads(out int workerThreads, out int completionPortThreads)
         {
             throw null;
         }
+
         public static void GetMinThreads(out int workerThreads, out int completionPortThreads)
         {
             throw null;
         }
+
         public static bool QueueUserWorkItem(System.Threading.WaitCallback callBack)
         {
             throw null;
         }
+
         public static bool QueueUserWorkItem(System.Threading.WaitCallback callBack, object? state)
         {
             throw null;
         }
+
         public static bool QueueUserWorkItem<TState>(
             System.Action<TState> callBack,
             TState state,
@@ -74,6 +85,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static System.Threading.RegisteredWaitHandle RegisterWaitForSingleObject(
             System.Threading.WaitHandle waitObject,
@@ -85,6 +97,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static System.Threading.RegisteredWaitHandle RegisterWaitForSingleObject(
             System.Threading.WaitHandle waitObject,
@@ -96,6 +109,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static System.Threading.RegisteredWaitHandle RegisterWaitForSingleObject(
             System.Threading.WaitHandle waitObject,
@@ -107,6 +121,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static System.Threading.RegisteredWaitHandle RegisterWaitForSingleObject(
@@ -119,14 +134,17 @@ namespace System.Threading
         {
             throw null;
         }
+
         public static bool SetMaxThreads(int workerThreads, int completionPortThreads)
         {
             throw null;
         }
+
         public static bool SetMinThreads(int workerThreads, int completionPortThreads)
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public unsafe static bool UnsafeQueueNativeOverlapped(
@@ -135,6 +153,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         public static bool UnsafeQueueUserWorkItem(
             System.Threading.IThreadPoolWorkItem callBack,
             bool preferLocal
@@ -142,6 +161,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         public static bool UnsafeQueueUserWorkItem(
             System.Threading.WaitCallback callBack,
             object? state
@@ -149,6 +169,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         public static bool UnsafeQueueUserWorkItem<TState>(
             System.Action<TState> callBack,
             TState state,
@@ -157,6 +178,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static System.Threading.RegisteredWaitHandle UnsafeRegisterWaitForSingleObject(
             System.Threading.WaitHandle waitObject,
@@ -168,6 +190,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static System.Threading.RegisteredWaitHandle UnsafeRegisterWaitForSingleObject(
             System.Threading.WaitHandle waitObject,
@@ -179,6 +202,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static System.Threading.RegisteredWaitHandle UnsafeRegisterWaitForSingleObject(
             System.Threading.WaitHandle waitObject,
@@ -190,6 +214,7 @@ namespace System.Threading
         {
             throw null;
         }
+
         [System.CLSCompliantAttribute(false)]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
         public static System.Threading.RegisteredWaitHandle UnsafeRegisterWaitForSingleObject(
@@ -203,6 +228,7 @@ namespace System.Threading
             throw null;
         }
     }
+
     public delegate void WaitCallback(object? state);
     public delegate void WaitOrTimerCallback(object? state, bool timedOut);
 }

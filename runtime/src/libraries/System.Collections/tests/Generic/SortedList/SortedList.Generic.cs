@@ -28,6 +28,7 @@ namespace System.Collections.Tests
     public class SortedList_Generic_Tests_int_int : SortedList_Generic_Tests<int, int>
     {
         protected override bool DefaultValueAllowed => true;
+
         protected override KeyValuePair<int, int> CreateT(int seed)
         {
             Random rand = new Random(seed);

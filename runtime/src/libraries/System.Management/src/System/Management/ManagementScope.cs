@@ -430,6 +430,7 @@ namespace System.Management
             APTTYPE_NA = 2,
             APTTYPE_MAINSTA = 3
         }
+
         internal static ResetSecurity ResetSecurity_f;
         internal static SetSecurity SetSecurity_f;
         internal static BlessIWbemServices BlessIWbemServices_f;
@@ -587,6 +588,7 @@ namespace System.Management
                 );
             }
         }
+
         private static bool LoadDelegate<TDelegate>(
             ref TDelegate delegate_f,
             IntPtr hModule,
@@ -871,6 +873,7 @@ namespace System.Management
         private ConnectionOptions options;
         internal event IdentifierChangedEventHandler IdentifierChanged;
         internal bool IsDefaulted; //used to tell whether the current scope has been created from the default
+
         //scope or not - this information is used to tell whether it can be overridden
         //when a new path is set or not.
 
@@ -1121,6 +1124,7 @@ namespace System.Management
         /// </example>
         public ManagementScope(string path)
             : this(new ManagementPath(path), (ConnectionOptions)null) { }
+
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class representing the specified scope path,
         ///    with the specified options.</para>
@@ -1453,16 +1457,19 @@ namespace System.Management
         {
             return new SecurityHandler(this);
         }
+
         internal SecuredConnectHandler GetSecuredConnectHandler()
         {
             return new SecuredConnectHandler(this);
         }
+
         internal SecuredIEnumWbemClassObjectHandler GetSecuredIEnumWbemClassObjectHandler(
             IEnumWbemClassObject pEnumWbemClassObject
         )
         {
             return new SecuredIEnumWbemClassObjectHandler(this, pEnumWbemClassObject);
         }
+
         internal SecuredIWbemServicesHandler GetSecuredIWbemServicesHandler(
             IWbemServices pWbemServiecs
         )
@@ -1475,6 +1482,7 @@ namespace System.Management
     {
         private readonly IEnumWbemClassObject pEnumWbemClassObjectsecurityHelper;
         private readonly ManagementScope scope;
+
         internal SecuredIEnumWbemClassObjectHandler(
             ManagementScope theScope,
             IEnumWbemClassObject pEnumWbemClassObject
@@ -1483,12 +1491,14 @@ namespace System.Management
             this.scope = theScope;
             pEnumWbemClassObjectsecurityHelper = pEnumWbemClassObject;
         }
+
         internal int Reset_()
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pEnumWbemClassObjectsecurityHelper.Reset_();
             return status;
         }
+
         internal int Next_(
             int lTimeout,
             uint uCount,
@@ -1505,12 +1515,14 @@ namespace System.Management
             );
             return status;
         }
+
         internal int NextAsync_(uint uCount, IWbemObjectSink pSink)
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pEnumWbemClassObjectsecurityHelper.NextAsync_(uCount, pSink);
             return status;
         }
+
         internal int Clone_(ref IEnumWbemClassObject ppEnum)
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
@@ -1530,6 +1542,7 @@ namespace System.Management
             }
             return status;
         }
+
         internal int Skip_(int lTimeout, uint nCount)
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
@@ -1546,6 +1559,7 @@ namespace System.Management
         {
             this.scope = theScope;
         }
+
         internal int ConnectNSecureIWbemServices(string path, ref IWbemServices pServices)
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
@@ -1593,11 +1607,13 @@ namespace System.Management
     {
         private readonly IWbemServices pWbemServiecsSecurityHelper;
         private readonly ManagementScope scope;
+
         internal SecuredIWbemServicesHandler(ManagementScope theScope, IWbemServices pWbemServiecs)
         {
             this.scope = theScope;
             pWbemServiecsSecurityHelper = pWbemServiecs;
         }
+
         internal int OpenNamespace_(
             string strNamespace,
             int lFlags,
@@ -1616,12 +1632,14 @@ namespace System.Management
             status = pWbemServiecsSecurityHelper.CancelAsyncCall_(pSink);
             return status;
         }
+
         internal int QueryObjectSink_(int lFlags, ref IWbemObjectSink ppResponseHandler)
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.QueryObjectSink_(lFlags, out ppResponseHandler);
             return status;
         }
+
         internal int GetObject_(
             string strObjectPath,
             int lFlags,
@@ -1657,6 +1675,7 @@ namespace System.Management
             );
             return status;
         }
+
         internal int PutClass_(
             IWbemClassObjectFreeThreaded pObject,
             int lFlags,
@@ -1684,6 +1703,7 @@ namespace System.Management
             }
             return status;
         }
+
         internal int PutClassAsync_(
             IWbemClassObjectFreeThreaded pObject,
             int lFlags,
@@ -1700,6 +1720,7 @@ namespace System.Management
             );
             return status;
         }
+
         internal int DeleteClass_(
             string strClass,
             int lFlags,
@@ -1711,6 +1732,7 @@ namespace System.Management
             status = pWbemServiecsSecurityHelper.DeleteClass_(strClass, lFlags, pCtx, ppCallResult);
             return status;
         }
+
         internal int DeleteClassAsync_(
             string strClass,
             int lFlags,
@@ -1727,6 +1749,7 @@ namespace System.Management
             );
             return status;
         }
+
         internal int CreateClassEnum_(
             string strSuperClass,
             int lFlags,
@@ -1754,6 +1777,7 @@ namespace System.Management
             }
             return status;
         }
+
         internal int CreateClassEnumAsync_(
             string strSuperClass,
             int lFlags,
@@ -1770,6 +1794,7 @@ namespace System.Management
             );
             return status;
         }
+
         internal int PutInstance_(
             IWbemClassObjectFreeThreaded pInst,
             int lFlags,
@@ -1797,6 +1822,7 @@ namespace System.Management
             }
             return status;
         }
+
         internal int PutInstanceAsync_(
             IWbemClassObjectFreeThreaded pInst,
             int lFlags,
@@ -1813,6 +1839,7 @@ namespace System.Management
             );
             return status;
         }
+
         internal int DeleteInstance_(
             string strObjectPath,
             int lFlags,
@@ -1829,6 +1856,7 @@ namespace System.Management
             );
             return status;
         }
+
         internal int DeleteInstanceAsync_(
             string strObjectPath,
             int lFlags,
@@ -1873,6 +1901,7 @@ namespace System.Management
             }
             return status;
         }
+
         internal int CreateInstanceEnumAsync_(
             string strFilter,
             int lFlags,
@@ -1889,6 +1918,7 @@ namespace System.Management
             );
             return status;
         }
+
         internal int ExecQuery_(
             string strQueryLanguage,
             string strQuery,
@@ -1918,6 +1948,7 @@ namespace System.Management
             }
             return status;
         }
+
         internal int ExecQueryAsync_(
             string strQueryLanguage,
             string strQuery,
@@ -1936,6 +1967,7 @@ namespace System.Management
             );
             return status;
         }
+
         internal int ExecNotificationQuery_(
             string strQueryLanguage,
             string strQuery,
@@ -1965,6 +1997,7 @@ namespace System.Management
             }
             return status;
         }
+
         internal int ExecNotificationQueryAsync_(
             string strQueryLanguage,
             string strQuery,
@@ -1983,6 +2016,7 @@ namespace System.Management
             );
             return status;
         }
+
         internal int ExecMethod_(
             string strObjectPath,
             string strMethodName,
@@ -2005,6 +2039,7 @@ namespace System.Management
             );
             return status;
         }
+
         internal int ExecMethodAsync_(
             string strObjectPath,
             string strMethodName,

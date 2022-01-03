@@ -15,6 +15,7 @@ namespace GenericTypes
         /// Purpose is to manipulate a method involving a generic parameter in its return type.
         /// </summary>
         public abstract T Foo();
+
         /// <summary>
         /// Purpose is to manipulate a method involving a generic parameter in its parameter list.
         /// </summary>
@@ -30,6 +31,7 @@ namespace GenericTypes
             return default(T);
         }
     }
+
     /// <summary>
     /// Generic class with multiple parameters to be used for testing.
     /// </summary>

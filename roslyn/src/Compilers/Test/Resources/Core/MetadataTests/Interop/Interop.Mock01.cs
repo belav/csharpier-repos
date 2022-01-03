@@ -17,6 +17,8 @@ using System.Runtime.InteropServices;
 [assembly: ComConversionLoss()] // not embed
 [assembly: ComVisible(true)] // not embed
 [assembly: TypeLibVersion(1, 0)] // not embed
+
+
 // [assembly: SetWin32ContextInIDispatch()]
 // [assembly: IDispatchImpl(IDispatchImplType.CompatibleImpl)] // not embed
 
@@ -41,12 +43,15 @@ namespace MockInterop01
         [FieldOffset(0)]
         [TypeLibVar(TypeLibVarFlags.FBindable), MarshalAs(UnmanagedType.I1)]
         public sbyte field01;
+
         [FieldOffset(0)]
         [TypeLibVar(TypeLibVarFlags.FBindable), MarshalAs(UnmanagedType.U2)]
         public ushort field02;
+
         [FieldOffset(0), MarshalAs(UnmanagedType.I4)]
         [TypeLibVar(TypeLibVarFlags.FBindable)]
         public int field03;
+
         [FieldOffset(0)]
         [TypeLibVar(TypeLibVarFlags.FBindable), MarshalAs(UnmanagedType.U8)]
         public ulong field04;
@@ -65,10 +70,13 @@ namespace MockInterop01
             public Int64 y;
             public IntPtr z;
         }
+
         [DispId(1)]
         public Guid GuidField;
+
         [DispId(2)]
         public Decimal DecimalField;
+
         [
             DispId(3),
             ComConversionLoss,
@@ -114,14 +122,17 @@ namespace MockInterop01
     {
         [AllowReversePInvokeCalls()]
         object DoSomething(params string[] ary);
+
         [ComRegisterFunction()]
         object Register(
             [MarshalAs(UnmanagedType.IDispatch), Optional, DefaultParameterValue(null)] ref object o
         );
+
         [ComUnregisterFunction()]
         void UnRegister(
             [MarshalAs(UnmanagedType.IDispatch), Optional, IDispatchConstant()] object o
         );
+
         [TypeLibFunc(TypeLibFuncFlags.FDefaultBind)]
         void LibFunc(
             [Optional, DecimalConstant(1, 2, (uint)3, (uint)4, (uint)5)] decimal p1,
@@ -141,8 +152,10 @@ namespace MockInterop01
     {
         [DispId(101), PreserveSig]
         void Event01(IGoo p1);
+
         [DispId(102), PreserveSig]
         void Event02(InteropEnum p1);
+
         [DispId(103), PreserveSig]
         void Event03(ComplexStruct p1);
     }

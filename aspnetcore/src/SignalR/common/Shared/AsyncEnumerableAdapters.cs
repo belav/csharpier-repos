@@ -40,6 +40,7 @@ internal static class AsyncEnumerableAdapters
     {
         private readonly ChannelReader<T> _channel;
         private readonly CancellationToken _cancellationToken;
+
         public ChannelAsyncEnumerator(ChannelReader<T> channel, CancellationToken cancellationToken)
         {
             _channel = channel;

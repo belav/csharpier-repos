@@ -11,15 +11,19 @@ namespace System.Threading.Tasks.Dataflow
           System.Threading.Tasks.Dataflow.ITargetBlock<TInput>
     {
         public ActionBlock(System.Action<TInput> action) { }
+
         public ActionBlock(
             System.Action<TInput> action,
             System.Threading.Tasks.Dataflow.ExecutionDataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public ActionBlock(System.Func<TInput, System.Threading.Tasks.Task> action) { }
+
         public ActionBlock(
             System.Func<TInput, System.Threading.Tasks.Task> action,
             System.Threading.Tasks.Dataflow.ExecutionDataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public System.Threading.Tasks.Task Completion
         {
             get { throw null; }
@@ -28,12 +32,16 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { throw null; }
         }
+
         public void Complete() { }
+
         public bool Post(TInput item)
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
+
         System.Threading.Tasks.Dataflow.DataflowMessageStatus System.Threading.Tasks.Dataflow.ITargetBlock<TInput>.OfferMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             TInput messageValue,
@@ -43,11 +51,13 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
     }
+
     public sealed partial class BatchBlock<T>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
           System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T[]>,
@@ -56,10 +66,12 @@ namespace System.Threading.Tasks.Dataflow
           System.Threading.Tasks.Dataflow.ITargetBlock<T>
     {
         public BatchBlock(int batchSize) { }
+
         public BatchBlock(
             int batchSize,
             System.Threading.Tasks.Dataflow.GroupingDataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public int BatchSize
         {
             get { throw null; }
@@ -72,7 +84,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { throw null; }
         }
+
         public void Complete() { }
+
         public System.IDisposable LinkTo(
             System.Threading.Tasks.Dataflow.ITargetBlock<T[]> target,
             System.Threading.Tasks.Dataflow.DataflowLinkOptions linkOptions
@@ -80,7 +94,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
+
         T[]? System.Threading.Tasks.Dataflow.ISourceBlock<T[]>.ConsumeMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<T[]> target,
@@ -89,10 +105,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.ISourceBlock<T[]>.ReleaseReservation(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<T[]> target
         ) { }
+
         bool System.Threading.Tasks.Dataflow.ISourceBlock<T[]>.ReserveMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<T[]> target
@@ -100,6 +118,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         System.Threading.Tasks.Dataflow.DataflowMessageStatus System.Threading.Tasks.Dataflow.ITargetBlock<T>.OfferMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             T messageValue,
@@ -109,11 +128,14 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public void TriggerBatch() { }
+
         public bool TryReceive(
             System.Predicate<T[]>? filter,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out T[]? item
@@ -121,6 +143,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public bool TryReceiveAll(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Collections.Generic.IList<T[]>? items
@@ -129,6 +152,7 @@ namespace System.Threading.Tasks.Dataflow
             throw null;
         }
     }
+
     public sealed partial class BatchedJoinBlock<T1, T2>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
           System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<
@@ -141,10 +165,12 @@ namespace System.Threading.Tasks.Dataflow
               >>
     {
         public BatchedJoinBlock(int batchSize) { }
+
         public BatchedJoinBlock(
             int batchSize,
             System.Threading.Tasks.Dataflow.GroupingDataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public int BatchSize
         {
             get { throw null; }
@@ -165,7 +191,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { throw null; }
         }
+
         public void Complete() { }
+
         public System.IDisposable LinkTo(
             System.Threading.Tasks.Dataflow.ITargetBlock<System.Tuple<
                     System.Collections.Generic.IList<T1>,
@@ -176,7 +204,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
+
         System.Tuple<
             System.Collections.Generic.IList<T1>,
             System.Collections.Generic.IList<T2>
@@ -194,6 +224,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<
                 System.Collections.Generic.IList<T1>,
                 System.Collections.Generic.IList<T2>
@@ -204,6 +235,7 @@ namespace System.Threading.Tasks.Dataflow
                     System.Collections.Generic.IList<T2>
                 >> target
         ) { }
+
         bool System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<
                 System.Collections.Generic.IList<T1>,
                 System.Collections.Generic.IList<T2>
@@ -217,10 +249,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public bool TryReceive(
             System.Predicate<System.Tuple<
                     System.Collections.Generic.IList<T1>,
@@ -235,6 +269,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public bool TryReceiveAll(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Collections.Generic.IList<System.Tuple<
@@ -246,6 +281,7 @@ namespace System.Threading.Tasks.Dataflow
             throw null;
         }
     }
+
     public sealed partial class BatchedJoinBlock<T1, T2, T3>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
           System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<
@@ -260,10 +296,12 @@ namespace System.Threading.Tasks.Dataflow
               >>
     {
         public BatchedJoinBlock(int batchSize) { }
+
         public BatchedJoinBlock(
             int batchSize,
             System.Threading.Tasks.Dataflow.GroupingDataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public int BatchSize
         {
             get { throw null; }
@@ -288,7 +326,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { throw null; }
         }
+
         public void Complete() { }
+
         public System.IDisposable LinkTo(
             System.Threading.Tasks.Dataflow.ITargetBlock<System.Tuple<
                     System.Collections.Generic.IList<T1>,
@@ -300,7 +340,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
+
         System.Tuple<
             System.Collections.Generic.IList<T1>,
             System.Collections.Generic.IList<T2>,
@@ -321,6 +363,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<
                 System.Collections.Generic.IList<T1>,
                 System.Collections.Generic.IList<T2>,
@@ -333,6 +376,7 @@ namespace System.Threading.Tasks.Dataflow
                     System.Collections.Generic.IList<T3>
                 >> target
         ) { }
+
         bool System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<
                 System.Collections.Generic.IList<T1>,
                 System.Collections.Generic.IList<T2>,
@@ -348,10 +392,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public bool TryReceive(
             System.Predicate<System.Tuple<
                     System.Collections.Generic.IList<T1>,
@@ -368,6 +414,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public bool TryReceiveAll(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Collections.Generic.IList<System.Tuple<
@@ -380,6 +427,7 @@ namespace System.Threading.Tasks.Dataflow
             throw null;
         }
     }
+
     public sealed partial class BroadcastBlock<T>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
           System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T>,
@@ -388,15 +436,19 @@ namespace System.Threading.Tasks.Dataflow
           System.Threading.Tasks.Dataflow.ITargetBlock<T>
     {
         public BroadcastBlock(System.Func<T, T>? cloningFunction) { }
+
         public BroadcastBlock(
             System.Func<T, T>? cloningFunction,
             System.Threading.Tasks.Dataflow.DataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public System.Threading.Tasks.Task Completion
         {
             get { throw null; }
         }
+
         public void Complete() { }
+
         public System.IDisposable LinkTo(
             System.Threading.Tasks.Dataflow.ITargetBlock<T> target,
             System.Threading.Tasks.Dataflow.DataflowLinkOptions linkOptions
@@ -404,7 +456,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
+
         bool System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>.TryReceiveAll(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Collections.Generic.IList<T>? items
@@ -412,6 +466,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         T? System.Threading.Tasks.Dataflow.ISourceBlock<T>.ConsumeMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<T> target,
@@ -420,10 +475,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.ISourceBlock<T>.ReleaseReservation(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<T> target
         ) { }
+
         bool System.Threading.Tasks.Dataflow.ISourceBlock<T>.ReserveMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<T> target
@@ -431,6 +488,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         System.Threading.Tasks.Dataflow.DataflowMessageStatus System.Threading.Tasks.Dataflow.ITargetBlock<T>.OfferMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             T messageValue,
@@ -440,10 +498,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public bool TryReceive(
             System.Predicate<T>? filter,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhen(false)] out T item
@@ -452,6 +512,7 @@ namespace System.Threading.Tasks.Dataflow
             throw null;
         }
     }
+
     public sealed partial class BufferBlock<T>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
           System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T>,
@@ -460,9 +521,11 @@ namespace System.Threading.Tasks.Dataflow
           System.Threading.Tasks.Dataflow.ITargetBlock<T>
     {
         public BufferBlock() { }
+
         public BufferBlock(
             System.Threading.Tasks.Dataflow.DataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public System.Threading.Tasks.Task Completion
         {
             get { throw null; }
@@ -471,7 +534,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { throw null; }
         }
+
         public void Complete() { }
+
         public System.IDisposable LinkTo(
             System.Threading.Tasks.Dataflow.ITargetBlock<T> target,
             System.Threading.Tasks.Dataflow.DataflowLinkOptions linkOptions
@@ -479,7 +544,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
+
         T? System.Threading.Tasks.Dataflow.ISourceBlock<T>.ConsumeMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<T> target,
@@ -488,10 +555,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.ISourceBlock<T>.ReleaseReservation(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<T> target
         ) { }
+
         bool System.Threading.Tasks.Dataflow.ISourceBlock<T>.ReserveMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<T> target
@@ -499,6 +568,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         System.Threading.Tasks.Dataflow.DataflowMessageStatus System.Threading.Tasks.Dataflow.ITargetBlock<T>.OfferMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             T messageValue,
@@ -508,10 +578,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public bool TryReceive(
             System.Predicate<T>? filter,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhen(false)] out T item
@@ -519,6 +591,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public bool TryReceiveAll(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Collections.Generic.IList<T>? items
@@ -527,6 +600,7 @@ namespace System.Threading.Tasks.Dataflow
             throw null;
         }
     }
+
     public static partial class DataflowBlock
     {
         public static System.IObservable<TOutput> AsObservable<TOutput>(
@@ -535,12 +609,14 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.IObserver<TInput> AsObserver<TInput>(
             this System.Threading.Tasks.Dataflow.ITargetBlock<TInput> target
         )
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<int> Choose<T1, T2>(
             System.Threading.Tasks.Dataflow.ISourceBlock<T1> source1,
             System.Action<T1> action1,
@@ -550,6 +626,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<int> Choose<T1, T2>(
             System.Threading.Tasks.Dataflow.ISourceBlock<T1> source1,
             System.Action<T1> action1,
@@ -560,6 +637,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<int> Choose<T1, T2, T3>(
             System.Threading.Tasks.Dataflow.ISourceBlock<T1> source1,
             System.Action<T1> action1,
@@ -571,6 +649,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<int> Choose<T1, T2, T3>(
             System.Threading.Tasks.Dataflow.ISourceBlock<T1> source1,
             System.Action<T1> action1,
@@ -583,6 +662,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Dataflow.IPropagatorBlock<TInput, TOutput> Encapsulate<
             TInput,
             TOutput
@@ -593,6 +673,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.IDisposable LinkTo<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source,
             System.Threading.Tasks.Dataflow.ITargetBlock<TOutput> target
@@ -600,6 +681,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.IDisposable LinkTo<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source,
             System.Threading.Tasks.Dataflow.ITargetBlock<TOutput> target,
@@ -608,6 +690,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.IDisposable LinkTo<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source,
             System.Threading.Tasks.Dataflow.ITargetBlock<TOutput> target,
@@ -617,16 +700,19 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Dataflow.ITargetBlock<TInput> NullTarget<TInput>()
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<bool> OutputAvailableAsync<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source
         )
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<bool> OutputAvailableAsync<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source,
             System.Threading.CancellationToken cancellationToken
@@ -634,6 +720,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static bool Post<TInput>(
             this System.Threading.Tasks.Dataflow.ITargetBlock<TInput> target,
             TInput item
@@ -641,12 +728,14 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<TOutput> ReceiveAsync<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source
         )
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<TOutput> ReceiveAsync<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source,
             System.Threading.CancellationToken cancellationToken
@@ -654,6 +743,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<TOutput> ReceiveAsync<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source,
             System.TimeSpan timeout
@@ -661,6 +751,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<TOutput> ReceiveAsync<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source,
             System.TimeSpan timeout,
@@ -669,12 +760,14 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static TOutput Receive<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source
         )
         {
             throw null;
         }
+
         public static TOutput Receive<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source,
             System.Threading.CancellationToken cancellationToken
@@ -682,6 +775,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static TOutput Receive<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source,
             System.TimeSpan timeout
@@ -689,6 +783,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static TOutput Receive<TOutput>(
             this System.Threading.Tasks.Dataflow.ISourceBlock<TOutput> source,
             System.TimeSpan timeout,
@@ -697,6 +792,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<bool> SendAsync<TInput>(
             this System.Threading.Tasks.Dataflow.ITargetBlock<TInput> target,
             TInput item
@@ -704,6 +800,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static System.Threading.Tasks.Task<bool> SendAsync<TInput>(
             this System.Threading.Tasks.Dataflow.ITargetBlock<TInput> target,
             TInput item,
@@ -712,6 +809,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static bool TryReceive<TOutput>(
             this System.Threading.Tasks.Dataflow.IReceivableSourceBlock<TOutput> source,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhen(false)] out TOutput item
@@ -720,10 +818,13 @@ namespace System.Threading.Tasks.Dataflow
             throw null;
         }
     }
+
     public partial class DataflowBlockOptions
     {
         public const int Unbounded = -1;
+
         public DataflowBlockOptions() { }
+
         public int BoundedCapacity
         {
             get { throw null; }
@@ -755,9 +856,11 @@ namespace System.Threading.Tasks.Dataflow
             set { }
         }
     }
+
     public partial class DataflowLinkOptions
     {
         public DataflowLinkOptions() { }
+
         public bool Append
         {
             get { throw null; }
@@ -774,14 +877,17 @@ namespace System.Threading.Tasks.Dataflow
             set { }
         }
     }
+
     public readonly partial struct DataflowMessageHeader
         : System.IEquatable<System.Threading.Tasks.Dataflow.DataflowMessageHeader>
     {
         private readonly int _dummyPrimitive;
+
         public DataflowMessageHeader(long id)
         {
             throw null;
         }
+
         public long Id
         {
             get { throw null; }
@@ -790,20 +896,24 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { throw null; }
         }
+
         public override bool Equals(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
         )
         {
             throw null;
         }
+
         public bool Equals(System.Threading.Tasks.Dataflow.DataflowMessageHeader other)
         {
             throw null;
         }
+
         public override int GetHashCode()
         {
             throw null;
         }
+
         public static bool operator ==(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader left,
             System.Threading.Tasks.Dataflow.DataflowMessageHeader right
@@ -811,6 +921,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public static bool operator !=(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader left,
             System.Threading.Tasks.Dataflow.DataflowMessageHeader right
@@ -819,6 +930,7 @@ namespace System.Threading.Tasks.Dataflow
             throw null;
         }
     }
+
     public enum DataflowMessageStatus
     {
         Accepted = 0,
@@ -827,10 +939,12 @@ namespace System.Threading.Tasks.Dataflow
         NotAvailable = 3,
         DecliningPermanently = 4,
     }
+
     public partial class ExecutionDataflowBlockOptions
         : System.Threading.Tasks.Dataflow.DataflowBlockOptions
     {
         public ExecutionDataflowBlockOptions() { }
+
         public int MaxDegreeOfParallelism
         {
             get { throw null; }
@@ -842,10 +956,12 @@ namespace System.Threading.Tasks.Dataflow
             set { }
         }
     }
+
     public partial class GroupingDataflowBlockOptions
         : System.Threading.Tasks.Dataflow.DataflowBlockOptions
     {
         public GroupingDataflowBlockOptions() { }
+
         public bool Greedy
         {
             get { throw null; }
@@ -857,18 +973,21 @@ namespace System.Threading.Tasks.Dataflow
             set { }
         }
     }
+
     public partial interface IDataflowBlock
     {
         System.Threading.Tasks.Task Completion { get; }
         void Complete();
         void Fault(System.Exception exception);
     }
+
     public partial interface IPropagatorBlock<in TInput, out TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
           System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>,
           System.Threading.Tasks.Dataflow.ITargetBlock<TInput>
     {
     }
+
     public partial interface IReceivableSourceBlock<TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
           System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>
@@ -882,6 +1001,7 @@ namespace System.Threading.Tasks.Dataflow
                 out System.Collections.Generic.IList<TOutput>? items
         );
     }
+
     public partial interface ISourceBlock<out TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock
     {
@@ -903,6 +1023,7 @@ namespace System.Threading.Tasks.Dataflow
             System.Threading.Tasks.Dataflow.ITargetBlock<TOutput> target
         );
     }
+
     public partial interface ITargetBlock<in TInput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock
     {
@@ -913,15 +1034,18 @@ namespace System.Threading.Tasks.Dataflow
             bool consumeToAccept
         );
     }
+
     public sealed partial class JoinBlock<T1, T2>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
           System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<T1, T2>>,
           System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<T1, T2>>
     {
         public JoinBlock() { }
+
         public JoinBlock(
             System.Threading.Tasks.Dataflow.GroupingDataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public System.Threading.Tasks.Task Completion
         {
             get { throw null; }
@@ -938,7 +1062,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { throw null; }
         }
+
         public void Complete() { }
+
         public System.IDisposable LinkTo(
             System.Threading.Tasks.Dataflow.ITargetBlock<System.Tuple<T1, T2>> target,
             System.Threading.Tasks.Dataflow.DataflowLinkOptions linkOptions
@@ -946,7 +1072,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
+
         System.Tuple<T1, T2>? System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<
                 T1,
                 T2
@@ -958,10 +1086,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<T1, T2>>.ReleaseReservation(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<System.Tuple<T1, T2>> target
         ) { }
+
         bool System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<T1, T2>>.ReserveMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<System.Tuple<T1, T2>> target
@@ -969,10 +1099,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public bool TryReceive(
             System.Predicate<System.Tuple<T1, T2>>? filter,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
@@ -981,6 +1113,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public bool TryReceiveAll(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Collections.Generic.IList<System.Tuple<T1, T2>>? items
@@ -989,15 +1122,18 @@ namespace System.Threading.Tasks.Dataflow
             throw null;
         }
     }
+
     public sealed partial class JoinBlock<T1, T2, T3>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
           System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<T1, T2, T3>>,
           System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<T1, T2, T3>>
     {
         public JoinBlock() { }
+
         public JoinBlock(
             System.Threading.Tasks.Dataflow.GroupingDataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public System.Threading.Tasks.Task Completion
         {
             get { throw null; }
@@ -1018,7 +1154,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { throw null; }
         }
+
         public void Complete() { }
+
         public System.IDisposable LinkTo(
             System.Threading.Tasks.Dataflow.ITargetBlock<System.Tuple<T1, T2, T3>> target,
             System.Threading.Tasks.Dataflow.DataflowLinkOptions linkOptions
@@ -1026,7 +1164,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
+
         System.Tuple<T1, T2, T3>? System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<
                 T1,
                 T2,
@@ -1039,6 +1179,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<
                 T1,
                 T2,
@@ -1047,6 +1188,7 @@ namespace System.Threading.Tasks.Dataflow
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<System.Tuple<T1, T2, T3>> target
         ) { }
+
         bool System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<T1, T2, T3>>.ReserveMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<System.Tuple<T1, T2, T3>> target
@@ -1054,10 +1196,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public bool TryReceive(
             System.Predicate<System.Tuple<T1, T2, T3>>? filter,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
@@ -1066,6 +1210,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public bool TryReceiveAll(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Collections.Generic.IList<System.Tuple<T1, T2, T3>>? items
@@ -1074,6 +1219,7 @@ namespace System.Threading.Tasks.Dataflow
             throw null;
         }
     }
+
     public sealed partial class TransformBlock<TInput, TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
           System.Threading.Tasks.Dataflow.IPropagatorBlock<TInput, TOutput>,
@@ -1083,15 +1229,19 @@ namespace System.Threading.Tasks.Dataflow
     {
         public TransformBlock(System.Func<TInput, System.Threading.Tasks.Task<TOutput>> transform)
         { }
+
         public TransformBlock(
             System.Func<TInput, System.Threading.Tasks.Task<TOutput>> transform,
             System.Threading.Tasks.Dataflow.ExecutionDataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public TransformBlock(System.Func<TInput, TOutput> transform) { }
+
         public TransformBlock(
             System.Func<TInput, TOutput> transform,
             System.Threading.Tasks.Dataflow.ExecutionDataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public System.Threading.Tasks.Task Completion
         {
             get { throw null; }
@@ -1104,7 +1254,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { throw null; }
         }
+
         public void Complete() { }
+
         public System.IDisposable LinkTo(
             System.Threading.Tasks.Dataflow.ITargetBlock<TOutput> target,
             System.Threading.Tasks.Dataflow.DataflowLinkOptions linkOptions
@@ -1112,7 +1264,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
+
         TOutput? System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>.ConsumeMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<TOutput> target,
@@ -1121,10 +1275,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>.ReleaseReservation(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<TOutput> target
         ) { }
+
         bool System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>.ReserveMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<TOutput> target
@@ -1132,6 +1288,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         System.Threading.Tasks.Dataflow.DataflowMessageStatus System.Threading.Tasks.Dataflow.ITargetBlock<TInput>.OfferMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             TInput messageValue,
@@ -1141,10 +1298,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public bool TryReceive(
             System.Predicate<TOutput>? filter,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhen(false)] out TOutput item
@@ -1152,6 +1311,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public bool TryReceiveAll(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Collections.Generic.IList<TOutput>? items
@@ -1160,6 +1320,7 @@ namespace System.Threading.Tasks.Dataflow
             throw null;
         }
     }
+
     public sealed partial class TransformManyBlock<TInput, TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
           System.Threading.Tasks.Dataflow.IPropagatorBlock<TInput, TOutput>,
@@ -1170,16 +1331,19 @@ namespace System.Threading.Tasks.Dataflow
         public TransformManyBlock(
             System.Func<TInput, System.Collections.Generic.IEnumerable<TOutput>> transform
         ) { }
+
         public TransformManyBlock(
             System.Func<TInput, System.Collections.Generic.IEnumerable<TOutput>> transform,
             System.Threading.Tasks.Dataflow.ExecutionDataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public TransformManyBlock(
             System.Func<
                 TInput,
                 System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<TOutput>>
             > transform
         ) { }
+
         public TransformManyBlock(
             System.Func<
                 TInput,
@@ -1187,6 +1351,7 @@ namespace System.Threading.Tasks.Dataflow
             > transform,
             System.Threading.Tasks.Dataflow.ExecutionDataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public System.Threading.Tasks.Task Completion
         {
             get { throw null; }
@@ -1199,7 +1364,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             get { throw null; }
         }
+
         public void Complete() { }
+
         public System.IDisposable LinkTo(
             System.Threading.Tasks.Dataflow.ITargetBlock<TOutput> target,
             System.Threading.Tasks.Dataflow.DataflowLinkOptions linkOptions
@@ -1207,7 +1374,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
+
         TOutput? System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>.ConsumeMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<TOutput> target,
@@ -1216,10 +1385,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>.ReleaseReservation(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<TOutput> target
         ) { }
+
         bool System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>.ReserveMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<TOutput> target
@@ -1227,6 +1398,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         System.Threading.Tasks.Dataflow.DataflowMessageStatus System.Threading.Tasks.Dataflow.ITargetBlock<TInput>.OfferMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             TInput messageValue,
@@ -1236,10 +1408,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public bool TryReceive(
             System.Predicate<TOutput>? filter,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhen(false)] out TOutput item
@@ -1247,6 +1421,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public bool TryReceiveAll(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Collections.Generic.IList<TOutput>? items
@@ -1255,6 +1430,7 @@ namespace System.Threading.Tasks.Dataflow
             throw null;
         }
     }
+
     public sealed partial class WriteOnceBlock<T>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
           System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T>,
@@ -1263,15 +1439,19 @@ namespace System.Threading.Tasks.Dataflow
           System.Threading.Tasks.Dataflow.ITargetBlock<T>
     {
         public WriteOnceBlock(System.Func<T, T>? cloningFunction) { }
+
         public WriteOnceBlock(
             System.Func<T, T>? cloningFunction,
             System.Threading.Tasks.Dataflow.DataflowBlockOptions dataflowBlockOptions
         ) { }
+
         public System.Threading.Tasks.Task Completion
         {
             get { throw null; }
         }
+
         public void Complete() { }
+
         public System.IDisposable LinkTo(
             System.Threading.Tasks.Dataflow.ITargetBlock<T> target,
             System.Threading.Tasks.Dataflow.DataflowLinkOptions linkOptions
@@ -1279,7 +1459,9 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
+
         bool System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>.TryReceiveAll(
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
                 out System.Collections.Generic.IList<T>? items
@@ -1287,6 +1469,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         T? System.Threading.Tasks.Dataflow.ISourceBlock<T>.ConsumeMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<T> target,
@@ -1295,10 +1478,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         void System.Threading.Tasks.Dataflow.ISourceBlock<T>.ReleaseReservation(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<T> target
         ) { }
+
         bool System.Threading.Tasks.Dataflow.ISourceBlock<T>.ReserveMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             System.Threading.Tasks.Dataflow.ITargetBlock<T> target
@@ -1306,6 +1491,7 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         System.Threading.Tasks.Dataflow.DataflowMessageStatus System.Threading.Tasks.Dataflow.ITargetBlock<T>.OfferMessage(
             System.Threading.Tasks.Dataflow.DataflowMessageHeader messageHeader,
             T messageValue,
@@ -1315,10 +1501,12 @@ namespace System.Threading.Tasks.Dataflow
         {
             throw null;
         }
+
         public override string ToString()
         {
             throw null;
         }
+
         public bool TryReceive(
             System.Predicate<T>? filter,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhen(false)] out T item

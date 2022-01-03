@@ -115,10 +115,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             }
 
             public interface IBase { }
+
             public interface IDerived1 : IBase
             {
                 int X { get; set; }
             }
+
             public interface IDerived2 : IBase
             {
                 string X { get; set; }

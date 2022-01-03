@@ -137,6 +137,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private sealed class SyntheticBinderImpl : BuckStopsHereBinder
         {
             private readonly SyntheticBoundNodeFactory _factory;
+
             internal SyntheticBinderImpl(SyntheticBoundNodeFactory factory)
                 : base(factory.Compilation)
             {
@@ -147,6 +148,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 get { return _factory.CurrentFunction; }
             }
+
             internal override bool IsAccessibleHelper(
                 Symbol symbol,
                 TypeSymbol accessThroughType,
@@ -1480,6 +1482,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             public readonly ImmutableArray<int> Values;
             public readonly ImmutableArray<BoundStatement> Statements;
+
             public SyntheticSwitchSection(
                 ImmutableArray<int> Values,
                 ImmutableArray<BoundStatement> Statements

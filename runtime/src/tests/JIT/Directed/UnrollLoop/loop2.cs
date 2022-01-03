@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal class A
 {
     public virtual int f0(int i)
@@ -26,6 +27,7 @@ internal unsafe class B : A
     {
         return f1(ref i);
     }
+
     public static int F1downBy1ge(int amount)
     {
         int i;

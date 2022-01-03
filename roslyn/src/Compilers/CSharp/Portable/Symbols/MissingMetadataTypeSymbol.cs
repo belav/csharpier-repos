@@ -48,6 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get { return mangleName; }
         }
+
         /// <summary>
         /// Get the arity of the missing type.
         /// </summary>

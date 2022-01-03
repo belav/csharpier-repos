@@ -104,34 +104,42 @@ public class TemplatePart
     /// <see langword="true"/> if the route part is is a catch-all part (e.g. /*).
     /// </summary>
     public bool IsCatchAll { get; private set; }
+
     /// <summary>
     /// <see langword="true"/> if the route part is represents a literal value.
     /// </summary>
     public bool IsLiteral { get; private set; }
+
     /// <summary>
     /// <see langword="true"/> if the route part represents a parameterized value.
     /// </summary>
     public bool IsParameter { get; private set; }
+
     /// <summary>
     /// <see langword="true"/> if the route part represents an optional part.
     /// </summary>
     public bool IsOptional { get; private set; }
+
     /// <summary>
     /// <see langword="true"/> if the route part represents an optional seperator.
     /// </summary>
     public bool IsOptionalSeperator { get; set; }
+
     /// <summary>
     /// The name of the route parameter. Can be null.
     /// </summary>
     public string? Name { get; private set; }
+
     /// <summary>
     /// The textual representation of the route parameter. Can be null. Used to represent route seperators and literal parts.
     /// </summary>
     public string? Text { get; private set; }
+
     /// <summary>
     /// The default value for route parameters. Can be null.
     /// </summary>
     public object? DefaultValue { get; private set; }
+
     /// <summary>
     /// The constraints associates with a route parameter.
     /// </summary>

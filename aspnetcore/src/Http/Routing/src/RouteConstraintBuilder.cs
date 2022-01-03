@@ -21,6 +21,7 @@ public class RouteConstraintBuilder
 
     private readonly Dictionary<string, List<IRouteConstraint>> _constraints;
     private readonly HashSet<string> _optionalParameters;
+
     /// <summary>
     /// Creates a new instance of <see cref="RouteConstraintBuilder"/> instance.
     /// </summary>

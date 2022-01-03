@@ -59,6 +59,7 @@ namespace System.ComponentModel
     internal sealed class ReflectEventDescriptor : EventDescriptor
     {
         private Type? _type; // the delegate type for the event
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         private readonly Type _componentClass; // the class of the component this info is for
 

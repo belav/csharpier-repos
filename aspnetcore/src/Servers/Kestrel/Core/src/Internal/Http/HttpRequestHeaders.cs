@@ -212,6 +212,7 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
         /// Enumerator created from previous request
         /// </summary>
         public EnumeratorBox? CachedEnumerator { get; set; }
+
         /// <summary>
         /// Enumerator used on this request
         /// </summary>

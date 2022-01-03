@@ -481,6 +481,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             public string StringProperty { get; set; }
             public List<int> ListOfInts { get; set; }
+
             public FlushThresholdTestClass(List<int> list)
             {
                 ListOfInts = list;
@@ -724,7 +725,9 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public override long Seek(long offset, SeekOrigin origin) => _stream.Seek(offset, origin);
+
         public override void SetLength(long value) => _stream.SetLength(value);
+
         public override bool CanRead => _stream.CanRead;
         public override bool CanSeek => _stream.CanSeek;
         public override bool CanWrite => _stream.CanWrite;

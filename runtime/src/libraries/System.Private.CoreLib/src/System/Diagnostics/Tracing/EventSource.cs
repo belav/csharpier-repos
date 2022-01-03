@@ -274,6 +274,7 @@ namespace System.Diagnostics.Tracing
         /// The human-friendly name of the eventSource.  It defaults to the simple name of the class
         /// </summary>
         public string Name => m_name;
+
         /// <summary>
         /// Every eventSource is assigned a GUID to uniquely identify it to the system.
         /// </summary>
@@ -371,6 +372,7 @@ namespace System.Diagnostics.Tracing
             }
             return GenerateGuidFromName(name.ToUpperInvariant()); // Make it case insensitive.
         }
+
         /// <summary>
         /// Returns the official ETW Provider name for the eventSource defined by 'eventSourceType'.
         /// This API allows you to compute this without actually creating an instance of the EventSource.
@@ -1653,6 +1655,7 @@ namespace System.Diagnostics.Tracing
             this.Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         /// <summary>
         /// Disposes of an EventSource.
         /// </summary>
@@ -1705,6 +1708,7 @@ namespace System.Diagnostics.Tracing
             m_eventSourceEnabled = false;
             m_eventSourceDisposed = true;
         }
+
         /// <summary>
         /// Finalizer for EventSource
         /// </summary>
@@ -2822,6 +2826,7 @@ namespace System.Diagnostics.Tracing
             }
             return true;
         }
+
         [System.Runtime.CompilerServices.MethodImpl(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
@@ -2915,6 +2920,7 @@ namespace System.Diagnostics.Tracing
                 this.m_eventSource = eventSource;
                 this.m_eventProviderType = providerType;
             }
+
             protected override void OnControllerCommand(
                 ControllerCommand command,
                 IDictionary<string, string?>? arguments,
@@ -2936,6 +2942,7 @@ namespace System.Diagnostics.Tracing
                     arguments
                 );
             }
+
             private readonly EventSource m_eventSource;
             private readonly EventProviderType m_eventProviderType;
         }
@@ -4992,6 +4999,7 @@ namespace System.Diagnostics.Tracing
                 Validate();
             }
         }
+
         // We don't expose a Dispose(bool), because the contract is that you don't have any non-syncronous
         // 'cleanup' associated with this object
 
@@ -5009,6 +5017,7 @@ namespace System.Diagnostics.Tracing
         {
             EnableEvents(eventSource, level, EventKeywords.None);
         }
+
         /// <summary>
         /// Enable all events from the eventSource identified by 'eventSource' to the current
         /// dispatcher that have a verbosity level of 'level' or lower and have a event keyword
@@ -5028,6 +5037,7 @@ namespace System.Diagnostics.Tracing
         {
             EnableEvents(eventSource, level, matchAnyKeyword, null);
         }
+
         /// <summary>
         /// Enable all events from the eventSource identified by 'eventSource' to the current
         /// dispatcher that have a verbosity level of 'level' or lower and have a event keyword
@@ -5077,6 +5087,7 @@ namespace System.Diagnostics.Tracing
             }
 #endif // FEATURE_PERFTRACING
         }
+
         /// <summary>
         /// Disables all events coming from eventSource identified by 'eventSource'.
         ///
@@ -5498,6 +5509,7 @@ namespace System.Diagnostics.Tracing
         /// from this list.   Note that EventSources point to their listener but NOT the reverse.
         /// </summary>
         internal static EventListener? s_Listeners;
+
         /// <summary>
         /// The list of all active eventSources in the appdomain.  Note that eventSources do NOT
         /// remove themselves from this list this is a weak list and the GC that removes them may
@@ -5902,10 +5914,13 @@ namespace System.Diagnostics.Tracing
 
         /// <summary>Event's ID</summary>
         public int EventId { get; private set; }
+
         /// <summary>Event's severity level: indicates the severity or verbosity of the event</summary>
         public EventLevel Level { get; set; }
+
         /// <summary>Event's keywords: allows classification of events by "categories"</summary>
         public EventKeywords Keywords { get; set; }
+
         /// <summary>Event's operation code: allows defining operations, generally used with Tasks</summary>
         public EventOpcode Opcode
         {
@@ -6466,7 +6481,6 @@ namespace System.Diagnostics.Tracing
 
             return channelMask;
         }
-
 #endif
         public void StartEvent(string eventName, EventAttribute eventAttribute)
         {
@@ -6573,6 +6587,7 @@ namespace System.Diagnostics.Tracing
 
             templates.AppendLine("/>");
         }
+
         public void EndEvent()
         {
             Debug.Assert(eventName != null);
@@ -6935,6 +6950,7 @@ namespace System.Diagnostics.Tracing
             stringBuilder.Append(" name=\"").Append(name).Append('"');
             WriteMessageAttrib(sb, elementName, name, name);
         }
+
         private void WriteMessageAttrib(
             StringBuilder stringBuilder,
             string elementName,
@@ -6969,6 +6985,7 @@ namespace System.Diagnostics.Tracing
 
             stringTab[key] = value;
         }
+
         internal string? GetLocalizedMessage(string key, CultureInfo ci, bool etwFormat)
         {
             string? value = null;
@@ -7226,6 +7243,7 @@ namespace System.Diagnostics.Tracing
             "%n",
             "%t"
         };
+
         // Manifest messages use %N conventions for their message substitutions.   Translate from
         // .NET conventions.   We can't use RegEx for this (we are in mscorlib), so we do it 'by hand'
         private string TranslateToManifestConvention(string eventMessage, string evtName)
@@ -7408,6 +7426,7 @@ namespace System.Diagnostics.Tracing
     internal struct ManifestEnvelope
     {
         public const int MaxChunkSize = 0xFF00;
+
         public enum ManifestFormats : byte
         {
             SimpleXmlFormat = 1, // simply dump the XML manifest as UTF8

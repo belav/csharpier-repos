@@ -1087,7 +1087,9 @@ namespace System.Data
 
         #region IBindingList implementation
         bool IBindingList.AllowNew => AllowNew;
+
         object IBindingList.AddNew() => AddNew();
+
         bool IBindingList.AllowEdit => AllowEdit;
         bool IBindingList.AllowRemove => AllowDelete;
 

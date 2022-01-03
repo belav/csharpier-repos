@@ -9,6 +9,7 @@ using System;
 class Foo : IDisposable
 {
     public bool IsConstructed { get; } = true;
+
     public Foo(int ignored) { }
 
     ~Foo()
@@ -26,7 +27,9 @@ class Foo : IDisposable
 class Runtime_4781
 {
     private static int Throw() => throw new NotSupportedException();
+
     private static bool failed = false;
+
     public static void Fail()
     {
         failed = true;

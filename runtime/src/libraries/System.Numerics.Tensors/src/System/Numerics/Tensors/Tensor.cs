@@ -1320,6 +1320,7 @@ namespace System.Numerics.Tensors
 
             return true;
         }
+
         int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
         {
             int hashCode = 0;

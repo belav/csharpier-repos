@@ -13,6 +13,7 @@ namespace System.ComponentModel
     {
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private Type? _toolboxItemType;
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private readonly string? _toolboxItemTypeName;
 

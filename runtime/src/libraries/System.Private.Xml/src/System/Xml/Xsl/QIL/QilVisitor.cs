@@ -266,38 +266,47 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitFunctionList(QilList n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitGlobalVariableList(QilList n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitGlobalParameterList(QilList n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitActualParameterList(QilList n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitFormalParameterList(QilList n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitSortKeyList(QilList n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitBranchList(QilList n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitOptimizeBarrier(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitUnknown(QilNode n)
         {
             return VisitChildren(n);
@@ -309,14 +318,17 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitNop(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitError(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitWarning(QilUnary n)
         {
             return VisitChildren(n);
@@ -328,26 +340,32 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitForReference(QilIterator n)
         {
             return n;
         }
+
         protected virtual QilNode VisitLet(QilIterator n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitLetReference(QilIterator n)
         {
             return n;
         }
+
         protected virtual QilNode VisitParameter(QilParameter n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitParameterReference(QilParameter n)
         {
             return n;
         }
+
         protected virtual QilNode VisitPositionOf(QilUnary n)
         {
             return VisitChildren(n);
@@ -359,38 +377,47 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitFalse(QilNode n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitLiteralString(QilLiteral n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitLiteralInt32(QilLiteral n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitLiteralInt64(QilLiteral n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitLiteralDouble(QilLiteral n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitLiteralDecimal(QilLiteral n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitLiteralQName(QilName n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitLiteralType(QilLiteral n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitLiteralObject(QilLiteral n)
         {
             return VisitChildren(n);
@@ -402,10 +429,12 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitOr(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitNot(QilUnary n)
         {
             return VisitChildren(n);
@@ -417,6 +446,7 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitChoice(QilChoice n)
         {
             return VisitChildren(n);
@@ -428,34 +458,42 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitSequence(QilList n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitUnion(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitIntersection(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitDifference(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitAverage(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitSum(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitMinimum(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitMaximum(QilUnary n)
         {
             return VisitChildren(n);
@@ -467,22 +505,27 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitAdd(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitSubtract(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitMultiply(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitDivide(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitModulo(QilBinary n)
         {
             return VisitChildren(n);
@@ -494,10 +537,12 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitStrConcat(QilStrConcat n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitStrParseQName(QilBinary n)
         {
             return VisitChildren(n);
@@ -509,22 +554,27 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitEq(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitGt(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitGe(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitLt(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitLe(QilBinary n)
         {
             return VisitChildren(n);
@@ -536,10 +586,12 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitAfter(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitBefore(QilBinary n)
         {
             return VisitChildren(n);
@@ -551,6 +603,7 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitFilter(QilLoop n)
         {
             return VisitChildren(n);
@@ -562,10 +615,12 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitSortKey(QilSortKey n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitDocOrderDistinct(QilUnary n)
         {
             return VisitChildren(n);
@@ -577,10 +632,12 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitFunctionReference(QilFunction n)
         {
             return n;
         }
+
         protected virtual QilNode VisitInvoke(QilInvoke n)
         {
             return VisitChildren(n);
@@ -592,54 +649,67 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitAttribute(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitParent(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitRoot(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitXmlContext(QilNode n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitDescendant(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitDescendantOrSelf(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitAncestor(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitAncestorOrSelf(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitPreceding(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitFollowingSibling(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitPrecedingSibling(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitNodeRange(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitDeref(QilBinary n)
         {
             return VisitChildren(n);
@@ -651,34 +721,42 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitAttributeCtor(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitCommentCtor(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitPICtor(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitTextCtor(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitRawTextCtor(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitDocumentCtor(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitNamespaceDecl(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitRtfCtor(QilBinary n)
         {
             return VisitChildren(n);
@@ -690,14 +768,17 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitLocalNameOf(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitNamespaceUriOf(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitPrefixOf(QilUnary n)
         {
             return VisitChildren(n);
@@ -709,10 +790,12 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitIsType(QilTargetType n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitIsEmpty(QilUnary n)
         {
             return VisitChildren(n);
@@ -724,14 +807,17 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitXPathFollowing(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitXPathPreceding(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitXPathNamespace(QilUnary n)
         {
             return VisitChildren(n);
@@ -743,22 +829,27 @@ namespace System.Xml.Xsl.Qil
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitXsltInvokeLateBound(QilInvokeLateBound n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitXsltInvokeEarlyBound(QilInvokeEarlyBound n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitXsltCopy(QilBinary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitXsltCopyOf(QilUnary n)
         {
             return VisitChildren(n);
         }
+
         protected virtual QilNode VisitXsltConvert(QilTargetType n)
         {
             return VisitChildren(n);

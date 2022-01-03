@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal unsafe class testout1
 {
     public struct VT_1
@@ -10,10 +11,12 @@ internal unsafe class testout1
         public int a1_1;
         public long a4_1;
     }
+
     public class CL
     {
         public ulong a0 = 11235799373080166400UL;
     }
+
     private static int s_a3_1 = 1202448569;
     public static VT_1 vtstatic_1 = new VT_1();
 

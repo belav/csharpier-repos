@@ -441,8 +441,10 @@ namespace System.Text.Json.Serialization.Tests
 
             public static ConcreteDerivedClassWithNoPublicDefaultCtor Ok() =>
                 new ConcreteDerivedClassWithNoPublicDefaultCtor("ok");
+
             public static GenericClassWithProtectedInternalCtor<T> Ok<T>() =>
                 new GenericClassWithProtectedInternalCtor<T>();
+
             public static ConcreteDerivedClassWithNoPublicDefaultCtor Error(string error) =>
                 new ConcreteDerivedClassWithNoPublicDefaultCtor(error);
         }

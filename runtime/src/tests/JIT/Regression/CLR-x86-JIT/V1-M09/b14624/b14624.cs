@@ -39,6 +39,7 @@ namespace DefaultNamespace
         {
             return false;
         }
+
         public override int GetHashCode()
         {
             return 0;

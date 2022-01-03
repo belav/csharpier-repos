@@ -135,9 +135,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         internal readonly struct Http2StreamAsValueType
         {
             private readonly Http2Stream _value;
+
             private Http2StreamAsValueType(Http2Stream value) => _value = value;
+
             public static implicit operator Http2StreamAsValueType(Http2Stream s) =>
                 new Http2StreamAsValueType(s);
+
             public static implicit operator Http2Stream(Http2StreamAsValueType s) => s._value;
         }
     }

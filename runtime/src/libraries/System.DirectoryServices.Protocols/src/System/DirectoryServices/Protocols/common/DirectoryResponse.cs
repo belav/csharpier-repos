@@ -169,6 +169,7 @@ namespace System.DirectoryServices.Protocols
             new SearchResultReferenceCollection();
         private SearchResultEntryCollection _entryCollection = new SearchResultEntryCollection();
         internal bool searchDone;
+
         internal SearchResponse(
             string dn,
             DirectoryControl[] controls,

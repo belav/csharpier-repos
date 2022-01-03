@@ -13,6 +13,7 @@ namespace Metadata
         Two,
         Three
     }
+
     public delegate void DGoo<T>(T p1, T p2);
 
     public interface ICSProp

@@ -32,6 +32,7 @@ namespace System.Speech.Synthesis
 
         #endregion
     }
+
     public class SpeakStartedEventArgs : PromptEventArgs
     {
         #region Constructors

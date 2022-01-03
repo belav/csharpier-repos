@@ -22,6 +22,7 @@ In E.cctor: thread T3: A.i 5
 using System;
 using System.Threading;
 using System.Runtime.CompilerServices;
+
 public class A
 {
     public static int i;

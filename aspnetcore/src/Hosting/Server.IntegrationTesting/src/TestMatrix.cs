@@ -45,6 +45,7 @@ public class TestMatrix : IEnumerable<object[]>
         ApplicationTypes.Add(ApplicationType.Standalone);
         return this;
     }
+
     public TestMatrix WithArchitectures(params RuntimeArchitecture[] archs)
     {
         Architectures = archs;

@@ -28,6 +28,7 @@ namespace System.Net.Http
 #endif
         /// <summary>Default size of the write buffer used for the connection.</summary>
         private const int InitialWriteBufferSize = InitialReadBufferSize;
+
         /// <summary>
         /// Size after which we'll close the connection rather than send the payload in response
         /// to final error status code sent by the server when using Expect: 100-continue.
@@ -64,6 +65,7 @@ namespace System.Net.Http
         private readonly byte[] _writeBuffer;
         private int _writeOffset;
         private int _allowedReadLineBytes;
+
         /// <summary>Reusable array used to get the values for each header being written to the wire.</summary>
         private string[] _headerValues = Array.Empty<string>();
 

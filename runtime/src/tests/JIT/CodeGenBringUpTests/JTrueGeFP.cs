@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_JTrueGeFP
 {
     const int Pass = 100;

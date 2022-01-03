@@ -8,6 +8,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
     internal sealed class ILEmitServiceProviderEngine : ServiceProviderEngine
     {
         private readonly ILEmitResolverBuilder _expressionResolverBuilder;
+
         public ILEmitServiceProviderEngine(ServiceProvider serviceProvider)
         {
             _expressionResolverBuilder = new ILEmitResolverBuilder(serviceProvider);

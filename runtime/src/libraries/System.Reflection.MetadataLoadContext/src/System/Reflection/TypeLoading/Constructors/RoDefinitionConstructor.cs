@@ -27,22 +27,32 @@ namespace System.Reflection.TypeLoading
         }
 
         internal sealed override RoType GetRoDeclaringType() => _declaringType;
+
         internal sealed override RoModule GetRoModule() => _decoder.GetRoModule();
+
         protected sealed override string ComputeName() => _decoder.ComputeName();
+
         public sealed override int MetadataToken => _decoder.MetadataToken;
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
             _decoder.ComputeTrueCustomAttributes();
+
         protected sealed override MethodAttributes ComputeAttributes() =>
             _decoder.ComputeAttributes();
+
         protected sealed override CallingConventions ComputeCallingConvention() =>
             _decoder.ComputeCallingConvention();
+
         protected sealed override MethodImplAttributes ComputeMethodImplementationFlags() =>
             _decoder.ComputeMethodImplementationFlags();
+
         protected sealed override MethodSig<RoParameter> ComputeMethodSig() =>
             _decoder.SpecializeMethodSig(this);
+
         public sealed override MethodBody? GetMethodBody() => _decoder.SpecializeMethodBody(this);
+
         protected sealed override MethodSig<string> ComputeMethodSigStrings() =>
             _decoder.SpecializeMethodSigStrings(TypeContext);
+
         protected sealed override MethodSig<RoType> ComputeCustomModifiers() =>
             _decoder.SpecializeCustomModifiers(TypeContext);
 

@@ -13,6 +13,7 @@ namespace System.Security.Cryptography
         private RandomNumberGenerator? RngValue;
 
         public RSAOAEPKeyExchangeFormatter() { }
+
         public RSAOAEPKeyExchangeFormatter(AsymmetricAlgorithm key)
         {
             if (key == null)

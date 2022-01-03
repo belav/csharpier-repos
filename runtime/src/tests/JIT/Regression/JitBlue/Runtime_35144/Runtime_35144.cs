@@ -15,10 +15,12 @@ struct WrappedVector64
 {
     Vector64<byte> _;
 }
+
 struct WrappedVector128
 {
     Vector128<byte> _;
 }
+
 struct WrappedVector256
 {
     Vector256<byte> _;

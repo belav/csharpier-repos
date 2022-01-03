@@ -97,7 +97,6 @@ else
 
 #if (RequiresHttps)
 app.UseHttpsRedirection();
-
 #endif
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
@@ -112,7 +111,6 @@ app.UseAuthentication();
 #endif
 #if (!NoAuth)
 app.UseAuthorization();
-
 #endif
 
 app.MapRazorPages();

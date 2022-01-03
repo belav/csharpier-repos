@@ -13,6 +13,7 @@ namespace System.Data.ProviderBase
         private DataSet _metaDataCollectionsDataSet;
         private string _normalizedServerVersion;
         private string _serverVersionString;
+
         // well known column names
         private const string _collectionName = "CollectionName";
         private const string _populationMechanism = "PopulationMechanism";

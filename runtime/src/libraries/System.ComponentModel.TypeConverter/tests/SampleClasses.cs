@@ -17,11 +17,14 @@ namespace System.ComponentModel.Tests
         {
             get { return null; }
         }
+
         public bool OnComponentChanging()
         {
             return true;
         }
+
         public void OnComponentChanged() { }
+
         public object GetService(Type serviceType)
         {
             return null;
@@ -68,6 +71,7 @@ namespace System.ComponentModel.Tests
         {
             return FormattableClass.Token;
         }
+
         public const string Token = "Formatted class.";
     }
 
@@ -93,6 +97,7 @@ namespace System.ComponentModel.Tests
         {
             BaseProperty = 1;
         }
+
         public override bool Equals(object other)
         {
             BaseClass otherBaseClass = other as BaseClass;
@@ -106,10 +111,12 @@ namespace System.ComponentModel.Tests
             }
             return base.Equals(other);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+
         public int BaseProperty;
     }
 
@@ -121,7 +128,9 @@ namespace System.ComponentModel.Tests
                 "This constructor should not be invoked by TypeDescriptor.GetConverter."
             );
         }
+
         public BaseClassConverter() { }
+
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(int))
@@ -130,6 +139,7 @@ namespace System.ComponentModel.Tests
             }
             return base.CanConvertFrom(context, sourceType);
         }
+
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
             if (destinationType == typeof(int))
@@ -138,6 +148,7 @@ namespace System.ComponentModel.Tests
             }
             return base.CanConvertTo(context, destinationType);
         }
+
         public override object ConvertFrom(
             ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
@@ -152,6 +163,7 @@ namespace System.ComponentModel.Tests
             }
             return base.ConvertFrom(context, culture, value);
         }
+
         public override object ConvertTo(
             ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
@@ -178,10 +190,12 @@ namespace System.ComponentModel.Tests
         {
             DerivedProperty = 2;
         }
+
         public DerivedClass(int i) : base()
         {
             DerivedProperty = i;
         }
+
         public override bool Equals(object other)
         {
             DerivedClass otherDerivedClass = other as DerivedClass;
@@ -195,10 +209,12 @@ namespace System.ComponentModel.Tests
             }
             return base.Equals(other);
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+
         public int DerivedProperty;
     }
 
@@ -214,6 +230,7 @@ namespace System.ComponentModel.Tests
             }
             return base.CanConvertFrom(context, sourceType);
         }
+
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
             if (destinationType == typeof(int))
@@ -222,6 +239,7 @@ namespace System.ComponentModel.Tests
             }
             return base.CanConvertTo(context, destinationType);
         }
+
         public override object ConvertFrom(
             ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
@@ -237,6 +255,7 @@ namespace System.ComponentModel.Tests
             }
             return base.ConvertFrom(context, culture, value);
         }
+
         public override object ConvertTo(
             ITypeDescriptorContext context,
             System.Globalization.CultureInfo culture,
@@ -273,6 +292,7 @@ namespace System.ComponentModel.Tests
         {
             InterfaceProperty = 10;
         }
+
         public int InterfaceProperty { get; set; }
     }
 
@@ -283,6 +303,7 @@ namespace System.ComponentModel.Tests
             InterfaceProperty = 20;
             DerivedInterfaceProperty = InterfaceProperty / 2;
         }
+
         public int InterfaceProperty { get; set; }
         public int DerivedInterfaceProperty { get; set; }
     }

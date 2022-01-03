@@ -16,14 +16,17 @@ namespace System.Diagnostics
         #region Keep in sync with object-internals.h
         internal int ilOffset;
         internal int nativeOffset;
+
         // Unused
         internal long methodAddress;
+
         // Unused
         internal uint methodIndex;
         internal MethodBase? methodBase;
         internal string? fileName;
         internal int lineNumber;
         internal int columnNumber;
+
         // Unused
         internal string? internalMethodName;
         #endregion
