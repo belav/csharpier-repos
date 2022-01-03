@@ -17,10 +17,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Migrations
 {
-    public class MigrationsSqliteTest : MigrationsTestBase<MigrationsSqliteTest.MigrationsSqliteFixture>
+    public class MigrationsSqliteTest
+        : MigrationsTestBase<MigrationsSqliteTest.MigrationsSqliteFixture>
     {
-        public MigrationsSqliteTest(MigrationsSqliteFixture fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public MigrationsSqliteTest(
+            MigrationsSqliteFixture fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -34,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 @"CREATE TABLE ""People"" (
     ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_People"" PRIMARY KEY AUTOINCREMENT,
     ""Name"" TEXT NULL
-);");
+);"
+            );
         }
 
         public override async Task Create_table_all_settings()
@@ -54,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
     CONSTRAINT ""AK_People_SSN"" UNIQUE (""SSN""),
     CONSTRAINT ""CK_People_EmployerId"" CHECK (""EmployerId"" > 0),
     CONSTRAINT ""FK_People_Employers_EmployerId"" FOREIGN KEY (""EmployerId"") REFERENCES ""Employers"" (""Id"")
-);");
+);"
+            );
         }
 
         public override async Task Create_table_with_comments()
@@ -69,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
     -- Column comment
     ""Name"" TEXT NULL
-);");
+);"
+            );
         }
 
         public override async Task Create_table_with_multiline_comments()
@@ -90,7 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
     -- More information can
     -- be found in the docs.
     ""Name"" TEXT NULL
-);");
+);"
+            );
         }
 
         public override async Task Create_table_with_computed_column(bool? stored)
@@ -105,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
     ""Sum"" AS (""X"" + ""Y""){computedColumnTypeSql},
     ""X"" INTEGER NOT NULL,
     ""Y"" INTEGER NOT NULL
-);");
+);"
+            );
         }
 
         public override async Task Alter_table_add_comment()
@@ -124,7 +132,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_table_add_comment_non_default_schema()
@@ -143,7 +152,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_table_change_comment()
@@ -162,7 +172,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_table_remove_comment()
@@ -179,15 +190,15 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Rename_table()
         {
             await base.Rename_table();
 
-            AssertSql(
-                @"ALTER TABLE ""People"" RENAME TO ""Persons"";");
+            AssertSql(@"ALTER TABLE ""People"" RENAME TO ""Persons"";");
         }
 
         public override async Task Rename_table_with_primary_key()
@@ -211,7 +222,8 @@ FROM ""Persons"";",
                 //
                 @"ALTER TABLE ""ef_temp_Persons"" RENAME TO ""Persons"";",
                 //
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         // SQLite does not support schemas.
@@ -230,7 +242,8 @@ FROM ""Persons"";",
             AssertSql(
                 @"CREATE TABLE ""People"" (
     ""Id"" INTEGER NOT NULL
-);");
+);"
+            );
         }
 
         public override async Task Add_column_with_defaultValue_datetime()
@@ -238,15 +251,15 @@ FROM ""Persons"";",
             await base.Add_column_with_defaultValue_datetime();
 
             AssertSql(
-                @"ALTER TABLE ""People"" ADD ""Birthday"" TEXT NOT NULL DEFAULT '2015-04-12 17:05:00';");
+                @"ALTER TABLE ""People"" ADD ""Birthday"" TEXT NOT NULL DEFAULT '2015-04-12 17:05:00';"
+            );
         }
 
         public override async Task Add_column_with_defaultValueSql()
         {
             await base.Add_column_with_defaultValueSql();
 
-            AssertSql(
-                @"ALTER TABLE ""People"" ADD ""Sum"" INTEGER NOT NULL DEFAULT (1 + 2);");
+            AssertSql(@"ALTER TABLE ""People"" ADD ""Sum"" INTEGER NOT NULL DEFAULT (1 + 2);");
         }
 
         public override async Task Add_column_with_computedSql(bool? stored)
@@ -255,8 +268,7 @@ FROM ""Persons"";",
 
             var storedSql = stored == true ? " STORED" : "";
 
-            AssertSql(
-                $@"ALTER TABLE ""People"" ADD ""Sum"" AS (""X"" + ""Y""){storedSql};");
+            AssertSql($@"ALTER TABLE ""People"" ADD ""Sum"" AS (""X"" + ""Y""){storedSql};");
         }
 
         public override async Task Add_column_with_max_length()
@@ -264,8 +276,7 @@ FROM ""Persons"";",
             await base.Add_column_with_max_length();
 
             // See issue #3698
-            AssertSql(
-                @"ALTER TABLE ""People"" ADD ""Name"" TEXT NULL;");
+            AssertSql(@"ALTER TABLE ""People"" ADD ""Name"" TEXT NULL;");
         }
 
         public override async Task Add_column_with_comment()
@@ -292,23 +303,22 @@ FROM ""People"";",
                 //
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
                 //
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Add_column_with_collation()
         {
             await base.Add_column_with_collation();
 
-            AssertSql(
-                @"ALTER TABLE ""People"" ADD ""Name"" TEXT COLLATE NOCASE NULL;");
+            AssertSql(@"ALTER TABLE ""People"" ADD ""Name"" TEXT COLLATE NOCASE NULL;");
         }
 
         public override async Task Add_column_computed_with_collation()
         {
             await base.Add_column_computed_with_collation();
 
-            AssertSql(
-                @"ALTER TABLE ""People"" ADD ""Name"" AS ('hello') COLLATE NOCASE;");
+            AssertSql(@"ALTER TABLE ""People"" ADD ""Name"" AS ('hello') COLLATE NOCASE;");
         }
 
         public override async Task Add_column_with_check_constraint()
@@ -328,7 +338,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_column_make_required()
@@ -346,7 +357,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_column_make_required_with_index()
@@ -365,7 +377,8 @@ FROM ""People"";",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
                 @"PRAGMA foreign_keys = 1;",
-                @"CREATE INDEX ""IX_People_SomeColumn"" ON ""People"" (""SomeColumn"");");
+                @"CREATE INDEX ""IX_People_SomeColumn"" ON ""People"" (""SomeColumn"");"
+            );
         }
 
         public override async Task Alter_column_make_required_with_composite_index()
@@ -385,7 +398,8 @@ FROM ""People"";",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
                 @"PRAGMA foreign_keys = 1;",
-                @"CREATE INDEX ""IX_People_FirstName_LastName"" ON ""People"" (""FirstName"", ""LastName"");");
+                @"CREATE INDEX ""IX_People_FirstName_LastName"" ON ""People"" (""FirstName"", ""LastName"");"
+            );
         }
 
         public override async Task Alter_column_make_computed(bool? stored)
@@ -407,7 +421,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_column_change_computed()
@@ -427,7 +442,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_column_change_computed_recreates_indexes()
@@ -448,7 +464,8 @@ FROM ""People"";",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
                 @"PRAGMA foreign_keys = 1;",
-                @"CREATE INDEX ""IX_People_Sum"" ON ""People"" (""Sum"");");
+                @"CREATE INDEX ""IX_People_Sum"" ON ""People"" (""Sum"");"
+            );
         }
 
         public override async Task Alter_column_change_computed_type()
@@ -468,7 +485,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_column_make_non_computed()
@@ -488,7 +506,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_column_add_comment()
@@ -506,7 +525,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_computed_column_add_comment()
@@ -531,7 +551,8 @@ FROM ""People"";",
                 //
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
                 //
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_column_change_comment()
@@ -549,7 +570,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_column_remove_comment()
@@ -566,7 +588,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_column_set_collation()
@@ -583,7 +606,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_column_reset_collation()
@@ -600,7 +624,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Drop_column()
@@ -617,7 +642,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Drop_column_primary_key()
@@ -634,7 +660,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Rename_column()
@@ -642,7 +669,8 @@ FROM ""People"";",
             await base.Rename_column();
 
             AssertSql(
-                @"ALTER TABLE ""People"" RENAME COLUMN ""SomeColumn"" TO ""SomeOtherColumn"";");
+                @"ALTER TABLE ""People"" RENAME COLUMN ""SomeColumn"" TO ""SomeOtherColumn"";"
+            );
         }
 
         public override async Task Create_index_with_filter()
@@ -650,7 +678,8 @@ FROM ""People"";",
             await base.Create_index_with_filter();
 
             AssertSql(
-                @"CREATE INDEX ""IX_People_Name"" ON ""People"" (""Name"") WHERE ""Name"" IS NOT NULL;");
+                @"CREATE INDEX ""IX_People_Name"" ON ""People"" (""Name"") WHERE ""Name"" IS NOT NULL;"
+            );
         }
 
         public override async Task Create_unique_index_with_filter()
@@ -658,7 +687,8 @@ FROM ""People"";",
             await base.Create_unique_index_with_filter();
 
             AssertSql(
-                @"CREATE UNIQUE INDEX ""IX_People_Name"" ON ""People"" (""Name"") WHERE ""Name"" IS NOT NULL AND ""Name"" <> '';");
+                @"CREATE UNIQUE INDEX ""IX_People_Name"" ON ""People"" (""Name"") WHERE ""Name"" IS NOT NULL AND ""Name"" <> '';"
+            );
         }
 
         public override async Task Rename_index()
@@ -668,7 +698,8 @@ FROM ""People"";",
             AssertSql(
                 @"DROP INDEX ""Foo"";",
                 //
-                @"CREATE INDEX ""foo"" ON ""People"" (""FirstName"");");
+                @"CREATE INDEX ""foo"" ON ""People"" (""FirstName"");"
+            );
         }
 
         public override async Task Add_primary_key()
@@ -685,7 +716,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Add_primary_key_with_name()
@@ -702,7 +734,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Add_primary_key_composite_with_name()
@@ -721,7 +754,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Drop_primary_key()
@@ -738,7 +772,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Add_foreign_key()
@@ -757,7 +792,8 @@ FROM ""Orders"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""Orders"";",
                 @"ALTER TABLE ""ef_temp_Orders"" RENAME TO ""Orders"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Add_foreign_key_with_name()
@@ -776,7 +812,8 @@ FROM ""Orders"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""Orders"";",
                 @"ALTER TABLE ""ef_temp_Orders"" RENAME TO ""Orders"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Drop_foreign_key()
@@ -794,7 +831,8 @@ FROM ""Orders"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""Orders"";",
                 @"ALTER TABLE ""ef_temp_Orders"" RENAME TO ""Orders"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Add_unique_constraint()
@@ -813,7 +851,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Add_unique_constraint_composite_with_name()
@@ -833,7 +872,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Drop_unique_constraint()
@@ -851,7 +891,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Add_check_constraint_with_name()
@@ -870,7 +911,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Alter_check_constraint()
@@ -889,7 +931,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         public override async Task Drop_check_constraint()
@@ -907,7 +950,8 @@ FROM ""People"";",
                 @"PRAGMA foreign_keys = 0;",
                 @"DROP TABLE ""People"";",
                 @"ALTER TABLE ""ef_temp_People"" RENAME TO ""People"";",
-                @"PRAGMA foreign_keys = 1;");
+                @"PRAGMA foreign_keys = 1;"
+            );
         }
 
         [ConditionalFact]
@@ -916,85 +960,103 @@ FROM ""People"";",
             await Test(
                 builder => { },
                 builder => { },
-                builder => builder.Entity(
-                    "Person", e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.Property<string>("Name");
-                        e.Property<int>("Age").HasDefaultValue(18);
-                        e.HasKey("Id");
-                    }),
+                builder =>
+                    builder.Entity(
+                        "Person",
+                        e =>
+                        {
+                            e.Property<int>("Id").ValueGeneratedOnAdd();
+                            e.Property<string>("Name");
+                            e.Property<int>("Age").HasDefaultValue(18);
+                            e.HasKey("Id");
+                        }
+                    ),
                 model =>
                 {
                     var personTable = Assert.Single(model.Tables);
-                    Assert.Equal(ValueGenerated.OnAdd, personTable.Columns.Single(c => c.Name == "Id").ValueGenerated);
+                    Assert.Equal(
+                        ValueGenerated.OnAdd,
+                        personTable.Columns.Single(c => c.Name == "Id").ValueGenerated
+                    );
                     Assert.Null(personTable.Columns.Single(c => c.Name == "Age").ValueGenerated);
-                    Assert.NotNull(personTable.Columns.Single(c => c.Name == "Age").DefaultValueSql);
-                });
+                    Assert.NotNull(
+                        personTable.Columns.Single(c => c.Name == "Age").DefaultValueSql
+                    );
+                }
+            );
 
             AssertSql(
                 @"CREATE TABLE ""Person"" (
     ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_Person"" PRIMARY KEY AUTOINCREMENT,
     ""Age"" INTEGER NOT NULL DEFAULT 18,
     ""Name"" TEXT NULL
-);");
+);"
+            );
         }
 
-        public override Task Create_sequence()
-            => AssertNotSupportedAsync(base.Create_sequence, SqliteStrings.SequencesNotSupported);
+        public override Task Create_sequence() =>
+            AssertNotSupportedAsync(base.Create_sequence, SqliteStrings.SequencesNotSupported);
 
-        public override Task Create_sequence_long()
-            => AssertNotSupportedAsync(base.Create_sequence_long, SqliteStrings.SequencesNotSupported);
+        public override Task Create_sequence_long() =>
+            AssertNotSupportedAsync(base.Create_sequence_long, SqliteStrings.SequencesNotSupported);
 
-        public override Task Create_sequence_short()
-            => AssertNotSupportedAsync(base.Create_sequence_short, SqliteStrings.SequencesNotSupported);
+        public override Task Create_sequence_short() =>
+            AssertNotSupportedAsync(
+                base.Create_sequence_short,
+                SqliteStrings.SequencesNotSupported
+            );
 
-        public override Task Create_sequence_all_settings()
-            => AssertNotSupportedAsync(base.Create_sequence_all_settings, SqliteStrings.SequencesNotSupported);
+        public override Task Create_sequence_all_settings() =>
+            AssertNotSupportedAsync(
+                base.Create_sequence_all_settings,
+                SqliteStrings.SequencesNotSupported
+            );
 
-        public override Task Alter_sequence_all_settings()
-            => AssertNotSupportedAsync(base.Alter_sequence_all_settings, SqliteStrings.SequencesNotSupported);
+        public override Task Alter_sequence_all_settings() =>
+            AssertNotSupportedAsync(
+                base.Alter_sequence_all_settings,
+                SqliteStrings.SequencesNotSupported
+            );
 
-        public override Task Alter_sequence_increment_by()
-            => AssertNotSupportedAsync(base.Alter_sequence_increment_by, SqliteStrings.SequencesNotSupported);
+        public override Task Alter_sequence_increment_by() =>
+            AssertNotSupportedAsync(
+                base.Alter_sequence_increment_by,
+                SqliteStrings.SequencesNotSupported
+            );
 
-        public override Task Drop_sequence()
-            => AssertNotSupportedAsync(base.Drop_sequence, SqliteStrings.SequencesNotSupported);
+        public override Task Drop_sequence() =>
+            AssertNotSupportedAsync(base.Drop_sequence, SqliteStrings.SequencesNotSupported);
 
-        public override Task Rename_sequence()
-            => AssertNotSupportedAsync(base.Rename_sequence, SqliteStrings.SequencesNotSupported);
+        public override Task Rename_sequence() =>
+            AssertNotSupportedAsync(base.Rename_sequence, SqliteStrings.SequencesNotSupported);
 
-        public override Task Move_sequence()
-            => AssertNotSupportedAsync(base.Move_sequence, SqliteStrings.SequencesNotSupported);
+        public override Task Move_sequence() =>
+            AssertNotSupportedAsync(base.Move_sequence, SqliteStrings.SequencesNotSupported);
 
         // SQLite does not support schemas
-        protected override bool AssertSchemaNames
-            => false;
+        protected override bool AssertSchemaNames => false;
 
         // Reverse-engineering of comments isn't supported in Sqlite
-        protected override bool AssertComments
-            => false;
+        protected override bool AssertComments => false;
 
         // Reverse engineering of computed columns isn't fully supported on SQLite
-        protected override bool AssertComputedColumns
-            => false;
+        protected override bool AssertComputedColumns => false;
 
         // Our current version Sqlite doesn't seem to support scaffolding collations
-        protected override bool AssertCollations
-            => false;
+        protected override bool AssertCollations => false;
 
         // Reverse engineering of index filters isn't supported in SQLite
-        protected override bool AssertIndexFilters
-            => false;
+        protected override bool AssertIndexFilters => false;
 
         // Reverse engineering of constraint names isn't supported in SQLite
-        protected override bool AssertConstraintNames
-            => false;
+        protected override bool AssertConstraintNames => false;
 
-        protected override string NonDefaultCollation
-            => "NOCASE";
+        protected override string NonDefaultCollation => "NOCASE";
 
-        protected virtual async Task AssertNotSupportedAsync(Func<Task> action, string? message = null)
+        protected virtual async Task AssertNotSupportedAsync(
+            Func<Task> action,
+            string? message = null
+        )
         {
             var ex = await Assert.ThrowsAsync<NotSupportedException>(action);
             if (message != null)
@@ -1007,14 +1069,15 @@ FROM ""People"";",
         {
             protected override string StoreName { get; } = nameof(MigrationsSqliteTest);
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
 
-            public override TestHelpers TestHelpers
-                => SqliteTestHelpers.Instance;
+            public override TestHelpers TestHelpers => SqliteTestHelpers.Instance;
 
-            protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-                => base.AddServices(serviceCollection)
+            protected override IServiceCollection AddServices(
+                IServiceCollection serviceCollection
+            ) =>
+                base.AddServices(serviceCollection)
                     .AddScoped<IDatabaseModelFactory, SqliteDatabaseModelFactory>();
         }
     }

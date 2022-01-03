@@ -10,10 +10,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
     public class SqlServerSqlGenerationHelperTest
     {
         [ConditionalFact]
-        public void BatchSeparator_returns_separator()
-            => Assert.Equal("GO" + Environment.NewLine + Environment.NewLine, CreateSqlGenerationHelper().BatchTerminator);
+        public void BatchSeparator_returns_separator() =>
+            Assert.Equal(
+                "GO" + Environment.NewLine + Environment.NewLine,
+                CreateSqlGenerationHelper().BatchTerminator
+            );
 
-        private ISqlGenerationHelper CreateSqlGenerationHelper()
-            => new SqlServerSqlGenerationHelper(new RelationalSqlGenerationHelperDependencies());
+        private ISqlGenerationHelper CreateSqlGenerationHelper() =>
+            new SqlServerSqlGenerationHelper(new RelationalSqlGenerationHelperDependencies());
     }
 }

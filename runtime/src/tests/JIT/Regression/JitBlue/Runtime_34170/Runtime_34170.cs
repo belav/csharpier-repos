@@ -77,7 +77,6 @@ class Test_Runtime_34170
 {
     private static unsafe int Main()
     {
-        
         var a = new FloatNonAlignedFieldWithSmallOffset(1);
         Debug.Assert(a.field == 1);
         Console.WriteLine(a.field);
@@ -91,7 +90,7 @@ class Test_Runtime_34170
         var d = new DoubleNonAlignedFieldWithLargeOffset(1);
         Debug.Assert(d.field == 1);
         Console.WriteLine(d.field);
-        
+
         var e = new StructNonAlignedField(1);
         Debug.Assert(e.field.field == 1);
         Console.WriteLine(e.field.field);

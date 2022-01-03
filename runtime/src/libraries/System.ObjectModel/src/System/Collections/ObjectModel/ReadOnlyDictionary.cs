@@ -10,8 +10,13 @@ namespace System.Collections.ObjectModel
     [Serializable]
     [DebuggerTypeProxy(typeof(DictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public class ReadOnlyDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public class ReadOnlyDictionary<TKey, TValue>
+        : IDictionary<TKey, TValue>,
+          IDictionary,
+          IReadOnlyDictionary<TKey, TValue> where TKey : notnull
     {
         private readonly IDictionary<TKey, TValue> m_dictionary; // Do not rename (binary serialization)
 
@@ -73,7 +78,10 @@ namespace System.Collections.ObjectModel
             return m_dictionary.Contains(item);
         }
 
-        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
+            KeyValuePair<TKey, TValue>[] array,
+            int arrayIndex
+        )
         {
             m_dictionary.CopyTo(array, arrayIndex);
         }
@@ -250,7 +258,10 @@ namespace System.Collections.ObjectModel
 
         [DebuggerTypeProxy(typeof(CollectionDebugView<>))]
         [DebuggerDisplay("Count = {Count}")]
-        public sealed class KeyCollection : ICollection<TKey>, ICollection, IReadOnlyCollection<TKey>
+        public sealed class KeyCollection
+            : ICollection<TKey>,
+              ICollection,
+              IReadOnlyCollection<TKey>
         {
             private readonly ICollection<TKey> _collection;
 
@@ -304,7 +315,10 @@ namespace System.Collections.ObjectModel
 
         [DebuggerTypeProxy(typeof(CollectionDebugView<>))]
         [DebuggerDisplay("Count = {Count}")]
-        public sealed class ValueCollection : ICollection<TValue>, ICollection, IReadOnlyCollection<TValue>
+        public sealed class ValueCollection
+            : ICollection<TValue>,
+              ICollection,
+              IReadOnlyCollection<TValue>
         {
             private readonly ICollection<TValue> _collection;
 

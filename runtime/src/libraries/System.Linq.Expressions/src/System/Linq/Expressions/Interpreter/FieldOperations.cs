@@ -21,8 +21,7 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class LoadStaticFieldInstruction : FieldInstruction
     {
-        public LoadStaticFieldInstruction(FieldInfo field)
-            : base(field)
+        public LoadStaticFieldInstruction(FieldInfo field) : base(field)
         {
             Debug.Assert(field.IsStatic);
         }
@@ -39,10 +38,7 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class LoadFieldInstruction : FieldInstruction
     {
-        public LoadFieldInstruction(FieldInfo field)
-            : base(field)
-        {
-        }
+        public LoadFieldInstruction(FieldInfo field) : base(field) { }
 
         public override string InstructionName => "LoadField";
         public override int ConsumedStack => 1;
@@ -60,8 +56,7 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class StoreFieldInstruction : FieldInstruction
     {
-        public StoreFieldInstruction(FieldInfo field)
-            : base(field)
+        public StoreFieldInstruction(FieldInfo field) : base(field)
         {
             Assert.NotNull(field);
         }
@@ -82,8 +77,7 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class StoreStaticFieldInstruction : FieldInstruction
     {
-        public StoreStaticFieldInstruction(FieldInfo field)
-            : base(field)
+        public StoreStaticFieldInstruction(FieldInfo field) : base(field)
         {
             Debug.Assert(field.IsStatic);
         }

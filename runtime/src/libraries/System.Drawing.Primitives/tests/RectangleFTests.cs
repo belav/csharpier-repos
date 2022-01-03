@@ -147,8 +147,13 @@ namespace System.Drawing.PrimitivesTest
             // If RectangleF implements IEquatable<RectangleF> (e.g. in .NET Core), then classes that are implicitly
             // convertible to RectangleF can potentially be equal.
             // See https://github.com/dotnet/runtime/issues/16050.
-            bool expectsImplicitCastToRectangleF = typeof(IEquatable<RectangleF>).IsAssignableFrom(rectangle.GetType());
-            Assert.Equal(expectsImplicitCastToRectangleF, rectangle.Equals(new Rectangle(0, 0, 0, 0)));
+            bool expectsImplicitCastToRectangleF = typeof(IEquatable<RectangleF>).IsAssignableFrom(
+                rectangle.GetType()
+            );
+            Assert.Equal(
+                expectsImplicitCastToRectangleF,
+                rectangle.Equals(new Rectangle(0, 0, 0, 0))
+            );
 
             Assert.False(rectangle.Equals((object)new Rectangle(0, 0, 0, 0))); // No implicit cast
         }
@@ -188,7 +193,12 @@ namespace System.Drawing.PrimitivesTest
         public void InflateTest(float x, float y, float width, float height)
         {
             RectangleF rect = new RectangleF(x, y, width, height);
-            RectangleF inflatedRect = new RectangleF(x - width, y - height, width + 2 * width, height + 2 * height);
+            RectangleF inflatedRect = new RectangleF(
+                x - width,
+                y - height,
+                width + 2 * width,
+                height + 2 * height
+            );
 
             rect.Inflate(width, height);
             Assert.Equal(inflatedRect, rect);
@@ -268,7 +278,17 @@ namespace System.Drawing.PrimitivesTest
         public void ToStringTest(float x, float y, float width, float height)
         {
             var r = new RectangleF(x, y, width, height);
-            Assert.Equal(string.Format(CultureInfo.CurrentCulture, "{{X={0},Y={1},Width={2},Height={3}}}", r.X, r.Y, r.Width, r.Height), r.ToString());
+            Assert.Equal(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{{X={0},Y={1},Width={2},Height={3}}}",
+                    r.X,
+                    r.Y,
+                    r.Width,
+                    r.Height
+                ),
+                r.ToString()
+            );
         }
     }
 }

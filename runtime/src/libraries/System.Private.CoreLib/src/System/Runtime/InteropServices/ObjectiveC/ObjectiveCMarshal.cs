@@ -30,10 +30,13 @@ namespace System.Runtime.InteropServices.ObjectiveC
         /// to manage. The handler must not return and is expected to propagate the exception (for example, throw a native exception)
         /// into the native environment or fail fast.
         /// </remarks>
-        public unsafe delegate delegate* unmanaged<IntPtr, void> UnhandledExceptionPropagationHandler(
+        public unsafe delegate delegate* unmanaged<
+            IntPtr,
+            void> UnhandledExceptionPropagationHandler(
             Exception exception,
             RuntimeMethodHandle lastMethod,
-            out IntPtr context);
+            out IntPtr context
+        );
 
         private static UnhandledExceptionPropagationHandler? s_unhandledExceptionPropagationHandler;
 
@@ -61,7 +64,8 @@ namespace System.Runtime.InteropServices.ObjectiveC
             delegate* unmanaged<void> beginEndCallback,
             delegate* unmanaged<IntPtr, int> isReferencedCallback,
             delegate* unmanaged<IntPtr, void> trackedObjectEnteredFinalization,
-            UnhandledExceptionPropagationHandler unhandledExceptionPropagationHandler)
+            UnhandledExceptionPropagationHandler unhandledExceptionPropagationHandler
+        )
         {
             if (beginEndCallback is null)
                 throw new ArgumentNullException(nameof(beginEndCallback));
@@ -72,10 +76,18 @@ namespace System.Runtime.InteropServices.ObjectiveC
             if (unhandledExceptionPropagationHandler is null)
                 throw new ArgumentNullException(nameof(unhandledExceptionPropagationHandler));
 
-            if (s_unhandledExceptionPropagationHandler != null
-                || !TryInitializeReferenceTracker(beginEndCallback, isReferencedCallback, trackedObjectEnteredFinalization))
+            if (
+                s_unhandledExceptionPropagationHandler != null
+                || !TryInitializeReferenceTracker(
+                    beginEndCallback,
+                    isReferencedCallback,
+                    trackedObjectEnteredFinalization
+                )
+            )
             {
-                throw new InvalidOperationException(SR.InvalidOperation_ReinitializeObjectiveCMarshal);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ReinitializeObjectiveCMarshal
+                );
             }
             s_unhandledExceptionPropagationHandler = unhandledExceptionPropagationHandler;
         }
@@ -108,7 +120,8 @@ namespace System.Runtime.InteropServices.ObjectiveC
         /// </remarks>
         public static GCHandle CreateReferenceTrackingHandle(
             object obj,
-            out Span<IntPtr> taggedMemory)
+            out Span<IntPtr> taggedMemory
+        )
         {
             if (obj is null)
                 throw new ArgumentNullException(nameof(obj));
@@ -116,8 +129,8 @@ namespace System.Runtime.InteropServices.ObjectiveC
             IntPtr refCountHandle = CreateReferenceTrackingHandleInternal(
                 ObjectHandleOnStack.Create(ref obj),
                 out int memInSizeT,
-                out IntPtr mem);
-
+                out IntPtr mem
+            );
             unsafe
             {
                 taggedMemory = new Span<IntPtr>(mem.ToPointer(), memInSizeT);
@@ -167,11 +180,16 @@ namespace System.Runtime.InteropServices.ObjectiveC
             if (func == IntPtr.Zero)
                 throw new ArgumentNullException(nameof(func));
 
-            if (msgSendFunction < MessageSendFunction.MsgSend || msgSendFunction > MessageSendFunction.MsgSendSuperStret)
+            if (
+                msgSendFunction < MessageSendFunction.MsgSend
+                || msgSendFunction > MessageSendFunction.MsgSendSuperStret
+            )
                 throw new ArgumentOutOfRangeException(nameof(msgSendFunction));
 
             if (!TrySetGlobalMessageSendCallback(msgSendFunction, func))
-                throw new InvalidOperationException(SR.InvalidOperation_ResetGlobalObjectiveCMsgSend);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ResetGlobalObjectiveCMsgSend
+                );
         }
     }
 }

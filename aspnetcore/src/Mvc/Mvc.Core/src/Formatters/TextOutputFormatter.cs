@@ -72,7 +72,8 @@ public abstract class TextOutputFormatter : OutputFormatter
         if (SupportedEncodings.Count == 0)
         {
             var message = Resources.FormatTextOutputFormatter_SupportedEncodingsMustNotBeEmpty(
-                nameof(SupportedEncodings));
+                nameof(SupportedEncodings)
+            );
             throw new InvalidOperationException(message);
         }
 
@@ -92,7 +93,12 @@ public abstract class TextOutputFormatter : OutputFormatter
                 for (var i = 0; i < SupportedEncodings.Count; i++)
                 {
                     var supportedEncoding = SupportedEncodings[i];
-                    if (contentTypeCharset.Equals(supportedEncoding.WebName, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        contentTypeCharset.Equals(
+                            supportedEncoding.WebName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         // This is supported.
                         return SupportedEncodings[i];
@@ -122,7 +128,9 @@ public abstract class TextOutputFormatter : OutputFormatter
             }
             else
             {
-                throw new InvalidOperationException(Resources.FormatOutputFormatterNoMediaType(GetType().FullName));
+                throw new InvalidOperationException(
+                    Resources.FormatOutputFormatterNoMediaType(GetType().FullName)
+                );
             }
         }
 
@@ -130,7 +138,10 @@ public abstract class TextOutputFormatter : OutputFormatter
         if (selectedEncoding != null)
         {
             // Override the content type value even if one already existed.
-            var mediaTypeWithCharset = GetMediaTypeWithCharset(selectedMediaType.Value!, selectedEncoding);
+            var mediaTypeWithCharset = GetMediaTypeWithCharset(
+                selectedMediaType.Value!,
+                selectedEncoding
+            );
             selectedMediaType = new StringSegment(mediaTypeWithCharset);
         }
         else
@@ -152,7 +163,8 @@ public abstract class TextOutputFormatter : OutputFormatter
         var message = Resources.FormatTextOutputFormatter_WriteResponseBodyAsyncNotSupported(
             $"{nameof(WriteResponseBodyAsync)}({nameof(OutputFormatterWriteContext)})",
             nameof(TextOutputFormatter),
-            $"{nameof(WriteResponseBodyAsync)}({nameof(OutputFormatterWriteContext)},{nameof(Encoding)})");
+            $"{nameof(WriteResponseBodyAsync)}({nameof(OutputFormatterWriteContext)},{nameof(Encoding)})"
+        );
 
         throw new InvalidOperationException(message);
     }
@@ -163,12 +175,19 @@ public abstract class TextOutputFormatter : OutputFormatter
     /// <param name="context">The formatter context associated with the call.</param>
     /// <param name="selectedEncoding">The <see cref="Encoding"/> that should be used to write the response.</param>
     /// <returns>A task which can write the response body.</returns>
-    public abstract Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding);
+    public abstract Task WriteResponseBodyAsync(
+        OutputFormatterWriteContext context,
+        Encoding selectedEncoding
+    );
 
-    internal static IList<StringWithQualityHeaderValue> GetAcceptCharsetHeaderValues(OutputFormatterWriteContext context)
+    internal static IList<StringWithQualityHeaderValue> GetAcceptCharsetHeaderValues(
+        OutputFormatterWriteContext context
+    )
     {
         var request = context.HttpContext.Request;
-        if (StringWithQualityHeaderValue.TryParseList(request.Headers.AcceptCharset, out var result))
+        if (
+            StringWithQualityHeaderValue.TryParseList(request.Headers.AcceptCharset, out var result)
+        )
         {
             return result;
         }
@@ -178,8 +197,13 @@ public abstract class TextOutputFormatter : OutputFormatter
 
     private string GetMediaTypeWithCharset(string mediaType, Encoding encoding)
     {
-        if (string.Equals(encoding.WebName, Encoding.UTF8.WebName, StringComparison.OrdinalIgnoreCase) &&
-            OutputMediaTypeCache.ContainsKey(mediaType))
+        if (
+            string.Equals(
+                encoding.WebName,
+                Encoding.UTF8.WebName,
+                StringComparison.OrdinalIgnoreCase
+            ) && OutputMediaTypeCache.ContainsKey(mediaType)
+        )
         {
             return OutputMediaTypeCache[mediaType];
         }
@@ -187,7 +211,9 @@ public abstract class TextOutputFormatter : OutputFormatter
         return MediaType.ReplaceEncoding(mediaType, encoding);
     }
 
-    private Encoding? MatchAcceptCharacterEncoding(IList<StringWithQualityHeaderValue> acceptCharsetHeaders)
+    private Encoding? MatchAcceptCharacterEncoding(
+        IList<StringWithQualityHeaderValue> acceptCharsetHeaders
+    )
     {
         if (acceptCharsetHeaders != null && acceptCharsetHeaders.Count > 0)
         {
@@ -200,8 +226,10 @@ public abstract class TextOutputFormatter : OutputFormatter
                     for (var j = 0; j < SupportedEncodings.Count; j++)
                     {
                         var encoding = SupportedEncodings[j];
-                        if (charset.Equals(encoding.WebName, StringComparison.OrdinalIgnoreCase) ||
-                            charset.Equals("*", StringComparison.Ordinal))
+                        if (
+                            charset.Equals(encoding.WebName, StringComparison.OrdinalIgnoreCase)
+                            || charset.Equals("*", StringComparison.Ordinal)
+                        )
                         {
                             return encoding;
                         }
@@ -248,7 +276,10 @@ public abstract class TextOutputFormatter : OutputFormatter
             else
             {
                 // Doing an insertion sort.
-                var position = sorted.BinarySearch(value, StringWithQualityHeaderValueComparer.QualityComparer);
+                var position = sorted.BinarySearch(
+                    value,
+                    StringWithQualityHeaderValueComparer.QualityComparer
+                );
                 if (position >= 0)
                 {
                     sorted.Insert(position + 1, value);

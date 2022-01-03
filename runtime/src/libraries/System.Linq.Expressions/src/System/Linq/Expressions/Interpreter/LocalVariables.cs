@@ -41,7 +41,10 @@ namespace System.Linq.Expressions.Interpreter
         }
 
         public override string ToString() =>
-            string.Create(CultureInfo.InvariantCulture, $"{Index}: {(IsBoxed ? "boxed" : null)} {(InClosure ? "in closure" : null)}");
+            string.Create(
+                CultureInfo.InvariantCulture,
+                $"{Index}: {(IsBoxed ? "boxed" : null)} {(InClosure ? "in closure" : null)}"
+            );
     }
 
     internal readonly struct LocalDefinition
@@ -78,17 +81,20 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class LocalVariables
     {
-        private readonly HybridReferenceDictionary<ParameterExpression, VariableScope> _variables = new HybridReferenceDictionary<ParameterExpression, VariableScope>();
+        private readonly HybridReferenceDictionary<ParameterExpression, VariableScope> _variables =
+            new HybridReferenceDictionary<ParameterExpression, VariableScope>();
         private Dictionary<ParameterExpression, LocalVariable>? _closureVariables;
 
-        private int _localCount, _maxLocalCount;
+        private int _localCount,
+            _maxLocalCount;
 
         public LocalDefinition DefineLocal(ParameterExpression variable, int start)
         {
             var result = new LocalVariable(_localCount++, closure: false);
             _maxLocalCount = Math.Max(_localCount, _maxLocalCount);
 
-            VariableScope? existing, newScope;
+            VariableScope? existing,
+                newScope;
             if (_variables.TryGetValue(variable, out existing))
             {
                 newScope = new VariableScope(result, start, existing);
@@ -150,7 +156,10 @@ namespace System.Linq.Expressions.Interpreter
 
         public int LocalCount => _maxLocalCount;
 
-        public bool TryGetLocalOrClosure(ParameterExpression var, [NotNullWhen(true)] out LocalVariable? local)
+        public bool TryGetLocalOrClosure(
+            ParameterExpression var,
+            [NotNullWhen(true)] out LocalVariable? local
+        )
         {
             if (_variables.TryGetValue(var, out VariableScope? scope))
             {
@@ -169,7 +178,8 @@ namespace System.Linq.Expressions.Interpreter
         /// <summary>
         /// Gets the variables which are defined in an outer scope and available within the current scope.
         /// </summary>
-        internal Dictionary<ParameterExpression, LocalVariable>? ClosureVariables => _closureVariables;
+        internal Dictionary<ParameterExpression, LocalVariable>? ClosureVariables =>
+            _closureVariables;
 
         internal LocalVariable AddClosureVariable(ParameterExpression variable)
         {

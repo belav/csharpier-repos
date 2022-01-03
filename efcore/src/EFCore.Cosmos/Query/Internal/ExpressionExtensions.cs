@@ -24,8 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         {
             for (var i = 0; i < expressions.Length; i++)
             {
-                if (expressions[i] is SqlExpression sql
-                    && sql.TypeMapping != null)
+                if (expressions[i] is SqlExpression sql && sql.TypeMapping != null)
                 {
                     return sql.TypeMapping;
                 }

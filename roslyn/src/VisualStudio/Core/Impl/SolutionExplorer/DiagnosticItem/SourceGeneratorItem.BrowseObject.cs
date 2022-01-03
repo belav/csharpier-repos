@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.Path))]
             public string? Path => _sourceGeneratorItem.AnalyzerReference.FullPath;
 
-            public override string GetClassName() => SolutionExplorerShim.Source_Generator_Properties;
+            public override string GetClassName() =>
+                SolutionExplorerShim.Source_Generator_Properties;
             public override string GetComponentName() => TypeName;
         }
     }

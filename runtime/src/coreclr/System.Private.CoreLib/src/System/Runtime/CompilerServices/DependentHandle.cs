@@ -45,11 +45,9 @@ namespace System.Runtime.CompilerServices
         public object? GetPrimaryAndSecondary(out object? secondary) =>
             nGetPrimaryAndSecondary(_handle, out secondary);
 
-        public void SetPrimary(object? primary) =>
-            nSetPrimary(_handle, primary);
+        public void SetPrimary(object? primary) => nSetPrimary(_handle, primary);
 
-        public void SetSecondary(object? secondary) =>
-            nSetSecondary(_handle, secondary);
+        public void SetSecondary(object? secondary) => nSetSecondary(_handle, secondary);
 
         // Forces dependentHandle back to non-allocated state (if not already there)
         // and frees the handle if needed.
@@ -70,7 +68,10 @@ namespace System.Runtime.CompilerServices
         private static extern object? nGetPrimary(IntPtr dependentHandle);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern object? nGetPrimaryAndSecondary(IntPtr dependentHandle, out object? secondary);
+        private static extern object? nGetPrimaryAndSecondary(
+            IntPtr dependentHandle,
+            out object? secondary
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern void nSetPrimary(IntPtr dependentHandle, object? primary);

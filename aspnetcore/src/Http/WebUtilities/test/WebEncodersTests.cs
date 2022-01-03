@@ -8,7 +8,6 @@ namespace Microsoft.AspNetCore.WebUtilities;
 
 public class WebEncodersTests
 {
-
     [Theory]
     [InlineData("", 1, 0)]
     [InlineData("", 0, 1)]
@@ -18,10 +17,12 @@ public class WebEncodersTests
     public void Base64UrlDecode_BadOffsets(string input, int offset, int count)
     {
         // Act & assert
-        Assert.ThrowsAny<ArgumentException>(() =>
-        {
-            var retVal = WebEncoders.Base64UrlDecode(input, offset, count);
-        });
+        Assert.ThrowsAny<ArgumentException>(
+            () =>
+            {
+                var retVal = WebEncoders.Base64UrlDecode(input, offset, count);
+            }
+        );
     }
 
     [Theory]
@@ -36,10 +37,12 @@ public class WebEncodersTests
         byte[] input = new byte[inputLength];
 
         // Act & assert
-        Assert.ThrowsAny<ArgumentException>(() =>
-        {
-            var retVal = WebEncoders.Base64UrlEncode(input, offset, count);
-        });
+        Assert.ThrowsAny<ArgumentException>(
+            () =>
+            {
+                var retVal = WebEncoders.Base64UrlEncode(input, offset, count);
+            }
+        );
     }
 
     [Fact]

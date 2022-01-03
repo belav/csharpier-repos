@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-// Any reference to Common.cs should also include Kernel32.cs because 
+// Any reference to Common.cs should also include Kernel32.cs because
 // SafeHandleZeroIsInvalid (from Common.cs) uses CloseHandle (from Kernel32.cs)
 namespace Microsoft.Web.Management.PInvoke.Kernel32
 {
@@ -37,19 +37,14 @@ namespace Microsoft.Web.Management.PInvoke.Kernel32
         {
             get
             {
-                return
-                    wProductType == OSProductType.VER_NT_SERVER ||
-                    wProductType == OSProductType.VER_NT_DOMAIN_CONTROLLER;
+                return wProductType == OSProductType.VER_NT_SERVER
+                    || wProductType == OSProductType.VER_NT_DOMAIN_CONTROLLER;
             }
         }
 
         public bool IsClient
         {
-            get
-            {
-                return
-                    wProductType == OSProductType.VER_NT_WORKSTATION;
-            }
+            get { return wProductType == OSProductType.VER_NT_WORKSTATION; }
         }
     }
 
@@ -73,7 +68,11 @@ namespace Microsoft.Web.Management.PInvoke.Kernel32
 
         [DllImport("kernel32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        [SuppressMessage("Microsoft.Usage", "CA2205:UseManagedEquivalentsOfWin32Api", Justification = "GetVersionEx returns more information")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2205:UseManagedEquivalentsOfWin32Api",
+            Justification = "GetVersionEx returns more information"
+        )]
         private static extern bool GetVersionEx(ref OSVERSIONINFOEX osVersionInfo);
 
         [DllImport("kernel32.dll", ExactSpelling = true)]
@@ -82,7 +81,13 @@ namespace Microsoft.Web.Management.PInvoke.Kernel32
         // WARNING: Vista+ ONLY
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool GetProductInfo(uint dwOSMajorVersion, uint dwOSMinorVersion, uint dwSpMajorVersion, uint spMinorVersion, out uint pdwReturnedProductType);
+        internal static extern bool GetProductInfo(
+            uint dwOSMajorVersion,
+            uint dwOSMinorVersion,
+            uint dwSpMajorVersion,
+            uint spMinorVersion,
+            out uint pdwReturnedProductType
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -94,6 +99,11 @@ namespace Microsoft.Web.Management.PInvoke.Kernel32
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool WritePrivateProfileString(string applicationName, string keyName, string stringValue, string fileName);
+        public static extern bool WritePrivateProfileString(
+            string applicationName,
+            string keyName,
+            string stringValue,
+            string fileName
+        );
     }
 }

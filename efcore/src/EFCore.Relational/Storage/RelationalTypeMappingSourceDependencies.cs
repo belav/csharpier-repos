@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </remarks>
         [EntityFrameworkInternal]
         public RelationalTypeMappingSourceDependencies(
-            IEnumerable<IRelationalTypeMappingSourcePlugin> plugins)
+            IEnumerable<IRelationalTypeMappingSourcePlugin> plugins
+        )
         {
             Plugins = plugins;
         }

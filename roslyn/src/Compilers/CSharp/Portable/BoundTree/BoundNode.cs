@@ -52,8 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// the target type is known.
             /// </summary>
             WasConverted = 1 << 8,
-
-            AttributesPreservedInClone = HasErrors | CompilerGenerated | IsSuppressed | WasConverted,
+            AttributesPreservedInClone =
+                HasErrors | CompilerGenerated | IsSuppressed | WasConverted,
         }
 
         protected new BoundNode MemberwiseClone()
@@ -66,17 +66,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected BoundNode(BoundKind kind, SyntaxNode syntax)
         {
             Debug.Assert(
-                kind == BoundKind.SequencePoint ||
-                kind == BoundKind.SequencePointExpression ||
-                kind == (BoundKind)byte.MaxValue || // used in SpillSequenceSpiller
-                syntax != null);
+                kind == BoundKind.SequencePoint
+                    || kind == BoundKind.SequencePointExpression
+                    || kind == (BoundKind)byte.MaxValue
+                    || // used in SpillSequenceSpiller
+                    syntax != null
+            );
 
             _kind = kind;
             this.Syntax = syntax;
         }
 
-        protected BoundNode(BoundKind kind, SyntaxNode syntax, bool hasErrors)
-            : this(kind, syntax)
+        protected BoundNode(BoundKind kind, SyntaxNode syntax, bool hasErrors) : this(kind, syntax)
         {
             if (hasErrors)
             {
@@ -117,10 +118,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool HasErrors
         {
-            get
-            {
-                return (_attributes & BoundNodeAttributes.HasErrors) != 0;
-            }
+            get { return (_attributes & BoundNodeAttributes.HasErrors) != 0; }
             private set
             {
                 if (value)
@@ -129,18 +127,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else
                 {
-                    Debug.Assert((_attributes & BoundNodeAttributes.HasErrors) == 0,
-                        "HasErrors flag should not be reset here");
+                    Debug.Assert(
+                        (_attributes & BoundNodeAttributes.HasErrors) == 0,
+                        "HasErrors flag should not be reset here"
+                    );
                 }
             }
         }
 
         public SyntaxTree? SyntaxTree
         {
-            get
-            {
-                return Syntax?.SyntaxTree;
-            }
+            get { return Syntax?.SyntaxTree; }
         }
 
         protected void CopyAttributes(BoundNode original)
@@ -169,8 +166,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal set
             {
 #if DEBUG
-                Debug.Assert((_attributes & BoundNodeAttributes.WasCompilerGeneratedIsChecked) == 0,
-                    "compiler generated flag should not be set after reading it");
+                Debug.Assert(
+                    (_attributes & BoundNodeAttributes.WasCompilerGeneratedIsChecked) == 0,
+                    "compiler generated flag should not be set after reading it"
+                );
 #endif
 
                 if (value)
@@ -179,20 +178,24 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else
                 {
-                    Debug.Assert((_attributes & BoundNodeAttributes.CompilerGenerated) == 0,
-                        "compiler generated flag should not be reset here");
+                    Debug.Assert(
+                        (_attributes & BoundNodeAttributes.CompilerGenerated) == 0,
+                        "compiler generated flag should not be reset here"
+                    );
                 }
             }
         }
 
-        // PERF: it is very uncommon for a flag being forcibly reset 
-        //       so we do not support it in general (making the commonly used implementation simpler) 
+        // PERF: it is very uncommon for a flag being forcibly reset
+        //       so we do not support it in general (making the commonly used implementation simpler)
         //       and instead have a special method to do resetting.
         public void ResetCompilerGenerated(bool newCompilerGenerated)
         {
 #if DEBUG
-            Debug.Assert((_attributes & BoundNodeAttributes.WasCompilerGeneratedIsChecked) == 0,
-                "compiler generated flag should not be set after reading it");
+            Debug.Assert(
+                (_attributes & BoundNodeAttributes.WasCompilerGeneratedIsChecked) == 0,
+                "compiler generated flag should not be set after reading it"
+            );
 #endif
             if (newCompilerGenerated)
             {
@@ -224,15 +227,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             set
             {
 #if DEBUG
-                Debug.Assert((_attributes & BoundNodeAttributes.WasTopLevelNullabilityChecked) == 0,
-                    "bound node nullability should not be set after reading it");
+                Debug.Assert(
+                    (_attributes & BoundNodeAttributes.WasTopLevelNullabilityChecked) == 0,
+                    "bound node nullability should not be set after reading it"
+                );
 #endif
-                _attributes &= ~(BoundNodeAttributes.TopLevelAnnotationMask | BoundNodeAttributes.TopLevelFlowStateMaybeNull);
+                _attributes &= ~(
+                    BoundNodeAttributes.TopLevelAnnotationMask
+                    | BoundNodeAttributes.TopLevelFlowStateMaybeNull
+                );
 
                 _attributes |= value.Annotation switch
                 {
-                    CodeAnalysis.NullableAnnotation.Annotated => BoundNodeAttributes.TopLevelAnnotated,
-                    CodeAnalysis.NullableAnnotation.NotAnnotated => BoundNodeAttributes.TopLevelNotAnnotated,
+                    CodeAnalysis.NullableAnnotation.Annotated
+                      => BoundNodeAttributes.TopLevelAnnotated,
+                    CodeAnalysis.NullableAnnotation.NotAnnotated
+                      => BoundNodeAttributes.TopLevelNotAnnotated,
                     CodeAnalysis.NullableAnnotation.None => BoundNodeAttributes.TopLevelNone,
                     var a => throw ExceptionUtilities.UnexpectedValue(a),
                 };
@@ -268,13 +278,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var annotation = (_attributes & BoundNodeAttributes.TopLevelAnnotationMask) switch
                 {
-                    BoundNodeAttributes.TopLevelAnnotated => CodeAnalysis.NullableAnnotation.Annotated,
-                    BoundNodeAttributes.TopLevelNotAnnotated => CodeAnalysis.NullableAnnotation.NotAnnotated,
+                    BoundNodeAttributes.TopLevelAnnotated
+                      => CodeAnalysis.NullableAnnotation.Annotated,
+                    BoundNodeAttributes.TopLevelNotAnnotated
+                      => CodeAnalysis.NullableAnnotation.NotAnnotated,
                     BoundNodeAttributes.TopLevelNone => CodeAnalysis.NullableAnnotation.None,
                     var mask => throw ExceptionUtilities.UnexpectedValue(mask)
                 };
 
-                var flowState = (_attributes & BoundNodeAttributes.TopLevelFlowStateMaybeNull) == 0 ? CodeAnalysis.NullableFlowState.NotNull : CodeAnalysis.NullableFlowState.MaybeNull;
+                var flowState =
+                    (_attributes & BoundNodeAttributes.TopLevelFlowStateMaybeNull) == 0
+                        ? CodeAnalysis.NullableFlowState.NotNull
+                        : CodeAnalysis.NullableFlowState.MaybeNull;
 
                 return new NullabilityInfo(annotation, flowState);
             }
@@ -282,13 +297,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public bool IsSuppressed
         {
-            get
-            {
-                return (_attributes & BoundNodeAttributes.IsSuppressed) != 0;
-            }
+            get { return (_attributes & BoundNodeAttributes.IsSuppressed) != 0; }
             protected set
             {
-                Debug.Assert((_attributes & BoundNodeAttributes.IsSuppressed) == 0, "flag should not be set twice or reset");
+                Debug.Assert(
+                    (_attributes & BoundNodeAttributes.IsSuppressed) == 0,
+                    "flag should not be set twice or reset"
+                );
                 if (value)
                 {
                     _attributes |= BoundNodeAttributes.IsSuppressed;
@@ -304,13 +319,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool WasConverted
         {
-            get
-            {
-                return (_attributes & BoundNodeAttributes.WasConverted) != 0;
-            }
+            get { return (_attributes & BoundNodeAttributes.WasConverted) != 0; }
             protected set
             {
-                Debug.Assert((_attributes & BoundNodeAttributes.WasConverted) == 0, "WasConverted flag should not be set twice or reset");
+                Debug.Assert(
+                    (_attributes & BoundNodeAttributes.WasConverted) == 0,
+                    "WasConverted flag should not be set twice or reset"
+                );
                 if (value)
                 {
                     _attributes |= BoundNodeAttributes.WasConverted;
@@ -321,10 +336,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public BoundKind Kind
         {
-            get
-            {
-                return _kind;
-            }
+            get { return _kind; }
         }
 
         public virtual BoundNode? Accept(BoundTreeVisitor visitor)
@@ -385,7 +397,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 #endif
         }
 
-        public static Conversion GetConversion(BoundExpression? conversion, BoundValuePlaceholder? placeholder)
+        public static Conversion GetConversion(
+            BoundExpression? conversion,
+            BoundValuePlaceholder? placeholder
+        )
         {
             switch (conversion)
             {
@@ -408,9 +423,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         BoundConversion next;
 
-                        if ((object)boundConversion.Operand == placeholder ||
-                            (object)(next = (BoundConversion)boundConversion.Operand).Operand == placeholder ||
-                            (object)((BoundConversion)next.Operand).Operand == placeholder)
+                        if (
+                            (object)boundConversion.Operand == placeholder
+                            || (object)(next = (BoundConversion)boundConversion.Operand).Operand
+                                == placeholder
+                            || (object)((BoundConversion)next.Operand).Operand == placeholder
+                        )
                         {
                             return boundConversion.Conversion;
                         }
@@ -418,7 +436,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     goto default;
 
-                case BoundValuePlaceholder valuePlaceholder when (object)valuePlaceholder == placeholder:
+                case BoundValuePlaceholder valuePlaceholder
+                      when (object)valuePlaceholder == placeholder:
                     return Conversion.Identity;
 
                 default:
@@ -427,13 +446,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
 #if DEBUG
-        private class LocalsScanner : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+        private class LocalsScanner
+            : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
         {
-            public readonly PooledHashSet<LocalSymbol> DeclaredLocals = PooledHashSet<LocalSymbol>.GetInstance();
+            public readonly PooledHashSet<LocalSymbol> DeclaredLocals =
+                PooledHashSet<LocalSymbol>.GetInstance();
 
-            private LocalsScanner()
-            {
-            }
+            private LocalsScanner() { }
 
             public static void CheckLocalsDefined(BoundNode root)
             {

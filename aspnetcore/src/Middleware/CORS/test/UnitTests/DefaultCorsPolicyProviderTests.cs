@@ -22,7 +22,10 @@ public class DefaultPolicyProviderTests
         var policyProvider = new DefaultCorsPolicyProvider(corsOptions);
 
         // Act
-        var actualPolicy = await policyProvider.GetPolicyAsync(new DefaultHttpContext(), policyName: null);
+        var actualPolicy = await policyProvider.GetPolicyAsync(
+            new DefaultHttpContext(),
+            policyName: null
+        );
 
         // Assert
         Assert.Same(policy, actualPolicy);
@@ -42,7 +45,10 @@ public class DefaultPolicyProviderTests
         var policyProvider = new DefaultCorsPolicyProvider(corsOptions);
 
         // Act
-        var actualPolicy = await policyProvider.GetPolicyAsync(new DefaultHttpContext(), policyName);
+        var actualPolicy = await policyProvider.GetPolicyAsync(
+            new DefaultHttpContext(),
+            policyName
+        );
 
         // Assert
         Assert.Same(policy, actualPolicy);

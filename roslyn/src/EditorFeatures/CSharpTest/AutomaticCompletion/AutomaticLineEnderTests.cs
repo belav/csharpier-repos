@@ -22,127 +22,162 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Creation()
         {
-            Test(@"
-$$", "$$");
+            Test(
+                @"
+$$",
+                "$$"
+            );
         }
 
         [WpfFact]
         public void Usings()
         {
-            Test(@"using System;
-$$", @"using System$$");
+            Test(
+                @"using System;
+$$",
+                @"using System$$"
+            );
         }
 
         [WpfFact]
         public void Namespace()
         {
-            Test(@"namespace {}
-$$", @"namespace {$$}");
+            Test(
+                @"namespace {}
+$$",
+                @"namespace {$$}"
+            );
         }
 
         [WpfFact]
         public void Class()
         {
-            Test(@"class {}
-$$", "class {$$}");
+            Test(
+                @"class {}
+$$",
+                "class {$$}"
+            );
         }
 
         [WpfFact]
         public void Method()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     void Method() {$$}
-}", @"class C
+}",
+                @"class C
 {
     void Method() {$$}
-}", assertNextHandlerInvoked: true);
+}",
+                assertNextHandlerInvoked: true
+            );
         }
 
         [WpfFact]
         public void Field()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     private readonly int i = 3;
     $$
-}", @"class C
+}",
+                @"class C
 {
     pri$$vate re$$adonly i$$nt i = 3$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void EventField()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     event System.EventHandler e = null;
     $$
-}", @"class C
+}",
+                @"class C
 {
     e$$vent System.Even$$tHandler e$$ = null$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void Field2()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     private readonly int i;
     $$
-}", @"class C
+}",
+                @"class C
 {
     private readonly int i$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void EventField2()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     event System.EventHandler e
     {
         $$
     }
-}", @"class C
+}",
+                @"class C
 {
     eve$$nt System.E$$ventHandler e$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void Field3()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     private readonly int
         $$
-}", @"class C
+}",
+                @"class C
 {
     private readonly int$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void EventField3()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     event System.EventHandler
         $$
-}", @"class C
+}",
+                @"class C
 {
     event System.EventHandler$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void EmbededStatement()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     void Method()
     {
@@ -151,19 +186,22 @@ $$", "class {$$}");
             $$
         }
     }
-}", @"class C
+}",
+                @"class C
 {
     void Method()
     {
         if (true) $$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void EmbededStatement1()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     void Method()
     {
@@ -171,20 +209,23 @@ $$", "class {$$}");
             Console.WriteLine()
                 $$
     }
-}", @"class C
+}",
+                @"class C
 {
     void Method()
     {
         if (true) 
             Console.WriteLine()$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void EmbededStatement2()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     void Method()
     {
@@ -192,21 +233,24 @@ $$", "class {$$}");
             Console.WriteLine();
         $$
     }
-}", @"class C
+}",
+                @"class C
 {
     void Method()
     {
         if (true) 
             Console.WriteLine($$)
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         [WorkItem(57323, "https://github.com/dotnet/roslyn/issues/57323")]
         public void EmbededStatementFollowedByStatement()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     void Method()
     {
@@ -221,7 +265,8 @@ $$", "class {$$}");
         {
         }
     }
-}", @"class C
+}",
+                @"class C
 {
     void Method()
     {
@@ -233,84 +278,98 @@ $$", "class {$$}");
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void Statement()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     void Method()
     {
         int i;
         $$
     }
-}", @"class C
+}",
+                @"class C
 {
     void Method()
     {
         int i$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void Statement1()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     void Method()
     {
         int
             $$
     }
-}", @"class C
+}",
+                @"class C
 {
     void Method()
     {
         int$$
     }
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void ExpressionBodiedMethod()
         {
-            Test(@"class T
+            Test(
+                @"class T
 {
     int M() => 1 + 2;
     $$
-}", @"class T
+}",
+                @"class T
 {
     int M() => 1 + 2$$
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void ExpressionBodiedOperator()
         {
-            Test(@"class Complex
+            Test(
+                @"class Complex
 {
     int real; int imaginary;
     public static Complex operator +(Complex a, Complex b) => a.Add(b.real + 1);
     $$
     private Complex Add(int b) => null;
-}", @"class Complex
+}",
+                @"class Complex
 {
     int real; int imaginary;
     public static Complex operator +(Complex a, Complex b) => a.Add(b.real + 1)$$
     private Complex Add(int b) => null;
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void ExpressionBodiedConversionOperator()
         {
-            Test(@"using System;
+            Test(
+                @"using System;
 public struct DBBool
 {
     public static readonly DBBool dbFalse = new DBBool(-1);
@@ -323,7 +382,8 @@ public struct DBBool
 
     public static implicit operator DBBool(bool x) => x ? new DBBool(1) : dbFalse;
     $$
-}", @"using System;
+}",
+                @"using System;
 public struct DBBool
 {
     public static readonly DBBool dbFalse = new DBBool(-1);
@@ -335,46 +395,54 @@ public struct DBBool
     }
 
     public static implicit operator DBBool(bool x) => x ? new DBBool(1) : dbFalse$$
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void ExpressionBodiedProperty()
         {
-            Test(@"class T
+            Test(
+                @"class T
 {
     int P1 => 1 + 2;
     $$
-}", @"class T
+}",
+                @"class T
 {
     int P1 => 1 + 2$$
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void ExpressionBodiedIndexer()
         {
-            Test(@"using System;
+            Test(
+                @"using System;
 class SampleCollection<T>
 {
     private T[] arr = new T[100];
     public T this[int i] => i > 0 ? arr[i + 1] : arr[i + 2];
     $$
-}", @"using System;
+}",
+                @"using System;
 class SampleCollection<T>
 {
     private T[] arr = new T[100];
     public T this[int i] => i > 0 ? arr[i + 1] : arr[i + 2]$$
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void ExpressionBodiedMethodWithBlockBodiedAnonymousMethodExpression()
         {
-            Test(@"using System;
+            Test(
+                @"using System;
 class TestClass
 {
     Func<int, int> Y() => delegate (int x)
@@ -382,37 +450,43 @@ class TestClass
         return 9;
     };
     $$
-}", @"using System;
+}",
+                @"using System;
 class TestClass
 {
     Func<int, int> Y() => delegate (int x)
     {
         return 9;
     }$$
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void ExpressionBodiedMethodWithSingleLineBlockBodiedAnonymousMethodExpression()
         {
-            Test(@"using System;
+            Test(
+                @"using System;
 class TestClass
 {
     Func<int, int> Y() => delegate (int x) { return 9; };
     $$
-}", @"using System;
+}",
+                @"using System;
 class TestClass
 {
     Func<int, int> Y() => delegate (int x) { return 9; }$$
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void ExpressionBodiedMethodWithBlockBodiedSimpleLambdaExpression()
         {
-            Test(@"using System;
+            Test(
+                @"using System;
 class TestClass
 {
     Func<int, int> Y() => f =>
@@ -420,37 +494,43 @@ class TestClass
         return f * 9;
     };
     $$
-}", @"using System;
+}",
+                @"using System;
 class TestClass
 {
     Func<int, int> Y() => f =>
     {
         return f * 9;
     }$$
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void ExpressionBodiedMethodWithExpressionBodiedSimpleLambdaExpression()
         {
-            Test(@"using System;
+            Test(
+                @"using System;
 class TestClass
 {
     Func<int, int> Y() => f => f * 9;
     $$
-}", @"using System;
+}",
+                @"using System;
 class TestClass
 {
     Func<int, int> Y() => f => f * 9$$
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void ExpressionBodiedMethodWithBlockBodiedAnonymousMethodExpressionInMethodArgs()
         {
-            Test(@"using System;
+            Test(
+                @"using System;
 class TestClass
 {
     public int Prop => Method1(delegate ()
@@ -460,7 +540,8 @@ class TestClass
     $$
 
     private int Method1(Func<int> p) => null;
-}", @"using System;
+}",
+                @"using System;
 class TestClass
 {
     public int Prop => Method1(delegate()
@@ -469,44 +550,52 @@ class TestClass
     })$$
 
     private int Method1(Func<int> p) => null;
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void Format_SimpleExpressionBodiedMember()
         {
-            Test(@"class T
+            Test(
+                @"class T
 {
     int M() => 1 + 2;
     $$
-}", @"class T
+}",
+                @"class T
 {
          int   M()   =>    1       +     2$$
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void Format_ExpressionBodiedMemberWithSingleLineBlock()
         {
-            Test(@"using System;
+            Test(
+                @"using System;
 class TestClass
 {
     Func<int, int> Y() => delegate (int x) { return 9; };
     $$
-}", @"using System;
+}",
+                @"using System;
 class TestClass
 {
                 Func<int, int>  Y ()   =>   delegate(int x) { return     9  ; }$$
-}");
+}"
+            );
         }
 
         [WorkItem(3944, "https://github.com/dotnet/roslyn/issues/3944")]
         [WpfFact]
         public void Format_ExpressionBodiedMemberWithMultiLineBlock()
         {
-            Test(@"using System;
+            Test(
+                @"using System;
 class TestClass
 {
     Func<int, int> Y() => delegate (int x)
@@ -514,120 +603,145 @@ class TestClass
         return 9;
     };
     $$
-}", @"using System;
+}",
+                @"using System;
 class TestClass
 {
     Func<int, int> Y() => delegate(int x)
     {
         return 9;
         }$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void Format_Statement()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     void Method()
     {
         int i = 1;
         $$
     }
-}", @"class C
+}",
+                @"class C
 {
     void Method()
     {
                     int         i           =           1               $$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void Format_Using()
         {
-            Test(@"using System.Linq;
-$$", @"         using           System          .                   Linq            $$");
+            Test(
+                @"using System.Linq;
+$$",
+                @"         using           System          .                   Linq            $$"
+            );
         }
 
         [WpfFact]
         public void Format_Using2()
         {
-            Test(@"using
+            Test(
+                @"using
     System.Linq;
-$$", @"         using           
-             System          .                   Linq            $$");
+$$",
+                @"         using           
+             System          .                   Linq            $$"
+            );
         }
 
         [WpfFact]
         public void Format_Field()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     int i = 1;
     $$
-}", @"class C
+}",
+                @"class C
 {
             int         i           =               1           $$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void Statement_Trivia()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     void goo()
     {
         goo(); //comment
         $$
     }
-}", @"class C
+}",
+                @"class C
 {
     void goo()
     {
         goo()$$ //comment
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TrailingText_Negative()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     event System.EventHandler e = null  int i = 2;
     $$
-}", @"class C
+}",
+                @"class C
 {
     event System.EventHandler e = null$$  int i = 2;  
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void CompletionSetUp()
         {
-            Test(@"class Program
+            Test(
+                @"class Program
 {
     object goo(object o)
     {
         return goo();
         $$
     }
-}", @"class Program
+}",
+                @"class Program
 {
     object goo(object o)
     {
         return goo($$)
     }
-}", completionActive: true);
+}",
+                completionActive: true
+            );
         }
 
         [WorkItem(530352, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530352")]
         [WpfFact]
         public void EmbededStatement3()
         {
-            Test(@"class Program
+            Test(
+                @"class Program
 {
     void Method()
     {
@@ -636,267 +750,316 @@ $$", @"         using
             $$
         }
     }
-}", @"class Program
+}",
+                @"class Program
 {
     void Method()
     {
         foreach (var x in y$$)
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530716, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530716")]
         [WpfFact]
         public void DontAssertOnMultilineToken()
         {
-            Test(@"interface I
+            Test(
+                @"interface I
 {
     void M(string s = @""""""
 $$
-}", @"interface I
+}",
+                @"interface I
 {
     void M(string s = @""""""$$
-}");
+}"
+            );
         }
 
         [WorkItem(530718, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530718")]
         [WpfFact]
         public void AutomaticLineFormat()
         {
-            Test(@"class C
+            Test(
+                @"class C
 {
     public string P { set; get; }
     $$
-}", @"class C
+}",
+                @"class C
 {
     public string P {set;get;$$}
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void NotAfterExisitingSemicolon()
         {
-            Test(@"class TestClass
+            Test(
+                @"class TestClass
 {
     private int i;
     $$
-}", @"class TestClass
+}",
+                @"class TestClass
 {
     private int i;$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void NotAfterCloseBraceInMethod()
         {
-            Test(@"class TestClass
+            Test(
+                @"class TestClass
 {
     void Test() { }
     $$
-}", @"class TestClass
+}",
+                @"class TestClass
 {
     void Test() { }$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void NotAfterCloseBraceInStatement()
         {
-            Test(@"class TestClass
+            Test(
+                @"class TestClass
 {
     void Test()
     {
         if (true) { }
         $$
     }
-}", @"class TestClass
+}",
+                @"class TestClass
 {
     void Test()
     {
         if (true) { }$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void NotAfterAutoPropertyAccessor()
         {
-            Test(@"class TestClass
+            Test(
+                @"class TestClass
 {
     public int A { get; set }
     $$
-}", @"class TestClass
+}",
+                @"class TestClass
 {
     public int A { get; set$$ }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void NotAfterAutoPropertyDeclaration()
         {
-            Test(@"class TestClass
+            Test(
+                @"class TestClass
 {
     public int A { get; set; }
     $$
-}", @"class TestClass
+}",
+                @"class TestClass
 {
     public int A { get; set; }$$
-}");
+}"
+            );
         }
 
         [WorkItem(150480, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/150480")]
         [WpfFact]
         public void DelegatedInEmptyBlock()
         {
-            Test(@"class TestClass
+            Test(
+                @"class TestClass
 {
     void Method()
     {
         try { $$}
     }
-}", @"class TestClass
+}",
+                @"class TestClass
 {
     void Method()
     {
         try { $$}
     }
-}", assertNextHandlerInvoked: true);
+}",
+                assertNextHandlerInvoked: true
+            );
         }
 
         [WorkItem(150480, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/150480")]
         [WpfFact]
         public void DelegatedInEmptyBlock2()
         {
-            Test(@"class TestClass
+            Test(
+                @"class TestClass
 {
     void Method()
     {
         if (true) { $$}
     }
-}", @"class TestClass
+}",
+                @"class TestClass
 {
     void Method()
     {
         if (true) { $$}
     }
-}", assertNextHandlerInvoked: true);
+}",
+                assertNextHandlerInvoked: true
+            );
         }
 
         [WorkItem(150480, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/150480")]
         [WpfFact]
         public void NotDelegatedOutsideEmptyBlock()
         {
-            Test(@"class TestClass
+            Test(
+                @"class TestClass
 {
     void Method()
     {
         try { }
         $$
     }
-}", @"class TestClass
+}",
+                @"class TestClass
 {
     void Method()
     {
         try { }$$
     }
-}");
+}"
+            );
         }
 
         [WorkItem(150480, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/150480")]
         [WpfFact]
         public void NotDelegatedAfterOpenBraceAndMissingCloseBrace()
         {
-            Test(@"class TestClass
+            Test(
+                @"class TestClass
 {
     void Method()
     {
         try {
             $$
     }
-}", @"class TestClass
+}",
+                @"class TestClass
 {
     void Method()
     {
         try {$$
     }
-}");
+}"
+            );
         }
 
         [WorkItem(150480, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/150480")]
         [WpfFact]
         public void NotDelegatedInNonEmptyBlock()
         {
-            Test(@"class TestClass
+            Test(
+                @"class TestClass
 {
     void Method()
     {
         try { x }
         $$
     }
-}", @"class TestClass
+}",
+                @"class TestClass
 {
     void Method()
     {
         try { x$$ }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(150480, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/150480")]
         [WpfFact]
         public void NotDelegatedAfterOpenBraceInAnonymousObjectCreationExpression()
         {
-            Test(@"class TestClass
+            Test(
+                @"class TestClass
 {
     void Method()
     {
         var pet = new { };
         $$
     }
-}", @"class TestClass
+}",
+                @"class TestClass
 {
     void Method()
     {
         var pet = new { $$}
     }
-}");
+}"
+            );
         }
 
         [WorkItem(150480, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/150480")]
         [WpfFact]
         public void NotDelegatedAfterOpenBraceObjectCreationExpression()
         {
-            Test(@"class TestClass
+            Test(
+                @"class TestClass
 {
     void Method()
     {
         var pet = new List<int>();
         $$
     }
-}", @"class TestClass
+}",
+                @"class TestClass
 {
     void Method()
     {
         var pet = new List<int> { $$}
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestMulitpleNamespace()
         {
-            Test($@"
+            Test(
+                $@"
 namespace Bar2
 {{
     $$
 }}
 namespace Bar
 {{
-}}", $@"
+}}",
+                $@"
 namespace B$$ar2$$
 namespace Bar
 {{
-}}");
+}}"
+            );
         }
 
         [WpfTheory]
@@ -908,12 +1071,15 @@ namespace Bar
         [InlineData("interface")]
         public void TestEmptyBaseTypeDeclarationAndNamespace(string typeKeyword)
         {
-            Test($@"
+            Test(
+                $@"
 public {typeKeyword} Bar
 {{
     $$
-}}", $@"
-pu$$blic {typeKeyword} $$Bar$$");
+}}",
+                $@"
+pu$$blic {typeKeyword} $$Bar$$"
+            );
         }
 
         [WpfTheory]
@@ -924,7 +1090,8 @@ pu$$blic {typeKeyword} $$Bar$$");
         [InlineData("interface")]
         public void TestMultipleBaseTypeDeclaration(string typeKeyword)
         {
-            Test($@"
+            Test(
+                $@"
 public {typeKeyword} Bar2
 {{
     $$
@@ -932,17 +1099,20 @@ public {typeKeyword} Bar2
 
 public {typeKeyword} Bar
 {{
-}}", $@"
+}}",
+                $@"
 pub$$lic {typeKeyword} B$$ar2$$
 public {typeKeyword} Bar
 {{
-}}");
+}}"
+            );
         }
 
         [WpfFact]
         public void TestNestedTypeDeclaration()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar1
 {
     public class Bar2
@@ -950,17 +1120,19 @@ public class Bar1
         $$
     }
 }",
-@"
+                @"
 public class Bar1
 {
     pu$$blic cla$$ss B$$ar2$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestNestedNamespace()
         {
-            Test(@"
+            Test(
+                @"
 namespace Bar1
 {
     namespace Bar2
@@ -968,11 +1140,12 @@ namespace Bar1
         $$
     }
 }",
-@"
+                @"
 namespace Bar1
 {
     namespa$$ce $$B$$ar2$$
-}");
+}"
+            );
         }
 
         [WpfTheory]
@@ -984,10 +1157,13 @@ namespace Bar1
         [InlineData("interface")]
         public void TestBaseTypeDeclarationAndNamespaceWithOpenBrace(string typeKeyword)
         {
-            Test($@"
+            Test(
+                $@"
 public {typeKeyword} Bar {{
-    $$", $@"
-pub$$lic {typeKeyword} B$$ar {{$$");
+    $$",
+                $@"
+pub$$lic {typeKeyword} B$$ar {{$$"
+            );
         }
 
         [WpfTheory]
@@ -999,79 +1175,94 @@ pub$$lic {typeKeyword} B$$ar {{$$");
         [InlineData("interface")]
         public void TestValidTypeDeclarationAndNamespace(string typeKeyword)
         {
-            Test($@"public {typeKeyword} Bar {{}}
+            Test(
+                $@"public {typeKeyword} Bar {{}}
 $$",
-                $@"public {typeKeyword}$$ Ba$$r {{}}$$");
+                $@"public {typeKeyword}$$ Ba$$r {{}}$$"
+            );
         }
 
         [WpfFact]
         public void TestMethod()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     void Main()
     {
         $$
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     v$$oid Ma$$in($$)$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestConstructor()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     void Bar()
     {
         $$
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     v$$oid Ba$$r($$)$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestValidMethodInInterface()
         {
-            Test(@"
+            Test(
+                @"
 public interface Bar
 {
     void Main();
     $$
-}", @"
+}",
+                @"
 public interface Bar
 {
     v$$oid Mai$$n($$)$$;
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestMissingSemicolonMethodInInterface()
         {
-            Test(@"
+            Test(
+                @"
 public interface Bar
 {
     void Main()
         $$
-}", @"
+}",
+                @"
 public interface Bar
 {
     v$$oid Mai$$n($$)$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestValidLocalFunction()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     void Main()
@@ -1081,7 +1272,8 @@ public class Bar
         {
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     void Main()
@@ -1090,13 +1282,15 @@ public class Bar
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestLocalFunction()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     void Main()
@@ -1106,37 +1300,43 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     void Main()
     {
         v$$oid Loca$$l($$)$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestIndexerAsLastElementInClass()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public int this[int i]
     {
         $$
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     p$$ublic in$$t thi$$s[in$$t i]$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestIndexerNotAsLastElementInClass()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public int this[int i]
@@ -1144,37 +1344,43 @@ public class Bar
         $$
     }
     void Main() {}
-}", @"
+}",
+                @"
 public class Bar
 {
     p$$ublic in$$t thi$$s[in$$t i]$$
     void Main() {}
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestValidIndexer()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public int this[int i]
         $$
     {
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     p$$ublic i$$nt thi$$s[in$$t i]$$
     {
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestGetAccessorOfProperty()
         {
-            var initialMarkup = @"
+            var initialMarkup =
+                @"
 public class Bar
 {
     public int P
@@ -1183,7 +1389,8 @@ public class Bar
     }
 }";
 
-            var firstResult = @"
+            var firstResult =
+                @"
 public class Bar
 {
     public int P
@@ -1194,7 +1401,8 @@ public class Bar
         }
     }
 }";
-            var secondResult = @"
+            var secondResult =
+                @"
 public class Bar
 {
     public int P
@@ -1210,7 +1418,8 @@ public class Bar
         [WpfFact]
         public void TestSetAccessorOfProperty()
         {
-            var initialMarkup = @"
+            var initialMarkup =
+                @"
 public class Bar
 {
     public int P
@@ -1218,7 +1427,8 @@ public class Bar
         set$$
     }
 }";
-            var firstResult = @"
+            var firstResult =
+                @"
 public class Bar
 {
     public int P
@@ -1229,7 +1439,8 @@ public class Bar
         }
     }
 }";
-            var secondResult = @"
+            var secondResult =
+                @"
 public class Bar
 {
     public int P
@@ -1245,7 +1456,8 @@ public class Bar
         [WpfFact]
         public void TestGetAccessorOfIndexer()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public int this[int i]
@@ -1255,20 +1467,23 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public int this[int i]
     {
         ge$$t
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestValidGetAccessorOfIndexer()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public int this[int i]
@@ -1279,7 +1494,8 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public int this[int i]
@@ -1289,13 +1505,15 @@ public class Bar
             $$
         }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestNonEmptyGetAccessor()
         {
-            Test(@"
+            Test(
+                @"
 public Class Bar
 {
     public int P
@@ -1323,13 +1541,15 @@ public Class Bar
             }
         }
     }   
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestNonEmptySetAccessor()
         {
-            Test(@"
+            Test(
+                @"
 public Class Bar
 {
     public int P
@@ -1357,13 +1577,15 @@ public Class Bar
             }
         }
     }   
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestSetAccessorOfIndexer()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public int this[int i]
@@ -1374,7 +1596,8 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public int this[int i]
@@ -1382,13 +1605,15 @@ public class Bar
         get;
         se$$t
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestValidSetAccessorOfIndexer()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public int this[int i]
@@ -1400,7 +1625,8 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public int this[int i]
@@ -1411,13 +1637,15 @@ public class Bar
             $$
         }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestAddAccessorInEventDeclaration()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 public class Bar
 {
@@ -1429,7 +1657,8 @@ public class Bar
         }
         remove
     }
-}", @"
+}",
+                @"
 using System;
 public class Bar
 {
@@ -1438,13 +1667,15 @@ public class Bar
         ad$$d
         remove
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestValidAddAccessorInEventDeclaration()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 public class Bar
 {
@@ -1457,7 +1688,8 @@ public class Bar
         }
         remove { }
     }
-}", @"
+}",
+                @"
 using System;
 public class Bar
 {
@@ -1469,13 +1701,15 @@ public class Bar
         }
         remove { }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestRemoveAccessor()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 public class Bar
 {
@@ -1487,7 +1721,8 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 using System;
 public class Bar
 {
@@ -1496,13 +1731,15 @@ public class Bar
         add
         remo$$ve
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestValidRemoveAccessor()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 public class Bar
 {
@@ -1515,7 +1752,8 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 using System;
 public class Bar
 {
@@ -1527,18 +1765,21 @@ public class Bar
             $$
         }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestField()
         {
-            var initialMarkup = @"
+            var initialMarkup =
+                @"
 public class Bar
 {
     p$$ublic i$$nt i$$ii$$
 }";
-            var firstResult = @"
+            var firstResult =
+                @"
 public class Bar
 {
     public int iii
@@ -1546,7 +1787,8 @@ public class Bar
         $$
     }
 }";
-            var secondResult = @"
+            var secondResult =
+                @"
 public class Bar
 {
     public int iii;
@@ -1560,22 +1802,26 @@ public class Bar
         [WpfFact]
         public void TestReadonlyField()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public readonly int iii;
     $$
-}", @"
+}",
+                @"
 public class Bar
 {
     p$$ublic reado$$nly i$$nt i$$ii$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestNonEmptyProperty()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public int Foo
@@ -1583,58 +1829,68 @@ public class Bar
         get { }
         $$
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public int Foo
     {
         $$get$$ { }$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestMulitpleFields()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public int apple, banana;
     $$
-}", @"
+}",
+                @"
 public class Bar
 {
     p$$ublic i$$nt ap$$ple$$, ba$$nana;$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestMultipleEvents()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 public class Bar
 {
     public event EventHandler apple, banana;
     $$
-}", @"
+}",
+                @"
 using System;
 public class Bar
 {
     p$$ublic event EventHandler ap$$ple$$, ba$$nana$$;$$
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestEvent()
         {
-            var initialMarkup = @"
+            var initialMarkup =
+                @"
 using System;
 public class Bar
 {
     pu$$blic e$$vent EventHand$$ler c$$c$$
 }";
-            var firstResult = @"
+            var firstResult =
+                @"
 using System;
 public class Bar
 {
@@ -1643,7 +1899,8 @@ public class Bar
         $$
     }
 }";
-            var secondResult = @"
+            var secondResult =
+                @"
 using System;
 public class Bar
 {
@@ -1657,7 +1914,8 @@ public class Bar
         [WpfFact]
         public void TestNonEmptyEvent()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 public class Bar
 {
@@ -1666,7 +1924,8 @@ public class Bar
         add { }
         $$
     }
-}", @"
+}",
+                @"
 using System;
 public class Bar
 {
@@ -1674,13 +1933,15 @@ public class Bar
     {
         $$add$$ {$$ }$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestObjectCreationExpressionWithParenthesis()
         {
-            var initialMarkup = @"
+            var initialMarkup =
+                @"
 public class Bar
 {
     public void M()
@@ -1694,7 +1955,8 @@ public class Foo
     public int PP { get; set; }
 }";
 
-            var firstResult = @"
+            var firstResult =
+                @"
 public class Bar
 {
     public void M()
@@ -1711,7 +1973,8 @@ public class Foo
     public int PP { get; set; }
 }";
 
-            var secondResult = @"
+            var secondResult =
+                @"
 public class Bar
 {
     public void M()
@@ -1733,7 +1996,8 @@ public class Foo
         [WpfFact]
         public void TestObjectCreationExpressionWithNoParenthesis()
         {
-            var initialMarkUp = @"
+            var initialMarkUp =
+                @"
 public class Bar
 {
     public void M()
@@ -1747,7 +2011,8 @@ public class Foo
     public int PP { get; set; }
 }";
 
-            var firstResult = @"
+            var firstResult =
+                @"
 public class Bar
 {
     public void M()
@@ -1764,7 +2029,8 @@ public class Foo
     public int PP { get; set; }
 }";
 
-            var secondResult = @"
+            var secondResult =
+                @"
 public class Bar
 {
     public void M()
@@ -1786,7 +2052,8 @@ public class Foo
         [WpfFact]
         public void TestObjectCreationExpressionWithCorrectSemicolon()
         {
-            var initialMarkUp = @"
+            var initialMarkUp =
+                @"
 public class Bar
 {
     public void M()
@@ -1800,7 +2067,8 @@ public class Foo
     public int PP { get; set; }
 }";
 
-            var firstResult = @"
+            var firstResult =
+                @"
 public class Bar
 {
     public void M()
@@ -1817,7 +2085,8 @@ public class Foo
     public int PP { get; set; }
 }";
 
-            var secondResult = @"
+            var secondResult =
+                @"
 public class Bar
 {
     public void M()
@@ -1839,7 +2108,8 @@ public class Foo
         [WpfFact]
         public void TestObjectCreationExpressionUsedAsExpression()
         {
-            var initialMarkUp = @"
+            var initialMarkUp =
+                @"
 public class Bar
 {
     public void M()
@@ -1857,7 +2127,8 @@ public class Foo
     public int PP { get; set; }
 }";
 
-            var firstResult = @"
+            var firstResult =
+                @"
 public class Bar
 {
     public void M()
@@ -1878,7 +2149,8 @@ public class Foo
     public int PP { get; set; }
 }";
 
-            var secondResult = @"
+            var secondResult =
+                @"
 public class Bar
 {
     public void M()
@@ -1904,7 +2176,8 @@ public class Foo
         [WpfFact]
         public void TestObjectCreationExpressionInUsingStatement()
         {
-            var initialMarkup = @"
+            var initialMarkup =
+                @"
 public class Bar
 {
     public void M()
@@ -1918,7 +2191,8 @@ public class Foo
     public int PP { get; set; }
 }";
 
-            var firstResult = @"
+            var firstResult =
+                @"
 public class Bar
 {
     public void M()
@@ -1935,7 +2209,8 @@ public class Foo
     public int PP { get; set; }
 }";
 
-            var secondResult = @"
+            var secondResult =
+                @"
 public class Bar
 {
     public void M()
@@ -1984,14 +2259,15 @@ public class Foo
 {
     public int HH { get; set; }
     public int PP { get; set; }
-}");
-
+}"
+            );
         }
 
         [WpfFact]
         public void TestIfStatementWithInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Main(bool x)
@@ -2002,7 +2278,8 @@ public class Bar
         }
         var z = 1;
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Main(bool x)
@@ -2010,13 +2287,15 @@ public class Bar
         i$$f$$ ($$x)$$
         var z = 1;
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestIfStatementWithFollowingElseClause()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Main(bool x)
@@ -2028,7 +2307,8 @@ public class Bar
         }
         else if (!x)
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Main(bool x)
@@ -2037,13 +2317,15 @@ public class Bar
         var z = 1;
         else if (!x)
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestIfStatementWithoutStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Main(bool x)
@@ -2053,20 +2335,23 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Main(bool x)
     {
         i$$f$$ ($$x)$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestNestIfStatementWithInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Main(int x)
@@ -2080,7 +2365,8 @@ public class Bar
                         var a = 1000;
                     }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Main(int x)
@@ -2091,13 +2377,15 @@ public class Bar
                     i$$f ($$x =$$= 4)$$
                         var a = 1000;
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestNestIfStatementWithoutInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Main(int x)
@@ -2110,7 +2398,8 @@ public class Bar
                         $$
                     }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Main(int x)
@@ -2120,13 +2409,15 @@ public class Bar
                 if (x == 3)
                     i$$f ($$x =$$= 4)$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestNestedElseIfStatementWithInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Fo(int i)
@@ -2144,7 +2435,8 @@ public class Bar
             {
             }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Fo(int i)
@@ -2159,13 +2451,15 @@ public class Bar
             {
             }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestNestIfElseStatementWithBlockWithInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Main(int x)
@@ -2184,7 +2478,8 @@ public class Bar
                 {
                 }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Main(int x)
@@ -2200,13 +2495,15 @@ public class Bar
                 {
                 }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestEmptyDoStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Main()
@@ -2216,20 +2513,23 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Main()
     {
         d$$o$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestDoStatementWithInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Main()
@@ -2240,7 +2540,8 @@ public class Bar
         }
         var c = 10;
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Main()
@@ -2248,13 +2549,15 @@ public class Bar
         d$$o$$
         var c = 10;
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestDoStatementWithWhileClause()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Main()
@@ -2266,7 +2569,8 @@ public class Bar
         }
         while (true);
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Main()
@@ -2275,13 +2579,15 @@ public class Bar
         var c = 10;
         while (true);
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestSingleElseStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Fo()
@@ -2294,7 +2600,8 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Fo()
@@ -2304,13 +2611,15 @@ public class Bar
         }
         e$$lse$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestElseStatementWithInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Fo()
@@ -2324,7 +2633,8 @@ public class Bar
         }
         var c = 10;
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Fo()
@@ -2335,13 +2645,15 @@ public class Bar
         e$$lse$$
         var c = 10;
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestElseIfStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Fo()
@@ -2354,7 +2666,8 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Fo()
@@ -2364,13 +2677,15 @@ public class Bar
         }
         e$$lse i$$f ($$false)$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestElseIfInTheMiddleWithInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Fo()
@@ -2387,7 +2702,8 @@ public class Bar
         {
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Fo()
@@ -2401,13 +2717,15 @@ public class Bar
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestElseClauseInNestedIfStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Fo(int i)
@@ -2423,7 +2741,8 @@ public class Bar
             var c = 100;
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Fo(int i)
@@ -2436,13 +2755,15 @@ public class Bar
             var c = 100;
         }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestForStatementWithoutStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Fo()
@@ -2452,20 +2773,23 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Fo()
     {
         f$$or (i$$nt i; i < 10;$$ i++)$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestForStatementWithInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Fo()
@@ -2476,7 +2800,8 @@ public class Bar
         }
         var c = 10;
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Fo()
@@ -2484,13 +2809,15 @@ public class Bar
         f$$or (i$$nt i; i < 10;$$ i++)$$
         var c = 10;
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestForEachStatementWithoutInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Fo()
@@ -2501,7 +2828,8 @@ public class Bar
         }
         var c = 10;
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Fo()
@@ -2509,13 +2837,15 @@ public class Bar
         forea$$ch (var x $$in """")$$
         var c = 10;
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestLockStatementWithoutInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     object o = new object();
@@ -2526,7 +2856,8 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     object o = new object();
@@ -2534,13 +2865,15 @@ public class Bar
     {
         l$$ock$$(o)$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestLockStatementWithInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     object o = new object();
@@ -2552,7 +2885,8 @@ public class Bar
         }
         var i = 10;
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     object o = new object();
@@ -2561,13 +2895,15 @@ public class Bar
         l$$ock$$(o)$$
         var i = 10;
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestUsingStatementWithoutInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 public class Bar
 {
@@ -2583,7 +2919,8 @@ public class D : IDisposable
 {
     public void Dispose()
     {}
-}", @"
+}",
+                @"
 using System;
 public class Bar
 {
@@ -2596,13 +2933,15 @@ public class D : IDisposable
 {
     public void Dispose()
     {}
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestUsingStatementWithInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 public class Bar
 {
@@ -2619,7 +2958,8 @@ public class D : IDisposable
 {
     public void Dispose()
     {}
-}", @"
+}",
+                @"
 using System;
 public class Bar
 {
@@ -2633,13 +2973,15 @@ public class D : IDisposable
 {
     public void Dispose()
     {}
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestUsingInLocalDeclarationStatement()
         {
-            Test(@"
+            Test(
+                @"
 using System;
 public class Bar
 {
@@ -2653,7 +2995,8 @@ public class D : IDisposable
 {
     public void Dispose()
     {}
-}", @"
+}",
+                @"
 using System;
 public class Bar
 {
@@ -2666,13 +3009,15 @@ public class D : IDisposable
 {
     public void Dispose()
     {}
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestWhileStatementWithoutInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Fo()
@@ -2682,20 +3027,23 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Fo()
     {
         wh$$ile (tr$$ue)$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestWhileStatementWithInnerStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Fo()
@@ -2706,7 +3054,8 @@ public class Bar
         }
         var c = 10;
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Fo()
@@ -2714,13 +3063,15 @@ public class Bar
         wh$$ile (tr$$ue)$$
         var c = 10;
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestSwitchExpression1()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Goo(int c)
@@ -2738,14 +3089,15 @@ public class Bar
     {
         var d = c swi$$tch$$
     }
-}");
-
+}"
+            );
         }
 
         [WpfFact]
         public void TestSwitchExpression2()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Goo(int c)
@@ -2763,8 +3115,8 @@ public class Bar
     {
         var d = (c + 1) swi$$tch$$
     }
-}");
-
+}"
+            );
         }
 
         [WpfFact]
@@ -2773,7 +3125,8 @@ public class Bar
             // This test is to make sure {} will be added to the switch statement,
             // but our formatter now can't format the case when the CloseParenthesis token is missing.
             // If any future formatter improvement can handle this case, this test can be modified safely
-            Test(@"
+            Test(
+                @"
 public class bar
 {
     public void TT()
@@ -2783,20 +3136,23 @@ public class bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class bar
 {
     public void TT()
     {
         swi$$tch ($$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestSwitchStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class bar
 {
     public void TT()
@@ -2807,7 +3163,8 @@ public class bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class bar
 {
     public void TT()
@@ -2815,13 +3172,15 @@ public class bar
         int i = 10;
         switc$$h ($$i)$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestValidSwitchStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class bar
 {
     public void TT()
@@ -2832,7 +3191,8 @@ public class bar
         {
         }
     }
-}", @"
+}",
+                @"
 public class bar
 {
     public void TT()
@@ -2842,13 +3202,15 @@ public class bar
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestValidTryStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class bar
 {
     public void TT()
@@ -2858,7 +3220,8 @@ public class bar
         {
         }
     }
-}", @"
+}",
+                @"
 public class bar
 {
     public void TT()
@@ -2867,13 +3230,15 @@ public class bar
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestTryStatement()
         {
-            Test(@"
+            Test(
+                @"
 public class bar
 {
     public void TT()
@@ -2883,20 +3248,23 @@ public class bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class bar
 {
     public void TT()
     {
         tr$$y$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestValidCatchClause()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void TT()
@@ -2909,7 +3277,8 @@ public class Bar
         {
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void TT()
@@ -2921,13 +3290,15 @@ public class Bar
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestCatchClauseWithException()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void TT()
@@ -2940,7 +3311,8 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void TT()
@@ -2950,13 +3322,15 @@ public class Bar
         }
         cat$$ch (Syste$$m.Exception)$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestSingleCatchClause()
         {
-            Test(@"
+            Test(
+                @"
 public class bar
 {
     public void TT()
@@ -2969,7 +3343,8 @@ public class bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class bar
 {
     public void TT()
@@ -2979,13 +3354,15 @@ public class bar
         }
         cat$$ch$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestCatchClauseWithWhenClause()
         {
-            Test(@"
+            Test(
+                @"
 public class bar
 {
     public void TT()
@@ -2998,7 +3375,8 @@ public class bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class bar
 {
     public void TT()
@@ -3008,13 +3386,15 @@ public class bar
         }
         c$$atch (Ex$$ception) whe$$n (tru$$e)$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestFinallyCaluse()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Bar2()
@@ -3030,7 +3410,8 @@ public class Bar
             $$
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Bar2()
@@ -3043,13 +3424,15 @@ public class Bar
         }
         fin$$ally$$
     }
-}");
+}"
+            );
         }
 
         [WpfFact]
         public void TestValidFinallyCaluse()
         {
-            Test(@"
+            Test(
+                @"
 public class Bar
 {
     public void Bar2()
@@ -3065,7 +3448,8 @@ public class Bar
         {
         }
     }
-}", @"
+}",
+                @"
 public class Bar
 {
     public void Bar2()
@@ -3080,20 +3464,24 @@ public class Bar
         {
         }
     }
-}");
+}"
+            );
         }
 
         protected override string Language => LanguageNames.CSharp;
 
-        protected override Action CreateNextHandler(TestWorkspace workspace)
-            => () => { };
+        protected override Action CreateNextHandler(TestWorkspace workspace) => () => { };
 
-        internal override IChainedCommandHandler<AutomaticLineEnderCommandArgs> GetCommandHandler(TestWorkspace workspace)
+        internal override IChainedCommandHandler<AutomaticLineEnderCommandArgs> GetCommandHandler(
+            TestWorkspace workspace
+        )
         {
             return Assert.IsType<AutomaticLineEnderCommandHandler>(
                 workspace.GetService<ICommandHandler>(
                     ContentTypeNames.CSharpContentType,
-                    PredefinedCommandHandlerNames.AutomaticLineEnder));
+                    PredefinedCommandHandlerNames.AutomaticLineEnder
+                )
+            );
         }
     }
 }

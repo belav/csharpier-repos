@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies">Parameter object containing relational dependencies for this convention.</param>
         public TableSharingConcurrencyTokenConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        )
         {
             Dependencies = dependencies;
             RelationalDependencies = relationalDependencies;
@@ -49,9 +50,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
-            var tableToEntityTypes = new Dictionary<(string Name, string? Schema), List<IConventionEntityType>>();
+            var tableToEntityTypes = new Dictionary<
+                (string Name, string? Schema),
+                List<IConventionEntityType>
+            >();
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 var tableName = entityType.GetTableName();
@@ -75,7 +80,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 var table = tableToEntityType.Key;
                 var mappedTypes = tableToEntityType.Value;
 
-                var concurrencyColumns = GetConcurrencyTokensMap(StoreObjectIdentifier.Table(table.Name, table.Schema), mappedTypes);
+                var concurrencyColumns = GetConcurrencyTokensMap(
+                    StoreObjectIdentifier.Table(table.Name, table.Schema),
+                    mappedTypes
+                );
                 if (concurrencyColumns == null)
                 {
                     continue;
@@ -86,18 +94,35 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     var concurrencyColumnName = concurrencyColumn.Key;
                     var propertiesMappedToConcurrencyColumn = concurrencyColumn.Value;
 
-                    Dictionary<IConventionEntityType, IReadOnlyProperty>? entityTypesMissingConcurrencyColumn = null;
+                    Dictionary<
+                        IConventionEntityType,
+                        IReadOnlyProperty
+                    >? entityTypesMissingConcurrencyColumn = null;
                     foreach (var entityType in mappedTypes)
                     {
-                        var foundMappedProperty = !IsConcurrencyTokenMissing(propertiesMappedToConcurrencyColumn, entityType, mappedTypes)
-                            || entityType.GetProperties()
-                                .Any(p => p.GetColumnName(StoreObjectIdentifier.Table(table.Name, table.Schema)) == concurrencyColumnName);
+                        var foundMappedProperty =
+                            !IsConcurrencyTokenMissing(
+                                propertiesMappedToConcurrencyColumn,
+                                entityType,
+                                mappedTypes
+                            )
+                            || entityType
+                                .GetProperties()
+                                .Any(
+                                    p =>
+                                        p.GetColumnName(
+                                            StoreObjectIdentifier.Table(table.Name, table.Schema)
+                                        ) == concurrencyColumnName
+                                );
 
                         if (!foundMappedProperty)
                         {
                             if (entityTypesMissingConcurrencyColumn == null)
                             {
-                                entityTypesMissingConcurrencyColumn = new Dictionary<IConventionEntityType, IReadOnlyProperty>();
+                                entityTypesMissingConcurrencyColumn = new Dictionary<
+                                    IConventionEntityType,
+                                    IReadOnlyProperty
+                                >();
                             }
 
                             // store the entity type which is missing the
@@ -105,7 +130,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             // property which _is_ mapped to this concurrency token
                             // column and which will be used later as a template
                             entityTypesMissingConcurrencyColumn.Add(
-                                entityType, propertiesMappedToConcurrencyColumn.First());
+                                entityType,
+                                propertiesMappedToConcurrencyColumn.First()
+                            );
                         }
                     }
 
@@ -120,13 +147,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     {
                         var exampleProperty = entityTypeToExampleProperty.Value;
                         entityTypeToExampleProperty.Key.Builder.CreateUniqueProperty(
-                                exampleProperty.ClrType,
-                                ConcurrencyPropertyPrefix + exampleProperty.Name,
-                                !exampleProperty.IsNullable)!
-                            .HasColumnName(concurrencyColumnName)!
-                            .HasColumnType(exampleProperty.GetColumnType())!
-                            .IsConcurrencyToken(true)!
-                            .ValueGenerated(exampleProperty.ValueGenerated);
+                            exampleProperty.ClrType,
+                            ConcurrencyPropertyPrefix + exampleProperty.Name,
+                            !exampleProperty.IsNullable
+                        )!.HasColumnName(concurrencyColumnName)!.HasColumnType(
+                            exampleProperty.GetColumnType()
+                        )!.IsConcurrencyToken(true)!.ValueGenerated(exampleProperty.ValueGenerated);
                     }
                 }
             }
@@ -141,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [EntityFrameworkInternal]
         public static Dictionary<string, List<IReadOnlyProperty>>? GetConcurrencyTokensMap(
             in StoreObjectIdentifier storeObject,
-            IReadOnlyList<IReadOnlyEntityType> mappedTypes)
+            IReadOnlyList<IReadOnlyEntityType> mappedTypes
+        )
         {
             if (mappedTypes.Count < 2)
             {
@@ -152,16 +179,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var nonHierarchyTypesCount = 0;
             foreach (var entityType in mappedTypes)
             {
-                if (entityType.BaseType == null
-                    || !mappedTypes.Contains(entityType.BaseType))
+                if (entityType.BaseType == null || !mappedTypes.Contains(entityType.BaseType))
                 {
                     nonHierarchyTypesCount++;
                 }
 
                 foreach (var property in entityType.GetDeclaredProperties())
                 {
-                    if (!property.IsConcurrencyToken
-                        || (property.ValueGenerated & ValueGenerated.OnUpdate) == 0)
+                    if (
+                        !property.IsConcurrencyToken
+                        || (property.ValueGenerated & ValueGenerated.OnUpdate) == 0
+                    )
                     {
                         continue;
                     }
@@ -200,10 +228,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public static bool IsConcurrencyTokenMissing(
             List<IReadOnlyProperty> propertiesMappedToConcurrencyColumn,
             IReadOnlyEntityType entityType,
-            IReadOnlyList<IReadOnlyEntityType> mappedTypes)
+            IReadOnlyList<IReadOnlyEntityType> mappedTypes
+        )
         {
-            if (entityType.FindPrimaryKey() == null
-                || propertiesMappedToConcurrencyColumn.Count == 0)
+            if (
+                entityType.FindPrimaryKey() == null
+                || propertiesMappedToConcurrencyColumn.Count == 0
+            )
             {
                 return false;
             }
@@ -212,24 +243,34 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             foreach (var mappedProperty in propertiesMappedToConcurrencyColumn)
             {
                 var declaringEntityType = mappedProperty.DeclaringEntityType;
-                if (declaringEntityType.IsAssignableFrom(entityType)
+                if (
+                    declaringEntityType.IsAssignableFrom(entityType)
                     || declaringEntityType.IsInOwnershipPath(entityType)
-                    || entityType.IsInOwnershipPath(declaringEntityType))
+                    || entityType.IsInOwnershipPath(declaringEntityType)
+                )
                 {
                     // The concurrency token is on the base type or in the same aggregate
                     propertyMissing = false;
                     continue;
                 }
 
-                var linkingFks = declaringEntityType.FindForeignKeys(declaringEntityType.FindPrimaryKey()!.Properties)
+                var linkingFks = declaringEntityType
+                    .FindForeignKeys(declaringEntityType.FindPrimaryKey()!.Properties)
                     .Where(
-                        fk => fk.PrincipalKey.IsPrimaryKey()
-                            && mappedTypes.Contains(fk.PrincipalEntityType)).ToList();
-                if (linkingFks.Count > 0
+                        fk =>
+                            fk.PrincipalKey.IsPrimaryKey()
+                            && mappedTypes.Contains(fk.PrincipalEntityType)
+                    )
+                    .ToList();
+                if (
+                    linkingFks.Count > 0
                     && !linkingFks.Any(fk => fk.PrincipalEntityType == entityType)
                     && linkingFks.Any(
-                        fk => fk.PrincipalEntityType.IsAssignableFrom(entityType)
-                            || entityType.IsAssignableFrom(fk.PrincipalEntityType)))
+                        fk =>
+                            fk.PrincipalEntityType.IsAssignableFrom(entityType)
+                            || entityType.IsAssignableFrom(fk.PrincipalEntityType)
+                    )
+                )
                 {
                     // The concurrency token is on a type that shares the row with a base or derived type
                     propertyMissing = false;
@@ -239,7 +280,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             return propertyMissing;
         }
 
-        private static void RemoveDerivedEntityTypes<T>(Dictionary<IConventionEntityType, T> entityTypeDictionary)
+        private static void RemoveDerivedEntityTypes<T>(
+            Dictionary<IConventionEntityType, T> entityTypeDictionary
+        )
         {
             foreach (var entityType in entityTypeDictionary.Keys)
             {

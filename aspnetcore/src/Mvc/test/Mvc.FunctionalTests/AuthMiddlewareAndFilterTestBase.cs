@@ -11,15 +11,19 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public abstract class AuthMiddlewareAndFilterTestBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>> where TStartup : class
+public abstract class AuthMiddlewareAndFilterTestBase<TStartup>
+    : IClassFixture<MvcTestFixture<TStartup>> where TStartup : class
 {
     protected AuthMiddlewareAndFilterTestBase(MvcTestFixture<TStartup> fixture)
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 
-    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) => builder.UseStartup<TStartup>();
+    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
+        builder.UseStartup<TStartup>();
 
     public HttpClient Client { get; }
 

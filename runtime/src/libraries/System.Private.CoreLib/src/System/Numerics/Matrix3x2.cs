@@ -16,13 +16,9 @@ namespace System.Numerics
     [Intrinsic]
     public struct Matrix3x2 : IEquatable<Matrix3x2>
     {
-        private const float RotationEpsilon = 0.001f * MathF.PI / 180f;     // 0.1% of a degree
+        private const float RotationEpsilon = 0.001f * MathF.PI / 180f; // 0.1% of a degree
 
-        private static readonly Matrix3x2 _identity = new Matrix3x2(
-            1f, 0f,
-            0f, 1f,
-            0f, 0f
-        );
+        private static readonly Matrix3x2 _identity = new Matrix3x2(1f, 0f, 0f, 1f, 0f, 0f);
 
         /// <summary>The first element of the first row.</summary>
         public float M11;
@@ -49,9 +45,7 @@ namespace System.Numerics
         /// <param name="m22">The value to assign to the second element in the second row.</param>
         /// <param name="m31">The value to assign to the first element in the third row.</param>
         /// <param name="m32">The value to assign to the second element in the third row.</param>
-        public Matrix3x2(float m11, float m12,
-                         float m21, float m22,
-                         float m31, float m32)
+        public Matrix3x2(float m11, float m12, float m21, float m22, float m31, float m32)
         {
             M11 = m11;
             M12 = m12;
@@ -103,7 +97,6 @@ namespace System.Numerics
         public Vector2 Translation
         {
             readonly get => new Vector2(M31, M32);
-
             set
             {
                 M31 = value.X;
@@ -140,12 +133,14 @@ namespace System.Numerics
         public static bool operator ==(Matrix3x2 value1, Matrix3x2 value2)
         {
             // Check diagonal element first for early out.
-            return (value1.M11 == value2.M11
-                 && value1.M22 == value2.M22
-                 && value1.M12 == value2.M12
-                 && value1.M21 == value2.M21
-                 && value1.M31 == value2.M31
-                 && value1.M32 == value2.M32);
+            return (
+                value1.M11 == value2.M11
+                && value1.M22 == value2.M22
+                && value1.M12 == value2.M12
+                && value1.M21 == value2.M21
+                && value1.M31 == value2.M31
+                && value1.M32 == value2.M32
+            );
         }
 
         /// <summary>Returns a value that indicates whether the specified matrices are not equal.</summary>
@@ -260,7 +255,8 @@ namespace System.Numerics
         {
             radians = MathF.IEEERemainder(radians, MathF.PI * 2);
 
-            float c, s;
+            float c,
+                s;
 
             if (radians > -RotationEpsilon && radians < RotationEpsilon)
             {
@@ -268,7 +264,9 @@ namespace System.Numerics
                 c = 1;
                 s = 0;
             }
-            else if (radians > MathF.PI / 2 - RotationEpsilon && radians < MathF.PI / 2 + RotationEpsilon)
+            else if (
+                radians > MathF.PI / 2 - RotationEpsilon && radians < MathF.PI / 2 + RotationEpsilon
+            )
             {
                 // Exact case for 90 degree rotation.
                 c = 0;
@@ -280,7 +278,10 @@ namespace System.Numerics
                 c = -1;
                 s = 0;
             }
-            else if (radians > -MathF.PI / 2 - RotationEpsilon && radians < -MathF.PI / 2 + RotationEpsilon)
+            else if (
+                radians > -MathF.PI / 2 - RotationEpsilon
+                && radians < -MathF.PI / 2 + RotationEpsilon
+            )
             {
                 // Exact case for 270 degree rotation.
                 c = 0;
@@ -316,7 +317,8 @@ namespace System.Numerics
 
             radians = MathF.IEEERemainder(radians, MathF.PI * 2);
 
-            float c, s;
+            float c,
+                s;
 
             if (radians > -RotationEpsilon && radians < RotationEpsilon)
             {
@@ -324,7 +326,9 @@ namespace System.Numerics
                 c = 1;
                 s = 0;
             }
-            else if (radians > MathF.PI / 2 - RotationEpsilon && radians < MathF.PI / 2 + RotationEpsilon)
+            else if (
+                radians > MathF.PI / 2 - RotationEpsilon && radians < MathF.PI / 2 + RotationEpsilon
+            )
             {
                 // Exact case for 90 degree rotation.
                 c = 0;
@@ -336,7 +340,10 @@ namespace System.Numerics
                 c = -1;
                 s = 0;
             }
-            else if (radians > -MathF.PI / 2 - RotationEpsilon && radians < -MathF.PI / 2 + RotationEpsilon)
+            else if (
+                radians > -MathF.PI / 2 - RotationEpsilon
+                && radians < -MathF.PI / 2 + RotationEpsilon
+            )
             {
                 // Exact case for 270 degree rotation.
                 c = 0;
@@ -541,7 +548,14 @@ namespace System.Numerics
 
             if (MathF.Abs(det) < float.Epsilon)
             {
-                result = new Matrix3x2(float.NaN, float.NaN, float.NaN, float.NaN, float.NaN, float.NaN);
+                result = new Matrix3x2(
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN
+                );
                 return false;
             }
 

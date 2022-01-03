@@ -14,7 +14,6 @@ namespace DefaultNamespace
 
     }
 
-
     internal class Class1
     {
         public ValueCls1[] valCls1Array = new ValueCls1[1];
@@ -23,7 +22,6 @@ namespace DefaultNamespace
         {
             valCls1Array[0] = new ValueCls1();
         }
-
     }
 
     internal class Finalize

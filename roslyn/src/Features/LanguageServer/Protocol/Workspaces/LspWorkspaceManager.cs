@@ -65,7 +65,8 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
     /// Note that the text here is tracked regardless of whether or not we found a matching roslyn document
     /// for the URI.
     /// </summary>
-    private ImmutableDictionary<Uri, SourceText> _trackedDocuments = ImmutableDictionary<Uri, SourceText>.Empty;
+    private ImmutableDictionary<Uri, SourceText> _trackedDocuments =
+        ImmutableDictionary<Uri, SourceText>.Empty;
 
     private readonly string _hostWorkspaceKind;
     private readonly ILspLogger _logger;
@@ -77,7 +78,8 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
         ILspLogger logger,
         LspMiscellaneousFilesWorkspace? lspMiscellaneousFilesWorkspace,
         LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
-        RequestTelemetryLogger requestTelemetryLogger)
+        RequestTelemetryLogger requestTelemetryLogger
+    )
     {
         _hostWorkspaceKind = lspWorkspaceRegistrationService.GetHostWorkspaceKind();
 
@@ -138,7 +140,10 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
         var workspace = e.NewSolution.Workspace;
         if (e.Kind is WorkspaceChangeKind.DocumentChanged)
         {
-            Contract.ThrowIfNull(e.DocumentId, $"DocumentId missing for document change event {e.Kind}");
+            Contract.ThrowIfNull(
+                e.DocumentId,
+                $"DocumentId missing for document change event {e.Kind}"
+            );
 
             // Retrieve the current state of documents owned by LSP.  It is not necessarily
             // consistent with the workspace, but if the documents owned by LSP change we fork from the workspace
@@ -163,7 +168,11 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
             _workspaceToLspSolution[workspace] = null;
         }
 
-        bool IsDocumentTrackedByLsp(DocumentId changedDocumentId, Solution newWorkspaceSolution, ImmutableDictionary<Uri, SourceText> trackedDocuments)
+        bool IsDocumentTrackedByLsp(
+            DocumentId changedDocumentId,
+            Solution newWorkspaceSolution,
+            ImmutableDictionary<Uri, SourceText> trackedDocuments
+        )
         {
             var changedDocument = newWorkspaceSolution.GetRequiredDocument(changedDocumentId);
             var documentUri = changedDocument.TryGetURI();
@@ -183,7 +192,10 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
         lock (_gate)
         {
             // First, store the LSP view of the text as the uri is now owned by the LSP client.
-            Contract.ThrowIfTrue(_trackedDocuments.ContainsKey(uri), $"didOpen received for {uri} which is already open.");
+            Contract.ThrowIfTrue(
+                _trackedDocuments.ContainsKey(uri),
+                $"didOpen received for {uri} which is already open."
+            );
             _trackedDocuments = _trackedDocuments.Add(uri, documentText);
 
             // Make sure we reset/update our LSP incremental solutions now that we potentially have a new document.
@@ -195,10 +207,14 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
             }
 
             // If we can't find the document in any of the registered workspaces, add it to our loose files workspace.
-            var miscDocument = _lspMiscellaneousFilesWorkspace?.AddMiscellaneousDocument(uri, documentText);
+            var miscDocument = _lspMiscellaneousFilesWorkspace?.AddMiscellaneousDocument(
+                uri,
+                documentText
+            );
             if (miscDocument != null)
             {
-                _workspaceToLspSolution[miscDocument.Project.Solution.Workspace] = miscDocument.Project.Solution;
+                _workspaceToLspSolution[miscDocument.Project.Solution.Workspace] =
+                    miscDocument.Project.Solution;
             }
         }
     }
@@ -211,7 +227,10 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
         lock (_gate)
         {
             // First, stop tracking this URI and source text as it is no longer owned by LSP.
-            Contract.ThrowIfFalse(_trackedDocuments.ContainsKey(uri), $"didClose received for {uri} which is not open.");
+            Contract.ThrowIfFalse(
+                _trackedDocuments.ContainsKey(uri),
+                $"didClose received for {uri} which is not open."
+            );
             _trackedDocuments = _trackedDocuments.Remove(uri);
 
             // Trigger a fork of all workspaces, the LSP document text may not match the workspace and this document
@@ -232,13 +251,22 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
         lock (_gate)
         {
             // Store the updated LSP view of the source text.
-            Contract.ThrowIfFalse(_trackedDocuments.ContainsKey(uri), $"didChange received for {uri} which is not open.");
+            Contract.ThrowIfFalse(
+                _trackedDocuments.ContainsKey(uri),
+                $"didChange received for {uri} which is not open."
+            );
             _trackedDocuments = _trackedDocuments.SetItem(uri, newSourceText);
 
             // Get our current solutions and re-fork from the workspace as needed.
             var updatedSolutions = ComputeIncrementalLspSolutions_CalledUnderLock();
 
-            var findDocumentResult = FindDocuments(uri, updatedSolutions, clientName: null, _requestTelemetryLogger, _logger);
+            var findDocumentResult = FindDocuments(
+                uri,
+                updatedSolutions,
+                clientName: null,
+                _requestTelemetryLogger,
+                _logger
+            );
             if (findDocumentResult.IsEmpty)
             {
                 // We didn't find this document in a registered workspace or in the misc workspace.
@@ -255,10 +283,16 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
 
             // Update all the documents that have a matching uri with the new source text and store as our new incremental solution.
             // We can have multiple documents with the same URI (e.g. linked documents).
-            var solution = GetSolutionWithReplacedDocuments(findDocumentResult.First().Project.Solution, ImmutableArray.Create((uri, newSourceText)));
+            var solution = GetSolutionWithReplacedDocuments(
+                findDocumentResult.First().Project.Solution,
+                ImmutableArray.Create((uri, newSourceText))
+            );
             _workspaceToLspSolution[solution.Workspace] = solution;
 
-            if (solution.Workspace is not LspMiscellaneousFilesWorkspace && _lspMiscellaneousFilesWorkspace != null)
+            if (
+                solution.Workspace is not LspMiscellaneousFilesWorkspace
+                && _lspMiscellaneousFilesWorkspace != null
+            )
             {
                 // If we found the uri in a workspace that isn't LSP misc files, we can remove it from the lsp misc files if it is there.
                 //
@@ -295,7 +329,9 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
             // Ensure we have the latest lsp solutions
             var updatedSolutions = ComputeIncrementalLspSolutions_CalledUnderLock();
 
-            var hostWorkspaceSolution = updatedSolutions.FirstOrDefault(s => s.Workspace.Kind == _hostWorkspaceKind);
+            var hostWorkspaceSolution = updatedSolutions.FirstOrDefault(
+                s => s.Workspace.Kind == _hostWorkspaceKind
+            );
             return hostWorkspaceSolution;
         }
     }
@@ -307,7 +343,10 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
     /// Returns documents that have a matching client name.  In razor scenarios this is to ensure that the Razor C# server
     /// only provides data for generated razor documents (which have a client name).
     /// </param>
-    public Document? GetLspDocument(TextDocumentIdentifier textDocumentIdentifier, string? clientName)
+    public Document? GetLspDocument(
+        TextDocumentIdentifier textDocumentIdentifier,
+        string? clientName
+    )
     {
         lock (_gate)
         {
@@ -315,14 +354,22 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
             var currentLspSolutions = ComputeIncrementalLspSolutions_CalledUnderLock();
 
             // Search through the latest lsp solutions to find the document with matching uri and client name.
-            var findDocumentResult = FindDocuments(textDocumentIdentifier.Uri, currentLspSolutions, clientName, _requestTelemetryLogger, _logger);
+            var findDocumentResult = FindDocuments(
+                textDocumentIdentifier.Uri,
+                currentLspSolutions,
+                clientName,
+                _requestTelemetryLogger,
+                _logger
+            );
             if (findDocumentResult.IsEmpty)
             {
                 return null;
             }
 
             // Filter the matching documents by project context.
-            var documentInProjectContext = findDocumentResult.FindDocumentInProjectContext(textDocumentIdentifier);
+            var documentInProjectContext = findDocumentResult.FindDocumentInProjectContext(
+                textDocumentIdentifier
+            );
             return documentInProjectContext;
         }
     }
@@ -360,7 +407,10 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
             if (incrementalSolution == null)
             {
                 // We have no incremental lsp solution, create a new one forked from the workspace with LSP tracked documents.
-                var newIncrementalSolution = GetSolutionWithReplacedDocuments(workspace.CurrentSolution, _trackedDocuments.Select(k => (k.Key, k.Value)).ToImmutableArray());
+                var newIncrementalSolution = GetSolutionWithReplacedDocuments(
+                    workspace.CurrentSolution,
+                    _trackedDocuments.Select(k => (k.Key, k.Value)).ToImmutableArray()
+                );
                 _workspaceToLspSolution[workspace] = newIncrementalSolution;
                 updatedSolutions.Add(newIncrementalSolution);
             }
@@ -384,27 +434,48 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
         ImmutableArray<Solution> registeredSolutions,
         string? clientName,
         RequestTelemetryLogger telemetryLogger,
-        ILspLogger logger)
+        ILspLogger logger
+    )
     {
         logger.TraceInformation($"Finding document corresponding to {uri}");
 
         // Ensure we search the lsp misc files solution last if it is present.
         registeredSolutions = registeredSolutions
             .Where(solution => solution.Workspace is not LspMiscellaneousFilesWorkspace)
-            .Concat(registeredSolutions.Where(solution => solution.Workspace is LspMiscellaneousFilesWorkspace)).ToImmutableArray();
+            .Concat(
+                registeredSolutions.Where(
+                    solution => solution.Workspace is LspMiscellaneousFilesWorkspace
+                )
+            )
+            .ToImmutableArray();
 
         // First search the registered workspaces for documents with a matching URI.
-        if (TryGetDocumentsForUri(uri, registeredSolutions, clientName, out var documents, out var solution))
+        if (
+            TryGetDocumentsForUri(
+                uri,
+                registeredSolutions,
+                clientName,
+                out var documents,
+                out var solution
+            )
+        )
         {
             telemetryLogger.UpdateFindDocumentTelemetryData(success: true, solution.Workspace.Kind);
-            logger.TraceInformation($"{documents.Value.First().FilePath} found in workspace {solution.Workspace.Kind}");
+            logger.TraceInformation(
+                $"{documents.Value.First().FilePath} found in workspace {solution.Workspace.Kind}"
+            );
 
             return documents.Value;
         }
 
         // We didn't find the document in any workspace, record a telemetry notification that we did not find it.
-        var searchedWorkspaceKinds = string.Join(";", registeredSolutions.SelectAsArray(s => s.Workspace.Kind));
-        logger.TraceError($"Could not find '{uri}' with client name '{clientName}'.  Searched {searchedWorkspaceKinds}");
+        var searchedWorkspaceKinds = string.Join(
+            ";",
+            registeredSolutions.SelectAsArray(s => s.Workspace.Kind)
+        );
+        logger.TraceError(
+            $"Could not find '{uri}' with client name '{clientName}'.  Searched {searchedWorkspaceKinds}"
+        );
         telemetryLogger.UpdateFindDocumentTelemetryData(success: false, workspaceKind: null);
         return ImmutableArray<Document>.Empty;
 
@@ -413,7 +484,8 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
             ImmutableArray<Solution> registeredSolutions,
             string? clientName,
             [NotNullWhen(true)] out ImmutableArray<Document>? documents,
-            [NotNullWhen(true)] out Solution? solution)
+            [NotNullWhen(true)] out Solution? solution
+        )
         {
             foreach (var registeredSolution in registeredSolutions)
             {
@@ -437,7 +509,10 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
     /// but with document text for any open documents updated to match the LSP view of the world. This makes
     /// the LSP server the source of truth for all document text, but all other changes come from the workspace
     /// </summary>
-    private static Solution GetSolutionWithReplacedDocuments(Solution solution, ImmutableArray<(Uri DocumentUri, SourceText Text)> documentsToReplace)
+    private static Solution GetSolutionWithReplacedDocuments(
+        Solution solution,
+        ImmutableArray<(Uri DocumentUri, SourceText Text)> documentsToReplace
+    )
     {
         foreach (var (uri, text) in documentsToReplace)
         {
@@ -453,18 +528,16 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
         return solution;
     }
 
-    internal TestAccessor GetTestAccessor()
-            => new(this);
+    internal TestAccessor GetTestAccessor() => new(this);
 
     internal readonly struct TestAccessor
     {
         private readonly LspWorkspaceManager _manager;
 
-        public TestAccessor(LspWorkspaceManager manager)
-            => _manager = manager;
+        public TestAccessor(LspWorkspaceManager manager) => _manager = manager;
 
-        public LspMiscellaneousFilesWorkspace? GetLspMiscellaneousFilesWorkspace()
-            => _manager._lspMiscellaneousFilesWorkspace;
+        public LspMiscellaneousFilesWorkspace? GetLspMiscellaneousFilesWorkspace() =>
+            _manager._lspMiscellaneousFilesWorkspace;
 
         public ImmutableDictionary<Workspace, Solution?> GetWorkspaceState()
         {

@@ -26,15 +26,18 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseProviderAttribute'/> class without a license
         /// provider.
         /// </summary>
-        public LicenseProviderAttribute() : this((string?)null)
-        {
-        }
+        public LicenseProviderAttribute() : this((string?)null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseProviderAttribute'/> class with
         /// the specified type.
         /// </summary>
-        public LicenseProviderAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] string? typeName)
+        public LicenseProviderAttribute(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                string? typeName
+        )
         {
             _licenseProviderName = typeName;
         }
@@ -43,7 +46,12 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseProviderAttribute'/> class with
         /// the specified type of license provider.
         /// </summary>
-        public LicenseProviderAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type)
+        public LicenseProviderAttribute(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type type
+        )
         {
             _licenseProviderType = type;
         }

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -52,10 +52,7 @@ public class FormReader : IDisposable
     /// Initializes a new instance of <see cref="FormReader"/>.
     /// </summary>
     /// <param name="data">The data to read.</param>
-    public FormReader(string data)
-        : this(data, ArrayPool<char>.Shared)
-    {
-    }
+    public FormReader(string data) : this(data, ArrayPool<char>.Shared) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FormReader"/>.
@@ -78,10 +75,7 @@ public class FormReader : IDisposable
     /// Initializes a new instance of <see cref="FormReader"/>.
     /// </summary>
     /// <param name="stream">The <see cref="Stream"/> to read. Assumes a utf-8 encoded stream.</param>
-    public FormReader(Stream stream)
-        : this(stream, Encoding.UTF8, ArrayPool<char>.Shared)
-    {
-    }
+    public FormReader(Stream stream) : this(stream, Encoding.UTF8, ArrayPool<char>.Shared) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FormReader"/>.
@@ -89,9 +83,7 @@ public class FormReader : IDisposable
     /// <param name="stream">The <see cref="Stream"/> to read.</param>
     /// <param name="encoding">The character encoding to use.</param>
     public FormReader(Stream stream, Encoding encoding)
-        : this(stream, encoding, ArrayPool<char>.Shared)
-    {
-    }
+        : this(stream, encoding, ArrayPool<char>.Shared) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FormReader"/>.
@@ -113,7 +105,13 @@ public class FormReader : IDisposable
 
         _buffer = charPool.Rent(_rentedCharPoolLength);
         _charPool = charPool;
-        _reader = new StreamReader(stream, encoding, detectEncodingFromByteOrderMarks: true, bufferSize: 1024 * 2, leaveOpen: true);
+        _reader = new StreamReader(
+            stream,
+            encoding,
+            detectEncodingFromByteOrderMarks: true,
+            bufferSize: 1024 * 2,
+            leaveOpen: true
+        );
     }
 
     /// <summary>
@@ -170,7 +168,9 @@ public class FormReader : IDisposable
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns>The next key value pair, or null when the end of the form is reached.</returns>
-    public async Task<KeyValuePair<string, string>?> ReadNextPairAsync(CancellationToken cancellationToken = new CancellationToken())
+    public async Task<KeyValuePair<string, string>?> ReadNextPairAsync(
+        CancellationToken cancellationToken = new CancellationToken()
+    )
     {
         await ReadNextPairAsyncImpl(cancellationToken);
         if (ReadSucceeded())
@@ -180,7 +180,9 @@ public class FormReader : IDisposable
         return null;
     }
 
-    private async Task ReadNextPairAsyncImpl(CancellationToken cancellationToken = new CancellationToken())
+    private async Task ReadNextPairAsyncImpl(
+        CancellationToken cancellationToken = new CancellationToken()
+    )
     {
         StartReadNextPair();
         while (!_endOfStream)
@@ -311,7 +313,9 @@ public class FormReader : IDisposable
     /// </summary>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
     /// <returns>The collection containing the parsed HTTP form body.</returns>
-    public async Task<Dictionary<string, StringValues>> ReadFormAsync(CancellationToken cancellationToken = new CancellationToken())
+    public async Task<Dictionary<string, StringValues>> ReadFormAsync(
+        CancellationToken cancellationToken = new CancellationToken()
+    )
     {
         var accumulator = new KeyValueAccumulator();
         while (!_endOfStream)
@@ -335,7 +339,9 @@ public class FormReader : IDisposable
             accumulator.Append(_currentKey, _currentValue);
             if (accumulator.ValueCount > ValueCountLimit)
             {
-                throw new InvalidDataException($"Form value count limit {ValueCountLimit} exceeded.");
+                throw new InvalidDataException(
+                    $"Form value count limit {ValueCountLimit} exceeded."
+                );
             }
         }
     }

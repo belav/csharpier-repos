@@ -42,7 +42,12 @@ internal class NativeSafeHandle : SafeHandle, IValueTaskSource<object?>
         return _core.GetStatus(token);
     }
 
-    public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags)
+    public void OnCompleted(
+        Action<object?> continuation,
+        object? state,
+        short token,
+        ValueTaskSourceOnCompletedFlags flags
+    )
     {
         _core.OnCompleted(continuation, state, token, flags);
     }

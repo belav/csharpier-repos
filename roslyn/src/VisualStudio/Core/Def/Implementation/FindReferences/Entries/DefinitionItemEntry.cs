@@ -28,17 +28,19 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 string projectName,
                 Guid projectGuid,
                 SourceText lineText,
-                MappedSpanResult mappedSpanResult)
-                : base(context, definitionBucket, projectGuid, lineText, mappedSpanResult)
+                MappedSpanResult mappedSpanResult
+            ) : base(context, definitionBucket, projectGuid, lineText, mappedSpanResult)
             {
                 _projectName = projectName;
             }
 
-            protected override string GetProjectName()
-                => _projectName;
+            protected override string GetProjectName() => _projectName;
 
-            protected override IList<Inline> CreateLineTextInlines()
-                => DefinitionBucket.DefinitionItem.DisplayParts.ToInlines(Presenter.ClassificationFormatMap, Presenter.TypeMap);
+            protected override IList<Inline> CreateLineTextInlines() =>
+                DefinitionBucket.DefinitionItem.DisplayParts.ToInlines(
+                    Presenter.ClassificationFormatMap,
+                    Presenter.TypeMap
+                );
         }
     }
 }

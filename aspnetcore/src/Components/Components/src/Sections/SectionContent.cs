@@ -15,18 +15,21 @@ internal class SectionContent : ISectionContentProvider, IComponent, IDisposable
     /// Gets or sets the name that determines which <see cref="SectionOutlet"/> instance will render
     /// the content of this instance.
     /// </summary>
-    [Parameter] public string Name { get; set; } = default!;
+    [Parameter]
+    public string Name { get; set; } = default!;
 
     /// <summary>
     /// Gets or sets whether this component should provide the default content for the target
     /// <see cref="SectionOutlet"/>.
     /// </summary>
-    [Parameter] public bool IsDefaultContent { get; set; }
+    [Parameter]
+    public bool IsDefaultContent { get; set; }
 
     /// <summary>
     /// Gets or sets the content to be rendered in corresponding <see cref="SectionOutlet"/> instances.
     /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
 
     RenderFragment? ISectionContentProvider.Content => ChildContent;
 
@@ -41,7 +44,9 @@ internal class SectionContent : ISectionContentProvider, IComponent, IDisposable
 
         if (string.IsNullOrEmpty(Name))
         {
-            throw new InvalidOperationException($"{GetType()} requires a non-empty string parameter '{nameof(Name)}'.");
+            throw new InvalidOperationException(
+                $"{GetType()} requires a non-empty string parameter '{nameof(Name)}'."
+            );
         }
 
         if (Name != _registeredName)

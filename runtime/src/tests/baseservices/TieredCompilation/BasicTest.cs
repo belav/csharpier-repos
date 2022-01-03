@@ -24,9 +24,7 @@ public static class BasicTest
         Foo2();
     }
 
-    private static void Foo2()
-    {
-    }
+    private static void Foo2() { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int FooWithLoop(int n)

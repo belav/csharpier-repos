@@ -52,28 +52,36 @@ namespace Microsoft.NET.Build.Tasks
 
         private void LogErrorTelemetry(string eventName, Exception e)
         {
-            (BuildEngine as IBuildEngine5)?.LogTelemetry(eventName, new Dictionary<string, string> {
-                        {"exceptionType", e.GetType().ToString() },
-                        {"detail", ExceptionToStringWithoutMessage(e) }});
+            (BuildEngine as IBuildEngine5)?.LogTelemetry(
+                eventName,
+                new Dictionary<string, string>
+                {
+                    { "exceptionType", e.GetType().ToString() },
+                    { "detail", ExceptionToStringWithoutMessage(e) }
+                }
+            );
         }
 
         private static string ExceptionToStringWithoutMessage(Exception e)
         {
-            const string AggregateException_ToString = "{0}{1}---> (Inner Exception #{2}) {3}{4}{5}";
+            const string AggregateException_ToString =
+                "{0}{1}---> (Inner Exception #{2}) {3}{4}{5}";
             if (e is AggregateException aggregate)
             {
                 string text = NonAggregateExceptionToStringWithoutMessage(aggregate);
 
                 for (int i = 0; i < aggregate.InnerExceptions.Count; i++)
                 {
-                    text = string.Format(CultureInfo.InvariantCulture,
-                                         AggregateException_ToString,
-                                         text,
-                                         Environment.NewLine,
-                                         i,
-                                         ExceptionToStringWithoutMessage(aggregate.InnerExceptions[i]),
-                                         "<---",
-                                         Environment.NewLine);
+                    text = string.Format(
+                        CultureInfo.InvariantCulture,
+                        AggregateException_ToString,
+                        text,
+                        Environment.NewLine,
+                        i,
+                        ExceptionToStringWithoutMessage(aggregate.InnerExceptions[i]),
+                        "<---",
+                        Environment.NewLine
+                    );
                 }
 
                 return text;
@@ -87,16 +95,20 @@ namespace Microsoft.NET.Build.Tasks
         private static string NonAggregateExceptionToStringWithoutMessage(Exception e)
         {
             string s;
-            const string Exception_EndOfInnerExceptionStack = "--- End of inner exception stack trace ---";
-
+            const string Exception_EndOfInnerExceptionStack =
+                "--- End of inner exception stack trace ---";
 
             s = e.GetType().ToString();
 
             if (e.InnerException != null)
             {
-                s = s + " ---> " + ExceptionToStringWithoutMessage(e.InnerException) + Environment.NewLine +
-                "   " + Exception_EndOfInnerExceptionStack;
-
+                s =
+                    s
+                    + " ---> "
+                    + ExceptionToStringWithoutMessage(e.InnerException)
+                    + Environment.NewLine
+                    + "   "
+                    + Exception_EndOfInnerExceptionStack;
             }
 
             var stackTrace = e.StackTrace;

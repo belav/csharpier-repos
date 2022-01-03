@@ -19,7 +19,10 @@ internal class IdentityServerJwtDescriptor : IIdentityServerJwtDescriptor
     {
         return new Dictionary<string, ResourceDefinition>
         {
-            [Environment.ApplicationName + "API"] = new ResourceDefinition() { Profile = ApplicationProfiles.IdentityServerJwt }
+            [Environment.ApplicationName + "API"] = new ResourceDefinition()
+            {
+                Profile = ApplicationProfiles.IdentityServerJwt
+            }
         };
     }
 }

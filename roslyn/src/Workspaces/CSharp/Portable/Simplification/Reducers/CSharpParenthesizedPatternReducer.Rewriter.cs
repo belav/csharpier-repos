@@ -13,17 +13,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
     {
         private class Rewriter : AbstractReductionRewriter
         {
-            public Rewriter(ObjectPool<IReductionRewriter> pool)
-                : base(pool)
-            {
-            }
+            public Rewriter(ObjectPool<IReductionRewriter> pool) : base(pool) { }
 
             public override SyntaxNode VisitParenthesizedPattern(ParenthesizedPatternSyntax node)
             {
                 return SimplifyExpression(
                     node,
                     newNode: base.VisitParenthesizedPattern(node),
-                    simplifier: s_simplifyParentheses);
+                    simplifier: s_simplifyParentheses
+                );
             }
         }
     }

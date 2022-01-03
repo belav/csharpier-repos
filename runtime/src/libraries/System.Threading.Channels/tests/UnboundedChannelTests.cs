@@ -9,12 +9,14 @@ namespace System.Threading.Channels.Tests
 {
     public abstract class UnboundedChannelTests : ChannelTestBase
     {
-        protected override Channel<T> CreateChannel<T>() => Channel.CreateUnbounded<T>(
-            new UnboundedChannelOptions
-            {
-                SingleReader = RequiresSingleReader,
-                AllowSynchronousContinuations = AllowSynchronousContinuations
-            });
+        protected override Channel<T> CreateChannel<T>() =>
+            Channel.CreateUnbounded<T>(
+                new UnboundedChannelOptions
+                {
+                    SingleReader = RequiresSingleReader,
+                    AllowSynchronousContinuations = AllowSynchronousContinuations
+                }
+            );
         protected override Channel<T> CreateFullChannel<T>() => null;
 
         [Fact]
@@ -142,10 +144,21 @@ namespace System.Threading.Channels.Tests
             Channel<int> c = CreateChannel();
 
             int expectedId = Environment.CurrentManagedThreadId;
-            Task r = c.Reader.WaitToReadAsync().AsTask().ContinueWith(_ =>
-            {
-                Assert.Equal(AllowSynchronousContinuations, expectedId == Environment.CurrentManagedThreadId);
-            }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+            Task r = c.Reader
+                .WaitToReadAsync()
+                .AsTask()
+                .ContinueWith(
+                    _ =>
+                    {
+                        Assert.Equal(
+                            AllowSynchronousContinuations,
+                            expectedId == Environment.CurrentManagedThreadId
+                        );
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                );
 
             Assert.True(c.Writer.WriteAsync(42).IsCompletedSuccessfully);
             ((IAsyncResult)r).AsyncWaitHandle.WaitOne(); // avoid inlining the continuation
@@ -158,10 +171,18 @@ namespace System.Threading.Channels.Tests
             Channel<int> c = CreateChannel();
 
             int expectedId = Environment.CurrentManagedThreadId;
-            Task r = c.Reader.Completion.ContinueWith(_ =>
-            {
-                Assert.Equal(AllowSynchronousContinuations, expectedId == Environment.CurrentManagedThreadId);
-            }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+            Task r = c.Reader.Completion.ContinueWith(
+                _ =>
+                {
+                    Assert.Equal(
+                        AllowSynchronousContinuations,
+                        expectedId == Environment.CurrentManagedThreadId
+                    );
+                },
+                CancellationToken.None,
+                TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            );
 
             Assert.True(c.Writer.TryComplete());
             ((IAsyncResult)r).AsyncWaitHandle.WaitOne(); // avoid inlining the continuation
@@ -214,26 +235,31 @@ namespace System.Threading.Channels.Tests
             Channel<int> c = CreateChannel();
 
             Task.WaitAll(
-                Task.Run(async () =>
-                {
-                    int received = 0;
-                    while (await c.Reader.WaitToReadAsync())
+                Task.Run(
+                    async () =>
                     {
-                        while (c.Reader.TryRead(out int i))
+                        int received = 0;
+                        while (await c.Reader.WaitToReadAsync())
                         {
-                            Assert.Equal(received, i);
-                            received++;
+                            while (c.Reader.TryRead(out int i))
+                            {
+                                Assert.Equal(received, i);
+                                received++;
+                            }
                         }
                     }
-                }),
-                Task.Run(() =>
-                {
-                    for (int i = 0; i < NumItems; i++)
+                ),
+                Task.Run(
+                    () =>
                     {
-                        Assert.True(c.Writer.TryWrite(i));
+                        for (int i = 0; i < NumItems; i++)
+                        {
+                            Assert.True(c.Writer.TryWrite(i));
+                        }
+                        c.Writer.Complete();
                     }
-                    c.Writer.Complete();
-                }));
+                )
+            );
         }
     }
 

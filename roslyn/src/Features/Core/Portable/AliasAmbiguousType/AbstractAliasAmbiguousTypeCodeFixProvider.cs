@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.AliasAmbiguousType
             var cancellationToken = context.CancellationToken;
             var document = context.Document;
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // Innermost: We are looking for an IdentifierName. IdentifierName is sometimes at the same span as its parent (e.g. SimpleBaseTypeSyntax).
             var diagnosticNode = root.FindNode(context.Span, getInnermostNodeForTie: true);
@@ -37,48 +39,80 @@ namespace Microsoft.CodeAnalysis.AliasAmbiguousType
                 return;
             }
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var symbolInfo = semanticModel.GetSymbolInfo(diagnosticNode, cancellationToken);
             if (SymbolCandidatesContainsSupportedSymbols(symbolInfo))
             {
                 var addImportService = document.GetRequiredLanguageService<IAddImportsService>();
                 var syntaxGenerator = document.GetRequiredLanguageService<SyntaxGenerator>();
                 var compilation = semanticModel.Compilation;
-                var optionSet = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
+                var optionSet = await document
+                    .GetOptionsAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var allowInHiddenRegions = document.CanAddImportsInHiddenRegions();
-                var codeActionsBuilder = ImmutableArray.CreateBuilder<CodeAction>(symbolInfo.CandidateSymbols.Length);
+                var codeActionsBuilder = ImmutableArray.CreateBuilder<CodeAction>(
+                    symbolInfo.CandidateSymbols.Length
+                );
                 foreach (var symbol in symbolInfo.CandidateSymbols.Cast<ITypeSymbol>())
                 {
                     var typeName = symbol.Name;
                     var codeActionPreviewText = GetTextPreviewOfChange(typeName, symbol);
-                    codeActionsBuilder.Add(new MyCodeAction(codeActionPreviewText, c =>
-                        {
-                            var aliasDirective = syntaxGenerator.AliasImportDeclaration(typeName, symbol);
-                            var newRoot = addImportService.AddImport(compilation, root, diagnosticNode, aliasDirective, syntaxGenerator, optionSet, allowInHiddenRegions, cancellationToken);
-                            return Task.FromResult(document.WithSyntaxRoot(newRoot));
-                        }));
+                    codeActionsBuilder.Add(
+                        new MyCodeAction(
+                            codeActionPreviewText,
+                            c =>
+                            {
+                                var aliasDirective = syntaxGenerator.AliasImportDeclaration(
+                                    typeName,
+                                    symbol
+                                );
+                                var newRoot = addImportService.AddImport(
+                                    compilation,
+                                    root,
+                                    diagnosticNode,
+                                    aliasDirective,
+                                    syntaxGenerator,
+                                    optionSet,
+                                    allowInHiddenRegions,
+                                    cancellationToken
+                                );
+                                return Task.FromResult(document.WithSyntaxRoot(newRoot));
+                            }
+                        )
+                    );
                 }
 
-                var groupingTitle = string.Format(FeaturesResources.Alias_ambiguous_type_0, diagnosticNode.ToString());
-                var groupingCodeAction = new CodeActionWithNestedActions(groupingTitle, codeActionsBuilder.ToImmutable(), isInlinable: true);
+                var groupingTitle = string.Format(
+                    FeaturesResources.Alias_ambiguous_type_0,
+                    diagnosticNode.ToString()
+                );
+                var groupingCodeAction = new CodeActionWithNestedActions(
+                    groupingTitle,
+                    codeActionsBuilder.ToImmutable(),
+                    isInlinable: true
+                );
                 context.RegisterCodeFix(groupingCodeAction, context.Diagnostics.First());
             }
         }
 
-        private static bool SymbolCandidatesContainsSupportedSymbols(SymbolInfo symbolInfo)
-            => symbolInfo.CandidateReason == CandidateReason.Ambiguous &&
-               // Arity: Aliases can only name closed constructed types. (See also proposal https://github.com/dotnet/csharplang/issues/1239)
-               // Aliasing as a closed constructed type is possible but would require to remove the type arguments from the diagnosed node.
-               // It is unlikely that the user wants that and so generic types are not supported.
-               symbolInfo.CandidateSymbols.All(symbol => symbol.IsKind(SymbolKind.NamedType) &&
-                                                         symbol.GetArity() == 0);
+        private static bool SymbolCandidatesContainsSupportedSymbols(SymbolInfo symbolInfo) =>
+            symbolInfo.CandidateReason == CandidateReason.Ambiguous
+            &&
+            // Arity: Aliases can only name closed constructed types. (See also proposal https://github.com/dotnet/csharplang/issues/1239)
+            // Aliasing as a closed constructed type is possible but would require to remove the type arguments from the diagnosed node.
+            // It is unlikely that the user wants that and so generic types are not supported.
+            symbolInfo.CandidateSymbols.All(
+                symbol => symbol.IsKind(SymbolKind.NamedType) && symbol.GetArity() == 0
+            );
 
         private class MyCodeAction : DocumentChangeAction
         {
-            public MyCodeAction(string title, Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(title, createChangedDocument, equivalenceKey: title)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(title, createChangedDocument, equivalenceKey: title) { }
         }
     }
 }

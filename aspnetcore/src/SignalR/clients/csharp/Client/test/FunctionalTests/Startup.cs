@@ -20,41 +20,52 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests;
 
 public class Startup
 {
-    private readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(Guid.NewGuid().ToByteArray());
+    private readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(
+        Guid.NewGuid().ToByteArray()
+    );
     private readonly JwtSecurityTokenHandler JwtTokenHandler = new JwtSecurityTokenHandler();
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddSignalR(options => options.EnableDetailedErrors = true)
-                .AddMessagePackProtocol();
+        services
+            .AddSignalR(options => options.EnableDetailedErrors = true)
+            .AddMessagePackProtocol();
 
         services.AddSingleton<IUserIdProvider, HeaderUserIdProvider>();
-        services.AddAuthorization(options =>
-        {
-            options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
+        services.AddAuthorization(
+            options =>
             {
-                policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
-                policy.RequireClaim(ClaimTypes.NameIdentifier);
-            });
-        });
+                options.AddPolicy(
+                    JwtBearerDefaults.AuthenticationScheme,
+                    policy =>
+                    {
+                        policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+                        policy.RequireClaim(ClaimTypes.NameIdentifier);
+                    }
+                );
+            }
+        );
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(
+                options =>
                 {
-                    options.TokenValidationParameters =
-                        new TokenValidationParameters
-                        {
-                            ValidateAudience = false,
-                            ValidateIssuer = false,
-                            ValidateActor = false,
-                            ValidateLifetime = true,
-                            IssuerSigningKey = SecurityKey
-                        };
-                });
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        ValidateActor = false,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = SecurityKey
+                    };
+                }
+            );
 
         // Since tests run in parallel, it's possible multiple servers will startup and read files being written by another test
         // Use a unique directory per server to avoid this collision
-        services.AddDataProtection()
+        services
+            .AddDataProtection()
             .PersistKeysToFileSystem(Directory.CreateDirectory(Path.GetRandomFileName()));
     }
 
@@ -65,60 +76,94 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.Use(next =>
-        {
-            return context =>
+        app.Use(
+            next =>
             {
-                if (context.Request.Path.Value.EndsWith("/negotiate", StringComparison.Ordinal))
+                return context =>
                 {
-                    context.Response.Cookies.Append("fromNegotiate", "a value");
-                }
-                return next(context);
-            };
-        });
+                    if (context.Request.Path.Value.EndsWith("/negotiate", StringComparison.Ordinal))
+                    {
+                        context.Response.Cookies.Append("fromNegotiate", "a value");
+                    }
+                    return next(context);
+                };
+            }
+        );
 
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapHub<TestHub>("/default");
-            endpoints.MapHub<DynamicTestHub>("/dynamic");
-            endpoints.MapHub<TestHubT>("/hubT");
-            endpoints.MapHub<HubWithAuthorization>("/authorizedhub");
-            endpoints.MapHub<HubWithAuthorization2>("/authorizedhub2")
-                  .RequireAuthorization(new AuthorizeAttribute(JwtBearerDefaults.AuthenticationScheme));
-
-            endpoints.MapHub<TestHub>("/default-nowebsockets", options => options.Transports = HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents);
-
-            endpoints.MapHub<TestHub>("/negotiateProtocolVersion12", options =>
+        app.UseEndpoints(
+            endpoints =>
             {
-                options.MinimumProtocolVersion = 12;
-            });
+                endpoints.MapHub<TestHub>("/default");
+                endpoints.MapHub<DynamicTestHub>("/dynamic");
+                endpoints.MapHub<TestHubT>("/hubT");
+                endpoints.MapHub<HubWithAuthorization>("/authorizedhub");
+                endpoints
+                    .MapHub<HubWithAuthorization2>("/authorizedhub2")
+                    .RequireAuthorization(
+                        new AuthorizeAttribute(JwtBearerDefaults.AuthenticationScheme)
+                    );
 
-            endpoints.MapHub<TestHub>("/negotiateProtocolVersionNegative", options =>
-            {
-                options.MinimumProtocolVersion = -1;
-            });
+                endpoints.MapHub<TestHub>(
+                    "/default-nowebsockets",
+                    options =>
+                        options.Transports =
+                            HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents
+                );
 
-            endpoints.MapGet("/generateJwtToken", context =>
-            {
-                return context.Response.WriteAsync(GenerateJwtToken());
-            });
+                endpoints.MapHub<TestHub>(
+                    "/negotiateProtocolVersion12",
+                    options =>
+                    {
+                        options.MinimumProtocolVersion = 12;
+                    }
+                );
 
-            endpoints.Map("/redirect/{*anything}", context =>
-            {
-                return context.Response.WriteAsync(JsonConvert.SerializeObject(new
-                {
-                    url = $"{context.Request.Scheme}://{context.Request.Host}/authorizedHub",
-                    accessToken = GenerateJwtToken()
-                }));
-            });
-        });
+                endpoints.MapHub<TestHub>(
+                    "/negotiateProtocolVersionNegative",
+                    options =>
+                    {
+                        options.MinimumProtocolVersion = -1;
+                    }
+                );
+
+                endpoints.MapGet(
+                    "/generateJwtToken",
+                    context =>
+                    {
+                        return context.Response.WriteAsync(GenerateJwtToken());
+                    }
+                );
+
+                endpoints.Map(
+                    "/redirect/{*anything}",
+                    context =>
+                    {
+                        return context.Response.WriteAsync(
+                            JsonConvert.SerializeObject(
+                                new
+                                {
+                                    url = $"{context.Request.Scheme}://{context.Request.Host}/authorizedHub",
+                                    accessToken = GenerateJwtToken()
+                                }
+                            )
+                        );
+                    }
+                );
+            }
+        );
     }
 
     private string GenerateJwtToken()
     {
         var claims = new[] { new Claim(ClaimTypes.NameIdentifier, "testuser") };
         var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
-        var token = new JwtSecurityToken("SignalRTestServer", "SignalRTests", claims, expires: DateTime.Now.AddSeconds(5), signingCredentials: credentials);
+        var token = new JwtSecurityToken(
+            "SignalRTestServer",
+            "SignalRTests",
+            claims,
+            expires: DateTime.Now.AddSeconds(5),
+            signingCredentials: credentials
+        );
         return JwtTokenHandler.WriteToken(token);
     }
 }

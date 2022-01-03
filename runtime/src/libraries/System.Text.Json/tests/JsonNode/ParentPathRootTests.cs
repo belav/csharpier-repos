@@ -24,10 +24,7 @@ namespace System.Text.Json.Node.Tests
             Assert.Equal("$", node.GetPath());
             Assert.Same(node, node.Root);
 
-            node = new JsonObject
-            {
-                ["Child"] = 1
-            };
+            node = new JsonObject { ["Child"] = 1 };
             Assert.Equal("$.Child", node["Child"].GetPath());
 
             node = new JsonObject
@@ -44,13 +41,7 @@ namespace System.Text.Json.Node.Tests
             Assert.Equal("$.Child[2]", node["Child"][2].GetPath());
             Assert.Same(node, node["Child"][2].Root);
 
-            node = new JsonArray
-            {
-                new JsonObject
-                {
-                    ["Child"] = 42
-                }
-            };
+            node = new JsonArray { new JsonObject { ["Child"] = 42 } };
             Assert.Equal("$[0].Child", node[0]["Child"].GetPath());
             Assert.Same(node, node[0]["Child"].Root);
         }
@@ -58,10 +49,7 @@ namespace System.Text.Json.Node.Tests
         [Fact]
         public static void GetPath_SpecialCharacters()
         {
-            JsonNode node = new JsonObject
-            {
-                ["[Child"] = 1
-            };
+            JsonNode node = new JsonObject { ["[Child"] = 1 };
 
             Assert.Equal("$['[Child']", node["[Child"].GetPath());
         }

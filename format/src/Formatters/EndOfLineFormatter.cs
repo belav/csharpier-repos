@@ -25,46 +25,57 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             AnalyzerConfigOptions analyzerConfigOptions,
             FormatOptions formatOptions,
             ILogger logger,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return Task.Run(() =>
-            {
-                if (!TryGetEndOfLine(analyzerConfigOptions, out var endOfLine))
+            return Task.Run(
+                () =>
                 {
-                    return sourceText;
-                }
-
-                var newSourceText = sourceText;
-                for (var lineIndex = 0; lineIndex < newSourceText.Lines.Count; lineIndex++)
-                {
-                    var line = newSourceText.Lines[lineIndex];
-                    var lineEndingSpan = new TextSpan(line.End, line.EndIncludingLineBreak - line.End);
-
-                    // Check for end of file
-                    if (lineEndingSpan.IsEmpty)
+                    if (!TryGetEndOfLine(analyzerConfigOptions, out var endOfLine))
                     {
-                        break;
+                        return sourceText;
                     }
 
-                    var lineEnding = newSourceText.ToString(lineEndingSpan);
-
-                    if (lineEnding == endOfLine)
+                    var newSourceText = sourceText;
+                    for (var lineIndex = 0; lineIndex < newSourceText.Lines.Count; lineIndex++)
                     {
-                        continue;
+                        var line = newSourceText.Lines[lineIndex];
+                        var lineEndingSpan = new TextSpan(
+                            line.End,
+                            line.EndIncludingLineBreak - line.End
+                        );
+
+                        // Check for end of file
+                        if (lineEndingSpan.IsEmpty)
+                        {
+                            break;
+                        }
+
+                        var lineEnding = newSourceText.ToString(lineEndingSpan);
+
+                        if (lineEnding == endOfLine)
+                        {
+                            continue;
+                        }
+
+                        var newLineChange = new TextChange(lineEndingSpan, endOfLine);
+                        newSourceText = newSourceText.WithChanges(newLineChange);
                     }
 
-                    var newLineChange = new TextChange(lineEndingSpan, endOfLine);
-                    newSourceText = newSourceText.WithChanges(newLineChange);
+                    return newSourceText;
                 }
-
-                return newSourceText;
-            });
+            );
         }
 
-        public static bool TryGetEndOfLine(AnalyzerConfigOptions analyzerConfigOptions, [NotNullWhen(true)] out string? endOfLine)
+        public static bool TryGetEndOfLine(
+            AnalyzerConfigOptions analyzerConfigOptions,
+            [NotNullWhen(true)] out string? endOfLine
+        )
         {
-            if (analyzerConfigOptions != null &&
-                analyzerConfigOptions.TryGetValue("end_of_line", out var endOfLineOption))
+            if (
+                analyzerConfigOptions != null
+                && analyzerConfigOptions.TryGetValue("end_of_line", out var endOfLineOption)
+            )
             {
                 endOfLine = GetEndOfLine(endOfLineOption);
                 return true;

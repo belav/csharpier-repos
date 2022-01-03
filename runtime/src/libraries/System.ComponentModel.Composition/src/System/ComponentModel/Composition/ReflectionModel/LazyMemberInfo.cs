@@ -30,11 +30,20 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     {
                         throw new Exception(SR.Diagnostic_InternalExceptionMessage);
                     }
-                    _accessors = new MemberInfo?[] { property.GetGetMethod(true), property.GetSetMethod(true) };
+                    _accessors = new MemberInfo?[]
+                    {
+                        property.GetGetMethod(true),
+                        property.GetSetMethod(true)
+                    };
                     break;
                 case MemberTypes.Event:
                     EventInfo event_ = (EventInfo)member;
-                    _accessors = new MemberInfo?[] { event_.GetRaiseMethod(true), event_.GetAddMethod(true), event_.GetRemoveMethod(true) };
+                    _accessors = new MemberInfo?[]
+                    {
+                        event_.GetRaiseMethod(true),
+                        event_.GetAddMethod(true),
+                        event_.GetRemoveMethod(true)
+                    };
                     break;
                 default:
                     _accessors = new MemberInfo[] { member };
@@ -141,11 +150,22 @@ namespace System.ComponentModel.Composition.ReflectionModel
         }
         private static void EnsureSupportedMemberType(MemberTypes memberType, string argument)
         {
-            MemberTypes supportedTypes = MemberTypes.TypeInfo | MemberTypes.NestedType | MemberTypes.Constructor | MemberTypes.Field | MemberTypes.Method | MemberTypes.Property | MemberTypes.Event;
+            MemberTypes supportedTypes =
+                MemberTypes.TypeInfo
+                | MemberTypes.NestedType
+                | MemberTypes.Constructor
+                | MemberTypes.Field
+                | MemberTypes.Method
+                | MemberTypes.Property
+                | MemberTypes.Event;
             Requires.IsInMembertypeSet(memberType, argument, supportedTypes);
         }
 
-        private static bool AreAccessorsValid(MemberTypes memberType, MemberInfo[] accessors, out string errorMessage)
+        private static bool AreAccessorsValid(
+            MemberTypes memberType,
+            MemberInfo[] accessors,
+            out string errorMessage
+        )
         {
             errorMessage = string.Empty;
             if (accessors == null)
@@ -169,7 +189,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
                         return false;
                     }
 
-                    if (accessors.Where(accessor => (accessor != null) && (accessor.MemberType != MemberTypes.Method)).Any())
+                    if (
+                        accessors
+                            .Where(
+                                accessor =>
+                                    (accessor != null)
+                                    && (accessor.MemberType != MemberTypes.Method)
+                            )
+                            .Any()
+                    )
                     {
                         errorMessage = SR.LazyMemberinfo_InvalidPropertyAccessors_AccessorType;
                         return false;
@@ -184,7 +212,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
                         return false;
                     }
 
-                    if (accessors.Where(accessor => (accessor != null) && (accessor.MemberType != MemberTypes.Method)).Any())
+                    if (
+                        accessors
+                            .Where(
+                                accessor =>
+                                    (accessor != null)
+                                    && (accessor.MemberType != MemberTypes.Method)
+                            )
+                            .Any()
+                    )
                     {
                         errorMessage = SR.LazyMemberinfo_InvalidEventAccessors_AccessorType;
                         return false;
@@ -194,10 +230,14 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
                 default:
                     if (
-                        (accessors.Length != 1) ||
-                        ((accessors.Length == 1) && (accessors[0].MemberType != memberType)))
+                        (accessors.Length != 1)
+                        || ((accessors.Length == 1) && (accessors[0].MemberType != memberType))
+                    )
                     {
-                        errorMessage = SR.Format(SR.LazyMemberInfo_InvalidAccessorOnSimpleMember, memberType);
+                        errorMessage = SR.Format(
+                            SR.LazyMemberInfo_InvalidAccessorOnSimpleMember,
+                            memberType
+                        );
                         return false;
                     }
 

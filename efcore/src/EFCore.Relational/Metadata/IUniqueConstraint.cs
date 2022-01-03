@@ -40,8 +40,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Gets a value indicating whether this constraint is the primary key.
         /// </summary>
         /// <returns><see langword="true" /> if the constraint is the primary key</returns>
-        bool GetIsPrimaryKey()
-            => Table.PrimaryKey == this;
+        bool GetIsPrimaryKey() => Table.PrimaryKey == this;
 
         /// <summary>
         ///     <para>
@@ -55,7 +54,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="options">Options for generating the string.</param>
         /// <param name="indent">The number of indent spaces to use before each new line.</param>
         /// <returns>A human-readable representation.</returns>
-        string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+        string ToDebugString(
+            MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+            int indent = 0
+        )
         {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
@@ -67,10 +69,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 builder.Append("Key: ");
             }
 
-            builder
-                .Append(Name)
-                .Append(' ')
-                .Append(ColumnBase.Format(Columns));
+            builder.Append(Name).Append(' ').Append(ColumnBase.Format(Columns));
 
             if (GetIsPrimaryKey())
             {

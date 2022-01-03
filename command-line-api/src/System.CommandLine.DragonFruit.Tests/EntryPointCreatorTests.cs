@@ -13,7 +13,8 @@ namespace System.CommandLine.DragonFruit.Tests
         [Fact]
         public void ItThrowsIfEntryPointNotFound()
         {
-            Action find = () => EntryPointDiscoverer.FindStaticEntryMethod(typeof(IEnumerable<>).Assembly);
+            Action find = () =>
+                EntryPointDiscoverer.FindStaticEntryMethod(typeof(IEnumerable<>).Assembly);
             find.Should().Throw<InvalidProgramException>();
         }
 
@@ -26,7 +27,8 @@ namespace System.CommandLine.DragonFruit.Tests
         [Fact]
         public void ItThrowsIfMultipleEntryPointNotFound()
         {
-            Action find = () => EntryPointDiscoverer.FindStaticEntryMethod(typeof(CommandLineTests).Assembly);
+            Action find = () =>
+                EntryPointDiscoverer.FindStaticEntryMethod(typeof(CommandLineTests).Assembly);
             find.Should().Throw<AmbiguousMatchException>();
         }
     }

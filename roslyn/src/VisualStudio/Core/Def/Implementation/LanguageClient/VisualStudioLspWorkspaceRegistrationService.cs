@@ -14,9 +14,7 @@ internal class VisualStudioLspWorkspaceRegistrationService : LspWorkspaceRegistr
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VisualStudioLspWorkspaceRegistrationService()
-    {
-    }
+    public VisualStudioLspWorkspaceRegistrationService() { }
 
     public override string GetHostWorkspaceKind() => WorkspaceKind.Host;
 

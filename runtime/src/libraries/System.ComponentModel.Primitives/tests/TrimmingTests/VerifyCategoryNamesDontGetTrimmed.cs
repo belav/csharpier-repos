@@ -16,15 +16,18 @@ namespace Test
     {
         public static int Main()
         {
-            if (GetEnumCategory(AnEnum.Action) == "Action" && GetEnumCategory(AnEnum.Something) == "Something" && GetEnumCategory(AnEnum.WindowStyle) == "Window Style")
+            if (
+                GetEnumCategory(AnEnum.Action) == "Action"
+                && GetEnumCategory(AnEnum.Something) == "Something"
+                && GetEnumCategory(AnEnum.WindowStyle) == "Window Style"
+            )
             {
                 return 100;
             }
             return -1;
         }
 
-        public static string GetEnumCategory<T>(T enumValue)
-            where T : struct, IConvertible
+        public static string GetEnumCategory<T>(T enumValue) where T : struct, IConvertible
         {
             if (!typeof(T).IsEnum)
                 return null;
@@ -46,10 +49,8 @@ namespace Test
     {
         [Category("Action")] // Built-in category
         Action = 1,
-
         [Category("Something")] // Custom category
         Something = 2,
-
         [Category("WindowStyle")] // Built-in category with localized string different than category name.
         WindowStyle = 3,
     }

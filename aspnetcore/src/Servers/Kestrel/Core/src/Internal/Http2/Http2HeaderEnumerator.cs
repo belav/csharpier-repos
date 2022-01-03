@@ -29,9 +29,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         public KeyValuePair<string, string> Current { get; private set; }
         object IEnumerator.Current => Current;
 
-        public Http2HeadersEnumerator()
-        {
-        }
+        public Http2HeadersEnumerator() { }
 
         public void Initialize(HttpResponseHeaders headers)
         {
@@ -64,27 +62,41 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             if (_headersType == HeadersType.Headers)
             {
                 return _headersEnumerator.MoveNext()
-                    ? SetCurrent(_headersEnumerator.Current.Key, _headersEnumerator.Current.Value, _headersEnumerator.CurrentKnownType)
-                    : false;
+                  ? SetCurrent(
+                        _headersEnumerator.Current.Key,
+                        _headersEnumerator.Current.Value,
+                        _headersEnumerator.CurrentKnownType
+                    )
+                  : false;
             }
             else if (_headersType == HeadersType.Trailers)
             {
                 return _trailersEnumerator.MoveNext()
-                    ? SetCurrent(_trailersEnumerator.Current.Key, _trailersEnumerator.Current.Value, _trailersEnumerator.CurrentKnownType)
-                    : false;
+                  ? SetCurrent(
+                        _trailersEnumerator.Current.Key,
+                        _trailersEnumerator.Current.Value,
+                        _trailersEnumerator.CurrentKnownType
+                    )
+                  : false;
             }
             else
             {
                 return _genericEnumerator!.MoveNext()
-                    ? SetCurrent(_genericEnumerator.Current.Key, _genericEnumerator.Current.Value, default)
-                    : false;
+                  ? SetCurrent(
+                        _genericEnumerator.Current.Key,
+                        _genericEnumerator.Current.Value,
+                        default
+                    )
+                  : false;
             }
         }
 
         private bool MoveNextOnStringEnumerator(string key)
         {
             var result = _stringValuesEnumerator.MoveNext();
-            Current = result ? new KeyValuePair<string, string>(key, _stringValuesEnumerator.Current) : default;
+            Current = result
+                ? new KeyValuePair<string, string>(key, _stringValuesEnumerator.Current)
+                : default;
             return result;
         }
 
@@ -124,9 +136,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             _knownHeaderType = default;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         internal static int GetResponseHeaderStaticTableId(KnownHeaderType responseHeaderType)
         {

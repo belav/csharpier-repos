@@ -9,7 +9,7 @@ using System.Runtime.Intrinsics.X86;
 using System;
 
 class Runtime_39403
-{ 
+{
     public static int Main()
     {
         if (Sse41.IsSupported)
@@ -23,4 +23,3 @@ class Runtime_39403
         return 100;
     }
 }
-

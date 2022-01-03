@@ -8,9 +8,7 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
 {
     internal partial struct PfxAsn
     {
-        internal bool VerifyMac(
-            ReadOnlySpan<char> macPassword,
-            ReadOnlySpan<byte> authSafeContents)
+        internal bool VerifyMac(ReadOnlySpan<char> macPassword, ReadOnlySpan<byte> authSafeContents)
         {
             Debug.Assert(MacData.HasValue);
 
@@ -43,7 +41,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
                     break;
                 default:
                     throw new CryptographicException(
-                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, algorithmValue));
+                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, algorithmValue)
+                    );
             }
 
             if (MacData.Value.Mac.Digest.Length != expectedOutputSize)
@@ -59,29 +58,37 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
 #endif
 
 
-            int iterationCount =
-                PasswordBasedEncryption.NormalizeIterationCount(MacData.Value.IterationCount);
+            int iterationCount = PasswordBasedEncryption.NormalizeIterationCount(
+                MacData.Value.IterationCount
+            );
 
             Pkcs12Kdf.DeriveMacKey(
                 macPassword,
                 hashAlgorithm,
                 iterationCount,
                 MacData.Value.MacSalt.Span,
-                derived);
+                derived
+            );
 
             using (IncrementalHash hmac = IncrementalHash.CreateHMAC(hashAlgorithm, derived))
             {
                 hmac.AppendData(authSafeContents);
 
-                if (!hmac.TryGetHashAndReset(derived, out int bytesWritten) || bytesWritten != expectedOutputSize)
+                if (
+                    !hmac.TryGetHashAndReset(derived, out int bytesWritten)
+                    || bytesWritten != expectedOutputSize
+                )
                 {
-                    Debug.Fail($"TryGetHashAndReset wrote {bytesWritten} bytes when {expectedOutputSize} was expected");
+                    Debug.Fail(
+                        $"TryGetHashAndReset wrote {bytesWritten} bytes when {expectedOutputSize} was expected"
+                    );
                     throw new CryptographicException();
                 }
 
                 return CryptographicOperations.FixedTimeEquals(
                     derived,
-                    MacData.Value.Mac.Digest.Span);
+                    MacData.Value.Mac.Digest.Span
+                );
             }
         }
     }

@@ -32,19 +32,24 @@ public class DeferredComponentContentStartup
             app.UseDeveloperExceptionPage();
         }
 
-        app.Map("/deferred-component-content", app =>
-        {
-            app.UseStaticFiles();
-
-            app.UseAuthentication();
-
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
+        app.Map(
+            "/deferred-component-content",
+            app =>
             {
-                endpoints.MapRazorPages();
-                endpoints.MapFallbackToPage("/DeferredComponentContentHost");
-                endpoints.MapBlazorHub();
-            });
-        });
+                app.UseStaticFiles();
+
+                app.UseAuthentication();
+
+                app.UseRouting();
+                app.UseEndpoints(
+                    endpoints =>
+                    {
+                        endpoints.MapRazorPages();
+                        endpoints.MapFallbackToPage("/DeferredComponentContentHost");
+                        endpoints.MapBlazorHub();
+                    }
+                );
+            }
+        );
     }
 }

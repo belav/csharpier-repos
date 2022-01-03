@@ -61,7 +61,10 @@ namespace Newtonsoft.Json.Serialization
             set
             {
                 _propertyName = value;
-                _skipPropertyNameEscape = !JavaScriptUtils.ShouldEscapeJavaScriptString(_propertyName, JavaScriptUtils.HtmlCharEscapeFlags);
+                _skipPropertyNameEscape = !JavaScriptUtils.ShouldEscapeJavaScriptString(
+                    _propertyName,
+                    JavaScriptUtils.HtmlCharEscapeFlags
+                );
             }
         }
 

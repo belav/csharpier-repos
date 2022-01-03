@@ -21,18 +21,24 @@ public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTest
     public void Execute_AddsAttributes()
     {
         // Arrange
-        var properties = new RazorSourceDocumentProperties(filePath: "ignored", relativePath: "Test.cshtml");
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("Hello world", properties));
+        var properties = new RazorSourceDocumentProperties(
+            filePath: "ignored",
+            relativePath: "Test.cshtml"
+        );
+        var codeDocument = RazorCodeDocument.Create(
+            RazorSourceDocument.Create("Hello world", properties)
+        );
 
-        var engine = CreateProjectEngine(b =>
-        {
-            PageDirective.Register(b);
-        }).Engine; ;
+        var engine =
+            CreateProjectEngine(
+                b =>
+                {
+                    PageDirective.Register(b);
+                }
+            ).Engine;
+        ;
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new CreateNewOnMetadataUpdateAttributePass
-        {
-            Engine = engine
-        };
+        var pass = new CreateNewOnMetadataUpdateAttributePass { Engine = engine };
         var documentClassifier = new MvcViewDocumentClassifierPass { Engine = engine };
 
         // Act
@@ -46,33 +52,42 @@ public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTest
             visitor.ExtensionNodes,
             node =>
             {
-                var attributeNode = Assert.IsType<RazorCompiledItemMetadataAttributeIntermediateNode>(node);
+                var attributeNode =
+                    Assert.IsType<RazorCompiledItemMetadataAttributeIntermediateNode>(node);
                 Assert.Equal("Identifier", attributeNode.Key);
                 Assert.Equal("/Test.cshtml", attributeNode.Value);
             },
             node =>
             {
-                Assert.IsType<CreateNewOnMetadataUpdateAttributePass.CreateNewOnMetadataUpdateAttributeIntermediateNode>(node);
-            });
+                Assert.IsType<CreateNewOnMetadataUpdateAttributePass.CreateNewOnMetadataUpdateAttributeIntermediateNode>(
+                    node
+                );
+            }
+        );
     }
 
     [Fact]
     public void Execute_NoOpsForBlazorComponents()
     {
         // Arrange
-        var properties = new RazorSourceDocumentProperties(filePath: "ignored", relativePath: "Test.razor");
-        var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("Hello world", properties));
+        var properties = new RazorSourceDocumentProperties(
+            filePath: "ignored",
+            relativePath: "Test.razor"
+        );
+        var codeDocument = RazorCodeDocument.Create(
+            RazorSourceDocument.Create("Hello world", properties)
+        );
         codeDocument.SetFileKind(FileKinds.Component);
 
-        var engine = CreateProjectEngine(b =>
-        {
-            PageDirective.Register(b);
-        }).Engine;
+        var engine =
+            CreateProjectEngine(
+                b =>
+                {
+                    PageDirective.Register(b);
+                }
+            ).Engine;
         var irDocument = CreateIRDocument(engine, codeDocument);
-        var pass = new CreateNewOnMetadataUpdateAttributePass
-        {
-            Engine = engine
-        };
+        var pass = new CreateNewOnMetadataUpdateAttributePass { Engine = engine };
         var documentClassifier = new DefaultDocumentClassifierPass { Engine = engine };
 
         // Act
@@ -85,7 +100,10 @@ public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTest
         Assert.Empty(visitor.ExtensionNodes);
     }
 
-    private static DocumentIntermediateNode CreateIRDocument(RazorEngine engine, RazorCodeDocument codeDocument)
+    private static DocumentIntermediateNode CreateIRDocument(
+        RazorEngine engine,
+        RazorCodeDocument codeDocument
+    )
     {
         for (var i = 0; i < engine.Phases.Count; i++)
         {

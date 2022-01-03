@@ -25,19 +25,17 @@ struct VT
 
     public VT(double d1, double d2, double d3)
     {
-        vt1 = d1; vt2 = d2; vt3 = d3;
+        vt1 = d1;
+        vt2 = d2;
+        vt3 = d3;
     }
-
 }
-
 
 class DblArray3
 {
-
     // instance field of valuetype
     public static void f4(VT[] keys, uint m_ReadMultipleMaxBatchSize)
     {
-
         // Create first batch.
         // Should have incoming m_ReadMultipleMaxBatchSize less than keys.length
         VT[] batch = keys;
@@ -69,11 +67,8 @@ class DblArray3
 
             // Process the current batch and move to the next one.
             batchIndex += batch.Length;
-        }
-        while (batchIndex < keys.Length);
+        } while (batchIndex < keys.Length);
     }
-
-
 
     public static int Main()
     {
@@ -89,14 +84,14 @@ class DblArray3
             Console.WriteLine(e.Message);
             Console.WriteLine("FAILED");
             Console.WriteLine();
-            Console.WriteLine(@"// 
+            Console.WriteLine(
+                @"// 
 // The bug is triggered by a pattern of loops over arrays of medium sized structs (between 4 and ~32 bytes), but those are not the only cases that might hit it, just the easiest to describe (and maybe most likely?).  In this case the last part of the trigger was that on array was offset from the other:
 //                        batch[i] = keys[batchIndex + i];"
-                            );
+            );
             return -1;
         }
         Console.WriteLine("PASSED");
         return 100;
     }
-
 }

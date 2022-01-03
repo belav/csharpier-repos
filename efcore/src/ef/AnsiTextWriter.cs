@@ -13,8 +13,7 @@ namespace Microsoft.EntityFrameworkCore.Tools
     {
         private readonly TextWriter _writer;
 
-        public AnsiTextWriter(TextWriter writer)
-            => _writer = writer;
+        public AnsiTextWriter(TextWriter writer) => _writer = writer;
 
         public void WriteLine(string? text)
         {
@@ -104,11 +103,11 @@ namespace Microsoft.EntityFrameworkCore.Tools
             }
         }
 
-        private static void ApplyBold()
-            => Console.ForegroundColor = (ConsoleColor)((int)Console.ForegroundColor | 8);
+        private static void ApplyBold() =>
+            Console.ForegroundColor = (ConsoleColor)((int)Console.ForegroundColor | 8);
 
-        private static void ResetBold()
-            => Console.ForegroundColor = (ConsoleColor)((int)Console.ForegroundColor & 7);
+        private static void ResetBold() =>
+            Console.ForegroundColor = (ConsoleColor)((int)Console.ForegroundColor & 7);
 
         private static void ApplyColor(ConsoleColor color)
         {

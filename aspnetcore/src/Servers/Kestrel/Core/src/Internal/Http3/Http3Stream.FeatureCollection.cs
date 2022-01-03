@@ -11,9 +11,10 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
-internal partial class Http3Stream : IHttpResetFeature,
-                                     IHttpMinRequestBodyDataRateFeature,
-                                     IHttpResponseTrailersFeature
+internal partial class Http3Stream
+    : IHttpResetFeature,
+      IHttpMinRequestBodyDataRateFeature,
+      IHttpResponseTrailersFeature
 {
     private IHeaderDictionary? _userTrailers;
 
@@ -23,7 +24,9 @@ internal partial class Http3Stream : IHttpResetFeature,
         {
             if (ResponseTrailers == null)
             {
-                ResponseTrailers = new HttpResponseTrailers(ServerOptions.ResponseHeaderEncodingSelector);
+                ResponseTrailers = new HttpResponseTrailers(
+                    ServerOptions.ResponseHeaderEncodingSelector
+                );
                 if (HasResponseCompleted)
                 {
                     ResponseTrailers.SetReadOnly();
@@ -58,7 +61,9 @@ internal partial class Http3Stream : IHttpResetFeature,
 
     void IHttpResetFeature.Reset(int errorCode)
     {
-        var message = CoreStrings.FormatHttp3StreamResetByApplication(Http3Formatting.ToFormattedErrorCode((Http3ErrorCode)errorCode));
+        var message = CoreStrings.FormatHttp3StreamResetByApplication(
+            Http3Formatting.ToFormattedErrorCode((Http3ErrorCode)errorCode)
+        );
         var abortReason = new ConnectionAbortedException(message);
         ApplicationAbort(abortReason, (Http3ErrorCode)errorCode);
     }

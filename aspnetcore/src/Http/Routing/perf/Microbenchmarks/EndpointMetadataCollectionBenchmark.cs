@@ -20,15 +20,15 @@ public class EndpointMetadataCollectionBenchmark
     {
         var seeds = new Type[]
         {
-                typeof(Metadata1),
-                typeof(Metadata2),
-                typeof(Metadata3),
-                typeof(Metadata4),
-                typeof(Metadata5),
-                typeof(Metadata6),
-                typeof(Metadata7),
-                typeof(Metadata8),
-                typeof(Metadata9),
+            typeof(Metadata1),
+            typeof(Metadata2),
+            typeof(Metadata3),
+            typeof(Metadata4),
+            typeof(Metadata5),
+            typeof(Metadata6),
+            typeof(Metadata7),
+            typeof(Metadata8),
+            typeof(Metadata9),
         };
 
         _items = new object[Count];

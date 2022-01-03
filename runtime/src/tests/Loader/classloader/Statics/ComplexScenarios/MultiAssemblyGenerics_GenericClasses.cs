@@ -28,5 +28,3 @@ public class G_CA<T>
         MyT = t;
     }
 }
-
-

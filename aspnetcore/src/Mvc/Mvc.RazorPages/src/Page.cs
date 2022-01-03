@@ -6,6 +6,4 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages;
 /// <summary>
 /// A base class for a Razor page.
 /// </summary>
-public abstract class Page : PageBase
-{
-}
+public abstract class Page : PageBase { }

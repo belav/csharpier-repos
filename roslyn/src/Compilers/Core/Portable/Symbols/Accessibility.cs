@@ -30,9 +30,7 @@ namespace Microsoft.CodeAnalysis
         /// (more restrictive than <see cref="Protected"/>, <see cref="Friend"/> and <see cref="ProtectedOrFriend"/>).
         /// </summary>
         ProtectedAndFriend = ProtectedAndInternal,
-
         Protected = 3,
-
         Internal = 4,
         Friend = Internal,
 
@@ -47,7 +45,6 @@ namespace Microsoft.CodeAnalysis
         /// (less restrictive than <see cref="Protected"/>, <see cref="Friend"/> and <see cref="ProtectedAndFriend"/>).
         /// </summary>
         ProtectedOrFriend = ProtectedOrInternal,
-
         Public = 6
     }
 }

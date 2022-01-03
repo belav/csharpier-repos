@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TextWriter writer,
                 ArrayBuilder<CSharpSyntaxNode> includeElementNodes,
                 HashSet<ParameterSymbol> documentedParameters,
-                HashSet<TypeParameterSymbol> documentedTypeParameters)
-                : base(SyntaxWalkerDepth.StructuredTrivia)
+                HashSet<TypeParameterSymbol> documentedTypeParameters
+            ) : base(SyntaxWalkerDepth.StructuredTrivia)
             {
                 _compilation = compilation;
                 _diagnostics = diagnostics;
@@ -68,12 +68,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                 DocumentationCommentTriviaSyntax trivia,
                 ArrayBuilder<CSharpSyntaxNode> includeElementNodes,
                 ref HashSet<ParameterSymbol> documentedParameters,
-                ref HashSet<TypeParameterSymbol> documentedTypeParameters)
+                ref HashSet<TypeParameterSymbol> documentedTypeParameters
+            )
             {
                 PooledStringBuilder pooled = PooledStringBuilder.GetInstance();
-                using (StringWriter writer = new StringWriter(pooled.Builder, CultureInfo.InvariantCulture))
+                using (
+                    StringWriter writer = new StringWriter(
+                        pooled.Builder,
+                        CultureInfo.InvariantCulture
+                    )
+                )
                 {
-                    DocumentationCommentWalker walker = new DocumentationCommentWalker(compilation, diagnostics, symbol, writer, includeElementNodes, documentedParameters, documentedTypeParameters);
+                    DocumentationCommentWalker walker = new DocumentationCommentWalker(
+                        compilation,
+                        diagnostics,
+                        symbol,
+                        writer,
+                        includeElementNodes,
+                        documentedParameters,
+                        documentedTypeParameters
+                    );
                     walker.Visit(trivia);
 
                     // Copy back out in case they have been initialized.
@@ -97,7 +111,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Binder binder = factory.GetBinder(cref);
 
                     // Do this for the diagnostics, even if it won't be written.
-                    string docCommentId = GetDocumentationCommentId(cref, binder, diagnose ? _diagnostics : new BindingDiagnosticBag(diagnosticBag: null, _diagnostics.DependenciesBag));
+                    string docCommentId = GetDocumentationCommentId(
+                        cref,
+                        binder,
+                        diagnose
+                          ? _diagnostics
+                          : new BindingDiagnosticBag(
+                                diagnosticBag: null,
+                                _diagnostics.DependenciesBag
+                            )
+                    );
 
                     if (_writer != null)
                     {
@@ -128,7 +151,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Binder binder = factory.GetBinder(nameAttr, nameAttr.Identifier.SpanStart);
 
                     // Do this for diagnostics, even if we aren't writing.
-                    BindName(nameAttr, binder, _memberSymbol, ref _documentedParameters, ref _documentedTypeParameters, _diagnostics);
+                    BindName(
+                        nameAttr,
+                        binder,
+                        _memberSymbol,
+                        ref _documentedParameters,
+                        ref _documentedTypeParameters,
+                        _diagnostics
+                    );
 
                     // Do descend - we still need to write out the tokens of the attribute.
                 }
@@ -147,8 +177,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                         nameSyntax = ((XmlElementStartTagSyntax)node).Name;
                     }
 
-                    if (nameSyntax != null && nameSyntax.Prefix == null &&
-                        DocumentationCommentXmlNames.ElementEquals(nameSyntax.LocalName.ValueText, DocumentationCommentXmlNames.IncludeElementName))
+                    if (
+                        nameSyntax != null
+                        && nameSyntax.Prefix == null
+                        && DocumentationCommentXmlNames.ElementEquals(
+                            nameSyntax.LocalName.ValueText,
+                            DocumentationCommentXmlNames.IncludeElementName
+                        )
+                    )
                     {
                         _includeElementNodes.Add((CSharpSyntaxNode)node);
                     }

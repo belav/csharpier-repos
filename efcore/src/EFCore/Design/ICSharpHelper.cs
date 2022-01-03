@@ -26,7 +26,11 @@ namespace Microsoft.EntityFrameworkCore.Design
         ///     <see langword="true" /> if the method call should be type-qualified, <see langword="false" /> for instance/extension syntax.
         /// </param>
         /// <returns>The fragment.</returns>
-        string Fragment(MethodCallCodeFragment fragment, string? instanceIdentifier = null, bool typeQualified = false);
+        string Fragment(
+            MethodCallCodeFragment fragment,
+            string? instanceIdentifier = null,
+            bool typeQualified = false
+        );
 
         /// <summary>
         ///     Generates a valid C# identifier from the specified string unique to the scope.
@@ -54,8 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="properties">The properties.</param>
         /// <param name="lambdaIdentifier">The identifier to use for parameter in the lambda.</param>
         /// <returns>The lambda.</returns>
-        string Lambda(IEnumerable<IProperty> properties, string? lambdaIdentifier = null)
-            => Lambda(properties.Select(p => p.Name).ToList(), lambdaIdentifier);
+        string Lambda(IEnumerable<IProperty> properties, string? lambdaIdentifier = null) =>
+            Lambda(properties.Select(p => p.Name).ToList(), lambdaIdentifier);
 
         /// <summary>
         ///     Generates a multidimensional array literal.
@@ -70,8 +74,7 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <typeparam name="T">The underlying type of the nullable type.</typeparam>
         /// <param name="value">The nullable value.</param>
         /// <returns>The literal.</returns>
-        string Literal<T>(T? value)
-            where T : struct;
+        string Literal<T>(T? value) where T : struct;
 
         /// <summary>
         ///     Generates a bool literal.

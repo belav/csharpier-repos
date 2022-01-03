@@ -18,7 +18,8 @@ internal class ConfigureBuilder
 
     public MethodInfo MethodInfo { get; }
 
-    public Action<IApplicationBuilder> Build(object? instance) => builder => Invoke(instance, builder);
+    public Action<IApplicationBuilder> Build(object? instance) =>
+        builder => Invoke(instance, builder);
 
     private void Invoke(object? instance, IApplicationBuilder builder)
     {
@@ -40,17 +41,23 @@ internal class ConfigureBuilder
                 {
                     try
                     {
-                        parameters[index] = serviceProvider.GetRequiredService(parameterInfo.ParameterType);
+                        parameters[index] = serviceProvider.GetRequiredService(
+                            parameterInfo.ParameterType
+                        );
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception(string.Format(
-                            CultureInfo.InvariantCulture,
-                            "Could not resolve a service of type '{0}' for the parameter '{1}' of method '{2}' on type '{3}'.",
-                            parameterInfo.ParameterType.FullName,
-                            parameterInfo.Name,
-                            MethodInfo.Name,
-                            MethodInfo.DeclaringType?.FullName), ex);
+                        throw new Exception(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "Could not resolve a service of type '{0}' for the parameter '{1}' of method '{2}' on type '{3}'.",
+                                parameterInfo.ParameterType.FullName,
+                                parameterInfo.Name,
+                                MethodInfo.Name,
+                                MethodInfo.DeclaringType?.FullName
+                            ),
+                            ex
+                        );
                     }
                 }
             }

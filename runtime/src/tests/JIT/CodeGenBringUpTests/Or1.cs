@@ -11,12 +11,17 @@ public class BringUpTest_Or1
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static int Or1(int x) { return x | 0xa; }
+    public static int Or1(int x)
+    {
+        return x | 0xa;
+    }
 
     public static int Main()
     {
         int y = Or1(4);
-        if (y == 14) return Pass;
-        else return Fail;
+        if (y == 14)
+            return Pass;
+        else
+            return Fail;
     }
 }

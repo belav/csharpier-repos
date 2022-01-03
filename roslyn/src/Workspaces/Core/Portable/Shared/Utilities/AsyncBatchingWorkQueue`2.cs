@@ -34,7 +34,11 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Callback to actually perform the processing of the next batch of work.
         /// </summary>
-        private readonly Func<ImmutableArray<TItem>, CancellationToken, ValueTask<TResult>> _processBatchAsync;
+        private readonly Func<
+            ImmutableArray<TItem>,
+            CancellationToken,
+            ValueTask<TResult>
+        > _processBatchAsync;
         private readonly IAsynchronousOperationListener _asyncListener;
         private readonly CancellationToken _cancellationToken;
 
@@ -79,7 +83,8 @@ namespace Roslyn.Utilities
             Func<ImmutableArray<TItem>, CancellationToken, ValueTask<TResult>> processBatchAsync,
             IEqualityComparer<TItem>? equalityComparer,
             IAsynchronousOperationListener asyncListener,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             _delay = delay;
             _processBatchAsync = processBatchAsync;

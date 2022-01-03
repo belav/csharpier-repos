@@ -12,9 +12,11 @@ namespace System.Net.Security
         internal X509Certificate2Collection? _trustList;
         internal bool _sendTrustInHandshake;
 
-        public static SslCertificateTrust CreateForX509Store(X509Store store, bool sendTrustInHandshake = false)
+        public static SslCertificateTrust CreateForX509Store(
+            X509Store store,
+            bool sendTrustInHandshake = false
+        )
         {
-
 #if TARGET_WINDOWS
             if (sendTrustInHandshake && store.Location != StoreLocation.LocalMachine)
             {
@@ -39,7 +41,10 @@ namespace System.Net.Security
         }
 
         [UnsupportedOSPlatform("windows")]
-        public static SslCertificateTrust CreateForX509Collection(X509Certificate2Collection trustList, bool sendTrustInHandshake = false)
+        public static SslCertificateTrust CreateForX509Collection(
+            X509Certificate2Collection trustList,
+            bool sendTrustInHandshake = false
+        )
         {
             if (sendTrustInHandshake)
             {

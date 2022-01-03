@@ -68,11 +68,13 @@ namespace System.Data.Tests.Common
         [Fact]
         public void AddException1()
         {
-            Assert.Throws<InvalidCastException>(() =>
-            {
-                DataTableMappingCollection c = new DataTableMappingCollection();
-                _tableMapCollection.Add(c);
-            });
+            Assert.Throws<InvalidCastException>(
+                () =>
+                {
+                    DataTableMappingCollection c = new DataTableMappingCollection();
+                    _tableMapCollection.Add(c);
+                }
+            );
         }
 
         [Fact]
@@ -166,17 +168,29 @@ namespace System.Data.Tests.Common
             bool eq;
             DataTableMapping tab1;
             tab1 = _tableMapCollection.GetByDataSetTable("dataSetCustomers");
-            eq = (tab1.DataSetTable.Equals("dataSetCustomers") && tab1.SourceTable.Equals("sourceCustomers"));
+            eq = (
+                tab1.DataSetTable.Equals("dataSetCustomers")
+                && tab1.SourceTable.Equals("sourceCustomers")
+            );
             Assert.True(eq);
             tab1 = _tableMapCollection.GetByDataSetTable("dataSetEmployees");
-            eq = (tab1.DataSetTable.Equals("dataSetEmployees") && tab1.SourceTable.Equals("sourceEmployees"));
+            eq = (
+                tab1.DataSetTable.Equals("dataSetEmployees")
+                && tab1.SourceTable.Equals("sourceEmployees")
+            );
             Assert.True(eq);
 
             tab1 = _tableMapCollection.GetByDataSetTable("datasetcustomers");
-            eq = (tab1.DataSetTable.Equals("dataSetCustomers") && tab1.SourceTable.Equals("sourceCustomers"));
+            eq = (
+                tab1.DataSetTable.Equals("dataSetCustomers")
+                && tab1.SourceTable.Equals("sourceCustomers")
+            );
             Assert.True(eq);
             tab1 = _tableMapCollection.GetByDataSetTable("datasetemployees");
-            eq = (tab1.DataSetTable.Equals("dataSetEmployees") && tab1.SourceTable.Equals("sourceEmployees"));
+            eq = (
+                tab1.DataSetTable.Equals("dataSetEmployees")
+                && tab1.SourceTable.Equals("sourceEmployees")
+            );
             Assert.True(eq);
         }
 
@@ -186,29 +200,62 @@ namespace System.Data.Tests.Common
             _tableMapCollection.AddRange(_tabs);
             bool eq;
             DataTableMapping tab1;
-            tab1 = DataTableMappingCollection.GetTableMappingBySchemaAction(_tableMapCollection, "sourceCustomers", "dataSetCustomers", MissingMappingAction.Passthrough);
-            eq = (tab1.DataSetTable.Equals("dataSetCustomers") && tab1.SourceTable.Equals("sourceCustomers"));
+            tab1 = DataTableMappingCollection.GetTableMappingBySchemaAction(
+                _tableMapCollection,
+                "sourceCustomers",
+                "dataSetCustomers",
+                MissingMappingAction.Passthrough
+            );
+            eq = (
+                tab1.DataSetTable.Equals("dataSetCustomers")
+                && tab1.SourceTable.Equals("sourceCustomers")
+            );
             Assert.True(eq);
-            tab1 = DataTableMappingCollection.GetTableMappingBySchemaAction(_tableMapCollection, "sourceEmployees", "dataSetEmployees", MissingMappingAction.Passthrough);
-            eq = (tab1.DataSetTable.Equals("dataSetEmployees") && tab1.SourceTable.Equals("sourceEmployees"));
+            tab1 = DataTableMappingCollection.GetTableMappingBySchemaAction(
+                _tableMapCollection,
+                "sourceEmployees",
+                "dataSetEmployees",
+                MissingMappingAction.Passthrough
+            );
+            eq = (
+                tab1.DataSetTable.Equals("dataSetEmployees")
+                && tab1.SourceTable.Equals("sourceEmployees")
+            );
             Assert.True(eq);
 
-            tab1 = DataTableMappingCollection.GetTableMappingBySchemaAction(_tableMapCollection, "sourceData", "dataSetData", MissingMappingAction.Passthrough);
+            tab1 = DataTableMappingCollection.GetTableMappingBySchemaAction(
+                _tableMapCollection,
+                "sourceData",
+                "dataSetData",
+                MissingMappingAction.Passthrough
+            );
             eq = (tab1.DataSetTable.Equals("sourceData") && tab1.SourceTable.Equals("dataSetData"));
             Assert.False(eq);
             eq = _tableMapCollection.Contains(tab1);
             Assert.False(eq);
-            tab1 = DataTableMappingCollection.GetTableMappingBySchemaAction(_tableMapCollection, "sourceData", "dataSetData", MissingMappingAction.Ignore);
+            tab1 = DataTableMappingCollection.GetTableMappingBySchemaAction(
+                _tableMapCollection,
+                "sourceData",
+                "dataSetData",
+                MissingMappingAction.Ignore
+            );
             Assert.Null(tab1);
         }
 
         [Fact]
         public void GetTableMappingBySchemaActionException1()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                DataTableMappingCollection.GetTableMappingBySchemaAction(_tableMapCollection, "sourceCustomers", "dataSetCustomers", MissingMappingAction.Error);
-            });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    DataTableMappingCollection.GetTableMappingBySchemaAction(
+                        _tableMapCollection,
+                        "sourceCustomers",
+                        "dataSetCustomers",
+                        MissingMappingAction.Error
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -259,23 +306,28 @@ namespace System.Data.Tests.Common
         [Fact]
         public void RemoveException1()
         {
-            Assert.Throws<InvalidCastException>(() =>
-            {
-                string te = "testingdata";
-                _tableMapCollection.AddRange(_tabs);
-                _tableMapCollection.Remove(te);
-            });
+            Assert.Throws<InvalidCastException>(
+                () =>
+                {
+                    string te = "testingdata";
+                    _tableMapCollection.AddRange(_tabs);
+                    _tableMapCollection.Remove(te);
+                }
+            );
         }
 
         [Fact]
         public void RemoveException2()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                _tableMapCollection.AddRange(_tabs);
-                DataTableMapping mymap = new DataTableMapping("sourceAge", "dataSetAge");
-                _tableMapCollection.Remove(mymap);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    _tableMapCollection.AddRange(_tabs);
+                    DataTableMapping mymap = new DataTableMapping("sourceAge", "dataSetAge");
+                    _tableMapCollection.Remove(mymap);
+                }
+            );
         }
 
         [Fact]
@@ -299,22 +351,29 @@ namespace System.Data.Tests.Common
         [Fact]
         public void RemoveAtException1()
         {
-            Assert.Throws<IndexOutOfRangeException>(() =>
-            {
-                _tableMapCollection.RemoveAt(3);
-            });
+            Assert.Throws<IndexOutOfRangeException>(
+                () =>
+                {
+                    _tableMapCollection.RemoveAt(3);
+                }
+            );
         }
 
         [Fact]
         public void RemoveAtException2()
         {
-            Assert.Throws<IndexOutOfRangeException>(() => _tableMapCollection.RemoveAt("sourceAge"));
+            Assert.Throws<IndexOutOfRangeException>(
+                () => _tableMapCollection.RemoveAt("sourceAge")
+            );
         }
 
         [Fact]
         public void ToStringTest()
         {
-            Assert.Equal("System.Data.Common.DataTableMappingCollection", _tableMapCollection.ToString());
+            Assert.Equal(
+                "System.Data.Common.DataTableMappingCollection",
+                _tableMapCollection.ToString()
+            );
         }
     }
 }

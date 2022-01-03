@@ -8,27 +8,31 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public abstract class ComplexNavigationsCollectionsSplitQueryRelationalTestBase<TFixture> : ComplexNavigationsCollectionsQueryTestBase<TFixture>
+    public abstract class ComplexNavigationsCollectionsSplitQueryRelationalTestBase<TFixture>
+        : ComplexNavigationsCollectionsQueryTestBase<TFixture>
         where TFixture : ComplexNavigationsQueryFixtureBase, new()
     {
         protected ComplexNavigationsCollectionsSplitQueryRelationalTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
-        protected override Expression RewriteServerQueryExpression(Expression serverQueryExpression)
-            => new SplitQueryRewritingExpressionVisitor().Visit(serverQueryExpression);
+        protected override Expression RewriteServerQueryExpression(
+            Expression serverQueryExpression
+        ) => new SplitQueryRewritingExpressionVisitor().Visit(serverQueryExpression);
 
         private class SplitQueryRewritingExpressionVisitor : ExpressionVisitor
         {
-            private readonly MethodInfo _asSplitQueryMethod
-                = typeof(RelationalQueryableExtensions).GetMethod(nameof(RelationalQueryableExtensions.AsSplitQuery));
+            private readonly MethodInfo _asSplitQueryMethod =
+                typeof(RelationalQueryableExtensions).GetMethod(
+                    nameof(RelationalQueryableExtensions.AsSplitQuery)
+                );
 
             protected override Expression VisitExtension(Expression extensionExpression)
             {
                 if (extensionExpression is QueryRootExpression rootExpression)
                 {
-                    var splitMethod = _asSplitQueryMethod.MakeGenericMethod(rootExpression.EntityType.ClrType);
+                    var splitMethod = _asSplitQueryMethod.MakeGenericMethod(
+                        rootExpression.EntityType.ClrType
+                    );
 
                     return Expression.Call(splitMethod, rootExpression);
                 }

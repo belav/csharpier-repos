@@ -14,10 +14,8 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
             public GenerateDefaultConstructorCodeAction(
                 Document document,
                 State state,
-                IMethodSymbol constructor)
-                : base(document, state, new[] { constructor }, GetDisplayText(state, constructor))
-            {
-            }
+                IMethodSymbol constructor
+            ) : base(document, state, new[] { constructor }, GetDisplayText(state, constructor)) { }
 
             private static string GetDisplayText(State state, IMethodSymbol constructor)
             {
@@ -25,8 +23,11 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                 var parameterString = string.Join(", ", parameters);
 
                 Contract.ThrowIfNull(state.ClassType);
-                return string.Format(FeaturesResources.Generate_constructor_0_1,
-                    state.ClassType.Name, parameterString);
+                return string.Format(
+                    FeaturesResources.Generate_constructor_0_1,
+                    state.ClassType.Name,
+                    parameterString
+                );
             }
         }
     }

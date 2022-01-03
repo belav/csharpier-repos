@@ -15,7 +15,8 @@ namespace System.Reflection.TypeLoading
     internal abstract partial class RoAssembly
     {
         public sealed override Module? GetModule(string name) => GetRoModule(name);
-        public sealed override Module[] GetModules(bool getResourceModules) => ComputeRoModules(getResourceModules).CloneArray<Module>();
+        public sealed override Module[] GetModules(bool getResourceModules) =>
+            ComputeRoModules(getResourceModules).CloneArray<Module>();
 
 #if NET5_0_OR_GREATER
         [RequiresAssemblyFiles(ThrowingMessageInRAF)]
@@ -25,7 +26,12 @@ namespace System.Reflection.TypeLoading
             Module? m = GetModule(name);
             if (m == null)
                 return null;
-            return new FileStream(m.FullyQualifiedName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            return new FileStream(
+                m.FullyQualifiedName,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read
+            );
         }
 
 #if NET5_0_OR_GREATER
@@ -37,7 +43,12 @@ namespace System.Reflection.TypeLoading
             FileStream[] fs = new FileStream[m.Length];
             for (int i = 0; i < fs.Length; i++)
             {
-                fs[i] = new FileStream(m[i].FullyQualifiedName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                fs[i] = new FileStream(
+                    m[i].FullyQualifiedName,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read
+                );
             }
             return fs;
         }
@@ -64,7 +75,9 @@ namespace System.Reflection.TypeLoading
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
 
-            if (!TryGetAssemblyFileInfo(name, includeManifestModule: true, out AssemblyFileInfo afi))
+            if (
+                !TryGetAssemblyFileInfo(name, includeManifestModule: true, out AssemblyFileInfo afi)
+            )
                 return null;
 
             return GetRoModule(afi);
@@ -82,13 +95,22 @@ namespace System.Reflection.TypeLoading
                 return prior;
 
             RoModule newModule = LoadModule(moduleName, afi.ContainsMetadata);
-            return Interlocked.CompareExchange(ref _loadedModules[loadedModulesIndex], newModule, null) ?? newModule;
+            return Interlocked.CompareExchange(
+                    ref _loadedModules[loadedModulesIndex],
+                    newModule,
+                    null
+                ) ?? newModule;
         }
 
         internal RoModule[] ComputeRoModules(bool getResourceModules)
         {
             List<RoModule> modules = new List<RoModule>(_loadedModules.Length + 1);
-            foreach (AssemblyFileInfo afi in GetAssemblyFileInfosFromManifest(includeManifestModule: true, includeResourceModules: getResourceModules))
+            foreach (
+                AssemblyFileInfo afi in GetAssemblyFileInfosFromManifest(
+                    includeManifestModule: true,
+                    includeResourceModules: getResourceModules
+                )
+            )
             {
                 RoModule module = GetRoModule(afi);
                 modules.Add(module);
@@ -96,14 +118,24 @@ namespace System.Reflection.TypeLoading
             return modules.ToArray();
         }
 
-        public sealed override Module LoadModule(string moduleName, byte[]? rawModule, byte[]? rawSymbolStore)
+        public sealed override Module LoadModule(
+            string moduleName,
+            byte[]? rawModule,
+            byte[]? rawSymbolStore
+        )
         {
             if (moduleName == null)
                 throw new ArgumentNullException(nameof(moduleName));
             if (rawModule == null)
                 throw new ArgumentNullException(nameof(rawModule));
 
-            if (!TryGetAssemblyFileInfo(moduleName, includeManifestModule: false, out AssemblyFileInfo afi))
+            if (
+                !TryGetAssemblyFileInfo(
+                    moduleName,
+                    includeManifestModule: false,
+                    out AssemblyFileInfo afi
+                )
+            )
                 throw new ArgumentException(SR.Format(SR.SpecifiedFileNameInvalid, moduleName)); // Name not in manifest.
 
             Debug.Assert(afi.RowIndex != 0); // Since we excluded the manifest module from the search.
@@ -117,9 +149,18 @@ namespace System.Reflection.TypeLoading
             return newModule;
         }
 
-        private bool TryGetAssemblyFileInfo(string name, bool includeManifestModule, out AssemblyFileInfo afi)
+        private bool TryGetAssemblyFileInfo(
+            string name,
+            bool includeManifestModule,
+            out AssemblyFileInfo afi
+        )
         {
-            foreach (AssemblyFileInfo candidate in GetAssemblyFileInfosFromManifest(includeManifestModule: includeManifestModule, includeResourceModules: true))
+            foreach (
+                AssemblyFileInfo candidate in GetAssemblyFileInfosFromManifest(
+                    includeManifestModule: includeManifestModule,
+                    includeResourceModules: true
+                )
+            )
             {
                 if (name.Equals(candidate.Name, StringComparison.OrdinalIgnoreCase))
                 {
@@ -134,6 +175,9 @@ namespace System.Reflection.TypeLoading
 
         protected abstract RoModule LoadModule(string moduleName, bool containsMetadata);
         protected abstract RoModule CreateModule(Stream peStream, bool containsMetadata);
-        protected abstract IEnumerable<AssemblyFileInfo> GetAssemblyFileInfosFromManifest(bool includeManifestModule, bool includeResourceModules);
+        protected abstract IEnumerable<AssemblyFileInfo> GetAssemblyFileInfosFromManifest(
+            bool includeManifestModule,
+            bool includeResourceModules
+        );
     }
 }

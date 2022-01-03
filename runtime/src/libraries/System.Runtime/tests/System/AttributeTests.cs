@@ -144,7 +144,7 @@ namespace System.Tests
 
         class ParentAttribute : Attribute
         {
-            public int Prop {get;set;}
+            public int Prop { get; set; }
         }
 
         class ChildAttribute : ParentAttribute { }
@@ -158,10 +158,14 @@ namespace System.Tests
         [StringValue("\uDFFF")]
         public static void StringArgument_InvalidCodeUnits_FallbackUsed()
         {
-            MethodInfo thisMethod = typeof(AttributeTests).GetTypeInfo().GetDeclaredMethod("StringArgument_InvalidCodeUnits_FallbackUsed");
+            MethodInfo thisMethod = typeof(AttributeTests)
+                .GetTypeInfo()
+                .GetDeclaredMethod("StringArgument_InvalidCodeUnits_FallbackUsed");
             Assert.NotNull(thisMethod);
 
-            CustomAttributeData cad = thisMethod.CustomAttributes.Where(ca => ca.AttributeType == typeof(StringValueAttribute)).FirstOrDefault();
+            CustomAttributeData cad = thisMethod.CustomAttributes
+                .Where(ca => ca.AttributeType == typeof(StringValueAttribute))
+                .FirstOrDefault();
             Assert.NotNull(cad);
 
             string stringArg = cad.ConstructorArguments[0].Value as string;
@@ -171,22 +175,57 @@ namespace System.Tests
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { new StringValueAttribute("hello"), new StringValueAttribute("hello"), true, true };
-            yield return new object[] { new StringValueAttribute("hello"), new StringValueAttribute("foo"), false, false };
+            yield return new object[]
+            {
+                new StringValueAttribute("hello"),
+                new StringValueAttribute("hello"),
+                true,
+                true
+            };
+            yield return new object[]
+            {
+                new StringValueAttribute("hello"),
+                new StringValueAttribute("foo"),
+                false,
+                false
+            };
 
-            yield return new object[] { new StringValueIntValueAttribute("hello", 1), new StringValueIntValueAttribute("hello", 1), true, true };
-            yield return new object[] { new StringValueIntValueAttribute("hello", 1), new StringValueIntValueAttribute("hello", 2), false, true }; // GetHashCode() ignores the int value
+            yield return new object[]
+            {
+                new StringValueIntValueAttribute("hello", 1),
+                new StringValueIntValueAttribute("hello", 1),
+                true,
+                true
+            };
+            yield return new object[]
+            {
+                new StringValueIntValueAttribute("hello", 1),
+                new StringValueIntValueAttribute("hello", 2),
+                false,
+                true
+            }; // GetHashCode() ignores the int value
 
             yield return new object[] { new EmptyAttribute(), new EmptyAttribute(), true, true };
 
-            yield return new object[] { new StringValueAttribute("hello"), new StringValueIntValueAttribute("hello", 1), false, true }; // GetHashCode() ignores the int value
+            yield return new object[]
+            {
+                new StringValueAttribute("hello"),
+                new StringValueIntValueAttribute("hello", 1),
+                false,
+                true
+            }; // GetHashCode() ignores the int value
             yield return new object[] { new StringValueAttribute("hello"), "hello", false, false };
             yield return new object[] { new StringValueAttribute("hello"), null, false, false };
         }
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public static void EqualsTest(Attribute attr1, object obj, bool expected, bool hashEqualityExpected)
+        public static void EqualsTest(
+            Attribute attr1,
+            object obj,
+            bool expected,
+            bool hashEqualityExpected
+        )
         {
             Assert.Equal(expected, attr1.Equals(obj));
 
@@ -225,7 +264,7 @@ namespace System.Tests
         [Fact]
         public static void ValidateDefaults()
         {
-            StringValueAttribute sav =  new StringValueAttribute("test");
+            StringValueAttribute sav = new StringValueAttribute("test");
             Assert.False(sav.IsDefaultAttribute());
             Assert.Equal(sav.GetType(), sav.TypeId);
             Assert.True(sav.Match(sav));

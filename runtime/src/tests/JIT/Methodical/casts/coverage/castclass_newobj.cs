@@ -20,28 +20,40 @@ namespace JitTest
                         inst = (TestClass)(object)(new TestClass());
                         return inst != null;
                     }
-                    catch (Exception) { return false; }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case 1:
                     try
                     {
                         inst = (TestClass)(object)(new DerivedClass());
                         return inst != null;
                     }
-                    catch (Exception) { return false; }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case 2:
                     try
                     {
                         inst = (TestClass)(object)(new BaseClass());
                         return false;
                     }
-                    catch (Exception X) { return X is InvalidCastException; }
+                    catch (Exception X)
+                    {
+                        return X is InvalidCastException;
+                    }
                 case 3:
                     try
                     {
                         inst = (TestClass)(object)(new OtherClass());
                         return false;
                     }
-                    catch (Exception X) { return X is InvalidCastException; }
+                    catch (Exception X)
+                    {
+                        return X is InvalidCastException;
+                    }
                 default:
                     return false;
             }

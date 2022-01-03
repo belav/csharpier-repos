@@ -26,6 +26,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         /// and TextSpan in the original solution, and specify their new span and possible conflict
         /// resolution.
         /// </summary>
-        Task<IVSTypeScriptInlineRenameReplacementInfo> GetReplacementsAsync(string replacementText, OptionSet optionSet, CancellationToken cancellationToken);
+        Task<IVSTypeScriptInlineRenameReplacementInfo> GetReplacementsAsync(
+            string replacementText,
+            OptionSet optionSet,
+            CancellationToken cancellationToken
+        );
     }
 }

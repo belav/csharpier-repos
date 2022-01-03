@@ -25,7 +25,10 @@ namespace System
         public void MakeStrong()
         {
             _strongRef = WeakTarget;
-            Debug.Assert(_strongRef != null, $"Expected non-null {nameof(_strongRef)} after setting");
+            Debug.Assert(
+                _strongRef != null,
+                $"Expected non-null {nameof(_strongRef)} after setting"
+            );
         }
 
         /// <summary>Gets the wrapped object.</summary>

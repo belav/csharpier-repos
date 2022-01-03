@@ -35,7 +35,9 @@ internal static class ChangeEventArgsReader
                         changeArgs.Value = GetJsonElementStringArrayValue(value);
                         break;
                     default:
-                        throw new ArgumentException($"Unsupported {nameof(ChangeEventArgs)} value {jsonElement}.");
+                        throw new ArgumentException(
+                            $"Unsupported {nameof(ChangeEventArgs)} value {jsonElement}."
+                        );
                 }
                 return changeArgs;
             }
@@ -58,8 +60,9 @@ internal static class ChangeEventArgsReader
             if (arrayElement.ValueKind != JsonValueKind.String)
             {
                 throw new InvalidOperationException(
-                    $"Unsupported {nameof(JsonElement)} value kind '{arrayElement.ValueKind}' " +
-                    $"(expected '{JsonValueKind.String}').");
+                    $"Unsupported {nameof(JsonElement)} value kind '{arrayElement.ValueKind}' "
+                        + $"(expected '{JsonValueKind.String}')."
+                );
             }
 
             result[elementIndex] = arrayElement.GetString();
@@ -69,6 +72,3 @@ internal static class ChangeEventArgsReader
         return result;
     }
 }
-
-
-

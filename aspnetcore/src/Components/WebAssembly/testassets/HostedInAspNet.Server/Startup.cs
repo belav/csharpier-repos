@@ -27,22 +27,33 @@ public class Startup
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BootResourceRequestLog bootResourceRequestLog)
+    public void Configure(
+        IApplicationBuilder app,
+        IWebHostEnvironment env,
+        BootResourceRequestLog bootResourceRequestLog
+    )
     {
         var mapAlternativePathApp = Configuration.GetValue<bool>("UseAlternativeBasePath");
         var mapAllApps = Configuration.GetValue<bool>("MapAllApps");
-        app.Use((context, next) =>
-        {
+        app.Use(
+            (context, next) =>
+            {
                 // This is used by E2E tests to verify that the correct resources were fetched,
                 // and that it was possible to override the loading mechanism
-                if (context.Request.Query.ContainsKey("customizedbootresource")
-                || context.Request.Headers.ContainsKey("customizedbootresource")
-                || context.Request.Path.Value.EndsWith("/blazor.boot.json", StringComparison.Ordinal))
-            {
-                bootResourceRequestLog.AddRequest(context.Request);
+                if (
+                    context.Request.Query.ContainsKey("customizedbootresource")
+                    || context.Request.Headers.ContainsKey("customizedbootresource")
+                    || context.Request.Path.Value.EndsWith(
+                        "/blazor.boot.json",
+                        StringComparison.Ordinal
+                    )
+                )
+                {
+                    bootResourceRequestLog.AddRequest(context.Request);
+                }
+                return next(context);
             }
-            return next(context);
-        });
+        );
 
         if (env.IsDevelopment())
         {
@@ -64,17 +75,19 @@ public class Startup
 
         app.UseRouting();
 
-        app.UseEndpoints(endpoints =>
-        {
-            if (mapAllApps || mapAlternativePathApp)
+        app.UseEndpoints(
+            endpoints =>
             {
-                endpoints.MapFallbackToFile("/app/{**slug:nonfile}", "app/index.html");
-            }
+                if (mapAllApps || mapAlternativePathApp)
+                {
+                    endpoints.MapFallbackToFile("/app/{**slug:nonfile}", "app/index.html");
+                }
 
-            if (mapAllApps || !mapAlternativePathApp)
-            {
-                endpoints.MapFallbackToFile("index.html");
+                if (mapAllApps || !mapAlternativePathApp)
+                {
+                    endpoints.MapFallbackToFile("index.html");
+                }
             }
-        });
+        );
     }
 }

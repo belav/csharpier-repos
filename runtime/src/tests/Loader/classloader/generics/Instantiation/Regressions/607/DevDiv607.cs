@@ -11,21 +11,19 @@
 using System;
 
 public class Test_DevDiv607
-{	
-	public static int Main()
-	{
-		try
-		{
-			C7 obj = new C7();
-			Console.WriteLine("PASS");
-			return 100;
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine("FAIL: Caught unexpected exception: " + e);
-			return 101;
-		}
-		
-	}
-
+{
+    public static int Main()
+    {
+        try
+        {
+            C7 obj = new C7();
+            Console.WriteLine("PASS");
+            return 100;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("FAIL: Caught unexpected exception: " + e);
+            return 101;
+        }
+    }
 }

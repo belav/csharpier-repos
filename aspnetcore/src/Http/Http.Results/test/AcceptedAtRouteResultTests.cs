@@ -26,17 +26,16 @@ public class AcceptedAtRouteResultTests
         var stream = new MemoryStream();
         httpContext.Response.Body = stream;
 
-        var routeValues = new RouteValueDictionary(new Dictionary<string, string>()
-            {
-                { "test", "case" },
-                { "sample", "route" }
-            });
+        var routeValues = new RouteValueDictionary(
+            new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+        );
 
         // Act
         var result = new AcceptedAtRouteResult(
             routeName: "sample",
             routeValues: routeValues,
-            value: "Hello world");
+            value: "Hello world"
+        );
         await result.ExecuteAsync(httpContext);
 
         // Assert
@@ -49,19 +48,13 @@ public class AcceptedAtRouteResultTests
         get
         {
             return new TheoryData<object>
-                {
-                    null,
-                    new Dictionary<string, string>()
-                    {
-                        { "hello", "world" }
-                    },
-                    new RouteValueDictionary(
-                        new Dictionary<string, string>()
-                        {
-                            { "test", "case" },
-                            { "sample", "route" }
-                        }),
-                    };
+            {
+                null,
+                new Dictionary<string, string>() { { "hello", "world" } },
+                new RouteValueDictionary(
+                    new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+                ),
+            };
         }
     }
 
@@ -94,12 +87,14 @@ public class AcceptedAtRouteResultTests
         var result = new AcceptedAtRouteResult(
             routeName: null,
             routeValues: new Dictionary<string, object>(),
-            value: null);
+            value: null
+        );
 
         // Assert
-        await ExceptionAssert.ThrowsAsync<InvalidOperationException>(() =>
-            result.ExecuteAsync(httpContext),
-            "No route matches the supplied values.");
+        await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
+            () => result.ExecuteAsync(httpContext),
+            "No route matches the supplied values."
+        );
     }
 
     private static HttpContext GetHttpContext(LinkGenerator linkGenerator)

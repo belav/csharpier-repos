@@ -21,25 +21,35 @@ public class WebHostTests : LoggedTest
     {
         // Arrange
         var builder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel(o =>
-                    {
-                        o.ConfigureEndpointDefaults(listenOptions =>
-                        {
-                            listenOptions.Protocols = Core.HttpProtocols.Http3;
-                        });
-                    })
-                    .UseUrls("https://127.0.0.1:0")
-                    .Configure(app =>
-                    {
-                        app.Run(async context =>
-                        {
-                            await context.Response.WriteAsync("hello, world");
-                        });
-                    });
-            })
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel(
+                            o =>
+                            {
+                                o.ConfigureEndpointDefaults(
+                                    listenOptions =>
+                                    {
+                                        listenOptions.Protocols = Core.HttpProtocols.Http3;
+                                    }
+                                );
+                            }
+                        )
+                        .UseUrls("https://127.0.0.1:0")
+                        .Configure(
+                            app =>
+                            {
+                                app.Run(
+                                    async context =>
+                                    {
+                                        await context.Response.WriteAsync("hello, world");
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
             .ConfigureServices(AddTestLogging);
 
         using (var host = builder.Build())
@@ -47,7 +57,10 @@ public class WebHostTests : LoggedTest
         {
             await host.StartAsync();
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{host.GetPort()}/");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"https://127.0.0.1:{host.GetPort()}/"
+            );
             request.Version = HttpVersion.Version30;
             request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
@@ -68,34 +81,53 @@ public class WebHostTests : LoggedTest
     [MsQuicSupported]
     [InlineData(5002, 5003)]
     [InlineData(5004, 5004)]
-    public async Task Listen_Http3AndSocketsCoexistOnDifferentEndpoints_ClientSuccess(int http3Port, int http1Port)
+    public async Task Listen_Http3AndSocketsCoexistOnDifferentEndpoints_ClientSuccess(
+        int http3Port,
+        int http1Port
+    )
     {
         // Arrange
         var builder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel(o =>
-                    {
-                        o.Listen(IPAddress.Parse("127.0.0.1"), http3Port, listenOptions =>
-                        {
-                            listenOptions.Protocols = Core.HttpProtocols.Http3;
-                            listenOptions.UseHttps(TestResources.GetTestCertificate());
-                        });
-                        o.Listen(IPAddress.Parse("127.0.0.1"), http1Port, listenOptions =>
-                        {
-                            listenOptions.Protocols = Core.HttpProtocols.Http1;
-                            listenOptions.UseHttps(TestResources.GetTestCertificate());
-                        });
-                    })
-                    .Configure(app =>
-                    {
-                        app.Run(async context =>
-                        {
-                            await context.Response.WriteAsync("hello, world");
-                        });
-                    });
-            })
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel(
+                            o =>
+                            {
+                                o.Listen(
+                                    IPAddress.Parse("127.0.0.1"),
+                                    http3Port,
+                                    listenOptions =>
+                                    {
+                                        listenOptions.Protocols = Core.HttpProtocols.Http3;
+                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                    }
+                                );
+                                o.Listen(
+                                    IPAddress.Parse("127.0.0.1"),
+                                    http1Port,
+                                    listenOptions =>
+                                    {
+                                        listenOptions.Protocols = Core.HttpProtocols.Http1;
+                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                    }
+                                );
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Run(
+                                    async context =>
+                                    {
+                                        await context.Response.WriteAsync("hello, world");
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
             .ConfigureServices(AddTestLogging);
 
         using var host = builder.Build();
@@ -112,25 +144,38 @@ public class WebHostTests : LoggedTest
     {
         // Arrange
         var builder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel(o =>
-                    {
-                        o.Listen(IPAddress.Parse("127.0.0.1"), 5005, listenOptions =>
-                        {
-                            listenOptions.Protocols = Core.HttpProtocols.Http1AndHttp2AndHttp3;
-                            listenOptions.UseHttps(TestResources.GetTestCertificate());
-                        });
-                    })
-                    .Configure(app =>
-                    {
-                        app.Run(async context =>
-                        {
-                            await context.Response.WriteAsync("hello, world");
-                        });
-                    });
-            })
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel(
+                            o =>
+                            {
+                                o.Listen(
+                                    IPAddress.Parse("127.0.0.1"),
+                                    5005,
+                                    listenOptions =>
+                                    {
+                                        listenOptions.Protocols =
+                                            Core.HttpProtocols.Http1AndHttp2AndHttp3;
+                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                    }
+                                );
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Run(
+                                    async context =>
+                                    {
+                                        await context.Response.WriteAsync("hello, world");
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
             .ConfigureServices(AddTestLogging);
 
         using var host = builder.Build();
@@ -147,25 +192,38 @@ public class WebHostTests : LoggedTest
     {
         // Arrange
         var builder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel(o =>
-                    {
-                        o.Listen(IPAddress.Parse("127.0.0.1"), 0, listenOptions =>
-                        {
-                            listenOptions.Protocols = Core.HttpProtocols.Http1AndHttp2AndHttp3;
-                            listenOptions.UseHttps(TestResources.GetTestCertificate());
-                        });
-                    })
-                    .Configure(app =>
-                    {
-                        app.Run(async context =>
-                        {
-                            await context.Response.WriteAsync("hello, world");
-                        });
-                    });
-            })
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel(
+                            o =>
+                            {
+                                o.Listen(
+                                    IPAddress.Parse("127.0.0.1"),
+                                    0,
+                                    listenOptions =>
+                                    {
+                                        listenOptions.Protocols =
+                                            Core.HttpProtocols.Http1AndHttp2AndHttp3;
+                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                    }
+                                );
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Run(
+                                    async context =>
+                                    {
+                                        await context.Response.WriteAsync("hello, world");
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
             .ConfigureServices(AddTestLogging);
 
         using var host = builder.Build();
@@ -174,7 +232,10 @@ public class WebHostTests : LoggedTest
         using (var client = CreateClient())
         {
             // Act
-            var request1 = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{host.GetPort()}/");
+            var request1 = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"https://127.0.0.1:{host.GetPort()}/"
+            );
             request1.VersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
             var response1 = await client.SendAsync(request1).DefaultTimeout();
 
@@ -188,7 +249,10 @@ public class WebHostTests : LoggedTest
             Assert.Single(altSvcValues1, @$"h3="":{host.GetPort()}""");
 
             // Act
-            var request2 = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{host.GetPort()}/");
+            var request2 = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"https://127.0.0.1:{host.GetPort()}/"
+            );
             request2.VersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
             var response2 = await client.SendAsync(request2).DefaultTimeout();
 
@@ -211,29 +275,44 @@ public class WebHostTests : LoggedTest
     {
         // Arrange
         var builder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel(o =>
-                    {
-                        o.ConfigureEndpointDefaults(listenOptions =>
-                        {
-                            listenOptions.DisableAltSvcHeader = true;
-                        });
-                        o.Listen(IPAddress.Parse("127.0.0.1"), 0, listenOptions =>
-                        {
-                            listenOptions.Protocols = Core.HttpProtocols.Http1AndHttp2AndHttp3;
-                            listenOptions.UseHttps(TestResources.GetTestCertificate());
-                        });
-                    })
-                    .Configure(app =>
-                    {
-                        app.Run(async context =>
-                        {
-                            await context.Response.WriteAsync("hello, world");
-                        });
-                    });
-            })
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel(
+                            o =>
+                            {
+                                o.ConfigureEndpointDefaults(
+                                    listenOptions =>
+                                    {
+                                        listenOptions.DisableAltSvcHeader = true;
+                                    }
+                                );
+                                o.Listen(
+                                    IPAddress.Parse("127.0.0.1"),
+                                    0,
+                                    listenOptions =>
+                                    {
+                                        listenOptions.Protocols =
+                                            Core.HttpProtocols.Http1AndHttp2AndHttp3;
+                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                    }
+                                );
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Run(
+                                    async context =>
+                                    {
+                                        await context.Response.WriteAsync("hello, world");
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
             .ConfigureServices(AddTestLogging);
 
         using var host = builder.Build();
@@ -242,7 +321,10 @@ public class WebHostTests : LoggedTest
         using (var client = CreateClient())
         {
             // Act
-            var request1 = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{host.GetPort()}/");
+            var request1 = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"https://127.0.0.1:{host.GetPort()}/"
+            );
             request1.VersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
             var response1 = await client.SendAsync(request1).DefaultTimeout();
 
@@ -255,7 +337,10 @@ public class WebHostTests : LoggedTest
             Assert.False(response1.Headers.Contains("alt-svc"));
 
             // Act
-            var request2 = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{host.GetPort()}/");
+            var request2 = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"https://127.0.0.1:{host.GetPort()}/"
+            );
             request2.VersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
             var response2 = await client.SendAsync(request2).DefaultTimeout();
 
@@ -276,7 +361,10 @@ public class WebHostTests : LoggedTest
         using (var client = CreateClient())
         {
             // HTTP/3
-            var request1 = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{http3Port}/");
+            var request1 = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"https://127.0.0.1:{http3Port}/"
+            );
             request1.Version = HttpVersion.Version30;
             request1.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
@@ -290,7 +378,10 @@ public class WebHostTests : LoggedTest
             Assert.Equal("hello, world", responseText1);
 
             // HTTP/1.1
-            var request2 = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{http1Port}/");
+            var request2 = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"https://127.0.0.1:{http1Port}/"
+            );
 
             // Act
             var response2 = await client.SendAsync(request2).DefaultTimeout();
@@ -309,40 +400,57 @@ public class WebHostTests : LoggedTest
     {
         // Arrange
         var builder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseKestrel(o =>
-                    {
-                        o.ListenUnixSocket("/test-path", listenOptions =>
-                        {
-                            listenOptions.Protocols = Core.HttpProtocols.Http3;
-                            listenOptions.UseHttps(TestResources.GetTestCertificate());
-                        });
-                    })
-                    .Configure(app =>
-                    {
-                        app.Run(async context =>
-                        {
-                            await context.Response.WriteAsync("hello, world");
-                        });
-                    });
-            })
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseKestrel(
+                            o =>
+                            {
+                                o.ListenUnixSocket(
+                                    "/test-path",
+                                    listenOptions =>
+                                    {
+                                        listenOptions.Protocols = Core.HttpProtocols.Http3;
+                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                    }
+                                );
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Run(
+                                    async context =>
+                                    {
+                                        await context.Response.WriteAsync("hello, world");
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
             .ConfigureServices(AddTestLogging);
 
         using var host = builder.Build();
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => host.StartAsync()).DefaultTimeout();
+        var ex = await Assert
+            .ThrowsAsync<InvalidOperationException>(() => host.StartAsync())
+            .DefaultTimeout();
 
         // Assert
-        Assert.Equal("QUIC doesn't support listening on the configured endpoint type. Expected IPEndPoint but got UnixDomainSocketEndPoint.", ex.Message);
+        Assert.Equal(
+            "QUIC doesn't support listening on the configured endpoint type. Expected IPEndPoint but got UnixDomainSocketEndPoint.",
+            ex.Message
+        );
     }
 
     private static HttpClient CreateClient()
     {
         var httpHandler = new HttpClientHandler();
-        httpHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+        httpHandler.ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 
         return new HttpClient(httpHandler);
     }

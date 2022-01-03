@@ -34,10 +34,7 @@ namespace System.Security.Cryptography
             /// <summary>
             ///     Create an ECDsaOpenSsl algorithm with a random 521 bit key pair.
             /// </summary>
-            public ECDsaOpenSsl()
-                : this(521)
-            {
-            }
+            public ECDsaOpenSsl() : this(521) { }
 
             /// <summary>
             ///     Creates a new ECDsaOpenSsl object that will use a randomly generated key of the specified size.
@@ -70,7 +67,8 @@ namespace System.Security.Cryptography
                 get
                 {
                     // Return the three sizes that can be explicitly set (for backwards compatibility)
-                    return new[] {
+                    return new[]
+                    {
                         new KeySizes(minSize: 256, maxSize: 384, skipSize: 128),
                         new KeySizes(minSize: 521, maxSize: 521, skipSize: 0),
                     };
@@ -87,29 +85,47 @@ namespace System.Security.Cryptography
                 int signatureLength = Interop.Crypto.EcDsaSize(key);
 
                 Span<byte> signDestination = stackalloc byte[SignatureStackBufSize];
-                ReadOnlySpan<byte> derSignature = SignHash(hash, signDestination, signatureLength, key);
+                ReadOnlySpan<byte> derSignature = SignHash(
+                    hash,
+                    signDestination,
+                    signatureLength,
+                    key
+                );
 
-                byte[] converted = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(derSignature, KeySize);
+                byte[] converted = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
+                    derSignature,
+                    KeySize
+                );
                 return converted;
             }
 
 #if INTERNAL_ASYMMETRIC_IMPLEMENTATIONS
-            public override bool TrySignHash(ReadOnlySpan<byte> hash, Span<byte> destination, out int bytesWritten)
+            public override bool TrySignHash(
+                ReadOnlySpan<byte> hash,
+                Span<byte> destination,
+                out int bytesWritten
+            )
             {
                 return TrySignHashCore(
                     hash,
                     destination,
                     DSASignatureFormat.IeeeP1363FixedFieldConcatenation,
-                    out bytesWritten);
+                    out bytesWritten
+                );
             }
 
             protected override bool TrySignHashCore(
                 ReadOnlySpan<byte> hash,
                 Span<byte> destination,
                 DSASignatureFormat signatureFormat,
-                out int bytesWritten)
+                out int bytesWritten
+            )
 #else
-            public override bool TrySignHash(ReadOnlySpan<byte> hash, Span<byte> destination, out int bytesWritten)
+        public override bool TrySignHash(
+            ReadOnlySpan<byte> hash,
+            Span<byte> destination,
+            out int bytesWritten
+        )
 #endif
             {
                 ThrowIfDisposed();
@@ -130,8 +146,17 @@ namespace System.Security.Cryptography
                         return false;
                     }
 
-                    ReadOnlySpan<byte> derSignature = SignHash(hash, signDestination, signatureLength, key);
-                    bytesWritten = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(derSignature, KeySize, destination);
+                    ReadOnlySpan<byte> derSignature = SignHash(
+                        hash,
+                        signDestination,
+                        signatureLength,
+                        key
+                    );
+                    bytesWritten = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
+                        derSignature,
+                        KeySize,
+                        destination
+                    );
                     Debug.Assert(bytesWritten == encodedSize);
                     return true;
 #if INTERNAL_ASYMMETRIC_IMPLEMENTATIONS
@@ -144,12 +169,19 @@ namespace System.Security.Cryptography
                     }
                     else if (signatureLength > signDestination.Length)
                     {
-                        Debug.Fail($"Stack-based signDestination is insufficient ({signatureLength} needed)");
+                        Debug.Fail(
+                            $"Stack-based signDestination is insufficient ({signatureLength} needed)"
+                        );
                         bytesWritten = 0;
                         return false;
                     }
 
-                    ReadOnlySpan<byte> derSignature = SignHash(hash, signDestination, signatureLength, key);
+                    ReadOnlySpan<byte> derSignature = SignHash(
+                        hash,
+                        signDestination,
+                        signatureLength,
+                        key
+                    );
 
                     if (destination == signDestination)
                     {
@@ -157,7 +189,11 @@ namespace System.Security.Cryptography
                         return true;
                     }
 
-                    return Helpers.TryCopyToDestination(derSignature, destination, out bytesWritten);
+                    return Helpers.TryCopyToDestination(
+                        derSignature,
+                        destination,
+                        out bytesWritten
+                    );
                 }
                 else
                 {
@@ -170,11 +206,14 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> hash,
                 Span<byte> destination,
                 int signatureLength,
-                SafeEcKeyHandle key)
+                SafeEcKeyHandle key
+            )
             {
                 if (signatureLength > destination.Length)
                 {
-                    Debug.Fail($"Stack-based signDestination is insufficient ({signatureLength} needed)");
+                    Debug.Fail(
+                        $"Stack-based signDestination is insufficient ({signatureLength} needed)"
+                    );
                     destination = new byte[signatureLength];
                 }
 
@@ -188,7 +227,8 @@ namespace System.Security.Cryptography
                     "ECDSA_sign reported an unexpected signature size",
                     "ECDSA_sign reported signatureSize was {0}, when <= {1} was expected",
                     actualLength,
-                    signatureLength);
+                    signatureLength
+                );
 
                 return destination.Slice(0, actualLength);
             }
@@ -204,15 +244,23 @@ namespace System.Security.Cryptography
             }
 
 #if INTERNAL_ASYMMETRIC_IMPLEMENTATIONS
-            public override bool VerifyHash(ReadOnlySpan<byte> hash, ReadOnlySpan<byte> signature) =>
-                VerifyHashCore(hash, signature, DSASignatureFormat.IeeeP1363FixedFieldConcatenation);
+            public override bool VerifyHash(
+                ReadOnlySpan<byte> hash,
+                ReadOnlySpan<byte> signature
+            ) =>
+                VerifyHashCore(
+                    hash,
+                    signature,
+                    DSASignatureFormat.IeeeP1363FixedFieldConcatenation
+                );
 
             protected override bool VerifyHashCore(
                 ReadOnlySpan<byte> hash,
                 ReadOnlySpan<byte> signature,
-                DSASignatureFormat signatureFormat)
+                DSASignatureFormat signatureFormat
+            )
 #else
-            public override bool VerifyHash(ReadOnlySpan<byte> hash, ReadOnlySpan<byte> signature)
+        public override bool VerifyHash(ReadOnlySpan<byte> hash, ReadOnlySpan<byte> signature)
 #endif
             {
                 ThrowIfDisposed();
@@ -234,7 +282,13 @@ namespace System.Security.Cryptography
                         return false;
                     }
 
-                    if (AsymmetricAlgorithmHelpers.TryConvertIeee1363ToDer(signature, derSignature, out int derSize))
+                    if (
+                        AsymmetricAlgorithmHelpers.TryConvertIeee1363ToDer(
+                            signature,
+                            derSignature,
+                            out int derSize
+                        )
+                    )
                     {
                         toVerify = derSignature.Slice(0, derSize);
                     }
@@ -250,10 +304,13 @@ namespace System.Security.Cryptography
                 }
                 else
                 {
-                    Debug.Fail($"Missing internal implementation handler for signature format {signatureFormat}");
+                    Debug.Fail(
+                        $"Missing internal implementation handler for signature format {signatureFormat}"
+                    );
                     throw new CryptographicException(
                         SR.Cryptography_UnknownSignatureFormat,
-                        signatureFormat.ToString());
+                        signatureFormat.ToString()
+                    );
                 }
 #endif
 
@@ -262,14 +319,28 @@ namespace System.Security.Cryptography
                 return verifyResult == 1;
             }
 
-            protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm) =>
-                AsymmetricAlgorithmHelpers.HashData(data, offset, count, hashAlgorithm);
+            protected override byte[] HashData(
+                byte[] data,
+                int offset,
+                int count,
+                HashAlgorithmName hashAlgorithm
+            ) => AsymmetricAlgorithmHelpers.HashData(data, offset, count, hashAlgorithm);
 
             protected override byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) =>
                 AsymmetricAlgorithmHelpers.HashData(data, hashAlgorithm);
 
-            protected override bool TryHashData(ReadOnlySpan<byte> data, Span<byte> destination, HashAlgorithmName hashAlgorithm, out int bytesWritten) =>
-                AsymmetricAlgorithmHelpers.TryHashData(data, destination, hashAlgorithm, out bytesWritten);
+            protected override bool TryHashData(
+                ReadOnlySpan<byte> data,
+                Span<byte> destination,
+                HashAlgorithmName hashAlgorithm,
+                out int bytesWritten
+            ) =>
+                AsymmetricAlgorithmHelpers.TryHashData(
+                    data,
+                    destination,
+                    hashAlgorithm,
+                    out bytesWritten
+                );
 
             protected override void Dispose(bool disposing)
             {
@@ -284,10 +355,7 @@ namespace System.Security.Cryptography
 
             public override int KeySize
             {
-                get
-                {
-                    return base.KeySize;
-                }
+                get { return base.KeySize; }
                 set
                 {
                     if (KeySize == value)
@@ -334,7 +402,8 @@ namespace System.Security.Cryptography
             public override void ImportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<byte> passwordBytes,
                 ReadOnlySpan<byte> source,
-                out int bytesRead)
+                out int bytesRead
+            )
             {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
@@ -343,7 +412,8 @@ namespace System.Security.Cryptography
             public override void ImportEncryptedPkcs8PrivateKey(
                 ReadOnlySpan<char> password,
                 ReadOnlySpan<byte> source,
-                out int bytesRead)
+                out int bytesRead
+            )
             {
                 ThrowIfDisposed();
                 base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
@@ -357,7 +427,7 @@ namespace System.Security.Cryptography
 #if INTERNAL_ASYMMETRIC_IMPLEMENTATIONS
                         nameof(ECDsa)
 #else
-                        nameof(ECDsaOpenSsl)
+                    nameof(ECDsaOpenSsl)
 #endif
                     );
                 }

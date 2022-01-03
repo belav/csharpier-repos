@@ -133,28 +133,19 @@ namespace XmlCoreTest.Common
 
         public override WriteState WriteState
         {
-            get
-            {
-                return _writer.WriteState;
-            }
+            get { return _writer.WriteState; }
         }
 
         // XmlSpace and XmlLang are virtual, so custom writer does not need to override them.
         // But the virtual impln returns Default and empty string respectively, which breaks many writer API tests, hence they are overridden here.
         public override XmlSpace XmlSpace
         {
-            get
-            {
-                return _writer.XmlSpace;
-            }
+            get { return _writer.XmlSpace; }
         }
 
         public override string XmlLang
         {
-            get
-            {
-                return _writer.XmlLang;
-            }
+            get { return _writer.XmlLang; }
         }
 
         protected override void Dispose(bool disposing)

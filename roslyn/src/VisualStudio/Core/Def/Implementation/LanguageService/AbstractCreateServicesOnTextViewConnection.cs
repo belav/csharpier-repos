@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
     /// Creates services on the first connection of an applicable subject buffer to an IWpfTextView. 
     /// This ensures the services are available by the time an open document or the interactive window needs them.
     /// </summary>
-    internal abstract class AbstractCreateServicesOnTextViewConnection : IWpfTextViewConnectionListener
+    internal abstract class AbstractCreateServicesOnTextViewConnection
+        : IWpfTextViewConnectionListener
     {
         private readonly IAsynchronousOperationListener _listener;
         private readonly IThreadingContext _threadingContext;
@@ -30,8 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
         protected VisualStudioWorkspace Workspace { get; }
 
-        protected virtual Task InitializeServiceForOpenedDocumentAsync(Document document)
-            => Task.CompletedTask;
+        protected virtual Task InitializeServiceForOpenedDocumentAsync(Document document) =>
+            Task.CompletedTask;
 
         protected virtual void OnSolutionRemoved()
         {
@@ -42,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             VisualStudioWorkspace workspace,
             IAsynchronousOperationListenerProvider listenerProvider,
             IThreadingContext threadingContext,
-            string languageName)
+            string languageName
+        )
         {
             Workspace = workspace;
             _listener = listenerProvider.GetListener(FeatureAttribute.Workspace);
@@ -53,7 +55,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             Workspace.WorkspaceChanged += OnWorkspaceChanged;
         }
 
-        void IWpfTextViewConnectionListener.SubjectBuffersConnected(IWpfTextView textView, ConnectionReason reason, Collection<ITextBuffer> subjectBuffers)
+        void IWpfTextViewConnectionListener.SubjectBuffersConnected(
+            IWpfTextView textView,
+            ConnectionReason reason,
+            Collection<ITextBuffer> subjectBuffers
+        )
         {
             if (!_initialized)
             {
@@ -64,9 +70,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             }
         }
 
-        void IWpfTextViewConnectionListener.SubjectBuffersDisconnected(IWpfTextView textView, ConnectionReason reason, Collection<ITextBuffer> subjectBuffers)
-        {
-        }
+        void IWpfTextViewConnectionListener.SubjectBuffersDisconnected(
+            IWpfTextView textView,
+            ConnectionReason reason,
+            Collection<ITextBuffer> subjectBuffers
+        ) { }
 
         private void OnWorkspaceChanged(object sender, WorkspaceChangeEventArgs e)
         {
@@ -83,8 +91,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 return;
             }
 
-            var token = _listener.BeginAsyncOperation(nameof(InitializeServiceForOpenedDocumentOnBackgroundAsync));
-            InitializeServiceForOpenedDocumentOnBackgroundAsync(e.Document).CompletesAsyncOperation(token);
+            var token = _listener.BeginAsyncOperation(
+                nameof(InitializeServiceForOpenedDocumentOnBackgroundAsync)
+            );
+            InitializeServiceForOpenedDocumentOnBackgroundAsync(e.Document)
+                .CompletesAsyncOperation(token);
 
             async Task InitializeServiceForOpenedDocumentOnBackgroundAsync(Document document)
             {
@@ -103,7 +114,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             // Preload completion providers on a background thread since assembly loads can be slow
             // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1242321
-            if (languageServices.GetService<CompletionService>() is CompletionServiceWithProviders service)
+            if (
+                languageServices.GetService<CompletionService>()
+                is CompletionServiceWithProviders service
+            )
             {
                 _ = service.GetImportedProviders().SelectAsArray(p => p.Value);
             }

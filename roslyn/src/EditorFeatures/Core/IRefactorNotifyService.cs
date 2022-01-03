@@ -22,7 +22,13 @@ namespace Microsoft.CodeAnalysis.Editor
         /// <see cref="TryOnAfterGlobalSymbolRenamed"/>.
         /// </summary>
         /// <returns>True if the rename should proceed.</returns>
-        bool TryOnBeforeGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, ISymbol symbol, string newName, bool throwOnFailure);
+        bool TryOnBeforeGlobalSymbolRenamed(
+            Workspace workspace,
+            IEnumerable<DocumentId> changedDocumentIDs,
+            ISymbol symbol,
+            string newName,
+            bool throwOnFailure
+        );
 
         /// <summary>
         /// Notifies any interested parties that a symbol rename has been applied to the 
@@ -32,6 +38,12 @@ namespace Microsoft.CodeAnalysis.Editor
         /// exception, depending on the throwOnFailure argument.
         /// </summary>
         /// <returns>True if the rename was successful.</returns>
-        bool TryOnAfterGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, ISymbol symbol, string newName, bool throwOnFailure);
+        bool TryOnAfterGlobalSymbolRenamed(
+            Workspace workspace,
+            IEnumerable<DocumentId> changedDocumentIDs,
+            ISymbol symbol,
+            string newName,
+            bool throwOnFailure
+        );
     }
 }

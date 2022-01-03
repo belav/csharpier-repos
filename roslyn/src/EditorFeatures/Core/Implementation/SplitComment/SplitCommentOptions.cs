@@ -16,15 +16,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SplitCommentOptions()
-        {
-        }
+        public SplitCommentOptions() { }
 
-        ImmutableArray<IOption> IOptionProvider.Options { get; } = ImmutableArray.Create<IOption>(
-            Enabled);
+        ImmutableArray<IOption> IOptionProvider.Options { get; } =
+            ImmutableArray.Create<IOption>(Enabled);
 
-        public static PerLanguageOption2<bool> Enabled =
-           new PerLanguageOption2<bool>(nameof(SplitCommentOptions), nameof(Enabled), defaultValue: true,
-               storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.SplitComments"));
+        public static PerLanguageOption2<bool> Enabled = new PerLanguageOption2<bool>(
+            nameof(SplitCommentOptions),
+            nameof(Enabled),
+            defaultValue: true,
+            storageLocation: new RoamingProfileStorageLocation(
+                "TextEditor.%LANGUAGE%.Specific.SplitComments"
+            )
+        );
     }
 }

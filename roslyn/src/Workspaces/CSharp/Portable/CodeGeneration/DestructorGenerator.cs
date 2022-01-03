@@ -16,31 +16,44 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 {
     internal static class DestructorGenerator
     {
-        private static MemberDeclarationSyntax LastConstructorOrField(SyntaxList<MemberDeclarationSyntax> members)
-            => LastConstructor(members) ?? LastField(members);
+        private static MemberDeclarationSyntax LastConstructorOrField(
+            SyntaxList<MemberDeclarationSyntax> members
+        ) => LastConstructor(members) ?? LastField(members);
 
         internal static TypeDeclarationSyntax AddDestructorTo(
             TypeDeclarationSyntax destination,
             IMethodSymbol destructor,
             CodeGenerationOptions options,
-            IList<bool> availableIndices)
+            IList<bool> availableIndices
+        )
         {
             var destructorDeclaration = GenerateDestructorDeclaration(destructor, options);
 
             // Generate after the last constructor, or after the last field, or at the start of the
             // type.
-            var members = Insert(destination.Members, destructorDeclaration, options,
-                availableIndices, after: LastConstructorOrField, before: FirstMember);
+            var members = Insert(
+                destination.Members,
+                destructorDeclaration,
+                options,
+                availableIndices,
+                after: LastConstructorOrField,
+                before: FirstMember
+            );
 
             return AddMembersTo(destination, members);
         }
 
         internal static DestructorDeclarationSyntax GenerateDestructorDeclaration(
-            IMethodSymbol destructor, CodeGenerationOptions options)
+            IMethodSymbol destructor,
+            CodeGenerationOptions options
+        )
         {
             options ??= CodeGenerationOptions.Default;
 
-            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<DestructorDeclarationSyntax>(destructor, options);
+            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<DestructorDeclarationSyntax>(
+                destructor,
+                options
+            );
             if (reusableSyntax != null)
             {
                 return reusableSyntax;
@@ -49,24 +62,33 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             var hasNoBody = !options.GenerateMethodBodies;
 
             var declaration = SyntaxFactory.DestructorDeclaration(
-                attributeLists: AttributeGenerator.GenerateAttributeLists(destructor.GetAttributes(), options),
+                attributeLists: AttributeGenerator.GenerateAttributeLists(
+                    destructor.GetAttributes(),
+                    options
+                ),
                 modifiers: default,
                 tildeToken: SyntaxFactory.Token(SyntaxKind.TildeToken),
-                identifier: CodeGenerationDestructorInfo.GetTypeName(destructor).ToIdentifierToken(),
+                identifier: CodeGenerationDestructorInfo
+                    .GetTypeName(destructor)
+                    .ToIdentifierToken(),
                 parameterList: SyntaxFactory.ParameterList(),
                 body: hasNoBody ? null : GenerateBlock(destructor),
-                semicolonToken: hasNoBody ? SyntaxFactory.Token(SyntaxKind.SemicolonToken) : default);
+                semicolonToken: hasNoBody ? SyntaxFactory.Token(SyntaxKind.SemicolonToken) : default
+            );
 
             return AddFormatterAndCodeGeneratorAnnotationsTo(
-                ConditionallyAddDocumentationCommentTo(declaration, destructor, options));
+                ConditionallyAddDocumentationCommentTo(declaration, destructor, options)
+            );
         }
 
-        private static BlockSyntax GenerateBlock(
-            IMethodSymbol constructor)
+        private static BlockSyntax GenerateBlock(IMethodSymbol constructor)
         {
-            var statements = CodeGenerationDestructorInfo.GetStatements(constructor) == null
-                ? default
-                : StatementGenerator.GenerateStatements(CodeGenerationDestructorInfo.GetStatements(constructor));
+            var statements =
+                CodeGenerationDestructorInfo.GetStatements(constructor) == null
+                    ? default
+                    : StatementGenerator.GenerateStatements(
+                          CodeGenerationDestructorInfo.GetStatements(constructor)
+                      );
 
             return SyntaxFactory.Block(statements);
         }

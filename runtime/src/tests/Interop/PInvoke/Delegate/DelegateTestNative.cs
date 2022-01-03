@@ -18,7 +18,6 @@ static class DelegateTestNative
     {
         public int expectedValue;
         [MarshalAs(UnmanagedType.IDispatch)]
-        
         public TestDelegate del;
     }
 
@@ -27,9 +26,16 @@ static class DelegateTestNative
     [DllImport(nameof(DelegateTestNative))]
     public static extern bool ValidateDelegateReturnsExpected(int i, TestDelegate @delegate);
     [DllImport(nameof(DelegateTestNative))]
-    public static extern bool ReplaceDelegate(int expectedValue, ref TestDelegate pDelegate, out int pNewExpectedValue);
+    public static extern bool ReplaceDelegate(
+        int expectedValue,
+        ref TestDelegate pDelegate,
+        out int pNewExpectedValue
+    );
     [DllImport(nameof(DelegateTestNative))]
-    public static extern void GetNativeTestFunction(out TestDelegate pDelegate, out int pExpectedValue);
+    public static extern void GetNativeTestFunction(
+        out TestDelegate pDelegate,
+        out int pExpectedValue
+    );
     [DllImport(nameof(DelegateTestNative))]
     public static extern TestDelegate GetNativeTestFunctionReturned(out int pExpectedValue);
     [DllImport(nameof(DelegateTestNative))]
@@ -42,21 +48,46 @@ static class DelegateTestNative
     // Delegate as IDispatch tests
 
     [DllImport(nameof(DelegateTestNative))]
-    public static extern bool ValidateDelegateValueMatchesExpected(int i, [MarshalAs(UnmanagedType.IDispatch)] TestDelegate @delegate);
+    public static extern bool ValidateDelegateValueMatchesExpected(
+        int i,
+        [MarshalAs(UnmanagedType.IDispatch)] TestDelegate @delegate
+    );
     [DllImport(nameof(DelegateTestNative))]
-    public static extern bool ValidateDelegateValueMatchesExpectedAndClear(int i, [MarshalAs(UnmanagedType.IDispatch)] ref TestDelegate @delegate);
+    public static extern bool ValidateDelegateValueMatchesExpectedAndClear(
+        int i,
+        [MarshalAs(UnmanagedType.IDispatch)] ref TestDelegate @delegate
+    );
     [DllImport(nameof(DelegateTestNative))]
-    public static extern bool DuplicateDelegate(int i, [MarshalAs(UnmanagedType.IDispatch)] TestDelegate delegateIn, [MarshalAs(UnmanagedType.IDispatch)] out TestDelegate delegateOut);
+    public static extern bool DuplicateDelegate(
+        int i,
+        [MarshalAs(UnmanagedType.IDispatch)] TestDelegate delegateIn,
+        [MarshalAs(UnmanagedType.IDispatch)] out TestDelegate delegateOut
+    );
     [DllImport(nameof(DelegateTestNative))]
     [return: MarshalAs(UnmanagedType.IDispatch)]
-    public static extern TestDelegate DuplicateDelegateReturned([MarshalAs(UnmanagedType.IDispatch)] TestDelegate delegateIn);
+    public static extern TestDelegate DuplicateDelegateReturned(
+        [MarshalAs(UnmanagedType.IDispatch)] TestDelegate delegateIn
+    );
     [DllImport(nameof(DelegateTestNative))]
-    public static extern bool ValidateStructDelegateValueMatchesExpected(DispatchDelegateWithExpectedValue dispatch);
+    public static extern bool ValidateStructDelegateValueMatchesExpected(
+        DispatchDelegateWithExpectedValue dispatch
+    );
     [DllImport(nameof(DelegateTestNative))]
-    public static extern bool ValidateDelegateValueMatchesExpectedAndClearStruct(ref DispatchDelegateWithExpectedValue dispatch);
+    public static extern bool ValidateDelegateValueMatchesExpectedAndClearStruct(
+        ref DispatchDelegateWithExpectedValue dispatch
+    );
     [DllImport(nameof(DelegateTestNative))]
-    public static extern bool DuplicateStruct(DispatchDelegateWithExpectedValue dispatchIn, out DispatchDelegateWithExpectedValue dispatchOut);
+    public static extern bool DuplicateStruct(
+        DispatchDelegateWithExpectedValue dispatchIn,
+        out DispatchDelegateWithExpectedValue dispatchOut
+    );
 
-    [DllImport(nameof(DelegateTestNative), EntryPoint = "Invalid", CallingConvention = CallingConvention.Cdecl)]
-    public static extern IntPtr MarshalDelegateAsInterface([MarshalAs(UnmanagedType.Interface)] TestDelegate del);
+    [DllImport(
+        nameof(DelegateTestNative),
+        EntryPoint = "Invalid",
+        CallingConvention = CallingConvention.Cdecl
+    )]
+    public static extern IntPtr MarshalDelegateAsInterface(
+        [MarshalAs(UnmanagedType.Interface)] TestDelegate del
+    );
 }

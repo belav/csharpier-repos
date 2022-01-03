@@ -128,8 +128,7 @@ namespace System.Xml.Xsl.XsltOld
                         default:
                             throw XsltException.Create(SR.Xslt_InvalidContents, "apply-templates");
                     }
-                }
-                while (compiler.Advance());
+                } while (compiler.Advance());
 
                 compiler.ToParent();
             }
@@ -190,7 +189,11 @@ namespace System.Xml.Xsl.XsltOld
                 case PositionAdvanced:
                     Debug.Assert(frame.State == PositionAdvanced);
 
-                    processor.PushTemplateLookup(frame.NewNodeSet, _mode, /*importsOf:*/null);
+                    processor.PushTemplateLookup(
+                        frame.NewNodeSet,
+                        _mode, /*importsOf:*/
+                        null
+                    );
 
                     frame.State = TemplateProcessed;
                     break;

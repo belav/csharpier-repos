@@ -24,7 +24,10 @@ namespace System.Threading.Tasks
         /// Async enumeration does not happen in the background; each MoveNext call will invoke the underlying <see cref="IAsyncEnumerator{T}.MoveNextAsync"/> exactly once.
         /// </remarks>
         [UnsupportedOSPlatform("browser")]
-        public static IEnumerable<T> ToBlockingEnumerable<T>(this IAsyncEnumerable<T> source, CancellationToken cancellationToken = default)
+        public static IEnumerable<T> ToBlockingEnumerable<T>(
+            this IAsyncEnumerable<T> source,
+            CancellationToken cancellationToken = default
+        )
         {
             IAsyncEnumerator<T> enumerator = source.GetAsyncEnumerator(cancellationToken);
             // A ManualResetEventSlim variant that lets us reuse the same

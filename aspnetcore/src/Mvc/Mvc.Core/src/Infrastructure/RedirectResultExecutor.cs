@@ -66,8 +66,9 @@ public class RedirectResultExecutor : IActionResultExecutor<RedirectResult>
 
         if (result.PreserveMethod)
         {
-            context.HttpContext.Response.StatusCode = result.Permanent ?
-                StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+            context.HttpContext.Response.StatusCode = result.Permanent
+                ? StatusCodes.Status308PermanentRedirect
+                : StatusCodes.Status307TemporaryRedirect;
             context.HttpContext.Response.Headers.Location = destinationUrl;
         }
         else

@@ -11,14 +11,15 @@ namespace Test
         public static void Main1()
         {
             bool local2 = true;
-            while (local2) { throw new Exception(); }
+            while (local2)
+            {
+                throw new Exception();
+            }
             while (local2)
             {
                 bool[] local3 = (new bool[119]);
                 //for (; local2; new AA[]{  }) - not a valid statement, see VS7 #244656.
-                for (; local2; new AA())
-                {
-                }
+                for (; local2; new AA()) { }
             }
         }
         public static int Main()
@@ -34,5 +35,4 @@ namespace Test
             return 101;
         }
     }
-
 }

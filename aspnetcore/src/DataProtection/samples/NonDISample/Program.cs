@@ -25,7 +25,8 @@ public class Program
                 {
                     configuration.ProtectKeysWithDpapi();
                 }
-            });
+            }
+        );
 
         var protector = dataProtectionProvider.CreateProtector("Program.No-DI");
 

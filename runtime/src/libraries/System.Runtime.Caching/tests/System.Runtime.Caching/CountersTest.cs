@@ -27,12 +27,17 @@ namespace MonoTests.System.Runtime.Caching
     public class CountersTest
     {
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "Wasm is single-threaded, which makes TestEventListener ineffective.")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "Wasm is single-threaded, which makes TestEventListener ineffective."
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/52652", TestPlatforms.Android)]
         public async void Basic_Counters()
         {
             string cacheName = "Basic_Counters_Test";
-            var cip = new CacheItemPolicy() { /* _absExpiry = ObjectCache.InfiniteAbsoluteExpiration */ };
+            var cip = new CacheItemPolicy()
+            { /* _absExpiry = ObjectCache.InfiniteAbsoluteExpiration */
+            };
 
             using (var poker = new PokerMemoryCache(cacheName))
             {
@@ -51,7 +56,7 @@ namespace MonoTests.System.Runtime.Caching
 
                 Assert.Equal(4, counters.Entries);
                 Assert.Equal(2, counters.Hits);
-                Assert.True(counters.HitRatio > 28);    // 2/(2+5)
+                Assert.True(counters.HitRatio > 28); // 2/(2+5)
                 Assert.True(counters.HitRatio < 29);
                 Assert.Equal(5, counters.Misses);
                 Assert.Equal(0, counters.Trims);
@@ -76,17 +81,29 @@ namespace MonoTests.System.Runtime.Caching
 
 #if NETCOREAPP
             var events = new ConcurrentQueue<EventWrittenEventArgs>();
-            using (var listener = new TestEventListener("System.Runtime.Caching." + cacheName, EventLevel.Verbose, eventCounterInterval: 0.1d))
+            using (
+                var listener = new TestEventListener(
+                    "System.Runtime.Caching." + cacheName,
+                    EventLevel.Verbose,
+                    eventCounterInterval: 0.1d
+                )
+            )
             {
                 // Following the example from System.Net.Http's telemetry test where they are also
                 // trying to "poll" some PollingCounters.
-                await listener.RunWithCallbackAsync(events.Enqueue, async () => await WaitForEventCountersAsync(events));
+                await listener.RunWithCallbackAsync(
+                    events.Enqueue,
+                    async () => await WaitForEventCountersAsync(events)
+                );
             }
 
             Dictionary<string, double[]> eventCounters = events
                 .Where(e => e.EventName == "EventCounters")
                 .Select(e => (IDictionary<string, object>)e.Payload.Single())
-                .GroupBy(d => (string)d["Name"], d => (double)(d.ContainsKey("Mean") ? d["Mean"] : d["Increment"]))
+                .GroupBy(
+                    d => (string)d["Name"],
+                    d => (double)(d.ContainsKey("Mean") ? d["Mean"] : d["Increment"])
+                )
                 .ToDictionary(p => p.Key, p => p.ToArray());
 
             // Take the first value since this is an explicit "poll" method. We want to know
@@ -117,7 +134,11 @@ namespace MonoTests.System.Runtime.Caching
                 }
             }
 
-            PerformanceCounter pc = new PerformanceCounter(".NET Memory Cache 4.0", "Cache Entries", instanceName);
+            PerformanceCounter pc = new PerformanceCounter(
+                ".NET Memory Cache 4.0",
+                "Cache Entries",
+                instanceName
+            );
             counters.Entries = (int)pc.NextValue();
             pc.CounterName = "Cache Hits";
             counters.Hits = (int)pc.NextValue();
@@ -136,13 +157,22 @@ namespace MonoTests.System.Runtime.Caching
         }
 
 #if NETCOREAPP
-        private static async Task WaitForEventCountersAsync(ConcurrentQueue<EventWrittenEventArgs> events)
+        private static async Task WaitForEventCountersAsync(
+            ConcurrentQueue<EventWrittenEventArgs> events
+        )
         {
             DateTime startTime = DateTime.UtcNow;
             int startCount = events.Count;
             int numberOfDistinctCounters = 6;
 
-            while (events.Skip(startCount).Where(e => e.EventName == "EventCounters").Select(e => GetCounterName(e)).Distinct().Count() != numberOfDistinctCounters)
+            while (
+                events
+                    .Skip(startCount)
+                    .Where(e => e.EventName == "EventCounters")
+                    .Select(e => GetCounterName(e))
+                    .Distinct()
+                    .Count() != numberOfDistinctCounters
+            )
             {
                 if (DateTime.UtcNow.Subtract(startTime) > TimeSpan.FromSeconds(30))
                     throw new TimeoutException($"Timed out waiting for EventCounters");

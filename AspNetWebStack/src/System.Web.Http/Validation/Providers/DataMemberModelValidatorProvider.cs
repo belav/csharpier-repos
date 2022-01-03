@@ -15,7 +15,11 @@ namespace System.Web.Http.Validation.Providers
     /// </summary>
     public class DataMemberModelValidatorProvider : AssociatedValidatorProvider
     {
-        protected override IEnumerable<ModelValidator> GetValidators(ModelMetadata metadata, IEnumerable<ModelValidatorProvider> validatorProviders, IEnumerable<Attribute> attributes)
+        protected override IEnumerable<ModelValidator> GetValidators(
+            ModelMetadata metadata,
+            IEnumerable<ModelValidatorProvider> validatorProviders,
+            IEnumerable<Attribute> attributes
+        )
         {
             // Types cannot be required; only properties can
             if (metadata.ContainerType == null || String.IsNullOrEmpty(metadata.PropertyName))
@@ -31,13 +35,22 @@ namespace System.Web.Http.Validation.Providers
             return Enumerable.Empty<ModelValidator>();
         }
 
-        internal static bool IsRequiredDataMember(Type containerType, IEnumerable<Attribute> attributes)
+        internal static bool IsRequiredDataMember(
+            Type containerType,
+            IEnumerable<Attribute> attributes
+        )
         {
-            DataMemberAttribute dataMemberAttribute = attributes.OfType<DataMemberAttribute>().FirstOrDefault();
+            DataMemberAttribute dataMemberAttribute = attributes
+                .OfType<DataMemberAttribute>()
+                .FirstOrDefault();
             if (dataMemberAttribute != null)
             {
                 // isDataContract == true iff the container type has at least one DataContractAttribute
-                bool isDataContract = TypeDescriptorHelper.Get(containerType).GetAttributes().OfType<DataContractAttribute>().Any();
+                bool isDataContract = TypeDescriptorHelper
+                    .Get(containerType)
+                    .GetAttributes()
+                    .OfType<DataContractAttribute>()
+                    .Any();
                 if (isDataContract && dataMemberAttribute.IsRequired)
                 {
                     return true;

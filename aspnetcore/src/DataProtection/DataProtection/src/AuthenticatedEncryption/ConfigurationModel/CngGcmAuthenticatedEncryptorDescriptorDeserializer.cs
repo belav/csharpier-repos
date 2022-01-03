@@ -12,9 +12,9 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 /// of an <see cref="CngGcmAuthenticatedEncryptorDescriptor"/>.
 /// </summary>
 [SupportedOSPlatform("windows")]
-public sealed class CngGcmAuthenticatedEncryptorDescriptorDeserializer : IAuthenticatedEncryptorDescriptorDeserializer
+public sealed class CngGcmAuthenticatedEncryptorDescriptorDeserializer
+    : IAuthenticatedEncryptorDescriptorDeserializer
 {
-
     /// <summary>
     /// Imports the <see cref="CngCbcAuthenticatedEncryptorDescriptor"/> from serialized XML.
     /// </summary>
@@ -36,7 +36,9 @@ public sealed class CngGcmAuthenticatedEncryptorDescriptorDeserializer : IAuthen
         var encryptionElement = element.Element("encryption")!;
         configuration.EncryptionAlgorithm = (string)encryptionElement.Attribute("algorithm")!;
         configuration.EncryptionAlgorithmKeySize = (int)encryptionElement.Attribute("keyLength")!;
-        configuration.EncryptionAlgorithmProvider = (string?)encryptionElement.Attribute("provider"); // could be null
+        configuration.EncryptionAlgorithmProvider = (string?)encryptionElement.Attribute(
+            "provider"
+        ); // could be null
 
         Secret masterKey = ((string)element.Element("masterKey")!).ToSecret();
 

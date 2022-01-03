@@ -14,7 +14,8 @@ namespace System.IO.Enumeration
             Interop.NtDll.FILE_FULL_DIR_INFORMATION* info,
             ReadOnlySpan<char> directory,
             ReadOnlySpan<char> rootDirectory,
-            ReadOnlySpan<char> originalRootDirectory)
+            ReadOnlySpan<char> originalRootDirectory
+        )
         {
             entry._info = info;
             entry.Directory = directory;
@@ -68,12 +69,11 @@ namespace System.IO.Enumeration
 
         /// <summary>Converts the value of this instance to a <see cref="System.IO.FileSystemInfo" />.</summary>
         /// <returns>The value of this instance as a <see cref="System.IO.FileSystemInfo" />.</returns>
-        public FileSystemInfo ToFileSystemInfo()
-            => FileSystemInfo.Create(Path.Join(Directory, FileName), ref this);
+        public FileSystemInfo ToFileSystemInfo() =>
+            FileSystemInfo.Create(Path.Join(Directory, FileName), ref this);
 
         /// <summary>Returns the full path of the find result.</summary>
         /// <returns>A string representing the full path.</returns>
-        public string ToFullPath() =>
-            Path.Join(Directory, FileName);
+        public string ToFullPath() => Path.Join(Directory, FileName);
     }
 }

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -23,19 +23,26 @@ public class HostFilteringMiddlewareTests
     public async Task MissingConfigThrows()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseHostFiltering();
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseHostFiltering();
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
-        await Assert.ThrowsAsync<InvalidOperationException>(() => host.GetTestServer().SendAsync(_ => { }));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => host.GetTestServer().SendAsync(_ => { })
+        );
     }
 
     [Theory]
@@ -44,33 +51,51 @@ public class HostFilteringMiddlewareTests
     public async Task AllowsMissingHost(bool allowed, int status)
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    services.AddHostFiltering(options =>
-                    {
-                        options.AllowEmptyHosts = allowed;
-                        options.AllowedHosts.Add("Localhost");
-                    });
-                })
-                .Configure(app =>
-                {
-                    app.Use((ctx, next) =>
-                    {
-                        ctx.Request.Headers.Remove(HeaderNames.Host);
-                        return next(ctx);
-                    });
-                    app.UseHostFiltering();
-                    app.Run(c =>
-                    {
-                        Assert.False(c.Request.Headers.TryGetValue(HeaderNames.Host, out var host));
-                        return Task.CompletedTask;
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .ConfigureServices(
+                            services =>
+                            {
+                                services.AddHostFiltering(
+                                    options =>
+                                    {
+                                        options.AllowEmptyHosts = allowed;
+                                        options.AllowedHosts.Add("Localhost");
+                                    }
+                                );
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Use(
+                                    (ctx, next) =>
+                                    {
+                                        ctx.Request.Headers.Remove(HeaderNames.Host);
+                                        return next(ctx);
+                                    }
+                                );
+                                app.UseHostFiltering();
+                                app.Run(
+                                    c =>
+                                    {
+                                        Assert.False(
+                                            c.Request.Headers.TryGetValue(
+                                                HeaderNames.Host,
+                                                out var host
+                                            )
+                                        );
+                                        return Task.CompletedTask;
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -85,35 +110,53 @@ public class HostFilteringMiddlewareTests
     public async Task AllowsEmptyHost(bool allowed, int status)
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    services.AddHostFiltering(options =>
-                    {
-                        options.AllowEmptyHosts = allowed;
-                        options.AllowedHosts.Add("Localhost");
-                    });
-                })
-                .Configure(app =>
-                {
-                    app.Use((ctx, next) =>
-                    {
-                        ctx.Request.Headers.Host = "";
-                        return next(ctx);
-                    });
-                    app.UseHostFiltering();
-                    app.Run(c =>
-                    {
-                        Assert.True(c.Request.Headers.TryGetValue(HeaderNames.Host, out var host));
-                        Assert.True(StringValues.Equals("", host));
-                        return Task.CompletedTask;
-                    });
-                    app.Run(c => Task.CompletedTask);
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .ConfigureServices(
+                            services =>
+                            {
+                                services.AddHostFiltering(
+                                    options =>
+                                    {
+                                        options.AllowEmptyHosts = allowed;
+                                        options.AllowedHosts.Add("Localhost");
+                                    }
+                                );
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Use(
+                                    (ctx, next) =>
+                                    {
+                                        ctx.Request.Headers.Host = "";
+                                        return next(ctx);
+                                    }
+                                );
+                                app.UseHostFiltering();
+                                app.Run(
+                                    c =>
+                                    {
+                                        Assert.True(
+                                            c.Request.Headers.TryGetValue(
+                                                HeaderNames.Host,
+                                                out var host
+                                            )
+                                        );
+                                        Assert.True(StringValues.Equals("", host));
+                                        return Task.CompletedTask;
+                                    }
+                                );
+                                app.Run(c => Task.CompletedTask);
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -141,30 +184,44 @@ public class HostFilteringMiddlewareTests
     public async Task AllowsSpecifiedHost(string hosturl, string allowedHost)
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    services.AddHostFiltering(options =>
-                    {
-                        options.AllowedHosts = allowedHost.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                    });
-                })
-                .Configure(app =>
-                {
-                    app.Use((ctx, next) =>
-                    {
-                            // TestHost's ClientHandler doesn't let you set the host header, only the host in the URI
-                            // and that would over-normalize some of our test conditions like casing.
-                            ctx.Request.Headers.Host = hosturl;
-                        return next(ctx);
-                    });
-                    app.UseHostFiltering();
-                    app.Run(c => Task.CompletedTask);
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .ConfigureServices(
+                            services =>
+                            {
+                                services.AddHostFiltering(
+                                    options =>
+                                    {
+                                        options.AllowedHosts = allowedHost.Split(
+                                            new[] { ';' },
+                                            StringSplitOptions.RemoveEmptyEntries
+                                        );
+                                    }
+                                );
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Use(
+                                    (ctx, next) =>
+                                    {
+                                        // TestHost's ClientHandler doesn't let you set the host header, only the host in the URI
+                                        // and that would over-normalize some of our test conditions like casing.
+                                        ctx.Request.Headers.Host = hosturl;
+                                        return next(ctx);
+                                    }
+                                );
+                                app.UseHostFiltering();
+                                app.Run(c => Task.CompletedTask);
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -193,30 +250,44 @@ public class HostFilteringMiddlewareTests
     public async Task RejectsMismatchedHosts(string hosturl, string allowedHost)
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    services.AddHostFiltering(options =>
-                    {
-                        options.AllowedHosts = allowedHost.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                    });
-                })
-                .Configure(app =>
-                {
-                    app.Use((ctx, next) =>
-                    {
-                            // TestHost's ClientHandler doesn't let you set the host header, only the host in the URI
-                            // and that would reject some of our test conditions.
-                            ctx.Request.Headers.Host = hosturl;
-                        return next(ctx);
-                    });
-                    app.UseHostFiltering();
-                    app.Run(c => throw new NotImplementedException("App"));
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .ConfigureServices(
+                            services =>
+                            {
+                                services.AddHostFiltering(
+                                    options =>
+                                    {
+                                        options.AllowedHosts = allowedHost.Split(
+                                            new[] { ';' },
+                                            StringSplitOptions.RemoveEmptyEntries
+                                        );
+                                    }
+                                );
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Use(
+                                    (ctx, next) =>
+                                    {
+                                        // TestHost's ClientHandler doesn't let you set the host header, only the host in the URI
+                                        // and that would reject some of our test conditions.
+                                        ctx.Request.Headers.Host = hosturl;
+                                        return next(ctx);
+                                    }
+                                );
+                                app.UseHostFiltering();
+                                app.Run(c => throw new NotImplementedException("App"));
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -233,29 +304,42 @@ public class HostFilteringMiddlewareTests
         var currentHost = "otherHost";
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    services.AddHostFiltering(options =>
-                    {
-                        options.AllowedHosts = new[] { config["AllowedHosts"] };
-                    });
-                    services.AddSingleton<IOptionsChangeTokenSource<HostFilteringOptions>>(new ConfigurationChangeTokenSource<HostFilteringOptions>(config));
-                })
-                .Configure(app =>
-                {
-                    app.Use((ctx, next) =>
-                    {
-                        ctx.Request.Headers.Host = currentHost;
-                        return next(ctx);
-                    });
-                    app.UseHostFiltering();
-                    app.Run(c => Task.CompletedTask);
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .ConfigureServices(
+                            services =>
+                            {
+                                services.AddHostFiltering(
+                                    options =>
+                                    {
+                                        options.AllowedHosts = new[] { config["AllowedHosts"] };
+                                    }
+                                );
+                                services.AddSingleton<
+                                    IOptionsChangeTokenSource<HostFilteringOptions>
+                                >(new ConfigurationChangeTokenSource<HostFilteringOptions>(config));
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.Use(
+                                    (ctx, next) =>
+                                    {
+                                        ctx.Request.Headers.Host = currentHost;
+                                        return next(ctx);
+                                    }
+                                );
+                                app.UseHostFiltering();
+                                app.Run(c => Task.CompletedTask);
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 

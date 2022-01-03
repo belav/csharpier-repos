@@ -50,11 +50,19 @@ namespace System
         {
             if (len != 0)
             {
-                Buffer.Memmove(ref *(byte*)dest, ref Unsafe.As<char, byte>(ref src.GetRawStringData()), (nuint)len);
+                Buffer.Memmove(
+                    ref *(byte*)dest,
+                    ref Unsafe.As<char, byte>(ref src.GetRawStringData()),
+                    (nuint)len
+                );
             }
         }
 
-        internal unsafe int GetBytesFromEncoding(byte* pbNativeBuffer, int cbNativeBuffer, Encoding encoding)
+        internal unsafe int GetBytesFromEncoding(
+            byte* pbNativeBuffer,
+            int cbNativeBuffer,
+            Encoding encoding
+        )
         {
             // encoding == Encoding.UTF8
             fixed (char* pwzChar = &_firstChar)

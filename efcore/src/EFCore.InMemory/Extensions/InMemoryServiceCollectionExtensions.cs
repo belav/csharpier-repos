@@ -40,7 +40,9 @@ namespace Microsoft.Extensions.DependencyInjection
         ///     The same service collection so that multiple calls can be chained.
         /// </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static IServiceCollection AddEntityFrameworkInMemoryDatabase(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddEntityFrameworkInMemoryDatabase(
+            this IServiceCollection serviceCollection
+        )
         {
             var builder = new EntityFrameworkServicesBuilder(serviceCollection)
                 .TryAdd<LoggingDefinitions, InMemoryLoggingDefinitions>()
@@ -53,15 +55,24 @@ namespace Microsoft.Extensions.DependencyInjection
                 .TryAdd<IProviderConventionSetBuilder, InMemoryConventionSetBuilder>()
                 .TryAdd<IModelValidator, InMemoryModelValidator>()
                 .TryAdd<ITypeMappingSource, InMemoryTypeMappingSource>()
-                .TryAdd<IShapedQueryCompilingExpressionVisitorFactory, InMemoryShapedQueryCompilingExpressionVisitorFactory>()
-                .TryAdd<IQueryableMethodTranslatingExpressionVisitorFactory, InMemoryQueryableMethodTranslatingExpressionVisitorFactory>()
-                .TryAdd<ISingletonOptions, IInMemorySingletonOptions>(p => p.GetRequiredService<IInMemorySingletonOptions>())
+                .TryAdd<
+                    IShapedQueryCompilingExpressionVisitorFactory,
+                    InMemoryShapedQueryCompilingExpressionVisitorFactory
+                >()
+                .TryAdd<
+                    IQueryableMethodTranslatingExpressionVisitorFactory,
+                    InMemoryQueryableMethodTranslatingExpressionVisitorFactory
+                >()
+                .TryAdd<ISingletonOptions, IInMemorySingletonOptions>(
+                    p => p.GetRequiredService<IInMemorySingletonOptions>()
+                )
                 .TryAddProviderSpecificServices(
-                    b => b
-                        .TryAddSingleton<IInMemorySingletonOptions, InMemorySingletonOptions>()
-                        .TryAddSingleton<IInMemoryStoreCache, InMemoryStoreCache>()
-                        .TryAddSingleton<IInMemoryTableFactory, InMemoryTableFactory>()
-                        .TryAddScoped<IInMemoryDatabase, InMemoryDatabase>());
+                    b =>
+                        b.TryAddSingleton<IInMemorySingletonOptions, InMemorySingletonOptions>()
+                            .TryAddSingleton<IInMemoryStoreCache, InMemoryStoreCache>()
+                            .TryAddSingleton<IInMemoryTableFactory, InMemoryTableFactory>()
+                            .TryAddScoped<IInMemoryDatabase, InMemoryDatabase>()
+                );
 
             builder.TryAddCoreServices();
 

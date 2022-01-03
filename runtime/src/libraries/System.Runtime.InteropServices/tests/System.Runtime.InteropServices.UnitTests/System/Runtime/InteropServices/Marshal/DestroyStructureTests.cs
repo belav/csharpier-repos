@@ -57,14 +57,23 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void DestroyStructure_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("ptr", () => Marshal.DestroyStructure<TestStruct>(IntPtr.Zero));
-            AssertExtensions.Throws<ArgumentNullException>("ptr", () => Marshal.DestroyStructure(IntPtr.Zero, typeof(TestStruct)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "ptr",
+                () => Marshal.DestroyStructure<TestStruct>(IntPtr.Zero)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "ptr",
+                () => Marshal.DestroyStructure(IntPtr.Zero, typeof(TestStruct))
+            );
         }
 
         [Fact]
         public void DestroyStructure_NullStructureType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("structureType", () => Marshal.DestroyStructure((IntPtr)1, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "structureType",
+                () => Marshal.DestroyStructure((IntPtr)1, null)
+            );
         }
 
         public static IEnumerable<object[]> DestroyStructure_InvalidType_TestData()
@@ -82,9 +91,15 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(IGenericInterface<>) };
             yield return new object[] { typeof(IGenericInterface<string>) };
 
-            yield return new object[] { typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0] };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0]
+            };
 
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             yield return new object[] { typeBuilder };
@@ -95,14 +110,23 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(DestroyStructure_InvalidType_TestData))]
         public void DestroyStructure_NonRuntimeType_ThrowsArgumentException(Type invalidType)
         {
-            AssertExtensions.Throws<ArgumentException>("structureType", () => Marshal.DestroyStructure((IntPtr)1, invalidType));
+            AssertExtensions.Throws<ArgumentException>(
+                "structureType",
+                () => Marshal.DestroyStructure((IntPtr)1, invalidType)
+            );
         }
 
         [Fact]
         public void DestroyStructure_AutoLayout_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("structureType", () => Marshal.DestroyStructure<AutoLayoutStruct>((IntPtr)1));
-            AssertExtensions.Throws<ArgumentException>("structureType", () => Marshal.DestroyStructure((IntPtr)1, typeof(AutoLayoutStruct)));
+            AssertExtensions.Throws<ArgumentException>(
+                "structureType",
+                () => Marshal.DestroyStructure<AutoLayoutStruct>((IntPtr)1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "structureType",
+                () => Marshal.DestroyStructure((IntPtr)1, typeof(AutoLayoutStruct))
+            );
         }
 
         [Fact]

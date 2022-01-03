@@ -61,9 +61,10 @@ public class NullableReferenceTypeIntegrationTest
                 Assert.Equal("FirstName", kvp.Key);
                 Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
 
-                    // Not validating framework error message.
-                    Assert.Single(kvp.Value.Errors);
-            });
+                // Not validating framework error message.
+                Assert.Single(kvp.Value.Errors);
+            }
+        );
     }
 
 #nullable enable
@@ -150,13 +151,12 @@ public class NullableReferenceTypeIntegrationTest
 
                 var error = Assert.Single(kvp.Value.Errors);
                 Assert.Equal("Test", error.ErrorMessage);
-            });
+            }
+        );
     }
 
 #nullable enable
-    private void NonNullableParameter(string param1)
-    {
-    }
+    private void NonNullableParameter(string param1) { }
 #nullable restore
 
     [Fact]
@@ -171,7 +171,11 @@ public class NullableReferenceTypeIntegrationTest
             ParameterType = typeof(string)
         };
 
-        var method = GetType().GetMethod(nameof(NonNullableParameter), BindingFlags.NonPublic | BindingFlags.Instance);
+        var method = GetType()
+            .GetMethod(
+                nameof(NonNullableParameter),
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
         var parameterInfo = method.GetParameters().Single();
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelMetadata = modelMetadataProvider.GetMetadataForParameter(parameterInfo);
@@ -184,7 +188,8 @@ public class NullableReferenceTypeIntegrationTest
             parameter,
             testContext,
             modelMetadataProvider,
-            modelMetadata);
+            modelMetadata
+        );
 
         // Assert
 
@@ -203,8 +208,9 @@ public class NullableReferenceTypeIntegrationTest
                 Assert.Equal("param1", kvp.Key);
                 Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
 
-                    // Not validating framework error message.
-                    Assert.Single(kvp.Value.Errors);
-            });
+                // Not validating framework error message.
+                Assert.Single(kvp.Value.Errors);
+            }
+        );
     }
 }

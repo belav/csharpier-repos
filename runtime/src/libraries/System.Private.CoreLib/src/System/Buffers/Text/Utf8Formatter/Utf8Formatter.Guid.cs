@@ -40,7 +40,12 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(Guid value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            Guid value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             const int INSERT_DASHES = unchecked((int)0x80000000);
             const int NO_DASHES = 0;
@@ -68,11 +73,21 @@ namespace System.Buffers.Text
                     break;
 
                 case 'B': // {nnnnnnnn-nnnn-nnnn-nnnn-nnnnnnnnnnnn}
-                    flags = INSERT_DASHES + INSERT_CURLY_BRACES + LEN_GUID_BASE + LEN_ADD_DASHES + LEN_ADD_BRACES;
+                    flags =
+                        INSERT_DASHES
+                        + INSERT_CURLY_BRACES
+                        + LEN_GUID_BASE
+                        + LEN_ADD_DASHES
+                        + LEN_ADD_BRACES;
                     break;
 
                 case 'P': // (nnnnnnnn-nnnn-nnnn-nnnn-nnnnnnnnnnnn)
-                    flags = INSERT_DASHES + INSERT_ROUND_BRACES + LEN_GUID_BASE + LEN_ADD_DASHES + LEN_ADD_BRACES;
+                    flags =
+                        INSERT_DASHES
+                        + INSERT_ROUND_BRACES
+                        + LEN_GUID_BASE
+                        + LEN_ADD_DASHES
+                        + LEN_ADD_BRACES;
                     break;
 
                 case 'N': // nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
@@ -116,23 +131,67 @@ namespace System.Buffers.Text
             // because it may have an observable side effect (throwing).
             // We use 8 instead of 7 so that we also capture the dash if we're asked to insert one.
 
-            { _ = destination[8]; }
+            {
+                _ = destination[8];
+            }
             if (BitConverter.IsLittleEndian)
             {
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte03, destination, 0, HexConverter.Casing.Lower);
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte02, destination, 2, HexConverter.Casing.Lower);
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte01, destination, 4, HexConverter.Casing.Lower);
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte00, destination, 6, HexConverter.Casing.Lower);
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte03,
+                    destination,
+                    0,
+                    HexConverter.Casing.Lower
+                );
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte02,
+                    destination,
+                    2,
+                    HexConverter.Casing.Lower
+                );
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte01,
+                    destination,
+                    4,
+                    HexConverter.Casing.Lower
+                );
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte00,
+                    destination,
+                    6,
+                    HexConverter.Casing.Lower
+                );
             }
             else
             {
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte00, destination, 0, HexConverter.Casing.Lower);
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte01, destination, 2, HexConverter.Casing.Lower);
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte02, destination, 4, HexConverter.Casing.Lower);
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte03, destination, 6, HexConverter.Casing.Lower);
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte00,
+                    destination,
+                    0,
+                    HexConverter.Casing.Lower
+                );
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte01,
+                    destination,
+                    2,
+                    HexConverter.Casing.Lower
+                );
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte02,
+                    destination,
+                    4,
+                    HexConverter.Casing.Lower
+                );
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte03,
+                    destination,
+                    6,
+                    HexConverter.Casing.Lower
+                );
             }
 
-            if (flags < 0 /* use dash? */)
+            if (
+                flags < 0 /* use dash? */
+            )
             {
                 destination[8] = Dash;
                 destination = destination.Slice(9);
@@ -142,19 +201,43 @@ namespace System.Buffers.Text
                 destination = destination.Slice(8);
             }
 
-            { _ = destination[4]; }
+            {
+                _ = destination[4];
+            }
             if (BitConverter.IsLittleEndian)
             {
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte05, destination, 0, HexConverter.Casing.Lower);
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte04, destination, 2, HexConverter.Casing.Lower);
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte05,
+                    destination,
+                    0,
+                    HexConverter.Casing.Lower
+                );
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte04,
+                    destination,
+                    2,
+                    HexConverter.Casing.Lower
+                );
             }
             else
             {
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte04, destination, 0, HexConverter.Casing.Lower);
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte05, destination, 2, HexConverter.Casing.Lower);
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte04,
+                    destination,
+                    0,
+                    HexConverter.Casing.Lower
+                );
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte05,
+                    destination,
+                    2,
+                    HexConverter.Casing.Lower
+                );
             }
 
-            if (flags < 0 /* use dash? */)
+            if (
+                flags < 0 /* use dash? */
+            )
             {
                 destination[4] = Dash;
                 destination = destination.Slice(5);
@@ -164,19 +247,43 @@ namespace System.Buffers.Text
                 destination = destination.Slice(4);
             }
 
-            { _ = destination[4]; }
+            {
+                _ = destination[4];
+            }
             if (BitConverter.IsLittleEndian)
             {
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte07, destination, 0, HexConverter.Casing.Lower);
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte06, destination, 2, HexConverter.Casing.Lower);
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte07,
+                    destination,
+                    0,
+                    HexConverter.Casing.Lower
+                );
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte06,
+                    destination,
+                    2,
+                    HexConverter.Casing.Lower
+                );
             }
             else
             {
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte06, destination, 0, HexConverter.Casing.Lower);
-                HexConverter.ToBytesBuffer(guidAsBytes.Byte07, destination, 2, HexConverter.Casing.Lower);
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte06,
+                    destination,
+                    0,
+                    HexConverter.Casing.Lower
+                );
+                HexConverter.ToBytesBuffer(
+                    guidAsBytes.Byte07,
+                    destination,
+                    2,
+                    HexConverter.Casing.Lower
+                );
             }
 
-            if (flags < 0 /* use dash? */)
+            if (
+                flags < 0 /* use dash? */
+            )
             {
                 destination[4] = Dash;
                 destination = destination.Slice(5);
@@ -186,11 +293,25 @@ namespace System.Buffers.Text
                 destination = destination.Slice(4);
             }
 
-            { _ = destination[4]; }
-            HexConverter.ToBytesBuffer(guidAsBytes.Byte08, destination, 0, HexConverter.Casing.Lower);
-            HexConverter.ToBytesBuffer(guidAsBytes.Byte09, destination, 2, HexConverter.Casing.Lower);
+            {
+                _ = destination[4];
+            }
+            HexConverter.ToBytesBuffer(
+                guidAsBytes.Byte08,
+                destination,
+                0,
+                HexConverter.Casing.Lower
+            );
+            HexConverter.ToBytesBuffer(
+                guidAsBytes.Byte09,
+                destination,
+                2,
+                HexConverter.Casing.Lower
+            );
 
-            if (flags < 0 /* use dash? */)
+            if (
+                flags < 0 /* use dash? */
+            )
             {
                 destination[4] = Dash;
                 destination = destination.Slice(5);
@@ -200,13 +321,45 @@ namespace System.Buffers.Text
                 destination = destination.Slice(4);
             }
 
-            { _ = destination[11]; } // can't hoist bounds check on the final brace (if exists)
-            HexConverter.ToBytesBuffer(guidAsBytes.Byte10, destination, 0, HexConverter.Casing.Lower);
-            HexConverter.ToBytesBuffer(guidAsBytes.Byte11, destination, 2, HexConverter.Casing.Lower);
-            HexConverter.ToBytesBuffer(guidAsBytes.Byte12, destination, 4, HexConverter.Casing.Lower);
-            HexConverter.ToBytesBuffer(guidAsBytes.Byte13, destination, 6, HexConverter.Casing.Lower);
-            HexConverter.ToBytesBuffer(guidAsBytes.Byte14, destination, 8, HexConverter.Casing.Lower);
-            HexConverter.ToBytesBuffer(guidAsBytes.Byte15, destination, 10, HexConverter.Casing.Lower);
+            {
+                _ = destination[11];
+            } // can't hoist bounds check on the final brace (if exists)
+            HexConverter.ToBytesBuffer(
+                guidAsBytes.Byte10,
+                destination,
+                0,
+                HexConverter.Casing.Lower
+            );
+            HexConverter.ToBytesBuffer(
+                guidAsBytes.Byte11,
+                destination,
+                2,
+                HexConverter.Casing.Lower
+            );
+            HexConverter.ToBytesBuffer(
+                guidAsBytes.Byte12,
+                destination,
+                4,
+                HexConverter.Casing.Lower
+            );
+            HexConverter.ToBytesBuffer(
+                guidAsBytes.Byte13,
+                destination,
+                6,
+                HexConverter.Casing.Lower
+            );
+            HexConverter.ToBytesBuffer(
+                guidAsBytes.Byte14,
+                destination,
+                8,
+                HexConverter.Casing.Lower
+            );
+            HexConverter.ToBytesBuffer(
+                guidAsBytes.Byte15,
+                destination,
+                10,
+                HexConverter.Casing.Lower
+            );
 
             if ((byte)flags != 0)
             {
@@ -222,23 +375,40 @@ namespace System.Buffers.Text
         [StructLayout(LayoutKind.Explicit)]
         private struct DecomposedGuid
         {
-            [FieldOffset(00)] public Guid Guid;
-            [FieldOffset(00)] public byte Byte00;
-            [FieldOffset(01)] public byte Byte01;
-            [FieldOffset(02)] public byte Byte02;
-            [FieldOffset(03)] public byte Byte03;
-            [FieldOffset(04)] public byte Byte04;
-            [FieldOffset(05)] public byte Byte05;
-            [FieldOffset(06)] public byte Byte06;
-            [FieldOffset(07)] public byte Byte07;
-            [FieldOffset(08)] public byte Byte08;
-            [FieldOffset(09)] public byte Byte09;
-            [FieldOffset(10)] public byte Byte10;
-            [FieldOffset(11)] public byte Byte11;
-            [FieldOffset(12)] public byte Byte12;
-            [FieldOffset(13)] public byte Byte13;
-            [FieldOffset(14)] public byte Byte14;
-            [FieldOffset(15)] public byte Byte15;
+            [FieldOffset(00)]
+            public Guid Guid;
+            [FieldOffset(00)]
+            public byte Byte00;
+            [FieldOffset(01)]
+            public byte Byte01;
+            [FieldOffset(02)]
+            public byte Byte02;
+            [FieldOffset(03)]
+            public byte Byte03;
+            [FieldOffset(04)]
+            public byte Byte04;
+            [FieldOffset(05)]
+            public byte Byte05;
+            [FieldOffset(06)]
+            public byte Byte06;
+            [FieldOffset(07)]
+            public byte Byte07;
+            [FieldOffset(08)]
+            public byte Byte08;
+            [FieldOffset(09)]
+            public byte Byte09;
+            [FieldOffset(10)]
+            public byte Byte10;
+            [FieldOffset(11)]
+            public byte Byte11;
+            [FieldOffset(12)]
+            public byte Byte12;
+            [FieldOffset(13)]
+            public byte Byte13;
+            [FieldOffset(14)]
+            public byte Byte14;
+            [FieldOffset(15)]
+            public byte Byte15;
         }
     }
 }

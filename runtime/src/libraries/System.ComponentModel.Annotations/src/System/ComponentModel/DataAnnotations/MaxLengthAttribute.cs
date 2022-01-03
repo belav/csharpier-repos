@@ -12,8 +12,10 @@ namespace System.ComponentModel.DataAnnotations
     /// <summary>
     ///     Specifies the maximum length of collection/string data allowed in a property.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public class MaxLengthAttribute : ValidationAttribute
     {
         private const int MaxAllowableLength = -1;
@@ -26,8 +28,7 @@ namespace System.ComponentModel.DataAnnotations
         ///     Value must be greater than zero.
         /// </param>
         [RequiresUnreferencedCode(CountPropertyHelper.RequiresUnreferencedCodeMessage)]
-        public MaxLengthAttribute(int length)
-            : base(() => DefaultErrorMessageString)
+        public MaxLengthAttribute(int length) : base(() => DefaultErrorMessageString)
         {
             Length = length;
         }
@@ -37,8 +38,7 @@ namespace System.ComponentModel.DataAnnotations
         ///     The maximum allowable length supported by the database will be used.
         /// </summary>
         [RequiresUnreferencedCode(CountPropertyHelper.RequiresUnreferencedCodeMessage)]
-        public MaxLengthAttribute()
-            : base(() => DefaultErrorMessageString)
+        public MaxLengthAttribute() : base(() => DefaultErrorMessageString)
         {
             Length = MaxAllowableLength;
         }
@@ -62,7 +62,11 @@ namespace System.ComponentModel.DataAnnotations
         ///     <c>true</c> if the value is null or less than or equal to the specified maximum length, otherwise <c>false</c>
         /// </returns>
         /// <exception cref="InvalidOperationException">Length is zero or less than negative one.</exception>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "The ctors are marked with RequiresUnreferencedCode.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The ctors are marked with RequiresUnreferencedCode."
+        )]
         public override bool IsValid(object? value)
         {
             // Check the lengths for legality
@@ -84,7 +88,9 @@ namespace System.ComponentModel.DataAnnotations
             }
             else
             {
-                throw new InvalidCastException(SR.Format(SR.LengthAttribute_InvalidValueType, value.GetType()));
+                throw new InvalidCastException(
+                    SR.Format(SR.LengthAttribute_InvalidValueType, value.GetType())
+                );
             }
 
             return MaxAllowableLength == Length || length <= Length;
@@ -114,7 +120,8 @@ namespace System.ComponentModel.DataAnnotations
 
     internal static class CountPropertyHelper
     {
-        internal const string RequiresUnreferencedCodeMessage = "Uses reflection to get the 'Count' property on types that don't implement ICollection. This 'Count' property may be trimmed. Ensure it is preserved.";
+        internal const string RequiresUnreferencedCodeMessage =
+            "Uses reflection to get the 'Count' property on types that don't implement ICollection. This 'Count' property may be trimmed. Ensure it is preserved.";
 
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
         public static bool TryGetCount(object value, out int count)

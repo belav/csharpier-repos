@@ -9,15 +9,18 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
-    internal abstract class VSTypeScriptAsynchronousTaggerProvider<TTag> : AsynchronousViewTaggerProvider<TTag>
-        where TTag : ITag
+    internal abstract class VSTypeScriptAsynchronousTaggerProvider<TTag>
+        : AsynchronousViewTaggerProvider<TTag> where TTag : ITag
     {
         protected VSTypeScriptAsynchronousTaggerProvider(
             IThreadingContext threadingContext,
             IAsynchronousOperationListenerProvider asyncListenerProvider,
-            VSTypeScriptGlobalOptions globalOptions)
-            : base(threadingContext, globalOptions.Service, asyncListenerProvider.GetListener(FeatureAttribute.Classification))
-        {
-        }
+            VSTypeScriptGlobalOptions globalOptions
+        )
+            : base(
+                threadingContext,
+                globalOptions.Service,
+                asyncListenerProvider.GetListener(FeatureAttribute.Classification)
+            ) { }
     }
 }

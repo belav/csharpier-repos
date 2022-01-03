@@ -23,8 +23,7 @@ internal class InputFileJsCallbacksRelay : IDisposable
     }
 
     [JSInvokable]
-    public Task NotifyChange(BrowserFile[] files)
-        => _callbacks.NotifyChange(files);
+    public Task NotifyChange(BrowserFile[] files) => _callbacks.NotifyChange(files);
 
     public void Dispose()
     {

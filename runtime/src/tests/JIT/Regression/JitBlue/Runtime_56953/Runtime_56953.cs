@@ -38,12 +38,19 @@ public class TestClass13
             return s_s5_s5_d1_f2_18.uint16_2 <<= 15 | 4;
         }
     }
-    public S3 Method4(ref S2 p_s2_0, S5.S5_D1_F2 p_s5_s5_d1_f2_1, S5.S5_D1_F2 p_s5_s5_d1_f2_2, ushort p_uint16_3, ref S5 p_s5_4, S5.S5_D1_F2 p_s5_s5_d1_f2_5, short p_int16_6)
+    public S3 Method4(
+        ref S2 p_s2_0,
+        S5.S5_D1_F2 p_s5_s5_d1_f2_1,
+        S5.S5_D1_F2 p_s5_s5_d1_f2_2,
+        ushort p_uint16_3,
+        ref S5 p_s5_4,
+        S5.S5_D1_F2 p_s5_s5_d1_f2_5,
+        short p_int16_6
+    )
     {
         unchecked
         {
-            {
-            }
+            { }
             return s_s3_16;
         }
     }
@@ -51,12 +58,18 @@ public class TestClass13
     {
         unchecked
         {
-            if ((s_uint16_11 %= s_s5_s5_d1_f2_18.uint16_2 <<= 15 | 4) < 15 + 4 - LeafMethod11())
+            if ((s_uint16_11 %= s_s5_s5_d1_f2_18.uint16_2 <<= 15 | 4) < 15 + 4 - LeafMethod11()) { }
+            else { }
             { }
-            else
-            { }
-            { }
-            s_s3_16 = Method4(ref s_s2_15, s_s5_s5_d1_f2_18, s_s5_s5_d1_f2_18, LeafMethod11(), ref s_s5_19, s_s5_s5_d1_f2_18, 11592);
+            s_s3_16 = Method4(
+                ref s_s2_15,
+                s_s5_s5_d1_f2_18,
+                s_s5_s5_d1_f2_18,
+                LeafMethod11(),
+                ref s_s5_19,
+                s_s5_s5_d1_f2_18,
+                11592
+            );
             return;
         }
     }
@@ -64,10 +77,10 @@ public class TestClass13
     {
         try
         {
-          TestClass13 objTestClass13 = new TestClass13();
-          objTestClass13.Method0();
+            TestClass13 objTestClass13 = new TestClass13();
+            objTestClass13.Method0();
         }
-        catch(Exception)
+        catch (Exception)
         {
             // ignore exceptions
         }

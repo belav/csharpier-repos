@@ -20,11 +20,19 @@ namespace System.Diagnostics.Tests
             const string libraryName = "LongPath.dll";
             const int minPathLength = 261;
 
-            string testBinPath = Path.GetDirectoryName(typeof(ProcessModuleTests).Assembly.Location);
+            string testBinPath = Path.GetDirectoryName(
+                typeof(ProcessModuleTests).Assembly.Location
+            );
             string libraryToCopy = Path.Combine(testBinPath, libraryName);
-            Assert.True(File.Exists(libraryToCopy), $"{libraryName} was not present in bin folder '{testBinPath}'");
+            Assert.True(
+                File.Exists(libraryToCopy),
+                $"{libraryName} was not present in bin folder '{testBinPath}'"
+            );
 
-            string directoryWithLongName = Path.Combine(TestDirectory, new string('a', Math.Max(1, minPathLength - TestDirectory.Length)));
+            string directoryWithLongName = Path.Combine(
+                TestDirectory,
+                new string('a', Math.Max(1, minPathLength - TestDirectory.Length))
+            );
             Directory.CreateDirectory(directoryWithLongName);
 
             string longNamePath = Path.Combine(directoryWithLongName, libraryName);
@@ -41,7 +49,11 @@ namespace System.Diagnostics.Tests
 
             try
             {
-                string[] modulePaths = Process.GetCurrentProcess().Modules.Cast<ProcessModule>().Select(module => module.FileName).ToArray();
+                string[] modulePaths = Process
+                    .GetCurrentProcess()
+                    .Modules.Cast<ProcessModule>()
+                    .Select(module => module.FileName)
+                    .ToArray();
                 Assert.Contains(longNamePath, modulePaths);
             }
             finally

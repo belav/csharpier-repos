@@ -28,16 +28,38 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
             InitializeComponent();
 
             FormatWhenTypingCheckBox.Content = CSharpVSResources.Automatically_format_when_typing;
-            FormatOnSemicolonCheckBox.Content = CSharpVSResources.Automatically_format_statement_on_semicolon;
-            FormatOnCloseBraceCheckBox.Content = CSharpVSResources.Automatically_format_block_on_close_brace;
+            FormatOnSemicolonCheckBox.Content =
+                CSharpVSResources.Automatically_format_statement_on_semicolon;
+            FormatOnCloseBraceCheckBox.Content =
+                CSharpVSResources.Automatically_format_block_on_close_brace;
             FormatOnReturnCheckBox.Content = CSharpVSResources.Automatically_format_on_return;
             FormatOnPasteCheckBox.Content = CSharpVSResources.Automatically_format_on_paste;
 
-            BindToOption(FormatWhenTypingCheckBox, FormattingBehaviorOptions.AutoFormattingOnTyping, LanguageNames.CSharp);
-            BindToOption(FormatOnCloseBraceCheckBox, BraceCompletionOptions.AutoFormattingOnCloseBrace, LanguageNames.CSharp);
-            BindToOption(FormatOnSemicolonCheckBox, FormattingBehaviorOptions.AutoFormattingOnSemicolon, LanguageNames.CSharp);
-            BindToOption(FormatOnReturnCheckBox, FormattingBehaviorOptions.AutoFormattingOnReturn, LanguageNames.CSharp);
-            BindToOption(FormatOnPasteCheckBox, FormattingBehaviorOptions.FormatOnPaste, LanguageNames.CSharp);
+            BindToOption(
+                FormatWhenTypingCheckBox,
+                FormattingBehaviorOptions.AutoFormattingOnTyping,
+                LanguageNames.CSharp
+            );
+            BindToOption(
+                FormatOnCloseBraceCheckBox,
+                BraceCompletionOptions.AutoFormattingOnCloseBrace,
+                LanguageNames.CSharp
+            );
+            BindToOption(
+                FormatOnSemicolonCheckBox,
+                FormattingBehaviorOptions.AutoFormattingOnSemicolon,
+                LanguageNames.CSharp
+            );
+            BindToOption(
+                FormatOnReturnCheckBox,
+                FormattingBehaviorOptions.AutoFormattingOnReturn,
+                LanguageNames.CSharp
+            );
+            BindToOption(
+                FormatOnPasteCheckBox,
+                FormattingBehaviorOptions.FormatOnPaste,
+                LanguageNames.CSharp
+            );
         }
     }
 }

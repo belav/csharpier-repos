@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 int indentation,
                 int indentationDelta,
                 AnalyzerConfigOptions options,
-                bool visitStructuredTrivia = true)
-                : base(visitIntoStructuredTrivia: visitStructuredTrivia)
+                bool visitStructuredTrivia = true
+            ) : base(visitIntoStructuredTrivia: visitStructuredTrivia)
             {
                 _forceIndentation = forceIndentation;
                 _indentation = indentation;
@@ -43,18 +43,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         var triviaText = trivia.ToFullString();
 
                         var newTriviaText = triviaText.AdjustIndentForXmlDocExteriorTrivia(
-                                                _forceIndentation,
-                                                _indentation,
-                                                _indentationDelta,
-                                                _options.GetOption(FormattingOptions2.UseTabs),
-                                                _options.GetOption(FormattingOptions2.TabSize));
+                            _forceIndentation,
+                            _indentation,
+                            _indentationDelta,
+                            _options.GetOption(FormattingOptions2.UseTabs),
+                            _options.GetOption(FormattingOptions2.TabSize)
+                        );
 
                         if (triviaText == newTriviaText)
                         {
                             return base.VisitTrivia(trivia);
                         }
 
-                        var parsedNewTrivia = SyntaxFactory.DocumentationCommentExterior(newTriviaText);
+                        var parsedNewTrivia = SyntaxFactory.DocumentationCommentExterior(
+                            newTriviaText
+                        );
 
                         return parsedNewTrivia;
                     }
@@ -69,11 +72,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
                 while (currentParent != null)
                 {
-                    if (currentParent.Kind() is SyntaxKind.SingleLineDocumentationCommentTrivia or
-                        SyntaxKind.MultiLineDocumentationCommentTrivia)
+                    if (
+                        currentParent.Kind()
+                        is SyntaxKind.SingleLineDocumentationCommentTrivia
+                            or SyntaxKind.MultiLineDocumentationCommentTrivia
+                    )
                     {
-                        if (trivia.Span.End == currentParent.SpanStart ||
-                            trivia.Span.End == currentParent.Span.End)
+                        if (
+                            trivia.Span.End == currentParent.SpanStart
+                            || trivia.Span.End == currentParent.Span.End
+                        )
                         {
                             return true;
                         }

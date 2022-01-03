@@ -28,11 +28,19 @@ namespace Microsoft.CodeAnalysis
 
         private const int MAX_PATH = 260;
 
-        [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("21b8916c-f28e-11d2-a473-00c04f8ef448")]
+        [
+            ComImport,
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            Guid("21b8916c-f28e-11d2-a473-00c04f8ef448")
+        ]
         private interface IAssemblyEnum
         {
             [PreserveSig]
-            int GetNextAssembly(out FusionAssemblyIdentity.IApplicationContext ppAppCtx, out FusionAssemblyIdentity.IAssemblyName ppName, uint dwFlags);
+            int GetNextAssembly(
+                out FusionAssemblyIdentity.IApplicationContext ppAppCtx,
+                out FusionAssemblyIdentity.IAssemblyName ppName,
+                uint dwFlags
+            );
 
             [PreserveSig]
             int Reset();
@@ -41,12 +49,20 @@ namespace Microsoft.CodeAnalysis
             int Clone(out IAssemblyEnum ppEnum);
         }
 
-        [ComImport, Guid("e707dcde-d1cd-11d2-bab9-00c04f8eceae"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        [
+            ComImport,
+            Guid("e707dcde-d1cd-11d2-bab9-00c04f8eceae"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+        ]
         private interface IAssemblyCache
         {
             void UninstallAssembly();
 
-            void QueryAssemblyInfo(uint dwFlags, [MarshalAs(UnmanagedType.LPWStr)] string pszAssemblyName, ref ASSEMBLY_INFO pAsmInfo);
+            void QueryAssemblyInfo(
+                uint dwFlags,
+                [MarshalAs(UnmanagedType.LPWStr)] string pszAssemblyName,
+                ref ASSEMBLY_INFO pAsmInfo
+            );
 
             void CreateAssemblyCacheItem();
             void CreateAssemblyScavenger();
@@ -64,10 +80,19 @@ namespace Microsoft.CodeAnalysis
         }
 
         [DllImport("clr", PreserveSig = true)]
-        private static extern int CreateAssemblyEnum(out IAssemblyEnum ppEnum, FusionAssemblyIdentity.IApplicationContext pAppCtx, FusionAssemblyIdentity.IAssemblyName pName, ASM_CACHE dwFlags, IntPtr pvReserved);
+        private static extern int CreateAssemblyEnum(
+            out IAssemblyEnum ppEnum,
+            FusionAssemblyIdentity.IApplicationContext pAppCtx,
+            FusionAssemblyIdentity.IAssemblyName pName,
+            ASM_CACHE dwFlags,
+            IntPtr pvReserved
+        );
 
         [DllImport("clr", PreserveSig = false)]
-        private static extern void CreateAssemblyCache(out IAssemblyCache ppAsmCache, uint dwReserved);
+        private static extern void CreateAssemblyCache(
+            out IAssemblyCache ppAsmCache,
+            uint dwReserved
+        );
 
         #endregion
 
@@ -77,9 +102,16 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="partialName">Optional partial name.</param>
         /// <param name="architectureFilter">Optional architecture filter.</param>
-        public override IEnumerable<AssemblyIdentity> GetAssemblyIdentities(AssemblyName partialName, ImmutableArray<ProcessorArchitecture> architectureFilter = default(ImmutableArray<ProcessorArchitecture>))
+        public override IEnumerable<AssemblyIdentity> GetAssemblyIdentities(
+            AssemblyName partialName,
+            ImmutableArray<ProcessorArchitecture> architectureFilter =
+                default(ImmutableArray<ProcessorArchitecture>)
+        )
         {
-            return GetAssemblyIdentities(FusionAssemblyIdentity.ToAssemblyNameObject(partialName), architectureFilter);
+            return GetAssemblyIdentities(
+                FusionAssemblyIdentity.ToAssemblyNameObject(partialName),
+                architectureFilter
+            );
         }
 
         /// <summary>
@@ -88,7 +120,11 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="partialName">The optional partial name.</param>
         /// <param name="architectureFilter">The optional architecture filter.</param>
-        public override IEnumerable<AssemblyIdentity> GetAssemblyIdentities(string partialName = null, ImmutableArray<ProcessorArchitecture> architectureFilter = default(ImmutableArray<ProcessorArchitecture>))
+        public override IEnumerable<AssemblyIdentity> GetAssemblyIdentities(
+            string partialName = null,
+            ImmutableArray<ProcessorArchitecture> architectureFilter =
+                default(ImmutableArray<ProcessorArchitecture>)
+        )
         {
             FusionAssemblyIdentity.IAssemblyName nameObj;
             if (partialName != null)
@@ -112,19 +148,27 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="architectureFilter">Optional architecture filter.</param>
         /// <returns>Unique simple names of GAC assemblies.</returns>
-        public override IEnumerable<string> GetAssemblySimpleNames(ImmutableArray<ProcessorArchitecture> architectureFilter = default(ImmutableArray<ProcessorArchitecture>))
+        public override IEnumerable<string> GetAssemblySimpleNames(
+            ImmutableArray<ProcessorArchitecture> architectureFilter =
+                default(ImmutableArray<ProcessorArchitecture>)
+        )
         {
-            var q = from nameObject in GetAssemblyObjects(partialNameFilter: null, architectureFilter: architectureFilter)
-                    select FusionAssemblyIdentity.GetName(nameObject);
+            var q =
+                from nameObject in GetAssemblyObjects(
+                    partialNameFilter: null,
+                    architectureFilter: architectureFilter
+                )
+                select FusionAssemblyIdentity.GetName(nameObject);
             return q.Distinct();
         }
 
         private static IEnumerable<AssemblyIdentity> GetAssemblyIdentities(
             FusionAssemblyIdentity.IAssemblyName partialName,
-            ImmutableArray<ProcessorArchitecture> architectureFilter)
+            ImmutableArray<ProcessorArchitecture> architectureFilter
+        )
         {
             return from nameObject in GetAssemblyObjects(partialName, architectureFilter)
-                   select FusionAssemblyIdentity.ToAssemblyIdentity(nameObject);
+            select FusionAssemblyIdentity.ToAssemblyIdentity(nameObject);
         }
 
         private const int S_OK = 0;
@@ -133,12 +177,19 @@ namespace Microsoft.CodeAnalysis
         // Internal for testing.
         internal static IEnumerable<FusionAssemblyIdentity.IAssemblyName> GetAssemblyObjects(
             FusionAssemblyIdentity.IAssemblyName partialNameFilter,
-            ImmutableArray<ProcessorArchitecture> architectureFilter)
+            ImmutableArray<ProcessorArchitecture> architectureFilter
+        )
         {
             IAssemblyEnum enumerator;
             FusionAssemblyIdentity.IApplicationContext applicationContext = null;
 
-            int hr = CreateAssemblyEnum(out enumerator, applicationContext, partialNameFilter, ASM_CACHE.GAC, IntPtr.Zero);
+            int hr = CreateAssemblyEnum(
+                out enumerator,
+                applicationContext,
+                partialNameFilter,
+                ASM_CACHE.GAC,
+                IntPtr.Zero
+            );
             if (hr == S_FALSE)
             {
                 // no assembly found
@@ -160,9 +211,13 @@ namespace Microsoft.CodeAnalysis
                 {
                     // for some reason it might happen that CreateAssemblyEnum returns non-zero HR that doesn't correspond to any exception:
 #if SCRIPTING
-                    throw new ArgumentException(Microsoft.CodeAnalysis.Scripting.ScriptingResources.InvalidAssemblyName);
+                    throw new ArgumentException(
+                        Microsoft.CodeAnalysis.Scripting.ScriptingResources.InvalidAssemblyName
+                    );
 #else
-                    throw new ArgumentException(Editor.EditorFeaturesResources.Invalid_assembly_name);
+                    throw new ArgumentException(
+                        Editor.EditorFeaturesResources.Invalid_assembly_name
+                    );
 #endif
                 }
             }
@@ -184,7 +239,9 @@ namespace Microsoft.CodeAnalysis
 
                 if (!architectureFilter.IsDefault)
                 {
-                    var assemblyArchitecture = FusionAssemblyIdentity.GetProcessorArchitecture(nameObject);
+                    var assemblyArchitecture = FusionAssemblyIdentity.GetProcessorArchitecture(
+                        nameObject
+                    );
                     if (!architectureFilter.Contains(assemblyArchitecture))
                     {
                         continue;
@@ -199,7 +256,8 @@ namespace Microsoft.CodeAnalysis
             string displayName,
             out string location,
             ImmutableArray<ProcessorArchitecture> architectureFilter,
-            CultureInfo preferredCulture)
+            CultureInfo preferredCulture
+        )
         {
             if (displayName == null)
             {
@@ -207,14 +265,18 @@ namespace Microsoft.CodeAnalysis
             }
 
             location = null;
-            FusionAssemblyIdentity.IAssemblyName nameObject = FusionAssemblyIdentity.ToAssemblyNameObject(displayName);
+            FusionAssemblyIdentity.IAssemblyName nameObject =
+                FusionAssemblyIdentity.ToAssemblyNameObject(displayName);
             if (nameObject == null)
             {
                 return null;
             }
 
             var candidates = GetAssemblyObjects(nameObject, architectureFilter);
-            string cultureName = (preferredCulture != null && !preferredCulture.IsNeutralCulture) ? preferredCulture.Name : null;
+            string cultureName =
+                (preferredCulture != null && !preferredCulture.IsNeutralCulture)
+                    ? preferredCulture.Name
+                    : null;
 
             var bestMatch = FusionAssemblyIdentity.GetBestMatch(candidates, cultureName);
             if (bestMatch == null)
@@ -226,10 +288,15 @@ namespace Microsoft.CodeAnalysis
             return FusionAssemblyIdentity.ToAssemblyIdentity(bestMatch);
         }
 
-        internal static unsafe string GetAssemblyLocation(FusionAssemblyIdentity.IAssemblyName nameObject)
+        internal static unsafe string GetAssemblyLocation(
+            FusionAssemblyIdentity.IAssemblyName nameObject
+        )
         {
             // NAME | VERSION | CULTURE | PUBLIC_KEY_TOKEN | RETARGET | PROCESSORARCHITECTURE
-            string fullName = FusionAssemblyIdentity.GetDisplayName(nameObject, FusionAssemblyIdentity.ASM_DISPLAYF.FULL);
+            string fullName = FusionAssemblyIdentity.GetDisplayName(
+                nameObject,
+                FusionAssemblyIdentity.ASM_DISPLAYF.FULL
+            );
 
             fixed (char* p = new char[MAX_PATH])
             {
@@ -246,7 +313,10 @@ namespace Microsoft.CodeAnalysis
                 Debug.Assert(info.pszCurrentAssemblyPathBuf != null);
                 Debug.Assert(info.pszCurrentAssemblyPathBuf[info.cchBuf - 1] == '\0');
 
-                var result = Marshal.PtrToStringUni((IntPtr)info.pszCurrentAssemblyPathBuf, (int)info.cchBuf - 1);
+                var result = Marshal.PtrToStringUni(
+                    (IntPtr)info.pszCurrentAssemblyPathBuf,
+                    (int)info.cchBuf - 1
+                );
                 Debug.Assert(result.IndexOf('\0') == -1);
                 return result;
             }

@@ -11,19 +11,26 @@ namespace System.Text.Json.Serialization.Converters
     /// </summary>
     /// <typeparam name="TCollection"></typeparam>
     internal sealed class IEnumerableConverter<TCollection>
-        : JsonCollectionConverter<TCollection, object?>
-        where TCollection : IEnumerable
+        : JsonCollectionConverter<TCollection, object?> where TCollection : IEnumerable
     {
         protected override void Add(in object? value, ref ReadStack state)
         {
             ((List<object?>)state.Current.ReturnValue!).Add(value);
         }
 
-        protected override void CreateCollection(ref Utf8JsonReader reader, ref ReadStack state, JsonSerializerOptions options)
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             if (!TypeToConvert.IsAssignableFrom(RuntimeType))
             {
-                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                    TypeToConvert,
+                    ref reader,
+                    ref state
+                );
             }
 
             state.Current.ReturnValue = new List<object?>();
@@ -36,7 +43,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             TCollection value,
             JsonSerializerOptions options,
-            ref WriteStack state)
+            ref WriteStack state
+        )
         {
             IEnumerator enumerator;
             if (state.Current.CollectionEnumerator == null)

@@ -12,7 +12,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         // a value to use in unit tests that won't interfere with reporting
         // for our other scenarios.
         TestEvent_NotUsed = 1,
-
         WorkCoordinator_DocumentWorker_Enqueue = 2,
         WorkCoordinator_ProcessProjectAsync = 3,
         WorkCoordinator_ProcessDocumentAsync = 4,
@@ -23,7 +22,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         WorkCoordinator_Project_Enqueue = 9,
         WorkCoordinator_AsyncWorkItemQueue_LastItem = 10,
         WorkCoordinator_AsyncWorkItemQueue_FirstItem = 11,
-
         Diagnostics_SyntaxDiagnostic = 12,
         Diagnostics_SemanticDiagnostic = 13,
         Diagnostics_ProjectDiagnostic = 14,
@@ -36,7 +34,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         // add new values after this
         Run_Environment = 20,
         Run_Environment_Options = 21,
-
         Tagger_AdornmentManager_OnLayoutChanged = 22,
         Tagger_AdornmentManager_UpdateInvalidSpans = 23,
         Tagger_BatchChangeNotifier_NotifyEditorNow = 24,
@@ -50,23 +47,19 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Tagger_Outlining_TagProducer_ProduceTags = 32,
         Tagger_Highlighter_TagProducer_ProduceTags = 33,
         Tagger_ReferenceHighlighting_TagProducer_ProduceTags = 34,
-
         CaseCorrection_CaseCorrect = 35,
         CaseCorrection_ReplaceTokens = 36,
         CaseCorrection_AddReplacements = 37,
-
         CodeCleanup_CleanupAsync = 38,
         CodeCleanup_Cleanup = 39,
         CodeCleanup_IterateAllCodeCleanupProviders = 40,
         CodeCleanup_IterateOneCodeCleanup = 41,
-
         CommandHandler_GetCommandState = 42,
         CommandHandler_ExecuteHandlers = 43,
         CommandHandler_FormatCommand = 44,
         CommandHandler_CompleteStatement = 45,
         CommandHandler_ToggleBlockComment = 46,
         CommandHandler_ToggleLineComment = 47,
-
         Workspace_SourceText_GetChangeRanges = 48,
         Workspace_Recoverable_RecoverRootAsync = 49,
         Workspace_Recoverable_RecoverRoot = 50,
@@ -87,14 +80,12 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         // obsolete: Workspace_Solution_LinkedFileDiffMergingSession = 65,
         // obsolete: Workspace_Solution_LinkedFileDiffMergingSession_LinkedFileGroup = 66,
         Workspace_Solution_Info = 67,
-
         EndConstruct_DoStatement = 68,
         EndConstruct_XmlCData = 69,
         EndConstruct_XmlComment = 70,
         EndConstruct_XmlElement = 71,
         EndConstruct_XmlEmbeddedExpression = 72,
         EndConstruct_XmlProcessingInstruction = 73,
-
         FindReference_Rename = 74,
         FindReference_ChangeSignature = 75,
         FindReference = 76,
@@ -104,9 +95,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         FindReference_ProcessAsync = 80,
         FindReference_ProcessProjectAsync = 81,
         FindReference_ProcessDocumentAsync = 82,
-
         LineCommit_CommitRegion = 83,
-
         Formatting_TokenStreamConstruction = 84,
         Formatting_ContextInitialization = 85,
         Formatting_Format = 86,
@@ -126,11 +115,9 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Formatting_CreateTextChanges = 100,
         Formatting_CreateFormattedRoot = 101,
         Formatting_Partitions = 102,
-
         SmartIndentation_Start = 103,
         SmartIndentation_OpenCurly = 104,
         SmartIndentation_CloseCurly = 105,
-
         Rename_InlineSession = 106,
         Rename_InlineSession_Session = 107,
         Rename_FindLinkedSpans = 108,
@@ -148,13 +135,10 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Rename_ReportSpan = 120,
         Rename_GetNoChangeConflictResolution = 121,
         Rename_Tracking_BufferChanged = 122,
-
         TPLTask_TaskScheduled = 123,
         TPLTask_TaskStarted = 124,
         TPLTask_TaskCompleted = 125,
-
         Get_QuickInfo_Async = 126,
-
         Completion_ModelComputer_DoInBackground = 127,
         Completion_ModelComputation_FilterModelInBackground = 128,
         Completion_ModelComputation_WaitForModel = 129,
@@ -163,10 +147,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Completion_SnippetCompletionProvider_GetItemsWorker_CSharp = 132,
         Completion_TypeImportCompletionProvider_GetCompletionItemsAsync = 133,
         Completion_ExtensionMethodImportCompletionProvider_GetCompletionItemsAsync = 134,
-
         SignatureHelp_ModelComputation_ComputeModelInBackground = 135,
         SignatureHelp_ModelComputation_UpdateModelInBackground = 136,
-
         Refactoring_CodeRefactoringService_GetRefactoringsAsync = 137,
         Refactoring_AddImport = 138,
         Refactoring_FullyQualify = 139,
@@ -184,45 +166,34 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Refactoring_GenerateType = 151,
         Refactoring_RemoveUnnecessaryImports_CSharp = 152,
         Refactoring_RemoveUnnecessaryImports_VisualBasic = 153,
-
         Snippet_OnBeforeInsertion = 154,
         Snippet_OnAfterInsertion = 155,
-
         Misc_NonReentrantLock_BlockingWait = 156,
         Misc_SaveEventsSink_OnBeforeSave = 158,
-
         TaskList_Refresh = 159,
         TaskList_NavigateTo = 160,
-
         WinformDesigner_GenerateXML = 161,
-
         NavigateTo_Search = 162,
-
         NavigationService_VSDocumentNavigationService_NavigateTo = 163,
-
         NavigationBar_ComputeModelAsync = 164,
         NavigationBar_ItemService_GetMembersInTypes_CSharp = 165,
         NavigationBar_ItemService_GetTypesInFile_CSharp = 166,
         NavigationBar_UpdateDropDownsSynchronously_WaitForModel = 167,
         NavigationBar_UpdateDropDownsSynchronously_WaitForSelectedItemInfo = 168,
-
         EventHookup_Determine_If_Event_Hookup = 169,
         EventHookup_Generate_Handler = 170,
         EventHookup_Type_Char = 171,
-
         Cache_Created = 172,
         Cache_AddOrAccess = 173,
         Cache_Remove = 174,
         Cache_Evict = 175,
         Cache_EvictAll = 176,
         Cache_ItemRank = 177,
-
         TextStructureNavigator_GetExtentOfWord = 178,
         TextStructureNavigator_GetSpanOfEnclosing = 179,
         TextStructureNavigator_GetSpanOfFirstChild = 180,
         TextStructureNavigator_GetSpanOfNextSibling = 181,
         TextStructureNavigator_GetSpanOfPreviousSibling = 182,
-
         Debugging_LanguageDebugInfoService_GetDataTipSpanAndText = 183,
         Debugging_VsLanguageDebugInfo_ValidateBreakpointLocation = 184,
         Debugging_VsLanguageDebugInfo_GetProximityExpressions = 185,
@@ -233,27 +204,21 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Debugging_EncSession_EditSession = 190,
         Debugging_EncSession_EditSession_EmitDeltaErrorId = 191,
         Debugging_EncSession_EditSession_RudeEdit = 192,
-
         Simplifier_ReduceAsync = 193,
         Simplifier_ExpandNode = 194,
         Simplifier_ExpandToken = 195,
-
         ForegroundNotificationService_Processed = 196,
         ForegroundNotificationService_NotifyOnForeground = 197,
-
         BackgroundCompiler_BuildCompilationsAsync = 198,
-
         PersistenceService_ReadAsync = 199,
         PersistenceService_WriteAsync = 200,
         PersistenceService_ReadAsyncFailed = 201,
         PersistenceService_WriteAsyncFailed = 202,
         PersistenceService_Initialization = 203,
-
         TemporaryStorageServiceFactory_ReadText = 204,
         TemporaryStorageServiceFactory_WriteText = 205,
         TemporaryStorageServiceFactory_ReadStream = 206,
         TemporaryStorageServiceFactory_WriteStream = 207,
-
         PullMembersUpWarning_ChangeTargetToAbstract = 208,
         PullMembersUpWarning_ChangeOriginToPublic = 209,
         PullMembersUpWarning_ChangeOriginToNonStatic = 210,
@@ -264,25 +229,20 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         SmartTags_RefreshSession = 213,
         SmartTags_SmartTagInitializeFixes = 214,
         SmartTags_ApplyQuickFix = 215,
-
         EditorTestApp_RefreshTask = 216,
         EditorTestApp_UpdateDiagnostics = 217,
-
         IncrementalAnalyzerProcessor_Analyzers = 218,
         IncrementalAnalyzerProcessor_Analyzer = 219,
         IncrementalAnalyzerProcessor_ActiveFileAnalyzers = 220,
         IncrementalAnalyzerProcessor_ActiveFileAnalyzer = 221,
         IncrementalAnalyzerProcessor_Shutdown = 222,
-
         WorkCoordinatorRegistrationService_Register = 223,
         WorkCoordinatorRegistrationService_Unregister = 224,
         WorkCoordinatorRegistrationService_Reanalyze = 225,
-
         WorkCoordinator_SolutionCrawlerOption = 226,
         WorkCoordinator_PersistentStorageAdded = 227,
         WorkCoordinator_PersistentStorageRemoved = 228,
         WorkCoordinator_Shutdown = 229,
-
         DiagnosticAnalyzerService_Analyzers = 230,
         DiagnosticAnalyzerDriver_AnalyzerCrash = 231,
         DiagnosticAnalyzerDriver_AnalyzerTypeCount = 232,
@@ -290,7 +250,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         StorageDatabase_Exceptions = 234,
         WorkCoordinator_ShutdownTimeout = 235,
         Diagnostics_HyperLink = 236,
-
         CodeFixes_FixAllOccurrencesSession = 237,
         CodeFixes_FixAllOccurrencesContext = 238,
         CodeFixes_FixAllOccurrencesComputation = 239,
@@ -302,7 +261,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         CodeFixes_FixAllOccurrencesComputation_Project_Merge = 245,
         CodeFixes_FixAllOccurrencesPreviewChanges = 246,
         CodeFixes_ApplyChanges = 247,
-
         SolutionExplorer_AnalyzerItemSource_GetItems = 248,
         SolutionExplorer_DiagnosticItemSource_GetItems = 249,
         WorkCoordinator_ActiveFileEnqueue = 250,
@@ -321,21 +279,16 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         AnalyzerDependencyCheckingService_LogMissingDependency = 263,
         VirtualMemory_MemoryLow = 264,
         Extension_Exception = 265,
-
         WorkCoordinator_WaitForHigherPriorityOperationsAsync = 266,
-
         CSharp_Interactive_Window = 267,
         VisualBasic_Interactive_Window = 268,
-
         NonFatalWatson = 269,
         GlobalOperationRegistration = 270,
         CommandHandler_FindAllReference = 271,
-
         CodefixInfobar_Enable = 272,
         CodefixInfobar_EnableAndIgnoreFutureErrors = 273,
         CodefixInfobar_LeaveDisabled = 274,
         CodefixInfobar_ErrorIgnored = 275,
-
         Refactoring_NamingStyle = 276,
 
         // Caches
@@ -343,17 +296,14 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         SpellChecker_ExceptionInCacheRead = 278,
         BKTree_ExceptionInCacheRead = 279,
         IntellisenseBuild_Failed = 280,
-
         FileTextLoader_FileLengthThresholdExceeded = 281,
 
         // Generic performance measurement action IDs
         MeasurePerformance_StartAction = 282,
         MeasurePerformance_StopAction = 283,
-
         Serializer_CreateChecksum = 284,
         Serializer_Serialize = 285,
         Serializer_Deserialize = 286,
-
         CodeAnalysisService_CalculateDiagnosticsAsync = 287,
         CodeAnalysisService_SerializeDiagnosticResultAsync = 288,
         CodeAnalysisService_GetReferenceCountAsync = 289,
@@ -362,7 +312,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         CodeAnalysisService_GetFullyQualifiedName = 292,
         CodeAnalysisService_GetTodoCommentsAsync = 293,
         CodeAnalysisService_GetDesignerAttributesAsync = 294,
-
         ServiceHubRemoteHostClient_CreateAsync = 295,
         // obsolete: PinnedRemotableDataScope_GetRemotableData = 296,
 
@@ -379,17 +328,14 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 
         AssetStorage_CleanAssets = 305,
         AssetStorage_TryGetAsset = 306,
-
         AssetService_GetAssetAsync = 307,
         AssetService_SynchronizeAssetsAsync = 308,
         AssetService_SynchronizeSolutionAssetsAsync = 309,
         AssetService_SynchronizeProjectAssetsAsync = 310,
-
         CodeLens_GetReferenceCountAsync = 311,
         CodeLens_FindReferenceLocationsAsync = 312,
         CodeLens_FindReferenceMethodsAsync = 313,
         CodeLens_GetFullyQualifiedName = 314,
-
         SolutionState_ComputeChecksumsAsync = 315,
         ProjectState_ComputeChecksumsAsync = 316,
         DocumentState_ComputeChecksumsAsync = 317,
@@ -398,12 +344,9 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         // obsolete: SolutionSynchronizationServiceFactory_CreatePinnedRemotableDataScopeAsync = 319,
 
         SolutionChecksumUpdater_SynchronizePrimaryWorkspace = 320,
-
         JsonRpcSession_RequestAssetAsync = 321,
-
         SolutionService_GetSolutionAsync = 322,
         SolutionService_UpdatePrimaryWorkspaceAsync = 323,
-
         RemoteHostService_GetAssetsAsync = 324,
 
         // obsolete: CompilationService_GetCompilationAsync = 325,
@@ -427,7 +370,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         DiagnosticIncrementalAnalyzer_SynchronizeWithBuildAsync = 343,
         Completion_ExecuteCommand_TypeChar = 344,
         RemoteHostService_SynchronizeTextAsync = 345,
-
         SymbolFinder_Solution_Pattern_FindSourceDeclarationsAsync = 346,
         SymbolFinder_Project_Pattern_FindSourceDeclarationsAsync = 347,
         // obsolete: Intellisense_Completion_Commit = 348,
@@ -435,7 +377,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         CodeCleanupInfobar_BarDisplayed = 349,
         CodeCleanupInfobar_ConfigureNow = 350,
         CodeCleanupInfobar_NeverShowCodeCleanupInfoBarAgain = 351,
-
         FormatDocument = 352,
         CodeCleanup_ApplyCodeFixesAsync = 353,
         CodeCleanup_RemoveUnusedImports = 354,
@@ -444,9 +385,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         CodeCleanupABTest_AssignedToOnByDefault = 357,
         CodeCleanupABTest_AssignedToOffByDefault = 358,
         Workspace_Events = 359,
-
         Refactoring_ExtractMethod_UnknownMatrixItem = 360,
-
         SyntaxTreeIndex_Precalculate = 361,
         SyntaxTreeIndex_Precalculate_Create = 362,
         SymbolTreeInfo_Create = 363,
@@ -457,7 +396,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         GraphQuery_IsCalledBy = 368,
         GraphQuery_IsUsedBy = 369,
         GraphQuery_Overrides = 370,
-
         Intellisense_AsyncCompletion_Data = 371,
         Intellisense_CompletionProviders_Data = 372,
         RemoteHostService_IsExperimentEnabledAsync = 373,
@@ -468,71 +406,47 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         // obsolete: Liveshare_SyntacticTagger = 378,
 
         CommandHandler_GoToBase = 379,
-
         DiagnosticAnalyzerService_GetDiagnosticsForSpanAsync = 380,
         CodeFixes_GetCodeFixesAsync = 381,
-
         LanguageServer_ActivateFailed = 382,
         LanguageServer_OnLoadedFailed = 383,
-
         CodeFixes_AddExplicitCast = 384,
-
         ToolsOptions_GenerateEditorconfig = 385,
-
         Renamer_RenameSymbolAsync = 386,
         Renamer_FindRenameLocationsAsync = 387,
         Renamer_ResolveConflictsAsync = 388,
-
         ChangeSignature_Data = 400,
-
         AbstractEncapsulateFieldService_EncapsulateFieldsAsync = 410,
-
         AbstractConvertTupleToStructCodeRefactoringProvider_ConvertToStructAsync = 420,
-
         DependentTypeFinder_FindAndCacheDerivedClassesAsync = 430,
         DependentTypeFinder_FindAndCacheDerivedInterfacesAsync = 431,
         DependentTypeFinder_FindAndCacheImplementingTypesAsync = 432,
-
         RemoteSemanticClassificationCacheService_ExceptionInCacheRead = 440,
         // obsolete: FeatureNotAvailable = 441,
 
         LSPCompletion_MissingLSPCompletionTriggerKind = 450,
         LSPCompletion_MissingLSPCompletionInvokeKind = 451,
-
         Workspace_Project_CompilationThrownAway = 460,
-
         CommandHandler_Paste_ImportsOnPaste = 470,
 
         // Superseded by LSP_FindDocumentInWorkspace
         // obsolete: FindDocumentInWorkspace = 480,
         RegisterWorkspace = 481,
-
         LSP_RequestCounter = 482,
         LSP_RequestDuration = 483,
         LSP_TimeInQueue = 484,
-
         Intellicode_UnknownIntent = 485,
-
         LSP_CompletionListCacheMiss = 486,
-
         InheritanceMargin_TargetsMenuOpen = 487,
         InheritanceMargin_NavigateToTarget = 488,
-
         VS_ErrorReportingService_ShowGlobalErrorInfo = 489,
-
         UnusedReferences_GetUnusedReferences = 490,
-
         ValueTracking_Command = 491,
         ValueTracking_TrackValueSource = 492,
-
         InheritanceMargin_GetInheritanceMemberItems = 493,
-
         LSP_FindDocumentInWorkspace = 494,
-
         SuggestedActions_GetSuggestedActionsAsync = 500,
-
         NavigateTo_CacheItemsMiss = 510,
-
         AssetService_Perf = 520,
     }
 }

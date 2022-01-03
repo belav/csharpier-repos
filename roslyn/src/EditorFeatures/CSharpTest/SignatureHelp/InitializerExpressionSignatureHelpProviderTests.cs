@@ -15,15 +15,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
 {
-    public class InitializerExpressionSignatureHelpProviderTests : AbstractCSharpSignatureHelpProviderTests
+    public class InitializerExpressionSignatureHelpProviderTests
+        : AbstractCSharpSignatureHelpProviderTests
     {
-        internal override Type GetSignatureHelpProviderType()
-            => typeof(InitializerExpressionSignatureHelpProvider);
+        internal override Type GetSignatureHelpProviderType() =>
+            typeof(InitializerExpressionSignatureHelpProvider);
 
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task WithSingleParamAddMethods()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -35,7 +37,9 @@ class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void List<int>.Add(int item)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("void List<int>.Add(int item)", currentParameterIndex: 0)
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -43,7 +47,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task ForMultiParamAddMethods()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -55,7 +60,12 @@ class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Dictionary<int, string>.Add(int key, string value)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void Dictionary<int, string>.Add(int key, string value)",
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -63,7 +73,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task ForSecondParam()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -75,7 +86,12 @@ class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Dictionary<int, string>.Add(int key, string value)", currentParameterIndex: 1));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void Dictionary<int, string>.Add(int key, string value)",
+                    currentParameterIndex: 1
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -83,7 +99,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task ForNestedCollectionInitializer()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 class Bar
@@ -100,7 +117,12 @@ class C
 }";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Dictionary<int, string>.Add(int key, string value)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void Dictionary<int, string>.Add(int key, string value)",
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -108,7 +130,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task WithoutClosingBraces()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 class Bar
@@ -124,7 +147,12 @@ class C
 ";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Dictionary<int, string>.Add(int key, string value)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void Dictionary<int, string>.Add(int key, string value)",
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -132,7 +160,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task WithMultipleAddMethods()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class Bar : IEnumerable
@@ -150,9 +179,22 @@ class C
 ";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Bar.Add(int i)", currentParameterIndex: 0));
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Bar.Add(int i, string s)", currentParameterIndex: 0, isSelected: true));
-            expectedOrderedItems.Add(new SignatureHelpTestItem("void Bar.Add(int i, string s, bool b)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem("void Bar.Add(int i)", currentParameterIndex: 0)
+            );
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void Bar.Add(int i, string s)",
+                    currentParameterIndex: 0,
+                    isSelected: true
+                )
+            );
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    "void Bar.Add(int i, string s, bool b)",
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -160,7 +202,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task DoesNotImplementIEnumerable()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class Bar
@@ -185,7 +228,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.SignatureHelp)]
         public async Task WithExtensionAddMethods()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections;
 
 class Bar : IEnumerable
@@ -207,9 +251,25 @@ class C
 ";
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
-            expectedOrderedItems.Add(new SignatureHelpTestItem($"({CSharpFeaturesResources.extension}) void Bar.Add(int i)", currentParameterIndex: 0));
-            expectedOrderedItems.Add(new SignatureHelpTestItem($"({CSharpFeaturesResources.extension}) void Bar.Add(int i, string s)", currentParameterIndex: 0, isSelected: true));
-            expectedOrderedItems.Add(new SignatureHelpTestItem($"({CSharpFeaturesResources.extension}) void Bar.Add(int i, string s, bool b)", currentParameterIndex: 0));
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    $"({CSharpFeaturesResources.extension}) void Bar.Add(int i)",
+                    currentParameterIndex: 0
+                )
+            );
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    $"({CSharpFeaturesResources.extension}) void Bar.Add(int i, string s)",
+                    currentParameterIndex: 0,
+                    isSelected: true
+                )
+            );
+            expectedOrderedItems.Add(
+                new SignatureHelpTestItem(
+                    $"({CSharpFeaturesResources.extension}) void Bar.Add(int i, string s, bool b)",
+                    currentParameterIndex: 0
+                )
+            );
 
             await TestAsync(markup, expectedOrderedItems, sourceCodeKind: SourceCodeKind.Regular);
         }

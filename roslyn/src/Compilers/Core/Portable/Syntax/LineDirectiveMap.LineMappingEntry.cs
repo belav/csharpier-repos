@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis
                 int unmappedLine,
                 int mappedLine,
                 string? mappedPathOpt,
-                PositionState state)
+                PositionState state
+            )
             {
                 Debug.Assert(state != PositionState.RemappedSpan);
 
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis
                 int unmappedLine,
                 LinePositionSpan mappedSpan,
                 int? unmappedCharacterOffset,
-                string? mappedPathOpt)
+                string? mappedPathOpt
+            )
             {
                 this.UnmappedLine = unmappedLine;
                 this.MappedLine = -1;
@@ -115,11 +117,10 @@ namespace Microsoft.CodeAnalysis
                 this.State = PositionState.RemappedSpan;
             }
 
-            public int CompareTo(LineMappingEntry other)
-                => UnmappedLine.CompareTo(other.UnmappedLine);
+            public int CompareTo(LineMappingEntry other) =>
+                UnmappedLine.CompareTo(other.UnmappedLine);
 
-            public bool IsHidden
-                => State == PositionState.Hidden;
+            public bool IsHidden => State == PositionState.Hidden;
         }
     }
 }

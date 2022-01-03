@@ -22,11 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public CosmosConventionSetBuilder(
-            ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public CosmosConventionSetBuilder(ProviderConventionSetBuilderDependencies dependencies)
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -38,13 +35,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
         {
             var conventionSet = base.CreateConventionSet();
 
-            conventionSet.ModelInitializedConventions.Add(new ContextContainerConvention(Dependencies));
+            conventionSet.ModelInitializedConventions.Add(
+                new ContextContainerConvention(Dependencies)
+            );
 
             conventionSet.ModelFinalizingConventions.Add(new ETagPropertyConvention());
 
             var storeKeyConvention = new StoreKeyConvention(Dependencies);
             var discriminatorConvention = new CosmosDiscriminatorConvention(Dependencies);
-            KeyDiscoveryConvention keyDiscoveryConvention = new CosmosKeyDiscoveryConvention(Dependencies);
+            KeyDiscoveryConvention keyDiscoveryConvention = new CosmosKeyDiscoveryConvention(
+                Dependencies
+            );
             InversePropertyAttributeConvention inversePropertyAttributeConvention =
                 new CosmosInversePropertyAttributeConvention(Dependencies);
             RelationshipDiscoveryConvention relationshipDiscoveryConvention =
@@ -52,28 +53,71 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
             conventionSet.EntityTypeAddedConventions.Add(storeKeyConvention);
             conventionSet.EntityTypeAddedConventions.Add(discriminatorConvention);
             ReplaceConvention(conventionSet.EntityTypeAddedConventions, keyDiscoveryConvention);
-            ReplaceConvention(conventionSet.EntityTypeAddedConventions, inversePropertyAttributeConvention);
-            ReplaceConvention(conventionSet.EntityTypeAddedConventions, relationshipDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.EntityTypeAddedConventions,
+                inversePropertyAttributeConvention
+            );
+            ReplaceConvention(
+                conventionSet.EntityTypeAddedConventions,
+                relationshipDiscoveryConvention
+            );
 
-            ReplaceConvention(conventionSet.EntityTypeIgnoredConventions, relationshipDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.EntityTypeIgnoredConventions,
+                relationshipDiscoveryConvention
+            );
 
-            ReplaceConvention(conventionSet.EntityTypeRemovedConventions, (DiscriminatorConvention)discriminatorConvention);
-            ReplaceConvention(conventionSet.EntityTypeRemovedConventions, inversePropertyAttributeConvention);
+            ReplaceConvention(
+                conventionSet.EntityTypeRemovedConventions,
+                (DiscriminatorConvention)discriminatorConvention
+            );
+            ReplaceConvention(
+                conventionSet.EntityTypeRemovedConventions,
+                inversePropertyAttributeConvention
+            );
 
-            ValueGenerationConvention valueGenerationConvention = new CosmosValueGenerationConvention(Dependencies);
+            ValueGenerationConvention valueGenerationConvention =
+                new CosmosValueGenerationConvention(Dependencies);
             conventionSet.EntityTypeBaseTypeChangedConventions.Add(storeKeyConvention);
-            ReplaceConvention(conventionSet.EntityTypeBaseTypeChangedConventions, valueGenerationConvention);
-            ReplaceConvention(conventionSet.EntityTypeBaseTypeChangedConventions, (DiscriminatorConvention)discriminatorConvention);
-            ReplaceConvention(conventionSet.EntityTypeBaseTypeChangedConventions, keyDiscoveryConvention);
-            ReplaceConvention(conventionSet.EntityTypeBaseTypeChangedConventions, inversePropertyAttributeConvention);
-            ReplaceConvention(conventionSet.EntityTypeBaseTypeChangedConventions, relationshipDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.EntityTypeBaseTypeChangedConventions,
+                valueGenerationConvention
+            );
+            ReplaceConvention(
+                conventionSet.EntityTypeBaseTypeChangedConventions,
+                (DiscriminatorConvention)discriminatorConvention
+            );
+            ReplaceConvention(
+                conventionSet.EntityTypeBaseTypeChangedConventions,
+                keyDiscoveryConvention
+            );
+            ReplaceConvention(
+                conventionSet.EntityTypeBaseTypeChangedConventions,
+                inversePropertyAttributeConvention
+            );
+            ReplaceConvention(
+                conventionSet.EntityTypeBaseTypeChangedConventions,
+                relationshipDiscoveryConvention
+            );
 
-            ReplaceConvention(conventionSet.EntityTypeMemberIgnoredConventions, keyDiscoveryConvention);
-            ReplaceConvention(conventionSet.EntityTypeMemberIgnoredConventions, inversePropertyAttributeConvention);
-            ReplaceConvention(conventionSet.EntityTypeMemberIgnoredConventions, relationshipDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.EntityTypeMemberIgnoredConventions,
+                keyDiscoveryConvention
+            );
+            ReplaceConvention(
+                conventionSet.EntityTypeMemberIgnoredConventions,
+                inversePropertyAttributeConvention
+            );
+            ReplaceConvention(
+                conventionSet.EntityTypeMemberIgnoredConventions,
+                relationshipDiscoveryConvention
+            );
 
             conventionSet.EntityTypePrimaryKeyChangedConventions.Add(storeKeyConvention);
-            ReplaceConvention(conventionSet.EntityTypePrimaryKeyChangedConventions, valueGenerationConvention);
+            ReplaceConvention(
+                conventionSet.EntityTypePrimaryKeyChangedConventions,
+                valueGenerationConvention
+            );
 
             conventionSet.KeyAddedConventions.Add(storeKeyConvention);
 
@@ -83,56 +127,113 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
             ReplaceConvention(conventionSet.ForeignKeyAddedConventions, keyDiscoveryConvention);
             ReplaceConvention(conventionSet.ForeignKeyAddedConventions, valueGenerationConvention);
 
-            ReplaceConvention(conventionSet.ForeignKeyRemovedConventions, relationshipDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.ForeignKeyRemovedConventions,
+                relationshipDiscoveryConvention
+            );
             conventionSet.ForeignKeyRemovedConventions.Add(discriminatorConvention);
             conventionSet.ForeignKeyRemovedConventions.Add(storeKeyConvention);
             ReplaceConvention(conventionSet.ForeignKeyRemovedConventions, keyDiscoveryConvention);
-            ReplaceConvention(conventionSet.ForeignKeyRemovedConventions, valueGenerationConvention);
+            ReplaceConvention(
+                conventionSet.ForeignKeyRemovedConventions,
+                valueGenerationConvention
+            );
 
-            ReplaceConvention(conventionSet.ForeignKeyPropertiesChangedConventions, keyDiscoveryConvention);
-            ReplaceConvention(conventionSet.ForeignKeyPropertiesChangedConventions, valueGenerationConvention);
+            ReplaceConvention(
+                conventionSet.ForeignKeyPropertiesChangedConventions,
+                keyDiscoveryConvention
+            );
+            ReplaceConvention(
+                conventionSet.ForeignKeyPropertiesChangedConventions,
+                valueGenerationConvention
+            );
 
-            ReplaceConvention(conventionSet.ForeignKeyUniquenessChangedConventions, keyDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.ForeignKeyUniquenessChangedConventions,
+                keyDiscoveryConvention
+            );
 
             conventionSet.ForeignKeyOwnershipChangedConventions.Add(discriminatorConvention);
             conventionSet.ForeignKeyOwnershipChangedConventions.Add(storeKeyConvention);
-            ReplaceConvention(conventionSet.ForeignKeyOwnershipChangedConventions, keyDiscoveryConvention);
-            ReplaceConvention(conventionSet.ForeignKeyOwnershipChangedConventions, valueGenerationConvention);
-            ReplaceConvention(conventionSet.ForeignKeyOwnershipChangedConventions, relationshipDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.ForeignKeyOwnershipChangedConventions,
+                keyDiscoveryConvention
+            );
+            ReplaceConvention(
+                conventionSet.ForeignKeyOwnershipChangedConventions,
+                valueGenerationConvention
+            );
+            ReplaceConvention(
+                conventionSet.ForeignKeyOwnershipChangedConventions,
+                relationshipDiscoveryConvention
+            );
 
-            ReplaceConvention(conventionSet.ForeignKeyNullNavigationSetConventions, relationshipDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.ForeignKeyNullNavigationSetConventions,
+                relationshipDiscoveryConvention
+            );
 
-            ReplaceConvention(conventionSet.NavigationAddedConventions, inversePropertyAttributeConvention);
-            ReplaceConvention(conventionSet.NavigationAddedConventions, relationshipDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.NavigationAddedConventions,
+                inversePropertyAttributeConvention
+            );
+            ReplaceConvention(
+                conventionSet.NavigationAddedConventions,
+                relationshipDiscoveryConvention
+            );
 
-            ReplaceConvention(conventionSet.NavigationRemovedConventions, relationshipDiscoveryConvention);
+            ReplaceConvention(
+                conventionSet.NavigationRemovedConventions,
+                relationshipDiscoveryConvention
+            );
 
             ManyToManyJoinEntityTypeConvention manyToManyJoinEntityTypeConvention =
                 new CosmosManyToManyJoinEntityTypeConvention(Dependencies);
-            ReplaceConvention(conventionSet.SkipNavigationAddedConventions, manyToManyJoinEntityTypeConvention);
+            ReplaceConvention(
+                conventionSet.SkipNavigationAddedConventions,
+                manyToManyJoinEntityTypeConvention
+            );
 
-            ReplaceConvention(conventionSet.SkipNavigationRemovedConventions, manyToManyJoinEntityTypeConvention);
+            ReplaceConvention(
+                conventionSet.SkipNavigationRemovedConventions,
+                manyToManyJoinEntityTypeConvention
+            );
 
-            ReplaceConvention(conventionSet.SkipNavigationInverseChangedConventions, manyToManyJoinEntityTypeConvention);
+            ReplaceConvention(
+                conventionSet.SkipNavigationInverseChangedConventions,
+                manyToManyJoinEntityTypeConvention
+            );
 
-            ReplaceConvention(conventionSet.SkipNavigationForeignKeyChangedConventions, manyToManyJoinEntityTypeConvention);
+            ReplaceConvention(
+                conventionSet.SkipNavigationForeignKeyChangedConventions,
+                manyToManyJoinEntityTypeConvention
+            );
 
             conventionSet.EntityTypeAnnotationChangedConventions.Add(discriminatorConvention);
             conventionSet.EntityTypeAnnotationChangedConventions.Add(storeKeyConvention);
-            conventionSet.EntityTypeAnnotationChangedConventions.Add((CosmosValueGenerationConvention)valueGenerationConvention);
-            conventionSet.EntityTypeAnnotationChangedConventions.Add((CosmosKeyDiscoveryConvention)keyDiscoveryConvention);
             conventionSet.EntityTypeAnnotationChangedConventions.Add(
-                (CosmosManyToManyJoinEntityTypeConvention)manyToManyJoinEntityTypeConvention);
+                (CosmosValueGenerationConvention)valueGenerationConvention
+            );
+            conventionSet.EntityTypeAnnotationChangedConventions.Add(
+                (CosmosKeyDiscoveryConvention)keyDiscoveryConvention
+            );
+            conventionSet.EntityTypeAnnotationChangedConventions.Add(
+                (CosmosManyToManyJoinEntityTypeConvention)manyToManyJoinEntityTypeConvention
+            );
 
             ReplaceConvention(conventionSet.PropertyAddedConventions, keyDiscoveryConvention);
 
             conventionSet.PropertyAnnotationChangedConventions.Add(storeKeyConvention);
 
-            ReplaceConvention(conventionSet.ModelFinalizingConventions, inversePropertyAttributeConvention);
+            ReplaceConvention(
+                conventionSet.ModelFinalizingConventions,
+                inversePropertyAttributeConvention
+            );
 
             ReplaceConvention(
                 conventionSet.ModelFinalizedConventions,
-                (RuntimeModelConvention)new CosmosRuntimeModelConvention(Dependencies));
+                (RuntimeModelConvention)new CosmosRuntimeModelConvention(Dependencies)
+            );
 
             return conventionSet;
         }
@@ -148,7 +249,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
         {
             using var serviceScope = CreateServiceScope();
             using var context = serviceScope.ServiceProvider.GetRequiredService<DbContext>();
-            return new ModelBuilder(ConventionSet.CreateConventionSet(context), context.GetService<ModelDependencies>());
+            return new ModelBuilder(
+                ConventionSet.CreateConventionSet(context),
+                context.GetService<ModelDependencies>()
+            );
         }
 
         private static IServiceScope CreateServiceScope()
@@ -156,9 +260,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Metadata.Conventions.Internal
             var serviceProvider = new ServiceCollection()
                 .AddEntityFrameworkCosmos()
                 .AddDbContext<DbContext>(
-                    (p, o) =>
-                        o.UseCosmos("localhost", "_", "_")
-                            .UseInternalServiceProvider(p))
+                    (p, o) => o.UseCosmos("localhost", "_", "_").UseInternalServiceProvider(p)
+                )
                 .BuildServiceProvider();
 
             return serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();

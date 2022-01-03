@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["MultiplyAdd.Double"] = MultiplyAddDouble,
                 ["MultiplyAdd.Single"] = MultiplyAddSingle,
                 ["MultiplyAddNegated.Double"] = MultiplyAddNegatedDouble,

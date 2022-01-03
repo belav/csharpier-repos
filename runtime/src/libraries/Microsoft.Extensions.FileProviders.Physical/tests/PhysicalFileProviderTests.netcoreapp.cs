@@ -15,7 +15,9 @@ namespace Microsoft.Extensions.FileProviders
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsSymLinkSupported))]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task UsePollingFileWatcher_UseActivePolling_HasChanged_SymbolicLink(bool useWildcard)
+        public async Task UsePollingFileWatcher_UseActivePolling_HasChanged_SymbolicLink(
+            bool useWildcard
+        )
         {
             // Arrange
             using var rootOfFile = new TempDirectory(GetTestFilePath());
@@ -27,11 +29,21 @@ namespace Microsoft.Extensions.FileProviders
             string linkPath = Path.Combine(rootOfLink.Path, linkName);
             File.CreateSymbolicLink(linkPath, filePath);
 
-            using var provider = new PhysicalFileProvider(rootOfLink.Path) { UsePollingFileWatcher = true, UseActivePolling = true };
+            using var provider = new PhysicalFileProvider(rootOfLink.Path)
+            {
+                UsePollingFileWatcher = true,
+                UseActivePolling = true
+            };
             IChangeToken token = provider.Watch(useWildcard ? "*" : linkName);
 
             var tcs = new TaskCompletionSource<bool>();
-            token.RegisterChangeCallback(_ => { tcs.TrySetResult(true); }, null);
+            token.RegisterChangeCallback(
+                _ =>
+                {
+                    tcs.TrySetResult(true);
+                },
+                null
+            );
 
             var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
             cts.Token.Register(() => tcs.TrySetCanceled());
@@ -41,15 +53,19 @@ namespace Microsoft.Extensions.FileProviders
             File.WriteAllText(filePath, "v1.2");
 
             // Assert
-            Assert.True(await tcs.Task,
-                $"Change event was not raised - current time: {DateTime.UtcNow:O}, file LastWriteTimeUtc: {File.GetLastWriteTimeUtc(filePath):O}.");
+            Assert.True(
+                await tcs.Task,
+                $"Change event was not raised - current time: {DateTime.UtcNow:O}, file LastWriteTimeUtc: {File.GetLastWriteTimeUtc(filePath):O}."
+            );
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsSymLinkSupported))]
         [OuterLoop]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task UsePollingFileWatcher_UseActivePolling_HasChanged_SymbolicLink_TargetNotExists(bool useWildcard)
+        public async Task UsePollingFileWatcher_UseActivePolling_HasChanged_SymbolicLink_TargetNotExists(
+            bool useWildcard
+        )
         {
             // Arrange
             using var rootOfLink = new TempDirectory(GetTestFilePath());
@@ -58,11 +74,21 @@ namespace Microsoft.Extensions.FileProviders
             File.CreateSymbolicLink(linkPath, "not-existent-file");
 
             // Act
-            using var provider = new PhysicalFileProvider(rootOfLink.Path) { UsePollingFileWatcher = true, UseActivePolling = true };
+            using var provider = new PhysicalFileProvider(rootOfLink.Path)
+            {
+                UsePollingFileWatcher = true,
+                UseActivePolling = true
+            };
             IChangeToken token = provider.Watch(useWildcard ? "*" : linkName);
 
             var tcs = new TaskCompletionSource();
-            token.RegisterChangeCallback(_ => { Assert.True(false, "Change event was raised when it was not expected."); }, null);
+            token.RegisterChangeCallback(
+                _ =>
+                {
+                    Assert.True(false, "Change event was raised when it was not expected.");
+                },
+                null
+            );
 
             var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
             cts.Token.Register(() => tcs.TrySetCanceled());
@@ -75,7 +101,10 @@ namespace Microsoft.Extensions.FileProviders
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public async Task UsePollingFileWatcher_UseActivePolling_HasChanged_SymbolicLink_TargetChanged(bool useWildcard, bool linkWasBroken)
+        public async Task UsePollingFileWatcher_UseActivePolling_HasChanged_SymbolicLink_TargetChanged(
+            bool useWildcard,
+            bool linkWasBroken
+        )
         {
             // Arrange
             using var rootOfFile = new TempDirectory(GetTestFilePath());
@@ -96,11 +125,21 @@ namespace Microsoft.Extensions.FileProviders
             File.CreateSymbolicLink(linkPath, file1Path);
 
             string filter = useWildcard ? "*" : linkName;
-            using var provider = new PhysicalFileProvider(rootOfLink.Path) { UsePollingFileWatcher = true, UseActivePolling = true };
+            using var provider = new PhysicalFileProvider(rootOfLink.Path)
+            {
+                UsePollingFileWatcher = true,
+                UseActivePolling = true
+            };
             IChangeToken token = provider.Watch(filter);
 
             var tcs = new TaskCompletionSource<bool>();
-            token.RegisterChangeCallback(_ => { tcs.TrySetResult(true); }, null);
+            token.RegisterChangeCallback(
+                _ =>
+                {
+                    tcs.TrySetResult(true);
+                },
+                null
+            );
 
             var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
             cts.Token.Register(() => tcs.TrySetCanceled());
@@ -112,8 +151,10 @@ namespace Microsoft.Extensions.FileProviders
                 File.CreateSymbolicLink(linkPath, file2Path);
 
                 // Assert - It should report the change regardless of the timestamp being older.
-                Assert.True(await tcs.Task,
-                    $"Change event was not raised - current time: {DateTime.UtcNow:O}, file1 LastWriteTimeUtc: {File.GetLastWriteTimeUtc(file1Path):O}, file2 LastWriteTime: {File.GetLastWriteTimeUtc(file2Path):O}.");
+                Assert.True(
+                    await tcs.Task,
+                    $"Change event was not raised - current time: {DateTime.UtcNow:O}, file1 LastWriteTimeUtc: {File.GetLastWriteTimeUtc(file1Path):O}, file2 LastWriteTime: {File.GetLastWriteTimeUtc(file2Path):O}."
+                );
             }
             // https://github.com/dotnet/runtime/issues/56810
             catch (UnauthorizedAccessException) { }
@@ -122,7 +163,9 @@ namespace Microsoft.Extensions.FileProviders
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsSymLinkSupported))]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task UsePollingFileWatcher_UseActivePolling_HasChanged_SymbolicLink_TargetDeleted(bool useWildcard)
+        public async Task UsePollingFileWatcher_UseActivePolling_HasChanged_SymbolicLink_TargetDeleted(
+            bool useWildcard
+        )
         {
             // Arrange
             using var rootOfFile = new TempDirectory(GetTestFilePath());
@@ -136,11 +179,21 @@ namespace Microsoft.Extensions.FileProviders
             File.CreateSymbolicLink(linkPath, filePath);
 
             string filter = useWildcard ? "*" : linkName;
-            using var provider = new PhysicalFileProvider(rootOfLink.Path) { UsePollingFileWatcher = true, UseActivePolling = true };
+            using var provider = new PhysicalFileProvider(rootOfLink.Path)
+            {
+                UsePollingFileWatcher = true,
+                UseActivePolling = true
+            };
             IChangeToken token = provider.Watch(filter);
 
             var tcs = new TaskCompletionSource<bool>();
-            token.RegisterChangeCallback(_ => { tcs.TrySetResult(true); }, null);
+            token.RegisterChangeCallback(
+                _ =>
+                {
+                    tcs.TrySetResult(true);
+                },
+                null
+            );
 
             var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
             cts.Token.Register(() => tcs.TrySetCanceled());
@@ -149,8 +202,10 @@ namespace Microsoft.Extensions.FileProviders
             File.Delete(linkPath);
 
             // Assert
-            Assert.True(await tcs.Task,
-                $"Change event was not raised - current time: {DateTime.UtcNow:O}, file LastWriteTimeUtc: {File.GetLastWriteTimeUtc(filePath):O}.");
+            Assert.True(
+                await tcs.Task,
+                $"Change event was not raised - current time: {DateTime.UtcNow:O}, file LastWriteTimeUtc: {File.GetLastWriteTimeUtc(filePath):O}."
+            );
         }
     }
 }

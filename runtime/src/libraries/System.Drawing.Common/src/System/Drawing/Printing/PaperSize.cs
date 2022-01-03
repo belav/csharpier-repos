@@ -71,8 +71,13 @@ namespace System.Drawing.Printing
         {
             get
             {
-                if (_kind <= (PaperKind)SafeNativeMethods.DMPAPER_LAST &&
-                    !(_kind == (PaperKind)SafeNativeMethods.DMPAPER_RESERVED_48 || _kind == (PaperKind)SafeNativeMethods.DMPAPER_RESERVED_49))
+                if (
+                    _kind <= (PaperKind)SafeNativeMethods.DMPAPER_LAST
+                    && !(
+                        _kind == (PaperKind)SafeNativeMethods.DMPAPER_RESERVED_48
+                        || _kind == (PaperKind)SafeNativeMethods.DMPAPER_RESERVED_49
+                    )
+                )
                 {
                     return _kind;
                 }
@@ -127,6 +132,7 @@ namespace System.Drawing.Printing
         /// <summary>
         /// Provides some interesting information about the PaperSize in String form.
         /// </summary>
-        public override string ToString() => $"[PaperSize {PaperName} Kind={Kind.ToString()} Height={Height.ToString(CultureInfo.InvariantCulture)} Width={Width.ToString(CultureInfo.InvariantCulture)}]";
+        public override string ToString() =>
+            $"[PaperSize {PaperName} Kind={Kind.ToString()} Height={Height.ToString(CultureInfo.InvariantCulture)} Width={Width.ToString(CultureInfo.InvariantCulture)}]";
     }
 }

@@ -14,10 +14,16 @@ namespace System.Data.Common
         // Oleaut32
         //
 
-        [Guid("00000567-0000-0010-8000-00AA006D2EA4"), InterfaceType(ComInterfaceType.InterfaceIsDual), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("00000567-0000-0010-8000-00AA006D2EA4"),
+            InterfaceType(ComInterfaceType.InterfaceIsDual),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface ADORecordConstruction
         {
-            [return: MarshalAs(UnmanagedType.Interface)] object get_Row();
+            [return: MarshalAs(UnmanagedType.Interface)]
+            object get_Row();
 
             //void put_Row(
             //    [In, MarshalAs(UnmanagedType.Interface)] object pRow);
@@ -26,12 +32,20 @@ namespace System.Data.Common
             //    [In, MarshalAs(UnmanagedType.Interface)]object pRow);
         }
 
-        [Guid("00000283-0000-0010-8000-00AA006D2EA4"), InterfaceType(ComInterfaceType.InterfaceIsDual), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("00000283-0000-0010-8000-00AA006D2EA4"),
+            InterfaceType(ComInterfaceType.InterfaceIsDual),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface ADORecordsetConstruction
         {
-            [return: MarshalAs(UnmanagedType.Interface)] object get_Rowset();
+            [return: MarshalAs(UnmanagedType.Interface)]
+            object get_Rowset();
 
-            [Obsolete("not used", true)] void put_Rowset(/*deleted parameters signature*/);
+            [Obsolete("not used", true)]
+            void put_Rowset( /*deleted parameters signature*/
+            );
 
             /*[return:MarshalAs(UnmanagedType.SysInt)]*/
             IntPtr get_Chapter();
@@ -52,73 +66,180 @@ namespace System.Data.Common
             //         object pRowPos);
         }
 
-        [Guid("0000050E-0000-0010-8000-00AA006D2EA4"), InterfaceType(ComInterfaceType.InterfaceIsDual), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0000050E-0000-0010-8000-00AA006D2EA4"),
+            InterfaceType(ComInterfaceType.InterfaceIsDual),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface Recordset15
         {
-            [Obsolete("not used", true)] void get_Properties(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_AbsolutePosition(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_AbsolutePosition(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void putref_ActiveConnection(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_ActiveConnection(/*deleted parameters signature*/);
+            [Obsolete("not used", true)]
+            void get_Properties( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_AbsolutePosition( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_AbsolutePosition( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void putref_ActiveConnection( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_ActiveConnection( /*deleted parameters signature*/
+            );
 
             /*[return:MarshalAs(UnmanagedType.Variant)]*/
             object get_ActiveConnection();
 
-            [Obsolete("not used", true)] void get_BOF(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_Bookmark(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_Bookmark(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_CacheSize(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_CacheSize(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_CursorType(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_CursorType(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_EOF(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_Fields(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_LockType(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_LockType(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_MaxRecords(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_MaxRecords(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_RecordCount(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void putref_Source(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_Source(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_Source(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void AddNew(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void CancelUpdate(/*deleted parameters signature*/);
+            [Obsolete("not used", true)]
+            void get_BOF( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_Bookmark( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_Bookmark( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_CacheSize( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_CacheSize( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_CursorType( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_CursorType( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_EOF( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_Fields( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_LockType( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_LockType( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_MaxRecords( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_MaxRecords( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_RecordCount( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void putref_Source( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_Source( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_Source( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void AddNew( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void CancelUpdate( /*deleted parameters signature*/
+            );
 
-            [PreserveSig] System.Data.OleDb.OleDbHResult Close();
+            [PreserveSig]
+            System.Data.OleDb.OleDbHResult Close();
 
-            [Obsolete("not used", true)] void Delete(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void GetRows(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void Move(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void MoveNext();
-            [Obsolete("not used", true)] void MovePrevious();
-            [Obsolete("not used", true)] void MoveFirst();
-            [Obsolete("not used", true)] void MoveLast();
-            [Obsolete("not used", true)] void Open(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void Requery(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void _xResync(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void Update(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_AbsolutePage(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_AbsolutePage(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_EditMode(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_Filter(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_Filter(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_PageCount(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_PageSize(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_PageSize(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_Sort(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_Sort(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_Status(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_State(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void _xClone(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void UpdateBatch(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void CancelBatch(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_CursorLocation(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_CursorLocation(/*deleted parameters signature*/);
+            [Obsolete("not used", true)]
+            void Delete( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void GetRows( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void Move( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void MoveNext();
+            [Obsolete("not used", true)]
+            void MovePrevious();
+            [Obsolete("not used", true)]
+            void MoveFirst();
+            [Obsolete("not used", true)]
+            void MoveLast();
+            [Obsolete("not used", true)]
+            void Open( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void Requery( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void _xResync( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void Update( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_AbsolutePage( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_AbsolutePage( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_EditMode( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_Filter( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_Filter( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_PageCount( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_PageSize( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_PageSize( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_Sort( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_Sort( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_Status( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_State( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void _xClone( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void UpdateBatch( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void CancelBatch( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_CursorLocation( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_CursorLocation( /*deleted parameters signature*/
+            );
 
             [PreserveSig]
             System.Data.OleDb.OleDbHResult NextRecordset(
-                [Out]out object RecordsAffected,
-                [Out, MarshalAs(UnmanagedType.Interface)] out object ppiRs);
+                [Out] out object RecordsAffected,
+                [Out, MarshalAs(UnmanagedType.Interface)] out object ppiRs
+            );
 
             //[ Obsolete("not used", true)] void Supports(/*deleted parameters signature*/);
             //[ Obsolete("not used", true)] void get_Collect(/*deleted parameters signature*/);
@@ -128,29 +249,63 @@ namespace System.Data.Common
             //[ Obsolete("not used", true)] void Find(/*deleted parameters signature*/);
         }
 
-        [Guid("00000562-0000-0010-8000-00AA006D2EA4"), InterfaceType(ComInterfaceType.InterfaceIsDual), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("00000562-0000-0010-8000-00AA006D2EA4"),
+            InterfaceType(ComInterfaceType.InterfaceIsDual),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface _ADORecord
         {
-            [Obsolete("not used", true)] void get_Properties(/*deleted parameters signature*/);
+            [Obsolete("not used", true)]
+            void get_Properties( /*deleted parameters signature*/
+            );
 
             /*[return:MarshalAs(UnmanagedType.Variant)]*/
             object get_ActiveConnection();
 
-            [Obsolete("not used", true)] void put_ActiveConnection(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void putref_ActiveConnection(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_State(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_Source(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_Source(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void putref_Source(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_Mode(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void put_Mode(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void get_ParentURL(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void MoveRecord(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void CopyRecord(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void DeleteRecord(/*deleted parameters signature*/);
-            [Obsolete("not used", true)] void Open(/*deleted parameters signature*/);
+            [Obsolete("not used", true)]
+            void put_ActiveConnection( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void putref_ActiveConnection( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_State( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_Source( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_Source( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void putref_Source( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_Mode( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void put_Mode( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void get_ParentURL( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void MoveRecord( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void CopyRecord( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void DeleteRecord( /*deleted parameters signature*/
+            );
+            [Obsolete("not used", true)]
+            void Open( /*deleted parameters signature*/
+            );
 
-            [PreserveSig] System.Data.OleDb.OleDbHResult Close();
+            [PreserveSig]
+            System.Data.OleDb.OleDbHResult Close();
 
             //[ Obsolete("not used", true)] void get_Fields(/*deleted parameters signature*/);
             //[ Obsolete("not used", true)] void get_RecordType(/*deleted parameters signature*/);
@@ -199,10 +354,17 @@ namespace System.Data.Common
                 typedef ULONGLONG           DB_URESERVE;
         */
 
-        [ComImport, Guid("0C733A8C-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), SuppressUnmanagedCodeSecurity]
+        [
+            ComImport,
+            Guid("0C733A8C-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IAccessor
         {
-            [Obsolete("not used", true)] void AddRefAccessor(/*deleted parameters signature*/);
+            [Obsolete("not used", true)]
+            void AddRefAccessor( /*deleted parameters signature*/
+            );
 
             /*[local]
             HRESULT CreateAccessor(
@@ -217,12 +379,17 @@ namespace System.Data.Common
             System.Data.OleDb.OleDbHResult CreateAccessor(
                 [In] int dwAccessorFlags,
                 [In] IntPtr cBindings,
-                [In] /*tagDBBINDING[]*/SafeHandle rgBindings,
+                [In] /*tagDBBINDING[]*/
+                SafeHandle rgBindings,
                 [In] IntPtr cbRowSize,
                 [Out] out IntPtr phAccessor,
-                [In, Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.I4)] int[] rgStatus);
+                [In, Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.I4)]
+                    int[] rgStatus
+            );
 
-            [Obsolete("not used", true)] void GetBindings(/*deleted parameters signature*/);
+            [Obsolete("not used", true)]
+            void GetBindings( /*deleted parameters signature*/
+            );
 
             /*[local]
             HRESULT ReleaseAccessor(
@@ -232,13 +399,21 @@ namespace System.Data.Common
             [PreserveSig]
             System.Data.OleDb.OleDbHResult ReleaseAccessor(
                 [In] IntPtr hAccessor,
-                [Out] out int pcRefCount);
+                [Out] out int pcRefCount
+            );
         }
 
-        [Guid("0C733A93-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A93-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IChapteredRowset
         {
-            [Obsolete("not used", true)] void AddRefChapter(/*deleted parameters signature*/);
+            [Obsolete("not used", true)]
+            void AddRefChapter( /*deleted parameters signature*/
+            );
 
             /*[local]
             HRESULT ReleaseChapter(
@@ -248,10 +423,16 @@ namespace System.Data.Common
             [PreserveSig]
             System.Data.OleDb.OleDbHResult ReleaseChapter(
                 [In] IntPtr hChapter,
-                [Out] out int pcRefCount);
+                [Out] out int pcRefCount
+            );
         }
 
-        [Guid("0C733A11-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A11-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IColumnsInfo
         {
             /*[local]
@@ -264,13 +445,19 @@ namespace System.Data.Common
             System.Data.OleDb.OleDbHResult GetColumnInfo(
                 [Out] out IntPtr pcColumns,
                 [Out] out IntPtr prgInfo,
-                [Out] out IntPtr ppStringsBuffer);
+                [Out] out IntPtr ppStringsBuffer
+            );
 
             //[PreserveSig]
             //int MapColumnIDs(/* deleted parameters*/);
         }
 
-        [Guid("0C733A10-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A10-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IColumnsRowset
         {
             /*[local]
@@ -281,7 +468,8 @@ namespace System.Data.Common
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetAvailableColumns(
                 [Out] out IntPtr pcOptColumns,
-                [Out] out IntPtr prgOptColumns);
+                [Out] out IntPtr prgOptColumns
+            );
 
             /*[local]
             HRESULT GetColumnsRowset(
@@ -301,10 +489,16 @@ namespace System.Data.Common
                 [In] ref Guid riid,
                 [In] int cPropertySets,
                 [In] IntPtr rgPropertySets,
-                [Out, MarshalAs(UnmanagedType.Interface)] out IRowset ppColRowset);
+                [Out, MarshalAs(UnmanagedType.Interface)] out IRowset ppColRowset
+            );
         }
 
-        [Guid("0C733A26-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A26-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface ICommandPrepare
         {
             /*[local]
@@ -312,14 +506,18 @@ namespace System.Data.Common
                 [in] ULONG cExpectedRuns
             );*/
             [PreserveSig]
-            System.Data.OleDb.OleDbHResult Prepare(
-                [In] int cExpectedRuns);
+            System.Data.OleDb.OleDbHResult Prepare([In] int cExpectedRuns);
 
             //[PreserveSig]
             //int Unprepare();
         }
 
-        [Guid("0C733A79-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A79-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface ICommandProperties
         {
             /*[local]
@@ -334,7 +532,8 @@ namespace System.Data.Common
                 [In] int cPropertyIDSets,
                 [In] SafeHandle? rgPropertyIDSets,
                 [Out] out int pcPropertySets,
-                [Out] out IntPtr prgPropertySets);
+                [Out] out IntPtr prgPropertySets
+            );
 
             /*[local]
             HRESULT SetProperties(
@@ -344,16 +543,23 @@ namespace System.Data.Common
             [PreserveSig]
             System.Data.OleDb.OleDbHResult SetProperties(
                 [In] int cPropertySets,
-                [In] SafeHandle rgPropertySets);
+                [In] SafeHandle rgPropertySets
+            );
         }
 
-        [Guid("0C733A27-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A27-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface ICommandText
         {
             /*[local]
             HRESULT Cancel(
             );*/
-            [PreserveSig] System.Data.OleDb.OleDbHResult Cancel();
+            [PreserveSig]
+            System.Data.OleDb.OleDbHResult Cancel();
 
             /*[local]
             HRESULT Execute(
@@ -369,11 +575,16 @@ namespace System.Data.Common
                 [In] ref Guid riid,
                 [In] System.Data.OleDb.tagDBPARAMS? pDBParams,
                 [Out] out IntPtr pcRowsAffected,
-                [Out, MarshalAs(UnmanagedType.Interface)] out object ppRowset);
+                [Out, MarshalAs(UnmanagedType.Interface)] out object ppRowset
+            );
 
-            [Obsolete("not used", true)] void GetDBSession(/*deleted parameter signature*/);
+            [Obsolete("not used", true)]
+            void GetDBSession( /*deleted parameter signature*/
+            );
 
-            [Obsolete("not used", true)] void GetCommandText(/*deleted parameter signature*/);
+            [Obsolete("not used", true)]
+            void GetCommandText( /*deleted parameter signature*/
+            );
 
             /*[local]
             HRESULT SetCommandText(
@@ -383,15 +594,25 @@ namespace System.Data.Common
             [PreserveSig]
             System.Data.OleDb.OleDbHResult SetCommandText(
                 [In] ref Guid rguidDialect,
-                [In, MarshalAs(UnmanagedType.LPWStr)] string pwszCommand);
+                [In, MarshalAs(UnmanagedType.LPWStr)] string pwszCommand
+            );
         }
 
-        [Guid("0C733A64-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A64-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface ICommandWithParameters
         {
-            [Obsolete("not used", true)] void GetParameterInfo(/*deleted parameters signature*/);
+            [Obsolete("not used", true)]
+            void GetParameterInfo( /*deleted parameters signature*/
+            );
 
-            [Obsolete("not used", true)] void MapParameterNames(/*deleted parameter signature*/);
+            [Obsolete("not used", true)]
+            void MapParameterNames( /*deleted parameter signature*/
+            );
 
             /*[local]
             HRESULT SetParameterInfo(
@@ -403,13 +624,24 @@ namespace System.Data.Common
             System.Data.OleDb.OleDbHResult SetParameterInfo(
                 [In] IntPtr cParams,
                 [In, MarshalAs(UnmanagedType.LPArray)] IntPtr[] rgParamOrdinals,
-                [In] IntPtr rgParamBindInfo);
+                [In] IntPtr rgParamBindInfo
+            );
         }
 
-        [Guid("2206CCB1-19C1-11D1-89E0-00C04FD7A829"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("2206CCB1-19C1-11D1-89E0-00C04FD7A829"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IDataInitialize { }
 
-        [Guid("0C733A89-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A89-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IDBInfo
         {
             /*[local]
@@ -418,7 +650,8 @@ namespace System.Data.Common
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetKeywords(
-                [Out, MarshalAs(UnmanagedType.LPWStr)] out string ppwszKeywords);
+                [Out, MarshalAs(UnmanagedType.LPWStr)] out string ppwszKeywords
+            );
 
             /*[local]
             HRESULT GetLiteralInfo(
@@ -434,10 +667,16 @@ namespace System.Data.Common
                 [In, MarshalAs(UnmanagedType.LPArray)] int[]? rgLiterals,
                 [Out] out int pcLiteralInfo,
                 [Out] out IntPtr prgLiteralInfo,
-                [Out] out IntPtr ppCharBuffer);
+                [Out] out IntPtr ppCharBuffer
+            );
         }
 
-        [Guid("0C733A8A-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A8A-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IDBProperties
         {
             /*[local]
@@ -452,7 +691,8 @@ namespace System.Data.Common
                 [In] int cPropertyIDSets,
                 [In] SafeHandle? rgPropertyIDSets,
                 [Out] out int pcPropertySets,
-                [Out] out IntPtr prgPropertySets);
+                [Out] out IntPtr prgPropertySets
+            );
 
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetPropertyInfo(
@@ -460,15 +700,22 @@ namespace System.Data.Common
                 [In] SafeHandle rgPropertyIDSets,
                 [Out] out int pcPropertySets,
                 [Out] out IntPtr prgPropertyInfoSets,
-                [Out] out IntPtr ppDescBuffer);
+                [Out] out IntPtr ppDescBuffer
+            );
 
             [PreserveSig]
             System.Data.OleDb.OleDbHResult SetProperties(
                 [In] int cPropertySets,
-                [In] SafeHandle rgPropertySets);
+                [In] SafeHandle rgPropertySets
+            );
         }
 
-        [Guid("0C733A7B-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A7B-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IDBSchemaRowset
         {
             /*[local]
@@ -491,7 +738,8 @@ namespace System.Data.Common
                 [In] ref Guid riid,
                 [In] int cPropertySets,
                 [In] IntPtr rgPropertySets,
-                [Out, MarshalAs(UnmanagedType.Interface)] out IRowset ppRowset);
+                [Out, MarshalAs(UnmanagedType.Interface)] out IRowset ppRowset
+            );
 
             /*[local]
             HRESULT GetSchemas(
@@ -503,21 +751,31 @@ namespace System.Data.Common
             System.Data.OleDb.OleDbHResult GetSchemas(
                 [Out] out int pcSchemas,
                 [Out] out IntPtr rguidSchema,
-                [Out] out IntPtr prgRestrictionSupport);
+                [Out] out IntPtr prgRestrictionSupport
+            );
         }
 
-        [Guid("1CF2B120-547D-101B-8E65-08002B2BD119"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("1CF2B120-547D-101B-8E65-08002B2BD119"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IErrorInfo
         {
-            [Obsolete("not used", true)] void GetGUID(/*deleted parameter signature*/);
+            [Obsolete("not used", true)]
+            void GetGUID( /*deleted parameter signature*/
+            );
 
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetSource(
-                [MarshalAs(UnmanagedType.BStr)] out string? pBstrSource);
+                [MarshalAs(UnmanagedType.BStr)] out string? pBstrSource
+            );
 
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetDescription(
-                [MarshalAs(UnmanagedType.BStr)] out string? pBstrDescription);
+                [MarshalAs(UnmanagedType.BStr)] out string? pBstrDescription
+            );
 
             //[ Obsolete("not used", true)] void GetHelpFile(/*deleted parameter signature*/);
 
@@ -538,25 +796,35 @@ namespace System.Data.Common
                 /* [out] */ DWORD *pdwHelpContext) = 0;
 #endif
 
-        [Guid("0C733A67-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A67-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IErrorRecords
         {
-            [Obsolete("not used", true)] void AddErrorRecord(/*deleted parameter signature*/);
+            [Obsolete("not used", true)]
+            void AddErrorRecord( /*deleted parameter signature*/
+            );
 
-            [Obsolete("not used", true)] void GetBasicErrorInfo(/*deleted parameter signature*/);
+            [Obsolete("not used", true)]
+            void GetBasicErrorInfo( /*deleted parameter signature*/
+            );
 
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetCustomErrorObject( // may return E_NOINTERFACE when asking for IID_ISQLErrorInfo
                 [In] int ulRecordNum,
                 [In] ref Guid riid,
-                [Out, MarshalAs(UnmanagedType.Interface)] out ISQLErrorInfo ppObject);
+                [Out, MarshalAs(UnmanagedType.Interface)] out ISQLErrorInfo ppObject
+            );
 
             [return: MarshalAs(UnmanagedType.Interface)]
-            IErrorInfo GetErrorInfo(
-                [In] int ulRecordNum,
-                [In] int lcid);
+            IErrorInfo GetErrorInfo([In] int ulRecordNum, [In] int lcid);
 
-            [Obsolete("not used", true)] void GetErrorParameters(/*deleted parameter signature*/);
+            [Obsolete("not used", true)]
+            void GetErrorParameters( /*deleted parameter signature*/
+            );
 
             int GetRecordCount();
         }
@@ -587,7 +855,12 @@ namespace System.Data.Common
             /* [out] */ ULONG *pcRecords) = 0;
 #endif
 
-        [Guid("0C733A90-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A90-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IMultipleResults
         {
             /*[local]
@@ -604,7 +877,8 @@ namespace System.Data.Common
                 [In] IntPtr lResultFlag,
                 [In] ref Guid riid,
                 [Out] out IntPtr pcRowsAffected,
-                [Out, MarshalAs(UnmanagedType.Interface)] out object ppRowset);
+                [Out, MarshalAs(UnmanagedType.Interface)] out object ppRowset
+            );
         }
 #if false
         enum DBRESULTFLAGENUM {
@@ -622,7 +896,12 @@ namespace System.Data.Common
                 /* [iid_is][out] */ IUnknown **ppRowset) = 0;
 #endif
 
-        [Guid("0C733A69-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A69-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IOpenRowset
         {
             [PreserveSig]
@@ -633,25 +912,40 @@ namespace System.Data.Common
                 [In] ref Guid riid,
                 [In] int cPropertySets,
                 [In] IntPtr rgPropertySets,
-                [Out, MarshalAs(UnmanagedType.Interface)] out object ppRowset);
+                [Out, MarshalAs(UnmanagedType.Interface)] out object ppRowset
+            );
         }
 
-        [Guid("0C733AB4-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733AB4-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IRow
         {
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetColumns(
                 [In] IntPtr cColumns,
-                [In, Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.Struct)] System.Data.OleDb.tagDBCOLUMNACCESS[] rgColumns);
+                [In, Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.Struct)]
+                    System.Data.OleDb.tagDBCOLUMNACCESS[] rgColumns
+            );
 
             //[ Obsolete("not used", true)] void GetSourceRowset(/*deleted parameter signature*/);
             //[ Obsolete("not used", true)] void Open(/*deleted parameter signature*/);
         }
 
-        [Guid("0C733A7C-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A7C-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IRowset
         {
-            [Obsolete("not used", true)] void AddRefRows(/*deleted parameter signature*/);
+            [Obsolete("not used", true)]
+            void AddRefRows( /*deleted parameter signature*/
+            );
 
             /*HRESULT GetData(
                 [in] HROW hRow,
@@ -662,7 +956,8 @@ namespace System.Data.Common
             System.Data.OleDb.OleDbHResult GetData(
                 [In] IntPtr hRow,
                 [In] IntPtr hAccessor,
-                [In] IntPtr pData);
+                [In] IntPtr pData
+            );
 
             /*HRESULT GetNextRows(
                 [in] HCHAPTER hReserved,
@@ -677,7 +972,8 @@ namespace System.Data.Common
                 [In] IntPtr lRowsOffset,
                 [In] IntPtr cRows,
                 [Out] out IntPtr pcRowsObtained,
-                [In] ref IntPtr pprghRows);
+                [In] ref IntPtr pprghRows
+            );
 
             /*HRESULT ReleaseRows(
                 [in] DBCOUNTITEM cRows,
@@ -690,14 +986,31 @@ namespace System.Data.Common
             System.Data.OleDb.OleDbHResult ReleaseRows(
                 [In] IntPtr cRows,
                 [In] SafeHandle rghRows,
-                [In/*, MarshalAs(UnmanagedType.LPArray)*/] IntPtr/*int[]*/ rgRowOptions,
-                [In/*, Out, MarshalAs(UnmanagedType.LPArray)*/] IntPtr/*int[]*/ rgRefCounts,
-                [In/*, Out, MarshalAs(UnmanagedType.LPArray)*/] IntPtr/*int[]*/ rgRowStatus);
+                [In /*, MarshalAs(UnmanagedType.LPArray)*/
+                ]
+                    IntPtr /*int[]*/
+                rgRowOptions,
+                [In /*, Out, MarshalAs(UnmanagedType.LPArray)*/
+                ]
+                    IntPtr /*int[]*/
+                rgRefCounts,
+                [In /*, Out, MarshalAs(UnmanagedType.LPArray)*/
+                ]
+                    IntPtr /*int[]*/
+                rgRowStatus
+            );
 
-            [Obsolete("not used", true)] void RestartPosition(/*deleted parameter signature*/);
+            [Obsolete("not used", true)]
+            void RestartPosition( /*deleted parameter signature*/
+            );
         }
 
-        [Guid("0C733A55-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A55-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface IRowsetInfo
         {
             /*[local]
@@ -712,55 +1025,61 @@ namespace System.Data.Common
                 [In] int cPropertyIDSets,
                 [In] SafeHandle? rgPropertyIDSets,
                 [Out] out int pcPropertySets,
-                [Out] out IntPtr prgPropertySets);
+                [Out] out IntPtr prgPropertySets
+            );
 
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetReferencedRowset(
                 [In] IntPtr iOrdinal,
                 [In] ref Guid riid,
-                [Out, MarshalAs(UnmanagedType.Interface)] out IRowset? ppRowset);
+                [Out, MarshalAs(UnmanagedType.Interface)] out IRowset? ppRowset
+            );
 
             //[PreserveSig]
             //int GetSpecification(/*deleted parameter signature*/);
         }
 
-        [Guid("0C733A74-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A74-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface ISQLErrorInfo
         {
             [return: MarshalAs(UnmanagedType.I4)]
-            int GetSQLInfo(
-                [Out, MarshalAs(UnmanagedType.BStr)] out string pbstrSQLState);
+            int GetSQLInfo([Out, MarshalAs(UnmanagedType.BStr)] out string pbstrSQLState);
         }
 
-        [Guid("0C733A5F-2A1C-11CE-ADE5-00AA0044773D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport, SuppressUnmanagedCodeSecurity]
+        [
+            Guid("0C733A5F-2A1C-11CE-ADE5-00AA0044773D"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            ComImport,
+            SuppressUnmanagedCodeSecurity
+        ]
         internal interface ITransactionLocal
         {
             [PreserveSig]
-            int Commit
-                (
-                [In] bool fRetaining,
-                [In] uint grfTC,
-                [In] uint grfRM
-                );
+            int Commit([In] bool fRetaining, [In] uint grfTC, [In] uint grfRM);
 
             [PreserveSig]
-            int Abort
-                (
-                [In] IntPtr pboidReason,
-                [In] bool fRetaining,
-                [In] bool fAsync
-                );
+            int Abort([In] IntPtr pboidReason, [In] bool fRetaining, [In] bool fAsync);
 
-            [Obsolete("not used", true)] void GetTransactionInfo(/*deleted parameter signature*/);
+            [Obsolete("not used", true)]
+            void GetTransactionInfo( /*deleted parameter signature*/
+            );
 
-            [Obsolete("not used", true)] void GetOptionsObject(/*deleted parameter signature*/);
+            [Obsolete("not used", true)]
+            void GetOptionsObject( /*deleted parameter signature*/
+            );
 
             [PreserveSig]
             System.Data.OleDb.OleDbHResult StartTransaction(
                 [In] int isoLevel,
                 [In] int isoFlags,
                 [In] IntPtr pOtherOptions,
-                [Out] out int pulTransactionLevel);
+                [Out] out int pulTransactionLevel
+            );
         }
 
         // we wrap the vtable entry which is just a function pointer as a delegate
@@ -773,40 +1092,43 @@ namespace System.Data.Common
         // dangerous delegate around IUnknown::QueryInterface (0th vtable entry)
         [SuppressUnmanagedCodeSecurity]
         internal delegate int IUnknownQueryInterface(
-                IntPtr pThis,
-                ref Guid riid,
-                ref IntPtr ppInterface);
+            IntPtr pThis,
+            ref Guid riid,
+            ref IntPtr ppInterface
+        );
 
         // dangerous delegate around IDataInitialize::GetDataSource (4th vtable entry)
         [SuppressUnmanagedCodeSecurity]
         internal delegate System.Data.OleDb.OleDbHResult IDataInitializeGetDataSource(
-                IntPtr pThis, // first parameter is always the 'this' value, must use use result from QI
-                IntPtr pUnkOuter,
-                int dwClsCtx,
-                [MarshalAs(UnmanagedType.LPWStr)] string pwszInitializationString,
-                ref Guid riid,
-                ref System.Data.OleDb.DataSourceWrapper ppDataSource);
+            IntPtr pThis, // first parameter is always the 'this' value, must use use result from QI
+            IntPtr pUnkOuter,
+            int dwClsCtx,
+            [MarshalAs(UnmanagedType.LPWStr)] string pwszInitializationString,
+            ref Guid riid,
+            ref System.Data.OleDb.DataSourceWrapper ppDataSource
+        );
 
         // dangerous wrapper around IDBInitialize::Initialize (4th vtable entry)
         [SuppressUnmanagedCodeSecurity]
-        internal delegate System.Data.OleDb.OleDbHResult IDBInitializeInitialize(
-                IntPtr pThis); // first parameter is always the 'this' value, must use use result from QI
+        internal delegate System.Data.OleDb.OleDbHResult IDBInitializeInitialize(IntPtr pThis); // first parameter is always the 'this' value, must use use result from QI
 
         // dangerous wrapper around IDBCreateSession::CreateSession (4th vtable entry)
         [SuppressUnmanagedCodeSecurity]
         internal delegate System.Data.OleDb.OleDbHResult IDBCreateSessionCreateSession(
-                IntPtr pThis, // first parameter is always the 'this' value, must use use result from QI
-                IntPtr pUnkOuter,
-                ref Guid riid,
-                ref System.Data.OleDb.SessionWrapper ppDBSession);
+            IntPtr pThis, // first parameter is always the 'this' value, must use use result from QI
+            IntPtr pUnkOuter,
+            ref Guid riid,
+            ref System.Data.OleDb.SessionWrapper ppDBSession
+        );
 
         // dangerous wrapper around IDBCreateCommand::CreateCommand (4th vtable entry)
         [SuppressUnmanagedCodeSecurity]
         internal delegate System.Data.OleDb.OleDbHResult IDBCreateCommandCreateCommand(
-                IntPtr pThis, // first parameter is always the 'this' value, must use use result from QI
-                IntPtr pUnkOuter,
-                ref Guid riid,
-                [MarshalAs(UnmanagedType.Interface)] ref object? ppCommand);
+            IntPtr pThis, // first parameter is always the 'this' value, must use use result from QI
+            IntPtr pUnkOuter,
+            ref Guid riid,
+            [MarshalAs(UnmanagedType.Interface)] ref object? ppCommand
+        );
 
         //
         // Advapi32.dll Integrated security functions
@@ -815,28 +1137,34 @@ namespace System.Data.Common
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct Trustee
         {
-            internal IntPtr _pMultipleTrustee;        // PTRUSTEE
-            internal int _MultipleTrusteeOperation;   // MULTIPLE_TRUSTEE_OPERATION
-            internal int _TrusteeForm;                // TRUSTEE_FORM
-            internal int _TrusteeType;                // TRUSTEE_TYPE
+            internal IntPtr _pMultipleTrustee; // PTRUSTEE
+            internal int _MultipleTrusteeOperation; // MULTIPLE_TRUSTEE_OPERATION
+            internal int _TrusteeForm; // TRUSTEE_FORM
+            internal int _TrusteeType; // TRUSTEE_TYPE
             [MarshalAs(UnmanagedType.LPTStr)]
             internal string _name;
 
             internal Trustee(string name)
             {
                 _pMultipleTrustee = IntPtr.Zero;
-                _MultipleTrusteeOperation = 0;              // NO_MULTIPLE_TRUSTEE
-                _TrusteeForm = 1;              // TRUSTEE_IS_NAME
-                _TrusteeType = 1;              // TRUSTEE_IS_USER
+                _MultipleTrusteeOperation = 0; // NO_MULTIPLE_TRUSTEE
+                _TrusteeForm = 1; // TRUSTEE_IS_NAME
+                _TrusteeType = 1; // TRUSTEE_IS_USER
                 _name = name;
             }
         }
 
-        [GeneratedDllImport(Interop.Libraries.Advapi32, EntryPoint = "CreateWellKnownSid", SetLastError = true, CharSet = CharSet.Unicode)]
+        [GeneratedDllImport(
+            Interop.Libraries.Advapi32,
+            EntryPoint = "CreateWellKnownSid",
+            SetLastError = true,
+            CharSet = CharSet.Unicode
+        )]
         internal static partial int CreateWellKnownSid(
             int sidType,
             byte[]? domainSid,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] out byte[] resultSid,
-            ref uint resultSidLength);
+            ref uint resultSidLength
+        );
     }
 }

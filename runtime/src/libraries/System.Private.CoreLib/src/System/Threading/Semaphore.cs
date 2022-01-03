@@ -12,20 +12,25 @@ namespace System.Threading
     {
         // creates a nameless semaphore object
         // Win32 only takes maximum count of int.MaxValue
-        public Semaphore(int initialCount, int maximumCount) : this(initialCount, maximumCount, null) { }
+        public Semaphore(int initialCount, int maximumCount)
+            : this(initialCount, maximumCount, null) { }
 
-        public Semaphore(int initialCount, int maximumCount, string? name) :
-            this(initialCount, maximumCount, name, out _)
-        {
-        }
+        public Semaphore(int initialCount, int maximumCount, string? name)
+            : this(initialCount, maximumCount, name, out _) { }
 
         public Semaphore(int initialCount, int maximumCount, string? name, out bool createdNew)
         {
             if (initialCount < 0)
-                throw new ArgumentOutOfRangeException(nameof(initialCount), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(initialCount),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (maximumCount < 1)
-                throw new ArgumentOutOfRangeException(nameof(maximumCount), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(maximumCount),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
 
             if (initialCount > maximumCount)
                 throw new ArgumentException(SR.Argument_SemaphoreInitialMaximum);
@@ -41,7 +46,12 @@ namespace System.Threading
                 case OpenExistingResult.NameNotFound:
                     throw new WaitHandleCannotBeOpenedException();
                 case OpenExistingResult.NameInvalid:
-                    throw new WaitHandleCannotBeOpenedException(SR.Format(SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                    throw new WaitHandleCannotBeOpenedException(
+                        SR.Format(
+                            SR.Threading_WaitHandleCannotBeOpenedException_InvalidHandle,
+                            name
+                        )
+                    );
                 case OpenExistingResult.PathNotFound:
                     throw new IOException(SR.Format(SR.IO_PathNotFound_Path, name));
                 default:
@@ -51,8 +61,10 @@ namespace System.Threading
         }
 
         [SupportedOSPlatform("windows")]
-        public static bool TryOpenExisting(string name, [NotNullWhen(true)] out Semaphore? result) =>
-            OpenExistingWorker(name, out result!) == OpenExistingResult.Success;
+        public static bool TryOpenExisting(
+            string name,
+            [NotNullWhen(true)] out Semaphore? result
+        ) => OpenExistingWorker(name, out result!) == OpenExistingResult.Success;
 
         public int Release() => ReleaseCore(1);
 
@@ -60,7 +72,10 @@ namespace System.Threading
         public int Release(int releaseCount)
         {
             if (releaseCount < 1)
-                throw new ArgumentOutOfRangeException(nameof(releaseCount), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(releaseCount),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             return ReleaseCore(releaseCount);
         }

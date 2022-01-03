@@ -22,7 +22,12 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         /// use to find the data inside the DocumentData table.
         /// </summary>
         private bool TryGetDocumentDataId(
-            SqlConnection connection, DocumentKey documentKey, string name, bool allowWrite, out long dataId)
+            SqlConnection connection,
+            DocumentKey documentKey,
+            string name,
+            bool allowWrite,
+            out long dataId
+        )
         {
             dataId = 0;
 
@@ -36,7 +41,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             return true;
         }
 
-        private int? TryGetDocumentId(SqlConnection connection, DocumentKey document, bool allowWrite)
+        private int? TryGetDocumentId(
+            SqlConnection connection,
+            DocumentKey document,
+            bool allowWrite
+        )
         {
             // First see if we've cached the ID for this value locally.  If so, just return
             // what we already have.
@@ -53,7 +62,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             return id;
         }
 
-        private int? TryGetDocumentIdFromDatabase(SqlConnection connection, DocumentKey document, bool allowWrite)
+        private int? TryGetDocumentIdFromDatabase(
+            SqlConnection connection,
+            DocumentKey document,
+            bool allowWrite
+        )
         {
             var projectId = TryGetProjectId(connection, document.Project, allowWrite);
             if (projectId == null)
@@ -69,7 +82,10 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
             // Unique identify the document through the key:  projectId-documentPathId-documentNameId
             return TryGetStringId(
-                connection, GetDocumentIdString(projectId.Value, documentPathId.Value, documentNameId.Value), allowWrite);
+                connection,
+                GetDocumentIdString(projectId.Value, documentPathId.Value, documentNameId.Value),
+                allowWrite
+            );
         }
     }
 }

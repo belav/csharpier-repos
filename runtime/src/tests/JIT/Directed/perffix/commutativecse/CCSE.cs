@@ -17,16 +17,35 @@ internal class CCSE
         uint v6 = s_source;
         uint v7 = s_source;
         uint v8 = s_source;
-        s_sink1 = ((v1 * v2) + (v2 * v3)) | (v5 * v6) + ((v1 + v4) * (v4 + v6)) * ((v4 + v5) + ((v1 * v3) | (v7 + v1)) & (v2 + v4));
-        s_sink2 = (v6 * v5) | ((v2 * v1) + (v3 * v2)) + ((v4 + v2) & ((v1 + v7) | (v3 * v1)) + (v5 + v4)) * ((v6 + v4) * (v4 + v1));
+        s_sink1 =
+            ((v1 * v2) + (v2 * v3))
+            | (v5 * v6)
+                + ((v1 + v4) * (v4 + v6)) * ((v4 + v5) + ((v1 * v3) | (v7 + v1)) & (v2 + v4));
+        s_sink2 =
+            (v6 * v5)
+            | ((v2 * v1) + (v3 * v2))
+                + ((v4 + v2) & ((v1 + v7) | (v3 * v1)) + (v5 + v4)) * ((v6 + v4) * (v4 + v1));
 
         if (s_sink1 != s_sink2)
             return 1;
 
-        s_sink1 = ((v1 * v3) + (v2 * v4)) | (v5 * v7) + ((v1 + v5) * (v4 + v7)) * ((v4 + v6) + ((v1 * v4) | (v7 + v2)) & (v2 + v5));
-        s_sink2 = (v7 * v5) | ((v3 * v1) + (v4 * v2)) + ((v5 + v2) & ((v2 + v7) | (v4 * v1)) + (v6 + v4)) * ((v7 + v4) * (v5 + v1));
+        s_sink1 =
+            ((v1 * v3) + (v2 * v4))
+            | (v5 * v7)
+                + ((v1 + v5) * (v4 + v7)) * ((v4 + v6) + ((v1 * v4) | (v7 + v2)) & (v2 + v5));
+        s_sink2 =
+            (v7 * v5)
+            | ((v3 * v1) + (v4 * v2))
+                + ((v5 + v2) & ((v2 + v7) | (v4 * v1)) + (v6 + v4)) * ((v7 + v4) * (v5 + v1));
 
-        if ((s_sink1 + s_sink2) != (((v1 * v3) + (v4 * v2)) | (v5 * v7) + ((v4 + v7) * (v1 + v5)) * ((v6 + v4) + ((v1 * v4) | (v7 + v2)) & (v2 + v5))) * 2)
+        if (
+            (s_sink1 + s_sink2)
+            != (
+                ((v1 * v3) + (v4 * v2))
+                | (v5 * v7)
+                    + ((v4 + v7) * (v1 + v5)) * ((v6 + v4) + ((v1 * v4) | (v7 + v2)) & (v2 + v5))
+            ) * 2
+        )
             return 1;
 
         s_sink1 *= ((v1 + v2) * (v3 | v4)) & (((v2 & v6) + v7 * v8) + (v3 + v4 * v6));
@@ -51,4 +70,3 @@ internal class CCSE
         return 100;
     }
 }
-

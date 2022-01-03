@@ -28,7 +28,6 @@ namespace System.Xml.Xsl
             }
         }
 
-
         //
         // Compiled stylesheet state
         //
@@ -121,10 +120,22 @@ namespace System.Xml.Xsl
             Debug.Assert(_RootAction != null);
         }
 
-        public XmlReader Transform(XPathNavigator input, XsltArgumentList? args, XmlResolver? resolver)
+        public XmlReader Transform(
+            XPathNavigator input,
+            XsltArgumentList? args,
+            XmlResolver? resolver
+        )
         {
             CheckCommand();
-            Processor processor = new Processor(input, args, resolver, _CompiledStylesheet, _QueryStore, _RootAction, null);
+            Processor processor = new Processor(
+                input,
+                args,
+                resolver,
+                _CompiledStylesheet,
+                _QueryStore,
+                _RootAction,
+                null
+            );
             return processor.StartReader();
         }
 
@@ -133,10 +144,23 @@ namespace System.Xml.Xsl
             return Transform(input, args, _DocumentResolver);
         }
 
-        public void Transform(XPathNavigator input, XsltArgumentList? args, XmlWriter output, XmlResolver? resolver)
+        public void Transform(
+            XPathNavigator input,
+            XsltArgumentList? args,
+            XmlWriter output,
+            XmlResolver? resolver
+        )
         {
             CheckCommand();
-            Processor processor = new Processor(input, args, resolver, _CompiledStylesheet, _QueryStore, _RootAction, null);
+            Processor processor = new Processor(
+                input,
+                args,
+                resolver,
+                _CompiledStylesheet,
+                _QueryStore,
+                _RootAction,
+                null
+            );
             processor.Execute(output);
         }
 
@@ -144,10 +168,23 @@ namespace System.Xml.Xsl
         {
             Transform(input, args, output, _DocumentResolver);
         }
-        public void Transform(XPathNavigator input, XsltArgumentList? args, Stream output, XmlResolver? resolver)
+        public void Transform(
+            XPathNavigator input,
+            XsltArgumentList? args,
+            Stream output,
+            XmlResolver? resolver
+        )
         {
             CheckCommand();
-            Processor processor = new Processor(input, args, resolver, _CompiledStylesheet, _QueryStore, _RootAction, null);
+            Processor processor = new Processor(
+                input,
+                args,
+                resolver,
+                _CompiledStylesheet,
+                _QueryStore,
+                _RootAction,
+                null
+            );
             processor.Execute(output);
         }
 
@@ -156,21 +193,46 @@ namespace System.Xml.Xsl
             Transform(input, args, output, _DocumentResolver);
         }
 
-        public void Transform(XPathNavigator input, XsltArgumentList? args, TextWriter output, XmlResolver? resolver)
+        public void Transform(
+            XPathNavigator input,
+            XsltArgumentList? args,
+            TextWriter output,
+            XmlResolver? resolver
+        )
         {
             CheckCommand();
-            Processor processor = new Processor(input, args, resolver, _CompiledStylesheet, _QueryStore, _RootAction, null);
+            Processor processor = new Processor(
+                input,
+                args,
+                resolver,
+                _CompiledStylesheet,
+                _QueryStore,
+                _RootAction,
+                null
+            );
             processor.Execute(output);
         }
 
         public void Transform(XPathNavigator input, XsltArgumentList? args, TextWriter output)
         {
             CheckCommand();
-            Processor processor = new Processor(input, args, _DocumentResolver, _CompiledStylesheet, _QueryStore, _RootAction, null);
+            Processor processor = new Processor(
+                input,
+                args,
+                _DocumentResolver,
+                _CompiledStylesheet,
+                _QueryStore,
+                _RootAction,
+                null
+            );
             processor.Execute(output);
         }
 
-        public XmlReader Transform(IXPathNavigable input, XsltArgumentList? args, XmlResolver? resolver)
+        public XmlReader Transform(
+            IXPathNavigable input,
+            XsltArgumentList? args,
+            XmlResolver? resolver
+        )
         {
             if (input == null)
             {
@@ -187,7 +249,12 @@ namespace System.Xml.Xsl
             }
             return Transform(input.CreateNavigator()!, args, _DocumentResolver);
         }
-        public void Transform(IXPathNavigable input, XsltArgumentList? args, TextWriter output, XmlResolver? resolver)
+        public void Transform(
+            IXPathNavigable input,
+            XsltArgumentList? args,
+            TextWriter output,
+            XmlResolver? resolver
+        )
         {
             if (input == null)
             {
@@ -205,7 +272,12 @@ namespace System.Xml.Xsl
             Transform(input.CreateNavigator()!, args, output, _DocumentResolver);
         }
 
-        public void Transform(IXPathNavigable input, XsltArgumentList? args, Stream output, XmlResolver? resolver)
+        public void Transform(
+            IXPathNavigable input,
+            XsltArgumentList? args,
+            Stream output,
+            XmlResolver? resolver
+        )
         {
             if (input == null)
             {
@@ -223,7 +295,12 @@ namespace System.Xml.Xsl
             Transform(input.CreateNavigator()!, args, output, _DocumentResolver);
         }
 
-        public void Transform(IXPathNavigable input, XsltArgumentList? args, XmlWriter output, XmlResolver? resolver)
+        public void Transform(
+            IXPathNavigable input,
+            XsltArgumentList? args,
+            XmlWriter output,
+            XmlResolver? resolver
+        )
         {
             if (input == null)
             {
@@ -249,7 +326,12 @@ namespace System.Xml.Xsl
                 // We should read doc before creating output file in case they are the same
                 XPathDocument doc = new XPathDocument(inputfile);
                 fs = new FileStream(outputfile, FileMode.Create, FileAccess.ReadWrite);
-                Transform(doc, /*args:*/null, fs, resolver);
+                Transform(
+                    doc, /*args:*/
+                    null,
+                    fs,
+                    resolver
+                );
             }
             finally
             {

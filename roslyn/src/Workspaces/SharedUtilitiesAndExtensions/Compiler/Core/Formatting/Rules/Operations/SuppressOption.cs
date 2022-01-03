@@ -28,7 +28,6 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
     internal enum SuppressOption
     {
         None = 0x0,
-
         NoWrappingIfOnSingleLine = 0x1,
         NoWrappingIfOnMultipleLine = 0x2,
         NoWrapping = NoWrappingIfOnSingleLine | NoWrappingIfOnMultipleLine,

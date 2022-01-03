@@ -8,8 +8,14 @@ namespace System.Reflection
 {
     public readonly partial struct CustomAttributeTypedArgument
     {
-        public static bool operator ==(CustomAttributeTypedArgument left, CustomAttributeTypedArgument right) => left.Equals(right);
-        public static bool operator !=(CustomAttributeTypedArgument left, CustomAttributeTypedArgument right) => !left.Equals(right);
+        public static bool operator ==(
+            CustomAttributeTypedArgument left,
+            CustomAttributeTypedArgument right
+        ) => left.Equals(right);
+        public static bool operator !=(
+            CustomAttributeTypedArgument left,
+            CustomAttributeTypedArgument right
+        ) => !left.Equals(right);
 
         private readonly object? _value;
         private readonly Type _argumentType;
@@ -31,7 +37,6 @@ namespace System.Reflection
             _value = CanonicalizeValue(value);
             _argumentType = value.GetType();
         }
-
 
         public override string ToString() => ToString(false);
 
@@ -57,7 +62,8 @@ namespace System.Reflection
 
             if (ArgumentType.IsArray)
             {
-                IList<CustomAttributeTypedArgument> array = (IList<CustomAttributeTypedArgument>)Value!;
+                IList<CustomAttributeTypedArgument> array =
+                    (IList<CustomAttributeTypedArgument>)Value!;
                 Type elementType = ArgumentType.GetElementType()!;
 
                 var result = new ValueStringBuilder(stackalloc char[256]);
@@ -91,6 +97,7 @@ namespace System.Reflection
         public Type ArgumentType => _argumentType;
         public object? Value => _value;
 
-        private static object? CanonicalizeValue(object? value) => (value is Enum e) ? e.GetValue() : value;
+        private static object? CanonicalizeValue(object? value) =>
+            (value is Enum e) ? e.GetValue() : value;
     }
 }

@@ -29,10 +29,19 @@ internal static partial class Interop
         // This struct is a union!  Word alignment should take care of padding!
     }
 
-
     internal static partial class Kernel32
     {
-        [GeneratedDllImport(Libraries.Kernel32, EntryPoint = "ReadConsoleInputW", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static partial bool ReadConsoleInput(IntPtr hConsoleInput, out InputRecord buffer, int numInputRecords_UseOne, out int numEventsRead);
+        [GeneratedDllImport(
+            Libraries.Kernel32,
+            EntryPoint = "ReadConsoleInputW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
+        internal static partial bool ReadConsoleInput(
+            IntPtr hConsoleInput,
+            out InputRecord buffer,
+            int numInputRecords_UseOne,
+            out int numEventsRead
+        );
     }
 }

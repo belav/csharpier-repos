@@ -46,9 +46,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         {
             public string Url { get; set; }
 
-            private Website()
-            {
-            }
+            private Website() { }
 
             public Website(Website website)
             {
@@ -79,10 +77,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 // Parameter name: website
             }
 
-            Website website = JsonConvert.DeserializeObject<Website>(json, new JsonSerializerSettings
-            {
-                ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
-            });
+            Website website = JsonConvert.DeserializeObject<Website>(
+                json,
+                new JsonSerializerSettings
+                {
+                    ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
+                }
+            );
 
             Console.WriteLine(website.Url);
             // http://www.google.com

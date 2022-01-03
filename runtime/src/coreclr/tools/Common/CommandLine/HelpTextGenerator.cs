@@ -10,8 +10,8 @@ namespace Internal.CommandLine
     {
         public static string Generate(ArgumentSyntax argumentSyntax, int maxWidth)
         {
-            var forCommandList = argumentSyntax.ActiveCommand == null &&
-                                 argumentSyntax.Commands.Any();
+            var forCommandList =
+                argumentSyntax.ActiveCommand == null && argumentSyntax.Commands.Any();
 
             var page = forCommandList
                 ? GetCommandListHelp(argumentSyntax)
@@ -59,7 +59,12 @@ namespace Internal.CommandLine
             }
         }
 
-        private static void WriteUsage(this StringBuilder sb, string applicationName, IEnumerable<string> syntaxElements, int maxWidth)
+        private static void WriteUsage(
+            this StringBuilder sb,
+            string applicationName,
+            IEnumerable<string> syntaxElements,
+            int maxWidth
+        )
         {
             var usageHeader = string.Format(Strings.HelpUsageOfApplicationFmt, applicationName);
             sb.Append(usageHeader);
@@ -73,7 +78,11 @@ namespace Internal.CommandLine
             sb.WriteWordWrapped(syntaxElements, syntaxIndent, syntaxMaxWidth);
         }
 
-        private static void WriteRows(this StringBuilder sb, IReadOnlyList<HelpRow> rows, int maxWidth)
+        private static void WriteRows(
+            this StringBuilder sb,
+            IReadOnlyList<HelpRow> rows,
+            int maxWidth
+        )
         {
             const int indent = 4;
             var maxColumnWidth = rows.Select(r => r.Header.Length).Max();
@@ -100,7 +109,12 @@ namespace Internal.CommandLine
             }
         }
 
-        private static void WriteWordWrapped(this StringBuilder sb, IEnumerable<string> words, int indent, int maxidth)
+        private static void WriteWordWrapped(
+            this StringBuilder sb,
+            IEnumerable<string> words,
+            int indent,
+            int maxidth
+        )
         {
             var helpLines = WordWrapLines(words, maxidth);
             var isFirstHelpLine = true;
@@ -130,7 +144,10 @@ namespace Internal.CommandLine
             };
         }
 
-        private static HelpPage GetCommandHelp(ArgumentSyntax argumentSyntax, ArgumentCommand command)
+        private static HelpPage GetCommandHelp(
+            ArgumentSyntax argumentSyntax,
+            ArgumentCommand command
+        )
         {
             return new HelpPage
             {
@@ -147,7 +164,10 @@ namespace Internal.CommandLine
             yield return @"[<args>]";
         }
 
-        private static IEnumerable<string> GetCommandSyntax(ArgumentSyntax argumentSyntax, ArgumentCommand command)
+        private static IEnumerable<string> GetCommandSyntax(
+            ArgumentSyntax argumentSyntax,
+            ArgumentCommand command
+        )
         {
             if (command != null)
                 yield return command.Name;
@@ -197,15 +217,19 @@ namespace Internal.CommandLine
         private static IEnumerable<HelpRow> GetCommandRows(ArgumentSyntax argumentSyntax)
         {
             return argumentSyntax.Commands
-                              .Where(c => !c.IsHidden)
-                              .Select(c => new HelpRow { Header = c.Name, Text = c.Help });
+                .Where(c => !c.IsHidden)
+                .Select(c => new HelpRow { Header = c.Name, Text = c.Help });
         }
 
-        private static IEnumerable<HelpRow> GetArgumentRows(ArgumentSyntax argumentSyntax, ArgumentCommand command)
+        private static IEnumerable<HelpRow> GetArgumentRows(
+            ArgumentSyntax argumentSyntax,
+            ArgumentCommand command
+        )
         {
-            return argumentSyntax.GetArguments(command)
-                              .Where(a => !a.IsHidden)
-                              .Select(a => new HelpRow { Header = GetArgumentRowHeader(a), Text = a.Help });
+            return argumentSyntax
+                .GetArguments(command)
+                .Where(a => !a.IsHidden)
+                .Select(a => new HelpRow { Header = GetArgumentRowHeader(a), Text = a.Help });
         }
 
         private static string GetArgumentRowHeader(Argument argument)
@@ -235,9 +259,7 @@ namespace Internal.CommandLine
 
             foreach (var token in tokens)
             {
-                var newLength = sb.Length == 0
-                    ? token.Length
-                    : sb.Length + 1 + token.Length;
+                var newLength = sb.Length == 0 ? token.Length : sb.Length + 1 + token.Length;
 
                 if (newLength > maxWidth)
                 {
@@ -263,9 +285,7 @@ namespace Internal.CommandLine
 
         private static IEnumerable<string> SplitWords(string text)
         {
-            return string.IsNullOrEmpty(text)
-                ? Enumerable.Empty<string>()
-                : text.Split(' ');
+            return string.IsNullOrEmpty(text) ? Enumerable.Empty<string>() : text.Split(' ');
         }
     }
 }

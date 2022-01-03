@@ -12,7 +12,8 @@ namespace System.Reflection
         public override object DefaultValue => throw Unexpected;
         public override bool Equals(object obj) => throw Unexpected;
         public override object[] GetCustomAttributes(bool inherit) => throw Unexpected;
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw Unexpected;
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+            throw Unexpected;
         public override IList<CustomAttributeData> GetCustomAttributesData() => throw Unexpected;
         public override int GetHashCode() => throw Unexpected;
         public override Type[] GetOptionalCustomModifiers() => throw Unexpected;
@@ -28,5 +29,5 @@ namespace System.Reflection
         public override string ToString() => throw Unexpected;
 
         protected virtual Exception Unexpected => new Exception("Did not expect to be called.");
-   }
+    }
 }

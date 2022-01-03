@@ -20,7 +20,8 @@ public class SocketReceiver
         _socket = socket;
         _awaitable = new SocketAwaitable(scheduler);
         _eventArgs.UserToken = _awaitable;
-        _eventArgs.Completed += (_, e) => ((SocketAwaitable)e.UserToken).Complete(e.BytesTransferred, e.SocketError);
+        _eventArgs.Completed += (_, e) =>
+            ((SocketAwaitable)e.UserToken).Complete(e.BytesTransferred, e.SocketError);
     }
 
     public SocketAwaitable ReceiveAsync(Memory<byte> buffer)
@@ -28,9 +29,9 @@ public class SocketReceiver
 #if NETCOREAPP
         _eventArgs.SetBuffer(buffer);
 #else
-            var segment = buffer.GetArray();
+        var segment = buffer.GetArray();
 
-            _eventArgs.SetBuffer(segment.Array, segment.Offset, segment.Count);
+        _eventArgs.SetBuffer(segment.Array, segment.Offset, segment.Count);
 #endif
         if (!_socket.ReceiveAsync(_eventArgs))
         {

@@ -22,7 +22,8 @@ using Xunit;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore
 {
-    public class ExecutionStrategyTest : IClassFixture<ExecutionStrategyTest.ExecutionStrategyFixture>
+    public class ExecutionStrategyTest
+        : IClassFixture<ExecutionStrategyTest.ExecutionStrategyFixture>
     {
         public ExecutionStrategyTest(ExecutionStrategyFixture fixture)
         {
@@ -34,66 +35,118 @@ namespace Microsoft.EntityFrameworkCore
         protected ExecutionStrategyFixture Fixture { get; }
 
         [ConditionalTheory]
-        [MemberData(nameof(DataGenerator.GetBoolCombinations), 1, MemberType = typeof(DataGenerator))]
+        [MemberData(
+            nameof(DataGenerator.GetBoolCombinations),
+            1,
+            MemberType = typeof(DataGenerator)
+        )]
         public void Handles_commit_failure(bool realFailure)
         {
             // Use all overloads of ExecuteInTransaction
             Test_commit_failure(
-                realFailure, (e, db) => e.ExecuteInTransaction(
-                    () => { db.SaveChanges(false); },
-                    () => db.Products.AsNoTracking().Any()));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransaction(
+                        () =>
+                        {
+                            db.SaveChanges(false);
+                        },
+                        () => db.Products.AsNoTracking().Any()
+                    )
+            );
 
             Test_commit_failure(
-                realFailure, (e, db) => e.ExecuteInTransaction(
-                    () => db.SaveChanges(false),
-                    () => db.Products.AsNoTracking().Any()));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransaction(
+                        () => db.SaveChanges(false),
+                        () => db.Products.AsNoTracking().Any()
+                    )
+            );
 
             Test_commit_failure(
-                realFailure, (e, db) => e.ExecuteInTransaction(
-                    db,
-                    c => { c.SaveChanges(false); },
-                    c => c.Products.AsNoTracking().Any()));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransaction(
+                        db,
+                        c =>
+                        {
+                            c.SaveChanges(false);
+                        },
+                        c => c.Products.AsNoTracking().Any()
+                    )
+            );
 
             Test_commit_failure(
-                realFailure, (e, db) => e.ExecuteInTransaction(
-                    db,
-                    c => c.SaveChanges(false),
-                    c => c.Products.AsNoTracking().Any()));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransaction(
+                        db,
+                        c => c.SaveChanges(false),
+                        c => c.Products.AsNoTracking().Any()
+                    )
+            );
 
             Test_commit_failure(
-                realFailure, (e, db) => e.ExecuteInTransaction(
-                    () => { db.SaveChanges(false); },
-                    () => db.Products.AsNoTracking().Any(),
-                    IsolationLevel.Serializable));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransaction(
+                        () =>
+                        {
+                            db.SaveChanges(false);
+                        },
+                        () => db.Products.AsNoTracking().Any(),
+                        IsolationLevel.Serializable
+                    )
+            );
 
             Test_commit_failure(
-                realFailure, (e, db) => e.ExecuteInTransaction(
-                    () => db.SaveChanges(false),
-                    () => db.Products.AsNoTracking().Any(),
-                    IsolationLevel.Serializable));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransaction(
+                        () => db.SaveChanges(false),
+                        () => db.Products.AsNoTracking().Any(),
+                        IsolationLevel.Serializable
+                    )
+            );
 
             Test_commit_failure(
-                realFailure, (e, db) => e.ExecuteInTransaction(
-                    db,
-                    c => { c.SaveChanges(false); },
-                    c => c.Products.AsNoTracking().Any(),
-                    IsolationLevel.Serializable));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransaction(
+                        db,
+                        c =>
+                        {
+                            c.SaveChanges(false);
+                        },
+                        c => c.Products.AsNoTracking().Any(),
+                        IsolationLevel.Serializable
+                    )
+            );
 
             Test_commit_failure(
-                realFailure, (e, db) => e.ExecuteInTransaction(
-                    db,
-                    c => c.SaveChanges(false),
-                    c => c.Products.AsNoTracking().Any(),
-                    IsolationLevel.Serializable));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransaction(
+                        db,
+                        c => c.SaveChanges(false),
+                        c => c.Products.AsNoTracking().Any(),
+                        IsolationLevel.Serializable
+                    )
+            );
         }
 
-        private void Test_commit_failure(bool realFailure, Action<TestSqlServerRetryingExecutionStrategy, ExecutionStrategyContext> execute)
+        private void Test_commit_failure(
+            bool realFailure,
+            Action<TestSqlServerRetryingExecutionStrategy, ExecutionStrategyContext> execute
+        )
         {
             CleanContext();
 
             using (var context = CreateContext())
             {
-                var connection = (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection =
+                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
 
                 connection.CommitFailures.Enqueue(new bool?[] { realFailure });
                 Fixture.TestSqlLoggerFactory.Clear();
@@ -108,13 +161,19 @@ namespace Microsoft.EntityFrameworkCore
                     + "Microsoft.Data.SqlClient.SqlException (0x80131904): Bang!";
                 if (realFailure)
                 {
-                    var logEntry = Fixture.TestSqlLoggerFactory.Log.Single(l => l.Id == CoreEventId.ExecutionStrategyRetrying);
+                    var logEntry = Fixture.TestSqlLoggerFactory.Log.Single(
+                        l => l.Id == CoreEventId.ExecutionStrategyRetrying
+                    );
                     Assert.Contains(retryMessage, logEntry.Message);
                     Assert.Equal(LogLevel.Information, logEntry.Level);
                 }
                 else
                 {
-                    Assert.Empty(Fixture.TestSqlLoggerFactory.Log.Where(l => l.Id == CoreEventId.ExecutionStrategyRetrying));
+                    Assert.Empty(
+                        Fixture.TestSqlLoggerFactory.Log.Where(
+                            l => l.Id == CoreEventId.ExecutionStrategyRetrying
+                        )
+                    );
                 }
 
                 Assert.Equal(realFailure ? 3 : 2, connection.OpenCount);
@@ -127,87 +186,145 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         [ConditionalTheory]
-        [MemberData(nameof(DataGenerator.GetBoolCombinations), 1, MemberType = typeof(DataGenerator))]
+        [MemberData(
+            nameof(DataGenerator.GetBoolCombinations),
+            1,
+            MemberType = typeof(DataGenerator)
+        )]
         public async Task Handles_commit_failure_async(bool realFailure)
         {
             // Use all overloads of ExecuteInTransactionAsync
             await Test_commit_failure_async(
-                realFailure, (e, db) => e.ExecuteInTransactionAsync(
-                    () => db.SaveChangesAsync(false),
-                    () => db.Products.AsNoTracking().AnyAsync()));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransactionAsync(
+                        () => db.SaveChangesAsync(false),
+                        () => db.Products.AsNoTracking().AnyAsync()
+                    )
+            );
 
             await Test_commit_failure_async(
-                realFailure, (e, db) => e.ExecuteInTransactionAsync(
-                    async ct => { await db.SaveChangesAsync(false); },
-                    ct => db.Products.AsNoTracking().AnyAsync(),
-                    CancellationToken.None));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransactionAsync(
+                        async ct =>
+                        {
+                            await db.SaveChangesAsync(false);
+                        },
+                        ct => db.Products.AsNoTracking().AnyAsync(),
+                        CancellationToken.None
+                    )
+            );
 
             await Test_commit_failure_async(
-                realFailure, (e, db) => e.ExecuteInTransactionAsync(
-                    ct => db.SaveChangesAsync(false, ct),
-                    ct => db.Products.AsNoTracking().AnyAsync(),
-                    CancellationToken.None));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransactionAsync(
+                        ct => db.SaveChangesAsync(false, ct),
+                        ct => db.Products.AsNoTracking().AnyAsync(),
+                        CancellationToken.None
+                    )
+            );
 
             await Test_commit_failure_async(
-                realFailure, (e, db) => e.ExecuteInTransactionAsync(
-                    db,
-                    async (c, ct) => { await c.SaveChangesAsync(false, ct); },
-                    (c, ct) => c.Products.AsNoTracking().AnyAsync(),
-                    CancellationToken.None));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransactionAsync(
+                        db,
+                        async (c, ct) =>
+                        {
+                            await c.SaveChangesAsync(false, ct);
+                        },
+                        (c, ct) => c.Products.AsNoTracking().AnyAsync(),
+                        CancellationToken.None
+                    )
+            );
 
             await Test_commit_failure_async(
-                realFailure, (e, db) => e.ExecuteInTransactionAsync(
-                    db,
-                    (c, ct) => c.SaveChangesAsync(false, ct),
-                    (c, ct) => c.Products.AsNoTracking().AnyAsync(),
-                    CancellationToken.None));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransactionAsync(
+                        db,
+                        (c, ct) => c.SaveChangesAsync(false, ct),
+                        (c, ct) => c.Products.AsNoTracking().AnyAsync(),
+                        CancellationToken.None
+                    )
+            );
 
             await Test_commit_failure_async(
-                realFailure, (e, db) => e.ExecuteInTransactionAsync(
-                    () => db.SaveChangesAsync(false),
-                    () => db.Products.AsNoTracking().AnyAsync(),
-                    IsolationLevel.Serializable));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransactionAsync(
+                        () => db.SaveChangesAsync(false),
+                        () => db.Products.AsNoTracking().AnyAsync(),
+                        IsolationLevel.Serializable
+                    )
+            );
 
             await Test_commit_failure_async(
-                realFailure, (e, db) => e.ExecuteInTransactionAsync(
-                    async ct => { await db.SaveChangesAsync(false, ct); },
-                    ct => db.Products.AsNoTracking().AnyAsync(ct),
-                    IsolationLevel.Serializable,
-                    CancellationToken.None));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransactionAsync(
+                        async ct =>
+                        {
+                            await db.SaveChangesAsync(false, ct);
+                        },
+                        ct => db.Products.AsNoTracking().AnyAsync(ct),
+                        IsolationLevel.Serializable,
+                        CancellationToken.None
+                    )
+            );
 
             await Test_commit_failure_async(
-                realFailure, (e, db) => e.ExecuteInTransactionAsync(
-                    ct => db.SaveChangesAsync(false, ct),
-                    ct => db.Products.AsNoTracking().AnyAsync(ct),
-                    IsolationLevel.Serializable,
-                    CancellationToken.None));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransactionAsync(
+                        ct => db.SaveChangesAsync(false, ct),
+                        ct => db.Products.AsNoTracking().AnyAsync(ct),
+                        IsolationLevel.Serializable,
+                        CancellationToken.None
+                    )
+            );
 
             await Test_commit_failure_async(
-                realFailure, (e, db) => e.ExecuteInTransactionAsync(
-                    db,
-                    async (c, ct) => { await c.SaveChangesAsync(false, ct); },
-                    (c, ct) => c.Products.AsNoTracking().AnyAsync(ct),
-                    IsolationLevel.Serializable,
-                    CancellationToken.None));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransactionAsync(
+                        db,
+                        async (c, ct) =>
+                        {
+                            await c.SaveChangesAsync(false, ct);
+                        },
+                        (c, ct) => c.Products.AsNoTracking().AnyAsync(ct),
+                        IsolationLevel.Serializable,
+                        CancellationToken.None
+                    )
+            );
 
             await Test_commit_failure_async(
-                realFailure, (e, db) => e.ExecuteInTransactionAsync(
-                    db,
-                    (c, ct) => c.SaveChangesAsync(false, ct),
-                    (c, ct) => c.Products.AsNoTracking().AnyAsync(ct),
-                    IsolationLevel.Serializable,
-                    CancellationToken.None));
+                realFailure,
+                (e, db) =>
+                    e.ExecuteInTransactionAsync(
+                        db,
+                        (c, ct) => c.SaveChangesAsync(false, ct),
+                        (c, ct) => c.Products.AsNoTracking().AnyAsync(ct),
+                        IsolationLevel.Serializable,
+                        CancellationToken.None
+                    )
+            );
         }
 
         private async Task Test_commit_failure_async(
             bool realFailure,
-            Func<TestSqlServerRetryingExecutionStrategy, ExecutionStrategyContext, Task> execute)
+            Func<TestSqlServerRetryingExecutionStrategy, ExecutionStrategyContext, Task> execute
+        )
         {
             CleanContext();
 
             using (var context = CreateContext())
             {
-                var connection = (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection =
+                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
 
                 connection.CommitFailures.Enqueue(new bool?[] { realFailure });
                 Fixture.TestSqlLoggerFactory.Clear();
@@ -222,13 +339,19 @@ namespace Microsoft.EntityFrameworkCore
                     + "Microsoft.Data.SqlClient.SqlException (0x80131904): Bang!";
                 if (realFailure)
                 {
-                    var logEntry = Fixture.TestSqlLoggerFactory.Log.Single(l => l.Id == CoreEventId.ExecutionStrategyRetrying);
+                    var logEntry = Fixture.TestSqlLoggerFactory.Log.Single(
+                        l => l.Id == CoreEventId.ExecutionStrategyRetrying
+                    );
                     Assert.Contains(retryMessage, logEntry.Message);
                     Assert.Equal(LogLevel.Information, logEntry.Level);
                 }
                 else
                 {
-                    Assert.Empty(Fixture.TestSqlLoggerFactory.Log.Where(l => l.Id == CoreEventId.ExecutionStrategyRetrying));
+                    Assert.Empty(
+                        Fixture.TestSqlLoggerFactory.Log.Where(
+                            l => l.Id == CoreEventId.ExecutionStrategyRetrying
+                        )
+                    );
                 }
 
                 Assert.Equal(realFailure ? 3 : 2, connection.OpenCount);
@@ -241,7 +364,11 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         [ConditionalTheory]
-        [MemberData(nameof(DataGenerator.GetBoolCombinations), 1, MemberType = typeof(DataGenerator))]
+        [MemberData(
+            nameof(DataGenerator.GetBoolCombinations),
+            1,
+            MemberType = typeof(DataGenerator)
+        )]
         public void Handles_commit_failure_multiple_SaveChanges(bool realFailure)
         {
             CleanContext();
@@ -261,13 +388,16 @@ namespace Microsoft.EntityFrameworkCore
                     c1 =>
                     {
                         context2.Database.UseTransaction(null);
-                        context2.Database.UseTransaction(context1.Database.CurrentTransaction.GetDbTransaction());
+                        context2.Database.UseTransaction(
+                            context1.Database.CurrentTransaction.GetDbTransaction()
+                        );
 
                         c1.SaveChanges(false);
 
                         return context2.SaveChanges(false);
                     },
-                    c => c.Products.AsNoTracking().Any());
+                    c => c.Products.AsNoTracking().Any()
+                );
 
                 context1.ChangeTracker.AcceptAllChanges();
                 context2.ChangeTracker.AcceptAllChanges();
@@ -278,18 +408,24 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         [ConditionalTheory]
-        [MemberData(nameof(DataGenerator.GetBoolCombinations), 4, MemberType = typeof(DataGenerator))]
+        [MemberData(
+            nameof(DataGenerator.GetBoolCombinations),
+            4,
+            MemberType = typeof(DataGenerator)
+        )]
         public async Task Retries_SaveChanges_on_execution_failure(
             bool realFailure,
             bool externalStrategy,
             bool openConnection,
-            bool async)
+            bool async
+        )
         {
             CleanContext();
 
             using (var context = CreateContext())
             {
-                var connection = (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection =
+                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
 
                 connection.ExecutionFailures.Enqueue(new bool?[] { null, realFailure });
 
@@ -316,14 +452,17 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (externalStrategy)
                     {
-                        await new TestSqlServerRetryingExecutionStrategy(context).ExecuteInTransactionAsync(
+                        await new TestSqlServerRetryingExecutionStrategy(
+                            context
+                        ).ExecuteInTransactionAsync(
                             context,
                             (c, ct) => c.SaveChangesAsync(false, ct),
                             (c, _) =>
                             {
                                 Assert.True(false);
                                 return Task.FromResult(false);
-                            });
+                            }
+                        );
 
                         context.ChangeTracker.AcceptAllChanges();
                     }
@@ -343,7 +482,8 @@ namespace Microsoft.EntityFrameworkCore
                             {
                                 Assert.True(false);
                                 return false;
-                            });
+                            }
+                        );
 
                         context.ChangeTracker.AcceptAllChanges();
                     }
@@ -357,9 +497,9 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Equal(4, connection.ExecutionCount);
 
                 Assert.Equal(
-                    openConnection
-                        ? ConnectionState.Open
-                        : ConnectionState.Closed, context.Database.GetDbConnection().State);
+                    openConnection ? ConnectionState.Open : ConnectionState.Closed,
+                    context.Database.GetDbConnection().State
+                );
 
                 if (openConnection)
                 {
@@ -383,11 +523,16 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         [ConditionalTheory] // Issue #25946
-        [MemberData(nameof(DataGenerator.GetBoolCombinations), 3, MemberType = typeof(DataGenerator))]
+        [MemberData(
+            nameof(DataGenerator.GetBoolCombinations),
+            3,
+            MemberType = typeof(DataGenerator)
+        )]
         public async Task Retries_SaveChanges_on_execution_failure_with_two_contexts(
             bool realFailure,
             bool openConnection,
-            bool async)
+            bool async
+        )
         {
             CleanContext();
 
@@ -395,7 +540,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 using var auditContext = new AuditContext();
 
-                var connection = (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection =
+                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
 
                 connection.ExecutionFailures.Enqueue(new bool?[] { null, realFailure });
 
@@ -422,14 +568,18 @@ namespace Microsoft.EntityFrameworkCore
 
                 if (async)
                 {
-                    await new TestSqlServerRetryingExecutionStrategy(context).ExecuteInTransactionAsync(
+                    await new TestSqlServerRetryingExecutionStrategy(
+                        context
+                    ).ExecuteInTransactionAsync(
                         (MainContext: context, AuditContext: auditContext),
                         async (c, ct) =>
                         {
                             var result = await c.MainContext.SaveChangesAsync(false, ct);
 
                             c.AuditContext.ChangeTracker.Clear();
-                            c.AuditContext.Database.SetDbConnection(c.MainContext.Database.GetDbConnection());
+                            c.AuditContext.Database.SetDbConnection(
+                                c.MainContext.Database.GetDbConnection()
+                            );
 
                             var currentTransaction = c.AuditContext.Database.CurrentTransaction;
                             if (throwTransientError)
@@ -442,9 +592,14 @@ namespace Microsoft.EntityFrameworkCore
                             }
 
                             await c.AuditContext.Database.UseTransactionAsync(
-                                c.MainContext.Database.CurrentTransaction!.GetDbTransaction(), ct);
+                                c.MainContext.Database.CurrentTransaction!.GetDbTransaction(),
+                                ct
+                            );
 
-                            Assert.NotSame(currentTransaction, c.AuditContext.Database.CurrentTransaction);
+                            Assert.NotSame(
+                                currentTransaction,
+                                c.AuditContext.Database.CurrentTransaction
+                            );
 
                             await c.AuditContext.Audits.AddAsync(new Audit(), ct);
                             await c.AuditContext.SaveChangesAsync(ct);
@@ -461,7 +616,8 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             Assert.True(false);
                             return Task.FromResult(false);
-                        });
+                        }
+                    );
 
                     context.ChangeTracker.AcceptAllChanges();
                 }
@@ -474,7 +630,9 @@ namespace Microsoft.EntityFrameworkCore
                             var result = c.MainContext.SaveChanges(false);
 
                             c.AuditContext.ChangeTracker.Clear();
-                            c.AuditContext.Database.SetDbConnection(c.MainContext.Database.GetDbConnection());
+                            c.AuditContext.Database.SetDbConnection(
+                                c.MainContext.Database.GetDbConnection()
+                            );
 
                             var currentTransaction = c.AuditContext.Database.CurrentTransaction;
                             if (throwTransientError)
@@ -486,9 +644,14 @@ namespace Microsoft.EntityFrameworkCore
                                 Assert.NotNull(currentTransaction);
                             }
 
-                            c.AuditContext.Database.UseTransaction(c.MainContext.Database.CurrentTransaction!.GetDbTransaction());
+                            c.AuditContext.Database.UseTransaction(
+                                c.MainContext.Database.CurrentTransaction!.GetDbTransaction()
+                            );
 
-                            Assert.NotSame(currentTransaction, c.AuditContext.Database.CurrentTransaction);
+                            Assert.NotSame(
+                                currentTransaction,
+                                c.AuditContext.Database.CurrentTransaction
+                            );
 
                             c.AuditContext.Audits.Add(new Audit());
                             c.AuditContext.SaveChanges();
@@ -505,7 +668,8 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             Assert.True(false);
                             return false;
-                        });
+                        }
+                    );
 
                     context.ChangeTracker.AcceptAllChanges();
                 }
@@ -514,9 +678,9 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Equal(6, connection.ExecutionCount);
 
                 Assert.Equal(
-                    openConnection
-                        ? ConnectionState.Open
-                        : ConnectionState.Closed, context.Database.GetDbConnection().State);
+                    openConnection ? ConnectionState.Open : ConnectionState.Closed,
+                    context.Database.GetDbConnection().State
+                );
 
                 if (openConnection)
                 {
@@ -540,7 +704,11 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         [ConditionalTheory]
-        [MemberData(nameof(DataGenerator.GetBoolCombinations), 2, MemberType = typeof(DataGenerator))]
+        [MemberData(
+            nameof(DataGenerator.GetBoolCombinations),
+            2,
+            MemberType = typeof(DataGenerator)
+        )]
         public async Task Retries_query_on_execution_failure(bool externalStrategy, bool async)
         {
             CleanContext();
@@ -555,7 +723,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var connection = (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection =
+                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
 
                 connection.ExecutionFailures.Enqueue(new bool?[] { true });
 
@@ -566,8 +735,9 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (externalStrategy)
                     {
-                        list = await new TestSqlServerRetryingExecutionStrategy(context)
-                            .ExecuteAsync(context, (c, ct) => c.Products.ToListAsync(ct), null);
+                        list = await new TestSqlServerRetryingExecutionStrategy(
+                            context
+                        ).ExecuteAsync(context, (c, ct) => c.Products.ToListAsync(ct), null);
                     }
                     else
                     {
@@ -578,8 +748,11 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (externalStrategy)
                     {
-                        list = new TestSqlServerRetryingExecutionStrategy(context)
-                            .Execute(context, c => c.Products.ToList(), null);
+                        list = new TestSqlServerRetryingExecutionStrategy(context).Execute(
+                            context,
+                            c => c.Products.ToList(),
+                            null
+                        );
                     }
                     else
                     {
@@ -596,7 +769,11 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         [ConditionalTheory]
-        [MemberData(nameof(DataGenerator.GetBoolCombinations), 2, MemberType = typeof(DataGenerator))]
+        [MemberData(
+            nameof(DataGenerator.GetBoolCombinations),
+            2,
+            MemberType = typeof(DataGenerator)
+        )]
         public async Task Retries_FromSqlRaw_on_execution_failure(bool externalStrategy, bool async)
         {
             CleanContext();
@@ -611,7 +788,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var connection = (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection =
+                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
 
                 connection.ExecutionFailures.Enqueue(new bool?[] { true });
 
@@ -622,34 +800,56 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (externalStrategy)
                     {
-                        list = await new TestSqlServerRetryingExecutionStrategy(context)
-                            .ExecuteAsync(
-                                context, (c, ct) => c.Set<Product>().FromSqlRaw(
-                                    @"SELECT [ID], [name]
-                              FROM [Products]").ToListAsync(ct), null);
+                        list = await new TestSqlServerRetryingExecutionStrategy(
+                            context
+                        ).ExecuteAsync(
+                            context,
+                            (c, ct) =>
+                                c.Set<Product>()
+                                    .FromSqlRaw(
+                                        @"SELECT [ID], [name]
+                              FROM [Products]"
+                                    )
+                                    .ToListAsync(ct),
+                            null
+                        );
                     }
                     else
                     {
-                        list = await context.Set<Product>().FromSqlRaw(
-                            @"SELECT [ID], [name]
-                              FROM [Products]").ToListAsync();
+                        list = await context
+                            .Set<Product>()
+                            .FromSqlRaw(
+                                @"SELECT [ID], [name]
+                              FROM [Products]"
+                            )
+                            .ToListAsync();
                     }
                 }
                 else
                 {
                     if (externalStrategy)
                     {
-                        list = new TestSqlServerRetryingExecutionStrategy(context)
-                            .Execute(
-                                context, c => c.Set<Product>().FromSqlRaw(
-                                    @"SELECT [ID], [name]
-                              FROM [Products]").ToList(), null);
+                        list = new TestSqlServerRetryingExecutionStrategy(context).Execute(
+                            context,
+                            c =>
+                                c.Set<Product>()
+                                    .FromSqlRaw(
+                                        @"SELECT [ID], [name]
+                              FROM [Products]"
+                                    )
+                                    .ToList(),
+                            null
+                        );
                     }
                     else
                     {
-                        list = context.Set<Product>().FromSqlRaw(
-                            @"SELECT [ID], [name]
-                              FROM [Products]").ToList();
+                        list = context
+                            .Set<Product>()
+                            .FromSqlRaw(
+                                @"SELECT [ID], [name]
+                              FROM [Products]"
+                            )
+                            .ToList();
                     }
                 }
 
@@ -662,8 +862,15 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         [ConditionalTheory]
-        [MemberData(nameof(DataGenerator.GetBoolCombinations), 2, MemberType = typeof(DataGenerator))]
-        public async Task Retries_OpenConnection_on_execution_failure(bool externalStrategy, bool async)
+        [MemberData(
+            nameof(DataGenerator.GetBoolCombinations),
+            2,
+            MemberType = typeof(DataGenerator)
+        )]
+        public async Task Retries_OpenConnection_on_execution_failure(
+            bool externalStrategy,
+            bool async
+        )
         {
             using var context = CreateContext();
             var connection = (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
@@ -678,7 +885,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     await new TestSqlServerRetryingExecutionStrategy(context).ExecuteAsync(
                         context,
-                        c => c.Database.OpenConnectionAsync());
+                        c => c.Database.OpenConnectionAsync()
+                    );
                 }
                 else
                 {
@@ -691,7 +899,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     new TestSqlServerRetryingExecutionStrategy(context).Execute(
                         context,
-                        c => c.Database.OpenConnection());
+                        c => c.Database.OpenConnection()
+                    );
                 }
                 else
                 {
@@ -727,9 +936,9 @@ namespace Microsoft.EntityFrameworkCore
 
             if (async)
             {
-                var transaction = await new TestSqlServerRetryingExecutionStrategy(context).ExecuteAsync(
-                    context,
-                    c => context.Database.BeginTransactionAsync());
+                var transaction = await new TestSqlServerRetryingExecutionStrategy(
+                    context
+                ).ExecuteAsync(context, c => context.Database.BeginTransactionAsync());
 
                 transaction.Dispose();
             }
@@ -737,7 +946,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var transaction = new TestSqlServerRetryingExecutionStrategy(context).Execute(
                     context,
-                    c => context.Database.BeginTransaction());
+                    c => context.Database.BeginTransaction()
+                );
 
                 transaction.Dispose();
             }
@@ -754,7 +964,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateContext())
             {
-                var connection = (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
+                var connection =
+                    (TestSqlServerConnection)context.GetService<ISqlServerConnection>();
 
                 connection.ExecutionFailures.Enqueue(new bool?[] { true, null, true, true });
                 connection.CommitFailures.Enqueue(new bool?[] { true, true, true, true });
@@ -762,11 +973,11 @@ namespace Microsoft.EntityFrameworkCore
                 context.Products.Add(new Product());
                 Assert.Throws<RetryLimitExceededException>(
                     () =>
-                        new TestSqlServerRetryingExecutionStrategy(context, TimeSpan.FromMilliseconds(100))
-                            .ExecuteInTransaction(
-                                context,
-                                c => c.SaveChanges(false),
-                                c => false));
+                        new TestSqlServerRetryingExecutionStrategy(
+                            context,
+                            TimeSpan.FromMilliseconds(100)
+                        ).ExecuteInTransaction(context, c => c.SaveChanges(false), c => false)
+                );
                 context.ChangeTracker.AcceptAllChanges();
 
                 Assert.Equal(7, connection.OpenCount);
@@ -781,10 +992,7 @@ namespace Microsoft.EntityFrameworkCore
 
         protected class ExecutionStrategyContext : DbContext
         {
-            public ExecutionStrategyContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public ExecutionStrategyContext(DbContextOptions options) : base(options) { }
 
             public DbSet<Product> Products { get; set; }
             public DbSet<Audit> Audits { get; set; }
@@ -800,8 +1008,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             public DbSet<Audit> Audits { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseSqlServer();
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseSqlServer();
         }
 
         public class Audit
@@ -809,8 +1017,8 @@ namespace Microsoft.EntityFrameworkCore
             public int AuditId { get; set; }
         }
 
-        protected virtual ExecutionStrategyContext CreateContext()
-            => (ExecutionStrategyContext)Fixture.CreateContext();
+        protected virtual ExecutionStrategyContext CreateContext() =>
+            (ExecutionStrategyContext)Fixture.CreateContext();
 
         private void CleanContext()
         {
@@ -824,27 +1032,30 @@ namespace Microsoft.EntityFrameworkCore
 
         public class ExecutionStrategyFixture : SharedStoreFixtureBase<DbContext>
         {
-            protected override bool UsePooling
-                => false;
+            protected override bool UsePooling => false;
 
             protected override string StoreName { get; } = nameof(ExecutionStrategyTest);
 
-            public new RelationalTestStore TestStore
-                => (RelationalTestStore)base.TestStore;
+            public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
 
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ListLoggerFactory;
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ListLoggerFactory;
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerTestStoreFactory.Instance;
 
             protected override Type ContextType { get; } = typeof(ExecutionStrategyContext);
 
-            protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-                => base.AddServices(serviceCollection)
+            protected override IServiceCollection AddServices(
+                IServiceCollection serviceCollection
+            ) =>
+                base.AddServices(serviceCollection)
                     .AddSingleton<IRelationalTransactionFactory, TestRelationalTransactionFactory>()
                     .AddScoped<ISqlServerConnection, TestSqlServerConnection>()
-                    .AddSingleton<IRelationalCommandBuilderFactory, TestRelationalCommandBuilderFactory>();
+                    .AddSingleton<
+                        IRelationalCommandBuilderFactory,
+                        TestRelationalCommandBuilderFactory
+                    >();
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
             {
@@ -853,8 +1064,8 @@ namespace Microsoft.EntityFrameworkCore
                 return options;
             }
 
-            protected override bool ShouldLogCategory(string logCategory)
-                => logCategory == DbLoggerCategory.Infrastructure.Name;
+            protected override bool ShouldLogCategory(string logCategory) =>
+                logCategory == DbLoggerCategory.Infrastructure.Name;
         }
     }
 }

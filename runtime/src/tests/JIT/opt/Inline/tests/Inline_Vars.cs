@@ -3621,5 +3621,3 @@ public class Test_Inline_Vars
         return 100;
     }
 }
-
-

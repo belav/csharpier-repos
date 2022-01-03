@@ -16,8 +16,6 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.Kernel32, SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern bool GetCommModemStatus(
-            SafeFileHandle hFile,
-            ref int lpModemStat);
+        internal static extern bool GetCommModemStatus(SafeFileHandle hFile, ref int lpModemStat);
     }
 }

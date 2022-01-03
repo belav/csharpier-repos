@@ -34,7 +34,11 @@ public abstract class RazorDiagnostic : IEquatable<RazorDiagnostic>, IFormattabl
         return new DefaultRazorDiagnostic(descriptor, span, EmptyArgs);
     }
 
-    public static RazorDiagnostic Create(RazorDiagnosticDescriptor descriptor, SourceSpan span, params object[] args)
+    public static RazorDiagnostic Create(
+        RazorDiagnosticDescriptor descriptor,
+        SourceSpan span,
+        params object[] args
+    )
     {
         if (descriptor == null)
         {

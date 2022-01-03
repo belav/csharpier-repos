@@ -11,10 +11,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class OwnedQueryCosmosTest : OwnedQueryTestBase<OwnedQueryCosmosTest.OwnedQueryCosmosFixture>
+    public class OwnedQueryCosmosTest
+        : OwnedQueryTestBase<OwnedQueryCosmosTest.OwnedQueryCosmosFixture>
     {
-        public OwnedQueryCosmosTest(OwnedQueryCosmosFixture fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public OwnedQueryCosmosTest(
+            OwnedQueryCosmosFixture fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             ClearLog();
             //TestLoggerFactory.TestOutputHelper = testOutputHelper;
@@ -40,11 +43,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""LeafB"") OR ((c[""Discriminator""] = ""LeafA"") OR ((c[""Discriminator""] = ""Branch"") OR (c[""Discriminator""] = ""OwnedPerson""))))");
+WHERE ((c[""Discriminator""] = ""LeafB"") OR ((c[""Discriminator""] = ""LeafA"") OR ((c[""Discriminator""] = ""Branch"") OR (c[""Discriminator""] = ""OwnedPerson""))))"
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#16926")]
-        public override async Task Navigation_rewrite_on_owned_collection_with_composition(bool async)
+        public override async Task Navigation_rewrite_on_owned_collection_with_composition(
+            bool async
+        )
         {
             await base.Navigation_rewrite_on_owned_collection_with_composition(async);
 
@@ -52,31 +58,39 @@ WHERE ((c[""Discriminator""] = ""LeafB"") OR ((c[""Discriminator""] = ""LeafA"")
         }
 
         [ConditionalTheory(Skip = "Issue#16926")]
-        public override async Task Navigation_rewrite_on_owned_collection_with_composition_complex(bool async)
+        public override async Task Navigation_rewrite_on_owned_collection_with_composition_complex(
+            bool async
+        )
         {
             await base.Navigation_rewrite_on_owned_collection_with_composition_complex(async);
 
             AssertSql(" ");
         }
 
-        public override async Task Navigation_rewrite_on_owned_reference_projecting_entity(bool async)
+        public override async Task Navigation_rewrite_on_owned_reference_projecting_entity(
+            bool async
+        )
         {
             await base.Navigation_rewrite_on_owned_reference_projecting_entity(async);
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""PersonAddress""][""Country""][""Name""] = ""USA""))");
+WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""PersonAddress""][""Country""][""Name""] = ""USA""))"
+            );
         }
 
-        public override async Task Navigation_rewrite_on_owned_reference_projecting_scalar(bool async)
+        public override async Task Navigation_rewrite_on_owned_reference_projecting_scalar(
+            bool async
+        )
         {
             await base.Navigation_rewrite_on_owned_reference_projecting_scalar(async);
 
             AssertSql(
                 @"SELECT c[""PersonAddress""][""Country""][""Name""]
 FROM root c
-WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""PersonAddress""][""Country""][""Name""] = ""USA""))");
+WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""PersonAddress""][""Country""][""Name""] = ""USA""))"
+            );
         }
 
         public override async Task Query_for_base_type_loads_all_owned_navs(bool async)
@@ -86,7 +100,8 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"")");
+WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"")"
+            );
         }
 
         public override async Task Query_for_branch_type_loads_all_owned_navs(bool async)
@@ -96,7 +111,8 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE c[""Discriminator""] IN (""Branch"", ""LeafA"")");
+WHERE c[""Discriminator""] IN (""Branch"", ""LeafA"")"
+            );
         }
 
         public override async Task Query_for_branch_type_loads_all_owned_navs_tracking(bool async)
@@ -106,7 +122,8 @@ WHERE c[""Discriminator""] IN (""Branch"", ""LeafA"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE c[""Discriminator""] IN (""Branch"", ""LeafA"")");
+WHERE c[""Discriminator""] IN (""Branch"", ""LeafA"")"
+            );
         }
 
         public override async Task Query_for_leaf_type_loads_all_owned_navs(bool async)
@@ -116,63 +133,96 @@ WHERE c[""Discriminator""] IN (""Branch"", ""LeafA"")");
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] = ""LeafA"")");
+WHERE (c[""Discriminator""] = ""LeafA"")"
+            );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
-        public override Task Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(bool async)
+        public override Task Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(
+            bool async
+        )
         {
-            return base.Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(async);
+            return base.Filter_owned_entity_chained_with_regular_entity_followed_by_projecting_owned_collection(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
-        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity(bool async)
+        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity(
+            bool async
+        )
         {
             return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity(async);
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
-        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(bool async)
+        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(
+            bool async
+        )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(async);
+            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_filter(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
-        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(bool async)
+        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(
+            bool async
+        )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(async);
+            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
-        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(bool async)
+        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(
+            bool async
+        )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(async);
+            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_and_scalar(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
-        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(bool async)
+        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(
+            bool async
+        )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(async);
+            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
-        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_count(bool async)
+        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_count(
+            bool async
+        )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_count(async);
+            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_count(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
-        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(bool async)
+        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(
+            bool async
+        )
         {
-            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(async);
+            return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
-        public override Task
-            Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(bool async)
+        public override Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(
+            bool async
+        )
         {
             return base.Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(
-                async);
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
@@ -182,9 +232,13 @@ WHERE (c[""Discriminator""] = ""LeafA"")");
         }
 
         [ConditionalTheory(Skip = "LeftJoin #17314")]
-        public override Task Project_multiple_owned_navigations_with_expansion_on_owned_collections(bool async)
+        public override Task Project_multiple_owned_navigations_with_expansion_on_owned_collections(
+            bool async
+        )
         {
-            return base.Project_multiple_owned_navigations_with_expansion_on_owned_collections(async);
+            return base.Project_multiple_owned_navigations_with_expansion_on_owned_collections(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "SelectMany #17246")]
@@ -194,15 +248,23 @@ WHERE (c[""Discriminator""] = ""LeafA"")");
         }
 
         [ConditionalTheory(Skip = "SelectMany #17246")]
-        public override Task SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(bool async)
+        public override Task SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(
+            bool async
+        )
         {
-            return base.SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(async);
+            return base.SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "SelectMany #17246")]
-        public override Task SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(bool async)
+        public override Task SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(
+            bool async
+        )
         {
-            return base.SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(async);
+            return base.SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(
+                async
+            );
         }
 
         [ConditionalTheory(Skip = "SelectMany #17246")]
@@ -217,14 +279,17 @@ WHERE (c[""Discriminator""] = ""LeafA"")");
             return base.Query_with_owned_entity_equality_object_method(async);
         }
 
-        public override async Task Query_with_OfType_eagerly_loads_correct_owned_navigations(bool async)
+        public override async Task Query_with_OfType_eagerly_loads_correct_owned_navigations(
+            bool async
+        )
         {
             await base.Query_with_OfType_eagerly_loads_correct_owned_navigations(async);
 
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""Discriminator""] = ""LeafA""))");
+WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""Discriminator""] = ""LeafA""))"
+            );
         }
 
         [ConditionalTheory(Skip = "Distinct ordering #16156")]
@@ -282,7 +347,9 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
         }
 
         [ConditionalTheory(Skip = "Issue #16146")]
-        public override Task GroupBy_with_multiple_aggregates_on_owned_navigation_properties(bool async)
+        public override Task GroupBy_with_multiple_aggregates_on_owned_navigation_properties(
+            bool async
+        )
         {
             return base.GroupBy_with_multiple_aggregates_on_owned_navigation_properties(async);
         }
@@ -294,7 +361,8 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""Name""] = ""Mona Cy""))");
+WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""Name""] = ""Mona Cy""))"
+            );
         }
 
         public override async Task Can_query_on_owned_indexer_properties(bool async)
@@ -304,17 +372,21 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
             AssertSql(
                 @"SELECT c[""Name""]
 FROM root c
-WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""PersonAddress""][""ZipCode""] = 38654))");
+WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""PersonAddress""][""ZipCode""] = 38654))"
+            );
         }
 
-        public override async Task Can_query_on_indexer_property_when_property_name_from_closure(bool async)
+        public override async Task Can_query_on_indexer_property_when_property_name_from_closure(
+            bool async
+        )
         {
             await base.Can_query_on_indexer_property_when_property_name_from_closure(async);
 
             AssertSql(
                 @"SELECT c[""Name""]
 FROM root c
-WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""Name""] = ""Mona Cy""))");
+WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""Name""] = ""Mona Cy""))"
+            );
         }
 
         public override async Task Can_project_indexer_properties(bool async)
@@ -324,7 +396,8 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
             AssertSql(
                 @"SELECT c[""Name""]
 FROM root c
-WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"")");
+WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"")"
+            );
         }
 
         public override async Task Can_project_owned_indexer_properties(bool async)
@@ -334,7 +407,8 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
             AssertSql(
                 @"SELECT c[""PersonAddress""][""AddressLine""]
 FROM root c
-WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"")");
+WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"")"
+            );
         }
 
         public override async Task Can_project_indexer_properties_converted(bool async)
@@ -344,7 +418,8 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
             AssertSql(
                 @"SELECT c[""Name""]
 FROM root c
-WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"")");
+WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"")"
+            );
         }
 
         public override async Task Can_project_owned_indexer_properties_converted(bool async)
@@ -431,17 +506,21 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
             AssertSql(
                 @"SELECT VALUE {""Nation"" : c[""PersonAddress""][""ZipCode""]}
 FROM root c
-WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"")");
+WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"")"
+            );
         }
 
-        public override async Task Projecting_indexer_property_ignores_include_converted(bool isAsync)
+        public override async Task Projecting_indexer_property_ignores_include_converted(
+            bool isAsync
+        )
         {
             await base.Projecting_indexer_property_ignores_include_converted(isAsync);
 
             AssertSql(
                 @"SELECT VALUE {""Nation"" : c[""PersonAddress""][""ZipCode""]}
 FROM root c
-WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"")");
+WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"")"
+            );
         }
 
         [ConditionalTheory(Skip = "Subquery #17246")]
@@ -460,10 +539,18 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
             AssertSql(" ");
         }
 
-        [ConditionalTheory(Skip = "No SelectMany, No Ability to Include navigation back to owner #17246")]
-        public override Task NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(bool async, bool useAsTracking)
+        [ConditionalTheory(
+            Skip = "No SelectMany, No Ability to Include navigation back to owner #17246"
+        )]
+        public override Task NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(
+            bool async,
+            bool useAsTracking
+        )
         {
-            return base.NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(async, useAsTracking);
+            return base.NoTracking_Include_with_cycles_does_not_throw_when_performing_identity_resolution(
+                async,
+                useAsTracking
+            );
         }
 
         [ConditionalTheory(Skip = "No Composite index to process custom ordering #17246")]
@@ -475,7 +562,9 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
         }
 
         [ConditionalTheory(Skip = "Composition over owned collection #17246")]
-        public override async Task Query_on_collection_entry_works_for_owned_collection(bool isAsync)
+        public override async Task Query_on_collection_entry_works_for_owned_collection(
+            bool isAsync
+        )
         {
             await base.Query_on_collection_entry_works_for_owned_collection(isAsync);
 
@@ -483,9 +572,13 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
         }
 
         [ConditionalTheory(Skip = "issue #17246")]
-        public override async Task Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(bool isAsync)
+        public override async Task Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(
+            bool isAsync
+        )
         {
-            await base.Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(isAsync);
+            await base.Projecting_collection_correlated_with_keyless_entity_after_navigation_works_using_parent_identifiers(
+                isAsync
+            );
 
             AssertSql(" ");
         }
@@ -497,7 +590,8 @@ WHERE c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA""
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""PersonAddress""][""ZipCode""] = 38654))");
+WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""PersonAddress""][""ZipCode""] = 38654))"
+            );
         }
 
         public override async Task Filter_on_indexer_using_function_argument(bool async)
@@ -507,22 +601,22 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""PersonAddress""][""ZipCode""] = 38654))");
+WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"") AND (c[""PersonAddress""][""ZipCode""] = 38654))"
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-        private void ClearLog()
-            => Fixture.TestSqlLoggerFactory.Clear();
+        private void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
         public class OwnedQueryCosmosFixture : OwnedQueryFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => CosmosTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                CosmosTestStoreFactory.Instance;
 
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
@@ -531,15 +625,12 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                     {
                         eb.IndexerProperty<string>("Name");
                         eb.HasData(
-                            new
-                            {
-                                Id = 1,
-                                id = Guid.NewGuid().ToString(),
-                                Name = "Mona Cy"
-                            });
+                            new { Id = 1, id = Guid.NewGuid().ToString(), Name = "Mona Cy" }
+                        );
 
                         eb.OwnsOne(
-                            p => p.PersonAddress, ab =>
+                            p => p.PersonAddress,
+                            ab =>
                             {
                                 ab.IndexerProperty<string>("AddressLine");
                                 ab.IndexerProperty(typeof(int), "ZipCode");
@@ -571,10 +662,12 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                                         PlaceType = "Land",
                                         AddressLine = "28 Strawberry St.",
                                         ZipCode = 19053
-                                    });
+                                    }
+                                );
 
                                 ab.OwnsOne(
-                                    a => a.Country, cb =>
+                                    a => a.Country,
+                                    cb =>
                                     {
                                         cb.HasData(
                                             new
@@ -600,15 +693,21 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                                                 OwnedAddressOwnedPersonId = 4,
                                                 PlanetId = 1,
                                                 Name = "USA"
-                                            });
+                                            }
+                                        );
 
-                                        cb.HasOne(cc => cc.Planet).WithMany().HasForeignKey(ee => ee.PlanetId)
+                                        cb.HasOne(cc => cc.Planet)
+                                            .WithMany()
+                                            .HasForeignKey(ee => ee.PlanetId)
                                             .OnDelete(DeleteBehavior.Restrict);
-                                    });
-                            });
+                                    }
+                                );
+                            }
+                        );
 
                         eb.OwnsMany(
-                            p => p.Orders, ob =>
+                            p => p.Orders,
+                            ob =>
                             {
                                 ob.HasKey(o => o.Id);
                                 ob.IndexerProperty<DateTime>("OrderDate");
@@ -645,54 +744,57 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                                     }
                                 );
 
-                                ob.OwnsMany(e => e.Details, odb =>
-                                {
-                                    odb.HasData(
-                                        new
-                                        {
-                                            Id = -100,
-                                            OrderId = -10,
-                                            OrderClientId = 1,
-                                            Detail = "Discounted Order"
-                                        },
-                                        new
-                                        {
-                                            Id = -101,
-                                            OrderId = -10,
-                                            OrderClientId = 1,
-                                            Detail = "Full Price Order"
-                                        },
-                                        new
-                                        {
-                                            Id = -200,
-                                            OrderId = -20,
-                                            OrderClientId = 2,
-                                            Detail = "Internal Order"
-                                        },
-                                        new
-                                        {
-                                            Id = -300,
-                                            OrderId = -30,
-                                            OrderClientId = 3,
-                                            Detail = "Bulk Order"
-                                        });
-                                });
-                            });
-                    });
+                                ob.OwnsMany(
+                                    e => e.Details,
+                                    odb =>
+                                    {
+                                        odb.HasData(
+                                            new
+                                            {
+                                                Id = -100,
+                                                OrderId = -10,
+                                                OrderClientId = 1,
+                                                Detail = "Discounted Order"
+                                            },
+                                            new
+                                            {
+                                                Id = -101,
+                                                OrderId = -10,
+                                                OrderClientId = 1,
+                                                Detail = "Full Price Order"
+                                            },
+                                            new
+                                            {
+                                                Id = -200,
+                                                OrderId = -20,
+                                                OrderClientId = 2,
+                                                Detail = "Internal Order"
+                                            },
+                                            new
+                                            {
+                                                Id = -300,
+                                                OrderId = -30,
+                                                OrderClientId = 3,
+                                                Detail = "Bulk Order"
+                                            }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
 
                 modelBuilder.Entity<Branch>(
                     eb =>
                     {
                         eb.HasData(
-                            new
-                            {
-                                Id = 2,
-                                id = Guid.NewGuid().ToString(),
-                                Name = "Antigonus Mitul"
-                            });
+                            new { Id = 2, id = Guid.NewGuid().ToString(), Name = "Antigonus Mitul" }
+                        );
 
                         eb.OwnsOne(
-                            p => p.BranchAddress, ab =>
+                            p => p.BranchAddress,
+                            ab =>
                             {
                                 ab.IndexerProperty<string>("BranchName").IsRequired();
                                 ab.HasData(
@@ -702,15 +804,12 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                                         PlaceType = "Land",
                                         BranchName = "BranchA"
                                     },
-                                    new
-                                    {
-                                        BranchId = 3,
-                                        PlaceType = "Land",
-                                        BranchName = "BranchB"
-                                    });
+                                    new { BranchId = 3, PlaceType = "Land", BranchName = "BranchB" }
+                                );
 
                                 ab.OwnsOne(
-                                    a => a.Country, cb =>
+                                    a => a.Country,
+                                    cb =>
                                     {
                                         cb.HasData(
                                             new
@@ -724,36 +823,32 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                                                 OwnedAddressBranchId = 3,
                                                 PlanetId = 1,
                                                 Name = "Canada"
-                                            });
-                                    });
-                            });
-                    });
+                                            }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
 
                 modelBuilder.Entity<LeafA>(
                     eb =>
                     {
                         eb.HasData(
-                            new
-                            {
-                                Id = 3,
-                                id = Guid.NewGuid().ToString(),
-                                Name = "Madalena Morana"
-                            });
+                            new { Id = 3, id = Guid.NewGuid().ToString(), Name = "Madalena Morana" }
+                        );
 
                         eb.OwnsOne(
-                            p => p.LeafAAddress, ab =>
+                            p => p.LeafAAddress,
+                            ab =>
                             {
                                 ab.IndexerProperty<int>("LeafType");
-                                ab.HasData(
-                                    new
-                                    {
-                                        LeafAId = 3,
-                                        PlaceType = "Land",
-                                        LeafType = 1
-                                    });
+                                ab.HasData(new { LeafAId = 3, PlaceType = "Land", LeafType = 1 });
 
                                 ab.OwnsOne(
-                                    a => a.Country, cb =>
+                                    a => a.Country,
+                                    cb =>
                                     {
                                         cb.HasData(
                                             new
@@ -761,36 +856,34 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                                                 OwnedAddressLeafAId = 3,
                                                 PlanetId = 1,
                                                 Name = "Mexico"
-                                            });
-                                    });
-                            });
-                    });
+                                            }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
 
                 modelBuilder.Entity<LeafB>(
                     eb =>
                     {
                         eb.HasData(
-                            new
-                            {
-                                Id = 4,
-                                id = Guid.NewGuid().ToString(),
-                                Name = "Vanda Waldemar"
-                            });
+                            new { Id = 4, id = Guid.NewGuid().ToString(), Name = "Vanda Waldemar" }
+                        );
 
                         eb.OwnsOne(
-                            p => p.LeafBAddress, ab =>
+                            p => p.LeafBAddress,
+                            ab =>
                             {
                                 ab.IndexerProperty<string>("LeafBType").IsRequired();
                                 ab.HasData(
-                                    new
-                                    {
-                                        LeafBId = 4,
-                                        PlaceType = "Land",
-                                        LeafBType = "Green"
-                                    });
+                                    new { LeafBId = 4, PlaceType = "Land", LeafBType = "Green" }
+                                );
 
                                 ab.OwnsOne(
-                                    a => a.Country, cb =>
+                                    a => a.Country,
+                                    cb =>
                                     {
                                         cb.HasData(
                                             new
@@ -798,22 +891,21 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                                                 OwnedAddressLeafBId = 4,
                                                 PlanetId = 1,
                                                 Name = "Panama"
-                                            });
-                                    });
-                            });
-                    });
+                                            }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
 
                 modelBuilder.Entity<Planet>(
                     pb =>
                     {
-                        pb.HasData(
-                            new
-                            {
-                                Id = 1,
-                                id = Guid.NewGuid().ToString(),
-                                StarId = 1
-                            });
-                    });
+                        pb.HasData(new { Id = 1, id = Guid.NewGuid().ToString(), StarId = 1 });
+                    }
+                );
 
                 modelBuilder.Entity<Moon>(
                     mb =>
@@ -825,58 +917,45 @@ WHERE (c[""Discriminator""] IN (""OwnedPerson"", ""Branch"", ""LeafB"", ""LeafA"
                                 id = Guid.NewGuid().ToString(),
                                 PlanetId = 1,
                                 Diameter = 3474
-                            });
-                    });
+                            }
+                        );
+                    }
+                );
 
                 modelBuilder.Entity<Star>(
                     sb =>
                     {
-                        sb.HasData(
-                            new
-                            {
-                                Id = 1,
-                                id = Guid.NewGuid().ToString(),
-                                Name = "Sol"
-                            });
+                        sb.HasData(new { Id = 1, id = Guid.NewGuid().ToString(), Name = "Sol" });
 
                         sb.OwnsMany(
-                            s => s.Composition, ob =>
+                            s => s.Composition,
+                            ob =>
                             {
                                 ob.HasKey(o => o.Id);
                                 ob.HasData(
-                                    new
-                                    {
-                                        Id = "H",
-                                        Name = "Hydrogen",
-                                        StarId = 1
-                                    },
-                                    new
-                                    {
-                                        Id = "He",
-                                        Name = "Helium",
-                                        StarId = 1
-                                    });
-                            });
-                    });
+                                    new { Id = "H", Name = "Hydrogen", StarId = 1 },
+                                    new { Id = "He", Name = "Helium", StarId = 1 }
+                                );
+                            }
+                        );
+                    }
+                );
 
                 modelBuilder.Entity<Barton>(
                     b =>
                     {
                         b.OwnsOne(
-                            e => e.Throned, b => b.HasData(
-                                new
-                                {
-                                    BartonId = 1,
-                                    Property = "Property",
-                                    Value = 42
-                                }));
+                            e => e.Throned,
+                            b => b.HasData(new { BartonId = 1, Property = "Property", Value = 42 })
+                        );
                         b.HasData(
                             new Barton { Id = 1, Simple = "Simple" },
-                            new Barton { Id = 2, Simple = "Not" });
-                    });
+                            new Barton { Id = 2, Simple = "Not" }
+                        );
+                    }
+                );
 
-                modelBuilder.Entity<Fink>().HasData(
-                    new { Id = 1, BartonId = 1 });
+                modelBuilder.Entity<Fink>().HasData(new { Id = 1, BartonId = 1 });
             }
         }
     }

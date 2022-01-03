@@ -19,9 +19,21 @@ namespace System.Security.Cryptography.Tests
             get
             {
                 // Assume curve is valid if required; tests will fail if not present
-                return RequiredOnPlatform ||
-                    (Curve.IsNamed && (EcDsa.Tests.ECDsaFactory.IsCurveValid(Curve.Oid) || EcDiffieHellman.Tests.ECDiffieHellmanFactory.IsCurveValid(Curve.Oid))) ||
-                    (Curve.IsExplicit && (EcDsa.Tests.ECDsaFactory.ExplicitCurvesSupported || EcDiffieHellman.Tests.ECDiffieHellmanFactory.ExplicitCurvesSupported));
+                return RequiredOnPlatform
+                    || (
+                        Curve.IsNamed
+                        && (
+                            EcDsa.Tests.ECDsaFactory.IsCurveValid(Curve.Oid)
+                            || EcDiffieHellman.Tests.ECDiffieHellmanFactory.IsCurveValid(Curve.Oid)
+                        )
+                    )
+                    || (
+                        Curve.IsExplicit
+                        && (
+                            EcDsa.Tests.ECDsaFactory.ExplicitCurvesSupported
+                            || EcDiffieHellman.Tests.ECDiffieHellmanFactory.ExplicitCurvesSupported
+                        )
+                    );
             }
         }
 
@@ -31,8 +43,12 @@ namespace System.Security.Cryptography.Tests
                 return true;
 
             // Montgomery and Weierstrass are interchangable depending on the platform
-            if (CurveType == ECCurve.ECCurveType.PrimeMontgomery && actual == ECCurve.ECCurveType.PrimeShortWeierstrass ||
-                CurveType == ECCurve.ECCurveType.PrimeShortWeierstrass && actual == ECCurve.ECCurveType.PrimeMontgomery)
+            if (
+                CurveType == ECCurve.ECCurveType.PrimeMontgomery
+                    && actual == ECCurve.ECCurveType.PrimeShortWeierstrass
+                || CurveType == ECCurve.ECCurveType.PrimeShortWeierstrass
+                    && actual == ECCurve.ECCurveType.PrimeMontgomery
+            )
             {
                 return true;
             }

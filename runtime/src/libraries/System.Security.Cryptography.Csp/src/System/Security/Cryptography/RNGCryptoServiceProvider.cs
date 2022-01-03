@@ -5,7 +5,11 @@ using System.ComponentModel;
 
 namespace System.Security.Cryptography
 {
-    [Obsolete(Obsoletions.RNGCryptoServiceProviderMessage, DiagnosticId = Obsoletions.RNGCryptoServiceProviderDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.RNGCryptoServiceProviderMessage,
+        DiagnosticId = Obsoletions.RNGCryptoServiceProviderDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class RNGCryptoServiceProvider : RandomNumberGenerator
     {
@@ -25,7 +29,8 @@ namespace System.Security.Cryptography
         }
 
         public override void GetBytes(byte[] data) => _impl.GetBytes(data);
-        public override void GetBytes(byte[] data, int offset, int count) => _impl.GetBytes(data, offset, count);
+        public override void GetBytes(byte[] data, int offset, int count) =>
+            _impl.GetBytes(data, offset, count);
         public override void GetBytes(Span<byte> data) => _impl.GetBytes(data);
         public override void GetNonZeroBytes(byte[] data) => _impl.GetNonZeroBytes(data);
         public override void GetNonZeroBytes(Span<byte> data) => _impl.GetNonZeroBytes(data);

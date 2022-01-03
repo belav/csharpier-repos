@@ -21,7 +21,6 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public class Gen<T>
 {
     public bool DefaultTest(bool status)
@@ -51,7 +50,6 @@ public class Test_default_class01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -65,31 +63,31 @@ public class Test_default_class01
         Eval(new Gen<int[]>().DefaultTest(true));
         Eval(new Gen<double[,]>().DefaultTest(true));
         Eval(new Gen<string[][][]>().DefaultTest(true));
-        Eval(new Gen<object[, , ,]>().DefaultTest(true));
-        Eval(new Gen<Guid[][, , ,][]>().DefaultTest(true));
+        Eval(new Gen<object[,,,]>().DefaultTest(true));
+        Eval(new Gen<Guid[][,,,][]>().DefaultTest(true));
 
         Eval(new Gen<RefX1<int>[]>().DefaultTest(true));
         Eval(new Gen<RefX1<double>[,]>().DefaultTest(true));
         Eval(new Gen<RefX1<string>[][][]>().DefaultTest(true));
-        Eval(new Gen<RefX1<object>[, , ,]>().DefaultTest(true));
-        Eval(new Gen<RefX1<Guid>[][, , ,][]>().DefaultTest(true));
+        Eval(new Gen<RefX1<object>[,,,]>().DefaultTest(true));
+        Eval(new Gen<RefX1<Guid>[][,,,][]>().DefaultTest(true));
         Eval(new Gen<RefX2<int, int>[]>().DefaultTest(true));
         Eval(new Gen<RefX2<double, double>[,]>().DefaultTest(true));
         Eval(new Gen<RefX2<string, string>[][][]>().DefaultTest(true));
-        Eval(new Gen<RefX2<object, object>[, , ,]>().DefaultTest(true));
-        Eval(new Gen<RefX2<Guid, Guid>[][, , ,][]>().DefaultTest(true));
+        Eval(new Gen<RefX2<object, object>[,,,]>().DefaultTest(true));
+        Eval(new Gen<RefX2<Guid, Guid>[][,,,][]>().DefaultTest(true));
 
         Eval(new Gen<ValX1<int>[]>().DefaultTest(true));
         Eval(new Gen<ValX1<double>[,]>().DefaultTest(true));
         Eval(new Gen<ValX1<string>[][][]>().DefaultTest(true));
-        Eval(new Gen<ValX1<object>[, , ,]>().DefaultTest(true));
-        Eval(new Gen<ValX1<Guid>[][, , ,][]>().DefaultTest(true));
+        Eval(new Gen<ValX1<object>[,,,]>().DefaultTest(true));
+        Eval(new Gen<ValX1<Guid>[][,,,][]>().DefaultTest(true));
 
         Eval(new Gen<ValX2<int, int>[]>().DefaultTest(true));
         Eval(new Gen<ValX2<double, double>[,]>().DefaultTest(true));
         Eval(new Gen<ValX2<string, string>[][][]>().DefaultTest(true));
-        Eval(new Gen<ValX2<object, object>[, , ,]>().DefaultTest(true));
-        Eval(new Gen<ValX2<Guid, Guid>[][, , ,][]>().DefaultTest(true));
+        Eval(new Gen<ValX2<object, object>[,,,]>().DefaultTest(true));
+        Eval(new Gen<ValX2<Guid, Guid>[][,,,][]>().DefaultTest(true));
 
         Eval(new Gen<RefX1<int>>().DefaultTest(true));
         Eval(new Gen<RefX1<ValX1<int>>>().DefaultTest(true));
@@ -101,8 +99,27 @@ public class Test_default_class01
         Eval(new Gen<RefX1<RefX1<RefX1<RefX1<Guid>>>>>().DefaultTest(true));
 
         Eval(new Gen<RefX1<RefX2<int, string>>>().DefaultTest(true));
-        Eval(new Gen<RefX2<RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>, RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>>>().DefaultTest(true));
-        Eval(new Gen<RefX3<RefX1<int[][, , ,]>, RefX2<object[, , ,][][], Guid[][][]>, RefX3<double[, , , , , , , , , ,], Guid[][][][, , , ,][, , , ,][][][], string[][][][][][][][][][][]>>>().DefaultTest(true));
+        Eval(
+            new Gen<
+                RefX2<
+                    RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>,
+                    RefX2<RefX1<int>, RefX3<int, string, RefX1<RefX2<int, string>>>>
+                >
+            >().DefaultTest(true)
+        );
+        Eval(
+            new Gen<
+                RefX3<
+                    RefX1<int[][,,,]>,
+                    RefX2<object[,,,][][], Guid[][][]>,
+                    RefX3<
+                        double[,,,,,,,,,,],
+                        Guid[][][][,,,,][,,,,][][][],
+                        string[][][][][][][][][][][]
+                    >
+                >
+            >().DefaultTest(true)
+        );
 
         Eval(new Gen<ValX1<int>>().DefaultTest(false));
         Eval(new Gen<ValX1<RefX1<int>>>().DefaultTest(false));
@@ -114,10 +131,27 @@ public class Test_default_class01
         Eval(new Gen<ValX1<ValX1<ValX1<ValX1<Guid>>>>>().DefaultTest(false));
 
         Eval(new Gen<ValX1<ValX2<int, string>>>().DefaultTest(false));
-        Eval(new Gen<ValX2<ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>, ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>>>().DefaultTest(false));
-        Eval(new Gen<ValX3<ValX1<int[][, , ,]>, ValX2<object[, , ,][][], Guid[][][]>, ValX3<double[, , , , , , , , , ,], Guid[][][][, , , ,][, , , ,][][][], string[][][][][][][][][][][]>>>().DefaultTest(false));
-
-
+        Eval(
+            new Gen<
+                ValX2<
+                    ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>,
+                    ValX2<ValX1<int>, ValX3<int, string, ValX1<ValX2<int, string>>>>
+                >
+            >().DefaultTest(false)
+        );
+        Eval(
+            new Gen<
+                ValX3<
+                    ValX1<int[][,,,]>,
+                    ValX2<object[,,,][][], Guid[][][]>,
+                    ValX3<
+                        double[,,,,,,,,,,],
+                        Guid[][][][,,,,][,,,,][][][],
+                        string[][][][][][][][][][][]
+                    >
+                >
+            >().DefaultTest(false)
+        );
 
         if (result)
         {
@@ -130,5 +164,4 @@ public class Test_default_class01
             return 1;
         }
     }
-
 }

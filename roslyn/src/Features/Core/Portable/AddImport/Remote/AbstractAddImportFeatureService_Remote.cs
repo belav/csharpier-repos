@@ -25,24 +25,43 @@ namespace Microsoft.CodeAnalysis.AddImport
     /// portion of the search.  Ideally we could keep this all OOP.
     /// </summary>
     [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteMissingImportDiscoveryService)), Shared]
-    internal sealed class RemoteMissingImportDiscoveryServiceCallbackDispatcher : RemoteServiceCallbackDispatcher, IRemoteMissingImportDiscoveryService.ICallback
+    internal sealed class RemoteMissingImportDiscoveryServiceCallbackDispatcher
+        : RemoteServiceCallbackDispatcher,
+          IRemoteMissingImportDiscoveryService.ICallback
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteMissingImportDiscoveryServiceCallbackDispatcher()
-        {
-        }
+        public RemoteMissingImportDiscoveryServiceCallbackDispatcher() { }
 
-        private ISymbolSearchService GetService(RemoteServiceCallbackId callbackId)
-            => (ISymbolSearchService)GetCallback(callbackId);
+        private ISymbolSearchService GetService(RemoteServiceCallbackId callbackId) =>
+            (ISymbolSearchService)GetCallback(callbackId);
 
-        public ValueTask<ImmutableArray<PackageWithTypeResult>> FindPackagesWithTypeAsync(RemoteServiceCallbackId callbackId, string source, string name, int arity, CancellationToken cancellationToken)
-            => GetService(callbackId).FindPackagesWithTypeAsync(source, name, arity, cancellationToken);
+        public ValueTask<ImmutableArray<PackageWithTypeResult>> FindPackagesWithTypeAsync(
+            RemoteServiceCallbackId callbackId,
+            string source,
+            string name,
+            int arity,
+            CancellationToken cancellationToken
+        ) =>
+            GetService(callbackId)
+                .FindPackagesWithTypeAsync(source, name, arity, cancellationToken);
 
-        public ValueTask<ImmutableArray<PackageWithAssemblyResult>> FindPackagesWithAssemblyAsync(RemoteServiceCallbackId callbackId, string source, string name, CancellationToken cancellationToken)
-            => GetService(callbackId).FindPackagesWithAssemblyAsync(source, name, cancellationToken);
+        public ValueTask<ImmutableArray<PackageWithAssemblyResult>> FindPackagesWithAssemblyAsync(
+            RemoteServiceCallbackId callbackId,
+            string source,
+            string name,
+            CancellationToken cancellationToken
+        ) => GetService(callbackId).FindPackagesWithAssemblyAsync(source, name, cancellationToken);
 
-        public ValueTask<ImmutableArray<ReferenceAssemblyWithTypeResult>> FindReferenceAssembliesWithTypeAsync(RemoteServiceCallbackId callbackId, string name, int arity, CancellationToken cancellationToken)
-            => GetService(callbackId).FindReferenceAssembliesWithTypeAsync(name, arity, cancellationToken);
+        public ValueTask<
+            ImmutableArray<ReferenceAssemblyWithTypeResult>
+        > FindReferenceAssembliesWithTypeAsync(
+            RemoteServiceCallbackId callbackId,
+            string name,
+            int arity,
+            CancellationToken cancellationToken
+        ) =>
+            GetService(callbackId)
+                .FindReferenceAssembliesWithTypeAsync(name, arity, cancellationToken);
     }
 }

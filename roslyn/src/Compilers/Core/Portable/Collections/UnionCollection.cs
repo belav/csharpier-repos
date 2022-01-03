@@ -45,7 +45,10 @@ namespace Microsoft.CodeAnalysis
             return new UnionCollection<T>(ImmutableArray.Create(coll1, coll2));
         }
 
-        public static ICollection<T> Create<TOrig>(ImmutableArray<TOrig> collections, Func<TOrig, ICollection<T>> selector)
+        public static ICollection<T> Create<TOrig>(
+            ImmutableArray<TOrig> collections,
+            Func<TOrig, ICollection<T>> selector
+        )
         {
             Debug.Assert(collections.All(c => selector(c).IsReadOnly));
 
@@ -58,7 +61,9 @@ namespace Microsoft.CodeAnalysis
                     return selector(collections[0]);
 
                 default:
-                    return new UnionCollection<T>(ImmutableArray.CreateRange(collections, selector));
+                    return new UnionCollection<T>(
+                        ImmutableArray.CreateRange(collections, selector)
+                    );
             }
         }
 
@@ -118,10 +123,7 @@ namespace Microsoft.CodeAnalysis
 
         public bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public bool Remove(T item)

@@ -23,7 +23,11 @@ namespace System
             return GetLocalTimeZoneFromTzFile();
         }
 
-        private static TimeZoneInfoResult TryGetTimeZoneFromLocalMachineCore(string id, out TimeZoneInfo? value, out Exception? e)
+        private static TimeZoneInfoResult TryGetTimeZoneFromLocalMachineCore(
+            string id,
+            out TimeZoneInfo? value,
+            out Exception? e
+        )
         {
             value = null;
             e = null;
@@ -52,7 +56,10 @@ namespace System
             }
             catch (IOException ex)
             {
-                e = new InvalidTimeZoneException(SR.Format(SR.InvalidTimeZone_InvalidFileData, id, timeZoneFilePath), ex);
+                e = new InvalidTimeZoneException(
+                    SR.Format(SR.InvalidTimeZone_InvalidFileData, id, timeZoneFilePath),
+                    ex
+                );
                 return TimeZoneInfoResult.InvalidTimeZoneException;
             }
 
@@ -60,7 +67,9 @@ namespace System
 
             if (value == null)
             {
-                e = new InvalidTimeZoneException(SR.Format(SR.InvalidTimeZone_InvalidFileData, id, timeZoneFilePath));
+                e = new InvalidTimeZoneException(
+                    SR.Format(SR.InvalidTimeZone_InvalidFileData, id, timeZoneFilePath)
+                );
                 return TimeZoneInfoResult.InvalidTimeZoneException;
             }
 
@@ -79,7 +88,12 @@ namespace System
 
             try
             {
-                using (StreamReader sr = new StreamReader(Path.Combine(GetTimeZoneDirectory(), TimeZoneFileName), Encoding.UTF8))
+                using (
+                    StreamReader sr = new StreamReader(
+                        Path.Combine(GetTimeZoneDirectory(), TimeZoneFileName),
+                        Encoding.UTF8
+                    )
+                )
                 {
                     string? zoneTabFileLine;
                     while ((zoneTabFileLine = sr.ReadLine()) != null)
@@ -91,7 +105,10 @@ namespace System
                             int firstTabIndex = zoneTabFileLine.IndexOf('\t');
                             if (firstTabIndex != -1)
                             {
-                                int secondTabIndex = zoneTabFileLine.IndexOf('\t', firstTabIndex + 1);
+                                int secondTabIndex = zoneTabFileLine.IndexOf(
+                                    '\t',
+                                    firstTabIndex + 1
+                                );
                                 if (secondTabIndex != -1)
                                 {
                                     string timeZoneId;
@@ -162,12 +179,19 @@ namespace System
             return id;
         }
 
-        private static string? GetDirectoryEntryFullPath(ref Interop.Sys.DirectoryEntry dirent, string currentPath)
+        private static string? GetDirectoryEntryFullPath(
+            ref Interop.Sys.DirectoryEntry dirent,
+            string currentPath
+        )
         {
-            ReadOnlySpan<char> direntName = dirent.GetName(stackalloc char[Interop.Sys.DirectoryEntry.NameBufferSize]);
+            ReadOnlySpan<char> direntName = dirent.GetName(
+                stackalloc char[Interop.Sys.DirectoryEntry.NameBufferSize]
+            );
 
-            if ((direntName.Length == 1 && direntName[0] == '.') ||
-                (direntName.Length == 2 && direntName[0] == '.' && direntName[1] == '.'))
+            if (
+                (direntName.Length == 1 && direntName[0] == '.')
+                || (direntName.Length == 2 && direntName[0] == '.' && direntName[1] == '.')
+            )
                 return null;
 
             return Path.Join(currentPath.AsSpan(), direntName);
@@ -176,7 +200,10 @@ namespace System
         /// <summary>
         /// Enumerate files
         /// </summary>
-        private static unsafe void EnumerateFilesRecursively(string path, Predicate<string> condition)
+        private static unsafe void EnumerateFilesRecursively(
+            string path,
+            Predicate<string> condition
+        )
         {
             List<string>? toExplore = null; // List used as a stack
 
@@ -193,16 +220,26 @@ namespace System
                         IntPtr dirHandle = Interop.Sys.OpenDir(currentPath);
                         if (dirHandle == IntPtr.Zero)
                         {
-                            throw Interop.GetExceptionForIoErrno(Interop.Sys.GetLastErrorInfo(), currentPath, isDirectory: true);
+                            throw Interop.GetExceptionForIoErrno(
+                                Interop.Sys.GetLastErrorInfo(),
+                                currentPath,
+                                isDirectory: true
+                            );
                         }
 
                         try
                         {
                             // Read each entry from the enumerator
                             Interop.Sys.DirectoryEntry dirent;
-                            while (Interop.Sys.ReadDirR(dirHandle, dirBufferPtr, bufferSize, &dirent) == 0)
+                            while (
+                                Interop.Sys.ReadDirR(dirHandle, dirBufferPtr, bufferSize, &dirent)
+                                == 0
+                            )
                             {
-                                string? fullPath = GetDirectoryEntryFullPath(ref dirent, currentPath);
+                                string? fullPath = GetDirectoryEntryFullPath(
+                                    ref dirent,
+                                    currentPath
+                                );
                                 if (fullPath == null)
                                     continue;
 
@@ -214,7 +251,10 @@ namespace System
                                     // We know it's a directory.
                                     isDir = true;
                                 }
-                                else if (dirent.InodeType == Interop.Sys.NodeType.DT_LNK || dirent.InodeType == Interop.Sys.NodeType.DT_UNKNOWN)
+                                else if (
+                                    dirent.InodeType == Interop.Sys.NodeType.DT_LNK
+                                    || dirent.InodeType == Interop.Sys.NodeType.DT_UNKNOWN
+                                )
                                 {
                                     // It's a symlink or unknown: stat to it to see if we can resolve it to a directory.
                                     // If we can't (e.g. symlink to a file, broken symlink, etc.), we'll just treat it as a file.
@@ -222,7 +262,9 @@ namespace System
                                     Interop.Sys.FileStatus fileinfo;
                                     if (Interop.Sys.Stat(fullPath, out fileinfo) >= 0)
                                     {
-                                        isDir = (fileinfo.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFDIR;
+                                        isDir =
+                                            (fileinfo.Mode & Interop.Sys.FileTypes.S_IFMT)
+                                            == Interop.Sys.FileTypes.S_IFDIR;
                                     }
                                     else
                                     {
@@ -274,7 +316,14 @@ namespace System
             try
             {
                 // bufferSize == 1 used to avoid unnecessary buffer in FileStream
-                using (SafeFileHandle sfh = File.OpenHandle(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (
+                    SafeFileHandle sfh = File.OpenHandle(
+                        filePath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read
+                    )
+                )
                 {
                     long fileLength = RandomAccess.GetLength(sfh);
                     if (fileLength == rawData.Length)
@@ -326,27 +375,40 @@ namespace System
 
             try
             {
-                EnumerateFilesRecursively(timeZoneDirectory, (string filePath) =>
-                {
-                    // skip the localtime and posixrules file, since they won't give us the correct id
-                    if (!string.Equals(filePath, localtimeFilePath, StringComparison.OrdinalIgnoreCase)
-                        && !string.Equals(filePath, posixrulesFilePath, StringComparison.OrdinalIgnoreCase))
+                EnumerateFilesRecursively(
+                    timeZoneDirectory,
+                    (string filePath) =>
                     {
-                        if (CompareTimeZoneFile(filePath, buffer, rawData))
+                        // skip the localtime and posixrules file, since they won't give us the correct id
+                        if (
+                            !string.Equals(
+                                filePath,
+                                localtimeFilePath,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                            && !string.Equals(
+                                filePath,
+                                posixrulesFilePath,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
-                            // if all bytes are the same, this must be the right tz file
-                            id = filePath;
-
-                            // strip off the root time zone directory
-                            if (id.StartsWith(timeZoneDirectory, StringComparison.Ordinal))
+                            if (CompareTimeZoneFile(filePath, buffer, rawData))
                             {
-                                id = id.Substring(timeZoneDirectory.Length);
+                                // if all bytes are the same, this must be the right tz file
+                                id = filePath;
+
+                                // strip off the root time zone directory
+                                if (id.StartsWith(timeZoneDirectory, StringComparison.Ordinal))
+                                {
+                                    id = id.Substring(timeZoneDirectory.Length);
+                                }
+                                return true;
                             }
-                            return true;
                         }
+                        return false;
                     }
-                    return false;
-                });
+                );
             }
             catch (IOException) { }
             catch (SecurityException) { }
@@ -355,7 +417,11 @@ namespace System
             return id;
         }
 
-        private static bool TryLoadTzFile(string tzFilePath, [NotNullWhen(true)] ref byte[]? rawData, [NotNullWhen(true)] ref string? id)
+        private static bool TryLoadTzFile(
+            string tzFilePath,
+            [NotNullWhen(true)] ref byte[]? rawData,
+            [NotNullWhen(true)] ref string? id
+        )
         {
             if (File.Exists(tzFilePath))
             {
@@ -387,7 +453,10 @@ namespace System
         /// 3. Look for the data in GetTimeZoneDirectory()/localtime.
         /// 4. Use UTC if all else fails.
         /// </summary>
-        private static bool TryGetLocalTzFile([NotNullWhen(true)] out byte[]? rawData, [NotNullWhen(true)] out string? id)
+        private static bool TryGetLocalTzFile(
+            [NotNullWhen(true)] out byte[]? rawData,
+            [NotNullWhen(true)] out string? id
+        )
         {
             rawData = null;
             id = null;
@@ -396,9 +465,12 @@ namespace System
             // If the env var is null, use the localtime file
             if (tzVariable == null)
             {
-                return
-                    TryLoadTzFile("/etc/localtime", ref rawData, ref id) ||
-                    TryLoadTzFile(Path.Combine(GetTimeZoneDirectory(), "localtime"), ref rawData, ref id);
+                return TryLoadTzFile("/etc/localtime", ref rawData, ref id)
+                    || TryLoadTzFile(
+                        Path.Combine(GetTimeZoneDirectory(), "localtime"),
+                        ref rawData,
+                        ref id
+                    );
             }
 
             // If it's empty, use UTC (TryGetLocalTzFile() should return false).
@@ -447,7 +519,9 @@ namespace System
 
         private static string GetTimeZoneDirectory()
         {
-            string? tzDirectory = Environment.GetEnvironmentVariable(TimeZoneDirectoryEnvironmentVariable);
+            string? tzDirectory = Environment.GetEnvironmentVariable(
+                TimeZoneDirectoryEnvironmentVariable
+            );
 
             if (tzDirectory == null)
             {

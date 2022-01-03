@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                             return true;
                         },
                         Logger,
-                        cancellationToken: default);
+                        cancellationToken: default
+                    );
                     Assert.True(response is CompletedBuildResponse);
                 }
             }
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                         return false;
                     },
                     Logger,
-                    cancellationToken: default);
+                    cancellationToken: default
+                );
                 Assert.True(response is CompletedBuildResponse);
             }
 
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     return true;
                 },
                 Logger,
-                cancellationToken: default);
+                cancellationToken: default
+            );
             Assert.True(response is RejectedBuildResponse);
             Assert.True(ran);
         }
@@ -131,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                         return false;
                     },
                     Logger,
-                    cancellationToken: default);
+                    cancellationToken: default
+                );
                 Assert.True(response is RejectedBuildResponse);
             }
 

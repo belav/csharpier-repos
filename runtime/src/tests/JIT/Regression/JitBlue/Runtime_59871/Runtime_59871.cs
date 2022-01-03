@@ -16,10 +16,14 @@ public class Runtime_59871
     {
         switch (Environment.TickCount % 4)
         {
-            case 0: return p._field.DateTime;
-            case 1: return p._field.DateTime;
-            case 2: return p._field.DateTime;
-            case 3: return p._field.DateTime;
+            case 0:
+                return p._field.DateTime;
+            case 1:
+                return p._field.DateTime;
+            case 2:
+                return p._field.DateTime;
+            case 3:
+                return p._field.DateTime;
         }
 
         return p._field.DateTime;

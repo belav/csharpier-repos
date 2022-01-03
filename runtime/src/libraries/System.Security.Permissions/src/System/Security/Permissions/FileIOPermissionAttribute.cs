@@ -4,9 +4,21 @@
 namespace System.Security.Permissions
 {
 #if NET5_0_OR_GREATER
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Assembly,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class FileIOPermissionAttribute : CodeAccessSecurityAttribute
     {
         public FileIOPermissionAttribute(SecurityAction action) : base(action) { }
@@ -21,6 +33,9 @@ namespace System.Security.Permissions
         public string ViewAndModify { get; set; }
         public FileIOPermissionAccess AllFiles { get; set; }
         public FileIOPermissionAccess AllLocalFiles { get; set; }
-        public override IPermission CreatePermission() { return null; }
+        public override IPermission CreatePermission()
+        {
+            return null;
+        }
     }
 }

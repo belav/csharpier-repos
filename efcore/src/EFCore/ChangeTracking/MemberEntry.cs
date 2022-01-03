@@ -94,8 +94,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information.
         /// </remarks>
         /// <value> An entry for the entity that owns this member. </value>
-        public virtual EntityEntry EntityEntry
-            => new(InternalEntry);
+        public virtual EntityEntry EntityEntry => new(InternalEntry);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -104,8 +103,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        InternalEntityEntry IInfrastructure<InternalEntityEntry>.Instance
-            => InternalEntry;
+        InternalEntityEntry IInfrastructure<InternalEntityEntry>.Instance => InternalEntry;
 
         #region Hidden System.Object members
 
@@ -114,8 +112,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string? ToString()
-            => base.ToString();
+        public override string? ToString() => base.ToString();
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -123,16 +120,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <param name="obj">The object to compare with the current object.</param>
         /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
         /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode()
-            => base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
 
         #endregion
     }

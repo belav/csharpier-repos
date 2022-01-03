@@ -22,14 +22,26 @@ public class BringUpTest_ArrayObj
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static int ArrayObj(int i)
     {
-        Dummy[] a = {new Dummy(0), new Dummy(1), new Dummy(2), new Dummy(3), new Dummy(4),
-                     new Dummy(5), new Dummy(6), new Dummy(7), new Dummy(8), new Dummy(9)};
+        Dummy[] a =
+        {
+            new Dummy(0),
+            new Dummy(1),
+            new Dummy(2),
+            new Dummy(3),
+            new Dummy(4),
+            new Dummy(5),
+            new Dummy(6),
+            new Dummy(7),
+            new Dummy(8),
+            new Dummy(9)
+        };
         return a[i].field;
     }
 
     static int Main()
     {
-        if (ArrayObj(1) != 1) return Fail;
+        if (ArrayObj(1) != 1)
+            return Fail;
         return Pass;
     }
 }

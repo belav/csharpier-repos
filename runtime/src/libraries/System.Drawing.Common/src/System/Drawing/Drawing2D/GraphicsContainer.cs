@@ -5,7 +5,8 @@ namespace System.Drawing.Drawing2D
 {
     public sealed class GraphicsContainer : MarshalByRefObject
     {
-        internal GraphicsContainer(int graphicsContainer) => nativeGraphicsContainer = graphicsContainer;
+        internal GraphicsContainer(int graphicsContainer) =>
+            nativeGraphicsContainer = graphicsContainer;
 
         internal int nativeGraphicsContainer;
     }

@@ -5,8 +5,18 @@
 // Many of these types are required by various components used by the C++/CLI compiler to live in mscorlib.
 
 // These types are required to support the C++/CLI compiler's usage of alink for metadata linking.
-[assembly:System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.CompilerServices.AssemblyAttributesGoHere))]
-[assembly:System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.CompilerServices.AssemblyAttributesGoHereS))]
-[assembly:System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.CompilerServices.AssemblyAttributesGoHereM))]
-[assembly:System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.CompilerServices.AssemblyAttributesGoHereSM))]
-[assembly:System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.CompilerServices.SuppressMergeCheckAttribute))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.CompilerServices.AssemblyAttributesGoHere)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.CompilerServices.AssemblyAttributesGoHereS)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.CompilerServices.AssemblyAttributesGoHereM)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.CompilerServices.AssemblyAttributesGoHereSM)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.CompilerServices.SuppressMergeCheckAttribute)
+)]

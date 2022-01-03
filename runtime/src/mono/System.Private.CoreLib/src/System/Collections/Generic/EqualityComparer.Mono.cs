@@ -42,7 +42,10 @@ namespace System.Collections.Generic
 
             if (typeof(IEquatable<T>).IsAssignableFrom(t))
             {
-                return (EqualityComparer<T>)RuntimeType.CreateInstanceForAnotherGenericParameter(typeof(GenericEqualityComparer<>), t);
+                return (EqualityComparer<T>)RuntimeType.CreateInstanceForAnotherGenericParameter(
+                    typeof(GenericEqualityComparer<>),
+                    t
+                );
             }
 
             if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>))
@@ -50,13 +53,19 @@ namespace System.Collections.Generic
                 RuntimeType u = (RuntimeType)t.GetGenericArguments()[0];
                 if (typeof(IEquatable<>).MakeGenericType(u).IsAssignableFrom(u))
                 {
-                    return (EqualityComparer<T>)RuntimeType.CreateInstanceForAnotherGenericParameter(typeof(NullableEqualityComparer<>), u);
+                    return (EqualityComparer<T>)RuntimeType.CreateInstanceForAnotherGenericParameter(
+                        typeof(NullableEqualityComparer<>),
+                        u
+                    );
                 }
             }
 
             if (t.IsEnum)
             {
-                return (EqualityComparer<T>)RuntimeType.CreateInstanceForAnotherGenericParameter(typeof(EnumEqualityComparer<>), t);
+                return (EqualityComparer<T>)RuntimeType.CreateInstanceForAnotherGenericParameter(
+                    typeof(EnumEqualityComparer<>),
+                    t
+                );
             }
 
             return new ObjectEqualityComparer<T>();

@@ -16,9 +16,7 @@ namespace System.Linq.Expressions.Tests
 
     public class C : IEquatable<C>, I
     {
-        void I.M()
-        {
-        }
+        void I.M() { }
 
         public override bool Equals(object o)
         {
@@ -41,13 +39,8 @@ namespace System.Linq.Expressions.Tests
         public int Val;
         public string S;
 
-        public D()
-        {
-        }
-        public D(int val)
-            : this(val, "")
-        {
-        }
+        public D() { }
+        public D(int val) : this(val, "") { }
 
         public D(int val, string s)
         {
@@ -249,9 +242,12 @@ namespace System.Linq.Expressions.Tests
         private static readonly IEnumerable<object[]> Booleans = new[]
         {
 #if FEATURE_COMPILE && FEATURE_INTERPRET
-            new object[] {false},
+            new object[] { false },
 #endif
-            new object[] {true},
+            new object[]
+            {
+                true
+            },
         };
 
         public IEnumerator<object[]> GetEnumerator() => Booleans.GetEnumerator();
@@ -263,14 +259,15 @@ namespace System.Linq.Expressions.Tests
     {
         internal static readonly NoOpVisitor Instance = new NoOpVisitor();
 
-        private NoOpVisitor()
-        {
-        }
+        private NoOpVisitor() { }
     }
 
     public static class Unreadable<T>
     {
-        public static T WriteOnly { set { } }
+        public static T WriteOnly
+        {
+            set { }
+        }
     }
 
     public class GenericClass<T>
@@ -284,9 +281,9 @@ namespace System.Linq.Expressions.Tests
 
     public class NonGenericClass
     {
-        #pragma warning disable 0067
+#pragma warning disable 0067
         public event EventHandler Event;
-        #pragma warning restore 0067
+#pragma warning restore 0067
 
         public void GenericMethod<T>() { }
         public static void StaticMethod() { }
@@ -298,8 +295,14 @@ namespace System.Linq.Expressions.Tests
 
     public class InvalidTypesData : IEnumerable<object[]>
     {
-        private static readonly object[] GenericTypeDefinition = new object[] { typeof(GenericClass<>) };
-        private static readonly object[] ContainsGenericParameters = new object[] { typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>)) };
+        private static readonly object[] GenericTypeDefinition = new object[]
+        {
+            typeof(GenericClass<>)
+        };
+        private static readonly object[] ContainsGenericParameters = new object[]
+        {
+            typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>))
+        };
 
         public IEnumerator<object[]> GetEnumerator()
         {
@@ -312,8 +315,18 @@ namespace System.Linq.Expressions.Tests
 
     public class UnreadableExpressionsData : IEnumerable<object[]>
     {
-        private static readonly object[] Property = new object[] { Expression.Property(null, typeof(Unreadable<bool>), nameof(Unreadable<bool>.WriteOnly)) };
-        private static readonly object[] Indexer = new object[] { Expression.Property(null, typeof(Unreadable<bool>).GetProperty(nameof(Unreadable<bool>.WriteOnly)), new Expression[0]) };
+        private static readonly object[] Property = new object[]
+        {
+            Expression.Property(null, typeof(Unreadable<bool>), nameof(Unreadable<bool>.WriteOnly))
+        };
+        private static readonly object[] Indexer = new object[]
+        {
+            Expression.Property(
+                null,
+                typeof(Unreadable<bool>).GetProperty(nameof(Unreadable<bool>.WriteOnly)),
+                new Expression[0]
+            )
+        };
 
         public IEnumerator<object[]> GetEnumerator()
         {
@@ -329,8 +342,14 @@ namespace System.Linq.Expressions.Tests
 
     public class OpenGenericMethodsData : IEnumerable<object[]>
     {
-        private static readonly object[] GenericClass = new object[] { typeof(GenericClass<>).GetMethod(nameof(GenericClass<string>.Method)) };
-        private static readonly object[] GenericMethod = new object[] { typeof(NonGenericClass).GetMethod(nameof(NonGenericClass.GenericMethod)) };
+        private static readonly object[] GenericClass = new object[]
+        {
+            typeof(GenericClass<>).GetMethod(nameof(GenericClass<string>.Method))
+        };
+        private static readonly object[] GenericMethod = new object[]
+        {
+            typeof(NonGenericClass).GetMethod(nameof(NonGenericClass.GenericMethod))
+        };
 
         public IEnumerator<object[]> GetEnumerator()
         {
@@ -347,24 +366,57 @@ namespace System.Linq.Expressions.Tests
     public struct ValueTypeWithParameterlessConstructor
     {
         public readonly bool ConstructorWasRun;
-        public ValueTypeWithParameterlessConstructor() { ConstructorWasRun = true; }
+        public ValueTypeWithParameterlessConstructor()
+        {
+            ConstructorWasRun = true;
+        }
     }
 
     public struct ValueTypeWithParameterlessConstructorThatThrows
     {
         public readonly object Value;
-        public ValueTypeWithParameterlessConstructorThatThrows() { throw new InvalidOperationException(); }
-        public ValueTypeWithParameterlessConstructorThatThrows(object value) { Value = value; }
+        public ValueTypeWithParameterlessConstructorThatThrows()
+        {
+            throw new InvalidOperationException();
+        }
+        public ValueTypeWithParameterlessConstructorThatThrows(object value)
+        {
+            Value = value;
+        }
     }
 
-    public enum ByteEnum : byte { A = byte.MaxValue }
-    public enum SByteEnum : sbyte { A = sbyte.MaxValue }
-    public enum Int16Enum : short { A = short.MaxValue }
-    public enum UInt16Enum : ushort { A = ushort.MaxValue }
-    public enum Int32Enum : int { A = int.MaxValue }
-    public enum UInt32Enum : uint { A = uint.MaxValue }
-    public enum Int64Enum : long { A = long.MaxValue }
-    public enum UInt64Enum : ulong { A = ulong.MaxValue }
+    public enum ByteEnum : byte
+    {
+        A = byte.MaxValue
+    }
+    public enum SByteEnum : sbyte
+    {
+        A = sbyte.MaxValue
+    }
+    public enum Int16Enum : short
+    {
+        A = short.MaxValue
+    }
+    public enum UInt16Enum : ushort
+    {
+        A = ushort.MaxValue
+    }
+    public enum Int32Enum : int
+    {
+        A = int.MaxValue
+    }
+    public enum UInt32Enum : uint
+    {
+        A = uint.MaxValue
+    }
+    public enum Int64Enum : long
+    {
+        A = long.MaxValue
+    }
+    public enum UInt64Enum : ulong
+    {
+        A = ulong.MaxValue
+    }
 
 #if FEATURE_COMPILE
     public static class NonCSharpTypes
@@ -375,7 +427,9 @@ namespace System.Linq.Expressions.Tests
         private static ModuleBuilder GetModuleBuilder()
         {
             AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
-                new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+                new AssemblyName("Name"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             return assembly.DefineDynamicModule("Name");
         }
 
@@ -385,7 +439,8 @@ namespace System.Linq.Expressions.Tests
             {
                 if (_charEnumType == null)
                 {
-                    EnumBuilder eb = GetModuleBuilder().DefineEnum("CharEnumType", TypeAttributes.Public, typeof(char));
+                    EnumBuilder eb = GetModuleBuilder()
+                        .DefineEnum("CharEnumType", TypeAttributes.Public, typeof(char));
                     eb.DefineLiteral("A", 'A');
                     eb.DefineLiteral("B", 'B');
                     eb.DefineLiteral("C", 'C');
@@ -402,7 +457,8 @@ namespace System.Linq.Expressions.Tests
             {
                 if (_boolEnumType == null)
                 {
-                    EnumBuilder eb = GetModuleBuilder().DefineEnum("BoolEnumType", TypeAttributes.Public, typeof(bool));
+                    EnumBuilder eb = GetModuleBuilder()
+                        .DefineEnum("BoolEnumType", TypeAttributes.Public, typeof(bool));
                     eb.DefineLiteral("False", false);
                     eb.DefineLiteral("True", true);
                     _boolEnumType = eb.CreateTypeInfo();
@@ -441,9 +497,11 @@ namespace System.Linq.Expressions.Tests
         public static readonly Number MinValue = new Number(int.MinValue);
         public static readonly Number MaxValue = new Number(int.MaxValue);
 
-        public static Number operator +(Number l, Number r) => new Number(unchecked(l._value + r._value));
+        public static Number operator +(Number l, Number r) =>
+            new Number(unchecked(l._value + r._value));
         public static Number operator -(Number l, Number r) => new Number(l._value - r._value);
-        public static Number operator *(Number l, Number r) => new Number(unchecked(l._value * r._value));
+        public static Number operator *(Number l, Number r) =>
+            new Number(unchecked(l._value * r._value));
         public static Number operator /(Number l, Number r) => new Number(l._value / r._value);
         public static Number operator %(Number l, Number r) => new Number(l._value % r._value);
 

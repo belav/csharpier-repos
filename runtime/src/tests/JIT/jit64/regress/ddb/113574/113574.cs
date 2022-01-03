@@ -3,8 +3,8 @@
 
 // Bug: JIT compiler generates incorrect native code for certain loops, resulting in incorrect behavior
 //
-// The 64bit JIT generates incorrect code for loops that have loop induction variables 
-// that are close to overflowing (like for (int i = 1; i < int.MaxValue; i++)).  
+// The 64bit JIT generates incorrect code for loops that have loop induction variables
+// that are close to overflowing (like for (int i = 1; i < int.MaxValue; i++)).
 // This can cause the loop to either become an infinite loop or to stop prematurely.
 
 using System;
@@ -71,12 +71,23 @@ internal class LoopTests
     {
         int ret = 100;
 
-        if (!Test1()) { ret = 101; }
-        if (!Test2()) { ret = 101; }
-        if (!Test3()) { ret = 101; }
+        if (!Test1())
+        {
+            ret = 101;
+        }
+        if (!Test2())
+        {
+            ret = 101;
+        }
+        if (!Test3())
+        {
+            ret = 101;
+        }
 
-        if (ret == 101) Console.WriteLine("Test Failed");
-        else Console.WriteLine("Test Passed");
+        if (ret == 101)
+            Console.WriteLine("Test Failed");
+        else
+            Console.WriteLine("Test Passed");
 
         return ret;
     }

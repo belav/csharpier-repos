@@ -36,16 +36,25 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s=>s.InnerSource, s=>s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None);
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None);
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource{ Description = "description" }, OtherInnerSource = new OtherInnerSource{ Title = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBe("description");
@@ -58,8 +67,10 @@ namespace AutoMapper.UnitTests
         {
             public int Id { get; set; }
             public string Name { get; set; }
-            public List<InnerSourceWrapper> InnerSources { get; set; } = new List<InnerSourceWrapper>();
-            public List<OtherInnerSource> OtherInnerSources { get; set; } = new List<OtherInnerSource>();
+            public List<InnerSourceWrapper> InnerSources { get; set; } =
+                new List<InnerSourceWrapper>();
+            public List<OtherInnerSource> OtherInnerSources { get; set; } =
+                new List<OtherInnerSource>();
         }
         class InnerSourceWrapper
         {
@@ -89,17 +100,26 @@ namespace AutoMapper.UnitTests
             public string Author { get; set; }
             public string Publisher { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSources.FirstOrDefault().InnerSource, s => s.OtherInnerSources.FirstOrDefault()).ReverseMap();
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None);
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(
+                            s => s.InnerSources.FirstOrDefault().InnerSource,
+                            s => s.OtherInnerSources.FirstOrDefault()
+                        )
+                        .ReverseMap();
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None);
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
+                }
+            );
         [Fact]
         public static void Should_null_check()
         {
-            Expression<Func<Source, InnerSource>> expression = s => s.InnerSources.FirstOrDefault().InnerSource;
-            var result= expression.Body.NullCheck();
+            Expression<Func<Source, InnerSource>> expression = s =>
+                s.InnerSources.FirstOrDefault().InnerSource;
+            var result = expression.Body.NullCheck();
         }
         [Fact]
         public void Should_flatten()
@@ -107,8 +127,21 @@ namespace AutoMapper.UnitTests
             var source = new Source
             {
                 Name = "name",
-                InnerSources = { new InnerSourceWrapper { InnerSource = new InnerSource { Description = "description", Publisher = "publisher" } } },
-                OtherInnerSources = { new OtherInnerSource { Title = "title", Author = "author" } }
+                InnerSources =
+                {
+                    new InnerSourceWrapper
+                    {
+                        InnerSource = new InnerSource
+                        {
+                            Description = "description",
+                            Publisher = "publisher"
+                        }
+                    }
+                },
+                OtherInnerSources =
+                {
+                    new OtherInnerSource { Title = "title", Author = "author" }
+                }
             };
             var destination = Mapper.Map<Destination>(source);
             var plan = Configuration.BuildExecutionPlan(typeof(Source), typeof(Destination));
@@ -127,7 +160,8 @@ namespace AutoMapper.UnitTests
             public int Id { get; set; }
             public string Name { get; set; }
             public List<InnerSource> InnerSources { get; set; } = new List<InnerSource>();
-            public List<OtherInnerSource> OtherInnerSources { get; set; } = new List<OtherInnerSource>();
+            public List<OtherInnerSource> OtherInnerSources { get; set; } =
+                new List<OtherInnerSource>();
         }
         class InnerSource
         {
@@ -153,20 +187,34 @@ namespace AutoMapper.UnitTests
             public string Author { get; set; }
             public string Publisher { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSources.FirstOrDefault(), s => s.OtherInnerSources.FirstOrDefault()).ReverseMap();
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None);
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(
+                            s => s.InnerSources.FirstOrDefault(),
+                            s => s.OtherInnerSources.FirstOrDefault()
+                        )
+                        .ReverseMap();
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None);
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
             var source = new Source
             {
                 Name = "name",
-                InnerSources = { new InnerSource { Description = "description", Publisher = "publisher" } },
-                OtherInnerSources = { new OtherInnerSource { Title = "title", Author = "author" } }
+                InnerSources =
+                {
+                    new InnerSource { Description = "description", Publisher = "publisher" }
+                },
+                OtherInnerSources =
+                {
+                    new OtherInnerSource { Title = "title", Author = "author" }
+                }
             };
             var destination = Mapper.Map<Destination>(source);
             var plan = Configuration.BuildExecutionPlan(typeof(Source), typeof(Destination));
@@ -185,7 +233,8 @@ namespace AutoMapper.UnitTests
             public int Id { get; set; }
             public string Name { get; set; }
             public List<InnerSource> InnerSources { get; set; } = new List<InnerSource>();
-            public List<OtherInnerSource> OtherInnerSources { get; set; } = new List<OtherInnerSource>();
+            public List<OtherInnerSource> OtherInnerSources { get; set; } =
+                new List<OtherInnerSource>();
         }
         class InnerSource
         {
@@ -211,16 +260,31 @@ namespace AutoMapper.UnitTests
             public string Author { get; set; }
             public string Publisher { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSources.FirstOrDefault(), s => s.OtherInnerSources.FirstOrDefault()).ReverseMap();
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ReverseMap();
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(
+                            s => s.InnerSources.FirstOrDefault(),
+                            s => s.OtherInnerSources.FirstOrDefault()
+                        )
+                        .ReverseMap();
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None).ReverseMap();
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
+                }
+            );
         [Fact]
         public void Should_unflatten()
         {
-            var source = Mapper.Map<Source>(new Destination { Description = "description", Name = "name", Title = "title" });
+            var source = Mapper.Map<Source>(
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
+            );
             source.Name.ShouldBe("name");
         }
     }
@@ -257,20 +321,33 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource.NestedInnerSource, s => s.OtherInnerSource.NestedOtherInnerSource);
-            cfg.CreateMap<NestedInnerSource, Destination>(MemberList.None);
-            cfg.CreateMap<NestedOtherInnerSource, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(
+                            s => s.InnerSource.NestedInnerSource,
+                            s => s.OtherInnerSource.NestedOtherInnerSource
+                        );
+                    cfg.CreateMap<NestedInnerSource, Destination>(MemberList.None);
+                    cfg.CreateMap<NestedOtherInnerSource, Destination>(MemberList.None);
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
             var source = new Source
             {
                 Name = "name",
-                InnerSource = new InnerSource { NestedInnerSource = new NestedInnerSource { Description = "description" } },
-                OtherInnerSource = new OtherInnerSource { NestedOtherInnerSource = new NestedOtherInnerSource { Title = "title" } }
+                InnerSource = new InnerSource
+                {
+                    NestedInnerSource = new NestedInnerSource { Description = "description" }
+                },
+                OtherInnerSource = new OtherInnerSource
+                {
+                    NestedOtherInnerSource = new NestedOtherInnerSource { Title = "title" }
+                }
             };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
@@ -304,16 +381,27 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForMember(d=>d.Description, o=>o.MapFrom(s=>s.Description1));
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForMember(d=>d.Title, o=>o.MapFrom(s=>s.Title1));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Description, o => o.MapFrom(s => s.Description1));
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Title, o => o.MapFrom(s => s.Title1));
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description1 = "description" }, OtherInnerSource = new OtherInnerSource { Title1 = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description1 = "description" },
+                OtherInnerSource = new OtherInnerSource { Title1 = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBe("description");
@@ -346,12 +434,18 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForMember(d => d.Description, o => o.NullSubstitute("description"));
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForMember(d=>d.Title, o => o.NullSubstitute("title"));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Description, o => o.NullSubstitute("description"));
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Title, o => o.NullSubstitute("title"));
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
@@ -388,16 +482,27 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForMember(d => d.Description, o => o.MapFrom((s, d) => s.Description1));
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.Title, o => o.MapFrom((s, d) => s.Title1));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Description, o => o.MapFrom((s, d) => s.Description1));
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Title, o => o.MapFrom((s, d) => s.Title1));
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description1 = "description" }, OtherInnerSource = new OtherInnerSource { Title1 = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description1 = "description" },
+                OtherInnerSource = new OtherInnerSource { Title1 = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBe("description");
@@ -430,16 +535,27 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForMember(d => d.Description, o => o.MapFrom<DescriptionResolver>());
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.Title, o => o.MapFrom<TitleResolver>());
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Description, o => o.MapFrom<DescriptionResolver>());
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Title, o => o.MapFrom<TitleResolver>());
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description1 = "description" }, OtherInnerSource = new OtherInnerSource { Title1 = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description1 = "description" },
+                OtherInnerSource = new OtherInnerSource { Title1 = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBe("description");
@@ -448,12 +564,22 @@ namespace AutoMapper.UnitTests
 
         private class DescriptionResolver : IValueResolver<InnerSource, Destination, string>
         {
-            public string Resolve(InnerSource source, Destination destination, string destMember, ResolutionContext context) => source.Description1;
+            public string Resolve(
+                InnerSource source,
+                Destination destination,
+                string destMember,
+                ResolutionContext context
+            ) => source.Description1;
         }
 
         private class TitleResolver : IValueResolver<OtherInnerSource, Destination, string>
         {
-            public string Resolve(OtherInnerSource source, Destination destination, string destMember, ResolutionContext context) => source.Title1;
+            public string Resolve(
+                OtherInnerSource source,
+                Destination destination,
+                string destMember,
+                ResolutionContext context
+            ) => source.Title1;
         }
     }
 
@@ -482,30 +608,58 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForMember(d => d.Description, o => o.MapFrom<DescriptionResolver,string>(s=>s.Description1));
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.Title, o => o.MapFrom<TitleResolver,string>("Title1"));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .ForMember(
+                            d => d.Description,
+                            o => o.MapFrom<DescriptionResolver, string>(s => s.Description1)
+                        );
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Title, o => o.MapFrom<TitleResolver, string>("Title1"));
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description1 = "description" }, OtherInnerSource = new OtherInnerSource { Title1 = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description1 = "description" },
+                OtherInnerSource = new OtherInnerSource { Title1 = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBe("description");
             destination.Title.ShouldBe("title");
         }
 
-        private class DescriptionResolver : IMemberValueResolver<InnerSource, Destination, string, string>
+        private class DescriptionResolver
+            : IMemberValueResolver<InnerSource, Destination, string, string>
         {
-            public string Resolve(InnerSource source, Destination destination, string sourceMember, string destMember, ResolutionContext context) => sourceMember;
+            public string Resolve(
+                InnerSource source,
+                Destination destination,
+                string sourceMember,
+                string destMember,
+                ResolutionContext context
+            ) => sourceMember;
         }
 
-        private class TitleResolver : IMemberValueResolver<OtherInnerSource, Destination, string, string>
+        private class TitleResolver
+            : IMemberValueResolver<OtherInnerSource, Destination, string, string>
         {
-            public string Resolve(OtherInnerSource source, Destination destination, string sourceMember, string destMember, ResolutionContext context) => sourceMember;
+            public string Resolve(
+                OtherInnerSource source,
+                Destination destination,
+                string sourceMember,
+                string destMember,
+                ResolutionContext context
+            ) => sourceMember;
         }
     }
     public class IncludeMembersWithValueConverter : AutoMapperSpecBase
@@ -533,16 +687,33 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForMember(d => d.Description, o => o.ConvertUsing<ValueConverter, string>(s => s.Description1));
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.Title, o => o.ConvertUsing<ValueConverter, string>("Title1"));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .ForMember(
+                            d => d.Description,
+                            o => o.ConvertUsing<ValueConverter, string>(s => s.Description1)
+                        );
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .ForMember(
+                            d => d.Title,
+                            o => o.ConvertUsing<ValueConverter, string>("Title1")
+                        );
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description1 = "description" }, OtherInnerSource = new OtherInnerSource { Title1 = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description1 = "description" },
+                OtherInnerSource = new OtherInnerSource { Title1 = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBe("description");
@@ -580,16 +751,30 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForMember(d => d.Description, o => o.Condition((s, d, sm, dm, c) => false));
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.Description, o => o.Condition((s, d, sm, dm, c) => true));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .ForMember(
+                            d => d.Description,
+                            o => o.Condition((s, d, sm, dm, c) => false)
+                        );
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Description, o => o.Condition((s, d, sm, dm, c) => true));
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description = "description" }, OtherInnerSource = new OtherInnerSource { Title = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBeNull();
@@ -621,16 +806,27 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForMember(d => d.Description, o => o.PreCondition((s, d, c) => false));
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.Description, o => o.PreCondition((s, d, c) => true));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Description, o => o.PreCondition((s, d, c) => false));
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Description, o => o.PreCondition((s, d, c) => true));
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description = "description" }, OtherInnerSource = new OtherInnerSource { Title = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBeNull();
@@ -665,16 +861,27 @@ namespace AutoMapper.UnitTests
             public string Title { get; set; }
             public Destination Parent { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).IncludeMembers(s=>s.Parent);
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).IncludeMembers(s=>s.Parent);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .IncludeMembers(s => s.Parent);
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .IncludeMembers(s => s.Parent);
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description = "description" }, OtherInnerSource = new OtherInnerSource { Title = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             source.InnerSource.Parent = source;
             source.OtherInnerSource.Parent = source;
             var destination = Mapper.Map<Destination>(source);
@@ -709,16 +916,28 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource).ReverseMap();
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ReverseMap();
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource)
+                        .ReverseMap();
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None).ReverseMap();
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
+                }
+            );
         [Fact]
         public void Should_unflatten()
         {
-            var source = Mapper.Map<Source>(new Destination { Description = "description", Name = "name", Title = "title" });
+            var source = Mapper.Map<Source>(
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
+            );
             source.Name.ShouldBe("name");
             source.InnerSource.Name.ShouldBe("name");
             source.OtherInnerSource.Name.ShouldBe("name");
@@ -752,18 +971,30 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource).ReverseMap()
-                .ForMember(d=>d.InnerSource, o=>o.Ignore())
-                .ForMember(d=>d.OtherInnerSource, o=>o.Ignore());
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None);
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource)
+                        .ReverseMap()
+                        .ForMember(d => d.InnerSource, o => o.Ignore())
+                        .ForMember(d => d.OtherInnerSource, o => o.Ignore());
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None);
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
+                }
+            );
         [Fact]
         public void Should_unflatten()
         {
-            var source = Mapper.Map<Source>(new Destination { Description = "description", Name = "name", Title = "title" });
+            var source = Mapper.Map<Source>(
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
+            );
             source.Name.ShouldBe("name");
             source.InnerSource.ShouldBeNull();
             source.OtherInnerSource.ShouldBeNull();
@@ -795,19 +1026,27 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Destination, Source>()
-                .ForMember(d => d.InnerSource, o => o.MapFrom(s => s))
-                .ForMember(d => d.OtherInnerSource, o => o.MapFrom(s => s))
-                .ReverseMap();
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ReverseMap();
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Destination, Source>()
+                        .ForMember(d => d.InnerSource, o => o.MapFrom(s => s))
+                        .ForMember(d => d.OtherInnerSource, o => o.MapFrom(s => s))
+                        .ReverseMap();
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None).ReverseMap();
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description = "description" }, OtherInnerSource = new OtherInnerSource { Title = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBe("description");
@@ -839,20 +1078,28 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Destination, Source>(MemberList.None)
-                .ForMember(d => d.InnerSource, o => o.MapFrom(s => s))
-                .ForMember(d => d.OtherInnerSource, o => o.MapFrom(s => s))
-                .ReverseMap()
-                .IncludeMembers();
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ReverseMap();
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Destination, Source>(MemberList.None)
+                        .ForMember(d => d.InnerSource, o => o.MapFrom(s => s))
+                        .ForMember(d => d.OtherInnerSource, o => o.MapFrom(s => s))
+                        .ReverseMap()
+                        .IncludeMembers();
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None).ReverseMap();
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description = "description" }, OtherInnerSource = new OtherInnerSource { Title = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBeNull();
@@ -884,17 +1131,29 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        bool afterMap, beforeMap;
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).AfterMap((s,d)=>afterMap=true);
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).BeforeMap((s, d, c) => beforeMap = true);
-        });
+        bool afterMap,
+            beforeMap;
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .AfterMap((s, d) => afterMap = true);
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .BeforeMap((s, d, c) => beforeMap = true);
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description = "description" }, OtherInnerSource = new OtherInnerSource { Title = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBe("description");
@@ -933,24 +1192,41 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForPath(d=>d.InnerDestination.Description, o=>
-            {
-                o.MapFrom(s => s.Description);
-                o.Condition(c => true);
-            });
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForPath(d=>d.InnerDestination.Title, o=>
-            {
-                o.MapFrom(s => s.Title);
-                o.Condition(c => true);
-            });
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .ForPath(
+                            d => d.InnerDestination.Description,
+                            o =>
+                            {
+                                o.MapFrom(s => s.Description);
+                                o.Condition(c => true);
+                            }
+                        );
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .ForPath(
+                            d => d.InnerDestination.Title,
+                            o =>
+                            {
+                                o.MapFrom(s => s.Title);
+                                o.Condition(c => true);
+                            }
+                        );
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description = "description" }, OtherInnerSource = new OtherInnerSource { Title = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.InnerDestination.Description.ShouldBe("description");
@@ -982,16 +1258,30 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource).AddTransform<string>(s => s + "Main");
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForMember(d=>d.Description, o=>o.AddTransform(s=>s+"Extra")).AddTransform<string>(s => s + "Ex");
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.Title, o => o.AddTransform(s => s + "Extra")).AddTransform<string>(s => s + "Ex");
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource)
+                        .AddTransform<string>(s => s + "Main");
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Description, o => o.AddTransform(s => s + "Extra"))
+                        .AddTransform<string>(s => s + "Ex");
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Title, o => o.AddTransform(s => s + "Extra"))
+                        .AddTransform<string>(s => s + "Ex");
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description = "description" }, OtherInnerSource = new OtherInnerSource { Title = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("nameMain");
             destination.Description.ShouldBe("descriptionExtraExMain");
@@ -1023,16 +1313,27 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForMember(d=>d.Description, o=>o.AddTransform(s=>s+"Ex"));
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.Title, o => o.AddTransform(s => s + "Ex"));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Description, o => o.AddTransform(s => s + "Ex"));
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None)
+                        .ForMember(d => d.Title, o => o.AddTransform(s => s + "Ex"));
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source { Name = "name", InnerSource = new InnerSource { Description = "description" }, OtherInnerSource = new OtherInnerSource { Title = "title" } };
+            var source = new Source
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBe("descriptionEx");
@@ -1064,16 +1365,25 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None).IncludeMembers("InnerSource", "OtherInnerSource");
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None);
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None)
+                        .IncludeMembers("InnerSource", "OtherInnerSource");
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None);
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source<InnerSource, OtherInnerSource> { Name = "name", InnerSource = new InnerSource { Description = "description" }, OtherInnerSource = new OtherInnerSource { Title = "title" } };
+            var source = new Source<InnerSource, OtherInnerSource>
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBe("description");
@@ -1098,10 +1408,16 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_throw()
         {
-            new MapperConfiguration(cfg =>
-            {
-                Assert.Throws<ArgumentOutOfRangeException>(() => cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None).IncludeMembers("dInnerSource", "fOtherInnerSource"));
-            });
+            new MapperConfiguration(
+                cfg =>
+                {
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () =>
+                            cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None)
+                                .IncludeMembers("dInnerSource", "fOtherInnerSource")
+                    );
+                }
+            );
         }
     }
 
@@ -1130,16 +1446,28 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None).IncludeMembers("InnerSource", "OtherInnerSource").ReverseMap();
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ReverseMap();
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None)
+                        .IncludeMembers("InnerSource", "OtherInnerSource")
+                        .ReverseMap();
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None).ReverseMap();
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ReverseMap();
+                }
+            );
         [Fact]
         public void Should_unflatten()
         {
-            var source = Mapper.Map<Source<InnerSource, OtherInnerSource>>(new Destination { Description = "description", Name = "name", Title = "title" });
+            var source = Mapper.Map<Source<InnerSource, OtherInnerSource>>(
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
+            );
             source.Name.ShouldBe("name");
             source.InnerSource.Name.ShouldBe("name");
             source.OtherInnerSource.Name.ShouldBe("name");
@@ -1173,18 +1501,30 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None).IncludeMembers("InnerSource", "OtherInnerSource").ReverseMap()
-                .ForMember("InnerSource", o=>o.Ignore())
-                .ForMember("OtherInnerSource", o=>o.Ignore());
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None);
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None)
+                        .IncludeMembers("InnerSource", "OtherInnerSource")
+                        .ReverseMap()
+                        .ForMember("InnerSource", o => o.Ignore())
+                        .ForMember("OtherInnerSource", o => o.Ignore());
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None);
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
+                }
+            );
         [Fact]
         public void Should_unflatten()
         {
-            var source = Mapper.Map<Source<InnerSource, OtherInnerSource>>(new Destination { Description = "description", Name = "name", Title = "title" });
+            var source = Mapper.Map<Source<InnerSource, OtherInnerSource>>(
+                new Destination
+                {
+                    Description = "description",
+                    Name = "name",
+                    Title = "title"
+                }
+            );
             source.Name.ShouldBe("name");
             source.InnerSource.ShouldBeNull();
             source.OtherInnerSource.ShouldBeNull();
@@ -1215,19 +1555,27 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap(typeof(Destination), typeof(Source<,>))
-                .ForMember("InnerSource", o => o.MapFrom(s => s))
-                .ForMember("OtherInnerSource", o => o.MapFrom(s => s))
-                .ReverseMap();
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None);
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(Destination), typeof(Source<,>))
+                        .ForMember("InnerSource", o => o.MapFrom(s => s))
+                        .ForMember("OtherInnerSource", o => o.MapFrom(s => s))
+                        .ReverseMap();
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None);
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source<InnerSource, OtherInnerSource> { Name = "name", InnerSource = new InnerSource { Description = "description" }, OtherInnerSource = new OtherInnerSource { Title = "title" } };
+            var source = new Source<InnerSource, OtherInnerSource>
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBe("description");
@@ -1259,20 +1607,28 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap(typeof(Destination), typeof(Source<,>))
-                .ForMember("InnerSource", o => o.MapFrom(s => s))
-                .ForMember("OtherInnerSource", o => o.MapFrom(s => s))
-                .ReverseMap()
-                .IncludeMembers();
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None);
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(Destination), typeof(Source<,>))
+                        .ForMember("InnerSource", o => o.MapFrom(s => s))
+                        .ForMember("OtherInnerSource", o => o.MapFrom(s => s))
+                        .ReverseMap()
+                        .IncludeMembers();
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None);
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
+                }
+            );
         [Fact]
         public void Should_flatten()
         {
-            var source = new Source<InnerSource, OtherInnerSource> { Name = "name", InnerSource = new InnerSource { Description = "description" }, OtherInnerSource = new OtherInnerSource { Title = "title" } };
+            var source = new Source<InnerSource, OtherInnerSource>
+            {
+                Name = "name",
+                InnerSource = new InnerSource { Description = "description" },
+                OtherInnerSource = new OtherInnerSource { Title = "title" }
+            };
             var destination = Mapper.Map<Destination>(source);
             destination.Name.ShouldBe("name");
             destination.Description.ShouldBeNull();
@@ -1304,12 +1660,16 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>(MemberList.Source).IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None);
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>(MemberList.Source)
+                        .IncludeMembers(s => s.InnerSource, s => s.OtherInnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None);
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
+                }
+            );
     }
     public class IncludeMembersWithGenericsSourceValidation : AutoMapperSpecBase
     {
@@ -1336,12 +1696,16 @@ namespace AutoMapper.UnitTests
             public string Description { get; set; }
             public string Title { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.Source).IncludeMembers("InnerSource", "OtherInnerSource");
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None);
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.Source)
+                        .IncludeMembers("InnerSource", "OtherInnerSource");
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None);
+                    cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
+                }
+            );
     }
     public class IncludeMembersWithInclude : AutoMapperSpecBase
     {
@@ -1361,14 +1725,31 @@ namespace AutoMapper.UnitTests
         {
             public string FullName { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<SourceBase, Destination>().ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FirstName + " " + src.LastName)).IncludeAllDerived();
-            cfg.CreateMap<ParentOfSource, Destination>().IncludeMembers(src => src.InnerSource);
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<SourceBase, Destination>()
+                        .ForMember(
+                            dest => dest.FullName,
+                            opt => opt.MapFrom(src => src.FirstName + " " + src.LastName)
+                        )
+                        .IncludeAllDerived();
+                    cfg.CreateMap<ParentOfSource, Destination>()
+                        .IncludeMembers(src => src.InnerSource);
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
         [Fact]
-        public void Should_inherit_configuration() => Mapper.Map<Destination>(new ParentOfSource { InnerSource = new Source { FirstName = "first", LastName = "last" } }).FullName.ShouldBe("first last");
+        public void Should_inherit_configuration() =>
+            Mapper
+                .Map<Destination>(
+                    new ParentOfSource
+                    {
+                        InnerSource = new Source { FirstName = "first", LastName = "last" }
+                    }
+                )
+                .FullName.ShouldBe("first last");
     }
     public class IncludeMembersWithIncludeDifferentOrder : AutoMapperSpecBase
     {
@@ -1388,14 +1769,31 @@ namespace AutoMapper.UnitTests
         {
             public string FullName { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<SourceBase, Destination>().ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FirstName + " " + src.LastName)).IncludeAllDerived();
-            cfg.CreateMap<Source, Destination>();
-            cfg.CreateMap<ParentOfSource, Destination>().IncludeMembers(src => src.InnerSource);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<SourceBase, Destination>()
+                        .ForMember(
+                            dest => dest.FullName,
+                            opt => opt.MapFrom(src => src.FirstName + " " + src.LastName)
+                        )
+                        .IncludeAllDerived();
+                    cfg.CreateMap<Source, Destination>();
+                    cfg.CreateMap<ParentOfSource, Destination>()
+                        .IncludeMembers(src => src.InnerSource);
+                }
+            );
         [Fact]
-        public void Should_inherit_configuration() => Mapper.Map<Destination>(new ParentOfSource { InnerSource = new Source { FirstName = "first", LastName = "last" } }).FullName.ShouldBe("first last");
+        public void Should_inherit_configuration() =>
+            Mapper
+                .Map<Destination>(
+                    new ParentOfSource
+                    {
+                        InnerSource = new Source { FirstName = "first", LastName = "last" }
+                    }
+                )
+                .FullName.ShouldBe("first last");
     }
     public class IncludeMembersWithIncludeBase : AutoMapperSpecBase
     {
@@ -1421,14 +1819,27 @@ namespace AutoMapper.UnitTests
         {
             public string CreatedBy { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg=>
-        {
-            cfg.CreateMap<Customer, CustomerDtoBase>().IncludeMembers(x => x.Address) .ForMember(m => m.Id, o => o.Ignore());
-            cfg.CreateMap<Address, CustomerDtoBase>(MemberList.None).ForMember(m => m.AddressLine1, o => o.MapFrom(x => x.Line1));
-            cfg.CreateMap<Customer, CreateCustomerDto>().IncludeBase<Customer, CustomerDtoBase>().ForMember(m => m.CreatedBy, o => o.Ignore());
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Customer, CustomerDtoBase>()
+                        .IncludeMembers(x => x.Address)
+                        .ForMember(m => m.Id, o => o.Ignore());
+                    cfg.CreateMap<Address, CustomerDtoBase>(MemberList.None)
+                        .ForMember(m => m.AddressLine1, o => o.MapFrom(x => x.Line1));
+                    cfg.CreateMap<Customer, CreateCustomerDto>()
+                        .IncludeBase<Customer, CustomerDtoBase>()
+                        .ForMember(m => m.CreatedBy, o => o.Ignore());
+                }
+            );
         [Fact]
-        public void Should_inherit_IncludeMembers() => Mapper.Map<CreateCustomerDto>(new Customer { Address = new Address { Postcode = "Postcode" } }).Postcode.ShouldBe("Postcode");
+        public void Should_inherit_IncludeMembers() =>
+            Mapper
+                .Map<CreateCustomerDto>(
+                    new Customer { Address = new Address { Postcode = "Postcode" } }
+                )
+                .Postcode.ShouldBe("Postcode");
     }
     public class IncludeMembersWithIncludeBaseOverride : AutoMapperSpecBase
     {
@@ -1455,15 +1866,30 @@ namespace AutoMapper.UnitTests
         {
             public string CreatedBy { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Customer, CustomerDtoBase>().IncludeMembers(x => x.Address).ForMember(m => m.Id, o => o.Ignore());
-            cfg.CreateMap<Address, CustomerDtoBase>(MemberList.None).ForMember(m => m.AddressLine1, o => o.MapFrom(x => x.Line1));
-            cfg.CreateMap<Address, CreateCustomerDto>(MemberList.None).IncludeBase<Address, CustomerDtoBase>();
-            cfg.CreateMap<Customer, CreateCustomerDto>().IncludeMembers(s => s.NewAddress).IncludeBase<Customer, CustomerDtoBase>().ForMember(m => m.CreatedBy, o => o.Ignore());
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Customer, CustomerDtoBase>()
+                        .IncludeMembers(x => x.Address)
+                        .ForMember(m => m.Id, o => o.Ignore());
+                    cfg.CreateMap<Address, CustomerDtoBase>(MemberList.None)
+                        .ForMember(m => m.AddressLine1, o => o.MapFrom(x => x.Line1));
+                    cfg.CreateMap<Address, CreateCustomerDto>(MemberList.None)
+                        .IncludeBase<Address, CustomerDtoBase>();
+                    cfg.CreateMap<Customer, CreateCustomerDto>()
+                        .IncludeMembers(s => s.NewAddress)
+                        .IncludeBase<Customer, CustomerDtoBase>()
+                        .ForMember(m => m.CreatedBy, o => o.Ignore());
+                }
+            );
         [Fact]
-        public void Should_override_IncludeMembers() => Mapper.Map<CreateCustomerDto>(new Customer { NewAddress = new Address { Postcode = "Postcode" } }).Postcode.ShouldBe("Postcode");
+        public void Should_override_IncludeMembers() =>
+            Mapper
+                .Map<CreateCustomerDto>(
+                    new Customer { NewAddress = new Address { Postcode = "Postcode" } }
+                )
+                .Postcode.ShouldBe("Postcode");
     }
     public class IncludeMembersWithIncludeBaseOverrideMapFrom : AutoMapperSpecBase
     {
@@ -1489,17 +1915,26 @@ namespace AutoMapper.UnitTests
         {
             public string CreatedBy { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Customer, CustomerDtoBase>().IncludeMembers(x => x.Address).ForMember(m => m.Id, o => o.Ignore());
-            cfg.CreateMap<Address, CustomerDtoBase>(MemberList.None).ForMember(m => m.AddressLine1, o => o.MapFrom(x => x.Line1));
-            cfg.CreateMap<Customer, CreateCustomerDto>()
-                .IncludeBase<Customer, CustomerDtoBase>()
-                .ForMember(d=>d.Postcode, o=>o.MapFrom((s, d)=>s.Name))
-                .ForMember(m => m.CreatedBy, o => o.Ignore());
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Customer, CustomerDtoBase>()
+                        .IncludeMembers(x => x.Address)
+                        .ForMember(m => m.Id, o => o.Ignore());
+                    cfg.CreateMap<Address, CustomerDtoBase>(MemberList.None)
+                        .ForMember(m => m.AddressLine1, o => o.MapFrom(x => x.Line1));
+                    cfg.CreateMap<Customer, CreateCustomerDto>()
+                        .IncludeBase<Customer, CustomerDtoBase>()
+                        .ForMember(d => d.Postcode, o => o.MapFrom((s, d) => s.Name))
+                        .ForMember(m => m.CreatedBy, o => o.Ignore());
+                }
+            );
         [Fact]
-        public void Should_override_IncludeMembers() => Mapper.Map<CreateCustomerDto>(new Customer { Name = "Postcode", Address = new Address() }).Postcode.ShouldBe("Postcode");
+        public void Should_override_IncludeMembers() =>
+            Mapper
+                .Map<CreateCustomerDto>(new Customer { Name = "Postcode", Address = new Address() })
+                .Postcode.ShouldBe("Postcode");
     }
     public class IncludeMembersWithIncludeBaseOverrideConvention : AutoMapperSpecBase
     {
@@ -1529,14 +1964,27 @@ namespace AutoMapper.UnitTests
         {
             public string CreatedBy { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Customer, CustomerDtoBase>().IncludeMembers(x => x.Address).ForMember(m => m.Id, o => o.Ignore());
-            cfg.CreateMap<Address, CustomerDtoBase>(MemberList.None).ForMember(m => m.AddressLine1, o => o.MapFrom(x => x.Line1));
-            cfg.CreateMap<NewCustomer, CreateCustomerDto>().IncludeBase<Customer, CustomerDtoBase>().ForMember(m => m.CreatedBy, o => o.Ignore());
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Customer, CustomerDtoBase>()
+                        .IncludeMembers(x => x.Address)
+                        .ForMember(m => m.Id, o => o.Ignore());
+                    cfg.CreateMap<Address, CustomerDtoBase>(MemberList.None)
+                        .ForMember(m => m.AddressLine1, o => o.MapFrom(x => x.Line1));
+                    cfg.CreateMap<NewCustomer, CreateCustomerDto>()
+                        .IncludeBase<Customer, CustomerDtoBase>()
+                        .ForMember(m => m.CreatedBy, o => o.Ignore());
+                }
+            );
         [Fact]
-        public void Should_override_IncludeMembers() => Mapper.Map<CreateCustomerDto>(new NewCustomer { Postcode = "Postcode", Address = new Address() }).Postcode.ShouldBe("Postcode");
+        public void Should_override_IncludeMembers() =>
+            Mapper
+                .Map<CreateCustomerDto>(
+                    new NewCustomer { Postcode = "Postcode", Address = new Address() }
+                )
+                .Postcode.ShouldBe("Postcode");
     }
     public class IncludeMembersWithValueTypeValidation : AutoMapperSpecBase
     {
@@ -1552,11 +2000,14 @@ namespace AutoMapper.UnitTests
         {
             public string Name { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource);
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSource);
+                    cfg.CreateMap<InnerSource, Destination>(MemberList.None);
+                }
+            );
     }
     public class CascadedIncludeMembers : AutoMapperSpecBase
     {
@@ -1580,16 +2031,30 @@ namespace AutoMapper.UnitTests
             public long TheField;
             public long Level1Field;
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.FieldLevel1);
-            cfg.CreateMap<Level1, Destination>(MemberList.None).IncludeMembers(s => s.FieldLevel2);
-            cfg.CreateMap<Level2, Destination>(MemberList.None);
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.FieldLevel1);
+                    cfg.CreateMap<Level1, Destination>(MemberList.None)
+                        .IncludeMembers(s => s.FieldLevel2);
+                    cfg.CreateMap<Level2, Destination>(MemberList.None);
+                }
+            );
         [Fact]
         public void Should_work()
         {
-            var dest = Map<Destination>(new Source { Id = 1, FieldLevel1 = new Level1 { Level1Field = 3, FieldLevel2 = new Level2 { TheField = 2 } } });
+            var dest = Map<Destination>(
+                new Source
+                {
+                    Id = 1,
+                    FieldLevel1 = new Level1
+                    {
+                        Level1Field = 3,
+                        FieldLevel2 = new Level2 { TheField = 2 }
+                    }
+                }
+            );
             dest.Id.ShouldBe(1);
             dest.TheField.ShouldBe(2);
             dest.Level1Field.ShouldBe(3);
@@ -1617,16 +2082,31 @@ namespace AutoMapper.UnitTests
             public long TheField;
             public long Level1Field;
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.FieldLevel1);
-            cfg.CreateMap<Level1, Destination>(MemberList.None).IncludeMembers(s => s.FieldLevel2);
-            cfg.CreateMap<Level2, Destination>(MemberList.None).ForPath(d => d.TheField, o => o.MapFrom(s => s.TheField));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.FieldLevel1);
+                    cfg.CreateMap<Level1, Destination>(MemberList.None)
+                        .IncludeMembers(s => s.FieldLevel2);
+                    cfg.CreateMap<Level2, Destination>(MemberList.None)
+                        .ForPath(d => d.TheField, o => o.MapFrom(s => s.TheField));
+                }
+            );
         [Fact]
         public void Should_work()
         {
-            var dest = Map<Destination>(new Source { Id = 1, FieldLevel1 = new Level1 { Level1Field = 3, FieldLevel2 = new Level2 { TheField = 2 } } });
+            var dest = Map<Destination>(
+                new Source
+                {
+                    Id = 1,
+                    FieldLevel1 = new Level1
+                    {
+                        Level1Field = 3,
+                        FieldLevel2 = new Level2 { TheField = 2 }
+                    }
+                }
+            );
             dest.Id.ShouldBe(1);
             dest.TheField.ShouldBe(2);
             dest.Level1Field.ShouldBe(3);
@@ -1658,14 +2138,23 @@ namespace AutoMapper.UnitTests
             public string Signature { get; set; }
             public DateTime Expired { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<MetaData, Response>(MemberList.None);
-            cfg.CreateMap<Item, Response>().IncludeMembers(src => src.MetaData);
-            cfg.CreateMap<Item, SignedResponse>().IncludeBase<Item, Response>().ForMember(dest => dest.Expired, opt => opt.Ignore());
-            cfg.CreateMap<ExpiredItem, SignedResponse>().IncludeBase<Item, SignedResponse>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<MetaData, Response>(MemberList.None);
+                    cfg.CreateMap<Item, Response>().IncludeMembers(src => src.MetaData);
+                    cfg.CreateMap<Item, SignedResponse>()
+                        .IncludeBase<Item, Response>()
+                        .ForMember(dest => dest.Expired, opt => opt.Ignore());
+                    cfg.CreateMap<ExpiredItem, SignedResponse>()
+                        .IncludeBase<Item, SignedResponse>();
+                }
+            );
         [Fact]
-        public void Should_inherit_IncludeMembers() => Mapper.Map<SignedResponse>(new ExpiredItem { MetaData = new MetaData { Hash = "hash" } }).Hash.ShouldBe("hash");
+        public void Should_inherit_IncludeMembers() =>
+            Mapper
+                .Map<SignedResponse>(new ExpiredItem { MetaData = new MetaData { Hash = "hash" } })
+                .Hash.ShouldBe("hash");
     }
 }

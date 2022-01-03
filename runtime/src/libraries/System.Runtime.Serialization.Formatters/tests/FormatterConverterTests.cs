@@ -13,8 +13,14 @@ namespace System.Runtime.Serialization.Formatters.Tests
         public void InvalidArguments_ThrowExceptions()
         {
             var f = new FormatterConverter();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => f.Convert(null, typeof(int)));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => f.Convert(null, TypeCode.Char));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => f.Convert(null, typeof(int))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => f.Convert(null, TypeCode.Char)
+            );
             AssertExtensions.Throws<ArgumentNullException>("value", () => f.ToBoolean(null));
             AssertExtensions.Throws<ArgumentNullException>("value", () => f.ToByte(null));
             AssertExtensions.Throws<ArgumentNullException>("value", () => f.ToChar(null));
@@ -38,7 +44,12 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.True(new FormatterConverter().ToBoolean("true"));
             Assert.Equal((byte)42, new FormatterConverter().ToByte("42"));
             Assert.Equal('c', new FormatterConverter().ToChar("c"));
-            Assert.Equal(new DateTime(2000, 1, 1), new FormatterConverter().ToDateTime(new DateTime(2000, 1, 1).ToString(CultureInfo.InvariantCulture)));
+            Assert.Equal(
+                new DateTime(2000, 1, 1),
+                new FormatterConverter().ToDateTime(
+                    new DateTime(2000, 1, 1).ToString(CultureInfo.InvariantCulture)
+                )
+            );
             Assert.Equal(1.2m, new FormatterConverter().ToDecimal("1.2"));
             Assert.Equal(1.2, new FormatterConverter().ToDouble("1.2"));
             Assert.Equal((short)42, new FormatterConverter().ToInt16("42"));

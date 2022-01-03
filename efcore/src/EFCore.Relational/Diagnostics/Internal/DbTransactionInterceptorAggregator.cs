@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class DbTransactionInterceptorAggregator : InterceptorAggregator<IDbTransactionInterceptor>
+    public class DbTransactionInterceptorAggregator
+        : InterceptorAggregator<IDbTransactionInterceptor>
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -23,14 +24,17 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override IDbTransactionInterceptor CreateChain(IEnumerable<IDbTransactionInterceptor> interceptors)
-            => new CompositeDbTransactionInterceptor(interceptors);
+        protected override IDbTransactionInterceptor CreateChain(
+            IEnumerable<IDbTransactionInterceptor> interceptors
+        ) => new CompositeDbTransactionInterceptor(interceptors);
 
         private sealed class CompositeDbTransactionInterceptor : IDbTransactionInterceptor
         {
             private readonly IDbTransactionInterceptor[] _interceptors;
 
-            public CompositeDbTransactionInterceptor(IEnumerable<IDbTransactionInterceptor> interceptors)
+            public CompositeDbTransactionInterceptor(
+                IEnumerable<IDbTransactionInterceptor> interceptors
+            )
             {
                 _interceptors = interceptors.ToArray();
             }
@@ -38,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public InterceptionResult<DbTransaction> TransactionStarting(
                 DbConnection connection,
                 TransactionStartingEventData eventData,
-                InterceptionResult<DbTransaction> result)
+                InterceptionResult<DbTransaction> result
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -51,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public DbTransaction TransactionStarted(
                 DbConnection connection,
                 TransactionEndEventData eventData,
-                DbTransaction result)
+                DbTransaction result
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -65,11 +71,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbConnection connection,
                 TransactionStartingEventData eventData,
                 InterceptionResult<DbTransaction> result,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].TransactionStartingAsync(connection, eventData, result, cancellationToken)
+                    result = await _interceptors[i]
+                        .TransactionStartingAsync(connection, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -80,11 +88,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbConnection connection,
                 TransactionEndEventData eventData,
                 DbTransaction result,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].TransactionStartedAsync(connection, eventData, result, cancellationToken)
+                    result = await _interceptors[i]
+                        .TransactionStartedAsync(connection, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -94,7 +104,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public DbTransaction TransactionUsed(
                 DbConnection connection,
                 TransactionEventData eventData,
-                DbTransaction result)
+                DbTransaction result
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -108,11 +119,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbConnection connection,
                 TransactionEventData eventData,
                 DbTransaction result,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].TransactionUsedAsync(connection, eventData, result, cancellationToken)
+                    result = await _interceptors[i]
+                        .TransactionUsedAsync(connection, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -122,7 +135,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public InterceptionResult TransactionCommitting(
                 DbTransaction transaction,
                 TransactionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -134,7 +148,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
             public void TransactionCommitted(
                 DbTransaction transaction,
-                TransactionEndEventData eventData)
+                TransactionEndEventData eventData
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -146,11 +161,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 InterceptionResult result,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].TransactionCommittingAsync(transaction, eventData, result, cancellationToken)
+                    result = await _interceptors[i]
+                        .TransactionCommittingAsync(
+                            transaction,
+                            eventData,
+                            result,
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
 
@@ -160,11 +182,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public async Task TransactionCommittedAsync(
                 DbTransaction transaction,
                 TransactionEndEventData eventData,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].TransactionCommittedAsync(transaction, eventData, cancellationToken)
+                    await _interceptors[i]
+                        .TransactionCommittedAsync(transaction, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -172,11 +196,16 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public InterceptionResult TransactionRollingBack(
                 DbTransaction transaction,
                 TransactionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = _interceptors[i].TransactionRollingBack(transaction, eventData, result);
+                    result = _interceptors[i].TransactionRollingBack(
+                        transaction,
+                        eventData,
+                        result
+                    );
                 }
 
                 return result;
@@ -184,7 +213,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
             public void TransactionRolledBack(
                 DbTransaction transaction,
-                TransactionEndEventData eventData)
+                TransactionEndEventData eventData
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -196,11 +226,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 InterceptionResult result,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].TransactionRollingBackAsync(transaction, eventData, result, cancellationToken)
+                    result = await _interceptors[i]
+                        .TransactionRollingBackAsync(
+                            transaction,
+                            eventData,
+                            result,
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
 
@@ -210,11 +247,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public async Task TransactionRolledBackAsync(
                 DbTransaction transaction,
                 TransactionEndEventData eventData,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].TransactionRolledBackAsync(transaction, eventData, cancellationToken)
+                    await _interceptors[i]
+                        .TransactionRolledBackAsync(transaction, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -222,7 +261,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public InterceptionResult CreatingSavepoint(
                 DbTransaction transaction,
                 TransactionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -232,9 +272,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 return result;
             }
 
-            public void CreatedSavepoint(
-                DbTransaction transaction,
-                TransactionEventData eventData)
+            public void CreatedSavepoint(DbTransaction transaction, TransactionEventData eventData)
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -246,11 +284,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 InterceptionResult result,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].CreatingSavepointAsync(transaction, eventData, result, cancellationToken)
+                    result = await _interceptors[i]
+                        .CreatingSavepointAsync(transaction, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -260,11 +300,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public async Task CreatedSavepointAsync(
                 DbTransaction transaction,
                 TransactionEventData eventData,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].CreatedSavepointAsync(transaction, eventData, cancellationToken)
+                    await _interceptors[i]
+                        .CreatedSavepointAsync(transaction, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -272,11 +314,16 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public InterceptionResult RollingBackToSavepoint(
                 DbTransaction transaction,
                 TransactionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = _interceptors[i].RollingBackToSavepoint(transaction, eventData, result);
+                    result = _interceptors[i].RollingBackToSavepoint(
+                        transaction,
+                        eventData,
+                        result
+                    );
                 }
 
                 return result;
@@ -284,7 +331,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
             public void RolledBackToSavepoint(
                 DbTransaction transaction,
-                TransactionEventData eventData)
+                TransactionEventData eventData
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -296,11 +344,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 InterceptionResult result,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].RollingBackToSavepointAsync(transaction, eventData, result, cancellationToken)
+                    result = await _interceptors[i]
+                        .RollingBackToSavepointAsync(
+                            transaction,
+                            eventData,
+                            result,
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
 
@@ -310,11 +365,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public async Task RolledBackToSavepointAsync(
                 DbTransaction transaction,
                 TransactionEventData eventData,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].RolledBackToSavepointAsync(transaction, eventData, cancellationToken)
+                    await _interceptors[i]
+                        .RolledBackToSavepointAsync(transaction, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -322,7 +379,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public InterceptionResult ReleasingSavepoint(
                 DbTransaction transaction,
                 TransactionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -332,9 +390,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 return result;
             }
 
-            public void ReleasedSavepoint(
-                DbTransaction transaction,
-                TransactionEventData eventData)
+            public void ReleasedSavepoint(DbTransaction transaction, TransactionEventData eventData)
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -346,11 +402,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbTransaction transaction,
                 TransactionEventData eventData,
                 InterceptionResult result,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].ReleasingSavepointAsync(transaction, eventData, result, cancellationToken)
+                    result = await _interceptors[i]
+                        .ReleasingSavepointAsync(transaction, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
@@ -360,16 +418,21 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public async Task ReleasedSavepointAsync(
                 DbTransaction transaction,
                 TransactionEventData eventData,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].ReleasedSavepointAsync(transaction, eventData, cancellationToken)
+                    await _interceptors[i]
+                        .ReleasedSavepointAsync(transaction, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
 
-            public void TransactionFailed(DbTransaction transaction, TransactionErrorEventData eventData)
+            public void TransactionFailed(
+                DbTransaction transaction,
+                TransactionErrorEventData eventData
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -380,11 +443,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public async Task TransactionFailedAsync(
                 DbTransaction transaction,
                 TransactionErrorEventData eventData,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].TransactionFailedAsync(transaction, eventData, cancellationToken)
+                    await _interceptors[i]
+                        .TransactionFailedAsync(transaction, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }

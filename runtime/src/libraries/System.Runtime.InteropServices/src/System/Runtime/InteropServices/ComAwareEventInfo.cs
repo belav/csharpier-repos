@@ -16,7 +16,10 @@ namespace System.Runtime.InteropServices
     {
         private readonly EventInfo _innerEventInfo;
 
-        public ComAwareEventInfo([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] Type type, string eventName)
+        public ComAwareEventInfo(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] Type type,
+            string eventName
+        )
         {
             _innerEventInfo = type.GetEvent(eventName)!;
         }
@@ -60,13 +63,17 @@ namespace System.Runtime.InteropServices
 
         public override EventAttributes Attributes => _innerEventInfo.Attributes;
 
-        public override MethodInfo? GetAddMethod(bool nonPublic) => _innerEventInfo.GetAddMethod(nonPublic);
+        public override MethodInfo? GetAddMethod(bool nonPublic) =>
+            _innerEventInfo.GetAddMethod(nonPublic);
 
-        public override MethodInfo[] GetOtherMethods(bool nonPublic) => _innerEventInfo.GetOtherMethods(nonPublic);
+        public override MethodInfo[] GetOtherMethods(bool nonPublic) =>
+            _innerEventInfo.GetOtherMethods(nonPublic);
 
-        public override MethodInfo? GetRaiseMethod(bool nonPublic) => _innerEventInfo.GetRaiseMethod(nonPublic);
+        public override MethodInfo? GetRaiseMethod(bool nonPublic) =>
+            _innerEventInfo.GetRaiseMethod(nonPublic);
 
-        public override MethodInfo? GetRemoveMethod(bool nonPublic) => _innerEventInfo.GetRemoveMethod(nonPublic);
+        public override MethodInfo? GetRemoveMethod(bool nonPublic) =>
+            _innerEventInfo.GetRemoveMethod(nonPublic);
 
         public override Type? DeclaringType => _innerEventInfo.DeclaringType;
 
@@ -80,7 +87,8 @@ namespace System.Runtime.InteropServices
             return _innerEventInfo.GetCustomAttributes(inherit);
         }
 
-        public override IList<CustomAttributeData> GetCustomAttributesData() => _innerEventInfo.GetCustomAttributesData();
+        public override IList<CustomAttributeData> GetCustomAttributesData() =>
+            _innerEventInfo.GetCustomAttributesData();
 
         public override bool IsDefined(Type attributeType, bool inherit)
         {
@@ -95,25 +103,40 @@ namespace System.Runtime.InteropServices
 
         public override Type? ReflectedType => _innerEventInfo.ReflectedType;
 
-        private static void GetDataForComInvocation(EventInfo eventInfo, out Guid sourceIid, out int dispid)
+        private static void GetDataForComInvocation(
+            EventInfo eventInfo,
+            out Guid sourceIid,
+            out int dispid
+        )
         {
-            object[] comEventInterfaces = eventInfo.DeclaringType!.GetCustomAttributes(typeof(ComEventInterfaceAttribute), inherit: false);
+            object[] comEventInterfaces = eventInfo.DeclaringType!.GetCustomAttributes(
+                typeof(ComEventInterfaceAttribute),
+                inherit: false
+            );
 
             if (comEventInterfaces == null || comEventInterfaces.Length == 0)
             {
-                throw new InvalidOperationException(SR.InvalidOperation_NoComEventInterfaceAttribute);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_NoComEventInterfaceAttribute
+                );
             }
 
             if (comEventInterfaces.Length > 1)
             {
-                throw new AmbiguousMatchException(SR.AmbiguousMatch_MultipleEventInterfaceAttributes);
+                throw new AmbiguousMatchException(
+                    SR.AmbiguousMatch_MultipleEventInterfaceAttributes
+                );
             }
 
-            Type sourceInterface = ((ComEventInterfaceAttribute)comEventInterfaces[0]).SourceInterface;
+            Type sourceInterface =
+                ((ComEventInterfaceAttribute)comEventInterfaces[0]).SourceInterface;
             Guid guid = sourceInterface.GUID;
 
             MethodInfo methodInfo = sourceInterface.GetMethod(eventInfo.Name)!;
-            Attribute? dispIdAttribute = Attribute.GetCustomAttribute(methodInfo, typeof(DispIdAttribute));
+            Attribute? dispIdAttribute = Attribute.GetCustomAttribute(
+                methodInfo,
+                typeof(DispIdAttribute)
+            );
             if (dispIdAttribute == null)
             {
                 throw new InvalidOperationException(SR.InvalidOperation_NoDispIdAttribute);

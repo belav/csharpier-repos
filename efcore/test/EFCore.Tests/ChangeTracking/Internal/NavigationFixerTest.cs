@@ -25,12 +25,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var blog1 = new Blog { Id = 1 };
             var blog2 = new Blog { Id = 2 };
 
-            var post1 = context.Add(
-                new Post { BlogId = 2 }).Entity;
+            var post1 = context.Add(new Post { BlogId = 2 }).Entity;
 
             blog1.Posts.Add(post1);
-            blog1.Posts.Add(
-                new Post { BlogId = 2 });
+            blog1.Posts.Add(new Post { BlogId = 2 });
 
             context.Add(blog2);
             context.Add(blog1);
@@ -41,8 +39,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             public DbSet<Blog> Blogs { get; set; }
             public DbSet<Post> Posts { get; set; }
 
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) =>
+                optionsBuilder
                     .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase(typeof(FixupContext).FullName);
         }
@@ -251,8 +251,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             principal2.Products.Add(dependent);
 
-            manager.StartTracking(manager.GetOrCreateEntry(principal1)).SetEntityState(EntityState.Added);
-            manager.StartTracking(manager.GetOrCreateEntry(principal2)).SetEntityState(EntityState.Added);
+            manager
+                .StartTracking(manager.GetOrCreateEntry(principal1))
+                .SetEntityState(EntityState.Added);
+            manager
+                .StartTracking(manager.GetOrCreateEntry(principal2))
+                .SetEntityState(EntityState.Added);
 
             var dependentEntry = manager.StartTracking(manager.GetOrCreateEntry(dependent));
 
@@ -276,9 +280,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var dependent2 = new Product { Id = 22 };
             var dependent3 = new Product { Id = 23, Category = principal };
 
-            manager.StartTracking(manager.GetOrCreateEntry(dependent1)).SetEntityState(EntityState.Added);
-            manager.StartTracking(manager.GetOrCreateEntry(dependent2)).SetEntityState(EntityState.Added);
-            manager.StartTracking(manager.GetOrCreateEntry(dependent3)).SetEntityState(EntityState.Added);
+            manager
+                .StartTracking(manager.GetOrCreateEntry(dependent1))
+                .SetEntityState(EntityState.Added);
+            manager
+                .StartTracking(manager.GetOrCreateEntry(dependent2))
+                .SetEntityState(EntityState.Added);
+            manager
+                .StartTracking(manager.GetOrCreateEntry(dependent3))
+                .SetEntityState(EntityState.Added);
 
             var principalEntry = manager.StartTracking(manager.GetOrCreateEntry(principal));
 
@@ -312,9 +322,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             principal.Products.Add(dependent1);
             principal.Products.Add(dependent3);
 
-            manager.StartTracking(manager.GetOrCreateEntry(dependent1)).SetEntityState(EntityState.Added);
-            manager.StartTracking(manager.GetOrCreateEntry(dependent2)).SetEntityState(EntityState.Added);
-            manager.StartTracking(manager.GetOrCreateEntry(dependent3)).SetEntityState(EntityState.Added);
+            manager
+                .StartTracking(manager.GetOrCreateEntry(dependent1))
+                .SetEntityState(EntityState.Added);
+            manager
+                .StartTracking(manager.GetOrCreateEntry(dependent2))
+                .SetEntityState(EntityState.Added);
+            manager
+                .StartTracking(manager.GetOrCreateEntry(dependent3))
+                .SetEntityState(EntityState.Added);
 
             var principalEntry = manager.StartTracking(manager.GetOrCreateEntry(principal));
 
@@ -503,9 +519,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 dependentEntry,
                 categoryIdProperty,
                 Array.Empty<IKey>(),
-                productType.GetForeignKeys().Where(k => k.Properties.Contains(categoryIdProperty)).ToList(),
+                productType
+                    .GetForeignKeys()
+                    .Where(k => k.Properties.Contains(categoryIdProperty))
+                    .ToList(),
                 12,
-                11);
+                11
+            );
 
             Assert.Same(dependent.Category, principal1);
             Assert.Contains(dependent, principal1.Products);
@@ -545,9 +565,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 dependentEntry,
                 categoryIdProperty,
                 Array.Empty<IKey>(),
-                productType.GetForeignKeys().Where(k => k.Properties.Contains(categoryIdProperty)).ToList(),
+                productType
+                    .GetForeignKeys()
+                    .Where(k => k.Properties.Contains(categoryIdProperty))
+                    .ToList(),
                 12,
-                11);
+                11
+            );
 
             Assert.Null(dependent.Category);
             Assert.DoesNotContain(dependent, principal2.Products);
@@ -587,9 +611,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 dependentEntry,
                 categoryIdProperty,
                 Array.Empty<IKey>(),
-                productType.GetForeignKeys().Where(k => k.Properties.Contains(categoryIdProperty)).ToList(),
+                productType
+                    .GetForeignKeys()
+                    .Where(k => k.Properties.Contains(categoryIdProperty))
+                    .ToList(),
                 12,
-                11);
+                11
+            );
 
             Assert.Same(dependent.Category, principal1);
             Assert.Contains(dependent, principal1.Products);
@@ -631,9 +659,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 dependentEntry,
                 idProperty,
                 productDetailType.GetKeys().Where(k => k.Properties.Contains(idProperty)).ToList(),
-                productDetailType.GetForeignKeys().Where(k => k.Properties.Contains(idProperty)).ToList(),
+                productDetailType
+                    .GetForeignKeys()
+                    .Where(k => k.Properties.Contains(idProperty))
+                    .ToList(),
                 21,
-                22);
+                22
+            );
 
             Assert.Same(principal2, dependent.Product);
             Assert.Same(dependent, principal2.Detail);
@@ -671,9 +703,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 dependentEntry,
                 idProperty,
                 productDetailType.GetKeys().Where(k => k.Properties.Contains(idProperty)).ToList(),
-                productDetailType.GetForeignKeys().Where(k => k.Properties.Contains(idProperty)).ToList(),
+                productDetailType
+                    .GetForeignKeys()
+                    .Where(k => k.Properties.Contains(idProperty))
+                    .ToList(),
                 21,
-                0);
+                0
+            );
 
             Assert.Null(dependent.Product);
             Assert.Null(principal.Detail);
@@ -710,9 +746,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 dependentEntry,
                 idProperty,
                 productDetailType.GetKeys().Where(k => k.Properties.Contains(idProperty)).ToList(),
-                productDetailType.GetForeignKeys().Where(k => k.Properties.Contains(idProperty)).ToList(),
+                productDetailType
+                    .GetForeignKeys()
+                    .Where(k => k.Properties.Contains(idProperty))
+                    .ToList(),
                 7,
-                21);
+                21
+            );
 
             Assert.Same(principal, dependent.Product);
             Assert.Same(dependent, principal.Detail);
@@ -758,9 +798,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 entry1,
                 alternateProductId,
                 Array.Empty<IKey>(),
-                productType.GetForeignKeys().Where(k => k.Properties.Contains(alternateProductId)).ToList(),
+                productType
+                    .GetForeignKeys()
+                    .Where(k => k.Properties.Contains(alternateProductId))
+                    .ToList(),
                 22,
-                23);
+                23
+            );
 
             Assert.Same(entity3, entity1.AlternateProduct);
             Assert.Null(entity1.OriginalProduct);
@@ -812,9 +856,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 entry1,
                 alternateProductId,
                 Array.Empty<IKey>(),
-                productType.GetForeignKeys().Where(k => k.Properties.Contains(alternateProductId)).ToList(),
+                productType
+                    .GetForeignKeys()
+                    .Where(k => k.Properties.Contains(alternateProductId))
+                    .ToList(),
                 22,
-                23);
+                23
+            );
 
             Assert.Same(entity3, entity1.AlternateProduct);
             Assert.Null(entity1.OriginalProduct);
@@ -980,17 +1028,27 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 tagEntry1,
                 productId,
                 Array.Empty<IKey>(),
-                productTagType.GetForeignKeys().Where(k => k.Properties.Contains(productId)).ToList(),
+                productTagType
+                    .GetForeignKeys()
+                    .Where(k => k.Properties.Contains(productId))
+                    .ToList(),
                 1,
-                2);
+                2
+            );
 
             Assert.Equal(new[] { tag2 }, photo1.ProductTags.OrderBy(t => t.Id).ToArray());
             Assert.Equal(new[] { tag3, tag4 }, photo2.ProductTags.OrderBy(t => t.Id).ToArray());
-            Assert.Equal(new[] { tag1, tag5, tag6 }, photo3.ProductTags.OrderBy(t => t.Id).ToArray());
+            Assert.Equal(
+                new[] { tag1, tag5, tag6 },
+                photo3.ProductTags.OrderBy(t => t.Id).ToArray()
+            );
             Assert.Equal(new[] { tag7, tag8 }, photo4.ProductTags.OrderBy(t => t.Id).ToArray());
             Assert.Equal(new[] { tag3 }, review1.ProductTags.OrderBy(t => t.Id).ToArray());
             Assert.Equal(new[] { tag2, tag4 }, review2.ProductTags.OrderBy(t => t.Id).ToArray());
-            Assert.Equal(new[] { tag1, tag5, tag7 }, review3.ProductTags.OrderBy(t => t.Id).ToArray());
+            Assert.Equal(
+                new[] { tag1, tag5, tag7 },
+                review3.ProductTags.OrderBy(t => t.Id).ToArray()
+            );
             Assert.Equal(new[] { tag6, tag8 }, review4.ProductTags.OrderBy(t => t.Id).ToArray());
 
             Assert.Same(photo3, tag1.Photo);
@@ -1240,8 +1298,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(dependent2.AlternateProductId, principal2.Id);
         }
 
-        private static IServiceProvider CreateContextServices(IModel model = null)
-            => InMemoryTestHelpers.Instance.CreateContextServices(model ?? BuildModel());
+        private static IServiceProvider CreateContextServices(IModel model = null) =>
+            InMemoryTestHelpers.Instance.CreateContextServices(model ?? BuildModel());
 
         private class Category
         {
@@ -1275,8 +1333,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 throw new NotImplementedException();
             }
 
-            IEnumerator IEnumerable.GetEnumerator()
-                => GetEnumerator();
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
         private class ProductPhoto
@@ -1314,12 +1371,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             builder.Entity<Product>(
                 b =>
                 {
-                    b.HasOne(e => e.AlternateProduct).WithOne(e => e.OriginalProduct)
+                    b.HasOne(e => e.AlternateProduct)
+                        .WithOne(e => e.OriginalProduct)
                         .HasForeignKey<Product>(e => e.AlternateProductId);
 
-                    b.HasOne(e => e.Detail).WithOne(e => e.Product)
+                    b.HasOne(e => e.Detail)
+                        .WithOne(e => e.Product)
                         .HasForeignKey<ProductDetail>(e => e.Id);
-                });
+                }
+            );
 
             builder.Entity<Category>().HasMany(e => e.Products).WithOne(e => e.Category);
 
@@ -1328,29 +1388,29 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             builder.Entity<ProductPhoto>(
                 b =>
                 {
-                    b.HasKey(
-                        e => new { e.ProductId, e.PhotoId });
-                    b.HasMany(e => e.ProductTags).WithOne(e => e.Photo)
-                        .HasForeignKey(
-                            e => new { e.ProductId, e.PhotoId });
-                });
+                    b.HasKey(e => new { e.ProductId, e.PhotoId });
+                    b.HasMany(e => e.ProductTags)
+                        .WithOne(e => e.Photo)
+                        .HasForeignKey(e => new { e.ProductId, e.PhotoId });
+                }
+            );
 
             builder.Entity<ProductReview>(
                 b =>
                 {
-                    b.HasKey(
-                        e => new { e.ProductId, e.ReviewId });
-                    b.HasMany(e => e.ProductTags).WithOne(e => e.Review)
-                        .HasForeignKey(
-                            e => new { e.ProductId, e.ReviewId });
-                });
+                    b.HasKey(e => new { e.ProductId, e.ReviewId });
+                    b.HasMany(e => e.ProductTags)
+                        .WithOne(e => e.Review)
+                        .HasForeignKey(e => new { e.ProductId, e.ReviewId });
+                }
+            );
 
             builder.Entity<ProductTag>();
 
             return builder.Model.FinalizeModel();
         }
 
-        private static INavigationFixer CreateNavigationFixer(IServiceProvider contextServices)
-            => contextServices.GetRequiredService<INavigationFixer>();
+        private static INavigationFixer CreateNavigationFixer(IServiceProvider contextServices) =>
+            contextServices.GetRequiredService<INavigationFixer>();
     }
 }

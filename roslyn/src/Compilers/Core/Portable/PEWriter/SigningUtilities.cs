@@ -17,14 +17,21 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class SigningUtilities
     {
-        internal static byte[] CalculateRsaSignature(IEnumerable<Blob> content, RSAParameters privateKey)
+        internal static byte[] CalculateRsaSignature(
+            IEnumerable<Blob> content,
+            RSAParameters privateKey
+        )
         {
             var hash = CalculateSha1(content);
 
             using (var rsa = RSA.Create())
             {
                 rsa.ImportParameters(privateKey);
-                var signature = rsa.SignHash(hash, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+                var signature = rsa.SignHash(
+                    hash,
+                    HashAlgorithmName.SHA1,
+                    RSASignaturePadding.Pkcs1
+                );
                 Array.Reverse(signature);
                 return signature;
             }
@@ -39,7 +46,10 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        internal static int CalculateStrongNameSignatureSize(CommonPEModuleBuilder module, RSAParameters? privateKey)
+        internal static int CalculateStrongNameSignatureSize(
+            CommonPEModuleBuilder module,
+            RSAParameters? privateKey
+        )
         {
             ISourceAssemblySymbolInternal? assembly = module.SourceAssemblyOpt;
             if (assembly == null && !privateKey.HasValue)

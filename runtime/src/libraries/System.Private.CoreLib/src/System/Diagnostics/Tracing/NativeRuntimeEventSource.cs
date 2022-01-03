@@ -36,7 +36,14 @@ namespace System.Diagnostics.Tracing
         /// <param name="childActivityId">The ID of the current child activity.</param>
         /// <param name="payload">A span pointing to the data payload for the event.</param>
         [NonEvent]
-        internal unsafe void ProcessEvent(uint eventID, uint osThreadID, DateTime timeStamp, Guid activityId, Guid childActivityId, ReadOnlySpan<byte> payload)
+        internal unsafe void ProcessEvent(
+            uint eventID,
+            uint osThreadID,
+            DateTime timeStamp,
+            Guid activityId,
+            Guid childActivityId,
+            ReadOnlySpan<byte> payload
+        )
         {
             // A simple fix to avoid dependencies brought by this method if event source is disabled via a feature switch.
             // Should be reconsidered when https://github.com/dotnet/runtime/issues/43657 is done.
@@ -52,9 +59,17 @@ namespace System.Diagnostics.Tracing
             }
 
             // Decode the payload.
-            object[] decodedPayloadFields = EventPipePayloadDecoder.DecodePayload(ref m_eventData[eventID], payload);
+            object[] decodedPayloadFields = EventPipePayloadDecoder.DecodePayload(
+                ref m_eventData[eventID],
+                payload
+            );
 
-            var eventCallbackArgs = new EventWrittenEventArgs(this, (int)eventID, &activityId, &childActivityId)
+            var eventCallbackArgs = new EventWrittenEventArgs(
+                this,
+                (int)eventID,
+                &activityId,
+                &childActivityId
+            )
             {
                 OSThreadId = (int)osThreadID,
                 TimeStamp = timeStamp,

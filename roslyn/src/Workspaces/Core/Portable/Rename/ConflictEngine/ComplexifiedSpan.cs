@@ -22,7 +22,11 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         [DataMember(Order = 2)]
         public readonly ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)> ModifiedSubSpans;
 
-        public ComplexifiedSpan(TextSpan originalSpan, TextSpan newSpan, ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)> modifiedSubSpans)
+        public ComplexifiedSpan(
+            TextSpan originalSpan,
+            TextSpan newSpan,
+            ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)> modifiedSubSpans
+        )
         {
             OriginalSpan = originalSpan;
             NewSpan = newSpan;

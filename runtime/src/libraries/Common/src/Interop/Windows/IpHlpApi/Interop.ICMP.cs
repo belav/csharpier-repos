@@ -79,9 +79,7 @@ internal static partial class Interop
 
         internal sealed class SafeCloseIcmpHandle : SafeHandleZeroOrMinusOneIsInvalid
         {
-            public SafeCloseIcmpHandle() : base(true)
-            {
-            }
+            public SafeCloseIcmpHandle() : base(true) { }
 
             protected override bool ReleaseHandle()
             {
@@ -99,11 +97,34 @@ internal static partial class Interop
         internal static partial bool IcmpCloseHandle(IntPtr handle);
 
         [GeneratedDllImport(Interop.Libraries.IpHlpApi, SetLastError = true)]
-        internal static partial uint IcmpSendEcho2(SafeCloseIcmpHandle icmpHandle, SafeWaitHandle Event, IntPtr apcRoutine, IntPtr apcContext,
-            uint ipAddress, SafeLocalAllocHandle data, ushort dataSize, ref IPOptions options, SafeLocalAllocHandle replyBuffer, uint replySize, uint timeout);
+        internal static partial uint IcmpSendEcho2(
+            SafeCloseIcmpHandle icmpHandle,
+            SafeWaitHandle Event,
+            IntPtr apcRoutine,
+            IntPtr apcContext,
+            uint ipAddress,
+            SafeLocalAllocHandle data,
+            ushort dataSize,
+            ref IPOptions options,
+            SafeLocalAllocHandle replyBuffer,
+            uint replySize,
+            uint timeout
+        );
 
         [GeneratedDllImport(Interop.Libraries.IpHlpApi, SetLastError = true)]
-        internal static partial uint Icmp6SendEcho2(SafeCloseIcmpHandle icmpHandle, SafeWaitHandle Event, IntPtr apcRoutine, IntPtr apcContext,
-            byte[] sourceSocketAddress, byte[] destSocketAddress, SafeLocalAllocHandle data, ushort dataSize, ref IPOptions options, SafeLocalAllocHandle replyBuffer, uint replySize, uint timeout);
+        internal static partial uint Icmp6SendEcho2(
+            SafeCloseIcmpHandle icmpHandle,
+            SafeWaitHandle Event,
+            IntPtr apcRoutine,
+            IntPtr apcContext,
+            byte[] sourceSocketAddress,
+            byte[] destSocketAddress,
+            SafeLocalAllocHandle data,
+            ushort dataSize,
+            ref IPOptions options,
+            SafeLocalAllocHandle replyBuffer,
+            uint replySize,
+            uint timeout
+        );
     }
 }

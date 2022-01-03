@@ -25,7 +25,10 @@ public class RedirectToRouteResultExecutor : IActionResultExecutor<RedirectToRou
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     /// <param name="urlHelperFactory">The factory used to create url helpers.</param>
-    public RedirectToRouteResultExecutor(ILoggerFactory loggerFactory, IUrlHelperFactory urlHelperFactory)
+    public RedirectToRouteResultExecutor(
+        ILoggerFactory loggerFactory,
+        IUrlHelperFactory urlHelperFactory
+    )
     {
         if (loggerFactory == null)
         {
@@ -51,7 +54,8 @@ public class RedirectToRouteResultExecutor : IActionResultExecutor<RedirectToRou
             result.RouteValues,
             protocol: null,
             host: null,
-            fragment: result.Fragment);
+            fragment: result.Fragment
+        );
         if (string.IsNullOrEmpty(destinationUrl))
         {
             throw new InvalidOperationException(Resources.NoRoutesMatched);
@@ -61,8 +65,9 @@ public class RedirectToRouteResultExecutor : IActionResultExecutor<RedirectToRou
 
         if (result.PreserveMethod)
         {
-            context.HttpContext.Response.StatusCode = result.Permanent ?
-                StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+            context.HttpContext.Response.StatusCode = result.Permanent
+                ? StatusCodes.Status308PermanentRedirect
+                : StatusCodes.Status307TemporaryRedirect;
             context.HttpContext.Response.Headers.Location = destinationUrl;
         }
         else

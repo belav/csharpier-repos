@@ -52,7 +52,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="annotation">The key of the annotation to be added or updated.</param>
         /// <param name="value">The value to be stored in the annotation.</param>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-        public virtual PropertiesConfigurationBuilder HaveAnnotation(string annotation, object value)
+        public virtual PropertiesConfigurationBuilder HaveAnnotation(
+            string annotation,
+            object value
+        )
         {
             Check.NotEmpty(annotation, nameof(annotation));
 
@@ -119,8 +122,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <typeparam name="TConversion">The type to convert to and from or a type that derives from <see cref="ValueConverter" />.</typeparam>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-        public virtual PropertiesConfigurationBuilder HaveConversion<TConversion>()
-            => HaveConversion(typeof(TConversion));
+        public virtual PropertiesConfigurationBuilder HaveConversion<TConversion>() =>
+            HaveConversion(typeof(TConversion));
 
         /// <summary>
         ///     Configures the property so that the property value is converted before
@@ -152,8 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <typeparam name="TComparer">A type that derives from <see cref="ValueComparer" />.</typeparam>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual PropertiesConfigurationBuilder HaveConversion<TConversion, TComparer>()
-            where TComparer : ValueComparer
-            => HaveConversion(typeof(TConversion), typeof(TComparer));
+            where TComparer : ValueComparer =>
+            HaveConversion(typeof(TConversion), typeof(TComparer));
 
         /// <summary>
         ///     Configures the property so that the property value is converted before
@@ -162,7 +165,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="conversionType">The type to convert to and from or a type that derives from <see cref="ValueConverter" />.</param>
         /// <param name="comparerType">A type that derives from <see cref="ValueComparer" />.</param>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-        public virtual PropertiesConfigurationBuilder HaveConversion(Type conversionType, Type? comparerType)
+        public virtual PropertiesConfigurationBuilder HaveConversion(
+            Type conversionType,
+            Type? comparerType
+        )
         {
             Check.NotNull(conversionType, nameof(conversionType));
 
@@ -187,8 +193,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string? ToString()
-            => base.ToString();
+        public override string? ToString() => base.ToString();
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -197,8 +202,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectEqualsIsObjectEquals
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <summary>
         ///     Serves as the default hash function.
@@ -206,8 +210,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>A hash code for the current object.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-        public override int GetHashCode()
-            => base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
 
         #endregion
     }

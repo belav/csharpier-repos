@@ -32,10 +32,8 @@ namespace Internal.Pgo
 
         // Mask of all schema data types
         AlignMask = 0x30,
-
         DescriptorMin = 0x40,
         DescriptorMask = ~(MarshalMask | AlignMask),
-
         Done = None, // All instrumentation schemas must end with a record which is "Done"
         BasicBlockIntCount = (DescriptorMin * 1) | FourByte, // basic block counter using unsigned 4 byte int
         BasicBlockLongCount = (DescriptorMin * 1) | EightByte, // basic block counter using unsigned 8 byte int
@@ -74,9 +72,20 @@ namespace Internal.Pgo
         public long DataLong;
         public Array DataObject;
 
-        public bool DataHeldInDataLong => (Count == 1 &&
-                            (((InstrumentationKind & PgoInstrumentationKind.MarshalMask) == PgoInstrumentationKind.FourByte) ||
-                            ((InstrumentationKind & PgoInstrumentationKind.MarshalMask) == PgoInstrumentationKind.EightByte)));
+        public bool DataHeldInDataLong =>
+            (
+                Count == 1
+                && (
+                    (
+                        (InstrumentationKind & PgoInstrumentationKind.MarshalMask)
+                        == PgoInstrumentationKind.FourByte
+                    )
+                    || (
+                        (InstrumentationKind & PgoInstrumentationKind.MarshalMask)
+                        == PgoInstrumentationKind.EightByte
+                    )
+                )
+            );
     }
 
     // Flags stored in 'Other' field of TypeHandleHistogram*Count entries.
@@ -153,22 +162,24 @@ namespace Internal.Pgo
                 }
                 else if ((bytes[offset]) == 0xC1) // 8 byte specifier
                 {
-                    signedInt = (((long)bytes[offset + 1]) << 56) |
-                                (((long)bytes[offset + 2]) << 48) |
-                                (((long)bytes[offset + 3]) << 40) |
-                                (((long)bytes[offset + 4]) << 32) |
-                                (((long)bytes[offset + 5]) << 24) |
-                                (((long)bytes[offset + 6]) << 16) |
-                                (((long)bytes[offset + 7]) << 8) |
-                                ((long)bytes[offset + 8]);
+                    signedInt =
+                        (((long)bytes[offset + 1]) << 56)
+                        | (((long)bytes[offset + 2]) << 48)
+                        | (((long)bytes[offset + 3]) << 40)
+                        | (((long)bytes[offset + 4]) << 32)
+                        | (((long)bytes[offset + 5]) << 24)
+                        | (((long)bytes[offset + 6]) << 16)
+                        | (((long)bytes[offset + 7]) << 8)
+                        | ((long)bytes[offset + 8]);
                     offset += 9;
                 }
                 else
                 {
-                    signedInt = (((int)bytes[offset + 1]) << 24) |
-                                (((int)bytes[offset + 2]) << 16) |
-                                (((int)bytes[offset + 3]) << 8) |
-                                ((int)bytes[offset + 4]);
+                    signedInt =
+                        (((int)bytes[offset + 1]) << 24)
+                        | (((int)bytes[offset + 2]) << 16)
+                        | (((int)bytes[offset + 3]) << 8)
+                        | ((int)bytes[offset + 4]);
                     offset += 5;
                 }
 
@@ -193,17 +204,26 @@ namespace Internal.Pgo
                 if (value < 0)
                     isSigned = 1;
 
-                if ((value & SIGN_MASK_ONEBYTE_64BIT) == 0 || (value & SIGN_MASK_ONEBYTE_64BIT) == SIGN_MASK_ONEBYTE_64BIT)
+                if (
+                    (value & SIGN_MASK_ONEBYTE_64BIT) == 0
+                    || (value & SIGN_MASK_ONEBYTE_64BIT) == SIGN_MASK_ONEBYTE_64BIT
+                )
                 {
                     yield return (byte)((byte)((value & ~SIGN_MASK_ONEBYTE_64BIT) << 1 | isSigned));
                 }
-                else if ((value & SIGN_MASK_TWOBYTE_64BIT) == 0 || (value & SIGN_MASK_TWOBYTE_64BIT) == SIGN_MASK_TWOBYTE_64BIT)
+                else if (
+                    (value & SIGN_MASK_TWOBYTE_64BIT) == 0
+                    || (value & SIGN_MASK_TWOBYTE_64BIT) == SIGN_MASK_TWOBYTE_64BIT
+                )
                 {
                     int iData = (int)((value & ~SIGN_MASK_TWOBYTE_64BIT) << 1 | isSigned);
                     yield return (byte)((iData >> 8) | 0x80);
                     yield return (byte)(iData & 0xff);
                 }
-                else if ((value & SIGN_MASK_FOURBYTE_64BIT) == 0 || (value & SIGN_MASK_FOURBYTE_64BIT) == SIGN_MASK_FOURBYTE_64BIT)
+                else if (
+                    (value & SIGN_MASK_FOURBYTE_64BIT) == 0
+                    || (value & SIGN_MASK_FOURBYTE_64BIT) == SIGN_MASK_FOURBYTE_64BIT
+                )
                 {
                     // Unlike CorSigCompressSignedInt, this just writes a header byte
                     // then 4 bytes, ignoring the whole signed bit detail
@@ -230,11 +250,16 @@ namespace Internal.Pgo
             }
         }
 
-        public static IEnumerable<PgoSchemaElem> ParsePgoData<TType>(IPgoSchemaDataLoader<TType> dataProvider, IEnumerable<long> inputDataStream, bool longsAreCompressed)
+        public static IEnumerable<PgoSchemaElem> ParsePgoData<TType>(
+            IPgoSchemaDataLoader<TType> dataProvider,
+            IEnumerable<long> inputDataStream,
+            bool longsAreCompressed
+        )
         {
             int dataCountToRead = 0;
             PgoSchemaElem curSchema = default(PgoSchemaElem);
-            InstrumentationDataProcessingState processingState = InstrumentationDataProcessingState.UpdateProcessMaskFlag;
+            InstrumentationDataProcessingState processingState =
+                InstrumentationDataProcessingState.UpdateProcessMaskFlag;
             long lastDataValue = 0;
             long lastTypeValue = 0;
 
@@ -253,14 +278,17 @@ namespace Internal.Pgo
                     else
                     {
                         int dataIndex = curSchema.Count - dataCountToRead;
-                        switch (curSchema.InstrumentationKind & PgoInstrumentationKind.MarshalMask)
-                        {
+                        switch (
+                            curSchema.InstrumentationKind & PgoInstrumentationKind.MarshalMask
+                        ) {
                             case PgoInstrumentationKind.FourByte:
                                 if (longsAreCompressed)
                                     lastDataValue += value;
                                 else
                                     lastDataValue = value;
-                                ((int[])curSchema.DataObject)[dataIndex] = checked((int)lastDataValue);
+                                ((int[])curSchema.DataObject)[dataIndex] = checked(
+                                    (int)lastDataValue
+                                );
                                 break;
 
                             case PgoInstrumentationKind.EightByte:
@@ -276,7 +304,8 @@ namespace Internal.Pgo
                                     lastTypeValue += value;
                                 else
                                     lastTypeValue = value;
-                                ((TType[])curSchema.DataObject)[dataIndex] = dataProvider.TypeFromLong(lastTypeValue);
+                                ((TType[])curSchema.DataObject)[dataIndex] =
+                                    dataProvider.TypeFromLong(lastTypeValue);
                                 break;
                         }
                     }
@@ -296,25 +325,37 @@ namespace Internal.Pgo
                     continue;
                 }
 
-                if ((processingState & InstrumentationDataProcessingState.ILOffset) == InstrumentationDataProcessingState.ILOffset)
+                if (
+                    (processingState & InstrumentationDataProcessingState.ILOffset)
+                    == InstrumentationDataProcessingState.ILOffset
+                )
                 {
                     if (longsAreCompressed)
                         curSchema.ILOffset = checked((int)(value + (long)curSchema.ILOffset));
                     else
                         curSchema.ILOffset = checked((int)value);
 
-                    processingState = processingState & ~InstrumentationDataProcessingState.ILOffset;
+                    processingState =
+                        processingState & ~InstrumentationDataProcessingState.ILOffset;
                 }
-                else if ((processingState & InstrumentationDataProcessingState.Type) == InstrumentationDataProcessingState.Type)
+                else if (
+                    (processingState & InstrumentationDataProcessingState.Type)
+                    == InstrumentationDataProcessingState.Type
+                )
                 {
                     if (longsAreCompressed)
-                        curSchema.InstrumentationKind = (PgoInstrumentationKind)(((int)(curSchema.InstrumentationKind)) + checked((int)value));
+                        curSchema.InstrumentationKind = (PgoInstrumentationKind)(
+                            ((int)(curSchema.InstrumentationKind)) + checked((int)value)
+                        );
                     else
                         curSchema.InstrumentationKind = (PgoInstrumentationKind)value;
 
                     processingState = processingState & ~InstrumentationDataProcessingState.Type;
                 }
-                else if ((processingState & InstrumentationDataProcessingState.Count) == InstrumentationDataProcessingState.Count)
+                else if (
+                    (processingState & InstrumentationDataProcessingState.Count)
+                    == InstrumentationDataProcessingState.Count
+                )
                 {
                     if (longsAreCompressed)
                         curSchema.Count = checked((int)(value + (long)curSchema.Count));
@@ -322,7 +363,10 @@ namespace Internal.Pgo
                         curSchema.Count = checked((int)value);
                     processingState = processingState & ~InstrumentationDataProcessingState.Count;
                 }
-                else if ((processingState & InstrumentationDataProcessingState.Other) == InstrumentationDataProcessingState.Other)
+                else if (
+                    (processingState & InstrumentationDataProcessingState.Other)
+                    == InstrumentationDataProcessingState.Other
+                )
                 {
                     if (longsAreCompressed)
                         curSchema.Other = checked((int)(value + (long)curSchema.Other));
@@ -373,7 +417,11 @@ namespace Internal.Pgo
             throw new Exception("Partial Instrumentation Data");
         }
 
-        public static void EncodePgoData<TType>(IEnumerable<PgoSchemaElem> schemas, IPgoEncodedValueEmitter<TType> valueEmitter, bool emitAllElementsUnconditionally)
+        public static void EncodePgoData<TType>(
+            IEnumerable<PgoSchemaElem> schemas,
+            IPgoEncodedValueEmitter<TType> valueEmitter,
+            bool emitAllElementsUnconditionally
+        )
         {
             PgoSchemaElem prevSchema = default(PgoSchemaElem);
             TType prevEmittedType = default(TType);
@@ -384,9 +432,11 @@ namespace Internal.Pgo
                 int ilOffsetDiff = schema.ILOffset - prevSchema.ILOffset;
                 int OtherDiff = schema.Other - prevSchema.Other;
                 int CountDiff = schema.Count - prevSchema.Count;
-                int TypeDiff = (int)schema.InstrumentationKind - (int)prevSchema.InstrumentationKind;
+                int TypeDiff =
+                    (int)schema.InstrumentationKind - (int)prevSchema.InstrumentationKind;
 
-                InstrumentationDataProcessingState modifyMask = (InstrumentationDataProcessingState)0;
+                InstrumentationDataProcessingState modifyMask =
+                    (InstrumentationDataProcessingState)0;
 
                 if (!emitAllElementsUnconditionally)
                 {
@@ -401,23 +451,39 @@ namespace Internal.Pgo
                 }
                 else
                 {
-                    modifyMask = InstrumentationDataProcessingState.ILOffset |
-                                 InstrumentationDataProcessingState.Type |
-                                 InstrumentationDataProcessingState.Count |
-                                 InstrumentationDataProcessingState.Other;
+                    modifyMask =
+                        InstrumentationDataProcessingState.ILOffset
+                        | InstrumentationDataProcessingState.Type
+                        | InstrumentationDataProcessingState.Count
+                        | InstrumentationDataProcessingState.Other;
                 }
 
                 Debug.Assert(modifyMask != InstrumentationDataProcessingState.Done);
 
                 valueEmitter.EmitLong((long)modifyMask, 0);
 
-                if ((modifyMask & InstrumentationDataProcessingState.ILOffset) == InstrumentationDataProcessingState.ILOffset)
+                if (
+                    (modifyMask & InstrumentationDataProcessingState.ILOffset)
+                    == InstrumentationDataProcessingState.ILOffset
+                )
                     valueEmitter.EmitLong(schema.ILOffset, prevSchema.ILOffset);
-                if ((modifyMask & InstrumentationDataProcessingState.Type) == InstrumentationDataProcessingState.Type)
-                    valueEmitter.EmitLong((long)schema.InstrumentationKind, (long)prevSchema.InstrumentationKind);
-                if ((modifyMask & InstrumentationDataProcessingState.Count) == InstrumentationDataProcessingState.Count)
+                if (
+                    (modifyMask & InstrumentationDataProcessingState.Type)
+                    == InstrumentationDataProcessingState.Type
+                )
+                    valueEmitter.EmitLong(
+                        (long)schema.InstrumentationKind,
+                        (long)prevSchema.InstrumentationKind
+                    );
+                if (
+                    (modifyMask & InstrumentationDataProcessingState.Count)
+                    == InstrumentationDataProcessingState.Count
+                )
                     valueEmitter.EmitLong(schema.Count, prevSchema.Count);
-                if ((modifyMask & InstrumentationDataProcessingState.Other) == InstrumentationDataProcessingState.Other)
+                if (
+                    (modifyMask & InstrumentationDataProcessingState.Other)
+                    == InstrumentationDataProcessingState.Other
+                )
                     valueEmitter.EmitLong(schema.Other, prevSchema.Other);
 
                 for (int i = 0; i < schema.Count; i++)
@@ -427,42 +493,42 @@ namespace Internal.Pgo
                         case PgoInstrumentationKind.None:
                             break;
                         case PgoInstrumentationKind.FourByte:
+                        {
+                            long valueToEmit;
+                            if (schema.Count == 1)
                             {
-                                long valueToEmit;
-                                if (schema.Count == 1)
-                                {
-                                    valueToEmit = schema.DataLong;
-                                }
-                                else
-                                {
-                                    valueToEmit = ((int[])schema.DataObject)[i];
-                                }
-                                valueEmitter.EmitLong(valueToEmit, prevEmittedIntData);
-                                prevEmittedIntData = valueToEmit;
-                                break;
+                                valueToEmit = schema.DataLong;
                             }
+                            else
+                            {
+                                valueToEmit = ((int[])schema.DataObject)[i];
+                            }
+                            valueEmitter.EmitLong(valueToEmit, prevEmittedIntData);
+                            prevEmittedIntData = valueToEmit;
+                            break;
+                        }
                         case PgoInstrumentationKind.EightByte:
+                        {
+                            long valueToEmit;
+                            if (schema.Count == 1)
                             {
-                                long valueToEmit;
-                                if (schema.Count == 1)
-                                {
-                                    valueToEmit = schema.DataLong;
-                                }
-                                else
-                                {
-                                    valueToEmit = ((long[])schema.DataObject)[i];
-                                }
-                                valueEmitter.EmitLong(valueToEmit, prevEmittedIntData);
-                                prevEmittedIntData = valueToEmit;
-                                break;
+                                valueToEmit = schema.DataLong;
                             }
+                            else
+                            {
+                                valueToEmit = ((long[])schema.DataObject)[i];
+                            }
+                            valueEmitter.EmitLong(valueToEmit, prevEmittedIntData);
+                            prevEmittedIntData = valueToEmit;
+                            break;
+                        }
                         case PgoInstrumentationKind.TypeHandle:
-                            {
-                                TType typeToEmit = ((TType[])schema.DataObject)[i];
-                                valueEmitter.EmitType(typeToEmit, prevEmittedType);
-                                prevEmittedType = typeToEmit;
-                                break;
-                            }
+                        {
+                            TType typeToEmit = ((TType[])schema.DataObject)[i];
+                            valueEmitter.EmitType(typeToEmit, prevEmittedType);
+                            prevEmittedType = typeToEmit;
+                            break;
+                        }
                     }
                 }
 
@@ -475,12 +541,16 @@ namespace Internal.Pgo
                 // If EmitDone returns true, no further data needs to be encoded.
                 // Otherwise, emit a "Done" schema
                 valueEmitter.EmitLong((long)InstrumentationDataProcessingState.Type, 0);
-                valueEmitter.EmitLong((long)PgoInstrumentationKind.Done, (long)prevSchema.InstrumentationKind);
+                valueEmitter.EmitLong(
+                    (long)PgoInstrumentationKind.Done,
+                    (long)prevSchema.InstrumentationKind
+                );
             }
         }
 
-
-        private class PgoSchemaMergeComparer : IComparer<PgoSchemaElem>, IEqualityComparer<PgoSchemaElem>
+        private class PgoSchemaMergeComparer
+            : IComparer<PgoSchemaElem>,
+              IEqualityComparer<PgoSchemaElem>
         {
             public static PgoSchemaMergeComparer Singleton = new PgoSchemaMergeComparer();
 
@@ -490,16 +560,23 @@ namespace Internal.Pgo
                 {
                     return x.ILOffset.CompareTo(y.ILOffset);
                 }
-                PgoInstrumentationKind xdescr = x.InstrumentationKind & PgoInstrumentationKind.DescriptorMask;
-                PgoInstrumentationKind ydescr = y.InstrumentationKind & PgoInstrumentationKind.DescriptorMask;
+                PgoInstrumentationKind xdescr =
+                    x.InstrumentationKind & PgoInstrumentationKind.DescriptorMask;
+                PgoInstrumentationKind ydescr =
+                    y.InstrumentationKind & PgoInstrumentationKind.DescriptorMask;
                 if (xdescr != ydescr)
                 {
                     return xdescr.CompareTo(ydescr);
                 }
                 // We usually merge the Other field, except for edges, where we take care only to merge
                 // edges with equal ILOffset _and_ equal Other fields.
-                if ((x.InstrumentationKind == PgoInstrumentationKind.EdgeIntCount || x.InstrumentationKind == PgoInstrumentationKind.EdgeLongCount)
-                    && x.Other != y.Other)
+                if (
+                    (
+                        x.InstrumentationKind == PgoInstrumentationKind.EdgeIntCount
+                        || x.InstrumentationKind == PgoInstrumentationKind.EdgeLongCount
+                    )
+                    && x.Other != y.Other
+                )
                 {
                     return x.Other.CompareTo(y.Other);
                 }
@@ -507,9 +584,10 @@ namespace Internal.Pgo
                 return 0;
             }
 
-            public bool Equals(PgoSchemaElem x, PgoSchemaElem y)
-                => Compare(x, y) == 0;
-            int IEqualityComparer<PgoSchemaElem>.GetHashCode(PgoSchemaElem obj) => obj.ILOffset ^ ((int)(obj.InstrumentationKind & PgoInstrumentationKind.DescriptorMask) << 20);
+            public bool Equals(PgoSchemaElem x, PgoSchemaElem y) => Compare(x, y) == 0;
+            int IEqualityComparer<PgoSchemaElem>.GetHashCode(PgoSchemaElem obj) =>
+                obj.ILOffset
+                ^ ((int)(obj.InstrumentationKind & PgoInstrumentationKind.DescriptorMask) << 20);
         }
 
         public static PgoSchemaElem[] Merge<TType>(ReadOnlySpan<PgoSchemaElem[]> schemasToMerge)
@@ -517,7 +595,10 @@ namespace Internal.Pgo
             {
                 // The merging algorithm will sort the schema data by iloffset, then by InstrumentationKind
                 // From there each individual instrumentation kind shall have a specific merging rule
-                Dictionary<PgoSchemaElem, PgoSchemaElem> dataMerger = new Dictionary<PgoSchemaElem, PgoSchemaElem>(PgoSchemaMergeComparer.Singleton);
+                Dictionary<PgoSchemaElem, PgoSchemaElem> dataMerger = new Dictionary<
+                    PgoSchemaElem,
+                    PgoSchemaElem
+                >(PgoSchemaMergeComparer.Singleton);
 
                 foreach (PgoSchemaElem[] schemaSet in schemasToMerge)
                 {
@@ -547,7 +628,10 @@ namespace Internal.Pgo
                 return result;
             }
 
-            void MergeInSchemaElem(Dictionary<PgoSchemaElem, PgoSchemaElem> dataMerger, PgoSchemaElem schema)
+            void MergeInSchemaElem(
+                Dictionary<PgoSchemaElem, PgoSchemaElem> dataMerger,
+                PgoSchemaElem schema
+            )
             {
                 if (dataMerger.TryGetValue(schema, out var existingSchemaItem))
                 {
@@ -570,37 +654,39 @@ namespace Internal.Pgo
                             break;
 
                         case PgoInstrumentationKind.TypeHandleHistogramTypeHandle:
+                        {
+                            mergedElem.Count = existingSchemaItem.Count + schema.Count;
+                            TType[] newMergedTypeArray = new TType[mergedElem.Count];
+                            mergedElem.DataObject = newMergedTypeArray;
+                            int i = 0;
+                            foreach (TType type in (TType[])existingSchemaItem.DataObject)
                             {
-                                mergedElem.Count = existingSchemaItem.Count + schema.Count;
-                                TType[] newMergedTypeArray = new TType[mergedElem.Count];
-                                mergedElem.DataObject = newMergedTypeArray;
-                                int i = 0;
-                                foreach (TType type in (TType[])existingSchemaItem.DataObject)
-                                {
-                                    newMergedTypeArray[i++] = type;
-                                }
-                                foreach (TType type in (TType[])schema.DataObject)
-                                {
-                                    newMergedTypeArray[i++] = type;
-                                }
-                                break;
+                                newMergedTypeArray[i++] = type;
                             }
+                            foreach (TType type in (TType[])schema.DataObject)
+                            {
+                                newMergedTypeArray[i++] = type;
+                            }
+                            break;
+                        }
 
                         case PgoInstrumentationKind.Version:
-                            {
-                                mergedElem.Other = Math.Max(existingSchemaItem.Other, schema.Other);
-                                break;
-                            }
+                        {
+                            mergedElem.Other = Math.Max(existingSchemaItem.Other, schema.Other);
+                            break;
+                        }
 
                         case PgoInstrumentationKind.NumRuns:
-                            {
-                                mergedElem.Other = existingSchemaItem.Other + schema.Other;
-                                break;
-                            }
+                        {
+                            mergedElem.Other = existingSchemaItem.Other + schema.Other;
+                            break;
+                        }
                     }
 
                     Debug.Assert(PgoSchemaMergeComparer.Singleton.Compare(schema, mergedElem) == 0);
-                    Debug.Assert(PgoSchemaMergeComparer.Singleton.Equals(schema, mergedElem) == true);
+                    Debug.Assert(
+                        PgoSchemaMergeComparer.Singleton.Equals(schema, mergedElem) == true
+                    );
                     dataMerger[mergedElem] = mergedElem;
                 }
                 else

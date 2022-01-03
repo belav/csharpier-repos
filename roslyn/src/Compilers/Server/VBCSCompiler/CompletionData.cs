@@ -37,18 +37,24 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         internal TimeSpan? NewKeepAlive { get; }
         internal bool ShutdownRequest { get; }
 
-        internal CompletionData(CompletionReason reason, TimeSpan? newKeepAlive = null, bool shutdownRequested = false)
+        internal CompletionData(
+            CompletionReason reason,
+            TimeSpan? newKeepAlive = null,
+            bool shutdownRequested = false
+        )
         {
             Reason = reason;
             NewKeepAlive = newKeepAlive;
             ShutdownRequest = shutdownRequested;
         }
 
-        internal static CompletionData RequestCompleted { get; } = new CompletionData(CompletionReason.RequestCompleted);
+        internal static CompletionData RequestCompleted { get; } =
+            new CompletionData(CompletionReason.RequestCompleted);
 
-        internal static CompletionData RequestError { get; } = new CompletionData(CompletionReason.RequestError);
+        internal static CompletionData RequestError { get; } =
+            new CompletionData(CompletionReason.RequestError);
 
-        public override string ToString() => $"{Reason} KeepAlive:{NewKeepAlive} ShutdownRequest:{ShutdownRequest}";
+        public override string ToString() =>
+            $"{Reason} KeepAlive:{NewKeepAlive} ShutdownRequest:{ShutdownRequest}";
     }
 }
-

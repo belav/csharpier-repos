@@ -38,7 +38,9 @@ namespace Microsoft.AspNetCore.Components.WebView.Wpf
             if (_hasInitialized)
             {
                 // We don't want people to think they can set more than one environment
-                throw new InvalidOperationException($"{nameof(EnsureCoreWebView2Async)} may only be called once per control.");
+                throw new InvalidOperationException(
+                    $"{nameof(EnsureCoreWebView2Async)} may only be called once per control."
+                );
             }
 
             _hasInitialized = true;

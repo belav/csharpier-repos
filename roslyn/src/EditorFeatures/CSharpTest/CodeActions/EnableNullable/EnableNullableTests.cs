@@ -12,33 +12,46 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.Testing;
 using Roslyn.Utilities;
 using Xunit;
-using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeRefactoringVerifier<
-    Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable.EnableNullableCodeRefactoringProvider>;
+using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeRefactoringVerifier<Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable.EnableNullableCodeRefactoringProvider>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.EnableNullable
 {
     public class EnableNullableTests
     {
-        private static readonly Func<Solution, ProjectId, Solution> s_enableNullableInFixedSolution =
-            (solution, projectId) =>
+        private static readonly Func<
+            Solution,
+            ProjectId,
+            Solution
+        > s_enableNullableInFixedSolution = (solution, projectId) =>
+        {
+            var project = solution.GetRequiredProject(projectId);
+            var document = project.Documents.First();
+
+            // Only the input solution contains '#nullable enable'
+            if (
+                !document
+                    .GetTextSynchronously(CancellationToken.None)
+                    .ToString()
+                    .Contains("#nullable enable")
+            )
             {
-                var project = solution.GetRequiredProject(projectId);
-                var document = project.Documents.First();
+                var compilationOptions = (CSharpCompilationOptions)solution.GetRequiredProject(
+                    projectId
+                ).CompilationOptions!;
+                solution = solution.WithProjectCompilationOptions(
+                    projectId,
+                    compilationOptions.WithNullableContextOptions(NullableContextOptions.Enable)
+                );
+            }
 
-                // Only the input solution contains '#nullable enable'
-                if (!document.GetTextSynchronously(CancellationToken.None).ToString().Contains("#nullable enable"))
-                {
-                    var compilationOptions = (CSharpCompilationOptions)solution.GetRequiredProject(projectId).CompilationOptions!;
-                    solution = solution.WithProjectCompilationOptions(projectId, compilationOptions.WithNullableContextOptions(NullableContextOptions.Enable));
-                }
-
-                return solution;
-            };
+            return solution;
+        };
 
         [Fact]
         public async Task EnabledOnNullableEnable()
         {
-            var code1 = @"
+            var code1 =
+                @"
 #nullable enable$$
 
 class Example
@@ -46,13 +59,15 @@ class Example
   string? value;
 }
 ";
-            var code2 = @"
+            var code2 =
+                @"
 class Example2
 {
   string value;
 }
 ";
-            var code3 = @"
+            var code3 =
+                @"
 class Example3
 {
 #nullable enable
@@ -60,7 +75,8 @@ class Example3
 #nullable restore
 }
 ";
-            var code4 = @"
+            var code4 =
+                @"
 #nullable disable
 
 class Example4
@@ -69,14 +85,16 @@ class Example4
 }
 ";
 
-            var fixedCode1 = @"
+            var fixedCode1 =
+                @"
 
 class Example
 {
   string? value;
 }
 ";
-            var fixedCode2 = @"
+            var fixedCode2 =
+                @"
 #nullable disable
 
 class Example2
@@ -84,7 +102,8 @@ class Example2
   string value;
 }
 ";
-            var fixedCode3 = @"
+            var fixedCode3 =
+                @"
 #nullable disable
 
 class Example3
@@ -94,7 +113,8 @@ class Example3
 #nullable disable
 }
 ";
-            var fixedCode4 = @"
+            var fixedCode4 =
+                @"
 #nullable disable
 
 class Example4
@@ -105,26 +125,8 @@ class Example4
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        code1,
-                        code2,
-                        code3,
-                        code4,
-                    },
-                },
-                FixedState =
-                {
-                    Sources =
-                    {
-                        fixedCode1,
-                        fixedCode2,
-                        fixedCode3,
-                        fixedCode4,
-                    },
-                },
+                TestState = { Sources = { code1, code2, code3, code4, }, },
+                FixedState = { Sources = { fixedCode1, fixedCode2, fixedCode3, fixedCode4, }, },
                 SolutionTransforms = { s_enableNullableInFixedSolution },
             }.RunAsync();
         }
@@ -132,7 +134,8 @@ class Example4
         [Fact]
         public async Task PlacementAfterHeader()
         {
-            var code1 = @"
+            var code1 =
+                @"
 #nullable enable$$
 
 class Example
@@ -140,7 +143,8 @@ class Example
   string? value;
 }
 ";
-            var code2 = @"// File header line 1
+            var code2 =
+                @"// File header line 1
 // File header line 2
 
 class Example2
@@ -148,7 +152,8 @@ class Example2
   string value;
 }
 ";
-            var code3 = @"#region File Header
+            var code3 =
+                @"#region File Header
 // File header line 1
 // File header line 2
 #endregion
@@ -159,14 +164,16 @@ class Example3
 }
 ";
 
-            var fixedCode1 = @"
+            var fixedCode1 =
+                @"
 
 class Example
 {
   string? value;
 }
 ";
-            var fixedCode2 = @"// File header line 1
+            var fixedCode2 =
+                @"// File header line 1
 // File header line 2
 
 #nullable disable
@@ -176,7 +183,8 @@ class Example2
   string value;
 }
 ";
-            var fixedCode3 = @"#region File Header
+            var fixedCode3 =
+                @"#region File Header
 // File header line 1
 // File header line 2
 #endregion
@@ -191,24 +199,8 @@ class Example3
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        code1,
-                        code2,
-                        code3,
-                    },
-                },
-                FixedState =
-                {
-                    Sources =
-                    {
-                        fixedCode1,
-                        fixedCode2,
-                        fixedCode3,
-                    },
-                },
+                TestState = { Sources = { code1, code2, code3, }, },
+                FixedState = { Sources = { fixedCode1, fixedCode2, fixedCode3, }, },
                 SolutionTransforms = { s_enableNullableInFixedSolution },
             }.RunAsync();
         }
@@ -216,7 +208,8 @@ class Example3
         [Fact]
         public async Task PlacementBeforeDocComment()
         {
-            var code1 = @"
+            var code1 =
+                @"
 #nullable enable$$
 
 class Example
@@ -224,13 +217,15 @@ class Example
   string? value;
 }
 ";
-            var code2 = @"// Line comment
+            var code2 =
+                @"// Line comment
 class Example2
 {
   string value;
 }
 ";
-            var code3 = @"/*
+            var code3 =
+                @"/*
  * Block comment
  */
 class Example3
@@ -238,13 +233,15 @@ class Example3
   string value;
 }
 ";
-            var code4 = @"/// <summary>Single line doc comment</summary>
+            var code4 =
+                @"/// <summary>Single line doc comment</summary>
 class Example4
 {
   string value;
 }
 ";
-            var code5 = @"/**
+            var code5 =
+                @"/**
  * Multi-line doc comment
  */
 class Example5
@@ -253,14 +250,16 @@ class Example5
 }
 ";
 
-            var fixedCode1 = @"
+            var fixedCode1 =
+                @"
 
 class Example
 {
   string? value;
 }
 ";
-            var fixedCode2 = @"// Line comment
+            var fixedCode2 =
+                @"// Line comment
 #nullable disable
 
 class Example2
@@ -268,7 +267,8 @@ class Example2
   string value;
 }
 ";
-            var fixedCode3 = @"/*
+            var fixedCode3 =
+                @"/*
  * Block comment
  */
 #nullable disable
@@ -278,7 +278,8 @@ class Example3
   string value;
 }
 ";
-            var fixedCode4 = @"#nullable disable
+            var fixedCode4 =
+                @"#nullable disable
 
 /// <summary>Single line doc comment</summary>
 class Example4
@@ -286,7 +287,8 @@ class Example4
   string value;
 }
 ";
-            var fixedCode5 = @"#nullable disable
+            var fixedCode5 =
+                @"#nullable disable
 
 /**
  * Multi-line doc comment
@@ -299,27 +301,10 @@ class Example5
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        code1,
-                        code2,
-                        code3,
-                        code4,
-                        code5,
-                    },
-                },
+                TestState = { Sources = { code1, code2, code3, code4, code5, }, },
                 FixedState =
                 {
-                    Sources =
-                    {
-                        fixedCode1,
-                        fixedCode2,
-                        fixedCode3,
-                        fixedCode4,
-                        fixedCode5,
-                    },
+                    Sources = { fixedCode1, fixedCode2, fixedCode3, fixedCode4, fixedCode5, },
                 },
                 SolutionTransforms = { s_enableNullableInFixedSolution },
             }.RunAsync();
@@ -328,7 +313,8 @@ class Example5
         [Fact]
         public async Task OmitLeadingRestore()
         {
-            var code1 = @"
+            var code1 =
+                @"
 #nullable enable$$
 
 class Example
@@ -336,7 +322,8 @@ class Example
   string? value;
 }
 ";
-            var code2 = @"
+            var code2 =
+                @"
 #nullable enable
 
 class Example2
@@ -344,7 +331,8 @@ class Example2
   string? value;
 }
 ";
-            var code3 = @"
+            var code3 =
+                @"
 #nullable enable warnings
 
 class Example3
@@ -352,7 +340,8 @@ class Example3
   string value;
 }
 ";
-            var code4 = @"
+            var code4 =
+                @"
 #nullable enable annotations
 
 class Example4
@@ -361,21 +350,24 @@ class Example4
 }
 ";
 
-            var fixedCode1 = @"
+            var fixedCode1 =
+                @"
 
 class Example
 {
   string? value;
 }
 ";
-            var fixedCode2 = @"
+            var fixedCode2 =
+                @"
 
 class Example2
 {
   string? value;
 }
 ";
-            var fixedCode3 = @"
+            var fixedCode3 =
+                @"
 #nullable disable
 
 #nullable restore warnings
@@ -385,7 +377,8 @@ class Example3
   string value;
 }
 ";
-            var fixedCode4 = @"
+            var fixedCode4 =
+                @"
 #nullable disable
 
 #nullable restore annotations
@@ -398,26 +391,8 @@ class Example4
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        code1,
-                        code2,
-                        code3,
-                        code4,
-                    },
-                },
-                FixedState =
-                {
-                    Sources =
-                    {
-                        fixedCode1,
-                        fixedCode2,
-                        fixedCode3,
-                        fixedCode4,
-                    },
-                },
+                TestState = { Sources = { code1, code2, code3, code4, }, },
+                FixedState = { Sources = { fixedCode1, fixedCode2, fixedCode3, fixedCode4, }, },
                 SolutionTransforms = { s_enableNullableInFixedSolution },
             }.RunAsync();
         }
@@ -425,7 +400,8 @@ class Example4
         [Fact]
         public async Task IgnoreGeneratedCode()
         {
-            var code1 = @"
+            var code1 =
+                @"
 #nullable enable$$
 
 class Example
@@ -433,7 +409,8 @@ class Example
   string? value;
 }
 ";
-            var generatedCode1 = @"// <auto-generated/>
+            var generatedCode1 =
+                @"// <auto-generated/>
 
 #nullable enable
 
@@ -442,7 +419,8 @@ class Example2
   string? value;
 }
 ";
-            var generatedCode2 = @"// <auto-generated/>
+            var generatedCode2 =
+                @"// <auto-generated/>
 
 #nullable disable
 
@@ -451,7 +429,8 @@ class Example3
   string value;
 }
 ";
-            var generatedCode3 = @"// <auto-generated/>
+            var generatedCode3 =
+                @"// <auto-generated/>
 
 #nullable restore
 
@@ -461,7 +440,8 @@ class Example4
 }
 ";
 
-            var fixedCode1 = @"
+            var fixedCode1 =
+                @"
 
 class Example
 {
@@ -473,23 +453,11 @@ class Example
             {
                 TestState =
                 {
-                    Sources =
-                    {
-                        code1,
-                        generatedCode1,
-                        generatedCode2,
-                        generatedCode3,
-                    },
+                    Sources = { code1, generatedCode1, generatedCode2, generatedCode3, },
                 },
                 FixedState =
                 {
-                    Sources =
-                    {
-                        fixedCode1,
-                        generatedCode1,
-                        generatedCode2,
-                        generatedCode3,
-                    },
+                    Sources = { fixedCode1, generatedCode1, generatedCode2, generatedCode3, },
                     ExpectedDiagnostics =
                     {
                         // /0/Test3.cs(7,10): error CS8618: Non-nullable field 'value' must contain a non-null value when exiting constructor. Consider declaring the field as nullable.
@@ -506,7 +474,8 @@ class Example
         [InlineData(NullableContextOptions.Enable)]
         public async Task DisabledIfSetInProject(NullableContextOptions nullableContextOptions)
         {
-            var code = @"
+            var code =
+                @"
 #nullable enable$$
 ";
 
@@ -518,8 +487,14 @@ class Example
                 {
                     (solution, projectId) =>
                     {
-                        var compilationOptions = (CSharpCompilationOptions)solution.GetRequiredProject(projectId).CompilationOptions!;
-                        return solution.WithProjectCompilationOptions(projectId, compilationOptions.WithNullableContextOptions(nullableContextOptions));
+                        var compilationOptions =
+                            (CSharpCompilationOptions)solution.GetRequiredProject(
+                                projectId
+                            ).CompilationOptions!;
+                        return solution.WithProjectCompilationOptions(
+                            projectId,
+                            compilationOptions.WithNullableContextOptions(nullableContextOptions)
+                        );
                     },
                 },
             }.RunAsync();
@@ -538,7 +513,8 @@ class Example
         [InlineData(LanguageVersion.CSharp7_3)]
         public async Task DisabledForUnsupportedLanguageVersion(LanguageVersion languageVersion)
         {
-            var code = @"
+            var code =
+                @"
 #{|#0:nullable|} enable$$
 ";
 
@@ -576,15 +552,12 @@ class Example
         [Fact]
         public async Task DisabledOnNullableDisable()
         {
-            var code = @"
+            var code =
+                @"
 #nullable disable$$
 ";
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
         }
     }
 }

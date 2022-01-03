@@ -80,13 +80,17 @@ namespace System.Runtime.InteropServices.JavaScript
         internal void AssertNotDisposed()
 #endif
         {
-            if (IsDisposed) throw new ObjectDisposedException($"Cannot access a disposed {GetType().Name}.");
+            if (IsDisposed)
+                throw new ObjectDisposedException($"Cannot access a disposed {GetType().Name}.");
         }
 
 #if DEBUG
         public void AssertInFlight(int expectedInFlightCount)
         {
-            if (InFlightCounter != expectedInFlightCount) throw new InvalidProgramException($"Invalid InFlightCounter for JSObject {JSHandle}, expected: {expectedInFlightCount}, actual: {InFlightCounter}");
+            if (InFlightCounter != expectedInFlightCount)
+                throw new InvalidProgramException(
+                    $"Invalid InFlightCounter for JSObject {JSHandle}, expected: {expectedInFlightCount}, actual: {InFlightCounter}"
+                );
         }
 #endif
 
@@ -98,7 +102,8 @@ namespace System.Runtime.InteropServices.JavaScript
             return true;
         }
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is JSObject other && JSHandle == other.JSHandle;
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is JSObject other && JSHandle == other.JSHandle;
 
         public override int GetHashCode() => JSHandle;
 

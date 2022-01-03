@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             TextSpan textSpan,
             DocumentId documentId,
             Glyph glyph,
-            ValueTrackedItem? parent = null)
+            ValueTrackedItem? parent = null
+        )
         {
             SymbolKey = symbolKey;
             Parent = parent;
@@ -49,7 +50,13 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             return subText.ToString();
         }
 
-        public static Task<ValueTrackedItem?> TryCreateAsync(Solution solution, Location location, ISymbol symbol, ValueTrackedItem? parent = null, CancellationToken cancellationToken = default)
+        public static Task<ValueTrackedItem?> TryCreateAsync(
+            Solution solution,
+            Location location,
+            ISymbol symbol,
+            ValueTrackedItem? parent = null,
+            CancellationToken cancellationToken = default
+        )
         {
             Contract.ThrowIfNull(location.SourceTree);
 
@@ -57,7 +64,13 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             return TryCreateAsync(document, location.SourceSpan, symbol, parent, cancellationToken);
         }
 
-        public static async Task<ValueTrackedItem?> TryCreateAsync(Document document, TextSpan textSpan, ISymbol symbol, ValueTrackedItem? parent = null, CancellationToken cancellationToken = default)
+        public static async Task<ValueTrackedItem?> TryCreateAsync(
+            Document document,
+            TextSpan textSpan,
+            ISymbol symbol,
+            ValueTrackedItem? parent = null,
+            CancellationToken cancellationToken = default
+        )
         {
             var excerptService = document.Services.GetService<IDocumentExcerptService>();
             SourceText? sourceText = null;
@@ -65,7 +78,9 @@ namespace Microsoft.CodeAnalysis.ValueTracking
 
             if (excerptService != null)
             {
-                var result = await excerptService.TryExcerptAsync(document, textSpan, ExcerptMode.SingleLine, cancellationToken).ConfigureAwait(false);
+                var result = await excerptService
+                    .TryExcerptAsync(document, textSpan, ExcerptMode.SingleLine, cancellationToken)
+                    .ConfigureAwait(false);
                 if (result.HasValue)
                 {
                     var value = result.Value;
@@ -75,21 +90,28 @@ namespace Microsoft.CodeAnalysis.ValueTracking
 
             if (sourceText is null)
             {
-                var documentSpan = await ClassifiedSpansAndHighlightSpanFactory.GetClassifiedDocumentSpanAsync(document, textSpan, cancellationToken).ConfigureAwait(false);
-                var classificationResult = await ClassifiedSpansAndHighlightSpanFactory.ClassifyAsync(documentSpan, cancellationToken).ConfigureAwait(false);
+                var documentSpan = await ClassifiedSpansAndHighlightSpanFactory
+                    .GetClassifiedDocumentSpanAsync(document, textSpan, cancellationToken)
+                    .ConfigureAwait(false);
+                var classificationResult = await ClassifiedSpansAndHighlightSpanFactory
+                    .ClassifyAsync(documentSpan, cancellationToken)
+                    .ConfigureAwait(false);
                 classifiedSpans = classificationResult.ClassifiedSpans;
-                var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var syntaxTree = await document
+                    .GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 sourceText = await syntaxTree.GetTextAsync(cancellationToken).ConfigureAwait(false);
             }
 
             return new ValueTrackedItem(
-                        SymbolKey.Create(symbol, cancellationToken),
-                        sourceText,
-                        classifiedSpans,
-                        textSpan,
-                        document.Id,
-                        symbol.GetGlyph(),
-                        parent: parent);
+                SymbolKey.Create(symbol, cancellationToken),
+                sourceText,
+                classifiedSpans,
+                textSpan,
+                document.Id,
+                symbol.GetGlyph(),
+                parent: parent
+            );
         }
     }
 }

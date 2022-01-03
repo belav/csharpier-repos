@@ -40,7 +40,10 @@ namespace Microsoft.Web.Mvc.Test
             MvcHtmlString result = html.Script("~/Correct/Path.js", "~/Correct/Debug/Path.js");
 
             // Assert
-            Assert.Equal("<script src=\"/Correct/Path.js\" type=\"text/javascript\"></script>", result.ToHtmlString());
+            Assert.Equal(
+                "<script src=\"/Correct/Path.js\" type=\"text/javascript\"></script>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -50,10 +53,16 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper html = MvcHelper.GetHtmlHelperWithPath(new ViewDataDictionary());
 
             // Act
-            MvcHtmlString result = html.Script("../../Correct/Path.js", "../../Correct/Debug/Path.js");
+            MvcHtmlString result = html.Script(
+                "../../Correct/Path.js",
+                "../../Correct/Debug/Path.js"
+            );
 
             // Assert
-            Assert.Equal("<script src=\"../../Correct/Path.js\" type=\"text/javascript\"></script>", result.ToHtmlString());
+            Assert.Equal(
+                "<script src=\"../../Correct/Path.js\" type=\"text/javascript\"></script>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -66,7 +75,10 @@ namespace Microsoft.Web.Mvc.Test
             MvcHtmlString result = html.Script("/Correct/Path.js", "/Correct/Debug/Path.js");
 
             // Assert
-            Assert.Equal("<script src=\"/Correct/Path.js\" type=\"text/javascript\"></script>", result.ToHtmlString());
+            Assert.Equal(
+                "<script src=\"/Correct/Path.js\" type=\"text/javascript\"></script>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -79,7 +91,10 @@ namespace Microsoft.Web.Mvc.Test
             MvcHtmlString result = html.Script("Correct/Path.js", "Correct/Debug/Path.js");
 
             // Assert
-            Assert.Equal("<script src=\"/Scripts/Correct/Path.js\" type=\"text/javascript\"></script>", result.ToHtmlString());
+            Assert.Equal(
+                "<script src=\"/Scripts/Correct/Path.js\" type=\"text/javascript\"></script>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -89,10 +104,16 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper html = MvcHelper.GetHtmlHelperWithPath(new ViewDataDictionary());
 
             // Act
-            MvcHtmlString result = html.Script("http://ajax.Correct.com/Path.js", "http://ajax.Debug.com/Path.js");
+            MvcHtmlString result = html.Script(
+                "http://ajax.Correct.com/Path.js",
+                "http://ajax.Debug.com/Path.js"
+            );
 
             // Assert
-            Assert.Equal("<script src=\"http://ajax.Correct.com/Path.js\" type=\"text/javascript\"></script>", result.ToHtmlString());
+            Assert.Equal(
+                "<script src=\"http://ajax.Correct.com/Path.js\" type=\"text/javascript\"></script>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -102,10 +123,16 @@ namespace Microsoft.Web.Mvc.Test
             HtmlHelper html = MvcHelper.GetHtmlHelperWithPath(new ViewDataDictionary());
 
             // Act
-            MvcHtmlString result = html.Script("https://ajax.Correct.com/Path.js", "https://ajax.Debug.com/Path.js");
+            MvcHtmlString result = html.Script(
+                "https://ajax.Correct.com/Path.js",
+                "https://ajax.Debug.com/Path.js"
+            );
 
             // Assert
-            Assert.Equal("<script src=\"https://ajax.Correct.com/Path.js\" type=\"text/javascript\"></script>", result.ToHtmlString());
+            Assert.Equal(
+                "<script src=\"https://ajax.Correct.com/Path.js\" type=\"text/javascript\"></script>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -119,7 +146,10 @@ namespace Microsoft.Web.Mvc.Test
             MvcHtmlString result = html.Script("Correct/Path.js", "Correct/Debug/Path.js");
 
             // Assert
-            Assert.Equal("<script src=\"/Scripts/Correct/Debug/Path.js\" type=\"text/javascript\"></script>", result.ToHtmlString());
+            Assert.Equal(
+                "<script src=\"/Scripts/Correct/Debug/Path.js\" type=\"text/javascript\"></script>",
+                result.ToHtmlString()
+            );
         }
     }
 }

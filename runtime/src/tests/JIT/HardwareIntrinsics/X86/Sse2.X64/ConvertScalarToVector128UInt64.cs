@@ -27,7 +27,9 @@ namespace IntelHardwareIntrinsicTest
 
                     if (!ulongTable.CheckResult((x, y) => (y[0] == 0xffffffff01ul) && (y[1] == 0)))
                     {
-                        Console.WriteLine("SSE2.X64 ConvertScalarToVector128Single failed on ulong:");
+                        Console.WriteLine(
+                            "SSE2.X64 ConvertScalarToVector128Single failed on ulong:"
+                        );
                         foreach (var item in ulongTable.outArray)
                         {
                             Console.Write(item + ", ");
@@ -42,16 +44,17 @@ namespace IntelHardwareIntrinsicTest
                     {
                         var vd = Sse2.X64.ConvertScalarToVector128UInt64((ulong)5);
                         testResult = Fail;
-                        Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.X64.ConvertScalarToVector128UInt64)} failed: expected PlatformNotSupportedException exception.");
+                        Console.WriteLine(
+                            $"{nameof(Sse2)}.{nameof(Sse2.X64.ConvertScalarToVector128UInt64)} failed: expected PlatformNotSupportedException exception."
+                        );
                     }
-                    catch (PlatformNotSupportedException)
-                    {
-
-                    }
+                    catch (PlatformNotSupportedException) { }
                     catch (Exception ex)
                     {
                         testResult = Fail;
-                        Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.X64.ConvertScalarToVector128UInt64)}-{ex} failed: expected PlatformNotSupportedException exception.");
+                        Console.WriteLine(
+                            $"{nameof(Sse2)}.{nameof(Sse2.X64.ConvertScalarToVector128UInt64)}-{ex} failed: expected PlatformNotSupportedException exception."
+                        );
                     }
                 }
             }

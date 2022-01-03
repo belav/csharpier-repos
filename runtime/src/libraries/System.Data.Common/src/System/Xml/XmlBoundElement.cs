@@ -26,15 +26,23 @@ namespace System.Xml
         private ElementState _state;
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        internal XmlBoundElement(string prefix, string localName, string namespaceURI, XmlDocument doc) : base(prefix, localName, namespaceURI, doc)
+        internal XmlBoundElement(
+            string prefix,
+            string localName,
+            string namespaceURI,
+            XmlDocument doc
+        ) : base(prefix, localName, namespaceURI, doc)
         {
             _state = ElementState.None;
         }
 
         public override XmlAttributeCollection Attributes
         {
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "This whole class is unsafe. Constructors are marked as such.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "This whole class is unsafe. Constructors are marked as such."
+            )]
             get
             {
                 AutoFoliate();
@@ -46,8 +54,11 @@ namespace System.Xml
 
         public override XmlNode? FirstChild
         {
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "This whole class is unsafe. Constructors are marked as such.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "This whole class is unsafe. Constructors are marked as such."
+            )]
             get
             {
                 AutoFoliate();
@@ -59,8 +70,11 @@ namespace System.Xml
 
         public override XmlNode? LastChild
         {
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "This whole class is unsafe. Constructors are marked as such.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "This whole class is unsafe. Constructors are marked as such."
+            )]
             get
             {
                 AutoFoliate();
@@ -70,8 +84,11 @@ namespace System.Xml
 
         public override XmlNode? PreviousSibling
         {
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "This whole class is unsafe. Constructors are marked as such.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "This whole class is unsafe. Constructors are marked as such."
+            )]
             get
             {
                 XmlNode? prev = base.PreviousSibling;
@@ -92,8 +109,11 @@ namespace System.Xml
 
         public override XmlNode? NextSibling
         {
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "This whole class is unsafe. Constructors are marked as such.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "This whole class is unsafe. Constructors are marked as such."
+            )]
             get
             {
                 XmlNode? next = base.NextSibling;
@@ -114,8 +134,11 @@ namespace System.Xml
 
         public override bool HasChildNodes
         {
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "This whole class is unsafe. Constructors are marked as such.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "This whole class is unsafe. Constructors are marked as such."
+            )]
             get
             {
                 AutoFoliate();
@@ -123,32 +146,44 @@ namespace System.Xml
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override XmlNode? InsertBefore(XmlNode newChild, XmlNode? refChild)
         {
             AutoFoliate();
             return base.InsertBefore(newChild, refChild);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override XmlNode? InsertAfter(XmlNode newChild, XmlNode? refChild)
         {
             AutoFoliate();
             return base.InsertAfter(newChild, refChild);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override XmlNode ReplaceChild(XmlNode newChild, XmlNode oldChild)
         {
             AutoFoliate();
             return base.ReplaceChild(newChild, oldChild);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override XmlNode? AppendChild(XmlNode newChild)
         {
             AutoFoliate();
@@ -171,8 +206,11 @@ namespace System.Xml
         public override string InnerXml
         {
             get { return base.InnerXml; }
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "This whole class is unsafe. Constructors are marked as such.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "This whole class is unsafe. Constructors are marked as such."
+            )]
             set
             {
                 RemoveAllChildren();
@@ -220,8 +258,11 @@ namespace System.Xml
             set { _state = value; }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         internal void Foliate(ElementState newState)
         {
             XmlDataDocument doc = (XmlDataDocument)OwnerDocument;
@@ -264,8 +305,11 @@ namespace System.Xml
             return element;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override void WriteContentTo(XmlWriter w)
         {
             DataPointer dp = new DataPointer((XmlDataDocument)OwnerDocument, this);
@@ -280,8 +324,11 @@ namespace System.Xml
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override void WriteTo(XmlWriter w)
         {
             DataPointer dp = new DataPointer((XmlDataDocument)OwnerDocument, this);
@@ -321,7 +368,12 @@ namespace System.Xml
 
             if (!bHasXSI && doc._bLoadFromDataSet && doc._bHasXSINIL)
             {
-                w.WriteAttributeString("xmlns", "xsi", "http://www.w3.org/2000/xmlns/", Keywords.XSINS);
+                w.WriteAttributeString(
+                    "xmlns",
+                    "xsi",
+                    "http://www.w3.org/2000/xmlns/",
+                    Keywords.XSINS
+                );
             }
 
             WriteBoundElementContentTo(dp, w);
@@ -374,8 +426,7 @@ namespace System.Xml
                 do
                 {
                     WriteTo(dp, w);
-                }
-                while (dp.MoveToNextSibling());
+                } while (dp.MoveToNextSibling());
 
                 dp.MoveToParent();
             }
@@ -396,8 +447,7 @@ namespace System.Xml
                             do
                             {
                                 WriteTo(dp, w);
-                            }
-                            while (dp.MoveToNextSibling());
+                            } while (dp.MoveToNextSibling());
 
                             dp.MoveToParent();
                         }

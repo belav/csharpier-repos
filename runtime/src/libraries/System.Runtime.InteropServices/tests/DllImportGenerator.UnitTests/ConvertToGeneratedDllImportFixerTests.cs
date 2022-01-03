@@ -10,7 +10,8 @@ using static Microsoft.Interop.Analyzers.ConvertToGeneratedDllImportFixer;
 
 using VerifyCS = DllImportGenerator.UnitTests.Verifiers.CSharpCodeFixVerifier<
     Microsoft.Interop.Analyzers.ConvertToGeneratedDllImportAnalyzer,
-    Microsoft.Interop.Analyzers.ConvertToGeneratedDllImportFixer>;
+    Microsoft.Interop.Analyzers.ConvertToGeneratedDllImportFixer
+>;
 
 namespace DllImportGenerator.UnitTests
 {
@@ -22,7 +23,8 @@ namespace DllImportGenerator.UnitTests
         [InlineData(false)]
         public async Task Basic(bool usePreprocessorDefines)
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -53,7 +55,8 @@ partial class Test
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey);
+                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey
+            );
         }
 
         [ConditionalTheory]
@@ -61,7 +64,8 @@ partial class Test
         [InlineData(false)]
         public async Task Comments(bool usePreprocessorDefines)
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -116,7 +120,8 @@ partial class Test
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey);
+                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey
+            );
         }
 
         [ConditionalTheory]
@@ -124,7 +129,8 @@ partial class Test
         [InlineData(false)]
         public async Task MultipleAttributes(bool usePreprocessorDefines)
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -177,7 +183,8 @@ partial class Test
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey);
+                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey
+            );
         }
 
         [ConditionalTheory]
@@ -185,7 +192,8 @@ partial class Test
         [InlineData(false)]
         public async Task NamedArguments(bool usePreprocessorDefines)
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -216,7 +224,8 @@ partial class Test
     [DllImport(""DoesNotExist"", EntryPoint = ""Entry"", CharSet = CharSet.Unicode)]
     public static extern int Method2(out int ret);
 #endif
-}}" : @$"
+}}"
+                : @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -229,7 +238,8 @@ partial class Test
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey);
+                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey
+            );
         }
 
         [ConditionalTheory]
@@ -237,7 +247,8 @@ partial class Test
         [InlineData(false)]
         public async Task RemoveableNamedArguments(bool usePreprocessorDefines)
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -268,7 +279,8 @@ partial class Test
     [DllImport(""DoesNotExist"", ThrowOnUnmappableChar = false)]
     public static extern int Method2(out int ret);
 #endif
-}}" : @$"
+}}"
+                : @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -281,15 +293,19 @@ partial class Test
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey);
+                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey
+            );
         }
 
         [ConditionalTheory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task ReplaceableExplicitPlatformDefaultCallingConvention(bool usePreprocessorDefines)
+        public async Task ReplaceableExplicitPlatformDefaultCallingConvention(
+            bool usePreprocessorDefines
+        )
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -309,7 +325,8 @@ partial class Test
     [DllImport(""DoesNotExist"", EntryPoint = ""Entry"", CallingConvention = CallingConvention.Winapi)]
     public static extern int Method1(out int ret);
 #endif
-}}" : @$"
+}}"
+                : @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -319,7 +336,8 @@ partial class Test
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey);
+                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey
+            );
         }
 
         [ConditionalTheory]
@@ -331,9 +349,14 @@ partial class Test
         [InlineData(CallingConvention.ThisCall, typeof(CallConvThiscall), false)]
         [InlineData(CallingConvention.FastCall, typeof(CallConvFastcall), true)]
         [InlineData(CallingConvention.FastCall, typeof(CallConvFastcall), false)]
-        public async Task ReplaceableCallingConvention(CallingConvention callConv, Type callConvType, bool usePreprocessorDefines)
+        public async Task ReplaceableCallingConvention(
+            CallingConvention callConv,
+            Type callConvType,
+            bool usePreprocessorDefines
+        )
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -354,7 +377,8 @@ partial class Test
     [DllImport(""DoesNotExist"", EntryPoint = ""Entry"", CallingConvention = CallingConvention.{callConv})]
     public static extern int Method1(out int ret);
 #endif
-}}" : @$"
+}}"
+                : @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -365,7 +389,8 @@ partial class Test
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey);
+                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey
+            );
         }
 
         [ConditionalTheory]
@@ -373,7 +398,8 @@ partial class Test
         [InlineData(false)]
         public async Task PreferredAttributeOrder(bool usePreprocessorDefines)
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -393,7 +419,8 @@ partial class Test
     [DllImport(""DoesNotExist"", EntryPoint = ""Entry"", CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
     public static extern int Method(out int ret);
 #endif
-}}" : @$"
+}}"
+                : @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -403,7 +430,8 @@ partial class Test
             await VerifyCS.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey);
+                usePreprocessorDefines ? WithPreprocessorDefinesKey : NoPreprocessorDefinesKey
+            );
         }
     }
 }

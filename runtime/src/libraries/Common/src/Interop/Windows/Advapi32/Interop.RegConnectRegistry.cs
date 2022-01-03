@@ -14,10 +14,15 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [GeneratedDllImport(Libraries.Advapi32, EntryPoint = "RegConnectRegistryW", CharSet = CharSet.Unicode)]
+        [GeneratedDllImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegConnectRegistryW",
+            CharSet = CharSet.Unicode
+        )]
         internal static partial int RegConnectRegistry(
             string machineName,
             SafeRegistryHandle key,
-            out SafeRegistryHandle result);
+            out SafeRegistryHandle result
+        );
     }
 }

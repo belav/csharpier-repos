@@ -15,11 +15,11 @@ using System.Runtime;
 //For testing the concurrent phase of partial compaction: update references between objects
 //This test also had LOH objects and creates fragmentation in LOH
 //What the test does:
-// 1.Allocating phase: 
+// 1.Allocating phase:
 //-Allocate n regions
 //-When objects get in Gen2 release the objects used to create spaces
 //-Create refs from objects in these regions to ephemeral objects
-// 2.Steady state 
+// 2.Steady state
 //- randomly change references between objects
 //- release some of the existing objects (to create fragmentation in the existing regions)
 // Repeat from 1.
@@ -27,7 +27,6 @@ namespace PartialCompactionTest
 {
     public class PartialCompactionTest
     {
-   
         //Define the size buckets:
         public struct SizeBucket
         {
@@ -40,7 +39,6 @@ namespace PartialCompactionTest
                 minsize = min;
                 maxsize = max;
             }
-
         }
 
         //Buckets are defined as following:
@@ -56,32 +54,31 @@ namespace PartialCompactionTest
         private const int BUCKET4_MIN = 10000;
         private const int BUCKETS_MAX = 80000;
         //////
-    
+
         public const int DEFAULT_ITERATIONS = 100;
         public static int countIters = DEFAULT_ITERATIONS;
         public static long timeout = 600; //seconds
         public static SizeBucket[] sizeBuckets = new SizeBucket[SIZEBUCKET_COUNT];
         public static int randomSeed;
- 
-        public static int pointerSize = 4;  //bytes
+
+        public static int pointerSize = 4; //bytes
         [ThreadStatic]
         public static Random Rand;
-       
+
         //new
         public static bool timeBased = true;
-        public static int maxHeapMB = 100;  //max heap in MB
+        public static int maxHeapMB = 100; //max heap in MB
         public static long maxAllocation; //bytes
         public static int regionSizeMB = 4; //MB
         public static double EstimatedHeapSize = 0; //bytes
         public static double EstimatedObjectCount = 0; //estimate how many objects we have
-        public static List<Object> Visited = new List<Object>(2500);  //for estimating the objects count
+        public static List<Object> Visited = new List<Object>(2500); //for estimating the objects count
         public static double AvgObjectSize = 0; //bytes
         public static List<Object> staticArr = new List<Object>(2500);
         public static List<GCHandle> gcHandleArr = new List<GCHandle>(2500);
         public static List<GCHandle> weakList = new List<GCHandle>(2500);
         public static List<Region> regionList = new List<Region>(2500);
         public static Object[] ephemeralList = new Object[2500];
-
 
         public static int Main(string[] args)
         {
@@ -92,12 +89,11 @@ namespace PartialCompactionTest
             Rand = new Random(randomSeed);
             List<Object> Arr = new List<Object>(2500);
 
-                pointerSize = IntPtr.Size;
+            pointerSize = IntPtr.Size;
 
             RunTest(Arr);
             GC.KeepAlive(Arr);
             return 100;
-
         }
 
         public static Object CreateObject(int size, bool pinned)
@@ -123,9 +119,6 @@ namespace PartialCompactionTest
             }
         }
 
-
-
-
         public static void InitialAllocation(List<Object> Arr)
         {
             for (int i = 0; i < 5; i++)
@@ -133,7 +126,6 @@ namespace PartialCompactionTest
                 Object[] o = new Object[3];
                 staticArr.Add(o);
                 weakList.Add(GCHandle.Alloc(o, GCHandleType.Weak));
-               
             }
             AllocatingPhase(Arr, 50);
         }
@@ -169,23 +161,38 @@ namespace PartialCompactionTest
                     int spaceBucket = Rand.Next(0, sizeBuckets.Length);
                     int objectBucket = Rand.Next(0, sizeBuckets.Length);
 
-                    AllocateRegion(regionSize, pinnedPercentage, sizeBuckets[spaceBucket].minsize, sizeBuckets[spaceBucket].maxsize, sizeBuckets[objectBucket].minsize, sizeBuckets[objectBucket].maxsize, Arr);
+                    AllocateRegion(
+                        regionSize,
+                        pinnedPercentage,
+                        sizeBuckets[spaceBucket].minsize,
+                        sizeBuckets[spaceBucket].maxsize,
+                        sizeBuckets[objectBucket].minsize,
+                        sizeBuckets[objectBucket].maxsize,
+                        Arr
+                    );
                 }
                 else
                 {
                     Console.WriteLine("Allocating in LOH");
                     int minsize = 85000;
                     int maxsize = 200000;
-                    AllocateRegion(regionSize, pinnedPercentage, minsize, maxsize, minsize, maxsize, Arr);
+                    AllocateRegion(
+                        regionSize,
+                        pinnedPercentage,
+                        minsize,
+                        maxsize,
+                        minsize,
+                        maxsize,
+                        Arr
+                    );
                 }
-                 if(i%3==0 && i>0)
-                     DeleteSpaces();
-                 if (i % 3 == 0 && i > 3)
-                     CleanupRegions();
+                if (i % 3 == 0 && i > 0)
+                    DeleteSpaces();
+                if (i % 3 == 0 && i > 3)
+                    CleanupRegions();
             }
             DeleteSpaces();
         }
-
 
         //want to create fragmentation in Gen2; when objects in the "spaces" list get in gen2, clear the list.
         public static void DeleteSpaces()
@@ -222,7 +229,7 @@ namespace PartialCompactionTest
                 }
             }
         }
-    
+
         public static void SteadyState(List<Object> Arr)
         {
             Console.WriteLine("Heap size=" + GC.GetTotalMemory(false));
@@ -231,10 +238,11 @@ namespace PartialCompactionTest
             {
                 UpdateReferences();
                 int randnumber2 = Rand.Next(0, 3);
-                if (iter2 % 50 == 0 && randnumber2==2)
+                if (iter2 % 50 == 0 && randnumber2 == 2)
                 {
                     Console.WriteLine("Setting LOH compaction mode & collect");
-                    GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+                    GCSettings.LargeObjectHeapCompactionMode =
+                        GCLargeObjectHeapCompactionMode.CompactOnce;
                 }
             }
             //randomly remove some objects
@@ -244,8 +252,8 @@ namespace PartialCompactionTest
             {
                 UpdateReferences();
             }
-               
-         
+
+
 
         }
 
@@ -258,7 +266,6 @@ namespace PartialCompactionTest
                 Object[] OAr = weakList[i].Target as Object[];
                 if (OAr == null)
                     continue;
-
 
                 for (int j = 0; j < OAr.Length; j++)
                 {
@@ -278,12 +285,12 @@ namespace PartialCompactionTest
         {
             Console.WriteLine("Removing Objects");
             //Console.WriteLine("before: Arr.Count " + Arr.Count);
-            for(int i= Arr.Count-1; i>=0; i--)
+            for (int i = Arr.Count - 1; i >= 0; i--)
             {
                 if (i % 4 == 0)
                 {
-                    if(GC.GetGeneration(Arr[i])==2)
-                    Arr.RemoveAt(i);
+                    if (GC.GetGeneration(Arr[i]) == 2)
+                        Arr.RemoveAt(i);
                 }
             }
             //Console.WriteLine("after: Arr.Count" + Arr.Count);
@@ -293,17 +300,17 @@ namespace PartialCompactionTest
                 if (j % 4 == 0)
                 {
                     if (GC.GetGeneration(staticArr[j]) == 2)
-                    staticArr.RemoveAt(j);
+                        staticArr.RemoveAt(j);
                 }
             }
             //Console.WriteLine("after: staticArr.Count " + staticArr.Count);
-           // Console.WriteLine("before: gcHandleArr.Count " + gcHandleArr.Count);
+            // Console.WriteLine("before: gcHandleArr.Count " + gcHandleArr.Count);
             for (int k = gcHandleArr.Count - 1; k >= 0; k--)
             {
                 if (k % 2 == 0)
                 {
                     if (GC.GetGeneration(gcHandleArr[k].Target) == 2)
-                    gcHandleArr[k].Free();
+                        gcHandleArr[k].Free();
                     gcHandleArr.RemoveAt(k);
                 }
             }
@@ -338,12 +345,12 @@ namespace PartialCompactionTest
             Console.WriteLine("Counting Objects..");
             //use the "visited" table
             int runningCount = 0;
-           // runningCount += CountReferences(Arr[0]);
+            // runningCount += CountReferences(Arr[0]);
             for (int i = 0; i < Arr.Count; i++)
-           {
-               runningCount+= CountReferences(Arr[i]);
+            {
+                runningCount += CountReferences(Arr[i]);
             }
-            
+
             for (int i = 0; i < staticArr.Count; i++)
             {
                 runningCount += CountReferences(staticArr[i]);
@@ -351,12 +358,12 @@ namespace PartialCompactionTest
             runningCount += gcHandleArr.Count;
 
             Console.WriteLine("Pinned GCHandles " + gcHandleArr.Count);
-            
+
             return runningCount;
         }
 
         //counts the refernces of this objects
-        public static int CountReferences( Object o)
+        public static int CountReferences(Object o)
         {
             if (Visited.Contains(o))
             {
@@ -365,7 +372,7 @@ namespace PartialCompactionTest
             else
                 Visited.Add(o);
             int count = 1;
-           
+
             Object[] oArr = o as Object[];
             if (oArr == null)
                 return count;
@@ -376,7 +383,7 @@ namespace PartialCompactionTest
                     count += CountReferences(oArr[i]);
                 }
             }
-           
+
             return count;
         }
         public static void CleanupWeakReferenceArr()
@@ -394,13 +401,21 @@ namespace PartialCompactionTest
                 }
             }
         }
-        public static int AllocateRegion(int regionSize, float pinnedPercentage, int minSpace, int maxSpace, int minObject, int maxObject, List<Object> Arr)
+        public static int AllocateRegion(
+            int regionSize,
+            float pinnedPercentage,
+            int minSpace,
+            int maxSpace,
+            int minObject,
+            int maxObject,
+            List<Object> Arr
+        )
         {
             int sizeCounter = 0;
             double pinnedCount = 0;
             double objectCount = 0;
             Object o;
-            
+
             Region r = new Region();
             regionList.Add(r);
             while (sizeCounter < regionSize)
@@ -423,13 +438,12 @@ namespace PartialCompactionTest
                 sizeCounter += objSize;
                 sizeCounter += spaceSize;
                 objectCount++;
-                EstimatedObjectCount ++;
+                EstimatedObjectCount++;
                 EstimatedHeapSize += objSize;
-                
             }
             //Console.WriteLine("Pinned objects in region: " + pinnedCount);
-           // Console.WriteLine("Allocated {0} objects per this region", objectCount);
-           // Console.WriteLine("Allocated {0} bytes per this region including spaces", sizeCounter);
+            // Console.WriteLine("Allocated {0} objects per this region", objectCount);
+            // Console.WriteLine("Allocated {0} bytes per this region including spaces", sizeCounter);
             UpdateAvg();
             return sizeCounter;
         }
@@ -455,7 +469,6 @@ namespace PartialCompactionTest
                     break;
                 }
             }
-
         }
 
         //add ref from this object to existing objects
@@ -515,9 +528,8 @@ namespace PartialCompactionTest
             {
                 //add as reference to existing objects
                 AddRefTo(o);
-                
             }
-          
+
             //find an empty place in array
             found = false;
             for (int i = 0; i < weakList.Count; i++)
@@ -528,21 +540,20 @@ namespace PartialCompactionTest
                     found = true;
                 }
             }
-            if(!found)
+            if (!found)
                 weakList.Add(GCHandle.Alloc(o, GCHandleType.Weak));
             return o;
         }
 
         public static void AddEphemeralObject(int size)
         {
-            for(int i=0; i<ephemeralList.Length; i++)
+            for (int i = 0; i < ephemeralList.Length; i++)
             {
-                if(ephemeralList[i]==null || (GC.GetGeneration(ephemeralList[i])>=1))
+                if (ephemeralList[i] == null || (GC.GetGeneration(ephemeralList[i]) >= 1))
                 {
                     ephemeralList[i] = new byte[size];
                     break;
                 }
-
             }
         }
 
@@ -550,9 +561,7 @@ namespace PartialCompactionTest
         {
             System.Diagnostics.Stopwatch threadStopwatch = new System.Diagnostics.Stopwatch();
             threadStopwatch.Start();
-            
 
-           
             //Steady state: objects die and others are created
 
             int iter = 0;
@@ -563,7 +572,8 @@ namespace PartialCompactionTest
                 if (randnumber == 1)
                 {
                     Console.WriteLine("Setting LOH compaction mode");
-                    GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+                    GCSettings.LargeObjectHeapCompactionMode =
+                        GCLargeObjectHeapCompactionMode.CompactOnce;
                 }
                 int randnumber2 = Rand.Next(0, 30);
                 if (randnumber2 == 1)
@@ -573,7 +583,7 @@ namespace PartialCompactionTest
                 }
 
                 Console.WriteLine("Allocating phase. Start at {0}", DateTime.Now);
-                if(iter==0)
+                if (iter == 0)
                     InitialAllocation(Arr);
                 else
                     AllocatingPhase(Arr, 20);
@@ -581,43 +591,42 @@ namespace PartialCompactionTest
                 if (randnumber == 2)
                 {
                     Console.WriteLine("Setting LOH compaction mode");
-                    GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+                    GCSettings.LargeObjectHeapCompactionMode =
+                        GCLargeObjectHeapCompactionMode.CompactOnce;
                 }
                 if (randnumber2 == 2)
                 {
                     Console.WriteLine("GC.Collect");
                     GC.Collect();
                 }
-               Console.WriteLine("starting steady state. Time is {0}", DateTime.Now);
-               SteadyState(Arr);
-               Console.WriteLine("End steady state. Time is {0}", DateTime.Now);
-               if (randnumber == 3)
-               {
-                   Console.WriteLine("Setting LOH compaction mode");
-                   GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
-               }
-               if (randnumber2 == 3)
-               {
-                   Console.WriteLine("GC.Collect");
-                   GC.Collect();
-               }
-               iter++;
+                Console.WriteLine("starting steady state. Time is {0}", DateTime.Now);
+                SteadyState(Arr);
+                Console.WriteLine("End steady state. Time is {0}", DateTime.Now);
+                if (randnumber == 3)
+                {
+                    Console.WriteLine("Setting LOH compaction mode");
+                    GCSettings.LargeObjectHeapCompactionMode =
+                        GCLargeObjectHeapCompactionMode.CompactOnce;
+                }
+                if (randnumber2 == 3)
+                {
+                    Console.WriteLine("GC.Collect");
+                    GC.Collect();
+                }
+                iter++;
 
-               if (timeBased)
-               {
-                   if (threadStopwatch.ElapsedMilliseconds / 1000 > timeout)
-                       break;
-               }
-               else //not timebased
-               {
-                   if(iter>=countIters)
-                       break;
-               }
+                if (timeBased)
+                {
+                    if (threadStopwatch.ElapsedMilliseconds / 1000 > timeout)
+                        break;
+                }
+                else //not timebased
+                {
+                    if (iter >= countIters)
+                        break;
+                }
             }
-
         }
-
-       
 
         public static void InitializeSizeBuckets()
         {
@@ -667,7 +676,7 @@ namespace PartialCompactionTest
                     {
                         currentArgValue = args[++i];
                         regionSizeMB = Int32.Parse(currentArgValue);
-                    }             
+                    }
                     else if (String.Compare(currentArg.ToLower(), "timeout") == 0) //seconds; if 0 run forever
                     {
                         currentArgValue = args[++i];
@@ -687,7 +696,6 @@ namespace PartialCompactionTest
                         Console.WriteLine("Error! Unexpected argument {0}", currentArg);
                         return false;
                     }
-
                 }
             }
             catch (System.Exception e)
@@ -698,7 +706,7 @@ namespace PartialCompactionTest
             }
 
             //do some basic checking of the arguments
-            if (countIters < 1 )
+            if (countIters < 1)
             {
                 Console.WriteLine("Incorrect values for arguments");
                 return false;
@@ -707,29 +715,33 @@ namespace PartialCompactionTest
 
             Console.WriteLine("Repro with: ");
             Console.WriteLine("==============================");
-            if(timeBased)
+            if (timeBased)
                 Console.WriteLine("-timeout " + timeout);
             else
                 Console.WriteLine("-iter " + countIters);
             Console.WriteLine("-maxHeapMB " + maxHeapMB);
-            Console.WriteLine("-regionSizeMB " + regionSizeMB);        
+            Console.WriteLine("-regionSizeMB " + regionSizeMB);
             Console.WriteLine("-randomseed " + randomSeed);
             Console.WriteLine("==============================");
             return true;
         }
-
 
         public static void Usage()
         {
             Console.WriteLine("PartialCompactionTest [options]");
             Console.WriteLine("\nOptions");
             Console.WriteLine("-? Display the usage and exit");
-            Console.WriteLine("-iter <num iterations> : specify number of iterations for the test, default is " + countIters);
+            Console.WriteLine(
+                "-iter <num iterations> : specify number of iterations for the test, default is "
+                    + countIters
+            );
             Console.WriteLine("If using time based instead of iterations:");
             Console.WriteLine("-timeout <seconds> : when to stop the test, default is " + timeout);
-            Console.WriteLine("-maxHeapMB <MB> : max heap size in MB to allocate, default is " + maxHeapMB);
+            Console.WriteLine(
+                "-maxHeapMB <MB> : max heap size in MB to allocate, default is " + maxHeapMB
+            );
             Console.WriteLine("-regionSizeMB <MB> : regionSize, default is " + regionSizeMB);
-     
+
             Console.WriteLine("-randomseed <seed> : random seed(for repro)");
         }
 
@@ -751,6 +763,5 @@ namespace PartialCompactionTest
                 Objects.Clear();
             }
         }
-
     }
 }

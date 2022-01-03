@@ -14,7 +14,10 @@ namespace System.IO
             return DirectoryExists(fullPath, out ignored);
         }
 
-        private static bool DirectoryExists(ReadOnlySpan<char> fullPath, out Interop.ErrorInfo errorInfo)
+        private static bool DirectoryExists(
+            ReadOnlySpan<char> fullPath,
+            out Interop.ErrorInfo errorInfo
+        )
         {
             Interop.Sys.FileStatus fileinfo;
             errorInfo = default(Interop.ErrorInfo);

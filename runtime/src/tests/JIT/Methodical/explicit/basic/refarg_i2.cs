@@ -13,8 +13,7 @@ namespace Test
 
         ~AA()
         {
-            if (_pad1 != 191 ||
-                mm != 11)
+            if (_pad1 != 191 || mm != 11)
             {
                 App.exitCode = 1;
                 throw new Exception();

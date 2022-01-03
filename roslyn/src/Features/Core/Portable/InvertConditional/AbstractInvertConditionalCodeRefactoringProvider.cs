@@ -15,45 +15,71 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.InvertConditional
 {
     internal abstract class AbstractInvertConditionalCodeRefactoringProvider<TConditionalExpressionSyntax>
-        : CodeRefactoringProvider
-        where TConditionalExpressionSyntax : SyntaxNode
+        : CodeRefactoringProvider where TConditionalExpressionSyntax : SyntaxNode
     {
         protected abstract bool ShouldOffer(TConditionalExpressionSyntax conditional);
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             var (document, span, cancellationToken) = context;
-            var conditional = await FindConditionalAsync(document, span, cancellationToken).ConfigureAwait(false);
+            var conditional = await FindConditionalAsync(document, span, cancellationToken)
+                .ConfigureAwait(false);
 
             if (conditional == null || !ShouldOffer(conditional))
             {
                 return;
             }
 
-            context.RegisterRefactoring(new MyCodeAction(
-                c => InvertConditionalAsync(document, span, c)),
-                conditional.Span);
+            context.RegisterRefactoring(
+                new MyCodeAction(c => InvertConditionalAsync(document, span, c)),
+                conditional.Span
+            );
         }
 
         private static async Task<TConditionalExpressionSyntax?> FindConditionalAsync(
-            Document document, TextSpan span, CancellationToken cancellationToken)
-            => await document.TryGetRelevantNodeAsync<TConditionalExpressionSyntax>(span, cancellationToken).ConfigureAwait(false);
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        ) =>
+            await document
+                .TryGetRelevantNodeAsync<TConditionalExpressionSyntax>(span, cancellationToken)
+                .ConfigureAwait(false);
 
         private static async Task<Document> InvertConditionalAsync(
-            Document document, TextSpan span, CancellationToken cancellationToken)
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        )
         {
-            var conditional = await FindConditionalAsync(document, span, cancellationToken).ConfigureAwait(false);
+            var conditional = await FindConditionalAsync(document, span, cancellationToken)
+                .ConfigureAwait(false);
             Contract.ThrowIfNull(conditional);
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var editor = new SyntaxEditor(root, document.Project.Solution.Workspace);
 
-            editor.Generator.SyntaxFacts.GetPartsOfConditionalExpression(conditional,
-                out var condition, out var whenTrue, out var whenFalse);
+            editor.Generator.SyntaxFacts.GetPartsOfConditionalExpression(
+                conditional,
+                out var condition,
+                out var whenTrue,
+                out var whenFalse
+            );
 
-            editor.ReplaceNode(condition, editor.Generator.Negate(editor.Generator.SyntaxGeneratorInternal, condition, semanticModel, cancellationToken));
+            editor.ReplaceNode(
+                condition,
+                editor.Generator.Negate(
+                    editor.Generator.SyntaxGeneratorInternal,
+                    condition,
+                    semanticModel,
+                    cancellationToken
+                )
+            );
             editor.ReplaceNode(whenTrue, whenFalse.WithTriviaFrom(whenTrue));
             editor.ReplaceNode(whenFalse, whenTrue.WithTriviaFrom(whenFalse));
 
@@ -63,9 +89,11 @@ namespace Microsoft.CodeAnalysis.InvertConditional
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(FeaturesResources.Invert_conditional, createChangedDocument, nameof(FeaturesResources.Invert_conditional))
-            {
-            }
+                : base(
+                    FeaturesResources.Invert_conditional,
+                    createChangedDocument,
+                    nameof(FeaturesResources.Invert_conditional)
+                ) { }
         }
     }
 }

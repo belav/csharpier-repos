@@ -5,12 +5,15 @@
 using System;
 using System.Runtime.CompilerServices;
 
-
 struct S2
 {
     public uint F0;
-    public ulong F1, F2;
-    public S2(uint f0) : this() { F0 = f0; }
+    public ulong F1,
+        F2;
+    public S2(uint f0) : this()
+    {
+        F0 = f0;
+    }
 }
 
 public class GitHub_19256
@@ -36,5 +39,3 @@ public class GitHub_19256
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void Use(S2 arg) { }
 }
-
-

@@ -16,7 +16,5 @@ public class PropertiesDataFormat : SecureDataFormat<AuthenticationProperties>
     /// </summary>
     /// <param name="protector">The <see cref="IDataProtector"/>.</param>
     public PropertiesDataFormat(IDataProtector protector)
-        : base(new PropertiesSerializer(), protector)
-    {
-    }
+        : base(new PropertiesSerializer(), protector) { }
 }

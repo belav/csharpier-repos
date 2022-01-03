@@ -15,14 +15,14 @@ namespace Microsoft.CodeAnalysis
         public new Exception InnerException => base.InnerException!;
 
         public UserFunctionException(Exception innerException)
-            : base("User provided code threw an exception", innerException)
-        {
-        }
+            : base("User provided code threw an exception", innerException) { }
     }
 
     internal static class UserFunctionExtensions
     {
-        internal static Func<TInput, CancellationToken, TOutput> WrapUserFunction<TInput, TOutput>(this Func<TInput, CancellationToken, TOutput> userFunction)
+        internal static Func<TInput, CancellationToken, TOutput> WrapUserFunction<TInput, TOutput>(
+            this Func<TInput, CancellationToken, TOutput> userFunction
+        )
         {
             return (input, token) =>
             {
@@ -37,9 +37,16 @@ namespace Microsoft.CodeAnalysis
             };
         }
 
-        internal static Func<TInput, CancellationToken, ImmutableArray<TOutput>> WrapUserFunctionAsImmutableArray<TInput, TOutput>(this Func<TInput, CancellationToken, IEnumerable<TOutput>> userFunction)
+        internal static Func<
+            TInput,
+            CancellationToken,
+            ImmutableArray<TOutput>
+        > WrapUserFunctionAsImmutableArray<TInput, TOutput>(
+            this Func<TInput, CancellationToken, IEnumerable<TOutput>> userFunction
+        )
         {
-            return (input, token) => userFunction.WrapUserFunction()(input, token).ToImmutableArray();
+            return (input, token) =>
+                userFunction.WrapUserFunction()(input, token).ToImmutableArray();
         }
 
         internal static Action<TInput> WrapUserAction<TInput>(this Action<TInput> userAction)
@@ -57,7 +64,9 @@ namespace Microsoft.CodeAnalysis
             };
         }
 
-        internal static Action<TInput1, TInput2> WrapUserAction<TInput1, TInput2>(this Action<TInput1, TInput2> userAction)
+        internal static Action<TInput1, TInput2> WrapUserAction<TInput1, TInput2>(
+            this Action<TInput1, TInput2> userAction
+        )
         {
             return (input1, input2) =>
             {

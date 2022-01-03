@@ -42,7 +42,8 @@ public sealed class WebAssemblyHost : IAsyncDisposable
         WebAssemblyHostBuilder builder,
         IServiceProvider services,
         AsyncServiceScope scope,
-        string? persistedState)
+        string? persistedState
+    )
     {
         // To ensure JS-invoked methods don't get linked out, have a reference to their enclosing types
         GC.KeepAlive(typeof(JSInteropMethods));
@@ -111,7 +112,10 @@ public sealed class WebAssemblyHost : IAsyncDisposable
     }
 
     // Internal for testing.
-    internal async Task RunAsyncCore(CancellationToken cancellationToken, WebAssemblyCultureProvider? cultureProvider = null)
+    internal async Task RunAsyncCore(
+        CancellationToken cancellationToken,
+        WebAssemblyCultureProvider? cultureProvider = null
+    )
     {
         if (_started)
         {
@@ -129,9 +133,9 @@ public sealed class WebAssemblyHost : IAsyncDisposable
         await cultureProvider.LoadCurrentCultureResourcesAsync();
 
         var manager = Services.GetRequiredService<ComponentStatePersistenceManager>();
-        var store = !string.IsNullOrEmpty(_persistedState) ?
-            new PrerenderComponentApplicationStore(_persistedState) :
-            new PrerenderComponentApplicationStore();
+        var store = !string.IsNullOrEmpty(_persistedState)
+            ? new PrerenderComponentApplicationStore(_persistedState)
+            : new PrerenderComponentApplicationStore();
 
         await manager.RestoreStateAsync(store);
 
@@ -149,35 +153,39 @@ public sealed class WebAssemblyHost : IAsyncDisposable
             _renderer = new WebAssemblyRenderer(Services, loggerFactory, jsComponentInterop);
 
             var initializationTcs = new TaskCompletionSource();
-            WebAssemblyCallQueue.Schedule((_rootComponents, _renderer, initializationTcs), static async state =>
-            {
-                var (rootComponents, renderer, initializationTcs) = state;
-
-                try
+            WebAssemblyCallQueue.Schedule(
+                (_rootComponents, _renderer, initializationTcs),
+                static async state =>
                 {
+                    var (rootComponents, renderer, initializationTcs) = state;
+
+                    try
+                    {
                         // Here, we add each root component but don't await the returned tasks so that the
                         // components can be processed in parallel.
                         var count = rootComponents.Count;
-                    var pendingRenders = new Task[count];
-                    for (var i = 0; i < count; i++)
-                    {
-                        var rootComponent = rootComponents[i];
-                        pendingRenders[i] = renderer.AddComponentAsync(
-                            rootComponent.ComponentType,
-                            rootComponent.Parameters,
-                            rootComponent.Selector);
-                    }
+                        var pendingRenders = new Task[count];
+                        for (var i = 0; i < count; i++)
+                        {
+                            var rootComponent = rootComponents[i];
+                            pendingRenders[i] = renderer.AddComponentAsync(
+                                rootComponent.ComponentType,
+                                rootComponent.Parameters,
+                                rootComponent.Selector
+                            );
+                        }
 
                         // Now we wait for all components to finish rendering.
                         await Task.WhenAll(pendingRenders);
 
-                    initializationTcs.SetResult();
+                        initializationTcs.SetResult();
+                    }
+                    catch (Exception ex)
+                    {
+                        initializationTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    initializationTcs.SetException(ex);
-                }
-            });
+            );
 
             await initializationTcs.Task;
             store.ExistingState.Clear();

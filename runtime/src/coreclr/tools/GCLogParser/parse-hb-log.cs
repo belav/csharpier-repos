@@ -80,7 +80,12 @@ namespace parse_hb_log
     {
         static bool fLogging = false;
 
-        static string ParseString(string str, string strStart, string strEnd, out string strRemaining)
+        static string ParseString(
+            string str,
+            string strStart,
+            string strEnd,
+            out string strRemaining
+        )
         {
             int startIndex = 0;
             if (strStart != null)
@@ -161,15 +166,24 @@ namespace parse_hb_log
             lastThreadICount = 0;
         }
 
-        static void LogPassZeroAggregatedSample(int _lastTimeUnit, int _tid, int _sampleCount, string _strAllocHeap)
+        static void LogPassZeroAggregatedSample(
+            int _lastTimeUnit,
+            int _tid,
+            int _sampleCount,
+            string _strAllocHeap
+        )
         {
-            swPassZero.WriteLine("{0}ms,{1}({2}),{3},m:{4},p:{5},i:{6}({7})",
+            swPassZero.WriteLine(
+                "{0}ms,{1}({2}),{3},m:{4},p:{5},i:{6}({7})",
                 _lastTimeUnit,
                 _tid,
                 _sampleCount,
                 _strAllocHeap,
-                lastThreadMCount, lastThreadPCount, lastThreadICount,
-                strIdealProc);
+                lastThreadMCount,
+                lastThreadPCount,
+                lastThreadICount,
+                strIdealProc
+            );
 
             (aggregatedSampleCount[lastProcIndex])++;
         }
@@ -180,7 +194,8 @@ namespace parse_hb_log
         static void PassZero(string strLog)
         {
             swPassZero = new StreamWriter(strPassZeroLog);
-            string strTemp, strRemaining;
+            string strTemp,
+                strRemaining;
             using (StreamReader sr = new StreamReader(strLog))
             {
                 string s;
@@ -199,7 +214,11 @@ namespace parse_hb_log
                             qpfAdjusted = UInt64.Parse(strTemp) / 1000;
                             strTemp = ParseString(strRemaining, "start:", "(", out strRemaining);
                             qpcStart = UInt64.Parse(strTemp);
-                            Console.WriteLine("QPF adjusted: {0}, init QPC: {1}", qpfAdjusted, qpcStart);
+                            Console.WriteLine(
+                                "QPF adjusted: {0}, init QPC: {1}",
+                                qpfAdjusted,
+                                qpcStart
+                            );
                         }
                         else if (strAfterTID.StartsWith("total: "))
                         {
@@ -208,7 +227,11 @@ namespace parse_hb_log
                             totalProcs = Int32.Parse(strTemp);
                             strTemp = ParseString(strRemaining, "numa: ", null, out strRemaining);
                             totalNodes = Int32.Parse(strTemp);
-                            Console.WriteLine("total procs: {0}, nodes: {1}", totalProcs, totalNodes);
+                            Console.WriteLine(
+                                "total procs: {0}, nodes: {1}",
+                                totalProcs,
+                                totalNodes
+                            );
                             procsPerNode = totalProcs / totalNodes;
                             swPassZero.WriteLine("P: {0}, N: {1}", totalProcs, totalNodes);
                             aggregatedSampleCount = new int[totalProcs];
@@ -218,11 +241,12 @@ namespace parse_hb_log
                             if (strTID != null)
                             {
                                 LogPassZeroAggregatedSample(
-                                //swPassZero.WriteLine("last sample before GC: {0}ms,{1}({2}),{3},m:{4},p:{5},i:{6}",
+                                    //swPassZero.WriteLine("last sample before GC: {0}ms,{1}({2}),{3},m:{4},p:{5},i:{6}",
                                     lastTimeUnit,
                                     threadMapping[strTID],
                                     lastThreadSampleCount,
-                                    strAllocHeap);
+                                    strAllocHeap
+                                );
                                 InitSampleInfoPassZero();
                             }
 
@@ -252,7 +276,8 @@ namespace parse_hb_log
                                     lastTimeUnit,
                                     threadMapping[strTID],
                                     lastThreadSampleCount,
-                                    strAllocHeap);
+                                    strAllocHeap
+                                );
                                 InitSampleInfoPassZero();
                             }
 
@@ -279,9 +304,17 @@ namespace parse_hb_log
                             UInt64 maxTimestampMS = UInt64.Parse(strTemp);
                             maxTimestampMS /= qpfAdjusted;
                             strTemp = ParseString(strAfterTID, null, "-", out strRemaining);
-                            swPassZero.WriteLine("{0}-{1}-{2}", strTemp, minTimestampMS, maxTimestampMS);
+                            swPassZero.WriteLine(
+                                "{0}-{1}-{2}",
+                                strTemp,
+                                minTimestampMS,
+                                maxTimestampMS
+                            );
 
-                            largestTimeInBetweenGCs = Math.Max(largestTimeInBetweenGCs, (int)(maxTimestampMS - minTimestampMS));
+                            largestTimeInBetweenGCs = Math.Max(
+                                largestTimeInBetweenGCs,
+                                (int)(maxTimestampMS - minTimestampMS)
+                            );
                         }
                         else if (strAfterTID.StartsWith("[GC#"))
                         {
@@ -344,7 +377,11 @@ namespace parse_hb_log
                                 threadMapping.Add(strTID, totalAllocThreads);
                                 if (fLogging)
                                 {
-                                    Console.WriteLine("Adding {0} as T#{1}", strTID, totalAllocThreads);
+                                    Console.WriteLine(
+                                        "Adding {0} as T#{1}",
+                                        strTID,
+                                        totalAllocThreads
+                                    );
                                 }
                                 totalAllocThreads++;
                             }
@@ -357,7 +394,12 @@ namespace parse_hb_log
 
                             if (strRemaining.Contains("|"))
                             {
-                                strAllocHeap = ParseString(strRemaining, ",", "|", out strRemaining);
+                                strAllocHeap = ParseString(
+                                    strRemaining,
+                                    ",",
+                                    "|",
+                                    out strRemaining
+                                );
                                 if (strRemaining.Contains("m"))
                                     multiple_procs_p = true;
                                 if (strRemaining.Contains("p"))
@@ -367,15 +409,27 @@ namespace parse_hb_log
                             }
                             else
                             {
-                                strAllocHeap = ParseString(strRemaining, ",", null, out strRemaining);
+                                strAllocHeap = ParseString(
+                                    strRemaining,
+                                    ",",
+                                    null,
+                                    out strRemaining
+                                );
                             }
 
                             if (fLogging)
                             {
-                                Console.WriteLine("{0:0.00}ms, tid: {1}/{2}, alloc heap: {3}, m: {4}, p: {5}, i: {6}, ideal {7}",
-                                    timestamp, strTID, threadMapping[strTID],
-                                    strAllocHeap, multiple_procs_p, !alloc_count_p, set_ideal_p,
-                                    strIdealProc);
+                                Console.WriteLine(
+                                    "{0:0.00}ms, tid: {1}/{2}, alloc heap: {3}, m: {4}, p: {5}, i: {6}, ideal {7}",
+                                    timestamp,
+                                    strTID,
+                                    threadMapping[strTID],
+                                    strAllocHeap,
+                                    multiple_procs_p,
+                                    !alloc_count_p,
+                                    set_ideal_p,
+                                    strIdealProc
+                                );
                             }
                             //swPassZero.WriteLine("{0:0.00}ms,{1},{2},m:{3},p:{4},i:{5}",
                             //    timestamp,
@@ -391,23 +445,33 @@ namespace parse_hb_log
                                 {
                                     if (fLogging)
                                     {
-                                        Console.WriteLine("time is now {7}>{0}+{8},{1}({2}),{3},m:{4},p:{5},i:{6}",
+                                        Console.WriteLine(
+                                            "time is now {7}>{0}+{8},{1}({2}),{3},m:{4},p:{5},i:{6}",
                                             lastTimeUnit,
                                             threadMapping[strTID],
                                             lastThreadSampleCount,
                                             strAllocHeap,
-                                            lastThreadMCount, lastThreadPCount, lastThreadICount,
-                                            (int)timestamp, timeUnitMS);
+                                            lastThreadMCount,
+                                            lastThreadPCount,
+                                            lastThreadICount,
+                                            (int)timestamp,
+                                            timeUnitMS
+                                        );
                                     }
                                     LogPassZeroAggregatedSample(
                                         lastTimeUnit,
                                         threadMapping[strTID],
                                         lastThreadSampleCount,
-                                        strAllocHeap);
+                                        strAllocHeap
+                                    );
                                     if (fLogging)
                                     {
-                                        Console.WriteLine("Set last time to {0} for thread {1}, alloc {2}",
-                                            (int)timestamp, strLastTID, strLastThreadAllocHeap);
+                                        Console.WriteLine(
+                                            "Set last time to {0} for thread {1}, alloc {2}",
+                                            (int)timestamp,
+                                            strLastTID,
+                                            strLastThreadAllocHeap
+                                        );
                                     }
                                     lastTimeUnit = (int)timestamp;
                                     lastThreadSampleCount = 0;
@@ -422,25 +486,35 @@ namespace parse_hb_log
                                     // log.
                                     if (fLogging)
                                     {
-                                        Console.WriteLine("{0},{1}({2}),{3},m:{4},p:{5},i:{6} -> {7}/{8}",
+                                        Console.WriteLine(
+                                            "{0},{1}({2}),{3},m:{4},p:{5},i:{6} -> {7}/{8}",
                                             lastTimeUnit,
                                             threadMapping[strLastTID],
                                             lastThreadSampleCount,
                                             strLastThreadAllocHeap,
-                                            lastThreadMCount, lastThreadPCount, lastThreadICount,
-                                            strTID, strAllocHeap);
+                                            lastThreadMCount,
+                                            lastThreadPCount,
+                                            lastThreadICount,
+                                            strTID,
+                                            strAllocHeap
+                                        );
                                     }
                                     LogPassZeroAggregatedSample(
                                         lastTimeUnit,
                                         threadMapping[strLastTID],
                                         lastThreadSampleCount,
-                                        strLastThreadAllocHeap);
+                                        strLastThreadAllocHeap
+                                    );
                                 }
 
                                 if (fLogging)
                                 {
-                                    Console.WriteLine("last tid {0}, last alloc heap {1}, diff, set last time to {2}",
-                                        strLastTID, strLastThreadAllocHeap, (int)timestamp);
+                                    Console.WriteLine(
+                                        "last tid {0}, last alloc heap {1}, diff, set last time to {2}",
+                                        strLastTID,
+                                        strLastThreadAllocHeap,
+                                        (int)timestamp
+                                    );
                                 }
                                 strLastTID = strTID;
                                 strLastThreadAllocHeap = strAllocHeap;
@@ -452,9 +526,12 @@ namespace parse_hb_log
                             }
 
                             lastThreadSampleCount++;
-                            if (multiple_procs_p) lastThreadMCount++;
-                            if (!alloc_count_p) lastThreadPCount++;
-                            if (set_ideal_p) lastThreadICount++;
+                            if (multiple_procs_p)
+                                lastThreadMCount++;
+                            if (!alloc_count_p)
+                                lastThreadPCount++;
+                            if (set_ideal_p)
+                                lastThreadICount++;
 
                             //if ((lastThreadMCount > 1) || (lastThreadPCount > 1) || (lastThreadICount > 1))
                             //{
@@ -464,9 +541,14 @@ namespace parse_hb_log
 
                             if (fLogging)
                             {
-                                Console.WriteLine("timeunit {0}, sample->{1}, MCount->{2}, PCount->{3}, ICount->{4}",
-                                    lastTimeUnit, lastThreadSampleCount,
-                                    lastThreadMCount, lastThreadPCount, lastThreadICount);
+                                Console.WriteLine(
+                                    "timeunit {0}, sample->{1}, MCount->{2}, PCount->{3}, ICount->{4}",
+                                    lastTimeUnit,
+                                    lastThreadSampleCount,
+                                    lastThreadMCount,
+                                    lastThreadPCount,
+                                    lastThreadICount
+                                );
                             }
                         }
                     }
@@ -478,7 +560,11 @@ namespace parse_hb_log
             {
                 if (aggregatedSampleCount[procIndex] != 0)
                 {
-                    Console.WriteLine("{0,-3} | {1,-10} ", procIndex, aggregatedSampleCount[procIndex]);
+                    Console.WriteLine(
+                        "{0,-3} | {1,-10} ",
+                        procIndex,
+                        aggregatedSampleCount[procIndex]
+                    );
                 }
             }
 
@@ -530,7 +616,19 @@ namespace parse_hb_log
         static int[] AllocMB;
         static int budgetMB = 0;
         // These are subscript chars for 0-9.
-        static char[] unicodeChars = { '\x2080', '\x2081', '\x2082', '\x2083', '\x2084', '\x2085', '\x2086', '\x2087', '\x2088', '\x2089' };
+        static char[] unicodeChars =
+        {
+            '\x2080',
+            '\x2081',
+            '\x2082',
+            '\x2083',
+            '\x2084',
+            '\x2085',
+            '\x2086',
+            '\x2087',
+            '\x2088',
+            '\x2089'
+        };
         static string[] passOneFileTypes = { "thread", "alloc" };
 
         static void PrintToAllPassOneFiles(string strLine)
@@ -571,7 +669,11 @@ namespace parse_hb_log
             //    ((double)currentGCAllocMBAllHeaps / (endTimeMS - startTimeMS)));
 
             int procIndexBase = nodeIndexToPrint * procsPerNode;
-            for (int procIndex = procIndexBase; procIndex < (procIndexBase + procsPerNode); procIndex++)
+            for (
+                int procIndex = procIndexBase;
+                procIndex < (procIndexBase + procsPerNode);
+                procIndex++
+            )
             {
                 strAlloc += string.Format("|{0,5}", AllocMB[procIndex]);
             }
@@ -580,11 +682,13 @@ namespace parse_hb_log
         }
         static void CloseAllPassOneFiles()
         {
-            Console.WriteLine("Total {0} GCs, avg {1}ms, node {2}: BFR %{3:f2}",
+            Console.WriteLine(
+                "Total {0} GCs, avg {1}ms, node {2}: BFR %{3:f2}",
                 totalGCCount,
                 (totalGCDurationMS / totalGCCount),
                 nodeIndexToPrint,
-                (totalAllocMB * 100.0 / totalBudgetMB));
+                (totalAllocMB * 100.0 / totalBudgetMB)
+            );
 
             for (int fileIndex = 0; fileIndex < (int)PassOneViewType.MaxType; fileIndex++)
             {
@@ -601,8 +705,12 @@ namespace parse_hb_log
 
             Console.WriteLine("Printing out proc [{0},[{1}", procStart, procEnd);
 
-            swPassOneFiles[(int)PassOneViewType.Thread].WriteLine("##########Thread view - indices of threads currently running on each proc in between GCs\n");
-            swPassOneFiles[(int)PassOneViewType.AllocHeap].WriteLine("##########Alloc heap view - alloc heaps for threads currently running on each proc in between GCs\n");
+            swPassOneFiles[(int)PassOneViewType.Thread].WriteLine(
+                "##########Thread view - indices of threads currently running on each proc in between GCs\n"
+            );
+            swPassOneFiles[(int)PassOneViewType.AllocHeap].WriteLine(
+                "##########Alloc heap view - alloc heaps for threads currently running on each proc in between GCs\n"
+            );
             string strHeader = string.Format("{0,6}", "ms");
             for (int procIndex = procStart; procIndex < procEnd; procIndex++)
             {
@@ -740,11 +848,19 @@ namespace parse_hb_log
                             else
                                 threadsSeen[tid] += currentSample.countSamples;
 
-                            string strCount = ((currentSample.countSamples > 0) ? FormatCount(currentSample.countSamples) : "");
+                            string strCount = (
+                                (currentSample.countSamples > 0)
+                                    ? FormatCount(currentSample.countSamples)
+                                    : ""
+                            );
                             strThread += string.Format(strCellFormat, tid.ToString(), strCount);
 
                             string strFlags = FormatFlags(currentSample.flags);
-                            strAllocHeap += string.Format(strCellFormat, currentSample.allocHeap.ToString(), strFlags);
+                            strAllocHeap += string.Format(
+                                strCellFormat,
+                                currentSample.allocHeap.ToString(),
+                                strFlags
+                            );
                         }
                     }
                     //swPassOne.WriteLine("|");
@@ -753,8 +869,11 @@ namespace parse_hb_log
 
                     if (fPrintThreadInfoPerTimeUnit)
                     {
-                        swPassOneFiles[(int)PassOneViewType.Thread].WriteLine("----{0,3} threads on {1,3} procs----",
-                            threadsSeenPerTimeUnit.Count, procsHadSamples);
+                        swPassOneFiles[(int)PassOneViewType.Thread].WriteLine(
+                            "----{0,3} threads on {1,3} procs----",
+                            threadsSeenPerTimeUnit.Count,
+                            procsHadSamples
+                        );
                     }
 
                     strAllocHeap += "|";
@@ -783,7 +902,10 @@ namespace parse_hb_log
         static void ParseThreadIndices(string _strThreadIndices)
         {
             strThreadIndices = _strThreadIndices;
-            string[] fields = strThreadIndices.Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] fields = strThreadIndices.Split(
+                new Char[] { ',' },
+                StringSplitOptions.RemoveEmptyEntries
+            );
             for (int i = 0; i < fields.Length; i++)
             {
                 threadsToPrint.Add(Int32.Parse(fields[i]));
@@ -800,8 +922,8 @@ namespace parse_hb_log
         static void ParseGCRange(string _strGCRange)
         {
             strGCRange = _strGCRange;
-            int dashIndex= strGCRange.IndexOf('-');
-            if (dashIndex== -1)
+            int dashIndex = strGCRange.IndexOf('-');
+            if (dashIndex == -1)
             {
                 Console.WriteLine("Invalid GC range {0}", strGCRange);
                 return;
@@ -825,7 +947,8 @@ namespace parse_hb_log
             string strLogNameWithoutExtension = Path.GetFileNameWithoutExtension(strPassZeroLog);
             string strIncludeAll = (fIncludeAllTime ? "-ia1-" : "-ia0-");
             string strTI = ((strThreadIndices == null) ? "" : strThreadIndices);
-            string strPassOneLog = strLogNameWithoutExtension + "-pass1-n" + nodeIndexToPrint + strIncludeAll + strTI;
+            string strPassOneLog =
+                strLogNameWithoutExtension + "-pass1-n" + nodeIndexToPrint + strIncludeAll + strTI;
 
             if (strGCRange != null)
                 strPassOneLog += "-" + strGCRange + "-";
@@ -833,10 +956,13 @@ namespace parse_hb_log
             swPassOneFiles = new StreamWriter[(int)PassOneViewType.MaxType];
             for (int fileIndex = 0; fileIndex < (int)PassOneViewType.MaxType; fileIndex++)
             {
-                swPassOneFiles[fileIndex] = new StreamWriter(strPassOneLog + passOneFileTypes[fileIndex] + ".txt");
+                swPassOneFiles[fileIndex] = new StreamWriter(
+                    strPassOneLog + passOneFileTypes[fileIndex] + ".txt"
+                );
             }
 
-            string strTemp, strRemaining;
+            string strTemp,
+                strRemaining;
             using (StreamReader sr = new StreamReader(strPassZeroLog))
             {
                 string s;
@@ -900,7 +1026,9 @@ namespace parse_hb_log
                         strTemp = ParseString(s, "A#", " ", out strRemaining);
                         int gcIndex = Int32.Parse(strTemp);
 
-                        fSkip = !((gcIndex >= gcIndexToPrintStart) && (gcIndex <= gcIndexToPrintEnd));
+                        fSkip = !(
+                            (gcIndex >= gcIndexToPrintStart) && (gcIndex <= gcIndexToPrintEnd)
+                        );
 
                         if (fSkip)
                         {
@@ -949,10 +1077,15 @@ namespace parse_hb_log
                                 budgetMB = Int32.Parse(strTemp);
                                 string strAllocLine = s.Substring(7);
                                 //Console.WriteLine("spliting {0}", strAllocLine);
-                                string[] fieldsAlloc = strAllocLine.Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                string[] fieldsAlloc = strAllocLine.Split(
+                                    new Char[] { ',' },
+                                    StringSplitOptions.RemoveEmptyEntries
+                                );
                                 for (int fieldIndex = 0; fieldIndex < procsPerNode; fieldIndex++)
                                 {
-                                    AllocMB[procIndexBase + fieldIndex] = Int32.Parse(fieldsAlloc[fieldIndex]);
+                                    AllocMB[procIndexBase + fieldIndex] = Int32.Parse(
+                                        fieldsAlloc[fieldIndex]
+                                    );
                                 }
                                 totalNodesRead++;
                                 if (totalNodesRead == totalNodes)
@@ -1021,13 +1154,21 @@ namespace parse_hb_log
                         int idealProcNo = Int32.Parse(strTemp);
                         //Console.WriteLine("ADDING time {0}ms, entry {1}, thread #{2}, ah {3}, ideal {4}",
                         //    currentTimeIndex, currentProcIndex, tid, allocHeap, idealProcNo);
-                        samples[currentTimeIndex][currentProcIndex] = new SampleInfo(tid, allocHeap, countSamples, flags, idealProcNo);
+                        samples[currentTimeIndex][currentProcIndex] = new SampleInfo(
+                            tid,
+                            allocHeap,
+                            countSamples,
+                            flags,
+                            idealProcNo
+                        );
                     }
                 }
             }
 
             var threadsSeenTotalOrdered = threadsSeenTotal.OrderByDescending(i => i.Value);
-            swPassOneFiles[(int)PassOneViewType.Thread].WriteLine("\n-----------Total samples per thread-----------");
+            swPassOneFiles[(int)PassOneViewType.Thread].WriteLine(
+                "\n-----------Total samples per thread-----------"
+            );
             foreach (var item in threadsSeenTotalOrdered)
             {
                 int k = item.Key;
@@ -1085,7 +1226,11 @@ namespace parse_hb_log
                 }
             }
 
-            Console.WriteLine("Processing {0}, {1}", strLog, (fIncludeAllTime ? "full time view" : "compressed time view"));
+            Console.WriteLine(
+                "Processing {0}, {1}",
+                strLog,
+                (fIncludeAllTime ? "full time view" : "compressed time view")
+            );
             PassZero(strLog);
             // Feel free to convert PassOne to print out all node's activity at once.
             // I used pass in the node # to print so did this the lazy way.

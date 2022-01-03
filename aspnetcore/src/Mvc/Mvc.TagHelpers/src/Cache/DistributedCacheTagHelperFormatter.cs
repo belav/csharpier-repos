@@ -27,7 +27,9 @@ public class DistributedCacheTagHelperFormatter : IDistributedCacheTagHelperForm
             throw new ArgumentException(
                 Resources.FormatPropertyOfTypeCannotBeNull(
                     nameof(DistributedCacheTagHelperFormattingContext.Html),
-                    typeof(DistributedCacheTagHelperFormattingContext).FullName));
+                    typeof(DistributedCacheTagHelperFormattingContext).FullName
+                )
+            );
         }
 
         var serialized = Encoding.UTF8.GetBytes(context.Html.ToString());

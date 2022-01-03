@@ -79,7 +79,8 @@ namespace Roslyn.Utilities
         public ObjectWriter(
             Stream stream,
             bool leaveOpen = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             // String serialization assumes both reader and writer to be of the same endianness.
             // It can be adjusted for BigEndian if needed.
@@ -90,7 +91,7 @@ namespace Roslyn.Utilities
             _stringReferenceMap = new WriterReferenceMap(valueEquality: true);
             _cancellationToken = cancellationToken;
 
-            // Capture a copy of the current static binder state.  That way we don't have to 
+            // Capture a copy of the current static binder state.  That way we don't have to
             // access any locks while we're doing our processing.
             _binderSnapshot = ObjectBinder.GetSnapshot();
 
@@ -151,7 +152,10 @@ namespace Roslyn.Utilities
 
         public void WriteValue(object? value)
         {
-            Debug.Assert(value == null || !value.GetType().GetTypeInfo().IsEnum, "Enum should not be written with WriteValue.  Write them as ints instead.");
+            Debug.Assert(
+                value == null || !value.GetType().GetTypeInfo().IsEnum,
+                "Enum should not be written with WriteValue.  Write them as ints instead."
+            );
 
             if (value == null)
             {
@@ -161,12 +165,15 @@ namespace Roslyn.Utilities
 
             var type = value.GetType();
             var typeInfo = type.GetTypeInfo();
-            Debug.Assert(!typeInfo.IsEnum, "Enums should not be written with WriteObject.  Write them out as integers instead.");
+            Debug.Assert(
+                !typeInfo.IsEnum,
+                "Enums should not be written with WriteObject.  Write them out as integers instead."
+            );
 
             // Perf: Note that JIT optimizes each expression value.GetType() == typeof(T) to a single register comparison.
             // Also the checks are sorted by commonality of the checked types.
 
-            // The primitive types are 
+            // The primitive types are
             // Boolean, Byte, SByte, Int16, UInt16, Int32, UInt32,
             // Int64, UInt64, IntPtr, UIntPtr, Char, Double, and Single.
             if (typeInfo.IsPrimitive)
@@ -185,12 +192,14 @@ namespace Roslyn.Utilities
                 }
                 else if (value.GetType() == typeof(bool))
                 {
-                    _writer.Write((byte)((bool)value ? EncodingKind.Boolean_True : EncodingKind.Boolean_False));
+                    _writer.Write(
+                        (byte)((bool)value ? EncodingKind.Boolean_True : EncodingKind.Boolean_False)
+                    );
                 }
                 else if (value.GetType() == typeof(char))
                 {
                     _writer.Write((byte)EncodingKind.Char);
-                    _writer.Write((ushort)(char)value);  // written as ushort because BinaryWriter fails on chars that are unicode surrogates
+                    _writer.Write((ushort)(char)value); // written as ushort because BinaryWriter fails on chars that are unicode surrogates
                 }
                 else if (value.GetType() == typeof(byte))
                 {
@@ -256,7 +265,9 @@ namespace Roslyn.Utilities
 
                 if (instance.Rank > 1)
                 {
-                    throw new InvalidOperationException(Resources.Arrays_with_more_than_one_dimension_cannot_be_serialized);
+                    throw new InvalidOperationException(
+                        Resources.Arrays_with_more_than_one_dimension_cannot_be_serialized
+                    );
                 }
 
                 WriteArray(instance);
@@ -388,11 +399,20 @@ namespace Roslyn.Utilities
             private readonly bool _valueEquality;
             private int _nextId;
 
-            private static readonly ObjectPool<SegmentedDictionary<object, int>> s_referenceDictionaryPool =
-                new(() => new SegmentedDictionary<object, int>(128, ReferenceEqualityComparer.Instance));
+            private static readonly ObjectPool<
+                SegmentedDictionary<object, int>
+            > s_referenceDictionaryPool =
+                new(
+                    () =>
+                        new SegmentedDictionary<object, int>(
+                            128,
+                            ReferenceEqualityComparer.Instance
+                        )
+                );
 
-            private static readonly ObjectPool<SegmentedDictionary<object, int>> s_valueDictionaryPool =
-                new(() => new SegmentedDictionary<object, int>(128));
+            private static readonly ObjectPool<
+                SegmentedDictionary<object, int>
+            > s_valueDictionaryPool = new(() => new SegmentedDictionary<object, int>(128));
 
             public WriterReferenceMap(bool valueEquality)
             {
@@ -401,8 +421,9 @@ namespace Roslyn.Utilities
                 _nextId = 0;
             }
 
-            private static ObjectPool<SegmentedDictionary<object, int>> GetDictionaryPool(bool valueEquality)
-                => valueEquality ? s_valueDictionaryPool : s_referenceDictionaryPool;
+            private static ObjectPool<SegmentedDictionary<object, int>> GetDictionaryPool(
+                bool valueEquality
+            ) => valueEquality ? s_valueDictionaryPool : s_referenceDictionaryPool;
 
             public void Dispose()
             {
@@ -421,8 +442,8 @@ namespace Roslyn.Utilities
                 }
             }
 
-            public bool TryGetReferenceId(object value, out int referenceId)
-                => _valueToIdMap.TryGetValue(value, out referenceId);
+            public bool TryGetReferenceId(object value, out int referenceId) =>
+                _valueToIdMap.TryGetValue(value, out referenceId);
 
             public void Add(object value, bool isReusable)
             {
@@ -465,7 +486,9 @@ namespace Roslyn.Utilities
             }
             else
             {
-                throw new ArgumentException(Resources.Value_too_large_to_be_represented_as_a_30_bit_unsigned_integer);
+                throw new ArgumentException(
+                    Resources.Value_too_large_to_be_represented_as_a_30_bit_unsigned_integer
+                );
             }
         }
 
@@ -578,7 +601,8 @@ namespace Roslyn.Utilities
                             WriteArrayValues((Array)a!);
                             return null;
                         },
-                        array);
+                        array
+                    );
 
                     // We must not proceed until the additional task completes. After returning from a write, the underlying
                     // stream providing access to raw memory will be closed; if this occurs before the separate thread
@@ -816,23 +840,33 @@ namespace Roslyn.Utilities
             {
                 case 1200:
                     Debug.Assert(HasPreamble(Encoding.Unicode));
-                    return (encoding.Equals(Encoding.Unicode) || HasPreamble(encoding)) ? EncodingKind.EncodingUnicode_LE_BOM : EncodingKind.EncodingUnicode_LE;
+                    return (encoding.Equals(Encoding.Unicode) || HasPreamble(encoding))
+                      ? EncodingKind.EncodingUnicode_LE_BOM
+                      : EncodingKind.EncodingUnicode_LE;
 
                 case 1201:
                     Debug.Assert(HasPreamble(Encoding.BigEndianUnicode));
-                    return (encoding.Equals(Encoding.BigEndianUnicode) || HasPreamble(encoding)) ? EncodingKind.EncodingUnicode_BE_BOM : EncodingKind.EncodingUnicode_BE;
+                    return (encoding.Equals(Encoding.BigEndianUnicode) || HasPreamble(encoding))
+                      ? EncodingKind.EncodingUnicode_BE_BOM
+                      : EncodingKind.EncodingUnicode_BE;
 
                 case 12000:
                     Debug.Assert(HasPreamble(Encoding.UTF32));
-                    return (encoding.Equals(Encoding.UTF32) || HasPreamble(encoding)) ? EncodingKind.EncodingUTF32_LE_BOM : EncodingKind.EncodingUTF32_LE;
+                    return (encoding.Equals(Encoding.UTF32) || HasPreamble(encoding))
+                      ? EncodingKind.EncodingUTF32_LE_BOM
+                      : EncodingKind.EncodingUTF32_LE;
 
                 case 12001:
                     Debug.Assert(HasPreamble(Encoding.UTF32));
-                    return (encoding.Equals(Encoding.UTF32) || HasPreamble(encoding)) ? EncodingKind.EncodingUTF32_BE_BOM : EncodingKind.EncodingUTF32_BE;
+                    return (encoding.Equals(Encoding.UTF32) || HasPreamble(encoding))
+                      ? EncodingKind.EncodingUTF32_BE_BOM
+                      : EncodingKind.EncodingUTF32_BE;
 
                 case 65001:
                     Debug.Assert(HasPreamble(Encoding.UTF8));
-                    return (encoding.Equals(Encoding.UTF8) || HasPreamble(encoding)) ? EncodingKind.EncodingUTF8_BOM : EncodingKind.EncodingUTF8;
+                    return (encoding.Equals(Encoding.UTF8) || HasPreamble(encoding))
+                      ? EncodingKind.EncodingUTF8_BOM
+                      : EncodingKind.EncodingUTF8;
 
                 default:
                     return EncodingKind.EncodingName;
@@ -840,9 +874,11 @@ namespace Roslyn.Utilities
 
             static bool HasPreamble(Encoding encoding)
 #if NETCOREAPP
-                => !encoding.Preamble.IsEmpty;
+                =>
+                !encoding.Preamble.IsEmpty;
 #else
-                => !encoding.GetPreamble().IsEmpty();
+                =>
+                !encoding.GetPreamble().IsEmpty();
 #endif
         }
 
@@ -881,7 +917,9 @@ namespace Roslyn.Utilities
                     writable = instance as IObjectWritable;
                     if (writable == null)
                     {
-                        throw NoSerializationWriterException($"{instance.GetType()} must implement {nameof(IObjectWritable)}");
+                        throw NoSerializationWriterException(
+                            $"{instance.GetType()} must implement {nameof(IObjectWritable)}"
+                        );
                     }
                 }
 
@@ -900,7 +938,8 @@ namespace Roslyn.Utilities
                             WriteObjectWorker((IObjectWritable)obj!);
                             return null;
                         },
-                        writable);
+                        writable
+                    );
 
                     // We must not proceed until the additional task completes. After returning from a write, the underlying
                     // stream providing access to raw memory will be closed; if this occurs before the separate thread
@@ -936,12 +975,19 @@ namespace Roslyn.Utilities
 
         private static Exception NoSerializationTypeException(string typeName)
         {
-            return new InvalidOperationException(string.Format(Resources.The_type_0_is_not_understood_by_the_serialization_binder, typeName));
+            return new InvalidOperationException(
+                string.Format(
+                    Resources.The_type_0_is_not_understood_by_the_serialization_binder,
+                    typeName
+                )
+            );
         }
 
         private static Exception NoSerializationWriterException(string typeName)
         {
-            return new InvalidOperationException(string.Format(Resources.Cannot_serialize_type_0, typeName));
+            return new InvalidOperationException(
+                string.Format(Resources.Cannot_serialize_type_0, typeName)
+            );
         }
 
         // we have s_typeMap and s_reversedTypeMap since there is no bidirectional map in compiler
@@ -1317,7 +1363,6 @@ namespace Roslyn.Utilities
             EncodingUnicode_BE_BOM,
             EncodingUnicode_LE,
             EncodingUnicode_LE_BOM,
-
             Last,
         }
     }

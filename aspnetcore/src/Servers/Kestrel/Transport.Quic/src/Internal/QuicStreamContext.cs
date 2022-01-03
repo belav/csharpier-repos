@@ -61,8 +61,22 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
         var maxWriteBufferSize = context.Options.MaxWriteBufferSize ?? 0;
 
         // TODO should we allow these PipeScheduler to be configurable here?
-        var inputOptions = new PipeOptions(MemoryPool, PipeScheduler.ThreadPool, PipeScheduler.Inline, maxReadBufferSize, maxReadBufferSize / 2, useSynchronizationContext: false);
-        var outputOptions = new PipeOptions(MemoryPool, PipeScheduler.Inline, PipeScheduler.ThreadPool, maxWriteBufferSize, maxWriteBufferSize / 2, useSynchronizationContext: false);
+        var inputOptions = new PipeOptions(
+            MemoryPool,
+            PipeScheduler.ThreadPool,
+            PipeScheduler.Inline,
+            maxReadBufferSize,
+            maxReadBufferSize / 2,
+            useSynchronizationContext: false
+        );
+        var outputOptions = new PipeOptions(
+            MemoryPool,
+            PipeScheduler.Inline,
+            PipeScheduler.ThreadPool,
+            maxWriteBufferSize,
+            maxWriteBufferSize / 2,
+            useSynchronizationContext: false
+        );
 
         _inputPipe = new Pipe(inputOptions);
         _outputPipe = new Pipe(outputOptions);
@@ -114,7 +128,9 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
         _serverAborted = false;
         _clientAbort = false;
         // TODO - resetable TCS
-        _waitForConnectionClosedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        _waitForConnectionClosedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         // Only reset pipes if the stream has been reused.
         if (CanReuse)
@@ -128,7 +144,12 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
 
     public override string ConnectionId
     {
-        get => _connectionId ??= StringUtilities.ConcatAsHexSuffix(_connection.ConnectionId, ':', (uint)StreamId);
+        get =>
+            _connectionId ??= StringUtilities.ConcatAsHexSuffix(
+                _connection.ConnectionId,
+                ':',
+                (uint)StreamId
+            );
         set => _connectionId = value;
     }
 
@@ -170,7 +191,11 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
         }
         catch (Exception ex)
         {
-            _log.LogError(0, ex, $"Unexpected exception in {nameof(QuicStreamContext)}.{nameof(StartAsync)}.");
+            _log.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(QuicStreamContext)}.{nameof(StartAsync)}."
+            );
         }
     }
 
@@ -231,7 +256,9 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
                         // Most implementations of ValueTask reset state in GetResult.
                         completeTask.GetAwaiter().GetResult();
 
-                        flushTask = ValueTask.FromResult(new FlushResult(isCanceled: false, isCompleted: true));
+                        flushTask = ValueTask.FromResult(
+                            new FlushResult(isCanceled: false, isCompleted: true)
+                        );
                     }
                     else
                     {
@@ -325,14 +352,16 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
 
         _streamClosed = true;
 
-        ThreadPool.UnsafeQueueUserWorkItem(state =>
-        {
-            state.CancelConnectionClosedToken();
+        ThreadPool.UnsafeQueueUserWorkItem(
+            state =>
+            {
+                state.CancelConnectionClosedToken();
 
-            state._waitForConnectionClosedTcs.TrySetResult();
-        },
-        this,
-        preferLocal: false);
+                state._waitForConnectionClosedTcs.TrySetResult();
+            },
+            this,
+            preferLocal: false
+        );
 
         return _waitForConnectionClosedTcs.Task;
     }
@@ -345,7 +374,11 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
         }
         catch (Exception ex)
         {
-            _log.LogError(0, ex, $"Unexpected exception in {nameof(QuicStreamContext)}.{nameof(CancelConnectionClosedToken)}.");
+            _log.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(QuicStreamContext)}.{nameof(CancelConnectionClosedToken)}."
+            );
         }
     }
 
@@ -487,7 +520,11 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
             lock (_shutdownLock)
             {
                 // TODO: Exception is always allocated. Consider only allocating if receive hasn't completed.
-                _shutdownReason = shutdownReason ?? new ConnectionAbortedException("The QUIC transport's send loop completed gracefully.");
+                _shutdownReason =
+                    shutdownReason
+                    ?? new ConnectionAbortedException(
+                        "The QUIC transport's send loop completed gracefully."
+                    );
                 QuicLog.StreamShutdownWrite(_log, this, _shutdownReason.Message);
 
                 _stream.Shutdown();
@@ -520,7 +557,9 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
             //
             // Be conservative about what can be pooled.
             // Only pool bidirectional streams whose pipes have completed successfully and haven't been aborted.
-            CanReuse = _stream.CanRead && _stream.CanWrite
+            CanReuse =
+                _stream.CanRead
+                && _stream.CanWrite
                 && _transportPipeReader.IsCompletedSuccessfully
                 && _transportPipeWriter.IsCompletedSuccessfully
                 && !_clientAbort

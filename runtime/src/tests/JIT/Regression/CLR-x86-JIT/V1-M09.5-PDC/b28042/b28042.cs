@@ -12,7 +12,8 @@ class A
     {
         A[] aa;
         int n;
-        for (aa = new A[7]; true; n = B[2] + B[2]) ;
+        for (aa = new A[7]; true; n = B[2] + B[2])
+            ;
     }
     static int Main()
     {

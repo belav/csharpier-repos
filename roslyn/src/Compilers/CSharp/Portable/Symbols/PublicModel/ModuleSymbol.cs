@@ -23,10 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         INamespaceSymbol IModuleSymbol.GlobalNamespace
         {
-            get
-            {
-                return _underlying.GlobalNamespace.GetPublicSymbol();
-            }
+            get { return _underlying.GlobalNamespace.GetPublicSymbol(); }
         }
 
         INamespaceSymbol IModuleSymbol.GetModuleNamespace(INamespaceSymbol namespaceSymbol)
@@ -36,13 +33,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ImmutableArray<IAssemblySymbol> IModuleSymbol.ReferencedAssemblySymbols
         {
-            get
-            {
-                return _underlying.ReferencedAssemblySymbols.GetPublicSymbols();
-            }
+            get { return _underlying.ReferencedAssemblySymbols.GetPublicSymbols(); }
         }
 
-        ImmutableArray<AssemblyIdentity> IModuleSymbol.ReferencedAssemblies => _underlying.ReferencedAssemblies;
+        ImmutableArray<AssemblyIdentity> IModuleSymbol.ReferencedAssemblies =>
+            _underlying.ReferencedAssemblies;
 
         ModuleMetadata IModuleSymbol.GetMetadata() => _underlying.GetMetadata();
 

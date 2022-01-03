@@ -6,9 +6,13 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class TempDataInSessionTest : TempDataTestBase, IClassFixture<MvcTestFixture<BasicWebSite.StartupWithSessionTempDataProvider>>
+public class TempDataInSessionTest
+    : TempDataTestBase,
+      IClassFixture<MvcTestFixture<BasicWebSite.StartupWithSessionTempDataProvider>>
 {
-    public TempDataInSessionTest(MvcTestFixture<BasicWebSite.StartupWithSessionTempDataProvider> fixture)
+    public TempDataInSessionTest(
+        MvcTestFixture<BasicWebSite.StartupWithSessionTempDataProvider> fixture
+    )
     {
         Client = fixture.CreateDefaultClient();
     }

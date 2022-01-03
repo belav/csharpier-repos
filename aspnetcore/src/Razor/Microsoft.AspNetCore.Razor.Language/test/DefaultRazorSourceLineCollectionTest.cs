@@ -12,7 +12,8 @@ public class DefaultRazorSourceLineCollectionTest
     public void GetLocation_Negative()
     {
         // Arrange
-        var content = @"@addTagHelper, * Stuff
+        var content =
+            @"@addTagHelper, * Stuff
 @* A comment *@";
         var document = TestRazorSourceDocument.Create(content);
         var collection = new DefaultRazorSourceLineCollection(document);
@@ -25,7 +26,8 @@ public class DefaultRazorSourceLineCollectionTest
     public void GetLocation_TooBig()
     {
         // Arrange
-        var content = @"addTagHelper, * Stuff
+        var content =
+            @"addTagHelper, * Stuff
 @* A comment *@";
         var document = TestRazorSourceDocument.Create(content);
         var collection = new DefaultRazorSourceLineCollection(document);
@@ -38,7 +40,8 @@ public class DefaultRazorSourceLineCollectionTest
     public void GetLocation_AtStart()
     {
         // Arrange
-        var content = @"@addTaghelper, * Stuff
+        var content =
+            @"@addTaghelper, * Stuff
 @* A comment *@";
         var document = TestRazorSourceDocument.Create(content);
         var collection = new DefaultRazorSourceLineCollection(document);
@@ -55,7 +58,8 @@ public class DefaultRazorSourceLineCollectionTest
     public void GetLocation_AtEnd()
     {
         // Arrange
-        var content = @"@addTagHelper, * Stuff
+        var content =
+            @"@addTagHelper, * Stuff
 @* A comment *@";
         var document = TestRazorSourceDocument.Create(content);
         var collection = new DefaultRazorSourceLineCollection(document);
@@ -73,7 +77,8 @@ public class DefaultRazorSourceLineCollectionTest
     public void GetLineLength_Negative()
     {
         // Arrange
-        var content = @"@addTagHelper, * Stuff
+        var content =
+            @"@addTagHelper, * Stuff
 @* A comment *@";
         var document = TestRazorSourceDocument.Create(content);
         var collection = new DefaultRazorSourceLineCollection(document);
@@ -86,7 +91,8 @@ public class DefaultRazorSourceLineCollectionTest
     public void GetLineLength_Bigger()
     {
         // Arrange
-        var content = @"@addTagHelper, * Stuff
+        var content =
+            @"@addTagHelper, * Stuff
 @* A comment *@";
         var document = TestRazorSourceDocument.Create(content);
         var collection = new DefaultRazorSourceLineCollection(document);
@@ -99,7 +105,8 @@ public class DefaultRazorSourceLineCollectionTest
     public void GetLineLength_AtStart()
     {
         // Arrange
-        var content = @"@addTagHelper, * Stuff
+        var content =
+            @"@addTagHelper, * Stuff
 @* A comment *@";
         var document = TestRazorSourceDocument.Create(content);
         var collection = new DefaultRazorSourceLineCollection(document);
@@ -116,7 +123,8 @@ public class DefaultRazorSourceLineCollectionTest
     public void GetLineLength_AtEnd()
     {
         // Arrange
-        var content = @"@addTagHelper, * Stuff
+        var content =
+            @"@addTagHelper, * Stuff
 @* A comment *@";
         var document = TestRazorSourceDocument.Create(content);
         var collection = new DefaultRazorSourceLineCollection(document);

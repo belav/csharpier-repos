@@ -12,11 +12,11 @@ public class ServicesModelBinderProviderTest
         get
         {
             return new TheoryData<BindingSource>()
-                {
-                    BindingSource.Header,
-                    BindingSource.Form,
-                    null,
-                };
+            {
+                BindingSource.Header,
+                BindingSource.Form,
+                null,
+            };
         }
     }
 

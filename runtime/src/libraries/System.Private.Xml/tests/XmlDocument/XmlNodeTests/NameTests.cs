@@ -65,7 +65,9 @@ namespace System.Xml.Tests
         public static void ElementWithExplicitlyStatedNamespace()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<root xmlns:my='http://something'><my:book price='99.95'><my:book></my:book></my:book></root>");
+            xmlDocument.LoadXml(
+                "<root xmlns:my='http://something'><my:book price='99.95'><my:book></my:book></my:book></root>"
+            );
 
             Assert.Equal("my:book", xmlDocument.DocumentElement.FirstChild.Name);
         }

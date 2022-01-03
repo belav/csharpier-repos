@@ -56,10 +56,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual IModel Initialize(
             IModel model,
             bool designTime = true,
-            IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? validationLogger = null)
+            IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? validationLogger = null
+        )
         {
-            if (model is Model mutableModel
-                && !mutableModel.IsReadOnly)
+            if (model is Model mutableModel && !mutableModel.IsReadOnly)
             {
                 lock (_syncObject)
                 {
@@ -81,8 +81,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                         InitializeModel(model, designTime, prevalidation: true);
 
-                        if (validationLogger != null
-                            && model is IConventionModel)
+                        if (validationLogger != null && model is IConventionModel)
                         {
                             Dependencies.ModelValidator.Validate(model, validationLogger);
                         }
@@ -109,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                     return model!;
                 },
-                model);
+                model
+            );
 
             return model;
         }
@@ -123,8 +123,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     <see langword="true" /> indicates that only pre-validation initialization should be performed;
         ///     <see langword="false" /> indicates that only post-validation initialization should be performed.
         /// </param>
-        protected virtual void InitializeModel(IModel model, bool designTime, bool prevalidation)
-        {
-        }
+        protected virtual void InitializeModel(
+            IModel model,
+            bool designTime,
+            bool prevalidation
+        ) { }
     }
 }

@@ -16,11 +16,9 @@ namespace Microsoft.CodeAnalysis.ImplementType
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ImplementTypeOptionsProvider()
-        {
-        }
+        public ImplementTypeOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            ImplementTypeOptions.InsertionBehavior);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(ImplementTypeOptions.InsertionBehavior);
     }
 }

@@ -47,8 +47,6 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     the constructor at any point in this process.
         /// </remarks>
         [EntityFrameworkInternal]
-        public RelationalModelDependencies()
-        {
-        }
+        public RelationalModelDependencies() { }
     }
 }

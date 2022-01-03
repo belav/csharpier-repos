@@ -26,9 +26,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// We expect that <paramref name="oldLine"/> and <paramref name="newLine"/> have the same value
         /// when the line delta is zero.
         /// </remarks>
-        public SourceLineUpdate(
-            int oldLine,
-            int newLine)
+        public SourceLineUpdate(int oldLine, int newLine)
         {
             if (oldLine < 0)
                 throw new ArgumentOutOfRangeException(nameof(oldLine));

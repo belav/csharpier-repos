@@ -4,7 +4,6 @@
 
 using System;
 
-
 namespace BoxTest
 {
     internal abstract class BaseTest
@@ -18,8 +17,7 @@ namespace BoxTest
 
         protected object Fibonacci(object num, object flag)
         {
-            if (num.GetType() != typeof(float) ||
-                flag.GetType() != typeof(bool))
+            if (num.GetType() != typeof(float) || flag.GetType() != typeof(bool))
                 throw new Exception();
 
             return Fibonacci2(num, flag);
@@ -31,7 +29,9 @@ namespace BoxTest
             if ((float)num < 1.1)
                 N = num;
             else
-                N = (float)Fibonacci((float)num - 2.0f, false) + (float)Fibonacci((float)num - 1.0f, flag);
+                N =
+                    (float)Fibonacci((float)num - 2.0f, false)
+                    + (float)Fibonacci((float)num - 1.0f, flag);
             if ((bool)flag)
                 Console.Write(N.ToString() + " ");
             return N;

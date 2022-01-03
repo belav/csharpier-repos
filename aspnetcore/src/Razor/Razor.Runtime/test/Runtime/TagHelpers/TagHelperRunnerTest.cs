@@ -31,7 +31,8 @@ public class TagHelperRunnerTest
                 Assert.Equal(1, incrementer);
 
                 incrementer++;
-            });
+            }
+        );
         executionContext.Add(callbackTagHelper);
 
         // Act
@@ -47,41 +48,25 @@ public class TagHelperRunnerTest
         {
             // tagHelperOrders, expectedTagHelperOrders
             return new TheoryData<int[], int[]>
+            {
+                { new[] { 1000, int.MaxValue, 0 }, new[] { 0, 1000, int.MaxValue } },
                 {
-                    {
-                        new[] { 1000, int.MaxValue, 0 },
-                        new[] { 0, 1000, int.MaxValue }
-                    },
-                    {
-                        new[] { int.MaxValue, int.MaxValue, int.MinValue },
-                        new[] { int.MinValue, int.MaxValue, int.MaxValue }
-                    },
-                    {
-                        new[] { 0, 0, int.MinValue },
-                        new[] { int.MinValue, 0, 0 }
-                    },
-                    {
-                        new[] { int.MinValue, -1000, 0 },
-                        new[] { int.MinValue, -1000, 0 }
-                    },
-                    {
-                        new[] { 0, 1000, int.MaxValue },
-                        new[] { 0, 1000, int.MaxValue }
-                    },
-                    {
-                        new[] { int.MaxValue, int.MinValue, int.MaxValue, -1000, int.MaxValue, 0 },
-                        new[] { int.MinValue, -1000, 0, int.MaxValue, int.MaxValue, int.MaxValue }
-                    },
-                    {
-                        new[] { 0, 0, 0, 0 },
-                        new[] { 0, 0, 0, 0 }
-                    },
-
-                    {
-                        new[] { 1000, int.MaxValue, 0, -1000, int.MinValue },
-                        new[] { int.MinValue, -1000, 0, 1000, int.MaxValue }
-                    },
-                };
+                    new[] { int.MaxValue, int.MaxValue, int.MinValue },
+                    new[] { int.MinValue, int.MaxValue, int.MaxValue }
+                },
+                { new[] { 0, 0, int.MinValue }, new[] { int.MinValue, 0, 0 } },
+                { new[] { int.MinValue, -1000, 0 }, new[] { int.MinValue, -1000, 0 } },
+                { new[] { 0, 1000, int.MaxValue }, new[] { 0, 1000, int.MaxValue } },
+                {
+                    new[] { int.MaxValue, int.MinValue, int.MaxValue, -1000, int.MaxValue, 0 },
+                    new[] { int.MinValue, -1000, 0, int.MaxValue, int.MaxValue, int.MaxValue }
+                },
+                { new[] { 0, 0, 0, 0 }, new[] { 0, 0, 0, 0 } },
+                {
+                    new[] { 1000, int.MaxValue, 0, -1000, int.MinValue },
+                    new[] { int.MinValue, -1000, 0, 1000, int.MaxValue }
+                },
+            };
         }
     }
 
@@ -89,7 +74,8 @@ public class TagHelperRunnerTest
     [MemberData(nameof(TagHelperOrderData))]
     public async Task RunAsync_OrdersTagHelpers(
         int[] tagHelperOrders,
-        int[] expectedTagHelperOrders)
+        int[] expectedTagHelperOrders
+    )
     {
         // Arrange
         var runner = new TagHelperRunner();

@@ -22,7 +22,7 @@ namespace SciMark2
             for (int i = 0; i < Iterations; i++)
             {
                 FFT.transform(x); // forward transform
-                FFT.inverse(x);   // backward transform
+                FFT.inverse(x); // backward transform
             }
         }
 
@@ -169,7 +169,13 @@ namespace SciMark2
             return SparseCompRow.num_flops(N, nz, cycles) / Q.read() * 1.0e-6;
         }
 
-        public static void validateLU(int N, SciMark2.Random R, double[][] lu, double[][] A, int[] pivot)
+        public static void validateLU(
+            int N,
+            SciMark2.Random R,
+            double[][] lu,
+            double[][] A,
+            int[] pivot
+        )
         {
             // verify that LU is correct
             double[] b = RandomVector(N, R);

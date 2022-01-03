@@ -17,29 +17,39 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 {
     public class CompilationHelper
     {
-        private static readonly CSharpParseOptions s_parseOptions =
-            new CSharpParseOptions(kind: SourceCodeKind.Regular, documentationMode: DocumentationMode.Parse)
-            // workaround https://github.com/dotnet/roslyn/pull/55866. We can remove "LangVersion=Preview" when we get a Roslyn build with that change.
-            .WithLanguageVersion(LanguageVersion.Preview);
+        private static readonly CSharpParseOptions s_parseOptions = new CSharpParseOptions(
+            kind: SourceCodeKind.Regular,
+            documentationMode: DocumentationMode.Parse
+        )
+        // workaround https://github.com/dotnet/roslyn/pull/55866. We can remove "LangVersion=Preview" when we get a Roslyn build with that change.
+        .WithLanguageVersion(LanguageVersion.Preview);
 
         public static Compilation CreateCompilation(
             string source,
             MetadataReference[] additionalReferences = null,
             string assemblyName = "TestAssembly",
-            bool includeSTJ = true)
+            bool includeSTJ = true
+        )
         {
             // Bypass System.Runtime error.
-            Assembly systemRuntimeAssembly = Assembly.Load("System.Runtime, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
-            Assembly systemCollectionsAssembly = Assembly.Load("System.Collections, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+            Assembly systemRuntimeAssembly = Assembly.Load(
+                "System.Runtime, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            );
+            Assembly systemCollectionsAssembly = Assembly.Load(
+                "System.Collections, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            );
             string systemRuntimeAssemblyPath = systemRuntimeAssembly.Location;
             string systemCollectionsAssemblyPath = systemCollectionsAssembly.Location;
 
-            List<MetadataReference> references = new List<MetadataReference> {
+            List<MetadataReference> references = new List<MetadataReference>
+            {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Type).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(KeyValuePair).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(ContractNamespaceAttribute).Assembly.Location),
+                MetadataReference.CreateFromFile(
+                    typeof(ContractNamespaceAttribute).Assembly.Location
+                ),
                 MetadataReference.CreateFromFile(typeof(JavaScriptEncoder).Assembly.Location),
                 MetadataReference.CreateFromFile(systemRuntimeAssemblyPath),
                 MetadataReference.CreateFromFile(systemCollectionsAssemblyPath),
@@ -47,7 +57,11 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             if (includeSTJ)
             {
-                references.Add(MetadataReference.CreateFromFile(typeof(JsonSerializerOptions).Assembly.Location));
+                references.Add(
+                    MetadataReference.CreateFromFile(
+                        typeof(JsonSerializerOptions).Assembly.Location
+                    )
+                );
             }
 
             // Add additional references as needed.
@@ -71,20 +85,28 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             Compilation compilation,
             out ImmutableArray<Diagnostic> diagnostics,
 #if ROSLYN4_0_OR_GREATER
-            params IIncrementalGenerator[] generators)
+            params IIncrementalGenerator[] generators
+        )
         {
             CSharpGeneratorDriver driver = CSharpGeneratorDriver.Create(
                 generators: generators.Select(g => g.AsSourceGenerator()),
-                parseOptions: s_parseOptions);
+                parseOptions: s_parseOptions
+            );
 #else
-            params ISourceGenerator[] generators)
+            params ISourceGenerator[] generators
+        )
         {
             CSharpGeneratorDriver driver = CSharpGeneratorDriver.Create(
                 generators: generators,
-                parseOptions: s_parseOptions);
+                parseOptions: s_parseOptions
+            );
 #endif
 
-            driver.RunGeneratorsAndUpdateCompilation(compilation, out Compilation outCompilation, out diagnostics);
+            driver.RunGeneratorsAndUpdateCompilation(
+                compilation,
+                out Compilation outCompilation,
+                out diagnostics
+            );
             return outCompilation;
         }
 
@@ -101,7 +123,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateReferencedLocationCompilation()
         {
-            string source = @"
+            string source =
+                @"
             namespace ReferencedAssembly
             {
                 public class Location
@@ -123,7 +146,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateCampaignSummaryViewModelCompilation()
         {
-            string source = @"
+            string source =
+                @"
             namespace ReferencedAssembly
             {
                 public class CampaignSummaryViewModel
@@ -142,7 +166,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateActiveOrUpcomingEventCompilation()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             namespace ReferencedAssembly
             {
@@ -164,7 +189,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateReferencedHighLowTempsCompilation()
         {
-            string source = @"
+            string source =
+                @"
             namespace ReferencedAssembly
             {
                 public class HighLowTemps
@@ -179,7 +205,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateRepeatedLocationsCompilation()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Collections;
             using System.Collections.Generic;
@@ -231,7 +258,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateRepeatedLocationsWithResolutionCompilation()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Collections;
             using System.Collections.Generic;
@@ -277,7 +305,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateCompilationWithInitOnlyProperties()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Text.Json.Serialization;
 
@@ -307,7 +336,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateCompilationWithInaccessibleJsonIncludeProperties()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Text.Json.Serialization;
 
@@ -336,15 +366,27 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             return CreateCompilation(source);
         }
 
-        internal static void CheckDiagnosticMessages(ImmutableArray<Diagnostic> diagnostics, DiagnosticSeverity level, string[] expectedMessages)
+        internal static void CheckDiagnosticMessages(
+            ImmutableArray<Diagnostic> diagnostics,
+            DiagnosticSeverity level,
+            string[] expectedMessages
+        )
         {
-            string[] actualMessages = diagnostics.Where(diagnostic => diagnostic.Severity == level).Select(diagnostic => diagnostic.GetMessage()).ToArray();
+            string[] actualMessages = diagnostics
+                .Where(diagnostic => diagnostic.Severity == level)
+                .Select(diagnostic => diagnostic.GetMessage())
+                .ToArray();
 
             // Can't depend on reflection order when generating type metadata.
             Array.Sort(actualMessages);
             Array.Sort(expectedMessages);
 
-            if (CultureInfo.CurrentUICulture.Name.StartsWith("en", StringComparison.OrdinalIgnoreCase))
+            if (
+                CultureInfo.CurrentUICulture.Name.StartsWith(
+                    "en",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 Assert.Equal(expectedMessages, actualMessages);
             }

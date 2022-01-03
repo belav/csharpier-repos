@@ -14,21 +14,24 @@ namespace System.Collections.Generic
         private readonly IEqualityComparer<T> _memberEqualityComparer;
 
         public SortedSetEqualityComparer(IEqualityComparer<T>? memberEqualityComparer)
-            : this(comparer: null, memberEqualityComparer: memberEqualityComparer)
-        { }
+            : this(comparer: null, memberEqualityComparer: memberEqualityComparer) { }
 
         /// <summary>
         /// Create a new SetEqualityComparer, given a comparer for member order and another for member equality (these
         /// must be consistent in their definition of equality)
         /// </summary>
-        private SortedSetEqualityComparer(IComparer<T>? comparer, IEqualityComparer<T>? memberEqualityComparer)
+        private SortedSetEqualityComparer(
+            IComparer<T>? comparer,
+            IEqualityComparer<T>? memberEqualityComparer
+        )
         {
             _comparer = comparer ?? Comparer<T>.Default;
             _memberEqualityComparer = memberEqualityComparer ?? EqualityComparer<T>.Default;
         }
 
         // Use _comparer to keep equals properties intact; don't want to choose one of the comparers.
-        public bool Equals(SortedSet<T>? x, SortedSet<T>? y) => SortedSet<T>.SortedSetEquals(x, y, _comparer);
+        public bool Equals(SortedSet<T>? x, SortedSet<T>? y) =>
+            SortedSet<T>.SortedSetEquals(x, y, _comparer);
 
         // IMPORTANT: this part uses the fact that GetHashCode() is consistent with the notion of equality in the set.
         public int GetHashCode(SortedSet<T> obj)
@@ -55,6 +58,7 @@ namespace System.Collections.Generic
             return comparer != null && _comparer == comparer._comparer;
         }
 
-        public override int GetHashCode() => _comparer.GetHashCode() ^ _memberEqualityComparer.GetHashCode();
+        public override int GetHashCode() =>
+            _comparer.GetHashCode() ^ _memberEqualityComparer.GetHashCode();
     }
 }

@@ -297,7 +297,6 @@ namespace System.Drawing.Imaging
             set { _matrix44 = value; }
         }
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref='ColorMatrix'/> class with the elements in the specified matrix.
         /// </summary>
@@ -377,11 +376,7 @@ namespace System.Drawing.Imaging
         /// </summary>
         public float this[int row, int column]
         {
-            get
-            {
-                return GetMatrix()[row][column];
-            }
-
+            get { return GetMatrix()[row][column]; }
             set
             {
                 float[][] tempMatrix = GetMatrix();

@@ -4,7 +4,6 @@
 
 using System;
 
-
 struct Big10DW
 {
 #pragma warning disable 0414
@@ -131,7 +130,6 @@ struct Big100000DW
         b10.Zero();
     }
 }
-
 
 class Test_hugestruct
 {

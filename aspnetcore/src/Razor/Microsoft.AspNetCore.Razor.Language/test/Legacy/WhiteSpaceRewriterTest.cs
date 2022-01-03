@@ -12,7 +12,8 @@ public class WhiteSpaceRewriterTest : ParserTestBase
     public void Moves_Whitespace_Preceeding_ExpressionBlock_To_Parent_Block()
     {
         // Arrange
-        var content = @"
+        var content =
+            @"
 <div>
     @result
 </div>
@@ -22,7 +23,8 @@ public class WhiteSpaceRewriterTest : ParserTestBase
         var parsed = ParseDocument(
             RazorLanguageVersion.Latest,
             content,
-            Array.Empty<DirectiveDescriptor>());
+            Array.Empty<DirectiveDescriptor>()
+        );
 
         var rewriter = new WhitespaceRewriter();
 
@@ -30,7 +32,12 @@ public class WhiteSpaceRewriterTest : ParserTestBase
         var rewritten = rewriter.Visit(parsed.Root);
 
         // Assert
-        var rewrittenTree = RazorSyntaxTree.Create(rewritten, parsed.Source, parsed.Diagnostics, parsed.Options);
+        var rewrittenTree = RazorSyntaxTree.Create(
+            rewritten,
+            parsed.Source,
+            parsed.Diagnostics,
+            parsed.Options
+        );
         BaselineTest(rewrittenTree);
     }
 }

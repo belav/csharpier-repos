@@ -21,19 +21,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.MatchFolderAndNamespace
 #endif
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpMatchFolderAndNamespaceDiagnosticAnalyzer
-        : AbstractMatchFolderAndNamespaceDiagnosticAnalyzer<SyntaxKind, BaseNamespaceDeclarationSyntax>
+        : AbstractMatchFolderAndNamespaceDiagnosticAnalyzer<
+              SyntaxKind,
+              BaseNamespaceDeclarationSyntax
+          >
     {
 #if !CODE_STYLE
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMatchFolderAndNamespaceDiagnosticAnalyzer()
-        {
-        }
+        public CSharpMatchFolderAndNamespaceDiagnosticAnalyzer() { }
 #endif
 
         protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
 
-        protected override ImmutableArray<SyntaxKind> GetSyntaxKindsToAnalyze()
-            => ImmutableArray.Create(SyntaxKind.NamespaceDeclaration, SyntaxKind.FileScopedNamespaceDeclaration);
+        protected override ImmutableArray<SyntaxKind> GetSyntaxKindsToAnalyze() =>
+            ImmutableArray.Create(
+                SyntaxKind.NamespaceDeclaration,
+                SyntaxKind.FileScopedNamespaceDeclaration
+            );
     }
 }

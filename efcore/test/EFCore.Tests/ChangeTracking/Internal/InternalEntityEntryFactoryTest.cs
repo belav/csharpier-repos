@@ -26,7 +26,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var stateManager = contextServices.GetRequiredService<IStateManager>();
 
             var entity = new RedHook();
-            var entry = new InternalEntityEntry(stateManager, (IEntityType)entityTypeBuilder.Metadata, entity);
+            var entry = new InternalEntityEntry(
+                stateManager,
+                (IEntityType)entityTypeBuilder.Metadata,
+                entity
+            );
 
             Assert.Same(stateManager, entry.StateManager);
             Assert.Same(entityTypeBuilder.Metadata, entry.EntityType);
@@ -48,7 +52,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var stateManager = contextServices.GetRequiredService<IStateManager>();
 
             var entity = new RedHook();
-            var entry = new InternalEntityEntry(stateManager, (IEntityType)entityTypeBuilder.Metadata, entity);
+            var entry = new InternalEntityEntry(
+                stateManager,
+                (IEntityType)entityTypeBuilder.Metadata,
+                entity
+            );
 
             Assert.Same(stateManager, entry.StateManager);
             Assert.Same(entityTypeBuilder.Metadata, entry.EntityType);

@@ -20,13 +20,55 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
 {
     // Use C#7.3's ReadOnlySpan<byte> optimization for static data https://vcsjones.com/2019/02/01/csharp-readonly-span-bytes-static/
     // "HTTP/1.1 100 Continue\r\n\r\n"
-    private static ReadOnlySpan<byte> ContinueBytes => new byte[] { (byte)'H', (byte)'T', (byte)'T', (byte)'P', (byte)'/', (byte)'1', (byte)'.', (byte)'1', (byte)' ', (byte)'1', (byte)'0', (byte)'0', (byte)' ', (byte)'C', (byte)'o', (byte)'n', (byte)'t', (byte)'i', (byte)'n', (byte)'u', (byte)'e', (byte)'\r', (byte)'\n', (byte)'\r', (byte)'\n' };
+    private static ReadOnlySpan<byte> ContinueBytes =>
+        new byte[]
+        {
+            (byte)'H',
+            (byte)'T',
+            (byte)'T',
+            (byte)'P',
+            (byte)'/',
+            (byte)'1',
+            (byte)'.',
+            (byte)'1',
+            (byte)' ',
+            (byte)'1',
+            (byte)'0',
+            (byte)'0',
+            (byte)' ',
+            (byte)'C',
+            (byte)'o',
+            (byte)'n',
+            (byte)'t',
+            (byte)'i',
+            (byte)'n',
+            (byte)'u',
+            (byte)'e',
+            (byte)'\r',
+            (byte)'\n',
+            (byte)'\r',
+            (byte)'\n'
+        };
     // "HTTP/1.1 "
-    private static ReadOnlySpan<byte> HttpVersion11Bytes => new byte[] { (byte)'H', (byte)'T', (byte)'T', (byte)'P', (byte)'/', (byte)'1', (byte)'.', (byte)'1', (byte)' ' };
+    private static ReadOnlySpan<byte> HttpVersion11Bytes =>
+        new byte[]
+        {
+            (byte)'H',
+            (byte)'T',
+            (byte)'T',
+            (byte)'P',
+            (byte)'/',
+            (byte)'1',
+            (byte)'.',
+            (byte)'1',
+            (byte)' '
+        };
     // "\r\n\r\n"
-    private static ReadOnlySpan<byte> EndHeadersBytes => new byte[] { (byte)'\r', (byte)'\n', (byte)'\r', (byte)'\n' };
+    private static ReadOnlySpan<byte> EndHeadersBytes =>
+        new byte[] { (byte)'\r', (byte)'\n', (byte)'\r', (byte)'\n' };
     // "0\r\n\r\n"
-    private static ReadOnlySpan<byte> EndChunkedResponseBytes => new byte[] { (byte)'0', (byte)'\r', (byte)'\n', (byte)'\r', (byte)'\n' };
+    private static ReadOnlySpan<byte> EndChunkedResponseBytes =>
+        new byte[] { (byte)'0', (byte)'\r', (byte)'\n', (byte)'\r', (byte)'\n' };
 
     private const int MaxBeginChunkLength = 10;
     private const int EndChunkLength = 2;
@@ -81,7 +123,8 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
         KestrelTrace log,
         ITimeoutControl timeoutControl,
         IHttpMinResponseDataRateFeature minResponseDataRateFeature,
-        IHttpOutputAborter outputAborter)
+        IHttpOutputAborter outputAborter
+    )
     {
         // Allow appending more data to the PipeWriter when a flush is pending.
         _pipeWriter = new ConcurrentPipeWriter(pipeWriter, memoryPool, _contextLock);
@@ -96,7 +139,10 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
         _flusher.Initialize(_pipeWriter);
     }
 
-    public Task WriteDataAsync(ReadOnlySpan<byte> buffer, CancellationToken cancellationToken = default)
+    public Task WriteDataAsync(
+        ReadOnlySpan<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         if (cancellationToken.IsCancellationRequested)
         {
@@ -106,7 +152,10 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
         return WriteAsync(buffer, cancellationToken).GetAsTask();
     }
 
-    public ValueTask<FlushResult> WriteDataToPipeAsync(ReadOnlySpan<byte> buffer, CancellationToken cancellationToken = default)
+    public ValueTask<FlushResult> WriteDataToPipeAsync(
+        ReadOnlySpan<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         if (cancellationToken.IsCancellationRequested)
         {
@@ -168,10 +217,18 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
             var bytesWritten = _unflushedBytes;
             _unflushedBytes = 0;
 
-            return _flusher.FlushAsync(_minResponseDataRateFeature.MinDataRate, bytesWritten, _outputAborter, cancellationToken);
+            return _flusher.FlushAsync(
+                _minResponseDataRateFeature.MinDataRate,
+                bytesWritten,
+                _outputAborter,
+                cancellationToken
+            );
         }
 
-        static ValueTask<FlushResult> FlushAsyncChunked(Http1OutputProducer producer, CancellationToken token)
+        static ValueTask<FlushResult> FlushAsyncChunked(
+            Http1OutputProducer producer,
+            CancellationToken token
+        )
         {
             // Local function so in the common-path the stack space for BufferWriter isn't reserved and cleared when it isn't used.
 
@@ -188,7 +245,12 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
             // If there is an empty write, we still need to update the current chunk
             producer._currentChunkMemoryUpdated = false;
 
-            return producer._flusher.FlushAsync(producer._minResponseDataRateFeature.MinDataRate, bytesWritten, producer._outputAborter, token);
+            return producer._flusher.FlushAsync(
+                producer._minResponseDataRateFeature.MinDataRate,
+                bytesWritten,
+                producer._outputAborter,
+                token
+            );
         }
     }
 
@@ -259,7 +321,10 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
                 {
                     if (_currentSegment.Length - bytes < _position)
                     {
-                        throw new ArgumentOutOfRangeException(nameof(bytes), "Can't advance past buffer size.");
+                        throw new ArgumentOutOfRangeException(
+                            nameof(bytes),
+                            "Can't advance past buffer size."
+                        );
                     }
 
                     _position += bytes;
@@ -267,9 +332,18 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
             }
             else if (_autoChunk)
             {
-                if (_advancedBytesForChunk > _currentChunkMemory.Length - _currentMemoryPrefixBytes - EndChunkLength - bytes)
+                if (
+                    _advancedBytesForChunk
+                    > _currentChunkMemory.Length
+                        - _currentMemoryPrefixBytes
+                        - EndChunkLength
+                        - bytes
+                )
                 {
-                    throw new ArgumentOutOfRangeException(nameof(bytes), "Can't advance past buffer size.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(bytes),
+                        "Can't advance past buffer size."
+                    );
                 }
                 _advancedBytesForChunk += bytes;
             }
@@ -286,7 +360,10 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
     }
 
     // This method is for chunked http responses that directly call response.WriteAsync
-    public ValueTask<FlushResult> WriteChunkAsync(ReadOnlySpan<byte> buffer, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> WriteChunkAsync(
+        ReadOnlySpan<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         lock (_contextLock)
         {
@@ -319,7 +396,6 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
 
         if (buffer.Length > 0)
         {
-
             writer.WriteBeginChunkBytes(buffer.Length);
             writer.Write(buffer);
             writer.WriteEndChunkBytes();
@@ -328,7 +404,13 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
         writer.Commit();
     }
 
-    public void WriteResponseHeaders(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, bool appComplete)
+    public void WriteResponseHeaders(
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk,
+        bool appComplete
+    )
     {
         lock (_contextLock)
         {
@@ -341,11 +423,23 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
 
             var buffer = _pipeWriter;
             var writer = new BufferWriter<PipeWriter>(buffer);
-            WriteResponseHeadersInternal(ref writer, statusCode, reasonPhrase, responseHeaders, autoChunk);
+            WriteResponseHeadersInternal(
+                ref writer,
+                statusCode,
+                reasonPhrase,
+                responseHeaders,
+                autoChunk
+            );
         }
     }
 
-    private void WriteResponseHeadersInternal(ref BufferWriter<PipeWriter> writer, int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk)
+    private void WriteResponseHeadersInternal(
+        ref BufferWriter<PipeWriter> writer,
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk
+    )
     {
         writer.Write(HttpVersion11Bytes);
         var statusBytes = ReasonPhrases.ToStatusBytes(statusCode, reasonPhrase);
@@ -483,7 +577,14 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
         return WriteAsync(ContinueBytes);
     }
 
-    public ValueTask<FlushResult> FirstWriteAsync(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, ReadOnlySpan<byte> buffer, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> FirstWriteAsync(
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk,
+        ReadOnlySpan<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         lock (_contextLock)
         {
@@ -497,13 +598,26 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
             // Uses same BufferWriter to write response headers and response
             var writer = new BufferWriter<PipeWriter>(_pipeWriter);
 
-            WriteResponseHeadersInternal(ref writer, statusCode, reasonPhrase, responseHeaders, autoChunk);
+            WriteResponseHeadersInternal(
+                ref writer,
+                statusCode,
+                reasonPhrase,
+                responseHeaders,
+                autoChunk
+            );
 
             return WriteAsyncInternal(ref writer, buffer, cancellationToken);
         }
     }
 
-    public ValueTask<FlushResult> FirstWriteChunkedAsync(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, ReadOnlySpan<byte> buffer, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> FirstWriteChunkedAsync(
+        int statusCode,
+        string? reasonPhrase,
+        HttpResponseHeaders responseHeaders,
+        bool autoChunk,
+        ReadOnlySpan<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         lock (_contextLock)
         {
@@ -517,7 +631,13 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
             // Uses same BufferWriter to write response headers and chunk
             var writer = new BufferWriter<PipeWriter>(_pipeWriter);
 
-            WriteResponseHeadersInternal(ref writer, statusCode, reasonPhrase, responseHeaders, autoChunk);
+            WriteResponseHeadersInternal(
+                ref writer,
+                statusCode,
+                reasonPhrase,
+                responseHeaders,
+                autoChunk
+            );
 
             CommitChunkInternal(ref writer, buffer);
 
@@ -541,7 +661,8 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
 
     private ValueTask<FlushResult> WriteAsync(
         ReadOnlySpan<byte> buffer,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         lock (_contextLock)
         {
@@ -560,7 +681,8 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
     private ValueTask<FlushResult> WriteAsyncInternal(
         ref BufferWriter<PipeWriter> writer,
         ReadOnlySpan<byte> buffer,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         if (_autoChunk)
         {
@@ -591,7 +713,8 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
             _minResponseDataRateFeature.MinDataRate,
             bytesWritten,
             _outputAborter,
-            cancellationToken);
+            cancellationToken
+        );
     }
 
     private Memory<byte> GetChunkedMemory(int sizeHint)
@@ -605,7 +728,14 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
             UpdateCurrentChunkMemory(sizeHint);
         }
         // Check if we need to allocate a new memory.
-        else if (_advancedBytesForChunk >= _currentChunkMemory.Length - _currentMemoryPrefixBytes - EndChunkLength - sizeHint && _advancedBytesForChunk > 0)
+        else if (
+            _advancedBytesForChunk
+                >= _currentChunkMemory.Length
+                    - _currentMemoryPrefixBytes
+                    - EndChunkLength
+                    - sizeHint
+            && _advancedBytesForChunk > 0
+        )
         {
             sizeHint += MaxBeginChunkLength + EndChunkLength;
             var writer = new BufferWriter<PipeWriter>(_pipeWriter);
@@ -618,7 +748,11 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
 
         var actualMemory = _currentChunkMemory.Slice(
             _currentMemoryPrefixBytes + _advancedBytesForChunk,
-            _currentChunkMemory.Length - _currentMemoryPrefixBytes - EndChunkLength - _advancedBytesForChunk);
+            _currentChunkMemory.Length
+                - _currentMemoryPrefixBytes
+                - EndChunkLength
+                - _advancedBytesForChunk
+        );
 
         return actualMemory;
     }
@@ -626,7 +760,10 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
     private void UpdateCurrentChunkMemory(int sizeHint)
     {
         _currentChunkMemory = _pipeWriter.GetMemory(sizeHint);
-        _currentMemoryPrefixBytes = ChunkWriter.GetPrefixBytesForChunk(_currentChunkMemory.Length, out var sliceOne);
+        _currentMemoryPrefixBytes = ChunkWriter.GetPrefixBytesForChunk(
+            _currentChunkMemory.Length,
+            out var sliceOne
+        );
         if (sliceOne)
         {
             _currentChunkMemory = _currentChunkMemory.Slice(0, _currentChunkMemory.Length - 1);
@@ -648,7 +785,9 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
             // If the current chunk of memory isn't completely utilized, we need to copy the contents forwards.
             // This occurs if someone uses less than 255 bytes of the current Memory segment.
             // Therefore, we need to copy it forwards by either 1 or 2 bytes (depending on number of bytes)
-            _currentChunkMemory.Slice(_currentMemoryPrefixBytes, _advancedBytesForChunk).CopyTo(_currentChunkMemory.Slice(bytesWritten));
+            _currentChunkMemory
+                .Slice(_currentMemoryPrefixBytes, _advancedBytesForChunk)
+                .CopyTo(_currentChunkMemory.Slice(bytesWritten));
         }
 
         writer.Advance(_advancedBytesForChunk);
@@ -737,7 +876,9 @@ internal class Http1OutputProducer : IHttpOutputProducer, IDisposable
             // Position might be less than the segment length if there wasn't enough space to satisfy the sizeHint when
             // GetMemory was called. In that case we'll take the current segment and call it "completed", but need to
             // ignore any empty space in it.
-            _completedSegments.Add(new CompletedBuffer(_currentSegmentOwner, _currentSegment, _position));
+            _completedSegments.Add(
+                new CompletedBuffer(_currentSegmentOwner, _currentSegment, _position)
+            );
         }
 
         if (sizeHint <= _memoryPool.MaxBufferSize)

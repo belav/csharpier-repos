@@ -8,18 +8,16 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class CustomConvertersSqliteTest : CustomConvertersTestBase<CustomConvertersSqliteTest.CustomConvertersSqliteFixture>
+    public class CustomConvertersSqliteTest
+        : CustomConvertersTestBase<CustomConvertersSqliteTest.CustomConvertersSqliteFixture>
     {
-        public CustomConvertersSqliteTest(CustomConvertersSqliteFixture fixture)
-            : base(fixture)
+        public CustomConvertersSqliteTest(CustomConvertersSqliteFixture fixture) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
         }
 
         // Disabled: SQLite database is case-sensitive
-        public override void Can_insert_and_read_back_with_case_insensitive_string_key()
-        {
-        }
+        public override void Can_insert_and_read_back_with_case_insensitive_string_key() { }
 
         [ConditionalFact]
         public override void Value_conversion_is_appropriately_used_for_join_condition()
@@ -32,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore
 SELECT ""b"".""Url""
 FROM ""Blog"" AS ""b""
 INNER JOIN ""Post"" AS ""p"" ON ((""b"".""BlogId"" = ""p"".""BlogId"") AND (""b"".""IsVisible"" = 'Y')) AND (""b"".""BlogId"" = @__blogId_0)
-WHERE ""b"".""IsVisible"" = 'Y'");
+WHERE ""b"".""IsVisible"" = 'Y'"
+            );
         }
 
         [ConditionalFact]
@@ -46,7 +45,8 @@ WHERE ""b"".""IsVisible"" = 'Y'");
 SELECT ""b"".""Url""
 FROM ""Blog"" AS ""b""
 LEFT JOIN ""Post"" AS ""p"" ON ((""b"".""BlogId"" = ""p"".""BlogId"") AND (""b"".""IsVisible"" = 'Y')) AND (""b"".""BlogId"" = @__blogId_0)
-WHERE ""b"".""IsVisible"" = 'Y'");
+WHERE ""b"".""IsVisible"" = 'Y'"
+            );
         }
 
         [ConditionalFact]
@@ -57,7 +57,8 @@ WHERE ""b"".""IsVisible"" = 'Y'");
             AssertSql(
                 @"SELECT ""b"".""BlogId"", ""b"".""Discriminator"", ""b"".""IndexerVisible"", ""b"".""IsVisible"", ""b"".""Url"", ""b"".""RssUrl""
 FROM ""Blog"" AS ""b""
-WHERE ""b"".""IsVisible"" = 'Y'");
+WHERE ""b"".""IsVisible"" = 'Y'"
+            );
         }
 
         [ConditionalFact]
@@ -68,7 +69,8 @@ WHERE ""b"".""IsVisible"" = 'Y'");
             AssertSql(
                 @"SELECT ""b"".""BlogId"", ""b"".""Discriminator"", ""b"".""IndexerVisible"", ""b"".""IsVisible"", ""b"".""Url"", ""b"".""RssUrl""
 FROM ""Blog"" AS ""b""
-WHERE ""b"".""IsVisible"" = 'N'");
+WHERE ""b"".""IsVisible"" = 'N'"
+            );
         }
 
         public override void Where_bool_with_value_conversion_inside_comparison_doesnt_get_converted_twice()
@@ -82,7 +84,8 @@ WHERE ""b"".""IsVisible"" = 'Y'",
                 //
                 @"SELECT ""b"".""BlogId"", ""b"".""Discriminator"", ""b"".""IndexerVisible"", ""b"".""IsVisible"", ""b"".""Url"", ""b"".""RssUrl""
 FROM ""Blog"" AS ""b""
-WHERE ""b"".""IsVisible"" <> 'Y'");
+WHERE ""b"".""IsVisible"" <> 'Y'"
+            );
         }
 
         public override void Select_bool_with_value_conversion_is_used()
@@ -91,7 +94,8 @@ WHERE ""b"".""IsVisible"" <> 'Y'");
 
             AssertSql(
                 @"SELECT ""b"".""IsVisible""
-FROM ""Blog"" AS ""b""");
+FROM ""Blog"" AS ""b"""
+            );
         }
 
         [ConditionalFact]
@@ -102,7 +106,8 @@ FROM ""Blog"" AS ""b""");
             AssertSql(
                 @"SELECT ""b"".""BlogId"", ""b"".""Discriminator"", ""b"".""IndexerVisible"", ""b"".""IsVisible"", ""b"".""Url"", ""b"".""RssUrl""
 FROM ""Blog"" AS ""b""
-WHERE ""b"".""IsVisible"" = 'Y'");
+WHERE ""b"".""IsVisible"" = 'Y'"
+            );
         }
 
         [ConditionalFact]
@@ -113,47 +118,44 @@ WHERE ""b"".""IsVisible"" = 'Y'");
             AssertSql(
                 @"SELECT ""b"".""BlogId"", ""b"".""Discriminator"", ""b"".""IndexerVisible"", ""b"".""IsVisible"", ""b"".""Url"", ""b"".""RssUrl""
 FROM ""Blog"" AS ""b""
-WHERE ""b"".""IndexerVisible"" = 'Nay'");
+WHERE ""b"".""IndexerVisible"" = 'Nay'"
+            );
         }
 
         public override void Value_conversion_on_enum_collection_contains()
         {
             Assert.Contains(
                 CoreStrings.TranslationFailed("")[47..],
-                Assert.Throws<InvalidOperationException>(() => base.Value_conversion_on_enum_collection_contains()).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => base.Value_conversion_on_enum_collection_contains()
+                ).Message
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
         public class CustomConvertersSqliteFixture : CustomConvertersFixtureBase
         {
-            public override bool StrictEquality
-                => false;
+            public override bool StrictEquality => false;
 
-            public override bool SupportsAnsi
-                => false;
+            public override bool SupportsAnsi => false;
 
-            public override bool SupportsUnicodeToAnsiConversion
-                => true;
+            public override bool SupportsUnicodeToAnsiConversion => true;
 
-            public override bool SupportsLargeStringComparisons
-                => true;
+            public override bool SupportsLargeStringComparisons => true;
 
-            public override bool SupportsDecimalComparisons
-                => false;
+            public override bool SupportsDecimalComparisons => false;
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
 
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ListLoggerFactory;
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ListLoggerFactory;
 
-            public override bool SupportsBinaryKeys
-                => true;
+            public override bool SupportsBinaryKeys => true;
 
-            public override DateTime DefaultDateTime
-                => new();
+            public override DateTime DefaultDateTime => new();
         }
     }
 }

@@ -3,10 +3,10 @@
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class AuthMiddlewareAndFilterWithoutEndpointRoutingTest : AuthMiddlewareAndFilterTestBase<SecurityWebSite.StartupWithGlobalAuthFilterWithoutEndpointRouting>
+public class AuthMiddlewareAndFilterWithoutEndpointRoutingTest
+    : AuthMiddlewareAndFilterTestBase<SecurityWebSite.StartupWithGlobalAuthFilterWithoutEndpointRouting>
 {
-    public AuthMiddlewareAndFilterWithoutEndpointRoutingTest(MvcTestFixture<SecurityWebSite.StartupWithGlobalAuthFilterWithoutEndpointRouting> fixture)
-        : base(fixture)
-    {
-    }
+    public AuthMiddlewareAndFilterWithoutEndpointRoutingTest(
+        MvcTestFixture<SecurityWebSite.StartupWithGlobalAuthFilterWithoutEndpointRouting> fixture
+    ) : base(fixture) { }
 }

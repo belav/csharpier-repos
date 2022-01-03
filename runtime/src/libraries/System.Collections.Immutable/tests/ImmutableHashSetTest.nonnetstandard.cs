@@ -15,13 +15,19 @@ namespace System.Collections.Immutable.Tests
         public void EmptyTest()
         {
             this.EmptyTestHelper(Empty<int>(), 5, null);
-            this.EmptyTestHelper(EmptyTyped<string>().WithComparer(StringComparer.OrdinalIgnoreCase), "a", StringComparer.OrdinalIgnoreCase);
+            this.EmptyTestHelper(
+                EmptyTyped<string>().WithComparer(StringComparer.OrdinalIgnoreCase),
+                "a",
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         [Fact]
         public void TryGetValueTest()
         {
-            this.TryGetValueTestHelper(ImmutableHashSet<string>.Empty.WithComparer(StringComparer.OrdinalIgnoreCase));
+            this.TryGetValueTestHelper(
+                ImmutableHashSet<string>.Empty.WithComparer(StringComparer.OrdinalIgnoreCase)
+            );
         }
 
         internal override IBinaryTree GetRootNode<T>(IImmutableSet<T> set)
@@ -36,13 +42,20 @@ namespace System.Collections.Immutable.Tests
         /// <param name="emptySet">The empty set.</param>
         /// <param name="value">A value that could be placed in the set.</param>
         /// <param name="comparer">The comparer used to obtain the empty set, if any.</param>
-        private void EmptyTestHelper<T>(IImmutableSet<T> emptySet, T value, IEqualityComparer<T> comparer)
+        private void EmptyTestHelper<T>(
+            IImmutableSet<T> emptySet,
+            T value,
+            IEqualityComparer<T> comparer
+        )
         {
             Assert.NotNull(emptySet);
 
             this.EmptyTestHelper(emptySet);
             Assert.Same(emptySet, emptySet.ToImmutableHashSet(comparer));
-            Assert.Same(comparer ?? EqualityComparer<T>.Default, ((IHashKeyCollection<T>)emptySet).KeyComparer);
+            Assert.Same(
+                comparer ?? EqualityComparer<T>.Default,
+                ((IHashKeyCollection<T>)emptySet).KeyComparer
+            );
 
             if (comparer == null)
             {

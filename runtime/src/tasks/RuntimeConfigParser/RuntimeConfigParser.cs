@@ -61,13 +61,11 @@ public class RuntimeConfigParserTask : Task
     /// Reads a json file from the given path and extracts the "configProperties" key (assumed to be a string to string dictionary)
     private Dictionary<string, string> ConvertInputToDictionary(string inputFilePath)
     {
-        var options = new JsonSerializerOptions {
+        var options = new JsonSerializerOptions
+        {
             AllowTrailingCommas = true,
             ReadCommentHandling = JsonCommentHandling.Skip,
-            Converters =
-            {
-                new StringConverter()
-            }
+            Converters = { new StringConverter() }
         };
 
         var jsonString = File.ReadAllText(inputFilePath);
@@ -83,7 +81,9 @@ public class RuntimeConfigParserTask : Task
         }
         if (parsedJson.RuntimeOptions.ConfigProperties == null)
         {
-            throw new ArgumentException("Key runtimeOptions->configProperties wasn't found in the json file.");
+            throw new ArgumentException(
+                "Key runtimeOptions->configProperties wasn't found in the json file."
+            );
         }
 
         return parsedJson.RuntimeOptions.ConfigProperties;
@@ -91,7 +91,10 @@ public class RuntimeConfigParserTask : Task
 
     /// Just write the dictionary out to a blob as a count followed by
     /// a length-prefixed UTF8 encoding of each key and value
-    private void ConvertDictionaryToBlob(IReadOnlyDictionary<string, string> properties, BlobBuilder builder)
+    private void ConvertDictionaryToBlob(
+        IReadOnlyDictionary<string, string> properties,
+        BlobBuilder builder
+    )
     {
         int count = properties.Count;
 
@@ -103,7 +106,10 @@ public class RuntimeConfigParserTask : Task
         }
     }
 
-    private void CheckDuplicateProperties(IReadOnlyDictionary<string, string> properties, ITaskItem[] keys)
+    private void CheckDuplicateProperties(
+        IReadOnlyDictionary<string, string> properties,
+        ITaskItem[] keys
+    )
     {
         foreach (var key in keys)
         {
@@ -119,10 +125,12 @@ public class RuntimeOption
 {
     // the configProperties key
     [JsonPropertyName("configProperties")]
-    public Dictionary<string, string> ConfigProperties { get; set; } = new Dictionary<string, string>();
+    public Dictionary<string, string> ConfigProperties { get; set; } =
+        new Dictionary<string, string>();
     // everything other than configProperties
     [JsonExtensionData]
-    public Dictionary<string, object> ExtensionDataSub { get; set; } = new Dictionary<string, object>();
+    public Dictionary<string, object> ExtensionDataSub { get; set; } =
+        new Dictionary<string, object>();
 }
 
 public class Root
@@ -132,12 +140,17 @@ public class Root
     public RuntimeOption RuntimeOptions { get; set; } = new RuntimeOption();
     // everything other than runtimeOptions
     [JsonExtensionData]
-    public Dictionary<string, object> ExtensionDataRoot { get; set; } = new Dictionary<string, object>();
+    public Dictionary<string, object> ExtensionDataRoot { get; set; } =
+        new Dictionary<string, object>();
 }
 
 public class StringConverter : JsonConverter<string>
 {
-    public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override string Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         switch (reader.TokenType)
         {

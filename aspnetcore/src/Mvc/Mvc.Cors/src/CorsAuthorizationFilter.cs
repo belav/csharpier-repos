@@ -27,9 +27,7 @@ public class CorsAuthorizationFilter : ICorsAuthorizationFilter
     /// <param name="corsService">The <see cref="ICorsService"/>.</param>
     /// <param name="policyProvider">The <see cref="ICorsPolicyProvider"/>.</param>
     public CorsAuthorizationFilter(ICorsService corsService, ICorsPolicyProvider policyProvider)
-        : this(corsService, policyProvider, NullLoggerFactory.Instance)
-    {
-    }
+        : this(corsService, policyProvider, NullLoggerFactory.Instance) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="CorsAuthorizationFilter"/>.
@@ -40,7 +38,8 @@ public class CorsAuthorizationFilter : ICorsAuthorizationFilter
     public CorsAuthorizationFilter(
         ICorsService corsService,
         ICorsPolicyProvider policyProvider,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         if (corsService == null)
         {
@@ -96,16 +95,20 @@ public class CorsAuthorizationFilter : ICorsAuthorizationFilter
             if (policy == null)
             {
                 throw new InvalidOperationException(
-                    Resources.FormatCorsAuthorizationFilter_MissingCorsPolicy(PolicyName));
+                    Resources.FormatCorsAuthorizationFilter_MissingCorsPolicy(PolicyName)
+                );
             }
 
             var result = _corsService.EvaluatePolicy(context.HttpContext, policy);
             _corsService.ApplyResult(result, context.HttpContext.Response);
 
-            var accessControlRequestMethod =
-                    httpContext.Request.Headers[CorsConstants.AccessControlRequestMethod];
-            if (HttpMethods.IsOptions(request.Method)
-                && !StringValues.IsNullOrEmpty(accessControlRequestMethod))
+            var accessControlRequestMethod = httpContext.Request.Headers[
+                CorsConstants.AccessControlRequestMethod
+            ];
+            if (
+                HttpMethods.IsOptions(request.Method)
+                && !StringValues.IsNullOrEmpty(accessControlRequestMethod)
+            )
             {
                 // If this was a preflight, there is no need to run anything else.
                 context.Result = new StatusCodeResult(StatusCodes.Status204NoContent);

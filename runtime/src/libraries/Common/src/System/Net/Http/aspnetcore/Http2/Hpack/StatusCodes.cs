@@ -10,72 +10,134 @@ namespace System.Net.Http.HPack
     {
         // This uses C# compiler's ability to refer to static data directly. For more information see https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
 
-        private static ReadOnlySpan<byte> BytesStatus100 => new byte[] { (byte)'1', (byte)'0', (byte)'0' };
-        private static ReadOnlySpan<byte> BytesStatus101 => new byte[] { (byte)'1', (byte)'0', (byte)'1' };
-        private static ReadOnlySpan<byte> BytesStatus102 => new byte[] { (byte)'1', (byte)'0', (byte)'2' };
+        private static ReadOnlySpan<byte> BytesStatus100 =>
+            new byte[] { (byte)'1', (byte)'0', (byte)'0' };
+        private static ReadOnlySpan<byte> BytesStatus101 =>
+            new byte[] { (byte)'1', (byte)'0', (byte)'1' };
+        private static ReadOnlySpan<byte> BytesStatus102 =>
+            new byte[] { (byte)'1', (byte)'0', (byte)'2' };
 
-        private static ReadOnlySpan<byte> BytesStatus200 => new byte[] { (byte)'2', (byte)'0', (byte)'0' };
-        private static ReadOnlySpan<byte> BytesStatus201 => new byte[] { (byte)'2', (byte)'0', (byte)'1' };
-        private static ReadOnlySpan<byte> BytesStatus202 => new byte[] { (byte)'2', (byte)'0', (byte)'2' };
-        private static ReadOnlySpan<byte> BytesStatus203 => new byte[] { (byte)'2', (byte)'0', (byte)'3' };
-        private static ReadOnlySpan<byte> BytesStatus204 => new byte[] { (byte)'2', (byte)'0', (byte)'4' };
-        private static ReadOnlySpan<byte> BytesStatus205 => new byte[] { (byte)'2', (byte)'0', (byte)'5' };
-        private static ReadOnlySpan<byte> BytesStatus206 => new byte[] { (byte)'2', (byte)'0', (byte)'6' };
-        private static ReadOnlySpan<byte> BytesStatus207 => new byte[] { (byte)'2', (byte)'0', (byte)'7' };
-        private static ReadOnlySpan<byte> BytesStatus208 => new byte[] { (byte)'2', (byte)'0', (byte)'8' };
-        private static ReadOnlySpan<byte> BytesStatus226 => new byte[] { (byte)'2', (byte)'2', (byte)'6' };
+        private static ReadOnlySpan<byte> BytesStatus200 =>
+            new byte[] { (byte)'2', (byte)'0', (byte)'0' };
+        private static ReadOnlySpan<byte> BytesStatus201 =>
+            new byte[] { (byte)'2', (byte)'0', (byte)'1' };
+        private static ReadOnlySpan<byte> BytesStatus202 =>
+            new byte[] { (byte)'2', (byte)'0', (byte)'2' };
+        private static ReadOnlySpan<byte> BytesStatus203 =>
+            new byte[] { (byte)'2', (byte)'0', (byte)'3' };
+        private static ReadOnlySpan<byte> BytesStatus204 =>
+            new byte[] { (byte)'2', (byte)'0', (byte)'4' };
+        private static ReadOnlySpan<byte> BytesStatus205 =>
+            new byte[] { (byte)'2', (byte)'0', (byte)'5' };
+        private static ReadOnlySpan<byte> BytesStatus206 =>
+            new byte[] { (byte)'2', (byte)'0', (byte)'6' };
+        private static ReadOnlySpan<byte> BytesStatus207 =>
+            new byte[] { (byte)'2', (byte)'0', (byte)'7' };
+        private static ReadOnlySpan<byte> BytesStatus208 =>
+            new byte[] { (byte)'2', (byte)'0', (byte)'8' };
+        private static ReadOnlySpan<byte> BytesStatus226 =>
+            new byte[] { (byte)'2', (byte)'2', (byte)'6' };
 
-        private static ReadOnlySpan<byte> BytesStatus300 => new byte[] { (byte)'3', (byte)'0', (byte)'0' };
-        private static ReadOnlySpan<byte> BytesStatus301 => new byte[] { (byte)'3', (byte)'0', (byte)'1' };
-        private static ReadOnlySpan<byte> BytesStatus302 => new byte[] { (byte)'3', (byte)'0', (byte)'2' };
-        private static ReadOnlySpan<byte> BytesStatus303 => new byte[] { (byte)'3', (byte)'0', (byte)'3' };
-        private static ReadOnlySpan<byte> BytesStatus304 => new byte[] { (byte)'3', (byte)'0', (byte)'4' };
-        private static ReadOnlySpan<byte> BytesStatus305 => new byte[] { (byte)'3', (byte)'0', (byte)'5' };
-        private static ReadOnlySpan<byte> BytesStatus306 => new byte[] { (byte)'3', (byte)'0', (byte)'6' };
-        private static ReadOnlySpan<byte> BytesStatus307 => new byte[] { (byte)'3', (byte)'0', (byte)'7' };
-        private static ReadOnlySpan<byte> BytesStatus308 => new byte[] { (byte)'3', (byte)'0', (byte)'8' };
+        private static ReadOnlySpan<byte> BytesStatus300 =>
+            new byte[] { (byte)'3', (byte)'0', (byte)'0' };
+        private static ReadOnlySpan<byte> BytesStatus301 =>
+            new byte[] { (byte)'3', (byte)'0', (byte)'1' };
+        private static ReadOnlySpan<byte> BytesStatus302 =>
+            new byte[] { (byte)'3', (byte)'0', (byte)'2' };
+        private static ReadOnlySpan<byte> BytesStatus303 =>
+            new byte[] { (byte)'3', (byte)'0', (byte)'3' };
+        private static ReadOnlySpan<byte> BytesStatus304 =>
+            new byte[] { (byte)'3', (byte)'0', (byte)'4' };
+        private static ReadOnlySpan<byte> BytesStatus305 =>
+            new byte[] { (byte)'3', (byte)'0', (byte)'5' };
+        private static ReadOnlySpan<byte> BytesStatus306 =>
+            new byte[] { (byte)'3', (byte)'0', (byte)'6' };
+        private static ReadOnlySpan<byte> BytesStatus307 =>
+            new byte[] { (byte)'3', (byte)'0', (byte)'7' };
+        private static ReadOnlySpan<byte> BytesStatus308 =>
+            new byte[] { (byte)'3', (byte)'0', (byte)'8' };
 
-        private static ReadOnlySpan<byte> BytesStatus400 => new byte[] { (byte)'4', (byte)'0', (byte)'0' };
-        private static ReadOnlySpan<byte> BytesStatus401 => new byte[] { (byte)'4', (byte)'0', (byte)'1' };
-        private static ReadOnlySpan<byte> BytesStatus402 => new byte[] { (byte)'4', (byte)'0', (byte)'2' };
-        private static ReadOnlySpan<byte> BytesStatus403 => new byte[] { (byte)'4', (byte)'0', (byte)'3' };
-        private static ReadOnlySpan<byte> BytesStatus404 => new byte[] { (byte)'4', (byte)'0', (byte)'4' };
-        private static ReadOnlySpan<byte> BytesStatus405 => new byte[] { (byte)'4', (byte)'0', (byte)'5' };
-        private static ReadOnlySpan<byte> BytesStatus406 => new byte[] { (byte)'4', (byte)'0', (byte)'6' };
-        private static ReadOnlySpan<byte> BytesStatus407 => new byte[] { (byte)'4', (byte)'0', (byte)'7' };
-        private static ReadOnlySpan<byte> BytesStatus408 => new byte[] { (byte)'4', (byte)'0', (byte)'8' };
-        private static ReadOnlySpan<byte> BytesStatus409 => new byte[] { (byte)'4', (byte)'0', (byte)'9' };
-        private static ReadOnlySpan<byte> BytesStatus410 => new byte[] { (byte)'4', (byte)'1', (byte)'0' };
-        private static ReadOnlySpan<byte> BytesStatus411 => new byte[] { (byte)'4', (byte)'1', (byte)'1' };
-        private static ReadOnlySpan<byte> BytesStatus412 => new byte[] { (byte)'4', (byte)'1', (byte)'2' };
-        private static ReadOnlySpan<byte> BytesStatus413 => new byte[] { (byte)'4', (byte)'1', (byte)'3' };
-        private static ReadOnlySpan<byte> BytesStatus414 => new byte[] { (byte)'4', (byte)'1', (byte)'4' };
-        private static ReadOnlySpan<byte> BytesStatus415 => new byte[] { (byte)'4', (byte)'1', (byte)'5' };
-        private static ReadOnlySpan<byte> BytesStatus416 => new byte[] { (byte)'4', (byte)'1', (byte)'6' };
-        private static ReadOnlySpan<byte> BytesStatus417 => new byte[] { (byte)'4', (byte)'1', (byte)'7' };
-        private static ReadOnlySpan<byte> BytesStatus418 => new byte[] { (byte)'4', (byte)'1', (byte)'8' };
-        private static ReadOnlySpan<byte> BytesStatus419 => new byte[] { (byte)'4', (byte)'1', (byte)'9' };
-        private static ReadOnlySpan<byte> BytesStatus421 => new byte[] { (byte)'4', (byte)'2', (byte)'1' };
-        private static ReadOnlySpan<byte> BytesStatus422 => new byte[] { (byte)'4', (byte)'2', (byte)'2' };
-        private static ReadOnlySpan<byte> BytesStatus423 => new byte[] { (byte)'4', (byte)'2', (byte)'3' };
-        private static ReadOnlySpan<byte> BytesStatus424 => new byte[] { (byte)'4', (byte)'2', (byte)'4' };
-        private static ReadOnlySpan<byte> BytesStatus426 => new byte[] { (byte)'4', (byte)'2', (byte)'6' };
-        private static ReadOnlySpan<byte> BytesStatus428 => new byte[] { (byte)'4', (byte)'2', (byte)'8' };
-        private static ReadOnlySpan<byte> BytesStatus429 => new byte[] { (byte)'4', (byte)'2', (byte)'9' };
-        private static ReadOnlySpan<byte> BytesStatus431 => new byte[] { (byte)'4', (byte)'3', (byte)'1' };
-        private static ReadOnlySpan<byte> BytesStatus451 => new byte[] { (byte)'4', (byte)'5', (byte)'1' };
+        private static ReadOnlySpan<byte> BytesStatus400 =>
+            new byte[] { (byte)'4', (byte)'0', (byte)'0' };
+        private static ReadOnlySpan<byte> BytesStatus401 =>
+            new byte[] { (byte)'4', (byte)'0', (byte)'1' };
+        private static ReadOnlySpan<byte> BytesStatus402 =>
+            new byte[] { (byte)'4', (byte)'0', (byte)'2' };
+        private static ReadOnlySpan<byte> BytesStatus403 =>
+            new byte[] { (byte)'4', (byte)'0', (byte)'3' };
+        private static ReadOnlySpan<byte> BytesStatus404 =>
+            new byte[] { (byte)'4', (byte)'0', (byte)'4' };
+        private static ReadOnlySpan<byte> BytesStatus405 =>
+            new byte[] { (byte)'4', (byte)'0', (byte)'5' };
+        private static ReadOnlySpan<byte> BytesStatus406 =>
+            new byte[] { (byte)'4', (byte)'0', (byte)'6' };
+        private static ReadOnlySpan<byte> BytesStatus407 =>
+            new byte[] { (byte)'4', (byte)'0', (byte)'7' };
+        private static ReadOnlySpan<byte> BytesStatus408 =>
+            new byte[] { (byte)'4', (byte)'0', (byte)'8' };
+        private static ReadOnlySpan<byte> BytesStatus409 =>
+            new byte[] { (byte)'4', (byte)'0', (byte)'9' };
+        private static ReadOnlySpan<byte> BytesStatus410 =>
+            new byte[] { (byte)'4', (byte)'1', (byte)'0' };
+        private static ReadOnlySpan<byte> BytesStatus411 =>
+            new byte[] { (byte)'4', (byte)'1', (byte)'1' };
+        private static ReadOnlySpan<byte> BytesStatus412 =>
+            new byte[] { (byte)'4', (byte)'1', (byte)'2' };
+        private static ReadOnlySpan<byte> BytesStatus413 =>
+            new byte[] { (byte)'4', (byte)'1', (byte)'3' };
+        private static ReadOnlySpan<byte> BytesStatus414 =>
+            new byte[] { (byte)'4', (byte)'1', (byte)'4' };
+        private static ReadOnlySpan<byte> BytesStatus415 =>
+            new byte[] { (byte)'4', (byte)'1', (byte)'5' };
+        private static ReadOnlySpan<byte> BytesStatus416 =>
+            new byte[] { (byte)'4', (byte)'1', (byte)'6' };
+        private static ReadOnlySpan<byte> BytesStatus417 =>
+            new byte[] { (byte)'4', (byte)'1', (byte)'7' };
+        private static ReadOnlySpan<byte> BytesStatus418 =>
+            new byte[] { (byte)'4', (byte)'1', (byte)'8' };
+        private static ReadOnlySpan<byte> BytesStatus419 =>
+            new byte[] { (byte)'4', (byte)'1', (byte)'9' };
+        private static ReadOnlySpan<byte> BytesStatus421 =>
+            new byte[] { (byte)'4', (byte)'2', (byte)'1' };
+        private static ReadOnlySpan<byte> BytesStatus422 =>
+            new byte[] { (byte)'4', (byte)'2', (byte)'2' };
+        private static ReadOnlySpan<byte> BytesStatus423 =>
+            new byte[] { (byte)'4', (byte)'2', (byte)'3' };
+        private static ReadOnlySpan<byte> BytesStatus424 =>
+            new byte[] { (byte)'4', (byte)'2', (byte)'4' };
+        private static ReadOnlySpan<byte> BytesStatus426 =>
+            new byte[] { (byte)'4', (byte)'2', (byte)'6' };
+        private static ReadOnlySpan<byte> BytesStatus428 =>
+            new byte[] { (byte)'4', (byte)'2', (byte)'8' };
+        private static ReadOnlySpan<byte> BytesStatus429 =>
+            new byte[] { (byte)'4', (byte)'2', (byte)'9' };
+        private static ReadOnlySpan<byte> BytesStatus431 =>
+            new byte[] { (byte)'4', (byte)'3', (byte)'1' };
+        private static ReadOnlySpan<byte> BytesStatus451 =>
+            new byte[] { (byte)'4', (byte)'5', (byte)'1' };
 
-        private static ReadOnlySpan<byte> BytesStatus500 => new byte[] { (byte)'5', (byte)'0', (byte)'0' };
-        private static ReadOnlySpan<byte> BytesStatus501 => new byte[] { (byte)'5', (byte)'0', (byte)'1' };
-        private static ReadOnlySpan<byte> BytesStatus502 => new byte[] { (byte)'5', (byte)'0', (byte)'2' };
-        private static ReadOnlySpan<byte> BytesStatus503 => new byte[] { (byte)'5', (byte)'0', (byte)'3' };
-        private static ReadOnlySpan<byte> BytesStatus504 => new byte[] { (byte)'5', (byte)'0', (byte)'4' };
-        private static ReadOnlySpan<byte> BytesStatus505 => new byte[] { (byte)'5', (byte)'0', (byte)'5' };
-        private static ReadOnlySpan<byte> BytesStatus506 => new byte[] { (byte)'5', (byte)'0', (byte)'6' };
-        private static ReadOnlySpan<byte> BytesStatus507 => new byte[] { (byte)'5', (byte)'0', (byte)'7' };
-        private static ReadOnlySpan<byte> BytesStatus508 => new byte[] { (byte)'5', (byte)'0', (byte)'8' };
-        private static ReadOnlySpan<byte> BytesStatus510 => new byte[] { (byte)'5', (byte)'1', (byte)'0' };
-        private static ReadOnlySpan<byte> BytesStatus511 => new byte[] { (byte)'5', (byte)'1', (byte)'1' };
+        private static ReadOnlySpan<byte> BytesStatus500 =>
+            new byte[] { (byte)'5', (byte)'0', (byte)'0' };
+        private static ReadOnlySpan<byte> BytesStatus501 =>
+            new byte[] { (byte)'5', (byte)'0', (byte)'1' };
+        private static ReadOnlySpan<byte> BytesStatus502 =>
+            new byte[] { (byte)'5', (byte)'0', (byte)'2' };
+        private static ReadOnlySpan<byte> BytesStatus503 =>
+            new byte[] { (byte)'5', (byte)'0', (byte)'3' };
+        private static ReadOnlySpan<byte> BytesStatus504 =>
+            new byte[] { (byte)'5', (byte)'0', (byte)'4' };
+        private static ReadOnlySpan<byte> BytesStatus505 =>
+            new byte[] { (byte)'5', (byte)'0', (byte)'5' };
+        private static ReadOnlySpan<byte> BytesStatus506 =>
+            new byte[] { (byte)'5', (byte)'0', (byte)'6' };
+        private static ReadOnlySpan<byte> BytesStatus507 =>
+            new byte[] { (byte)'5', (byte)'0', (byte)'7' };
+        private static ReadOnlySpan<byte> BytesStatus508 =>
+            new byte[] { (byte)'5', (byte)'0', (byte)'8' };
+        private static ReadOnlySpan<byte> BytesStatus510 =>
+            new byte[] { (byte)'5', (byte)'1', (byte)'0' };
+        private static ReadOnlySpan<byte> BytesStatus511 =>
+            new byte[] { (byte)'5', (byte)'1', (byte)'1' };
 
         public static ReadOnlySpan<byte> ToStatusBytes(int statusCode)
         {
@@ -211,8 +273,9 @@ namespace System.Net.Http.HPack
                     return BytesStatus511;
 
                 default:
-                    return Encoding.ASCII.GetBytes(statusCode.ToString(CultureInfo.InvariantCulture));
-
+                    return Encoding.ASCII.GetBytes(
+                        statusCode.ToString(CultureInfo.InvariantCulture)
+                    );
             }
         }
     }

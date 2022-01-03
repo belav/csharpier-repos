@@ -22,7 +22,9 @@ public static class ComponentEndpointRouteBuilderExtensions
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/>.</param>
     /// <returns>The <see cref="ComponentEndpointConventionBuilder"/>.</returns>
-    public static ComponentEndpointConventionBuilder MapBlazorHub(this IEndpointRouteBuilder endpoints)
+    public static ComponentEndpointConventionBuilder MapBlazorHub(
+        this IEndpointRouteBuilder endpoints
+    )
     {
         if (endpoints == null)
         {
@@ -40,7 +42,8 @@ public static class ComponentEndpointRouteBuilderExtensions
     /// <returns>The <see cref="ComponentEndpointConventionBuilder"/>.</returns>
     public static ComponentEndpointConventionBuilder MapBlazorHub(
         this IEndpointRouteBuilder endpoints,
-        string path)
+        string path
+    )
     {
         if (endpoints == null)
         {
@@ -63,7 +66,8 @@ public static class ComponentEndpointRouteBuilderExtensions
     /// <returns>The <see cref="ComponentEndpointConventionBuilder"/>.</returns>
     public static ComponentEndpointConventionBuilder MapBlazorHub(
         this IEndpointRouteBuilder endpoints,
-        Action<HttpConnectionDispatcherOptions> configureOptions)
+        Action<HttpConnectionDispatcherOptions> configureOptions
+    )
     {
         if (endpoints == null)
         {
@@ -88,7 +92,8 @@ public static class ComponentEndpointRouteBuilderExtensions
     public static ComponentEndpointConventionBuilder MapBlazorHub(
         this IEndpointRouteBuilder endpoints,
         string path,
-        Action<HttpConnectionDispatcherOptions> configureOptions)
+        Action<HttpConnectionDispatcherOptions> configureOptions
+    )
     {
         if (endpoints == null)
         {
@@ -107,16 +112,30 @@ public static class ComponentEndpointRouteBuilderExtensions
 
         var hubEndpoint = endpoints.MapHub<ComponentHub>(path, configureOptions);
 
-        var disconnectEndpoint = endpoints.Map(
-            (path.EndsWith('/') ? path : path + "/") + "disconnect/",
-            endpoints.CreateApplicationBuilder().UseMiddleware<CircuitDisconnectMiddleware>().Build())
+        var disconnectEndpoint = endpoints
+            .Map(
+                (path.EndsWith('/') ? path : path + "/") + "disconnect/",
+                endpoints
+                    .CreateApplicationBuilder()
+                    .UseMiddleware<CircuitDisconnectMiddleware>()
+                    .Build()
+            )
             .WithDisplayName("Blazor disconnect");
 
-        var jsInitializersEndpoint = endpoints.Map(
-            (path.EndsWith('/') ? path : path + "/") + "initializers/",
-            endpoints.CreateApplicationBuilder().UseMiddleware<CircuitJavaScriptInitializationMiddleware>().Build())
+        var jsInitializersEndpoint = endpoints
+            .Map(
+                (path.EndsWith('/') ? path : path + "/") + "initializers/",
+                endpoints
+                    .CreateApplicationBuilder()
+                    .UseMiddleware<CircuitJavaScriptInitializationMiddleware>()
+                    .Build()
+            )
             .WithDisplayName("Blazor initializers");
 
-        return new ComponentEndpointConventionBuilder(hubEndpoint, disconnectEndpoint, jsInitializersEndpoint);
+        return new ComponentEndpointConventionBuilder(
+            hubEndpoint,
+            disconnectEndpoint,
+            jsInitializersEndpoint
+        );
     }
 }

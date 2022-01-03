@@ -49,7 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </remarks>
         [EntityFrameworkInternal]
         public RelationalQueryTranslationPostprocessorDependencies(
-            ISqlExpressionFactory sqlExpressionFactory)
+            ISqlExpressionFactory sqlExpressionFactory
+        )
         {
             SqlExpressionFactory = sqlExpressionFactory;
         }

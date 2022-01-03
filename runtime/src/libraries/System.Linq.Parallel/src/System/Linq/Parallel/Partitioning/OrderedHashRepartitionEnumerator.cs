@@ -22,14 +22,19 @@ namespace System.Linq.Parallel
     /// <typeparam name="TInputOutput">The kind of elements.</typeparam>
     /// <typeparam name="THashKey">The key used to distribute elements.</typeparam>
     /// <typeparam name="TOrderKey">The kind of keys found in the source.</typeparam>
-    internal sealed class OrderedHashRepartitionEnumerator<TInputOutput, THashKey, TOrderKey> : QueryOperatorEnumerator<Pair<TInputOutput, THashKey>, TOrderKey>
+    internal sealed class OrderedHashRepartitionEnumerator<TInputOutput, THashKey, TOrderKey>
+        : QueryOperatorEnumerator<Pair<TInputOutput, THashKey>, TOrderKey>
     {
         private const int ENUMERATION_NOT_STARTED = -1; // Sentinel to note we haven't begun enumerating yet.
 
         private readonly int _partitionCount; // The number of partitions.
         private readonly int _partitionIndex; // Our unique partition index.
         private readonly Func<TInputOutput, THashKey>? _keySelector; // A key-selector function.
-        private readonly HashRepartitionStream<TInputOutput, THashKey, TOrderKey> _repartitionStream; // A repartitioning stream.
+        private readonly HashRepartitionStream<
+            TInputOutput,
+            THashKey,
+            TOrderKey
+        > _repartitionStream; // A repartitioning stream.
         private readonly ListChunk<Pair<TInputOutput, THashKey>>[][] _valueExchangeMatrix; // Matrix to do inter-task communication of values.
         private readonly ListChunk<TOrderKey>[][] _keyExchangeMatrix; // Matrix to do inter-task communication of order keys.
         private readonly QueryOperatorEnumerator<TInputOutput, TOrderKey> _source; // The immediate source of data.
@@ -64,17 +69,32 @@ namespace System.Linq.Parallel
         //
 
         internal OrderedHashRepartitionEnumerator(
-            QueryOperatorEnumerator<TInputOutput, TOrderKey> source, int partitionCount, int partitionIndex,
-            Func<TInputOutput, THashKey>? keySelector, OrderedHashRepartitionStream<TInputOutput, THashKey, TOrderKey> repartitionStream, CountdownEvent barrier,
-            ListChunk<Pair<TInputOutput, THashKey>>[][] valueExchangeMatrix, ListChunk<TOrderKey>[][] keyExchangeMatrix, CancellationToken cancellationToken)
+            QueryOperatorEnumerator<TInputOutput, TOrderKey> source,
+            int partitionCount,
+            int partitionIndex,
+            Func<TInputOutput, THashKey>? keySelector,
+            OrderedHashRepartitionStream<TInputOutput, THashKey, TOrderKey> repartitionStream,
+            CountdownEvent barrier,
+            ListChunk<Pair<TInputOutput, THashKey>>[][] valueExchangeMatrix,
+            ListChunk<TOrderKey>[][] keyExchangeMatrix,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(source != null);
-            Debug.Assert(keySelector != null || typeof(THashKey) == typeof(NoKeyMemoizationRequired));
+            Debug.Assert(
+                keySelector != null || typeof(THashKey) == typeof(NoKeyMemoizationRequired)
+            );
             Debug.Assert(repartitionStream != null);
             Debug.Assert(barrier != null);
             Debug.Assert(valueExchangeMatrix != null);
-            Debug.Assert(valueExchangeMatrix.GetLength(0) == partitionCount, "expected square matrix of buffers (NxN)");
-            Debug.Assert(partitionCount > 0 && valueExchangeMatrix[0].Length == partitionCount, "expected square matrix of buffers (NxN)");
+            Debug.Assert(
+                valueExchangeMatrix.GetLength(0) == partitionCount,
+                "expected square matrix of buffers (NxN)"
+            );
+            Debug.Assert(
+                partitionCount > 0 && valueExchangeMatrix[0].Length == partitionCount,
+                "expected square matrix of buffers (NxN)"
+            );
             Debug.Assert(0 <= partitionIndex && partitionIndex < partitionCount);
 
             _source = source;
@@ -104,7 +124,10 @@ namespace System.Linq.Parallel
         // anyway, so having the repartitioning operator do so isn't complicating matters much at all.
         //
 
-        internal override bool MoveNext(ref Pair<TInputOutput, THashKey> currentElement, [AllowNull] ref TOrderKey currentKey)
+        internal override bool MoveNext(
+            ref Pair<TInputOutput, THashKey> currentElement,
+            [AllowNull] ref TOrderKey currentKey
+        )
         {
             if (_partitionCount == 1)
             {
@@ -114,7 +137,9 @@ namespace System.Linq.Parallel
                 if (_source.MoveNext(ref current!, ref currentKey))
                 {
                     currentElement = new Pair<TInputOutput, THashKey>(
-                        current, _keySelector == null ? default! : _keySelector(current));
+                        current,
+                        _keySelector == null ? default! : _keySelector(current)
+                    );
                     return true;
                 }
 
@@ -148,7 +173,10 @@ namespace System.Linq.Parallel
                     {
                         // Return the current element.
                         currentElement = mutables._currentBuffer._chunk[mutables._currentIndex];
-                        Debug.Assert(mutables._currentKeyBuffer != null, "expected same # of buffers/key-buffers");
+                        Debug.Assert(
+                            mutables._currentKeyBuffer != null,
+                            "expected same # of buffers/key-buffers"
+                        );
                         currentKey = mutables._currentKeyBuffer._chunk[mutables._currentIndex];
                         return true;
                     }
@@ -158,9 +186,18 @@ namespace System.Linq.Parallel
                         mutables._currentIndex = ENUMERATION_NOT_STARTED;
                         mutables._currentBuffer = mutables._currentBuffer.Next;
                         mutables._currentKeyBuffer = mutables._currentKeyBuffer.Next;
-                        Debug.Assert(mutables._currentBuffer == null || mutables._currentBuffer.Count > 0);
-                        Debug.Assert((mutables._currentBuffer == null) == (mutables._currentKeyBuffer == null));
-                        Debug.Assert(mutables._currentBuffer == null || mutables._currentBuffer.Count == mutables._currentKeyBuffer!.Count);
+                        Debug.Assert(
+                            mutables._currentBuffer == null || mutables._currentBuffer.Count > 0
+                        );
+                        Debug.Assert(
+                            (mutables._currentBuffer == null)
+                                == (mutables._currentKeyBuffer == null)
+                        );
+                        Debug.Assert(
+                            mutables._currentBuffer == null
+                                || mutables._currentBuffer.Count
+                                    == mutables._currentKeyBuffer!.Count
+                        );
                         continue; // Go back around and invoke this same logic.
                     }
                 }
@@ -188,8 +225,12 @@ namespace System.Linq.Parallel
                 // Assuming we're within bounds, retrieve the next buffer object.
                 if (mutables._currentBufferIndex < _partitionCount)
                 {
-                    mutables._currentBuffer = _valueExchangeMatrix[mutables._currentBufferIndex][_partitionIndex];
-                    mutables._currentKeyBuffer = _keyExchangeMatrix[mutables._currentBufferIndex][_partitionIndex];
+                    mutables._currentBuffer = _valueExchangeMatrix[mutables._currentBufferIndex][
+                        _partitionIndex
+                    ];
+                    mutables._currentKeyBuffer = _keyExchangeMatrix[mutables._currentBufferIndex][
+                        _partitionIndex
+                    ];
                 }
             }
 
@@ -207,7 +248,9 @@ namespace System.Linq.Parallel
             Mutables? mutables = _mutables;
             Debug.Assert(mutables != null);
 
-            ListChunk<Pair<TInputOutput, THashKey>>[] privateBuffers = new ListChunk<Pair<TInputOutput, THashKey>>[_partitionCount];
+            ListChunk<Pair<TInputOutput, THashKey>>[] privateBuffers = new ListChunk<
+                Pair<TInputOutput, THashKey>
+            >[_partitionCount];
             ListChunk<TOrderKey>[] privateKeyBuffers = new ListChunk<TOrderKey>[_partitionCount];
 
             TInputOutput element = default(TInputOutput)!;
@@ -225,7 +268,8 @@ namespace System.Linq.Parallel
                 if (_keySelector != null)
                 {
                     elementHashKey = _keySelector(element);
-                    destinationIndex = _repartitionStream.GetHashCode(elementHashKey) % _partitionCount;
+                    destinationIndex =
+                        _repartitionStream.GetHashCode(elementHashKey) % _partitionCount;
                 }
                 else
                 {
@@ -233,8 +277,10 @@ namespace System.Linq.Parallel
                     destinationIndex = _repartitionStream.GetHashCode(element) % _partitionCount;
                 }
 
-                Debug.Assert(0 <= destinationIndex && destinationIndex < _partitionCount,
-                                "destination partition outside of the legal range of partitions");
+                Debug.Assert(
+                    0 <= destinationIndex && destinationIndex < _partitionCount,
+                    "destination partition outside of the legal range of partitions"
+                );
 
                 // Get the buffer for the destination partition, lazily allocating if needed.  We maintain
                 // this list in our own private cache so that we avoid accessing shared memory locations
@@ -247,8 +293,12 @@ namespace System.Linq.Parallel
                 {
                     const int INITIAL_PRIVATE_BUFFER_SIZE = 128;
                     Debug.Assert(keyBuffer == null);
-                    privateBuffers[destinationIndex] = buffer = new ListChunk<Pair<TInputOutput, THashKey>>(INITIAL_PRIVATE_BUFFER_SIZE);
-                    privateKeyBuffers[destinationIndex] = keyBuffer = new ListChunk<TOrderKey>(INITIAL_PRIVATE_BUFFER_SIZE);
+                    privateBuffers[destinationIndex] = buffer = new ListChunk<
+                        Pair<TInputOutput, THashKey>
+                    >(INITIAL_PRIVATE_BUFFER_SIZE);
+                    privateKeyBuffers[destinationIndex] = keyBuffer = new ListChunk<TOrderKey>(
+                        INITIAL_PRIVATE_BUFFER_SIZE
+                    );
                 }
 
                 buffer.Add(new Pair<TInputOutput, THashKey>(element, elementHashKey));

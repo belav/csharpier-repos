@@ -5,7 +5,6 @@ using System.Threading;
 
 class Class1
 {
-    
     static int Main(string[] args)
     {
         int rValue = 0;
@@ -13,29 +12,28 @@ class Class1
         string strIn = args[0];
         ThreadSafe tsi = new ThreadSafe(100, strIn);
 
-
         Console.WriteLine("Creating threads");
         for (int i = 0; i < threads.Length; i++)
         {
             threads[i] = new Thread(new ParameterizedThreadStart(tsi.ThreadWorker));
             threads[i].Start();
         }
-			
+
         tsi.Signal();
 
         Console.WriteLine("Joining threads");
-        for(int i=0;i<threads.Length;i++)
+        for (int i = 0; i < threads.Length; i++)
             threads[i].Join();
 
         // Build the expected string
-        string strExpected = string.Empty;        
-        for(int i=0;i<threads.Length;i++)
+        string strExpected = string.Empty;
+        for (int i = 0; i < threads.Length; i++)
             strExpected += tsi.Expected;
-        
-        if(tsi.Val == strExpected)
+
+        if (tsi.Val == strExpected)
             rValue = 100;
 
-	Console.WriteLine("Test Expected {0}, but found {1}", strExpected, tsi.Val);
+        Console.WriteLine("Test Expected {0}, but found {1}", strExpected, tsi.Val);
         Console.WriteLine("Test {0}", rValue == 100 ? "Passed" : "Failed");
         return rValue;
     }
@@ -44,7 +42,7 @@ class Class1
 public class ThreadSafe
 {
     ManualResetEvent signal;
-    public string Val = string.Empty;		
+    public string Val = string.Empty;
     private int numberOfIterations;
     private string strIn = string.Empty;
     public ThreadSafe(int loops, object obj)
@@ -53,11 +51,11 @@ public class ThreadSafe
         numberOfIterations = loops;
         strIn = obj.ToString();
 
-        if(0 < strIn.Length)
+        if (0 < strIn.Length)
         {
-            if("null" == strIn)
+            if ("null" == strIn)
                 strIn = null;
-            else if("empty" == strIn)
+            else if ("empty" == strIn)
                 strIn = string.Empty;
         }
     }
@@ -70,7 +68,7 @@ public class ThreadSafe
     public void ThreadWorker(object obj)
     {
         signal.WaitOne();
-        for(int i=0;i<numberOfIterations;i++)
+        for (int i = 0; i < numberOfIterations; i++)
             AddToTotal(strIn);
     }
 
@@ -79,7 +77,7 @@ public class ThreadSafe
         get
         {
             string strTemp = string.Empty;
-            for(int i=0;i<numberOfIterations;i++)
+            for (int i = 0; i < numberOfIterations; i++)
                 strTemp += strIn;
 
             return strTemp;
@@ -88,15 +86,17 @@ public class ThreadSafe
 
     private string AddToTotal(string addend)
     {
-        string initialValue, newValue;
+        string initialValue,
+            newValue;
         do
         {
             initialValue = Val;
             newValue = initialValue + addend;
-        } 
-        while ((object)initialValue != Interlocked.CompareExchange<string>(
-            ref Val, newValue, initialValue));
+        } while (
+            (object)initialValue
+            != Interlocked.CompareExchange<string>(ref Val, newValue, initialValue)
+        );
 
         return newValue;
-    }	
+    }
 }

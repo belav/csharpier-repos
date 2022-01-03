@@ -56,7 +56,9 @@ namespace System.Runtime.CompilerServices
         public DefaultInterpolatedStringHandler(int literalLength, int formattedCount)
         {
             _provider = null;
-            _chars = _arrayToReturnToPool = ArrayPool<char>.Shared.Rent(GetDefaultLength(literalLength, formattedCount));
+            _chars = _arrayToReturnToPool = ArrayPool<char>.Shared.Rent(
+                GetDefaultLength(literalLength, formattedCount)
+            );
             _pos = 0;
             _hasCustomFormatter = false;
         }
@@ -66,10 +68,16 @@ namespace System.Runtime.CompilerServices
         /// <param name="formattedCount">The number of interpolation expressions in the interpolated string.</param>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <remarks>This is intended to be called only by compiler-generated code. Arguments are not validated as they'd otherwise be for members intended to be used directly.</remarks>
-        public DefaultInterpolatedStringHandler(int literalLength, int formattedCount, IFormatProvider? provider)
+        public DefaultInterpolatedStringHandler(
+            int literalLength,
+            int formattedCount,
+            IFormatProvider? provider
+        )
         {
             _provider = provider;
-            _chars = _arrayToReturnToPool = ArrayPool<char>.Shared.Rent(GetDefaultLength(literalLength, formattedCount));
+            _chars = _arrayToReturnToPool = ArrayPool<char>.Shared.Rent(
+                GetDefaultLength(literalLength, formattedCount)
+            );
             _pos = 0;
             _hasCustomFormatter = provider is not null && HasCustomFormatter(provider);
         }
@@ -80,7 +88,12 @@ namespace System.Runtime.CompilerServices
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <param name="initialBuffer">A buffer temporarily transferred to the handler for use as part of its formatting.  Contents may be overwritten.</param>
         /// <remarks>This is intended to be called only by compiler-generated code. Arguments are not validated as they'd otherwise be for members intended to be used directly.</remarks>
-        public DefaultInterpolatedStringHandler(int literalLength, int formattedCount, IFormatProvider? provider, Span<char> initialBuffer)
+        public DefaultInterpolatedStringHandler(
+            int literalLength,
+            int formattedCount,
+            IFormatProvider? provider,
+            Span<char> initialBuffer
+        )
         {
             _provider = provider;
             _chars = initialBuffer;
@@ -94,7 +107,10 @@ namespace System.Runtime.CompilerServices
         /// <param name="formattedCount">The number of interpolation expressions in the interpolated string.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // becomes a constant when inputs are constant
         internal static int GetDefaultLength(int literalLength, int formattedCount) =>
-            Math.Max(MinimumArrayPoolLength, literalLength + (formattedCount * GuessedLengthPerHole));
+            Math.Max(
+                MinimumArrayPoolLength,
+                literalLength + (formattedCount * GuessedLengthPerHole)
+            );
 
         /// <summary>Gets the built <see cref="string"/>.</summary>
         /// <returns>The built string.</returns>
@@ -176,8 +192,13 @@ namespace System.Runtime.CompilerServices
                 if ((uint)pos < chars.Length - 1)
                 {
                     Unsafe.WriteUnaligned(
-                        ref Unsafe.As<char, byte>(ref Unsafe.Add(ref MemoryMarshal.GetReference(chars), pos)),
-                        Unsafe.ReadUnaligned<int>(ref Unsafe.As<char, byte>(ref value.GetRawStringData())));
+                        ref Unsafe.As<char, byte>(
+                            ref Unsafe.Add(ref MemoryMarshal.GetReference(chars), pos)
+                        ),
+                        Unsafe.ReadUnaligned<int>(
+                            ref Unsafe.As<char, byte>(ref value.GetRawStringData())
+                        )
+                    );
                     _pos = pos + 2;
                 }
                 else
@@ -310,7 +331,14 @@ namespace System.Runtime.CompilerServices
                 if (value is ISpanFormattable)
                 {
                     int charsWritten;
-                    while (!((ISpanFormattable)value).TryFormat(_chars.Slice(_pos), out charsWritten, default, _provider)) // constrained call avoiding boxing for value types
+                    while (
+                        !((ISpanFormattable)value).TryFormat(
+                            _chars.Slice(_pos),
+                            out charsWritten,
+                            default,
+                            _provider
+                        )
+                    ) // constrained call avoiding boxing for value types
                     {
                         Grow();
                     }
@@ -358,7 +386,14 @@ namespace System.Runtime.CompilerServices
                 if (value is ISpanFormattable)
                 {
                     int charsWritten;
-                    while (!((ISpanFormattable)value).TryFormat(_chars.Slice(_pos), out charsWritten, format, _provider)) // constrained call avoiding boxing for value types
+                    while (
+                        !((ISpanFormattable)value).TryFormat(
+                            _chars.Slice(_pos),
+                            out charsWritten,
+                            format,
+                            _provider
+                        )
+                    ) // constrained call avoiding boxing for value types
                     {
                         Grow();
                     }
@@ -430,7 +465,11 @@ namespace System.Runtime.CompilerServices
         /// <param name="value">The span to write.</param>
         /// <param name="alignment">Minimum number of characters that should be written for this value.  If the value is negative, it indicates left-aligned and the required minimum is the absolute value.</param>
         /// <param name="format">The format string.</param>
-        public void AppendFormatted(ReadOnlySpan<char> value, int alignment = 0, string? format = null)
+        public void AppendFormatted(
+            ReadOnlySpan<char> value,
+            int alignment = 0,
+            string? format = null
+        )
         {
             bool leftAlign = false;
             if (alignment < 0)
@@ -473,9 +512,7 @@ namespace System.Runtime.CompilerServices
         public void AppendFormatted(string? value)
         {
             // Fast-path for no custom formatter and a non-null string that fits in the current destination buffer.
-            if (!_hasCustomFormatter &&
-                value is not null &&
-                value.TryCopyTo(_chars.Slice(_pos)))
+            if (!_hasCustomFormatter && value is not null && value.TryCopyTo(_chars.Slice(_pos)))
             {
                 _pos += value.Length;
             }
@@ -535,9 +572,12 @@ namespace System.Runtime.CompilerServices
         internal static bool HasCustomFormatter(IFormatProvider provider)
         {
             Debug.Assert(provider is not null);
-            Debug.Assert(provider is not CultureInfo || provider.GetFormat(typeof(ICustomFormatter)) is null, "Expected CultureInfo to not provide a custom formatter");
-            return
-                provider.GetType() != typeof(CultureInfo) && // optimization to avoid GetFormat in the majority case
+            Debug.Assert(
+                provider is not CultureInfo || provider.GetFormat(typeof(ICustomFormatter)) is null,
+                "Expected CultureInfo to not provide a custom formatter"
+            );
+            return provider.GetType() != typeof(CultureInfo)
+                && // optimization to avoid GetFormat in the majority case
                 provider.GetFormat(typeof(ICustomFormatter)) != null;
         }
 
@@ -555,10 +595,18 @@ namespace System.Runtime.CompilerServices
             Debug.Assert(_hasCustomFormatter);
             Debug.Assert(_provider != null);
 
-            ICustomFormatter? formatter = (ICustomFormatter?)_provider.GetFormat(typeof(ICustomFormatter));
-            Debug.Assert(formatter != null, "An incorrectly written provider said it implemented ICustomFormatter, and then didn't");
+            ICustomFormatter? formatter = (ICustomFormatter?)_provider.GetFormat(
+                typeof(ICustomFormatter)
+            );
+            Debug.Assert(
+                formatter != null,
+                "An incorrectly written provider said it implemented ICustomFormatter, and then didn't"
+            );
 
-            if (formatter is not null && formatter.Format(format, value, _provider) is string customFormatted)
+            if (
+                formatter is not null
+                && formatter.Format(format, value, _provider) is string customFormatted
+            )
             {
                 AppendStringDirect(customFormatted);
             }
@@ -592,7 +640,9 @@ namespace System.Runtime.CompilerServices
                 }
                 else
                 {
-                    _chars.Slice(startingPos, charsWritten).CopyTo(_chars.Slice(startingPos + paddingNeeded));
+                    _chars
+                        .Slice(startingPos, charsWritten)
+                        .CopyTo(_chars.Slice(startingPos + paddingNeeded));
                     _chars.Slice(startingPos, paddingNeeded).Fill(' ');
                 }
 
@@ -661,7 +711,10 @@ namespace System.Runtime.CompilerServices
             // ints that could technically overflow if someone tried to, for example, append a huge string to a huge string, we also clamp to int.MaxValue.
             // Even if the array creation fails in such a case, we may later fail in ToStringAndClear.
 
-            uint newCapacity = Math.Max(requiredMinCapacity, Math.Min((uint)_chars.Length * 2, string.MaxLength));
+            uint newCapacity = Math.Max(
+                requiredMinCapacity,
+                Math.Min((uint)_chars.Length * 2, string.MaxLength)
+            );
             int arraySize = (int)Math.Clamp(newCapacity, MinimumArrayPoolLength, int.MaxValue);
 
             char[] newArray = ArrayPool<char>.Shared.Rent(arraySize);

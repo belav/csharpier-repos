@@ -63,14 +63,17 @@ namespace Microsoft.EntityFrameworkCore.Query
             IExecutionStrategy executionStrategy,
             ICurrentDbContext currentContext,
             IDbContextOptions contextOptions,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             _currentContext = currentContext;
             Model = model;
             QueryTranslationPreprocessorFactory = queryTranslationPreprocessorFactory;
-            QueryableMethodTranslatingExpressionVisitorFactory = queryableMethodTranslatingExpressionVisitorFactory;
+            QueryableMethodTranslatingExpressionVisitorFactory =
+                queryableMethodTranslatingExpressionVisitorFactory;
             QueryTranslationPostprocessorFactory = queryTranslationPostprocessorFactory;
-            ShapedQueryCompilingExpressionVisitorFactory = shapedQueryCompilingExpressionVisitorFactory;
+            ShapedQueryCompilingExpressionVisitorFactory =
+                shapedQueryCompilingExpressionVisitorFactory;
             IsRetryingExecutionStrategy = executionStrategy.RetriesOnFailure;
             ContextOptions = contextOptions;
             Logger = logger;
@@ -79,14 +82,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     The CLR type of DbContext.
         /// </summary>
-        public Type ContextType
-            => _currentContext.Context.GetType();
+        public Type ContextType => _currentContext.Context.GetType();
 
         /// <summary>
         ///     The default query tracking behavior.
         /// </summary>
-        public QueryTrackingBehavior QueryTrackingBehavior
-            => _currentContext.Context.ChangeTracker.QueryTrackingBehavior;
+        public QueryTrackingBehavior QueryTrackingBehavior =>
+            _currentContext.Context.ChangeTracker.QueryTrackingBehavior;
 
         /// <summary>
         ///     The model.

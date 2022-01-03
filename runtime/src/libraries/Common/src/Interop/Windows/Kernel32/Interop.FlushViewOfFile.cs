@@ -9,6 +9,9 @@ internal static partial class Interop
     internal static partial class Kernel32
     {
         [GeneratedDllImport(Libraries.Kernel32, SetLastError = true)]
-        internal static partial bool FlushViewOfFile(IntPtr lpBaseAddress, UIntPtr dwNumberOfBytesToFlush);
+        internal static partial bool FlushViewOfFile(
+            IntPtr lpBaseAddress,
+            UIntPtr dwNumberOfBytesToFlush
+        );
     }
 }

@@ -13,7 +13,9 @@ namespace System.Net.Sockets
         //disconnect doesn't update getpeername to return a failure.
         Connected = 0x2,
         Listening = 0x4,
-        [Obsolete("SocketInformationOptions.UseOnlyOverlappedIO has been deprecated and is not supported.")]
+        [Obsolete(
+            "SocketInformationOptions.UseOnlyOverlappedIO has been deprecated and is not supported."
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         UseOnlyOverlappedIO = 0x8,
     }

@@ -19,10 +19,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
         /// <summary>
         /// A place for diagnostics to be stored during parsing.  Not intended to be accessed 
         /// directly.  These will be collected and aggregated into <see cref="EmbeddedSyntaxTree{TNode, TRoot, TSyntaxKind}.Diagnostics"/>
-        /// </summary> 
+        /// </summary>
         internal readonly ImmutableArray<EmbeddedDiagnostic> Diagnostics;
 
-        public EmbeddedSyntaxTrivia(TSyntaxKind kind, VirtualCharSequence virtualChars, ImmutableArray<EmbeddedDiagnostic> diagnostics)
+        public EmbeddedSyntaxTrivia(
+            TSyntaxKind kind,
+            VirtualCharSequence virtualChars,
+            ImmutableArray<EmbeddedDiagnostic> diagnostics
+        )
         {
             Debug.Assert(virtualChars.Length > 0);
             Kind = kind;

@@ -27,7 +27,8 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
     private bool _hasMultipleValues;
     private KnownHeaderType _knownHeaderType;
 
-    public Func<string, Encoding?> EncodingSelector { get; set; } = KestrelServerOptions.DefaultHeaderEncodingSelector;
+    public Func<string, Encoding?> EncodingSelector { get; set; } =
+        KestrelServerOptions.DefaultHeaderEncodingSelector;
 
     public int HPackStaticTableId => GetResponseHeaderStaticTableId(_knownHeaderType);
     public KeyValuePair<string, string> Current { get; private set; }
@@ -80,20 +81,32 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         if (_headersType == HeadersType.Headers)
         {
             return _headersEnumerator.MoveNext()
-                ? SetCurrent(_headersEnumerator.Current.Key, _headersEnumerator.Current.Value, _headersEnumerator.CurrentKnownType)
-                : false;
+              ? SetCurrent(
+                    _headersEnumerator.Current.Key,
+                    _headersEnumerator.Current.Value,
+                    _headersEnumerator.CurrentKnownType
+                )
+              : false;
         }
         else if (_headersType == HeadersType.Trailers)
         {
             return _trailersEnumerator.MoveNext()
-                ? SetCurrent(_trailersEnumerator.Current.Key, _trailersEnumerator.Current.Value, _trailersEnumerator.CurrentKnownType)
-                : false;
+              ? SetCurrent(
+                    _trailersEnumerator.Current.Key,
+                    _trailersEnumerator.Current.Value,
+                    _trailersEnumerator.CurrentKnownType
+                )
+              : false;
         }
         else
         {
             return _genericEnumerator!.MoveNext()
-                ? SetCurrent(_genericEnumerator.Current.Key, _genericEnumerator.Current.Value, default)
-                : false;
+              ? SetCurrent(
+                    _genericEnumerator.Current.Key,
+                    _genericEnumerator.Current.Value,
+                    default
+                )
+              : false;
         }
     }
 
@@ -102,7 +115,9 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         var result = _stringValuesEnumerator.MoveNext();
 
         // Current is null only when result is false.
-        Current = result ? new KeyValuePair<string, string>(key, _stringValuesEnumerator.Current!) : default;
+        Current = result
+            ? new KeyValuePair<string, string>(key, _stringValuesEnumerator.Current!)
+            : default;
         return result;
     }
 
@@ -142,9 +157,7 @@ internal sealed class Http2HeadersEnumerator : IEnumerator<KeyValuePair<string, 
         _knownHeaderType = default;
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
     internal static int GetResponseHeaderStaticTableId(KnownHeaderType responseHeaderType)
     {

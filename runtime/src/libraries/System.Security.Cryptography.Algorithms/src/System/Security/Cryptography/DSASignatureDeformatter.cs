@@ -34,7 +34,9 @@ namespace System.Security.Cryptography
             if (strName.ToUpperInvariant() != HashAlgorithmNames.SHA1)
             {
                 // To match desktop, throw here
-                throw new CryptographicUnexpectedOperationException(SR.Cryptography_InvalidOperation);
+                throw new CryptographicUnexpectedOperationException(
+                    SR.Cryptography_InvalidOperation
+                );
             }
         }
 

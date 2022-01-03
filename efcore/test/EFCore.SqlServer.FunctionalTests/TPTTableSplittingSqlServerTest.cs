@@ -10,12 +10,9 @@ namespace Microsoft.EntityFrameworkCore
     public class TPTTableSplittingSqlServerTest : TPTTableSplittingTestBase
     {
         public TPTTableSplittingSqlServerTest(ITestOutputHelper testOutputHelper)
-            : base(testOutputHelper)
-        {
-        }
+            : base(testOutputHelper) { }
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
         public override async Task Can_use_with_redundant_relationships()
         {
@@ -91,7 +88,8 @@ LEFT JOIN (
 END = CASE
     WHEN [t6].[Capacity] IS NOT NULL THEN [t6].[VehicleName]
 END
-ORDER BY [v].[Name]");
+ORDER BY [v].[Name]"
+            );
         }
 
         public override async Task Can_query_shared()
@@ -107,7 +105,8 @@ LEFT JOIN [LicensedOperators] AS [l] ON [v].[Name] = [l].[VehicleName]
 INNER JOIN (
     SELECT [v0].[Name]
     FROM [Vehicles] AS [v0]
-) AS [t] ON [v].[Name] = [t].[Name]");
+) AS [t] ON [v].[Name] = [t].[Name]"
+            );
         }
 
         public override async Task Can_query_shared_nonhierarchy()
@@ -120,7 +119,8 @@ FROM [Vehicles] AS [v]
 INNER JOIN (
     SELECT [v0].[Name]
     FROM [Vehicles] AS [v0]
-) AS [t] ON [v].[Name] = [t].[Name]");
+) AS [t] ON [v].[Name] = [t].[Name]"
+            );
         }
 
         public override async Task Can_query_shared_nonhierarchy_with_nonshared_dependent()
@@ -133,7 +133,8 @@ FROM [Vehicles] AS [v]
 INNER JOIN (
     SELECT [v0].[Name]
     FROM [Vehicles] AS [v0]
-) AS [t] ON [v].[Name] = [t].[Name]");
+) AS [t] ON [v].[Name] = [t].[Name]"
+            );
         }
 
         public override async Task Can_query_shared_derived_hierarchy()
@@ -151,7 +152,8 @@ INNER JOIN (
     FROM [PoweredVehicles] AS [p]
     INNER JOIN [CombustionEngines] AS [c0] ON [p].[Name] = [c0].[VehicleName]
 ) AS [t] ON [c].[VehicleName] = [t].[Name]
-WHERE [c].[Capacity] IS NOT NULL");
+WHERE [c].[Capacity] IS NOT NULL"
+            );
         }
 
         public override async Task Can_query_shared_derived_nonhierarchy()
@@ -166,7 +168,8 @@ INNER JOIN (
     FROM [PoweredVehicles] AS [p]
     INNER JOIN [CombustionEngines] AS [c0] ON [p].[Name] = [c0].[VehicleName]
 ) AS [t] ON [c].[VehicleName] = [t].[Name]
-WHERE [c].[Capacity] IS NOT NULL");
+WHERE [c].[Capacity] IS NOT NULL"
+            );
         }
 
         public override async Task Can_query_shared_derived_nonhierarchy_all_required()
@@ -181,7 +184,8 @@ INNER JOIN (
     FROM [PoweredVehicles] AS [p]
     INNER JOIN [CombustionEngines] AS [c0] ON [p].[Name] = [c0].[VehicleName]
 ) AS [t] ON [c].[VehicleName] = [t].[Name]
-WHERE [c].[Capacity] IS NOT NULL AND [c].[FuelType] IS NOT NULL");
+WHERE [c].[Capacity] IS NOT NULL AND [c].[FuelType] IS NOT NULL"
+            );
         }
 
         public override async Task Can_change_dependent_instance_non_derived()
@@ -221,7 +225,8 @@ LEFT JOIN (
         FROM [Vehicles] AS [v1]
     ) AS [t] ON [v0].[Name] = [t].[Name]
 ) AS [t0] ON [v].[Name] = [t0].[Name]
-WHERE [v].[Name] = N'Trek Pro Fit Madone 6 Series'");
+WHERE [v].[Name] = N'Trek Pro Fit Madone 6 Series'"
+            );
         }
 
         public override async Task Can_change_principal_instance_non_derived()
@@ -229,15 +234,15 @@ WHERE [v].[Name] = N'Trek Pro Fit Madone 6 Series'");
             await base.Can_change_principal_instance_non_derived();
 
             AssertSql(
-               @"@p1='Trek Pro Fit Madone 6 Series' (Nullable = false) (Size = 450)
+                @"@p1='Trek Pro Fit Madone 6 Series' (Nullable = false) (Size = 450)
 @p0='2'
 
 SET NOCOUNT ON;
 UPDATE [Vehicles] SET [SeatingCapacity] = @p0
 WHERE [Name] = @p1;
 SELECT @@ROWCOUNT;",
-               //
-               @"SELECT TOP(2) [v].[Name], [v].[SeatingCapacity], [c].[AttachedVehicleName], CASE
+                //
+                @"SELECT TOP(2) [v].[Name], [v].[SeatingCapacity], [c].[AttachedVehicleName], CASE
     WHEN [c].[Name] IS NOT NULL THEN N'CompositeVehicle'
     WHEN [p].[Name] IS NOT NULL THEN N'PoweredVehicle'
 END AS [Discriminator], [t0].[Name], [t0].[Operator_Name], [t0].[LicenseType], [t0].[Discriminator]
@@ -255,7 +260,8 @@ LEFT JOIN (
         FROM [Vehicles] AS [v1]
     ) AS [t] ON [v0].[Name] = [t].[Name]
 ) AS [t0] ON [v].[Name] = [t0].[Name]
-WHERE [v].[Name] = N'Trek Pro Fit Madone 6 Series'");
+WHERE [v].[Name] = N'Trek Pro Fit Madone 6 Series'"
+            );
         }
 
         public override async Task Optional_dependent_materialized_when_no_properties()
@@ -297,7 +303,8 @@ LEFT JOIN (
     WHEN [t1].[Active] IS NOT NULL THEN [t1].[Name]
 END
 WHERE [v].[Name] = N'AIM-9M Sidewinder'
-ORDER BY [v].[Name]");
+ORDER BY [v].[Name]"
+            );
         }
     }
 }

@@ -16,11 +16,8 @@ namespace System.Speech.Recognition.SrgsGrammar
     public class SrgsOneOf : SrgsElement, IOneOf
     {
         #region Constructors
-        public SrgsOneOf()
-        {
-        }
-        public SrgsOneOf(params string[] items)
-            : this()
+        public SrgsOneOf() { }
+        public SrgsOneOf(params string[] items) : this()
         {
             Helpers.ThrowIfNull(items, nameof(items));
 
@@ -28,14 +25,16 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 if (items[i] == null)
                 {
-                    throw new ArgumentNullException(nameof(items), SR.Get(SRID.ParamsEntryNullIllegal));
+                    throw new ArgumentNullException(
+                        nameof(items),
+                        SR.Get(SRID.ParamsEntryNullIllegal)
+                    );
                 }
 
                 _items.Add(new SrgsItem(items[i]));
             }
         }
-        public SrgsOneOf(params SrgsItem[] items)
-            : this()
+        public SrgsOneOf(params SrgsItem[] items) : this()
         {
             Helpers.ThrowIfNull(items, nameof(items));
 
@@ -44,7 +43,10 @@ namespace System.Speech.Recognition.SrgsGrammar
                 SrgsItem item = items[i];
                 if (item == null)
                 {
-                    throw new ArgumentNullException(nameof(items), SR.Get(SRID.ParamsEntryNullIllegal));
+                    throw new ArgumentNullException(
+                        nameof(items),
+                        SR.Get(SRID.ParamsEntryNullIllegal)
+                    );
                 }
 
                 _items.Add(item);
@@ -68,10 +70,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         // ISSUE: Do we need more constructors? Take a look at RuleElementCollection.AddOneOf methods. [Bug# 37115]
         public Collection<SrgsItem> Items
         {
-            get
-            {
-                return _items;
-            }
+            get { return _items; }
         }
 
         #endregion

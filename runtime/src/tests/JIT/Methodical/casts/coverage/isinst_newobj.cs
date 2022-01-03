@@ -20,28 +20,40 @@ namespace JitTest
                         inst = ((object)(new TestClass())) as TestClass;
                         return inst != null;
                     }
-                    catch (Exception) { return false; }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case 1:
                     try
                     {
                         inst = ((object)(new DerivedClass())) as TestClass;
                         return inst != null;
                     }
-                    catch (Exception) { return false; }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case 2:
                     try
                     {
                         inst = ((object)(new BaseClass())) as TestClass;
                         return inst == null;
                     }
-                    catch (Exception) { return false; }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case 3:
                     try
                     {
                         inst = ((object)(new OtherClass())) as TestClass;
                         return inst == null;
                     }
-                    catch (Exception) { return false; }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 default:
                     return false;
             }

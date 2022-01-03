@@ -304,7 +304,8 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// These are also the rules used for VB identifier comparison.
         /// </remarks>
-        public static bool Equals(ReadOnlySpan<char> left, ReadOnlySpan<char> right) => s_comparer.Equals(left, right);
+        public static bool Equals(ReadOnlySpan<char> left, ReadOnlySpan<char> right) =>
+            s_comparer.Equals(left, right);
 #endif
 
         /// <summary>
@@ -313,7 +314,8 @@ namespace Microsoft.CodeAnalysis
         /// <param name="value"></param>
         /// <param name="possibleEnd"></param>
         /// <returns></returns>
-        public static bool EndsWith(string value, string possibleEnd) => OneToOneUnicodeComparer.EndsWith(value, possibleEnd);
+        public static bool EndsWith(string value, string possibleEnd) =>
+            OneToOneUnicodeComparer.EndsWith(value, possibleEnd);
 
         /// <summary>
         /// Determines if the string 'value' starts with string 'possibleStart'.
@@ -321,7 +323,8 @@ namespace Microsoft.CodeAnalysis
         /// <param name="value"></param>
         /// <param name="possibleStart"></param>
         /// <returns></returns>
-        public static bool StartsWith(string value, string possibleStart) => OneToOneUnicodeComparer.StartsWith(value, possibleStart);
+        public static bool StartsWith(string value, string possibleStart) =>
+            OneToOneUnicodeComparer.StartsWith(value, possibleStart);
 
         /// <summary>
         /// Compares two strings according to the Unicode rules for case-insensitive
@@ -346,7 +349,8 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// These are also the rules used for VB identifier comparison.
         /// </remarks>
-        public static int Compare(ReadOnlySpan<char> left, ReadOnlySpan<char> right) => s_comparer.Compare(left, right);
+        public static int Compare(ReadOnlySpan<char> left, ReadOnlySpan<char> right) =>
+            s_comparer.Compare(left, right);
 #endif
 
         /// <summary>

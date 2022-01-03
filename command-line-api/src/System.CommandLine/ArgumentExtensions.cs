@@ -23,8 +23,8 @@ namespace System.CommandLine
         /// <returns>The configured argument.</returns>
         public static TArgument AddSuggestions<TArgument>(
             this TArgument argument,
-            params string[] values)
-            where TArgument : Argument
+            params string[] values
+        ) where TArgument : Argument
         {
             argument.Suggestions.Add(values);
 
@@ -40,8 +40,8 @@ namespace System.CommandLine
         /// <returns>The configured argument.</returns>
         public static TArgument AddSuggestions<TArgument>(
             this TArgument argument,
-            SuggestDelegate suggest)
-            where TArgument : Argument
+            SuggestDelegate suggest
+        ) where TArgument : Argument
         {
             argument.Suggestions.Add(suggest);
 
@@ -57,8 +57,8 @@ namespace System.CommandLine
         /// <returns>The configured argument.</returns>
         public static TArgument FromAmong<TArgument>(
             this TArgument argument,
-            params string[] values)
-            where TArgument : Argument
+            params string[] values
+        ) where TArgument : Argument
         {
             argument.AddAllowedValues(values);
             argument.Suggestions.Add(values);
@@ -73,12 +73,14 @@ namespace System.CommandLine
         /// <returns>The configured argument.</returns>
         public static Argument<FileInfo> ExistingOnly(this Argument<FileInfo> argument)
         {
-            argument.AddValidator(symbol =>
-                                      symbol.Tokens
-                                            .Select(t => t.Value)
-                                            .Where(filePath => !File.Exists(filePath))
-                                            .Select(symbol.LocalizationResources.FileDoesNotExist)
-                                            .FirstOrDefault());
+            argument.AddValidator(
+                symbol =>
+                    symbol.Tokens
+                        .Select(t => t.Value)
+                        .Where(filePath => !File.Exists(filePath))
+                        .Select(symbol.LocalizationResources.FileDoesNotExist)
+                        .FirstOrDefault()
+            );
             return argument;
         }
 
@@ -89,12 +91,14 @@ namespace System.CommandLine
         /// <returns>The configured argument.</returns>
         public static Argument<DirectoryInfo> ExistingOnly(this Argument<DirectoryInfo> argument)
         {
-            argument.AddValidator(symbol =>
-                                      symbol.Tokens
-                                            .Select(t => t.Value)
-                                            .Where(filePath => !Directory.Exists(filePath))
-                                            .Select(symbol.LocalizationResources.DirectoryDoesNotExist)
-                                            .FirstOrDefault());
+            argument.AddValidator(
+                symbol =>
+                    symbol.Tokens
+                        .Select(t => t.Value)
+                        .Where(filePath => !Directory.Exists(filePath))
+                        .Select(symbol.LocalizationResources.DirectoryDoesNotExist)
+                        .FirstOrDefault()
+            );
             return argument;
         }
 
@@ -105,12 +109,14 @@ namespace System.CommandLine
         /// <returns>The configured argument.</returns>
         public static Argument<FileSystemInfo> ExistingOnly(this Argument<FileSystemInfo> argument)
         {
-            argument.AddValidator(symbol =>
-                                      symbol.Tokens
-                                            .Select(t => t.Value)
-                                            .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
-                                            .Select(symbol.LocalizationResources.FileOrDirectoryDoesNotExist)
-                                            .FirstOrDefault());
+            argument.AddValidator(
+                symbol =>
+                    symbol.Tokens
+                        .Select(t => t.Value)
+                        .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
+                        .Select(symbol.LocalizationResources.FileOrDirectoryDoesNotExist)
+                        .FirstOrDefault()
+            );
             return argument;
         }
 
@@ -125,29 +131,37 @@ namespace System.CommandLine
             if (typeof(IEnumerable<FileInfo>).IsAssignableFrom(typeof(T)))
             {
                 argument.AddValidator(
-                    a => a.Tokens
-                          .Select(t => t.Value)
-                          .Where(filePath => !File.Exists(filePath))
-                          .Select(a.LocalizationResources.FileDoesNotExist)
-                          .FirstOrDefault());
+                    a =>
+                        a.Tokens
+                            .Select(t => t.Value)
+                            .Where(filePath => !File.Exists(filePath))
+                            .Select(a.LocalizationResources.FileDoesNotExist)
+                            .FirstOrDefault()
+                );
             }
             else if (typeof(IEnumerable<DirectoryInfo>).IsAssignableFrom(typeof(T)))
             {
                 argument.AddValidator(
-                    a => a.Tokens
-                          .Select(t => t.Value)
-                          .Where(filePath => !Directory.Exists(filePath))
-                          .Select(a.LocalizationResources.DirectoryDoesNotExist)
-                          .FirstOrDefault());
+                    a =>
+                        a.Tokens
+                            .Select(t => t.Value)
+                            .Where(filePath => !Directory.Exists(filePath))
+                            .Select(a.LocalizationResources.DirectoryDoesNotExist)
+                            .FirstOrDefault()
+                );
             }
             else
             {
                 argument.AddValidator(
-                    a => a.Tokens
-                          .Select(t => t.Value)
-                          .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
-                          .Select(a.LocalizationResources.FileOrDirectoryDoesNotExist)
-                          .FirstOrDefault());
+                    a =>
+                        a.Tokens
+                            .Select(t => t.Value)
+                            .Where(
+                                filePath => !Directory.Exists(filePath) && !File.Exists(filePath)
+                            )
+                            .Select(a.LocalizationResources.FileOrDirectoryDoesNotExist)
+                            .FirstOrDefault()
+                );
             }
 
             return argument;
@@ -158,30 +172,33 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="argument">The argument to configure.</param>
         /// <returns>The configured argument.</returns>
-        public static TArgument LegalFilePathsOnly<TArgument>(
-            this TArgument argument)
+        public static TArgument LegalFilePathsOnly<TArgument>(this TArgument argument)
             where TArgument : Argument
         {
             var invalidPathChars = Path.GetInvalidPathChars();
 
-            argument.AddValidator(symbol =>
-            {
-                for (var i = 0; i < symbol.Tokens.Count; i++)
+            argument.AddValidator(
+                symbol =>
                 {
-                    var token = symbol.Tokens[i];
-
-                    // File class no longer check invalid character
-                    // https://blogs.msdn.microsoft.com/jeremykuhne/2018/03/09/custom-directory-enumeration-in-net-core-2-1/
-                    var invalidCharactersIndex = token.Value.IndexOfAny(invalidPathChars);
-
-                    if (invalidCharactersIndex >= 0)
+                    for (var i = 0; i < symbol.Tokens.Count; i++)
                     {
-                        return symbol.LocalizationResources.InvalidCharactersInPath(token.Value[invalidCharactersIndex]);
-                    }
-                }
+                        var token = symbol.Tokens[i];
 
-                return null;
-            });
+                        // File class no longer check invalid character
+                        // https://blogs.msdn.microsoft.com/jeremykuhne/2018/03/09/custom-directory-enumeration-in-net-core-2-1/
+                        var invalidCharactersIndex = token.Value.IndexOfAny(invalidPathChars);
+
+                        if (invalidCharactersIndex >= 0)
+                        {
+                            return symbol.LocalizationResources.InvalidCharactersInPath(
+                                token.Value[invalidCharactersIndex]
+                            );
+                        }
+                    }
+
+                    return null;
+                }
+            );
 
             return argument;
         }
@@ -192,31 +209,34 @@ namespace System.CommandLine
         /// <remarks>A parse error will result, for example, if file path separators are found in the parsed value.</remarks>
         /// <param name="argument">The argument to configure.</param>
         /// <returns>The configured argument.</returns>
-        public static TArgument LegalFileNamesOnly<TArgument>(
-            this TArgument argument)
+        public static TArgument LegalFileNamesOnly<TArgument>(this TArgument argument)
             where TArgument : Argument
         {
             var invalidFileNameChars = Path.GetInvalidFileNameChars();
 
-            argument.AddValidator(symbol =>
-            {
-                for (var i = 0; i < symbol.Tokens.Count; i++)
+            argument.AddValidator(
+                symbol =>
                 {
-                    var token = symbol.Tokens[i];
-                    var invalidCharactersIndex = token.Value.IndexOfAny(invalidFileNameChars);
-
-                    if (invalidCharactersIndex >= 0)
+                    for (var i = 0; i < symbol.Tokens.Count; i++)
                     {
-                        return symbol.LocalizationResources.InvalidCharactersInFileName(token.Value[invalidCharactersIndex]);
-                    }
-                }
+                        var token = symbol.Tokens[i];
+                        var invalidCharactersIndex = token.Value.IndexOfAny(invalidFileNameChars);
 
-                return null;
-            });
+                        if (invalidCharactersIndex >= 0)
+                        {
+                            return symbol.LocalizationResources.InvalidCharactersInFileName(
+                                token.Value[invalidCharactersIndex]
+                            );
+                        }
+                    }
+
+                    return null;
+                }
+            );
 
             return argument;
         }
-        
+
         /// <summary>
         /// Parses a command line string value using an argument.
         /// </summary>
@@ -224,9 +244,7 @@ namespace System.CommandLine
         /// <param name="argument">The argument to use to parse the command line input.</param>
         /// <param name="commandLine">A command line string to parse, which can include spaces and quotes equivalent to what can be entered into a terminal.</param>
         /// <returns>A parse result describing the outcome of the parse operation.</returns>
-        public static ParseResult Parse(
-            this Argument argument,
-            string commandLine) =>
+        public static ParseResult Parse(this Argument argument, string commandLine) =>
             argument.GetOrCreateDefaultParser().Parse(commandLine);
 
         /// <summary>
@@ -235,9 +253,7 @@ namespace System.CommandLine
         /// <param name="argument">The argument to use to parse the command line input.</param>
         /// <param name="args">The string arguments to parse.</param>
         /// <returns>A parse result describing the outcome of the parse operation.</returns>
-        public static ParseResult Parse(
-            this Argument argument,
-            string[] args) =>
+        public static ParseResult Parse(this Argument argument, string[] args) =>
             argument.GetOrCreateDefaultParser().Parse(args);
     }
 }
