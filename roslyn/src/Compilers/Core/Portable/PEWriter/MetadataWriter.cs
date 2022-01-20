@@ -1276,8 +1276,7 @@ namespace Microsoft.Cci
             }
 
             Debug.Assert(
-                (methodReference.CallingConvention & CallingConvention.Generic)
-                    != 0
+                (methodReference.CallingConvention & CallingConvention.Generic) != 0
                     == (methodReference.GenericParameterCount > 0)
             );
 

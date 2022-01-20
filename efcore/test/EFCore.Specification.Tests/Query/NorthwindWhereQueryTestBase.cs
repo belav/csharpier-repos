@@ -792,8 +792,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             ss.Set<Customer>()
                                 .Where(
                                     c =>
-                                        c.CustomerID
-                                        != "ALFKI"
+                                        c.CustomerID != "ALFKI"
                                         == (c.IsLondon && c.CustomerID != "AROUT")
                                 ),
                         entryCount: 6
