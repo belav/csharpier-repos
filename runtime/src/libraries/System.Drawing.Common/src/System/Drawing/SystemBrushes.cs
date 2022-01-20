@@ -67,7 +67,8 @@ namespace System.Drawing
             if (systemBrushes == null)
             {
                 systemBrushes = new Brush[
-                    (int)KnownColor.WindowText + (int)KnownColor.MenuHighlight
+                    (int)KnownColor.WindowText
+                        + (int)KnownColor.MenuHighlight
                         - (int)KnownColor.YellowGreen
                 ];
                 Gdip.ThreadData[s_systemBrushesKey] = systemBrushes;

@@ -22,9 +22,7 @@ using System.Runtime.CompilerServices;
     AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Property,
     AllowMultiple = false
 )]
-public class SingleAttribute<T> : Attribute
-{
-}
+public class SingleAttribute<T> : Attribute { }
 
 [AttributeUsage(
     AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Property,

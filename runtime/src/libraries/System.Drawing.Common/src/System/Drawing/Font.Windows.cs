@@ -562,7 +562,8 @@ namespace System.Drawing
                     float pixelsPerPoint = (float)(graphics.DpiY / 72.0);
                     float lineSpacingInPixels = GetHeight(graphics);
                     float emHeightInPixels =
-                        lineSpacingInPixels * FontFamily.GetEmHeight(Style)
+                        lineSpacingInPixels
+                        * FontFamily.GetEmHeight(Style)
                         / FontFamily.GetLineSpacing(Style);
 
                     return emHeightInPixels / pixelsPerPoint;

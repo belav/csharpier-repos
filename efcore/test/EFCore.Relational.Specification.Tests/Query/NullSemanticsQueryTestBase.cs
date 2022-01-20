@@ -751,7 +751,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<NullSemanticsEntity1>()
                         .Where(
                             e =>
-                                e.NullableBoolA == e.NullableBoolB
+                                e.NullableBoolA
+                                == e.NullableBoolB
                                 != (e.NullableIntA == e.NullableIntB)
                         )
                         .Select(e => e.Id)
@@ -782,7 +783,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<NullSemanticsEntity1>()
                         .Where(
                             e =>
-                                e.NullableBoolA != e.NullableBoolB
+                                e.NullableBoolA
+                                != e.NullableBoolB
                                 == (e.NullableIntA == e.NullableIntB)
                         )
                         .Select(e => e.Id)
@@ -845,7 +847,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     ss.Set<NullSemanticsEntity1>()
                         .Where(
                             e =>
-                                e.NullableBoolA != e.NullableBoolB
+                                e.NullableBoolA
+                                != e.NullableBoolB
                                 == (e.NullableIntA != e.NullableIntB)
                         )
                         .Select(e => e.Id)

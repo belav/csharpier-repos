@@ -323,7 +323,8 @@ namespace System.Globalization
             double y = tanHalfEpsilon * tanHalfEpsilon;
 
             double dividend = (
-                (y * SinOfDegree(2 * lambda)) - (2 * eccentricity * SinOfDegree(anomaly))
+                (y * SinOfDegree(2 * lambda))
+                - (2 * eccentricity * SinOfDegree(anomaly))
                 + (4 * eccentricity * y * SinOfDegree(anomaly) * CosOfDegree(2 * lambda))
                 - (0.5 * Math.Pow(y, 2) * SinOfDegree(4 * lambda))
                 - (1.25 * Math.Pow(eccentricity, 2) * SinOfDegree(2 * anomaly))

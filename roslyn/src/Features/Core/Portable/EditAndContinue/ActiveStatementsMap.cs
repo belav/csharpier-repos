@@ -343,13 +343,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             var unmappedStartColumn =
                 (mappedSpan.Start.Line == mappedSection.Start.Line)
-                    ? unmappedSection.Start.Character + mappedSpan.Start.Character
+                    ? unmappedSection.Start.Character
+                      + mappedSpan.Start.Character
                       - mappedSection.Start.Character
                     : mappedSpan.Start.Character;
 
             var unmappedEndColumn =
                 (mappedSpan.End.Line == mappedSection.Start.Line)
-                    ? unmappedSection.Start.Character + mappedSpan.End.Character
+                    ? unmappedSection.Start.Character
+                      + mappedSpan.End.Character
                       - mappedSection.Start.Character
                     : mappedSpan.End.Character;
 

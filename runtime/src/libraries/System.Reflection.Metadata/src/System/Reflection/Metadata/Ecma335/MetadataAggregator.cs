@@ -359,7 +359,8 @@ namespace System.Reflection.Metadata.Ecma335
                 int relativeRowId =
                     (generation == 0)
                         ? rowId
-                        : rowId - sizes[generation - 1].AggregateInserts
+                        : rowId
+                          - sizes[generation - 1].AggregateInserts
                           + sizes[generation].Updates;
 
                 return new Handle((byte)handle.Type, relativeRowId);

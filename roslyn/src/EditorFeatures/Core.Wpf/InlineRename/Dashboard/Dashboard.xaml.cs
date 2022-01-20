@@ -387,7 +387,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             Canvas.SetTop(this, top);
             Canvas.SetLeft(
                 this,
-                _textView.ViewportLeft + _textView.VisualElement.RenderSize.Width
+                _textView.ViewportLeft
+                    + _textView.VisualElement.RenderSize.Width
                     - this.RenderSize.Width
             );
         }

@@ -19,7 +19,8 @@ namespace System.Diagnostics
 
             // Timer ticks need to be converted to DateTime ticks
             long dateTimeTicksDiff = (long)(
-                (Stopwatch.GetTimestamp() - tmp.SyncStopwatchTicks) * 10000000L
+                (Stopwatch.GetTimestamp() - tmp.SyncStopwatchTicks)
+                * 10000000L
                 / (double)Stopwatch.Frequency
             );
 

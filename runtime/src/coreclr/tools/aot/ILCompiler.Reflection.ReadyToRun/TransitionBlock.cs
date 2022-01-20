@@ -87,7 +87,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             {
                 if (pos < NumArgumentRegisters)
                 {
-                    return OffsetOfArgumentRegisters + SizeOfArgumentRegisters
+                    return OffsetOfArgumentRegisters
+                        + SizeOfArgumentRegisters
                         - (pos + 1) * PointerSize;
                 }
                 else

@@ -292,7 +292,8 @@ namespace Newtonsoft.Json.Utilities
                         if (i > lastWritePosition)
                         {
                             length =
-                                i - lastWritePosition
+                                i
+                                - lastWritePosition
                                 + ((isEscapedUnicodeText) ? UnicodeTextLength : 0);
                             int start = (isEscapedUnicodeText) ? UnicodeTextLength : 0;
 

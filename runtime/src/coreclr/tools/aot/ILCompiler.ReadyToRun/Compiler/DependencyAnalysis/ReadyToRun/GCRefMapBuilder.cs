@@ -138,7 +138,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 nStackSlots = (uint)(
                     (
-                        transitionBlock.SizeOfTransitionBlock + nStackBytes
+                        transitionBlock.SizeOfTransitionBlock
+                        + nStackBytes
                         - _transitionBlock.OffsetOfFirstGCRefMapSlot
                     ) / _target.PointerSize
                 );

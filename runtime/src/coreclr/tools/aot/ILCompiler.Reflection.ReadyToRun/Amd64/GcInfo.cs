@@ -893,7 +893,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                 foreach (GcTransition transition in transitions)
                 {
                     int codeOffset =
-                        transition.CodeOffset + (int)currentRange.StartOffset
+                        transition.CodeOffset
+                        + (int)currentRange.StartOffset
                         - cumInterruptibleLength;
                     if (codeOffset > currentRange.StopOffset)
                     {
@@ -904,7 +905,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                             currentRange.StopOffset - currentRange.StartOffset
                         );
                         codeOffset =
-                            transition.CodeOffset + (int)currentRange.StartOffset
+                            transition.CodeOffset
+                            + (int)currentRange.StartOffset
                             - cumInterruptibleLength;
                     }
 

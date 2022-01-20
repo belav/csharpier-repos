@@ -224,25 +224,29 @@ namespace System.Drawing.Printing
                             (float)Interop.Gdi32.GetDeviceCaps(
                                 hdc,
                                 Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
-                            ) * 100
+                            )
+                            * 100
                             / dpiX;
                         printableArea.Y =
                             (float)Interop.Gdi32.GetDeviceCaps(
                                 hdc,
                                 Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
-                            ) * 100
+                            )
+                            * 100
                             / dpiY;
                         printableArea.Width =
                             (float)Interop.Gdi32.GetDeviceCaps(
                                 hdc,
                                 Interop.Gdi32.DeviceCapability.HORZRES
-                            ) * 100
+                            )
+                            * 100
                             / dpiX;
                         printableArea.Height =
                             (float)Interop.Gdi32.GetDeviceCaps(
                                 hdc,
                                 Interop.Gdi32.DeviceCapability.VERTRES
-                            ) * 100
+                            )
+                            * 100
                             / dpiY;
                     }
                     else
@@ -253,25 +257,29 @@ namespace System.Drawing.Printing
                             (float)Interop.Gdi32.GetDeviceCaps(
                                 hdc,
                                 Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
-                            ) * 100
+                            )
+                            * 100
                             / dpiX;
                         printableArea.X =
                             (float)Interop.Gdi32.GetDeviceCaps(
                                 hdc,
                                 Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
-                            ) * 100
+                            )
+                            * 100
                             / dpiY;
                         printableArea.Height =
                             (float)Interop.Gdi32.GetDeviceCaps(
                                 hdc,
                                 Interop.Gdi32.DeviceCapability.HORZRES
-                            ) * 100
+                            )
+                            * 100
                             / dpiX;
                         printableArea.Width =
                             (float)Interop.Gdi32.GetDeviceCaps(
                                 hdc,
                                 Interop.Gdi32.DeviceCapability.VERTRES
-                            ) * 100
+                            )
+                            * 100
                             / dpiY;
                     }
                 }

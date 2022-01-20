@@ -667,7 +667,8 @@ namespace System.Text.Json
             int[] days = DateTime.IsLeapYear(parseData.Year) ? s_daysToMonth366 : s_daysToMonth365;
             int yearMinusOne = parseData.Year - 1;
             int totalDays =
-                (yearMinusOne * 365) + (yearMinusOne / 4)
+                (yearMinusOne * 365)
+                + (yearMinusOne / 4)
                 - (yearMinusOne / 100)
                 + (yearMinusOne / 400)
                 + days[parseData.Month - 1]

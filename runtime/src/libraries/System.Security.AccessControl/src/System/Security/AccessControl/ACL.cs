@@ -571,7 +571,8 @@ namespace System.Security.AccessControl
                 }
 
                 int newBinaryLength =
-                    BinaryLength - (index < _aces.Count ? _aces[index].BinaryLength : 0)
+                    BinaryLength
+                    - (index < _aces.Count ? _aces[index].BinaryLength : 0)
                     + value.BinaryLength;
 
                 if (newBinaryLength > MaxBinaryLength)

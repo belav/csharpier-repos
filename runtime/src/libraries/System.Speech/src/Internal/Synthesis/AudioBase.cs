@@ -256,7 +256,8 @@ namespace System.Speech.Internal.Synthesis
                 {
                     // Write the RIFF section
                     riff._len =
-                        total + cData
+                        total
+                        + cData
                         - 8 /* - cRiff*/
                     ; // for the "WAVE" 4 characters
                     bw.Write(riff._id);

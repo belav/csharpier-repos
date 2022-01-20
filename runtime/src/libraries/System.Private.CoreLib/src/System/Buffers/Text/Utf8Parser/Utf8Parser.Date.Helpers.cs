@@ -220,7 +220,8 @@ namespace System.Buffers.Text
             int[] days = DateTime.IsLeapYear(year) ? s_daysToMonth366 : s_daysToMonth365;
             int yearMinusOne = year - 1;
             int totalDays =
-                (yearMinusOne * 365) + (yearMinusOne / 4)
+                (yearMinusOne * 365)
+                + (yearMinusOne / 4)
                 - (yearMinusOne / 100)
                 + (yearMinusOne / 400)
                 + days[month - 1]
