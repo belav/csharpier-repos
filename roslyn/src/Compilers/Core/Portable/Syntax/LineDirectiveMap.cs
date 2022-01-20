@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis
                 return new LinePosition(
                     unmapped.Line - entry.UnmappedLine + entry.MappedSpan.Start.Line,
                     unmapped.Line == entry.UnmappedLine
-                      ? entry.MappedSpan.Start.Character + unmapped.Character
+                      ? entry.MappedSpan.Start.Character
+                            + unmapped.Character
                             - entry.UnmappedCharacterOffset.GetValueOrDefault()
                       : unmapped.Character
                 );

@@ -2947,7 +2947,8 @@ class Program
             Assert.Equal(0, entryPointSectionIndex);
 
             peStream.Position =
-                peHeaders.SectionHeaders[0].PointerToRawData + peHeader.AddressOfEntryPoint
+                peHeaders.SectionHeaders[0].PointerToRawData
+                + peHeader.AddressOfEntryPoint
                 - peHeaders.SectionHeaders[0].VirtualAddress;
             byte[] startupStub = new byte[8];
             peStream.Read(startupStub, 0, startupStub.Length);

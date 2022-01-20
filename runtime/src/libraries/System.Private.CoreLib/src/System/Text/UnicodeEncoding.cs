@@ -865,7 +865,8 @@ namespace System.Text
                         // will go from longEnd - 1 long to longEnd. (Might not get to use this)
                         // We can only go iCount units (limited by shorter of char or byte buffers.
                         ulong* longEnd = (ulong*)(
-                            chars - 3
+                            chars
+                            - 3
                             + (
                                 ((byteEnd - bytes) >> 1 < charEnd - chars)
                                     ? (byteEnd - bytes) >> 1
@@ -1640,7 +1641,8 @@ namespace System.Text
                     // will go from longEnd - 1 long to longEnd. (Might not get to use this)
                     // We can only go iCount units (limited by shorter of char or byte buffers.
                     ulong* longEnd = (ulong*)(
-                        bytes - 7
+                        bytes
+                        - 7
                         + (
                             ((byteEnd - bytes) >> 1 < charEnd - chars)
                                 ? (byteEnd - bytes)

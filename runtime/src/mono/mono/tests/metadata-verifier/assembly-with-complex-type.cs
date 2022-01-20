@@ -82,9 +82,7 @@ public class ZZ : Iface
     void Iface.Foo() { }
 }
 
-public class Generic<T>
-{
-}
+public class Generic<T> { }
 
 public class NonGeneric
 {

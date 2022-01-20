@@ -484,7 +484,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 if (pos < NumArgumentRegisters)
                 {
-                    return OffsetOfArgumentRegisters + SizeOfArgumentRegisters
+                    return OffsetOfArgumentRegisters
+                        + SizeOfArgumentRegisters
                         - (pos + 1) * PointerSize;
                 }
                 else

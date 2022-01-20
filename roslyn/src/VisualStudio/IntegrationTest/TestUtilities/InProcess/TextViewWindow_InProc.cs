@@ -289,7 +289,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 {
                     var startOfLine = view.Caret.ContainingTextViewLine.Start.Position;
                     var caretVirtualPosition = view.Caret.Position.VirtualBufferPosition;
-                    return caretVirtualPosition.Position - startOfLine
+                    return caretVirtualPosition.Position
+                        - startOfLine
                         + caretVirtualPosition.VirtualSpaces;
                 }
             );

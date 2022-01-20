@@ -67,7 +67,8 @@ namespace System.Drawing
             if (systemPens == null)
             {
                 systemPens = new Pen[
-                    (int)KnownColor.WindowText + (int)KnownColor.MenuHighlight
+                    (int)KnownColor.WindowText
+                        + (int)KnownColor.MenuHighlight
                         - (int)KnownColor.YellowGreen
                 ];
                 Gdip.ThreadData[s_systemPensKey] = systemPens;

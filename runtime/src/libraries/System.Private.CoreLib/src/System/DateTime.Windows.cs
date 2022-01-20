@@ -329,7 +329,8 @@ namespace System
 
                 // StartOfValidityWindow = MidnightUtc + 23:59:59 - ValidityPeriod
                 fileTimeAtStartOfValidityWindow =
-                    fileTimeAtBeginningOfDay + (TicksPerDay - TicksPerSecond)
+                    fileTimeAtBeginningOfDay
+                    + (TicksPerDay - TicksPerSecond)
                     - LeapSecondCache.ValidityPeriodInTicks;
                 if (
                     fileTimeNow - fileTimeAtStartOfValidityWindow
@@ -388,7 +389,8 @@ namespace System
             );
 
             return new DateTime(
-                dateData: dotnetDateDataAtStartOfValidityWindow + fileTimeNow
+                dateData: dotnetDateDataAtStartOfValidityWindow
+                    + fileTimeNow
                     - fileTimeAtStartOfValidityWindow
             );
 

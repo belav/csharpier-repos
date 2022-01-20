@@ -807,7 +807,8 @@ namespace System.Threading
                         // reasons (e.g. drift, clock changes, etc.), but when dump debugging we are unable to use
                         // TickCount in a meaningful way, so this at least provides a reasonable approximation.
                         long msOffset =
-                            _timer._startTicks - TimerQueue.s_tickCountToTimeMap.TickCount
+                            _timer._startTicks
+                            - TimerQueue.s_tickCountToTimeMap.TickCount
                             + _timer._dueTime;
                         return (
                             TimerQueue.s_tickCountToTimeMap.Time

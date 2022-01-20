@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         )
         {
             Debug.Assert(
-                parent != null
+                parent
+                    != null
                     == (
                         originalOperation.Kind == OperationKind.LocalFunction
                         || originalOperation.Kind == OperationKind.AnonymousFunction

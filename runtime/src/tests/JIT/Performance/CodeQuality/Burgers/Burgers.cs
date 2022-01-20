@@ -19,7 +19,8 @@ public class Burgers
         return -2
                 * nu
                 * (
-                    -(-8 * t + 2 * x) * Math.Exp(-Math.Pow((-4 * t + x), 2) / (4 * nu * (t + 1)))
+                    -(-8 * t + 2 * x)
+                        * Math.Exp(-Math.Pow((-4 * t + x), 2) / (4 * nu * (t + 1)))
                         / (4 * nu * (t + 1))
                     - (-8 * t + 2 * x - 12.5663706143592)
                         * Math.Exp(-Math.Pow(-4 * t + x - 6.28318530717959, 2) / (4 * nu * (t + 1)))

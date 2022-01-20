@@ -1075,7 +1075,8 @@ namespace System.Text
                 // We need to adjust the pointer because we're re-reading data.
 
                 pBuffer = (char*)(
-                    (byte*)pBuffer + (bufferLength & (SizeOfVector128InBytes - 1))
+                    (byte*)pBuffer
+                    + (bufferLength & (SizeOfVector128InBytes - 1))
                     - SizeOfVector128InBytes
                 );
                 firstVector = Sse2.LoadVector128((ushort*)pBuffer); // unaligned load

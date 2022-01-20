@@ -1196,7 +1196,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int distanceFromInitializerStart = position - initializer.Syntax.Span.Start;
 
             int distanceFromCtorBody =
-                initializersLength + ctorInitializerLength
+                initializersLength
+                + ctorInitializerLength
                 - (precedingLength + distanceFromInitializerStart);
 
             Debug.Assert(distanceFromCtorBody > 0);

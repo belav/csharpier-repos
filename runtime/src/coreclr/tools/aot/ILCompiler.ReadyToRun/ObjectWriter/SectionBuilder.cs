@@ -555,7 +555,8 @@ namespace ILCompiler.PEWriter
                 new SymbolTarget(
                     sectionIndex: firstSymbolTarget.SectionIndex,
                     offset: firstSymbolTarget.Offset,
-                    size: secondSymbolTarget.Offset - firstSymbolTarget.Offset
+                    size: secondSymbolTarget.Offset
+                        - firstSymbolTarget.Offset
                         + secondSymbolTarget.Size
                 )
             );

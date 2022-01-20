@@ -226,11 +226,13 @@ namespace System.Speech.Recognition
                                     lexicalForm,
                                     displayAttributes,
                                     new TimeSpan(
-                                        element.ulAudioTimeOffset * TimeSpan.TicksPerMillisecond
+                                        element.ulAudioTimeOffset
+                                            * TimeSpan.TicksPerMillisecond
                                             / 10000
                                     ),
                                     new TimeSpan(
-                                        element.ulAudioSizeTime * TimeSpan.TicksPerMillisecond
+                                        element.ulAudioSizeTime
+                                            * TimeSpan.TicksPerMillisecond
                                             / 10000
                                     )
                                 )

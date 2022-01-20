@@ -270,7 +270,8 @@ namespace System.Threading
                 // in the Fourier analysis, and we won't be able to measure it accurately.
                 //
                 int sampleCount =
-                    ((int)Math.Min(_totalSamples - 1, _samplesToMeasure)) / _wavePeriod
+                    ((int)Math.Min(_totalSamples - 1, _samplesToMeasure))
+                    / _wavePeriod
                     * _wavePeriod;
 
                 if (sampleCount > _wavePeriod)

@@ -38,7 +38,8 @@ namespace System.Text
             // then fix up the "wwww = uuuuu - 1" section of the bit distribution. The code is written as below
             // to become just two instructions: shl, lea.
 
-            return (highSurrogateCodePoint << 10) + lowSurrogateCodePoint
+            return (highSurrogateCodePoint << 10)
+                + lowSurrogateCodePoint
                 - ((0xD800U << 10) + 0xDC00U - (1 << 16));
         }
 

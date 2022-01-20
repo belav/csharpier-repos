@@ -15,9 +15,7 @@ class D<T> : B
     public override int F() => typeof(T) == typeof(string) ? 44 : 55;
 }
 
-class E : D<string>
-{
-}
+class E : D<string> { }
 
 class G<T> : E
 {
