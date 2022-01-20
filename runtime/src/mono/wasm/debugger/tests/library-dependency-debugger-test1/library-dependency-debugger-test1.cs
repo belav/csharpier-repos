@@ -23,6 +23,4 @@ public class SomeAttribute : Attribute
 }
 
 [Some(SomeEnum.Something)] // <-- comment this to make blazor WASM debugging work
-public class SomeClass
-{
-}
+public class SomeClass { }

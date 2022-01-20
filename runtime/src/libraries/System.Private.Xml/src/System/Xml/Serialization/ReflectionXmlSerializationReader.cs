@@ -24,7 +24,6 @@ using System.Xml.Schema;
         + "and XmlQualifiedName which are considered primitive, so they are trim safe."
 )]
 
-
 namespace System.Xml.Serialization
 {
     internal delegate void UnknownNodeAction(object? o);

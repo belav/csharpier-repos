@@ -27,7 +27,6 @@ using Xunit;
 [assembly: TypeForwardedTo(typeof(string))]
 [assembly: TypeForwardedTo(typeof(TypeInForwardedAssembly))]
 
-
 namespace System.Reflection.Tests
 {
     public class AssemblyTests : FileCleanupTestBase

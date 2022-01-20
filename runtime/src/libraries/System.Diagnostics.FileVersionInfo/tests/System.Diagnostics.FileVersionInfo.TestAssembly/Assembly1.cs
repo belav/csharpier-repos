@@ -20,7 +20,6 @@ using System.Reflection;
 // Product
 [assembly: AssemblyProductAttribute("The greatest product EVER")]
 
-
 namespace System.Diagnostics.Tests
 {
     public class Test

@@ -4,7 +4,6 @@ using System.Reflection;
 // this for test_0_missing_attr_on_assembly
 [assembly: MissingAttribute]
 
-
 public sealed class MyAttribute : Attribute
 {
     public Type Type { get; set; }

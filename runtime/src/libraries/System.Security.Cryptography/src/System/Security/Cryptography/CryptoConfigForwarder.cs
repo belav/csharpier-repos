@@ -12,7 +12,6 @@ using System.Reflection;
     Justification = "The cctor caches the RequiresUnreferencedCode call in a delegate, and usage of that delegate is marked with RequiresUnreferencedCode."
 )]
 
-
 namespace System.Security.Cryptography
 {
     internal static class CryptoConfigForwarder

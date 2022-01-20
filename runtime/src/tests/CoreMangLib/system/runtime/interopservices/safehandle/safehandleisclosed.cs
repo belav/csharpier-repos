@@ -6,7 +6,6 @@ using System.Runtime.InteropServices; // For SafeHandle
 
 [assembly: SecurityCritical]
 
-
 /// <summary>
 ///IsClosed
 /// </summary>

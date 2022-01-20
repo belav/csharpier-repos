@@ -10,7 +10,6 @@ using Xunit;
 
 [assembly: DefaultDllImportSearchPaths(DllImportSearchPath.SafeDirectories)]
 
-
 public class CallbackTests
 {
     private static readonly int seed = 123;

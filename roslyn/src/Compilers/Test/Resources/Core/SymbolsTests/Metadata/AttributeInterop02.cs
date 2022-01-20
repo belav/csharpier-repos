@@ -9,7 +9,6 @@ using System.Security;
 
 [module: UnverifiableCodeAttribute()]
 
-
 namespace EventNS
 {
     /// <summary>

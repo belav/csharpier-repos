@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
     typeof(Microsoft.AspNetCore.AzureAppServices.HostingStartup.AzureAppServicesHostingStartup)
 )]
 
-
 namespace Microsoft.AspNetCore.AzureAppServices.HostingStartup;
 
 /// <summary>

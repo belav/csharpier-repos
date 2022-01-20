@@ -15,7 +15,6 @@ using Roslyn.Utilities;
 
 [assembly: TypeForwardedTo(typeof(ServiceBase))]
 
-
 namespace Microsoft.CodeAnalysis.Remote
 {
     // Used by Razor: https://github.com/aspnet/AspNetCore-Tooling/blob/main/src/Razor/src/Microsoft.CodeAnalysis.Remote.Razor/RazorServiceBase.cs

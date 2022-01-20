@@ -19,7 +19,6 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(true)] // not embed
 [assembly: TypeLibVersion(1, 0)] // not embed
 
-
 namespace Interop
 {
     [ComImport, Guid("ABCDEF5D-2448-447A-B786-64682CBEF123")]

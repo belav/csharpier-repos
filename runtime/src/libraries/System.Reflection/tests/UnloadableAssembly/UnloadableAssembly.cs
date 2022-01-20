@@ -6,5 +6,4 @@ using System.Runtime.CompilerServices;
 
 [assembly: ReferenceAssembly]
 
-
 public static class TypeInUnloadableAssembly { }

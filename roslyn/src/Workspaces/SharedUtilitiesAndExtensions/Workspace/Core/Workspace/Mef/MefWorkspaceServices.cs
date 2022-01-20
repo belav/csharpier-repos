@@ -18,7 +18,6 @@ using Microsoft.CodeAnalysis.Host.Mef;
     Target = typeof(ImmutableArray<Lazy<IWorkspaceService, WorkspaceServiceMetadata>>)
 )]
 
-
 namespace Microsoft.CodeAnalysis.Host.Mef
 {
     internal sealed class MefWorkspaceServices : HostWorkspaceServices

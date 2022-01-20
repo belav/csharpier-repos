@@ -5,7 +5,6 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyVersion("0.0.0.0")]
 
-
 public class server2
 {
     public int trivial()

@@ -12,7 +12,6 @@ using Assembly = System.Reflection.Tests;
     Assembly.MyAttribute_AllowMultiple("multiple2")
 ]
 
-
 namespace System.Reflection.Tests
 {
     public class GetCustomAttributes_Assembly

@@ -9,7 +9,6 @@ using System.Text;
 
 [assembly: MyAttr()]
 
-
 namespace CSharpProject
 {
     /// <summary>

@@ -11,7 +11,6 @@ using Assembly = System.Reflection.Tests;
     Assembly.MyAttribute_AllowMultiple_P("multiple2")
 ]
 
-
 namespace System.Reflection.Tests
 {
     public class GetCustomAttributes_ParameterInfo

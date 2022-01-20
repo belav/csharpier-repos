@@ -17,14 +17,11 @@ using System.Runtime.CompilerServices;
 [assembly: MultiAttribute<bool>()]
 [assembly: MultiAttribute<bool>(true)]
 
-
 [AttributeUsage(
     AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Property,
     AllowMultiple = false
 )]
-public class SingleAttribute<T> : Attribute
-{
-}
+public class SingleAttribute<T> : Attribute { }
 
 [AttributeUsage(
     AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Property,

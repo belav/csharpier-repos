@@ -20,6 +20,4 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace TestSite;
 
-public partial class Startup
-{
-}
+public partial class Startup { }

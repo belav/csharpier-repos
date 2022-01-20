@@ -9,7 +9,6 @@ using Xunit;
 // Implementation is not robust with respect to concurrently writing and reading log
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
-
 namespace System.Diagnostics.Tests
 {
     internal class Helpers

@@ -15,7 +15,6 @@ using Microsoft.AspNetCore.Components.HotReload;
     typeof(Microsoft.AspNetCore.Components.Forms.EditContextDataAnnotationsExtensions)
 )]
 
-
 namespace Microsoft.AspNetCore.Components.Forms;
 
 /// <summary>

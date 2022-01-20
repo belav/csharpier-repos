@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 [assembly: System.Reflection.AssemblyVersion("1.2.3.4")]
 [assembly: System.Reflection.AssemblyCulture("")]
 
-
 namespace AppCS
 {
     public class App
