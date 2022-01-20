@@ -20,10 +20,7 @@ public class ObjectResultTests
         // Arrange
         var result = new ObjectResult(value: null, 411);
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -38,10 +35,7 @@ public class ObjectResultTests
         // Arrange
         var result = new ObjectResult("Hello", 407);
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -59,10 +53,7 @@ public class ObjectResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -83,10 +74,7 @@ public class ObjectResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -112,10 +100,7 @@ public class ObjectResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -137,10 +122,7 @@ public class ObjectResultTests
         var details = new HttpValidationProblemDetails();
 
         var result = new ObjectResult(details, StatusCodes.Status422UnprocessableEntity);
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -157,10 +139,7 @@ public class ObjectResultTests
 
         var result = new ObjectResult(details);
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -179,10 +158,7 @@ public class ObjectResultTests
 
         var result = new BadRequestObjectResult(details);
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);

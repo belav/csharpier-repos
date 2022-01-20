@@ -72,20 +72,22 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             // collect the properties into a global section
             foreach (var prop in PropertyItems)
             {
-                builder.Append("build_property.")
-                       .Append(prop.ItemSpec)
-                       .Append(" = ")
-                       .AppendLine(prop.GetMetadata("Value"));
+                builder
+                    .Append("build_property.")
+                    .Append(prop.ItemSpec)
+                    .Append(" = ")
+                    .AppendLine(prop.GetMetadata("Value"));
             }
 
             // group the metadata items by their full path
-            var groupedItems = MetadataItems.GroupBy(i => NormalizeWithForwardSlash(i.GetMetadata("FullPath")));
+            var groupedItems = MetadataItems.GroupBy(
+                i => NormalizeWithForwardSlash(i.GetMetadata("FullPath"))
+            );
 
             foreach (var group in groupedItems)
             {
                 // write the section for this item
-                builder.AppendLine()
-                       .Append("[");
+                builder.AppendLine().Append("[");
                 EncodeString(builder, group.Key);
                 builder.AppendLine("]");
 
@@ -93,14 +95,18 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 {
                     string itemType = item.GetMetadata("ItemType");
                     string metadataName = item.GetMetadata("MetadataName");
-                    if (!string.IsNullOrWhiteSpace(itemType) && !string.IsNullOrWhiteSpace(metadataName))
+                    if (
+                        !string.IsNullOrWhiteSpace(itemType)
+                        && !string.IsNullOrWhiteSpace(metadataName)
+                    )
                     {
-                        builder.Append("build_metadata.")
-                               .Append(itemType)
-                               .Append(".")
-                               .Append(metadataName)
-                               .Append(" = ")
-                               .AppendLine(item.GetMetadata(metadataName));
+                        builder
+                            .Append("build_metadata.")
+                            .Append(itemType)
+                            .Append(".")
+                            .Append(metadataName)
+                            .Append(" = ")
+                            .AppendLine(item.GetMetadata(metadataName));
                     }
                 }
             }
@@ -122,7 +128,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         return true;
                     }
                 }
-                var encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+                var encoding = new UTF8Encoding(
+                    encoderShouldEmitUTF8Identifier: false,
+                    throwOnInvalidBytes: true
+                );
                 File.WriteAllText(targetFileName, ConfigFileContents, encoding);
                 return true;
             }
@@ -158,7 +167,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// Equivalent to Roslyn.Utilities.PathUtilities.NormalizeWithForwardSlash
         /// Both methods should be kept in sync.
         /// </remarks>
-        private static string NormalizeWithForwardSlash(string p)
-            => PlatformInformation.IsUnix ? p : p.Replace('\\', '/');
+        private static string NormalizeWithForwardSlash(string p) =>
+            PlatformInformation.IsUnix ? p : p.Replace('\\', '/');
     }
 }

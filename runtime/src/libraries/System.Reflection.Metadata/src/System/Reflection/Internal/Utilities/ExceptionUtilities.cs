@@ -9,7 +9,9 @@ namespace System.Reflection.Internal
         {
             if (value?.GetType().FullName != null)
             {
-                return new InvalidOperationException(SR.Format(SR.UnexpectedValue, value, value.GetType().FullName));
+                return new InvalidOperationException(
+                    SR.Format(SR.UnexpectedValue, value, value.GetType().FullName)
+                );
             }
 
             return new InvalidOperationException(SR.Format(SR.UnexpectedValueUnknownType, value));

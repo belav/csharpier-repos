@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -21,10 +21,8 @@ public class WebAssemblyICUShardingTest : ServerTestBase<ToggleExecutionModeServ
     public WebAssemblyICUShardingTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    ) : base(browserFixture, serverFixture, output) { }
 
     [Fact]
     public void LoadingApp_FrenchLanguage_Works()
@@ -109,10 +107,13 @@ public class WebAssemblyICUShardingTest : ServerTestBase<ToggleExecutionModeServ
         var errorUi = Browser.Exists(By.Id("blazor-error-ui"));
         Browser.Equal("block", () => errorUi.GetCssValue("display"));
 
-        var expected = "Blazor detected a change in the application's culture that is not supported with the current project configuration.";
+        var expected =
+            "Blazor detected a change in the application's culture that is not supported with the current project configuration.";
         var logs = Browser.GetBrowserLogs(LogLevel.Severe).Select(l => l.Message);
-        Assert.True(logs.Any(l => l.Contains(expected)),
-            $"Expected to see globalization error message in the browser logs: {string.Join(Environment.NewLine, logs)}.");
+        Assert.True(
+            logs.Any(l => l.Contains(expected)),
+            $"Expected to see globalization error message in the browser logs: {string.Join(Environment.NewLine, logs)}."
+        );
     }
 
     private void Initialize(CultureInfo culture)

@@ -29,14 +29,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 if (_lazyType is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyType, _underlying.TypeWithAnnotations.GetPublicSymbol(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyType,
+                        _underlying.TypeWithAnnotations.GetPublicSymbol(),
+                        null
+                    );
                 }
 
                 return _lazyType;
             }
         }
 
-        CodeAnalysis.NullableAnnotation IParameterSymbol.NullableAnnotation => _underlying.TypeWithAnnotations.ToPublicAnnotation();
+        CodeAnalysis.NullableAnnotation IParameterSymbol.NullableAnnotation =>
+            _underlying.TypeWithAnnotations.ToPublicAnnotation();
 
         ImmutableArray<CustomModifier> IParameterSymbol.CustomModifiers
         {
@@ -50,10 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         IParameterSymbol IParameterSymbol.OriginalDefinition
         {
-            get
-            {
-                return _underlying.OriginalDefinition.GetPublicSymbol();
-            }
+            get { return _underlying.OriginalDefinition.GetPublicSymbol(); }
         }
 
         RefKind IParameterSymbol.RefKind => _underlying.RefKind;

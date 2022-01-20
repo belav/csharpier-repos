@@ -6,6 +6,7 @@ using System.Reflection.Metadata;
 
 [assembly: MetadataUpdateHandler(typeof(RuntimeTypeMetadataUpdateHandler))]
 
+
 namespace System.Reflection.Metadata
 {
     /// <summary>Metadata update handler used to clear a Type's reflection cache in response to a metadata update notification.</summary>
@@ -13,7 +14,11 @@ namespace System.Reflection.Metadata
     {
         /// <summary>Clear type caches in response to an update notification.</summary>
         /// <param name="types">The specific types to be cleared, or null to clear everything.</param>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "Clearing the caches on a Type isn't affected if a Type is trimmed, or has any of its members trimmed.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Clearing the caches on a Type isn't affected if a Type is trimmed, or has any of its members trimmed."
+        )]
         public static void ClearCache(Type[]? types)
         {
             if (RequiresClearingAllTypes(types))

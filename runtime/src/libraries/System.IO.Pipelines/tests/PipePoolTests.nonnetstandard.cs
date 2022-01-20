@@ -25,11 +25,12 @@ namespace System.IO.Pipelines.Tests
             Assert.Equal(10, result.Buffer.Length);
 
             SequenceMarshal.TryGetReadOnlySequenceSegment(
-               result.Buffer,
-               out ReadOnlySequenceSegment<byte> start,
-               out int startIndex,
-               out ReadOnlySequenceSegment<byte> end,
-               out int endIndex);
+                result.Buffer,
+                out ReadOnlySequenceSegment<byte> start,
+                out int startIndex,
+                out ReadOnlySequenceSegment<byte> end,
+                out int endIndex
+            );
 
             var startSegment = (BufferSegment)start;
             var endSegment = (BufferSegment)end;
@@ -59,11 +60,12 @@ namespace System.IO.Pipelines.Tests
                 Assert.Equal(5 * 1024, result.Buffer.Length);
 
                 SequenceMarshal.TryGetReadOnlySequenceSegment(
-                   result.Buffer,
-                   out ReadOnlySequenceSegment<byte> start,
-                   out int startIndex,
-                   out ReadOnlySequenceSegment<byte> end,
-                   out int endIndex);
+                    result.Buffer,
+                    out ReadOnlySequenceSegment<byte> start,
+                    out int startIndex,
+                    out ReadOnlySequenceSegment<byte> end,
+                    out int endIndex
+                );
 
                 var startSegment = (BufferSegment)start;
                 var endSegment = (BufferSegment)end;
@@ -98,11 +100,12 @@ namespace System.IO.Pipelines.Tests
                 Assert.Equal(pool.MaxBufferSize, result.Buffer.Length);
 
                 SequenceMarshal.TryGetReadOnlySequenceSegment(
-                   result.Buffer,
-                   out ReadOnlySequenceSegment<byte> start,
-                   out int startIndex,
-                   out ReadOnlySequenceSegment<byte> end,
-                   out int endIndex);
+                    result.Buffer,
+                    out ReadOnlySequenceSegment<byte> start,
+                    out int startIndex,
+                    out ReadOnlySequenceSegment<byte> end,
+                    out int endIndex
+                );
 
                 var startSegment = (BufferSegment)start;
                 var endSegment = (BufferSegment)end;
@@ -125,7 +128,9 @@ namespace System.IO.Pipelines.Tests
         {
             using (var pool = new DisposeTrackingBufferPool())
             {
-                var pipe = new Pipe(new PipeOptions(pool: pool, minimumSegmentSize: pool.MaxBufferSize));
+                var pipe = new Pipe(
+                    new PipeOptions(pool: pool, minimumSegmentSize: pool.MaxBufferSize)
+                );
 
                 var buffer = new byte[pool.MaxBufferSize * 2 + 1];
                 await pipe.Writer.WriteAsync(buffer);

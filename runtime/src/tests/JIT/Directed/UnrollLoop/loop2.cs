@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal class A
 {
     public virtual int f0(int i)
@@ -26,6 +27,7 @@ internal unsafe class B : A
     {
         return f1(ref i);
     }
+
     public static int F1downBy1ge(int amount)
     {
         int i;
@@ -33,7 +35,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 4; i >= 1; i -= 1)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -45,7 +49,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i != 1; i -= 2)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -57,7 +63,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i <= 4; i += 1)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -69,7 +77,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i < 4; i += 1)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -81,7 +91,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i > 2; i -= 1)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -93,7 +105,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i <= 5; i += 2)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -105,7 +119,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i >= 1; i -= 2)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -117,7 +133,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i < 5; i += 2)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -129,7 +147,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 10; i > 2; i -= 2)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -141,7 +161,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i != 4; i += 1)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -153,7 +175,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i != 2; i -= 1)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -165,7 +189,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i != 5; i += 2)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -177,7 +203,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i != 8; i += 3)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
         return sum + i;
     }
@@ -189,7 +217,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 8; i != 1; i -= 3)
         {
-            Object c = new Object(); c = amount; sum += Convert.ToInt32(c);
+            Object c = new Object();
+            c = amount;
+            sum += Convert.ToInt32(c);
         }
 
         return sum + i;
@@ -202,7 +232,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 4; i >= 1; i -= 1)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
         return sum + i;
     }
@@ -214,7 +246,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i != 1; i -= 2)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
         return sum + i;
     }
@@ -226,7 +260,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i <= 4; i += 1)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
         return sum + i;
     }
@@ -238,7 +274,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i < 4; i += 1)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
         return sum + i;
     }
@@ -250,7 +288,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i > 2; i -= 1)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
         return sum + i;
     }
@@ -262,7 +302,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i <= 5; i += 2)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
         return sum + i;
     }
@@ -274,7 +316,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i >= 1; i -= 2)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
         return sum + i;
     }
@@ -286,7 +330,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i < 5; i += 2)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
         return sum + i;
     }
@@ -298,7 +344,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 10; i > 2; i -= 2)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
         return sum + i;
     }
@@ -310,7 +358,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i != 4; i += 1)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
         return sum + i;
     }
@@ -322,7 +372,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i != 2; i -= 1)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
         return sum + i;
     }
@@ -334,7 +386,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i != 5; i += 2)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
         return sum + i;
     }
@@ -346,7 +400,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i != 8; i += 3)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
 
         return sum + i;
@@ -359,7 +415,9 @@ internal unsafe class B : A
         B b = new B();
         for (i = 8; i != 1; i -= 3)
         {
-            int* n = stackalloc int[1]; *n = amount; sum += amount;
+            int* n = stackalloc int[1];
+            *n = amount;
+            sum += amount;
         }
 
         return sum + i;
@@ -596,7 +654,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 4; i >= 1; i -= 1)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -608,7 +667,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i != 1; i -= 2)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -620,7 +680,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i <= 4; i += 1)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -632,7 +693,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i < 4; i += 1)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -644,7 +706,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i > 2; i -= 1)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -656,7 +719,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i <= 5; i += 2)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -668,7 +732,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i >= 1; i -= 2)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -680,7 +745,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i < 5; i += 2)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -692,7 +758,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 10; i > 2; i -= 2)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -704,7 +771,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i != 4; i += 1)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -716,7 +784,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i != 2; i -= 1)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -728,7 +797,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i != 5; i += 2)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -740,7 +810,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i != 8; i += 3)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -752,7 +823,8 @@ internal unsafe class B : A
         B b = new B();
         for (i = 8; i != 1; i -= 3)
         {
-            TypedReference _ref = __makeref(sum); __refvalue(_ref, int) += amount;
+            TypedReference _ref = __makeref(sum);
+            __refvalue(_ref, int) += amount;
         }
         return sum + i;
     }
@@ -764,7 +836,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 4; i >= 1; i -= 1)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
         return sum + i;
     }
@@ -776,7 +852,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i != 1; i -= 2)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
         return sum + i;
     }
@@ -788,7 +868,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i <= 4; i += 1)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
         return sum + i;
     }
@@ -800,7 +884,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i < 4; i += 1)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
         return sum + i;
     }
@@ -812,7 +900,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i > 2; i -= 1)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
         return sum + i;
     }
@@ -824,7 +916,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i <= 5; i += 2)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
         return sum + i;
     }
@@ -836,7 +932,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i >= 1; i -= 2)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
         return sum + i;
     }
@@ -848,7 +948,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i < 5; i += 2)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
         return sum + i;
     }
@@ -860,7 +964,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 10; i > 2; i -= 2)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
         return sum + i;
     }
@@ -872,7 +980,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i != 4; i += 1)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
         return sum + i;
     }
@@ -884,7 +996,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 5; i != 2; i -= 1)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
         return sum + i;
     }
@@ -896,7 +1012,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i != 5; i += 2)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
         return sum + i;
     }
@@ -908,7 +1028,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 1; i != 8; i += 3)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
 
         return sum + i;
@@ -921,7 +1045,11 @@ internal unsafe class B : A
         B b = new B();
         for (i = 8; i != 1; i -= 3)
         {
-            try { sum += amount; } catch { }
+            try
+            {
+                sum += amount;
+            }
+            catch { }
         }
 
         return sum + i;
@@ -1300,4 +1428,3 @@ internal unsafe class B : A
         }
     }
 }
-

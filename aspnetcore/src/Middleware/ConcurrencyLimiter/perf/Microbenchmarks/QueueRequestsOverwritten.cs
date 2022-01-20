@@ -26,13 +26,15 @@ public class QueueRequestsOverwritten
             maxConcurrentRequests: 1,
             requestQueueLimit: 20,
             next: WaitForever,
-            onRejected: IncrementRejections);
+            onRejected: IncrementRejections
+        );
 
         _middlewareStack = TestUtils.CreateTestMiddleware_StackPolicy(
             maxConcurrentRequests: 1,
             requestQueueLimit: 20,
             next: WaitForever,
-            onRejected: IncrementRejections);
+            onRejected: IncrementRejections
+        );
     }
 
     [IterationSetup]

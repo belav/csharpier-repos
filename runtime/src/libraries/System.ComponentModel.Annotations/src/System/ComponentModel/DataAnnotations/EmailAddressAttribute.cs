@@ -3,12 +3,13 @@
 
 namespace System.ComponentModel.DataAnnotations
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public sealed class EmailAddressAttribute : DataTypeAttribute
     {
-        public EmailAddressAttribute()
-            : base(DataType.EmailAddress)
+        public EmailAddressAttribute() : base(DataType.EmailAddress)
         {
             // Set DefaultErrorMessage not ErrorMessage, allowing user to set
             // ErrorMessageResourceType and ErrorMessageResourceName to use localized messages.
@@ -31,10 +32,9 @@ namespace System.ComponentModel.DataAnnotations
             // and it is neither the first nor the last character
             int index = valueAsString.IndexOf('@');
 
-            return
-                index > 0 &&
-                index != valueAsString.Length - 1 &&
-                index == valueAsString.LastIndexOf('@');
+            return index > 0
+                && index != valueAsString.Length - 1
+                && index == valueAsString.LastIndexOf('@');
         }
     }
 }

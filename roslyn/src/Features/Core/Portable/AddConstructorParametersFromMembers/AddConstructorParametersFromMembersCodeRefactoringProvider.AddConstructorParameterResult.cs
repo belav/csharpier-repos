@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
             public AddConstructorParameterResult(
                 ImmutableArray<AddConstructorParametersCodeAction> requiredParameterActions,
                 ImmutableArray<AddConstructorParametersCodeAction> optionalParameterActions,
-                bool useSubMenu)
+                bool useSubMenu
+            )
             {
                 RequiredParameterActions = requiredParameterActions;
                 OptionalParameterActions = optionalParameterActions;

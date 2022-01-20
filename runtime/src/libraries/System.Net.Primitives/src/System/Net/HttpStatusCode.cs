@@ -22,7 +22,6 @@ namespace System.Net
         PartialContent = 206,
         MultiStatus = 207,
         AlreadyReported = 208,
-
         IMUsed = 226,
 
         // Redirection 3xx
@@ -69,14 +68,10 @@ namespace System.Net
         UnprocessableEntity = 422,
         Locked = 423,
         FailedDependency = 424,
-
         UpgradeRequired = 426,
-
         PreconditionRequired = 428,
         TooManyRequests = 429,
-
         RequestHeaderFieldsTooLarge = 431,
-
         UnavailableForLegalReasons = 451,
 
         // Server Error 5xx
@@ -89,7 +84,6 @@ namespace System.Net
         VariantAlsoNegotiates = 506,
         InsufficientStorage = 507,
         LoopDetected = 508,
-
         NotExtended = 510,
         NetworkAuthenticationRequired = 511
     }

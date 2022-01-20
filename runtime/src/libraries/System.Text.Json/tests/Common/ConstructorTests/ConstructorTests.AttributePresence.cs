@@ -13,7 +13,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             async Task RunTestAsync<T>()
             {
-                NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(() => JsonSerializerWrapperForString.DeserializeWrapper<T>("{}"));
+                NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
+                    () => JsonSerializerWrapperForString.DeserializeWrapper<T>("{}")
+                );
                 Assert.Contains("JsonConstructorAttribute", ex.ToString());
             }
 
@@ -31,8 +33,14 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task SinglePublicParameterizedCtor_SingleParameterlessCtor_NoAttribute_Supported_UseParameterlessCtor()
         {
-            var obj1 = await JsonSerializerWrapperForString.DeserializeWrapper<SinglePublicParameterizedCtor>(@"{""MyInt"":1,""MyString"":""1""}");
-            Assert.Equal(@"{""MyInt"":0,""MyString"":null}", await JsonSerializerWrapperForString.SerializeWrapper(obj1));
+            var obj1 =
+                await JsonSerializerWrapperForString.DeserializeWrapper<SinglePublicParameterizedCtor>(
+                    @"{""MyInt"":1,""MyString"":""1""}"
+                );
+            Assert.Equal(
+                @"{""MyInt"":0,""MyString"":null}",
+                await JsonSerializerWrapperForString.SerializeWrapper(obj1)
+            );
         }
 
         [Fact]
@@ -40,8 +48,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             async Task RunTestAsync<T>()
             {
-                var obj1 = await JsonSerializerWrapperForString.DeserializeWrapper<T>(@"{""MyInt"":1,""MyString"":""1""}");
-                Assert.Equal(@"{""MyInt"":0,""MyString"":null}", await JsonSerializerWrapperForString.SerializeWrapper(obj1));
+                var obj1 = await JsonSerializerWrapperForString.DeserializeWrapper<T>(
+                    @"{""MyInt"":1,""MyString"":""1""}"
+                );
+                Assert.Equal(
+                    @"{""MyInt"":0,""MyString"":null}",
+                    await JsonSerializerWrapperForString.SerializeWrapper(obj1)
+                );
             }
 
             await RunTestAsync<SingleParameterlessCtor_MultiplePublicParameterizedCtor>();
@@ -53,8 +66,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             async Task RunTestAsync<T>()
             {
-                var obj1 = await JsonSerializerWrapperForString.DeserializeWrapper<T>(@"{""MyInt"":1}");
-                Assert.Equal(@"{""MyInt"":1}", await JsonSerializerWrapperForString.SerializeWrapper(obj1));
+                var obj1 = await JsonSerializerWrapperForString.DeserializeWrapper<T>(
+                    @"{""MyInt"":1}"
+                );
+                Assert.Equal(
+                    @"{""MyInt"":1}",
+                    await JsonSerializerWrapperForString.SerializeWrapper(obj1)
+                );
             }
 
             await RunTestAsync<PublicParameterizedCtor>();
@@ -66,8 +84,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             async Task RunTestAsync<T>()
             {
-                var obj1 = await JsonSerializerWrapperForString.DeserializeWrapper<T>(@"{""MyInt"":1}");
-                Assert.Equal(@"{""MyInt"":1}", await JsonSerializerWrapperForString.SerializeWrapper(obj1));
+                var obj1 = await JsonSerializerWrapperForString.DeserializeWrapper<T>(
+                    @"{""MyInt"":1}"
+                );
+                Assert.Equal(
+                    @"{""MyInt"":1}",
+                    await JsonSerializerWrapperForString.SerializeWrapper(obj1)
+                );
             }
 
             await RunTestAsync<PublicParameterizedCtor_WithAttribute>();
@@ -78,39 +101,68 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public Task Class_MultiplePublicParameterizedCtors_NoPublicParameterlessCtor_NoAttribute_NotSupported()
         {
-            return Assert.ThrowsAsync<NotSupportedException>(() => JsonSerializerWrapperForString.DeserializeWrapper<MultiplePublicParameterizedCtor>(@"{""MyInt"":1,""MyString"":""1""}"));
+            return Assert.ThrowsAsync<NotSupportedException>(
+                () =>
+                    JsonSerializerWrapperForString.DeserializeWrapper<MultiplePublicParameterizedCtor>(
+                        @"{""MyInt"":1,""MyString"":""1""}"
+                    )
+            );
         }
 
         [Fact]
         public async Task Struct_MultiplePublicParameterizedCtors_NoPublicParameterlessCtor_NoAttribute_Supported_UseParameterlessCtor()
         {
-            var obj = await JsonSerializerWrapperForString.DeserializeWrapper<MultiplePublicParameterizedCtor_Struct>(@"{""myInt"":1,""myString"":""1""}");
+            var obj =
+                await JsonSerializerWrapperForString.DeserializeWrapper<MultiplePublicParameterizedCtor_Struct>(
+                    @"{""myInt"":1,""myString"":""1""}"
+                );
             Assert.Equal(0, obj.MyInt);
             Assert.Null(obj.MyString);
-            Assert.Equal(@"{""MyInt"":0,""MyString"":null}", await JsonSerializerWrapperForString.SerializeWrapper(obj));
+            Assert.Equal(
+                @"{""MyInt"":0,""MyString"":null}",
+                await JsonSerializerWrapperForString.SerializeWrapper(obj)
+            );
         }
 
         [Fact]
         public async Task NoPublicParameterlessCtor_MultiplePublicParameterizedCtors_WithAttribute_Supported()
         {
-            var obj1 = await JsonSerializerWrapperForString.DeserializeWrapper<MultiplePublicParameterizedCtor_WithAttribute>(@"{""MyInt"":1,""MyString"":""1""}");
+            var obj1 =
+                await JsonSerializerWrapperForString.DeserializeWrapper<MultiplePublicParameterizedCtor_WithAttribute>(
+                    @"{""MyInt"":1,""MyString"":""1""}"
+                );
             Assert.Equal(1, obj1.MyInt);
             Assert.Null(obj1.MyString);
-            Assert.Equal(@"{""MyInt"":1,""MyString"":null}", await JsonSerializerWrapperForString.SerializeWrapper(obj1));
+            Assert.Equal(
+                @"{""MyInt"":1,""MyString"":null}",
+                await JsonSerializerWrapperForString.SerializeWrapper(obj1)
+            );
 
-            var obj2 = await JsonSerializerWrapperForString.DeserializeWrapper<MultiplePublicParameterizedCtor_WithAttribute_Struct>(@"{""MyInt"":1,""MyString"":""1""}");
+            var obj2 =
+                await JsonSerializerWrapperForString.DeserializeWrapper<MultiplePublicParameterizedCtor_WithAttribute_Struct>(
+                    @"{""MyInt"":1,""MyString"":""1""}"
+                );
             Assert.Equal(1, obj2.MyInt);
             Assert.Equal("1", obj2.MyString);
-            Assert.Equal(@"{""MyInt"":1,""MyString"":""1""}", await JsonSerializerWrapperForString.SerializeWrapper(obj2));
+            Assert.Equal(
+                @"{""MyInt"":1,""MyString"":""1""}",
+                await JsonSerializerWrapperForString.SerializeWrapper(obj2)
+            );
         }
 
         [Fact]
         public async Task PublicParameterlessCtor_MultiplePublicParameterizedCtors_WithAttribute_Supported()
         {
-            var obj = await JsonSerializerWrapperForString.DeserializeWrapper<ParameterlessCtor_MultiplePublicParameterizedCtor_WithAttribute>(@"{""MyInt"":1,""MyString"":""1""}");
+            var obj =
+                await JsonSerializerWrapperForString.DeserializeWrapper<ParameterlessCtor_MultiplePublicParameterizedCtor_WithAttribute>(
+                    @"{""MyInt"":1,""MyString"":""1""}"
+                );
             Assert.Equal(1, obj.MyInt);
             Assert.Null(obj.MyString);
-            Assert.Equal(@"{""MyInt"":1,""MyString"":null}", await JsonSerializerWrapperForString.SerializeWrapper(obj));
+            Assert.Equal(
+                @"{""MyInt"":1,""MyString"":null}",
+                await JsonSerializerWrapperForString.SerializeWrapper(obj)
+            );
         }
 
 #if !BUILDING_SOURCE_GENERATOR_TESTS // These are compile-time warnings from the source generator.
@@ -119,7 +171,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             async Task RunTestAsync<T>()
             {
-                await Assert.ThrowsAsync<InvalidOperationException>(() => JsonSerializerWrapperForString.DeserializeWrapper<T>("{}"));
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => JsonSerializerWrapperForString.DeserializeWrapper<T>("{}")
+                );
             }
 
             await RunTestAsync<MultiplePublicParameterizedCtor_WithMultipleAttributes>();
@@ -139,7 +193,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             async Task RunTestAsync<T>()
             {
-                await Assert.ThrowsAsync<NotSupportedException>(() => JsonSerializerWrapperForString.DeserializeWrapper<T>("[]"));
+                await Assert.ThrowsAsync<NotSupportedException>(
+                    () => JsonSerializerWrapperForString.DeserializeWrapper<T>("[]")
+                );
             }
 
             await RunTestAsync<Parameterized_StackWrapper>();
@@ -152,11 +208,16 @@ namespace System.Text.Json.Serialization.Tests
             string json = @"{""X"":1,""Y"":2}";
 
             // By default, serializer uses default ctor to deserializer structs
-            var point1 = await JsonSerializerWrapperForString.DeserializeWrapper<Point_2D_Struct>(json);
+            var point1 = await JsonSerializerWrapperForString.DeserializeWrapper<Point_2D_Struct>(
+                json
+            );
             Assert.Equal(0, point1.X);
             Assert.Equal(0, point1.Y);
 
-            var point2 = await JsonSerializerWrapperForString.DeserializeWrapper<Point_2D_Struct_WithAttribute>(json);
+            var point2 =
+                await JsonSerializerWrapperForString.DeserializeWrapper<Point_2D_Struct_WithAttribute>(
+                    json
+                );
             Assert.Equal(1, point2.X);
             Assert.Equal(2, point2.Y);
         }

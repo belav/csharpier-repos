@@ -7,11 +7,15 @@ namespace System.Configuration
     {
         internal const bool EnabledDefaultValue = false;
 
-        private readonly ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
+        private readonly ConfigurationPropertyCollection _properties =
+            new ConfigurationPropertyCollection();
 
-        private readonly ConfigurationProperty _enabled =
-            new ConfigurationProperty(CommonConfigurationStrings.Enabled, typeof(bool), EnabledDefaultValue,
-                ConfigurationPropertyOptions.None);
+        private readonly ConfigurationProperty _enabled = new ConfigurationProperty(
+            CommonConfigurationStrings.Enabled,
+            typeof(bool),
+            EnabledDefaultValue,
+            ConfigurationPropertyOptions.None
+        );
 
         public IriParsingElement()
         {
@@ -20,13 +24,13 @@ namespace System.Configuration
 
         protected internal override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return _properties;
-            }
+            get { return _properties; }
         }
 
-        [ConfigurationProperty(CommonConfigurationStrings.Enabled, DefaultValue = EnabledDefaultValue)]
+        [ConfigurationProperty(
+            CommonConfigurationStrings.Enabled,
+            DefaultValue = EnabledDefaultValue
+        )]
         public bool Enabled
         {
             get { return (bool)this[_enabled]; }

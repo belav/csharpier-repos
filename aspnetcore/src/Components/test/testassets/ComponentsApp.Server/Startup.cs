@@ -15,10 +15,12 @@ public class Startup
     {
         services.AddMvc();
         services.AddSingleton<CircuitHandler, LoggingCircuitHandler>();
-        services.AddServerSideBlazor(options =>
-        {
-            options.DetailedErrors = true;
-        });
+        services.AddServerSideBlazor(
+            options =>
+            {
+                options.DetailedErrors = true;
+            }
+        );
 
         services.AddSingleton<WeatherForecastService, DefaultWeatherForecastService>();
     }
@@ -34,12 +36,14 @@ public class Startup
 
         app.UseRouting();
 
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapRazorPages();
-            endpoints.MapControllers();
-            endpoints.MapBlazorHub();
-            endpoints.MapFallbackToPage("/_Host");
-        });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
+            }
+        );
     }
 }

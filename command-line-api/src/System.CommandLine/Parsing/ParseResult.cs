@@ -29,7 +29,8 @@ namespace System.CommandLine.Parsing
             IReadOnlyList<Token> unparsedTokens,
             IReadOnlyList<Token> unmatchedTokens,
             List<ParseError>? errors = null,
-            string? rawInput = null)
+            string? rawInput = null
+        )
         {
             Parser = parser;
             _rootCommandResult = rootCommandResult;
@@ -58,16 +59,27 @@ namespace System.CommandLine.Parsing
 
             RawInput = rawInput;
 
-            _errors = errors ?? (parser.Configuration.RootCommand.TreatUnmatchedTokensAsErrors
-                                     ? new List<ParseError>(unmatchedTokens.Count)
-                                     : new List<ParseError>());
+            _errors =
+                errors
+                ?? (
+                    parser.Configuration.RootCommand.TreatUnmatchedTokensAsErrors
+                        ? new List<ParseError>(unmatchedTokens.Count)
+                        : new List<ParseError>()
+                );
 
             if (parser.Configuration.RootCommand.TreatUnmatchedTokensAsErrors)
             {
                 for (var i = 0; i < unmatchedTokens.Count; i++)
                 {
                     var token = unmatchedTokens[i];
-                    _errors.Add(new ParseError(parser.Configuration.LocalizationResources.UnrecognizedCommandOrArgument(token.Value), rootCommandResult));
+                    _errors.Add(
+                        new ParseError(
+                            parser.Configuration.LocalizationResources.UnrecognizedCommandOrArgument(
+                                token.Value
+                            ),
+                            rootCommandResult
+                        )
+                    );
                 }
             }
         }
@@ -112,13 +124,15 @@ namespace System.CommandLine.Parsing
         /// <summary>
         /// Gets the list of tokens used on the command line that were not matched by the parser.
         /// </summary>
-        public IReadOnlyList<string> UnmatchedTokens => _unmatchedTokens.Select(t => t.Value).ToArray();
+        public IReadOnlyList<string> UnmatchedTokens =>
+            _unmatchedTokens.Select(t => t.Value).ToArray();
 
         /// <summary>
         /// Gets the list of tokens used on the command line that were ignored by the parser.
         /// </summary>
         /// <remarks>This list will contain all of the tokens following the first occurrence of a <c>--</c> token if <see cref="CommandLineConfiguration.EnableLegacyDoubleDashBehavior"/> is set to <see langword="true"/>.</remarks>
-        public IReadOnlyList<string> UnparsedTokens => _unparsedTokens.Select(t => t.Value).ToArray();
+        public IReadOnlyList<string> UnparsedTokens =>
+            _unparsedTokens.Select(t => t.Value).ToArray();
 
         [return: MaybeNull]
         internal T GetValueFor<T>(IValueDescriptor<T> symbol) =>
@@ -131,33 +145,33 @@ namespace System.CommandLine.Parsing
 
         /// <inheritdoc cref="GetValueForOption"/>
         [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForOption<T>(Option<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        public object? ValueForOption(string alias) =>
-            ValueForOption<object?>(alias);
+            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForOption<T>(Option<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127"
+        )]
+        public object? ValueForOption(string alias) => ValueForOption<object?>(alias);
 
         /// <inheritdoc cref="GetValueForOption"/>
         [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForOption<T>(IOption) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        public object? ValueForOption(Option option) =>
-            GetValueForOption<object?>(option);
+            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForOption<T>(IOption) instead. For details see https://github.com/dotnet/command-line-api/issues/1127"
+        )]
+        public object? ValueForOption(Option option) => GetValueForOption<object?>(option);
 
         /// <summary>
         /// Gets the parsed or default value for the specified option.
         /// </summary>
         /// <param name="option">The option for which to get a value.</param>
         /// <returns>The parsed value or a configured default.</returns>
-        public object? GetValueForOption(Option option) =>
-            GetValueForOption<object?>(option);
+        public object? GetValueForOption(Option option) => GetValueForOption<object?>(option);
 
         /// <inheritdoc cref="GetValueForArgument"/>
         [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(Argument<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        public object? ValueForArgument(string alias) =>
-            ValueForArgument<object?>(alias);
+            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(Argument<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127"
+        )]
+        public object? ValueForArgument(string alias) => ValueForArgument<object?>(alias);
 
         /// <inheritdoc cref="GetValueForArgument"/>
         [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(Argument) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
+            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(Argument) instead. For details see https://github.com/dotnet/command-line-api/issues/1127"
+        )]
         public object? ValueForArgument(Argument argument) =>
             GetValueForArgument<object?>(argument);
 
@@ -171,17 +185,16 @@ namespace System.CommandLine.Parsing
 
         /// <inheritdoc cref="GetValueForArgument"/>
         [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(Argument<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
+            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(Argument<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127"
+        )]
         [return: MaybeNull]
-        public T ValueForArgument<T>(Argument<T> argument) =>
-            GetValueForArgument(argument);
+        public T ValueForArgument<T>(Argument<T> argument) => GetValueForArgument(argument);
 
         /// <inheritdoc cref="GetValueForArgument"/>
         [return: MaybeNull]
         public T GetValueForArgument<T>(Argument<T> argument)
         {
-            if (FindResultFor(argument) is { } result &&
-                result.GetValueOrDefault<T>() is { } t)
+            if (FindResultFor(argument) is { } result && result.GetValueOrDefault<T>() is { } t)
             {
                 return t;
             }
@@ -191,17 +204,16 @@ namespace System.CommandLine.Parsing
 
         /// <inheritdoc cref="GetValueForArgument"/>
         [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(IArgument) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
+            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(IArgument) instead. For details see https://github.com/dotnet/command-line-api/issues/1127"
+        )]
         [return: MaybeNull]
-        internal T ValueForArgument<T>(Argument argument) =>
-            GetValueForArgument<T>(argument);
+        internal T ValueForArgument<T>(Argument argument) => GetValueForArgument<T>(argument);
 
         /// <inheritdoc cref="GetValueForArgument"/>
         [return: MaybeNull]
         public T GetValueForArgument<T>(IArgument argument)
         {
-            if (FindResultFor(argument) is { } result &&
-                result.GetValueOrDefault<T>() is { } t)
+            if (FindResultFor(argument) is { } result && result.GetValueOrDefault<T>() is { } t)
             {
                 return t;
             }
@@ -212,7 +224,8 @@ namespace System.CommandLine.Parsing
         /// <inheritdoc cref="GetValueForArgument"/>
         [return: MaybeNull]
         [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(Option<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
+            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(Option<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127"
+        )]
         public T ValueForArgument<T>(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -232,17 +245,16 @@ namespace System.CommandLine.Parsing
 
         /// <inheritdoc cref="GetValueForOption"/>
         [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForOption<T>(Option<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
+            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForOption<T>(Option<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127"
+        )]
         [return: MaybeNull]
-        public T ValueForOption<T>(Option<T> option) =>
-            GetValueForOption(option);
+        public T ValueForOption<T>(Option<T> option) => GetValueForOption(option);
 
         /// <inheritdoc cref="GetValueForOption"/>
         [return: MaybeNull]
         public T GetValueForOption<T>(Option<T> option)
         {
-            if (FindResultFor(option) is { } result &&
-                result.GetValueOrDefault<T>() is { } t)
+            if (FindResultFor(option) is { } result && result.GetValueOrDefault<T>() is { } t)
             {
                 return t;
             }
@@ -267,7 +279,8 @@ namespace System.CommandLine.Parsing
 
         /// <inheritdoc cref="GetValueForOption"/>
         [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForOption<T>(Option<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
+            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForOption<T>(Option<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127"
+        )]
         [return: MaybeNull]
         public T ValueForOption<T>(string alias)
         {

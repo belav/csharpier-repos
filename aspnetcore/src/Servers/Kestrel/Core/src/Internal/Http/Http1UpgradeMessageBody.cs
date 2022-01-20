@@ -73,7 +73,9 @@ internal sealed class Http1UpgradeMessageBody : Http1MessageBody
         return true;
     }
 
-    public override ValueTask<ReadResult> ReadAsyncInternal(CancellationToken cancellationToken = default)
+    public override ValueTask<ReadResult> ReadAsyncInternal(
+        CancellationToken cancellationToken = default
+    )
     {
         ReadResult readResult;
 
@@ -94,7 +96,10 @@ internal sealed class Http1UpgradeMessageBody : Http1MessageBody
     }
 
     [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<>))]
-    private async ValueTask<ReadResult> ReadAsyncInternalAwaited(ValueTask<ReadResult> readTask, CancellationToken cancellationToken = default)
+    private async ValueTask<ReadResult> ReadAsyncInternalAwaited(
+        ValueTask<ReadResult> readTask,
+        CancellationToken cancellationToken = default
+    )
     {
         var readResult = await readTask;
 

@@ -10,13 +10,15 @@ namespace System.Drawing.Internal
         public Interop.Ole32.IStream Clone()
         {
             // The cloned object should have the same current "position"
-            return new GPStream(_dataStream)
-            {
-                _virtualPosition = _virtualPosition
-            };
+            return new GPStream(_dataStream) { _virtualPosition = _virtualPosition };
         }
 
-        public unsafe void CopyTo(Interop.Ole32.IStream pstm, ulong cb, ulong* pcbRead, ulong* pcbWritten)
+        public unsafe void CopyTo(
+            Interop.Ole32.IStream pstm,
+            ulong cb,
+            ulong* pcbRead,
+            ulong* pcbWritten
+        )
         {
             byte[] buffer = ArrayPool<byte>.Shared.Rent(4096);
 
@@ -28,7 +30,8 @@ namespace System.Drawing.Internal
             {
                 while (remaining > 0)
                 {
-                    uint read = remaining < (ulong)buffer.Length ? (uint)remaining : (uint)buffer.Length;
+                    uint read =
+                        remaining < (ulong)buffer.Length ? (uint)remaining : (uint)buffer.Length;
                     Read(b, read, &read);
                     remaining -= read;
                     totalRead += read;

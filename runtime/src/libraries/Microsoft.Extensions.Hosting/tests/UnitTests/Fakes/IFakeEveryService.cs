@@ -3,10 +3,7 @@
 
 namespace Microsoft.Extensions.Hosting.Fakes
 {
-    interface IFakeEveryService :
-            IFakeScopedService,
-            IFakeServiceInstance,
-            IFakeSingletonService
+    interface IFakeEveryService : IFakeScopedService, IFakeServiceInstance, IFakeSingletonService
     {
     }
 }

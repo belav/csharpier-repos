@@ -30,14 +30,17 @@ public class StaticFileMiddlewareTests : LoggedTest
     public async Task ReturnsNotFoundWithoutWwwroot()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .ConfigureServices(services => services.AddSingleton(LoggerFactory))
-                .UseKestrel()
-                .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
-                .Configure(app => app.UseStaticFiles());
-            }).Build();
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .ConfigureServices(services => services.AddSingleton(LoggerFactory))
+                        .UseKestrel()
+                        .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
+                        .Configure(app => app.UseStaticFiles());
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -53,36 +56,56 @@ public class StaticFileMiddlewareTests : LoggedTest
     public async Task Endpoint_PassesThrough()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .ConfigureServices(services => { services.AddSingleton(LoggerFactory); services.AddRouting(); })
-                .UseKestrel()
-                .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
-                .UseWebRoot(AppContext.BaseDirectory)
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                        // Routing first => static files noops
-                        app.UseRouting();
+                    webHostBuilder
+                        .ConfigureServices(
+                            services =>
+                            {
+                                services.AddSingleton(LoggerFactory);
+                                services.AddRouting();
+                            }
+                        )
+                        .UseKestrel()
+                        .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
+                        .UseWebRoot(AppContext.BaseDirectory)
+                        .Configure(
+                            app =>
+                            {
+                                // Routing first => static files noops
+                                app.UseRouting();
 
-                    app.Use(next => context =>
-                    {
-                            // Assign an endpoint, this will make the default files noop.
-                            context.SetEndpoint(new Endpoint((c) =>
-                        {
-                            return context.Response.WriteAsync("Hi from endpoint.");
-                        },
-                        new EndpointMetadataCollection(),
-                        "test"));
+                                app.Use(
+                                    next =>
+                                        context =>
+                                        {
+                                            // Assign an endpoint, this will make the default files noop.
+                                            context.SetEndpoint(
+                                                new Endpoint(
+                                                    (c) =>
+                                                    {
+                                                        return context.Response.WriteAsync(
+                                                            "Hi from endpoint."
+                                                        );
+                                                    },
+                                                    new EndpointMetadataCollection(),
+                                                    "test"
+                                                )
+                                            );
 
-                        return next(context);
-                    });
+                                            return next(context);
+                                        }
+                                );
 
-                    app.UseStaticFiles();
+                                app.UseStaticFiles();
 
-                    app.UseEndpoints(endpoints => { });
-                });
-            }).Build();
+                                app.UseEndpoints(endpoints => { });
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -99,24 +122,37 @@ public class StaticFileMiddlewareTests : LoggedTest
     public async Task FoundFile_LastModifiedTrimsSeconds()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .ConfigureServices(services => services.AddSingleton(LoggerFactory))
-                .UseKestrel()
-                .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
-                .UseWebRoot(AppContext.BaseDirectory)
-                .Configure(app => app.UseStaticFiles());
-            }).Build();
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .ConfigureServices(services => services.AddSingleton(LoggerFactory))
+                        .UseKestrel()
+                        .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
+                        .UseWebRoot(AppContext.BaseDirectory)
+                        .Configure(app => app.UseStaticFiles());
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         using (var client = new HttpClient { BaseAddress = new Uri(Helpers.GetAddress(host)) })
         {
-            var last = File.GetLastWriteTimeUtc(Path.Combine(AppContext.BaseDirectory, "TestDocument.txt"));
+            var last = File.GetLastWriteTimeUtc(
+                Path.Combine(AppContext.BaseDirectory, "TestDocument.txt")
+            );
             var response = await client.GetAsync("TestDocument.txt");
 
-            var trimmed = new DateTimeOffset(last.Year, last.Month, last.Day, last.Hour, last.Minute, last.Second, TimeSpan.Zero).ToUniversalTime();
+            var trimmed = new DateTimeOffset(
+                last.Year,
+                last.Month,
+                last.Day,
+                last.Hour,
+                last.Minute,
+                last.Second,
+                TimeSpan.Zero
+            ).ToUniversalTime();
 
             Assert.Equal(response.Content.Headers.LastModified.Value, trimmed);
         }
@@ -144,18 +180,23 @@ public class StaticFileMiddlewareTests : LoggedTest
     private async Task FoundFile_Served(string baseUrl, string baseDir, string requestUrl)
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .ConfigureServices(services => services.AddSingleton(LoggerFactory))
-                .UseKestrel()
-                .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
-                .UseWebRoot(Path.Combine(AppContext.BaseDirectory, baseDir))
-                .Configure(app => app.UseStaticFiles(new StaticFileOptions
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    RequestPath = new PathString(baseUrl),
-                }));
-            }).Build();
+                    webHostBuilder
+                        .ConfigureServices(services => services.AddSingleton(LoggerFactory))
+                        .UseKestrel()
+                        .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
+                        .UseWebRoot(Path.Combine(AppContext.BaseDirectory, baseDir))
+                        .Configure(
+                            app =>
+                                app.UseStaticFiles(
+                                    new StaticFileOptions { RequestPath = new PathString(baseUrl), }
+                                )
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -163,7 +204,9 @@ public class StaticFileMiddlewareTests : LoggedTest
 
         using (var client = new HttpClient { BaseAddress = new Uri(Helpers.GetAddress(host)) })
         {
-            var fileInfo = hostingEnvironment.WebRootFileProvider.GetFileInfo(Path.GetFileName(requestUrl));
+            var fileInfo = hostingEnvironment.WebRootFileProvider.GetFileInfo(
+                Path.GetFileName(requestUrl)
+            );
             var response = await client.GetAsync(requestUrl);
             var responseContent = await response.Content.ReadAsByteArrayAsync();
 
@@ -183,21 +226,30 @@ public class StaticFileMiddlewareTests : LoggedTest
 
     [Theory]
     [MemberData(nameof(ExistingFiles))]
-    public async Task HeadFile_HeadersButNotBodyServed(string baseUrl, string baseDir, string requestUrl)
+    public async Task HeadFile_HeadersButNotBodyServed(
+        string baseUrl,
+        string baseDir,
+        string requestUrl
+    )
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .ConfigureServices(services => services.AddSingleton(LoggerFactory))
-                .UseKestrel()
-                .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
-                .UseWebRoot(Path.Combine(AppContext.BaseDirectory, baseDir))
-                .Configure(app => app.UseStaticFiles(new StaticFileOptions
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    RequestPath = new PathString(baseUrl),
-                }));
-            }).Build();
+                    webHostBuilder
+                        .ConfigureServices(services => services.AddSingleton(LoggerFactory))
+                        .UseKestrel()
+                        .UseUrls(TestUrlHelper.GetTestUrl(ServerType.Kestrel))
+                        .UseWebRoot(Path.Combine(AppContext.BaseDirectory, baseDir))
+                        .Configure(
+                            app =>
+                                app.UseStaticFiles(
+                                    new StaticFileOptions { RequestPath = new PathString(baseUrl), }
+                                )
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -205,7 +257,9 @@ public class StaticFileMiddlewareTests : LoggedTest
 
         using (var client = new HttpClient { BaseAddress = new Uri(Helpers.GetAddress(host)) })
         {
-            var fileInfo = hostingEnvironment.WebRootFileProvider.GetFileInfo(Path.GetFileName(requestUrl));
+            var fileInfo = hostingEnvironment.WebRootFileProvider.GetFileInfo(
+                Path.GetFileName(requestUrl)
+            );
             var request = new HttpRequestMessage(HttpMethod.Head, requestUrl);
             var response = await client.SendAsync(request);
 
@@ -216,14 +270,15 @@ public class StaticFileMiddlewareTests : LoggedTest
         }
     }
 
-    public static IEnumerable<object[]> ExistingFiles => new[]
-    {
-            new[] {"", @".", "/TestDocument.txt"},
-            new[] {"/somedir", @".", "/somedir/TestDocument.txt"},
-            new[] {"/SomeDir", @".", "/soMediR/TestDocument.txt"},
-            new[] {"", @"SubFolder", "/ranges.txt"},
-            new[] {"/somedir", @"SubFolder", "/somedir/ranges.txt"},
-            new[] {"", @"SubFolder", "/Empty.txt"}
+    public static IEnumerable<object[]> ExistingFiles =>
+        new[]
+        {
+            new[] { "", @".", "/TestDocument.txt" },
+            new[] { "/somedir", @".", "/somedir/TestDocument.txt" },
+            new[] { "/SomeDir", @".", "/soMediR/TestDocument.txt" },
+            new[] { "", @"SubFolder", "/ranges.txt" },
+            new[] { "/somedir", @"SubFolder", "/somedir/ranges.txt" },
+            new[] { "", @"SubFolder", "/Empty.txt" }
         };
 
     [Fact]
@@ -243,46 +298,62 @@ public class StaticFileMiddlewareTests : LoggedTest
     private async Task ClientDisconnect_NoWriteExceptionThrown(ServerType serverType)
     {
         var interval = TimeSpan.FromSeconds(15);
-        var requestReceived = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var requestCancelled = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var responseComplete = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestReceived = new TaskCompletionSource<int>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var requestCancelled = new TaskCompletionSource<int>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var responseComplete = new TaskCompletionSource<int>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         Exception exception = null;
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .ConfigureServices(services => services.AddSingleton(LoggerFactory))
-                .UseWebRoot(Path.Combine(AppContext.BaseDirectory))
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.Use(async (context, next) =>
-                    {
-                        try
-                        {
-                            requestReceived.SetResult(0);
-                            await requestCancelled.Task.TimeoutAfter(interval);
-                            Assert.True(context.RequestAborted.WaitHandle.WaitOne(interval), "not aborted");
-                            await next(context);
-                        }
-                        catch (Exception ex)
-                        {
-                            exception = ex;
-                        }
-                        responseComplete.SetResult(0);
-                    });
-                    app.UseStaticFiles();
-                })
-                .UseUrls(TestUrlHelper.GetTestUrl(serverType));
+                    webHostBuilder
+                        .ConfigureServices(services => services.AddSingleton(LoggerFactory))
+                        .UseWebRoot(Path.Combine(AppContext.BaseDirectory))
+                        .Configure(
+                            app =>
+                            {
+                                app.Use(
+                                    async (context, next) =>
+                                    {
+                                        try
+                                        {
+                                            requestReceived.SetResult(0);
+                                            await requestCancelled.Task.TimeoutAfter(interval);
+                                            Assert.True(
+                                                context.RequestAborted.WaitHandle.WaitOne(interval),
+                                                "not aborted"
+                                            );
+                                            await next(context);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            exception = ex;
+                                        }
+                                        responseComplete.SetResult(0);
+                                    }
+                                );
+                                app.UseStaticFiles();
+                            }
+                        )
+                        .UseUrls(TestUrlHelper.GetTestUrl(serverType));
 
-                if (serverType == ServerType.HttpSys)
-                {
-                    webHostBuilder.UseHttpSys();
+                    if (serverType == ServerType.HttpSys)
+                    {
+                        webHostBuilder.UseHttpSys();
+                    }
+                    else if (serverType == ServerType.Kestrel)
+                    {
+                        webHostBuilder.UseKestrel();
+                    }
                 }
-                else if (serverType == ServerType.Kestrel)
-                {
-                    webHostBuilder.UseKestrel();
-                }
-            }).Build();
+            )
+            .Build();
 
         await host.StartAsync();
 

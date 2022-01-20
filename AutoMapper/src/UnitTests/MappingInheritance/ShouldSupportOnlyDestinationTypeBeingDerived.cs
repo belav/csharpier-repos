@@ -10,19 +10,29 @@ namespace AutoMapper.UnitTests.MappingInheritance
         {
             string Value { get; set; }
         }
+
         class TConcrete : TInterface
         {
             public string Value { get; set; }
         }
+
         class TModel
         {
             public string Value { get; set; }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateMap<TModel, TInterface>().As<TConcrete>());
+
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(cfg => cfg.CreateMap<TModel, TInterface>().As<TConcrete>());
+
         [Fact]
-        public void Should_report_missing_map() => new Action(() => Configuration.CompileMappings()).ShouldThrow<InvalidOperationException>().Message.ShouldBe(
-            "Missing map from AutoMapper.UnitTests.MappingInheritance.AsWithMissingMap+TModel to AutoMapper.UnitTests.MappingInheritance.AsWithMissingMap+TConcrete. Create using CreateMap<TModel, TConcrete>.");
+        public void Should_report_missing_map() =>
+            new Action(() => Configuration.CompileMappings())
+                .ShouldThrow<InvalidOperationException>()
+                .Message.ShouldBe(
+                    "Missing map from AutoMapper.UnitTests.MappingInheritance.AsWithMissingMap+TModel to AutoMapper.UnitTests.MappingInheritance.AsWithMissingMap+TConcrete. Create using CreateMap<TModel, TConcrete>."
+                );
     }
+
     public class AsShouldWorkOnlyWithDerivedTypesWithGenerics : AutoMapperSpecBase
     {
         class Source<T>
@@ -37,11 +47,14 @@ namespace AutoMapper.UnitTests.MappingInheritance
         {
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(c =>
-        {
-            c.CreateMap(typeof(Source<>), typeof(Override<>));
-            c.CreateMap(typeof(Source<>), typeof(Destination<>)).As(typeof(Override<>));
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                c =>
+                {
+                    c.CreateMap(typeof(Source<>), typeof(Override<>));
+                    c.CreateMap(typeof(Source<>), typeof(Destination<>)).As(typeof(Override<>));
+                }
+            );
     }
 
     public class AsShouldWorkOnlyWithDerivedTypes
@@ -57,10 +70,19 @@ namespace AutoMapper.UnitTests.MappingInheritance
         [Fact]
         public void Should_detect_unrelated_override()
         {
-            new Action(() => new MapperConfiguration(c => c.CreateMap(typeof(Source), typeof(Destination)).As(typeof(Source)))).ShouldThrowException<ArgumentOutOfRangeException>(ex =>
-            {
-                ex.Message.ShouldStartWith($"{typeof(Source)} is not derived from {typeof(Destination)}.");
-            });
+            new Action(
+                () =>
+                    new MapperConfiguration(
+                        c => c.CreateMap(typeof(Source), typeof(Destination)).As(typeof(Source))
+                    )
+            ).ShouldThrowException<ArgumentOutOfRangeException>(
+                ex =>
+                {
+                    ex.Message.ShouldStartWith(
+                        $"{typeof(Source)} is not derived from {typeof(Destination)}."
+                    );
+                }
+            );
         }
     }
 
@@ -92,27 +114,30 @@ namespace AutoMapper.UnitTests.MappingInheritance
             public CustomerStubDTO Customer { get; set; }
         }
 
-
         [Fact]
         public void Mapper_Should_Allow_Overriding_Of_Destination_Type()
         {
-            var order = new Order() { Customer = new Customer() { Id = 1, Name = "A" } };
-
-            var config = new MapperConfiguration(cfg =>
+            var order = new Order()
             {
-                cfg.CreateMap<Order, OrderDTO>();
-                cfg.CreateMap<Customer, CustomerDTO>();
-                cfg.CreateMap<Customer, CustomerStubDTO>().As<CustomerDTO>();
-            });
+                Customer = new Customer() { Id = 1, Name = "A" }
+            };
+
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Order, OrderDTO>();
+                    cfg.CreateMap<Customer, CustomerDTO>();
+                    cfg.CreateMap<Customer, CustomerStubDTO>().As<CustomerDTO>();
+                }
+            );
             var orderDto = config.CreateMapper().Map<Order, OrderDTO>(order);
 
             var customerDto = (CustomerDTO)orderDto.Customer;
             "A".ShouldBe(customerDto.Name);
             1.ShouldBe(customerDto.Id);
-
         }
-
     }
+
     public class DestinationTypePolymorphismTestNonGeneric
     {
         public class Customer
@@ -141,25 +166,28 @@ namespace AutoMapper.UnitTests.MappingInheritance
             public CustomerStubDTO Customer { get; set; }
         }
 
-
         [Fact]
         public void Mapper_Should_Allow_Overriding_Of_Destination_Type()
         {
-            var order = new Order() { Customer = new Customer() { Id = 1, Name = "A" } };
-            var config = new MapperConfiguration(cfg =>
+            var order = new Order()
             {
-                cfg.CreateMap(typeof(Order), typeof(OrderDTO));
-                cfg.CreateMap(typeof(Customer), typeof(CustomerDTO));
-                cfg.CreateMap(typeof(Customer), typeof(CustomerStubDTO)).As(typeof(CustomerDTO));
-            });
+                Customer = new Customer() { Id = 1, Name = "A" }
+            };
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(Order), typeof(OrderDTO));
+                    cfg.CreateMap(typeof(Customer), typeof(CustomerDTO));
+                    cfg.CreateMap(typeof(Customer), typeof(CustomerStubDTO))
+                        .As(typeof(CustomerDTO));
+                }
+            );
             var orderDto = config.CreateMapper().Map<Order, OrderDTO>(order);
 
             var customerDto = (CustomerDTO)orderDto.Customer;
             "A".ShouldBe(customerDto.Name);
             1.ShouldBe(customerDto.Id);
-
         }
-
     }
 
     public class AsWithGenerics : AutoMapperSpecBase
@@ -184,15 +212,8 @@ namespace AutoMapper.UnitTests.MappingInheritance
 
             object INodeModel.ID
             {
-                get
-                {
-                    return ID;
-                }
-
-                set
-                {
-                    ID = value as T?;
-                }
+                get { return ID; }
+                set { ID = value as T?; }
             }
         }
 
@@ -206,11 +227,15 @@ namespace AutoMapper.UnitTests.MappingInheritance
         {
             get
             {
-                return new MapperConfiguration(cfg => {
-                    cfg.CreateMap(typeof(NodeDto<>), typeof(NodeModel<>));
-                    cfg.CreateMap(typeof(NodeDto<>), typeof(INodeModel<>)).As(typeof(NodeModel<>));
-                    cfg.CreateMap(typeof(INodeModel<>), typeof(NodeModel<>));
-                });
+                return new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap(typeof(NodeDto<>), typeof(NodeModel<>));
+                        cfg.CreateMap(typeof(NodeDto<>), typeof(INodeModel<>))
+                            .As(typeof(NodeModel<>));
+                        cfg.CreateMap(typeof(INodeModel<>), typeof(NodeModel<>));
+                    }
+                );
             }
         }
 

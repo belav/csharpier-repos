@@ -37,8 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
     /// Each of these taggers is nicely asynchronous and properly works within the async
     /// tagging infrastructure. 
     /// </summary>
-    internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag> : AsynchronousTaggerProvider<TTag>
-        where TTag : ITag
+    internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
+        : AsynchronousTaggerProvider<TTag> where TTag : ITag
     {
         private readonly IDiagnosticService _diagnosticService;
 
@@ -49,15 +49,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
         /// diagnostics, we don't know how to map the span of the diagnostic to the current snapshot
         /// we're tagging.
         /// </summary>
-        private static readonly ConditionalWeakTable<object, ITextSnapshot> _diagnosticIdToTextSnapshot =
-            new();
+        private static readonly ConditionalWeakTable<
+            object,
+            ITextSnapshot
+        > _diagnosticIdToTextSnapshot = new();
 
         protected AbstractDiagnosticsTaggerProvider(
             IThreadingContext threadingContext,
             IDiagnosticService diagnosticService,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListener listener)
-            : base(threadingContext, globalOptions, listener)
+            IAsynchronousOperationListener listener
+        ) : base(threadingContext, globalOptions, listener)
         {
             _diagnosticService = diagnosticService;
             _diagnosticService.DiagnosticsUpdated += OnDiagnosticsUpdated;
@@ -82,7 +84,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             // a small risk that between calling .IsOpen the file may then close, which then would
             // cause TryGetText to fail.  However, that's ok.  In that case, if we do need to tag this
             // document, we'll just use the current editor snapshot.  If that's the same, then the tags
-            // will be hte same.  If it is different, we'll eventually hear about the new diagnostics 
+            // will be hte same.  If it is different, we'll eventually hear about the new diagnostics
             // for it and we'll reach our fixed point.
             if (document != null && document.IsOpen())
             {
@@ -99,17 +101,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
         protected override TaggerDelay EventChangeDelay => TaggerDelay.Short;
         protected override TaggerDelay AddedTagNotificationDelay => TaggerDelay.OnIdle;
 
-        protected override ITaggerEventSource CreateEventSource(ITextView textViewOpt, ITextBuffer subjectBuffer)
+        protected override ITaggerEventSource CreateEventSource(
+            ITextView textViewOpt,
+            ITextBuffer subjectBuffer
+        )
         {
             return TaggerEventSources.Compose(
                 TaggerEventSources.OnDocumentActiveContextChanged(subjectBuffer),
                 TaggerEventSources.OnWorkspaceRegistrationChanged(subjectBuffer),
-                TaggerEventSources.OnDiagnosticsChanged(subjectBuffer, _diagnosticService));
+                TaggerEventSources.OnDiagnosticsChanged(subjectBuffer, _diagnosticService)
+            );
         }
 
         protected internal abstract bool IsEnabled { get; }
         protected internal abstract bool IncludeDiagnostic(DiagnosticData data);
-        protected internal abstract ITagSpan<TTag>? CreateTagSpan(Workspace workspace, bool isLiveUpdate, SnapshotSpan span, DiagnosticData data);
+        protected internal abstract ITagSpan<TTag>? CreateTagSpan(
+            Workspace workspace,
+            bool isLiveUpdate,
+            SnapshotSpan span,
+            DiagnosticData data
+        );
 
         /// <summary>
         /// Get the <see cref="DiagnosticDataLocation"/> that should have the tag applied to it.
@@ -117,17 +128,28 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
         /// </summary>
         /// <param name="diagnosticData">the diagnostic containing the location(s).</param>
         /// <returns>an array of locations that should have the tag applied.</returns>
-        protected internal virtual ImmutableArray<DiagnosticDataLocation> GetLocationsToTag(DiagnosticData diagnosticData)
-            => diagnosticData.DataLocation is object ? ImmutableArray.Create(diagnosticData.DataLocation) : ImmutableArray<DiagnosticDataLocation>.Empty;
+        protected internal virtual ImmutableArray<DiagnosticDataLocation> GetLocationsToTag(
+            DiagnosticData diagnosticData
+        ) =>
+            diagnosticData.DataLocation is object
+                ? ImmutableArray.Create(diagnosticData.DataLocation)
+                : ImmutableArray<DiagnosticDataLocation>.Empty;
 
         protected override Task ProduceTagsAsync(
-            TaggerContext<TTag> context, DocumentSnapshotSpan spanToTag, int? caretPosition, CancellationToken cancellationToken)
+            TaggerContext<TTag> context,
+            DocumentSnapshotSpan spanToTag,
+            int? caretPosition,
+            CancellationToken cancellationToken
+        )
         {
             return ProduceTagsAsync(context, spanToTag, cancellationToken);
         }
 
         private async Task ProduceTagsAsync(
-            TaggerContext<TTag> context, DocumentSnapshotSpan spanToTag, CancellationToken cancellationToken)
+            TaggerContext<TTag> context,
+            DocumentSnapshotSpan spanToTag,
+            CancellationToken cancellationToken
+        )
         {
             if (!this.IsEnabled)
             {
@@ -149,33 +171,58 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             // is generating code that it doesn't want errors shown for.
             var buffer = editorSnapshot.TextBuffer;
             var suppressedDiagnosticsSpans = (NormalizedSnapshotSpanCollection?)null;
-            buffer?.Properties.TryGetProperty(PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey, out suppressedDiagnosticsSpans);
+            buffer?.Properties.TryGetProperty(
+                PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
+                out suppressedDiagnosticsSpans
+            );
 
             var buckets = _diagnosticService.GetPushDiagnosticBuckets(
-                workspace, document.Project.Id, document.Id, InternalDiagnosticsOptions.NormalDiagnosticMode, cancellationToken);
+                workspace,
+                document.Project.Id,
+                document.Id,
+                InternalDiagnosticsOptions.NormalDiagnosticMode,
+                cancellationToken
+            );
 
             foreach (var bucket in buckets)
             {
                 await ProduceTagsAsync(
-                    context, spanToTag, workspace, document,
-                    suppressedDiagnosticsSpans, bucket, cancellationToken).ConfigureAwait(false);
+                        context,
+                        spanToTag,
+                        workspace,
+                        document,
+                        suppressedDiagnosticsSpans,
+                        bucket,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
         private async Task ProduceTagsAsync(
-            TaggerContext<TTag> context, DocumentSnapshotSpan spanToTag,
-            Workspace workspace, Document document,
+            TaggerContext<TTag> context,
+            DocumentSnapshotSpan spanToTag,
+            Workspace workspace,
+            Document document,
             NormalizedSnapshotSpanCollection? suppressedDiagnosticsSpans,
-            DiagnosticBucket bucket, CancellationToken cancellationToken)
+            DiagnosticBucket bucket,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 var id = bucket.Id;
-                var diagnostics = await _diagnosticService.GetPushDiagnosticsAsync(
-                    workspace, document.Project.Id, document.Id, id,
-                    includeSuppressedDiagnostics: false,
-                    diagnosticMode: InternalDiagnosticsOptions.NormalDiagnosticMode,
-                    cancellationToken).ConfigureAwait(false);
+                var diagnostics = await _diagnosticService
+                    .GetPushDiagnosticsAsync(
+                        workspace,
+                        document.Project.Id,
+                        document.Id,
+                        id,
+                        includeSuppressedDiagnostics: false,
+                        diagnosticMode: InternalDiagnosticsOptions.NormalDiagnosticMode,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 var isLiveUpdate = id is ISupportLiveUpdate;
 
@@ -194,9 +241,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
                 // Note: when this happens, the diagnostic service will reanalyze the file.  So
                 // up to date diagnostic spans will appear shortly after this.
                 _diagnosticIdToTextSnapshot.TryGetValue(id, out var diagnosticSnapshot);
-                diagnosticSnapshot = diagnosticSnapshot?.TextBuffer == editorSnapshot.TextBuffer
-                    ? diagnosticSnapshot
-                    : editorSnapshot;
+                diagnosticSnapshot =
+                    diagnosticSnapshot?.TextBuffer == editorSnapshot.TextBuffer
+                        ? diagnosticSnapshot
+                        : editorSnapshot;
 
                 var sourceText = diagnosticSnapshot.AsText();
 
@@ -207,7 +255,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
                         // We're going to be retrieving the diagnostics against the last time the engine
                         // computed them against this document *id*.  That might have been a different
                         // version of the document vs what we're looking at now.  But that's ok:
-                        // 
+                        //
                         // 1) GetExistingOrCalculatedTextSpan will ensure that the diagnostics spans are
                         //    contained within 'editorSnapshot'.
                         // 2) We'll eventually hear about an update to the diagnostics for this document
@@ -216,12 +264,28 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
                         //    editorSnapshot.
 
                         var diagnosticSpans = this.GetLocationsToTag(diagnosticData)
-                            .Select(location => GetDiagnosticSnapshotSpan(location, diagnosticSnapshot, editorSnapshot, sourceText));
+                            .Select(
+                                location =>
+                                    GetDiagnosticSnapshotSpan(
+                                        location,
+                                        diagnosticSnapshot,
+                                        editorSnapshot,
+                                        sourceText
+                                    )
+                            );
                         foreach (var diagnosticSpan in diagnosticSpans)
                         {
-                            if (diagnosticSpan.IntersectsWith(requestedSpan) && !IsSuppressed(suppressedDiagnosticsSpans, diagnosticSpan))
+                            if (
+                                diagnosticSpan.IntersectsWith(requestedSpan)
+                                && !IsSuppressed(suppressedDiagnosticsSpans, diagnosticSpan)
+                            )
                             {
-                                var tagSpan = this.CreateTagSpan(workspace, isLiveUpdate, diagnosticSpan, diagnosticData);
+                                var tagSpan = this.CreateTagSpan(
+                                    workspace,
+                                    isLiveUpdate,
+                                    diagnosticSpan,
+                                    diagnosticData
+                                );
                                 if (tagSpan != null)
                                 {
                                     context.AddTag(tagSpan);
@@ -239,16 +303,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
                 return;
             }
 
-            static SnapshotSpan GetDiagnosticSnapshotSpan(DiagnosticDataLocation diagnosticDataLocation, ITextSnapshot diagnosticSnapshot,
-                ITextSnapshot editorSnapshot, SourceText sourceText)
+            static SnapshotSpan GetDiagnosticSnapshotSpan(
+                DiagnosticDataLocation diagnosticDataLocation,
+                ITextSnapshot diagnosticSnapshot,
+                ITextSnapshot editorSnapshot,
+                SourceText sourceText
+            )
             {
-                return DiagnosticData.GetExistingOrCalculatedTextSpan(diagnosticDataLocation, sourceText)
+                return DiagnosticData
+                    .GetExistingOrCalculatedTextSpan(diagnosticDataLocation, sourceText)
                     .ToSnapshotSpan(diagnosticSnapshot)
                     .TranslateTo(editorSnapshot, SpanTrackingMode.EdgeExclusive);
             }
         }
 
-        private static bool IsSuppressed(NormalizedSnapshotSpanCollection? suppressedSpans, SnapshotSpan span)
-            => suppressedSpans != null && suppressedSpans.IntersectsWith(span);
+        private static bool IsSuppressed(
+            NormalizedSnapshotSpanCollection? suppressedSpans,
+            SnapshotSpan span
+        ) => suppressedSpans != null && suppressedSpans.IntersectsWith(span);
     }
 }

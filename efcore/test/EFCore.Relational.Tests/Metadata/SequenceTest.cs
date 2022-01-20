@@ -67,12 +67,30 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             var conventionSequence = (IConventionSequence)sequence;
             Assert.Equal(ConfigurationSource.Explicit, conventionSequence.GetConfigurationSource());
-            Assert.Equal(ConfigurationSource.Explicit, conventionSequence.GetIncrementByConfigurationSource());
-            Assert.Equal(ConfigurationSource.Explicit, conventionSequence.GetStartValueConfigurationSource());
-            Assert.Equal(ConfigurationSource.Explicit, conventionSequence.GetMinValueConfigurationSource());
-            Assert.Equal(ConfigurationSource.Explicit, conventionSequence.GetMaxValueConfigurationSource());
-            Assert.Equal(ConfigurationSource.Explicit, conventionSequence.GetTypeConfigurationSource());
-            Assert.Equal(ConfigurationSource.Explicit, conventionSequence.GetIsCyclicConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                conventionSequence.GetIncrementByConfigurationSource()
+            );
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                conventionSequence.GetStartValueConfigurationSource()
+            );
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                conventionSequence.GetMinValueConfigurationSource()
+            );
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                conventionSequence.GetMaxValueConfigurationSource()
+            );
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                conventionSequence.GetTypeConfigurationSource()
+            );
+            Assert.Equal(
+                ConfigurationSource.Explicit,
+                conventionSequence.GetIsCyclicConfigurationSource()
+            );
         }
 
         [ConditionalFact]
@@ -92,8 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             Assert.Equal(
                 RelationalStrings.BadSequenceType,
-                Assert.Throws<ArgumentException>(
-                    () => sequence.Type = typeof(bool)).Message);
+                Assert.Throws<ArgumentException>(() => sequence.Type = typeof(bool)).Message
+            );
         }
     }
 }

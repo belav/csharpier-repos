@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace OmmitedDTOModel3
-{   
+{
     public class EntityDTO1 : BaseEntity
     {
         public EntityDTO1()
         {
             this.Entities2 = new EntityDTO2();
         }
+
         public Guid Entity17Id { get; set; }
         public EntityDTO17 Entity17 { get; set; }
         public Guid? Entity22Id { get; set; }

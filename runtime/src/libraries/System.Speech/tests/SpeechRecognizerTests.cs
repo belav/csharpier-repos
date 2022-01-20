@@ -17,15 +17,20 @@ using Xunit;
 
 namespace SampleSynthesisTests
 {
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))] // No SAPI on Nano or Server Core
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+    )] // No SAPI on Nano or Server Core
     [SkipOnMono("No SAPI on Mono")]
     public static class SpeechRecognizerTests
     {
         private static bool RecognizerInstalledAndEnabled()
         {
-            if (PlatformDetection.IsMonoRuntime ||
-                PlatformDetection.IsWindowsNanoServer ||
-                PlatformDetection.IsWindowsServerCore)
+            if (
+                PlatformDetection.IsMonoRuntime
+                || PlatformDetection.IsWindowsNanoServer
+                || PlatformDetection.IsWindowsServerCore
+            )
             {
                 return false;
             }
@@ -37,7 +42,8 @@ namespace SampleSynthesisTests
                     _ = recognizer.State; // force initialization
                 }
             }
-            catch (Exception ex) when (ex is PlatformNotSupportedException || ex is InvalidOperationException)
+            catch (Exception ex)
+                when (ex is PlatformNotSupportedException || ex is InvalidOperationException)
             {
                 // PlatformNotSupportedException : No recognizer is installed.
                 // PlatformNotSupportedException : The user has chosen to disable speech from running on the machine, or the system is not set up to run speech.
@@ -69,12 +75,21 @@ namespace SampleSynthesisTests
 
                 var list = new List<string>();
 
-                recognizer.SpeechRecognized += (object sender, SpeechRecognizedEventArgs e) => list.Add("SpeechRecognized");
-                recognizer.SpeechDetected += (object sender, SpeechDetectedEventArgs e) => list.Add("SpeechDetected");
-                recognizer.SpeechHypothesized += (object sender, SpeechHypothesizedEventArgs e) => list.Add("SpeechHypothesized");
-                recognizer.SpeechRecognitionRejected += (object sender, SpeechRecognitionRejectedEventArgs e) => list.Add("SpeechRecognitionRejected");
+                recognizer.SpeechRecognized += (object sender, SpeechRecognizedEventArgs e) =>
+                    list.Add("SpeechRecognized");
+                recognizer.SpeechDetected += (object sender, SpeechDetectedEventArgs e) =>
+                    list.Add("SpeechDetected");
+                recognizer.SpeechHypothesized += (object sender, SpeechHypothesizedEventArgs e) =>
+                    list.Add("SpeechHypothesized");
+                recognizer.SpeechRecognitionRejected += (
+                    object sender,
+                    SpeechRecognitionRejectedEventArgs e
+                ) => list.Add("SpeechRecognitionRejected");
 
-                recognizer.EmulateRecognizeCompleted += (object sender, EmulateRecognizeCompletedEventArgs e) =>
+                recognizer.EmulateRecognizeCompleted += (
+                    object sender,
+                    EmulateRecognizeCompletedEventArgs e
+                ) =>
                 {
                     Assert.Equal(EncodingFormat.Pcm, recognizer.AudioFormat.EncodingFormat);
                     Assert.Equal(new TimeSpan(0, 0, 0), recognizer.AudioPosition);

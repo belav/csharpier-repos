@@ -30,9 +30,7 @@ namespace System.IO.IsolatedStorage
         public void GetCreationTime_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
-            {
-            }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
 
             Assert.Throws<ObjectDisposedException>(() => isf.GetCreationTime("foo"));
         }
@@ -52,12 +50,16 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                AssertExtensions.Throws<ArgumentException>("path", null, () => isf.GetCreationTime("\0bad"));
+                AssertExtensions.Throws<ArgumentException>(
+                    "path",
+                    null,
+                    () => isf.GetCreationTime("\0bad")
+                );
             }
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.FreeBSD | TestPlatforms.Linux | TestPlatforms.NetBSD)]  // Filesystem timestamps vary in granularity
+        [PlatformSpecific(TestPlatforms.FreeBSD | TestPlatforms.Linux | TestPlatforms.NetBSD)] // Filesystem timestamps vary in granularity
         public void GetCreationTime_GetsTime_Unix()
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
@@ -75,9 +77,8 @@ namespace System.IO.IsolatedStorage
             }
         }
 
-
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows | TestPlatforms.OSX)]  // Filesystem timestamps vary in granularity
+        [PlatformSpecific(TestPlatforms.Windows | TestPlatforms.OSX)] // Filesystem timestamps vary in granularity
         public void GetCreationTime_GetsTime_Windows_OSX()
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())

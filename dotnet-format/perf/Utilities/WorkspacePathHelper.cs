@@ -6,7 +6,9 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
 {
     internal static class WorkspacePathHelper
     {
-        internal static (string workspacePath, WorkspaceType workspaceType) GetWorkspaceInfo(string workspaceFilePath)
+        internal static (string workspacePath, WorkspaceType workspaceType) GetWorkspaceInfo(
+            string workspaceFilePath
+        )
         {
             var workspacePath = Path.GetFullPath(workspaceFilePath);
 
@@ -18,8 +20,8 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
             else
             {
                 workspaceType = workspacePath.EndsWith(".sln")
-                    ? WorkspaceType.Solution
-                    : WorkspaceType.Project;
+                  ? WorkspaceType.Solution
+                  : WorkspaceType.Project;
             }
 
             return (workspacePath, workspaceType);

@@ -17,6 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal sealed class SimpleProgramUnitBinder : LocalScopeBinder
     {
         private readonly SimpleProgramBinder _scope;
+
         public SimpleProgramUnitBinder(Binder enclosing, SimpleProgramBinder scope)
             : base(enclosing, enclosing.Flags)
         {
@@ -35,10 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsLocalFunctionsScopeBinder
         {
-            get
-            {
-                return _scope.IsLocalFunctionsScopeBinder;
-            }
+            get { return _scope.IsLocalFunctionsScopeBinder; }
         }
 
         protected override ImmutableArray<LabelSymbol> BuildLabels()
@@ -48,26 +46,24 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsLabelsScopeBinder
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(SyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
+            SyntaxNode scopeDesignator
+        )
         {
             return _scope.GetDeclaredLocalsForScope(scopeDesignator);
         }
 
         internal override SyntaxNode? ScopeDesignator
         {
-            get
-            {
-                return _scope.ScopeDesignator;
-            }
+            get { return _scope.ScopeDesignator; }
         }
 
-        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(CSharpSyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
+            CSharpSyntaxNode scopeDesignator
+        )
         {
             return _scope.GetDeclaredLocalFunctionsForScope(scopeDesignator);
         }

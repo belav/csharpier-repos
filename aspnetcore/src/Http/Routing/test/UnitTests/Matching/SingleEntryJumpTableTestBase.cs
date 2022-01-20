@@ -11,7 +11,8 @@ public abstract class SingleEntryJumpTableTestBase
         int defaultDestination,
         int exitDestination,
         string text,
-        int destination);
+        int destination
+    );
 
     [Fact]
     public void GetDestination_ZeroLengthSegment_JumpsToExit()

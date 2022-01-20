@@ -24,11 +24,7 @@ namespace System.Configuration
         /// </summary>
         public string Description
         {
-            get
-            {
-                return _description;
-            }
+            get { return _description; }
         }
     }
-
 }

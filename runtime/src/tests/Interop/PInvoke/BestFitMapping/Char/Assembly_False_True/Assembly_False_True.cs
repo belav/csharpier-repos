@@ -8,34 +8,35 @@ using TestLibrary;
 
 [assembly: BestFitMapping(false, ThrowOnUnmappableChar = true)]
 
+
 public class BFM_CharMarshaler
 {
     [DllImport("Char_BestFitMappingNative")]
-    public static extern bool Char_In([In]char c);
+    public static extern bool Char_In([In] char c);
 
     [DllImport("Char_BestFitMappingNative")]
-    public static extern bool Char_InByRef([In]ref char c);
+    public static extern bool Char_InByRef([In] ref char c);
 
     [DllImport("Char_BestFitMappingNative")]
-    public static extern bool Char_InOutByRef([In, Out]ref char c);
+    public static extern bool Char_InOutByRef([In, Out] ref char c);
 
     [DllImport("Char_BestFitMappingNative")]
-    public static extern bool CharBuffer_In_String([In]String s);
+    public static extern bool CharBuffer_In_String([In] String s);
 
     [DllImport("Char_BestFitMappingNative")]
-    public static extern bool CharBuffer_InByRef_String([In]ref String s);
+    public static extern bool CharBuffer_InByRef_String([In] ref String s);
 
     [DllImport("Char_BestFitMappingNative")]
-    public static extern bool CharBuffer_InOutByRef_String([In, Out]ref String s);
+    public static extern bool CharBuffer_InOutByRef_String([In, Out] ref String s);
 
     [DllImport("Char_BestFitMappingNative")]
-    public static extern bool CharBuffer_In_StringBuilder([In]StringBuilder s);
+    public static extern bool CharBuffer_In_StringBuilder([In] StringBuilder s);
 
     [DllImport("Char_BestFitMappingNative")]
-    public static extern bool CharBuffer_InByRef_StringBuilder([In]ref StringBuilder s);
+    public static extern bool CharBuffer_InByRef_StringBuilder([In] ref StringBuilder s);
 
     [DllImport("Char_BestFitMappingNative")]
-    public static extern bool CharBuffer_InOutByRef_StringBuilder([In, Out]ref StringBuilder s);
+    public static extern bool CharBuffer_InOutByRef_StringBuilder([In, Out] ref StringBuilder s);
 
     static String GetValidString()
     {
@@ -105,18 +106,27 @@ public class BFM_CharMarshaler
 
     static void testCharBufferString()
     {
-        Assert.Throws<ArgumentException>(() => CharBuffer_In_String(GetInvalidString()), "[Error] Location tcbs1");
+        Assert.Throws<ArgumentException>(
+            () => CharBuffer_In_String(GetInvalidString()),
+            "[Error] Location tcbs1"
+        );
 
         Assert.IsTrue(CharBuffer_In_String(GetValidString()), "[Error] Location tcbs2");
 
         String cTemp = GetInvalidString();
-        Assert.Throws<ArgumentException>(() => CharBuffer_InByRef_String(ref cTemp), "[Error] Location tcbs3");
+        Assert.Throws<ArgumentException>(
+            () => CharBuffer_InByRef_String(ref cTemp),
+            "[Error] Location tcbs3"
+        );
 
         cTemp = GetValidString();
         Assert.IsTrue(CharBuffer_InByRef_String(ref cTemp), "[Error] Location tcbs4");
 
         cTemp = GetInvalidString();
-        Assert.Throws<ArgumentException>(() => CharBuffer_InOutByRef_String(ref cTemp), "[Error] Location tcbs5");
+        Assert.Throws<ArgumentException>(
+            () => CharBuffer_InOutByRef_String(ref cTemp),
+            "[Error] Location tcbs5"
+        );
 
         cTemp = GetValidString();
         String cTempClone = cTemp;
@@ -126,18 +136,30 @@ public class BFM_CharMarshaler
 
     static void testCharBufferStringBuilder()
     {
-        Assert.Throws<ArgumentException>(() => CharBuffer_In_StringBuilder(GetInvalidStringBuilder()), "[Error] Location tcbsb1");
+        Assert.Throws<ArgumentException>(
+            () => CharBuffer_In_StringBuilder(GetInvalidStringBuilder()),
+            "[Error] Location tcbsb1"
+        );
 
-        Assert.IsTrue(CharBuffer_In_StringBuilder(GetValidStringBuilder()), "[Error] Location tcbsb2");
+        Assert.IsTrue(
+            CharBuffer_In_StringBuilder(GetValidStringBuilder()),
+            "[Error] Location tcbsb2"
+        );
 
         StringBuilder cTemp = GetInvalidStringBuilder();
-        Assert.Throws<ArgumentException>(() => CharBuffer_InByRef_StringBuilder(ref cTemp), "[Error] Location tcbsb3");
+        Assert.Throws<ArgumentException>(
+            () => CharBuffer_InByRef_StringBuilder(ref cTemp),
+            "[Error] Location tcbsb3"
+        );
 
         cTemp = GetValidStringBuilder();
         Assert.IsTrue(CharBuffer_InByRef_StringBuilder(ref cTemp), "[Error] Location tcbsb4");
 
         cTemp = GetInvalidStringBuilder();
-        Assert.Throws<ArgumentException>(() => CharBuffer_InOutByRef_StringBuilder(ref cTemp), "[Error] Location tcbsb5");
+        Assert.Throws<ArgumentException>(
+            () => CharBuffer_InOutByRef_StringBuilder(ref cTemp),
+            "[Error] Location tcbsb5"
+        );
 
         cTemp = GetValidStringBuilder();
         StringBuilder cTempClone = cTemp;
@@ -156,7 +178,9 @@ public class BFM_CharMarshaler
     {
         if (System.Globalization.CultureInfo.CurrentCulture.Name != "en-US")
         {
-            Console.WriteLine("Non-US English platforms are not supported.\nPassing without running tests");
+            Console.WriteLine(
+                "Non-US English platforms are not supported.\nPassing without running tests"
+            );
 
             Console.WriteLine("--- Success");
             return 100;
@@ -166,9 +190,11 @@ public class BFM_CharMarshaler
         {
             runTest();
             return 100;
-        } catch (Exception e){
-            Console.WriteLine($"Test Failure: {e}"); 
-            return 101; 
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Test Failure: {e}");
+            return 101;
         }
     }
 }

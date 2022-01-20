@@ -13,8 +13,10 @@ internal class MinLengthAttributeAdapter : AttributeAdapterBase<MinLengthAttribu
 {
     private readonly string _min;
 
-    public MinLengthAttributeAdapter(MinLengthAttribute attribute, IStringLocalizer? stringLocalizer)
-        : base(attribute, stringLocalizer)
+    public MinLengthAttributeAdapter(
+        MinLengthAttribute attribute,
+        IStringLocalizer? stringLocalizer
+    ) : base(attribute, stringLocalizer)
     {
         _min = Attribute.Length.ToString(CultureInfo.InvariantCulture);
     }
@@ -42,6 +44,7 @@ internal class MinLengthAttributeAdapter : AttributeAdapterBase<MinLengthAttribu
         return GetErrorMessage(
             validationContext.ModelMetadata,
             validationContext.ModelMetadata.GetDisplayName(),
-            Attribute.Length);
+            Attribute.Length
+        );
     }
 }

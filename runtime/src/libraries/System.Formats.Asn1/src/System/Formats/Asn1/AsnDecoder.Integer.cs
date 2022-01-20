@@ -50,14 +50,16 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             return GetIntegerContents(
                 source,
                 ruleSet,
                 expectedTag ?? Asn1Tag.Integer,
                 UniversalTagNumber.Integer,
-                out bytesConsumed);
+                out bytesConsumed
+            );
         }
 
         /// <summary>
@@ -100,9 +102,15 @@ namespace System.Formats.Asn1
             ReadOnlySpan<byte> source,
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
-            ReadOnlySpan<byte> contents = ReadIntegerBytes(source, ruleSet, out int consumed, expectedTag);
+            ReadOnlySpan<byte> contents = ReadIntegerBytes(
+                source,
+                ruleSet,
+                out int consumed,
+                expectedTag
+            );
 
             // TODO: Split this for netcoreapp/netstandard to use the Big-Endian BigInteger parsing
             byte[] tmp = CryptoPool.Rent(contents.Length);
@@ -176,16 +184,20 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int value,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
-            if (TryReadSignedInteger(
-                source,
-                ruleSet,
-                sizeof(int),
-                expectedTag ?? Asn1Tag.Integer,
-                UniversalTagNumber.Integer,
-                out long longValue,
-                out bytesConsumed))
+            if (
+                TryReadSignedInteger(
+                    source,
+                    ruleSet,
+                    sizeof(int),
+                    expectedTag ?? Asn1Tag.Integer,
+                    UniversalTagNumber.Integer,
+                    out long longValue,
+                    out bytesConsumed
+                )
+            )
             {
                 value = (int)longValue;
                 return true;
@@ -243,16 +255,20 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out uint value,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
-            if (TryReadUnsignedInteger(
-                source,
-                ruleSet,
-                sizeof(uint),
-                expectedTag ?? Asn1Tag.Integer,
-                UniversalTagNumber.Integer,
-                out ulong ulongValue,
-                out bytesConsumed))
+            if (
+                TryReadUnsignedInteger(
+                    source,
+                    ruleSet,
+                    sizeof(uint),
+                    expectedTag ?? Asn1Tag.Integer,
+                    UniversalTagNumber.Integer,
+                    out ulong ulongValue,
+                    out bytesConsumed
+                )
+            )
             {
                 value = (uint)ulongValue;
                 return true;
@@ -309,7 +325,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out long value,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             return TryReadSignedInteger(
                 source,
@@ -318,7 +335,8 @@ namespace System.Formats.Asn1
                 expectedTag ?? Asn1Tag.Integer,
                 UniversalTagNumber.Integer,
                 out value,
-                out bytesConsumed);
+                out bytesConsumed
+            );
         }
 
         /// <summary>
@@ -369,7 +387,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out ulong value,
             out int bytesConsumed,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             return TryReadUnsignedInteger(
                 source,
@@ -378,7 +397,8 @@ namespace System.Formats.Asn1
                 expectedTag ?? Asn1Tag.Integer,
                 UniversalTagNumber.Integer,
                 out value,
-                out bytesConsumed);
+                out bytesConsumed
+            );
         }
 
         private static ReadOnlySpan<byte> GetIntegerContents(
@@ -386,7 +406,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             Asn1Tag expectedTag,
             UniversalTagNumber tagNumber,
-            out int bytesConsumed)
+            out int bytesConsumed
+        )
         {
             // T-REC-X.690-201508 sec 8.3.1
             ReadOnlySpan<byte> contents = GetPrimitiveContentSpan(
@@ -394,7 +415,8 @@ namespace System.Formats.Asn1
                 ruleSet,
                 expectedTag,
                 tagNumber,
-                out int consumed);
+                out int consumed
+            );
 
             // T-REC-X.690-201508 sec 8.3.1
             if (contents.IsEmpty)
@@ -426,7 +448,8 @@ namespace System.Formats.Asn1
             Asn1Tag expectedTag,
             UniversalTagNumber tagNumber,
             out long value,
-            out int bytesConsumed)
+            out int bytesConsumed
+        )
         {
             Debug.Assert(sizeLimit <= sizeof(long));
 
@@ -435,7 +458,8 @@ namespace System.Formats.Asn1
                 ruleSet,
                 expectedTag,
                 tagNumber,
-                out int consumed);
+                out int consumed
+            );
 
             if (contents.Length > sizeLimit)
             {
@@ -465,7 +489,8 @@ namespace System.Formats.Asn1
             Asn1Tag expectedTag,
             UniversalTagNumber tagNumber,
             out ulong value,
-            out int bytesConsumed)
+            out int bytesConsumed
+        )
         {
             Debug.Assert(sizeLimit <= sizeof(ulong));
 
@@ -474,7 +499,8 @@ namespace System.Formats.Asn1
                 ruleSet,
                 expectedTag,
                 tagNumber,
-                out int consumed);
+                out int consumed
+            );
 
             bool isNegative = (contents[0] & 0x80) != 0;
 
@@ -543,8 +569,12 @@ namespace System.Formats.Asn1
         /// </exception>
         public ReadOnlyMemory<byte> ReadIntegerBytes(Asn1Tag? expectedTag = null)
         {
-            ReadOnlySpan<byte> bytes =
-                AsnDecoder.ReadIntegerBytes(_data.Span, RuleSet, out int consumed, expectedTag);
+            ReadOnlySpan<byte> bytes = AsnDecoder.ReadIntegerBytes(
+                _data.Span,
+                RuleSet,
+                out int consumed,
+                expectedTag
+            );
 
             ReadOnlyMemory<byte> ret = AsnDecoder.Slice(_data, bytes);
 
@@ -580,7 +610,12 @@ namespace System.Formats.Asn1
         /// </exception>
         public BigInteger ReadInteger(Asn1Tag? expectedTag = null)
         {
-            BigInteger ret = AsnDecoder.ReadInteger(_data.Span, RuleSet, out int consumed, expectedTag);
+            BigInteger ret = AsnDecoder.ReadInteger(
+                _data.Span,
+                RuleSet,
+                out int consumed,
+                expectedTag
+            );
             _data = _data.Slice(consumed);
             return ret;
         }
@@ -619,7 +654,13 @@ namespace System.Formats.Asn1
         /// </exception>
         public bool TryReadInt32(out int value, Asn1Tag? expectedTag = null)
         {
-            bool ret = AsnDecoder.TryReadInt32(_data.Span, RuleSet, out value, out int read, expectedTag);
+            bool ret = AsnDecoder.TryReadInt32(
+                _data.Span,
+                RuleSet,
+                out value,
+                out int read,
+                expectedTag
+            );
             _data = _data.Slice(read);
             return ret;
         }
@@ -659,7 +700,13 @@ namespace System.Formats.Asn1
         [CLSCompliant(false)]
         public bool TryReadUInt32(out uint value, Asn1Tag? expectedTag = null)
         {
-            bool ret = AsnDecoder.TryReadUInt32(_data.Span, RuleSet, out value, out int read, expectedTag);
+            bool ret = AsnDecoder.TryReadUInt32(
+                _data.Span,
+                RuleSet,
+                out value,
+                out int read,
+                expectedTag
+            );
             _data = _data.Slice(read);
             return ret;
         }
@@ -698,7 +745,13 @@ namespace System.Formats.Asn1
         /// </exception>
         public bool TryReadInt64(out long value, Asn1Tag? expectedTag = null)
         {
-            bool ret = AsnDecoder.TryReadInt64(_data.Span, RuleSet, out value, out int read, expectedTag);
+            bool ret = AsnDecoder.TryReadInt64(
+                _data.Span,
+                RuleSet,
+                out value,
+                out int read,
+                expectedTag
+            );
             _data = _data.Slice(read);
             return ret;
         }
@@ -738,7 +791,13 @@ namespace System.Formats.Asn1
         [CLSCompliant(false)]
         public bool TryReadUInt64(out ulong value, Asn1Tag? expectedTag = null)
         {
-            bool ret = AsnDecoder.TryReadUInt64(_data.Span, RuleSet, out value, out int read, expectedTag);
+            bool ret = AsnDecoder.TryReadUInt64(
+                _data.Span,
+                RuleSet,
+                out value,
+                out int read,
+                expectedTag
+            );
             _data = _data.Slice(read);
             return ret;
         }

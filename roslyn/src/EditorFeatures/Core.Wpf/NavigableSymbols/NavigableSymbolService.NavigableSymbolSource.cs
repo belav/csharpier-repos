@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                 IThreadingContext threadingContext,
                 IStreamingFindUsagesPresenter streamingPresenter,
                 IUIThreadOperationExecutor uiThreadOperationExecutor,
-                IAsynchronousOperationListenerProvider listenerProvider)
+                IAsynchronousOperationListenerProvider listenerProvider
+            )
             {
                 _threadingContext = threadingContext;
                 _presenter = streamingPresenter;
@@ -43,10 +44,12 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                 _listenerProvider = listenerProvider;
             }
 
-            public void Dispose()
-                => _disposed = true;
+            public void Dispose() => _disposed = true;
 
-            public async Task<INavigableSymbol> GetNavigableSymbolAsync(SnapshotSpan triggerSpan, CancellationToken cancellationToken)
+            public async Task<INavigableSymbol> GetNavigableSymbolAsync(
+                SnapshotSpan triggerSpan,
+                CancellationToken cancellationToken
+            )
             {
                 if (_disposed)
                     return null;
@@ -76,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                     _threadingContext,
                     _presenter,
                     _uiThreadOperationExecutor,
-                    _listenerProvider);
+                    _listenerProvider
+                );
             }
         }
     }

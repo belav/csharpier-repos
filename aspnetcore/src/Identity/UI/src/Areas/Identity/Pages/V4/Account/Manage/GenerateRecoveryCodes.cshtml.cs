@@ -51,7 +51,8 @@ internal class GenerateRecoveryCodesModel<TUser> : GenerateRecoveryCodesModel wh
 
     public GenerateRecoveryCodesModel(
         UserManager<TUser> userManager,
-        ILogger<GenerateRecoveryCodesModel> logger)
+        ILogger<GenerateRecoveryCodesModel> logger
+    )
     {
         _userManager = userManager;
         _logger = logger;
@@ -68,7 +69,9 @@ internal class GenerateRecoveryCodesModel<TUser> : GenerateRecoveryCodesModel wh
         var isTwoFactorEnabled = await _userManager.GetTwoFactorEnabledAsync(user);
         if (!isTwoFactorEnabled)
         {
-            throw new InvalidOperationException($"Cannot generate recovery codes for user because they do not have 2FA enabled.");
+            throw new InvalidOperationException(
+                $"Cannot generate recovery codes for user because they do not have 2FA enabled."
+            );
         }
 
         return Page();
@@ -85,13 +88,18 @@ internal class GenerateRecoveryCodesModel<TUser> : GenerateRecoveryCodesModel wh
         var isTwoFactorEnabled = await _userManager.GetTwoFactorEnabledAsync(user);
         if (!isTwoFactorEnabled)
         {
-            throw new InvalidOperationException("Cannot generate recovery codes for user as they do not have 2FA enabled.");
+            throw new InvalidOperationException(
+                "Cannot generate recovery codes for user as they do not have 2FA enabled."
+            );
         }
 
         var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
         RecoveryCodes = recoveryCodes.ToArray();
 
-        _logger.LogInformation(LoggerEventIds.TwoFARecoveryGenerated, "User has generated new 2FA recovery codes.");
+        _logger.LogInformation(
+            LoggerEventIds.TwoFARecoveryGenerated,
+            "User has generated new 2FA recovery codes."
+        );
         StatusMessage = "You have generated new recovery codes.";
         return RedirectToPage("./ShowRecoveryCodes");
     }

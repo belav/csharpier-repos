@@ -23,7 +23,7 @@ namespace System.Text.RegularExpressions.Tests
             Assert.Equal(1, testClass.Matches(text).Count);
             Assert.Equal(1, testClass.Match(text).Groups[0].Captures.Count);
             Assert.Equal(text, testClass.Match(text).Groups[0].Value);
-            Assert.Equal(new int[] { 0, 1, 2}, testClass.GetGroupNumbers());
+            Assert.Equal(new int[] { 0, 1, 2 }, testClass.GetGroupNumbers());
             Assert.Equal(new string[] { "0", "1", "output" }, testClass.GetGroupNames());
         }
     }
@@ -39,8 +39,8 @@ namespace RegexTestNamespace
             roptions = RegexOptions.IgnoreCase;
             internalMatchTimeout = TimeSpan.FromTicks(-10000L);
             factory = new RegexFactoryTestClass();
-            Caps = new Hashtable {{0, 0}, {1, 1}, {2, 2}};
-            CapNames = new Hashtable {{"0", 0}, {"1", 1}, {"output", 2}};
+            Caps = new Hashtable { { 0, 0 }, { 1, 1 }, { 2, 2 } };
+            CapNames = new Hashtable { { "0", 0 }, { "1", 1 }, { "output", 2 } };
             capslist = new string[3];
             capslist[0] = "0";
             capslist[1] = "1";
@@ -113,7 +113,12 @@ namespace RegexTestNamespace
                     {
                         num++;
                         num4 = 1;
-                        while (RegexRunner.CharInClass(char.ToLower(runtext[num - num4--]), "\0\0\u0001\t"))
+                        while (
+                            RegexRunner.CharInClass(
+                                char.ToLower(runtext[num - num4--]),
+                                "\0\0\u0001\t"
+                            )
+                        )
                         {
                             if (num4 <= 0)
                             {
@@ -121,7 +126,12 @@ namespace RegexTestNamespace
                                 num4 = (num5 = runtextend - num) + 1;
                                 while (--num4 > 0)
                                 {
-                                    if (!RegexRunner.CharInClass(char.ToLower(runtext[num++]), "\0\0\u0001\t"))
+                                    if (
+                                        !RegexRunner.CharInClass(
+                                            char.ToLower(runtext[num++]),
+                                            "\0\0\u0001\t"
+                                        )
+                                    )
                                     {
                                         num--;
                                         break;
@@ -201,7 +211,16 @@ namespace RegexTestNamespace
                 runstack[--num3] = num;
                 runtrack[--num2] = 1;
                 this.CheckTimeout();
-                if (7 > runtextend - num || char.ToLower(runtext[num]) != 's' || char.ToLower(runtext[num + 1]) != 'u' || char.ToLower(runtext[num + 2]) != 'c' || char.ToLower(runtext[num + 3]) != 'c' || char.ToLower(runtext[num + 4]) != 'e' || char.ToLower(runtext[num + 5]) != 's' || char.ToLower(runtext[num + 6]) != 's')
+                if (
+                    7 > runtextend - num
+                    || char.ToLower(runtext[num]) != 's'
+                    || char.ToLower(runtext[num + 1]) != 'u'
+                    || char.ToLower(runtext[num + 2]) != 'c'
+                    || char.ToLower(runtext[num + 3]) != 'c'
+                    || char.ToLower(runtext[num + 4]) != 'e'
+                    || char.ToLower(runtext[num + 5]) != 's'
+                    || char.ToLower(runtext[num + 6]) != 's'
+                )
                 {
                     goto IL_441;
                 }
@@ -272,12 +291,16 @@ namespace RegexTestNamespace
                 do
                 {
                     num2--;
-                    if (RegexRunner.CharInClass(char.ToLower(runtext[num++]), "\0\u0003\u0001\0\n\v\t"))
+                    if (
+                        RegexRunner.CharInClass(
+                            char.ToLower(runtext[num++]),
+                            "\0\u0003\u0001\0\n\v\t"
+                        )
+                    )
                     {
                         goto IL_63;
                     }
-                }
-                while (num2 > 0);
+                } while (num2 > 0);
                 bool arg_74_0 = false;
                 goto IL_6C;
                 IL_63:

@@ -25,28 +25,22 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="storeType">The name of the database type.</param>
         /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
-        public LongTypeMapping(
-            string storeType,
-            DbType? dbType = System.Data.DbType.Int64)
-            : base(storeType, typeof(long), dbType)
-        {
-        }
+        public LongTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Int64)
+            : base(storeType, typeof(long), dbType) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="LongTypeMapping" /> class.
         /// </summary>
         /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-        protected LongTypeMapping(RelationalTypeMappingParameters parameters)
-            : base(parameters)
-        {
-        }
+        protected LongTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
 
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
         /// <param name="parameters">The parameters for this mapping.</param>
         /// <returns>The newly created mapping.</returns>
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new LongTypeMapping(parameters);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new LongTypeMapping(parameters);
     }
 }

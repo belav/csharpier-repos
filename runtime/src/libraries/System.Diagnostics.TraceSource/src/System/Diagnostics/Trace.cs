@@ -14,9 +14,7 @@ namespace System.Diagnostics
     {
         // not creatable...
         //
-        private Trace()
-        {
-        }
+        private Trace() { }
 
         private static CorrelationManager? s_correlationManager;
         public static CorrelationManager CorrelationManager
@@ -37,10 +35,7 @@ namespace System.Diagnostics
         /// </devdoc>
         public static TraceListenerCollection Listeners
         {
-            get
-            {
-                return TraceInternal.Listeners;
-            }
+            get { return TraceInternal.Listeners; }
         }
 
         /// <devdoc>
@@ -50,26 +45,14 @@ namespace System.Diagnostics
         /// </devdoc>
         public static bool AutoFlush
         {
-            get
-            {
-                return TraceInternal.AutoFlush;
-            }
-            set
-            {
-                TraceInternal.AutoFlush = value;
-            }
+            get { return TraceInternal.AutoFlush; }
+            set { TraceInternal.AutoFlush = value; }
         }
 
         public static bool UseGlobalLock
         {
-            get
-            {
-                return TraceInternal.UseGlobalLock;
-            }
-            set
-            {
-                TraceInternal.UseGlobalLock = value;
-            }
+            get { return TraceInternal.UseGlobalLock; }
+            set { TraceInternal.UseGlobalLock = value; }
         }
 
         /// <devdoc>
@@ -78,10 +61,8 @@ namespace System.Diagnostics
         public static int IndentLevel
         {
             get { return TraceInternal.IndentLevel; }
-
             set { TraceInternal.IndentLevel = value; }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -91,7 +72,6 @@ namespace System.Diagnostics
         public static int IndentSize
         {
             get { return TraceInternal.IndentSize; }
-
             set { TraceInternal.IndentSize = value; }
         }
 

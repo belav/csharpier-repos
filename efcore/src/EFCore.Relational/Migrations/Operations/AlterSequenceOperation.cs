@@ -31,7 +31,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
         public virtual SequenceOperation OldSequence { get; set; } = new CreateSequenceOperation();
 
         /// <inheritdoc />
-        IMutableAnnotatable IAlterMigrationOperation.OldAnnotations
-            => OldSequence;
+        IMutableAnnotatable IAlterMigrationOperation.OldAnnotations => OldSequence;
     }
 }

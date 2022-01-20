@@ -22,7 +22,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         CharacterClassRange,
         CharacterClassSubtraction,
         PosixProperty,
-
         ZeroOrMoreQuantifier,
         OneOrMoreQuantifier,
         ZeroOrOneQuantifier,
@@ -30,7 +29,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         OpenRangeNumericQuantifier,
         ClosedRangeNumericQuantifier,
         LazyQuantifier,
-
         SimpleGrouping,
         SimpleOptionsGrouping,
         NestedOptionsGrouping,
@@ -44,7 +42,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         BalancingGrouping,
         ConditionalCaptureGrouping,
         ConditionalExpressionGrouping,
-
         SimpleEscape,
         AnchorEscape,
         CharacterClassEscape,

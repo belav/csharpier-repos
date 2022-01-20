@@ -23,7 +23,9 @@ namespace System.IO
             {
                 case Interop.Errors.ERROR_PATH_NOT_FOUND:
                 case Interop.Errors.ERROR_INVALID_DRIVE:
-                    return new DriveNotFoundException(SR.Format(SR.IO_DriveNotFound_Drive, driveName));
+                    return new DriveNotFoundException(
+                        SR.Format(SR.IO_DriveNotFound_Drive, driveName)
+                    );
 
                 default:
                     return Win32Marshal.GetExceptionForWin32Error(errorCode, driveName);

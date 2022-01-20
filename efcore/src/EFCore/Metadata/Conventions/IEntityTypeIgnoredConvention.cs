@@ -25,6 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionModelBuilder modelBuilder,
             string name,
             Type? type,
-            IConventionContext<string> context);
+            IConventionContext<string> context
+        );
     }
 }

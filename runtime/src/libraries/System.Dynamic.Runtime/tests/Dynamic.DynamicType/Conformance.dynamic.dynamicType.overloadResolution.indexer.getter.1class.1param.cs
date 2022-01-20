@@ -185,8 +185,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.getter.Oneclass.Oneparam.param012.param012
 {
     // <Title>Call methods that have different parameter modifiers with dynamic</Title>
@@ -205,16 +203,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[params int[] x]
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
     }
 
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -240,8 +236,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.indexer.getter.Oneclass.Oneparam.param014.param014
 {
     // <Title>Call methods that have different parameter modifiers with dynamic</Title>
@@ -259,10 +253,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     {
         public int this[params int[] x]
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
     }
 

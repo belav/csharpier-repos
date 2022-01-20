@@ -12,18 +12,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
     internal sealed class FieldSymbolReferenceFinder : AbstractReferenceFinder<IFieldSymbol>
     {
-        protected override bool CanFind(IFieldSymbol symbol)
-            => true;
+        protected override bool CanFind(IFieldSymbol symbol) => true;
 
         protected override Task<ImmutableArray<ISymbol>> DetermineCascadedSymbolsAsync(
             IFieldSymbol symbol,
             Solution solution,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return symbol.AssociatedSymbol != null
-                ? Task.FromResult(ImmutableArray.Create(symbol.AssociatedSymbol))
-                : SpecializedTasks.EmptyImmutableArray<ISymbol>();
+              ? Task.FromResult(ImmutableArray.Create(symbol.AssociatedSymbol))
+              : SpecializedTasks.EmptyImmutableArray<ISymbol>();
         }
 
         protected override async Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
@@ -32,23 +32,50 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var documentsWithName = await FindDocumentsAsync(project, documents, cancellationToken, symbol.Name).ConfigureAwait(false);
-            var documentsWithGlobalAttributes = await FindDocumentsWithGlobalAttributesAsync(project, documents, cancellationToken).ConfigureAwait(false);
+            var documentsWithName = await FindDocumentsAsync(
+                    project,
+                    documents,
+                    cancellationToken,
+                    symbol.Name
+                )
+                .ConfigureAwait(false);
+            var documentsWithGlobalAttributes = await FindDocumentsWithGlobalAttributesAsync(
+                    project,
+                    documents,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return documentsWithName.Concat(documentsWithGlobalAttributes);
         }
 
-        protected override async ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
+        protected override async ValueTask<
+            ImmutableArray<FinderLocation>
+        > FindReferencesInDocumentAsync(
             IFieldSymbol symbol,
             HashSet<string>? globalAliases,
             Document document,
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var nameReferences = await FindReferencesInDocumentUsingSymbolNameAsync(symbol, document, semanticModel, cancellationToken).ConfigureAwait(false);
-            var suppressionReferences = await FindReferencesInDocumentInsideGlobalSuppressionsAsync(document, semanticModel, symbol, cancellationToken).ConfigureAwait(false);
+            var nameReferences = await FindReferencesInDocumentUsingSymbolNameAsync(
+                    symbol,
+                    document,
+                    semanticModel,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var suppressionReferences = await FindReferencesInDocumentInsideGlobalSuppressionsAsync(
+                    document,
+                    semanticModel,
+                    symbol,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return nameReferences.Concat(suppressionReferences);
         }
     }

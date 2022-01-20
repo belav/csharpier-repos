@@ -22,13 +22,23 @@ public class DefaultParameterPolicyFactoryTest
 
         // Act
         var exception = Assert.Throws<InvalidOperationException>(
-            () => factory.Create(RoutePatternFactory.ParameterPart("id", @default: null, RoutePatternParameterKind.Optional), @"notpresent(\d+)"));
+            () =>
+                factory.Create(
+                    RoutePatternFactory.ParameterPart(
+                        "id",
+                        @default: null,
+                        RoutePatternParameterKind.Optional
+                    ),
+                    @"notpresent(\d+)"
+                )
+        );
 
         // Assert
         Assert.Equal(
-            "The constraint reference 'notpresent' could not be resolved to a type. " +
-            $"Register the constraint type with '{typeof(RouteOptions)}.{nameof(RouteOptions.ConstraintMap)}'.",
-            exception.Message);
+            "The constraint reference 'notpresent' could not be resolved to a type. "
+                + $"Register the constraint type with '{typeof(RouteOptions)}.{nameof(RouteOptions.ConstraintMap)}'.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -44,12 +54,14 @@ public class DefaultParameterPolicyFactoryTest
 
         // Act
         var exception = Assert.Throws<RouteCreationException>(
-            () => factory.Create(RoutePatternFactory.ParameterPart("id"), @"bad"));
+            () => factory.Create(RoutePatternFactory.ParameterPart("id"), @"bad")
+        );
 
         // Assert
         Assert.Equal(
             $"The constraint type '{typeof(string)}' which is mapped to constraint key 'bad' must implement the '{nameof(IParameterPolicy)}' interface.",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Fact]
@@ -62,7 +74,8 @@ public class DefaultParameterPolicyFactoryTest
             "id",
             @default: null,
             parameterKind: RoutePatternParameterKind.Standard,
-            parameterPolicies: new[] { RoutePatternFactory.Constraint("int"), });
+            parameterPolicies: new[] { RoutePatternFactory.Constraint("int"), }
+        );
 
         // Act
         var parameterPolicy = factory.Create(parameter, parameter.ParameterPolicies[0]);
@@ -81,7 +94,8 @@ public class DefaultParameterPolicyFactoryTest
             "id",
             @default: null,
             parameterKind: RoutePatternParameterKind.Optional,
-            parameterPolicies: new[] { RoutePatternFactory.Constraint("int"), });
+            parameterPolicies: new[] { RoutePatternFactory.Constraint("int"), }
+        );
 
         // Act
         var parameterPolicy = factory.Create(parameter, parameter.ParameterPolicies[0]);
@@ -101,7 +115,11 @@ public class DefaultParameterPolicyFactoryTest
             "id",
             @default: null,
             parameterKind: RoutePatternParameterKind.Standard,
-            parameterPolicies: new[] { RoutePatternFactory.ParameterPolicy(new IntRouteConstraint()), });
+            parameterPolicies: new[]
+            {
+                RoutePatternFactory.ParameterPolicy(new IntRouteConstraint()),
+            }
+        );
 
         // Act
         var parameterPolicy = factory.Create(parameter, parameter.ParameterPolicies[0]);
@@ -120,7 +138,11 @@ public class DefaultParameterPolicyFactoryTest
             "id",
             @default: null,
             parameterKind: RoutePatternParameterKind.Optional,
-            parameterPolicies: new[] { RoutePatternFactory.ParameterPolicy(new IntRouteConstraint()), });
+            parameterPolicies: new[]
+            {
+                RoutePatternFactory.ParameterPolicy(new IntRouteConstraint()),
+            }
+        );
 
         // Act
         var parameterPolicy = factory.Create(parameter, parameter.ParameterPolicies[0]);
@@ -140,7 +162,11 @@ public class DefaultParameterPolicyFactoryTest
             "id",
             @default: null,
             parameterKind: RoutePatternParameterKind.Standard,
-            parameterPolicies: new[] { RoutePatternFactory.ParameterPolicy(new CustomParameterPolicy()), });
+            parameterPolicies: new[]
+            {
+                RoutePatternFactory.ParameterPolicy(new CustomParameterPolicy()),
+            }
+        );
 
         // Act
         var parameterPolicy = factory.Create(parameter, parameter.ParameterPolicies[0]);
@@ -169,7 +195,10 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory();
 
         // Act
-        var parameterPolicy = factory.Create(RoutePatternFactory.ParameterPart("id"), "range(1,20)");
+        var parameterPolicy = factory.Create(
+            RoutePatternFactory.ParameterPart("id"),
+            "range(1,20)"
+        );
 
         // Assert
         var constraint = Assert.IsType<RangeRouteConstraint>(parameterPolicy);
@@ -184,7 +213,14 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory();
 
         // Act
-        var parameterPolicy = factory.Create(RoutePatternFactory.ParameterPart("id", @default: null, RoutePatternParameterKind.Optional), "int");
+        var parameterPolicy = factory.Create(
+            RoutePatternFactory.ParameterPart(
+                "id",
+                @default: null,
+                RoutePatternParameterKind.Optional
+            ),
+            "int"
+        );
 
         // Assert
         var optionalConstraint = Assert.IsType<OptionalRouteConstraint>(parameterPolicy);
@@ -204,7 +240,14 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory(options, services);
 
         // Act
-        var parameterPolicy = factory.Create(RoutePatternFactory.ParameterPart("id", @default: null, RoutePatternParameterKind.Optional), "customParameterPolicy");
+        var parameterPolicy = factory.Create(
+            RoutePatternFactory.ParameterPart(
+                "id",
+                @default: null,
+                RoutePatternParameterKind.Optional
+            ),
+            "customParameterPolicy"
+        );
 
         // Assert
         Assert.IsType<CustomParameterPolicy>(parameterPolicy);
@@ -215,7 +258,10 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add("customConstraintPolicy", typeof(CustomParameterPolicyWithArguments));
+        options.ConstraintMap.Add(
+            "customConstraintPolicy",
+            typeof(CustomParameterPolicyWithArguments)
+        );
 
         var services = new ServiceCollection();
         services.AddTransient<ITestService, TestService>();
@@ -223,7 +269,10 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory(options, services);
 
         // Act
-        var parameterPolicy = factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(20)");
+        var parameterPolicy = factory.Create(
+            RoutePatternFactory.ParameterPart("id"),
+            "customConstraintPolicy(20)"
+        );
 
         // Assert
         var constraint = Assert.IsType<CustomParameterPolicyWithArguments>(parameterPolicy);
@@ -236,7 +285,10 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add("customConstraintPolicy", typeof(CustomParameterPolicyWithMultipleArguments));
+        options.ConstraintMap.Add(
+            "customConstraintPolicy",
+            typeof(CustomParameterPolicyWithMultipleArguments)
+        );
 
         var services = new ServiceCollection();
         services.AddTransient<ITestService, TestService>();
@@ -244,7 +296,10 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory(options, services);
 
         // Act
-        var parameterPolicy = factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(20,-1)");
+        var parameterPolicy = factory.Create(
+            RoutePatternFactory.ParameterPart("id"),
+            "customConstraintPolicy(20,-1)"
+        );
 
         // Assert
         var constraint = Assert.IsType<CustomParameterPolicyWithMultipleArguments>(parameterPolicy);
@@ -259,7 +314,10 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add("customConstraintPolicy", typeof(CustomParameterPolicyWithOnlyServiceArguments));
+        options.ConstraintMap.Add(
+            "customConstraintPolicy",
+            typeof(CustomParameterPolicyWithOnlyServiceArguments)
+        );
 
         var services = new ServiceCollection();
         services.AddTransient<ITestService, TestService>();
@@ -267,10 +325,15 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory(options, services);
 
         // Act
-        var parameterPolicy = factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy");
+        var parameterPolicy = factory.Create(
+            RoutePatternFactory.ParameterPart("id"),
+            "customConstraintPolicy"
+        );
 
         // Assert
-        var constraint = Assert.IsType<CustomParameterPolicyWithOnlyServiceArguments>(parameterPolicy);
+        var constraint = Assert.IsType<CustomParameterPolicyWithOnlyServiceArguments>(
+            parameterPolicy
+        );
         Assert.NotNull(constraint.TestService1);
         Assert.NotNull(constraint.TestService2);
     }
@@ -280,7 +343,10 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add("customConstraintPolicy", typeof(CustomParameterPolicyWithMultpleCtors));
+        options.ConstraintMap.Add(
+            "customConstraintPolicy",
+            typeof(CustomParameterPolicyWithMultpleCtors)
+        );
 
         var services = new ServiceCollection();
         services.AddTransient<ITestService, TestService>();
@@ -288,7 +354,10 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory(options, services);
 
         // Act
-        var parameterPolicy = factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(1)");
+        var parameterPolicy = factory.Create(
+            RoutePatternFactory.ParameterPart("id"),
+            "customConstraintPolicy(1)"
+        );
 
         // Assert
         var constraint = Assert.IsType<CustomParameterPolicyWithMultpleCtors>(parameterPolicy);
@@ -301,7 +370,10 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add("customConstraintPolicy", typeof(CustomParameterPolicyWithAmbigiousMultpleCtors));
+        options.ConstraintMap.Add(
+            "customConstraintPolicy",
+            typeof(CustomParameterPolicyWithAmbigiousMultpleCtors)
+        );
 
         var services = new ServiceCollection();
         services.AddTransient<ITestService, TestService>();
@@ -310,11 +382,16 @@ public class DefaultParameterPolicyFactoryTest
 
         // Act
         var exception = Assert.Throws<RouteCreationException>(
-            () => factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(1)"));
+            () =>
+                factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(1)")
+        );
 
         // Assert
-        Assert.Equal($"The constructor to use for activating the constraint type '{nameof(CustomParameterPolicyWithAmbigiousMultpleCtors)}' is ambiguous. "
-            + "Multiple constructors were found with the following number of parameters: 2.", exception.Message);
+        Assert.Equal(
+            $"The constructor to use for activating the constraint type '{nameof(CustomParameterPolicyWithAmbigiousMultpleCtors)}' is ambiguous. "
+                + "Multiple constructors were found with the following number of parameters: 2.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -330,7 +407,10 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory(options, services);
 
         // Act
-        var parameterPolicy = factory.Create(RoutePatternFactory.ParameterPart("id"), @"regex-service(\\d{1,2})");
+        var parameterPolicy = factory.Create(
+            RoutePatternFactory.ParameterPart("id"),
+            @"regex-service(\\d{1,2})"
+        );
 
         // Assert
         var constraint = Assert.IsType<RegexInlineRouteConstraintWithService>(parameterPolicy);
@@ -343,7 +423,10 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add("customConstraintPolicy", typeof(CustomParameterPolicyWithArguments));
+        options.ConstraintMap.Add(
+            "customConstraintPolicy",
+            typeof(CustomParameterPolicyWithArguments)
+        );
 
         var services = new ServiceCollection();
 
@@ -351,11 +434,19 @@ public class DefaultParameterPolicyFactoryTest
 
         // Act
         var exception = Assert.Throws<RouteCreationException>(
-            () => factory.Create(RoutePatternFactory.ParameterPart("id"), "customConstraintPolicy(20)"));
+            () =>
+                factory.Create(
+                    RoutePatternFactory.ParameterPart("id"),
+                    "customConstraintPolicy(20)"
+                )
+        );
 
         // Assert
         var inner = Assert.IsType<InvalidOperationException>(exception.InnerException);
-        Assert.Equal($"No service for type '{typeof(ITestService).FullName}' has been registered.", inner.Message);
+        Assert.Equal(
+            $"No service for type '{typeof(ITestService).FullName}' has been registered.",
+            inner.Message
+        );
     }
 
     [Fact]
@@ -371,7 +462,14 @@ public class DefaultParameterPolicyFactoryTest
         var factory = GetParameterPolicyFactory(options, services);
 
         // Act
-        var parameterPolicy = factory.Create(RoutePatternFactory.ParameterPart("id", @default: null, RoutePatternParameterKind.Optional), "customParameterPolicy");
+        var parameterPolicy = factory.Create(
+            RoutePatternFactory.ParameterPart(
+                "id",
+                @default: null,
+                RoutePatternParameterKind.Optional
+            ),
+            "customParameterPolicy"
+        );
 
         // Assert
         Assert.IsType<CustomParameterPolicy>(parameterPolicy);
@@ -379,7 +477,8 @@ public class DefaultParameterPolicyFactoryTest
 
     private DefaultParameterPolicyFactory GetParameterPolicyFactory(
         RouteOptions options = null,
-        ServiceCollection services = null)
+        ServiceCollection services = null
+    )
     {
         if (options == null)
         {
@@ -393,7 +492,8 @@ public class DefaultParameterPolicyFactoryTest
 
         return new DefaultParameterPolicyFactory(
             Options.Create(options),
-            services.BuildServiceProvider());
+            services.BuildServiceProvider()
+        );
     }
 
     private class TestRouteConstraint : IRouteConstraint
@@ -416,7 +516,8 @@ public class DefaultParameterPolicyFactoryTest
             IRouter route,
             string routeKey,
             RouteValueDictionary values,
-            RouteDirection routeDirection)
+            RouteDirection routeDirection
+        )
         {
             HttpContext = httpContext;
             Route = route;
@@ -428,9 +529,7 @@ public class DefaultParameterPolicyFactoryTest
     }
 }
 
-public class CustomParameterPolicy : IParameterPolicy
-{
-}
+public class CustomParameterPolicy : IParameterPolicy { }
 
 public class CustomParameterPolicyWithArguments : IParameterPolicy
 {
@@ -452,10 +551,7 @@ public class CustomParameterPolicyWithMultpleCtors : IParameterPolicy
         Count = count;
     }
 
-    public CustomParameterPolicyWithMultpleCtors(int count)
-        : this(testService: null, count)
-    {
-    }
+    public CustomParameterPolicyWithMultpleCtors(int count) : this(testService: null, count) { }
 
     public ITestService TestService { get; }
     public int Count { get; }
@@ -470,14 +566,10 @@ public class CustomParameterPolicyWithAmbigiousMultpleCtors : IParameterPolicy
     }
 
     public CustomParameterPolicyWithAmbigiousMultpleCtors(object testService, int count)
-        : this(testService: null, count)
-    {
-    }
+        : this(testService: null, count) { }
 
     public CustomParameterPolicyWithAmbigiousMultpleCtors(int count)
-        : this(testService: null, count)
-    {
-    }
+        : this(testService: null, count) { }
 
     public ITestService TestService { get; }
     public int Count { get; }
@@ -485,7 +577,12 @@ public class CustomParameterPolicyWithAmbigiousMultpleCtors : IParameterPolicy
 
 public class CustomParameterPolicyWithMultipleArguments : IParameterPolicy
 {
-    public CustomParameterPolicyWithMultipleArguments(int first, ITestService testService1, int second, ITestService testService2)
+    public CustomParameterPolicyWithMultipleArguments(
+        int first,
+        ITestService testService1,
+        int second,
+        ITestService testService2
+    )
     {
         First = first;
         TestService1 = testService1;
@@ -501,7 +598,10 @@ public class CustomParameterPolicyWithMultipleArguments : IParameterPolicy
 
 public class CustomParameterPolicyWithOnlyServiceArguments : IParameterPolicy
 {
-    public CustomParameterPolicyWithOnlyServiceArguments(ITestService testService1, ITestService testService2)
+    public CustomParameterPolicyWithOnlyServiceArguments(
+        ITestService testService1,
+        ITestService testService2
+    )
     {
         TestService1 = testService1;
         TestService2 = testService2;
@@ -511,13 +611,10 @@ public class CustomParameterPolicyWithOnlyServiceArguments : IParameterPolicy
     public ITestService TestService2 { get; }
 }
 
-public interface ITestService
-{
-}
+public interface ITestService { }
 
 public class TestService : ITestService
 {
-
 }
 
 public class RegexInlineRouteConstraintWithService : RegexRouteConstraint

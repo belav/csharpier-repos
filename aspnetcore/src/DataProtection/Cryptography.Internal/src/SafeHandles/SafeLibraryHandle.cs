@@ -16,9 +16,7 @@ namespace Microsoft.AspNetCore.Cryptography.SafeHandles;
 internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
 {
     // Called by P/Invoke when returning SafeHandles
-    private SafeLibraryHandle()
-        : base(ownsHandle: true)
-    { }
+    private SafeLibraryHandle() : base(ownsHandle: true) { }
 
     /// <summary>
     /// Returns a value stating whether the library exports a given proc.
@@ -40,7 +38,11 @@ internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInval
         const uint GET_MODULE_HANDLE_EX_FLAG_PIN = 0x00000001U;
 
         IntPtr unused;
-        bool retVal = UnsafeNativeMethods.GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_PIN, this, out unused);
+        bool retVal = UnsafeNativeMethods.GetModuleHandleEx(
+            GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_PIN,
+            this,
+            out unused
+        );
         if (!retVal)
         {
             UnsafeNativeMethods.ThrowExceptionForLastWin32Error();
@@ -60,20 +62,30 @@ internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInval
 
         LocalAllocHandle messageHandle;
         int numCharsOutput = UnsafeNativeMethods.FormatMessage(
-            dwFlags: FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_HMODULE | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+            dwFlags: FORMAT_MESSAGE_ALLOCATE_BUFFER
+                | FORMAT_MESSAGE_FROM_HMODULE
+                | FORMAT_MESSAGE_FROM_SYSTEM
+                | FORMAT_MESSAGE_IGNORE_INSERTS,
             lpSource: this,
             dwMessageId: (uint)messageId,
-            dwLanguageId: 0 /* ignore current culture */,
+            dwLanguageId: 0 /* ignore current culture */
+            ,
             lpBuffer: out messageHandle,
-            nSize: 0 /* unused */,
-            Arguments: IntPtr.Zero /* unused */);
+            nSize: 0 /* unused */
+            ,
+            Arguments: IntPtr.Zero /* unused */
+        );
 
         if (numCharsOutput != 0 && messageHandle != null && !messageHandle.IsInvalid)
         {
             // Successfully retrieved the message.
             using (messageHandle)
             {
-                return new string((char*)messageHandle.DangerousGetHandle(), 0, numCharsOutput).Trim();
+                return new string(
+                    (char*)messageHandle.DangerousGetHandle(),
+                    0,
+                    numCharsOutput
+                ).Trim();
             }
         }
         else
@@ -86,7 +98,8 @@ internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInval
     /// <summary>
     /// Gets a delegate pointing to a given export from this library.
     /// </summary>
-    public TDelegate? GetProcAddress<TDelegate>(string lpProcName, bool throwIfNotFound = true) where TDelegate : class
+    public TDelegate? GetProcAddress<TDelegate>(string lpProcName, bool throwIfNotFound = true)
+        where TDelegate : class
     {
         IntPtr pfnProc = UnsafeNativeMethods.GetProcAddress(this, lpProcName);
         if (pfnProc == IntPtr.Zero)
@@ -111,7 +124,11 @@ internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInval
     {
         const uint LOAD_LIBRARY_SEARCH_SYSTEM32 = 0x00000800U; // from libloaderapi.h
 
-        SafeLibraryHandle handle = UnsafeNativeMethods.LoadLibraryEx(filename, IntPtr.Zero, LOAD_LIBRARY_SEARCH_SYSTEM32);
+        SafeLibraryHandle handle = UnsafeNativeMethods.LoadLibraryEx(
+            filename,
+            IntPtr.Zero,
+            LOAD_LIBRARY_SEARCH_SYSTEM32
+        );
         if (handle == null || handle.IsInvalid)
         {
             UnsafeNativeMethods.ThrowExceptionForLastWin32Error();
@@ -129,7 +146,13 @@ internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInval
     private static class UnsafeNativeMethods
     {
         // http://msdn.microsoft.com/en-us/library/windows/desktop/ms679351(v=vs.85).aspx
-        [DllImport("kernel32.dll", EntryPoint = "FormatMessageW", CallingConvention = CallingConvention.Winapi, CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(
+            "kernel32.dll",
+            EntryPoint = "FormatMessageW",
+            CallingConvention = CallingConvention.Winapi,
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         public static extern int FormatMessage(
             [In] uint dwFlags,
             [In] SafeLibraryHandle lpSource,
@@ -143,31 +166,52 @@ internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInval
         // http://msdn.microsoft.com/en-us/library/ms683152(v=vs.85).aspx
         [return: MarshalAs(UnmanagedType.Bool)]
 #if NETSTANDARD2_0
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
 #endif
-        [DllImport("kernel32.dll", CallingConvention = CallingConvention.Winapi, CharSet = CharSet.Unicode)]
+        [DllImport(
+            "kernel32.dll",
+            CallingConvention = CallingConvention.Winapi,
+            CharSet = CharSet.Unicode
+        )]
         internal static extern bool FreeLibrary(IntPtr hModule);
 
         // http://msdn.microsoft.com/en-us/library/ms683200(v=vs.85).aspx
         [return: MarshalAs(UnmanagedType.Bool)]
-        [DllImport("kernel32.dll", EntryPoint = "GetModuleHandleExW", CallingConvention = CallingConvention.Winapi, SetLastError = true)]
+        [DllImport(
+            "kernel32.dll",
+            EntryPoint = "GetModuleHandleExW",
+            CallingConvention = CallingConvention.Winapi,
+            SetLastError = true
+        )]
         internal static extern bool GetModuleHandleEx(
             [In] uint dwFlags,
             [In] SafeLibraryHandle lpModuleName, // can point to a location within the module if GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS is set
-            [Out] out IntPtr phModule);
+            [Out] out IntPtr phModule
+        );
 
         // http://msdn.microsoft.com/en-us/library/ms683212(v=vs.85).aspx
-        [DllImport("kernel32.dll", CallingConvention = CallingConvention.Winapi, SetLastError = true)]
+        [DllImport(
+            "kernel32.dll",
+            CallingConvention = CallingConvention.Winapi,
+            SetLastError = true
+        )]
         internal static extern IntPtr GetProcAddress(
             [In] SafeLibraryHandle hModule,
-            [In, MarshalAs(UnmanagedType.LPStr)] string lpProcName);
+            [In, MarshalAs(UnmanagedType.LPStr)] string lpProcName
+        );
 
         // http://msdn.microsoft.com/en-us/library/windows/desktop/ms684179(v=vs.85).aspx
-        [DllImport("kernel32.dll", EntryPoint = "LoadLibraryExW", CallingConvention = CallingConvention.Winapi, SetLastError = true)]
+        [DllImport(
+            "kernel32.dll",
+            EntryPoint = "LoadLibraryExW",
+            CallingConvention = CallingConvention.Winapi,
+            SetLastError = true
+        )]
         internal static extern SafeLibraryHandle LoadLibraryEx(
             [In, MarshalAs(UnmanagedType.LPWStr)] string lpFileName,
             [In] IntPtr hFile,
-            [In] uint dwFlags);
+            [In] uint dwFlags
+        );
 
 #pragma warning disable CS8763 // A method marked [DoesNotReturn] should not return.
         [DoesNotReturn]

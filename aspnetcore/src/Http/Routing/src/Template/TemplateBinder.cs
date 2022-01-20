@@ -46,10 +46,16 @@ public class TemplateBinder
         UrlEncoder urlEncoder,
         ObjectPool<UriBuildingContext> pool,
         RouteTemplate template,
-        RouteValueDictionary defaults)
-        : this(urlEncoder, pool, template?.ToRoutePattern()!, defaults, requiredKeys: null, parameterPolicies: null)
-    {
-    }
+        RouteValueDictionary defaults
+    )
+        : this(
+            urlEncoder,
+            pool,
+            template?.ToRoutePattern()!,
+            defaults,
+            requiredKeys: null,
+            parameterPolicies: null
+        ) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="TemplateBinder"/>.
@@ -68,7 +74,8 @@ public class TemplateBinder
         RoutePattern pattern,
         RouteValueDictionary? defaults,
         IEnumerable<string>? requiredKeys,
-        IEnumerable<(string parameterName, IParameterPolicy policy)>? parameterPolicies)
+        IEnumerable<(string parameterName, IParameterPolicy policy)>? parameterPolicies
+    )
     {
         if (urlEncoder == null)
         {
@@ -100,14 +107,16 @@ public class TemplateBinder
         }
         _filters = filters.ToArray();
 
-        _constraints = parameterPolicies
-            ?.Where(p => p.policy is IRouteConstraint)
-            .Select(p => (p.parameterName, (IRouteConstraint)p.policy))
-            .ToArray() ?? Array.Empty<(string, IRouteConstraint)>();
-        _parameterTransformers = parameterPolicies
-            ?.Where(p => p.policy is IOutboundParameterTransformer)
-            .Select(p => (p.parameterName, (IOutboundParameterTransformer)p.policy))
-            .ToArray() ?? Array.Empty<(string, IOutboundParameterTransformer)>();
+        _constraints =
+            parameterPolicies?
+                .Where(p => p.policy is IRouteConstraint)
+                .Select(p => (p.parameterName, (IRouteConstraint)p.policy))
+                .ToArray() ?? Array.Empty<(string, IRouteConstraint)>();
+        _parameterTransformers =
+            parameterPolicies?
+                .Where(p => p.policy is IOutboundParameterTransformer)
+                .Select(p => (p.parameterName, (IOutboundParameterTransformer)p.policy))
+                .ToArray() ?? Array.Empty<(string, IOutboundParameterTransformer)>();
 
         _slots = AssignSlots(_pattern, _filters);
     }
@@ -116,7 +125,8 @@ public class TemplateBinder
         UrlEncoder urlEncoder,
         ObjectPool<UriBuildingContext> pool,
         RoutePattern pattern,
-        IEnumerable<(string parameterName, IParameterPolicy policy)> parameterPolicies)
+        IEnumerable<(string parameterName, IParameterPolicy policy)> parameterPolicies
+    )
     {
         if (urlEncoder == null)
         {
@@ -150,14 +160,16 @@ public class TemplateBinder
         }
         _filters = filters.ToArray();
 
-        _constraints = parameterPolicies
-            ?.Where(p => p.policy is IRouteConstraint)
-            .Select(p => (p.parameterName, (IRouteConstraint)p.policy))
-            .ToArray() ?? Array.Empty<(string, IRouteConstraint)>();
-        _parameterTransformers = parameterPolicies
-            ?.Where(p => p.policy is IOutboundParameterTransformer)
-            .Select(p => (p.parameterName, (IOutboundParameterTransformer)p.policy))
-            .ToArray() ?? Array.Empty<(string, IOutboundParameterTransformer)>();
+        _constraints =
+            parameterPolicies?
+                .Where(p => p.policy is IRouteConstraint)
+                .Select(p => (p.parameterName, (IRouteConstraint)p.policy))
+                .ToArray() ?? Array.Empty<(string, IRouteConstraint)>();
+        _parameterTransformers =
+            parameterPolicies?
+                .Where(p => p.policy is IOutboundParameterTransformer)
+                .Select(p => (p.parameterName, (IOutboundParameterTransformer)p.policy))
+                .ToArray() ?? Array.Empty<(string, IOutboundParameterTransformer)>();
 
         _slots = AssignSlots(_pattern, _filters);
     }
@@ -168,7 +180,10 @@ public class TemplateBinder
     /// <param name="ambientValues">The values associated with the current request.</param>
     /// <param name="values">The route values to process.</param>
     /// <returns>A <see cref="TemplateValuesResult"/> instance. Can be null.</returns>
-    public TemplateValuesResult? GetValues(RouteValueDictionary? ambientValues, RouteValueDictionary values)
+    public TemplateValuesResult? GetValues(
+        RouteValueDictionary? ambientValues,
+        RouteValueDictionary values
+    )
     {
         // Make a new copy of the slots array, we'll use this as 'scratch' space
         // and then the RVD will take ownership of it.
@@ -232,11 +247,15 @@ public class TemplateBinder
                 {
                     if (!_pattern.RequiredValues.TryGetValue(key, out var requiredValue))
                     {
-                        throw new InvalidOperationException($"Unable to find required value '{key}' on route pattern.");
+                        throw new InvalidOperationException(
+                            $"Unable to find required value '{key}' on route pattern."
+                        );
                     }
 
-                    if (!RoutePartsEqual(ambientValue, _pattern.RequiredValues[key]) &&
-                        !RoutePattern.IsRequiredValueAny(_pattern.RequiredValues[key]))
+                    if (
+                        !RoutePartsEqual(ambientValue, _pattern.RequiredValues[key])
+                        && !RoutePattern.IsRequiredValueAny(_pattern.RequiredValues[key])
+                    )
                     {
                         copyAmbientValues = false;
                         break;
@@ -281,16 +300,19 @@ public class TemplateBinder
             // We are copying **all** ambient values
             if (copyAmbientValues)
             {
-                hasAmbientValue = ambientValues != null && ambientValues.TryGetValue(key, out ambientValue);
+                hasAmbientValue =
+                    ambientValues != null && ambientValues.TryGetValue(key, out ambientValue);
                 if (hasExplicitValue && hasAmbientValue && !RoutePartsEqual(ambientValue, value))
                 {
                     // Stop copying current values when we find one that doesn't match
                     copyAmbientValues = false;
                 }
 
-                if (!hasExplicitValue &&
-                    !hasAmbientValue &&
-                    _defaults?.ContainsKey(parameter.Name) != true)
+                if (
+                    !hasExplicitValue
+                    && !hasAmbientValue
+                    && _defaults?.ContainsKey(parameter.Name) != true
+                )
                 {
                     // This is an unsatisfied parameter value and there are no defaults. We might still
                     // be able to generate a URL but we should stop 'accepting' ambient values.
@@ -319,11 +341,21 @@ public class TemplateBinder
             //
             // OR in plain English... when linking from a page in an area to an action in the same area, it should
             // be possible to use the area as an ambient value.
-            if (!copyAmbientValues && !hasExplicitValue && _pattern.RequiredValues.TryGetValue(key, out var requiredValue))
+            if (
+                !copyAmbientValues
+                && !hasExplicitValue
+                && _pattern.RequiredValues.TryGetValue(key, out var requiredValue)
+            )
             {
-                hasAmbientValue = ambientValues != null && ambientValues.TryGetValue(key, out ambientValue);
-                if (hasAmbientValue &&
-                    (RoutePartsEqual(requiredValue, ambientValue) || RoutePattern.IsRequiredValueAny(requiredValue)))
+                hasAmbientValue =
+                    ambientValues != null && ambientValues.TryGetValue(key, out ambientValue);
+                if (
+                    hasAmbientValue
+                    && (
+                        RoutePartsEqual(requiredValue, ambientValue)
+                        || RoutePattern.IsRequiredValueAny(requiredValue)
+                    )
+                )
                 {
                     // Treat this an an explicit value to *force it*.
                     slots[i] = new KeyValuePair<string, object?>(key, ambientValue);
@@ -347,9 +379,10 @@ public class TemplateBinder
                 // will be omitted from the RVD.
                 slots[i] = default;
             }
-            else if (_defaults != null && _defaults.TryGetValue(parameter.Name, out var defaultValue))
+            else if (
+                _defaults != null && _defaults.TryGetValue(parameter.Name, out var defaultValue)
+            )
             {
-
                 // Add the default value only if there isn't already a new value for it and
                 // only if it actually has a default value.
                 slots[i] = new KeyValuePair<string, object?>(key, defaultValue);
@@ -403,7 +436,7 @@ public class TemplateBinder
                 if (!_defaults!.ContainsKey(kvp.Key))
                 {
 #if RVD_TryAdd
-                        acceptedValues.TryAdd(kvp.Key, kvp.Value);
+                    acceptedValues.TryAdd(kvp.Key, kvp.Value);
 #else
                     if (!acceptedValues.ContainsKey(kvp.Key))
                     {
@@ -422,7 +455,8 @@ public class TemplateBinder
         CopyNonParameterAmbientValues(
             ambientValues: ambientValues,
             acceptedValues: acceptedValues,
-            combinedValues: combinedValues);
+            combinedValues: combinedValues
+        );
 
         return new TemplateValuesResult()
         {
@@ -440,14 +474,27 @@ public class TemplateBinder
     /// <param name="parameterName">The name of the parameter.</param>
     /// <param name="constraint">The constraint object.</param>
     /// <returns><see langword="true"/> if constraints were processed succesfully and false otherwise.</returns>
-    public bool TryProcessConstraints(HttpContext? httpContext, RouteValueDictionary combinedValues, out string? parameterName, out IRouteConstraint? constraint)
+    public bool TryProcessConstraints(
+        HttpContext? httpContext,
+        RouteValueDictionary combinedValues,
+        out string? parameterName,
+        out IRouteConstraint? constraint
+    )
     {
         var constraints = _constraints;
         for (var i = 0; i < constraints.Length; i++)
         {
             (parameterName, constraint) = constraints[i];
 
-            if (!constraint.Match(httpContext, NullRouter.Instance, parameterName, combinedValues, RouteDirection.UrlGeneration))
+            if (
+                !constraint.Match(
+                    httpContext,
+                    NullRouter.Instance,
+                    parameterName,
+                    combinedValues,
+                    RouteDirection.UrlGeneration
+                )
+            )
             {
                 return false;
             }
@@ -483,12 +530,15 @@ public class TemplateBinder
         RouteValueDictionary acceptedValues,
         LinkOptions? options,
         LinkOptions globalOptions,
-        out (PathString path, QueryString query) result)
+        out (PathString path, QueryString query) result
+    )
     {
         var context = _pool.Get();
 
-        context.AppendTrailingSlash = options?.AppendTrailingSlash ?? globalOptions.AppendTrailingSlash ?? false;
-        context.LowercaseQueryStrings = options?.LowercaseQueryStrings ?? globalOptions.LowercaseQueryStrings ?? false;
+        context.AppendTrailingSlash =
+            options?.AppendTrailingSlash ?? globalOptions.AppendTrailingSlash ?? false;
+        context.LowercaseQueryStrings =
+            options?.LowercaseQueryStrings ?? globalOptions.LowercaseQueryStrings ?? false;
         context.LowercaseUrls = options?.LowercaseUrls ?? globalOptions.LowercaseUrls ?? false;
 
         try
@@ -556,9 +606,11 @@ public class TemplateBinder
                     acceptedValues.Remove(parameterPart.Name, out var value);
 
                     var isSameAsDefault = false;
-                    if (_defaults != null &&
-                        _defaults.TryGetValue(parameterPart.Name, out var defaultValue) &&
-                        RoutePartsEqual(value, defaultValue))
+                    if (
+                        _defaults != null
+                        && _defaults.TryGetValue(parameterPart.Name, out var defaultValue)
+                        && RoutePartsEqual(value, defaultValue)
+                    )
                     {
                         isSameAsDefault = true;
                     }
@@ -586,7 +638,12 @@ public class TemplateBinder
                         if (!context.Accept(converted, parameterPart.EncodeSlashes))
                         {
                             RoutePatternSeparatorPart? nullablePart;
-                            if (j != 0 && parameterPart.IsOptional && (nullablePart = parts[j - 1] as RoutePatternSeparatorPart) != null)
+                            if (
+                                j != 0
+                                && parameterPart.IsOptional
+                                && (nullablePart = parts[j - 1] as RoutePatternSeparatorPart)
+                                    != null
+                            )
                             {
                                 separatorPart = nullablePart;
                                 context.Remove(separatorPart.Content);
@@ -630,7 +687,12 @@ public class TemplateBinder
         return true;
     }
 
-    private bool AddQueryKeyValueToContext(UriBuildingContext context, string key, object? value, bool wroteFirst)
+    private bool AddQueryKeyValueToContext(
+        UriBuildingContext context,
+        string key,
+        object? value,
+        bool wroteFirst
+    )
     {
         var converted = Convert.ToString(value, CultureInfo.InvariantCulture);
         if (!string.IsNullOrEmpty(converted))
@@ -711,7 +773,8 @@ public class TemplateBinder
     private void CopyNonParameterAmbientValues(
         RouteValueDictionary? ambientValues,
         RouteValueDictionary acceptedValues,
-        RouteValueDictionary combinedValues)
+        RouteValueDictionary combinedValues
+    )
     {
         if (ambientValues == null)
         {
@@ -731,7 +794,10 @@ public class TemplateBinder
         }
     }
 
-    private static KeyValuePair<string, object?>[] AssignSlots(RoutePattern pattern, KeyValuePair<string, object?>[] filters)
+    private static KeyValuePair<string, object?>[] AssignSlots(
+        RoutePattern pattern,
+        KeyValuePair<string, object?>[] filters
+    )
     {
         var slots = new KeyValuePair<string, object?>[pattern.Parameters.Count + filters.Length];
 
@@ -742,7 +808,10 @@ public class TemplateBinder
 
         for (var i = 0; i < filters.Length; i++)
         {
-            slots[i + pattern.Parameters.Count] = new KeyValuePair<string, object?>(filters[i].Key, null);
+            slots[i + pattern.Parameters.Count] = new KeyValuePair<string, object?>(
+                filters[i].Key,
+                null
+            );
         }
 
         return slots;
@@ -754,9 +823,7 @@ public class TemplateBinder
     {
         public static object Instance = new SentinullValue();
 
-        private SentinullValue()
-        {
-        }
+        private SentinullValue() { }
 
         public override string ToString() => string.Empty;
     }

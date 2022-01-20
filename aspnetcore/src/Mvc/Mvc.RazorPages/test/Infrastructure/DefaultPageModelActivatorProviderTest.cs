@@ -27,7 +27,8 @@ public class DefaultPageModelActivatorProviderTest
         ExceptionAssert.ThrowsArgument(
             () => activatorProvider.CreateActivator(actionDescriptor),
             "actionDescriptor",
-            "The 'ModelTypeInfo' property of 'actionDescriptor' must not be null.");
+            "The 'ModelTypeInfo' property of 'actionDescriptor' must not be null."
+        );
     }
 
     [Fact]
@@ -46,10 +47,7 @@ public class DefaultPageModelActivatorProviderTest
         {
             RequestServices = serviceCollection.BuildServiceProvider(),
         };
-        var pageContext = new PageContext
-        {
-            HttpContext = httpContext
-        };
+        var pageContext = new PageContext { HttpContext = httpContext };
 
         // Act
         var activator = activatorProvider.CreateActivator(actionDescriptor);
@@ -76,10 +74,7 @@ public class DefaultPageModelActivatorProviderTest
         {
             RequestServices = serviceCollection.BuildServiceProvider(),
         };
-        var pageContext = new PageContext
-        {
-            HttpContext = httpContext
-        };
+        var pageContext = new PageContext { HttpContext = httpContext };
 
         // Act
         var activator = activatorProvider.CreateActivator(actionDescriptor);
@@ -162,10 +157,9 @@ public class DefaultPageModelActivatorProviderTest
         var model = new DisposableModel();
 
         // Act & Assert
-        var disposer = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-        {
-            ModelTypeInfo = model.GetType().GetTypeInfo()
-        });
+        var disposer = activator.CreateAsyncReleaser(
+            new CompiledPageActionDescriptor { ModelTypeInfo = model.GetType().GetTypeInfo() }
+        );
         Assert.NotNull(disposer);
         disposer(context, model);
 
@@ -183,10 +177,9 @@ public class DefaultPageModelActivatorProviderTest
         var model = new AsyncDisposableModel();
 
         // Act & Assert
-        var disposer = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-        {
-            ModelTypeInfo = model.GetType().GetTypeInfo()
-        });
+        var disposer = activator.CreateAsyncReleaser(
+            new CompiledPageActionDescriptor { ModelTypeInfo = model.GetType().GetTypeInfo() }
+        );
         Assert.NotNull(disposer);
         await disposer(context, model);
 
@@ -204,10 +197,9 @@ public class DefaultPageModelActivatorProviderTest
         var model = new DisposableAndAsyncDisposableModel();
 
         // Act & Assert
-        var disposer = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-        {
-            ModelTypeInfo = model.GetType().GetTypeInfo()
-        });
+        var disposer = activator.CreateAsyncReleaser(
+            new CompiledPageActionDescriptor { ModelTypeInfo = model.GetType().GetTypeInfo() }
+        );
         Assert.NotNull(disposer);
         await disposer(context, model);
 

@@ -24,17 +24,23 @@ internal sealed class DeferredKey : KeyBase
         DateTimeOffset expirationDate,
         IInternalXmlKeyManager keyManager,
         XElement keyElement,
-        IEnumerable<IAuthenticatedEncryptorFactory> encryptorFactories)
-        : base(keyId,
-              creationDate,
-              activationDate,
-              expirationDate,
-              new Lazy<IAuthenticatedEncryptorDescriptor>(GetLazyDescriptorDelegate(keyManager, keyElement)),
-              encryptorFactories)
-    {
-    }
+        IEnumerable<IAuthenticatedEncryptorFactory> encryptorFactories
+    )
+        : base(
+            keyId,
+            creationDate,
+            activationDate,
+            expirationDate,
+            new Lazy<IAuthenticatedEncryptorDescriptor>(
+                GetLazyDescriptorDelegate(keyManager, keyElement)
+            ),
+            encryptorFactories
+        ) { }
 
-    private static Func<IAuthenticatedEncryptorDescriptor> GetLazyDescriptorDelegate(IInternalXmlKeyManager keyManager, XElement keyElement)
+    private static Func<IAuthenticatedEncryptorDescriptor> GetLazyDescriptorDelegate(
+        IInternalXmlKeyManager keyManager,
+        XElement keyElement
+    )
     {
         // The <key> element will be held around in memory for a potentially lengthy period
         // of time. Since it might contain sensitive information, we should protect it.
@@ -42,7 +48,8 @@ internal sealed class DeferredKey : KeyBase
 
         try
         {
-            return () => keyManager.DeserializeDescriptorFromKeyElement(encryptedKeyElement.ToXElement());
+            return () =>
+                keyManager.DeserializeDescriptorFromKeyElement(encryptedKeyElement.ToXElement());
         }
         finally
         {

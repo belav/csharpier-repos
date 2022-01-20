@@ -19,7 +19,10 @@ public sealed class EditContext
     // error state. If you give us an unrecognized FieldIdentifier, that just means we
     // didn't yet track any state for it, so we behave as if it's in the default state
     // (valid and unmodified).
-    private readonly Dictionary<FieldIdentifier, FieldState> _fieldStates = new Dictionary<FieldIdentifier, FieldState>();
+    private readonly Dictionary<FieldIdentifier, FieldState> _fieldStates = new Dictionary<
+        FieldIdentifier,
+        FieldState
+    >();
 
     /// <summary>
     /// Constructs an instance of <see cref="EditContext"/>.
@@ -55,8 +58,7 @@ public sealed class EditContext
     /// </summary>
     /// <param name="fieldName">The name of the editable field.</param>
     /// <returns>A <see cref="FieldIdentifier"/> corresponding to a specified field name on this <see cref="EditContext"/>'s <see cref="Model"/>.</returns>
-    public FieldIdentifier Field(string fieldName)
-        => new FieldIdentifier(Model, fieldName);
+    public FieldIdentifier Field(string fieldName) => new FieldIdentifier(Model, fieldName);
 
     /// <summary>
     /// Gets the model object for this <see cref="EditContext"/>.
@@ -172,25 +174,23 @@ public sealed class EditContext
     /// </summary>
     /// <param name="accessor">Identifies the field whose current validation messages should be returned.</param>
     /// <returns>The current validation messages for the specified field.</returns>
-    public IEnumerable<string> GetValidationMessages(Expression<Func<object>> accessor)
-        => GetValidationMessages(FieldIdentifier.Create(accessor));
+    public IEnumerable<string> GetValidationMessages(Expression<Func<object>> accessor) =>
+        GetValidationMessages(FieldIdentifier.Create(accessor));
 
     /// <summary>
     /// Determines whether the specified fields in this <see cref="EditContext"/> has been modified.
     /// </summary>
     /// <returns>True if the field has been modified; otherwise false.</returns>
-    public bool IsModified(in FieldIdentifier fieldIdentifier)
-        => _fieldStates.TryGetValue(fieldIdentifier, out var state)
-        ? state.IsModified
-        : false;
+    public bool IsModified(in FieldIdentifier fieldIdentifier) =>
+        _fieldStates.TryGetValue(fieldIdentifier, out var state) ? state.IsModified : false;
 
     /// <summary>
     /// Determines whether the specified fields in this <see cref="EditContext"/> has been modified.
     /// </summary>
     /// <param name="accessor">Identifies the field whose current validation messages should be returned.</param>
     /// <returns>True if the field has been modified; otherwise false.</returns>
-    public bool IsModified(Expression<Func<object>> accessor)
-        => IsModified(FieldIdentifier.Create(accessor));
+    public bool IsModified(Expression<Func<object>> accessor) =>
+        IsModified(FieldIdentifier.Create(accessor));
 
     /// <summary>
     /// Validates this <see cref="EditContext"/>.

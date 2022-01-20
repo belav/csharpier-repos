@@ -41,9 +41,11 @@ public class TestHub : Hub
         return Context.ConnectionId;
     }
 
-    public ChannelReader<string> StreamEcho(ChannelReader<string> source) => TestHubMethodsImpl.StreamEcho(source);
+    public ChannelReader<string> StreamEcho(ChannelReader<string> source) =>
+        TestHubMethodsImpl.StreamEcho(source);
 
-    public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) => TestHubMethodsImpl.StreamEchoInt(source);
+    public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) =>
+        TestHubMethodsImpl.StreamEchoInt(source);
 
     public IAsyncEnumerable<int> StreamIAsyncConsumer(IAsyncEnumerable<int> source) => source;
 
@@ -82,11 +84,11 @@ public class TestHub : Hub
 
         object[] result =
         {
-                feature.LocalPort,
-                feature.RemotePort,
-                feature.LocalIpAddress.ToString(),
-                feature.RemoteIpAddress.ToString()
-            };
+            feature.LocalPort,
+            feature.RemotePort,
+            feature.LocalIpAddress.ToString(),
+            feature.RemoteIpAddress.ToString()
+        };
 
         return result;
     }
@@ -110,9 +112,7 @@ public class TestHub : Hub
     {
         public Unserializable Child { get; private set; }
 
-        private Unserializable()
-        {
-        }
+        private Unserializable() { }
 
         internal static Unserializable Create()
         {
@@ -151,9 +151,11 @@ public class DynamicTestHub : DynamicHub
         return Context.ConnectionId;
     }
 
-    public ChannelReader<string> StreamEcho(ChannelReader<string> source) => TestHubMethodsImpl.StreamEcho(source);
+    public ChannelReader<string> StreamEcho(ChannelReader<string> source) =>
+        TestHubMethodsImpl.StreamEcho(source);
 
-    public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) => TestHubMethodsImpl.StreamEchoInt(source);
+    public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) =>
+        TestHubMethodsImpl.StreamEchoInt(source);
 
     public IAsyncEnumerable<int> StreamIAsyncConsumer(IAsyncEnumerable<int> source) => source;
 }
@@ -185,9 +187,11 @@ public class TestHubT : Hub<ITestHub>
         return Context.ConnectionId;
     }
 
-    public ChannelReader<string> StreamEcho(ChannelReader<string> source) => TestHubMethodsImpl.StreamEcho(source);
+    public ChannelReader<string> StreamEcho(ChannelReader<string> source) =>
+        TestHubMethodsImpl.StreamEcho(source);
 
-    public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) => TestHubMethodsImpl.StreamEchoInt(source);
+    public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) =>
+        TestHubMethodsImpl.StreamEchoInt(source);
 
     public IAsyncEnumerable<int> StreamIAsyncConsumer(IAsyncEnumerable<int> source) => source;
 }
@@ -208,16 +212,18 @@ internal static class TestHubMethodsImpl
     {
         var channel = Channel.CreateUnbounded<int>();
 
-        Task.Run(async () =>
-        {
-            for (var i = 0; i < count; i++)
+        Task.Run(
+            async () =>
             {
-                await channel.Writer.WriteAsync(i);
-                await Task.Delay(20);
-            }
+                for (var i = 0; i < count; i++)
+                {
+                    await channel.Writer.WriteAsync(i);
+                    await Task.Delay(20);
+                }
 
-            channel.Writer.TryComplete();
-        });
+                channel.Writer.TryComplete();
+            }
+        );
 
         return channel.Reader;
     }
@@ -232,23 +238,25 @@ internal static class TestHubMethodsImpl
     public static ChannelReader<string> StreamEcho(ChannelReader<string> source)
     {
         var output = Channel.CreateUnbounded<string>();
-        _ = Task.Run(async () =>
-        {
-            try
+        _ = Task.Run(
+            async () =>
             {
-                while (await source.WaitToReadAsync())
+                try
                 {
-                    while (source.TryRead(out var item))
+                    while (await source.WaitToReadAsync())
                     {
-                        await output.Writer.WriteAsync(item);
+                        while (source.TryRead(out var item))
+                        {
+                            await output.Writer.WriteAsync(item);
+                        }
                     }
                 }
+                finally
+                {
+                    output.Writer.TryComplete();
+                }
             }
-            finally
-            {
-                output.Writer.TryComplete();
-            }
-        });
+        );
 
         return output.Reader;
     }
@@ -256,23 +264,25 @@ internal static class TestHubMethodsImpl
     public static ChannelReader<int> StreamEchoInt(ChannelReader<int> source)
     {
         var output = Channel.CreateUnbounded<int>();
-        _ = Task.Run(async () =>
-        {
-            try
+        _ = Task.Run(
+            async () =>
             {
-                while (await source.WaitToReadAsync())
+                try
                 {
-                    while (source.TryRead(out var item))
+                    while (await source.WaitToReadAsync())
                     {
-                        await output.Writer.WriteAsync(item);
+                        while (source.TryRead(out var item))
+                        {
+                            await output.Writer.WriteAsync(item);
+                        }
                     }
                 }
+                finally
+                {
+                    output.Writer.TryComplete();
+                }
             }
-            finally
-            {
-                output.Writer.TryComplete();
-            }
-        });
+        );
 
         return output.Reader;
     }

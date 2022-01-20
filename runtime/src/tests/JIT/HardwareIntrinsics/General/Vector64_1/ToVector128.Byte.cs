@@ -53,7 +53,16 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            Vector64<Byte> value = Vector64.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+            Vector64<Byte> value = Vector64.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7]
+            );
 
             Vector128<Byte> result = value.ToVector128();
             ValidateResult(result, values, isUnsafe: false);
@@ -73,22 +82,36 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            Vector64<Byte> value = Vector64.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+            Vector64<Byte> value = Vector64.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7]
+            );
 
             object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.ToVector128))
-                                .MakeGenericMethod(typeof(Byte))
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.ToVector128))
+                .MakeGenericMethod(typeof(Byte))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector128<Byte>)(result), values, isUnsafe: false);
 
             object unsafeResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.ToVector128))
-                                    .MakeGenericMethod(typeof(Byte))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.ToVector128))
+                .MakeGenericMethod(typeof(Byte))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector128<Byte>)(unsafeResult), values, isUnsafe: true);
         }
 
-        private void ValidateResult(Vector128<Byte> result, Byte[] values, bool isUnsafe, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Byte> result,
+            Byte[] values,
+            bool isUnsafe,
+            [CallerMemberName] string method = ""
+        )
         {
             Byte[] resultElements = new Byte[ElementCount * 2];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref resultElements[0]), result);
@@ -96,7 +119,12 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, values, isUnsafe, method);
         }
 
-        private void ValidateResult(Byte[] result, Byte[] values, bool isUnsafe, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Byte[] result,
+            Byte[] values,
+            bool isUnsafe,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -123,9 +151,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<Byte>.ToVector128{(isUnsafe ? "Unsafe" : "")}(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<Byte>.ToVector128{(isUnsafe ? "Unsafe" : "")}(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

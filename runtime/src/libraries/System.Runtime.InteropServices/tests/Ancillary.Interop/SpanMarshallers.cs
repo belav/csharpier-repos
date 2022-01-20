@@ -13,8 +13,7 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
         private readonly int _sizeOfNativeElement;
         private IntPtr _allocatedMemory;
 
-        public ReadOnlySpanMarshaller(int sizeOfNativeElement)
-            : this()
+        public ReadOnlySpanMarshaller(int sizeOfNativeElement) : this()
         {
             _sizeOfNativeElement = sizeOfNativeElement;
         }
@@ -36,7 +35,11 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
             NativeValueStorage = new Span<byte>((void*)_allocatedMemory, spaceToAllocate);
         }
 
-        public ReadOnlySpanMarshaller(ReadOnlySpan<T> managed, Span<byte> stackSpace, int sizeOfNativeElement)
+        public ReadOnlySpanMarshaller(
+            ReadOnlySpan<T> managed,
+            Span<byte> stackSpace,
+            int sizeOfNativeElement
+        )
         {
             _allocatedMemory = default;
             _sizeOfNativeElement = sizeOfNativeElement;
@@ -66,11 +69,16 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
         /// </summary>
         public const int StackBufferSize = 0x200;
 
-        public Span<T> ManagedValues => MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(_managedSpan), _managedSpan.Length);
+        public Span<T> ManagedValues =>
+            MemoryMarshal.CreateSpan(
+                ref MemoryMarshal.GetReference(_managedSpan),
+                _managedSpan.Length
+            );
 
         public Span<byte> NativeValueStorage { get; private set; }
 
-        public ref byte GetPinnableReference() => ref MemoryMarshal.GetReference(NativeValueStorage);
+        public ref byte GetPinnableReference() =>
+            ref MemoryMarshal.GetReference(NativeValueStorage);
 
         public void SetUnmarshalledCollectionLength(int length)
         {
@@ -94,7 +102,10 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
                 else
                 {
                     _allocatedMemory = (IntPtr)value;
-                    NativeValueStorage = new Span<byte>(value, _managedSpan.Length * _sizeOfNativeElement);
+                    NativeValueStorage = new Span<byte>(
+                        value,
+                        _managedSpan.Length * _sizeOfNativeElement
+                    );
                 }
             }
         }
@@ -112,8 +123,7 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
     {
         private ReadOnlySpanMarshaller<T> _inner;
 
-        public SpanMarshaller(int sizeOfNativeElement)
-            : this()
+        public SpanMarshaller(int sizeOfNativeElement) : this()
         {
             _inner = new ReadOnlySpanMarshaller<T>(sizeOfNativeElement);
         }
@@ -158,7 +168,10 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
         public Span<T> ToManaged()
         {
             ReadOnlySpan<T> managedInner = _inner.ToManaged();
-            return MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(managedInner), managedInner.Length);
+            return MemoryMarshal.CreateSpan(
+                ref MemoryMarshal.GetReference(managedInner),
+                managedInner.Length
+            );
         }
 
         public void FreeNative()
@@ -172,8 +185,7 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
     {
         private SpanMarshaller<T> _inner;
 
-        public NeverNullSpanMarshaller(int sizeOfNativeElement)
-            : this()
+        public NeverNullSpanMarshaller(int sizeOfNativeElement) : this()
         {
             _inner = new SpanMarshaller<T>(sizeOfNativeElement);
         }
@@ -183,7 +195,11 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
             _inner = new SpanMarshaller<T>(managed, sizeOfNativeElement);
         }
 
-        public NeverNullSpanMarshaller(Span<T> managed, Span<byte> stackSpace, int sizeOfNativeElement)
+        public NeverNullSpanMarshaller(
+            Span<T> managed,
+            Span<byte> stackSpace,
+            int sizeOfNativeElement
+        )
         {
             _inner = new SpanMarshaller<T>(managed, stackSpace, sizeOfNativeElement);
         }
@@ -226,7 +242,6 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
                 }
                 return _inner.Value;
             }
-
             set => _inner.Value = value;
         }
 
@@ -243,8 +258,7 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
     {
         private ReadOnlySpanMarshaller<T> _inner;
 
-        public NeverNullReadOnlySpanMarshaller(int sizeOfNativeElement)
-            : this()
+        public NeverNullReadOnlySpanMarshaller(int sizeOfNativeElement) : this()
         {
             _inner = new ReadOnlySpanMarshaller<T>(sizeOfNativeElement);
         }
@@ -254,7 +268,11 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
             _inner = new ReadOnlySpanMarshaller<T>(managed, sizeOfNativeElement);
         }
 
-        public NeverNullReadOnlySpanMarshaller(ReadOnlySpan<T> managed, Span<byte> stackSpace, int sizeOfNativeElement)
+        public NeverNullReadOnlySpanMarshaller(
+            ReadOnlySpan<T> managed,
+            Span<byte> stackSpace,
+            int sizeOfNativeElement
+        )
         {
             _inner = new ReadOnlySpanMarshaller<T>(managed, stackSpace, sizeOfNativeElement);
         }
@@ -297,7 +315,6 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
                 }
                 return _inner.Value;
             }
-
             set => _inner.Value = value;
         }
 
@@ -310,25 +327,30 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
     }
 
     [GenericContiguousCollectionMarshaller]
-    public unsafe ref struct DirectSpanMarshaller<T>
-        where T : unmanaged
+    public unsafe ref struct DirectSpanMarshaller<T> where T : unmanaged
     {
         private int _unmarshalledLength;
         private T* _allocatedMemory;
         private Span<T> _data;
 
-        public DirectSpanMarshaller(int sizeOfNativeElement)
-            :this()
+        public DirectSpanMarshaller(int sizeOfNativeElement) : this()
         {
             // This check is not exhaustive, but it will catch the majority of cases.
-            if (typeof(T) == typeof(bool) || typeof(T) == typeof(char) || Unsafe.SizeOf<T>() != sizeOfNativeElement)
+            if (
+                typeof(T) == typeof(bool)
+                || typeof(T) == typeof(char)
+                || Unsafe.SizeOf<T>() != sizeOfNativeElement
+            )
             {
-                throw new ArgumentException("This marshaller only supports blittable element types. The provided type parameter must be blittable", nameof(T));
+                throw new ArgumentException(
+                    "This marshaller only supports blittable element types. The provided type parameter must be blittable",
+                    nameof(T)
+                );
             }
         }
 
         public DirectSpanMarshaller(Span<T> managed, int sizeOfNativeElement)
-            :this(sizeOfNativeElement)
+            : this(sizeOfNativeElement)
         {
             if (managed.Length == 0)
             {
@@ -341,7 +363,7 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
         }
 
         public DirectSpanMarshaller(Span<T> managed, Span<byte> stackSpace, int sizeOfNativeElement)
-            :this(sizeOfNativeElement)
+            : this(sizeOfNativeElement)
         {
             Debug.Assert(stackSpace.IsEmpty);
             _data = managed;
@@ -354,9 +376,10 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
 
         public Span<T> ManagedValues => _data;
 
-        public Span<byte> NativeValueStorage => _allocatedMemory != null
-            ? new Span<byte>(_allocatedMemory, _data.Length * Unsafe.SizeOf<T>())
-            : MemoryMarshal.Cast<T, byte>(_data);
+        public Span<byte> NativeValueStorage =>
+            _allocatedMemory != null
+                ? new Span<byte>(_allocatedMemory, _data.Length * Unsafe.SizeOf<T>())
+                : MemoryMarshal.Cast<T, byte>(_data);
 
         public ref T GetPinnableReference() => ref _data.GetPinnableReference();
 

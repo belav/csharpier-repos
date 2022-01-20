@@ -11,6 +11,7 @@ using TestAttributes;
 [module: Foo]
 [module: Complicated(1, Stuff = 2)]
 
+
 namespace TestAttributes
 {
     public class FooAttribute : Attribute
@@ -19,16 +20,9 @@ namespace TestAttributes
 
     public class ComplicatedAttribute : Attribute
     {
-        public int Stuff
-        {
-            get;
-            set;
-        }
+        public int Stuff { get; set; }
 
-        public int Foo
-        {
-            get;
-        }
+        public int Foo { get; }
 
         public ComplicatedAttribute(int foo)
         {
@@ -61,20 +55,33 @@ namespace System.Reflection.Tests
         {
             List<CustomAttributeData> customAttributes = Module.CustomAttributes.ToList();
             Assert.True(customAttributes.Count >= 2);
-            CustomAttributeData fooAttribute = customAttributes.Single(a => a.AttributeType == typeof(FooAttribute));
+            CustomAttributeData fooAttribute = customAttributes.Single(
+                a => a.AttributeType == typeof(FooAttribute)
+            );
             Assert.Equal(typeof(FooAttribute).GetConstructors().First(), fooAttribute.Constructor);
             Assert.Equal(0, fooAttribute.ConstructorArguments.Count);
             Assert.Equal(0, fooAttribute.NamedArguments.Count);
-            CustomAttributeData complicatedAttribute = customAttributes.Single(a => a.AttributeType == typeof(ComplicatedAttribute));
-            Assert.Equal(typeof(ComplicatedAttribute).GetConstructors().First(), complicatedAttribute.Constructor);
+            CustomAttributeData complicatedAttribute = customAttributes.Single(
+                a => a.AttributeType == typeof(ComplicatedAttribute)
+            );
+            Assert.Equal(
+                typeof(ComplicatedAttribute).GetConstructors().First(),
+                complicatedAttribute.Constructor
+            );
             Assert.Equal(1, complicatedAttribute.ConstructorArguments.Count);
             Assert.Equal(typeof(int), complicatedAttribute.ConstructorArguments[0].ArgumentType);
             Assert.Equal(1, (int)complicatedAttribute.ConstructorArguments[0].Value);
             Assert.Equal(1, complicatedAttribute.NamedArguments.Count);
             Assert.False(complicatedAttribute.NamedArguments[0].IsField);
             Assert.Equal("Stuff", complicatedAttribute.NamedArguments[0].MemberName);
-            Assert.Equal(typeof(ComplicatedAttribute).GetProperty("Stuff"), complicatedAttribute.NamedArguments[0].MemberInfo);
-            Assert.Equal(typeof(int), complicatedAttribute.NamedArguments[0].TypedValue.ArgumentType);
+            Assert.Equal(
+                typeof(ComplicatedAttribute).GetProperty("Stuff"),
+                complicatedAttribute.NamedArguments[0].MemberInfo
+            );
+            Assert.Equal(
+                typeof(int),
+                complicatedAttribute.NamedArguments[0].TypedValue.ArgumentType
+            );
             Assert.Equal(2, complicatedAttribute.NamedArguments[0].TypedValue.Value);
         }
 
@@ -116,7 +123,10 @@ namespace System.Reflection.Tests
         [Fact]
         public void TestGetHashCode()
         {
-            Assert.Equal(Assembly.GetExecutingAssembly().GetModules().First().GetHashCode(), Module.GetHashCode());
+            Assert.Equal(
+                Assembly.GetExecutingAssembly().GetModules().First().GetHashCode(),
+                Module.GetHashCode()
+            );
         }
 
         [Theory]
@@ -136,10 +146,13 @@ namespace System.Reflection.Tests
         [Fact]
         public void IsDefined_NullType()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("attributeType", () =>
-            {
-                Module.IsDefined(null, false);
-            });
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "attributeType",
+                () =>
+                {
+                    Module.IsDefined(null, false);
+                }
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -147,17 +160,23 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetField_NullName()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("name", () =>
-            {
-                Module.GetField(null);
-            });
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () =>
+                {
+                    Module.GetField(null);
+                }
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
 
-            ex = AssertExtensions.Throws<ArgumentNullException>("name", () =>
-            {
-                Module.GetField(null, 0);
-            });
+            ex = AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () =>
+                {
+                    Module.GetField(null, 0);
+                }
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -166,11 +185,17 @@ namespace System.Reflection.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/60558", TestPlatforms.Android)]
         public void GetField()
         {
-            FieldInfo testInt = TestModule.GetField("TestInt", BindingFlags.Public | BindingFlags.Static);
+            FieldInfo testInt = TestModule.GetField(
+                "TestInt",
+                BindingFlags.Public | BindingFlags.Static
+            );
             Assert.Equal(1, (int)testInt.GetValue(null));
             testInt.SetValue(null, 100);
             Assert.Equal(100, (int)testInt.GetValue(null));
-            FieldInfo testLong = TestModule.GetField("TestLong", BindingFlags.NonPublic | BindingFlags.Static);
+            FieldInfo testLong = TestModule.GetField(
+                "TestLong",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Assert.Equal(2L, (long)testLong.GetValue(null));
             testLong.SetValue(null, 200);
             Assert.Equal(200L, (long)testLong.GetValue(null));
@@ -179,20 +204,32 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetFields()
         {
-            List<FieldInfo> fields = TestModule.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static).OrderBy(f => f.Name).ToList();
+            List<FieldInfo> fields = TestModule
+                .GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
+                .OrderBy(f => f.Name)
+                .ToList();
             Assert.Equal(2, fields.Count);
             Assert.Equal(TestModule.GetField("TestInt"), fields[0]);
-            Assert.Equal(TestModule.GetField("TestLong", BindingFlags.NonPublic | BindingFlags.Static), fields[1]);
+            Assert.Equal(
+                TestModule.GetField("TestLong", BindingFlags.NonPublic | BindingFlags.Static),
+                fields[1]
+            );
         }
 
         [Fact]
         public void GetMethod_NullName()
         {
-            var ex = AssertExtensions.Throws<ArgumentNullException>("name", () => Module.GetMethod(null));
+            var ex = AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => Module.GetMethod(null)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
 
-            ex = AssertExtensions.Throws<ArgumentNullException>("name", () => Module.GetMethod(null, Type.EmptyTypes));
+            ex = AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => Module.GetMethod(null, Type.EmptyTypes)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -200,22 +237,37 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetMethod_NullTypes()
         {
-            var ex = AssertExtensions.Throws<ArgumentNullException>("types", () => Module.GetMethod("TestMethodFoo", null));
+            var ex = AssertExtensions.Throws<ArgumentNullException>(
+                "types",
+                () => Module.GetMethod("TestMethodFoo", null)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51912", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51912",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public void GetMethod_AmbiguousMatch()
         {
-            var ex = Assert.Throws<AmbiguousMatchException>(() => TestModule.GetMethod("TestMethodFoo"));
+            var ex = Assert.Throws<AmbiguousMatchException>(
+                () => TestModule.GetMethod("TestMethodFoo")
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51912", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51912",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public void GetMethod()
         {
             var method = TestModule.GetMethod("TestMethodFoo", Type.EmptyTypes);
@@ -224,7 +276,14 @@ namespace System.Reflection.Tests
             Assert.Equal(typeof(void), method.ReturnType);
             Assert.Empty(method.GetParameters());
 
-            method = TestModule.GetMethod("TestMethodBar", BindingFlags.NonPublic | BindingFlags.Static, null, CallingConventions.Any, new[] { typeof(int) }, null);
+            method = TestModule.GetMethod(
+                "TestMethodBar",
+                BindingFlags.NonPublic | BindingFlags.Static,
+                null,
+                CallingConventions.Any,
+                new[] { typeof(int) },
+                null
+            );
             Assert.False(method.IsPublic);
             Assert.True(method.IsStatic);
             Assert.Equal(typeof(int), method.ReturnType);
@@ -232,15 +291,26 @@ namespace System.Reflection.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51912", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51912",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public void GetMethods()
         {
             var methodNames = TestModule.GetMethods().Select(m => m.Name).ToArray();
-            AssertExtensions.SequenceEqual(new[]{ "TestMethodFoo", "TestMethodFoo" }, methodNames );
+            AssertExtensions.SequenceEqual(new[] { "TestMethodFoo", "TestMethodFoo" }, methodNames);
 
-            methodNames = TestModule.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static).Select(m => m.Name).ToArray();
+            methodNames = TestModule
+                .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
+                .Select(m => m.Name)
+                .ToArray();
             Array.Sort<string>(methodNames);
-            AssertExtensions.SequenceEqual(new[]{ "TestMethodBar", "TestMethodFoo", "TestMethodFoo" }, methodNames );
+            AssertExtensions.SequenceEqual(
+                new[] { "TestMethodBar", "TestMethodFoo", "TestMethodFoo" },
+                methodNames
+            );
         }
 
         public static IEnumerable<Type> Types => Module.GetTypes();
@@ -248,7 +318,7 @@ namespace System.Reflection.Tests
         [Fact]
         public void ResolveTypes()
         {
-            foreach(Type t in Types)
+            foreach (Type t in Types)
                 Assert.Equal(t, Module.ResolveType(t.MetadataToken));
         }
 
@@ -257,26 +327,32 @@ namespace System.Reflection.Tests
             {
                 new object[] { 1234 },
                 new object[] { typeof(ModuleTests).GetMethod("ResolveTypes").MetadataToken },
-            }
-            .Union(NullTokens);
+            }.Union(NullTokens);
 
         [Theory]
         [MemberData(nameof(BadResolveTypes))]
         public void ResolveTypeFail(int token)
         {
-            Assert.ThrowsAny<ArgumentException>(() =>
-            {
-                Module.ResolveType(token);
-            });
+            Assert.ThrowsAny<ArgumentException>(
+                () =>
+                {
+                    Module.ResolveType(token);
+                }
+            );
         }
 
         public static IEnumerable<MemberInfo> Methods =>
-            typeof(ModuleTests).GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly);
+            typeof(ModuleTests).GetMethods(
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Static
+                    | BindingFlags.DeclaredOnly
+            );
 
         [Fact]
         public void ResolveMethodsByMethodInfo()
         {
-            foreach(MethodInfo mi in Methods)
+            foreach (MethodInfo mi in Methods)
                 Assert.Equal(mi, Module.ResolveMethod(mi.MetadataToken));
         }
 
@@ -286,27 +362,36 @@ namespace System.Reflection.Tests
                 new object[] { 1234 },
                 new object[] { typeof(ModuleTests).MetadataToken },
                 new object[] { typeof(ModuleTests).MetadataToken + 1000 },
-            }
-            .Union(NullTokens);
+            }.Union(NullTokens);
 
         [Theory]
         [MemberData(nameof(BadResolveMethods))]
         public void ResolveMethodFail(int token)
         {
-            Assert.ThrowsAny<ArgumentException>(() =>
-            {
-                Module.ResolveMethod(token);
-            });
+            Assert.ThrowsAny<ArgumentException>(
+                () =>
+                {
+                    Module.ResolveMethod(token);
+                }
+            );
         }
 
         public static IEnumerable<MemberInfo> Fields =>
-            typeof(ModuleTests).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly);
+            typeof(ModuleTests).GetFields(
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Static
+                    | BindingFlags.DeclaredOnly
+            );
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/52072", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/52072",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public void ResolveFieldsByFieldInfo()
         {
-            foreach(FieldInfo fi in Fields)
+            foreach (FieldInfo fi in Fields)
                 Assert.Equal(fi, Module.ResolveField(fi.MetadataToken));
         }
 
@@ -316,17 +401,18 @@ namespace System.Reflection.Tests
                 new object[] { 1234 },
                 new object[] { typeof(ModuleTests).MetadataToken },
                 new object[] { typeof(ModuleTests).MetadataToken + 1000 },
-            }
-            .Union(NullTokens);
+            }.Union(NullTokens);
 
         [Theory]
         [MemberData(nameof(BadResolveFields))]
         public void ResolveFieldFail(int token)
         {
-            Assert.ThrowsAny<ArgumentException>(() =>
-            {
-                Module.ResolveField(token);
-            });
+            Assert.ThrowsAny<ArgumentException>(
+                () =>
+                {
+                    Module.ResolveField(token);
+                }
+            );
         }
 
         public static IEnumerable<object[]> BadResolveStrings =>
@@ -335,23 +421,24 @@ namespace System.Reflection.Tests
                 new object[] { 1234 },
                 new object[] { typeof(ModuleTests).MetadataToken },
                 new object[] { typeof(ModuleTests).MetadataToken + 1000 },
-            }
-            .Union(NullTokens);
+            }.Union(NullTokens);
 
         [Theory]
         [MemberData(nameof(BadResolveStrings))]
         public void ResolveStringFail(int token)
         {
-            Assert.ThrowsAny<ArgumentException>(() =>
-            {
-                Module.ResolveString(token);
-            });
+            Assert.ThrowsAny<ArgumentException>(
+                () =>
+                {
+                    Module.ResolveString(token);
+                }
+            );
         }
 
         [Fact]
         public void ResolveTypesByMemberInfo()
         {
-            foreach(MemberInfo mi in Types)
+            foreach (MemberInfo mi in Types)
                 Assert.Equal(mi, Module.ResolveMember(mi.MetadataToken));
         }
 
@@ -384,7 +471,10 @@ namespace System.Reflection.Tests
         {
             List<Type> types = TestModule.GetTypes().ToList();
             Assert.Equal(1, types.Count);
-            Assert.Equal("System.Reflection.TestModule.Dummy, System.Reflection.TestModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", types[0].AssemblyQualifiedName);
+            Assert.Equal(
+                "System.Reflection.TestModule.Dummy, System.Reflection.TestModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                types[0].AssemblyQualifiedName
+            );
         }
 
         private static object[][] NullTokens =>
@@ -416,14 +506,12 @@ namespace System.Reflection.Tests
                 new object[] { 0x2c000000 }, // mdtGenericParamConstraint
                 new object[] { 0x70000000 }, // mdtString
                 new object[] { 0x71000000 }, // mdtName
-                new object[] { 0x72000000 }  // mdtBaseType
+                new object[] { 0x72000000 } // mdtBaseType
             };
     }
 
     public class Foo<T>
     {
-        public void Bar(T t)
-        {
-        }
+        public void Bar(T t) { }
     }
 }

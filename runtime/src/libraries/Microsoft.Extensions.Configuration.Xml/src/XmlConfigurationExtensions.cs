@@ -20,9 +20,18 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="path">Path relative to the base path stored in
         /// <see cref="IConfigurationBuilder.Properties"/> of <paramref name="builder"/>.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddXmlFile(this IConfigurationBuilder builder, string path)
+        public static IConfigurationBuilder AddXmlFile(
+            this IConfigurationBuilder builder,
+            string path
+        )
         {
-            return AddXmlFile(builder, provider: null, path: path, optional: false, reloadOnChange: false);
+            return AddXmlFile(
+                builder,
+                provider: null,
+                path: path,
+                optional: false,
+                reloadOnChange: false
+            );
         }
 
         /// <summary>
@@ -33,9 +42,19 @@ namespace Microsoft.Extensions.Configuration
         /// <see cref="IConfigurationBuilder.Properties"/> of <paramref name="builder"/>.</param>
         /// <param name="optional">Whether the file is optional.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddXmlFile(this IConfigurationBuilder builder, string path, bool optional)
+        public static IConfigurationBuilder AddXmlFile(
+            this IConfigurationBuilder builder,
+            string path,
+            bool optional
+        )
         {
-            return AddXmlFile(builder, provider: null, path: path, optional: optional, reloadOnChange: false);
+            return AddXmlFile(
+                builder,
+                provider: null,
+                path: path,
+                optional: optional,
+                reloadOnChange: false
+            );
         }
 
         /// <summary>
@@ -47,9 +66,20 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="optional">Whether the file is optional.</param>
         /// <param name="reloadOnChange">Whether the configuration should be reloaded if the file changes.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddXmlFile(this IConfigurationBuilder builder, string path, bool optional, bool reloadOnChange)
+        public static IConfigurationBuilder AddXmlFile(
+            this IConfigurationBuilder builder,
+            string path,
+            bool optional,
+            bool reloadOnChange
+        )
         {
-            return AddXmlFile(builder, provider: null, path: path, optional: optional, reloadOnChange: reloadOnChange);
+            return AddXmlFile(
+                builder,
+                provider: null,
+                path: path,
+                optional: optional,
+                reloadOnChange: reloadOnChange
+            );
         }
 
         /// <summary>
@@ -62,7 +92,13 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="optional">Whether the file is optional.</param>
         /// <param name="reloadOnChange">Whether the configuration should be reloaded if the file changes.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddXmlFile(this IConfigurationBuilder builder, IFileProvider provider, string path, bool optional, bool reloadOnChange)
+        public static IConfigurationBuilder AddXmlFile(
+            this IConfigurationBuilder builder,
+            IFileProvider provider,
+            string path,
+            bool optional,
+            bool reloadOnChange
+        )
         {
             if (builder == null)
             {
@@ -73,14 +109,16 @@ namespace Microsoft.Extensions.Configuration
                 throw new ArgumentException(SR.Error_InvalidFilePath, nameof(path));
             }
 
-            return builder.AddXmlFile(s =>
-            {
-                s.FileProvider = provider;
-                s.Path = path;
-                s.Optional = optional;
-                s.ReloadOnChange = reloadOnChange;
-                s.ResolveFileProvider();
-            });
+            return builder.AddXmlFile(
+                s =>
+                {
+                    s.FileProvider = provider;
+                    s.Path = path;
+                    s.Optional = optional;
+                    s.ReloadOnChange = reloadOnChange;
+                    s.ResolveFileProvider();
+                }
+            );
         }
 
         /// <summary>
@@ -89,8 +127,10 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="builder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <param name="configureSource">Configures the source.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddXmlFile(this IConfigurationBuilder builder, Action<XmlConfigurationSource> configureSource)
-            => builder.Add(configureSource);
+        public static IConfigurationBuilder AddXmlFile(
+            this IConfigurationBuilder builder,
+            Action<XmlConfigurationSource> configureSource
+        ) => builder.Add(configureSource);
 
         /// <summary>
         /// Adds a XML configuration source to <paramref name="builder"/>.
@@ -98,7 +138,10 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="builder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <param name="stream">The <see cref="Stream"/> to read the XML configuration data from.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder AddXmlStream(this IConfigurationBuilder builder, Stream stream)
+        public static IConfigurationBuilder AddXmlStream(
+            this IConfigurationBuilder builder,
+            Stream stream
+        )
         {
             if (builder == null)
             {

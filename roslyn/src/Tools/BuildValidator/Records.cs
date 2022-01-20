@@ -27,7 +27,8 @@ namespace BuildValidator
         bool Verbose,
         bool Quiet,
         bool Debug,
-        string DebugPath);
+        string DebugPath
+    );
 
     /// <summary>An entry in the source-link.json dictionary.</summary>
     public record SourceLinkEntry

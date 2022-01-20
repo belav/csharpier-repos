@@ -7,11 +7,13 @@ namespace System.Text.Json.Node.Tests
 {
     public static partial class JsonNodeTests
     {
-        internal const string ExpectedDomJson = "{\"MyString\":\"Hello!\",\"MyNull\":null,\"MyBoolean\":false,\"MyArray\":[2,3,42]," +
-            "\"MyInt\":43,\"MyDateTime\":\"2020-07-08T00:00:00\",\"MyGuid\":\"ed957609-cdfe-412f-88c1-02daca1b4f51\"," +
-            "\"MyObject\":{\"MyString\":\"Hello!!\"},\"Child\":{\"ChildProp\":1}}";
+        internal const string ExpectedDomJson =
+            "{\"MyString\":\"Hello!\",\"MyNull\":null,\"MyBoolean\":false,\"MyArray\":[2,3,42],"
+            + "\"MyInt\":43,\"MyDateTime\":\"2020-07-08T00:00:00\",\"MyGuid\":\"ed957609-cdfe-412f-88c1-02daca1b4f51\","
+            + "\"MyObject\":{\"MyString\":\"Hello!!\"},\"Child\":{\"ChildProp\":1}}";
 
-        internal const string Linq_Query_Json = @"
+        internal const string Linq_Query_Json =
+            @"
         [
           {
             ""OrderId"":100, ""Customer"":
@@ -42,12 +44,13 @@ namespace System.Text.Json.Node.Tests
         internal static class EmployeesDatabase
         {
             private static int s_id = 0;
+
             public static KeyValuePair<string, JsonNode?> GetNextEmployee()
             {
                 var employee = new JsonObject()
                 {
-                    { "name", "John" } ,
-                    { "surname", "Smith"},
+                    { "name", "John" },
+                    { "surname", "Smith" },
                     { "age", 45 }
                 };
 
@@ -80,47 +83,48 @@ namespace System.Text.Json.Node.Tests
             {
                 var manager = GetNextEmployee().Value as JsonObject;
 
-                manager.Add
-                (
+                manager.Add(
                     "phone numbers",
-                    new JsonObject()
-                    {
-                    { "work", "425-555-0123" }, { "home", "425-555-0134" }
-                    }
+                    new JsonObject() { { "work", "425-555-0123" }, { "home", "425-555-0134" } }
                 );
 
-                manager.Add
-                (
-                    "reporting employees", new JsonObject
+                manager.Add(
+                    "reporting employees",
+                    new JsonObject
                     {
-                    {
-                        "software developers", new JsonObject
                         {
+                            "software developers",
+                            new JsonObject
                             {
-                                "full time employees", new JsonObject
                                 {
-                                    EmployeesDatabase.GetNextEmployee(),
-                                    EmployeesDatabase.GetNextEmployee(),
-                                    EmployeesDatabase.GetNextEmployee(),
+                                    "full time employees",
+                                    new JsonObject
+                                    {
+                                        EmployeesDatabase.GetNextEmployee(),
+                                        EmployeesDatabase.GetNextEmployee(),
+                                        EmployeesDatabase.GetNextEmployee(),
+                                    }
+                                },
+                                {
+                                    "intern employees",
+                                    new JsonObject
+                                    {
+                                        EmployeesDatabase.GetNextEmployee(),
+                                        EmployeesDatabase.GetNextEmployee(),
+                                    }
                                 }
-                            },
+                            }
+                        },
+                        {
+                            "HR",
+                            new JsonObject
                             {
-                                "intern employees", new JsonObject
                                 {
-                                    EmployeesDatabase.GetNextEmployee(),
-                                    EmployeesDatabase.GetNextEmployee(),
+                                    "full time employees",
+                                    new JsonObject(EmployeesDatabase.GetTenBestEmployees())
                                 }
                             }
                         }
-                    },
-                    {
-                        "HR", new JsonObject
-                        {
-                            {
-                                "full time employees", new JsonObject(EmployeesDatabase.GetTenBestEmployees())
-                            }
-                        }
-                    }
                     }
                 );
 

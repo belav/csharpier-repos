@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.ProjectSystem.Api
 {
     // Interface to be implemented and MEF exported by Project System
-    internal interface IProjectSystemReferenceCleanupService2 : IProjectSystemReferenceCleanupService
+    internal interface IProjectSystemReferenceCleanupService2
+        : IProjectSystemReferenceCleanupService
     {
         /// <summary>
         /// Gets an operation that can update the project’s references by removing or marking references as
@@ -17,6 +18,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.ProjectSystem.A
         Task<IProjectSystemUpdateReferenceOperation> GetUpdateReferenceOperationAsync(
             string projectPath,
             ProjectSystemReferenceUpdate referenceUpdate,
-            CancellationToken canellationToken);
+            CancellationToken canellationToken
+        );
     }
 }

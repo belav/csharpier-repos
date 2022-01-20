@@ -37,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public EntityEntryGraphNode(
             InternalEntityEntry entry,
             InternalEntityEntry? sourceEntry,
-            INavigationBase? inboundNavigation)
+            INavigationBase? inboundNavigation
+        )
         {
             _entry = entry;
             _sourceEntry = sourceEntry;
@@ -51,8 +52,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <remarks>
         ///     See <see cref="ChangeTracker.TrackGraph" /> for information on how graph nodes are used.
         /// </remarks>
-        public virtual EntityEntry? SourceEntry
-            => _sourceEntry == null ? null : new EntityEntry(_sourceEntry);
+        public virtual EntityEntry? SourceEntry =>
+            _sourceEntry == null ? null : new EntityEntry(_sourceEntry);
 
         /// <summary>
         ///     Gets the navigation property that is being traversed to reach this node in the graph.
@@ -68,8 +69,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <remarks>
         ///     See <see cref="ChangeTracker.TrackGraph" /> for information on how graph nodes are used.
         /// </remarks>
-        public virtual EntityEntry Entry
-            => new(_entry);
+        public virtual EntityEntry Entry => new(_entry);
 
         /// <summary>
         ///     <para>
@@ -89,8 +89,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     </para>
         /// </remarks>
         [EntityFrameworkInternal]
-        InternalEntityEntry IInfrastructure<InternalEntityEntry>.Instance
-            => _entry;
+        InternalEntityEntry IInfrastructure<InternalEntityEntry>.Instance => _entry;
 
         /// <summary>
         ///     Creates a new node for the entity that is being traversed next in the graph.
@@ -104,7 +103,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public virtual EntityEntryGraphNode CreateNode(
             EntityEntryGraphNode currentNode,
             InternalEntityEntry internalEntityEntry,
-            INavigationBase reachedVia)
+            INavigationBase reachedVia
+        )
         {
             Check.NotNull(currentNode, nameof(currentNode));
             Check.NotNull(internalEntityEntry, nameof(internalEntityEntry));
@@ -113,7 +113,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             return new EntityEntryGraphNode(
                 internalEntityEntry,
                 currentNode.Entry.GetInfrastructure(),
-                reachedVia);
+                reachedVia
+            );
         }
     }
 }

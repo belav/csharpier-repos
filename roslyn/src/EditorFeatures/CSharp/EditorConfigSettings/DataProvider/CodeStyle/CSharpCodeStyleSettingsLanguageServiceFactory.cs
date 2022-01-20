@@ -12,14 +12,18 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.DataProvider.CodeStyle
 {
-    [ExportLanguageServiceFactory(typeof(ILanguageSettingsProviderFactory<CodeStyleSetting>), LanguageNames.CSharp), Shared]
+    [
+        ExportLanguageServiceFactory(
+            typeof(ILanguageSettingsProviderFactory<CodeStyleSetting>),
+            LanguageNames.CSharp
+        ),
+        Shared
+    ]
     internal class CSharpCodeStyleSettingsLanguageServiceFactory : ILanguageServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCodeStyleSettingsLanguageServiceFactory()
-        {
-        }
+        public CSharpCodeStyleSettingsLanguageServiceFactory() { }
 
         public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
         {

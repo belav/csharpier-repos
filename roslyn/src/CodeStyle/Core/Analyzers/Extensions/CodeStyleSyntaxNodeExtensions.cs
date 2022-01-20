@@ -16,8 +16,12 @@ namespace Microsoft.CodeAnalysis
         /// the code style layer is updated to reference a version of Roslyn that includes it. It will be easy to
         /// identify since this method will show 0 references once the switch occurs.
         /// </remarks>
-        internal static TNode? FirstAncestorOrSelf<TNode, TArg>(this SyntaxNode? node, Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia = true)
-            where TNode : SyntaxNode
+        internal static TNode? FirstAncestorOrSelf<TNode, TArg>(
+            this SyntaxNode? node,
+            Func<TNode, TArg, bool> predicate,
+            TArg argument,
+            bool ascendOutOfTrivia = true
+        ) where TNode : SyntaxNode
         {
             for (; node != null; node = GetParent(node, ascendOutOfTrivia))
             {

@@ -30,8 +30,8 @@ namespace Internal.Cryptography
             byte[]? iv,
             bool encrypting,
             int feedbackSizeInBytes,
-            int paddingSizeInBytes)
-            : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
+            int paddingSizeInBytes
+        ) : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
         {
             _encrypting = encrypting;
 
@@ -83,7 +83,8 @@ namespace Internal.Cryptography
                 IV,
                 _encrypting,
                 _feedbackSizeInBytes,
-                PaddingSizeInBytes);
+                PaddingSizeInBytes
+            );
         }
 
         private unsafe void Reset()

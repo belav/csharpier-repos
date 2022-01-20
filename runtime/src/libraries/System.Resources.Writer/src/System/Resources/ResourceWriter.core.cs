@@ -45,8 +45,14 @@ namespace System.Resources
             AddResourceData(name, typeName, (object)serializedData);
         }
 
-        private string ResourceReaderTypeName { get => ResourceReaderFullyQualifiedName; }
-        private string ResourceSetTypeName { get => ResSetTypeName; }
+        private string ResourceReaderTypeName
+        {
+            get => ResourceReaderFullyQualifiedName;
+        }
+        private string ResourceSetTypeName
+        {
+            get => ResSetTypeName;
+        }
 
         private void WriteData(BinaryWriter writer, object dataContext)
         {

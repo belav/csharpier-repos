@@ -15,13 +15,19 @@ internal class HubFilterFactory : IHubFilter
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
     private readonly Type _filterType;
 
-    public HubFilterFactory([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type filterType)
+    public HubFilterFactory(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type filterType
+    )
     {
         _objectFactory = ActivatorUtilities.CreateFactory(filterType, Array.Empty<Type>());
         _filterType = filterType;
     }
 
-    public async ValueTask<object?> InvokeMethodAsync(HubInvocationContext invocationContext, Func<HubInvocationContext, ValueTask<object?>> next)
+    public async ValueTask<object?> InvokeMethodAsync(
+        HubInvocationContext invocationContext,
+        Func<HubInvocationContext, ValueTask<object?>> next
+    )
     {
         var (filter, owned) = GetFilter(invocationContext.ServiceProvider);
 
@@ -38,7 +44,10 @@ internal class HubFilterFactory : IHubFilter
         }
     }
 
-    public async Task OnConnectedAsync(HubLifetimeContext context, Func<HubLifetimeContext, Task> next)
+    public async Task OnConnectedAsync(
+        HubLifetimeContext context,
+        Func<HubLifetimeContext, Task> next
+    )
     {
         var (filter, owned) = GetFilter(context.ServiceProvider);
 
@@ -55,7 +64,11 @@ internal class HubFilterFactory : IHubFilter
         }
     }
 
-    public async Task OnDisconnectedAsync(HubLifetimeContext context, Exception? exception, Func<HubLifetimeContext, Exception?, Task> next)
+    public async Task OnDisconnectedAsync(
+        HubLifetimeContext context,
+        Exception? exception,
+        Func<HubLifetimeContext, Exception?, Task> next
+    )
     {
         var (filter, owned) = GetFilter(context.ServiceProvider);
 

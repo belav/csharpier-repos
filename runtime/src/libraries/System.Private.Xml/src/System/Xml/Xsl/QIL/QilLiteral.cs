@@ -17,7 +17,6 @@ namespace System.Xml.Xsl.Qil
     {
         private object? _value;
 
-
         //-----------------------------------------------
         // Constructor
         //-----------------------------------------------
@@ -29,7 +28,6 @@ namespace System.Xml.Xsl.Qil
         {
             Value = value;
         }
-
 
         //-----------------------------------------------
         // QilLiteral methods

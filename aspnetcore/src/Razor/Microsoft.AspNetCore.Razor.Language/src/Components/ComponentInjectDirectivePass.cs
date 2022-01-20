@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-internal class ComponentInjectDirectivePass : IntermediateNodePassBase, IRazorDirectiveClassifierPass
+internal class ComponentInjectDirectivePass
+    : IntermediateNodePassBase,
+      IRazorDirectiveClassifierPass
 {
     protected override void ExecuteCore(
         RazorCodeDocument codeDocument,
-        DocumentIntermediateNode documentNode)
+        DocumentIntermediateNode documentNode
+    )
     {
         var visitor = new Visitor();
         visitor.Visit(documentNode);
@@ -43,8 +46,8 @@ internal class ComponentInjectDirectivePass : IntermediateNodePassBase, IRazorDi
 
     private class Visitor : IntermediateNodeWalker
     {
-        public IList<DirectiveIntermediateNode> Directives { get; }
-            = new List<DirectiveIntermediateNode>();
+        public IList<DirectiveIntermediateNode> Directives { get; } =
+            new List<DirectiveIntermediateNode>();
 
         public override void VisitDirective(DirectiveIntermediateNode node)
         {

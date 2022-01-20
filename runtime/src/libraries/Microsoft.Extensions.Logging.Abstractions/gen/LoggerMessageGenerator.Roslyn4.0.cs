@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 [assembly: System.Resources.NeutralResourcesLanguage("en-us")]
 
+
 namespace Microsoft.Extensions.Logging.Generators
 {
     [Generator]
@@ -18,17 +19,28 @@ namespace Microsoft.Extensions.Logging.Generators
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations = context.SyntaxProvider
-                .CreateSyntaxProvider(static (s, _) => Parser.IsSyntaxTargetForGeneration(s), static (ctx, _) => Parser.GetSemanticTargetForGeneration(ctx))
-                .Where(static m => m is not null);
+            IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations =
+                context.SyntaxProvider
+                    .CreateSyntaxProvider(
+                        static (s, _) => Parser.IsSyntaxTargetForGeneration(s),
+                        static (ctx, _) => Parser.GetSemanticTargetForGeneration(ctx)
+                    )
+                    .Where(static m => m is not null);
 
             IncrementalValueProvider<(Compilation, ImmutableArray<ClassDeclarationSyntax>)> compilationAndClasses =
                 context.CompilationProvider.Combine(classDeclarations.Collect());
 
-            context.RegisterSourceOutput(compilationAndClasses, static (spc, source) => Execute(source.Item1, source.Item2, spc));
+            context.RegisterSourceOutput(
+                compilationAndClasses,
+                static (spc, source) => Execute(source.Item1, source.Item2, spc)
+            );
         }
 
-        private static void Execute(Compilation compilation, ImmutableArray<ClassDeclarationSyntax> classes, SourceProductionContext context)
+        private static void Execute(
+            Compilation compilation,
+            ImmutableArray<ClassDeclarationSyntax> classes,
+            SourceProductionContext context
+        )
         {
             if (classes.IsDefaultOrEmpty)
             {

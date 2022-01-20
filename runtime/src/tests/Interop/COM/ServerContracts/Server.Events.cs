@@ -63,14 +63,18 @@ namespace Server.Contract
         public sealed class TestingEvents_EventProvider : TestingEvents_Event, IDisposable
         {
             private readonly WeakReference ConnectionPointContainer;
-            private readonly List<TestingEvents_SinkHelper> eventSinkHelpers = new List<TestingEvents_SinkHelper>();
+            private readonly List<TestingEvents_SinkHelper> eventSinkHelpers =
+                new List<TestingEvents_SinkHelper>();
 
             private IConnectionPoint connectionPoint;
             private bool isDisposed = false;
 
             public TestingEvents_EventProvider(object container)
             {
-                this.ConnectionPointContainer = new WeakReference((IConnectionPointContainer)container, false);
+                this.ConnectionPointContainer = new WeakReference(
+                    (IConnectionPointContainer)container,
+                    false
+                );
             }
 
             event TestingEvents_OnEventEventHandler TestingEvents_Event.OnEvent

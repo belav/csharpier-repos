@@ -10,11 +10,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal class CodeBlockEditHandler : SpanEditHandler
 {
-    public CodeBlockEditHandler(Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer) : base(tokenizer)
-    {
-    }
+    public CodeBlockEditHandler(
+        Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer
+    ) : base(tokenizer) { }
 
-    protected override PartialParseResultInternal CanAcceptChange(SyntaxNode target, SourceChange change)
+    protected override PartialParseResultInternal CanAcceptChange(
+        SyntaxNode target,
+        SourceChange change
+    )
     {
         if (IsAcceptableDeletion(target, change))
         {
@@ -76,7 +79,15 @@ internal class CodeBlockEditHandler : SpanEditHandler
     {
         var relativePosition = change.Span.AbsoluteIndex - target.Position;
 
-        if (target.GetContent().IndexOfAny(new[] { '{', '}', '@', '<', '*', }, relativePosition, change.Span.Length) >= 0)
+        if (
+            target
+                .GetContent()
+                .IndexOfAny(
+                    new[] { '{', '}', '@', '<', '*', },
+                    relativePosition,
+                    change.Span.Length
+                ) >= 0
+        )
         {
             return true;
         }
@@ -118,8 +129,7 @@ internal class CodeBlockEditHandler : SpanEditHandler
 
     public override bool Equals(object obj)
     {
-        return obj is CodeBlockEditHandler other &&
-            base.Equals(other);
+        return obj is CodeBlockEditHandler other && base.Equals(other);
     }
 
     public override int GetHashCode() => base.GetHashCode();

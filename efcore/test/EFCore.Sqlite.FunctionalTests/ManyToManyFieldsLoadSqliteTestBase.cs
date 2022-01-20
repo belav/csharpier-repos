@@ -11,14 +11,12 @@ namespace Microsoft.EntityFrameworkCore
         : ManyToManyFieldsLoadTestBase<ManyToManyFieldsLoadSqliteTest.ManyToManyFieldsLoadSqliteFixture>
     {
         public ManyToManyFieldsLoadSqliteTest(ManyToManyFieldsLoadSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class ManyToManyFieldsLoadSqliteFixture : ManyToManyFieldsLoadFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {

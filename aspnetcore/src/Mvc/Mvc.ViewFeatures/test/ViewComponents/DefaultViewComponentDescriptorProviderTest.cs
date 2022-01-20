@@ -20,11 +20,14 @@ public class DefaultViewComponentDescriptorProviderTest
     public void GetViewComponents_ThrowsIfTypeHasNoInvocationMethods(Type type)
     {
         // Arrange
-        var expected = $"Could not find an 'Invoke' or 'InvokeAsync' method for the view component '{type}'.";
+        var expected =
+            $"Could not find an 'Invoke' or 'InvokeAsync' method for the view component '{type}'.";
         var provider = CreateProvider(type);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => provider.GetViewComponents().ToArray());
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => provider.GetViewComponents().ToArray()
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -35,12 +38,15 @@ public class DefaultViewComponentDescriptorProviderTest
     public void GetViewComponents_ThrowsIfTypeHasAmbiguousInvocationMethods(Type type)
     {
         // Arrange
-        var expected = $"View component '{type}' must have exactly one public method named " +
-            "'InvokeAsync' or 'Invoke'.";
+        var expected =
+            $"View component '{type}' must have exactly one public method named "
+            + "'InvokeAsync' or 'Invoke'.";
         var provider = CreateProvider(type);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => provider.GetViewComponents().ToArray());
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => provider.GetViewComponents().ToArray()
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -51,11 +57,14 @@ public class DefaultViewComponentDescriptorProviderTest
     public void GetViewComponents_ThrowsIfInvokeAsyncDoesNotHaveCorrectReturnType(Type type)
     {
         // Arrange
-        var expected = $"Method 'InvokeAsync' of view component '{type}' should be declared to return Task<T>.";
+        var expected =
+            $"Method 'InvokeAsync' of view component '{type}' should be declared to return Task<T>.";
         var provider = CreateProvider(type);
 
         // Act and Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => provider.GetViewComponents().ToArray());
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => provider.GetViewComponents().ToArray()
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -69,7 +78,9 @@ public class DefaultViewComponentDescriptorProviderTest
         var provider = CreateProvider(type);
 
         // Act and Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => provider.GetViewComponents().ToArray());
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => provider.GetViewComponents().ToArray()
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -78,11 +89,14 @@ public class DefaultViewComponentDescriptorProviderTest
     {
         // Arrange
         var type = typeof(VoidReturningInvokeViewComponent);
-        var expected = $"Method 'Invoke' of view component '{type}' should be declared to return a value.";
+        var expected =
+            $"Method 'Invoke' of view component '{type}' should be declared to return a value.";
         var provider = CreateProvider(type);
 
         // Act and Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => provider.GetViewComponents().ToArray());
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => provider.GetViewComponents().ToArray()
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -130,9 +144,7 @@ public class DefaultViewComponentDescriptorProviderTest
 
     private class VoidReturningInvokeAsyncViewComponent
     {
-        public void InvokeAsync()
-        {
-        }
+        public void InvokeAsync() { }
     }
 
     public class NonTaskReturningInvokeAsyncViewComponent
@@ -152,9 +164,7 @@ public class DefaultViewComponentDescriptorProviderTest
 
     public class VoidReturningInvokeViewComponent
     {
-        public void Invoke(int x)
-        {
-        }
+        public void Invoke(int x) { }
     }
 
     private DefaultViewComponentDescriptorProvider CreateProvider(Type componentType)
@@ -166,9 +176,7 @@ public class DefaultViewComponentDescriptorProviderTest
     private class FilteredViewComponentDescriptorProvider : DefaultViewComponentDescriptorProvider
     {
         public FilteredViewComponentDescriptorProvider(params Type[] allowedTypes)
-            : base(GetApplicationPartManager(allowedTypes.Select(t => t.GetTypeInfo())))
-        {
-        }
+            : base(GetApplicationPartManager(allowedTypes.Select(t => t.GetTypeInfo()))) { }
 
         private static ApplicationPartManager GetApplicationPartManager(IEnumerable<TypeInfo> types)
         {
@@ -180,9 +188,16 @@ public class DefaultViewComponentDescriptorProviderTest
 
         private class TestFeatureProvider : IApplicationFeatureProvider<ViewComponentFeature>
         {
-            public void PopulateFeature(IEnumerable<ApplicationPart> parts, ViewComponentFeature feature)
+            public void PopulateFeature(
+                IEnumerable<ApplicationPart> parts,
+                ViewComponentFeature feature
+            )
             {
-                foreach (var type in parts.OfType<IApplicationPartTypeProvider>().SelectMany(p => p.Types))
+                foreach (
+                    var type in parts
+                        .OfType<IApplicationPartTypeProvider>()
+                        .SelectMany(p => p.Types)
+                )
                 {
                     feature.ViewComponents.Add(type);
                 }

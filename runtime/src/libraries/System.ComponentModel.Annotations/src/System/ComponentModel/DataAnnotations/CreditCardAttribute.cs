@@ -3,12 +3,13 @@
 
 namespace System.ComponentModel.DataAnnotations
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public sealed class CreditCardAttribute : DataTypeAttribute
     {
-        public CreditCardAttribute()
-            : base(DataType.CreditCard)
+        public CreditCardAttribute() : base(DataType.CreditCard)
         {
             // Set DefaultErrorMessage, allowing user to set
             // ErrorMessageResourceType and ErrorMessageResourceName to use localized messages.

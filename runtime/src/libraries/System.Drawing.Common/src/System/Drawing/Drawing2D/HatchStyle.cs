@@ -58,7 +58,6 @@ namespace System.Drawing.Drawing2D
         LargeCheckerBoard = 50,
         OutlinedDiamond = 51,
         SolidDiamond = 52,
-
         LargeGrid = Cross,
         Min = Horizontal,
         Max = LargeGrid

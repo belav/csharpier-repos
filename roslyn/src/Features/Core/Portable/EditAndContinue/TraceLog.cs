@@ -37,20 +37,33 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 Object = type;
             }
 
-            public override string? ToString()
-                => (Object is null) ? Int32.ToString() :
-                   (Object is Type { IsEnum: true } type && Int32 >= 0) ? Enum.GetName(type, Int32) :
-                    Object.ToString();
+            public override string? ToString() =>
+                (Object is null)
+                    ? Int32.ToString()
+                    : (Object is Type { IsEnum: true } type && Int32 >= 0)
+                        ? Enum.GetName(type, Int32)
+                        : Object.ToString();
 
             public static implicit operator Arg(string? value) => new(value);
+
             public static implicit operator Arg(int value) => new(value);
+
             public static implicit operator Arg(bool value) => new(value ? "true" : "false");
+
             public static implicit operator Arg(ProjectId value) => new(value.DebugName);
+
             public static implicit operator Arg(DocumentId value) => new(value.DebugName);
+
             public static implicit operator Arg(Diagnostic value) => new(value);
-            public static implicit operator Arg(ProjectAnalysisSummary value) => new((int)value, typeof(ProjectAnalysisSummary));
-            public static implicit operator Arg(RudeEditKind value) => new((int)value, typeof(RudeEditKind));
-            public static implicit operator Arg((int enumValue, Type enumType) value) => new(value.enumValue, value.enumType);
+
+            public static implicit operator Arg(ProjectAnalysisSummary value) =>
+                new((int)value, typeof(ProjectAnalysisSummary));
+
+            public static implicit operator Arg(RudeEditKind value) =>
+                new((int)value, typeof(RudeEditKind));
+
+            public static implicit operator Arg((int enumValue, Type enumType) value) =>
+                new(value.enumValue, value.enumType);
         }
 
         [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
@@ -66,7 +79,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             internal string GetDebuggerDisplay() =>
-                (MessageFormat == null) ? "" : string.Format(MessageFormat, Args?.Select(a => (object)a).ToArray() ?? Array.Empty<object>());
+                (MessageFormat == null)
+                    ? ""
+                    : string.Format(
+                          MessageFormat,
+                          Args?.Select(a => (object)a).ToArray() ?? Array.Empty<object>()
+                      );
         }
 
         private readonly Entry[] _log;
@@ -85,15 +103,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             _log[(index - 1) % _log.Length] = entry;
         }
 
-        public void Write(string str)
-            => Write(str, args: null);
+        public void Write(string str) => Write(str, args: null);
 
-        public void Write(string format, params Arg[]? args)
-            => Append(new Entry(format, args));
+        public void Write(string format, params Arg[]? args) => Append(new Entry(format, args));
 
         [Conditional("DEBUG")]
-        public void DebugWrite(string str)
-            => DebugWrite(str, args: null);
+        public void DebugWrite(string str) => DebugWrite(str, args: null);
 
         [Conditional("DEBUG")]
         public void DebugWrite(string format, params Arg[]? args)
@@ -103,15 +118,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Debug.WriteLine(entry.ToString(), _id);
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly TraceLog _traceLog;
 
-            public TestAccessor(TraceLog traceLog)
-                => _traceLog = traceLog;
+            public TestAccessor(TraceLog traceLog) => _traceLog = traceLog;
 
             internal Entry[] Entries => _traceLog._log;
         }

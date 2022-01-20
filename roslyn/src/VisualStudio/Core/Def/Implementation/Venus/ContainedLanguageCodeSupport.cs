@@ -41,10 +41,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             return syntaxFacts.IsValidIdentifier(identifier);
         }
 
-        public static bool TryGetBaseClassName(Document document, string className, CancellationToken cancellationToken, out string baseClassName)
+        public static bool TryGetBaseClassName(
+            Document document,
+            string className,
+            CancellationToken cancellationToken,
+            out string baseClassName
+        )
         {
             baseClassName = null;
-            var type = document.Project.GetCompilationAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken).GetTypeByMetadataName(className);
+            var type = document.Project
+                .GetCompilationAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken)
+                .GetTypeByMetadataName(className);
             if (type == null || type.BaseType == null)
             {
                 return false;
@@ -55,21 +63,42 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         }
 
         public static string CreateUniqueEventName(
-            Document document, string className, string objectName, string nameOfEvent, CancellationToken cancellationToken)
+            Document document,
+            string className,
+            string objectName,
+            string nameOfEvent,
+            CancellationToken cancellationToken
+        )
         {
-            var type = document.Project.GetCompilationAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken).GetTypeByMetadataName(className);
+            var type = document.Project
+                .GetCompilationAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken)
+                .GetTypeByMetadataName(className);
             var name = objectName + "_" + nameOfEvent;
 
-            var semanticModel = document.GetSemanticModelAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken);
+            var semanticModel = document
+                .GetSemanticModelAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken);
 
             var tree = document.GetSyntaxTreeSynchronously(cancellationToken);
-            var typeNode = type.DeclaringSyntaxReferences.Where(r => r.SyntaxTree == tree).Select(r => r.GetSyntax(cancellationToken)).First();
+            var typeNode = type.DeclaringSyntaxReferences
+                .Where(r => r.SyntaxTree == tree)
+                .Select(r => r.GetSyntax(cancellationToken))
+                .First();
             var codeModel = document.GetRequiredLanguageService<ICodeModelNavigationPointService>();
-            var options = document.GetOptionsAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken);
+            var options = document
+                .GetOptionsAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken);
             var point = codeModel.GetStartPoint(typeNode, options, EnvDTE.vsCMPart.vsCMPartBody);
-            var reservedNames = semanticModel.LookupSymbols(point.Value.Position, type).Select(m => m.Name);
+            var reservedNames = semanticModel
+                .LookupSymbols(point.Value.Position, type)
+                .Select(m => m.Name);
 
-            return NameGenerator.EnsureUniqueness(name, reservedNames, document.GetLanguageService<ISyntaxFactsService>().IsCaseSensitive);
+            return NameGenerator.EnsureUniqueness(
+                name,
+                reservedNames,
+                document.GetLanguageService<ISyntaxFactsService>().IsCaseSensitive
+            );
         }
 
         /// <summary>
@@ -85,16 +114,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The display name of the method, and a unique to for the method.</returns>
         public static IEnumerable<Tuple<string, string>> GetCompatibleEventHandlers(
-            Document document, string className, string objectTypeName, string nameOfEvent, CancellationToken cancellationToken)
+            Document document,
+            string className,
+            string objectTypeName,
+            string nameOfEvent,
+            CancellationToken cancellationToken
+        )
         {
-            var compilation = document.Project.GetCompilationAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken);
+            var compilation = document.Project
+                .GetCompilationAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken);
             var type = compilation.GetTypeByMetadataName(className);
             if (type == null)
             {
                 throw new InvalidOperationException();
             }
 
-            var eventMember = GetEventSymbol(document, objectTypeName, nameOfEvent, type, cancellationToken);
+            var eventMember = GetEventSymbol(
+                document,
+                objectTypeName,
+                nameOfEvent,
+                type,
+                cancellationToken
+            );
             if (eventMember == null)
             {
                 throw new InvalidOperationException();
@@ -106,13 +148,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 throw new InvalidOperationException(ServicesVSResources.Event_type_is_invalid);
             }
 
-            var methods = type.GetMembers().OfType<IMethodSymbol>().Where(m => m.CompatibleSignatureToDelegate((INamedTypeSymbol)eventType));
+            var methods = type.GetMembers()
+                .OfType<IMethodSymbol>()
+                .Where(m => m.CompatibleSignatureToDelegate((INamedTypeSymbol)eventType));
             return methods.Select(m => Tuple.Create(m.Name, ConstructMemberId(m)));
         }
 
-        public static string GetEventHandlerMemberId(Document document, string className, string objectTypeName, string nameOfEvent, string eventHandlerName, CancellationToken cancellationToken)
+        public static string GetEventHandlerMemberId(
+            Document document,
+            string className,
+            string objectTypeName,
+            string nameOfEvent,
+            string eventHandlerName,
+            CancellationToken cancellationToken
+        )
         {
-            var nameAndId = GetCompatibleEventHandlers(document, className, objectTypeName, nameOfEvent, cancellationToken).SingleOrDefault(pair => pair.Item1 == eventHandlerName);
+            var nameAndId = GetCompatibleEventHandlers(
+                    document,
+                    className,
+                    objectTypeName,
+                    nameOfEvent,
+                    cancellationToken
+                )
+                .SingleOrDefault(pair => pair.Item1 == eventHandlerName);
             return nameAndId == null ? null : nameAndId.Item2;
         }
 
@@ -152,14 +210,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             uint itemidInsertionPoint,
             bool useHandlesClause,
             AbstractFormattingRule additionalFormattingRule,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
 #pragma warning restore IDE0060 // Remove unused parameter
         {
-            var thisCompilation = thisDocument.Project.GetCompilationAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken);
+            var thisCompilation = thisDocument.Project
+                .GetCompilationAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken);
             var type = thisCompilation.GetTypeByMetadataName(className);
 
-            var existingEventHandlers = GetCompatibleEventHandlers(targetDocument, className, objectTypeName, nameOfEvent, cancellationToken);
-            var existingHandler = existingEventHandlers.SingleOrDefault(e => e.Item1 == eventHandlerName);
+            var existingEventHandlers = GetCompatibleEventHandlers(
+                targetDocument,
+                className,
+                objectTypeName,
+                nameOfEvent,
+                cancellationToken
+            );
+            var existingHandler = existingEventHandlers.SingleOrDefault(
+                e => e.Item1 == eventHandlerName
+            );
             if (existingHandler != null)
             {
                 return Tuple.Create(existingHandler.Item2, (string)null, default(VsTextSpan));
@@ -168,22 +237,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             // Okay, it doesn't exist yet.  Let's create it.
             var codeGenerationService = targetDocument.GetLanguageService<ICodeGenerationService>();
             var syntaxFactory = targetDocument.GetLanguageService<SyntaxGenerator>();
-            var eventMember = GetEventSymbol(thisDocument, objectTypeName, nameOfEvent, type, cancellationToken);
+            var eventMember = GetEventSymbol(
+                thisDocument,
+                objectTypeName,
+                nameOfEvent,
+                type,
+                cancellationToken
+            );
             if (eventMember == null)
             {
                 throw new InvalidOperationException();
             }
 
             var eventType = ((IEventSymbol)eventMember).Type;
-            if (eventType.Kind != SymbolKind.NamedType || ((INamedTypeSymbol)eventType).DelegateInvokeMethod == null)
+            if (
+                eventType.Kind != SymbolKind.NamedType
+                || ((INamedTypeSymbol)eventType).DelegateInvokeMethod == null
+            )
             {
                 throw new InvalidOperationException(ServicesVSResources.Event_type_is_invalid);
             }
 
             var handlesExpressions = useHandlesClause
-                ? ImmutableArray.Create(syntaxFactory.MemberAccessExpression(
-                        objectName != null ? syntaxFactory.IdentifierName(objectName) : syntaxFactory.ThisExpression(),
-                        syntaxFactory.IdentifierName(nameOfEvent)))
+                ? ImmutableArray.Create(
+                      syntaxFactory.MemberAccessExpression(
+                          objectName != null
+                            ? syntaxFactory.IdentifierName(objectName)
+                            : syntaxFactory.ThisExpression(),
+                          syntaxFactory.IdentifierName(nameOfEvent)
+                      )
+                  )
                 : default;
 
             var invokeMethod = ((INamedTypeSymbol)eventType).DelegateInvokeMethod;
@@ -191,47 +274,84 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 attributes: default,
                 accessibility: Accessibility.Protected,
                 modifiers: new DeclarationModifiers(),
-                returnType: targetDocument.Project.GetCompilationAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken).GetSpecialType(SpecialType.System_Void),
+                returnType: targetDocument.Project
+                    .GetCompilationAsync(cancellationToken)
+                    .WaitAndGetResult_Venus(cancellationToken)
+                    .GetSpecialType(SpecialType.System_Void),
                 refKind: RefKind.None,
                 explicitInterfaceImplementations: default,
                 name: eventHandlerName,
                 typeParameters: default,
                 parameters: invokeMethod.Parameters,
                 statements: default,
-                handlesExpressions: handlesExpressions);
+                handlesExpressions: handlesExpressions
+            );
 
             var annotation = new SyntaxAnnotation();
             newMethod = annotation.AddAnnotationToSymbol(newMethod);
-            var codeModel = targetDocument.Project.LanguageServices.GetRequiredService<ICodeModelNavigationPointService>();
-            var syntaxFacts = targetDocument.Project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
+            var codeModel =
+                targetDocument.Project.LanguageServices.GetRequiredService<ICodeModelNavigationPointService>();
+            var syntaxFacts =
+                targetDocument.Project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
 
             var targetSyntaxTree = targetDocument.GetSyntaxTreeSynchronously(cancellationToken);
 
-            var position = type.Locations.First(loc => loc.SourceTree == targetSyntaxTree).SourceSpan.Start;
-            var destinationType = syntaxFacts.GetContainingTypeDeclaration(targetSyntaxTree.GetRoot(cancellationToken), position);
-            var options = targetDocument.GetOptionsAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken);
-            var insertionPoint = codeModel.GetEndPoint(destinationType, options, EnvDTE.vsCMPart.vsCMPartBody);
+            var position =
+                type.Locations.First(loc => loc.SourceTree == targetSyntaxTree).SourceSpan.Start;
+            var destinationType = syntaxFacts.GetContainingTypeDeclaration(
+                targetSyntaxTree.GetRoot(cancellationToken),
+                position
+            );
+            var options = targetDocument
+                .GetOptionsAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken);
+            var insertionPoint = codeModel.GetEndPoint(
+                destinationType,
+                options,
+                EnvDTE.vsCMPart.vsCMPartBody
+            );
 
             if (insertionPoint == null)
             {
-                throw new InvalidOperationException(ServicesVSResources.Can_t_find_where_to_insert_member);
+                throw new InvalidOperationException(
+                    ServicesVSResources.Can_t_find_where_to_insert_member
+                );
             }
 
-            var newType = codeGenerationService.AddMethod(destinationType, newMethod, new CodeGenerationOptions(autoInsertionLocation: false), cancellationToken);
-            var newRoot = targetSyntaxTree.GetRoot(cancellationToken).ReplaceNode(destinationType, newType);
+            var newType = codeGenerationService.AddMethod(
+                destinationType,
+                newMethod,
+                new CodeGenerationOptions(autoInsertionLocation: false),
+                cancellationToken
+            );
+            var newRoot = targetSyntaxTree
+                .GetRoot(cancellationToken)
+                .ReplaceNode(destinationType, newType);
 
-            newRoot = Simplifier.ReduceAsync(
-                targetDocument.WithSyntaxRoot(newRoot), Simplifier.Annotation, null, cancellationToken).WaitAndGetResult_Venus(cancellationToken).GetSyntaxRootSynchronously(cancellationToken);
+            newRoot = Simplifier
+                .ReduceAsync(
+                    targetDocument.WithSyntaxRoot(newRoot),
+                    Simplifier.Annotation,
+                    null,
+                    cancellationToken
+                )
+                .WaitAndGetResult_Venus(cancellationToken)
+                .GetSyntaxRootSynchronously(cancellationToken);
 
-            var formattingRules = additionalFormattingRule.Concat(Formatter.GetDefaultFormattingRules(targetDocument));
+            var formattingRules = additionalFormattingRule.Concat(
+                Formatter.GetDefaultFormattingRules(targetDocument)
+            );
 
             newRoot = Formatter.Format(
                 newRoot,
                 Formatter.Annotation,
                 targetDocument.Project.Solution.Workspace,
-                targetDocument.GetOptionsAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken),
+                targetDocument
+                    .GetOptionsAsync(cancellationToken)
+                    .WaitAndGetResult_Venus(cancellationToken),
                 formattingRules,
-                cancellationToken);
+                cancellationToken
+            );
 
             var newMember = newRoot.GetAnnotatedNodesAndTokens(annotation).Single();
             var newMemberText = newMember.ToFullString();
@@ -243,7 +363,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 newMemberText += Environment.NewLine;
             }
 
-            return Tuple.Create(ConstructMemberId(newMethod), newMemberText, insertionPoint.Value.ToVsTextSpan());
+            return Tuple.Create(
+                ConstructMemberId(newMethod),
+                newMemberText,
+                insertionPoint.Value.ToVsTextSpan()
+            );
         }
 
         public static bool TryGetMemberNavigationPoint(
@@ -252,12 +376,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string uniqueMemberID,
             out VsTextSpan textSpan,
             out Document targetDocument,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             targetDocument = null;
             textSpan = default;
 
-            var type = thisDocument.Project.GetCompilationAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken).GetTypeByMetadataName(className);
+            var type = thisDocument.Project
+                .GetCompilationAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken)
+                .GetTypeByMetadataName(className);
             var member = LookupMemberId(type, uniqueMemberID);
 
             if (member == null)
@@ -265,13 +393,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 return false;
             }
 
-            var codeModel = thisDocument.Project.LanguageServices.GetService<ICodeModelNavigationPointService>();
-            var memberNode = member.DeclaringSyntaxReferences.Select(r => r.GetSyntax(cancellationToken)).FirstOrDefault();
+            var codeModel =
+                thisDocument.Project.LanguageServices.GetService<ICodeModelNavigationPointService>();
+            var memberNode = member.DeclaringSyntaxReferences
+                .Select(r => r.GetSyntax(cancellationToken))
+                .FirstOrDefault();
             if (memberNode != null)
             {
-                var memberNodeDocument = thisDocument.Project.Solution.GetDocument(memberNode.SyntaxTree);
-                var options = memberNodeDocument.GetOptionsAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken);
-                var navigationPoint = codeModel.GetStartPoint(memberNode, options, EnvDTE.vsCMPart.vsCMPartNavigate);
+                var memberNodeDocument = thisDocument.Project.Solution.GetDocument(
+                    memberNode.SyntaxTree
+                );
+                var options = memberNodeDocument
+                    .GetOptionsAsync(cancellationToken)
+                    .WaitAndGetResult_Venus(cancellationToken);
+                var navigationPoint = codeModel.GetStartPoint(
+                    memberNode,
+                    options,
+                    EnvDTE.vsCMPart.vsCMPartNavigate
+                );
                 if (navigationPoint != null)
                 {
                     targetDocument = memberNodeDocument;
@@ -288,16 +427,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         /// name="className"/>.
         /// </summary>
         public static IEnumerable<Tuple<string, string>> GetMembers(
-            Document document, string className, CODEMEMBERTYPE codeMemberType, CancellationToken cancellationToken)
+            Document document,
+            string className,
+            CODEMEMBERTYPE codeMemberType,
+            CancellationToken cancellationToken
+        )
         {
-            var type = document.Project.GetCompilationAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken).GetTypeByMetadataName(className);
+            var type = document.Project
+                .GetCompilationAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken)
+                .GetTypeByMetadataName(className);
 
-            var compilation = document.Project.GetCompilationAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken);
-            var semanticModel = document.GetSemanticModelAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken);
+            var compilation = document.Project
+                .GetCompilationAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken);
+            var semanticModel = document
+                .GetSemanticModelAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken);
 
-            var allMembers = codeMemberType == CODEMEMBERTYPE.CODEMEMBERTYPE_EVENTS ?
-                semanticModel.LookupSymbols(position: type.Locations[0].SourceSpan.Start, container: type, name: null) :
-                type.GetMembers();
+            var allMembers =
+                codeMemberType == CODEMEMBERTYPE.CODEMEMBERTYPE_EVENTS
+                    ? semanticModel.LookupSymbols(
+                          position: type.Locations[0].SourceSpan.Start,
+                          container: type,
+                          name: null
+                      )
+                    : type.GetMembers();
 
             var members = allMembers.Where(m => IncludeMember(m, codeMemberType, compilation));
             return members.Select(m => Tuple.Create(m.Name, ConstructMemberId(m)));
@@ -314,7 +469,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             string oldFullyQualifiedName,
             string newFullyQualifiedName,
             IEnumerable<IRefactorNotifyService> refactorNotifyServices,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var symbol = FindSymbol(document, clrt, oldFullyQualifiedName, cancellationToken);
             if (symbol == null)
@@ -322,19 +478,46 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 return false;
             }
 
-            if (CodeAnalysis.Workspace.TryGetWorkspace(document.GetTextSynchronously(cancellationToken).Container, out var workspace))
+            if (
+                CodeAnalysis.Workspace.TryGetWorkspace(
+                    document.GetTextSynchronously(cancellationToken).Container,
+                    out var workspace
+                )
+            )
             {
-                var newName = newFullyQualifiedName.Substring(newFullyQualifiedName.LastIndexOf('.') + 1);
+                var newName = newFullyQualifiedName.Substring(
+                    newFullyQualifiedName.LastIndexOf('.') + 1
+                );
                 var optionSet = document.Project.Solution.Workspace.Options;
-                var newSolution = Renamer.RenameSymbolAsync(document.Project.Solution, symbol, newName, optionSet, cancellationToken).WaitAndGetResult_Venus(cancellationToken);
+                var newSolution = Renamer
+                    .RenameSymbolAsync(
+                        document.Project.Solution,
+                        symbol,
+                        newName,
+                        optionSet,
+                        cancellationToken
+                    )
+                    .WaitAndGetResult_Venus(cancellationToken);
                 var changedDocuments = newSolution.GetChangedDocuments(document.Project.Solution);
 
-                var undoTitle = string.Format(EditorFeaturesResources.Rename_0_to_1, symbol.Name, newName);
-                using (var workspaceUndoTransaction = workspace.OpenGlobalUndoTransaction(undoTitle))
+                var undoTitle = string.Format(
+                    EditorFeaturesResources.Rename_0_to_1,
+                    symbol.Name,
+                    newName
+                );
+                using (
+                    var workspaceUndoTransaction = workspace.OpenGlobalUndoTransaction(undoTitle)
+                )
                 {
                     // Notify third parties about the coming rename operation on the workspace, and let
                     // any exceptions propagate through
-                    refactorNotifyServices.TryOnBeforeGlobalSymbolRenamed(workspace, changedDocuments, symbol, newName, throwOnFailure: true);
+                    refactorNotifyServices.TryOnBeforeGlobalSymbolRenamed(
+                        workspace,
+                        changedDocuments,
+                        symbol,
+                        newName,
+                        throwOnFailure: true
+                    );
 
                     if (!workspace.TryApplyChanges(newSolution))
                     {
@@ -343,7 +526,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
                     // Notify third parties about the completed rename operation on the workspace, and
                     // let any exceptions propagate through
-                    refactorNotifyServices.TryOnAfterGlobalSymbolRenamed(workspace, changedDocuments, symbol, newName, throwOnFailure: true);
+                    refactorNotifyServices.TryOnAfterGlobalSymbolRenamed(
+                        workspace,
+                        changedDocuments,
+                        symbol,
+                        newName,
+                        throwOnFailure: true
+                    );
 
                     workspaceUndoTransaction.Commit();
                 }
@@ -357,7 +546,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             }
         }
 
-        private static bool IncludeMember(ISymbol member, CODEMEMBERTYPE memberType, Compilation compilation)
+        private static bool IncludeMember(
+            ISymbol member,
+            CODEMEMBERTYPE memberType,
+            Compilation compilation
+        )
         {
             if (!member.CanBeReferencedByName)
             {
@@ -367,7 +560,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             switch (memberType)
             {
                 case CODEMEMBERTYPE.CODEMEMBERTYPE_EVENT_HANDLERS:
-                    // NOTE: the Dev10 C# codebase just returned 
+                    // NOTE: the Dev10 C# codebase just returned
                     if (member.Kind != SymbolKind.Method)
                     {
                         return false;
@@ -389,7 +582,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                         return false;
                     }
 
-                    if (!method.Parameters[1].Type.InheritsFromOrEquals(compilation.EventArgsType()))
+                    if (
+                        !method.Parameters[1].Type.InheritsFromOrEquals(compilation.EventArgsType())
+                    )
                     {
                         return false;
                     }
@@ -408,24 +603,42 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         }
 
         private static ISymbol FindSymbol(
-            Document document, ContainedLanguageRenameType renameType, string fullyQualifiedName, CancellationToken cancellationToken)
+            Document document,
+            ContainedLanguageRenameType renameType,
+            string fullyQualifiedName,
+            CancellationToken cancellationToken
+        )
         {
             switch (renameType)
             {
                 case ContainedLanguageRenameType.CLRT_CLASS:
-                    return document.Project.GetCompilationAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken).GetTypeByMetadataName(fullyQualifiedName);
+                    return document.Project
+                        .GetCompilationAsync(cancellationToken)
+                        .WaitAndGetResult_Venus(cancellationToken)
+                        .GetTypeByMetadataName(fullyQualifiedName);
 
                 case ContainedLanguageRenameType.CLRT_CLASSMEMBER:
                     var lastDot = fullyQualifiedName.LastIndexOf('.');
                     var typeName = fullyQualifiedName.Substring(0, lastDot);
-                    var memberName = fullyQualifiedName.Substring(lastDot + 1, fullyQualifiedName.Length - lastDot - 1);
-                    var type = document.Project.GetCompilationAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken).GetTypeByMetadataName(typeName);
-                    var semanticModel = document.GetSemanticModelAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken);
+                    var memberName = fullyQualifiedName.Substring(
+                        lastDot + 1,
+                        fullyQualifiedName.Length - lastDot - 1
+                    );
+                    var type = document.Project
+                        .GetCompilationAsync(cancellationToken)
+                        .WaitAndGetResult_Venus(cancellationToken)
+                        .GetTypeByMetadataName(typeName);
+                    var semanticModel = document
+                        .GetSemanticModelAsync(cancellationToken)
+                        .WaitAndGetResult_Venus(cancellationToken);
                     var membersOfName = type.GetMembers(memberName);
                     return membersOfName.SingleOrDefault();
 
                 case ContainedLanguageRenameType.CLRT_NAMESPACE:
-                    var ns = document.Project.GetCompilationAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken).GlobalNamespace;
+                    var ns =
+                        document.Project
+                            .GetCompilationAsync(cancellationToken)
+                            .WaitAndGetResult_Venus(cancellationToken).GlobalNamespace;
                     var parts = fullyQualifiedName.Split('.');
                     for (var i = 0; i < parts.Length && ns != null; i++)
                     {
@@ -435,7 +648,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     return ns;
 
                 case ContainedLanguageRenameType.CLRT_OTHER:
-                    throw new NotSupportedException(ServicesVSResources.Can_t_rename_other_elements);
+                    throw new NotSupportedException(
+                        ServicesVSResources.Can_t_rename_other_elements
+                    );
 
                 default:
                     throw new InvalidOperationException(ServicesVSResources.Unknown_rename_type);
@@ -446,7 +661,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         {
             if (member.Kind == SymbolKind.Method)
             {
-                return string.Format("{0}({1})", member.Name, string.Join(",", ((IMethodSymbol)member).Parameters.Select(p => p.Type.ToDisplayString())));
+                return string.Format(
+                    "{0}({1})",
+                    member.Name,
+                    string.Join(
+                        ",",
+                        ((IMethodSymbol)member).Parameters.Select(p => p.Type.ToDisplayString())
+                    )
+                );
             }
             else if (member.Kind == SymbolKind.Event)
             {
@@ -454,7 +676,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             }
             else
             {
-                throw new NotSupportedException(ServicesVSResources.IDs_are_not_supported_for_this_symbol_type);
+                throw new NotSupportedException(
+                    ServicesVSResources.IDs_are_not_supported_for_this_symbol_type
+                );
             }
         }
 
@@ -475,10 +699,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         }
 
         private static ISymbol GetEventSymbol(
-            Document document, string objectTypeName, string nameOfEvent, INamedTypeSymbol type, CancellationToken cancellationToken)
+            Document document,
+            string objectTypeName,
+            string nameOfEvent,
+            INamedTypeSymbol type,
+            CancellationToken cancellationToken
+        )
         {
-            var compilation = document.Project.GetCompilationAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken);
-            var semanticModel = document.GetSemanticModelAsync(cancellationToken).WaitAndGetResult_Venus(cancellationToken);
+            var compilation = document.Project
+                .GetCompilationAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken);
+            var semanticModel = document
+                .GetSemanticModelAsync(cancellationToken)
+                .WaitAndGetResult_Venus(cancellationToken);
 
             var objectType = compilation.GetTypeByMetadataName(objectTypeName);
             if (objectType == null)
@@ -493,7 +726,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 throw new InvalidOperationException();
             }
 
-            return semanticModel.LookupSymbols(typeLocation.SourceSpan.Start, objectType, nameOfEvent).SingleOrDefault(m => m.Kind == SymbolKind.Event);
+            return semanticModel
+                .LookupSymbols(typeLocation.SourceSpan.Start, objectType, nameOfEvent)
+                .SingleOrDefault(m => m.Kind == SymbolKind.Event);
         }
     }
 }

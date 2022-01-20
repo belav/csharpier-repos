@@ -20,9 +20,7 @@ namespace System.Data
         /// Constructs a new sys description.
         /// </summary>
         [Obsolete("DataSysDescriptionAttribute has been deprecated and is not supported.")]
-        public DataSysDescriptionAttribute(string description) : base(description)
-        {
-        }
+        public DataSysDescriptionAttribute(string description) : base(description) { }
 
         /// <summary>
         /// Retrieves the description text.

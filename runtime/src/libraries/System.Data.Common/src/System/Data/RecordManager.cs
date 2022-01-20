@@ -28,9 +28,10 @@ namespace System.Data
 
         private void GrowRecordCapacity()
         {
-            RecordCapacity = NewCapacity(_recordCapacity) < NormalizedMinimumCapacity(_minimumCapacity) ?
-                NormalizedMinimumCapacity(_minimumCapacity) :
-                NewCapacity(_recordCapacity);
+            RecordCapacity =
+                NewCapacity(_recordCapacity) < NormalizedMinimumCapacity(_minimumCapacity)
+                    ? NormalizedMinimumCapacity(_minimumCapacity)
+                    : NewCapacity(_recordCapacity);
 
             // set up internal map : record --> row
             DataRow[] newRows = _table.NewRowArray(_recordCapacity);
@@ -218,9 +219,7 @@ namespace System.Data
             int newRecord = -1;
             try
             {
-                newRecord = copy == -1 ?
-                    _table.NewUninitializedRecord() :
-                    copy;
+                newRecord = copy == -1 ? _table.NewUninitializedRecord() : copy;
 
                 int count = _table.Columns.Count;
                 for (int i = 0; i < count; ++i)
@@ -267,19 +266,31 @@ namespace System.Data
         [Conditional("DEBUG")]
         internal void VerifyRecord(int record)
         {
-            Debug.Assert((record < _lastFreeRecord) && (-1 == _freeRecordList.IndexOf(record)), "accessing free record");
+            Debug.Assert(
+                (record < _lastFreeRecord) && (-1 == _freeRecordList.IndexOf(record)),
+                "accessing free record"
+            );
             var r = _rows[record];
-            Debug.Assert((null == r) ||
-                         (record == r._oldRecord) ||
-                         (record == r._newRecord) ||
-                         (record == r._tempRecord), "record of a different row");
+            Debug.Assert(
+                (null == r)
+                    || (record == r._oldRecord)
+                    || (record == r._newRecord)
+                    || (record == r._tempRecord),
+                "record of a different row"
+            );
         }
 
         [Conditional("DEBUG")]
         internal void VerifyRecord(int record, DataRow? row)
         {
-            Debug.Assert((record < _lastFreeRecord) && (-1 == _freeRecordList.IndexOf(record)), "accessing free record");
-            Debug.Assert((null == _rows[record]) || (row == _rows[record]), "record of a different row");
+            Debug.Assert(
+                (record < _lastFreeRecord) && (-1 == _freeRecordList.IndexOf(record)),
+                "accessing free record"
+            );
+            Debug.Assert(
+                (null == _rows[record]) || (row == _rows[record]),
+                "record of a different row"
+            );
         }
     }
 }

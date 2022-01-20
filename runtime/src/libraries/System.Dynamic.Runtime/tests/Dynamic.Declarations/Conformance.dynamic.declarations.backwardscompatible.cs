@@ -36,8 +36,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamicfieldorlocal002.dynamicfieldorlocal002
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -49,6 +47,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     public class C
     {
         private int _dynamic = 1;
+
         public int M()
         {
             _dynamic = 2;
@@ -94,8 +93,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared001.dynamictypedeclared001
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -137,8 +134,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared002.dynamictypedeclared002
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -167,24 +162,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         private dynamic _mydynamic;
         public dynamic MyProperty
         {
-            get
-            {
-                return _mydynamic;
-            }
-
-            set
-            {
-                _mydynamic = value;
-            }
+            get { return _mydynamic; }
+            set { _mydynamic = value; }
         }
 
         public dynamic this[int index]
         {
-            get
-            {
-                return new dynamic(index);
-            }
-
+            get { return new dynamic(index); }
             set
             { /* set the specified index to value here */
             }
@@ -230,8 +214,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared003.dynamictypedeclared003
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -248,6 +230,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         }
 
         public int i = 0;
+
         public static int operator +(dynamic v1, dynamic v2)
         {
             return v1.i + v2.i;
@@ -263,11 +246,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
 
         public int this[dynamic v]
         {
-            get
-            {
-                return v.i;
-            }
-
+            get { return v.i; }
             set
             { /* set the specified index to value here */
             }
@@ -305,8 +284,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared004.dynamictypedeclared004
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -319,8 +296,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     {
     }
 
-    public class G<T>
-        where T : dynamic
+    public class G<T> where T : dynamic
     {
         public R M<R>(R r) where R : dynamic
         {
@@ -342,8 +318,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared005.dynamictypedeclared005
 {
@@ -377,8 +351,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared006.dynamictypedeclared006
 {
@@ -417,43 +389,23 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
             {
                 return -1;
             }
-
             ;
             D x = new D();
-            dynamic[,] dynamicr3 =
-            {
-            {
-            x, x
-            }
-
-            , {
-            x, x
-            }
-
-            , {
-            x, x
-            }
-            }
-
-            ;
+            dynamic[,] dynamicr3 = { { x, x }, { x, x }, { x, x } };
             if (dynamicr3.Length != 6)
             {
                 return -1;
             }
-
             ;
             if (!(dynamicr3[0, 0].Equals(x)))
             {
                 return -1;
             }
-
             ;
             return 0;
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared007.dynamictypedeclared007
 {
@@ -516,8 +468,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared008.dynamictypedeclared008
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -533,6 +483,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     public class Test
     {
         private static dynamic s_v = new dynamic();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -551,8 +502,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared009.dynamictypedeclared009
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -569,6 +518,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     {
         private static dynamic s_v1 = new dynamic();
         private static dynamic s_v2;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -593,8 +543,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared010.dynamictypedeclared010
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -610,6 +558,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     public class Test
     {
         private static dynamic s_v1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -630,8 +579,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared011.dynamictypedeclared011
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -644,10 +591,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     {
     }
 
-    public class G<T>
-        where T : new()
+    public class G<T> where T : new()
     {
         public T V = new T();
+
         public R M<R>() where R : new()
         {
             return new R();
@@ -680,8 +627,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared012.dynamictypedeclared012
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -690,8 +635,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public class G<dynamic>
-        where dynamic : new()
+    public class G<dynamic> where dynamic : new()
     {
         public dynamic V = new dynamic();
     }
@@ -748,8 +692,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         {
         }
 
-        public class G2<dynamic>
-            where dynamic : new()
+        public class G2<dynamic> where dynamic : new()
         {
             public dynamic V = new dynamic();
         }
@@ -764,8 +707,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared013.dynamictypedeclared013
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -778,8 +719,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     {
     }
 
-    public class G<dynamic>
-        where dynamic : new()
+    public class G<dynamic> where dynamic : new()
     {
         public dynamic V = new dynamic();
     }
@@ -819,8 +759,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared014.dynamictypedeclared014
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -834,6 +772,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 
     internal delegate dynamic D(dynamic v);
+
     public class Test
     {
         [Fact]
@@ -844,12 +783,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
 
         public static int MainMethod()
         {
-            D d = delegate (dynamic v)
+            D d = delegate(dynamic v)
             {
                 return new dynamic();
-            }
-
-            ;
+            };
             if (!d(new dynamic()).GetType().Equals(typeof(dynamic)))
             {
                 return -1;
@@ -859,8 +796,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared015.dynamictypedeclared015
 {
@@ -891,8 +826,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     //    }
     //}
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared016.dynamictypedeclared016
 {
@@ -929,8 +862,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared017.dynamictypedeclared017
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -964,8 +895,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared018.dynamictypedeclared018
 {
     // <Area> Implicitly Typed Local Variables </Area>
@@ -986,12 +915,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         {
             A a = new A();
             int c = 0;
-            a.MyEvent += delegate (int i)
+            a.MyEvent += delegate(int i)
             {
                 c += i;
-            }
-
-            ;
+            };
             a.MyEvent(1);
             a.MyEvent(2);
             if (c != 3)
@@ -1006,8 +933,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         private delegate void dynamic(int i);
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared019.dynamictypedeclared019
 {
@@ -1035,8 +960,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared021.dynamictypedeclared021
 {
@@ -1080,8 +1003,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamictypedeclared023.dynamictypedeclared023
 {
     public class Test
@@ -1108,8 +1029,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.errorverifier.errorverifier
 {
@@ -1293,8 +1212,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.variablenameddynamic001.variablenameddynamic001
 {
     // <Title> Interaction between object and dynamic</Title>
@@ -1330,8 +1247,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardscompatible.dynamicnsdeclared.dynamicnsdeclared
 {
     // <Title>declare dynamic namespace</Title>
@@ -1357,12 +1272,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
         }
     }
 
-    namespace var
-    {
-    }
+    namespace var { }
 
-    namespace dynamic
-    {
-    }
+    namespace dynamic { }
     // </Code>
 }

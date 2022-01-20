@@ -6,10 +6,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class GearsOfWarFromSqlQuerySqlServerTest : GearsOfWarFromSqlQueryTestBase<GearsOfWarQuerySqlServerFixture>
+    public class GearsOfWarFromSqlQuerySqlServerTest
+        : GearsOfWarFromSqlQueryTestBase<GearsOfWarQuerySqlServerFixture>
     {
-        public GearsOfWarFromSqlQuerySqlServerTest(GearsOfWarQuerySqlServerFixture fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public GearsOfWarFromSqlQuerySqlServerTest(
+            GearsOfWarQuerySqlServerFixture fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             fixture.TestSqlLoggerFactory.Clear();
         }
@@ -20,13 +23,12 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             Assert.Equal(
                 @"SELECT ""Id"", ""Name"", ""IsAutomatic"", ""AmmunitionType"", ""OwnerFullName"", ""SynergyWithId"" FROM ""Weapons"" ORDER BY ""Name""",
-                Sql);
+                Sql
+            );
         }
 
-        protected override void ClearLog()
-            => Fixture.TestSqlLoggerFactory.Clear();
+        protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-        private string Sql
-            => Fixture.TestSqlLoggerFactory.Sql;
+        private string Sql => Fixture.TestSqlLoggerFactory.Sql;
     }
 }

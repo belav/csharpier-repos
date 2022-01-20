@@ -22,21 +22,30 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     internal static partial class DependentProjectsFinder
     {
         public static async Task<ImmutableArray<Project>> GetDependentProjectsAsync(
-            Solution solution, ISymbol symbol, IImmutableSet<Project>? projects, CancellationToken cancellationToken)
+            Solution solution,
+            ISymbol symbol,
+            IImmutableSet<Project>? projects,
+            CancellationToken cancellationToken
+        )
         {
             if (symbol.Kind == SymbolKind.Namespace)
             {
                 // namespaces are visible in all projects.
                 return projects != null
-                    ? projects.ToImmutableArray()
-                    : solution.Projects.ToImmutableArray();
+                  ? projects.ToImmutableArray()
+                  : solution.Projects.ToImmutableArray();
             }
             else
             {
-                var dependentProjects = await GetDependentProjectsWorkerAsync(solution, symbol, cancellationToken).ConfigureAwait(false);
+                var dependentProjects = await GetDependentProjectsWorkerAsync(
+                        solution,
+                        symbol,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return projects != null
-                    ? dependentProjects.WhereAsArray(projects.Contains)
-                    : dependentProjects;
+                  ? dependentProjects.WhereAsArray(projects.Contains)
+                  : dependentProjects;
             }
         }
 
@@ -53,7 +62,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// Dependent projects computed in stage (1) are cached to avoid recomputation.
         /// </summary>
         private static async Task<ImmutableArray<Project>> GetDependentProjectsWorkerAsync(
-            Solution solution, ISymbol symbol, CancellationToken cancellationToken)
+            Solution solution,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -66,12 +78,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // 1) Compute all the dependent projects (submission + non-submission) and their InternalsVisibleTo semantics to the definition project.
             var symbolVisibility = symbol.GetResultantVisibility();
             var dependentProjects = await ComputeDependentProjectsAsync(
-                solution, symbolOrigination, symbolVisibility, cancellationToken).ConfigureAwait(false);
+                    solution,
+                    symbolOrigination,
+                    symbolVisibility,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // 2) Filter the above computed dependent projects based on symbol visibility.
-            var filteredProjects = symbolVisibility == SymbolVisibility.Internal
-                ? dependentProjects.WhereAsArray(dp => dp.hasInternalsAccess)
-                : dependentProjects;
+            var filteredProjects =
+                symbolVisibility == SymbolVisibility.Internal
+                    ? dependentProjects.WhereAsArray(dp => dp.hasInternalsAccess)
+                    : dependentProjects;
 
             return filteredProjects.SelectAsArray(t => t.project);
         }
@@ -82,17 +100,25 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// was a symbol from source.
         /// </summary>
         private static (IAssemblySymbol assembly, Project? sourceProject) GetSymbolOrigination(
-            Solution solution, ISymbol symbol, CancellationToken cancellationToken)
+            Solution solution,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             var assembly = symbol.OriginalDefinition.ContainingAssembly;
-            return assembly == null ? default : (assembly, solution.GetProject(assembly, cancellationToken));
+            return assembly == null
+              ? default
+              : (assembly, solution.GetProject(assembly, cancellationToken));
         }
 
-        private static async Task<ImmutableArray<(Project project, bool hasInternalsAccess)>> ComputeDependentProjectsAsync(
+        private static async Task<
+            ImmutableArray<(Project project, bool hasInternalsAccess)>
+        > ComputeDependentProjectsAsync(
             Solution solution,
             (IAssemblySymbol assembly, Project? sourceProject) symbolOrigination,
             SymbolVisibility visibility,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -105,17 +131,32 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             // If it's not private, then we need to find possible references.
             if (visibility != SymbolVisibility.Private)
-                AddNonSubmissionDependentProjects(solution, symbolOrigination, dependentProjects, cancellationToken);
+                AddNonSubmissionDependentProjects(
+                    solution,
+                    symbolOrigination,
+                    dependentProjects,
+                    cancellationToken
+                );
 
             // submission projects are special here. The fields generated inside the Script object is private, but
             // further submissions can bind to them.
-            await AddSubmissionDependentProjectsAsync(solution, symbolOrigination.sourceProject, dependentProjects, cancellationToken).ConfigureAwait(false);
+            await AddSubmissionDependentProjectsAsync(
+                    solution,
+                    symbolOrigination.sourceProject,
+                    dependentProjects,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return dependentProjects.ToImmutableArray();
         }
 
         private static async Task AddSubmissionDependentProjectsAsync(
-            Solution solution, Project? sourceProject, HashSet<(Project project, bool hasInternalsAccess)> dependentProjects, CancellationToken cancellationToken)
+            Solution solution,
+            Project? sourceProject,
+            HashSet<(Project project, bool hasInternalsAccess)> dependentProjects,
+            CancellationToken cancellationToken
+        )
         {
             if (sourceProject?.IsSubmission != true)
                 return;
@@ -132,18 +173,31 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                     // If we are referencing another project, store the link in the other direction
                     // so we walk across it later
-                    var compilation = await project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
+                    var compilation = await project
+                        .GetRequiredCompilationAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     var previous = compilation.ScriptCompilationInfo?.PreviousScriptCompilation;
 
                     if (previous != null)
                     {
-                        var referencedProject = solution.GetProject(previous.Assembly, cancellationToken);
+                        var referencedProject = solution.GetProject(
+                            previous.Assembly,
+                            cancellationToken
+                        );
                         if (referencedProject != null)
                         {
-                            if (!projectIdsToReferencingSubmissionIds.TryGetValue(referencedProject.Id, out var referencingSubmissions))
+                            if (
+                                !projectIdsToReferencingSubmissionIds.TryGetValue(
+                                    referencedProject.Id,
+                                    out var referencingSubmissions
+                                )
+                            )
                             {
                                 referencingSubmissions = new List<ProjectId>();
-                                projectIdsToReferencingSubmissionIds.Add(referencedProject.Id, referencingSubmissions);
+                                projectIdsToReferencingSubmissionIds.Add(
+                                    referencedProject.Id,
+                                    referencingSubmissions
+                                );
                             }
 
                             referencingSubmissions.Add(project.Id);
@@ -157,19 +211,28 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // and 2, even though 2 doesn't have a direct reference to 1. Hence we need to take
             // our current set of projects and find the transitive closure over backwards
             // submission previous references.
-            var projectIdsToProcess = new Stack<ProjectId>(dependentProjects.Select(dp => dp.project.Id));
+            var projectIdsToProcess = new Stack<ProjectId>(
+                dependentProjects.Select(dp => dp.project.Id)
+            );
 
             while (projectIdsToProcess.Count > 0)
             {
                 var toProcess = projectIdsToProcess.Pop();
 
-                if (projectIdsToReferencingSubmissionIds.TryGetValue(toProcess, out var submissionIds))
+                if (
+                    projectIdsToReferencingSubmissionIds.TryGetValue(
+                        toProcess,
+                        out var submissionIds
+                    )
+                )
                 {
                     foreach (var pId in submissionIds)
                     {
                         if (!dependentProjects.Any(dp => dp.project.Id == pId))
                         {
-                            dependentProjects.Add((solution.GetRequiredProject(pId), hasInternalsAccess: true));
+                            dependentProjects.Add(
+                                (solution.GetRequiredProject(pId), hasInternalsAccess: true)
+                            );
                             projectIdsToProcess.Push(pId);
                         }
                     }
@@ -180,18 +243,21 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private static bool IsInternalsVisibleToAttribute(AttributeData attr)
         {
             var attrType = attr.AttributeClass;
-            return attrType?.Name == nameof(InternalsVisibleToAttribute) &&
-                   attrType.ContainingNamespace?.Name == nameof(System.Runtime.CompilerServices) &&
-                   attrType.ContainingNamespace.ContainingNamespace?.Name == nameof(System.Runtime) &&
-                   attrType.ContainingNamespace.ContainingNamespace.ContainingNamespace?.Name == nameof(System) &&
-                   attrType.ContainingNamespace.ContainingNamespace.ContainingNamespace.ContainingNamespace?.IsGlobalNamespace == true;
+            return attrType?.Name == nameof(InternalsVisibleToAttribute)
+                && attrType.ContainingNamespace?.Name == nameof(System.Runtime.CompilerServices)
+                && attrType.ContainingNamespace.ContainingNamespace?.Name == nameof(System.Runtime)
+                && attrType.ContainingNamespace.ContainingNamespace.ContainingNamespace?.Name
+                    == nameof(System)
+                && attrType.ContainingNamespace.ContainingNamespace.ContainingNamespace.ContainingNamespace?.IsGlobalNamespace
+                    == true;
         }
 
         private static void AddNonSubmissionDependentProjects(
             Solution solution,
             (IAssemblySymbol assembly, Project? sourceProject) symbolOrigination,
             HashSet<(Project project, bool hasInternalsAccess)> dependentProjects,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (symbolOrigination.sourceProject?.IsSubmission == true)
                 return;
@@ -200,8 +266,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             HashSet<string>? internalsVisibleToSet = null;
             foreach (var project in solution.Projects)
             {
-                if (!project.SupportsCompilation ||
-                    !HasReferenceTo(symbolOrigination, project, cancellationToken))
+                if (
+                    !project.SupportsCompilation
+                    || !HasReferenceTo(symbolOrigination, project, cancellationToken)
+                )
                 {
                     continue;
                 }
@@ -220,9 +288,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             foreach (var attr in assembly.GetAttributes().Where(IsInternalsVisibleToAttribute))
             {
                 var typeNameConstant = attr.ConstructorArguments.FirstOrDefault();
-                if (typeNameConstant.Type == null ||
-                    typeNameConstant.Type.SpecialType != SpecialType.System_String ||
-                    typeNameConstant.Value is not string value)
+                if (
+                    typeNameConstant.Type == null
+                    || typeNameConstant.Type.SpecialType != SpecialType.System_String
+                    || typeNameConstant.Value is not string value
+                )
                 {
                     continue;
                 }
@@ -239,7 +309,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private static bool HasReferenceTo(
             (IAssemblySymbol assembly, Project? sourceProject) symbolOrigination,
             Project project,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(symbolOrigination.assembly);
             Contract.ThrowIfNull(project);
@@ -247,13 +318,23 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             // If our symbol was from a project, then just check if this current project has a direct reference to it.
             if (symbolOrigination.sourceProject != null)
-                return project.ProjectReferences.Any(p => p.ProjectId == symbolOrigination.sourceProject.Id);
+                return project.ProjectReferences.Any(
+                    p => p.ProjectId == symbolOrigination.sourceProject.Id
+                );
 
             // Otherwise, if the symbol is from metadata, see if the project's compilation references that metadata assembly.
-            return HasReferenceToAssembly(project, symbolOrigination.assembly.Name, cancellationToken);
+            return HasReferenceToAssembly(
+                project,
+                symbolOrigination.assembly.Name,
+                cancellationToken
+            );
         }
 
-        private static bool HasReferenceToAssembly(Project project, string assemblyName, CancellationToken cancellationToken)
+        private static bool HasReferenceToAssembly(
+            Project project,
+            string assemblyName,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(project.SupportsCompilation);
 
@@ -262,7 +343,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // WORKAROUND:
                 // perf check metadata reference using newly created empty compilation with only metadata references.
                 compilation = project.LanguageServices.CompilationFactory!.CreateCompilation(
-                    project.AssemblyName, project.CompilationOptions!);
+                    project.AssemblyName,
+                    project.CompilationOptions!
+                );
 
                 compilation = compilation.AddReferences(project.MetadataReferences);
             }
@@ -271,8 +354,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                if (compilation.GetAssemblyOrModuleSymbol(reference) is IAssemblySymbol symbol &&
-                    symbol.Name == assemblyName)
+                if (
+                    compilation.GetAssemblyOrModuleSymbol(reference) is IAssemblySymbol symbol
+                    && symbol.Name == assemblyName
+                )
                 {
                     return true;
                 }

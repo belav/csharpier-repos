@@ -27,7 +27,12 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static unsafe bool TryFormat(decimal value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static unsafe bool TryFormat(
+            decimal value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             if (format.IsDefault)
             {
@@ -38,77 +43,113 @@ namespace System.Buffers.Text
             {
                 case 'g':
                 case 'G':
+                {
+                    if (format.Precision != StandardFormat.NoPrecision)
+                        throw new NotSupportedException(SR.Argument_GWithPrecisionNotSupported);
+
+                    byte* pDigits = stackalloc byte[Number.DecimalNumberBufferLength];
+                    Number.NumberBuffer number = new Number.NumberBuffer(
+                        Number.NumberBufferKind.Decimal,
+                        pDigits,
+                        Number.DecimalNumberBufferLength
+                    );
+
+                    Number.DecimalToNumber(ref value, ref number);
+                    if (number.Digits[0] == 0)
                     {
-                        if (format.Precision != StandardFormat.NoPrecision)
-                            throw new NotSupportedException(SR.Argument_GWithPrecisionNotSupported);
-
-                        byte* pDigits = stackalloc byte[Number.DecimalNumberBufferLength];
-                        Number.NumberBuffer number = new Number.NumberBuffer(Number.NumberBufferKind.Decimal, pDigits, Number.DecimalNumberBufferLength);
-
-                        Number.DecimalToNumber(ref value, ref number);
-                        if (number.Digits[0] == 0)
-                        {
-                            number.IsNegative = false; // For Decimals, -0 must print as normal 0.
-                        }
-                        bool success = TryFormatDecimalG(ref number, destination, out bytesWritten);
+                        number.IsNegative = false; // For Decimals, -0 must print as normal 0.
+                    }
+                    bool success = TryFormatDecimalG(ref number, destination, out bytesWritten);
 #if DEBUG
-                        // This DEBUG segment exists to close a code coverage hole inside TryFormatDecimalG(). Because we don't call RoundNumber() on this path, we have no way to feed
-                        // TryFormatDecimalG() a number where trailing zeros before the decimal point have been cropped. So if the chance comes up, we'll crop the zeroes
-                        // ourselves and make a second call to ensure we get the same outcome.
-                        if (success)
+                    // This DEBUG segment exists to close a code coverage hole inside TryFormatDecimalG(). Because we don't call RoundNumber() on this path, we have no way to feed
+                    // TryFormatDecimalG() a number where trailing zeros before the decimal point have been cropped. So if the chance comes up, we'll crop the zeroes
+                    // ourselves and make a second call to ensure we get the same outcome.
+                    if (success)
+                    {
+                        Span<byte> digits = number.Digits;
+                        int numDigits = number.DigitsCount;
+                        if (
+                            numDigits != 0
+                            && number.Scale == numDigits
+                            && digits[numDigits - 1] == '0'
+                        )
                         {
-                            Span<byte> digits = number.Digits;
-                            int numDigits = number.DigitsCount;
-                            if (numDigits != 0 && number.Scale == numDigits && digits[numDigits - 1] == '0')
+                            while (numDigits != 0 && digits[numDigits - 1] == '0')
                             {
-                                while (numDigits != 0 && digits[numDigits - 1] == '0')
-                                {
-                                    digits[numDigits - 1] = 0;
-                                    numDigits--;
-                                }
+                                digits[numDigits - 1] = 0;
+                                numDigits--;
+                            }
 
-                                number.DigitsCount = numDigits;
-                                number.CheckConsistency();
+                            number.DigitsCount = numDigits;
+                            number.CheckConsistency();
 
-                                byte[] buffer2 = new byte[destination.Length];
-                                bool success2 = TryFormatDecimalG(ref number, buffer2, out int bytesWritten2);
-                                Debug.Assert(success2);
-                                Debug.Assert(bytesWritten2 == bytesWritten);
-                                for (int i = 0; i < bytesWritten; i++)
-                                {
-                                    Debug.Assert(destination[i] == buffer2[i]);
-                                }
+                            byte[] buffer2 = new byte[destination.Length];
+                            bool success2 = TryFormatDecimalG(
+                                ref number,
+                                buffer2,
+                                out int bytesWritten2
+                            );
+                            Debug.Assert(success2);
+                            Debug.Assert(bytesWritten2 == bytesWritten);
+                            for (int i = 0; i < bytesWritten; i++)
+                            {
+                                Debug.Assert(destination[i] == buffer2[i]);
                             }
                         }
-#endif // DEBUG
-                        return success;
                     }
+#endif // DEBUG
+                    return success;
+                }
 
                 case 'f':
                 case 'F':
-                    {
-                        byte* pDigits = stackalloc byte[Number.DecimalNumberBufferLength];
-                        Number.NumberBuffer number = new Number.NumberBuffer(Number.NumberBufferKind.Decimal, pDigits, Number.DecimalNumberBufferLength);
+                {
+                    byte* pDigits = stackalloc byte[Number.DecimalNumberBufferLength];
+                    Number.NumberBuffer number = new Number.NumberBuffer(
+                        Number.NumberBufferKind.Decimal,
+                        pDigits,
+                        Number.DecimalNumberBufferLength
+                    );
 
-                        Number.DecimalToNumber(ref value, ref number);
-                        byte precision = (format.Precision == StandardFormat.NoPrecision) ? (byte)2 : format.Precision;
-                        Number.RoundNumber(ref number, number.Scale + precision, isCorrectlyRounded: false);
-                        Debug.Assert((number.Digits[0] != 0) || !number.IsNegative);   // For Decimals, -0 must print as normal 0. As it happens, Number.RoundNumber already ensures this invariant.
-                        return TryFormatDecimalF(ref number, destination, out bytesWritten, precision);
-                    }
+                    Number.DecimalToNumber(ref value, ref number);
+                    byte precision =
+                        (format.Precision == StandardFormat.NoPrecision)
+                            ? (byte)2
+                            : format.Precision;
+                    Number.RoundNumber(
+                        ref number,
+                        number.Scale + precision,
+                        isCorrectlyRounded: false
+                    );
+                    Debug.Assert((number.Digits[0] != 0) || !number.IsNegative); // For Decimals, -0 must print as normal 0. As it happens, Number.RoundNumber already ensures this invariant.
+                    return TryFormatDecimalF(ref number, destination, out bytesWritten, precision);
+                }
 
                 case 'e':
                 case 'E':
-                    {
-                        byte* pDigits = stackalloc byte[Number.DecimalNumberBufferLength];
-                        Number.NumberBuffer number = new Number.NumberBuffer(Number.NumberBufferKind.Decimal, pDigits, Number.DecimalNumberBufferLength);
+                {
+                    byte* pDigits = stackalloc byte[Number.DecimalNumberBufferLength];
+                    Number.NumberBuffer number = new Number.NumberBuffer(
+                        Number.NumberBufferKind.Decimal,
+                        pDigits,
+                        Number.DecimalNumberBufferLength
+                    );
 
-                        Number.DecimalToNumber(ref value, ref number);
-                        byte precision = (format.Precision == StandardFormat.NoPrecision) ? (byte)6 : format.Precision;
-                        Number.RoundNumber(ref number, precision + 1, isCorrectlyRounded: false);
-                        Debug.Assert((number.Digits[0] != 0) || !number.IsNegative);   // For Decimals, -0 must print as normal 0. As it happens, Number.RoundNumber already ensures this invariant.
-                        return TryFormatDecimalE(ref number, destination, out bytesWritten, precision, exponentSymbol: (byte)format.Symbol);
-                    }
+                    Number.DecimalToNumber(ref value, ref number);
+                    byte precision =
+                        (format.Precision == StandardFormat.NoPrecision)
+                            ? (byte)6
+                            : format.Precision;
+                    Number.RoundNumber(ref number, precision + 1, isCorrectlyRounded: false);
+                    Debug.Assert((number.Digits[0] != 0) || !number.IsNegative); // For Decimals, -0 must print as normal 0. As it happens, Number.RoundNumber already ensures this invariant.
+                    return TryFormatDecimalE(
+                        ref number,
+                        destination,
+                        out bytesWritten,
+                        precision,
+                        exponentSymbol: (byte)format.Symbol
+                    );
+                }
 
                 default:
                     return FormattingHelpers.TryFormatThrowFormatException(out bytesWritten);

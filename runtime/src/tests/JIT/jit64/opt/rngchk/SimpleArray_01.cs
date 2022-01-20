@@ -7,18 +7,22 @@ using System.Runtime.CompilerServices;
 namespace SimpleArray_01
 {
     public delegate void RngTest();
+
     internal class Class1
     {
         private static int Main()
         {
             int retVal = 100;
             int testNum = 0;
-            RngTest[] Tests ={  new RngTest(Test.Test1),
-                        new RngTest(Test.Test2),
-                        new RngTest(Test.Test3),
-                        new RngTest(Test.Test4),
-                        new RngTest(Test.Test5),
-                        new RngTest(Test.Test6)};
+            RngTest[] Tests =
+            {
+                new RngTest(Test.Test1),
+                new RngTest(Test.Test2),
+                new RngTest(Test.Test3),
+                new RngTest(Test.Test4),
+                new RngTest(Test.Test5),
+                new RngTest(Test.Test6)
+            };
             foreach (RngTest test in Tests)
             {
                 testNum++;
@@ -54,6 +58,7 @@ namespace SimpleArray_01
             return bResult;
         }
     }
+
     internal class Test
     {
         /********************************************************************************************
@@ -83,6 +88,7 @@ namespace SimpleArray_01
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
 		* RngChk is eliminated properly when reverse iterate through the array
 		********************************************************************************************/
@@ -97,6 +103,7 @@ namespace SimpleArray_01
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
 		* RngChk is not eliminated if the array is modified
 		********************************************************************************************/
@@ -113,6 +120,7 @@ namespace SimpleArray_01
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
 		* RngChk is not eliminated if the upper limit of the array is modified
 		********************************************************************************************/
@@ -129,6 +137,7 @@ namespace SimpleArray_01
                 numbers[index] = index * index;
             }
         }
+
         /********************************************************************************************
 		* RngChk is not eliminated if induction variable is modified
 		********************************************************************************************/

@@ -21,9 +21,15 @@ namespace System.CommandLine.Help
             ISymbol symbol,
             string? firstColumnText = null,
             string? secondColumnText = null,
-            string? defaultValue = null)
+            string? defaultValue = null
+        )
         {
-            builder.Customize(symbol, _ => firstColumnText, _ => secondColumnText, _ => defaultValue);
+            builder.Customize(
+                symbol,
+                _ => firstColumnText,
+                _ => secondColumnText,
+                _ => defaultValue
+            );
         }
 
         /// <param name="symbol">The symbol to customize the help details for.</param>
@@ -36,7 +42,8 @@ namespace System.CommandLine.Help
             ISymbol symbol,
             Func<ParseResult?, string?>? firstColumnText = null,
             Func<ParseResult?, string?>? secondColumnText = null,
-            Func<ParseResult?, string?>? defaultValue = null)
+            Func<ParseResult?, string?>? defaultValue = null
+        )
         {
             builder.Customize(symbol, firstColumnText, secondColumnText, defaultValue);
         }
@@ -47,10 +54,7 @@ namespace System.CommandLine.Help
         /// <param name="builder">The help builder to write with.</param>
         /// <param name="command">The command for which to write help output.</param>
         /// <param name="writer">The writer to write output to.</param>
-        public static void Write(
-            this IHelpBuilder builder,
-            ICommand command,
-            TextWriter writer) =>
+        public static void Write(this IHelpBuilder builder, ICommand command, TextWriter writer) =>
             builder.Write(command, writer, ParseResult.Empty());
     }
 }

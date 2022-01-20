@@ -13,7 +13,10 @@ namespace System.Runtime.InteropServices.Tests
         public void AddRef_ValidPointer_Success()
         {
             var cw = new ComWrappersImpl();
-            IntPtr iUnknown = cw.GetOrCreateComInterfaceForObject(new object(), CreateComInterfaceFlags.None);
+            IntPtr iUnknown = cw.GetOrCreateComInterfaceForObject(
+                new object(),
+                CreateComInterfaceFlags.None
+            );
             try
             {
                 Assert.Equal(2, Marshal.AddRef(iUnknown));
@@ -33,7 +36,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void AddRef_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("pUnk", () => Marshal.AddRef(IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pUnk",
+                () => Marshal.AddRef(IntPtr.Zero)
+            );
         }
     }
 }

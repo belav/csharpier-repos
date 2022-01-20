@@ -57,45 +57,86 @@ namespace System.Reflection
         // This approach is used to prevent regenerating identical proxy types for identical T/Proxy pairs,
         // which would ultimately be a more expensive leak.
         // Proxy instances are not cached.  Their lifetime is entirely owned by the caller of DispatchProxy.Create.
-        private static readonly Dictionary<Type, Dictionary<Type, GeneratedTypeInfo>> s_baseTypeAndInterfaceToGeneratedProxyType = new Dictionary<Type, Dictionary<Type, GeneratedTypeInfo>>();
+        private static readonly Dictionary<
+            Type,
+            Dictionary<Type, GeneratedTypeInfo>
+        > s_baseTypeAndInterfaceToGeneratedProxyType = new Dictionary<
+            Type,
+            Dictionary<Type, GeneratedTypeInfo>
+        >();
         private static readonly ProxyAssembly s_proxyAssembly = new ProxyAssembly();
-        private static readonly MethodInfo s_dispatchProxyInvokeMethod = typeof(DispatchProxy).GetMethod("Invoke", BindingFlags.NonPublic | BindingFlags.Instance)!;
-        private static readonly MethodInfo s_getTypeFromHandleMethod = typeof(Type).GetRuntimeMethod("GetTypeFromHandle", new Type[] { typeof(RuntimeTypeHandle) })!;
+        private static readonly MethodInfo s_dispatchProxyInvokeMethod =
+            typeof(DispatchProxy).GetMethod(
+                "Invoke",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            )!;
+        private static readonly MethodInfo s_getTypeFromHandleMethod =
+            typeof(Type).GetRuntimeMethod(
+                "GetTypeFromHandle",
+                new Type[] { typeof(RuntimeTypeHandle) }
+            )!;
         private static readonly MethodInfo s_makeGenericMethodMethod = GetGenericMethodMethodInfo();
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "MakeGenericMethod is safe here because the user code invoking the generic method will reference " +
-            "the GenericTypes being used, which will guarantee the requirements of the generic method.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "MakeGenericMethod is safe here because the user code invoking the generic method will reference "
+                + "the GenericTypes being used, which will guarantee the requirements of the generic method."
+        )]
         private static MethodInfo GetGenericMethodMethodInfo()
         {
-            return typeof(MethodInfo).GetMethod("MakeGenericMethod", new Type[] { typeof(Type[]) })!;
+            return typeof(MethodInfo).GetMethod(
+                "MakeGenericMethod",
+                new Type[] { typeof(Type[]) }
+            )!;
         }
 
         // Returns a new instance of a proxy the derives from 'baseType' and implements 'interfaceType'
         internal static object CreateProxyInstance(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type baseType,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type baseType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType
+        )
         {
             Debug.Assert(baseType != null);
             Debug.Assert(interfaceType != null);
 
             GeneratedTypeInfo proxiedType = GetProxyType(baseType, interfaceType);
-            return Activator.CreateInstance(proxiedType.GeneratedType, new object[] { proxiedType.MethodInfos })!;
+            return Activator.CreateInstance(
+                proxiedType.GeneratedType,
+                new object[] { proxiedType.MethodInfos }
+            )!;
         }
 
         private static GeneratedTypeInfo GetProxyType(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type baseType,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type baseType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType
+        )
         {
             lock (s_baseTypeAndInterfaceToGeneratedProxyType)
             {
-                if (!s_baseTypeAndInterfaceToGeneratedProxyType.TryGetValue(baseType, out Dictionary<Type, GeneratedTypeInfo>? interfaceToProxy))
+                if (
+                    !s_baseTypeAndInterfaceToGeneratedProxyType.TryGetValue(
+                        baseType,
+                        out Dictionary<Type, GeneratedTypeInfo>? interfaceToProxy
+                    )
+                )
                 {
                     interfaceToProxy = new Dictionary<Type, GeneratedTypeInfo>();
                     s_baseTypeAndInterfaceToGeneratedProxyType[baseType] = interfaceToProxy;
                 }
 
-                if (!interfaceToProxy.TryGetValue(interfaceType, out GeneratedTypeInfo? generatedProxy))
+                if (
+                    !interfaceToProxy.TryGetValue(
+                        interfaceType,
+                        out GeneratedTypeInfo? generatedProxy
+                    )
+                )
                 {
                     generatedProxy = GenerateProxyType(baseType, interfaceType);
                     interfaceToProxy[interfaceType] = generatedProxy;
@@ -106,11 +147,18 @@ namespace System.Reflection
         }
 
         // Unconditionally generates a new proxy type derived from 'baseType' and implements 'interfaceType'
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2062:UnrecognizedReflectionPattern",
-            Justification = "interfaceType is annotated as preserve All members, so any Types returned from GetInterfaces should be preserved as well once https://github.com/mono/linker/issues/1731 is fixed.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2062:UnrecognizedReflectionPattern",
+            Justification = "interfaceType is annotated as preserve All members, so any Types returned from GetInterfaces should be preserved as well once https://github.com/mono/linker/issues/1731 is fixed."
+        )]
         private static GeneratedTypeInfo GenerateProxyType(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type baseType,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type baseType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType
+        )
         {
             // Parameter validation is deferred until the point we need to create the proxy.
             // This prevents unnecessary overhead revalidating cached proxy types.
@@ -119,26 +167,38 @@ namespace System.Reflection
             if (!interfaceType.IsInterface)
             {
                 // "T" is the generic parameter seen via the public contract
-                throw new ArgumentException(SR.Format(SR.InterfaceType_Must_Be_Interface, interfaceType.FullName), "T");
+                throw new ArgumentException(
+                    SR.Format(SR.InterfaceType_Must_Be_Interface, interfaceType.FullName),
+                    "T"
+                );
             }
 
             // The base type cannot be sealed because the proxy needs to subclass it.
             if (baseType.IsSealed)
             {
                 // "TProxy" is the generic parameter seen via the public contract
-                throw new ArgumentException(SR.Format(SR.BaseType_Cannot_Be_Sealed, baseType.FullName), "TProxy");
+                throw new ArgumentException(
+                    SR.Format(SR.BaseType_Cannot_Be_Sealed, baseType.FullName),
+                    "TProxy"
+                );
             }
 
             // The base type cannot be abstract
             if (baseType.IsAbstract)
             {
-                throw new ArgumentException(SR.Format(SR.BaseType_Cannot_Be_Abstract, baseType.FullName), "TProxy");
+                throw new ArgumentException(
+                    SR.Format(SR.BaseType_Cannot_Be_Abstract, baseType.FullName),
+                    "TProxy"
+                );
             }
 
             // The base type must have a public default ctor
             if (baseType.GetConstructor(Type.EmptyTypes) == null)
             {
-                throw new ArgumentException(SR.Format(SR.BaseType_Must_Have_Default_Ctor, baseType.FullName), "TProxy");
+                throw new ArgumentException(
+                    SR.Format(SR.BaseType_Must_Have_Default_Ctor, baseType.FullName),
+                    "TProxy"
+                );
             }
 
             // Create a type that derives from 'baseType' provided by caller
@@ -157,7 +217,8 @@ namespace System.Reflection
         {
             public GeneratedTypeInfo(
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type generatedType,
-                MethodInfo[] methodInfos)
+                MethodInfo[] methodInfos
+            )
             {
                 GeneratedType = generatedType;
                 MethodInfos = methodInfos;
@@ -179,7 +240,10 @@ namespace System.Reflection
 
             public ProxyAssembly()
             {
-                _ab = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("ProxyBuilder"), AssemblyBuilderAccess.Run);
+                _ab = AssemblyBuilder.DefineDynamicAssembly(
+                    new AssemblyName("ProxyBuilder"),
+                    AssemblyBuilderAccess.Run
+                );
                 _mb = _ab.DefineDynamicModule("testmod");
             }
 
@@ -192,21 +256,33 @@ namespace System.Reflection
                 {
                     if (_ignoresAccessChecksToAttributeConstructor == null)
                     {
-                        _ignoresAccessChecksToAttributeConstructor = IgnoreAccessChecksToAttributeBuilder.AddToModule(_mb);
+                        _ignoresAccessChecksToAttributeConstructor =
+                            IgnoreAccessChecksToAttributeBuilder.AddToModule(_mb);
                     }
 
                     return _ignoresAccessChecksToAttributeConstructor;
                 }
             }
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2067:UnrecognizedReflectionPattern",
-                Justification = "Only the parameterless ctor is referenced on proxyBaseType. Other members can be trimmed if unused.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2067:UnrecognizedReflectionPattern",
+                Justification = "Only the parameterless ctor is referenced on proxyBaseType. Other members can be trimmed if unused."
+            )]
             public ProxyBuilder CreateProxy(
                 string name,
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type proxyBaseType)
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                )]
+                    Type proxyBaseType
+            )
             {
                 int nextId = Interlocked.Increment(ref _typeId);
-                TypeBuilder tb = _mb.DefineType(name + "_" + nextId, TypeAttributes.Public, proxyBaseType);
+                TypeBuilder tb = _mb.DefineType(
+                    name + "_" + nextId,
+                    TypeAttributes.Public,
+                    proxyBaseType
+                );
                 return new ProxyBuilder(this, tb, proxyBaseType);
             }
 
@@ -218,8 +294,10 @@ namespace System.Reflection
                 // Add this assembly level attribute:
                 // [assembly: System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute(assemblyName)]
                 ConstructorInfo attributeConstructor = IgnoresAccessChecksAttributeConstructor;
-                CustomAttributeBuilder customAttributeBuilder =
-                    new CustomAttributeBuilder(attributeConstructor, new object[] { assemblyName });
+                CustomAttributeBuilder customAttributeBuilder = new CustomAttributeBuilder(
+                    attributeConstructor,
+                    new object[] { assemblyName }
+                );
                 _ab.SetCustomAttribute(customAttributeBuilder);
             }
 
@@ -244,7 +322,10 @@ namespace System.Reflection
         {
             private readonly ProxyAssembly _assembly;
             private readonly TypeBuilder _tb;
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
             private readonly Type _proxyBaseType;
             private readonly List<FieldBuilder> _fields;
             private readonly List<MethodInfo> _methodInfos;
@@ -252,14 +333,20 @@ namespace System.Reflection
             internal ProxyBuilder(
                 ProxyAssembly assembly,
                 TypeBuilder tb,
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type proxyBaseType)
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                )]
+                    Type proxyBaseType
+            )
             {
                 _assembly = assembly;
                 _tb = tb;
                 _proxyBaseType = proxyBaseType;
 
                 _fields = new List<FieldBuilder>();
-                _fields.Add(tb.DefineField("_methodInfos", typeof(MethodInfo[]), FieldAttributes.Private));
+                _fields.Add(
+                    tb.DefineField("_methodInfos", typeof(MethodInfo[]), FieldAttributes.Private)
+                );
 
                 _methodInfos = new List<MethodInfo>();
 
@@ -274,7 +361,11 @@ namespace System.Reflection
                     args[i] = _fields[i].FieldType;
                 }
 
-                ConstructorBuilder cb = _tb.DefineConstructor(MethodAttributes.Public, CallingConventions.HasThis, args);
+                ConstructorBuilder cb = _tb.DefineConstructor(
+                    MethodAttributes.Public,
+                    CallingConventions.HasThis,
+                    args
+                );
                 ILGenerator il = cb.GetILGenerator();
 
                 // chained ctor call
@@ -301,7 +392,9 @@ namespace System.Reflection
                 return new GeneratedTypeInfo(_tb.CreateType()!, _methodInfos.ToArray());
             }
 
-            internal void AddInterfaceImpl([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type iface)
+            internal void AddInterfaceImpl(
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type iface
+            )
             {
                 // If necessary, generate an attribute to permit visibility
                 // to internal types.
@@ -371,7 +464,12 @@ namespace System.Reflection
                     if (ai.GetMethodBuilder == null && ai.SetMethodBuilder == null)
                         continue;
 
-                    PropertyBuilder pb = _tb.DefineProperty(pi.Name, pi.Attributes, pi.PropertyType, pi.GetIndexParameters().Select(p => p.ParameterType).ToArray());
+                    PropertyBuilder pb = _tb.DefineProperty(
+                        pi.Name,
+                        pi.Attributes,
+                        pi.PropertyType,
+                        pi.GetIndexParameters().Select(p => p.ParameterType).ToArray()
+                    );
                     if (ai.GetMethodBuilder != null)
                         pb.SetGetMethod(ai.GetMethodBuilder);
                     if (ai.SetMethodBuilder != null)
@@ -385,7 +483,11 @@ namespace System.Reflection
                     // If we didn't make an overriden accessor above, this was a static event, non-virtual event,
                     // or a default implementation of an event of a different interface. In any case, we don't
                     // need to redeclare it.
-                    if (ai.AddMethodBuilder == null && ai.RemoveMethodBuilder == null && ai.RaiseMethodBuilder == null)
+                    if (
+                        ai.AddMethodBuilder == null
+                        && ai.RemoveMethodBuilder == null
+                        && ai.RaiseMethodBuilder == null
+                    )
                         continue;
 
                     Debug.Assert(ei.EventHandlerType != null);
@@ -411,9 +513,17 @@ namespace System.Reflection
                     paramReqMods[i] = parameters[i].GetRequiredCustomModifiers();
                 }
 
-                MethodBuilder mdb = _tb.DefineMethod(mi.Name, MethodAttributes.Public | MethodAttributes.Virtual, CallingConventions.Standard,
-                    mi.ReturnType, null, null,
-                    paramTypes, paramReqMods, null);
+                MethodBuilder mdb = _tb.DefineMethod(
+                    mi.Name,
+                    MethodAttributes.Public | MethodAttributes.Virtual,
+                    CallingConventions.Standard,
+                    mi.ReturnType,
+                    null,
+                    null,
+                    paramTypes,
+                    paramReqMods,
+                    null
+                );
 
                 if (mi.ContainsGenericParameters)
                 {
@@ -423,10 +533,14 @@ namespace System.Reflection
                     {
                         ss[i] = ts[i].Name;
                     }
-                    GenericTypeParameterBuilder[] genericParameters = mdb.DefineGenericParameters(ss);
+                    GenericTypeParameterBuilder[] genericParameters = mdb.DefineGenericParameters(
+                        ss
+                    );
                     for (int i = 0; i < genericParameters.Length; i++)
                     {
-                        genericParameters[i].SetGenericParameterAttributes(ts[i].GenericParameterAttributes);
+                        genericParameters[i].SetGenericParameterAttributes(
+                            ts[i].GenericParameterAttributes
+                        );
                     }
                 }
                 ILGenerator il = mdb.GetILGenerator();
@@ -440,7 +554,10 @@ namespace System.Reflection
                 for (int i = 0; i < parameters.Length; i++)
                 {
                     // args[i] = argi;
-                    bool isOutRef = parameters[i].IsOut && parameters[i].ParameterType.IsByRef && !parameters[i].IsIn;
+                    bool isOutRef =
+                        parameters[i].IsOut
+                        && parameters[i].ParameterType.IsByRef
+                        && !parameters[i].IsIn;
 
                     if (!isOutRef)
                     {
@@ -479,9 +596,8 @@ namespace System.Reflection
                 }
 
                 // object result = this.Invoke(methodInfo, args);
-                LocalBuilder? resultLocal = mi.ReturnType != typeof(void) ?
-                    il.DeclareLocal(typeof(object)) :
-                    null;
+                LocalBuilder? resultLocal =
+                    mi.ReturnType != typeof(void) ? il.DeclareLocal(typeof(object)) : null;
                 il.Emit(OpCodes.Ldarg_0);
                 il.Emit(OpCodes.Ldloc, methodInfoLocal);
                 argsArr.Load();
@@ -526,60 +642,61 @@ namespace System.Reflection
             private static int GetTypeCode(Type? type)
             {
                 if (type == null)
-                    return 0;   // TypeCode.Empty;
+                    return 0; // TypeCode.Empty;
 
                 if (type == typeof(bool))
-                    return 3;   // TypeCode.Boolean;
+                    return 3; // TypeCode.Boolean;
 
                 if (type == typeof(char))
-                    return 4;   // TypeCode.Char;
+                    return 4; // TypeCode.Char;
 
                 if (type == typeof(sbyte))
-                    return 5;   // TypeCode.SByte;
+                    return 5; // TypeCode.SByte;
 
                 if (type == typeof(byte))
-                    return 6;   // TypeCode.Byte;
+                    return 6; // TypeCode.Byte;
 
                 if (type == typeof(short))
-                    return 7;   // TypeCode.Int16;
+                    return 7; // TypeCode.Int16;
 
                 if (type == typeof(ushort))
-                    return 8;   // TypeCode.UInt16;
+                    return 8; // TypeCode.UInt16;
 
                 if (type == typeof(int))
-                    return 9;   // TypeCode.Int32;
+                    return 9; // TypeCode.Int32;
 
                 if (type == typeof(uint))
-                    return 10;  // TypeCode.UInt32;
+                    return 10; // TypeCode.UInt32;
 
                 if (type == typeof(long))
-                    return 11;  // TypeCode.Int64;
+                    return 11; // TypeCode.Int64;
 
                 if (type == typeof(ulong))
-                    return 12;  // TypeCode.UInt64;
+                    return 12; // TypeCode.UInt64;
 
                 if (type == typeof(float))
-                    return 13;  // TypeCode.Single;
+                    return 13; // TypeCode.Single;
 
                 if (type == typeof(double))
-                    return 14;  // TypeCode.Double;
+                    return 14; // TypeCode.Double;
 
                 if (type == typeof(decimal))
-                    return 15;  // TypeCode.Decimal;
+                    return 15; // TypeCode.Decimal;
 
                 if (type == typeof(DateTime))
-                    return 16;  // TypeCode.DateTime;
+                    return 16; // TypeCode.DateTime;
 
                 if (type == typeof(string))
-                    return 18;  // TypeCode.String;
+                    return 18; // TypeCode.String;
 
                 if (type.IsEnum)
                     return GetTypeCode(Enum.GetUnderlyingType(type));
 
-                return 1;   // TypeCode.Object;
+                return 1; // TypeCode.Object;
             }
 
-            private static readonly OpCode[] s_convOpCodes = new OpCode[] {
+            private static readonly OpCode[] s_convOpCodes = new OpCode[]
+            {
                 OpCodes.Nop, //Empty = 0,
                 OpCodes.Nop, //Object = 1,
                 OpCodes.Nop, //DBNull = 2,
@@ -601,7 +718,8 @@ namespace System.Reflection
                 OpCodes.Nop, //String = 18,
             };
 
-            private static readonly OpCode[] s_ldindOpCodes = new OpCode[] {
+            private static readonly OpCode[] s_ldindOpCodes = new OpCode[]
+            {
                 OpCodes.Nop, //Empty = 0,
                 OpCodes.Nop, //Object = 1,
                 OpCodes.Nop, //DBNull = 2,
@@ -623,7 +741,8 @@ namespace System.Reflection
                 OpCodes.Ldind_Ref, //String = 18,
             };
 
-            private static readonly OpCode[] s_stindOpCodes = new OpCode[] {
+            private static readonly OpCode[] s_stindOpCodes = new OpCode[]
+            {
                 OpCodes.Nop, //Empty = 0,
                 OpCodes.Nop, //Object = 1,
                 OpCodes.Nop, //DBNull = 2,
@@ -686,7 +805,9 @@ namespace System.Reflection
                 }
                 else
                 {
-                    Debug.Assert(source.IsAssignableFrom(target) || target.IsInterface || source.IsInterface);
+                    Debug.Assert(
+                        source.IsAssignableFrom(target) || target.IsInterface || source.IsInterface
+                    );
                     if (target.IsGenericParameter)
                     {
                         il.Emit(OpCodes.Unbox_Any, target);
@@ -728,6 +849,7 @@ namespace System.Reflection
             {
                 private readonly ILGenerator _il;
                 private readonly Type[] _paramTypes;
+
                 internal ParametersArray(ILGenerator il, Type[] paramTypes)
                 {
                     _il = il;
@@ -757,6 +879,7 @@ namespace System.Reflection
             {
                 private readonly ILGenerator _il;
                 private readonly LocalBuilder _lb;
+
                 internal GenericArray(ILGenerator il, int len)
                 {
                     _il = il;
@@ -799,7 +922,10 @@ namespace System.Reflection
                 public MethodBuilder? GetMethodBuilder { get; set; }
                 public MethodBuilder? SetMethodBuilder { get; set; }
 
-                public PropertyAccessorInfo(MethodInfo? interfaceGetMethod, MethodInfo? interfaceSetMethod)
+                public PropertyAccessorInfo(
+                    MethodInfo? interfaceGetMethod,
+                    MethodInfo? interfaceSetMethod
+                )
                 {
                     InterfaceGetMethod = interfaceGetMethod;
                     InterfaceSetMethod = interfaceSetMethod;
@@ -815,7 +941,11 @@ namespace System.Reflection
                 public MethodBuilder? RemoveMethodBuilder { get; set; }
                 public MethodBuilder? RaiseMethodBuilder { get; set; }
 
-                public EventAccessorInfo(MethodInfo? interfaceAddMethod, MethodInfo? interfaceRemoveMethod, MethodInfo? interfaceRaiseMethod)
+                public EventAccessorInfo(
+                    MethodInfo? interfaceAddMethod,
+                    MethodInfo? interfaceRemoveMethod,
+                    MethodInfo? interfaceRaiseMethod
+                )
                 {
                     InterfaceAddMethod = interfaceAddMethod;
                     InterfaceRemoveMethod = interfaceRemoveMethod;

@@ -24,15 +24,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             //    ULONG * pcbData,              // [out] Size of the mapped memory region.
             //    DWORD * pdwMappingType) PURE; // [out] Type of file mapping (code:CorFileMapping).
             [PreserveSig]
-            int GetFileMapping(out IntPtr ppvData, out long pcbData, out CorFileMapping pdwMappingType);
+            int GetFileMapping(
+                out IntPtr ppvData,
+                out long pcbData,
+                out CorFileMapping pdwMappingType
+            );
         }
 
         // Flags returned from IMetaDataInfo.GetFileMapping
         internal enum CorFileMapping : uint
         {
-            Flat = 0,    // Flat file mapping - file is mapped as data file (code:SEC_IMAGE flag was not 
+            Flat = 0, // Flat file mapping - file is mapped as data file (code:SEC_IMAGE flag was not
             // passed to code:CreateFileMapping).
-            ExecutableImage = 1     // Executable image file mapping - file is mapped for execution 
+            ExecutableImage = 1 // Executable image file mapping - file is mapped for execution
             // (either via code:LoadLibrary or code:CreateFileMapping with code:SEC_IMAGE flag).
         }
 
@@ -41,13 +45,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             Read = 0,
             Write = 1,
             ReadWriteMask = 1,
-
             CopyMemory = 2,
-
             ManifestMetadata = 8,
             ReadOnly = 16,
             TakeOwnership = 32,
-
             CacheImage = 4,
             NoTypeLib = 128
         }

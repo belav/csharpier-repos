@@ -41,7 +41,13 @@ namespace System.Drawing.Printing
         internal static extern IntPtr cupsGetDefault();
 
         [DllImport(LibraryName, ExactSpelling = true, CharSet = CharSet.Ansi)]
-        internal static extern int cupsPrintFile(string printer, string filename, string title, int num_options, IntPtr options);
+        internal static extern int cupsPrintFile(
+            string printer,
+            string filename,
+            string title,
+            int num_options,
+            IntPtr options
+        );
 
         [DllImport(LibraryName, ExactSpelling = true, CharSet = CharSet.Ansi)]
         internal static extern IntPtr cupsGetPPD(string printer);
@@ -56,7 +62,11 @@ namespace System.Drawing.Printing
         internal static extern void ppdClose(IntPtr ppd);
 
         [DllImport(LibraryName, ExactSpelling = true, CharSet = CharSet.Ansi)]
-        internal static extern int cupsParseOptions(string arg, int number_of_options, ref IntPtr options);
+        internal static extern int cupsParseOptions(
+            string arg,
+            int number_of_options,
+            ref IntPtr options
+        );
 
         [DllImport(LibraryName, ExactSpelling = true)]
         internal static extern void cupsFreeOptions(int number_options, IntPtr options);

@@ -14,8 +14,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Base<T>
     {
-        public class Derived<U>
-            where U : T
+        public class Derived<U> where U : T
         {
             public void Foo()
             {
@@ -27,6 +26,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -45,8 +45,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nested002.nested002
 {
     // <Title>Generic constraints for nested types</Title>
@@ -58,8 +56,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Base<T>
     {
-        public class Derived<U>
-            where U : T
+        public class Derived<U> where U : T
         {
             public void Foo()
             {
@@ -71,6 +68,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -89,8 +87,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nested003.nested003
 {
     // <Title>Generic constraints for nested types</Title>
@@ -102,8 +98,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Base<T>
     {
-        public class Derived<U>
-            where U : T
+        public class Derived<U> where U : T
         {
             public void Foo()
             {
@@ -115,6 +110,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -133,8 +129,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nested004.nested004
 {
     // <Title>Generic constraints for nested types</Title>
@@ -146,8 +140,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Base<T>
     {
-        public class Derived<U>
-            where U : T
+        public class Derived<U> where U : T
         {
             public void Foo()
             {
@@ -159,6 +152,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -177,8 +171,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nested005.nested005
 {
     // <Title>Generic constraints for nested types</Title>
@@ -190,8 +182,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Base<T>
     {
-        public class Derived<U>
-            where U : T
+        public class Derived<U> where U : T
         {
             public void Foo()
             {
@@ -203,6 +194,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -220,8 +212,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nested006.nested006
 {
@@ -234,8 +224,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Base<T>
     {
-        public class Derived<U>
-            where U : T
+        public class Derived<U> where U : T
         {
             public void Foo()
             {
@@ -247,6 +236,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -264,8 +254,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nested007.nested007
 {
@@ -280,11 +268,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     {
     }
 
-    public class Base<T>
-        where T : Foo
+    public class Base<T> where T : Foo
     {
-        public class Derived<U>
-            where U : T
+        public class Derived<U> where U : T
         {
             public void Foo()
             {
@@ -296,6 +282,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -313,8 +300,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedclass001.nestedclass001
 {
@@ -356,8 +341,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedclass002.nestedclass002
 {
     // <Title>Generic nested types</Title>
@@ -377,6 +360,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public class A2<T>
         {
             public int x;
+
             public class A3<U>
             {
                 public int x;
@@ -408,8 +392,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedclass003.nestedclass003
 {
     // <Title>Generic nested types</Title>
@@ -428,6 +410,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public class A2<V>
         {
             public int x;
+
             public class A3<V>
             {
                 public int x;
@@ -459,8 +442,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedclass004.nestedclass004
 {
     // <Title>Generic nested types</Title>
@@ -481,9 +462,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public class A2<U>
         {
             public int x;
+
             public class A3<T>
             {
                 public int x;
+
                 public class A4<U>
                 {
                     public int x;
@@ -520,8 +503,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedclass005.nestedclass005
 {
     // <Title>Generic nested types</Title>
@@ -547,9 +528,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public class A2<U>
         {
             public int x;
+
             public class A3<T>
             {
                 public int x;
+
                 public class A4<U>
                 {
                     public int x;
@@ -563,9 +546,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public class A2<U>
         {
             public int x;
+
             public class A3<T>
             {
                 public int x;
+
                 public class A4<U>
                 {
                     public int x;
@@ -614,8 +599,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedclass006.nestedclass006
 {
     // <Title>Generic nested types</Title>
@@ -654,8 +637,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedclass007.nestedclass007
 {
     // <Title>Generic nested types</Title>
@@ -676,6 +657,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public class A2<T, U>
         {
             public int x;
+
             public class A3<U>
             {
                 public int x;
@@ -706,8 +688,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedstrct001.nestedstrct001
 {
@@ -749,8 +729,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedstrct002.nestedstrct002
 {
     // <Title>Generic nested types</Title>
@@ -770,6 +748,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public struct A2<T>
         {
             public int x;
+
             public struct A3<U>
             {
                 public int x;
@@ -801,8 +780,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedstrct003.nestedstrct003
 {
     // <Title>Generic nested types</Title>
@@ -821,6 +798,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public struct A2<V>
         {
             public int x;
+
             public struct A3<V>
             {
                 public int x;
@@ -852,8 +830,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedstrct004.nestedstrct004
 {
     // <Title>Generic nested types</Title>
@@ -874,9 +850,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public struct A2<U>
         {
             public int x;
+
             public struct A3<T>
             {
                 public int x;
+
                 public struct A4<U>
                 {
                     public int x;
@@ -913,8 +891,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedstrct005.nestedstrct005
 {
     // <Title>Generic nested types</Title>
@@ -940,9 +916,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public struct A2<U>
         {
             public int x;
+
             public struct A3<T>
             {
                 public int x;
+
                 public struct A4<U>
                 {
                     public int x;
@@ -956,9 +934,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public struct A2<U>
         {
             public int x;
+
             public struct A3<T>
             {
                 public int x;
+
                 public struct A4<U>
                 {
                     public int x;
@@ -1007,8 +987,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedstrct006.nestedstrct006
 {
     // <Title>Generic nested types</Title>
@@ -1047,8 +1025,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.nested.nestedstrct007.nestedstrct007
 {
     // <Title>Generic nested types</Title>
@@ -1069,6 +1045,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
         public struct A2<T, U>
         {
             public int x;
+
             public struct A3<U>
             {
                 public int x;

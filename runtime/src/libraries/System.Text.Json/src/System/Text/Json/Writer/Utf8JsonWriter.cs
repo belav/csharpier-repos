@@ -259,12 +259,21 @@ namespace System.Text.Json
 #if BUILDING_INBOX_LIBRARY
                     _stream.Write(_arrayBufferWriter.WrittenSpan);
 #else
-                    Debug.Assert(_arrayBufferWriter.WrittenMemory.Length == _arrayBufferWriter.WrittenCount);
-                    bool result = MemoryMarshal.TryGetArray(_arrayBufferWriter.WrittenMemory, out ArraySegment<byte> underlyingBuffer);
+                    Debug.Assert(
+                        _arrayBufferWriter.WrittenMemory.Length == _arrayBufferWriter.WrittenCount
+                    );
+                    bool result = MemoryMarshal.TryGetArray(
+                        _arrayBufferWriter.WrittenMemory,
+                        out ArraySegment<byte> underlyingBuffer
+                    );
                     Debug.Assert(result);
                     Debug.Assert(underlyingBuffer.Offset == 0);
                     Debug.Assert(_arrayBufferWriter.WrittenCount == underlyingBuffer.Count);
-                    _stream.Write(underlyingBuffer.Array, underlyingBuffer.Offset, underlyingBuffer.Count);
+                    _stream.Write(
+                        underlyingBuffer.Array,
+                        underlyingBuffer.Offset,
+                        underlyingBuffer.Count
+                    );
 #endif
 
                     BytesCommitted += _arrayBufferWriter.WrittenCount;
@@ -371,14 +380,28 @@ namespace System.Text.Json
                     BytesPending = 0;
 
 #if BUILDING_INBOX_LIBRARY
-                    await _stream.WriteAsync(_arrayBufferWriter.WrittenMemory, cancellationToken).ConfigureAwait(false);
+                    await _stream
+                        .WriteAsync(_arrayBufferWriter.WrittenMemory, cancellationToken)
+                        .ConfigureAwait(false);
 #else
-                    Debug.Assert(_arrayBufferWriter.WrittenMemory.Length == _arrayBufferWriter.WrittenCount);
-                    bool result = MemoryMarshal.TryGetArray(_arrayBufferWriter.WrittenMemory, out ArraySegment<byte> underlyingBuffer);
+                    Debug.Assert(
+                        _arrayBufferWriter.WrittenMemory.Length == _arrayBufferWriter.WrittenCount
+                    );
+                    bool result = MemoryMarshal.TryGetArray(
+                        _arrayBufferWriter.WrittenMemory,
+                        out ArraySegment<byte> underlyingBuffer
+                    );
                     Debug.Assert(result);
                     Debug.Assert(underlyingBuffer.Offset == 0);
                     Debug.Assert(_arrayBufferWriter.WrittenCount == underlyingBuffer.Count);
-                    await _stream.WriteAsync(underlyingBuffer.Array, underlyingBuffer.Offset, underlyingBuffer.Count, cancellationToken).ConfigureAwait(false);
+                    await _stream
+                        .WriteAsync(
+                            underlyingBuffer.Array,
+                            underlyingBuffer.Offset,
+                            underlyingBuffer.Count,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 #endif
 
                     BytesCommitted += _arrayBufferWriter.WrittenCount;
@@ -427,7 +450,12 @@ namespace System.Text.Json
         private void WriteStart(byte token)
         {
             if (CurrentDepth >= JsonConstants.MaxWriterDepth)
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.DepthTooLarge, _currentDepth, token: default, tokenType: default);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.DepthTooLarge,
+                    _currentDepth,
+                    token: default,
+                    tokenType: default
+                );
 
             if (_options.IndentedOrNotSkipValidation)
             {
@@ -444,7 +472,7 @@ namespace System.Text.Json
 
         private void WriteStartMinimized(byte token)
         {
-            if (_memory.Length - BytesPending < 2)  // 1 start token, and optionally, 1 list separator
+            if (_memory.Length - BytesPending < 2) // 1 start token, and optionally, 1 list separator
             {
                 Grow(2);
             }
@@ -485,8 +513,15 @@ namespace System.Text.Json
             {
                 if (_tokenType != JsonTokenType.PropertyName)
                 {
-                    Debug.Assert(_tokenType != JsonTokenType.None && _tokenType != JsonTokenType.StartArray);
-                    ThrowHelper.ThrowInvalidOperationException(ExceptionResource.CannotStartObjectArrayWithoutProperty, currentDepth: default, token: default, _tokenType);
+                    Debug.Assert(
+                        _tokenType != JsonTokenType.None && _tokenType != JsonTokenType.StartArray
+                    );
+                    ThrowHelper.ThrowInvalidOperationException(
+                        ExceptionResource.CannotStartObjectArrayWithoutProperty,
+                        currentDepth: default,
+                        token: default,
+                        _tokenType
+                    );
                 }
             }
             else
@@ -497,7 +532,12 @@ namespace System.Text.Json
                 // It is more likely for CurrentDepth to not equal 0 when writing valid JSON, so check that first to rely on short-circuiting and return quickly.
                 if (CurrentDepth == 0 && _tokenType != JsonTokenType.None)
                 {
-                    ThrowHelper.ThrowInvalidOperationException(ExceptionResource.CannotStartObjectArrayAfterPrimitiveOrClose, currentDepth: default, token: default, _tokenType);
+                    ThrowHelper.ThrowInvalidOperationException(
+                        ExceptionResource.CannotStartObjectArrayAfterPrimitiveOrClose,
+                        currentDepth: default,
+                        token: default,
+                        _tokenType
+                    );
                 }
             }
         }
@@ -507,7 +547,7 @@ namespace System.Text.Json
             int indent = Indentation;
             Debug.Assert(indent <= 2 * JsonConstants.MaxWriterDepth);
 
-            int minRequired = indent + 1;   // 1 start token
+            int minRequired = indent + 1; // 1 start token
             int maxRequired = minRequired + 3; // Optionally, 1 list separator and 1-2 bytes for new line
 
             if (_memory.Length - BytesPending < maxRequired)
@@ -655,20 +695,39 @@ namespace System.Text.Json
             }
         }
 
-        private void WriteStartEscapeProperty(ReadOnlySpan<byte> utf8PropertyName, byte token, int firstEscapeIndexProp)
+        private void WriteStartEscapeProperty(
+            ReadOnlySpan<byte> utf8PropertyName,
+            byte token,
+            int firstEscapeIndexProp
+        )
         {
-            Debug.Assert(int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8PropertyName.Length);
-            Debug.Assert(firstEscapeIndexProp >= 0 && firstEscapeIndexProp < utf8PropertyName.Length);
+            Debug.Assert(
+                int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping
+                    >= utf8PropertyName.Length
+            );
+            Debug.Assert(
+                firstEscapeIndexProp >= 0 && firstEscapeIndexProp < utf8PropertyName.Length
+            );
 
             byte[]? propertyArray = null;
 
-            int length = JsonWriterHelper.GetMaxEscapedLength(utf8PropertyName.Length, firstEscapeIndexProp);
+            int length = JsonWriterHelper.GetMaxEscapedLength(
+                utf8PropertyName.Length,
+                firstEscapeIndexProp
+            );
 
-            Span<byte> escapedPropertyName = length <= JsonConstants.StackallocByteThreshold ?
-                stackalloc byte[JsonConstants.StackallocByteThreshold] :
-                (propertyArray = ArrayPool<byte>.Shared.Rent(length));
+            Span<byte> escapedPropertyName =
+                length <= JsonConstants.StackallocByteThreshold
+                    ? stackalloc byte[JsonConstants.StackallocByteThreshold]
+                    : (propertyArray = ArrayPool<byte>.Shared.Rent(length));
 
-            JsonWriterHelper.EscapeString(utf8PropertyName, escapedPropertyName, firstEscapeIndexProp, _options.Encoder, out int written);
+            JsonWriterHelper.EscapeString(
+                utf8PropertyName,
+                escapedPropertyName,
+                firstEscapeIndexProp,
+                _options.Encoder,
+                out int written
+            );
 
             WriteStartByOptions(escapedPropertyName.Slice(0, written), token);
 
@@ -695,8 +754,10 @@ namespace System.Text.Json
         /// Thrown when the depth of the JSON has exceeded the maximum depth of 1000
         /// OR if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
-        public void WriteStartArray(string propertyName)
-            => WriteStartArray((propertyName ?? throw new ArgumentNullException(nameof(propertyName))).AsSpan());
+        public void WriteStartArray(string propertyName) =>
+            WriteStartArray(
+                (propertyName ?? throw new ArgumentNullException(nameof(propertyName))).AsSpan()
+            );
 
         /// <summary>
         /// Writes the beginning of a JSON object with a property name as the key.
@@ -715,8 +776,10 @@ namespace System.Text.Json
         /// Thrown when the depth of the JSON has exceeded the maximum depth of 1000
         /// OR if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
-        public void WriteStartObject(string propertyName)
-            => WriteStartObject((propertyName ?? throw new ArgumentNullException(nameof(propertyName))).AsSpan());
+        public void WriteStartObject(string propertyName) =>
+            WriteStartObject(
+                (propertyName ?? throw new ArgumentNullException(nameof(propertyName))).AsSpan()
+            );
 
         /// <summary>
         /// Writes the beginning of a JSON array with a property name as the key.
@@ -798,20 +861,36 @@ namespace System.Text.Json
             }
         }
 
-        private void WriteStartEscapeProperty(ReadOnlySpan<char> propertyName, byte token, int firstEscapeIndexProp)
+        private void WriteStartEscapeProperty(
+            ReadOnlySpan<char> propertyName,
+            byte token,
+            int firstEscapeIndexProp
+        )
         {
-            Debug.Assert(int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= propertyName.Length);
+            Debug.Assert(
+                int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= propertyName.Length
+            );
             Debug.Assert(firstEscapeIndexProp >= 0 && firstEscapeIndexProp < propertyName.Length);
 
             char[]? propertyArray = null;
 
-            int length = JsonWriterHelper.GetMaxEscapedLength(propertyName.Length, firstEscapeIndexProp);
+            int length = JsonWriterHelper.GetMaxEscapedLength(
+                propertyName.Length,
+                firstEscapeIndexProp
+            );
 
-            Span<char> escapedPropertyName = length <= JsonConstants.StackallocCharThreshold ?
-                stackalloc char[JsonConstants.StackallocCharThreshold] :
-                (propertyArray = ArrayPool<char>.Shared.Rent(length));
+            Span<char> escapedPropertyName =
+                length <= JsonConstants.StackallocCharThreshold
+                    ? stackalloc char[JsonConstants.StackallocCharThreshold]
+                    : (propertyArray = ArrayPool<char>.Shared.Rent(length));
 
-            JsonWriterHelper.EscapeString(propertyName, escapedPropertyName, firstEscapeIndexProp, _options.Encoder, out int written);
+            JsonWriterHelper.EscapeString(
+                propertyName,
+                escapedPropertyName,
+                firstEscapeIndexProp,
+                _options.Encoder,
+                out int written
+            );
 
             WriteStartByOptions(escapedPropertyName.Slice(0, written), token);
 
@@ -898,14 +977,24 @@ namespace System.Text.Json
         private void ValidateEnd(byte token)
         {
             if (_bitStack.CurrentDepth <= 0 || _tokenType == JsonTokenType.PropertyName)
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.MismatchedObjectArray, currentDepth: default, token, _tokenType);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.MismatchedObjectArray,
+                    currentDepth: default,
+                    token,
+                    _tokenType
+                );
 
             if (token == JsonConstants.CloseBracket)
             {
                 if (_inObject)
                 {
                     Debug.Assert(_tokenType != JsonTokenType.None);
-                    ThrowHelper.ThrowInvalidOperationException(ExceptionResource.MismatchedObjectArray, currentDepth: default, token, _tokenType);
+                    ThrowHelper.ThrowInvalidOperationException(
+                        ExceptionResource.MismatchedObjectArray,
+                        currentDepth: default,
+                        token,
+                        _tokenType
+                    );
                 }
             }
             else
@@ -914,7 +1003,12 @@ namespace System.Text.Json
 
                 if (!_inObject)
                 {
-                    ThrowHelper.ThrowInvalidOperationException(ExceptionResource.MismatchedObjectArray, currentDepth: default, token, _tokenType);
+                    ThrowHelper.ThrowInvalidOperationException(
+                        ExceptionResource.MismatchedObjectArray,
+                        currentDepth: default,
+                        token,
+                        _tokenType
+                    );
                 }
             }
 
@@ -1061,6 +1155,7 @@ namespace System.Text.Json
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => $"BytesCommitted = {BytesCommitted} BytesPending = {BytesPending} CurrentDepth = {CurrentDepth}";
+        private string DebuggerDisplay =>
+            $"BytesCommitted = {BytesCommitted} BytesPending = {BytesPending} CurrentDepth = {CurrentDepth}";
     }
 }

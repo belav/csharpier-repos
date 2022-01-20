@@ -18,14 +18,13 @@ class Selenium
 
     const bool PoolForBrowserLogs = true;
 
-    private static async ValueTask<Uri> WaitForServerAsync(int port, CancellationToken cancellationToken)
+    private static async ValueTask<Uri> WaitForServerAsync(
+        int port,
+        CancellationToken cancellationToken
+    )
     {
         var uri = new UriBuilder("http", "localhost", port, "/wd/hub/").Uri;
-        var httpClient = new HttpClient
-        {
-            BaseAddress = uri,
-            Timeout = TimeSpan.FromSeconds(1),
-        };
+        var httpClient = new HttpClient { BaseAddress = uri, Timeout = TimeSpan.FromSeconds(1), };
 
         Console.WriteLine($"Attempting to connect to Selenium Server running at {uri}");
 
@@ -37,7 +36,9 @@ class Selenium
             retries++;
             try
             {
-                var response = (await httpClient.GetAsync("status", cancellationToken)).EnsureSuccessStatusCode();
+                var response = (
+                    await httpClient.GetAsync("status", cancellationToken)
+                ).EnsureSuccessStatusCode();
                 Console.WriteLine("Connected to Selenium");
                 return uri;
             }
@@ -45,7 +46,9 @@ class Selenium
             {
                 if (retries == 1)
                 {
-                    Console.WriteLine("Could not connect to selenium-server. Has it been started as yet?");
+                    Console.WriteLine(
+                        "Could not connect to selenium-server. Has it been started as yet?"
+                    );
                 }
             }
 
@@ -55,7 +58,10 @@ class Selenium
         throw new Exception($"Unable to connect to selenium-server at {uri}");
     }
 
-    public static async Task<RemoteWebDriver> CreateBrowser(CancellationToken cancellationToken, bool captureBrowserMemory = false)
+    public static async Task<RemoteWebDriver> CreateBrowser(
+        CancellationToken cancellationToken,
+        bool captureBrowserMemory = false
+    )
     {
         var uri = await WaitForServerAsync(SeleniumPort, cancellationToken);
 
@@ -86,7 +92,8 @@ class Selenium
                 var driver = new RemoteWebDriver(
                     uri,
                     options.ToCapabilities(),
-                    TimeSpan.FromSeconds(60).Add(TimeSpan.FromSeconds(attempt * 60)));
+                    TimeSpan.FromSeconds(60).Add(TimeSpan.FromSeconds(attempt * 60))
+                );
 
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
 
@@ -94,19 +101,23 @@ class Selenium
                 {
                     // Run in background.
                     var logs = driver.Manage().Logs;
-                    _ = Task.Run(async () =>
-                    {
-                        while (!cancellationToken.IsCancellationRequested)
+                    _ = Task.Run(
+                        async () =>
                         {
-                            await Task.Delay(TimeSpan.FromSeconds(3));
-
-                            var consoleLogs = logs.GetLog(LogType.Browser);
-                            foreach (var entry in consoleLogs)
+                            while (!cancellationToken.IsCancellationRequested)
                             {
-                                Console.WriteLine($"[Browser Log]: {entry.Timestamp}: {entry.Message}");
+                                await Task.Delay(TimeSpan.FromSeconds(3));
+
+                                var consoleLogs = logs.GetLog(LogType.Browser);
+                                foreach (var entry in consoleLogs)
+                                {
+                                    Console.WriteLine(
+                                        $"[Browser Log]: {entry.Timestamp}: {entry.Message}"
+                                    );
+                                }
                             }
                         }
-                    });
+                    );
                 }
 
                 return driver;
@@ -117,9 +128,10 @@ class Selenium
             }
 
             attempt++;
-
         } while (attempt < MaxAttempts);
 
-        throw new InvalidOperationException("Couldn't create a Selenium remote driver client. The server is irresponsive");
+        throw new InvalidOperationException(
+            "Couldn't create a Selenium remote driver client. The server is irresponsive"
+        );
     }
 }

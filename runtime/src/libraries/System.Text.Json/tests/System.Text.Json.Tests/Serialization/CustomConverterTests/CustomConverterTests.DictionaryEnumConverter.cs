@@ -43,16 +43,20 @@ namespace System.Text.Json.Serialization.Tests
                 Type valueType = type.GetGenericArguments()[1];
 
                 JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                    typeof(DictionaryEnumConverterInner<,>).MakeGenericType(new Type[] { keyType, valueType }),
+                    typeof(DictionaryEnumConverterInner<,>).MakeGenericType(
+                        new Type[] { keyType, valueType }
+                    ),
                     BindingFlags.Instance | BindingFlags.Public,
                     binder: null,
                     args: new object[] { options },
-                    culture: null);
+                    culture: null
+                );
 
                 return converter;
             }
 
-            private class DictionaryEnumConverterInner<TKey, TValue> : JsonConverter<Dictionary<TKey, TValue>> where TKey : struct, Enum
+            private class DictionaryEnumConverterInner<TKey, TValue>
+                : JsonConverter<Dictionary<TKey, TValue>> where TKey : struct, Enum
             {
                 private readonly JsonConverter<TValue> _valueConverter;
                 private Type _keyType;
@@ -68,7 +72,11 @@ namespace System.Text.Json.Serialization.Tests
                     _valueType = typeof(TValue);
                 }
 
-                public override Dictionary<TKey, TValue> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+                public override Dictionary<TKey, TValue> Read(
+                    ref Utf8JsonReader reader,
+                    Type typeToConvert,
+                    JsonSerializerOptions options
+                )
                 {
                     if (reader.TokenType != JsonTokenType.StartObject)
                     {
@@ -93,10 +101,14 @@ namespace System.Text.Json.Serialization.Tests
                         string propertyName = reader.GetString();
 
                         // For performance, parse with ignoreCase:false first.
-                        if (!Enum.TryParse(propertyName, ignoreCase: false, out TKey key) &&
-                            !Enum.TryParse(propertyName, ignoreCase: true, out key))
+                        if (
+                            !Enum.TryParse(propertyName, ignoreCase: false, out TKey key)
+                            && !Enum.TryParse(propertyName, ignoreCase: true, out key)
+                        )
                         {
-                            throw new JsonException($"Unable to convert \"{propertyName}\" to Enum \"{_keyType}\".");
+                            throw new JsonException(
+                                $"Unable to convert \"{propertyName}\" to Enum \"{_keyType}\"."
+                            );
                         }
 
                         // Get the value.
@@ -118,7 +130,11 @@ namespace System.Text.Json.Serialization.Tests
                     throw new JsonException();
                 }
 
-                public override void Write(Utf8JsonWriter writer, Dictionary<TKey, TValue> value, JsonSerializerOptions options)
+                public override void Write(
+                    Utf8JsonWriter writer,
+                    Dictionary<TKey, TValue> value,
+                    JsonSerializerOptions options
+                )
                 {
                     writer.WriteStartObject();
 
@@ -149,7 +165,10 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new DictionaryEnumConverter());
 
-            Dictionary<MyEnum, int> obj = JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(Json, options);
+            Dictionary<MyEnum, int> obj = JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(
+                Json,
+                options
+            );
             Assert.Equal(1, obj.Count);
             Assert.Equal(1, obj[MyEnum.One]);
 
@@ -165,7 +184,10 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new DictionaryEnumConverter());
 
-            Dictionary<MyEnum, int> obj = JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(Json, options);
+            Dictionary<MyEnum, int> obj = JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(
+                Json,
+                options
+            );
             Assert.Equal(1, obj.Count);
             Assert.Equal(1, obj[MyEnum.One]);
 
@@ -182,7 +204,10 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new DictionaryEnumConverter());
 
-            Dictionary<MyEnum, Entity> obj = JsonSerializer.Deserialize<Dictionary<MyEnum, Entity>>(Json, options);
+            Dictionary<MyEnum, Entity> obj = JsonSerializer.Deserialize<Dictionary<MyEnum, Entity>>(
+                Json,
+                options
+            );
             Assert.Equal(1, obj.Count);
             Assert.Equal("test", obj[MyEnum.One].Value);
 
@@ -198,7 +223,9 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new DictionaryEnumConverter());
 
-            JsonException ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(Json, options));
+            JsonException ex = Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(Json, options)
+            );
             Assert.Contains($"Unable to convert \"BAD\" to Enum \"{typeof(MyEnum)}\".", ex.Message);
         }
     }

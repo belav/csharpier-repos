@@ -10,13 +10,21 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed class SynthesizedLambdaCacheFieldSymbol : SynthesizedFieldSymbolBase, ISynthesizedMethodBodyImplementationSymbol
+    internal sealed class SynthesizedLambdaCacheFieldSymbol
+        : SynthesizedFieldSymbolBase,
+          ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly TypeWithAnnotations _type;
         private readonly MethodSymbol _topLevelMethod;
 
-        public SynthesizedLambdaCacheFieldSymbol(NamedTypeSymbol containingType, TypeSymbol type, string name, MethodSymbol topLevelMethod, bool isReadOnly, bool isStatic)
-            : base(containingType, name, isPublic: true, isReadOnly: isReadOnly, isStatic: isStatic)
+        public SynthesizedLambdaCacheFieldSymbol(
+            NamedTypeSymbol containingType,
+            TypeSymbol type,
+            string name,
+            MethodSymbol topLevelMethod,
+            bool isReadOnly,
+            bool isStatic
+        ) : base(containingType, name, isPublic: true, isReadOnly: isReadOnly, isStatic: isStatic)
         {
             Debug.Assert((object)type != null);
             Debug.Assert((object)topLevelMethod != null);

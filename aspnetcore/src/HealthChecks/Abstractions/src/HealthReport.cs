@@ -16,13 +16,17 @@ public sealed class HealthReport
     /// </summary>
     /// <param name="entries">A <see cref="IReadOnlyDictionary{TKey, T}"/> containing the results from each health check.</param>
     /// <param name="totalDuration">A value indicating the time the health check service took to execute.</param>
-    public HealthReport(IReadOnlyDictionary<string, HealthReportEntry> entries, TimeSpan totalDuration)
+    public HealthReport(
+        IReadOnlyDictionary<string, HealthReportEntry> entries,
+        TimeSpan totalDuration
+    )
         : this(
             entries,
-            CalculateAggregateStatus(entries?.Values ?? throw new ArgumentNullException(nameof(entries))),
-            totalDuration)
-    {
-    }
+            CalculateAggregateStatus(
+                entries?.Values ?? throw new ArgumentNullException(nameof(entries))
+            ),
+            totalDuration
+        ) { }
 
     /// <summary>
     /// Create a new <see cref="HealthReport"/> from the specified results.
@@ -30,7 +34,11 @@ public sealed class HealthReport
     /// <param name="entries">A <see cref="IReadOnlyDictionary{TKey, T}"/> containing the results from each health check.</param>
     /// <param name="status">A <see cref="HealthStatus"/> representing the aggregate status of all the health checks.</param>
     /// <param name="totalDuration">A value indicating the time the health check service took to execute.</param>
-    public HealthReport(IReadOnlyDictionary<string, HealthReportEntry> entries, HealthStatus status, TimeSpan totalDuration)
+    public HealthReport(
+        IReadOnlyDictionary<string, HealthReportEntry> entries,
+        HealthStatus status,
+        TimeSpan totalDuration
+    )
     {
         Entries = entries;
         Status = status;

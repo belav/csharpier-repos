@@ -15,8 +15,13 @@ internal sealed partial class RequestContext<TContext> : RequestContext where TC
     private readonly IHttpApplication<TContext> _application;
     private readonly MessagePump _messagePump;
 
-    public RequestContext(IHttpApplication<TContext> application, MessagePump messagePump, HttpSysListener server, uint? bufferSize, ulong requestId)
-        : base(server, bufferSize, requestId)
+    public RequestContext(
+        IHttpApplication<TContext> application,
+        MessagePump messagePump,
+        HttpSysListener server,
+        uint? bufferSize,
+        ulong requestId
+    ) : base(server, bufferSize, requestId)
     {
         _application = application;
         _messagePump = messagePump;

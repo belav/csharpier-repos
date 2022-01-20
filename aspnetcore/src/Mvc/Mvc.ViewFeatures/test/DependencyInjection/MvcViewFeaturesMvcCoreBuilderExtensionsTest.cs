@@ -21,7 +21,10 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         builder.AddViews();
 
         // Assert
-        var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 
@@ -36,7 +39,10 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         builder.AddCookieTempDataProvider();
 
         // Assert
-        var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 
@@ -53,7 +59,8 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         // Assert
         Assert.DoesNotContain(
             services,
-            item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>));
+            item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>)
+        );
     }
 
     [Fact]
@@ -67,7 +74,10 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         builder.AddCookieTempDataProvider(options => { });
 
         // Assert
-        var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 
@@ -84,7 +94,8 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         // Assert
         Assert.Single(
             services,
-            item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>));
+            item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>)
+        );
     }
 
     [Fact]
@@ -99,7 +110,10 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         builder.AddViews();
 
         // Assert
-        var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 
@@ -115,7 +129,10 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         builder.AddViews();
 
         // Assert
-        var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 
@@ -131,7 +148,10 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         builder.AddCookieTempDataProvider();
 
         // Assert
-        var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 
@@ -147,7 +167,10 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         builder.AddCookieTempDataProvider(options => { });
 
         // Assert
-        var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 
@@ -163,7 +186,10 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         builder.AddCookieTempDataProvider();
 
         // Assert
-        var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 
@@ -179,7 +205,10 @@ public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
         builder.AddCookieTempDataProvider(options => { });
 
         // Assert
-        var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+        var descriptor = Assert.Single(
+            services,
+            item => item.ServiceType == typeof(ITempDataProvider)
+        );
         Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
     }
 }

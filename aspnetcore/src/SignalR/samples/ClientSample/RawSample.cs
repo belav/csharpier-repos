@@ -18,14 +18,20 @@ internal class RawSample
 {
     internal static void Register(CommandLineApplication app)
     {
-        app.Command("raw", cmd =>
-        {
-            cmd.Description = "Tests a connection to an endpoint";
+        app.Command(
+            "raw",
+            cmd =>
+            {
+                cmd.Description = "Tests a connection to an endpoint";
 
-            var baseUrlArgument = cmd.Argument("<BASEURL>", "The URL to the Chat EndPoint to test");
+                var baseUrlArgument = cmd.Argument(
+                    "<BASEURL>",
+                    "The URL to the Chat EndPoint to test"
+                );
 
-            cmd.OnExecute(() => ExecuteAsync(baseUrlArgument.Value));
-        });
+                cmd.OnExecute(() => ExecuteAsync(baseUrlArgument.Value));
+            }
+        );
     }
 
     public static async Task<int> ExecuteAsync(string baseUrl)
@@ -59,12 +65,9 @@ internal class RawSample
 
             await shutdown.Task;
         }
-        catch (AggregateException aex) when (aex.InnerExceptions.All(e => e is OperationCanceledException))
-        {
-        }
-        catch (OperationCanceledException)
-        {
-        }
+        catch (AggregateException aex)
+            when (aex.InnerExceptions.All(e => e is OperationCanceledException)) { }
+        catch (OperationCanceledException) { }
         finally
         {
             await connection.DisposeAsync();

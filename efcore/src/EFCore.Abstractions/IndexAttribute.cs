@@ -60,7 +60,6 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Checks whether <see cref="IsUnique" /> has been explicitly set to a value.
         /// </summary>
-        public bool IsUniqueHasValue
-            => _isUnique.HasValue;
+        public bool IsUniqueHasValue => _isUnique.HasValue;
     }
 }

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -22,27 +22,36 @@ public class ForwardedHeadersMiddlewareTests
     public async Task XForwardedForDefaultSettingsChangeRemoteIpAndPort()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedFor
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedFor
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-For"] = "11.111.111.11:9090";
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-For"] = "11.111.111.11:9090";
+            }
+        );
 
         Assert.Equal("11.111.111.11", context.Connection.RemoteIpAddress.ToString());
         Assert.Equal(9090, context.Connection.RemotePort);
@@ -54,33 +63,47 @@ public class ForwardedHeadersMiddlewareTests
 
     [Theory]
     [InlineData(1, "11.111.111.11.12345", "10.0.0.1", 99)] // Invalid
-    public async Task XForwardedForFirstValueIsInvalid(int limit, string header, string expectedIp, int expectedPort)
+    public async Task XForwardedForFirstValueIsInvalid(
+        int limit,
+        string header,
+        string expectedIp,
+        int expectedPort
+    )
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedFor,
-                        ForwardLimit = limit,
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedFor,
+                                        ForwardLimit = limit,
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-For"] = header;
-            c.Connection.RemoteIpAddress = IPAddress.Parse("10.0.0.1");
-            c.Connection.RemotePort = 99;
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-For"] = header;
+                c.Connection.RemoteIpAddress = IPAddress.Parse("10.0.0.1");
+                c.Connection.RemotePort = 99;
+            }
+        );
 
         Assert.Equal(expectedIp, context.Connection.RemoteIpAddress.ToString());
         Assert.Equal(expectedPort, context.Connection.RemotePort);
@@ -94,51 +117,135 @@ public class ForwardedHeadersMiddlewareTests
     [InlineData(1, "11.111.111.11:12345", "11.111.111.11", 12345, "", true)]
     [InlineData(10, "11.111.111.11:12345", "11.111.111.11", 12345, "", false)]
     [InlineData(10, "11.111.111.11:12345", "11.111.111.11", 12345, "", true)]
-    [InlineData(1, "12.112.112.12:23456, 11.111.111.11:12345", "11.111.111.11", 12345, "12.112.112.12:23456", false)]
-    [InlineData(1, "12.112.112.12:23456, 11.111.111.11:12345", "11.111.111.11", 12345, "12.112.112.12:23456", true)]
+    [InlineData(
+        1,
+        "12.112.112.12:23456, 11.111.111.11:12345",
+        "11.111.111.11",
+        12345,
+        "12.112.112.12:23456",
+        false
+    )]
+    [InlineData(
+        1,
+        "12.112.112.12:23456, 11.111.111.11:12345",
+        "11.111.111.11",
+        12345,
+        "12.112.112.12:23456",
+        true
+    )]
     [InlineData(2, "12.112.112.12:23456, 11.111.111.11:12345", "12.112.112.12", 23456, "", false)]
     [InlineData(2, "12.112.112.12:23456, 11.111.111.11:12345", "12.112.112.12", 23456, "", true)]
     [InlineData(10, "12.112.112.12:23456, 11.111.111.11:12345", "12.112.112.12", 23456, "", false)]
     [InlineData(10, "12.112.112.12:23456, 11.111.111.11:12345", "12.112.112.12", 23456, "", true)]
-    [InlineData(10, "12.112.112.12.23456, 11.111.111.11:12345", "11.111.111.11", 12345, "12.112.112.12.23456", false)] // Invalid 2nd value
-    [InlineData(10, "12.112.112.12.23456, 11.111.111.11:12345", "11.111.111.11", 12345, "12.112.112.12.23456", true)] // Invalid 2nd value
-    [InlineData(10, "13.113.113.13:34567, 12.112.112.12.23456, 11.111.111.11:12345", "11.111.111.11", 12345, "13.113.113.13:34567,12.112.112.12.23456", false)] // Invalid 2nd value
-    [InlineData(10, "13.113.113.13:34567, 12.112.112.12.23456, 11.111.111.11:12345", "11.111.111.11", 12345, "13.113.113.13:34567,12.112.112.12.23456", true)] // Invalid 2nd value
-    [InlineData(2, "13.113.113.13:34567, 12.112.112.12:23456, 11.111.111.11:12345", "12.112.112.12", 23456, "13.113.113.13:34567", false)]
-    [InlineData(2, "13.113.113.13:34567, 12.112.112.12:23456, 11.111.111.11:12345", "12.112.112.12", 23456, "13.113.113.13:34567", true)]
-    [InlineData(3, "13.113.113.13:34567, 12.112.112.12:23456, 11.111.111.11:12345", "13.113.113.13", 34567, "", false)]
-    [InlineData(3, "13.113.113.13:34567, 12.112.112.12:23456, 11.111.111.11:12345", "13.113.113.13", 34567, "", true)]
-    public async Task XForwardedForForwardLimit(int limit, string header, string expectedIp, int expectedPort, string remainingHeader, bool requireSymmetry)
+    [InlineData(
+        10,
+        "12.112.112.12.23456, 11.111.111.11:12345",
+        "11.111.111.11",
+        12345,
+        "12.112.112.12.23456",
+        false
+    )] // Invalid 2nd value
+    [InlineData(
+        10,
+        "12.112.112.12.23456, 11.111.111.11:12345",
+        "11.111.111.11",
+        12345,
+        "12.112.112.12.23456",
+        true
+    )] // Invalid 2nd value
+    [InlineData(
+        10,
+        "13.113.113.13:34567, 12.112.112.12.23456, 11.111.111.11:12345",
+        "11.111.111.11",
+        12345,
+        "13.113.113.13:34567,12.112.112.12.23456",
+        false
+    )] // Invalid 2nd value
+    [InlineData(
+        10,
+        "13.113.113.13:34567, 12.112.112.12.23456, 11.111.111.11:12345",
+        "11.111.111.11",
+        12345,
+        "13.113.113.13:34567,12.112.112.12.23456",
+        true
+    )] // Invalid 2nd value
+    [InlineData(
+        2,
+        "13.113.113.13:34567, 12.112.112.12:23456, 11.111.111.11:12345",
+        "12.112.112.12",
+        23456,
+        "13.113.113.13:34567",
+        false
+    )]
+    [InlineData(
+        2,
+        "13.113.113.13:34567, 12.112.112.12:23456, 11.111.111.11:12345",
+        "12.112.112.12",
+        23456,
+        "13.113.113.13:34567",
+        true
+    )]
+    [InlineData(
+        3,
+        "13.113.113.13:34567, 12.112.112.12:23456, 11.111.111.11:12345",
+        "13.113.113.13",
+        34567,
+        "",
+        false
+    )]
+    [InlineData(
+        3,
+        "13.113.113.13:34567, 12.112.112.12:23456, 11.111.111.11:12345",
+        "13.113.113.13",
+        34567,
+        "",
+        true
+    )]
+    public async Task XForwardedForForwardLimit(
+        int limit,
+        string header,
+        string expectedIp,
+        int expectedPort,
+        string remainingHeader,
+        bool requireSymmetry
+    )
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    var options = new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedFor,
-                        RequireHeaderSymmetry = requireSymmetry,
-                        ForwardLimit = limit,
-                    };
-                    options.KnownProxies.Clear();
-                    options.KnownNetworks.Clear();
-                    app.UseForwardedHeaders(options);
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                var options = new ForwardedHeadersOptions
+                                {
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedFor,
+                                    RequireHeaderSymmetry = requireSymmetry,
+                                    ForwardLimit = limit,
+                                };
+                                options.KnownProxies.Clear();
+                                options.KnownNetworks.Clear();
+                                app.UseForwardedHeaders(options);
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-For"] = header;
-            c.Connection.RemoteIpAddress = IPAddress.Parse("10.0.0.1");
-            c.Connection.RemotePort = 99;
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-For"] = header;
+                c.Connection.RemoteIpAddress = IPAddress.Parse("10.0.0.1");
+                c.Connection.RemotePort = 99;
+            }
+        );
 
         Assert.Equal(expectedIp, context.Connection.RemoteIpAddress.ToString());
         Assert.Equal(expectedPort, context.Connection.RemotePort);
@@ -154,37 +261,48 @@ public class ForwardedHeadersMiddlewareTests
     public async Task XForwardedForLoopback(string originalIp, bool expectForwarded)
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedFor,
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedFor,
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-For"] = "10.0.0.1:1234";
-            c.Connection.RemoteIpAddress = IPAddress.Parse(originalIp);
-            c.Connection.RemotePort = 99;
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-For"] = "10.0.0.1:1234";
+                c.Connection.RemoteIpAddress = IPAddress.Parse(originalIp);
+                c.Connection.RemotePort = 99;
+            }
+        );
 
         if (expectForwarded)
         {
             Assert.Equal("10.0.0.1", context.Connection.RemoteIpAddress.ToString());
             Assert.Equal(1234, context.Connection.RemotePort);
             Assert.True(context.Request.Headers.ContainsKey("X-Original-For"));
-            Assert.Equal(new IPEndPoint(IPAddress.Parse(originalIp), 99).ToString(),
-                context.Request.Headers["X-Original-For"]);
+            Assert.Equal(
+                new IPEndPoint(IPAddress.Parse(originalIp), 99).ToString(),
+                context.Request.Headers["X-Original-For"]
+            );
         }
         else
         {
@@ -201,55 +319,185 @@ public class ForwardedHeadersMiddlewareTests
     [InlineData(1, "", "10.0.0.1", "10.0.0.1", 99, true)]
     [InlineData(1, "11.111.111.11:12345", "10.0.0.1", "11.111.111.11", 12345, false)]
     [InlineData(1, "11.111.111.11:12345", "10.0.0.1", "11.111.111.11", 12345, true)]
-    [InlineData(1, "12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1", "11.111.111.11", 12345, false)]
-    [InlineData(1, "12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1", "11.111.111.11", 12345, true)]
-    [InlineData(1, "12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11", "11.111.111.11", 12345, false)]
-    [InlineData(1, "12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11", "11.111.111.11", 12345, true)]
-    [InlineData(2, "12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11", "12.112.112.12", 23456, false)]
-    [InlineData(2, "12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11", "12.112.112.12", 23456, true)]
-    [InlineData(1, "12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11,12.112.112.12", "11.111.111.11", 12345, false)]
-    [InlineData(1, "12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11,12.112.112.12", "11.111.111.11", 12345, true)]
-    [InlineData(2, "12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11,12.112.112.12", "12.112.112.12", 23456, false)]
-    [InlineData(2, "12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11,12.112.112.12", "12.112.112.12", 23456, true)]
-    [InlineData(3, "13.113.113.13:34567, 12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11,12.112.112.12", "13.113.113.13", 34567, false)]
-    [InlineData(3, "13.113.113.13:34567, 12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11,12.112.112.12", "13.113.113.13", 34567, true)]
-    [InlineData(3, "13.113.113.13:34567, 12.112.112.12;23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11,12.112.112.12", "11.111.111.11", 12345, false)] // Invalid 2nd IP
-    [InlineData(3, "13.113.113.13:34567, 12.112.112.12;23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11,12.112.112.12", "11.111.111.11", 12345, true)] // Invalid 2nd IP
-    [InlineData(3, "13.113.113.13;34567, 12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11,12.112.112.12", "12.112.112.12", 23456, false)] // Invalid 3rd IP
-    [InlineData(3, "13.113.113.13;34567, 12.112.112.12:23456, 11.111.111.11:12345", "10.0.0.1,11.111.111.11,12.112.112.12", "12.112.112.12", 23456, true)] // Invalid 3rd IP
-    public async Task XForwardedForForwardKnownIps(int limit, string header, string knownIPs, string expectedIp, int expectedPort, bool requireSymmetry)
+    [InlineData(
+        1,
+        "12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1",
+        "11.111.111.11",
+        12345,
+        false
+    )]
+    [InlineData(
+        1,
+        "12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1",
+        "11.111.111.11",
+        12345,
+        true
+    )]
+    [InlineData(
+        1,
+        "12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11",
+        "11.111.111.11",
+        12345,
+        false
+    )]
+    [InlineData(
+        1,
+        "12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11",
+        "11.111.111.11",
+        12345,
+        true
+    )]
+    [InlineData(
+        2,
+        "12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11",
+        "12.112.112.12",
+        23456,
+        false
+    )]
+    [InlineData(
+        2,
+        "12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11",
+        "12.112.112.12",
+        23456,
+        true
+    )]
+    [InlineData(
+        1,
+        "12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11,12.112.112.12",
+        "11.111.111.11",
+        12345,
+        false
+    )]
+    [InlineData(
+        1,
+        "12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11,12.112.112.12",
+        "11.111.111.11",
+        12345,
+        true
+    )]
+    [InlineData(
+        2,
+        "12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11,12.112.112.12",
+        "12.112.112.12",
+        23456,
+        false
+    )]
+    [InlineData(
+        2,
+        "12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11,12.112.112.12",
+        "12.112.112.12",
+        23456,
+        true
+    )]
+    [InlineData(
+        3,
+        "13.113.113.13:34567, 12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11,12.112.112.12",
+        "13.113.113.13",
+        34567,
+        false
+    )]
+    [InlineData(
+        3,
+        "13.113.113.13:34567, 12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11,12.112.112.12",
+        "13.113.113.13",
+        34567,
+        true
+    )]
+    [InlineData(
+        3,
+        "13.113.113.13:34567, 12.112.112.12;23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11,12.112.112.12",
+        "11.111.111.11",
+        12345,
+        false
+    )] // Invalid 2nd IP
+    [InlineData(
+        3,
+        "13.113.113.13:34567, 12.112.112.12;23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11,12.112.112.12",
+        "11.111.111.11",
+        12345,
+        true
+    )] // Invalid 2nd IP
+    [InlineData(
+        3,
+        "13.113.113.13;34567, 12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11,12.112.112.12",
+        "12.112.112.12",
+        23456,
+        false
+    )] // Invalid 3rd IP
+    [InlineData(
+        3,
+        "13.113.113.13;34567, 12.112.112.12:23456, 11.111.111.11:12345",
+        "10.0.0.1,11.111.111.11,12.112.112.12",
+        "12.112.112.12",
+        23456,
+        true
+    )] // Invalid 3rd IP
+    public async Task XForwardedForForwardKnownIps(
+        int limit,
+        string header,
+        string knownIPs,
+        string expectedIp,
+        int expectedPort,
+        bool requireSymmetry
+    )
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    var options = new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedFor,
-                        RequireHeaderSymmetry = requireSymmetry,
-                        ForwardLimit = limit,
-                    };
-                    foreach (var ip in knownIPs.Split(',').Select(text => IPAddress.Parse(text)))
-                    {
-                        options.KnownProxies.Add(ip);
-                    }
-                    app.UseForwardedHeaders(options);
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                var options = new ForwardedHeadersOptions
+                                {
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedFor,
+                                    RequireHeaderSymmetry = requireSymmetry,
+                                    ForwardLimit = limit,
+                                };
+                                foreach (
+                                    var ip in knownIPs
+                                        .Split(',')
+                                        .Select(text => IPAddress.Parse(text))
+                                )
+                                {
+                                    options.KnownProxies.Add(ip);
+                                }
+                                app.UseForwardedHeaders(options);
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-For"] = header;
-            c.Connection.RemoteIpAddress = IPAddress.Parse("10.0.0.1");
-            c.Connection.RemotePort = 99;
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-For"] = header;
+                c.Connection.RemoteIpAddress = IPAddress.Parse("10.0.0.1");
+                c.Connection.RemotePort = 99;
+            }
+        );
 
         Assert.Equal(expectedIp, context.Connection.RemoteIpAddress.ToString());
         Assert.Equal(expectedPort, context.Connection.RemotePort);
@@ -259,27 +507,36 @@ public class ForwardedHeadersMiddlewareTests
     public async Task XForwardedForOverrideBadIpDoesntChangeRemoteIp()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedFor
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedFor
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-For"] = "BAD-IP";
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-For"] = "BAD-IP";
+            }
+        );
 
         Assert.Null(context.Connection.RemoteIpAddress);
     }
@@ -288,27 +545,36 @@ public class ForwardedHeadersMiddlewareTests
     public async Task XForwardedHostOverrideChangesRequestHost()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedHost
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedHost
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Host"] = "testhost";
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Host"] = "testhost";
+            }
+        );
 
         Assert.Equal("testhost", context.Request.Host.ToString());
     }
@@ -317,33 +583,34 @@ public class ForwardedHeadersMiddlewareTests
     {
         get
         {
-            return new TheoryData<string>() {
-                    "z",
-                    "1",
-                    "y:1",
-                    "1:1",
-                    "[ABCdef]",
-                    "[abcDEF]:0",
-                    "[abcdef:127.2355.1246.114]:0",
-                    "[::1]:80",
-                    "127.0.0.1:80",
-                    "900.900.900.900:9523547852",
-                    "foo",
-                    "foo:234",
-                    "foo.bar.baz",
-                    "foo.BAR.baz:46245",
-                    "foo.ba-ar.baz:46245",
-                    "-foo:1234",
-                    "xn--c1yn36f:134",
-                    "-",
-                    "_",
-                    "~",
-                    "!",
-                    "$",
-                    "'",
-                    "(",
-                    ")",
-                };
+            return new TheoryData<string>()
+            {
+                "z",
+                "1",
+                "y:1",
+                "1:1",
+                "[ABCdef]",
+                "[abcDEF]:0",
+                "[abcdef:127.2355.1246.114]:0",
+                "[::1]:80",
+                "127.0.0.1:80",
+                "900.900.900.900:9523547852",
+                "foo",
+                "foo:234",
+                "foo.bar.baz",
+                "foo.BAR.baz:46245",
+                "foo.ba-ar.baz:46245",
+                "-foo:1234",
+                "xn--c1yn36f:134",
+                "-",
+                "_",
+                "~",
+                "!",
+                "$",
+                "'",
+                "(",
+                ")",
+            };
         }
     }
 
@@ -354,33 +621,44 @@ public class ForwardedHeadersMiddlewareTests
         var assertsExecuted = false;
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedHost
-                    });
-                    app.Run(context =>
-                    {
-                        Assert.Equal(hostHeader, context.Request.Host.ToString());
-                        assertsExecuted = true;
-                        return Task.FromResult(0);
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedHost
+                                    }
+                                );
+                                app.Run(
+                                    context =>
+                                    {
+                                        Assert.Equal(hostHeader, context.Request.Host.ToString());
+                                        assertsExecuted = true;
+                                        return Task.FromResult(0);
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Host"] = hostHeader;
-        });
+        await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Host"] = hostHeader;
+            }
+        );
         Assert.True(assertsExecuted);
     }
 
@@ -389,25 +667,26 @@ public class ForwardedHeadersMiddlewareTests
         get
         {
             // see https://tools.ietf.org/html/rfc7230#section-5.4
-            var data = new TheoryData<string>() {
-                    "", // Empty
-                    "[]", // Too short
-                    "[::]", // Too short
-                    "[ghijkl]", // Non-hex
-                    "[afd:adf:123", // Incomplete
-                    "[afd:adf]123", // Missing :
-                    "[afd:adf]:", // Missing port digits
-                    "[afd adf]", // Space
-                    "[ad-314]", // dash
-                    ":1234", // Missing host
-                    "a:b:c", // Missing []
-                    "::1", // Missing []
-                    "::", // Missing everything
-                    "abcd:1abcd", // Letters in port
-                    "abcd:1.2", // Dot in port
-                    "1.2.3.4:", // Missing port digits
-                    "1.2 .4", // Space
-                };
+            var data = new TheoryData<string>()
+            {
+                "", // Empty
+                "[]", // Too short
+                "[::]", // Too short
+                "[ghijkl]", // Non-hex
+                "[afd:adf:123", // Incomplete
+                "[afd:adf]123", // Missing :
+                "[afd:adf]:", // Missing port digits
+                "[afd adf]", // Space
+                "[ad-314]", // dash
+                ":1234", // Missing host
+                "a:b:c", // Missing []
+                "::1", // Missing []
+                "::", // Missing everything
+                "abcd:1abcd", // Letters in port
+                "abcd:1.2", // Dot in port
+                "1.2.3.4:", // Missing port digits
+                "1.2 .4", // Space
+            };
 
             // These aren't allowed anywhere in the host header
             var invalid = "\"#%*+/;<=>?@[]\\^`{}|";
@@ -439,33 +718,44 @@ public class ForwardedHeadersMiddlewareTests
         var assertsExecuted = false;
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedHost
-                    });
-                    app.Run(context =>
-                    {
-                        Assert.NotEqual(hostHeader, context.Request.Host.Value);
-                        assertsExecuted = true;
-                        return Task.FromResult(0);
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedHost
+                                    }
+                                );
+                                app.Run(
+                                    context =>
+                                    {
+                                        Assert.NotEqual(hostHeader, context.Request.Host.Value);
+                                        assertsExecuted = true;
+                                        return Task.FromResult(0);
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Host"] = hostHeader;
-        });
+        await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Host"] = hostHeader;
+            }
+        );
         Assert.True(assertsExecuted);
     }
 
@@ -489,33 +779,47 @@ public class ForwardedHeadersMiddlewareTests
     {
         bool assertsExecuted = false;
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedHost,
-                        AllowedHosts = allowedHost.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
-                    });
-                    app.Run(context =>
-                    {
-                        Assert.Equal(hostHeader, context.Request.Headers.Host);
-                        assertsExecuted = true;
-                        return Task.FromResult(0);
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedHost,
+                                        AllowedHosts = allowedHost.Split(
+                                            new[] { ';' },
+                                            StringSplitOptions.RemoveEmptyEntries
+                                        )
+                                    }
+                                );
+                                app.Run(
+                                    context =>
+                                    {
+                                        Assert.Equal(hostHeader, context.Request.Headers.Host);
+                                        assertsExecuted = true;
+                                        return Task.FromResult(0);
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
-        var response = await server.SendAsync(ctx =>
-        {
-            ctx.Request.Headers["X-forwarded-Host"] = hostHeader;
-        });
+        var response = await server.SendAsync(
+            ctx =>
+            {
+                ctx.Request.Headers["X-forwarded-Host"] = hostHeader;
+            }
+        );
         Assert.True(assertsExecuted);
     }
 
@@ -540,33 +844,47 @@ public class ForwardedHeadersMiddlewareTests
     {
         bool assertsExecuted = false;
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedHost,
-                        AllowedHosts = new[] { allowedHost }
-                    });
-                    app.Run(context =>
-                    {
-                        Assert.NotEqual<string>(hostHeader, context.Request.Headers.Host);
-                        assertsExecuted = true;
-                        return Task.FromResult(0);
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedHost,
+                                        AllowedHosts = new[] { allowedHost }
+                                    }
+                                );
+                                app.Run(
+                                    context =>
+                                    {
+                                        Assert.NotEqual<string>(
+                                            hostHeader,
+                                            context.Request.Headers.Host
+                                        );
+                                        assertsExecuted = true;
+                                        return Task.FromResult(0);
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
-        var response = await server.SendAsync(ctx =>
-        {
-            ctx.Request.Headers["X-forwarded-Host"] = hostHeader;
-        });
+        var response = await server.SendAsync(
+            ctx =>
+            {
+                ctx.Request.Headers["X-forwarded-Host"] = hostHeader;
+            }
+        );
         Assert.True(assertsExecuted);
     }
 
@@ -575,34 +893,48 @@ public class ForwardedHeadersMiddlewareTests
     {
         bool assertsExecuted = false;
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedHost,
-                        ForwardLimit = 10,
-                        AllowedHosts = new[] { "bar.com", "*.foo.com" }
-                    });
-                    app.Run(context =>
-                    {
-                        Assert.Equal("bar.foo.com:432", context.Request.Headers.Host);
-                        assertsExecuted = true;
-                        return Task.FromResult(0);
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedHost,
+                                        ForwardLimit = 10,
+                                        AllowedHosts = new[] { "bar.com", "*.foo.com" }
+                                    }
+                                );
+                                app.Run(
+                                    context =>
+                                    {
+                                        Assert.Equal(
+                                            "bar.foo.com:432",
+                                            context.Request.Headers.Host
+                                        );
+                                        assertsExecuted = true;
+                                        return Task.FromResult(0);
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
-        var response = await server.SendAsync(ctx =>
-        {
-            ctx.Request.Headers["X-forwarded-Host"] = "stuff:523, bar.foo.com:432, bar.com:80";
-        });
+        var response = await server.SendAsync(
+            ctx =>
+            {
+                ctx.Request.Headers["X-forwarded-Host"] = "stuff:523, bar.foo.com:432, bar.com:80";
+            }
+        );
         Assert.True(assertsExecuted);
     }
 
@@ -614,31 +946,44 @@ public class ForwardedHeadersMiddlewareTests
     [InlineData(1, "h2, h1", "h1")]
     [InlineData(2, "h2, h1", "h2")]
     [InlineData(10, "h3, h2, h1", "h3")]
-    public async Task XForwardedProtoOverrideChangesRequestProtocol(int limit, string header, string expected)
+    public async Task XForwardedProtoOverrideChangesRequestProtocol(
+        int limit,
+        string header,
+        string expected
+    )
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedProto,
-                        ForwardLimit = limit,
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedProto,
+                                        ForwardLimit = limit,
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Proto"] = header;
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Proto"] = header;
+            }
+        );
 
         Assert.Equal(expected, context.Request.Scheme);
     }
@@ -648,14 +993,7 @@ public class ForwardedHeadersMiddlewareTests
         get
         {
             // ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
-            return new TheoryData<string>() {
-                    "z",
-                    "Z",
-                    "1",
-                    "y+",
-                    "1-",
-                    "a.",
-                };
+            return new TheoryData<string>() { "z", "Z", "1", "y+", "1-", "a.", };
         }
     }
 
@@ -666,33 +1004,44 @@ public class ForwardedHeadersMiddlewareTests
         var assertsExecuted = false;
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedProto
-                    });
-                    app.Run(context =>
-                    {
-                        Assert.Equal(scheme, context.Request.Scheme);
-                        assertsExecuted = true;
-                        return Task.FromResult(0);
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedProto
+                                    }
+                                );
+                                app.Run(
+                                    context =>
+                                    {
+                                        Assert.Equal(scheme, context.Request.Scheme);
+                                        assertsExecuted = true;
+                                        return Task.FromResult(0);
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Proto"] = scheme;
-        });
+        await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Proto"] = scheme;
+            }
+        );
         Assert.True(assertsExecuted);
     }
 
@@ -701,9 +1050,10 @@ public class ForwardedHeadersMiddlewareTests
         get
         {
             // ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
-            var data = new TheoryData<string>() {
-                    "a b", // Space
-                };
+            var data = new TheoryData<string>()
+            {
+                "a b", // Space
+            };
 
             // These aren't allowed anywhere in the scheme header
             var invalid = "!\"#$%&'()*/:;<=>?@[]\\^_`{}|~";
@@ -723,33 +1073,44 @@ public class ForwardedHeadersMiddlewareTests
         var assertsExecuted = false;
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedProto,
-                    });
-                    app.Run(context =>
-                    {
-                        Assert.Equal("http", context.Request.Scheme);
-                        assertsExecuted = true;
-                        return Task.FromResult(0);
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.XForwardedProto,
+                                    }
+                                );
+                                app.Run(
+                                    context =>
+                                    {
+                                        Assert.Equal("http", context.Request.Scheme);
+                                        assertsExecuted = true;
+                                        return Task.FromResult(0);
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Proto"] = scheme;
-        });
+        await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Proto"] = scheme;
+            }
+        );
         Assert.True(assertsExecuted);
     }
 
@@ -762,33 +1123,49 @@ public class ForwardedHeadersMiddlewareTests
     [InlineData(5, "h2, h1", "::1, ::1", "h2")]
     [InlineData(10, "h3, h2, h1", "::1, ::1, ::1", "h3")]
     [InlineData(10, "h3, h2, h1", "::1, badip, ::1", "h1")]
-    public async Task XForwardedProtoOverrideLimitedByXForwardedForCount(int limit, string protoHeader, string forHeader, string expected)
+    public async Task XForwardedProtoOverrideLimitedByXForwardedForCount(
+        int limit,
+        string protoHeader,
+        string forHeader,
+        string expected
+    )
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedFor,
-                        RequireHeaderSymmetry = true,
-                        ForwardLimit = limit,
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders =
+                                            ForwardedHeaders.XForwardedProto
+                                            | ForwardedHeaders.XForwardedFor,
+                                        RequireHeaderSymmetry = true,
+                                        ForwardLimit = limit,
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Proto"] = protoHeader;
-            c.Request.Headers["X-Forwarded-For"] = forHeader;
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Proto"] = protoHeader;
+                c.Request.Headers["X-Forwarded-For"] = forHeader;
+            }
+        );
 
         Assert.Equal(expected, context.Request.Scheme);
     }
@@ -804,33 +1181,49 @@ public class ForwardedHeadersMiddlewareTests
     [InlineData(5, "h2, h1", "::1, ::1", "h2")]
     [InlineData(10, "h3, h2, h1", "::1, ::1, ::1", "h3")]
     [InlineData(10, "h3, h2, h1", "::1, badip, ::1", "h1")]
-    public async Task XForwardedProtoOverrideCanBeIndependentOfXForwardedForCount(int limit, string protoHeader, string forHeader, string expected)
+    public async Task XForwardedProtoOverrideCanBeIndependentOfXForwardedForCount(
+        int limit,
+        string protoHeader,
+        string forHeader,
+        string expected
+    )
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedFor,
-                        RequireHeaderSymmetry = false,
-                        ForwardLimit = limit,
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders =
+                                            ForwardedHeaders.XForwardedProto
+                                            | ForwardedHeaders.XForwardedFor,
+                                        RequireHeaderSymmetry = false,
+                                        ForwardLimit = limit,
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Proto"] = protoHeader;
-            c.Request.Headers["X-Forwarded-For"] = forHeader;
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Proto"] = protoHeader;
+                c.Request.Headers["X-Forwarded-For"] = forHeader;
+            }
+        );
 
         Assert.Equal(expected, context.Request.Scheme);
     }
@@ -848,40 +1241,55 @@ public class ForwardedHeadersMiddlewareTests
     [InlineData("h2, h1", "", "::1", true, "http")]
     [InlineData("h2, h1", "F::, D::", "::1", true, "h1")]
     [InlineData("h2, h1", "E::, D::", "F::", true, "http")]
-    public async Task XForwardedProtoOverrideLimitedByLoopback(string protoHeader, string forHeader, string remoteIp, bool loopback, string expected)
+    public async Task XForwardedProtoOverrideLimitedByLoopback(
+        string protoHeader,
+        string forHeader,
+        string remoteIp,
+        bool loopback,
+        string expected
+    )
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    var options = new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedFor,
-                        RequireHeaderSymmetry = true,
-                        ForwardLimit = 5,
-                    };
-                    if (!loopback)
-                    {
-                        options.KnownNetworks.Clear();
-                        options.KnownProxies.Clear();
-                    }
-                    app.UseForwardedHeaders(options);
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                var options = new ForwardedHeadersOptions
+                                {
+                                    ForwardedHeaders =
+                                        ForwardedHeaders.XForwardedProto
+                                        | ForwardedHeaders.XForwardedFor,
+                                    RequireHeaderSymmetry = true,
+                                    ForwardLimit = 5,
+                                };
+                                if (!loopback)
+                                {
+                                    options.KnownNetworks.Clear();
+                                    options.KnownProxies.Clear();
+                                }
+                                app.UseForwardedHeaders(options);
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Proto"] = protoHeader;
-            c.Request.Headers["X-Forwarded-For"] = forHeader;
-            c.Connection.RemoteIpAddress = IPAddress.Parse(remoteIp);
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Proto"] = protoHeader;
+                c.Request.Headers["X-Forwarded-For"] = forHeader;
+                c.Connection.RemoteIpAddress = IPAddress.Parse(remoteIp);
+            }
+        );
 
         Assert.Equal(expected, context.Request.Scheme);
     }
@@ -900,29 +1308,38 @@ public class ForwardedHeadersMiddlewareTests
     public async Task AllForwardsEnabledChangeRequestRemoteIpHostandProtocol()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.All
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.All
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Proto"] = "Protocol";
-            c.Request.Headers["X-Forwarded-For"] = "11.111.111.11";
-            c.Request.Headers["X-Forwarded-Host"] = "testhost";
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Proto"] = "Protocol";
+                c.Request.Headers["X-Forwarded-For"] = "11.111.111.11";
+                c.Request.Headers["X-Forwarded-Host"] = "testhost";
+            }
+        );
 
         Assert.Equal("11.111.111.11", context.Connection.RemoteIpAddress.ToString());
         Assert.Equal("testhost", context.Request.Host.ToString());
@@ -933,29 +1350,38 @@ public class ForwardedHeadersMiddlewareTests
     public async Task AllOptionsDisabledRequestDoesntChange()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.None
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders = ForwardedHeaders.None
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Proto"] = "Protocol";
-            c.Request.Headers["X-Forwarded-For"] = "11.111.111.11";
-            c.Request.Headers["X-Forwarded-Host"] = "otherhost";
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Proto"] = "Protocol";
+                c.Request.Headers["X-Forwarded-For"] = "11.111.111.11";
+                c.Request.Headers["X-Forwarded-Host"] = "otherhost";
+            }
+        );
 
         Assert.Null(context.Connection.RemoteIpAddress);
         Assert.Equal("localhost", context.Request.Host.ToString());
@@ -966,28 +1392,39 @@ public class ForwardedHeadersMiddlewareTests
     public async Task PartiallyEnabledForwardsPartiallyChangesRequest()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-                    });
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(
+                                    new ForwardedHeadersOptions
+                                    {
+                                        ForwardedHeaders =
+                                            ForwardedHeaders.XForwardedFor
+                                            | ForwardedHeaders.XForwardedProto
+                                    }
+                                );
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Proto"] = "Protocol";
-            c.Request.Headers["X-Forwarded-For"] = "11.111.111.11";
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Proto"] = "Protocol";
+                c.Request.Headers["X-Forwarded-For"] = "11.111.111.11";
+            }
+        );
 
         Assert.Equal("11.111.111.11", context.Connection.RemoteIpAddress.ToString());
         Assert.Equal("localhost", context.Request.Host.ToString());
@@ -998,10 +1435,30 @@ public class ForwardedHeadersMiddlewareTests
     [InlineData("22.33.44.55,::ffff:127.0.0.1", "", "", "22.33.44.55")]
     [InlineData("22.33.44.55,::ffff:172.123.142.121", "172.123.142.121", "", "22.33.44.55")]
     [InlineData("22.33.44.55,::ffff:172.123.142.121", "::ffff:172.123.142.121", "", "22.33.44.55")]
-    [InlineData("22.33.44.55,::ffff:172.123.142.121,172.32.24.23", "", "172.0.0.0/8", "22.33.44.55")]
-    [InlineData("2a00:1450:4009:802::200e,2a02:26f0:2d:183::356e,::ffff:172.123.142.121,172.32.24.23", "", "172.0.0.0/8,2a02:26f0:2d:183::1/64", "2a00:1450:4009:802::200e")]
-    [InlineData("22.33.44.55,2a02:26f0:2d:183::356e,::ffff:127.0.0.1", "2a02:26f0:2d:183::356e", "", "22.33.44.55")]
-    public async Task XForwardForIPv4ToIPv6Mapping(string forHeader, string knownProxies, string knownNetworks, string expectedRemoteIp)
+    [InlineData(
+        "22.33.44.55,::ffff:172.123.142.121,172.32.24.23",
+        "",
+        "172.0.0.0/8",
+        "22.33.44.55"
+    )]
+    [InlineData(
+        "2a00:1450:4009:802::200e,2a02:26f0:2d:183::356e,::ffff:172.123.142.121,172.32.24.23",
+        "",
+        "172.0.0.0/8,2a02:26f0:2d:183::1/64",
+        "2a00:1450:4009:802::200e"
+    )]
+    [InlineData(
+        "22.33.44.55,2a02:26f0:2d:183::356e,::ffff:127.0.0.1",
+        "2a02:26f0:2d:183::356e",
+        "",
+        "22.33.44.55"
+    )]
+    public async Task XForwardForIPv4ToIPv6Mapping(
+        string forHeader,
+        string knownProxies,
+        string knownNetworks,
+        string expectedRemoteIp
+    )
     {
         var options = new ForwardedHeadersOptions
         {
@@ -1009,12 +1466,22 @@ public class ForwardedHeadersMiddlewareTests
             ForwardLimit = null,
         };
 
-        foreach (var knownProxy in knownProxies.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries))
+        foreach (
+            var knownProxy in knownProxies.Split(
+                new string[] { "," },
+                StringSplitOptions.RemoveEmptyEntries
+            )
+        )
         {
             var proxy = IPAddress.Parse(knownProxy);
             options.KnownProxies.Add(proxy);
         }
-        foreach (var knownNetwork in knownNetworks.Split(new string[] { "," }, options: StringSplitOptions.RemoveEmptyEntries))
+        foreach (
+            var knownNetwork in knownNetworks.Split(
+                new string[] { "," },
+                options: StringSplitOptions.RemoveEmptyEntries
+            )
+        )
         {
             var knownNetworkParts = knownNetwork.Split('/');
             var networkIp = IPAddress.Parse(knownNetworkParts[0]);
@@ -1023,24 +1490,31 @@ public class ForwardedHeadersMiddlewareTests
         }
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    app.UseForwardedHeaders(options);
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders(options);
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-For"] = forHeader;
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-For"] = forHeader;
+            }
+        );
 
         Assert.Equal(expectedRemoteIp, context.Connection.RemoteIpAddress.ToString());
     }
@@ -1048,38 +1522,54 @@ public class ForwardedHeadersMiddlewareTests
     [Theory]
     [InlineData(1, "httpa, httpb, httpc", "httpc", "httpa,httpb")]
     [InlineData(2, "httpa, httpb, httpc", "httpb", "httpa")]
-    public async Task ForwardersWithDIOptionsRunsOnce(int limit, string header, string expectedScheme, string remainingHeader)
+    public async Task ForwardersWithDIOptionsRunsOnce(
+        int limit,
+        string header,
+        string expectedScheme,
+        string remainingHeader
+    )
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    services.Configure<ForwardedHeadersOptions>(options =>
-                    {
-                        options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
-                        options.KnownProxies.Clear();
-                        options.KnownNetworks.Clear();
-                        options.ForwardLimit = limit;
-                    });
-                })
-                .Configure(app =>
-                {
-                    app.UseForwardedHeaders();
-                    app.UseForwardedHeaders();
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .ConfigureServices(
+                            services =>
+                            {
+                                services.Configure<ForwardedHeadersOptions>(
+                                    options =>
+                                    {
+                                        options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
+                                        options.KnownProxies.Clear();
+                                        options.KnownNetworks.Clear();
+                                        options.ForwardLimit = limit;
+                                    }
+                                );
+                            }
+                        )
+                        .Configure(
+                            app =>
+                            {
+                                app.UseForwardedHeaders();
+                                app.UseForwardedHeaders();
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Proto"] = header;
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Proto"] = header;
+            }
+        );
 
         Assert.Equal(expectedScheme, context.Request.Scheme);
         Assert.Equal(remainingHeader, context.Request.Headers["X-Forwarded-Proto"].ToString());
@@ -1088,35 +1578,47 @@ public class ForwardedHeadersMiddlewareTests
     [Theory]
     [InlineData(1, "httpa, httpb, httpc", "httpb", "httpa")]
     [InlineData(2, "httpa, httpb, httpc", "httpa", "")]
-    public async Task ForwardersWithDirectOptionsRunsTwice(int limit, string header, string expectedScheme, string remainingHeader)
+    public async Task ForwardersWithDirectOptionsRunsTwice(
+        int limit,
+        string header,
+        string expectedScheme,
+        string remainingHeader
+    )
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
+            .ConfigureWebHost(
+                webHostBuilder =>
                 {
-                    var options = new ForwardedHeadersOptions
-                    {
-                        ForwardedHeaders = ForwardedHeaders.XForwardedProto,
-                        ForwardLimit = limit,
-                    };
-                    options.KnownProxies.Clear();
-                    options.KnownNetworks.Clear();
-                    app.UseForwardedHeaders(options);
-                    app.UseForwardedHeaders(options);
-                });
-            }).Build();
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                var options = new ForwardedHeadersOptions
+                                {
+                                    ForwardedHeaders = ForwardedHeaders.XForwardedProto,
+                                    ForwardLimit = limit,
+                                };
+                                options.KnownProxies.Clear();
+                                options.KnownNetworks.Clear();
+                                app.UseForwardedHeaders(options);
+                                app.UseForwardedHeaders(options);
+                            }
+                        );
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
         var server = host.GetTestServer();
 
-        var context = await server.SendAsync(c =>
-        {
-            c.Request.Headers["X-Forwarded-Proto"] = header;
-        });
+        var context = await server.SendAsync(
+            c =>
+            {
+                c.Request.Headers["X-Forwarded-Proto"] = header;
+            }
+        );
 
         Assert.Equal(expectedScheme, context.Request.Scheme);
         Assert.Equal(remainingHeader, context.Request.Headers["X-Forwarded-Proto"].ToString());

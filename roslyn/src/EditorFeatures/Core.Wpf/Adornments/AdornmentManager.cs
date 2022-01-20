@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             IWpfTextView textView,
             IViewTagAggregatorFactoryService aggregatorService,
             IAsynchronousOperationListener asyncListener,
-            string adornmentLayerName)
+            string adornmentLayerName
+        )
         {
             Contract.ThrowIfNull(threadingContext);
             Contract.ThrowIfNull(textView);
@@ -56,7 +57,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             Contract.ThrowIfNull(adornmentLayerName);
             Contract.ThrowIfNull(asyncListener);
 
-            return new AdornmentManager<T>(threadingContext, textView, aggregatorService, asyncListener, adornmentLayerName);
+            return new AdornmentManager<T>(
+                threadingContext,
+                textView,
+                aggregatorService,
+                asyncListener,
+                adornmentLayerName
+            );
         }
 
         internal AdornmentManager(
@@ -64,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             IWpfTextView textView,
             IViewTagAggregatorFactoryService tagAggregatorFactoryService,
             IAsynchronousOperationListener asyncListener,
-            string adornmentLayerName)
+            string adornmentLayerName
+        )
         {
             Contract.ThrowIfNull(threadingContext);
             Contract.ThrowIfNull(textView);
@@ -106,7 +114,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
         /// </summary>
         private void OnLayoutChanged(object sender, TextViewLayoutChangedEventArgs e)
         {
-            using (Logger.LogBlock(FunctionId.Tagger_AdornmentManager_OnLayoutChanged, CancellationToken.None))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Tagger_AdornmentManager_OnLayoutChanged,
+                    CancellationToken.None
+                )
+            )
             using (_asyncListener.BeginAsyncOperation(GetType() + ".OnLayoutChanged"))
             {
                 // Make sure we're on the UI thread.
@@ -131,16 +144,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                     var invalidatedAndNormalized = TranslateAndNormalize(invalidated, viewSnapshot);
                     var invalidatedButNotReformatted = NormalizedSnapshotSpanCollection.Difference(
                         invalidatedAndNormalized,
-                        e.NewOrReformattedSpans);
+                        e.NewOrReformattedSpans
+                    );
 
-                    UpdateSpans_CallOnlyOnUIThread(invalidatedButNotReformatted, removeOldTags: true);
+                    UpdateSpans_CallOnlyOnUIThread(
+                        invalidatedButNotReformatted,
+                        removeOldTags: true
+                    );
                 }
             }
         }
 
         private static NormalizedSnapshotSpanCollection TranslateAndNormalize(
             IEnumerable<IMappingSpan> spans,
-            ITextSnapshot targetSnapshot)
+            ITextSnapshot targetSnapshot
+        )
         {
             Contract.ThrowIfNull(spans);
 
@@ -182,14 +200,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                 if (needToScheduleUpdate)
                 {
                     // schedule an update
-                    _threadingContext.JoinableTaskFactory.WithPriority(_textView.VisualElement.Dispatcher, DispatcherPriority.Render).RunAsync(async () =>
-                    {
-                        using (_asyncListener.BeginAsyncOperation(GetType() + ".OnTagsChanged.2"))
-                        {
-                            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true);
-                            UpdateInvalidSpans();
-                        }
-                    });
+                    _threadingContext.JoinableTaskFactory
+                        .WithPriority(_textView.VisualElement.Dispatcher, DispatcherPriority.Render)
+                        .RunAsync(
+                            async () =>
+                            {
+                                using (
+                                    _asyncListener.BeginAsyncOperation(
+                                        GetType() + ".OnTagsChanged.2"
+                                    )
+                                )
+                                {
+                                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                                        alwaysYield: true
+                                    );
+                                    UpdateInvalidSpans();
+                                }
+                            }
+                        );
                 }
             }
         }
@@ -202,7 +230,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
         private void UpdateInvalidSpans()
         {
             using (_asyncListener.BeginAsyncOperation(GetType().Name + ".UpdateInvalidSpans.1"))
-            using (Logger.LogBlock(FunctionId.Tagger_AdornmentManager_UpdateInvalidSpans, CancellationToken.None))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Tagger_AdornmentManager_UpdateInvalidSpans,
+                    CancellationToken.None
+                )
+            )
             {
                 // this method should only run on UI thread as we do WPF here.
                 Contract.ThrowIfFalse(_textView.VisualElement.Dispatcher.CheckAccess());
@@ -235,8 +268,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
         /// 
         /// It happens when another region of the view becomes visible or there is a change in tags.
         /// For us the end result is the same - get tags from tagger and update visuals correspondingly.
-        /// </summary>        
-        private void UpdateSpans_CallOnlyOnUIThread(NormalizedSnapshotSpanCollection changedSpanCollection, bool removeOldTags)
+        /// </summary>
+        private void UpdateSpans_CallOnlyOnUIThread(
+            NormalizedSnapshotSpanCollection changedSpanCollection,
+            bool removeOldTags
+        )
         {
             Contract.ThrowIfNull(changedSpanCollection);
 
@@ -277,29 +313,38 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                 foreach (var tagMappingSpan in tagSpans)
                 {
                     // We don't want to draw line separators if they would intersect a collapsed outlining
-                    // region.  So we test if we can map the start of the line separator up to our visual 
+                    // region.  So we test if we can map the start of the line separator up to our visual
                     // snapshot. If we can't, then we just skip it.
-                    var point = tagMappingSpan.Span.Start.GetPoint(changedSpan.Snapshot, PositionAffinity.Predecessor);
+                    var point = tagMappingSpan.Span.Start.GetPoint(
+                        changedSpan.Snapshot,
+                        PositionAffinity.Predecessor
+                    );
                     if (point == null)
                     {
                         continue;
                     }
 
                     var mappedPoint = _textView.BufferGraph.MapUpToSnapshot(
-                        point.Value, PointTrackingMode.Negative, PositionAffinity.Predecessor, _textView.VisualSnapshot);
+                        point.Value,
+                        PointTrackingMode.Negative,
+                        PositionAffinity.Predecessor,
+                        _textView.VisualSnapshot
+                    );
                     if (mappedPoint == null)
                     {
                         continue;
                     }
 
-                    if (!TryMapToSingleSnapshotSpan(tagMappingSpan.Span, viewSnapshot, out var span))
+                    if (
+                        !TryMapToSingleSnapshotSpan(tagMappingSpan.Span, viewSnapshot, out var span)
+                    )
                     {
                         continue;
                     }
 
                     if (!viewLines.IntersectsBufferSpan(span))
                     {
-                        // span is outside of the view so we will not get geometry for it, but may 
+                        // span is outside of the view so we will not get geometry for it, but may
                         // spent a lot of time trying.
                         continue;
                     }
@@ -315,7 +360,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
                             visualSpan: span,
                             tag: tag,
                             adornment: graphicsResult.VisualElement,
-                            removedCallback: delegate { graphicsResult.Dispose(); });
+                            removedCallback: delegate
+                            {
+                                graphicsResult.Dispose();
+                            }
+                        );
                     }
                 }
             }
@@ -325,7 +374,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
         // topology, originally single span may be mapped into several spans. Visual adornments do
         // not make much sense on disjoint spans. We will not decorate spans that could not make it
         // in one piece.
-        private static bool TryMapToSingleSnapshotSpan(IMappingSpan mappingSpan, ITextSnapshot viewSnapshot, out SnapshotSpan span)
+        private static bool TryMapToSingleSnapshotSpan(
+            IMappingSpan mappingSpan,
+            ITextSnapshot viewSnapshot,
+            out SnapshotSpan span
+        )
         {
             // IMappingSpan.GetSpans is a surprisingly expensive function that allocates multiple
             // lists and collection if the view buffer is same as anchor we could just map the
@@ -334,14 +387,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             // should use the cheapest.
             if (viewSnapshot != null && mappingSpan.AnchorBuffer == viewSnapshot.TextBuffer)
             {
-                var mappedStart = mappingSpan.Start.GetPoint(viewSnapshot, PositionAffinity.Predecessor).Value;
-                var mappedEnd = mappingSpan.End.GetPoint(viewSnapshot, PositionAffinity.Successor).Value;
+                var mappedStart =
+                    mappingSpan.Start.GetPoint(viewSnapshot, PositionAffinity.Predecessor).Value;
+                var mappedEnd =
+                    mappingSpan.End.GetPoint(viewSnapshot, PositionAffinity.Successor).Value;
                 span = new SnapshotSpan(mappedStart, mappedEnd);
                 return true;
             }
 
             // TODO: actually adornments do not make much sense on "cropped" spans either - Consider line separator on "nd Su"
-            // is it possible to cheaply detect cropping?  
+            // is it possible to cheaply detect cropping?
             var spans = mappingSpan.GetSpans(viewSnapshot);
             if (spans.Count != 1)
             {

@@ -9,24 +9,23 @@ namespace Test
     class App
     {
         public static bool[] m_abStatic1 = new bool[7];
+
         public uint Method1()
         {
             try
             {
                 while (m_abStatic1[1]) { }
-                for (; ; ) { throw new Exception(); }
-                try
+                for (; ; )
                 {
+                    throw new Exception();
                 }
-                finally
-                {
-                }
+                try { }
+                finally { }
             }
-            catch (DivideByZeroException)
-            {
-            }
+            catch (DivideByZeroException) { }
             return 0;
         }
+
         static int Main()
         {
             try

@@ -20,9 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
         public UnicodeAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.
@@ -35,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBuilder propertyBuilder,
             UnicodeAttribute attribute,
             MemberInfo clrMember,
-            IConventionContext context)
+            IConventionContext context
+        )
         {
             propertyBuilder.IsUnicode(attribute.IsUnicode, fromDataAnnotation: true);
         }

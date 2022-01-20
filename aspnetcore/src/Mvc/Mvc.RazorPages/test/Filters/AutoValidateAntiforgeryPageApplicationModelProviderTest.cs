@@ -21,9 +21,13 @@ public class AutoValidateAntiforgeryPageApplicationModelProviderTest
         var applicationModel = new PageApplicationModel(
             actionDescriptor,
             typeof(object).GetTypeInfo(),
-            new object[0]);
+            new object[0]
+        );
         var applicationModelProvider = new AutoValidateAntiforgeryPageApplicationModelProvider();
-        var context = new PageApplicationModelProviderContext(new PageActionDescriptor(), typeof(object).GetTypeInfo())
+        var context = new PageApplicationModelProviderContext(
+            new PageActionDescriptor(),
+            typeof(object).GetTypeInfo()
+        )
         {
             PageApplicationModel = applicationModel,
         };
@@ -34,7 +38,8 @@ public class AutoValidateAntiforgeryPageApplicationModelProviderTest
         // Assert
         Assert.Collection(
             applicationModel.Filters,
-            filter => Assert.IsType<AutoValidateAntiforgeryTokenAttribute>(filter));
+            filter => Assert.IsType<AutoValidateAntiforgeryTokenAttribute>(filter)
+        );
     }
 
     [Fact]
@@ -45,9 +50,16 @@ public class AutoValidateAntiforgeryPageApplicationModelProviderTest
 
         var descriptor = new PageActionDescriptor();
         var provider = new AutoValidateAntiforgeryPageApplicationModelProvider();
-        var context = new PageApplicationModelProviderContext(descriptor, typeof(object).GetTypeInfo())
+        var context = new PageApplicationModelProviderContext(
+            descriptor,
+            typeof(object).GetTypeInfo()
+        )
         {
-            PageApplicationModel = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), Array.Empty<object>())
+            PageApplicationModel = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            )
             {
                 Filters = { expected },
             },
@@ -59,7 +71,8 @@ public class AutoValidateAntiforgeryPageApplicationModelProviderTest
         // Assert
         Assert.Collection(
             context.PageApplicationModel.Filters,
-            actual => Assert.Same(expected, actual));
+            actual => Assert.Same(expected, actual)
+        );
     }
 
     [Fact]
@@ -70,9 +83,16 @@ public class AutoValidateAntiforgeryPageApplicationModelProviderTest
 
         var descriptor = new PageActionDescriptor();
         var provider = new AutoValidateAntiforgeryPageApplicationModelProvider();
-        var context = new PageApplicationModelProviderContext(descriptor, typeof(object).GetTypeInfo())
+        var context = new PageApplicationModelProviderContext(
+            descriptor,
+            typeof(object).GetTypeInfo()
+        )
         {
-            PageApplicationModel = new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), Array.Empty<object>())
+            PageApplicationModel = new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                Array.Empty<object>()
+            )
             {
                 Filters = { expected },
             },
@@ -84,6 +104,7 @@ public class AutoValidateAntiforgeryPageApplicationModelProviderTest
         // Assert
         Assert.Collection(
             context.PageApplicationModel.Filters,
-            actual => Assert.Same(expected, actual));
+            actual => Assert.Same(expected, actual)
+        );
     }
 }

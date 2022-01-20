@@ -4,7 +4,6 @@
 
 using System;
 
-
 namespace Test
 {
     internal class AA
@@ -25,6 +24,7 @@ namespace Test
             }
             catch (NullReferenceException) { }
         }
+
         private static int Main()
         {
             try

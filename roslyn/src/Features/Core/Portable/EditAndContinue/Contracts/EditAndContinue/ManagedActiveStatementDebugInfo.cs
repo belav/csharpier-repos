@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
             ManagedInstructionId activeInstruction,
             string? documentName,
             SourceSpan sourceSpan,
-            ActiveStatementFlags flags)
+            ActiveStatementFlags flags
+        )
         {
             ActiveInstruction = activeInstruction;
             DocumentName = documentName;

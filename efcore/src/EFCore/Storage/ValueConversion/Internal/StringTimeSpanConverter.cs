@@ -33,10 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
         public StringTimeSpanConverter(
             Expression<Func<TModel, TProvider>> convertToProviderExpression,
             Expression<Func<TProvider, TModel>> convertFromProviderExpression,
-            ConverterMappingHints? mappingHints = null)
-            : base(convertToProviderExpression, convertFromProviderExpression, mappingHints)
-        {
-        }
+            ConverterMappingHints? mappingHints = null
+        ) : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,8 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected new static Expression<Func<TimeSpan, string>> ToString()
-            => v => v.ToString("c");
+        protected new static Expression<Func<TimeSpan, string>> ToString() => v => v.ToString("c");
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -53,7 +50,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected static Expression<Func<string, TimeSpan>> ToTimeSpan()
-            => v => TimeSpan.Parse(v, CultureInfo.InvariantCulture);
+        protected static Expression<Func<string, TimeSpan>> ToTimeSpan() =>
+            v => TimeSpan.Parse(v, CultureInfo.InvariantCulture);
     }
 }

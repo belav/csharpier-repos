@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.Debugger
             return null;
         }
 
-        public void SetDataItem<T>(DkmDataCreationDisposition creationDisposition, T item) where T : DkmDataItem
+        public void SetDataItem<T>(DkmDataCreationDisposition creationDisposition, T item)
+            where T : DkmDataItem
         {
             if (item == null)
             {

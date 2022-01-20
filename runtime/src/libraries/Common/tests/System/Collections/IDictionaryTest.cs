@@ -9,12 +9,10 @@ using Xunit.Sdk;
 
 namespace Tests.Collections
 {
-    public abstract class IDictionaryTest<TKey, TValue> : ICollectionTest<KeyValuePair<TKey, TValue>>
+    public abstract class IDictionaryTest<TKey, TValue>
+        : ICollectionTest<KeyValuePair<TKey, TValue>>
     {
-        protected IDictionaryTest(bool isSynchronized)
-            : base(isSynchronized)
-        {
-        }
+        protected IDictionaryTest(bool isSynchronized) : base(isSynchronized) { }
 
         protected IDictionary<TKey, TValue> GetDictionary(object[] items)
         {
@@ -176,7 +174,7 @@ namespace Tests.Collections
                     while (enumerator.MoveNext())
                     {
                         Assert.True(dictEnumerator.MoveNext());
-                        var pair = (KeyValuePair<TKey, TValue>) enumerator.Current;
+                        var pair = (KeyValuePair<TKey, TValue>)enumerator.Current;
                         Assert.Equal(dictEnumerator.Current, dictEnumerator.Entry);
                         var entry = dictEnumerator.Entry;
                         Assert.Equal(pair.Key, dictEnumerator.Key);

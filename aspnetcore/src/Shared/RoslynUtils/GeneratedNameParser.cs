@@ -13,7 +13,10 @@ internal static class GeneratedNameParser
     /// <summary>
     /// Parses generated local function name out of a generated method name.
     /// </summary>
-    internal static bool TryParseLocalFunctionName(string generatedName, [NotNullWhen(true)] out string? originalName)
+    internal static bool TryParseLocalFunctionName(
+        string generatedName,
+        [NotNullWhen(true)] out string? originalName
+    )
     {
         originalName = null;
 

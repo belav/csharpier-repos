@@ -40,12 +40,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
             VisualStudio.SolutionExplorer.CloseSolution();
             VisualStudio.SolutionExplorer.CreateSolution(nameof(WorkspacesDesktop));
             var testProj = new ProjectUtils.Project("TestProj");
-            VisualStudio.SolutionExplorer.AddProject(testProj, WellKnownProjectTemplates.ClassLibrary, languageName: LanguageNames.VisualBasic);
+            VisualStudio.SolutionExplorer.AddProject(
+                testProj,
+                WellKnownProjectTemplates.ClassLibrary,
+                languageName: LanguageNames.VisualBasic
+            );
             VisualStudio.SolutionExplorer.RestoreNuGetPackages(testProj);
-            VisualStudio.Editor.SetText(@"Imports System
+            VisualStudio.Editor.SetText(
+                @"Imports System
 Class Program
     Private e As Exception
-End Class");
+End Class"
+            );
             VisualStudio.Editor.PlaceCaret("Exception");
             VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "class name");
         }
@@ -66,22 +72,43 @@ End Class");
         {
             var project = new ProjectUtils.Project(ProjectName);
             var csProj2 = new ProjectUtils.Project("CSProj2");
-            VisualStudio.SolutionExplorer.AddProject(csProj2, projectTemplate: DefaultProjectTemplate, languageName: LanguageName);
+            VisualStudio.SolutionExplorer.AddProject(
+                csProj2,
+                projectTemplate: DefaultProjectTemplate,
+                languageName: LanguageName
+            );
             var projectName = new ProjectUtils.ProjectReference(ProjectName);
-            VisualStudio.SolutionExplorer.AddProjectReference(fromProjectName: csProj2, toProjectName: projectName);
+            VisualStudio.SolutionExplorer.AddProjectReference(
+                fromProjectName: csProj2,
+                toProjectName: projectName
+            );
             VisualStudio.SolutionExplorer.RestoreNuGetPackages(csProj2);
-            VisualStudio.SolutionExplorer.AddFile(project, "Program.cs", open: true, contents: "public class Class1 { }");
-            VisualStudio.SolutionExplorer.AddFile(csProj2, "Program.cs", open: true, contents: "public class Class2 { Class1 c; }");
+            VisualStudio.SolutionExplorer.AddFile(
+                project,
+                "Program.cs",
+                open: true,
+                contents: "public class Class1 { }"
+            );
+            VisualStudio.SolutionExplorer.AddFile(
+                csProj2,
+                "Program.cs",
+                open: true,
+                contents: "public class Class2 { Class1 c; }"
+            );
             VisualStudio.SolutionExplorer.OpenFile(csProj2, "Program.cs");
             VisualStudio.Editor.PlaceCaret("Class1");
             VisualStudio.Editor.Verify.CurrentTokenType("class name");
-            VisualStudio.SolutionExplorer.RemoveProjectReference(projectReferenceName: projectName, projectName: csProj2);
+            VisualStudio.SolutionExplorer.RemoveProjectReference(
+                projectReferenceName: projectName,
+                projectName: csProj2
+            );
             VisualStudio.Editor.Verify.CurrentTokenType("identifier");
         }
 
         public virtual void ProjectProperties()
         {
-            VisualStudio.Editor.SetText(@"Module Program
+            VisualStudio.Editor.SetText(
+                @"Module Program
     Sub Main()
         Dim x = 42
         M(x)
@@ -90,15 +117,22 @@ End Class");
     End Sub
     Sub M(p As Object)
     End Sub
-End Module");
+End Module"
+            );
             VisualStudio.Editor.PlaceCaret("(x)", charsOffset: -1);
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.Workspace.SetOptionInfer(project.Name, true);
             VisualStudio.Editor.InvokeQuickInfo();
-            Assert.Equal("Sub Program.M(p As Integer) (+ 1 overload)", VisualStudio.Editor.GetQuickInfo());
+            Assert.Equal(
+                "Sub Program.M(p As Integer) (+ 1 overload)",
+                VisualStudio.Editor.GetQuickInfo()
+            );
             VisualStudio.Workspace.SetOptionInfer(project.Name, false);
             VisualStudio.Editor.InvokeQuickInfo();
-            Assert.Equal("Sub Program.M(p As Object) (+ 1 overload)", VisualStudio.Editor.GetQuickInfo());
+            Assert.Equal(
+                "Sub Program.M(p As Object) (+ 1 overload)",
+                VisualStudio.Editor.GetQuickInfo()
+            );
         }
 
         [WpfFact]
@@ -125,7 +159,11 @@ End Module");
             // Verify we are connected to the project before...
             Assert.Contains(ProjectName, VisualStudio.Editor.GetProjectNavBarItems());
 
-            VisualStudio.SolutionExplorer.RenameFileViaDTE(project, "BeforeRename.cs", "AfterRename.cs");
+            VisualStudio.SolutionExplorer.RenameFileViaDTE(
+                project,
+                "BeforeRename.cs",
+                "AfterRename.cs"
+            );
 
             // ...and after.
             Assert.Contains(ProjectName, VisualStudio.Editor.GetProjectNavBarItems());

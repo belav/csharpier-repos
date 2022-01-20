@@ -7,6 +7,7 @@ using System.Text.Json;
 
 [assembly: MetadataUpdateHandler(typeof(JsonSerializerOptionsUpdateHandler))]
 
+
 namespace System.Text.Json
 {
     /// <summary>Handler used to clear JsonSerializerOptions reflection cache upon a metadata update.</summary>
@@ -15,7 +16,12 @@ namespace System.Text.Json
         public static void ClearCache(Type[]? types)
         {
             // Ignore the types, and just clear out all reflection caches from serializer options.
-            foreach (KeyValuePair<JsonSerializerOptions, object?> options in JsonSerializerOptions.TrackedOptionsInstances.All)
+            foreach (
+                KeyValuePair<
+                    JsonSerializerOptions,
+                    object?
+                > options in JsonSerializerOptions.TrackedOptionsInstances.All
+            )
             {
                 options.Key.ClearClasses();
             }

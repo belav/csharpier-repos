@@ -37,11 +37,11 @@ using System;
 */
 internal struct huff_node
 {
-    public byte c;                /* Byte value */
-    public float freq;             /* Frequency */
-    public int parent;             /* Parent node */
-    public int left;               /* Left pointer = 0 */
-    public int right;              /* Right pointer = 1 */
+    public byte c; /* Byte value */
+    public float freq; /* Frequency */
+    public int parent; /* Parent node */
+    public int left; /* Left pointer = 0 */
+    public int right; /* Right pointer = 1 */
 };
 
 /************************
@@ -114,16 +114,18 @@ public class Huffman : HuffStruct
 			** get a number of loops that we can use.
 			*/
 
-            for (this.loops = 100;
-              this.loops < global.MAXHUFFLOOPS;
-              this.loops += 10)
+            for (this.loops = 100; this.loops < global.MAXHUFFLOOPS; this.loops += 10)
             {
-                if (DoHuffIteration(plaintext,
-                    comparray,
-                    decomparray,
-                  this.arraysize,
-                  this.loops,
-                  hufftree) > global.min_ticks)
+                if (
+                    DoHuffIteration(
+                        plaintext,
+                        comparray,
+                        decomparray,
+                        this.arraysize,
+                        this.loops,
+                        hufftree
+                    ) > global.min_ticks
+                )
                     break;
             }
         }
@@ -136,12 +138,14 @@ public class Huffman : HuffStruct
 
         do
         {
-            accumtime += DoHuffIteration(plaintext,
+            accumtime += DoHuffIteration(
+                plaintext,
                 comparray,
                 decomparray,
                 this.arraysize,
                 this.loops,
-                hufftree);
+                hufftree
+            );
             iterations += (double)this.loops;
         } while (ByteMark.TicksToSecs(accumtime) < this.request_secs);
 
@@ -157,7 +161,6 @@ public class Huffman : HuffStruct
         return (iterations / ByteMark.TicksToFracSecs(accumtime));
     }
 
-
     /*********************
 	** create_text_line **
 	**********************
@@ -166,9 +169,9 @@ public class Huffman : HuffStruct
 	*/
     private static void create_text_line(byte[] dt, int nchars, int lower)
     {
-        int charssofar;        /* # of characters so far */
-        int tomove;            /* # of characters to move */
-        string myword;        /* Local buffer for words */
+        int charssofar; /* # of characters so far */
+        int tomove; /* # of characters to move */
+        string myword; /* Local buffer for words */
 
         int index = 0;
 
@@ -221,12 +224,10 @@ public class Huffman : HuffStruct
 	** maxlinlen is the maximum length of any line (line end indicated
 	**  by a carriage return).
 	*/
-    private static void create_text_block(byte[] tb,
-                int tblen,
-                short maxlinlen)
+    private static void create_text_block(byte[] tb, int tblen, short maxlinlen)
     {
-        int bytessofar;       /* # of bytes so far */
-        int linelen;          /* Line length */
+        int bytessofar; /* # of bytes so far */
+        int linelen; /* Line length */
 
         bytessofar = 0;
         do
@@ -244,7 +245,7 @@ public class Huffman : HuffStruct
             {
                 create_text_line(tb, linelen, bytessofar);
             }
-            tb[linelen] = (byte)'\n';          /* Add the carriage return */
+            tb[linelen] = (byte)'\n'; /* Add the carriage return */
 
             bytessofar += linelen;
         } while (bytessofar < tblen);
@@ -258,25 +259,29 @@ public class Huffman : HuffStruct
 	**  (b) Compresses the text
 	**  (c) Decompresses the text and verifies correct decompression
 	*/
-    private static long DoHuffIteration(byte[] plaintext,
+    private static long DoHuffIteration(
+        byte[] plaintext,
         byte[] comparray,
         byte[] decomparray,
         int arraysize,
         int nloops,
-        huff_node[] hufftree)
+        huff_node[] hufftree
+    )
     {
-        int i;                          /* Index */
-        int j;                         /* Bigger index */
-        int root;                       /* Pointer to huffman tree root */
-        float lowfreq1, lowfreq2;       /* Low frequency counters */
-        int lowidx1, lowidx2;           /* Indexes of low freq. elements */
-        int bitoffset;                 /* Bit offset into text */
-        int textoffset;                /* Char offset into text */
-        int maxbitoffset;              /* Holds limit of bit offset */
-        int bitstringlen;              /* Length of bitstring */
-        int c;                          /* Character from plaintext */
-        byte[] bitstring = new byte[30];             /* Holds bitstring */
-        long elapsed;                  /* For stopwatch */
+        int i; /* Index */
+        int j; /* Bigger index */
+        int root; /* Pointer to huffman tree root */
+        float lowfreq1,
+            lowfreq2; /* Low frequency counters */
+        int lowidx1,
+            lowidx2; /* Indexes of low freq. elements */
+        int bitoffset; /* Bit offset into text */
+        int textoffset; /* Char offset into text */
+        int maxbitoffset; /* Holds limit of bit offset */
+        int bitstringlen; /* Length of bitstring */
+        int c; /* Character from plaintext */
+        byte[] bitstring = new byte[30]; /* Holds bitstring */
+        long elapsed; /* For stopwatch */
 
         /*
 		** Start the stopwatch
@@ -324,11 +329,13 @@ public class Huffman : HuffStruct
 			** Go through the tree. Finding nodes of really low
 			** frequency.
 			*/
-            root = 255;                       /* Starting root node-1 */
+            root = 255; /* Starting root node-1 */
             while (true)
             {
-                lowfreq1 = (float)2.0; lowfreq2 = (float)2.0;
-                lowidx1 = -1; lowidx2 = -1;
+                lowfreq1 = (float)2.0;
+                lowfreq2 = (float)2.0;
+                lowidx1 = -1;
+                lowidx2 = -1;
                 /*
 				** Find first lowest frequency.
 				*/
@@ -344,7 +351,8 @@ public class Huffman : HuffStruct
 				** Did we find a lowest value?  If not, the
 				** tree is done.
 				*/
-                if (lowidx1 == -1) break;
+                if (lowidx1 == -1)
+                    break;
 
                 /*
 				** Find next lowest frequency
@@ -362,29 +370,30 @@ public class Huffman : HuffStruct
 				** item is surely the root, and (as above) the
 				** tree is done.
 				*/
-                if (lowidx2 == -1) break;
+                if (lowidx2 == -1)
+                    break;
 
                 /*
 				** Attach the two new nodes to the current root, and
 				** advance the current root.
 				*/
-                root++;                 /* New root */
+                root++; /* New root */
                 hufftree[lowidx1].parent = root;
                 hufftree[lowidx2].parent = root;
                 hufftree[root].freq = lowfreq1 + lowfreq2;
                 hufftree[root].left = lowidx1;
                 hufftree[root].right = lowidx2;
-                hufftree[root].parent = -2;       /* Show root */
+                hufftree[root].parent = -2; /* Show root */
             }
 
             /*
 			** Huffman tree built...compress the plaintext
 			*/
-            bitoffset = 0;                           /* Initialize bit offset */
+            bitoffset = 0; /* Initialize bit offset */
             for (i = 0; i < arraysize; i++)
             {
-                c = (int)plaintext[i];                 /* Fetch character */
-                                                       /*
+                c = (int)plaintext[i]; /* Fetch character */
+                /*
                                                        ** Build a bit string for byte c
                                                        */
                 bitstringlen = 0;
@@ -438,7 +447,7 @@ public class Huffman : HuffStruct
 #endif
                 textoffset++;
             } while (bitoffset < maxbitoffset);
-        }       /* End the big while(nloops--) from above */
+        } /* End the big while(nloops--) from above */
 
         /*
 		** All done
@@ -452,9 +461,7 @@ public class Huffman : HuffStruct
 	** Set a bit in the compression array.  The value of the
 	** bit is set according to char bitchar.
 	*/
-    private static void SetCompBit(byte[] comparray,
-            int bitoffset,
-            byte bitchar)
+    private static void SetCompBit(byte[] comparray, int bitoffset, byte bitchar)
     {
         int byteoffset;
         int bitnumb;
@@ -487,8 +494,7 @@ public class Huffman : HuffStruct
 	** Return the bit value of a bit in the comparession array.
 	** Returns 0 if the bit is clear, nonzero otherwise.
 	*/
-    private static int GetCompBit(byte[] comparray,
-            int bitoffset)
+    private static int GetCompBit(byte[] comparray, int bitoffset)
     {
         int byteoffset;
         int bitnumb;
@@ -506,12 +512,14 @@ public class Huffman : HuffStruct
     }
 
     protected const int WORDCATSIZE = 50;
-    protected const int EXCLUDED = 32000;          /* Big positive value */
+    protected const int EXCLUDED = 32000; /* Big positive value */
     protected static string[] wordcatarray;
+
     protected static void InitWords()
     {
         wordcatarray = new string[]
-        {   "Hello",
+        {
+            "Hello",
             "He",
             "Him",
             "the",
@@ -560,6 +568,7 @@ public class Huffman : HuffStruct
             "used",
             "shown",
             "you",
-            "know" };
+            "know"
+        };
     }
 }

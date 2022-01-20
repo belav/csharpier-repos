@@ -15,24 +15,24 @@ internal abstract class ActionMethodExecutor
 {
     private static readonly ActionMethodExecutor[] Executors = new ActionMethodExecutor[]
     {
-            // Executors for sync methods
-            new VoidResultExecutor(),
-            new SyncActionResultExecutor(),
-            new SyncObjectResultExecutor(),
-
-            // Executors for async methods
-            new AwaitableResultExecutor(),
-            new TaskResultExecutor(),
-            new TaskOfIActionResultExecutor(),
-            new TaskOfActionResultExecutor(),
-            new AwaitableObjectResultExecutor(),
+        // Executors for sync methods
+        new VoidResultExecutor(),
+        new SyncActionResultExecutor(),
+        new SyncObjectResultExecutor(),
+        // Executors for async methods
+        new AwaitableResultExecutor(),
+        new TaskResultExecutor(),
+        new TaskOfIActionResultExecutor(),
+        new TaskOfActionResultExecutor(),
+        new AwaitableObjectResultExecutor(),
     };
 
     public abstract ValueTask<IActionResult> Execute(
         IActionResultTypeMapper mapper,
         ObjectMethodExecutor executor,
         object controller,
-        object?[]? arguments);
+        object?[]? arguments
+    );
 
     protected abstract bool CanExecute(ObjectMethodExecutor executor);
 
@@ -57,14 +57,15 @@ internal abstract class ActionMethodExecutor
             IActionResultTypeMapper mapper,
             ObjectMethodExecutor executor,
             object controller,
-            object?[]? arguments)
+            object?[]? arguments
+        )
         {
             executor.Execute(controller, arguments);
             return new ValueTask<IActionResult>(new EmptyResult());
         }
 
-        protected override bool CanExecute(ObjectMethodExecutor executor)
-            => !executor.IsMethodAsync && executor.MethodReturnType == typeof(void);
+        protected override bool CanExecute(ObjectMethodExecutor executor) =>
+            !executor.IsMethodAsync && executor.MethodReturnType == typeof(void);
     }
 
     // IActionResult Post(..)
@@ -75,7 +76,8 @@ internal abstract class ActionMethodExecutor
             IActionResultTypeMapper mapper,
             ObjectMethodExecutor executor,
             object controller,
-            object?[]? arguments)
+            object?[]? arguments
+        )
         {
             var actionResult = (IActionResult)executor.Execute(controller, arguments)!;
             EnsureActionResultNotNull(executor, actionResult);
@@ -83,8 +85,9 @@ internal abstract class ActionMethodExecutor
             return new ValueTask<IActionResult>(actionResult);
         }
 
-        protected override bool CanExecute(ObjectMethodExecutor executor)
-            => !executor.IsMethodAsync && typeof(IActionResult).IsAssignableFrom(executor.MethodReturnType);
+        protected override bool CanExecute(ObjectMethodExecutor executor) =>
+            !executor.IsMethodAsync
+            && typeof(IActionResult).IsAssignableFrom(executor.MethodReturnType);
     }
 
     // Person GetPerson(..)
@@ -95,16 +98,22 @@ internal abstract class ActionMethodExecutor
             IActionResultTypeMapper mapper,
             ObjectMethodExecutor executor,
             object controller,
-            object?[]? arguments)
+            object?[]? arguments
+        )
         {
             // Sync method returning arbitrary object
             var returnValue = executor.Execute(controller, arguments);
-            var actionResult = ConvertToActionResult(mapper, returnValue, executor.MethodReturnType);
+            var actionResult = ConvertToActionResult(
+                mapper,
+                returnValue,
+                executor.MethodReturnType
+            );
             return new ValueTask<IActionResult>(actionResult);
         }
 
         // Catch-all for sync methods
-        protected override bool CanExecute(ObjectMethodExecutor executor) => !executor.IsMethodAsync;
+        protected override bool CanExecute(ObjectMethodExecutor executor) =>
+            !executor.IsMethodAsync;
     }
 
     // Task SaveState(..)
@@ -114,13 +123,15 @@ internal abstract class ActionMethodExecutor
             IActionResultTypeMapper mapper,
             ObjectMethodExecutor executor,
             object controller,
-            object?[]? arguments)
+            object?[]? arguments
+        )
         {
             await (Task)executor.Execute(controller, arguments)!;
             return new EmptyResult();
         }
 
-        protected override bool CanExecute(ObjectMethodExecutor executor) => executor.MethodReturnType == typeof(Task);
+        protected override bool CanExecute(ObjectMethodExecutor executor) =>
+            executor.MethodReturnType == typeof(Task);
     }
 
     // CustomAsync PerformActionAsync(..)
@@ -131,7 +142,8 @@ internal abstract class ActionMethodExecutor
             IActionResultTypeMapper mapper,
             ObjectMethodExecutor executor,
             object controller,
-            object?[]? arguments)
+            object?[]? arguments
+        )
         {
             await executor.ExecuteAsync(controller, arguments);
             return new EmptyResult();
@@ -151,7 +163,8 @@ internal abstract class ActionMethodExecutor
             IActionResultTypeMapper mapper,
             ObjectMethodExecutor executor,
             object controller,
-            object?[]? arguments)
+            object?[]? arguments
+        )
         {
             // Async method returning Task<IActionResult>
             // Avoid extra allocations by calling Execute rather than ExecuteAsync and casting to Task<IActionResult>.
@@ -162,8 +175,8 @@ internal abstract class ActionMethodExecutor
             return actionResult;
         }
 
-        protected override bool CanExecute(ObjectMethodExecutor executor)
-            => typeof(Task<IActionResult>).IsAssignableFrom(executor.MethodReturnType);
+        protected override bool CanExecute(ObjectMethodExecutor executor) =>
+            typeof(Task<IActionResult>).IsAssignableFrom(executor.MethodReturnType);
     }
 
     // Task<PhysicalFileResult> DownloadFile(..)
@@ -174,7 +187,8 @@ internal abstract class ActionMethodExecutor
             IActionResultTypeMapper mapper,
             ObjectMethodExecutor executor,
             object controller,
-            object?[]? arguments)
+            object?[]? arguments
+        )
         {
             // Async method returning awaitable-of-IActionResult (e.g., Task<ViewResult>)
             // We have to use ExecuteAsync because we don't know the awaitable's type at compile time.
@@ -186,7 +200,8 @@ internal abstract class ActionMethodExecutor
         protected override bool CanExecute(ObjectMethodExecutor executor)
         {
             // Async method returning awaitable-of - IActionResult(e.g., Task<ViewResult>)
-            return executor.IsMethodAsync && typeof(IActionResult).IsAssignableFrom(executor.AsyncResultType);
+            return executor.IsMethodAsync
+                && typeof(IActionResult).IsAssignableFrom(executor.AsyncResultType);
         }
     }
 
@@ -198,32 +213,48 @@ internal abstract class ActionMethodExecutor
             IActionResultTypeMapper mapper,
             ObjectMethodExecutor executor,
             object controller,
-            object?[]? arguments)
+            object?[]? arguments
+        )
         {
             // Async method returning awaitable-of-nonvoid
             var returnValue = await executor.ExecuteAsync(controller, arguments);
-            var actionResult = ConvertToActionResult(mapper, returnValue, executor.AsyncResultType!);
+            var actionResult = ConvertToActionResult(
+                mapper,
+                returnValue,
+                executor.AsyncResultType!
+            );
             return actionResult;
         }
 
         protected override bool CanExecute(ObjectMethodExecutor executor) => true;
     }
 
-    private static void EnsureActionResultNotNull(ObjectMethodExecutor executor, IActionResult actionResult)
+    private static void EnsureActionResultNotNull(
+        ObjectMethodExecutor executor,
+        IActionResult actionResult
+    )
     {
         if (actionResult == null)
         {
             var type = executor.AsyncResultType ?? executor.MethodReturnType;
-            throw new InvalidOperationException(Resources.FormatActionResult_ActionReturnValueCannotBeNull(type));
+            throw new InvalidOperationException(
+                Resources.FormatActionResult_ActionReturnValueCannotBeNull(type)
+            );
         }
     }
 
-    private IActionResult ConvertToActionResult(IActionResultTypeMapper mapper, object? returnValue, Type declaredType)
+    private IActionResult ConvertToActionResult(
+        IActionResultTypeMapper mapper,
+        object? returnValue,
+        Type declaredType
+    )
     {
         var result = (returnValue as IActionResult) ?? mapper.Convert(returnValue, declaredType);
         if (result == null)
         {
-            throw new InvalidOperationException(Resources.FormatActionResult_ActionReturnValueCannotBeNull(declaredType));
+            throw new InvalidOperationException(
+                Resources.FormatActionResult_ActionReturnValueCannotBeNull(declaredType)
+            );
         }
 
         return result;

@@ -19,8 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SingleQueryResultCoordinator()
-            => ResultContext = new ResultContext();
+        public SingleQueryResultCoordinator() => ResultContext = new ResultContext();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public IList<SingleQueryCollectionContext?> Collections { get; } = new List<SingleQueryCollectionContext?>();
+        public IList<SingleQueryCollectionContext?> Collections { get; } =
+            new List<SingleQueryCollectionContext?>();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -62,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public void SetSingleQueryCollectionContext(
             int collectionId,
-            SingleQueryCollectionContext singleQueryCollectionContext)
+            SingleQueryCollectionContext singleQueryCollectionContext
+        )
         {
             while (Collections.Count <= collectionId)
             {

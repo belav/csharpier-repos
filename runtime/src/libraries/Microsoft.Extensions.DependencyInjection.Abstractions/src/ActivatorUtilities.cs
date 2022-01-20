@@ -16,8 +16,9 @@ namespace Microsoft.Extensions.DependencyInjection
     /// </summary>
     public static class ActivatorUtilities
     {
-        private static readonly MethodInfo GetServiceInfo =
-            GetMethodInfo<Func<IServiceProvider, Type, Type, bool, object?>>((sp, t, r, c) => GetService(sp, t, r, c));
+        private static readonly MethodInfo GetServiceInfo = GetMethodInfo<
+            Func<IServiceProvider, Type, Type, bool, object?>
+        >((sp, t, r, c) => GetService(sp, t, r, c));
 
         /// <summary>
         /// Instantiate a type with constructor arguments provided directly and/or from an <see cref="IServiceProvider"/>.
@@ -28,8 +29,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>An activated object of type instanceType</returns>
         public static object CreateInstance(
             IServiceProvider provider,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type instanceType,
-            params object[] parameters)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type instanceType,
+            params object[] parameters
+        )
         {
             int bestLength = -1;
             bool seenPreferred = false;
@@ -41,7 +44,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 foreach (ConstructorInfo? constructor in instanceType.GetConstructors())
                 {
                     var matcher = new ConstructorMatcher(constructor);
-                    bool isPreferred = constructor.IsDefined(typeof(ActivatorUtilitiesConstructorAttribute), false);
+                    bool isPreferred = constructor.IsDefined(
+                        typeof(ActivatorUtilitiesConstructorAttribute),
+                        false
+                    );
                     int length = matcher.Match(parameters);
 
                     if (isPreferred)
@@ -69,7 +75,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             if (bestLength == -1)
             {
-                string? message = $"A suitable constructor for type '{instanceType}' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.";
+                string? message =
+                    $"A suitable constructor for type '{instanceType}' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.";
                 throw new InvalidOperationException(message);
             }
 
@@ -89,17 +96,38 @@ namespace Microsoft.Extensions.DependencyInjection
         /// and an argument array containing objects matching the types defined in argumentTypes
         /// </returns>
         public static ObjectFactory CreateFactory(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type instanceType,
-            Type[] argumentTypes)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type instanceType,
+            Type[] argumentTypes
+        )
         {
-            FindApplicableConstructor(instanceType, argumentTypes, out ConstructorInfo? constructor, out int?[]? parameterMap);
+            FindApplicableConstructor(
+                instanceType,
+                argumentTypes,
+                out ConstructorInfo? constructor,
+                out int?[]? parameterMap
+            );
 
-            ParameterExpression? provider = Expression.Parameter(typeof(IServiceProvider), "provider");
-            ParameterExpression? argumentArray = Expression.Parameter(typeof(object[]), "argumentArray");
-            Expression? factoryExpressionBody = BuildFactoryExpression(constructor, parameterMap, provider, argumentArray);
+            ParameterExpression? provider = Expression.Parameter(
+                typeof(IServiceProvider),
+                "provider"
+            );
+            ParameterExpression? argumentArray = Expression.Parameter(
+                typeof(object[]),
+                "argumentArray"
+            );
+            Expression? factoryExpressionBody = BuildFactoryExpression(
+                constructor,
+                parameterMap,
+                provider,
+                argumentArray
+            );
 
             var factoryLambda = Expression.Lambda<Func<IServiceProvider, object?[]?, object>>(
-                factoryExpressionBody, provider, argumentArray);
+                factoryExpressionBody,
+                provider,
+                argumentArray
+            );
 
             Func<IServiceProvider, object?[]?, object>? result = factoryLambda.Compile();
             return result.Invoke;
@@ -112,7 +140,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="provider">The service provider used to resolve dependencies</param>
         /// <param name="parameters">Constructor arguments not provided by the <paramref name="provider"/>.</param>
         /// <returns>An activated object of type T</returns>
-        public static T CreateInstance<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(IServiceProvider provider, params object[] parameters)
+        public static T CreateInstance<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+        >(IServiceProvider provider, params object[] parameters)
         {
             return (T)CreateInstance(provider, typeof(T), parameters);
         }
@@ -123,7 +153,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <typeparam name="T">The type of the service</typeparam>
         /// <param name="provider">The service provider used to resolve dependencies</param>
         /// <returns>The resolved service or created instance</returns>
-        public static T GetServiceOrCreateInstance<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(IServiceProvider provider)
+        public static T GetServiceOrCreateInstance<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+        >(IServiceProvider provider)
         {
             return (T)GetServiceOrCreateInstance(provider, typeof(T));
         }
@@ -136,7 +168,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The resolved service or created instance</returns>
         public static object GetServiceOrCreateInstance(
             IServiceProvider provider,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type type
+        )
         {
             return provider.GetService(type) ?? CreateInstance(provider, type);
         }
@@ -147,12 +181,18 @@ namespace Microsoft.Extensions.DependencyInjection
             return mc.Method;
         }
 
-        private static object? GetService(IServiceProvider sp, Type type, Type requiredBy, bool isDefaultParameterRequired)
+        private static object? GetService(
+            IServiceProvider sp,
+            Type type,
+            Type requiredBy,
+            bool isDefaultParameterRequired
+        )
         {
             object? service = sp.GetService(type);
             if (service == null && !isDefaultParameterRequired)
             {
-                string? message = $"Unable to resolve service for type '{type}' while attempting to activate '{requiredBy}'.";
+                string? message =
+                    $"Unable to resolve service for type '{type}' while attempting to activate '{requiredBy}'.";
                 throw new InvalidOperationException(message);
             }
             return service;
@@ -162,7 +202,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ConstructorInfo constructor,
             int?[] parameterMap,
             Expression serviceProvider,
-            Expression factoryArgumentArray)
+            Expression factoryArgumentArray
+        )
         {
             ParameterInfo[]? constructorParameters = constructor.GetParameters();
             var constructorArguments = new Expression[constructorParameters.Length];
@@ -171,19 +212,31 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 ParameterInfo? constructorParameter = constructorParameters[i];
                 Type? parameterType = constructorParameter.ParameterType;
-                bool hasDefaultValue = ParameterDefaultValue.TryGetDefaultValue(constructorParameter, out object? defaultValue);
+                bool hasDefaultValue = ParameterDefaultValue.TryGetDefaultValue(
+                    constructorParameter,
+                    out object? defaultValue
+                );
 
                 if (parameterMap[i] != null)
                 {
-                    constructorArguments[i] = Expression.ArrayAccess(factoryArgumentArray, Expression.Constant(parameterMap[i]));
+                    constructorArguments[i] = Expression.ArrayAccess(
+                        factoryArgumentArray,
+                        Expression.Constant(parameterMap[i])
+                    );
                 }
                 else
                 {
-                    var parameterTypeExpression = new Expression[] { serviceProvider,
+                    var parameterTypeExpression = new Expression[]
+                    {
+                        serviceProvider,
                         Expression.Constant(parameterType, typeof(Type)),
                         Expression.Constant(constructor.DeclaringType, typeof(Type)),
-                        Expression.Constant(hasDefaultValue) };
-                    constructorArguments[i] = Expression.Call(GetServiceInfo, parameterTypeExpression);
+                        Expression.Constant(hasDefaultValue)
+                    };
+                    constructorArguments[i] = Expression.Call(
+                        GetServiceInfo,
+                        parameterTypeExpression
+                    );
                 }
 
                 // Support optional constructor arguments by passing in the default value
@@ -191,28 +244,49 @@ namespace Microsoft.Extensions.DependencyInjection
                 if (hasDefaultValue)
                 {
                     ConstantExpression? defaultValueExpression = Expression.Constant(defaultValue);
-                    constructorArguments[i] = Expression.Coalesce(constructorArguments[i], defaultValueExpression);
+                    constructorArguments[i] = Expression.Coalesce(
+                        constructorArguments[i],
+                        defaultValueExpression
+                    );
                 }
 
-                constructorArguments[i] = Expression.Convert(constructorArguments[i], parameterType);
+                constructorArguments[i] = Expression.Convert(
+                    constructorArguments[i],
+                    parameterType
+                );
             }
 
             return Expression.New(constructor, constructorArguments);
         }
 
         private static void FindApplicableConstructor(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type instanceType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type instanceType,
             Type[] argumentTypes,
             out ConstructorInfo matchingConstructor,
-            out int?[] matchingParameterMap)
+            out int?[] matchingParameterMap
+        )
         {
             ConstructorInfo? constructorInfo = null;
             int?[]? parameterMap = null;
 
-            if (!TryFindPreferredConstructor(instanceType, argumentTypes, ref constructorInfo, ref parameterMap) &&
-                !TryFindMatchingConstructor(instanceType, argumentTypes, ref constructorInfo, ref parameterMap))
+            if (
+                !TryFindPreferredConstructor(
+                    instanceType,
+                    argumentTypes,
+                    ref constructorInfo,
+                    ref parameterMap
+                )
+                && !TryFindMatchingConstructor(
+                    instanceType,
+                    argumentTypes,
+                    ref constructorInfo,
+                    ref parameterMap
+                )
+            )
             {
-                string? message = $"A suitable constructor for type '{instanceType}' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.";
+                string? message =
+                    $"A suitable constructor for type '{instanceType}' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.";
                 throw new InvalidOperationException(message);
             }
 
@@ -222,18 +296,28 @@ namespace Microsoft.Extensions.DependencyInjection
 
         // Tries to find constructor based on provided argument types
         private static bool TryFindMatchingConstructor(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type instanceType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type instanceType,
             Type[] argumentTypes,
             [NotNullWhen(true)] ref ConstructorInfo? matchingConstructor,
-            [NotNullWhen(true)] ref int?[]? parameterMap)
+            [NotNullWhen(true)] ref int?[]? parameterMap
+        )
         {
             foreach (ConstructorInfo? constructor in instanceType.GetConstructors())
             {
-                if (TryCreateParameterMap(constructor.GetParameters(), argumentTypes, out int?[] tempParameterMap))
+                if (
+                    TryCreateParameterMap(
+                        constructor.GetParameters(),
+                        argumentTypes,
+                        out int?[] tempParameterMap
+                    )
+                )
                 {
                     if (matchingConstructor != null)
                     {
-                        throw new InvalidOperationException($"Multiple constructors accepting all given argument types have been found in type '{instanceType}'. There should only be one applicable constructor.");
+                        throw new InvalidOperationException(
+                            $"Multiple constructors accepting all given argument types have been found in type '{instanceType}'. There should only be one applicable constructor."
+                        );
                     }
 
                     matchingConstructor = constructor;
@@ -252,10 +336,12 @@ namespace Microsoft.Extensions.DependencyInjection
 
         // Tries to find constructor marked with ActivatorUtilitiesConstructorAttribute
         private static bool TryFindPreferredConstructor(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type instanceType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type instanceType,
             Type[] argumentTypes,
             [NotNullWhen(true)] ref ConstructorInfo? matchingConstructor,
-            [NotNullWhen(true)] ref int?[]? parameterMap)
+            [NotNullWhen(true)] ref int?[]? parameterMap
+        )
         {
             bool seenPreferred = false;
             foreach (ConstructorInfo? constructor in instanceType.GetConstructors())
@@ -267,7 +353,13 @@ namespace Microsoft.Extensions.DependencyInjection
                         ThrowMultipleCtorsMarkedWithAttributeException();
                     }
 
-                    if (!TryCreateParameterMap(constructor.GetParameters(), argumentTypes, out int?[] tempParameterMap))
+                    if (
+                        !TryCreateParameterMap(
+                            constructor.GetParameters(),
+                            argumentTypes,
+                            out int?[] tempParameterMap
+                        )
+                    )
                     {
                         ThrowMarkedCtorDoesNotTakeAllProvidedArguments();
                     }
@@ -289,7 +381,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
         // Creates an injective parameterMap from givenParameterTypes to assignable constructorParameters.
         // Returns true if each given parameter type is assignable to a unique; otherwise, false.
-        private static bool TryCreateParameterMap(ParameterInfo[] constructorParameters, Type[] argumentTypes, out int?[] parameterMap)
+        private static bool TryCreateParameterMap(
+            ParameterInfo[] constructorParameters,
+            Type[] argumentTypes,
+            out int?[] parameterMap
+        )
         {
             parameterMap = new int?[constructorParameters.Length];
 
@@ -345,10 +441,16 @@ namespace Microsoft.Extensions.DependencyInjection
                     Type? givenType = givenParameters[givenIndex]?.GetType();
                     bool givenMatched = false;
 
-                    for (int applyIndex = applyIndexStart; givenMatched == false && applyIndex != _parameters.Length; ++applyIndex)
+                    for (
+                        int applyIndex = applyIndexStart;
+                        givenMatched == false && applyIndex != _parameters.Length;
+                        ++applyIndex
+                    )
                     {
-                        if (_parameterValues[applyIndex] == null &&
-                            _parameters[applyIndex].ParameterType.IsAssignableFrom(givenType))
+                        if (
+                            _parameterValues[applyIndex] == null
+                            && _parameters[applyIndex].ParameterType.IsAssignableFrom(givenType)
+                        )
                         {
                             givenMatched = true;
                             _parameterValues[applyIndex] = givenParameters[givenIndex];
@@ -380,9 +482,16 @@ namespace Microsoft.Extensions.DependencyInjection
                         object? value = provider.GetService(_parameters[index].ParameterType);
                         if (value == null)
                         {
-                            if (!ParameterDefaultValue.TryGetDefaultValue(_parameters[index], out object? defaultValue))
+                            if (
+                                !ParameterDefaultValue.TryGetDefaultValue(
+                                    _parameters[index],
+                                    out object? defaultValue
+                                )
+                            )
                             {
-                                throw new InvalidOperationException($"Unable to resolve service for type '{_parameters[index].ParameterType}' while attempting to activate '{_constructor.DeclaringType}'.");
+                                throw new InvalidOperationException(
+                                    $"Unable to resolve service for type '{_parameters[index].ParameterType}' while attempting to activate '{_constructor.DeclaringType}'."
+                                );
                             }
                             else
                             {
@@ -408,19 +517,28 @@ namespace Microsoft.Extensions.DependencyInjection
                     throw;
                 }
 #else
-                return _constructor.Invoke(BindingFlags.DoNotWrapExceptions, binder: null, parameters: _parameterValues, culture: null);
+                return _constructor.Invoke(
+                    BindingFlags.DoNotWrapExceptions,
+                    binder: null,
+                    parameters: _parameterValues,
+                    culture: null
+                );
 #endif
             }
         }
 
         private static void ThrowMultipleCtorsMarkedWithAttributeException()
         {
-            throw new InvalidOperationException($"Multiple constructors were marked with {nameof(ActivatorUtilitiesConstructorAttribute)}.");
+            throw new InvalidOperationException(
+                $"Multiple constructors were marked with {nameof(ActivatorUtilitiesConstructorAttribute)}."
+            );
         }
 
         private static void ThrowMarkedCtorDoesNotTakeAllProvidedArguments()
         {
-            throw new InvalidOperationException($"Constructor marked with {nameof(ActivatorUtilitiesConstructorAttribute)} does not accept all given argument types.");
+            throw new InvalidOperationException(
+                $"Constructor marked with {nameof(ActivatorUtilitiesConstructorAttribute)} does not accept all given argument types."
+            );
         }
     }
 }

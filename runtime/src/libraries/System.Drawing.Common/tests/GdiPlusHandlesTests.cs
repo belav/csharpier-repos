@@ -12,36 +12,45 @@ namespace System.Drawing.Tests
     [PlatformSpecific(TestPlatforms.Windows)]
     public static class GdiPlusHandlesTests
     {
-        public static bool IsDrawingAndRemoteExecutorSupported => Helpers.GetIsDrawingSupported() && RemoteExecutor.IsSupported;
+        public static bool IsDrawingAndRemoteExecutorSupported =>
+            Helpers.GetIsDrawingSupported() && RemoteExecutor.IsSupported;
 
         [ConditionalFact(nameof(IsDrawingAndRemoteExecutorSupported))]
         public static void GraphicsDrawIconDoesNotLeakHandles()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                const int handleTreshold = 1;
-                using Bitmap bmp = new(100, 100);
-                using Icon ico = new(Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico"));
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        const int handleTreshold = 1;
+                        using Bitmap bmp = new(100, 100);
+                        using Icon ico = new(Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico"));
 
-                IntPtr hdc = Helpers.GetDC(Helpers.GetForegroundWindow());
-                using Graphics graphicsFromHdc = Graphics.FromHdc(hdc);
+                        IntPtr hdc = Helpers.GetDC(Helpers.GetForegroundWindow());
+                        using Graphics graphicsFromHdc = Graphics.FromHdc(hdc);
 
-                using Process currentProcess = Process.GetCurrentProcess();
-                IntPtr processHandle = currentProcess.Handle;
+                        using Process currentProcess = Process.GetCurrentProcess();
+                        IntPtr processHandle = currentProcess.Handle;
 
-                int initialHandles = Helpers.GetGuiResources(processHandle, 0);
-                ValidateNoWin32Error(initialHandles);
+                        int initialHandles = Helpers.GetGuiResources(processHandle, 0);
+                        ValidateNoWin32Error(initialHandles);
 
-                for (int i = 0; i < 5000; i++)
-                {
-                    graphicsFromHdc.DrawIcon(ico, 100, 100);
-                }
+                        for (int i = 0; i < 5000; i++)
+                        {
+                            graphicsFromHdc.DrawIcon(ico, 100, 100);
+                        }
 
-                int finalHandles = Helpers.GetGuiResources(processHandle, 0);
-                ValidateNoWin32Error(finalHandles);
+                        int finalHandles = Helpers.GetGuiResources(processHandle, 0);
+                        ValidateNoWin32Error(finalHandles);
 
-                Assert.InRange(finalHandles, initialHandles - handleTreshold, initialHandles + handleTreshold);
-            }).Dispose();
+                        Assert.InRange(
+                            finalHandles,
+                            initialHandles - handleTreshold,
+                            initialHandles + handleTreshold
+                        );
+                    }
+                )
+                .Dispose();
         }
 
         private static void ValidateNoWin32Error(int handleCount)
@@ -54,6 +63,5 @@ namespace System.Drawing.Tests
                     throw new XunitException($"GetGuiResorces failed with win32 error: {error}");
             }
         }
-
     }
 }

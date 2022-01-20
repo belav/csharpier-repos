@@ -86,7 +86,8 @@ namespace System.Diagnostics.Tests
                 }
                 catch
                 {
-                    if (++attempt < MaxAttempts) continue;
+                    if (++attempt < MaxAttempts)
+                        continue;
                     throw;
                 }
                 break;
@@ -110,8 +111,10 @@ namespace System.Diagnostics.Tests
                 Thread.Sleep(SleepTime);
                 sw.Stop();
 
-                if (sw.ElapsedMilliseconds >= (SleepTime / WindowFactor) &&
-                    sw.ElapsedMilliseconds <= (SleepTime * WindowFactor))
+                if (
+                    sw.ElapsedMilliseconds >= (SleepTime / WindowFactor)
+                    && sw.ElapsedMilliseconds <= (SleepTime * WindowFactor)
+                )
                 {
                     return;
                 }
@@ -119,7 +122,10 @@ namespace System.Diagnostics.Tests
                 results.Add(sw.ElapsedMilliseconds);
             }
 
-            Assert.True(false, $"All {AllowedTries} fell outside of {WindowFactor} window of {SleepTime} sleep time: {string.Join(", ", results)}");
+            Assert.True(
+                false,
+                $"All {AllowedTries} fell outside of {WindowFactor} window of {SleepTime} sleep time: {string.Join(", ", results)}"
+            );
         }
 
         private static void Sleep(int milliseconds = 1)

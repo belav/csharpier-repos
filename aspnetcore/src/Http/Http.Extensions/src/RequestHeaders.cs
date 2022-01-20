@@ -37,14 +37,8 @@ public class RequestHeaders
     /// </summary>
     public IList<MediaTypeHeaderValue> Accept
     {
-        get
-        {
-            return Headers.Accept.GetList<MediaTypeHeaderValue>();
-        }
-        set
-        {
-            Headers.SetList(HeaderNames.Accept, value);
-        }
+        get { return Headers.Accept.GetList<MediaTypeHeaderValue>(); }
+        set { Headers.SetList(HeaderNames.Accept, value); }
     }
 
     /// <summary>
@@ -52,14 +46,8 @@ public class RequestHeaders
     /// </summary>
     public IList<StringWithQualityHeaderValue> AcceptCharset
     {
-        get
-        {
-            return Headers.AcceptCharset.GetList<StringWithQualityHeaderValue>();
-        }
-        set
-        {
-            Headers.SetList(HeaderNames.AcceptCharset, value);
-        }
+        get { return Headers.AcceptCharset.GetList<StringWithQualityHeaderValue>(); }
+        set { Headers.SetList(HeaderNames.AcceptCharset, value); }
     }
 
     /// <summary>
@@ -67,14 +55,8 @@ public class RequestHeaders
     /// </summary>
     public IList<StringWithQualityHeaderValue> AcceptEncoding
     {
-        get
-        {
-            return Headers.AcceptEncoding.GetList<StringWithQualityHeaderValue>();
-        }
-        set
-        {
-            Headers.SetList(HeaderNames.AcceptEncoding, value);
-        }
+        get { return Headers.AcceptEncoding.GetList<StringWithQualityHeaderValue>(); }
+        set { Headers.SetList(HeaderNames.AcceptEncoding, value); }
     }
 
     /// <summary>
@@ -82,14 +64,8 @@ public class RequestHeaders
     /// </summary>
     public IList<StringWithQualityHeaderValue> AcceptLanguage
     {
-        get
-        {
-            return Headers.AcceptLanguage.GetList<StringWithQualityHeaderValue>();
-        }
-        set
-        {
-            Headers.SetList(HeaderNames.AcceptLanguage, value);
-        }
+        get { return Headers.AcceptLanguage.GetList<StringWithQualityHeaderValue>(); }
+        set { Headers.SetList(HeaderNames.AcceptLanguage, value); }
     }
 
     /// <summary>
@@ -97,14 +73,8 @@ public class RequestHeaders
     /// </summary>
     public CacheControlHeaderValue? CacheControl
     {
-        get
-        {
-            return Headers.Get<CacheControlHeaderValue>(HeaderNames.CacheControl);
-        }
-        set
-        {
-            Headers.Set(HeaderNames.CacheControl, value);
-        }
+        get { return Headers.Get<CacheControlHeaderValue>(HeaderNames.CacheControl); }
+        set { Headers.Set(HeaderNames.CacheControl, value); }
     }
 
     /// <summary>
@@ -112,14 +82,8 @@ public class RequestHeaders
     /// </summary>
     public ContentDispositionHeaderValue? ContentDisposition
     {
-        get
-        {
-            return Headers.Get<ContentDispositionHeaderValue>(HeaderNames.ContentDisposition);
-        }
-        set
-        {
-            Headers.Set(HeaderNames.ContentDisposition, value);
-        }
+        get { return Headers.Get<ContentDispositionHeaderValue>(HeaderNames.ContentDisposition); }
+        set { Headers.Set(HeaderNames.ContentDisposition, value); }
     }
 
     /// <summary>
@@ -127,14 +91,8 @@ public class RequestHeaders
     /// </summary>
     public long? ContentLength
     {
-        get
-        {
-            return Headers.ContentLength;
-        }
-        set
-        {
-            Headers.ContentLength = value;
-        }
+        get { return Headers.ContentLength; }
+        set { Headers.ContentLength = value; }
     }
 
     /// <summary>
@@ -142,14 +100,8 @@ public class RequestHeaders
     /// </summary>
     public ContentRangeHeaderValue? ContentRange
     {
-        get
-        {
-            return Headers.Get<ContentRangeHeaderValue>(HeaderNames.ContentRange);
-        }
-        set
-        {
-            Headers.Set(HeaderNames.ContentRange, value);
-        }
+        get { return Headers.Get<ContentRangeHeaderValue>(HeaderNames.ContentRange); }
+        set { Headers.Set(HeaderNames.ContentRange, value); }
     }
 
     /// <summary>
@@ -157,14 +109,8 @@ public class RequestHeaders
     /// </summary>
     public MediaTypeHeaderValue? ContentType
     {
-        get
-        {
-            return Headers.Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
-        }
-        set
-        {
-            Headers.Set(HeaderNames.ContentType, value);
-        }
+        get { return Headers.Get<MediaTypeHeaderValue>(HeaderNames.ContentType); }
+        set { Headers.Set(HeaderNames.ContentType, value); }
     }
 
     /// <summary>
@@ -172,14 +118,8 @@ public class RequestHeaders
     /// </summary>
     public IList<CookieHeaderValue> Cookie
     {
-        get
-        {
-            return Headers.Cookie.GetList<CookieHeaderValue>();
-        }
-        set
-        {
-            Headers.SetList(HeaderNames.Cookie, value);
-        }
+        get { return Headers.Cookie.GetList<CookieHeaderValue>(); }
+        set { Headers.SetList(HeaderNames.Cookie, value); }
     }
 
     /// <summary>
@@ -187,14 +127,8 @@ public class RequestHeaders
     /// </summary>
     public DateTimeOffset? Date
     {
-        get
-        {
-            return Headers.GetDate(HeaderNames.Date);
-        }
-        set
-        {
-            Headers.SetDate(HeaderNames.Date, value);
-        }
+        get { return Headers.GetDate(HeaderNames.Date); }
+        set { Headers.SetDate(HeaderNames.Date, value); }
     }
 
     /// <summary>
@@ -202,14 +136,8 @@ public class RequestHeaders
     /// </summary>
     public DateTimeOffset? Expires
     {
-        get
-        {
-            return Headers.GetDate(HeaderNames.Expires);
-        }
-        set
-        {
-            Headers.SetDate(HeaderNames.Expires, value);
-        }
+        get { return Headers.GetDate(HeaderNames.Expires); }
+        set { Headers.SetDate(HeaderNames.Expires, value); }
     }
 
     /// <summary>
@@ -217,14 +145,8 @@ public class RequestHeaders
     /// </summary>
     public HostString Host
     {
-        get
-        {
-            return HostString.FromUriComponent(Headers.Host.ToString());
-        }
-        set
-        {
-            Headers.Host = value.ToUriComponent();
-        }
+        get { return HostString.FromUriComponent(Headers.Host.ToString()); }
+        set { Headers.Host = value.ToUriComponent(); }
     }
 
     /// <summary>
@@ -232,14 +154,8 @@ public class RequestHeaders
     /// </summary>
     public IList<EntityTagHeaderValue> IfMatch
     {
-        get
-        {
-            return Headers.IfMatch.GetList<EntityTagHeaderValue>();
-        }
-        set
-        {
-            Headers.SetList(HeaderNames.IfMatch, value);
-        }
+        get { return Headers.IfMatch.GetList<EntityTagHeaderValue>(); }
+        set { Headers.SetList(HeaderNames.IfMatch, value); }
     }
 
     /// <summary>
@@ -247,14 +163,8 @@ public class RequestHeaders
     /// </summary>
     public DateTimeOffset? IfModifiedSince
     {
-        get
-        {
-            return Headers.GetDate(HeaderNames.IfModifiedSince);
-        }
-        set
-        {
-            Headers.SetDate(HeaderNames.IfModifiedSince, value);
-        }
+        get { return Headers.GetDate(HeaderNames.IfModifiedSince); }
+        set { Headers.SetDate(HeaderNames.IfModifiedSince, value); }
     }
 
     /// <summary>
@@ -262,14 +172,8 @@ public class RequestHeaders
     /// </summary>
     public IList<EntityTagHeaderValue> IfNoneMatch
     {
-        get
-        {
-            return Headers.IfNoneMatch.GetList<EntityTagHeaderValue>();
-        }
-        set
-        {
-            Headers.SetList(HeaderNames.IfNoneMatch, value);
-        }
+        get { return Headers.IfNoneMatch.GetList<EntityTagHeaderValue>(); }
+        set { Headers.SetList(HeaderNames.IfNoneMatch, value); }
     }
 
     /// <summary>
@@ -277,14 +181,8 @@ public class RequestHeaders
     /// </summary>
     public RangeConditionHeaderValue? IfRange
     {
-        get
-        {
-            return Headers.Get<RangeConditionHeaderValue>(HeaderNames.IfRange);
-        }
-        set
-        {
-            Headers.Set(HeaderNames.IfRange, value);
-        }
+        get { return Headers.Get<RangeConditionHeaderValue>(HeaderNames.IfRange); }
+        set { Headers.Set(HeaderNames.IfRange, value); }
     }
 
     /// <summary>
@@ -292,14 +190,8 @@ public class RequestHeaders
     /// </summary>
     public DateTimeOffset? IfUnmodifiedSince
     {
-        get
-        {
-            return Headers.GetDate(HeaderNames.IfUnmodifiedSince);
-        }
-        set
-        {
-            Headers.SetDate(HeaderNames.IfUnmodifiedSince, value);
-        }
+        get { return Headers.GetDate(HeaderNames.IfUnmodifiedSince); }
+        set { Headers.SetDate(HeaderNames.IfUnmodifiedSince, value); }
     }
 
     /// <summary>
@@ -307,14 +199,8 @@ public class RequestHeaders
     /// </summary>
     public DateTimeOffset? LastModified
     {
-        get
-        {
-            return Headers.GetDate(HeaderNames.LastModified);
-        }
-        set
-        {
-            Headers.SetDate(HeaderNames.LastModified, value);
-        }
+        get { return Headers.GetDate(HeaderNames.LastModified); }
+        set { Headers.SetDate(HeaderNames.LastModified, value); }
     }
 
     /// <summary>
@@ -322,14 +208,8 @@ public class RequestHeaders
     /// </summary>
     public RangeHeaderValue? Range
     {
-        get
-        {
-            return Headers.Get<RangeHeaderValue>(HeaderNames.Range);
-        }
-        set
-        {
-            Headers.Set(HeaderNames.Range, value);
-        }
+        get { return Headers.Get<RangeHeaderValue>(HeaderNames.Range); }
+        set { Headers.Set(HeaderNames.Range, value); }
     }
 
     /// <summary>
@@ -345,10 +225,7 @@ public class RequestHeaders
             }
             return null;
         }
-        set
-        {
-            Headers.Set(HeaderNames.Referer, value == null ? null : UriHelper.Encode(value));
-        }
+        set { Headers.Set(HeaderNames.Referer, value == null ? null : UriHelper.Encode(value)); }
     }
 
     /// <summary>

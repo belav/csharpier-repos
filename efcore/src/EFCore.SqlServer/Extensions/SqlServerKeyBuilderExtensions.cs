@@ -48,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static KeyBuilder<TEntity> IsClustered<TEntity>(
             this KeyBuilder<TEntity> keyBuilder,
-            bool clustered = true)
-            => (KeyBuilder<TEntity>)IsClustered((KeyBuilder)keyBuilder, clustered);
+            bool clustered = true
+        ) => (KeyBuilder<TEntity>)IsClustered((KeyBuilder)keyBuilder, clustered);
 
         /// <summary>
         ///     Configures whether the key is clustered when targeting SQL Server.
@@ -69,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionKeyBuilder? IsClustered(
             this IConventionKeyBuilder keyBuilder,
             bool? clustered,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (keyBuilder.CanSetIsClustered(clustered, fromDataAnnotation))
             {
@@ -95,7 +96,12 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetIsClustered(
             this IConventionKeyBuilder keyBuilder,
             bool? clustered,
-            bool fromDataAnnotation = false)
-            => keyBuilder.CanSetAnnotation(SqlServerAnnotationNames.Clustered, clustered, fromDataAnnotation);
+            bool fromDataAnnotation = false
+        ) =>
+            keyBuilder.CanSetAnnotation(
+                SqlServerAnnotationNames.Clustered,
+                clustered,
+                fromDataAnnotation
+            );
     }
 }

@@ -17,10 +17,7 @@ namespace System.Security.Cryptography
             /// <summary>
             ///     Create a DSACng algorithm with a random 2048 bit key pair.
             /// </summary>
-            public DSACng()
-                : this(keySize: s_defaultKeySize)
-            {
-            }
+            public DSACng() : this(keySize: s_defaultKeySize) { }
 
             /// <summary>
             ///     Creates a new DSACng object that will use a randomly generated key of the specified size.
@@ -37,24 +34,29 @@ namespace System.Security.Cryptography
 
             public override KeySizes[] LegalKeySizes
             {
-                get
-                {
-                    return base.LegalKeySizes;
-                }
+                get { return base.LegalKeySizes; }
             }
 
             public override string SignatureAlgorithm => "DSA";
             public override string? KeyExchangeAlgorithm => null;
 
             // Need to override since base methods throw a "override me" exception: makes SignData/VerifyData function.
-            protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm) =>
-                CngCommon.HashData(data, offset, count, hashAlgorithm);
+            protected override byte[] HashData(
+                byte[] data,
+                int offset,
+                int count,
+                HashAlgorithmName hashAlgorithm
+            ) => CngCommon.HashData(data, offset, count, hashAlgorithm);
 
             protected override byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) =>
                 CngCommon.HashData(data, hashAlgorithm);
 
-            protected override bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, HashAlgorithmName hashAlgorithm, out int bytesWritten) =>
-                CngCommon.TryHashData(source, destination, hashAlgorithm, out bytesWritten);
+            protected override bool TryHashData(
+                ReadOnlySpan<byte> source,
+                Span<byte> destination,
+                HashAlgorithmName hashAlgorithm,
+                out int bytesWritten
+            ) => CngCommon.TryHashData(source, destination, hashAlgorithm, out bytesWritten);
 
             private void ForceSetKeySize(int newKeySize)
             {
@@ -75,11 +77,15 @@ namespace System.Security.Cryptography
             {
                 Debug.Assert(OperatingSystem.IsWindows());
                 Version version = Environment.OSVersion.Version;
-                bool isAtLeastWindows8 = version.Major > 6 || (version.Major == 6 && version.Minor >= 2);
+                bool isAtLeastWindows8 =
+                    version.Major > 6 || (version.Major == 6 && version.Minor >= 2);
                 return isAtLeastWindows8;
             }
 
-            private static readonly KeySizes[] s_legalKeySizes = new KeySizes[] { new KeySizes(minSize: 512, maxSize: 3072, skipSize: 64) };
+            private static readonly KeySizes[] s_legalKeySizes = new KeySizes[]
+            {
+                new KeySizes(minSize: 512, maxSize: 3072, skipSize: 64)
+            };
             private static readonly int s_defaultKeySize = Supports2048KeySize() ? 2048 : 1024;
         }
 #if INTERNAL_ASYMMETRIC_IMPLEMENTATIONS

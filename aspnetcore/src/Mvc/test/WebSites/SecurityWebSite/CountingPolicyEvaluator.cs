@@ -16,7 +16,12 @@ public class CountingPolicyEvaluator : PolicyEvaluator
 
     public CountingPolicyEvaluator(IAuthorizationService authorization) : base(authorization) { }
 
-    public override Task<PolicyAuthorizationResult> AuthorizeAsync(AuthorizationPolicy policy, AuthenticateResult authenticationResult, HttpContext context, object resource)
+    public override Task<PolicyAuthorizationResult> AuthorizeAsync(
+        AuthorizationPolicy policy,
+        AuthenticateResult authenticationResult,
+        HttpContext context,
+        object resource
+    )
     {
         AuthorizeCount++;
         return base.AuthorizeAsync(policy, authenticationResult, context, resource);

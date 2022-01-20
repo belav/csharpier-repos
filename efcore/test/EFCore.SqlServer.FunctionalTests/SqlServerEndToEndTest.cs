@@ -67,12 +67,43 @@ namespace Microsoft.EntityFrameworkCore
                 context.Database.EnsureCreatedResiliently();
 
                 context.AddRange(
-                    nownNum1, nownNum2, numNum1, numNum2, adNum1, adNum2, anNum1, anNum2,
-                    byteNownNum1, byteNownNum2, byteNum1, byteNum2, byteAdNum1, byteAdNum2, byteAnNum1, byteAnNum2);
+                    nownNum1,
+                    nownNum2,
+                    numNum1,
+                    numNum2,
+                    adNum1,
+                    adNum2,
+                    anNum1,
+                    anNum2,
+                    byteNownNum1,
+                    byteNownNum2,
+                    byteNum1,
+                    byteNum2,
+                    byteAdNum1,
+                    byteAdNum2,
+                    byteAnNum1,
+                    byteAnNum2
+                );
 
-                preSaveValues = new[] { numNum1.Id, numNum2.Id, adNum1.Id, adNum2.Id, anNum1.Id, anNum2.Id };
+                preSaveValues = new[]
+                {
+                    numNum1.Id,
+                    numNum2.Id,
+                    adNum1.Id,
+                    adNum2.Id,
+                    anNum1.Id,
+                    anNum2.Id
+                };
 
-                preSaveByteValues = new[] { byteNum1.Id, byteNum2.Id, byteAdNum1.Id, byteAdNum2.Id, byteAnNum1.Id, byteAnNum2.Id };
+                preSaveByteValues = new[]
+                {
+                    byteNum1.Id,
+                    byteNum2.Id,
+                    byteAdNum1.Id,
+                    byteAdNum2.Id,
+                    byteAnNum1.Id,
+                    byteAnNum2.Id
+                };
 
                 context.SaveChanges();
             }
@@ -99,8 +130,14 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.NotEqual(anNum1.Id, preSaveValues[4]);
                 Assert.NotEqual(anNum2.Id, preSaveValues[5]);
 
-                Assert.Equal(byteNownNum1.Id, context.ByteNownNums.Single(e => e.Lucy == "Tangerine").Id);
-                Assert.Equal(byteNownNum2.Id, context.ByteNownNums.Single(e => e.Lucy == "Trees").Id);
+                Assert.Equal(
+                    byteNownNum1.Id,
+                    context.ByteNownNums.Single(e => e.Lucy == "Tangerine").Id
+                );
+                Assert.Equal(
+                    byteNownNum2.Id,
+                    context.ByteNownNums.Single(e => e.Lucy == "Trees").Id
+                );
                 Assert.Equal(77, byteNownNum1.Id);
                 Assert.Equal(78, byteNownNum2.Id);
 
@@ -109,12 +146,18 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.NotEqual(byteNum1.Id, preSaveByteValues[0]);
                 Assert.NotEqual(byteNum2.Id, preSaveByteValues[1]);
 
-                Assert.Equal(byteAnNum1.Id, context.ByteAnNums.Single(e => e.Lucy == "Cellophane").Id);
+                Assert.Equal(
+                    byteAnNum1.Id,
+                    context.ByteAnNums.Single(e => e.Lucy == "Cellophane").Id
+                );
                 Assert.Equal(byteAnNum2.Id, context.ByteAnNums.Single(e => e.Lucy == "Flowers").Id);
                 Assert.NotEqual(byteAdNum1.Id, preSaveByteValues[2]);
                 Assert.NotEqual(byteAdNum2.Id, preSaveByteValues[3]);
 
-                Assert.Equal(byteAdNum1.Id, context.ByteAdNums.Single(e => e.Lucy == "Kaleidoscope").Id);
+                Assert.Equal(
+                    byteAdNum1.Id,
+                    context.ByteAdNums.Single(e => e.Lucy == "Kaleidoscope").Id
+                );
                 Assert.Equal(byteAdNum2.Id, context.ByteAdNums.Single(e => e.Lucy == "Eyes").Id);
                 Assert.NotEqual(byteAnNum1.Id, preSaveByteValues[4]);
                 Assert.NotEqual(byteAnNum2.Id, preSaveByteValues[5]);
@@ -123,10 +166,7 @@ namespace Microsoft.EntityFrameworkCore
 
         private class NumNumContext : DbContext
         {
-            public NumNumContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public NumNumContext(DbContextOptions options) : base(options) { }
 
             public DbSet<NownNum> NownNums { get; set; }
             public DbSet<NumNum> NumNums { get; set; }
@@ -152,20 +192,11 @@ namespace Microsoft.EntityFrameworkCore
                     .HasColumnType("decimal(10, 0)")
                     .ValueGeneratedOnAdd();
 
-                modelBuilder
-                    .Entity<ByteNum>()
-                    .Property(e => e.Id)
-                    .UseIdentityColumn();
+                modelBuilder.Entity<ByteNum>().Property(e => e.Id).UseIdentityColumn();
 
-                modelBuilder
-                    .Entity<ByteAdNum>()
-                    .Property(e => e.Id)
-                    .ValueGeneratedOnAdd();
+                modelBuilder.Entity<ByteAdNum>().Property(e => e.Id).ValueGeneratedOnAdd();
 
-                modelBuilder
-                    .Entity<NownNum>()
-                    .Property(e => e.Id)
-                    .HasColumnType("numeric(18, 0)");
+                modelBuilder.Entity<NownNum>().Property(e => e.Id).HasColumnType("numeric(18, 0)");
             }
         }
 
@@ -288,10 +319,7 @@ namespace Microsoft.EntityFrameworkCore
 
         private class ENumContext : DbContext
         {
-            public ENumContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public ENumContext(DbContextOptions options) : base(options) { }
 
             public DbSet<SNum> SNums { get; set; }
             public DbSet<EnNum> EnNums { get; set; }
@@ -366,25 +394,23 @@ namespace Microsoft.EntityFrameworkCore
 
         private class ProjectContext : DbContext
         {
-            public ProjectContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public ProjectContext(DbContextOptions options) : base(options) { }
 
             public DbSet<EvaluationAction> EvaluationActions { get; set; }
             public DbSet<ProjectAction> ProjectActions { get; set; }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<ProjectAction>()
-                   .ToTable("projectaction")
-                   .HasOne(o => o.EvaluationAction).WithOne(o => o.ProjectAction)
-                   .HasForeignKey<ProjectAction>(o => o.Id);
+                modelBuilder
+                    .Entity<ProjectAction>()
+                    .ToTable("projectaction")
+                    .HasOne(o => o.EvaluationAction)
+                    .WithOne(o => o.ProjectAction)
+                    .HasForeignKey<ProjectAction>(o => o.Id);
 
                 modelBuilder.Entity<ProjectAction>().Property(p => p.Name).IsRequired();
 
-                modelBuilder.Entity<EvaluationAction>()
-                   .ToTable("projectaction");
+                modelBuilder.Entity<EvaluationAction>().ToTable("projectaction");
             }
         }
 
@@ -447,18 +473,11 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = new CompositeKeysDbContext(options))
             {
                 context.Database.EnsureCreatedResiliently();
-                var first = new Int32CompositeKeys
-                {
-                    Id1 = 1, Id2 = 2
-                };
+                var first = new Int32CompositeKeys { Id1 = 1, Id2 = 2 };
 
                 context.Add(first);
 
-                var second = new Int64CompositeKeys
-                {
-                    Id1 = 1,
-                    Id2 = 2
-                };
+                var second = new Int64CompositeKeys { Id1 = 1, Id2 = 2 };
 
                 context.Add(second);
                 await context.SaveChangesAsync();
@@ -478,10 +497,7 @@ namespace Microsoft.EntityFrameworkCore
 
         private class CompositeKeysDbContext : DbContext
         {
-            public CompositeKeysDbContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public CompositeKeysDbContext(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -527,10 +543,7 @@ namespace Microsoft.EntityFrameworkCore
 
         private class FileContext : DbContext
         {
-            public FileContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public FileContext(DbContextOptions options) : base(options) { }
 
             public DbSet<FileMetadata> FileMetadata { get; set; }
             public DbSet<Category> Categories { get; set; }
@@ -539,13 +552,21 @@ namespace Microsoft.EntityFrameworkCore
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<Category>(builder =>
-                {
-                    builder.OwnsOne(x => x.Picture, fileSource =>
+                modelBuilder.Entity<Category>(
+                    builder =>
                     {
-                        fileSource.HasOne<FileMetadata>().WithOne().HasForeignKey<FileSource>(x => x.FileId);
-                    });
-                });
+                        builder.OwnsOne(
+                            x => x.Picture,
+                            fileSource =>
+                            {
+                                fileSource
+                                    .HasOne<FileMetadata>()
+                                    .WithOne()
+                                    .HasForeignKey<FileSource>(x => x.FileId);
+                            }
+                        );
+                    }
+                );
             }
         }
 
@@ -588,10 +609,7 @@ namespace Microsoft.EntityFrameworkCore
 
         private class CarContext : DbContext
         {
-            public CarContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public CarContext(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -694,20 +712,22 @@ namespace Microsoft.EntityFrameworkCore
                 db.Entry(toUpdate).State = EntityState.Modified;
                 db.Entry(toDelete).State = EntityState.Deleted;
 
-                var toAdd = db.Add(
-                    new Blog
-                    {
-                        Name = "Blog to Insert",
-                        George = true,
-                        TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
-                        NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
-                        ToEat = 64,
-                        OrNothing = 0.123456789,
-                        Fuse = 777,
-                        WayRound = 9876543210,
-                        Away = 0.12345f,
-                        AndChew = new byte[16]
-                    }).Entity;
+                var toAdd =
+                    db.Add(
+                        new Blog
+                        {
+                            Name = "Blog to Insert",
+                            George = true,
+                            TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
+                            NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
+                            ToEat = 64,
+                            OrNothing = 0.123456789,
+                            Fuse = 777,
+                            WayRound = 9876543210,
+                            Away = 0.12345f,
+                            AndChew = new byte[16]
+                        }
+                    ).Entity;
 
                 await db.SaveChangesAsync();
 
@@ -727,17 +747,20 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Contains("INSERT", Fixture.TestSqlLoggerFactory.SqlStatements[4]);
 
                 var rows = await testDatabase.ExecuteScalarAsync<int>(
-                    $"SELECT Count(*) FROM [dbo].[Blog] WHERE Id = {updatedId} AND Name = 'Blog is Updated'");
+                    $"SELECT Count(*) FROM [dbo].[Blog] WHERE Id = {updatedId} AND Name = 'Blog is Updated'"
+                );
 
                 Assert.Equal(1, rows);
 
                 rows = await testDatabase.ExecuteScalarAsync<int>(
-                    $"SELECT Count(*) FROM [dbo].[Blog] WHERE Id = {deletedId}");
+                    $"SELECT Count(*) FROM [dbo].[Blog] WHERE Id = {deletedId}"
+                );
 
                 Assert.Equal(0, rows);
 
                 rows = await testDatabase.ExecuteScalarAsync<int>(
-                    $"SELECT Count(*) FROM [dbo].[Blog] WHERE Id = {addedId} AND Name = 'Blog to Insert'");
+                    $"SELECT Count(*) FROM [dbo].[Blog] WHERE Id = {addedId} AND Name = 'Blog to Insert'"
+                );
 
                 Assert.Equal(1, rows);
             }
@@ -755,20 +778,22 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var blogs = await CreateBlogDatabaseAsync<Blog>(db);
 
-                var toAdd = db.Blogs.Add(
-                    new Blog
-                    {
-                        Name = "Blog to Insert",
-                        George = true,
-                        TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
-                        NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
-                        ToEat = 64,
-                        OrNothing = 0.123456789,
-                        Fuse = 777,
-                        WayRound = 9876543210,
-                        Away = 0.12345f,
-                        AndChew = new byte[16]
-                    }).Entity;
+                var toAdd =
+                    db.Blogs.Add(
+                        new Blog
+                        {
+                            Name = "Blog to Insert",
+                            George = true,
+                            TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
+                            NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
+                            ToEat = 64,
+                            OrNothing = 0.123456789,
+                            Fuse = 777,
+                            WayRound = 9876543210,
+                            Away = 0.12345f,
+                            AndChew = new byte[16]
+                        }
+                    ).Entity;
                 db.Entry(toAdd).State = EntityState.Detached;
 
                 var toUpdate = blogs[0];
@@ -809,9 +834,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 context.Database.EnsureCreatedResiliently();
 
-                context.Characters.Add(
-                    new PlayerCharacter(
-                        new Level { Game = new Game() }));
+                context.Characters.Add(new PlayerCharacter(new Level { Game = new Game() }));
 
                 context.SaveChanges();
             }
@@ -839,13 +862,9 @@ namespace Microsoft.EntityFrameworkCore
             {
                 context.Database.EnsureCreatedResiliently();
 
-                context.Add(new EntityA()
-                {
-                    EntityB = new EntityB()
-                    {
-                        EntitiesC = { new EntityC() },
-                    }
-                });
+                context.Add(
+                    new EntityA() { EntityB = new EntityB() { EntitiesC = { new EntityC() }, } }
+                );
 
                 context.SaveChanges();
             }
@@ -853,12 +872,13 @@ namespace Microsoft.EntityFrameworkCore
             var expectedCId = 0;
             using (var context = new SomeDbContext(options))
             {
-                var entityA = context.EntitiesA.Include(x => x.EntityB).ThenInclude(x => x.EntitiesC).OrderBy(x => x.Id).First();
+                var entityA = context.EntitiesA
+                    .Include(x => x.EntityB)
+                    .ThenInclude(x => x.EntitiesC)
+                    .OrderBy(x => x.Id)
+                    .First();
 
-                entityA.EntityB = new EntityB()
-                {
-                    EntitiesC = { new EntityC() }
-                };
+                entityA.EntityB = new EntityB() { EntitiesC = { new EntityC() } };
 
                 context.SaveChanges();
 
@@ -867,7 +887,11 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new SomeDbContext(options))
             {
-                var entityA = context.EntitiesA.Include(x => x.EntityB).ThenInclude(x => x.EntitiesC).OrderBy(x => x.Id).First();
+                var entityA = context.EntitiesA
+                    .Include(x => x.EntityB)
+                    .ThenInclude(x => x.EntitiesC)
+                    .OrderBy(x => x.Id)
+                    .First();
 
                 Assert.Equal(expectedCId, entityA.EntityB.EntitiesC.Single().Id);
             }
@@ -894,10 +918,7 @@ namespace Microsoft.EntityFrameworkCore
 
         private class SomeDbContext : DbContext
         {
-            public SomeDbContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public SomeDbContext(DbContextOptions options) : base(options) { }
 
             public DbSet<EntityA> EntitiesA { get; set; }
             public DbSet<EntityB> EntitiesB { get; set; }
@@ -922,8 +943,7 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new GameDbContext(options);
             context.Database.EnsureCreatedResiliently();
 
-            var player = new PlayerCharacter(
-                new Level { Game = new Game() });
+            var player = new PlayerCharacter(new Level { Game = new Game() });
 
             var weapon = new Item { Id = 1, Game = player.Game };
 
@@ -948,8 +968,7 @@ namespace Microsoft.EntityFrameworkCore
             {
                 context.Database.EnsureCreatedResiliently();
 
-                var player = new PlayerCharacter(
-                    new Level { Game = new Game() });
+                var player = new PlayerCharacter(new Level { Game = new Game() });
 
                 var weapon = new Item { Id = 1, Game = player.Game };
 
@@ -970,9 +989,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new GameDbContext(options))
             {
-                var player = context.Characters
-                    .Include(c => c.Items)
-                    .ToList().Single();
+                var player = context.Characters.Include(c => c.Items).ToList().Single();
 
                 Assert.Equal(player.Items.Single(), player.CurrentWeapon);
             }
@@ -988,15 +1005,13 @@ namespace Microsoft.EntityFrameworkCore
             {
                 context.Database.EnsureCreatedResiliently();
 
-                var player = new PlayerCharacter(
-                    new Level { Game = new Game() });
+                var player = new PlayerCharacter(new Level { Game = new Game() });
 
                 var weapon = new Item { Id = 1, Game = player.Game };
 
                 player.Items.Add(weapon);
 
-                player.Items.Add(
-                    new Item { Id = 2, Game = player.Game });
+                player.Items.Add(new Item { Id = 2, Game = player.Game });
 
                 context.Characters.Add(player);
 
@@ -1009,9 +1024,7 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new GameDbContext(options))
             {
-                var player = context.Characters
-                    .Include(p => p.CurrentWeapon)
-                    .Single();
+                var player = context.Characters.Include(p => p.CurrentWeapon).Single();
 
                 Assert.Equal(1, player.Items.Count);
 
@@ -1019,10 +1032,7 @@ namespace Microsoft.EntityFrameworkCore
 
                 Assert.Equal(1, player.Items.Count);
 
-                context.Levels
-                    .Include(l => l.Actors)
-                    .ThenInclude(a => a.Items)
-                    .Load();
+                context.Levels.Include(l => l.Actors).ThenInclude(a => a.Items).Load();
 
                 Assert.Equal(2, player.Items.Count);
             }
@@ -1042,10 +1052,7 @@ namespace Microsoft.EntityFrameworkCore
 
                 Assert.Equal(1, player.Items.Count);
 
-                context.Levels
-                    .Include(l => l.Actors)
-                    .ThenInclude(a => a.Items)
-                    .Load();
+                context.Levels.Include(l => l.Actors).ThenInclude(a => a.Items).Load();
 
                 Assert.Equal(2, player.Items.Count);
             }
@@ -1053,9 +1060,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public abstract class Actor
         {
-            protected Actor()
-            {
-            }
+            protected Actor() { }
 
             protected Actor(Level level)
             {
@@ -1072,14 +1077,9 @@ namespace Microsoft.EntityFrameworkCore
 
         public class PlayerCharacter : Actor
         {
-            public PlayerCharacter()
-            {
-            }
+            public PlayerCharacter() { }
 
-            public PlayerCharacter(Level level)
-                : base(level)
-            {
-            }
+            public PlayerCharacter(Level level) : base(level) { }
 
             public virtual string Name { get; set; }
 
@@ -1131,10 +1131,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class GameDbContext : DbContext
         {
-            public GameDbContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public GameDbContext(DbContextOptions options) : base(options) { }
 
             public DbSet<Game> Games { get; set; }
             public DbSet<Level> Levels { get; set; }
@@ -1146,17 +1143,16 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder.Entity<Level>(
                     eb =>
                     {
-                        eb.Property(g => g.Id)
-                            .ValueGeneratedNever();
+                        eb.Property(g => g.Id).ValueGeneratedNever();
 
                         eb.HasKey(l => new { l.GameId, l.Id });
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<Actor>(
                     eb =>
                     {
-                        eb.Property(g => g.Id)
-                            .ValueGeneratedNever();
+                        eb.Property(g => g.Id).ValueGeneratedNever();
 
                         eb.HasKey(a => new { a.GameId, a.Id });
 
@@ -1168,40 +1164,43 @@ namespace Microsoft.EntityFrameworkCore
                         eb.HasMany(a => a.Items)
                             .WithOne(i => i.Actor)
                             .HasForeignKey(nameof(Item.GameId), "ActorId");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<PlayerCharacter>(
                     eb =>
                     {
                         eb.HasOne(p => p.CurrentWeapon)
                             .WithOne()
-                            .HasForeignKey<PlayerCharacter>(nameof(PlayerCharacter.GameId), "CurrentWeaponId");
-                    });
+                            .HasForeignKey<PlayerCharacter>(
+                                nameof(PlayerCharacter.GameId),
+                                "CurrentWeaponId"
+                            );
+                    }
+                );
 
                 modelBuilder.Entity<Item>(
                     eb =>
                     {
-                        eb.Property(g => g.Id)
-                            .ValueGeneratedNever();
+                        eb.Property(g => g.Id).ValueGeneratedNever();
 
                         eb.HasKey(l => new { l.GameId, l.Id });
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<Container>();
 
                 modelBuilder.Entity<Game>(
                     eb =>
                     {
-                        eb.Property(g => g.Id)
-                            .ValueGeneratedOnAdd();
-                        eb.HasMany(g => g.Levels)
-                            .WithOne(l => l.Game)
-                            .HasForeignKey(l => l.GameId);
+                        eb.Property(g => g.Id).ValueGeneratedOnAdd();
+                        eb.HasMany(g => g.Levels).WithOne(l => l.Game).HasForeignKey(l => l.GameId);
                         eb.HasMany(g => g.Actors)
                             .WithOne(a => a.Game)
                             .HasForeignKey(a => a.GameId)
                             .OnDelete(DeleteBehavior.Restrict);
-                    });
+                    }
+                );
             }
         }
 
@@ -1231,10 +1230,8 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = new SchemaContext(options))
             {
-                context.Add(
-                    new Jack { MyKey = 1 });
-                context.Add(
-                    new Black { MyKey = 2 });
+                context.Add(new Jack { MyKey = 1 });
+                context.Add(new Black { MyKey = 2 });
                 context.SaveChanges();
             }
 
@@ -1247,25 +1244,16 @@ namespace Microsoft.EntityFrameworkCore
 
         private class SchemaContext : DbContext
         {
-            public SchemaContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public SchemaContext(DbContextOptions options) : base(options) { }
 
             public DbSet<Jack> Jacks { get; set; }
             public DbSet<Black> Blacks { get; set; }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder
-                    .Entity<Jack>()
-                    .ToTable("Jack", "Apple")
-                    .HasKey(e => e.MyKey);
+                modelBuilder.Entity<Jack>().ToTable("Jack", "Apple").HasKey(e => e.MyKey);
 
-                modelBuilder
-                    .Entity<Black>()
-                    .ToTable("Black", "Apple")
-                    .HasKey(e => e.MyKey);
+                modelBuilder.Entity<Black>().ToTable("Black", "Apple").HasKey(e => e.MyKey);
             }
         }
 
@@ -1297,8 +1285,7 @@ namespace Microsoft.EntityFrameworkCore
             return RoundTripChanges<ChangedOnlyBlog>();
         }
 
-        private async Task RoundTripChanges<TBlog>()
-            where TBlog : class, IBlog, new()
+        private async Task RoundTripChanges<TBlog>() where TBlog : class, IBlog, new()
         {
             using var testDatabase = SqlServerTestStore.CreateInitialized(DatabaseName);
             var options = Fixture.CreateOptions(testDatabase);
@@ -1378,44 +1365,48 @@ namespace Microsoft.EntityFrameworkCore
         {
             context.Database.EnsureCreatedResiliently();
 
-            var blog1 = context.Add(
-                new TBlog
-                {
-                    Name = "Blog1",
-                    George = true,
-                    TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
-                    NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
-                    ToEat = 64,
-                    CupOfChar = 'C',
-                    OrNothing = 0.123456789,
-                    Fuse = 777,
-                    WayRound = 9876543210,
-                    NotToEat = -64,
-                    Away = 0.12345f,
-                    OrULong = 888,
-                    OrUSkint = 8888888,
-                    OrUShort = 888888888888888,
-                    AndChew = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
-                }).Entity;
-            var blog2 = context.Add(
-                new TBlog
-                {
-                    Name = "Blog2",
-                    George = false,
-                    TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9CF"),
-                    NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 778),
-                    ToEat = 65,
-                    CupOfChar = 'D',
-                    OrNothing = 0.987654321,
-                    Fuse = 778,
-                    WayRound = 98765432100,
-                    NotToEat = -64,
-                    Away = 0.12345f,
-                    OrULong = 888,
-                    OrUSkint = 8888888,
-                    OrUShort = 888888888888888,
-                    AndChew = new byte[16]
-                }).Entity;
+            var blog1 =
+                context.Add(
+                    new TBlog
+                    {
+                        Name = "Blog1",
+                        George = true,
+                        TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9BF"),
+                        NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 777),
+                        ToEat = 64,
+                        CupOfChar = 'C',
+                        OrNothing = 0.123456789,
+                        Fuse = 777,
+                        WayRound = 9876543210,
+                        NotToEat = -64,
+                        Away = 0.12345f,
+                        OrULong = 888,
+                        OrUSkint = 8888888,
+                        OrUShort = 888888888888888,
+                        AndChew = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+                    }
+                ).Entity;
+            var blog2 =
+                context.Add(
+                    new TBlog
+                    {
+                        Name = "Blog2",
+                        George = false,
+                        TheGu = new Guid("0456AEF1-B7FC-47AA-8102-975D6BA3A9CF"),
+                        NotFigTime = new DateTime(1973, 9, 3, 0, 10, 33, 778),
+                        ToEat = 65,
+                        CupOfChar = 'D',
+                        OrNothing = 0.987654321,
+                        Fuse = 778,
+                        WayRound = 98765432100,
+                        NotToEat = -64,
+                        Away = 0.12345f,
+                        OrULong = 888,
+                        OrUSkint = 8888888,
+                        OrUShort = 888888888888888,
+                        AndChew = new byte[16]
+                    }
+                ).Entity;
             await context.SaveChangesAsync();
 
             return new[] { blog1, blog2 };
@@ -1423,10 +1414,7 @@ namespace Microsoft.EntityFrameworkCore
 
         private class NorthwindContext : DbContext
         {
-            public NorthwindContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public NorthwindContext(DbContextOptions options) : base(options) { }
 
             public DbSet<Customer> Customers { get; set; }
 
@@ -1437,7 +1425,8 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         b.HasKey(c => c.CustomerID);
                         b.ToTable("Customers");
-                    });
+                    }
+                );
             }
         }
 
@@ -1450,10 +1439,7 @@ namespace Microsoft.EntityFrameworkCore
 
         private class BloggingContext : BloggingContext<Blog>
         {
-            public BloggingContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public BloggingContext(DbContextOptions options) : base(options) { }
         }
 
         private class Blog : IBlog
@@ -1482,23 +1468,23 @@ namespace Microsoft.EntityFrameworkCore
             public byte[] AndChew { get; set; }
         }
 
-        private class BloggingContext<TBlog> : DbContext
-            where TBlog : class, IBlog
+        private class BloggingContext<TBlog> : DbContext where TBlog : class, IBlog
         {
-            public BloggingContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public BloggingContext(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 if (typeof(INotifyPropertyChanging).IsAssignableFrom(typeof(TBlog)))
                 {
-                    modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotifications);
+                    modelBuilder.HasChangeTrackingStrategy(
+                        ChangeTrackingStrategy.ChangingAndChangedNotifications
+                    );
                 }
                 else if (typeof(INotifyPropertyChanged).IsAssignableFrom(typeof(TBlog)))
                 {
-                    modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
+                    modelBuilder.HasChangeTrackingStrategy(
+                        ChangeTrackingStrategy.ChangedNotifications
+                    );
                 }
 
                 modelBuilder.Entity<TBlog>().ToTable("Blog", "dbo");
@@ -1785,11 +1771,11 @@ namespace Microsoft.EntityFrameworkCore
             public event PropertyChangingEventHandler PropertyChanging;
             public event PropertyChangedEventHandler PropertyChanged;
 
-            private void NotifyChanged([CallerMemberName] string propertyName = "")
-                => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            private void NotifyChanged([CallerMemberName] string propertyName = "") =>
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-            private void NotifyChanging([CallerMemberName] string propertyName = "")
-                => PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
+            private void NotifyChanging([CallerMemberName] string propertyName = "") =>
+                PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
         }
 
         private class ChangedOnlyBlog : INotifyPropertyChanged, IBlog
@@ -2027,8 +2013,8 @@ namespace Microsoft.EntityFrameworkCore
 
             public event PropertyChangedEventHandler PropertyChanged;
 
-            private void NotifyChanged([CallerMemberName] string propertyName = "")
-                => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            private void NotifyChanged([CallerMemberName] string propertyName = "") =>
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

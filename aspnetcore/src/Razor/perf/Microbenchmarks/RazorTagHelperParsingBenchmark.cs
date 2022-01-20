@@ -28,18 +28,31 @@ public class RazorTagHelperParsingBenchmark
         var tagHelpers = ReadTagHelpers(Path.Combine(root.FullName, "taghelpers.json"));
         var tagHelperFeature = new StaticTagHelperFeature(tagHelpers);
 
-        var blazorServerTagHelpersFilePath = Path.Combine(root.FullName, "BlazorServerTagHelpers.razor");
+        var blazorServerTagHelpersFilePath = Path.Combine(
+            root.FullName,
+            "BlazorServerTagHelpers.razor"
+        );
 
         var fileSystem = RazorProjectFileSystem.Create(root.FullName);
-        ProjectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, fileSystem,
+        ProjectEngine = RazorProjectEngine.Create(
+            RazorConfiguration.Default,
+            fileSystem,
             b =>
             {
                 RazorExtensions.Register(b);
                 b.Features.Add(tagHelperFeature);
-            });
-        BlazorServerTagHelpersDemoFile = fileSystem.GetItem(Path.Combine(blazorServerTagHelpersFilePath), FileKinds.Component);
+            }
+        );
+        BlazorServerTagHelpersDemoFile = fileSystem.GetItem(
+            Path.Combine(blazorServerTagHelpersFilePath),
+            FileKinds.Component
+        );
 
-        ComponentDirectiveVisitor = new ComponentDirectiveVisitor(blazorServerTagHelpersFilePath, tagHelpers, currentNamespace: null);
+        ComponentDirectiveVisitor = new ComponentDirectiveVisitor(
+            blazorServerTagHelpersFilePath,
+            tagHelpers,
+            currentNamespace: null
+        );
         var codeDocument = ProjectEngine.ProcessDesignTime(BlazorServerTagHelpersDemoFile);
         SyntaxTree = codeDocument.GetSyntaxTree();
     }
@@ -75,7 +88,8 @@ public class RazorTagHelperParsingBenchmark
 
     private sealed class StaticTagHelperFeature : RazorEngineFeatureBase, ITagHelperFeature
     {
-        public StaticTagHelperFeature(IReadOnlyList<TagHelperDescriptor> descriptors) => Descriptors = descriptors;
+        public StaticTagHelperFeature(IReadOnlyList<TagHelperDescriptor> descriptors) =>
+            Descriptors = descriptors;
 
         public IReadOnlyList<TagHelperDescriptor> Descriptors { get; }
 

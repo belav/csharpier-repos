@@ -10,7 +10,6 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
     public static class TripleDESContractTests
     {
-
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows7))]
         public static void Windows7DoesNotSupportCFB64()
         {
@@ -47,10 +46,12 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 {
                     // there are some key sizes that are invalid for any of the modes,
                     // so the exception is thrown in the setter
-                    Assert.Throws<CryptographicException>(() =>
-                    {
-                        tdes.FeedbackSize = feedbackSize;
-                    });
+                    Assert.Throws<CryptographicException>(
+                        () =>
+                        {
+                            tdes.FeedbackSize = feedbackSize;
+                        }
+                    );
                 }
                 else
                 {

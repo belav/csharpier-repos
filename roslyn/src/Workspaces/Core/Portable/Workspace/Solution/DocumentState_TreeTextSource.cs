@@ -22,14 +22,20 @@ namespace Microsoft.CodeAnalysis
             private readonly VersionStamp _version;
             private readonly string _filePath;
 
-            public TreeTextSource(ValueSource<SourceText> text, VersionStamp version, string filePath)
+            public TreeTextSource(
+                ValueSource<SourceText> text,
+                VersionStamp version,
+                string filePath
+            )
             {
                 _lazyText = text;
                 _version = version;
                 _filePath = filePath;
             }
 
-            public override async Task<TextAndVersion> GetValueAsync(CancellationToken cancellationToken = default)
+            public override async Task<TextAndVersion> GetValueAsync(
+                CancellationToken cancellationToken = default
+            )
             {
                 var text = await _lazyText.GetValueAsync(cancellationToken).ConfigureAwait(false);
                 return TextAndVersion.Create(text, _version, _filePath);

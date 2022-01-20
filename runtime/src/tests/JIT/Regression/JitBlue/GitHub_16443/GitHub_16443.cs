@@ -9,6 +9,7 @@ class Program
     struct vec2
     {
         public Vector2 value;
+
         public vec2(float x, float y) => value = new Vector2(x, y);
     }
 

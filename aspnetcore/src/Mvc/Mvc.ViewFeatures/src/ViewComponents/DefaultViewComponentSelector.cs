@@ -21,7 +21,9 @@ public class DefaultViewComponentSelector : IViewComponentSelector
     /// Creates a new <see cref="DefaultViewComponentSelector"/>.
     /// </summary>
     /// <param name="descriptorProvider">The <see cref="IViewComponentDescriptorCollectionProvider"/>.</param>
-    public DefaultViewComponentSelector(IViewComponentDescriptorCollectionProvider descriptorProvider)
+    public DefaultViewComponentSelector(
+        IViewComponentDescriptorCollectionProvider descriptorProvider
+    )
     {
         _descriptorProvider = descriptorProvider;
     }
@@ -79,7 +81,8 @@ public class DefaultViewComponentSelector : IViewComponentSelector
 
         private static ViewComponentDescriptor Select(
             ILookup<string, ViewComponentDescriptor> candidates,
-            string name)
+            string name
+        )
         {
             var matches = candidates[name];
 
@@ -97,14 +100,22 @@ public class DefaultViewComponentSelector : IViewComponentSelector
                 var matchedTypes = new List<string>();
                 foreach (var candidate in matches)
                 {
-                    matchedTypes.Add(Resources.FormatViewComponent_AmbiguousTypeMatch_Item(
-                        candidate.TypeInfo.FullName,
-                        candidate.FullName));
+                    matchedTypes.Add(
+                        Resources.FormatViewComponent_AmbiguousTypeMatch_Item(
+                            candidate.TypeInfo.FullName,
+                            candidate.FullName
+                        )
+                    );
                 }
 
                 var typeNames = string.Join(Environment.NewLine, matchedTypes);
                 throw new InvalidOperationException(
-                    Resources.FormatViewComponent_AmbiguousTypeMatch(name, Environment.NewLine, typeNames));
+                    Resources.FormatViewComponent_AmbiguousTypeMatch(
+                        name,
+                        Environment.NewLine,
+                        typeNames
+                    )
+                );
             }
         }
     }

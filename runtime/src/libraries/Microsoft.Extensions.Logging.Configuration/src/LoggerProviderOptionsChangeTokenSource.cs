@@ -6,10 +6,11 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.Extensions.Logging.Configuration
 {
     /// <inheritdoc />
-    public class LoggerProviderOptionsChangeTokenSource<TOptions, TProvider> : ConfigurationChangeTokenSource<TOptions>
+    public class LoggerProviderOptionsChangeTokenSource<TOptions, TProvider>
+        : ConfigurationChangeTokenSource<TOptions>
     {
-        public LoggerProviderOptionsChangeTokenSource(ILoggerProviderConfiguration<TProvider> providerConfiguration) : base(providerConfiguration.Configuration)
-        {
-        }
+        public LoggerProviderOptionsChangeTokenSource(
+            ILoggerProviderConfiguration<TProvider> providerConfiguration
+        ) : base(providerConfiguration.Configuration) { }
     }
 }

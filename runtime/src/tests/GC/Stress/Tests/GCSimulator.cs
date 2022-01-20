@@ -27,11 +27,7 @@ namespace GCSimulator
 
     public interface LifeTime
     {
-        LifeTimeENUM LifeTime
-        {
-            get;
-            set;
-        }
+        LifeTimeENUM LifeTime { get; set; }
     }
 
     public interface LifeTimeStrategy
@@ -57,12 +53,8 @@ namespace GCSimulator
         void AddObjectAt(T o, int index);
         T GetObject(int index);
         T SetObjectAt(T o, int index);
-        int Count
-        {
-            get;
-        }
+        int Count { get; }
     }
-
 
     public sealed class BinaryTreeObjectContainer<T> : ObjectContainer<T> where T : LifeTime
     {
@@ -73,8 +65,6 @@ namespace GCSimulator
             public int id;
             public T Data;
         }
-
-
 
         private Node _root;
         private int _count;
@@ -95,7 +85,7 @@ namespace GCSimulator
             _root = new Node();
             _root.id = 0;
             // the total number of objects in a binary search tree = (2^n+1) - 1
-            // where n is the depth of the tree 
+            // where n is the depth of the tree
             int depth = (int)Math.Log(numberOfObjects, 2);
 
             _count = numberOfObjects;
@@ -113,7 +103,6 @@ namespace GCSimulator
                 node.Data = o;
             }
         }
-
 
         public T GetObject(int index)
         {
@@ -143,13 +132,8 @@ namespace GCSimulator
 
         public int Count
         {
-            get
-            {
-                return _count;
-            }
+            get { return _count; }
         }
-
-
 
         private Node CreateTree(int depth, int id)
         {
@@ -157,7 +141,6 @@ namespace GCSimulator
             {
                 return null;
             }
-
 
             Node node = new Node();
             node.id = id;
@@ -173,7 +156,7 @@ namespace GCSimulator
             // we want to implement find and try to avoid creating temp objects..
             // Our Tree is fixed size,  we don;t allow modifying the actual
             // tree by adding or deleting nodes ( that would be more
-            // interesting, but would give us inconsistent perf numbers.           
+            // interesting, but would give us inconsistent perf numbers.
 
             // Traverse the tree ( slow, but avoids allocation ), we can write
             // another tree that is a BST, or use SortedList<T,T> which uses
@@ -196,12 +179,11 @@ namespace GCSimulator
         }
     }
 
-
-
     //#ArrayContainer Simple Array Stock Implemntation for ObjectContainer
     public sealed class ArrayObjectContainer<T> : ObjectContainer<T> where T : LifeTime
     {
         private T[] _objContainer = null;
+
         public void Init(int numberOfObjects)
         {
             _objContainer = new T[numberOfObjects];
@@ -226,14 +208,9 @@ namespace GCSimulator
 
         public int Count
         {
-            get
-            {
-                return _objContainer.Length;
-            }
+            get { return _objContainer.Length; }
         }
     }
-
-
 
     public delegate void ObjectDiedEventHandler(LifeTime o, int index);
 
@@ -242,7 +219,8 @@ namespace GCSimulator
         private LifeTimeStrategy _strategy;
 
         private ObjectContainer<LifeTime> _objectContainer = null;
-        // 
+
+        //
 
         public void SetObjectContainer(ObjectContainer<LifeTime> objectContainer)
         {
@@ -259,10 +237,7 @@ namespace GCSimulator
 
         public LifeTimeStrategy LifeTimeStrategy
         {
-            set
-            {
-                _strategy = value;
-            }
+            set { _strategy = value; }
         }
 
         public void AddObject(LifeTime o, int index)
@@ -286,7 +261,7 @@ namespace GCSimulator
                     int index = _strategy.NextObject(objLifeTime.LifeTime);
                     LifeTime oldObject = _objectContainer.SetObjectAt(null, index);
                     //objContainer[index] = null;
-                    // fire the event 
+                    // fire the event
                     objectDied(oldObject, index);
                 }
             }
@@ -310,19 +285,14 @@ namespace GCSimulator
             _mediumDataCount = mdc;
             _shortDataCount = sdc;
         }
+
         public int MediumLifeTime
         {
-            set
-            {
-                _mediumLifeTime = value;
-            }
+            set { _mediumLifeTime = value; }
         }
         public int ShortLifeTime
         {
-            set
-            {
-                _shortLifeTime = value;
-            }
+            set { _shortLifeTime = value; }
         }
 
         public int NextObject(LifeTimeENUM lifeTime)
@@ -335,12 +305,12 @@ namespace GCSimulator
                 case LifeTimeENUM.Medium:
                     return (_rand.Next() % _mediumDataCount) + _shortDataCount;
 
-
                 case LifeTimeENUM.Long:
                     return 0;
             }
             return 0;
         }
+
         public bool ShouldDie(LifeTime o, int index)
         {
             _counter++;
@@ -397,7 +367,7 @@ namespace GCSimulator
                 case LifeTimeENUM.Short:
                     if (Environment.TickCount - _lastShortTickCount > 1) // this is in accureat enumber, since
                     // we will be finsh iterating throuh the short life time object in less than 1 ms , so we need
-                    // to switch either to QueryPeroformanceCounter, or to block the loop for some time through 
+                    // to switch either to QueryPeroformanceCounter, or to block the loop for some time through
                     // Thread.Sleep, the other solution is to increase the number of objects a lot.
                     {
                         _lastShortTickCount = Environment.TickCount;
@@ -453,14 +423,8 @@ namespace GCSimulator
 
         public LifeTimeENUM LifeTime
         {
-            get
-            {
-                return _lifeTime;
-            }
-            set
-            {
-                _lifeTime = value;
-            }
+            get { return _lifeTime; }
+            set { _lifeTime = value; }
         }
 
         public bool IsPinned()
@@ -472,7 +436,6 @@ namespace GCSimulator
         {
             return _weakReferenced;
         }
-
 
         public void CleanUp()
         {
@@ -491,7 +454,6 @@ namespace GCSimulator
                 GC.SuppressFinalize(this);
             }
         }
-
 
         ~ObjectWrapper()
         {
@@ -536,7 +498,7 @@ namespace GCSimulator
 
         //keep track of the collection count for generations 0, 1, 2
         private static int[] s_currentCollections = new int[3];
-        private static int s_outputFrequency = 0; //after how many iterations the data is printed 
+        private static int s_outputFrequency = 0; //after how many iterations the data is printed
         private static System.TimeSpan s_totalTime;
 
         public static int Main(string[] args)
@@ -567,7 +529,6 @@ namespace GCSimulator
             return 100;
         }
 
-
         public static void RunTest()
         {
             // Allocate the objects.
@@ -597,10 +558,14 @@ namespace GCSimulator
 
             s_lifeTimeManager.Init(threadShortDataCount + threadMediumDataCount);
 
-
             if (threadStrategy.ToLower() == "random")
             {
-                ltStrategy = new RandomLifeTimeStrategy(threadMediumLifeTime, threadShortLifeTime, threadMediumDataCount, threadShortDataCount);
+                ltStrategy = new RandomLifeTimeStrategy(
+                    threadMediumLifeTime,
+                    threadShortLifeTime,
+                    threadMediumDataCount,
+                    threadShortDataCount
+                );
             }
             else
             {
@@ -642,7 +607,10 @@ namespace GCSimulator
 
             lock (s_objLock)
             {
-                Console.WriteLine("Thread {0} Running With Configuration: ", System.Threading.Thread.CurrentThread.ManagedThreadId);
+                Console.WriteLine(
+                    "Thread {0} Running With Configuration: ",
+                    System.Threading.Thread.CurrentThread.ManagedThreadId
+                );
                 Console.WriteLine("==============================");
                 Console.WriteLine("[Thread] Medium Lifetime " + threadMediumLifeTime);
                 Console.WriteLine("[Thread] Short Lifetime " + threadShortLifeTime);
@@ -658,7 +626,6 @@ namespace GCSimulator
                 Console.WriteLine("==============================");
             }
 
-
             for (int i = 0; i < s_countIters; ++i)
             {
                 // Run the test.
@@ -672,7 +639,10 @@ namespace GCSimulator
                         if (s_currentIterations % s_outputFrequency == 0)
                         {
                             Console.WriteLine("Iterations = {0}", s_currentIterations);
-                            Console.WriteLine("AllocatedMemory = {0} bytes", GC.GetTotalMemory(false));
+                            Console.WriteLine(
+                                "AllocatedMemory = {0} bytes",
+                                GC.GetTotalMemory(false)
+                            );
 
                             //get the number of collections and the elapsed time for this group of iterations
                             int[] collectionCount = new int[3];
@@ -738,7 +708,8 @@ namespace GCSimulator
 
             oWrapper = new ObjectWrapper(s_runFinalizer, oWrapper.IsPinned(), oWrapper.IsWeak());
             oWrapper.LifeTime = lifeTime.LifeTime;
-            oWrapper.DataSize = lifeTime.LifeTime == LifeTimeENUM.Short ? s_shortDataSize : s_mediumDataSize;
+            oWrapper.DataSize =
+                lifeTime.LifeTime == LifeTimeENUM.Short ? s_shortDataSize : s_mediumDataSize;
 
             s_lifeTimeManager.AddObject(oWrapper, index);
         }
@@ -784,86 +755,93 @@ namespace GCSimulator
                         currentArgValue = args[++i];
                         s_mediumDataSize = Int32.Parse(currentArgValue);
                     }
-
                     else if (currentArg.StartsWith("sdatasize") || currentArg.Equals("sdz"))
                     {
                         currentArgValue = args[++i];
                         s_shortDataSize = Int32.Parse(currentArgValue);
                     }
-
                     else if (currentArg.StartsWith("datacount") || currentArg.Equals("dc"))
                     {
                         currentArgValue = args[++i];
                         s_mediumDataCount = Int32.Parse(currentArgValue);
                     }
-
                     else if (currentArg.StartsWith("sdatacount") || currentArg.Equals("sdc"))
                     {
                         currentArgValue = args[++i];
                         s_shortDataCount = Int32.Parse(currentArgValue);
                     }
-
-
                     else if (currentArg.StartsWith("lifetime") || currentArg.Equals("lt"))
                     {
                         currentArgValue = args[++i];
                         s_shortLifeTime = Int32.Parse(currentArgValue);
                         s_mediumLifeTime = s_shortLifeTime * 10;
                     }
-
                     else if (currentArg.StartsWith("threads") || currentArg.Equals("t"))
                     {
                         currentArgValue = args[++i];
                         s_numThreads = Int32.Parse(currentArgValue);
                     }
-
                     else if (currentArg.StartsWith("fin") || currentArg.Equals("f"))
                     {
                         s_runFinalizer = true;
                     }
-
                     else if (currentArg.StartsWith("datapinned") || currentArg.StartsWith("dp")) // percentage data pinned
                     {
                         currentArgValue = args[++i];
-                        s_percentPinned = float.Parse(currentArgValue, System.Globalization.CultureInfo.InvariantCulture);
+                        s_percentPinned = float.Parse(
+                            currentArgValue,
+                            System.Globalization.CultureInfo.InvariantCulture
+                        );
                         if (s_percentPinned < 0 || s_percentPinned > 1)
                         {
                             Console.WriteLine("Error! datapinned should be a number from 0 to 1");
                             return false;
                         }
                     }
-
                     else if (currentArg.StartsWith("strategy")) //strategy that if the object died or not
                     {
                         currentArgValue = args[++i];
-                        if ((currentArgValue.ToLower() == "random") || (currentArgValue.ToLower() == "time"))
+                        if (
+                            (currentArgValue.ToLower() == "random")
+                            || (currentArgValue.ToLower() == "time")
+                        )
                             s_strategy = currentArgValue;
                         else
                         {
-                            Console.WriteLine("Error! Unexpected argument for strategy: {0}", currentArgValue);
+                            Console.WriteLine(
+                                "Error! Unexpected argument for strategy: {0}",
+                                currentArgValue
+                            );
                             return false;
                         }
                     }
-
                     else if (currentArg.StartsWith("dataweak") || currentArg.StartsWith("dw"))
                     {
                         currentArgValue = args[++i];
-                        s_percentWeak = float.Parse(currentArgValue, System.Globalization.CultureInfo.InvariantCulture);
+                        s_percentWeak = float.Parse(
+                            currentArgValue,
+                            System.Globalization.CultureInfo.InvariantCulture
+                        );
                         if (s_percentWeak < 0 || s_percentWeak > 1)
                         {
                             Console.WriteLine("Error! dataweak should be a number from 0 to 1");
                             return false;
                         }
                     }
-
                     else if (currentArg.StartsWith("objectgraph") || currentArg.StartsWith("og"))
                     {
                         currentArgValue = args[++i];
-                        if ((currentArgValue.ToLower() == "tree") || (currentArgValue.ToLower() == "list"))
+                        if (
+                            (currentArgValue.ToLower() == "tree")
+                            || (currentArgValue.ToLower() == "list")
+                        )
                             s_objectGraph = currentArgValue;
                         else
                         {
-                            Console.WriteLine("Error! Unexpected argument for objectgraph: {0}", currentArgValue);
+                            Console.WriteLine(
+                                "Error! Unexpected argument for objectgraph: {0}",
+                                currentArgValue
+                            );
                             return false;
                         }
                     }
@@ -888,27 +866,60 @@ namespace GCSimulator
             return true;
         }
 
-
         public static void Usage()
         {
             Console.WriteLine("GCSimulator [-?] [options]");
             Console.WriteLine("\nOptions");
             Console.WriteLine("\nGlobal:");
             Console.WriteLine("-? Display the usage and exit");
-            Console.WriteLine("-i [-iter] <num iterations> : specify number of iterations for the test, default is " + s_countIters);
+            Console.WriteLine(
+                "-i [-iter] <num iterations> : specify number of iterations for the test, default is "
+                    + s_countIters
+            );
             Console.WriteLine("\nThreads:");
-            Console.WriteLine("-t [-threads] <number of threads> : specifiy number of threads, default is " + s_numThreads);
+            Console.WriteLine(
+                "-t [-threads] <number of threads> : specifiy number of threads, default is "
+                    + s_numThreads
+            );
             Console.WriteLine("\nData:");
-            Console.WriteLine("-dz [-datasize] <data size> : specify the data size in bytes, default is " + s_mediumDataSize);
-            Console.WriteLine("-sdz [sdatasize] <data size> : specify the short lived  data size in bytes, default is " + s_shortDataSize);
-            Console.WriteLine("-dc [datacount] <data count> : specify the medium lived  data count, default is " + s_mediumDataCount);
-            Console.WriteLine("-sdc [sdatacount] <data count> : specify the short lived  data count, default is " + s_shortDataCount);
-            Console.WriteLine("-lt [-lifetime] <number> : specify the life time of the objects, default is " + s_shortLifeTime);
-            Console.WriteLine("-f [-fin]  : specify whether to do allocation in finalizer or not, default is no");
-            Console.WriteLine("-dp [-datapinned] <percent of data pinned> : specify the percentage of data that we want to pin (number from 0 to 1), default is " + s_percentPinned);
-            Console.WriteLine("-dw [-dataweak] <percent of data weak referenced> : specify the percentage of data that we want to weak reference, (number from 0 to 1) default is " + s_percentWeak);
-            Console.WriteLine("-strategy < indicate the strategy for deciding when the objects should die, right now we support only Random and Time strategy, default is Random");
-            Console.WriteLine("-og [-objectgraph] <List|Tree> : specify whether to use a List- or Tree-based object graph, default is " + s_objectGraph);
+            Console.WriteLine(
+                "-dz [-datasize] <data size> : specify the data size in bytes, default is "
+                    + s_mediumDataSize
+            );
+            Console.WriteLine(
+                "-sdz [sdatasize] <data size> : specify the short lived  data size in bytes, default is "
+                    + s_shortDataSize
+            );
+            Console.WriteLine(
+                "-dc [datacount] <data count> : specify the medium lived  data count, default is "
+                    + s_mediumDataCount
+            );
+            Console.WriteLine(
+                "-sdc [sdatacount] <data count> : specify the short lived  data count, default is "
+                    + s_shortDataCount
+            );
+            Console.WriteLine(
+                "-lt [-lifetime] <number> : specify the life time of the objects, default is "
+                    + s_shortLifeTime
+            );
+            Console.WriteLine(
+                "-f [-fin]  : specify whether to do allocation in finalizer or not, default is no"
+            );
+            Console.WriteLine(
+                "-dp [-datapinned] <percent of data pinned> : specify the percentage of data that we want to pin (number from 0 to 1), default is "
+                    + s_percentPinned
+            );
+            Console.WriteLine(
+                "-dw [-dataweak] <percent of data weak referenced> : specify the percentage of data that we want to weak reference, (number from 0 to 1) default is "
+                    + s_percentWeak
+            );
+            Console.WriteLine(
+                "-strategy < indicate the strategy for deciding when the objects should die, right now we support only Random and Time strategy, default is Random"
+            );
+            Console.WriteLine(
+                "-og [-objectgraph] <List|Tree> : specify whether to use a List- or Tree-based object graph, default is "
+                    + s_objectGraph
+            );
             Console.WriteLine("-out <iterations> : after how many iterations to output data");
         }
     }

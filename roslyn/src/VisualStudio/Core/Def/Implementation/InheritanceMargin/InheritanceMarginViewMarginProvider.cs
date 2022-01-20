@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IViewTagAggregatorFactoryService tagAggregatorFactoryService,
             IEditorFormatMapService editorFormatMapService,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _threadingContext = threadingContext;
             _streamingFindUsagesPresenter = streamingFindUsagesPresenter;
@@ -61,13 +62,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             _listenerProvider = listenerProvider;
         }
 
-        public IWpfTextViewMargin? CreateMargin(IWpfTextViewHost wpfTextViewHost, IWpfTextViewMargin marginContainer)
+        public IWpfTextViewMargin? CreateMargin(
+            IWpfTextViewHost wpfTextViewHost,
+            IWpfTextViewMargin marginContainer
+        )
         {
             var textView = wpfTextViewHost.TextView;
-            var tagAggregator = _tagAggregatorFactoryService.CreateTagAggregator<InheritanceMarginTag>(textView);
+            var tagAggregator =
+                _tagAggregatorFactoryService.CreateTagAggregator<InheritanceMarginTag>(textView);
             var editorFormatMap = _editorFormatMapService.GetEditorFormatMap(textView);
 
-            var document = wpfTextViewHost.TextView.TextBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                wpfTextViewHost.TextView.TextBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return null;
@@ -85,7 +91,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 editorFormatMap,
                 _globalOptions,
                 listener,
-                document.Project.Language);
+                document.Project.Language
+            );
         }
     }
 }

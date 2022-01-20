@@ -9,6 +9,7 @@ namespace Test
     class BB
     {
         public static ulong m_ulStatic1 = 237u;
+
         public static int Main()
         {
             try { }

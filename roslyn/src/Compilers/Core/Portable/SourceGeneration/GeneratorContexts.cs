@@ -9,6 +9,7 @@ using System.Threading;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Text;
+
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
@@ -20,14 +21,23 @@ namespace Microsoft.CodeAnalysis
 
         private readonly AdditionalSourcesCollection _additionalSources;
 
-        internal GeneratorExecutionContext(Compilation compilation, ParseOptions parseOptions, ImmutableArray<AdditionalText> additionalTexts, AnalyzerConfigOptionsProvider optionsProvider, ISyntaxContextReceiver? syntaxReceiver, string sourceExtension, CancellationToken cancellationToken = default)
+        internal GeneratorExecutionContext(
+            Compilation compilation,
+            ParseOptions parseOptions,
+            ImmutableArray<AdditionalText> additionalTexts,
+            AnalyzerConfigOptionsProvider optionsProvider,
+            ISyntaxContextReceiver? syntaxReceiver,
+            string sourceExtension,
+            CancellationToken cancellationToken = default
+        )
         {
             Compilation = compilation;
             ParseOptions = parseOptions;
             AdditionalFiles = additionalTexts;
             AnalyzerConfigOptions = optionsProvider;
             SyntaxReceiver = (syntaxReceiver as SyntaxContextReceiverAdaptor)?.Receiver;
-            SyntaxContextReceiver = (syntaxReceiver is SyntaxContextReceiverAdaptor) ? null : syntaxReceiver;
+            SyntaxContextReceiver =
+                (syntaxReceiver is SyntaxContextReceiverAdaptor) ? null : syntaxReceiver;
             CancellationToken = cancellationToken;
             _additionalSources = new AdditionalSourcesCollection(sourceExtension);
             _diagnostics = new DiagnosticBag();
@@ -78,14 +88,16 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
         /// <param name="source">The source code to add to the compilation</param>
-        public void AddSource(string hintName, string source) => AddSource(hintName, SourceText.From(source, Encoding.UTF8));
+        public void AddSource(string hintName, string source) =>
+            AddSource(hintName, SourceText.From(source, Encoding.UTF8));
 
         /// <summary>
         /// Adds a <see cref="SourceText"/> to the compilation
         /// </summary>
         /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
         /// <param name="sourceText">The <see cref="SourceText"/> to add to the compilation</param>
-        public void AddSource(string hintName, SourceText sourceText) => _additionalSources.Add(hintName, sourceText);
+        public void AddSource(string hintName, SourceText sourceText) =>
+            _additionalSources.Add(hintName, sourceText);
 
         /// <summary>
         /// Adds a <see cref="Diagnostic"/> to the users compilation 
@@ -96,8 +108,8 @@ namespace Microsoft.CodeAnalysis
         /// </remarks>
         public void ReportDiagnostic(Diagnostic diagnostic) => _diagnostics.Add(diagnostic);
 
-        internal (ImmutableArray<GeneratedSourceText> sources, ImmutableArray<Diagnostic> diagnostics) ToImmutableAndFree()
-            => (_additionalSources.ToImmutableAndFree(), _diagnostics.ToReadOnlyAndFree());
+        internal (ImmutableArray<GeneratedSourceText> sources, ImmutableArray<Diagnostic> diagnostics) ToImmutableAndFree() =>
+            (_additionalSources.ToImmutableAndFree(), _diagnostics.ToReadOnlyAndFree());
 
         internal void Free()
         {
@@ -148,8 +160,13 @@ namespace Microsoft.CodeAnalysis
         /// <param name="receiverCreator">A <see cref="SyntaxReceiverCreator"/> that can be invoked to create an instance of <see cref="ISyntaxReceiver"/></param>
         public void RegisterForSyntaxNotifications(SyntaxReceiverCreator receiverCreator)
         {
-            CheckIsEmpty(InfoBuilder.SyntaxContextReceiverCreator, $"{nameof(SyntaxReceiverCreator)} / {nameof(SyntaxContextReceiverCreator)}");
-            InfoBuilder.SyntaxContextReceiverCreator = SyntaxContextReceiverAdaptor.Create(receiverCreator);
+            CheckIsEmpty(
+                InfoBuilder.SyntaxContextReceiverCreator,
+                $"{nameof(SyntaxReceiverCreator)} / {nameof(SyntaxContextReceiverCreator)}"
+            );
+            InfoBuilder.SyntaxContextReceiverCreator = SyntaxContextReceiverAdaptor.Create(
+                receiverCreator
+            );
         }
 
         /// <summary>
@@ -170,7 +187,10 @@ namespace Microsoft.CodeAnalysis
         /// <param name="receiverCreator">A <see cref="SyntaxContextReceiverCreator"/> that can be invoked to create an instance of <see cref="ISyntaxContextReceiver"/></param>
         public void RegisterForSyntaxNotifications(SyntaxContextReceiverCreator receiverCreator)
         {
-            CheckIsEmpty(InfoBuilder.SyntaxContextReceiverCreator, $"{nameof(SyntaxReceiverCreator)} / {nameof(SyntaxContextReceiverCreator)}");
+            CheckIsEmpty(
+                InfoBuilder.SyntaxContextReceiverCreator,
+                $"{nameof(SyntaxReceiverCreator)} / {nameof(SyntaxContextReceiverCreator)}"
+            );
             InfoBuilder.SyntaxContextReceiverCreator = receiverCreator;
         }
 
@@ -188,17 +208,30 @@ namespace Microsoft.CodeAnalysis
         /// Note that any sources added during PostInitialization <i>will</i> be visible to the later phases of other generators operating on the compilation. 
         /// </remarks>
         /// <param name="callback">An <see cref="Action{T}"/> that accepts a <see cref="GeneratorPostInitializationContext"/> that will be invoked after initialization.</param>
-        public void RegisterForPostInitialization(Action<GeneratorPostInitializationContext> callback)
+        public void RegisterForPostInitialization(
+            Action<GeneratorPostInitializationContext> callback
+        )
         {
             CheckIsEmpty(InfoBuilder.PostInitCallback);
-            InfoBuilder.PostInitCallback = (context) => callback(new GeneratorPostInitializationContext(context.AdditionalSources, context.CancellationToken));
+            InfoBuilder.PostInitCallback = (context) =>
+                callback(
+                    new GeneratorPostInitializationContext(
+                        context.AdditionalSources,
+                        context.CancellationToken
+                    )
+                );
         }
 
         private static void CheckIsEmpty<T>(T x, string? typeName = null) where T : class?
         {
             if (x is object)
             {
-                throw new InvalidOperationException(string.Format(CodeAnalysisResources.Single_type_per_generator_0, typeName ?? typeof(T).Name));
+                throw new InvalidOperationException(
+                    string.Format(
+                        CodeAnalysisResources.Single_type_per_generator_0,
+                        typeName ?? typeof(T).Name
+                    )
+                );
             }
         }
     }
@@ -232,7 +265,10 @@ namespace Microsoft.CodeAnalysis
     {
         private readonly AdditionalSourcesCollection _additionalSources;
 
-        internal GeneratorPostInitializationContext(AdditionalSourcesCollection additionalSources, CancellationToken cancellationToken)
+        internal GeneratorPostInitializationContext(
+            AdditionalSourcesCollection additionalSources,
+            CancellationToken cancellationToken
+        )
         {
             _additionalSources = additionalSources;
             CancellationToken = cancellationToken;
@@ -248,13 +284,15 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
         /// <param name="source">The source code to add to the compilation</param>
-        public void AddSource(string hintName, string source) => AddSource(hintName, SourceText.From(source, Encoding.UTF8));
+        public void AddSource(string hintName, string source) =>
+            AddSource(hintName, SourceText.From(source, Encoding.UTF8));
 
         /// <summary>
         /// Adds a <see cref="SourceText"/> to the compilation that will be available during subsequent phases
         /// </summary>
         /// <param name="hintName">An identifier that can be used to reference this source text, must be unique within this generator</param>
         /// <param name="sourceText">The <see cref="SourceText"/> to add to the compilation</param>
-        public void AddSource(string hintName, SourceText sourceText) => _additionalSources.Add(hintName, sourceText);
+        public void AddSource(string hintName, SourceText sourceText) =>
+            _additionalSources.Add(hintName, sourceText);
     }
 }

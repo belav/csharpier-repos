@@ -21,12 +21,13 @@ public class LocalizationSampleTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .UseStartup(typeof(Startup));
-            }).Build();
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().UseStartup(typeof(Startup));
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -35,7 +36,10 @@ public class LocalizationSampleTest
         var client = testHost.CreateClient();
         var request = new HttpRequestMessage(HttpMethod.Get, "My/Resources");
         var cookieValue = $"c={locale}|uic={locale}";
-        request.Headers.Add("Cookie", $"{CookieRequestCultureProvider.DefaultCookieName}={cookieValue}");
+        request.Headers.Add(
+            "Cookie",
+            $"{CookieRequestCultureProvider.DefaultCookieName}={cookieValue}"
+        );
 
         // Act
         var response = await client.SendAsync(request);

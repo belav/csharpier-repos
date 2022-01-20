@@ -33,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             PropertyInfo? propertyInfo,
             FieldInfo? fieldInfo,
             RuntimeEntityType declaringEntityType,
-            PropertyAccessMode propertyAccessMode)
-            : base(name, propertyInfo, fieldInfo, propertyAccessMode)
+            PropertyAccessMode propertyAccessMode
+        ) : base(name, propertyInfo, fieldInfo, propertyAccessMode)
         {
             Check.NotNull(declaringEntityType, nameof(declaringEntityType));
 
@@ -57,15 +57,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         public virtual ServiceParameterBinding ParameterBinding
         {
-            get => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _parameterBinding, (IServiceProperty)this, static property =>
+            get =>
+                NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _parameterBinding,
+                    (IServiceProperty)this,
+                    static property =>
                     {
                         var entityType = property.DeclaringEntityType;
-                        var factory = entityType.Model.GetModelDependencies().ParameterBindingFactories
-                            .FindFactory(property.ClrType, property.Name)!;
-                        return (ServiceParameterBinding)factory.Bind(entityType, property.ClrType, property.Name);
-                    });
-
+                        var factory = entityType.Model
+                            .GetModelDependencies()
+                            .ParameterBindingFactories.FindFactory(
+                                property.ClrType,
+                                property.Name
+                            )!;
+                        return (ServiceParameterBinding)factory.Bind(
+                            entityType,
+                            property.ClrType,
+                            property.Name
+                        );
+                    }
+                );
             [DebuggerStepThrough]
             set => _parameterBinding = value;
         }
@@ -74,8 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns a string that represents the current object.
         /// </summary>
         /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-            => ((IServiceProperty)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((IServiceProperty)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -84,10 +95,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public virtual DebugView DebugView
-            => new(
+        public virtual DebugView DebugView =>
+            new(
                 () => ((IServiceProperty)this).ToDebugString(),
-                () => ((IServiceProperty)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+                () => ((IServiceProperty)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+            );
 
         /// <inheritdoc />
         IReadOnlyEntityType IReadOnlyServiceProperty.DeclaringEntityType

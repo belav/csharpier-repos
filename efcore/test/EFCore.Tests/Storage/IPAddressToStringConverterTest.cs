@@ -9,8 +9,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
 {
     public class IPAddressToStringConverterTest
     {
-        private static readonly IPAddressToStringConverter _ipAddressToString
-            = new();
+        private static readonly IPAddressToStringConverter _ipAddressToString = new();
 
         [ConditionalTheory]
         [InlineData("255.255.255.255")]
@@ -48,9 +47,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var converter = _ipAddressToString.ConvertFromProviderExpression.Compile();
 
-            Assert.Equal(
-                IPAddress.Parse(ipv4),
-                converter(ipv4));
+            Assert.Equal(IPAddress.Parse(ipv4), converter(ipv4));
         }
 
         [ConditionalTheory]
@@ -63,9 +60,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var converter = _ipAddressToString.ConvertFromProviderExpression.Compile();
 
-            Assert.Equal(
-                IPAddress.Parse(ipv6),
-                converter(ipv6));
+            Assert.Equal(IPAddress.Parse(ipv6), converter(ipv6));
         }
     }
 }

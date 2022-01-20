@@ -127,14 +127,11 @@ namespace Microsoft.EntityFrameworkCore
             public DbSet<Marmite> Food { get; set; }
             public DbSet<Marmite> Beverage { get; set; }
 
-            public DbSet<BothEntity> Bovrils
-                => Set<BothEntity>("Bovril");
+            public DbSet<BothEntity> Bovrils => Set<BothEntity>("Bovril");
 
-            public DbSet<BothEntity> Beefs
-                => Set<BothEntity>("Beefy");
+            public DbSet<BothEntity> Beefs => Set<BothEntity>("Beefy");
 
-            public DbSet<VeggieEntity> Imposters
-                => Set<VeggieEntity>("Imposter");
+            public DbSet<VeggieEntity> Imposters => Set<VeggieEntity>("Imposter");
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {

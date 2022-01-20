@@ -74,11 +74,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="mapping">The mapping, if any.</param>
         /// <param name="property">The property, if any.</param>
-        protected virtual void ValidateMapping(
-            CoreTypeMapping? mapping,
-            IProperty? property)
-        {
-        }
+        protected virtual void ValidateMapping(CoreTypeMapping? mapping, IProperty? property) { }
 
         /// <summary>
         ///     Finds the type mapping for a given <see cref="IProperty" />.

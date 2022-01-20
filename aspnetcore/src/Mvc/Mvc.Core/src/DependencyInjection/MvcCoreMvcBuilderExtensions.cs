@@ -26,7 +26,8 @@ public static class MvcCoreMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddMvcOptions(
         this IMvcBuilder builder,
-        Action<MvcOptions> setupAction)
+        Action<MvcOptions> setupAction
+    )
     {
         if (builder == null)
         {
@@ -50,7 +51,8 @@ public static class MvcCoreMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddJsonOptions(
         this IMvcBuilder builder,
-        Action<JsonOptions> configure)
+        Action<JsonOptions> configure
+    )
     {
         if (builder == null)
         {
@@ -74,7 +76,8 @@ public static class MvcCoreMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddFormatterMappings(
         this IMvcBuilder builder,
-        Action<FormatterMappings> setupAction)
+        Action<FormatterMappings> setupAction
+    )
     {
         if (builder == null)
         {
@@ -109,14 +112,16 @@ public static class MvcCoreMvcBuilderExtensions
             throw new ArgumentNullException(nameof(assembly));
         }
 
-        builder.ConfigureApplicationPartManager(manager =>
-        {
-            var partFactory = ApplicationPartFactory.GetApplicationPartFactory(assembly);
-            foreach (var applicationPart in partFactory.GetApplicationParts(assembly))
+        builder.ConfigureApplicationPartManager(
+            manager =>
             {
-                manager.ApplicationParts.Add(applicationPart);
+                var partFactory = ApplicationPartFactory.GetApplicationPartFactory(assembly);
+                foreach (var applicationPart in partFactory.GetApplicationParts(assembly))
+                {
+                    manager.ApplicationParts.Add(applicationPart);
+                }
             }
-        });
+        );
 
         return builder;
     }
@@ -130,7 +135,8 @@ public static class MvcCoreMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder ConfigureApplicationPartManager(
         this IMvcBuilder builder,
-        Action<ApplicationPartManager> setupAction)
+        Action<ApplicationPartManager> setupAction
+    )
     {
         if (builder == null)
         {
@@ -167,7 +173,9 @@ public static class MvcCoreMvcBuilderExtensions
             builder.Services.TryAddTransient(controller, controller);
         }
 
-        builder.Services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
+        builder.Services.Replace(
+            ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>()
+        );
 
         return builder;
     }
@@ -178,10 +186,15 @@ public static class MvcCoreMvcBuilderExtensions
     /// <param name="builder">The <see cref="IMvcBuilder"/>.</param>
     /// <param name="version">The <see cref="CompatibilityVersion"/> value to configure.</param>
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
-    [Obsolete("This API is obsolete and will be removed in a future version. Consider removing usages.",
+    [Obsolete(
+        "This API is obsolete and will be removed in a future version. Consider removing usages.",
         DiagnosticId = "ASP5001",
-        UrlFormat = "https://aka.ms/aspnetcore-warnings/{0}")]
-    public static IMvcBuilder SetCompatibilityVersion(this IMvcBuilder builder, CompatibilityVersion version)
+        UrlFormat = "https://aka.ms/aspnetcore-warnings/{0}"
+    )]
+    public static IMvcBuilder SetCompatibilityVersion(
+        this IMvcBuilder builder,
+        CompatibilityVersion version
+    )
     {
         if (builder == null)
         {
@@ -200,7 +213,8 @@ public static class MvcCoreMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder ConfigureApiBehaviorOptions(
         this IMvcBuilder builder,
-        Action<ApiBehaviorOptions> setupAction)
+        Action<ApiBehaviorOptions> setupAction
+    )
     {
         if (builder == null)
         {

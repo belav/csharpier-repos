@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             EntityEntry entityEntry,
             IProperty property,
-            object? value)
-            : base(eventDefinition, messageGenerator, property)
+            object? value
+        ) : base(eventDefinition, messageGenerator, property)
         {
             EntityEntry = entityEntry;
             Value = value;
@@ -45,8 +45,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     The property.
         /// </summary>
-        public new virtual IProperty Property
-            => (IProperty)base.Property;
+        public new virtual IProperty Property => (IProperty)base.Property;
 
         /// <summary>
         ///     The value.

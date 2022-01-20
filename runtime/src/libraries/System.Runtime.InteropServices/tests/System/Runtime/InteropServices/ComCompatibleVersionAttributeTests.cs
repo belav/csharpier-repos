@@ -7,6 +7,7 @@ using Xunit;
 
 [assembly: ComCompatibleVersion(1, 2, 3, 4)]
 
+
 namespace System.Runtime.InteropServices.Tests
 {
     public class ComCompatibleVersionAttributeTests
@@ -16,7 +17,9 @@ namespace System.Runtime.InteropServices.Tests
         {
             Type type = typeof(ComCompatibleVersionAttributeTests);
             Assembly assembly = type.GetTypeInfo().Assembly;
-            ComCompatibleVersionAttribute attribute = Assert.Single(assembly.GetCustomAttributes<ComCompatibleVersionAttribute>());
+            ComCompatibleVersionAttribute attribute = Assert.Single(
+                assembly.GetCustomAttributes<ComCompatibleVersionAttribute>()
+            );
             Assert.Equal(1, attribute.MajorVersion);
             Assert.Equal(2, attribute.MinorVersion);
             Assert.Equal(3, attribute.BuildNumber);

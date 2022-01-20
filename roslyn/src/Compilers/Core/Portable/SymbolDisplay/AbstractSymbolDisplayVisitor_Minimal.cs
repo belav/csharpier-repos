@@ -21,9 +21,10 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
 
         protected bool NameBoundSuccessfullyToSameSymbol(INamedTypeSymbol symbol)
         {
-            ImmutableArray<ISymbol> normalSymbols = ShouldRestrictMinimallyQualifyLookupToNamespacesAndTypes()
-                ? semanticModelOpt.LookupNamespacesAndTypes(positionOpt, name: symbol.Name)
-                : semanticModelOpt.LookupSymbols(positionOpt, name: symbol.Name);
+            ImmutableArray<ISymbol> normalSymbols =
+                ShouldRestrictMinimallyQualifyLookupToNamespacesAndTypes()
+                  ? semanticModelOpt.LookupNamespacesAndTypes(positionOpt, name: symbol.Name)
+                  : semanticModelOpt.LookupSymbols(positionOpt, name: symbol.Name);
             ISymbol normalSymbol = SingleSymbolWithArity(normalSymbols, symbol.Arity);
 
             if (normalSymbol == null)
@@ -40,7 +41,10 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
 
             // Binding normally failed.  We may be in a "Color Color" situation where 'Color'
             // will bind to the field, but we could still allow simplification here.
-            ImmutableArray<ISymbol> typeOnlySymbols = semanticModelOpt.LookupNamespacesAndTypes(positionOpt, name: symbol.Name);
+            ImmutableArray<ISymbol> typeOnlySymbols = semanticModelOpt.LookupNamespacesAndTypes(
+                positionOpt,
+                name: symbol.Name
+            );
             ISymbol typeOnlySymbol = SingleSymbolWithArity(typeOnlySymbols, symbol.Arity);
 
             if (typeOnlySymbol == null)
@@ -51,14 +55,16 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
             var type1 = GetSymbolType(normalSymbol);
             var type2 = GetSymbolType(typeOnlySymbol);
 
-            return
-                type1 != null &&
-                type2 != null &&
-                type1.Equals(type2) &&
-                typeOnlySymbol.Equals(symbol.OriginalDefinition);
+            return type1 != null
+                && type2 != null
+                && type1.Equals(type2)
+                && typeOnlySymbol.Equals(symbol.OriginalDefinition);
         }
 
-        private static ISymbol SingleSymbolWithArity(ImmutableArray<ISymbol> candidates, int desiredArity)
+        private static ISymbol SingleSymbolWithArity(
+            ImmutableArray<ISymbol> candidates,
+            int desiredArity
+        )
         {
             ISymbol singleSymbol = null;
             foreach (ISymbol candidate in candidates)

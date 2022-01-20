@@ -9,7 +9,11 @@ namespace System.Linq.Parallel.Tests
     public static class AsSequentialTests
     {
         [Theory]
-        [MemberData(nameof(UnorderedSources.Ranges), new[] { 0, 1, 2, 16 }, MemberType = typeof(UnorderedSources))]
+        [MemberData(
+            nameof(UnorderedSources.Ranges),
+            new[] { 0, 1, 2, 16 },
+            MemberType = typeof(UnorderedSources)
+        )]
         public static void AsSequential_Unordered(Labeled<ParallelQuery<int>> labeled, int count)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
@@ -20,8 +24,14 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(UnorderedSources.OuterLoopRanges), MemberType = typeof(UnorderedSources))]
-        public static void AsSequential_Unordered_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        [MemberData(
+            nameof(UnorderedSources.OuterLoopRanges),
+            MemberType = typeof(UnorderedSources)
+        )]
+        public static void AsSequential_Unordered_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             AsSequential_Unordered(labeled, count);
         }
@@ -62,9 +72,15 @@ namespace System.Linq.Parallel.Tests
             Assert.False(seq.Distinct() is ParallelQuery<int>);
             Assert.False(seq.Except(Enumerable.Range(0, count)) is ParallelQuery<int>);
             Assert.False(seq.GroupBy(x => x) is ParallelQuery<int>);
-            Assert.False(seq.GroupJoin(Enumerable.Range(0, count), x => x, y => y, (x, g) => x) is ParallelQuery<int>);
+            Assert.False(
+                seq.GroupJoin(Enumerable.Range(0, count), x => x, y => y, (x, g) => x)
+                    is ParallelQuery<int>
+            );
             Assert.False(seq.Intersect(Enumerable.Range(0, count)) is ParallelQuery<int>);
-            Assert.False(seq.Join(Enumerable.Range(0, count), x => x, y => y, (x, y) => x) is ParallelQuery<int>);
+            Assert.False(
+                seq.Join(Enumerable.Range(0, count), x => x, y => y, (x, y) => x)
+                    is ParallelQuery<int>
+            );
             Assert.False(seq.OfType<int>() is ParallelQuery<int>);
             Assert.False(seq.OrderBy(x => x) is ParallelQuery<int>);
             Assert.False(seq.OrderByDescending(x => x) is ParallelQuery<int>);
@@ -83,7 +99,10 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void AsSequential_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<int>)null).AsSequential());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<int>)null).AsSequential()
+            );
         }
     }
 }

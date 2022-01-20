@@ -42,9 +42,12 @@ internal partial class StatusCodeResult : IResult
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information,
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
             "Executing StatusCodeResult, setting HTTP status code {StatusCode}.",
-            EventName = "StatusCodeResultExecuting")]
+            EventName = "StatusCodeResultExecuting"
+        )]
         public static partial void StatusCodeResultExecuting(ILogger logger, int statusCode);
     }
 }

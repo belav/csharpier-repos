@@ -29,7 +29,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             }
         }
 
-        public override bool IsEnabled(string name)
-            => name == EnableFor;
+        public override bool IsEnabled(string name) => name == EnableFor;
     }
 }

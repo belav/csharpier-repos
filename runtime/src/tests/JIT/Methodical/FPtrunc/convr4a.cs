@@ -19,9 +19,11 @@ public class CL
     //used for add and sub
     public float f1 = 1.0F;
     public float delta1 = 1.0E-10F;
+
     //used for mul and div
     public int a1 = 3;
     public float b1 = (1.0F / 3.0F);
+
     //used as temp variable
     public float temp;
 }

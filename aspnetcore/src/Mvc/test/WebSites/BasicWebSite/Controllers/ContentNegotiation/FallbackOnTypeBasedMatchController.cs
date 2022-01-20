@@ -17,7 +17,9 @@ public class FallbackOnTypeBasedMatchController : Controller
     public FallbackOnTypeBasedMatchController(IOptions<MvcOptions> mvcOptions)
     {
         _mvcOptions = mvcOptions;
-        _jsonOutputFormatter = mvcOptions.Value.OutputFormatters.OfType<NewtonsoftJsonOutputFormatter>().First();
+        _jsonOutputFormatter = mvcOptions.Value.OutputFormatters
+            .OfType<NewtonsoftJsonOutputFormatter>()
+            .First();
     }
 
     public int UseTheFallback_WithDefaultFormatters(int input)
@@ -70,8 +72,7 @@ public class FallbackOnTypeBasedMatchController : Controller
         return objectResult;
     }
 
-    public IActionResult ReturnString(
-        [FromServices] IOptions<MvcOptions> optionsAccessor)
+    public IActionResult ReturnString([FromServices] IOptions<MvcOptions> optionsAccessor)
     {
         var objectResult = new ObjectResult("Hello World!");
 

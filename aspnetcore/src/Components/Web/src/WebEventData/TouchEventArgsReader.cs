@@ -22,7 +22,9 @@ internal static class TouchEventArgsReader
     private static readonly JsonEncodedText MetaKey = JsonEncodedText.Encode("metaKey");
     private static readonly JsonEncodedText Type = JsonEncodedText.Encode("type");
     private static readonly JsonEncodedText Identifier = JsonEncodedText.Encode("identifier");
-    private static readonly JsonEncodedText ChangedTouches = JsonEncodedText.Encode("changedTouches");
+    private static readonly JsonEncodedText ChangedTouches = JsonEncodedText.Encode(
+        "changedTouches"
+    );
     private static readonly JsonEncodedText TargetTouches = JsonEncodedText.Encode("targetTouches");
     private static readonly JsonEncodedText Touches = JsonEncodedText.Encode("touches");
 

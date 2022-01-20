@@ -25,7 +25,6 @@
 
 using Xunit;
 
-
 namespace System.Data.Tests
 {
     public class DeletedRowInaccessibleExceptionTest
@@ -40,22 +39,28 @@ namespace System.Data.Tests
             dr.Delete();
 
             // DeletedRowInaccessible Exception (BeginEdit)
-            Assert.Throws<DeletedRowInaccessibleException>(() =>
-            {
-                dr.BeginEdit();
-            });
+            Assert.Throws<DeletedRowInaccessibleException>(
+                () =>
+                {
+                    dr.BeginEdit();
+                }
+            );
 
             // DeletedRowInaccessible Exception (Item)
-            Assert.Throws<DeletedRowInaccessibleException>(() =>
-            {
-                string s = dr[0].ToString();
-            });
+            Assert.Throws<DeletedRowInaccessibleException>(
+                () =>
+                {
+                    string s = dr[0].ToString();
+                }
+            );
 
             // DeletedRowInaccessible Exception (ItemArray)
-            Assert.Throws<DeletedRowInaccessibleException>(() =>
-            {
-                object[] o = dr.ItemArray;
-            });
+            Assert.Throws<DeletedRowInaccessibleException>(
+                () =>
+                {
+                    object[] o = dr.ItemArray;
+                }
+            );
         }
     }
 }

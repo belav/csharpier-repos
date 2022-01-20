@@ -20,7 +20,10 @@ unsafe partial class GenericsNative
     public static extern Point2<bool> AddPoint2B(Point2<bool> lhs, Point2<bool> rhs);
 
     [DllImport(nameof(GenericsNative))]
-    public static extern Point2<bool> AddPoint2Bs([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point2<bool>[] pValues, int count);
+    public static extern Point2<bool> AddPoint2Bs(
+        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point2<bool>[] pValues,
+        int count
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern Point2<bool> AddPoint2Bs(in Point2<bool> pValues, int count);
@@ -32,13 +35,16 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint2B(true, false));
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint2BOut(true, false, out GenericsNative.Point2<bool> value3));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetPoint2BOut(true, false, out GenericsNative.Point2<bool> value3)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint2BRef(true, false));
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint2B(default, default));
 
-        GenericsNative.Point2<bool>[] values = new GenericsNative.Point2<bool>[] {
+        GenericsNative.Point2<bool>[] values = new GenericsNative.Point2<bool>[]
+        {
             default,
             default,
             default,
@@ -46,9 +52,12 @@ unsafe partial class GenericsTest
             default
         };
 
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddPoint2Bs(values, values.Length)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint2Bs(values, values.Length));
-
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint2Bs(in values[0], values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddPoint2Bs(in values[0], values.Length)
+        );
     }
 }

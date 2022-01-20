@@ -38,35 +38,45 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             AssertNotDisposed();
 
-            object res = Interop.Runtime.InvokeJSWithArgs(JSHandle, method, args, out int exception);
+            object res = Interop.Runtime.InvokeJSWithArgs(
+                JSHandle,
+                method,
+                args,
+                out int exception
+            );
             if (exception != 0)
                 throw new JSException((string)res);
             Interop.Runtime.ReleaseInFlight(res);
             return res;
         }
 
-        public struct EventListenerOptions {
+        public struct EventListenerOptions
+        {
             public bool Capture;
             public bool Once;
             public bool Passive;
             public object? Signal;
         }
 
-        public int AddEventListener(string name, Action<JSObject> listener, EventListenerOptions? options = null)
+        public int AddEventListener(
+            string name,
+            Action<JSObject> listener,
+            EventListenerOptions? options = null
+        )
         {
             AssertNotDisposed();
 
-            var optionsDict = options.HasValue
-                ? new JSObject()
-                : null;
+            var optionsDict = options.HasValue ? new JSObject() : null;
 
-            try {
+            try
+            {
                 if (options?.Signal != null)
                     throw new NotImplementedException("EventListenerOptions.Signal");
 
                 var jsfunc = Runtime.GetJSOwnedObjectGCHandle(listener);
                 // int exception;
-                if (options.HasValue) {
+                if (options.HasValue)
+                {
                     // TODO: Optimize this
                     var _options = options.Value;
                     optionsDict?.SetObjectProperty("capture", _options.Capture, true, true);
@@ -78,16 +88,27 @@ namespace System.Runtime.InteropServices.JavaScript
                 // TODO: Handle errors
                 // We can't currently do this because adding any additional parameters or a return value causes
                 //  a signature mismatch at runtime
-                var ret = Interop.Runtime.AddEventListener(JSHandle, name, jsfunc, optionsDict?.JSHandle ?? 0);
+                var ret = Interop.Runtime.AddEventListener(
+                    JSHandle,
+                    name,
+                    jsfunc,
+                    optionsDict?.JSHandle ?? 0
+                );
                 if (ret != null)
                     throw new JSException(ret);
                 return jsfunc;
-            } finally {
+            }
+            finally
+            {
                 optionsDict?.Dispose();
             }
         }
 
-        public void RemoveEventListener(string name, Action<JSObject>? listener, EventListenerOptions? options = null)
+        public void RemoveEventListener(
+            string name,
+            Action<JSObject>? listener,
+            EventListenerOptions? options = null
+        )
         {
             AssertNotDisposed();
 
@@ -97,11 +118,20 @@ namespace System.Runtime.InteropServices.JavaScript
             RemoveEventListener(name, jsfunc, options);
         }
 
-        public void RemoveEventListener(string name, int listenerGCHandle, EventListenerOptions? options = null)
+        public void RemoveEventListener(
+            string name,
+            int listenerGCHandle,
+            EventListenerOptions? options = null
+        )
         {
             AssertNotDisposed();
 
-            var ret = Interop.Runtime.RemoveEventListener(JSHandle, name, listenerGCHandle, options?.Capture ?? false);
+            var ret = Interop.Runtime.RemoveEventListener(
+                JSHandle,
+                name,
+                listenerGCHandle,
+                options?.Capture ?? false
+            );
             if (ret != null)
                 throw new JSException(ret);
         }
@@ -132,7 +162,11 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             AssertNotDisposed();
 
-            object propertyValue = Interop.Runtime.GetObjectProperty(JSHandle, name, out int exception);
+            object propertyValue = Interop.Runtime.GetObjectProperty(
+                JSHandle,
+                name,
+                out int exception
+            );
             if (exception != 0)
                 throw new JSException((string)propertyValue);
             Interop.Runtime.ReleaseInFlight(propertyValue);
@@ -150,11 +184,23 @@ namespace System.Runtime.InteropServices.JavaScript
         /// float[], double[]) </param>
         /// <param name="createIfNotExists">Defaults to <see langword="true"/> and creates the property on the javascript object if not found, if set to <see langword="false"/> it will not create the property if it does not exist.  If the property exists, the value is updated with the provided value.</param>
         /// <param name="hasOwnProperty"></param>
-        public void SetObjectProperty(string name, object value, bool createIfNotExists = true, bool hasOwnProperty = false)
+        public void SetObjectProperty(
+            string name,
+            object value,
+            bool createIfNotExists = true,
+            bool hasOwnProperty = false
+        )
         {
             AssertNotDisposed();
 
-            object setPropResult = Interop.Runtime.SetObjectProperty(JSHandle, name, value, createIfNotExists, hasOwnProperty, out int exception);
+            object setPropResult = Interop.Runtime.SetObjectProperty(
+                JSHandle,
+                name,
+                value,
+                createIfNotExists,
+                hasOwnProperty,
+                out int exception
+            );
             if (exception != 0)
                 throw new JSException($"Error setting {name} on (js-obj js '{JSHandle}')");
         }

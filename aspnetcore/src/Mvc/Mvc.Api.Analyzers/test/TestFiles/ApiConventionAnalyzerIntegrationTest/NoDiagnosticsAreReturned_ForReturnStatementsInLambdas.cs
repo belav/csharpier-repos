@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [assembly: ApiConventionType(typeof(DefaultApiConventions))]
 
+
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
     [ApiController]
@@ -26,12 +27,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 return null;
             };
 
-
             if (id == 0)
             {
                 return NotFound();
             }
-
 
             if (id == 1)
             {

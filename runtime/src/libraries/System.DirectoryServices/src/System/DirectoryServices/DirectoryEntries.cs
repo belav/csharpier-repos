@@ -28,7 +28,8 @@ namespace System.DirectoryServices
             get
             {
                 CheckIsContainer();
-                SchemaNameCollection.FilterDelegateWrapper filter = new SchemaNameCollection.FilterDelegateWrapper(_container.ContainerObject);
+                SchemaNameCollection.FilterDelegateWrapper filter =
+                    new SchemaNameCollection.FilterDelegateWrapper(_container.ContainerObject);
                 return new SchemaNameCollection(filter.Getter, filter.Setter);
             }
         }
@@ -46,8 +47,14 @@ namespace System.DirectoryServices
         {
             CheckIsContainer();
             object newChild = _container.ContainerObject.Create(schemaClassName, name);
-            DirectoryEntry entry = new DirectoryEntry(newChild, _container.UsePropertyCache, _container.GetUsername(), _container.GetPassword(), _container.AuthenticationType);
-            entry.JustCreated = true;       // suspend writing changes until CommitChanges() is called
+            DirectoryEntry entry = new DirectoryEntry(
+                newChild,
+                _container.UsePropertyCache,
+                _container.GetUsername(),
+                _container.GetPassword(),
+                _container.AuthenticationType
+            );
+            entry.JustCreated = true; // suspend writing changes until CommitChanges() is called
             return entry;
         }
 
@@ -76,7 +83,13 @@ namespace System.DirectoryServices
             {
                 throw COMExceptionHelper.CreateFormattedComException(e);
             }
-            return new DirectoryEntry(o, _container.UsePropertyCache, _container.GetUsername(), _container.GetPassword(), _container.AuthenticationType);
+            return new DirectoryEntry(
+                o,
+                _container.UsePropertyCache,
+                _container.GetUsername(),
+                _container.GetPassword(),
+                _container.AuthenticationType
+            );
         }
 
         /// <devdoc>
@@ -112,7 +125,9 @@ namespace System.DirectoryServices
                 _container = container;
                 if (container.IsContainer)
                 {
-                    _enumVariant = new SafeNativeMethods.EnumVariant((SafeNativeMethods.IEnumVariant)container.ContainerObject._NewEnum);
+                    _enumVariant = new SafeNativeMethods.EnumVariant(
+                        (SafeNativeMethods.IEnumVariant)container.ContainerObject._NewEnum
+                    );
                 }
             }
 
@@ -127,7 +142,13 @@ namespace System.DirectoryServices
                         throw new InvalidOperationException(SR.DSNoCurrentChild);
 
                     if (_currentEntry == null)
-                        _currentEntry = new DirectoryEntry(_enumVariant.GetValue(), _container.UsePropertyCache, _container.GetUsername(), _container.GetPassword(), _container.AuthenticationType);
+                        _currentEntry = new DirectoryEntry(
+                            _enumVariant.GetValue(),
+                            _container.UsePropertyCache,
+                            _container.GetUsername(),
+                            _container.GetPassword(),
+                            _container.AuthenticationType
+                        );
 
                     return _currentEntry;
                 }
@@ -160,7 +181,9 @@ namespace System.DirectoryServices
                     catch (NotImplementedException)
                     {
                         //Some providers might not implement Reset, workaround the problem.
-                        _enumVariant = new SafeNativeMethods.EnumVariant((SafeNativeMethods.IEnumVariant)_container.ContainerObject._NewEnum);
+                        _enumVariant = new SafeNativeMethods.EnumVariant(
+                            (SafeNativeMethods.IEnumVariant)_container.ContainerObject._NewEnum
+                        );
                     }
                     _currentEntry = null;
                 }

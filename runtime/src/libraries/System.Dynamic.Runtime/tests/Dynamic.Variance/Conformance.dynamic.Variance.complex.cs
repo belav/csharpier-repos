@@ -67,8 +67,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.Twondo
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.Twondorder02.Twondorder02
 {
     // <Area>variance</Area>
@@ -87,6 +85,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.Twondo
 
     public delegate void Action<in T>(T t);
     public delegate void Meta<out T>(Action<T> action);
+
     public class C
     {
         [Fact]
@@ -97,18 +96,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.Twondo
 
         public static int MainMethod()
         {
-            dynamic v1 = (Action<Animal>)((Animal a) =>
-            {
-            }
-
-            );
+            dynamic v1 = (Action<Animal>)((Animal a) => { });
             dynamic v2 = v1;
-            dynamic m1 = (Meta<Tiger>)((Action<Tiger> action) =>
-            {
-                action(new Tiger());
-            }
-
-            );
+            dynamic m1 =
+                (Meta<Tiger>)(
+                    (Action<Tiger> action) =>
+                    {
+                        action(new Tiger());
+                    }
+                );
             dynamic m2 = (Meta<Animal>)m1;
             m2(v1);
             return 0;
@@ -116,8 +112,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.Twondo
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multipleuse01.multipleuse01
 {
@@ -146,6 +140,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
     public class C
     {
         public delegate S Foo<in T, out S, in U>(T t, U u);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -157,25 +152,25 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
             Foo<Animal, Apple, Fruit> f11 = (Animal a, Fruit fr) =>
             {
                 return new Apple();
-            }
-
-            ;
+            };
             dynamic f12 = (Foo<Tiger, Fruit, Apple>)f11;
             var x1 = f12(new Tiger(), new Apple());
-            dynamic f21 = (Foo<Animal, Apple, Fruit>)((Animal a, Fruit fr) =>
-            {
-                return new Apple();
-            }
-
-            );
+            dynamic f21 =
+                (Foo<Animal, Apple, Fruit>)(
+                    (Animal a, Fruit fr) =>
+                    {
+                        return new Apple();
+                    }
+                );
             Foo<Tiger, Fruit, Apple> f22 = f21;
             var x2 = f22(new Tiger(), new Apple());
-            dynamic f31 = (Foo<Animal, Apple, Fruit>)((Animal a, Fruit fr) =>
-            {
-                return new Apple();
-            }
-
-            );
+            dynamic f31 =
+                (Foo<Animal, Apple, Fruit>)(
+                    (Animal a, Fruit fr) =>
+                    {
+                        return new Apple();
+                    }
+                );
             dynamic f32 = (Foo<Tiger, Fruit, Apple>)f31;
             var x3 = f32(new Tiger(), new Apple());
             return 0;
@@ -183,8 +178,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multipleuse02.multipleuse02
 {
@@ -248,8 +241,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multipleuse03.multipleuse03
 {
     // <Area>variance</Area>
@@ -306,7 +297,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, ex.Message, "Variance<Tiger,Fruit,Fruit>", "iVariance<Animal,Apple,Apple>");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoImplicitConvCast,
+                    ex.Message,
+                    "Variance<Tiger,Fruit,Fruit>",
+                    "iVariance<Animal,Apple,Apple>"
+                );
                 if (ret)
                 {
                     result--;
@@ -330,17 +326,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typeinference001.typeinference001
 {
     public // <Area>variance</Area>
-           // <Title> </Title>
-           // <Description> variance on generics </Description>
-           // <RelatedBugs></RelatedBugs>
-           // <Expects status=success></Expects>
-           // <Code>
-class Animal
+    // <Title> </Title>
+    // <Description> variance on generics </Description>
+    // <RelatedBugs></RelatedBugs>
+    // <Expects status=success></Expects>
+    // <Code>
+    class Animal
     {
     }
 
@@ -384,14 +378,16 @@ class Animal
             int ret = 0;
             Mammal m = new Mammal();
             dynamic ca = new C<Animal>();
-            ret += w(m, ca, "ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typeinference001.typeinference001.Animal"); // This now infers mammal. It previously inferred Animal
+            ret += w(
+                m,
+                ca,
+                "ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typeinference001.typeinference001.Animal"
+            ); // This now infers mammal. It previously inferred Animal
             return ret;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typeinference002.typeinference002
 {
@@ -406,6 +402,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public int Status = 1;
+
         public void Foo<T>(T x, Action<T> y) //where T : new()
         {
             this.Status = 0;
@@ -434,8 +431,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typeinference003.typeinference003
 {
     // <Area>variance</Area>
@@ -448,19 +443,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public int Status = 1;
+
         public void Foo<T>(T x, MyDel<T> y) where T : new()
         {
             this.Status = 0;
         }
 
         public delegate void MyDel<in T>(T t);
-        private static void Foo(object o)
-        {
-        }
 
-        private static void Foo(string o)
-        {
-        }
+        private static void Foo(object o) { }
+
+        private static void Foo(string o) { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -484,8 +477,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typeinference004.typeinference004
 {
@@ -512,6 +503,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public int Status = 0;
+
         public void Foo<T>(T x, IFoo<T> y) where T : new()
         {
             this.Status = 0;
@@ -540,8 +532,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typeinference005.typeinference005
 {
     // <Area>variance</Area>
@@ -567,6 +557,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public int Status = 0;
+
         public void Foo<T>(T x, IFoo<T> y) where T : class
         {
             this.Status = 0;
@@ -594,8 +585,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typeinference006.typeinference006
 {
@@ -630,6 +619,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public int Status = 0;
+
         public void Foo<T>(T x, IFoo<T> y) where T : IFoo
         {
             this.Status = 0;
@@ -658,8 +648,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typeinference007.typeinference007
 {
     // <Area>variance</Area>
@@ -673,6 +661,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public static int Status = 0;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -682,11 +671,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
         public static int MainMethod()
         {
             int rez = 0;
-            Action<Func<object>, Action<string>> x = (s, o) =>
-            {
-            }
-
-            ;
+            Action<Func<object>, Action<string>> x = (s, o) => { };
             C.Status = 1;
             Foo(x); // System.Object
             rez += C.Status;
@@ -704,8 +689,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typeinference008.typeinference008
 {
     // <Area>variance</Area>
@@ -719,7 +702,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class A
     {
         public static int Status = 0;
-        public static implicit operator string (A a)
+
+        public static implicit operator string(A a)
         {
             return "";
         }
@@ -750,8 +734,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typeinference009.typeinference009
 {
     // <Area>variance</Area>
@@ -765,6 +747,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     public class C
     {
         public int Status = 0;
+
         public void Foo<T>(T x, Action<T> y) where T : new()
         {
             this.Status = 0;

@@ -13,6 +13,7 @@ internal static partial class Interop
             SafeCertContextHandle pCertContext,
             CertContextPropId dwPropId,
             byte[] pvData,
-            ref int pcbData);
+            ref int pcbData
+        );
     }
 }

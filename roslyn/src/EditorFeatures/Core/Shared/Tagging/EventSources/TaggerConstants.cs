@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
         internal const int IdleDelay = 1500;
         internal const int NonFocusDelay = 3000;
 
-        internal static TimeSpan ComputeTimeDelay(this TaggerDelay behavior, ITextBuffer textBufferOpt)
+        internal static TimeSpan ComputeTimeDelay(
+            this TaggerDelay behavior,
+            ITextBuffer textBufferOpt
+        )
         {
             if (TextBufferAssociatedViewService.AnyAssociatedViewHasFocus(textBufferOpt))
             {
@@ -28,8 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             return TimeSpan.FromMilliseconds(NonFocusDelay);
         }
 
-        internal static TimeSpan ComputeTimeDelay(this TaggerDelay behavior)
-            => behavior switch
+        internal static TimeSpan ComputeTimeDelay(this TaggerDelay behavior) =>
+            behavior switch
             {
                 TaggerDelay.NearImmediate => TimeSpan.FromMilliseconds(NearImmediateDelay),
                 TaggerDelay.Short => TimeSpan.FromMilliseconds(ShortDelay),

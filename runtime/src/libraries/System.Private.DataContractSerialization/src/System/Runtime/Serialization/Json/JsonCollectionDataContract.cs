@@ -35,11 +35,15 @@ namespace System.Runtime.Serialization.Json
                             JsonFormatCollectionReaderDelegate tempDelegate;
                             if (DataContractSerializer.Option == SerializationOption.ReflectionOnly)
                             {
-                                tempDelegate = new ReflectionJsonCollectionReader().ReflectionReadCollection;
+                                tempDelegate =
+                                    new ReflectionJsonCollectionReader().ReflectionReadCollection;
                             }
                             else
                             {
-                                tempDelegate = new JsonFormatReaderGenerator().GenerateCollectionReader(TraditionalCollectionDataContract);
+                                tempDelegate =
+                                    new JsonFormatReaderGenerator().GenerateCollectionReader(
+                                        TraditionalCollectionDataContract
+                                    );
                             }
 
                             Interlocked.MemoryBarrier();
@@ -63,19 +67,37 @@ namespace System.Runtime.Serialization.Json
                         if (_helper.JsonFormatGetOnlyReaderDelegate == null)
                         {
                             CollectionKind kind = this.TraditionalCollectionDataContract.Kind;
-                            if (this.TraditionalDataContract.UnderlyingType.IsInterface && (kind == CollectionKind.Enumerable || kind == CollectionKind.Collection || kind == CollectionKind.GenericEnumerable))
+                            if (
+                                this.TraditionalDataContract.UnderlyingType.IsInterface
+                                && (
+                                    kind == CollectionKind.Enumerable
+                                    || kind == CollectionKind.Collection
+                                    || kind == CollectionKind.GenericEnumerable
+                                )
+                            )
                             {
-                                throw new InvalidDataContractException(SR.Format(SR.GetOnlyCollectionMustHaveAddMethod, DataContract.GetClrTypeFullName(this.TraditionalDataContract.UnderlyingType)));
+                                throw new InvalidDataContractException(
+                                    SR.Format(
+                                        SR.GetOnlyCollectionMustHaveAddMethod,
+                                        DataContract.GetClrTypeFullName(
+                                            this.TraditionalDataContract.UnderlyingType
+                                        )
+                                    )
+                                );
                             }
 
                             JsonFormatGetOnlyCollectionReaderDelegate tempDelegate;
                             if (DataContractSerializer.Option == SerializationOption.ReflectionOnly)
                             {
-                                tempDelegate = new ReflectionJsonCollectionReader().ReflectionReadGetOnlyCollection;
+                                tempDelegate =
+                                    new ReflectionJsonCollectionReader().ReflectionReadGetOnlyCollection;
                             }
                             else
                             {
-                                tempDelegate = new JsonFormatReaderGenerator().GenerateGetOnlyCollectionReader(TraditionalCollectionDataContract);
+                                tempDelegate =
+                                    new JsonFormatReaderGenerator().GenerateGetOnlyCollectionReader(
+                                        TraditionalCollectionDataContract
+                                    );
                             }
 
                             Interlocked.MemoryBarrier();
@@ -101,11 +123,15 @@ namespace System.Runtime.Serialization.Json
                             JsonFormatCollectionWriterDelegate tempDelegate;
                             if (DataContractSerializer.Option == SerializationOption.ReflectionOnly)
                             {
-                                tempDelegate = new ReflectionJsonFormatWriter().ReflectionWriteCollection;
+                                tempDelegate =
+                                    new ReflectionJsonFormatWriter().ReflectionWriteCollection;
                             }
                             else
                             {
-                                tempDelegate = new JsonFormatWriterGenerator().GenerateCollectionWriter(TraditionalCollectionDataContract);
+                                tempDelegate =
+                                    new JsonFormatWriterGenerator().GenerateCollectionWriter(
+                                        TraditionalCollectionDataContract
+                                    );
                             }
 
                             Interlocked.MemoryBarrier();
@@ -117,10 +143,14 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        private CollectionDataContract TraditionalCollectionDataContract => _helper.TraditionalCollectionDataContract;
+        private CollectionDataContract TraditionalCollectionDataContract =>
+            _helper.TraditionalCollectionDataContract;
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public override object? ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson? context)
+        public override object? ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson? context
+        )
         {
             Debug.Assert(context != null);
 
@@ -130,18 +160,35 @@ namespace System.Runtime.Serialization.Json
             {
                 // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value can now be reset.
                 context.IsGetOnlyCollection = false;
-                JsonFormatGetOnlyReaderDelegate(jsonReader, context, XmlDictionaryString.Empty, JsonGlobals.itemDictionaryString, TraditionalCollectionDataContract);
+                JsonFormatGetOnlyReaderDelegate(
+                    jsonReader,
+                    context,
+                    XmlDictionaryString.Empty,
+                    JsonGlobals.itemDictionaryString,
+                    TraditionalCollectionDataContract
+                );
             }
             else
             {
-                o = JsonFormatReaderDelegate(jsonReader, context, XmlDictionaryString.Empty, JsonGlobals.itemDictionaryString, TraditionalCollectionDataContract);
+                o = JsonFormatReaderDelegate(
+                    jsonReader,
+                    context,
+                    XmlDictionaryString.Empty,
+                    JsonGlobals.itemDictionaryString,
+                    TraditionalCollectionDataContract
+                );
             }
             jsonReader.ReadEndElement();
             return o;
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public override void WriteJsonValueCore(XmlWriterDelegator jsonWriter, object obj, XmlObjectSerializerWriteContextComplexJson? context, RuntimeTypeHandle declaredTypeHandle)
+        public override void WriteJsonValueCore(
+            XmlWriterDelegator jsonWriter,
+            object obj,
+            XmlObjectSerializerWriteContextComplexJson? context,
+            RuntimeTypeHandle declaredTypeHandle
+        )
         {
             Debug.Assert(context != null);
             // IsGetOnlyCollection value has already been used to create current collectiondatacontract, value can now be reset.
@@ -149,7 +196,8 @@ namespace System.Runtime.Serialization.Json
             JsonFormatWriterDelegate(jsonWriter, obj, context, TraditionalCollectionDataContract);
         }
 
-        private sealed class JsonCollectionDataContractCriticalHelper : JsonDataContractCriticalHelper
+        private sealed class JsonCollectionDataContractCriticalHelper
+            : JsonDataContractCriticalHelper
         {
             private JsonFormatCollectionReaderDelegate? _jsonFormatReaderDelegate;
             private JsonFormatGetOnlyCollectionReaderDelegate? _jsonFormatGetOnlyReaderDelegate;
@@ -157,8 +205,9 @@ namespace System.Runtime.Serialization.Json
             private readonly CollectionDataContract _traditionalCollectionDataContract;
 
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-            public JsonCollectionDataContractCriticalHelper(CollectionDataContract traditionalDataContract)
-                : base(traditionalDataContract)
+            public JsonCollectionDataContractCriticalHelper(
+                CollectionDataContract traditionalDataContract
+            ) : base(traditionalDataContract)
             {
                 _traditionalCollectionDataContract = traditionalDataContract;
             }

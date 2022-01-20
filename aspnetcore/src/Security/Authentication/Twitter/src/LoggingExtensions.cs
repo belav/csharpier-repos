@@ -5,7 +5,6 @@ namespace Microsoft.Extensions.Logging;
 
 internal static partial class LoggingExtensions
 {
-
     [LoggerMessage(2, LogLevel.Debug, "ObtainAccessToken", EventName = "ObtainAccessToken")]
     public static partial void ObtainAccessToken(this ILogger logger);
 

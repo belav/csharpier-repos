@@ -13,22 +13,45 @@ namespace System.ComponentModel.Composition
 {
     public class ContraintParser
     {
-        private static readonly PropertyInfo _exportDefinitionContractNameProperty = typeof(ExportDefinition).GetProperty("ContractName");
-        private static readonly PropertyInfo _exportDefinitionMetadataProperty = typeof(ExportDefinition).GetProperty("Metadata");
-        private static readonly MethodInfo _metadataContainsKeyMethod = typeof(IDictionary<string, object>).GetMethod("ContainsKey");
-        private static readonly MethodInfo _metadataItemMethod = typeof(IDictionary<string, object>).GetMethod("get_Item");
-        private static readonly MethodInfo _typeIsInstanceOfTypeMethod = typeof(Type).GetMethod("IsInstanceOfType");
+        private static readonly PropertyInfo _exportDefinitionContractNameProperty =
+            typeof(ExportDefinition).GetProperty("ContractName");
+        private static readonly PropertyInfo _exportDefinitionMetadataProperty =
+            typeof(ExportDefinition).GetProperty("Metadata");
+        private static readonly MethodInfo _metadataContainsKeyMethod = typeof(IDictionary<
+            string,
+            object
+        >).GetMethod("ContainsKey");
+        private static readonly MethodInfo _metadataItemMethod = typeof(IDictionary<
+            string,
+            object
+        >).GetMethod("get_Item");
+        private static readonly MethodInfo _typeIsInstanceOfTypeMethod = typeof(Type).GetMethod(
+            "IsInstanceOfType"
+        );
 
-        public static bool TryParseConstraint(Expression<Func<ExportDefinition, bool>> constraint, out string contractName, out IEnumerable<KeyValuePair<string, Type>> requiredMetadata)
+        public static bool TryParseConstraint(
+            Expression<Func<ExportDefinition, bool>> constraint,
+            out string contractName,
+            out IEnumerable<KeyValuePair<string, Type>> requiredMetadata
+        )
         {
             contractName = null;
             requiredMetadata = null;
 
-            List<KeyValuePair<string, Type>> requiredMetadataList = new List<KeyValuePair<string, Type>>();
+            List<KeyValuePair<string, Type>> requiredMetadataList = new List<
+                KeyValuePair<string, Type>
+            >();
             foreach (Expression expression in SplitConstraintBody(constraint.Body))
             {
                 // First try to parse as a contract, if we don't have one already
-                if (contractName == null && TryParseExpressionAsContractConstraintBody(expression, constraint.Parameters[0], out contractName))
+                if (
+                    contractName == null
+                    && TryParseExpressionAsContractConstraintBody(
+                        expression,
+                        constraint.Parameters[0],
+                        out contractName
+                    )
+                )
                 {
                     continue;
                 }
@@ -36,9 +59,21 @@ namespace System.ComponentModel.Composition
                 // Then try to parse as a required metadata item name
                 string requiredMetadataItemName = null;
                 Type requiredMetadataItemType = null;
-                if (TryParseExpressionAsMetadataConstraintBody(expression, constraint.Parameters[0], out requiredMetadataItemName, out requiredMetadataItemType))
+                if (
+                    TryParseExpressionAsMetadataConstraintBody(
+                        expression,
+                        constraint.Parameters[0],
+                        out requiredMetadataItemName,
+                        out requiredMetadataItemType
+                    )
+                )
                 {
-                    requiredMetadataList.Add(new KeyValuePair<string, Type>(requiredMetadataItemName, requiredMetadataItemType));
+                    requiredMetadataList.Add(
+                        new KeyValuePair<string, Type>(
+                            requiredMetadataItemName,
+                            requiredMetadataItemType
+                        )
+                    );
                 }
 
                 // Just skip the expressions we don't understand
@@ -76,7 +111,11 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        private static bool TryParseExpressionAsContractConstraintBody(Expression expression, Expression parameter, out string contractName)
+        private static bool TryParseExpressionAsContractConstraintBody(
+            Expression expression,
+            Expression parameter,
+            out string contractName
+        )
         {
             contractName = null;
 
@@ -89,13 +128,27 @@ namespace System.ComponentModel.Composition
             BinaryExpression contractConstraintExpression = (BinaryExpression)expression;
 
             // First try item.ContractName == "Value"
-            if (TryParseContractNameFromEqualsExpression(contractConstraintExpression.Left, contractConstraintExpression.Right, parameter, out contractName))
+            if (
+                TryParseContractNameFromEqualsExpression(
+                    contractConstraintExpression.Left,
+                    contractConstraintExpression.Right,
+                    parameter,
+                    out contractName
+                )
+            )
             {
                 return true;
             }
 
             // Then try "Value == item.ContractName
-            if (TryParseContractNameFromEqualsExpression(contractConstraintExpression.Right, contractConstraintExpression.Left, parameter, out contractName))
+            if (
+                TryParseContractNameFromEqualsExpression(
+                    contractConstraintExpression.Right,
+                    contractConstraintExpression.Left,
+                    parameter,
+                    out contractName
+                )
+            )
             {
                 return true;
             }
@@ -103,7 +156,12 @@ namespace System.ComponentModel.Composition
             return false;
         }
 
-        private static bool TryParseContractNameFromEqualsExpression(Expression left, Expression right, Expression parameter, out string contractName)
+        private static bool TryParseContractNameFromEqualsExpression(
+            Expression left,
+            Expression right,
+            Expression parameter,
+            out string contractName
+        )
         {
             contractName = null;
 
@@ -114,7 +172,10 @@ namespace System.ComponentModel.Composition
                 return false;
             }
 
-            if ((targetMember.Member != _exportDefinitionContractNameProperty) || (targetMember.Expression != parameter))
+            if (
+                (targetMember.Member != _exportDefinitionContractNameProperty)
+                || (targetMember.Expression != parameter)
+            )
             {
                 return false;
             }
@@ -134,7 +195,12 @@ namespace System.ComponentModel.Composition
             return true;
         }
 
-        private static bool TryParseExpressionAsMetadataConstraintBody(Expression expression, Expression parameter, out string requiredMetadataKey, out Type requiredMetadataType)
+        private static bool TryParseExpressionAsMetadataConstraintBody(
+            Expression expression,
+            Expression parameter,
+            out string requiredMetadataKey,
+            out Type requiredMetadataType
+        )
         {
             if (expression == null)
             {
@@ -192,7 +258,10 @@ namespace System.ComponentModel.Composition
                 return false;
             }
 
-            if ((targetMember.Expression != parameter) || (targetMember.Member != _exportDefinitionMetadataProperty))
+            if (
+                (targetMember.Expression != parameter)
+                || (targetMember.Member != _exportDefinitionMetadataProperty)
+            )
             {
                 return false;
             }
@@ -204,7 +273,8 @@ namespace System.ComponentModel.Composition
                 throw new Exception(SR.Diagnostic_InternalExceptionMessage);
             }
             // Argument should a constant expression containing the metadata key
-            ConstantExpression requiredMetadataKeyConstant = methodCall.Arguments[0] as ConstantExpression;
+            ConstantExpression requiredMetadataKeyConstant =
+                methodCall.Arguments[0] as ConstantExpression;
             if (requiredMetadataKeyConstant == null)
             {
                 return false;

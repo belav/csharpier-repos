@@ -12,10 +12,7 @@ namespace System.Net.Http.Headers
     {
         internal static readonly ByteArrayHeaderParser Parser = new ByteArrayHeaderParser();
 
-        private ByteArrayHeaderParser()
-            : base(false)
-        {
-        }
+        private ByteArrayHeaderParser() : base(false) { }
 
         public override string ToString(object value)
         {
@@ -24,7 +21,12 @@ namespace System.Net.Http.Headers
             return Convert.ToBase64String((byte[])value);
         }
 
-        public override bool TryParseValue([NotNullWhen(true)] string? value, object? storeValue, ref int index, [NotNullWhen(true)] out object? parsedValue)
+        public override bool TryParseValue(
+            [NotNullWhen(true)] string? value,
+            object? storeValue,
+            ref int index,
+            [NotNullWhen(true)] out object? parsedValue
+        )
         {
             parsedValue = null;
 
@@ -49,7 +51,11 @@ namespace System.Net.Http.Headers
             }
             catch (FormatException e)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, SR.Format(SR.net_http_parser_invalid_base64_string, base64String, e.Message));
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(
+                        this,
+                        SR.Format(SR.net_http_parser_invalid_base64_string, base64String, e.Message)
+                    );
             }
 
             return false;

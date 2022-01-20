@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-public sealed class DefaultTagHelperDescriptorProvider : RazorEngineFeatureBase, ITagHelperDescriptorProvider
+public sealed class DefaultTagHelperDescriptorProvider
+    : RazorEngineFeatureBase,
+      ITagHelperDescriptorProvider
 {
     public int Order { get; set; }
 
@@ -55,8 +57,11 @@ public sealed class DefaultTagHelperDescriptorProvider : RazorEngineFeatureBase,
             }
         }
 
-
-        var factory = new DefaultTagHelperDescriptorFactory(compilation, context.IncludeDocumentation, context.ExcludeHidden);
+        var factory = new DefaultTagHelperDescriptorFactory(
+            compilation,
+            context.IncludeDocumentation,
+            context.ExcludeHidden
+        );
         for (var i = 0; i < types.Count; i++)
         {
             var descriptor = factory.CreateDescriptor(types[i]);
@@ -70,6 +75,7 @@ public sealed class DefaultTagHelperDescriptorProvider : RazorEngineFeatureBase,
 
     private bool IsTagHelperAssembly(IAssemblySymbol assembly)
     {
-        return assembly.Name != null && !assembly.Name.StartsWith("System.", StringComparison.Ordinal);
+        return assembly.Name != null
+            && !assembly.Name.StartsWith("System.", StringComparison.Ordinal);
     }
 }

@@ -9,17 +9,25 @@ internal class NullableTest
 {
     private static bool BoxUnboxToNQ<T>(T o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenA<int>)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenA<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenA<int>)(object)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenA<int>))
+        );
     }
 
     private static bool BoxUnboxToQ<T>(T o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGenA<int>?)(object)o, Helper.Create(default(NotEmptyStructConstrainedGenA<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGenA<int>?)(object)o,
+            Helper.Create(default(NotEmptyStructConstrainedGenA<int>))
+        );
     }
 
     private static int Main()
     {
-        NotEmptyStructConstrainedGenA<int>? s = Helper.Create(default(NotEmptyStructConstrainedGenA<int>));
+        NotEmptyStructConstrainedGenA<int>? s = Helper.Create(
+            default(NotEmptyStructConstrainedGenA<int>)
+        );
 
         if (BoxUnboxToNQ(s) && BoxUnboxToQ(s))
             return ExitCode.Passed;
@@ -27,5 +35,3 @@ internal class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

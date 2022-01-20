@@ -23,7 +23,9 @@ public class DefaultModelMetadataProviderTest
         // Assert
         var defaultMetadata = Assert.IsType<DefaultModelMetadata>(metadata);
 
-        var attribute = Assert.IsType<ModelAttribute>(Assert.Single(defaultMetadata.Attributes.Attributes));
+        var attribute = Assert.IsType<ModelAttribute>(
+            Assert.Single(defaultMetadata.Attributes.Attributes)
+        );
         Assert.Equal("OnType", attribute.Value);
     }
 
@@ -34,8 +36,12 @@ public class DefaultModelMetadataProviderTest
         var provider = CreateProvider();
 
         // Act
-        var metadata1 = Assert.IsType<DefaultModelMetadata>(provider.GetMetadataForType(typeof(ModelType)));
-        var metadata2 = Assert.IsType<DefaultModelMetadata>(provider.GetMetadataForType(typeof(ModelType)));
+        var metadata1 = Assert.IsType<DefaultModelMetadata>(
+            provider.GetMetadataForType(typeof(ModelType))
+        );
+        var metadata2 = Assert.IsType<DefaultModelMetadata>(
+            provider.GetMetadataForType(typeof(ModelType))
+        );
 
         // Assert
         Assert.Same(metadata1, metadata2);
@@ -83,7 +89,8 @@ public class DefaultModelMetadataProviderTest
                 Assert.Equal("Property2", propertyMetadata.PropertyName);
                 Assert.NotNull(propertyMetadata.ContainerMetadata);
                 Assert.Equal(modelType, propertyMetadata.ContainerMetadata.ModelType);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -122,8 +129,14 @@ public class DefaultModelMetadataProviderTest
         var provider = CreateProvider();
 
         // Act
-        var properties1 = provider.GetMetadataForProperties(typeof(ModelType)).Cast<DefaultModelMetadata>().ToArray();
-        var properties2 = provider.GetMetadataForProperties(typeof(ModelType)).Cast<DefaultModelMetadata>().ToArray();
+        var properties1 = provider
+            .GetMetadataForProperties(typeof(ModelType))
+            .Cast<DefaultModelMetadata>()
+            .ToArray();
+        var properties2 = provider
+            .GetMetadataForProperties(typeof(ModelType))
+            .Cast<DefaultModelMetadata>()
+            .ToArray();
 
         // Assert
         Assert.Equal(properties1.Length, properties2.Length);
@@ -144,8 +157,12 @@ public class DefaultModelMetadataProviderTest
         var provider = CreateProvider();
 
         // Act
-        var metadata1 = Assert.IsType<DefaultModelMetadata>(provider.GetMetadataForType(typeof(ModelType)));
-        var metadata2 = Assert.IsType<DefaultModelMetadata>(provider.GetMetadataForType(typeof(ModelType)));
+        var metadata1 = Assert.IsType<DefaultModelMetadata>(
+            provider.GetMetadataForType(typeof(ModelType))
+        );
+        var metadata2 = Assert.IsType<DefaultModelMetadata>(
+            provider.GetMetadataForType(typeof(ModelType))
+        );
 
         // Assert
         Assert.Same(metadata1.Properties, metadata2.Properties);
@@ -204,9 +221,7 @@ public class DefaultModelMetadataProviderTest
     {
         // Arrange
         var provider = CreateProvider();
-        var parameters = typeof(ModelType)
-            .GetMethod(nameof(ModelType.Method1))
-            .GetParameters();
+        var parameters = typeof(ModelType).GetMethod(nameof(ModelType.Method1)).GetParameters();
 
         // Act
         var metadata = provider.GetMetadataForParameter(parameters[0]);
@@ -223,9 +238,7 @@ public class DefaultModelMetadataProviderTest
     {
         // Arrange
         var provider = CreateProvider();
-        var parameters = typeof(ModelType)
-            .GetMethod(nameof(ModelType.Method1))
-            .GetParameters();
+        var parameters = typeof(ModelType).GetMethod(nameof(ModelType.Method1)).GetParameters();
 
         // Act
         var metadata = provider.GetMetadataForParameter(parameters[1]);
@@ -244,7 +257,8 @@ public class DefaultModelMetadataProviderTest
             {
                 var modelAttribute = Assert.IsType<ModelAttribute>(attribute);
                 Assert.Equal("ParamAttrib2", modelAttribute.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -252,9 +266,7 @@ public class DefaultModelMetadataProviderTest
     {
         // Arrange
         var provider = CreateProvider();
-        var parameter = typeof(ModelType)
-            .GetMethod(nameof(ModelType.Method1))
-            .GetParameters()[1];
+        var parameter = typeof(ModelType).GetMethod(nameof(ModelType.Method1)).GetParameters()[1];
 
         // Act
         var metadata1 = provider.GetMetadataForParameter(parameter);
@@ -269,7 +281,10 @@ public class DefaultModelMetadataProviderTest
     {
         // Arrange
         var parameter = GetType()
-            .GetMethod(nameof(GetMetadataForParameterTestMethod), BindingFlags.NonPublic | BindingFlags.Instance)
+            .GetMethod(
+                nameof(GetMetadataForParameterTestMethod),
+                BindingFlags.NonPublic | BindingFlags.Instance
+            )
             .GetParameters()[0];
         var provider = CreateProvider();
 
@@ -286,7 +301,8 @@ public class DefaultModelMetadataProviderTest
             defaultModelMetadata.Attributes.Attributes,
             a => Assert.Equal("OnParameter", Assert.IsType<ModelAttribute>(a).Value),
             a => Assert.Equal("OnDerivedType", Assert.IsType<ModelAttribute>(a).Value),
-            a => Assert.Equal("OnType", Assert.IsType<ModelAttribute>(a).Value));
+            a => Assert.Equal("OnType", Assert.IsType<ModelAttribute>(a).Value)
+        );
 
         Assert.Collection(
             metadata.Properties.OrderBy(p => p.Name),
@@ -297,7 +313,8 @@ public class DefaultModelMetadataProviderTest
                 var defaultPropertyMetadata = Assert.IsType<DefaultModelMetadata>(p);
                 Assert.Collection(
                     defaultPropertyMetadata.Attributes.Attributes.OfType<ModelAttribute>(),
-                    a => Assert.Equal("OnDerivedProperty", Assert.IsType<ModelAttribute>(a).Value));
+                    a => Assert.Equal("OnDerivedProperty", Assert.IsType<ModelAttribute>(a).Value)
+                );
             },
             p =>
             {
@@ -307,12 +324,14 @@ public class DefaultModelMetadataProviderTest
                 Assert.Collection(
                     defaultPropertyMetadata.Attributes.Attributes.OfType<ModelAttribute>(),
                     a => Assert.Equal("OnProperty", Assert.IsType<ModelAttribute>(a).Value),
-                    a => Assert.Equal("OnPropertyType", Assert.IsType<ModelAttribute>(a).Value));
+                    a => Assert.Equal("OnPropertyType", Assert.IsType<ModelAttribute>(a).Value)
+                );
             },
             p =>
             {
                 Assert.Equal(nameof(DerivedModelType.Property2), p.Name);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -320,7 +339,10 @@ public class DefaultModelMetadataProviderTest
     {
         // Arrange
         var parameter = GetType()
-            .GetMethod(nameof(GetMetadataForParameterTestMethod), BindingFlags.NonPublic | BindingFlags.Instance)
+            .GetMethod(
+                nameof(GetMetadataForParameterTestMethod),
+                BindingFlags.NonPublic | BindingFlags.Instance
+            )
             .GetParameters()[0];
         var provider = CreateProvider();
 
@@ -337,7 +359,10 @@ public class DefaultModelMetadataProviderTest
     {
         // Arrange
         var parameter = GetType()
-            .GetMethod(nameof(GetMetadataForParameterTestMethod), BindingFlags.NonPublic | BindingFlags.Instance)
+            .GetMethod(
+                nameof(GetMetadataForParameterTestMethod),
+                BindingFlags.NonPublic | BindingFlags.Instance
+            )
             .GetParameters()[0];
         var provider = CreateProvider();
 
@@ -353,8 +378,7 @@ public class DefaultModelMetadataProviderTest
     public void GetMetadataForProperty_WithModelType_ReturnsCombinedModelMetadata()
     {
         // Arrange
-        var property = typeof(TestContainer)
-            .GetProperty(nameof(TestContainer.ModelProperty));
+        var property = typeof(TestContainer).GetProperty(nameof(TestContainer.ModelProperty));
         var provider = CreateProvider();
 
         // Act
@@ -370,7 +394,8 @@ public class DefaultModelMetadataProviderTest
             defaultModelMetadata.Attributes.Attributes,
             a => Assert.Equal("OnProperty", Assert.IsType<ModelAttribute>(a).Value),
             a => Assert.Equal("OnDerivedType", Assert.IsType<ModelAttribute>(a).Value),
-            a => Assert.Equal("OnType", Assert.IsType<ModelAttribute>(a).Value));
+            a => Assert.Equal("OnType", Assert.IsType<ModelAttribute>(a).Value)
+        );
 
         Assert.Collection(
             metadata.Properties.OrderBy(p => p.Name),
@@ -381,7 +406,8 @@ public class DefaultModelMetadataProviderTest
                 var defaultPropertyMetadata = Assert.IsType<DefaultModelMetadata>(p);
                 Assert.Collection(
                     defaultPropertyMetadata.Attributes.Attributes.OfType<ModelAttribute>(),
-                    a => Assert.Equal("OnDerivedProperty", Assert.IsType<ModelAttribute>(a).Value));
+                    a => Assert.Equal("OnDerivedProperty", Assert.IsType<ModelAttribute>(a).Value)
+                );
             },
             p =>
             {
@@ -391,20 +417,21 @@ public class DefaultModelMetadataProviderTest
                 Assert.Collection(
                     defaultPropertyMetadata.Attributes.Attributes.OfType<ModelAttribute>(),
                     a => Assert.Equal("OnProperty", Assert.IsType<ModelAttribute>(a).Value),
-                    a => Assert.Equal("OnPropertyType", Assert.IsType<ModelAttribute>(a).Value));
+                    a => Assert.Equal("OnPropertyType", Assert.IsType<ModelAttribute>(a).Value)
+                );
             },
             p =>
             {
                 Assert.Equal(nameof(DerivedModelType.Property2), p.Name);
-            });
+            }
+        );
     }
 
     [Fact]
     public void GetMetadataForProperty_WithModelType_CachesResults()
     {
         // Arrange
-        var property = typeof(TestContainer)
-            .GetProperty(nameof(TestContainer.ModelProperty));
+        var property = typeof(TestContainer).GetProperty(nameof(TestContainer.ModelProperty));
         var provider = CreateProvider();
 
         // Act
@@ -419,8 +446,7 @@ public class DefaultModelMetadataProviderTest
     public void GetMetadataForProperty_WithModelType_VariesByModelType()
     {
         // Arrange
-        var property = typeof(TestContainer)
-            .GetProperty(nameof(TestContainer.ModelProperty));
+        var property = typeof(TestContainer).GetProperty(nameof(TestContainer.ModelProperty));
         var provider = CreateProvider();
 
         // Act
@@ -435,7 +461,8 @@ public class DefaultModelMetadataProviderTest
     {
         return new DefaultModelMetadataProvider(
             new EmptyCompositeMetadataDetailsProvider(),
-            Options.Create(new MvcOptions()));
+            Options.Create(new MvcOptions())
+        );
     }
 
     [Model("OnType")]
@@ -448,9 +475,8 @@ public class DefaultModelMetadataProviderTest
 
         public void Method1(
             object paramWithNoAttributes,
-            [Model("ParamAttrib1"), Model("ParamAttrib2")] object paramWithTwoAttributes)
-        {
-        }
+            [Model("ParamAttrib1"), Model("ParamAttrib2")] object paramWithTwoAttributes
+        ) { }
     }
 
     [Model("OnPropertyType")]
@@ -476,9 +502,7 @@ public class DefaultModelMetadataProviderTest
         public PropertyType Property1 { get; set; }
     }
 
-    private void GetMetadataForParameterTestMethod([Model("OnParameter")] ModelType parameter)
-    {
-    }
+    private void GetMetadataForParameterTestMethod([Model("OnParameter")] ModelType parameter) { }
 
     private class BaseModelWithHiding
     {

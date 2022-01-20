@@ -12,8 +12,7 @@ namespace System.Reflection.Context.Projection
     // Recursively 'projects' any assemblies, modules, types and members returned by a given assembly
     internal class ProjectingAssembly : DelegatingAssembly, IProjectable
     {
-        public ProjectingAssembly(Assembly assembly, Projector projector)
-            : base(assembly)
+        public ProjectingAssembly(Assembly assembly, Projector projector) : base(assembly)
         {
             Debug.Assert(null != projector);
 
@@ -36,7 +35,10 @@ namespace System.Reflection.Context.Projection
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
-            return Projector.Project(base.GetCustomAttributesData(), Projector.ProjectCustomAttributeData);
+            return Projector.Project(
+                base.GetCustomAttributesData(),
+                Projector.ProjectCustomAttributeData
+            );
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -58,7 +60,10 @@ namespace System.Reflection.Context.Projection
 
         public override Module[] GetLoadedModules(bool getResourceModules)
         {
-            return Projector.Project(base.GetLoadedModules(getResourceModules), Projector.ProjectModule);
+            return Projector.Project(
+                base.GetLoadedModules(getResourceModules),
+                Projector.ProjectModule
+            );
         }
 
         public override ManifestResourceInfo? GetManifestResourceInfo(string resourceName)
@@ -96,16 +101,20 @@ namespace System.Reflection.Context.Projection
             return Projector.Project(base.GetTypes(), Projector.ProjectType);
         }
 
-        public override Module LoadModule(string moduleName, byte[]? rawModule, byte[]? rawSymbolStore)
+        public override Module LoadModule(
+            string moduleName,
+            byte[]? rawModule,
+            byte[]? rawSymbolStore
+        )
         {
             return Projector.ProjectModule(base.LoadModule(moduleName, rawModule, rawSymbolStore));
         }
 
         public override bool Equals([NotNullWhen(true)] object? o)
         {
-            return o is ProjectingAssembly other &&
-                   Projector == other.Projector &&
-                   UnderlyingAssembly == other.UnderlyingAssembly;
+            return o is ProjectingAssembly other
+                && Projector == other.Projector
+                && UnderlyingAssembly == other.UnderlyingAssembly;
         }
 
         public override int GetHashCode()

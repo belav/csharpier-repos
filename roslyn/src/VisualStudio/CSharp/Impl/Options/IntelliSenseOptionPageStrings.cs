@@ -40,10 +40,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         public static string Option_Show_completion_item_filters =>
             CSharpVSResources.Show_completion_item_filters;
 
-        public static string Option_Automatically_complete_statement_on_semicolon => CSharpVSResources.Automatically_complete_statement_on_semicolon;
+        public static string Option_Automatically_complete_statement_on_semicolon =>
+            CSharpVSResources.Automatically_complete_statement_on_semicolon;
 
-        public static string Enter_key_behavior_Title =>
-            CSharpVSResources.Enter_key_behavior_colon;
+        public static string Enter_key_behavior_Title => CSharpVSResources.Enter_key_behavior_colon;
 
         public static string Option_Never_add_new_line_on_enter =>
             CSharpVSResources.Never_add_new_line_on_enter;
@@ -54,8 +54,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         public static string Option_Always_add_new_line_on_enter =>
             CSharpVSResources.Always_add_new_line_on_enter;
 
-        public static string Snippets_behavior =>
-            CSharpVSResources.Snippets_behavior;
+        public static string Snippets_behavior => CSharpVSResources.Snippets_behavior;
 
         public static string Option_Never_include_snippets =>
             CSharpVSResources.Never_include_snippets;

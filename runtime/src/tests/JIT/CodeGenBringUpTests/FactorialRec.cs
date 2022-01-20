@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_FactorialRec
 {
     const int Pass = 100;
@@ -27,7 +28,8 @@ public class BringUpTest_FactorialRec
     public static int Main()
     {
         int s = FactorialRec(5);
-        if (s != 120) return Fail;
+        if (s != 120)
+            return Fail;
         return Pass;
     }
 }

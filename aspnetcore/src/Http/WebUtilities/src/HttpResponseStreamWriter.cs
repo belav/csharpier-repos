@@ -40,8 +40,7 @@ public class HttpResponseStreamWriter : TextWriter
     /// <param name="encoding">The character encoding to use.</param>
     public HttpResponseStreamWriter(Stream stream, Encoding encoding)
         : this(stream, encoding, DefaultBufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared)
-    {
-    }
+    { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="HttpResponseStreamWriter"/>.
@@ -50,9 +49,7 @@ public class HttpResponseStreamWriter : TextWriter
     /// <param name="encoding">The character encoding to use.</param>
     /// <param name="bufferSize">The minimum buffer size.</param>
     public HttpResponseStreamWriter(Stream stream, Encoding encoding, int bufferSize)
-        : this(stream, encoding, bufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared)
-    {
-    }
+        : this(stream, encoding, bufferSize, ArrayPool<byte>.Shared, ArrayPool<char>.Shared) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="HttpResponseStreamWriter"/>.
@@ -67,7 +64,8 @@ public class HttpResponseStreamWriter : TextWriter
         Encoding encoding,
         int bufferSize,
         ArrayPool<byte> bytePool,
-        ArrayPool<char> charPool)
+        ArrayPool<char> charPool
+    )
     {
         _stream = stream ?? throw new ArgumentNullException(nameof(stream));
         Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
@@ -80,7 +78,10 @@ public class HttpResponseStreamWriter : TextWriter
         }
         if (!_stream.CanWrite)
         {
-            throw new ArgumentException(Resources.HttpResponseStreamWriter_StreamNotWritable, nameof(stream));
+            throw new ArgumentException(
+                Resources.HttpResponseStreamWriter_StreamNotWritable,
+                nameof(stream)
+            );
         }
 
         _charBufferSize = bufferSize;
@@ -170,7 +171,8 @@ public class HttpResponseStreamWriter : TextWriter
 
             remaining -= written;
             value = value.Slice(written);
-        };
+        }
+        ;
     }
 
     /// <inheritdoc/>
@@ -330,8 +332,15 @@ public class HttpResponseStreamWriter : TextWriter
     }
 
     /// <inheritdoc/>
-    [SuppressMessage("ApiDesign", "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads.", Justification = "Required to maintain compatibility")]
-    public override Task WriteAsync(ReadOnlyMemory<char> value, CancellationToken cancellationToken = default)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads.",
+        Justification = "Required to maintain compatibility"
+    )]
+    public override Task WriteAsync(
+        ReadOnlyMemory<char> value,
+        CancellationToken cancellationToken = default
+    )
     {
         if (_disposed)
         {
@@ -378,11 +387,15 @@ public class HttpResponseStreamWriter : TextWriter
 
             remaining -= written;
             value = value.Slice(written);
-        };
+        }
+        ;
     }
 
     /// <inheritdoc/>
-    public override Task WriteLineAsync(ReadOnlyMemory<char> value, CancellationToken cancellationToken = default)
+    public override Task WriteLineAsync(
+        ReadOnlyMemory<char> value,
+        CancellationToken cancellationToken = default
+    )
     {
         if (_disposed)
         {
@@ -499,7 +512,8 @@ public class HttpResponseStreamWriter : TextWriter
             _charBufferCount,
             _byteBuffer,
             0,
-            flush: flushEncoder);
+            flush: flushEncoder
+        );
 
         _charBufferCount = 0;
 
@@ -524,7 +538,8 @@ public class HttpResponseStreamWriter : TextWriter
             _charBufferCount,
             _byteBuffer,
             0,
-            flush: flushEncoder);
+            flush: flushEncoder
+        );
 
         _charBufferCount = 0;
 
@@ -542,7 +557,8 @@ public class HttpResponseStreamWriter : TextWriter
             sourceIndex: 0,
             destination: _charBuffer,
             destinationIndex: _charBufferCount,
-            count: value.Length);
+            count: value.Length
+        );
 
         _charBufferCount += value.Length;
     }
@@ -555,7 +571,8 @@ public class HttpResponseStreamWriter : TextWriter
             sourceIndex: index,
             destination: _charBuffer,
             destinationIndex: _charBufferCount,
-            count: remaining);
+            count: remaining
+        );
 
         _charBufferCount += remaining;
         index += remaining;
@@ -571,7 +588,8 @@ public class HttpResponseStreamWriter : TextWriter
             srcOffset: index * sizeof(char),
             dst: _charBuffer,
             dstOffset: _charBufferCount * sizeof(char),
-            count: remaining * sizeof(char));
+            count: remaining * sizeof(char)
+        );
 
         _charBufferCount += remaining;
         index += remaining;

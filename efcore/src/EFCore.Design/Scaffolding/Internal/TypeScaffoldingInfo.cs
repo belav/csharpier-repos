@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             int? scaffoldMaxLength,
             bool? scaffoldFixedLength,
             int? scaffoldPrecision,
-            int? scaffoldScale)
+            int? scaffoldScale
+        )
         {
             IsInferred = inferred;
             ScaffoldUnicode = scaffoldUnicode;

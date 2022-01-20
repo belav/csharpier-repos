@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 /// </summary>
 /// <typeparam name="TKey">Type of keys in the dictionary.</typeparam>
 /// <typeparam name="TValue">Type of values in the dictionary.</typeparam>
-public class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder<KeyValuePair<TKey, TValue?>> where TKey : notnull
+public class DictionaryModelBinder<TKey, TValue>
+    : CollectionModelBinder<KeyValuePair<TKey, TValue?>> where TKey : notnull
 {
     private readonly IModelBinder _valueBinder;
 
@@ -28,8 +29,15 @@ public class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder<KeyValu
     /// <param name="keyBinder">The <see cref="IModelBinder"/> for <typeparamref name="TKey"/>.</param>
     /// <param name="valueBinder">The <see cref="IModelBinder"/> for <typeparamref name="TValue"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-    public DictionaryModelBinder(IModelBinder keyBinder, IModelBinder valueBinder, ILoggerFactory loggerFactory)
-        : base(new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory), loggerFactory)
+    public DictionaryModelBinder(
+        IModelBinder keyBinder,
+        IModelBinder valueBinder,
+        ILoggerFactory loggerFactory
+    )
+        : base(
+            new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
+            loggerFactory
+        )
     {
         if (valueBinder == null)
         {
@@ -61,12 +69,14 @@ public class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder<KeyValu
         IModelBinder keyBinder,
         IModelBinder valueBinder,
         ILoggerFactory loggerFactory,
-        bool allowValidatingTopLevelNodes)
+        bool allowValidatingTopLevelNodes
+    )
         : base(
             new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
             loggerFactory,
             // CollectionModelBinder should not check IsRequired, done in this model binder.
-            allowValidatingTopLevelNodes: false)
+            allowValidatingTopLevelNodes: false
+        )
     {
         if (valueBinder == null)
         {
@@ -103,12 +113,14 @@ public class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder<KeyValu
         IModelBinder valueBinder,
         ILoggerFactory loggerFactory,
         bool allowValidatingTopLevelNodes,
-        MvcOptions mvcOptions)
+        MvcOptions mvcOptions
+    )
         : base(
-              new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
-              loggerFactory,
-              allowValidatingTopLevelNodes: false,
-              mvcOptions)
+            new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
+            loggerFactory,
+            allowValidatingTopLevelNodes: false,
+            mvcOptions
+        )
     {
         if (valueBinder == null)
         {
@@ -182,11 +194,14 @@ public class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder<KeyValu
             // that culture when rendering a form.
             var convertedKey = ModelBindingHelper.ConvertTo<TKey>(kvp.Key, culture: null);
 
-            using (bindingContext.EnterNestedScope(
-                modelMetadata: valueMetadata,
-                fieldName: bindingContext.FieldName,
-                modelName: kvp.Value,
-                model: null))
+            using (
+                bindingContext.EnterNestedScope(
+                    modelMetadata: valueMetadata,
+                    fieldName: bindingContext.FieldName,
+                    modelName: kvp.Value,
+                    model: null
+                )
+            )
             {
                 await _valueBinder.BindModelAsync(bindingContext);
 
@@ -200,7 +215,10 @@ public class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder<KeyValu
                     // IKeyRewriterValueProvider implementation was first (hiding the original "[key][next key]").
                     if (kvp.Value.EndsWith(']'))
                     {
-                        bindingContext.ModelName = ModelNames.CreatePropertyModelName(prefix, kvp.Key);
+                        bindingContext.ModelName = ModelNames.CreatePropertyModelName(
+                            prefix,
+                            kvp.Key
+                        );
                     }
                     else
                     {
@@ -217,16 +235,23 @@ public class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder<KeyValu
             }
         }
 
-        bindingContext.ValidationState.Add(model, new ValidationStateEntry()
-        {
-            Strategy = new ShortFormDictionaryValidationStrategy<TKey, TValue?>(keyMappings, valueMetadata),
-        });
+        bindingContext.ValidationState.Add(
+            model,
+            new ValidationStateEntry()
+            {
+                Strategy = new ShortFormDictionaryValidationStrategy<TKey, TValue?>(
+                    keyMappings,
+                    valueMetadata
+                ),
+            }
+        );
     }
 
     /// <inheritdoc />
     protected override object? ConvertToCollectionType(
         Type targetType,
-        IEnumerable<KeyValuePair<TKey, TValue?>> collection)
+        IEnumerable<KeyValuePair<TKey, TValue?>> collection
+    )
     {
         if (collection == null)
         {

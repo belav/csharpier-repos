@@ -36,9 +36,11 @@
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Source, Dest>());
 
-            var source = new CustomCollection<Source> {new Source()};
+            var source = new CustomCollection<Source> { new Source() };
 
-            var dests = config.CreateMapper().Map<CustomCollection<Source>, CustomCollection<Dest>>(source);
+            var dests = config
+                .CreateMapper()
+                .Map<CustomCollection<Source>, CustomCollection<Dest>>(source);
 
             dests.Count.ShouldBe(1);
         }

@@ -27,9 +27,7 @@ public class AcceptedAtRouteResult : ObjectResult
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to format in the entity body.</param>
     public AcceptedAtRouteResult(object? routeValues, [ActionResultObjectValue] object? value)
-        : this(routeName: null, routeValues: routeValues, value: value)
-    {
-    }
+        : this(routeName: null, routeValues: routeValues, value: value) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AcceptedAtRouteResult"/> class with the values
@@ -41,8 +39,8 @@ public class AcceptedAtRouteResult : ObjectResult
     public AcceptedAtRouteResult(
         string? routeName,
         object? routeValues,
-        [ActionResultObjectValue] object? value)
-        : base(value)
+        [ActionResultObjectValue] object? value
+    ) : base(value)
     {
         RouteName = routeName;
         RouteValues = routeValues == null ? null : new RouteValueDictionary(routeValues);

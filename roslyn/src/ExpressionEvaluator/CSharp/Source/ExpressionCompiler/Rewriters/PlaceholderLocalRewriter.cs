@@ -10,11 +10,23 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
-    internal sealed class PlaceholderLocalRewriter : BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+    internal sealed class PlaceholderLocalRewriter
+        : BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
     {
-        internal static BoundNode Rewrite(CSharpCompilation compilation, EENamedTypeSymbol container, HashSet<LocalSymbol> declaredLocals, BoundNode node, DiagnosticBag diagnostics)
+        internal static BoundNode Rewrite(
+            CSharpCompilation compilation,
+            EENamedTypeSymbol container,
+            HashSet<LocalSymbol> declaredLocals,
+            BoundNode node,
+            DiagnosticBag diagnostics
+        )
         {
-            var rewriter = new PlaceholderLocalRewriter(compilation, container, declaredLocals, diagnostics);
+            var rewriter = new PlaceholderLocalRewriter(
+                compilation,
+                container,
+                declaredLocals,
+                diagnostics
+            );
             return rewriter.Visit(node);
         }
 
@@ -23,7 +35,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private readonly HashSet<LocalSymbol> _declaredLocals;
         private readonly DiagnosticBag _diagnostics;
 
-        private PlaceholderLocalRewriter(CSharpCompilation compilation, EENamedTypeSymbol container, HashSet<LocalSymbol> declaredLocals, DiagnosticBag diagnostics)
+        private PlaceholderLocalRewriter(
+            CSharpCompilation compilation,
+            EENamedTypeSymbol container,
+            HashSet<LocalSymbol> declaredLocals,
+            DiagnosticBag diagnostics
+        )
         {
             _compilation = compilation;
             _container = container;
@@ -34,7 +51,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         public override BoundNode VisitLocal(BoundLocal node)
         {
             var result = RewriteLocal(node);
-            Debug.Assert(TypeSymbol.Equals(result.Type, node.Type, TypeCompareKind.ConsiderEverything2));
+            Debug.Assert(
+                TypeSymbol.Equals(result.Type, node.Type, TypeCompareKind.ConsiderEverything2)
+            );
             return result;
         }
 
@@ -44,11 +63,21 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             var placeholder = local as PlaceholderLocalSymbol;
             if ((object)placeholder != null)
             {
-                return placeholder.RewriteLocal(_compilation, _container, node.Syntax, _diagnostics);
+                return placeholder.RewriteLocal(
+                    _compilation,
+                    _container,
+                    node.Syntax,
+                    _diagnostics
+                );
             }
             if (_declaredLocals.Contains(local))
             {
-                return ObjectIdLocalSymbol.RewriteLocal(_compilation, _container, node.Syntax, local);
+                return ObjectIdLocalSymbol.RewriteLocal(
+                    _compilation,
+                    _container,
+                    node.Syntax,
+                    local
+                );
             }
             return node;
         }

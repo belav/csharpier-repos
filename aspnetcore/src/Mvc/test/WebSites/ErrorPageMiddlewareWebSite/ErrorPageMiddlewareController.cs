@@ -35,7 +35,8 @@ public class ErrorPageMiddlewareController : Controller
     {
         throw new ReflectionTypeLoadException(
             new[] { typeof(SomeType) },
-            new[] { new TypeLoadException("Custom Loader Exception.") });
+            new[] { new TypeLoadException("Custom Loader Exception.") }
+        );
     }
 
     private class SomeType

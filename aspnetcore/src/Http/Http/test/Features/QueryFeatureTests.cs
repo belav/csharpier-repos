@@ -30,7 +30,10 @@ public class QueryFeatureTests
     public void ParseQueryWithUniqueKeysWorks(string queryString)
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = queryString };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = queryString
+        };
 
         var provider = new QueryFeature(features);
 
@@ -50,7 +53,10 @@ public class QueryFeatureTests
     public void KeyWithoutValuesAddedToQueryCollection(string queryString, string emptyParam)
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = queryString };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = queryString
+        };
 
         var provider = new QueryFeature(features);
 
@@ -67,7 +73,10 @@ public class QueryFeatureTests
     public void EmptyKeysNotAddedToQueryCollection(string queryString)
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = queryString };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = queryString
+        };
 
         var provider = new QueryFeature(features);
 
@@ -80,7 +89,10 @@ public class QueryFeatureTests
     public void ParseQueryWithEmptyKeyWorks()
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = "?=value1&=" };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = "?=value1&="
+        };
 
         var provider = new QueryFeature(features);
 
@@ -94,7 +106,10 @@ public class QueryFeatureTests
     public void ParseQueryWithDuplicateKeysGroups()
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = "?key1=valueA&key2=valueB&key1=valueC" };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = "?key1=valueA&key2=valueB&key1=valueC"
+        };
 
         var provider = new QueryFeature(features);
 
@@ -109,7 +124,10 @@ public class QueryFeatureTests
     public void ParseQueryWithThreefoldKeysGroups()
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = "?key1=valueA&key2=valueB&key1=valueC&key1=valueD" };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = "?key1=valueA&key2=valueB&key1=valueC&key1=valueD"
+        };
 
         var provider = new QueryFeature(features);
 
@@ -124,7 +142,10 @@ public class QueryFeatureTests
     public void ParseQueryWithEmptyValuesWorks()
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = "?key1=&key2=" };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = "?key1=&key2="
+        };
 
         var provider = new QueryFeature(features);
 
@@ -142,7 +163,10 @@ public class QueryFeatureTests
     public void ParseEmptyOrNullQueryWorks(string queryString)
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = queryString };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = queryString
+        };
 
         var provider = new QueryFeature(features);
 
@@ -155,7 +179,10 @@ public class QueryFeatureTests
     public void ParseQueryWithEncodedKeyWorks()
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = "?fields+%5BtodoItems%5D" };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = "?fields+%5BtodoItems%5D"
+        };
 
         var provider = new QueryFeature(features);
 
@@ -169,7 +196,10 @@ public class QueryFeatureTests
     public void ParseQueryWithEncodedValueWorks()
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = "?=fields+%5BtodoItems%5D" };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = "?=fields+%5BtodoItems%5D"
+        };
 
         var provider = new QueryFeature(features);
 
@@ -183,7 +213,10 @@ public class QueryFeatureTests
     public void ParseQueryWithEncodedKeyEmptyValueWorks()
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = "?fields+%5BtodoItems%5D=" };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = "?fields+%5BtodoItems%5D="
+        };
 
         var provider = new QueryFeature(features);
 
@@ -197,7 +230,10 @@ public class QueryFeatureTests
     public void ParseQueryWithEncodedKeyEncodedValueWorks()
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = "?fields+%5BtodoItems%5D=%5B+1+%5D" };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = "?fields+%5BtodoItems%5D=%5B+1+%5D"
+        };
 
         var provider = new QueryFeature(features);
 
@@ -211,7 +247,10 @@ public class QueryFeatureTests
     public void ParseQueryWithEncodedKeyEncodedValuesWorks()
     {
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = "?fields+%5BtodoItems%5D=%5B+1+%5D&fields+%5BtodoItems%5D=%5B+2+%5D" };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = "?fields+%5BtodoItems%5D=%5B+1+%5D&fields+%5BtodoItems%5D=%5B+2+%5D"
+        };
 
         var provider = new QueryFeature(features);
 
@@ -228,8 +267,9 @@ public class QueryFeatureTests
         var features = new FeatureCollection();
         features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
         {
-            QueryString = "?a=0&b=0&c=1&d=2&e=3&f=4&g=5&h=6&i=7&j=8&k=9&" +
-                "key=1&Key=2&key=3&Key=4&KEy=5&KEY=6&kEY=7&KeY=8&kEy=9&keY=10"
+            QueryString =
+                "?a=0&b=0&c=1&d=2&e=3&f=4&g=5&h=6&i=7&j=8&k=9&"
+                + "key=1&Key=2&key=3&Key=4&KEy=5&KEY=6&kEY=7&KeY=8&kEy=9&keY=10"
         };
 
         var provider = new QueryFeature(features);
@@ -237,7 +277,10 @@ public class QueryFeatureTests
         var queryCollection = provider.Query;
 
         Assert.Equal(12, queryCollection.Count);
-        Assert.Equal(new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }, queryCollection["KEY"]);
+        Assert.Equal(
+            new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" },
+            queryCollection["KEY"]
+        );
     }
 
     [Fact]
@@ -245,7 +288,10 @@ public class QueryFeatureTests
     {
         // need to use less than 10 keys to test array storage code path
         var features = new FeatureCollection();
-        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature { QueryString = "?key=1&Key=2&key=3&Key=4&KEy=5" };
+        features[typeof(IHttpRequestFeature)] = new HttpRequestFeature
+        {
+            QueryString = "?key=1&Key=2&key=3&Key=4&KEy=5"
+        };
 
         var provider = new QueryFeature(features);
 

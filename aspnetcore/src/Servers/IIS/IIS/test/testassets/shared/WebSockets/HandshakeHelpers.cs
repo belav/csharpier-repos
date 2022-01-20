@@ -12,9 +12,18 @@ internal static class HandshakeHelpers
 {
     public static IEnumerable<KeyValuePair<string, string>> GenerateResponseHeaders(string key)
     {
-        yield return new KeyValuePair<string, string>(Constants.Headers.Connection, Constants.Headers.Upgrade);
-        yield return new KeyValuePair<string, string>(Constants.Headers.Upgrade, Constants.Headers.UpgradeWebSocket);
-        yield return new KeyValuePair<string, string>(Constants.Headers.SecWebSocketAccept, CreateResponseKey(key));
+        yield return new KeyValuePair<string, string>(
+            Constants.Headers.Connection,
+            Constants.Headers.Upgrade
+        );
+        yield return new KeyValuePair<string, string>(
+            Constants.Headers.Upgrade,
+            Constants.Headers.UpgradeWebSocket
+        );
+        yield return new KeyValuePair<string, string>(
+            Constants.Headers.SecWebSocketAccept,
+            CreateResponseKey(key)
+        );
     }
 
     public static string CreateResponseKey(string requestKey)

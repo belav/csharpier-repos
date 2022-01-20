@@ -17,13 +17,11 @@ namespace System.CommandLine.Tests
             public void When_legacy_behavior_is_enabled_then_the_portion_of_the_command_line_following_a_double_dasare_treated_as_unparsed_tokens()
             {
                 var result = new CommandLineBuilder(new RootCommand { new Option("-o") })
-                             .EnableLegacyDoubleDashBehavior()
-                             .Build()
-                             .Parse("-o \"some stuff\" -- x y z");
+                    .EnableLegacyDoubleDashBehavior()
+                    .Build()
+                    .Parse("-o \"some stuff\" -- x y z");
 
-                result.UnparsedTokens
-                      .Should()
-                      .BeEquivalentSequenceTo("x", "y", "z");
+                result.UnparsedTokens.Should().BeEquivalentSequenceTo("x", "y", "z");
             }
 
             [Fact]
@@ -33,29 +31,18 @@ namespace System.CommandLine.Tests
                 var optionX = new Option(new[] { "-x" });
                 var optionY = new Option(new[] { "-y" });
                 var optionZ = new Option(new[] { "-z" });
-                var rootCommand = new RootCommand
-                {
-                    optionO,
-                    optionX,
-                    optionY,
-                    optionZ
-                };
+                var rootCommand = new RootCommand { optionO, optionX, optionY, optionZ };
                 var result = new CommandLineBuilder(rootCommand)
-                             .EnableLegacyDoubleDashBehavior()
-                             .Build()
-                             .Parse("-o \"some stuff\" -- -x -y -z -o:foo");
+                    .EnableLegacyDoubleDashBehavior()
+                    .Build()
+                    .Parse("-o \"some stuff\" -- -x -y -z -o:foo");
 
                 result.HasOption(optionO).Should().BeTrue();
                 result.HasOption(optionX).Should().BeFalse();
                 result.HasOption(optionY).Should().BeFalse();
                 result.HasOption(optionZ).Should().BeFalse();
 
-                result.UnparsedTokens
-                      .Should()
-                      .BeEquivalentSequenceTo("-x",
-                                              "-y",
-                                              "-z",
-                                              "-o:foo");
+                result.UnparsedTokens.Should().BeEquivalentSequenceTo("-x", "-y", "-z", "-o:foo");
             }
 
             [Fact]
@@ -63,22 +50,21 @@ namespace System.CommandLine.Tests
             {
                 var option = new Option<string[]>(new[] { "-o", "--one" });
                 var argument = new Argument<string[]>();
-                var rootCommand = new RootCommand
-                {
-                    option,
-                    argument
-                };
+                var rootCommand = new RootCommand { option, argument };
 
                 var result = new CommandLineBuilder(rootCommand)
-                             .EnableLegacyDoubleDashBehavior(false)
-                             .Build()
-                             .Parse("-o \"some stuff\" -- -o --one -x -y -z -o:foo");
+                    .EnableLegacyDoubleDashBehavior(false)
+                    .Build()
+                    .Parse("-o \"some stuff\" -- -o --one -x -y -z -o:foo");
 
                 result.HasOption(option).Should().BeTrue();
 
                 result.GetValueForOption(option).Should().BeEquivalentTo("some stuff");
 
-                result.GetValueForArgument(argument).Should().BeEquivalentSequenceTo("-o", "--one", "-x", "-y", "-z", "-o:foo");
+                result
+                    .GetValueForArgument(argument)
+                    .Should()
+                    .BeEquivalentSequenceTo("-o", "--one", "-x", "-y", "-z", "-o:foo");
 
                 result.UnparsedTokens.Should().BeEmpty();
             }
@@ -87,15 +73,12 @@ namespace System.CommandLine.Tests
             public void When_legacy_behavior_is_disabled_then_a_second_double_dash_is_parsed_as_an_argument()
             {
                 var argument = new Argument<string[]>();
-                var rootCommand = new RootCommand
-                {
-                    argument
-                };
+                var rootCommand = new RootCommand { argument };
 
                 var result = new CommandLineBuilder(rootCommand)
-                             .EnableLegacyDoubleDashBehavior(false)
-                             .Build()
-                             .Parse("a b c -- -- d");
+                    .EnableLegacyDoubleDashBehavior(false)
+                    .Build()
+                    .Parse("a b c -- -- d");
 
                 var strings = result.GetValueForArgument(argument);
 

@@ -44,7 +44,12 @@ public class RuntimeConfigParserTask : Task
             return false;
         }
 
-        if (!TryConvertInputToDictionary(RuntimeConfigFile, out Dictionary<string, string>? configProperties))
+        if (
+            !TryConvertInputToDictionary(
+                RuntimeConfigFile,
+                out Dictionary<string, string>? configProperties
+            )
+        )
         {
             return false;
         }
@@ -68,17 +73,18 @@ public class RuntimeConfigParserTask : Task
     }
 
     /// Reads a json file from the given path and extracts the "configProperties" key (assumed to be a string to string dictionary)
-    private bool TryConvertInputToDictionary(string inputFilePath, [NotNullWhen(true)] out Dictionary<string, string>? result)
+    private bool TryConvertInputToDictionary(
+        string inputFilePath,
+        [NotNullWhen(true)] out Dictionary<string, string>? result
+    )
     {
         result = null;
 
-        var options = new JsonSerializerOptions {
+        var options = new JsonSerializerOptions
+        {
             AllowTrailingCommas = true,
             ReadCommentHandling = JsonCommentHandling.Skip,
-            Converters =
-            {
-                new StringConverter()
-            }
+            Converters = { new StringConverter() }
         };
 
         var jsonString = File.ReadAllText(inputFilePath);
@@ -106,7 +112,10 @@ public class RuntimeConfigParserTask : Task
 
     /// Just write the dictionary out to a blob as a count followed by
     /// a length-prefixed UTF8 encoding of each key and value
-    private void ConvertDictionaryToBlob(IReadOnlyDictionary<string, string> properties, BlobBuilder builder)
+    private void ConvertDictionaryToBlob(
+        IReadOnlyDictionary<string, string> properties,
+        BlobBuilder builder
+    )
     {
         int count = properties.Count;
 
@@ -118,7 +127,10 @@ public class RuntimeConfigParserTask : Task
         }
     }
 
-    private bool CheckReservedProperties(IReadOnlyDictionary<string, string> properties, ITaskItem[] keys)
+    private bool CheckReservedProperties(
+        IReadOnlyDictionary<string, string> properties,
+        ITaskItem[] keys
+    )
     {
         var succeed = true;
 
@@ -139,10 +151,13 @@ public class RuntimeOption
 {
     // the configProperties key
     [JsonPropertyName("configProperties")]
-    public Dictionary<string, string> ConfigProperties { get; set; } = new Dictionary<string, string>();
+    public Dictionary<string, string> ConfigProperties { get; set; } =
+        new Dictionary<string, string>();
+
     // everything other than configProperties
     [JsonExtensionData]
-    public Dictionary<string, object> ExtensionDataSub { get; set; } = new Dictionary<string, object>();
+    public Dictionary<string, object> ExtensionDataSub { get; set; } =
+        new Dictionary<string, object>();
 }
 
 public class Root
@@ -150,14 +165,20 @@ public class Root
     // the runtimeOptions key
     [JsonPropertyName("runtimeOptions")]
     public RuntimeOption RuntimeOptions { get; set; } = new RuntimeOption();
+
     // everything other than runtimeOptions
     [JsonExtensionData]
-    public Dictionary<string, object> ExtensionDataRoot { get; set; } = new Dictionary<string, object>();
+    public Dictionary<string, object> ExtensionDataRoot { get; set; } =
+        new Dictionary<string, object>();
 }
 
 public class StringConverter : JsonConverter<string>
 {
-    public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override string Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         switch (reader.TokenType)
         {

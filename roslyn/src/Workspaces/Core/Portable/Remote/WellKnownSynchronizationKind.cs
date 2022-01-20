@@ -10,18 +10,14 @@ namespace Microsoft.CodeAnalysis.Serialization
     internal enum WellKnownSynchronizationKind
     {
         Null,
-
         SolutionState,
         ProjectState,
         DocumentState,
-
         ChecksumCollection,
-
         SolutionAttributes,
         ProjectAttributes,
         DocumentAttributes,
         SourceGeneratedDocumentIdentity,
-
         CompilationOptions,
         ParseOptions,
         ProjectReference,
@@ -29,14 +25,12 @@ namespace Microsoft.CodeAnalysis.Serialization
         AnalyzerReference,
         SourceText,
         OptionSet,
-
         SerializableSourceText,
 
         //
 
         SyntaxTreeIndex,
         SymbolTreeInfo,
-
         ProjectReferenceChecksumCollection,
         MetadataReferenceChecksumCollection,
         AnalyzerReferenceChecksumCollection,

@@ -40,9 +40,15 @@ namespace System.Web.Helpers
         private string _path;
 
         private DataSourceData _dataSource;
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Target = "_xAxis, _yAxis",
-           Justification = "These names make most sense.")]
-        private ChartAxisData _xAxis, _yAxis;
+
+        [SuppressMessage(
+            "StyleCop.CSharp.NamingRules",
+            "SA1305:FieldNamesMustNotUseHungarianNotation",
+            Target = "_xAxis, _yAxis",
+            Justification = "These names make most sense."
+        )]
+        private ChartAxisData _xAxis,
+            _yAxis;
 
 #if CODE_COVERAGE
         [ExcludeFromCodeCoverage]
@@ -63,24 +69,34 @@ namespace System.Web.Helpers
         /// Chart(100, 100, themePath: "my-theme.xml")
         /// Any valid theme definition can be used as content of the file specified in themePath
         /// </example>
-        public Chart(
+        public Chart(int width, int height, string theme = null, string themePath = null)
+            : this(
+                GetDefaultContext(),
+                () => HostingEnvironment.VirtualPathProvider,
+                width,
+                height,
+                theme,
+                themePath
+            ) { }
+
+        // Overload used only for testing
+        internal Chart(
+            HttpContextBase httpContext,
+            VirtualPathProvider virtualPathProvider,
             int width,
             int height,
             string theme = null,
-            string themePath = null)
-            : this(GetDefaultContext(), () => HostingEnvironment.VirtualPathProvider, width, height, theme, themePath)
-        {
-        }
+            string themePath = null
+        ) : this(httpContext, () => virtualPathProvider, width, height, theme, themePath) { }
 
-        // Overload used only for testing
-        internal Chart(HttpContextBase httpContext, VirtualPathProvider virtualPathProvider, int width, int height,
-                       string theme = null, string themePath = null)
-            : this(httpContext, () => virtualPathProvider, width, height, theme, themePath)
-        {
-        }
-
-        internal Chart(HttpContextBase httpContext, Func<VirtualPathProvider> virtualPathProviderFunc,
-            int width, int height, string theme = null, string themePath = null)
+        internal Chart(
+            HttpContextBase httpContext,
+            Func<VirtualPathProvider> virtualPathProviderFunc,
+            int width,
+            int height,
+            string theme = null,
+            string themePath = null
+        )
         {
             Contract.Assert(httpContext != null);
             Contract.Assert(virtualPathProviderFunc != null);
@@ -90,17 +106,25 @@ namespace System.Web.Helpers
 
             if (width < 0)
             {
-                throw new ArgumentOutOfRangeException("width", String.Format(
-                    CultureInfo.CurrentCulture,
-                    CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
-                    0));
+                throw new ArgumentOutOfRangeException(
+                    "width",
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        0
+                    )
+                );
             }
             if (height < 0)
             {
-                throw new ArgumentOutOfRangeException("height", String.Format(
-                    CultureInfo.CurrentCulture,
-                    CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
-                    0));
+                throw new ArgumentOutOfRangeException(
+                    "height",
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        0
+                    )
+                );
             }
 
             _httpContext = httpContext;
@@ -112,10 +136,21 @@ namespace System.Web.Helpers
             // path must be app-relative in case chart is rendered from handler in different directory
             if (!String.IsNullOrEmpty(themePath))
             {
-                _themePath = VirtualPathUtil.ResolvePath(TemplateStack.GetCurrentTemplate(httpContext), httpContext, themePath);
+                _themePath = VirtualPathUtil.ResolvePath(
+                    TemplateStack.GetCurrentTemplate(httpContext),
+                    httpContext,
+                    themePath
+                );
                 if (!virtualPathProviderFunc().FileExists(_themePath))
                 {
-                    throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, HelpersResources.Chart_ThemeFileNotFound, _themePath), "themePath");
+                    throw new ArgumentException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            HelpersResources.Chart_ThemeFileNotFound,
+                            _themePath
+                        ),
+                        "themePath"
+                    );
                 }
             }
         }
@@ -137,15 +172,9 @@ namespace System.Web.Helpers
 
         /// <param name="title">Legend title.</param>
         /// <param name="name">Legend name.</param>
-        public Chart AddLegend(
-            string title = null,
-            string name = null)
+        public Chart AddLegend(string title = null, string name = null)
         {
-            _legends.Add(new LegendData
-            {
-                Name = name,
-                Title = title
-            });
+            _legends.Add(new LegendData { Name = name, Title = title });
             return this;
         }
 
@@ -159,12 +188,24 @@ namespace System.Web.Helpers
         /// <param name="xField">Column for the X data points, if data-binding the series.</param>
         /// <param name="yValues">Y data source(s), if data-binding the series.</param>
         /// <param name="yFields">Column(s) for the Y data points, if data-binding the series.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x",
-            Justification = "Name based on X-axis. Suppressed in source because this is a one-time occurrence")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y",
-            Justification = "Name based on Y-axis. Suppressed in source because this is a one-time occurrence")]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Target = "xValue, xField, yValues, yFields",
-            Justification = "These names cannot be changed because this is a public method.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "x",
+            Justification = "Name based on X-axis. Suppressed in source because this is a one-time occurrence"
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "y",
+            Justification = "Name based on Y-axis. Suppressed in source because this is a one-time occurrence"
+        )]
+        [SuppressMessage(
+            "StyleCop.CSharp.NamingRules",
+            "SA1305:FieldNamesMustNotUseHungarianNotation",
+            Target = "xValue, xField, yValues, yFields",
+            Justification = "These names cannot be changed because this is a public method."
+        )]
         public Chart AddSeries(
             string name = null,
             string chartType = "Column",
@@ -175,11 +216,15 @@ namespace System.Web.Helpers
             IEnumerable xValue = null,
             string xField = null,
             IEnumerable yValues = null,
-            string yFields = null)
+            string yFields = null
+        )
         {
             if (String.IsNullOrEmpty(chartType))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "chartType");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "chartType"
+                );
             }
 
             DataSourceData dataSource = null;
@@ -194,54 +239,54 @@ namespace System.Web.Helpers
                 };
             }
 
-            _series.Add(new SeriesData
-            {
-                Name = name,
-                ChartType = ConvertStringArgument<SeriesChartType>("chartType", chartType),
-                ChartArea = chartArea,
-                AxisLabel = axisLabel,
-                Legend = legend,
-                MarkerStep = markerStep,
-                DataSource = dataSource
-            });
+            _series.Add(
+                new SeriesData
+                {
+                    Name = name,
+                    ChartType = ConvertStringArgument<SeriesChartType>("chartType", chartType),
+                    ChartArea = chartArea,
+                    AxisLabel = axisLabel,
+                    Legend = legend,
+                    MarkerStep = markerStep,
+                    DataSource = dataSource
+                }
+            );
             return this;
         }
 
         /// <param name="text">Title text.</param>
         /// <param name="name">Title name.</param>
-        public Chart AddTitle(
-            string text = null,
-            string name = null)
+        public Chart AddTitle(string text = null, string name = null)
         {
-            _titles.Add(new TitleData
-            {
-                Name = name,
-                Text = text
-            });
+            _titles.Add(new TitleData { Name = name, Text = text });
             return this;
         }
 
         /// <param name="title">Title for X-axis</param>
         /// <param name="min">The minimum value on X-axis. Default 0</param>
         /// <param name="max">The maximum value on X-axis. Default NaN</param>
-        public Chart SetXAxis(
-            string title = "",
-            double min = 0,
-            double max = Double.NaN)
+        public Chart SetXAxis(string title = "", double min = 0, double max = Double.NaN)
         {
-            _xAxis = new ChartAxisData { Title = title, Minimum = min, Maximum = max };
+            _xAxis = new ChartAxisData
+            {
+                Title = title,
+                Minimum = min,
+                Maximum = max
+            };
             return this;
         }
 
         /// <param name="title">Title for Y-axis</param>
         /// <param name="min">The minimum value on Y-axis. Default 0</param>
         /// <param name="max">The maximum value on Y-axis. Default NaN</param>
-        public Chart SetYAxis(
-            string title = "",
-            double min = 0,
-            double max = Double.NaN)
+        public Chart SetYAxis(string title = "", double min = 0, double max = Double.NaN)
         {
-            _yAxis = new ChartAxisData { Title = title, Minimum = min, Maximum = max };
+            _yAxis = new ChartAxisData
+            {
+                Title = title,
+                Minimum = min,
+                Maximum = max
+            };
             return this;
         }
 
@@ -254,14 +299,32 @@ namespace System.Web.Helpers
         /// <param name="yFields">Column(s) for the Y data points, separated by comma.</param>
         /// <param name="otherFields"></param>
         /// <param name="pointSortOrder">Sort order (see: PointSortOrder).</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x",
-            Justification = "Name based on X-axis. Suppressed in source because this is a one-time occurrence")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y",
-            Justification = "Name based on Y-axis. Suppressed in source because this is a one-time occurrence")]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Target = "xField, yFields",
-            Justification = "These names cannot be changed because this is a public method.")]
-        public Chart DataBindCrossTable(IEnumerable dataSource, string groupByField, string xField, string yFields,
-                                        string otherFields = null, string pointSortOrder = "Ascending")
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "x",
+            Justification = "Name based on X-axis. Suppressed in source because this is a one-time occurrence"
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "y",
+            Justification = "Name based on Y-axis. Suppressed in source because this is a one-time occurrence"
+        )]
+        [SuppressMessage(
+            "StyleCop.CSharp.NamingRules",
+            "SA1305:FieldNamesMustNotUseHungarianNotation",
+            Target = "xField, yFields",
+            Justification = "These names cannot be changed because this is a public method."
+        )]
+        public Chart DataBindCrossTable(
+            IEnumerable dataSource,
+            string groupByField,
+            string xField,
+            string yFields,
+            string otherFields = null,
+            string pointSortOrder = "Ascending"
+        )
         {
             if (dataSource == null)
             {
@@ -269,15 +332,24 @@ namespace System.Web.Helpers
             }
             if (dataSource is string)
             {
-                throw new ArgumentException(HelpersResources.Chart_ExceptionDataBindSeriesToString, "dataSource");
+                throw new ArgumentException(
+                    HelpersResources.Chart_ExceptionDataBindSeriesToString,
+                    "dataSource"
+                );
             }
             if (String.IsNullOrEmpty(groupByField))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "groupByField");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "groupByField"
+                );
             }
             if (String.IsNullOrEmpty(yFields))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "yFields");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "yFields"
+                );
             }
 
             _dataSource = new DataSourceData
@@ -287,7 +359,10 @@ namespace System.Web.Helpers
                 XField = xField,
                 YFields = yFields,
                 OtherFields = otherFields,
-                PointSortOrder = ConvertStringArgument<PointSortOrder>("pointSortOrder", pointSortOrder)
+                PointSortOrder = ConvertStringArgument<PointSortOrder>(
+                    "pointSortOrder",
+                    pointSortOrder
+                )
             };
             return this;
         }
@@ -297,10 +372,18 @@ namespace System.Web.Helpers
         /// </summary>
         /// <param name="dataSource">Chart data source.</param>
         /// <param name="xField">Column for the X data points.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x",
-            Justification = "Name based on X-axis. Suppressed in source because this is a one-time occurrence")]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Target = "xField",
-            Justification = "These names cannot be changed because this is a public method.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "x",
+            Justification = "Name based on X-axis. Suppressed in source because this is a one-time occurrence"
+        )]
+        [SuppressMessage(
+            "StyleCop.CSharp.NamingRules",
+            "SA1305:FieldNamesMustNotUseHungarianNotation",
+            Target = "xField",
+            Justification = "These names cannot be changed because this is a public method."
+        )]
         public Chart DataBindTable(IEnumerable dataSource, string xField = null)
         {
             if (dataSource == null)
@@ -309,7 +392,10 @@ namespace System.Web.Helpers
             }
             if (dataSource is string)
             {
-                throw new ArgumentException(HelpersResources.Chart_ExceptionDataBindSeriesToString, "dataSource");
+                throw new ArgumentException(
+                    HelpersResources.Chart_ExceptionDataBindSeriesToString,
+                    "dataSource"
+                );
             }
 
             _dataSource = new DataSourceData
@@ -330,10 +416,12 @@ namespace System.Web.Helpers
             var imageFormat = ConvertStringToChartImageFormat(format);
             using (MemoryStream stream = new MemoryStream())
             {
-                ExecuteChartAction(c =>
-                {
-                    c.SaveImage(stream, imageFormat);
-                });
+                ExecuteChartAction(
+                    c =>
+                    {
+                        c.SaveImage(stream, imageFormat);
+                    }
+                );
                 return stream.ToArray();
             }
         }
@@ -365,16 +453,21 @@ namespace System.Web.Helpers
         {
             if (String.IsNullOrEmpty(path))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "path");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "path"
+                );
             }
             var imageFormat = ConvertStringToChartImageFormat(format);
 
             _path = VirtualPathUtil.MapPath(httpContext, path);
-            ExecuteChartAction(c =>
-            {
-                c.RenderType = RenderType.ImageTag;
-                c.SaveImage(FileName, imageFormat);
-            });
+            ExecuteChartAction(
+                c =>
+                {
+                    c.RenderType = RenderType.ImageTag;
+                    c.SaveImage(FileName, imageFormat);
+                }
+            );
             return this;
         }
 
@@ -385,7 +478,11 @@ namespace System.Web.Helpers
         /// <param name="minutesToCache">Number of minutes to save in cache.</param>
         /// <param name="slidingExpiration">Whether a sliding expiration policy is used.</param>
         /// <returns>Cache key.</returns>
-        public string SaveToCache(string key = null, int minutesToCache = 20, bool slidingExpiration = true)
+        public string SaveToCache(
+            string key = null,
+            int minutesToCache = 20,
+            bool slidingExpiration = true
+        )
         {
             if (String.IsNullOrEmpty(key))
             {
@@ -414,13 +511,18 @@ namespace System.Web.Helpers
         {
             if (String.IsNullOrEmpty(path))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "path");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "path"
+                );
             }
 
-            ExecuteChartAction(c =>
-            {
-                c.SaveXml(VirtualPathUtil.MapPath(httpContext, path));
-            });
+            ExecuteChartAction(
+                c =>
+                {
+                    c.SaveXml(VirtualPathUtil.MapPath(httpContext, path));
+                }
+            );
             return this;
         }
 
@@ -459,7 +561,10 @@ namespace System.Web.Helpers
         // create and execute an action against the WebForm control in a limited scope since the control is disposable.
         internal void ExecuteChartAction(Action<UI.DataVisualization.Charting.Chart> action)
         {
-            using (UI.DataVisualization.Charting.Chart chart = new UI.DataVisualization.Charting.Chart())
+            using (
+                UI.DataVisualization.Charting.Chart chart =
+                    new UI.DataVisualization.Charting.Chart()
+            )
             {
                 chart.Width = new Unit(_width);
                 chart.Height = new Unit(_height);
@@ -501,7 +606,10 @@ namespace System.Web.Helpers
             }
         }
 
-        private static void LoadChartThemeFromFile(UI.DataVisualization.Charting.Chart chart, Stream templateStream)
+        private static void LoadChartThemeFromFile(
+            UI.DataVisualization.Charting.Chart chart,
+            Stream templateStream
+        )
         {
             // workarounds for Chart templating bugs mentioned in:
             // http://social.msdn.microsoft.com/Forums/en-US/MSWinWebChart/thread/b50d5b7e-30e2-4948-af7a-370d9be1268a
@@ -512,9 +620,12 @@ namespace System.Web.Helpers
             // loading serializer with stream to avoid bug with template file getting locked in VS
 
             // The default xml reader used by the serializer does not ignore comments
-            // Using the IsUnknownAttributeIgnored fixes this, but then it would give no feedback to the user 
-            // if member names do not match the spelling and casing of Chart properties. 
-            XmlReader reader = XmlReader.Create(templateStream, new XmlReaderSettings { IgnoreComments = true });
+            // Using the IsUnknownAttributeIgnored fixes this, but then it would give no feedback to the user
+            // if member names do not match the spelling and casing of Chart properties.
+            XmlReader reader = XmlReader.Create(
+                templateStream,
+                new XmlReaderSettings { IgnoreComments = true }
+            );
             chart.Serializer.Load(reader);
         }
 
@@ -524,7 +635,10 @@ namespace System.Web.Helpers
 
             if (String.IsNullOrEmpty(key))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "key");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "key"
+                );
             }
 
             var chart = WebCache.Get(key) as Chart;
@@ -535,7 +649,11 @@ namespace System.Web.Helpers
             return chart;
         }
 
-        internal static Chart WriteFromCache(HttpContextBase context, string key, string format = "jpeg")
+        internal static Chart WriteFromCache(
+            HttpContextBase context,
+            string key,
+            string format = "jpeg"
+        )
         {
             var chart = GetFromCache(context, key);
             if (chart != null)
@@ -603,8 +721,12 @@ namespace System.Web.Helpers
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Target = "yValues, yValuesArray",
-            Justification = "These names make the most sense.")]
+        [SuppressMessage(
+            "StyleCop.CSharp.NamingRules",
+            "SA1305:FieldNamesMustNotUseHungarianNotation",
+            Target = "yValues, yValuesArray",
+            Justification = "These names make the most sense."
+        )]
         private void ApplySeries(UI.DataVisualization.Charting.Chart chart)
         {
             foreach (var seriesData in _series)
@@ -628,17 +750,27 @@ namespace System.Web.Helpers
                             var yValuesArray = yValues as IEnumerable[];
                             if ((yValuesArray != null) && !(yValues is string[]))
                             {
-                                series.Points.DataBindXY(seriesData.DataSource.XDataSource, yValuesArray);
+                                series.Points.DataBindXY(
+                                    seriesData.DataSource.XDataSource,
+                                    yValuesArray
+                                );
                             }
                             else
                             {
-                                series.Points.DataBindXY(seriesData.DataSource.XDataSource, yValues);
+                                series.Points.DataBindXY(
+                                    seriesData.DataSource.XDataSource,
+                                    yValues
+                                );
                             }
                         }
                         else
                         {
-                            series.Points.DataBindXY(seriesData.DataSource.XDataSource, seriesData.DataSource.XField,
-                                                     seriesData.DataSource.DataSource, seriesData.DataSource.YFields);
+                            series.Points.DataBindXY(
+                                seriesData.DataSource.XDataSource,
+                                seriesData.DataSource.XField,
+                                seriesData.DataSource.DataSource,
+                                seriesData.DataSource.YFields
+                            );
                         }
                     }
                 }
@@ -677,8 +809,14 @@ namespace System.Web.Helpers
             object result;
             if (!ConversionUtil.TryFromString(typeof(T), value, out result))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture,
-                                                          HelpersResources.Chart_ArgumentConversionFailed, typeof(T).FullName), paramName);
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        HelpersResources.Chart_ArgumentConversionFailed,
+                        typeof(T).FullName
+                    ),
+                    paramName
+                );
             }
             return (T)result;
         }
@@ -694,8 +832,14 @@ namespace System.Web.Helpers
             format = NormalizeFormat(format);
             if (!ConversionUtil.TryFromString(typeof(ChartImageFormat), format, out result))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture,
-                                                          HelpersResources.Image_IncorrectImageFormat, format), "format");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        HelpersResources.Image_IncorrectImageFormat,
+                        format
+                    ),
+                    "format"
+                );
             }
             return (ChartImageFormat)result;
         }
@@ -713,13 +857,12 @@ namespace System.Web.Helpers
                         _dataSource.XField ?? String.Empty,
                         _dataSource.YFields,
                         _dataSource.OtherFields ?? String.Empty,
-                        _dataSource.PointSortOrder);
+                        _dataSource.PointSortOrder
+                    );
                 }
                 else if (_dataSource.DataBindTable)
                 {
-                    chart.DataBindTable(
-                        _dataSource.DataSource,
-                        _dataSource.XField ?? String.Empty);
+                    chart.DataBindTable(_dataSource.DataSource, _dataSource.XField ?? String.Empty);
                 }
                 else
                 {
@@ -749,7 +892,10 @@ namespace System.Web.Helpers
         {
             if (String.IsNullOrEmpty(format))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "format");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "format"
+                );
             }
             if (format.StartsWith("image/", StringComparison.OrdinalIgnoreCase))
             {

@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [EntityFrameworkInternal]
         public QueryTranslationPreprocessorDependencies(
             IEvaluatableExpressionFilter evaluatableExpressionFilter,
-            INavigationExpansionExtensibilityHelper navigationExpansionExtensibilityHelper)
+            INavigationExpansionExtensibilityHelper navigationExpansionExtensibilityHelper
+        )
         {
             EvaluatableExpressionFilter = evaluatableExpressionFilter;
             NavigationExpansionExtensibilityHelper = navigationExpansionExtensibilityHelper;

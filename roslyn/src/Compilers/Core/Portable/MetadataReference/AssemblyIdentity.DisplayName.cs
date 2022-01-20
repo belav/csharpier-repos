@@ -152,7 +152,10 @@ namespace Microsoft.CodeAnalysis
             return GetDisplayName(fullKey: true);
         }
 
-        public static bool TryParseDisplayName(string displayName, [NotNullWhen(true)] out AssemblyIdentity? identity)
+        public static bool TryParseDisplayName(
+            string displayName,
+            [NotNullWhen(true)] out AssemblyIdentity? identity
+        )
         {
             if (displayName == null)
             {
@@ -179,7 +182,11 @@ namespace Microsoft.CodeAnalysis
         /// If neither public key nor token is specified the identity is considered weak.
         /// </remarks>
         /// <exception cref="ArgumentNullException"><paramref name="displayName"/> is null.</exception>
-        public static bool TryParseDisplayName(string displayName, [NotNullWhen(true)] out AssemblyIdentity? identity, out AssemblyIdentityParts parts)
+        public static bool TryParseDisplayName(
+            string displayName,
+            [NotNullWhen(true)] out AssemblyIdentity? identity,
+            out AssemblyIdentityParts parts
+        )
         {
             // see ndp\clr\src\Binder\TextualIdentityParser.cpp, ndp\clr\src\Binder\StringLexer.cpp
 
@@ -267,8 +274,10 @@ namespace Microsoft.CodeAnalysis
                     version = ToVersion(versionLong);
                     parsedParts |= versionParts;
                 }
-                else if (string.Equals(propertyName, "Culture", StringComparison.OrdinalIgnoreCase) ||
-                         string.Equals(propertyName, "Language", StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(propertyName, "Culture", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(propertyName, "Language", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     if ((seen & AssemblyIdentityParts.Culture) != 0)
                     {
@@ -282,10 +291,18 @@ namespace Microsoft.CodeAnalysis
                         continue;
                     }
 
-                    culture = string.Equals(propertyValue, InvariantCultureDisplay, StringComparison.OrdinalIgnoreCase) ? null : propertyValue;
+                    culture = string.Equals(
+                        propertyValue,
+                        InvariantCultureDisplay,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                      ? null
+                      : propertyValue;
                     parsedParts |= AssemblyIdentityParts.Culture;
                 }
-                else if (string.Equals(propertyName, "PublicKey", StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(propertyName, "PublicKey", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     if ((seen & AssemblyIdentityParts.PublicKey) != 0)
                     {
@@ -312,7 +329,13 @@ namespace Microsoft.CodeAnalysis
                     publicKey = value;
                     parsedParts |= AssemblyIdentityParts.PublicKey;
                 }
-                else if (string.Equals(propertyName, "PublicKeyToken", StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(
+                        propertyName,
+                        "PublicKeyToken",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     if ((seen & AssemblyIdentityParts.PublicKeyToken) != 0)
                     {
@@ -335,7 +358,9 @@ namespace Microsoft.CodeAnalysis
                     publicKeyToken = value;
                     parsedParts |= AssemblyIdentityParts.PublicKeyToken;
                 }
-                else if (string.Equals(propertyName, "Retargetable", StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(propertyName, "Retargetable", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     if ((seen & AssemblyIdentityParts.Retargetability) != 0)
                     {
@@ -364,7 +389,9 @@ namespace Microsoft.CodeAnalysis
 
                     parsedParts |= AssemblyIdentityParts.Retargetability;
                 }
-                else if (string.Equals(propertyName, "ContentType", StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(propertyName, "ContentType", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     if ((seen & AssemblyIdentityParts.ContentType) != 0)
                     {
@@ -378,7 +405,13 @@ namespace Microsoft.CodeAnalysis
                         continue;
                     }
 
-                    if (string.Equals(propertyValue, "WindowsRuntime", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            propertyValue,
+                            "WindowsRuntime",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         contentType = AssemblyContentType.WindowsRuntime;
                     }
@@ -404,9 +437,21 @@ namespace Microsoft.CodeAnalysis
             bool hasPublicKey = !publicKey.IsDefault;
             bool hasPublicKeyToken = !publicKeyToken.IsDefault;
 
-            identity = new AssemblyIdentity(simpleName, version, culture, hasPublicKey ? publicKey : publicKeyToken, hasPublicKey, isRetargetable, contentType);
+            identity = new AssemblyIdentity(
+                simpleName,
+                version,
+                culture,
+                hasPublicKey ? publicKey : publicKeyToken,
+                hasPublicKey,
+                isRetargetable,
+                contentType
+            );
 
-            if (hasPublicKey && hasPublicKeyToken && !identity.PublicKeyToken.SequenceEqual(publicKeyToken))
+            if (
+                hasPublicKey
+                && hasPublicKeyToken
+                && !identity.PublicKeyToken.SequenceEqual(publicKeyToken)
+            )
             {
                 identity = null;
                 return false;
@@ -416,7 +461,11 @@ namespace Microsoft.CodeAnalysis
             return true;
         }
 
-        private static bool TryParseNameToken(string displayName, ref int position, [NotNullWhen(true)] out string? value)
+        private static bool TryParseNameToken(
+            string displayName,
+            ref int position,
+            [NotNullWhen(true)] out string? value
+        )
         {
             Debug.Assert(displayName.IndexOf('\0') == -1);
 
@@ -557,18 +606,23 @@ namespace Microsoft.CodeAnalysis
                 unchecked((ushort)(version >> 48)),
                 unchecked((ushort)(version >> 32)),
                 unchecked((ushort)(version >> 16)),
-                unchecked((ushort)version));
+                unchecked((ushort)version)
+            );
         }
 
         // internal for testing
-        // Parses version format: 
+        // Parses version format:
         //   [version-part]{[.][version-part], 3}
         // Where version part is
         //   [*]|[0-9]*
         // The number of dots in the version determines the present parts, i.e.
         //   "1..2" parses as "1.0.2.0" with Major, Minor and Build parts.
         //   "1.*" parses as "1.0.0.0" with Major and Minor parts.
-        internal static bool TryParseVersion(string str, out ulong result, out AssemblyIdentityParts parts)
+        internal static bool TryParseVersion(
+            string str,
+            out ulong result,
+            out AssemblyIdentityParts parts
+        )
         {
             Debug.Assert(str.Length > 0);
             Debug.Assert(str.IndexOf('\0') < 0);
@@ -600,7 +654,9 @@ namespace Microsoft.CodeAnalysis
 
                     if (partHasValue || partHasWildcard)
                     {
-                        parts |= (AssemblyIdentityParts)((int)AssemblyIdentityParts.VersionMajor << partIndex);
+                        parts |= (AssemblyIdentityParts)(
+                            (int)AssemblyIdentityParts.VersionMajor << partIndex
+                        );
                     }
 
                     if (c == 0)
@@ -636,8 +692,7 @@ namespace Microsoft.CodeAnalysis
 
         private static bool TryParsePublicKey(string value, out ImmutableArray<byte> key)
         {
-            if (!TryParseHexBytes(value, out key) ||
-                !MetadataHelpers.IsValidPublicKey(key))
+            if (!TryParseHexBytes(value, out key) || !MetadataHelpers.IsValidPublicKey(key))
             {
                 key = default;
                 return false;
@@ -650,8 +705,10 @@ namespace Microsoft.CodeAnalysis
 
         private static bool TryParsePublicKeyToken(string value, out ImmutableArray<byte> token)
         {
-            if (string.Equals(value, "null", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(value, "neutral", StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(value, "null", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(value, "neutral", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 token = ImmutableArray<byte>.Empty;
                 return true;
@@ -774,7 +831,12 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static bool TryUnescape(string str, int start, int end, [NotNullWhen(true)] out string? value)
+        private static bool TryUnescape(
+            string str,
+            int start,
+            int end,
+            [NotNullWhen(true)] out string? value
+        )
         {
             var sb = PooledStringBuilder.GetInstance();
 

@@ -52,8 +52,11 @@ namespace Microsoft.AspNet.Facebook
         /// <remarks>
         /// This should only ever be "set" or modified within tests.
         /// </remarks>
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
-            Justification = "This is public and can be set in tests.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This is public and can be set in tests."
+        )]
         public HashSet<string> RequiredPermissions { get; set; }
 
         /// <summary>

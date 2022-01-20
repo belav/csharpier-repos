@@ -18,7 +18,15 @@ class BindHandle1
     }
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-    public static extern IntPtr CreateFile(String FileName, uint Access, uint Share, int Atts, uint Dispo, uint Flags, int Template);
+    public static extern IntPtr CreateFile(
+        String FileName,
+        uint Access,
+        uint Share,
+        int Atts,
+        uint Dispo,
+        uint Flags,
+        int Template
+    );
 
     int RunTest()
     {
@@ -26,9 +34,13 @@ class BindHandle1
         {
             try
             {
-                using (SafeFileHandle sfh = new SafeFileHandle(CreateFile("test.txt", 0x40000000, 0, 0, 2, 0x40000000, 0), true))
+                using (
+                    SafeFileHandle sfh = new SafeFileHandle(
+                        CreateFile("test.txt", 0x40000000, 0, 0, 2, 0x40000000, 0),
+                        true
+                    )
+                )
                 {
-
                     try
                     {
                         if (ThreadPool.BindHandle(sfh))
@@ -69,7 +81,7 @@ class BindHandle1
             {
                 File.Delete("test.txt");
             }
-        }        
+        }
         return (99);
     }
 

@@ -26,8 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             DbContext context,
-            int entitiesSavedCount)
-            : base(eventDefinition, messageGenerator, context)
+            int entitiesSavedCount
+        ) : base(eventDefinition, messageGenerator, context)
         {
             EntitiesSavedCount = entitiesSavedCount;
         }

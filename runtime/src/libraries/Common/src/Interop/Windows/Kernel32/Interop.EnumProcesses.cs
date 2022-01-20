@@ -7,7 +7,12 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [GeneratedDllImport(Libraries.Kernel32, EntryPoint = "K32EnumProcesses", CharSet = CharSet.Unicode, SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.Kernel32,
+            EntryPoint = "K32EnumProcesses",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         internal static partial bool EnumProcesses(int[] processIds, int size, out int needed);
     }
 }

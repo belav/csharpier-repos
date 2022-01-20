@@ -30,9 +30,11 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
     {
         // Arrange
         var sampleInputInt = 10;
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<DummyClass xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\"><SampleInt>"
-            + sampleInputInt + "</SampleInt></DummyClass>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<DummyClass xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\"><SampleInt>"
+            + sampleInputInt
+            + "</SampleInt></DummyClass>";
         var content = new StringContent(input, Encoding.UTF8, "application/xml");
 
         // Act
@@ -40,7 +42,10 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal(sampleInputInt.ToString(CultureInfo.InvariantCulture), await response.Content.ReadAsStringAsync());
+        Assert.Equal(
+            sampleInputInt.ToString(CultureInfo.InvariantCulture),
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
     [Theory]
@@ -49,10 +54,17 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
     public async Task CustomFormatter_IsSelected_ForSupportedContentTypeAndEncoding(string encoding)
     {
         // Arrange
-        var content = new StringContent("Test Content", Encoding.GetEncoding(encoding), "text/plain");
+        var content = new StringContent(
+            "Test Content",
+            Encoding.GetEncoding(encoding),
+            "text/plain"
+        );
 
         // Act
-        var response = await Client.PostAsync("http://localhost/InputFormatter/ReturnInput/", content);
+        var response = await Client.PostAsync(
+            "http://localhost/InputFormatter/ReturnInput/",
+            content
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -69,7 +81,10 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
         var content = new StringContent("Test Content", Encoding.UTF8, contentType);
 
         // Act
-        var response = await Client.PostAsync("http://localhost/InputFormatter/ReturnInput/", content);
+        var response = await Client.PostAsync(
+            "http://localhost/InputFormatter/ReturnInput/",
+            content
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.UnsupportedMediaType, response.StatusCode);
@@ -83,7 +98,9 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
-        var result = JsonConvert.DeserializeObject<DerivedModel>(await response.Content.ReadAsStringAsync());
+        var result = JsonConvert.DeserializeObject<DerivedModel>(
+            await response.Content.ReadAsStringAsync()
+        );
         Assert.Equal("Test", result.DerivedProperty);
     }
 
@@ -103,7 +120,8 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
                 Assert.Equal("DerivedProperty", p.Name);
                 var value = Assert.IsType<JArray>(p.Value);
                 Assert.Equal("The DerivedProperty field is required.", value.First);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -115,7 +133,9 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
-        var result = JsonConvert.DeserializeObject<DerivedModel>(await response.Content.ReadAsStringAsync());
+        var result = JsonConvert.DeserializeObject<DerivedModel>(
+            await response.Content.ReadAsStringAsync()
+        );
         Assert.Equal(input, result.DerivedProperty);
     }
 
@@ -123,7 +143,10 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
     public async Task ValidationUsesModelMetadataFromActualModelType_ForInputFormattedParameters()
     {
         // Act
-        var response = await Client.PostAsJsonAsync("PolymorphicBinding/InputFormatted", string.Empty);
+        var response = await Client.PostAsJsonAsync(
+            "PolymorphicBinding/InputFormatted",
+            string.Empty
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
@@ -135,7 +158,8 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
                 Assert.Equal("DerivedProperty", p.Name);
                 var value = Assert.IsType<JArray>(p.Value);
                 Assert.Equal("The DerivedProperty field is required.", value.First);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -147,7 +171,9 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
-        var result = JsonConvert.DeserializeObject<DerivedModel>(await response.Content.ReadAsStringAsync());
+        var result = JsonConvert.DeserializeObject<DerivedModel>(
+            await response.Content.ReadAsStringAsync()
+        );
         Assert.Equal(input, result.DerivedProperty);
     }
 
@@ -155,7 +181,10 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
     public async Task ValidationUsesModelMetadataFromActualModelType_ForInputFormattedProperties()
     {
         // Act
-        var response = await Client.PostAsJsonAsync("PolymorphicPropertyBinding/Action", string.Empty);
+        var response = await Client.PostAsJsonAsync(
+            "PolymorphicPropertyBinding/Action",
+            string.Empty
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
@@ -167,14 +196,18 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
                 Assert.Equal("DerivedProperty", p.Name);
                 var value = Assert.IsType<JArray>(p.Value);
                 Assert.Equal("The DerivedProperty field is required.", value.First);
-            });
+            }
+        );
     }
 
     [Fact]
     public async Task BodyIsRequiredByDefault()
     {
         // Act
-        var response = await Client.PostAsJsonAsync<object>($"Home/{nameof(HomeController.DefaultBody)}", value: null);
+        var response = await Client.PostAsJsonAsync<object>(
+            $"Home/{nameof(HomeController.DefaultBody)}",
+            value: null
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
@@ -185,7 +218,8 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
             {
                 Assert.Empty(kvp.Key);
                 Assert.Equal("A non-empty request body is required.", Assert.Single(kvp.Value));
-            });
+            }
+        );
     }
 
     [Fact]
@@ -196,7 +230,10 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
         Assert.Equal(0, content.Headers.ContentLength);
 
         // Act
-        var response = await Client.PostAsync($"Home/{nameof(HomeController.DefaultBody)}", content);
+        var response = await Client.PostAsync(
+            $"Home/{nameof(HomeController.DefaultBody)}",
+            content
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.UnsupportedMediaType);
@@ -206,7 +243,10 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
     public async Task OptionalFromBodyWorks()
     {
         // Act
-        var response = await Client.PostAsJsonAsync<object>($"Home/{nameof(HomeController.OptionalBody)}", value: null);
+        var response = await Client.PostAsJsonAsync<object>(
+            $"Home/{nameof(HomeController.OptionalBody)}",
+            value: null
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -221,7 +261,10 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
         Assert.Equal(0, content.Headers.ContentLength);
 
         // Act
-        var response = await Client.PostAsync($"Home/{nameof(HomeController.OptionalBody)}", content);
+        var response = await Client.PostAsync(
+            $"Home/{nameof(HomeController.OptionalBody)}",
+            content
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);

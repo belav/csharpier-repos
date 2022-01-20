@@ -26,38 +26,34 @@ namespace System.Runtime.Serialization
         {
             _helper = (base.Helper as EnumDataContractCriticalHelper)!;
         }
+
         public List<DataMember> Members
         {
-            get
-            { return _helper.Members; }
+            get { return _helper.Members; }
             set { _helper.Members = value; }
         }
 
         public List<long>? Values
         {
-            get
-            { return _helper.Values; }
+            get { return _helper.Values; }
             set { _helper.Values = value; }
         }
 
         public bool IsFlags
         {
-            get
-            { return _helper.IsFlags; }
+            get { return _helper.IsFlags; }
             set { _helper.IsFlags = value; }
         }
 
         public bool IsULong
         {
-            get
-            { return _helper.IsULong; }
+            get { return _helper.IsULong; }
             set { _helper.IsULong = value; }
         }
 
         public XmlDictionaryString[]? ChildElementNames
         {
-            get
-            { return _helper.ChildElementNames; }
+            get { return _helper.ChildElementNames; }
             set { _helper.ChildElementNames = value; }
         }
 
@@ -66,10 +62,13 @@ namespace System.Runtime.Serialization
             get { return false; }
         }
 
-        private sealed class EnumDataContractCriticalHelper : DataContract.DataContractCriticalHelper
+        private sealed class EnumDataContractCriticalHelper
+            : DataContract.DataContractCriticalHelper
         {
-            private static readonly Dictionary<Type, XmlQualifiedName> s_typeToName = new Dictionary<Type, XmlQualifiedName>();
-            private static readonly Dictionary<XmlQualifiedName, Type> s_nameToType = new Dictionary<XmlQualifiedName, Type>();
+            private static readonly Dictionary<Type, XmlQualifiedName> s_typeToName =
+                new Dictionary<Type, XmlQualifiedName>();
+            private static readonly Dictionary<XmlQualifiedName, Type> s_nameToType =
+                new Dictionary<XmlQualifiedName, Type>();
 
             private List<DataMember> _members;
             private List<long>? _values;
@@ -92,7 +91,10 @@ namespace System.Runtime.Serialization
 
             internal static void Add(Type type, string localName)
             {
-                XmlQualifiedName stableName = CreateQualifiedName(localName, Globals.SchemaNamespace);
+                XmlQualifiedName stableName = CreateQualifiedName(
+                    localName,
+                    Globals.SchemaNamespace
+                );
                 s_typeToName.Add(type, stableName);
                 s_nameToType.Add(stableName, type);
             }
@@ -100,7 +102,8 @@ namespace System.Runtime.Serialization
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             internal EnumDataContractCriticalHelper(
                 [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
-                Type type) : base(type)
+                    Type type
+            ) : base(type)
             {
                 this.StableName = DataContract.GetStableName(type, out _hasDataContract);
                 Type baseType = Enum.GetUnderlyingType(type);
@@ -120,14 +123,18 @@ namespace System.Runtime.Serialization
                     if (dataContractAttribute.IsReference)
                     {
                         DataContract.ThrowInvalidDataContractException(
-                                SR.Format(SR.EnumTypeCannotHaveIsReference,
-                                    DataContract.GetClrTypeFullName(type),
-                                    dataContractAttribute.IsReference,
-                                    false),
-                                type);
+                            SR.Format(
+                                SR.EnumTypeCannotHaveIsReference,
+                                DataContract.GetClrTypeFullName(type),
+                                dataContractAttribute.IsReference,
+                                false
+                            ),
+                            type
+                        );
                     }
                 }
             }
+
             internal List<DataMember> Members
             {
                 get { return _members; }
@@ -168,7 +175,10 @@ namespace System.Runtime.Serialization
             {
                 Type type = this.UnderlyingType;
                 FieldInfo[] fields = type.GetFields(BindingFlags.Static | BindingFlags.Public);
-                Dictionary<string, DataMember> memberValuesTable = new Dictionary<string, DataMember>();
+                Dictionary<string, DataMember> memberValuesTable = new Dictionary<
+                    string,
+                    DataMember
+                >();
                 List<DataMember> tempMembers = new List<DataMember>(fields.Length);
                 List<long> tempValues = new List<long>(fields.Length);
 
@@ -178,29 +188,59 @@ namespace System.Runtime.Serialization
                     bool enumMemberValid = false;
                     if (_hasDataContract)
                     {
-                        object[] memberAttributes = field.GetCustomAttributes(Globals.TypeOfEnumMemberAttribute, false).ToArray();
+                        object[] memberAttributes = field
+                            .GetCustomAttributes(Globals.TypeOfEnumMemberAttribute, false)
+                            .ToArray();
                         if (memberAttributes != null && memberAttributes.Length > 0)
                         {
                             if (memberAttributes.Length > 1)
-                                ThrowInvalidDataContractException(SR.Format(SR.TooManyEnumMembers, DataContract.GetClrTypeFullName(field.DeclaringType!), field.Name));
-                            EnumMemberAttribute memberAttribute = (EnumMemberAttribute)memberAttributes[0];
+                                ThrowInvalidDataContractException(
+                                    SR.Format(
+                                        SR.TooManyEnumMembers,
+                                        DataContract.GetClrTypeFullName(field.DeclaringType!),
+                                        field.Name
+                                    )
+                                );
+                            EnumMemberAttribute memberAttribute =
+                                (EnumMemberAttribute)memberAttributes[0];
 
                             DataMember memberContract = new DataMember(field);
                             if (memberAttribute.IsValueSetExplicitly)
                             {
-                                if (memberAttribute.Value == null || memberAttribute.Value.Length == 0)
-                                    ThrowInvalidDataContractException(SR.Format(SR.InvalidEnumMemberValue, field.Name, DataContract.GetClrTypeFullName(type)));
+                                if (
+                                    memberAttribute.Value == null
+                                    || memberAttribute.Value.Length == 0
+                                )
+                                    ThrowInvalidDataContractException(
+                                        SR.Format(
+                                            SR.InvalidEnumMemberValue,
+                                            field.Name,
+                                            DataContract.GetClrTypeFullName(type)
+                                        )
+                                    );
                                 memberContract.Name = memberAttribute.Value;
                             }
                             else
                                 memberContract.Name = field.Name;
-                            ClassDataContract.CheckAndAddMember(tempMembers, memberContract, memberValuesTable);
+                            ClassDataContract.CheckAndAddMember(
+                                tempMembers,
+                                memberContract,
+                                memberValuesTable
+                            );
                             enumMemberValid = true;
                         }
 
-                        object[] dataMemberAttributes = field.GetCustomAttributes(Globals.TypeOfDataMemberAttribute, false).ToArray();
+                        object[] dataMemberAttributes = field
+                            .GetCustomAttributes(Globals.TypeOfDataMemberAttribute, false)
+                            .ToArray();
                         if (dataMemberAttributes != null && dataMemberAttributes.Length > 0)
-                            ThrowInvalidDataContractException(SR.Format(SR.DataMemberOnEnumField, DataContract.GetClrTypeFullName(field.DeclaringType!), field.Name));
+                            ThrowInvalidDataContractException(
+                                SR.Format(
+                                    SR.DataMemberOnEnumField,
+                                    DataContract.GetClrTypeFullName(field.DeclaringType!),
+                                    field.Name
+                                )
+                            );
                     }
                     else
                     {
@@ -208,7 +248,11 @@ namespace System.Runtime.Serialization
                         {
                             DataMember memberContract = new DataMember(field);
                             memberContract.Name = field.Name;
-                            ClassDataContract.CheckAndAddMember(tempMembers, memberContract, memberValuesTable);
+                            ClassDataContract.CheckAndAddMember(
+                                tempMembers,
+                                memberContract,
+                                memberValuesTable
+                            );
                             enumMemberValid = true;
                         }
                     }
@@ -231,7 +275,9 @@ namespace System.Runtime.Serialization
 
         internal void WriteEnumValue(XmlWriterDelegator writer, object value)
         {
-            long longValue = IsULong ? (long)Convert.ToUInt64(value, null) : Convert.ToInt64(value, null);
+            long longValue = IsULong
+                ? (long)Convert.ToUInt64(value, null)
+                : Convert.ToInt64(value, null);
             for (int i = 0; i < Values!.Count; i++)
             {
                 if (longValue == Values[i])
@@ -267,13 +313,29 @@ namespace System.Runtime.Serialization
                 }
                 // enforce that enum value was completely parsed
                 if (longValue != 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.InvalidEnumValueOnWrite, value, DataContract.GetClrTypeFullName(UnderlyingType))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.InvalidEnumValueOnWrite,
+                                value,
+                                DataContract.GetClrTypeFullName(UnderlyingType)
+                            )
+                        )
+                    );
 
                 if (noneWritten && zeroIndex >= 0)
                     writer.WriteString(ChildElementNames![zeroIndex].Value);
             }
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.InvalidEnumValueOnWrite, value, DataContract.GetClrTypeFullName(UnderlyingType))));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(
+                            SR.InvalidEnumValueOnWrite,
+                            value,
+                            DataContract.GetClrTypeFullName(UnderlyingType)
+                        )
+                    )
+                );
         }
 
         internal object ReadEnumValue(XmlReaderDelegator reader)
@@ -313,7 +375,15 @@ namespace System.Runtime.Serialization
             else
             {
                 if (stringValue.Length == 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.InvalidEnumValueOnRead, stringValue, DataContract.GetClrTypeFullName(UnderlyingType))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.InvalidEnumValueOnRead,
+                                stringValue,
+                                DataContract.GetClrTypeFullName(UnderlyingType)
+                            )
+                        )
+                    );
                 longValue = ReadEnumValue(stringValue, 0, stringValue.Length);
             }
 
@@ -327,12 +397,23 @@ namespace System.Runtime.Serialization
             for (int i = 0; i < Members.Count; i++)
             {
                 string memberName = Members[i].Name;
-                if (memberName.Length == count && string.CompareOrdinal(value, index, memberName, 0, count) == 0)
+                if (
+                    memberName.Length == count
+                    && string.CompareOrdinal(value, index, memberName, 0, count) == 0
+                )
                 {
                     return Values![i];
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.InvalidEnumValueOnRead, value.Substring(index, count), DataContract.GetClrTypeFullName(UnderlyingType))));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(
+                        SR.InvalidEnumValueOnRead,
+                        value.Substring(index, count),
+                        DataContract.GetClrTypeFullName(UnderlyingType)
+                    )
+                )
+            );
         }
 
         internal string GetStringFromEnumValue(long value)
@@ -360,13 +441,20 @@ namespace System.Runtime.Serialization
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public override void WriteXmlValue(XmlWriterDelegator xmlWriter, object obj, XmlObjectSerializerWriteContext? context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator xmlWriter,
+            object obj,
+            XmlObjectSerializerWriteContext? context
+        )
         {
             WriteEnumValue(xmlWriter, obj);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public override object ReadXmlValue(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext? context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext? context
+        )
         {
             object obj = ReadEnumValue(xmlReader);
             if (context != null)

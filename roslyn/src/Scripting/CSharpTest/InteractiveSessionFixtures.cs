@@ -6,7 +6,9 @@
 
 public class InteractiveFixtures_TopLevelHostObject
 {
-    public int X, Y, Z;
+    public int X,
+        Y,
+        Z;
 }
 
 namespace InteractiveFixtures

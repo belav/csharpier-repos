@@ -43,11 +43,13 @@ public class SaveState
         app.UseBlazorFrameworkFiles();
         app.UseStaticFiles();
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapRazorPages();
-            endpoints.MapBlazorHub();
-            endpoints.MapFallbackToPage("/SaveState");
-        });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/SaveState");
+            }
+        );
     }
 }

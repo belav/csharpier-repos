@@ -10,7 +10,7 @@ namespace Sample
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine ("Hello, World!");
+            Console.WriteLine("Hello, World!");
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -20,6 +20,6 @@ namespace Sample
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void StopProfile(){}
+        public static void StopProfile() { }
     }
 }

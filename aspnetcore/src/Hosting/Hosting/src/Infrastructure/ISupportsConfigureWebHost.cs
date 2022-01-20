@@ -17,5 +17,8 @@ public interface ISupportsConfigureWebHost
     /// <param name="configure">The delegate that configures the <see cref="IWebHostBuilder"/>.</param>
     /// <param name="configureOptions">The delegate that configures the <see cref="WebHostBuilderOptions"/>.</param>
     /// <returns>The <see cref="IHostBuilder"/>.</returns>
-    IHostBuilder ConfigureWebHost(Action<IWebHostBuilder> configure, Action<WebHostBuilderOptions> configureOptions);
+    IHostBuilder ConfigureWebHost(
+        Action<IWebHostBuilder> configure,
+        Action<WebHostBuilderOptions> configureOptions
+    );
 }

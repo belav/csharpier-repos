@@ -26,20 +26,14 @@ namespace System.Net.Sockets
         private int _disposed;
 
         // Creates a new instance of the System.Net.Sockets.NetworkStream class for the specified System.Net.Sockets.Socket.
-        public NetworkStream(Socket socket)
-            : this(socket, FileAccess.ReadWrite, ownsSocket: false)
-        {
-        }
+        public NetworkStream(Socket socket) : this(socket, FileAccess.ReadWrite, ownsSocket: false)
+        { }
 
         public NetworkStream(Socket socket, bool ownsSocket)
-            : this(socket, FileAccess.ReadWrite, ownsSocket)
-        {
-        }
+            : this(socket, FileAccess.ReadWrite, ownsSocket) { }
 
         public NetworkStream(Socket socket, FileAccess access)
-            : this(socket, access, ownsSocket: false)
-        {
-        }
+            : this(socket, access, ownsSocket: false) { }
 
         public NetworkStream(Socket socket, FileAccess access, bool ownsSocket)
         {
@@ -119,7 +113,10 @@ namespace System.Net.Sockets
         {
             get
             {
-                int timeout = (int)_streamSocket.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout)!;
+                int timeout = (int)_streamSocket.GetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.ReceiveTimeout
+                )!;
                 if (timeout == 0)
                 {
                     return -1;
@@ -130,7 +127,10 @@ namespace System.Net.Sockets
             {
                 if (value <= 0 && value != System.Threading.Timeout.Infinite)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.net_io_timeout_use_gt_zero);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.net_io_timeout_use_gt_zero
+                    );
                 }
                 SetSocketTimeoutOption(SocketShutdown.Receive, value, false);
             }
@@ -142,7 +142,10 @@ namespace System.Net.Sockets
         {
             get
             {
-                int timeout = (int)_streamSocket.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout)!;
+                int timeout = (int)_streamSocket.GetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.SendTimeout
+                )!;
                 if (timeout == 0)
                 {
                     return -1;
@@ -153,7 +156,10 @@ namespace System.Net.Sockets
             {
                 if (value <= 0 && value != System.Threading.Timeout.Infinite)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.net_io_timeout_use_gt_zero);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.net_io_timeout_use_gt_zero
+                    );
                 }
                 SetSocketTimeoutOption(SocketShutdown.Send, value, false);
             }
@@ -176,24 +182,14 @@ namespace System.Net.Sockets
         // The length of data available on the stream. Always throws NotSupportedException.
         public override long Length
         {
-            get
-            {
-                throw new NotSupportedException(SR.net_noseek);
-            }
+            get { throw new NotSupportedException(SR.net_noseek); }
         }
 
         // Gets or sets the position in the stream. Always throws NotSupportedException.
         public override long Position
         {
-            get
-            {
-                throw new NotSupportedException(SR.net_noseek);
-            }
-
-            set
-            {
-                throw new NotSupportedException(SR.net_noseek);
-            }
+            get { throw new NotSupportedException(SR.net_noseek); }
+            set { throw new NotSupportedException(SR.net_noseek); }
         }
 
         // Seeks a specific position in the stream. This method is not supported by the
@@ -247,7 +243,8 @@ namespace System.Net.Sockets
             }
 
             ThrowIfDisposed();
-            if (!CanRead) throw new InvalidOperationException(SR.net_writeonlystream);
+            if (!CanRead)
+                throw new InvalidOperationException(SR.net_writeonlystream);
 
             try
             {
@@ -314,7 +311,8 @@ namespace System.Net.Sockets
             }
 
             ThrowIfDisposed();
-            if (!CanWrite) throw new InvalidOperationException(SR.net_readonlystream);
+            if (!CanWrite)
+                throw new InvalidOperationException(SR.net_readonlystream);
 
             try
             {
@@ -386,7 +384,13 @@ namespace System.Net.Sockets
         // Returns:
         //
         //     An IASyncResult, representing the read.
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             ThrowIfDisposed();
@@ -398,12 +402,13 @@ namespace System.Net.Sockets
             try
             {
                 return _streamSocket.BeginReceive(
-                        buffer,
-                        offset,
-                        count,
-                        SocketFlags.None,
-                        callback,
-                        state);
+                    buffer,
+                    offset,
+                    count,
+                    SocketFlags.None,
+                    callback,
+                    state
+                );
             }
             catch (Exception exception) when (!(exception is OutOfMemoryException))
             {
@@ -453,7 +458,13 @@ namespace System.Net.Sockets
         // Returns:
         //
         //     An IASyncResult, representing the write.
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             ThrowIfDisposed();
@@ -466,12 +477,13 @@ namespace System.Net.Sockets
             {
                 // Call BeginSend on the Socket.
                 return _streamSocket.BeginSend(
-                        buffer,
-                        offset,
-                        count,
-                        SocketFlags.None,
-                        callback,
-                        state);
+                    buffer,
+                    offset,
+                    count,
+                    SocketFlags.None,
+                    callback,
+                    state
+                );
             }
             catch (Exception exception) when (!(exception is OutOfMemoryException))
             {
@@ -518,7 +530,12 @@ namespace System.Net.Sockets
         // Returns:
         //
         //     A Task<int> representing the read.
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             ThrowIfDisposed();
@@ -529,11 +546,14 @@ namespace System.Net.Sockets
 
             try
             {
-                return _streamSocket.ReceiveAsync(
-                    new Memory<byte>(buffer, offset, count),
-                    SocketFlags.None,
-                    fromNetworkStream: true,
-                    cancellationToken).AsTask();
+                return _streamSocket
+                    .ReceiveAsync(
+                        new Memory<byte>(buffer, offset, count),
+                        SocketFlags.None,
+                        fromNetworkStream: true,
+                        cancellationToken
+                    )
+                    .AsTask();
             }
             catch (Exception exception) when (!(exception is OutOfMemoryException))
             {
@@ -541,7 +561,10 @@ namespace System.Net.Sockets
             }
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             bool canRead = CanRead; // Prevent race with Dispose.
             ThrowIfDisposed();
@@ -556,7 +579,8 @@ namespace System.Net.Sockets
                     buffer,
                     SocketFlags.None,
                     fromNetworkStream: true,
-                    cancellationToken: cancellationToken);
+                    cancellationToken: cancellationToken
+                );
             }
             catch (Exception exception) when (!(exception is OutOfMemoryException))
             {
@@ -579,7 +603,12 @@ namespace System.Net.Sockets
         // Returns:
         //
         //     A Task representing the write.
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             ThrowIfDisposed();
@@ -590,10 +619,13 @@ namespace System.Net.Sockets
 
             try
             {
-                return _streamSocket.SendAsyncForNetworkStream(
-                    new ReadOnlyMemory<byte>(buffer, offset, count),
-                    SocketFlags.None,
-                    cancellationToken).AsTask();
+                return _streamSocket
+                    .SendAsyncForNetworkStream(
+                        new ReadOnlyMemory<byte>(buffer, offset, count),
+                        SocketFlags.None,
+                        cancellationToken
+                    )
+                    .AsTask();
             }
             catch (Exception exception) when (!(exception is OutOfMemoryException))
             {
@@ -601,7 +633,10 @@ namespace System.Net.Sockets
             }
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             bool canWrite = CanWrite; // Prevent race with Dispose.
             ThrowIfDisposed();
@@ -615,7 +650,8 @@ namespace System.Net.Sockets
                 return _streamSocket.SendAsyncForNetworkStream(
                     buffer,
                     SocketFlags.None,
-                    cancellationToken);
+                    cancellationToken
+                );
             }
             catch (Exception exception) when (!(exception is OutOfMemoryException))
             {
@@ -624,9 +660,7 @@ namespace System.Net.Sockets
         }
 
         // Flushes data from the stream.  This is meaningless for us, so it does nothing.
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
@@ -641,6 +675,7 @@ namespace System.Net.Sockets
 
         private int _currentReadTimeout = -1;
         private int _currentWriteTimeout = -1;
+
         internal void SetSocketTimeoutOption(SocketShutdown mode, int timeout, bool silent)
         {
             if (timeout < 0)
@@ -652,7 +687,12 @@ namespace System.Net.Sockets
             {
                 if (timeout != _currentWriteTimeout)
                 {
-                    _streamSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, timeout, silent);
+                    _streamSocket.SetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.SendTimeout,
+                        timeout,
+                        silent
+                    );
                     _currentWriteTimeout = timeout;
                 }
             }
@@ -661,7 +701,12 @@ namespace System.Net.Sockets
             {
                 if (timeout != _currentReadTimeout)
                 {
-                    _streamSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, timeout, silent);
+                    _streamSocket.SetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.ReceiveTimeout,
+                        timeout,
+                        silent
+                    );
                     _currentReadTimeout = timeout;
                 }
             }
@@ -672,9 +717,15 @@ namespace System.Net.Sockets
             ObjectDisposedException.ThrowIf(_disposed != 0, this);
         }
 
-        private static IOException WrapException(string resourceFormatString, Exception innerException)
+        private static IOException WrapException(
+            string resourceFormatString,
+            Exception innerException
+        )
         {
-            return new IOException(SR.Format(resourceFormatString, innerException.Message), innerException);
+            return new IOException(
+                SR.Format(resourceFormatString, innerException.Message),
+                innerException
+            );
         }
     }
 }

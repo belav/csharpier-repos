@@ -16,7 +16,8 @@ namespace System.Security.Cryptography
                 return CngKeyLite.GetPropertyAsString(
                     KeyHandle,
                     CngKeyLite.KeyPropertyName.AlgorithmGroup,
-                    CngPropertyOptions.None);
+                    CngPropertyOptions.None
+                );
             }
 
             internal void FreeKey()
@@ -29,28 +30,25 @@ namespace System.Security.Cryptography
         {
             SafeNCryptKeyHandle handle = CngKeyLite.ImportKeyBlob(
                 Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
-                keyBlob);
+                keyBlob
+            );
 
-            return new Pkcs8Response
-            {
-                KeyHandle = handle,
-            };
+            return new Pkcs8Response { KeyHandle = handle, };
         }
 
         private static Pkcs8Response ImportPkcs8(
             ReadOnlySpan<byte> keyBlob,
-            ReadOnlySpan<char> password)
+            ReadOnlySpan<char> password
+        )
         {
             SafeNCryptKeyHandle handle = CngKeyLite.ImportKeyBlob(
                 Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
                 keyBlob,
                 encrypted: true,
-                password);
+                password
+            );
 
-            return new Pkcs8Response
-            {
-                KeyHandle = handle,
-            };
+            return new Pkcs8Response { KeyHandle = handle, };
         }
     }
 }

@@ -43,7 +43,10 @@ public class TryValidateModelIntegrationTest
         Assert.False(modelState.IsValid);
         var modelStateErrors = GetModelStateErrors(modelState);
         Assert.Single(modelStateErrors);
-        Assert.Equal("Product must be made in the USA if it is not named.", modelStateErrors["software"]);
+        Assert.Equal(
+            "Product must be made in the USA if it is not named.",
+            modelStateErrors["software"]
+        );
     }
 
     [Fact]
@@ -84,35 +87,43 @@ public class TryValidateModelIntegrationTest
         var testContext = ModelBindingTestHelper.GetTestContext();
         var modelState = testContext.ModelState;
         var model = new List<ProductViewModel>();
-        model.Add(new ProductViewModel()
-        {
-            Price = 2,
-            Contact = "acvrdzersaererererfdsfdsfdsfsdf",
-            ProductDetails = new ProductDetails()
+        model.Add(
+            new ProductViewModel()
             {
-                Detail1 = "d1",
-                Detail2 = "d2",
-                Detail3 = "d3"
+                Price = 2,
+                Contact = "acvrdzersaererererfdsfdsfdsfsdf",
+                ProductDetails = new ProductDetails()
+                {
+                    Detail1 = "d1",
+                    Detail2 = "d2",
+                    Detail3 = "d3"
+                }
             }
-        });
-        model.Add(new ProductViewModel()
-        {
-            Price = 2,
-            Contact = "acvrdzersaererererfdsfdsfdsfsdf",
-            ProductDetails = new ProductDetails()
+        );
+        model.Add(
+            new ProductViewModel()
             {
-                Detail1 = "d1",
-                Detail2 = "d2",
-                Detail3 = "d3"
+                Price = 2,
+                Contact = "acvrdzersaererererfdsfdsfdsfsdf",
+                ProductDetails = new ProductDetails()
+                {
+                    Detail1 = "d1",
+                    Detail2 = "d2",
+                    Detail3 = "d3"
+                }
             }
-        });
+        );
 
         var controller = CreateController(testContext, testContext.MetadataProvider);
 
         // We define the "CompanyName null" message locally, so we should manually check its value.
         var categoryRequired = ValidationAttributeUtil.GetRequiredErrorMessage("Category");
         var priceRange = ValidationAttributeUtil.GetRangeErrorMessage(20, 100, "Price");
-        var contactUsMax = ValidationAttributeUtil.GetStringLengthErrorMessage(null, 20, "Contact Us");
+        var contactUsMax = ValidationAttributeUtil.GetStringLengthErrorMessage(
+            null,
+            20,
+            "Contact Us"
+        );
         var contactUsRegEx = ValidationAttributeUtil.GetRegExErrorMessage("^[0-9]*$", "Contact Us");
 
         // Act
@@ -140,7 +151,11 @@ public class TryValidateModelIntegrationTest
         var testContext = ModelBindingTestHelper.GetTestContext();
         var modelState = testContext.ModelState;
         var model = new ModelLevelErrorTest();
-        var controller = CreateController(testContext, testContext.MetadataProvider, o => o.ValidateComplexTypesIfChildValidationFails = true);
+        var controller = CreateController(
+            testContext,
+            testContext.MetadataProvider,
+            o => o.ValidateComplexTypesIfChildValidationFails = true
+        );
 
         // Act
         var result = controller.TryValidateModel(model);
@@ -161,7 +176,11 @@ public class TryValidateModelIntegrationTest
         var testContext = ModelBindingTestHelper.GetTestContext();
         var modelState = testContext.ModelState;
         var model = new ModelLevelErrorTest();
-        var controller = CreateController(testContext, testContext.MetadataProvider, o => o.ValidateComplexTypesIfChildValidationFails = false);
+        var controller = CreateController(
+            testContext,
+            testContext.MetadataProvider,
+            o => o.ValidateComplexTypesIfChildValidationFails = false
+        );
 
         // Act
         var result = controller.TryValidateModel(model);
@@ -187,6 +206,7 @@ public class TryValidateModelIntegrationTest
         {
             ErrorMessage = "Model";
         }
+
         public override bool IsValid(object value)
         {
             return false;
@@ -198,12 +218,14 @@ public class TryValidateModelIntegrationTest
         // OrderBy is used because the order of the results may very depending on the platform / client.
         Assert.Equal(
             expected.Split('.').OrderBy(item => item, StringComparer.Ordinal),
-            actual.Split('.').OrderBy(item => item, StringComparer.Ordinal));
+            actual.Split('.').OrderBy(item => item, StringComparer.Ordinal)
+        );
     }
 
     private TestController CreateController(
         ActionContext actionContext,
-        IModelMetadataProvider metadataProvider)
+        IModelMetadataProvider metadataProvider
+    )
     {
         return CreateController(actionContext, metadataProvider, _ => { });
     }
@@ -214,12 +236,17 @@ public class TryValidateModelIntegrationTest
         Action<MvcOptions> optionsConfigurator
     )
     {
-        var options = actionContext.HttpContext.RequestServices.GetRequiredService<IOptions<MvcOptions>>();
+        var options = actionContext.HttpContext.RequestServices.GetRequiredService<
+            IOptions<MvcOptions>
+        >();
         optionsConfigurator.Invoke(options.Value);
 
         var controller = new TestController();
         controller.ControllerContext = new ControllerContext(actionContext);
-        controller.ObjectValidator = ModelBindingTestHelper.GetObjectValidator(metadataProvider, options);
+        controller.ObjectValidator = ModelBindingTestHelper.GetObjectValidator(
+            metadataProvider,
+            options
+        );
         controller.MetadataProvider = metadataProvider;
 
         return controller;

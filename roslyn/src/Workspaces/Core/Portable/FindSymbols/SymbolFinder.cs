@@ -27,9 +27,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SemanticModel semanticModel,
             int position,
             Workspace workspace,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            return FindSymbolAtPositionAsync(semanticModel, position, workspace, cancellationToken).WaitAndGetResult(cancellationToken);
+            return FindSymbolAtPositionAsync(semanticModel, position, workspace, cancellationToken)
+                .WaitAndGetResult(cancellationToken);
         }
 
         /// <summary>
@@ -43,7 +45,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SemanticModel semanticModel,
             int position,
             Workspace workspace,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (semanticModel is null)
                 throw new ArgumentNullException(nameof(semanticModel));
@@ -51,7 +54,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 throw new ArgumentNullException(nameof(workspace));
 
             var semanticInfo = await GetSemanticInfoAtPositionAsync(
-                semanticModel, position, workspace.Services, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    semanticModel,
+                    position,
+                    workspace.Services,
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
             return semanticInfo.GetAnySymbol(includeType: false);
         }
 
@@ -59,12 +67,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SemanticModel semanticModel,
             int position,
             HostWorkspaceServices services,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var token = await GetTokenAtPositionAsync(semanticModel, position, services, cancellationToken).ConfigureAwait(false);
+            var token = await GetTokenAtPositionAsync(
+                    semanticModel,
+                    position,
+                    services,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            if (token != default &&
-                token.Span.IntersectsWith(position))
+            if (token != default && token.Span.IntersectsWith(position))
             {
                 return semanticModel.GetSemanticInfo(token, services, cancellationToken);
             }
@@ -76,24 +90,41 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SemanticModel semanticModel,
             int position,
             HostWorkspaceServices services,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = semanticModel.SyntaxTree;
-            var syntaxFacts = services.GetLanguageServices(semanticModel.Language).GetRequiredService<ISyntaxFactsService>();
+            var syntaxFacts = services
+                .GetLanguageServices(semanticModel.Language)
+                .GetRequiredService<ISyntaxFactsService>();
 
-            return syntaxTree.GetTouchingTokenAsync(position, syntaxFacts.IsBindableToken, cancellationToken, findInsideTrivia: true);
+            return syntaxTree.GetTouchingTokenAsync(
+                position,
+                syntaxFacts.IsBindableToken,
+                cancellationToken,
+                findInsideTrivia: true
+            );
         }
 
         public static async Task<ISymbol> FindSymbolAtPositionAsync(
             Document document,
             int position,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (document is null)
                 throw new ArgumentNullException(nameof(document));
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            return await FindSymbolAtPositionAsync(semanticModel, position, document.Project.Solution.Workspace, cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            return await FindSymbolAtPositionAsync(
+                    semanticModel,
+                    position,
+                    document.Project.Solution.Workspace,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -101,7 +132,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// Returns null if no such symbol can be found in the specified solution.
         /// </summary>
         public static Task<ISymbol?> FindSourceDefinitionAsync(
-            ISymbol? symbol, Solution solution, CancellationToken cancellationToken = default)
+            ISymbol? symbol,
+            Solution solution,
+            CancellationToken cancellationToken = default
+        )
         {
             if (symbol != null)
             {
@@ -127,7 +161,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private static async Task<ISymbol?> FindSourceDefinitionWorkerAsync(
             ISymbol symbol,
             Solution solution,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // If it's already in source, then we might already be done
             if (InSource(symbol))
@@ -167,8 +202,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             if (project != null && project.SupportsCompilation)
             {
                 var symbolId = symbol.GetSymbolKey(cancellationToken);
-                var compilation = await project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-                var result = symbolId.Resolve(compilation, ignoreAssemblyKey: true, cancellationToken: cancellationToken);
+                var compilation = await project
+                    .GetRequiredCompilationAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var result = symbolId.Resolve(
+                    compilation,
+                    ignoreAssemblyKey: true,
+                    cancellationToken: cancellationToken
+                );
 
                 if (result.Symbol != null && InSource(result.Symbol))
                 {
@@ -201,8 +242,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// <param name="compilation">A compilation to find the corresponding symbol within. The compilation may or may not be the origin of the symbol.</param>
         /// <param name="cancellationToken">A CancellationToken.</param>
         /// <returns></returns>
-        public static IEnumerable<TSymbol> FindSimilarSymbols<TSymbol>(TSymbol symbol, Compilation compilation, CancellationToken cancellationToken = default)
-            where TSymbol : ISymbol
+        public static IEnumerable<TSymbol> FindSimilarSymbols<TSymbol>(
+            TSymbol symbol,
+            Compilation compilation,
+            CancellationToken cancellationToken = default
+        ) where TSymbol : ISymbol
         {
             if (symbol is null)
                 throw new ArgumentNullException(nameof(symbol));
@@ -233,7 +277,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// originally started with.
         /// </summary>
         internal static async Task<ImmutableArray<ISymbol>> FindLinkedSymbolsAsync(
-            ISymbol symbol, Solution solution, CancellationToken cancellationToken)
+            ISymbol symbol,
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             // Add the original symbol to the result set.
             var linkedSymbols = new HashSet<ISymbol> { symbol };
@@ -246,22 +293,38 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // to fetch the #load'ed tree's Document once https://github.com/dotnet/roslyn/issues/5260 is fixed.
                 if (originalDocument == null)
                 {
-                    Debug.Assert(solution.Workspace.Kind is WorkspaceKind.Interactive or WorkspaceKind.MiscellaneousFiles);
+                    Debug.Assert(
+                        solution.Workspace.Kind
+                            is WorkspaceKind.Interactive
+                                or WorkspaceKind.MiscellaneousFiles
+                    );
                     continue;
                 }
 
                 foreach (var linkedDocumentId in originalDocument.GetLinkedDocumentIds())
                 {
                     var linkedDocument = solution.GetRequiredDocument(linkedDocumentId);
-                    var linkedSyntaxRoot = await linkedDocument.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-                    var linkedNode = linkedSyntaxRoot.FindNode(location.Span, getInnermostNodeForTie: true);
+                    var linkedSyntaxRoot = await linkedDocument
+                        .GetRequiredSyntaxRootAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    var linkedNode = linkedSyntaxRoot.FindNode(
+                        location.Span,
+                        getInnermostNodeForTie: true
+                    );
 
-                    var semanticModel = await linkedDocument.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                    var linkedSymbol = semanticModel.GetDeclaredSymbol(linkedNode, cancellationToken);
+                    var semanticModel = await linkedDocument
+                        .GetRequiredSemanticModelAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    var linkedSymbol = semanticModel.GetDeclaredSymbol(
+                        linkedNode,
+                        cancellationToken
+                    );
 
-                    if (linkedSymbol != null &&
-                        linkedSymbol.Kind == symbol.Kind &&
-                        linkedSymbol.Name == symbol.Name)
+                    if (
+                        linkedSymbol != null
+                        && linkedSymbol.Kind == symbol.Kind
+                        && linkedSymbol.Name == symbol.Name
+                    )
                     {
                         linkedSymbols.Add(linkedSymbol);
                     }

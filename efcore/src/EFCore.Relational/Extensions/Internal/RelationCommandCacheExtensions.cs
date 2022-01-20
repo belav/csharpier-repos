@@ -23,9 +23,12 @@ namespace Microsoft.EntityFrameworkCore.Internal
         /// </summary>
         public static IRelationalCommand RentAndPopulateRelationalCommand(
             this RelationalCommandCache relationalCommandCache,
-            RelationalQueryContext queryContext)
+            RelationalQueryContext queryContext
+        )
         {
-            var relationalCommandTemplate = relationalCommandCache.GetRelationalCommandTemplate(queryContext.ParameterValues);
+            var relationalCommandTemplate = relationalCommandCache.GetRelationalCommandTemplate(
+                queryContext.ParameterValues
+            );
             var relationalCommand = queryContext.Connection.RentCommand();
             relationalCommand.PopulateFrom(relationalCommandTemplate);
             return relationalCommand;

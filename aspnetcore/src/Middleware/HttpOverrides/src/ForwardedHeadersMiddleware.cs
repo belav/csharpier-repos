@@ -71,7 +71,11 @@ public class ForwardedHeadersMiddleware
     /// <param name="next">The <see cref="RequestDelegate"/> representing the next middleware in the pipeline.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used for logging.</param>
     /// <param name="options">The <see cref="ForwardedHeadersOptions"/> for configuring the middleware.</param>
-    public ForwardedHeadersMiddleware(RequestDelegate next, ILoggerFactory loggerFactory, IOptions<ForwardedHeadersOptions> options)
+    public ForwardedHeadersMiddleware(
+        RequestDelegate next,
+        ILoggerFactory loggerFactory,
+        IOptions<ForwardedHeadersOptions> options
+    )
     {
         if (next == null)
         {
@@ -87,12 +91,30 @@ public class ForwardedHeadersMiddleware
         }
 
         // Make sure required options is not null or whitespace
-        EnsureOptionNotNullorWhitespace(options.Value.ForwardedForHeaderName, nameof(options.Value.ForwardedForHeaderName));
-        EnsureOptionNotNullorWhitespace(options.Value.ForwardedHostHeaderName, nameof(options.Value.ForwardedHostHeaderName));
-        EnsureOptionNotNullorWhitespace(options.Value.ForwardedProtoHeaderName, nameof(options.Value.ForwardedProtoHeaderName));
-        EnsureOptionNotNullorWhitespace(options.Value.OriginalForHeaderName, nameof(options.Value.OriginalForHeaderName));
-        EnsureOptionNotNullorWhitespace(options.Value.OriginalHostHeaderName, nameof(options.Value.OriginalHostHeaderName));
-        EnsureOptionNotNullorWhitespace(options.Value.OriginalProtoHeaderName, nameof(options.Value.OriginalProtoHeaderName));
+        EnsureOptionNotNullorWhitespace(
+            options.Value.ForwardedForHeaderName,
+            nameof(options.Value.ForwardedForHeaderName)
+        );
+        EnsureOptionNotNullorWhitespace(
+            options.Value.ForwardedHostHeaderName,
+            nameof(options.Value.ForwardedHostHeaderName)
+        );
+        EnsureOptionNotNullorWhitespace(
+            options.Value.ForwardedProtoHeaderName,
+            nameof(options.Value.ForwardedProtoHeaderName)
+        );
+        EnsureOptionNotNullorWhitespace(
+            options.Value.OriginalForHeaderName,
+            nameof(options.Value.OriginalForHeaderName)
+        );
+        EnsureOptionNotNullorWhitespace(
+            options.Value.OriginalHostHeaderName,
+            nameof(options.Value.OriginalHostHeaderName)
+        );
+        EnsureOptionNotNullorWhitespace(
+            options.Value.OriginalProtoHeaderName,
+            nameof(options.Value.OriginalProtoHeaderName)
+        );
 
         _options = options.Value;
         _logger = loggerFactory.CreateLogger<ForwardedHeadersMiddleware>();
@@ -141,9 +163,11 @@ public class ForwardedHeadersMiddleware
 
     private static bool IsTopLevelWildcard(string host)
     {
-        return (string.Equals("*", host, StringComparison.Ordinal) // HttpSys wildcard
-                       || string.Equals("[::]", host, StringComparison.Ordinal) // Kestrel wildcard, IPv6 Any
-                       || string.Equals("0.0.0.0", host, StringComparison.Ordinal)); // IPv4 Any
+        return (
+            string.Equals("*", host, StringComparison.Ordinal) // HttpSys wildcard
+            || string.Equals("[::]", host, StringComparison.Ordinal) // Kestrel wildcard, IPv6 Any
+            || string.Equals("0.0.0.0", host, StringComparison.Ordinal)
+        ); // IPv4 Any
     }
 
     /// <summary>
@@ -163,8 +187,12 @@ public class ForwardedHeadersMiddleware
     public void ApplyForwarders(HttpContext context)
     {
         // Gather expected headers.
-        string[]? forwardedFor = null, forwardedProto = null, forwardedHost = null;
-        bool checkFor = false, checkProto = false, checkHost = false;
+        string[]? forwardedFor = null,
+            forwardedProto = null,
+            forwardedHost = null;
+        bool checkFor = false,
+            checkProto = false,
+            checkHost = false;
         int entryCount = 0;
 
         var request = context.Request;
@@ -179,10 +207,19 @@ public class ForwardedHeadersMiddleware
         if (_options.ForwardedHeaders.HasFlag(ForwardedHeaders.XForwardedProto))
         {
             checkProto = true;
-            forwardedProto = requestHeaders.GetCommaSeparatedValues(_options.ForwardedProtoHeaderName);
-            if (_options.RequireHeaderSymmetry && checkFor && forwardedFor!.Length != forwardedProto.Length)
+            forwardedProto = requestHeaders.GetCommaSeparatedValues(
+                _options.ForwardedProtoHeaderName
+            );
+            if (
+                _options.RequireHeaderSymmetry
+                && checkFor
+                && forwardedFor!.Length != forwardedProto.Length
+            )
             {
-                _logger.LogWarning(1, "Parameter count mismatch between X-Forwarded-For and X-Forwarded-Proto.");
+                _logger.LogWarning(
+                    1,
+                    "Parameter count mismatch between X-Forwarded-For and X-Forwarded-Proto."
+                );
                 return;
             }
             entryCount = Math.Max(forwardedProto.Length, entryCount);
@@ -191,12 +228,21 @@ public class ForwardedHeadersMiddleware
         if (_options.ForwardedHeaders.HasFlag(ForwardedHeaders.XForwardedHost))
         {
             checkHost = true;
-            forwardedHost = requestHeaders.GetCommaSeparatedValues(_options.ForwardedHostHeaderName);
-            if (_options.RequireHeaderSymmetry
-                && ((checkFor && forwardedFor!.Length != forwardedHost.Length)
-                    || (checkProto && forwardedProto!.Length != forwardedHost.Length)))
+            forwardedHost = requestHeaders.GetCommaSeparatedValues(
+                _options.ForwardedHostHeaderName
+            );
+            if (
+                _options.RequireHeaderSymmetry
+                && (
+                    (checkFor && forwardedFor!.Length != forwardedHost.Length)
+                    || (checkProto && forwardedProto!.Length != forwardedHost.Length)
+                )
+            )
             {
-                _logger.LogWarning(1, "Parameter count mismatch between X-Forwarded-Host and X-Forwarded-For or X-Forwarded-Proto.");
+                _logger.LogWarning(
+                    1,
+                    "Parameter count mismatch between X-Forwarded-Host and X-Forwarded-For or X-Forwarded-Proto."
+                );
                 return;
             }
             entryCount = Math.Max(forwardedHost.Length, entryCount);
@@ -233,7 +279,10 @@ public class ForwardedHeadersMiddleware
         var connection = context.Connection;
         var currentValues = new SetOfForwarders()
         {
-            RemoteIpAndPort = connection.RemoteIpAddress != null ? new IPEndPoint(connection.RemoteIpAddress, connection.RemotePort) : null,
+            RemoteIpAndPort =
+                connection.RemoteIpAddress != null
+                    ? new IPEndPoint(connection.RemoteIpAddress, connection.RemotePort)
+                    : null,
             // Host and Scheme initial values are never inspected, no need to set them here.
         };
 
@@ -247,10 +296,18 @@ public class ForwardedHeadersMiddleware
             if (checkFor)
             {
                 // For the first instance, allow remoteIp to be null for servers that don't support it natively.
-                if (currentValues.RemoteIpAndPort != null && checkKnownIps && !CheckKnownAddress(currentValues.RemoteIpAndPort.Address))
+                if (
+                    currentValues.RemoteIpAndPort != null
+                    && checkKnownIps
+                    && !CheckKnownAddress(currentValues.RemoteIpAndPort.Address)
+                )
                 {
                     // Stop at the first unknown remote IP, but still apply changes processed so far.
-                    _logger.LogDebug(1, "Unknown proxy: {RemoteIpAndPort}", currentValues.RemoteIpAndPort);
+                    _logger.LogDebug(
+                        1,
+                        "Unknown proxy: {RemoteIpAndPort}",
+                        currentValues.RemoteIpAndPort
+                    );
                     break;
                 }
 
@@ -283,22 +340,31 @@ public class ForwardedHeadersMiddleware
                 }
                 else if (_options.RequireHeaderSymmetry)
                 {
-                    _logger.LogWarning(3, $"Forwarded scheme is not present, this is required by {nameof(_options.RequireHeaderSymmetry)}");
+                    _logger.LogWarning(
+                        3,
+                        $"Forwarded scheme is not present, this is required by {nameof(_options.RequireHeaderSymmetry)}"
+                    );
                     return;
                 }
             }
 
             if (checkHost)
             {
-                if (!string.IsNullOrEmpty(set.Host) && TryValidateHost(set.Host)
-                    && (_allowAllHosts || HostString.MatchesAny(set.Host, _allowedHosts!)))
+                if (
+                    !string.IsNullOrEmpty(set.Host)
+                    && TryValidateHost(set.Host)
+                    && (_allowAllHosts || HostString.MatchesAny(set.Host, _allowedHosts!))
+                )
                 {
                     applyChanges = true;
                     currentValues.Host = set.Host;
                 }
                 else if (_options.RequireHeaderSymmetry)
                 {
-                    _logger.LogWarning(4, $"Incorrect number of x-forwarded-host header values, see {nameof(_options.RequireHeaderSymmetry)}.");
+                    _logger.LogWarning(
+                        4,
+                        $"Incorrect number of x-forwarded-host header values, see {nameof(_options.RequireHeaderSymmetry)}."
+                    );
                     return;
                 }
             }
@@ -311,12 +377,17 @@ public class ForwardedHeadersMiddleware
                 if (connection.RemoteIpAddress != null)
                 {
                     // Save the original
-                    requestHeaders[_options.OriginalForHeaderName] = new IPEndPoint(connection.RemoteIpAddress, connection.RemotePort).ToString();
+                    requestHeaders[_options.OriginalForHeaderName] = new IPEndPoint(
+                        connection.RemoteIpAddress,
+                        connection.RemotePort
+                    ).ToString();
                 }
                 if (forwardedFor!.Length > entriesConsumed)
                 {
                     // Truncate the consumed header values
-                    requestHeaders[_options.ForwardedForHeaderName] = forwardedFor.Take(forwardedFor.Length - entriesConsumed).ToArray();
+                    requestHeaders[_options.ForwardedForHeaderName] = forwardedFor
+                        .Take(forwardedFor.Length - entriesConsumed)
+                        .ToArray();
                 }
                 else
                 {
@@ -334,7 +405,9 @@ public class ForwardedHeadersMiddleware
                 if (forwardedProto!.Length > entriesConsumed)
                 {
                     // Truncate the consumed header values
-                    requestHeaders[_options.ForwardedProtoHeaderName] = forwardedProto.Take(forwardedProto.Length - entriesConsumed).ToArray();
+                    requestHeaders[_options.ForwardedProtoHeaderName] = forwardedProto
+                        .Take(forwardedProto.Length - entriesConsumed)
+                        .ToArray();
                 }
                 else
                 {
@@ -351,7 +424,9 @@ public class ForwardedHeadersMiddleware
                 if (forwardedHost!.Length > entriesConsumed)
                 {
                     // Truncate the consumed header values
-                    requestHeaders[_options.ForwardedHostHeaderName] = forwardedHost.Take(forwardedHost.Length - entriesConsumed).ToArray();
+                    requestHeaders[_options.ForwardedHostHeaderName] = forwardedHost
+                        .Take(forwardedHost.Length - entriesConsumed)
+                        .ToArray();
                 }
                 else
                 {
@@ -509,8 +584,6 @@ public class ForwardedHeadersMiddleware
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private bool IsHex(char ch)
     {
-        return IsNumeric(ch)
-            || ('a' <= ch && ch <= 'f')
-            || ('A' <= ch && ch <= 'F');
+        return IsNumeric(ch) || ('a' <= ch && ch <= 'f') || ('A' <= ch && ch <= 'F');
     }
 }

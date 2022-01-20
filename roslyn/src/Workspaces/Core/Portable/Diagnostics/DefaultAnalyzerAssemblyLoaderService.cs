@@ -17,11 +17,9 @@ namespace Microsoft.CodeAnalysis.Host
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultAnalyzerAssemblyLoaderService()
-        {
-        }
+        public DefaultAnalyzerAssemblyLoaderService() { }
 
-        public IAnalyzerAssemblyLoader GetLoader(in AnalyzerAssemblyLoaderOptions options)
-            => options.ShadowCopy ? _shadowCopyLoader : _loader;
+        public IAnalyzerAssemblyLoader GetLoader(in AnalyzerAssemblyLoaderOptions options) =>
+            options.ShadowCopy ? _shadowCopyLoader : _loader;
     }
 }

@@ -23,14 +23,17 @@ class BindHandleInvalid3
         {
             try
             {
-                using (FileStream fs1 = new FileStream("test.txt",
-                    FileMode.Create,
-                    FileAccess.ReadWrite,
-                    FileShare.ReadWrite,
-                    0x10000,
-                    true))
+                using (
+                    FileStream fs1 = new FileStream(
+                        "test.txt",
+                        FileMode.Create,
+                        FileAccess.ReadWrite,
+                        FileShare.ReadWrite,
+                        0x10000,
+                        true
+                    )
+                )
                 {
-
                     ThreadPool.BindHandle(fs1.SafeFileHandle);
                 }
             }

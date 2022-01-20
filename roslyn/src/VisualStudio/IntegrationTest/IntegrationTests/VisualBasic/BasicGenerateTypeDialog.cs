@@ -21,29 +21,35 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         private GenerateTypeDialog_OutOfProc GenerateTypeDialog => VisualStudio.GenerateTypeDialog;
 
         public BasicGenerateTypeDialog(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicGenerateTypeDialog))
-        {
-        }
+            : base(instanceFactory, nameof(BasicGenerateTypeDialog)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
         public void BasicToCSharp()
         {
             var csProj = new ProjectUtils.Project("CSProj");
-            VisualStudio.SolutionExplorer.AddProject(csProj, WellKnownProjectTemplates.ClassLibrary, LanguageNames.CSharp);
+            VisualStudio.SolutionExplorer.AddProject(
+                csProj,
+                WellKnownProjectTemplates.ClassLibrary,
+                LanguageNames.CSharp
+            );
 
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.vb");
 
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Class C
     Sub Method()
         $$Dim _A As A
     End Sub
 End Class
-");
-            VisualStudio.Editor.Verify.CodeAction("Generate new type...",
+"
+            );
+            VisualStudio.Editor.Verify.CodeAction(
+                "Generate new type...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             GenerateTypeDialog.VerifyOpen();
             GenerateTypeDialog.SetAccessibility("Public");
@@ -53,39 +59,49 @@ End Class
             GenerateTypeDialog.ClickOK();
             GenerateTypeDialog.VerifyClosed();
             var actualText = VisualStudio.Editor.GetText();
-            Assert.Contains(@"Imports CSProj
+            Assert.Contains(
+                @"Imports CSProj
 
 Class C
     Sub Method()
         Dim _A As A
     End Sub
 End Class
-", actualText);
+",
+                actualText
+            );
 
             VisualStudio.SolutionExplorer.OpenFile(csProj, "GenerateTypeTest.cs");
             actualText = VisualStudio.Editor.GetText();
-            Assert.Contains(@"namespace CSProj
+            Assert.Contains(
+                @"namespace CSProj
 {
     public struct A
     {
     }
-}", actualText);
+}",
+                actualText
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
         public void SameProject()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Class C
     Sub Method()
         $$Dim _A As A
     End Sub
 End Class
-");
+"
+            );
 
-            VisualStudio.Editor.Verify.CodeAction("Generate new type...",
+            VisualStudio.Editor.Verify.CodeAction(
+                "Generate new type...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
             var project = new ProjectUtils.Project(ProjectName);
 
             GenerateTypeDialog.VerifyOpen();
@@ -97,35 +113,49 @@ End Class
 
             VisualStudio.SolutionExplorer.OpenFile(project, "GenerateTypeTest.vb");
             var actualText = VisualStudio.Editor.GetText();
-            Assert.Contains(@"Public Structure A
+            Assert.Contains(
+                @"Public Structure A
 End Structure
-", actualText);
+",
+                actualText
+            );
 
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.vb");
             actualText = VisualStudio.Editor.GetText();
-            Assert.Contains(@"Class C
+            Assert.Contains(
+                @"Class C
     Sub Method()
         Dim _A As A
     End Sub
 End Class
-", actualText);
+",
+                actualText
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
         public void CheckFoldersPopulateComboBox()
         {
             var project = new ProjectUtils.Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddFile(project, @"folder1\folder2\GenerateTypeTests.vb", open: true);
+            VisualStudio.SolutionExplorer.AddFile(
+                project,
+                @"folder1\folder2\GenerateTypeTests.vb",
+                open: true
+            );
 
-            SetUpEditor(@"Class C
+            SetUpEditor(
+                @"Class C
     Sub Method() 
         $$Dim _A As A
     End Sub
 End Class
-");
-            VisualStudio.Editor.Verify.CodeAction("Generate new type...",
+"
+            );
+            VisualStudio.Editor.Verify.CodeAction(
+                "Generate new type...",
                 applyFix: true,
-                blockUntilComplete: false);
+                blockUntilComplete: false
+            );
 
             GenerateTypeDialog.VerifyOpen();
             GenerateTypeDialog.SetTargetFileToNewName("Other");

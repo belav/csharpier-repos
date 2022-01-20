@@ -7,9 +7,11 @@ namespace KnightMove
 {
     internal struct MV
     {
-        public int x, y;
+        public int x,
+            y;
         public int v;
     }
+
     internal struct SQ
     {
         public int visited;

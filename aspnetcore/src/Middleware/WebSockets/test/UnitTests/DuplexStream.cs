@@ -14,10 +14,7 @@ public class DuplexStream : Stream
     public BufferStream ReadStream { get; }
     public BufferStream WriteStream { get; }
 
-    public DuplexStream()
-        : this(new BufferStream(), new BufferStream())
-    {
-    }
+    public DuplexStream() : this(new BufferStream(), new BufferStream()) { }
 
     public DuplexStream(BufferStream readStream, BufferStream writeStream)
     {
@@ -29,7 +26,6 @@ public class DuplexStream : Stream
     {
         return new DuplexStream(WriteStream, ReadStream);
     }
-
 
     #region Properties
 
@@ -93,7 +89,13 @@ public class DuplexStream : Stream
         return ReadStream.ReadByte();
     }
 
-    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+    public override IAsyncResult BeginRead(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback callback,
+        object state
+    )
     {
         return ReadStream.BeginRead(buffer, offset, count, callback, state);
     }
@@ -103,12 +105,21 @@ public class DuplexStream : Stream
         return ReadStream.EndRead(asyncResult);
     }
 
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return ReadStream.ReadAsync(buffer, offset, count, cancellationToken);
     }
 
-    public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+    public override Task CopyToAsync(
+        Stream destination,
+        int bufferSize,
+        CancellationToken cancellationToken
+    )
     {
         return ReadStream.CopyToAsync(destination, bufferSize, cancellationToken);
     }
@@ -128,12 +139,19 @@ public class DuplexStream : Stream
     {
         WriteStream.Write(buffer, offset, count);
     }
+
     public override void WriteByte(byte value)
     {
         WriteStream.WriteByte(value);
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+    public override IAsyncResult BeginWrite(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback callback,
+        object state
+    )
     {
         return WriteStream.BeginWrite(buffer, offset, count, callback, state);
     }
@@ -143,7 +161,12 @@ public class DuplexStream : Stream
         WriteStream.EndWrite(asyncResult);
     }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return WriteStream.WriteAsync(buffer, offset, count, cancellationToken);
     }

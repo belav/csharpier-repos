@@ -15,8 +15,8 @@ namespace Microsoft.Net.Http.Headers;
 /// </summary>
 public class ContentRangeHeaderValue
 {
-    private static readonly HttpHeaderParser<ContentRangeHeaderValue> Parser
-        = new GenericHeaderParser<ContentRangeHeaderValue>(false, GetContentRangeLength);
+    private static readonly HttpHeaderParser<ContentRangeHeaderValue> Parser =
+        new GenericHeaderParser<ContentRangeHeaderValue>(false, GetContentRangeLength);
 
     private StringSegment _unit;
 
@@ -152,8 +152,12 @@ public class ContentRangeHeaderValue
             return false;
         }
 
-        return ((From == other.From) && (To == other.To) && (Length == other.Length) &&
-            StringSegment.Equals(Unit, other.Unit, StringComparison.OrdinalIgnoreCase));
+        return (
+            (From == other.From)
+            && (To == other.To)
+            && (Length == other.Length)
+            && StringSegment.Equals(Unit, other.Unit, StringComparison.OrdinalIgnoreCase)
+        );
     }
 
     /// <inheritdoc/>
@@ -222,13 +226,20 @@ public class ContentRangeHeaderValue
     /// <param name="input">The value to parse.</param>
     /// <param name="parsedValue">The parsed value.</param>
     /// <returns><see langword="true"/> if input is a valid <see cref="ContentRangeHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-    public static bool TryParse(StringSegment input, [NotNullWhen(true)] out ContentRangeHeaderValue parsedValue)
+    public static bool TryParse(
+        StringSegment input,
+        [NotNullWhen(true)] out ContentRangeHeaderValue parsedValue
+    )
     {
         var index = 0;
         return Parser.TryParseValue(input, ref index, out parsedValue!);
     }
 
-    private static int GetContentRangeLength(StringSegment input, int startIndex, out ContentRangeHeaderValue? parsedValue)
+    private static int GetContentRangeLength(
+        StringSegment input,
+        int startIndex,
+        out ContentRangeHeaderValue? parsedValue
+    )
     {
         Contract.Requires(startIndex >= 0);
 
@@ -295,8 +306,19 @@ public class ContentRangeHeaderValue
             return 0;
         }
 
-        if (!TryCreateContentRange(input, unit, fromStartIndex, fromLength, toStartIndex, toLength,
-            lengthStartIndex, lengthLength, out parsedValue))
+        if (
+            !TryCreateContentRange(
+                input,
+                unit,
+                fromStartIndex,
+                fromLength,
+                toStartIndex,
+                toLength,
+                lengthStartIndex,
+                lengthLength,
+                out parsedValue
+            )
+        )
         {
             return 0;
         }
@@ -304,7 +326,11 @@ public class ContentRangeHeaderValue
         return current - startIndex;
     }
 
-    private static bool TryGetLengthLength(StringSegment input, ref int current, out int lengthLength)
+    private static bool TryGetLengthLength(
+        StringSegment input,
+        ref int current,
+        out int lengthLength
+    )
     {
         lengthLength = 0;
 
@@ -329,7 +355,13 @@ public class ContentRangeHeaderValue
         return true;
     }
 
-    private static bool TryGetRangeLength(StringSegment input, ref int current, out int fromLength, out int toStartIndex, out int toLength)
+    private static bool TryGetRangeLength(
+        StringSegment input,
+        ref int current,
+        out int fromLength,
+        out int toStartIndex,
+        out int toLength
+    )
     {
         fromLength = 0;
         toStartIndex = 0;
@@ -394,18 +426,31 @@ public class ContentRangeHeaderValue
         int toLength,
         int lengthStartIndex,
         int lengthLength,
-        [NotNullWhen(true)] out ContentRangeHeaderValue? parsedValue)
+        [NotNullWhen(true)] out ContentRangeHeaderValue? parsedValue
+    )
     {
         parsedValue = null;
 
         long from = 0;
-        if ((fromLength > 0) && !HeaderUtilities.TryParseNonNegativeInt64(input.Subsegment(fromStartIndex, fromLength), out from))
+        if (
+            (fromLength > 0)
+            && !HeaderUtilities.TryParseNonNegativeInt64(
+                input.Subsegment(fromStartIndex, fromLength),
+                out from
+            )
+        )
         {
             return false;
         }
 
         long to = 0;
-        if ((toLength > 0) && !HeaderUtilities.TryParseNonNegativeInt64(input.Subsegment(toStartIndex, toLength), out to))
+        if (
+            (toLength > 0)
+            && !HeaderUtilities.TryParseNonNegativeInt64(
+                input.Subsegment(toStartIndex, toLength),
+                out to
+            )
+        )
         {
             return false;
         }
@@ -417,8 +462,13 @@ public class ContentRangeHeaderValue
         }
 
         long length = 0;
-        if ((lengthLength > 0) && !HeaderUtilities.TryParseNonNegativeInt64(input.Subsegment(lengthStartIndex, lengthLength),
-            out length))
+        if (
+            (lengthLength > 0)
+            && !HeaderUtilities.TryParseNonNegativeInt64(
+                input.Subsegment(lengthStartIndex, lengthLength),
+                out length
+            )
+        )
         {
             return false;
         }

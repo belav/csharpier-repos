@@ -36,10 +36,10 @@ public class BodyModelBinder : IModelBinder
     /// The <see cref="IHttpRequestStreamReaderFactory"/>, used to create <see cref="System.IO.TextReader"/>
     /// instances for reading the request body.
     /// </param>
-    public BodyModelBinder(IList<IInputFormatter> formatters, IHttpRequestStreamReaderFactory readerFactory)
-        : this(formatters, readerFactory, loggerFactory: null)
-    {
-    }
+    public BodyModelBinder(
+        IList<IInputFormatter> formatters,
+        IHttpRequestStreamReaderFactory readerFactory
+    ) : this(formatters, readerFactory, loggerFactory: null) { }
 
     /// <summary>
     /// Creates a new <see cref="BodyModelBinder"/>.
@@ -53,10 +53,8 @@ public class BodyModelBinder : IModelBinder
     public BodyModelBinder(
         IList<IInputFormatter> formatters,
         IHttpRequestStreamReaderFactory readerFactory,
-        ILoggerFactory? loggerFactory)
-        : this(formatters, readerFactory, loggerFactory, options: null)
-    {
-    }
+        ILoggerFactory? loggerFactory
+    ) : this(formatters, readerFactory, loggerFactory, options: null) { }
 
     /// <summary>
     /// Creates a new <see cref="BodyModelBinder"/>.
@@ -72,7 +70,8 @@ public class BodyModelBinder : IModelBinder
         IList<IInputFormatter> formatters,
         IHttpRequestStreamReaderFactory readerFactory,
         ILoggerFactory? loggerFactory,
-        MvcOptions? options)
+        MvcOptions? options
+    )
     {
         if (formatters == null)
         {
@@ -87,7 +86,8 @@ public class BodyModelBinder : IModelBinder
         _formatters = formatters;
         _readerFactory = readerFactory.CreateReader;
 
-        _logger = loggerFactory?.CreateLogger<BodyModelBinder>() ?? NullLogger<BodyModelBinder>.Instance;
+        _logger =
+            loggerFactory?.CreateLogger<BodyModelBinder>() ?? NullLogger<BodyModelBinder>.Instance;
 
         _options = options;
     }
@@ -125,7 +125,8 @@ public class BodyModelBinder : IModelBinder
             bindingContext.ModelState,
             bindingContext.ModelMetadata,
             _readerFactory,
-            AllowEmptyBody);
+            AllowEmptyBody
+        );
 
         var formatter = (IInputFormatter?)null;
         for (var i = 0; i < _formatters.Count; i++)
@@ -146,8 +147,11 @@ public class BodyModelBinder : IModelBinder
         {
             if (AllowEmptyBody)
             {
-                var hasBody = httpContext.Features.Get<IHttpRequestBodyDetectionFeature>()?.CanHaveBody;
-                hasBody ??= httpContext.Request.ContentLength is not null && httpContext.Request.ContentLength == 0;
+                var hasBody =
+                    httpContext.Features.Get<IHttpRequestBodyDetectionFeature>()?.CanHaveBody;
+                hasBody ??=
+                    httpContext.Request.ContentLength is not null
+                    && httpContext.Request.ContentLength == 0;
                 if (hasBody == false)
                 {
                     bindingContext.Result = ModelBindingResult.Success(model: null);
@@ -159,7 +163,11 @@ public class BodyModelBinder : IModelBinder
 
             var message = Resources.FormatUnsupportedContentType(httpContext.Request.ContentType);
             var exception = new UnsupportedContentTypeException(message);
-            bindingContext.ModelState.AddModelError(modelBindingKey, exception, bindingContext.ModelMetadata);
+            bindingContext.ModelState.AddModelError(
+                modelBindingKey,
+                exception,
+                bindingContext.ModelMetadata
+            );
             _logger.DoneAttemptingToBindModel(bindingContext);
             return;
         }
@@ -187,16 +195,19 @@ public class BodyModelBinder : IModelBinder
                 // If instead the input formatter wants to treat the input as optional, it must do so by
                 // returning InputFormatterResult.Success(defaultForModelType), because input formatters
                 // are responsible for choosing a default value for the model type.
-                var message = bindingContext
-                    .ModelMetadata
-                    .ModelBindingMessageProvider
-                    .MissingRequestBodyRequiredValueAccessor();
+                var message =
+                    bindingContext.ModelMetadata.ModelBindingMessageProvider.MissingRequestBodyRequiredValueAccessor();
                 bindingContext.ModelState.AddModelError(modelBindingKey, message);
             }
         }
-        catch (Exception exception) when (exception is InputFormatterException || ShouldHandleException(formatter))
+        catch (Exception exception)
+            when (exception is InputFormatterException || ShouldHandleException(formatter))
         {
-            bindingContext.ModelState.AddModelError(modelBindingKey, exception, bindingContext.ModelMetadata);
+            bindingContext.ModelState.AddModelError(
+                modelBindingKey,
+                exception,
+                bindingContext.ModelMetadata
+            );
         }
 
         _logger.DoneAttemptingToBindModel(bindingContext);
@@ -205,8 +216,9 @@ public class BodyModelBinder : IModelBinder
     private bool ShouldHandleException(IInputFormatter formatter)
     {
         // Any explicit policy on the formatters overrides the default.
-        var policy = (formatter as IInputFormatterExceptionPolicy)?.ExceptionPolicy ??
-            InputFormatterExceptionPolicy.MalformedInputExceptions;
+        var policy =
+            (formatter as IInputFormatterExceptionPolicy)?.ExceptionPolicy
+            ?? InputFormatterExceptionPolicy.MalformedInputExceptions;
 
         return policy == InputFormatterExceptionPolicy.AllExceptions;
     }

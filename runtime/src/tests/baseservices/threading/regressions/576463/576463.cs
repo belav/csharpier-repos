@@ -6,6 +6,7 @@ using System.Threading;
 class Test
 {
     bool _aRun = false;
+
     public void A()
     {
         _aRun = true;
@@ -13,6 +14,7 @@ class Test
     }
 
     bool _bRun = false;
+
     public void B()
     {
         _bRun = true;
@@ -20,6 +22,7 @@ class Test
     }
 
     volatile bool _cRun = false;
+
     public void C()
     {
         _cRun = true;
@@ -39,6 +42,7 @@ class Test
     }
 
     bool _dRun = false;
+
     public void D()
     {
         _dRun = true;
@@ -145,7 +149,7 @@ class Test
             Thread.Sleep(5000);
 
             // Once we're here we know that C has started running and
-            // is presumably in the Monitor.Enter code, now we release 
+            // is presumably in the Monitor.Enter code, now we release
             // the lock to let C have it
             Console.WriteLine("Main: Exiting   -- Monitor on _objLock");
             Monitor.Exit(t._objLock);
@@ -164,7 +168,9 @@ class Test
         else
         {
             Console.WriteLine("Test failed!");
-            Console.WriteLine("If some delegegates did not run, this failure is most likely due to the loopcount register not being properly tracked during assembly for monitor.");
+            Console.WriteLine(
+                "If some delegegates did not run, this failure is most likely due to the loopcount register not being properly tracked during assembly for monitor."
+            );
             return 50;
         }
     }

@@ -12,10 +12,14 @@ namespace System.Text.Json.Serialization.Converters
     /// representing the dictionary element key and value.
     /// </summary>
     internal sealed class IDictionaryConverter<TDictionary>
-        : JsonDictionaryConverter<TDictionary, string, object?>
-        where TDictionary : IDictionary
+        : JsonDictionaryConverter<TDictionary, string, object?> where TDictionary : IDictionary
     {
-        protected override void Add(string key, in object? value, JsonSerializerOptions options, ref ReadStack state)
+        protected override void Add(
+            string key,
+            in object? value,
+            JsonSerializerOptions options,
+            ref ReadStack state
+        )
         {
             TDictionary collection = (TDictionary)state.Current.ReturnValue!;
             collection[key] = value;
@@ -33,7 +37,11 @@ namespace System.Text.Json.Serialization.Converters
             {
                 if (!TypeToConvert.IsAssignableFrom(RuntimeType))
                 {
-                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 // Strings are intentionally used as keys when deserializing non-generic dictionaries.
@@ -43,21 +51,34 @@ namespace System.Text.Json.Serialization.Converters
             {
                 if (typeInfo.CreateObject is null)
                 {
-                    ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 TDictionary returnValue = (TDictionary)typeInfo.CreateObject()!;
 
                 if (returnValue.IsReadOnly)
                 {
-                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 state.Current.ReturnValue = returnValue;
             }
         }
 
-        protected internal override bool OnWriteResume(Utf8JsonWriter writer, TDictionary value, JsonSerializerOptions options, ref WriteStack state)
+        protected internal override bool OnWriteResume(
+            Utf8JsonWriter writer,
+            TDictionary value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             IDictionaryEnumerator enumerator;
             if (state.Current.CollectionEnumerator == null)
@@ -92,13 +113,23 @@ namespace System.Text.Json.Serialization.Converters
                     if (key is string keyString)
                     {
                         _keyConverter ??= GetConverter<string>(typeInfo.KeyTypeInfo!);
-                        _keyConverter.WriteAsPropertyNameCore(writer, keyString, options, state.Current.IsWritingExtensionDataProperty);
+                        _keyConverter.WriteAsPropertyNameCore(
+                            writer,
+                            keyString,
+                            options,
+                            state.Current.IsWritingExtensionDataProperty
+                        );
                     }
                     else
                     {
                         // IDictionary is a special case since it has polymorphic object semantics on serialization
                         // but needs to use JsonConverter<string> on deserialization.
-                        _valueConverter.WriteAsPropertyNameCore(writer, key, options, state.Current.IsWritingExtensionDataProperty);
+                        _valueConverter.WriteAsPropertyNameCore(
+                            writer,
+                            key,
+                            options,
+                            state.Current.IsWritingExtensionDataProperty
+                        );
                     }
                 }
 
@@ -115,6 +146,9 @@ namespace System.Text.Json.Serialization.Converters
             return true;
         }
 
-        internal override Type RuntimeType => TypeToConvert.IsAbstract || TypeToConvert.IsInterface ? typeof(Dictionary<string, object>) : TypeToConvert;
+        internal override Type RuntimeType =>
+            TypeToConvert.IsAbstract || TypeToConvert.IsInterface
+                ? typeof(Dictionary<string, object>)
+                : TypeToConvert;
     }
 }

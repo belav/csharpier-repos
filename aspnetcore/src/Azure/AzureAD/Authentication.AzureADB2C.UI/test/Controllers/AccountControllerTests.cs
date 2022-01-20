@@ -25,11 +25,15 @@ public class AccountControllerTests
     {
         // Arrange
         var controller = new AccountController(
-            new OptionsMonitor(AzureADB2CDefaults.AuthenticationScheme, new AzureADB2COptions()
-            {
-                OpenIdConnectSchemeName = AzureADB2CDefaults.OpenIdScheme,
-                CookieSchemeName = AzureADB2CDefaults.CookieScheme
-            }))
+            new OptionsMonitor(
+                AzureADB2CDefaults.AuthenticationScheme,
+                new AzureADB2COptions()
+                {
+                    OpenIdConnectSchemeName = AzureADB2CDefaults.OpenIdScheme,
+                    CookieSchemeName = AzureADB2CDefaults.CookieScheme
+                }
+            )
+        )
         {
             Url = new TestUrlHelper("~/", "https://localhost/")
         };
@@ -49,7 +53,9 @@ public class AccountControllerTests
     public void SignInProvidedScheme_ChallengesCustomScheme()
     {
         // Arrange
-        var controller = new AccountController(new OptionsMonitor("Custom", new AzureADB2COptions()));
+        var controller = new AccountController(
+            new OptionsMonitor("Custom", new AzureADB2COptions())
+        );
         controller.Url = new TestUrlHelper("~/", "https://localhost/");
 
         // Act
@@ -68,12 +74,15 @@ public class AccountControllerTests
         var controller = new AccountController(
             new OptionsMonitor(
                 AzureADB2CDefaults.AuthenticationScheme,
-                new AzureADB2COptions() { ResetPasswordPolicyId = "Reset" }))
+                new AzureADB2COptions() { ResetPasswordPolicyId = "Reset" }
+            )
+        )
         {
             Url = new TestUrlHelper("~/", "https://localhost/")
         };
         controller.ControllerContext = CreateControllerContext(
-            CreateAuthenticatedPrincipal(AzureADB2CDefaults.AuthenticationScheme));
+            CreateAuthenticatedPrincipal(AzureADB2CDefaults.AuthenticationScheme)
+        );
 
         // Act
         var result = controller.ResetPassword(null);
@@ -95,12 +104,15 @@ public class AccountControllerTests
         var controller = new AccountController(
             new OptionsMonitor(
                 "Custom",
-                new AzureADB2COptions() { ResetPasswordPolicyId = "CustomReset" }))
+                new AzureADB2COptions() { ResetPasswordPolicyId = "CustomReset" }
+            )
+        )
         {
             Url = new TestUrlHelper("~/", "https://localhost/")
         };
         controller.ControllerContext = CreateControllerContext(
-            CreateAuthenticatedPrincipal("Custom"));
+            CreateAuthenticatedPrincipal("Custom")
+        );
 
         // Act
         var result = controller.ResetPassword("Custom");
@@ -122,12 +134,15 @@ public class AccountControllerTests
         var controller = new AccountController(
             new OptionsMonitor(
                 AzureADB2CDefaults.AuthenticationScheme,
-                new AzureADB2COptions() { EditProfilePolicyId = "EditProfile" }))
+                new AzureADB2COptions() { EditProfilePolicyId = "EditProfile" }
+            )
+        )
         {
             Url = new TestUrlHelper("~/", "https://localhost/")
         };
         controller.ControllerContext = CreateControllerContext(
-            CreateAuthenticatedPrincipal(AzureADB2CDefaults.AuthenticationScheme));
+            CreateAuthenticatedPrincipal(AzureADB2CDefaults.AuthenticationScheme)
+        );
 
         // Act
         var result = await controller.EditProfile(null);
@@ -155,13 +170,16 @@ public class AccountControllerTests
                 {
                     if (principal.Identity.IsAuthenticated)
                     {
-                        return AuthenticateResult.Success(new AuthenticationTicket(principal, scheme));
+                        return AuthenticateResult.Success(
+                            new AuthenticationTicket(principal, scheme)
+                        );
                     }
                     else
                     {
                         return AuthenticateResult.NoResult();
                     }
-                });
+                }
+            );
         return new ControllerContext()
         {
             HttpContext = new DefaultHttpContext()
@@ -180,12 +198,15 @@ public class AccountControllerTests
         var controller = new AccountController(
             new OptionsMonitor(
                 "Custom",
-                new AzureADB2COptions() { EditProfilePolicyId = "CustomEditProfile" }))
+                new AzureADB2COptions() { EditProfilePolicyId = "CustomEditProfile" }
+            )
+        )
         {
             Url = new TestUrlHelper("~/", "https://localhost/")
         };
         controller.ControllerContext = CreateControllerContext(
-            CreateAuthenticatedPrincipal("Custom"));
+            CreateAuthenticatedPrincipal("Custom")
+        );
         // Act
         var result = await controller.EditProfile("Custom");
 
@@ -210,23 +231,24 @@ public class AccountControllerTests
         };
 
         var controllerContext = CreateControllerContext(
-            CreateAuthenticatedPrincipal(AzureADB2CDefaults.AuthenticationScheme));
+            CreateAuthenticatedPrincipal(AzureADB2CDefaults.AuthenticationScheme)
+        );
 
         var descriptor = new PageActionDescriptor()
         {
-            AttributeRouteInfo = new AttributeRouteInfo()
-            {
-                Template = "/Account/SignedOut"
-            }
+            AttributeRouteInfo = new AttributeRouteInfo() { Template = "/Account/SignedOut" }
         };
-        var controller = new AccountController(new OptionsMonitor(AzureADB2CDefaults.AuthenticationScheme, options))
+        var controller = new AccountController(
+            new OptionsMonitor(AzureADB2CDefaults.AuthenticationScheme, options)
+        )
         {
             Url = new TestUrlHelper(
                 controllerContext.HttpContext,
                 new RouteData(),
                 descriptor,
                 "/Account/SignedOut",
-                "https://localhost/Account/SignedOut"),
+                "https://localhost/Account/SignedOut"
+            ),
             ControllerContext = new ControllerContext()
             {
                 HttpContext = controllerContext.HttpContext
@@ -239,7 +261,10 @@ public class AccountControllerTests
 
         // Assert
         var signOut = Assert.IsAssignableFrom<SignOutResult>(result);
-        Assert.Equal(new[] { AzureADB2CDefaults.CookieScheme, AzureADB2CDefaults.OpenIdScheme }, signOut.AuthenticationSchemes);
+        Assert.Equal(
+            new[] { AzureADB2CDefaults.CookieScheme, AzureADB2CDefaults.OpenIdScheme },
+            signOut.AuthenticationSchemes
+        );
         Assert.NotNull(signOut.Properties.RedirectUri);
         Assert.Equal("https://localhost/Account/SignedOut", signOut.Properties.RedirectUri);
     }
@@ -255,13 +280,11 @@ public class AccountControllerTests
         };
 
         var controllerContext = CreateControllerContext(
-            CreateAuthenticatedPrincipal(AzureADB2CDefaults.AuthenticationScheme));
+            CreateAuthenticatedPrincipal(AzureADB2CDefaults.AuthenticationScheme)
+        );
         var descriptor = new PageActionDescriptor()
         {
-            AttributeRouteInfo = new AttributeRouteInfo()
-            {
-                Template = "/Account/SignedOut"
-            }
+            AttributeRouteInfo = new AttributeRouteInfo() { Template = "/Account/SignedOut" }
         };
 
         var controller = new AccountController(new OptionsMonitor("Custom", options))
@@ -271,7 +294,8 @@ public class AccountControllerTests
                 new RouteData(),
                 descriptor,
                 "/Account/SignedOut",
-                "https://localhost/Account/SignedOut"),
+                "https://localhost/Account/SignedOut"
+            ),
             ControllerContext = new ControllerContext()
             {
                 HttpContext = controllerContext.HttpContext
@@ -329,7 +353,8 @@ public class AccountControllerTests
             RouteData routeData,
             ActionDescriptor descriptor,
             string contentPath,
-            string url)
+            string url
+        )
         {
             HttpContext = context;
             RouteData = routeData;
@@ -373,10 +398,12 @@ public class AccountControllerTests
 
         public string RouteUrl(UrlRouteContext routeContext)
         {
-            if (routeContext.Values is RouteValueDictionary dicionary &&
-                dicionary.TryGetValue("page", out var page) &&
-                page is string pagePath &&
-                ContentPath == pagePath)
+            if (
+                routeContext.Values is RouteValueDictionary dicionary
+                && dicionary.TryGetValue("page", out var page)
+                && page is string pagePath
+                && ContentPath == pagePath
+            )
             {
                 return Url;
             }

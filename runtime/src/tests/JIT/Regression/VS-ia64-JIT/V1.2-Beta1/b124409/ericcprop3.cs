@@ -8,7 +8,12 @@ public class Hello1
 {
     public static int Main()
     {
-        int i, j, k, l, m, t;
+        int i,
+            j,
+            k,
+            l,
+            m,
+            t;
 
         i = j = k = l = m = 0;
 
@@ -17,7 +22,7 @@ public class Hello1
             i++;
         }
 
-    LOOP_START:
+        LOOP_START:
 
         switch (i)
         {
@@ -42,8 +47,7 @@ public class Hello1
                 break;
         }
 
-
-    LOOPEXIT:
+        LOOPEXIT:
 
         t = i;
         System.Console.WriteLine("i is {0}", t);

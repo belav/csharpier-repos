@@ -18,7 +18,6 @@ namespace System.Xml.Tests
             _output = output;
         }
 
-
         //-----------------------------------------------------------------------------------
         //[Variation(Desc = "v1 - Schemas with null on empty collection", Priority = 0)]
         [Fact]

@@ -28,7 +28,9 @@ public class ModelExpressionProvider : IModelExpressionProvider
         }
 
         _modelMetadataProvider = modelMetadataProvider;
-        _expressionTextCache = new ConcurrentDictionary<LambdaExpression, string>(LambdaExpressionComparer.Instance);
+        _expressionTextCache = new ConcurrentDictionary<LambdaExpression, string>(
+            LambdaExpressionComparer.Instance
+        );
     }
 
     /// <summary>
@@ -51,7 +53,8 @@ public class ModelExpressionProvider : IModelExpressionProvider
     /// <inheritdoc />
     public ModelExpression CreateModelExpression<TModel, TValue>(
         ViewDataDictionary<TModel> viewData,
-        Expression<Func<TModel, TValue>> expression)
+        Expression<Func<TModel, TValue>> expression
+    )
     {
         if (viewData == null)
         {
@@ -64,11 +67,19 @@ public class ModelExpressionProvider : IModelExpressionProvider
         }
 
         var name = GetExpressionText(expression);
-        var modelExplorer = ExpressionMetadataProvider.FromLambdaExpression(expression, viewData, _modelMetadataProvider);
+        var modelExplorer = ExpressionMetadataProvider.FromLambdaExpression(
+            expression,
+            viewData,
+            _modelMetadataProvider
+        );
         if (modelExplorer == null)
         {
             throw new InvalidOperationException(
-                Resources.FormatCreateModelExpression_NullModelMetadata(nameof(IModelMetadataProvider), name));
+                Resources.FormatCreateModelExpression_NullModelMetadata(
+                    nameof(IModelMetadataProvider),
+                    name
+                )
+            );
         }
 
         return new ModelExpression(name, modelExplorer);
@@ -84,7 +95,8 @@ public class ModelExpressionProvider : IModelExpressionProvider
     /// <returns>A new <see cref="ModelExpression"/> instance describing the given <paramref name="expression"/>.</returns>
     public ModelExpression CreateModelExpression<TModel>(
         ViewDataDictionary<TModel> viewData,
-        string expression)
+        string expression
+    )
     {
         if (viewData == null)
         {
@@ -96,11 +108,19 @@ public class ModelExpressionProvider : IModelExpressionProvider
             throw new ArgumentNullException(nameof(expression));
         }
 
-        var modelExplorer = ExpressionMetadataProvider.FromStringExpression(expression, viewData, _modelMetadataProvider);
+        var modelExplorer = ExpressionMetadataProvider.FromStringExpression(
+            expression,
+            viewData,
+            _modelMetadataProvider
+        );
         if (modelExplorer == null)
         {
             throw new InvalidOperationException(
-                Resources.FormatCreateModelExpression_NullModelMetadata(nameof(IModelMetadataProvider), expression));
+                Resources.FormatCreateModelExpression_NullModelMetadata(
+                    nameof(IModelMetadataProvider),
+                    expression
+                )
+            );
         }
 
         return new ModelExpression(expression, modelExplorer);

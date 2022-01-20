@@ -18,23 +18,24 @@ using System.Reflection;
 
 public class AssemblyName
 {
-	public static int Main()
-	{
-		//random Assembly Attributes
-		Console.WriteLine((new AssemblyCompanyAttribute("my company")).Company);
-		Console.WriteLine((new AssemblyCopyrightAttribute("my copyright")).Copyright);
-		Console.WriteLine((new AssemblyCultureAttribute("my culture")).Culture);
-		Console.WriteLine((new AssemblyFileVersionAttribute("my version")).ToString());
-		try
-		{
-			new AssemblyFileVersionAttribute(null);
-		}
-		catch(ArgumentNullException)
-		{}
-		Console.WriteLine((new AssemblyInformationalVersionAttribute("my informational")).InformationalVersion);
-		Console.WriteLine((new AssemblyProductAttribute("my product")).Product);
-		Console.WriteLine((new AssemblyTrademarkAttribute("my trademark")).Trademark);
-		Console.WriteLine((new AssemblyVersionAttribute("my version")).Version);
-		return 100;
-	}
+    public static int Main()
+    {
+        //random Assembly Attributes
+        Console.WriteLine((new AssemblyCompanyAttribute("my company")).Company);
+        Console.WriteLine((new AssemblyCopyrightAttribute("my copyright")).Copyright);
+        Console.WriteLine((new AssemblyCultureAttribute("my culture")).Culture);
+        Console.WriteLine((new AssemblyFileVersionAttribute("my version")).ToString());
+        try
+        {
+            new AssemblyFileVersionAttribute(null);
+        }
+        catch (ArgumentNullException) { }
+        Console.WriteLine(
+            (new AssemblyInformationalVersionAttribute("my informational")).InformationalVersion
+        );
+        Console.WriteLine((new AssemblyProductAttribute("my product")).Product);
+        Console.WriteLine((new AssemblyTrademarkAttribute("my trademark")).Trademark);
+        Console.WriteLine((new AssemblyVersionAttribute("my version")).Version);
+        return 100;
+    }
 }

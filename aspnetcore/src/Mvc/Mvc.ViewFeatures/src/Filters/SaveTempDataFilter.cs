@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 /// </summary>
 internal class SaveTempDataFilter : IResourceFilter, IResultFilter
 {
-    private static readonly Func<object, Task> OnStartingCallback = (state) => OnStarting((HttpContext)state);
+    private static readonly Func<object, Task> OnStartingCallback = (state) =>
+        OnStarting((HttpContext)state);
+
     // Internal for unit testing
     internal static readonly object SaveTempDataFilterContextKey = new object();
 
@@ -46,7 +48,8 @@ internal class SaveTempDataFilter : IResourceFilter, IResultFilter
         {
             context.HttpContext.Response.OnStarting(
                 callback: OnStartingCallback,
-                state: context.HttpContext);
+                state: context.HttpContext
+            );
         }
     }
 
@@ -72,7 +75,8 @@ internal class SaveTempDataFilter : IResourceFilter, IResultFilter
             result: null,
             factory: saveTempDataContext.TempDataDictionaryFactory,
             filters: saveTempDataContext.Filters,
-            httpContext: httpContext);
+            httpContext: httpContext
+        );
 
         return Task.CompletedTask;
     }
@@ -95,9 +99,7 @@ internal class SaveTempDataFilter : IResourceFilter, IResultFilter
     }
 
     /// <inheritdoc />
-    public void OnResultExecuting(ResultExecutingContext context)
-    {
-    }
+    public void OnResultExecuting(ResultExecutingContext context) { }
 
     /// <inheritdoc />
     public void OnResultExecuted(ResultExecutedContext context)
@@ -131,7 +133,8 @@ internal class SaveTempDataFilter : IResourceFilter, IResultFilter
         IActionResult result,
         ITempDataDictionaryFactory factory,
         IList<IFilterMetadata> filters,
-        HttpContext httpContext)
+        HttpContext httpContext
+    )
     {
         var tempData = factory.GetTempData(httpContext);
 

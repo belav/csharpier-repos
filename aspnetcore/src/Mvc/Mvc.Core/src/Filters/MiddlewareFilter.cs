@@ -25,7 +25,10 @@ internal class MiddlewareFilter : IAsyncResourceFilter
         _middlewarePipeline = middlewarePipeline;
     }
 
-    public Task OnResourceExecutionAsync(ResourceExecutingContext context, ResourceExecutionDelegate next)
+    public Task OnResourceExecutionAsync(
+        ResourceExecutingContext context,
+        ResourceExecutionDelegate next
+    )
     {
         var httpContext = context.HttpContext;
 

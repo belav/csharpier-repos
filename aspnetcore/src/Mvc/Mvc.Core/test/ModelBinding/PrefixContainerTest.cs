@@ -73,7 +73,6 @@ public class PrefixContainerTest
         Assert.False(result);
     }
 
-
     [Theory]
     [InlineData("a")]
     [InlineData("b")]
@@ -205,14 +204,23 @@ public class PrefixContainerTest
     public void GetKeysFromPrefix_ReturnsUniqueTopLevelEntries_WhenPrefixIsEmpty()
     {
         // Arrange
-        var keys = new[] { "[0].name", "[0].address.street", "[item1].name", "[item1].age", "foo", "foo.bar" };
+        var keys = new[]
+        {
+            "[0].name",
+            "[0].address.street",
+            "[item1].name",
+            "[item1].age",
+            "foo",
+            "foo.bar"
+        };
         var container = new PrefixContainer(keys);
 
         // Act
         var result = container.GetKeysFromPrefix(prefix: string.Empty);
 
         // Assert
-        Assert.Collection(result.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase),
+        Assert.Collection(
+            result.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase),
             item =>
             {
                 Assert.Equal("0", item.Key);
@@ -227,7 +235,8 @@ public class PrefixContainerTest
             {
                 Assert.Equal("item1", item.Key);
                 Assert.Equal("[item1]", item.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -255,7 +264,8 @@ public class PrefixContainerTest
         var result = container.GetKeysFromPrefix("foo");
 
         // Assert
-        Assert.Collection(result.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase),
+        Assert.Collection(
+            result.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase),
             item =>
             {
                 Assert.Equal("0", item.Key);
@@ -270,21 +280,28 @@ public class PrefixContainerTest
             {
                 Assert.Equal("age", item.Key);
                 Assert.Equal("foo.age", item.Value);
-            });
+            }
+        );
     }
 
     [Fact]
     public void GetKeysFromPrefix_ReturnsSubKeysThatStartWithPrefix_ForNestedSubKeys()
     {
         // Arrange
-        var keys = new[] { "person[0].address[0].street", "person[0].address[1].street", "person[0].address[1].zip" };
+        var keys = new[]
+        {
+            "person[0].address[0].street",
+            "person[0].address[1].street",
+            "person[0].address[1].zip"
+        };
         var container = new PrefixContainer(keys);
 
         // Act
         var result = container.GetKeysFromPrefix("person[0].address");
 
         // Assert
-        Assert.Collection(result.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase),
+        Assert.Collection(
+            result.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase),
             item =>
             {
                 Assert.Equal("0", item.Key);
@@ -294,6 +311,7 @@ public class PrefixContainerTest
             {
                 Assert.Equal("1", item.Key);
                 Assert.Equal("person[0].address[1]", item.Value);
-            });
+            }
+        );
     }
 }

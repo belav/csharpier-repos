@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         internal sealed class SolutionCrawlerProgressReporter : ISolutionCrawlerProgressReporter
         {
             // we use ref count here since solution crawler has multiple queues per priority
-            // where an item can be enqueued and dequeued independently. 
+            // where an item can be enqueued and dequeued independently.
             // first item added in any of those queues will cause the "start" event to be sent
             // and the very last item processed from those queues will cause "stop" event to be sent
             // evaluating and paused is also ref counted since work in the lower priority queue can
@@ -38,17 +38,26 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
             public bool InProgress => _progressStartCount > 0;
 
-            public void Start() => ChangeProgressStatus(ref _progressStartCount, ProgressStatus.Started);
-            public void Stop() => ChangeProgressStatus(ref _progressStartCount, ProgressStatus.Stopped);
+            public void Start() =>
+                ChangeProgressStatus(ref _progressStartCount, ProgressStatus.Started);
 
-            private void Evaluate() => ChangeProgressStatus(ref _progressEvaluateCount, ProgressStatus.Evaluating);
-            private void Pause() => ChangeProgressStatus(ref _progressEvaluateCount, ProgressStatus.Paused);
+            public void Stop() =>
+                ChangeProgressStatus(ref _progressStartCount, ProgressStatus.Stopped);
+
+            private void Evaluate() =>
+                ChangeProgressStatus(ref _progressEvaluateCount, ProgressStatus.Evaluating);
+
+            private void Pause() =>
+                ChangeProgressStatus(ref _progressEvaluateCount, ProgressStatus.Paused);
 
             public void UpdatePendingItemCount(int pendingItemCount)
             {
                 if (_progressStartCount > 0)
                 {
-                    var progressData = new ProgressData(ProgressStatus.PendingItemCountUpdated, pendingItemCount);
+                    var progressData = new ProgressData(
+                        ProgressStatus.PendingItemCountUpdated,
+                        pendingItemCount
+                    );
                     OnProgressChanged(progressData);
                 }
             }
@@ -60,21 +69,24 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             /// Only when the last one actually disposes the scope-object will the crawler 
             /// actually revert back to the paused state where no work proceeds.
             /// </summary>
-            public IDisposable GetEvaluatingScope()
-                => new ProgressStatusRAII(this);
+            public IDisposable GetEvaluatingScope() => new ProgressStatusRAII(this);
 
             private void ChangeProgressStatus(ref int referenceCount, ProgressStatus status)
             {
                 var start = status is ProgressStatus.Started or ProgressStatus.Evaluating;
-                if (start ? (Interlocked.Increment(ref referenceCount) == 1) : (Interlocked.Decrement(ref referenceCount) == 0))
+                if (
+                    start
+                        ? (Interlocked.Increment(ref referenceCount) == 1)
+                        : (Interlocked.Decrement(ref referenceCount) == 0)
+                )
                 {
                     var progressData = new ProgressData(status, pendingItemCount: null);
                     OnProgressChanged(progressData);
                 }
             }
 
-            private void OnProgressChanged(ProgressData progressData)
-                => ProgressChanged?.Invoke(this, progressData);
+            private void OnProgressChanged(ProgressData progressData) =>
+                ProgressChanged?.Invoke(this, progressData);
 
             private struct ProgressStatusRAII : IDisposable
             {
@@ -86,8 +98,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     _owner.Evaluate();
                 }
 
-                public void Dispose()
-                    => _owner.Pause();
+                public void Dispose() => _owner.Pause();
             }
         }
 

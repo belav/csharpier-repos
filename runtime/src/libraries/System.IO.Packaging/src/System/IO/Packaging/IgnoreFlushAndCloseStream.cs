@@ -171,7 +171,6 @@ namespace System.IO.Packaging
             }
         }
 
-
         #region Private Methods
 
         private void ThrowIfStreamDisposed()

@@ -71,9 +71,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
     public class Logger
     {
-        public void Log(LogEventInfo logEvent)
-        {
-        }
+        public void Log(LogEventInfo logEvent) { }
     }
 
     public static class LogManager
@@ -143,7 +141,12 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             JsonConvert.SerializeObject(
                 staff,
-                new JsonSerializerSettings { TraceWriter = traceWriter, Converters = { new JavaScriptDateTimeConverter() } });
+                new JsonSerializerSettings
+                {
+                    TraceWriter = traceWriter,
+                    Converters = { new JavaScriptDateTimeConverter() }
+                }
+            );
 
             Console.WriteLine(traceWriter);
             // 2012-11-11T12:08:42.761 Info Started serializing Newtonsoft.Json.Tests.Serialization.Staff. Path ''.
@@ -152,7 +155,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             // 2012-11-11T12:08:42.797 Info Started serializing System.Collections.Generic.List`1[System.String]. Path 'Roles'.
             // 2012-11-11T12:08:42.798 Info Finished serializing System.Collections.Generic.List`1[System.String]. Path 'Roles'.
             // 2012-11-11T12:08:42.799 Info Finished serializing Newtonsoft.Json.Tests.Serialization.Staff. Path ''.
-            // 2013-05-18T21:38:11.255 Verbose Serialized JSON: 
+            // 2013-05-18T21:38:11.255 Verbose Serialized JSON:
             // {
             //   "Name": "Arnie Admin",
             //   "StartDate": new Date(

@@ -88,10 +88,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
         /// </summary>
         public DiagnosticLog Log { get; }
 
-        public override string ToString()
-            => RoslynString.IsNullOrWhiteSpace(TargetFramework)
-                ? FilePath ?? string.Empty
-                : $"{FilePath} ({TargetFramework})";
+        public override string ToString() =>
+            RoslynString.IsNullOrWhiteSpace(TargetFramework)
+              ? FilePath ?? string.Empty
+              : $"{FilePath} ({TargetFramework})";
 
         private ProjectFileInfo(
             bool isEmpty,
@@ -106,7 +106,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             ImmutableArray<DocumentFileInfo> additionalDocuments,
             ImmutableArray<DocumentFileInfo> analyzerConfigDocuments,
             ImmutableArray<ProjectFileReference> projectReferences,
-            DiagnosticLog log)
+            DiagnosticLog log
+        )
         {
             RoslynDebug.Assert(filePath != null);
 
@@ -137,8 +138,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
             ImmutableArray<DocumentFileInfo> additionalDocuments,
             ImmutableArray<DocumentFileInfo> analyzerConfigDocuments,
             ImmutableArray<ProjectFileReference> projectReferences,
-            DiagnosticLog log)
-            => new(
+            DiagnosticLog log
+        ) =>
+            new(
                 isEmpty: false,
                 language,
                 filePath,
@@ -151,10 +153,15 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 additionalDocuments,
                 analyzerConfigDocuments,
                 projectReferences,
-                log);
+                log
+            );
 
-        public static ProjectFileInfo CreateEmpty(string language, string? filePath, DiagnosticLog log)
-            => new(
+        public static ProjectFileInfo CreateEmpty(
+            string language,
+            string? filePath,
+            DiagnosticLog log
+        ) =>
+            new(
                 isEmpty: true,
                 language,
                 filePath,
@@ -167,6 +174,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 additionalDocuments: ImmutableArray<DocumentFileInfo>.Empty,
                 analyzerConfigDocuments: ImmutableArray<DocumentFileInfo>.Empty,
                 projectReferences: ImmutableArray<ProjectFileReference>.Empty,
-                log);
+                log
+            );
     }
 }

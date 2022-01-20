@@ -5,11 +5,12 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class CompositeKeysSplitQuerySqliteTest : CompositeKeysSplitQueryRelationalTestBase<CompositeKeysQuerySqliteFixture>
+    public class CompositeKeysSplitQuerySqliteTest
+        : CompositeKeysSplitQueryRelationalTestBase<CompositeKeysQuerySqliteFixture>
     {
-        public CompositeKeysSplitQuerySqliteTest(CompositeKeysQuerySqliteFixture fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
-        {
-        }
+        public CompositeKeysSplitQuerySqliteTest(
+            CompositeKeysQuerySqliteFixture fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture) { }
     }
 }

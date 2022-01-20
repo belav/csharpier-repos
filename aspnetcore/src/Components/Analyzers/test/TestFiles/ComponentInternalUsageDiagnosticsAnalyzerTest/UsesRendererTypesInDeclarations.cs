@@ -9,12 +9,11 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Tests.TestFiles.ComponentInt
 {
     /*MMBaseClass*/class UsesRendererTypesInDeclarations : Renderer
     {
-        private readonly Renderer /*MMField*/_field = null;
+        private readonly Renderer /*MMField*/
+        _field = null;
 
         public UsesRendererTypesInDeclarations()
-            /*MMInvocation*/: base(null, null)
-        {
-        }
+            /*MMInvocation*/: base(null, null) { }
 
         public override Dispatcher Dispatcher => throw new NotImplementedException();
 

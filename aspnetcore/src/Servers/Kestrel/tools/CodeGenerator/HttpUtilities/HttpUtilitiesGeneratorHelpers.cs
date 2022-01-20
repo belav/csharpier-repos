@@ -40,11 +40,7 @@ internal class HttpUtilitiesGeneratorHelpers
             else if (currentBitsCount > 0)
             {
                 var currentShift = (byte)(i - currentBitsCount - lastShift);
-                shifts.Add(new ShiftInfo<ulong>
-                {
-                    Mask = currentMask,
-                    Shift = currentShift
-                });
+                shifts.Add(new ShiftInfo<ulong> { Mask = currentMask, Shift = currentShift });
                 lastShift = currentShift;
                 currentMask = 0;
                 currentBitsCount = 0;
@@ -54,7 +50,12 @@ internal class HttpUtilitiesGeneratorHelpers
         return shifts.ToArray();
     }
 
-    public static ulong? SearchKeyByLookThroughMaskCombinations(ulong[] values, byte bitsIndexStart, byte bitsLength, byte bitsCount)
+    public static ulong? SearchKeyByLookThroughMaskCombinations(
+        ulong[] values,
+        byte bitsIndexStart,
+        byte bitsLength,
+        byte bitsCount
+    )
     {
         if (bitsIndexStart + bitsLength > sizeof(ulong) * 8)
         {
@@ -212,6 +213,10 @@ internal class HttpUtilitiesGeneratorHelpers
         var maskSizeInBIts = Math.Log(mask, 2);
         var hexMaskSize = (byte)Math.Ceiling(maskSizeInBIts / 4);
 
-        return string.Format(CultureInfo.InvariantCulture, "0x{0:X" + (hexMaskSize == 0 ? 1 : hexMaskSize) + "}", mask);
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "0x{0:X" + (hexMaskSize == 0 ? 1 : hexMaskSize) + "}",
+            mask
+        );
     }
 }
