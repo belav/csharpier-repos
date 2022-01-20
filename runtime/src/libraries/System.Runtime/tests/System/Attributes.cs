@@ -22,7 +22,6 @@ using Xunit;
 
 [module: Debuggable(true, false)]
 
-
 namespace System.Tests
 {
     public class AttributeIsDefinedTests

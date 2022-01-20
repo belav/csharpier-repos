@@ -8,7 +8,6 @@ using Xunit;
 // while concurrently reading counters
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
-
 namespace System.Diagnostics.Tests
 {
     internal class Helpers

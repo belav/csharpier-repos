@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Hosting;
 
 [assembly: HostingStartup(typeof(Microsoft.AspNetCore.Server.IISIntegration.IISHostingStartup))]
 
-
 namespace Microsoft.AspNetCore.Server.IISIntegration;
 
 /// <summary>

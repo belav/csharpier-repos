@@ -10,7 +10,6 @@ using System.Runtime.Versioning;
 
 [assembly: TargetFramework(".NETFramework,Version=v2.0")]
 
-
 namespace Microsoft.CodeAnalysis
 {
     internal static class ReflectionTypeExtensions

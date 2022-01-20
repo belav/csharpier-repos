@@ -13,7 +13,6 @@ using Xunit;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("41DDB0BD-1E88-4B0C-BD23-FD3B7E4037A8")]
 
-
 /// <summary>
 /// Interface with ComImport.
 /// </summary>

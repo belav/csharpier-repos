@@ -11,7 +11,6 @@ using CustomAttribute;
 [assembly: @AttrName(UShortField = 321)]
 [module: AttrNameAttribute(TypeField = typeof(Dictionary<string, int>))]
 
-
 namespace AttributeUse
 {
     // attribute on type parameter (with target typevar or not)

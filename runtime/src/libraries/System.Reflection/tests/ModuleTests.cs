@@ -13,7 +13,6 @@ using Xunit;
 [module: StringAttr("hello", name = "StringAttrSimple")]
 [module: EnumAttr(PublicEnum.Case1, name = "EnumAttrSimple")]
 
-
 namespace System.Reflection.Tests
 {
     public class ModuleTest

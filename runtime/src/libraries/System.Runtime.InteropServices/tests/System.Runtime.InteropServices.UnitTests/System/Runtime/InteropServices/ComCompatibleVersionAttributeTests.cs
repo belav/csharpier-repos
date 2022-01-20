@@ -7,7 +7,6 @@ using Xunit;
 
 [assembly: ComCompatibleVersion(1, 2, 3, 4)]
 
-
 namespace System.Runtime.InteropServices.Tests
 {
     public class ComCompatibleVersionAttributeTests

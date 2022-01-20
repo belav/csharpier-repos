@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.HotReload;
 
 [assembly: MetadataUpdateHandler(typeof(HotReloadManager))]
 
-
 namespace Microsoft.AspNetCore.Components.HotReload;
 
 internal sealed class HotReloadManager

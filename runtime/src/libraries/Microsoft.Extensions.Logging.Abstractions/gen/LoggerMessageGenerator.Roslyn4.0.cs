@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.Text;
 
 [assembly: System.Resources.NeutralResourcesLanguage("en-us")]
 
-
 namespace Microsoft.Extensions.Logging.Generators
 {
     [Generator]

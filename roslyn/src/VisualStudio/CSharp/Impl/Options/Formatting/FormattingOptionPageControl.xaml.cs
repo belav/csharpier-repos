@@ -16,7 +16,6 @@ using System.Runtime.CompilerServices;
 // assemblies.
 [assembly: TypeForwardedTo(typeof(CodeStyleNoticeTextBlock))]
 
-
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 {
     /// <summary>

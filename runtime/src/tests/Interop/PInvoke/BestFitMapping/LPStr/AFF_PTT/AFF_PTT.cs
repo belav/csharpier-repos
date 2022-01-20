@@ -8,7 +8,6 @@ using TestLibrary;
 
 [assembly: BestFitMapping(false, ThrowOnUnmappableChar = false)]
 
-
 [StructLayout(LayoutKind.Sequential)]
 [BestFitMapping(true, ThrowOnUnmappableChar = true)]
 public struct LPStrTestStruct

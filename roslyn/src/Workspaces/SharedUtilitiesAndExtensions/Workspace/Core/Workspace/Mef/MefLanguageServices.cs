@@ -17,7 +17,6 @@ using Microsoft.CodeAnalysis.Host.Mef;
     Target = typeof(ImmutableArray<Lazy<ILanguageService, WorkspaceServiceMetadata>>)
 )]
 
-
 namespace Microsoft.CodeAnalysis.Host.Mef
 {
     internal sealed class MefLanguageServices : HostLanguageServices

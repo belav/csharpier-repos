@@ -7,7 +7,6 @@ using Xunit;
 
 [assembly: PrimaryInteropAssembly(1, 2)]
 
-
 namespace System.Runtime.InteropServices.Tests
 {
     public class PrimaryInteropAssemblyAttributeTests

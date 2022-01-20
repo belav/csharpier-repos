@@ -6,7 +6,6 @@ using System.Reflection.Metadata;
 
 [assembly: MetadataUpdateHandler(typeof(RuntimeTypeMetadataUpdateHandler))]
 
-
 namespace System.Reflection.Metadata
 {
     /// <summary>Metadata update handler used to clear a Type's reflection cache in response to a metadata update notification.</summary>

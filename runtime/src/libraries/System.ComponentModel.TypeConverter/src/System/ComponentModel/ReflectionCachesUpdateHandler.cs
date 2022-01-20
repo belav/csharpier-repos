@@ -7,7 +7,6 @@ using System.Reflection.Metadata;
 
 [assembly: MetadataUpdateHandler(typeof(ReflectionCachesUpdateHandler))]
 
-
 namespace System.ComponentModel
 {
     internal static class ReflectionCachesUpdateHandler

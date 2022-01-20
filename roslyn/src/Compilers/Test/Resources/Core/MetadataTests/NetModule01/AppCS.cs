@@ -12,7 +12,6 @@ using NS.Module.CS01;
 [assembly: System.Reflection.AssemblyVersion("1.2.3.4")]
 [assembly: System.Reflection.AssemblyCulture("")]
 
-
 namespace AppCS
 {
     public class App

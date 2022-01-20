@@ -15,7 +15,6 @@ using Xunit;
 
 [assembly: NeutralResourcesLanguage("en")]
 
-
 namespace System.Resources.Tests
 {
     namespace Resources

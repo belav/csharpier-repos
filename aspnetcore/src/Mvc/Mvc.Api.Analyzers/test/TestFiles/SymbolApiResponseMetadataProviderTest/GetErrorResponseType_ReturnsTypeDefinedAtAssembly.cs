@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
     typeof(Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.SymbolApiResponseMetadataProviderTest.GetErrorResponseType_ReturnsTypeDefinedAtAssemblyModel)
 )]
 
-
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.SymbolApiResponseMetadataProviderTest
 {
     public class GetErrorResponseType_ReturnsTypeDefinedAtAssemblyController

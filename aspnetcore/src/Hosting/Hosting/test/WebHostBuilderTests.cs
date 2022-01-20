@@ -26,7 +26,6 @@ using Xunit;
 
 [assembly: HostingStartup(typeof(WebHostBuilderTests.TestHostingStartup))]
 
-
 namespace Microsoft.AspNetCore.Hosting;
 
 public class WebHostBuilderTests

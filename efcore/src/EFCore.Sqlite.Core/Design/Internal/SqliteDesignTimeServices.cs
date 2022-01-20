@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
     "Microsoft.EntityFrameworkCore.Sqlite.Design.Internal.SqliteDesignTimeServices"
 )]
 
-
 namespace Microsoft.EntityFrameworkCore.Sqlite.Design.Internal
 {
     /// <summary>
