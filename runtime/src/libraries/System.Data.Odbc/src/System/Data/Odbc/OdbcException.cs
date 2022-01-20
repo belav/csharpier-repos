@@ -7,12 +7,17 @@ using System.Text;
 namespace System.Data.Odbc
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class OdbcException : System.Data.Common.DbException
     {
         private readonly OdbcErrorCollection _odbcErrors = new OdbcErrorCollection();
 
-        internal static OdbcException CreateException(OdbcErrorCollection errors, ODBC32.RetCode retcode)
+        internal static OdbcException CreateException(
+            OdbcErrorCollection errors,
+            ODBC32.RetCode retcode
+        )
         {
             StringBuilder builder = new StringBuilder();
             foreach (OdbcError error in errors)
@@ -22,7 +27,14 @@ namespace System.Data.Odbc
                     builder.Append(Environment.NewLine);
                 }
 
-                builder.Append(SR.GetString(SR.Odbc_ExceptionMessage, ODBC32.RetcodeToString(retcode), error.SQLState, error.Message)); // MDAC 68337
+                builder.Append(
+                    SR.GetString(
+                        SR.Odbc_ExceptionMessage,
+                        ODBC32.RetcodeToString(retcode),
+                        error.SQLState,
+                        error.Message
+                    )
+                ); // MDAC 68337
             }
             OdbcException exception = new OdbcException(builder.ToString(), errors);
             return exception;
@@ -37,16 +49,16 @@ namespace System.Data.Odbc
         private OdbcException(SerializationInfo si, StreamingContext sc) : base(si, sc)
         {
             // Ignoring ODBC32.RETCODE
-            _odbcErrors = (OdbcErrorCollection)si.GetValue("odbcErrors", typeof(OdbcErrorCollection))!;
+            _odbcErrors = (OdbcErrorCollection)si.GetValue(
+                "odbcErrors",
+                typeof(OdbcErrorCollection)
+            )!;
             HResult = HResults.OdbcException;
         }
 
         public OdbcErrorCollection Errors
         {
-            get
-            {
-                return _odbcErrors;
-            }
+            get { return _odbcErrors; }
         }
 
         public override void GetObjectData(SerializationInfo si, StreamingContext context)

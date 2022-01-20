@@ -14,24 +14,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(float p1)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
 
         public static implicit operator Target(string p1)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
     }
 
@@ -55,8 +46,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.onedynamicparam004.onedynamicparam004
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -68,34 +57,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static explicit operator Target(string x)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
 
         public static explicit operator Target(int x)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
 
         public static explicit operator Target(ulong x)
         {
-            return new Target()
-            {
-                Field = 3
-            }
-
-            ;
+            return new Target() { Field = 3 };
         }
     }
 
@@ -119,8 +94,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.onedynamicparam005.onedynamicparam005
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -132,12 +105,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field = 4;
-        public static implicit operator int (Target p1)
+
+        public static implicit operator int(Target p1)
         {
             return p1;
         }
 
-        public static implicit operator string (Target p1)
+        public static implicit operator string(Target p1)
         {
             return string.Empty;
         }
@@ -153,12 +127,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
         public static int MainMethod(string[] args)
         {
-            Target t = new Target()
-            {
-                Field = 5
-            }
-
-            ;
+            Target t = new Target() { Field = 5 };
             dynamic d = t;
             if (d.Field == 5)
                 return 0;
@@ -167,8 +136,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparam013.oneparam013
 {
@@ -181,13 +148,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
-        public static explicit operator decimal (Target p1)
+
+        public static explicit operator decimal(Target p1)
         {
             p1.Field = 2;
             return (decimal)p1;
         }
 
-        public static explicit operator int (Target p2)
+        public static explicit operator int(Target p2)
         {
             return int.MinValue;
         }
@@ -203,12 +171,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
         public static int MainMethod(string[] args)
         {
-            dynamic d = new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            dynamic d = new Target() { Field = 1 };
             int x = (int)d;
             if (x == int.MinValue)
                 return 0;
@@ -217,8 +180,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparam014.oneparam014
 {
@@ -230,12 +191,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public class Target
     {
-        public static implicit operator string (Target p2)
+        public static implicit operator string(Target p2)
         {
             return "foo";
         }
 
-        public static explicit operator float (Target p2)
+        public static explicit operator float(Target p2)
         {
             return 12.3f;
         }
@@ -261,8 +222,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparam015.oneparam015
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -273,12 +232,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public class Target
     {
-        public static explicit operator string (Target p1)
+        public static explicit operator string(Target p1)
         {
             return "foo";
         }
 
-        public static explicit operator short (Target p2)
+        public static explicit operator short(Target p2)
         {
             return 1;
         }
@@ -304,8 +263,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparam016.oneparam016
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -316,17 +273,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public class Target
     {
-        public static implicit operator int (Target p2)
+        public static implicit operator int(Target p2)
         {
             return int.MinValue;
         }
 
-        public static explicit operator short (Target p2)
+        public static explicit operator short(Target p2)
         {
             return short.MinValue;
         }
 
-        public static implicit operator long (Target p2)
+        public static implicit operator long(Target p2)
         {
             return long.MaxValue;
         }
@@ -352,8 +309,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv001.oneparamdifftypesconv001
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -365,24 +320,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(int x)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
 
         public static implicit operator Target(long x)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
     }
 
@@ -406,8 +352,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv002.oneparamdifftypesconv002
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -419,24 +363,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(int x)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
 
         public static implicit operator Target(long x)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
     }
 
@@ -460,8 +395,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv003.oneparamdifftypesconv003
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -472,12 +405,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public class Target
     {
-        public static explicit operator float (Target x)
+        public static explicit operator float(Target x)
         {
             return float.Epsilon;
         }
 
-        public static explicit operator float? (Target x)
+        public static explicit operator float?(Target x)
         {
             return float.NegativeInfinity;
         }
@@ -503,8 +436,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv004.oneparamdifftypesconv004
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -515,12 +446,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public class Target
     {
-        public static explicit operator float (Target x)
+        public static explicit operator float(Target x)
         {
             return float.Epsilon;
         }
 
-        public static explicit operator float? (Target x)
+        public static explicit operator float?(Target x)
         {
             return null;
         }
@@ -546,8 +477,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv005.oneparamdifftypesconv005
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -558,12 +487,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public class Target
     {
-        public static implicit operator long (Target x)
+        public static implicit operator long(Target x)
         {
             return long.MaxValue;
         }
 
-        public static implicit operator int? (Target x)
+        public static implicit operator int?(Target x)
         {
             return int.MinValue;
         }
@@ -589,8 +518,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv006.oneparamdifftypesconv006
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -608,7 +535,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public class Target
     {
-        public static implicit operator int (Target x)
+        public static implicit operator int(Target x)
         {
             return int.MinValue;
         }
@@ -639,8 +566,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv007.oneparamdifftypesconv007
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -659,24 +584,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static explicit operator Target(int x)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
 
         public static explicit operator Target(myEnum x)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
     }
 
@@ -700,8 +616,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv008.oneparamdifftypesconv008
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -720,24 +634,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(int x)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
 
         public static implicit operator Target(myEnum x)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
     }
 
@@ -761,8 +666,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv009.oneparamdifftypesconv009
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -775,34 +678,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public struct myStruct
     {
-        public bool Ok
-        {
-            get;
-            set;
-        }
+        public bool Ok { get; set; }
     }
 
     public class Target
     {
         public int Field;
+
         public static explicit operator Target(myStruct x)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
 
         public static explicit operator Target(ValueType x)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
     }
 
@@ -816,12 +706,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
         public static int MainMethod(string[] args)
         {
-            dynamic s = new myStruct()
-            {
-                Ok = false
-            }
-
-            ;
+            dynamic s = new myStruct() { Ok = false };
             Target x = (Target)s;
             if (x.Field == 1)
                 return 0;
@@ -830,8 +715,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv010.oneparamdifftypesconv010
 {
@@ -845,16 +728,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public struct myStruct
     {
-        public bool Ok
-        {
-            get;
-            set;
-        }
+        public bool Ok { get; set; }
     }
 
     public class Target
     {
         public static int Status = 0;
+
         public static implicit operator Target(ValueType x)
         {
             Target.Status = 1;
@@ -878,12 +758,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
         public static int MainMethod(string[] args)
         {
-            dynamic s = new myStruct()
-            {
-                Ok = false
-            }
-
-            ;
+            dynamic s = new myStruct() { Ok = false };
             Target x = s;
             if (Target.Status == 1)
                 return 0;
@@ -892,8 +767,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv011.oneparamdifftypesconv011
 {
@@ -905,34 +778,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public struct myStruct
     {
-        public bool Ok
-        {
-            get;
-            set;
-        }
+        public bool Ok { get; set; }
     }
 
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(myStruct x)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
 
         public static implicit operator Target(myStruct? x)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
     }
 
@@ -946,12 +806,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
         public static int MainMethod(string[] args)
         {
-            dynamic s = new myStruct()
-            {
-                Ok = false
-            }
-
-            ;
+            dynamic s = new myStruct() { Ok = false };
             Target x = s;
             if (x.Field == 1)
                 return 0;
@@ -960,8 +815,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv012.oneparamdifftypesconv012
 {
@@ -973,34 +826,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public struct MyStruct
     {
-        public bool Ok
-        {
-            get;
-            set;
-        }
+        public bool Ok { get; set; }
     }
 
     public class Target
     {
         public int Field;
+
         public static explicit operator Target(MyStruct x)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
 
         public static explicit operator Target(MyStruct? x)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
     }
 
@@ -1024,8 +864,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv013.oneparamdifftypesconv013
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1045,24 +883,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static explicit operator Target(Base x)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
 
         public static explicit operator Target(Derived x)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
     }
 
@@ -1086,8 +915,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv014.oneparamdifftypesconv014
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1107,6 +934,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public static int Status;
+
         public static implicit operator Base(Target x)
         {
             Target.Status = 1;
@@ -1140,8 +968,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv015.oneparamdifftypesconv015
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1161,24 +987,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(Base x)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
 
         public static implicit operator Target(Derived x)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
     }
 
@@ -1203,8 +1020,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv017.oneparamdifftypesconv017
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1228,24 +1043,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static explicit operator Target(Derived x)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
 
         public static explicit operator Target(Base x)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
     }
 
@@ -1270,8 +1076,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesconv018.oneparamdifftypesconv018
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1295,24 +1099,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Target
     {
         public int Field;
+
         public static implicit operator Target(Base2 x)
         {
-            return new Target()
-            {
-                Field = 1
-            }
-
-            ;
+            return new Target() { Field = 1 };
         }
 
         public static implicit operator Target(Base x)
         {
-            return new Target()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Target() { Field = 2 };
         }
     }
 
@@ -1337,8 +1132,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesnoconv001.oneparamdifftypesnoconv001
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1349,12 +1142,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public class Target
     {
-        public static explicit operator bool (Target x)
+        public static explicit operator bool(Target x)
         {
             return false;
         }
 
-        public static explicit operator string (Target x)
+        public static explicit operator string(Target x)
         {
             return "foo";
         }
@@ -1380,8 +1173,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesnoconv002.oneparamdifftypesnoconv002
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1397,7 +1188,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             return true;
         }
 
-        public static implicit operator string (Target x)
+        public static implicit operator string(Target x)
         {
             return string.Empty;
         }
@@ -1423,8 +1214,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesuserconv001.oneparamdifftypesuserconv001
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1435,7 +1224,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public class Base
     {
-        public static implicit operator decimal (Base b)
+        public static implicit operator decimal(Base b)
         {
             return 1m;
         }
@@ -1443,7 +1232,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public class Target
     {
-        public static implicit operator decimal (Target x)
+        public static implicit operator decimal(Target x)
         {
             return decimal.One;
         }
@@ -1473,8 +1262,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.errorverifier.errorverifier
 {
@@ -1658,8 +1445,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesuserconv002.oneparamdifftypesuserconv002
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1673,14 +1458,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Base
     {
         public int Field;
-        public static implicit operator int (Base b)
+
+        public static implicit operator int(Base b)
         {
             if (b.Field == 2)
                 return 1;
             return 0;
         }
 
-        public static implicit operator long (Base b)
+        public static implicit operator long(Base b)
         {
             if (b.Field == 3)
                 return 2;
@@ -1692,12 +1478,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     {
         public static implicit operator Base(Target x)
         {
-            return new Base()
-            {
-                Field = 2
-            }
-
-            ;
+            return new Base() { Field = 2 };
         }
 
         public static implicit operator Target(ValueType x)
@@ -1732,8 +1513,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.oneparamdifftypesuserconv003.oneparamdifftypesuserconv003
 {
     // <Title> Tests overload resolution for 1 class and 2 methods</Title>
@@ -1748,7 +1527,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public class Derived : Base
     {
-        public static implicit operator decimal (Derived b)
+        public static implicit operator decimal(Derived b)
         {
             return decimal.Zero;
         }
@@ -1756,7 +1535,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public class Target
     {
-        public static implicit operator decimal (Target x)
+        public static implicit operator decimal(Target x)
         {
             return decimal.One;
         }
@@ -1787,8 +1566,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Oneclass2operates.conversion.genericparam101n.genericparam101n
 {
     // <Title> Tests overload resolution for 1 class and 2 operators</Title>
@@ -1799,7 +1576,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public class A<T>
     {
-        public static explicit operator int (A<T> x)
+        public static explicit operator int(A<T> x)
         {
             return 0;
         }

@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             private const int FirstBufferMaxDepth = 100;
 
             // 3 + Sum { d = 1..maxDepth : 2*d+1 } = (maxDepth + 1)^2 + 2
-            private const int FirstBufferLength = (FirstBufferMaxDepth + 1) * (FirstBufferMaxDepth + 1) + 2;
+            private const int FirstBufferLength =
+                (FirstBufferMaxDepth + 1) * (FirstBufferMaxDepth + 1) + 2;
 
             internal const int GrowFactor = 2;
 
@@ -94,19 +95,16 @@ namespace Microsoft.CodeAnalysis.Differencing
                 return new VArray(_array, start, length);
             }
 
-            public bool IsTooLargeToPool
-                => _array.Length > MaxPooledBufferSize;
+            public bool IsTooLargeToPool => _array.Length > MaxPooledBufferSize;
 
-            private static int GetVArrayLength(int depth)
-                => 2 * Math.Max(depth, 1) + 1;
+            private static int GetVArrayLength(int depth) => 2 * Math.Max(depth, 1) + 1;
 
             // 3 + Sum { d = 1..depth-1 : 2*d+1 } = depth^2 + 2
-            private static int GetVArrayStart(int depth)
-                => (depth == 0) ? 0 : depth * depth + 2;
+            private static int GetVArrayStart(int depth) => (depth == 0) ? 0 : depth * depth + 2;
 
             // Sum { d = previousChunkDepth..maxDepth : 2*d+1 } = (maxDepth + 1)^2 - precedingBufferMaxDepth^2
-            private static int GetNextBufferLength(int precedingBufferMaxDepth, int maxDepth)
-                => (maxDepth + 1) * (maxDepth + 1) - precedingBufferMaxDepth * precedingBufferMaxDepth;
+            private static int GetNextBufferLength(int precedingBufferMaxDepth, int maxDepth) =>
+                (maxDepth + 1) * (maxDepth + 1) - precedingBufferMaxDepth * precedingBufferMaxDepth;
 
             public void Unlink()
             {
@@ -185,7 +183,9 @@ namespace Microsoft.CodeAnalysis.Differencing
 
             public void InitializeFrom(VArray other)
             {
-                int dstCopyStart, srcCopyStart, copyLength;
+                int dstCopyStart,
+                    srcCopyStart,
+                    copyLength;
 
                 var copyDelta = Offset - other.Offset;
                 if (copyDelta >= 0)
@@ -203,12 +203,21 @@ namespace Microsoft.CodeAnalysis.Differencing
 
                 // since we might be reusing previously used arrays, we need to clear slots that are not copied over from the other array:
                 Array.Clear(_buffer, _start, dstCopyStart);
-                Array.Copy(other._buffer, other._start + srcCopyStart, _buffer, _start + dstCopyStart, copyLength);
-                Array.Clear(_buffer, _start + dstCopyStart + copyLength, _length - dstCopyStart - copyLength);
+                Array.Copy(
+                    other._buffer,
+                    other._start + srcCopyStart,
+                    _buffer,
+                    _start + dstCopyStart,
+                    copyLength
+                );
+                Array.Clear(
+                    _buffer,
+                    _start + dstCopyStart + copyLength,
+                    _length - dstCopyStart - copyLength
+                );
             }
 
-            internal void Initialize()
-                => Array.Clear(_buffer, _start, _length);
+            internal void Initialize() => Array.Clear(_buffer, _start, _length);
 
             public int this[int index]
             {
@@ -219,8 +228,7 @@ namespace Microsoft.CodeAnalysis.Differencing
             private int Offset => _length / 2;
         }
 
-        protected static VStack CreateStack()
-            => new(s_pool);
+        protected static VStack CreateStack() => new(s_pool);
     }
 
     /// <summary>
@@ -228,10 +236,20 @@ namespace Microsoft.CodeAnalysis.Differencing
     /// </summary>
     internal abstract class LongestCommonSubsequence<TSequence> : LongestCommonSubsequence
     {
-        protected abstract bool ItemsEqual(TSequence oldSequence, int oldIndex, TSequence newSequence, int newIndex);
+        protected abstract bool ItemsEqual(
+            TSequence oldSequence,
+            int oldIndex,
+            TSequence newSequence,
+            int newIndex
+        );
 
         // TODO: Consolidate return types between GetMatchingPairs and GetEdit to avoid duplicated code (https://github.com/dotnet/roslyn/issues/16864)
-        protected IEnumerable<KeyValuePair<int, int>> GetMatchingPairs(TSequence oldSequence, int oldLength, TSequence newSequence, int newLength)
+        protected IEnumerable<KeyValuePair<int, int>> GetMatchingPairs(
+            TSequence oldSequence,
+            int oldLength,
+            TSequence newSequence,
+            int newLength
+        )
         {
             var stack = ComputeEditPaths(oldSequence, oldLength, newSequence, newLength);
 
@@ -279,12 +297,15 @@ namespace Microsoft.CodeAnalysis.Differencing
             }
 
             // make sure we finish the enumeration as it returns the allocated buffers to the pool
-            while (varrays.MoveNext())
-            {
-            }
+            while (varrays.MoveNext()) { }
         }
 
-        protected IEnumerable<SequenceEdit> GetEdits(TSequence oldSequence, int oldLength, TSequence newSequence, int newLength)
+        protected IEnumerable<SequenceEdit> GetEdits(
+            TSequence oldSequence,
+            int oldLength,
+            TSequence newSequence,
+            int newLength
+        )
         {
             var stack = ComputeEditPaths(oldSequence, oldLength, newSequence, newLength);
 
@@ -355,7 +376,12 @@ namespace Microsoft.CodeAnalysis.Differencing
         /// Returns a distance [0..1] of the specified sequences.
         /// The smaller distance the more similar the sequences are.
         /// </summary>
-        protected double ComputeDistance(TSequence oldSequence, int oldLength, TSequence newSequence, int newLength)
+        protected double ComputeDistance(
+            TSequence oldSequence,
+            int oldLength,
+            TSequence newSequence,
+            int newLength
+        )
         {
             Debug.Assert(oldLength >= 0 && newLength >= 0);
 
@@ -364,10 +390,11 @@ namespace Microsoft.CodeAnalysis.Differencing
                 return (oldLength == newLength) ? 0.0 : 1.0;
             }
 
-            // If the sequences differ significantly in size their distance will be very close to 1.0 
+            // If the sequences differ significantly in size their distance will be very close to 1.0
             // (even if one is a strict subsequence of the other).
             // Avoid running an expensive LCS algorithm on such sequences.
-            double lenghtRatio = (oldLength > newLength) ? oldLength / newLength : newLength / oldLength;
+            double lenghtRatio =
+                (oldLength > newLength) ? oldLength / newLength : newLength / oldLength;
             if (lenghtRatio > 100)
             {
                 return 1.0;
@@ -418,7 +445,12 @@ namespace Microsoft.CodeAnalysis.Differencing
         /// 
         /// VArrays store just the y index because x can be calculated: x = y + k.
         /// </remarks>
-        private VStack ComputeEditPaths(TSequence oldSequence, int oldLength, TSequence newSequence, int newLength)
+        private VStack ComputeEditPaths(
+            TSequence oldSequence,
+            int oldLength,
+            TSequence newSequence,
+            int newLength
+        )
         {
             var reachedEnd = false;
             VArray currentV = default;
@@ -443,7 +475,7 @@ namespace Microsoft.CodeAnalysis.Differencing
 
                 for (var k = -d; k <= d; k += 2)
                 {
-                    // down or right? 
+                    // down or right?
                     var right = k == d || (k != -d && currentV[k - 1] > currentV[k + 1]);
                     var kPrev = right ? k - 1 : k + 1;
 
@@ -459,7 +491,11 @@ namespace Microsoft.CodeAnalysis.Differencing
                     var yEnd = yMid;
 
                     // follow diagonal
-                    while (xEnd < oldLength && yEnd < newLength && ItemsEqual(oldSequence, xEnd, newSequence, yEnd))
+                    while (
+                        xEnd < oldLength
+                        && yEnd < newLength
+                        && ItemsEqual(oldSequence, xEnd, newSequence, yEnd)
+                    )
                     {
                         xEnd++;
                         yEnd++;

@@ -26,9 +26,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// <exception cref="ArgumentOutOfRangeException">
         /// If <paramref name="token"/> is less or equals 0x06000000 or <paramref name="version"/> is less or equals zero. 
         /// </exception>
-        public ManagedModuleMethodId(
-            int token,
-            int version)
+        public ManagedModuleMethodId(int token, int version)
         {
             // 0x06 means that the token is for a MethodDef.
             // Valid method tokens are expected to be greather than 0x06000000.
@@ -72,13 +70,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
             return Token == other.Token && Version == other.Version;
         }
 
-        public override bool Equals(object? obj) => obj is ManagedModuleMethodId method && Equals(method);
+        public override bool Equals(object? obj) =>
+            obj is ManagedModuleMethodId method && Equals(method);
 
         public override int GetHashCode() => Token ^ Version;
 
-        public static bool operator ==(ManagedModuleMethodId left, ManagedModuleMethodId right) => left.Equals(right);
+        public static bool operator ==(ManagedModuleMethodId left, ManagedModuleMethodId right) =>
+            left.Equals(right);
 
-        public static bool operator !=(ManagedModuleMethodId left, ManagedModuleMethodId right) => !(left == right);
+        public static bool operator !=(ManagedModuleMethodId left, ManagedModuleMethodId right) =>
+            !(left == right);
 
         internal string GetDebuggerDisplay() => $"0x{Token:X8} v{Version}";
     }

@@ -27,12 +27,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             get
             {
                 var priority = ComputeRequestPriority();
-                Contract.ThrowIfFalse(priority is CodeActionRequestPriority.Normal or CodeActionRequestPriority.High);
+                Contract.ThrowIfFalse(
+                    priority is CodeActionRequestPriority.Normal or CodeActionRequestPriority.High
+                );
                 return priority;
             }
         }
 
-        private protected virtual CodeActionRequestPriority ComputeRequestPriority()
-            => CodeActionRequestPriority.Normal;
+        private protected virtual CodeActionRequestPriority ComputeRequestPriority() =>
+            CodeActionRequestPriority.Normal;
     }
 }

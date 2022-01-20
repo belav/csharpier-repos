@@ -45,8 +45,11 @@ namespace ILCompiler.PettisHansenSort
         public int FindSet(int node)
         {
             if (node < 0 || node >= _nodes.Length)
-                throw new ArgumentOutOfRangeException(nameof(node), node,
-                                                      "Node must be positive and less than number of nodes");
+                throw new ArgumentOutOfRangeException(
+                    nameof(node),
+                    node,
+                    "Node must be positive and less than number of nodes"
+                );
 
             return FindSetInternal(node);
         }

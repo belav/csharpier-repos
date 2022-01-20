@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 
 [assembly: HostingStartup(typeof(TestStartupAssembly1.TestHostingStartup1))]
 
+
 namespace TestStartupAssembly1;
 
 public class TestHostingStartup1 : IHostingStartup
@@ -21,7 +22,13 @@ public class TestHostingStartup1 : IHostingStartup
         }
 
         builder.UseSetting("testhostingstartup1", "1");
-        builder.UseSetting("testhostingstartup_chain", builder.GetSetting("testhostingstartup_chain") + "1");
-        builder.UseSetting("testhostingstartup1_calls", numCalls.ToString(CultureInfo.InvariantCulture));
+        builder.UseSetting(
+            "testhostingstartup_chain",
+            builder.GetSetting("testhostingstartup_chain") + "1"
+        );
+        builder.UseSetting(
+            "testhostingstartup1_calls",
+            numCalls.ToString(CultureInfo.InvariantCulture)
+        );
     }
 }

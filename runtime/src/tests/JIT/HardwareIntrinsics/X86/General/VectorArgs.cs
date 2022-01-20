@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-// This test case is ported from S.N.Vector counterpart 
+// This test case is ported from S.N.Vector counterpart
 // https://github.com/dotnet/coreclr/blob/master/tests/src/JIT/SIMD/VectorArgs.cs
 
 using System;
@@ -21,7 +21,9 @@ internal partial class IntelHardwareIntrinsicTest
         public VectorArg128(float r, float g, float b)
         {
             float[] temp = new float[4];
-            temp[0] = r; temp[1] = g; temp[2] = b;
+            temp[0] = r;
+            temp[1] = g;
+            temp[2] = b;
             unsafe
             {
                 fixed (float* ptr = temp)
@@ -32,7 +34,9 @@ internal partial class IntelHardwareIntrinsicTest
         }
 
         public VectorArg128(Vector128<float> _rgb)
-        { this._rgb = _rgb; }
+        {
+            this._rgb = _rgb;
+        }
 
         public VectorArg128 Change(float f)
         {
@@ -40,7 +44,10 @@ internal partial class IntelHardwareIntrinsicTest
             return new VectorArg128(Sse.Add(t, _rgb));
         }
 
-        public Vector128<float> RGB { get { return _rgb; } }
+        public Vector128<float> RGB
+        {
+            get { return _rgb; }
+        }
     }
 
     internal class VectorArg256
@@ -50,7 +57,9 @@ internal partial class IntelHardwareIntrinsicTest
         public VectorArg256(float r, float g, float b)
         {
             float[] temp = new float[8];
-            temp[0] = r; temp[1] = g; temp[2] = b;
+            temp[0] = r;
+            temp[1] = g;
+            temp[2] = b;
             unsafe
             {
                 fixed (float* ptr = temp)
@@ -61,7 +70,9 @@ internal partial class IntelHardwareIntrinsicTest
         }
 
         public VectorArg256(Vector256<float> _rgb)
-        { this._rgb = _rgb; }
+        {
+            this._rgb = _rgb;
+        }
 
         public VectorArg256 Change(float f)
         {
@@ -69,7 +80,10 @@ internal partial class IntelHardwareIntrinsicTest
             return new VectorArg256(Avx.Add(t, _rgb));
         }
 
-        public Vector256<float> RGB { get { return _rgb; } }
+        public Vector256<float> RGB
+        {
+            get { return _rgb; }
+        }
     }
 
     unsafe static int Main()

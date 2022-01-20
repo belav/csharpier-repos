@@ -7,8 +7,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal abstract class ExprWithType : Expr
     {
-        protected ExprWithType(ExpressionKind kind, CType type)
-            : base(kind)
+        protected ExprWithType(ExpressionKind kind, CType type) : base(kind)
         {
             Type = type;
         }

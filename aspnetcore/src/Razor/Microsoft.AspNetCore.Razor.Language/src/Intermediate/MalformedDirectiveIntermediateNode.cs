@@ -12,7 +12,8 @@ public sealed class MalformedDirectiveIntermediateNode : IntermediateNode
 
     public string DirectiveName { get; set; }
 
-    public IEnumerable<DirectiveTokenIntermediateNode> Tokens => Children.OfType<DirectiveTokenIntermediateNode>();
+    public IEnumerable<DirectiveTokenIntermediateNode> Tokens =>
+        Children.OfType<DirectiveTokenIntermediateNode>();
 
     public DirectiveDescriptor Directive { get; set; }
 

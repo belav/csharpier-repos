@@ -15,7 +15,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public static class BasicCompilationUtils
     {
-        public static MetadataReference CompileToMetadata(string source, string assemblyName = null, IEnumerable<MetadataReference> references = null, Verification verify = Verification.Passes)
+        public static MetadataReference CompileToMetadata(
+            string source,
+            string assemblyName = null,
+            IEnumerable<MetadataReference> references = null,
+            Verification verify = Verification.Passes
+        )
         {
             if (references == null)
             {
@@ -26,14 +31,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return MetadataReference.CreateFromImage(verifier.EmittedAssemblyData);
         }
 
-        private static VisualBasicCompilation CreateCompilationWithMscorlib(string source, string assemblyName, IEnumerable<MetadataReference> references)
+        private static VisualBasicCompilation CreateCompilationWithMscorlib(
+            string source,
+            string assemblyName,
+            IEnumerable<MetadataReference> references
+        )
         {
             if (assemblyName == null)
             {
                 assemblyName = TestBase.GetUniqueName();
             }
             var tree = VisualBasicSyntaxTree.ParseText(source);
-            var options = new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optimizationLevel: OptimizationLevel.Release);
+            var options = new VisualBasicCompilationOptions(
+                OutputKind.DynamicallyLinkedLibrary,
+                optimizationLevel: OptimizationLevel.Release
+            );
             return VisualBasicCompilation.Create(assemblyName, new[] { tree }, references, options);
         }
 
@@ -43,7 +55,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         private sealed class BasicTestBase : CommonTestBase
         {
-            internal override string VisualizeRealIL(IModuleSymbol peModule, MethodData methodData, IReadOnlyDictionary<int, string> markers, bool areLocalsZeroed)
+            internal override string VisualizeRealIL(
+                IModuleSymbol peModule,
+                MethodData methodData,
+                IReadOnlyDictionary<int, string> markers,
+                bool areLocalsZeroed
+            )
             {
                 throw new NotImplementedException();
             }

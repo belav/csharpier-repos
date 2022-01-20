@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest2()
         {
-            var code = @"{|b:namespace A|}
+            var code =
+                @"{|b:namespace A|}
 {
 }";
             await TestSelectionAsync(code, expectedFail: true);
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest3()
         {
-            var code = @"namespace {|b:A|}
+            var code =
+                @"namespace {|b:A|}
 {
 }";
             await TestSelectionAsync(code, expectedFail: true);
@@ -46,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest4()
         {
-            var code = @"{|b:class|} A
+            var code =
+                @"{|b:class|} A
 {
 }";
             await TestSelectionAsync(code, expectedFail: true);
@@ -56,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest5()
         {
-            var code = @"class {|b:A|}
+            var code =
+                @"class {|b:A|}
 {
 }";
             await TestSelectionAsync(code, expectedFail: true);
@@ -66,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest6()
         {
-            var code = @"class A : {|b:object|}
+            var code =
+                @"class A : {|b:object|}
 {
 }";
             await TestSelectionAsync(code, expectedFail: true);
@@ -76,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest7()
         {
-            var code = @"class A : object, {|b:IDisposable|}
+            var code =
+                @"class A : object, {|b:IDisposable|}
 {
 }";
             await TestSelectionAsync(code, expectedFail: true);
@@ -86,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest8()
         {
-            var code = @"class A<{|b:T|}>
+            var code =
+                @"class A<{|b:T|}>
 {
 }";
             await TestSelectionAsync(code, expectedFail: true);
@@ -96,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest9()
         {
-            var code = @"class A<T> where {|b:T|} : class
+            var code =
+                @"class A<T> where {|b:T|} : class
 {
 }";
             await TestSelectionAsync(code, expectedFail: true);
@@ -106,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest10()
         {
-            var code = @"class A<T> where T : {|b:IDisposable|}
+            var code =
+                @"class A<T> where T : {|b:IDisposable|}
 {
 }";
             await TestSelectionAsync(code, expectedFail: true);
@@ -116,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest11()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     {|b:A|} Method()
     {
@@ -129,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest12()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     A Method({|b:A|} a)
     {
@@ -142,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest13()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     A Method(A {|b:a|})
     {
@@ -155,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest14()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     [{|b:Goo|}]
     A Method(A a)
@@ -169,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest15()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     [Goo({|b:A|}=1)]
     A Method(A a)
@@ -183,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest16()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     [Goo(A={|b:1|})]
     A Method(A a)
@@ -197,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest17()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     const int {|b:i|} = 1;
 }";
@@ -208,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest18()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     const {|b:int|} i = 1;
 }";
@@ -219,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest19()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     const int i = {|b:1|};
 }";
@@ -230,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest20()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     const int i = {|r:{|b:1 + |}2|};
 }";
@@ -241,7 +260,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest21()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     const int {|b:i = 1 + |}2;
 }";
@@ -252,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest22()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -271,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest23()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -285,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest24()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -301,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest25()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -317,7 +341,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest26()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -333,7 +358,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest27()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -349,7 +375,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest28()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -365,7 +392,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest29()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -381,7 +409,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest30()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -397,7 +426,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest31()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -414,7 +444,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest32()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -431,7 +462,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest33()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -447,7 +479,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest34()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -463,7 +496,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest35()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -477,7 +511,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest36()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     IEnumerable<int> Method1()
     {
@@ -491,7 +526,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest37()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -511,7 +547,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest38()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -532,7 +569,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest39()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -547,7 +585,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest40()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -562,7 +601,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest41()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -577,7 +617,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest42()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -592,7 +633,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest43()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -607,7 +649,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest44()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -622,7 +665,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest45()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -637,7 +681,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest46()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     void Method1()
     {
@@ -652,7 +697,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectionTest47()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class C
 {
     void M()
@@ -668,7 +714,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectIfWithReturn()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     public void Method1()
     {
@@ -684,7 +731,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectConstIfWithReturn()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     public void Method1()
     {
@@ -700,7 +748,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectReturnButNotAllCodePathsContainAReturn()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     public void Method1(bool b1, bool b2)
     {
@@ -719,7 +768,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectIfBranchWhereNotAllPathsReturn()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int Method8(int i)
     {
@@ -744,7 +794,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectCatchFilterClause()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method()
     {
@@ -764,7 +815,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectCatchFilterClause2()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method()
     {
@@ -786,7 +838,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectWithinCatchFilterClause()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method()
     {
@@ -806,7 +859,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectWithinCatchFilterClause2()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method()
     {
@@ -826,7 +880,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectLValueOfPlusEqualsOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method()
     {
@@ -841,7 +896,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectRValueOfPlusEqualsOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method()
     {
@@ -856,7 +912,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectRValueOfPredecrementOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     string method(string s, int i)
     {
@@ -872,7 +929,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectArrayWithDecrementIndex()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     string method(string s, int i)
     {
@@ -888,7 +946,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectCastOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method(string goo)
     {
@@ -902,7 +961,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectLHSOfPostIncrementOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method(int i)
     {
@@ -915,7 +975,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectPostIncrementOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method(int i)
     {
@@ -928,7 +989,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectRHSOfPreIncrementOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method(int i)
     {
@@ -941,7 +1003,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectPreIncrementOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method(int i)
     {
@@ -954,7 +1017,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectPreDecrementOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method(int i)
     {
@@ -967,7 +1031,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectLHSOfPostDecrementOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method(int i)
     {
@@ -980,7 +1045,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectUnaryPlusOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method(int i)
     {
@@ -994,7 +1060,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectUnaryMinusOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method(int i)
     {
@@ -1008,7 +1075,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectLogicalNegationOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method(int i)
     {
@@ -1022,7 +1090,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectBitwiseNegationOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method(int i)
     {
@@ -1036,7 +1105,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectCastOperator2()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     int method(double i)
     {
@@ -1050,7 +1120,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectInvalidSubexpressionToExpand()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     public int method(int a, int b, int c)
     {
@@ -1063,7 +1134,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectValidSubexpressionAndHenceDontExpand()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     public int method(int a, int b, int c)
     {
@@ -1076,7 +1148,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectLHSOfMinusEqualsOperator()
         {
-            var code = @"class A
+            var code =
+                @"class A
 {
     public int method(int a, int b)
     {
@@ -1090,7 +1163,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectInnerBlockPartially()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections;
 
 class A
@@ -1114,7 +1188,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectInnerBlockWithoutBracesPartially()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections;
 
 class A
@@ -1136,7 +1211,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectBeginningBrace()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections;
 
 class A
@@ -1152,7 +1228,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectAcrossBlocks1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections;
 
 class A
@@ -1175,7 +1252,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectMethodParameters()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections;
 
 class A
@@ -1199,7 +1277,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectChainedInvocations1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections;
 
 class Test
@@ -1228,7 +1307,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SelectChainedInvocations2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections;
 
 class Test
@@ -1258,7 +1338,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task GotoStatement()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Reflection.Emit; 
 
 class Program
@@ -1281,7 +1362,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix6750()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1294,7 +1376,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix6750_1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1307,7 +1390,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MalformedCode_NoOuterType()
         {
-            var code = @"x(a){
+            var code =
+                @"x(a){
 {|b:for ();|}
 }
 ";
@@ -1318,7 +1402,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task NoQueryContinuation()
         {
-            var code = @"using System.Linq;
+            var code =
+                @"using System.Linq;
  
 class P
 {
@@ -1336,14 +1421,14 @@ class P
         [WorkItem(540787, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540787")]
         [WorkItem(542722, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542722")]
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
-        public async Task DontCrash()
-            => await IterateAllAsync(TestResource.AllInOneCSharpCode);
+        public async Task DontCrash() => await IterateAllAsync(TestResource.AllInOneCSharpCode);
 
         [WorkItem(9931, "DevDiv_Projects/Roslyn")]
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodIdentifierAtEndOfInteractiveBuffer()
         {
-            var code = @"using System.Console;
+            var code =
+                @"using System.Console;
 WriteLine();
 
 {|r:{|b:Diagnostic|}|}";
@@ -1354,7 +1439,8 @@ WriteLine();
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MemberAccessStructAsExpression()
         {
-            var code = @"struct S
+            var code =
+                @"struct S
 {
     public float X;
     public float Y;
@@ -1391,7 +1477,8 @@ WriteLine();
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TypeOfExpression()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1409,7 +1496,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task AnonymousTypeMember1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class C { void M() { {|r:var x = new { {|b:String|} = true }; |}} }
 ";
             await TestSelectionAsync(code);
@@ -1419,7 +1507,8 @@ class C { void M() { {|r:var x = new { {|b:String|} = true }; |}} }
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task AnonymousTypeMember2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class C { void M() { 
 var String = 1;
 {|r:var x = new { {|b:String|} };|}
@@ -1432,7 +1521,8 @@ var String = 1;
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task AnonymousTypeMember3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class C { void M() { var x = new { String = {|b:true|} }; } }
 ";
             await TestSelectionAsync(code);
@@ -1442,7 +1532,8 @@ class C { void M() { var x = new { String = {|b:true|} }; } }
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task AnonymousTypeMember4()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1466,7 +1557,8 @@ class C { void M() { var x = new { String = {|b:true|} }; } }
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task AddressOfExpr1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     unsafe void M()
@@ -1482,7 +1574,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task AddressOfExpr2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     unsafe void M()
@@ -1498,7 +1591,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BaseKeyword()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Goo()
     {
@@ -1513,7 +1607,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task RefvalueKeyword()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
  
 class A
 {
@@ -1532,7 +1627,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task NoCrashOnThrowWithoutCatchClause()
         {
-            var code = @"public class Test
+            var code =
+                @"public class Test
 {
     delegate int D();
     static void Main()
@@ -1555,7 +1651,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SimpleConditionalAccessExpressionSelectFirstExpression()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -1575,7 +1672,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task SimpleConditionalAccessExpressionSelectSecondExpression()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -1595,7 +1693,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task NestedConditionalAccessExpressionWithMemberBindingExpression()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
  
 class Program
 {
@@ -1620,7 +1719,8 @@ class B
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task NestedConditionalAccessExpressionWithMemberBindingExpressionSelectSecondExpression()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
  
 class Program
 {
@@ -1645,7 +1745,8 @@ class B
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task NestedConditionalAccessExpressionWithInvocationExpression()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
  
 class Program
 {

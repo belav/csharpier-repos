@@ -17,17 +17,20 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = base.CreateConventionalModelBuilder();
             var context = new DbContext(new DbContextOptions<DbContext>());
-            modelBuilder.Entity<Abstract>().HasNoKey().ToInMemoryQuery(() => context.Set<Abstract>());
+            modelBuilder
+                .Entity<Abstract>()
+                .HasNoKey()
+                .ToInMemoryQuery(() => context.Set<Abstract>());
 
             Expression<Func<IQueryable<Generic<int>>>> query = () => context.Set<Generic<int>>();
             modelBuilder.Entity<Generic<int>>().ToInMemoryQuery((LambdaExpression)query);
 
             VerifyError(
                 CoreStrings.DerivedTypeDefiningQuery("Generic<int>", nameof(Abstract)),
-                modelBuilder);
+                modelBuilder
+            );
         }
 
-        protected override TestHelpers TestHelpers
-            => InMemoryTestHelpers.Instance;
+        protected override TestHelpers TestHelpers => InMemoryTestHelpers.Instance;
     }
 }

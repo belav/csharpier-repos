@@ -155,7 +155,11 @@ namespace Newtonsoft.Json.Serialization
                     {
                         foreach (JsonProperty property in Properties)
                         {
-                            if (property.Required != Required.Default || (property.DefaultValueHandling & DefaultValueHandling.Populate) == DefaultValueHandling.Populate)
+                            if (
+                                property.Required != Required.Default
+                                || (property.DefaultValueHandling & DefaultValueHandling.Populate)
+                                    == DefaultValueHandling.Populate
+                            )
                             {
                                 _hasRequiredOrDefaultValueProperties = true;
                                 break;
@@ -172,8 +176,7 @@ namespace Newtonsoft.Json.Serialization
         /// Initializes a new instance of the <see cref="JsonObjectContract"/> class.
         /// </summary>
         /// <param name="underlyingType">The underlying type for the contract.</param>
-        public JsonObjectContract(Type underlyingType)
-            : base(underlyingType)
+        public JsonObjectContract(Type underlyingType) : base(underlyingType)
         {
             ContractType = JsonContractType.Object;
 
@@ -189,7 +192,12 @@ namespace Newtonsoft.Json.Serialization
             // we should never get here if the environment is not fully trusted, check just in case
             if (!JsonTypeReflector.FullyTrusted)
             {
-                throw new JsonException("Insufficient permissions. Creating an uninitialized '{0}' type requires full trust.".FormatWith(CultureInfo.InvariantCulture, NonNullableUnderlyingType));
+                throw new JsonException(
+                    "Insufficient permissions. Creating an uninitialized '{0}' type requires full trust.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        NonNullableUnderlyingType
+                    )
+                );
             }
 
             return FormatterServices.GetUninitializedObject(NonNullableUnderlyingType);

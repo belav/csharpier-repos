@@ -29,8 +29,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 {
     internal partial class StreamingFindUsagesPresenter
     {
-        private abstract class AbstractTableDataSourceFindUsagesContext :
-            FindUsagesContext, ITableDataSource, ITableEntriesSnapshotFactory
+        private abstract class AbstractTableDataSourceFindUsagesContext
+            : FindUsagesContext,
+              ITableDataSource,
+              ITableEntriesSnapshotFactory
         {
             /// <summary>
             /// Cancellation token we own that we will trigger if the presenter for this particular
@@ -85,8 +87,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             /// bucket for it.  The first time we hear about a definition we'll make a single task
             /// and then always return that for all future references found.
             /// </summary>
-            private readonly Dictionary<DefinitionItem, RoslynDefinitionBucket> _definitionToBucket =
-                new();
+            private readonly Dictionary<
+                DefinitionItem,
+                RoslynDefinitionBucket
+            > _definitionToBucket = new();
 
             /// <summary>
             /// We want to hide declarations of a symbol if the user is grouping by definition.
@@ -96,8 +100,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             /// </summary>
             private bool _currentlyGroupingByDefinition;
 
-            protected ImmutableList<Entry> EntriesWhenNotGroupingByDefinition = ImmutableList<Entry>.Empty;
-            protected ImmutableList<Entry> EntriesWhenGroupingByDefinition = ImmutableList<Entry>.Empty;
+            protected ImmutableList<Entry> EntriesWhenNotGroupingByDefinition =
+                ImmutableList<Entry>.Empty;
+            protected ImmutableList<Entry> EntriesWhenGroupingByDefinition =
+                ImmutableList<Entry>.Empty;
 
             private TableEntriesSnapshot? _lastSnapshot;
             public int CurrentVersionNumber { get; protected set; }
@@ -105,11 +111,12 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             #endregion
 
             protected AbstractTableDataSourceFindUsagesContext(
-                 StreamingFindUsagesPresenter presenter,
-                 IFindAllReferencesWindow findReferencesWindow,
-                 ImmutableArray<ITableColumnDefinition> customColumns,
-                 bool includeContainingTypeAndMemberColumns,
-                 bool includeKindColumn)
+                StreamingFindUsagesPresenter presenter,
+                IFindAllReferencesWindow findReferencesWindow,
+                ImmutableArray<ITableColumnDefinition> customColumns,
+                bool includeContainingTypeAndMemberColumns,
+                bool includeKindColumn
+            )
             {
                 presenter.AssertIsForeground();
 
@@ -129,7 +136,12 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 // Additionally, add applicable custom columns to display custom reference information
                 _findReferencesWindow.Manager.AddSource(
                     this,
-                    SelectCustomColumnsToInclude(customColumns, includeContainingTypeAndMemberColumns, includeKindColumn));
+                    SelectCustomColumnsToInclude(
+                        customColumns,
+                        includeContainingTypeAndMemberColumns,
+                        includeKindColumn
+                    )
+                );
 
                 // After adding us as the source, the manager should immediately call into us to
                 // tell us what the data sink is.
@@ -146,10 +158,15 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     TimeSpan.FromMilliseconds(250),
                     this.UpdateTableProgressAsync,
                     presenter._asyncListener,
-                    CancellationTokenSource.Token);
+                    CancellationTokenSource.Token
+                );
             }
 
-            private static ImmutableArray<string> SelectCustomColumnsToInclude(ImmutableArray<ITableColumnDefinition> customColumns, bool includeContainingTypeAndMemberColumns, bool includeKindColumn)
+            private static ImmutableArray<string> SelectCustomColumnsToInclude(
+                ImmutableArray<ITableColumnDefinition> customColumns,
+                bool includeContainingTypeAndMemberColumns,
+                bool includeKindColumn
+            )
             {
                 var customColumnsToInclude = ArrayBuilder<string>.GetInstance();
 
@@ -182,8 +199,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 return customColumnsToInclude.ToImmutableAndFree();
             }
 
-            protected void NotifyChange()
-                => _tableDataSink.FactorySnapshotChanged(this);
+            protected void NotifyChange() => _tableDataSink.FactorySnapshotChanged(this);
 
             private void OnFindReferencesWindowClosed(object sender, EventArgs e)
             {
@@ -257,7 +273,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 lock (Gate)
                 {
                     // Mark ourselves as clear so that no further changes are made.
-                    // Note: we don't actually mutate any of our entry-lists.  Instead, 
+                    // Note: we don't actually mutate any of our entry-lists.  Instead,
                     // GetCurrentSnapshot will simply ignore them if it sees that _cleared
                     // is true.  This way we don't have to do anything complicated if we
                     // keep hearing about definitions/references on the background.
@@ -274,11 +290,11 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
             public string DisplayName => "Roslyn Data Source";
 
-            public string Identifier
-                => StreamingFindUsagesPresenter.RoslynFindUsagesTableDataSourceIdentifier;
+            public string Identifier =>
+                StreamingFindUsagesPresenter.RoslynFindUsagesTableDataSourceIdentifier;
 
-            public string SourceTypeIdentifier
-                => StreamingFindUsagesPresenter.RoslynFindUsagesTableDataSourceSourceTypeIdentifier;
+            public string SourceTypeIdentifier =>
+                StreamingFindUsagesPresenter.RoslynFindUsagesTableDataSourceSourceTypeIdentifier;
 
             public IDisposable Subscribe(ITableDataSink sink)
             {
@@ -297,22 +313,32 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
             #region FindUsagesContext overrides.
 
-            public sealed override ValueTask SetSearchTitleAsync(string title, CancellationToken cancellationToken)
+            public sealed override ValueTask SetSearchTitleAsync(
+                string title,
+                CancellationToken cancellationToken
+            )
             {
                 // Note: IFindAllReferenceWindow.Title is safe to set from any thread.
                 _findReferencesWindow.Title = title;
                 return default;
             }
 
-            public sealed override async ValueTask OnCompletedAsync(CancellationToken cancellationToken)
+            public sealed override async ValueTask OnCompletedAsync(
+                CancellationToken cancellationToken
+            )
             {
                 await OnCompletedAsyncWorkerAsync(cancellationToken).ConfigureAwait(false);
                 _tableDataSink.IsStable = true;
             }
 
-            protected abstract Task OnCompletedAsyncWorkerAsync(CancellationToken cancellationToken);
+            protected abstract Task OnCompletedAsyncWorkerAsync(
+                CancellationToken cancellationToken
+            );
 
-            public sealed override ValueTask OnDefinitionFoundAsync(DefinitionItem definition, CancellationToken cancellationToken)
+            public sealed override ValueTask OnDefinitionFoundAsync(
+                DefinitionItem definition,
+                CancellationToken cancellationToken
+            )
             {
                 try
                 {
@@ -323,13 +349,17 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
                     return OnDefinitionFoundWorkerAsync(definition, cancellationToken);
                 }
-                catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
+                catch (Exception ex)
+                    when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
                 {
                     throw ExceptionUtilities.Unreachable;
                 }
             }
 
-            protected abstract ValueTask OnDefinitionFoundWorkerAsync(DefinitionItem definition, CancellationToken cancellationToken);
+            protected abstract ValueTask OnDefinitionFoundWorkerAsync(
+                DefinitionItem definition,
+                CancellationToken cancellationToken
+            );
 
             protected async Task<Entry?> TryCreateDocumentSpanEntryAsync(
                 RoslynDefinitionBucket definitionBucket,
@@ -337,13 +367,23 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 HighlightSpanKind spanKind,
                 SymbolUsageInfo symbolUsageInfo,
                 ImmutableDictionary<string, string> additionalProperties,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var document = documentSpan.Document;
-                var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-                var (excerptResult, lineText) = await ExcerptAsync(sourceText, documentSpan, cancellationToken).ConfigureAwait(false);
+                var sourceText = await document
+                    .GetTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var (excerptResult, lineText) = await ExcerptAsync(
+                        sourceText,
+                        documentSpan,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                var mappedDocumentSpan = await AbstractDocumentSpanEntry.TryMapAndGetFirstAsync(documentSpan, sourceText, cancellationToken).ConfigureAwait(false);
+                var mappedDocumentSpan = await AbstractDocumentSpanEntry
+                    .TryMapAndGetFirstAsync(documentSpan, sourceText, cancellationToken)
+                    .ConfigureAwait(false);
                 if (mappedDocumentSpan == null)
                 {
                     // this will be removed from the result
@@ -365,23 +405,43 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     excerptResult,
                     lineText,
                     symbolUsageInfo,
-                    additionalProperties);
+                    additionalProperties
+                );
             }
 
             private async Task<(ExcerptResult, SourceText)> ExcerptAsync(
-                SourceText sourceText, DocumentSpan documentSpan, CancellationToken cancellationToken)
+                SourceText sourceText,
+                DocumentSpan documentSpan,
+                CancellationToken cancellationToken
+            )
             {
-                var excerptService = documentSpan.Document.Services.GetService<IDocumentExcerptService>();
+                var excerptService =
+                    documentSpan.Document.Services.GetService<IDocumentExcerptService>();
                 if (excerptService != null)
                 {
-                    var result = await excerptService.TryExcerptAsync(documentSpan.Document, documentSpan.SourceSpan, ExcerptMode.SingleLine, cancellationToken).ConfigureAwait(false);
+                    var result = await excerptService
+                        .TryExcerptAsync(
+                            documentSpan.Document,
+                            documentSpan.SourceSpan,
+                            ExcerptMode.SingleLine,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     if (result != null)
                     {
-                        return (result.Value, AbstractDocumentSpanEntry.GetLineContainingPosition(result.Value.Content, result.Value.MappedSpan.Start));
+                        return (
+                            result.Value,
+                            AbstractDocumentSpanEntry.GetLineContainingPosition(
+                                result.Value.Content,
+                                result.Value.MappedSpan.Start
+                            )
+                        );
                     }
                 }
 
-                var classificationResult = await ClassifiedSpansAndHighlightSpanFactory.ClassifyAsync(documentSpan, cancellationToken).ConfigureAwait(false);
+                var classificationResult = await ClassifiedSpansAndHighlightSpanFactory
+                    .ClassifyAsync(documentSpan, cancellationToken)
+                    .ConfigureAwait(false);
 
                 // need to fix the span issue tracking here - https://github.com/dotnet/roslyn/issues/31001
                 var excerptResult = new ExcerptResult(
@@ -389,23 +449,43 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     classificationResult.HighlightSpan,
                     classificationResult.ClassifiedSpans,
                     documentSpan.Document,
-                    documentSpan.SourceSpan);
+                    documentSpan.SourceSpan
+                );
 
-                return (excerptResult, AbstractDocumentSpanEntry.GetLineContainingPosition(sourceText, documentSpan.SourceSpan.Start));
+                return (
+                    excerptResult,
+                    AbstractDocumentSpanEntry.GetLineContainingPosition(
+                        sourceText,
+                        documentSpan.SourceSpan.Start
+                    )
+                );
             }
 
-            public sealed override ValueTask OnReferenceFoundAsync(SourceReferenceItem reference, CancellationToken cancellationToken)
-                => OnReferenceFoundWorkerAsync(reference, cancellationToken);
+            public sealed override ValueTask OnReferenceFoundAsync(
+                SourceReferenceItem reference,
+                CancellationToken cancellationToken
+            ) => OnReferenceFoundWorkerAsync(reference, cancellationToken);
 
-            protected abstract ValueTask OnReferenceFoundWorkerAsync(SourceReferenceItem reference, CancellationToken cancellationToken);
+            protected abstract ValueTask OnReferenceFoundWorkerAsync(
+                SourceReferenceItem reference,
+                CancellationToken cancellationToken
+            );
 
-            protected RoslynDefinitionBucket GetOrCreateDefinitionBucket(DefinitionItem definition, bool expandedByDefault)
+            protected RoslynDefinitionBucket GetOrCreateDefinitionBucket(
+                DefinitionItem definition,
+                bool expandedByDefault
+            )
             {
                 lock (Gate)
                 {
                     if (!_definitionToBucket.TryGetValue(definition, out var bucket))
                     {
-                        bucket = RoslynDefinitionBucket.Create(Presenter, this, definition, expandedByDefault);
+                        bucket = RoslynDefinitionBucket.Create(
+                            Presenter,
+                            this,
+                            definition,
+                            expandedByDefault
+                        );
                         _definitionToBucket.Add(definition, bucket);
                     }
 
@@ -413,16 +493,28 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 }
             }
 
-            public sealed override ValueTask ReportMessageAsync(string message, CancellationToken cancellationToken)
-                => throw new InvalidOperationException("This should never be called in the streaming case.");
+            public sealed override ValueTask ReportMessageAsync(
+                string message,
+                CancellationToken cancellationToken
+            ) =>
+                throw new InvalidOperationException(
+                    "This should never be called in the streaming case."
+                );
 
-            protected sealed override ValueTask ReportProgressAsync(int current, int maximum, CancellationToken cancellationToken)
+            protected sealed override ValueTask ReportProgressAsync(
+                int current,
+                int maximum,
+                CancellationToken cancellationToken
+            )
             {
                 _progressQueue.AddWork((current, maximum));
                 return default;
             }
 
-            private ValueTask UpdateTableProgressAsync(ImmutableArray<(int current, int maximum)> nextBatch, CancellationToken _)
+            private ValueTask UpdateTableProgressAsync(
+                ImmutableArray<(int current, int maximum)> nextBatch,
+                CancellationToken _
+            )
             {
                 if (!nextBatch.IsEmpty)
                 {

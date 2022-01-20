@@ -11,16 +11,13 @@ internal class ThreadPoolAwaitable : ICriticalNotifyCompletion
 {
     public static readonly ThreadPoolAwaitable Instance = new ThreadPoolAwaitable();
 
-    private ThreadPoolAwaitable()
-    {
-    }
+    private ThreadPoolAwaitable() { }
 
     public ThreadPoolAwaitable GetAwaiter() => this;
+
     public bool IsCompleted => false;
 
-    public void GetResult()
-    {
-    }
+    public void GetResult() { }
 
     public void OnCompleted(Action continuation)
     {

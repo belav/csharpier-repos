@@ -114,9 +114,7 @@ internal readonly struct TextSpan : IEquatable<TextSpan>, IComparable<TextSpan>
         var overlapStart = Math.Max(Start, span.Start);
         var overlapEnd = Math.Min(End, span.End);
 
-        return overlapStart < overlapEnd
-            ? FromBounds(overlapStart, overlapEnd)
-            : (TextSpan?)null;
+        return overlapStart < overlapEnd ? FromBounds(overlapStart, overlapEnd) : (TextSpan?)null;
     }
 
     /// <summary>
@@ -166,8 +164,8 @@ internal readonly struct TextSpan : IEquatable<TextSpan>, IComparable<TextSpan>
         var intersectEnd = Math.Min(End, span.End);
 
         return intersectStart <= intersectEnd
-            ? FromBounds(intersectStart, intersectEnd)
-            : (TextSpan?)null;
+          ? FromBounds(intersectStart, intersectEnd)
+          : (TextSpan?)null;
     }
 
     /// <summary>

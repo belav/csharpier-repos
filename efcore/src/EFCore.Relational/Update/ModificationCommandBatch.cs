@@ -54,6 +54,7 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public abstract Task ExecuteAsync(
             IRelationalConnection connection,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
     }
 }

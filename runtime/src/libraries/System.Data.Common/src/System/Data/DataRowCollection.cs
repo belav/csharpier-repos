@@ -15,9 +15,12 @@ namespace System.Data
             {
                 throw ExceptionBuilder.InternalRBTreeError(RBTreeError.CompareNodeInDataRowTree);
             }
+
             protected override int CompareSateliteTreeNode(DataRow? record1, DataRow? record2)
             {
-                throw ExceptionBuilder.InternalRBTreeError(RBTreeError.CompareSateliteTreeNodeInDataRowTree);
+                throw ExceptionBuilder.InternalRBTreeError(
+                    RBTreeError.CompareSateliteTreeNodeInDataRowTree
+                );
             }
         }
 
@@ -72,7 +75,7 @@ namespace System.Data
 
             if (_table.NestedParentRelations.Length > 0)
             { // get in this trouble only if  table has a nested parent
-              // get into trouble if table has JUST a nested parent? how about multi parent!
+                // get into trouble if table has JUST a nested parent? how about multi parent!
                 if (pos < _list.Count)
                 {
                     if (_list[pos] != null)
@@ -99,9 +102,12 @@ namespace System.Data
             }
         }
 
-        public int IndexOf(DataRow? row) => (null == row) || (row.Table != _table) || ((0 == row.RBTreeNodeId) && (row.RowState == DataRowState.Detached)) ?
-            -1 :
-            _list.IndexOf(row.RBTreeNodeId, row);
+        public int IndexOf(DataRow? row) =>
+            (null == row)
+            || (row.Table != _table)
+            || ((0 == row.RBTreeNodeId) && (row.RowState == DataRowState.Detached))
+                ? -1
+                : _list.IndexOf(row.RBTreeNodeId, row);
 
         /// <summary>
         /// Creates a row using specified values and adds it to the <see cref='System.Data.DataRowCollection'/>.
@@ -124,7 +130,8 @@ namespace System.Data
 
         internal void ArrayAdd(DataRow row) => row.RBTreeNodeId = _list.Add(row);
 
-        internal void ArrayInsert(DataRow row, int pos) => row.RBTreeNodeId = _list.Insert(pos, row);
+        internal void ArrayInsert(DataRow row, int pos) =>
+            row.RBTreeNodeId = _list.Insert(pos, row);
 
         internal void ArrayClear() => _list.Clear();
 
@@ -132,7 +139,9 @@ namespace System.Data
         {
             if (row.RBTreeNodeId == 0)
             {
-                throw ExceptionBuilder.InternalRBTreeError(RBTreeError.AttachedNodeWithZerorbTreeNodeId);
+                throw ExceptionBuilder.InternalRBTreeError(
+                    RBTreeError.AttachedNodeWithZerorbTreeNodeId
+                );
             }
             _list.RBDelete(row.RBTreeNodeId);
             row.RBTreeNodeId = 0;

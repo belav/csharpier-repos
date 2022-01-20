@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             RenameDeclarationLocationReference[] renameDeclarationLocations,
             bool isNamespaceDeclarationReference,
             bool isInvocationExpression,
-            bool isMemberGroupReference)
+            bool isMemberGroupReference
+        )
         {
             this.OriginalSpan = originalSpan;
             this.IsRenameLocation = isRenameLocation;

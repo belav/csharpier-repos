@@ -4,7 +4,9 @@
 
 class Bug
 {
-    static short s1 = 8712, s2 = -973;
+    static short s1 = 8712,
+        s2 = -973;
+
     public static int Main()
     {
         short s3 = (short)(s1 / s2);

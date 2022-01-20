@@ -35,11 +35,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         [DisallowNull]
         public static Action<Exception>? Handler
         {
-            get
-            {
-                return s_fatalHandler;
-            }
-
+            get { return s_fatalHandler; }
             set
             {
                 if (s_fatalHandler != value)
@@ -57,11 +53,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         [DisallowNull]
         public static Action<Exception>? NonFatalHandler
         {
-            get
-            {
-                return s_nonFatalHandler;
-            }
-
+            get { return s_nonFatalHandler; }
             set
             {
                 if (s_nonFatalHandler != value)
@@ -72,7 +64,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             }
         }
 
-        // Same as setting the Handler property except that it avoids the assert.  This is useful in 
+        // Same as setting the Handler property except that it avoids the assert.  This is useful in
         // test code which needs to verify the handler is called in specific cases and will continually
         // overwrite this value.
         public static void OverwriteHandler(Action<Exception>? value)
@@ -80,8 +72,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             s_fatalHandler = value;
         }
 
-        private static bool IsCurrentOperationBeingCancelled(Exception exception, CancellationToken cancellationToken)
-            => exception is OperationCanceledException && cancellationToken.IsCancellationRequested;
+        private static bool IsCurrentOperationBeingCancelled(
+            Exception exception,
+            CancellationToken cancellationToken
+        ) => exception is OperationCanceledException && cancellationToken.IsCancellationRequested;
 
         /// <summary>
         /// Use in an exception filter to report a fatal error (by calling <see cref="Handler"/>), unless the
@@ -118,7 +112,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// <see cref="CancellationToken.IsCancellationRequested"/> set if cancellation is expected.</param>
         /// <returns><see langword="false"/> to avoid catching the exception.</returns>
         [DebuggerHidden]
-        public static bool ReportAndPropagateUnlessCanceled(Exception exception, CancellationToken contextCancellationToken)
+        public static bool ReportAndPropagateUnlessCanceled(
+            Exception exception,
+            CancellationToken contextCancellationToken
+        )
         {
             if (IsCurrentOperationBeingCancelled(exception, contextCancellationToken))
             {
@@ -165,7 +162,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// <returns><see langword="true"/> to catch the exception if the non-fatal error was reported; otherwise,
         /// <see langword="false"/> to propagate the exception if the operation was cancelled.</returns>
         [DebuggerHidden]
-        public static bool ReportAndCatchUnlessCanceled(Exception exception, CancellationToken contextCancellationToken)
+        public static bool ReportAndCatchUnlessCanceled(
+            Exception exception,
+            CancellationToken contextCancellationToken
+        )
         {
             if (IsCurrentOperationBeingCancelled(exception, contextCancellationToken))
             {
@@ -224,7 +224,11 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             }
 
 #if !NET20
-            if (exception is AggregateException aggregate && aggregate.InnerExceptions.Count == 1 && aggregate.InnerExceptions[0].Data[s_reportedMarker] != null)
+            if (
+                exception is AggregateException aggregate
+                && aggregate.InnerExceptions.Count == 1
+                && aggregate.InnerExceptions[0].Data[s_reportedMarker] != null
+            )
             {
                 return;
             }

@@ -17,6 +17,7 @@ internal static partial class Interop
             out SafePipeHandle lpTargetHandle,
             uint dwDesiredAccess,
             bool bInheritHandle,
-            uint dwOptions);
+            uint dwOptions
+        );
     }
 }

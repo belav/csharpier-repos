@@ -26,7 +26,6 @@ public class ServicesModelBinderIntegrationTest
                 BinderModelName = "CustomParameter",
                 BindingSource = BindingSource.Services
             },
-
             // Using a service type already in defaults.
             ParameterType = typeof(ITypeActivatorCache)
         };
@@ -59,11 +58,7 @@ public class ServicesModelBinderIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "ControllerProperty",
-            BindingInfo = new BindingInfo
-            {
-                BindingSource = BindingSource.Services,
-            },
-
+            BindingInfo = new BindingInfo { BindingSource = BindingSource.Services, },
             // Use a service type already in defaults.
             ParameterType = typeof(ITypeActivatorCache),
         };
@@ -95,11 +90,7 @@ public class ServicesModelBinderIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "ControllerProperty",
-            BindingInfo = new BindingInfo
-            {
-                BindingSource = BindingSource.Services,
-            },
-
+            BindingInfo = new BindingInfo { BindingSource = BindingSource.Services, },
             // Use a service type already in defaults.
             ParameterType = typeof(IEnumerable<ITypeActivatorCache>),
         };
@@ -131,11 +122,7 @@ public class ServicesModelBinderIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "ControllerProperty",
-            BindingInfo = new BindingInfo
-            {
-                BindingSource = BindingSource.Services,
-            },
-
+            BindingInfo = new BindingInfo { BindingSource = BindingSource.Services, },
             // Use a service type not available in DI.
             ParameterType = typeof(IEnumerable<IActionResult>),
         };
@@ -167,11 +154,7 @@ public class ServicesModelBinderIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "ControllerProperty",
-            BindingInfo = new BindingInfo
-            {
-                BindingSource = BindingSource.Services,
-            },
-
+            BindingInfo = new BindingInfo { BindingSource = BindingSource.Services, },
             // Use a service type not available in DI.
             ParameterType = typeof(IActionResult),
         };
@@ -180,7 +163,8 @@ public class ServicesModelBinderIntegrationTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext));
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Contains(typeof(IActionResult).FullName, exception.Message);
     }
 
@@ -195,7 +179,8 @@ public class ServicesModelBinderIntegrationTest
     [Theory]
     [MemberData(
         nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+    )]
     public async Task FromServicesOnPropertyType_WithData_Succeeds(BindingInfo bindingInfo)
     {
         // Arrange
@@ -207,7 +192,9 @@ public class ServicesModelBinderIntegrationTest
 
         var testContext = ModelBindingTestHelper.GetTestContext(metadataProvider: metadataProvider);
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor
         {
             Name = "parameter-name",
@@ -233,7 +220,8 @@ public class ServicesModelBinderIntegrationTest
     [Theory]
     [MemberData(
         nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+    )]
     public async Task FromServicesOnParameterType_WithData_Succeeds(BindingInfo bindingInfo)
     {
         // Arrange
@@ -245,7 +233,9 @@ public class ServicesModelBinderIntegrationTest
 
         var testContext = ModelBindingTestHelper.GetTestContext(metadataProvider: metadataProvider);
         var modelState = testContext.ModelState;
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor
         {
             Name = "parameter-name",

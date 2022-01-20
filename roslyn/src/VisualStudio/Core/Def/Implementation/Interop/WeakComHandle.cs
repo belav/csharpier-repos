@@ -22,8 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
         // client, the RCW will be cleaned up, even though there is still a native reference
         // to the underlying native outer object.
         //
-        // Instead we make use of an implementation detail of the way the CLR's COM aggregation 
-        // works.  Namely, if all references to the aggregated object are released, the CLR 
+        // Instead we make use of an implementation detail of the way the CLR's COM aggregation
+        // works.  Namely, if all references to the aggregated object are released, the CLR
         // responds to QI's for IUnknown with a different object.  So, we store the original
         // value, when we know that we have a client, and then we use that to compare to see
         // if we still have a client alive.
@@ -102,7 +102,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
                     pUnk = Marshal.GetIUnknownForObject(target);
                     if (pUnk == _pUnkOfInnerUnknownWhenAlive)
                     {
-                        // QueryInterface on COM aggregate might fail during shutdown, so we 
+                        // QueryInterface on COM aggregate might fail during shutdown, so we
                         // defensively use "as" instead of casting (see Dev10 816848).
                         return Marshal.GetObjectForIUnknown(pUnk) as THandle;
                     }
@@ -121,7 +121,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
             }
         }
 
-        internal bool TryGetManagedObjectWithoutCaringWhetherNativeObjectIsAlive(out TObject managedObject)
+        internal bool TryGetManagedObjectWithoutCaringWhetherNativeObjectIsAlive(
+            out TObject managedObject
+        )
         {
             // NOTE: Only use this method if you do NOT care whether the native ComAggregate
             // object has already been released.
@@ -149,7 +151,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
                 if (_managedObjectWeakReference.Target is TObject managedObject)
                 {
                     // Construct a new ComHandle without going through the cycle of unwrapping
-                    // the managed object from the rcw, that has shown to be a perf concern for 
+                    // the managed object from the rcw, that has shown to be a perf concern for
                     // progression (see Dev10 Bug 628992).
                     return new ComHandle<THandle, TObject>(rcw, managedObject);
                 }

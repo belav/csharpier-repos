@@ -15,7 +15,10 @@ public class ClientValidatorCacheTest
     {
         // Arrange
         var cache = new ClientValidatorCache();
-        var metadata = new TestModelMetadataProvider().GetMetadataForProperty(typeof(TypeWithProperty), "Property1");
+        var metadata = new TestModelMetadataProvider().GetMetadataForProperty(
+            typeof(TypeWithProperty),
+            "Property1"
+        );
         var validatorProvider = TestClientModelValidatorProvider.CreateDefaultProvider();
 
         // Act - 1
@@ -23,7 +26,8 @@ public class ClientValidatorCacheTest
 
         // Assert - 1
         var attribute1 = Assert.Single(validators1.OfType<RequiredAttributeAdapter>()).Attribute;
-        var attribute2 = Assert.Single(validators1.OfType<StringLengthAttributeAdapter>()).Attribute;
+        var attribute2 =
+            Assert.Single(validators1.OfType<StringLengthAttributeAdapter>()).Attribute;
         Assert.Contains(attribute1, metadata.ValidatorMetadata); // Copied by provider
         Assert.Contains(attribute2, metadata.ValidatorMetadata); // Copied by provider
 
@@ -42,7 +46,10 @@ public class ClientValidatorCacheTest
     {
         // Arrange
         var cache = new ClientValidatorCache();
-        var metadata = new TestModelMetadataProvider().GetMetadataForProperty(typeof(TypeWithProperty), "Property1");
+        var metadata = new TestModelMetadataProvider().GetMetadataForProperty(
+            typeof(TypeWithProperty),
+            "Property1"
+        );
         var validatorProvider = new ProviderWithNonReusableValidators();
 
         // Act - 1
@@ -61,7 +68,10 @@ public class ClientValidatorCacheTest
         Assert.NotSame(validators1, validators2);
 
         Assert.Same(validator1, Assert.Single(validators2.OfType<RequiredAttributeAdapter>())); // cached
-        Assert.NotSame(validator2, Assert.Single(validators2.OfType<StringLengthAttributeAdapter>())); // not cached
+        Assert.NotSame(
+            validator2,
+            Assert.Single(validators2.OfType<StringLengthAttributeAdapter>())
+        ); // not cached
     }
 
     [Fact]
@@ -72,7 +82,9 @@ public class ClientValidatorCacheTest
         var modelMetadataProvider = new TestModelMetadataProvider();
         var metadata = modelMetadataProvider.GetMetadataForType(typeof(TestRecordType));
         var property = metadata.Properties[nameof(TestRecordType.Property1)];
-        var parameter = metadata.BoundConstructor.BoundConstructorParameters.First(f => f.Name == nameof(TestRecordType.Property1));
+        var parameter = metadata.BoundConstructor.BoundConstructorParameters.First(
+            f => f.Name == nameof(TestRecordType.Property1)
+        );
         var validatorProvider = new ProviderWithNonReusableValidators();
 
         // Act
@@ -112,9 +124,9 @@ public class ClientValidatorCacheTest
         public string Property1 { get; set; }
     }
 
-    private record TestRecordType([Required][StringLength(10)] string Property1);
+    private record TestRecordType([Required] [StringLength(10)] string Property1);
 
-    private record TestRecordTypeWithProperty([Required][StringLength(10)] string Property1)
+    private record TestRecordTypeWithProperty([Required] [StringLength(10)] string Property1)
     {
         [Required]
         [StringLength(10)]
@@ -141,7 +153,10 @@ public class ClientValidatorCacheTest
 
                 var validationAdapterProvider = new ValidationAttributeAdapterProvider();
 
-                validatorItem.Validator = validationAdapterProvider.GetAttributeAdapter(attribute, stringLocalizer: null);
+                validatorItem.Validator = validationAdapterProvider.GetAttributeAdapter(
+                    attribute,
+                    stringLocalizer: null
+                );
 
                 if (attribute is RequiredAttribute)
                 {

@@ -61,22 +61,27 @@ namespace BlazorServerWeb_CSharp
         public void ConfigureServices(IServiceCollection services)
         {
 #if (IndividualLocalAuth)
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(
+                options =>
 #if (UseLocalDB)
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 #else
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+            );
 #endif
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services
+                .AddDefaultIdentity<IdentityUser>(
+                    options => options.SignIn.RequireConfirmedAccount = true
+                )
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 #elif (OrganizationalAuth)
 #if (GenerateApiOrGraph)
             var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
 
 #endif
-            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+            services
+                .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
                 .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"))
                     .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
@@ -95,7 +100,8 @@ namespace BlazorServerWeb_CSharp
             var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
 
 #endif
-            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+            services
+                .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApi)
                 .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAdB2C"))
                     .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
@@ -106,25 +112,30 @@ namespace BlazorServerWeb_CSharp
 #endif
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth)
-            services.AddControllersWithViews()
+            services
+                .AddControllersWithViews()
                 .AddMicrosoftIdentityUI();
 
-            services.AddAuthorization(options =>
-            {
-                // By default, all incoming requests will be authorized according to the default policy
-                options.FallbackPolicy = options.DefaultPolicy;
-            });
+            services.AddAuthorization(
+                options =>
+                {
+                    // By default, all incoming requests will be authorized according to the default policy
+                    options.FallbackPolicy = options.DefaultPolicy;
+                }
+            );
 
 #endif
             services.AddRazorPages();
 #if (OrganizationalAuth || IndividualB2CAuth)
-            services.AddServerSideBlazor()
-                .AddMicrosoftIdentityConsentHandler();
+            services.AddServerSideBlazor().AddMicrosoftIdentityConsentHandler();
 #else
             services.AddServerSideBlazor();
 #endif
 #if (IndividualLocalAuth)
-            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+            services.AddScoped<
+                AuthenticationStateProvider,
+                RevalidatingIdentityAuthenticationStateProvider<IdentityUser>
+            >();
             services.AddDatabaseDeveloperPageExceptionFilter();
 #endif
             services.AddSingleton<WeatherForecastService>();
@@ -162,14 +173,16 @@ namespace BlazorServerWeb_CSharp
             app.UseAuthorization();
 
 #endif
-            app.UseEndpoints(endpoints =>
-            {
+            app.UseEndpoints(
+                endpoints =>
+                {
 #if (OrganizationalAuth || IndividualAuth)
-                endpoints.MapControllers();
+                    endpoints.MapControllers();
 #endif
-                endpoints.MapBlazorHub();
-                endpoints.MapFallbackToPage("/_Host");
-            });
+                    endpoints.MapBlazorHub();
+                    endpoints.MapFallbackToPage("/_Host");
+                }
+            );
         }
     }
 }

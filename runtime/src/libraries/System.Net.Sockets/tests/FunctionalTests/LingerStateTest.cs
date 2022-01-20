@@ -18,17 +18,24 @@ namespace System.Net.Sockets.Tests
 
         private void TestLingerState_ArgumentException(Socket sock, bool enabled, int lingerTime)
         {
-            AssertExtensions.Throws<ArgumentException>("optionValue", () =>
-            {
-                sock.LingerState = new LingerOption(enabled, lingerTime);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                "optionValue",
+                () =>
+                {
+                    sock.LingerState = new LingerOption(enabled, lingerTime);
+                }
+            );
         }
 
         [OuterLoop]
         [Fact]
         public void Socket_LingerState_Common_Boundaries_CorrectBehavior()
         {
-            Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Socket sock = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
 
             Assert.False(sock.LingerState.Enabled, "Linger was turned on by default!");
             Assert.Equal<int>(0, sock.LingerState.LingerTime);
@@ -43,10 +50,17 @@ namespace System.Net.Sockets.Tests
 
         [OuterLoop]
         [Fact]
-        [SkipOnPlatform(TestPlatforms.OSX, "The upper bound for linger time is drastically different on OS X.")]
+        [SkipOnPlatform(
+            TestPlatforms.OSX,
+            "The upper bound for linger time is drastically different on OS X."
+        )]
         public void Socket_LingerState_Upper_Boundaries_CorrectBehavior()
         {
-            Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Socket sock = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
 
             TestLingerState_Success(sock, true, short.MaxValue);
             TestLingerState_Success(sock, true, short.MaxValue + 1);
@@ -55,26 +69,36 @@ namespace System.Net.Sockets.Tests
 
         [OuterLoop]
         [Fact]
-        [PlatformSpecific(TestPlatforms.OSX)]  // The upper bound for linger time is drastically different on OS X.
+        [PlatformSpecific(TestPlatforms.OSX)] // The upper bound for linger time is drastically different on OS X.
         public void Socket_LingerState_Upper_Boundaries_CorrectBehavior_OSX()
         {
             // The upper bound for linger time is drastically different on OS X.
-            Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Socket sock = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
 
-            Assert.Throws<SocketException>(() =>
-            {
-                sock.LingerState = new LingerOption(true, short.MaxValue);
-            });
+            Assert.Throws<SocketException>(
+                () =>
+                {
+                    sock.LingerState = new LingerOption(true, short.MaxValue);
+                }
+            );
 
-            Assert.Throws<SocketException>(() =>
-            {
-                sock.LingerState = new LingerOption(true, short.MaxValue + 1);
-            });
+            Assert.Throws<SocketException>(
+                () =>
+                {
+                    sock.LingerState = new LingerOption(true, short.MaxValue + 1);
+                }
+            );
 
-            Assert.Throws<SocketException>(() =>
-            {
-                sock.LingerState = new LingerOption(true, ushort.MaxValue);
-            });
+            Assert.Throws<SocketException>(
+                () =>
+                {
+                    sock.LingerState = new LingerOption(true, ushort.MaxValue);
+                }
+            );
         }
 
         [OuterLoop]
@@ -84,12 +108,22 @@ namespace System.Net.Sockets.Tests
         [InlineData(true, 1)]
         public void SetLingerAfterServerClosed(bool linger, int timeout)
         {
-            using (var server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var server = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 int port = server.BindToAnonymousPort(IPAddress.Loopback);
                 server.Listen(1);
 
-                var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 {
                     client.Connect(IPAddress.Loopback, port);
 

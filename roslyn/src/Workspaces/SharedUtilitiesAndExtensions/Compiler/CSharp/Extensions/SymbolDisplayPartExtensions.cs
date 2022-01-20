@@ -6,7 +6,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static class SymbolDisplayPartExtensions
     {
-        public static SymbolDisplayPart MassageErrorTypeNames(this SymbolDisplayPart part, string? replacement = null)
+        public static SymbolDisplayPart MassageErrorTypeNames(
+            this SymbolDisplayPart part,
+            string? replacement = null
+        )
         {
             if (part.Kind == SymbolDisplayPartKind.ErrorTypeName)
             {
@@ -14,13 +17,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 if (text == string.Empty)
                 {
                     return replacement == null
-                        ? new SymbolDisplayPart(SymbolDisplayPartKind.Keyword, null, "object")
-                        : new SymbolDisplayPart(SymbolDisplayPartKind.Text, null, replacement);
+                      ? new SymbolDisplayPart(SymbolDisplayPartKind.Keyword, null, "object")
+                      : new SymbolDisplayPart(SymbolDisplayPartKind.Text, null, replacement);
                 }
 
                 if (SyntaxFacts.GetKeywordKind(text) != SyntaxKind.None)
                 {
-                    return new SymbolDisplayPart(SymbolDisplayPartKind.ErrorTypeName, null, string.Format("@{0}", text));
+                    return new SymbolDisplayPart(
+                        SymbolDisplayPartKind.ErrorTypeName,
+                        null,
+                        string.Format("@{0}", text)
+                    );
                 }
             }
 

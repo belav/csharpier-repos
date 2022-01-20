@@ -14,7 +14,8 @@ namespace Microsoft.Cci
         public const CharSet CharSet_Auto = (CharSet)4;
 
         // Non-portable CallingConvention values:
-        public const System.Runtime.InteropServices.CallingConvention CallingConvention_FastCall = (System.Runtime.InteropServices.CallingConvention)5;
+        public const System.Runtime.InteropServices.CallingConvention CallingConvention_FastCall =
+            (System.Runtime.InteropServices.CallingConvention)5;
 
         // Non-portable UnmanagedType values:
         public const UnmanagedType UnmanagedType_CustomMarshaler = (UnmanagedType)44;

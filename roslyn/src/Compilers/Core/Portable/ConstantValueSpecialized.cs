@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis
         /// to one.  Conversion of this value to float produces the corresponding
         /// canonical NaN of the float type (IEEE Std 754-2008 section 6.2.3).
         /// </summary>
-        private static readonly double _s_IEEE_canonical_NaN = BitConverter.Int64BitsToDouble(unchecked((long)0xFFF8000000000000UL));
+        private static readonly double _s_IEEE_canonical_NaN = BitConverter.Int64BitsToDouble(
+            unchecked((long)0xFFF8000000000000UL)
+        );
 
         private sealed class ConstantValueBad : ConstantValue
         {
@@ -32,10 +34,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ConstantValueTypeDiscriminator Discriminator
             {
-                get
-                {
-                    return ConstantValueTypeDiscriminator.Bad;
-                }
+                get { return ConstantValueTypeDiscriminator.Bad; }
             }
 
             internal override SpecialType SpecialType
@@ -69,10 +68,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ConstantValueTypeDiscriminator Discriminator
             {
-                get
-                {
-                    return ConstantValueTypeDiscriminator.Null;
-                }
+                get { return ConstantValueTypeDiscriminator.Null; }
             }
 
             internal override SpecialType SpecialType
@@ -82,18 +78,12 @@ namespace Microsoft.CodeAnalysis
 
             public override string? StringValue
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
 
             internal override Rope? RopeValue
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
 
             // all instances of this class are singletons
@@ -109,10 +99,7 @@ namespace Microsoft.CodeAnalysis
 
             public override bool IsDefaultValue
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             internal override string GetValueToDisplay()
@@ -124,6 +111,7 @@ namespace Microsoft.CodeAnalysis
         private sealed class ConstantValueString : ConstantValue
         {
             private readonly Rope _value;
+
             /// <summary>
             /// Some string constant values can have large costs to realize. To compensate, we realize
             /// constant values lazily, and hold onto a weak reference. If the next time we're asked for the constant
@@ -135,23 +123,26 @@ namespace Microsoft.CodeAnalysis
             public ConstantValueString(string value)
             {
                 // we should have just one Null regardless string or object.
-                RoslynDebug.Assert(value != null, "null strings should be represented as Null constant.");
+                RoslynDebug.Assert(
+                    value != null,
+                    "null strings should be represented as Null constant."
+                );
                 _value = Rope.ForString(value);
             }
 
             public ConstantValueString(Rope value)
             {
                 // we should have just one Null regardless string or object.
-                RoslynDebug.Assert(value != null, "null strings should be represented as Null constant.");
+                RoslynDebug.Assert(
+                    value != null,
+                    "null strings should be represented as Null constant."
+                );
                 _value = value;
             }
 
             public override ConstantValueTypeDiscriminator Discriminator
             {
-                get
-                {
-                    return ConstantValueTypeDiscriminator.String;
-                }
+                get { return ConstantValueTypeDiscriminator.String; }
             }
 
             internal override SpecialType SpecialType
@@ -181,10 +172,7 @@ namespace Microsoft.CodeAnalysis
 
             internal override Rope RopeValue
             {
-                get
-                {
-                    return _value;
-                }
+                get { return _value; }
             }
 
             public override int GetHashCode()
@@ -214,10 +202,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ConstantValueTypeDiscriminator Discriminator
             {
-                get
-                {
-                    return ConstantValueTypeDiscriminator.Decimal;
-                }
+                get { return ConstantValueTypeDiscriminator.Decimal; }
             }
 
             internal override SpecialType SpecialType
@@ -227,10 +212,7 @@ namespace Microsoft.CodeAnalysis
 
             public override decimal DecimalValue
             {
-                get
-                {
-                    return _value;
-                }
+                get { return _value; }
             }
 
             public override int GetHashCode()
@@ -255,10 +237,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ConstantValueTypeDiscriminator Discriminator
             {
-                get
-                {
-                    return ConstantValueTypeDiscriminator.DateTime;
-                }
+                get { return ConstantValueTypeDiscriminator.DateTime; }
             }
 
             internal override SpecialType SpecialType
@@ -268,10 +247,7 @@ namespace Microsoft.CodeAnalysis
 
             public override DateTime DateTimeValue
             {
-                get
-                {
-                    return _value;
-                }
+                get { return _value; }
             }
 
             public override int GetHashCode()
@@ -285,7 +261,7 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        // base for constant classes that may represent more than one 
+        // base for constant classes that may represent more than one
         // constant type
         private abstract class ConstantValueDiscriminated : ConstantValue
         {
@@ -298,10 +274,7 @@ namespace Microsoft.CodeAnalysis
 
             public override ConstantValueTypeDiscriminator Discriminator
             {
-                get
-                {
-                    return _discriminator;
-                }
+                get { return _discriminator; }
             }
 
             internal override SpecialType SpecialType
@@ -313,90 +286,90 @@ namespace Microsoft.CodeAnalysis
         // default value of a value type constant. (reference type constants use Null as default)
         private class ConstantValueDefault : ConstantValueDiscriminated
         {
-            public static readonly ConstantValueDefault SByte = new ConstantValueDefault(ConstantValueTypeDiscriminator.SByte);
-            public static readonly ConstantValueDefault Byte = new ConstantValueDefault(ConstantValueTypeDiscriminator.Byte);
-            public static readonly ConstantValueDefault Int16 = new ConstantValueDefault(ConstantValueTypeDiscriminator.Int16);
-            public static readonly ConstantValueDefault UInt16 = new ConstantValueDefault(ConstantValueTypeDiscriminator.UInt16);
-            public static readonly ConstantValueDefault Int32 = new ConstantValueDefault(ConstantValueTypeDiscriminator.Int32);
-            public static readonly ConstantValueDefault UInt32 = new ConstantValueDefault(ConstantValueTypeDiscriminator.UInt32);
-            public static readonly ConstantValueDefault Int64 = new ConstantValueDefault(ConstantValueTypeDiscriminator.Int64);
-            public static readonly ConstantValueDefault UInt64 = new ConstantValueDefault(ConstantValueTypeDiscriminator.UInt64);
-            public static readonly ConstantValueDefault NInt = new ConstantValueDefault(ConstantValueTypeDiscriminator.NInt);
-            public static readonly ConstantValueDefault NUInt = new ConstantValueDefault(ConstantValueTypeDiscriminator.NUInt);
-            public static readonly ConstantValueDefault Char = new ConstantValueDefault(ConstantValueTypeDiscriminator.Char);
+            public static readonly ConstantValueDefault SByte = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.SByte
+            );
+            public static readonly ConstantValueDefault Byte = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.Byte
+            );
+            public static readonly ConstantValueDefault Int16 = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.Int16
+            );
+            public static readonly ConstantValueDefault UInt16 = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.UInt16
+            );
+            public static readonly ConstantValueDefault Int32 = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.Int32
+            );
+            public static readonly ConstantValueDefault UInt32 = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.UInt32
+            );
+            public static readonly ConstantValueDefault Int64 = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.Int64
+            );
+            public static readonly ConstantValueDefault UInt64 = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.UInt64
+            );
+            public static readonly ConstantValueDefault NInt = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.NInt
+            );
+            public static readonly ConstantValueDefault NUInt = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.NUInt
+            );
+            public static readonly ConstantValueDefault Char = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.Char
+            );
             public static readonly ConstantValueDefault Single = new ConstantValueSingleZero();
             public static readonly ConstantValueDefault Double = new ConstantValueDoubleZero();
             public static readonly ConstantValueDefault Decimal = new ConstantValueDecimalZero();
-            public static readonly ConstantValueDefault DateTime = new ConstantValueDefault(ConstantValueTypeDiscriminator.DateTime);
-            public static readonly ConstantValueDefault Boolean = new ConstantValueDefault(ConstantValueTypeDiscriminator.Boolean);
+            public static readonly ConstantValueDefault DateTime = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.DateTime
+            );
+            public static readonly ConstantValueDefault Boolean = new ConstantValueDefault(
+                ConstantValueTypeDiscriminator.Boolean
+            );
 
             protected ConstantValueDefault(ConstantValueTypeDiscriminator discriminator)
-                : base(discriminator)
-            {
-            }
+                : base(discriminator) { }
 
             public override byte ByteValue
             {
-                get
-                {
-                    return 0;
-                }
+                get { return 0; }
             }
 
             public override sbyte SByteValue
             {
-                get
-                {
-                    return 0;
-                }
+                get { return 0; }
             }
 
             public override bool BooleanValue
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override double DoubleValue
             {
-                get
-                {
-                    return 0;
-                }
+                get { return 0; }
             }
 
             public override float SingleValue
             {
-                get
-                {
-                    return 0;
-                }
+                get { return 0; }
             }
 
             public override decimal DecimalValue
             {
-                get
-                {
-                    return 0;
-                }
+                get { return 0; }
             }
 
             public override char CharValue
             {
-                get
-                {
-                    return default(char);
-                }
+                get { return default(char); }
             }
 
             public override DateTime DateTimeValue
             {
-                get
-                {
-                    return default(DateTime);
-                }
+                get { return default(DateTime); }
             }
 
             // all instances of this class are singletons
@@ -418,10 +391,7 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueDecimalZero : ConstantValueDefault
         {
-            internal ConstantValueDecimalZero()
-                : base(ConstantValueTypeDiscriminator.Decimal)
-            {
-            }
+            internal ConstantValueDecimalZero() : base(ConstantValueTypeDiscriminator.Decimal) { }
 
             public override bool Equals(ConstantValue? other)
             {
@@ -441,10 +411,7 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueDoubleZero : ConstantValueDefault
         {
-            internal ConstantValueDoubleZero()
-                : base(ConstantValueTypeDiscriminator.Double)
-            {
-            }
+            internal ConstantValueDoubleZero() : base(ConstantValueTypeDiscriminator.Double) { }
 
             public override bool Equals(ConstantValue? other)
             {
@@ -464,10 +431,7 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueSingleZero : ConstantValueDefault
         {
-            internal ConstantValueSingleZero()
-                : base(ConstantValueTypeDiscriminator.Single)
-            {
-            }
+            internal ConstantValueSingleZero() : base(ConstantValueTypeDiscriminator.Single) { }
 
             public override bool Equals(ConstantValue? other)
             {
@@ -487,72 +451,78 @@ namespace Microsoft.CodeAnalysis
 
         private class ConstantValueOne : ConstantValueDiscriminated
         {
-            public static readonly ConstantValueOne SByte = new ConstantValueOne(ConstantValueTypeDiscriminator.SByte);
-            public static readonly ConstantValueOne Byte = new ConstantValueOne(ConstantValueTypeDiscriminator.Byte);
-            public static readonly ConstantValueOne Int16 = new ConstantValueOne(ConstantValueTypeDiscriminator.Int16);
-            public static readonly ConstantValueOne UInt16 = new ConstantValueOne(ConstantValueTypeDiscriminator.UInt16);
-            public static readonly ConstantValueOne Int32 = new ConstantValueOne(ConstantValueTypeDiscriminator.Int32);
-            public static readonly ConstantValueOne UInt32 = new ConstantValueOne(ConstantValueTypeDiscriminator.UInt32);
-            public static readonly ConstantValueOne Int64 = new ConstantValueOne(ConstantValueTypeDiscriminator.Int64);
-            public static readonly ConstantValueOne UInt64 = new ConstantValueOne(ConstantValueTypeDiscriminator.UInt64);
-            public static readonly ConstantValueOne NInt = new ConstantValueOne(ConstantValueTypeDiscriminator.NInt);
-            public static readonly ConstantValueOne NUInt = new ConstantValueOne(ConstantValueTypeDiscriminator.NUInt);
-            public static readonly ConstantValueOne Single = new ConstantValueOne(ConstantValueTypeDiscriminator.Single);
-            public static readonly ConstantValueOne Double = new ConstantValueOne(ConstantValueTypeDiscriminator.Double);
+            public static readonly ConstantValueOne SByte = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.SByte
+            );
+            public static readonly ConstantValueOne Byte = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.Byte
+            );
+            public static readonly ConstantValueOne Int16 = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.Int16
+            );
+            public static readonly ConstantValueOne UInt16 = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.UInt16
+            );
+            public static readonly ConstantValueOne Int32 = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.Int32
+            );
+            public static readonly ConstantValueOne UInt32 = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.UInt32
+            );
+            public static readonly ConstantValueOne Int64 = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.Int64
+            );
+            public static readonly ConstantValueOne UInt64 = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.UInt64
+            );
+            public static readonly ConstantValueOne NInt = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.NInt
+            );
+            public static readonly ConstantValueOne NUInt = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.NUInt
+            );
+            public static readonly ConstantValueOne Single = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.Single
+            );
+            public static readonly ConstantValueOne Double = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.Double
+            );
             public static readonly ConstantValueOne Decimal = new ConstantValueDecimalOne();
-            public static readonly ConstantValueOne Boolean = new ConstantValueOne(ConstantValueTypeDiscriminator.Boolean);
+            public static readonly ConstantValueOne Boolean = new ConstantValueOne(
+                ConstantValueTypeDiscriminator.Boolean
+            );
 
             protected ConstantValueOne(ConstantValueTypeDiscriminator discriminator)
-                : base(discriminator)
-            {
-            }
+                : base(discriminator) { }
 
             public override byte ByteValue
             {
-                get
-                {
-                    return 1;
-                }
+                get { return 1; }
             }
 
             public override sbyte SByteValue
             {
-                get
-                {
-                    return 1;
-                }
+                get { return 1; }
             }
 
             public override bool BooleanValue
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public override double DoubleValue
             {
-                get
-                {
-                    return 1;
-                }
+                get { return 1; }
             }
 
             public override float SingleValue
             {
-                get
-                {
-                    return 1;
-                }
+                get { return 1; }
             }
 
             public override decimal DecimalValue
             {
-                get
-                {
-                    return 1;
-                }
+                get { return 1; }
             }
 
             // all instances of this class are singletons
@@ -569,10 +539,7 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueDecimalOne : ConstantValueOne
         {
-            internal ConstantValueDecimalOne()
-                : base(ConstantValueTypeDiscriminator.Decimal)
-            {
-            }
+            internal ConstantValueDecimalOne() : base(ConstantValueTypeDiscriminator.Decimal) { }
 
             public override bool Equals(ConstantValue? other)
             {
@@ -594,32 +561,24 @@ namespace Microsoft.CodeAnalysis
         {
             private readonly byte _value;
 
-            public ConstantValueI8(sbyte value)
-                : base(ConstantValueTypeDiscriminator.SByte)
+            public ConstantValueI8(sbyte value) : base(ConstantValueTypeDiscriminator.SByte)
             {
                 _value = unchecked((byte)value);
             }
 
-            public ConstantValueI8(byte value)
-                : base(ConstantValueTypeDiscriminator.Byte)
+            public ConstantValueI8(byte value) : base(ConstantValueTypeDiscriminator.Byte)
             {
                 _value = value;
             }
 
             public override byte ByteValue
             {
-                get
-                {
-                    return _value;
-                }
+                get { return _value; }
             }
 
             public override sbyte SByteValue
             {
-                get
-                {
-                    return unchecked((sbyte)(_value));
-                }
+                get { return unchecked((sbyte)(_value)); }
             }
 
             public override int GetHashCode()
@@ -637,46 +596,34 @@ namespace Microsoft.CodeAnalysis
         {
             private readonly short _value;
 
-            public ConstantValueI16(short value)
-                : base(ConstantValueTypeDiscriminator.Int16)
+            public ConstantValueI16(short value) : base(ConstantValueTypeDiscriminator.Int16)
             {
                 _value = value;
             }
 
-            public ConstantValueI16(ushort value)
-                : base(ConstantValueTypeDiscriminator.UInt16)
+            public ConstantValueI16(ushort value) : base(ConstantValueTypeDiscriminator.UInt16)
             {
                 _value = unchecked((short)value);
             }
 
-            public ConstantValueI16(char value)
-                : base(ConstantValueTypeDiscriminator.Char)
+            public ConstantValueI16(char value) : base(ConstantValueTypeDiscriminator.Char)
             {
                 _value = unchecked((short)value);
             }
 
             public override short Int16Value
             {
-                get
-                {
-                    return _value;
-                }
+                get { return _value; }
             }
 
             public override ushort UInt16Value
             {
-                get
-                {
-                    return unchecked((ushort)_value);
-                }
+                get { return unchecked((ushort)_value); }
             }
 
             public override char CharValue
             {
-                get
-                {
-                    return unchecked((char)_value);
-                }
+                get { return unchecked((char)_value); }
             }
 
             public override int GetHashCode()
@@ -694,32 +641,24 @@ namespace Microsoft.CodeAnalysis
         {
             private readonly int _value;
 
-            public ConstantValueI32(int value)
-                : base(ConstantValueTypeDiscriminator.Int32)
+            public ConstantValueI32(int value) : base(ConstantValueTypeDiscriminator.Int32)
             {
                 _value = value;
             }
 
-            public ConstantValueI32(uint value)
-                : base(ConstantValueTypeDiscriminator.UInt32)
+            public ConstantValueI32(uint value) : base(ConstantValueTypeDiscriminator.UInt32)
             {
                 _value = unchecked((int)value);
             }
 
             public override int Int32Value
             {
-                get
-                {
-                    return _value;
-                }
+                get { return _value; }
             }
 
             public override uint UInt32Value
             {
-                get
-                {
-                    return unchecked((uint)_value);
-                }
+                get { return unchecked((uint)_value); }
             }
 
             public override int GetHashCode()
@@ -737,32 +676,24 @@ namespace Microsoft.CodeAnalysis
         {
             private readonly long _value;
 
-            public ConstantValueI64(long value)
-                : base(ConstantValueTypeDiscriminator.Int64)
+            public ConstantValueI64(long value) : base(ConstantValueTypeDiscriminator.Int64)
             {
                 _value = value;
             }
 
-            public ConstantValueI64(ulong value)
-                : base(ConstantValueTypeDiscriminator.UInt64)
+            public ConstantValueI64(ulong value) : base(ConstantValueTypeDiscriminator.UInt64)
             {
                 _value = unchecked((long)value);
             }
 
             public override long Int64Value
             {
-                get
-                {
-                    return _value;
-                }
+                get { return _value; }
             }
 
             public override ulong UInt64Value
             {
-                get
-                {
-                    return unchecked((ulong)_value);
-                }
+                get { return unchecked((ulong)_value); }
             }
 
             public override int GetHashCode()
@@ -781,32 +712,24 @@ namespace Microsoft.CodeAnalysis
             // Constants are limited to 32-bit for portability.
             private readonly int _value;
 
-            public ConstantValueNativeInt(int value)
-                : base(ConstantValueTypeDiscriminator.NInt)
+            public ConstantValueNativeInt(int value) : base(ConstantValueTypeDiscriminator.NInt)
             {
                 _value = value;
             }
 
-            public ConstantValueNativeInt(uint value)
-                : base(ConstantValueTypeDiscriminator.NUInt)
+            public ConstantValueNativeInt(uint value) : base(ConstantValueTypeDiscriminator.NUInt)
             {
                 _value = unchecked((int)value);
             }
 
             public override int Int32Value
             {
-                get
-                {
-                    return _value;
-                }
+                get { return _value; }
             }
 
             public override uint UInt32Value
             {
-                get
-                {
-                    return unchecked((uint)_value);
-                }
+                get { return unchecked((uint)_value); }
             }
 
             public override int GetHashCode()
@@ -824,8 +747,7 @@ namespace Microsoft.CodeAnalysis
         {
             private readonly double _value;
 
-            public ConstantValueDouble(double value)
-                : base(ConstantValueTypeDiscriminator.Double)
+            public ConstantValueDouble(double value) : base(ConstantValueTypeDiscriminator.Double)
             {
                 if (double.IsNaN(value))
                 {
@@ -837,10 +759,7 @@ namespace Microsoft.CodeAnalysis
 
             public override double DoubleValue
             {
-                get
-                {
-                    return _value;
-                }
+                get { return _value; }
             }
 
             public override int GetHashCode()
@@ -861,8 +780,7 @@ namespace Microsoft.CodeAnalysis
             // DoubleValue can be used to get unclipped value
             private readonly double _value;
 
-            public ConstantValueSingle(double value)
-                : base(ConstantValueTypeDiscriminator.Single)
+            public ConstantValueSingle(double value) : base(ConstantValueTypeDiscriminator.Single)
             {
                 if (double.IsNaN(value))
                 {
@@ -874,18 +792,12 @@ namespace Microsoft.CodeAnalysis
 
             public override double DoubleValue
             {
-                get
-                {
-                    return _value;
-                }
+                get { return _value; }
             }
 
             public override float SingleValue
             {
-                get
-                {
-                    return (float)_value;
-                }
+                get { return (float)_value; }
             }
 
             public override int GetHashCode()

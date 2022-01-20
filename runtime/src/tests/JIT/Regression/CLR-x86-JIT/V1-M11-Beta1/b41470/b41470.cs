@@ -13,23 +13,50 @@ namespace Test
         static int Main()
         {
             ulong local3 = 168u;
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
             return 100;
         }

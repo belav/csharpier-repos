@@ -15,16 +15,16 @@ class TEST
         try
         {
             goto LB1;
-        LB7:
+            LB7:
             goto LB4;
-        LB1:
+            LB1:
             SSS = 0;
             goto LB9;
-        LB3:
+            LB3:
             goto LB4;
-        LB4:
+            LB4:
             goto LB13;
-        LB9:
+            LB9:
             switch (SSS)
             {
                 case 0:
@@ -36,14 +36,11 @@ class TEST
             }
             goto LB13;
         }
-        finally
-        {
-        }
-    LB13:
+        finally { }
+        LB13:
         System.Console.WriteLine("END");
 
         System.Console.WriteLine("!!!!!!!!!!!!! PASSED !!!!!!!!!!!!!");
         return 100;
     }
 }
-

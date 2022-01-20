@@ -20,48 +20,83 @@ namespace System.Security.AccessControl.Tests
 
             //Case 1, array binaryForm is null
             rAcl = new RawAcl(GenericAcl.AclRevision, 1);
-            gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rAcl.InsertAce(0, gAce);
             dAcl = new DiscretionaryAcl(true, false, rAcl);
 
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                dAcl.GetBinaryForm(binaryForm, 0);
-
-            });
-
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    dAcl.GetBinaryForm(binaryForm, 0);
+                }
+            );
 
             //Case 2, offset is negative
             binaryForm = new byte[100];
             rAcl = new RawAcl(GenericAcl.AclRevision, 1);
-            gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rAcl.InsertAce(0, gAce);
             dAcl = new DiscretionaryAcl(true, false, rAcl);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                dAcl.GetBinaryForm(binaryForm, -1);
-            });
-
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    dAcl.GetBinaryForm(binaryForm, -1);
+                }
+            );
 
             //Case 3, offset is equal to binaryForm length
             binaryForm = new byte[100];
             rAcl = new RawAcl(GenericAcl.AclRevision, 1);
-            gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rAcl.InsertAce(0, gAce);
             dAcl = new DiscretionaryAcl(true, false, rAcl);
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                dAcl.GetBinaryForm(binaryForm, binaryForm.Length);
-            });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    dAcl.GetBinaryForm(binaryForm, binaryForm.Length);
+                }
+            );
 
             //Case 4, offset is a big possitive number
             rAcl = new RawAcl(GenericAcl.AclRevision, 1);
-            gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rAcl.InsertAce(0, gAce);
             dAcl = new DiscretionaryAcl(true, false, rAcl);
             binaryForm = new byte[dAcl.BinaryLength + 10000];
@@ -75,16 +110,25 @@ namespace System.Security.AccessControl.Tests
             //Case 5, binaryForm array's size is insufficient
             binaryForm = new byte[4];
             rAcl = new RawAcl(GenericAcl.AclRevision, 1);
-            gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rAcl.InsertAce(0, gAce);
             dAcl = new DiscretionaryAcl(true, false, rAcl);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                dAcl.GetBinaryForm(binaryForm, 0);
-
-            });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    dAcl.GetBinaryForm(binaryForm, 0);
+                }
+            );
 
 
 

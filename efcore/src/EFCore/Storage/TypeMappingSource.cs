@@ -34,20 +34,22 @@ namespace Microsoft.EntityFrameworkCore.Storage
     /// </remarks>
     public abstract class TypeMappingSource : TypeMappingSourceBase
     {
-        private readonly ConcurrentDictionary<(TypeMappingInfo, Type?, ValueConverter?), CoreTypeMapping?> _explicitMappings = new();
+        private readonly ConcurrentDictionary<
+            (TypeMappingInfo, Type?, ValueConverter?),
+            CoreTypeMapping?
+        > _explicitMappings = new();
 
         /// <summary>
         ///     Initializes a new instance of the this class.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-        protected TypeMappingSource(TypeMappingSourceDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        protected TypeMappingSource(TypeMappingSourceDependencies dependencies) : base(dependencies)
+        { }
 
         private CoreTypeMapping? FindMappingWithConversion(
             in TypeMappingInfo mappingInfo,
-            IReadOnlyList<IProperty>? principals)
+            IReadOnlyList<IProperty>? principals
+        )
         {
             Type? providerClrType = null;
             ValueConverter? customConverter = null;
@@ -76,7 +78,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 }
             }
 
-            var resolvedMapping = FindMappingWithConversion(mappingInfo, providerClrType, customConverter);
+            var resolvedMapping = FindMappingWithConversion(
+                mappingInfo,
+                providerClrType,
+                customConverter
+            );
 
             ValidateMapping(resolvedMapping, principals?[0]);
 
@@ -86,14 +92,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         private CoreTypeMapping? FindMappingWithConversion(
             TypeMappingInfo mappingInfo,
             Type? providerClrType,
-            ValueConverter? customConverter)
-            => _explicitMappings.GetOrAdd(
+            ValueConverter? customConverter
+        ) =>
+            _explicitMappings.GetOrAdd(
                 (mappingInfo, providerClrType, customConverter),
                 k =>
                 {
                     var (info, providerType, converter) = k;
-                    var mapping = providerType == null
-                        || providerType == info.ClrType
+                    var mapping =
+                        providerType == null || providerType == info.ClrType
                             ? FindMapping(info)
                             : null;
 
@@ -102,21 +109,27 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         var sourceType = info.ClrType;
                         if (sourceType != null)
                         {
-                            foreach (var converterInfo in Dependencies
-                                .ValueConverterSelector
-                                .Select(sourceType, providerType))
+                            foreach (
+                                var converterInfo in Dependencies.ValueConverterSelector.Select(
+                                    sourceType,
+                                    providerType
+                                )
+                            )
                             {
                                 var mappingInfoUsed = info.WithConverter(converterInfo);
                                 mapping = FindMapping(mappingInfoUsed);
 
-                                if (mapping == null
-                                    && providerType != null)
+                                if (mapping == null && providerType != null)
                                 {
-                                    foreach (var secondConverterInfo in Dependencies
-                                        .ValueConverterSelector
-                                        .Select(providerType))
+                                    foreach (
+                                        var secondConverterInfo in Dependencies.ValueConverterSelector.Select(
+                                            providerType
+                                        )
+                                    )
                                     {
-                                        mapping = FindMapping(mappingInfoUsed.WithConverter(secondConverterInfo));
+                                        mapping = FindMapping(
+                                            mappingInfoUsed.WithConverter(secondConverterInfo)
+                                        );
 
                                         if (mapping != null)
                                         {
@@ -135,14 +148,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         }
                     }
 
-                    if (mapping != null
-                        && converter != null)
+                    if (mapping != null && converter != null)
                     {
                         mapping = mapping.Clone(converter);
                     }
 
                     return mapping;
-                });
+                }
+            );
 
         /// <summary>
         ///     Finds the type mapping for a given <see cref="IProperty" />.
@@ -173,8 +186,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </remarks>
         /// <param name="type">The CLR type.</param>
         /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
-        public override CoreTypeMapping? FindMapping(Type type)
-            => FindMappingWithConversion(new TypeMappingInfo(type), null);
+        public override CoreTypeMapping? FindMapping(Type type) =>
+            FindMappingWithConversion(new TypeMappingInfo(type), null);
 
         /// <summary>
         ///     Finds the type mapping for a given <see cref="Type" />, taking pre-convention configuration into the account.
@@ -206,7 +219,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     unicode: typeConfiguration.IsUnicode(),
                     size: typeConfiguration.GetMaxLength(),
                     precision: typeConfiguration.GetPrecision(),
-                    scale: typeConfiguration.GetScale());
+                    scale: typeConfiguration.GetScale()
+                );
             }
 
             return FindMappingWithConversion(mappingInfo, providerClrType, customConverter);
@@ -227,7 +241,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </remarks>
         /// <param name="member">The field or property.</param>
         /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
-        public override CoreTypeMapping? FindMapping(MemberInfo member)
-            => FindMappingWithConversion(new TypeMappingInfo(member), null);
+        public override CoreTypeMapping? FindMapping(MemberInfo member) =>
+            FindMappingWithConversion(new TypeMappingInfo(member), null);
     }
 }

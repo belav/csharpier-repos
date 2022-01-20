@@ -39,15 +39,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         public SqlServerDateTimeOffsetTypeMapping(
             string storeType,
             DbType? dbType = System.Data.DbType.DateTimeOffset,
-            StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision)
+            StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision
+        )
             : base(
                 new RelationalTypeMappingParameters(
                     new CoreTypeMappingParameters(typeof(DateTimeOffset)),
                     storeType,
                     storeTypePostfix,
-                    dbType))
-        {
-        }
+                    dbType
+                )
+            ) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -56,17 +57,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected SqlServerDateTimeOffsetTypeMapping(RelationalTypeMappingParameters parameters)
-            : base(parameters)
-        {
-        }
+            : base(parameters) { }
 
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
         /// <param name="parameters">The parameters for this mapping.</param>
         /// <returns>The newly created mapping.</returns>
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new SqlServerDateTimeOffsetTypeMapping(parameters);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new SqlServerDateTimeOffsetTypeMapping(parameters);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -81,8 +81,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                 if (Precision.HasValue)
                 {
                     var precision = Precision.Value;
-                    if (precision <= 7
-                        && precision >= 0)
+                    if (precision <= 7 && precision >= 0)
                     {
                         return _dateTimeOffsetFormats[precision];
                     }
@@ -102,8 +101,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         {
             base.ConfigureParameter(parameter);
 
-            if (Size.HasValue
-                && Size.Value != -1)
+            if (Size.HasValue && Size.Value != -1)
             {
                 parameter.Size = Size.Value;
             }

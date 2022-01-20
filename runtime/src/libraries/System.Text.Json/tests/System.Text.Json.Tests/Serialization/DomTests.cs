@@ -37,8 +37,7 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        public const string Json =
-            "{\"StringProp\":\"Hello\",\"IntArrayProp\":[1,2]}";
+        public const string Json = "{\"StringProp\":\"Hello\",\"IntArrayProp\":[1,2]}";
 
         [Fact]
         public static void JsonDocumentDeserialize_Generic()
@@ -144,7 +143,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(JsonValueKind.String, stringProp.ValueKind);
             Assert.Equal("Hello", stringProp.ToString());
 
-            JsonElement[] elements = dom.RootElement.GetProperty("IntArrayProp").EnumerateArray().ToArray();
+            JsonElement[] elements = dom.RootElement
+                .GetProperty("IntArrayProp")
+                .EnumerateArray()
+                .ToArray();
             Assert.Equal(JsonValueKind.Number, elements[0].ValueKind);
             Assert.Equal(1, elements[0].GetInt32());
             Assert.Equal(JsonValueKind.Number, elements[1].ValueKind);

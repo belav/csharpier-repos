@@ -11,8 +11,12 @@ namespace System.Speech.Recognition
     {
         #region Constructors
 
-        internal LoadGrammarCompletedEventArgs(Grammar grammar, Exception error, bool cancelled, object userState)
-            : base(error, cancelled, userState)
+        internal LoadGrammarCompletedEventArgs(
+            Grammar grammar,
+            Exception error,
+            bool cancelled,
+            object userState
+        ) : base(error, cancelled, userState)
         {
             _grammar = grammar;
         }

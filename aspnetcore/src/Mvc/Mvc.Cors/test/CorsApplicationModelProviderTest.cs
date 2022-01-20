@@ -21,7 +21,9 @@ namespace Microsoft.AspNetCore.Mvc.Cors;
 
 public class CorsApplicationModelProviderTest
 {
-    private readonly IOptions<MvcOptions> OptionsWithoutEndpointRouting = Options.Create(new MvcOptions { EnableEndpointRouting = false });
+    private readonly IOptions<MvcOptions> OptionsWithoutEndpointRouting = Options.Create(
+        new MvcOptions { EnableEndpointRouting = false }
+    );
 
     [Fact]
     public void OnProvidersExecuting_SetsEndpointMetadata_IfCorsAttributeIsPresentOnController()
@@ -39,10 +41,15 @@ public class CorsApplicationModelProviderTest
 
         var action = Assert.Single(model.Actions);
         var selector = Assert.Single(action.Selectors);
-        var constraint = Assert.Single(selector.ActionConstraints, c => c is HttpMethodActionConstraint);
+        var constraint = Assert.Single(
+            selector.ActionConstraints,
+            c => c is HttpMethodActionConstraint
+        );
         Assert.IsNotType<CorsHttpMethodActionConstraint>(constraint);
 
-        var httpMethodMetadata = Assert.Single(selector.EndpointMetadata.OfType<HttpMethodMetadata>());
+        var httpMethodMetadata = Assert.Single(
+            selector.EndpointMetadata.OfType<HttpMethodMetadata>()
+        );
         Assert.True(httpMethodMetadata.AcceptCorsPreflight);
     }
 
@@ -62,10 +69,15 @@ public class CorsApplicationModelProviderTest
 
         var action = Assert.Single(model.Actions);
         var selector = Assert.Single(action.Selectors);
-        var constraint = Assert.Single(selector.ActionConstraints, c => c is HttpMethodActionConstraint);
+        var constraint = Assert.Single(
+            selector.ActionConstraints,
+            c => c is HttpMethodActionConstraint
+        );
         Assert.IsNotType<CorsHttpMethodActionConstraint>(constraint);
 
-        var httpMethodMetadata = Assert.Single(selector.EndpointMetadata.OfType<HttpMethodMetadata>());
+        var httpMethodMetadata = Assert.Single(
+            selector.EndpointMetadata.OfType<HttpMethodMetadata>()
+        );
         Assert.True(httpMethodMetadata.AcceptCorsPreflight);
     }
 
@@ -84,7 +96,10 @@ public class CorsApplicationModelProviderTest
         Assert.Single(model.Filters, f => f is CorsAuthorizationFilterFactory);
         var action = Assert.Single(model.Actions);
         var selector = Assert.Single(action.Selectors);
-        var constraint = Assert.Single(selector.ActionConstraints, c => c is HttpMethodActionConstraint);
+        var constraint = Assert.Single(
+            selector.ActionConstraints,
+            c => c is HttpMethodActionConstraint
+        );
         Assert.IsType<CorsHttpMethodActionConstraint>(constraint);
     }
 
@@ -103,7 +118,10 @@ public class CorsApplicationModelProviderTest
         Assert.Single(model.Filters, f => f is DisableCorsAuthorizationFilter);
         var action = Assert.Single(model.Actions);
         var selector = Assert.Single(action.Selectors);
-        var constraint = Assert.Single(selector.ActionConstraints, c => c is HttpMethodActionConstraint);
+        var constraint = Assert.Single(
+            selector.ActionConstraints,
+            c => c is HttpMethodActionConstraint
+        );
         Assert.IsType<CorsHttpMethodActionConstraint>(constraint);
     }
 
@@ -121,7 +139,10 @@ public class CorsApplicationModelProviderTest
         var controller = Assert.Single(context.Result.Controllers);
         var action = Assert.Single(controller.Actions);
         var selector = Assert.Single(action.Selectors);
-        var constraint = Assert.Single(selector.ActionConstraints, c => c is HttpMethodActionConstraint);
+        var constraint = Assert.Single(
+            selector.ActionConstraints,
+            c => c is HttpMethodActionConstraint
+        );
         Assert.IsType<CorsHttpMethodActionConstraint>(constraint);
     }
 
@@ -140,7 +161,10 @@ public class CorsApplicationModelProviderTest
         var action = Assert.Single(controller.Actions);
         Assert.Single(action.Filters, f => f is CorsAuthorizationFilterFactory);
         var selector = Assert.Single(action.Selectors);
-        var constraint = Assert.Single(selector.ActionConstraints, c => c is HttpMethodActionConstraint);
+        var constraint = Assert.Single(
+            selector.ActionConstraints,
+            c => c is HttpMethodActionConstraint
+        );
         Assert.IsType<CorsHttpMethodActionConstraint>(constraint);
     }
 
@@ -159,7 +183,10 @@ public class CorsApplicationModelProviderTest
         var action = Assert.Single(controller.Actions);
         Assert.Contains(action.Filters, f => f is DisableCorsAuthorizationFilter);
         var selector = Assert.Single(action.Selectors);
-        var constraint = Assert.Single(selector.ActionConstraints, c => c is HttpMethodActionConstraint);
+        var constraint = Assert.Single(
+            selector.ActionConstraints,
+            c => c is HttpMethodActionConstraint
+        );
         Assert.IsType<CorsHttpMethodActionConstraint>(constraint);
     }
 
@@ -177,7 +204,10 @@ public class CorsApplicationModelProviderTest
         var controller = Assert.Single(context.Result.Controllers);
         var action = Assert.Single(controller.Actions);
         var selector = Assert.Single(action.Selectors);
-        var constraint = Assert.Single(selector.ActionConstraints, c => c is HttpMethodActionConstraint);
+        var constraint = Assert.Single(
+            selector.ActionConstraints,
+            c => c is HttpMethodActionConstraint
+        );
         Assert.IsType<CorsHttpMethodActionConstraint>(constraint);
     }
 
@@ -189,7 +219,12 @@ public class CorsApplicationModelProviderTest
         var context = GetProviderContext(typeof(RegularController));
 
         context.Result.Filters.Add(
-            new CorsAuthorizationFilter(Mock.Of<ICorsService>(), Mock.Of<ICorsPolicyProvider>(), Mock.Of<ILoggerFactory>()));
+            new CorsAuthorizationFilter(
+                Mock.Of<ICorsService>(),
+                Mock.Of<ICorsPolicyProvider>(),
+                Mock.Of<ILoggerFactory>()
+            )
+        );
 
         // Act
         corsProvider.OnProvidersExecuting(context);
@@ -198,7 +233,10 @@ public class CorsApplicationModelProviderTest
         var model = Assert.Single(context.Result.Controllers);
         var action = Assert.Single(model.Actions);
         var selector = Assert.Single(action.Selectors);
-        var constraint = Assert.Single(selector.ActionConstraints, c => c is HttpMethodActionConstraint);
+        var constraint = Assert.Single(
+            selector.ActionConstraints,
+            c => c is HttpMethodActionConstraint
+        );
         Assert.IsType<CorsHttpMethodActionConstraint>(constraint);
     }
 
@@ -217,7 +255,10 @@ public class CorsApplicationModelProviderTest
         var model = Assert.Single(context.Result.Controllers);
         var action = Assert.Single(model.Actions);
         var selector = Assert.Single(action.Selectors);
-        var constraint = Assert.Single(selector.ActionConstraints, c => c is HttpMethodActionConstraint);
+        var constraint = Assert.Single(
+            selector.ActionConstraints,
+            c => c is HttpMethodActionConstraint
+        );
         Assert.IsType<CorsHttpMethodActionConstraint>(constraint);
     }
 
@@ -236,7 +277,10 @@ public class CorsApplicationModelProviderTest
         var model = Assert.Single(context.Result.Controllers);
         var action = Assert.Single(model.Actions);
         var selector = Assert.Single(action.Selectors);
-        var constraint = Assert.Single(selector.ActionConstraints, c => c is HttpMethodActionConstraint);
+        var constraint = Assert.Single(
+            selector.ActionConstraints,
+            c => c is HttpMethodActionConstraint
+        );
         Assert.IsType<CorsHttpMethodActionConstraint>(constraint);
     }
 
@@ -254,7 +298,10 @@ public class CorsApplicationModelProviderTest
         var model = Assert.Single(context.Result.Controllers);
         var action = Assert.Single(model.Actions);
         var selector = Assert.Single(action.Selectors);
-        var constraint = Assert.Single(selector.ActionConstraints, c => c is HttpMethodActionConstraint);
+        var constraint = Assert.Single(
+            selector.ActionConstraints,
+            c => c is HttpMethodActionConstraint
+        );
         Assert.IsNotType<CorsHttpMethodActionConstraint>(constraint);
     }
 
@@ -263,7 +310,8 @@ public class CorsApplicationModelProviderTest
         var context = new ApplicationModelProviderContext(new[] { controllerType.GetTypeInfo() });
         var provider = new DefaultApplicationModelProvider(
             Options.Create(new MvcOptions()),
-            new EmptyModelMetadataProvider());
+            new EmptyModelMetadataProvider()
+        );
         provider.OnProvidersExecuting(context);
 
         return context;
@@ -283,9 +331,7 @@ public class CorsApplicationModelProviderTest
     {
         [DisableCors]
         [HttpGet]
-        public void Action()
-        {
-        }
+        public void Action() { }
     }
 
     [EnableCors("policy")]

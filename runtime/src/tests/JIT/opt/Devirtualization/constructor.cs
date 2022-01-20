@@ -4,35 +4,34 @@
 using System;
 using System.Runtime.CompilerServices;
 
-class Test_constructor 
+class Test_constructor
 {
     static string s;
 
-    public override string ToString() 
+    public override string ToString()
     {
         return "Test";
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public Test_constructor() 
+    public Test_constructor()
     {
-        s = ToString();   // cannot be devirtualized
+        s = ToString(); // cannot be devirtualized
     }
-    
-    static int Main() 
+
+    static int Main()
     {
         new Child();
         return (s == "Child" ? 100 : 0);
     }
 }
 
-class Child : Test_constructor 
+class Child : Test_constructor
 {
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public Child() { }
 
-    public override string ToString() 
+    public override string ToString()
     {
         return "Child";
     }

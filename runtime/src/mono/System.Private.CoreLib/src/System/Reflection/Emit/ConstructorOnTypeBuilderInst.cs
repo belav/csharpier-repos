@@ -45,7 +45,10 @@ namespace System.Reflection.Emit
         internal TypeBuilderInstantiation instantiation;
         internal ConstructorInfo cb;
 
-        public ConstructorOnTypeBuilderInst(TypeBuilderInstantiation instantiation, ConstructorInfo cb)
+        public ConstructorOnTypeBuilderInst(
+            TypeBuilderInstantiation instantiation,
+            ConstructorInfo cb
+        )
         {
             this.instantiation = instantiation;
             this.cb = cb;
@@ -57,34 +60,22 @@ namespace System.Reflection.Emit
 
         public override Type DeclaringType
         {
-            get
-            {
-                return instantiation;
-            }
+            get { return instantiation; }
         }
 
         public override string Name
         {
-            get
-            {
-                return cb.Name;
-            }
+            get { return cb.Name; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return instantiation;
-            }
+            get { return instantiation; }
         }
 
         public override Module Module
         {
-            get
-            {
-                return cb.Module;
-            }
+            get { return cb.Module; }
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -164,8 +155,11 @@ namespace System.Reflection.Emit
         }
 
         // Called from the runtime to return the corresponding finished ConstructorInfo object
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Reflection.Emit is not subject to trimming")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Reflection.Emit is not subject to trimming"
+        )]
         internal ConstructorInfo RuntimeResolve()
         {
             Type type = instantiation.InternalResolve();
@@ -174,10 +168,7 @@ namespace System.Reflection.Emit
 
         public override int MetadataToken
         {
-            get
-            {
-                return base.MetadataToken;
-            }
+            get { return base.MetadataToken; }
         }
 
         internal override int GetParametersCount()
@@ -185,33 +176,30 @@ namespace System.Reflection.Emit
             return cb.GetParametersCount();
         }
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             return cb.Invoke(obj, invokeAttr, binder, parameters, culture);
         }
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                return cb.MethodHandle;
-            }
+            get { return cb.MethodHandle; }
         }
 
         public override MethodAttributes Attributes
         {
-            get
-            {
-                return cb.Attributes;
-            }
+            get { return cb.Attributes; }
         }
 
         public override CallingConventions CallingConvention
         {
-            get
-            {
-                return cb.CallingConvention;
-            }
+            get { return cb.CallingConvention; }
         }
 
         public override Type[] GetGenericArguments()
@@ -221,34 +209,29 @@ namespace System.Reflection.Emit
 
         public override bool ContainsGenericParameters
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsGenericMethodDefinition
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsGenericMethod
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         //
         // MethodBase members
         //
 
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters,
-                                       CultureInfo? culture)
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw new InvalidOperationException();
         }

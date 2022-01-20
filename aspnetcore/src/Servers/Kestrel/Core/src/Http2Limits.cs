@@ -36,7 +36,11 @@ public class Http2Limits
         {
             if (value <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, CoreStrings.GreaterThanZeroRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    CoreStrings.GreaterThanZeroRequired
+                );
             }
 
             _maxStreamsPerConnection = value;
@@ -56,7 +60,11 @@ public class Http2Limits
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, CoreStrings.GreaterThanOrEqualToZeroRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    CoreStrings.GreaterThanOrEqualToZeroRequired
+                );
             }
 
             _headerTableSize = value;
@@ -74,9 +82,19 @@ public class Http2Limits
         get => _maxFrameSize;
         set
         {
-            if (value < Http2PeerSettings.MinAllowedMaxFrameSize || value > Http2PeerSettings.MaxAllowedMaxFrameSize)
+            if (
+                value < Http2PeerSettings.MinAllowedMaxFrameSize
+                || value > Http2PeerSettings.MaxAllowedMaxFrameSize
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, CoreStrings.FormatArgumentOutOfRange(Http2PeerSettings.MinAllowedMaxFrameSize, Http2PeerSettings.MaxAllowedMaxFrameSize));
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    CoreStrings.FormatArgumentOutOfRange(
+                        Http2PeerSettings.MinAllowedMaxFrameSize,
+                        Http2PeerSettings.MaxAllowedMaxFrameSize
+                    )
+                );
             }
 
             _maxFrameSize = value;
@@ -96,7 +114,11 @@ public class Http2Limits
         {
             if (value <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, CoreStrings.GreaterThanZeroRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    CoreStrings.GreaterThanZeroRequired
+                );
             }
 
             _maxRequestHeaderFieldSize = value;
@@ -115,10 +137,19 @@ public class Http2Limits
         get => _initialConnectionWindowSize;
         set
         {
-            if (value < Http2PeerSettings.DefaultInitialWindowSize || value > Http2PeerSettings.MaxWindowSize)
+            if (
+                value < Http2PeerSettings.DefaultInitialWindowSize
+                || value > Http2PeerSettings.MaxWindowSize
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value,
-                    CoreStrings.FormatArgumentOutOfRange(Http2PeerSettings.DefaultInitialWindowSize, Http2PeerSettings.MaxWindowSize));
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    CoreStrings.FormatArgumentOutOfRange(
+                        Http2PeerSettings.DefaultInitialWindowSize,
+                        Http2PeerSettings.MaxWindowSize
+                    )
+                );
             }
 
             _initialConnectionWindowSize = value;
@@ -137,10 +168,19 @@ public class Http2Limits
         get => _initialStreamWindowSize;
         set
         {
-            if (value < Http2PeerSettings.DefaultInitialWindowSize || value > Http2PeerSettings.MaxWindowSize)
+            if (
+                value < Http2PeerSettings.DefaultInitialWindowSize
+                || value > Http2PeerSettings.MaxWindowSize
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value,
-                    CoreStrings.FormatArgumentOutOfRange(Http2PeerSettings.DefaultInitialWindowSize, Http2PeerSettings.MaxWindowSize));
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    CoreStrings.FormatArgumentOutOfRange(
+                        Http2PeerSettings.DefaultInitialWindowSize,
+                        Http2PeerSettings.MaxWindowSize
+                    )
+                );
             }
 
             _initialStreamWindowSize = value;
@@ -165,7 +205,10 @@ public class Http2Limits
             // Keep alive uses Kestrel's system clock which has a 1 second resolution. Time is greater or equal to clock resolution.
             if (value < Heartbeat.Interval && value != Timeout.InfiniteTimeSpan)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.FormatArgumentTimeSpanGreaterOrEqual(Heartbeat.Interval));
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    CoreStrings.FormatArgumentTimeSpanGreaterOrEqual(Heartbeat.Interval)
+                );
             }
 
             _keepAlivePingDelay = value != Timeout.InfiniteTimeSpan ? value : TimeSpan.MaxValue;
@@ -190,7 +233,10 @@ public class Http2Limits
             // Keep alive uses Kestrel's system clock which has a 1 second resolution. Time is greater or equal to clock resolution.
             if (value < Heartbeat.Interval && value != Timeout.InfiniteTimeSpan)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.FormatArgumentTimeSpanGreaterOrEqual(Heartbeat.Interval));
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    CoreStrings.FormatArgumentTimeSpanGreaterOrEqual(Heartbeat.Interval)
+                );
             }
 
             _keepAlivePingTimeout = value != Timeout.InfiniteTimeSpan ? value : TimeSpan.MaxValue;

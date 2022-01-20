@@ -3,7 +3,8 @@
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 
-public class BasicTestAppServerSiteFixture<TStartup> : AspNetSiteServerFixture where TStartup : class
+public class BasicTestAppServerSiteFixture<TStartup> : AspNetSiteServerFixture
+    where TStartup : class
 {
     public BasicTestAppServerSiteFixture()
     {

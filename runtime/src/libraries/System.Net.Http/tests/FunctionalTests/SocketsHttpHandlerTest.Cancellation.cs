@@ -15,11 +15,22 @@ namespace System.Net.Http.Functional.Tests
     {
         protected SocketsHttpHandler_Cancellation_Test(ITestOutputHelper output) : base(output) { }
 
-        private async Task ValidateConnectTimeout(HttpMessageInvoker invoker, Uri uri, int minElapsed, int maxElapsed)
+        private async Task ValidateConnectTimeout(
+            HttpMessageInvoker invoker,
+            Uri uri,
+            int minElapsed,
+            int maxElapsed
+        )
         {
             var sw = Stopwatch.StartNew();
-            var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                invoker.SendAsync(TestAsync, new HttpRequestMessage(HttpMethod.Get, uri) { Version = UseVersion }, default));
+            var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                () =>
+                    invoker.SendAsync(
+                        TestAsync,
+                        new HttpRequestMessage(HttpMethod.Get, uri) { Version = UseVersion },
+                        default
+                    )
+            );
             sw.Stop();
 
             Assert.IsType<TimeoutException>(oce.InnerException);
@@ -36,19 +47,27 @@ namespace System.Net.Http.Functional.Tests
             }
 
             var releaseServer = new TaskCompletionSource();
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using (var handler = CreateHttpClientHandler())
-                using (var invoker = new HttpMessageInvoker(handler))
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    var socketsHandler = GetUnderlyingSocketsHttpHandler(handler);
-                    socketsHandler.ConnectTimeout = TimeSpan.FromSeconds(1);
+                    using (var handler = CreateHttpClientHandler())
+                    using (var invoker = new HttpMessageInvoker(handler))
+                    {
+                        var socketsHandler = GetUnderlyingSocketsHttpHandler(handler);
+                        socketsHandler.ConnectTimeout = TimeSpan.FromSeconds(1);
 
-                    await ValidateConnectTimeout(invoker, new UriBuilder(uri) { Scheme = "https" }.Uri, 500, 85_000);
+                        await ValidateConnectTimeout(
+                            invoker,
+                            new UriBuilder(uri) { Scheme = "https" }.Uri,
+                            500,
+                            85_000
+                        );
 
-                    releaseServer.SetResult();
-                }
-            }, server => releaseServer.Task); // doesn't establish SSL connection
+                        releaseServer.SetResult();
+                    }
+                },
+                server => releaseServer.Task
+            ); // doesn't establish SSL connection
         }
 
         [OuterLoop]
@@ -63,19 +82,26 @@ namespace System.Net.Http.Functional.Tests
                 return;
             }
 
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using (var handler = CreateHttpClientHandler())
-                using (var invoker = new HttpMessageInvoker(handler))
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    var socketsHandler = GetUnderlyingSocketsHttpHandler(handler);
-                    socketsHandler.ConnectTimeout = TimeSpan.FromSeconds(1);
-                    socketsHandler.ConnectCallback = async (context, token) => { await Task.Delay(-1, token); return null; };
+                    using (var handler = CreateHttpClientHandler())
+                    using (var invoker = new HttpMessageInvoker(handler))
+                    {
+                        var socketsHandler = GetUnderlyingSocketsHttpHandler(handler);
+                        socketsHandler.ConnectTimeout = TimeSpan.FromSeconds(1);
+                        socketsHandler.ConnectCallback = async (context, token) =>
+                        {
+                            await Task.Delay(-1, token);
+                            return null;
+                        };
 
-                    await ValidateConnectTimeout(invoker, uri, 500, 85_000);
-                }
-            }, server => Task.CompletedTask, // doesn't actually connect to server
-            options: new GenericLoopbackOptions() { UseSsl = useSsl });
+                        await ValidateConnectTimeout(invoker, uri, 500, 85_000);
+                    }
+                },
+                server => Task.CompletedTask, // doesn't actually connect to server
+                options: new GenericLoopbackOptions() { UseSsl = useSsl }
+            );
         }
 
         [OuterLoop]
@@ -88,52 +114,69 @@ namespace System.Net.Http.Functional.Tests
                 return;
             }
 
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using (var handler = CreateHttpClientHandler())
-                using (var invoker = new HttpMessageInvoker(handler))
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    var socketsHandler = GetUnderlyingSocketsHttpHandler(handler);
-                    socketsHandler.ConnectTimeout = TimeSpan.FromSeconds(1);
-                    socketsHandler.ConnectCallback = (context, token) => new ValueTask<Stream>(new MemoryStream());
-                    socketsHandler.PlaintextStreamFilter = async (context, token) => { await Task.Delay(-1, token); return null; };
+                    using (var handler = CreateHttpClientHandler())
+                    using (var invoker = new HttpMessageInvoker(handler))
+                    {
+                        var socketsHandler = GetUnderlyingSocketsHttpHandler(handler);
+                        socketsHandler.ConnectTimeout = TimeSpan.FromSeconds(1);
+                        socketsHandler.ConnectCallback = (context, token) =>
+                            new ValueTask<Stream>(new MemoryStream());
+                        socketsHandler.PlaintextStreamFilter = async (context, token) =>
+                        {
+                            await Task.Delay(-1, token);
+                            return null;
+                        };
 
-                    await ValidateConnectTimeout(invoker, uri, 500, 85_000);
-                }
-            }, server => Task.CompletedTask, // doesn't actually connect to server
-            options: new GenericLoopbackOptions() { UseSsl = false });
+                        await ValidateConnectTimeout(invoker, uri, 500, 85_000);
+                    }
+                },
+                server => Task.CompletedTask, // doesn't actually connect to server
+                options: new GenericLoopbackOptions() { UseSsl = false }
+            );
         }
 
         [OuterLoop("Incurs significant delay")]
         [Fact]
         public async Task Expect100Continue_WaitsExpectedPeriodOfTimeBeforeSendingContent()
         {
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using (var handler = CreateHttpClientHandler())
-                using (var invoker = new HttpMessageInvoker(handler))
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    var socketsHandler = GetUnderlyingSocketsHttpHandler(handler);
-                    TimeSpan delay = TimeSpan.FromSeconds(3);
-                    socketsHandler.Expect100ContinueTimeout = delay;
+                    using (var handler = CreateHttpClientHandler())
+                    using (var invoker = new HttpMessageInvoker(handler))
+                    {
+                        var socketsHandler = GetUnderlyingSocketsHttpHandler(handler);
+                        TimeSpan delay = TimeSpan.FromSeconds(3);
+                        socketsHandler.Expect100ContinueTimeout = delay;
 
-                    var tcs = new TaskCompletionSource<bool>();
-                    var content = new SetTcsContent(new MemoryStream(new byte[1]), tcs);
-                    var request = new HttpRequestMessage(HttpMethod.Post, uri) { Content = content, Version = UseVersion };
-                    request.Headers.ExpectContinue = true;
+                        var tcs = new TaskCompletionSource<bool>();
+                        var content = new SetTcsContent(new MemoryStream(new byte[1]), tcs);
+                        var request = new HttpRequestMessage(HttpMethod.Post, uri)
+                        {
+                            Content = content,
+                            Version = UseVersion
+                        };
+                        request.Headers.ExpectContinue = true;
 
-                    long start = Environment.TickCount64;
-                    (await invoker.SendAsync(TestAsync, request, default)).Dispose();
-                    long elapsed = content.Ticks - start;
-                    Assert.True(elapsed >= delay.TotalMilliseconds);
+                        long start = Environment.TickCount64;
+                        (await invoker.SendAsync(TestAsync, request, default)).Dispose();
+                        long elapsed = content.Ticks - start;
+                        Assert.True(elapsed >= delay.TotalMilliseconds);
+                    }
+                },
+                async server =>
+                {
+                    await server.AcceptConnectionAsync(
+                        async connection =>
+                        {
+                            await connection.HandleRequestAsync();
+                        }
+                    );
                 }
-            }, async server =>
-            {
-                await server.AcceptConnectionAsync(async connection =>
-                {
-                    await connection.HandleRequestAsync();
-                });
-            });
+            );
         }
 
         private sealed class SetTcsContent : StreamContent
@@ -141,10 +184,14 @@ namespace System.Net.Http.Functional.Tests
             private readonly TaskCompletionSource<bool> _tcs;
             public long Ticks;
 
-            public SetTcsContent(Stream stream, TaskCompletionSource<bool> tcs) : base(stream) => _tcs = tcs;
+            public SetTcsContent(Stream stream, TaskCompletionSource<bool> tcs) : base(stream) =>
+                _tcs = tcs;
 
-            protected override void SerializeToStream(Stream stream, TransportContext context, CancellationToken cancellationToken) =>
-                SerializeToStreamAsync(stream, context).GetAwaiter().GetResult();
+            protected override void SerializeToStream(
+                Stream stream,
+                TransportContext context,
+                CancellationToken cancellationToken
+            ) => SerializeToStreamAsync(stream, context).GetAwaiter().GetResult();
 
             protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
             {

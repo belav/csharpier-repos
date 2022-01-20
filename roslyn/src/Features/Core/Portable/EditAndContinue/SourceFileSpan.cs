@@ -43,52 +43,45 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Span = span;
         }
 
-        public SourceFileSpan WithSpan(LinePositionSpan span)
-            => new(Path, span);
+        public SourceFileSpan WithSpan(LinePositionSpan span) => new(Path, span);
 
-        public SourceFileSpan WithPath(string path)
-            => new(path, Span);
+        public SourceFileSpan WithPath(string path) => new(path, Span);
 
         /// <summary>
         /// Returns true if the span represents a valid location.
         /// </summary>
-        public bool IsValid
-            => Path != null; // invalid span can be constructed by new FileLinePositionSpan()
+        public bool IsValid => Path != null; // invalid span can be constructed by new FileLinePositionSpan()
 
         /// <summary>
         /// Gets the <see cref="LinePosition"/> of the start of the span.
         /// </summary>
-        public LinePosition Start
-            => Span.Start;
+        public LinePosition Start => Span.Start;
 
         /// <summary>
         /// Gets the <see cref="LinePosition"/> of the end of the span.
         /// </summary>
-        public LinePosition End
-            => Span.End;
+        public LinePosition End => Span.End;
 
-        public bool Equals(SourceFileSpan other)
-            => Span.Equals(other.Span) && string.Equals(Path, other.Path, StringComparison.Ordinal);
+        public bool Equals(SourceFileSpan other) =>
+            Span.Equals(other.Span) && string.Equals(Path, other.Path, StringComparison.Ordinal);
 
-        public override bool Equals(object? other)
-            => other is SourceFileSpan span && Equals(span);
+        public override bool Equals(object? other) => other is SourceFileSpan span && Equals(span);
 
-        public override int GetHashCode()
-            => Hash.Combine(Path, Span.GetHashCode());
+        public override int GetHashCode() => Hash.Combine(Path, Span.GetHashCode());
 
-        public override string ToString()
-            => string.IsNullOrEmpty(Path) ? Span.ToString() : $"{Path}: {Span}";
+        public override string ToString() =>
+            string.IsNullOrEmpty(Path) ? Span.ToString() : $"{Path}: {Span}";
 
-        public static implicit operator SourceFileSpan(FileLinePositionSpan span)
-            => new(span.Path, span.Span);
+        public static implicit operator SourceFileSpan(FileLinePositionSpan span) =>
+            new(span.Path, span.Span);
 
-        public static bool operator ==(SourceFileSpan left, SourceFileSpan right)
-            => left.Equals(right);
+        public static bool operator ==(SourceFileSpan left, SourceFileSpan right) =>
+            left.Equals(right);
 
-        public static bool operator !=(SourceFileSpan left, SourceFileSpan right)
-            => !(left == right);
+        public static bool operator !=(SourceFileSpan left, SourceFileSpan right) =>
+            !(left == right);
 
-        public bool Contains(SourceFileSpan span)
-            => Span.Contains(span.Span) && string.Equals(Path, span.Path, StringComparison.Ordinal);
+        public bool Contains(SourceFileSpan span) =>
+            Span.Contains(span.Span) && string.Equals(Path, span.Path, StringComparison.Ordinal);
     }
 }

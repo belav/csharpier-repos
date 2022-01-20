@@ -8,7 +8,11 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_MAdvise", SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_MAdvise",
+            SetLastError = true
+        )]
         internal static partial int MAdvise(IntPtr addr, ulong length, MemoryAdvice advice);
 
         internal enum MemoryAdvice

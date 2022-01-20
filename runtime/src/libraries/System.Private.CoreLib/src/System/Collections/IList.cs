@@ -9,11 +9,7 @@ namespace System.Collections
     public interface IList : ICollection
     {
         // The Item property provides methods to read and edit entries in the List.
-        object? this[int index]
-        {
-            get;
-            set;
-        }
+        object? this[int index] { get; set; }
 
         // Adds an item to the list.  The exact position in the list is
         // implementation-dependent, so while ArrayList may always insert
@@ -27,15 +23,9 @@ namespace System.Collections
         // Removes all items from the list.
         void Clear();
 
-        bool IsReadOnly
-        { get; }
+        bool IsReadOnly { get; }
 
-
-        bool IsFixedSize
-        {
-            get;
-        }
-
+        bool IsFixedSize { get; }
 
         // Returns the index of a particular item, if it is in the list.
         // Returns -1 if the item isn't in the list.

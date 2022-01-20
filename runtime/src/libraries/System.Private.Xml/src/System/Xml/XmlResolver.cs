@@ -24,11 +24,7 @@ namespace System.Xml
         ///       URI to an Object containing the actual resource.</para>
         /// </devdoc>
 
-        public abstract object? GetEntity(Uri absoluteUri,
-                                          string? role,
-                                          Type? ofObjectToReturn);
-
-
+        public abstract object? GetEntity(Uri absoluteUri, string? role, Type? ofObjectToReturn);
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

@@ -20,9 +20,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         {
             return TestWorkspace.CreateVisualBasic(
                 new string[] { string.Empty },
-                new VisualBasicParseOptions[] { new VisualBasicParseOptions(kind: SourceCodeKind.Regular) },
+                new VisualBasicParseOptions[]
+                {
+                    new VisualBasicParseOptions(kind: SourceCodeKind.Regular)
+                },
                 new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary),
-                exportProvider: exportProvider);
+                exportProvider: exportProvider
+            );
         }
     }
 }

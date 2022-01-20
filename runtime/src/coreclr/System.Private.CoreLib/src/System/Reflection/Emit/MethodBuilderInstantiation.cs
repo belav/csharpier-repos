@@ -42,24 +42,63 @@ namespace System.Reflection.Emit
         public override string Name => m_method.Name;
         public override Type? DeclaringType => m_method.DeclaringType;
         public override Type? ReflectedType => m_method.ReflectedType;
-        public override object[] GetCustomAttributes(bool inherit) { return m_method.GetCustomAttributes(inherit); }
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) { return m_method.GetCustomAttributes(attributeType, inherit); }
-        public override bool IsDefined(Type attributeType, bool inherit) { return m_method.IsDefined(attributeType, inherit); }
+
+        public override object[] GetCustomAttributes(bool inherit)
+        {
+            return m_method.GetCustomAttributes(inherit);
+        }
+
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
+            return m_method.GetCustomAttributes(attributeType, inherit);
+        }
+
+        public override bool IsDefined(Type attributeType, bool inherit)
+        {
+            return m_method.IsDefined(attributeType, inherit);
+        }
+
         public override Module Module => m_method.Module;
         #endregion
 
         #region MethodBase Members
-        public override ParameterInfo[] GetParameters() { throw new NotSupportedException(); }
-        public override MethodImplAttributes GetMethodImplementationFlags() { return m_method.GetMethodImplementationFlags(); }
-        public override RuntimeMethodHandle MethodHandle => throw new NotSupportedException(SR.NotSupported_DynamicModule);
-        public override MethodAttributes Attributes => m_method.Attributes;
-        public override object Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override ParameterInfo[] GetParameters()
         {
             throw new NotSupportedException();
         }
+
+        public override MethodImplAttributes GetMethodImplementationFlags()
+        {
+            return m_method.GetMethodImplementationFlags();
+        }
+
+        public override RuntimeMethodHandle MethodHandle =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
+        public override MethodAttributes Attributes => m_method.Attributes;
+
+        public override object Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
+        {
+            throw new NotSupportedException();
+        }
+
         public override CallingConventions CallingConvention => m_method.CallingConvention;
-        public override Type[] GetGenericArguments() { return m_inst; }
-        public override MethodInfo GetGenericMethodDefinition() { return m_method; }
+
+        public override Type[] GetGenericArguments()
+        {
+            return m_inst;
+        }
+
+        public override MethodInfo GetGenericMethodDefinition()
+        {
+            return m_method;
+        }
+
         public override bool IsGenericMethodDefinition => false;
         public override bool ContainsGenericParameters
         {
@@ -78,7 +117,9 @@ namespace System.Reflection.Emit
             }
         }
 
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override MethodInfo MakeGenericMethod(params Type[] arguments)
         {
             throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericMethodDefinition, this));
@@ -92,8 +133,13 @@ namespace System.Reflection.Emit
         public override Type ReturnType => m_method.ReturnType;
 
         public override ParameterInfo ReturnParameter => throw new NotSupportedException();
-        public override ICustomAttributeProvider ReturnTypeCustomAttributes => throw new NotSupportedException();
-        public override MethodInfo GetBaseDefinition() { throw new NotSupportedException(); }
+        public override ICustomAttributeProvider ReturnTypeCustomAttributes =>
+            throw new NotSupportedException();
+
+        public override MethodInfo GetBaseDefinition()
+        {
+            throw new NotSupportedException();
+        }
         #endregion
     }
 }

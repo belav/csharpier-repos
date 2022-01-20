@@ -29,11 +29,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// If <paramref name="startColumn"/> or <paramref name="endColumn"/> is less than -1.
         /// If only <paramref name="startColumn"/> or <paramref name="endColumn"/> is -1.
         /// </exception>
-        public SourceSpan(
-            int startLine,
-            int startColumn,
-            int endLine,
-            int endColumn)
+        public SourceSpan(int startLine, int startColumn, int endLine, int endColumn)
         {
             if (startLine < 0)
                 throw new ArgumentOutOfRangeException(nameof(startLine));
@@ -45,7 +41,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
                 throw new ArgumentOutOfRangeException(nameof(endColumn));
 
             if ((startColumn == -1 || endColumn == -1) && startColumn != endColumn)
-                throw new ArgumentOutOfRangeException(startColumn == -1 ? nameof(endColumn) : nameof(startColumn));
+                throw new ArgumentOutOfRangeException(
+                    startColumn == -1 ? nameof(endColumn) : nameof(startColumn)
+                );
 
             StartLine = startLine;
             StartColumn = startColumn;
@@ -81,20 +79,21 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
 
         public bool Equals(SourceSpan other)
         {
-            return StartLine == other.StartLine &&
-                StartColumn == other.StartColumn &&
-                EndLine == other.EndLine &&
-                EndColumn == other.EndColumn;
+            return StartLine == other.StartLine
+                && StartColumn == other.StartColumn
+                && EndLine == other.EndLine
+                && EndColumn == other.EndColumn;
         }
 
         public override bool Equals(object? obj) => obj is SourceSpan span && Equals(span);
 
         public override int GetHashCode()
         {
-            return
-                ((StartLine & 0xffff) << 16) |       // bytes 3, 2 are a hash for start line
-                ((StartColumn & 0xff) << 8) |        // byte 1 is a hash for start column
-                ((EndLine ^ EndColumn) % 255);  // byte 0 is a hash for end line and column
+            return ((StartLine & 0xffff) << 16)
+                | // bytes 3, 2 are a hash for start line
+                ((StartColumn & 0xff) << 8)
+                | // byte 1 is a hash for start column
+                ((EndLine ^ EndColumn) % 255); // byte 0 is a hash for end line and column
         }
 
         public static bool operator ==(SourceSpan left, SourceSpan right) => left.Equals(right);
@@ -102,8 +101,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         public static bool operator !=(SourceSpan left, SourceSpan right) => !(left == right);
 
         internal string GetDebuggerDisplay() =>
-            (StartColumn >= 0) ?
-                $"({StartLine},{StartColumn})-({EndLine},{EndColumn})" :
-                $"{StartLine}-{EndLine}";
+            (StartColumn >= 0)
+                ? $"({StartLine},{StartColumn})-({EndLine},{EndColumn})"
+                : $"{StartLine}-{EndLine}";
     }
 }

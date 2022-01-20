@@ -26,14 +26,30 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var headerFacts = document.GetRequiredLanguageService<IHeaderFactsService>();
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            if (!headerFacts.IsOnTypeHeader(root, diagnostic.Location.SourceSpan.Start, fullHeader: true, out var typeDecl))
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            if (
+                !headerFacts.IsOnTypeHeader(
+                    root,
+                    diagnostic.Location.SourceSpan.Start,
+                    fullHeader: true,
+                    out var typeDecl
+                )
+            )
                 return;
 
             var typeName = syntaxFacts.GetIdentifierOfTypeDeclaration(typeDecl);
-            var service = document.GetRequiredLanguageService<IGenerateDefaultConstructorsService>();
-            var actions = await service.GenerateDefaultConstructorsAsync(
-                document, new TextSpan(typeName.Span.Start, 0), forRefactoring: false, cancellationToken).ConfigureAwait(false);
+            var service =
+                document.GetRequiredLanguageService<IGenerateDefaultConstructorsService>();
+            var actions = await service
+                .GenerateDefaultConstructorsAsync(
+                    document,
+                    new TextSpan(typeName.Span.Start, 0),
+                    forRefactoring: false,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             context.RegisterFixes(actions, diagnostic);
         }
     }

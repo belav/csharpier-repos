@@ -11,8 +11,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     {
         private readonly Type _marshalType;
 
-        internal ConvertArgBuilder(Type parameterType, Type marshalType)
-            : base(parameterType)
+        internal ConvertArgBuilder(Type parameterType, Type marshalType) : base(parameterType)
         {
             _marshalType = marshalType;
         }

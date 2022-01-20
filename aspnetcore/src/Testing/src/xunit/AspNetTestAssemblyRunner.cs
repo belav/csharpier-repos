@@ -14,53 +14,61 @@ namespace Microsoft.AspNetCore.Testing;
 
 public class AspNetTestAssemblyRunner : XunitTestAssemblyRunner
 {
-    private readonly Dictionary<Type, object> _assemblyFixtureMappings = new Dictionary<Type, object>();
+    private readonly Dictionary<Type, object> _assemblyFixtureMappings = new Dictionary<
+        Type,
+        object
+    >();
 
     public AspNetTestAssemblyRunner(
         ITestAssembly testAssembly,
         IEnumerable<IXunitTestCase> testCases,
         IMessageSink diagnosticMessageSink,
         IMessageSink executionMessageSink,
-        ITestFrameworkExecutionOptions executionOptions)
-        : base(testAssembly, testCases, diagnosticMessageSink, executionMessageSink, executionOptions)
-    {
-    }
+        ITestFrameworkExecutionOptions executionOptions
+    ) : base(testAssembly, testCases, diagnosticMessageSink, executionMessageSink, executionOptions)
+    { }
 
     protected override async Task AfterTestAssemblyStartingAsync()
     {
         await base.AfterTestAssemblyStartingAsync();
 
         // Find all the AssemblyFixtureAttributes on the test assembly
-        await Aggregator.RunAsync(async () =>
-        {
-            var fixturesAttributes = ((IReflectionAssemblyInfo)TestAssembly.Assembly)
-                .Assembly
-                .GetCustomAttributes(typeof(AssemblyFixtureAttribute), false)
-                .Cast<AssemblyFixtureAttribute>()
-                .ToList();
+        await Aggregator.RunAsync(
+            async () =>
+            {
+                var fixturesAttributes = ((IReflectionAssemblyInfo)TestAssembly.Assembly).Assembly
+                    .GetCustomAttributes(typeof(AssemblyFixtureAttribute), false)
+                    .Cast<AssemblyFixtureAttribute>()
+                    .ToList();
 
                 // Instantiate all the fixtures
                 foreach (var fixtureAttribute in fixturesAttributes)
-            {
-                var ctorWithDiagnostics = fixtureAttribute.FixtureType.GetConstructor(new[] { typeof(IMessageSink) });
-                object instance = null;
-                if (ctorWithDiagnostics != null)
                 {
-                    instance = Activator.CreateInstance(fixtureAttribute.FixtureType, DiagnosticMessageSink);
-                }
-                else
-                {
-                    instance = Activator.CreateInstance(fixtureAttribute.FixtureType);
-                }
+                    var ctorWithDiagnostics = fixtureAttribute.FixtureType.GetConstructor(
+                        new[] { typeof(IMessageSink) }
+                    );
+                    object instance = null;
+                    if (ctorWithDiagnostics != null)
+                    {
+                        instance = Activator.CreateInstance(
+                            fixtureAttribute.FixtureType,
+                            DiagnosticMessageSink
+                        );
+                    }
+                    else
+                    {
+                        instance = Activator.CreateInstance(fixtureAttribute.FixtureType);
+                    }
 
-                _assemblyFixtureMappings[fixtureAttribute.FixtureType] = instance;
+                    _assemblyFixtureMappings[fixtureAttribute.FixtureType] = instance;
 
-                if (instance is IAsyncLifetime asyncInit)
-                {
-                    await asyncInit.InitializeAsync();
+                    if (instance is IAsyncLifetime asyncInit)
+                    {
+                        await asyncInit.InitializeAsync();
+                    }
                 }
             }
-        });
+        );
     }
 
     protected override async Task BeforeTestAssemblyFinishedAsync()
@@ -83,8 +91,9 @@ public class AspNetTestAssemblyRunner : XunitTestAssemblyRunner
         IMessageBus messageBus,
         ITestCollection testCollection,
         IEnumerable<IXunitTestCase> testCases,
-        CancellationTokenSource cancellationTokenSource)
-        => new AspNetTestCollectionRunner(
+        CancellationTokenSource cancellationTokenSource
+    ) =>
+        new AspNetTestCollectionRunner(
             _assemblyFixtureMappings,
             testCollection,
             testCases,
@@ -92,5 +101,6 @@ public class AspNetTestAssemblyRunner : XunitTestAssemblyRunner
             messageBus,
             TestCaseOrderer,
             new ExceptionAggregator(Aggregator),
-            cancellationTokenSource).RunAsync();
+            cancellationTokenSource
+        ).RunAsync();
 }

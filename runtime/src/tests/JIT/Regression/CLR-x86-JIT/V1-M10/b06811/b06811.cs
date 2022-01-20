@@ -4,7 +4,6 @@
 using System;
 using System.Collections;
 
-
 internal class test
 {
     public static int Main(String[] args)

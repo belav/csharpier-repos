@@ -76,14 +76,36 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int AutomaticallyCompleteStatementOnSemicolon
         {
-            get { return GetBooleanOption(FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon); }
-            set { SetBooleanOption(FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon, value); }
+            get
+            {
+                return GetBooleanOption(
+                    FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    FeatureOnOffOptions.AutomaticallyCompleteStatementOnSemicolon,
+                    value
+                );
+            }
         }
 
         public int SkipAnalyzersForImplicitlyTriggeredBuilds
         {
-            get { return GetBooleanOption(FeatureOnOffOptions.SkipAnalyzersForImplicitlyTriggeredBuilds); }
-            set { SetBooleanOption(FeatureOnOffOptions.SkipAnalyzersForImplicitlyTriggeredBuilds, value); }
+            get
+            {
+                return GetBooleanOption(
+                    FeatureOnOffOptions.SkipAnalyzersForImplicitlyTriggeredBuilds
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    FeatureOnOffOptions.SkipAnalyzersForImplicitlyTriggeredBuilds,
+                    value
+                );
+            }
         }
     }
 }

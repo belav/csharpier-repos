@@ -27,34 +27,46 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
         [Fact]
         public async Task LanguageServerQueueEmptyOnShutdownMessage()
         {
-            await using var languageServerTarget = CreateLanguageServer(out var jsonRpc, out var listenerProvider);
+            await using var languageServerTarget = CreateLanguageServer(
+                out var jsonRpc,
+                out var listenerProvider
+            );
             AssertServerAlive(languageServerTarget);
 
             await languageServerTarget.ShutdownAsync(CancellationToken.None).ConfigureAwait(false);
-            await AssertServerQueueClosed(languageServerTarget, listenerProvider).ConfigureAwait(false);
+            await AssertServerQueueClosed(languageServerTarget, listenerProvider)
+                .ConfigureAwait(false);
             Assert.False(jsonRpc.IsDisposed);
         }
 
         [Fact]
         public async Task LanguageServerCleansUpOnExitMessage()
         {
-            await using var languageServerTarget = CreateLanguageServer(out var jsonRpc, out var listenerProvider);
+            await using var languageServerTarget = CreateLanguageServer(
+                out var jsonRpc,
+                out var listenerProvider
+            );
             AssertServerAlive(languageServerTarget);
 
             await languageServerTarget.ShutdownAsync(CancellationToken.None).ConfigureAwait(false);
             await languageServerTarget.ExitAsync(CancellationToken.None).ConfigureAwait(false);
-            await AssertServerQueueClosed(languageServerTarget, listenerProvider).ConfigureAwait(false);
+            await AssertServerQueueClosed(languageServerTarget, listenerProvider)
+                .ConfigureAwait(false);
             Assert.True(jsonRpc.IsDisposed);
         }
 
         [Fact]
         public async Task LanguageServerCleansUpOnUnexpectedJsonRpcDisconnectAsync()
         {
-            await using var languageServerTarget = CreateLanguageServer(out var jsonRpc, out var listenerProvider);
+            await using var languageServerTarget = CreateLanguageServer(
+                out var jsonRpc,
+                out var listenerProvider
+            );
             AssertServerAlive(languageServerTarget);
 
             jsonRpc.Dispose();
-            await AssertServerQueueClosed(languageServerTarget, listenerProvider).ConfigureAwait(false);
+            await AssertServerQueueClosed(languageServerTarget, listenerProvider)
+                .ConfigureAwait(false);
             Assert.True(jsonRpc.IsDisposed);
         }
 
@@ -64,25 +76,34 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
             Assert.False(server.GetTestAccessor().GetQueueAccessor().IsComplete());
         }
 
-        private static async Task AssertServerQueueClosed(LanguageServerTarget server, IAsynchronousOperationListenerProvider listenerProvider)
+        private static async Task AssertServerQueueClosed(
+            LanguageServerTarget server,
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             await listenerProvider.GetWaiter(FeatureAttribute.LanguageServer).ExpeditedWaitAsync();
             Assert.True(server.HasShutdownStarted);
             Assert.True(server.GetTestAccessor().GetQueueAccessor().IsComplete());
         }
 
-        private LanguageServerTarget CreateLanguageServer(out JsonRpc serverJsonRpc, out IAsynchronousOperationListenerProvider listenerProvider)
+        private LanguageServerTarget CreateLanguageServer(
+            out JsonRpc serverJsonRpc,
+            out IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp("", composition: Composition);
 
             var (_, serverStream) = FullDuplexStream.CreatePair();
             var dispatcherFactory = workspace.GetService<RequestDispatcherFactory>();
-            var lspWorkspaceRegistrationService = workspace.GetService<LspWorkspaceRegistrationService>();
+            var lspWorkspaceRegistrationService =
+                workspace.GetService<LspWorkspaceRegistrationService>();
             var capabilitiesProvider = workspace.GetService<DefaultCapabilitiesProvider>();
             var globalOptions = workspace.GetService<IGlobalOptionService>();
             listenerProvider = workspace.GetService<IAsynchronousOperationListenerProvider>();
 
-            serverJsonRpc = new JsonRpc(new HeaderDelimitedMessageHandler(serverStream, serverStream))
+            serverJsonRpc = new JsonRpc(
+                new HeaderDelimitedMessageHandler(serverStream, serverStream)
+            )
             {
                 ExceptionStrategy = ExceptionProcessing.ISerializable,
             };
@@ -99,7 +120,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
                 ProtocolConstants.RoslynLspLanguages,
                 clientName: null,
                 userVisibleServerName: string.Empty,
-                telemetryServerTypeName: string.Empty);
+                telemetryServerTypeName: string.Empty
+            );
 
             serverJsonRpc.StartListening();
             return languageServer;

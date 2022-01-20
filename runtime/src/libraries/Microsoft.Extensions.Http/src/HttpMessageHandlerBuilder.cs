@@ -76,7 +76,10 @@ namespace Microsoft.Extensions.Http
         /// <exception cref="InvalidOperationException"><paramref name="additionalHandlers "/> contains a <see langword="null"/> entry.
         /// -or-
         /// The <c>DelegatingHandler.InnerHandler</c> property must be <see langword="null"/>. <c>DelegatingHandler</c> instances provided to <c>HttpMessageHandlerBuilder</c> must not be reused or cached.</exception>
-        protected internal static HttpMessageHandler CreateHandlerPipeline(HttpMessageHandler primaryHandler, IEnumerable<DelegatingHandler> additionalHandlers)
+        protected internal static HttpMessageHandler CreateHandlerPipeline(
+            HttpMessageHandler primaryHandler,
+            IEnumerable<DelegatingHandler> additionalHandlers
+        )
         {
             // This is similar to https://github.com/aspnet/AspNetWebStack/blob/master/src/System.Net.Http.Formatting/HttpClientFactory.cs#L58
             // but we don't want to take that package as a dependency.
@@ -91,7 +94,9 @@ namespace Microsoft.Extensions.Http
                 throw new ArgumentNullException(nameof(additionalHandlers));
             }
 
-            IReadOnlyList<DelegatingHandler> additionalHandlersList = additionalHandlers as IReadOnlyList<DelegatingHandler> ?? additionalHandlers.ToArray();
+            IReadOnlyList<DelegatingHandler> additionalHandlersList =
+                additionalHandlers as IReadOnlyList<DelegatingHandler>
+                ?? additionalHandlers.ToArray();
 
             HttpMessageHandler next = primaryHandler;
             for (int i = additionalHandlersList.Count - 1; i >= 0; i--)
@@ -99,7 +104,10 @@ namespace Microsoft.Extensions.Http
                 DelegatingHandler handler = additionalHandlersList[i];
                 if (handler == null)
                 {
-                    string message = SR.Format(SR.HttpMessageHandlerBuilder_AdditionalHandlerIsNull, nameof(additionalHandlers));
+                    string message = SR.Format(
+                        SR.HttpMessageHandlerBuilder_AdditionalHandlerIsNull,
+                        nameof(additionalHandlers)
+                    );
                     throw new InvalidOperationException(message);
                 }
 
@@ -107,12 +115,14 @@ namespace Microsoft.Extensions.Http
                 // work the way you want and it can be tricky for callers to figure out.
                 if (handler.InnerHandler != null)
                 {
-                    string message = SR.Format(SR.HttpMessageHandlerBuilder_AdditionHandlerIsInvalid,
+                    string message = SR.Format(
+                        SR.HttpMessageHandlerBuilder_AdditionHandlerIsInvalid,
                         nameof(DelegatingHandler.InnerHandler),
                         nameof(DelegatingHandler),
                         nameof(HttpMessageHandlerBuilder),
                         Environment.NewLine,
-                        handler);
+                        handler
+                    );
                     throw new InvalidOperationException(message);
                 }
 

@@ -23,9 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Notification
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorNotificationServiceFactory()
-        {
-        }
+        public EditorNotificationServiceFactory() { }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {
@@ -50,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Notification
             public void SendNotification(
                 string message,
                 string title = null,
-                NotificationSeverity severity = NotificationSeverity.Warning)
+                NotificationSeverity severity = NotificationSeverity.Warning
+            )
             {
                 var callback = NotificationCallback;
                 if (callback != null)
@@ -68,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Notification
             public bool ConfirmMessageBox(
                 string message,
                 string title = null,
-                NotificationSeverity severity = NotificationSeverity.Warning)
+                NotificationSeverity severity = NotificationSeverity.Warning
+            )
             {
                 var callback = NotificationCallback;
                 if (callback != null)
@@ -80,12 +80,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Notification
                 else
                 {
                     var image = SeverityToImage(severity);
-                    return MessageBox.Show(message, title, MessageBoxButton.YesNo, image) == MessageBoxResult.Yes;
+                    return MessageBox.Show(message, title, MessageBoxButton.YesNo, image)
+                        == MessageBoxResult.Yes;
                 }
             }
 
-            private static MessageBoxImage SeverityToImage(NotificationSeverity severity)
-                => severity switch
+            private static MessageBoxImage SeverityToImage(NotificationSeverity severity) =>
+                severity switch
                 {
                     NotificationSeverity.Information => MessageBoxImage.Information,
                     NotificationSeverity.Warning => MessageBoxImage.Warning,

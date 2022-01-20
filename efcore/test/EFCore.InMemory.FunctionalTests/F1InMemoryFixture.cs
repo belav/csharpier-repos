@@ -16,13 +16,12 @@ namespace Microsoft.EntityFrameworkCore
 
     public abstract class F1InMemoryFixtureBase<TRowVersion> : F1FixtureBase<TRowVersion>
     {
-        public override TestHelpers TestHelpers
-            => InMemoryTestHelpers.Instance;
+        public override TestHelpers TestHelpers => InMemoryTestHelpers.Instance;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(e => e.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(e => e.Ignore(InMemoryEventId.TransactionIgnoredWarning));
     }
 }

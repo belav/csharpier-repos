@@ -18,20 +18,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.IntroducePa
 {
     public class IntroduceParameterTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpIntroduceParameterCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpIntroduceParameterCodeRefactoringProvider();
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         private OptionsCollection UseExpressionBody =>
-            Option(CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement);
+            Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionWithNoMethodCallsCase()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z) 
@@ -41,7 +47,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z, int m) 
@@ -56,7 +62,7 @@ class TestClass
         public async Task TestExpressionCaseWithLocal()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z) 
@@ -73,7 +79,7 @@ class TestClass
         public async Task TestBasicComplexExpressionCase()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(string x, int y, int z) 
@@ -88,7 +94,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(string x, int y, int z, int m) 
@@ -108,7 +114,7 @@ class TestClass
         public async Task TestExpressionCaseWithSingleMethodCall()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -123,7 +129,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z, int m)
@@ -143,7 +149,7 @@ class TestClass
         public async Task TestLocalDeclarationMultipleDeclarators()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -158,7 +164,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z, int v)
@@ -179,7 +185,7 @@ class TestClass
         public async Task TestDeclarationInForLoop()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int a, int b)
@@ -198,7 +204,7 @@ class TestClass
         public async Task TestExpressionCaseWithSingleMethodCallInLocalFunction()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -214,7 +220,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -235,7 +241,7 @@ class TestClass
         public async Task TestExpressionCaseWithSingleMethodCallInStaticLocalFunction()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -251,7 +257,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -272,7 +278,7 @@ class TestClass
         public async Task TestHighlightIncompleteExpressionCaseWithSingleMethodCall()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -293,7 +299,7 @@ class TestClass
         public async Task TestExpressionCaseWithMultipleMethodCall()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -309,7 +315,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z, int m)
@@ -330,7 +336,7 @@ class TestClass
         public async Task TestExpressionAllOccurrences()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -346,7 +352,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z, int f)
@@ -367,7 +373,7 @@ class TestClass
         public async Task TestxpressionWithNoMethodCallTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z) 
@@ -377,7 +383,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int GetM(int x, int y, int z)
@@ -390,14 +396,20 @@ class TestClass
     }
 }";
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionWithSingleMethodCallTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -412,7 +424,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int GetM(int x, int y)
@@ -430,14 +442,20 @@ class TestClass
     }
 }";
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionWithSingleMethodCallAndAccessorsTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -452,7 +470,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int GetM(int x, int y)
@@ -470,14 +488,20 @@ class TestClass
     }
 }";
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionWithSingleMethodCallAndAccessorsConditionalTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -492,7 +516,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int GetM(int x, int y)
@@ -510,14 +534,20 @@ class TestClass
     }
 }";
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionWithSingleMethodCallMultipleAccessorsTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z) 
@@ -541,7 +571,7 @@ class B
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z) 
@@ -568,14 +598,20 @@ class B
     }
 }";
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionWithSingleMethodCallMultipleAccessorsConditionalTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z) 
@@ -599,7 +635,7 @@ class B
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z) 
@@ -626,14 +662,20 @@ class B
     }
 }";
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionWithSingleMethodCallAccessorsMixedConditionalTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z) 
@@ -657,7 +699,7 @@ class B
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z) 
@@ -684,14 +726,20 @@ class B
     }
 }";
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionWithSingleMethodCallTrampolineAllOccurrences()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -707,7 +755,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int GetM(int x, int y, int z)
@@ -725,14 +773,20 @@ class TestClass
         M(z, y, x, GetM(z, y, x));
     }
 }";
-            await TestInRegularAndScriptAsync(code, expected, index: 4, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 4,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionWithNoMethodCallOverload()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z) 
@@ -742,7 +796,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private void M(int x, int y, int z)
@@ -755,14 +809,20 @@ class TestClass
     }
 }";
 
-            await TestInRegularAndScriptAsync(code, expected, index: 2, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 2,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionWithSingleMethodCallOverload()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(int x, int y, int z)
@@ -777,7 +837,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private void M(int x, int y, int z)
@@ -794,14 +854,20 @@ class TestClass
         M(z, y, x);
     }
 }";
-            await TestInRegularAndScriptAsync(code, expected, index: 2, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 2,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionBodiedMemberOverload()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y, int z) => [|x * y * z|];
@@ -813,7 +879,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int M(int x, int y, int z) => M(x, y, z, x * y * z);
@@ -825,14 +891,20 @@ class TestClass
     }
 }";
 
-            await TestInRegularAndScriptAsync(code, expected, index: 2, options: UseExpressionBody, parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 2,
+                options: UseExpressionBody,
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionBodiedMemberTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y, int z) => [|x * y * z|];
@@ -844,7 +916,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int GetV(int x, int y, int z)
@@ -860,14 +932,20 @@ class TestClass
     }
 }";
 
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionCaseWithRecursiveCall()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y, int z)
@@ -878,7 +956,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y, int z, int m)
@@ -893,7 +971,7 @@ class TestClass
         public async Task TestExpressionCaseWithNestedRecursiveCall()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y, int z)
@@ -904,7 +982,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y, int z, int m)
@@ -919,7 +997,7 @@ class TestClass
         public async Task TestExpressionCaseWithParamsArg()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(params int[] args)
@@ -940,7 +1018,7 @@ class TestClass
         public async Task TestExpressionCaseWithOptionalParameters()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y = 5)
@@ -956,7 +1034,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int m, int y = 5)
@@ -976,7 +1054,7 @@ class TestClass
         public async Task TestExpressionCaseWithOptionalParametersUsed()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y = 5)
@@ -992,7 +1070,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int m, int y = 5)
@@ -1012,7 +1090,7 @@ class TestClass
         public async Task TestExpressionCaseWithOptionalParametersUsedOverload()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y = 5)
@@ -1028,7 +1106,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int M(int x, int y = 5)
@@ -1053,7 +1131,7 @@ class TestClass
         public async Task TestExpressionCaseWithOptionalParametersUsedTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y = 5)
@@ -1069,7 +1147,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int GetM(int x, int y = 5)
@@ -1094,7 +1172,7 @@ class TestClass
         public async Task TestExpressionCaseWithOptionalParametersUnusedTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y = 5)
@@ -1110,7 +1188,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int GetM(int x, int y = 5)
@@ -1135,7 +1213,7 @@ class TestClass
         public async Task TestExpressionCaseWithCancellationToken()
         {
             var code =
-@"using System;
+                @"using System;
 using System.Threading;
 class TestClass
 {
@@ -1152,7 +1230,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Threading;
 class TestClass
 {
@@ -1173,7 +1251,7 @@ class TestClass
         public async Task TestExpressionCaseWithRecursiveCallTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y, int z)
@@ -1184,7 +1262,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int GetM(int x, int y, int z)
@@ -1197,14 +1275,20 @@ class TestClass
         return M(x, x, z, GetM(x, x, z));
     }
 }";
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionCaseWithNestedRecursiveCallTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y, int z)
@@ -1215,7 +1299,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int GetM(int x, int y, int z)
@@ -1228,14 +1312,20 @@ class TestClass
         return M(x, x, M(x, y, x, GetM(x, y, x)), GetM(x, x, M(x, y, x, GetM(x, y, x))));
     }
 }";
-            await TestInRegularAndScriptAsync(code, expected, index: 1, options: new OptionsCollection(GetLanguage()), parseOptions: CSharpParseOptions.Default);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                index: 1,
+                options: new OptionsCollection(GetLanguage()),
+                parseOptions: CSharpParseOptions.Default
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceParameter)]
         public async Task TestExpressionCaseInConstructor()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     public TestClass(int x, int y)
@@ -1249,7 +1339,7 @@ class TestClass
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     public TestClass(int x, int y, int val1)
@@ -1270,7 +1360,7 @@ class TestClass
         public async Task TestLambdaCaseNormal()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     Func<int, int, int> mult = (x, y) => [|x * y|];
@@ -1283,7 +1373,7 @@ class TestClass
         public async Task TestLambdaCaseTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     Func<int, int, int> mult = (x, y) => [|x * y|];
@@ -1296,7 +1386,7 @@ class TestClass
         public async Task TestLambdaCaseOverload()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     Func<int, int, int> mult = (x, y) => [|x * y|];
@@ -1309,7 +1399,7 @@ class TestClass
         public async Task TestTopLevelStatements()
         {
             var code =
-@"using System;
+                @"using System;
 Math.Max(5 + 5, [|6 + 7|]);";
 
             await TestMissingInRegularAndScriptAsync(code);
@@ -1319,7 +1409,7 @@ Math.Max(5 + 5, [|6 + 7|]);";
         public async Task TestFieldInitializer()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int a = [|5 + 3|];
@@ -1331,7 +1421,7 @@ class TestClass
         public async Task TestIndexer()
         {
             var code =
-@"using System;
+                @"using System;
 class SampleCollection<T>
 {
     private T[] arr = new T[100];
@@ -1345,7 +1435,7 @@ class SampleCollection<T>
         public async Task TestPropertyGetter()
         {
             var code =
-@"using System;
+                @"using System;
 
 class TimePeriod
 {
@@ -1363,7 +1453,7 @@ class TimePeriod
         public async Task TestPropertySetter()
         {
             var code =
-@"using System;
+                @"using System;
 
 class TimePeriod
 {
@@ -1383,7 +1473,7 @@ class TimePeriod
         public async Task TestDestructor()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     public ~TestClass()
@@ -1398,7 +1488,7 @@ class TestClass
         public async Task TestExpressionInParameter()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     public void M(int x = [|5 * 5|])
@@ -1412,7 +1502,7 @@ class TestClass
         public async Task TestCrossLanguageInvocations()
         {
             var code =
-@"<Workspace>
+                @"<Workspace>
     <Project Language= ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 public class Program
@@ -1448,7 +1538,7 @@ End Class
 ";
 
             var expected =
-@"<Workspace>
+                @"<Workspace>
     <Project Language= ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 public class Program
@@ -1488,7 +1578,7 @@ End Class
         public async Task TestConvertedTypeInExpression()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(double x, double y) 
@@ -1498,7 +1588,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(double x, double y, int m) 
@@ -1513,7 +1603,7 @@ class TestClass
         public async Task TestConvertedTypeInExpressionTrampoline()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(double x, double y) 
@@ -1523,7 +1613,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     private int GetM(double x, double y)
@@ -1543,7 +1633,7 @@ class TestClass
         public async Task TestThisKeywordInExpression()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     public int M1()
@@ -1559,7 +1649,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     public int M1()
@@ -1585,7 +1675,7 @@ class TestClass
         public async Task TestThisImplicitInExpression()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     public int M1()
@@ -1601,7 +1691,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     public int M1()
@@ -1627,7 +1717,7 @@ class TestClass
         public async Task TestStaticMethodCallInExpression()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     public static int M1()
@@ -1643,7 +1733,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     public static int M1()
@@ -1664,7 +1754,7 @@ class TestClass
         public async Task TestBaseKeywordInExpression()
         {
             var code =
-@"using System;
+                @"using System;
 class Net
 {
     public int _value = 6;
@@ -1681,7 +1771,7 @@ class Perl : Net
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class Net
 {
     public int _value = 6;
@@ -1708,7 +1798,7 @@ class Perl : Net
         public async Task TestFieldReferenceInOptionalParameter()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y = int.MaxValue)
@@ -1724,7 +1814,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int m, int y = int.MaxValue)
@@ -1744,7 +1834,7 @@ class TestClass
         public async Task TestNamedParameterNecessary()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int y = 5, int z = 3)
@@ -1760,7 +1850,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     int M(int x, int m, int y = 5, int z = 3)
@@ -1780,7 +1870,7 @@ class TestClass
         public async Task TestHighlightReturnType()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     [|int|] M(int x)
@@ -1800,7 +1890,7 @@ class TestClass
         public async Task TestTypeOfOnString()
         {
             var code =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M()
@@ -1810,7 +1900,7 @@ class TestClass
 }";
 
             var expected =
-@"using System;
+                @"using System;
 class TestClass
 {
     void M(Type x)
@@ -1825,7 +1915,7 @@ class TestClass
         public async Task TestClassObject()
         {
             var code =
-@"
+                @"
 class F
 {
     public int x;

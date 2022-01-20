@@ -38,9 +38,11 @@ namespace System.Web.Http.ExceptionHandling
         /// <param name="exception">The exception caught.</param>
         /// <param name="catchBlock">The catch block where the exception was caught.</param>
         /// <param name="actionContext">The action context in which the exception occurred.</param>
-        public ExceptionContext(Exception exception, ExceptionContextCatchBlock catchBlock,
-            HttpActionContext actionContext)
-            : this(exception, catchBlock)
+        public ExceptionContext(
+            Exception exception,
+            ExceptionContextCatchBlock catchBlock,
+            HttpActionContext actionContext
+        ) : this(exception, catchBlock)
         {
             if (actionContext == null)
             {
@@ -53,8 +55,14 @@ namespace System.Web.Http.ExceptionHandling
 
             if (controllerContext == null)
             {
-                throw new ArgumentException(Error.Format(SRResources.TypePropertyMustNotBeNull,
-                    typeof(HttpActionContext).Name, "ControllerContext"), "actionContext");
+                throw new ArgumentException(
+                    Error.Format(
+                        SRResources.TypePropertyMustNotBeNull,
+                        typeof(HttpActionContext).Name,
+                        "ControllerContext"
+                    ),
+                    "actionContext"
+                );
             }
 
             ControllerContext = controllerContext;
@@ -67,8 +75,14 @@ namespace System.Web.Http.ExceptionHandling
 
             if (request == null)
             {
-                throw new ArgumentException(Error.Format(SRResources.TypePropertyMustNotBeNull,
-                    typeof(HttpControllerContext).Name, "Request"), "actionContext");
+                throw new ArgumentException(
+                    Error.Format(
+                        SRResources.TypePropertyMustNotBeNull,
+                        typeof(HttpControllerContext).Name,
+                        "Request"
+                    ),
+                    "actionContext"
+                );
             }
 
             Request = request;
@@ -80,8 +94,11 @@ namespace System.Web.Http.ExceptionHandling
         /// <param name="exception">The exception caught.</param>
         /// <param name="catchBlock">The catch block where the exception was caught.</param>
         /// <param name="request">The request being processed when the exception was caught.</param>
-        public ExceptionContext(Exception exception, ExceptionContextCatchBlock catchBlock, HttpRequestMessage request)
-            : this(exception, catchBlock)
+        public ExceptionContext(
+            Exception exception,
+            ExceptionContextCatchBlock catchBlock,
+            HttpRequestMessage request
+        ) : this(exception, catchBlock)
         {
             if (request == null)
             {
@@ -99,8 +116,12 @@ namespace System.Web.Http.ExceptionHandling
         /// <param name="catchBlock">The catch block where the exception was caught.</param>
         /// <param name="request">The request being processed when the exception was caught.</param>
         /// <param name="response">The repsonse being returned when the exception was caught.</param>
-        public ExceptionContext(Exception exception, ExceptionContextCatchBlock catchBlock, HttpRequestMessage request,
-            HttpResponseMessage response) : this(exception, catchBlock)
+        public ExceptionContext(
+            Exception exception,
+            ExceptionContextCatchBlock catchBlock,
+            HttpRequestMessage request,
+            HttpResponseMessage response
+        ) : this(exception, catchBlock)
         {
             if (request == null)
             {

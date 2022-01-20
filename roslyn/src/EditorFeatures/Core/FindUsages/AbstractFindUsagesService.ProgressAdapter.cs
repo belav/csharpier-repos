@@ -28,22 +28,32 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             private readonly IFindUsagesContext _context;
             private readonly DefinitionItem _definition;
 
-            public IStreamingProgressTracker ProgressTracker
-                => _context.ProgressTracker;
+            public IStreamingProgressTracker ProgressTracker => _context.ProgressTracker;
 
             public FindLiteralsProgressAdapter(
-                IFindUsagesContext context, DefinitionItem definition)
+                IFindUsagesContext context,
+                DefinitionItem definition
+            )
             {
                 _context = context;
                 _definition = definition;
             }
 
-            public async ValueTask OnReferenceFoundAsync(Document document, TextSpan span, CancellationToken cancellationToken)
+            public async ValueTask OnReferenceFoundAsync(
+                Document document,
+                TextSpan span,
+                CancellationToken cancellationToken
+            )
             {
-                var documentSpan = await ClassifiedSpansAndHighlightSpanFactory.GetClassifiedDocumentSpanAsync(
-                    document, span, cancellationToken).ConfigureAwait(false);
-                await _context.OnReferenceFoundAsync(
-                    new SourceReferenceItem(_definition, documentSpan, SymbolUsageInfo.None), cancellationToken).ConfigureAwait(false);
+                var documentSpan = await ClassifiedSpansAndHighlightSpanFactory
+                    .GetClassifiedDocumentSpanAsync(document, span, cancellationToken)
+                    .ConfigureAwait(false);
+                await _context
+                    .OnReferenceFoundAsync(
+                        new SourceReferenceItem(_definition, documentSpan, SymbolUsageInfo.None),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
@@ -70,11 +80,13 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
 
             private readonly SemaphoreSlim _gate = new(initialCount: 1);
 
-            public IStreamingProgressTracker ProgressTracker
-                => _context.ProgressTracker;
+            public IStreamingProgressTracker ProgressTracker => _context.ProgressTracker;
 
             public FindReferencesProgressAdapter(
-                Solution solution, IFindUsagesContext context, FindReferencesSearchOptions options)
+                Solution solution,
+                IFindUsagesContext context,
+                FindReferencesSearchOptions options
+            )
             {
                 _solution = solution;
                 _context = context;
@@ -84,26 +96,41 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             // Do nothing functions.  The streaming far service doesn't care about
             // any of these.
             public ValueTask OnStartedAsync(CancellationToken cancellationToken) => default;
+
             public ValueTask OnCompletedAsync(CancellationToken cancellationToken) => default;
-            public ValueTask OnFindInDocumentStartedAsync(Document document, CancellationToken cancellationToken) => default;
-            public ValueTask OnFindInDocumentCompletedAsync(Document document, CancellationToken cancellationToken) => default;
+
+            public ValueTask OnFindInDocumentStartedAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) => default;
+
+            public ValueTask OnFindInDocumentCompletedAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) => default;
 
             // More complicated forwarding functions.  These need to map from the symbols
-            // used by the FAR engine to the INavigableItems used by the streaming FAR 
+            // used by the FAR engine to the INavigableItems used by the streaming FAR
             // feature.
 
-            private async ValueTask<DefinitionItem> GetDefinitionItemAsync(SymbolGroup group, CancellationToken cancellationToken)
+            private async ValueTask<DefinitionItem> GetDefinitionItemAsync(
+                SymbolGroup group,
+                CancellationToken cancellationToken
+            )
             {
                 using (await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
                 {
                     if (!_definitionToItem.TryGetValue(group, out var definitionItem))
                     {
-                        definitionItem = await group.ToClassifiedDefinitionItemAsync(
-                            _solution,
-                            isPrimary: _definitionToItem.Count == 0,
-                            includeHiddenLocations: false,
-                            _options,
-                            cancellationToken).ConfigureAwait(false);
+                        definitionItem = await group
+                            .ToClassifiedDefinitionItemAsync(
+                                _solution,
+                                isPrimary: _definitionToItem.Count == 0,
+                                includeHiddenLocations: false,
+                                _options,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                         _definitionToItem[group] = definitionItem;
                     }
@@ -112,21 +139,39 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                 }
             }
 
-            public async ValueTask OnDefinitionFoundAsync(SymbolGroup group, CancellationToken cancellationToken)
+            public async ValueTask OnDefinitionFoundAsync(
+                SymbolGroup group,
+                CancellationToken cancellationToken
+            )
             {
-                var definitionItem = await GetDefinitionItemAsync(group, cancellationToken).ConfigureAwait(false);
-                await _context.OnDefinitionFoundAsync(definitionItem, cancellationToken).ConfigureAwait(false);
+                var definitionItem = await GetDefinitionItemAsync(group, cancellationToken)
+                    .ConfigureAwait(false);
+                await _context
+                    .OnDefinitionFoundAsync(definitionItem, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
-            public async ValueTask OnReferenceFoundAsync(SymbolGroup group, ISymbol definition, ReferenceLocation location, CancellationToken cancellationToken)
+            public async ValueTask OnReferenceFoundAsync(
+                SymbolGroup group,
+                ISymbol definition,
+                ReferenceLocation location,
+                CancellationToken cancellationToken
+            )
             {
-                var definitionItem = await GetDefinitionItemAsync(group, cancellationToken).ConfigureAwait(false);
-                var referenceItem = await location.TryCreateSourceReferenceItemAsync(
-                    definitionItem, includeHiddenLocations: false,
-                    cancellationToken).ConfigureAwait(false);
+                var definitionItem = await GetDefinitionItemAsync(group, cancellationToken)
+                    .ConfigureAwait(false);
+                var referenceItem = await location
+                    .TryCreateSourceReferenceItemAsync(
+                        definitionItem,
+                        includeHiddenLocations: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (referenceItem != null)
-                    await _context.OnReferenceFoundAsync(referenceItem, cancellationToken).ConfigureAwait(false);
+                    await _context
+                        .OnReferenceFoundAsync(referenceItem, cancellationToken)
+                        .ConfigureAwait(false);
             }
         }
     }

@@ -61,7 +61,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
     internal static class GeneratedNameKindExtensions
     {
-        internal static bool IsTypeName(this GeneratedNameKind kind)
-            => kind is GeneratedNameKind.LambdaDisplayClass or GeneratedNameKind.StateMachineType or GeneratedNameKind.DynamicCallSiteContainerType;
+        internal static bool IsTypeName(this GeneratedNameKind kind) =>
+            kind
+                is GeneratedNameKind.LambdaDisplayClass
+                    or GeneratedNameKind.StateMachineType
+                    or GeneratedNameKind.DynamicCallSiteContainerType;
     }
 }

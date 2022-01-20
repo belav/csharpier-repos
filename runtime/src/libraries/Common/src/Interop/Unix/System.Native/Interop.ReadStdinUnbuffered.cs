@@ -8,13 +8,23 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_ReadStdin", SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_ReadStdin",
+            SetLastError = true
+        )]
         internal static unsafe partial int ReadStdin(byte* buffer, int bufferSize);
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_InitializeConsoleBeforeRead")]
-        internal static extern void InitializeConsoleBeforeRead(byte minChars = 1, byte decisecondsTimeout = 0);
+        internal static extern void InitializeConsoleBeforeRead(
+            byte minChars = 1,
+            byte decisecondsTimeout = 0
+        );
 
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_UninitializeConsoleAfterRead")]
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_UninitializeConsoleAfterRead"
+        )]
         internal static extern void UninitializeConsoleAfterRead();
     }
 }

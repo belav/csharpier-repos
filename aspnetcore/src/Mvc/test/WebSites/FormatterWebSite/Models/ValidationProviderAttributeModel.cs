@@ -22,11 +22,11 @@ public class FirstNameAttribute : ValidationProviderAttribute
     public override IEnumerable<ValidationAttribute> GetValidationAttributes()
     {
         return new List<ValidationAttribute>
-            {
-                new RequiredAttribute(),
-                new RegularExpressionAttribute(pattern: "[A-Za-z]*"),
-                new StringLengthAttribute(maximumLength: 5)
-            };
+        {
+            new RequiredAttribute(),
+            new RegularExpressionAttribute(pattern: "[A-Za-z]*"),
+            new StringLengthAttribute(maximumLength: 5)
+        };
     }
 }
 
@@ -34,9 +34,6 @@ public class LastNameAttribute : ValidationProviderAttribute
 {
     public override IEnumerable<ValidationAttribute> GetValidationAttributes()
     {
-        return new List<ValidationAttribute>
-            {
-                new RequiredAttribute()
-            };
+        return new List<ValidationAttribute> { new RequiredAttribute() };
     }
 }

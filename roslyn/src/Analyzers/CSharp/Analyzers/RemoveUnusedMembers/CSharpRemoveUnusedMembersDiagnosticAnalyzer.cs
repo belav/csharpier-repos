@@ -10,7 +10,10 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedMembers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpRemoveUnusedMembersDiagnosticAnalyzer
-        : AbstractRemoveUnusedMembersDiagnosticAnalyzer<DocumentationCommentTriviaSyntax, IdentifierNameSyntax>
+        : AbstractRemoveUnusedMembersDiagnosticAnalyzer<
+              DocumentationCommentTriviaSyntax,
+              IdentifierNameSyntax
+          >
     {
     }
 }

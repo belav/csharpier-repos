@@ -17,18 +17,32 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class StringMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _isNullOrEmptyMethodInfo
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.IsNullOrEmpty), typeof(string));
+        private static readonly MethodInfo _isNullOrEmptyMethodInfo =
+            typeof(string).GetRequiredRuntimeMethod(nameof(string.IsNullOrEmpty), typeof(string));
 
-        private static readonly MethodInfo _concatMethodInfoTwoArgs
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Concat), typeof(string), typeof(string));
+        private static readonly MethodInfo _concatMethodInfoTwoArgs =
+            typeof(string).GetRequiredRuntimeMethod(
+                nameof(string.Concat),
+                typeof(string),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _concatMethodInfoThreeArgs
-            = typeof(string).GetRequiredRuntimeMethod(nameof(string.Concat), typeof(string), typeof(string), typeof(string));
+        private static readonly MethodInfo _concatMethodInfoThreeArgs =
+            typeof(string).GetRequiredRuntimeMethod(
+                nameof(string.Concat),
+                typeof(string),
+                typeof(string),
+                typeof(string)
+            );
 
-        private static readonly MethodInfo _concatMethodInfoFourArgs
-            = typeof(string).GetRequiredRuntimeMethod(
-                nameof(string.Concat), typeof(string), typeof(string), typeof(string), typeof(string));
+        private static readonly MethodInfo _concatMethodInfoFourArgs =
+            typeof(string).GetRequiredRuntimeMethod(
+                nameof(string.Concat),
+                typeof(string),
+                typeof(string),
+                typeof(string),
+                typeof(string)
+            );
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -53,7 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             if (Equals(method, _isNullOrEmptyMethodInfo))
             {
@@ -63,23 +78,22 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     _sqlExpressionFactory.IsNull(argument),
                     _sqlExpressionFactory.Equal(
                         argument,
-                        _sqlExpressionFactory.Constant(string.Empty)));
+                        _sqlExpressionFactory.Constant(string.Empty)
+                    )
+                );
             }
 
             if (Equals(method, _concatMethodInfoTwoArgs))
             {
-                return _sqlExpressionFactory.Add(
-                    arguments[0],
-                    arguments[1]);
+                return _sqlExpressionFactory.Add(arguments[0], arguments[1]);
             }
 
             if (Equals(method, _concatMethodInfoThreeArgs))
             {
                 return _sqlExpressionFactory.Add(
                     arguments[0],
-                    _sqlExpressionFactory.Add(
-                        arguments[1],
-                        arguments[2]));
+                    _sqlExpressionFactory.Add(arguments[1], arguments[2])
+                );
             }
 
             if (Equals(method, _concatMethodInfoFourArgs))
@@ -88,9 +102,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     arguments[0],
                     _sqlExpressionFactory.Add(
                         arguments[1],
-                        _sqlExpressionFactory.Add(
-                            arguments[2],
-                            arguments[3])));
+                        _sqlExpressionFactory.Add(arguments[2], arguments[3])
+                    )
+                );
             }
 
             return null;

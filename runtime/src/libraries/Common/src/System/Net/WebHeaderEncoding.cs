@@ -20,42 +20,56 @@ namespace System.Net
                 return string.Empty;
             }
 
-            Debug.Assert(bytes != null && (uint)byteIndex <= (uint)bytes.Length && (uint)(byteIndex + byteCount) <= (uint)bytes.Length);
+            Debug.Assert(
+                bytes != null
+                    && (uint)byteIndex <= (uint)bytes.Length
+                    && (uint)(byteIndex + byteCount) <= (uint)bytes.Length
+            );
 
-            return string.Create(byteCount, (bytes, byteIndex), (buffer, state) =>
-            {
-                fixed (byte* pByt = &state.bytes[state.byteIndex])
-                fixed (char* pStr = buffer)
+            return string.Create(
+                byteCount,
+                (bytes, byteIndex),
+                (buffer, state) =>
                 {
-                    byte* pBytes = pByt;
-                    char* pString = pStr;
-                    int byteCount = buffer.Length;
+                    fixed (byte* pByt = &state.bytes[state.byteIndex])
+                    fixed (char* pStr = buffer)
+                    {
+                        byte* pBytes = pByt;
+                        char* pString = pStr;
+                        int byteCount = buffer.Length;
 
-                    while (byteCount >= 8)
-                    {
-                        pString[0] = (char)pBytes[0];
-                        pString[1] = (char)pBytes[1];
-                        pString[2] = (char)pBytes[2];
-                        pString[3] = (char)pBytes[3];
-                        pString[4] = (char)pBytes[4];
-                        pString[5] = (char)pBytes[5];
-                        pString[6] = (char)pBytes[6];
-                        pString[7] = (char)pBytes[7];
-                        pString += 8;
-                        pBytes += 8;
-                        byteCount -= 8;
-                    }
-                    for (int i = 0; i < byteCount; i++)
-                    {
-                        pString[i] = (char)pBytes[i];
+                        while (byteCount >= 8)
+                        {
+                            pString[0] = (char)pBytes[0];
+                            pString[1] = (char)pBytes[1];
+                            pString[2] = (char)pBytes[2];
+                            pString[3] = (char)pBytes[3];
+                            pString[4] = (char)pBytes[4];
+                            pString[5] = (char)pBytes[5];
+                            pString[6] = (char)pBytes[6];
+                            pString[7] = (char)pBytes[7];
+                            pString += 8;
+                            pBytes += 8;
+                            byteCount -= 8;
+                        }
+                        for (int i = 0; i < byteCount; i++)
+                        {
+                            pString[i] = (char)pBytes[i];
+                        }
                     }
                 }
-            });
+            );
         }
 
         internal static int GetByteCount(string myString) => myString.Length;
 
-        internal static unsafe void GetBytes(string myString, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        internal static unsafe void GetBytes(
+            string myString,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             if (myString.Length == 0)
             {
@@ -72,6 +86,7 @@ namespace System.Net
                 }
             }
         }
+
         internal static byte[] GetBytes(string myString)
         {
             byte[] bytes = new byte[myString.Length];

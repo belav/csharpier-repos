@@ -6,23 +6,22 @@ using System.Runtime.Serialization;
 namespace System.IO
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class FileLoadException : IOException
     {
-        public FileLoadException()
-            : base(SR.IO_FileLoad)
+        public FileLoadException() : base(SR.IO_FileLoad)
         {
             HResult = HResults.COR_E_FILELOAD;
         }
 
-        public FileLoadException(string? message)
-            : base(message)
+        public FileLoadException(string? message) : base(message)
         {
             HResult = HResults.COR_E_FILELOAD;
         }
 
-        public FileLoadException(string? message, Exception? inner)
-            : base(message, inner)
+        public FileLoadException(string? message, Exception? inner) : base(message, inner)
         {
             HResult = HResults.COR_E_FILELOAD;
         }
@@ -40,7 +39,8 @@ namespace System.IO
             FileName = fileName;
         }
 
-        public override string Message => _message ??= FormatFileLoadExceptionMessage(FileName, HResult);
+        public override string Message =>
+            _message ??= FormatFileLoadExceptionMessage(FileName, HResult);
 
         public string? FileName { get; }
         public string? FusionLog { get; }

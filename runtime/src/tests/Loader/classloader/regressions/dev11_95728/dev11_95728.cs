@@ -19,27 +19,29 @@ namespace StaticFieldBug
         {
             StubClass<T>.StaticField = value;
         }
+
         public static T StaticField = default(T);
         public static T StaticProperty
         {
             get { return StaticField; }
         }
     }
-        
+
     class Program
     {
         static int Main(string[] args)
         {
             Foo<string>("Run me to crash LINQ...");
-            
+
             Console.WriteLine("PASS (we didn't crash)!");
             return 100;
         }
+
         public static void Foo<T>(T value)
         {
             Expression<Func<int, T>> lambda;
             StubClass<T> foo = new StubClass<T>((T)value);
-            lambda = i => StubClass<T>.StaticField;            
+            lambda = i => StubClass<T>.StaticField;
         }
     }
 }

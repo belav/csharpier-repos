@@ -30,9 +30,14 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
     /// once it is fully indexed, then total results will be returned.
     /// </summary>
     [Shared]
-    [ExportIncrementalAnalyzerProvider(nameof(SymbolTreeInfoIncrementalAnalyzerProvider), new[] { WorkspaceKind.RemoteWorkspace })]
+    [ExportIncrementalAnalyzerProvider(
+        nameof(SymbolTreeInfoIncrementalAnalyzerProvider),
+        new[] { WorkspaceKind.RemoteWorkspace }
+    )]
     [ExportWorkspaceServiceFactory(typeof(ISymbolTreeInfoCacheService))]
-    internal partial class SymbolTreeInfoIncrementalAnalyzerProvider : IIncrementalAnalyzerProvider, IWorkspaceServiceFactory
+    internal partial class SymbolTreeInfoIncrementalAnalyzerProvider
+        : IIncrementalAnalyzerProvider,
+          IWorkspaceServiceFactory
     {
         // Concurrent dictionaries so they can be read from the SymbolTreeInfoCacheService while they are being
         // populated/updated by the IncrementalAnalyzer.
@@ -45,14 +50,12 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolTreeInfoIncrementalAnalyzerProvider()
-        {
-        }
+        public SymbolTreeInfoIncrementalAnalyzerProvider() { }
 
-        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
-            => new SymbolTreeInfoIncrementalAnalyzer(_projectIdToInfo, _metadataIdToInfo);
+        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
+            new SymbolTreeInfoIncrementalAnalyzer(_projectIdToInfo, _metadataIdToInfo);
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new SymbolTreeInfoCacheService(_projectIdToInfo, _metadataIdToInfo);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new SymbolTreeInfoCacheService(_projectIdToInfo, _metadataIdToInfo);
     }
 }

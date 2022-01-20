@@ -14,23 +14,31 @@ public class StartupForLinkGenerator
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        var pageRouteTransformerConvention = new PageRouteTransformerConvention(new SlugifyParameterTransformer());
+        var pageRouteTransformerConvention = new PageRouteTransformerConvention(
+            new SlugifyParameterTransformer()
+        );
 
         services
             .AddMvc()
             .AddNewtonsoftJson()
-            .AddRazorPagesOptions(options =>
-            {
-                options.Conventions.AddFolderRouteModelConvention("/PageRouteTransformer", model =>
+            .AddRazorPagesOptions(
+                options =>
                 {
-                    pageRouteTransformerConvention.Apply(model);
-                });
-            });
-        services
-            .AddRouting(options =>
+                    options.Conventions.AddFolderRouteModelConvention(
+                        "/PageRouteTransformer",
+                        model =>
+                        {
+                            pageRouteTransformerConvention.Apply(model);
+                        }
+                    );
+                }
+            );
+        services.AddRouting(
+            options =>
             {
                 options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
-            });
+            }
+        );
 
         services.AddScoped<TestResponseGenerator>();
         services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -39,12 +47,17 @@ public class StartupForLinkGenerator
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapDefaultControllerRoute();
-            endpoints.MapRazorPages();
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
 
-            endpoints.MapControllerRoute("routewithnomvcparameters", "/routewithnomvcparameters/{custom}");
-        });
+                endpoints.MapControllerRoute(
+                    "routewithnomvcparameters",
+                    "/routewithnomvcparameters/{custom}"
+                );
+            }
+        );
     }
 }

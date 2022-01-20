@@ -41,9 +41,7 @@ internal class Disable2faModel<TUser> : Disable2faModel where TUser : class
     private readonly UserManager<TUser> _userManager;
     private readonly ILogger<Disable2faModel> _logger;
 
-    public Disable2faModel(
-        UserManager<TUser> userManager,
-        ILogger<Disable2faModel> logger)
+    public Disable2faModel(UserManager<TUser> userManager, ILogger<Disable2faModel> logger)
     {
         _userManager = userManager;
         _logger = logger;
@@ -59,7 +57,9 @@ internal class Disable2faModel<TUser> : Disable2faModel where TUser : class
 
         if (!await _userManager.GetTwoFactorEnabledAsync(user))
         {
-            throw new InvalidOperationException($"Cannot disable 2FA for user as it's not currently enabled.");
+            throw new InvalidOperationException(
+                $"Cannot disable 2FA for user as it's not currently enabled."
+            );
         }
 
         return Page();
@@ -80,7 +80,8 @@ internal class Disable2faModel<TUser> : Disable2faModel where TUser : class
         }
 
         _logger.LogInformation(LoggerEventIds.TwoFADisabled, "User has disabled 2fa.");
-        StatusMessage = "2fa has been disabled. You can reenable 2fa when you setup an authenticator app";
+        StatusMessage =
+            "2fa has been disabled. You can reenable 2fa when you setup an authenticator app";
         return RedirectToPage("./TwoFactorAuthentication");
     }
 }

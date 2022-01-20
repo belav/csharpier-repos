@@ -7,7 +7,8 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-internal class DefaultBoundAttributeParameterDescriptorBuilder : BoundAttributeParameterDescriptorBuilder
+internal class DefaultBoundAttributeParameterDescriptorBuilder
+    : BoundAttributeParameterDescriptorBuilder
 {
     private readonly DefaultBoundAttributeDescriptorBuilder _parent;
     private readonly string _kind;
@@ -15,7 +16,10 @@ internal class DefaultBoundAttributeParameterDescriptorBuilder : BoundAttributeP
 
     private RazorDiagnosticCollection _diagnostics;
 
-    public DefaultBoundAttributeParameterDescriptorBuilder(DefaultBoundAttributeDescriptorBuilder parent, string kind)
+    public DefaultBoundAttributeParameterDescriptorBuilder(
+        DefaultBoundAttributeDescriptorBuilder parent,
+        string kind
+    )
     {
         _parent = parent;
         _kind = kind;
@@ -67,7 +71,8 @@ internal class DefaultBoundAttributeParameterDescriptorBuilder : BoundAttributeP
             GetDisplayName(),
             CaseSensitive,
             new Dictionary<string, string>(Metadata),
-            diagnostics?.ToArray() ?? Array.Empty<RazorDiagnostic>());
+            diagnostics?.ToArray() ?? Array.Empty<RazorDiagnostic>()
+        );
 
         return descriptor;
     }
@@ -87,8 +92,10 @@ internal class DefaultBoundAttributeParameterDescriptorBuilder : BoundAttributeP
         HashSet<RazorDiagnostic> diagnostics = null;
         if (string.IsNullOrWhiteSpace(Name))
         {
-
-            var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterNullOrWhitespace(_parent.Name);
+            var diagnostic =
+                RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterNullOrWhitespace(
+                    _parent.Name
+                );
             diagnostics ??= new();
             diagnostics.Add(diagnostic);
         }
@@ -96,12 +103,17 @@ internal class DefaultBoundAttributeParameterDescriptorBuilder : BoundAttributeP
         {
             foreach (var character in Name)
             {
-                if (char.IsWhiteSpace(character) || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character))
+                if (
+                    char.IsWhiteSpace(character)
+                    || HtmlConventions.IsInvalidNonWhitespaceHtmlCharacters(character)
+                )
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterName(
-                        _parent.Name,
-                        Name,
-                        character);
+                    var diagnostic =
+                        RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterName(
+                            _parent.Name,
+                            Name,
+                            character
+                        );
 
                     diagnostics ??= new();
                     diagnostics.Add(diagnostic);

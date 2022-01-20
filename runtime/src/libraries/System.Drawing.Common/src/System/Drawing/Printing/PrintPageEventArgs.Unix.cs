@@ -35,6 +35,7 @@
 //
 using System;
 using System.Drawing;
+
 namespace System.Drawing.Printing
 {
     /// <summary>
@@ -50,63 +51,44 @@ namespace System.Drawing.Printing
         private PageSettings pageSettings;
         private GraphicsPrinter? graphics_context;
 
-        public PrintPageEventArgs(Graphics? graphics, Rectangle marginBounds,
-            Rectangle pageBounds, PageSettings pageSettings)
+        public PrintPageEventArgs(
+            Graphics? graphics,
+            Rectangle marginBounds,
+            Rectangle pageBounds,
+            PageSettings pageSettings
+        )
         {
             this.graphics = graphics;
             this.marginBounds = marginBounds;
             this.pageBounds = pageBounds;
             this.pageSettings = pageSettings;
         }
+
         public bool Cancel
         {
-            get
-            {
-                return cancel;
-            }
-            set
-            {
-                cancel = value;
-            }
+            get { return cancel; }
+            set { cancel = value; }
         }
         public Graphics? Graphics
         {
-            get
-            {
-                return graphics;
-            }
+            get { return graphics; }
         }
         public bool HasMorePages
         {
-            get
-            {
-                return hasmorePages;
-            }
-            set
-            {
-                hasmorePages = value;
-            }
+            get { return hasmorePages; }
+            set { hasmorePages = value; }
         }
         public Rectangle MarginBounds
         {
-            get
-            {
-                return marginBounds;
-            }
+            get { return marginBounds; }
         }
         public Rectangle PageBounds
         {
-            get
-            {
-                return pageBounds;
-            }
+            get { return pageBounds; }
         }
         public PageSettings PageSettings
         {
-            get
-            {
-                return pageSettings;
-            }
+            get { return pageSettings; }
         }
 
         // used in PrintDocument.Print()

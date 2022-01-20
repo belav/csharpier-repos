@@ -26,7 +26,10 @@ internal static partial class Interop
             int bufferSize = DefaultPathBufferSize;
             while (true)
             {
-                checked { bufferSize *= 2; }
+                checked
+                {
+                    bufferSize *= 2;
+                }
                 byte[] buf = ArrayPool<byte>.Shared.Rent(bufferSize);
                 try
                 {
@@ -62,7 +65,7 @@ internal static partial class Interop
             ErrorInfo errorInfo = Interop.Sys.GetLastErrorInfo();
             if (errorInfo.Error == Interop.Error.ERANGE)
             {
-               return null;
+                return null;
             }
             throw Interop.GetExceptionForIoErrno(errorInfo);
         }

@@ -111,7 +111,9 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
 
             await manager1.OnConnectedAsync(connection).DefaultTimeout();
 
-            await manager2.SendConnectionAsync(connection.ConnectionId, "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager2
+                .SendConnectionAsync(connection.ConnectionId, "Hello", new object[] { "World" })
+                .DefaultTimeout();
 
             await AssertMessageAsync(client);
         }
@@ -137,7 +139,9 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
 
             await manager1.AddToGroupAsync(connection.ConnectionId, "name").DefaultTimeout();
 
-            await manager2.SendGroupAsync("name", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager2
+                .SendGroupAsync("name", "Hello", new object[] { "World" })
+                .DefaultTimeout();
 
             await AssertMessageAsync(client);
         }
@@ -163,7 +167,9 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
 
             await manager.OnDisconnectedAsync(connection).DefaultTimeout();
 
-            await manager.SendGroupAsync("name", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager
+                .SendGroupAsync("name", "Hello", new object[] { "World" })
+                .DefaultTimeout();
 
             Assert.Null(client.TryRead());
         }
@@ -229,7 +235,9 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
 
             await manager2.AddToGroupAsync(connection.ConnectionId, "name").DefaultTimeout();
 
-            await manager2.SendGroupAsync("name", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager2
+                .SendGroupAsync("name", "Hello", new object[] { "World" })
+                .DefaultTimeout();
 
             await AssertMessageAsync(client);
         }
@@ -254,7 +262,9 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
             await manager.AddToGroupAsync(connection.ConnectionId, "name").DefaultTimeout();
             await manager.AddToGroupAsync(connection.ConnectionId, "name").DefaultTimeout();
 
-            await manager.SendGroupAsync("name", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager
+                .SendGroupAsync("name", "Hello", new object[] { "World" })
+                .DefaultTimeout();
 
             await AssertMessageAsync(client);
             Assert.Null(client.TryRead());
@@ -281,7 +291,9 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
             await manager1.AddToGroupAsync(connection.ConnectionId, "name").DefaultTimeout();
             await manager2.AddToGroupAsync(connection.ConnectionId, "name").DefaultTimeout();
 
-            await manager2.SendGroupAsync("name", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager2
+                .SendGroupAsync("name", "Hello", new object[] { "World" })
+                .DefaultTimeout();
 
             await AssertMessageAsync(client);
             Assert.Null(client.TryRead());
@@ -307,13 +319,17 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
 
             await manager1.AddToGroupAsync(connection.ConnectionId, "name").DefaultTimeout();
 
-            await manager2.SendGroupAsync("name", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager2
+                .SendGroupAsync("name", "Hello", new object[] { "World" })
+                .DefaultTimeout();
 
             await AssertMessageAsync(client);
 
             await manager2.RemoveFromGroupAsync(connection.ConnectionId, "name").DefaultTimeout();
 
-            await manager2.SendGroupAsync("name", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager2
+                .SendGroupAsync("name", "Hello", new object[] { "World" })
+                .DefaultTimeout();
 
             Assert.Null(client.TryRead());
         }
@@ -338,7 +354,9 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
             await manager1.OnConnectedAsync(connection).DefaultTimeout();
             await manager2.OnConnectedAsync(connection).DefaultTimeout();
 
-            await manager1.SendConnectionAsync(connection.ConnectionId, "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager1
+                .SendConnectionAsync(connection.ConnectionId, "Hello", new object[] { "World" })
+                .DefaultTimeout();
 
             await AssertMessageAsync(client);
             Assert.Null(client.TryRead());
@@ -365,7 +383,9 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
 
             // This doesn't throw because there is no connection.ConnectionId on this server so it has to publish to the backplane.
             // And once that happens there is no way to know if the invocation was successful or not.
-            await manager1.SendConnectionAsync(connectionMock.ConnectionId, "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager1
+                .SendConnectionAsync(connectionMock.ConnectionId, "Hello", new object[] { "World" })
+                .DefaultTimeout();
         }
     }
 
@@ -393,13 +413,17 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
             await manager.OnConnectedAsync(connection2).DefaultTimeout();
             await manager.AddToGroupAsync(connection2.ConnectionId, "group");
 
-            await manager.SendGroupAsync("group", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager
+                .SendGroupAsync("group", "Hello", new object[] { "World" })
+                .DefaultTimeout();
             // connection1 will throw when receiving a group message, we are making sure other connections
             // are not affected by another connection throwing
             await AssertMessageAsync(client2);
 
             // Repeat to check that group can still be sent to
-            await manager.SendGroupAsync("group", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager
+                .SendGroupAsync("group", "Hello", new object[] { "World" })
+                .DefaultTimeout();
             await AssertMessageAsync(client2);
         }
     }
@@ -418,15 +442,26 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
         using (var client2 = new TestClient())
         using (var client3 = new TestClient())
         {
-            var connection1 = HubConnectionContextUtils.Create(client1.Connection, userIdentifier: "userA");
-            var connection2 = HubConnectionContextUtils.Create(client2.Connection, userIdentifier: "userA");
-            var connection3 = HubConnectionContextUtils.Create(client3.Connection, userIdentifier: "userB");
+            var connection1 = HubConnectionContextUtils.Create(
+                client1.Connection,
+                userIdentifier: "userA"
+            );
+            var connection2 = HubConnectionContextUtils.Create(
+                client2.Connection,
+                userIdentifier: "userA"
+            );
+            var connection3 = HubConnectionContextUtils.Create(
+                client3.Connection,
+                userIdentifier: "userB"
+            );
 
             await manager.OnConnectedAsync(connection1).DefaultTimeout();
             await manager.OnConnectedAsync(connection2).DefaultTimeout();
             await manager.OnConnectedAsync(connection3).DefaultTimeout();
 
-            await manager.SendUserAsync("userA", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager
+                .SendUserAsync("userA", "Hello", new object[] { "World" })
+                .DefaultTimeout();
             await AssertMessageAsync(client1);
             await AssertMessageAsync(client2);
         }
@@ -446,21 +481,34 @@ public abstract class ScaleoutHubLifetimeManagerTests<TBackplane> : HubLifetimeM
         using (var client2 = new TestClient())
         using (var client3 = new TestClient())
         {
-            var connection1 = HubConnectionContextUtils.Create(client1.Connection, userIdentifier: "userA");
-            var connection2 = HubConnectionContextUtils.Create(client2.Connection, userIdentifier: "userA");
-            var connection3 = HubConnectionContextUtils.Create(client3.Connection, userIdentifier: "userB");
+            var connection1 = HubConnectionContextUtils.Create(
+                client1.Connection,
+                userIdentifier: "userA"
+            );
+            var connection2 = HubConnectionContextUtils.Create(
+                client2.Connection,
+                userIdentifier: "userA"
+            );
+            var connection3 = HubConnectionContextUtils.Create(
+                client3.Connection,
+                userIdentifier: "userB"
+            );
 
             await manager.OnConnectedAsync(connection1).DefaultTimeout();
             await manager.OnConnectedAsync(connection2).DefaultTimeout();
             await manager.OnConnectedAsync(connection3).DefaultTimeout();
 
-            await manager.SendUserAsync("userA", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager
+                .SendUserAsync("userA", "Hello", new object[] { "World" })
+                .DefaultTimeout();
             await AssertMessageAsync(client1);
             await AssertMessageAsync(client2);
 
             // Disconnect one connection for the user
             await manager.OnDisconnectedAsync(connection1).DefaultTimeout();
-            await manager.SendUserAsync("userA", "Hello", new object[] { "World" }).DefaultTimeout();
+            await manager
+                .SendUserAsync("userA", "Hello", new object[] { "World" })
+                .DefaultTimeout();
             await AssertMessageAsync(client2);
         }
     }

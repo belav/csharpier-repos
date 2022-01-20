@@ -28,14 +28,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var modelBuilder = new InternalModelBuilder(new Model());
 
-            var entityBuilder = modelBuilder.Entity(typeof(EntityWithIndex), ConfigurationSource.Convention);
+            var entityBuilder = modelBuilder.Entity(
+                typeof(EntityWithIndex),
+                ConfigurationSource.Convention
+            );
             entityBuilder.Property("Id", ConfigurationSource.Convention);
             var propABuilder = entityBuilder.Property("A", ConfigurationSource.Convention);
             var propBBuilder = entityBuilder.Property("B", ConfigurationSource.Convention);
             entityBuilder.PrimaryKey(new List<string> { "Id" }, ConfigurationSource.Convention);
 
-            var indexProperties = new List<string> { propABuilder.Metadata.Name, propBBuilder.Metadata.Name };
-            var indexBuilder = entityBuilder.HasIndex(indexProperties, "IndexOnAAndB", ConfigurationSource.Convention);
+            var indexProperties = new List<string>
+            {
+                propABuilder.Metadata.Name,
+                propBBuilder.Metadata.Name
+            };
+            var indexBuilder = entityBuilder.HasIndex(
+                indexProperties,
+                "IndexOnAAndB",
+                ConfigurationSource.Convention
+            );
             indexBuilder.IsUnique(false, ConfigurationSource.Convention);
 
             RunConvention(entityBuilder);
@@ -45,11 +56,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(ConfigurationSource.DataAnnotation, index.GetConfigurationSource());
             Assert.Equal("IndexOnAAndB", index.Name);
             Assert.True(index.IsUnique);
-            Assert.Equal(ConfigurationSource.DataAnnotation, index.GetIsUniqueConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.DataAnnotation,
+                index.GetIsUniqueConfigurationSource()
+            );
             Assert.Collection(
                 index.Properties,
                 prop0 => Assert.Equal("A", prop0.Name),
-                prop1 => Assert.Equal("B", prop1.Name));
+                prop1 => Assert.Equal("B", prop1.Name)
+            );
         }
 
         [ConditionalFact]
@@ -58,8 +73,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
             var entityBuilder = modelBuilder.Entity<EntityWithIndex>();
 
-            entityBuilder.HasIndex(new[] { "A", "B" }, "IndexOnAAndB")
-                .IsUnique(false);
+            entityBuilder.HasIndex(new[] { "A", "B" }, "IndexOnAAndB").IsUnique(false);
 
             modelBuilder.Model.FinalizeModel();
 
@@ -71,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Collection(
                 index.Properties,
                 prop0 => Assert.Equal("A", prop0.Name),
-                prop1 => Assert.Equal("B", prop1.Name));
+                prop1 => Assert.Equal("B", prop1.Name)
+            );
         }
 
         [ConditionalFact]
@@ -82,21 +97,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(
                 AbstractionsStrings.CollectionArgumentIsEmpty("propertyNames"),
                 Assert.Throws<ArgumentException>(
-                    () => modelBuilder.Entity<EntityWithInvalidEmptyIndex>()).Message);
+                    () => modelBuilder.Entity<EntityWithInvalidEmptyIndex>()
+                ).Message
+            );
         }
 
         [InlineData(typeof(EntityWithInvalidNullIndexProperty))]
         [InlineData(typeof(EntityWithInvalidEmptyIndexProperty))]
         [InlineData(typeof(EntityWithInvalidWhiteSpaceIndexProperty))]
         [ConditionalTheory]
-        public void IndexAttribute_properties_cannot_include_whitespace(Type entityTypeWithInvalidIndex)
+        public void IndexAttribute_properties_cannot_include_whitespace(
+            Type entityTypeWithInvalidIndex
+        )
         {
             var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
             Assert.Equal(
                 AbstractionsStrings.CollectionArgumentHasEmptyElements("propertyNames"),
                 Assert.Throws<ArgumentException>(
-                    () => modelBuilder.Entity(entityTypeWithInvalidIndex)).Message);
+                    () => modelBuilder.Entity(entityTypeWithInvalidIndex)
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -113,21 +134,29 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.Equal(ConfigurationSource.DataAnnotation, index0.GetConfigurationSource());
             Assert.Equal("IndexOnAAndB", index0.Name);
             Assert.True(index0.IsUnique);
-            Assert.Equal(ConfigurationSource.DataAnnotation, index0.GetIsUniqueConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.DataAnnotation,
+                index0.GetIsUniqueConfigurationSource()
+            );
             Assert.Collection(
                 index0.Properties,
                 prop0 => Assert.Equal("A", prop0.Name),
-                prop1 => Assert.Equal("B", prop1.Name));
+                prop1 => Assert.Equal("B", prop1.Name)
+            );
 
             var index1 = (Index)indexes.Skip(1).First();
             Assert.Equal(ConfigurationSource.DataAnnotation, index1.GetConfigurationSource());
             Assert.Equal("IndexOnBAndC", index1.Name);
             Assert.False(index1.IsUnique);
-            Assert.Equal(ConfigurationSource.DataAnnotation, index1.GetIsUniqueConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.DataAnnotation,
+                index1.GetIsUniqueConfigurationSource()
+            );
             Assert.Collection(
                 index1.Properties,
                 prop0 => Assert.Equal("B", prop0.Name),
-                prop1 => Assert.Equal("C", prop1.Name));
+                prop1 => Assert.Equal("C", prop1.Name)
+            );
         }
 
         [ConditionalFact]
@@ -139,19 +168,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             // assert that the base type is not part of the model
             Assert.Empty(
-                modelBuilder.Model.GetEntityTypes()
-                    .Where(e => e.ClrType == typeof(BaseUnmappedEntityWithIndex)));
+                modelBuilder.Model
+                    .GetEntityTypes()
+                    .Where(e => e.ClrType == typeof(BaseUnmappedEntityWithIndex))
+            );
 
             // assert that we see the index anyway
             var index = (Index)entityBuilder.Metadata.GetIndexes().Single();
             Assert.Equal(ConfigurationSource.DataAnnotation, index.GetConfigurationSource());
             Assert.Equal("IndexOnAAndB", index.Name);
             Assert.True(index.IsUnique);
-            Assert.Equal(ConfigurationSource.DataAnnotation, index.GetIsUniqueConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.DataAnnotation,
+                index.GetIsUniqueConfigurationSource()
+            );
             Assert.Collection(
                 index.Properties,
                 prop0 => Assert.Equal("A", prop0.Name),
-                prop1 => Assert.Equal("B", prop1.Name));
+                prop1 => Assert.Equal("B", prop1.Name)
+            );
         }
 
         [ConditionalFact]
@@ -164,9 +199,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 CoreStrings.UnnamedIndexDefinedOnIgnoredProperty(
                     nameof(EntityUnnamedIndexWithIgnoredProperty),
                     "{'A', 'B'}",
-                    "B"),
+                    "B"
+                ),
                 Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Model.FinalizeModel()).Message);
+                    () => modelBuilder.Model.FinalizeModel()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -180,9 +218,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     "IndexOnAAndIgnoredProperty",
                     nameof(EntityIndexWithIgnoredProperty),
                     "{'A', 'B'}",
-                    "B"),
+                    "B"
+                ),
                 Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Model.FinalizeModel()).Message);
+                    () => modelBuilder.Model.FinalizeModel()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -195,9 +236,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 CoreStrings.UnnamedIndexDefinedOnNonExistentProperty(
                     nameof(EntityUnnamedIndexWithNonExistentProperty),
                     "{'A', 'DoesNotExist'}",
-                    "DoesNotExist"),
+                    "DoesNotExist"
+                ),
                 Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Model.FinalizeModel()).Message);
+                    () => modelBuilder.Model.FinalizeModel()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -211,9 +255,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     "IndexOnAAndNonExistentProperty",
                     nameof(EntityIndexWithNonExistentProperty),
                     "{'A', 'DoesNotExist'}",
-                    "DoesNotExist"),
+                    "DoesNotExist"
+                ),
                 Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Model.FinalizeModel()).Message);
+                    () => modelBuilder.Model.FinalizeModel()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -238,8 +285,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Assert.NotNull(childEntityBuilder.Metadata.BaseType);
 
             // The Index is replicated on the Parent type, but not on the Child.
-            var index = (Index)
-                Assert.Single(parentEntityBuilder.Metadata.GetDeclaredIndexes());
+            var index = (Index)Assert.Single(parentEntityBuilder.Metadata.GetDeclaredIndexes());
             Assert.Equal(ConfigurationSource.DataAnnotation, index.GetConfigurationSource());
             Assert.Equal("IndexOnGrandparentGetsReplicatedToParent", index.Name);
             Assert.False(index.IsUnique);
@@ -249,12 +295,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             // The Child still has its own index even though
             // the property is defined on the Grandparent type.
-            var childIndex = (Index)
-                Assert.Single(childEntityBuilder.Metadata.GetDeclaredIndexes());
+            var childIndex = (Index)Assert.Single(childEntityBuilder.Metadata.GetDeclaredIndexes());
             Assert.Equal(ConfigurationSource.DataAnnotation, childIndex.GetConfigurationSource());
             Assert.Equal("IndexOnChildUnaffectedWhenParentBaseTypeRemoved", childIndex.Name);
             Assert.True(childIndex.IsUnique);
-            Assert.Equal(ConfigurationSource.DataAnnotation, childIndex.GetIsUniqueConfigurationSource());
+            Assert.Equal(
+                ConfigurationSource.DataAnnotation,
+                childIndex.GetIsUniqueConfigurationSource()
+            );
             var childIndexProperty = Assert.Single(childIndex.Properties);
             Assert.Equal("A", childIndexProperty.Name);
 
@@ -273,15 +321,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             entityBuilder.Property<int>("Y");
             modelBuilder.Model.FinalizeModel();
 
-            var index = (Index)
-                Assert.Single(entityBuilder.Metadata.GetDeclaredIndexes());
+            var index = (Index)Assert.Single(entityBuilder.Metadata.GetDeclaredIndexes());
 
             Assert.Equal(ConfigurationSource.DataAnnotation, index.GetConfigurationSource());
             Assert.Equal("IndexOnShadowProperty", index.Name);
             Assert.Collection(
                 index.Properties,
                 prop0 => Assert.Equal("X", prop0.Name),
-                prop1 => Assert.Equal("Y", prop1.Name));
+                prop1 => Assert.Equal("Y", prop1.Name)
+            );
         }
 
         [ConditionalFact]
@@ -291,15 +339,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var entityBuilder = modelBuilder.Entity(typeof(EntityWithIndexOnPrivateProperty));
             modelBuilder.Model.FinalizeModel();
 
-            var index = (Index)
-                Assert.Single(entityBuilder.Metadata.GetDeclaredIndexes());
+            var index = (Index)Assert.Single(entityBuilder.Metadata.GetDeclaredIndexes());
 
             Assert.Equal(ConfigurationSource.DataAnnotation, index.GetConfigurationSource());
             Assert.Equal("IndexOnPrivateProperty", index.Name);
             Assert.Collection(
                 index.Properties,
                 prop0 => Assert.Equal("X", prop0.Name),
-                prop1 => Assert.Equal("Y", prop1.Name));
+                prop1 => Assert.Equal("Y", prop1.Name)
+            );
         }
 
         #endregion
@@ -307,23 +355,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void RunConvention(InternalEntityTypeBuilder entityTypeBuilder)
         {
             var context = new ConventionContext<IConventionEntityTypeBuilder>(
-                entityTypeBuilder.Metadata.Model.ConventionDispatcher);
+                entityTypeBuilder.Metadata.Model.ConventionDispatcher
+            );
 
             CreateIndexAttributeConvention().ProcessEntityTypeAdded(entityTypeBuilder, context);
         }
 
         private void RunConvention(InternalModelBuilder modelBuilder)
         {
-            var context = new ConventionContext<IConventionModelBuilder>(modelBuilder.Metadata.ConventionDispatcher);
+            var context = new ConventionContext<IConventionModelBuilder>(
+                modelBuilder.Metadata.ConventionDispatcher
+            );
 
             CreateIndexAttributeConvention().ProcessModelFinalizing(modelBuilder, context);
         }
 
-        private IndexAttributeConvention CreateIndexAttributeConvention()
-            => new(CreateDependencies());
+        private IndexAttributeConvention CreateIndexAttributeConvention() =>
+            new(CreateDependencies());
 
-        private ProviderConventionSetBuilderDependencies CreateDependencies()
-            => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+        private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
+                .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         [Index(nameof(A), nameof(B), Name = "IndexOnAAndB", IsUnique = true)]
         private class EntityWithIndex
@@ -440,7 +493,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public int D { get; set; }
         }
 
-        [Index(nameof(A), Name = "IndexOnChildUnaffectedWhenParentBaseTypeRemoved", IsUnique = true)]
+        [Index(
+            nameof(A),
+            Name = "IndexOnChildUnaffectedWhenParentBaseTypeRemoved",
+            IsUnique = true
+        )]
         private class ChildEntity : ParentEntity
         {
             public int E { get; set; }

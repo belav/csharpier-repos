@@ -93,64 +93,81 @@ namespace IdeBenchmarks.InheritanceMargin
         [Benchmark]
         public void BenchmarkGlyphRefresh()
         {
-            RunOnUIThread(() =>
-            {
-                for (var i = 0; i < Iterations; i++)
+            RunOnUIThread(
+                () =>
                 {
-                    // Add & remove glyphs from the Canvas, which simulates the real refreshing scenanrio when user is scrolling up/down.
-                    for (var j = 0; j < _tags.Length; j++)
+                    for (var i = 0; i < Iterations; i++)
                     {
-                        var tag = _tags[j];
-                        var glyph = new InheritanceMarginGlyph(
-                            _threadingContext,
-                            _streamingFindUsagesPresenter,
-                            _classificationTypeMap,
-                            _classificationFormatMap,
-                            _operationExecutor,
-                            tag,
-                            _mockTextView,
-                            _listener);
-                        Canvas.SetTop(glyph, j * WidthAndHeightOfGlyph);
-                        _canvas.Children.Add(glyph);
+                        // Add & remove glyphs from the Canvas, which simulates the real refreshing scenanrio when user is scrolling up/down.
+                        for (var j = 0; j < _tags.Length; j++)
+                        {
+                            var tag = _tags[j];
+                            var glyph = new InheritanceMarginGlyph(
+                                _threadingContext,
+                                _streamingFindUsagesPresenter,
+                                _classificationTypeMap,
+                                _classificationFormatMap,
+                                _operationExecutor,
+                                tag,
+                                _mockTextView,
+                                _listener
+                            );
+                            Canvas.SetTop(glyph, j * WidthAndHeightOfGlyph);
+                            _canvas.Children.Add(glyph);
+                        }
+                        _canvas.Measure(new Size(WidthAndHeightOfGlyph, HeightOfCanvas));
+                        _canvas.Children.Clear();
                     }
-                    _canvas.Measure(new Size(WidthAndHeightOfGlyph, HeightOfCanvas));
-                    _canvas.Children.Clear();
                 }
-            });
+            );
         }
 
         private async Task PrepareGlyphRequiredDataAsync(CancellationToken cancellationToken)
         {
             var testFile = CreateTestFile();
             using var workspace = TestWorkspace.CreateCSharp(testFile);
-            var items = await BenchmarksHelpers.GenerateInheritanceMarginItemsAsync(workspace.CurrentSolution, cancellationToken).ConfigureAwait(false);
+            var items = await BenchmarksHelpers
+                .GenerateInheritanceMarginItemsAsync(workspace.CurrentSolution, cancellationToken)
+                .ConfigureAwait(false);
 
-            using var _ = Microsoft.CodeAnalysis.PooledObjects.ArrayBuilder<InheritanceMarginTag>.GetInstance(out var builder);
+            using var _ =
+                Microsoft.CodeAnalysis.PooledObjects.ArrayBuilder<InheritanceMarginTag>.GetInstance(
+                    out var builder
+                );
             foreach (var grouping in items.GroupBy(i => i.LineNumber))
             {
-                builder.Add(new InheritanceMarginTag(workspace, grouping.Key, grouping.ToImmutableArray()));
+                builder.Add(
+                    new InheritanceMarginTag(workspace, grouping.Key, grouping.ToImmutableArray())
+                );
             }
 
             _tags = builder.ToImmutableArray();
             var exportProvider = workspace.ExportProvider;
             _threadingContext = exportProvider.GetExportedValue<IThreadingContext>();
-            _streamingFindUsagesPresenter = exportProvider.GetExportedValue<IStreamingFindUsagesPresenter>();
+            _streamingFindUsagesPresenter =
+                exportProvider.GetExportedValue<IStreamingFindUsagesPresenter>();
             _classificationTypeMap = exportProvider.GetExportedValue<ClassificationTypeMap>();
-            var classificationFormatMapService = exportProvider.GetExportedValue<IClassificationFormatMapService>();
-            _classificationFormatMap = classificationFormatMapService.GetClassificationFormatMap("tooltip");
+            var classificationFormatMapService =
+                exportProvider.GetExportedValue<IClassificationFormatMapService>();
+            _classificationFormatMap = classificationFormatMapService.GetClassificationFormatMap(
+                "tooltip"
+            );
             _operationExecutor = exportProvider.GetExportedValue<IUIThreadOperationExecutor>();
-            var listenerProvider = exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
             _listener = listenerProvider.GetListener(FeatureAttribute.InheritanceMargin);
         }
 
         private void RunOnUIThread(Action action)
         {
 #pragma warning disable VSTHRD001 // Only used for Benchmark purpose
-            _wpfApp.Dispatcher.Invoke(() =>
+            _wpfApp.Dispatcher.Invoke(
+                () =>
 #pragma warning restore VSTHRD001
-            {
-                action?.Invoke();
-            });
+                {
+                    action?.Invoke();
+                }
+            );
         }
 
         private Task SetupWpfApplicaitonAsync()
@@ -158,25 +175,27 @@ namespace IdeBenchmarks.InheritanceMargin
             if (Application.Current == null)
             {
                 var tcs = new TaskCompletionSource<bool>();
-                var mainThread = new Thread(() =>
-                {
-                    _wpfApp = new Application();
-                    _wpfApp.MainWindow = new Window();
-                    _wpfApp.Startup += (sender, args) =>
+                var mainThread = new Thread(
+                    () =>
                     {
-                        tcs.SetResult(true);
-                    };
+                        _wpfApp = new Application();
+                        _wpfApp.MainWindow = new Window();
+                        _wpfApp.Startup += (sender, args) =>
+                        {
+                            tcs.SetResult(true);
+                        };
 
-                    _canvas = new Canvas()
-                    {
-                        ClipToBounds = true,
-                        Width = WidthAndHeightOfGlyph,
-                        Height = HeightOfCanvas
-                    };
+                        _canvas = new Canvas()
+                        {
+                            ClipToBounds = true,
+                            Width = WidthAndHeightOfGlyph,
+                            Height = HeightOfCanvas
+                        };
 
-                    _wpfApp.MainWindow.Content = _canvas;
-                    _wpfApp.Run();
-                });
+                        _wpfApp.MainWindow.Content = _canvas;
+                        _wpfApp.Run();
+                    }
+                );
 
                 mainThread.SetApartmentState(ApartmentState.STA);
                 mainThread.Start();
@@ -192,32 +211,42 @@ namespace IdeBenchmarks.InheritanceMargin
             var builder = new StringBuilder();
             builder.Append(@"using System;");
             builder.Append(Environment.NewLine);
-            builder.Append(@"namespace TestNs
+            builder.Append(
+                @"namespace TestNs
 {
-");
-            builder.Append(@"   public interface IBar
+"
+            );
+            builder.Append(
+                @"   public interface IBar
     {
-");
+"
+            );
             for (var i = 0; i < MemberCount; i++)
             {
                 builder.Append($"       int Method{i}();");
                 builder.Append(Environment.NewLine);
             }
 
-            builder.Append(@"   }
-");
+            builder.Append(
+                @"   }
+"
+            );
 
-            builder.Append(@"       public class Bar : IBar
+            builder.Append(
+                @"       public class Bar : IBar
     {
-");
+"
+            );
             for (var i = 0; i < MemberCount; i++)
             {
                 builder.Append($"       public int Method{i}() => 1");
                 builder.Append(Environment.NewLine);
             }
 
-            builder.Append(@"   }
-");
+            builder.Append(
+                @"   }
+"
+            );
 
             builder.Append('}');
             return builder.ToString();

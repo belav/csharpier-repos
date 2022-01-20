@@ -26,18 +26,35 @@ namespace Microsoft.CodeAnalysis
         private ModuleMetadata(PEReader peReader)
             : base(isImageOwner: true, id: MetadataId.CreateNewId())
         {
-            _module = new PEModule(this, peReader: peReader, metadataOpt: IntPtr.Zero, metadataSizeOpt: 0, includeEmbeddedInteropTypes: false, ignoreAssemblyRefs: false);
+            _module = new PEModule(
+                this,
+                peReader: peReader,
+                metadataOpt: IntPtr.Zero,
+                metadataSizeOpt: 0,
+                includeEmbeddedInteropTypes: false,
+                ignoreAssemblyRefs: false
+            );
         }
 
-        private ModuleMetadata(IntPtr metadata, int size, bool includeEmbeddedInteropTypes, bool ignoreAssemblyRefs)
-            : base(isImageOwner: true, id: MetadataId.CreateNewId())
+        private ModuleMetadata(
+            IntPtr metadata,
+            int size,
+            bool includeEmbeddedInteropTypes,
+            bool ignoreAssemblyRefs
+        ) : base(isImageOwner: true, id: MetadataId.CreateNewId())
         {
-            _module = new PEModule(this, peReader: null, metadataOpt: metadata, metadataSizeOpt: size, includeEmbeddedInteropTypes: includeEmbeddedInteropTypes, ignoreAssemblyRefs: ignoreAssemblyRefs);
+            _module = new PEModule(
+                this,
+                peReader: null,
+                metadataOpt: metadata,
+                metadataSizeOpt: size,
+                includeEmbeddedInteropTypes: includeEmbeddedInteropTypes,
+                ignoreAssemblyRefs: ignoreAssemblyRefs
+            );
         }
 
         // creates a copy
-        private ModuleMetadata(ModuleMetadata metadata)
-            : base(isImageOwner: false, id: metadata.Id)
+        private ModuleMetadata(ModuleMetadata metadata) : base(isImageOwner: false, id: metadata.Id)
         {
             _module = metadata.Module;
         }
@@ -59,17 +76,35 @@ namespace Microsoft.CodeAnalysis
 
             if (size <= 0)
             {
-                throw new ArgumentOutOfRangeException(CodeAnalysisResources.SizeHasToBePositive, nameof(size));
+                throw new ArgumentOutOfRangeException(
+                    CodeAnalysisResources.SizeHasToBePositive,
+                    nameof(size)
+                );
             }
 
-            return new ModuleMetadata(metadata, size, includeEmbeddedInteropTypes: false, ignoreAssemblyRefs: false);
+            return new ModuleMetadata(
+                metadata,
+                size,
+                includeEmbeddedInteropTypes: false,
+                ignoreAssemblyRefs: false
+            );
         }
 
-        internal static ModuleMetadata CreateFromMetadata(IntPtr metadata, int size, bool includeEmbeddedInteropTypes, bool ignoreAssemblyRefs = false)
+        internal static ModuleMetadata CreateFromMetadata(
+            IntPtr metadata,
+            int size,
+            bool includeEmbeddedInteropTypes,
+            bool ignoreAssemblyRefs = false
+        )
         {
             Debug.Assert(metadata != IntPtr.Zero);
             Debug.Assert(size > 0);
-            return new ModuleMetadata(metadata, size, includeEmbeddedInteropTypes, ignoreAssemblyRefs);
+            return new ModuleMetadata(
+                metadata,
+                size,
+                includeEmbeddedInteropTypes,
+                ignoreAssemblyRefs
+            );
         }
 
         /// <summary>
@@ -88,7 +123,10 @@ namespace Microsoft.CodeAnalysis
 
             if (size <= 0)
             {
-                throw new ArgumentOutOfRangeException(CodeAnalysisResources.SizeHasToBePositive, nameof(size));
+                throw new ArgumentOutOfRangeException(
+                    CodeAnalysisResources.SizeHasToBePositive,
+                    nameof(size)
+                );
             }
 
             return new ModuleMetadata(new PEReader((byte*)peImage, size));
@@ -136,7 +174,10 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="ArgumentException">The stream doesn't support seek operations.</exception>
         public static ModuleMetadata CreateFromStream(Stream peStream, bool leaveOpen = false)
         {
-            return CreateFromStream(peStream, leaveOpen ? PEStreamOptions.LeaveOpen : PEStreamOptions.Default);
+            return CreateFromStream(
+                peStream,
+                leaveOpen ? PEStreamOptions.LeaveOpen : PEStreamOptions.Default
+            );
         }
 
         /// <summary>
@@ -166,11 +207,18 @@ namespace Microsoft.CodeAnalysis
 
             if (!peStream.CanRead || !peStream.CanSeek)
             {
-                throw new ArgumentException(CodeAnalysisResources.StreamMustSupportReadAndSeek, nameof(peStream));
+                throw new ArgumentException(
+                    CodeAnalysisResources.StreamMustSupportReadAndSeek,
+                    nameof(peStream)
+                );
             }
 
-            // Workaround of issue https://github.com/dotnet/corefx/issues/1815: 
-            if (peStream.Length == 0 && (options & PEStreamOptions.PrefetchEntireImage) != 0 && (options & PEStreamOptions.PrefetchMetadata) != 0)
+            // Workaround of issue https://github.com/dotnet/corefx/issues/1815:
+            if (
+                peStream.Length == 0
+                && (options & PEStreamOptions.PrefetchEntireImage) != 0
+                && (options & PEStreamOptions.PrefetchMetadata) != 0
+            )
             {
                 // throws BadImageFormatException:
                 new PEHeaders(peStream);
@@ -195,7 +243,14 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="NotSupportedException">Reading from a file path is not supported by the platform.</exception>
         public static ModuleMetadata CreateFromFile(string path)
         {
-            return CreateFromStream(StandardFileSystem.Instance.OpenFileWithNormalizedException(path, FileMode.Open, FileAccess.Read, FileShare.Read));
+            return CreateFromStream(
+                StandardFileSystem.Instance.OpenFileWithNormalizedException(
+                    path,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read
+                )
+            );
         }
 
         /// <summary>
@@ -306,9 +361,19 @@ namespace Microsoft.CodeAnalysis
         /// <param name="filePath">Path describing the location of the metadata, or null if the metadata have no location.</param>
         /// <param name="display">Display string used in error messages to identity the reference.</param>
         /// <returns>A reference to the module metadata.</returns>
-        public PortableExecutableReference GetReference(DocumentationProvider? documentation = null, string? filePath = null, string? display = null)
+        public PortableExecutableReference GetReference(
+            DocumentationProvider? documentation = null,
+            string? filePath = null,
+            string? display = null
+        )
         {
-            return new MetadataImageReference(this, MetadataReferenceProperties.Module, documentation, filePath, display);
+            return new MetadataImageReference(
+                this,
+                MetadataReferenceProperties.Module,
+                documentation,
+                filePath,
+                display
+            );
         }
     }
 }

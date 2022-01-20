@@ -16,51 +16,118 @@ using static Microsoft.CodeAnalysis.NavigationBar.RoslynNavigationBarItem;
 
 namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
 {
-    internal abstract class AbstractEditorNavigationBarItemService : ForegroundThreadAffinitizedObject, INavigationBarItemService
+    internal abstract class AbstractEditorNavigationBarItemService
+        : ForegroundThreadAffinitizedObject,
+          INavigationBarItemService
     {
         protected AbstractEditorNavigationBarItemService(IThreadingContext threadingContext)
-            : base(threadingContext, assertIsForeground: false)
+            : base(threadingContext, assertIsForeground: false) { }
+
+        protected abstract Task<bool> TryNavigateToItemAsync(
+            Document document,
+            WrappedNavigationBarItem item,
+            ITextView textView,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        );
+
+        public async Task<ImmutableArray<NavigationBarItem>> GetItemsAsync(
+            Document document,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        )
         {
+            var service =
+                document.GetRequiredLanguageService<CodeAnalysis.NavigationBar.INavigationBarItemService>();
+            var workspaceSupportsDocumentChanges =
+                document.Project.Solution.Workspace.CanApplyChange(ApplyChangesKind.ChangeDocument);
+            var items = await service
+                .GetItemsAsync(document, workspaceSupportsDocumentChanges, cancellationToken)
+                .ConfigureAwait(false);
+            return items.SelectAsArray(
+                v => (NavigationBarItem)new WrappedNavigationBarItem(textVersion, v)
+            );
         }
 
-        protected abstract Task<bool> TryNavigateToItemAsync(Document document, WrappedNavigationBarItem item, ITextView textView, ITextVersion textVersion, CancellationToken cancellationToken);
-
-        public async Task<ImmutableArray<NavigationBarItem>> GetItemsAsync(Document document, ITextVersion textVersion, CancellationToken cancellationToken)
-        {
-            var service = document.GetRequiredLanguageService<CodeAnalysis.NavigationBar.INavigationBarItemService>();
-            var workspaceSupportsDocumentChanges = document.Project.Solution.Workspace.CanApplyChange(ApplyChangesKind.ChangeDocument);
-            var items = await service.GetItemsAsync(document, workspaceSupportsDocumentChanges, cancellationToken).ConfigureAwait(false);
-            return items.SelectAsArray(v => (NavigationBarItem)new WrappedNavigationBarItem(textVersion, v));
-        }
-
-        public Task<bool> TryNavigateToItemAsync(Document document, NavigationBarItem item, ITextView textView, ITextVersion textVersion, CancellationToken cancellationToken)
-            => TryNavigateToItemAsync(document, (WrappedNavigationBarItem)item, textView, textVersion, cancellationToken);
+        public Task<bool> TryNavigateToItemAsync(
+            Document document,
+            NavigationBarItem item,
+            ITextView textView,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        ) =>
+            TryNavigateToItemAsync(
+                document,
+                (WrappedNavigationBarItem)item,
+                textView,
+                textVersion,
+                cancellationToken
+            );
 
         protected async Task NavigateToSymbolItemAsync(
-            Document document, NavigationBarItem item, SymbolItem symbolItem, ITextVersion textVersion, CancellationToken cancellationToken)
+            Document document,
+            NavigationBarItem item,
+            SymbolItem symbolItem,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        )
         {
             var workspace = document.Project.Solution.Workspace;
 
             var (documentId, position, virtualSpace) = await GetNavigationLocationAsync(
-                document, item, symbolItem, textVersion, cancellationToken).ConfigureAwait(false);
+                    document,
+                    item,
+                    symbolItem,
+                    textVersion,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Ensure we're back on the UI thread before either navigating or showing a failure message.
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
             NavigateToPosition(workspace, documentId, position, virtualSpace, cancellationToken);
         }
 
-        protected void NavigateToPosition(Workspace workspace, DocumentId documentId, int position, int virtualSpace, CancellationToken cancellationToken)
+        protected void NavigateToPosition(
+            Workspace workspace,
+            DocumentId documentId,
+            int position,
+            int virtualSpace,
+            CancellationToken cancellationToken
+        )
         {
             this.AssertIsForeground();
-            var navigationService = workspace.Services.GetRequiredService<IDocumentNavigationService>();
-            if (navigationService.CanNavigateToPosition(workspace, documentId, position, virtualSpace, cancellationToken))
+            var navigationService =
+                workspace.Services.GetRequiredService<IDocumentNavigationService>();
+            if (
+                navigationService.CanNavigateToPosition(
+                    workspace,
+                    documentId,
+                    position,
+                    virtualSpace,
+                    cancellationToken
+                )
+            )
             {
-                navigationService.TryNavigateToPosition(workspace, documentId, position, virtualSpace, options: null, cancellationToken);
+                navigationService.TryNavigateToPosition(
+                    workspace,
+                    documentId,
+                    position,
+                    virtualSpace,
+                    options: null,
+                    cancellationToken
+                );
             }
             else
             {
-                var notificationService = workspace.Services.GetRequiredService<INotificationService>();
-                notificationService.SendNotification(EditorFeaturesResources.The_definition_of_the_object_is_hidden, severity: NotificationSeverity.Error);
+                var notificationService =
+                    workspace.Services.GetRequiredService<INotificationService>();
+                notificationService.SendNotification(
+                    EditorFeaturesResources.The_definition_of_the_object_is_hidden,
+                    severity: NotificationSeverity.Error
+                );
             }
         }
 
@@ -69,13 +136,17 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
             NavigationBarItem item,
             SymbolItem symbolItem,
             ITextVersion textVersion,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (symbolItem.Location.InDocumentInfo != null)
             {
                 // If the item points to a location in this document, then just determine the where that span currently
                 // is (in case recent edits have moved it) and navigate there.
-                var navigationSpan = item.GetCurrentItemSpan(textVersion, symbolItem.Location.InDocumentInfo.Value.navigationSpan);
+                var navigationSpan = item.GetCurrentItemSpan(
+                    textVersion,
+                    symbolItem.Location.InDocumentInfo.Value.navigationSpan
+                );
                 return Task.FromResult((document.Id, navigationSpan.Start, 0));
             }
             else

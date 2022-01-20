@@ -5,17 +5,20 @@
 namespace Test
 {
     using System;
+
     class AA
     {
         public int[] m_anField1 = new int[7];
+
         public static void Method1()
         {
             AA[] local2 = new AA[7];
             while (true)
             {
-                local2[2].m_anField1 = new AA().m_anField1;	//this will blow up
+                local2[2].m_anField1 = new AA().m_anField1; //this will blow up
             }
         }
+
         static int Main()
         {
             try

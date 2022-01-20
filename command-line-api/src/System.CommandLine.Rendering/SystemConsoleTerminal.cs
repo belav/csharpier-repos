@@ -48,7 +48,8 @@ namespace System.CommandLine.Rendering
             System.Console.BackgroundColor = _initialBackgroundColor;
         }
 
-        public override void SetCursorPosition(int left, int top) => System.Console.SetCursorPosition(left, top);
+        public override void SetCursorPosition(int left, int top) =>
+            System.Console.SetCursorPosition(left, top);
 
         protected override void Dispose(bool disposing)
         {

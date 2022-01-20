@@ -104,18 +104,22 @@ namespace System.Collections.Immutable
             /// </value>
             public IEqualityComparer<T> KeyComparer
             {
-                get
-                {
-                    return _equalityComparer;
-                }
-
+                get { return _equalityComparer; }
                 set
                 {
                     Requires.NotNull(value, nameof(value));
 
                     if (value != _equalityComparer)
                     {
-                        var result = Union(this, new MutationInput(SortedInt32KeyNode<HashBucket>.EmptyNode, value, _hashBucketEqualityComparer, 0));
+                        var result = Union(
+                            this,
+                            new MutationInput(
+                                SortedInt32KeyNode<HashBucket>.EmptyNode,
+                                value,
+                                _hashBucketEqualityComparer,
+                                0
+                            )
+                        );
 
                         _immutable = null;
                         _equalityComparer = value;
@@ -138,7 +142,15 @@ namespace System.Collections.Immutable
             /// </summary>
             private MutationInput Origin
             {
-                get { return new MutationInput(this.Root, _equalityComparer, _hashBucketEqualityComparer, _count); }
+                get
+                {
+                    return new MutationInput(
+                        this.Root,
+                        _equalityComparer,
+                        _hashBucketEqualityComparer,
+                        _count
+                    );
+                }
             }
 
             /// <summary>
@@ -146,11 +158,7 @@ namespace System.Collections.Immutable
             /// </summary>
             private SortedInt32KeyNode<HashBucket> Root
             {
-                get
-                {
-                    return _root;
-                }
-
+                get { return _root; }
                 set
                 {
                     // We *always* increment the version number because some mutations
@@ -279,7 +287,12 @@ namespace System.Collections.Immutable
             /// <param name="other">The collection of items to remove from the set.</param>
             public void ExceptWith(IEnumerable<T> other)
             {
-                var result = ImmutableHashSet<T>.Except(other, _equalityComparer, _hashBucketEqualityComparer, _root);
+                var result = ImmutableHashSet<T>.Except(
+                    other,
+                    _equalityComparer,
+                    _hashBucketEqualityComparer,
+                    _root
+                );
                 this.Apply(result);
             }
 

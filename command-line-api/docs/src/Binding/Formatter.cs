@@ -49,12 +49,16 @@ namespace Binding
 
                     default:
 
-                        foreach (var property in obj.GetType()
-                                                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                                                    .Where(p => p.CanRead)
-                                                    .OrderBy(p => p.Name))
+                        foreach (
+                            var property in obj.GetType()
+                                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                                .Where(p => p.CanRead)
+                                .OrderBy(p => p.Name)
+                        )
                         {
-                            sb.AppendLine($"{property.Name}: {property.GetValue(obj)} ({property.PropertyType})");
+                            sb.AppendLine(
+                                $"{property.Name}: {property.GetValue(obj)} ({property.PropertyType})"
+                            );
                         }
 
                         break;

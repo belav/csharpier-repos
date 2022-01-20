@@ -28,9 +28,7 @@ public abstract class LinkGeneratorTestBase
         return services;
     }
 
-    protected virtual void AddAdditionalServices(IServiceCollection services)
-    {
-    }
+    protected virtual void AddAdditionalServices(IServiceCollection services) { }
 
     private protected DefaultLinkGenerator CreateLinkGenerator(params Endpoint[] endpoints)
     {
@@ -39,9 +37,13 @@ public abstract class LinkGeneratorTestBase
 
     private protected DefaultLinkGenerator CreateLinkGenerator(
         Action<IServiceCollection> configureServices,
-        params Endpoint[] endpoints)
+        params Endpoint[] endpoints
+    )
     {
-        return CreateLinkGenerator(configureServices, new[] { new DefaultEndpointDataSource(endpoints ?? Array.Empty<Endpoint>()) });
+        return CreateLinkGenerator(
+            configureServices,
+            new[] { new DefaultEndpointDataSource(endpoints ?? Array.Empty<Endpoint>()) }
+        );
     }
 
     private protected DefaultLinkGenerator CreateLinkGenerator(EndpointDataSource[] dataSources)
@@ -51,22 +53,25 @@ public abstract class LinkGeneratorTestBase
 
     private protected DefaultLinkGenerator CreateLinkGenerator(
         Action<IServiceCollection> configureServices,
-        EndpointDataSource[] dataSources)
+        EndpointDataSource[] dataSources
+    )
     {
         var services = GetBasicServices();
         AddAdditionalServices(services);
         configureServices?.Invoke(services);
 
-        services.Configure<RouteOptions>(o =>
-        {
-            if (dataSources != null)
+        services.Configure<RouteOptions>(
+            o =>
             {
-                foreach (var dataSource in dataSources)
+                if (dataSources != null)
                 {
-                    o.EndpointDataSources.Add(dataSource);
+                    foreach (var dataSource in dataSources)
+                    {
+                        o.EndpointDataSources.Add(dataSource);
+                    }
                 }
             }
-        });
+        );
 
         var serviceProvider = services.BuildServiceProvider();
         var routeOptions = serviceProvider.GetRequiredService<IOptions<RouteOptions>>();
@@ -77,6 +82,7 @@ public abstract class LinkGeneratorTestBase
             new CompositeEndpointDataSource(routeOptions.Value.EndpointDataSources),
             routeOptions,
             NullLogger<DefaultLinkGenerator>.Instance,
-            serviceProvider);
+            serviceProvider
+        );
     }
 }

@@ -16,42 +16,103 @@ namespace Microsoft.AspNetCore.Builder;
 
 public class RequestDelegateEndpointRouteBuilderExtensionsTest
 {
-    private ModelEndpointDataSource GetBuilderEndpointDataSource(IEndpointRouteBuilder endpointRouteBuilder)
+    private ModelEndpointDataSource GetBuilderEndpointDataSource(
+        IEndpointRouteBuilder endpointRouteBuilder
+    )
     {
-        return Assert.IsType<ModelEndpointDataSource>(Assert.Single(endpointRouteBuilder.DataSources));
+        return Assert.IsType<ModelEndpointDataSource>(
+            Assert.Single(endpointRouteBuilder.DataSources)
+        );
     }
 
     private RouteEndpointBuilder GetRouteEndpointBuilder(IEndpointRouteBuilder endpointRouteBuilder)
     {
-        return Assert.IsType<RouteEndpointBuilder>(Assert.Single(GetBuilderEndpointDataSource(endpointRouteBuilder).EndpointBuilders));
+        return Assert.IsType<RouteEndpointBuilder>(
+            Assert.Single(GetBuilderEndpointDataSource(endpointRouteBuilder).EndpointBuilders)
+        );
     }
 
     public static object[][] MapMethods
     {
         get
         {
-            IEndpointConventionBuilder MapGet(IEndpointRouteBuilder routes, string template, RequestDelegate action) =>
-                routes.MapGet(template, action);
+            IEndpointConventionBuilder MapGet(
+                IEndpointRouteBuilder routes,
+                string template,
+                RequestDelegate action
+            ) => routes.MapGet(template, action);
 
-            IEndpointConventionBuilder MapPost(IEndpointRouteBuilder routes, string template, RequestDelegate action) =>
-                routes.MapPost(template, action);
+            IEndpointConventionBuilder MapPost(
+                IEndpointRouteBuilder routes,
+                string template,
+                RequestDelegate action
+            ) => routes.MapPost(template, action);
 
-            IEndpointConventionBuilder MapPut(IEndpointRouteBuilder routes, string template, RequestDelegate action) =>
-                routes.MapPut(template, action);
+            IEndpointConventionBuilder MapPut(
+                IEndpointRouteBuilder routes,
+                string template,
+                RequestDelegate action
+            ) => routes.MapPut(template, action);
 
-            IEndpointConventionBuilder MapDelete(IEndpointRouteBuilder routes, string template, RequestDelegate action) =>
-                routes.MapDelete(template, action);
+            IEndpointConventionBuilder MapDelete(
+                IEndpointRouteBuilder routes,
+                string template,
+                RequestDelegate action
+            ) => routes.MapDelete(template, action);
 
-            IEndpointConventionBuilder Map(IEndpointRouteBuilder routes, string template, RequestDelegate action) =>
-                routes.Map(template, action);
+            IEndpointConventionBuilder Map(
+                IEndpointRouteBuilder routes,
+                string template,
+                RequestDelegate action
+            ) => routes.Map(template, action);
 
             return new object[][]
             {
-                    new object[] { (Func<IEndpointRouteBuilder, string, RequestDelegate, IEndpointConventionBuilder>)MapGet },
-                    new object[] { (Func<IEndpointRouteBuilder, string, RequestDelegate, IEndpointConventionBuilder>)MapPost },
-                    new object[] { (Func<IEndpointRouteBuilder, string, RequestDelegate, IEndpointConventionBuilder>)MapPut },
-                    new object[] { (Func<IEndpointRouteBuilder, string, RequestDelegate, IEndpointConventionBuilder>)MapDelete },
-                    new object[] { (Func<IEndpointRouteBuilder, string, RequestDelegate, IEndpointConventionBuilder>)Map },
+                new object[]
+                {
+                    (Func<
+                        IEndpointRouteBuilder,
+                        string,
+                        RequestDelegate,
+                        IEndpointConventionBuilder
+                    >)MapGet
+                },
+                new object[]
+                {
+                    (Func<
+                        IEndpointRouteBuilder,
+                        string,
+                        RequestDelegate,
+                        IEndpointConventionBuilder
+                    >)MapPost
+                },
+                new object[]
+                {
+                    (Func<
+                        IEndpointRouteBuilder,
+                        string,
+                        RequestDelegate,
+                        IEndpointConventionBuilder
+                    >)MapPut
+                },
+                new object[]
+                {
+                    (Func<
+                        IEndpointRouteBuilder,
+                        string,
+                        RequestDelegate,
+                        IEndpointConventionBuilder
+                    >)MapDelete
+                },
+                new object[]
+                {
+                    (Func<
+                        IEndpointRouteBuilder,
+                        string,
+                        RequestDelegate,
+                        IEndpointConventionBuilder
+                    >)Map
+                },
             };
         }
     }
@@ -144,7 +205,10 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
         Assert.Equal("METHOD", GetMethod(endpoint.Metadata[1]));
         Assert.Equal("BUILDER", GetMethod(endpoint.Metadata[2]));
 
-        Assert.Equal("BUILDER", endpoint.Metadata.GetMetadata<IHttpMethodMetadata>().HttpMethods.Single());
+        Assert.Equal(
+            "BUILDER",
+            endpoint.Metadata.GetMetadata<IHttpMethodMetadata>().HttpMethods.Single()
+        );
 
         string GetMethod(object metadata)
         {
@@ -155,13 +219,16 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
 
     [Theory]
     [MemberData(nameof(MapMethods))]
-    public void Map_EndpointMetadataNotDuplicated(Func<IEndpointRouteBuilder, string, RequestDelegate, IEndpointConventionBuilder> map)
+    public void Map_EndpointMetadataNotDuplicated(
+        Func<IEndpointRouteBuilder, string, RequestDelegate, IEndpointConventionBuilder> map
+    )
     {
         // Arrange
         var builder = new DefaultEndpointRouteBuilder(Mock.Of<IApplicationBuilder>());
 
         // Act
-        var endpointBuilder = map(builder, "/", context => Task.CompletedTask).WithMetadata(new EndpointNameMetadata("MapMe"));
+        var endpointBuilder = map(builder, "/", context => Task.CompletedTask)
+            .WithMetadata(new EndpointNameMetadata("MapMe"));
 
         // Assert
         var ds = GetBuilderEndpointDataSource(builder);
@@ -178,13 +245,16 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
 
     [Theory]
     [MemberData(nameof(MapMethods))]
-    public void AddingMetadataAfterBuildingEndpointThrows(Func<IEndpointRouteBuilder, string, RequestDelegate, IEndpointConventionBuilder> map)
+    public void AddingMetadataAfterBuildingEndpointThrows(
+        Func<IEndpointRouteBuilder, string, RequestDelegate, IEndpointConventionBuilder> map
+    )
     {
         // Arrange
         var builder = new DefaultEndpointRouteBuilder(Mock.Of<IApplicationBuilder>());
 
         // Act
-        var endpointBuilder = map(builder, "/", context => Task.CompletedTask).WithMetadata(new EndpointNameMetadata("MapMe"));
+        var endpointBuilder = map(builder, "/", context => Task.CompletedTask)
+            .WithMetadata(new EndpointNameMetadata("MapMe"));
 
         // Assert
         var ds = GetBuilderEndpointDataSource(builder);
@@ -193,7 +263,9 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
 
         Assert.Single(endpoint.Metadata.GetOrderedMetadata<IEndpointNameMetadata>());
 
-        Assert.Throws<InvalidOperationException>(() => endpointBuilder.WithMetadata(new RouteNameMetadata("Foo")));
+        Assert.Throws<InvalidOperationException>(
+            () => endpointBuilder.WithMetadata(new RouteNameMetadata("Foo"))
+        );
     }
 
     [Attribute1]

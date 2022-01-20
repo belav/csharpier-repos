@@ -6,13 +6,13 @@ using System.ComponentModel;
 
 namespace Moq.Language
 {
-	/// <summary>
+    /// <summary>
 	/// Defines the <c>Raises</c> verb.
 	/// </summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public partial interface IRaise<T> : IFluentInterface
-	{
-		/// <summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public partial interface IRaise<T> : IFluentInterface
+    {
+        /// <summary>
 		/// Specifies the event that will be raised 
 		/// when the setup is met.
 		/// </summary>
@@ -28,9 +28,9 @@ namespace Moq.Language
 		///     .Raises(add => add.Added += null, EventArgs.Empty);
 		/// </code>
 		/// </example>
-		IVerifies Raises(Action<T> eventExpression, EventArgs args);
+        IVerifies Raises(Action<T> eventExpression, EventArgs args);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies the event that will be raised 
 		/// when the setup is matched.
 		/// </summary>
@@ -38,14 +38,14 @@ namespace Moq.Language
 		/// <param name="func">A function that will build the <see cref="EventArgs"/> 
 		/// to pass when raising the event.</param>
 		/// <seealso cref="Raises(Action{T}, EventArgs)"/>
-		IVerifies Raises(Action<T> eventExpression, Func<EventArgs> func);
+        IVerifies Raises(Action<T> eventExpression, Func<EventArgs> func);
 
-		/// <summary>
+        /// <summary>
 		/// Specifies the custom event that will be raised 
 		/// when the setup is matched.
 		/// </summary>
 		/// <param name="eventExpression">An expression that represents an event attach or detach action.</param>
 		/// <param name="args">The arguments to pass to the custom delegate (non EventHandler-compatible).</param>
-		IVerifies Raises(Action<T> eventExpression, params object[] args);
-	}
+        IVerifies Raises(Action<T> eventExpression, params object[] args);
+    }
 }

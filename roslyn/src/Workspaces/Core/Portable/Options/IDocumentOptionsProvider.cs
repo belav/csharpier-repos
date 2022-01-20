@@ -20,6 +20,9 @@ namespace Microsoft.CodeAnalysis.Options
         /// Fetches a <see cref="IDocumentOptions"/> for the given document. Any asynchronous work (looking for config files, etc.)
         /// should be done here. Can return a null-valued task to mean there is no options being provided for this document.
         /// </summary>
-        Task<IDocumentOptions?> GetOptionsForDocumentAsync(Document document, CancellationToken cancellationToken);
+        Task<IDocumentOptions?> GetOptionsForDocumentAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
     }
 }

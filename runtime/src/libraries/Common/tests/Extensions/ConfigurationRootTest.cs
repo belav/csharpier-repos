@@ -20,9 +20,16 @@ namespace Microsoft.Extensions.Configuration.Test
             var provider4 = new DisposableTestConfigurationProvider("qux", "qux-value");
             var provider5 = new DisposableTestConfigurationProvider("quux", "quux-value");
 
-            var config = new ConfigurationRoot(new IConfigurationProvider[] {
-                provider1, provider2, provider3, provider4, provider5
-            });
+            var config = new ConfigurationRoot(
+                new IConfigurationProvider[]
+                {
+                    provider1,
+                    provider2,
+                    provider3,
+                    provider4,
+                    provider5
+                }
+            );
 
             Assert.Equal("foo-value", config["foo"]);
             Assert.Equal("bar-value", config["bar"]);
@@ -38,16 +45,19 @@ namespace Microsoft.Extensions.Configuration.Test
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void RootDisposesChangeTokenRegistrations()
         {
             var changeToken = new ChangeToken();
             var providerMock = new Mock<IConfigurationProvider>();
             providerMock.Setup(p => p.GetReloadToken()).Returns(changeToken);
 
-            var config = new ConfigurationRoot(new IConfigurationProvider[] {
-                providerMock.Object,
-            });
+            var config = new ConfigurationRoot(
+                new IConfigurationProvider[] { providerMock.Object, }
+            );
 
             Assert.NotEmpty(changeToken.Callbacks);
 
@@ -62,9 +72,7 @@ namespace Microsoft.Extensions.Configuration.Test
         public void ChainedConfigurationIsDisposed(bool shouldDispose)
         {
             var provider = new DisposableTestConfigurationProvider("foo", "foo-value");
-            var chainedConfig = new ConfigurationRoot(new IConfigurationProvider[] {
-                provider
-            });
+            var chainedConfig = new ConfigurationRoot(new IConfigurationProvider[] { provider });
 
             var config = new ConfigurationBuilder()
                 .AddConfiguration(chainedConfig, shouldDisposeConfiguration: shouldDispose)
@@ -79,24 +87,23 @@ namespace Microsoft.Extensions.Configuration.Test
 
         private class TestConfigurationProvider : ConfigurationProvider
         {
-            public TestConfigurationProvider(string key, string value)
-                => Data.Add(key, value);
+            public TestConfigurationProvider(string key, string value) => Data.Add(key, value);
         }
 
         private class DisposableTestConfigurationProvider : ConfigurationProvider, IDisposable
         {
             public bool IsDisposed { get; set; }
 
-            public DisposableTestConfigurationProvider(string key, string value)
-                => Data.Add(key, value);
+            public DisposableTestConfigurationProvider(string key, string value) =>
+                Data.Add(key, value);
 
-            public void Dispose()
-                => IsDisposed = true;
+            public void Dispose() => IsDisposed = true;
         }
 
         public class ChangeToken : IChangeToken
         {
-            public List<(Action<object>, object)> Callbacks { get; } = new List<(Action<object>, object)>();
+            public List<(Action<object>, object)> Callbacks { get; } =
+                new List<(Action<object>, object)>();
 
             public bool HasChanged => false;
 

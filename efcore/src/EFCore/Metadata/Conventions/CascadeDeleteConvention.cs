@@ -13,7 +13,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
     /// </remarks>
-    public class CascadeDeleteConvention : IForeignKeyAddedConvention, IForeignKeyRequirednessChangedConvention
+    public class CascadeDeleteConvention
+        : IForeignKeyAddedConvention,
+          IForeignKeyRequirednessChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="CascadeDeleteConvention" />.
@@ -36,9 +38,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessForeignKeyAdded(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<IConventionForeignKeyBuilder> context)
+            IConventionContext<IConventionForeignKeyBuilder> context
+        )
         {
-            var newRelationshipBuilder = relationshipBuilder.OnDelete(GetTargetDeleteBehavior(relationshipBuilder.Metadata));
+            var newRelationshipBuilder = relationshipBuilder.OnDelete(
+                GetTargetDeleteBehavior(relationshipBuilder.Metadata)
+            );
             if (newRelationshipBuilder != null)
             {
                 context.StopProcessingIfChanged(newRelationshipBuilder);
@@ -52,9 +57,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context">Additional information associated with convention execution.</param>
         public virtual void ProcessForeignKeyRequirednessChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
-            var newRelationshipBuilder = relationshipBuilder.OnDelete(GetTargetDeleteBehavior(relationshipBuilder.Metadata));
+            var newRelationshipBuilder = relationshipBuilder.OnDelete(
+                GetTargetDeleteBehavior(relationshipBuilder.Metadata)
+            );
             if (newRelationshipBuilder != null)
             {
                 context.StopProcessingIfChanged(newRelationshipBuilder.Metadata.IsRequired);
@@ -65,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Returns the delete behavior to set for the given foreign key.
         /// </summary>
         /// <param name="foreignKey">The foreign key.</param>
-        protected virtual DeleteBehavior GetTargetDeleteBehavior(IConventionForeignKey foreignKey)
-            => foreignKey.IsRequired ? DeleteBehavior.Cascade : DeleteBehavior.ClientSetNull;
+        protected virtual DeleteBehavior GetTargetDeleteBehavior(
+            IConventionForeignKey foreignKey
+        ) => foreignKey.IsRequired ? DeleteBehavior.Cascade : DeleteBehavior.ClientSetNull;
     }
 }

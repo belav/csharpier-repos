@@ -10,7 +10,8 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-public class NoIdentityAddedTests : IClassFixture<ServerFactory<NoIdentityStartup, IdentityDbContext>>
+public class NoIdentityAddedTests
+    : IClassFixture<ServerFactory<NoIdentityStartup, IdentityDbContext>>
 {
     public NoIdentityAddedTests(ServerFactory<NoIdentityStartup, IdentityDbContext> serverFactory)
     {
@@ -21,10 +22,16 @@ public class NoIdentityAddedTests : IClassFixture<ServerFactory<NoIdentityStartu
 
     [Theory]
     [MemberData(nameof(IdentityEndpoints))]
-    public async Task QueryingIdentityEndpointsReturnsNotFoundWhenIdentityIsNotPresent(string endpoint)
+    public async Task QueryingIdentityEndpointsReturnsNotFoundWhenIdentityIsNotPresent(
+        string endpoint
+    )
     {
         // Arrange
-        void ConfigureTestServices(IServiceCollection services) { return; };
+        void ConfigureTestServices(IServiceCollection services)
+        {
+            return;
+        }
+        ;
 
         var client = ServerFactory
             .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices))
@@ -36,7 +43,8 @@ public class NoIdentityAddedTests : IClassFixture<ServerFactory<NoIdentityStartu
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
 
-    public static TheoryData<string> IdentityEndpoints => new TheoryData<string>
+    public static TheoryData<string> IdentityEndpoints =>
+        new TheoryData<string>
         {
             "/Identity/Account/AccessDenied",
             "/Identity/Account/ConfirmEmail",

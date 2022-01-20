@@ -36,8 +36,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     TextWindow.AdvanceChar();
                     break;
                 }
-                else if (SyntaxFacts.IsNewLine(ch) ||
-                        (ch == SlidingTextWindow.InvalidCharacter && TextWindow.IsReallyAtEnd()))
+                else if (
+                    SyntaxFacts.IsNewLine(ch)
+                    || (ch == SlidingTextWindow.InvalidCharacter && TextWindow.IsReallyAtEnd())
+                )
                 {
                     //String and character literals can contain any Unicode character. They are not limited
                     //to valid UTF-16 characters. So if we get the SlidingTextWindow's sentinel value,
@@ -59,7 +61,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 info.Kind = SyntaxKind.CharacterLiteralToken;
                 if (_builder.Length != 1)
                 {
-                    this.AddError((_builder.Length != 0) ? ErrorCode.ERR_TooManyCharsInConst : ErrorCode.ERR_EmptyCharConst);
+                    this.AddError(
+                        (_builder.Length != 0)
+                          ? ErrorCode.ERR_TooManyCharsInConst
+                          : ErrorCode.ERR_EmptyCharConst
+                    );
                 }
 
                 if (_builder.Length > 0)
@@ -132,7 +138,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 case 'U':
                     TextWindow.Reset(start);
                     SyntaxDiagnosticInfo error;
-                    ch = TextWindow.NextUnicodeEscape(surrogateCharacter: out surrogateCharacter, info: out error);
+                    ch = TextWindow.NextUnicodeEscape(
+                        surrogateCharacter: out surrogateCharacter,
+                        info: out error
+                    );
                     AddError(error);
                     break;
                 default:
@@ -210,15 +219,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             // [] brackets, and "" strings, including interpolated holes in the latter.
 
             SyntaxDiagnosticInfo? error = null;
-            ScanInterpolatedStringLiteralTop(interpolations: null, isVerbatim, ref info, ref error, closeQuoteMissing: out _);
+            ScanInterpolatedStringLiteralTop(
+                interpolations: null,
+                isVerbatim,
+                ref info,
+                ref error,
+                closeQuoteMissing: out _
+            );
             this.AddError(error);
         }
 
         internal void ScanInterpolatedStringLiteralTop(
-            ArrayBuilder<Interpolation>? interpolations, bool isVerbatim, ref TokenInfo info, ref SyntaxDiagnosticInfo? error, out bool closeQuoteMissing)
+            ArrayBuilder<Interpolation>? interpolations,
+            bool isVerbatim,
+            ref TokenInfo info,
+            ref SyntaxDiagnosticInfo? error,
+            out bool closeQuoteMissing
+        )
         {
             var subScanner = new InterpolatedStringScanner(this, isVerbatim);
-            subScanner.ScanInterpolatedStringLiteralTop(interpolations, ref info, out closeQuoteMissing);
+            subScanner.ScanInterpolatedStringLiteralTop(
+                interpolations,
+                ref info,
+                out closeQuoteMissing
+            );
             error = subScanner.Error;
             info.Text = TextWindow.GetText(intern: false);
         }
@@ -231,9 +255,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             public readonly bool CloseBraceMissing;
             public bool ColonMissing => ColonPosition <= 0;
             public bool HasColon => ColonPosition > 0;
-            public int LastPosition => CloseBraceMissing ? CloseBracePosition - 1 : CloseBracePosition;
+            public int LastPosition =>
+                CloseBraceMissing ? CloseBracePosition - 1 : CloseBracePosition;
             public int FormatEndPosition => CloseBracePosition - 1;
-            public Interpolation(int openBracePosition, int colonPosition, int closeBracePosition, bool closeBraceMissing)
+
+            public Interpolation(
+                int openBracePosition,
+                int colonPosition,
+                int closeBracePosition,
+                bool closeBraceMissing
+            )
             {
                 this.OpenBracePosition = openBracePosition;
                 this.ColonPosition = colonPosition;
@@ -246,7 +277,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// Turn a (parsed) interpolated string nonterminal into an interpolated string token.
         /// </summary>
         /// <param name="interpolatedString"></param>
-        internal static SyntaxToken RescanInterpolatedString(InterpolatedStringExpressionSyntax interpolatedString)
+        internal static SyntaxToken RescanInterpolatedString(
+            InterpolatedStringExpressionSyntax interpolatedString
+        )
         {
             var text = interpolatedString.ToString();
             var kind = SyntaxKind.InterpolatedStringToken;
@@ -257,7 +290,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 text,
                 kind,
                 text,
-                interpolatedString.GetLastToken().GetTrailingTrivia());
+                interpolatedString.GetLastToken().GetTrailingTrivia()
+            );
         }
 
         private class InterpolatedStringScanner
@@ -290,9 +324,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             private bool IsAtEnd(bool allowNewline)
             {
                 char ch = _lexer.TextWindow.PeekChar();
-                return
-                    (!allowNewline && SyntaxFacts.IsNewLine(ch)) ||
-                    (ch == SlidingTextWindow.InvalidCharacter && _lexer.TextWindow.IsReallyAtEnd());
+                return (!allowNewline && SyntaxFacts.IsNewLine(ch))
+                    || (
+                        ch == SlidingTextWindow.InvalidCharacter
+                        && _lexer.TextWindow.IsReallyAtEnd()
+                    );
             }
 
             private void TrySetUnrecoverableError(SyntaxDiagnosticInfo error)
@@ -314,13 +350,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 // is a recoverable error.
             }
 
-            internal void ScanInterpolatedStringLiteralTop(ArrayBuilder<Interpolation>? interpolations, ref TokenInfo info, out bool closeQuoteMissing)
+            internal void ScanInterpolatedStringLiteralTop(
+                ArrayBuilder<Interpolation>? interpolations,
+                ref TokenInfo info,
+                out bool closeQuoteMissing
+            )
             {
                 if (_isVerbatim)
                 {
                     Debug.Assert(
-                        (_lexer.TextWindow.PeekChar() == '@' && _lexer.TextWindow.PeekChar(1) == '$') ||
-                        (_lexer.TextWindow.PeekChar() == '$' && _lexer.TextWindow.PeekChar(1) == '@'));
+                        (
+                            _lexer.TextWindow.PeekChar() == '@'
+                            && _lexer.TextWindow.PeekChar(1) == '$'
+                        )
+                            || (
+                                _lexer.TextWindow.PeekChar() == '$'
+                                && _lexer.TextWindow.PeekChar(1) == '@'
+                            )
+                    );
 
                     // @$ or $@
                     _lexer.TextWindow.AdvanceChar();
@@ -338,8 +385,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 if (_lexer.TextWindow.PeekChar() != '"')
                 {
                     Debug.Assert(IsAtEnd());
-                    int position = IsAtEnd(allowNewline: true) ? _lexer.TextWindow.Position - 1 : _lexer.TextWindow.Position;
-                    TrySetUnrecoverableError(_lexer.MakeError(position, 1, _isVerbatim ? ErrorCode.ERR_UnterminatedStringLit : ErrorCode.ERR_NewlineInConst));
+                    int position = IsAtEnd(allowNewline: true)
+                      ? _lexer.TextWindow.Position - 1
+                      : _lexer.TextWindow.Position;
+                    TrySetUnrecoverableError(
+                        _lexer.MakeError(
+                            position,
+                            1,
+                            _isVerbatim
+                              ? ErrorCode.ERR_UnterminatedStringLit
+                              : ErrorCode.ERR_NewlineInConst
+                        )
+                    );
 
                     closeQuoteMissing = true;
                 }
@@ -353,7 +410,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 info.Kind = SyntaxKind.InterpolatedStringToken;
             }
 
-            private void ScanInterpolatedStringLiteralContents(ArrayBuilder<Interpolation>? interpolations)
+            private void ScanInterpolatedStringLiteralContents(
+                ArrayBuilder<Interpolation>? interpolations
+            )
             {
                 while (true)
                 {
@@ -390,7 +449,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             }
                             else
                             {
-                                TrySetUnrecoverableError(_lexer.MakeError(pos, 1, ErrorCode.ERR_UnescapedCurly, "}"));
+                                TrySetUnrecoverableError(
+                                    _lexer.MakeError(pos, 1, ErrorCode.ERR_UnescapedCurly, "}")
+                                );
                             }
                             continue;
                         case '{':
@@ -404,7 +465,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 int openBracePosition = _lexer.TextWindow.Position;
                                 _lexer.TextWindow.AdvanceChar();
                                 int colonPosition = 0;
-                                ScanInterpolatedStringLiteralHoleBalancedText('}', isHole: true, ref colonPosition);
+                                ScanInterpolatedStringLiteralHoleBalancedText(
+                                    '}',
+                                    isHole: true,
+                                    ref colonPosition
+                                );
                                 int closeBracePosition = _lexer.TextWindow.Position;
                                 bool closeBraceMissing = false;
                                 if (_lexer.TextWindow.PeekChar() == '}')
@@ -414,10 +479,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 else
                                 {
                                     closeBraceMissing = true;
-                                    TrySetUnrecoverableError(_lexer.MakeError(openBracePosition - 1, 2, ErrorCode.ERR_UnclosedExpressionHole));
+                                    TrySetUnrecoverableError(
+                                        _lexer.MakeError(
+                                            openBracePosition - 1,
+                                            2,
+                                            ErrorCode.ERR_UnclosedExpressionHole
+                                        )
+                                    );
                                 }
 
-                                interpolations?.Add(new Interpolation(openBracePosition, colonPosition, closeBracePosition, closeBraceMissing));
+                                interpolations?.Add(
+                                    new Interpolation(
+                                        openBracePosition,
+                                        colonPosition,
+                                        closeBracePosition,
+                                        closeBraceMissing
+                                    )
+                                );
                             }
                             continue;
                         case '\\':
@@ -430,7 +508,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             char ch = _lexer.ScanEscapeSequence(surrogateCharacter: out _);
                             if (ch == '{' || ch == '}')
                             {
-                                TrySetUnrecoverableError(_lexer.MakeError(escapeStart, _lexer.TextWindow.Position - escapeStart, ErrorCode.ERR_EscapedCurly, ch));
+                                TrySetUnrecoverableError(
+                                    _lexer.MakeError(
+                                        escapeStart,
+                                        _lexer.TextWindow.Position - escapeStart,
+                                        ErrorCode.ERR_EscapedCurly,
+                                        ch
+                                    )
+                                );
                             }
 
                             continue;
@@ -456,7 +541,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         ch = _lexer.ScanEscapeSequence(surrogateCharacter: out _);
                         if (ch == '{' || ch == '}')
                         {
-                            TrySetUnrecoverableError(_lexer.MakeError(pos, 1, ErrorCode.ERR_EscapedCurly, ch));
+                            TrySetUnrecoverableError(
+                                _lexer.MakeError(pos, 1, ErrorCode.ERR_EscapedCurly, ch)
+                            );
                         }
                     }
                     else if (ch == '"')
@@ -482,7 +569,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         }
                         else
                         {
-                            TrySetUnrecoverableError(_lexer.MakeError(pos, 1, ErrorCode.ERR_UnescapedCurly, "{"));
+                            TrySetUnrecoverableError(
+                                _lexer.MakeError(pos, 1, ErrorCode.ERR_UnescapedCurly, "{")
+                            );
                         }
                     }
                     else if (ch == '}')
@@ -511,7 +600,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             /// <summary>
             /// Scan past the hole inside an interpolated string literal, leaving the current character on the '}' (if any)
             /// </summary>
-            private void ScanInterpolatedStringLiteralHoleBalancedText(char endingChar, bool isHole, ref int colonPosition)
+            private void ScanInterpolatedStringLiteralHoleBalancedText(
+                char endingChar,
+                bool isHole,
+                ref int colonPosition
+            )
             {
                 while (true)
                 {
@@ -529,11 +622,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     {
                         case '#':
                             // preprocessor directives not allowed.
-                            TrySetUnrecoverableError(_lexer.MakeError(_lexer.TextWindow.Position, 1, ErrorCode.ERR_SyntaxError, endingChar.ToString()));
+                            TrySetUnrecoverableError(
+                                _lexer.MakeError(
+                                    _lexer.TextWindow.Position,
+                                    1,
+                                    ErrorCode.ERR_SyntaxError,
+                                    endingChar.ToString()
+                                )
+                            );
                             _lexer.TextWindow.AdvanceChar();
                             continue;
                         case '$':
-                            if (_lexer.TextWindow.PeekChar(1) == '"' || _lexer.TextWindow.PeekChar(1) == '@' && _lexer.TextWindow.PeekChar(2) == '"')
+                            if (
+                                _lexer.TextWindow.PeekChar(1) == '"'
+                                || _lexer.TextWindow.PeekChar(1) == '@'
+                                    && _lexer.TextWindow.PeekChar(2) == '"'
+                            )
                             {
                                 bool isVerbatimSubstring = _lexer.TextWindow.PeekChar(1) == '@';
                                 var interpolations = (ArrayBuilder<Interpolation>?)null;
@@ -542,7 +646,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 try
                                 {
                                     _isVerbatim = isVerbatimSubstring;
-                                    ScanInterpolatedStringLiteralTop(interpolations, ref info, closeQuoteMissing: out _);
+                                    ScanInterpolatedStringLiteralTop(
+                                        interpolations,
+                                        ref info,
+                                        closeQuoteMissing: out _
+                                    );
                                 }
                                 finally
                                 {
@@ -571,7 +679,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 return;
                             }
 
-                            TrySetUnrecoverableError(_lexer.MakeError(_lexer.TextWindow.Position, 1, ErrorCode.ERR_SyntaxError, endingChar.ToString()));
+                            TrySetUnrecoverableError(
+                                _lexer.MakeError(
+                                    _lexer.TextWindow.Position,
+                                    1,
+                                    ErrorCode.ERR_SyntaxError,
+                                    endingChar.ToString()
+                                )
+                            );
                             goto default;
                         case '"' when RecoveringFromRunawayLexing():
                             // When recovering from mismatched delimiters, we consume the next
@@ -585,7 +700,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             ScanInterpolatedStringLiteralNestedString();
                             continue;
                         case '@':
-                            if (_lexer.TextWindow.PeekChar(1) == '"' && !RecoveringFromRunawayLexing())
+                            if (
+                                _lexer.TextWindow.PeekChar(1) == '"'
+                                && !RecoveringFromRunawayLexing()
+                            )
                             {
                                 // check for verbatim string inside an expression hole.
                                 var nestedStringPosition = _lexer.TextWindow.Position;
@@ -599,12 +717,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 var errorCode = _lexer.ScanVerbatimStringLiteral(ref discarded);
                                 if (errorCode is ErrorCode code)
                                 {
-                                    TrySetRecoverableError(_lexer.MakeError(nestedStringPosition, width: 2, code));
+                                    TrySetRecoverableError(
+                                        _lexer.MakeError(nestedStringPosition, width: 2, code)
+                                    );
                                 }
 
                                 continue;
                             }
-                            else if (_lexer.TextWindow.PeekChar(1) == '$' && _lexer.TextWindow.PeekChar(2) == '"')
+                            else if (
+                                _lexer.TextWindow.PeekChar(1) == '$'
+                                && _lexer.TextWindow.PeekChar(2) == '"'
+                            )
                             {
                                 var interpolations = (ArrayBuilder<Interpolation>?)null;
                                 var info = default(TokenInfo);
@@ -612,7 +735,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 try
                                 {
                                     _isVerbatim = true;
-                                    ScanInterpolatedStringLiteralTop(interpolations, ref info, closeQuoteMissing: out _);
+                                    ScanInterpolatedStringLiteralTop(
+                                        interpolations,
+                                        ref info,
+                                        closeQuoteMissing: out _
+                                    );
                                 }
                                 finally
                                 {
@@ -681,7 +808,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 {
                     // Note: if we reach the end of the file without hitting */ just bail out.  It's not necessary for
                     // us to report any issues, as this code is just being used to find the end of the interpolation hole.
-                    // When the full parse happens, the lexer will grab the string inside the interpolation hole and 
+                    // When the full parse happens, the lexer will grab the string inside the interpolation hole and
                     // pass it to the regular parser.  This parser will then see the unterminated /* and will report the
                     // error for it.
                     if (IsAtEnd(allowNewline: true))

@@ -15,8 +15,15 @@ namespace System.Reflection.Emit.Tests
         [InlineData("-", "assembly name  ")]
         public void AssemblyQualifiedName(string typeName, string assemblyName)
         {
-            TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic, typeName: typeName, assemblyName: assemblyName);
-            Assert.Equal($"{typeName}, {assemblyName.Trim()}, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", type.AssemblyQualifiedName);
+            TypeBuilder type = Helpers.DynamicType(
+                TypeAttributes.NotPublic,
+                typeName: typeName,
+                assemblyName: assemblyName
+            );
+            Assert.Equal(
+                $"{typeName}, {assemblyName.Trim()}, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                type.AssemblyQualifiedName
+            );
         }
     }
 }

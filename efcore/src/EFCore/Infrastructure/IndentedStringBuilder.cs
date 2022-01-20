@@ -32,8 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     The current length of the built string.
         /// </summary>
-        public virtual int Length
-            => _stringBuilder.Length;
+        public virtual int Length => _stringBuilder.Length;
 
         /// <summary>
         ///     Appends the current indent and then the given string to the string being built.
@@ -137,7 +136,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <param name="value">The string to append.</param>
         /// <param name="skipFinalNewline">If <see langword="true" />, then the terminating new line is not added after the last line.</param>
         /// <returns>This builder so that additional calls can be chained.</returns>
-        public virtual IndentedStringBuilder AppendLines(string value, bool skipFinalNewline = false)
+        public virtual IndentedStringBuilder AppendLines(
+            string value,
+            bool skipFinalNewline = false
+        )
         {
             using (var reader = new StringReader(value))
             {
@@ -210,22 +212,19 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     Creates a scoped indenter that will increment the indent, then decrement it when disposed.
         /// </summary>
         /// <returns>An indenter.</returns>
-        public virtual IDisposable Indent()
-            => new Indenter(this);
+        public virtual IDisposable Indent() => new Indenter(this);
 
         /// <summary>
         ///     Temporarily disables all indentation. Restores the original indentation when the returned object is disposed.
         /// </summary>
         /// <returns>An object that restores the original indentation when disposed.</returns>
-        public virtual IDisposable SuspendIndent()
-            => new IndentSuspender(this);
+        public virtual IDisposable SuspendIndent() => new IndentSuspender(this);
 
         /// <summary>
         ///     Returns the built string.
         /// </summary>
         /// <returns>The built string.</returns>
-        public override string ToString()
-            => _stringBuilder.ToString();
+        public override string ToString() => _stringBuilder.ToString();
 
         private void DoIndent()
         {
@@ -248,8 +247,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 _stringBuilder.IncrementIndent();
             }
 
-            public void Dispose()
-                => _stringBuilder.DecrementIndent();
+            public void Dispose() => _stringBuilder.DecrementIndent();
         }
 
         private sealed class IndentSuspender : IDisposable
@@ -264,8 +262,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 _stringBuilder._indent = 0;
             }
 
-            public void Dispose()
-                => _stringBuilder._indent = _indent;
+            public void Dispose() => _stringBuilder._indent = _indent;
         }
     }
 }

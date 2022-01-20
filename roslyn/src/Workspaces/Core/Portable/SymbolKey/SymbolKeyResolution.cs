@@ -26,7 +26,10 @@ namespace Microsoft.CodeAnalysis
             CandidateReason = CandidateReason.None;
         }
 
-        internal SymbolKeyResolution(ImmutableArray<ISymbol> candidateSymbols, CandidateReason candidateReason)
+        internal SymbolKeyResolution(
+            ImmutableArray<ISymbol> candidateSymbols,
+            CandidateReason candidateReason
+        )
         {
             Symbol = null;
             _candidateSymbols = candidateSymbols;
@@ -39,10 +42,8 @@ namespace Microsoft.CodeAnalysis
         public CandidateReason CandidateReason { get; }
         public ImmutableArray<ISymbol> CandidateSymbols => _candidateSymbols.NullToEmpty();
 
-        public Enumerator<ISymbol> GetEnumerator()
-            => new(this);
+        public Enumerator<ISymbol> GetEnumerator() => new(this);
 
-        internal Enumerable<TSymbol> OfType<TSymbol>() where TSymbol : ISymbol
-            => new(this);
+        internal Enumerable<TSymbol> OfType<TSymbol>() where TSymbol : ISymbol => new(this);
     }
 }

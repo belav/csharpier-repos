@@ -17,11 +17,14 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>> where TStartup : class
+public abstract class JsonOutputFormatterTestBase<TStartup>
+    : IClassFixture<MvcTestFixture<TStartup>> where TStartup : class
 {
     protected JsonOutputFormatterTestBase(MvcTestFixture<TStartup> fixture)
     {
-        Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        Factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = Factory.CreateDefaultClient();
     }
 
@@ -35,14 +38,19 @@ public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcT
     public virtual async Task SerializableErrorIsReturnedInExpectedFormat()
     {
         // Arrange
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<Employee xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\">" +
-            "<Id>2</Id><Name>foo</Name></Employee>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<Employee xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\">"
+            + "<Id>2</Id><Name>foo</Name></Employee>";
 
-        var expectedOutput = "{\"Id\":[\"The field Id must be between 10 and 100." +
-                "\"],\"Name\":[\"The field Name must be a string or array type with" +
-                " a minimum length of '15'.\"]}";
-        var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/SerializableError/CreateEmployee");
+        var expectedOutput =
+            "{\"Id\":[\"The field Id must be between 10 and 100."
+            + "\"],\"Name\":[\"The field Name must be a string or array type with"
+            + " a minimum length of '15'.\"]}";
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "http://localhost/SerializableError/CreateEmployee"
+        );
         request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));
         request.Content = new StringContent(input, Encoding.UTF8, "application/xml");
 
@@ -55,7 +63,9 @@ public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcT
         var actualContent = await response.Content.ReadAsStringAsync();
         Assert.Equal(expectedOutput, actualContent);
 
-        var modelStateErrors = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(actualContent);
+        var modelStateErrors = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(
+            actualContent
+        );
         Assert.Equal(2, modelStateErrors.Count);
 
         var errors = Assert.Single(modelStateErrors, kvp => kvp.Key == "Id").Value;
@@ -65,14 +75,19 @@ public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcT
 
         errors = Assert.Single(modelStateErrors, kvp => kvp.Key == "Name").Value;
         error = Assert.Single(errors);
-        Assert.Equal("The field Name must be a string or array type with a minimum length of '15'.", error);
+        Assert.Equal(
+            "The field Name must be a string or array type with a minimum length of '15'.",
+            error
+        );
     }
 
     [Fact]
     public virtual async Task Formatting_IntValue()
     {
         // Act
-        var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.IntResult)}");
+        var response = await Client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.IntResult)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -83,7 +98,9 @@ public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcT
     public virtual async Task Formatting_StringValue()
     {
         // Act
-        var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringResult)}");
+        var response = await Client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringResult)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -94,7 +111,9 @@ public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcT
     public virtual async Task Formatting_StringValueWithUnicodeContent()
     {
         // Act
-        var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringWithUnicodeResult)}");
+        var response = await Client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringWithUnicodeResult)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -105,7 +124,9 @@ public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcT
     public virtual async Task Formatting_StringValueWithNonAsciiCharacters()
     {
         // Act
-        var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringWithNonAsciiContent)}");
+        var response = await Client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringWithNonAsciiContent)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -119,7 +140,9 @@ public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcT
         var expected = "{\"id\":10,\"name\":\"Test\",\"streetName\":\"Some street\"}";
 
         // Act
-        var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.SimpleModelResult)}");
+        var response = await Client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.SimpleModelResult)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -130,10 +153,13 @@ public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcT
     public virtual async Task Formatting_CollectionType()
     {
         // Arrange
-        var expected = "[{\"id\":10,\"name\":\"TestName\",\"streetName\":null},{\"id\":11,\"name\":\"TestName1\",\"streetName\":\"Some street\"}]";
+        var expected =
+            "[{\"id\":10,\"name\":\"TestName\",\"streetName\":null},{\"id\":11,\"name\":\"TestName1\",\"streetName\":\"Some street\"}]";
 
         // Act
-        var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.CollectionModelResult)}");
+        var response = await Client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.CollectionModelResult)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -147,7 +173,9 @@ public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcT
         var expected = "{\"SomeKey\":\"Value0\",\"DifferentKey\":\"Value1\",\"Key3\":null}";
 
         // Act
-        var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.DictionaryResult)}");
+        var response = await Client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.DictionaryResult)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -158,11 +186,14 @@ public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcT
     public virtual async Task Formatting_LargeObject()
     {
         // Arrange
-        var expectedName = "This is long so we can test large objects " + new string('a', 1024 * 65);
+        var expectedName =
+            "This is long so we can test large objects " + new string('a', 1024 * 65);
         var expected = $"{{\"id\":10,\"name\":\"{expectedName}\",\"streetName\":null}}";
 
         // Act
-        var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.LargeObjectResult)}");
+        var response = await Client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.LargeObjectResult)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -175,13 +206,18 @@ public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcT
         using var _ = new ActivityReplacer();
 
         // Act
-        var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.ProblemDetailsResult)}");
+        var response = await Client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.ProblemDetailsResult)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.NotFound);
 
         var obj = JObject.Parse(await response.Content.ReadAsStringAsync());
-        Assert.Equal("https://tools.ietf.org/html/rfc7231#section-6.5.4", obj.Value<string>("type"));
+        Assert.Equal(
+            "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+            obj.Value<string>("type")
+        );
         Assert.Equal("Not Found", obj.Value<string>("title"));
         Assert.Equal("404", obj.Value<string>("status"));
         Assert.NotNull(obj.Value<string>("traceId"));
@@ -191,10 +227,13 @@ public abstract class JsonOutputFormatterTestBase<TStartup> : IClassFixture<MvcT
     public virtual async Task Formatting_PolymorphicModel()
     {
         // Arrange
-        var expected = "{\"address\":\"Some address\",\"id\":10,\"name\":\"test\",\"streetName\":null}";
+        var expected =
+            "{\"address\":\"Some address\",\"id\":10,\"name\":\"test\",\"streetName\":null}";
 
         // Act
-        var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.PolymorphicResult)}");
+        var response = await Client.GetAsync(
+            $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.PolymorphicResult)}"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);

@@ -17,10 +17,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public TableValuedFunctionBuilder(IMutableDbFunction function)
-            : base(function)
-        {
-        }
+        public TableValuedFunctionBuilder(IMutableDbFunction function) : base(function) { }
 
         /// <summary>
         ///     Sets the name of the database function.
@@ -30,8 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </remarks>
         /// <param name="name">The name of the function in the database.</param>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-        public new virtual TableValuedFunctionBuilder HasName(string name)
-            => (TableValuedFunctionBuilder)base.HasName(name);
+        public new virtual TableValuedFunctionBuilder HasName(string name) =>
+            (TableValuedFunctionBuilder)base.HasName(name);
 
         /// <summary>
         ///     Sets the schema of the database function.
@@ -41,7 +38,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </remarks>
         /// <param name="schema">The schema of the function in the database.</param>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-        public new virtual TableValuedFunctionBuilder HasSchema(string? schema)
-            => (TableValuedFunctionBuilder)base.HasSchema(schema);
+        public new virtual TableValuedFunctionBuilder HasSchema(string? schema) =>
+            (TableValuedFunctionBuilder)base.HasSchema(schema);
     }
 }

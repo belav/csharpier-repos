@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         public ManagedExceptionRegionUpdate(
             ManagedModuleMethodId method,
             int delta,
-            SourceSpan newSpan)
+            SourceSpan newSpan
+        )
         {
             Method = method;
             Delta = delta;

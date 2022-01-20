@@ -6,20 +6,20 @@ using System.Diagnostics;
 
 namespace Moq.Behaviors
 {
-	internal sealed class ThrowException : Behavior
-	{
-		private readonly Exception exception;
+    internal sealed class ThrowException : Behavior
+    {
+        private readonly Exception exception;
 
-		public ThrowException(Exception exception)
-		{
-			Debug.Assert(exception != null);
+        public ThrowException(Exception exception)
+        {
+            Debug.Assert(exception != null);
 
-			this.exception = exception;
-		}
+            this.exception = exception;
+        }
 
-		public override void Execute(Invocation invocation)
-		{
-			throw this.exception;
-		}
-	}
+        public override void Execute(Invocation invocation)
+        {
+            throw this.exception;
+        }
+    }
 }

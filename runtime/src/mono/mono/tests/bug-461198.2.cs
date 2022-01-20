@@ -10,7 +10,7 @@ namespace TestCase
         }
     }
 
-    public class Foo<T> : Bar<Foo<T>> 
+    public class Foo<T> : Bar<Foo<T>>
     {
     }
 
@@ -22,9 +22,7 @@ namespace TestCase
             {
                 throw new Exception();
             }
-            catch
-            {
-            }
+            catch { }
         }
     }
 

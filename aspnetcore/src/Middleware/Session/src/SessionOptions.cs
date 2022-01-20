@@ -59,7 +59,12 @@ public class SessionOptions
         public override TimeSpan? Expiration
         {
             get => null;
-            set => throw new InvalidOperationException(nameof(Expiration) + " cannot be set for the cookie defined by " + nameof(SessionOptions));
+            set =>
+                throw new InvalidOperationException(
+                    nameof(Expiration)
+                        + " cannot be set for the cookie defined by "
+                        + nameof(SessionOptions)
+                );
         }
     }
 }

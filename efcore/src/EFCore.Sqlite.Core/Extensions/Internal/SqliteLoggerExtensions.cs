@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
         public static void SchemaConfiguredWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
             IEntityType entityType,
-            string schema)
+            string schema
+        )
         {
             var definition = SqliteResources.LogSchemaConfigured(diagnostics);
 
@@ -35,25 +36,38 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
                 definition.Log(diagnostics, entityType.DisplayName(), schema);
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new EntityTypeSchemaEventData(
                     definition,
                     SchemaConfiguredWarning,
                     entityType,
-                    schema);
+                    schema
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 
-        private static string SchemaConfiguredWarning(EventDefinitionBase definition, EventData payload)
+        private static string SchemaConfiguredWarning(
+            EventDefinitionBase definition,
+            EventData payload
+        )
         {
             var d = (EventDefinition<string, string>)definition;
             var p = (EntityTypeSchemaEventData)payload;
-            return d.GenerateMessage(
-                p.EntityType.DisplayName(),
-                p.Schema);
+            return d.GenerateMessage(p.EntityType.DisplayName(), p.Schema);
         }
 
         /// <summary>
@@ -64,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
         /// </summary>
         public static void SequenceConfiguredWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-            IReadOnlySequence sequence)
+            IReadOnlySequence sequence
+        )
         {
             var definition = SqliteResources.LogSequenceConfigured(diagnostics);
 
@@ -73,18 +88,33 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
                 definition.Log(diagnostics, sequence.Name);
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new SequenceEventData(
                     definition,
                     SequenceConfiguredWarning,
-                    sequence);
+                    sequence
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 
-        private static string SequenceConfiguredWarning(EventDefinitionBase definition, EventData payload)
+        private static string SequenceConfiguredWarning(
+            EventDefinitionBase definition,
+            EventData payload
+        )
         {
             var d = (EventDefinition<string>)definition;
             var p = (SequenceEventData)payload;
@@ -103,13 +133,21 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
             string? columnName,
             string? dataTypeName,
             bool notNull,
-            string? defaultValue)
+            string? defaultValue
+        )
         {
             var definition = SqliteResources.LogFoundColumn(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {
-                definition.Log(diagnostics, tableName, columnName, dataTypeName, notNull, defaultValue);
+                definition.Log(
+                    diagnostics,
+                    tableName,
+                    columnName,
+                    dataTypeName,
+                    notNull,
+                    defaultValue
+                );
             }
 
             // No DiagnosticsSource events because these are purely design-time messages
@@ -122,7 +160,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public static void SchemasNotSupportedWarning(
-            this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics)
+            this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics
+        )
         {
             var definition = SqliteResources.LogUsingSchemaSelectionsWarning(diagnostics);
 
@@ -144,9 +183,12 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string? id,
             string? tableName,
-            string? principalTableName)
+            string? principalTableName
+        )
         {
-            var definition = SqliteResources.LogForeignKeyScaffoldErrorPrincipalTableNotFound(diagnostics);
+            var definition = SqliteResources.LogForeignKeyScaffoldErrorPrincipalTableNotFound(
+                diagnostics
+            );
 
             if (diagnostics.ShouldLog(definition))
             {
@@ -164,7 +206,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
         /// </summary>
         public static void TableFound(
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
-            string? tableName)
+            string? tableName
+        )
         {
             var definition = SqliteResources.LogFoundTable(diagnostics);
 
@@ -184,7 +227,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
         /// </summary>
         public static void MissingTableWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
-            string? tableName)
+            string? tableName
+        )
         {
             var definition = SqliteResources.LogMissingTable(diagnostics);
 
@@ -207,13 +251,20 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
             string? foreignKeyName,
             string? tableName,
             string? principalColumnName,
-            string? principalTableName)
+            string? principalTableName
+        )
         {
             var definition = SqliteResources.LogPrincipalColumnNotFound(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {
-                definition.Log(diagnostics, foreignKeyName, tableName, principalColumnName, principalTableName);
+                definition.Log(
+                    diagnostics,
+                    foreignKeyName,
+                    tableName,
+                    principalColumnName,
+                    principalTableName
+                );
             }
 
             // No DiagnosticsSource events because these are purely design-time messages
@@ -229,7 +280,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string? indexName,
             string? tableName,
-            bool? unique)
+            bool? unique
+        )
         {
             var definition = SqliteResources.LogFoundIndex(diagnostics);
 
@@ -252,7 +304,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
             string? tableName,
             long id,
             string? principalTableName,
-            string? deleteAction)
+            string? deleteAction
+        )
         {
             var definition = SqliteResources.LogFoundForeignKey(diagnostics);
 
@@ -273,7 +326,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
         public static void PrimaryKeyFound(
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string? primaryKeyName,
-            string? tableName)
+            string? tableName
+        )
         {
             var definition = SqliteResources.LogFoundPrimaryKey(diagnostics);
 
@@ -294,7 +348,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
         public static void UniqueConstraintFound(
             this IDiagnosticsLogger<DbLoggerCategory.Scaffolding> diagnostics,
             string? uniqueConstraintName,
-            string? tableName)
+            string? tableName
+        )
         {
             var definition = SqliteResources.LogFoundUniqueConstraint(diagnostics);
 
@@ -314,7 +369,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
         /// </summary>
         public static void UnexpectedConnectionTypeWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Infrastructure> diagnostics,
-            Type connectionType)
+            Type connectionType
+        )
         {
             var definition = SqliteResources.LogUnexpectedConnectionType(diagnostics);
 
@@ -323,18 +379,33 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
                 definition.Log(diagnostics, connectionType.ShortDisplayName());
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new UnexpectedConnectionTypeEventData(
                     definition,
                     UnexpectedConnectionTypeWarning,
-                    connectionType);
+                    connectionType
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 
-        private static string UnexpectedConnectionTypeWarning(EventDefinitionBase definition, EventData payload)
+        private static string UnexpectedConnectionTypeWarning(
+            EventDefinitionBase definition,
+            EventData payload
+        )
         {
             var d = (EventDefinition<string>)definition;
             var p = (UnexpectedConnectionTypeEventData)payload;
@@ -351,7 +422,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
         public static void TableRebuildPendingWarning(
             this IDiagnosticsLogger<DbLoggerCategory.Migrations> diagnostics,
             Type operationType,
-            string tableName)
+            string tableName
+        )
         {
             var definition = SqliteResources.LogTableRebuildPendingWarning(diagnostics);
 
@@ -360,19 +432,34 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
                 definition.Log(diagnostics, operationType.ShortDisplayName(), tableName);
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new TableRebuildEventData(
                     definition,
                     TableRebuildPendingWarning,
                     operationType,
-                    tableName);
+                    tableName
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 
-        private static string TableRebuildPendingWarning(EventDefinitionBase definition, EventData payload)
+        private static string TableRebuildPendingWarning(
+            EventDefinitionBase definition,
+            EventData payload
+        )
         {
             var d = (EventDefinition<string, string?>)definition;
             var p = (TableRebuildEventData)payload;

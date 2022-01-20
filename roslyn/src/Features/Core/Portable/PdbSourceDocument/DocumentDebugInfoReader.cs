@@ -36,7 +36,11 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 
         public ImmutableArray<SourceDocument> FindSourceDocuments(ISymbol symbol)
         {
-            var documentHandles = SymbolSourceDocumentFinder.FindDocumentHandles(symbol, _dllReader, _pdbReader);
+            var documentHandles = SymbolSourceDocumentFinder.FindDocumentHandles(
+                symbol,
+                _dllReader,
+                _pdbReader
+            );
 
             using var _ = ArrayBuilder<SourceDocument>.GetInstance(out var sourceDocuments);
 
@@ -51,7 +55,9 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 
                 var embeddedText = TryGetEmbeddedSourceText(handle);
 
-                sourceDocuments.Add(new SourceDocument(filePath, hashAlgorithm, checksum, embeddedText));
+                sourceDocuments.Add(
+                    new SourceDocument(filePath, hashAlgorithm, checksum, embeddedText)
+                );
             }
 
             return sourceDocuments.ToImmutable();
@@ -76,7 +82,9 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                         {
                             var decompressed = new MemoryStream(uncompressedSize);
 
-                            using (var deflater = new DeflateStream(stream, CompressionMode.Decompress))
+                            using (
+                                var deflater = new DeflateStream(stream, CompressionMode.Decompress)
+                            )
                             {
                                 deflater.CopyTo(decompressed);
                             }
@@ -104,10 +112,15 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
         {
             using var _ = PooledDictionary<string, string>.GetInstance(out var result);
 
-            foreach (var handle in _pdbReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition))
+            foreach (
+                var handle in _pdbReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition)
+            )
             {
                 var customDebugInformation = _pdbReader.GetCustomDebugInformation(handle);
-                if (_pdbReader.GetGuid(customDebugInformation.Kind) == PortableCustomDebugInfoKinds.CompilationOptions)
+                if (
+                    _pdbReader.GetGuid(customDebugInformation.Kind)
+                    == PortableCustomDebugInfoKinds.CompilationOptions
+                )
                 {
                     var blobReader = _pdbReader.GetBlobReader(customDebugInformation.Value);
 

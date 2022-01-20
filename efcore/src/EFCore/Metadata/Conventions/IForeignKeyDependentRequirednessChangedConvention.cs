@@ -20,6 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context">Additional information associated with convention execution.</param>
         void ProcessForeignKeyDependentRequirednessChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<bool?> context);
+            IConventionContext<bool?> context
+        );
     }
 }

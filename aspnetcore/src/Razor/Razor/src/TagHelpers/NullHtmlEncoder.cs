@@ -17,9 +17,7 @@ public sealed class NullHtmlEncoder : HtmlEncoder
     /// <summary>
     /// Initializes a <see cref="NullHtmlEncoder"/> instance.
     /// </summary>
-    private NullHtmlEncoder()
-    {
-    }
+    private NullHtmlEncoder() { }
 
     /// <summary>
     /// A <see cref="HtmlEncoder"/> instance that does not encode. Should not be used when writing directly to a
@@ -96,7 +94,8 @@ public sealed class NullHtmlEncoder : HtmlEncoder
         int unicodeScalar,
         char* buffer,
         int bufferLength,
-        out int numberOfCharactersWritten)
+        out int numberOfCharactersWritten
+    )
     {
         if (buffer == null)
         {

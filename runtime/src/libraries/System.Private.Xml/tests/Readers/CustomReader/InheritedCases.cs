@@ -65,8 +65,7 @@ namespace System.Xml.Tests
                 return new CustomReader(filename);
             }
 
-            throw new
-                CTestFailedException("CustomReader not created");
+            throw new CTestFailedException("CustomReader not created");
         }
     }
 
@@ -105,7 +104,10 @@ namespace System.Xml.Tests
     {
     }
 
-    [TestCase(Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)", Desc = "CustomInheritedReader")]
+    [TestCase(
+        Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)",
+        Desc = "CustomInheritedReader"
+    )]
     internal class TCMoveToAttributeReader : TCMoveToAttribute
     {
     }
@@ -115,7 +117,10 @@ namespace System.Xml.Tests
     {
     }
 
-    [TestCase(Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)", Desc = "CustomInheritedReader")]
+    [TestCase(
+        Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)",
+        Desc = "CustomInheritedReader"
+    )]
     internal class TCGetAttributeNameReader : TCGetAttributeName
     {
     }
@@ -209,6 +214,7 @@ namespace System.Xml.Tests
     internal class TCReadSubtreeReader : TCReadSubtree
     {
     }
+
     [TestCase(Name = "ReadToDescendant", Desc = "CustomInheritedReader")]
     internal class TCReadToDescendantReader : TCReadToDescendant
     {

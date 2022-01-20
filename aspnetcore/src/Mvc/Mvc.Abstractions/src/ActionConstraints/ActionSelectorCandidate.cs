@@ -19,7 +19,10 @@ public readonly struct ActionSelectorCandidate
     /// <param name="constraints">
     /// The list of <see cref="IActionConstraint"/> instances associated with <paramref name="action"/>.
     /// </param>
-    public ActionSelectorCandidate(ActionDescriptor action, IReadOnlyList<IActionConstraint>? constraints)
+    public ActionSelectorCandidate(
+        ActionDescriptor action,
+        IReadOnlyList<IActionConstraint>? constraints
+    )
     {
         if (action == null)
         {

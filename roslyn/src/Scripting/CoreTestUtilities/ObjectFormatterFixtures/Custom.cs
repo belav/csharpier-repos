@@ -57,7 +57,10 @@ namespace ObjectFormatterFixtures
 
     internal class Signatures
     {
-        public static readonly MethodInfo Arrays = typeof(Signatures).GetMethod(nameof(ArrayParameters));
+        public static readonly MethodInfo Arrays = typeof(Signatures).GetMethod(
+            nameof(ArrayParameters)
+        );
+
         public void ArrayParameters(int[] arrayOne, int[,] arrayTwo, int[,,] arrayThree) { }
     }
 
@@ -75,6 +78,7 @@ namespace ObjectFormatterFixtures
         private class Proxy
         {
             public Proxy() { }
+
             public Proxy(Node node)
             {
                 x = node.value;
@@ -107,6 +111,7 @@ namespace ObjectFormatterFixtures
         private class Proxy
         {
             public Proxy() { }
+
             public Proxy(Node c) { }
 
             public readonly int x;
@@ -132,25 +137,33 @@ namespace ObjectFormatterFixtures
 
     internal class ComplexProxy : ComplexProxyBase
     {
-        public ComplexProxy()
-        {
-        }
+        public ComplexProxy() { }
 
-        public ComplexProxy(object b)
-        {
-        }
+        public ComplexProxy(object b) { }
 
         [DebuggerDisplay("*1")]
-        public int _02_public_property_dd { get { return 1; } }
+        public int _02_public_property_dd
+        {
+            get { return 1; }
+        }
 
         [DebuggerDisplay("*2")]
-        private int _03_private_property_dd { get { return 1; } }
+        private int _03_private_property_dd
+        {
+            get { return 1; }
+        }
 
         [DebuggerDisplay("*3")]
-        protected int _04_protected_property_dd { get { return 1; } }
+        protected int _04_protected_property_dd
+        {
+            get { return 1; }
+        }
 
         [DebuggerDisplay("*4")]
-        internal int _05_internal_property_dd { get { return 1; } }
+        internal int _05_internal_property_dd
+        {
+            get { return 1; }
+        }
 
         [DebuggerDisplay("+1")]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -246,8 +259,15 @@ namespace ObjectFormatterFixtures
             return 2;
         }
 
-        private int F1(int a) { return 1; }
-        private int F2(short a) { return 2; }
+        private int F1(int a)
+        {
+            return 1;
+        }
+
+        private int F2(short a)
+        {
+            return 2;
+        }
 
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
         public readonly C _27_rootHidden = new C();
@@ -265,20 +285,44 @@ namespace ObjectFormatterFixtures
         [CompilerGenerated]
         private readonly int _33;
 
-        public int _34_Exception { get { throw new Exception("error1"); } }
+        public int _34_Exception
+        {
+            get { throw new Exception("error1"); }
+        }
 
         [DebuggerDisplay("-!-")]
-        public int _35_Exception { get { throw new Exception("error2"); } }
+        public int _35_Exception
+        {
+            get { throw new Exception("error2"); }
+        }
 
         public readonly object _36 = new ToStringException();
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        public int _37 { get { throw new Exception("error3"); } }
+        public int _37
+        {
+            get { throw new Exception("error3"); }
+        }
 
-        public int _38_private_get_public_set { private get { return 1; } set { } }
-        public int _39_public_get_private_set { get { return 1; } private set { } }
-        private int _40_private_get_private_set { get { return 1; } set { } }
-        private int _41_set_only_property { set { } }
+        public int _38_private_get_public_set
+        {
+            private get { return 1; }
+            set { }
+        }
+        public int _39_public_get_private_set
+        {
+            get { return 1; }
+            private set { }
+        }
+        private int _40_private_get_private_set
+        {
+            get { return 1; }
+            set { }
+        }
+        private int _41_set_only_property
+        {
+            set { }
+        }
 
         public override string ToString()
         {
@@ -307,9 +351,7 @@ namespace ObjectFormatterFixtures
         [DebuggerDisplay("pxy")]
         private class Proxy
         {
-            public Proxy(object x)
-            {
-            }
+            public Proxy(object x) { }
 
             public readonly int A;
             public readonly int B;
@@ -396,9 +438,7 @@ namespace ObjectFormatterFixtures
             get { return new[] { 1, 2 }; }
         }
 
-        public void Remove(object key)
-        {
-        }
+        public void Remove(object key) { }
 
         public ICollection Values
         {
@@ -407,18 +447,11 @@ namespace ObjectFormatterFixtures
 
         public object this[object key]
         {
-            get
-            {
-                return 1;
-            }
-            set
-            {
-            }
+            get { return 1; }
+            set { }
         }
 
-        public void CopyTo(Array array, int index)
-        {
-        }
+        public void CopyTo(Array array, int index) { }
 
         public int Count
         {
@@ -466,9 +499,7 @@ namespace ObjectFormatterFixtures
                 return _i < 5;
             }
 
-            public void Reset()
-            {
-            }
+            public void Reset() { }
 
             public DictionaryEntry Entry
             {
@@ -495,7 +526,9 @@ namespace ObjectFormatterFixtures
 
     public class LongMembers
     {
-        public readonly string LongName0123456789_0123456789_0123456789_0123456789_0123456789_0123456789_0123456789 = "hello";
-        public readonly string LongValue = "0123456789_0123456789_0123456789_0123456789_0123456789_0123456789_0123456789";
+        public readonly string LongName0123456789_0123456789_0123456789_0123456789_0123456789_0123456789_0123456789 =
+            "hello";
+        public readonly string LongValue =
+            "0123456789_0123456789_0123456789_0123456789_0123456789_0123456789_0123456789";
     }
 }

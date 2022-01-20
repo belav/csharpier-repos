@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public RuntimeRelationalPropertyOverrides(
             RuntimeProperty property,
             bool columnNameOverriden,
-            string? columnName)
+            string? columnName
+        )
         {
             Property = property;
             if (columnNameOverriden)

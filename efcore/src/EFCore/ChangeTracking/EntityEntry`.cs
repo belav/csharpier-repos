@@ -26,8 +26,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
     ///     </para>
     /// </remarks>
     /// <typeparam name="TEntity">The type of entity being tracked by this entry.</typeparam>
-    public class EntityEntry<TEntity> : EntityEntry
-        where TEntity : class
+    public class EntityEntry<TEntity> : EntityEntry where TEntity : class
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,16 +35,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public EntityEntry(InternalEntityEntry internalEntry)
-            : base(internalEntry)
-        {
-        }
+        public EntityEntry(InternalEntityEntry internalEntry) : base(internalEntry) { }
 
         /// <summary>
         ///     Gets the entity being tracked by this entry.
         /// </summary>
-        public new virtual TEntity Entity
-            => (TEntity)base.Entity;
+        public new virtual TEntity Entity => (TEntity)base.Entity;
 
         /// <summary>
         ///     Provides access to change tracking information and operations for a given
@@ -60,11 +55,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// </param>
         /// <returns>An object that exposes change tracking information and operations for the given property.</returns>
         public virtual PropertyEntry<TEntity, TProperty> Property<TProperty>(
-            Expression<Func<TEntity, TProperty>> propertyExpression)
+            Expression<Func<TEntity, TProperty>> propertyExpression
+        )
         {
             Check.NotNull(propertyExpression, nameof(propertyExpression));
 
-            return new PropertyEntry<TEntity, TProperty>(InternalEntry, propertyExpression.GetMemberAccess().GetSimpleMemberName());
+            return new PropertyEntry<TEntity, TProperty>(
+                InternalEntry,
+                propertyExpression.GetMemberAccess().GetSimpleMemberName()
+            );
         }
 
         /// <summary>
@@ -85,12 +84,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     given navigation property.
         /// </returns>
         public virtual ReferenceEntry<TEntity, TProperty> Reference<TProperty>(
-            Expression<Func<TEntity, TProperty?>> propertyExpression)
-            where TProperty : class
+            Expression<Func<TEntity, TProperty?>> propertyExpression
+        ) where TProperty : class
         {
             Check.NotNull(propertyExpression, nameof(propertyExpression));
 
-            return new ReferenceEntry<TEntity, TProperty>(InternalEntry, propertyExpression.GetMemberAccess().GetSimpleMemberName());
+            return new ReferenceEntry<TEntity, TProperty>(
+                InternalEntry,
+                propertyExpression.GetMemberAccess().GetSimpleMemberName()
+            );
         }
 
         /// <summary>
@@ -111,12 +113,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     given navigation property.
         /// </returns>
         public virtual CollectionEntry<TEntity, TProperty> Collection<TProperty>(
-            Expression<Func<TEntity, IEnumerable<TProperty>>> propertyExpression)
-            where TProperty : class
+            Expression<Func<TEntity, IEnumerable<TProperty>>> propertyExpression
+        ) where TProperty : class
         {
             Check.NotNull(propertyExpression, nameof(propertyExpression));
 
-            return new CollectionEntry<TEntity, TProperty>(InternalEntry, propertyExpression.GetMemberAccess().GetSimpleMemberName());
+            return new CollectionEntry<TEntity, TProperty>(
+                InternalEntry,
+                propertyExpression.GetMemberAccess().GetSimpleMemberName()
+            );
         }
 
         /// <summary>
@@ -155,8 +160,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     An object that exposes change tracking information and operations for the
         ///     given navigation property.
         /// </returns>
-        public virtual CollectionEntry<TEntity, TProperty> Collection<TProperty>(string propertyName)
-            where TProperty : class
+        public virtual CollectionEntry<TEntity, TProperty> Collection<TProperty>(
+            string propertyName
+        ) where TProperty : class
         {
             Check.NotEmpty(propertyName, nameof(propertyName));
 
@@ -173,8 +179,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <typeparam name="TProperty">The type of the property.</typeparam>
         /// <param name="propertyName">The property to access information and operations for.</param>
         /// <returns>An object that exposes change tracking information and operations for the given property.</returns>
-        public virtual PropertyEntry<TEntity, TProperty> Property<TProperty>(
-            string propertyName)
+        public virtual PropertyEntry<TEntity, TProperty> Property<TProperty>(string propertyName)
         {
             Check.NotEmpty(propertyName, nameof(propertyName));
 
@@ -185,15 +190,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
         private static void ValidateType<TProperty>(IProperty? property)
         {
-            if (property != null
-                && property.ClrType != typeof(TProperty))
+            if (property != null && property.ClrType != typeof(TProperty))
             {
                 throw new ArgumentException(
                     CoreStrings.WrongGenericPropertyType(
                         property.Name,
                         property.DeclaringEntityType.DisplayName(),
                         property.ClrType.ShortDisplayName(),
-                        typeof(TProperty).ShortDisplayName()));
+                        typeof(TProperty).ShortDisplayName()
+                    )
+                );
             }
         }
     }

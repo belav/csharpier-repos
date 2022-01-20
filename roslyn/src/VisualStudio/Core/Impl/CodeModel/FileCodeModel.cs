@@ -27,15 +27,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
     /// <summary>
     /// Implementations of EnvDTE.FileCodeModel for both languages.
     /// </summary>
-    public sealed partial class FileCodeModel : AbstractCodeModelObject, EnvDTE.FileCodeModel, EnvDTE80.FileCodeModel2, ICodeElementContainer<AbstractCodeElement>, IVBFileCodeModelEvents, ICSCodeModelRefactoring
+    public sealed partial class FileCodeModel
+        : AbstractCodeModelObject,
+          EnvDTE.FileCodeModel,
+          EnvDTE80.FileCodeModel2,
+          ICodeElementContainer<AbstractCodeElement>,
+          IVBFileCodeModelEvents,
+          ICSCodeModelRefactoring
     {
         internal static ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> Create(
             CodeModelState state,
             object parent,
             DocumentId documentId,
-            ITextManagerAdapter textManagerAdapter)
+            ITextManagerAdapter textManagerAdapter
+        )
         {
-            return new FileCodeModel(state, parent, documentId, textManagerAdapter).GetComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>();
+            return new FileCodeModel(state, parent, documentId, textManagerAdapter).GetComHandle<
+                EnvDTE80.FileCodeModel2,
+                FileCodeModel
+            >();
         }
 
         private readonly ComHandle<object, object> _parentHandle;
@@ -50,7 +60,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         private string? _incomingFilePath;
         private Document? _previousDocument;
 
-        private readonly CleanableWeakComHandleTable<SyntaxNodeKey, EnvDTE.CodeElement> _codeElementTable;
+        private readonly CleanableWeakComHandleTable<
+            SyntaxNodeKey,
+            EnvDTE.CodeElement
+        > _codeElementTable;
 
         // These are used during batching.
         private bool _batchMode;
@@ -67,8 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             CodeModelState state,
             object parent,
             DocumentId documentId,
-            ITextManagerAdapter textManagerAdapter)
-            : base(state)
+            ITextManagerAdapter textManagerAdapter
+        ) : base(state)
         {
             RoslynDebug.AssertNotNull(documentId);
             RoslynDebug.AssertNotNull(textManagerAdapter);
@@ -77,17 +90,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             _documentId = documentId;
             TextManagerAdapter = textManagerAdapter;
 
-            _codeElementTable = new CleanableWeakComHandleTable<SyntaxNodeKey, EnvDTE.CodeElement>(state.ThreadingContext);
+            _codeElementTable = new CleanableWeakComHandleTable<SyntaxNodeKey, EnvDTE.CodeElement>(
+                state.ThreadingContext
+            );
 
             _batchMode = false;
             _batchDocument = null;
             _lastSyntaxTree = GetSyntaxTree();
         }
 
-        internal ITextManagerAdapter TextManagerAdapter
-        {
-            get; set;
-        }
+        internal ITextManagerAdapter TextManagerAdapter { get; set; }
 
         /// <summary>
         /// Internally, we store the DocumentId for the document that the FileCodeModel represents. If the underlying file
@@ -99,7 +111,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         /// </summary>
         internal void OnRename(string newFilePath)
         {
-            Debug.Assert(_editCount == 0, "FileCodeModel have an open edit and the underlying file is being renamed. This is a bug.");
+            Debug.Assert(
+                _editCount == 0,
+                "FileCodeModel have an open edit and the underlying file is being renamed. This is a bug."
+            );
 
             RoslynDebug.AssertNotNull(_documentId);
 
@@ -128,7 +143,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                         _ = cancellationToken;
 
                         _invisibleEditor.Dispose();
-                    });
+                    }
+                );
             }
 
             base.Shutdown();
@@ -156,7 +172,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 return false;
             }
 
-            documentId = project.Solution.GetDocumentIdsWithFilePath(_incomingFilePath).FirstOrDefault(d => d.ProjectId == project.Id);
+            documentId = project.Solution
+                .GetDocumentIdsWithFilePath(_incomingFilePath)
+                .FirstOrDefault(d => d.ProjectId == project.Id);
             if (documentId == null)
             {
                 return false;
@@ -185,19 +203,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             throw Exceptions.ThrowEUnexpected();
         }
 
-        internal void UpdateCodeElementNodeKey(AbstractKeyedCodeElement keyedElement, SyntaxNodeKey oldNodeKey, SyntaxNodeKey newNodeKey)
+        internal void UpdateCodeElementNodeKey(
+            AbstractKeyedCodeElement keyedElement,
+            SyntaxNodeKey oldNodeKey,
+            SyntaxNodeKey newNodeKey
+        )
         {
             if (!_codeElementTable.TryGetValue(oldNodeKey, out var codeElement))
             {
-                throw new InvalidOperationException($"Could not find {oldNodeKey} in Code Model element table.");
+                throw new InvalidOperationException(
+                    $"Could not find {oldNodeKey} in Code Model element table."
+                );
             }
 
             _codeElementTable.Remove(oldNodeKey);
 
-            var managedElement = ComAggregate.GetManagedObject<AbstractKeyedCodeElement>(codeElement);
+            var managedElement = ComAggregate.GetManagedObject<AbstractKeyedCodeElement>(
+                codeElement
+            );
             if (!object.Equals(managedElement, keyedElement))
             {
-                throw new InvalidOperationException($"Unexpected failure in Code Model while updating node keys {oldNodeKey} -> {newNodeKey}");
+                throw new InvalidOperationException(
+                    $"Unexpected failure in Code Model while updating node keys {oldNodeKey} -> {newNodeKey}"
+                );
             }
 
             // If we're updating this element with the same node key as an element that's already in the table,
@@ -224,8 +252,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             _codeElementTable.Add(nodeKey, element);
         }
 
-        internal void OnCodeElementDeleted(SyntaxNodeKey nodeKey)
-            => _codeElementTable.Remove(nodeKey);
+        internal void OnCodeElementDeleted(SyntaxNodeKey nodeKey) =>
+            _codeElementTable.Remove(nodeKey);
 
         internal T GetOrCreateCodeElement<T>(SyntaxNode node)
         {
@@ -240,7 +268,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 {
                     if (codeElement != null)
                     {
-                        var element = ComAggregate.GetManagedObject<AbstractCodeElement>(codeElement);
+                        var element = ComAggregate.GetManagedObject<AbstractCodeElement>(
+                            codeElement
+                        );
                         if (element.IsValidNode())
                         {
                             if (codeElement is T tcodeElement)
@@ -248,7 +278,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                                 return tcodeElement;
                             }
 
-                            throw new InvalidOperationException($"Found a valid code element for {nodeKey}, but it is not of type, {typeof(T).ToString()}");
+                            throw new InvalidOperationException(
+                                $"Found a valid code element for {nodeKey}, but it is not of type, {typeof(T).ToString()}"
+                            );
                         }
                     }
                 }
@@ -316,42 +348,52 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         internal void PerformEdit(Func<Document, Document> action)
         {
-            EnsureEditor(() =>
-            {
-                Debug.Assert(_invisibleEditor != null);
-
-                var document = GetDocument();
-                var workspace = document.Project.Solution.Workspace;
-
-                var result = action(document);
-
-                var formatted = State.ThreadingContext.JoinableTaskFactory.Run(async () =>
+            EnsureEditor(
+                () =>
                 {
-                    var formatted = await Formatter.FormatAsync(result, Formatter.Annotation).ConfigureAwait(true);
-                    formatted = await Formatter.FormatAsync(formatted, SyntaxAnnotation.ElasticAnnotation).ConfigureAwait(true);
+                    Debug.Assert(_invisibleEditor != null);
 
-                    return formatted;
-                });
+                    var document = GetDocument();
+                    var workspace = document.Project.Solution.Workspace;
 
-                ApplyChanges(workspace, formatted);
-            });
+                    var result = action(document);
+
+                    var formatted = State.ThreadingContext.JoinableTaskFactory.Run(
+                        async () =>
+                        {
+                            var formatted = await Formatter
+                                .FormatAsync(result, Formatter.Annotation)
+                                .ConfigureAwait(true);
+                            formatted = await Formatter
+                                .FormatAsync(formatted, SyntaxAnnotation.ElasticAnnotation)
+                                .ConfigureAwait(true);
+
+                            return formatted;
+                        }
+                    );
+
+                    ApplyChanges(workspace, formatted);
+                }
+            );
         }
 
         internal T PerformEdit<T>(Func<Document, Tuple<T, Document>> action) where T : SyntaxNode
         {
-            return EnsureEditor(() =>
-            {
-                Debug.Assert(_invisibleEditor != null);
+            return EnsureEditor(
+                () =>
+                {
+                    Debug.Assert(_invisibleEditor != null);
 
-                var document = GetDocument();
-                var workspace = document.Project.Solution.Workspace;
+                    var document = GetDocument();
+                    var workspace = document.Project.Solution.Workspace;
 
-                var result = action(document);
+                    var result = action(document);
 
-                ApplyChanges(workspace, result.Item2);
+                    ApplyChanges(workspace, result.Item2);
 
-                return result.Item1;
-            });
+                    return result.Item1;
+                }
+            );
         }
 
         private void ApplyChanges(Workspace workspace, Document document)
@@ -397,7 +439,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 // We choose to do this here rather than in the project system code when it's added because we don't want to pay the penalty of checking the RDT for
                 // all files being opened on the UI thread if we really don't need it. This uses an 'as' cast, because in unit tests the workspace is a different
                 // derived form of VisualStudioWorkspace, and there we aren't dealing with open files at all so it doesn't matter.
-                (State.Workspace as VisualStudioWorkspaceImpl)?.ProcessQueuedWorkOnUIThread();
+                (
+                    State.Workspace as VisualStudioWorkspaceImpl
+                )?.ProcessQueuedWorkOnUIThread();
 
                 document = Workspace.CurrentSolution.GetDocument(GetDocumentId());
             }
@@ -415,101 +459,181 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             return GetDocument().GetRequiredSyntaxRootSynchronously(CancellationToken.None);
         }
 
-        internal SemanticModel GetSemanticModel()
-            => State.ThreadingContext.JoinableTaskFactory.Run(() =>
-            {
-                return GetDocument()
-                    .GetRequiredSemanticModelAsync(CancellationToken.None).AsTask();
-            });
+        internal SemanticModel GetSemanticModel() =>
+            State.ThreadingContext.JoinableTaskFactory.Run(
+                () =>
+                {
+                    return GetDocument()
+                        .GetRequiredSemanticModelAsync(CancellationToken.None)
+                        .AsTask();
+                }
+            );
 
-        internal Compilation GetCompilation()
-            => State.ThreadingContext.JoinableTaskFactory.Run(() =>
-            {
-                return GetDocument().Project
-                    .GetRequiredCompilationAsync(CancellationToken.None);
-            });
+        internal Compilation GetCompilation() =>
+            State.ThreadingContext.JoinableTaskFactory.Run(
+                () =>
+                {
+                    return GetDocument().Project.GetRequiredCompilationAsync(
+                        CancellationToken.None
+                    );
+                }
+            );
 
-        internal ProjectId GetProjectId()
-            => GetDocumentId().ProjectId;
+        internal ProjectId GetProjectId() => GetDocumentId().ProjectId;
 
-        internal SyntaxNode LookupNode(SyntaxNodeKey nodeKey)
-            => CodeModelService.LookupNode(nodeKey, GetSyntaxTree());
+        internal SyntaxNode LookupNode(SyntaxNodeKey nodeKey) =>
+            CodeModelService.LookupNode(nodeKey, GetSyntaxTree());
 
         public EnvDTE.CodeAttribute AddAttribute(string name, string value, object position)
         {
-            return EnsureEditor(() =>
-            {
-                return AddAttribute(GetSyntaxRoot(), name, value, position, target: CodeModelService.AssemblyAttributeString);
-            });
+            return EnsureEditor(
+                () =>
+                {
+                    return AddAttribute(
+                        GetSyntaxRoot(),
+                        name,
+                        value,
+                        position,
+                        target: CodeModelService.AssemblyAttributeString
+                    );
+                }
+            );
         }
 
-        public EnvDTE.CodeClass AddClass(string name, object position, object bases, object implementedInterfaces, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeClass AddClass(
+            string name,
+            object position,
+            object bases,
+            object implementedInterfaces,
+            EnvDTE.vsCMAccess access
+        )
         {
-            return EnsureEditor(() =>
-            {
-                return AddClass(GetSyntaxRoot(), name, position, bases, implementedInterfaces, access);
-            });
+            return EnsureEditor(
+                () =>
+                {
+                    return AddClass(
+                        GetSyntaxRoot(),
+                        name,
+                        position,
+                        bases,
+                        implementedInterfaces,
+                        access
+                    );
+                }
+            );
         }
 
-        public EnvDTE.CodeDelegate AddDelegate(string name, object type, object position, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeDelegate AddDelegate(
+            string name,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access
+        )
         {
-            return EnsureEditor(() =>
-            {
-                return AddDelegate(GetSyntaxRoot(), name, type, position, access);
-            });
+            return EnsureEditor(
+                () =>
+                {
+                    return AddDelegate(GetSyntaxRoot(), name, type, position, access);
+                }
+            );
         }
 
-        public EnvDTE.CodeEnum AddEnum(string name, object position, object bases, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeEnum AddEnum(
+            string name,
+            object position,
+            object bases,
+            EnvDTE.vsCMAccess access
+        )
         {
-            return EnsureEditor(() =>
-            {
-                return AddEnum(GetSyntaxRoot(), name, position, bases, access);
-            });
+            return EnsureEditor(
+                () =>
+                {
+                    return AddEnum(GetSyntaxRoot(), name, position, bases, access);
+                }
+            );
         }
 
-        public EnvDTE.CodeFunction AddFunction(string name, EnvDTE.vsCMFunction kind, object type, object position, EnvDTE.vsCMAccess access)
-            => throw Exceptions.ThrowEFail();
+        public EnvDTE.CodeFunction AddFunction(
+            string name,
+            EnvDTE.vsCMFunction kind,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access
+        ) => throw Exceptions.ThrowEFail();
 
         public EnvDTE80.CodeImport AddImport(string name, object position, string alias)
         {
-            return EnsureEditor(() =>
-            {
-                return AddImport(GetSyntaxRoot(), name, position, alias);
-            });
+            return EnsureEditor(
+                () =>
+                {
+                    return AddImport(GetSyntaxRoot(), name, position, alias);
+                }
+            );
         }
 
-        public EnvDTE.CodeInterface AddInterface(string name, object position, object bases, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeInterface AddInterface(
+            string name,
+            object position,
+            object bases,
+            EnvDTE.vsCMAccess access
+        )
         {
-            return EnsureEditor(() =>
-            {
-                return AddInterface(GetSyntaxRoot(), name, position, bases, access);
-            });
+            return EnsureEditor(
+                () =>
+                {
+                    return AddInterface(GetSyntaxRoot(), name, position, bases, access);
+                }
+            );
         }
 
         public EnvDTE.CodeNamespace AddNamespace(string name, object position)
         {
-            return EnsureEditor(() =>
-            {
-                return AddNamespace(GetSyntaxRoot(), name, position);
-            });
+            return EnsureEditor(
+                () =>
+                {
+                    return AddNamespace(GetSyntaxRoot(), name, position);
+                }
+            );
         }
 
-        public EnvDTE.CodeStruct AddStruct(string name, object position, object bases, object implementedInterfaces, EnvDTE.vsCMAccess access)
+        public EnvDTE.CodeStruct AddStruct(
+            string name,
+            object position,
+            object bases,
+            object implementedInterfaces,
+            EnvDTE.vsCMAccess access
+        )
         {
-            return EnsureEditor(() =>
-            {
-                return AddStruct(GetSyntaxRoot(), name, position, bases, implementedInterfaces, access);
-            });
+            return EnsureEditor(
+                () =>
+                {
+                    return AddStruct(
+                        GetSyntaxRoot(),
+                        name,
+                        position,
+                        bases,
+                        implementedInterfaces,
+                        access
+                    );
+                }
+            );
         }
 
-        public EnvDTE.CodeVariable AddVariable(string name, object type, object position, EnvDTE.vsCMAccess access)
-            => throw Exceptions.ThrowEFail();
+        public EnvDTE.CodeVariable AddVariable(
+            string name,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access
+        ) => throw Exceptions.ThrowEFail();
 
-        public EnvDTE.CodeElement CodeElementFromPoint(EnvDTE.TextPoint point, EnvDTE.vsCMElement scope)
+        public EnvDTE.CodeElement CodeElementFromPoint(
+            EnvDTE.TextPoint point,
+            EnvDTE.vsCMElement scope
+        )
         {
             // Can't use point.AbsoluteCharOffset because it's calculated by the native
             // implementation in GetAbsoluteOffset (in env\msenv\textmgr\autoutil.cpp)
-            // to only count each newline as a single character. We need to ask for line and 
+            // to only count each newline as a single character. We need to ask for line and
             // column and calculate the right offset ourselves. See DevDiv2 530496 for details.
             var position = GetPositionFromTextPoint(point);
 
@@ -547,8 +671,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     // If both tokens are touching, we prefer identifiers and keywords to
                     // separators. Note that the language doesn't allow both tokens to be a
                     // keyword or identifier.
-                    if (SyntaxFactsService.IsReservedOrContextualKeyword(rightToken) ||
-                        SyntaxFactsService.IsIdentifier(rightToken))
+                    if (
+                        SyntaxFactsService.IsReservedOrContextualKeyword(rightToken)
+                        || SyntaxFactsService.IsIdentifier(rightToken)
+                    )
                     {
                         token = rightToken;
                     }
@@ -580,20 +706,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 }
             }
 
-            var node = parent?.AncestorsAndSelf().FirstOrDefault(n => CodeModelService.MatchesScope(n, scope));
+            var node = parent?
+                .AncestorsAndSelf()
+                .FirstOrDefault(n => CodeModelService.MatchesScope(n, scope));
 
             if (node == null)
             {
                 return null;
             }
 
-            if (scope == EnvDTE.vsCMElement.vsCMElementAttribute ||
-                scope == EnvDTE.vsCMElement.vsCMElementImportStmt ||
-                scope == EnvDTE.vsCMElement.vsCMElementParameter ||
-                scope == EnvDTE.vsCMElement.vsCMElementOptionStmt ||
-                scope == EnvDTE.vsCMElement.vsCMElementInheritsStmt ||
-                scope == EnvDTE.vsCMElement.vsCMElementImplementsStmt ||
-                (scope == EnvDTE.vsCMElement.vsCMElementFunction && CodeModelService.IsAccessorNode(node)))
+            if (
+                scope == EnvDTE.vsCMElement.vsCMElementAttribute
+                || scope == EnvDTE.vsCMElement.vsCMElementImportStmt
+                || scope == EnvDTE.vsCMElement.vsCMElementParameter
+                || scope == EnvDTE.vsCMElement.vsCMElementOptionStmt
+                || scope == EnvDTE.vsCMElement.vsCMElementInheritsStmt
+                || scope == EnvDTE.vsCMElement.vsCMElementImplementsStmt
+                || (
+                    scope == EnvDTE.vsCMElement.vsCMElementFunction
+                    && CodeModelService.IsAccessorNode(node)
+                )
+            )
             {
                 // Attributes, imports, parameters, Option, Inherits and Implements
                 // don't have node keys of their own and won't be included in our
@@ -624,12 +757,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             if (codeElement == null)
             {
-                codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(this.CodeElements.Item(element));
+                codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
+                    this.CodeElements.Item(element)
+                );
             }
 
             if (codeElement == null)
             {
-                throw new ArgumentException(ServicesVSResources.Element_is_not_valid, nameof(element));
+                throw new ArgumentException(
+                    ServicesVSResources.Element_is_not_valid,
+                    nameof(element)
+                );
             }
 
             codeElement.Delete();
@@ -672,8 +810,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                             var node = element.LookupNode();
                             if (node != null)
                             {
-                                elementAndPaths ??= new List<ValueTuple<AbstractKeyedCodeElement, SyntaxPath>>();
-                                elementAndPaths.Add(ValueTuple.Create(element, new SyntaxPath(node)));
+                                elementAndPaths ??= new List<
+                                    ValueTuple<AbstractKeyedCodeElement, SyntaxPath>
+                                >();
+                                elementAndPaths.Add(
+                                    ValueTuple.Create(element, new SyntaxPath(node))
+                                );
                             }
                         }
                     }
@@ -681,10 +823,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     if (_batchDocument != null)
                     {
                         // perform expensive operations at once
-                        var newDocument = State.ThreadingContext.JoinableTaskFactory.Run(() =>
-                            Simplifier.ReduceAsync(_batchDocument, Simplifier.Annotation, cancellationToken: CancellationToken.None));
+                        var newDocument = State.ThreadingContext.JoinableTaskFactory.Run(
+                            () =>
+                                Simplifier.ReduceAsync(
+                                    _batchDocument,
+                                    Simplifier.Annotation,
+                                    cancellationToken: CancellationToken.None
+                                )
+                        );
 
-                        _batchDocument.Project.Solution.Workspace.TryApplyChanges(newDocument.Project.Solution);
+                        _batchDocument.Project.Solution.Workspace.TryApplyChanges(
+                            newDocument.Project.Solution
+                        );
 
                         // done using batch document
                         _batchDocument = null;
@@ -698,9 +848,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                         foreach (var elementAndPath in elementAndPaths)
                         {
                             // make sure the element is there.
-                            if (_codeElementTable.TryGetValue(elementAndPath.Item1.NodeKey, out var existingElement))
+                            if (
+                                _codeElementTable.TryGetValue(
+                                    elementAndPath.Item1.NodeKey,
+                                    out var existingElement
+                                )
+                            )
                             {
-                                elementAndPath.Item1.ReacquireNodeKey(elementAndPath.Item2, CancellationToken.None);
+                                elementAndPath.Item1.ReacquireNodeKey(
+                                    elementAndPath.Item2,
+                                    CancellationToken.None
+                                );
                             }
 
                             // make sure existing element doesn't go away (weak reference) in the middle of
@@ -740,14 +898,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         [MemberNotNullWhen(true, nameof(_batchElements))]
         public bool IsBatchOpen
         {
-            get
-            {
-                return _batchMode && _editCount > 0;
-            }
+            get { return _batchMode && _editCount > 0; }
         }
 
-        public EnvDTE.CodeElement ElementFromID(string id)
-            => throw new NotImplementedException();
+        public EnvDTE.CodeElement ElementFromID(string id) => throw new NotImplementedException();
 
         public EnvDTE80.vsCMParseStatus ParseStatus
         {
@@ -755,16 +909,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 var syntaxTree = GetSyntaxTree();
                 return syntaxTree.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error)
-                    ? EnvDTE80.vsCMParseStatus.vsCMParseStatusError
-                    : EnvDTE80.vsCMParseStatus.vsCMParseStatusComplete;
+                  ? EnvDTE80.vsCMParseStatus.vsCMParseStatusError
+                  : EnvDTE80.vsCMParseStatus.vsCMParseStatusComplete;
             }
         }
 
-        public void Synchronize()
-            => FireEvents();
+        public void Synchronize() => FireEvents();
 
-        EnvDTE.CodeElements ICodeElementContainer<AbstractCodeElement>.GetCollection()
-            => CodeElements;
+        EnvDTE.CodeElements ICodeElementContainer<AbstractCodeElement>.GetCollection() =>
+            CodeElements;
 
         internal List<GlobalNodeKey> GetCurrentNodeKeys()
         {
@@ -772,7 +925,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             foreach (var element in _codeElementTable.Values)
             {
-                var keyedElement = ComAggregate.TryGetManagedObject<AbstractKeyedCodeElement>(element);
+                var keyedElement = ComAggregate.TryGetManagedObject<AbstractKeyedCodeElement>(
+                    element
+                );
                 if (keyedElement == null)
                 {
                     continue;

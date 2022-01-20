@@ -47,52 +47,112 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         /// to the expression as well.  For example, "++a".  In this expression 'a' is both read from
         /// and written to.
         /// </summary>
-        bool IsWrittenTo(SemanticModel semanticModel, SyntaxNode node, CancellationToken cancellationToken);
+        bool IsWrittenTo(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// True if a write is performed to the given expression.  Note: unlike IsWrittenTo, this
         /// will not return true if reads are performed on the expression as well.  For example,
         /// "++a" will return 'false'.  However, 'a' in "out a" or "a = 1" will return true.
         /// </summary>
-        bool IsOnlyWrittenTo(SemanticModel semanticModel, SyntaxNode node, CancellationToken cancellationToken);
-        bool IsInOutContext(SemanticModel semanticModel, SyntaxNode node, CancellationToken cancellationToken);
-        bool IsInRefContext(SemanticModel semanticModel, SyntaxNode node, CancellationToken cancellationToken);
-        bool IsInInContext(SemanticModel semanticModel, SyntaxNode node, CancellationToken cancellationToken);
+        bool IsOnlyWrittenTo(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
+        bool IsInOutContext(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
+        bool IsInRefContext(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
+        bool IsInInContext(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
 
-        bool CanReplaceWithRValue(SemanticModel semanticModel, SyntaxNode expression, CancellationToken cancellationToken);
+        bool CanReplaceWithRValue(
+            SemanticModel semanticModel,
+            SyntaxNode expression,
+            CancellationToken cancellationToken
+        );
 
-        ISymbol GetDeclaredSymbol(SemanticModel semanticModel, SyntaxToken token, CancellationToken cancellationToken);
+        ISymbol GetDeclaredSymbol(
+            SemanticModel semanticModel,
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        );
 
         bool LastEnumValueHasInitializer(INamedTypeSymbol namedTypeSymbol);
 
         /// <summary>
         /// return speculative semantic model for supported node. otherwise, it will return null
         /// </summary>
-        bool TryGetSpeculativeSemanticModel(SemanticModel oldSemanticModel, SyntaxNode oldNode, SyntaxNode newNode, out SemanticModel speculativeModel);
+        bool TryGetSpeculativeSemanticModel(
+            SemanticModel oldSemanticModel,
+            SyntaxNode oldNode,
+            SyntaxNode newNode,
+            out SemanticModel speculativeModel
+        );
 
         /// <summary>
         /// get all alias names defined in the semantic model
         /// </summary>
-        ImmutableHashSet<string> GetAliasNameSet(SemanticModel model, CancellationToken cancellationToken);
+        ImmutableHashSet<string> GetAliasNameSet(
+            SemanticModel model,
+            CancellationToken cancellationToken
+        );
 
         ForEachSymbols GetForEachSymbols(SemanticModel semanticModel, SyntaxNode forEachStatement);
 
         IMethodSymbol GetGetAwaiterMethod(SemanticModel semanticModel, SyntaxNode node);
 
-        ImmutableArray<IMethodSymbol> GetDeconstructionAssignmentMethods(SemanticModel semanticModel, SyntaxNode node);
+        ImmutableArray<IMethodSymbol> GetDeconstructionAssignmentMethods(
+            SemanticModel semanticModel,
+            SyntaxNode node
+        );
 
-        ImmutableArray<IMethodSymbol> GetDeconstructionForEachMethods(SemanticModel semanticModel, SyntaxNode node);
+        ImmutableArray<IMethodSymbol> GetDeconstructionForEachMethods(
+            SemanticModel semanticModel,
+            SyntaxNode node
+        );
 
         bool IsPartial(ITypeSymbol typeSymbol, CancellationToken cancellationToken);
 
-        IEnumerable<ISymbol> GetDeclaredSymbols(SemanticModel semanticModel, SyntaxNode memberDeclaration, CancellationToken cancellationToken);
+        IEnumerable<ISymbol> GetDeclaredSymbols(
+            SemanticModel semanticModel,
+            SyntaxNode memberDeclaration,
+            CancellationToken cancellationToken
+        );
 
-        IParameterSymbol FindParameterForArgument(SemanticModel semanticModel, SyntaxNode argumentNode, CancellationToken cancellationToken);
+        IParameterSymbol FindParameterForArgument(
+            SemanticModel semanticModel,
+            SyntaxNode argumentNode,
+            CancellationToken cancellationToken
+        );
 
 #nullable enable
-        ImmutableArray<ISymbol> GetBestOrAllSymbols(SemanticModel semanticModel, SyntaxNode? node, SyntaxToken token, CancellationToken cancellationToken);
+        ImmutableArray<ISymbol> GetBestOrAllSymbols(
+            SemanticModel semanticModel,
+            SyntaxNode? node,
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        );
+
 #nullable disable
 
-        bool IsInsideNameOfExpression(SemanticModel semanticModel, SyntaxNode node, CancellationToken cancellationToken);
+        bool IsInsideNameOfExpression(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
     }
 }

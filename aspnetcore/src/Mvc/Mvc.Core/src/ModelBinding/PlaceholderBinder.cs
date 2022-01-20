@@ -18,7 +18,10 @@ internal class PlaceholderBinder : IModelBinder
 
     public Task BindModelAsync(ModelBindingContext bindingContext)
     {
-        Debug.Assert(Inner is not null, "Inner must be resolved before BindModelAsync can be called.");
+        Debug.Assert(
+            Inner is not null,
+            "Inner must be resolved before BindModelAsync can be called."
+        );
 
         return Inner.BindModelAsync(bindingContext);
     }

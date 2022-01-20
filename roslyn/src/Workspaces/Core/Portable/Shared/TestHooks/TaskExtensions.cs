@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
 {
     internal static class TaskExtensions
     {
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "This is a Task wrapper, not an asynchronous method.")]
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "This is a Task wrapper, not an asynchronous method."
+        )]
         public static Task CompletesAsyncOperation(this Task task, IAsyncToken asyncToken)
         {
             if (asyncToken is AsynchronousOperationListener.DiagnosticAsyncToken diagnosticToken)
@@ -26,8 +30,13 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
 
         [PerformanceSensitive(
             "https://developercommunity.visualstudio.com/content/problem/854696/changing-target-framework-takes-10-minutes-with-10.html",
-            AllowCaptures = false)]
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "This is a Task wrapper, not an asynchronous method.")]
+            AllowCaptures = false
+        )]
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "This is a Task wrapper, not an asynchronous method."
+        )]
         public static Task CompletesTrackingOperation(this Task task, IDisposable token)
         {
             if (token == null || token == EmptyAsyncToken.Instance)
@@ -43,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                     t => token.Dispose(),
                     CancellationToken.None,
                     TaskContinuationOptions.ExecuteSynchronously,
-                    TaskScheduler.Default);
+                    TaskScheduler.Default
+                );
             }
         }
 
@@ -57,7 +67,10 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         /// <param name="task">The task whose completion should signal the completion of the returned awaitable.</param>
         /// <param name="captureContext">if set to <c>true</c> the continuation will be scheduled on the caller's context; <c>false</c> to always execute the continuation on the threadpool.</param>
         /// <returns>An awaitable.</returns>
-        public static NoThrowTaskAwaitable NoThrowAwaitableInternal(this Task task, bool captureContext = true)
+        public static NoThrowTaskAwaitable NoThrowAwaitableInternal(
+            this Task task,
+            bool captureContext = true
+        )
         {
             return new NoThrowTaskAwaitable(task, captureContext);
         }

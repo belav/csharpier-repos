@@ -8,6 +8,7 @@ namespace OmmitedDTOModel3WithCollections
         {
             this.Entities11 = new List<EntityDTO11>();
         }
+
         public ICollection<EntityDTO11> Entities11 { get; set; }
     }
 }

@@ -33,7 +33,9 @@ public class Test_Collect_fail
         if (!passed)
         {
             // Exception not thrown
-            Console.WriteLine("Test for GC.Collect(-1) failed: ArgumentOutOfRangeException not thrown!");
+            Console.WriteLine(
+                "Test for GC.Collect(-1) failed: ArgumentOutOfRangeException not thrown!"
+            );
             return 1;
         }
 

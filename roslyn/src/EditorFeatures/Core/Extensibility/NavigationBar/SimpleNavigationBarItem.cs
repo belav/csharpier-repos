@@ -9,20 +9,25 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.Editor
 {
-    internal sealed class SimpleNavigationBarItem : NavigationBarItem, IEquatable<SimpleNavigationBarItem>
+    internal sealed class SimpleNavigationBarItem
+        : NavigationBarItem,
+          IEquatable<SimpleNavigationBarItem>
     {
-        public SimpleNavigationBarItem(ITextVersion textVersion, string text, Glyph glyph, ImmutableArray<TextSpan> spans, ImmutableArray<NavigationBarItem> childItems, int indent, bool bolded, bool grayed)
-            : base(textVersion, text, glyph, spans, childItems, indent, bolded, grayed)
-        {
-        }
+        public SimpleNavigationBarItem(
+            ITextVersion textVersion,
+            string text,
+            Glyph glyph,
+            ImmutableArray<TextSpan> spans,
+            ImmutableArray<NavigationBarItem> childItems,
+            int indent,
+            bool bolded,
+            bool grayed
+        ) : base(textVersion, text, glyph, spans, childItems, indent, bolded, grayed) { }
 
-        public override bool Equals(object? obj)
-            => Equals(obj as SimpleNavigationBarItem);
+        public override bool Equals(object? obj) => Equals(obj as SimpleNavigationBarItem);
 
-        public bool Equals(SimpleNavigationBarItem? other)
-            => base.Equals(other);
+        public bool Equals(SimpleNavigationBarItem? other) => base.Equals(other);
 
-        public override int GetHashCode()
-            => throw new NotImplementedException();
+        public override int GetHashCode() => throw new NotImplementedException();
     }
 }

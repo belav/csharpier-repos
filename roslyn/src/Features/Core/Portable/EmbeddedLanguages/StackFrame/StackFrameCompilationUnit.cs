@@ -36,8 +36,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// </summary>
         public readonly StackFrameToken EndOfLineToken;
 
-        public StackFrameCompilationUnit(StackFrameMethodDeclarationNode methodDeclaration, StackFrameFileInformationNode? fileInformationExpression, StackFrameToken endOfLineToken)
-            : base(StackFrameKind.CompilationUnit)
+        public StackFrameCompilationUnit(
+            StackFrameMethodDeclarationNode methodDeclaration,
+            StackFrameFileInformationNode? fileInformationExpression,
+            StackFrameToken endOfLineToken
+        ) : base(StackFrameKind.CompilationUnit)
         {
             MethodDeclaration = methodDeclaration;
             FileInformationExpression = fileInformationExpression;
@@ -46,11 +49,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         internal override int ChildCount => 3;
 
-        public override void Accept(IStackFrameNodeVisitor visitor)
-            => visitor.Visit(this);
+        public override void Accept(IStackFrameNodeVisitor visitor) => visitor.Visit(this);
 
-        internal override StackFrameNodeOrToken ChildAt(int index)
-            => index switch
+        internal override StackFrameNodeOrToken ChildAt(int index) =>
+            index switch
             {
                 0 => MethodDeclaration,
                 1 => FileInformationExpression,

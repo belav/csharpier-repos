@@ -72,10 +72,14 @@ namespace System.Numerics.Tests
                 tempByteArray2 = new byte[] { 0 };
                 VerifyDivRemString(Print(tempByteArray1) + Print(tempByteArray2) + "bDivRem");
 
-                Assert.Throws<DivideByZeroException>(() =>
-                {
-                    VerifyDivRemString(Print(tempByteArray2) + Print(tempByteArray1) + "bDivRem");
-                });
+                Assert.Throws<DivideByZeroException>(
+                    () =>
+                    {
+                        VerifyDivRemString(
+                            Print(tempByteArray2) + Print(tempByteArray1) + "bDivRem"
+                        );
+                    }
+                );
             }
         }
 
@@ -92,10 +96,14 @@ namespace System.Numerics.Tests
                 tempByteArray2 = new byte[] { 0 };
                 VerifyDivRemString(Print(tempByteArray1) + Print(tempByteArray2) + "bDivRem");
 
-                Assert.Throws<DivideByZeroException>(() =>
-                {
-                    VerifyDivRemString(Print(tempByteArray2) + Print(tempByteArray1) + "bDivRem");
-                });
+                Assert.Throws<DivideByZeroException>(
+                    () =>
+                    {
+                        VerifyDivRemString(
+                            Print(tempByteArray2) + Print(tempByteArray1) + "bDivRem"
+                        );
+                    }
+                );
             }
         }
 
@@ -155,7 +163,14 @@ namespace System.Numerics.Tests
                 tempByteArray2 = new byte[] { 0 };
                 VerifyDivRemString(Print(tempByteArray1) + Print(tempByteArray2) + "bDivRem");
 
-                Assert.Throws<DivideByZeroException>(() => { VerifyDivRemString(Print(tempByteArray2) + Print(tempByteArray1) + "bDivRem"); });
+                Assert.Throws<DivideByZeroException>(
+                    () =>
+                    {
+                        VerifyDivRemString(
+                            Print(tempByteArray2) + Print(tempByteArray1) + "bDivRem"
+                        );
+                    }
+                );
             }
 
             // DivRem Method - One small BigIntegers and zero
@@ -165,9 +180,15 @@ namespace System.Numerics.Tests
                 tempByteArray2 = new byte[] { 0 };
                 VerifyDivRemString(Print(tempByteArray1) + Print(tempByteArray2) + "bDivRem");
 
-                Assert.Throws<DivideByZeroException>(() => { VerifyDivRemString(Print(tempByteArray2) + Print(tempByteArray1) + "bDivRem"); });
+                Assert.Throws<DivideByZeroException>(
+                    () =>
+                    {
+                        VerifyDivRemString(
+                            Print(tempByteArray2) + Print(tempByteArray1) + "bDivRem"
+                        );
+                    }
+                );
             }
-
 
             // Check interesting cases for boundary conditions
             // You'll either be shifting a 0 or 1 across the boundary

@@ -10,7 +10,11 @@ namespace System.Web.Http
     /// If the attribute is on a type-declaration, then it's as if that attribute is present on all action parameters 
     /// of that type.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Parameter, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Parameter,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public abstract class ParameterBindingAttribute : Attribute
     {
         public abstract HttpParameterBinding GetBinding(HttpParameterDescriptor parameter);

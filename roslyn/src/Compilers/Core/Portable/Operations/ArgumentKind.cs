@@ -31,4 +31,3 @@ namespace Microsoft.CodeAnalysis.Operations
         DefaultValue = 0x3
     }
 }
-

@@ -16,9 +16,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveStaticMembers
     {
         [ImportingConstructor]
         [System.Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestMoveStaticMembersService()
-        {
-        }
+        public TestMoveStaticMembersService() { }
 
         public string? DestinationType { get; set; }
 
@@ -26,9 +24,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveStaticMembers
 
         public string? Filename { get; set; }
 
-        public MoveStaticMembersOptions GetMoveMembersToTypeOptions(Document document, INamedTypeSymbol selectedType, ISymbol? selectedNodeSymbol)
+        public MoveStaticMembersOptions GetMoveMembersToTypeOptions(
+            Document document,
+            INamedTypeSymbol selectedType,
+            ISymbol? selectedNodeSymbol
+        )
         {
-            var selectedMembers = selectedType.GetMembers().WhereAsArray(symbol => SelectedMembers.Contains(symbol.Name));
+            var selectedMembers = selectedType
+                .GetMembers()
+                .WhereAsArray(symbol => SelectedMembers.Contains(symbol.Name));
             var namespaceDisplay = selectedType.ContainingNamespace.IsGlobalNamespace
                 ? string.Empty
                 : selectedType.ContainingNamespace.ToDisplayString();
@@ -36,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveStaticMembers
             return new MoveStaticMembersOptions(
                 Filename!,
                 string.Join(".", namespaceDisplay, DestinationType!),
-                selectedMembers);
+                selectedMembers
+            );
         }
     }
 }

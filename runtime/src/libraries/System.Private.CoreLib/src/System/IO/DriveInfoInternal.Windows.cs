@@ -25,7 +25,8 @@ namespace System.IO
             int count = 0;
             while (d != 0)
             {
-                if (((int)d & 1) != 0) count++;
+                if (((int)d & 1) != 0)
+                    count++;
                 d >>= 1;
             }
 
@@ -61,7 +62,10 @@ namespace System.IO
                 // Disallow null or empty drive letters and UNC paths
                 if (string.IsNullOrEmpty(name) || name.StartsWith("\\\\", StringComparison.Ordinal))
                 {
-                    throw new ArgumentException(SR.Arg_MustBeDriveLetterOrRootDir, nameof(driveName));
+                    throw new ArgumentException(
+                        SR.Arg_MustBeDriveLetterOrRootDir,
+                        nameof(driveName)
+                    );
                 }
             }
             // We want to normalize to have a trailing backslash so we don't have two equivalent forms and

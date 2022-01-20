@@ -11,6 +11,7 @@ using Microsoft.Extensions.Primitives;
 
 [assembly: MetadataUpdateHandler(typeof(Microsoft.AspNetCore.Mvc.HotReload.HotReloadService))]
 
+
 namespace Microsoft.AspNetCore.Mvc.HotReload;
 
 internal sealed class HotReloadService : IActionDescriptorChangeProvider, IDisposable
@@ -22,15 +23,14 @@ internal sealed class HotReloadService : IActionDescriptorChangeProvider, IDispo
 
     public HotReloadService(
         IModelMetadataProvider modelMetadataProvider,
-        IControllerPropertyActivator controllerPropertyActivator)
-        : this(modelMetadataProvider, controllerPropertyActivator, null)
-    {
-    }
+        IControllerPropertyActivator controllerPropertyActivator
+    ) : this(modelMetadataProvider, controllerPropertyActivator, null) { }
 
     public HotReloadService(
         IModelMetadataProvider modelMetadataProvider,
         IControllerPropertyActivator controllerPropertyActivator,
-        RazorHotReload? razorHotReload)
+        RazorHotReload? razorHotReload
+    )
     {
         ClearCacheEvent += NotifyClearCache;
         UpdateApplicationEvent += NotifyUpdateApplication;
@@ -40,7 +40,10 @@ internal sealed class HotReloadService : IActionDescriptorChangeProvider, IDispo
             _modelMetadataProvider = (DefaultModelMetadataProvider)modelMetadataProvider;
         }
 
-        if (controllerPropertyActivator is DefaultControllerPropertyActivator defaultControllerPropertyActivator)
+        if (
+            controllerPropertyActivator
+            is DefaultControllerPropertyActivator defaultControllerPropertyActivator
+        )
         {
             _controllerPropertyActivator = defaultControllerPropertyActivator;
         }
@@ -61,7 +64,8 @@ internal sealed class HotReloadService : IActionDescriptorChangeProvider, IDispo
         UpdateApplicationEvent?.Invoke(changedTypes);
     }
 
-    IChangeToken IActionDescriptorChangeProvider.GetChangeToken() => new CancellationChangeToken(_tokenSource.Token);
+    IChangeToken IActionDescriptorChangeProvider.GetChangeToken() =>
+        new CancellationChangeToken(_tokenSource.Token);
 
     private void NotifyClearCache(Type[]? changedTypes)
     {

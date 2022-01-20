@@ -39,7 +39,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void Twoary()
         {
             CmsRecipient a0 = s_cr0;
-            CmsRecipientCollection c = new CmsRecipientCollection(SubjectIdentifierType.IssuerAndSerialNumber, new X509Certificate2Collection(a0.Certificate));
+            CmsRecipientCollection c = new CmsRecipientCollection(
+                SubjectIdentifierType.IssuerAndSerialNumber,
+                new X509Certificate2Collection(a0.Certificate)
+            );
             Assert.Equal(1, c.Count);
             CmsRecipient actual = c[0];
             Assert.Equal(a0.RecipientIdentifierType, actual.RecipientIdentifierType);
@@ -50,10 +53,16 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void Twoary_Ski()
         {
             CmsRecipient a0 = s_cr0;
-            CmsRecipientCollection c = new CmsRecipientCollection(SubjectIdentifierType.SubjectKeyIdentifier, new X509Certificate2Collection(a0.Certificate));
+            CmsRecipientCollection c = new CmsRecipientCollection(
+                SubjectIdentifierType.SubjectKeyIdentifier,
+                new X509Certificate2Collection(a0.Certificate)
+            );
             Assert.Equal(1, c.Count);
             CmsRecipient actual = c[0];
-            Assert.Equal(SubjectIdentifierType.SubjectKeyIdentifier, actual.RecipientIdentifierType);
+            Assert.Equal(
+                SubjectIdentifierType.SubjectKeyIdentifier,
+                actual.RecipientIdentifierType
+            );
             Assert.Equal(a0.Certificate, actual.Certificate);
         }
 
@@ -61,7 +70,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void Twoary_Negative()
         {
             object ignore;
-            Assert.Throws<NullReferenceException>(() => ignore = new CmsRecipientCollection(SubjectIdentifierType.IssuerAndSerialNumber, null));
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    ignore = new CmsRecipientCollection(
+                        SubjectIdentifierType.IssuerAndSerialNumber,
+                        null
+                    )
+            );
         }
 
         [Fact]
@@ -123,7 +138,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             CmsRecipientCollection c = new CmsRecipientCollection();
             CmsRecipient a0 = s_cr0;
-            c.Remove(a0);  // You can "remove" items that aren't in the collection - this is defined as a NOP.
+            c.Remove(a0); // You can "remove" items that aren't in the collection - this is defined as a NOP.
         }
 
         [Fact]
@@ -166,17 +181,23 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => ic.CopyTo(a, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => ic.CopyTo(a, 3));
             AssertExtensions.Throws<ArgumentException>(null, () => ic.CopyTo(a, 1));
-            AssertExtensions.Throws<ArgumentException>(null, () => ic.CopyTo(new CmsRecipient[2, 2], 1));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => ic.CopyTo(new CmsRecipient[2, 2], 1)
+            );
             Assert.Throws<InvalidCastException>(() => ic.CopyTo(new int[10], 1));
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
                 // Array has non-zero lower bound
-                Array array = Array.CreateInstance(typeof(object), new int[] { 10 }, new int[] { 10 });
+                Array array = Array.CreateInstance(
+                    typeof(object),
+                    new int[] { 10 },
+                    new int[] { 10 }
+                );
                 Assert.Throws<IndexOutOfRangeException>(() => ic.CopyTo(array, 0));
             }
         }
-
 
         private static void AssertEquals(CmsRecipientCollection c, IList<CmsRecipient> expected)
         {
@@ -227,9 +248,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.False(enumerator.MoveNext());
         }
 
-
-        private static readonly CmsRecipient s_cr0 = new CmsRecipient(Certificates.RSAKeyTransfer1.GetCertificate());
-        private static readonly CmsRecipient s_cr1 = new CmsRecipient(Certificates.RSAKeyTransfer2.GetCertificate());
-        private static readonly CmsRecipient s_cr2 = new CmsRecipient(Certificates.RSAKeyTransfer3.GetCertificate());
+        private static readonly CmsRecipient s_cr0 = new CmsRecipient(
+            Certificates.RSAKeyTransfer1.GetCertificate()
+        );
+        private static readonly CmsRecipient s_cr1 = new CmsRecipient(
+            Certificates.RSAKeyTransfer2.GetCertificate()
+        );
+        private static readonly CmsRecipient s_cr2 = new CmsRecipient(
+            Certificates.RSAKeyTransfer3.GetCertificate()
+        );
     }
 }

@@ -31,7 +31,8 @@ public class PageActionDescriptorProvider : IActionDescriptorProvider
     public PageActionDescriptorProvider(
         IEnumerable<IPageRouteModelProvider> pageRouteModelProviders,
         IOptions<MvcOptions> mvcOptionsAccessor,
-        IOptions<RazorPagesOptions> pagesOptionsAccessor)
+        IOptions<RazorPagesOptions> pagesOptionsAccessor
+    )
     {
         _routeModelProviders = pageRouteModelProviders.OrderBy(p => p.Order).ToArray();
         _mvcOptions = mvcOptionsAccessor.Value;
@@ -77,9 +78,7 @@ public class PageActionDescriptorProvider : IActionDescriptorProvider
     }
 
     /// <inheritdoc/>
-    public void OnProvidersExecuted(ActionDescriptorProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(ActionDescriptorProviderContext context) { }
 
     private void AddActionDescriptors(IList<ActionDescriptor> actions, PageRouteModel model)
     {
@@ -135,7 +134,9 @@ public class PageActionDescriptorProvider : IActionDescriptorProvider
             return selectorModel.AttributeRouteModel!.Template;
         }
 
-        var pageRouteMetadata = selectorModel.EndpointMetadata.OfType<PageRouteMetadata>().SingleOrDefault();
+        var pageRouteMetadata = selectorModel.EndpointMetadata
+            .OfType<PageRouteMetadata>()
+            .SingleOrDefault();
         if (pageRouteMetadata == null)
         {
             // Selector does not have expected metadata
@@ -153,6 +154,9 @@ public class PageActionDescriptorProvider : IActionDescriptorProvider
         var transformedPageRoute = string.Join("/", segments);
 
         // Combine transformed page route with template
-        return AttributeRouteModel.CombineTemplates(transformedPageRoute, pageRouteMetadata.RouteTemplate);
+        return AttributeRouteModel.CombineTemplates(
+            transformedPageRoute,
+            pageRouteMetadata.RouteTemplate
+        );
     }
 }

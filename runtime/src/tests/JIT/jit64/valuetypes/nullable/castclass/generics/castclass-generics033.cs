@@ -9,12 +9,18 @@ internal class NullableTest
 {
     private static bool BoxUnboxToNQ<T>(T o)
     {
-        return Helper.Compare((NestedStructGen<int>)(ValueType)(object)o, Helper.Create(default(NestedStructGen<int>)));
+        return Helper.Compare(
+            (NestedStructGen<int>)(ValueType)(object)o,
+            Helper.Create(default(NestedStructGen<int>))
+        );
     }
 
     private static bool BoxUnboxToQ<T>(T o)
     {
-        return Helper.Compare((NestedStructGen<int>?)(ValueType)(object)o, Helper.Create(default(NestedStructGen<int>)));
+        return Helper.Compare(
+            (NestedStructGen<int>?)(ValueType)(object)o,
+            Helper.Create(default(NestedStructGen<int>))
+        );
     }
 
     private static int Main()
@@ -27,5 +33,3 @@ internal class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

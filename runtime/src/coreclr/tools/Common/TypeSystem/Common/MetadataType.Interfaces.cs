@@ -14,9 +14,6 @@ namespace Internal.TypeSystem
         /// The interfaces explicitly declared as implemented by this MetadataType in the type's metadata.
         /// These correspond to the InterfaceImpls of a type in metadata
         /// </summary>
-        public abstract DefType[] ExplicitlyImplementedInterfaces
-        {
-            get;
-        }
+        public abstract DefType[] ExplicitlyImplementedInterfaces { get; }
     }
 }

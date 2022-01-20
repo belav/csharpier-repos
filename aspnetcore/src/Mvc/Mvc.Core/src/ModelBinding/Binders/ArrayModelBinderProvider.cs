@@ -35,8 +35,10 @@ public class ArrayModelBinderProvider : IModelBinderProvider
                 binderType,
                 elementBinder,
                 loggerFactory,
-                true /* allowValidatingTopLevelNodes */,
-                mvcOptions)!;
+                true /* allowValidatingTopLevelNodes */
+                ,
+                mvcOptions
+            )!;
         }
 
         return null;

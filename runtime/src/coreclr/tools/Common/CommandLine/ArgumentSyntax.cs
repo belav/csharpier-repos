@@ -31,7 +31,10 @@ namespace Internal.CommandLine
             ErrorOnUnexpectedArguments = true;
         }
 
-        public static ArgumentSyntax Parse(IEnumerable<string> arguments, Action<ArgumentSyntax> defineAction)
+        public static ArgumentSyntax Parse(
+            IEnumerable<string> arguments,
+            Action<ArgumentSyntax> defineAction
+        )
         {
             if (arguments == null)
                 throw new ArgumentNullException("arguments");
@@ -61,9 +64,10 @@ namespace Internal.CommandLine
             if (_activeCommand == null && _commands.Any())
             {
                 var unreadCommand = Parser.GetUnreadCommand();
-                var message = unreadCommand == null
-                    ? Strings.MissingCommand
-                    : string.Format(Strings.UnknownCommandFmt, unreadCommand);
+                var message =
+                    unreadCommand == null
+                        ? Strings.MissingCommand
+                        : string.Format(Strings.UnknownCommandFmt, unreadCommand);
                 ReportError(message);
             }
 
@@ -87,10 +91,14 @@ namespace Internal.CommandLine
 
         private bool IsHelpRequested()
         {
-            return Parser.GetUnreadOptionNames()
-                         .Any(a => string.Equals(a, @"-?", StringComparison.Ordinal) ||
-                                   string.Equals(a, @"-h", StringComparison.Ordinal) ||
-                                   string.Equals(a, @"--help", StringComparison.Ordinal));
+            return Parser
+                .GetUnreadOptionNames()
+                .Any(
+                    a =>
+                        string.Equals(a, @"-?", StringComparison.Ordinal)
+                        || string.Equals(a, @"-h", StringComparison.Ordinal)
+                        || string.Equals(a, @"--help", StringComparison.Ordinal)
+                );
         }
 
         public void ReportError(string message)
@@ -140,7 +148,12 @@ namespace Internal.CommandLine
             return definedCommand;
         }
 
-        public Argument<T> DefineOption<T>(string name, T defaultValue, Func<string, T> valueConverter, bool isRequired)
+        public Argument<T> DefineOption<T>(
+            string name,
+            T defaultValue,
+            Func<string, T> valueConverter,
+            bool isRequired
+        )
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException(Strings.NameMissing, "name");
@@ -157,7 +170,16 @@ namespace Internal.CommandLine
 
             try
             {
-                if (Parser.TryParseOption(option.GetDisplayName(), option.Names, valueConverter, isRequired, out T value, out bool specified))
+                if (
+                    Parser.TryParseOption(
+                        option.GetDisplayName(),
+                        option.Names,
+                        valueConverter,
+                        isRequired,
+                        out T value,
+                        out bool specified
+                    )
+                )
                 {
                     option.SetValue(value);
                 }
@@ -175,7 +197,12 @@ namespace Internal.CommandLine
             return option;
         }
 
-        public ArgumentList<T> DefineOptionList<T>(string name, IReadOnlyList<T> defaultValue, Func<string, T> valueConverter, bool isRequired)
+        public ArgumentList<T> DefineOptionList<T>(
+            string name,
+            IReadOnlyList<T> defaultValue,
+            Func<string, T> valueConverter,
+            bool isRequired
+        )
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException(Strings.NameMissing, "name");
@@ -192,7 +219,16 @@ namespace Internal.CommandLine
 
             try
             {
-                if (Parser.TryParseOptionList(optionList.GetDisplayName(), optionList.Names, valueConverter, isRequired, out IReadOnlyList<T> value, out bool specified))
+                if (
+                    Parser.TryParseOptionList(
+                        optionList.GetDisplayName(),
+                        optionList.Names,
+                        valueConverter,
+                        isRequired,
+                        out IReadOnlyList<T> value,
+                        out bool specified
+                    )
+                )
                 {
                     optionList.SetValue(value);
                 }
@@ -210,7 +246,11 @@ namespace Internal.CommandLine
             return optionList;
         }
 
-        public Argument<T> DefineParameter<T>(string name, T defaultValue, Func<string, T> valueConverter)
+        public Argument<T> DefineParameter<T>(
+            string name,
+            T defaultValue,
+            Func<string, T> valueConverter
+        )
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException(Strings.NameMissing, "name");
@@ -224,7 +264,11 @@ namespace Internal.CommandLine
             if (DefinedParameters.Any(p => p.IsList))
                 throw new InvalidOperationException(Strings.ParametersCannotBeDefinedAfterLists);
 
-            if (DefinedParameters.Any(p => string.Equals(name, p.Name, StringComparison.OrdinalIgnoreCase)))
+            if (
+                DefinedParameters.Any(
+                    p => string.Equals(name, p.Name, StringComparison.OrdinalIgnoreCase)
+                )
+            )
             {
                 var message = string.Format(Strings.ParameterAlreadyDefinedFmt, name);
                 throw new InvalidOperationException(message);
@@ -238,7 +282,13 @@ namespace Internal.CommandLine
 
             try
             {
-                if (Parser.TryParseParameter(parameter.GetDisplayName(), valueConverter, out T value))
+                if (
+                    Parser.TryParseParameter(
+                        parameter.GetDisplayName(),
+                        valueConverter,
+                        out T value
+                    )
+                )
                     parameter.SetValue(value);
             }
             catch (ArgumentSyntaxException ex)
@@ -249,7 +299,11 @@ namespace Internal.CommandLine
             return parameter;
         }
 
-        public ArgumentList<T> DefineParameterList<T>(string name, IReadOnlyList<T> defaultValue, Func<string, T> valueConverter)
+        public ArgumentList<T> DefineParameterList<T>(
+            string name,
+            IReadOnlyList<T> defaultValue,
+            Func<string, T> valueConverter
+        )
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException(Strings.NameMissing, "name");
@@ -271,7 +325,13 @@ namespace Internal.CommandLine
 
             try
             {
-                if (Parser.TryParseParameterList(parameterList.GetDisplayName(), valueConverter, out IReadOnlyList<T> values))
+                if (
+                    Parser.TryParseParameterList(
+                        parameterList.GetDisplayName(),
+                        valueConverter,
+                        out IReadOnlyList<T> values
+                    )
+                )
                     parameterList.SetValue(values);
             }
             catch (ArgumentSyntaxException ex)
@@ -290,9 +350,7 @@ namespace Internal.CommandLine
             if (name[0] == '-')
                 return false;
 
-            return name.All(c => char.IsLetterOrDigit(c) ||
-                                 c == '-' ||
-                                 c == '_');
+            return name.All(c => char.IsLetterOrDigit(c) || c == '-' || c == '_');
         }
 
         private IEnumerable<string> ParseOptionNameList(string name)
@@ -351,8 +409,7 @@ namespace Internal.CommandLine
 
         public bool ErrorOnUnexpectedArguments { get; set; }
 
-        public IEnumerable<string> RemainingArguments
-            => Parser.GetUnreadArguments();
+        public IEnumerable<string> RemainingArguments => Parser.GetUnreadArguments();
 
         private ArgumentParser Parser
         {
@@ -372,7 +429,10 @@ namespace Internal.CommandLine
 
         private IEnumerable<Argument> DefinedParameters
         {
-            get { return _parameters.Where(p => p.Command == null || p.Command == _definedCommand); }
+            get
+            {
+                return _parameters.Where(p => p.Command == null || p.Command == _definedCommand);
+            }
         }
 
         public ArgumentCommand ActiveCommand
@@ -439,9 +499,7 @@ namespace Internal.CommandLine
                 if (!Console.IsOutputRedirected)
                     return Console.WindowWidth;
             }
-            catch
-            {
-            }
+            catch { }
             return 100;
         }
 
@@ -462,10 +520,7 @@ namespace Internal.CommandLine
                 _extraHelpParagraphs.Clear();
                 _extraHelpParagraphs.AddRange(value);
             }
-            get
-            {
-                return _extraHelpParagraphs.ToArray();
-            }
+            get { return _extraHelpParagraphs.ToArray(); }
         }
     }
 }

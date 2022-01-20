@@ -20,13 +20,9 @@ namespace System.ComponentModel
         private Hashtable? _resourceSets;
         private CultureInfo? _neutralResourcesCulture;
 
-        public ComponentResourceManager()
-        {
-        }
+        public ComponentResourceManager() { }
 
-        public ComponentResourceManager(Type t) : base(t)
-        {
-        }
+        public ComponentResourceManager(Type t) : base(t) { }
 
         /// <summary>
         /// The culture of the main assembly's neutral resources. If someone is asking for this culture's resources,
@@ -53,7 +49,8 @@ namespace System.ComponentModel
         /// property the resource will be ignored.
         /// </summary>
         [RequiresUnreferencedCode("The Type of value cannot be statically discovered.")]
-        public void ApplyResources(object value, string objectName) => ApplyResources(value, objectName, null);
+        public void ApplyResources(object value, string objectName) =>
+            ApplyResources(value, objectName, null);
 
         /// <summary>
         /// This method examines all the resources for the provided culture.
@@ -100,14 +97,18 @@ namespace System.ComponentModel
             else
             {
                 resources = (SortedList<string, object?>?)_resourceSets[culture];
-                if (resources == null || (resources.Comparer.Equals(StringComparer.OrdinalIgnoreCase) != IgnoreCase))
+                if (
+                    resources == null
+                    || (resources.Comparer.Equals(StringComparer.OrdinalIgnoreCase) != IgnoreCase)
+                )
                 {
                     resources = FillResources(culture, out ResourceSet? dummy);
                     _resourceSets[culture] = resources;
                 }
             }
 
-            BindingFlags flags = BindingFlags.Public | BindingFlags.GetProperty | BindingFlags.Instance;
+            BindingFlags flags =
+                BindingFlags.Public | BindingFlags.GetProperty | BindingFlags.Instance;
             if (IgnoreCase)
             {
                 flags |= BindingFlags.IgnoreCase;
@@ -130,7 +131,16 @@ namespace System.ComponentModel
 
                 if (IgnoreCase)
                 {
-                    if (string.Compare(key, 0, objectName, 0, objectName.Length, StringComparison.OrdinalIgnoreCase) != 0)
+                    if (
+                        string.Compare(
+                            key,
+                            0,
+                            objectName,
+                            0,
+                            objectName.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        ) != 0
+                    )
                     {
                         continue;
                     }
@@ -156,9 +166,15 @@ namespace System.ComponentModel
 
                 if (componentReflect)
                 {
-                    PropertyDescriptor? prop = TypeDescriptor.GetProperties(value).Find(propName, IgnoreCase);
+                    PropertyDescriptor? prop = TypeDescriptor
+                        .GetProperties(value)
+                        .Find(propName, IgnoreCase);
 
-                    if (prop != null && !prop.IsReadOnly && (kvp.Value == null || prop.PropertyType.IsInstanceOfType(kvp.Value)))
+                    if (
+                        prop != null
+                        && !prop.IsReadOnly
+                        && (kvp.Value == null || prop.PropertyType.IsInstanceOfType(kvp.Value))
+                    )
                     {
                         prop.SetValue(value, kvp.Value);
                     }
@@ -183,7 +199,11 @@ namespace System.ComponentModel
                         } while (prop == null && t != null && t != typeof(object));
                     }
 
-                    if (prop != null && prop.CanWrite && (kvp.Value == null || prop.PropertyType.IsInstanceOfType(kvp.Value)))
+                    if (
+                        prop != null
+                        && prop.CanWrite
+                        && (kvp.Value == null || prop.PropertyType.IsInstanceOfType(kvp.Value))
+                    )
                     {
                         prop.SetValue(value, kvp.Value, null);
                     }
@@ -195,14 +215,20 @@ namespace System.ComponentModel
         /// Recursive routine that creates a resource hashtable populated with
         /// resources for culture and all parent cultures.
         /// </summary>
-        private SortedList<string, object?> FillResources(CultureInfo culture, out ResourceSet? resourceSet)
+        private SortedList<string, object?> FillResources(
+            CultureInfo culture,
+            out ResourceSet? resourceSet
+        )
         {
             SortedList<string, object?> sd;
             ResourceSet? parentResourceSet = null;
 
             // Traverse parents first, so we always replace more
             // specific culture values with less specific.
-            if (!culture.Equals(CultureInfo.InvariantCulture) && !culture.Equals(NeutralResourcesCulture))
+            if (
+                !culture.Equals(CultureInfo.InvariantCulture)
+                && !culture.Equals(NeutralResourcesCulture)
+            )
             {
                 sd = FillResources(culture.Parent, out parentResourceSet);
             }

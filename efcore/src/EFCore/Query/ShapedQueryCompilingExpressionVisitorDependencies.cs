@@ -54,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IEntityMaterializerSource entityMaterializerSource,
             ITypeMappingSource typeMappingSource,
             IMemoryCache memoryCache,
-            ICoreSingletonOptions coreSingletonOptions)
+            ICoreSingletonOptions coreSingletonOptions
+        )
         {
             EntityMaterializerSource = entityMaterializerSource;
             TypeMappingSource = typeMappingSource;

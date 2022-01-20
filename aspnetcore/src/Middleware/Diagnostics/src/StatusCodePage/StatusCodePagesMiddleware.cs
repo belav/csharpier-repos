@@ -52,11 +52,13 @@ public class StatusCodePagesMiddleware
         }
 
         // Do nothing if a response body has already been provided.
-        if (context.Response.HasStarted
+        if (
+            context.Response.HasStarted
             || context.Response.StatusCode < 400
             || context.Response.StatusCode >= 600
             || context.Response.ContentLength.HasValue
-            || !string.IsNullOrEmpty(context.Response.ContentType))
+            || !string.IsNullOrEmpty(context.Response.ContentType)
+        )
         {
             return;
         }

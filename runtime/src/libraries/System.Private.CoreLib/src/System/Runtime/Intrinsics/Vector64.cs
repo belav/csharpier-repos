@@ -30,8 +30,7 @@ namespace System.Runtime.Intrinsics
         /// <returns>A vector whose elements are the absolute value of the elements in <paramref name="vector" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector64<T> Abs<T>(Vector64<T> vector)
-            where T : struct
+        public static Vector64<T> Abs<T>(Vector64<T> vector) where T : struct
         {
             if (typeof(T) == typeof(byte))
             {
@@ -75,8 +74,8 @@ namespace System.Runtime.Intrinsics
         /// <returns>The sum of <paramref name="left" /> and <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector64<T> Add<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct => left + right;
+        public static Vector64<T> Add<T>(Vector64<T> left, Vector64<T> right) where T : struct =>
+            left + right;
 
         /// <summary>Computes the bitwise-and of a given vector and the ones complement of another vector.</summary>
         /// <param name="left">The vector to bitwise-and with <paramref name="right" />.</param>
@@ -85,8 +84,8 @@ namespace System.Runtime.Intrinsics
         /// <returns>The bitwise-and of <paramref name="left" /> and the ones-complement of <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector64<T> AndNot<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct => left & ~right;
+        public static Vector64<T> AndNot<T>(Vector64<T> left, Vector64<T> right) where T : struct =>
+            left & ~right;
 
         /// <summary>Reinterprets a <see cref="Vector64{T}" /> as a new <see cref="Vector64{U}" />.</summary>
         /// <typeparam name="TFrom">The type of the input vector.</typeparam>
@@ -112,8 +111,8 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="vector" /> reinterpreted as a new <see cref="Vector64{Byte}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector64<byte> AsByte<T>(this Vector64<T> vector)
-            where T : struct => vector.As<T, byte>();
+        public static Vector64<byte> AsByte<T>(this Vector64<T> vector) where T : struct =>
+            vector.As<T, byte>();
 
         /// <summary>Reinterprets a <see cref="Vector64{T}" /> as a new <see cref="Vector64{Double}" />.</summary>
         /// <typeparam name="T">The type of the input vector.</typeparam>
@@ -121,8 +120,8 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="vector" /> reinterpreted as a new <see cref="Vector64{Double}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector64<double> AsDouble<T>(this Vector64<T> vector)
-            where T : struct => vector.As<T, double>();
+        public static Vector64<double> AsDouble<T>(this Vector64<T> vector) where T : struct =>
+            vector.As<T, double>();
 
         /// <summary>Reinterprets a <see cref="Vector64{T}" /> as a new <see cref="Vector64{Int16}" />.</summary>
         /// <typeparam name="T">The type of the input vector.</typeparam>
@@ -130,8 +129,8 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="vector" /> reinterpreted as a new <see cref="Vector64{Int16}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector64<short> AsInt16<T>(this Vector64<T> vector)
-            where T : struct => vector.As<T, short>();
+        public static Vector64<short> AsInt16<T>(this Vector64<T> vector) where T : struct =>
+            vector.As<T, short>();
 
         /// <summary>Reinterprets a <see cref="Vector64{T}" /> as a new <see cref="Vector64{Int32}" />.</summary>
         /// <typeparam name="T">The type of the input vector.</typeparam>
@@ -139,8 +138,8 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="vector" /> reinterpreted as a new <see cref="Vector64{Int32}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector64<int> AsInt32<T>(this Vector64<T> vector)
-            where T : struct => vector.As<T, int>();
+        public static Vector64<int> AsInt32<T>(this Vector64<T> vector) where T : struct =>
+            vector.As<T, int>();
 
         /// <summary>Reinterprets a <see cref="Vector64{T}" /> as a new <see cref="Vector64{Int64}" />.</summary>
         /// <typeparam name="T">The type of the input vector.</typeparam>
@@ -148,8 +147,8 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="vector" /> reinterpreted as a new <see cref="Vector64{Int64}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector64<long> AsInt64<T>(this Vector64<T> vector)
-            where T : struct => vector.As<T, long>();
+        public static Vector64<long> AsInt64<T>(this Vector64<T> vector) where T : struct =>
+            vector.As<T, long>();
 
         /// <summary>Reinterprets a <see cref="Vector64{T}" /> as a new <see cref="Vector64{SByte}" />.</summary>
         /// <typeparam name="T">The type of the input vector.</typeparam>
@@ -158,8 +157,8 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
         [CLSCompliant(false)]
-        public static Vector64<sbyte> AsSByte<T>(this Vector64<T> vector)
-            where T : struct => vector.As<T, sbyte>();
+        public static Vector64<sbyte> AsSByte<T>(this Vector64<T> vector) where T : struct =>
+            vector.As<T, sbyte>();
 
         /// <summary>Reinterprets a <see cref="Vector64{T}" /> as a new <see cref="Vector64{Single}" />.</summary>
         /// <typeparam name="T">The type of the input vector.</typeparam>
@@ -167,8 +166,8 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="vector" /> reinterpreted as a new <see cref="Vector64{Single}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector64<float> AsSingle<T>(this Vector64<T> vector)
-            where T : struct => vector.As<T, float>();
+        public static Vector64<float> AsSingle<T>(this Vector64<T> vector) where T : struct =>
+            vector.As<T, float>();
 
         /// <summary>Reinterprets a <see cref="Vector64{T}" /> as a new <see cref="Vector64{UInt16}" />.</summary>
         /// <typeparam name="T">The type of the input vector.</typeparam>
@@ -177,8 +176,8 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
         [CLSCompliant(false)]
-        public static Vector64<ushort> AsUInt16<T>(this Vector64<T> vector)
-            where T : struct => vector.As<T, ushort>();
+        public static Vector64<ushort> AsUInt16<T>(this Vector64<T> vector) where T : struct =>
+            vector.As<T, ushort>();
 
         /// <summary>Reinterprets a <see cref="Vector64{T}" /> as a new <see cref="Vector64{UInt32}" />.</summary>
         /// <typeparam name="T">The type of the input vector.</typeparam>
@@ -187,8 +186,8 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
         [CLSCompliant(false)]
-        public static Vector64<uint> AsUInt32<T>(this Vector64<T> vector)
-            where T : struct => vector.As<T, uint>();
+        public static Vector64<uint> AsUInt32<T>(this Vector64<T> vector) where T : struct =>
+            vector.As<T, uint>();
 
         /// <summary>Reinterprets a <see cref="Vector64{T}" /> as a new <see cref="Vector64{UInt64}" />.</summary>
         /// <typeparam name="T">The type of the input vector.</typeparam>
@@ -197,8 +196,8 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
         [CLSCompliant(false)]
-        public static Vector64<ulong> AsUInt64<T>(this Vector64<T> vector)
-            where T : struct => vector.As<T, ulong>();
+        public static Vector64<ulong> AsUInt64<T>(this Vector64<T> vector) where T : struct =>
+            vector.As<T, ulong>();
 
         /// <summary>Computes the bitwise-and of two vectors.</summary>
         /// <param name="left">The vector to bitwise-and with <paramref name="right" />.</param>
@@ -262,8 +261,11 @@ namespace System.Runtime.Intrinsics
         /// <returns>A vector whose bits come from <paramref name="left" /> or <paramref name="right" /> based on the value of <paramref name="condition" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector64<T> ConditionalSelect<T>(Vector64<T> condition, Vector64<T> left, Vector64<T> right)
-            where T : struct => (left & condition) | (right & ~condition);
+        public static Vector64<T> ConditionalSelect<T>(
+            Vector64<T> condition,
+            Vector64<T> left,
+            Vector64<T> right
+        ) where T : struct => (left & condition) | (right & ~condition);
 
         /// <summary>Converts a <see cref="Vector64{Int64}" /> to a <see cref="Vector64{Double}" />.</summary>
         /// <param name="vector">The vector to convert.</param>
@@ -411,8 +413,8 @@ namespace System.Runtime.Intrinsics
         /// <param name="destination">The array to which <paramref name="vector" /> is copied.</param>
         /// <exception cref="NullReferenceException"><paramref name="destination" /> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">The length of <paramref name="destination" /> is less than <see cref="Vector64{T}.Count" />.</exception>
-        public static void CopyTo<T>(this Vector64<T> vector, T[] destination)
-            where T : struct => vector.CopyTo(destination, startIndex: 0);
+        public static void CopyTo<T>(this Vector64<T> vector, T[] destination) where T : struct =>
+            vector.CopyTo(destination, startIndex: 0);
 
         /// <summary>Copies a <see cref="Vector64{T}" /> to a given array starting at the specified index.</summary>
         /// <typeparam name="T">The type of the elements in the vector.</typeparam>
@@ -422,8 +424,11 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="ArgumentException">The length of <paramref name="destination" /> is less than <see cref="Vector64{T}.Count" />.</exception>
         /// <exception cref="NullReferenceException"><paramref name="destination" /> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="startIndex" /> is negative or greater than the length of <paramref name="destination" />.</exception>
-        public static unsafe void CopyTo<T>(this Vector64<T> vector, T[] destination, int startIndex)
-            where T : struct
+        public static unsafe void CopyTo<T>(
+            this Vector64<T> vector,
+            T[] destination,
+            int startIndex
+        ) where T : struct
         {
             ThrowHelper.ThrowForUnsupportedIntrinsicsVector64BaseType<T>();
 
@@ -450,8 +455,7 @@ namespace System.Runtime.Intrinsics
         /// <param name="vector">The vector to be copied.</param>
         /// <param name="destination">The span to which <paramref name="vector" /> is copied.</param>
         /// <exception cref="ArgumentException">The length of <paramref name="destination" /> is less than <see cref="Vector64{T}.Count" />.</exception>
-        public static void CopyTo<T>(this Vector64<T> vector, Span<T> destination)
-            where T : struct
+        public static void CopyTo<T>(this Vector64<T> vector, Span<T> destination) where T : struct
         {
             ThrowHelper.ThrowForUnsupportedIntrinsicsVector64BaseType<T>();
 
@@ -460,7 +464,10 @@ namespace System.Runtime.Intrinsics
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)), vector);
+            Unsafe.WriteUnaligned(
+                ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)),
+                vector
+            );
         }
 
         /// <summary>Creates a new <see cref="Vector64{T}" /> instance with all elements initialized to the specified value.</summary>
@@ -468,8 +475,7 @@ namespace System.Runtime.Intrinsics
         /// <returns>A new <see cref="Vector64{T}" /> with all elements initialized to <paramref name="value" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe Vector64<T> Create<T>(T value)
-            where T : struct
+        public static unsafe Vector64<T> Create<T>(T value) where T : struct
         {
             if (typeof(T) == typeof(byte))
             {
@@ -533,17 +539,8 @@ namespace System.Runtime.Intrinsics
 
             static Vector64<byte> SoftwareFallback(byte value)
             {
-                byte* pResult = stackalloc byte[8]
-                {
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                };
+                byte* pResult =
+                    stackalloc byte[8] { value, value, value, value, value, value, value, value, };
 
                 return Unsafe.AsRef<Vector64<byte>>(pResult);
             }
@@ -584,13 +581,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector64<short> SoftwareFallback(short value)
             {
-                short* pResult = stackalloc short[4]
-                {
-                    value,
-                    value,
-                    value,
-                    value,
-                };
+                short* pResult = stackalloc short[4] { value, value, value, value, };
 
                 return Unsafe.AsRef<Vector64<short>>(pResult);
             }
@@ -612,11 +603,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector64<int> SoftwareFallback(int value)
             {
-                int* pResult = stackalloc int[2]
-                {
-                    value,
-                    value,
-                };
+                int* pResult = stackalloc int[2] { value, value, };
 
                 return Unsafe.AsRef<Vector64<int>>(pResult);
             }
@@ -658,17 +645,8 @@ namespace System.Runtime.Intrinsics
 
             static Vector64<sbyte> SoftwareFallback(sbyte value)
             {
-                sbyte* pResult = stackalloc sbyte[8]
-                {
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                };
+                sbyte* pResult =
+                    stackalloc sbyte[8] { value, value, value, value, value, value, value, value, };
 
                 return Unsafe.AsRef<Vector64<sbyte>>(pResult);
             }
@@ -689,11 +667,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector64<float> SoftwareFallback(float value)
             {
-                float* pResult = stackalloc float[2]
-                {
-                    value,
-                    value,
-                };
+                float* pResult = stackalloc float[2] { value, value, };
 
                 return Unsafe.AsRef<Vector64<float>>(pResult);
             }
@@ -716,13 +690,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector64<ushort> SoftwareFallback(ushort value)
             {
-                ushort* pResult = stackalloc ushort[4]
-                {
-                    value,
-                    value,
-                    value,
-                    value,
-                };
+                ushort* pResult = stackalloc ushort[4] { value, value, value, value, };
 
                 return Unsafe.AsRef<Vector64<ushort>>(pResult);
             }
@@ -745,11 +713,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector64<uint> SoftwareFallback(uint value)
             {
-                uint* pResult = stackalloc uint[2]
-                {
-                    value,
-                    value,
-                };
+                uint* pResult = stackalloc uint[2] { value, value, };
 
                 return Unsafe.AsRef<Vector64<uint>>(pResult);
             }
@@ -781,8 +745,8 @@ namespace System.Runtime.Intrinsics
         /// <returns>A new <see cref="Vector64{T}" /> with its elements set to the first <see cref="Vector64{T}.Count" /> elements from <paramref name="values" />.</returns>
         /// <exception cref="NullReferenceException"><paramref name="values" /> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The length of <paramref name="values" /> is less than <see cref="Vector64{T}.Count" />.</exception>
-        public static Vector64<T> Create<T>(T[] values)
-            where T : struct => Create(values, index: 0);
+        public static Vector64<T> Create<T>(T[] values) where T : struct =>
+            Create(values, index: 0);
 
         /// <summary>Creates a new <see cref="Vector64{T}" /> from a given array.</summary>
         /// <typeparam name="T">The type of the elements in the vector.</typeparam>
@@ -791,8 +755,7 @@ namespace System.Runtime.Intrinsics
         /// <returns>A new <see cref="Vector64{T}" /> with its elements set to the first <see cref="Vector128{T}.Count" /> elements from <paramref name="values" />.</returns>
         /// <exception cref="NullReferenceException"><paramref name="values" /> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The length of <paramref name="values" />, starting from <paramref name="index" />, is less than <see cref="Vector64{T}.Count" />.</exception>
-        public static Vector64<T> Create<T>(T[] values, int index)
-            where T : struct
+        public static Vector64<T> Create<T>(T[] values, int index) where T : struct
         {
             ThrowHelper.ThrowForUnsupportedIntrinsicsVector64BaseType<T>();
 
@@ -814,8 +777,7 @@ namespace System.Runtime.Intrinsics
         /// <param name="values">The readonly span from which the vector is created.</param>
         /// <returns>A new <see cref="Vector64{T}" /> with its elements set to the first <see cref="Vector64{T}.Count" /> elements from <paramref name="values" />.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The length of <paramref name="values" /> is less than <see cref="Vector64{T}.Count" />.</exception>
-        public static Vector64<T> Create<T>(ReadOnlySpan<T> values)
-            where T : struct
+        public static Vector64<T> Create<T>(ReadOnlySpan<T> values) where T : struct
         {
             ThrowHelper.ThrowForUnsupportedIntrinsicsVector64BaseType<T>();
 
@@ -824,7 +786,9 @@ namespace System.Runtime.Intrinsics
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.values);
             }
 
-            return Unsafe.ReadUnaligned<Vector64<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(values)));
+            return Unsafe.ReadUnaligned<Vector64<T>>(
+                ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(values))
+            );
         }
 
         /// <summary>Creates a new <see cref="Vector64{Byte}" /> instance with each element initialized to the corresponding specified value.</summary>
@@ -839,7 +803,16 @@ namespace System.Runtime.Intrinsics
         /// <remarks>On x86, this method corresponds to __m64 _mm_setr_pi8</remarks>
         /// <returns>A new <see cref="Vector64{Byte}" /> with each element initialized to corresponding specified value.</returns>
         [Intrinsic]
-        public static unsafe Vector64<byte> Create(byte e0, byte e1, byte e2, byte e3, byte e4, byte e5, byte e6, byte e7)
+        public static unsafe Vector64<byte> Create(
+            byte e0,
+            byte e1,
+            byte e2,
+            byte e3,
+            byte e4,
+            byte e5,
+            byte e6,
+            byte e7
+        )
         {
             if (AdvSimd.IsSupported)
             {
@@ -848,19 +821,18 @@ namespace System.Runtime.Intrinsics
 
             return SoftwareFallback(e0, e1, e2, e3, e4, e5, e6, e7);
 
-            static Vector64<byte> SoftwareFallback(byte e0, byte e1, byte e2, byte e3, byte e4, byte e5, byte e6, byte e7)
+            static Vector64<byte> SoftwareFallback(
+                byte e0,
+                byte e1,
+                byte e2,
+                byte e3,
+                byte e4,
+                byte e5,
+                byte e6,
+                byte e7
+            )
             {
-                byte* pResult = stackalloc byte[8]
-                {
-                    e0,
-                    e1,
-                    e2,
-                    e3,
-                    e4,
-                    e5,
-                    e6,
-                    e7,
-                };
+                byte* pResult = stackalloc byte[8] { e0, e1, e2, e3, e4, e5, e6, e7, };
 
                 return Unsafe.AsRef<Vector64<byte>>(pResult);
             }
@@ -885,13 +857,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector64<short> SoftwareFallback(short e0, short e1, short e2, short e3)
             {
-                short* pResult = stackalloc short[4]
-                {
-                    e0,
-                    e1,
-                    e2,
-                    e3,
-                };
+                short* pResult = stackalloc short[4] { e0, e1, e2, e3, };
 
                 return Unsafe.AsRef<Vector64<short>>(pResult);
             }
@@ -914,11 +880,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector64<int> SoftwareFallback(int e0, int e1)
             {
-                int* pResult = stackalloc int[2]
-                {
-                    e0,
-                    e1,
-                };
+                int* pResult = stackalloc int[2] { e0, e1, };
 
                 return Unsafe.AsRef<Vector64<int>>(pResult);
             }
@@ -937,7 +899,16 @@ namespace System.Runtime.Intrinsics
         /// <returns>A new <see cref="Vector64{SByte}" /> with each element initialized to corresponding specified value.</returns>
         [Intrinsic]
         [CLSCompliant(false)]
-        public static unsafe Vector64<sbyte> Create(sbyte e0, sbyte e1, sbyte e2, sbyte e3, sbyte e4, sbyte e5, sbyte e6, sbyte e7)
+        public static unsafe Vector64<sbyte> Create(
+            sbyte e0,
+            sbyte e1,
+            sbyte e2,
+            sbyte e3,
+            sbyte e4,
+            sbyte e5,
+            sbyte e6,
+            sbyte e7
+        )
         {
             if (AdvSimd.IsSupported)
             {
@@ -946,19 +917,18 @@ namespace System.Runtime.Intrinsics
 
             return SoftwareFallback(e0, e1, e2, e3, e4, e5, e6, e7);
 
-            static Vector64<sbyte> SoftwareFallback(sbyte e0, sbyte e1, sbyte e2, sbyte e3, sbyte e4, sbyte e5, sbyte e6, sbyte e7)
+            static Vector64<sbyte> SoftwareFallback(
+                sbyte e0,
+                sbyte e1,
+                sbyte e2,
+                sbyte e3,
+                sbyte e4,
+                sbyte e5,
+                sbyte e6,
+                sbyte e7
+            )
             {
-                sbyte* pResult = stackalloc sbyte[8]
-                {
-                    e0,
-                    e1,
-                    e2,
-                    e3,
-                    e4,
-                    e5,
-                    e6,
-                    e7,
-                };
+                sbyte* pResult = stackalloc sbyte[8] { e0, e1, e2, e3, e4, e5, e6, e7, };
 
                 return Unsafe.AsRef<Vector64<sbyte>>(pResult);
             }
@@ -980,11 +950,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector64<float> SoftwareFallback(float e0, float e1)
             {
-                float* pResult = stackalloc float[2]
-                {
-                    e0,
-                    e1,
-                };
+                float* pResult = stackalloc float[2] { e0, e1, };
 
                 return Unsafe.AsRef<Vector64<float>>(pResult);
             }
@@ -1010,13 +976,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector64<ushort> SoftwareFallback(ushort e0, ushort e1, ushort e2, ushort e3)
             {
-                ushort* pResult = stackalloc ushort[4]
-                {
-                    e0,
-                    e1,
-                    e2,
-                    e3,
-                };
+                ushort* pResult = stackalloc ushort[4] { e0, e1, e2, e3, };
 
                 return Unsafe.AsRef<Vector64<ushort>>(pResult);
             }
@@ -1040,11 +1000,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector64<uint> SoftwareFallback(uint e0, uint e1)
             {
-                uint* pResult = stackalloc uint[2]
-                {
-                    e0,
-                    e1,
-                };
+                uint* pResult = stackalloc uint[2] { e0, e1, };
 
                 return Unsafe.AsRef<Vector64<uint>>(pResult);
             }
@@ -1229,7 +1185,6 @@ namespace System.Runtime.Intrinsics
             }
         }
 
-
         /// <summary>Creates a new <see cref="Vector64{UInt64}" /> instance with the first element initialized to the specified value and the remaining elements initialized to zero.</summary>
         /// <param name="value">The value that element 0 will be initialized to.</param>
         /// <returns>A new <see cref="Vector64{UInt64}" /> instance with the first element initialized to <paramref name="value"/> and the remaining elements initialized to zero.</returns>
@@ -1357,8 +1312,8 @@ namespace System.Runtime.Intrinsics
         /// <returns>The quotient of <paramref name="left" /> divided by <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector64<T> Divide<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct => left / right;
+        public static Vector64<T> Divide<T>(Vector64<T> left, Vector64<T> right) where T : struct =>
+            left / right;
 
         /// <summary>Computes the dot product of two vectors.</summary>
         /// <param name="left">The vector that will be dotted with <paramref name="right" />.</param>
@@ -1366,14 +1321,16 @@ namespace System.Runtime.Intrinsics
         /// <typeparam name="T">The type of the elements in the vector.</typeparam>
         /// <returns>The dot product of <paramref name="left" /> and <paramref name="right" />.</returns>
         [Intrinsic]
-        public static T Dot<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct
+        public static T Dot<T>(Vector64<T> left, Vector64<T> right) where T : struct
         {
             T result = default;
 
             for (int index = 0; index < Vector64<T>.Count; index++)
             {
-                var value = Scalar<T>.Multiply(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                var value = Scalar<T>.Multiply(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result = Scalar<T>.Add(result, value);
             }
 
@@ -1386,14 +1343,18 @@ namespace System.Runtime.Intrinsics
         /// <typeparam name="T">The type of the elements in the vector.</typeparam>
         /// <returns>A vector whose elements are all-bits-set or zero, depending on if the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were equal.</returns>
         [Intrinsic]
-        public static Vector64<T> Equals<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct
+        public static Vector64<T> Equals<T>(Vector64<T> left, Vector64<T> right) where T : struct
         {
             Unsafe.SkipInit(out Vector64<T> result);
 
             for (int index = 0; index < Vector64<T>.Count; index++)
             {
-                var value = Scalar<T>.Equals(left.GetElementUnsafe(index), right.GetElementUnsafe(index)) ? Scalar<T>.AllBitsSet : default;
+                var value = Scalar<T>.Equals(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                )
+                  ? Scalar<T>.AllBitsSet
+                  : default;
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1407,8 +1368,8 @@ namespace System.Runtime.Intrinsics
         /// <returns><c>true</c> if all elements in <paramref name="left" /> were equal to the corresponding element in <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool EqualsAll<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct => left == right;
+        public static bool EqualsAll<T>(Vector64<T> left, Vector64<T> right) where T : struct =>
+            left == right;
 
         /// <summary>Compares two vectors to determine if any elements are equal.</summary>
         /// <param name="left">The vector to compare with <paramref name="right" />.</param>
@@ -1417,8 +1378,8 @@ namespace System.Runtime.Intrinsics
         /// <returns><c>true</c> if any elements in <paramref name="left" /> was equal to the corresponding element in <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool EqualsAny<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct => Equals(left, right).As<T, ulong>() != Vector64<ulong>.Zero;
+        public static bool EqualsAny<T>(Vector64<T> left, Vector64<T> right) where T : struct =>
+            Equals(left, right).As<T, ulong>() != Vector64<ulong>.Zero;
 
         /// <summary>Computes the floor of each element in a vector.</summary>
         /// <param name="vector">The vector that will have its floor computed.</param>
@@ -1462,8 +1423,7 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> was less than zero or greater than the number of elements.</exception>
         [Intrinsic]
-        public static T GetElement<T>(this Vector64<T> vector, int index)
-            where T : struct
+        public static T GetElement<T>(this Vector64<T> vector, int index) where T : struct
         {
             ThrowHelper.ThrowForUnsupportedIntrinsicsVector64BaseType<T>();
 
@@ -1488,7 +1448,12 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Vector64<T>.Count; index++)
             {
-                T value = Scalar<T>.GreaterThan(left.GetElementUnsafe(index), right.GetElementUnsafe(index)) ? Scalar<T>.AllBitsSet : default;
+                T value = Scalar<T>.GreaterThan(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                )
+                  ? Scalar<T>.AllBitsSet
+                  : default;
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1503,7 +1468,8 @@ namespace System.Runtime.Intrinsics
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GreaterThanAll<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct => GreaterThan(left, right).As<T, ulong>() == Vector64<ulong>.AllBitsSet;
+            where T : struct =>
+            GreaterThan(left, right).As<T, ulong>() == Vector64<ulong>.AllBitsSet;
 
         /// <summary>Compares two vectors to determine if any elements are greater.</summary>
         /// <param name="left">The vector to compare with <paramref name="right" />.</param>
@@ -1528,7 +1494,12 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Vector64<T>.Count; index++)
             {
-                T value = Scalar<T>.GreaterThanOrEqual(left.GetElementUnsafe(index), right.GetElementUnsafe(index)) ? Scalar<T>.AllBitsSet : default;
+                T value = Scalar<T>.GreaterThanOrEqual(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                )
+                  ? Scalar<T>.AllBitsSet
+                  : default;
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1543,7 +1514,8 @@ namespace System.Runtime.Intrinsics
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GreaterThanOrEqualAll<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct => GreaterThanOrEqual(left, right).As<T, ulong>() == Vector64<ulong>.AllBitsSet;
+            where T : struct =>
+            GreaterThanOrEqual(left, right).As<T, ulong>() == Vector64<ulong>.AllBitsSet;
 
         /// <summary>Compares two vectors to determine if any elements are greater or equal.</summary>
         /// <param name="left">The vector to compare with <paramref name="right" />.</param>
@@ -1553,7 +1525,8 @@ namespace System.Runtime.Intrinsics
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GreaterThanOrEqualAny<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct => GreaterThanOrEqual(left, right).As<T, ulong>() != Vector64<ulong>.Zero;
+            where T : struct =>
+            GreaterThanOrEqual(left, right).As<T, ulong>() != Vector64<ulong>.Zero;
 
         /// <summary>Compares two vectors to determine which is less on a per-element basis.</summary>
         /// <param name="left">The vector to compare with <paramref name="left" />.</param>
@@ -1561,14 +1534,18 @@ namespace System.Runtime.Intrinsics
         /// <typeparam name="T">The type of the elements in the vector.</typeparam>
         /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were less.</returns>
         [Intrinsic]
-        public static Vector64<T> LessThan<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct
+        public static Vector64<T> LessThan<T>(Vector64<T> left, Vector64<T> right) where T : struct
         {
             Unsafe.SkipInit(out Vector64<T> result);
 
             for (int index = 0; index < Vector64<T>.Count; index++)
             {
-                T value = Scalar<T>.LessThan(left.GetElementUnsafe(index), right.GetElementUnsafe(index)) ? Scalar<T>.AllBitsSet : default;
+                T value = Scalar<T>.LessThan(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                )
+                  ? Scalar<T>.AllBitsSet
+                  : default;
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1582,8 +1559,8 @@ namespace System.Runtime.Intrinsics
         /// <returns><c>true</c> if all elements in <paramref name="left" /> were less than the corresponding element in <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool LessThanAll<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct => LessThan(left, right).As<T, ulong>() == Vector64<ulong>.AllBitsSet;
+        public static bool LessThanAll<T>(Vector64<T> left, Vector64<T> right) where T : struct =>
+            LessThan(left, right).As<T, ulong>() == Vector64<ulong>.AllBitsSet;
 
         /// <summary>Compares two vectors to determine if any elements are less.</summary>
         /// <param name="left">The vector to compare with <paramref name="right" />.</param>
@@ -1592,8 +1569,8 @@ namespace System.Runtime.Intrinsics
         /// <returns><c>true</c> if any elements in <paramref name="left" /> was less than the corresponding element in <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool LessThanAny<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct => LessThan(left, right).As<T, ulong>() != Vector64<ulong>.Zero;
+        public static bool LessThanAny<T>(Vector64<T> left, Vector64<T> right) where T : struct =>
+            LessThan(left, right).As<T, ulong>() != Vector64<ulong>.Zero;
 
         /// <summary>Compares two vectors to determine which is less or equal on a per-element basis.</summary>
         /// <param name="left">The vector to compare with <paramref name="left" />.</param>
@@ -1608,7 +1585,12 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Vector64<T>.Count; index++)
             {
-                T value = Scalar<T>.LessThanOrEqual(left.GetElementUnsafe(index), right.GetElementUnsafe(index)) ? Scalar<T>.AllBitsSet : default;
+                T value = Scalar<T>.LessThanOrEqual(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                )
+                  ? Scalar<T>.AllBitsSet
+                  : default;
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1623,7 +1605,8 @@ namespace System.Runtime.Intrinsics
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool LessThanOrEqualAll<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct => LessThanOrEqual(left, right).As<T, ulong>() == Vector64<ulong>.AllBitsSet;
+            where T : struct =>
+            LessThanOrEqual(left, right).As<T, ulong>() == Vector64<ulong>.AllBitsSet;
 
         /// <summary>Compares two vectors to determine if any elements are less or equal.</summary>
         /// <param name="left">The vector to compare with <paramref name="right" />.</param>
@@ -1641,14 +1624,18 @@ namespace System.Runtime.Intrinsics
         /// <typeparam name="T">The type of the elements in the vector.</typeparam>
         /// <returns>A vector whose elements are the maximum of the corresponding elements in <paramref name="left" /> and <paramref name="right" />.</returns>
         [Intrinsic]
-        public static Vector64<T> Max<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct
+        public static Vector64<T> Max<T>(Vector64<T> left, Vector64<T> right) where T : struct
         {
             Unsafe.SkipInit(out Vector64<T> result);
 
             for (int index = 0; index < Vector64<T>.Count; index++)
             {
-                T value = Scalar<T>.GreaterThan(left.GetElementUnsafe(index), right.GetElementUnsafe(index)) ? left.GetElementUnsafe(index) : right.GetElementUnsafe(index);
+                T value = Scalar<T>.GreaterThan(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                )
+                  ? left.GetElementUnsafe(index)
+                  : right.GetElementUnsafe(index);
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1661,14 +1648,18 @@ namespace System.Runtime.Intrinsics
         /// <typeparam name="T">The type of the elements in the vector.</typeparam>
         /// <returns>A vector whose elements are the minimum of the corresponding elements in <paramref name="left" /> and <paramref name="right" />.</returns>
         [Intrinsic]
-        public static Vector64<T> Min<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct
+        public static Vector64<T> Min<T>(Vector64<T> left, Vector64<T> right) where T : struct
         {
             Unsafe.SkipInit(out Vector64<T> result);
 
             for (int index = 0; index < Vector64<T>.Count; index++)
             {
-                T value = Scalar<T>.LessThan(left.GetElementUnsafe(index), right.GetElementUnsafe(index)) ? left.GetElementUnsafe(index) : right.GetElementUnsafe(index);
+                T value = Scalar<T>.LessThan(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                )
+                  ? left.GetElementUnsafe(index)
+                  : right.GetElementUnsafe(index);
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1692,8 +1683,8 @@ namespace System.Runtime.Intrinsics
         /// <returns>The product of <paramref name="left" /> and <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector64<T> Multiply<T>(Vector64<T> left, T right)
-            where T : struct => left * right;
+        public static Vector64<T> Multiply<T>(Vector64<T> left, T right) where T : struct =>
+            left * right;
 
         /// <summary>Multiplies a vector by a scalar to compute their product.</summary>
         /// <param name="left">The scalar to multiply with <paramref name="right" />.</param>
@@ -1702,8 +1693,8 @@ namespace System.Runtime.Intrinsics
         /// <returns>The product of <paramref name="left" /> and <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector64<T> Multiply<T>(T left, Vector64<T> right)
-            where T : struct => left * right;
+        public static Vector64<T> Multiply<T>(T left, Vector64<T> right) where T : struct =>
+            left * right;
 
         /// <summary>Narrows two <see cref="Vector64{Double}"/> instances into one <see cref="Vector64{Single}" />.</summary>
         /// <param name="lower">The vector that will be narrowed to the lower half of the result vector.</param>
@@ -1883,8 +1874,7 @@ namespace System.Runtime.Intrinsics
         /// <returns>A vector whose elements are the negation of the corresponding elements in <paramref name="vector" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector64<T> Negate<T>(Vector64<T> vector)
-            where T : struct => -vector;
+        public static Vector64<T> Negate<T>(Vector64<T> vector) where T : struct => -vector;
 
         /// <summary>Computes the ones-complement of a vector.</summary>
         /// <param name="vector">The vector whose ones-complement is to be computed.</param>
@@ -1892,16 +1882,14 @@ namespace System.Runtime.Intrinsics
         /// <returns>A vector whose elements are the ones-complement of the corresponding elements in <paramref name="vector" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector64<T> OnesComplement<T>(Vector64<T> vector)
-            where T : struct => ~vector;
+        public static Vector64<T> OnesComplement<T>(Vector64<T> vector) where T : struct => ~vector;
 
         /// <summary>Computes the square root of a vector on a per-element basis.</summary>
         /// <param name="vector">The vector whose square root is to be computed.</param>
         /// <typeparam name="T">The type of the elements in the vector.</typeparam>
         /// <returns>A vector whose elements are the square root of the corresponding elements in <paramref name="vector" />.</returns>
         [Intrinsic]
-        public static Vector64<T> Sqrt<T>(Vector64<T> vector)
-            where T : struct
+        public static Vector64<T> Sqrt<T>(Vector64<T> vector) where T : struct
         {
             Unsafe.SkipInit(out Vector64<T> result);
 
@@ -1930,8 +1918,7 @@ namespace System.Runtime.Intrinsics
         /// <returns>A scalar <typeparamref name="T" /> containing the value of the first element.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static T ToScalar<T>(this Vector64<T> vector)
-            where T : struct
+        public static T ToScalar<T>(this Vector64<T> vector) where T : struct
         {
             ThrowHelper.ThrowForUnsupportedIntrinsicsVector64BaseType<T>();
             return vector.GetElementUnsafe(0);
@@ -1943,8 +1930,7 @@ namespace System.Runtime.Intrinsics
         /// <returns>A new <see cref="Vector128{T}" /> with the lower 64-bits set to the value of <paramref name="vector" /> and the upper 64-bits initialized to zero.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector128<T> ToVector128<T>(this Vector64<T> vector)
-            where T : struct
+        public static Vector128<T> ToVector128<T>(this Vector64<T> vector) where T : struct
         {
             ThrowHelper.ThrowForUnsupportedIntrinsicsVector64BaseType<T>();
 
@@ -1986,7 +1972,10 @@ namespace System.Runtime.Intrinsics
                 return false;
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)), vector);
+            Unsafe.WriteUnaligned(
+                ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)),
+                vector
+            );
             return true;
         }
 
@@ -1994,47 +1983,54 @@ namespace System.Runtime.Intrinsics
         /// <param name="source">The vector whose elements are to be widened.</param>
         /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" />.</returns>
         [CLSCompliant(false)]
-        public static unsafe (Vector64<ushort> Lower, Vector64<ushort> Upper) Widen(Vector64<byte> source)
-            => (WidenLower(source), WidenUpper(source));
+        public static unsafe (Vector64<ushort> Lower, Vector64<ushort> Upper) Widen(
+            Vector64<byte> source
+        ) => (WidenLower(source), WidenUpper(source));
 
         /// <summary>Widens a <see cref="Vector64{Int16}" /> into two <see cref="Vector64{Int32} " />.</summary>
         /// <param name="source">The vector whose elements are to be widened.</param>
         /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" />.</returns>
-        public static unsafe (Vector64<int> Lower, Vector64<int> Upper) Widen(Vector64<short> source)
-            => (WidenLower(source), WidenUpper(source));
+        public static unsafe (Vector64<int> Lower, Vector64<int> Upper) Widen(
+            Vector64<short> source
+        ) => (WidenLower(source), WidenUpper(source));
 
         /// <summary>Widens a <see cref="Vector64{Int32}" /> into two <see cref="Vector64{Int64} " />.</summary>
         /// <param name="source">The vector whose elements are to be widened.</param>
         /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" />.</returns>
-        public static unsafe (Vector64<long> Lower, Vector64<long> Upper) Widen(Vector64<int> source)
-            => (WidenLower(source), WidenUpper(source));
+        public static unsafe (Vector64<long> Lower, Vector64<long> Upper) Widen(
+            Vector64<int> source
+        ) => (WidenLower(source), WidenUpper(source));
 
         /// <summary>Widens a <see cref="Vector64{SByte}" /> into two <see cref="Vector64{Int16} " />.</summary>
         /// <param name="source">The vector whose elements are to be widened.</param>
         /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" />.</returns>
         [CLSCompliant(false)]
-        public static unsafe (Vector64<short> Lower, Vector64<short> Upper) Widen(Vector64<sbyte> source)
-            => (WidenLower(source), WidenUpper(source));
+        public static unsafe (Vector64<short> Lower, Vector64<short> Upper) Widen(
+            Vector64<sbyte> source
+        ) => (WidenLower(source), WidenUpper(source));
 
         /// <summary>Widens a <see cref="Vector64{Single}" /> into two <see cref="Vector64{Double} " />.</summary>
         /// <param name="source">The vector whose elements are to be widened.</param>
         /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" />.</returns>
-        public static unsafe (Vector64<double> Lower, Vector64<double> Upper) Widen(Vector64<float> source)
-            => (WidenLower(source), WidenUpper(source));
+        public static unsafe (Vector64<double> Lower, Vector64<double> Upper) Widen(
+            Vector64<float> source
+        ) => (WidenLower(source), WidenUpper(source));
 
         /// <summary>Widens a <see cref="Vector64{UInt16}" /> into two <see cref="Vector64{UInt32} " />.</summary>
         /// <param name="source">The vector whose elements are to be widened.</param>
         /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" />.</returns>
         [CLSCompliant(false)]
-        public static unsafe (Vector64<uint> Lower, Vector64<uint> Upper) Widen(Vector64<ushort> source)
-            => (WidenLower(source), WidenUpper(source));
+        public static unsafe (Vector64<uint> Lower, Vector64<uint> Upper) Widen(
+            Vector64<ushort> source
+        ) => (WidenLower(source), WidenUpper(source));
 
         /// <summary>Widens a <see cref="Vector64{UInt32}" /> into two <see cref="Vector64{UInt64} " />.</summary>
         /// <param name="source">The vector whose elements are to be widened.</param>
         /// <returns>A pair of vectors that contain the widened lower and upper halves of <paramref name="source" />.</returns>
         [CLSCompliant(false)]
-        public static unsafe (Vector64<ulong> Lower, Vector64<ulong> Upper) Widen(Vector64<uint> source)
-            => (WidenLower(source), WidenUpper(source));
+        public static unsafe (Vector64<ulong> Lower, Vector64<ulong> Upper) Widen(
+            Vector64<uint> source
+        ) => (WidenLower(source), WidenUpper(source));
 
         /// <summary>Creates a new <see cref="Vector64{T}" /> with the element at the specified index set to the specified value and the remaining elements set to the same value as that in the given vector.</summary>
         /// <typeparam name="T">The type of the input vector.</typeparam>
@@ -2067,8 +2063,8 @@ namespace System.Runtime.Intrinsics
         /// <returns>The exclusive-or of <paramref name="left" /> and <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector64<T> Xor<T>(Vector64<T> left, Vector64<T> right)
-            where T : struct => left ^ right;
+        public static Vector64<T> Xor<T>(Vector64<T> left, Vector64<T> right) where T : struct =>
+            left ^ right;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static T GetElementUnsafe<T>(in this Vector64<T> vector, int index)

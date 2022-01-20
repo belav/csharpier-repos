@@ -8,7 +8,11 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
-    internal sealed class ServiceProviderEngineScope : IServiceScope, IServiceProvider, IAsyncDisposable, IServiceScopeFactory
+    internal sealed class ServiceProviderEngineScope
+        : IServiceScope,
+          IServiceProvider,
+          IAsyncDisposable,
+          IServiceScopeFactory
     {
         // For testing only
         internal IList<object> Disposables => _disposables ?? (IList<object>)Array.Empty<object>();
@@ -50,7 +54,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         internal object CaptureDisposable(object service)
         {
-            if (ReferenceEquals(this, service) || !(service is IDisposable || service is IAsyncDisposable))
+            if (
+                ReferenceEquals(this, service)
+                || !(service is IDisposable || service is IAsyncDisposable)
+            )
             {
                 return service;
             }
@@ -80,7 +87,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 else
                 {
                     // sync over async, for the rare case that an object only implements IAsyncDisposable and may end up starving the thread pool.
-                    Task.Run(() => ((IAsyncDisposable)service).DisposeAsync().AsTask()).GetAwaiter().GetResult();
+                    Task.Run(() => ((IAsyncDisposable)service).DisposeAsync().AsTask())
+                        .GetAwaiter()
+                        .GetResult();
                 }
 
                 ThrowHelper.ThrowObjectDisposedException();
@@ -103,7 +112,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     }
                     else
                     {
-                        throw new InvalidOperationException(SR.Format(SR.AsyncDisposableServiceDispose, TypeNameHelper.GetTypeDisplayName(toDispose[i])));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.AsyncDisposableServiceDispose,
+                                TypeNameHelper.GetTypeDisplayName(toDispose[i])
+                            )
+                        );
                     }
                 }
             }
@@ -178,7 +192,11 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 }
 
                 // Track statistics about the scope (number of disposable objects and number of disposed services)
-                DependencyInjectionEventSource.Log.ScopeDisposed(RootProvider.GetHashCode(), ResolvedServices.Count, _disposables?.Count ?? 0);
+                DependencyInjectionEventSource.Log.ScopeDisposed(
+                    RootProvider.GetHashCode(),
+                    ResolvedServices.Count,
+                    _disposables?.Count ?? 0
+                );
 
                 // We've transitioned to the disposed state, so future calls to
                 // CaptureDisposable will immediately dispose the object.

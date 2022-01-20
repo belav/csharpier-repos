@@ -22,15 +22,20 @@ public class DelegateOutOfProcTests : LoggedTest
 
         // https://github.com/dotnet/aspnetcore/issues/8247
 #pragma warning disable 0618
-        var applicationPath = Path.Combine(TestPathUtilities.GetSolutionRootDirectory("HttpSysServer"), "test", "testassets",
-            "DelegationSite");
+        var applicationPath = Path.Combine(
+            TestPathUtilities.GetSolutionRootDirectory("HttpSysServer"),
+            "test",
+            "testassets",
+            "DelegationSite"
+        );
 #pragma warning restore 0618
 
         var deploymentParameters = new DeploymentParameters(
             applicationPath,
             ServerType.HttpSys,
             RuntimeFlavor.CoreClr,
-            RuntimeArchitecture.x64)
+            RuntimeArchitecture.x64
+        )
         {
             EnvironmentName = "Testing",
             TargetFramework = Tfm.Default,
@@ -50,15 +55,23 @@ public class DelegateOutOfProcTests : LoggedTest
         Assert.Equal("Hello from delegatee", responseString);
 
         DelegationRule destination = default;
-        using var delegator = Utilities.CreateHttpServer(out var delegatorAddress, httpContext =>
-        {
-            var delegateFeature = httpContext.Features.Get<IHttpSysRequestDelegationFeature>();
-            delegateFeature.DelegateRequest(destination);
-            return Task.CompletedTask;
-        });
+        using var delegator = Utilities.CreateHttpServer(
+            out var delegatorAddress,
+            httpContext =>
+            {
+                var delegateFeature = httpContext.Features.Get<IHttpSysRequestDelegationFeature>();
+                delegateFeature.DelegateRequest(destination);
+                return Task.CompletedTask;
+            }
+        );
 
         var delegationProperty = delegator.Features.Get<IServerDelegationFeature>();
-        using (destination = delegationProperty.CreateDelegationRule(queueName, deploymentResult.ApplicationBaseUri))
+        using (
+            destination = delegationProperty.CreateDelegationRule(
+                queueName,
+                deploymentResult.ApplicationBaseUri
+            )
+        )
         {
             // Send a request to the delegator that gets transfered to the delegatee in the other process.
             using var client = new HttpClient();

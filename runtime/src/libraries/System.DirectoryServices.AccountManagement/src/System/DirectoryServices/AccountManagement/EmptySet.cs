@@ -21,6 +21,7 @@ namespace System.DirectoryServices.AccountManagement
                 return null;
             }
         }
+
         internal override bool MoveNext()
         {
             // Mimic an empty set

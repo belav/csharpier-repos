@@ -22,9 +22,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tags
         /// </summary>
         public string Name { get; set; }
 
-        public ExportImageMonikerServiceAttribute()
-            : base(typeof(IImageMonikerService))
-        {
-        }
+        public ExportImageMonikerServiceAttribute() : base(typeof(IImageMonikerService)) { }
     }
 }

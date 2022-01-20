@@ -48,8 +48,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     the constructor at any point in this process.
         /// </remarks>
         [EntityFrameworkInternal]
-        public RelationalQueryTranslationPreprocessorDependencies()
-        {
-        }
+        public RelationalQueryTranslationPreprocessorDependencies() { }
     }
 }

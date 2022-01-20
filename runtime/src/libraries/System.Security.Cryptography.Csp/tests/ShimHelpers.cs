@@ -10,7 +10,12 @@ namespace System.Security.Cryptography.Csp.Tests
 {
     public static class ShimHelpers
     {
-        public static void TestSymmetricAlgorithmProperties(SymmetricAlgorithm alg, int blockSize, int keySize, byte[] key = null)
+        public static void TestSymmetricAlgorithmProperties(
+            SymmetricAlgorithm alg,
+            int blockSize,
+            int keySize,
+            byte[] key = null
+        )
         {
             alg.BlockSize = blockSize;
             Assert.Equal(blockSize, alg.BlockSize);
@@ -86,14 +91,15 @@ namespace System.Security.Cryptography.Csp.Tests
                 "TryDecryptCfbCore",
             };
 
-            IEnumerable<MethodInfo> baseMethods = shimType.
-                GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).
-                Where(m => m.IsVirtual && !namesToNotVerify.Any(n=> n.Equals(m.Name)));
+            IEnumerable<MethodInfo> baseMethods = shimType
+                .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                .Where(m => m.IsVirtual && !namesToNotVerify.Any(n => n.Equals(m.Name)));
 
             foreach (MethodInfo info in baseMethods)
             {
                 // Ensure the override is on the shim; ignore virtual methods on System.Object
-                bool methodOverriden = info.DeclaringType == shimType || info.DeclaringType == typeof(object);
+                bool methodOverriden =
+                    info.DeclaringType == shimType || info.DeclaringType == typeof(object);
 
                 Assert.True(methodOverriden, $"Member overriden: {info.Name}");
             }

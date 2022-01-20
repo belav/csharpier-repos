@@ -8,6 +8,6 @@ namespace System.CommandLine.Rendering
         Auto,
         NonAnsi,
         Ansi,
-        PlainText 
+        PlainText
     }
 }

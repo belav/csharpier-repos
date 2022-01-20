@@ -35,8 +35,7 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         /// <summary>
         ///     The cache being used to store value generator instances.
         /// </summary>
-        public virtual IValueGeneratorCache Cache
-            => Dependencies.Cache;
+        public virtual IValueGeneratorCache Cache => Dependencies.Cache;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ValueGeneratorSelector" /> class.
@@ -61,8 +60,8 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         ///     this entity type may be different from the declared entity type on <paramref name="property" />
         /// </param>
         /// <returns>The value generator to be used.</returns>
-        public virtual ValueGenerator Select(IProperty property, IEntityType entityType)
-            => Cache.GetOrAdd(property, entityType, (p, t) => CreateFromFactory(p, t) ?? Create(p, t));
+        public virtual ValueGenerator Select(IProperty property, IEntityType entityType) =>
+            Cache.GetOrAdd(property, entityType, (p, t) => CreateFromFactory(p, t) ?? Create(p, t));
 
         private static ValueGenerator? CreateFromFactory(IProperty property, IEntityType entityType)
         {
@@ -80,15 +79,15 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
                     if (converter != null)
                     {
                         var type = converter.ProviderClrType.UnwrapNullableType();
-                        if (!type.IsInteger()
-                            && !type.IsEnum
-                            && type != typeof(decimal))
+                        if (!type.IsInteger() && !type.IsEnum && type != typeof(decimal))
                         {
                             throw new NotSupportedException(
                                 CoreStrings.ValueGenWithConversion(
                                     property.DeclaringEntityType.DisplayName(),
                                     property.Name,
-                                    converter.GetType().ShortDisplayName()));
+                                    converter.GetType().ShortDisplayName()
+                                )
+                            );
                         }
                     }
                 }
@@ -126,7 +125,12 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
             }
 
             throw new NotSupportedException(
-                CoreStrings.NoValueGenerator(property.Name, property.DeclaringEntityType.DisplayName(), propertyType.ShortDisplayName()));
+                CoreStrings.NoValueGenerator(
+                    property.Name,
+                    property.DeclaringEntityType.DisplayName(),
+                    propertyType.ShortDisplayName()
+                )
+            );
         }
     }
 }

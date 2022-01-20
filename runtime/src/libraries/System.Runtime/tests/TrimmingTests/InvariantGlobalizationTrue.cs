@@ -14,16 +14,15 @@ class Program
     {
         // Ensure the internal GlobalizationMode class is trimmed correctly
         Type globalizationMode = GetCoreLibType("System.Globalization.GlobalizationMode");
-        const BindingFlags allStatics = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
+        const BindingFlags allStatics =
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
         try
         {
             CultureInfo.CurrentCulture = new CultureInfo("tr-TR");
             return -1; // we expect new CultureInfo("tr-TR") to throw.
         }
-        catch (CultureNotFoundException)
-        {
-        }
+        catch (CultureNotFoundException) { }
 
         if ("i".ToUpper() != "I")
         {
@@ -41,14 +40,19 @@ class Program
             if (OperatingSystem.IsWindows())
             {
                 // Windows still contains a static cctor and a backing field for UseNls
-                if (member is ConstructorInfo || (member is FieldInfo field && field.Name.Contains("UseNls")))
+                if (
+                    member is ConstructorInfo
+                    || (member is FieldInfo field && field.Name.Contains("UseNls"))
+                )
                 {
                     continue;
                 }
             }
 
             // Some unexpected member was left on GlobalizationMode, fail
-            Console.WriteLine($"Member '{member.Name}' was not trimmed from GlobalizationMode, but should have been.");
+            Console.WriteLine(
+                $"Member '{member.Name}' was not trimmed from GlobalizationMode, but should have been."
+            );
             return -4;
         }
 

@@ -29,8 +29,20 @@ internal class AspNetTestRunner : XunitTestRunner
         string skipReason,
         IReadOnlyList<BeforeAfterTestAttribute> beforeAfterAttributes,
         ExceptionAggregator aggregator,
-        CancellationTokenSource cancellationTokenSource)
-        : base(test, messageBus, testClass, constructorArguments, testMethod, testMethodArguments, skipReason, beforeAfterAttributes, aggregator, cancellationTokenSource)
+        CancellationTokenSource cancellationTokenSource
+    )
+        : base(
+            test,
+            messageBus,
+            testClass,
+            constructorArguments,
+            testMethod,
+            testMethodArguments,
+            skipReason,
+            beforeAfterAttributes,
+            aggregator,
+            cancellationTokenSource
+        )
     {
         // Prioritize using ITestOutputHelper from constructor.
         if (ConstructorArguments != null)
@@ -53,7 +65,9 @@ internal class AspNetTestRunner : XunitTestRunner
         }
     }
 
-    protected override async Task<Tuple<decimal, string>> InvokeTestAsync(ExceptionAggregator aggregator)
+    protected override async Task<Tuple<decimal, string>> InvokeTestAsync(
+        ExceptionAggregator aggregator
+    )
     {
         if (_ownsTestOutputHelper)
         {
@@ -76,7 +90,10 @@ internal class AspNetTestRunner : XunitTestRunner
         return result;
     }
 
-    private async Task<Tuple<decimal, string>> RunTestCaseWithRetryAsync(RetryAttribute retryAttribute, ExceptionAggregator aggregator)
+    private async Task<Tuple<decimal, string>> RunTestCaseWithRetryAsync(
+        RetryAttribute retryAttribute,
+        ExceptionAggregator aggregator
+    )
     {
         var totalTimeTaken = 0m;
         List<string> messages = new();
@@ -95,7 +112,9 @@ internal class AspNetTestRunner : XunitTestRunner
             else if (attempt < numAttempts)
             {
                 // We can't use the ITestOutputHelper here because there's no active test
-                messages.Add($"[{TestCase.DisplayName}] Attempt {attempt} of {retryAttribute.MaxRetries} failed due to {aggregator.ToException()}");
+                messages.Add(
+                    $"[{TestCase.DisplayName}] Attempt {attempt} of {retryAttribute.MaxRetries} failed due to {aggregator.ToException()}"
+                );
 
                 await Task.Delay(5000);
                 aggregator.Clear();
@@ -117,7 +136,11 @@ internal class AspNetTestRunner : XunitTestRunner
         RepeatContext.Current = repeatContext;
 
         var timeTaken = 0.0M;
-        for (repeatContext.CurrentIteration = 0; repeatContext.CurrentIteration < repeatContext.Limit; repeatContext.CurrentIteration++)
+        for (
+            repeatContext.CurrentIteration = 0;
+            repeatContext.CurrentIteration < repeatContext.Limit;
+            repeatContext.CurrentIteration++
+        )
         {
             timeTaken = await InvokeTestMethodCoreAsync(aggregator);
             if (aggregator.HasExceptions)
@@ -131,7 +154,18 @@ internal class AspNetTestRunner : XunitTestRunner
 
     private Task<decimal> InvokeTestMethodCoreAsync(ExceptionAggregator aggregator)
     {
-        var invoker = new AspNetTestInvoker(Test, MessageBus, TestClass, ConstructorArguments, TestMethod, TestMethodArguments, BeforeAfterAttributes, aggregator, CancellationTokenSource, _testOutputHelper);
+        var invoker = new AspNetTestInvoker(
+            Test,
+            MessageBus,
+            TestClass,
+            ConstructorArguments,
+            TestMethod,
+            TestMethodArguments,
+            BeforeAfterAttributes,
+            aggregator,
+            CancellationTokenSource,
+            _testOutputHelper
+        );
         return invoker.RunAsync();
     }
 

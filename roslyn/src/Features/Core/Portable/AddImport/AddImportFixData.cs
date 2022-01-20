@@ -112,7 +112,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             string assemblyReferenceFullyQualifiedTypeName = null,
             string packageSource = null,
             string packageName = null,
-            string packageVersionOpt = null)
+            string packageVersionOpt = null
+        )
         {
             Kind = kind;
             TextChanges = textChanges;
@@ -129,38 +130,69 @@ namespace Microsoft.CodeAnalysis.AddImport
             PackageVersionOpt = packageVersionOpt;
         }
 
-        public static AddImportFixData CreateForProjectSymbol(ImmutableArray<TextChange> textChanges, string title, ImmutableArray<string> tags, CodeActionPriority priority, ProjectId projectReferenceToAdd)
-            => new(AddImportFixKind.ProjectSymbol,
-                   textChanges,
-                   title: title,
-                   tags: tags,
-                   priority: priority,
-                   projectReferenceToAdd: projectReferenceToAdd);
+        public static AddImportFixData CreateForProjectSymbol(
+            ImmutableArray<TextChange> textChanges,
+            string title,
+            ImmutableArray<string> tags,
+            CodeActionPriority priority,
+            ProjectId projectReferenceToAdd
+        ) =>
+            new(
+                AddImportFixKind.ProjectSymbol,
+                textChanges,
+                title: title,
+                tags: tags,
+                priority: priority,
+                projectReferenceToAdd: projectReferenceToAdd
+            );
 
-        public static AddImportFixData CreateForMetadataSymbol(ImmutableArray<TextChange> textChanges, string title, ImmutableArray<string> tags, CodeActionPriority priority, ProjectId portableExecutableReferenceProjectId, string portableExecutableReferenceFilePathToAdd)
-            => new(AddImportFixKind.MetadataSymbol,
-                   textChanges,
-                   title: title,
-                   tags: tags,
-                   priority: priority,
-                   portableExecutableReferenceProjectId: portableExecutableReferenceProjectId,
-                   portableExecutableReferenceFilePathToAdd: portableExecutableReferenceFilePathToAdd);
+        public static AddImportFixData CreateForMetadataSymbol(
+            ImmutableArray<TextChange> textChanges,
+            string title,
+            ImmutableArray<string> tags,
+            CodeActionPriority priority,
+            ProjectId portableExecutableReferenceProjectId,
+            string portableExecutableReferenceFilePathToAdd
+        ) =>
+            new(
+                AddImportFixKind.MetadataSymbol,
+                textChanges,
+                title: title,
+                tags: tags,
+                priority: priority,
+                portableExecutableReferenceProjectId: portableExecutableReferenceProjectId,
+                portableExecutableReferenceFilePathToAdd: portableExecutableReferenceFilePathToAdd
+            );
 
-        public static AddImportFixData CreateForReferenceAssemblySymbol(ImmutableArray<TextChange> textChanges, string title, string assemblyReferenceAssemblyName, string assemblyReferenceFullyQualifiedTypeName)
-            => new(AddImportFixKind.ReferenceAssemblySymbol,
-                   textChanges,
-                   title: title,
-                   tags: WellKnownTagArrays.AddReference,
-                   priority: CodeActionPriority.Low,
-                   assemblyReferenceAssemblyName: assemblyReferenceAssemblyName,
-                   assemblyReferenceFullyQualifiedTypeName: assemblyReferenceFullyQualifiedTypeName);
+        public static AddImportFixData CreateForReferenceAssemblySymbol(
+            ImmutableArray<TextChange> textChanges,
+            string title,
+            string assemblyReferenceAssemblyName,
+            string assemblyReferenceFullyQualifiedTypeName
+        ) =>
+            new(
+                AddImportFixKind.ReferenceAssemblySymbol,
+                textChanges,
+                title: title,
+                tags: WellKnownTagArrays.AddReference,
+                priority: CodeActionPriority.Low,
+                assemblyReferenceAssemblyName: assemblyReferenceAssemblyName,
+                assemblyReferenceFullyQualifiedTypeName: assemblyReferenceFullyQualifiedTypeName
+            );
 
-        public static AddImportFixData CreateForPackageSymbol(ImmutableArray<TextChange> textChanges, string packageSource, string packageName, string packageVersionOpt)
-            => new(AddImportFixKind.PackageSymbol,
-                   textChanges,
-                   packageSource: packageSource,
-                   priority: CodeActionPriority.Low,
-                   packageName: packageName,
-                   packageVersionOpt: packageVersionOpt);
+        public static AddImportFixData CreateForPackageSymbol(
+            ImmutableArray<TextChange> textChanges,
+            string packageSource,
+            string packageName,
+            string packageVersionOpt
+        ) =>
+            new(
+                AddImportFixKind.PackageSymbol,
+                textChanges,
+                packageSource: packageSource,
+                priority: CodeActionPriority.Low,
+                packageName: packageName,
+                packageVersionOpt: packageVersionOpt
+            );
     }
 }

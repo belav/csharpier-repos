@@ -17,8 +17,12 @@ namespace System.Collections.Tests
             LinkedList<T> linkedList = new LinkedList<T>();
             int arraySize = 16;
             int seed = 21543;
-            T[] headItems, tailItems, tempItems;
-            LinkedListNode<T> tempNode1, tempNode2, tempNode3;
+            T[] headItems,
+                tailItems,
+                tempItems;
+            LinkedListNode<T> tempNode1,
+                tempNode2,
+                tempNode3;
 
             headItems = new T[arraySize];
             tailItems = new T[arraySize];
@@ -83,7 +87,12 @@ namespace System.Collections.Tests
 
             linkedList.Remove(linkedList.First); //Remove when  VS Whidbey: 234648 is resolved
             InitialItems_Tests(linkedList, new T[] { headItems[1], headItems[2] });
-            VerifyRemovedNode(linkedList, new T[] { headItems[1], headItems[2] }, tempNode1, headItems[0]);
+            VerifyRemovedNode(
+                linkedList,
+                new T[] { headItems[1], headItems[2] },
+                tempNode1,
+                headItems[0]
+            );
 
             //[] Call Remove with the middle item collection size=3
             linkedList = new LinkedList<T>();
@@ -94,7 +103,12 @@ namespace System.Collections.Tests
 
             linkedList.Remove(linkedList.First.Next); //Remove when  VS Whidbey: 234648 is resolved
             InitialItems_Tests(linkedList, new T[] { headItems[0], headItems[2] });
-            VerifyRemovedNode(linkedList, new T[] { headItems[0], headItems[2] }, tempNode1, headItems[1]);
+            VerifyRemovedNode(
+                linkedList,
+                new T[] { headItems[0], headItems[2] },
+                tempNode1,
+                headItems[1]
+            );
 
             //[] Call Remove with the Tail collection size=3
             linkedList = new LinkedList<T>();
@@ -105,7 +119,12 @@ namespace System.Collections.Tests
 
             linkedList.Remove(linkedList.Last); //Remove when  VS Whidbey: 234648 is resolved
             InitialItems_Tests(linkedList, new T[] { headItems[0], headItems[1] });
-            VerifyRemovedNode(linkedList, new T[] { headItems[0], headItems[1] }, tempNode1, headItems[2]);
+            VerifyRemovedNode(
+                linkedList,
+                new T[] { headItems[0], headItems[1] },
+                tempNode1,
+                headItems[2]
+            );
 
             //[] Call Remove all the items collection size=3
             linkedList = new LinkedList<T>();
@@ -263,7 +282,9 @@ namespace System.Collections.Tests
             linkedList = new LinkedList<T>();
             items = new T[] { CreateT(seed++) };
             linkedList.AddLast(items[0]);
-            Assert.Throws<InvalidOperationException>(() => linkedList.Remove(new LinkedListNode<T>(CreateT(seed++)))); //"Err_0568ajods Expected Node that is a new Node throws InvalidOperationException\n"
+            Assert.Throws<InvalidOperationException>(
+                () => linkedList.Remove(new LinkedListNode<T>(CreateT(seed++)))
+            ); //"Err_0568ajods Expected Node that is a new Node throws InvalidOperationException\n"
 
             InitialItems_Tests(linkedList, items);
 

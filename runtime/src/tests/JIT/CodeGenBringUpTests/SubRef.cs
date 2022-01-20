@@ -22,12 +22,10 @@ class child
             return Fail;
     }
 
-    [MethodImplAttribute(MethodImplOptions.NoInlining)] 
+    [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int SubRef(int x, ref int a)
     {
         x -= a;
         return x;
     }
-    
 }
-

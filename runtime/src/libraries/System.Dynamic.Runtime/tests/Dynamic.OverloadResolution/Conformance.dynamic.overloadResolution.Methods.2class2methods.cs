@@ -18,6 +18,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public void Method(C x)
         {
             Base.Status = 1;
@@ -54,8 +55,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload001.overload001
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -67,6 +66,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public void Method(short x)
         {
             Base.Status = 1;
@@ -103,8 +103,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload002.overload002
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -116,6 +114,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public void Method(short x)
         {
             Base.Status = 1;
@@ -152,8 +151,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload003.overload003
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -166,6 +163,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         protected void Method(short x)
         {
             Base.Status = 1;
@@ -202,8 +200,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload004.overload004
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -216,6 +212,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public void Method(int x)
         {
             Base.Status = 1;
@@ -252,8 +249,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload005.overload005
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -266,6 +261,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public void Method(int x)
         {
             Base.Status = 1;
@@ -302,8 +298,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload006.overload006
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -316,6 +310,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         internal void Method(short x)
         {
             Base.Status = 1;
@@ -352,8 +347,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload007.overload007
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -366,6 +359,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         protected internal void Method(short x)
         {
             Base.Status = 1;
@@ -402,8 +396,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload008.overload008
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -416,6 +408,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public int Method(dynamic x)
         {
             Base.Status = 1;
@@ -458,8 +451,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload009.overload009
 {
     // <Title> Tests overload resolution</Title>
@@ -471,6 +462,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class B
     {
         public static int status = -1;
+
         public void Foo(out int x)
         {
             status = 1;
@@ -484,7 +476,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         {
             status = 2;
         }
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -502,8 +493,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload010.overload010
 {
@@ -516,6 +505,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class B
     {
         public static int status = -1;
+
         public void Foo(out int x)
         {
             status = 1;
@@ -529,7 +519,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         {
             status = 2;
         }
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -547,8 +536,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload011.overload011
 {
@@ -574,6 +561,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Program
     {
         public static int result;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -590,8 +578,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload012.overload012
 {
     //<Area></Area>
@@ -602,9 +588,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     //<Code>
     public class NO
     {
-        public void Foo<T>(T t = default(T))
-        {
-        }
+        public void Foo<T>(T t = default(T)) { }
     }
 
     public class Program
@@ -637,8 +621,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.overload013.overload013
 {
     // <Area>dynamic</Area>
@@ -653,6 +635,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class A
     {
         public static int x = 0;
+
         public void Foo(ref string y)
         {
             x = 1;
@@ -661,10 +644,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public class C : A
     {
-        public void Foo(string y)
-        {
-        }
-
+        public void Foo(string y) { }
 
         public static void DynamicCSharpRunTest()
         {
@@ -682,8 +662,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovr001.ovr001
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -695,6 +673,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(int x)
         {
             Base.Status = 1;
@@ -736,8 +715,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovr002.ovr002
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -749,6 +726,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(int x)
         {
             Base.Status = 1;
@@ -790,8 +768,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovr003.ovr003
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -803,6 +779,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(string x)
         {
             Base.Status = 1;
@@ -844,8 +821,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovr004.ovr004
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -865,6 +840,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(D x)
         {
             Base.Status = 1;
@@ -906,8 +882,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovr005.ovr005
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -927,6 +901,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(D x)
         {
             Base.Status = 1;
@@ -968,8 +943,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovr006.ovr006
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -989,6 +962,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(D x)
         {
             Base.Status = 1;
@@ -1030,8 +1004,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovr007.ovr007
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1051,6 +1023,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(int x)
         {
             Base.Status = 1;
@@ -1092,8 +1065,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovr008.ovr008
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1109,6 +1080,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(int x)
         {
             Base.Status = 1;
@@ -1150,8 +1122,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovr009.ovr009
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1169,6 +1139,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(string x)
         {
             Base.Status = 1;
@@ -1210,8 +1181,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovr010.ovr010
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1222,7 +1191,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Code>
     public class C
     {
-        public static implicit operator int (C c)
+        public static implicit operator int(C c)
         {
             return 0;
         }
@@ -1231,6 +1200,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(C x)
         {
             Base.Status = 1;
@@ -1272,8 +1242,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovr011.ovr011
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1284,7 +1252,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Code>
     public class C
     {
-        public static implicit operator int (C c)
+        public static implicit operator int(C c)
         {
             return 0;
         }
@@ -1293,6 +1261,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(C x)
         {
             Base.Status = 1;
@@ -1334,8 +1303,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovr012.ovr012
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1347,6 +1314,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(int x)
         {
             Base.Status = 1;
@@ -1396,8 +1364,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovrdynamic001.ovrdynamic001
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1413,6 +1379,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(object x)
         {
             Base.Status = 1;
@@ -1449,8 +1416,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.Twoclass2methods.ovrdynamic002.ovrdynamic002
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -1466,6 +1431,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Base
     {
         public static int Status;
+
         public virtual void Method(dynamic x)
         {
             Base.Status = 1;

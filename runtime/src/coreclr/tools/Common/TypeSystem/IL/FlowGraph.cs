@@ -13,11 +13,11 @@ namespace Internal.IL
 {
     internal class BasicBlock : IEquatable<BasicBlock>
     {
-        public BasicBlock(int start, int size)
-            => (Start, Size) = (start, size);
+        public BasicBlock(int start, int size) => (Start, Size) = (start, size);
 
         // First IL offset
         public int Start { get; }
+
         // Number of IL bytes in this basic block
         public int Size { get; }
 
@@ -27,10 +27,14 @@ namespace Internal.IL
         public override string ToString() => $"Start={Start}, Size={Size}";
 
         public override bool Equals(object obj) => Equals(obj as BasicBlock);
+
         public bool Equals(BasicBlock other) => other != null && Start == other.Start;
+
         public override int GetHashCode() => HashCode.Combine(Start);
 
-        public static bool operator ==(BasicBlock left, BasicBlock right) => EqualityComparer<BasicBlock>.Default.Equals(left, right);
+        public static bool operator ==(BasicBlock left, BasicBlock right) =>
+            EqualityComparer<BasicBlock>.Default.Equals(left, right);
+
         public static bool operator !=(BasicBlock left, BasicBlock right) => !(left == right);
     }
 
@@ -68,8 +72,8 @@ namespace Internal.IL
             return index;
         }
 
-        public BasicBlock Lookup(int ilOffset)
-            => LookupIndex(ilOffset) switch
+        public BasicBlock Lookup(int ilOffset) =>
+            LookupIndex(ilOffset) switch
             {
                 -1 => null,
                 int idx => BasicBlocks[idx]
@@ -88,7 +92,10 @@ namespace Internal.IL
                 yield return BasicBlocks[i];
         }
 
-        internal string Dump(Func<BasicBlock, string> getNodeAnnot, Func<(BasicBlock, BasicBlock), string> getEdgeAnnot)
+        internal string Dump(
+            Func<BasicBlock, string> getNodeAnnot,
+            Func<(BasicBlock, BasicBlock), string> getEdgeAnnot
+        )
         {
             var sb = new StringBuilder();
             sb.AppendLine("digraph G {");
@@ -112,16 +119,23 @@ namespace Internal.IL
                 {
                     string label = getEdgeAnnot((bb, tar));
                     string postfix = string.IsNullOrEmpty(label) ? "" : $" [label=\"{label}\"]";
-                    sb.AppendLine($"  BB{bbToIndex[bb.Start]} -> BB{bbToIndex[tar.Start]}{postfix};");
+                    sb.AppendLine(
+                        $"  BB{bbToIndex[bb.Start]} -> BB{bbToIndex[tar.Start]}{postfix};"
+                    );
                 }
             }
 
             // Write ranks with BFS.
-            List<BasicBlock> curRank = new List<BasicBlock> { BasicBlocks.Single(bb => bb.Start == 0) };
+            List<BasicBlock> curRank = new List<BasicBlock>
+            {
+                BasicBlocks.Single(bb => bb.Start == 0)
+            };
             HashSet<BasicBlock> seen = new HashSet<BasicBlock>(curRank);
             while (curRank.Count > 0)
             {
-                sb.AppendLine($"  {{rank = same; {string.Concat(curRank.Select(bb => $"BB{bbToIndex[bb.Start]}; "))}}}");
+                sb.AppendLine(
+                    $"  {{rank = same; {string.Concat(curRank.Select(bb => $"BB{bbToIndex[bb.Start]}; "))}}}"
+                );
                 curRank = curRank.SelectMany(bb => bb.Targets).Where(seen.Add).ToList();
             }
 
@@ -185,7 +199,13 @@ namespace Internal.IL
                         break;
                     }
 
-                    if (opc == ILOpcode.ret || opc == ILOpcode.endfinally || opc == ILOpcode.endfilter || opc == ILOpcode.throw_ || opc == ILOpcode.rethrow)
+                    if (
+                        opc == ILOpcode.ret
+                        || opc == ILOpcode.endfinally
+                        || opc == ILOpcode.endfilter
+                        || opc == ILOpcode.throw_
+                        || opc == ILOpcode.rethrow
+                    )
                     {
                         break;
                     }
@@ -246,7 +266,13 @@ namespace Internal.IL
                         bbStarts.Add(caseOfs);
                     }
                 }
-                else if (opc == ILOpcode.ret || opc == ILOpcode.endfinally || opc == ILOpcode.endfilter || opc == ILOpcode.throw_ || opc == ILOpcode.rethrow)
+                else if (
+                    opc == ILOpcode.ret
+                    || opc == ILOpcode.endfinally
+                    || opc == ILOpcode.endfilter
+                    || opc == ILOpcode.throw_
+                    || opc == ILOpcode.rethrow
+                )
                 {
                     if (reader.HasNext)
                         bbStarts.Add(reader.Offset);

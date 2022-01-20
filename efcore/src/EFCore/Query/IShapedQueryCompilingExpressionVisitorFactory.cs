@@ -27,6 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="queryCompilationContext">The query compilation context to use.</param>
         /// <returns>The created visitor.</returns>
-        ShapedQueryCompilingExpressionVisitor Create(QueryCompilationContext queryCompilationContext);
+        ShapedQueryCompilingExpressionVisitor Create(
+            QueryCompilationContext queryCompilationContext
+        );
     }
 }

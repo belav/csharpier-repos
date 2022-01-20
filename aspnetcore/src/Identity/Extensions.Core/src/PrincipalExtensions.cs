@@ -26,5 +26,4 @@ public static class PrincipalExtensions
         var claim = principal.FindFirst(claimType);
         return claim != null ? claim.Value : null;
     }
-
 }

@@ -27,7 +27,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
             _modelBinderFactory = () => modelBinder;
         }
 
-        public SimpleModelBinderProvider(Type modelType, Func<IExtensibleModelBinder> modelBinderFactory)
+        public SimpleModelBinderProvider(
+            Type modelType,
+            Func<IExtensibleModelBinder> modelBinderFactory
+        )
         {
             if (modelType == null)
             {
@@ -49,13 +52,19 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
         public bool SuppressPrefixCheck { get; set; }
 
-        public override IExtensibleModelBinder GetBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+        public override IExtensibleModelBinder GetBinder(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        )
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
             if (bindingContext.ModelType == ModelType)
             {
-                if (SuppressPrefixCheck || bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))
+                if (
+                    SuppressPrefixCheck
+                    || bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName)
+                )
                 {
                     return _modelBinderFactory();
                 }

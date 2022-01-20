@@ -10,10 +10,9 @@ namespace One
 {
     abstract class A
     {
-
     }
 
-    class B: A
+    class B : A
     {
         ~B()
         {
@@ -21,9 +20,10 @@ namespace One
         }
     }
 
-    class C: B
+    class C : B
     {
-        public static int count=0;
+        public static int count = 0;
+
         ~C()
         {
             Console.WriteLine("In Finalize of C");
@@ -35,19 +35,20 @@ namespace One
 namespace Two
 {
     using One;
-    class D: C
+
+    class D : C
     {
     }
 }
 
-namespace Three {
+namespace Three
+{
     using One;
     using Two;
 
     class CreateObj
     {
-
-// disabling unused variable warning
+        // disabling unused variable warning
 #pragma warning disable 0414
         B b;
         D d;
@@ -68,10 +69,10 @@ namespace Three {
         {
             A a = c;
 
-            d=null;
-            b=null;
-            a=null;
-            c=null;
+            d = null;
+            b = null;
+            a = null;
+            c = null;
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -98,8 +99,6 @@ namespace Three {
             }
             Console.WriteLine("Test Failed");
             return 1;
-
         }
     }
-
 }

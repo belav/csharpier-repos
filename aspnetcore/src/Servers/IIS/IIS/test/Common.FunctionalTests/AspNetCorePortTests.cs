@@ -18,14 +18,18 @@ using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]
@@ -35,19 +39,23 @@ public class AspNetCorePortTests : IISFunctionalTestBase
     private const int _minPort = 1025;
     private const int _maxPort = 48000;
 
-    public AspNetCorePortTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public AspNetCorePortTests(PublishedSitesFixture fixture) : base(fixture) { }
 
-    public static TestMatrix TestVariants
-        => TestMatrix.ForServers(DeployerSelector.ServerType)
+    public static TestMatrix TestVariants =>
+        TestMatrix
+            .ForServers(DeployerSelector.ServerType)
             .WithTfms(Tfm.Default)
             .WithApplicationTypes(ApplicationType.Portable);
 
-    public static IEnumerable<object[]> InvalidTestVariants
-        => from v in TestVariants.Select(v => v.Single())
-            from s in new string[] { (_minPort - 1).ToString(CultureInfo.InvariantCulture), (_maxPort + 1).ToString(CultureInfo.InvariantCulture), "noninteger" }
-            select new object[] { v, s };
+    public static IEnumerable<object[]> InvalidTestVariants =>
+        from v in TestVariants.Select(v => v.Single())
+        from s in new string[]
+        {
+            (_minPort - 1).ToString(CultureInfo.InvariantCulture),
+            (_maxPort + 1).ToString(CultureInfo.InvariantCulture),
+            "noninteger"
+        }
+        select new object[] { v, s };
 
     [ConditionalTheory]
     [MemberData(nameof(TestVariants))]
@@ -56,7 +64,9 @@ public class AspNetCorePortTests : IISFunctionalTestBase
         // Must publish to set env vars in web.config
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(variant);
         var port = GetUnusedRandomPort();
-        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_PORT"] = port.ToString(CultureInfo.InvariantCulture);
+        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_PORT"] = port.ToString(
+            CultureInfo.InvariantCulture
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -157,7 +167,13 @@ public class AspNetCorePortTests : IISFunctionalTestBase
         {
             var port = Random.Shared.Next(_minPort, _maxPort);
 
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 try
                 {
@@ -176,6 +192,9 @@ public class AspNetCorePortTests : IISFunctionalTestBase
             }
         }
 
-        throw new AggregateException($"Unable to find unused random port after {retries} retries.", exceptions);
+        throw new AggregateException(
+            $"Unable to find unused random port after {retries} retries.",
+            exceptions
+        );
     }
 }

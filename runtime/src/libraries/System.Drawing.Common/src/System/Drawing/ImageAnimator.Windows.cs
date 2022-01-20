@@ -87,9 +87,7 @@ namespace System.Drawing
         /// <summary>
         ///     Prevent instantiation of this class.
         /// </summary>
-        private ImageAnimator()
-        {
-        }
+        private ImageAnimator() { }
 
         /// <summary>
         ///     Advances the frame in the specified image. The new frame is drawn the next time the image is rendered.
@@ -234,7 +232,10 @@ namespace System.Drawing
             finally
             {
                 t_threadWriterLockWaitCount--;
-                Debug.Assert(t_threadWriterLockWaitCount >= 0, "threadWriterLockWaitCount less than zero.");
+                Debug.Assert(
+                    t_threadWriterLockWaitCount >= 0,
+                    "threadWriterLockWaitCount less than zero."
+                );
             }
 
             try
@@ -337,7 +338,10 @@ namespace System.Drawing
             finally
             {
                 t_threadWriterLockWaitCount--;
-                Debug.Assert(t_threadWriterLockWaitCount >= 0, "threadWriterLockWaitCount less than zero.");
+                Debug.Assert(
+                    t_threadWriterLockWaitCount >= 0,
+                    "threadWriterLockWaitCount less than zero."
+                );
             }
 
             try
@@ -349,7 +353,13 @@ namespace System.Drawing
 
                     if (image == imageInfo.Image)
                     {
-                        if ((onFrameChangedHandler == imageInfo.FrameChangedHandler) || (onFrameChangedHandler != null && onFrameChangedHandler.Equals(imageInfo.FrameChangedHandler)))
+                        if (
+                            (onFrameChangedHandler == imageInfo.FrameChangedHandler)
+                            || (
+                                onFrameChangedHandler != null
+                                && onFrameChangedHandler.Equals(imageInfo.FrameChangedHandler)
+                            )
+                        )
                         {
                             s_imageInfoList.Remove(imageInfo);
                         }
@@ -369,7 +379,6 @@ namespace System.Drawing
                 }
             }
         }
-
 
         /// <summary>
         ///     Worker thread procedure which implements the main animation loop.

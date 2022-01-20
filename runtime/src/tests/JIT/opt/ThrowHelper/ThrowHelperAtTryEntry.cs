@@ -23,7 +23,8 @@ class ThrowHelperAtTryEntry
         {
             ThrowHelper();
             x = -1;
-            if (p) ThrowHelper();
+            if (p)
+                ThrowHelper();
         }
         catch (Exception)
         {

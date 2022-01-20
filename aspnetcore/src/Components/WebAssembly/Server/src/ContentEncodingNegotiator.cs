@@ -15,14 +15,18 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server;
 internal class ContentEncodingNegotiator
 {
     // List of encodings by preference order with their associated extension so that we can easily handle "*".
-    private static readonly StringSegment[] _preferredEncodings =
-        new StringSegment[] { "br", "gzip" };
-
-    private static readonly Dictionary<StringSegment, string> _encodingExtensionMap = new Dictionary<StringSegment, string>(StringSegmentComparer.OrdinalIgnoreCase)
+    private static readonly StringSegment[] _preferredEncodings = new StringSegment[]
     {
-        ["br"] = ".br",
-        ["gzip"] = ".gz"
+        "br",
+        "gzip"
     };
+
+    private static readonly Dictionary<StringSegment, string> _encodingExtensionMap =
+        new Dictionary<StringSegment, string>(StringSegmentComparer.OrdinalIgnoreCase)
+        {
+            ["br"] = ".br",
+            ["gzip"] = ".gz"
+        };
 
     private readonly RequestDelegate _next;
     private readonly IWebHostEnvironment _webHostEnvironment;
@@ -48,7 +52,10 @@ internal class ContentEncodingNegotiator
             return;
         }
 
-        if (!StringWithQualityHeaderValue.TryParseList(accept, out var encodings) || encodings.Count == 0)
+        if (
+            !StringWithQualityHeaderValue.TryParseList(accept, out var encodings)
+            || encodings.Count == 0
+        )
         {
             return;
         }
@@ -67,7 +74,10 @@ internal class ContentEncodingNegotiator
                 {
                     selectedEncoding = PickPreferredEncoding(context, selectedEncoding, encoding);
                 }
-                else if (_encodingExtensionMap.TryGetValue(encodingName, out var encodingExtension) && ResourceExists(context, encodingExtension))
+                else if (
+                    _encodingExtensionMap.TryGetValue(encodingName, out var encodingExtension)
+                    && ResourceExists(context, encodingExtension)
+                )
                 {
                     selectedEncoding = encodingName;
                     selectedEncodingQuality = quality;
@@ -80,7 +90,13 @@ internal class ContentEncodingNegotiator
                     selectedEncodingQuality = quality;
                 }
 
-                if (StringSegment.Equals("identity", encodingName, StringComparison.OrdinalIgnoreCase))
+                if (
+                    StringSegment.Equals(
+                        "identity",
+                        encodingName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     selectedEncoding = StringSegment.Empty;
                     selectedEncodingQuality = quality;
@@ -97,7 +113,11 @@ internal class ContentEncodingNegotiator
 
         return;
 
-        StringSegment PickPreferredEncoding(HttpContext context, StringSegment selectedEncoding, StringWithQualityHeaderValue encoding)
+        StringSegment PickPreferredEncoding(
+            HttpContext context,
+            StringSegment selectedEncoding,
+            StringWithQualityHeaderValue encoding
+        )
         {
             foreach (var preferredEncoding in _preferredEncodings)
             {
@@ -106,7 +126,10 @@ internal class ContentEncodingNegotiator
                     return selectedEncoding;
                 }
 
-                if ((preferredEncoding == encoding.Value || encoding.Value == "*") && ResourceExists(context, _encodingExtensionMap[preferredEncoding]))
+                if (
+                    (preferredEncoding == encoding.Value || encoding.Value == "*")
+                    && ResourceExists(context, _encodingExtensionMap[preferredEncoding])
+                )
                 {
                     return preferredEncoding;
                 }
@@ -117,5 +140,7 @@ internal class ContentEncodingNegotiator
     }
 
     private bool ResourceExists(HttpContext context, string extension) =>
-        _webHostEnvironment.WebRootFileProvider.GetFileInfo(context.Request.Path + extension).Exists;
+        _webHostEnvironment.WebRootFileProvider.GetFileInfo(
+            context.Request.Path + extension
+        ).Exists;
 }

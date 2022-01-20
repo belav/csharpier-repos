@@ -16,8 +16,8 @@ public class HasValidatorsValidationMetadataProviderTest
         // Arrange
         var validationProviders = new IModelValidatorProvider[]
         {
-                new DefaultModelValidatorProvider(),
-                Mock.Of<IModelValidatorProvider>(),
+            new DefaultModelValidatorProvider(),
+            Mock.Of<IModelValidatorProvider>(),
         };
         var metadataProvider = new HasValidatorsValidationMetadataProvider(validationProviders);
 
@@ -55,15 +55,15 @@ public class HasValidatorsValidationMetadataProviderTest
     {
         // Arrange
         var metadataBasedModelValidatorProvider = new Mock<IMetadataBasedModelValidatorProvider>();
-        metadataBasedModelValidatorProvider.Setup(p => p.HasValidators(typeof(object), It.IsAny<IList<object>>()))
+        metadataBasedModelValidatorProvider
+            .Setup(p => p.HasValidators(typeof(object), It.IsAny<IList<object>>()))
             .Returns(true)
             .Verifiable();
 
         var validationProviders = new IModelValidatorProvider[]
         {
-                 new DefaultModelValidatorProvider(),
-                 metadataBasedModelValidatorProvider.Object,
-
+            new DefaultModelValidatorProvider(),
+            metadataBasedModelValidatorProvider.Object,
         };
         var metadataProvider = new HasValidatorsValidationMetadataProvider(validationProviders);
 
@@ -83,11 +83,13 @@ public class HasValidatorsValidationMetadataProviderTest
     public void CreateValidationMetadata_SetsHasValidatorsToFalse_IfNoProviderReturnsTrue()
     {
         // Arrange
-        var provider = Mock.Of<IMetadataBasedModelValidatorProvider>(p => p.HasValidators(typeof(object), It.IsAny<IList<object>>()) == false);
+        var provider = Mock.Of<IMetadataBasedModelValidatorProvider>(
+            p => p.HasValidators(typeof(object), It.IsAny<IList<object>>()) == false
+        );
         var validationProviders = new IModelValidatorProvider[]
         {
-                 new DefaultModelValidatorProvider(),
-                 provider,
+            new DefaultModelValidatorProvider(),
+            provider,
         };
         var metadataProvider = new HasValidatorsValidationMetadataProvider(validationProviders);
 
@@ -106,11 +108,13 @@ public class HasValidatorsValidationMetadataProviderTest
     public void CreateValidationMetadata_DoesNotOverrideExistingHasValidatorsValue()
     {
         // Arrange
-        var provider = Mock.Of<IMetadataBasedModelValidatorProvider>(p => p.HasValidators(typeof(object), It.IsAny<IList<object>>()) == false);
+        var provider = Mock.Of<IMetadataBasedModelValidatorProvider>(
+            p => p.HasValidators(typeof(object), It.IsAny<IList<object>>()) == false
+        );
         var validationProviders = new IModelValidatorProvider[]
         {
-                 new DefaultModelValidatorProvider(),
-                 provider,
+            new DefaultModelValidatorProvider(),
+            provider,
         };
         var metadataProvider = new HasValidatorsValidationMetadataProvider(validationProviders);
 

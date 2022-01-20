@@ -34,17 +34,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <param name="startupAssembly">The startup assembly.</param>
         /// <param name="args">The command-line arguments.</param>
         /// <returns>Zero if the command succeeds; otherwise, one.</returns>
-        public static int Execute(string? context, Assembly assembly, Assembly startupAssembly, string[] args)
+        public static int Execute(
+            string? context,
+            Assembly assembly,
+            Assembly startupAssembly,
+            string[] args
+        )
         {
             _context = context;
             _assembly = assembly;
             _startupAssembly = startupAssembly;
 
-            var app = new CommandLineApplication
-            {
-                Name = "bundle",
-                HandleResponseFiles = true
-            };
+            var app = new CommandLineApplication { Name = "bundle", HandleResponseFiles = true };
             Configure(app);
 
             try
@@ -53,8 +54,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             }
             catch (Exception ex)
             {
-                if (ex is CommandParsingException
-                    || ex is OperationException)
+                if (ex is CommandParsingException || ex is OperationException)
                 {
                     Reporter.WriteVerbose(ex.ToString());
                 }
@@ -75,7 +75,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             app.FullName = DesignStrings.BundleFullName;
 
             _migration = app.Argument("<MIGRATION>", DesignStrings.MigrationDescription);
-            _connection = app.Option("--connection <CONNECTION>", DesignStrings.ConnectionDescription);
+            _connection = app.Option(
+                "--connection <CONNECTION>",
+                DesignStrings.ConnectionDescription
+            );
 
             app.VersionOption("--version", ProductInfo.GetVersion);
             app.HelpOption("-h|--help");
@@ -85,34 +88,37 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             app.OnExecute(
                 args =>
-                    {
-                        Reporter.IsVerbose = verbose.HasValue();
-                        Reporter.NoColor = noColor.HasValue();
-                        Reporter.PrefixOutput = prefixOutput.HasValue();
+                {
+                    Reporter.IsVerbose = verbose.HasValue();
+                    Reporter.NoColor = noColor.HasValue();
+                    Reporter.PrefixOutput = prefixOutput.HasValue();
 
-                        ExecuteInternal(args);
+                    ExecuteInternal(args);
 
-                        return 0;
-                    });
+                    return 0;
+                }
+            );
         }
 
         private static void ExecuteInternal(string[] args)
         {
             new MigrationsOperations(
-                    new OperationReporter(
-                        new OperationReportHandler(
-                            Reporter.WriteError,
-                            Reporter.WriteWarning,
-                            Reporter.WriteInformation,
-                            Reporter.WriteVerbose)),
-                    _assembly!,
-                    _startupAssembly!,
-                    projectDir: string.Empty,
-                    rootNamespace: null,
-                    language: null,
-                    nullable: false,
-                    args)
-                .UpdateDatabase(_migration!.Value, _connection!.Value(), _context);
+                new OperationReporter(
+                    new OperationReportHandler(
+                        Reporter.WriteError,
+                        Reporter.WriteWarning,
+                        Reporter.WriteInformation,
+                        Reporter.WriteVerbose
+                    )
+                ),
+                _assembly!,
+                _startupAssembly!,
+                projectDir: string.Empty,
+                rootNamespace: null,
+                language: null,
+                nullable: false,
+                args
+            ).UpdateDatabase(_migration!.Value, _connection!.Value(), _context);
         }
     }
 }

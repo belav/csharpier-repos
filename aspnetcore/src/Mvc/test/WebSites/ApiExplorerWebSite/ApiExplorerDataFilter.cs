@@ -28,8 +28,10 @@ public class ApiExplorerDataFilter : IResourceFilter
 
     public void OnResourceExecuting(ResourceExecutingContext context)
     {
-        if (context.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor &&
-            controllerActionDescriptor.MethodInfo.IsDefined(typeof(PassThruAttribute)))
+        if (
+            context.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor
+            && controllerActionDescriptor.MethodInfo.IsDefined(typeof(PassThruAttribute))
+        )
         {
             return;
         }
@@ -49,9 +51,7 @@ public class ApiExplorerDataFilter : IResourceFilter
         context.Result = new JsonResult(descriptions);
     }
 
-    public void OnResourceExecuted(ResourceExecutedContext context)
-    {
-    }
+    public void OnResourceExecuted(ResourceExecutedContext context) { }
 
     private ApiExplorerData CreateSerializableData(ApiDescription description)
     {
@@ -77,7 +77,9 @@ public class ApiExplorerDataFilter : IResourceFilter
             {
                 parameterData.RouteInfo = new ApiExplorerParameterRouteInfo()
                 {
-                    ConstraintTypes = parameter.RouteInfo.Constraints?.Select(c => c.GetType().Name).ToArray(),
+                    ConstraintTypes = parameter.RouteInfo.Constraints?
+                        .Select(c => c.GetType().Name)
+                        .ToArray(),
                     DefaultValue = parameter.RouteInfo.DefaultValue,
                     IsOptional = parameter.RouteInfo.IsOptional,
                 };
@@ -88,11 +90,13 @@ public class ApiExplorerDataFilter : IResourceFilter
 
         foreach (var request in description.SupportedRequestFormats)
         {
-            data.SupportedRequestFormats.Add(new ApiExplorerRequestFormat
-            {
-                FormatterType = request.Formatter?.GetType().FullName,
-                MediaType = request.MediaType,
-            });
+            data.SupportedRequestFormats.Add(
+                new ApiExplorerRequestFormat
+                {
+                    FormatterType = request.Formatter?.GetType().FullName,
+                    MediaType = request.MediaType,
+                }
+            );
         }
 
         foreach (var response in description.SupportedResponseTypes)
@@ -106,11 +110,13 @@ public class ApiExplorerDataFilter : IResourceFilter
 
             foreach (var responseFormat in response.ApiResponseFormats)
             {
-                responseType.ResponseFormats.Add(new ApiExplorerResponseFormat()
-                {
-                    FormatterType = responseFormat.Formatter?.GetType().FullName,
-                    MediaType = responseFormat.MediaType
-                });
+                responseType.ResponseFormats.Add(
+                    new ApiExplorerResponseFormat()
+                    {
+                        FormatterType = responseFormat.Formatter?.GetType().FullName,
+                        MediaType = responseFormat.MediaType
+                    }
+                );
             }
 
             data.SupportedResponseTypes.Add(responseType);
@@ -126,13 +132,16 @@ public class ApiExplorerDataFilter : IResourceFilter
 
         public string HttpMethod { get; set; }
 
-        public List<ApiExplorerParameterData> ParameterDescriptions { get; } = new List<ApiExplorerParameterData>();
+        public List<ApiExplorerParameterData> ParameterDescriptions { get; } =
+            new List<ApiExplorerParameterData>();
 
         public string RelativePath { get; set; }
 
-        public List<ApiExplorerResponseType> SupportedResponseTypes { get; } = new List<ApiExplorerResponseType>();
+        public List<ApiExplorerResponseType> SupportedResponseTypes { get; } =
+            new List<ApiExplorerResponseType>();
 
-        public List<ApiExplorerRequestFormat> SupportedRequestFormats { get; } = new List<ApiExplorerRequestFormat>();
+        public List<ApiExplorerRequestFormat> SupportedRequestFormats { get; } =
+            new List<ApiExplorerRequestFormat>();
     }
 
     // Used to serialize data between client and server
@@ -164,8 +173,8 @@ public class ApiExplorerDataFilter : IResourceFilter
     // Used to serialize data between client and server
     private class ApiExplorerResponseType
     {
-        public IList<ApiExplorerResponseFormat> ResponseFormats { get; }
-            = new List<ApiExplorerResponseFormat>();
+        public IList<ApiExplorerResponseFormat> ResponseFormats { get; } =
+            new List<ApiExplorerResponseFormat>();
 
         public string ResponseType { get; set; }
 

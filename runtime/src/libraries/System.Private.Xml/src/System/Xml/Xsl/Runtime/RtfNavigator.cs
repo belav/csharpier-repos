@@ -37,7 +37,6 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         public abstract XPathNavigator ToNavigator();
 
-
         //-----------------------------------------------
         // XPathNavigator
         //-----------------------------------------------
@@ -189,7 +188,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// This navigator is a cursor over a cache that stores Xslt disable-output-escaping flags.
     /// </summary>
@@ -198,7 +196,6 @@ namespace System.Xml.Xsl.Runtime
         private XmlEventCache _events;
         private NavigatorConstructor _constr;
         private XmlNameTable _nameTable;
-
 
         //-----------------------------------------------
         // Constructors
@@ -224,7 +221,6 @@ namespace System.Xml.Xsl.Runtime
             _nameTable = that._nameTable;
         }
 
-
         //-----------------------------------------------
         // RtfNavigator
         //-----------------------------------------------
@@ -245,7 +241,6 @@ namespace System.Xml.Xsl.Runtime
             return _constr.GetNavigator(_events, _nameTable);
         }
 
-
         //-----------------------------------------------
         // XPathItem
         //-----------------------------------------------
@@ -260,7 +255,6 @@ namespace System.Xml.Xsl.Runtime
         {
             get { return _events.EventsToString(); }
         }
-
 
         //-----------------------------------------------
         // XPathNavigator
@@ -300,16 +294,15 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// This RtfNavigator specializes the case of a root node having a single text node child.  This is a very common
     /// case, such as in &lt;xsl:variable name="foo"&gt;bar&lt;/xsl:variable&gt;.
     /// </summary>
     internal sealed class RtfTextNavigator : RtfNavigator
     {
-        private string _text, _baseUri;
+        private string _text,
+            _baseUri;
         private NavigatorConstructor _constr;
-
 
         //-----------------------------------------------
         // Constructors
@@ -335,7 +328,6 @@ namespace System.Xml.Xsl.Runtime
             _constr = that._constr;
         }
 
-
         //-----------------------------------------------
         // RtfNavigator
         //-----------------------------------------------
@@ -356,7 +348,6 @@ namespace System.Xml.Xsl.Runtime
             return _constr.GetNavigator(_text, _baseUri, new NameTable());
         }
 
-
         //-----------------------------------------------
         // XPathItem
         //-----------------------------------------------
@@ -371,7 +362,6 @@ namespace System.Xml.Xsl.Runtime
         {
             get { return _text; }
         }
-
 
         //-----------------------------------------------
         // XPathNavigator
@@ -411,7 +401,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// This class creates a document on the first call to GetNavigator(), and returns a Navigator from it.  On
     /// subsequent calls, Navigators from the same document are returned (no new document is created).
@@ -431,7 +420,15 @@ namespace System.Xml.Xsl.Runtime
             {
                 // Create XPathDocument from event cache
                 XPathDocument doc = new XPathDocument(nameTable);
-                XmlRawWriter writer = doc.LoadFromWriter(XPathDocument.LoadFlags.AtomizeNames | (events.HasRootNode ? XPathDocument.LoadFlags.None : XPathDocument.LoadFlags.Fragment), events.BaseUri);
+                XmlRawWriter writer = doc.LoadFromWriter(
+                    XPathDocument.LoadFlags.AtomizeNames
+                        | (
+                            events.HasRootNode
+                                ? XPathDocument.LoadFlags.None
+                                : XPathDocument.LoadFlags.Fragment
+                        ),
+                    events.BaseUri
+                );
 
                 events.EventsToWriter(writer);
                 writer.Close();
@@ -453,7 +450,10 @@ namespace System.Xml.Xsl.Runtime
             {
                 // Create XPathDocument
                 XPathDocument doc = new XPathDocument(nameTable);
-                XmlRawWriter writer = doc.LoadFromWriter(XPathDocument.LoadFlags.AtomizeNames, baseUri);
+                XmlRawWriter writer = doc.LoadFromWriter(
+                    XPathDocument.LoadFlags.AtomizeNames,
+                    baseUri
+                );
                 writer.WriteString(text);
                 writer.Close();
 

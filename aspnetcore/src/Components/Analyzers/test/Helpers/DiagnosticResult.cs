@@ -52,11 +52,7 @@ public struct DiagnosticResult
             }
             return this.locations;
         }
-
-        set
-        {
-            this.locations = value;
-        }
+        set { this.locations = value; }
     }
 
     public DiagnosticSeverity Severity { get; set; }
@@ -67,25 +63,16 @@ public struct DiagnosticResult
 
     public string Path
     {
-        get
-        {
-            return this.Locations.Length > 0 ? this.Locations[0].Path : "";
-        }
+        get { return this.Locations.Length > 0 ? this.Locations[0].Path : ""; }
     }
 
     public int Line
     {
-        get
-        {
-            return this.Locations.Length > 0 ? this.Locations[0].Line : -1;
-        }
+        get { return this.Locations.Length > 0 ? this.Locations[0].Line : -1; }
     }
 
     public int Column
     {
-        get
-        {
-            return this.Locations.Length > 0 ? this.Locations[0].Column : -1;
-        }
+        get { return this.Locations.Length > 0 ? this.Locations[0].Column : -1; }
     }
 }

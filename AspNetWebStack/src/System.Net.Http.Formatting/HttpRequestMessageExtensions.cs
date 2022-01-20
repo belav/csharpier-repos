@@ -19,19 +19,22 @@ namespace System.Net.Http
         /// <param name="request">The HTTP request.</param>
         /// <param name="statusCode">The HTTP status code.</param>
         /// <returns>An initialized <see cref="HttpResponseMessage"/>.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller will dispose")]
-        public static HttpResponseMessage CreateResponse(this HttpRequestMessage request, HttpStatusCode statusCode)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller will dispose"
+        )]
+        public static HttpResponseMessage CreateResponse(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode
+        )
         {
             if (request == null)
             {
                 throw Error.ArgumentNull("request");
             }
 
-            return new HttpResponseMessage
-            {
-                StatusCode = statusCode,
-                RequestMessage = request
-            };
+            return new HttpResponseMessage { StatusCode = statusCode, RequestMessage = request };
         }
 
         /// <summary>
@@ -39,7 +42,11 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="request">The HTTP request.</param>
         /// <returns>An initialized <see cref="HttpResponseMessage"/>.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller will dispose")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller will dispose"
+        )]
         public static HttpResponseMessage CreateResponse(this HttpRequestMessage request)
         {
             if (request == null)
@@ -47,10 +54,7 @@ namespace System.Net.Http
                 throw Error.ArgumentNull("request");
             }
 
-            return new HttpResponseMessage
-            {
-                RequestMessage = request
-            };
+            return new HttpResponseMessage { RequestMessage = request };
         }
     }
 }

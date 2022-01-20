@@ -14,7 +14,8 @@ public class DisallowNonLiteralSequenceNumbersTest
     public async Task RenderTreeBuilderInvocationWithNumericLiteralArgument_Works()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Components.Rendering;
 var renderTreeBuilder = new RenderTreeBuilder();
 renderTreeBuilder.OpenElement(0, ""div"");
@@ -31,13 +32,15 @@ renderTreeBuilder.CloseElement();
     public async Task RenderTreeBuilderInvocationWithNonConstantArgument_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Components.Rendering;
 var renderTreeBuilder = new RenderTreeBuilder();
 var i = 0;
 renderTreeBuilder.OpenRegion(/*MM*/i);
 renderTreeBuilder.CloseRegion();
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -45,20 +48,25 @@ renderTreeBuilder.CloseRegion();
         var diagnostic = Assert.Single(diagnostics);
         Assert.Same(DiagnosticDescriptors.DoNotUseNonLiteralSequenceNumbers, diagnostic.Descriptor);
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.StartsWith("'i' should not be used as a sequence number.", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.StartsWith(
+            "'i' should not be used as a sequence number.",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task RenderTreeBuilderInvocationWithConstantArgument_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Components.Rendering;
 var renderTreeBuilder = new RenderTreeBuilder();
 const int i = 0;
 renderTreeBuilder.OpenRegion(/*MM*/i);
 renderTreeBuilder.CloseRegion();
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -66,20 +74,25 @@ renderTreeBuilder.CloseRegion();
         var diagnostic = Assert.Single(diagnostics);
         Assert.Same(DiagnosticDescriptors.DoNotUseNonLiteralSequenceNumbers, diagnostic.Descriptor);
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.StartsWith("'i' should not be used as a sequence number.", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.StartsWith(
+            "'i' should not be used as a sequence number.",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task RenderTreeBuilderInvocationWithInvocationArgument_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Components.Rendering;
 var renderTreeBuilder = new RenderTreeBuilder();
 renderTreeBuilder.OpenElement(/*MM*/ComputeSequenceNumber(0), ""div"");
 renderTreeBuilder.CloseElement();
 static int ComputeSequenceNumber(int i) => i + 1;
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -87,6 +100,9 @@ static int ComputeSequenceNumber(int i) => i + 1;
         var diagnostic = Assert.Single(diagnostics);
         Assert.Same(DiagnosticDescriptors.DoNotUseNonLiteralSequenceNumbers, diagnostic.Descriptor);
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.StartsWith("'ComputeSequenceNumber(0)' should not be used as a sequence number.", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.StartsWith(
+            "'ComputeSequenceNumber(0)' should not be used as a sequence number.",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 }

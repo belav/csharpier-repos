@@ -84,7 +84,9 @@ internal class StackPolicy : IQueuePolicy
                 if (_freeServerSpots > _maxConcurrentRequests)
                 {
                     _freeServerSpots--;
-                    throw new InvalidOperationException("OnExit must only be called once per successful call to TryEnterAsync");
+                    throw new InvalidOperationException(
+                        "OnExit must only be called once per successful call to TryEnterAsync"
+                    );
                 }
 
                 return;

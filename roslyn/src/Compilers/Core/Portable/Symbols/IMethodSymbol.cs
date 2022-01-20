@@ -249,7 +249,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns a constructed method given its type arguments and type argument nullable annotations.
         /// </summary>
-        IMethodSymbol Construct(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations);
+        IMethodSymbol Construct(
+            ImmutableArray<ITypeSymbol> typeArguments,
+            ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations
+        );
 
         /// <summary>
         /// If this is a partial method implementation part, returns the corresponding

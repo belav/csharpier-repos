@@ -86,7 +86,8 @@ public interface IHtmlHelper
         string hostname,
         string fragment,
         object routeValues,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns a &lt;hidden&gt; element (antiforgery token) that will be validated when the containing
@@ -130,7 +131,8 @@ public interface IHtmlHelper
         object routeValues,
         FormMethod method,
         bool? antiforgery,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Renders a &lt;form&gt; start tag to the response. The route with name <paramref name="routeName"/>
@@ -165,7 +167,8 @@ public interface IHtmlHelper
         object routeValues,
         FormMethod method,
         bool? antiforgery,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns an &lt;input&gt; element of type "checkbox" with value "true" and an &lt;input&gt; element of type
@@ -232,7 +235,8 @@ public interface IHtmlHelper
         string expression,
         string templateName,
         string htmlFieldName,
-        object additionalViewData);
+        object additionalViewData
+    );
 
     /// <summary>
     /// Returns the display name for the specified <paramref name="expression"/>.
@@ -284,7 +288,8 @@ public interface IHtmlHelper
         string expression,
         IEnumerable<SelectListItem> selectList,
         string optionLabel,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns HTML markup for the <paramref name="expression"/>, using an editor template, specified HTML field
@@ -320,7 +325,12 @@ public interface IHtmlHelper
     /// case-sensitive file systems.
     /// </para>
     /// </remarks>
-    IHtmlContent Editor(string expression, string templateName, string htmlFieldName, object additionalViewData);
+    IHtmlContent Editor(
+        string expression,
+        string templateName,
+        string htmlFieldName,
+        object additionalViewData
+    );
 
     /// <summary>
     /// Converts the <paramref name="value"/> to an HTML-encoded <see cref="string"/>.
@@ -466,7 +476,11 @@ public interface IHtmlHelper
     /// &lt;select&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
     /// attribute.
     /// </remarks>
-    IHtmlContent ListBox(string expression, IEnumerable<SelectListItem> selectList, object htmlAttributes);
+    IHtmlContent ListBox(
+        string expression,
+        IEnumerable<SelectListItem> selectList,
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns the full HTML element name for the specified <paramref name="expression"/>. Uses
@@ -489,7 +503,11 @@ public interface IHtmlHelper
     /// A <see cref="Task"/> that on completion returns a new <see cref="IHtmlContent"/> instance containing
     /// the created HTML.
     /// </returns>
-    Task<IHtmlContent> PartialAsync(string partialViewName, object model, ViewDataDictionary viewData);
+    Task<IHtmlContent> PartialAsync(
+        string partialViewName,
+        object model,
+        ViewDataDictionary viewData
+    );
 
     /// <summary>
     /// Returns an &lt;input&gt; element of type "password" for the specified <paramref name="expression"/>. Adds a
@@ -548,7 +566,12 @@ public interface IHtmlHelper
     /// &lt;input&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
     /// attribute.
     /// </remarks>
-    IHtmlContent RadioButton(string expression, object value, bool? isChecked, object htmlAttributes);
+    IHtmlContent RadioButton(
+        string expression,
+        object value,
+        bool? isChecked,
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Wraps HTML markup in an <see cref="HtmlString"/>, without HTML-encoding the specified
@@ -606,7 +629,8 @@ public interface IHtmlHelper
         string hostName,
         string fragment,
         object routeValues,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns a &lt;textarea&gt; element for the specified <paramref name="expression"/>. Adds content to the
@@ -631,7 +655,13 @@ public interface IHtmlHelper
     /// &lt;textarea&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
     /// attribute.
     /// </remarks>
-    IHtmlContent TextArea(string expression, string value, int rows, int columns, object htmlAttributes);
+    IHtmlContent TextArea(
+        string expression,
+        string value,
+        int rows,
+        int columns,
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Returns an &lt;input&gt; element of type "text" for the specified <paramref name="expression"/>. Adds a
@@ -684,7 +714,12 @@ public interface IHtmlHelper
     /// <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side validation is
     /// disabled.
     /// </returns>
-    IHtmlContent ValidationMessage(string expression, string message, object htmlAttributes, string tag);
+    IHtmlContent ValidationMessage(
+        string expression,
+        string message,
+        object htmlAttributes,
+        string tag
+    );
 
     /// <summary>
     /// Returns an unordered list (&lt;ul&gt; element) of validation messages that are in the
@@ -711,7 +746,8 @@ public interface IHtmlHelper
         bool excludePropertyErrors,
         string message,
         object htmlAttributes,
-        string tag);
+        string tag
+    );
 
     /// <summary>
     /// Returns the formatted value for the specified <paramref name="expression"/>. Specifically, returns the

@@ -61,7 +61,12 @@ namespace Microsoft.CodeAnalysis.Host
             /// </remarks>
             private ReferenceCountedDisposable<MemoryMappedViewAccessor>.WeakReference _weakReadAccessor;
 
-            public MemoryMappedInfo(ReferenceCountedDisposable<MemoryMappedFile> memoryMappedFile, string name, long offset, long size)
+            public MemoryMappedInfo(
+                ReferenceCountedDisposable<MemoryMappedFile> memoryMappedFile,
+                string name,
+                long offset,
+                long size
+            )
             {
                 _memoryMappedFile = memoryMappedFile;
                 Name = name;
@@ -70,9 +75,14 @@ namespace Microsoft.CodeAnalysis.Host
             }
 
             public MemoryMappedInfo(string name, long offset, long size)
-                : this(new ReferenceCountedDisposable<MemoryMappedFile>(MemoryMappedFile.OpenExisting(name)), name, offset, size)
-            {
-            }
+                : this(
+                    new ReferenceCountedDisposable<MemoryMappedFile>(
+                        MemoryMappedFile.OpenExisting(name)
+                    ),
+                    name,
+                    offset,
+                    size
+                ) { }
 
             /// <summary>
             /// The name of the memory mapped file.
@@ -108,13 +118,25 @@ namespace Microsoft.CodeAnalysis.Host
                         {
                             using var memoryMappedFile = info._memoryMappedFile.TryAddReference();
                             if (memoryMappedFile is null)
-                                throw new ObjectDisposedException(typeof(MemoryMappedInfo).FullName);
+                                throw new ObjectDisposedException(
+                                    typeof(MemoryMappedInfo).FullName
+                                );
 
-                            return memoryMappedFile.Target.CreateViewAccessor(info.Offset, info.Size, MemoryMappedFileAccess.Read);
+                            return memoryMappedFile.Target.CreateViewAccessor(
+                                info.Offset,
+                                info.Size,
+                                MemoryMappedFileAccess.Read
+                            );
                         },
-                        this);
-                    streamAccessor = new ReferenceCountedDisposable<MemoryMappedViewAccessor>(rawAccessor);
-                    _weakReadAccessor = new ReferenceCountedDisposable<MemoryMappedViewAccessor>.WeakReference(streamAccessor);
+                        this
+                    );
+                    streamAccessor = new ReferenceCountedDisposable<MemoryMappedViewAccessor>(
+                        rawAccessor
+                    );
+                    _weakReadAccessor =
+                        new ReferenceCountedDisposable<MemoryMappedViewAccessor>.WeakReference(
+                            streamAccessor
+                        );
                 }
 
                 Debug.Assert(streamAccessor.Target.CanRead);
@@ -134,9 +156,14 @@ namespace Microsoft.CodeAnalysis.Host
                         if (memoryMappedFile is null)
                             throw new ObjectDisposedException(typeof(MemoryMappedInfo).FullName);
 
-                        return memoryMappedFile.Target.CreateViewStream(info.Offset, info.Size, MemoryMappedFileAccess.Write);
+                        return memoryMappedFile.Target.CreateViewStream(
+                            info.Offset,
+                            info.Size,
+                            MemoryMappedFileAccess.Write
+                        );
                     },
-                    this);
+                    this
+                );
             }
 
             /// <summary>
@@ -156,7 +183,10 @@ namespace Microsoft.CodeAnalysis.Host
             /// <param name="function">The function to execute.</param>
             /// <param name="argument">The argument to pass to the function.</param>
             /// <returns>The value returned by <paramref name="function"/>.</returns>
-            private static T RunWithCompactingGCFallback<TArg, T>(Func<TArg, T> function, TArg argument)
+            private static T RunWithCompactingGCFallback<TArg, T>(
+                Func<TArg, T> function,
+                TArg argument
+            )
             {
                 try
                 {
@@ -175,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Host
                 GC.GetTotalMemory(forceFullCollection: true);
 
                 // compact the LOH
-                GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+                GCSettings.LargeObjectHeapCompactionMode =
+                    GCLargeObjectHeapCompactionMode.CompactOnce;
                 GC.Collect();
             }
 
@@ -194,10 +225,15 @@ namespace Microsoft.CodeAnalysis.Host
                 private byte* _current;
                 private readonly byte* _end;
 
-                public SharedReadableStream(ReferenceCountedDisposable<MemoryMappedViewAccessor> accessor, long length)
+                public SharedReadableStream(
+                    ReferenceCountedDisposable<MemoryMappedViewAccessor> accessor,
+                    long length
+                )
                 {
                     _accessor = accessor;
-                    _current = _start = (byte*)_accessor.Target.SafeMemoryMappedViewHandle.DangerousGetHandle() + _accessor.Target.PointerOffset;
+                    _current = _start =
+                        (byte*)_accessor.Target.SafeMemoryMappedViewHandle.DangerousGetHandle()
+                        + _accessor.Target.PointerOffset;
                     _end = checked(_start + length);
                 }
 
@@ -208,11 +244,7 @@ namespace Microsoft.CodeAnalysis.Host
 
                 public override long Position
                 {
-                    get
-                    {
-                        return _current - _start;
-                    }
-
+                    get { return _current - _start; }
                     set
                     {
                         var target = _start + value;
@@ -278,8 +310,11 @@ namespace Microsoft.CodeAnalysis.Host
                 }
 
                 public override void Flush() => throw new NotSupportedException();
+
                 public override void SetLength(long value) => throw new NotSupportedException();
-                public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+
+                public override void Write(byte[] buffer, int offset, int count) =>
+                    throw new NotSupportedException();
 
                 protected override void Dispose(bool disposing)
                 {
@@ -296,8 +331,7 @@ namespace Microsoft.CodeAnalysis.Host
                 /// <summary>
                 /// Get underlying native memory directly.
                 /// </summary>
-                public IntPtr GetPointer()
-                    => (IntPtr)_start;
+                public IntPtr GetPointer() => (IntPtr)_start;
             }
         }
     }

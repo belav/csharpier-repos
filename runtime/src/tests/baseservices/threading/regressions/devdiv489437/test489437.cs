@@ -31,7 +31,6 @@ class Test
         s.Release();
         cts.Cancel();
 
-
         if (t.Status != TaskStatus.Canceled && s.CurrentCount == 0)
         {
             Console.WriteLine("PASS");
@@ -48,4 +47,3 @@ class Test
 
     }
 }
-

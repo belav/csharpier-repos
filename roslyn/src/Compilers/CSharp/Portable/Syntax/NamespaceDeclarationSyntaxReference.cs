@@ -15,17 +15,20 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal sealed class NamespaceDeclarationSyntaxReference : TranslationSyntaxReference
     {
-        public NamespaceDeclarationSyntaxReference(SyntaxReference reference)
-            : base(reference)
-        {
-        }
+        public NamespaceDeclarationSyntaxReference(SyntaxReference reference) : base(reference) { }
 
-        protected override SyntaxNode Translate(SyntaxReference reference, CancellationToken cancellationToken)
+        protected override SyntaxNode Translate(
+            SyntaxReference reference,
+            CancellationToken cancellationToken
+        )
         {
             return GetSyntax(reference, cancellationToken);
         }
 
-        internal static SyntaxNode GetSyntax(SyntaxReference reference, CancellationToken cancellationToken)
+        internal static SyntaxNode GetSyntax(
+            SyntaxReference reference,
+            CancellationToken cancellationToken
+        )
         {
             var node = (CSharpSyntaxNode)reference.GetSyntax(cancellationToken);
 

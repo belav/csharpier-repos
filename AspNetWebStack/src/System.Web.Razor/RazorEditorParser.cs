@@ -80,7 +80,10 @@ namespace System.Web.Razor
             }
             if (String.IsNullOrEmpty(sourceFileName))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "sourceFileName");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "sourceFileName"
+                );
             }
 
             Host = host;
@@ -103,12 +106,17 @@ namespace System.Web.Razor
             get { return _currentParseTree; }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Since this method is heavily affected by side-effects, particularly calls to CheckForStructureChanges, it should not be made into a property")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Since this method is heavily affected by side-effects, particularly calls to CheckForStructureChanges, it should not be made into a property"
+        )]
         public virtual string GetAutoCompleteString()
         {
             if (_lastAutoCompleteSpan != null)
             {
-                AutoCompleteEditHandler editHandler = _lastAutoCompleteSpan.EditHandler as AutoCompleteEditHandler;
+                AutoCompleteEditHandler editHandler =
+                    _lastAutoCompleteSpan.EditHandler as AutoCompleteEditHandler;
                 if (editHandler != null)
                 {
                     return editHandler.AutoCompleteString;
@@ -135,13 +143,22 @@ namespace System.Web.Razor
             Stopwatch sw = new Stopwatch();
             sw.Start();
 #endif
-            RazorEditorTrace.TraceLine(RazorResources.Trace_EditorReceivedChange, Path.GetFileName(FileName), change);
+            RazorEditorTrace.TraceLine(
+                RazorResources.Trace_EditorReceivedChange,
+                Path.GetFileName(FileName),
+                change
+            );
             if (change.NewBuffer == null)
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentUICulture,
-                                                          RazorResources.Structure_Member_CannotBeNull,
-                                                          "Buffer",
-                                                          "TextChange"), "change");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentUICulture,
+                        RazorResources.Structure_Member_CannotBeNull,
+                        "Buffer",
+                        "TextChange"
+                    ),
+                    "change"
+                );
             }
 
             PartialParseResult result = PartialParseResult.Rejected;
@@ -175,7 +192,13 @@ namespace System.Web.Razor
             elapsedMs = sw.ElapsedMilliseconds;
             sw.Reset();
 #endif
-            RazorEditorTrace.TraceLine(RazorResources.Trace_EditorProcessedChange, Path.GetFileName(FileName), changeString, elapsedMs.HasValue ? elapsedMs.Value.ToString(CultureInfo.InvariantCulture) : "?", result.ToString());
+            RazorEditorTrace.TraceLine(
+                RazorResources.Trace_EditorProcessedChange,
+                Path.GetFileName(FileName),
+                changeString,
+                elapsedMs.HasValue ? elapsedMs.Value.ToString(CultureInfo.InvariantCulture) : "?",
+                result.ToString()
+            );
             return result;
         }
 
@@ -188,8 +211,18 @@ namespace System.Web.Razor
             GC.SuppressFinalize(this);
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_cancelTokenSource", Justification = "The cancellation token is owned by the worker thread, so it is disposed there")]
-        [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_changeReceived", Justification = "The change received event is owned by the worker thread, so it is disposed there")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2213:DisposableFieldsShouldBeDisposed",
+            MessageId = "_cancelTokenSource",
+            Justification = "The cancellation token is owned by the worker thread, so it is disposed there"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2213:DisposableFieldsShouldBeDisposed",
+            MessageId = "_changeReceived",
+            Justification = "The change received event is owned by the worker thread, so it is disposed there"
+        )]
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -203,9 +236,15 @@ namespace System.Web.Razor
             PartialParseResult result = PartialParseResult.Rejected;
 
             // Try the last change owner
-            if (_lastChangeOwner != null && _lastChangeOwner.EditHandler.OwnsChange(_lastChangeOwner, change))
+            if (
+                _lastChangeOwner != null
+                && _lastChangeOwner.EditHandler.OwnsChange(_lastChangeOwner, change)
+            )
             {
-                EditResult editResult = _lastChangeOwner.EditHandler.ApplyChange(_lastChangeOwner, change);
+                EditResult editResult = _lastChangeOwner.EditHandler.ApplyChange(
+                    _lastChangeOwner,
+                    change
+                );
                 result = editResult.Result;
                 if (!editResult.Result.HasFlag(PartialParseResult.Rejected))
                 {
@@ -225,7 +264,10 @@ namespace System.Web.Razor
             }
             else if (_lastChangeOwner != null)
             {
-                EditResult editRes = _lastChangeOwner.EditHandler.ApplyChange(_lastChangeOwner, change);
+                EditResult editRes = _lastChangeOwner.EditHandler.ApplyChange(
+                    _lastChangeOwner,
+                    change
+                );
                 result = editRes.Result;
                 if (!editRes.Result.HasFlag(PartialParseResult.Rejected))
                 {
@@ -243,7 +285,11 @@ namespace System.Web.Razor
             return result;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions are being caught here intentionally")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exceptions are being caught here intentionally"
+        )]
         private void OnDocumentParseComplete(DocumentParseCompleteEventArgs args)
         {
             using (_parser.SynchronizeMainThreadState())
@@ -262,7 +308,9 @@ namespace System.Web.Razor
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("[RzEd] Document Parse Complete Handler Threw: " + ex.ToString());
+                    Debug.WriteLine(
+                        "[RzEd] Document Parse Complete Handler Threw: " + ex.ToString()
+                    );
                 }
             }
         }
@@ -270,18 +318,26 @@ namespace System.Web.Razor
         [Conditional("DEBUG")]
         private static void VerifyFlagsAreValid(PartialParseResult result)
         {
-            Debug.Assert(result.HasFlag(PartialParseResult.Accepted) ||
-                         result.HasFlag(PartialParseResult.Rejected),
-                         "Partial Parse result does not have either of Accepted or Rejected flags set");
-            Debug.Assert(result.HasFlag(PartialParseResult.Rejected) ||
-                         !result.HasFlag(PartialParseResult.SpanContextChanged),
-                         "Partial Parse result was Accepted AND had SpanContextChanged flag set");
-            Debug.Assert(result.HasFlag(PartialParseResult.Rejected) ||
-                         !result.HasFlag(PartialParseResult.AutoCompleteBlock),
-                         "Partial Parse result was Accepted AND had AutoCompleteBlock flag set");
-            Debug.Assert(result.HasFlag(PartialParseResult.Accepted) ||
-                         !result.HasFlag(PartialParseResult.Provisional),
-                         "Partial Parse result was Rejected AND had Provisional flag set");
+            Debug.Assert(
+                result.HasFlag(PartialParseResult.Accepted)
+                    || result.HasFlag(PartialParseResult.Rejected),
+                "Partial Parse result does not have either of Accepted or Rejected flags set"
+            );
+            Debug.Assert(
+                result.HasFlag(PartialParseResult.Rejected)
+                    || !result.HasFlag(PartialParseResult.SpanContextChanged),
+                "Partial Parse result was Accepted AND had SpanContextChanged flag set"
+            );
+            Debug.Assert(
+                result.HasFlag(PartialParseResult.Rejected)
+                    || !result.HasFlag(PartialParseResult.AutoCompleteBlock),
+                "Partial Parse result was Accepted AND had AutoCompleteBlock flag set"
+            );
+            Debug.Assert(
+                result.HasFlag(PartialParseResult.Accepted)
+                    || !result.HasFlag(PartialParseResult.Provisional),
+                "Partial Parse result was Rejected AND had Provisional flag set"
+            );
         }
     }
 }

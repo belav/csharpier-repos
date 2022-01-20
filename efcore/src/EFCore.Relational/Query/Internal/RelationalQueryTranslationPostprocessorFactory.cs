@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class RelationalQueryTranslationPostprocessorFactory : IQueryTranslationPostprocessorFactory
+    public class RelationalQueryTranslationPostprocessorFactory
+        : IQueryTranslationPostprocessorFactory
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -19,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public RelationalQueryTranslationPostprocessorFactory(
             QueryTranslationPostprocessorDependencies dependencies,
-            RelationalQueryTranslationPostprocessorDependencies relationalDependencies)
+            RelationalQueryTranslationPostprocessorDependencies relationalDependencies
+        )
         {
             Dependencies = dependencies;
             RelationalDependencies = relationalDependencies;
@@ -41,10 +43,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual QueryTranslationPostprocessor Create(QueryCompilationContext queryCompilationContext)
-            => new RelationalQueryTranslationPostprocessor(
+        public virtual QueryTranslationPostprocessor Create(
+            QueryCompilationContext queryCompilationContext
+        ) =>
+            new RelationalQueryTranslationPostprocessor(
                 Dependencies,
                 RelationalDependencies,
-                queryCompilationContext);
+                queryCompilationContext
+            );
     }
 }

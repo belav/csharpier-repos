@@ -50,14 +50,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
         internal Mutex TESTSessionHookupMutex;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public EventHookupCommandHandler(
             IThreadingContext threadingContext,
             IInlineRenameService inlineRenameService,
             EventHookupSessionManager eventHookupSessionManager,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext)
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) : base(threadingContext)
         {
             _inlineRenameService = inlineRenameService;
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.EventHookup);

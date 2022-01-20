@@ -5,21 +5,20 @@
 // <StdHeader/>
 // <Description>
 // Section 4.1
-// If the result of a floating-point operation is too small for 
+// If the result of a floating-point operation is too small for
 // the destination format, the result of the operation becomes
 // positive zero or negative zero.
 // </Description>
 
 // <Expects Status=success></Expects>
 
-// <Code> 
+// <Code>
 using System;
 
 public class MyClass
 {
     public static int Main()
     {
-
         float f1 = float.Epsilon;
 
         if ((float)(f1 / 2.0f) != 0.0f)

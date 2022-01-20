@@ -210,8 +210,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             }
         }
 
-        public static ImageSource GetImageSource(this Glyph glyph, IGlyphService glyphService)
-            => glyphService.GetGlyph(glyph.GetStandardGlyphGroup(), glyph.GetStandardGlyphItem());
+        public static ImageSource GetImageSource(this Glyph glyph, IGlyphService glyphService) =>
+            glyphService.GetGlyph(glyph.GetStandardGlyphGroup(), glyph.GetStandardGlyphItem());
 
         public static ushort GetGlyphIndex(this Glyph glyph)
         {
@@ -219,8 +219,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             var glyphItem = glyph.GetStandardGlyphItem();
 
             return glyphGroup < StandardGlyphGroup.GlyphGroupError
-                ? (ushort)((int)glyphGroup + (int)glyphItem)
-                : (ushort)glyphGroup;
+              ? (ushort)((int)glyphGroup + (int)glyphItem)
+              : (ushort)glyphGroup;
         }
     }
 }

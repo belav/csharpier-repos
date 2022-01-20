@@ -16,7 +16,8 @@ public class TestRazorProjectItem : RazorProjectItem
         string relativePhysicalPath = null,
         string basePath = "/",
         string fileKind = null,
-        string cssScope = null)
+        string cssScope = null
+    )
     {
         FilePath = filePath;
         PhysicalPath = physicalPath;

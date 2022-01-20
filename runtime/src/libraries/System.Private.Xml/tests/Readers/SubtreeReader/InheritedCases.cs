@@ -185,7 +185,10 @@ namespace System.Xml.Tests
     {
     }
 
-    [TestCase(Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)", Desc = "SubtreeReader")]
+    [TestCase(
+        Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)",
+        Desc = "SubtreeReader"
+    )]
     public class TCMoveToAttributeReader : TCMoveToAttribute
     {
     }
@@ -195,7 +198,10 @@ namespace System.Xml.Tests
     {
     }
 
-    [TestCase(Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)", Desc = "SubtreeReader")]
+    [TestCase(
+        Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)",
+        Desc = "SubtreeReader"
+    )]
     public class TCGetAttributeNameReader : TCGetAttributeName
     {
     }

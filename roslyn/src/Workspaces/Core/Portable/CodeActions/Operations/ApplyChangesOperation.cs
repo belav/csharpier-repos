@@ -30,20 +30,24 @@ namespace Microsoft.CodeAnalysis.CodeActions
     {
         public Solution ChangedSolution { get; }
 
-        public ApplyChangesOperation(Solution changedSolution)
-            => ChangedSolution = changedSolution ?? throw new ArgumentNullException(nameof(changedSolution));
+        public ApplyChangesOperation(Solution changedSolution) =>
+            ChangedSolution =
+                changedSolution ?? throw new ArgumentNullException(nameof(changedSolution));
 
         internal override bool ApplyDuringTests => true;
 
-        public override void Apply(Workspace workspace, CancellationToken cancellationToken)
-            => workspace.TryApplyChanges(ChangedSolution, new ProgressTracker());
+        public override void Apply(Workspace workspace, CancellationToken cancellationToken) =>
+            workspace.TryApplyChanges(ChangedSolution, new ProgressTracker());
 
         internal sealed override Task<bool> TryApplyAsync(
-            Workspace workspace, IProgressTracker progressTracker, CancellationToken cancellationToken)
+            Workspace workspace,
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
             return workspace.TryApplyChanges(ChangedSolution, progressTracker)
-                ? SpecializedTasks.True
-                : SpecializedTasks.False;
+              ? SpecializedTasks.True
+              : SpecializedTasks.False;
         }
     }
 }

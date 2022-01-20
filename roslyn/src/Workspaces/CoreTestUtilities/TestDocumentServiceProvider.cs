@@ -14,7 +14,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     internal class TestDocumentServiceProvider : IDocumentServiceProvider
     {
-        public TestDocumentServiceProvider(bool canApplyChange = true, bool supportDiagnostics = true, bool supportsMappingImportDirectives = false)
+        public TestDocumentServiceProvider(
+            bool canApplyChange = true,
+            bool supportDiagnostics = true,
+            bool supportsMappingImportDirectives = false
+        )
         {
             DocumentOperationService = new TestDocumentOperationService()
             {
@@ -45,9 +49,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         private class TestDocumentOperationService : IDocumentOperationService
         {
-            public TestDocumentOperationService()
-            {
-            }
+            public TestDocumentOperationService() { }
 
             public bool CanApplyChange { get; set; }
             public bool SupportDiagnostics { get; set; }
@@ -62,15 +64,22 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             public bool SupportsMappingImportDirectives { get; }
 
-            public Task<ImmutableArray<(string mappedFilePath, TextChange mappedTextChange)>> GetMappedTextChangesAsync(
+            public Task<
+                ImmutableArray<(string mappedFilePath, TextChange mappedTextChange)>
+            > GetMappedTextChangesAsync(
                 Document oldDocument,
                 Document newDocument,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 throw new NotImplementedException();
             }
 
-            public Task<ImmutableArray<MappedSpanResult>> MapSpansAsync(Document document, IEnumerable<TextSpan> spans, CancellationToken cancellationToken)
+            public Task<ImmutableArray<MappedSpanResult>> MapSpansAsync(
+                Document document,
+                IEnumerable<TextSpan> spans,
+                CancellationToken cancellationToken
+            )
             {
                 throw new NotImplementedException();
             }

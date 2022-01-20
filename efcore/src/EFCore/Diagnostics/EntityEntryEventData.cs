@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public EntityEntryEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
-            EntityEntry entityEntry)
-            : base(eventDefinition, messageGenerator)
+            EntityEntry entityEntry
+        ) : base(eventDefinition, messageGenerator)
         {
             EntityEntry = entityEntry;
         }

@@ -86,7 +86,11 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
 
         if (MaxAge.HasValue && MaxAge.Value < TimeSpan.Zero)
         {
-            throw new ArgumentOutOfRangeException(nameof(MaxAge), MaxAge.Value, "The value must not be a negative TimeSpan.");
+            throw new ArgumentOutOfRangeException(
+                nameof(MaxAge),
+                MaxAge.Value,
+                "The value must not be a negative TimeSpan."
+            );
         }
 
         if (string.IsNullOrEmpty(ClientId))
@@ -96,13 +100,18 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
 
         if (!CallbackPath.HasValue)
         {
-            throw new ArgumentException("Options.CallbackPath must be provided.", nameof(CallbackPath));
+            throw new ArgumentException(
+                "Options.CallbackPath must be provided.",
+                nameof(CallbackPath)
+            );
         }
 
         if (ConfigurationManager == null)
         {
-            throw new InvalidOperationException($"Provide {nameof(Authority)}, {nameof(MetadataAddress)}, "
-            + $"{nameof(Configuration)}, or {nameof(ConfigurationManager)} to {nameof(OpenIdConnectOptions)}");
+            throw new InvalidOperationException(
+                $"Provide {nameof(Authority)}, {nameof(MetadataAddress)}, "
+                    + $"{nameof(Configuration)}, or {nameof(ConfigurationManager)} to {nameof(OpenIdConnectOptions)}"
+            );
         }
     }
 
@@ -176,11 +185,12 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     /// is valid per: http://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation
     /// </summary>
     /// <exception cref="ArgumentNullException">if 'value' is null.</exception>
-    public OpenIdConnectProtocolValidator ProtocolValidator { get; set; } = new OpenIdConnectProtocolValidator()
-    {
-        RequireStateValidation = false,
-        NonceLifetime = TimeSpan.FromMinutes(15)
-    };
+    public OpenIdConnectProtocolValidator ProtocolValidator { get; set; } =
+        new OpenIdConnectProtocolValidator()
+        {
+            RequireStateValidation = false,
+            NonceLifetime = TimeSpan.FromMinutes(15)
+        };
 
     /// <summary>
     /// The request path within the application's base path where the user agent will be returned after sign out from the identity provider.
@@ -204,7 +214,8 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     /// <summary>
     /// Gets or sets the method used to redirect the user agent to the identity provider.
     /// </summary>
-    public OpenIdConnectRedirectBehavior AuthenticationMethod { get; set; } = OpenIdConnectRedirectBehavior.RedirectGet;
+    public OpenIdConnectRedirectBehavior AuthenticationMethod { get; set; } =
+        OpenIdConnectRedirectBehavior.RedirectGet;
 
     /// <summary>
     /// Gets or sets the 'resource'.
@@ -261,7 +272,8 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     /// Gets or sets the parameters used to validate identity tokens.
     /// </summary>
     /// <remarks>Contains the types and definitions required for validating a token.</remarks>
-    public TokenValidationParameters TokenValidationParameters { get; set; } = new TokenValidationParameters();
+    public TokenValidationParameters TokenValidationParameters { get; set; } =
+        new TokenValidationParameters();
 
     /// <summary>
     /// Indicates that the authentication session lifetime (e.g. cookies) should match that of the authentication token.
@@ -333,12 +345,14 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     /// <summary>
     /// 1 day is the default time interval that afterwards, <see cref="ConfigurationManager" /> will obtain new configuration.
     /// </summary>
-    public TimeSpan AutomaticRefreshInterval { get; set; } = ConfigurationManager<OpenIdConnectConfiguration>.DefaultAutomaticRefreshInterval;
+    public TimeSpan AutomaticRefreshInterval { get; set; } =
+        ConfigurationManager<OpenIdConnectConfiguration>.DefaultAutomaticRefreshInterval;
 
     /// <summary>
     /// The minimum time between <see cref="ConfigurationManager" /> retrievals, in the event that a retrieval failed, or that a refresh was explicitly requested. 30 seconds is the default.
     /// </summary>
-    public TimeSpan RefreshInterval { get; set; } = ConfigurationManager<OpenIdConnectConfiguration>.DefaultRefreshInterval;
+    public TimeSpan RefreshInterval { get; set; } =
+        ConfigurationManager<OpenIdConnectConfiguration>.DefaultRefreshInterval;
 
     /// <summary>
     /// Gets or sets the <see cref="MapInboundClaims"/> property on the default instance of <see cref="JwtSecurityTokenHandler"/> in SecurityTokenValidator, which is used when determining

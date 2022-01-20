@@ -45,18 +45,13 @@ namespace System.Threading.Tasks
         /// The <paramref name="creationOptions"/> represent options invalid for use
         /// with a <see cref="TaskCompletionSource{TResult}"/>.
         /// </exception>
-        public TaskCompletionSource(TaskCreationOptions creationOptions) :
-            this(null, creationOptions)
-        {
-        }
+        public TaskCompletionSource(TaskCreationOptions creationOptions)
+            : this(null, creationOptions) { }
 
         /// <summary>Creates a <see cref="TaskCompletionSource{TResult}"/> with the specified state.</summary>
         /// <param name="state">The state to use as the underlying
         /// <see cref="Task{TResult}"/>'s AsyncState.</param>
-        public TaskCompletionSource(object? state) :
-            this(state, TaskCreationOptions.None)
-        {
-        }
+        public TaskCompletionSource(object? state) : this(state, TaskCreationOptions.None) { }
 
         /// <summary>Creates a <see cref="TaskCompletionSource{TResult}"/> with the specified state and options.</summary>
         /// <param name="creationOptions">The options to use when creating the underlying <see cref="Task{TResult}"/>.</param>
@@ -87,7 +82,9 @@ namespace System.Threading.Tasks
         {
             if (!TrySetException(exception))
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.TaskT_TransitionToFinal_AlreadyCompleted);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.TaskT_TransitionToFinal_AlreadyCompleted
+                );
             }
         }
 
@@ -105,7 +102,9 @@ namespace System.Threading.Tasks
         {
             if (!TrySetException(exceptions))
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.TaskT_TransitionToFinal_AlreadyCompleted);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.TaskT_TransitionToFinal_AlreadyCompleted
+                );
             }
         }
 
@@ -163,7 +162,10 @@ namespace System.Threading.Tasks
             {
                 if (e is null)
                 {
-                    ThrowHelper.ThrowArgumentException(ExceptionResource.TaskCompletionSourceT_TrySetException_NullException, ExceptionArgument.exceptions);
+                    ThrowHelper.ThrowArgumentException(
+                        ExceptionResource.TaskCompletionSourceT_TrySetException_NullException,
+                        ExceptionArgument.exceptions
+                    );
                 }
 
                 defensiveCopy.Add(e);
@@ -171,7 +173,10 @@ namespace System.Threading.Tasks
 
             if (defensiveCopy.Count == 0)
             {
-                ThrowHelper.ThrowArgumentException(ExceptionResource.TaskCompletionSourceT_TrySetException_NoExceptions, ExceptionArgument.exceptions);
+                ThrowHelper.ThrowArgumentException(
+                    ExceptionResource.TaskCompletionSourceT_TrySetException_NoExceptions,
+                    ExceptionArgument.exceptions
+                );
             }
 
             bool rval = _task.TrySetException(defensiveCopy);
@@ -197,7 +202,9 @@ namespace System.Threading.Tasks
         {
             if (!TrySetResult(result))
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.TaskT_TransitionToFinal_AlreadyCompleted);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.TaskT_TransitionToFinal_AlreadyCompleted
+                );
             }
         }
 
@@ -249,7 +256,9 @@ namespace System.Threading.Tasks
         {
             if (!TrySetCanceled(cancellationToken))
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.TaskT_TransitionToFinal_AlreadyCompleted);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.TaskT_TransitionToFinal_AlreadyCompleted
+                );
             }
         }
 

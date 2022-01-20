@@ -29,4 +29,3 @@ class child
         return x;
     }
 }
-

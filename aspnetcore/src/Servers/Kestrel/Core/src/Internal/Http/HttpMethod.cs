@@ -14,8 +14,6 @@ public enum HttpMethod : byte
     Patch,
     Connect,
     Options,
-
     Custom,
-
     None = byte.MaxValue,
 }

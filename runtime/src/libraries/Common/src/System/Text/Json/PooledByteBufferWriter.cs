@@ -113,7 +113,10 @@ namespace System.Text.Json
         }
 
 #if BUILDING_INBOX_LIBRARY
-        internal ValueTask WriteToStreamAsync(Stream destination, CancellationToken cancellationToken)
+        internal ValueTask WriteToStreamAsync(
+            Stream destination,
+            CancellationToken cancellationToken
+        )
         {
             return destination.WriteAsync(WrittenMemory, cancellationToken);
         }
@@ -158,7 +161,9 @@ namespace System.Text.Json
                     newSize = currentLength + sizeHint;
                     if ((uint)newSize > int.MaxValue)
                     {
-                        ThrowHelper.ThrowOutOfMemoryException_BufferMaximumSizeExceeded((uint)newSize);
+                        ThrowHelper.ThrowOutOfMemoryException_BufferMaximumSizeExceeded(
+                            (uint)newSize
+                        );
                     }
                 }
 
