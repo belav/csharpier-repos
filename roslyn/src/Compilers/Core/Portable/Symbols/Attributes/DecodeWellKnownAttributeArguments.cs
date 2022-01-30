@@ -72,7 +72,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Syntax of the attribute to decode. Might be null when the attribute information is not coming 
+        /// Syntax of the attribute to decode. Might be null when the attribute information is not coming
         /// from syntax. For example, an assembly attribute propagated from added module to the resulting assembly.
         /// </summary>
         public TAttributeSyntax? AttributeSyntaxOpt { get; set; }

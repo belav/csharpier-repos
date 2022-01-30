@@ -187,7 +187,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal static class QuickAttributeHelpers
     {
         /// <summary>
-        /// Returns the <see cref="QuickAttributes"/> that corresponds to the particular type 
+        /// Returns the <see cref="QuickAttributes"/> that corresponds to the particular type
         /// <paramref name="name"/> passed in.  If <paramref name="inAttribute"/> is <see langword="true"/>
         /// then the name will be checked both as-is as well as with the 'Attribute' suffix.
         /// </summary>

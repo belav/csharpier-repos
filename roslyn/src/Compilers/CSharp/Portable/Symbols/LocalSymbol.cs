@@ -52,7 +52,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// WARN WARN WARN: If you access this via the semantic model, things will break (since the initializer may not have been bound).
-        /// 
+        ///
         /// Whether or not this local is pinned (i.e. the type will be emitted with the "pinned" modifier).
         /// </summary>
         /// <remarks>
@@ -154,7 +154,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns true if this local variable was declared in a catch clause. 
+        /// Returns true if this local variable was declared in a catch clause.
         /// </summary>
         public bool IsCatch
         {
@@ -175,7 +175,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <example>
         /// <code>
-        ///     using (var localVariable = new StreamReader("C:\\Temp\\MyFile.txt")) { ... } 
+        ///     using (var localVariable = new StreamReader("C:\\Temp\\MyFile.txt")) { ... }
         /// </code>
         /// </example>
         public bool IsUsing
@@ -203,10 +203,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Returns the syntax node that declares the variable.
         /// </summary>
         /// <remarks>
-        /// All user-defined and long-lived synthesized variables must return a reference to a node that is 
+        /// All user-defined and long-lived synthesized variables must return a reference to a node that is
         /// tracked by the EnC diffing algorithm. For example, for <see cref="LocalDeclarationKind.CatchVariable"/> variable
         /// the declarator is the <see cref="CatchClauseSyntax"/> node.
-        /// 
+        ///
         /// The location of the declarator is used to calculate <see cref="LocalDebugId.SyntaxOffset"/> during emit.
         /// </remarks>
         internal abstract SyntaxNode GetDeclaratorSyntax();

@@ -30,7 +30,7 @@ namespace RunTests
         }
 
         /// <summary>
-        /// Return the list of processes which are direct children of the provided <paramref name="process"/> 
+        /// Return the list of processes which are direct children of the provided <paramref name="process"/>
         /// instance.
         /// </summary>
         /// <remarks>
@@ -59,7 +59,7 @@ namespace RunTests
         }
 
         /// <summary>
-        /// Return the list of processes which are direct or indirect children of the provided <paramref name="process"/> 
+        /// Return the list of processes which are direct or indirect children of the provided <paramref name="process"/>
         /// instance.
         /// </summary>
         /// <remarks>

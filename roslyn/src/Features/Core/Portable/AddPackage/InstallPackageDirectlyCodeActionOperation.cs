@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.AddPackage
 {
     /// <summary>
-    /// Operation responsible purely for installing a nuget package with a specific 
+    /// Operation responsible purely for installing a nuget package with a specific
     /// version, or a the latest version of a nuget package.  Is not responsible
     /// for adding an import to user code.
     /// </summary>

@@ -494,8 +494,8 @@ public class Tests
     }
 
     /*
-	 * Passing and returning small structs
-	 */
+     * Passing and returning small structs
+     */
 
     /* TEST 1: 4 byte long INTEGER struct */
 
@@ -829,8 +829,8 @@ public class Tests
     }
 
     /*
-	 * Passing arrays
-	 */
+     * Passing arrays
+     */
     public delegate int ArrayDelegate1(
         int i,
         string j,
@@ -1210,8 +1210,8 @@ public class Tests
     }
 
     /*
-	 * [Out] blittable arrays
-	 */
+     * [Out] blittable arrays
+     */
 
     public delegate int ArrayDelegate9(
         int i,
@@ -1244,8 +1244,8 @@ public class Tests
     }
 
     /*
-	 * [Out] string arrays
-	 */
+     * [Out] string arrays
+     */
 
     public delegate int ArrayDelegate10(
         int i,
@@ -1283,8 +1283,8 @@ public class Tests
     }
 
     /*
-	 * [In, Out] classes
-	 */
+     * [In, Out] classes
+     */
 
     public delegate int InOutByvalClassDelegate([In, Out] SimpleClass ss);
 
@@ -1314,8 +1314,8 @@ public class Tests
     }
 
     /*
-	 * Returning unicode strings
-	 */
+     * Returning unicode strings
+     */
     [return: MarshalAs(UnmanagedType.LPWStr)]
     public delegate string ReturnUnicodeStringDelegate(
         [MarshalAs(UnmanagedType.LPWStr)] string message
@@ -1339,8 +1339,8 @@ public class Tests
     }
 
     /*
-	 * Returning string arrays
-	 */
+     * Returning string arrays
+     */
     public delegate string[] ReturnArrayDelegate(int i);
 
     [DllImport("libtest", EntryPoint = "mono_test_marshal_return_string_array_delegate")]
@@ -1376,8 +1376,8 @@ public class Tests
     }
 
     /*
-	 * Byref string marshalling
-	 */
+     * Byref string marshalling
+     */
     public delegate int ByrefStringDelegate(ref string s);
 
     [DllImport("libtest", EntryPoint = "mono_test_marshal_byref_string_delegate")]
@@ -1401,8 +1401,8 @@ public class Tests
     }
 
     /*
-	 * Thread attach
-	 */
+     * Thread attach
+     */
 
     public delegate int SimpleDelegate(int i);
 
@@ -1524,8 +1524,8 @@ public class Tests
     }
 
     /*
-	 * Appdomain save/restore
-	 */
+     * Appdomain save/restore
+     */
     static Func<int> callback;
 
     [DllImport("libtest", EntryPoint = "mono_test_marshal_set_callback")]

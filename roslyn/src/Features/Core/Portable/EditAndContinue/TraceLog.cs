@@ -11,7 +11,7 @@ using System.Threading;
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     /// <summary>
-    /// Fixed size rolling tracing log. 
+    /// Fixed size rolling tracing log.
     /// </summary>
     /// <remarks>
     /// Recent entries are captured in a memory dump.

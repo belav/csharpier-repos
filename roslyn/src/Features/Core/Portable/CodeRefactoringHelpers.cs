@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis
         /// following selection `1 + [|2 + 3|]` is underselecting the whole expression node tree.
         /// </para>
         /// <para>
-        /// Returns false if only and precisely one <see cref="SyntaxToken"/> is selected. In that case the <paramref name="selection"/> 
+        /// Returns false if only and precisely one <see cref="SyntaxToken"/> is selected. In that case the <paramref name="selection"/>
         /// is treated more as a caret location.
         /// </para>
         /// <para>

@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 {
     /// <summary>
     /// Represents a reference to a type nested in an instantiation of a generic type.
-    /// e.g. 
+    /// e.g.
     /// A{int}.B
     /// A.B{int}.C.D
     /// </summary>

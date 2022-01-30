@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.FindUsages
         public ImmutableArray<DefinitionItem> Definitions { get; }
 
         /// <summary>
-        /// All the references to show.  Note: every <see cref="SourceReferenceItem.Definition"/> 
-        /// should be in <see cref="Definitions"/> 
+        /// All the references to show.  Note: every <see cref="SourceReferenceItem.Definition"/>
+        /// should be in <see cref="Definitions"/>
         /// </summary>
         public ImmutableArray<SourceReferenceItem> References { get; }
 

@@ -120,7 +120,7 @@ namespace System.Web.Http.Controllers
         /// <summary>
         /// Gets the converter for correctly transforming the result of calling
         /// <see cref="ExecuteAsync(HttpControllerContext, IDictionary{string, object}, CancellationToken)"/> into an instance of
-        /// <see cref="HttpResponseMessage"/>. 
+        /// <see cref="HttpResponseMessage"/>.
         /// </summary>
         /// <remarks>
         /// <para>This converter is not used when the runtime return value of an action is an <see cref="IHttpActionResult"/>.</para>
@@ -245,7 +245,7 @@ namespace System.Web.Http.Controllers
         /// <summary>
         /// Returns the filters for the given configuration and action. The filter collection is ordered
         /// according to the FilterScope (in order from least specific to most specific: First, Global, Controller, Action).
-        /// 
+        ///
         /// If a given filter disallows duplicates (AllowMultiple=False) then the most specific filter is maintained
         /// and less specific filters get removed (e.g. if there is a Authorize filter with a Controller scope and another
         /// one with an Action scope then the one with the Action scope will be maintained and the one with the Controller

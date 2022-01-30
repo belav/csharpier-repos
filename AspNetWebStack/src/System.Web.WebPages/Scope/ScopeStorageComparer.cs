@@ -8,8 +8,8 @@ namespace System.Web.WebPages.Scope
 {
     /// <summary>
     /// Custom comparer for the context dictionaries
-    /// The comparer treats strings as a special case, performing case insesitive comparison. 
-    /// This guaratees that we remain consistent throughout the chain of contexts since PageData dictionary 
+    /// The comparer treats strings as a special case, performing case insesitive comparison.
+    /// This guaratees that we remain consistent throughout the chain of contexts since PageData dictionary
     /// behaves in this manner.
     /// </summary>
     internal class ScopeStorageComparer : IEqualityComparer<object>

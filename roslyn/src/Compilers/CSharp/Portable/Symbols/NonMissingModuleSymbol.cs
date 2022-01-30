@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns an array of assembly identities for assemblies referenced by this module.
-        /// Items at the same position from GetReferencedAssemblies and from GetReferencedAssemblySymbols 
+        /// Items at the same position from GetReferencedAssemblies and from GetReferencedAssemblySymbols
         /// should correspond to each other.
         /// </summary>
         internal sealed override ImmutableArray<AssemblyIdentity> GetReferencedAssemblies()
@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced 
-        /// by this module. Items at the same position from GetReferencedAssemblies and 
-        /// from GetReferencedAssemblySymbols should correspond to each other. If reference is 
+        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced
+        /// by this module. Items at the same position from GetReferencedAssemblies and
+        /// from GetReferencedAssemblySymbols should correspond to each other. If reference is
         /// not resolved by compiler, GetReferencedAssemblySymbols returns MissingAssemblySymbol in the
         /// corresponding item.
         /// </summary>
@@ -158,7 +158,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// A helper method for ReferenceManager to set assembly identities for assemblies 
+        /// A helper method for ReferenceManager to set assembly identities for assemblies
         /// referenced by this module and corresponding AssemblySymbols.
         /// </summary>
         internal override void SetReferences(

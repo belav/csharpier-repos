@@ -17,7 +17,7 @@ namespace System.Web.Razor
     /// The result of attempting an incremental parse
     /// </summary>
     /// <remarks>
-    /// Either the Accepted or Rejected flag is ALWAYS set.  
+    /// Either the Accepted or Rejected flag is ALWAYS set.
     /// Additionally, Provisional may be set with Accepted and SpanContextChanged may be set with Rejected.
     /// Provisional may NOT be set with Rejected and SpanContextChanged may NOT be set with Accepted.
     /// </remarks>

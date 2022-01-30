@@ -114,7 +114,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         /// <summary>
         /// Guid of the project
-        /// 
+        ///
         /// it is not readonly since it can be changed while loading project
         /// </summary>
         public Guid Guid { get; protected set; }

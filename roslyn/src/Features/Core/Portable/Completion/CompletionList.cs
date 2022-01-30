@@ -28,11 +28,11 @@ namespace Microsoft.CodeAnalysis.Completion
         public TextSpan DefaultSpan { get; }
 
         /// <summary>
-        /// The span of the syntax element at the caret position when the <see cref="CompletionList"/> 
+        /// The span of the syntax element at the caret position when the <see cref="CompletionList"/>
         /// was created.
-        /// 
-        /// The span identifies the text in the document that is used to filter the initial list 
-        /// presented to the user, and typically represents the region of the document that will 
+        ///
+        /// The span identifies the text in the document that is used to filter the initial list
+        /// presented to the user, and typically represents the region of the document that will
         /// be changed if this item is committed.
         /// </summary>
         public TextSpan Span { get; }

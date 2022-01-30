@@ -8,9 +8,9 @@
 
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
- 
-   contributed by Isaac Gouy 
-*/
+   
+   contributed by Isaac Gouy
+   */
 
 using System;
 using System.Runtime.CompilerServices;

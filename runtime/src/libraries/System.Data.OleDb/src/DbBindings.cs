@@ -137,13 +137,13 @@ namespace System.Data.OleDb
 #if DEBUG
         /*internal int ValueOffset { // obValue
             get { return _dbbindings[_index].obValue.ToInt32(); }
-        }
-        internal int LengthOffset { // obLength
+            }
+            internal int LengthOffset { // obLength
             get { return _dbbindings[_index].obLength.ToInt32(); }
-        }
-        internal int StatusOffset { // obStatus
+            }
+            internal int StatusOffset { // obStatus
             get { return _dbbindings[_index].obStatus.ToInt32(); }
-        }*/
+            }*/
 #endif
         internal int Part
         { // dwPart

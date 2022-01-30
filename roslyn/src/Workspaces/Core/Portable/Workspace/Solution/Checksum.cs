@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis
     internal sealed partial class Checksum : IObjectWritable, IEquatable<Checksum>
     {
         /// <summary>
-        /// The intended size of the <see cref="HashData"/> structure. 
+        /// The intended size of the <see cref="HashData"/> structure.
         /// </summary>
         public const int HashSize = 20;
 

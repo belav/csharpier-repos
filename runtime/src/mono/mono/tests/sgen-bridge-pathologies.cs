@@ -29,10 +29,10 @@ class Driver
     const double survival_rate = 0.6;
 
     /*
-	 * Pathological case for the original old algorithm.  Goes
-	 * away when merging is replaced by appending with flag
-	 * checking.
-	 */
+     * Pathological case for the original old algorithm.  Goes
+     * away when merging is replaced by appending with flag
+     * checking.
+     */
     static void SetupLinks()
     {
         var list = new List<Bridge>();
@@ -60,11 +60,11 @@ class Driver
     const int FAN_OUT = 20000;
 
     /*
-	 * Pathological case for the new algorithm.  Goes away with
-	 * the single-node elimination optimization, but will still
-	 * persist if modified by using a ladder instead of the single
-	 * list.
-	 */
+     * Pathological case for the new algorithm.  Goes away with
+     * the single-node elimination optimization, but will still
+     * persist if modified by using a ladder instead of the single
+     * list.
+     */
     static void SetupLinkedFan()
     {
         var head = new Bridge();
@@ -84,10 +84,10 @@ class Driver
     }
 
     /*
-	 * Pathological case for the improved old algorithm.  Goes
-	 * away with copy-on-write DynArrays, but will still persist
-	 * if modified by using a ladder instead of the single list.
-	 */
+     * Pathological case for the improved old algorithm.  Goes
+     * away with copy-on-write DynArrays, but will still persist
+     * if modified by using a ladder instead of the single list.
+     */
     static void SetupInverseFan()
     {
         var tail = new Bridge();
@@ -109,10 +109,10 @@ class Driver
     }
 
     /*
-	 * Pathological case for the bridge in general.  We generate
-	 * 2*FAN_OUT bridge objects here, but the output of the bridge
-	 * is a graph with FAN_OUT^2 edges.
-	 */
+     * Pathological case for the bridge in general.  We generate
+     * 2*FAN_OUT bridge objects here, but the output of the bridge
+     * is a graph with FAN_OUT^2 edges.
+     */
     static void SetupDoubleFan()
     {
         var heads = new Bridge[FAN_OUT];
@@ -148,16 +148,16 @@ class Driver
     }
 
     /*
-	 * Not necessarily a pathology, but a special case of where we
-	 * generate lots of "dead" SCCs.  A non-bridge object that
-	 * can't reach a bridge object can safely be removed from the
-	 * graph.  In this special case it's a linked list hanging off
-	 * a bridge object.  We can handle this by "forwarding" edges
-	 * going to non-bridge nodes that have only a single outgoing
-	 * edge.  That collapses the whole list into a single node.
-	 * We could remove that node, too, by removing non-bridge
-	 * nodes with no outgoing edges.
-	 */
+     * Not necessarily a pathology, but a special case of where we
+     * generate lots of "dead" SCCs.  A non-bridge object that
+     * can't reach a bridge object can safely be removed from the
+     * graph.  In this special case it's a linked list hanging off
+     * a bridge object.  We can handle this by "forwarding" edges
+     * going to non-bridge nodes that have only a single outgoing
+     * edge.  That collapses the whole list into a single node.
+     * We could remove that node, too, by removing non-bridge
+     * nodes with no outgoing edges.
+     */
     static void SetupDeadList()
     {
         var head = new Bridge();
@@ -172,8 +172,8 @@ class Driver
     }
 
     /*
-	 * Triggered a bug in the forwarding mechanic.
-	 */
+     * Triggered a bug in the forwarding mechanic.
+     */
     static void SetupSelfLinks()
     {
         var head = new Bridge();
@@ -187,10 +187,10 @@ class Driver
     const int EXTRA_LEVELS = 4;
 
     /*
-	Set a complex graph from one bridge to a couple.
-	The graph is designed to expose naive coloring on
-	tarjan and SCC explosion on classic.
-	*/
+    Set a complex graph from one bridge to a couple.
+    The graph is designed to expose naive coloring on
+    tarjan and SCC explosion on classic.
+    */
     static void Spider()
     {
         Bridge a = new Bridge();

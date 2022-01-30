@@ -239,7 +239,7 @@ namespace System.Web.WebPages.Html
         }
 
         /// <summary>
-        /// Creates a dictionary of HTML attributes from the input object, 
+        /// Creates a dictionary of HTML attributes from the input object,
         /// translating underscores to dashes.
         /// </summary>
         /// <example>
@@ -268,7 +268,7 @@ namespace System.Web.WebPages.Html
         }
 
         /// <summary>
-        /// Creates a dictionary from an object, by adding each public instance property as a key with its associated 
+        /// Creates a dictionary from an object, by adding each public instance property as a key with its associated
         /// value to the dictionary. It will expose public properties from derived types as well. This is typically used
         /// with objects of an anonymous type.
         /// </summary>

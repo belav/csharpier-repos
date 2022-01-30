@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// When indexer overload resolution fails, we have two options:
     ///   1) Create a BoundBadExpression with the candidates as child nodes;
     ///   2) Create a BoundIndexerAccess with the error flag set.
-    ///   
+    ///
     /// Option 2 is preferable, because it retains information about the arguments
     /// (names, ref kind, etc), and results in better output from flow analysis.
     /// However, we can't create a BoundIndexerAccess with a null indexer symbol,

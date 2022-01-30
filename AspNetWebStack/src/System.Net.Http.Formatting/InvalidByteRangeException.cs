@@ -9,7 +9,7 @@ using System.Web.Http;
 namespace System.Net.Http
 {
     /// <summary>
-    /// An exception thrown by <see cref="ByteRangeStreamContent"/> in case none of the requested ranges 
+    /// An exception thrown by <see cref="ByteRangeStreamContent"/> in case none of the requested ranges
     /// overlap with the current extend of the selected resource. The current extend of the resource
     /// is indicated in the ContentRange property.
     /// </summary>

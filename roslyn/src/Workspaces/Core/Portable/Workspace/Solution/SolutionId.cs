@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// An identifier that can be used to refer to the same Solution across versions. 
+    /// An identifier that can be used to refer to the same Solution across versions.
     /// </summary>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     public sealed class SolutionId : IEquatable<SolutionId>, IObjectWritable

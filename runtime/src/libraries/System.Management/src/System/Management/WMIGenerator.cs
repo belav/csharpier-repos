@@ -269,20 +269,20 @@ namespace System.Management
                         [Browsable(true)]
                         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
                         public string ManagementClassName {
-                            get {
-                                string strRet = CreatedClassName;
-                                if (((PrivateLateBoundObject != null)
-                                            && (PrivateLateBoundObject.Path != null))) {
-                                    strRet = ((string)(PrivateLateBoundObject["__CLASS"]));
-                                    if (((strRet == null)
-                                                || (strRet.Length == 0))) {
-                                        strRet = CreatedClassName;
-                                    }
-                                }
-                                return strRet;
-                            }
+                        get {
+                        string strRet = CreatedClassName;
+                        if (((PrivateLateBoundObject != null)
+                        && (PrivateLateBoundObject.Path != null))) {
+                        strRet = ((string)(PrivateLateBoundObject["__CLASS"]));
+                        if (((strRet == null)
+                        || (strRet.Length == 0))) {
+                        strRet = CreatedClassName;
                         }
-                */
+                        }
+                        return strRet;
+                        }
+                        }
+                        */
 
 
             // Add a private member variable to hold the namespace of the created class
@@ -608,10 +608,10 @@ namespace System.Management
 
                     /*
                         throw new Exception("OriginalServer is " + OriginalServer +
-                            " OriginalNamespace is " + OriginalNamespace +
-                            " OriginalClassName is " + OriginalClassName +
-                            " results in " + thePath.Path);
-                            */
+                        " OriginalNamespace is " + OriginalNamespace +
+                        " OriginalClassName is " + OriginalClassName +
+                        " results in " + thePath.Path);
+                        */
                 }
                 classobj = new ManagementClass(thePath);
             }
@@ -1442,16 +1442,16 @@ namespace System.Management
                                 [Browsable(false)]
                                 [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
                                 public <Type> Is<PropertyName>Null {
-                                    get {
-                                        if ((PrivateLateBoundObject[<PropertyName>] == null)) {
-                                            return true;
-                                        }
-                                        else {
-                                            return false;
-                                        }
-                                    }
+                                get {
+                                if ((PrivateLateBoundObject[<PropertyName>] == null)) {
+                                return true;
                                 }
-                        */
+                                else {
+                                return false;
+                                }
+                                }
+                                }
+                                */
                         cis = new CodeConditionStatement();
                         cis.Condition = new CodeBinaryOperatorExpression(
                             cie,
@@ -1557,14 +1557,14 @@ namespace System.Management
                         /*
                             private bool ShouldSerialize<propertyName>()
                             {
-                                if (Is<PropertyName>Null == true)
-                                    return false;
-
-                                return true;
-
-
+                            if (Is<PropertyName>Null == true)
+                            return false;
+                            
+                            return true;
+                            
+                            
                             }
-                        */
+                            */
                         cmm = new CodeMemberMethod();
                         cmm.Name = "ShouldSerialize" + PublicProperties[prop.Name].ToString();
                         cmm.Attributes = MemberAttributes.Private | MemberAttributes.Final;
@@ -1725,15 +1725,15 @@ namespace System.Management
                         {
                             /*
                             if (<PropertyName>Values.NULL_ENUM_VALUE == value)
-                             {
-                                 curObj[<PropertyName>] = null;
-                             }
-                             else
-                             {
-                                 curObj[<PropertyName>] = value;
-                             }
-
-                             */
+                            {
+                            curObj[<PropertyName>] = null;
+                            }
+                            else
+                            {
+                            curObj[<PropertyName>] = value;
+                            }
+                            
+                            */
 
                             CodeConditionStatement ccs = new CodeConditionStatement();
                             if (prop.IsArray)
@@ -2905,22 +2905,22 @@ namespace System.Management
             string strPathObject = "path";
             string strGetOptions = "getOptions";
             /*            bool bPrivileges = true;
-
-                        try
-                        {
-                            classobj.Qualifiers["priveleges"].ToString();
-                        }
-                        catch (ManagementException e)
-                        {
-                            if (e.ErrorCode == ManagementStatus.NotFound)
-                            {
-                                bPrivileges = false;
-                            }
-                            else
-                            {
-                                throw;
-                            }
-                        }
+            
+            try
+            {
+            classobj.Qualifiers["priveleges"].ToString();
+            }
+            catch (ManagementException e)
+            {
+            if (e.ErrorCode == ManagementStatus.NotFound)
+            {
+            bPrivileges = false;
+            }
+            else
+            {
+            throw;
+            }
+            }
             */
             cctor = new CodeConstructor();
             cctor.Attributes = MemberAttributes.Public;
@@ -4777,7 +4777,7 @@ namespace System.Management
             /*
                 private TypeConverter baseConverter;
                 private Type baseType;
-            */
+                */
             cf = new CodeMemberField();
             cf.Name = baseTypeMemberVariable;
             cf.Attributes = MemberAttributes.Private | MemberAttributes.Final;
@@ -4795,10 +4795,10 @@ namespace System.Management
             /*
                 public WMIValueTypeConverter(System.Type inBaseType)
                 {
-                    baseConverter = TypeDescriptor.GetConverter(inBaseType);
-                    baseType = inBaseType;
+                baseConverter = TypeDescriptor.GetConverter(inBaseType);
+                baseType = inBaseType;
                 }
-            */
+                */
             cctor = new CodeConstructor();
             cctor.Attributes = MemberAttributes.Public;
             cpde = new CodeParameterDeclarationExpression();
@@ -4833,7 +4833,7 @@ namespace System.Management
             /*
             public virtual bool CanConvertFrom(ITypeDescriptorContext context, Type srcType);
             {
-                return baseType.CanConvertFrom(srcType);
+            return baseType.CanConvertFrom(srcType);
             }
             */
 
@@ -4861,7 +4861,7 @@ namespace System.Management
             /*
             public virtual bool CanConvertTo(ITypeDescriptorContext context, Type TypeDstObject);
             {
-                return baseType.CanConvertTo(context,TypeDstObject);
+            return baseType.CanConvertTo(context,TypeDstObject);
             }
             */
 
@@ -4891,7 +4891,7 @@ namespace System.Management
             /*
             public virtual object ConvertFrom(ITypeDescriptorContext context,CultureInfo culInfo, object value);
             {
-                return baseType.ConvertFrom(context,culInfo,value);
+            return baseType.ConvertFrom(context,culInfo,value);
             }
             */
 
@@ -4928,7 +4928,7 @@ namespace System.Management
             /*
                 public virtual object CreateInstance(ITypeDescriptorContext,IDictionary dictionary);
                 {
-                    return baseType.CreateInstance(context,dictionary);
+                return baseType.CreateInstance(context,dictionary);
                 }
                 */
 
@@ -4956,7 +4956,7 @@ namespace System.Management
             /*
                 public virtual bool GetCreateInstanceSupported(ITypeDescriptorContext context);
                 {
-                    return baseType.GetCreateInstanceSupported(context);
+                return baseType.GetCreateInstanceSupported(context);
                 }
                 */
 
@@ -4982,7 +4982,7 @@ namespace System.Management
             /*
                 public virtual PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context,object value,Attribute [] attributes);
                 {
-                    return baseType.GetProperties(context,value);
+                return baseType.GetProperties(context,value);
                 }
                 */
 
@@ -5021,7 +5021,7 @@ namespace System.Management
             /*
                 public virtual GetPropertiesSupported(ITypeDescriptorContext context);
                 {
-                    return baseType.GetPropertiesSupported(context);
+                return baseType.GetPropertiesSupported(context);
                 }
                 */
 
@@ -5046,7 +5046,7 @@ namespace System.Management
             /*
                 public StandardValuesCollection virtual GetStandardValues(ITypeDescriptorContext context);
                 {
-                    return baseType.GetStandardValues(context);
+                return baseType.GetStandardValues(context);
                 }
                 */
 
@@ -5073,7 +5073,7 @@ namespace System.Management
             /*
                 public virtual GetStandardValuesExclusive(ITypeDescriptorContext context);
                 {
-                    return baseType.GetStandardValuesExclusive(context);
+                return baseType.GetStandardValuesExclusive(context);
                 }
                 */
 
@@ -5098,7 +5098,7 @@ namespace System.Management
             /*
                 public virtual GetStandardValuesSupported(ITypeDescriptorContext context);
                 {
-                    return baseType.GetStandardValuesSupported(context);
+                return baseType.GetStandardValuesSupported(context);
                 }
                 */
 
@@ -5124,35 +5124,35 @@ namespace System.Management
             /*
             public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, System.Type destinationType)
             {
-                if ( baseType.BaseType == typeof(System.Enum) )
-                {
-                    if (value.GetType() == destinationType) return value;
-                    if ((value == null) && (context != null)
-                        && (context.PropertyDescriptor.ShouldSerializeValue(context.Instance) == false))
-                    {
-                        return "NULL_ENUM_VALUE";
-                    }
-                    return baseConverter.ConvertTo(context, culture, value, destinationType);
-                }
-
-                if ( (baseType == typeof(System.Boolean)) && (baseType.BaseType == typeof(System.ValueType)) )
-                {
-                    if ((value == null) && (context != null)
-                       && (context.PropertyDescriptor.ShouldSerializeValue(context.Instance) == false))
-                    {
-                        return "";
-                    }
-                    return baseConverter.ConvertTo(context, culture, value, destinationType);
-                }
-
-                if ((context != null) && (context.PropertyDescriptor.ShouldSerializeValue(context.Instance) == false))
-                {
-                    return "";
-                }
-
-                return baseConverter.ConvertTo(context, culture, value, destinationType);
+            if ( baseType.BaseType == typeof(System.Enum) )
+            {
+            if (value.GetType() == destinationType) return value;
+            if ((value == null) && (context != null)
+            && (context.PropertyDescriptor.ShouldSerializeValue(context.Instance) == false))
+            {
+            return "NULL_ENUM_VALUE";
             }
-
+            return baseConverter.ConvertTo(context, culture, value, destinationType);
+            }
+            
+            if ( (baseType == typeof(System.Boolean)) && (baseType.BaseType == typeof(System.ValueType)) )
+            {
+            if ((value == null) && (context != null)
+            && (context.PropertyDescriptor.ShouldSerializeValue(context.Instance) == false))
+            {
+            return "";
+            }
+            return baseConverter.ConvertTo(context, culture, value, destinationType);
+            }
+            
+            if ((context != null) && (context.PropertyDescriptor.ShouldSerializeValue(context.Instance) == false))
+            {
+            return "";
+            }
+            
+            return baseConverter.ConvertTo(context, culture, value, destinationType);
+            }
+            
             */
 
             // make the member method
@@ -5181,7 +5181,7 @@ namespace System.Management
             // make the generic return statement we'll need all over
             /*
                 return baseConverter.ConvertTo(context, culture, value, destinationType);
-            */
+                */
             cmie = new CodeMethodInvokeExpression(
                 new CodeVariableReferenceExpression(baseTypeMemberVariable),
                 "ConvertTo"
@@ -5209,13 +5209,13 @@ namespace System.Management
             /*
                     if (value.GetType() == destinationType) return value;
                     if ((value == null) && (context != null)
-                        && (context.PropertyDescriptor.ShouldSerializeValue(context.Instance) == false))
+                    && (context.PropertyDescriptor.ShouldSerializeValue(context.Instance) == false))
                     {
-                        return "NULL_ENUM_VALUE";
+                    return "NULL_ENUM_VALUE";
                     }
                     return baseConverter.ConvertTo(context, culture, value, destinationType);
-
-            */
+                    
+                    */
 
             CodeBinaryOperatorExpression cboe2 = new CodeBinaryOperatorExpression();
             cboe2.Left = new CodeMethodInvokeExpression(
@@ -5313,14 +5313,14 @@ namespace System.Management
             cis.Condition = cboe3;
 
             /* true statements
-
-                    if ((value == null) && (context != null)
-                       && (context.PropertyDescriptor.ShouldSerializeValue(context.Instance) == false))
-                    {
-                        return "";
-                    }
-                    return baseConverter.ConvertTo(context, culture, value, destinationType);
-
+            
+            if ((value == null) && (context != null)
+            && (context.PropertyDescriptor.ShouldSerializeValue(context.Instance) == false))
+            {
+            return "";
+            }
+            return baseConverter.ConvertTo(context, culture, value, destinationType);
+            
             */
 
             cboe3 = new CodeBinaryOperatorExpression(
@@ -5379,11 +5379,11 @@ namespace System.Management
             /*
                 if ((context != null) && (context.PropertyDescriptor.ShouldSerializeValue(context.Instance) == false))
                 {
-                    return "";
+                return "";
                 }
-
+                
                 return baseConverter.ConvertTo(context, culture, value, destinationType);
-            */
+                */
 
             cis = new CodeConditionStatement();
             cboe1 = new CodeBinaryOperatorExpression(
@@ -6521,76 +6521,76 @@ namespace System.Management
         const int IDS_CommentEmbeddedObject            = 21;
         const int IDS_CommentCurrentObject            = 22;
         const int IDS_CommentFlagForEmbedded        = 23;
-
+        
         /// <summary>
         /// Function to initialize the comments to be put in the generated code
         /// Later can be moved to Resource once resource for System.management.dll is setup
         /// </summary>
         private void InitializeComments()
         {
-            string strComment = "Functions ShouldSerialize<PropertyName> are functions used by VS property browser to check if";
-
-            strComment = strComment  + " a particular property has to be serialized. These functions are added for all ValueType";
-            strComment = strComment  + " properties ( properties of type Int32, BOOL etc.. which cannot be set to null). These functions";
-            strComment = strComment  + " uses Is<PropertyName>Null function. These functions are also used in the TypeConverter implementation";
-            strComment = strComment  + " for the properties to check for NULL value of property so that a empty value can be shown";
-            strComment = strComment  + " in Property browser in case of Drag and Drop in Visual studio.";
-
-            CommentsString.Add(strComment);    // IDS_CommentShouldSerialize
-
-            strComment = "Functions Is<PropertyName>Null() are functions . These functions are to be used to check if a property is NULL.";
-            CommentsString.Add(strComment);    // IDS_CommentIsPropNull
-
-            strComment = "Functions Reset<PropertyName> are added for Nullable Read/Write properties. These functions are used in VS designere in";
-            strComment = strComment + " property browser to set a property to NULL.";
-            CommentsString.Add(strComment);    // IDS_CommentResetProperty
-
-            strComment = "Every property added to the class for WMI property has attributes set to define its behaviour in Visual Studio";
-            strComment = strComment + " designer and as well as to define a TypeConverter to be used.";
-            CommentsString.Add(strComment);    // IDS_CommentAttributeProperty
-
-            strComment = "DateTime Conversions are added for the class to convert DMTF date to System.DateTime and Vise-versa. Conversion from DMTF";
-            strComment = strComment + " to System.DateTime conversion ignores the microseconds as System.DateTime doesn't have the microseconds part in it.";
-            CommentsString.Add(strComment);    // IDS_CommentDateConversionFunction
-
-            strComment = "Different flavours of GetInstances() help in enumerating instances of the WMI class.";
-            CommentsString.Add(strComment);    // IDS_CommentGetInstances
-
-            strComment = "An Early Bound class generated for the WMI class ";
-            CommentsString.Add(strComment);    // IDS_CommentClassBegin
-
-            CommentsString.Add("Member variable to store the autocommit behaviour for the class"); // IDS_COMMENT_PRIV_AUTOCOMMIT
-
-            CommentsString.Add("Below are different flavours of constructors to initialize the instance with a WMI object"); // IDS_CommentConstructors
-
-            CommentsString.Add("Property returns the namespace of the WMI class"); // IDS_COMMENT_ORIG_NAMESPACE
-
-            CommentsString.Add("Name of the WMI class");    // IDS_COMMENT_CLASSNAME;
-
-            CommentsString.Add("Property pointing to a embeded object to get System properties of the WMI object"); // IDS_CommentSystemObject
-
-            CommentsString.Add("Underlying lateBound WMI object"); // IDS_CommentLateBoundObject
-
-            CommentsString.Add(" ManagementScope of the object"); //  IDS_CommentManagementScope
-
-            strComment = "Property to show the autocommit behaviour for the WMI object. If this is";
-            strComment = strComment + "true then WMI object is saved to WMI then for change in every";
-            strComment = strComment + "property (ie Put is called after modification of a property) ";
-            CommentsString.Add(strComment); // IDS_CommentAutoCommitProperty
-
-            CommentsString.Add("The ManagementPath of the underlying WMI object"); // IDS_CommentManagementPath
-
-            CommentsString.Add("TypeConverter to handle null values for ValueType properties"); // IDS_COMMENT_PROP_TYPECONVERTER
-
-            CommentsString.Add(" Embedded class to represent WMI system Properties"); // IDS_CommentSystemPropertiesClass
-
-            CommentsString.Add("Enumerator implementation for enumerating instances of the class"); // IDS_CommentEnumeratorImplementation
-            CommentsString.Add("Property returning the underlying lateBound object"); // IDS_CommentLateBoundProperty
-
-            CommentsString.Add("Private property to hold the name of WMI class which created this class"); // IDS_COMMENTS_CREATEDCLASS
-            CommentsString.Add("Private variable to hold the embedded property representing the instance"); // IDS_CommentEmbeddedObject
-            CommentsString.Add("The current WMI object used"); //IDS_CommentCurrentObject
-            CommentsString.Add("Flag to indicate if an instance is an embedded object"); // IDS_CommentFlagForEmbedded
+        string strComment = "Functions ShouldSerialize<PropertyName> are functions used by VS property browser to check if";
+        
+        strComment = strComment  + " a particular property has to be serialized. These functions are added for all ValueType";
+        strComment = strComment  + " properties ( properties of type Int32, BOOL etc.. which cannot be set to null). These functions";
+        strComment = strComment  + " uses Is<PropertyName>Null function. These functions are also used in the TypeConverter implementation";
+        strComment = strComment  + " for the properties to check for NULL value of property so that a empty value can be shown";
+        strComment = strComment  + " in Property browser in case of Drag and Drop in Visual studio.";
+        
+        CommentsString.Add(strComment);    // IDS_CommentShouldSerialize
+        
+        strComment = "Functions Is<PropertyName>Null() are functions . These functions are to be used to check if a property is NULL.";
+        CommentsString.Add(strComment);    // IDS_CommentIsPropNull
+        
+        strComment = "Functions Reset<PropertyName> are added for Nullable Read/Write properties. These functions are used in VS designere in";
+        strComment = strComment + " property browser to set a property to NULL.";
+        CommentsString.Add(strComment);    // IDS_CommentResetProperty
+        
+        strComment = "Every property added to the class for WMI property has attributes set to define its behaviour in Visual Studio";
+        strComment = strComment + " designer and as well as to define a TypeConverter to be used.";
+        CommentsString.Add(strComment);    // IDS_CommentAttributeProperty
+        
+        strComment = "DateTime Conversions are added for the class to convert DMTF date to System.DateTime and Vise-versa. Conversion from DMTF";
+        strComment = strComment + " to System.DateTime conversion ignores the microseconds as System.DateTime doesn't have the microseconds part in it.";
+        CommentsString.Add(strComment);    // IDS_CommentDateConversionFunction
+        
+        strComment = "Different flavours of GetInstances() help in enumerating instances of the WMI class.";
+        CommentsString.Add(strComment);    // IDS_CommentGetInstances
+        
+        strComment = "An Early Bound class generated for the WMI class ";
+        CommentsString.Add(strComment);    // IDS_CommentClassBegin
+        
+        CommentsString.Add("Member variable to store the autocommit behaviour for the class"); // IDS_COMMENT_PRIV_AUTOCOMMIT
+        
+        CommentsString.Add("Below are different flavours of constructors to initialize the instance with a WMI object"); // IDS_CommentConstructors
+        
+        CommentsString.Add("Property returns the namespace of the WMI class"); // IDS_COMMENT_ORIG_NAMESPACE
+        
+        CommentsString.Add("Name of the WMI class");    // IDS_COMMENT_CLASSNAME;
+        
+        CommentsString.Add("Property pointing to a embeded object to get System properties of the WMI object"); // IDS_CommentSystemObject
+        
+        CommentsString.Add("Underlying lateBound WMI object"); // IDS_CommentLateBoundObject
+        
+        CommentsString.Add(" ManagementScope of the object"); //  IDS_CommentManagementScope
+        
+        strComment = "Property to show the autocommit behaviour for the WMI object. If this is";
+        strComment = strComment + "true then WMI object is saved to WMI then for change in every";
+        strComment = strComment + "property (ie Put is called after modification of a property) ";
+        CommentsString.Add(strComment); // IDS_CommentAutoCommitProperty
+        
+        CommentsString.Add("The ManagementPath of the underlying WMI object"); // IDS_CommentManagementPath
+        
+        CommentsString.Add("TypeConverter to handle null values for ValueType properties"); // IDS_COMMENT_PROP_TYPECONVERTER
+        
+        CommentsString.Add(" Embedded class to represent WMI system Properties"); // IDS_CommentSystemPropertiesClass
+        
+        CommentsString.Add("Enumerator implementation for enumerating instances of the class"); // IDS_CommentEnumeratorImplementation
+        CommentsString.Add("Property returning the underlying lateBound object"); // IDS_CommentLateBoundProperty
+        
+        CommentsString.Add("Private property to hold the name of WMI class which created this class"); // IDS_COMMENTS_CREATEDCLASS
+        CommentsString.Add("Private variable to hold the embedded property representing the instance"); // IDS_CommentEmbeddedObject
+        CommentsString.Add("The current WMI object used"); //IDS_CommentCurrentObject
+        CommentsString.Add("Flag to indicate if an instance is an embedded object"); // IDS_CommentFlagForEmbedded
         }
         */
 
@@ -8064,9 +8064,9 @@ namespace System.Management
             /*
                 if (dmtf.Length == 0)
                 {
-                    throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException();
                 }
-            */
+                */
 
             cboe = new CodeBinaryOperatorExpression();
             cboe.Left = new CodePropertyReferenceExpression(
@@ -8086,9 +8086,9 @@ namespace System.Management
             /*
                 if (str.Length != DMTF_DATETIME_STR_LENGTH )
                 {
-                    throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException();
                 }
-            */
+                */
             cboe = new CodeBinaryOperatorExpression();
             cboe.Left = new CodePropertyReferenceExpression(
                 new CodeVariableReferenceExpression(dmtf),
@@ -8163,9 +8163,9 @@ namespace System.Management
                 tempString = dmtf.Substring(15, 6);
                 if (("******" != tempString))
                 {
-                    ticks = (System.Int64.Parse(tempString)) * (System.TimeSpan.TicksPerMillisecond/1000);
+                ticks = (System.Int64.Parse(tempString)) * (System.TimeSpan.TicksPerMillisecond/1000);
                 }
-            */
+                */
 
             CodeMethodReferenceExpression cmre = new CodeMethodReferenceExpression(
                 new CodeVariableReferenceExpression(dmtf),
@@ -8217,9 +8217,9 @@ namespace System.Management
             /*
                 if ( year < 0 || month < 0 || day < 0 || hour < 0 || minute < 0 || second < 0 || ticks < 0)
                 {
-                    throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException();
                 }
-            */
+                */
 
             CodeBinaryOperatorExpression cboeYear = new CodeBinaryOperatorExpression();
             cboeYear.Left = new CodeVariableReferenceExpression(year);
@@ -8300,9 +8300,9 @@ namespace System.Management
             /*
                 catch
                 {
-                    throw new System.ArgumentOutOfRangeException(null, e.Message);
+                throw new System.ArgumentOutOfRangeException(null, e.Message);
                 }
-            */
+                */
             string exceptVar = "e";
             CodeCatchClause catchblock = new CodeCatchClause(exceptVar);
 
@@ -8330,7 +8330,7 @@ namespace System.Management
 
             /*
                 datetime = new System.DateTime(year, month, day, hour, minute, second, millisec);
-            */
+                */
 
             coce = new CodeObjectCreateExpression();
             coce.CreateType = new CodeTypeReference("System.DateTime");
@@ -8348,7 +8348,7 @@ namespace System.Management
 
             /*
                 datetime = datetime.AddTicks(ticks);
-            */
+                */
             CodeMethodReferenceExpression cmre2 = new CodeMethodReferenceExpression(
                 new CodeVariableReferenceExpression(datetimeVariable),
                 "AddTicks"
@@ -8366,7 +8366,7 @@ namespace System.Management
 
             /*
                 System.TimeSpan tickOffset = System.TimeZone.CurrentTimeZone.GetUtcOffset(datetime);
-            */
+                */
             cmre1 = new CodeMethodReferenceExpression(
                 new CodePropertyReferenceExpression(
                     new CodeTypeReferenceExpression("System.TimeZone"),
@@ -8392,7 +8392,7 @@ namespace System.Management
                 System.Int32 OffsetToBeAdjusted = 0;
                 long OffsetMins = tickOffset.Ticks / System.TimeSpan.TicksPerMinute;
                 tempString = dmtf.Substring(22, 3);
-            */
+                */
             string utcOffset = "UTCOffset";
             cmmdt.Statements.Add(
                 new CodeVariableDeclarationStatement(
@@ -8445,23 +8445,23 @@ namespace System.Management
             /*
                 if (("***" != tempString1))
                 {
-                    tempString1 = dmtf.Substring(21, 4);
-                    try
-                    {
-                        UTCOffset = System.Int32.Parse(tempString1);
-                    }
-                    catch
-                    {
-                        throw new System.ArgumentOutOfRangeException();
-                    }
-
-                    OffsetToBeAdjusted = UTCOffset-OffsetMins;
-
-                    // We have to substract the minutes from the time
-                    datetime = datetime.AddMinutes((System.Double)(OffsetToBeAdjusted));
-
+                tempString1 = dmtf.Substring(21, 4);
+                try
+                {
+                UTCOffset = System.Int32.Parse(tempString1);
                 }
-            */
+                catch
+                {
+                throw new System.ArgumentOutOfRangeException();
+                }
+                
+                OffsetToBeAdjusted = UTCOffset-OffsetMins;
+                
+                // We have to substract the minutes from the time
+                datetime = datetime.AddMinutes((System.Double)(OffsetToBeAdjusted));
+                
+                }
+                */
             cboe = new CodeBinaryOperatorExpression();
             cboe.Left = new CodeVariableReferenceExpression(tempStr);
             cboe.Right = new CodePrimitiveExpression("******");
@@ -8533,8 +8533,8 @@ namespace System.Management
             cmmdt.Statements.Add(cis);
             /*
                     return datetime;
-
-            */
+                    
+                    */
             cmmdt.Statements.Add(
                 new CodeMethodReturnStatement(new CodeVariableReferenceExpression(datetimeVariable))
             );
@@ -8610,7 +8610,7 @@ namespace System.Management
 
             /*
                 string dmtftimespan = timespan.Days.ToString().PadLeft(8,'0');
-            */
+                */
 
             CodePropertyReferenceExpression cpre1 = new CodePropertyReferenceExpression(
                 new CodeVariableReferenceExpression(timespan),
@@ -8644,9 +8644,9 @@ namespace System.Management
                 System.Timespan maxTimeSpan = System.TimeSpan.MaxValue ;
                 if (timespan.Days > maxTimeSpan.Days)
                 {
-                    throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException();
                 }
-            */
+                */
             CodeFieldReferenceExpression cpreMaxVal = new CodeFieldReferenceExpression(
                 new CodeTypeReferenceExpression("System.TimeSpan"),
                 "MaxValue"
@@ -8683,9 +8683,9 @@ namespace System.Management
                 System.TimeSpan minTimeSpan = System.TimeSpan.MinValue ;
                 if (timespan.Days < minTimeSpan.Days)
                 {
-                    throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException();
                 }
-            */
+                */
             CodeFieldReferenceExpression cpreMinVal = new CodeFieldReferenceExpression(
                 new CodeTypeReferenceExpression("System.TimeSpan"),
                 "MinValue"
@@ -8720,7 +8720,7 @@ namespace System.Management
 
             /*
                 dmtftimespan = (dmtftimespan + timespan.Hours.ToString().PadLeft(2, '0'));
-            */
+                */
 
             cpre1 = new CodePropertyReferenceExpression(
                 new CodeVariableReferenceExpression(timespan),
@@ -8748,7 +8748,7 @@ namespace System.Management
 
             /*
                 dmtftimespan = (dmtftimespan + timespan.Minutes.ToString().PadLeft(2, '0'));
-            */
+                */
 
             cpre1 = new CodePropertyReferenceExpression(
                 new CodeVariableReferenceExpression(timespan),
@@ -8773,7 +8773,7 @@ namespace System.Management
 
             /*
                 dmtftimespan = (dmtftimespan + timespan.Seconds.ToString().PadLeft(2, '0'));
-            */
+                */
 
             cpre1 = new CodePropertyReferenceExpression(
                 new CodeVariableReferenceExpression(timespan),
@@ -8798,7 +8798,7 @@ namespace System.Management
 
             /*
                 dmtftimespan = dmtftimespan + ".";
-            */
+                */
             cmie2 = GenerateConcatStrings(
                 new CodeVariableReferenceExpression(dmtfTimeSpan),
                 new CodePrimitiveExpression(".")
@@ -8810,7 +8810,7 @@ namespace System.Management
 
             /*
                 TimeSpan tsTemp = new TimeSpan(timespan.Days ,timespan.Hours,timespan.Minutes ,timespan.Seconds ,0);
-            */
+                */
             coce = new CodeObjectCreateExpression();
             coce.CreateType = new CodeTypeReference("System.TimeSpan");
             coce.Parameters.Add(
@@ -8848,7 +8848,7 @@ namespace System.Management
 
             /*
                 System.Int64 microsec = ((timespan.Ticks-tsTemp.Ticks) * 1000) / System.TimeSpan.TicksPerMillisecond;
-            */
+                */
 
             cboe = new CodeBinaryOperatorExpression();
             cboe.Left = new CodePropertyReferenceExpression(
@@ -8883,7 +8883,7 @@ namespace System.Management
 
             /*
                 System.String strMicrosec = microsec.ToString();
-            */
+                */
             cmie = new CodeMethodInvokeExpression();
             cmie.Method = new CodeMethodReferenceExpression(
                 new CodeCastExpression(
@@ -8903,9 +8903,9 @@ namespace System.Management
             /*
                 if (strMicrosec.Length > 6)
                 {
-                    strMicrosec = strMicrosec.Substring(0,6);
+                strMicrosec = strMicrosec.Substring(0,6);
                 }
-            */
+                */
             cboe = new CodeBinaryOperatorExpression();
             cboe.Left = new CodePropertyReferenceExpression(
                 new CodeVariableReferenceExpression(strmicrosec),
@@ -8932,7 +8932,7 @@ namespace System.Management
 
             /*
                 dmtftimespan = dmtftimespan + strMicrosec.PadLeft(6,'0');
-            */
+                */
 
             cmie = new CodeMethodInvokeExpression();
             cmie.Method = new CodeMethodReferenceExpression(
@@ -8985,7 +8985,7 @@ namespace System.Management
 
             /*
                  string UtcString = String.Empty;
-            */
+                 */
             cmmdt.Statements.Add(
                 new CodeVariableDeclarationStatement(
                     new CodeTypeReference("System.String"),
@@ -8999,7 +8999,7 @@ namespace System.Management
             /*
                 System.TimeSpan tickOffset = System.TimeZone.CurrentTimeZone.GetUtcOffset(date);
                 long OffsetMins = tickOffset.Ticks / System.TimeSpan.TicksPerMinute;
-            */
+                */
 
             CodeMethodReferenceExpression cmre = new CodeMethodReferenceExpression(
                 new CodePropertyReferenceExpression(
@@ -9043,10 +9043,10 @@ namespace System.Management
             /*
                 if (Math.Abs(OffsetMins) > MAXSIZE_UTC_DMTF)
                 {
-                    date = date.ToUniversalTime();
-                    UtcString = "+000";
+                date = date.ToUniversalTime();
+                UtcString = "+000";
                 }
-            */
+                */
 
             cmre = new CodeMethodReferenceExpression(
                 new CodeTypeReferenceExpression("System.Math"),
@@ -9084,9 +9084,9 @@ namespace System.Management
                 else
                 if ((tickOffset.Ticks >= 0))
                 {
-                    UtcString = "+" + ((tickOffset.Ticks / System.TimeSpan.TicksPerMinute)).ToString().PadLeft(3,'0');
+                UtcString = "+" + ((tickOffset.Ticks / System.TimeSpan.TicksPerMinute)).ToString().PadLeft(3,'0');
                 }
-            */
+                */
             CodeBinaryOperatorExpression cboe1 = new CodeBinaryOperatorExpression();
             cboe1.Left = new CodePropertyReferenceExpression(
                 new CodeVariableReferenceExpression(tickoffset),
@@ -9129,10 +9129,10 @@ namespace System.Management
             /*
                 else
                 {
-                    string strTemp = OffsetMins.ToString();
-                    UtcString = "-" + strTemp.Substring(1, strTemp.Length-1).PadLeft(3,'0');
+                string strTemp = OffsetMins.ToString();
+                UtcString = "-" + strTemp.Substring(1, strTemp.Length-1).PadLeft(3,'0');
                 }
-            */
+                */
 
             cmie1 = new CodeMethodInvokeExpression();
             cmie1.Method = new CodeMethodReferenceExpression(
@@ -9183,7 +9183,7 @@ namespace System.Management
 
             /*
                 string dmtfDateTime = date.Year.ToString().PadLeft(4,'0');
-            */
+                */
 
             string dmtfDateTime = "dmtfDateTime";
             cmie1 = new CodeMethodInvokeExpression();
@@ -9213,35 +9213,35 @@ namespace System.Management
 
             /*
                 dmtfDateTime = (dmtfDateTime + date.Month.ToString().PadLeft(2, '0'));
-            */
+                */
 
             ToDMTFDateHelper("Month", cmmdt, "System.Int32 ");
 
             /*
                 dmtfDateTime = (dmtfDateTime + date.Day.ToString().PadLeft(2, '0'));
-            */
+                */
             ToDMTFDateHelper("Day", cmmdt, "System.Int32 ");
 
             /*
                 dmtfDateTime = (dmtfDateTime + date.Hour.ToString().PadLeft(2, '0'));
-            */
+                */
             ToDMTFDateHelper("Hour", cmmdt, "System.Int32 ");
 
             /*
                 dmtfDateTime = (dmtfDateTime + date.Minute.ToString().PadLeft(2, '0'));
-            */
+                */
 
             ToDMTFDateHelper("Minute", cmmdt, "System.Int32 ");
 
             /*
                 dmtfDateTime = (dmtfDateTime + date.Second.ToString().PadLeft(2, '0'));
-            */
+                */
 
             ToDMTFDateHelper("Second", cmmdt, "System.Int32 ");
 
             /*
                 dmtfDateTime = (dmtfDateTime + ".");
-            */
+                */
 
             cmmdt.Statements.Add(
                 new CodeAssignStatement(
@@ -9254,7 +9254,7 @@ namespace System.Management
             );
             /*
                 DateTime dtTemp = new DateTime(date.Year ,date.Month,date.Day ,date.Hour ,date.Minute ,date.Second,0);
-            */
+                */
 
             string dtTemp = "dtTemp";
             coce = new CodeObjectCreateExpression();
@@ -9306,7 +9306,7 @@ namespace System.Management
 
             /*
                 System.Int64 microsec = ((date.Ticks-dtTemp.Ticks) * 1000) / System.TimeSpan.TicksPerMillisecond;
-            */
+                */
 
             string microsec = "microsec";
             cboe = new CodeBinaryOperatorExpression();
@@ -9342,7 +9342,7 @@ namespace System.Management
             );
             /*
                 System.String strMicrosec = microsec.ToString();
-            */
+                */
             string strmicrosec = "strMicrosec";
             cmie1 = new CodeMethodInvokeExpression();
             cmie1.Method = new CodeMethodReferenceExpression(
@@ -9363,9 +9363,9 @@ namespace System.Management
             /*
                 if (strMicrosec.Length > 6)
                 {
-                    strMicrosec = strMicrosec.Substring(0,6);
+                strMicrosec = strMicrosec.Substring(0,6);
                 }
-            */
+                */
             cboe = new CodeBinaryOperatorExpression();
             cboe.Left = new CodePropertyReferenceExpression(
                 new CodeVariableReferenceExpression(strmicrosec),
@@ -9392,7 +9392,7 @@ namespace System.Management
 
             /*
                 dmtfDateTime = dmtfDateTime + strMicrosec.PadLeft(6,'0');
-            */
+                */
 
             cmie1 = new CodeMethodInvokeExpression();
             cmie1.Method = new CodeMethodReferenceExpression(
@@ -9409,7 +9409,7 @@ namespace System.Management
 
             /*
                 dmtfDateTime = dmtfDateTime + UtcString;
-            */
+                */
 
             cmmdt.Statements.Add(
                 new CodeAssignStatement(
@@ -9523,9 +9523,9 @@ namespace System.Management
             /*
                 if (dmtfTimespan == null)
                 {
-                    throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException();
                 }
-            */
+                */
 
             CodeBinaryOperatorExpression cboe = new CodeBinaryOperatorExpression();
             cboe.Left = new CodeVariableReferenceExpression(tsParam);
@@ -9546,9 +9546,9 @@ namespace System.Management
             /*
                 if (dmtfTimespan.Length == 0)
                 {
-                    throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException();
                 }
-            */
+                */
 
             cboe = new CodeBinaryOperatorExpression();
             cboe.Left = new CodePropertyReferenceExpression(
@@ -9568,9 +9568,9 @@ namespace System.Management
             /*
                 if (dmtfTimespan.Length != DMTF_DATETIME_STR_LENGTH )
                 {
-                    throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException();
                 }
-            */
+                */
 
             cboe = new CodeBinaryOperatorExpression();
             cboe.Left = new CodePropertyReferenceExpression(
@@ -9589,9 +9589,9 @@ namespace System.Management
             /*
                 if (dmtfTimespan.Substring(21,4) != ":000")
                 {
-                    throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException();
                 }
-            */
+                */
 
             CodeMethodInvokeExpression cmie = new CodeMethodInvokeExpression();
             cmie.Method = new CodeMethodReferenceExpression(
@@ -9616,7 +9616,7 @@ namespace System.Management
 
             /*
                 string tempString = System.String.Empty;
-            */
+                */
 
             string strTemp = "tempString";
             tryblock.TryStatements.Add(
@@ -9632,16 +9632,16 @@ namespace System.Management
             /*
                 tempString = dmtfTimespan.Substring(0, 8);
                 days = System.Int32.Parse(tempString);
-
+                
                 tempString = dmtfTimespan.Substring(8, 2);
                 hours = System.Int32.Parse(tempString);
-
+                
                 tempString = dmtfTimespan.Substring(10, 2);
                 minutes = System.Int32.Parse(tempString);
-
+                
                 tempString = dmtfTimespan.Substring(12, 2);
                 seconds = System.Int32.Parse(tempString);
-            */
+                */
 
             ToTimeSpanHelper(0, 8, days, tryblock.TryStatements);
             ToTimeSpanHelper(8, 2, hours, tryblock.TryStatements);
@@ -9650,7 +9650,7 @@ namespace System.Management
 
             /*
                 tempString = dmtfTimespan.Substring(15, 6);
-            */
+                */
 
             cmie = new CodeMethodInvokeExpression();
             cmie.Method = new CodeMethodReferenceExpression(
@@ -9673,7 +9673,7 @@ namespace System.Management
 
             /*
                 ticks = (System.Int64.Parse(tempString)) * (System.TimeSpan.TicksPerMillisecond/1000);
-            */
+                */
             tryblock.TryStatements.Add(
                 new CodeAssignStatement(
                     new CodeVariableReferenceExpression(ticks),
@@ -9698,9 +9698,9 @@ namespace System.Management
             /*
                 if ( days < 0 || hours < 0 || minutes < 0 || seconds < 0 || ticks < 0)
                 {
-                    throw new System.ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException();
                 }
-            */
+                */
 
             CodeBinaryOperatorExpression cboeDays = new CodeBinaryOperatorExpression();
             cboeDays.Left = new CodeVariableReferenceExpression(days);
@@ -9755,9 +9755,9 @@ namespace System.Management
             /*
                 catch
                 {
-                    throw new System.ArgumentOutOfRangeException(null, e.Message);
+                throw new System.ArgumentOutOfRangeException(null, e.Message);
                 }
-            */
+                */
             string exceptVar = "e";
             CodeCatchClause catchblock = new CodeCatchClause(exceptVar);
 
@@ -9785,7 +9785,7 @@ namespace System.Management
 
             /*
                 timespan = new System.TimeSpan(days, hours, minutes, seconds, 0);
-            */
+                */
 
             string timespan = "timespan";
             coce = new CodeObjectCreateExpression();
@@ -9807,7 +9807,7 @@ namespace System.Management
             /*
                 TimeSpan tsTemp = System.TimeSpan.FromTicks(ticks);
                 timespan = timespan.Add(tsTemp);
-            */
+                */
             string tsTemp = "tsTemp";
             cmie = new CodeMethodInvokeExpression();
             cmie.Method = new CodeMethodReferenceExpression(
@@ -9837,7 +9837,7 @@ namespace System.Management
 
             /*
                 return timespan;
-            */
+                */
             cmmts.Statements.Add(
                 new CodeMethodReturnStatement(new CodeVariableReferenceExpression(timespan))
             );

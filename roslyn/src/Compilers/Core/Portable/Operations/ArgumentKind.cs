@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Operations
         Explicit = 0x1,
 
         /// <summary>
-        /// Argument is a param array created by compilers for the matching C# params or VB ParamArray parameter. 
+        /// Argument is a param array created by compilers for the matching C# params or VB ParamArray parameter.
         /// Note, the value is a an array creation expression that encapsulates all the elements, if any.
         /// </summary>
         ParamArray = 0x2,

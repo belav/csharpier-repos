@@ -19,17 +19,17 @@ namespace BuildBoss
 {
     /// <summary>
     /// Verifies the contents of our toolset NuPkg and SWR files are correct.
-    /// 
-    /// The compiler toolset is a particularly difficult package to get correct. In essense it is 
-    /// merging the output of three different exes into a single directory. That causes a number 
+    ///
+    /// The compiler toolset is a particularly difficult package to get correct. In essense it is
+    /// merging the output of three different exes into a single directory. That causes a number
     /// of issues during pack time:
-    /// 
+    ///
     ///     - The dependencies are not necessarily equal between all exes
     ///     - The dependencies can change based on subtle changes to the code
-    ///     - There is no project which is guaranteed to have a superset of dependencies 
+    ///     - There is no project which is guaranteed to have a superset of dependencies
     ///     - There is no syntax for using the union of DLLs in a NuSpec file
     ///
-    /// The most straightforward solution that could be decided on was to manage the list of dependencies 
+    /// The most straightforward solution that could be decided on was to manage the list of dependencies
     /// by hand in the NuSpec file and then rigorously verify the solution here.
     /// </summary>
     internal sealed class PackageContentsChecker : ICheckerUtil
@@ -315,7 +315,7 @@ namespace BuildBoss
         }
 
         /// <summary>
-        /// Get all of the dependencies in the specified directory set. 
+        /// Get all of the dependencies in the specified directory set.
         /// </summary>
         private bool GetPackageAssetsCore(
             TextWriter textWriter,

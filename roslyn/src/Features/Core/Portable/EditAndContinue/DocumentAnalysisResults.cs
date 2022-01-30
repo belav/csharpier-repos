@@ -44,19 +44,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         /// <summary>
         /// Exception regions -- spans of catch and finally handlers that surround the active statements.
-        /// 
+        ///
         /// Null if the document has syntax errors, rude edits or has not changed.
         /// </summary>
         /// <remarks>
         /// Null if there are any rude edit diagnostics.
-        /// 
+        ///
         /// Otherwise, each active statement in <see cref="ActiveStatements"/> has a corresponding slot in <see cref="ExceptionRegions"/>.
         ///
         /// Exception regions for each EH block/clause are marked as |...|.
         ///   try { ... AS ... } |catch { } finally { }|
         ///   try { } |catch { ... AS ... }| finally { }
         ///   try { } catch { } |finally { ... AS ... }|
-        /// 
+        ///
         /// Contains a minimal set of spans that cover the handlers.
         /// For example:
         ///   try { } |finally { try { ... AS ... } catch {  } }|
@@ -69,7 +69,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// Line edits in the document (or mapped documents), or null if the document has syntax errors, rude edits or has not changed.
         /// </summary>
         /// <remarks>
-        /// Grouped by file name and updates in each group are ordered by <see cref="SourceLineUpdate.OldLine"/>. 
+        /// Grouped by file name and updates in each group are ordered by <see cref="SourceLineUpdate.OldLine"/>.
         /// Each entry in the group applies the delta of <see cref="SourceLineUpdate.NewLine"/> - <see cref="SourceLineUpdate.OldLine"/>
         /// to all lines in range [<see cref="SourceLineUpdate.OldLine"/>, next entry's <see cref="SourceLineUpdate.OldLine"/>).
         /// </remarks>

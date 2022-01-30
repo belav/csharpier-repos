@@ -27,14 +27,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             /// <summary>
             /// Name of the extension method's receiver type to the index of its DeclaredSymbolInfo in `_declarationInfo`.
-            /// 
+            ///
             /// For simple types, the receiver type name is it's metadata name. All predefined types are converted to its metadata form.
             /// e.g. int => Int32. For generic types, type parameters are ignored.
-            /// 
+            ///
             /// For complex types, the receiver type name is "".
-            /// 
+            ///
             /// For any kind of array types, it's "{element's receiver type name}[]".
-            /// e.g. 
+            /// e.g.
             /// int[][,] => "Int32[]"
             /// T (where T is a type parameter) => ""
             /// T[,] (where T is a type parameter) => "T[]"

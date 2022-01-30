@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Navigation
     internal static class NavigationOptions
     {
         /// <summary>
-        /// This option can be passed to the <see cref="IDocumentNavigationService"/> APIs to request that a provisional (or preview) tab 
+        /// This option can be passed to the <see cref="IDocumentNavigationService"/> APIs to request that a provisional (or preview) tab
         /// be used for any document that needs to be opened, if one is available.
         /// </summary>
         public static readonly Option2<bool> PreferProvisionalTab =

@@ -310,7 +310,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
         }
 
         /// <summary>
-        /// Returns true if ReSharper is installed, enabled, and not suspended.  
+        /// Returns true if ReSharper is installed, enabled, and not suspended.
         /// </summary>
         private async ValueTask<ReSharperStatus> IsReSharperRunningAsync(
             CancellationToken cancellationToken

@@ -48,11 +48,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Finally state of the next Finally frame if such created.
         /// Finally state is a negative decreasing number starting with -3. (-2 is used for something else).
         /// Root frame has finally state -1.
-        /// 
+        ///
         /// The Finally state is the state that we are in when "between states".
         /// Regular states are positive and are the only states that can be resumed to.
-        /// The purpose of distinct finally states is to have enough information about 
-        /// which finally handlers must run when we need to finalize iterator after a fault. 
+        /// The purpose of distinct finally states is to have enough information about
+        /// which finally handlers must run when we need to finalize iterator after a fault.
         /// </summary>
         private int _nextFinalizeState = StateMachineStates.FinishedStateMachine - 1; // -3
 
@@ -221,9 +221,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Produces a Try/Finally if frame has a handler (otherwise a regular block).
         /// Handler goes into the Finally.
         /// If there are nested frames, they are emitted into the try block.
-        /// This way the handler for the current frame is guaranteed to run even if 
+        /// This way the handler for the current frame is guaranteed to run even if
         /// nested handlers throw exceptions.
-        /// 
+        ///
         /// {
         ///     switch(state)
         ///     {
@@ -255,13 +255,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///                 handler_1_2()
         ///             }
         ///             break;
-        ///             
+        ///
         ///         case state5:
         ///             ... another dispatch of nested states to their finally blocks ...
         ///             break;
         ///     }
         /// }
-        /// 
+        ///
         /// </summary>
         private BoundStatement EmitFinallyFrame(IteratorFinallyFrame frame, BoundLocal state)
         {

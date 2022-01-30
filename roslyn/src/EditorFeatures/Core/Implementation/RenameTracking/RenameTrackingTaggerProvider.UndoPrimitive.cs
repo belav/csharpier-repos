@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
     {
         /// <summary>
         /// Clears or restores the state machine on relevant undo/redo actions.
-        /// 
+        ///
         /// These may stay alive on the global undo stack well beyond the lifetime of the
         /// <see cref="ITextBuffer"/> on which they were created, so we must avoid strong
         /// references to anything that may hold that <see cref="ITextBuffer"/> alive.

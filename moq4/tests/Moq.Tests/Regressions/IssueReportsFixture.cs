@@ -476,12 +476,12 @@ namespace Moq.Tests.Regressions
             }
 
             /// <summary>
-			/// The tests in this class document some of Moq's assumptions about
-			/// how Castle DynamicProxy handles various correct and incorrect
-			/// implementations of `ISerializable`. If any one these tests start
-			/// failing, this is a signal that DynamicProxy has changed, and that
-			/// Moq might have to be adjusted accordingly.
-			/// </summary>
+            /// The tests in this class document some of Moq's assumptions about
+            /// how Castle DynamicProxy handles various correct and incorrect
+            /// implementations of `ISerializable`. If any one these tests start
+            /// failing, this is a signal that DynamicProxy has changed, and that
+            /// Moq might have to be adjusted accordingly.
+            /// </summary>
             public class AssumptionsAboutDynamicProxy
             {
                 [Theory]
@@ -1594,10 +1594,10 @@ namespace Moq.Tests.Regressions
 		#region 340
 
         /// <summary>
-		/// These tests check whether the presence of a deserialization ctor and/or a GetObjectData
-		/// method alone can fool Moq into assuming that a type is ISerializable, or implements
-		/// it incompletely when it isn't ISerializable at all.
-		/// </summary>
+        /// These tests check whether the presence of a deserialization ctor and/or a GetObjectData
+        /// method alone can fool Moq into assuming that a type is ISerializable, or implements
+        /// it incompletely when it isn't ISerializable at all.
+        /// </summary>
         public class Issue340 // see also issue 163 above
         {
             [Fact]

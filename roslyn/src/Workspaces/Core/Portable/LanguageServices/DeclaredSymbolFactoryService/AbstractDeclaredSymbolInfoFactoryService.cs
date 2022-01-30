@@ -94,9 +94,9 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         );
 
         /// <summary>
-        /// Get the name of the target type of specified extension method declaration. 
-        /// The node provided must be an extension method declaration,  i.e. calling `TryGetDeclaredSymbolInfo()` 
-        /// on `node` should return a `DeclaredSymbolInfo` of kind `ExtensionMethod`. 
+        /// Get the name of the target type of specified extension method declaration.
+        /// The node provided must be an extension method declaration,  i.e. calling `TryGetDeclaredSymbolInfo()`
+        /// on `node` should return a `DeclaredSymbolInfo` of kind `ExtensionMethod`.
         /// If the return value is null, then it means this is a "complex" method (as described at <see cref="SyntaxTreeIndex.ExtensionMethodInfo"/>).
         /// </summary>
         protected abstract string GetReceiverTypeName(TMemberDeclarationSyntax node);

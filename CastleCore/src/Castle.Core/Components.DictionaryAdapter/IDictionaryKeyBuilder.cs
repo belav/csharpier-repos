@@ -18,17 +18,17 @@ namespace Castle.Components.DictionaryAdapter
     using System.Collections;
 
     /// <summary>
-	/// Defines the contract for building typed dictionary keys.
-	/// </summary>
+    /// Defines the contract for building typed dictionary keys.
+    /// </summary>
     public interface IDictionaryKeyBuilder : IDictionaryBehavior
     {
         /// <summary>
-		/// Builds the specified key.
-		/// </summary>
-		/// <param name="dictionaryAdapter">The dictionary adapter.</param>
-		/// <param name="key">The current key.</param>
-		/// <param name="property">The property.</param>
-		/// <returns>The updated key</returns>
+        /// Builds the specified key.
+        /// </summary>
+        /// <param name="dictionaryAdapter">The dictionary adapter.</param>
+        /// <param name="key">The current key.</param>
+        /// <param name="property">The property.</param>
+        /// <returns>The updated key</returns>
         string GetKey(
             IDictionaryAdapter dictionaryAdapter,
             string key,

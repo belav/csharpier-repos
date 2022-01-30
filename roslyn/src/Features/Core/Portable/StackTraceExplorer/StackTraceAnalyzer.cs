@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
     {
         /// <summary>
         /// List of parsers to use. Order is important because
-        /// take the result from the first parser that returns 
+        /// take the result from the first parser that returns
         /// success.
         /// </summary>
         private static readonly ImmutableArray<IStackFrameParser> Parsers =

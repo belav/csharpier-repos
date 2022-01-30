@@ -4,7 +4,7 @@
 
 /*
 ---------------------------
-Assert Failure (PID 848, Thread 1036/40c)        
+Assert Failure (PID 848, Thread 1036/40c)
 ---------------------------
 (argCnt < MAX_PTRARG_OFS)
 
@@ -19,7 +19,7 @@ Image:
 D:\bugs\bug.exe
 
 ---------------------------
-Abort   Retry   Ignore   
+Abort   Retry   Ignore
 ---------------------------
 */
 namespace Test

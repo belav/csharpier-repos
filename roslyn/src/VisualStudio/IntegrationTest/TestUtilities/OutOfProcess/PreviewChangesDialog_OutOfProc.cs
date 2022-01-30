@@ -14,7 +14,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         /// <summary>
         /// Verifies that the Preview Changes dialog is showing with the
-        /// specified title. The dialog does not have an AutomationId and the 
+        /// specified title. The dialog does not have an AutomationId and the
         /// title can be changed by features, so callers of this method must
         /// specify a title.
         /// </summary>

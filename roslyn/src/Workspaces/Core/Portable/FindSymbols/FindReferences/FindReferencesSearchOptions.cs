@@ -21,12 +21,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// <summary>
         /// When searching for property, associate specific references we find to the relevant
         /// accessor symbol (if there is one).  For example, in C#, this would result in:
-        /// 
+        ///
         ///     P = 0;     // A reference to the P.set accessor
         ///     var v = P; // A reference to the P.get accessor
         ///     P++;       // A reference to P.get and P.set accessors
         ///     nameof(P); // A reference only to P.  Not associated with a particular accessor.
-        ///     
+        ///
         /// The default for this is false.  With that default, all of the above references
         /// are associated with the property P and not the accessors.
         /// </summary>
@@ -67,7 +67,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// class C1 : I { public void Goo() { } }
         /// class C2 : I { public void Goo() { } }
         /// </code>
-        /// 
+        ///
         /// If <c>C1.Goo</c> is renamed, this will need to rename <c>C2.Goo</c> as well to keep the code properly
         /// compiling.  So, by default 'Rename' will cascade to all of these so it can appropriately update them.  This
         /// option is the more relevant with knowing if a particular reference would actually result in a call to the

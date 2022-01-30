@@ -70,7 +70,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         > AssemblyReferenceProvider { get; } = SharedAssemblyReferenceProvider;
 
         /// <summary>
-        /// Directory that contains the compiler executables and the response files. 
+        /// Directory that contains the compiler executables and the response files.
         /// </summary>
         private string ClientDirectory { get; }
 

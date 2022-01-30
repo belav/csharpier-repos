@@ -17,10 +17,10 @@ namespace JitBench
     ///   b) Use the various WithXXX methods to modify the configuration of the process to launch
     ///   c) await RunAsync() to start the process and wait for it to terminate. Configuration
     ///      changes are no longer possible
-    ///   d) While waiting for RunAsync(), optionally call Kill() one or more times. This will expedite 
+    ///   d) While waiting for RunAsync(), optionally call Kill() one or more times. This will expedite
     ///      the termination of the process but there is no guarantee the process is terminated by
     ///      the time Kill() returns.
-    ///      
+    ///
     ///   Although the entire API of this type has been designed to be thread-safe, its typical that
     ///   only calls to Kill() and property getters invoked within the logging callbacks will be called
     ///   asynchronously.

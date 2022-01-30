@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-/* 
+/*
  * Tests GC.KeepAlive(obj), where obj is the Object reference whose
  * finalizer you don't want called until after the call to KeepAlive.
  *

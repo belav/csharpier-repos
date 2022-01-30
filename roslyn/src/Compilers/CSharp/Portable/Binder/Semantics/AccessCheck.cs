@@ -136,10 +136,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Checks if 'symbol' is accessible from within 'within', which must be a NamedTypeSymbol
-        /// or an AssemblySymbol. 
+        /// or an AssemblySymbol.
         /// </summary>
         /// <remarks>
-        /// Note that NamedTypeSymbol, if available, is the type that is associated with the binder 
+        /// Note that NamedTypeSymbol, if available, is the type that is associated with the binder
         /// that found the 'symbol', not the inner-most type that contains the access to the
         /// 'symbol'.
         /// <para>

@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.Remote
     /// <summary>
     /// Service that client will connect to to make service hub alive even when there is
     /// no other people calling service hub.
-    /// 
+    ///
     /// basically, this is used to manage lifetime of the service hub.
     /// </summary>
     [Obsolete("Supports non-brokered services")]

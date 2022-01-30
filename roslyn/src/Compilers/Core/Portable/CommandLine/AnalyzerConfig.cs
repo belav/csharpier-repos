@@ -127,7 +127,7 @@ namespace Microsoft.CodeAnalysis
         ///     Any other file gets a default level of 0
         ///     </description></item>
         ///  </list>
-        ///  
+        ///
         /// This value is unused when <see cref="IsGlobal"/> is <c>false</c>.
         /// </remarks>
         internal int GlobalLevel

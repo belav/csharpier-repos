@@ -12,8 +12,8 @@ namespace Moq
     partial class SequenceExtensions
     {
         /// <summary>
-		/// Return a sequence of values, once per call.
-		/// </summary>
+        /// Return a sequence of values, once per call.
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Please use instance method Mock<T>.SetupSequence instead.")]
         public static ISetupSequentialResult<TResult> SetupSequence<TMock, TResult>(
@@ -25,8 +25,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Performs a sequence of actions, one per call.
-		/// </summary>
+        /// Performs a sequence of actions, one per call.
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Please use instance method Mock<T>.SetupSequence instead.")]
         public static ISetupSequentialAction SetupSequence<TMock>(

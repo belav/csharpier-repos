@@ -19,8 +19,8 @@ namespace Moq
     public partial class Mock<T>
     {
         /// <summary>
-		/// Obsolete.
-		/// </summary>
+        /// Obsolete.
+        /// </summary>
         [Obsolete("Expect has been renamed to Setup.", false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ISetup<T> Expect(Expression<Action<T>> expression)
@@ -29,8 +29,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Obsolete.
-		/// </summary>
+        /// Obsolete.
+        /// </summary>
         [Obsolete("Expect has been renamed to Setup.", false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ISetup<T, TResult> Expect<TResult>(Expression<Func<T, TResult>> expression)
@@ -39,8 +39,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Obsolete.
-		/// </summary>
+        /// Obsolete.
+        /// </summary>
         [Obsolete("ExpectGet has been renamed to SetupGet.", false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ISetupGetter<T, TProperty> ExpectGet<TProperty>(
@@ -51,8 +51,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Obsolete.
-		/// </summary>
+        /// Obsolete.
+        /// </summary>
         [Obsolete("ExpectSet has been renamed to SetupSet.", false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ISetupSetter<T, TProperty> ExpectSet<TProperty>(
@@ -63,8 +63,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Obsolete.
-		/// </summary>
+        /// Obsolete.
+        /// </summary>
         [Obsolete(
             "ExpectSet has been renamed to SetupSet, and the new syntax allows you to pass the value in the expression itself, like f => f.Value = 25.",
             true
@@ -80,15 +80,15 @@ namespace Moq
     }
 
     /// <summary>
-	/// Contains obsolete API members as extension methods so that existing code continues to compile,
-	/// but new code doesn't see them.
-	/// </summary>
+    /// Contains obsolete API members as extension methods so that existing code continues to compile,
+    /// but new code doesn't see them.
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class MockLegacyExtensions
     {
         /// <summary>
-		/// Obsolete.
-		/// </summary>
+        /// Obsolete.
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete(
             "The new syntax allows you to pass the value in the expression itself, like f => f.Value = 25.",
@@ -104,8 +104,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Obsolete.
-		/// </summary>
+        /// Obsolete.
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete(
             "Use the new syntax, which allows you to pass the value in the expression itself, mock.VerifySet(m => m.Value = 25);",
@@ -121,8 +121,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Obsolete.
-		/// </summary>
+        /// Obsolete.
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete(
             "Use the new syntax, which allows you to pass the value in the expression itself, mock.VerifySet(m => m.Value = 25, failMessage);",

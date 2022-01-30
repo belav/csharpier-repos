@@ -266,9 +266,9 @@ End Module"
 
         /// <summary>
         /// Compiles some source code and returns the bytes that were contained in the compiled DLL file.
-        /// 
+        ///
         /// Each time that this function is called, it will be compiled in a different directory.
-        /// 
+        ///
         /// The default flags are "/shared /deterministic+ /nologo /t:library".
         /// </summary>
         /// <param name="source"> The source code for the program that will be compiled </param>
@@ -626,7 +626,7 @@ End Module"
         }
 
         /// <summary>
-        /// This method tests that when a 64-bit compiler server loads a 
+        /// This method tests that when a 64-bit compiler server loads a
         /// 64-bit mscorlib with /platform:x86 enabled no warning about
         /// emitting a reference to a 64-bit assembly is produced.
         /// The test should pass on x86 or amd64, but can only fail on
@@ -1992,7 +1992,7 @@ static void Main(string[] args)
         }
 
         /// <summary>
-        /// Runs CompileAndGetBytes twice and compares the output. 
+        /// Runs CompileAndGetBytes twice and compares the output.
         /// </summary>
         /// <param name="source"> The source of the program that will be compiled </param>
         private async Task RunDeterministicTest(string source)

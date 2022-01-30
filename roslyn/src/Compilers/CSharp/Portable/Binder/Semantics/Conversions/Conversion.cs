@@ -646,7 +646,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if the conversion is an implicit numeric conversion or explicit numeric conversion. 
+        /// Returns true if the conversion is an implicit numeric conversion or explicit numeric conversion.
         /// </summary>
         /// <remarks>
         /// Implicit and explicit numeric conversions are described in sections 6.1.2 and 6.2.1 of the C# language specification.
@@ -833,7 +833,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if the conversion is an implicit dynamic conversion. 
+        /// Returns true if the conversion is an implicit dynamic conversion.
         /// </summary>
         /// <remarks>
         /// Implicit dynamic conversions are described in section 6.1.8 of the C# language specification.
@@ -877,19 +877,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if the conversion is a pointer conversion 
+        /// Returns true if the conversion is a pointer conversion
         /// </summary>
         /// <remarks>
         /// Pointer conversions are described in section 18.4 of the C# language specification.
-        /// 
-        /// Returns true if the conversion is a conversion 
-        ///  a) from a pointer type to void*, 
+        ///
+        /// Returns true if the conversion is a conversion
+        ///  a) from a pointer type to void*,
         ///  b) from a pointer type to another pointer type (other than void*),
         ///  c) from the null literal to a pointer type,
         ///  d) from an integral numeric type to a pointer type,
         ///  e) from a pointer type to an integral numeric type, or
         ///  d) from a function pointer type to a function pointer type.
-        /// 
+        ///
         /// Does not return true for user-defined conversions to/from pointer types.
         /// Does not return true for conversions between pointer types and IntPtr/UIntPtr.
         /// </remarks>
@@ -917,7 +917,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns the method used to create the delegate for a method group conversion if <see cref="IsMethodGroup"/> is true 
+        /// Returns the method used to create the delegate for a method group conversion if <see cref="IsMethodGroup"/> is true
         /// or the method used to perform the conversion for a user-defined conversion if <see cref="IsUserDefined"/> is true.
         /// Otherwise, returns null.
         /// </summary>

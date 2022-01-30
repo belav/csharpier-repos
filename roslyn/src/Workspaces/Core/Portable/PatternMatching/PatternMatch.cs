@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         public PatternMatchKind Kind { get; }
 
         /// <summary>
-        /// The spans in the original text that were matched.  Only returned if the 
+        /// The spans in the original text that were matched.  Only returned if the
         /// pattern matcher is asked to collect these spans.
         /// </summary>
         public ImmutableArray<TextSpan> MatchedSpans { get; }

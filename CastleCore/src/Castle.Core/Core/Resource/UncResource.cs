@@ -19,8 +19,8 @@ namespace Castle.Core.Resource
     using System.IO;
 
     /// <summary>
-	/// Enable access to files on network shares
-	/// </summary>
+    /// Enable access to files on network shares
+    /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",
         "CA1704:IdentifiersShouldBeSpelledCorrectly",

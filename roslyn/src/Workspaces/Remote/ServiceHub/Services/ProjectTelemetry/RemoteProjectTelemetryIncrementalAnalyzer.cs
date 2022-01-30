@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.Remote
         /// Collects data from <paramref name="project"/> and reports it to the telemetry service.
         /// </summary>
         /// <remarks>
-        /// Only sends data to the telemetry service when one of the collected data points changes, 
+        /// Only sends data to the telemetry service when one of the collected data points changes,
         /// not necessarily every time this code is called.
         /// </remarks>
         public override async Task AnalyzeProjectAsync(

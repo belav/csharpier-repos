@@ -403,12 +403,12 @@ internal partial class RequestContext
 
     /* TODO: https://github.com/aspnet/HttpSysServer/issues/231
     byte[] ITlsTokenBindingFeature.GetProvidedTokenBindingId() => Request.GetProvidedTokenBindingId();
-
+    
     byte[] ITlsTokenBindingFeature.GetReferredTokenBindingId() => Request.GetReferredTokenBindingId();
-
+    
     internal ITlsTokenBindingFeature GetTlsTokenBindingFeature()
     {
-        return Request.IsHttps ? this : null;
+    return Request.IsHttps ? this : null;
     }
     */
 

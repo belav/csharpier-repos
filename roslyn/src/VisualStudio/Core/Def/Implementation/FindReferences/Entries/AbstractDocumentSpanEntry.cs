@@ -16,7 +16,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
     internal partial class StreamingFindUsagesPresenter
     {
         /// <summary>
-        /// Base type of all <see cref="Entry"/>s that represent some source location in 
+        /// Base type of all <see cref="Entry"/>s that represent some source location in
         /// a <see cref="Document"/>.  Navigation to that location is provided by this type.
         /// Subclasses can be used to provide customized line text to display in the entry.
         /// </summary>

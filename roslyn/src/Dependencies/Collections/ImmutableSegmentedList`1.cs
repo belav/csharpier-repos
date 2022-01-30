@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Collections
     ///
     /// <para>The following table summarizes the performance characteristics of
     /// <see cref="ImmutableSegmentedList{T}"/>:</para>
-    /// 
+    ///
     /// <list type="table">
     ///   <item>
     ///     <description>Operation</description>
@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.Collections
     ///     <description>Requires creating a new segmented list and cloning all impacted segments</description>
     ///   </item>
     /// </list>
-    /// 
+    ///
     /// <para>This type is backed by segmented arrays to avoid using the Large Object Heap without impacting algorithmic
     /// complexity.</para>
     /// </remarks>

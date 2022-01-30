@@ -172,14 +172,14 @@ namespace System.Xml.Schema
 
         /*  internal struct ReplaceList
           {
-              internal XmlSchemaObjectCollection col;
-              internal int position;
-
-              internal ReplaceList(XmlSchemaObjectCollection col, int position)
-              {
-                  this.col = col;
-                  this.position = position;
-              }
+          internal XmlSchemaObjectCollection col;
+          internal int position;
+          
+          internal ReplaceList(XmlSchemaObjectCollection col, int position)
+          {
+          this.col = col;
+          this.position = position;
+          }
           }*/
 
         public enum InferenceOption
@@ -280,26 +280,26 @@ namespace System.Xml.Schema
 
                 /*  foreach (ReplaceList listItem in schemaList)
                   {
-                      if (listItem.position < listItem.col.Count)
-                      {
-                          XmlSchemaElement particle = listItem.col[listItem.position] as XmlSchemaElement;
-                          if (particle != null && (particle.RefName.Namespace == XmlSchema.Namespace))
-                          {
-                              XmlSchemaAny any = new XmlSchemaAny();
-                              if (particle.MaxOccurs != 1)
-                              {
-                                  any.MaxOccurs = particle.MaxOccurs;
-                              }
-                              if (particle.MinOccurs != 1)
-                              {
-                                  any.MinOccurs = particle.MinOccurs;
-                              }
-                              any.ProcessContents = XmlSchemaContentProcessing.Skip;
-                              any.MinOccurs = decimal.Zero;
-                              any.Namespace = particle.RefName.Namespace;
-                              listItem.col[listItem.position] = any;
-                          }
-                      }
+                  if (listItem.position < listItem.col.Count)
+                  {
+                  XmlSchemaElement particle = listItem.col[listItem.position] as XmlSchemaElement;
+                  if (particle != null && (particle.RefName.Namespace == XmlSchema.Namespace))
+                  {
+                  XmlSchemaAny any = new XmlSchemaAny();
+                  if (particle.MaxOccurs != 1)
+                  {
+                  any.MaxOccurs = particle.MaxOccurs;
+                  }
+                  if (particle.MinOccurs != 1)
+                  {
+                  any.MinOccurs = particle.MinOccurs;
+                  }
+                  any.ProcessContents = XmlSchemaContentProcessing.Skip;
+                  any.MinOccurs = decimal.Zero;
+                  any.Namespace = particle.RefName.Namespace;
+                  listItem.col[listItem.position] = any;
+                  }
+                  }
                   }*/
                 foreach (string? prefix in _namespaceManager)
                 {
@@ -404,11 +404,11 @@ namespace System.Xml.Schema
                 else if (childURI != null && !_schemaSet!.Contains(childURI))
                 {
                     /*if (parentSchema.AttributeFormDefault = XmlSchemaForm.Unqualified && childURI.Length == 0)
-                {
+                    {
                     xs = parentSchema;
                     add = false;
                     break;
-                }*/
+                    }*/
                     xs = new XmlSchema();
                     xs.AttributeFormDefault = XmlSchemaForm.Unqualified;
                     xs.ElementFormDefault = XmlSchemaForm.Qualified;
@@ -705,7 +705,7 @@ namespace System.Xml.Schema
                     returnedElement = elementReference;
                     /* if (childURI == XmlSchema.Namespace)
                      {
-                         schemaList.Add(new ReplaceList(addLocation, positionWithinCollection));
+                     schemaList.Add(new ReplaceList(addLocation, positionWithinCollection));
                      }*/
                 }
             }
@@ -2013,7 +2013,7 @@ namespace System.Xml.Schema
             }
             /*          if (currentType == null)
                             return SimpleTypes[newType];
-                        else
+                            else
                             return SimpleTypes[ST_Map[newType,(short) ST_Codes[currentType]]];
                             */
         }

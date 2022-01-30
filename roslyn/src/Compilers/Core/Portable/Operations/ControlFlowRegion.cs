@@ -25,18 +25,18 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public ControlFlowRegion? EnclosingRegion { get; private set; }
 
         /// <summary>
-        /// Target exception type for <see cref="ControlFlowRegionKind.Filter"/>, <see cref="ControlFlowRegionKind.Catch"/>, 
+        /// Target exception type for <see cref="ControlFlowRegionKind.Filter"/>, <see cref="ControlFlowRegionKind.Catch"/>,
         /// <see cref="ControlFlowRegionKind.FilterAndHandler "/>
         /// </summary>
         public ITypeSymbol? ExceptionType { get; }
 
         /// <summary>
-        /// Ordinal (<see cref="BasicBlock.Ordinal"/>) of the first <see cref="BasicBlock"/> within the region. 
+        /// Ordinal (<see cref="BasicBlock.Ordinal"/>) of the first <see cref="BasicBlock"/> within the region.
         /// </summary>
         public int FirstBlockOrdinal { get; }
 
         /// <summary>
-        /// Ordinal (<see cref="BasicBlock.Ordinal"/>) of the last <see cref="BasicBlock"/> within the region. 
+        /// Ordinal (<see cref="BasicBlock.Ordinal"/>) of the last <see cref="BasicBlock"/> within the region.
         /// </summary>
         public int LastBlockOrdinal { get; }
 

@@ -601,7 +601,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns whether the reference type constraint (the 'class' constraint) should also be treated as nullable ('class?') or non-nullable (class!).
-        /// In some cases this aspect is unknown (null value is returned). For example, when 'class' constraint is specified in a NonNullTypes(false) context.  
+        /// In some cases this aspect is unknown (null value is returned). For example, when 'class' constraint is specified in a NonNullTypes(false) context.
         /// This API returns false when <see cref="HasReferenceTypeConstraint"/> is false.
         /// </summary>
         internal abstract bool? ReferenceTypeConstraintIsNullable { get; }

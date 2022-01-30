@@ -988,15 +988,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///   1) Collection type
         ///   2) Enumerator type
         ///   3) Element type
-        ///   
+        ///
         /// The implementation details are a bit different.  If we're iterating over a string or an array, then we don't need to record anything
-        /// but the inferredType (in case the iteration variable is implicitly typed).  If we're iterating over anything else, then we want the 
+        /// but the inferredType (in case the iteration variable is implicitly typed).  If we're iterating over anything else, then we want the
         /// inferred type plus a ForEachEnumeratorInfo.Builder with:
         ///   1) Collection type
         ///   2) Element type
         ///   3) GetEnumerator (or GetAsyncEnumerator) method of the collection type (return type will be the enumerator type from the spec)
         ///   4) Current property and MoveNext (or MoveNextAsync) method of the enumerator type
-        ///   
+        ///
         /// The caller will have to do some extra conversion checks before creating a ForEachEnumeratorInfo for the BoundForEachStatement.
         /// </summary>
         /// <param name="builder">Builder to fill in (partially, all but conversions).</param>
@@ -2029,7 +2029,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Called after it is determined that the expression being enumerated is of a type that
         /// has a GetEnumerator (or GetAsyncEnumerator) method.  Checks to see if the return type of the GetEnumerator
-        /// method is suitable (i.e. has Current and MoveNext for regular case, 
+        /// method is suitable (i.e. has Current and MoveNext for regular case,
         /// or Current and MoveNextAsync for async case).
         /// </summary>
         /// <param name="builder">Must be non-null and contain a non-null GetEnumeratorMethod.</param>

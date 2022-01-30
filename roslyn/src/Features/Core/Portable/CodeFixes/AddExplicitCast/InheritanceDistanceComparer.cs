@@ -17,17 +17,17 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
     /// class Base { }
     /// class Derived1 : Base { }
     /// class Derived2 : Derived1 { }
-    /// 
+    ///
     /// void Foo(Derived1 d1) { }
     /// void Foo(Derived2 d2) { }
-    /// 
+    ///
     /// Base b = new Derived1();
     /// Foo([||]b);
-    /// 
+    ///
     /// operations:
     /// 1. Convert type to 'Derived1'
     /// 2. Convert type to 'Derived2'
-    /// 
+    ///
     /// 'Derived1' is less specific than 'Derived2' compared to 'Base'
     /// </summary>
     internal sealed class InheritanceDistanceComparer<TExpressionSyntax>

@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Text
     public readonly struct TextChange : IEquatable<TextChange>
     {
         /// <summary>
-        /// The original span of the changed text. 
+        /// The original span of the changed text.
         /// </summary>
         [DataMember(Order = 0)]
         public TextSpan Span { get; }

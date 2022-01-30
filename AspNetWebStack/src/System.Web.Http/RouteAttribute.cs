@@ -7,7 +7,7 @@ using System.Web.Http.Routing;
 namespace System.Web.Http
 {
     /// <summary>
-    /// Place on a controller or action to expose it directly via a route. 
+    /// Place on a controller or action to expose it directly via a route.
     /// When placed on a controller, it applies to actions that do not have any <see cref="RouteAttribute"/>s on them.
     /// </summary>
     [AttributeUsage(

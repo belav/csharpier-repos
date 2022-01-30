@@ -55,7 +55,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         ///     1) Public: Dependent projects include the symbol definition project and all the referencing projects.
         ///     2) Internal: Dependent projects include the symbol definition project and all the referencing projects that have internals access to the definition project.
         ///     3) Private: Dependent projects include the symbol definition project and all the referencing submission projects (which are special and can reference private fields of the previous submission).
-        /// 
+        ///
         /// We perform this computation in two stages:
         ///     1) Compute all the dependent projects (submission + non-submission) and their InternalsVisibleTo semantics to the definition project.
         ///     2) Filter the above computed dependent projects based on symbol visibility.

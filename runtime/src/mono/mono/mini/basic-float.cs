@@ -383,24 +383,24 @@ class Tests
 
     /* FIXME: This only works on little-endian machines */
     /*
-	static unsafe int test_2_negative_zero () {
-		int result = 0;
-		double d = -0.0;
-		float f = -0.0f;
-
-		byte *ptr = (byte*)&d;
-		if (ptr [7] == 0)
-			return result;
-		result ++;
-
-		ptr = (byte*)&f;
-		if (ptr [3] == 0)
-			return result;
-		result ++;
-
-		return result;
-	}
-	*/
+    static unsafe int test_2_negative_zero () {
+    int result = 0;
+    double d = -0.0;
+    float f = -0.0f;
+    
+    byte *ptr = (byte*)&d;
+    if (ptr [7] == 0)
+    return result;
+    result ++;
+    
+    ptr = (byte*)&f;
+    if (ptr [3] == 0)
+    return result;
+    result ++;
+    
+    return result;
+    }
+    */
 
     public static int test_16_float_cmp()
     {
@@ -740,14 +740,14 @@ class Tests
     /*
     public static int test_0_long_to_double_conversion ()
     {
-		long l = 9223372036854775807L;
-		long conv = (long)((double)l);
-		if (conv != -9223372036854775808L)
-			return 1;
-
-		return 0;
+    long l = 9223372036854775807L;
+    long conv = (long)((double)l);
+    if (conv != -9223372036854775808L)
+    return 1;
+    
+    return 0;
     }
-	*/
+    */
 
     public static int INT_VAL = 0x13456799;
 

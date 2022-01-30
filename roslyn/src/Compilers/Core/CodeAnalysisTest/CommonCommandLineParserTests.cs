@@ -1350,7 +1350,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         /// <summary>
         /// This function should always preserve the slashes as they exist in the original command
         /// line.  The only serve to decide whether quotes should count as grouping constructors
-        /// or not. 
+        /// or not.
         /// </summary>
         [Fact]
         public void SplitCommandLineIntoArguments_Slashes()
@@ -1468,14 +1468,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         /// <summary>
-        /// Test all of the cases around slashes in the RemoveQuotes function.  
+        /// Test all of the cases around slashes in the RemoveQuotes function.
         /// </summary>
         /// <remarks>
-        /// It's important to remember this is testing slash behavior on the strings as they 
-        /// are passed to RemoveQuotes, not as they are passed to the command line.  Command 
+        /// It's important to remember this is testing slash behavior on the strings as they
+        /// are passed to RemoveQuotes, not as they are passed to the command line.  Command
         /// line arguments have already gone through an initial round of processing.  So a
         /// string that appears here as "\\test.cs" actually came through the command line
-        /// as \"\\test.cs\". 
+        /// as \"\\test.cs\".
         /// </remarks>
         [Fact]
         public void RemoveQuotesAndSlashes()
@@ -1509,7 +1509,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         /// <summary>
-        /// Verify that for the standard cases we do not allocate new memory but instead 
+        /// Verify that for the standard cases we do not allocate new memory but instead
         /// return a <see cref="ReadOnlyMemory{T}"/> to the existing string
         /// </summary>
         [Fact]

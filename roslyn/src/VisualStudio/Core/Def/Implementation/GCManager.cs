@@ -16,7 +16,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     /// <summary>
     /// This class manages setting the GC mode to SustainedLowLatency.
-    /// 
+    ///
     /// It is safe to call from any thread, but is intended to be called from
     /// the UI thread whenever user keyboard or mouse input is received.
     /// </summary>
@@ -63,7 +63,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         /// <summary>
         /// Turn off low latency GC mode.
-        /// 
+        ///
         /// if there is a pending low latency mode request, Latency mode will go back to its original status as
         /// pending request timeout. once it goes back to its original status, it will not go back to low latency mode again.
         /// </summary>
@@ -76,8 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         /// <summary>
         /// Call this method to suppress expensive blocking Gen 2 garbage GCs in
         /// scenarios where high-latency is unacceptable (e.g. processing typing input).
-        /// 
-        /// Blocking GCs will be re-enabled automatically after a short duration unless 
+        ///
+        /// Blocking GCs will be re-enabled automatically after a short duration unless
         /// UseLowLatencyModeForProcessingUserInput is called again.
         /// </summary>
         internal static void UseLowLatencyModeForProcessingUserInput()

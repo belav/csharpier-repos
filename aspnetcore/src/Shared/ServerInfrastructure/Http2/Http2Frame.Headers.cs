@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
     +---------------------------------------------------------------+
     |                           Padding (*)                       ...
     +---------------------------------------------------------------+
-*/
+    */
 internal partial class Http2Frame
 {
     public Http2HeadersFrameFlags HeadersFlags

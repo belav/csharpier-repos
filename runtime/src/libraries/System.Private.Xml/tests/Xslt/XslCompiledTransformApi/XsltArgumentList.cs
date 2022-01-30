@@ -10334,7 +10334,7 @@ namespace System.Xml.Tests
              * In these variations, the XSLT calls the extension function Increment from XSLT.
              * In some cases, the variable is never used in the XSLT (Bug 357711)
              * Verify by calling an extenfion function like increment and check the state of the variable
-            */
+             */
             ExObj obj = new ExObj(0, _output);
             m_xsltArg = new XsltArgumentList();
             string xslFile = param0.ToString();

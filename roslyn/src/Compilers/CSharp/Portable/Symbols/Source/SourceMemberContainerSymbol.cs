@@ -1705,7 +1705,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// The purpose of this function is to assert that the <paramref name="member"/> symbol
         /// is actually among the symbols cached by this type symbol in a way that ensures
-        /// that any consumer of standard APIs to get to type's members is going to get the same 
+        /// that any consumer of standard APIs to get to type's members is going to get the same
         /// symbol (same instance) for the member rather than an equivalent, but different instance.
         /// </summary>
         [Conditional("DEBUG")]

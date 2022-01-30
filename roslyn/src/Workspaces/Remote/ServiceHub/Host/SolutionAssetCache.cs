@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Remote
         /// <summary>
         /// Time we will wait after the last activity before doing explicit GC cleanup.
         /// We monitor all resource access and service call to track last activity time.
-        /// 
+        ///
         /// We do this since 64bit process can hold onto quite big unused memory when
         /// OOP is running as AnyCpu
         /// </summary>

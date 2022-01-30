@@ -57,7 +57,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// with the code that searches for binders.  We don't want the searcher
         /// to skip over any nodes that could have associated binders, especially
         /// if changes are made later.
-        /// 
+        ///
         /// "Local binder" is a term that refers to binders that are
         /// created by LocalBinderFactory.
         /// </summary>

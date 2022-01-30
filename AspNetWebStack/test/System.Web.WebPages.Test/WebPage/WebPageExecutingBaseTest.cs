@@ -212,7 +212,7 @@ namespace System.Web.WebPages.Test
         /// <remarks>
         /// This is a regression test for Html.Raw behaving incorrectly in attributes - the code here is derived from that generated
         /// by the Razor engine on input like the following:
-        /// 
+        ///
         /// cool="@Html.Raw("this is cool text")"
         /// </remarks>
         [Fact]

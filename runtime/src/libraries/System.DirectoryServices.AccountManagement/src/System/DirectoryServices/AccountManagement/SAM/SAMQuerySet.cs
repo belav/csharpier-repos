@@ -134,17 +134,17 @@ namespace System.DirectoryServices.AccountManagement
                 // One more to try: the root object
                 if (IsOfCorrectType(this.ctxBase) && this.matcher.Matches(this.ctxBase))
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMQuerySet", "MoveNext: found a match on root {0}", this.ctxBase);
-
-                    this.current = this.ctxBase;
-                    this.resultsReturned++;
-                    f = true;
+                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMQuerySet", "MoveNext: found a match on root {0}", this.ctxBase);
+                
+                this.current = this.ctxBase;
+                this.resultsReturned++;
+                f = true;
                 }
                 else
                 {
-                    endReached = true;
+                endReached = true;
                 }
-                 * */
+                * */
             }
 
             return f;
@@ -598,10 +598,10 @@ namespace System.DirectoryServices.AccountManagement
                 );
                 /*
                 return (String.Compare(((string)de.Properties["Name"].Value),
-                                       samAccountName,
-                                       true,                                // acct names are not case-sensitive
-                                       CultureInfo.InvariantCulture) == 0);
-                                       */
+                samAccountName,
+                true,                                // acct names are not case-sensitive
+                CultureInfo.InvariantCulture) == 0);
+                */
             }
 
             return false;

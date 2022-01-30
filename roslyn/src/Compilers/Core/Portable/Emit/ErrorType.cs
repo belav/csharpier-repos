@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Emit
 {
     /// <summary>
-    /// Error type symbols should be replaced with an object of this class 
+    /// Error type symbols should be replaced with an object of this class
     /// in the translation layer for emit.
     /// </summary>
     internal class ErrorType : Cci.INamespaceTypeReference

@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
     /// <summary>
     /// This trace listener is useful in environments where we don't want a dialog but instead want
     /// to exit with a reliable stack trace of the failure.  For example during a bootstrap build where
-    /// the assert dialog would otherwise cause a Jenkins build to timeout. 
+    /// the assert dialog would otherwise cause a Jenkins build to timeout.
     /// </summary>
     internal sealed class ExitingTraceListener : TraceListener
     {

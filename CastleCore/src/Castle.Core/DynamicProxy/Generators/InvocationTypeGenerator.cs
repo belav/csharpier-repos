@@ -48,9 +48,9 @@ namespace Castle.DynamicProxy.Generators
         }
 
         /// <summary>
-		///   Generates the constructor for the class that extends
-		///   <see cref = "AbstractInvocation" />
-		/// </summary>
+        ///   Generates the constructor for the class that extends
+        ///   <see cref = "AbstractInvocation" />
+        /// </summary>
         protected abstract ArgumentReference[] GetBaseCtorArguments(
             Type targetFieldType,
             out ConstructorInfo baseConstructor

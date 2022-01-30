@@ -643,8 +643,8 @@ namespace System.Drawing.Printing
         /*
                 void GetPrintDialogInfo (string printer_name, ref string port, ref string type, ref string status, ref string comment)
                 {
-                    printing_services.GetPrintDialogInfo (printer_name, ref port, ref type, ref status, ref comment);
+                printing_services.GetPrintDialogInfo (printer_name, ref port, ref type, ref status, ref comment);
                 }
-        */
+                */
     }
 }

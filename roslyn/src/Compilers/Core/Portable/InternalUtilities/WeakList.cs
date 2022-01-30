@@ -131,7 +131,7 @@ namespace Roslyn.Utilities
         }
 
         /// <summary>
-        /// Returns the number of weak references in this list. 
+        /// Returns the number of weak references in this list.
         /// Note that some of them might not point to live objects anymore.
         /// </summary>
         public int WeakCount

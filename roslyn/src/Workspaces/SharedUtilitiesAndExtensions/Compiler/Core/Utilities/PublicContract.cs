@@ -77,7 +77,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Use to validate public API input for properties that are exposed as <see cref="IReadOnlyList{T}"/> and 
+        /// Use to validate public API input for properties that are exposed as <see cref="IReadOnlyList{T}"/> and
         /// whose items should be unique.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

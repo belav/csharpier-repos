@@ -29,9 +29,9 @@ namespace Castle.Components.DictionaryAdapter
     using Castle.Core.Internal;
 
     /// <summary>
-	/// Uses Reflection.Emit to expose the properties of a dictionary
-	/// through a dynamic implementation of a typed interface.
-	/// </summary>
+    /// Uses Reflection.Emit to expose the properties of a dictionary
+    /// through a dynamic implementation of a typed interface.
+    /// </summary>
     public class DictionaryAdapterFactory : IDictionaryAdapterFactory
     {
         private readonly SynchronizedDictionary<Type, DictionaryAdapterMeta> interfaceToMeta =

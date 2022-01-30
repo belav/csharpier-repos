@@ -1030,7 +1030,7 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// This method decides whether the type needs aligned base offset in order to have layout resilient to 
+        /// This method decides whether the type needs aligned base offset in order to have layout resilient to
         /// base class layout changes.
         /// </summary>
         protected override void AlignBaseOffsetIfNecessary(

@@ -3,7 +3,7 @@
 
 /**
 This testcase attempts to checks GetDirectories/GetFiles with the following ReparsePoint implementations
- - Mount Volumes
+- Mount Volumes
 **/
 using System;
 using System.IO;

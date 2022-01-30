@@ -13,9 +13,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
 {
     /// <summary>
     /// Maintains a list of sequence points in a space efficient way. Most of the time sequence points
-    /// occur in the same syntax tree, so optimize for that case. Store a sequence point as an offset, and 
+    /// occur in the same syntax tree, so optimize for that case. Store a sequence point as an offset, and
     /// position in a syntax tree, then translate to CCI format only on demand.
-    /// 
+    ///
     /// Use a ArrayBuilder{RawSequencePoint} to create.
     /// </summary>
     internal class SequencePointList

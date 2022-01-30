@@ -24,13 +24,13 @@ namespace Microsoft.CodeAnalysis
             private int _position;
 
             /// <summary>
-            /// We use <see cref="XmlReader"/> to validate XML doc comments. Unfortunately it cannot be reset and thus can't be pooled. 
-            /// Each time we need to validate a fragment of XML we "append" it to the underlying text reader, implemented by this class, 
-            /// and advance the reader. By the end of the fragment validation, we keep the reader open in a state 
+            /// We use <see cref="XmlReader"/> to validate XML doc comments. Unfortunately it cannot be reset and thus can't be pooled.
+            /// Each time we need to validate a fragment of XML we "append" it to the underlying text reader, implemented by this class,
+            /// and advance the reader. By the end of the fragment validation, we keep the reader open in a state
             /// that is ready for the next fragment validation unless the fragment was invalid, in which case we need to create a new XmlReader.
             /// That is why <see cref="Read(char[], int, int) "/> pretends that the stream has extra <see cref="maxReadsPastTheEnd"/> spaces
-            /// at the end. That should be sufficient for <see cref="XmlReader"/> to not reach the end of this reader before the next 
-            /// fragment is appended, unless the current fragment is malformed in one way or another. 
+            /// at the end. That should be sufficient for <see cref="XmlReader"/> to not reach the end of this reader before the next
+            /// fragment is appended, unless the current fragment is malformed in one way or another.
             /// </summary>
             private const int maxReadsPastTheEnd = 100;
             private int _readsPastTheEnd;

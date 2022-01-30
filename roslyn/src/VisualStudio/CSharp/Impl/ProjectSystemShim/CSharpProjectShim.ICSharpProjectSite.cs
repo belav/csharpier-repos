@@ -18,8 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
     {
         /// <summary>
         /// When the project property page calls GetValidStartupClasses on us, it assumes
-        /// the strings passed to it are in the native C# language service's string table 
-        /// and never frees them. To avoid leaking our strings, we allocate them on the 
+        /// the strings passed to it are in the native C# language service's string table
+        /// and never frees them. To avoid leaking our strings, we allocate them on the
         /// native heap for each call and keep the pointers here. On subsequent calls
         /// or on disposal, we free the old strings before allocating the new ones.
         /// </summary>

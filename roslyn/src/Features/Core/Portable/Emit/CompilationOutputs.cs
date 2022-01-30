@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.Emit
         /// otherwise keeps the underlying stream open until the returned <see cref="MetadataReaderProvider"/> is disposed.
         /// </param>
         /// <returns>
-        /// Instance of <see cref="MetadataReaderProvider"/>, which owns the opened metadata and must be disposed once the caller is done reading the data, 
+        /// Instance of <see cref="MetadataReaderProvider"/>, which owns the opened metadata and must be disposed once the caller is done reading the data,
         /// or null if the assembly is not available.
         /// </returns>
         /// <exception cref="BadImageFormatException">Invalid format of the assembly data.</exception>

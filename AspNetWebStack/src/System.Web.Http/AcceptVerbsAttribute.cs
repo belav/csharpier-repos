@@ -23,7 +23,7 @@ namespace System.Web.Http
         private readonly Collection<HttpMethod> _httpMethods;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AcceptVerbsAttribute" /> class.        
+        /// Initializes a new instance of the <see cref="AcceptVerbsAttribute" /> class.
         /// </summary>
         /// <param name="method">The HTTP method the action supports.</param>
         /// <remarks>

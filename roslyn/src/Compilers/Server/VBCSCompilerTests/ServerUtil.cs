@@ -89,7 +89,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         }
 
         /// <summary>
-        /// Create a new server at the specified pipe name. This function will return immediately 
+        /// Create a new server at the specified pipe name. This function will return immediately
         /// after creating the server and does _not_ wait for it to begin listening
         /// </summary>
         internal static ServerData Create(
@@ -132,7 +132,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         }
 
         /// <summary>
-        /// This function will wait until the server is either listening on the named pipe or 
+        /// This function will wait until the server is either listening on the named pipe or
         /// if it has exited.
         /// </summary>
         internal async Task WaitForServerAsync()

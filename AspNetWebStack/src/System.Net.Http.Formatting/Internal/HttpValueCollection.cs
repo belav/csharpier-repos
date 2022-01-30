@@ -44,7 +44,7 @@ namespace System.Net.Http.Formatting.Internal
         >();
 
         /// <summary>
-        /// Creates a new <see cref="System.Net.Http.Formatting.HttpValueCollection"/> instance 
+        /// Creates a new <see cref="System.Net.Http.Formatting.HttpValueCollection"/> instance
         /// </summary>
         public HttpValueCollection() { }
 #else

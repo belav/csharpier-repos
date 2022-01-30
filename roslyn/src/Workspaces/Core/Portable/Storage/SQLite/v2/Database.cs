@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
     {
         /// <summary>
         /// Name of the different dbs.
-        /// 
+        ///
         /// 1. "main" is the default that sqlite uses.  This just allows us to be explicit that we
         /// want this db.
         ///

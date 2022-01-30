@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
     /// window are things that appear to be 'side effect free'.  Note: because we only use the syntax
     /// tree for this, it's possible for us to get this wrong.  However, this should only happen in
     /// code that behaves unexpectedly.  For example, we will assume that "a + b" is side effect free
-    /// (when in practice it may not be).  
-    /// 
+    /// (when in practice it may not be).
+    ///
     /// The general tactic we take is to add the expressions for the statements on the
     /// line the debugger is currently at.  We will also try to find the 'previous' statement as well
     /// to add the expressions from that.  The 'previous' statement is a bit of an interesting beast.

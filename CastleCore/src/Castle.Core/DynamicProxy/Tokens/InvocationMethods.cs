@@ -20,8 +20,8 @@ namespace Castle.DynamicProxy.Tokens
     using Castle.DynamicProxy.Internal;
 
     /// <summary>
-	///   Holds <see cref = "MethodInfo" /> objects representing methods of <see cref = "AbstractInvocation" /> class.
-	/// </summary>
+    ///   Holds <see cref = "MethodInfo" /> objects representing methods of <see cref = "AbstractInvocation" /> class.
+    /// </summary>
     internal static class InvocationMethods
     {
         public static readonly ConstructorInfo CompositionInvocationConstructor =

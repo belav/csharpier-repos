@@ -54,7 +54,7 @@ namespace System.CommandLine.Benchmarks.DragonFruit
         ///         </summary>
         ///         <param>....</param>
         ///         static int Main(int p1, string p2, bool p3) { return 0; }
-        ///     } 
+        ///     }
         /// }
         /// </code>
         /// </remarks>>

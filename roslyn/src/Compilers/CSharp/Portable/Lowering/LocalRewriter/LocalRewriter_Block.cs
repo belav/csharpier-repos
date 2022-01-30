@@ -104,8 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="replacedLocalDeclarations">Set to true if this visited a <see cref="BoundUsingLocalDeclarations"/> node</param>
         /// <returns>A <see cref="BoundStatement"/></returns>
         /// <remarks>
-        /// The node being visited is not necessarily equal to statements[startIndex]. 
-        /// When traversing down a set of labels, we set node to the label.body and recurse, but statements[startIndex] still refers to the original parent label 
+        /// The node being visited is not necessarily equal to statements[startIndex].
+        /// When traversing down a set of labels, we set node to the label.body and recurse, but statements[startIndex] still refers to the original parent label
         /// as we haven't actually moved down the original statement list
         /// </remarks>
         public BoundStatement? VisitPossibleUsingDeclaration(

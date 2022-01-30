@@ -14,67 +14,67 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         /*
             These are the predefined binary operator signatures
-
-                (object,    object)     :                   == !=
-                (string,    string)     :                   == !=
-                (string,    string)     :       +
-                (string,    object)     :       +
-                (object,    string)     :       +
-
-                (int,       int)        :  / % + - << >>   == != < > <= >=&| ^
-                (uint,      uint)       :  / % + -         == != < > <= >=&| ^
-                (long,      long)       :  / % + -         == != < > <= >=&| ^
-                (ulong,     ulong)      :  / % + -         == != < > <= >=&| ^
-                (uint,      int)        :           << >>
-                (long,      int)        :           << >>
-                (ulong,     int)        :           << >>
-
-                (float,     float)      :  / % + -         == != < > <= >=
-                (double,    double)     :  / % + -         == != < > <= >=
-                (decimal,   decimal)    :  / % + -         == != < > <= >=
-
-                (bool,      bool)       :                   == !=          &| ^ && ||
-
-                (Sys.Del,   Sys.Del)    :                   == !=
-
-                // Below here the types cannot be represented entirely by a PREDEFTYPE.
-                (delegate,  delegate)   :       + -         == !=
-
-                (enum,      enum)       :         -         == != < > <= >=&| ^
-                (enum,      under)      :       + -
-                (under,     enum)       :       +
-
-                (ptr,       ptr)        :         -     Not callable through dynamic
-                (ptr,       int)        :       + -     Not callable through dynamic
-                (ptr,       uint)       :       + -     Not callable through dynamic
-                (ptr,       long)       :       + -     Not callable through dynamic
-                (ptr,       ulong)      :       + -     Not callable through dynamic
-                (int,       ptr)        :       +       Not callable through dynamic
-                (uint,      ptr)        :       +       Not callable through dynamic
-                (long,      ptr)        :       +       Not callable through dynamic
-                (ulong,     ptr)        :       +       Not callable through dynamic
-
-                (void,     void)      :                   == != < > <= >=
-
+            
+            (object,    object)     :                   == !=
+            (string,    string)     :                   == !=
+            (string,    string)     :       +
+            (string,    object)     :       +
+            (object,    string)     :       +
+            
+            (int,       int)        :  / % + - << >>   == != < > <= >=&| ^
+            (uint,      uint)       :  / % + -         == != < > <= >=&| ^
+            (long,      long)       :  / % + -         == != < > <= >=&| ^
+            (ulong,     ulong)      :  / % + -         == != < > <= >=&| ^
+            (uint,      int)        :           << >>
+            (long,      int)        :           << >>
+            (ulong,     int)        :           << >>
+            
+            (float,     float)      :  / % + -         == != < > <= >=
+            (double,    double)     :  / % + -         == != < > <= >=
+            (decimal,   decimal)    :  / % + -         == != < > <= >=
+            
+            (bool,      bool)       :                   == !=          &| ^ && ||
+            
+            (Sys.Del,   Sys.Del)    :                   == !=
+            
+            // Below here the types cannot be represented entirely by a PREDEFTYPE.
+            (delegate,  delegate)   :       + -         == !=
+            
+            (enum,      enum)       :         -         == != < > <= >=&| ^
+            (enum,      under)      :       + -
+            (under,     enum)       :       +
+            
+            (ptr,       ptr)        :         -     Not callable through dynamic
+            (ptr,       int)        :       + -     Not callable through dynamic
+            (ptr,       uint)       :       + -     Not callable through dynamic
+            (ptr,       long)       :       + -     Not callable through dynamic
+            (ptr,       ulong)      :       + -     Not callable through dynamic
+            (int,       ptr)        :       +       Not callable through dynamic
+            (uint,      ptr)        :       +       Not callable through dynamic
+            (long,      ptr)        :       +       Not callable through dynamic
+            (ulong,     ptr)        :       +       Not callable through dynamic
+            
+            (void,     void)      :                   == != < > <= >=
+            
             There are the predefined unary operator signatures:
-
-                int     : + -   ~
-                uint    : +     ~
-                long    : + -   ~
-                ulong   : +     ~
-
-                float   : + -
-                double  : + -
-                decimal : + -
-
-                bool    :     !
-
-                // Below here the types cannot be represented entirely by a PREDEFTYPE.
-                enum    :       ~
-                ptr     :
-
+            
+            int     : + -   ~
+            uint    : +     ~
+            long    : + -   ~
+            ulong   : +     ~
+            
+            float   : + -
+            double  : + -
+            decimal : + -
+            
+            bool    :     !
+            
+            // Below here the types cannot be represented entirely by a PREDEFTYPE.
+            enum    :       ~
+            ptr     :
+            
             Note that pointer operators cannot be lifted over nullable and are not callable through dynamic
-        */
+            */
 
         // BinOpBindMethod and UnaOpBindMethod are method pointer arrays to dispatch the appropriate operator binder.
         // Method pointers must be in the order of the corresponding enums. We check this when the full signature is set.
@@ -715,7 +715,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         /*
             This handles binding binary operators by first checking for user defined operators, then
             applying overload resolution to the predefined operators. It handles lifting over nullable.
-        */
+            */
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public Expr BindStandardBinop(ExpressionKind ek, Expr arg1, Expr arg2)
@@ -947,7 +947,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         /*
             Get the special signatures when at least one of the args is a delegate instance.
             Returns true iff an exact signature match is found.
-        */
+            */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private bool GetDelBinOpSigs(List<BinOpFullSig> prgbofs, BinOpArgInfo info)
         {
@@ -1016,7 +1016,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         /*
             Utility method to determine whether arg1 is convertible to typeDst, either in a regular
             scenario or lifted scenario. Sets pgrflt, ptypeSig1 and ptypeSig2 accordingly.
-        */
+            */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private bool CanConvertArg1(
             BinOpArgInfo info,
@@ -1055,7 +1055,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Same as CanConvertArg1 but with the indices interchanged!
-        */
+            */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private bool CanConvertArg2(
             BinOpArgInfo info,
@@ -1095,7 +1095,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         /*
             Record the appropriate binary operator full signature from the given BinOpArgInfo. This assumes
             that any NullableType valued args should be lifted.
-        */
+            */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private static void RecordBinOpSigFromArgs(List<BinOpFullSig> prgbofs, BinOpArgInfo info)
         {
@@ -1140,7 +1140,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         /*
             Get the special signatures when at least one of the args is an enum.  Return true if
             we find an exact match.
-        */
+            */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private bool GetEnumBinOpSigs(List<BinOpFullSig> prgbofs, BinOpArgInfo info)
         {
@@ -1252,7 +1252,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             See if standard reference equality applies. Make sure not to return true if another == operator
             may be applicable and better (or ambiguous)! This also handles == on System.Delegate, since
             it has special rules as well.
-        */
+            */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private bool GetRefEqualSigs(List<BinOpFullSig> prgbofs, BinOpArgInfo info)
         {
@@ -1396,14 +1396,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         /*
             Determine which BinOpSig is better for overload resolution.
             Better means: at least as good in all Params, and better in at least one param.
-
+            
             Better w/r to a param means:
             1) same type as argument
             2) implicit conversion from this one's param type to the other's param type
             Because of user defined conversion operators this relation is not transitive.
-
+            
             Returns negative if ibos1 is better, positive if ibos2 is better, 0 if neither.
-        */
+            */
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private int WhichBofsIsBetter(
@@ -1984,7 +1984,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         /*
             Determine which UnaOpSig is better for overload resolution.
             Returns negative if iuos1 is better, positive if iuos2 is better, 0 if neither.
-        */
+            */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private int WhichUofsIsBetter(UnaOpFullSig uofs1, UnaOpFullSig uofs2, CType typeArg)
         {
@@ -2011,7 +2011,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles standard binary integer based operators.
-        */
+            */
         private static ExprOperator BindIntBinOp(
             ExpressionBinder binder,
             ExpressionKind ek,
@@ -2030,7 +2030,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles standard unary integer based operators.
-        */
+            */
         private static ExprOperator BindIntUnaOp(
             ExpressionBinder binder,
             ExpressionKind ek,
@@ -2044,7 +2044,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles standard binary floating point (float, double) based operators.
-        */
+            */
         private static ExprOperator BindRealBinOp(
             ExpressionBinder binder,
             ExpressionKind ek,
@@ -2063,7 +2063,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles standard unary floating point (float, double) based operators.
-        */
+            */
         private static ExprOperator BindRealUnaOp(
             ExpressionBinder binder,
             ExpressionKind ek,
@@ -2077,7 +2077,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles standard increment and decrement operators.
-        */
+            */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private Expr BindIncOp(ExpressionKind ek, EXPRFLAG flags, Expr arg, UnaOpFullSig uofs)
         {
@@ -2270,7 +2270,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Handles standard binary decimal based operators.
             This function is called twice by the EE for every binary operator it evaluates
             Here is how it works.
-        */
+            */
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",
@@ -2322,7 +2322,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles standard unary decimal based operators.
-        */
+            */
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -2357,7 +2357,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles string concatenation.
-        */
+            */
         private static Expr BindStrBinOp(
             ExpressionBinder _,
             ExpressionKind ek,
@@ -2377,7 +2377,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         /*
             Bind a shift operator: <<, >>. These can have integer or long first operands,
             and second operand must be int.
-        */
+            */
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",
@@ -2409,7 +2409,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         /*
             Bind a bool binary operator: ==, !=, &&, ||, , |, ^. If both operands are constant, the
             result will be a constant also.
-        */
+            */
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",
@@ -2510,7 +2510,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles boolean unary operator (!).
-        */
+            */
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",
@@ -2545,7 +2545,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles string equality.
-        */
+            */
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",
@@ -2584,7 +2584,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles reference equality operators. Type variables come through here.
-        */
+            */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private static ExprBinOp BindRefCmpOp(
             ExpressionBinder binder,
@@ -2618,7 +2618,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles delegate binary operators.
-        */
+            */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private static Expr BindDelBinOp(
             ExpressionBinder _,
@@ -2675,7 +2675,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles enum binary operators.
-        */
+            */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private static Expr BindEnumBinOp(
             ExpressionBinder binder,
@@ -2772,7 +2772,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Handles enum unary operator (~).
-        */
+            */
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private static Expr BindEnumUnaOp(
             ExpressionBinder binder,
@@ -2802,7 +2802,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
             Given a binary operator EXPRKIND, get the BinOpKind and flags.
-        */
+            */
         private (BinOpKind, EXPRFLAG) GetBinopKindAndFlags(ExpressionKind ek)
         {
             BinOpKind pBinopKind;
@@ -2877,7 +2877,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         /*
             Convert an expression involving I4, U4, I8 or U8 operands. The operands are
             assumed to be already converted to the correct types.
-        */
+            */
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",
@@ -2996,7 +2996,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
           Bind an float/double operator: +, -, , /, %, <, >, <=, >=, ==, !=. If both operations are constants, the result
           will be a constant also. op2 can be null for a unary operator. The operands are assumed
           to be already converted to the correct type.
-         */
+          */
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -3053,7 +3053,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         /*
           Report an ambiguous operator types error.
-         */
+          */
         private static RuntimeBinderException AmbiguousOperatorError(Expr op1, Expr op2)
         {
             Debug.Assert(op1 != null);

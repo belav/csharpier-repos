@@ -216,7 +216,7 @@ namespace System.Xml.Schema
 
         /*internal static XmlSchemaException Create(string res) { //Since internal overload with res string will clash with public constructor that takes in a message
             return new XmlSchemaException(res, (string[])null, null, null, 0, 0, null);
-        }*/
+            }*/
 
         internal void SetSource(string? sourceUri, int lineNumber, int linePosition)
         {

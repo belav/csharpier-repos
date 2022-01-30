@@ -51,7 +51,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             );
 
         /// <summary>
-        /// <see cref="Accessor{TKey, TWriteQueueKey, TDatabaseId}"/> responsible for storing and 
+        /// <see cref="Accessor{TKey, TWriteQueueKey, TDatabaseId}"/> responsible for storing and
         /// retrieving data from <see cref="DocumentDataTableName"/>.
         /// </summary>
         private class DocumentAccessor

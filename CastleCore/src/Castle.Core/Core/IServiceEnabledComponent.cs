@@ -17,16 +17,16 @@ namespace Castle.Core
     using System;
 
     /// <summary>
-	/// Defines that the implementation wants a 
-	/// <see cref="IServiceProvider"/> in order to 
-	/// access other components. The creator must be aware
-	/// that the component might (or might not) implement 
-	/// the interface.
-	/// </summary>
-	/// <remarks>
-	/// Used by Castle Project components to, for example, 
-	/// gather logging factories
-	/// </remarks>
+    /// Defines that the implementation wants a
+    /// <see cref="IServiceProvider"/> in order to
+    /// access other components. The creator must be aware
+    /// that the component might (or might not) implement
+    /// the interface.
+    /// </summary>
+    /// <remarks>
+    /// Used by Castle Project components to, for example,
+    /// gather logging factories
+    /// </remarks>
     public interface IServiceEnabledComponent
     {
         void Service(IServiceProvider provider);

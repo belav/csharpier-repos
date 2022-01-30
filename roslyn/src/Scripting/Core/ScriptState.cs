@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// Caught exception originating from the script top-level code.
         /// </summary>
         /// <remarks>
-        /// Exceptions are only caught and stored here if the API returning the <see cref="ScriptState"/> is instructed to do so. 
+        /// Exceptions are only caught and stored here if the API returning the <see cref="ScriptState"/> is instructed to do so.
         /// By default they are propagated to the caller of the API.
         /// </remarks>
         public Exception Exception { get; }
@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         }
 
         /// <summary>
-        /// Returns a script variable of the specified name. 
-        /// </summary> 
+        /// Returns a script variable of the specified name.
+        /// </summary>
         /// <remarks>
         /// If multiple script variables are defined in the script (in distinct submissions) returns the last one.
         /// Name lookup is case sensitive in C# scripts and case insensitive in VB scripts.

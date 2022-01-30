@@ -40,7 +40,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
             /// <summary>
             /// Gets all the diagnostics to fix in the given project in a <see cref="FixAllContext"/>.
-            /// This includes both document-level diagnostics for all documents in the given project and project-level diagnostics, i.e. diagnostics with no source location, in the given project. 
+            /// This includes both document-level diagnostics for all documents in the given project and project-level diagnostics, i.e. diagnostics with no source location, in the given project.
             /// </summary>
             public abstract Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(
                 Project project,

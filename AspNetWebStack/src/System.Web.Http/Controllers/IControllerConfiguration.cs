@@ -5,7 +5,7 @@ namespace System.Web.Http.Controllers
 {
     /// <summary>
     /// If a controller is decorated with an attribute with this interface, then it gets invoked
-    /// to initialize the controller settings. 
+    /// to initialize the controller settings.
     /// </summary>
     public interface IControllerConfiguration
     {

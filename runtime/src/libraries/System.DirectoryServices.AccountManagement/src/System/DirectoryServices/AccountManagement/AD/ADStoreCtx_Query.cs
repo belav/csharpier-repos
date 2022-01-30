@@ -586,26 +586,26 @@ namespace System.DirectoryServices.AccountManagement
         /*** If standard bool conversion is needed uncomment this function
                 protected static string BoolConverter(FilterBase filter, string suggestedAdProperty)
                 {
-                    StringBuilder sb = new StringBuilder();
-
-                    if (filter.Value != null)
-                    {
-                        sb.Append('(');
-                        sb.Append(suggestedAdProperty);
-                        sb.Append('=');
-                        sb.Append( (bool)filter.Value ? "TRUE" : "FALSE" );
-                        sb.Append(')');
-                    }
-                    else
-                    {
-                        sb.Append("(!(");
-                        sb.Append(suggestedAdProperty);
-                        sb.Append("=*))");
-                    }
-
-                    return sb.ToString();
+                StringBuilder sb = new StringBuilder();
+                
+                if (filter.Value != null)
+                {
+                sb.Append('(');
+                sb.Append(suggestedAdProperty);
+                sb.Append('=');
+                sb.Append( (bool)filter.Value ? "TRUE" : "FALSE" );
+                sb.Append(')');
                 }
-        *****/
+                else
+                {
+                sb.Append("(!(");
+                sb.Append(suggestedAdProperty);
+                sb.Append("=*))");
+                }
+                
+                return sb.ToString();
+                }
+                *****/
         protected static string CommaStringConverter(FilterBase filter, string suggestedAdProperty)
         {
             StringBuilder sb = new StringBuilder();

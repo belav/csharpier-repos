@@ -2721,7 +2721,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         /// <summary>
         /// Changes in this function around member parsing should be mirrored in <see cref="ParseMemberDeclarationCore"/>.
-        /// Try keeping structure of both functions similar to simplify this task. The split was made to 
+        /// Try keeping structure of both functions similar to simplify this task. The split was made to
         /// reduce the stack usage during recursive parsing.
         /// </summary>
         /// <returns>Returns null if we can't parse anything (even partially).</returns>
@@ -3444,7 +3444,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         /// <summary>
         /// Changes in this function should be mirrored in <see cref="ParseMemberDeclarationOrStatementCore"/>.
-        /// Try keeping structure of both functions similar to simplify this task. The split was made to 
+        /// Try keeping structure of both functions similar to simplify this task. The split was made to
         /// reduce the stack usage during recursive parsing.
         /// </summary>
         /// <returns>Returns null if we can't parse anything (even partially).</returns>

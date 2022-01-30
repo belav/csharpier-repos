@@ -458,15 +458,15 @@ namespace System.Transactions.Tests
                         {
                             irm.Value = 4;
                             /* Not completing this, so the transaction will
-                        * get aborted
-                       scope2.Complete (); */
+                            * get aborted
+                            scope2.Complete (); */
                         }
 
                         using (TransactionScope scope3 = new TransactionScope())
                         {
                             /* Aborted transaction cannot be used for another
-                        * TransactionScope
-                        */
+                            * TransactionScope
+                            */
                         }
                     }
                 }
@@ -488,7 +488,7 @@ namespace System.Transactions.Tests
                     irm.Value = 4;
                     /* Not completing this, so the transaction will
                      * get aborted
-                    scope2.Complete (); */
+                     scope2.Complete (); */
                 }
 
                 using (
@@ -522,8 +522,8 @@ namespace System.Transactions.Tests
                         {
                             irm.Value = 4;
                             /* Not completing this, so the transaction will
-                        * get aborted
-                       scope2.Complete (); */
+                            * get aborted
+                            scope2.Complete (); */
                         }
 
                         scope.Complete();
@@ -591,9 +591,9 @@ namespace System.Transactions.Tests
                         irm3.Value = 24;
 
                         /* irm2 won't call Prepared or ForceRollback in
-                     * its Prepare (), so TransactionManager will timeout
-                     * waiting for it
-                     */
+                        * its Prepare (), so TransactionManager will timeout
+                        * waiting for it
+                        */
                         irm2.IgnorePrepare = true;
                         scope.Complete();
                     }
@@ -857,8 +857,8 @@ namespace System.Transactions.Tests
                     ct.Commit();
 
                     /* Using an already committed transaction in a new
-                 * TransactionScope
-                 */
+                    * TransactionScope
+                    */
                     TransactionScope scope = new TransactionScope(ct);
                 }
             );

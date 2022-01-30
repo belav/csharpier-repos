@@ -15,18 +15,18 @@
 namespace Castle.Components.DictionaryAdapter
 {
     /// <summary>
-	/// Defines the contract for updating dictionary values.
-	/// </summary>
+    /// Defines the contract for updating dictionary values.
+    /// </summary>
     public interface IDictionaryPropertySetter : IDictionaryBehavior
     {
         /// <summary>
-		/// Sets the stored dictionary value.
-		/// </summary>
-		/// <param name="dictionaryAdapter">The dictionary adapter.</param>
-		/// <param name="key">The key.</param>
-		/// <param name="value">The stored value.</param>
-		/// <param name="property">The property.</param>
-		/// <returns>true if the property should be stored.</returns>
+        /// Sets the stored dictionary value.
+        /// </summary>
+        /// <param name="dictionaryAdapter">The dictionary adapter.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The stored value.</param>
+        /// <param name="property">The property.</param>
+        /// <returns>true if the property should be stored.</returns>
         bool SetPropertyValue(
             IDictionaryAdapter dictionaryAdapter,
             string key,

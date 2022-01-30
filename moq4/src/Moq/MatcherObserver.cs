@@ -9,15 +9,15 @@ using System.Linq;
 namespace Moq
 {
     /// <summary>
-	///   A per-thread observer that records invocations to matchers for later inspection.
-	/// </summary>
-	/// <remarks>
-	///   <para>
-	///     This component requires the active cooperation of the respective subsystem.
-	///     That is, invoked matchers call into <see cref="OnMatch(Match)"/> if an
-	///     observer is active on the current thread.
-	///   </para>
-	/// </remarks>
+    ///   A per-thread observer that records invocations to matchers for later inspection.
+    /// </summary>
+    /// <remarks>
+    ///   <para>
+    ///     This component requires the active cooperation of the respective subsystem.
+    ///     That is, invoked matchers call into <see cref="OnMatch(Match)"/> if an
+    ///     observer is active on the current thread.
+    ///   </para>
+    /// </remarks>
     internal sealed class MatcherObserver : IDisposable
     {
         [ThreadStatic]
@@ -66,17 +66,17 @@ namespace Moq
         }
 
         /// <summary>
-		///   Returns the current timestamp. The next call will return a timestamp greater than this one,
-		///   allowing you to order invocations and matcher observations.
-		/// </summary>
+        ///   Returns the current timestamp. The next call will return a timestamp greater than this one,
+        ///   allowing you to order invocations and matcher observations.
+        /// </summary>
         public int GetNextTimestamp()
         {
             return ++this.timestamp;
         }
 
         /// <summary>
-		///   Adds the specified <see cref="Match"/> as an observation.
-		/// </summary>
+        ///   Adds the specified <see cref="Match"/> as an observation.
+        /// </summary>
         public void OnMatch(Match match)
         {
             if (this.observations == null)
@@ -88,10 +88,10 @@ namespace Moq
         }
 
         /// <summary>
-		///   Checks whether at least one <see cref="Match"/> observation is available,
-		///   and if so, returns the last one.
-		/// </summary>
-		/// <param name="match">The observed <see cref="Match"/> matcher observed last.</param>
+        ///   Checks whether at least one <see cref="Match"/> observation is available,
+        ///   and if so, returns the last one.
+        /// </summary>
+        /// <param name="match">The observed <see cref="Match"/> matcher observed last.</param>
         public bool TryGetLastMatch(out Match match)
         {
             if (this.observations != null && this.observations.Count > 0)

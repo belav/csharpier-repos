@@ -8,8 +8,8 @@ using System.Runtime.CompilerServices;
 namespace Moq.Expressions.Visitors
 {
     /// <summary>
-	///   Evaluates variables that have been closed over by a lambda function.
-	/// </summary>
+    ///   Evaluates variables that have been closed over by a lambda function.
+    /// </summary>
     internal sealed class EvaluateCaptures : ExpressionVisitor
     {
         public static readonly ExpressionVisitor Rewriter = new EvaluateCaptures();

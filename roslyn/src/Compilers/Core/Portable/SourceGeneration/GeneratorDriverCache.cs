@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis
         public int CacheSize => _cacheSize;
 
         /// <summary>
-        /// Attempts to find a driver based on <paramref name="cacheKey"/>. If a matching driver is found in the 
+        /// Attempts to find a driver based on <paramref name="cacheKey"/>. If a matching driver is found in the
         /// cache, or explicitly passed via <paramref name="driver"/>, the cache is updated so that it is at the
         /// head of the list.
         /// </summary>

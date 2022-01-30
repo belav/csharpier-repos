@@ -8,8 +8,8 @@ using System.Web.Http.Metadata;
 namespace System.Web.Http.Controllers
 {
     /// <summary>
-    /// Describes how a parameter is bound. The binding should be static (based purely on the descriptor) and 
-    /// can be shared across requests. 
+    /// Describes how a parameter is bound. The binding should be static (based purely on the descriptor) and
+    /// can be shared across requests.
     /// </summary>
     public abstract class HttpParameterBinding
     {
@@ -26,7 +26,7 @@ namespace System.Web.Http.Controllers
 
         /// <summary>
         /// True iff this binding owns the body. This is important since the body can be a stream that is only read once.
-        /// This lets us know who is trying to read the body, and enforce that there is only one reader. 
+        /// This lets us know who is trying to read the body, and enforce that there is only one reader.
         /// </summary>
         public virtual bool WillReadBody
         {
@@ -34,9 +34,9 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// True if the binding was successful and ExecuteBinding can be called. 
-        /// False if there was an error determining this binding. This means a developer error somewhere, such as 
-        /// configuration, parameter types, proper attributes, etc. 
+        /// True if the binding was successful and ExecuteBinding can be called.
+        /// False if there was an error determining this binding. This means a developer error somewhere, such as
+        /// configuration, parameter types, proper attributes, etc.
         /// </summary>
         public bool IsValid
         {
@@ -44,7 +44,7 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Get an error message describing why this binding is invalid. 
+        /// Get an error message describing why this binding is invalid.
         /// </summary>
         public virtual string ErrorMessage
         {
@@ -90,7 +90,7 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Helper to set the result of this parameter binding in the action context's argument dictionary. 
+        /// Helper to set the result of this parameter binding in the action context's argument dictionary.
         /// </summary>
         /// <param name="actionContext">action context.</param>
         /// <param name="value">parameter value.</param>

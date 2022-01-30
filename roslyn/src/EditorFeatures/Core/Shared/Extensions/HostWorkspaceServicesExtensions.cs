@@ -43,7 +43,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         }
 
         /// <summary>
-        /// Returns the name of the language (see <see cref="LanguageNames"/>) associated with the specified buffer. 
+        /// Returns the name of the language (see <see cref="LanguageNames"/>) associated with the specified buffer.
         /// </summary>
         internal static string? GetLanguageName(this ITextBuffer buffer) =>
             Workspace.TryGetWorkspace(buffer.AsTextContainer(), out var workspace)

@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// Represents an analyzer assembly reference that contains diagnostic analyzers.
     /// </summary>
     /// <remarks>
-    /// Represents a logical location of the analyzer reference, not the content of the reference. 
+    /// Represents a logical location of the analyzer reference, not the content of the reference.
     /// The content might change in time. A snapshot is taken when the compiler queries the reference for its analyzers.
     /// </remarks>
     public abstract class AnalyzerReference

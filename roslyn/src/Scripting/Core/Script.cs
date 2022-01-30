@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Scripting
 {
     /// <summary>
     /// A class that represents a script that you can run.
-    /// 
+    ///
     /// Create a script using a language specific script class such as CSharpScript or VisualBasicScript.
     /// </summary>
     public abstract class Script
@@ -77,7 +77,7 @@ namespace Microsoft.CodeAnalysis.Scripting
         }
 
         /// <summary>
-        /// A script that will run first when this script is run. 
+        /// A script that will run first when this script is run.
         /// Any declarations made in the previous script can be referenced in this script.
         /// The end state from running this script includes all declarations made by both scripts.
         /// </summary>

@@ -17,10 +17,10 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.ChangeSignature
 {
     /// <summary>
-    /// For ChangeSignature, FAR on a delegate invoke method must cascade to BeginInvoke, 
+    /// For ChangeSignature, FAR on a delegate invoke method must cascade to BeginInvoke,
     /// cascade through method group conversions, and discover implicit invocations that do not
     /// mention the string "Invoke" or the delegate type itself. This implementation finds these
-    /// symbols by binding most identifiers and invocation expressions in the solution. 
+    /// symbols by binding most identifiers and invocation expressions in the solution.
     /// </summary>
     /// <remarks>
     /// TODO: Rewrite this to track backward through references instead of binding everything

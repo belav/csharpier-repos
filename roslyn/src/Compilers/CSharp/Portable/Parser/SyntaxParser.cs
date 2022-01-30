@@ -1106,8 +1106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         /// <summary>
-        /// This function searches for the given location node within the subtree rooted at root node. 
-        /// If it finds it, the function computes the offset span of that child node within the root and returns true, 
+        /// This function searches for the given location node within the subtree rooted at root node.
+        /// If it finds it, the function computes the offset span of that child node within the root and returns true,
         /// otherwise it returns false.
         /// </summary>
         /// <param name="root">Root node</param>

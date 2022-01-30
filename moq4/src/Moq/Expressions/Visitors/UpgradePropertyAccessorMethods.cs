@@ -9,22 +9,22 @@ using System.Reflection;
 namespace Moq.Expressions.Visitors
 {
     /// <summary>
-	///   Replaces <see cref="ExpressionType.Call"/> nodes for property or indexer accessor methods
-	///   with equivalent <see cref="ExpressionType.MemberAccess"/> nodes.
-	///   <para>
-	///     <list type="bullet">
-	///       <item>
-	///         In the case of getter accessors such as `x.get_Property()`, the result will be
-	///         a single <see cref="ExpressionType.MemberAccess"/> node: `x.Property`.
-	///       </item>
-	///       <item>
-	///         In the case of setter accessors such as `x.set_Property(y)`, the result will be
-	///         a combination of <see cref="ExpressionType.Assign"/> and <see cref="ExpressionType.MemberAccess"/>:
-	///         `x.Property = y`.
-	///       </item>
-	///     </list>
-	///   </para>
-	/// </summary>
+    ///   Replaces <see cref="ExpressionType.Call"/> nodes for property or indexer accessor methods
+    ///   with equivalent <see cref="ExpressionType.MemberAccess"/> nodes.
+    ///   <para>
+    ///     <list type="bullet">
+    ///       <item>
+    ///         In the case of getter accessors such as `x.get_Property()`, the result will be
+    ///         a single <see cref="ExpressionType.MemberAccess"/> node: `x.Property`.
+    ///       </item>
+    ///       <item>
+    ///         In the case of setter accessors such as `x.set_Property(y)`, the result will be
+    ///         a combination of <see cref="ExpressionType.Assign"/> and <see cref="ExpressionType.MemberAccess"/>:
+    ///         `x.Property = y`.
+    ///       </item>
+    ///     </list>
+    ///   </para>
+    /// </summary>
     internal sealed class UpgradePropertyAccessorMethods : ExpressionVisitor
     {
         public static readonly ExpressionVisitor Rewriter = new UpgradePropertyAccessorMethods();

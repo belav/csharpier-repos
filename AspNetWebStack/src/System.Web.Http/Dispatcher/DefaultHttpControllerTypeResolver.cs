@@ -123,8 +123,8 @@ namespace System.Web.Http.Dispatcher
         }
 
         /// <summary>
-        /// We match if type name ends with "Controller" and that is not the only part of the 
-        /// name (i.e it can't be just "Controller"). The reason is that the route name has to 
+        /// We match if type name ends with "Controller" and that is not the only part of the
+        /// name (i.e it can't be just "Controller"). The reason is that the route name has to
         /// be a non-empty prefix of the controller type name.
         /// </summary>
         internal static bool HasValidControllerName(Type controllerType)

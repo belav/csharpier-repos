@@ -71,11 +71,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// True if this is a Windows Runtime-style event.
-        /// 
+        ///
         /// A normal C# event, "event D E", has accessors
         ///     void add_E(D d)
         ///     void remove_E(D d)
-        /// 
+        ///
         /// A Windows Runtime event, "event D E", has accessors
         ///     EventRegistrationToken add_E(D d)
         ///     void remove_E(EventRegistrationToken t)

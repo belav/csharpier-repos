@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// the syntax with which it is created. This binder is not created in reaction to any
     /// specific syntax node type. It is inserted into the binder chain
     /// between the binder which it is constructed with and those that it constructs via
-    /// the LocalBinderFactory. 
+    /// the LocalBinderFactory.
     /// </summary>
     internal sealed class ExecutableCodeBinder : Binder
     {

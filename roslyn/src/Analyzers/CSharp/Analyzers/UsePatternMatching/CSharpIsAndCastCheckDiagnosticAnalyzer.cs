@@ -17,14 +17,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 {
     /// <summary>
     /// Looks for code of the form:
-    /// 
+    ///
     ///     if (expr is Type)
     ///     {
     ///         var v = (Type)expr;
     ///     }
-    ///     
+    ///
     /// and converts it to:
-    /// 
+    ///
     ///     if (expr is Type v)
     ///     {
     ///     }

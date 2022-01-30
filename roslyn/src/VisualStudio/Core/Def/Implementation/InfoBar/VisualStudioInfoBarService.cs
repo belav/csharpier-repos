@@ -27,10 +27,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         private readonly IAsynchronousOperationListener _listener;
 
         /// <summary>
-        /// Keep track of the messages that are currently being shown to the user.  If we would 
+        /// Keep track of the messages that are currently being shown to the user.  If we would
         /// show the same message again, block that from happening so we don't spam the user with
         /// the same message.  When the info bar item is dismissed though, we then may show the
-        /// same message in the future.  This is important for user clarity as it's possible for 
+        /// same message in the future.  This is important for user clarity as it's possible for
         /// a feature to fail for some reason, then work fine for a while, then fail again.  We want
         /// the second failure message to be reported to ensure the user is not confused.
         /// </summary>

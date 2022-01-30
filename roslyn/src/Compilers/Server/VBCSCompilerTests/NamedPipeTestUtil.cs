@@ -14,9 +14,9 @@ using Roslyn.Test.Utilities;
 namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 {
     /// <summary>
-    /// This is a HACK that allows you to get at the underlying Socket for a given NamedPipeServerStream 
+    /// This is a HACK that allows you to get at the underlying Socket for a given NamedPipeServerStream
     /// instance. It is very useful it proactively diagnosing bugs in the server code by letting us inspect
-    /// the socket to see if it's disposed, not available, etc ... vs. experiencing flaky bugs that are 
+    /// the socket to see if it's disposed, not available, etc ... vs. experiencing flaky bugs that are
     /// incredibly difficult to track down.
     ///
     /// Do NOT check this into production, it's a unit test utility only

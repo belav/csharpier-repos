@@ -9,7 +9,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// Each application of an attribute is effectively a constructor call.  Since the attribute constructor
     /// might have a CallerMemberName parameter, we need to keep track of which method/property/event
-    /// the attribute is on/in (e.g. on a parameter) so that we can use the name of that member as the 
+    /// the attribute is on/in (e.g. on a parameter) so that we can use the name of that member as the
     /// CallerMemberName argument.
     /// </summary>
     internal sealed class ContextualAttributeBinder : Binder

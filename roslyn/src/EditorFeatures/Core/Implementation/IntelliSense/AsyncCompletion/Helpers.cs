@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         /// Attempts to convert VS Completion trigger into Roslyn completion trigger
         /// </summary>
         /// <param name="trigger">VS completion trigger</param>
-        /// <param name="triggerLocation">Character. 
+        /// <param name="triggerLocation">Character.
         /// VS provides Backspace and Delete characters inside the trigger while Roslyn needs the char deleted by the trigger.
         /// Therefore, we provide this character separately and use it for Delete and Backspace cases only.
         /// We retrieve this character from triggerLocation.

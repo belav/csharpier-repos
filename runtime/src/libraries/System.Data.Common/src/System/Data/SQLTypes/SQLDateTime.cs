@@ -334,17 +334,17 @@ namespace System.Data.SqlTypes
 
         /*
         internal static SqlDateTime FromDouble(double dblVal) {
-            return new SqlDateTime(dblVal);
+        return new SqlDateTime(dblVal);
         }
-
+        
         internal static double ToDouble(SqlDateTime x) {
-            AssertValidSqlDateTime(x);
-            return(double)x.m_day + ((double)x.m_time / (double)SQLTicksPerDay);
+        AssertValidSqlDateTime(x);
+        return(double)x.m_day + ((double)x.m_time / (double)SQLTicksPerDay);
         }
-
+        
         internal static int ToInt(SqlDateTime x) {
-            AssertValidSqlDateTime(x);
-            return x.m_time >= MaxTime / 2 ? x.m_day + 1 : x.m_day;
+        AssertValidSqlDateTime(x);
+        return x.m_time >= MaxTime / 2 ? x.m_day + 1 : x.m_day;
         }
         */
 
@@ -463,78 +463,78 @@ namespace System.Data.SqlTypes
 
         /*
                 // Implicit conversions
-
+                
                 // Implicit conversion from SqlBoolean to SqlDateTime
                 public static implicit operator SqlDateTime(SqlBoolean x)
-                    {
-                    return x.IsNull ? Null : new SqlDateTime(x.Value, 0);
-                    }
-
+                {
+                return x.IsNull ? Null : new SqlDateTime(x.Value, 0);
+                }
+                
                 // Implicit conversion from SqlInt32 to SqlDateTime
                 public static implicit operator SqlDateTime(SqlInt32 x)
-                    {
-                    return x.IsNull ? Null : new SqlDateTime(x.Value, 0);
-                    }
-
+                {
+                return x.IsNull ? Null : new SqlDateTime(x.Value, 0);
+                }
+                
                 // Implicit conversion from SqlMoney to SqlDateTime
                 public static implicit operator SqlDateTime(SqlMoney x)
-                    {
-                    return x.IsNull ? Null : SqlDateTime.FromDouble(x.ToDouble());
-                    }
-
-
+                {
+                return x.IsNull ? Null : SqlDateTime.FromDouble(x.ToDouble());
+                }
+                
+                
                 // Explicit conversions
-
+                
                 // Explicit conversion from SqlDateTime to SqlInt32
                 public static explicit operator SqlInt32(SqlDateTime x)
-                    {
-                    if (x.IsNull)
-                        return SqlInt32.Null;
-
-                    return new SqlInt32(SqlDateTime.ToInt(x));
-                    }
-
+                {
+                if (x.IsNull)
+                return SqlInt32.Null;
+                
+                return new SqlInt32(SqlDateTime.ToInt(x));
+                }
+                
                 // Explicit conversion from SqlDateTime to SqlBoolean
                 public static explicit operator SqlBoolean(SqlDateTime x)
-                    {
-                    if (x.IsNull)
-                        return SqlBoolean.Null;
-
-                    return new SqlBoolean(x.m_day != 0 || x.m_time != 0, false);
-                    }
-
+                {
+                if (x.IsNull)
+                return SqlBoolean.Null;
+                
+                return new SqlBoolean(x.m_day != 0 || x.m_time != 0, false);
+                }
+                
                 // Explicit conversion from SqlDateTime to SqlMoney
                 public static explicit operator SqlMoney(SqlDateTime x)
-                    {
-                    return x.IsNull ? SqlMoney.Null : new SqlMoney(SqlDateTime.ToDouble(x));
-                    }
-
+                {
+                return x.IsNull ? SqlMoney.Null : new SqlMoney(SqlDateTime.ToDouble(x));
+                }
+                
                 // Implicit conversion from SqlDouble to SqlDateTime
                 public static implicit operator SqlDateTime(SqlDouble x)
-                    {
-                    return x.IsNull ? Null : new SqlDateTime(x.Value);
-                    }
-
+                {
+                return x.IsNull ? Null : new SqlDateTime(x.Value);
+                }
+                
                 // Explicit conversion from SqlDateTime to SqlDouble
                 public static explicit operator SqlDouble(SqlDateTime x)
-                    {
-                    return x.IsNull ? SqlDouble.Null : new SqlDouble(SqlDateTime.ToDouble(x));
-                    }
-
-
+                {
+                return x.IsNull ? SqlDouble.Null : new SqlDouble(SqlDateTime.ToDouble(x));
+                }
+                
+                
                 // Implicit conversion from SqlDecimal to SqlDateTime
                 public static implicit operator SqlDateTime(SqlDecimal x)
-                    {
-                    return x.IsNull ? SqlDateTime.Null : new SqlDateTime(SqlDecimal.ToDouble(x));
-                    }
-
+                {
+                return x.IsNull ? SqlDateTime.Null : new SqlDateTime(SqlDecimal.ToDouble(x));
+                }
+                
                 // Explicit conversion from SqlDateTime to SqlDecimal
                 public static explicit operator SqlDecimal(SqlDateTime x)
-                    {
-                    return x.IsNull ? SqlDecimal.Null : new SqlDecimal(SqlDateTime.ToDouble(x));
-                    }
-
-        */
+                {
+                return x.IsNull ? SqlDecimal.Null : new SqlDecimal(SqlDateTime.ToDouble(x));
+                }
+                
+                */
 
         // Explicit conversion from SqlString to SqlDateTime
         // Throws FormatException or OverflowException if necessary.
@@ -549,11 +549,11 @@ namespace System.Data.SqlTypes
         // utility functions
         /*
         private static void AssertValidSqlDateTime(SqlDateTime x) {
-            Debug.Assert(!x.IsNull, "!x.IsNull", "Datetime: Null");
-            Debug.Assert(x.m_day >= MinDay && x.m_day <= MaxDay, "day >= MinDay && day <= MaxDay",
-                           "DateTime: Day out of range");
-            Debug.Assert(x.m_time >= MinTime && x.m_time <= MaxTime, "time >= MinTime && time <= MaxTime",
-                           "DateTime: Time out of range");
+        Debug.Assert(!x.IsNull, "!x.IsNull", "Datetime: Null");
+        Debug.Assert(x.m_day >= MinDay && x.m_day <= MaxDay, "day >= MinDay && day <= MaxDay",
+        "DateTime: Day out of range");
+        Debug.Assert(x.m_time >= MinTime && x.m_time <= MaxTime, "time >= MinTime && time <= MaxTime",
+        "DateTime: Time out of range");
         }
         */
 

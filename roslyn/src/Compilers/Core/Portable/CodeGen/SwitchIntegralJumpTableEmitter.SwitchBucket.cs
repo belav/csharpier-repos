@@ -32,15 +32,15 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ///      case 2:
             ///      case 3:
             ///           DoOneThing();
-            ///           break;               
+            ///           break;
             ///
             ///      case 4:
             ///      case 5:
             ///      case 6:
             ///      case 7:
             ///           DoAnotherThing();
-            ///           break;   
-            ///  
+            ///           break;
+            ///
             ///  NOTE: A trivial bucket with only one case constant is by definition degenerate.
             /// </summary>
             internal bool IsDegenerate

@@ -18,8 +18,8 @@ class Program
         Assert(((ICustomAttributeProvider)assembly).IsDefined(typeof(SingleAttribute<int>), true));
         Assert(CustomAttributeExtensions.IsDefined(assembly, typeof(SingleAttribute<bool>)));
         Assert(((ICustomAttributeProvider)assembly).IsDefined(typeof(SingleAttribute<bool>), true));
-
-*/
+        
+        */
 
         TypeInfo programTypeInfo = typeof(Class).GetTypeInfo();
         Assert(

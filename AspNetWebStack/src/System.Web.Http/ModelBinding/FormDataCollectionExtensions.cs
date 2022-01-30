@@ -231,14 +231,14 @@ namespace System.Web.Http.ModelBinding
         }
 
         /// <summary>
-        /// Deserialize the form data to the given type, using model binding.  
+        /// Deserialize the form data to the given type, using model binding.
         /// </summary>
         /// <param name="formData">collection with parsed form url data</param>
         /// <param name="type">target type to read as</param>
-        /// <param name="modelName">null or empty to read the entire form as a single object. 
-        /// This is common for body data. Or the name of a model to do a partial binding against the form data. 
+        /// <param name="modelName">null or empty to read the entire form as a single object.
+        /// This is common for body data. Or the name of a model to do a partial binding against the form data.
         /// This is common for extracting individual fields.</param>
-        /// <param name="requiredMemberSelector">The <see cref="IRequiredMemberSelector"/> 
+        /// <param name="requiredMemberSelector">The <see cref="IRequiredMemberSelector"/>
         /// used to determine required members.</param>
         /// <param name="formatterLogger">The <see cref="IFormatterLogger"/> to log events to.</param>
         /// <param name="config">The <see cref="HttpConfiguration"/> configuration to pick binder from.

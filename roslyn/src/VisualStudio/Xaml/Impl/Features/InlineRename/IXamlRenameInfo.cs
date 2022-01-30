@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
         bool CanRename { get; }
 
         /// <summary>
-        /// Provides the reason that can be displayed to the user if the entity at the selected 
+        /// Provides the reason that can be displayed to the user if the entity at the selected
         /// location cannot be renamed.
         /// </summary>
         string LocalizedErrorMessage { get; }

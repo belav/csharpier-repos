@@ -203,7 +203,7 @@ namespace System.Web.WebPages.Administration
         }
 
         /// <summary>
-        /// Ensure that the current request is authorized. 
+        /// Ensure that the current request is authorized.
         /// If the request is authenticated, then we skip all other checks.
         /// </summary>
         internal static void Authorize(StartPage page)

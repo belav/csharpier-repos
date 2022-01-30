@@ -1155,8 +1155,8 @@ namespace Moq.Tests
         }
 
         /// <summary>
-		/// Warning, this is a flaky test and doesn't fail when run as standalone. Running all tests at once will increase the chances of that test to fail.
-		/// </summary>
+        /// Warning, this is a flaky test and doesn't fail when run as standalone. Running all tests at once will increase the chances of that test to fail.
+        /// </summary>
         [Fact]
         public void DoesNotThrowCollectionModifiedWhenMoreInvocationsInterceptedDuringVerfication()
         {

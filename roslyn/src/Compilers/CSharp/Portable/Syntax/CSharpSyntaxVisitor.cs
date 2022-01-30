@@ -6,7 +6,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
     /// Represents a <see cref="CSharpSyntaxNode"/> visitor that visits only the single CSharpSyntaxNode
-    /// passed into its Visit method and produces 
+    /// passed into its Visit method and produces
     /// a value of the type specified by the <typeparamref name="TResult"/> parameter.
     /// </summary>
     /// <typeparam name="TResult">

@@ -108,7 +108,7 @@ namespace System.Net.Http.Formatting
 
         /// <summary>
         /// Determine how well each formatter matches by associating a <see cref="MediaTypeFormatterMatchRanking"/> value
-        /// with the formatter. Then associate the quality of the match based on q-factors and other parameters. The result of this 
+        /// with the formatter. Then associate the quality of the match based on q-factors and other parameters. The result of this
         /// method is a collection of the matches found categorized and assigned a quality value.
         /// </summary>
         /// <param name="type">The type to be serialized.</param>
@@ -558,7 +558,7 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Determine whether to match on type or not. This is used to determine whether to
         /// generate a 406 response or use the default media type formatter in case there
-        /// is no match against anything in the request. If ExcludeMatchOnTypeOnly is true 
+        /// is no match against anything in the request. If ExcludeMatchOnTypeOnly is true
         /// then we don't match on type unless there are no accept headers.
         /// </summary>
         /// <param name="sortedAcceptValues">The sorted accept header values to match.</param>
@@ -610,7 +610,7 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Sort Accept header values and related header field values with similar syntax rules 
+        /// Sort Accept header values and related header field values with similar syntax rules
         /// (if more than 1) in descending order based on q-factor.
         /// </summary>
         /// <param name="headerValues">The header values to sort.</param>
@@ -642,7 +642,7 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Sort Accept-Charset, Accept-Encoding, Accept-Language and related header field values with similar syntax rules 
+        /// Sort Accept-Charset, Accept-Encoding, Accept-Language and related header field values with similar syntax rules
         /// (if more than 1) in descending order based on q-factor.
         /// </summary>
         /// <param name="headerValues">The header values to sort.</param>
@@ -671,7 +671,7 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Evaluates whether a match is better than the current match and if so returns the replacement; otherwise returns the 
+        /// Evaluates whether a match is better than the current match and if so returns the replacement; otherwise returns the
         /// current match.
         /// </summary>
         protected virtual MediaTypeFormatterMatch UpdateBestMatch(

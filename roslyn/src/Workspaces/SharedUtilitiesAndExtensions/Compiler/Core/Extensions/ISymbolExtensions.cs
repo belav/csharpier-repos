@@ -629,7 +629,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         /// <returns>
-        /// Returns true if symbol is a local variable and its declaring syntax node is 
+        /// Returns true if symbol is a local variable and its declaring syntax node is
         /// after the current position, false otherwise (including for non-local symbols)
         /// </returns>
         public static bool IsInaccessibleLocal(this ISymbol symbol, int position)

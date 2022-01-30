@@ -197,7 +197,7 @@ namespace AutoMapper.Internal
         IMemberConfiguration AddMemberConfiguration();
 
         /// <summary>
-        /// Allows to enable null-value propagation for query mapping. 
+        /// Allows to enable null-value propagation for query mapping.
         /// <remarks>Some providers (such as EntityFrameworkQueryVisitor) do not work with this feature enabled!</remarks>
         /// </summary>
         bool? EnableNullPropagationForQueryMapping { get; set; }

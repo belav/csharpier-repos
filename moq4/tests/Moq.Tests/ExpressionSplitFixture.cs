@@ -303,9 +303,9 @@ namespace Moq.Tests
         }
 
         /// <summary>
-		///   Helper method producing an assignment <see cref="BinaryExpression"/>.
-		///   Useful because C# does not allow assignments in literal expressions.
-		/// </summary>
+        ///   Helper method producing an assignment <see cref="BinaryExpression"/>.
+        ///   Useful because C# does not allow assignments in literal expressions.
+        /// </summary>
         private static LambdaExpression A<T, TResult>(
             Expression<Func<T, TResult>> left,
             Expression right
@@ -321,27 +321,27 @@ namespace Moq.Tests
         }
 
         /// <summary>
-		///   Helper method producing a <see cref="ConstantExpression"/> for the default value of <typeparamref name="T"/>.
-		/// </summary>
+        ///   Helper method producing a <see cref="ConstantExpression"/> for the default value of <typeparamref name="T"/>.
+        /// </summary>
         private static ConstantExpression D<T>()
         {
             return Expression.Constant(default(T), typeof(T));
         }
 
         /// <summary>
-		///   Helper method producing a <see cref="LambdaExpression"/>.
-		/// </summary>
+        ///   Helper method producing a <see cref="LambdaExpression"/>.
+        /// </summary>
         private static LambdaExpression E<T, TResult>(Expression<Func<T, TResult>> expression)
         {
             return (LambdaExpression)IndexerReplacer.Instance.Visit(expression);
         }
 
         /// <summary>
-		/// Expression visitor that compensates the Roslyn C# compiler's encoding
-		/// indexer accesses as plain method calls. The visitor "lifts" such method
-		/// calls into indexer access representations so we can use them in our unit
-		/// tests without having to construct expression trees manually.
-		/// </summary>
+        /// Expression visitor that compensates the Roslyn C# compiler's encoding
+        /// indexer accesses as plain method calls. The visitor "lifts" such method
+        /// calls into indexer access representations so we can use them in our unit
+        /// tests without having to construct expression trees manually.
+        /// </summary>
         private sealed class IndexerReplacer : ExpressionVisitor
         {
             public static readonly IndexerReplacer Instance = new IndexerReplacer();

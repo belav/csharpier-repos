@@ -2013,8 +2013,8 @@ namespace Internal.JitInterface
                         ((TypeDesc)result).IsRuntimeDeterminedSubtype
                             ||
                             /* If the resolved type is not runtime determined there's a chance we went down this path
-                           because there was a literal typeof(__Canon) in the compiled IL - check for that
-                           by resolving the token in the definition. */
+                            because there was a literal typeof(__Canon) in the compiled IL - check for that
+                            by resolving the token in the definition. */
                             (
                                 (TypeDesc)methodIL
                                     .GetMethodILScopeDefinition()

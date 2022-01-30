@@ -85,17 +85,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// If we have a WinRT type event, we need to encapsulate the adder call
-        /// (which returns an EventRegistrationToken) with a call to 
+        /// (which returns an EventRegistrationToken) with a call to
         /// WindowsRuntimeMarshal.AddEventHandler or RemoveEventHandler, but these
         /// require us to create a new Func representing the adder and another
         /// Action representing the Remover.
-        /// 
+        ///
         /// The rewritten call looks something like:
-        /// 
+        ///
         /// WindowsRuntimeMarshal.AddEventHandler&lt;EventHandler&gt;
-        ///     (new Func&lt;EventHandler, EventRegistrationToken&gt;(@object.add), 
+        ///     (new Func&lt;EventHandler, EventRegistrationToken&gt;(@object.add),
         ///      new Action&lt;EventRegistrationToken&gt;(@object.remove), handler);
-        /// 
+        ///
         /// Where @object is a compiler-generated local temp if needed.
         /// </summary>
         /// <remarks>

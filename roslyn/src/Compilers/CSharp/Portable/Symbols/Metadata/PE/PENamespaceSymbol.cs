@@ -23,13 +23,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
     internal abstract class PENamespaceSymbol : NamespaceSymbol
     {
         /// <summary>
-        /// A map of namespaces immediately contained within this namespace 
+        /// A map of namespaces immediately contained within this namespace
         /// mapped by their name (case-sensitively).
         /// </summary>
         protected Dictionary<string, PENestedNamespaceSymbol> lazyNamespaces;
 
         /// <summary>
-        /// A map of types immediately contained within this namespace 
+        /// A map of types immediately contained within this namespace
         /// grouped by their name (case-sensitively).
         /// </summary>
         protected Dictionary<string, ImmutableArray<PENamedTypeSymbol>> lazyTypes;
@@ -160,16 +160,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         protected abstract void EnsureAllMembersLoaded();
 
         /// <summary>
-        /// Initializes namespaces and types maps with information about 
+        /// Initializes namespaces and types maps with information about
         /// namespaces and types immediately contained within this namespace.
         /// </summary>
         /// <param name="typesByNS">
-        /// The sequence of groups of TypeDef row ids for types contained within the namespace, 
-        /// recursively including those from nested namespaces. The row ids must be grouped by the 
-        /// fully-qualified namespace name case-sensitively. There could be multiple groups 
+        /// The sequence of groups of TypeDef row ids for types contained within the namespace,
+        /// recursively including those from nested namespaces. The row ids must be grouped by the
+        /// fully-qualified namespace name case-sensitively. There could be multiple groups
         /// for each fully-qualified namespace name. The groups must be sorted by
-        /// their key in case-sensitive manner. Empty string must be used as namespace name for types 
-        /// immediately contained within Global namespace. Therefore, all types in this namespace, if any, 
+        /// their key in case-sensitive manner. Empty string must be used as namespace name for types
+        /// immediately contained within Global namespace. Therefore, all types in this namespace, if any,
         /// must be in several first IGroupings.
         /// </param>
         protected void LoadAllMembers(

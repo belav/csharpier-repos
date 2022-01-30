@@ -155,9 +155,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         /// <summary>
         /// Called right after we instantiate the language service.  Used to set up any internal
         /// state we need.
-        /// 
+        ///
         /// Try to keep this method fairly clean.  Any complicated logic should go in methods called
-        /// from this one.  Initialize and Uninitialize go in reverse order 
+        /// from this one.  Initialize and Uninitialize go in reverse order
         /// </summary>
         protected virtual void Initialize()
         {

@@ -789,10 +789,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// We parse all <see cref="AnalyzerConfig"/>s as individual files, according to the editorconfig spec.
-        /// 
+        ///
         /// However, when viewing the configs as an <see cref="AnalyzerConfigSet"/> if multiple files have the
-        /// <c>is_global</c> property set to <c>true</c> we combine those files and treat them as a single 
-        /// 'logical' global config file. This type represents that combined file. 
+        /// <c>is_global</c> property set to <c>true</c> we combine those files and treat them as a single
+        /// 'logical' global config file. This type represents that combined file.
         /// </remarks>
         internal sealed class GlobalAnalyzerConfig
         {

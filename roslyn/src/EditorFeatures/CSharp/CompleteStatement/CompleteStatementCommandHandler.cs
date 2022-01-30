@@ -163,7 +163,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
         }
 
         /// <summary>
-        /// Determines which node the caret is in.  
+        /// Determines which node the caret is in.
         /// Must be called on the UI thread.
         /// </summary>
         /// <param name="root"></param>

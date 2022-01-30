@@ -572,13 +572,13 @@ namespace System.Net
 
         /*
             Accessor:   Expect
-
+            
             The property that controls the Expect header
-
+            
             Input:
-                string Expect, null clears the Expect except for 100-continue value
+            string Expect, null clears the Expect except for 100-continue value
             Returns: The value of the Expect on get.
-        */
+            */
 
         public string? Expect
         {

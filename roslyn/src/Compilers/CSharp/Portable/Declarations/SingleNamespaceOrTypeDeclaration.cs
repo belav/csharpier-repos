@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Any diagnostics reported while converting the Namespace/Type syntax into the Declaration
-        /// instance.  Generally, we determine and store some diagnostics here because we don't want 
+        /// instance.  Generally, we determine and store some diagnostics here because we don't want
         /// to have to go back to Syntax when we have our NamespaceSymbol or NamedTypeSymbol.
         /// </summary>
         public readonly ImmutableArray<Diagnostic> Diagnostics;

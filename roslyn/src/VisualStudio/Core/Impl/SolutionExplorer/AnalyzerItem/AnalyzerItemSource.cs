@@ -210,10 +210,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 /*
                 var vsProject = vsWorkspace.DeferredState?.ProjectTracker.GetProject(_analyzersFolder.ProjectId);
                 var vsAnalyzersMap = vsProject?.GetProjectAnalyzersMap();
-
+                
                 if (vsAnalyzersMap != null)
                 {
-                    return vsAnalyzersMap.Where(kvp => kvp.Value.HasLoadErrors).Select(kvp => kvp.Key).ToImmutableHashSet();
+                return vsAnalyzersMap.Where(kvp => kvp.Value.HasLoadErrors).Select(kvp => kvp.Key).ToImmutableHashSet();
                 }
                 */
             }

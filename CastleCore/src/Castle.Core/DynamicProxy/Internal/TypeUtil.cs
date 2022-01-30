@@ -65,8 +65,8 @@ namespace Castle.DynamicProxy.Internal
         }
 
         /// <summary>
-		///   Returns list of all unique interfaces implemented given types, including their base interfaces.
-		/// </summary>
+        ///   Returns list of all unique interfaces implemented given types, including their base interfaces.
+        /// </summary>
         internal static Type[] GetAllInterfaces(params Type[] types)
         {
             if (types == null)
@@ -223,8 +223,8 @@ namespace Castle.DynamicProxy.Internal
         }
 
         /// <summary>
-		///   Checks whether the specified <paramref name="type"/> is a delegate type (i.e. a direct subclass of <see cref="MulticastDelegate"/>).
-		/// </summary>
+        ///   Checks whether the specified <paramref name="type"/> is a delegate type (i.e. a direct subclass of <see cref="MulticastDelegate"/>).
+        /// </summary>
         internal static bool IsDelegateType(this Type type)
         {
             return type.BaseType == typeof(MulticastDelegate);

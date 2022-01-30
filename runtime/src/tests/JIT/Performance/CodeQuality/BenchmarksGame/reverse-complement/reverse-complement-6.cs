@@ -8,10 +8,10 @@
 
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
-
+   
    Contributed by Peperud
    Modified to reduce memory use by Anthony Lloyd
-*/
+   */
 
 using System;
 using System.IO;

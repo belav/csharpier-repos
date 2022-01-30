@@ -53,13 +53,13 @@ interface I0 : I1, I2
         /// <summary>
         /// For this series of tests, we're going to use a fixed type hierarchy and a single member signature "void M()".
         /// We will start with the signature in all interfaces, and then remove it from various subsets.
-        /// 
+        ///
         ///      ITop
         ///    /      \
         /// ILeft    IRight
         ///    \      /
         ///    IBottom
-        /// 
+        ///
         /// All have method.
         /// </summary>
         [WorkItem(581173, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581173")]
@@ -270,13 +270,13 @@ public interface IBottom : ILeft, IRight
         /// <summary>
         /// These tests are the same as the TestDiamond_Method tests except that, instead of removing the method
         /// from some interfaces, we'll change its parameter list in those interfaces.
-        /// 
+        ///
         ///      ITop
         ///    /      \
         /// ILeft    IRight
         ///    \      /
         ///    IBottom
-        /// 
+        ///
         /// All have unmodified method.
         /// </summary>
         [WorkItem(581173, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581173")]
@@ -455,13 +455,13 @@ public interface IBottom : ILeft, IRight
         /// <summary>
         /// These tests are the same as the TestDiamond_Method tests except that, instead of removing the method
         /// from some interfaces, we'll change its type parameter list in those interfaces.
-        /// 
+        ///
         ///      ITop
         ///    /      \
         /// ILeft    IRight
         ///    \      /
         ///    IBottom
-        /// 
+        ///
         /// All have unmodified method.
         /// </summary>
         [WorkItem(581173, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581173")]
@@ -640,13 +640,13 @@ public interface IBottom : ILeft, IRight
         /// <summary>
         /// These tests are the same as the TestDiamond_Method tests except that, instead of removing the method
         /// from some interfaces, we'll change its member kind (to Property) in those interfaces.
-        /// 
+        ///
         ///      ITop
         ///    /      \
         /// ILeft    IRight
         ///    \      /
         ///    IBottom
-        /// 
+        ///
         /// All have unmodified method.
         /// </summary>
         [WorkItem(581173, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581173")]

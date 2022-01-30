@@ -483,7 +483,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// return true if the type is constructed from a generic interface that 
+        /// return true if the type is constructed from a generic interface that
         /// might be implemented by an array.
         /// </summary>
         public static bool IsPossibleArrayGenericInterface(this TypeSymbol type)
@@ -1219,7 +1219,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// (null TypeParameterSymbol "parameter"): Checks if the given type is a type parameter 
+        /// (null TypeParameterSymbol "parameter"): Checks if the given type is a type parameter
         /// or its referent type is a type parameter (array/pointer) or contains a type parameter (aggregate type)
         /// (non-null TypeParameterSymbol "parameter"): above + also checks if the type parameter
         /// is the same as "parameter"
@@ -1374,8 +1374,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <remarks>
         /// Any non-null type symbol returned is guaranteed not to be an error type.
-        /// 
-        /// It is possible to pass in a constructed type and received back an 
+        ///
+        /// It is possible to pass in a constructed type and received back an
         /// unconstructed type.  This can occur when the type passed in was
         /// constructed from an error type - the underlying definition will be
         /// available, but there won't be a good way to "re-substitute" back up
@@ -1452,7 +1452,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
 #pragma warning disable CA1200 // Avoid using cref tags with a prefix
         /// <summary>
-        /// Returns true if the type is one of the restricted types, namely: <see cref="T:System.TypedReference"/>, 
+        /// Returns true if the type is one of the restricted types, namely: <see cref="T:System.TypedReference"/>,
         /// <see cref="T:System.ArgIterator"/>, or <see cref="T:System.RuntimeArgumentHandle"/>.
         /// or a ref-like type.
         /// </summary>
@@ -1679,8 +1679,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// If we are in a COM PIA with embedInteropTypes enabled we should turn properties and methods 
-        /// that have the type and return type of object, respectively, into type dynamic. If the requisite conditions 
+        /// If we are in a COM PIA with embedInteropTypes enabled we should turn properties and methods
+        /// that have the type and return type of object, respectively, into type dynamic. If the requisite conditions
         /// are fulfilled, this method returns a dynamic type. If not, it returns the original type.
         /// </summary>
         /// <param name="type">A property type or method return type to be checked for dynamification.</param>

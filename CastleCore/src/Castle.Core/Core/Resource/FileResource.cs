@@ -19,8 +19,8 @@ namespace Castle.Core.Resource
     using System.IO;
 
     /// <summary>
-	/// 
-	/// </summary>
+    ///
+    /// </summary>
     public class FileResource : AbstractStreamResource
     {
         private string filePath;

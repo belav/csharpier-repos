@@ -30,7 +30,7 @@ namespace BuildValidator
         private readonly Dictionary<Guid, AssemblyInfo> _mvidMap = new();
 
         /// <summary>
-        /// This maps a given file name to all of the <see cref="AssemblyInfo"/> that we ever considered 
+        /// This maps a given file name to all of the <see cref="AssemblyInfo"/> that we ever considered
         /// for that file name. It's useful for diagnostic purposes to see where we may have missed a
         /// reference lookup.
         /// </summary>

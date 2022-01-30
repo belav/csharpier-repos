@@ -174,7 +174,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         /// <summary>
         /// Given an expression node, tries to generate an appropriate name that can be used for
-        /// that expression. 
+        /// that expression.
         /// </summary>
         public static string GenerateNameForExpression(
             this SemanticModel semanticModel,

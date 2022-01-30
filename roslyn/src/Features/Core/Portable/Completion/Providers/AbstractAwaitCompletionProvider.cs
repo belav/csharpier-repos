@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private const string MakeContainerAsync = nameof(MakeContainerAsync);
 
         /// <summary>
-        /// If 'await' should be placed at the current position.  If not present, it means to add 'await' prior 
+        /// If 'await' should be placed at the current position.  If not present, it means to add 'await' prior
         /// to the preceding expression.
         /// </summary>
         private const string AddAwaitAtCurrentPosition = nameof(AddAwaitAtCurrentPosition);

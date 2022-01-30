@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis
     /// <remarks>
     /// The lifetime of a generator is controlled by the compiler.
     /// State should not be stored directly on the generator, as there
-    /// is no guarantee that the same instance will be used on a 
+    /// is no guarantee that the same instance will be used on a
     /// subsequent generation pass.
     /// </remarks>
     public interface ISourceGenerator
@@ -31,17 +31,17 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Called to perform source generation. A generator can use the <paramref name="context"/>
-        /// to add source files via the <see cref="GeneratorExecutionContext.AddSource(string, SourceText)"/> 
+        /// to add source files via the <see cref="GeneratorExecutionContext.AddSource(string, SourceText)"/>
         /// method.
         /// </summary>
         /// <param name="context">The <see cref="GeneratorExecutionContext"/> to add source to</param>
         /// <remarks>
-        /// This call represents the main generation step. It is called after a <see cref="Compilation"/> is 
-        /// created that contains the user written code. 
-        /// 
+        /// This call represents the main generation step. It is called after a <see cref="Compilation"/> is
+        /// created that contains the user written code.
+        ///
         /// A generator can use the <see cref="GeneratorExecutionContext.Compilation"/> property to
-        /// discover information about the users compilation and make decisions on what source to 
-        /// provide. 
+        /// discover information about the users compilation and make decisions on what source to
+        /// provide.
         /// </remarks>
         void Execute(GeneratorExecutionContext context);
     }

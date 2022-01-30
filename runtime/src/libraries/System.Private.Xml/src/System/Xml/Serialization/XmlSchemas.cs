@@ -865,11 +865,11 @@ namespace System.Xml.Serialization
         {
             /* Create fake xsd schema to fool the XmlSchema.Compiler
                 <xsd:schema targetNamespace="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-                  <xsd:element name="schema">
-                    <xsd:complexType />
-                  </xsd:element>
+                <xsd:element name="schema">
+                <xsd:complexType />
+                </xsd:element>
                 </xsd:schema>
-            */
+                */
             XmlSchema schema = new XmlSchema();
             schema.TargetNamespace = ns;
             XmlSchemaElement element = new XmlSchemaElement();

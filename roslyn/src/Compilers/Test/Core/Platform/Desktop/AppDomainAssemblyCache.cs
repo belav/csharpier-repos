@@ -18,7 +18,7 @@ using Roslyn.Test.Utilities;
 namespace Roslyn.Test.Utilities.Desktop
 {
     /// <summary>
-    /// This is a singleton per AppDomain which manages all of the assemblies which were ever loaded into it.  
+    /// This is a singleton per AppDomain which manages all of the assemblies which were ever loaded into it.
     /// </summary>
     internal sealed class AppDomainAssemblyCache
     {

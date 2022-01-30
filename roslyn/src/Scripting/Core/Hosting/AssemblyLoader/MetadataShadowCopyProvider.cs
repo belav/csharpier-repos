@@ -290,7 +290,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// <param name="fullPath">Full path to an assembly manifest module file or a standalone module file.</param>
         /// <param name="kind">Metadata kind (assembly or module).</param>
         /// <returns>
-        /// Copy of the specified file, or null if the file doesn't need a copy (<see cref="NeedsShadowCopy"/>). 
+        /// Copy of the specified file, or null if the file doesn't need a copy (<see cref="NeedsShadowCopy"/>).
         /// Returns the same object if called multiple times with the same path.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="fullPath"/> is null.</exception>

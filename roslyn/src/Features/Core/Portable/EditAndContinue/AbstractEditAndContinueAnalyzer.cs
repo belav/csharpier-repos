@@ -83,11 +83,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <remarks>
         /// The implementation has to decide what kinds of nodes in top-level match relationship represent a declaration.
         /// Every member declaration must be represented by exactly one node, but not all nodes have to represent a declaration.
-        /// 
-        /// Note that in some cases the set of nodes of the declaration body may differ from the set of active nodes that 
+        ///
+        /// Note that in some cases the set of nodes of the declaration body may differ from the set of active nodes that
         /// belong to the declaration. For example, in <c>Dim a, b As New T</c> the sets for member <c>a</c> are
         /// { <c>New</c>, <c>T</c> } and { <c>a</c> }, respectively.
-        /// 
+        ///
         /// May return multiple declarations if the specified <paramref name="node"/> belongs to multiple declarations,
         /// such as in VB <c>Dim a, b As New T</c> case when <paramref name="node"/> is e.g. <c>T</c>.
         /// </remarks>
@@ -102,17 +102,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// i.e. a node used as the root of statement-level match.
         /// </summary>
         /// <param name="node">A node representing a declaration or a top-level edit node.</param>
-        /// 
+        ///
         /// <returns>
         /// Returns null for nodes that don't represent declarations.
         /// </returns>
         /// <remarks>
         /// The implementation has to decide what kinds of nodes in top-level match relationship represent a declaration.
         /// Every member declaration must be represented by exactly one node, but not all nodes have to represent a declaration.
-        /// 
+        ///
         /// If a member doesn't have a body (null is returned) it can't have associated active statements.
-        /// 
-        /// Body does not need to cover all active statements that may be associated with the member. 
+        ///
+        /// Body does not need to cover all active statements that may be associated with the member.
         /// E.g. Body of a C# constructor is the method body block. Active statements may be placed on the base constructor call.
         ///      Body of a VB field declaration with shared AsNew initializer is the New expression. Active statements might be placed on the field variables.
         /// <see cref="FindStatementAndPartner"/> has to account for such cases.
@@ -129,14 +129,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// that might be covered by an active statement.
         /// </summary>
         /// <returns>
-        /// Tokens covering all possible breakpoint spans associated with the member, 
-        /// or null if the specified node doesn't represent a member declaration or 
+        /// Tokens covering all possible breakpoint spans associated with the member,
+        /// or null if the specified node doesn't represent a member declaration or
         /// doesn't have a body that can contain active statements.
         /// </returns>
         /// <remarks>
         /// The implementation has to decide what kinds of nodes in top-level match relationship represent a declaration.
         /// Every member declaration must be represented by exactly one node, but not all nodes have to represent a declaration.
-        /// 
+        ///
         /// TODO: consider implementing this via <see cref="GetActiveSpanEnvelope"/>.
         /// </remarks>
         internal abstract IEnumerable<SyntaxToken>? TryGetActiveTokens(SyntaxNode node);
@@ -144,7 +144,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <summary>
         /// Returns a span that contains all possible breakpoint spans of the <paramref name="declaration"/>
         /// and no breakpoint spans that do not belong to the <paramref name="declaration"/>.
-        /// 
+        ///
         /// Returns default if the declaration does not have any breakpoint spans.
         /// </summary>
         internal abstract (TextSpan envelope, TextSpan hole) GetActiveSpanEnvelope(
@@ -152,7 +152,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         );
 
         /// <summary>
-        /// Returns an ancestor that encompasses all active and statement level 
+        /// Returns an ancestor that encompasses all active and statement level
         /// nodes that belong to the member represented by <paramref name="bodyOrMatchRoot"/>.
         /// </summary>
         protected SyntaxNode? GetEncompassingAncestor(SyntaxNode? bodyOrMatchRoot)
@@ -174,7 +174,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// Also returns the corresponding partner statement in <paramref name="partnerDeclarationBody"/>, if specified.
         /// </summary>
         /// <remarks>
-        /// The declaration body node may not contain the <paramref name="span"/>. 
+        /// The declaration body node may not contain the <paramref name="span"/>.
         /// This happens when an active statement associated with the member is outside of its body
         /// (e.g. C# constructor, or VB <c>Dim a,b As New T</c>).
         /// If the position doesn't correspond to any statement uses the start of the <paramref name="declarationBody"/>.
@@ -217,7 +217,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// Given a node that represents a lambda body returns all nodes of the body in a syntax list.
         /// </summary>
         /// <remarks>
-        /// Note that VB lambda bodies are represented by a lambda header and that some lambda bodies share 
+        /// Note that VB lambda bodies are represented by a lambda header and that some lambda bodies share
         /// their parent nodes with other bodies (e.g. join clause expressions).
         /// </remarks>
         protected abstract IEnumerable<SyntaxNode> GetLambdaBodyExpressionsAndStatements(
@@ -293,7 +293,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         protected abstract bool StatementLabelEquals(SyntaxNode node1, SyntaxNode node2);
 
         /// <summary>
-        /// True if both nodes represent the same kind of suspension point 
+        /// True if both nodes represent the same kind of suspension point
         /// (await expression, await foreach statement, await using declarator, yield return, yield break).
         /// </summary>
         protected virtual bool StateMachineSuspensionPointKindEquals(
@@ -307,8 +307,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         protected abstract bool AreEquivalent(SyntaxNode left, SyntaxNode right);
 
         /// <summary>
-        /// Returns true if the code emitted for the old active statement part (<paramref name="statementPart"/> of <paramref name="oldStatement"/>) 
-        /// is the same as the code emitted for the corresponding new active statement part (<paramref name="statementPart"/> of <paramref name="newStatement"/>). 
+        /// Returns true if the code emitted for the old active statement part (<paramref name="statementPart"/> of <paramref name="oldStatement"/>)
+        /// is the same as the code emitted for the corresponding new active statement part (<paramref name="statementPart"/> of <paramref name="newStatement"/>).
         /// </summary>
         /// <remarks>
         /// A rude edit is reported if an active statement is changed and this method returns true.
@@ -567,13 +567,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal abstract bool HasParameterClosureScope(ISymbol member);
 
         /// <summary>
-        /// Returns all lambda bodies of a node representing a lambda, 
+        /// Returns all lambda bodies of a node representing a lambda,
         /// or false if the node doesn't represent a lambda.
         /// </summary>
         /// <remarks>
         /// C# anonymous function expression and VB lambda expression both have a single body
         /// (in VB the body is the header of the lambda expression).
-        /// 
+        ///
         /// Some lambda queries (group by, join by) have two bodies.
         /// </remarks>
         internal abstract bool TryGetLambdaBodies(
@@ -591,7 +591,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal abstract SyntaxNode? TryGetContainingTypeDeclaration(SyntaxNode node);
 
         /// <summary>
-        /// Returns the declaration of 
+        /// Returns the declaration of
         /// - a property, indexer or event declaration whose accessor is the specified <paramref name="node"/>,
         /// - a method, an indexer or a type (delegate) if the <paramref name="node"/> is a parameter,
         /// - a method or an type if the <paramref name="node"/> is a type parameter.
@@ -604,7 +604,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal abstract bool HasBackingField(SyntaxNode propertyDeclaration);
 
         /// <summary>
-        /// Return true if the declaration is a field/property declaration with an initializer. 
+        /// Return true if the declaration is a field/property declaration with an initializer.
         /// Shall return false for enum members.
         /// </summary>
         internal abstract bool IsDeclarationWithInitializer(SyntaxNode declaration);
@@ -624,7 +624,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         );
 
         /// <summary>
-        /// Return true if the declaration is a constructor declaration to which field/property initializers are emitted. 
+        /// Return true if the declaration is a constructor declaration to which field/property initializers are emitted.
         /// </summary>
         internal abstract bool IsConstructorWithMemberInitializers(SyntaxNode declaration);
 
@@ -2767,7 +2767,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// It also does not reflect changes in line mapping directives.
         /// Members that are unchanged but their location in the file changes are not considered updated.
         /// This method calculates line and trivia edits for all these cases.
-        /// 
+        ///
         /// The resulting line edits are grouped by mapped document path and sorted by <see cref="SourceLineUpdate.OldLine"/> in each group.
         /// </summary>
         private void AnalyzeTrivia(

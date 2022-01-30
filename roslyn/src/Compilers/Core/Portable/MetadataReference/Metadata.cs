@@ -7,7 +7,7 @@ using System;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// An Id that can be used to identify a metadata instance.  If two metadata instances 
+    /// An Id that can be used to identify a metadata instance.  If two metadata instances
     /// have the same id then they are guaranteed to have the same content.  If two metadata
     /// instances have different ids, then the contents may or may not be the same.  As such,
     /// the id is useful as a key in a cache when a client wants to share data for a metadata
@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis
         internal readonly bool IsImageOwner;
 
         /// <summary>
-        /// The id for this metadata instance.  If two metadata instances have the same id, then 
+        /// The id for this metadata instance.  If two metadata instances have the same id, then
         /// they have the same content.  If they have different ids they may or may not have the
         /// same content.
         /// </summary>

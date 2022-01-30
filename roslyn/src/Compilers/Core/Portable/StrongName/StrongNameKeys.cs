@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis
     internal sealed class StrongNameKeys
     {
         /// <summary>
-        /// The strong name key associated with the identity of this assembly. 
+        /// The strong name key associated with the identity of this assembly.
         /// This contains the contents of the user-supplied key file exactly as extracted.
         /// </summary>
         internal readonly ImmutableArray<byte> KeyPair;
@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal readonly ImmutableArray<byte> PublicKey;
 
-        /// <summary> 
+        /// <summary>
         /// The Private key information that will exist if it was a private key file that was parsed.
         /// </summary>
         internal readonly RSAParameters? PrivateKey;
@@ -40,7 +40,7 @@ namespace Microsoft.CodeAnalysis
         /// or null if the key was retrieved from <see cref="KeyFilePath"/>.
         /// </summary>
         /// <remarks>
-        /// The original value as specified by <see cref="System.Reflection.AssemblyKeyNameAttribute"/> or 
+        /// The original value as specified by <see cref="System.Reflection.AssemblyKeyNameAttribute"/> or
         /// <see cref="CompilationOptions.CryptoKeyContainer"/>.
         /// </remarks>
         internal readonly string? KeyContainer;
@@ -49,13 +49,13 @@ namespace Microsoft.CodeAnalysis
         /// Original key file path, or null if the key is provided by the <see cref="KeyContainer"/>.
         /// </summary>
         /// <remarks>
-        /// The original value as specified by <see cref="System.Reflection.AssemblyKeyFileAttribute"/> or 
+        /// The original value as specified by <see cref="System.Reflection.AssemblyKeyFileAttribute"/> or
         /// <see cref="CompilationOptions.CryptoKeyFile"/>
         /// </remarks>
         internal readonly string? KeyFilePath;
 
         /// <summary>
-        /// True when the assembly contains a <see cref="System.Reflection.AssemblySignatureKeyAttribute"/> value 
+        /// True when the assembly contains a <see cref="System.Reflection.AssemblySignatureKeyAttribute"/> value
         /// and hence signing requires counter signature verification.
         /// </summary>
         internal readonly bool HasCounterSignature;

@@ -52,11 +52,11 @@ namespace System.IO.Ports.Tests
                 int iterationWaitTime = 100;
 
                 /***************************************************************
-            Scenario Description: All of the event handlers should be called sequentially never
-            at the same time on multiple thread. Basically we will block each event handler caller thread and verify
-            that no other thread is in another event handler
-
-            ***************************************************************/
+                Scenario Description: All of the event handlers should be called sequentially never
+                at the same time on multiple thread. Basically we will block each event handler caller thread and verify
+                that no other thread is in another event handler
+                
+                ***************************************************************/
 
                 Debug.WriteLine("Verifying that event handlers are called serially");
 

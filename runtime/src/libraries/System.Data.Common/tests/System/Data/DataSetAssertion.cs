@@ -42,11 +42,11 @@ namespace System.Data.Tests
                         // schema document into XmlSchema once, and compare
                         // output string with those emission from Write().
                         XmlSchema xs = XmlSchema.Read (new XmlTextReader (
-                            new StringReader (source)), null);
+                        new StringReader (source)), null);
                         StringWriter writer = new StringWriter ();
                         xs.Write (writer);
                         return writer.ToString ();
-            */
+                        */
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(source);
             SortAttributes(doc.DocumentElement);

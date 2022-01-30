@@ -183,27 +183,27 @@ namespace DefaultNamespace
             Vertex root = Vfirst;
             int i=0,j=0;
             Vertex next = root.Adjacent[i];
-
+            
             while(j<Nodes) {
-
-                    TestLibrary.Logging.WriteLine("root: " + root.Name);
-                    while(next != null) {
-                        TestLibrary.Logging.WriteLine(next.Name);
-                        if(next.Name == j) {break;}
-                        next = next.Adjacent[0]; 
-                    }
-                    i++;
-                    if((next = root.Adjacent[i]) == null) {
-                        i=0;
-                        j++;
-                        if(root == Vlast) break;
-                        else root = root.Next;
-                        next = root.Adjacent[i];
-
-                            }
-                }	
-
-        }*/
+            
+            TestLibrary.Logging.WriteLine("root: " + root.Name);
+            while(next != null) {
+            TestLibrary.Logging.WriteLine(next.Name);
+            if(next.Name == j) {break;}
+            next = next.Adjacent[0];
+            }
+            i++;
+            if((next = root.Adjacent[i]) == null) {
+            i=0;
+            j++;
+            if(root == Vlast) break;
+            else root = root.Next;
+            next = root.Adjacent[i];
+            
+            }
+            }
+            
+            }*/
 
         public void DeleteVertex()
         {

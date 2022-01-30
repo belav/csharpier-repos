@@ -38,10 +38,10 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
         /// For example from SpecialType enum.
         /// I am not using SpecialType as the type for this field because
         /// VB runtime types are not part of SpecialType.
-        /// 
-        /// So, the implication is that any type ids we use outside of the SpecialType 
-        /// (either for the VB runtime classes, or types like System.Task etc.) will need 
-        /// to use IDs that are all mutually disjoint. 
+        ///
+        /// So, the implication is that any type ids we use outside of the SpecialType
+        /// (either for the VB runtime classes, or types like System.Task etc.) will need
+        /// to use IDs that are all mutually disjoint.
         /// </summary>
         public readonly short DeclaringTypeId;
 
@@ -59,11 +59,11 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
         public readonly string Name;
 
         /// <summary>
-        /// Signature of the field or method, similar to metadata signature, 
+        /// Signature of the field or method, similar to metadata signature,
         /// but with the following exceptions:
         ///    1) Truncated on the left, for methods starts at [ParamCount], for fields at [Type]
         ///    2) Type tokens are not compressed
-        ///    3) BOOLEAN | CHAR | I1 | U1 | I2 | U2 | I4 | U4 | I8 | U8 | R4 | R8 | I | U | Void types are encoded by 
+        ///    3) BOOLEAN | CHAR | I1 | U1 | I2 | U2 | I4 | U4 | I8 | U8 | R4 | R8 | I | U | Void types are encoded by
         ///       using VALUETYPE+typeId notation.
         ///    4) array bounds are not included.
         ///    5) modifiers are not included.

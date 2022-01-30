@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery
         /// is converted to
         /// foreach(... where condition)
         /// {
-        ///        doSomething(); 
+        ///        doSomething();
         /// }
         /// </summary>
         protected abstract IConverter<TForEachStatement, TStatement> CreateDefaultConverter(

@@ -8,7 +8,7 @@ namespace System.Web.Http.Tracing
 {
     /// <summary>
     /// This <see cref="ITraceWriter"/> unconditionally responds that
-    /// all categories and levels are enabled.  
+    /// all categories and levels are enabled.
     /// All attempts to trace call back the caller for trace information
     /// and the information is kept in memory for later use.
     /// <para>

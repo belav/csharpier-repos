@@ -16,12 +16,12 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// operand type of any return expressions in the async method. The result type is void in the case of
     /// Task-returning and void-returning async methods, and T in the case of Task&lt;T&gt;-returning async
     /// methods.
-    /// 
+    ///
     /// System.Runtime.CompilerServices provides a collection of async method builders that are used in the
     /// generated code of async methods to create and manipulate the async method's task. There are three
     /// distinct async method builder types, one of each async return type: AsyncVoidMethodBuilder,
-    /// AsyncTaskMethodBuilder, and AsyncTaskMethodBuilder&lt;T&gt;. 
-    /// 
+    /// AsyncTaskMethodBuilder, and AsyncTaskMethodBuilder&lt;T&gt;.
+    ///
     /// AsyncMethodBuilderMemberCollection provides a common mechanism for accessing the well-known members of
     /// each async method builder type. This avoids having to inspect the return style of the current async method
     /// to pick the right async method builder member during async rewriting.

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace Roslyn.Utilities
 {
     /// <summary>
-    /// <see cref="ObjectBinder"/> is a registry that maps between arbitrary <see cref="Type"/>s and 
+    /// <see cref="ObjectBinder"/> is a registry that maps between arbitrary <see cref="Type"/>s and
     /// the 'reader' function used to deserialize serialized instances of those types.  Registration
     /// must happen ahead of time using the <see cref="RegisterTypeReader"/> method.
     /// </summary>

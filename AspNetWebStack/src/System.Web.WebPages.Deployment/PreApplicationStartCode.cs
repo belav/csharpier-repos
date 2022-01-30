@@ -22,7 +22,7 @@ namespace System.Web.WebPages.Deployment
     public static class PreApplicationStartCode
     {
         /// <summary>
-        /// Key used to indicate to tooling that the compile exception we throw to refresh the app domain originated from us so that they can deal with it correctly. 
+        /// Key used to indicate to tooling that the compile exception we throw to refresh the app domain originated from us so that they can deal with it correctly.
         /// </summary>
         private const string ToolingIndicatorKey = "WebPages.VersionChange";
 
@@ -199,8 +199,8 @@ namespace System.Web.WebPages.Deployment
         }
 
         /// <summary>
-        /// WebPages stores the version to be compiled against in AppSettings as &gt;add key="webpages:version" value="1.0" /&lt;. 
-        /// Changing values AppSettings does not cause recompilation therefore we could run into a state where we have files compiled against v1 but the application is 
+        /// WebPages stores the version to be compiled against in AppSettings as &gt;add key="webpages:version" value="1.0" /&lt;.
+        /// Changing values AppSettings does not cause recompilation therefore we could run into a state where we have files compiled against v1 but the application is
         /// currently v2.
         /// </summary>
         private static void InvalidateCompilationResultsIfVersionChanged(
@@ -284,10 +284,10 @@ namespace System.Web.WebPages.Deployment
                     // No-op if the attribute is invalid
                     /*
                     else {
-                        throw new HttpException(SR.GetString(SR.Invalid_PreApplicationStartMethodAttribute_value,
-                            assembly.FullName,
-                            (attribute.Type != null ? attribute.Type.FullName : String.Empty),
-                            attribute.MethodName));
+                    throw new HttpException(SR.GetString(SR.Invalid_PreApplicationStartMethodAttribute_value,
+                    assembly.FullName,
+                    (attribute.Type != null ? attribute.Type.FullName : String.Empty),
+                    attribute.MethodName));
                     }
                     */
                 }

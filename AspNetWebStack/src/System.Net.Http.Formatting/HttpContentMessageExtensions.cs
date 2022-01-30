@@ -165,7 +165,7 @@ namespace System.Net.Http
         /// Read the <see cref="HttpContent"/> as an <see cref="HttpRequestMessage"/>.
         /// </summary>
         /// <param name="content">The content to read.</param>
-        /// <param name="uriScheme">The URI scheme to use for the request URI (the 
+        /// <param name="uriScheme">The URI scheme to use for the request URI (the
         /// URI scheme is not actually part of the HTTP Request URI and so must be provided externally).</param>
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <returns>A task object representing reading the content as an <see cref="HttpRequestMessage"/>.</returns>
@@ -193,7 +193,7 @@ namespace System.Net.Http
         /// Read the <see cref="HttpContent"/> as an <see cref="HttpRequestMessage"/>.
         /// </summary>
         /// <param name="content">The content to read.</param>
-        /// <param name="uriScheme">The URI scheme to use for the request URI (the 
+        /// <param name="uriScheme">The URI scheme to use for the request URI (the
         /// URI scheme is not actually part of the HTTP Request URI and so must be provided externally).</param>
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
@@ -224,7 +224,7 @@ namespace System.Net.Http
         /// Read the <see cref="HttpContent"/> as an <see cref="HttpRequestMessage"/>.
         /// </summary>
         /// <param name="content">The content to read.</param>
-        /// <param name="uriScheme">The URI scheme to use for the request URI (the 
+        /// <param name="uriScheme">The URI scheme to use for the request URI (the
         /// URI scheme is not actually part of the HTTP Request URI and so must be provided externally).</param>
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <param name="maxHeaderSize">The max length of the HTTP header.</param>
@@ -260,7 +260,7 @@ namespace System.Net.Http
         /// Read the <see cref="HttpContent"/> as an <see cref="HttpRequestMessage"/>.
         /// </summary>
         /// <param name="content">The content to read.</param>
-        /// <param name="uriScheme">The URI scheme to use for the request URI (the 
+        /// <param name="uriScheme">The URI scheme to use for the request URI (the
         /// URI scheme is not actually part of the HTTP Request URI and so must be provided externally).</param>
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <param name="maxHeaderSize">The max length of the HTTP header.</param>

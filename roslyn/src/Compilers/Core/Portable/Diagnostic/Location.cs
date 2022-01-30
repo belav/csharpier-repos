@@ -52,7 +52,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns the metadata module the location is associated with or <c>null</c> if the module is not available.
         /// </summary>
         /// <remarks>
-        /// Might return null even if <see cref="IsInMetadata"/> returns true. The module symbol might not be available anymore, 
+        /// Might return null even if <see cref="IsInMetadata"/> returns true. The module symbol might not be available anymore,
         /// for example, if the location is serialized and deserialized.
         /// </remarks>
         public IModuleSymbol? MetadataModule
@@ -81,9 +81,9 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <returns>
         /// <see cref="FileLinePositionSpan"/> that contains path, line and column information.
-        /// 
+        ///
         /// Returns an invalid span (see <see cref="FileLinePositionSpan.IsValid"/>) if the information is not available.
-        /// 
+        ///
         /// The values are not affected by line mapping directives (#line in C# or #ExternalSource in VB).
         /// </returns>
         public virtual FileLinePositionSpan GetLineSpan()
@@ -178,7 +178,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// A location of kind LocationKind.None. 
+        /// A location of kind LocationKind.None.
         /// </summary>
         public static Location None
         {

@@ -16,14 +16,14 @@ namespace X
         /*
         public static int     filt(UInt32 a)
         {
-            Console.WriteLine("Exception code = " + a);
-            return  1;
+        Console.WriteLine("Exception code = " + a);
+        return  1;
         }
-		
+        
         public static int     filt0(UInt32 a)
         {
-            Console.WriteLine("Exception code = " + a);
-            return  0;
+        Console.WriteLine("Exception code = " + a);
+        return  0;
         }
         */
 

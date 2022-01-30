@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// we are in the original tree as we're incrementally parsing.  When it is at a node or
         /// token, it can either move forward to that entity's next sibling.  It can also move down
         /// to a node's first child or first token.
-        /// 
+        ///
         /// Once the cursor hits the end of file, it's done.  Note: the cursor will skip any other
         /// zero length nodes in the tree.
         /// </summary>

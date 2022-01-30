@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 {
     /// <summary>
     /// A line of text that was parsed by <see cref="StackTraceAnalyzer" />
-    /// to provide metadata bout the line. Expected to be the parsed output 
+    /// to provide metadata bout the line. Expected to be the parsed output
     /// of a serialized <see cref="StackFrame"/>
     /// </summary>
     internal sealed class ParsedStackFrame : ParsedFrame
@@ -41,7 +41,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         }
 
         /// <summary>
-        /// The full type name parsed from the line. 
+        /// The full type name parsed from the line.
         /// ex: [|Microsoft.CodeAnalysis.Editor.CallstackExplorer.|]Example(arg1, arg2)
         /// </summary>
         public TextSpan TypeSpan { get; }
@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         public TextSpan ArgsSpan { get; }
 
         /// <summary>
-        /// The span representing file information on the stack trace line. Is not always available, so it's 
+        /// The span representing file information on the stack trace line. Is not always available, so it's
         /// possible this span is <see langword="default"/>
         /// </summary>
         public TextSpan FileSpan { get; }

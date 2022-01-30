@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis
         internal string WorkingDirectory { get; }
 
         /// <summary>
-        /// The path which contains mscorlib.  This can be null when specified by the user or running in a 
+        /// The path which contains mscorlib.  This can be null when specified by the user or running in a
         /// CoreClr environment.
         /// </summary>
         internal string? SdkDirectory { get; }
@@ -2183,13 +2183,13 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// The string returned from this function represents the inputs to the compiler which impact determinism.  It is 
+        /// The string returned from this function represents the inputs to the compiler which impact determinism.  It is
         /// meant to be inline with the specification here:
-        /// 
+        ///
         ///     - https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
-        /// 
-        /// Issue #8193 tracks filling this out to the full specification. 
-        /// 
+        ///
+        /// Issue #8193 tracks filling this out to the full specification.
+        ///
         ///     https://github.com/dotnet/roslyn/issues/8193
         /// </summary>
         private static string CreateDeterminismKey(

@@ -62,7 +62,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         /// <remarks>
         /// Cases where both conversions are possible and neither is preferred as the
         /// wider of the two are possible only in the presence of user-defined implicit
-        /// conversions.  Such cases are tested separately.  
+        /// conversions.  Such cases are tested separately.
         /// See SemanticErrorTests.CS0172ERR_AmbigQM.
         /// </remarks>
         [Fact]

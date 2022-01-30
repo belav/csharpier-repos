@@ -9,10 +9,10 @@ using System.Linq;
 namespace Moq
 {
     /// <summary>
-	/// A <see cref="DefaultValueProvider"/> that returns an empty default value 
-	/// for invocations that do not have setups or return values, with loose mocks.
-	/// This is the default behavior for a mock.
-	/// </summary>
+    /// A <see cref="DefaultValueProvider"/> that returns an empty default value
+    /// for invocations that do not have setups or return values, with loose mocks.
+    /// This is the default behavior for a mock.
+    /// </summary>
     internal sealed class EmptyDefaultValueProvider : LookupOrFallbackDefaultValueProvider
     {
         internal EmptyDefaultValueProvider()

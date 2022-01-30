@@ -1835,17 +1835,17 @@ namespace System.Xml.Schema
 
         /*
             <schema
-              attributeFormDefault = qualified | unqualified : unqualified
-              blockDefault = #all or (possibly empty) subset of {substitution, extension, restriction}
-              elementFormDefault = qualified | unqualified : unqualified
-              finalDefault = #all or (possibly empty) subset of {extension, restriction}
-              id = ID
-              targetNamespace = uriReference
-              version = string
-              {any attributes with non-schema namespace . . .}>
-              Content: ((include | import | redefine | annotation)* , ((attribute | attributeGroup | complexType | element | group | notation | simpleType) , annotation*)*)
+            attributeFormDefault = qualified | unqualified : unqualified
+            blockDefault = #all or (possibly empty) subset of {substitution, extension, restriction}
+            elementFormDefault = qualified | unqualified : unqualified
+            finalDefault = #all or (possibly empty) subset of {extension, restriction}
+            id = ID
+            targetNamespace = uriReference
+            version = string
+            {any attributes with non-schema namespace . . .}>
+            Content: ((include | import | redefine | annotation)* , ((attribute | attributeGroup | complexType | element | group | notation | simpleType) , annotation*)*)
             </schema>
-        */
+            */
 
         private static void BuildSchema_AttributeFormDefault(XsdBuilder builder, string value)
         {
@@ -1899,12 +1899,12 @@ namespace System.Xml.Schema
 
         /*
             <include
-              id = ID
-              schemaLocation = uriReference
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation?)
+            id = ID
+            schemaLocation = uriReference
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation?)
             </include>
-        */
+            */
         private static void InitInclude(XsdBuilder builder, string? value)
         {
             if (!builder._canIncludeImport)
@@ -1923,13 +1923,13 @@ namespace System.Xml.Schema
 
         /*
             <import
-              id = ID
-              namespace = uriReference
-              schemaLocation = uriReference
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation?)
+            id = ID
+            namespace = uriReference
+            schemaLocation = uriReference
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation?)
             </import>
-        */
+            */
         private static void InitImport(XsdBuilder builder, string? value)
         {
             if (!builder._canIncludeImport)
@@ -1952,11 +1952,11 @@ namespace System.Xml.Schema
 
         /*
             <redefine
-              schemaLocation = uriReference
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation | (attributeGroup | complexType | group | simpleType))*
+            schemaLocation = uriReference
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation | (attributeGroup | complexType | group | simpleType))*
             </redefine>
-        */
+            */
         private static void InitRedefine(XsdBuilder builder, string? value)
         {
             if (!builder._canIncludeImport)
@@ -1979,17 +1979,17 @@ namespace System.Xml.Schema
 
         /*
             <attribute
-              form = qualified | unqualified
-              id = ID
-              name = NCName
-              ref = QName
-              type = QName
-              use = prohibited | optional | required | default | fixed : optional
-              value = string
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (simpleType?))
+            form = qualified | unqualified
+            id = ID
+            name = NCName
+            ref = QName
+            type = QName
+            use = prohibited | optional | required | default | fixed : optional
+            value = string
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (simpleType?))
             </attribute>
-        */
+            */
         private static void InitAttribute(XsdBuilder builder, string? value)
         {
             builder._xso = builder._attribute = new XmlSchemaAttribute();
@@ -2045,24 +2045,24 @@ namespace System.Xml.Schema
 
         /*
             <element
-              abstract = boolean : false
-              block = #all or (possibly empty) subset of {substitution, extension, restriction}
-              default = string
-              final = #all or (possibly empty) subset of {extension, restriction}
-              fixed = string
-              form = qualified | unqualified
-              id = ID
-              maxOccurs = for maxOccurs : 1
-              minOccurs = nonNegativeInteger : 1
-              name = NCName
-              nillable = boolean : false
-              ref = QName
-              substitutionGroup = QName
-              type = QName
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , ((simpleType | complexType)? , (key | keyref | unique)*))
+            abstract = boolean : false
+            block = #all or (possibly empty) subset of {substitution, extension, restriction}
+            default = string
+            final = #all or (possibly empty) subset of {extension, restriction}
+            fixed = string
+            form = qualified | unqualified
+            id = ID
+            maxOccurs = for maxOccurs : 1
+            minOccurs = nonNegativeInteger : 1
+            name = NCName
+            nillable = boolean : false
+            ref = QName
+            substitutionGroup = QName
+            type = QName
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , ((simpleType | complexType)? , (key | keyref | unique)*))
             </element>
-        */
+            */
         private static void InitElement(XsdBuilder builder, string? value)
         {
             builder._xso = builder._element = new XmlSchemaElement();
@@ -2164,12 +2164,12 @@ namespace System.Xml.Schema
 
         /*
             <simpleType
-              id = ID
-              name = NCName
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , ((list | restriction | union)))
+            id = ID
+            name = NCName
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , ((list | restriction | union)))
             </simpleType>
-        */
+            */
         private static void InitSimpleType(XsdBuilder builder, string? value)
         {
             builder._xso = builder._simpleType = new XmlSchemaSimpleType();
@@ -2251,12 +2251,12 @@ namespace System.Xml.Schema
 
         /*
             <union
-              id = ID
-              memberTypes = List of [anon]
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (simpleType*))
+            id = ID
+            memberTypes = List of [anon]
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (simpleType*))
             </union>
-        */
+            */
         private static void InitSimpleTypeUnion(XsdBuilder builder, string? value)
         {
             if (builder._simpleType!.Content != null)
@@ -2293,12 +2293,12 @@ namespace System.Xml.Schema
 
         /*
             <list
-              id = ID
-              itemType = QName
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (simpleType?))
+            id = ID
+            itemType = QName
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (simpleType?))
             </list>
-        */
+            */
         private static void InitSimpleTypeList(XsdBuilder builder, string? value)
         {
             if (builder._simpleType!.Content != null)
@@ -2317,12 +2317,12 @@ namespace System.Xml.Schema
 
         /*
             <restriction
-              base = QName
-              id = ID
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (simpleType? , ((duration | encoding | enumeration | length | maxExclusive | maxInclusive | maxLength | minExclusive | minInclusive | minLength | pattern | period | TotalDigits | FractionDigits)*)))
+            base = QName
+            id = ID
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (simpleType? , ((duration | encoding | enumeration | length | maxExclusive | maxInclusive | maxLength | minExclusive | minInclusive | minLength | pattern | period | TotalDigits | FractionDigits)*)))
             </restriction>
-        */
+            */
         private static void InitSimpleTypeRestriction(XsdBuilder builder, string? value)
         {
             if (builder._simpleType!.Content != null)
@@ -2341,16 +2341,16 @@ namespace System.Xml.Schema
 
         /*
             <complexType
-              abstract = boolean : false
-              block = #all or (possibly empty) subset of {extension, restriction}
-              final = #all or (possibly empty) subset of {extension, restriction}
-              id = ID
-              mixed = boolean : false
-              name = NCName
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (simpleContent | complexContent | ((group | all | choice | sequence)? , ((attribute | attributeGroup)* , anyAttribute?))))
+            abstract = boolean : false
+            block = #all or (possibly empty) subset of {extension, restriction}
+            final = #all or (possibly empty) subset of {extension, restriction}
+            id = ID
+            mixed = boolean : false
+            name = NCName
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (simpleContent | complexContent | ((group | all | choice | sequence)? , ((attribute | attributeGroup)* , anyAttribute?))))
             </complexType>
-        */
+            */
         private static void InitComplexType(XsdBuilder builder, string? value)
         {
             builder._xso = builder._complexType = new XmlSchemaComplexType();
@@ -2410,12 +2410,12 @@ namespace System.Xml.Schema
 
         /*
             <complexContent
-              id = ID
-              mixed = boolean
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (restriction | extension))
+            id = ID
+            mixed = boolean
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (restriction | extension))
             </complexContent>
-        */
+            */
         private static void InitComplexContent(XsdBuilder builder, string? value)
         {
             if (
@@ -2440,12 +2440,12 @@ namespace System.Xml.Schema
 
         /*
             <extension
-              base = QName
-              id = ID
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , ((group | all | choice | sequence)? , ((attribute | attributeGroup)* , anyAttribute?)))
+            base = QName
+            id = ID
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , ((group | all | choice | sequence)? , ((attribute | attributeGroup)* , anyAttribute?)))
             </extension>
-        */
+            */
         private static void InitComplexContentExtension(XsdBuilder builder, string? value)
         {
             if (builder._complexContent!.Content != null)
@@ -2464,12 +2464,12 @@ namespace System.Xml.Schema
 
         /*
             <restriction
-              base = QName
-              id = ID
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (group | all | choice | sequence)? , ((attribute | attributeGroup)* , anyAttribute?))
+            base = QName
+            id = ID
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (group | all | choice | sequence)? , ((attribute | attributeGroup)* , anyAttribute?))
             </restriction>
-        */
+            */
         private static void InitComplexContentRestriction(XsdBuilder builder, string? value)
         {
             builder._xso = builder._complexContentRestriction =
@@ -2484,11 +2484,11 @@ namespace System.Xml.Schema
 
         /*
             <simpleContent
-              id = ID
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (restriction | extension))
+            id = ID
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (restriction | extension))
             </simpleContent>
-        */
+            */
         private static void InitSimpleContent(XsdBuilder builder, string? value)
         {
             if (
@@ -2508,12 +2508,12 @@ namespace System.Xml.Schema
 
         /*
             <extension
-              base = QName
-              id = ID
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , ((attribute | attributeGroup)* , anyAttribute?))
+            base = QName
+            id = ID
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , ((attribute | attributeGroup)* , anyAttribute?))
             </extension>
-        */
+            */
 
         private static void InitSimpleContentExtension(XsdBuilder builder, string? value)
         {
@@ -2532,12 +2532,12 @@ namespace System.Xml.Schema
 
         /*
             <restriction
-              base = QName
-              id = ID
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , ((duration | encoding | enumeration | length | maxExclusive | maxInclusive | maxLength | minExclusive | minInclusive | minLength | pattern | period | totalDigits | fractionDigits)*)? , ((attribute | attributeGroup)* , anyAttribute?))
+            base = QName
+            id = ID
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , ((duration | encoding | enumeration | length | maxExclusive | maxInclusive | maxLength | minExclusive | minInclusive | minLength | pattern | period | totalDigits | fractionDigits)*)? , ((attribute | attributeGroup)* , anyAttribute?))
             </restriction>
-        */
+            */
         private static void InitSimpleContentRestriction(XsdBuilder builder, string? value)
         {
             if (builder._simpleContent!.Content != null)
@@ -2556,13 +2556,13 @@ namespace System.Xml.Schema
 
         /*
             <attributeGroup
-              id = ID
-              name = NCName
-              ref = QName
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , ((attribute | attributeGroup)* , anyAttribute?))
+            id = ID
+            name = NCName
+            ref = QName
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , ((attribute | attributeGroup)* , anyAttribute?))
             </attributeGroup>
-        */
+            */
         private static void InitAttributeGroup(XsdBuilder builder, string? value)
         {
             builder._canIncludeImport = false;
@@ -2585,12 +2585,12 @@ namespace System.Xml.Schema
 
         /*
             <attributeGroup
-              id = ID
-              ref = QName
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation?)
+            id = ID
+            ref = QName
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation?)
             </attributeGroup>
-        */
+            */
         private static void InitAttributeGroupRef(XsdBuilder builder, string? value)
         {
             builder._xso = builder._attributeGroupRef = new XmlSchemaAttributeGroupRef();
@@ -2604,13 +2604,13 @@ namespace System.Xml.Schema
 
         /*
             <anyAttribute
-              id = ID
-              namespace = ##any | ##other | list of {uri, ##targetNamespace, ##local} : ##any
-              processContents = skip | lax | strict : strict
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation?)
+            id = ID
+            namespace = ##any | ##other | list of {uri, ##targetNamespace, ##local} : ##any
+            processContents = skip | lax | strict : strict
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation?)
             </anyAttribute>
-        */
+            */
         private static void InitAnyAttribute(XsdBuilder builder, string? value)
         {
             builder._xso = builder._anyAttribute = new XmlSchemaAnyAttribute();
@@ -2684,12 +2684,12 @@ namespace System.Xml.Schema
 
         /*
             <group
-              id = ID
-              name = NCName
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (all | choice | sequence)?)
+            id = ID
+            name = NCName
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (all | choice | sequence)?)
             </group>
-        */
+            */
         private static void InitGroup(XsdBuilder builder, string? value)
         {
             builder._xso = builder._group = new XmlSchemaGroup();
@@ -2712,14 +2712,14 @@ namespace System.Xml.Schema
 
         /*
             <group
-              id = ID
-              maxOccurs = for maxOccurs : 1
-              minOccurs = nonNegativeInteger : 1
-              ref = QName
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation?)
+            id = ID
+            maxOccurs = for maxOccurs : 1
+            minOccurs = nonNegativeInteger : 1
+            ref = QName
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation?)
             </group>
-        */
+            */
         private static void InitGroupRef(XsdBuilder builder, string? value)
         {
             builder._xso = builder._particle = builder._groupRef = new XmlSchemaGroupRef();
@@ -2743,13 +2743,13 @@ namespace System.Xml.Schema
 
         /*
             <all
-              id = ID
-              maxOccurs = for maxOccurs : 1
-              minOccurs = nonNegativeInteger : 1
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , element*)
+            id = ID
+            maxOccurs = for maxOccurs : 1
+            minOccurs = nonNegativeInteger : 1
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , element*)
             </all>
-        */
+            */
         private static void InitAll(XsdBuilder builder, string? value)
         {
             builder._xso = builder._particle = builder._all = new XmlSchemaAll();
@@ -2758,13 +2758,13 @@ namespace System.Xml.Schema
 
         /*
             <choice
-              id = ID
-              maxOccurs = for maxOccurs : 1
-              minOccurs = nonNegativeInteger : 1
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (element | group | choice | sequence | any)*)
+            id = ID
+            maxOccurs = for maxOccurs : 1
+            minOccurs = nonNegativeInteger : 1
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (element | group | choice | sequence | any)*)
             </choice>
-        */
+            */
         private static void InitChoice(XsdBuilder builder, string? value)
         {
             builder._xso = builder._particle = builder._choice = new XmlSchemaChoice();
@@ -2773,13 +2773,13 @@ namespace System.Xml.Schema
 
         /*
              <sequence
-              id = ID
-              maxOccurs = for maxOccurs : 1
-              minOccurs = nonNegativeInteger : 1
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (element | group | choice | sequence | any)*)
-            </sequence>
-        */
+             id = ID
+             maxOccurs = for maxOccurs : 1
+             minOccurs = nonNegativeInteger : 1
+             {any attributes with non-schema namespace . . .}>
+             Content: (annotation? , (element | group | choice | sequence | any)*)
+             </sequence>
+             */
         private static void InitSequence(XsdBuilder builder, string? value)
         {
             builder._xso = builder._particle = builder._sequence = new XmlSchemaSequence();
@@ -2788,15 +2788,15 @@ namespace System.Xml.Schema
 
         /*
             <any
-              id = ID
-              maxOccurs = for maxOccurs : 1
-              minOccurs = nonNegativeInteger : 1
-              namespace = ##any | ##other | list of {uri, ##targetNamespace, ##local} : ##any
-              processContents = skip | lax | strict : strict
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation?)
+            id = ID
+            maxOccurs = for maxOccurs : 1
+            minOccurs = nonNegativeInteger : 1
+            namespace = ##any | ##other | list of {uri, ##targetNamespace, ##local} : ##any
+            processContents = skip | lax | strict : strict
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation?)
             </any>
-        */
+            */
         private static void InitAny(XsdBuilder builder, string? value)
         {
             builder._xso = builder._particle = builder._anyElement = new XmlSchemaAny();
@@ -2819,14 +2819,14 @@ namespace System.Xml.Schema
 
         /*
             <notation
-              id = ID
-              name = NCName
-              public = A public identifier, per ISO 8879
-              system = uriReference
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation?)
+            id = ID
+            name = NCName
+            public = A public identifier, per ISO 8879
+            system = uriReference
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation?)
             </notation>
-        */
+            */
         private static void InitNotation(XsdBuilder builder, string? value)
         {
             builder._xso = builder._notation = new XmlSchemaNotation();
@@ -2854,12 +2854,12 @@ namespace System.Xml.Schema
         //
         /*
             <duration
-              id = ID
-              value = timeDuration
-              fixed = boolean : false>
-              Content: (annotation?)
+            id = ID
+            value = timeDuration
+            fixed = boolean : false>
+            Content: (annotation?)
             </duration>
-        */
+            */
         private static void InitFacet(XsdBuilder builder, string? value)
         {
             switch (builder.CurrentElement)
@@ -2931,27 +2931,27 @@ namespace System.Xml.Schema
 
         /*
             <unique
-              id = ID
-              name = NCName
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (selector , field+))
+            id = ID
+            name = NCName
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (selector , field+))
             </unique>
-
+            
             <key
-              id = ID
-              name = NCName
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (selector , field+))
+            id = ID
+            name = NCName
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (selector , field+))
             </key>
-
+            
             <keyref
-              id = ID
-              name = NCName
-              refer = QName
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation? , (selector , field+))
+            id = ID
+            name = NCName
+            refer = QName
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation? , (selector , field+))
             </keyref>
-        */
+            */
         private static void InitIdentityConstraint(XsdBuilder builder, string? value)
         {
             if (!builder._element!.RefName.IsEmpty)
@@ -2996,12 +2996,12 @@ namespace System.Xml.Schema
 
         /*
             <selector
-              id = ID
-              xpath = An XPath expression
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation?)
+            id = ID
+            xpath = An XPath expression
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation?)
             </selector>
-        */
+            */
         private static void InitSelector(XsdBuilder builder, string? value)
         {
             builder._xso = builder._xpath = new XmlSchemaXPath();
@@ -3022,12 +3022,12 @@ namespace System.Xml.Schema
 
         /*
             <field
-              id = ID
-              xpath = An XPath expression
-              {any attributes with non-schema namespace . . .}>
-              Content: (annotation?)
+            id = ID
+            xpath = An XPath expression
+            {any attributes with non-schema namespace . . .}>
+            Content: (annotation?)
             </field>
-        */
+            */
         private static void InitField(XsdBuilder builder, string? value)
         {
             builder._xso = builder._xpath = new XmlSchemaXPath();
@@ -3049,9 +3049,9 @@ namespace System.Xml.Schema
 
         /*
             <annotation>
-              Content: (appinfo | documentation)*
+            Content: (appinfo | documentation)*
             </annotation>
-        */
+            */
         private static void InitAnnotation(XsdBuilder builder, string? value)
         {
             // On most elements annotations are only allowed to be the first child
@@ -3072,10 +3072,10 @@ namespace System.Xml.Schema
 
         /*
             <appinfo
-              source = uriReference>
-              Content: ({any})*
+            source = uriReference>
+            Content: ({any})*
             </appinfo>
-        */
+            */
         private static void InitAppinfo(XsdBuilder builder, string? value)
         {
             builder._xso = builder._appInfo = new XmlSchemaAppInfo();
@@ -3095,10 +3095,10 @@ namespace System.Xml.Schema
 
         /*
             <documentation
-              source = uriReference>
-              Content: ({any})*
+            source = uriReference>
+            Content: ({any})*
             </documentation>
-        */
+            */
         private static void InitDocumentation(XsdBuilder builder, string? value)
         {
             builder._xso = builder._documentation = new XmlSchemaDocumentation();

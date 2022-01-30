@@ -18,28 +18,28 @@ using Moq.Properties;
 namespace Moq
 {
     /// <summary>
-	/// Exception thrown by mocks when they are not properly set up,
-	/// when setups are not matched, when verification fails, etc.
-	/// </summary>
-	/// <remarks>
-	/// A distinct exception type is provided so that exceptions
-	/// thrown by a mock can be distinguished from other exceptions
-	/// that might be thrown in tests.
-	/// <para>
-	/// Moq does not provide a richer hierarchy of exception types, as
-	/// tests typically should <em>not</em> catch or expect exceptions
-	/// from mocks. These are typically the result of changes
-	/// in the tested class or its collaborators' implementation, and
-	/// result in fixes in the mock setup so that they disappear and
-	/// allow the test to pass.
-	/// </para>
-	/// </remarks>
+    /// Exception thrown by mocks when they are not properly set up,
+    /// when setups are not matched, when verification fails, etc.
+    /// </summary>
+    /// <remarks>
+    /// A distinct exception type is provided so that exceptions
+    /// thrown by a mock can be distinguished from other exceptions
+    /// that might be thrown in tests.
+    /// <para>
+    /// Moq does not provide a richer hierarchy of exception types, as
+    /// tests typically should <em>not</em> catch or expect exceptions
+    /// from mocks. These are typically the result of changes
+    /// in the tested class or its collaborators' implementation, and
+    /// result in fixes in the mock setup so that they disappear and
+    /// allow the test to pass.
+    /// </para>
+    /// </remarks>
     [Serializable]
     public class MockException : Exception
     {
         /// <summary>
-		///   Returns the exception to be thrown when a setup limited by <see cref="IOccurrence.AtMostOnce()"/> is matched more often than once.
-		/// </summary>
+        ///   Returns the exception to be thrown when a setup limited by <see cref="IOccurrence.AtMostOnce()"/> is matched more often than once.
+        /// </summary>
         internal static MockException MoreThanOneCall(MethodCall setup, int invocationCount)
         {
             var message = new StringBuilder();
@@ -52,8 +52,8 @@ namespace Moq
         }
 
         /// <summary>
-		///   Returns the exception to be thrown when a setup limited by <see cref="IOccurrence.AtMost(int)"/> is matched more often than the specified maximum number of times.
-		/// </summary>
+        ///   Returns the exception to be thrown when a setup limited by <see cref="IOccurrence.AtMost(int)"/> is matched more often than the specified maximum number of times.
+        /// </summary>
         internal static MockException MoreThanNCalls(
             MethodCall setup,
             int maxInvocationCount,
@@ -70,8 +70,8 @@ namespace Moq
         }
 
         /// <summary>
-		///   Returns the exception to be thrown when <see cref="Mock.Verify"/> finds no invocations (or the wrong number of invocations) that match the specified expectation.
-		/// </summary>
+        ///   Returns the exception to be thrown when <see cref="Mock.Verify"/> finds no invocations (or the wrong number of invocations) that match the specified expectation.
+        /// </summary>
         internal static MockException NoMatchingCalls(
             Mock rootMock,
             LambdaExpression expression,
@@ -145,8 +145,8 @@ namespace Moq
         }
 
         /// <summary>
-		///   Returns the exception to be thrown when a strict mock has no setup corresponding to the specified invocation.
-		/// </summary>
+        ///   Returns the exception to be thrown when a strict mock has no setup corresponding to the specified invocation.
+        /// </summary>
         internal static MockException NoSetup(Invocation invocation)
         {
             return new MockException(
@@ -162,8 +162,8 @@ namespace Moq
         }
 
         /// <summary>
-		///   Returns the exception to be thrown when a strict mock has no setup that provides a return value for the specified invocation.
-		/// </summary>
+        ///   Returns the exception to be thrown when a strict mock has no setup that provides a return value for the specified invocation.
+        /// </summary>
         internal static MockException ReturnValueRequired(Invocation invocation)
         {
             return new MockException(
@@ -179,8 +179,8 @@ namespace Moq
         }
 
         /// <summary>
-		///   Returns the exception to be thrown when a setup was not matched.
-		/// </summary>
+        ///   Returns the exception to be thrown when a setup was not matched.
+        /// </summary>
         internal static MockException UnmatchedSetup(Setup setup)
         {
             return new MockException(
@@ -211,10 +211,10 @@ namespace Moq
         }
 
         /// <summary>
-		///   Returns an exception whose message is the concatenation of the given <paramref name="errors"/>' messages
-		///   and whose reason(s) is the combination of the given <paramref name="errors"/>' reason(s).
-		///   Used by <see cref="MockFactory.VerifyMocks(Action{Mock})"/> when it finds one or more mocks with verification errors.
-		/// </summary>
+        ///   Returns an exception whose message is the concatenation of the given <paramref name="errors"/>' messages
+        ///   and whose reason(s) is the combination of the given <paramref name="errors"/>' reason(s).
+        ///   Used by <see cref="MockFactory.VerifyMocks(Action{Mock})"/> when it finds one or more mocks with verification errors.
+        /// </summary>
         internal static MockException Combined(IEnumerable<MockException> errors, string preamble)
         {
             Debug.Assert(errors != null);
@@ -238,8 +238,8 @@ namespace Moq
         }
 
         /// <summary>
-		///   Returns the exception to be thrown when <see cref="Mock.VerifyNoOtherCalls(Mock)"/> finds invocations that have not been verified.
-		/// </summary>
+        ///   Returns the exception to be thrown when <see cref="Mock.VerifyNoOtherCalls(Mock)"/> finds invocations that have not been verified.
+        /// </summary>
         internal static MockException UnverifiedInvocations(
             Mock mock,
             IEnumerable<Invocation> invocations
@@ -276,8 +276,8 @@ namespace Moq
         internal MockExceptionReasons Reasons => this.reasons;
 
         /// <summary>
-		/// Indicates whether this exception is a verification fault raised by Verify()
-		/// </summary>
+        /// Indicates whether this exception is a verification fault raised by Verify()
+        /// </summary>
         public bool IsVerificationError
         {
             get
@@ -291,10 +291,10 @@ namespace Moq
         }
 
         /// <summary>
-		/// Supports the serialization infrastructure.
-		/// </summary>
-		/// <param name="info">Serialization information.</param>
-		/// <param name="context">Streaming context.</param>
+        /// Supports the serialization infrastructure.
+        /// </summary>
+        /// <param name="info">Serialization information.</param>
+        /// <param name="context">Streaming context.</param>
         protected MockException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
@@ -307,10 +307,10 @@ namespace Moq
         }
 
         /// <summary>
-		/// Supports the serialization infrastructure.
-		/// </summary>
-		/// <param name="info">Serialization information.</param>
-		/// <param name="context">Streaming context.</param>
+        /// Supports the serialization infrastructure.
+        /// </summary>
+        /// <param name="info">Serialization information.</param>
+        /// <param name="context">Streaming context.</param>
         [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

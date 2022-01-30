@@ -292,7 +292,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
             }
 
             /// <summary>
-            /// If possible, changes the branch code of the current block to the short version and 
+            /// If possible, changes the branch code of the current block to the short version and
             /// updates the delta correspondingly.
             /// </summary>
             /// <param name="delta">Position delta created by previous block size reductions.</param>

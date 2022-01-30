@@ -16,7 +16,7 @@ using System.Xml.Serialization;
 namespace System.Web.Http.Tracing.Tracers
 {
     /// <summary>
-    /// Tracer for <see cref="XmlMediaTypeFormatter"/>.  
+    /// Tracer for <see cref="XmlMediaTypeFormatter"/>.
     /// It is required because users can select formatters by this type.
     /// </summary>
     internal class XmlMediaTypeFormatterTracer

@@ -228,8 +228,8 @@ namespace Moq.Tests
         }
 
         /// <summary>
-		/// Subclass of <see cref="LookupOrFallbackDefaultValueProvider"/> used as a test surrogate.
-		/// </summary>
+        /// Subclass of <see cref="LookupOrFallbackDefaultValueProvider"/> used as a test surrogate.
+        /// </summary>
         private sealed class Provider : LookupOrFallbackDefaultValueProvider
         {
             private Mock<object> mock;

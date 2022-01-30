@@ -79,7 +79,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal readonly AsyncLazy<ActiveStatementsMap> BaseActiveStatements;
 
         /// <summary>
-        /// Cache of document EnC analyses. 
+        /// Cache of document EnC analyses.
         /// </summary>
         internal readonly EditAndContinueDocumentAnalysesCache Analyses;
 
@@ -90,8 +90,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal readonly bool InBreakState;
 
         /// <summary>
-        /// A <see cref="DocumentId"/> is added whenever EnC analyzer reports 
-        /// rude edits or module diagnostics. At the end of the session we ask the diagnostic analyzer to reanalyze 
+        /// A <see cref="DocumentId"/> is added whenever EnC analyzer reports
+        /// rude edits or module diagnostics. At the end of the session we ask the diagnostic analyzer to reanalyze
         /// the documents to clean up the diagnostics.
         /// </summary>
         private readonly HashSet<DocumentId> _documentsWithReportedDiagnostics = new();
@@ -455,7 +455,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// - additional documents have not changed,
         /// - analyzer config documents have not changed,
         /// the outputs of source generators will not change.
-        /// 
+        ///
         /// Currently it's not possible to change compilation options (Project System is readonly during debugging).
         /// </summary>
         private static bool HasChangesThatMayAffectSourceGenerators(

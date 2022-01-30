@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
 {
-    /// <summary>   
+    /// <summary>
     /// Custom column to display the containing type for the Find All References window.
     /// </summary>
     [Export(typeof(ITableColumnDefinition))]

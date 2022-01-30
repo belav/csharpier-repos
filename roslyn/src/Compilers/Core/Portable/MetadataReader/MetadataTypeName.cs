@@ -12,9 +12,9 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Helper structure to encapsulate/cache various information about metadata name of a type and 
+    /// Helper structure to encapsulate/cache various information about metadata name of a type and
     /// name resolution options.
-    /// Also, allows us to stop using strings in the APIs that accept only metadata names, 
+    /// Also, allows us to stop using strings in the APIs that accept only metadata names,
     /// making usage of them less bug prone.
     /// </summary>
     [NonCopyable]
@@ -55,7 +55,7 @@ namespace Microsoft.CodeAnalysis
         private short _forcedArity;
 
         /// <summary>
-        /// While resolving the name, consider only types following 
+        /// While resolving the name, consider only types following
         /// CLS-compliant generic type names and arity encoding (ECMA-335, section 10.7.2).
         /// I.e. arity is inferred from the name and matching type must have the same
         /// emitted name and arity.
@@ -264,7 +264,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// While resolving the name, consider only types following 
+        /// While resolving the name, consider only types following
         /// CLS-compliant generic type names and arity encoding (ECMA-335, section 10.7.2).
         /// I.e. arity is inferred from the name and matching type must have the same
         /// emitted name and arity.

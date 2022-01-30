@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     {
         /// <summary>
         /// Performs several edits to a document.  If multiple edits are made within the same
-        /// expression context, then the document/semantic-model will be forked after each edit 
+        /// expression context, then the document/semantic-model will be forked after each edit
         /// so that further edits can see if they're still safe to apply.
         /// </summary>
         public static Task ApplyExpressionLevelSemanticEditsAsync<TType, TNode>(
@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         /// <summary>
         /// Performs several edits to a document.  If multiple edits are made within the same
-        /// expression context, then the document/semantic-model will be forked after each edit 
+        /// expression context, then the document/semantic-model will be forked after each edit
         /// so that further edits can see if they're still safe to apply.
         /// </summary>
         public static Task ApplyExpressionLevelSemanticEditsAsync<TType, TNode>(
@@ -74,7 +74,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         /// <summary>
         /// Performs several edits to a document.  If multiple edits are made within the same
-        /// expression context, then the document/semantic-model will be forked after each edit 
+        /// expression context, then the document/semantic-model will be forked after each edit
         /// so that further edits can see if they're still safe to apply.
         /// </summary>
         public static Task ApplyExpressionLevelSemanticEditsAsync<TNode>(
@@ -154,16 +154,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <summary>
         /// Helper function for fix-all fixes where individual fixes may affect the viability
         /// of another.  For example, consider the following code:
-        /// 
+        ///
         ///     if ((double)x == (double)y)
-        ///     
+        ///
         /// In this code either cast can be removed, but at least one cast must remain.  Even
         /// though an analyzer marks both, a fixer must not remove both.  One way to accomplish
         /// this would be to have the fixer do a semantic check after each application.  However
         /// This is extremely expensive, especially for hte common cases where one fix does
         /// not affect each other.
-        /// 
-        /// To address that, this helper groups fixes at certain boundary points.  i.e. at 
+        ///
+        /// To address that, this helper groups fixes at certain boundary points.  i.e. at
         /// statement boundaries.  If there is only one fix within the boundary, it does not
         /// do any semantic verification.  However, if there are multiple fixes in a boundary
         /// it will call into <paramref name="canReplace"/> to validate if the subsequent fix

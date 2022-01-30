@@ -496,11 +496,11 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// If the text was created from a stream or byte[] and canBeEmbedded argument was true, 
+        /// If the text was created from a stream or byte[] and canBeEmbedded argument was true,
         /// this provides the embedded text blob that was precomputed using the original stream
         /// or byte[]. The precomputation was required in that case so that the bytes written to
-        /// the PDB match the original bytes exactly (and match the checksum of the original 
-        /// bytes). 
+        /// the PDB match the original bytes exactly (and match the checksum of the original
+        /// bytes).
         /// </summary>
         internal ImmutableArray<byte> PrecomputedEmbeddedTextBlob => _precomputedEmbeddedTextBlob;
 
@@ -509,7 +509,7 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         /// <param name="position">The position to get the character from.</param>
         /// <returns>The character.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">When position is negative or 
+        /// <exception cref="ArgumentOutOfRangeException">When position is negative or
         /// greater than <see cref="Length"/>.</exception>
         public abstract char this[int position] { get; }
 
@@ -888,7 +888,7 @@ namespace Microsoft.CodeAnalysis.Text
 
         /// <summary>
         /// Gets the set of <see cref="TextChange"/> that describe how the text changed
-        /// between this text and an older version. This may be multiple detailed changes 
+        /// between this text and an older version. This may be multiple detailed changes
         /// or a single change encompassing the entire text.
         /// </summary>
         public virtual IReadOnlyList<TextChange> GetTextChanges(SourceText oldText)

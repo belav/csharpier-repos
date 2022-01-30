@@ -28,15 +28,15 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// The name usually (but not necessarily) includes an extension, e.g. "MyModule.dll".
-        /// 
-        /// If <see cref="ModuleName"/> is null the actual name written to metadata  
+        ///
+        /// If <see cref="ModuleName"/> is null the actual name written to metadata
         /// is derived from the name of the compilation (<see cref="Compilation.AssemblyName"/>)
         /// by appending a default extension for <see cref="OutputKind"/>.
         /// </remarks>
         public string? ModuleName { get; protected set; }
 
         /// <summary>
-        /// The full name of a global implicit class (script class). This class implicitly encapsulates top-level statements, 
+        /// The full name of a global implicit class (script class). This class implicitly encapsulates top-level statements,
         /// type declarations, and member declarations. Could be a namespace qualified name.
         /// </summary>
         public string? ScriptClassName { get; protected set; }
@@ -61,7 +61,7 @@ namespace Microsoft.CodeAnalysis
         public ImmutableArray<byte> CryptoPublicKey { get; protected set; }
 
         /// <summary>
-        /// The name of the file containing the public and private keys to use to generate strong name of the 
+        /// The name of the file containing the public and private keys to use to generate strong name of the
         /// compilation assembly and to sign it.
         /// </summary>
         /// <remarks>
@@ -86,7 +86,7 @@ namespace Microsoft.CodeAnalysis
         /// </para>
         /// <para>
         /// This setting is obsolete and only supported on Microsoft Windows platform.
-        /// Use <see cref="CryptoPublicKey"/> to generate assemblies with strong name and 
+        /// Use <see cref="CryptoPublicKey"/> to generate assemblies with strong name and
         /// a signing tool (Microsoft .NET Framework Strong Name Utility (sn.exe) or equivalent) to sign them.
         /// </para>
         /// </remarks>
@@ -97,12 +97,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// If true the resulting assembly is marked as delay signed.
-        /// 
+        ///
         /// If false and <see cref="CryptoPublicKey"/>, <see cref="CryptoKeyFile"/>, or <see cref="CryptoKeyContainer"/> is specified
-        /// or attribute System.Reflection.AssemblyKeyFileAttribute or System.Reflection.AssemblyKeyNameAttribute is applied to the 
+        /// or attribute System.Reflection.AssemblyKeyFileAttribute or System.Reflection.AssemblyKeyNameAttribute is applied to the
         /// compilation assembly in source the resulting assembly is signed accordingly to the specified values/attributes.
-        /// 
-        /// If null the semantics is specified by the value of attribute System.Reflection.AssemblyDelaySignAttribute 
+        ///
+        /// If null the semantics is specified by the value of attribute System.Reflection.AssemblyDelaySignAttribute
         /// applied to the compilation assembly in source. If the attribute is not present the value defaults to "false".
         /// </remarks>
         public bool? DelaySign { get; protected set; }
@@ -164,15 +164,15 @@ namespace Microsoft.CodeAnalysis
         internal DateTime CurrentLocalTime { get; private protected set; }
 
         /// <summary>
-        /// Emit mode that favors debuggability. 
+        /// Emit mode that favors debuggability.
         /// </summary>
         internal bool DebugPlusMode { get; set; }
 
         /// <summary>
-        /// Specifies whether to import members with accessibility other than public or protected by default. 
-        /// Default value is <see cref="MetadataImportOptions.Public"/>. The value specified is not going to 
-        /// affect correctness of analysis performed by compilers because all members needed for correctness 
-        /// are going to be imported regardless. This setting can force compilation to import members that it 
+        /// Specifies whether to import members with accessibility other than public or protected by default.
+        /// Default value is <see cref="MetadataImportOptions.Public"/>. The value specified is not going to
+        /// affect correctness of analysis performed by compilers because all members needed for correctness
+        /// are going to be imported regardless. This setting can force compilation to import members that it
         /// normally doesn't.
         /// </summary>
         public MetadataImportOptions MetadataImportOptions { get; protected set; }
@@ -213,7 +213,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Resolves paths to metadata references specified in source via #r directives.
-        /// Null if the compilation can't contain references to metadata other than those explicitly passed to its factory (such as #r directives in sources). 
+        /// Null if the compilation can't contain references to metadata other than those explicitly passed to its factory (such as #r directives in sources).
         /// </summary>
         public MetadataReferenceResolver? MetadataReferenceResolver { get; protected set; }
 

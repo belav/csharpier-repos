@@ -144,21 +144,21 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
         /// <summary>
         /// Information to track deltas of complexified spans
-        /// 
-        /// Consider the following example where renaming a->b causes a conflict 
+        ///
+        /// Consider the following example where renaming a->b causes a conflict
         /// and Goo is an extension method:
         ///     "a.Goo(a)" is rewritten to "NS1.NS2.Goo(NS3.a, NS3.a)"
-        /// 
+        ///
         /// The OriginalSpan is the span of "a.Goo(a)"
-        /// 
+        ///
         /// The NewSpan is the span of "NS1.NS2.Goo(NS3.a, NS3.a)"
-        /// 
-        /// The ModifiedSubSpans are the pairs of complexified symbols sorted 
+        ///
+        /// The ModifiedSubSpans are the pairs of complexified symbols sorted
         /// according to their order in the original source code span:
         ///     "a", "NS3.a"
         ///     "Goo", "NS1.NS2.Goo"
         ///     "a", "NS3.a"
-        /// 
+        ///
         /// </summary>
         private class MutableComplexifiedSpan
         {

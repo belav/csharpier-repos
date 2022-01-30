@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Converts all properties to strings.
-	/// </summary>
+    /// Converts all properties to strings.
+    /// </summary>
     [AttributeUsage(
         AttributeTargets.Interface | AttributeTargets.Property,
         AllowMultiple = false,
@@ -27,9 +27,9 @@ namespace Castle.Components.DictionaryAdapter
     public class StringValuesAttribute : DictionaryBehaviorAttribute, IDictionaryPropertySetter
     {
         /// <summary>
-		/// Gets or sets the format.
-		/// </summary>
-		/// <value>The format.</value>
+        /// Gets or sets the format.
+        /// </summary>
+        /// <value>The format.</value>
         public string Format { get; set; }
 
         bool IDictionaryPropertySetter.SetPropertyValue(

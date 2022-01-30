@@ -438,7 +438,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Determines whether the underlying node or token or any of its descendant nodes, tokens or trivia have any
-        /// diagnostics on them. 
+        /// diagnostics on them.
         /// </summary>
         public bool ContainsDiagnostics
         {
@@ -460,7 +460,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Gets a list of all the diagnostics in either the sub tree that has this node as its root or
-        /// associated with this token and its related trivia. 
+        /// associated with this token and its related trivia.
         /// This method does not filter diagnostics based on #pragmas and compiler options
         /// like nowarn, warnaserror etc.
         /// </summary>

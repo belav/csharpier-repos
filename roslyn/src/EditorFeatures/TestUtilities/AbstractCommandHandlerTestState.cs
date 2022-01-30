@@ -37,9 +37,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         /// <summary>
         /// This can use input files with an (optionally) annotated span 'Selection' and a cursor position ($$),
         /// and use it to create a selected span in the TextView.
-        /// 
+        ///
         /// For instance, the following will create a TextView that has a multiline selection with the cursor at the end.
-        /// 
+        ///
         /// Sub Goo
         ///     {|Selection:SomeMethodCall()
         ///     AnotherMethodCall()$$|}

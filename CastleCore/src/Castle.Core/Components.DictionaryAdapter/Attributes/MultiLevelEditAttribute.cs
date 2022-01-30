@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Requests support for multi-level editing.
-	/// </summary>
+    /// Requests support for multi-level editing.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false)]
     public class MultiLevelEditAttribute : DictionaryBehaviorAttribute, IDictionaryInitializer
     {

@@ -10,23 +10,23 @@ using System.Diagnostics;
 namespace Microsoft.CodeAnalysis.Emit
 {
     /// <summary>
-    /// Represents additional info needed by async method implementation methods 
+    /// Represents additional info needed by async method implementation methods
     /// (MoveNext methods) to properly emit necessary PDB data for async debugging.
     /// </summary>
     internal sealed class AsyncMoveNextBodyDebugInfo : StateMachineMoveNextBodyDebugInfo
     {
-        /// <summary> 
-        /// IL offset of catch handler or -1 
+        /// <summary>
+        /// IL offset of catch handler or -1
         /// </summary>
         public readonly int CatchHandlerOffset;
 
-        /// <summary> 
+        /// <summary>
         /// Set of IL offsets where await operators yield control
         ///  </summary>
         public readonly ImmutableArray<int> YieldOffsets;
 
-        /// <summary> 
-        /// Set of IL offsets where await operators are to be resumed 
+        /// <summary>
+        /// Set of IL offsets where await operators are to be resumed
         /// </summary>
         public readonly ImmutableArray<int> ResumeOffsets;
 

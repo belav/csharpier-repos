@@ -27,7 +27,7 @@ namespace Roslyn.Utilities
     /// computed, more clients can request the value. As long as there are outstanding clients the
     /// underlying computation will proceed.  If all outstanding clients cancel their request then
     /// the underlying value computation will be cancelled as well.
-    /// 
+    ///
     /// Creators of an <see cref="AsyncLazy{T}" /> can specify whether the result of the computation is
     /// cached for future requests or not. Choosing to not cache means the computation functions are kept
     /// alive, whereas caching means the value (but not functions) are kept alive once complete.

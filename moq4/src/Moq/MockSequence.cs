@@ -9,16 +9,16 @@ using Moq.Language.Flow;
 namespace Moq
 {
     /// <summary>
-	/// Helper class to setup a full trace between many mocks
-	/// </summary>
+    /// Helper class to setup a full trace between many mocks
+    /// </summary>
     public class MockSequence
     {
         int sequenceStep;
         int sequenceLength;
 
         /// <summary>
-		/// Initialize a trace setup
-		/// </summary>
+        /// Initialize a trace setup
+        /// </summary>
         public MockSequence()
         {
             sequenceLength = 0;
@@ -26,8 +26,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Allow sequence to be repeated
-		/// </summary>
+        /// Allow sequence to be repeated
+        /// </summary>
         public bool Cyclic { get; set; }
 
         private void NextStep()
@@ -52,14 +52,14 @@ namespace Moq
     }
 
     /// <summary>
-	/// Contains extension methods that are related to <see cref="MockSequence"/>.
-	/// </summary>
+    /// Contains extension methods that are related to <see cref="MockSequence"/>.
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class MockSequenceHelper
     {
         /// <summary>
-		/// Perform an expectation in the trace.
-		/// </summary>
+        /// Perform an expectation in the trace.
+        /// </summary>
         public static ISetupConditionResult<TMock> InSequence<TMock>(
             this Mock<TMock> mock,
             MockSequence sequence

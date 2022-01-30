@@ -3,8 +3,8 @@
 
 /**
 This is meant to contain useful utilities for IO related work in ReparsePoints
- - MountVolume
- - Encryption
+- MountVolume
+- Encryption
 **/
 #define TRACE
 #define DEBUG

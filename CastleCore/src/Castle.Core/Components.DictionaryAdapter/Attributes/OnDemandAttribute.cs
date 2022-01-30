@@ -22,8 +22,8 @@ namespace Castle.Components.DictionaryAdapter
     using System.Reflection;
 
     /// <summary>
-	/// Support for on-demand value resolution.
-	/// </summary>
+    /// Support for on-demand value resolution.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = false)]
     public class OnDemandAttribute : DictionaryBehaviorAttribute, IDictionaryPropertyGetter
     {

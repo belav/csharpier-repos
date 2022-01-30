@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis
     }
 
     /// <summary>
-    /// Represents the various output kinds of an <see cref="IIncrementalGenerator"/>. 
+    /// Represents the various output kinds of an <see cref="IIncrementalGenerator"/>.
     /// </summary>
     /// <remarks>
     /// Can be passed as a bit field when creating a <see cref="GeneratorDriver"/> to selectively disable outputs.
@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis
         None = 0,
 
         /// <summary>
-        /// A regular source output, registered via <see cref="IncrementalGeneratorInitializationContext.RegisterSourceOutput{TSource}(IncrementalValueProvider{TSource}, Action{SourceProductionContext, TSource})"/> 
+        /// A regular source output, registered via <see cref="IncrementalGeneratorInitializationContext.RegisterSourceOutput{TSource}(IncrementalValueProvider{TSource}, Action{SourceProductionContext, TSource})"/>
         /// or <see cref="IncrementalGeneratorInitializationContext.RegisterSourceOutput{TSource}(IncrementalValuesProvider{TSource}, Action{SourceProductionContext, TSource})"/>
         /// </summary>
         Source = 0b1,

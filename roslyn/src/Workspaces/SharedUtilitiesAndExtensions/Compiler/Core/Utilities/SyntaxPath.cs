@@ -13,7 +13,7 @@ namespace Roslyn.Utilities
     /// <summary>
     /// Stores the "path" from the root of a tree to a node, allowing the node to be recovered in a
     /// later snapshot of the tree, under certain circumstances.
-    /// 
+    ///
     /// The implementation stores the child indices to represent the path, so any edit which affects
     /// the child indices could render this object unable to recover its node.  NOTE: One thing C#
     /// IDE has done in the past to do a better job of this is to store the fully qualified name of

@@ -51,14 +51,14 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         );
 
         /// <summary>
-        /// Try to get a new node to replace given node, which is a reference to a top-level type declared inside the 
+        /// Try to get a new node to replace given node, which is a reference to a top-level type declared inside the
         /// namespace to be changed. If this reference is the right side of a qualified name, the new node returned would
-        /// be the entire qualified name. Depends on whether <paramref name="newNamespaceParts"/> is provided, the name 
+        /// be the entire qualified name. Depends on whether <paramref name="newNamespaceParts"/> is provided, the name
         /// in the new node might be qualified with this new namespace instead.
         /// </summary>
-        /// <param name="reference">A reference to a type declared inside the namespace to be changed, which is calculated 
+        /// <param name="reference">A reference to a type declared inside the namespace to be changed, which is calculated
         /// based on results from `SymbolFinder.FindReferencesAsync`.</param>
-        /// <param name="newNamespaceParts">If specified, the namespace of original reference will be replaced with given 
+        /// <param name="newNamespaceParts">If specified, the namespace of original reference will be replaced with given
         /// namespace in the replacement node.</param>
         /// <param name="old">The node to be replaced. This might be an ancestor of original </param>
         /// <param name="new">The replacement node.</param>
@@ -111,12 +111,12 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         protected abstract string GetDeclaredNamespace(SyntaxNode container);
 
         /// <summary>
-        /// Decide if we can change the namespace for provided <paramref name="container"/> based on the criteria listed for 
+        /// Decide if we can change the namespace for provided <paramref name="container"/> based on the criteria listed for
         /// <see cref="IChangeNamespaceService.CanChangeNamespaceAsync(Document, SyntaxNode, CancellationToken)"/>
         /// </summary>
         /// <returns>
         /// If namespace can be changed, returns a list of documents that linked to the provided document (including itself)
-        /// and the corresponding container nodes in each document, which will later be used for annotation. Otherwise, a 
+        /// and the corresponding container nodes in each document, which will later be used for annotation. Otherwise, a
         /// default ImmutableArray is returned. Currently we only support linked document in multi-targeting project scenario.
         /// </returns>
         protected abstract Task<

@@ -43,7 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// If this symbol represents a partial method definition or implementation part, its other part (if any).
-        /// This should be set, if at all, before this symbol appears among the members of its owner.  
+        /// This should be set, if at all, before this symbol appears among the members of its owner.
         /// The implementation part is not listed among the "members" of the enclosing type.
         /// </summary>
         private SourceOrdinaryMethodSymbol _otherPartOfPartial;
@@ -550,7 +550,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns the implementation part of a partial method definition, 
+        /// Returns the implementation part of a partial method definition,
         /// or null if this is not a partial method or it is the definition part.
         /// </summary>
         internal SourceOrdinaryMethodSymbol SourcePartialDefinition
@@ -559,7 +559,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns the definition part of a partial method implementation, 
+        /// Returns the definition part of a partial method implementation,
         /// or null if this is not a partial method or it is the implementation part.
         /// </summary>
         internal SourceOrdinaryMethodSymbol SourcePartialImplementation

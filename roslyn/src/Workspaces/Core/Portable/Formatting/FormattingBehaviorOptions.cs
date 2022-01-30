@@ -53,7 +53,7 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// lengths can often feel too cramped for .NET languages, which are often starting with a
         /// default indentation of at least 16 (for namespace, class, member, plus the final construct
         /// indentation).
-        /// 
+        ///
         /// TODO: Currently the option has no storage and always has its default value. See https://github.com/dotnet/roslyn/pull/30422#issuecomment-436118696.
         /// </summary>
         internal static Option2<int> PreferredWrappingColumn { get; } =
@@ -65,7 +65,7 @@ namespace Microsoft.CodeAnalysis.Formatting
             );
 
         /// <summary>
-        /// TODO: Currently the option has no storage and always has its default value. 
+        /// TODO: Currently the option has no storage and always has its default value.
         /// </summary>
         internal static Option2<bool> AllowDisjointSpanMerging { get; } =
             new(

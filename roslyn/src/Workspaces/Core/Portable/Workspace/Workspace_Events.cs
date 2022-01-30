@@ -172,7 +172,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// An event that is fired when the active context document associated with a buffer 
+        /// An event that is fired when the active context document associated with a buffer
         /// changes.
         /// </summary>
         public event EventHandler<DocumentActiveContextChangedEventArgs> DocumentActiveContextChanged

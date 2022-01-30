@@ -796,24 +796,24 @@ namespace BasicEventSourceTests
 
                 /* TODO: NULL byte array does not seem to be supported.
                  * An EventSourceMessage event is written for this case.
-                tests.Add(new SubTest("Write/Array/EventWithNullByteArray",
-                    delegate ()
-                    {
-                        logger.EventWithByteArrayArg(null, 0);
-                    },
-                    delegate (Event evt)
-                    {
-                        Assert.Equal(logger.Name, evt.ProviderName);
-                        Assert.Equal("EventWithByteArrayArg", evt.EventName);
-
-                        if (evt.IsEventListener)
-                        {
-                            byte[] retBlob = (byte[])evt.PayloadValue(0, "blob");
-                            Assert.Null(retBlob);
-                            Assert.Equal(0, (int)evt.PayloadValue(1, "n"));
-                        }
-                    }));
-                */
+                 tests.Add(new SubTest("Write/Array/EventWithNullByteArray",
+                 delegate ()
+                 {
+                 logger.EventWithByteArrayArg(null, 0);
+                 },
+                 delegate (Event evt)
+                 {
+                 Assert.Equal(logger.Name, evt.ProviderName);
+                 Assert.Equal("EventWithByteArrayArg", evt.EventName);
+                 
+                 if (evt.IsEventListener)
+                 {
+                 byte[] retBlob = (byte[])evt.PayloadValue(0, "blob");
+                 Assert.Null(retBlob);
+                 Assert.Equal(0, (int)evt.PayloadValue(1, "n"));
+                 }
+                 }));
+                 */
 
                 tests.Add(
                     new SubTest(

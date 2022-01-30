@@ -1773,7 +1773,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Unique metadata assembly references that are considered to be used by this compilation.
-        /// For example, if a type declared in a referenced assembly is referenced in source code 
+        /// For example, if a type declared in a referenced assembly is referenced in source code
         /// within this compilation, the reference is considered to be used. Etc.
         /// The returned set is a subset of references returned by <see cref="References"/> API.
         /// The result is undefined if the compilation contains errors.
@@ -2244,7 +2244,7 @@ namespace Microsoft.CodeAnalysis
         /// There are two ways to sign PE files
         ///   1. By directly signing the <see cref="PEBuilder"/>
         ///   2. Write the unsigned PE to disk and use CLR COM APIs to sign.
-        /// The preferred method is #1 as it's more efficient and more resilient (no reliance on %TEMP%). But 
+        /// The preferred method is #1 as it's more efficient and more resilient (no reliance on %TEMP%). But
         /// we must continue to support #2 as it's the only way to do the following:
         ///   - Access private keys stored in a key container
         ///   - Do proper counter signature verification for AssemblySignatureKey attributes

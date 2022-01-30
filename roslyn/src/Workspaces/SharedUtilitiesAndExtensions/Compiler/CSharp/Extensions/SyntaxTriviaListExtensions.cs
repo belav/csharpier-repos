@@ -90,7 +90,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         }
 
         /// <summary>
-        /// Takes an INCLUSIVE range of trivia from the trivia list. 
+        /// Takes an INCLUSIVE range of trivia from the trivia list.
         /// </summary>
         public static IEnumerable<SyntaxTrivia> TakeRange(
             this SyntaxTriviaList triviaList,

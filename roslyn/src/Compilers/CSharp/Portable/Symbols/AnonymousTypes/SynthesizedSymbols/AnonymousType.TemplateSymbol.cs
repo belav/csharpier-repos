@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Represents an anonymous type 'template' which is a generic type to be used for all 
+        /// Represents an anonymous type 'template' which is a generic type to be used for all
         /// anonymous type having the same structure, i.e. the same number of fields and field names.
         /// </summary>
         internal sealed class AnonymousTypeTemplateSymbol : NamedTypeSymbol
@@ -43,7 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             private readonly ImmutableArray<TypeParameterSymbol> _typeParameters;
             private readonly ImmutableArray<Symbol> _members;
 
-            /// <summary> This list consists of synthesized method symbols for ToString, 
+            /// <summary> This list consists of synthesized method symbols for ToString,
             /// Equals and GetHashCode which are not part of symbol table </summary>
             internal readonly ImmutableArray<MethodSymbol> SpecialMembers;
 
@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             /// <summary> Anonymous type manager owning this template </summary>
             internal readonly AnonymousTypeManager Manager;
 
-            /// <summary> Smallest location of the template, actually contains the smallest location 
+            /// <summary> Smallest location of the template, actually contains the smallest location
             /// of all the anonymous type instances created using this template during EMIT </summary>
             private Location _smallestLocation;
 
@@ -154,9 +154,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             /// <summary>
-            /// Smallest location of the template, actually contains the smallest location 
+            /// Smallest location of the template, actually contains the smallest location
             /// of all the anonymous type instances created using this template during EMIT;
-            /// 
+            ///
             /// NOTE: if this property is queried, smallest location must not be null.
             /// </summary>
             internal Location SmallestLocation
@@ -182,7 +182,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             /// <summary>
-            /// In emit phase every time a created anonymous type is referenced we try to store the lowest 
+            /// In emit phase every time a created anonymous type is referenced we try to store the lowest
             /// location of the template. It will be used for ordering templates and assigning emitted type names.
             /// </summary>
             internal void AdjustLocation(Location location)

@@ -1435,10 +1435,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <remarks>
         /// WORKAROUND:
         /// We're taking a dependency on the location and structure of a framework assembly resource.  This is not a robust solution.
-        /// 
+        ///
         /// Possible alternatives:
         /// 1) Polish our XML parser until it matches MSXML.  We don't want to reinvent the wheel.
-        /// 2) Build a map that lets us go from XML string positions back to source positions.  
+        /// 2) Build a map that lets us go from XML string positions back to source positions.
         /// This is what the native compiler did, and it was a lot of work.  We'd also still need to modify the message.
         /// 3) Do not report a diagnostic.  This is very unhelpful.
         /// 4) Report a vague diagnostic (i.e. there's a problem somewhere in this doc comment).  This is relatively unhelpful.

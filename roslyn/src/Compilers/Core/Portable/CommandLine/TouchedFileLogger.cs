@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Writes all of the paths the TouchedFileLogger to the given 
+        /// Writes all of the paths the TouchedFileLogger to the given
         /// TextWriter in upper case. After calling this method the
         /// logger is in an undefined state.
         /// </summary>
@@ -81,7 +81,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Writes all of the paths the TouchedFileLogger to the given 
+        /// Writes all of the paths the TouchedFileLogger to the given
         /// TextWriter in upper case. After calling this method the
         /// logger is in an undefined state.
         /// </summary>

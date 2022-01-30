@@ -76,7 +76,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             /// Gets the internal sqlite db-id (effectively the row-id for the doc or proj table, or just the string-id
             /// for the solution table) for the provided caller key.  This db-id will be looked up and returned if a
             /// mapping already exists for it in the db.  Otherwise, a guaranteed unique id will be created for it and
-            /// stored in the db for the future.  This allows all associated data to be cheaply associated with the 
+            /// stored in the db for the future.  This allows all associated data to be cheaply associated with the
             /// simple ID, avoiding lots of db bloat if we used the full <paramref name="key"/> in numerous places.
             /// </summary>
             /// <param name="allowWrite">Whether or not the caller owns the write lock and thus is ok with the DB id

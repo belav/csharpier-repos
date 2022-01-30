@@ -20,7 +20,7 @@ namespace System.Web.Mvc
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteAreaAttribute" /> class.
         /// </summary>
-        /// <param name="areaName">The name of the area. 
+        /// <param name="areaName">The name of the area.
         /// If the value is null, an attempt will be made to infer the area name from the target controller's namespace.
         /// </param>
         public RouteAreaAttribute(string areaName)

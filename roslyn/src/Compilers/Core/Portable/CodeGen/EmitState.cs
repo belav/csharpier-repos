@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
     internal partial class ILBuilder
     {
         /// <summary>
-        /// Abstract Execution state. 
+        /// Abstract Execution state.
         /// If we know something interesting about IL stream we put it here.
         /// </summary>
         private struct EmitState

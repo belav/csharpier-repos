@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         /// <summary>
         /// Unique ID for this pinned solution
-        /// 
+        ///
         /// This later used to find matching solution between VS and remote host
         /// </summary>
         [DataMember(Order = 0)]
@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
         /// <summary>
         /// This indicates whether this scope is for primary branch or not (not forked solution)
-        /// 
+        ///
         /// Features like OOP will use this flag to see whether caching information related to this solution
         /// can benefit other requests or not
         /// </summary>

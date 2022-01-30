@@ -31,7 +31,7 @@ using System.Diagnostics;
    AD unloads).  The point is to avoid starting work if it is likely to fail.
    The Enterprise Services team has used these memory gates effectively in the
    unmanaged world for a decade.
-
+   
    In Whidbey, we will simply check to see if there is enough memory available
    in the OS's page file & attempt to ensure there might be enough space free
    within the process's address space (checking for address space fragmentation
@@ -39,17 +39,17 @@ using System.Diagnostics;
    other threads using MemoryFailPoints, we'll also keep track of a
    process-wide amount of memory "reserved" via all currently-active
    MemoryFailPoints.  This has two problems:
-      1) This can account for memory twice.  If a thread creates a
-         MemoryFailPoint for 100 MB then allocates 99 MB, we'll see 99 MB
-         less free memory and 100 MB less reserved memory.  Yet, subtracting
-         off the 100 MB is necessary because the thread may not have started
-         allocating memory yet.  Disposing of this class immediately after
-         front-loaded allocations have completed is a great idea.
-      2) This is still vulnerable to race conditions with other threads that don't use
-         MemoryFailPoints.
+   1) This can account for memory twice.  If a thread creates a
+   MemoryFailPoint for 100 MB then allocates 99 MB, we'll see 99 MB
+   less free memory and 100 MB less reserved memory.  Yet, subtracting
+   off the 100 MB is necessary because the thread may not have started
+   allocating memory yet.  Disposing of this class immediately after
+   front-loaded allocations have completed is a great idea.
+   2) This is still vulnerable to race conditions with other threads that don't use
+   MemoryFailPoints.
    So this class is far from perfect.  But it may be good enough to
    meaningfully reduce the frequency of OutOfMemoryExceptions in managed apps.
-
+   
    In Orcas or later, we might allocate some memory from the OS and add it
    to a allocation context for this thread.  Obviously, at that point we need
    some way of conveying when we release this block of memory.  So, we
@@ -58,12 +58,12 @@ using System.Diagnostics;
    usage.  The call to Dispose (implicit with the using block) will give us an
    opportunity to release this memory, perhaps.  We anticipate this will give
    us the possibility of a more effective design in a future version.
-
+   
    In Orcas, we may also need to differentiate between allocations that would
    go into the normal managed heap vs. the large object heap, or we should
    consider checking for enough free space in both locations (with any
    appropriate adjustments to ensure the memory is contiguous).
-*/
+   */
 
 namespace System.Runtime
 {

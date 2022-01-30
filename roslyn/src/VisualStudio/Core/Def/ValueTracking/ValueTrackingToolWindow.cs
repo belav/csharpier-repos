@@ -41,7 +41,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
         /// This paramterless constructor is used when
         /// the tool window is initialized on open without any
         /// context. If the tool window is left open across shutdown/restart
-        /// of VS for example, then this gets called. 
+        /// of VS for example, then this gets called.
         /// </summary>
         public ValueTrackingToolWindow() : base(null)
         {

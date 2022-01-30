@@ -11,29 +11,29 @@ namespace System.Text.RegularExpressions
             Let U be the set of Unicode character values and let L be the lowercase
             function, mapping from U to U. To perform case insensitive matching of
             character sets, we need to be able to map an interval I in U, say
-
-                I = [chMin, chMax] = { ch : chMin <= ch <= chMax }
-
+            
+            I = [chMin, chMax] = { ch : chMin <= ch <= chMax }
+            
             to a set A such that A contains L(I) and A is contained in the union of
             I and L(I).
-
+            
             The table below partitions U into intervals on which L is non-decreasing.
             Thus, for any interval J = [a, b] contained in one of these intervals,
             L(J) is contained in [L(a), L(b)].
-
+            
             It is also true that for any such J, [L(a), L(b)] is contained in the
             union of J and L(J). This does not follow from L being non-decreasing on
             these intervals. It follows from the nature of the L on each interval.
             On each interval, L has one of the following forms:
-
-                (1) L(ch) = constant            (LowercaseSet)
-                (2) L(ch) = ch + offset         (LowercaseAdd)
-                (3) L(ch) = ch | 1              (LowercaseBor)
-                (4) L(ch) = ch + (ch & 1)       (LowercaseBad)
-
+            
+            (1) L(ch) = constant            (LowercaseSet)
+            (2) L(ch) = ch + offset         (LowercaseAdd)
+            (3) L(ch) = ch | 1              (LowercaseBor)
+            (4) L(ch) = ch + (ch & 1)       (LowercaseBad)
+            
             It is easy to verify that for any of these forms [L(a), L(b)] is
             contained in the union of [a, b] and L([a, b]).
-        ***************************************************************************/
+            ***************************************************************************/
 
         internal const int LowercaseSet = 0; // Set to arg.
         internal const int LowercaseAdd = 1; // Add arg.

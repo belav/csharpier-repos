@@ -9,23 +9,23 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Rebuild
 {
     /// <summary>
-    /// For most operations the rebuild scenario does not need to provide a 
-    /// <see cref="SourceReferenceResolver"/>. However the usage of #line in the program 
-    /// forces our hand. 
-    /// 
+    /// For most operations the rebuild scenario does not need to provide a
+    /// <see cref="SourceReferenceResolver"/>. However the usage of #line in the program
+    /// forces our hand.
+    ///
     /// A #line pragma which has a document argument goes through the same path normalization
-    /// as other files. This is always done relative to the file which contains the #line 
+    /// as other files. This is always done relative to the file which contains the #line
     /// pragma (the containing file will be the base path).
-    /// 
+    ///
     /// It is possible for multiple files, in different directories, to have a #line which
     /// refers to the same file. For example lib1.cs and dir/lib2.cs can both have the following
     /// entry:
     ///
     ///     #line 42 "data.txt"
-    /// 
+    ///
     /// Without a resolver entry to provide a normalized path, based on the directory, it is possible
     /// these get normalized out to the same path. Particularly when pathmap is involved and we
-    /// are observing unix paths in a windows rebuild (or vice versa). This is because pathmap can 
+    /// are observing unix paths in a windows rebuild (or vice versa). This is because pathmap can
     /// create paths which are illegal to the current operating system (by design).
     /// </summary>
     internal sealed class RebuildSourceReferenceResolver : SourceReferenceResolver

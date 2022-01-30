@@ -61,20 +61,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// If this field serves as a backing variable for an automatically generated
-        /// property or a field-like event, returns that 
+        /// property or a field-like event, returns that
         /// property/event. Otherwise returns null.
-        /// Note, the set of possible associated symbols might be expanded in the future to 
+        /// Note, the set of possible associated symbols might be expanded in the future to
         /// reflect changes in the languages.
         /// </summary>
         public abstract Symbol AssociatedSymbol { get; }
 
         /// <summary>
-        /// Returns true if this field was declared as "readonly". 
+        /// Returns true if this field was declared as "readonly".
         /// </summary>
         public abstract bool IsReadOnly { get; }
 
         /// <summary>
-        /// Returns true if this field was declared as "volatile". 
+        /// Returns true if this field was declared as "volatile".
         /// </summary>
         public abstract bool IsVolatile { get; }
 
@@ -266,10 +266,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// True if this field has a pointer type.
         /// </summary>
         /// <remarks>
-        /// By default we defer to this.Type.IsPointerOrFunctionPointer() 
+        /// By default we defer to this.Type.IsPointerOrFunctionPointer()
         /// However in some cases this may cause circular dependency via binding a
         /// pointer that points to the type that contains the current field.
-        /// Fortunately in those cases we do not need to force binding of the field's type 
+        /// Fortunately in those cases we do not need to force binding of the field's type
         /// and can just check the declaration syntax if the field type is not yet known.
         /// </remarks>
         internal virtual bool HasPointerType
@@ -288,8 +288,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Returns the marshalling type of this field, or 0 if marshalling information isn't available.
         /// </summary>
         /// <remarks>
-        /// By default this information is extracted from <see cref="MarshallingInformation"/> if available. 
-        /// Since the compiler does only need to know the marshalling type of symbols that aren't emitted 
+        /// By default this information is extracted from <see cref="MarshallingInformation"/> if available.
+        /// Since the compiler does only need to know the marshalling type of symbols that aren't emitted
         /// PE symbols just decode the type from metadata and don't provide full marshalling information.
         /// </remarks>
         internal virtual UnmanagedType MarshallingType
@@ -374,7 +374,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Return error code that has highest priority while calculating use site error for this symbol. 
+        /// Return error code that has highest priority while calculating use site error for this symbol.
         /// </summary>
         protected override int HighestPriorityUseSiteError
         {

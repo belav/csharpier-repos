@@ -13,8 +13,8 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// This class associates a symbol with particular format for display.
-    /// It can be passed as an argument for an error message in place where symbol display should go, 
-    /// which allows to defer building strings and doing many other things (like loading metadata) 
+    /// It can be passed as an argument for an error message in place where symbol display should go,
+    /// which allows to defer building strings and doing many other things (like loading metadata)
     /// associated with that until the error message is actually requested.
     /// </summary>
     internal sealed class FormattedSymbol : IFormattable

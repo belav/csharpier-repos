@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         /// it is tri-state since we want to retrieve this value, if never explicitly set, from environment variable
         /// and then cache it.
         /// we read value from environment variable (RoslynWaiterEnabled) because we want team, that doesn't have
-        /// access to Roslyn code (InternalVisibleTo), can use this listener/waiter framework as well. 
+        /// access to Roslyn code (InternalVisibleTo), can use this listener/waiter framework as well.
         /// those team can enable this without using <see cref="AsynchronousOperationListenerProvider.Enable(bool)" /> API
         /// </summary>
         public static bool? s_enabled = null;
@@ -54,7 +54,7 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         /// it is tri-state since we want to retrieve this value, if never explicitly set, from environment variable
         /// and then cache it.
         /// we read value from environment variable (RoslynWaiterDiagnosticTokenEnabled) because we want team, that doesn't have
-        /// access to Roslyn code (InternalVisibleTo), can use this listener/waiter framework as well. 
+        /// access to Roslyn code (InternalVisibleTo), can use this listener/waiter framework as well.
         /// those team can enable this without using <see cref="AsynchronousOperationListenerProvider.EnableDiagnosticTokens(bool)" /> API
         /// </summary>
         private bool? _enableDiagnosticTokens;
@@ -117,8 +117,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         /// work.
         /// </summary>
         /// <remarks>
-        /// This is a very handy method for debugging hangs in the unit test.  Set a break point in the 
-        /// loop, dig into the waiters and see all of the active <see cref="IAsyncToken"/> values 
+        /// This is a very handy method for debugging hangs in the unit test.  Set a break point in the
+        /// loop, dig into the waiters and see all of the active <see cref="IAsyncToken"/> values
         /// representing the remaining work.
         /// </remarks>
         public async Task WaitAllAsync(

@@ -9,8 +9,8 @@ using System.Reflection;
 namespace Moq
 {
     /// <summary>
-	///   Setup used by <see cref="Mock.SetupAllProperties(Mock)"/> for property setters.
-	/// </summary>
+    ///   Setup used by <see cref="Mock.SetupAllProperties(Mock)"/> for property setters.
+    /// </summary>
     internal sealed class StubbedPropertySetterSetup : Setup
     {
         private Action<object> setter;

@@ -63,18 +63,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public readonly NamedTypeSymbol EffectiveBaseClass;
 
         /// <summary>
-        /// The "exact" effective base type. 
+        /// The "exact" effective base type.
         /// In the definition of effective base type we abstract some concrete types to their base classes:
         ///  * For each constraint of T that is a struct-type, R contains System.ValueType.
         ///  * For each constraint of T that is an enumeration type, R contains System.Enum.
         ///  * For each constraint of T that is a delegate type, R contains System.Delegate.
         ///  * For each constraint of T that is an array type, R contains System.Array.
-        ///  * For each constraint of T that is a class-type C, R contains type C' which is constructed 
+        ///  * For each constraint of T that is a class-type C, R contains type C' which is constructed
         ///    from C by replacing all occurrences of dynamic with object.
-        /// The reason is that the CLR doesn't support operations on generic parameters that would be needed 
-        /// to work with these types. For example, ldelem instruction requires the receiver to be a specific array, 
+        /// The reason is that the CLR doesn't support operations on generic parameters that would be needed
+        /// to work with these types. For example, ldelem instruction requires the receiver to be a specific array,
         /// not a type parameter constrained to be an array.
-        /// 
+        ///
         /// When computing the deduced type we don't perform this abstraction. We keep the original constraint T.
         /// Deduced base type is used to check that consistency rules are satisfied.
         /// </summary>

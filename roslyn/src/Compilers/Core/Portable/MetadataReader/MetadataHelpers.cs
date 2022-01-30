@@ -73,7 +73,7 @@ namespace Microsoft.CodeAnalysis
         /// Decodes a serialized type name in its canonical form. The canonical name is its full type name, followed
         /// optionally by the assembly where it is defined, its version, culture and public key token.  If the assembly
         /// name is omitted, the type name is in the current assembly otherwise it is in the referenced assembly. The
-        /// full type name is the fully qualified metadata type name. 
+        /// full type name is the fully qualified metadata type name.
         /// </summary>
         private struct SerializedTypeDecoder
         {
@@ -755,14 +755,14 @@ namespace Microsoft.CodeAnalysis
         /// Length of the fully-qualified name of this namespace.
         /// </param>
         /// <param name="typesByNS">
-        /// The sequence of groups of TypeDef row ids for types contained within the namespace, 
-        /// recursively including those from nested namespaces. The row ids must be grouped by the 
-        /// fully-qualified namespace name in case-sensitive manner. 
-        /// Key of each IGrouping is a fully-qualified namespace name, which starts with the name of 
+        /// The sequence of groups of TypeDef row ids for types contained within the namespace,
+        /// recursively including those from nested namespaces. The row ids must be grouped by the
+        /// fully-qualified namespace name in case-sensitive manner.
+        /// Key of each IGrouping is a fully-qualified namespace name, which starts with the name of
         /// this namespace. There could be multiple groups for each fully-qualified namespace name.
-        /// 
+        ///
         /// The groups must be sorted by the keys in a manner consistent with comparer passed in as
-        /// nameComparer. Therefore, all types immediately contained within THIS namespace, if any, 
+        /// nameComparer. Therefore, all types immediately contained within THIS namespace, if any,
         /// must be in several IGrouping at the very beginning of the sequence.
         /// </param>
         /// <param name="nameComparer">
@@ -778,7 +778,7 @@ namespace Microsoft.CodeAnalysis
         /// For each pair:
         ///   Key - contains simple name of a child namespace.
         ///   Value - contains a sequence similar to the one passed to this function, but
-        ///           calculated for the child namespace. 
+        ///           calculated for the child namespace.
         /// </param>
         /// <remarks></remarks>
         public static void GetInfoForImmediateNamespaceMembers(
@@ -964,7 +964,7 @@ namespace Microsoft.CodeAnalysis
         /// Fully qualified namespace name.
         /// </param>
         /// <returns>
-        /// Simple name of a top level child namespace, the left-most name following parent namespace name 
+        /// Simple name of a top level child namespace, the left-most name following parent namespace name
         /// in the fully qualified name.
         /// </returns>
         private static string ExtractSimpleNameOfChildNamespace(
@@ -1082,11 +1082,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Checks that the specified name is a valid metadata String and a file name.
         /// The specification isn't entirely consistent and complete but it mentions:
-        /// 
+        ///
         /// 22.19.2: "Name shall index a non-empty string in the String heap. It shall be in the format {filename}.{extension} (e.g., 'goo.dll', but not 'c:\utils\goo.dll')."
         /// 22.30.2: "The format of Name is {file name}.{file extension} with no path or drive letter; on POSIX-compliant systems Name contains no colon, no forward-slash, no backslash."
         ///          As Microsoft specific constraint.
-        /// 
+        ///
         /// A reasonable restriction seems to be a valid UTF8 non-empty string that doesn't contain '\0', '\', '/', ':' characters.
         /// </summary>
         internal static bool IsValidMetadataFileName(string name)

@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis
         /// Any character '\t' is replaced by two characters '\' and 't',
         /// Any character '\n' is replaced by two characters '\' and 'n',
         /// Any character '\r' is replaced by two characters '\' and 'r',
-        /// The assembly name in the display name is enclosed in double quotes if it starts or ends with 
+        /// The assembly name in the display name is enclosed in double quotes if it starts or ends with
         /// a whitespace character (' ', '\t', '\r', '\n').
         /// </remarks>
         public string GetDisplayName(bool fullKey = false)
@@ -171,7 +171,7 @@ namespace Microsoft.CodeAnalysis
         /// <param name="displayName">Display name.</param>
         /// <param name="identity">A full assembly identity.</param>
         /// <param name="parts">
-        /// Parts of the assembly identity that were specified in the display name, 
+        /// Parts of the assembly identity that were specified in the display name,
         /// or 0 if the parsing failed.
         /// </param>
         /// <returns>True if display name parsed correctly.</returns>

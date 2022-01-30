@@ -8,7 +8,7 @@ using System.Web.Http.SelfHost.Properties;
 namespace System.Web.Http.SelfHost.Channels
 {
     /// <summary>
-    /// Provides an <see cref="HttpMessageEncoderFactory"/> that returns a <see cref="MessageEncoder"/> 
+    /// Provides an <see cref="HttpMessageEncoderFactory"/> that returns a <see cref="MessageEncoder"/>
     /// that is able to produce and consume <see cref="HttpMessage"/> instances.
     /// </summary>
     internal sealed class HttpMessageEncodingBindingElement : MessageEncodingBindingElement
@@ -136,11 +136,11 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Creates a factory for producing message encoders that are able to 
+        /// Creates a factory for producing message encoders that are able to
         /// produce and consume <see cref="HttpMessage"/> instances.
         /// </summary>
         /// <returns>
-        /// The <see cref="MessageEncoderFactory"/> used to produce message encoders that are able to 
+        /// The <see cref="MessageEncoderFactory"/> used to produce message encoders that are able to
         /// produce and consume <see cref="HttpMessage"/> instances.
         /// </returns>
         public override MessageEncoderFactory CreateMessageEncoderFactory()

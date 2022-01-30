@@ -105,12 +105,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
 
         /// <summary>
         /// Try to get a new node to replace given node, which is a reference to a top-level type declared inside the namespace to be changed.
-        /// If this reference is the right side of a qualified name, the new node returned would be the entire qualified name. Depends on 
+        /// If this reference is the right side of a qualified name, the new node returned would be the entire qualified name. Depends on
         /// whether <paramref name="newNamespaceParts"/> is provided, the name in the new node might be qualified with this new namespace instead.
         /// </summary>
-        /// <param name="reference">A reference to a type declared inside the namespace to be changed, which is calculated based on results from 
+        /// <param name="reference">A reference to a type declared inside the namespace to be changed, which is calculated based on results from
         /// `SymbolFinder.FindReferencesAsync`.</param>
-        /// <param name="newNamespaceParts">If specified, and the reference is qualified with namespace, the namespace part of original reference 
+        /// <param name="newNamespaceParts">If specified, and the reference is qualified with namespace, the namespace part of original reference
         /// will be replaced with given namespace in the new node.</param>
         /// <param name="oldNode">The node to be replaced. This might be an ancestor of original reference.</param>
         /// <param name="newNode">The replacement node.</param>
@@ -284,10 +284,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
         /// Try to change the namespace declaration based on the following rules:
         ///     - if neither declared nor target namespace are "" (i.e. global namespace),
         ///     then we try to change the name of the namespace.
-        ///     - if declared namespace is "", then we try to move all types declared 
+        ///     - if declared namespace is "", then we try to move all types declared
         ///     in global namespace in the document into a new namespace declaration.
-        ///     - if target namespace is "", then we try to move all members in declared 
-        ///     namespace to global namespace (i.e. remove the namespace declaration).    
+        ///     - if target namespace is "", then we try to move all members in declared
+        ///     namespace to global namespace (i.e. remove the namespace declaration).
         /// </summary>
         protected override CompilationUnitSyntax ChangeNamespaceDeclaration(
             CompilationUnitSyntax root,
@@ -405,10 +405,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
         }
 
         /// <summary>
-        /// For the node specified by <paramref name="span"/> to be applicable container, it must be a namespace 
+        /// For the node specified by <paramref name="span"/> to be applicable container, it must be a namespace
         /// declaration or a compilation unit, contain no partial declarations and meet the following additional
         /// requirements:
-        /// 
+        ///
         /// - If a namespace declaration:
         ///    1. It doesn't contain or is nested in other namespace declarations
         ///    2. The name of the namespace is valid (i.e. no errors)
@@ -559,7 +559,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
         }
 
         /// <summary>
-        /// return trivia attached to namespace declaration. 
+        /// return trivia attached to namespace declaration.
         /// Leading trivia of the node and trivia around opening brace, as well as
         /// trivia around closing brace are concatenated together respectively.
         /// </summary>

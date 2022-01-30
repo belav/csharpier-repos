@@ -160,7 +160,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         }
 
         /// <summary>
-        /// Signals that the extension has been loaded.  The server can be started immediately, or wait for user action to start.  
+        /// Signals that the extension has been loaded.  The server can be started immediately, or wait for user action to start.
         /// To start the server, invoke the <see cref="StartAsync"/> event;
         /// </summary>
         public async Task OnLoadedAsync()

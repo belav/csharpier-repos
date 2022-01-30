@@ -41,7 +41,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             /// <summary>
             /// Indicates what kind of object it is
             /// <see cref="WellKnownSynchronizationKind"/> for examples.
-            /// 
+            ///
             /// this will be used in tranportation framework and deserialization service
             /// to hand shake how to send over data and deserialize serialized data
             /// </summary>

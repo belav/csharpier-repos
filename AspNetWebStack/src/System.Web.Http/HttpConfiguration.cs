@@ -146,8 +146,8 @@ namespace System.Web.Http
         /// <summary>
         /// Gets an ordered list of <see cref="DelegatingHandler"/> instances to be invoked as an
         /// <see cref="HttpRequestMessage"/> travels up the stack and an <see cref="HttpResponseMessage"/> travels down in
-        /// stack in return. The handlers are invoked in a top-down fashion in the incoming path and bottom-up in the outgoing 
-        /// path. That is, the first entry is invoked first for an incoming request message but last for an outgoing 
+        /// stack in return. The handlers are invoked in a top-down fashion in the incoming path and bottom-up in the outgoing
+        /// path. That is, the first entry is invoked first for an incoming request message but last for an outgoing
         /// response message.
         /// </summary>
         /// <value>
@@ -178,7 +178,7 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Gets the root virtual path. The <see cref="VirtualPathRoot"/> property always returns 
+        /// Gets the root virtual path. The <see cref="VirtualPathRoot"/> property always returns
         /// "/" as the first character of the returned value.
         /// </summary>
         public string VirtualPathRoot
@@ -211,8 +211,8 @@ namespace System.Web.Http
         public ServicesContainer Services { get; internal set; }
 
         /// <summary>
-        /// Top level hook for how parameters should be bound. 
-        /// This should be respected by the IActionValueBinder. If a parameter is not claimed by the list, the IActionValueBinder still binds it. 
+        /// Top level hook for how parameters should be bound.
+        /// This should be respected by the IActionValueBinder. If a parameter is not claimed by the list, the IActionValueBinder still binds it.
         /// </summary>
         public ParameterBindingRulesCollection ParameterBindingRules { get; internal set; }
 
@@ -296,7 +296,7 @@ namespace System.Web.Http
 
         /// <summary>
         /// Invoke the Intializer hook. It is considered immutable from this point forward.
-        /// It's safe to call this multiple times. 
+        /// It's safe to call this multiple times.
         /// </summary>
         public void EnsureInitialized()
         {

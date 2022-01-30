@@ -647,7 +647,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Selects the candidate assembly with the largest version number.  Uses culture as a tie-breaker if it is provided.
-        /// All candidates are assumed to have the same name and must include versions and cultures.  
+        /// All candidates are assumed to have the same name and must include versions and cultures.
         /// </summary>
         internal static IAssemblyName GetBestMatch(
             IEnumerable<IAssemblyName> candidates,

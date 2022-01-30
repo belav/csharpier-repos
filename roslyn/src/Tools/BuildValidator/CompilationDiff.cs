@@ -530,7 +530,7 @@ namespace BuildValidator
         }
 
         /// <summary>
-        /// Given two builds which are not identical this will look for known issues that could be 
+        /// Given two builds which are not identical this will look for known issues that could be
         /// causing the difference.
         /// </summary>
         private static unsafe bool SearchForKnownIssues(

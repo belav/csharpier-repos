@@ -336,7 +336,7 @@ public class ReliabilityFramework
 
     /// <summary>
     /// Runs the reliability tests.  Called from Main with the name of the configuration file we should be using.
-    /// All code in here runs in our starting app domain.  
+    /// All code in here runs in our starting app domain.
     /// </summary>
     /// <param name="testConfig">configuration file to use</param>
     /// <returns>100 on sucess, another number on failure.</returns>
@@ -1770,8 +1770,8 @@ public class ReliabilityFramework
     /// <summary>
     /// Pre-loads a test into the correct AssemblyLoadContext for the current loader mode.
     /// This method behaves in the same way as the TestPreLoader_AppDomain, the difference
-    /// (besides the AssemblyLoadContext vs AppDomain creation differences) is that it uses 
-    /// reflection to get and invoke the methods on the LoaderClass loaded into 
+    /// (besides the AssemblyLoadContext vs AppDomain creation differences) is that it uses
+    /// reflection to get and invoke the methods on the LoaderClass loaded into
     /// the AssemblyLoadContext.
     /// </summary>
     /// <param name="test"></param>
@@ -2028,106 +2028,106 @@ public class ReliabilityFramework
     /// <param name="returnCode">return code of the test, -1 for none provided</param>
     void SendFailMail(ReliabilityTest testCase, string message, string subject, string to, string body)
     {
-        // we only want to send fail mails once / test / run, so we mark a failed test
-        // and won't send any additional e-mails once it's failed.
-        if (testCase == null || !testCase.HasFailed)
-        {
-            if (testCase != null)
-            {
-                testCase.HasFailed = true;
-            }
-            try
-            {
-#pragma warning disable 618
-                MailMessage mail = new MailMessage();
-#pragma warning restore
-                if (subject != null)
-                {
-                    mail.Subject = subject;
-                }
-                else
-                {
-                    mail.Subject = "ACTION REQUIRED::Follow up on stress failures";
-                }
-                mail.From = "corbvt@microsoft.com";
-
-                if (to == null)
-                {
-                    if (testCase != null && testCase.TestOwner != null)
-                    {
-                        string[] failMailReceivers = testCase.TestOwner.Split(new char[] { ';' });
-
-                        //convert aliases into full e-mail addresses
-                        foreach (string failReceiver in failMailReceivers)
-                        {
-                            if (failReceiver.IndexOf("@") != -1)
-                            {
-                                mail.To = failReceiver;
-                            }
-                            else
-                            {
-                                mail.To = String.Format("{0}@microsoft.com", failReceiver);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        mail.To = "dinov@microsoft.com";
-                    }
-                }
-                else
-                {
-                    mail.To = to;
-                }
-
-                if (_curTestSet.CCFailMail != null)
-                {
-                    mail.Cc = _curTestSet.CCFailMail;
-                }
-
-#pragma warning disable 0618
-                mail.BodyFormat = MailFormat.Html;
-                mail.Priority = MailPriority.High;
-#pragma warning restore
-                if (body == null)
-                {
-                    mail.Body = String.Format(@"
-<HTML><BODY><H2>Please investigate your test failures ASAP</H2>
-
-<table border=1 cellspacing=0>
-<tr><td bgcolor=#cccccc>Computer Name:</td><td> {0}</td></tr>
-<tr><td bgcolor=#cccccc>Test         :</td><td> {1} {2}</td></tr>
-<tr><td bgcolor=#cccccc>Comments	 :</td><td> {3}</td></tr>
-</table>
-
-<P>If you are listed on the To: line, you have test failures to investigate.  
-
-<p>For all failures please find the machine listed above on the <a href=""http://urtframeworks/stress/stressdetails.aspx?team=CLR"">CLR Stress Details Web Page</a> and open a tracking bug if one has not already been created for this stress run.  
-
-<p>If this is a product failure please e-mail the 
-<a href=""mailto:corqrd"">CLR Quick Response Dev Team</a> with the failure information and tracking bug number.  The QRT will then open a product bug if appropriate and resolve the tracking bug as a duplicate.
-
-<p>If this is a test failure please open a tracking bug via the CLR Stress Details web page and assign if to yourself.  Resolve the bug once you have fixed the test issue.
-
-<p>If this is a stress harness issue please contact <a href=""mailto:timme;dinov"">the stress developers</a>.
-	
-Thanks for contributing to CLR Stress!
-	</P></BODY></HTML>", Environment.MachineName, testCase == null ? "None" : testCase.Assembly, testCase == null ? "None" : testCase.Arguments, message);
-                }
-                else
-                {
-                    mail.Body = body;
-                }
-#pragma warning disable 0618
-                SmtpMail.SmtpServer = "smarthost";
-                SmtpMail.Send(mail);
-#pragma warning restore
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error sending fail mail: {0}", e);
-            }
-        }
+    // we only want to send fail mails once / test / run, so we mark a failed test
+    // and won't send any additional e-mails once it's failed.
+    if (testCase == null || !testCase.HasFailed)
+    {
+    if (testCase != null)
+    {
+    testCase.HasFailed = true;
+    }
+    try
+    {
+    #pragma warning disable 618
+    MailMessage mail = new MailMessage();
+    #pragma warning restore
+    if (subject != null)
+    {
+    mail.Subject = subject;
+    }
+    else
+    {
+    mail.Subject = "ACTION REQUIRED::Follow up on stress failures";
+    }
+    mail.From = "corbvt@microsoft.com";
+    
+    if (to == null)
+    {
+    if (testCase != null && testCase.TestOwner != null)
+    {
+    string[] failMailReceivers = testCase.TestOwner.Split(new char[] { ';' });
+    
+    //convert aliases into full e-mail addresses
+    foreach (string failReceiver in failMailReceivers)
+    {
+    if (failReceiver.IndexOf("@") != -1)
+    {
+    mail.To = failReceiver;
+    }
+    else
+    {
+    mail.To = String.Format("{0}@microsoft.com", failReceiver);
+    }
+    }
+    }
+    else
+    {
+    mail.To = "dinov@microsoft.com";
+    }
+    }
+    else
+    {
+    mail.To = to;
+    }
+    
+    if (_curTestSet.CCFailMail != null)
+    {
+    mail.Cc = _curTestSet.CCFailMail;
+    }
+    
+    #pragma warning disable 0618
+    mail.BodyFormat = MailFormat.Html;
+    mail.Priority = MailPriority.High;
+    #pragma warning restore
+    if (body == null)
+    {
+    mail.Body = String.Format(@"
+    <HTML><BODY><H2>Please investigate your test failures ASAP</H2>
+    
+    <table border=1 cellspacing=0>
+    <tr><td bgcolor=#cccccc>Computer Name:</td><td> {0}</td></tr>
+    <tr><td bgcolor=#cccccc>Test         :</td><td> {1} {2}</td></tr>
+    <tr><td bgcolor=#cccccc>Comments	 :</td><td> {3}</td></tr>
+    </table>
+    
+    <P>If you are listed on the To: line, you have test failures to investigate.
+    
+    <p>For all failures please find the machine listed above on the <a href=""http://urtframeworks/stress/stressdetails.aspx?team=CLR"">CLR Stress Details Web Page</a> and open a tracking bug if one has not already been created for this stress run.
+    
+    <p>If this is a product failure please e-mail the
+    <a href=""mailto:corqrd"">CLR Quick Response Dev Team</a> with the failure information and tracking bug number.  The QRT will then open a product bug if appropriate and resolve the tracking bug as a duplicate.
+    
+    <p>If this is a test failure please open a tracking bug via the CLR Stress Details web page and assign if to yourself.  Resolve the bug once you have fixed the test issue.
+    
+    <p>If this is a stress harness issue please contact <a href=""mailto:timme;dinov"">the stress developers</a>.
+    
+    Thanks for contributing to CLR Stress!
+    </P></BODY></HTML>", Environment.MachineName, testCase == null ? "None" : testCase.Assembly, testCase == null ? "None" : testCase.Arguments, message);
+    }
+    else
+    {
+    mail.Body = body;
+    }
+    #pragma warning disable 0618
+    SmtpMail.SmtpServer = "smarthost";
+    SmtpMail.Send(mail);
+    #pragma warning restore
+    }
+    catch (Exception e)
+    {
+    Console.WriteLine("Error sending fail mail: {0}", e);
+    }
+    }
     }
     */
     /// <summary>

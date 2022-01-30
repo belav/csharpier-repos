@@ -159,7 +159,7 @@ namespace System.Net.Http.Formatting.Parsers
 
         /// <summary>
         /// Parse a MIME multipart message. Bytes are parsed in a consuming
-        /// manner from the beginning of the request buffer meaning that the same bytes can not be 
+        /// manner from the beginning of the request buffer meaning that the same bytes can not be
         /// present in the request buffer.
         /// </summary>
         /// <param name="buffer">Request buffer from where request is read</param>
@@ -168,7 +168,7 @@ namespace System.Net.Http.Formatting.Parsers
         /// <param name="remainingBodyPart">Any body part that was considered as a potential MIME multipart boundary but which was in fact part of the body.</param>
         /// <param name="bodyPart">The bulk of the body part.</param>
         /// <param name="isFinalBodyPart">Indicates whether the final body part has been found.</param>
-        /// <remarks>In order to get the complete body part, the caller is responsible for concatenating the contents of the 
+        /// <remarks>In order to get the complete body part, the caller is responsible for concatenating the contents of the
         /// <paramref name="remainingBodyPart"/> and <paramref name="bodyPart"/> out parameters.</remarks>
         /// <returns>State of the parser.</returns>
         [SuppressMessage(

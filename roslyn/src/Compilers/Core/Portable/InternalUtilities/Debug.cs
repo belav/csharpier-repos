@@ -26,13 +26,13 @@ namespace Roslyn.Utilities
         }
 
         /// <summary>
-        /// Generally <see cref="Debug.Assert(bool)"/> is a sufficient method for enforcing DEBUG 
-        /// only invariants in our code. When it triggers that provides a nice stack trace for 
+        /// Generally <see cref="Debug.Assert(bool)"/> is a sufficient method for enforcing DEBUG
+        /// only invariants in our code. When it triggers that provides a nice stack trace for
         /// investigation. Generally that is enough.
-        /// 
-        /// <para>There are cases for which a stack is not enough and we need a full heap dump to 
+        ///
+        /// <para>There are cases for which a stack is not enough and we need a full heap dump to
         /// investigate the failure. This method takes care of that. The behavior is that when running
-        /// in our CI environment if the assert triggers we will rudely crash the process and 
+        /// in our CI environment if the assert triggers we will rudely crash the process and
         /// produce a heap dump for investigation.</para>
         /// </summary>
         [Conditional("DEBUG")]

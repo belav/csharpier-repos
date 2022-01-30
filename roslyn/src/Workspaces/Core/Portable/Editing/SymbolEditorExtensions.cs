@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Editing
     public static class SymbolEditorExtensions
     {
         /// <summary>
-        /// Gets the reference to the declaration of the base or interface type as part of the symbol's declaration. 
+        /// Gets the reference to the declaration of the base or interface type as part of the symbol's declaration.
         /// </summary>
         public static async Task<SyntaxNode> GetBaseOrInterfaceDeclarationReferenceAsync(
             this SymbolEditor editor,

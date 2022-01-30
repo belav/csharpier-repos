@@ -27,7 +27,7 @@ namespace AutoMapper.Internal.Mappers
         /// <param name="memberMap"></param>
         /// <param name="sourceExpression">Source parameter</param>
         /// <param name="destExpression">Destination parameter</param>
-        /// 
+        ///
         /// <returns>Map expression</returns>
         Expression MapExpression(
             IGlobalConfiguration configurationProvider,

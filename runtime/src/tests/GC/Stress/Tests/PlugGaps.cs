@@ -155,18 +155,18 @@ public class Test
 13 0012f268 5d993abd mscorwks!MethodDesc::CallTargetWorker+0x297 [f:\pd7\ndp\clr\src\vm\method.cpp @ 1717]
 
 0:000> dt WKS::gc_heap::settings
-   +0x000 condemned_generation : 2
-   +0x004 promotion        : 1
-   +0x008 compaction       : 1
-   +0x00c heap_expansion   : 0
-   +0x010 concurrent       : 1
-   +0x014 concurrent_compaction : 1
-   +0x018 demotion         : 0
-   +0x01c card_bundles     : 1
-   +0x020 gen0_reduction_count : 0
-   +0x024 segment_allocation_failed_count : 0
-   +0x028 elevation        : 3 ( el_locked )
-   +0x02c reason           : 0 ( reason_alloc )
-   +0x030 pause_mode       : 1 ( pause_interactive )
++0x000 condemned_generation : 2
++0x004 promotion        : 1
++0x008 compaction       : 1
++0x00c heap_expansion   : 0
++0x010 concurrent       : 1
++0x014 concurrent_compaction : 1
++0x018 demotion         : 0
++0x01c card_bundles     : 1
++0x020 gen0_reduction_count : 0
++0x024 segment_allocation_failed_count : 0
++0x028 elevation        : 3 ( el_locked )
++0x02c reason           : 0 ( reason_alloc )
++0x030 pause_mode       : 1 ( pause_interactive )
 
 */

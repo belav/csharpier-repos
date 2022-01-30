@@ -890,8 +890,8 @@ class Boom : System.Attribute
         }
 
         /// <summary>
-        /// When determining whether the LHS of a null-coalescing operator (??) is non-null, the native compiler strips off casts.  
-        /// 
+        /// When determining whether the LHS of a null-coalescing operator (??) is non-null, the native compiler strips off casts.
+        ///
         /// We have decided not to reproduce this behavior.
         /// </summary>
         [Fact]

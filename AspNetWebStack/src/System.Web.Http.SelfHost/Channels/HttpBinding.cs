@@ -11,7 +11,7 @@ using System.Web.Http.SelfHost.ServiceModel.Channels;
 namespace System.Web.Http.SelfHost.Channels
 {
     /// <summary>
-    /// A binding used with endpoints for web services that use strongly-type HTTP request 
+    /// A binding used with endpoints for web services that use strongly-type HTTP request
     /// and response messages.
     /// </summary>
     public class HttpBinding : Binding, IBindingRuntimePreferences
@@ -34,10 +34,10 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpBinding"/> class with the 
+        /// Initializes a new instance of the <see cref="HttpBinding"/> class with the
         /// type of security used by the binding explicitly specified.
         /// </summary>
-        /// <param name="securityMode">The value of <see cref="HttpBindingSecurityMode"/> that 
+        /// <param name="securityMode">The value of <see cref="HttpBindingSecurityMode"/> that
         /// specifies the type of security that is used to configure a service endpoint using the
         /// <see cref="HttpBinding"/> binding.
         /// </param>
@@ -47,7 +47,7 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets the envelope version that is used by endpoints that are configured to use an 
+        /// Gets the envelope version that is used by endpoints that are configured to use an
         /// <see cref="HttpBinding"/> binding.  Always returns <see cref="System.ServiceModel.EnvelopeVersion.None"/>.
         /// </summary>
         [SuppressMessage(
@@ -61,7 +61,7 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets a value that indicates whether the hostname is used to reach the 
+        /// Gets or sets a value that indicates whether the hostname is used to reach the
         /// service when matching the URI.
         /// </summary>
         [DefaultValue(HttpTransportDefaults.HostNameComparisonMode)]
@@ -76,7 +76,7 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets the maximum amount of memory allocated for the buffer manager that manages the buffers 
+        /// Gets or sets the maximum amount of memory allocated for the buffer manager that manages the buffers
         /// required by endpoints that use this binding.
         /// </summary>
         [DefaultValue(TransportDefaults.MaxBufferPoolSize)]
@@ -91,7 +91,7 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets the maximum amount of memory that is allocated for use by the manager of the message 
+        /// Gets or sets the maximum amount of memory that is allocated for use by the manager of the message
         /// buffers that receive messages from the channel.
         /// </summary>
         [DefaultValue(TransportDefaults.MaxBufferSize)]
@@ -137,7 +137,7 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets the URI transport scheme for the channels and listeners that are configured 
+        /// Gets the URI transport scheme for the channels and listeners that are configured
         /// with this binding. (Overrides <see cref="System.ServiceModel.Channels.Binding.Scheme">
         /// Binding.Scheme</see>.)
         /// </summary>
@@ -147,7 +147,7 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets the security settings used with this binding. 
+        /// Gets or sets the security settings used with this binding.
         /// </summary>
         public HttpBindingSecurity Security
         {
@@ -164,7 +164,7 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets a value that indicates whether the service configured with the 
+        /// Gets or sets a value that indicates whether the service configured with the
         /// binding uses streamed or buffered (or both) modes of message transfer.
         /// </summary>
         [DefaultValue(HttpTransportDefaults.TransferMode)]
@@ -192,7 +192,7 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Returns an ordered collection of binding elements contained in the current binding. 
+        /// Returns an ordered collection of binding elements contained in the current binding.
         /// (Overrides <see cref="System.ServiceModel.Channels.Binding.CreateBindingElements">
         /// Binding.CreateBindingElements</see>.)
         /// </summary>

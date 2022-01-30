@@ -1390,11 +1390,11 @@ namespace DebuggerTests
             JObject.FromObject(new { type = "symbol", value = @value, description = @value });
 
         /*
-        	For target names with generated method names like
-        		`void <ActionTSignatureTest>b__11_0 (Math.GenericStruct<int[]>)`
-
-        	.. pass target "as `target: "void <ActionTSignatureTest>|(Math.GenericStruct<int[]>)"`
-        */
+            For target names with generated method names like
+            `void <ActionTSignatureTest>b__11_0 (Math.GenericStruct<int[]>)`
+            
+            .. pass target "as `target: "void <ActionTSignatureTest>|(Math.GenericStruct<int[]>)"`
+            */
         internal static JObject TDelegate(string className, string target) =>
             JObject.FromObject(
                 new { __custom_type = "delegate", className = className, target = target }

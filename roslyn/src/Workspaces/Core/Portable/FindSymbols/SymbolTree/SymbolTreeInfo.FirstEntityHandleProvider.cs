@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// generic arguments, or nested type + separators.  Instead just hte name
         /// of the type, any containing types, and the component parts of its namespace
         /// are added.  For example, for the type "X.Y.O`1.I`2, we will produce [X, Y, O, I]
-        /// 
+        ///
         /// </summary>
         private class FirstEntityHandleProvider : ISignatureTypeProvider<EntityHandle, object>
         {

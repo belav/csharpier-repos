@@ -330,7 +330,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// input-unsafe if it could not be a parameter type of a method.
         /// </summary>
         /// <remarks>
-        /// This method is intended to match spec section 13.1.3.1 as closely as possible 
+        /// This method is intended to match spec section 13.1.3.1 as closely as possible
         /// (except that the output-unsafe and input-unsafe checks are merged).
         /// </remarks>
         private static bool IsVarianceUnsafe<T>(

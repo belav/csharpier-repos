@@ -365,13 +365,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
          * to verify exception handling.
          * See issue https://github.com/dotnet/runtime/issues/19030
          * and https://github.com/dotnet/runtime/issues/18792
-
-        [Fact]
-        public static void TestAddAndRemove() {}
-
-        [Fact]
-        public static void TestAddRangeAndRemoveRange() {}
-        */
+         
+         [Fact]
+         public static void TestAddAndRemove() {}
+         
+         [Fact]
+         public static void TestAddRangeAndRemoveRange() {}
+         */
 
         [Fact]
         public static void EnumerateClosedIsEmpty()

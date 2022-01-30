@@ -50,7 +50,7 @@ namespace System.Web.Mvc
         /// <param name="collection">Key value collection from request.</param>
         /// <param name="unvalidatedCollection">Unvalidated key value collection from the request.</param>
         /// <param name="culture">Culture with which the values are to be used.</param>
-        /// <param name="jQueryToMvcRequestNormalizationRequired">jQuery POST when sending complex Javascript 
+        /// <param name="jQueryToMvcRequestNormalizationRequired">jQuery POST when sending complex Javascript
         /// objects to server does not encode in the way understandable by MVC. This flag should be set
         /// if the request should be normalized to MVC form - https://aspnetwebstack.codeplex.com/workitem/1564. </param>
         [SuppressMessage(

@@ -955,7 +955,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         }
 
         /// <remarks>
-        /// The interesting part in the following method is the support for exception filters. 
+        /// The interesting part in the following method is the support for exception filters.
         /// === Example:
         ///
         /// try
@@ -971,7 +971,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         ///
         /// Try
         ///     TryBlock
-        /// Filter 
+        /// Filter
         ///     var tmp = Pop() as {ExceptionType}
         ///     if (tmp == null)
         ///     {
@@ -988,7 +988,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         ///     variable ex can be used here
         ///     Handler
         /// EndCatch
-        /// 
+        ///
         /// When evaluating `Condition` requires additional statements be executed first, those
         /// statements are stored in `catchBlock.ExceptionFilterPrologueOpt` and emitted before the condition.
         /// </remarks>
@@ -1731,7 +1731,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             private FinallyCloner() { }
 
             /// <summary>
-            /// The argument is BoundTryStatement (and not a BoundBlock) specifically 
+            /// The argument is BoundTryStatement (and not a BoundBlock) specifically
             /// to support only Finally blocks where it is guaranteed to not have incoming or leaving branches.
             /// </summary>
             public static BoundBlock MakeFinallyClone(BoundTryStatement node)

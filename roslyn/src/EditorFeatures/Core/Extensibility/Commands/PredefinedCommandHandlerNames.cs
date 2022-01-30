@@ -164,7 +164,7 @@ namespace Microsoft.CodeAnalysis.Editor
         public const string ToggleLineComment = "Toggle Line Comment Command Handler";
 
         /// <summary>
-        /// Command handler name for Paste Content in Interactive Format. 
+        /// Command handler name for Paste Content in Interactive Format.
         /// </summary>
         public const string InteractivePaste = "Interactive Paste Command Handler";
 

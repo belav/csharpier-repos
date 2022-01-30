@@ -284,8 +284,8 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Finds the <see cref="DocumentId"/> related to the given <see cref="DocumentId"/> that
-        /// is in the current context. If the <see cref="DocumentId"/> is currently closed, then 
-        /// it is returned directly. If it is open, then this returns the same result that 
+        /// is in the current context. If the <see cref="DocumentId"/> is currently closed, then
+        /// it is returned directly. If it is open, then this returns the same result that
         /// <see cref="GetDocumentIdInCurrentContext(SourceTextContainer)"/> would return for the
         /// <see cref="SourceTextContainer"/>.
         /// </summary>

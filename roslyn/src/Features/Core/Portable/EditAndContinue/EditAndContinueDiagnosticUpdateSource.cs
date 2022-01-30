@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public void ClearDiagnostics() => DiagnosticsCleared?.Invoke(this, EventArgs.Empty);
 
         /// <summary>
-        /// Reports given set of project or solution level diagnostics. 
+        /// Reports given set of project or solution level diagnostics.
         /// </summary>
         public void ReportDiagnostics(
             Workspace workspace,

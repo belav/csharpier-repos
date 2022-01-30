@@ -88,8 +88,8 @@ public unsafe class Tests
         public double d;
     }
 
-    /* sparcv9 has complex conventions when passing structs with doubles in them 
-	   by value, some simple tests for them */
+    /* sparcv9 has complex conventions when passing structs with doubles in them
+       by value, some simple tests for them */
     [StructLayout(LayoutKind.Sequential)]
     public struct Point
     {
@@ -658,14 +658,14 @@ public unsafe class Tests
 
     /* FIXME: This doesn't work on all platforms */
     /*
-	public static int test_0_marshal_empty_struct_cpp () {
-		EmptyStructCpp es = new EmptyStructCpp ();
-
-		mono_test_return_empty_struct_cpp (42);
-		
-		return 0;
-	}
-	*/
+    public static int test_0_marshal_empty_struct_cpp () {
+    EmptyStructCpp es = new EmptyStructCpp ();
+    
+    mono_test_return_empty_struct_cpp (42);
+    
+    return 0;
+    }
+    */
 
     public static int test_0_marshal_lpstruct()
     {
@@ -1361,8 +1361,8 @@ public unsafe class Tests
     }
 
     /*
-	 * AMD64 small structs-by-value tests.
-	 */
+     * AMD64 small structs-by-value tests.
+     */
 
     /* TEST 1: 16 byte long INTEGER struct */
 
@@ -1502,8 +1502,8 @@ public unsafe class Tests
     }
 
     /*
-	 * IA64 struct tests
-	 */
+     * IA64 struct tests
+     */
 
     /* Test 5: Float HFA */
 
@@ -1592,8 +1592,8 @@ public unsafe class Tests
     }
 
     /*
-	 * Generic structures
-	 */
+     * Generic structures
+     */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct Amd64Struct1Gen<T>
@@ -1623,8 +1623,8 @@ public unsafe class Tests
     }
 
     /*
-	 * Other tests
-	 */
+     * Other tests
+     */
 
     public static int test_0_marshal_byval_class()
     {
@@ -1748,37 +1748,37 @@ public unsafe class Tests
     }
 
     /*
-	 * Pointers to structures can not be passed
-	 */
+     * Pointers to structures can not be passed
+     */
 
     /* This seems to be allowed by MS in some cases */
     /*
-	public struct CharInfo {
-		public char Character;
-		public short Attributes;
-	}
-
-	[DllImport ("libtest", EntryPoint="mono_test_marshal_struct")]
-	public static unsafe extern int mono_test_marshal_ptr_to_struct (CharInfo *ptr);
-
-	public static unsafe int test_0_marshal_ptr_to_struct () {
-		CharInfo [] buffer = new CharInfo [1];
-		fixed (CharInfo *ptr = &buffer [0]) {
-			try {
-				mono_test_marshal_ptr_to_struct (ptr);
-				return 1;
-			}
-			catch (MarshalDirectiveException) {
-				return 0;
-			}
-		}
-		return 1;
-	}
-	*/
+    public struct CharInfo {
+    public char Character;
+    public short Attributes;
+    }
+    
+    [DllImport ("libtest", EntryPoint="mono_test_marshal_struct")]
+    public static unsafe extern int mono_test_marshal_ptr_to_struct (CharInfo *ptr);
+    
+    public static unsafe int test_0_marshal_ptr_to_struct () {
+    CharInfo [] buffer = new CharInfo [1];
+    fixed (CharInfo *ptr = &buffer [0]) {
+    try {
+    mono_test_marshal_ptr_to_struct (ptr);
+    return 1;
+    }
+    catch (MarshalDirectiveException) {
+    return 0;
+    }
+    }
+    return 1;
+    }
+    */
 
     /*
-	 * LPWStr marshalling
-	 */
+     * LPWStr marshalling
+     */
 
     [DllImport("libtest", EntryPoint = "test_lpwstr_marshal")]
     [return: MarshalAs(UnmanagedType.LPWStr)]
@@ -1834,8 +1834,8 @@ public unsafe class Tests
     }
 
     /*
-	 * Byref bool marshalling
-	 */
+     * Byref bool marshalling
+     */
 
     [DllImport("libtest")]
     extern static int marshal_test_ref_bool(
@@ -1869,8 +1869,8 @@ public unsafe class Tests
     }
 
     /*
-	 * Bool struct field marshalling
-	 */
+     * Bool struct field marshalling
+     */
 
     struct BoolStruct
     {
@@ -1911,8 +1911,8 @@ public unsafe class Tests
     }
 
     /*
-	 * Alignment of structs containing longs
-	 */
+     * Alignment of structs containing longs
+     */
 
     struct LongStruct2
     {
@@ -1939,8 +1939,8 @@ public unsafe class Tests
     }
 
     /*
-	 * Invoking pinvoke methods through delegates
-	 */
+     * Invoking pinvoke methods through delegates
+     */
 
     delegate int MyDelegate(string name);
 
@@ -1961,8 +1961,8 @@ public unsafe class Tests
     }
 
     /*
-	 * Missing virtual pinvoke methods
-	 */
+     * Missing virtual pinvoke methods
+     */
 
     public class T
     {
@@ -1995,8 +1995,8 @@ public unsafe class Tests
     }
 
     /*
-	 * Marshalling of type 'object'
-	 */
+     * Marshalling of type 'object'
+     */
 
     [DllImport("libtest", EntryPoint = "mono_test_marshal_class")]
     public static extern SimpleClass mono_test_marshal_object(
@@ -2021,8 +2021,8 @@ public unsafe class Tests
     }
 
     /*
-	 * Marshalling of DateTime to OLE DATE (double)
-	 */
+     * Marshalling of DateTime to OLE DATE (double)
+     */
     [DllImport("libtest", EntryPoint = "mono_test_marshal_date_time")]
     public static extern double mono_test_marshal_date_time(DateTime d, out DateTime d2);
 
@@ -2039,8 +2039,8 @@ public unsafe class Tests
     }
 
     /*
-	 * Calling pinvoke functions dynamically using calli
-	 */
+     * Calling pinvoke functions dynamically using calli
+     */
 
     [DllImport("libtest")]
     private static extern IntPtr mono_test_marshal_lookup_symbol(string fileName);

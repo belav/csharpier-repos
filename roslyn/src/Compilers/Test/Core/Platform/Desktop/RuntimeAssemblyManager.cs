@@ -61,8 +61,8 @@ namespace Roslyn.Test.Utilities.Desktop
         /// <summary>
         /// The AppDomain we create to host the RuntimeAssemblyManager will always have the mscorlib
         /// it was compiled against.  It's possible the data we are verifying or running used a slightly
-        /// different mscorlib.  Hence we can't do exact MVID matching on them.  This tracks the set of 
-        /// modules loaded when we started the RuntimeAssemblyManager for which we can't do strict 
+        /// different mscorlib.  Hence we can't do exact MVID matching on them.  This tracks the set of
+        /// modules loaded when we started the RuntimeAssemblyManager for which we can't do strict
         /// comparisons.
         /// </summary>
         private readonly HashSet<string> _preloadedSet;
@@ -168,8 +168,8 @@ namespace Roslyn.Test.Utilities.Desktop
         }
 
         /// <summary>
-        /// Add this to the set of <see cref="ModuleData"/> that is managed by this instance.  It is okay to 
-        /// return values that are already present. 
+        /// Add this to the set of <see cref="ModuleData"/> that is managed by this instance.  It is okay to
+        /// return values that are already present.
         /// </summary>
         /// <param name="modules"></param>
         public void AddModuleData(List<RuntimeModuleData> modules)

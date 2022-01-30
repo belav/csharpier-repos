@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// The entries in the map are sorted by <see cref="DocumentId.Id"/>, which yields locally deterministic order but not the order that
-        /// matches the order in which documents were added. Therefore this ordering can't be used when creating compilations and it can't be 
+        /// matches the order in which documents were added. Therefore this ordering can't be used when creating compilations and it can't be
         /// used when persisting document lists that do not preserve the GUIDs.
         /// </summary>
         private readonly ImmutableSortedDictionary<DocumentId, TState> _map;

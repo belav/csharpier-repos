@@ -36,10 +36,10 @@ public class Tests
 
     static Tests()
     {
-        /* 
-		 * This is really at test of the compiler: it should init
-		 * last before getting here.
-		*/
+        /*
+         * This is really at test of the compiler: it should init
+         * last before getting here.
+         */
         if (last != 42)
             burp = 5;
         else

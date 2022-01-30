@@ -106,7 +106,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         }
 
         /// <summary>
-        /// Returns the latest token the lexer has produced, and then asks the lexer to 
+        /// Returns the latest token the lexer has produced, and then asks the lexer to
         /// produce the next token after that.
         /// </summary>
         /// <param name="allowTrivia">Whether or not trivia is allowed on the next token
@@ -124,8 +124,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         }
 
         /// <summary>
-        /// Given an input text, and set of options, parses out a fully representative syntax tree 
-        /// and list of diagnostics.  Parsing should always succeed, except in the case of the stack 
+        /// Given an input text, and set of options, parses out a fully representative syntax tree
+        /// and list of diagnostics.  Parsing should always succeed, except in the case of the stack
         /// overflowing.
         /// </summary>
         public static RegexTree TryParse(VirtualCharSequence text, RegexOptions options)
@@ -281,9 +281,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         /// Parses out code of the form: ...|...|...
         /// This is the type of code you have at the top level of a regex, or inside any grouping
         /// contruct.  Note that sequences can be empty in .NET regex.  i.e. the following is legal:
-        /// 
+        ///
         ///     ...||...
-        /// 
+        ///
         /// An empty sequence just means "match at every position in the test string".
         /// </summary>
         private RegexExpressionNode ParseAlternatingSequencesWorker(bool consumeCloseParen)

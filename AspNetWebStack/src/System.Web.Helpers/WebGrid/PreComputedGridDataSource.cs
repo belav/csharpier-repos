@@ -8,7 +8,7 @@ using System.Linq;
 namespace System.Web.Helpers
 {
     /// <summary>
-    /// Source wrapper for data provided by the user that is already sorted and paged. The user provides the WebGrid the rows to bind and additionally the total number of rows that 
+    /// Source wrapper for data provided by the user that is already sorted and paged. The user provides the WebGrid the rows to bind and additionally the total number of rows that
     /// are available.
     /// </summary>
     internal sealed class PreComputedGridDataSource : IWebGridDataSource

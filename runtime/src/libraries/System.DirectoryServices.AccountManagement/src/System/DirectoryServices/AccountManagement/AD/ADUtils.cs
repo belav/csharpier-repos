@@ -543,9 +543,9 @@ namespace System.DirectoryServices.AccountManagement
                             bool w2k3Supported  = false;
                             if ( w2k3Supported )
                             {
-                                return @"LDAP://" + this.UserSuppliedServerName + @"/<WKGUID= " + Constants.GUID_FOREIGNSECURITYPRINCIPALS_CONTAINER_W + @"," + this.DefaultNamingContext + @">";
+                            return @"LDAP://" + this.UserSuppliedServerName + @"/<WKGUID= " + Constants.GUID_FOREIGNSECURITYPRINCIPALS_CONTAINER_W + @"," + this.DefaultNamingContext + @">";
                             }
-                */
+                            */
             PropertyValueCollection wellKnownObjectValues = deBase.Properties["wellKnownObjects"];
 
             foreach (UnsafeNativeMethods.IADsDNWithBinary value in wellKnownObjectValues)

@@ -47,9 +47,9 @@ namespace Castle.Core.Logging
         public abstract ILogger Create(string name, LoggerLevel level);
 
         /// <summary>
-		///   Gets the configuration file.
-		/// </summary>
-		/// <param name = "fileName">i.e. log4net.config</param>
+        ///   Gets the configuration file.
+        /// </summary>
+        /// <param name = "fileName">i.e. log4net.config</param>
         protected static FileInfo GetConfigFile(string fileName)
         {
             FileInfo result;

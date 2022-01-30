@@ -13,8 +13,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Shared.Collections
 {
     /// <summary>
-    /// An interval tree represents an ordered tree data structure to store intervals of the form 
-    /// [start, end).  It allows you to efficiently find all intervals that intersect or overlap 
+    /// An interval tree represents an ordered tree data structure to store intervals of the form
+    /// [start, end).  It allows you to efficiently find all intervals that intersect or overlap
     /// a provided interval.
     /// </summary>
     internal partial class IntervalTree<T> : IEnumerable<T>

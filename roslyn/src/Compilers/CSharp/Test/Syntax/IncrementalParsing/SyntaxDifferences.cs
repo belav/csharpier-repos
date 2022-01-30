@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     public class SyntaxDifferences
     {
         /// <summary>
-        /// Returns the nodes in the new tree that do not share the same underlying 
+        /// Returns the nodes in the new tree that do not share the same underlying
         /// representation in the old tree. These may be entirely new nodes or rebuilt nodes.
         /// </summary>
         public static ImmutableArray<SyntaxNodeOrToken> GetRebuiltNodes(

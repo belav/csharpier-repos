@@ -7,7 +7,7 @@ namespace System.Web.Http.Tracing
 {
     /// <summary>
     /// This <see cref="ITraceWriter"/> unconditionally responds that
-    /// all categories and levels are disabled.  
+    /// all categories and levels are disabled.
     /// All attempts to trace do not call back to the user for trace information.
     /// </summary>
     /// <para>

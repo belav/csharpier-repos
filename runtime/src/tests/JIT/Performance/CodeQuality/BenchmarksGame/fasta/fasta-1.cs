@@ -8,11 +8,11 @@
 
 /* The Computer Language Benchmarks Game
   http://benchmarksgame.alioth.debian.org/
-
+  
   contributed by Serge Smith
   further optimized (rewrote threading, random generation loop) by Jan de Vaan
   modified by Josh Goldfoot (fasta-repeat buffering)
-*/
+  */
 
 using System;
 using System.Collections.Concurrent;

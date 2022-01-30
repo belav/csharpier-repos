@@ -324,7 +324,7 @@ internal class Http2Utilities : IHttpHeadersHandler
         +=+=============================================================+
         |                   Frame Payload (0...)                      ...
         +---------------------------------------------------------------+
-    */
+        */
     internal static void WriteHeader(Http2Frame frame, PipeWriter output)
     {
         var buffer = output.GetSpan(Http2FrameReader.HeaderLength);
@@ -349,7 +349,7 @@ internal class Http2Utilities : IHttpHeadersHandler
         +---------------------------------------------------------------+
         |                           Padding (*)                       ...
         +---------------------------------------------------------------+
-    */
+        */
     public Task SendHeadersWithPaddingAsync(
         int streamId,
         IEnumerable<KeyValuePair<string, string>> headers,
@@ -404,7 +404,7 @@ internal class Http2Utilities : IHttpHeadersHandler
         +-+-------------+-----------------------------------------------+
         |                   Header Block Fragment (*)                 ...
         +---------------------------------------------------------------+
-    */
+        */
     public Task SendHeadersWithPriorityAsync(
         int streamId,
         IEnumerable<KeyValuePair<string, string>> headers,
@@ -460,7 +460,7 @@ internal class Http2Utilities : IHttpHeadersHandler
         +---------------------------------------------------------------+
         |                           Padding (*)                       ...
         +---------------------------------------------------------------+
-    */
+        */
     public Task SendHeadersWithPaddingAndPriorityAsync(
         int streamId,
         IEnumerable<KeyValuePair<string, string>> headers,
@@ -892,7 +892,7 @@ internal class Http2Utilities : IHttpHeadersHandler
         +-+-------------+-----------------------------------------------+
         |   Weight (8)  |
         +-+-------------+
-    */
+        */
     public Task SendPriorityAsync(int streamId, int streamDependency = 0)
     {
         var outputWriter = _pair.Application.Output;
@@ -927,7 +927,7 @@ internal class Http2Utilities : IHttpHeadersHandler
         +---------------------------------------------------------------+
         |                        Error Code (32)                        |
         +---------------------------------------------------------------+
-    */
+        */
     public Task SendRstStreamAsync(int streamId)
     {
         var outputWriter = _pair.Application.Output;

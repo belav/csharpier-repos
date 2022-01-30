@@ -24,8 +24,8 @@ namespace Castle.Components.DictionaryAdapter
     using Castle.Core.Internal;
 
     /// <summary>
-	/// Describes a dictionary property.
-	/// </summary>
+    /// Describes a dictionary property.
+    /// </summary>
     [DebuggerDisplay("{Property.DeclaringType.FullName,nq}.{PropertyName,nq}")]
     public class PropertyDescriptor
         : IDictionaryKeyBuilder,
@@ -39,18 +39,18 @@ namespace Castle.Components.DictionaryAdapter
         private static readonly object[] NoAnnotations = new object[0];
 
         /// <summary>
-		/// Initializes an empty <see cref="PropertyDescriptor"/> class.
-		/// </summary>
+        /// Initializes an empty <see cref="PropertyDescriptor"/> class.
+        /// </summary>
         public PropertyDescriptor()
         {
             Annotations = NoAnnotations;
         }
 
         /// <summary>
-		/// Initializes a new instance of the <see cref="PropertyDescriptor"/> class.
-		/// </summary>
-		/// <param name="property">The property.</param>
-		/// <param name="annotations">The annotations.</param>
+        /// Initializes a new instance of the <see cref="PropertyDescriptor"/> class.
+        /// </summary>
+        /// <param name="property">The property.</param>
+        /// <param name="annotations">The annotations.</param>
         public PropertyDescriptor(PropertyInfo property, object[] annotations) : this()
         {
             Property = property;
@@ -60,16 +60,16 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Initializes a new instance <see cref="PropertyDescriptor"/> class.
-		/// </summary>
+        /// Initializes a new instance <see cref="PropertyDescriptor"/> class.
+        /// </summary>
         public PropertyDescriptor(object[] annotations)
         {
             Annotations = annotations ?? NoAnnotations;
         }
 
         /// <summary>
-		///  Copies an existing instance of the <see cref="PropertyDescriptor"/> class.
-		/// </summary>
+        ///  Copies an existing instance of the <see cref="PropertyDescriptor"/> class.
+        /// </summary>
         public PropertyDescriptor(PropertyDescriptor source, bool copyBehaviors)
         {
             Property = source.Property;
@@ -89,77 +89,77 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// 
-		/// </summary>
+        ///
+        /// </summary>
         public int ExecutionOrder
         {
             get { return 0; }
         }
 
         /// <summary>
-		/// Gets the property name.
-		/// </summary>
+        /// Gets the property name.
+        /// </summary>
         public string PropertyName
         {
             get { return (Property != null) ? Property.Name : null; }
         }
 
         /// <summary>
-		/// Gets the property type.
-		/// </summary>
+        /// Gets the property type.
+        /// </summary>
         public Type PropertyType
         {
             get { return (Property != null) ? Property.PropertyType : null; }
         }
 
         /// <summary>
-		/// Gets the property.
-		/// </summary>
-		/// <value>The property.</value>
+        /// Gets the property.
+        /// </summary>
+        /// <value>The property.</value>
         public PropertyInfo Property { get; private set; }
 
         /// <summary>
-		/// Returns true if the property is dynamic.
-		/// </summary>
+        /// Returns true if the property is dynamic.
+        /// </summary>
         public bool IsDynamicProperty { get; private set; }
 
         /// <summary>
-		/// Gets additional state.
-		/// </summary>
+        /// Gets additional state.
+        /// </summary>
         public IDictionary State
         {
             get { return state ?? (state = new Dictionary<object, object>()); }
         }
 
         /// <summary>
-		/// Determines if property should be fetched.
-		/// </summary>
+        /// Determines if property should be fetched.
+        /// </summary>
         public bool Fetch { get; set; }
 
         /// <summary>
-		/// Determines if property must exist first.
-		/// </summary>
+        /// Determines if property must exist first.
+        /// </summary>
         public bool IfExists { get; set; }
 
         /// <summary>
-		/// Determines if notifications should occur.
-		/// </summary>
+        /// Determines if notifications should occur.
+        /// </summary>
         public bool SuppressNotifications { get; set; }
 
         /// <summary>
-		/// Gets the property behaviors.
-		/// </summary>
+        /// Gets the property behaviors.
+        /// </summary>
         public object[] Annotations { get; private set; }
 
         /// <summary>
-		/// Gets the type converter.
-		/// </summary>
-		/// <value>The type converter.</value>
+        /// Gets the type converter.
+        /// </summary>
+        /// <value>The type converter.</value>
         public TypeConverter TypeConverter { get; private set; }
 
         /// <summary>
-		/// Gets the extended properties.
-		/// </summary>
+        /// Gets the extended properties.
+        /// </summary>
         public IDictionary ExtendedProperties
         {
             get
@@ -170,9 +170,9 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Gets the setter.
-		/// </summary>
-		/// <value>The setter.</value>
+        /// Gets the setter.
+        /// </summary>
+        /// <value>The setter.</value>
         public IEnumerable<IDictionaryBehavior> Behaviors
         {
             get { return dictionaryBehaviors ?? Enumerable.Empty<IDictionaryBehavior>(); }
@@ -184,9 +184,9 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Gets the key builders.
-		/// </summary>
-		/// <value>The key builders.</value>
+        /// Gets the key builders.
+        /// </summary>
+        /// <value>The key builders.</value>
         public IEnumerable<IDictionaryKeyBuilder> KeyBuilders
         {
             get
@@ -198,9 +198,9 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Gets the setter.
-		/// </summary>
-		/// <value>The setter.</value>
+        /// Gets the setter.
+        /// </summary>
+        /// <value>The setter.</value>
         public IEnumerable<IDictionaryPropertySetter> Setters
         {
             get
@@ -212,9 +212,9 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Gets the getter.
-		/// </summary>
-		/// <value>The getter.</value>
+        /// Gets the getter.
+        /// </summary>
+        /// <value>The getter.</value>
         public IEnumerable<IDictionaryPropertyGetter> Getters
         {
             get
@@ -226,9 +226,9 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Gets the initializers.
-		/// </summary>
-		/// <value>The initializers.</value>
+        /// Gets the initializers.
+        /// </summary>
+        /// <value>The initializers.</value>
         public IEnumerable<IDictionaryInitializer> Initializers
         {
             get
@@ -240,9 +240,9 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Gets the meta-data initializers.
-		/// </summary>
-		/// <value>The meta-data initializers.</value>
+        /// Gets the meta-data initializers.
+        /// </summary>
+        /// <value>The meta-data initializers.</value>
         public IEnumerable<IDictionaryMetaInitializer> MetaInitializers
         {
             get
@@ -254,11 +254,11 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Gets the key.
-		/// </summary>
-		/// <param name="dictionaryAdapter">The dictionary adapter.</param>
-		/// <param name="key">The key.</param>
-		/// <param name="descriptor">The descriptor.</param>
+        /// Gets the key.
+        /// </summary>
+        /// <param name="dictionaryAdapter">The dictionary adapter.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="descriptor">The descriptor.</param>
         public string GetKey(
             IDictionaryAdapter dictionaryAdapter,
             string key,
@@ -280,13 +280,13 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Gets the property value.
-		/// </summary>
-		/// <param name="dictionaryAdapter">The dictionary adapter.</param>
-		/// <param name="key">The key.</param>
-		/// <param name="storedValue">The stored value.</param>
-		/// <param name="descriptor">The descriptor.</param>
-		/// <param name="ifExists">true if return only existing.</param>
+        /// Gets the property value.
+        /// </summary>
+        /// <param name="dictionaryAdapter">The dictionary adapter.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="storedValue">The stored value.</param>
+        /// <param name="descriptor">The descriptor.</param>
+        /// <param name="ifExists">true if return only existing.</param>
         public object GetPropertyValue(
             IDictionaryAdapter dictionaryAdapter,
             string key,
@@ -320,12 +320,12 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Sets the property value.
-		/// </summary>
-		/// <param name="dictionaryAdapter">The dictionary adapter.</param>
-		/// <param name="key">The key.</param>
-		/// <param name="value">The value.</param>
-		/// <param name="descriptor">The descriptor.</param>
+        /// Sets the property value.
+        /// </summary>
+        /// <param name="dictionaryAdapter">The dictionary adapter.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="descriptor">The descriptor.</param>
         public bool SetPropertyValue(
             IDictionaryAdapter dictionaryAdapter,
             string key,
@@ -356,9 +356,9 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Adds a single behavior.
-		/// </summary>
-		/// <param name="behavior">The behavior.</param>
+        /// Adds a single behavior.
+        /// </summary>
+        /// <param name="behavior">The behavior.</param>
         public PropertyDescriptor AddBehavior(IDictionaryBehavior behavior)
         {
             if (behavior == null)
@@ -437,9 +437,9 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Adds the behaviors.
-		/// </summary>
-		/// <param name="behaviors">The behaviors.</param>
+        /// Adds the behaviors.
+        /// </summary>
+        /// <param name="behaviors">The behaviors.</param>
         public PropertyDescriptor AddBehaviors(params IDictionaryBehavior[] behaviors)
         {
             // DO NOT REFACTOR. Compiler will emit optimized iterator here.
@@ -449,9 +449,9 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Adds the behaviors.
-		/// </summary>
-		/// <param name="behaviors">The behaviors.</param>
+        /// Adds the behaviors.
+        /// </summary>
+        /// <param name="behaviors">The behaviors.</param>
         public PropertyDescriptor AddBehaviors(IEnumerable<IDictionaryBehavior> behaviors)
         {
             if (behaviors != null)
@@ -461,8 +461,8 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Copies the behaviors to the other <see cref="PropertyDescriptor"/>
-		/// </summary>
+        /// Copies the behaviors to the other <see cref="PropertyDescriptor"/>
+        /// </summary>
         public PropertyDescriptor CopyBehaviors(PropertyDescriptor other)
         {
             var behaviors = dictionaryBehaviors;
@@ -480,8 +480,8 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Copies the <see cref="PropertyDescriptor"/>
-		/// </summary>
+        /// Copies the <see cref="PropertyDescriptor"/>
+        /// </summary>
         public IDictionaryBehavior Copy()
         {
             return new PropertyDescriptor(this, true);

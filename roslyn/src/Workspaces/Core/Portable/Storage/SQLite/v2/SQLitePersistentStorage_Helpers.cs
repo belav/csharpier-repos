@@ -84,7 +84,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         /// <summary>
         /// We use a pool to cache reads/writes that are less than 4k.  Testing with Roslyn,
         /// 99% of all writes (48.5k out of 49.5k) are less than that size.  So this helps
-        /// ensure that we can pool as much as possible, without caching excessively large 
+        /// ensure that we can pool as much as possible, without caching excessively large
         /// arrays (for example, Roslyn does write out nearly 50 chunks that are larger than
         /// 100k each).
         /// </summary>

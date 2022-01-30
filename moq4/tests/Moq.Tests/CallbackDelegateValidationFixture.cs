@@ -13,9 +13,9 @@ using Xunit;
 namespace Moq.Tests
 {
     /// <summary>
-	///   This fixture targets the `Callback` delegate validation logic.
-	/// </summary>
-	/// <seealso cref="ReturnsDelegateValidationFixture"/>
+    ///   This fixture targets the `Callback` delegate validation logic.
+    /// </summary>
+    /// <seealso cref="ReturnsDelegateValidationFixture"/>
     public class CallbackDelegateValidationFixture
     {
         private ISetup<IFoo> setup;

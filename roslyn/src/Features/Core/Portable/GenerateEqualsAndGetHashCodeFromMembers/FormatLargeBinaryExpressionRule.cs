@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             /// <summary>
             /// Align all the wrapped parts of the expression with the token after 'return'.
             /// That way we get:
-            /// 
+            ///
             /// return a == obj.a &amp;&amp;
             ///        b == obj.b &amp;&amp;
             ///        ...

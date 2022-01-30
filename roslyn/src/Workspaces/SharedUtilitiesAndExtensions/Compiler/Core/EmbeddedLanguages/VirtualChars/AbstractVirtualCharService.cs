@@ -129,7 +129,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         }
 
         /// <summary>
-        /// Helper to convert simple string literals that escape quotes by doubling them.  This is 
+        /// Helper to convert simple string literals that escape quotes by doubling them.  This is
         /// how normal VB literals and c# verbatim string literals work.
         /// </summary>
         /// <param name="startDelimiter">The start characters string.  " in VB and @" in C#</param>

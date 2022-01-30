@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     /// <summary>
-    /// Calculates and caches results of changed documents analysis. 
+    /// Calculates and caches results of changed documents analysis.
     /// The work is triggered by an incremental analyzer on idle or explicitly when "continue" operation is executed.
     /// Contains analyses of the latest observed document versions.
     /// </summary>

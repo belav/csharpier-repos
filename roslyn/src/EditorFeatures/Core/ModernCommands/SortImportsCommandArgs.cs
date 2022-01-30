@@ -11,8 +11,8 @@ using Microsoft.VisualStudio.Text.Editor.Commanding;
 
 namespace Microsoft.CodeAnalysis.Editor.Commanding.Commands
 {
-    /// <summary>	
-    /// Arguments for the Sort Imports command being invoked.	
+    /// <summary>
+    /// Arguments for the Sort Imports command being invoked.
     /// </summary>
     [ExcludeFromCodeCoverage]
     internal class SortImportsCommandArgs : EditorCommandArgs

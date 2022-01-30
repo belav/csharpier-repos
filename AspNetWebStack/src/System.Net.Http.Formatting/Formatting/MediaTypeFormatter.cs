@@ -87,7 +87,7 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Gets or sets the maximum number of keys stored in a NameValueCollection. 
+        /// Gets or sets the maximum number of keys stored in a NameValueCollection.
         /// </summary>
         public static int MaxHttpCollectionKeys
         {
@@ -129,7 +129,7 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Gets the mutable collection of character encodings supported by
         /// this <see cref="MediaTypeFormatter"/> instance. The encodings are
-        /// used when reading or writing data. 
+        /// used when reading or writing data.
         /// </summary>
         public Collection<Encoding> SupportedEncodings { get; private set; }
 

@@ -14,7 +14,7 @@ using System.Web.Http.ValueProviders.Providers;
 namespace System.Web.Http.ModelBinding
 {
     /// <summary>
-    /// Describes a parameter that gets bound via ModelBinding.  
+    /// Describes a parameter that gets bound via ModelBinding.
     /// </summary>
     public class ModelBinderParameterBinding : HttpParameterBinding, IValueProviderParameterBinding
     {

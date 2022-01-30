@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Initializes a new instance of the <see cref="RelativePathResolver"/> class.
         /// </summary>
-        /// <param name="searchPaths">An ordered set of fully qualified 
+        /// <param name="searchPaths">An ordered set of fully qualified
         /// paths which are searched when resolving assembly names.</param>
         /// <param name="baseDirectory">Directory used when resolving relative paths.</param>
         public RelativePathResolver(ImmutableArray<string> searchPaths, string baseDirectory)

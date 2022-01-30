@@ -13,8 +13,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
     {
         /// <summary>
         /// First we break up the pattern given by dots.  Each portion of the pattern between the
-        /// dots is a 'Segment'.  The 'Segment' contains information about the entire section of 
-        /// text between the dots, as well as information about any individual 'Words' that we 
+        /// dots is a 'Segment'.  The 'Segment' contains information about the entire section of
+        /// text between the dots, as well as information about any individual 'Words' that we
         /// can break the segment into.
         /// </summary>
         [NonCopyable]

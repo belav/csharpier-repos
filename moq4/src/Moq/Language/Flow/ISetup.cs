@@ -6,8 +6,8 @@ using System.ComponentModel;
 namespace Moq.Language.Flow
 {
     /// <summary>
-	/// Implements the fluent API.
-	/// </summary>
+    /// Implements the fluent API.
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ISetup<TMock>
         : ICallback,
@@ -17,8 +17,8 @@ namespace Moq.Language.Flow
           IFluentInterface where TMock : class { }
 
     /// <summary>
-	/// Implements the fluent API.
-	/// </summary>
+    /// Implements the fluent API.
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ISetup<TMock, TResult>
         : ICallback<TMock, TResult>,
@@ -27,8 +27,8 @@ namespace Moq.Language.Flow
           IFluentInterface where TMock : class { }
 
     /// <summary>
-	/// Implements the fluent API.
-	/// </summary>
+    /// Implements the fluent API.
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ISetupGetter<TMock, TProperty>
         : ICallbackGetter<TMock, TProperty>,
@@ -37,8 +37,8 @@ namespace Moq.Language.Flow
           IFluentInterface where TMock : class { }
 
     /// <summary>
-	/// Implements the fluent API.
-	/// </summary>
+    /// Implements the fluent API.
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ISetupSetter<TMock, TProperty>
         : ICallbackSetter<TProperty>,

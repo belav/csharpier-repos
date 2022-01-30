@@ -18,7 +18,7 @@ using Microsoft.CodeAnalysis.Internal.Log;
 namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 {
     /// <summary>
-    /// Track diagnostic performance 
+    /// Track diagnostic performance
     /// </summary>
     [ExportWorkspaceService(typeof(IPerformanceTrackerService), WorkspaceKind.Host), Shared]
     internal class PerformanceTrackerService : IPerformanceTrackerService

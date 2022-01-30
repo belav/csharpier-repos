@@ -21,10 +21,10 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// 2) control flow goes out of try scope by conditionally or unconditionally branching outside of one ore more try/finally frames.
     /// 3) enumerator is disposed by the owner.
     /// 4) enumerator is being disposed after an exception.
-    /// 
-    /// It is easier to manage partial or complete finalization when every finally is factored out as a separate method. 
-    /// 
-    /// NOTE: Finally is a private void nonvirtual instance method with no parameters. 
+    ///
+    /// It is easier to manage partial or complete finalization when every finally is factored out as a separate method.
+    ///
+    /// NOTE: Finally is a private void nonvirtual instance method with no parameters.
     ///       It is a valid JIT inlining target as long as JIT may consider inlining profitable.
     /// </summary>
     internal sealed class IteratorFinallyMethodSymbol

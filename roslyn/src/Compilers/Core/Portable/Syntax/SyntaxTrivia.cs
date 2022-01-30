@@ -224,7 +224,7 @@ namespace Microsoft.CodeAnalysis
             return structure is object;
         }
 
-        /// <summary> 
+        /// <summary>
         /// Returns the string representation of this trivia. If this trivia is structured trivia then the returned string
         /// will not include any leading or trailing trivia present on the StructuredTriviaSyntax node of this trivia.
         /// </summary>
@@ -235,7 +235,7 @@ namespace Microsoft.CodeAnalysis
             return UnderlyingNode != null ? UnderlyingNode.ToString() : string.Empty;
         }
 
-        /// <summary> 
+        /// <summary>
         /// Returns the full string representation of this trivia. If this trivia is structured trivia then the returned string will
         /// include any leading or trailing trivia present on the StructuredTriviaSyntax node of this trivia.
         /// </summary>

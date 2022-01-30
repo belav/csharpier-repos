@@ -7,13 +7,13 @@ using System.Threading;
 namespace Exchange
 {
     /// <summary>
-	/// Summary description for Class1.
-	/// </summary>
+    /// Summary description for Class1.
+    /// </summary>
     class Class1
     {
         /// <summary>
-		/// The main entry point for the application.
-		/// </summary>
+        /// The main entry point for the application.
+        /// </summary>
 
         static int Main(string[] args)
         {

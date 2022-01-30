@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// newPosition represents the position we are in the final SourceText.  As we consume and reuse
         /// nodes from the old tree we will update our position in the new text accordingly.
         /// Likewise, when we must lex tokens out of the new tree we will update as well.
-        /// 
+        ///
         /// NOTE(cyrusn): We do not need an oldPosition because it is redundant given the
         /// oldTreeCursor.  The oldPosition is implicitly defined by the position of the cursor.
         /// </summary>

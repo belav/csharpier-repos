@@ -15,17 +15,17 @@
 namespace Castle.Components.DictionaryAdapter
 {
     /// <summary>
-	/// Contract for dynamic value resolution.
-	/// </summary>
+    /// Contract for dynamic value resolution.
+    /// </summary>
     public interface IDynamicValue
     {
         object GetValue();
     }
 
     /// <summary>
-	/// Contract for typed dynamic value resolution.
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
+    /// Contract for typed dynamic value resolution.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IDynamicValue<T> : IDynamicValue
     {
         T Value { get; }

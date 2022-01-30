@@ -57,7 +57,7 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets a collection containing the local files names and associated HTTP content headers of MIME 
+        /// Gets a collection containing the local files names and associated HTTP content headers of MIME
         /// body parts written to file.
         /// </summary>
         public Collection<MultipartFileData> FileData

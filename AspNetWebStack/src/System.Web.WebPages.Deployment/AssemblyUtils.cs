@@ -92,7 +92,7 @@ namespace System.Web.WebPages.Deployment
         }
 
         /// <summary>
-        /// Returns the version of a System.Web.WebPages.Deployment.dll if it is present in the bin and matches the name and 
+        /// Returns the version of a System.Web.WebPages.Deployment.dll if it is present in the bin and matches the name and
         /// public key token of the current assembly.
         /// </summary>
         /// <returns>Version from bin if present, null otherwise.</returns>

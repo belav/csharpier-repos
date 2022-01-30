@@ -23,8 +23,8 @@ namespace Castle.Components.DictionaryAdapter
     using Castle.Core;
 
     /// <summary>
-	/// Abstract implementation of <see cref="IDictionaryAdapterVisitor"/>.
-	/// </summary>
+    /// Abstract implementation of <see cref="IDictionaryAdapterVisitor"/>.
+    /// </summary>
     public abstract class AbstractDictionaryAdapterVisitor : IDictionaryAdapterVisitor
     {
         private readonly Dictionary<IDictionaryAdapter, int> scopes;

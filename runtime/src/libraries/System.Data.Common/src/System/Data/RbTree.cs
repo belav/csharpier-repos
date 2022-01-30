@@ -1417,26 +1417,26 @@ namespace System.Data
         }
 
         /*
-
-         * GetIndexByNode()
-         *
-         * If I am right child then size=my size + size of left child of my parent + 1
-         * go up till root, if right child keep adding to the size.
-         * (1) compute rank in main tree.
-         * (2) if node member of a satelite tree, add to rank its relative rank in that tree.
-         *
-         * Rank:
-         * Case 1: Node is in Main RBTree only
-         *         Its rank/index is its main tree index
-         * Case 2: Node is in a Satelite tree only
-         *         Its rank/index is its satelite tree index
-         * Case 3: Nodes is in both Main and Satelite RBTree (a main tree node can be a satelite tree root)
-         *         Its rank/index is its main tree index + its satelite tree index - 1
-         * Returns the index of the specified node.
-         * returns -1, if the specified Node is tree.NIL.
-         *
-         * Assumption: The specified node always exist in the tree.
-         */
+        
+        * GetIndexByNode()
+        *
+        * If I am right child then size=my size + size of left child of my parent + 1
+        * go up till root, if right child keep adding to the size.
+        * (1) compute rank in main tree.
+        * (2) if node member of a satelite tree, add to rank its relative rank in that tree.
+        *
+        * Rank:
+        * Case 1: Node is in Main RBTree only
+        *         Its rank/index is its main tree index
+        * Case 2: Node is in a Satelite tree only
+        *         Its rank/index is its satelite tree index
+        * Case 3: Nodes is in both Main and Satelite RBTree (a main tree node can be a satelite tree root)
+        *         Its rank/index is its main tree index + its satelite tree index - 1
+        * Returns the index of the specified node.
+        * returns -1, if the specified Node is tree.NIL.
+        *
+        * Assumption: The specified node always exist in the tree.
+        */
 
         // this improves performance when used heavily, like with the default view (creating before rows added)
         public int GetIndexByNode(int node)

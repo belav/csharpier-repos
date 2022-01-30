@@ -51,7 +51,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
             /// <summary>
             /// This is the part of the declared namespace that is contained in default namespace.
             /// We will use this to construct target folder to move the file to.
-            /// For example, if default namespace is `A` and declared namespace is `A.B.C`, 
+            /// For example, if default namespace is `A` and declared namespace is `A.B.C`,
             /// this would be `B.C`.
             /// </summary>
             public string RelativeDeclaredNamespace { get; }
@@ -166,8 +166,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
             }
 
             /// <summary>
-            /// Determines if the actual file path matches its logical path in project 
-            /// which is constructed as [project_root_path]\Logical\Folders\. The refactoring 
+            /// Determines if the actual file path matches its logical path in project
+            /// which is constructed as [project_root_path]\Logical\Folders\. The refactoring
             /// is triggered only when the two match. The reason of doing this is we don't really know
             /// the user's intention of keeping the file path out-of-sync with its logical path.
             /// </summary>

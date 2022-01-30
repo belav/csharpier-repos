@@ -655,11 +655,11 @@ namespace System.Data.Tests
 
             /*
             try {
-                Mom.Select ("Child.Name = 'Jack'");
-Assert.False(true);
+            Mom.Select ("Child.Name = 'Jack'");
+            Assert.False(true);
             } catch (Exception e) {
-                Assert.Equal (typeof (SyntaxErrorException), e.GetType ());
-                Assert.Equal ("Cannot interpret token 'Child' at position 1.", e.Message);
+            Assert.Equal (typeof (SyntaxErrorException), e.GetType ());
+            Assert.Equal ("Cannot interpret token 'Child' at position 1.", e.Message);
             }
             */
 

@@ -33,11 +33,11 @@ namespace System.Web.Mvc
         { }
 
         /// <summary>
-        /// Initializes a new instance of the MultiSelectList class by using the items to include in the list, 
+        /// Initializes a new instance of the MultiSelectList class by using the items to include in the list,
         /// the selected values, the disabled values.
         /// </summary>
         /// <param name="items">The items used to build each <see cref="SelectListItem"/> of the list.</param>
-        /// <param name="selectedValues">The selected values field. Used to match the Selected property of the 
+        /// <param name="selectedValues">The selected values field. Used to match the Selected property of the
         /// corresponding <see cref="SelectListItem"/>.</param>
         /// <param name="disabledValues">The disabled values. Used to match the Disabled property of the corresponding
         /// <see cref="SelectListItem"/>.</param>>
@@ -72,15 +72,15 @@ namespace System.Web.Mvc
             ) { }
 
         /// <summary>
-        /// Initializes a new instance of the MultiSelectList class by using the items to include in the list, 
+        /// Initializes a new instance of the MultiSelectList class by using the items to include in the list,
         /// the data value field, the data text field, and the data group field.
         /// </summary>
         /// <param name="items">The items used to build each <see cref="SelectListItem"/> of the list.</param>
-        /// <param name="dataValueField">The data value field. Used to match the Value property of the corresponding 
+        /// <param name="dataValueField">The data value field. Used to match the Value property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="dataTextField">The data text field. Used to match the Text property of the corresponding 
+        /// <param name="dataTextField">The data text field. Used to match the Text property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="dataGroupField">The data group field. Used to match the Group property of the corresponding 
+        /// <param name="dataGroupField">The data group field. Used to match the Group property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
         public MultiSelectList(
             IEnumerable items,
@@ -97,15 +97,15 @@ namespace System.Web.Mvc
             ) { }
 
         /// <summary>
-        /// Initializes a new instance of the MultiSelectList class by using the items to include in the list, 
+        /// Initializes a new instance of the MultiSelectList class by using the items to include in the list,
         /// the data value field, the data text field, the selected values, and the disabled values.
         /// </summary>
         /// <param name="items">The items used to build each <see cref="SelectListItem"/> of the list.</param>
-        /// <param name="dataValueField">The data value field. Used to match the Value property of the corresponding 
+        /// <param name="dataValueField">The data value field. Used to match the Value property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="dataTextField">The data text field. Used to match the Text property of the corresponding 
+        /// <param name="dataTextField">The data text field. Used to match the Text property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="selectedValues">The selected values field. Used to match the Selected property of the 
+        /// <param name="selectedValues">The selected values field. Used to match the Selected property of the
         /// corresponding <see cref="SelectListItem"/>.</param>
         /// <param name="disabledValues">The disabled values. Used to match the Disabled property of the corresponding
         /// <see cref="SelectListItem"/>.</param>>
@@ -126,17 +126,17 @@ namespace System.Web.Mvc
             ) { }
 
         /// <summary>
-        /// Initializes a new instance of the MultiSelectList class by using the items to include in the list, 
+        /// Initializes a new instance of the MultiSelectList class by using the items to include in the list,
         /// the data value field, the data text field, the data group field, and the selected values.
         /// </summary>
         /// <param name="items">The items used to build each <see cref="SelectListItem"/> of the list.</param>
-        /// <param name="dataValueField">The data value field. Used to match the Value property of the corresponding 
+        /// <param name="dataValueField">The data value field. Used to match the Value property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="dataTextField">The data text field. Used to match the Text property of the corresponding 
+        /// <param name="dataTextField">The data text field. Used to match the Text property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="dataGroupField">The data group field. Used to match the Group property of the corresponding 
+        /// <param name="dataGroupField">The data group field. Used to match the Group property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="selectedValues">The selected values field. Used to match the Selected property of the 
+        /// <param name="selectedValues">The selected values field. Used to match the Selected property of the
         /// corresponding <see cref="SelectListItem"/>.</param>
         public MultiSelectList(
             IEnumerable items,
@@ -160,13 +160,13 @@ namespace System.Web.Mvc
         /// values.
         /// </summary>
         /// <param name="items">The items used to build each <see cref="SelectListItem"/> of the list.</param>
-        /// <param name="dataValueField">The data value field. Used to match the Value property of the corresponding 
+        /// <param name="dataValueField">The data value field. Used to match the Value property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="dataTextField">The data text field. Used to match the Text property of the corresponding 
+        /// <param name="dataTextField">The data text field. Used to match the Text property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="dataGroupField">The data group field. Used to match the Group property of the corresponding 
+        /// <param name="dataGroupField">The data group field. Used to match the Group property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="selectedValues">The selected values field. Used to match the Selected property of the 
+        /// <param name="selectedValues">The selected values field. Used to match the Selected property of the
         /// corresponding <see cref="SelectListItem"/>.</param>
         /// <param name="disabledValues">The disabled values. Used to match the Disabled property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
@@ -189,18 +189,18 @@ namespace System.Web.Mvc
             ) { }
 
         /// <summary>
-        /// Initializes a new instance of the MultiSelectList class by using the items to include in the list, 
+        /// Initializes a new instance of the MultiSelectList class by using the items to include in the list,
         /// the data value field, the data text field, the data group field, the selected values, the disabled values,
         /// and the disabled groups.
         /// </summary>
         /// <param name="items">The items used to build each <see cref="SelectListItem"/> of the list.</param>
-        /// <param name="dataValueField">The data value field. Used to match the Value property of the corresponding 
+        /// <param name="dataValueField">The data value field. Used to match the Value property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="dataTextField">The data text field. Used to match the Text property of the corresponding 
+        /// <param name="dataTextField">The data text field. Used to match the Text property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="dataGroupField">The data group field. Used to match the Group property of the corresponding 
+        /// <param name="dataGroupField">The data group field. Used to match the Group property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        /// <param name="selectedValues">The selected values field. Used to match the Selected property of the 
+        /// <param name="selectedValues">The selected values field. Used to match the Selected property of the
         /// corresponding <see cref="SelectListItem"/>.</param>
         /// <param name="disabledValues">The disabled values. Used to match the Disabled property of the corresponding
         /// <see cref="SelectListItem"/>.</param>

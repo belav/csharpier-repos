@@ -283,7 +283,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
         private const int MaxPreviewText = 1000;
 
         /// <summary>
-        /// Given a <see cref="StructureTag"/>, creates an ITextBuffer with the content to display 
+        /// Given a <see cref="StructureTag"/>, creates an ITextBuffer with the content to display
         /// in the tooltip.
         /// </summary>
         protected ITextBuffer CreateElisionBufferForTagTooltip(StructureTag tag)

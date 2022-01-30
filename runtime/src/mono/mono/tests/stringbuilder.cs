@@ -8,8 +8,8 @@ namespace test
         {
             StringBuilder b = new StringBuilder();
             /*b.Append ('A');
-			b.Append ('b');
-			b.Append ('r');*/
+            b.Append ('b');
+            b.Append ('r');*/
             b.Append("Abr");
             if (b.ToString() != "Abr")
             {

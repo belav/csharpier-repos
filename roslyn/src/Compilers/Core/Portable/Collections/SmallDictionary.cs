@@ -13,8 +13,8 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// Dictionary designed to hold small number of items.
-    /// Compared to the regular Dictionary, average overhead per-item is roughly the same, but 
-    /// unlike regular dictionary, this one is based on an AVL tree and as such does not require 
+    /// Compared to the regular Dictionary, average overhead per-item is roughly the same, but
+    /// unlike regular dictionary, this one is based on an AVL tree and as such does not require
     /// rehashing when items are added.
     /// It does require rebalancing, but that is allocation-free.
     ///
@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis
     ///
     /// Generally, this dictionary is a win if number of elements is small, not known beforehand or both.
     ///
-    /// If the size of the dictionary is known at creation and it is likely to contain more than 10 elements, 
+    /// If the size of the dictionary is known at creation and it is likely to contain more than 10 elements,
     /// then regular Dictionary is a better choice.
     /// </summary>
     internal sealed class SmallDictionary<K, V> : IEnumerable<KeyValuePair<K, V>> where K : notnull

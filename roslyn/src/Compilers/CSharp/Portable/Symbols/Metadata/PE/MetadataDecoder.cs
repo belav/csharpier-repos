@@ -198,8 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         /// Lookup a type defined in this module.
         /// This method will be called only if the type we are
         /// looking for hasn't been loaded yet. Otherwise, MetadataDecoder
-        /// would have found the type in TypeDefRowIdToTypeMap based on its 
-        /// TypeDef row id. 
+        /// would have found the type in TypeDefRowIdToTypeMap based on its
+        /// TypeDef row id.
         /// </summary>
         protected override TypeSymbol LookupTopLevelTypeDefSymbol(
             ref MetadataTypeName emittedName,
@@ -226,8 +226,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         }
 
         /// <summary>
-        /// Perform a check whether the type or at least one of its generic arguments 
-        /// is defined in the specified assemblies. The check is performed recursively. 
+        /// Perform a check whether the type or at least one of its generic arguments
+        /// is defined in the specified assemblies. The check is performed recursively.
         /// </summary>
         public static bool IsOrClosedOverATypeFromAssemblies(
             TypeSymbol symbol,

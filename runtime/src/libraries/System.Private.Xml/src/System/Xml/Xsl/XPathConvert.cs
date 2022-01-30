@@ -124,9 +124,9 @@ namespace System.Xml.Xsl
 
         /*  ----------------------------------------------------------------------------
             AddU()
-
+            
             Add two unsigned ints and return the carry bit.
-        */
+            */
         public static uint AddU(ref uint u1, uint u2)
         {
             u1 = unchecked(u1 + u2);
@@ -135,10 +135,10 @@ namespace System.Xml.Xsl
 
         /*  ----------------------------------------------------------------------------
             MulU()
-
+            
             Multiply two unsigned ints. Return the low uint and fill uHi with
             the high uint.
-        */
+            */
         public static uint MulU(uint u1, uint u2, out uint uHi)
         {
             ulong result = (ulong)u1 * u2;
@@ -148,9 +148,9 @@ namespace System.Xml.Xsl
 
         /*  ----------------------------------------------------------------------------
             CbitZeroLeft()
-
+            
             Return a count of the number of leading 0 bits in u.
-        */
+            */
         public static int CbitZeroLeft(uint u)
         {
             int cbit = 0;
@@ -187,10 +187,10 @@ namespace System.Xml.Xsl
 
         /*  ----------------------------------------------------------------------------
             IsInteger()
-
+            
             If dbl is a whole number in the range of INT_MIN to INT_MAX, return true
             and the integer in value.  Otherwise, return false.
-        */
+            */
         public static bool IsInteger(double dbl, out int value)
         {
             if (!IsSpecial(dbl))
@@ -416,10 +416,10 @@ namespace System.Xml.Xsl
 
             /*  ----------------------------------------------------------------------------
                 Normalize()
-
+                
                 Normalize the big number - make sure the high bit is 1 or everything is zero
                 (including the exponent).
-            */
+                */
             private void Normalize()
             {
                 int w1,
@@ -460,9 +460,9 @@ namespace System.Xml.Xsl
 
             /*  ----------------------------------------------------------------------------
                 Mul()
-
+                
                 Multiply this big number by another big number.
-            */
+                */
             private void Mul(ref BigNumber numOp)
             {
                 Debug.Assert(0 != (_u2 & 0x80000000));
@@ -761,9 +761,9 @@ namespace System.Xml.Xsl
 
             /*  ----------------------------------------------------------------------------
                 DblToRgbFast()
-
+                
                 Get mantissa bytes (BCD).
-            */
+                */
             public static bool DblToRgbFast(
                 double dbl,
                 byte[] mantissa,
@@ -1130,9 +1130,9 @@ namespace System.Xml.Xsl
 
             /*  ----------------------------------------------------------------------------
                 DblToRgbPrecise()
-
+                
                 Uses big integer arithmetic to get the sequence of digits.
-            */
+                */
             public static void DblToRgbPrecise(
                 double dbl,
                 byte[] mantissa,
@@ -1840,9 +1840,9 @@ namespace System.Xml.Xsl
 
             /*  ----------------------------------------------------------------------------
                 InitFromRgu()
-
+                
                 Initialize this big integer from an array of uint values.
-            */
+                */
             public void InitFromRgu(uint[] rgu, int cu)
             {
                 AssertValid();
@@ -1860,9 +1860,9 @@ namespace System.Xml.Xsl
 
             /*  ----------------------------------------------------------------------------
                 InitFromRgu()
-
+                
                 Initialize this big integer from 0, 1, or 2 uint values.
-            */
+                */
             public void InitFromDigits(uint u0, uint u1, int cu)
             {
                 AssertValid();
@@ -1876,9 +1876,9 @@ namespace System.Xml.Xsl
 
             /*  ----------------------------------------------------------------------------
                 InitFromBigint()
-
+                
                 Initialize this big integer from another BigInteger object.
-            */
+                */
             public void InitFromBigint(BigInteger biSrc)
             {
                 AssertValid();
@@ -1891,9 +1891,9 @@ namespace System.Xml.Xsl
 #if !NOPARSE || DEBUG
             /*  ----------------------------------------------------------------------------
                 InitFromFloatingDecimal()
-
+                
                 Initialize this big integer from a FloatingDecimal object.
-            */
+                */
             public void InitFromFloatingDecimal(FloatingDecimal dec)
             {
                 AssertValid();
@@ -2529,10 +2529,10 @@ namespace System.Xml.Xsl
 #if NEVER
             /*  ----------------------------------------------------------------------------
                 RoundTo()
-
+                
                 Rounds off the BCD representation of a number to a specified number of digits.
                 This may result in the exponent being incremented (e.g. if digits were 999).
-            */
+                */
             public void RoundTo(int sizeMantissa)
             {
                 if (sizeMantissa >= mantissaSize)
@@ -2595,9 +2595,9 @@ namespace System.Xml.Xsl
 #if !NOPARSE || DEBUG
             /*  ----------------------------------------------------------------------------
                 explicit operator double()
-
+                
                 Returns the double value of this floating decimal.
-            */
+                */
             public static explicit operator double(FloatingDecimal dec)
             {
                 BigNumber num,
@@ -2745,11 +2745,11 @@ namespace System.Xml.Xsl
 
             /*  ----------------------------------------------------------------------------
                 AdjustDbl()
-
+                
                 The double contains a binary value, M * 2^n, which is off by at most 1
                 in the least significant bit; this class' members represent a decimal
                 value, D * 10^e.
-
+                
                 The general scheme is to find an integer N (the smaller the better) such
                 that N * M * 2^n and N * D * 10^e are both integers. We then compare
                 N * M * 2^n to N * D * 10^e (at full precision). If the binary value is
@@ -2758,7 +2758,7 @@ namespace System.Xml.Xsl
                 double up to the next value. Similary if the binary value is smaller,
                 we adjust it to be exactly half way to the previous representable value
                 and recompare.
-            */
+                */
             private double AdjustDbl(double dbl)
             {
                 BigInteger biDec = new BigInteger();
@@ -2999,9 +2999,9 @@ namespace System.Xml.Xsl
 
         /*  ----------------------------------------------------------------------------
             DoubleToString()
-
+            
             Converts a floating point number to a string according to XPath rules.
-        */
+            */
         public static string DoubleToString(double dbl)
         {
             Debug.Assert(('0' & 0xF) == 0, "We use (char)(d |'0') to convert digit to char");

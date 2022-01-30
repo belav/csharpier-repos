@@ -210,7 +210,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             }
 
             /// <summary>
-            /// Add a trailing newline if we don't already have one if that's what the user's 
+            /// Add a trailing newline if we don't already have one if that's what the user's
             /// preference is.
             /// </summary>
             private async Task<SyntaxNode> AddFinalNewLineIfDesiredAsync(

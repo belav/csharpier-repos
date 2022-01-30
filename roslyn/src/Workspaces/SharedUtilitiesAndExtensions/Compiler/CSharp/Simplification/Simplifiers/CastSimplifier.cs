@@ -21,16 +21,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
     /// By default the cast simplifier operates under several main principles:
     /// <list type="number">
     /// <item>The final type that a cast-expression was converted to should be the same as the final
-    /// type that the underlying expression should convert to without the cast.  This tells us that 
+    /// type that the underlying expression should convert to without the cast.  This tells us that
     /// the compiler thinks that value should convert to that type implicitly, not just explicitly.</item>
     /// <item>Static semantics of the code should remain the same.  This means that things like overload
     /// resolution of the invocations the casted expression is contained within should not change.</item>
-    /// <item>Runtime types and values should not observably change.  This means that if casting the 
-    /// value would cause a different type to be seen in a <see cref="System.Object.GetType()"/> call, 
+    /// <item>Runtime types and values should not observably change.  This means that if casting the
+    /// value would cause a different type to be seen in a <see cref="System.Object.GetType()"/> call,
     /// or a different value could be observed at runtime, then it must remain.</item>
     /// </list>
-    /// 
-    /// These rules serve as a good foundational intuition about when casts should be kept and when 
+    ///
+    /// These rules serve as a good foundational intuition about when casts should be kept and when
     /// they should be removable.  However, they are not entirely complete.  There are cases when we
     /// can weaken some of the above rules if it would not be observable at runtime.  For example,
     /// if it can be proven that calling through an interface method would lead to the exact same

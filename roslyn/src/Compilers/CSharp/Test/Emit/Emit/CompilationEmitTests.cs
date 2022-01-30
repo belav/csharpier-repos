@@ -419,7 +419,7 @@ public class C
         }
 
         /// <summary>
-        /// Extract the MVID using two different methods (PEReader and MvidReader) and compare them. 
+        /// Extract the MVID using two different methods (PEReader and MvidReader) and compare them.
         /// We only expect an .mvid section in ref assemblies.
         /// </summary>
         private void VerifyMvid(MemoryStream stream, bool hasMvidSection)

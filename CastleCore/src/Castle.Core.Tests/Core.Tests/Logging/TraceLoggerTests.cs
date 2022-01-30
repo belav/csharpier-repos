@@ -22,8 +22,8 @@ namespace Castle.Core.Logging.Tests
     using NUnit.Framework;
 
     /// <summary>
-	/// Tests the TraceLogger and TraceLoggerFactory classes
-	/// </summary>
+    /// Tests the TraceLogger and TraceLoggerFactory classes
+    /// </summary>
     [TestFixture]
     public class TraceLoggerTests
     {
@@ -115,9 +115,9 @@ namespace Castle.Core.Logging.Tests
 		#region in-memory listener class
 
         /// <summary>
-		/// This class captures trace text and records it to StringBuilders in a static dictionary.
-		/// Used for the sake of unit testing.
-		/// </summary>
+        /// This class captures trace text and records it to StringBuilders in a static dictionary.
+        /// Used for the sake of unit testing.
+        /// </summary>
         public class Listener : TraceListener
         {
             public Listener() { }

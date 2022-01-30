@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Wrapping
         /// Class responsible for actually computing the entire set of code actions to offer the
         /// user.  Contains lots of helper functionality used by all the different Wrapper
         /// implementations.
-        /// 
+        ///
         /// Specifically subclasses of this type can simply provide a list of code-actions to
         /// perform.  This type will then take those code actions and will ensure there aren't
         /// multiple code actions that end up having the same effect on the document.  For example,
@@ -132,9 +132,9 @@ namespace Microsoft.CodeAnalysis.Wrapping
             }
 
             /// <summary>
-            /// Try to create a CodeAction representing these edits.  Can return <see langword="null"/> in several 
+            /// Try to create a CodeAction representing these edits.  Can return <see langword="null"/> in several
             /// cases, including:
-            /// 
+            ///
             ///     1. No edits.
             ///     2. Edits would change more than whitespace.
             ///     3. A previous code action was created that already had the same effect.

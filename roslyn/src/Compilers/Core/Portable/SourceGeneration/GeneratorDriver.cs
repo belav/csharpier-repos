@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     /// <remarks>
     /// GeneratorDriver is an immutable class that can be manipulated by returning a mutated copy of itself.
-    /// In the compiler we only ever create a single instance and ignore the mutated copy. The IDE may perform 
+    /// In the compiler we only ever create a single instance and ignore the mutated copy. The IDE may perform
     /// multiple edits, or generation passes of the same driver, re-using the state as needed.
     /// </remarks>
     public abstract class GeneratorDriver

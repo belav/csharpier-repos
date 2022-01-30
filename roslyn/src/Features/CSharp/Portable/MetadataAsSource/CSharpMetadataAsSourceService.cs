@@ -110,7 +110,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
         /// <para/>
         /// This is technically innacurate for possible, but very uncommon cases.  For example, if the user's code
         /// explicitly did something like this:
-        /// 
+        ///
         /// <code>
         /// public void Goo(string goo,
         ///                 #nullable disable
@@ -118,7 +118,7 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
         ///                 #nullable enable
         ///                 string baz);
         /// </code>
-        /// 
+        ///
         /// Then we would be unable to handle that.  However, this is highly unlikely to happen, and so we accept the
         /// inaccuracy for the purpose of simplicity and for handling the much more common cases of either the entire
         /// file being annotated, or the user individually disabling annotations at the member level.

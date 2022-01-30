@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         private enum CompilationKind
         {
             /// <summary>
-            /// Compilation occurred using the command line tool by normal processes, typically because 
+            /// Compilation occurred using the command line tool by normal processes, typically because
             /// the customer opted out of the compiler server
             /// </summary>
             Tool,
@@ -771,7 +771,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
         /// <summary>
         /// Log the compiler output to MSBuild. Each language will override this to parse their output and log it
-        /// in the language specific manner. This often involves parsing the raw output and formatting it as 
+        /// in the language specific manner. This often involves parsing the raw output and formatting it as
         /// individual messages for MSBuild.
         /// </summary>
         private protected abstract void LogCompilerOutput(

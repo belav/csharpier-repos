@@ -33,7 +33,7 @@ namespace System.Web.Helpers
         >(ReadSmtpDefaults);
 
         /// <summary>
-        /// MailMessage dictates that headers values that have equivalent properties would be discarded or overwritten. The list of values is available at 
+        /// MailMessage dictates that headers values that have equivalent properties would be discarded or overwritten. The list of values is available at
         /// http://msdn.microsoft.com/en-us/library/system.net.mail.mailmessage.aspx
         /// </summary>
         private static readonly Dictionary<string, Action<MailMessage, string>> _actionableHeaders =

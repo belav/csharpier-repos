@@ -23,11 +23,11 @@ namespace Microsoft.CodeAnalysis
     internal static class FileTextLoaderOptions
     {
         /// <summary>
-        /// Hidden registry key to control maximum size of a text file we will read into memory. 
+        /// Hidden registry key to control maximum size of a text file we will read into memory.
         /// we have this option to reduce a chance of OOM when user adds massive size files to the solution.
         /// Default threshold is 100MB which came from some internal data on big files and some discussion.
-        /// 
-        /// User can override default value by setting DWORD value on FileLengthThreshold in 
+        ///
+        /// User can override default value by setting DWORD value on FileLengthThreshold in
         /// "[VS HIVE]\Roslyn\Internal\Performance\Text"
         /// </summary>
         internal static readonly Option<long> FileLengthThreshold =
@@ -61,9 +61,9 @@ namespace Microsoft.CodeAnalysis
         public string Path { get; }
 
         /// <summary>
-        /// Specifies an encoding to be used if the actual encoding of the file 
+        /// Specifies an encoding to be used if the actual encoding of the file
         /// can't be determined from the stream content (the stream doesn't start with Byte Order Mark).
-        /// If <c>null</c> auto-detect heuristics are used to determine the encoding. 
+        /// If <c>null</c> auto-detect heuristics are used to determine the encoding.
         /// Note that if the stream starts with Byte Order Mark the value of <see cref="DefaultEncoding"/> is ignored.
         /// </summary>
         public Encoding? DefaultEncoding { get; }

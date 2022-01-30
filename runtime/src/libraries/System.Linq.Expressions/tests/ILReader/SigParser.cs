@@ -21,54 +21,54 @@ namespace System.Linq.Expressions.Tests
     internal class SigParser
     {
         /*
-
+        
         Sig ::= MethodDefSig | MethodRefSig | StandAloneMethodSig | FieldSig | PropertySig | LocalVarSig
-
+        
         MethodDefSig ::= [[HASTHIS] [EXPLICITTHIS]] (DEFAULT|VARARG|GENERIC GenParamCount) ParamCount RetType Param*
-
+        
         MethodRefSig ::= [[HASTHIS] [EXPLICITTHIS]] VARARG ParamCount RetType Param* [SENTINEL Param+]
-
+        
         StandAloneMethodSig ::=  [[HASTHIS] [EXPLICITTHIS]] (DEFAULT|VARARG|C|STDCALL|THISCALL|FASTCALL)
-                            ParamCount RetType Param* [SENTINEL Param+]
-
+        ParamCount RetType Param* [SENTINEL Param+]
+        
         FieldSig ::= FIELD CustomMod* Type
-
+        
         PropertySig ::= PROPERTY [HASTHIS] ParamCount CustomMod* Type Param*
-
+        
         LocalVarSig ::= LOCAL_SIG Count (TYPEDBYREF | ([CustomMod] [Constraint])* [BYREF] Type)+
-
-
+        
+        
         -------------
-
+        
         CustomMod ::= ( CMOD_OPT | CMOD_REQD ) ( TypeDefEncoded | TypeRefEncoded )
-
+        
         Constraint ::= #define ELEMENT_TYPE_PINNED
-
+        
         Param ::= CustomMod* ( TYPEDBYREF | [BYREF] Type )
-
+        
         RetType ::= CustomMod* ( VOID | TYPEDBYREF | [BYREF] Type )
-
+        
         Type ::= ( BOOLEAN | CHAR | I1 | U1 | U2 | U2 | I4 | U4 | I8 | U8 | R4 | R8 | I | U |
-                        | VALUETYPE TypeDefOrRefEncoded
-                        | CLASS TypeDefOrRefEncoded
-                        | STRING
-                        | OBJECT
-                        | PTR CustomMod* VOID
-                        | PTR CustomMod* Type
-                        | FNPTR MethodDefSig
-                        | FNPTR MethodRefSig
-                        | ARRAY Type ArrayShape
-                        | SZARRAY CustomMod* Type
-                        | GENERICINST (CLASS | VALUETYPE) TypeDefOrRefEncoded GenArgCount Type*
-                        | VAR Number
-                        | MVAR Number
-
+        | VALUETYPE TypeDefOrRefEncoded
+        | CLASS TypeDefOrRefEncoded
+        | STRING
+        | OBJECT
+        | PTR CustomMod* VOID
+        | PTR CustomMod* Type
+        | FNPTR MethodDefSig
+        | FNPTR MethodRefSig
+        | ARRAY Type ArrayShape
+        | SZARRAY CustomMod* Type
+        | GENERICINST (CLASS | VALUETYPE) TypeDefOrRefEncoded GenArgCount Type*
+        | VAR Number
+        | MVAR Number
+        
         ArrayShape ::= Rank NumSizes Size* NumLoBounds LoBound*
-
+        
         TypeDefOrRefEncoded ::= TypeDefEncoded | TypeRefEncoded
         TypeDefEncoded ::= 32-bit-3-part-encoding-for-typedefs-and-typerefs
         TypeRefEncoded ::= 32-bit-3-part-encoding-for-typedefs-and-typerefs
-
+        
         ParamCount ::= 29-bit-encoded-integer
         GenArgCount ::= 29-bit-encoded-integer
         Count ::= 29-bit-encoded-integer
@@ -78,7 +78,7 @@ namespace System.Linq.Expressions.Tests
         NumLoBounds ::= 29-bit-encoded-integer
         LoBounds ::= 29-bit-encoded-integer
         Number ::= 29-bit-encoded-integer
-
+        
         */
 
         protected const int ELEMENT_TYPE_END = 0x00; //Marks end of a list
@@ -696,20 +696,20 @@ namespace System.Linq.Expressions.Tests
         {
             /*
             Type ::= ( BOOLEAN | CHAR | I1 | U1 | U2 | U2 | I4 | U4 | I8 | U8 | R4 | R8 | I | U |
-                            | VALUETYPE TypeDefOrRefEncoded
-                            | CLASS TypeDefOrRefEncoded
-                            | STRING
-                            | OBJECT
-                            | PTR CustomMod* VOID
-                            | PTR CustomMod* Type
-                            | FNPTR MethodDefSig
-                            | FNPTR MethodRefSig
-                            | ARRAY Type ArrayShape
-                            | SZARRAY CustomMod* Type
-                            | GENERICINST (CLASS | VALUETYPE) TypeDefOrRefEncoded GenArgCount Type *
-                            | VAR Number
-                            | MVAR Number
-
+            | VALUETYPE TypeDefOrRefEncoded
+            | CLASS TypeDefOrRefEncoded
+            | STRING
+            | OBJECT
+            | PTR CustomMod* VOID
+            | PTR CustomMod* Type
+            | FNPTR MethodDefSig
+            | FNPTR MethodRefSig
+            | ARRAY Type ArrayShape
+            | SZARRAY CustomMod* Type
+            | GENERICINST (CLASS | VALUETYPE) TypeDefOrRefEncoded GenArgCount Type *
+            | VAR Number
+            | MVAR Number
+            
             */
 
             NotifyBeginType();

@@ -41,7 +41,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             /// <summary>
             /// True if we should produce instrumentation and sequence points, which we do for a switch statement and a switch expression.
-            /// This affects 
+            /// This affects
             /// - whether or not we invoke the instrumentation APIs
             /// - production of sequence points
             /// - synthesized local variable kind

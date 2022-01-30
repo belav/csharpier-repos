@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 {
     /// <summary>
     /// Also known as "rename smart tag," this watches text changes in open buffers, determines
-    /// whether they can be interpreted as an identifier rename, and if so displays a smart tag 
+    /// whether they can be interpreted as an identifier rename, and if so displays a smart tag
     /// that can perform a rename on that symbol. Each text buffer is tracked independently.
     /// </summary>
     [Export(typeof(ITaggerProvider))]

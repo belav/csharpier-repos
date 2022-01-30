@@ -4644,21 +4644,21 @@ namespace System
                 /*
                 The following table describes the behaviors of getting the default value
                 when a certain year/month/day values are missing.
-
+                
                 An "X" means that the value exists.  And "--" means that value is missing.
-
+                
                 Year    Month   Day =>  ResultYear  ResultMonth     ResultDay       Note
-
+                
                 X       X       X       Parsed year Parsed month    Parsed day
                 X       X       --      Parsed Year Parsed month    First day       If we have year and month, assume the first day of that month.
                 X       --      X       Parsed year First month     Parsed day      If the month is missing, assume first month of that year.
                 X       --      --      Parsed year First month     First day       If we have only the year, assume the first day of that year.
-
+                
                 --      X       X       CurrentYear Parsed month    Parsed day      If the year is missing, assume the current year.
                 --      X       --      CurrentYear Parsed month    First day       If we have only a month value, assume the current year and current day.
                 --      --      X       CurrentYear First month     Parsed day      If we have only a day value, assume current year and first month.
                 --      --      --      CurrentYear Current month   Current day     So this means that if the date string only contains time, you will get current date.
-
+                
                 */
 
                 DateTime now = GetDateTimeNow(ref result, ref styles);

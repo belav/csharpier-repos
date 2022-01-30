@@ -31,7 +31,7 @@ namespace Microsoft.Cci
         void Dispatch(MetadataVisitor visitor);
 
         /// <summary>
-        /// Gets the definition object corresponding to this reference within the given context, 
+        /// Gets the definition object corresponding to this reference within the given context,
         /// or null if the referenced entity isn't defined in the context.
         /// </summary>
         IDefinition? AsDefinition(EmitContext context);

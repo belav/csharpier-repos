@@ -164,26 +164,26 @@ namespace System.Data.Tests
         /*
           // simple diffgram
           string xml23 = @"<set>
-    <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
-      <xs:element name='table'>
-        <xs:complexType>
-        <xs:choice>
+          <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+          <xs:element name='table'>
+          <xs:complexType>
+          <xs:choice>
           <xs:any />
-        </xs:choice>
-        </xs:complexType>
-      </xs:element>
-    </xs:schema>
-    <diffgr:diffgram
+          </xs:choice>
+          </xs:complexType>
+          </xs:element>
+          </xs:schema>
+          <diffgr:diffgram
           xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'
           xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1'>
-      <table>
-        <col>1</col>
-      </table>
-    </diffgr:diffgram>
-  </set>";
+          <table>
+          <col>1</col>
+          </table>
+          </diffgr:diffgram>
+          </set>";
           // just deep table
           string xml24 = "<p1><p2><p3><p4><p5><p6/></p5></p4></p3></p2></p1>";
-        */
+          */
 
         private DataSet GetDataSet(string xml, string[] nss)
         {

@@ -30,18 +30,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         /// <summary>
-        /// The system assembly, which provides primitive types like Object, String, etc., e.g. mscorlib.dll. 
-        /// The value is provided by ReferenceManager and must not be modified. For SourceAssemblySymbol, non-missing 
-        /// coreLibrary must match one of the referenced assemblies returned by GetReferencedAssemblySymbols() method of 
-        /// the main module. If there is no existing assembly that can be used as a source for the primitive types, 
-        /// the value is a Compilation.MissingCorLibrary. 
+        /// The system assembly, which provides primitive types like Object, String, etc., e.g. mscorlib.dll.
+        /// The value is provided by ReferenceManager and must not be modified. For SourceAssemblySymbol, non-missing
+        /// coreLibrary must match one of the referenced assemblies returned by GetReferencedAssemblySymbols() method of
+        /// the main module. If there is no existing assembly that can be used as a source for the primitive types,
+        /// the value is a Compilation.MissingCorLibrary.
         /// </summary>
         private AssemblySymbol _corLibrary;
 
         /// <summary>
-        /// The system assembly, which provides primitive types like Object, String, etc., e.g. mscorlib.dll. 
-        /// The value is MissingAssemblySymbol if none of the referenced assemblies can be used as a source for the 
-        /// primitive types and the owning assembly cannot be used as the source too. Otherwise, it is one of 
+        /// The system assembly, which provides primitive types like Object, String, etc., e.g. mscorlib.dll.
+        /// The value is MissingAssemblySymbol if none of the referenced assemblies can be used as a source for the
+        /// primitive types and the owning assembly cannot be used as the source too. Otherwise, it is one of
         /// the referenced assemblies returned by GetReferencedAssemblySymbols() method or the owning assembly.
         /// </summary>
         internal AssemblySymbol CorLibrary
@@ -50,8 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// A helper method for ReferenceManager to set the system assembly, which provides primitive 
-        /// types like Object, String, etc., e.g. mscorlib.dll. 
+        /// A helper method for ReferenceManager to set the system assembly, which provides primitive
+        /// types like Object, String, etc., e.g. mscorlib.dll.
         /// </summary>
         internal void SetCorLibrary(AssemblySymbol corLibrary)
         {
@@ -63,7 +63,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Simple name the assembly.
         /// </summary>
         /// <remarks>
-        /// This is equivalent to <see cref="Identity"/>.<see cref="AssemblyIdentity.Name"/>, but may be 
+        /// This is equivalent to <see cref="Identity"/>.<see cref="AssemblyIdentity.Name"/>, but may be
         /// much faster to retrieve for source code assemblies, since it does not require binding
         /// the assembly-level attributes that contain the version number and other assembly
         /// information.
@@ -85,8 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Assembly version pattern with wildcards represented by <see cref="ushort.MaxValue"/>,
         /// or null if the version string specified in the <see cref="AssemblyVersionAttribute"/> doesn't contain a wildcard.
-        /// 
-        /// For example, 
+        ///
+        /// For example,
         ///   AssemblyVersion("1.2.*") is represented as 1.2.65535.65535,
         ///   AssemblyVersion("1.2.3.*") is represented as 1.2.3.65535.
         /// </summary>
@@ -110,7 +110,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Gets the merged root namespace that contains all namespaces and types defined in the modules
-        /// of this assembly. If there is just one module in this assembly, this property just returns the 
+        /// of this assembly. If there is just one module in this assembly, this property just returns the
         /// GlobalNamespace of that module.
         /// </summary>
         public abstract NamespaceSymbol GlobalNamespace { get; }
@@ -471,7 +471,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Return an array of assemblies involved in canonical type resolution of
-        /// NoPia local types defined within this assembly. In other words, all 
+        /// NoPia local types defined within this assembly. In other words, all
         /// references used by previous compilation referencing this assembly.
         /// </summary>
         /// <returns></returns>
@@ -481,8 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         );
 
         /// <summary>
-        /// Return an array of assemblies referenced by this assembly, which are linked (/l-ed) by 
-        /// each compilation that is using this AssemblySymbol as a reference. 
+        /// Return an array of assemblies referenced by this assembly, which are linked (/l-ed) by
+        /// each compilation that is using this AssemblySymbol as a reference.
         /// If this AssemblySymbol is linked too, it will be in this array too.
         /// </summary>
         internal abstract ImmutableArray<AssemblySymbol> GetLinkedReferencedAssemblies();
@@ -501,8 +501,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal abstract bool IsLinked { get; }
 
         /// <summary>
-        /// Returns true and a string from the first GuidAttribute on the assembly, 
-        /// the string might be null or an invalid guid representation. False, 
+        /// Returns true and a string from the first GuidAttribute on the assembly,
+        /// the string might be null or an invalid guid representation. False,
         /// if there is no GuidAttribute with string argument.
         /// </summary>
         internal virtual bool GetGuidString(out string guidString)
@@ -516,7 +516,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <remarks>
         /// These names are the simple identifiers for the type, and do not include namespaces,
         /// outer type names, or type parameters.
-        /// 
+        ///
         /// This functionality can be used for features that want to quickly know if a name could be
         /// a type for performance reasons.  For example, classification does not want to incur an
         /// expensive binding call cost if it knows that there is no type with the name that they
@@ -1075,7 +1075,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Lookup member declaration in predefined CorLib type in this Assembly. Only valid if this 
+        /// Lookup member declaration in predefined CorLib type in this Assembly. Only valid if this
         /// assembly is the Cor Library
         /// </summary>
         internal virtual Symbol GetDeclaredSpecialTypeMember(SpecialMember member)
@@ -1095,7 +1095,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// If this symbol represents a metadata assembly returns the underlying <see cref="AssemblyMetadata"/>.
-        /// 
+        ///
         /// Otherwise, this returns <see langword="null"/>.
         /// </summary>
         public abstract AssemblyMetadata GetMetadata();

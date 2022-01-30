@@ -202,7 +202,7 @@ namespace System.Web.WebPages.Deployment
         /// Returns the version of WebPages to be used for a specified path.
         /// </summary>
         /// <remarks>
-        /// This method would always returns a value regardless of web pages is explicitly disabled (via config) or implicitly disabled (by virtue of not having a cshtml file) at 
+        /// This method would always returns a value regardless of web pages is explicitly disabled (via config) or implicitly disabled (by virtue of not having a cshtml file) at
         /// the specified path.
         /// </remarks>
         internal static Version GetVersionInternal(
@@ -239,7 +239,7 @@ namespace System.Web.WebPages.Deployment
 
         /// <summary>
         /// Gets full path to a folder that contains ASP.NET WebPages assemblies for a given version. Used by
-        /// WebMatrix and Visual Studio so they know what to copy to an app's Bin folder or deploy to a hoster. 
+        /// WebMatrix and Visual Studio so they know what to copy to an app's Bin folder or deploy to a hoster.
         /// </summary>
         public static string GetAssemblyPath(Version version)
         {
@@ -451,7 +451,7 @@ namespace System.Web.WebPages.Deployment
         }
 
         /// <summary>
-        /// Name of the the temporary file used by BuildManager.CreateCachedFile / BuildManager.ReadCachedFile where we cache WebPages's version number. 
+        /// Name of the the temporary file used by BuildManager.CreateCachedFile / BuildManager.ReadCachedFile where we cache WebPages's version number.
         /// </summary>
         /// <returns></returns>
         private static string GetCachedFileName()

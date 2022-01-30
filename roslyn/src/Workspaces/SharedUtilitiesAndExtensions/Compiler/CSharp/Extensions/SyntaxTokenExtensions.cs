@@ -98,7 +98,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             token.IsKind(SyntaxKind.OpenBraceToken) && token.Parent.IsKind(SyntaxKind.AccessorList);
 
         /// <summary>
-        /// Returns true if this token is something that looks like a C# keyword. This includes 
+        /// Returns true if this token is something that looks like a C# keyword. This includes
         /// actual keywords, contextual keywords, and even 'var' and 'dynamic'
         /// </summary>
         /// <param name="token"></param>

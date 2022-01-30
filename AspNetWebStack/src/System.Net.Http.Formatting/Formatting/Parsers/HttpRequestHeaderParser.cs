@@ -7,8 +7,8 @@ using System.Web.Http;
 namespace System.Net.Http.Formatting.Parsers
 {
     /// <summary>
-    /// The <see cref="HttpRequestHeaderParser"/> combines <see cref="HttpRequestLineParser"/> for parsing the HTTP Request Line  
-    /// and <see cref="InternetMessageFormatHeaderParser"/> for parsing each header field. 
+    /// The <see cref="HttpRequestHeaderParser"/> combines <see cref="HttpRequestLineParser"/> for parsing the HTTP Request Line
+    /// and <see cref="InternetMessageFormatHeaderParser"/> for parsing each header field.
     /// </summary>
     internal class HttpRequestHeaderParser
     {

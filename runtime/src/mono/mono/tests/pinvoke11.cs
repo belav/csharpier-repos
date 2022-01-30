@@ -25,9 +25,9 @@ public struct cs
     public su u1;
 }
 
-/* various small structs for testing struct-by-value where they are handled specially 
+/* various small structs for testing struct-by-value where they are handled specially
    on some platforms.
-*/
+   */
 [StructLayout(LayoutKind.Sequential)]
 public struct sc1
 {

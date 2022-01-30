@@ -80,7 +80,7 @@ namespace System.Web.Http.SelfHost
         }
 
         /// <summary>
-        /// Gets or sets the upper limit of how many concurrent <see cref="T:System.Net.Http.HttpRequestMessage"/> instances 
+        /// Gets or sets the upper limit of how many concurrent <see cref="T:System.Net.Http.HttpRequestMessage"/> instances
         /// can be processed at any given time. The default is 100 times the number of CPU cores.
         /// </summary>
         /// <value>
@@ -277,7 +277,7 @@ namespace System.Web.Http.SelfHost
         }
 
         /// <summary>
-        /// Gets/Sets the ClientCredentialType that server is expecting. 
+        /// Gets/Sets the ClientCredentialType that server is expecting.
         /// </summary>
         /// <value>
         /// The default value is HttpClientCredentialType.None.

@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Rename
         /// Individual action from RenameDocument APIs in <see cref="Renamer"/>. Represents
         /// changes that will be done to one or more document contents to help facilitate
         /// a smooth experience while moving documents around.
-        /// 
+        ///
         /// See <see cref="RenameDocumentActionSet" /> on use case and how to apply them to a solution.
         /// </summary>
         public abstract class RenameDocumentAction

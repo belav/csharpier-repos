@@ -97,8 +97,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         }
 
         /// <summary>
-        /// Reset the thread affinity, in particular the designated foreground thread, to the active 
-        /// thread.  
+        /// Reset the thread affinity, in particular the designated foreground thread, to the active
+        /// thread.
         /// </summary>
         internal static void ResetThreadAffinity(JoinableTaskFactory joinableTaskFactory)
         {

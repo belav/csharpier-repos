@@ -134,7 +134,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Computes a new <see cref="_transitiveReferencesMap"/> for the addition of additional project references. 
+        /// Computes a new <see cref="_transitiveReferencesMap"/> for the addition of additional project references.
         /// </summary>
         private static ImmutableDictionary<
             ProjectId,

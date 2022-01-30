@@ -98,7 +98,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         ) where TDeclarationNode : SyntaxNode;
 
         /// <summary>
-        /// Adds a property into destination. 
+        /// Adds a property into destination.
         /// </summary>
         TDeclarationNode AddProperty<TDeclarationNode>(
             TDeclarationNode destination,
@@ -108,7 +108,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         ) where TDeclarationNode : SyntaxNode;
 
         /// <summary>
-        /// Adds a named type into destination. 
+        /// Adds a named type into destination.
         /// </summary>
         TDeclarationNode AddNamedType<TDeclarationNode>(
             TDeclarationNode destination,
@@ -118,7 +118,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         ) where TDeclarationNode : SyntaxNode;
 
         /// <summary>
-        /// Adds a namespace into destination. 
+        /// Adds a namespace into destination.
         /// </summary>
         TDeclarationNode AddNamespace<TDeclarationNode>(
             TDeclarationNode destination,

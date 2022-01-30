@@ -1516,7 +1516,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// This method implements the algorithm in spec section 7.6.5.1.
-        /// 
+        ///
         /// For method group conversions, there are situations in which the conversion is
         /// considered to exist ("Otherwise the algorithm produces a single best method M having
         /// the same number of parameters as D and the conversion is considered to exist"), but
@@ -1609,19 +1609,19 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Performs the following checks:
-        /// 
-        /// Spec 7.6.5: Invocation expressions (definition of Final Validation) 
-        ///   The method is validated in the context of the method group: If the best method is a static method, 
-        ///   the method group must have resulted from a simple-name or a member-access through a type. If the best 
+        ///
+        /// Spec 7.6.5: Invocation expressions (definition of Final Validation)
+        ///   The method is validated in the context of the method group: If the best method is a static method,
+        ///   the method group must have resulted from a simple-name or a member-access through a type. If the best
         ///   method is an instance method, the method group must have resulted from a simple-name, a member-access
         ///   through a variable or value, or a base-access. If neither of these requirements is true, a binding-time
         ///   error occurs.
         ///   (Note that the spec omits to mention, in the case of an instance method invoked through a simple name, that
         ///   the invocation must appear within the body of an instance method)
         ///
-        /// Spec 7.5.4: Compile-time checking of dynamic overload resolution 
-        ///   If F is a static method, the method group must have resulted from a simple-name, a member-access through a type, 
-        ///   or a member-access whose receiver can't be classified as a type or value until after overload resolution (see §7.6.4.1). 
+        /// Spec 7.5.4: Compile-time checking of dynamic overload resolution
+        ///   If F is a static method, the method group must have resulted from a simple-name, a member-access through a type,
+        ///   or a member-access whose receiver can't be classified as a type or value until after overload resolution (see §7.6.4.1).
         ///   If F is an instance method, the method group must have resulted from a simple-name, a member-access through a variable or value,
         ///   or a member-access whose receiver can't be classified as a type or value until after overload resolution (see §7.6.4.1).
         /// </summary>

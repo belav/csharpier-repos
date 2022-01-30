@@ -715,12 +715,12 @@ namespace System.Reflection.Emit
         /*
                 internal ISymbolDocumentWriter? DefineDocument (string url, Guid language, Guid languageVendor, Guid documentType)
                 {
-                    if (symbolWriter != null)
-                        return symbolWriter.DefineDocument (url, language, languageVendor, documentType);
-                    else
-                        return null;
+                if (symbolWriter != null)
+                return symbolWriter.DefineDocument (url, language, languageVendor, documentType);
+                else
+                return null;
                 }
-        */
+                */
         [RequiresUnreferencedCode("Types might be removed")]
         public override Type[] GetTypes()
         {

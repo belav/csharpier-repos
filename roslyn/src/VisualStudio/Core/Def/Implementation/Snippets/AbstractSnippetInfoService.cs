@@ -32,8 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         private IVsExpansionManager? _expansionManager;
 
         /// <summary>
-        /// Initialize these to empty values. When returning from <see cref="GetSnippetsIfAvailable "/> 
-        /// and <see cref="SnippetShortcutExists_NonBlocking"/>, we return the current set of known 
+        /// Initialize these to empty values. When returning from <see cref="GetSnippetsIfAvailable "/>
+        /// and <see cref="SnippetShortcutExists_NonBlocking"/>, we return the current set of known
         /// snippets rather than waiting for initial results.
         /// </summary>
         protected ImmutableArray<SnippetInfo> snippets = ImmutableArray.Create<SnippetInfo>();
@@ -154,7 +154,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
         /// This method must be called on the UI thread because it eventually calls into
         /// IVsExpansionEnumeration.Next, which must be called on the UI thread due to an issue
         /// with how the call is marshalled.
-        /// 
+        ///
         /// The second parameter for IVsExpansionEnumeration.Next is defined like this:
         ///    [ComAliasName("Microsoft.VisualStudio.TextManager.Interop.VsExpansion")] IntPtr[] rgelt
         ///

@@ -7015,7 +7015,7 @@ class Test
         }
 
         /// <summary>
-        /// import - lib1: namespace A { namespace B { .class C {}.. }} 
+        /// import - lib1: namespace A { namespace B { .class C {}.. }}
         ///      vs. lib2: Namespace A { class B { class C{} }    }} - use C
         /// </summary>
         [Fact]
@@ -22131,7 +22131,7 @@ interface I
         }
 
         /// <summary>
-        /// import - Lib:  class A     { class B {} } 
+        /// import - Lib:  class A     { class B {} }
         ///      vs. curr: Namespace A { class B {} } - use B
         /// </summary>
         [ClrOnlyFact(ClrOnlyReason.Unknown)]

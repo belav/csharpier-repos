@@ -154,10 +154,10 @@ namespace System.Xml
             } //still use the old code to generate the output
             /*
             foreach ( XmlNode n in this ) {
-                if ( n.NodeType != XmlNodeType.EntityReference )
-                n.WriteTo( w );
-                else
-                    n.WriteContentTo( w );
+            if ( n.NodeType != XmlNodeType.EntityReference )
+            n.WriteTo( w );
+            else
+            n.WriteContentTo( w );
             }*/
         }
 

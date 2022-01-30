@@ -15,13 +15,13 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         /// Makes sure that the string at least somewhat resembles the correct form.
         /// Does not check validity on class or method identifiers
         /// Example line:
-        /// at ConsoleApp4.MyClass.ThrowAtOne(p1, p2) 
-        ///   |-------------------||--------||-------| 
-        ///           Class          Method    Args   
+        /// at ConsoleApp4.MyClass.ThrowAtOne(p1, p2)
+        ///   |-------------------||--------||-------|
+        ///           Class          Method    Args
         /// </summary>
         /// <remarks>
         /// See https://docs.microsoft.com/en-us/dotnet/api/system.environment.stacktrace for more information
-        /// on expected stacktrace form. At time of writing, this is based on the following "ToString" implementation in the runtime: 
+        /// on expected stacktrace form. At time of writing, this is based on the following "ToString" implementation in the runtime:
         /// https://github.com/dotnet/runtime/blob/72d643d05ab23888f30a57d447154e36f979f3d1/src/libraries/System.Private.CoreLib/src/System/Diagnostics/StackTrace.cs#L206
         /// </remarks>
 
@@ -227,17 +227,17 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                 CurrentParsingSpan.Type;
 
             /// <summary>
-            /// [|ConsoleApp4.MyClass|].M(string s, int i) 
+            /// [|ConsoleApp4.MyClass|].M(string s, int i)
             /// </summary>
             public TextSpan TypeSpan { get; private set; }
 
             /// <summary>
-            /// ConsoleApp4.MyClass.[|M|](string s, int i) 
+            /// ConsoleApp4.MyClass.[|M|](string s, int i)
             /// </summary>
             public TextSpan MethodSpan { get; private set; }
 
             /// <summary>
-            /// ConsoleApp4.MyClass.M([|string s, int i|]) 
+            /// ConsoleApp4.MyClass.M([|string s, int i|])
             /// </summary>
             public TextSpan ArgumentsSpan { get; private set; }
 
@@ -313,9 +313,9 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         /// <summary>
         /// Order is important here. This is the order we expect
         /// parts of a method declaration to be parsed.
-        /// at ConsoleApp4.MyClass.ThrowAtOne(p1, p2,) 
-        ///   |-------------------||--------||-------| 
-        ///           Class          Method    Args   
+        /// at ConsoleApp4.MyClass.ThrowAtOne(p1, p2,)
+        ///   |-------------------||--------||-------|
+        ///           Class          Method    Args
         /// </summary>
         private enum CurrentParsingSpan
         {

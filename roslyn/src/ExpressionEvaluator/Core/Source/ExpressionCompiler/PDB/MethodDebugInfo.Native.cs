@@ -273,12 +273,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// </summary>
         /// <remarks>
         /// Doesn't consider forwarding.
-        /// 
+        ///
         /// CONSIDER: Dev12 doesn't just check the root scope - it digs around to find the best
         /// match based on the IL offset and then walks up to the root scope (see PdbUtil::GetScopeFromOffset).
         /// However, it's not clear that this matters, since imports can't be scoped in VB.  This is probably
         /// just based on the way they were extracting locals and constants based on a specific scope.
-        /// 
+        ///
         /// Returns empty array if there are no import strings for the specified method.
         /// </remarks>
         private static ImmutableArray<string> GetImportStrings(
@@ -544,11 +544,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         }
 
         /// <summary>
-        /// Dynamic CDI encodes slot id and name for each dynamic local variable, but only name for a constant. 
+        /// Dynamic CDI encodes slot id and name for each dynamic local variable, but only name for a constant.
         /// Constants have slot id set to 0. As a result there is a potential for ambiguity. If a variable in a slot 0
-        /// and a constant defined anywhere in the method body have the same name we can't say which one 
+        /// and a constant defined anywhere in the method body have the same name we can't say which one
         /// the dynamic flags belong to (if there is a dynamic record for at least one of them).
-        /// 
+        ///
         /// This method returns the local kind (variable, constant, or duplicate) based on name.
         /// </summary>
         private static void GetLocalKindByName(

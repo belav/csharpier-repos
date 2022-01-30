@@ -21,7 +21,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Represents a set of projects and their source code documents. 
+    /// Represents a set of projects and their source code documents.
     /// </summary>
     public partial class Solution
     {
@@ -103,8 +103,8 @@ namespace Microsoft.CodeAnalysis
             _state.ContainsProject(projectId);
 
         /// <summary>
-        /// Gets the project in this solution with the specified project ID. 
-        /// 
+        /// Gets the project in this solution with the specified project ID.
+        ///
         /// If the id is not an id of a project that is part of this solution the method returns null.
         /// </summary>
         public Project? GetProject(ProjectId? projectId)
@@ -751,7 +751,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Create a new solution instance with the project specified updated to include the 
+        /// Create a new solution instance with the project specified updated to include the
         /// specified metadata reference.
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
@@ -873,7 +873,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Create a new solution instance with the project specified updated to include the 
+        /// Create a new solution instance with the project specified updated to include the
         /// specified analyzer reference.
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
@@ -1233,7 +1233,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Create a new solution instance with the corresponding project updated to include a new 
+        /// Create a new solution instance with the corresponding project updated to include a new
         /// document instanced defined by the document info.
         /// </summary>
         public Solution AddDocument(DocumentInfo documentInfo) =>
@@ -1901,9 +1901,9 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Creates a branch of the solution that has its compilations frozen in whatever state they are in at the time, assuming a background compiler is
         /// busy building this compilations.
-        /// 
+        ///
         /// A compilation for the project containing the specified document id will be guaranteed to exist with at least the syntax tree for the document.
-        /// 
+        ///
         /// This not intended to be the public API, use Document.WithFrozenPartialSemantics() instead.
         /// </summary>
         internal Solution WithFrozenPartialCompilationIncludingSpecificDocument(
@@ -2075,7 +2075,7 @@ namespace Microsoft.CodeAnalysis
             _state.GetProjectDependencyGraph();
 
         /// <summary>
-        /// Returns the options that should be applied to this solution. This is equivalent to <see cref="Workspace.Options" /> when the <see cref="Solution"/> 
+        /// Returns the options that should be applied to this solution. This is equivalent to <see cref="Workspace.Options" /> when the <see cref="Solution"/>
         /// instance was created.
         /// </summary>
         public OptionSet Options => _state.Options;
@@ -2249,7 +2249,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Throws if setting the project references of project <paramref name="projectId"/> to specified <paramref name="projectReferences"/>
         /// would form an invalid submission project chain.
-        /// 
+        ///
         /// Submission projects can reference at most one other submission project. Regular projects can't reference any.
         /// </summary>
         private void CheckSubmissionProjectReferences(

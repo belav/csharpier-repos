@@ -30,21 +30,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         MemberClass staticMC =new MemberClass();
         dynamic mc = staticMC;
         bool myBool;
-
+        
         //This test the getter for the property
         myBool = true;
         staticMC.myBool = myBool; //We set the inner field
         myBool = mc.Property_bool; //We use the property to get the field
         if (myBool != true)
         return 1;
-
+        
         //This tests the setter for the property
         myBool = true;
         mc.Property_bool = myBool; //We set the property
         myBool = statMc.myBool; // We get the inner field
         if (myBool != true)
         return 1;
-
+        
         */
         public bool myBool = true;
         public bool? myBoolNull = true;

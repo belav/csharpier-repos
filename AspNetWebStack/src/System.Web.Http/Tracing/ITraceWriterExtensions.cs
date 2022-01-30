@@ -16,7 +16,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Debug"/> with the given message.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
@@ -43,7 +43,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Debug"/> with the given <paramref name="exception"/>.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
@@ -61,7 +61,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Debug"/> with the given message and exception.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
@@ -91,7 +91,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Error"/> with the given message.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
@@ -118,7 +118,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Error"/> with the given <paramref name="exception"/>.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
@@ -136,7 +136,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Error"/> with the given message and exception.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
@@ -166,7 +166,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Fatal"/> with the given message.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
@@ -193,7 +193,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Fatal"/> with the given <paramref name="exception"/>.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
@@ -211,7 +211,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Fatal"/> with the given message and exception.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
@@ -241,7 +241,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Info"/> with the given message.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
@@ -261,7 +261,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Info"/> with the given <paramref name="exception"/>.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
@@ -279,7 +279,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Info"/> with the given message and exception.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
@@ -310,7 +310,7 @@ namespace System.Web.Http.Tracing
         /// is enabled for the given <paramref name="category"/> and <paramref name="level"/>.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so cannot be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="level">The <see cref="TraceLevel"/> for the trace.</param>
@@ -349,7 +349,7 @@ namespace System.Web.Http.Tracing
         /// is enabled for the given <paramref name="category"/> and <paramref name="level"/>.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="level">The <see cref="TraceLevel"/> for the trace.</param>
@@ -401,7 +401,7 @@ namespace System.Web.Http.Tracing
         /// is enabled for the given <paramref name="category"/> and <paramref name="level"/>.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="level">The <see cref="TraceLevel"/> for the trace.</param>
@@ -449,12 +449,12 @@ namespace System.Web.Http.Tracing
         /// <param name="level">The <see cref="TraceLevel"/> of the trace.</param>
         /// <param name="operatorName">The name of the object performing the operation.  It may be null.</param>
         /// <param name="operationName">The name of the operation being performed.  It may be null.</param>
-        /// <param name="beginTrace">The <see cref="Action"/> to invoke prior to performing the operation, 
+        /// <param name="beginTrace">The <see cref="Action"/> to invoke prior to performing the operation,
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  It may be null.</param>
         /// <param name="execute">An <see cref="Action"/> that performs the operation.</param>
-        /// <param name="endTrace">The <see cref="Action"/> to invoke after successfully performing the operation, 
+        /// <param name="endTrace">The <see cref="Action"/> to invoke after successfully performing the operation,
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  It may be null.</param>
-        /// <param name="errorTrace">The <see cref="Action"/> to invoke if an error was encountered performing the operation, 
+        /// <param name="errorTrace">The <see cref="Action"/> to invoke if an error was encountered performing the operation,
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  It may be null.</param>
         public static void TraceBeginEnd(
             this ITraceWriter traceWriter,
@@ -539,13 +539,13 @@ namespace System.Web.Http.Tracing
         /// <param name="level">The <see cref="TraceLevel"/> of the trace.</param>
         /// <param name="operatorName">The name of the object performing the operation.  It may be null.</param>
         /// <param name="operationName">The name of the operation being performed.  It may be null.</param>
-        /// <param name="beginTrace">The <see cref="Action"/> to invoke prior to performing the operation, 
+        /// <param name="beginTrace">The <see cref="Action"/> to invoke prior to performing the operation,
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  It may be null.</param>
         /// <param name="execute">An <see cref="Func{Task}"/> that returns the <see cref="Task"/> that will perform the operation.</param>
-        /// <param name="endTrace">The <see cref="Action"/> to invoke after successfully performing the operation, 
+        /// <param name="endTrace">The <see cref="Action"/> to invoke after successfully performing the operation,
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  The result of the completed task will also
         /// be passed to this action.  This action may be null.</param>
-        /// <param name="errorTrace">The <see cref="Action"/> to invoke if an error was encountered performing the operation, 
+        /// <param name="errorTrace">The <see cref="Action"/> to invoke if an error was encountered performing the operation,
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  It may be null.</param>
         /// <returns>The <see cref="Task"/> returned by the operation.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
@@ -706,12 +706,12 @@ namespace System.Web.Http.Tracing
         /// <param name="level">The <see cref="TraceLevel"/> of the trace.</param>
         /// <param name="operatorName">The name of the object performing the operation.  It may be null.</param>
         /// <param name="operationName">The name of the operation being performed.  It may be null.</param>
-        /// <param name="beginTrace">The <see cref="Action"/> to invoke prior to performing the operation, 
+        /// <param name="beginTrace">The <see cref="Action"/> to invoke prior to performing the operation,
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  It may be null.</param>
         /// <param name="execute">An <see cref="Func{Task}"/> that returns the <see cref="Task"/> that will perform the operation.</param>
-        /// <param name="endTrace">The <see cref="Action"/> to invoke after successfully performing the operation, 
+        /// <param name="endTrace">The <see cref="Action"/> to invoke after successfully performing the operation,
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  It may be null.</param>
-        /// <param name="errorTrace">The <see cref="Action"/> to invoke if an error was encountered performing the operation, 
+        /// <param name="errorTrace">The <see cref="Action"/> to invoke if an error was encountered performing the operation,
         /// allowing the given <see cref="TraceRecord"/> to be filled in.  It may be null.</param>
         /// <returns>The <see cref="Task"/> returned by the operation.</returns>
         public static Task TraceBeginEndAsync(
@@ -859,7 +859,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Warn"/> with the given message.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="messageFormat">The string to use to format a message.  It may not be null.</param>
@@ -879,7 +879,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Warn"/> with the given <paramref name="exception"/>.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>
@@ -897,7 +897,7 @@ namespace System.Web.Http.Tracing
         /// Writes a <see cref="TraceRecord"/> at <see cref="TraceLevel.Warn"/> with the given message and exception.
         /// </summary>
         /// <param name="traceWriter">The <see cref="ITraceWriter"/></param>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.  
+        /// <param name="request">The <see cref="HttpRequestMessage"/> with which to correlate the request.
         /// It may be null, but if so will not be correlated with any request.</param>
         /// <param name="category">The category for the trace.</param>
         /// <param name="exception">The exception to trace</param>

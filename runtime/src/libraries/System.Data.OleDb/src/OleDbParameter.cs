@@ -611,12 +611,12 @@ namespace System.Data.OleDb
             /*switch(Direction) {
             default:
             case ParameterDirection.Input:
-                return ODB.DBPARAMIO_INPUT;
+            return ODB.DBPARAMIO_INPUT;
             case ParameterDirection.Output:
             case ParameterDirection.ReturnValue:
-                return ODB.DBPARAMIO_OUTPUT;
+            return ODB.DBPARAMIO_OUTPUT;
             case ParameterDirection.InputOutput:
-                return (ODB.DBPARAMIO_INPUT | ODB.DBPARAMIO_OUTPUT);
+            return (ODB.DBPARAMIO_INPUT | ODB.DBPARAMIO_OUTPUT);
             }*/
         }
 
@@ -626,12 +626,12 @@ namespace System.Data.OleDb
             /*switch(Direction) {
             default:
             case ParameterDirection.Input:
-                return ODB.DBPARAMFLAGS_ISINPUT;
+            return ODB.DBPARAMFLAGS_ISINPUT;
             case ParameterDirection.Output:
             case ParameterDirection.ReturnValue:
-                return ODB.DBPARAMFLAGS_ISOUTPUT;
+            return ODB.DBPARAMFLAGS_ISOUTPUT;
             case ParameterDirection.InputOutput:
-                return (ODB.DBPARAMFLAGS_ISINPUT | ODB.DBPARAMFLAGS_ISOUTPUT);
+            return (ODB.DBPARAMFLAGS_ISINPUT | ODB.DBPARAMFLAGS_ISOUTPUT);
             }*/
         }
 

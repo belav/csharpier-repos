@@ -16,11 +16,11 @@ namespace Microsoft.CodeAnalysis.Rename
     {
         /// <summary>
         /// Information about rename document calls that allows them to be applied as individual actions. Actions are individual units of work
-        /// that can change the contents of one or more document in the solution. Even if the <see cref="ApplicableActions"/> is empty, the 
+        /// that can change the contents of one or more document in the solution. Even if the <see cref="ApplicableActions"/> is empty, the
         /// document metadata will still be updated by calling <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)"/>
         /// <para />
         /// To apply all actions use <see cref="UpdateSolutionAsync(Solution, CancellationToken)"/>, or use a subset
-        /// of the actions by calling <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)"/>. 
+        /// of the actions by calling <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)"/>.
         /// Actions can be applied in any order.
         /// Each action has a description of the changes that it will apply that can be presented to a user.
         /// </summary>
@@ -47,14 +47,14 @@ namespace Microsoft.CodeAnalysis.Rename
             }
 
             /// <summary>
-            /// All applicable actions computed for the action. Action set may be empty, which represents updates to document 
-            /// contents rather than metadata. Document metadata will still not be updated unless <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)" /> 
+            /// All applicable actions computed for the action. Action set may be empty, which represents updates to document
+            /// contents rather than metadata. Document metadata will still not be updated unless <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)" />
             /// is called.
             /// </summary>
             public ImmutableArray<RenameDocumentAction> ApplicableActions { get; }
 
             /// <summary>
-            /// Same as calling <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)"/> with 
+            /// Same as calling <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)"/> with
             /// <see cref="ApplicableActions"/> as the argument
             /// </summary>
             public Task<Solution> UpdateSolutionAsync(
@@ -63,12 +63,12 @@ namespace Microsoft.CodeAnalysis.Rename
             ) => UpdateSolutionAsync(solution, ApplicableActions, cancellationToken);
 
             /// <summary>
-            /// Applies each <see cref="RenameDocumentAction"/> in order and returns the final solution. 
+            /// Applies each <see cref="RenameDocumentAction"/> in order and returns the final solution.
             /// All actions must be contained in <see cref="ApplicableActions" />
             /// </summary>
             /// <remarks>
             /// An empty action set is still allowed and will return a modified solution
-            /// that will update the document properties as appropriate. This means we 
+            /// that will update the document properties as appropriate. This means we
             /// can still support when <see cref="ApplicableActions"/> is empty. It's desirable
             /// that consumers can call a rename API to produce a <see cref="RenameDocumentActionSet"/> and
             /// immediately call <see cref="UpdateSolutionAsync(Solution, ImmutableArray{RenameDocumentAction}, CancellationToken)"/> without
@@ -122,7 +122,7 @@ namespace Microsoft.CodeAnalysis.Rename
             }
 
             /// <summary>
-            /// Attempts to find the document in the solution. Tries by documentId first, but 
+            /// Attempts to find the document in the solution. Tries by documentId first, but
             /// that's not always reliable between analysis and application of the rename actions
             /// </summary>
             private Document GetDocument(Solution solution)

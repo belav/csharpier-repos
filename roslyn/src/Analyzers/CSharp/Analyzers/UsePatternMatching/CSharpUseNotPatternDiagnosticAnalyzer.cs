@@ -14,14 +14,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 {
     /// <summary>
     /// Looks for code of the forms:
-    /// 
+    ///
     ///     var x = o as Type;
     ///     if (!(x is Y y)) ...
-    /// 
+    ///
     /// and converts it to:
-    /// 
+    ///
     ///     if (x is not Y y) ...
-    ///     
+    ///
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal partial class CSharpUseNotPatternDiagnosticAnalyzer

@@ -697,7 +697,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         /// <summary>
         /// Returns the list of using directives that affect <paramref name="node"/>. The list will be returned in
-        /// top down order.  
+        /// top down order.
         /// </summary>
         public static IEnumerable<UsingDirectiveSyntax> GetEnclosingUsingDirectives(
             this SyntaxNode node
@@ -884,37 +884,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         /// <summary>
         /// Returns true if the passed in node contains an interleaved pp directive.
-        /// 
+        ///
         /// i.e. The following returns false:
-        /// 
+        ///
         ///   void Goo() {
         /// #if true
         /// #endif
         ///   }
-        /// 
+        ///
         /// #if true
         ///   void Goo() {
         ///   }
         /// #endif
-        /// 
+        ///
         /// but these return true:
-        /// 
+        ///
         /// #if true
         ///   void Goo() {
         /// #endif
         ///   }
-        /// 
+        ///
         ///   void Goo() {
         /// #if true
         ///   }
         /// #endif
-        /// 
+        ///
         /// #if true
         ///   void Goo() {
         /// #else
         ///   }
         /// #endif
-        /// 
+        ///
         /// i.e. the method returns true if it contains a PP directive that belongs to a grouping
         /// constructs (like #if/#endif or #region/#endregion), but the grouping construct isn't
         /// entirely contained within the span of the node.

@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private StrongNameKeys _lazyStrongNameKeys;
 
         /// <summary>
-        /// A list of modules the assembly consists of. 
+        /// A list of modules the assembly consists of.
         /// The first (index=0) module is a SourceModuleSymbol, which is a primary module, the rest are net-modules.
         /// </summary>
         private readonly ImmutableArray<ModuleSymbol> _modules;
@@ -694,7 +694,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <remarks>
         /// As in Dev10, we won't report anything if the attribute TYPES are missing (note: missing, not erroneous) because we won't
-        /// synthesize anything in that case.  We'll only report diagnostics if the attribute TYPES are present and either they or 
+        /// synthesize anything in that case.  We'll only report diagnostics if the attribute TYPES are present and either they or
         /// the attribute CONSTRUCTORS have errors.
         /// </remarks>
         private static void ReportDiagnosticsForSynthesizedAttributes(
@@ -753,14 +753,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// If this compilation allows unsafe code (note: allows, not contains), then when we actually emit the assembly/module, 
+        /// If this compilation allows unsafe code (note: allows, not contains), then when we actually emit the assembly/module,
         /// we're going to synthesize SecurityPermissionAttribute/UnverifiableCodeAttribute.  However, at synthesis time, it is
         /// too late to report diagnostics or cancel the emit.  Instead, we check for use site errors on the types and members
         /// we know we'll need at synthesis time.
         /// </summary>
         /// <remarks>
         /// As in Dev10, we won't report anything if the attribute TYPES are missing (note: missing, not erroneous) because we won't
-        /// synthesize anything in that case.  We'll only report diagnostics if the attribute TYPES are present and either they or 
+        /// synthesize anything in that case.  We'll only report diagnostics if the attribute TYPES are present and either they or
         /// the attribute CONSTRUCTORS have errors.
         /// </remarks>
         private static void ReportDiagnosticsForUnsafeSynthesizedAttributes(

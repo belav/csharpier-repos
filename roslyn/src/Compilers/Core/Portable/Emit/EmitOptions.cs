@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Emit
         public bool EmitMetadataOnly { get; private set; }
 
         /// <summary>
-        /// Tolerate errors, producing a PE stream and a success result even in the presence of (some) errors. 
+        /// Tolerate errors, producing a PE stream and a success result even in the presence of (some) errors.
         /// </summary>
         public bool TolerateErrors { get; private set; }
 
@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.Emit
         public SubsystemVersion SubsystemVersion { get; private set; }
 
         /// <summary>
-        /// Specifies the size of sections in the output file. 
+        /// Specifies the size of sections in the output file.
         /// </summary>
         /// <remarks>
         /// Valid values are 0, 512, 1024, 2048, 4096 and 8192.
@@ -77,9 +77,9 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <remarks>
         /// By default the name of the output assembly is <see cref="Compilation.AssemblyName"/>. Only in rare cases it is necessary
         /// to override the name.
-        /// 
+        ///
         /// CAUTION: If this is set to a (non-null) value other than the existing compilation output name, then internals-visible-to
-        /// and assembly references may not work as expected.  In particular, things that were visible at bind time, based on the 
+        /// and assembly references may not work as expected.  In particular, things that were visible at bind time, based on the
         /// name of the compilation, may not be visible at runtime and vice-versa.
         /// </remarks>
         public string? OutputNameOverride { get; private set; }
@@ -99,7 +99,7 @@ namespace Microsoft.CodeAnalysis.Emit
         public HashAlgorithmName PdbChecksumAlgorithm { get; private set; }
 
         /// <summary>
-        /// Runtime metadata version. 
+        /// Runtime metadata version.
         /// </summary>
         public string? RuntimeMetadataVersion { get; private set; }
 

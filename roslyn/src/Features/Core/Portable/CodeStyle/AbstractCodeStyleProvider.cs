@@ -98,9 +98,9 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// <summary>
         /// Subclasses must implement this method to provide fixes for any diagnostics that this
         /// type has registered.  If this subclass wants the same code to run for this single
-        /// diagnostic as well as for when running fix-all, then it should call 
+        /// diagnostic as well as for when running fix-all, then it should call
         /// <see cref="FixWithSyntaxEditorAsync"/> from its code action.  This will end up calling
-        /// <see cref="FixAllAsync"/>, with that single <paramref name="diagnostic"/> in the 
+        /// <see cref="FixAllAsync"/>, with that single <paramref name="diagnostic"/> in the
         /// <see cref="ImmutableArray{T}"/> passed to that method.
         /// </summary>
         protected abstract Task<ImmutableArray<CodeAction>> ComputeCodeActionsAsync(

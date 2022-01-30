@@ -7,10 +7,10 @@ using System.Diagnostics;
 namespace Moq
 {
     /// <summary>
-	/// A <see cref="DefaultValueProvider"/> that returns an empty default value 
-	/// for non-mockable types, and mocks for all other types (interfaces and
-	/// non-sealed classes) that can be mocked.
-	/// </summary>
+    /// A <see cref="DefaultValueProvider"/> that returns an empty default value
+    /// for non-mockable types, and mocks for all other types (interfaces and
+    /// non-sealed classes) that can be mocked.
+    /// </summary>
     internal sealed class MockDefaultValueProvider : LookupOrFallbackDefaultValueProvider
     {
         internal MockDefaultValueProvider() { }

@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     /// <summary>
     /// Provide document difference service specific to remote workspace's behavior.
-    /// 
+    ///
     /// Default <see cref="AbstractDocumentDifferenceService"/> is optimized for typing case in editor where we have events
     /// for each typing. But in remote workspace, we aggregate changes and update solution in bulk and we don't have concept
     /// of active file making default implementation unsuitable. Functionally, default one is still correct, but it often

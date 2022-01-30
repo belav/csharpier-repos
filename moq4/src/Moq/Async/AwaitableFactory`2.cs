@@ -10,9 +10,9 @@ using System.Linq.Expressions;
 namespace Moq.Async
 {
     /// <summary>
-	///   Abstract base class that facilitates type-safe implementation of <see cref="IAwaitableFactory"/>
-	///   for awaitables that produce a result when awaited.
-	/// </summary>
+    ///   Abstract base class that facilitates type-safe implementation of <see cref="IAwaitableFactory"/>
+    ///   for awaitables that produce a result when awaited.
+    /// </summary>
     internal abstract class AwaitableFactory<TAwaitable, TResult> : IAwaitableFactory
     {
         public Type ResultType => typeof(TResult);

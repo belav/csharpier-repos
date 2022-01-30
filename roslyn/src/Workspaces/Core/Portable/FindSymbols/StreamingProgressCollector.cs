@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
     /// <summary>
-    /// Collects all the <see cref="ISymbol"/> definitions and <see cref="ReferenceLocation"/> 
+    /// Collects all the <see cref="ISymbol"/> definitions and <see cref="ReferenceLocation"/>
     /// references that are reported independently and packages them up into the final list
     /// of <see cref="ReferencedSymbol" />.  This is used by the old non-streaming Find-References
     /// APIs to return all the results at the end of the operation, as opposed to broadcasting

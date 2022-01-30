@@ -199,7 +199,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
         }
 
         /// <returns>
-        /// True: if a failure notification was displayed or the user did not want to proceed in a best effort scenario. 
+        /// True: if a failure notification was displayed or the user did not want to proceed in a best effort scenario.
         ///       Extract Method does not proceed further and is done.
         /// False: the user proceeded to a best effort scenario.
         /// </returns>

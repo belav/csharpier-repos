@@ -569,7 +569,7 @@ namespace Microsoft.Cci
 
         /// <summary>
         /// Use this routine, rather than ITypeReference.Dispatch, to call the appropriate derived overload of an ITypeReference.
-        /// The former routine will call Visit(INamespaceTypeDefinition) rather than Visit(INamespaceTypeReference), etc., 
+        /// The former routine will call Visit(INamespaceTypeDefinition) rather than Visit(INamespaceTypeReference), etc.,
         /// in the case where a definition is used as a reference to itself.
         /// </summary>
         /// <param name="typeReference">A reference to a type definition. Note that a type definition can serve as a reference to itself.</param>

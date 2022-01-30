@@ -26,12 +26,12 @@ namespace Castle.DynamicProxy.Generators
         private EventEmitter emitter;
 
         /// <summary>
-		///   Initializes a new instance of the <see cref = "MetaEvent" /> class.
-		/// </summary>
-		/// <param name = "event">The event.</param>
-		/// <param name = "adder">The add method.</param>
-		/// <param name = "remover">The remove method.</param>
-		/// <param name = "attributes">The attributes.</param>
+        ///   Initializes a new instance of the <see cref = "MetaEvent" /> class.
+        /// </summary>
+        /// <param name = "event">The event.</param>
+        /// <param name = "adder">The add method.</param>
+        /// <param name = "remover">The remove method.</param>
+        /// <param name = "attributes">The attributes.</param>
         public MetaEvent(
             EventInfo @event,
             MetaMethod adder,

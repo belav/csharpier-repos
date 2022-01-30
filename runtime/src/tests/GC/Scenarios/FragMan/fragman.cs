@@ -6,7 +6,7 @@
  * This test creates an array of FragNodes, then reorganizes them into a tree.
  * Then it removes the references from the array, and verifies the tree keeps
  * all the elements alive (verified by checking the Finalized count against 0).
-*/
+ */
 
 namespace DefaultNamespace
 {

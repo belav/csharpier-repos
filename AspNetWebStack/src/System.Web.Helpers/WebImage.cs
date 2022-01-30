@@ -698,11 +698,11 @@ namespace System.Web.Helpers
             return this;
         }
 
-        /// <param name="filePath">If no filePath is specified, the method falls back to the file name if the image was constructed from a file or 
+        /// <param name="filePath">If no filePath is specified, the method falls back to the file name if the image was constructed from a file or
         /// the file name on the client (the browser machine) if the image was built off GetImageFromRequest
         /// </param>
         /// <param name="imageFormat">The format the image is saved in</param>
-        /// <param name="forceCorrectExtension">Appends a well known extension to the filePath based on the imageFormat specified. 
+        /// <param name="forceCorrectExtension">Appends a well known extension to the filePath based on the imageFormat specified.
         /// If the filePath uses a valid extension, no change is made.
         /// e.g. format: "jpg", filePath: "foo.txt". Image saved at = "foo.txt.jpeg"
         ///      format: "png", filePath: "foo.png". Image saved at = "foo.txt.png"

@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis
             public abstract IEnumerable<TAssemblySymbol> AvailableSymbols { get; }
 
             /// <summary>
-            /// Check if provided AssemblySymbol is created for assembly described by this instance. 
-            /// This method is expected to return true for every AssemblySymbol returned by 
+            /// Check if provided AssemblySymbol is created for assembly described by this instance.
+            /// This method is expected to return true for every AssemblySymbol returned by
             /// AvailableSymbols property.
             /// </summary>
             /// <param name="assembly">
@@ -44,14 +44,14 @@ namespace Microsoft.CodeAnalysis
             public abstract bool IsMatchingAssembly(TAssemblySymbol? assembly);
 
             /// <summary>
-            /// Resolve assembly references against assemblies described by provided AssemblyData objects. 
-            /// In other words, match assembly identities returned by AssemblyReferences property against 
+            /// Resolve assembly references against assemblies described by provided AssemblyData objects.
+            /// In other words, match assembly identities returned by AssemblyReferences property against
             /// assemblies described by provided AssemblyData objects.
             /// </summary>
             /// <param name="assemblies">An array of AssemblyData objects to match against.</param>
             /// <param name="assemblyIdentityComparer">Used to compare assembly identities.</param>
             /// <returns>
-            /// For each assembly referenced by this assembly (<see cref="AssemblyReferences"/>) 
+            /// For each assembly referenced by this assembly (<see cref="AssemblyReferences"/>)
             /// a description of how it binds to one of the input assemblies.
             /// </returns>
             public abstract AssemblyReferenceBinding[] BindAssemblyReferences(

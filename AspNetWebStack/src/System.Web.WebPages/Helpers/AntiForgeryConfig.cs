@@ -54,7 +54,7 @@ namespace System.Web.Helpers
         /// <summary>
         /// Specifies whether to suppress the generation of X-Frame-Options header
         /// which is used to prevent ClickJacking. By default, the X-Frame-Options
-        /// header is generated with the value SAMEORIGIN. If this setting is 'true', 
+        /// header is generated with the value SAMEORIGIN. If this setting is 'true',
         /// the X-Frame-Options header will not be generated for the response.
         /// </summary>
         public static bool SuppressXFrameOptionsHeader { get; set; }

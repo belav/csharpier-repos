@@ -2482,7 +2482,7 @@ P1(5).get
             compilation2.VerifyDiagnostics();
 
             /*
-             * Intentionally not validating IL as it is just going to show the same generated code as 
+             * Intentionally not validating IL as it is just going to show the same generated code as
              * many of the other tests.  the run results are far more  interesting
              */
         }
@@ -2567,7 +2567,7 @@ P1(2).get
             compilation2.VerifyDiagnostics();
 
             /*
-             * Intentionally not validating IL as it is just going to show the same generated code as 
+             * Intentionally not validating IL as it is just going to show the same generated code as
              * many of the other tests.  the run results are far more  interesting
              */
         }

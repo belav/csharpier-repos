@@ -838,25 +838,25 @@ namespace System.Diagnostics.Tracing
             ref uint totalEventSize
         )
         /*++
-
+        
         Routine Description:
-
-           This routine is used by WriteEvent to unbox the object type and
-           to fill the passed in ETW data descriptor.
-
+        
+        This routine is used by WriteEvent to unbox the object type and
+        to fill the passed in ETW data descriptor.
+        
         Arguments:
-
-           data - argument to be decoded
-
-           dataDescriptor - pointer to the descriptor to be filled (updated to point to the next empty entry)
-
-           dataBuffer - storage buffer for storing user data, needed because cant get the address of the object
-                        (updated to point to the next empty entry)
-
+        
+        data - argument to be decoded
+        
+        dataDescriptor - pointer to the descriptor to be filled (updated to point to the next empty entry)
+        
+        dataBuffer - storage buffer for storing user data, needed because cant get the address of the object
+        (updated to point to the next empty entry)
+        
         Return Value:
-
-           null if the object is a basic type other than string or byte[]. String otherwise
-
+        
+        null if the object is a basic type other than string or byte[]. String otherwise
+        
         --*/
         {
             Again:

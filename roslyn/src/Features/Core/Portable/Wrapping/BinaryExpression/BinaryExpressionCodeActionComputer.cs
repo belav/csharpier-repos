@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
             private readonly SyntaxTriviaList _newlineBeforeOperatorTrivia;
 
             /// <summary>
-            /// The indent trivia to insert if we are trying to align wrapped code with the 
+            /// The indent trivia to insert if we are trying to align wrapped code with the
             /// start of the original expression.
             /// </summary>
             private readonly SyntaxTriviaList _indentAndAlignTrivia;

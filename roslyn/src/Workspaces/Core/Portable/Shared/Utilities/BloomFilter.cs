@@ -26,15 +26,15 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         /// <summary><![CDATA[
         /// 1) n  = Number of items in the filter
-        /// 
+        ///
         /// 2) p = Probability of false positives, (a double between 0 and 1).
-        /// 
+        ///
         /// 3) m = Number of bits in the filter
-        /// 
+        ///
         /// 4) k = Number of hash functions
-        /// 
+        ///
         /// m = ceil((n * log(p)) / log(1.0 / (pow(2.0, log(2.0)))))
-        /// 
+        ///
         /// k = round(log(2.0) * m / n)
         /// ]]></summary>
         public BloomFilter(int expectedCount, double falsePositiveProbability, bool isCaseSensitive)
@@ -107,20 +107,20 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// Modification of the murmurhash2 algorithm.  Code is simpler because it operates over
         /// strings instead of byte arrays.  Because each string character is two bytes, it is known
         /// that the input will be an even number of bytes (though not necessarily a multiple of 4).
-        /// 
+        ///
         /// This is needed over the normal 'string.GetHashCode()' because we need to be able to generate
         /// 'k' different well distributed hashes for any given string s.  Also, we want to be able to
         /// generate these hashes without allocating any memory.  My ideal solution would be to use an
         /// MD5 hash.  However, there appears to be no way to do MD5 in .NET where you can:
-        /// 
+        ///
         /// a) feed it individual values instead of a byte[]
-        /// 
+        ///
         /// b) have the hash computed into a byte[] you provide instead of a newly allocated one
-        /// 
+        ///
         /// Generating 'k' pieces of garbage on each insert and lookup seems very wasteful.  So,
         /// instead, we use murmur hash since it provides well distributed values, allows for a
         /// seed, and allocates no memory.
-        /// 
+        ///
         /// Murmur hash is public domain.  Actual code is included below as reference.
         /// </summary>
         private int ComputeHash(string key, int seed)

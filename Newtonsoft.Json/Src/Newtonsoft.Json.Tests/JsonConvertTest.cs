@@ -1711,7 +1711,7 @@ namespace Newtonsoft.Json.Tests
         public class IncorrectJsonConvertParameters
         {
             /// <summary>
-            /// We deliberately use the wrong number/type of arguments for ClobberingJsonConverter to ensure an 
+            /// We deliberately use the wrong number/type of arguments for ClobberingJsonConverter to ensure an
             /// exception is thrown.
             /// </summary>
             [JsonConverter(typeof(ClobberingJsonConverter), "Uno", "Blammo")]

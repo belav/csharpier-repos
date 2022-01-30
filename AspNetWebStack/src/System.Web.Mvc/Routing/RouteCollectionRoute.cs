@@ -10,7 +10,7 @@ using System.Web.Routing;
 namespace System.Web.Mvc.Routing
 {
     /// <summary>
-    /// A single route that is the composite of multiple "sub routes".  
+    /// A single route that is the composite of multiple "sub routes".
     /// </summary>
     /// <remarks>
     /// Corresponds to the Web API implementation of attribute routing in System.Web.Http.Routing.RouteCollectionRoute.

@@ -370,7 +370,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="predicate">Only tokens for which this predicate returns true are included.  Pass null to include
         /// all tokens.</param>
         /// <param name="stepInto">Steps into trivia if this is not null.  Only trivia for which this delegate returns
-        /// true are included.</param> 
+        /// true are included.</param>
         /// <returns></returns>
         internal SyntaxToken GetFirstToken(
             Func<SyntaxToken, bool>? predicate,
@@ -408,11 +408,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Finds a token according to the following rules:
         /// 1) If position matches the End of the node/s FullSpan and the node is CompilationUnit,
-        ///    then EoF is returned. 
-        /// 
+        ///    then EoF is returned.
+        ///
         ///  2) If node.FullSpan.Contains(position) then the token that contains given position is
         ///     returned.
-        /// 
+        ///
         ///  3) Otherwise an ArgumentOutOfRangeException is thrown
         /// </summary>
         public new SyntaxToken FindToken(int position, bool findInsideTrivia = false)
@@ -423,11 +423,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Finds a token according to the following rules:
         /// 1) If position matches the End of the node/s FullSpan and the node is CompilationUnit,
-        ///    then EoF is returned. 
-        /// 
+        ///    then EoF is returned.
+        ///
         ///  2) If node.FullSpan.Contains(position) then the token that contains given position is
         ///     returned.
-        /// 
+        ///
         ///  3) Otherwise an ArgumentOutOfRangeException is thrown
         /// </summary>
         internal SyntaxToken FindTokenIncludingCrefAndNameAttributes(int position)

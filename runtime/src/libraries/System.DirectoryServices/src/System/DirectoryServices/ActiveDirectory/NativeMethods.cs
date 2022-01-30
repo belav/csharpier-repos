@@ -16,7 +16,7 @@ namespace System.DirectoryServices.ActiveDirectory
         ULONG Flags;
         LPTSTR DcSiteName;
         LPTSTR ClientSiteName;
-    } DOMAIN_CONTROLLER_INFO, *PDOMAIN_CONTROLLER_INFO; */
+        } DOMAIN_CONTROLLER_INFO, *PDOMAIN_CONTROLLER_INFO; */
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal sealed class DomainControllerInfo
     {
@@ -33,20 +33,20 @@ namespace System.DirectoryServices.ActiveDirectory
 
     /*typedef struct {
          LPTSTR NetbiosName;
-        LPTSTR DnsHostName;
-        LPTSTR SiteName;
-        LPTSTR SiteObjectName;
-        LPTSTR ComputerObjectName;
-        LPTSTR ServerObjectName;
-        LPTSTR NtdsaObjectName;
-        BOOL fIsPdc;
-        BOOL fDsEnabled;
-        BOOL fIsGc;
-        GUID SiteObjectGuid;
-        GUID ComputerObjectGuid;
-        GUID ServerObjectGuid;
-        GUID NtdsDsaObjectGuid;
-    } DS_DOMAIN_CONTROLLER_INFO_2, *PDS_DOMAIN_CONTROLLER_INFO_2;*/
+         LPTSTR DnsHostName;
+         LPTSTR SiteName;
+         LPTSTR SiteObjectName;
+         LPTSTR ComputerObjectName;
+         LPTSTR ServerObjectName;
+         LPTSTR NtdsaObjectName;
+         BOOL fIsPdc;
+         BOOL fDsEnabled;
+         BOOL fIsGc;
+         GUID SiteObjectGuid;
+         GUID ComputerObjectGuid;
+         GUID ServerObjectGuid;
+         GUID NtdsDsaObjectGuid;
+         } DS_DOMAIN_CONTROLLER_INFO_2, *PDS_DOMAIN_CONTROLLER_INFO_2;*/
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal sealed class DsDomainControllerInfo2
     {
@@ -82,7 +82,7 @@ namespace System.DirectoryServices.ActiveDirectory
         GUID ComputerObjectGuid;
         GUID ServerObjectGuid;
         GUID NtdsDsaObjectGuid;
-    } DS_DOMAIN_CONTROLLER_INFO_3, *PDS_DOMAIN_CONTROLLER_INFO_3;*/
+        } DS_DOMAIN_CONTROLLER_INFO_3, *PDS_DOMAIN_CONTROLLER_INFO_3;*/
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal sealed class DsDomainControllerInfo3
     {
@@ -106,7 +106,7 @@ namespace System.DirectoryServices.ActiveDirectory
     /*typedef struct {
         DWORD cItems;
         PDS_NAME_RESULT_ITEM rItems;
-    } DS_NAME_RESULT, *PDS_NAME_RESULT;*/
+        } DS_NAME_RESULT, *PDS_NAME_RESULT;*/
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class DsNameResult
     {
@@ -118,7 +118,7 @@ namespace System.DirectoryServices.ActiveDirectory
         DWORD status;
         LPTSTR pDomain;
         LPTSTR pName;
-    } DS_NAME_RESULT_ITEM, *PDS_NAME_RESULT_ITEM;*/
+        } DS_NAME_RESULT_ITEM, *PDS_NAME_RESULT_ITEM;*/
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal sealed class DsNameResultItem
     {
@@ -134,48 +134,48 @@ namespace System.DirectoryServices.ActiveDirectory
         WORD                wDataLength; // Not referenced for DNS record
         //types defined above.
         union {
-            DWORD               DW;      // flags as DWORD
-            DNS_RECORD_FLAGS    S;       // flags as structure
+        DWORD               DW;      // flags as DWORD
+        DNS_RECORD_FLAGS    S;       // flags as structure
         } Flags;
-
+        
         DWORD               dwTtl;
         DWORD               dwReserved;
-
+        
         // Record Data
         union {
-            DNS_A_DATA      A;
-            DNS_SOA_DATA    SOA, Soa;
-            DNS_PTR_DATA    PTR, Ptr,
-                            NS, Ns,
-                            CNAME, Cname,
-                            MB, Mb,
-                            MD, Md,
-                            MF, Mf,
-                            MG, Mg,
-                            MR, Mr;
-            DNS_MINFO_DATA  MINFO, Minfo,
-                            RP, Rp;
-            DNS_MX_DATA     MX, Mx,
-                            AFSDB, Afsdb,
-                            RT, Rt;
-            DNS_TXT_DATA    HINFO, Hinfo,
-                            ISDN, Isdn,
-                            TXT, Txt,
-                            X25;
-            DNS_NULL_DATA   Null;
-            DNS_WKS_DATA    WKS, Wks;
-            DNS_AAAA_DATA   AAAA;
-            DNS_KEY_DATA    KEY, Key;
-            DNS_SIG_DATA    SIG, Sig;
-            DNS_ATMA_DATA   ATMA, Atma;
-            DNS_NXT_DATA    NXT, Nxt;
-            DNS_SRV_DATA    SRV, Srv;
-            DNS_TKEY_DATA   TKEY, Tkey;
-            DNS_TSIG_DATA   TSIG, Tsig;
-            DNS_WINS_DATA   WINS, Wins;
-            DNS_WINSR_DATA  WINSR, WinsR, NBSTAT, Nbstat;
+        DNS_A_DATA      A;
+        DNS_SOA_DATA    SOA, Soa;
+        DNS_PTR_DATA    PTR, Ptr,
+        NS, Ns,
+        CNAME, Cname,
+        MB, Mb,
+        MD, Md,
+        MF, Mf,
+        MG, Mg,
+        MR, Mr;
+        DNS_MINFO_DATA  MINFO, Minfo,
+        RP, Rp;
+        DNS_MX_DATA     MX, Mx,
+        AFSDB, Afsdb,
+        RT, Rt;
+        DNS_TXT_DATA    HINFO, Hinfo,
+        ISDN, Isdn,
+        TXT, Txt,
+        X25;
+        DNS_NULL_DATA   Null;
+        DNS_WKS_DATA    WKS, Wks;
+        DNS_AAAA_DATA   AAAA;
+        DNS_KEY_DATA    KEY, Key;
+        DNS_SIG_DATA    SIG, Sig;
+        DNS_ATMA_DATA   ATMA, Atma;
+        DNS_NXT_DATA    NXT, Nxt;
+        DNS_SRV_DATA    SRV, Srv;
+        DNS_TKEY_DATA   TKEY, Tkey;
+        DNS_TSIG_DATA   TSIG, Tsig;
+        DNS_WINS_DATA   WINS, Wins;
+        DNS_WINSR_DATA  WINSR, WinsR, NBSTAT, Nbstat;
         } Data;
-    }DNS_RECORD, *PDNS_RECORD;*/
+        }DNS_RECORD, *PDNS_RECORD;*/
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal sealed class DnsRecord
     {
@@ -208,7 +208,7 @@ namespace System.DirectoryServices.ActiveDirectory
         WORD        wWeight;
         WORD        wPort;
         WORD        Pad;            // keep ptrs DWORD aligned
-    }DNS_SRV_DATA, *PDNS_SRV_DATA;*/
+        }DNS_SRV_DATA, *PDNS_SRV_DATA;*/
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal sealed class DnsSrvData
     {
@@ -259,7 +259,7 @@ namespace System.DirectoryServices.ActiveDirectory
     /*typedef struct _LUID {
             DWORD LowPart;
             LONG HighPart;
-    } LUID, *PLUID;*/
+            } LUID, *PLUID;*/
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class LUID
     {
@@ -270,7 +270,7 @@ namespace System.DirectoryServices.ActiveDirectory
     /*typedef struct _NEGOTIATE_CALLER_NAME_REQUEST {
             ULONG       MessageType ;
             LUID        LogonId ;
-    } NEGOTIATE_CALLER_NAME_REQUEST, *PNEGOTIATE_CALLER_NAME_REQUEST ;*/
+            } NEGOTIATE_CALLER_NAME_REQUEST, *PNEGOTIATE_CALLER_NAME_REQUEST ;*/
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class NegotiateCallerNameRequest
     {
@@ -281,7 +281,7 @@ namespace System.DirectoryServices.ActiveDirectory
     /*typedef struct _NEGOTIATE_CALLER_NAME_RESPONSE {
             ULONG       MessageType ;
             PWSTR       CallerName ;
-        } NEGOTIATE_CALLER_NAME_RESPONSE, * PNEGOTIATE_CALLER_NAME_RESPONSE ;*/
+            } NEGOTIATE_CALLER_NAME_RESPONSE, * PNEGOTIATE_CALLER_NAME_RESPONSE ;*/
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal sealed class NegotiateCallerNameResponse
     {
@@ -517,7 +517,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
         /*BOOL GetVersionEx(
               LPOSVERSIONINFO lpVersionInfo
-            );*/
+              );*/
         [DllImport(
             global::Interop.Libraries.Kernel32,
             EntryPoint = "GetVersionExW",
@@ -547,7 +547,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
         /*NTSTATUS LsaConnectUntrusted(
               PHANDLE LsaHandle
-            );*/
+              );*/
         [DllImport(global::Interop.Libraries.Secur32)]
         internal static extern int LsaConnectUntrusted(
             [Out] out LsaLogonProcessSafeHandle lsaHandle
@@ -563,7 +563,7 @@ namespace System.DirectoryServices.ActiveDirectory
               PVOID* ProtocolReturnBuffer,
               PULONG ReturnBufferLength,
               PNTSTATUS ProtocolStatus
-            );*/
+              );*/
         [DllImport(global::Interop.Libraries.Secur32)]
         internal static extern int LsaCallAuthenticationPackage(
             [In] LsaLogonProcessSafeHandle lsaHandle,
@@ -577,13 +577,13 @@ namespace System.DirectoryServices.ActiveDirectory
 
         /*NTSTATUS LsaFreeReturnBuffer(
               PVOID Buffer
-            );*/
+              );*/
         [DllImport(global::Interop.Libraries.Secur32)]
         internal static extern uint LsaFreeReturnBuffer([In] IntPtr buffer);
 
         /*NTSTATUS LsaDeregisterLogonProcess(
               HANDLE LsaHandle
-            );*/
+              );*/
         [DllImport(global::Interop.Libraries.Secur32)]
         internal static extern int LsaDeregisterLogonProcess([In] IntPtr lsaHandle);
 
@@ -625,9 +625,9 @@ namespace System.DirectoryServices.ActiveDirectory
            ADS_SETTYPE_PROVIDER=2,
            ADS_SETTYPE_SERVER=3,
            ADS_SETTYPE_DN=4
-        } ADS_SETTYPE_ENUM;
-
-        typedef enum {
+           } ADS_SETTYPE_ENUM;
+           
+           typedef enum {
            ADS_FORMAT_WINDOWS=1,
            ADS_FORMAT_WINDOWS_NO_SERVER=2,
            ADS_FORMAT_WINDOWS_DN=3,
@@ -639,14 +639,14 @@ namespace System.DirectoryServices.ActiveDirectory
            ADS_FORMAT_SERVER=9,
            ADS_FORMAT_PROVIDER=10,
            ADS_FORMAT_LEAF=11
-        } ADS_FORMAT_ENUM;
-
-        typedef enum {
+           } ADS_FORMAT_ENUM;
+           
+           typedef enum {
            ADS_ESCAPEDMODE_DEFAULT=1,
            ADS_ESCAPEDMODE_ON=2,
            ADS_ESCAPEDMODE_OFF=3,
            ADS_ESCAPEDMODE_OFF_EX=4
-        } ADS_ESCAPE_MODE_ENUM;*/
+           } ADS_ESCAPE_MODE_ENUM;*/
 
         internal const int ADS_SETTYPE_DN = 4;
         internal const int ADS_FORMAT_X500_DN = 7;

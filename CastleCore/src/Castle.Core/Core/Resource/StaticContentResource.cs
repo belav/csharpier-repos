@@ -19,8 +19,8 @@ namespace Castle.Core.Resource
     using System.Text;
 
     /// <summary>
-	/// Adapts a static string content as an <see cref="IResource"/>
-	/// </summary>
+    /// Adapts a static string content as an <see cref="IResource"/>
+    /// </summary>
     public class StaticContentResource : AbstractResource
     {
         private readonly string contents;

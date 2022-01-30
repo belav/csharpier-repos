@@ -17,7 +17,7 @@ namespace System.Web.WebPages.Administration.PackageManager
         IPackageRepository LocalRepository { get; }
 
         /// <summary>
-        /// Remote feed to fetch packages from. 
+        /// Remote feed to fetch packages from.
         /// </summary>
         IPackageRepository SourceRepository { get; }
 

@@ -69,8 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns true if this symbol has external implementation; i.e., declared with the 
-        /// "extern" modifier. 
+        /// Returns true if this symbol has external implementation; i.e., declared with the
+        /// "extern" modifier.
         /// </summary>
         /// <returns>
         /// Always returns false.
@@ -372,7 +372,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <param name="qualifiedName">Sequence of simple plain names.</param>
         /// <returns>
-        /// A set of namespace or type symbols with given qualified name (might comprise of types with multiple generic arities), 
+        /// A set of namespace or type symbols with given qualified name (might comprise of types with multiple generic arities),
         /// or an empty set if the member can't be found (the qualified name is ambiguous or the symbol doesn't exist).
         /// </returns>
         /// <remarks>

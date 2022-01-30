@@ -496,7 +496,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Constraints are checked for invalid types, duplicate types, and accessibility. 
+        /// Constraints are checked for invalid types, duplicate types, and accessibility.
         /// </summary>
         private static void RemoveInvalidConstraints(
             ImmutableArray<TypeParameterSymbol> typeParameters,

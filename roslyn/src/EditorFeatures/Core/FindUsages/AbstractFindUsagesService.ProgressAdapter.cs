@@ -72,7 +72,7 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             /// reference it finds to the symbol.  However, we only want to create and pass along
             /// a single instance of <see cref="INavigableItem" /> for that definition no matter
             /// how many times we see it.
-            /// 
+            ///
             /// This dictionary allows us to make that mapping once and then keep it around for
             /// all future callbacks.
             /// </summary>

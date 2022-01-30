@@ -231,7 +231,7 @@ namespace Newtonsoft.Json
 
         /// <summary>
         /// Gets or sets the maximum depth allowed when reading JSON. Reading past this depth will throw a <see cref="JsonReaderException"/>.
-        /// A null value means there is no maximum. 
+        /// A null value means there is no maximum.
         /// The default value is <c>64</c>.
         /// </summary>
         public int? MaxDepth
@@ -249,7 +249,7 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets the type of the current JSON token. 
+        /// Gets the type of the current JSON token.
         /// </summary>
         public virtual JsonToken TokenType => _tokenType;
 
@@ -287,7 +287,7 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets the path of the current JSON token. 
+        /// Gets the path of the current JSON token.
         /// </summary>
         public virtual string Path
         {

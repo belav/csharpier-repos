@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
         /// <summary>
         /// Indicates what kind of object it.
-        /// 
+        ///
         /// Used in tranportation framework and deserialization service
         /// to hand shake how to send over data and deserialize serialized data.
         /// </summary>

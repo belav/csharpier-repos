@@ -278,10 +278,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// <![CDATA[
         /// fixed(int* ptr = &v){ ... }    == becomes ===>
-        /// 
+        ///
         /// pinned ref int pinnedTemp = ref v;    // pinning managed ref
         /// int* ptr = (int*)&pinnedTemp;         // unsafe cast to unmanaged ptr
-        ///   . . . 
+        ///   . . .
         /// ]]>
         /// </summary>
         private BoundStatement InitializeFixedStatementRegularLocal(
@@ -360,10 +360,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// <![CDATA[
         /// fixed(int* ptr = &v){ ... }    == becomes ===>
-        /// 
+        ///
         /// pinned ref int pinnedTemp = ref v;    // pinning managed ref
         /// int* ptr = (int*)&pinnedTemp;         // unsafe cast to unmanaged ptr
-        ///   . . . 
+        ///   . . .
         /// ]]>
         /// </summary>
         private BoundStatement InitializeFixedStatementGetPinnable(
@@ -477,11 +477,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// fixed(char* ptr = stringVar){ ... }    == becomes ===>
-        /// 
+        ///
         /// pinned string pinnedTemp = stringVar;    // pinning managed ref
         /// char* ptr = (char*)pinnedTemp;           // unsafe cast to unmanaged ptr
         /// if (pinnedTemp != null) ptr += OffsetToStringData();
-        ///   . . . 
+        ///   . . .
         /// </summary>
         private BoundStatement InitializeFixedStatementStringLocal(
             BoundLocalDeclaration localDecl,
@@ -582,12 +582,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// <![CDATA[
         /// fixed(int* ptr = arr){ ... }    == becomes ===>
-        /// 
+        ///
         /// pinned int[] pinnedTemp = arr;         // pinning managed ref
         /// int* ptr = pinnedTemp != null && pinnedTemp.Length != 0 ?
         ///                (int*)&pinnedTemp[0] :   // unsafe cast to unmanaged ptr
         ///                0;
-        ///   . . . 
+        ///   . . .
         ///   ]]>
         /// </summary>
         private BoundStatement InitializeFixedStatementArrayLocal(

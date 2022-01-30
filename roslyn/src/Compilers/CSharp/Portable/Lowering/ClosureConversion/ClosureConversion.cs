@@ -26,18 +26,18 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// as containers for captured variables along the lines of the example in section 6.5.3 of the
     /// C# language specification. A closure is the lowered form of a nested function, consisting of a
     /// synthesized method and a set of environments containing the captured variables.
-    /// 
+    ///
     /// The entry point is the public method <see cref="Rewrite"/>.  It operates as follows:
-    /// 
+    ///
     /// First, an analysis of the whole method body is performed that determines which variables are
     /// captured, what their scopes are, and what the nesting relationship is between scopes that
     /// have captured variables.  The result of this analysis is left in <see cref="_analysis"/>.
-    /// 
+    ///
     /// Then we make a frame, or compiler-generated class, represented by an instance of
     /// <see cref="SynthesizedClosureEnvironment"/> for each scope with captured variables. The generated frames are kept
     /// in <see cref="_frames"/>.  Each frame is given a single field for each captured
     /// variable in the corresponding scope.  These are maintained in <see cref="MethodToClassRewriter.proxies"/>.
-    /// 
+    ///
     /// Next, we walk and rewrite the input bound tree, keeping track of the following:
     /// (1) The current set of active frame pointers, in <see cref="_framePointers"/>
     /// (2) The current method being processed (this changes within a lambda's body), in <see cref="_currentMethod"/>
@@ -50,16 +50,16 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// lambdas because we may see the reference before we lower the target
     /// local function. Lambdas, on the other hand, are always convertible as
     /// they are being lowered.
-    /// 
+    ///
     /// There are a few key transformations done in the rewriting.
     /// (1) Lambda expressions are turned into delegate creation expressions, and the body of the lambda is
     ///     moved into a new, compiler-generated method of a selected frame class.
     /// (2) On entry to a scope with captured variables, we create a frame object and store it in a local variable.
     /// (3) References to captured variables are transformed into references to fields of a frame class.
-    /// 
+    ///
     /// In addition, the rewriting deposits into <see cref="TypeCompilationState.SynthesizedMethods"/>
     /// a (<see cref="MethodSymbol"/>, <see cref="BoundStatement"/>) pair for each generated method.
-    /// 
+    ///
     /// <see cref="Rewrite"/> produces its output in two forms.  First, it returns a new bound statement
     /// for the caller to use for the body of the original method.  Second, it returns a collection of
     /// (<see cref="MethodSymbol"/>, <see cref="BoundStatement"/>) pairs for additional methods that the lambda rewriter produced.
@@ -562,7 +562,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Get the static container for closures or create one if one doesn't already exist.
         /// </summary>
         /// <param name="syntax">
-        /// associate the frame with the first lambda that caused it to exist. 
+        /// associate the frame with the first lambda that caused it to exist.
         /// we need to associate this with some syntax.
         /// unfortunately either containing method or containing class could be synthetic
         /// therefore could have no syntax.
@@ -1111,7 +1111,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///         void L&lt;T&gt;(T t) => Console.Write(t);
         ///         L("A");
         ///     }
-        ///     
+        ///
         /// In this example, L&lt;T&gt; is a local function that will be
         /// lowered into its own method and the type parameter T will be
         /// alpha renamed to something else (let's call it T'). In this case,

@@ -5,7 +5,7 @@ namespace System.Data.Common
 {
     /*
         public delegate void RowUpdatedEventHandler(object sender, RowUpdatedEventArgs e);
-    */
+        */
 
     public class RowUpdatedEventArgs : EventArgs
     {

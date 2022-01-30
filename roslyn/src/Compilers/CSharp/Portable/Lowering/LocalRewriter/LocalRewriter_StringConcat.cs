@@ -15,20 +15,20 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         /// <summary>
         /// The strategy of this rewrite is to do rewrite "locally".
-        /// We analyze arguments of the concat in a shallow fashion assuming that 
+        /// We analyze arguments of the concat in a shallow fashion assuming that
         /// lowering and optimizations (including this one) is already done for the arguments.
         /// Based on the arguments we select the most appropriate pattern for the current node.
-        /// 
-        /// NOTE: it is not guaranteed that the node that we chose will be the most optimal since we have only 
+        ///
+        /// NOTE: it is not guaranteed that the node that we chose will be the most optimal since we have only
         ///       local information - i.e. we look at the arguments, but we do not know about siblings.
         ///       When we move to the parent, the node may be rewritten by this or some another optimization.
-        ///       
+        ///
         /// Example:
         ///     result = ( "abc" + "def" + null ?? expr1 + "moo" + "baz" ) + expr2
-        /// 
+        ///
         /// Will rewrite into:
         ///     result = Concat("abcdef", expr2)
-        ///     
+        ///
         /// However there will be transient nodes like  Concat(expr1 + "moo")  that will not be present in the
         /// resulting tree.
         ///
@@ -168,7 +168,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// digs into known concat operators and unwraps their arguments
         /// otherwise returns the expression as-is
-        /// 
+        ///
         /// Generally we only need to recognize same node patterns that we create as a result of concatenation rewrite.
         /// </summary>
         private void FlattenConcatArg(

@@ -7,9 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Web.Http.Controllers
 {
     /// <summary>
-    /// Represents a container for services that can be specific to a controller. 
-    /// This shadows the services from its parent <see cref="ServicesContainer"/>. A controller can either set a service here, or fall through 
-    /// to the more global set of services. 
+    /// Represents a container for services that can be specific to a controller.
+    /// This shadows the services from its parent <see cref="ServicesContainer"/>. A controller can either set a service here, or fall through
+    /// to the more global set of services.
     /// </summary>
     public class ControllerServices : ServicesContainer
     {

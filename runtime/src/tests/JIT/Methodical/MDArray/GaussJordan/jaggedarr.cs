@@ -131,47 +131,47 @@ internal class jaggedarr
         jaggedb[1][2, 0] = 3;
 
         /*
-		int i, j;
-				
-		Console.WriteLine("Matrix A is \n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<n; j++)
-				Console.Write("{0}\t", jaggeda[2][i,j]);
-			Console.WriteLine();
-		}
-
-		Console.WriteLine();
-		Console.WriteLine("Matrix B is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<m; j++)
-				Console.Write("{0}\t", jaggedb[1][i,j]);
-			Console.WriteLine();
-		}
-		*/
+        int i, j;
+        
+        Console.WriteLine("Matrix A is \n");
+        for (i=0; i<n; i++)
+        {
+        for (j=0; j<n; j++)
+        Console.Write("{0}\t", jaggeda[2][i,j]);
+        Console.WriteLine();
+        }
+        
+        Console.WriteLine();
+        Console.WriteLine("Matrix B is:\n");
+        for (i=0; i<n; i++)
+        {
+        for (j=0; j<m; j++)
+        Console.Write("{0}\t", jaggedb[1][i,j]);
+        Console.WriteLine();
+        }
+        */
 
         gaussj(jaggeda, n, jaggedb, m);
 
         /*
-		Console.WriteLine();
-		Console.WriteLine("The inverse of matrix A is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<n; j++)
-				Console.Write("{0}\t", jaggeda[2][i,j]);
-			Console.WriteLine();
-		}
-
-		Console.WriteLine();
-		Console.WriteLine("The solution X of AX=B is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<m; j++)
-				Console.Write("{0}\t", jaggedb[1][i,j]);
-			Console.WriteLine();
-		}
-		*/
+        Console.WriteLine();
+        Console.WriteLine("The inverse of matrix A is:\n");
+        for (i=0; i<n; i++)
+        {
+        for (j=0; j<n; j++)
+        Console.Write("{0}\t", jaggeda[2][i,j]);
+        Console.WriteLine();
+        }
+        
+        Console.WriteLine();
+        Console.WriteLine("The solution X of AX=B is:\n");
+        for (i=0; i<n; i++)
+        {
+        for (j=0; j<m; j++)
+        Console.Write("{0}\t", jaggedb[1][i,j]);
+        Console.WriteLine();
+        }
+        */
 
         if (
             AreEqual(jaggeda[2][0, 0], 3)

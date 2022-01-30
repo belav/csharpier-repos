@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <summary>
         /// If <see cref="Kind"/> is <see cref="SemanticEditKind.Insert"/> represents the inserted symbol in the new compilation.
         /// If <see cref="Kind"/> is <see cref="SemanticEditKind.Update"/> represents the updated symbol in both compilations.
-        /// 
+        ///
         /// We use <see cref="SymbolKey"/> to represent the symbol rather then <see cref="ISymbol"/>,
         /// since different semantic edits might have been calculated against different solution snapshot and thus symbols are not directly comparable.
         /// When the edits are processed we map the <see cref="SymbolKey"/> to the current compilation.
@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         /// <summary>
         /// Specified if the edit needs to be merged with other edits of the same <see cref="PartialType"/>.
-        /// 
+        ///
         /// If specified, the <see cref="SyntaxMap"/> is either null or incomplete: it only provides mapping of the changed members of a single partial type declaration.
         /// </summary>
         public SymbolKey? PartialType { get; }

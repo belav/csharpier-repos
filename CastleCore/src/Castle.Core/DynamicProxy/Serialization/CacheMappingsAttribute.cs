@@ -26,8 +26,8 @@ namespace Castle.DynamicProxy.Serialization
     using Castle.DynamicProxy.Generators;
 
     /// <summary>
-	///   Applied to the assemblies saved by <see cref="ModuleScope" /> in order to persist the cache data included in the persisted assembly.
-	/// </summary>
+    ///   Applied to the assemblies saved by <see cref="ModuleScope" /> in order to persist the cache data included in the persisted assembly.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
     [CLSCompliant(false)]
     public class CacheMappingsAttribute : Attribute

@@ -60,7 +60,7 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// Asynchronously loads a <see cref="JArray"/> from a <see cref="JsonReader"/>. 
+        /// Asynchronously loads a <see cref="JArray"/> from a <see cref="JsonReader"/>.
         /// </summary>
         /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see cref="JArray"/>.
         /// If this is <c>null</c>, default load settings will be used.</param>
@@ -75,7 +75,7 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// Asynchronously loads a <see cref="JArray"/> from a <see cref="JsonReader"/>. 
+        /// Asynchronously loads a <see cref="JArray"/> from a <see cref="JsonReader"/>.
         /// </summary>
         /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see cref="JArray"/>.</param>
         /// <param name="settings">The <see cref="JsonLoadSettings"/> used to load the JSON.

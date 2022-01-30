@@ -23,11 +23,11 @@ namespace Microsoft.CodeAnalysis.CSharp
     public partial class CSharpCompilation
     {
         /// <summary>
-        /// ReferenceManager encapsulates functionality to create an underlying SourceAssemblySymbol 
+        /// ReferenceManager encapsulates functionality to create an underlying SourceAssemblySymbol
         /// (with underlying ModuleSymbols) for Compilation and AssemblySymbols for referenced
         /// assemblies (with underlying ModuleSymbols) all properly linked together based on
         /// reference resolution between them.
-        /// 
+        ///
         /// ReferenceManager is also responsible for reuse of metadata readers for imported modules
         /// and assemblies as well as existing AssemblySymbols for referenced assemblies. In order
         /// to do that, it maintains global cache for metadata readers and AssemblySymbols
@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// AssemblySymbols that are created for the referenced assemblies, which (the
         /// AssemblySymbols from the set) are linked in a way, consistent with the reference
         /// resolution between the referenced assemblies.
-        /// 
+        ///
         /// When existing Compilation is used as a metadata reference, there are scenarios when its
         /// underlying SourceAssemblySymbol cannot be used to provide symbols in context of the new
         /// Compilation. Consider classic multi-targeting scenario: compilation C1 references v1 of
@@ -50,7 +50,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// C1, which is responsible for the type retargeting. The RetargetingAssemblySymbols could
         /// also be reused for different Compilations, ReferenceManager maintains a cache of
         /// RetargetingAssemblySymbols (WeakReferences) for each Compilation.
-        /// 
+        ///
         /// The only public entry point of this class is CreateSourceAssembly() method.
         /// </summary>
         internal sealed class ReferenceManager
@@ -140,7 +140,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             /// <summary>
             /// C# only considers culture when comparing weak identities.
-            /// It ignores versions of weak identities and reports an error if there are two weak assembly 
+            /// It ignores versions of weak identities and reports an error if there are two weak assembly
             /// references passed to a compilation that have the same simple name.
             /// </summary>
             protected override bool WeakIdentityPropertiesEquivalent(
@@ -261,26 +261,26 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <summary>
-            /// Creates a <see cref="PEAssemblySymbol"/> from specified metadata. 
+            /// Creates a <see cref="PEAssemblySymbol"/> from specified metadata.
             /// </summary>
             /// <remarks>
             /// Used by EnC to create symbols for emit baseline. The PE symbols are used by <see cref="CSharpSymbolMatcher"/>.
-            /// 
-            /// The assembly references listed in the metadata AssemblyRef table are matched to the resolved references 
-            /// stored on this <see cref="ReferenceManager"/>. We assume that the dependencies of the baseline metadata are 
-            /// the same as the dependencies of the current compilation. This is not exactly true when the dependencies use 
+            ///
+            /// The assembly references listed in the metadata AssemblyRef table are matched to the resolved references
+            /// stored on this <see cref="ReferenceManager"/>. We assume that the dependencies of the baseline metadata are
+            /// the same as the dependencies of the current compilation. This is not exactly true when the dependencies use
             /// time-based versioning pattern, e.g. AssemblyVersion("1.0.*"). In that case we assume only the version
             /// changed and nothing else.
-            /// 
-            /// Each AssemblyRef is matched against the assembly identities using an exact equality comparison modulo version. 
-            /// AssemblyRef with lower version in metadata is matched to a PE assembly symbol with the higher version 
-            /// (provided that the assembly name, culture, PKT and flags are the same) if there is no symbol with the exactly matching version. 
+            ///
+            /// Each AssemblyRef is matched against the assembly identities using an exact equality comparison modulo version.
+            /// AssemblyRef with lower version in metadata is matched to a PE assembly symbol with the higher version
+            /// (provided that the assembly name, culture, PKT and flags are the same) if there is no symbol with the exactly matching version.
             /// If there are multiple symbols with higher versions selects the one with the minimal version among them.
-            /// 
-            /// Matching to a higher version is necessary to support EnC for projects whose P2P dependencies use time-based versioning pattern. 
-            /// The versions of the dependent projects seen from the IDE will be higher than 
+            ///
+            /// Matching to a higher version is necessary to support EnC for projects whose P2P dependencies use time-based versioning pattern.
+            /// The versions of the dependent projects seen from the IDE will be higher than
             /// the one written in the metadata at the time their respective baselines are built.
-            /// 
+            ///
             /// No other unification or further resolution is performed.
             /// </remarks>
             /// <param name="metadata"></param>

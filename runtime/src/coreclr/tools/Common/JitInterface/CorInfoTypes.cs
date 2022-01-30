@@ -680,8 +680,8 @@ namespace Internal.JitInterface
         public uint ClassTokenOrOffset;
         /*        union
                 {
-                    DWORD                   ClassToken;       // use for type-based exception handlers
-                    DWORD                   FilterOffset;     // use for filter-based exception handlers (COR_ILEXCEPTION_FILTER is set)
+                DWORD                   ClassToken;       // use for type-based exception handlers
+                DWORD                   FilterOffset;     // use for filter-based exception handlers (COR_ILEXCEPTION_FILTER is set)
                 };*/
     }
 

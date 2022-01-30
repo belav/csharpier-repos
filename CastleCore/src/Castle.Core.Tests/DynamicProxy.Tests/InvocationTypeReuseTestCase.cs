@@ -21,12 +21,12 @@ namespace Castle.DynamicProxy.Tests
     using NUnit.Framework;
 
     /// <summary>
-	///   This fixture checks which <see cref="IInvocation"/> types get used for proxied methods.
-	///   Usually, DynamicProxy generates a separate implementation type per proxied method, but
-	///   in some cases, it can reuse predefined implementation types. Because this is beneficial
-	///   for runtime performance (as it reduces the amount of dynamic type generation performed),
-	///   we want to ensure that those predefined types do in fact get picked when they should be.
-	/// </summary>
+    ///   This fixture checks which <see cref="IInvocation"/> types get used for proxied methods.
+    ///   Usually, DynamicProxy generates a separate implementation type per proxied method, but
+    ///   in some cases, it can reuse predefined implementation types. Because this is beneficial
+    ///   for runtime performance (as it reduces the amount of dynamic type generation performed),
+    ///   we want to ensure that those predefined types do in fact get picked when they should be.
+    /// </summary>
     [TestFixture]
     public class InvocationTypeReuseTestCase : BasePEVerifyTestCase
     {

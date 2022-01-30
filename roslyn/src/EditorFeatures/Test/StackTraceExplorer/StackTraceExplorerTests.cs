@@ -464,7 +464,7 @@ void [|LocalInTopLevelStatement|]()
 
         /// <summary>
         /// Tests cases where the text will technically parse and look like a symbol, but does not point to
-        /// a symbol in the solution. 
+        /// a symbol in the solution.
         /// </summary>
         [Theory]
         [InlineData("at __.__._()")]

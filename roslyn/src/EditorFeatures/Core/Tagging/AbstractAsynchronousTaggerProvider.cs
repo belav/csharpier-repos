@@ -24,7 +24,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
     /// <summary>
-    /// Base type of all asynchronous tagger providers (<see cref="ITaggerProvider"/> and <see cref="IViewTaggerProvider"/>). 
+    /// Base type of all asynchronous tagger providers (<see cref="ITaggerProvider"/> and <see cref="IViewTaggerProvider"/>).
     /// </summary>
     internal abstract partial class AbstractAsynchronousTaggerProvider<TTag>
         : ForegroundThreadAffinitizedObject where TTag : ITag
@@ -39,9 +39,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// it is attached to.  Most taggers can simply use <see cref="TaggerTextChangeBehavior.None"/>.
         /// However, advanced taggers that want to perform specialized behavior depending on what has
         /// actually changed in the file can specify <see cref="TaggerTextChangeBehavior.TrackTextChanges"/>.
-        /// 
+        ///
         /// If this is specified the tagger engine will track text changes and pass them along as
-        /// <see cref="TaggerContext{TTag}.TextChangeRange"/> when calling 
+        /// <see cref="TaggerContext{TTag}.TextChangeRange"/> when calling
         /// <see cref="ProduceTagsAsync(TaggerContext{TTag}, CancellationToken)"/>.
         /// </summary>
         protected virtual TaggerTextChangeBehavior TextChangeBehavior =>
@@ -62,8 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
         /// <summary>
         /// Global options controlling if the tagger should tag or not.
-        /// 
-        /// An empty enumerable can be returned to indicate that this tagger should 
+        ///
+        /// An empty enumerable can be returned to indicate that this tagger should
         /// run unconditionally.
         /// </summary>
         protected virtual IEnumerable<Option2<bool>> Options =>
@@ -178,8 +178,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         }
 
         /// <summary>
-        /// Called by the <see cref="AbstractAsynchronousTaggerProvider{TTag}"/> infrastructure to 
-        /// determine the caret position.  This value will be passed in as the value to 
+        /// Called by the <see cref="AbstractAsynchronousTaggerProvider{TTag}"/> infrastructure to
+        /// determine the caret position.  This value will be passed in as the value to
         /// <see cref="TaggerContext{TTag}.CaretPosition"/> in the call to
         /// <see cref="ProduceTagsAsync(TaggerContext{TTag}, CancellationToken)"/>.
         /// </summary>

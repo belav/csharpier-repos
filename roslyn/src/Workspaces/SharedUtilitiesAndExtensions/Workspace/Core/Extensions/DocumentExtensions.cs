@@ -133,7 +133,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// Attempts to return an speculative semantic model for <paramref name="document"/> if possible if <paramref
         /// name="position"/> is contained within a method body in the tree.  Specifically, this will attempt to get an
         /// existing cached semantic model for <paramref name="document"/>.  If it can find one, and the top-level semantic
-        /// version for this project matches the cached version, and the position is within a method body, then it will 
+        /// version for this project matches the cached version, and the position is within a method body, then it will
         /// be returned, just with the previous corresponding method body swapped out with the current method body.
         /// <para/>
         /// If this is not possible, the regular semantic model for <paramref name="document"/> will be returned.
@@ -158,7 +158,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// Attempts to return an speculative semantic model for <paramref name="document"/> if possible if <paramref
         /// name="span"/> is contained within a method body in the tree.  Specifically, this will attempt to get an
         /// existing cached semantic model <paramref name="document"/>.  If it can find one, and the top-level semantic
-        /// version for this project matches the cached version, and the position is within a method body, then it will 
+        /// version for this project matches the cached version, and the position is within a method body, then it will
         /// be returned, just with the previous corresponding method body swapped out with the current method body.
         /// <para/>
         /// If this is not possible, the regular semantic model for <paramref name="document"/> will be returned.
@@ -190,7 +190,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// Attempts to return an speculative semantic model for <paramref name="document"/> if possible if <paramref
         /// name="node"/> is contained within a method body in the tree.  Specifically, this will attempt to get an
         /// existing cached semantic model <paramref name="document"/>.  If it can find one, and the top-level semantic
-        /// version for this project matches the cached version, and the position is within a method body, then it will 
+        /// version for this project matches the cached version, and the position is within a method body, then it will
         /// be returned, just with the previous corresponding method body swapped out with the current method body.
         /// <para/>
         /// If this is not possible, the regular semantic model for <paramref name="document"/> will be returned.

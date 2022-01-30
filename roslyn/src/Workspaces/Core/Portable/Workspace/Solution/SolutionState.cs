@@ -55,7 +55,7 @@ namespace Microsoft.CodeAnalysis
         private readonly ValueSource<SolutionStateChecksums> _lazyChecksums;
 
         /// <summary>
-        /// Mapping from project-id to the checksums needed to synchronize it (and the projects it depends on) over 
+        /// Mapping from project-id to the checksums needed to synchronize it (and the projects it depends on) over
         /// to an OOP host.  Lock this specific field before reading/writing to it.
         /// </summary>
         private readonly Dictionary<
@@ -2390,7 +2390,7 @@ namespace Microsoft.CodeAnalysis
         > s_assemblyOrModuleSymbolToProjectMap = new();
 
         /// <summary>
-        /// Get a metadata reference for the project's compilation.  Returns <see langword="null"/> upon failure, which 
+        /// Get a metadata reference for the project's compilation.  Returns <see langword="null"/> upon failure, which
         /// can happen when trying to build a skeleton reference that fails to build.
         /// </summary>
         public Task<MetadataReference?> GetMetadataReferenceAsync(

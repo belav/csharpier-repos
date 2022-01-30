@@ -13,7 +13,7 @@ using System.Web.Http.Services;
 namespace System.Web.Http.Tracing.Tracers
 {
     /// <summary>
-    /// Tracer for <see cref="FormUrlEncodedMediaTypeFormatter"/>.  
+    /// Tracer for <see cref="FormUrlEncodedMediaTypeFormatter"/>.
     /// It is required because users can select formatters by this type.
     /// </summary>
     internal class FormUrlEncodedMediaTypeFormatterTracer

@@ -39,7 +39,7 @@ namespace Roslyn.Test.Performance.Utilities
         }
 
         /// <summary>
-        /// Returns the current working directory that the test has access to.  
+        /// Returns the current working directory that the test has access to.
         /// This is typically the same directory as the script is located in.
         /// </summary>
         public string MyWorkingDirectory
@@ -68,7 +68,7 @@ namespace Roslyn.Test.Performance.Utilities
         }
 
         /// <summary>
-        /// Returns the directory that contains built roslyn binaries.  Usually this will be 
+        /// Returns the directory that contains built roslyn binaries.  Usually this will be
         /// Binaries/Debug or Binaries/Release.
         /// </summary>
         /// <returns></returns>

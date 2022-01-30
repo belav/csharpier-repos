@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Specifies assignment by reference rather than by copying.
-	/// </summary>
+    /// Specifies assignment by reference rather than by copying.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Interface)]
     public class ReferenceAttribute : Attribute
     {

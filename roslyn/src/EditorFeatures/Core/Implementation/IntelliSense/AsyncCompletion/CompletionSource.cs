@@ -557,8 +557,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
         /// <summary>
         /// We'd like to cache VS Completion item directly to avoid allocation completely. However it holds references
-        /// to transient objects, which would cause memory leak (among other potential issues) if cached. 
-        /// So as a compromise,  we cache data that can be calculated from Roslyn completion item to avoid repeated 
+        /// to transient objects, which would cause memory leak (among other potential issues) if cached.
+        /// So as a compromise,  we cache data that can be calculated from Roslyn completion item to avoid repeated
         /// calculation cost for cached Roslyn completion items.
         /// </summary>
         private readonly struct VSCompletionItemData

@@ -9,7 +9,7 @@ namespace System.Web.WebPages
 {
     /// <summary>
     /// Template stacks store a stack of template files. WebPageExecutingBase implements this type, so when executing Plan9 or Mvc WebViewPage,
-    /// the stack would contain instances of the page. 
+    /// the stack would contain instances of the page.
     /// The stack can be queried to identify properties of the current executing file such as the virtual path of the file.
     /// </summary>
     [SuppressMessage(

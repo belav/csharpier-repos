@@ -4652,7 +4652,7 @@ namespace System.Tests
                     ICU has different contraction collation weights, depending on locale collation rules.
                     If CurrentCultureIgnoreCase is specified, ICU will use 'secondary' collation rules
                     which ignore the contraction collation weights (defined as 'tertiary' rules)
-                */
+                    */
                 Assert.Equal(PlatformDetection.IsNlsGlobalization ? 0 : -1, source.IndexOf(target));
                 Assert.Equal(
                     PlatformDetection.IsNlsGlobalization ? 0 : -1,

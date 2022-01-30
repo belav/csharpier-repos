@@ -335,7 +335,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
         }
 
         /// <remarks>
-        /// If we have a variable declaration and if it is read/written outside the delegate 
+        /// If we have a variable declaration and if it is read/written outside the delegate
         /// invocation pattern, the fix is not offered on the declaration.
         /// </remarks>
         [
@@ -364,7 +364,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
         }
 
         /// <remarks>
-        /// If we have a variable declaration and if it is read/written outside the delegate 
+        /// If we have a variable declaration and if it is read/written outside the delegate
         /// invocation pattern, the fix is not offered on the declaration but is offered on
         /// the invocation pattern itself.
         /// </remarks>
@@ -858,7 +858,7 @@ class C
         }
 
         /// <remarks>
-        /// if local declaration is not immediately preceding the invocation pattern, 
+        /// if local declaration is not immediately preceding the invocation pattern,
         /// the fix is not offered on the declaration.
         /// </remarks>
         [
@@ -886,7 +886,7 @@ class C
         }
 
         /// <remarks>
-        /// if local declaration is not immediately preceding the invocation pattern, 
+        /// if local declaration is not immediately preceding the invocation pattern,
         /// the fix is not offered on the declaration but is offered on the invocation pattern itself.
         /// </remarks>
         [

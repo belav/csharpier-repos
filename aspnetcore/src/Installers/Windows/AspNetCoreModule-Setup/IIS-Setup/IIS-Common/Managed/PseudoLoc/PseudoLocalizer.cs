@@ -183,8 +183,8 @@ namespace Microsoft.Web.Utility
         }
 
         /// <summary>
-        /// Enables Pseudo-localization for all assemblies that get loaded from the current 
-        /// host. Within the assemblie, only types that are of the form {AssemblyName}.Resources 
+        /// Enables Pseudo-localization for all assemblies that get loaded from the current
+        /// host. Within the assemblie, only types that are of the form {AssemblyName}.Resources
         /// will get pseudo-localization enabled.
         /// </summary>
         public static void EnableAutoPseudoLocalizationFromHostExecutable()

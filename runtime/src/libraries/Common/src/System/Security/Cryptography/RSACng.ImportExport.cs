@@ -18,20 +18,20 @@ namespace System.Security.Cryptography
         public sealed partial class RSACng : RSA
         {
             /// <summary>
-        ///     <para>
-        ///         ImportParameters will replace the existing key that RSACng is working with by creating a
-        ///         new CngKey for the parameters structure. If the parameters structure contains only an
-        ///         exponent and modulus, then only a public key will be imported. If the parameters also
-        ///         contain P and Q values, then a full key pair will be imported.
-        ///     </para>
-        /// </summary>
-        /// <exception cref="ArgumentException">
-        ///     if <paramref name="parameters" /> contains neither an exponent nor a modulus.
-        /// </exception>
-        /// <exception cref="CryptographicException">
-        ///     if <paramref name="parameters" /> is not a valid RSA key or if <paramref name="parameters"
-        ///     /> is a full key pair and the default KSP is used.
-        /// </exception>
+            ///     <para>
+            ///         ImportParameters will replace the existing key that RSACng is working with by creating a
+            ///         new CngKey for the parameters structure. If the parameters structure contains only an
+            ///         exponent and modulus, then only a public key will be imported. If the parameters also
+            ///         contain P and Q values, then a full key pair will be imported.
+            ///     </para>
+            /// </summary>
+            /// <exception cref="ArgumentException">
+            ///     if <paramref name="parameters" /> contains neither an exponent nor a modulus.
+            /// </exception>
+            /// <exception cref="CryptographicException">
+            ///     if <paramref name="parameters" /> is not a valid RSA key or if <paramref name="parameters"
+            ///     /> is a full key pair and the default KSP is used.
+            /// </exception>
             public override unsafe void ImportParameters(RSAParameters parameters)
             {
                 if (parameters.Exponent == null || parameters.Modulus == null)
@@ -400,10 +400,10 @@ namespace System.Security.Cryptography
             }
 
             /// <summary>
-        ///     This function checks the magic value in the key blob header
-        /// </summary>
-        /// <param name="magic">The expected magic number.</param>
-        /// <param name="includePrivateParameters">Private blob if true else public key blob</param>
+            ///     This function checks the magic value in the key blob header
+            /// </summary>
+            /// <param name="magic">The expected magic number.</param>
+            /// <param name="includePrivateParameters">Private blob if true else public key blob</param>
             private static void CheckMagicValueOfKey(
                 KeyBlobMagicNumber magic,
                 bool includePrivateParameters

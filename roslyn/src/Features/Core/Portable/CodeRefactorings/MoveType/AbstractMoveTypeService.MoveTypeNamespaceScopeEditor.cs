@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
     >
     {
         /// <summary>
-        /// Editor that takes a type in a scope and creates a scope beside it. For example, if the type is contained within a namespace 
-        /// it will evaluate if the namespace scope needs to be closed and reopened to create a new scope. 
+        /// Editor that takes a type in a scope and creates a scope beside it. For example, if the type is contained within a namespace
+        /// it will evaluate if the namespace scope needs to be closed and reopened to create a new scope.
         /// </summary>
         private class MoveTypeNamespaceScopeEditor : Editor
         {

@@ -34,7 +34,7 @@ namespace System.Runtime.Caching
             /*
               The chart below shows physical memory in megabytes, and the 1, 3, and 10% values.
               When we reach "middle" pressure, we begin trimming the cache.
-
+              
               RAM     1%      3%      10%
               -----------------------------
               128     1.28    3.84    12.8
@@ -44,8 +44,8 @@ namespace System.Runtime.Caching
               2048    20.48   61.44   204.8
               4096    40.96   122.88  409.6
               8192    81.92   245.76  819.2
-
-            */
+              
+              */
 
             long memory = TotalPhysical;
             if (memory >= 0x100000000)

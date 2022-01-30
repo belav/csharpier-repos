@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     public static partial class SymbolFinder
     {
         /// <summary>
-        /// Callback object we pass to the OOP server to hear about the result 
+        /// Callback object we pass to the OOP server to hear about the result
         /// of the FindReferencesEngine as it executes there.
         /// </summary>
         internal sealed class FindReferencesServerCallback

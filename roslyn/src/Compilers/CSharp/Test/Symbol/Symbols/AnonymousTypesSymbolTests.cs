@@ -1012,7 +1012,7 @@ class Query
         #region "Utility methods"
 
         /// <summary>
-        /// This method duplicates the generation logic for initial value used 
+        /// This method duplicates the generation logic for initial value used
         /// in anonymous type's GetHashCode function
         /// </summary>
         public static string GetHashCodeInitialValue(params string[] names)

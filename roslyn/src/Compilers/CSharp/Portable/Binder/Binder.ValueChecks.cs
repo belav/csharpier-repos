@@ -22,13 +22,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// For the purpose of escape verification we operate with the depth of local scopes.
         /// The depth is a uint, with smaller number representing shallower/wider scopes.
-        /// The 0 and 1 are special scopes - 
-        /// 0 is the "external" or "return" scope that is outside of the containing method/lambda. 
+        /// The 0 and 1 are special scopes -
+        /// 0 is the "external" or "return" scope that is outside of the containing method/lambda.
         ///   If something can escape to scope 0, it can escape to any scope in a given method or can be returned.
-        /// 1 is the "parameter" or "top" scope that is just inside the containing method/lambda. 
+        /// 1 is the "parameter" or "top" scope that is just inside the containing method/lambda.
         ///   If something can escape to scope 1, it can escape to any scope in a given method, but cannot be returned.
-        /// n + 1 corresponds to scopes immediately inside a scope of depth n. 
-        ///   Since sibling scopes do not intersect and a value cannot escape from one to another without 
+        /// n + 1 corresponds to scopes immediately inside a scope of depth n.
+        ///   Since sibling scopes do not intersect and a value cannot escape from one to another without
         ///   escaping to a wider scope, we can use simple depth numbering without ambiguity.
         /// </summary>
         internal const uint ExternalScope = 0;
@@ -56,8 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             /// <remarks>
             /// The following are rvalues: values, variables, null literals, properties
-            /// and indexers with getters, events. 
-            /// 
+            /// and indexers with getters, events.
+            ///
             /// The following are not rvalues:
             /// namespaces, types, method groups, anonymous functions.
             /// </remarks>
@@ -65,7 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             /// <summary>
             /// Expression can be the LHS of a simple assignment operation.
-            /// Example: 
+            /// Example:
             ///   property with a setter
             /// </summary>
             Assignable = 2 << ValueKindInsignificantBits,
@@ -461,7 +461,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// The purpose of this method is to determine if the expression satisfies desired capabilities. 
+        /// The purpose of this method is to determine if the expression satisfies desired capabilities.
         /// If it is not then this code gives an appropriate error message.
         ///
         /// To determine the appropriate error message we need to know two things:
@@ -470,7 +470,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///
         /// (2) Are we trying to determine if the left hand side of a dot is a variable in order
         ///     to determine if the field or property on the right hand side of a dot is assignable?
-        ///     
+        ///
         /// (3) The syntax of the expression that started the analysis. (for error reporting purposes).
         /// </summary>
         internal bool CheckValueKind(
@@ -1375,10 +1375,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// SPEC: When a property or indexer declared in a struct-type is the target of an 
-        /// SPEC: assignment, the instance expression associated with the property or indexer 
-        /// SPEC: access must be classified as a variable. If the instance expression is 
-        /// SPEC: classified as a value, a compile-time error occurs. Because of 7.6.4, 
+        /// SPEC: When a property or indexer declared in a struct-type is the target of an
+        /// SPEC: assignment, the instance expression associated with the property or indexer
+        /// SPEC: access must be classified as a variable. If the instance expression is
+        /// SPEC: classified as a value, a compile-time error occurs. Because of 7.6.4,
         /// SPEC: the same rule also applies to fields.
         /// </summary>
         /// <remarks>
@@ -1818,10 +1818,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Computes the scope to which the given invocation can escape
-        /// NOTE: the escape scope for ref and val escapes is the same for invocations except for trivial cases (ordinary type returned by val) 
+        /// NOTE: the escape scope for ref and val escapes is the same for invocations except for trivial cases (ordinary type returned by val)
         ///       where escape is known otherwise. Therefore we do not have two ref/val variants of this.
-        ///       
-        /// NOTE: we need scopeOfTheContainingExpression as some expressions such as optional <c>in</c> parameters or <c>ref dynamic</c> behave as 
+        ///
+        /// NOTE: we need scopeOfTheContainingExpression as some expressions such as optional <c>in</c> parameters or <c>ref dynamic</c> behave as
         ///       local variables declared at the scope of the invocation.
         /// </summary>
         internal static uint GetInvocationEscapeScope(
@@ -1940,10 +1940,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Validates whether given invocation can allow its results to escape from <paramref name="escapeFrom"/> level to <paramref name="escapeTo"/> level.
-        /// The result indicates whether the escape is possible. 
+        /// The result indicates whether the escape is possible.
         /// Additionally, the method emits diagnostics (possibly more than one, recursively) that would help identify the cause for the failure.
-        /// 
-        /// NOTE: we need scopeOfTheContainingExpression as some expressions such as optional <c>in</c> parameters or <c>ref dynamic</c> behave as 
+        ///
+        /// NOTE: we need scopeOfTheContainingExpression as some expressions such as optional <c>in</c> parameters or <c>ref dynamic</c> behave as
         ///       local variables declared at the scope of the invocation.
         /// </summary>
         private static bool CheckInvocationEscape(
@@ -2284,12 +2284,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Gets "effective" ref kind of an argument. 
+        /// Gets "effective" ref kind of an argument.
         /// If the ref kind is 'in', marks that that corresponding parameter was matched with a value
         /// We need that to detect when there were optional 'in' parameters for which values were not supplied.
-        /// 
-        /// NOTE: Generally we know if a formal argument is passed as ref/out/in by looking at the call site. 
-        /// However, 'in' may also be passed as an ordinary val argument so we need to take a look at corresponding parameter, if such exists. 
+        ///
+        /// NOTE: Generally we know if a formal argument is passed as ref/out/in by looking at the call site.
+        /// However, 'in' may also be passed as an ordinary val argument so we need to take a look at corresponding parameter, if such exists.
         /// There are cases like params/vararg, when a corresponding parameter may not exist, then val cannot become 'in'.
         /// </summary>
         private static RefKind GetEffectiveRefKindAndMarkMatchedInParameter(
@@ -2324,7 +2324,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Gets a "in" parameter for which there is no argument supplied, if such exists. 
+        /// Gets a "in" parameter for which there is no argument supplied, if such exists.
         /// That indicates an optional "in" parameter. We treat it as an RValue passed by reference via a temporary.
         /// The effective scope of such variable is the immediately containing scope.
         /// </summary>
@@ -2666,10 +2666,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Computes the widest scope depth to which the given expression can escape by reference.
-        /// 
+        ///
         /// NOTE: in a case if expression cannot be passed by an alias (RValue and similar), the ref-escape is scopeOfTheContainingExpression
         ///       There are few cases where RValues are permitted to be passed by reference which implies that a temporary local proxy is passed instead.
-        ///       We reflect such behavior by constraining the escape value to the narrowest scope possible. 
+        ///       We reflect such behavior by constraining the escape value to the narrowest scope possible.
         /// </summary>
         internal static uint GetRefEscape(BoundExpression expr, uint scopeOfTheContainingExpression)
         {
@@ -2878,7 +2878,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// A counterpart to the GetRefEscape, which validates if given escape demand can be met by the expression.
-        /// The result indicates whether the escape is possible. 
+        /// The result indicates whether the escape is possible.
         /// Additionally, the method emits diagnostics (possibly more than one, recursively) that would help identify the cause for the failure.
         /// </summary>
         internal static bool CheckRefEscape(
@@ -3230,8 +3230,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Computes the widest scope depth to which the given expression can escape by value.
-        /// 
-        /// NOTE: unless the type of expression is ref-like, the result is Binder.ExternalScope since ordinary values can always be returned from methods. 
+        ///
+        /// NOTE: unless the type of expression is ref-like, the result is Binder.ExternalScope since ordinary values can always be returned from methods.
         /// </summary>
         internal static uint GetValEscape(BoundExpression expr, uint scopeOfTheContainingExpression)
         {
@@ -4830,7 +4830,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Special HasHome for fields. 
+        /// Special HasHome for fields.
         /// Fields have readable homes when they are not constants.
         /// Fields have writeable homes unless they are readonly and used outside of the constructor.
         /// </summary>

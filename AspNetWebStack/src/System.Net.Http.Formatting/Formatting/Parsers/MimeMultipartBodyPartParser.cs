@@ -11,7 +11,7 @@ using System.Web.Http;
 namespace System.Net.Http.Formatting.Parsers
 {
     /// <summary>
-    /// Complete MIME multipart parser that combines <see cref="MimeMultipartParser"/> for parsing the MIME message into individual body parts 
+    /// Complete MIME multipart parser that combines <see cref="MimeMultipartParser"/> for parsing the MIME message into individual body parts
     /// and <see cref="InternetMessageFormatHeaderParser"/> for parsing each body part into a MIME header and a MIME body. The caller of the parser is returned
     /// the resulting MIME bodies which can then be written to some output.
     /// </summary>
@@ -109,7 +109,7 @@ namespace System.Net.Http.Formatting.Parsers
         }
 
         /// <summary>
-        /// Parses the data provided and generates parsed MIME body part bodies in the form of <see cref="ArraySegment{T}"/> which are ready to 
+        /// Parses the data provided and generates parsed MIME body part bodies in the form of <see cref="ArraySegment{T}"/> which are ready to
         /// write to the output stream.
         /// </summary>
         /// <param name="data">The data to parse</param>

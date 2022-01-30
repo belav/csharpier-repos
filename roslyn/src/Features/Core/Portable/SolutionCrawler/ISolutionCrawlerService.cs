@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     internal interface ISolutionCrawlerService : IWorkspaceService
     {
         /// <summary>
-        /// Ask solution crawler to re-analyze given <see cref="ProjectId"/>s or/and <see cref="DocumentId"/>s 
+        /// Ask solution crawler to re-analyze given <see cref="ProjectId"/>s or/and <see cref="DocumentId"/>s
         /// in given <see cref="Workspace"/> with given <see cref="IIncrementalAnalyzer"/>.
         /// </summary>
         void Reanalyze(

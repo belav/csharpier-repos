@@ -14,8 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// The dynamic operation factories below return this struct so that the caller
     /// have the option of separating the call-site initialization from its invocation.
-    /// 
-    /// Most callers just call <see cref="ToExpression"/> to get the combo but some (object and array initializers) 
+    ///
+    /// Most callers just call <see cref="ToExpression"/> to get the combo but some (object and array initializers)
     /// hoist all call-site initialization code and emit multiple invocations of the same site.
     /// </summary>
     internal struct LoweredDynamicOperation

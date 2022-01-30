@@ -7,7 +7,7 @@ using System;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Combines a value, <see cref="Value"/>, and a flag, <see cref="HasValue"/>, 
+    /// Combines a value, <see cref="Value"/>, and a flag, <see cref="HasValue"/>,
     /// indicating whether or not that value is meaningful.
     /// </summary>
     /// <typeparam name="T">The type of the value.</typeparam>
@@ -52,7 +52,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new object initialized to a meaningful value. 
+        /// Creates a new object initialized to a meaningful value.
         /// </summary>
         /// <param name="value"></param>
         public static implicit operator Optional<T>(T value)

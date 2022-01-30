@@ -10,7 +10,7 @@ namespace Roslyn.Utilities
     /// <summary>
     /// Compares string based upon their ordinal equality.
     /// We use this comparer for string identifiers because it does exactly what we need and nothing more
-    /// The StringComparer.Ordinal as implemented by StringComparer is more complex to support 
+    /// The StringComparer.Ordinal as implemented by StringComparer is more complex to support
     /// case sensitive and insensitive compares depending on flags.
     /// It also defers to the default string hash function that might not be the best for our scenarios.
     /// </summary>

@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.Differencing
         /// </summary>
         /// <remarks>
         /// The more similar the nodes the smaller the distance.
-        /// 
+        ///
         /// Used to determine whether two nodes of the same label match.
         /// Even if 0 is returned the nodes might be slightly different.
         /// </remarks>

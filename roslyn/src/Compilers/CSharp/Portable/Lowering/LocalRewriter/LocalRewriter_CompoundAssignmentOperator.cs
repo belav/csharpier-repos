@@ -560,7 +560,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Returns true if the <paramref name="receiver"/> was lowered and transformed.
-        /// The <paramref name="receiver"/> is not changed if this function returns false. 
+        /// The <paramref name="receiver"/> is not changed if this function returns false.
         /// </summary>
         private bool TransformCompoundAssignmentFieldOrEventAccessReceiver(
             Symbol fieldOrEvent,
@@ -1024,10 +1024,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Variables local to current frame do not need temps when re-read multiple times
         /// as long as there is no code that may write to locals in between accesses and they
         /// are not captured.
-        /// 
+        ///
         /// Example:
         ///        l += goo(ref l);
-        /// 
+        ///
         /// even though l is a local, we must access it via a temp since "goo(ref l)" may change it
         /// on between accesses.
         ///

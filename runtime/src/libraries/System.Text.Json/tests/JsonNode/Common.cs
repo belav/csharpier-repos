@@ -67,14 +67,14 @@ namespace System.Text.Json.Node.Tests
             /// Returns following JsonObject:
             /// {
             ///     "phone numbers" : { "work" :  "425-555-0123", "home": "425-555-0134"  }
-            ///     "reporting employees" : 
+            ///     "reporting employees" :
             ///     {
             ///         "software developers" :
             ///         {
-            ///             "full time employees" : /JsonObject of 3 employees from database/ 
-            ///             "intern employees" : /JsonObject of 2 employees from database/ 
+            ///             "full time employees" : /JsonObject of 3 employees from database/
+            ///             "intern employees" : /JsonObject of 2 employees from database/
             ///         },
-            ///         "HR" : /JsonObject of 10 employees from database/ 
+            ///         "HR" : /JsonObject of 10 employees from database/
             ///     }
             /// }
             /// </summary>

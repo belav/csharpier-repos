@@ -107,7 +107,7 @@ namespace System.Security.AccessControl
 
         /* // Not in the spec
         public EventWaitHandleAuditRule(string identity, EventWaitHandleRights eventRights, AuditFlags flags)
-            : this(new NTAccount(identity), (int) eventRights, false, InheritanceFlags.None, PropagationFlags.None, flags)
+        : this(new NTAccount(identity), (int) eventRights, false, InheritanceFlags.None, PropagationFlags.None, flags)
         {
         }
         */

@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Gets the document from the corresponding workspace's current solution that is associated with the source text's container 
+        /// Gets the document from the corresponding workspace's current solution that is associated with the source text's container
         /// in its current project context, updated to contain the same text as the source if necessary.
         /// </summary>
         public static Document? GetOpenDocumentInCurrentContextWithChanges(this SourceText text)
@@ -94,7 +94,7 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Gets the documents from the corresponding workspace's current solution that are associated with the text container. 
+        /// Gets the documents from the corresponding workspace's current solution that are associated with the text container.
         /// </summary>
         public static ImmutableArray<Document> GetRelatedDocuments(
             this SourceTextContainer container
@@ -118,7 +118,7 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Gets the document from the corresponding workspace's current solution that is associated with the text container 
+        /// Gets the document from the corresponding workspace's current solution that is associated with the text container
         /// in its current project context.
         /// </summary>
         public static Document? GetOpenDocumentInCurrentContext(this SourceTextContainer container)
@@ -133,8 +133,8 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Tries to get the document corresponding to the text from the current partial solution 
-        /// associated with the text's container. If the document does not contain the exact text a document 
+        /// Tries to get the document corresponding to the text from the current partial solution
+        /// associated with the text's container. If the document does not contain the exact text a document
         /// from a new solution containing the specified text is constructed. If no document is associated
         /// with the specified text's container, or the text's container isn't associated with a workspace,
         /// then the method returns false.

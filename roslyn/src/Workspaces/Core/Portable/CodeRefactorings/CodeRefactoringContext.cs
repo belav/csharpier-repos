@@ -85,7 +85,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// <param name="action">The <see cref="CodeAction"/> that will be invoked to apply the refactoring.</param>
         /// <param name="applicableToSpan">The <see cref="TextSpan"/> within original document the <paramref name="action"/> is applicable to.</param>
         /// <remarks>
-        /// <paramref name="applicableToSpan"/> should represent a logical section within the original document that the <paramref name="action"/> is 
+        /// <paramref name="applicableToSpan"/> should represent a logical section within the original document that the <paramref name="action"/> is
         /// applicable to. It doesn't have to precisely represent the exact <see cref="TextSpan"/> that will get changed.
         /// </remarks>
         internal void RegisterRefactoring(CodeAction action, TextSpan applicableToSpan) =>

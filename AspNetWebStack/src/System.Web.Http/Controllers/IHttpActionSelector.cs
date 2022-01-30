@@ -15,7 +15,7 @@ namespace System.Web.Http.Controllers
         HttpActionDescriptor SelectAction(HttpControllerContext controllerContext);
 
         /// <summary>
-        /// Returns a map, keyed by action string, of all <see cref="HttpActionDescriptor"/> that the selector can select. 
+        /// Returns a map, keyed by action string, of all <see cref="HttpActionDescriptor"/> that the selector can select.
         /// This is primarily called by <see cref="System.Web.Http.Description.IApiExplorer"/> to discover all the possible actions in the controller.
         /// </summary>
         /// <param name="controllerDescriptor">The controller descriptor.</param>

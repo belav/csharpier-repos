@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
 {
     /// <summary>
     /// Represents a request from the client. A request is as follows.
-    /// 
+    ///
     ///  Field Name         Type                Size (bytes)
     /// ----------------------------------------------------
     ///  Length             Integer             4
@@ -38,10 +38,10 @@ namespace Microsoft.CodeAnalysis.CommandLine
     ///  CompilerHash       String              Variable
     ///  Argument Count     UInteger            4
     ///  Arguments          Argument[]          Variable
-    /// 
+    ///
     /// See <see cref="Argument"/> for the format of an
     /// Argument.
-    /// 
+    ///
     /// </summary>
     internal sealed class BuildRequest
     {
@@ -132,7 +132,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
         /// <summary>
         /// Read a Request from the given stream.
-        /// 
+        ///
         /// The total request size must be less than <see cref="MaximumRequestSize"/>.
         /// </summary>
         /// <returns>null if the Request was too large, the Request otherwise.</returns>
@@ -237,15 +237,15 @@ namespace Microsoft.CodeAnalysis.CommandLine
         }
 
         /// <summary>
-        /// A command line argument to the compilation. 
+        /// A command line argument to the compilation.
         /// An argument is formatted as follows:
-        /// 
+        ///
         ///  Field Name         Type            Size (bytes)
         /// --------------------------------------------------
         ///  ID                 UInteger        4
         ///  Index              UInteger        4
         ///  Value              String          Variable
-        /// 
+        ///
         /// Strings are encoded via a length prefix as a signed
         /// 32-bit integer, followed by an array of characters.
         /// </summary>
@@ -288,7 +288,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
     ///
     /// Field Name       Field Type          Size (bytes)
     /// -------------------------------------------------
-    /// responseLength   int (positive)      4  
+    /// responseLength   int (positive)      4
     /// responseType     enum ResponseType   4
     /// responseBody     Response subclass   variable
     /// </summary>
@@ -408,16 +408,16 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
     /// <summary>
     /// Represents a Response from the server. A response is as follows.
-    /// 
+    ///
     ///  Field Name         Type            Size (bytes)
     /// --------------------------------------------------
     ///  Length             UInteger        4
     ///  ReturnCode         Integer         4
     ///  Output             String          Variable
-    /// 
-    /// Strings are encoded via a character count prefix as a 
+    ///
+    /// Strings are encoded via a character count prefix as a
     /// 32-bit integer, followed by an array of characters.
-    /// 
+    ///
     /// </summary>
     internal sealed class CompletedBuildResponse : BuildResponse
     {

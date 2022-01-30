@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.InternalUtilities
 
         /// <summary>
         /// Create cache from an array. The cache capacity will be the size
-        /// of the array. All elements of the array will be added to the 
+        /// of the array. All elements of the array will be added to the
         /// cache. If any duplicate keys are found in the array a
         /// <see cref="ArgumentException"/> will be thrown.
         /// </summary>

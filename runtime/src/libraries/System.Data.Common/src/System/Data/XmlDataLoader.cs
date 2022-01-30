@@ -335,19 +335,19 @@ namespace System.Data
                         Hashtable tableAtoms = new Hashtable();
                         XmlNode tabNode;
                         if (CountNonNSAttributes (rootElement) > 0)
-                            dataSet.fTopLevelTable = true;
+                        dataSet.fTopLevelTable = true;
                         else {
-                            for (tabNode = rootElement.FirstChild; tabNode != null; tabNode = tabNode.NextSibling) {
-                                if (tabNode is XmlElement && tabNode.LocalName != Keywords.XSD_SCHEMA) {
-                                    object value = tableAtoms[QualifiedName (tabNode.LocalName, tabNode.NamespaceURI)];
-                                    if (value == null || (bool)value == false) {
-                                        dataSet.fTopLevelTable = true;
-                                        break;
-                                    }
-                                }
-                            }
+                        for (tabNode = rootElement.FirstChild; tabNode != null; tabNode = tabNode.NextSibling) {
+                        if (tabNode is XmlElement && tabNode.LocalName != Keywords.XSD_SCHEMA) {
+                        object value = tableAtoms[QualifiedName (tabNode.LocalName, tabNode.NamespaceURI)];
+                        if (value == null || (bool)value == false) {
+                        dataSet.fTopLevelTable = true;
+                        break;
                         }
-            */
+                        }
+                        }
+                        }
+                        */
             DataRow? topRow = null;
             if (_isTableLevel || (_dataSet != null && _dataSet._fTopLevelTable))
             {

@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// Encapsulates the MakeOverriddenOrHiddenMembers functionality for methods, properties (including indexers), 
+    /// Encapsulates the MakeOverriddenOrHiddenMembers functionality for methods, properties (including indexers),
     /// and events.
     /// </summary>
     internal static class OverriddenOrHiddenMembersHelpers
@@ -48,13 +48,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// member is declared "override") or hides (accessible members with the same name
         /// but different kinds, plus members that would be in the overrides list if
         /// this member were not declared "override").
-        /// 
+        ///
         /// Members in the overridden list may be non-virtual or may have different
         /// accessibilities, types, accessors, etc.  They are really candidates to be
         /// overridden.
-        /// 
+        ///
         /// Members in the hidden list are definitely hidden.
-        /// 
+        ///
         /// Members in the runtime overridden list are indistinguishable from the members
         /// in the overridden list from the point of view of the runtime (see
         /// FindOtherOverriddenMethodsInContainingType for details).
@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// complicated.  If this member isn't from source, then it refers to the runtime's
         /// notion of signature (i.e. including return type, custom modifiers, etc).
         /// If this member is from source, then the process is (conceptually) as follows.
-        /// 
+        ///
         /// 1) Walk up the type hierarchy, recording all matching members with the same
         ///    signature, ignoring custom modifiers and return type.  Stop if a hidden
         ///    member is encountered.
@@ -76,7 +76,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// 3) If a member remains, search its containing type for other members that
         ///    have the same C# signature (overridden members) or runtime signature
         ///    (runtime overridden members).
-        /// 
+        ///
         /// In metadata, properties participate in overriding only through their accessors.
         /// That is, property/event accessors may implicitly or explicitly override other methods
         /// and a property/event can be considered to override another property/event if its accessors
@@ -275,22 +275,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// For an accessor to hide a member, the hidden member must be a corresponding accessor on a property hidden
         /// by the associated property.  For an accessor to override a member, the overridden member must be a
         /// corresponding accessor on a property (directly or indirectly) overridden by the associated property.
-        /// 
+        ///
         /// Example 1:
-        /// 
+        ///
         /// public class A { public virtual int P { get; set; } }
         /// public class B : A { public override int P { get { return 1; } } } //get only
         /// public class C : B { public override int P { set { } } } // set only
-        /// 
+        ///
         /// C.P.set overrides A.P.set because C.P.set is the setter of C.P, which overrides B.P,
         /// which overrides A.P, which has A.P.set as a setter.
-        /// 
+        ///
         /// Example 2:
-        /// 
+        ///
         /// public class A { public virtual int P { get; set; } }
         /// public class B : A { public new virtual int P { get { return 1; } } } //get only
         /// public class C : B { public override int P { set { } } } // set only
-        /// 
+        ///
         /// C.P.set does not override any method because C.P overrides B.P, which has no setter
         /// and does not override a property.
         /// </summary>
@@ -300,7 +300,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <remarks>
         /// This method is intended to return values consistent with the definition of C#, which
         /// may differ from the actual meaning at runtime.
-        /// 
+        ///
         /// Note: we don't need a different path for interfaces - Property.OverriddenOrHiddenMembers handles that.
         /// </remarks>
         private static OverriddenOrHiddenMembersResult MakePropertyAccessorOverriddenOrHiddenMembers(
@@ -417,12 +417,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <remarks>
         /// This method is intended to return values consistent with the definition of C#, which
         /// may differ from the actual meaning at runtime.
-        /// 
+        ///
         /// Note: we don't need a different path for interfaces - Event.OverriddenOrHiddenMembers handles that.
-        /// 
+        ///
         /// CONSIDER: It is an error for an event to have only one accessor.  Currently, we mimic the behavior for
         /// properties, for consistency, but an alternative approach would be to say that nothing is overridden.
-        /// 
+        ///
         /// CONSIDER: is there a way to share code with MakePropertyAccessorOverriddenOrHiddenMembers?
         /// </remarks>
         private static OverriddenOrHiddenMembersResult MakeEventAccessorOverriddenOrHiddenMembers(
@@ -518,11 +518,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// multiple inheritance raises the possibility of diamond inheritance.  Spec section 13.2.5, Interface member access,
         /// says: "The intuitive rule for hiding in multiple-inheritance interfaces is simply this: If a member is hidden in any
         /// access path, it is hidden in all access paths."  For example, consider the following interfaces:
-        /// 
+        ///
         /// interface I0 { void M(); }
         /// interface I1 : I0 { void M(); }
         /// interface I2 : I0, I1 { void M(); }
-        /// 
+        ///
         /// I2.M does not hide I0.M, because it is already hidden by I1.M.  To make this work, we need to traverse the graph
         /// of ancestor interfaces in topological order and flag ones later in the enumeration that are hidden along some path.
         /// </summary>
@@ -665,7 +665,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <remarks>
         /// There is some similarity between this member and TypeSymbol.FindPotentialImplicitImplementationMemberDeclaredInType.
         /// When making changes to this member, think about whether or not they should also be applied in TypeSymbol.
-        /// 
+        ///
         /// In incorrect or imported code, it is possible that both currTypeBestMatch and hiddenBuilder will be populated.
         /// </remarks>
         private static void FindOverriddenOrHiddenMembersInType(
@@ -981,7 +981,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Assumed to already be in the overridden and runtime overridden lists.
         /// </param>
         /// <param name="overridingMemberIsFromSomeCompilation">
-        /// If the best match was based on the custom modifier count, rather than the custom modifiers themselves 
+        /// If the best match was based on the custom modifier count, rather than the custom modifiers themselves
         /// (because the overriding member is in the current compilation), then we should use the count when determining
         /// whether the override is ambiguous.
         /// </param>
@@ -1071,7 +1071,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Assumed to already be in hiddenBuilder.
         /// </param>
         /// <param name="hiddenBuilder">
-        /// Will have all other members with the same signature (including custom modifiers) as 
+        /// Will have all other members with the same signature (including custom modifiers) as
         /// representativeMember added.
         /// </param>
         private static void FindOtherHiddenMembersInContainingType(

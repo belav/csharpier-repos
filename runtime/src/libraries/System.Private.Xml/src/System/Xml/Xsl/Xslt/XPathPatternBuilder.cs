@@ -511,7 +511,7 @@ namespace System.Xml.Xsl.Xslt
 
             /*  ----------------------------------------------------------------------------
                 IXPathEnvironment interface
-            */
+                */
             public XPathQilFactory Factory
             {
                 get { return _f; }
@@ -568,7 +568,7 @@ namespace System.Xml.Xsl.Xslt
 
             /*  ----------------------------------------------------------------------------
                 IFocus interface
-            */
+                */
             public QilNode GetCurrent()
             {
                 return _current;

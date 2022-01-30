@@ -3,8 +3,8 @@
 /* TEST:        delete_next_card_table
  * SDET:        clyon
  * DESCRIPTION: gains 14 blocks in gc.cpp
-                mscorwks!WKS::delete_next_card_table: (7 blocks, 11 arcs)
-                mscorwks!SVR::delete_next_card_table: (7 blocks, 11 arcs)
+ mscorwks!WKS::delete_next_card_table: (7 blocks, 11 arcs)
+ mscorwks!SVR::delete_next_card_table: (7 blocks, 11 arcs)
  */
 
 using System;

@@ -37,10 +37,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             /// <summary>
             /// Cancellation token we own that we will trigger if the presenter for this particular
             /// search is either closed, or repurposed to show results from another search.  Clients
-            /// using the <see cref="IStreamingFindUsagesPresenter"/> should use this token if they 
+            /// using the <see cref="IStreamingFindUsagesPresenter"/> should use this token if they
             /// are populating the presenter in a fire-and-forget manner.  In other words if they kick
             /// off work to compute the results that they themselves are not waiting on.  If they are
-            /// *not* kickign off work in a fire-and-forget manner, and are instead populating the 
+            /// *not* kickign off work in a fire-and-forget manner, and are instead populating the
             /// presenter on their own thread, they should have their own cancellation token (for example
             /// backed by a threaded-wait-dialog or CommandExecutionContext) that controls their scenario
             /// which a client can use to cancel that work.
@@ -74,16 +74,16 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             /// The list of all definitions we've heard about.  This may be a superset of the
             /// keys in <see cref="_definitionToBucket"/> because we may encounter definitions
             /// we don't create definition buckets for.  For example, if the definition asks
-            /// us to not display it if it has no references, and we don't run into any 
+            /// us to not display it if it has no references, and we don't run into any
             /// references for it (common with implicitly declared symbols).
             /// </summary>
             protected readonly List<DefinitionItem> Definitions = new();
 
             /// <summary>
-            /// We will hear about the same definition over and over again.  i.e. for each reference 
+            /// We will hear about the same definition over and over again.  i.e. for each reference
             /// to a definition, we will be told about the same definition.  However, we only want to
             /// create a single actual <see cref="DefinitionBucket"/> for the definition. To accomplish
-            /// this we keep a map from the definition to the task that we're using to create the 
+            /// this we keep a map from the definition to the task that we're using to create the
             /// bucket for it.  The first time we hear about a definition we'll make a single task
             /// and then always return that for all future references found.
             /// </summary>

@@ -16,14 +16,14 @@ using E = System.Linq.Expressions.Expression;
 namespace Moq
 {
     /// <summary>
-	///   Describes the "shape" of an invocation against which concrete <see cref="Invocation"/>s can be matched.
-	///   <para>
-	///     This shape is described by <see cref="InvocationShape.Expression"/> which has the general form
-	///     `mock => mock.Method(...arguments)`. Because the method and arguments are frequently needed,
-	///     they are cached in <see cref="InvocationShape.Method"/> and <see cref="InvocationShape.Arguments"/>
-	///     for faster access.
-	///   </para>
-	/// </summary>
+    ///   Describes the "shape" of an invocation against which concrete <see cref="Invocation"/>s can be matched.
+    ///   <para>
+    ///     This shape is described by <see cref="InvocationShape.Expression"/> which has the general form
+    ///     `mock => mock.Method(...arguments)`. Because the method and arguments are frequently needed,
+    ///     they are cached in <see cref="InvocationShape.Method"/> and <see cref="InvocationShape.Arguments"/>
+    ///     for faster access.
+    ///   </para>
+    /// </summary>
     internal sealed class InvocationShape : IEquatable<InvocationShape>
     {
         public static InvocationShape CreateFrom(Invocation invocation)

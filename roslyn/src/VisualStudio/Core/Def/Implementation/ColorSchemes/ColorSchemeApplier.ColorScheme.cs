@@ -12,7 +12,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
     internal partial class ColorSchemeApplier
     {
         /// <summary>
-        /// A ColorScheme represents a style to be applied to VS themes in 
+        /// A ColorScheme represents a style to be applied to VS themes in
         /// order to emphasize some aspect of the source code. For instance
         /// C++ has an 'Enhanced (Globals vs. Members)' scheme to emphasize
         /// a distinction between where identifiers are declared.

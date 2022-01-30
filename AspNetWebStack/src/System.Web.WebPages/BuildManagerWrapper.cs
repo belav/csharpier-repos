@@ -17,9 +17,9 @@ using Microsoft.Internal.Web.Utils;
 namespace System.Web.WebPages
 {
     /// <summary>
-    /// Wraps the caching and instantiation of paths of the BuildManager. 
+    /// Wraps the caching and instantiation of paths of the BuildManager.
     /// In case of precompiled non-updateable sites, the only way to verify if a file exists is to call BuildManager.GetObjectFactory. However this method is less performant than
-    /// VirtualPathProvider.FileExists which is used for all other scenarios. In this class, we optimize for the first scenario by storing the results of GetObjectFactory for a 
+    /// VirtualPathProvider.FileExists which is used for all other scenarios. In this class, we optimize for the first scenario by storing the results of GetObjectFactory for a
     /// long duration.
     /// </summary>
     internal sealed class BuildManagerWrapper : IVirtualPathFactory
@@ -66,8 +66,8 @@ namespace System.Web.WebPages
         }
 
         /// <summary>
-        /// Determines if a page exists in the website. 
-        /// This method switches between a long duration cache or a short duration FileExistenceCache depending on whether the site is precompiled. 
+        /// Determines if a page exists in the website.
+        /// This method switches between a long duration cache or a short duration FileExistenceCache depending on whether the site is precompiled.
         /// This is an optimization because BuildManager.GetObjectFactory is comparably slower than performing VirtualPathFactory.Exists
         /// </summary>
         public bool Exists(string virtualPath)
@@ -91,8 +91,8 @@ namespace System.Web.WebPages
         }
 
         /// <summary>
-        /// An app's is precompiled for our purposes if 
-        /// (a) it has a PreCompiledApp.config file in the site root, 
+        /// An app's is precompiled for our purposes if
+        /// (a) it has a PreCompiledApp.config file in the site root,
         /// (b) The PreCompiledApp.config says that the app is not Updatable.
         /// </summary>
         /// <remarks>
@@ -187,8 +187,8 @@ namespace System.Web.WebPages
         }
 
         /// <summary>
-        /// Determines if an ObjectFactory exists for the virtualPath. 
-        /// The BuildManager complains if we pass in extensions that aren't registered for compilation. So we ensure that the virtual path is not 
+        /// Determines if an ObjectFactory exists for the virtualPath.
+        /// The BuildManager complains if we pass in extensions that aren't registered for compilation. So we ensure that the virtual path is not
         /// extensionless and that it is one of the extension
         /// </summary>
         private IWebObjectFactory GetObjectFactory(string virtualPath)
@@ -227,7 +227,7 @@ namespace System.Web.WebPages
         }
 
         /// <summary>
-        /// Determines if the extension is one of the extensions registered with WebPageHttpHandler. 
+        /// Determines if the extension is one of the extensions registered with WebPageHttpHandler.
         /// </summary>
         public bool IsPathExtensionSupported(string virtualPath)
         {

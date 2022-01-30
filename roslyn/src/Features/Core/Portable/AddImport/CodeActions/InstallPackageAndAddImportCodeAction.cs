@@ -41,9 +41,9 @@ namespace Microsoft.CodeAnalysis.AddImport
             }
 
             /// <summary>
-            /// For preview purposes we return all the operations in a list.  This way the 
+            /// For preview purposes we return all the operations in a list.  This way the
             /// preview system stiches things together in the UI to make a suitable display.
-            /// i.e. if we have a SolutionChangedOperation and some other operation with a 
+            /// i.e. if we have a SolutionChangedOperation and some other operation with a
             /// Title, then the UI will show that nicely to the user.
             /// </summary>
             protected override async Task<

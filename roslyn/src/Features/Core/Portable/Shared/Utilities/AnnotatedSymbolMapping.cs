@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
     internal class AnnotatedSymbolMapping
     {
         /// <summary>
-        /// Used to map a symbol to the annotation that was added at the beginning of it's definition. Use the 
+        /// Used to map a symbol to the annotation that was added at the beginning of it's definition. Use the
         /// annotation the symbol declaration again across edits.
         /// </summary>
         public ImmutableDictionary<
@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public Solution AnnotatedSolution { get; }
 
         /// <summary>
-        /// A map of the document ids that were used and what symbols are in them. 
+        /// A map of the document ids that were used and what symbols are in them.
         /// </summary>
         public ImmutableDictionary<
             DocumentId,

@@ -1119,17 +1119,17 @@ public class VectorTests
     }
 
     /*
-	public static int test_0_vector_t_u4_equal () {
-		var elems1 = new uint [] { 1, 1, 1, 1 };
-		var v1 = new Vector<uint> (elems1);
-		var elems2 = new uint [] { 1, 2, 1, 2 };
-		var v2 = new Vector<uint> (elems2);
-		Vector<uint> v = Vector.Equals (v1, v2);
-		if (v [0] != 0xffffffff || v [1] != 0 || v [2] != 0xffffffff || v[3] != 0)
-			return 1;
-		return 0;
-	}
-	*/
+    public static int test_0_vector_t_u4_equal () {
+    var elems1 = new uint [] { 1, 1, 1, 1 };
+    var v1 = new Vector<uint> (elems1);
+    var elems2 = new uint [] { 1, 2, 1, 2 };
+    var v2 = new Vector<uint> (elems2);
+    Vector<uint> v = Vector.Equals (v1, v2);
+    if (v [0] != 0xffffffff || v [1] != 0 || v [2] != 0xffffffff || v[3] != 0)
+    return 1;
+    return 0;
+    }
+    */
 
     public static int test_0_vector_t_i2_equal()
     {

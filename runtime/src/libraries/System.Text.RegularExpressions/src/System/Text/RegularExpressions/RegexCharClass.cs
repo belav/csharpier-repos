@@ -139,7 +139,7 @@ namespace System.Text.RegularExpressions
          *   and Perl 5.6 (see Programming Perl, 3rd edition page 167).   Three blocks defined by Perl (and here) may
          *   not be in the Unicode: IsHighPrivateUseSurrogates, IsHighSurrogates, and IsLowSurrogates.
          *
-        **/
+         **/
         // Has to be sorted by the first column
         private static readonly string[][] s_propTable =
         {

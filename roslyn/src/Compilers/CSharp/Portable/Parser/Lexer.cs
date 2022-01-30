@@ -4151,7 +4151,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         /// <summary>
-        /// Lexer entry point for LexerMode.XmlCrefQuote, LexerMode.XmlCrefDoubleQuote, 
+        /// Lexer entry point for LexerMode.XmlCrefQuote, LexerMode.XmlCrefDoubleQuote,
         /// LexerMode.XmlNameQuote, and LexerMode.XmlNameDoubleQuote.
         /// </summary>
         private SyntaxToken LexXmlCrefOrNameToken()

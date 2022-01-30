@@ -16,7 +16,7 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
 {
     /// <summary>
     /// Represents whether each feature is active or inactive.
-    /// 
+    ///
     /// The IsActive property indicates whether a given feature is currently in the
     /// middle of an operation.  Features can be grouped into a parent ActivityLevel
     /// which is active when any of its children are active.

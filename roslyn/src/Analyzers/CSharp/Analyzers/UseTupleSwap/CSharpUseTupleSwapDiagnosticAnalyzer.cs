@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
 {
     /// <summary>
     /// Looks for code of the form:
-    /// 
+    ///
     /// <code>
     ///     var temp = expr_a;
     ///     expr_a = expr_b;
@@ -22,11 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
     /// </code>
     ///
     /// and converts it to:
-    /// 
+    ///
     /// <code>
     ///     (expr_b, expr_a) = (expr_a, expr_b);
     /// </code>
-    /// 
+    ///
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpUseTupleSwapDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer

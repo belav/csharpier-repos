@@ -9,8 +9,8 @@ using Xunit;
 namespace Moq.Tests
 {
     /// <summary>
-	/// Tests for the <see cref="DefaultValueProvider"/> abstract base class.
-	/// </summary>
+    /// Tests for the <see cref="DefaultValueProvider"/> abstract base class.
+    /// </summary>
     public class DefaultValueProviderFixture
     {
         private static MethodInfo fooActionMethod = typeof(IFoo).GetMethod(nameof(IFoo.Action));

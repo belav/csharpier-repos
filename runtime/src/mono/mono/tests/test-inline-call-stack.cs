@@ -79,9 +79,9 @@ namespace Program
             );
 
             /*
-			 * The relaxedFlag test is broken, the runtime can initialized
-			 * to false before the StaticFlag.Flag = true assignment is ran.
-			 */
+             * The relaxedFlag test is broken, the runtime can initialized
+             * to false before the StaticFlag.Flag = true assignment is ran.
+             */
             relaxedFlag = true;
 
             Console.WriteLine(

@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         /// <remarks>
-        /// This temp is not interesting to the expression compiler.  However, it 
+        /// This temp is not interesting to the expression compiler.  However, it
         /// may be replaced by an interesting local in a later stage.
         /// </remarks>
         public LocalVariableAttributes PdbAttributes => LocalVariableAttributes.DebuggerHidden;

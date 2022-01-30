@@ -11,8 +11,8 @@ using System.Linq.Expressions;
 namespace Moq.Linq
 {
     /// <summary>
-	/// A default implementation of IQueryable for use with QueryProvider
-	/// </summary>
+    /// A default implementation of IQueryable for use with QueryProvider
+    /// </summary>
     internal class MockQueryable<T> : IQueryable<T>, IQueryProvider
     {
         private readonly Expression expression;

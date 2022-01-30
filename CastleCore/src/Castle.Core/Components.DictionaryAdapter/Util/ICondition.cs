@@ -15,8 +15,8 @@
 namespace Castle.Components.DictionaryAdapter
 {
     /// <summary>
-	/// Contract for value matching.
-	/// </summary>
+    /// Contract for value matching.
+    /// </summary>
     public interface ICondition
     {
         bool SatisfiedBy(object value);

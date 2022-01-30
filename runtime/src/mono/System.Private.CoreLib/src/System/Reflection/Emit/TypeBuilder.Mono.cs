@@ -433,8 +433,8 @@ namespace System.Reflection.Emit
             // Visibility must be NestedXXX
             /* This breaks mcs
             if (((attrs & TypeAttributes.VisibilityMask) == TypeAttributes.Public) ||
-                ((attrs & TypeAttributes.VisibilityMask) == TypeAttributes.NotPublic))
-                throw new ArgumentException (nameof(attr), "Bad type flags for nested type.");
+            ((attrs & TypeAttributes.VisibilityMask) == TypeAttributes.NotPublic))
+            throw new ArgumentException (nameof(attr), "Bad type flags for nested type.");
             */
             if (interfaces != null)
             {
@@ -1317,28 +1317,28 @@ namespace System.Reflection.Emit
         /*
                 internal void GenerateDebugInfo (ISymbolWriter symbolWriter)
                 {
-                    symbolWriter.OpenNamespace (this.Namespace);
-
-                    if (methods != null) {
-                        for (int i = 0; i < num_methods; ++i) {
-                            MethodBuilder metb = (MethodBuilder) methods[i];
-                            metb.GenerateDebugInfo (symbolWriter);
-                        }
-                    }
-
-                    if (ctors != null) {
-                        foreach (ConstructorBuilder ctor in ctors)
-                            ctor.GenerateDebugInfo (symbolWriter);
-                    }
-
-                    symbolWriter.CloseNamespace ();
-
-                    if (subtypes != null) {
-                        for (int i = 0; i < subtypes.Length; ++i)
-                            subtypes [i].GenerateDebugInfo (symbolWriter);
-                    }
+                symbolWriter.OpenNamespace (this.Namespace);
+                
+                if (methods != null) {
+                for (int i = 0; i < num_methods; ++i) {
+                MethodBuilder metb = (MethodBuilder) methods[i];
+                metb.GenerateDebugInfo (symbolWriter);
                 }
-        */
+                }
+                
+                if (ctors != null) {
+                foreach (ConstructorBuilder ctor in ctors)
+                ctor.GenerateDebugInfo (symbolWriter);
+                }
+                
+                symbolWriter.CloseNamespace ();
+                
+                if (subtypes != null) {
+                for (int i = 0; i < subtypes.Length; ++i)
+                subtypes [i].GenerateDebugInfo (symbolWriter);
+                }
+                }
+                */
         [ComVisible(true)]
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicConstructors

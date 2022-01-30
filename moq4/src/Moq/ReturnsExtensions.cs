@@ -12,18 +12,18 @@ using Moq.Properties;
 namespace Moq
 {
     /// <summary>
-	/// Defines async extension methods on IReturns.
-	/// </summary>
+    /// Defines async extension methods on IReturns.
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static partial class ReturnsExtensions
     {
         /// <summary>
-		/// Specifies the value to return from an asynchronous method.
-		/// </summary>
-		/// <typeparam name="TMock">Mocked type.</typeparam>
-		/// <typeparam name="TResult">Type of the return value.</typeparam>
-		/// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
-		/// <param name="value">The value to return, or <see longword="null"/>.</param>
+        /// Specifies the value to return from an asynchronous method.
+        /// </summary>
+        /// <typeparam name="TMock">Mocked type.</typeparam>
+        /// <typeparam name="TResult">Type of the return value.</typeparam>
+        /// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
+        /// <param name="value">The value to return, or <see longword="null"/>.</param>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
             TResult value
@@ -33,12 +33,12 @@ namespace Moq
         }
 
         /// <summary>
-		/// Specifies the value to return from an asynchronous method.
-		/// </summary>
-		/// <typeparam name="TMock">Mocked type.</typeparam>
-		/// <typeparam name="TResult">Type of the return value.</typeparam>
-		/// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
-		/// <param name="value">The value to return, or <see longword="null"/>.</param>
+        /// Specifies the value to return from an asynchronous method.
+        /// </summary>
+        /// <typeparam name="TMock">Mocked type.</typeparam>
+        /// <typeparam name="TResult">Type of the return value.</typeparam>
+        /// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
+        /// <param name="value">The value to return, or <see longword="null"/>.</param>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
             TResult value
@@ -48,12 +48,12 @@ namespace Moq
         }
 
         /// <summary>
-		/// Specifies a function that will calculate the value to return from the asynchronous method.
-		/// </summary>
-		/// <typeparam name="TMock">Mocked type.</typeparam>
-		/// <typeparam name="TResult">Type of the return value.</typeparam>
-		/// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
-		/// <param name="valueFunction">The function that will calculate the return value.</param>
+        /// Specifies a function that will calculate the value to return from the asynchronous method.
+        /// </summary>
+        /// <typeparam name="TMock">Mocked type.</typeparam>
+        /// <typeparam name="TResult">Type of the return value.</typeparam>
+        /// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
+        /// <param name="valueFunction">The function that will calculate the return value.</param>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
             Func<TResult> valueFunction
@@ -68,12 +68,12 @@ namespace Moq
         }
 
         /// <summary>
-		/// Specifies a function that will calculate the value to return from the asynchronous method.
-		/// </summary>
-		/// <typeparam name="TMock">Mocked type.</typeparam>
-		/// <typeparam name="TResult">Type of the return value.</typeparam>
-		/// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
-		/// <param name="valueFunction">The function that will calculate the return value.</param>
+        /// Specifies a function that will calculate the value to return from the asynchronous method.
+        /// </summary>
+        /// <typeparam name="TMock">Mocked type.</typeparam>
+        /// <typeparam name="TResult">Type of the return value.</typeparam>
+        /// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
+        /// <param name="valueFunction">The function that will calculate the return value.</param>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
             Func<TResult> valueFunction
@@ -88,11 +88,11 @@ namespace Moq
         }
 
         /// <summary>
-		/// Specifies the exception to throw when the asynchronous method is invoked.
-		/// </summary>
-		/// <typeparam name="TMock">Mocked type.</typeparam>
-		/// <param name="mock">Returns verb which represents the mocked type and the task return type</param>
-		/// <param name="exception">Exception instance to throw.</param>
+        /// Specifies the exception to throw when the asynchronous method is invoked.
+        /// </summary>
+        /// <typeparam name="TMock">Mocked type.</typeparam>
+        /// <param name="mock">Returns verb which represents the mocked type and the task return type</param>
+        /// <param name="exception">Exception instance to throw.</param>
         public static IReturnsResult<TMock> ThrowsAsync<TMock>(
             this IReturns<TMock, Task> mock,
             Exception exception
@@ -109,12 +109,12 @@ namespace Moq
         }
 
         /// <summary>
-		/// Specifies the exception to throw when the asynchronous method is invoked.
-		/// </summary>
-		/// <typeparam name="TMock">Mocked type.</typeparam>
-		/// <typeparam name="TResult">Type of the return value.</typeparam>
-		/// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
-		/// <param name="exception">Exception instance to throw.</param>
+        /// Specifies the exception to throw when the asynchronous method is invoked.
+        /// </summary>
+        /// <typeparam name="TMock">Mocked type.</typeparam>
+        /// <typeparam name="TResult">Type of the return value.</typeparam>
+        /// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
+        /// <param name="exception">Exception instance to throw.</param>
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
             Exception exception
@@ -131,12 +131,12 @@ namespace Moq
         }
 
         /// <summary>
-		/// Specifies the exception to throw when the asynchronous method is invoked.
-		/// </summary>
-		/// <typeparam name="TMock">Mocked type.</typeparam>
-		/// <typeparam name="TResult">Type of the return value.</typeparam>
-		/// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
-		/// <param name="exception">Exception instance to throw.</param>
+        /// Specifies the exception to throw when the asynchronous method is invoked.
+        /// </summary>
+        /// <typeparam name="TMock">Mocked type.</typeparam>
+        /// <typeparam name="TResult">Type of the return value.</typeparam>
+        /// <param name="mock">Returns verb which represents the mocked type and the task of return type</param>
+        /// <param name="exception">Exception instance to throw.</param>
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
             Exception exception
@@ -155,8 +155,8 @@ namespace Moq
         private static readonly Random Random = new Random();
 
         /// <summary>
-		/// Allows to specify the delayed return value of an asynchronous method.
-		/// </summary>
+        /// Allows to specify the delayed return value of an asynchronous method.
+        /// </summary>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
             TResult value,
@@ -167,8 +167,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Allows to specify the delayed return value of an asynchronous method.
-		/// </summary>
+        /// Allows to specify the delayed return value of an asynchronous method.
+        /// </summary>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
             TResult value,
@@ -179,8 +179,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Allows to specify the delayed return value of an asynchronous method.
-		/// </summary>
+        /// Allows to specify the delayed return value of an asynchronous method.
+        /// </summary>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
             TResult value,
@@ -194,8 +194,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Allows to specify the delayed return value of an asynchronous method.
-		/// </summary>
+        /// Allows to specify the delayed return value of an asynchronous method.
+        /// </summary>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
             TResult value,
@@ -209,9 +209,9 @@ namespace Moq
         }
 
         /// <summary>
-		/// <para>Allows to specify the delayed return value of an asynchronous method.</para>
-		/// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across your unit test.</para>
-		/// </summary>
+        /// <para>Allows to specify the delayed return value of an asynchronous method.</para>
+        /// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across your unit test.</para>
+        /// </summary>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
             TResult value,
@@ -229,9 +229,9 @@ namespace Moq
         }
 
         /// <summary>
-		/// <para>Allows to specify the delayed return value of an asynchronous method.</para>
-		/// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across your unit test.</para>
-		/// </summary>
+        /// <para>Allows to specify the delayed return value of an asynchronous method.</para>
+        /// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across your unit test.</para>
+        /// </summary>
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
             TResult value,
@@ -249,8 +249,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Allows to specify the exception thrown by an asynchronous method.
-		/// </summary>
+        /// Allows to specify the exception thrown by an asynchronous method.
+        /// </summary>
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
             Exception exception,
@@ -261,8 +261,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Allows to specify the exception thrown by an asynchronous method.
-		/// </summary>
+        /// Allows to specify the exception thrown by an asynchronous method.
+        /// </summary>
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
             Exception exception,
@@ -273,8 +273,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Allows to specify the exception thrown by an asynchronous method.
-		/// </summary>
+        /// Allows to specify the exception thrown by an asynchronous method.
+        /// </summary>
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
             Exception exception,
@@ -288,8 +288,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Allows to specify the exception thrown by an asynchronous method.
-		/// </summary>
+        /// Allows to specify the exception thrown by an asynchronous method.
+        /// </summary>
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
             Exception exception,
@@ -303,9 +303,9 @@ namespace Moq
         }
 
         /// <summary>
-		/// <para>Allows to specify the exception thrown by an asynchronous method.</para> 
-		/// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across your unit test.</para>
-		/// </summary>
+        /// <para>Allows to specify the exception thrown by an asynchronous method.</para>
+        /// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across your unit test.</para>
+        /// </summary>
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
             Exception exception,
@@ -323,9 +323,9 @@ namespace Moq
         }
 
         /// <summary>
-		/// <para>Allows to specify the exception thrown by an asynchronous method.</para> 
-		/// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across your unit test.</para>
-		/// </summary>
+        /// <para>Allows to specify the exception thrown by an asynchronous method.</para>
+        /// <para>Use the <see cref="Random"/> argument to pass in (seeded) random generators used across your unit test.</para>
+        /// </summary>
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
             Exception exception,

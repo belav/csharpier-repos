@@ -2163,7 +2163,7 @@ namespace System.Xml.Xsl.Xslt
                 If the 'count' attribute is not specified, then it defaults to the pattern that matches any node
                 with the same node kind as the context node and, if the context node has an expanded-QName, with
                 the same expanded-QName as the context node.
-            */
+                */
             if (countPattern != null)
             {
                 return MatchPattern(countPattern, testNode);
@@ -2226,22 +2226,22 @@ namespace System.Xml.Xsl.Xslt
             /*
                 Quotation from XSLT 2.0 spec:
                 * Let $A be the node sequence selected by the expression
-                    ancestor-or-self::node()[matches-count(.)]          (level = "multiple")
-                    ancestor-or-self::node()[matches-count(.)][1]       (level = "single")
+                ancestor-or-self::node()[matches-count(.)]          (level = "multiple")
+                ancestor-or-self::node()[matches-count(.)][1]       (level = "single")
                 * Let $F be the node sequence selected by the expression
-                    ancestor-or-self::node()[matches-from(.)][1]
+                ancestor-or-self::node()[matches-from(.)][1]
                 * Let $AF be the value of
-                    $A intersect ($F/descendant-or-self::node())
+                $A intersect ($F/descendant-or-self::node())
                 * Return the result of the expression
-                    for $af in $AF return 1+count($af/preceding-sibling::node()[matches-count(.)])
-
+                for $af in $AF return 1+count($af/preceding-sibling::node()[matches-count(.)])
+                
                 NOTE: There are some distinctions between XSLT 1.0 and XSLT 2.0 specs. In our 1.0 implementation we:
                 1) Assume that the 'matches-from()' function does not match root nodes by default.
                 2) Instead of '$A intersect ($F/descendant-or-self::node())' (which, by the way,
-                   would filter out attribute and namespace nodes from $A) we calculate
-                     '$A'           if the 'from' attribute is omitted,
-                     '$A[. >> $F]'  if the 'from' attribute is present.
-            */
+                would filter out attribute and namespace nodes from $A) we calculate
+                '$A'           if the 'from' attribute is omitted,
+                '$A[. >> $F]'  if the 'from' attribute is present.
+                */
 
             QilNode? countPattern2;
             QilNode countMatches,
@@ -2300,19 +2300,19 @@ namespace System.Xml.Xsl.Xslt
                 Quotation from XSLT 2.0 spec:
                 * If the context node is a document node, return the empty sequence, ()
                 * Let $A be the node sequence selected by the expression
-                    (preceding::node()|ancestor-or-self::node())[matches-count(.)]
+                (preceding::node()|ancestor-or-self::node())[matches-count(.)]
                 * Let $F be the node sequence selected by the expression
-                    (preceding::node()|ancestor::node())[matches-from(.)][last()]
+                (preceding::node()|ancestor::node())[matches-from(.)][last()]
                 * Let $AF be the node sequence $A[. is $F or . >> $F].
                 * If $AF is empty, return the empty sequence, ()
                 * Otherwise return the value of the expression count($AF)
-
+                
                 NOTE: There are some distinctions between XSLT 1.0 and XSLT 2.0 specs. In our 1.0 implementation we:
                 1) Assume that the 'matches-from()' function does not match root nodes by default.
                 2) Instead of '$A[. is $F or . >> $F]' we calculate
-                     '$A'           if the 'from' attribute is omitted,
-                     '$A[. >> $F]'  if the 'from' attribute is present.
-            */
+                '$A'           if the 'from' attribute is omitted,
+                '$A[. >> $F]'  if the 'from' attribute is present.
+                */
 
             QilNode range,
                 fromMatches,

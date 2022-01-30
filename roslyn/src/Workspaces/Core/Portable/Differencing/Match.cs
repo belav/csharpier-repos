@@ -403,14 +403,14 @@ namespace Microsoft.CodeAnalysis.Differencing
             _twoToOne.TryGetValue(newNode, out oldNode);
 
         /// <summary>
-        /// Returns an edit script (a sequence of edits) that transform <see cref="OldRoot"/> subtree 
+        /// Returns an edit script (a sequence of edits) that transform <see cref="OldRoot"/> subtree
         /// to <see cref="NewRoot"/> subtree.
         /// </summary>
         public EditScript<TNode> GetTreeEdits() => new(this);
 
         /// <summary>
         /// Returns an edit script (a sequence of edits) that transform a sequence of nodes <paramref name="oldNodes"/>
-        /// to a sequence of nodes <paramref name="newNodes"/>. 
+        /// to a sequence of nodes <paramref name="newNodes"/>.
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="oldNodes"/> or <paramref name="newNodes"/> is a null reference.</exception>
         public IEnumerable<Edit<TNode>> GetSequenceEdits(

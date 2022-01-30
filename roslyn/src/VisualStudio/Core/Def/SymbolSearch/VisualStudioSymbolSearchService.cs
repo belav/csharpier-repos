@@ -31,7 +31,7 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
     /// <summary>
     /// A service which enables searching for packages matching certain criteria.
     /// It works against an <see cref="Microsoft.CodeAnalysis.Elfie"/> database to find results.
-    /// 
+    ///
     /// This implementation also spawns a task which will attempt to keep that database up to
     /// date by downloading patches on a daily basis.
     /// </summary>

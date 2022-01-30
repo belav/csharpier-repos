@@ -50,7 +50,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// <para>
         /// Note: this function trims all whitespace from both the beginning and the end of given <paramref name="selection"/>.
         /// The trimmed version is then used to determine relevant <see cref="SyntaxNode"/>. It also handles incomplete selections
-        /// of tokens gracefully. Over-selection containing leading comments is also handled correctly. 
+        /// of tokens gracefully. Over-selection containing leading comments is also handled correctly.
         /// </para>
         /// </summary>
         Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(

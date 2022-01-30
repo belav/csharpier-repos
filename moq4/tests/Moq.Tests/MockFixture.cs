@@ -1043,8 +1043,8 @@ namespace Moq.Tests
         }
 
         /// <summary>
-		/// Mostly testing that these casts compile, but also that there are no runtime failures.
-		/// </summary>
+        /// Mostly testing that these casts compile, but also that there are no runtime failures.
+        /// </summary>
         [Fact]
         public void CanBeCastToIMockWithCovariance()
         {

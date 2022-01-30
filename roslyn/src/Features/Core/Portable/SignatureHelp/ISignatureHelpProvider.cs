@@ -10,14 +10,14 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
     internal interface ISignatureHelpProvider
     {
         /// <summary>
-        /// Returns true if the character might trigger completion, 
-        /// e.g. '(' and ',' for method invocations 
+        /// Returns true if the character might trigger completion,
+        /// e.g. '(' and ',' for method invocations
         /// </summary>
         bool IsTriggerCharacter(char ch);
 
         /// <summary>
-        /// Returns true if the character might end a Signature Help session, 
-        /// e.g. ')' for method invocations.  
+        /// Returns true if the character might end a Signature Help session,
+        /// e.g. ')' for method invocations.
         /// </summary>
         bool IsRetriggerCharacter(char ch);
 

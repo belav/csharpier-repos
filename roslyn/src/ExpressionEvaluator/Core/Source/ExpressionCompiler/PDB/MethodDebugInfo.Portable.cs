@@ -85,8 +85,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         }
 
         /// <summary>
-        /// Maps global method token to a handle local to the current delta PDB. 
-        /// Debug tables referring to methods currently use local handles, not global handles. 
+        /// Maps global method token to a handle local to the current delta PDB.
+        /// Debug tables referring to methods currently use local handles, not global handles.
         /// See https://github.com/dotnet/roslyn/issues/16286
         /// </summary>
         private static MethodDefinitionHandle GetDeltaRelativeMethodDefinitionHandle(

@@ -283,7 +283,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// If <paramref name="uniqueSymbol"/> is set, then <paramref name="arities"/> will be null.
-        /// The only arity in that case will be encoded in the symbol. 
+        /// The only arity in that case will be encoded in the symbol.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="arities"></param>

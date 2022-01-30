@@ -238,7 +238,7 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// Add a supported instruction set to the specified list. 
+        /// Add a supported instruction set to the specified list.
         /// </summary>
         /// <returns>returns "false" if instruction set isn't valid on this architecture</returns>
         public bool AddSupportedInstructionSet(string instructionSet)
@@ -252,7 +252,7 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// Removes a supported instruction set to the specified list. 
+        /// Removes a supported instruction set to the specified list.
         /// </summary>
         /// <returns>returns "false" if instruction set isn't valid on this architecture</returns>
         public bool RemoveInstructionSetSupport(string instructionSet)

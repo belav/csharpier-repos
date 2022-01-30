@@ -606,15 +606,15 @@ namespace System.IO.Tests
         [Fact]
         public void DotDotAsPath_WhenCurrentDirectoryIsRoot_DoesNotThrow()
         {
-            string root = Path.GetPathRoot(Directory.GetCurrentDirectory());
-
-            using (CurrentDirectoryContext context = new CurrentDirectoryContext(root))
-            {
-                DirectoryInfo result = Create("..");
-
-                Assert.True(Directory.Exists(result.FullName));
-                Assert.Equal(root, result.FullName);
-            }
+        string root = Path.GetPathRoot(Directory.GetCurrentDirectory());
+        
+        using (CurrentDirectoryContext context = new CurrentDirectoryContext(root))
+        {
+        DirectoryInfo result = Create("..");
+        
+        Assert.True(Directory.Exists(result.FullName));
+        Assert.Equal(root, result.FullName);
+        }
         }
         */
 #endif

@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         /// <summary>
         /// Allows asking semantic questions about a TypeSyntax (or its descendants) within a member, that did not appear in the original source code.
-        /// Typically, an instance is obtained by a call to SemanticModel.TryGetSpeculativeSemanticModel. 
+        /// Typically, an instance is obtained by a call to SemanticModel.TryGetSpeculativeSemanticModel.
         /// </summary>
         private sealed class SpeculativeMemberSemanticModel : MemberSemanticModel
         {

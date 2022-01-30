@@ -100,7 +100,7 @@ namespace Microsoft.CodeAnalysis
         );
 
         /// <summary>
-        /// Given a message identifier (e.g., CS0219), severity, warning as error and a culture, 
+        /// Given a message identifier (e.g., CS0219), severity, warning as error and a culture,
         /// get the entire prefix (e.g., "error CS0219: Warning as Error:" for C# or "error BC42024:" for VB) used on error messages.
         /// </summary>
         public abstract string GetMessagePrefix(

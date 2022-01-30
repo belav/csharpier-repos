@@ -60,7 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         }
 
         /// <summary>
-        /// Given a syntax token determines a text span delimited by the closest applicable sequence points 
+        /// Given a syntax token determines a text span delimited by the closest applicable sequence points
         /// encompassing the token.
         /// </summary>
         /// <remarks>
@@ -821,7 +821,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         }
 
         /// <summary>
-        /// There are a few places where we allow breakpoints on expressions. 
+        /// There are a few places where we allow breakpoints on expressions.
         ///
         /// 1) When the expression is the body of a lambda/method/operator/property/indexer.
         /// 2) The expression is a breakable expression inside a query expression.
@@ -882,7 +882,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         /// <summary>
         /// Returns a span that contains all possible breakpoint spans of top-level <paramref name="declaration"/>
         /// and no breakpoint spans that do not belong to the <paramref name="declaration"/>.
-        /// 
+        ///
         /// Returns default if the declaration does not have any breakpoint spans.
         /// </summary>
         internal static TextSpan GetEnvelope(SyntaxNode declaration)

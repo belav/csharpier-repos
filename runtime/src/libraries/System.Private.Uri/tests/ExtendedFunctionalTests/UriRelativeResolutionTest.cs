@@ -122,9 +122,9 @@ namespace System.PrivateUri.Tests
            considered to be a loophole in prior specifications of partial URI
            [RFC1630].  Its use should be avoided but is allowed for backward
            compatibility.
-
-              "http:g"        =  "http:g"         ; for strict parsers
-                              /  "http://a/b/c/g" ; for backward compatibility "*/
+           
+           "http:g"        =  "http:g"         ; for strict parsers
+           /  "http://a/b/c/g" ; for backward compatibility "*/
         public void Uri_Relative_BaseVsSimplePartialPathWithScheme_ReturnsPartialPathWithScheme()
         {
             string partialPath = "scheme:p1";

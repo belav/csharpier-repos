@@ -1021,7 +1021,7 @@ class C {
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="semanticModel"></param>
         /// <param name="expr"></param>

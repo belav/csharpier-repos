@@ -14,8 +14,8 @@ using Microsoft.CodeAnalysis.Tags;
 namespace Microsoft.CodeAnalysis.AddPackage
 {
     /// <summary>
-    /// This is the top level 'Install Nuget Package' code action we show in 
-    /// the lightbulb.  It will have children to 'Install Latest', 
+    /// This is the top level 'Install Nuget Package' code action we show in
+    /// the lightbulb.  It will have children to 'Install Latest',
     /// 'Install Version 'X' ..., and 'Install with package manager'.
     /// </summary>
     internal class InstallPackageParentCodeAction : CodeAction.CodeActionWithNestedActions

@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// A LookupResult summarizes the result of a name lookup within a scope It also allows
     /// combining name lookups from different scopes in an easy way.
-    /// 
+    ///
     /// A LookupResult can be ONE OF:
     ///    empty - nothing found.
     ///    a viable result - this kind of result prevents lookup into further scopes of lower priority.
@@ -31,33 +31,33 @@ namespace Microsoft.CodeAnalysis.CSharp
     ///    a non-viable result - a result that means that the search continues into further scopes of lower priority for
     ///                          a viable or non-accessible result. An error is attached with the error that indicates
     ///                          why the result is non-viable.  A typical reason would be that it is the wrong kind of symbol.
-    /// 
+    ///
     /// Note that the class is poolable so its instances can be obtained from a pool via GetInstance.
     /// Also it is a good idea to call Free on instances after they no longer needed.
-    /// 
+    ///
     /// The typical pattern is "caller allocates / caller frees" -
-    ///    
+    ///
     ///    var result = LookupResult.GetInstance();
-    ///  
+    ///
     ///    scope.Lookup(result, "goo");
     ///    ... use result ...
-    ///         
+    ///
     ///    result.Clear();
     ///    anotherScope.Lookup(result, "moo");
     ///    ... use result ...
-    /// 
+    ///
     ///    result.Free();   //result and its content is invalid after this
-    ///    
-    /// 
-    /// 
+    ///
+    ///
+    ///
     /// </summary>
     /// <remarks>
     /// Currently LookupResult is intended only for name lookup, not for overload resolution. It is
     /// not clear if overload resolution will work with the structure as is, require enhancements,
     /// or be best served by an alternate mechanism.
-    /// 
+    ///
     /// We might want to extend this to a more general priority scheme.
-    /// 
+    ///
     /// </remarks>
     internal sealed class LookupResult
     {
@@ -252,7 +252,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Merge another result with this one, with the symbols combined if both
-        /// this and other are viable. Otherwise the highest priority result wins (this if equal 
+        /// this and other are viable. Otherwise the highest priority result wins (this if equal
         /// priority and non-viable.)
         /// </summary>
         internal void MergeEqual(LookupResult other)

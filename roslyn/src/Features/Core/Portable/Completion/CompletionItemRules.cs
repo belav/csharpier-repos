@@ -11,17 +11,17 @@ namespace Microsoft.CodeAnalysis.Completion
         Default,
 
         /// <summary>
-        /// If no text has been typed, the item should be soft selected. This is appropriate for 
-        /// completion providers that want to provide suggestions that shouldn't interfere with 
+        /// If no text has been typed, the item should be soft selected. This is appropriate for
+        /// completion providers that want to provide suggestions that shouldn't interfere with
         /// typing.  For example a provider that comes up on space might offer items that are soft
-        /// selected so that an additional space (or other puntuation character) will not then 
+        /// selected so that an additional space (or other puntuation character) will not then
         /// commit that item.
         /// </summary>
         SoftSelection,
 
         /// <summary>
         /// If no text has been typed, the item should be hard selected.  This is appropriate for
-        /// completion providers that are providing suggestions the user is nearly certain to 
+        /// completion providers that are providing suggestions the user is nearly certain to
         /// select.  Because the item is hard selected, any commit characters typed after it will
         /// cause it to be committed.
         /// </summary>

@@ -798,15 +798,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             /*
             Effectively, we pick the best item from a set using a non-transitive ranking function
             So, pick the first item (candidate) and compare against next (contender), if there is
-                no next, goto phase 2
+            no next, goto phase 2
             If first is better, move to next contender, if none proceed to phase 2
             If second is better, make the contender the candidate and make the item following
-                contender into the new contender, if there is none, goto phase 2
+            contender into the new contender, if there is none, goto phase 2
             If neither, make contender+1 into candidate and contender+2 into contender, if possible,
-                otherwise, if contender was last, return null, otherwise if new candidate is last,
-                goto phase 2
+            otherwise, if contender was last, return null, otherwise if new candidate is last,
+            goto phase 2
             Phase 2: compare all items before candidate to candidate
-                If candidate always better, return it, otherwise return null
+            If candidate always better, return it, otherwise return null
             */
 
             // Record two method that are ambiguous for error reporting.

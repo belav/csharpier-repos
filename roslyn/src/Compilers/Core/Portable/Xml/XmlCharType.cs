@@ -19,7 +19,7 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis
 {
-    /// 
+    ///
     /// The XmlCharType class is used for quick character type recognition
     /// which is optimized for the first 127 ascii characters.
     ///

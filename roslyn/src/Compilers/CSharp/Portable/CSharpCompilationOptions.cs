@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Represents various options that affect compilation, such as 
+    /// Represents various options that affect compilation, such as
     /// whether to emit an executable or a library, whether to optimize
     /// generated code, and so on.
     /// </summary>
@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public ImmutableArray<string> Usings { get; private set; }
 
         /// <summary>
-        /// Flags applied to the top-level binder created for each syntax tree in the compilation 
+        /// Flags applied to the top-level binder created for each syntax tree in the compilation
         /// as well as for the binder of global imports.
         /// </summary>
         internal BinderFlags TopLevelBinderFlags { get; private set; }

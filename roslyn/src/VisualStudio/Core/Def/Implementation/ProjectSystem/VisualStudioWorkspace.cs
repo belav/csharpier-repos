@@ -74,7 +74,7 @@ namespace Microsoft.VisualStudio.LanguageServices
         internal override bool IgnoreUnchangeableDocumentsWhenApplyingChanges => true;
 
         /// <summary>
-        /// Returns the hierarchy for a given project. 
+        /// Returns the hierarchy for a given project.
         /// </summary>
         /// <param name="projectId">The <see cref="ProjectId"/> for the project.</param>
         /// <returns>The <see cref="IVsHierarchy"/>, or null if the project doesn't have one.</returns>

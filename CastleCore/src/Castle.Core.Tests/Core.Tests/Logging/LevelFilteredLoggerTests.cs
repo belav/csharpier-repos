@@ -22,8 +22,8 @@ namespace Castle.Core.Logging.Tests
     using Castle.Core.Logging;
 
     /// <summary>
-	/// Contains all tests relating to the properties.
-	/// </summary>
+    /// Contains all tests relating to the properties.
+    /// </summary>
     [TestFixture]
     public class PropertyTests
     {
@@ -304,8 +304,8 @@ namespace Castle.Core.Logging.Tests
     }
 
     /// <summary>
-	/// Contains all tests relating to the logging methods.
-	/// </summary>
+    /// Contains all tests relating to the logging methods.
+    /// </summary>
     [TestFixture]
     public class LoggingTests
     {

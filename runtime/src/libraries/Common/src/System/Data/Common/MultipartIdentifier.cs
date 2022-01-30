@@ -21,7 +21,7 @@ namespace System.Data.Common
             would set a or b as a starting quote character.
             If a is the starting quote char then c would be the ending quote char
             otherwise if b is the starting quote char then d would be the ending quote character.
-        */
+            */
         internal static string?[] ParseMultipartIdentifier(
             string name,
             string leftQuote,

@@ -157,12 +157,12 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
             /// </summary>
             /// <remarks>
             /// This class assumes that we more or less have two kinds of edges in the LSIF world:
-            /// 
+            ///
             /// 1. the resultSet might point to a node that doesn't really have any data, but simply points to other data like referenceResults.
             ///    In this case, it's important for clients to get to that Id.
             /// 2. the resultSet points to a node that itself has data, but nobody needs to know the ID, like a hover result. In this case, those results
             ///    are often expensive to compute, but we do want to record that somebody is adding them somewhere.
-            /// 
+            ///
             /// We record the first kind of this in this dictionary with a non-null Id, and the second kind with a null ID. We could conceptually store
             /// two dictionaries for this, but that will add memory pressure and also limit the catching of mistakes if people cross these two APIs.
             /// </remarks>

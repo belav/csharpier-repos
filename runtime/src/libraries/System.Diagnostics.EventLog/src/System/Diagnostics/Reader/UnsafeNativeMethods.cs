@@ -495,9 +495,9 @@ namespace Microsoft.Win32
         /*
         [DllImport(WEVTAPI, EntryPoint = "EvtClose", SetLastError = true)]
         public static extern bool EvtClose(
-                            IntPtr eventHandle
-                                           );
-         */
+        IntPtr eventHandle
+        );
+        */
 
         [DllImport(WEVTAPI, CharSet = CharSet.Auto, SetLastError = true)]
         internal static extern bool EvtGetEventInfo(

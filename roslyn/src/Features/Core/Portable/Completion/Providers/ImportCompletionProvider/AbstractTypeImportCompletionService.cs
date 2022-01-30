@@ -219,8 +219,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
         }
 
         /// <summary>
-        /// Get appropriate completion items for all the visible top level types from given project. 
-        /// This method is intended to be used for getting types from source only, so the project must support compilation. 
+        /// Get appropriate completion items for all the visible top level types from given project.
+        /// This method is intended to be used for getting types from source only, so the project must support compilation.
         /// For getting types from PE, use <see cref="TryGetCacheForPEReference"/>.
         /// </summary>
         private async Task<GetCacheResult?> GetCacheForProjectAsync(

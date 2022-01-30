@@ -221,7 +221,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// This works the same as GetRed, but intended to be used in lists
-        /// The only difference is that the public parent of the node is not the list, 
+        /// The only difference is that the public parent of the node is not the list,
         /// but the list's parent. (element's grand parent).
         /// </summary>
         internal SyntaxNode? GetRedElement(ref SyntaxNode? element, int slot)
@@ -382,7 +382,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns true if these two nodes are considered "incrementally identical".  An incrementally identical node
         /// occurs when a <see cref="SyntaxTree"/> is incrementally parsed using <see cref="SyntaxTree.WithChangedText"/>
         /// and the incremental parser is able to take the node from the original tree and use it in its entirety in the
-        /// new tree.  In this case, the <see cref="SyntaxNode.ToFullString()"/> of each node will be the same, though 
+        /// new tree.  In this case, the <see cref="SyntaxNode.ToFullString()"/> of each node will be the same, though
         /// they could have different parents, and may occur at different positions in their respective trees.  If two nodes are
         /// incrementally identical, all children of each node will be incrementally identical as well.
         /// </summary>
@@ -453,7 +453,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Determines whether this node or any of its descendant nodes, tokens or trivia have any diagnostics on them. 
+        /// Determines whether this node or any of its descendant nodes, tokens or trivia have any diagnostics on them.
         /// </summary>
         public bool ContainsDiagnostics
         {
@@ -662,7 +662,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets node at given node index. 
+        /// Gets node at given node index.
         /// This WILL force node creation if node has not yet been created.
         /// Can still return null for invalid slot numbers
         /// </summary>
@@ -699,7 +699,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets a list of ancestor nodes (including this node) 
+        /// Gets a list of ancestor nodes (including this node)
         /// </summary>
         public IEnumerable<SyntaxNode> AncestorsAndSelf(bool ascendOutOfTrivia = true)
         {
@@ -973,7 +973,7 @@ namespace Microsoft.CodeAnalysis
 
         #region Token Lookup
         /// <summary>
-        /// Finds a descendant token of this node whose span includes the supplied position. 
+        /// Finds a descendant token of this node whose span includes the supplied position.
         /// </summary>
         /// <param name="position">The character position of the token relative to the beginning of the file.</param>
         /// <param name="findInsideTrivia">
@@ -1259,7 +1259,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets all the annotations with the specified annotation kind. 
+        /// Gets all the annotations with the specified annotation kind.
         /// </summary>
         public IEnumerable<SyntaxAnnotation> GetAnnotations(string annotationKind)
         {
@@ -1267,7 +1267,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets all the annotations with the specified annotation kinds. 
+        /// Gets all the annotations with the specified annotation kinds.
         /// </summary>
         public IEnumerable<SyntaxAnnotation> GetAnnotations(IEnumerable<string> annotationKinds)
         {
@@ -1436,7 +1436,7 @@ namespace Microsoft.CodeAnalysis
         /// <param name="topLevel"> If true then the nodes are equivalent if the contained nodes and
         /// tokens declaring metadata visible symbolic information are equivalent, ignoring any
         /// differences of nodes inside method bodies or initializer expressions, otherwise all
-        /// nodes and tokens must be equivalent. 
+        /// nodes and tokens must be equivalent.
         /// </param>
         public bool IsEquivalentTo(SyntaxNode node, bool topLevel = false)
         {
@@ -1485,7 +1485,7 @@ namespace Microsoft.CodeAnalysis
         protected abstract SyntaxTree SyntaxTreeCore { get; }
 
         /// <summary>
-        /// Finds a descendant token of this node whose span includes the supplied position. 
+        /// Finds a descendant token of this node whose span includes the supplied position.
         /// </summary>
         /// <param name="position">The character position of the token relative to the beginning of the file.</param>
         /// <param name="findInsideTrivia">
@@ -1561,11 +1561,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Finds a descendant token of this node whose span includes the supplied position. 
+        /// Finds a descendant token of this node whose span includes the supplied position.
         /// </summary>
         /// <param name="position">The character position of the token relative to the beginning of the file.</param>
         /// <param name="stepInto">
-        /// Applied on every structured trivia. Return false if the tokens included in the trivia should be skipped. 
+        /// Applied on every structured trivia. Return false if the tokens included in the trivia should be skipped.
         /// Pass null to skip all structured trivia.
         /// </param>
         protected virtual SyntaxToken FindTokenCore(int position, Func<SyntaxTrivia, bool> stepInto)
@@ -1692,16 +1692,16 @@ namespace Microsoft.CodeAnalysis
         /// <param name="topLevel"> If true then the nodes are equivalent if the contained nodes and
         /// tokens declaring metadata visible symbolic information are equivalent, ignoring any
         /// differences of nodes inside method bodies or initializer expressions, otherwise all
-        /// nodes and tokens must be equivalent. 
+        /// nodes and tokens must be equivalent.
         /// </param>
         protected abstract bool IsEquivalentToCore(SyntaxNode node, bool topLevel = false);
 
         #endregion
 
         /// <summary>
-        /// Whether or not this parent node wants its child SyntaxList node to be 
+        /// Whether or not this parent node wants its child SyntaxList node to be
         /// converted to a Weak-SyntaxList when creating the red-node equivalent.
-        /// For example, in C# the statements of a Block-Node that is parented by a 
+        /// For example, in C# the statements of a Block-Node that is parented by a
         /// MethodDeclaration will be held weakly.
         /// </summary>
         internal virtual bool ShouldCreateWeakList()

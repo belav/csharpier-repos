@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Generates a new GUID on demand.
-	/// </summary>
+    /// Generates a new GUID on demand.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = false)]
     public class NewGuidAttribute : DictionaryBehaviorAttribute, IDictionaryPropertyGetter
     {

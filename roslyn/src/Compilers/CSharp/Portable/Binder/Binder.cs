@@ -125,9 +125,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <remarks>
         /// Spec 7.5.12:
-        /// For non-constant expressions (expressions that are evaluated at run-time) that are not 
+        /// For non-constant expressions (expressions that are evaluated at run-time) that are not
         /// enclosed by any checked or unchecked operators or statements, the default overflow checking
-        /// context is unchecked unless external factors (such as compiler switches and execution 
+        /// context is unchecked unless external factors (such as compiler switches and execution
         /// environment configuration) call for checked evaluation.
         /// </remarks>
         protected bool CheckOverflowAtRuntime
@@ -145,9 +145,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <remarks>
         /// Spec 7.5.12:
-        /// For constant expressions (expressions that can be fully evaluated at compile-time), 
-        /// the default overflow checking context is always checked. Unless a constant expression 
-        /// is explicitly placed in an unchecked context, overflows that occur during the compile-time 
+        /// For constant expressions (expressions that can be fully evaluated at compile-time),
+        /// the default overflow checking context is always checked. Unless a constant expression
+        /// is explicitly placed in an unchecked context, overflows that occur during the compile-time
         /// evaluation of the expression always cause compile-time errors.
         /// </remarks>
         internal bool CheckOverflowAtCompileTime
@@ -957,7 +957,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Report diagnostics that should be reported when using a synthesized attribute. 
+        /// Report diagnostics that should be reported when using a synthesized attribute.
         /// </summary>
         internal static void ReportUseSiteDiagnosticForSynthesizedAttribute(
             CSharpCompilation compilation,

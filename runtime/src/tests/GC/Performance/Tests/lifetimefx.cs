@@ -36,7 +36,7 @@ namespace LifeTimeFX
     /// implementation.
     /// The only restriction on the ObjectContainer is that the objects contained in it must implement
     /// LifeTime interface.
-    /// Right now we have a simple array container as a stock implementation for that. for more information 
+    /// Right now we have a simple array container as a stock implementation for that. for more information
     /// see code:#ArrayContainer
     /// </summary>
     /// <param name="o"></param>

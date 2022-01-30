@@ -67,7 +67,7 @@ namespace Microsoft.Cci
     }
 
     /// <summary>
-    /// Modifies the set of allowed values for a type, or the semantics of operations allowed on those values. 
+    /// Modifies the set of allowed values for a type, or the semantics of operations allowed on those values.
     /// Custom modifiers are not associated directly with types, but rather with typed storage locations for values.
     /// </summary>
     internal interface ICustomModifier
@@ -89,12 +89,12 @@ namespace Microsoft.Cci
     internal interface IParameterTypeInformation : IParameterListEntry
     {
         /// <summary>
-        /// The list of custom modifiers, if any, associated with the parameter type. 
+        /// The list of custom modifiers, if any, associated with the parameter type.
         /// </summary>
         ImmutableArray<ICustomModifier> CustomModifiers { get; }
 
         /// <summary>
-        /// The list of custom modifiers, if any, associated with the ref modifier. 
+        /// The list of custom modifiers, if any, associated with the ref modifier.
         /// </summary>
         ImmutableArray<ICustomModifier> RefCustomModifiers { get; }
 
@@ -584,7 +584,7 @@ namespace Microsoft.Cci
         bool IsEnum { get; }
 
         /// <summary>
-        /// True if the type is a value type. 
+        /// True if the type is a value type.
         /// Value types are sealed and extend System.ValueType or System.Enum.
         /// A type parameter for which MustBeValueType (the struct constraint in C#) is true also returns true for this property.
         /// </summary>
@@ -739,7 +739,7 @@ namespace Microsoft.Cci
         Private = 1,
 
         /// <summary>
-        /// The member is visible only within the intersection of its family (its own type and any subtypes) and assembly. 
+        /// The member is visible only within the intersection of its family (its own type and any subtypes) and assembly.
         /// </summary>
         FamilyAndAssembly = 2,
 
@@ -754,7 +754,7 @@ namespace Microsoft.Cci
         Family = 4,
 
         /// <summary>
-        /// The member is visible only within the union of its family and assembly. 
+        /// The member is visible only within the union of its family and assembly.
         /// </summary>
         FamilyOrAssembly = 5,
 

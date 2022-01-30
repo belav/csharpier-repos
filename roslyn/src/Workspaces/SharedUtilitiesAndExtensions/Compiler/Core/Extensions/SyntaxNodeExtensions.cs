@@ -301,7 +301,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         /// <summary>
         /// create a new root node from the given root after adding annotations to the tokens
-        /// 
+        ///
         /// tokens should belong to the given root
         /// </summary>
         public static SyntaxNode AddAnnotations(
@@ -323,7 +323,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         /// <summary>
         /// create a new root node from the given root after adding annotations to the nodes
-        /// 
+        ///
         /// nodes should belong to the given root
         /// </summary>
         public static SyntaxNode AddAnnotations(
@@ -1081,7 +1081,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         /// <summary>
-        /// Gets a list of ancestor nodes (including this node) 
+        /// Gets a list of ancestor nodes (including this node)
         /// </summary>
         public static ValueAncestorsAndSelfEnumerable ValueAncestorsAndSelf(
             this SyntaxNode syntaxNode,

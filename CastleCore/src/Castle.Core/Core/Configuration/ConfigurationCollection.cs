@@ -18,21 +18,21 @@ namespace Castle.Core.Configuration
     using System.Collections.Generic;
 
     /// <summary>
-	/// A collection of <see cref="IConfiguration"/> objects.
-	/// </summary>
+    /// A collection of <see cref="IConfiguration"/> objects.
+    /// </summary>
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif
     public class ConfigurationCollection : List<IConfiguration>
     {
         /// <summary>
-		/// Creates a new instance of <c>ConfigurationCollection</c>.
-		/// </summary>
+        /// Creates a new instance of <c>ConfigurationCollection</c>.
+        /// </summary>
         public ConfigurationCollection() { }
 
         /// <summary>
-		/// Creates a new instance of <c>ConfigurationCollection</c>.
-		/// </summary>
+        /// Creates a new instance of <c>ConfigurationCollection</c>.
+        /// </summary>
         public ConfigurationCollection(IEnumerable<IConfiguration> value) : base(value) { }
 
         public IConfiguration this[string name]

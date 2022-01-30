@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis
     /// or double representation, which considers all digits significant and correctly rounds according to
     /// the IEEE round-to-nearest-ties-to-even mode. This code does not support a leading sign character,
     /// as that is not part of the C# or VB floating-point literal lexical syntax.
-    /// 
+    ///
     /// If you change this code, please run the set of long-running random tests in the solution
     /// RandomRealParserTests.sln. That solution is not included in Roslyn.sln as it is Windows-specific.
     /// </summary>
@@ -80,23 +80,23 @@ namespace Microsoft.CodeAnalysis
             public abstract ulong Infinity { get; }
 
             /// <summary>
-            /// Converts the floating point value 0.mantissa * 2^exponent into the  
-            /// correct form for the FloatingPointType and stores the bits of the resulting value  
-            /// into the result object.  
-            /// The caller must ensure that the mantissa and exponent are correctly computed  
-            /// such that either [1] the most significant bit of the mantissa is in the  
-            /// correct position for the FloatingType, or [2] the exponent has been correctly  
-            /// adjusted to account for the shift of the mantissa that will be required.  
-            ///  
-            /// This function correctly handles range errors and stores a zero or infinity in  
-            /// the result object on underflow and overflow errors, respectively.  This  
-            /// function correctly forms denormal numbers when required.  
-            ///  
-            /// If the provided mantissa has more bits of precision than can be stored in the  
-            /// result object, the mantissa is rounded to the available precision.  Thus, if  
-            /// possible, the caller should provide a mantissa with at least one more bit of  
-            /// precision than is required, to ensure that the mantissa is correctly rounded.  
-            /// (The caller should not round the mantissa before calling this function.)  
+            /// Converts the floating point value 0.mantissa * 2^exponent into the
+            /// correct form for the FloatingPointType and stores the bits of the resulting value
+            /// into the result object.
+            /// The caller must ensure that the mantissa and exponent are correctly computed
+            /// such that either [1] the most significant bit of the mantissa is in the
+            /// correct position for the FloatingType, or [2] the exponent has been correctly
+            /// adjusted to account for the shift of the mantissa that will be required.
+            ///
+            /// This function correctly handles range errors and stores a zero or infinity in
+            /// the result object on underflow and overflow errors, respectively.  This
+            /// function correctly forms denormal numbers when required.
+            ///
+            /// If the provided mantissa has more bits of precision than can be stored in the
+            /// result object, the mantissa is rounded to the available precision.  Thus, if
+            /// possible, the caller should provide a mantissa with at least one more bit of
+            /// precision than is required, to ensure that the mantissa is correctly rounded.
+            /// (The caller should not round the mantissa before calling this function.)
             /// </summary>
             /// <param name="initialMantissa">The bits of the mantissa</param>
             /// <param name="initialExponent">The exponent</param>
@@ -280,12 +280,12 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// This type is used to hold a partially-parsed string representation of a  
-        /// floating point number.  The number is stored in the following form:  
+        /// This type is used to hold a partially-parsed string representation of a
+        /// floating point number.  The number is stored in the following form:
         ///  <pre>
         ///     0.Mantissa * 10^Exponent
         ///  </pre>
-        /// The Mantissa buffer stores the mantissa digits as characters in a string.  
+        /// The Mantissa buffer stores the mantissa digits as characters in a string.
         /// The MantissaCount gives the number of digits present in the Mantissa buffer.
         /// There shall be neither leading nor trailing zero digits in the Mantissa.
         /// Note that this represents only nonnegative floating-point literals; the
@@ -619,11 +619,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// This function is part of the fast track for integer floating point strings.  
-        /// It takes an integer stored as an array of bytes (lsb first) and converts the value into its FloatingType  
-        /// representation, storing the bits into "result".  If the value is not  
-        /// representable, +/-infinity is stored and overflow is reported (since this  
-        /// function only deals with integers, underflow is impossible).  
+        /// This function is part of the fast track for integer floating point strings.
+        /// It takes an integer stored as an array of bytes (lsb first) and converts the value into its FloatingType
+        /// representation, storing the bits into "result".  If the value is not
+        /// representable, +/-infinity is stored and overflow is reported (since this
+        /// function only deals with integers, underflow is impossible).
         /// </summary>
         /// <param name="integerValueAsBytes">the bits of the integer, least significant bits first</param>
         /// <param name="integerBitsOfPrecision">the number of bits of precision in integerValueAsBytes</param>
@@ -690,7 +690,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Return the number of significant bits set. 
+        /// Return the number of significant bits set.
         /// </summary>
         private static uint CountSignificantBits(ulong data)
         {
@@ -705,7 +705,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Return the number of significant bits set. 
+        /// Return the number of significant bits set.
         /// </summary>
         private static uint CountSignificantBits(byte data)
         {
@@ -720,7 +720,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Return the number of significant bits set. 
+        /// Return the number of significant bits set.
         /// </summary>
         private static uint CountSignificantBits(BigInteger data, out byte[] dataBytes)
         {
@@ -742,7 +742,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Return the number of significant bits set. 
+        /// Return the number of significant bits set.
         /// </summary>
         private static uint CountSignificantBits(BigInteger data)
         {
@@ -751,10 +751,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Computes value / 2^shift, then rounds the result according to the current  
-        /// rounding mode.  By the time we call this function, we will already have  
-        /// discarded most digits.  The caller must pass true for has_zero_tail if  
-        /// all discarded bits were zeroes.  
+        /// Computes value / 2^shift, then rounds the result according to the current
+        /// rounding mode.  By the time we call this function, we will already have
+        /// discarded most digits.  The caller must pass true for has_zero_tail if
+        /// all discarded bits were zeroes.
         /// </summary>
         /// <param name="value">The value to shift</param>
         /// <param name="shift">The amount of shift</param>
@@ -784,15 +784,15 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Determines whether a mantissa should be rounded up in the  
-        /// round-to-nearest-ties-to-even mode given [1] the value of the least  
-        /// significant bit of the mantissa, [2] the value of the next bit after  
-        /// the least significant bit (the "round" bit) and [3] whether any  
-        /// trailing bits after the round bit are set.  
-        ///  
-        /// The mantissa is treated as an unsigned integer magnitude.  
-        ///  
-        /// For this function, "round up" is defined as "increase the magnitude" of the  
+        /// Determines whether a mantissa should be rounded up in the
+        /// round-to-nearest-ties-to-even mode given [1] the value of the least
+        /// significant bit of the mantissa, [2] the value of the next bit after
+        /// the least significant bit (the "round" bit) and [3] whether any
+        /// trailing bits after the round bit are set.
+        ///
+        /// The mantissa is treated as an unsigned integer magnitude.
+        ///
+        /// For this function, "round up" is defined as "increase the magnitude" of the
         /// mantissa.
         /// </summary>
         /// <param name="lsbBit">the least-significant bit of the representable value</param>

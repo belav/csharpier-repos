@@ -177,7 +177,7 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
         /// for a repository has the source synchronized to the S:\source1, but we want to do analysis on a different machine which has
         /// the source in a folder S:\source2. If we have the original compilation command line when it was built under S:\source1, and
         /// know that any time we see S:\source1 we should actually read the file out of S:\source2, then we analyze on a separate machine.
-        /// 
+        ///
         /// This is used to enable some internal-to-Microsoft build environments which have a mechanism to run "analysis" passes like
         /// the LSIF tool independent from the main build machines, and can restore source and build artifacts to provide the environment
         /// that is close enough to match the original.

@@ -15,7 +15,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// An information that should be reported at a call site of a symbol. 
+    /// An information that should be reported at a call site of a symbol.
     /// </summary>
     internal readonly struct UseSiteInfo<TAssemblySymbol>
         where TAssemblySymbol : class, IAssemblySymbolInternal
@@ -517,11 +517,11 @@ namespace Microsoft.CodeAnalysis
         where TAssemblySymbol : class, IAssemblySymbolInternal
     {
         /// <summary>
-        /// Either 
+        /// Either
         /// - null (meaning no diagnostic info and dependencies), or
         /// - a <see cref="DiagnosticInfo"/>, or
         /// - dependencies as a <see cref="ImmutableHashSet{TAssemblySymbol}"/>, or
-        /// - a <see cref="Boxed"/> tuple of a <see cref="DiagnosticInfo"/> and a <see cref="ImmutableHashSet{TAssemblySymbol}"/>. 
+        /// - a <see cref="Boxed"/> tuple of a <see cref="DiagnosticInfo"/> and a <see cref="ImmutableHashSet{TAssemblySymbol}"/>.
         /// </summary>
         private object? _info;
 

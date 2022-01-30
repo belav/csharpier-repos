@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
     /// <summary>
     /// trivia factory.
-    /// 
+    ///
     /// it will cache some commonly used trivia to reduce memory footprint and heap allocation
     /// </summary>
     internal partial class TriviaDataFactory : AbstractTriviaDataFactory

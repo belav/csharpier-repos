@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 
         /// <summary>
         /// Creates a <see cref="KeyValueLogMessage"/> with default <see cref="LogLevel.Information"/>, since
-        /// KV Log Messages are by default more informational and should be logged as such. 
+        /// KV Log Messages are by default more informational and should be logged as such.
         /// </summary>
         public static KeyValueLogMessage Create(
             Action<Dictionary<string, object?>> propertySetter,

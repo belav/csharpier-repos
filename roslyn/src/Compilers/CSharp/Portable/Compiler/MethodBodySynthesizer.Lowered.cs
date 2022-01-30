@@ -170,7 +170,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Given a SynthesizedExplicitImplementationMethod (effectively a tuple (interface method, implementing method, implementing type)),
         /// construct a BoundBlock body.  Consider the tuple (Interface.Goo, Base.Goo, Derived).  The generated method will look like:
-        /// 
+        ///
         /// R Interface.Goo&lt;T1, T2, ...&gt;(A1 a1, A2 a2, ...)
         /// {
         ///     //don't return the output if the return type is void
@@ -323,7 +323,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     }
 
     /// <summary>
-    /// Contains methods related to synthesizing bound nodes in lowered form 
+    /// Contains methods related to synthesizing bound nodes in lowered form
     /// that does not need any processing before passing to codegen
     /// </summary>
     internal static class MethodBodySynthesizer

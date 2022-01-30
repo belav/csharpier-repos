@@ -70,7 +70,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         }
 
         /// <summary>
-        /// for prototype, we won't care about what solution is actually fully loaded. 
+        /// for prototype, we won't care about what solution is actually fully loaded.
         /// we will just see whatever solution VS has at this point of time has actually fully loaded
         /// </summary>
         private class Service : IWorkspaceStatusService

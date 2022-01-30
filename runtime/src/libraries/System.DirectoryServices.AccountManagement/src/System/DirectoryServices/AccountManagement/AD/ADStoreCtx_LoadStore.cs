@@ -1104,55 +1104,55 @@ namespace System.DirectoryServices.AccountManagement
 
         /*/
         ///*******  Mapping table for perf testing...
-                static object[,] propertyMappingTableRaw =
-                {
-                    // PropertyName                          AD property             Converter(LDAP->PAPI)                                    Converter(PAPI->LDAP)
-                    {PropertyNames.PrincipalDisplayName,     "displayName",          new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-                    {PropertyNames.PrincipalDescription,     "description",          new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
+        static object[,] propertyMappingTableRaw =
+        {
+        // PropertyName                          AD property             Converter(LDAP->PAPI)                                    Converter(PAPI->LDAP)
+        {PropertyNames.PrincipalDisplayName,     "displayName",          new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
+        {PropertyNames.PrincipalDescription,     "description",          new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
         //            {PropertyNames.PrincipalDistinguishedName,  "distinguishedName",    null, null},
-                    {PropertyNames.PrincipalSid,  "objectSid",            new FromLdapConverterDelegate(SidFromLdapConverter),  null},
-                    {PropertyNames.PrincipalSamAccountName,  "samAccountName",       new FromLdapConverterDelegate(StringFromLdapConverter), new ToLdapConverterDelegate(StringToLdapConverter)},
-                    {PropertyNames.PrincipalUserPrincipalName,  "userPrincipalName",    new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-                    {PropertyNames.PrincipalGuid,  "objectGuid",           new FromLdapConverterDelegate(GuidFromLdapConverter),   null},
-                    {PropertyNames.PrincipalStructuralObjectClass,  "objectClass",           null, null},
-                    {PropertyNames.PrincipalName,  "name",           new FromLdapConverterDelegate(StringFromLdapConverter), new ToLdapConverterDelegate(StringToLdapConverter)},
-                    {PropertyNames.PrincipalExtensionCache,  null,  null, null},
-
-                    {PropertyNames.AuthenticablePrincipalEnabled,      "userAccountControl", null, null},
-                  {PropertyNames.AuthenticablePrincipalCertificates, "userCertificate",    null, null},
-
-                    {PropertyNames.GroupIsSecurityGroup,   "groupType", null, null},
-                                {PropertyNames.GroupGroupScope, "groupType", null, null},
-                   //
-                              {PropertyNames.UserGivenName,             "givenName",        null, null},
-                               {PropertyNames.UserMiddleName,            "middleName",       null, null},
-                                {PropertyNames.UserSurname,               "sn",               null, null},
-                                {PropertyNames.UserEmailAddress,          "mail",             null, null},
-                                {PropertyNames.UserVoiceTelephoneNumber,  "telephoneNumber",  null, null},
-                                {PropertyNames.UserEmployeeID,            "employeeID",       null, null},
-
-                                {PropertyNames.ComputerServicePrincipalNames, "servicePrincipalName", null, null},
-                                {PropertyNames.AcctInfoAcctLockoutTime,       "lockoutTime",        null, null},
-                                {PropertyNames.AcctInfoLastLogon,             "lastLogon",          null, null},
-                                {PropertyNames.AcctInfoLastLogon,             "lastLogonTimestamp", null, null},
-                                {PropertyNames.AcctInfoPermittedWorkstations, "userWorkstations",   null, null},
-                                {PropertyNames.AcctInfoPermittedLogonTimes,   "logonHours",         null, null},
-                    {PropertyNames.AcctInfoExpirationDate,        "accountExpires",     new FromLdapConverterDelegate(AcctExpirFromLdapConverter),       new ToLdapConverterDelegate(AcctExpirToLdapConverter)},
-                                {PropertyNames.AcctInfoSmartcardRequired,     "userAccountControl", null, null},
-                                {PropertyNames.AcctInfoDelegationPermitted,   "userAccountControl", null, null},
-                                {PropertyNames.AcctInfoBadLogonCount,         "badPwdCount",        null, null},
-                                {PropertyNames.AcctInfoHomeDirectory,         "homeDirectory",      null, null},
-                                {PropertyNames.AcctInfoHomeDrive,             "homeDrive",          null, null},
-                                {PropertyNames.AcctInfoScriptPath,            "scriptPath",         null, null},
-
-                                {PropertyNames.PwdInfoLastPasswordSet,        "pwdLastSet",           null, null},
-                                {PropertyNames.PwdInfoLastBadPasswordAttempt, "badPasswordTime",      null, null},
-                                {PropertyNames.PwdInfoPasswordNotRequired,    "userAccountControl",   null, null},
-                                {PropertyNames.PwdInfoPasswordNeverExpires,   "userAccountControl",   null, null},
+        {PropertyNames.PrincipalSid,  "objectSid",            new FromLdapConverterDelegate(SidFromLdapConverter),  null},
+        {PropertyNames.PrincipalSamAccountName,  "samAccountName",       new FromLdapConverterDelegate(StringFromLdapConverter), new ToLdapConverterDelegate(StringToLdapConverter)},
+        {PropertyNames.PrincipalUserPrincipalName,  "userPrincipalName",    new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
+        {PropertyNames.PrincipalGuid,  "objectGuid",           new FromLdapConverterDelegate(GuidFromLdapConverter),   null},
+        {PropertyNames.PrincipalStructuralObjectClass,  "objectClass",           null, null},
+        {PropertyNames.PrincipalName,  "name",           new FromLdapConverterDelegate(StringFromLdapConverter), new ToLdapConverterDelegate(StringToLdapConverter)},
+        {PropertyNames.PrincipalExtensionCache,  null,  null, null},
+        
+        {PropertyNames.AuthenticablePrincipalEnabled,      "userAccountControl", null, null},
+        {PropertyNames.AuthenticablePrincipalCertificates, "userCertificate",    null, null},
+        
+        {PropertyNames.GroupIsSecurityGroup,   "groupType", null, null},
+        {PropertyNames.GroupGroupScope, "groupType", null, null},
+        //
+        {PropertyNames.UserGivenName,             "givenName",        null, null},
+        {PropertyNames.UserMiddleName,            "middleName",       null, null},
+        {PropertyNames.UserSurname,               "sn",               null, null},
+        {PropertyNames.UserEmailAddress,          "mail",             null, null},
+        {PropertyNames.UserVoiceTelephoneNumber,  "telephoneNumber",  null, null},
+        {PropertyNames.UserEmployeeID,            "employeeID",       null, null},
+        
+        {PropertyNames.ComputerServicePrincipalNames, "servicePrincipalName", null, null},
+        {PropertyNames.AcctInfoAcctLockoutTime,       "lockoutTime",        null, null},
+        {PropertyNames.AcctInfoLastLogon,             "lastLogon",          null, null},
+        {PropertyNames.AcctInfoLastLogon,             "lastLogonTimestamp", null, null},
+        {PropertyNames.AcctInfoPermittedWorkstations, "userWorkstations",   null, null},
+        {PropertyNames.AcctInfoPermittedLogonTimes,   "logonHours",         null, null},
+        {PropertyNames.AcctInfoExpirationDate,        "accountExpires",     new FromLdapConverterDelegate(AcctExpirFromLdapConverter),       new ToLdapConverterDelegate(AcctExpirToLdapConverter)},
+        {PropertyNames.AcctInfoSmartcardRequired,     "userAccountControl", null, null},
+        {PropertyNames.AcctInfoDelegationPermitted,   "userAccountControl", null, null},
+        {PropertyNames.AcctInfoBadLogonCount,         "badPwdCount",        null, null},
+        {PropertyNames.AcctInfoHomeDirectory,         "homeDirectory",      null, null},
+        {PropertyNames.AcctInfoHomeDrive,             "homeDrive",          null, null},
+        {PropertyNames.AcctInfoScriptPath,            "scriptPath",         null, null},
+        
+        {PropertyNames.PwdInfoLastPasswordSet,        "pwdLastSet",           null, null},
+        {PropertyNames.PwdInfoLastBadPasswordAttempt, "badPasswordTime",      null, null},
+        {PropertyNames.PwdInfoPasswordNotRequired,    "userAccountControl",   null, null},
+        {PropertyNames.PwdInfoPasswordNeverExpires,   "userAccountControl",   null, null},
         //            {PropertyNames.PwdInfoCannotChangePassword,   "ntSecurityDescriptor", null,     new ToLdapConverterDelegate(CannotChangePwdToLdapConverter)},
-                                {PropertyNames.PwdInfoAllowReversiblePasswordEncryption,     "userAccountControl",    null, null}
-                };
-
+        {PropertyNames.PwdInfoAllowReversiblePasswordEncryption,     "userAccountControl",    null, null}
+        };
+        
         /************************/
         // This table only includes properties that are writeable.
         private static Hashtable s_propertyMappingTableByProperty;

@@ -203,7 +203,7 @@ internal static partial class Interop
 
             /* Windows 2008 +
                   PIP_ADAPTER_DNS_SUFFIX             FirstDnsSuffix;
-             * */
+                  * */
         }
 
         internal enum InterfaceConnectionType : int

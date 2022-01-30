@@ -40,7 +40,7 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets an object that contains the transport-level security settings for the 
+        /// Gets or sets an object that contains the transport-level security settings for the
         /// <see cref="HttpBinding"/> binding.
         /// </summary>
         public HttpTransportSecurity Transport

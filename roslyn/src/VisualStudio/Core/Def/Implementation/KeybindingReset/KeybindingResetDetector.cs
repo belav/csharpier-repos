@@ -292,7 +292,7 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
         }
 
         /// <summary>
-        /// Returns true if ReSharper is installed, enabled, and not suspended.  
+        /// Returns true if ReSharper is installed, enabled, and not suspended.
         /// </summary>
         private async ValueTask<ReSharperStatus> IsReSharperRunningAsync(
             CancellationToken cancellationToken

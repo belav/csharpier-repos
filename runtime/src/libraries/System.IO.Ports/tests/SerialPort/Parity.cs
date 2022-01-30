@@ -528,15 +528,15 @@ namespace System.IO.Ports.Tests
 
                 /*
                 for (int i=0; i<xmitBytes.Length; i++) {
-                  do {
-                    xmitBytes[i] = (byte)rndGen.Next(0, 256);
-                    isParityError = !VerifyParityByte(xmitBytes[i], com1.DataBits, (Parity)parity);
-                  }while(parityErrorOnLastByte && isParityError); //Prevent adacent parity errors see VSWhidbey 103979
-
-                  expectedBytes[i] =  isParityError ? com2.ParityReplace :(byte)(xmitBytes[i] & shiftMask);
-                  parityErrorOnLastByte = isParityError;
+                do {
+                xmitBytes[i] = (byte)rndGen.Next(0, 256);
+                isParityError = !VerifyParityByte(xmitBytes[i], com1.DataBits, (Parity)parity);
+                }while(parityErrorOnLastByte && isParityError); //Prevent adacent parity errors see VSWhidbey 103979
+                
+                expectedBytes[i] =  isParityError ? com2.ParityReplace :(byte)(xmitBytes[i] & shiftMask);
+                parityErrorOnLastByte = isParityError;
                 }
-            */
+                */
                 com1.Open();
                 com2.Open();
                 PerformWriteRead(com1, com2, xmitBytes, expectedBytes);

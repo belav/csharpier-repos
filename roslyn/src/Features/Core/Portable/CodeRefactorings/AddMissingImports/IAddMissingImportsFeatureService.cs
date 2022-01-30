@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
         /// Attempts to add missing imports to the document within the textspan provided. The imports added will
         /// not add assembly references to the project. In case of failure, null is returned. Failure can happen
         /// if there are ambiguous imports, no known resolutions to import, or if no imports that would be provided
-        /// would be added without adding a reference for the project. 
+        /// would be added without adding a reference for the project.
         /// </summary>
         Task<Document> AddMissingImportsAsync(
             Document document,

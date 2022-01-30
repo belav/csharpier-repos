@@ -17,7 +17,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 {
     /// <summary>
     /// Abstract base class for a custom node in Solution Explorer. This utilizes the core
-    /// SolutionExplorer extensibility similar to 
+    /// SolutionExplorer extensibility similar to
     /// Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.dll and
     /// Microsoft.VisualStudio.Shell.TreeNavigation.GraphProvider.dll.
     /// </summary>

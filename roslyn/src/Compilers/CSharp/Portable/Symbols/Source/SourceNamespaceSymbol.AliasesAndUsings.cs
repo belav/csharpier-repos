@@ -526,7 +526,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             private Imports? _lazyImports;
 
             /// <summary>
-            /// Completion state that tracks whether validation was done/not done/currently in process. 
+            /// Completion state that tracks whether validation was done/not done/currently in process.
             /// </summary>
             private SymbolCompletionState _state;
 
@@ -1570,7 +1570,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             private Imports? _lazyImports;
 
             /// <summary>
-            /// Completion state that tracks whether validation was done/not done/currently in process. 
+            /// Completion state that tracks whether validation was done/not done/currently in process.
             /// </summary>
             private SymbolCompletionState _state;
 

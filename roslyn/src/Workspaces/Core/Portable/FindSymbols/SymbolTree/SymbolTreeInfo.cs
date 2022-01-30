@@ -25,22 +25,22 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public Checksum Checksum { get; }
 
         /// <summary>
-        /// The list of nodes that represent symbols. The primary key into the sorting of this 
+        /// The list of nodes that represent symbols. The primary key into the sorting of this
         /// list is the name. They are sorted case-insensitively with the <see cref="s_totalComparer" />.
-        /// Finding case-sensitive matches can be found by binary searching for something that 
-        /// matches insensitively, and then searching around that equivalence class for one that 
+        /// Finding case-sensitive matches can be found by binary searching for something that
+        /// matches insensitively, and then searching around that equivalence class for one that
         /// matches.
         /// </summary>
         private readonly ImmutableArray<Node> _nodes;
 
         /// <summary>
         /// Inheritance information for the types in this assembly.  The mapping is between
-        /// a type's simple name (like 'IDictionary') and the simple metadata names of types 
+        /// a type's simple name (like 'IDictionary') and the simple metadata names of types
         /// that implement it or derive from it (like 'Dictionary').
-        /// 
+        ///
         /// Note: to save space, all names in this map are stored with simple ints.  These
         /// ints are the indices into _nodes that contain the nodes with the appropriate name.
-        /// 
+        ///
         /// This mapping is only produced for metadata assemblies.
         /// </summary>
         private readonly OrderPreservingMultiDictionary<int, int> _inheritanceMap;
@@ -70,10 +70,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         /// <summary>
         /// The task that produces the spell checker we use for fuzzy match queries.
-        /// We use a task so that we can generate the <see cref="SymbolTreeInfo"/> 
+        /// We use a task so that we can generate the <see cref="SymbolTreeInfo"/>
         /// without having to wait for the spell checker construction to finish.
-        /// 
-        /// Features that don't need fuzzy matching don't want to incur the cost of 
+        ///
+        /// Features that don't need fuzzy matching don't want to incur the cost of
         /// the creation of this value.  And the only feature which does want fuzzy
         /// matching (add-using) doesn't want to block waiting for the value to be
         /// created.

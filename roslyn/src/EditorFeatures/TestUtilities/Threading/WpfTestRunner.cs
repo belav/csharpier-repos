@@ -21,12 +21,12 @@ namespace Roslyn.Test.Utilities
 {
     /// <summary>
     /// This type is actually responsible for spinning up the STA context to run all of the
-    /// tests. 
-    /// 
-    /// Overriding the <see cref="XunitTestInvoker"/> to setup the STA context is not the correct 
-    /// approach. That type begins constructing types before RunAsync and hence ctors end up 
+    /// tests.
+    ///
+    /// Overriding the <see cref="XunitTestInvoker"/> to setup the STA context is not the correct
+    /// approach. That type begins constructing types before RunAsync and hence ctors end up
     /// running on the current thread vs. the STA ones. Just completely wrapping the invocation
-    /// here is the best case. 
+    /// here is the best case.
     /// </summary>
     public sealed class WpfTestRunner : XunitTestRunner
     {

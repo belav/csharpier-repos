@@ -126,7 +126,7 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
             /*
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                SendCtlC(hostProcess);
+            SendCtlC(hostProcess);
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {

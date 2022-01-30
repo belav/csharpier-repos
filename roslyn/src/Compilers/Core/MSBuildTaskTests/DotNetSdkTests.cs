@@ -349,7 +349,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         }
 
         /// <summary>
-        /// Validates dependencies of _BeforeVBCSCoreCompile target. 
+        /// Validates dependencies of _BeforeVBCSCoreCompile target.
         /// </summary>
         [ConditionalFact(typeof(DotNetSdkAvailable))]
         public void BeforeVBCSCoreCompileDependencies()

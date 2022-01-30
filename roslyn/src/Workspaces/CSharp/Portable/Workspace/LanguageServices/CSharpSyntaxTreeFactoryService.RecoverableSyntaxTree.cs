@@ -19,9 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         private partial class CSharpSyntaxTreeFactoryService
         {
             /// <summary>
-            /// Represents a syntax tree that only has a weak reference to its 
+            /// Represents a syntax tree that only has a weak reference to its
             /// underlying data.  This way it can be passed around without forcing
-            /// the underlying full tree to stay alive.  Think of it more as a 
+            /// the underlying full tree to stay alive.  Think of it more as a
             /// key that can be used to identify a tree rather than the tree itself.
             /// </summary>
             internal sealed class RecoverableSyntaxTree

@@ -130,9 +130,9 @@ public sealed class AuthenticationManager
         }
         /*if ((_authSchemes & AuthenticationSchemes.Digest) == AuthenticationSchemes.Digest)
         {
-            // TODO:
-            throw new NotImplementedException("Digest challenge generation has not been implemented.");
-            // challenges.Add("Digest");
+        // TODO:
+        throw new NotImplementedException("Digest challenge generation has not been implemented.");
+        // challenges.Add("Digest");
         }*/
         if ((authSchemes & AuthenticationSchemes.Basic) == AuthenticationSchemes.Basic)
         {

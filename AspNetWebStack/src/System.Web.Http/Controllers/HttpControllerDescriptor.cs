@@ -77,7 +77,7 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Gets the configuration associated with the <see cref="HttpControllerDescriptor"/>. 
+        /// Gets the configuration associated with the <see cref="HttpControllerDescriptor"/>.
         /// </summary>
         public HttpConfiguration Configuration
         {

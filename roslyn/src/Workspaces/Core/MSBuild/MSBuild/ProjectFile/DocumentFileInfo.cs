@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
         public string LogicalPath { get; }
 
         /// <summary>
-        /// True if the document has a logical path that differs from its 
+        /// True if the document has a logical path that differs from its
         /// absolute file path.
         /// </summary>
         public bool IsLinked { get; }

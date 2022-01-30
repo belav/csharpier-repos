@@ -396,9 +396,9 @@ namespace Roslyn.Utilities
         /// <param name="root">Absolute root path.</param>
         /// <param name="relativePath">Relative path.</param>
         /// <returns>
-        /// An absolute combined path, or null if <paramref name="relativePath"/> is 
-        /// absolute (e.g. "C:\abc", "\\machine\share\abc"), 
-        /// relative to the current root (e.g. "\abc"), 
+        /// An absolute combined path, or null if <paramref name="relativePath"/> is
+        /// absolute (e.g. "C:\abc", "\\machine\share\abc"),
+        /// relative to the current root (e.g. "\abc"),
         /// or relative to a drive directory (e.g. "C:abc\def").
         /// </returns>
         /// <seealso cref="CombinePossiblyRelativeAndRelativePaths"/>
@@ -513,7 +513,7 @@ namespace Roslyn.Utilities
         /// i.e. asking if the path "c:\goo\bar\baz" has component "bar" would return 'true'.
         /// On the other hand, if you had "c:\goo\bar1\baz" then it would not have "bar" as a
         /// component.
-        /// 
+        ///
         /// A path contains a component if any file name or directory name in the path
         /// matches 'component'.  As such, if you had something like "\\goo" then that would
         /// not have "goo" as a component. That's because here "goo" is the server name portion
@@ -761,10 +761,10 @@ namespace Roslyn.Utilities
         /// From MSDN: The array returned from this method is not guaranteed to contain the complete set of characters
         /// that are invalid in file and directory names. The full set of invalid characters can vary by file system.
         /// https://msdn.microsoft.com/en-us/library/system.io.path.getinvalidfilenamechars.aspx
-        /// 
+        ///
         /// Additionally, Path.GetInvalidPathChars() doesn't include "?" or "*" which are invalid characters,
         /// and Path.GetInvalidFileNameChars() includes ":" and "\" which are valid characters.
-        /// 
+        ///
         /// The more accurate way is to let the framework parse the path and throw on any errors.
         /// </summary>
         public static bool IsValidFilePath([NotNullWhen(true)] string? fullPath)
@@ -811,7 +811,7 @@ namespace Roslyn.Utilities
         /// <returns>An equivalent path that does not contain any '..' or '.' path parts, or the original path.</returns>
         /// <remarks>
         /// This method handles unix and windows drive rooted absolute paths only (i.e /a/b or x:\a\b). Passing any other kind of path
-        /// including relative, drive relative, unc, or windows device paths will simply return the original input. 
+        /// including relative, drive relative, unc, or windows device paths will simply return the original input.
         /// </remarks>
         public static string ExpandAbsolutePathWithRelativeParts(string p)
         {

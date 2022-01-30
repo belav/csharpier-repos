@@ -15,8 +15,8 @@ using System.Diagnostics;
 namespace Dia.Util
 {
     /***************************************************************************************
- *
- ***************************************************************************************/
+    *
+    ***************************************************************************************/
 
     class Util
     {
@@ -90,8 +90,8 @@ namespace Dia.Util
     }
 
     /***************************************************************************************
- *
- ***************************************************************************************/
+    *
+    ***************************************************************************************/
 
     public class DiaFile
     {
@@ -157,16 +157,16 @@ namespace Dia.Util
         }
 
         /// <summary>
-    /// Path of the PDB file actually loaded (must be non-null)
-    /// </summary>
+        /// Path of the PDB file actually loaded (must be non-null)
+        /// </summary>
         public String LoadedPdbPath
         {
             get { return m_loadedPdbPath; }
         }
 
         /// <summary>
-    /// Timestamp in the debug directory of the DLL corresponding to the PDB loaded (always set non-zero).
-    /// </summary>
+        /// Timestamp in the debug directory of the DLL corresponding to the PDB loaded (always set non-zero).
+        /// </summary>
         public UInt32 DebugTimestamp
         {
             get { return m_debugTimestamp; }
@@ -221,16 +221,16 @@ namespace Dia.Util
         private class DiaLoadCallback : IDiaLoadCallback2
         {
             /// <summary>
-        /// The path from with the PDB file was actually loaded, or null if none yet.
-        /// </summary>
+            /// The path from with the PDB file was actually loaded, or null if none yet.
+            /// </summary>
             public string LoadedPdbPath
             {
                 get { return m_loadedPdbPath; }
             }
 
             /// <summary>
-        /// The time stamp in the debug directory corresponding to the PDB that was loaded
-        /// </summary>
+            /// The time stamp in the debug directory corresponding to the PDB that was loaded
+            /// </summary>
             public UInt32 DebugTimeDateStamp
             {
                 get { return m_debugTimeDateStamp; }
@@ -516,8 +516,8 @@ namespace Dia.Util
     }
 
     /***************************************************************************************
- *
- ***************************************************************************************/
+    *
+    ***************************************************************************************/
 
     public class DiaSymbol
     {
@@ -595,53 +595,53 @@ namespace Dia.Util
         private String GetVariantString(Object o)
         {
             /*
-        switch( v.vt )
-        {
-     //*    LONGLONG       VT_I8
-        case VT_I8:
+            switch( v.vt )
+            {
+            //*    LONGLONG       VT_I8
+            case VT_I8:
             printf( "%ld", v.llVal );
             break;
-     //*    LONG           VT_I4
-        case VT_I4:
+            //*    LONG           VT_I4
+            case VT_I4:
             printf( "%d", v.lVal );
             break;
-     //*    BYTE           VT_UI1
-        case VT_UI1:
+            //*    BYTE           VT_UI1
+            case VT_UI1:
             printf( "%d", v.bVal);
             break;
-     //*    SHORT          VT_I2
-        case VT_I2:
+            //*    SHORT          VT_I2
+            case VT_I2:
             printf( "%d", v.iVal);
             break;
-     //*    CHAR           VT_I1
-        case VT_I1:
+            //*    CHAR           VT_I1
+            case VT_I1:
             printf( "%d", v.cVal);
             break;
-     //*    USHORT         VT_UI2
-        case VT_UI2:
+            //*    USHORT         VT_UI2
+            case VT_UI2:
             printf( "%d", v.uiVal);
             break;
-    //*    ULONG          VT_UI4
-        case VT_UI4:
+            //*    ULONG          VT_UI4
+            case VT_UI4:
             printf( "%d", v.ulVal);
             break;
-     //*    ULONGLONG      VT_UI8
-        case VT_UI8:
+            //*    ULONGLONG      VT_UI8
+            case VT_UI8:
             printf( "%ld", v.ullVal);
             break;
-     //*    INT            VT_INT
-        case VT_INT:
+            //*    INT            VT_INT
+            case VT_INT:
             printf( "%d", v.intVal);
             break;
-     //*    UINT           VT_UINT
-        case VT_UINT:
+            //*    UINT           VT_UINT
+            case VT_UINT:
             printf( "%d", v.uintVal);
             break;
-        default:
+            default:
             printf( "<Not implemented>" );
             break;
-        }
-        */
+            }
+            */
             return "VARIANT";
         }
 
@@ -778,45 +778,45 @@ namespace Dia.Util
             {
                 throw new Exception("NYI");
                 /*
-            str.Append("Custom Type: ");
-            try
-            {
-                str.Append(s.guid.ToString());
-            }
-            catch (Exception e)
-            {
+                str.Append("Custom Type: ");
                 try
                 {
-                    str.AppendFormat("{0:x}:{0:x}", s.oemId, s.oemSymbolId);
+                str.Append(s.guid.ToString());
+                }
+                catch (Exception e)
+                {
+                try
+                {
+                str.AppendFormat("{0:x}:{0:x}", s.oemId, s.oemSymbolId);
                 }
                 catch (Exception)
                 {
                 }
-            }
-            DWORD len = 0;
-            if ( s.get_types( 0, &len, NULL ) == S_OK && len > 0 ) {
+                }
+                DWORD len = 0;
+                if ( s.get_types( 0, &len, NULL ) == S_OK && len > 0 ) {
                 IDiaSymbol** psyms = new IDiaSymbol*[ len ];
                 s.get_types( len, &len, psyms );
                 for ( DWORD i = 0; i < len; ++i ) {
-                    printf( " <" );
-                    printType( psyms[i] );
-                    printf( ">" );
-                    psyms[i]->Release();
+                printf( " <" );
+                printType( psyms[i] );
+                printf( ">" );
+                psyms[i]->Release();
                 }
                 delete [] psyms;
-            }
-            len = 0;
-            if ( s.get_dataBytes( 0, &len, NULL ) == S_OK && len > 0 ) {
+                }
+                len = 0;
+                if ( s.get_dataBytes( 0, &len, NULL ) == S_OK && len > 0 ) {
                 BYTE* pdata = new BYTE[ len ];
                 s.get_dataBytes( len, &len, pdata );
                 printf( "<data" );
                 for ( DWORD i = 0; i < len; ++i ) {
-                    printf( " %02x", pdata[i] );
+                printf( " %02x", pdata[i] );
                 }
                 printf( " data>" );
                 delete [] pdata;
-            }
-            */
+                }
+                */
             }
             else
             {

@@ -489,22 +489,22 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
 
             /*
-   ResponseData ::= SEQUENCE {
-      version              [0] EXPLICIT Version DEFAULT v1,
-      responderID              ResponderID,
-      producedAt               GeneralizedTime,
-      responses                SEQUENCE OF SingleResponse,
-      responseExtensions   [1] EXPLICIT Extensions OPTIONAL }
-                 */
+            ResponseData ::= SEQUENCE {
+            version              [0] EXPLICIT Version DEFAULT v1,
+            responderID              ResponderID,
+            producedAt               GeneralizedTime,
+            responses                SEQUENCE OF SingleResponse,
+            responseExtensions   [1] EXPLICIT Extensions OPTIONAL }
+            */
             using (writer.PushSequence())
             {
                 // Skip version (v1)
 
                 /*
-ResponderID ::= CHOICE {
-  byName               [1] Name,
-  byKey                [2] KeyHash }
-                 */
+                ResponderID ::= CHOICE {
+                byName               [1] Name,
+                byKey                [2] KeyHash }
+                */
 
                 using (writer.PushSequence(s_context1))
                 {
@@ -523,13 +523,13 @@ ResponderID ::= CHOICE {
                 using (writer.PushSequence())
                 {
                     /*
-SingleResponse ::= SEQUENCE {
-  certID                       CertID,
-  certStatus                   CertStatus,
-  thisUpdate                   GeneralizedTime,
-  nextUpdate         [0]       EXPLICIT GeneralizedTime OPTIONAL,
-  singleExtensions   [1]       EXPLICIT Extensions OPTIONAL }
-                     */
+                    SingleResponse ::= SEQUENCE {
+                    certID                       CertID,
+                    certStatus                   CertStatus,
+                    thisUpdate                   GeneralizedTime,
+                    nextUpdate         [0]       EXPLICIT GeneralizedTime OPTIONAL,
+                    singleExtensions   [1]       EXPLICIT Extensions OPTIONAL }
+                    */
                     using (writer.PushSequence())
                     {
                         writer.WriteEncodedValue(certId.Span);
@@ -591,11 +591,11 @@ SingleResponse ::= SEQUENCE {
 
             /*
                 BasicOCSPResponse       ::= SEQUENCE {
-  tbsResponseData      ResponseData,
-  signatureAlgorithm   AlgorithmIdentifier,
-  signature            BIT STRING,
-  certs            [0] EXPLICIT SEQUENCE OF Certificate OPTIONAL }
-             */
+                tbsResponseData      ResponseData,
+                signatureAlgorithm   AlgorithmIdentifier,
+                signature            BIT STRING,
+                certs            [0] EXPLICIT SEQUENCE OF Certificate OPTIONAL }
+                */
             using (writer.PushSequence())
             {
                 writer.WriteEncodedValue(tbsResponseData);

@@ -8,7 +8,7 @@ using System.Web.Http.Controllers;
 namespace System.Web.Http.ModelBinding
 {
     /// <summary>
-    /// Collection of functions that can produce a parameter binding for a given parameter.   
+    /// Collection of functions that can produce a parameter binding for a given parameter.
     /// </summary>
     public class ParameterBindingRulesCollection
         : Collection<Func<HttpParameterDescriptor, HttpParameterBinding>>
@@ -24,7 +24,7 @@ namespace System.Web.Http.ModelBinding
         }
 
         /// <summary>
-        /// Adds function to the end of the collection. 
+        /// Adds function to the end of the collection.
         /// The function added is a wrapper around funcInner that checks that parameterType matches typeMatch.
         /// </summary>
         /// <param name="typeMatch">type to match against HttpParameterDescriptor.ParameterType</param>
@@ -54,7 +54,7 @@ namespace System.Web.Http.ModelBinding
         }
 
         /// <summary>
-        /// Execute each binding function in order until one of them returns a non-null binding. 
+        /// Execute each binding function in order until one of them returns a non-null binding.
         /// </summary>
         /// <param name="parameter">parameter to bind.</param>
         /// <returns>the first non-null binding produced for the parameter. Of null if no binding is produced.</returns>

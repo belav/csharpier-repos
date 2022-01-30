@@ -8,8 +8,8 @@ using System.Linq.Expressions;
 namespace Moq
 {
     /// <summary>
-	///   Programmable setup used by <see cref="Mock.SetupSequence(Mock, LambdaExpression)"/>.
-	/// </summary>
+    ///   Programmable setup used by <see cref="Mock.SetupSequence(Mock, LambdaExpression)"/>.
+    /// </summary>
     internal sealed class SequenceSetup : SetupWithOutParameterSupport
     {
         // contains the behaviors set up with the `CallBase`, `Pass`, `Returns`, and `Throws` verbs

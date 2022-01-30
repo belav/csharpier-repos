@@ -89,7 +89,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Sets the decoded well-known attribute data (except the early data) on the bag in a thread safe manner. 
+        /// Sets the decoded well-known attribute data (except the early data) on the bag in a thread safe manner.
         /// Stored decoded data is immutable and cannot be updated further.
         /// </summary>
         /// <returns>Returns true if decoded data were stored into the bag on this thread.</returns>
@@ -139,7 +139,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the decoded well-known attribute data (except the early data) in the bag. 
+        /// Gets the decoded well-known attribute data (except the early data) in the bag.
         /// </summary>
         /// <remarks>This property can only be accessed on the bag after <see cref="SetDecodedWellKnownAttributeData"/> has been invoked.</remarks>
         public WellKnownAttributeData DecodedWellKnownAttributeData
@@ -154,7 +154,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the early decoded well-known attribute data in the bag. 
+        /// Gets the early decoded well-known attribute data in the bag.
         /// </summary>
         /// <remarks>This property can only be accessed on the bag after <see cref="SetEarlyDecodedWellKnownAttributeData"/> has been invoked.</remarks>
         public EarlyWellKnownAttributeData EarlyDecodedWellKnownAttributeData

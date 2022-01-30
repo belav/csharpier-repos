@@ -300,38 +300,38 @@ namespace System.Net.Security
             AcquireCredentials - Attempts to find Client Credential
             Information, that can be sent to the server.  In our case,
             this is only Client Certificates, that we have Credential Info.
-
+            
             How it works:
-                case 0: Cert Selection delegate is present
-                        Always use its result as the client cert answer.
-                        Try to use cached credential handle whenever feasible.
-                        Do not use cached anonymous creds if the delegate has returned null
-                        and the collection is not empty (allow responding with the cert later).
-
-                case 1: Certs collection is empty
-                        Always use the same statically acquired anonymous SSL Credential
-
-                case 2: Before our Connection with the Server
-                        If we have a cached credential handle keyed by first X509Certificate
-                        **content** in the passed collection, then we use that cached
-                        credential and hoping to restart a session.
-
-                        Otherwise create a new anonymous (allow responding with the cert later).
-
-                case 3: After our Connection with the Server (i.e. during handshake or re-handshake)
-                        The server has requested that we send it a Certificate then
-                        we Enumerate a list of server sent Issuers trying to match against
-                        our list of Certificates, the first match is sent to the server.
-
-                        Once we got a cert we again try to match cached credential handle if possible.
-                        This will not restart a session but helps minimizing the number of handles we create.
-
-                In the case of an error getting a Certificate or checking its private Key we fall back
-                to the behavior of having no certs, case 1.
-
+            case 0: Cert Selection delegate is present
+            Always use its result as the client cert answer.
+            Try to use cached credential handle whenever feasible.
+            Do not use cached anonymous creds if the delegate has returned null
+            and the collection is not empty (allow responding with the cert later).
+            
+            case 1: Certs collection is empty
+            Always use the same statically acquired anonymous SSL Credential
+            
+            case 2: Before our Connection with the Server
+            If we have a cached credential handle keyed by first X509Certificate
+            **content** in the passed collection, then we use that cached
+            credential and hoping to restart a session.
+            
+            Otherwise create a new anonymous (allow responding with the cert later).
+            
+            case 3: After our Connection with the Server (i.e. during handshake or re-handshake)
+            The server has requested that we send it a Certificate then
+            we Enumerate a list of server sent Issuers trying to match against
+            our list of Certificates, the first match is sent to the server.
+            
+            Once we got a cert we again try to match cached credential handle if possible.
+            This will not restart a session but helps minimizing the number of handles we create.
+            
+            In the case of an error getting a Certificate or checking its private Key we fall back
+            to the behavior of having no certs, case 1.
+            
             Returns: True if cached creds were used, false otherwise.
-
-        --*/
+            
+            --*/
 
         private bool AcquireClientCredentials(ref byte[]? thumbPrint)
         {
@@ -850,14 +850,14 @@ namespace System.Net.Security
             the server.  The server responds, each response,
             is pass then into this function, again, and the cycle
             repeats until successful connection, or failure.
-
+            
             Input:
-                input  - bytes from the wire
-                output - ref to byte [], what we will send to the
-                    server in response
+            input  - bytes from the wire
+            output - ref to byte [], what we will send to the
+            server in response
             Return:
-                status - error information
-        --*/
+            status - error information
+            --*/
         private SecurityStatusPal GenerateToken(ReadOnlySpan<byte> inputBuffer, ref byte[]? output)
         {
             byte[]? result = Array.Empty<byte>();
@@ -965,11 +965,11 @@ namespace System.Net.Security
 
         /*++
             ProcessHandshakeSuccess -
-               Called on successful completion of Handshake -
-               used to set header/trailer sizes for encryption use
-
+            Called on successful completion of Handshake -
+            used to set header/trailer sizes for encryption use
+            
             Fills in the information about established protocol
-        --*/
+            --*/
         internal void ProcessHandshakeSuccess()
         {
             if (_negotiatedApplicationProtocol == default)
@@ -994,16 +994,16 @@ namespace System.Net.Security
 
         /*++
             Encrypt - Encrypts our bytes before we send them over the wire
-
+            
             PERF: make more efficient, this does an extra copy when the offset
             is non-zero.
-
+            
             Input:
-                buffer - bytes for sending
-                offset -
-                size   -
-                output - Encrypted bytes
-        --*/
+            buffer - bytes for sending
+            offset -
+            size   -
+            output - Encrypted bytes
+            --*/
         internal SecurityStatusPal Encrypt(
             ReadOnlyMemory<byte> buffer,
             ref byte[] output,
@@ -1059,10 +1059,10 @@ namespace System.Net.Security
 
         /*++
             VerifyRemoteCertificate - Validates the content of a Remote Certificate
-
+            
             checkCRL if true, checks the certificate revocation list for validity.
             checkCertName, if true checks the CN field of the certificate
-        --*/
+            --*/
 
         //This method validates a remote certificate.
         internal bool VerifyRemoteCertificate(

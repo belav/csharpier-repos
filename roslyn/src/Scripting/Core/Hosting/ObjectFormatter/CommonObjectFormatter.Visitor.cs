@@ -310,12 +310,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
             /// <summary>
             /// Formats object members to a list.
-            /// 
+            ///
             /// Inline == false:
             /// <code>
             /// { A=true, B=false, C=new int[3] { 1, 2, 3 } }
             /// </code>
-            /// 
+            ///
             /// Inline == true:
             /// <code>
             /// {
@@ -971,17 +971,17 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             #region DebuggerDisplay Embedded Expressions
 
             /// <summary>
-            /// Evaluate a format string with possible member references enclosed in braces. 
+            /// Evaluate a format string with possible member references enclosed in braces.
             /// E.g. "goo = {GetGooString(),nq}, bar = {Bar}".
             /// </summary>
             /// <remarks>
             /// Although in theory any expression is allowed to be embedded in the string such behavior is in practice fundamentally broken.
-            /// The attribute doesn't specify what language (VB, C#, F#, etc.) to use to parse these expressions. Even if it did all languages 
-            /// would need to be able to evaluate each other language's expressions, which is not viable and the Expression Evaluator doesn't 
-            /// work that way today. Instead it evaluates the embedded expressions in the language of the current method frame. When consuming 
+            /// The attribute doesn't specify what language (VB, C#, F#, etc.) to use to parse these expressions. Even if it did all languages
+            /// would need to be able to evaluate each other language's expressions, which is not viable and the Expression Evaluator doesn't
+            /// work that way today. Instead it evaluates the embedded expressions in the language of the current method frame. When consuming
             /// VB objects from C#, for example, the evaluation might fail due to language mismatch (evaluating VB expression using C# parser).
-            /// 
-            /// Therefore we limit the expressions to a simple language independent syntax: {clr-member-name} '(' ')' ',nq', 
+            ///
+            /// Therefore we limit the expressions to a simple language independent syntax: {clr-member-name} '(' ')' ',nq',
             /// where parentheses and ,nq suffix (no-quotes) are optional and the name is an arbitrary CLR field, property, or method name.
             /// We then resolve the member by name using case-sensitive lookup first with fallback to case insensitive and evaluate it.
             /// If parentheses are present we only look for methods.

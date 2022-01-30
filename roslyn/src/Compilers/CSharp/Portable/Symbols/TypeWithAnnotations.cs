@@ -316,7 +316,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Is this System.Nullable`1 type, or its substitution.
-        /// 
+        ///
         /// To check whether a type is System.Nullable`1 or is a type parameter constrained to System.Nullable`1
         /// use <see cref="TypeSymbolExtensions.IsNullableTypeOrTypeParameter" /> instead.
         /// </summary>

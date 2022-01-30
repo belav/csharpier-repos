@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis
         /// - ReferenceManager state
         /// - <see cref="AssemblyMetadata.CachedSymbols"/>
         /// - <see cref="Compilation.RetargetingAssemblySymbols"/>
-        /// 
+        ///
         /// All the above data should be updated at once while holding this lock.
         /// Once lazyAssemblySymbol is set the Compilation.referenceManager field and ReferenceManager
         /// state should not change.
@@ -60,14 +60,14 @@ namespace Microsoft.CodeAnalysis
     {
         /// <summary>
         /// If the compilation being built represents an assembly its assembly name.
-        /// If the compilation being built represents a module, the name of the 
+        /// If the compilation being built represents a module, the name of the
         /// containing assembly or <see cref="Compilation.UnspecifiedModuleAssemblyName"/>
         /// if not specified (/moduleassemblyname command line option).
         /// </summary>
         internal readonly string SimpleAssemblyName;
 
         /// <summary>
-        /// Used to compares assembly identities. 
+        /// Used to compares assembly identities.
         /// May implement unification and portability policies specific to the target platform.
         /// </summary>
         internal readonly AssemblyIdentityComparer IdentityComparer;
@@ -118,7 +118,7 @@ namespace Microsoft.CodeAnalysis
         /// Array of unique bound #r references.
         /// </summary>
         /// <remarks>
-        /// The references are in the order they appear in syntax trees. This order is currently preserved 
+        /// The references are in the order they appear in syntax trees. This order is currently preserved
         /// as syntax trees are added or removed, but we might decide to share reference manager between compilations
         /// with different order of #r's. It doesn't seem this would be an issue since all #r's within the compilation
         /// have the same "priority" with respect to each other.
@@ -146,8 +146,8 @@ namespace Microsoft.CodeAnalysis
         /// Diagnostics produced during reference resolution and binding.
         /// </summary>
         /// <remarks>
-        /// When reporting diagnostics be sure not to include any information that can't be shared among 
-        /// compilations that share the same reference manager (such as full identity of the compilation, 
+        /// When reporting diagnostics be sure not to include any information that can't be shared among
+        /// compilations that share the same reference manager (such as full identity of the compilation,
         /// simple assembly name is ok).
         /// </remarks>
         private ImmutableArray<Diagnostic> _lazyDiagnostics;
@@ -156,7 +156,7 @@ namespace Microsoft.CodeAnalysis
         /// COR library symbol, or null if the compilation itself is the COR library.
         /// </summary>
         /// <remarks>
-        /// If the compilation being built is the COR library we don't want to store its source assembly symbol 
+        /// If the compilation being built is the COR library we don't want to store its source assembly symbol
         /// here since we wouldn't be able to share the state among subsequent compilations that are derived from it
         /// (each of them has its own source assembly symbol).
         /// </remarks>
@@ -486,7 +486,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Global namespaces of assembly references that have been superseded by an assembly reference with a higher version are 
+        /// Global namespaces of assembly references that have been superseded by an assembly reference with a higher version are
         /// hidden behind <see cref="s_supersededAlias"/> to avoid ambiguity when they are accessed from source.
         /// All existing aliases of a superseded assembly are discarded.
         /// </summary>
@@ -592,8 +592,8 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Calculates map from the identities of specified symbols to the corresponding identities in the original EnC baseline metadata.
-        /// The map only includes an entry for identities that differ, i.e. for symbols representing assembly references of the current compilation that have different identities 
-        /// than the corresponding identity in baseline metadata AssemblyRef table. The key comparer of the map ignores build and revision parts of the version number, 
+        /// The map only includes an entry for identities that differ, i.e. for symbols representing assembly references of the current compilation that have different identities
+        /// than the corresponding identity in baseline metadata AssemblyRef table. The key comparer of the map ignores build and revision parts of the version number,
         /// since these might change if the original version included wildcard.
         /// </summary>
         /// <param name="symbols">Assembly symbols for references of the current compilation.</param>
@@ -794,7 +794,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the <see cref="MetadataReference"/> that corresponds to the assembly symbol. 
+        /// Gets the <see cref="MetadataReference"/> that corresponds to the assembly symbol.
         /// </summary>
         internal override MetadataReference? GetMetadataReference(
             IAssemblySymbolInternal? assemblySymbol

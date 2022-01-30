@@ -1345,20 +1345,20 @@ class StackOverflowInLeafFunction
     /*
     int LeafFunction(int a, int b)
     {
-        int c;
-        
-        try
-        {
-            // raise stack overflow
-        }
-        catch
-        {
-            c = b / a;  // this exception will not be able to dispatch
-        }
-
-        return c;
+    int c;
+    
+    try
+    {
+    // raise stack overflow
     }
-*/
+    catch
+    {
+    c = b / a;  // this exception will not be able to dispatch
+    }
+    
+    return c;
+    }
+    */
 
     unsafe void RecursiveDeath(int depth)
     {

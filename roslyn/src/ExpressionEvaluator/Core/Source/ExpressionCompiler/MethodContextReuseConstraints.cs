@@ -63,12 +63,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// Examples:
         /// scopes: [   [   ) x [  )  )
         /// result:         [   )
-        /// 
+        ///
         /// scopes: [ x [   )   [  )  )
-        /// result: [   )     
-        /// 
+        /// result: [   )
+        ///
         /// scopes: [   [ x )   [  )  )
-        /// result:     [   )     
+        /// result:     [   )
         /// </summary>
         public static ILSpan CalculateReuseSpan(
             int ilOffset,

@@ -40,10 +40,10 @@ namespace System.Text
             3       16      1110vvvv 10vvvvvv 10vvvvvv
             4       21      11110vvv 10vvvvvv 10vvvvvv 10vvvvvv
             -----   ----    -----------------------------------
-
+            
             Surrogate:
             Real Unicode value = (HighSurrogate - 0xD800) * 0x400 + (LowSurrogate - 0xDC00) + 0x10000
-        */
+            */
 
         private const int UTF8_CODEPAGE = 65001;
 

@@ -30,9 +30,9 @@ namespace Castle.Services.Logging.Log4netIntegration
         public ExtendedLog4netFactory() : this(Log4netFactory.defaultConfigFileName) { }
 
         /// <summary>
-		///   Initializes a new instance of the <see cref="ExtendedLog4netFactory" /> class.
-		/// </summary>
-		/// <param name="configuredExternally"> If <c>true</c> . Skips the initialization of log4net assuming it will happen externally. Useful if you're using another framework that wants to take over configuration of log4net. </param>
+        ///   Initializes a new instance of the <see cref="ExtendedLog4netFactory" /> class.
+        /// </summary>
+        /// <param name="configuredExternally"> If <c>true</c> . Skips the initialization of log4net assuming it will happen externally. Useful if you're using another framework that wants to take over configuration of log4net. </param>
         public ExtendedLog4netFactory(bool configuredExternally)
         {
             if (configuredExternally)
@@ -51,16 +51,16 @@ namespace Castle.Services.Logging.Log4netIntegration
         }
 
         /// <summary>
-		///   Configures log4net with a stream containing XML.
-		/// </summary>
+        ///   Configures log4net with a stream containing XML.
+        /// </summary>
         public ExtendedLog4netFactory(Stream config)
         {
             XmlConfigurator.Configure(LogManager.GetRepository(_callingAssembly), config);
         }
 
         /// <summary>
-		///   Creates a new extended logger.
-		/// </summary>
+        ///   Creates a new extended logger.
+        /// </summary>
         public override IExtendedLogger Create(string name)
         {
             var log = LogManager.GetLogger(_callingAssembly, name);
@@ -68,8 +68,8 @@ namespace Castle.Services.Logging.Log4netIntegration
         }
 
         /// <summary>
-		///   Creates a new extended logger.
-		/// </summary>
+        ///   Creates a new extended logger.
+        /// </summary>
         public override IExtendedLogger Create(string name, LoggerLevel level)
         {
             throw new NotSupportedException(

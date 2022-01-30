@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Implements a readonly collection over a set of existing collections. This can be used to
     /// prevent having to copy items from one collection over to another (thus bloating space).
-    /// 
+    ///
     /// Note: this is a *collection*, not a *set*.  There is no removal of duplicated elements. This
     /// allows us to be able to efficiently do operations like CopyTo, Count, etc. in O(c) time
     /// instead of O(n) (where 'c' is the number of collections and 'n' is the number of elements).

@@ -135,7 +135,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     /// <summary>
     /// Represents a state machine method other than a MoveNext method.
-    /// All such methods are considered debugger hidden. 
+    /// All such methods are considered debugger hidden.
     /// </summary>
     internal sealed class SynthesizedStateMachineDebuggerHiddenMethod
         : SynthesizedStateMachineMethod

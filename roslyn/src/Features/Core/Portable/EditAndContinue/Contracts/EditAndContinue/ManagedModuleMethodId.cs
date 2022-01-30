@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// <param name="token">Method token.</param>
         /// <param name="version">Method version.</param>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// If <paramref name="token"/> is less or equals 0x06000000 or <paramref name="version"/> is less or equals zero. 
+        /// If <paramref name="token"/> is less or equals 0x06000000 or <paramref name="version"/> is less or equals zero.
         /// </exception>
         public ManagedModuleMethodId(int token, int version)
         {
@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// MethodVersion is a 1-based index. This will be '1' for methods that have not
         /// been edited through Edit-and-continue. For edited methods, the version indicates
         /// the EnC apply of this method.
-        /// Thus, if the user does 5 EnC applies and a particular method is only edited in the 5th apply, 
+        /// Thus, if the user does 5 EnC applies and a particular method is only edited in the 5th apply,
         /// then there are two method ids for this method, and they have Version = 1 and Version = 5.
         ///
         /// The debugger needs to deal with old versions of the method because they will
@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// methods. In other words, if the user sets a breakpoint within the catch block of a
         /// non-leaf method, the debugger needs to set that breakpoint within the old version
         /// of the method.
-        /// 
+        ///
         /// In scenarios such as function breakpoint binding, the value '0' may used to
         /// indicate the current version of the method.
         /// </summary>

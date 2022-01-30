@@ -44,10 +44,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// <summary>
         /// String interning table so that we can share many more strings in our DeclaredSymbolInfo
         /// buckets.  Keyed off a Project instance so that we share all these strings as we create
-        /// the or load the index items for this a specific Project.  This helps as we will generally 
+        /// the or load the index items for this a specific Project.  This helps as we will generally
         /// be creating or loading all the index items for the documents in a Project at the same time.
         /// Once this project is let go of (which happens with any solution change) then we'll dump
-        /// this string table.  The table will have already served its purpose at that point and 
+        /// this string table.  The table will have already served its purpose at that point and
         /// doesn't need to be kept around further.
         /// </summary>
         private static readonly ConditionalWeakTable<Project, StringTable> s_projectStringTable =

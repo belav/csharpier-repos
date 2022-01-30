@@ -42,24 +42,24 @@ namespace Microsoft.CodeAnalysis.Differencing
         public EditKind Kind => _kind;
 
         /// <summary>
-        /// Insert: 
+        /// Insert:
         /// default(TNode).
-        /// 
-        /// Delete: 
+        ///
+        /// Delete:
         /// Deleted node.
-        /// 
-        /// Move, Update: 
+        ///
+        /// Move, Update:
         /// Node in the old tree/sequence.
         /// </summary>
         public TNode OldNode => _oldNode;
 
         /// <summary>
-        /// Insert: 
+        /// Insert:
         /// Inserted node.
-        /// 
-        /// Delete: 
+        ///
+        /// Delete:
         /// default(TNode)
-        /// 
+        ///
         /// Move, Update:
         /// Node in the new tree/sequence.
         /// </summary>

@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /* Regression Test for Dev11 bug #95728: LINQ/CLR :: Accessing a static generic field <String> causes CLR to crash with FatalExecutionEngineError
-* 
-* Comments from bug: FatalExecutionEngineError: The runtime has encountered a fatal error. The address of the error was at 0x71ff5dcd, 
-* on thread 0x7f4. The error code is 0xc0000005. This error may be a bug in the CLR or in the unsafe or non-verifiable portions of user 
+*
+* Comments from bug: FatalExecutionEngineError: The runtime has encountered a fatal error. The address of the error was at 0x71ff5dcd,
+* on thread 0x7f4. The error code is 0xc0000005. This error may be a bug in the CLR or in the unsafe or non-verifiable portions of user
 * code. Common sources of this bug include user marshaling errors for COM-interop or PInvoke, which may corrupt the stack.
 */
 

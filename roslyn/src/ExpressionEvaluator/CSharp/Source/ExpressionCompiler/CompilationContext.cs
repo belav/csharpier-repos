@@ -1570,7 +1570,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         }
 
         /// <summary>
-        /// Generate the set of locals to use for binding. 
+        /// Generate the set of locals to use for binding.
         /// </summary>
         private static ImmutableArray<LocalSymbol> GetLocalsForBinding(
             ImmutableArray<LocalSymbol> locals,

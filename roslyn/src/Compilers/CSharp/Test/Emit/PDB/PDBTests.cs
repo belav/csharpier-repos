@@ -1192,12 +1192,12 @@ class C
         }
 
         /// <summary>
-        /// Although the debugging info attached to DebuggerHidden method is not used by the debugger 
+        /// Although the debugging info attached to DebuggerHidden method is not used by the debugger
         /// (the debugger doesn't ever stop in the method) Dev11 emits the info and so do we.
-        /// 
+        ///
         /// StepThrough method needs the information if JustMyCode is disabled and a breakpoint is set within the method.
         /// NonUserCode method needs the information if JustMyCode is disabled.
-        /// 
+        ///
         /// It's up to the tool that consumes the debugging information, not the compiler to decide whether to ignore the info or not.
         /// BTW, the information can actually be retrieved at runtime from the PDB file via Reflection StackTrace.
         /// </summary>

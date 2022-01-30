@@ -168,9 +168,9 @@ namespace Castle.DynamicProxy.Contributors
         );
 
         /// <summary>
-		///   Performs some basic screening and invokes the <see cref = "IProxyGenerationHook" />
-		///   to select methods.
-		/// </summary>
+        ///   Performs some basic screening and invokes the <see cref = "IProxyGenerationHook" />
+        ///   to select methods.
+        /// </summary>
         protected bool AcceptMethod(MethodInfo method, bool onlyVirtuals, IProxyGenerationHook hook)
         {
             return AcceptMethodPreScreen(method, onlyVirtuals, hook)
@@ -178,12 +178,12 @@ namespace Castle.DynamicProxy.Contributors
         }
 
         /// <summary>
-		///   Performs some basic screening to filter out non-interceptable methods.
-		/// </summary>
-		/// <remarks>
-		///   The <paramref name="hook"/> will get invoked for non-interceptable method notification only;
-		///   it does not get asked whether or not to intercept the <paramref name="method"/>.
-		/// </remarks>
+        ///   Performs some basic screening to filter out non-interceptable methods.
+        /// </summary>
+        /// <remarks>
+        ///   The <paramref name="hook"/> will get invoked for non-interceptable method notification only;
+        ///   it does not get asked whether or not to intercept the <paramref name="method"/>.
+        /// </remarks>
         protected bool AcceptMethodPreScreen(
             MethodInfo method,
             bool onlyVirtuals,

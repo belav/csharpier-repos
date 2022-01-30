@@ -79,7 +79,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <remarks>
         /// This is for when we are dotting into a field.
         /// Distinguish from <see cref="CheckFieldAddress"/>.
-        /// 
+        ///
         /// NOTE: dev11 also calls this on string initializers in fixed statements,
         /// but never accomplishes anything since string is a reference type.  This
         /// is probably a bug, but fixing it would be a breaking change.

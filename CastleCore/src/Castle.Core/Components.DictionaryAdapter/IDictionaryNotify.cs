@@ -18,8 +18,8 @@ namespace Castle.Components.DictionaryAdapter
     using System.ComponentModel;
 
     /// <summary>
-	/// Contract for managing Dictionary adapter notifications.
-	/// </summary>
+    /// Contract for managing Dictionary adapter notifications.
+    /// </summary>
     public interface IDictionaryNotify : INotifyPropertyChanging, INotifyPropertyChanged
     {
         bool CanNotify { get; }

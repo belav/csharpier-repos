@@ -38,7 +38,7 @@ namespace System.Web.Http.Routing
 
         /// <summary>
         /// Gets the <see cref="HttpRequestMessage"/> of the current <see cref="UrlHelper"/>.
-        /// The setter is not intended to be used other than for unit testing purpose. 
+        /// The setter is not intended to be used other than for unit testing purpose.
         /// </summary>
         public HttpRequestMessage Request
         {

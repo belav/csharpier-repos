@@ -633,12 +633,12 @@ namespace System.Xml
             XmlQualifiedName elementName = new XmlQualifiedName(elementToValidate.LocalName, elementToValidate.NamespaceURI);
             XmlSchemaElement elem = parentSchemaType.LocalElements[elementName] as XmlSchemaElement;
             if (elem == null) { //Element not found as direct child of the content model. It might be invalid at this position or it might be a substitution member
-                SchemaInfo compiledSchemaInfo = schemas.CompiledInfo;
-                XmlSchemaElement memberElem = compiledSchemaInfo.GetElement(elementName);
-                if (memberElem != null) {
-                }
+            SchemaInfo compiledSchemaInfo = schemas.CompiledInfo;
+            XmlSchemaElement memberElem = compiledSchemaInfo.GetElement(elementName);
+            if (memberElem != null) {
             }
-        }*/
+            }
+            }*/
 
         private void CheckNodeSequenceCapacity(int currentIndex)
         {

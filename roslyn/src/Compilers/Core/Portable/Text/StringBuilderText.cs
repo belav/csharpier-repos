@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         /// <param name="position">The position to get the character from.</param>
         /// <returns>The character.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">When position is negative or 
+        /// <exception cref="ArgumentOutOfRangeException">When position is negative or
         /// greater than <see cref="Length"/>.</exception>
         public override char this[int position]
         {

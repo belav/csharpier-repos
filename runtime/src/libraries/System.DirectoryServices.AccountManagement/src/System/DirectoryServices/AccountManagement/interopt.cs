@@ -431,16 +431,16 @@ namespace System.DirectoryServices.AccountManagement
         /*
         typedef enum
         {
-          DsRole_RoleStandaloneWorkstation,
-          DsRole_RoleMemberWorkstation,
-          DsRole_RoleStandaloneServer,
-          DsRole_RoleMemberServer,
-          DsRole_RoleBackupDomainController,
-          DsRole_RolePrimaryDomainController,
-          DsRole_WorkstationWithSharedAccountDomain,
-          DsRole_ServerWithSharedAccountDomain,
-          DsRole_MemberWorkstationWithSharedAccountDomain,
-          DsRole_MemberServerWithSharedAccountDomain
+        DsRole_RoleStandaloneWorkstation,
+        DsRole_RoleMemberWorkstation,
+        DsRole_RoleStandaloneServer,
+        DsRole_RoleMemberServer,
+        DsRole_RoleBackupDomainController,
+        DsRole_RolePrimaryDomainController,
+        DsRole_WorkstationWithSharedAccountDomain,
+        DsRole_ServerWithSharedAccountDomain,
+        DsRole_MemberWorkstationWithSharedAccountDomain,
+        DsRole_MemberServerWithSharedAccountDomain
         }DSROLE_MACHINE_ROLE;
         */
 
@@ -461,10 +461,10 @@ namespace System.DirectoryServices.AccountManagement
         /*
         typedef enum
         {
-          DsRolePrimaryDomainInfoBasic,
-          DsRoleUpgradeStatus,
-          DsRoleOperationState,
-          DsRolePrimaryDomainInfoBasicEx
+        DsRolePrimaryDomainInfoBasic,
+        DsRoleUpgradeStatus,
+        DsRoleOperationState,
+        DsRolePrimaryDomainInfoBasicEx
         }DSROLE_PRIMARY_DOMAIN_INFO_LEVEL;
         */
 
@@ -506,9 +506,9 @@ namespace System.DirectoryServices.AccountManagement
 
         /*
         DWORD DsRoleGetPrimaryDomainInformation(
-          LPCWSTR lpServer,
-          DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
-          PBYTE* Buffer
+        LPCWSTR lpServer,
+        DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
+        PBYTE* Buffer
         ); */
 
         [DllImport(
@@ -533,7 +533,7 @@ namespace System.DirectoryServices.AccountManagement
             ULONG Flags;
             LPTSTR DcSiteName;
             LPTSTR ClientSiteName;
-        } DOMAIN_CONTROLLER_INFO, *PDOMAIN_CONTROLLER_INFO; */
+            } DOMAIN_CONTROLLER_INFO, *PDOMAIN_CONTROLLER_INFO; */
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         public sealed class DomainControllerInfo
         {
@@ -550,7 +550,7 @@ namespace System.DirectoryServices.AccountManagement
 
         /*
         void DsRoleFreeMemory(
-          PVOID Buffer
+        PVOID Buffer
         );
         */
         [DllImport(Interop.Libraries.Dsrole)]
@@ -563,7 +563,7 @@ namespace System.DirectoryServices.AccountManagement
             LPCTSTR SiteName,
             ULONG Flags,
             PDOMAIN_CONTROLLER_INFO* DomainControllerInfo
-        );*/
+            );*/
         [DllImport(
             Interop.Libraries.Logoncli,
             CallingConvention = CallingConvention.StdCall,
@@ -585,7 +585,7 @@ namespace System.DirectoryServices.AccountManagement
                 LMSTR wki100_langroup;
                 DWORD wki100_ver_major;
                 DWORD wki100_ver_minor;
-        } WKSTA_INFO_100, *PWKSTA_INFO_100; */
+                } WKSTA_INFO_100, *PWKSTA_INFO_100; */
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         public sealed class WKSTA_INFO_100
         {
@@ -708,13 +708,13 @@ namespace System.DirectoryServices.AccountManagement
 
         /*
         BOOL WINAPI AuthzInitializeContextFromSid(
-            DWORD Flags,
-            PSID UserSid,
-            AUTHZ_RESOURCE_MANAGER_HANDLE AuthzResourceManager,
-            PLARGE_INTEGER pExpirationTime,
-            LUID Identifier,
-            PVOID DynamicGroupArgs,
-            PAUTHZ_CLIENT_CONTEXT_HANDLE pAuthzClientContext
+        DWORD Flags,
+        PSID UserSid,
+        AUTHZ_RESOURCE_MANAGER_HANDLE AuthzResourceManager,
+        PLARGE_INTEGER pExpirationTime,
+        LUID Identifier,
+        PVOID DynamicGroupArgs,
+        PAUTHZ_CLIENT_CONTEXT_HANDLE pAuthzClientContext
         );
         */
         [DllImport(
@@ -737,15 +737,15 @@ namespace System.DirectoryServices.AccountManagement
         /*
                 [DllImport(Interop.Libraries.Authz, SetLastError=true, CallingConvention=CallingConvention.StdCall, EntryPoint="AuthzInitializeContextFromToken", CharSet=CharSet.Unicode)]
                 static extern public bool AuthzInitializeContextFromToken(
-                                                int Flags,
-                                                IntPtr TokenHandle,
-                                                IntPtr AuthzResourceManager,
-                                                IntPtr pExpirationTime,
-                                                LUID Identitifier,
-                                                IntPtr DynamicGroupArgs,
-                                                out IntPtr pAuthzClientContext
-                                                );
-        */
+                int Flags,
+                IntPtr TokenHandle,
+                IntPtr AuthzResourceManager,
+                IntPtr pExpirationTime,
+                LUID Identitifier,
+                IntPtr DynamicGroupArgs,
+                out IntPtr pAuthzClientContext
+                );
+                */
         [DllImport(
             Interop.Libraries.Authz,
             SetLastError = true,

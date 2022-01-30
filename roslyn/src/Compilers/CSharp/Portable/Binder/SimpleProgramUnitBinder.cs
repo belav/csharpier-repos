@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// This binder provides a context for binding within a specific compilation unit, but outside of top-level statements.
     /// It ensures that locals are in scope, however it is not responsible
     /// for creating the symbols. That task is actually owned by <see cref="SimpleProgramBinder"/> and
-    /// this binder simply delegates to it when appropriate. That ensures that the same set of symbols is 
+    /// this binder simply delegates to it when appropriate. That ensures that the same set of symbols is
     /// shared across all compilation units.
     /// </summary>
     internal sealed class SimpleProgramUnitBinder : LocalScopeBinder

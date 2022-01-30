@@ -29,7 +29,7 @@ namespace Microsoft.Web.Helpers
         public UrlBuilder(string path) : this(path, null) { }
 
         /// <summary>
-        /// Constructs an Url with the current page's virtual path and the parameters 
+        /// Constructs an Url with the current page's virtual path and the parameters
         /// </summary>
         /// <param name="parameters"></param>
         public UrlBuilder(object parameters) : this(null, parameters) { }

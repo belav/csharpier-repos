@@ -14,7 +14,7 @@ namespace System.Net.Http
 {
     /// <summary>
     /// Provides an <see cref="HttpContent"/> implementation that exposes an output <see cref="Stream"/>
-    /// which can be written to directly. The ability to push data to the output stream differs from the 
+    /// which can be written to directly. The ability to push data to the output stream differs from the
     /// <see cref="StreamContent"/> where data is pulled and not pushed.
     /// </summary>
     public class PushStreamContent : HttpContent
@@ -24,8 +24,8 @@ namespace System.Net.Http
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class. The
         /// <paramref name="onStreamAvailable"/> action is called when an output stream
-        /// has become available allowing the action to write to it directly. When the 
-        /// stream is closed, it will signal to the content that is has completed and the 
+        /// has become available allowing the action to write to it directly. When the
+        /// stream is closed, it will signal to the content that is has completed and the
         /// HTTP request or response will be completed.
         /// </summary>
         /// <param name="onStreamAvailable">The action to call when an output stream is available.</param>
@@ -33,7 +33,7 @@ namespace System.Net.Http
             : this(Taskify(onStreamAvailable), (MediaTypeHeaderValue)null) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PushStreamContent"/> class. 
+        /// Initializes a new instance of the <see cref="PushStreamContent"/> class.
         /// </summary>
         /// <param name="onStreamAvailable">The action to call when an output stream is available. The stream is automatically
         /// closed when the return task is completed.</param>
@@ -99,8 +99,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// When this method is called, it calls the action provided in the constructor with the output 
-        /// stream to write to. Once the action has completed its work it closes the stream which will 
+        /// When this method is called, it calls the action provided in the constructor with the output
+        /// stream to write to. Once the action has completed its work it closes the stream which will
         /// close this content instance and complete the HTTP request or response.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> to which to write.</param>

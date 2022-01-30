@@ -15,10 +15,10 @@ public class TestGC
     private static string value21;
     private static string value99;
 
-    /* 
-   * Ensure that a key that has no managed references to it gets automatically removed from the 
-   * dictionary after GC happens. Also make sure the value gets gc’d as well. 
-   */
+    /*
+    * Ensure that a key that has no managed references to it gets automatically removed from the
+    * dictionary after GC happens. Also make sure the value gets gc’d as well.
+    */
     public static void TestKeyWithNoReferences_Pass1(int length)
     {
         tbl = new ConditionalWeakTable<string, string>();
@@ -72,11 +72,11 @@ public class TestGC
     }
 
     /*
-     * Ensure that a key whose value has a reference to the key or a reference to another object 
-     * which has a reference to the key, gets automatically removed from the dictionary after GC 
-     * happens (provided there are no references to the value outside the dictionary.) 
+     * Ensure that a key whose value has a reference to the key or a reference to another object
+     * which has a reference to the key, gets automatically removed from the dictionary after GC
+     * happens (provided there are no references to the value outside the dictionary.)
      * Also make sure the value gets gc’d as well.
-     * 
+     *
      * In this case we pass the same string array to the function, so keys and values have references to each other
      * (But only within the dictionary)
      * */
@@ -135,7 +135,7 @@ public class TestGC
     }
 
     /*
-     * Ensure that a key whose value is referenced outside the dictionary does not get 
+     * Ensure that a key whose value is referenced outside the dictionary does not get
      * automatically removed from the dictionary after GC happens and the key doesn't get gc'd.
      */
     public static void TestKeyWithOutsideReferences_Pass1(int length)

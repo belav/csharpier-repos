@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
     internal readonly struct SourceLineUpdate
     {
         /// <summary>
-        /// Creates a SourceLineUpdate. 
+        /// Creates a SourceLineUpdate.
         /// </summary>
         /// <param name="oldLine">Line number before the update was made.</param>
         /// <param name="newLine">Line number after the update was made.</param>

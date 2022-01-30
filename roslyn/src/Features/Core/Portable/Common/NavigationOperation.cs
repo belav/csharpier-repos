@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
     /// <summary>
     /// A <see cref="CodeActionOperation"/> for navigating to a specific position in a document.
     /// When <see cref="CodeAction.GetOperationsAsync(CancellationToken)"/> is called an implementation
-    /// of <see cref="CodeAction"/> can return an instance of this operation along with the other 
+    /// of <see cref="CodeAction"/> can return an instance of this operation along with the other
     /// operations they want to apply.  For example, an implementation could generate a new <see cref="Document"/>
     /// in one <see cref="CodeActionOperation"/> and then have the host editor navigate to that
     /// <see cref="Document"/> using this operation.

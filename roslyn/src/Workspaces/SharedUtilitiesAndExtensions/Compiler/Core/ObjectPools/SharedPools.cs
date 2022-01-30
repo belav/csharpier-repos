@@ -10,11 +10,11 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// Shared object pool for roslyn
-    /// 
+    ///
     /// Use this shared pool if only concern is reducing object allocations.
     /// if perf of an object pool itself is also a concern, use ObjectPool directly.
-    /// 
-    /// For example, if you want to create a million of small objects within a second, 
+    ///
+    /// For example, if you want to create a million of small objects within a second,
     /// use the ObjectPool directly. it should have much less overhead than using this.
     /// </summary>
     internal static class SharedPools

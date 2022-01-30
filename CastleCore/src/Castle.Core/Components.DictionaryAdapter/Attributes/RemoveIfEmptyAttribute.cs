@@ -18,8 +18,8 @@ namespace Castle.Components.DictionaryAdapter
     using System.Collections;
 
     /// <summary>
-	/// Removes a property if null or empty string, guid or collection.
-	/// </summary>
+    /// Removes a property if null or empty string, guid or collection.
+    /// </summary>
     public class RemoveIfEmptyAttribute : RemoveIfAttribute
     {
         public RemoveIfEmptyAttribute() : base(RemoveIfEmptyCondition.Instance) { }

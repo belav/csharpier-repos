@@ -8,10 +8,10 @@
 
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
-
+   
    contributed by Isaac Gouy
    optimizations by Alp Toker <alp@atoker.com>
-*/
+   */
 
 using System;
 using System.IO;

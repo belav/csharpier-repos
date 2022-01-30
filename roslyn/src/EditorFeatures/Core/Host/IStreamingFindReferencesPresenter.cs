@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Editor.Host
         /// Tells the presenter that a search is starting.  The returned <see cref="FindUsagesContext"/>
         /// is used to push information about the search into.  i.e. when a reference is found
         /// <see cref="FindUsagesContext.OnReferenceFoundAsync"/> should be called.  When the
-        /// search completes <see cref="FindUsagesContext.OnCompletedAsync"/> should be called. 
+        /// search completes <see cref="FindUsagesContext.OnCompletedAsync"/> should be called.
         /// etc. etc.
         /// </summary>
         /// <param name="title">A title to display to the user in the presentation of the results.</param>

@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     internal class ExportConfigurationFixProviderAttribute : ExportAttribute
     {
         /// <summary>
-        /// The name of the <see cref="IConfigurationFixProvider"/>.  
+        /// The name of the <see cref="IConfigurationFixProvider"/>.
         /// </summary>
         public string Name { get; }
 

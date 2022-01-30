@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Host
     {
         /// <summary>
         /// return <see cref="ExcerptResult"/> of given <see cref="Document"/> and <see cref="TextSpan"/>
-        /// 
+        ///
         /// the result might not be an exact copy of the given source or contains more then given span
         /// </summary>
         Task<ExcerptResult?> TryExcerptAsync(
@@ -61,14 +61,14 @@ namespace Microsoft.CodeAnalysis.Host
 
         /// <summary>
         /// <see cref="Document"/> this excerpt is from
-        /// 
+        ///
         /// should be same document in <see cref="IDocumentExcerptService.TryExcerptAsync(Document, TextSpan, ExcerptMode, CancellationToken)" />
         /// </summary>
         public readonly Document Document;
 
         /// <summary>
         /// span on <see cref="Document"/> this excerpt is from
-        /// 
+        ///
         /// should be same text span in <see cref="IDocumentExcerptService.TryExcerptAsync(Document, TextSpan, ExcerptMode, CancellationToken)" />
         /// </summary>
         public readonly TextSpan Span;

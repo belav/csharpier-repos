@@ -16,7 +16,7 @@ using System.Web.Http.Validation;
 namespace System.Web.Http.ModelBinding
 {
     /// <summary>
-    /// Parameter binding that will read from the body and invoke the formatters. 
+    /// Parameter binding that will read from the body and invoke the formatters.
     /// </summary>
     public class FormatterParameterBinding : HttpParameterBinding
     {

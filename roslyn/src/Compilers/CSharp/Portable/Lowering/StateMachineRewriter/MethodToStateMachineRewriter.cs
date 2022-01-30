@@ -50,15 +50,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected readonly LocalSymbol cachedState;
 
         /// <summary>
-        /// Cached "this" local, used to store the captured "this", which is safe to cache locally since "this" 
+        /// Cached "this" local, used to store the captured "this", which is safe to cache locally since "this"
         /// is semantically immutable.
         /// It would be hard for such caching to happen at JIT level (since JIT does not know that it never changes).
         /// NOTE: this field is null when we are not caching "this" which happens when
         ///       - not optimizing
         ///       - method is not capturing "this" at all
-        ///       - containing type is a struct 
-        ///       (we could cache "this" as a ref local for struct containers, 
-        ///       but such caching would not save as much indirection and could actually 
+        ///       - containing type is a struct
+        ///       (we could cache "this" as a ref local for struct containers,
+        ///       but such caching would not save as much indirection and could actually
         ///       be done at JIT level, possibly more efficiently)
         /// </summary>
         protected readonly LocalSymbol cachedThis;

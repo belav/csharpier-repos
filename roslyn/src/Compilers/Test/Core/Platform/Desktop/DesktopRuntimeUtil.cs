@@ -29,7 +29,7 @@ namespace Roslyn.Test.Utilities.Desktop
         /// from a hex-encoded byte stream representing a gzipped assembly image.
         /// </summary>
         /// <param name="image">
-        /// A string containing a hex-encoded byte stream representing a gzipped assembly image. 
+        /// A string containing a hex-encoded byte stream representing a gzipped assembly image.
         /// Hex digits are case-insensitive and can be separated by spaces or newlines.
         /// Cannot be null.
         /// </param>

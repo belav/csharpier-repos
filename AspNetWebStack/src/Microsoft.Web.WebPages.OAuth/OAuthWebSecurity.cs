@@ -703,7 +703,7 @@ namespace Microsoft.Web.WebPages.OAuth
         }
 
         /// <summary>
-        /// Deserializes a string obtained from <see cref="SerializeProviderUserId(string, string)"/> back into a 
+        /// Deserializes a string obtained from <see cref="SerializeProviderUserId(string, string)"/> back into a
         /// providerName/providerUserId pair.
         /// </summary>
         /// <param name="data">The input data.</param>

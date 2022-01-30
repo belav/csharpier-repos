@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
     /// <summary>
     /// Attempts to parse a stack frame line from given input. StackFrame is generally
-    /// defined as a string line in a StackTrace. See https://docs.microsoft.com/en-us/dotnet/api/system.environment.stacktrace for 
-    /// more documentation on dotnet stack traces. 
+    /// defined as a string line in a StackTrace. See https://docs.microsoft.com/en-us/dotnet/api/system.environment.stacktrace for
+    /// more documentation on dotnet stack traces.
     /// </summary>
     internal struct StackFrameParser
     {
@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         private StackFrameToken CurrentCharAsToken() => _lexer.CurrentCharAsToken();
 
         /// <summary>
-        /// Given an input text, and set of options, parses out a fully representative syntax tree 
-        /// and list of diagnostics.  Parsing should always succeed, except in the case of the stack 
+        /// Given an input text, and set of options, parses out a fully representative syntax tree
+        /// and list of diagnostics.  Parsing should always succeed, except in the case of the stack
         /// overflowing.
         /// </summary>
         public static StackFrameTree? TryParse(VirtualCharSequence text)
@@ -102,8 +102,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         /// <summary>
         /// Attempts to parse the full method declaration, optionally adding leading whitespace as trivia. Includes
-        /// all of the generic indicators for types, 
-        /// 
+        /// all of the generic indicators for types,
+        ///
         /// Ex: [|MyClass.MyMethod(string s)|]
         /// </summary>
         private StackFrameMethodDeclarationNode? TryParseRequiredMethodDeclaration()
@@ -141,7 +141,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         /// <summary>
         /// Parses a <see cref="StackFrameNameNode"/> which could either be a <see cref="StackFrameSimpleNameNode"/> or <see cref="StackFrameQualifiedNameNode" />.
-        /// 
+        ///
         /// Nodes will be parsed for arity but not generic type arguments.
         ///
         /// <code>
@@ -152,7 +152,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         ///   * [|$$MyClass`1.MyMethod|](string s)
         ///   * [|$$MyClass.MyMethod|][T](T t)
         /// </code>
-        /// 
+        ///
         /// </summary>
         private StackFrameNameNode? TryParseRequiredNameNode(bool scanAtTrivia)
         {
@@ -196,7 +196,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         }
 
         /// <summary>
-        /// Given an existing left hand side node or token, parse a qualified name if possible. Returns 
+        /// Given an existing left hand side node or token, parse a qualified name if possible. Returns
         /// null with success if a dot token is not available
         /// </summary>
         private Result<StackFrameQualifiedNameNode> TryParseQualifiedName(StackFrameNameNode lhs)
@@ -229,7 +229,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// ex: MyNamespace.MyClass`1.MyMethod()
         ///                 ^--------------------- MyClass would be the identifier passed in
         ///                        ^-------------- Grave token
-        ///                         ^------------- Arity token of "1" 
+        ///                         ^------------- Arity token of "1"
         /// </code>
         /// </summary>
         private Result<StackFrameSimpleNameNode> TryScanGenericTypeIdentifier(
@@ -256,12 +256,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         }
 
         /// <summary>
-        /// Type arguments for stacks are only valid on method declarations, and can have either '[' or '&lt;' as the 
+        /// Type arguments for stacks are only valid on method declarations, and can have either '[' or '&lt;' as the
         /// starting character depending on output source.
-        /// 
+        ///
         /// ex: MyNamespace.MyClass.MyMethod[T](T t)
         /// ex: MyNamespace.MyClass.MyMethod&lt;T&lt;(T t)
-        /// 
+        ///
         /// Assumes the identifier "MyMethod" has already been parsed, and the type arguments will need to be parsed.
         /// </summary>
         private Result<StackFrameTypeArgumentList> TryParseTypeArguments()
@@ -339,7 +339,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// </summary>
         /// <remarks>
         /// This method assumes that the caller requires method parameters, and returns null for all failure cases. The caller
-        /// should escalate to abort parsing on null values. 
+        /// should escalate to abort parsing on null values.
         /// </remarks>
         private StackFrameParameterList? TryParseRequiredMethodParameters()
         {
@@ -420,7 +420,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// Parses a <see cref="StackFrameParameterDeclarationNode"/> by parsing identifiers first representing the type and then the parameter identifier.
         /// Ex: System.String[] s
         ///     ^--------------^ -- Type = "System.String[]"
-        ///                     ^-- Identifier = "s"    
+        ///                     ^-- Identifier = "s"
         /// </summary>
         private Result<StackFrameParameterDeclarationNode> ParseParameterNode()
         {
@@ -456,7 +456,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         }
 
         /// <summary>
-        /// Parses the array rank specifiers for an identifier. 
+        /// Parses the array rank specifiers for an identifier.
         /// Ex: string[,][]
         ///           ^----^ both are array rank specifiers
         ///                  0: "[,]
@@ -514,8 +514,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         /// <summary>
         /// Parses text for a valid file path using valid file characters. It's very possible this includes a path that doesn't exist but
-        /// forms a valid path identifier. 
-        /// 
+        /// forms a valid path identifier.
+        ///
         /// Can return if only a path is available but not line numbers, but throws if the value after the path is a colon as the expectation
         /// is that line number should follow.
         /// </summary>

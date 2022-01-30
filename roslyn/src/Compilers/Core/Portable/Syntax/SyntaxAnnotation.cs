@@ -9,8 +9,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// A SyntaxAnnotation is used to annotate syntax elements with additional information. 
-    /// 
+    /// A SyntaxAnnotation is used to annotate syntax elements with additional information.
+    ///
     /// Since syntax elements are immutable, annotating them requires creating new instances of them
     /// with the annotations attached.
     /// </summary>

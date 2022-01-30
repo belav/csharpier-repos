@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Provides simple string formatting from existing properties.
-	/// </summary>
+    /// Provides simple string formatting from existing properties.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class StringFormatAttribute : DictionaryBehaviorAttribute, IDictionaryPropertyGetter
     {
@@ -36,13 +36,13 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Gets the string format.
-		/// </summary>
+        /// Gets the string format.
+        /// </summary>
         public string Format { get; private set; }
 
         /// <summary>
-		/// Gets the format properties.
-		/// </summary>
+        /// Gets the format properties.
+        /// </summary>
         public string Properties { get; private set; }
 
 		#region IDictionaryPropertyGetter

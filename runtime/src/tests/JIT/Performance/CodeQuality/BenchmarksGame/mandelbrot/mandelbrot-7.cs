@@ -8,13 +8,13 @@
 
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
-
+   
    started with Java #2 program (Krause/Whipkey/Bennet/AhnTran/Enotus/Stalcup)
    adapted for C# by Jan de Vaan
    simplified and optimised to use TPL by Anthony Lloyd
    simplified to compute Cib alongside Crb by Tanner Gooding
    optimized to use Vector<double> by Tanner Gooding
-*/
+   */
 
 using System;
 using System.Numerics;

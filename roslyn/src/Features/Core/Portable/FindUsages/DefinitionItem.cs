@@ -17,10 +17,10 @@ namespace Microsoft.CodeAnalysis.FindUsages
     /// <summary>
     /// Information about a symbol's definition that can be displayed in an editor
     /// and used for navigation.
-    /// 
+    ///
     /// Standard implmentations can be obtained through the various <see cref="DefinitionItem"/>.Create
     /// overloads.
-    /// 
+    ///
     /// Subclassing is also supported for scenarios that fall outside the bounds of
     /// these common cases.
     /// </summary>
@@ -40,7 +40,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
         internal const string RQNameKey2 = nameof(RQNameKey2);
 
         /// <summary>
-        /// For metadata symbols we encode information in the <see cref="Properties"/> so we can 
+        /// For metadata symbols we encode information in the <see cref="Properties"/> so we can
         /// retrieve the symbol later on when navigating.  This is needed so that we can go to
         /// metadata-as-source for metadata symbols.  We need to store the <see cref="SymbolKey"/>
         /// for the symbol and the project ID that originated the symbol.  With these we can correctly recover the symbol.
@@ -60,7 +60,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
         private const string NonNavigable = nameof(NonNavigable);
 
         /// <summary>
-        /// Descriptive tags from <see cref="WellKnownTags"/>. These tags may influence how the 
+        /// Descriptive tags from <see cref="WellKnownTags"/>. These tags may influence how the
         /// item is displayed.
         /// </summary>
         public ImmutableArray<string> Tags { get; }
@@ -78,13 +78,13 @@ namespace Microsoft.CodeAnalysis.FindUsages
         public ImmutableDictionary<string, string> DisplayableProperties { get; }
 
         /// <summary>
-        /// The DisplayParts just for the name of this definition.  Generally used only for 
+        /// The DisplayParts just for the name of this definition.  Generally used only for
         /// error messages.
         /// </summary>
         public ImmutableArray<TaggedText> NameDisplayParts { get; }
 
         /// <summary>
-        /// The full display parts for this definition.  Displayed in a classified 
+        /// The full display parts for this definition.  Displayed in a classified
         /// manner when possible.
         /// </summary>
         public ImmutableArray<TaggedText> DisplayParts { get; }
@@ -96,7 +96,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
         public ImmutableArray<TaggedText> OriginationParts { get; }
 
         /// <summary>
-        /// Additional locations to present in the UI.  A definition may have multiple locations 
+        /// Additional locations to present in the UI.  A definition may have multiple locations
         /// for cases like partial types/members.
         /// </summary>
         public ImmutableArray<DocumentSpan> SourceSpans { get; }
@@ -104,11 +104,11 @@ namespace Microsoft.CodeAnalysis.FindUsages
         /// <summary>
         /// Whether or not this definition should be presented if we never found any references to
         /// it.  For example, when searching for a property, the FindReferences engine will cascade
-        /// to the accessors in case any code specifically called those accessors (can happen in 
+        /// to the accessors in case any code specifically called those accessors (can happen in
         /// cross-language cases).  However, in the normal case where there were no calls specifically
-        /// to the accessor, we would not want to display them in the UI.  
-        /// 
-        /// For most definitions we will want to display them, even if no references were found.  
+        /// to the accessor, we would not want to display them in the UI.
+        ///
+        /// For most definitions we will want to display them, even if no references were found.
         /// This property allows for this customization in behavior.
         /// </summary>
         public bool DisplayIfNoReferences { get; }

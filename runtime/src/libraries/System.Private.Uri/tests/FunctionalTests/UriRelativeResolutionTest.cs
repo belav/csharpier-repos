@@ -131,9 +131,9 @@ namespace System.PrivateUri.Tests
            considered to be a loophole in prior specifications of partial URI
            [RFC1630].  Its use should be avoided but is allowed for backward
            compatibility.
-
-              "http:g"        =  "http:g"         ; for strict parsers
-                              /  "http://a/b/c/g" ; for backward compatibility "*/
+           
+           "http:g"        =  "http:g"         ; for strict parsers
+           /  "http://a/b/c/g" ; for backward compatibility "*/
         public void Uri_Relative_BaseVsSimplePartialPathWithScheme_ReturnsPartialPathWithScheme()
         {
             string partialPath = "scheme:p1";
@@ -822,7 +822,7 @@ namespace System.PrivateUri.Tests
                 reserved       = gen-delims / sub-delims
                 gen-delims     = ":" / "/" / "?" / "#" / "[" / "]" / "@"
                 sub-delims     = "!" / "$" / "&" / "'" / "(" / ")"
-                                / "*" / "+" / "," / ";" / "="
+                / "*" / "+" / "," / ";" / "="
                 */
 
                 return _iriReserved.Contains(c);
@@ -840,15 +840,15 @@ namespace System.PrivateUri.Tests
                 /*
                 ALPHA          =  %x41-5A / %x61-7A   ; A-Z / a-z
                 DIGIT          =  %x30-39
-
+                
                 iunreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~" / ucschar
-
+                
                 ucschar        = %xA0-D7FF / %xF900-FDCF / %xFDF0-FFEF
-                                / %x10000-1FFFD / %x20000-2FFFD / %x30000-3FFFD
-                                / %x40000-4FFFD / %x50000-5FFFD / %x60000-6FFFD
-                                / %x70000-7FFFD / %x80000-8FFFD / %x90000-9FFFD
-                                / %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD
-                                / %xD0000-DFFFD / %xE1000-EFFFD
+                / %x10000-1FFFD / %x20000-2FFFD / %x30000-3FFFD
+                / %x40000-4FFFD / %x50000-5FFFD / %x60000-6FFFD
+                / %x70000-7FFFD / %x80000-8FFFD / %x90000-9FFFD
+                / %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD
+                / %xD0000-DFFFD / %xE1000-EFFFD
                 */
 
                 // https://www.ietf.org/rfc/rfc3987.txt 2.2

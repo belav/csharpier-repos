@@ -63,7 +63,7 @@ namespace Microsoft.CodeAnalysis.Interactive
         /// Test only setting.
         /// True to join output writing threads when the host is being disposed.
         /// We have to join the threads before each test is finished, otherwise xunit won't be able to unload the AppDomain.
-        /// WARNING: Joining the threads might deadlock if <see cref="Dispose()"/> is executing on the UI thread, 
+        /// WARNING: Joining the threads might deadlock if <see cref="Dispose()"/> is executing on the UI thread,
         /// since the threads are dispatching to UI thread to write the output to the editor buffer.
         /// </remarks>
         private readonly bool _joinOutputWritingThreadsOnDisposal;

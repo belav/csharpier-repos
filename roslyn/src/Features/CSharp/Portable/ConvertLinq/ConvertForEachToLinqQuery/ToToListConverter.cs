@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
         ///     ...
         ///     list.Add(item);
         ///  }
-        ///  
+        ///
         ///  Output:
         ///  list.AddRange(queryGenerated);
         protected override StatementSyntax CreateDefaultStatement(

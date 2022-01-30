@@ -147,7 +147,7 @@ namespace ILCompiler.IBC
         /// See comment above ReadMIbcGroup for details of the group format
         ///
         /// The mibcGroupName is in the following format "Assembly_{definingAssemblyName};{OtherAssemblyName};{OtherAssemblyName};...; (OtherAssemblyName is ; delimited)
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public static ProfileData ParseMIbcFile(

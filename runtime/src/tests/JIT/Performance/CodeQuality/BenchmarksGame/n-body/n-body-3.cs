@@ -9,9 +9,9 @@
 
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
-
+   
    contributed by Isaac Gouy, optimization and use of more C# idioms by Robert F. Tobler
-*/
+   */
 
 using System;
 

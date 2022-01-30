@@ -21,7 +21,7 @@ internal static class Http2FrameReader
         +=+=============================================================+
         |                   Frame Payload (0...)                      ...
         +---------------------------------------------------------------+
-    */
+        */
     public const int HeaderLength = 9;
 
     private const int TypeOffset = 3;
@@ -112,7 +112,7 @@ internal static class Http2FrameReader
                 +---------------------------------------------------------------+
                 |                           Padding (*)                       ...
                 +---------------------------------------------------------------+
-            */
+                */
             case Http2FrameType.DATA: // Variable 0 or 1
                 frame.DataPadLength = frame.DataHasPadding ? extendedHeaders[0] : (byte)0;
                 break;
@@ -129,7 +129,7 @@ internal static class Http2FrameReader
                 +---------------------------------------------------------------+
                 |                           Padding (*)                       ...
                 +---------------------------------------------------------------+
-            */
+                */
             case Http2FrameType.HEADERS:
                 if (frame.HeadersHasPadding)
                 {
@@ -163,7 +163,7 @@ internal static class Http2FrameReader
                 +---------------------------------------------------------------+
                 |                  Additional Debug Data (*)                    |
                 +---------------------------------------------------------------+
-            */
+                */
             case Http2FrameType.GOAWAY:
                 frame.GoAwayLastStreamId = (int)Bitshifter.ReadUInt31BigEndian(extendedHeaders);
                 frame.GoAwayErrorCode = (Http2ErrorCode)BinaryPrimitives.ReadUInt32BigEndian(
@@ -177,7 +177,7 @@ internal static class Http2FrameReader
                 +-+-------------+-----------------------------------------------+
                 |   Weight (8)  |
                 +-+-------------+
-            */
+                */
             case Http2FrameType.PRIORITY:
                 frame.PriorityStreamDependency = (int)Bitshifter.ReadUInt31BigEndian(
                     extendedHeaders
@@ -189,7 +189,7 @@ internal static class Http2FrameReader
                 +---------------------------------------------------------------+
                 |                        Error Code (32)                        |
                 +---------------------------------------------------------------+
-            */
+                */
             case Http2FrameType.RST_STREAM:
                 frame.RstStreamErrorCode = (Http2ErrorCode)BinaryPrimitives.ReadUInt32BigEndian(
                     extendedHeaders
@@ -200,7 +200,7 @@ internal static class Http2FrameReader
                 +-+-------------------------------------------------------------+
                 |R|              Window Size Increment (31)                     |
                 +-+-------------------------------------------------------------+
-            */
+                */
             case Http2FrameType.WINDOW_UPDATE:
                 frame.WindowUpdateSizeIncrement = (int)Bitshifter.ReadUInt31BigEndian(
                     extendedHeaders

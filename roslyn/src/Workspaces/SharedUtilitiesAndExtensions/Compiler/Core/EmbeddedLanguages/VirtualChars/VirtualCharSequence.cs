@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
 {
     /// <summary>
-    /// Represents the individual characters that raw string token represents (i.e. with escapes collapsed).  
+    /// Represents the individual characters that raw string token represents (i.e. with escapes collapsed).
     /// The difference between this and the result from token.ValueText is that for each collapsed character
     /// returned the original span of text in the original token can be found.  i.e. if you had the
     /// following in C#:
@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         private readonly Chunk _leafCharacters;
 
         /// <summary>
-        /// The portion of <see cref="_leafCharacters"/> that is being exposed.  This span 
+        /// The portion of <see cref="_leafCharacters"/> that is being exposed.  This span
         /// is `[inclusive, exclusive)`.
         /// </summary>
         private readonly TextSpan _span;
@@ -134,7 +134,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
 
         /// <summary>
         /// Combines two <see cref="VirtualCharSequence"/>s, producing a final
-        /// sequence that points at the same underlying data, but spans from the 
+        /// sequence that points at the same underlying data, but spans from the
         /// start of <paramref name="chars1"/> to the end of <paramref name="chars2"/>.
         /// </summary>
         public static VirtualCharSequence FromBounds(

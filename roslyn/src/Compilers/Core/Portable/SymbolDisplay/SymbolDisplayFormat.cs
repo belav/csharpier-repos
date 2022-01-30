@@ -299,7 +299,7 @@ namespace Microsoft.CodeAnalysis
         public SymbolDisplayExtensionMethodStyle ExtensionMethodStyle { get; }
 
         /// <summary>
-        /// Determines how properties are displayed. 
+        /// Determines how properties are displayed.
         /// For example, "Prop" vs "Prop { get; set; }" in C# or "Prop" vs. "ReadOnly Prop" in Visual Basic.
         /// </summary>
         public SymbolDisplayPropertyStyle PropertyStyle { get; }
@@ -349,7 +349,7 @@ namespace Microsoft.CodeAnalysis
         /// The settings that determine how parameters (of methods, properties/indexers, and delegates) are displayed.
         /// </param>
         /// <param name="propertyStyle">
-        /// The settings that determine how properties are displayed. 
+        /// The settings that determine how properties are displayed.
         /// For example, "Prop" vs "Prop { get; set; }" in C# or "Prop" vs. "ReadOnly Prop" in Visual Basic.
         /// </param>
         /// <param name="localOptions">

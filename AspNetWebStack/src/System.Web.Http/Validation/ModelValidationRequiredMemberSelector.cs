@@ -10,7 +10,7 @@ using System.Web.Http.Metadata;
 namespace System.Web.Http.Validation
 {
     /// <summary>
-    /// This <see cref="IRequiredMemberSelector"/> selects required members by checking for any 
+    /// This <see cref="IRequiredMemberSelector"/> selects required members by checking for any
     /// required ModelValidators associated with the member. This is the default implementation used by
     /// <see cref="HttpConfiguration"/>.
     /// </summary>

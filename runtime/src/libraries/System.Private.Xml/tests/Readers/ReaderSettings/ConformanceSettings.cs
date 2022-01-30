@@ -325,7 +325,7 @@ namespace System.Xml.Tests
         {
             /*
             The following XML Strings will be created :
-
+            
             1 Text at Top Level
             2 More than one element at top level
             3 WhiteSpace at Top level
@@ -339,7 +339,7 @@ namespace System.Xml.Tests
             11 prefix Xml missing Namepace URI
             12 prefix or localname xmlns matches with wrong namespace URI
             13 prefix or localname xmlns missing namespace uri.
-
+            
             */
 
             List<string> list = new List<string>();

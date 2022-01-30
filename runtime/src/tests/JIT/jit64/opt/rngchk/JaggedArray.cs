@@ -61,8 +61,8 @@ namespace SimpleArray_01
     internal class Test
     {
         /********************************************************************************************
-		* RngChk shall not be eliminated if directly access jaggedArray elements
-		*********************************************************************************************/
+        * RngChk shall not be eliminated if directly access jaggedArray elements
+        *********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test1()
         {
@@ -80,8 +80,8 @@ namespace SimpleArray_01
         }
 
         /********************************************************************************************
-		* RngChk shall not be eliminated if the loop upper limit is larger than the array bound
-		********************************************************************************************/
+        * RngChk shall not be eliminated if the loop upper limit is larger than the array bound
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test2()
         {
@@ -99,8 +99,8 @@ namespace SimpleArray_01
         }
 
         /********************************************************************************************
-		* RngChk is not eliminated if the array is modified
-		********************************************************************************************/
+        * RngChk is not eliminated if the array is modified
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test3()
         {
@@ -121,8 +121,8 @@ namespace SimpleArray_01
         }
 
         /********************************************************************************************
-		* RngChk is not eliminated if the upper limit of the array is modified
-		********************************************************************************************/
+        * RngChk is not eliminated if the upper limit of the array is modified
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test4()
         {
@@ -140,8 +140,8 @@ namespace SimpleArray_01
         }
 
         /********************************************************************************************
-		* RngChk is not eliminated if induction variable is modified
-		********************************************************************************************/
+        * RngChk is not eliminated if induction variable is modified
+        ********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test5()
         {

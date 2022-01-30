@@ -153,7 +153,7 @@ namespace System.Text.RegularExpressions.Tests
         ///   Yes(index,length)
         ///   No
         ///   TIMEOUT
-        ///   ERROR 
+        ///   ERROR
         ///  and in the case of TIMEOUT or ERROR time is 10000 (the timeout limit of 10sec)
         /// </summary>
         [ConditionalFact(nameof(Enabled))]

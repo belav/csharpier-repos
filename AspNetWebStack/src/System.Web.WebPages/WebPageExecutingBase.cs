@@ -13,12 +13,12 @@ using System.Web.WebPages.Resources;
 WebPage class hierarchy
 
 WebPageExecutingBase                        The base class for all Plan9 files (_pagestart, _appstart, and regular pages)
-    ApplicationStartPage                    Used for _appstart.cshtml
-    WebPageRenderingBase
-        StartPage                           Used for _pagestart.cshtml
-        WebPageBase
-            WebPage                         Plan9Pages
-            ViewWebPage?                    MVC Views
+ApplicationStartPage                    Used for _appstart.cshtml
+WebPageRenderingBase
+StartPage                           Used for _pagestart.cshtml
+WebPageBase
+WebPage                         Plan9Pages
+ViewWebPage?                    MVC Views
 HelperPage                                  Base class for Web Pages in App_Code.
 */
 

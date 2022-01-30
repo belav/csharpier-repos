@@ -791,7 +791,7 @@ namespace System.Xml
                         and not really insist on a specific value. Who knows in the future it
                         might be OK to say xml:blabla
                         else {
-                            throw new ArgumentException(SR.Xml_InvalidPrefix);
+                        throw new ArgumentException(SR.Xml_InvalidPrefix);
                         }*/
                     }
                     else if (prefix == "xmlns")

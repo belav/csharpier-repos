@@ -210,9 +210,9 @@ namespace System.Data.OleDb
 
         /*
         internal long RecordsAffectedLong {
-            get {
-                return (long)_recordsAffected;
-            }
+        get {
+        return (long)_recordsAffected;
+        }
         }*/
 
         public override object this[int index]
@@ -1802,11 +1802,11 @@ namespace System.Data.OleDb
                         /*if (((null != connection) && connection.PropertyGetProviderOwnedMemory())
                             || ((null != command) && command.Connection.PropertyGetProviderOwnedMemory())) {
                             bindings.MemOwner = DBMemOwner.ProviderOwned;
-
+                            
                             bindings.MaxLen = ADP.PtrSize;
                             bindings.DbType = (short) (getType | DbType.BYREF);
-                        }
-                        else*/
+                            }
+                            else*/
 
                         if (ODB.LargeDataSize < info.size)
                         {
@@ -1829,7 +1829,7 @@ namespace System.Data.OleDb
                     /*if (((null != connection) && connection.PropertyGetProviderOwnedMemory())
                         || ((null != command) && command.Connection.PropertyGetProviderOwnedMemory())) {
                         bindings.MemOwner = DBMemOwner.ProviderOwned;
-                    }*/
+                        }*/
                     maxLen = ADP.PtrSize;
                     getType = (short)((ushort)getType | (ushort)NativeDBType.BYREF);
                 }

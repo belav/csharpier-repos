@@ -1394,7 +1394,7 @@ partial class Base
         /// I -> M(ref int)
         /// B -> M(out int)
         /// D : B, I
-        /// 
+        ///
         /// I source, B source, D source
         /// </summary>
         [Fact]
@@ -1454,7 +1454,7 @@ class Program
         /// I -> M(ref int)
         /// B -> M(out int)
         /// D : B, I
-        /// 
+        ///
         /// I source, B metadata, D source
         /// </summary>
         [Fact]
@@ -1534,7 +1534,7 @@ class Program
         /// I -> M(ref int)
         /// B -> M(out int)
         /// D : B, I
-        /// 
+        ///
         /// I metadata, B source, D source
         /// </summary>
         [Fact]
@@ -1599,7 +1599,7 @@ class Program
         /// I -> M(ref int)
         /// B -> M(out int)
         /// D : B, I
-        /// 
+        ///
         /// I metadata, B metadata, D source
         /// </summary>
         [Fact]
@@ -1717,7 +1717,7 @@ class C : B { }
         /// I -> M(ref int)
         /// B -> M(out int)
         /// D : B, I
-        /// 
+        ///
         /// I source, B source, D source
         /// </summary>
         [Fact]

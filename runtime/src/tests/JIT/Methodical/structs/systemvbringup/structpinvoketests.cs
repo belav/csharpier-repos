@@ -174,17 +174,17 @@ namespace structinreg
         [StructLayout(LayoutKind.Sequential)]
         public struct S28
         {
-            public object x;
-            public int y;
+        public object x;
+        public int y;
         }
-
+        
         [StructLayout(LayoutKind.Sequential)]
         public struct S29
         {
-            public int x;
-            public object y;
+        public int x;
+        public object y;
         }
- Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved. */
+        Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved. */
         public struct S30
         {
             public long x;
@@ -215,7 +215,7 @@ namespace structinreg
         /* These tests are not working on non Windows CoreCLR.  Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved.
         public delegate void MyCallback28(S28 s);
         public delegate void MyCallback29(S29 s);
- Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved. */
+        Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved. */
         public delegate void MyCallback30(S30 s1, S30 s2, S30 s3);
 
         [DllImport("jitstructtests_lib")]
@@ -282,10 +282,10 @@ namespace structinreg
         
         [DllImport("jitstructtests_lib")]
         public static extern void InvokeCallback28(MyCallback28 callback, S28 s);
-
+        
         [DllImport("jitstructtests_lib")]
         public static extern void InvokeCallback29(MyCallback29 callback, S29 s);
- Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved. */
+        Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved. */
         [DllImport("jitstructtests_lib")]
         public static extern void InvokeCallback30(MyCallback30 callback, S30 s1, S30 s2, S30 s3);
 
@@ -350,13 +350,13 @@ namespace structinreg
         public static extern S20 InvokeCallback20R(MyCallback20 callback, S20 s);
 
         /* These tests are not working on non Windows CoreCLR.  Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved.
-
+        
         [DllImport("jitstructtests_lib")]
         public static extern S28 InvokeCallback28R(MyCallback28 callback, S28 s);
-
+        
         [DllImport("jitstructtests_lib")]
         public static extern S29 InvokeCallback29R(MyCallback29 callback, S29 s);
- Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved. */
+        Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved. */
         static public int Main1()
         {
             Program3 p = new Program3();
@@ -773,49 +773,49 @@ namespace structinreg
                 S28 s28;
                 s28.x = null;
                 s28.y = 1;
-
+                
                 InvokeCallback28((par) => {
-                    Console.WriteLine("S28: {0}, {1}", par.x == null ? "Null" : "Not null", par.y);
-                    if (par.x != null || par.y != 1)
-                    {
-                        throw new System.Exception();
-                    }
+                Console.WriteLine("S28: {0}, {1}", par.x == null ? "Null" : "Not null", par.y);
+                if (par.x != null || par.y != 1)
+                {
+                throw new System.Exception();
+                }
                 }, s28);
-
+                
                 s28.x = testClass;
                 s28.y = 5;
-
+                
                 InvokeCallback28((par) => {
-                    Console.WriteLine("S28: {0}, {1}", par.x == null ? "Null" : "Not null", par.y);
-                    if (par.x != testClass || par.y != 5)
-                    {
-                        throw new System.Exception();
-                    }
+                Console.WriteLine("S28: {0}, {1}", par.x == null ? "Null" : "Not null", par.y);
+                if (par.x != testClass || par.y != 5)
+                {
+                throw new System.Exception();
+                }
                 }, s28);
-
+                
                 S29 s29;
                 s29.x = 1;
                 s29.y = null;
-
+                
                 InvokeCallback29((par) => {
-                    Console.WriteLine("S29: {0}, {1}", par.x, par.y == null ? "Null" : "Not null");
-                    if (par.x != 1 || par.y != null)
-                    {
-                        throw new System.Exception();
-                    }
+                Console.WriteLine("S29: {0}, {1}", par.x, par.y == null ? "Null" : "Not null");
+                if (par.x != 1 || par.y != null)
+                {
+                throw new System.Exception();
+                }
                 }, s29);
-
+                
                 s29.x = 5;
                 s29.y = testClass;
-
+                
                 InvokeCallback29((par) => {
-                    Console.WriteLine("S29: {0}, {1}", par.x, par.y == null ? "Null" : "Not null");
-                    if (par.x != 5 || par.y != testClass)
-                    {
-                        throw new System.Exception();
-                    }
+                Console.WriteLine("S29: {0}, {1}", par.x, par.y == null ? "Null" : "Not null");
+                if (par.x != 5 || par.y != testClass)
+                {
+                throw new System.Exception();
+                }
                 }, s29);
-                 Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved. */
+                Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved. */
                 S30 s30;
                 s30.x = 1;
                 s30.y = 2;
@@ -1308,63 +1308,63 @@ namespace structinreg
                 /* These tests are not working on non Windows CoreCLR.  Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved.
                 s28.x = null;
                 S28 s28r = InvokeCallback28R((par) => {
-                    Console.WriteLine("S28: {0}, {1}", par.x == null ? "Null" : "Not null", par.y);
-                    if (par.x == null || par.y != 5)
-                    {
-                        throw new System.Exception();
-                    }
+                Console.WriteLine("S28: {0}, {1}", par.x == null ? "Null" : "Not null", par.y);
+                if (par.x == null || par.y != 5)
+                {
+                throw new System.Exception();
+                }
                 }, s28);
                 Console.WriteLine("S28R: {0}, {1}", s28r.x == null ? "Null" : "Not null", s28r.y);
                 if (s28r.x == null || s28r.y != 5)
                 {
-                    throw new System.Exception();
+                throw new System.Exception();
                 }
-
+                
                 s28.x = testClass;
                 s28.y = 5;
-
+                
                 s28r = InvokeCallback28R((par) => {
-                    Console.WriteLine("S28: {0}, {1}", par.x == null ? "Null" : "Not null", par.y);
-                    if (par.x != testClass || par.y != 5)
-                    {
-                        throw new System.Exception();
-                    }
+                Console.WriteLine("S28: {0}, {1}", par.x == null ? "Null" : "Not null", par.y);
+                if (par.x != testClass || par.y != 5)
+                {
+                throw new System.Exception();
+                }
                 }, s28);
                 Console.WriteLine("S28R: {0}, {1}", s28r.x == null ? "Null" : "Not null", s28r.y);
                 if (s28r.x != testClass || s28r.y != 5)
                 {
-                    throw new System.Exception();
+                throw new System.Exception();
                 }
-
+                
                 s29.y = null;
                 S29 s29r = InvokeCallback29R((par) => {
-                    Console.WriteLine("S29: {0}, {1}", par.x, par.y == null ? "Null" : "Not null");
-                    if (par.x != 5 || par.y == null)
-                    {
-                        throw new System.Exception();
-                    }
+                Console.WriteLine("S29: {0}, {1}", par.x, par.y == null ? "Null" : "Not null");
+                if (par.x != 5 || par.y == null)
+                {
+                throw new System.Exception();
+                }
                 }, s29);
                 Console.WriteLine("S29R: {0}, {1}", s29r.x, s29r.y == null ? "Null" : "Not null");
                 if (s29r.x != 5 || s29r.y == null)
                 {
-                    throw new System.Exception();
+                throw new System.Exception();
                 }
-
+                
                 s29.x = 5;
                 s29.y = testClass;
                 s29r = InvokeCallback29R((par) => {
-                    Console.WriteLine("S29: {0}, {1}", par.x, par.y == null ? "Null" : "Not null");
-                    if (par.x != 5 || par.y != testClass)
-                    {
-                        throw new System.Exception();
-                    }
-                }, s29);            
+                Console.WriteLine("S29: {0}, {1}", par.x, par.y == null ? "Null" : "Not null");
+                if (par.x != 5 || par.y != testClass)
+                {
+                throw new System.Exception();
+                }
+                }, s29);
                 Console.WriteLine("S29R: {0}, {1}", s29r.x, s29r.y == null ? "Null" : "Not null");
                 if (s29r.x != 5 || s29r.y != testClass)
                 {
-                    throw new System.Exception();
+                throw new System.Exception();
                 }
-                 Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved. */
+                Enable this when https://github.com/dotnet/runtime/issues/4680 is resolved. */
             }
             catch (Exception e)
             {

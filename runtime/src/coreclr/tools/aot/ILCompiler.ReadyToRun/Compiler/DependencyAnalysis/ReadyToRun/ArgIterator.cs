@@ -1931,11 +1931,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private bool _RETURN_HAS_RET_BUFFER; // Cached value of HasRetBuffArg
         private uint _fpReturnSize;
 
-        /*        ITERATION_STARTED               = 0x0001,   
+        /*        ITERATION_STARTED               = 0x0001,
                 SIZE_OF_ARG_STACK_COMPUTED      = 0x0002,
                 RETURN_FLAGS_COMPUTED           = 0x0004,
                 RETURN_HAS_RET_BUFFER           = 0x0008,   // Cached value of HasRetBuffArg
-        */
+                */
         private enum ParamTypeLocation
         {
             Stack,

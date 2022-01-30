@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             private readonly DiagnosticAnalyzerInfoCache _analyzerInfoCache;
 
             /// <summary>
-            /// Analyzers supplied by the host (IDE). These are built-in to the IDE, the compiler, or from an installed IDE extension (VSIX). 
+            /// Analyzers supplied by the host (IDE). These are built-in to the IDE, the compiler, or from an installed IDE extension (VSIX).
             /// Maps language name to the analyzers and their state.
             /// </summary>
             private ImmutableDictionary<string, HostAnalyzerStateSets> _hostAnalyzerStateMap;
@@ -61,7 +61,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 GetAllHostStateSets().Concat(GetAllProjectStateSets());
 
             /// <summary>
-            /// Return <see cref="StateSet"/>s for the given <see cref="ProjectId"/>. 
+            /// Return <see cref="StateSet"/>s for the given <see cref="ProjectId"/>.
             /// This will never create new <see cref="StateSet"/> but will return ones already created.
             /// </summary>
             public IEnumerable<StateSet> GetStateSets(ProjectId projectId)
@@ -76,17 +76,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             /// <summary>
             /// Return <see cref="StateSet"/>s for the given <see cref="Project"/>.
             /// This will never create new <see cref="StateSet"/> but will return ones already created.
-            /// Difference with <see cref="GetStateSets(ProjectId)"/> is that 
+            /// Difference with <see cref="GetStateSets(ProjectId)"/> is that
             /// this will only return <see cref="StateSet"/>s that have same language as <paramref name="project"/>.
             /// </summary>
             public IEnumerable<StateSet> GetStateSets(Project project) =>
                 GetStateSets(project.Id).Where(s => s.Language == project.Language);
 
             /// <summary>
-            /// Return <see cref="StateSet"/>s for the given <see cref="Project"/>. 
+            /// Return <see cref="StateSet"/>s for the given <see cref="Project"/>.
             /// This will either return already created <see cref="StateSet"/>s for the specific snapshot of <see cref="Project"/> or
             /// It will create new <see cref="StateSet"/>s for the <see cref="Project"/> and update internal state.
-            /// 
+            ///
             /// since this has a side-effect, this should never be called concurrently. and incremental analyzer (solution crawler) should guarantee that.
             /// </summary>
             public IEnumerable<StateSet> GetOrUpdateStateSets(Project project)
@@ -98,7 +98,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             }
 
             /// <summary>
-            /// Return <see cref="StateSet"/>s for the given <see cref="Project"/>. 
+            /// Return <see cref="StateSet"/>s for the given <see cref="Project"/>.
             /// This will either return already created <see cref="StateSet"/>s for the specific snapshot of <see cref="Project"/> or
             /// It will create new <see cref="StateSet"/>s for the <see cref="Project"/>.
             /// Unlike <see cref="GetOrUpdateStateSets(Project)"/>, this has no side effect.

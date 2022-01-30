@@ -10,7 +10,7 @@ namespace System.Web.WebPages
 {
     /// <summary>
     /// This is a wrapper around PageDataDictionary[[dynamic]] which allows dynamic
-    /// access (e.g. dict.Foo). Like PageDataDictionary, it returns null if the key is not found, 
+    /// access (e.g. dict.Foo). Like PageDataDictionary, it returns null if the key is not found,
     /// instead of throwing an exception.
     /// This class is intended to be used as DynamicPageDataDictionary[[dynamic]]
     /// </summary>

@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Creates a new tree of nodes with the specified nodes being tracked.
-        /// 
+        ///
         /// Use GetCurrentNode on the subtree resulting from this operation, or any transformation of it,
         /// to get the current node corresponding to the original tracked node.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Creates a new tree of nodes with the specified nodes being tracked.
-        /// 
+        ///
         /// Use GetCurrentNode on the subtree resulting from this operation, or any transformation of it,
         /// to get the current node corresponding to the original tracked node.
         /// </summary>

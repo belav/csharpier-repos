@@ -343,7 +343,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <remarks>
-            /// This method boils down to Rewrite(XDocument.Load(fileAttrValue).XPathSelectElements(pathAttrValue)).  
+            /// This method boils down to Rewrite(XDocument.Load(fileAttrValue).XPathSelectElements(pathAttrValue)).
             /// Everything else is error handling.
             /// </remarks>
             private XNode[] RewriteIncludeElement(

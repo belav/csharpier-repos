@@ -118,14 +118,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             /// void DoSomething(int i, Derived1 d) { }
             /// void DoSomething(string s, Derived2 d) { }
             /// void DoSomething(int i, Derived3 d) { }
-            /// 
+            ///
             /// Base b;
             /// DoSomething(1, [||]b);
             ///
             /// *void DoSomething(string s, Derived2 d) { }* is not the perfect match candidate function for
             /// *DoSomething(1, [||]b)* because int and string are not ancestor-descendant relationship. Thus,
             /// Derived2 is not a potential conversion type.
-            /// 
+            ///
             /// <param name="argumentList"> The argument list of invocation expression</param>
             /// <param name="parameters"> The parameters of function</param>
             /// <param name="targetArgument">The argument need to be cast.</param>

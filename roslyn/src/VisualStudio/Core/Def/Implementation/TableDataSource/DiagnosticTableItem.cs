@@ -92,7 +92,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         /// <summary>
         /// Used to group diagnostics that only differ in the project they come from.
-        /// We want to avoid displaying diagnostic multuple times when it is reported from 
+        /// We want to avoid displaying diagnostic multuple times when it is reported from
         /// multi-targeted projects and/or files linked to multiple projects.
         /// Note that a linked file is represented by unique <see cref="DocumentId"/> in each project it is linked to,
         /// so we don't include <see cref="DocumentId"/> in the comparison.

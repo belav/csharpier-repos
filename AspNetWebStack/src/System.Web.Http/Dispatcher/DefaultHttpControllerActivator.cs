@@ -13,10 +13,10 @@ namespace System.Web.Http.Dispatcher
     /// <summary>
     /// Default implementation of an <see cref="IHttpControllerActivator"/>.
     /// A different implementation can be registered via the <see cref="T:System.Web.Http.Services.DependencyResolver"/>.
-    /// We optimize for the case where we have an <see cref="Controllers.ApiControllerActionInvoker"/> 
+    /// We optimize for the case where we have an <see cref="Controllers.ApiControllerActionInvoker"/>
     /// instance per <see cref="HttpControllerDescriptor"/> instance but can support cases where there are
-    /// many <see cref="HttpControllerDescriptor"/> instances for one <see cref="System.Web.Http.Controllers.ApiControllerActionInvoker"/> 
-    /// as well. In the latter case the lookup is slightly slower because it goes through the 
+    /// many <see cref="HttpControllerDescriptor"/> instances for one <see cref="System.Web.Http.Controllers.ApiControllerActionInvoker"/>
+    /// as well. In the latter case the lookup is slightly slower because it goes through the
     /// <see cref="P:HttpControllerDescriptor.Properties"/> dictionary.
     /// </summary>
     public class DefaultHttpControllerActivator : IHttpControllerActivator

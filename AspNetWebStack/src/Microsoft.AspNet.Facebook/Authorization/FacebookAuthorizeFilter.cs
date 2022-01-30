@@ -183,8 +183,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
         }
 
         /// <summary>
-        /// Adds a query string parameter to a <see cref="NameValueCollection"/> that enables a 
-        /// <see cref="FacebookAuthorizeFilter"/> to detect when cookies are unavailable and then trigger the 
+        /// Adds a query string parameter to a <see cref="NameValueCollection"/> that enables a
+        /// <see cref="FacebookAuthorizeFilter"/> to detect when cookies are unavailable and then trigger the
         /// <see cref="OnCannotCreateCookies"/> hook.
         /// </summary>
         /// <param name="queries">List of query parameters that are used to create a url.</param>

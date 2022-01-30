@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 namespace System.Web.Http.Tracing.Tracers
 {
     /// <summary>
-    /// Tracer for <see cref="JsonMediaTypeFormatter"/>.  
+    /// Tracer for <see cref="JsonMediaTypeFormatter"/>.
     /// It is required because users can select formatters by this type.
     /// </summary>
     internal class JsonMediaTypeFormatterTracer

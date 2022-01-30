@@ -13,7 +13,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// This portion of the binder converts a AnonymousObjectCreationExpressionSyntax into 
+    /// This portion of the binder converts a AnonymousObjectCreationExpressionSyntax into
     /// a bound anonymous object creation node
     /// </summary>
     internal partial class Binder
@@ -201,9 +201,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Actually, defines if an error ERR_AnonymousTypeNotAvailable is to be generated; 
-        /// 
-        /// Dev10 rules (which are based on BindingContext::InMethod()) are difficult to 
+        /// Actually, defines if an error ERR_AnonymousTypeNotAvailable is to be generated;
+        ///
+        /// Dev10 rules (which are based on BindingContext::InMethod()) are difficult to
         /// reproduce, so this implementation checks both current symbol as well as syntax nodes.
         /// </summary>
         private bool IsAnonymousTypesAllowed()

@@ -233,7 +233,7 @@ namespace RunTests
         }
 
         /// <summary>
-        /// Invoked when a timeout occurs and we need to dump all of the test processes and shut down 
+        /// Invoked when a timeout occurs and we need to dump all of the test processes and shut down
         /// the runnner.
         /// </summary>
         private static async Task HandleTimeout(

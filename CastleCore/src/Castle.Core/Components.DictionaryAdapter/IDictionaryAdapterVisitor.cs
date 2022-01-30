@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Contract for traversing a <see cref="IDictionaryAdapter"/>.
-	/// </summary>
+    /// Contract for traversing a <see cref="IDictionaryAdapter"/>.
+    /// </summary>
     public interface IDictionaryAdapterVisitor
     {
         bool VisitDictionaryAdapter(IDictionaryAdapter dictionaryAdapter, object state);

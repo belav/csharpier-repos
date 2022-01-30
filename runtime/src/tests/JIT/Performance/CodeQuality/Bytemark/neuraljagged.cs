@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 /*
 ** This program was translated to C# and adapted for xunit-performance.
-** New variants of several tests were added to compare class versus 
+** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
 
@@ -23,7 +23,7 @@
 ** are error-free.  Consequently, McGraw-HIll and BYTE Magazine make
 ** no claims in regard to the fitness of the source code, executable
 ** code, and documentation of the BYTEmark.
-** 
+**
 ** Furthermore, BYTE Magazine, McGraw-Hill, and all employees
 ** of McGraw-Hill cannot be held responsible for any damages resulting
 ** from the use of this code or the results obtained from using
@@ -104,8 +104,8 @@ public class NeuralJagged : NNetStruct
 
     /*
     ** GLOBALS
-
-
+    
+    
     */
     public static double[][] mid_wts = new double[MID_SIZE][];
     public static double[][] out_wts = new double[OUT_SIZE][];
@@ -166,44 +166,44 @@ public class NeuralJagged : NNetStruct
     /*********************
      ** read_data_file() **
      **********************
-    ** Read in the input data file and store the patterns in
-    ** in_pats and out_pats.
-    ** The format for the data file is as follows:
-    **
-    ** line#   data expected
-    ** -----   ------------------------------
-    ** 1               In-X-size,in-y-size,out-size
-    ** 2               number of patterns in file
-    ** 3               1st X row of 1st input pattern
-    ** 4..             following rows of 1st input pattern pattern
-    **                 in-x+2  y-out pattern
-    **                                 1st X row of 2nd pattern
-    **                 etc.
-    **
-    ** Each row of data is separated by commas or spaces.
-    ** The data is expected to be ascii text corresponding to
-    ** either a +1 or a 0.
-    **
-    ** Sample input for a 1-pattern file (The comments to the
-    ** right may NOT be in the file unless more sophisticated
-    ** parsing of the input is done.):
-    **
-    ** 5,7,8                      input is 5x7 grid, output is 8 bits
-    ** 1                          one pattern in file
-    ** 0,1,1,1,0                  beginning of pattern for "O"
-    ** 1,0,0,0,1
-    ** 1,0,0,0,1
-    ** 1,0,0,0,1
-    ** 1,0,0,0,1
-    ** 1,0,0,0,0
-    ** 0,1,1,1,0
-    ** 0,1,0,0,1,1,1,1            ASCII code for "O" -- 0100 1111
-    **
-    ** Clearly, this simple scheme can be expanded or enhanced
-    ** any way you like.
-    **
-    ** Returns -1 if any file error occurred, otherwise 0.
-    **/
+     ** Read in the input data file and store the patterns in
+     ** in_pats and out_pats.
+     ** The format for the data file is as follows:
+     **
+     ** line#   data expected
+     ** -----   ------------------------------
+     ** 1               In-X-size,in-y-size,out-size
+     ** 2               number of patterns in file
+     ** 3               1st X row of 1st input pattern
+     ** 4..             following rows of 1st input pattern pattern
+     **                 in-x+2  y-out pattern
+     **                                 1st X row of 2nd pattern
+     **                 etc.
+     **
+     ** Each row of data is separated by commas or spaces.
+     ** The data is expected to be ascii text corresponding to
+     ** either a +1 or a 0.
+     **
+     ** Sample input for a 1-pattern file (The comments to the
+     ** right may NOT be in the file unless more sophisticated
+     ** parsing of the input is done.):
+     **
+     ** 5,7,8                      input is 5x7 grid, output is 8 bits
+     ** 1                          one pattern in file
+     ** 0,1,1,1,0                  beginning of pattern for "O"
+     ** 1,0,0,0,1
+     ** 1,0,0,0,1
+     ** 1,0,0,0,1
+     ** 1,0,0,0,1
+     ** 1,0,0,0,0
+     ** 0,1,1,1,0
+     ** 0,1,0,0,1,1,1,1            ASCII code for "O" -- 0100 1111
+     **
+     ** Clearly, this simple scheme can be expanded or enhanced
+     ** any way you like.
+     **
+     ** Returns -1 if any file error occurred, otherwise 0.
+     **/
     private void read_data_file()
     {
         int xinsize = 0,
@@ -499,22 +499,22 @@ public class NeuralJagged : NNetStruct
     public static void  display_output(int patt)
     {
     int             i;
-
-        fprintf(outfile,"\n Iteration # %d",iteration_count);
-        fprintf(outfile,"\n Desired Output:  ");
-
-        for (i=0; i<OUT_SIZE; i++)
-        {
-            fprintf(outfile,"%6.3f  ",out_pats[patt][i]);
-        }
-        fprintf(outfile,"\n Actual Output:   ");
-
-        for (i=0; i<OUT_SIZE; i++)
-        {
-            fprintf(outfile,"%6.3f  ",out_out[i]);
-        }
-        fprintf(outfile,"\n");
-        return;
+    
+    fprintf(outfile,"\n Iteration # %d",iteration_count);
+    fprintf(outfile,"\n Desired Output:  ");
+    
+    for (i=0; i<OUT_SIZE; i++)
+    {
+    fprintf(outfile,"%6.3f  ",out_pats[patt][i]);
+    }
+    fprintf(outfile,"\n Actual Output:   ");
+    
+    for (i=0; i<OUT_SIZE; i++)
+    {
+    fprintf(outfile,"%6.3f  ",out_out[i]);
+    }
+    fprintf(outfile,"\n");
+    return;
     }
     */
 
@@ -868,21 +868,21 @@ public class NeuralJagged : NNetStruct
     /* static void display_mid_wts()
     {
     int             neurode, weight, row, col;
-
+    
     fprintf(outfile,"\n Weights of Middle Layer neurodes:");
-
+    
     for (neurode=0; neurode<MID_SIZE; neurode++)
     {
-        fprintf(outfile,"\n  Mid Neurode # %d",neurode);
-        for (row=0; row<IN_Y_SIZE; row++)
-        {
-            fprintf(outfile,"\n ");
-            for (col=0; col<IN_X_SIZE; col++)
-            {
-                weight = IN_X_SIZE * row + col;
-                fprintf(outfile," %8.3f ", mid_wts[neurode,weight]);
-            }
-        }
+    fprintf(outfile,"\n  Mid Neurode # %d",neurode);
+    for (row=0; row<IN_Y_SIZE; row++)
+    {
+    fprintf(outfile,"\n ");
+    for (col=0; col<IN_X_SIZE; col++)
+    {
+    weight = IN_X_SIZE * row + col;
+    fprintf(outfile," %8.3f ", mid_wts[neurode,weight]);
+    }
+    }
     }
     return;
     }
@@ -897,18 +897,18 @@ public class NeuralJagged : NNetStruct
     /* void  display_out_wts()
     {
     int             neurode, weight;
-
-        fprintf(outfile,"\n Weights of Output Layer neurodes:");
-
-        for (neurode=0; neurode<OUT_SIZE; neurode++)
-        {
-            fprintf(outfile,"\n  Out Neurode # %d \n",neurode);
-            for (weight=0; weight<MID_SIZE; weight++)
-            {
-                fprintf(outfile," %8.3f ", out_wts[neurode,weight]);
-            }
-        }
-        return;
+    
+    fprintf(outfile,"\n Weights of Output Layer neurodes:");
+    
+    for (neurode=0; neurode<OUT_SIZE; neurode++)
+    {
+    fprintf(outfile,"\n  Out Neurode # %d \n",neurode);
+    for (weight=0; weight<MID_SIZE; weight++)
+    {
+    fprintf(outfile," %8.3f ", out_wts[neurode,weight]);
+    }
+    }
+    return;
     }
     */
 }

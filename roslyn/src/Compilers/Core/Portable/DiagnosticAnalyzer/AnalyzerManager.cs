@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// <summary>
     /// Manages properties of analyzers (such as registered actions, supported diagnostics) for analyzer host's lifetime
     /// and executes the callbacks into the analyzers.
-    /// 
+    ///
     /// It ensures the following for the lifetime of analyzer host:
     /// 1) <see cref="DiagnosticAnalyzer.Initialize(AnalysisContext)"/> is invoked only once per-analyzer.
     /// 2) <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> is invoked only once per-analyzer.

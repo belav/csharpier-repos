@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         bool CanRename { get; }
 
         /// <summary>
-        /// Provides the reason that can be displayed to the user if the entity at the selected 
+        /// Provides the reason that can be displayed to the user if the entity at the selected
         /// location cannot be renamed.
         /// </summary>
         string LocalizedErrorMessage { get; }
@@ -89,7 +89,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         );
 
         /// <summary>
-        /// Determine the set of locations to rename given the provided options. May be called 
+        /// Determine the set of locations to rename given the provided options. May be called
         /// multiple times.  For example, this can be called one time for the initial set of
         /// locations to rename, as well as any time the rename options are changed by the user.
         /// </summary>
@@ -99,7 +99,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         );
 
         /// <summary>
-        /// Called before the rename is applied to the specified documents in the workspace.  Return 
+        /// Called before the rename is applied to the specified documents in the workspace.  Return
         /// <see langword="true"/> if rename should proceed, or <see langword="false"/> if it should be canceled.
         /// </summary>
         bool TryOnBeforeGlobalSymbolRenamed(
@@ -109,7 +109,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         );
 
         /// <summary>
-        /// Called after the rename is applied to the specified documents in the workspace.  Return 
+        /// Called after the rename is applied to the specified documents in the workspace.  Return
         /// <see langword="true"/> if this operation succeeded, or <see langword="false"/> if it failed.
         /// </summary>
         bool TryOnAfterGlobalSymbolRenamed(

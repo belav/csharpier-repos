@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.Formatting
 {
     /// <summary>
     /// a tweaked version of our interval tree to meet the formatting engine's need
-    /// 
+    ///
     /// it now has an ability to return a smallest span that contains a position rather than
     /// all Intersecting or overlapping spans
     /// </summary>

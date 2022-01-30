@@ -220,7 +220,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Represents a distinct set of <see cref="DiagnosticDescriptor"/>s and provides unique string keys 
+        /// Represents a distinct set of <see cref="DiagnosticDescriptor"/>s and provides unique string keys
         /// to distinguish them.
         ///
         /// The first <see cref="DiagnosticDescriptor"/> added with a given <see cref="DiagnosticDescriptor.Id"/>

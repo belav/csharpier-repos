@@ -42,7 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns whether this namespace is the unnamed, global namespace that is 
+        /// Returns whether this namespace is the unnamed, global namespace that is
         /// at the root of all namespaces.
         /// </summary>
         public virtual bool IsGlobalNamespace
@@ -223,7 +223,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Sequence of names for nested child namespaces.
         /// </param>
         /// <returns>
-        /// Symbol for the most nested namespace, if found. Nothing 
+        /// Symbol for the most nested namespace, if found. Nothing
         /// if namespace or any part of it can not be found.
         /// </returns>
         internal NamespaceSymbol LookupNestedNamespace(ImmutableArray<string> names)

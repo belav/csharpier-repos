@@ -53,7 +53,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
 
         /// <summary>
         /// Creates the <see cref="VSInternalDiagnosticReport"/> instance we'll report back to clients to let them know our
-        /// progress. 
+        /// progress.
         /// </summary>
         protected abstract TReport CreateReport(
             TextDocumentIdentifier? identifier,

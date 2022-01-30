@@ -82,14 +82,14 @@ namespace Microsoft.CodeAnalysis.CommandLine
         }
 
         /// <summary>
-        /// Get the directory which contains the csc, vbc and VBCSCompiler clients. 
-        /// 
-        /// Historically this is referred to as the "client" directory but maybe better if it was 
+        /// Get the directory which contains the csc, vbc and VBCSCompiler clients.
+        ///
+        /// Historically this is referred to as the "client" directory but maybe better if it was
         /// called the "installation" directory.
-        /// 
+        ///
         /// It is important that this method exist here and not on <see cref="BuildServerConnection"/>. This
-        /// can only reliably be called from our executable projects and this file is only linked into 
-        /// those projects while <see cref="BuildServerConnection"/> is also included in the MSBuild 
+        /// can only reliably be called from our executable projects and this file is only linked into
+        /// those projects while <see cref="BuildServerConnection"/> is also included in the MSBuild
         /// task.
         /// </summary>
         public static string GetClientDirectory() =>
@@ -433,8 +433,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
         }
 
         /// <summary>
-        /// When running on Windows we can't take the command line which was provided to the 
-        /// Main method of the application.  That will go through normal windows command line 
+        /// When running on Windows we can't take the command line which was provided to the
+        /// Main method of the application.  That will go through normal windows command line
         /// parsing which eliminates artifacts like quotes.  This has the effect of normalizing
         /// the below command line options, which are semantically different, into the same
         /// value:
@@ -442,8 +442,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
         ///     /reference:a,b
         ///     /reference:"a,b"
         ///
-        /// To get the correct semantics here on Windows we parse the original command line 
-        /// provided to the process. 
+        /// To get the correct semantics here on Windows we parse the original command line
+        /// provided to the process.
         /// </summary>
         private static IEnumerable<string> GetCommandLineWindows(IEnumerable<string> args)
         {

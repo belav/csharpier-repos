@@ -410,10 +410,10 @@ namespace System.Reflection.Emit
 
         /*
         public override object Invoke (object obj, object[] parameters) {
-            CreateDynMethod ();
-            if (method == null)
-                method = new RuntimeMethodInfo (mhandle);
-            return method.Invoke (obj, parameters);
+        CreateDynMethod ();
+        if (method == null)
+        method = new RuntimeMethodInfo (mhandle);
+        return method.Invoke (obj, parameters);
         }
         */
 
@@ -523,11 +523,11 @@ namespace System.Reflection.Emit
 
         /*
                 public override int MetadataToken {
-                    get {
-                        return 0;
-                    }
+                get {
+                return 0;
                 }
-        */
+                }
+                */
 
         private void RejectIfCreated()
         {

@@ -275,7 +275,7 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Determines the segment count that would result if the segments of size less than or equal to 
+        /// Determines the segment count that would result if the segments of size less than or equal to
         /// the specified segment size were to be combined.
         /// </summary>
         private static int GetSegmentCountIfCombined(

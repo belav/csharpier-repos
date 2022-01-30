@@ -161,10 +161,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         /// <returns>
         /// Given a node representing a declaration or a top-level match node returns:
         /// - <see cref="BlockSyntax"/> for method-like member declarations with block bodies (methods, operators, constructors, destructors, accessors).
-        /// - <see cref="ExpressionSyntax"/> for variable declarators of fields, properties with an initializer expression, or 
+        /// - <see cref="ExpressionSyntax"/> for variable declarators of fields, properties with an initializer expression, or
         ///   for method-like member declarations with expression bodies (methods, properties, indexers, operators)
         /// - <see cref="CompilationUnitSyntax"/> for top level statements
-        /// 
+        ///
         /// A null reference otherwise.
         /// </returns>
         internal override SyntaxNode? TryGetDeclarationBody(SyntaxNode node)
@@ -250,17 +250,17 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         /// <returns>
         /// If <paramref name="node"/> is a method, accessor, operator, destructor, or constructor without an initializer,
         /// tokens of its block body, or tokens of the expression body.
-        /// 
+        ///
         /// If <paramref name="node"/> is an indexer declaration the tokens of its expression body.
-        /// 
+        ///
         /// If <paramref name="node"/> is a property declaration the tokens of its expression body or initializer.
-        ///   
-        /// If <paramref name="node"/> is a constructor with an initializer, 
+        ///
+        /// If <paramref name="node"/> is a constructor with an initializer,
         /// tokens of the initializer concatenated with tokens of the constructor body.
-        /// 
+        ///
         /// If <paramref name="node"/> is a variable declarator of a field with an initializer,
         /// subset of the tokens of the field declaration depending on which variable declarator it is.
-        /// 
+        ///
         /// If <paramref name="node"/> is a <see cref="CompilationUnitSyntax"/> the tokens of all its global statements.
         /// Null reference otherwise.
         /// </returns>
@@ -3699,7 +3699,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         /// <summary>
         /// Reports rude edits when an active statement is a when clause in a switch statement and any of the switch cases or the switch value changed.
         /// This is necessary since the switch emits long-lived synthesized variables to store results of pattern evaluations.
-        /// These synthesized variables are mapped to the slots of the new methods via ordinals. The mapping preserves the values of these variables as long as 
+        /// These synthesized variables are mapped to the slots of the new methods via ordinals. The mapping preserves the values of these variables as long as
         /// exactly the same variables are emitted for the new switch as they were for the old one and their order didn't change either.
         /// This is guaranteed if none of the case clauses have changed.
         /// </summary>

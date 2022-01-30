@@ -18,9 +18,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         /// <summary>
         /// Given a set of folders from build the namespace that would match
-        /// the folder structure. If a document is located in { "Bat" , "Bar", "Baz" } then the namespace could be 
+        /// the folder structure. If a document is located in { "Bat" , "Bar", "Baz" } then the namespace could be
         /// "Bat.Bar.Baz". If a rootNamespace is provided, it is prepended to the generated namespace.
-        /// 
+        ///
         /// Returns null if the folders contain parts that are invalid identifiers for a namespace.
         /// </summary>
         public static string? TryBuildNamespaceFromFolders(

@@ -1480,7 +1480,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
         /// <summary>
         /// Used to decide if we need to emit call or callvirt.
-        /// It basically checks if the receiver expression cannot be null, but it is not 100% precise. 
+        /// It basically checks if the receiver expression cannot be null, but it is not 100% precise.
         /// There are cases where it really can be null, but we do not care.
         /// </summary>
         private bool CanUseCallOnRefTypeReceiver(BoundExpression receiver)
@@ -2004,7 +2004,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// <summary>
         /// Used to decide if we need to emit 'call' or 'callvirt' for structure method.
         /// It basically checks if the method overrides any other and method's defining type
-        /// is not a 'special' or 'special-by-ref' type. 
+        /// is not a 'special' or 'special-by-ref' type.
         /// </summary>
         internal static bool MayUseCallForStructMethod(MethodSymbol method)
         {
@@ -2028,7 +2028,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         }
 
         /// <summary>
-        /// When array operation get long or ulong arguments the args should be 
+        /// When array operation get long or ulong arguments the args should be
         /// cast to native int.
         /// Note that the cast is always checked.
         /// </summary>
@@ -3668,7 +3668,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         ///   push x
         ///   dup x
         ///   if pop != null goto LEFT_NOT_NULL
-        ///     pop 
+        ///     pop
         ///     push y
         ///   LEFT_NOT_NULL:
         /// </remarks>

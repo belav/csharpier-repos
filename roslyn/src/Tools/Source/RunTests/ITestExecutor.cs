@@ -39,7 +39,7 @@ namespace RunTests
     /// The actual results from running the xunit tests.
     /// </summary>
     /// <remarks>
-    /// The difference between <see cref="TestResultInfo"/>  and <see cref="TestResult"/> is the former 
+    /// The difference between <see cref="TestResultInfo"/>  and <see cref="TestResult"/> is the former
     /// is specifically for the actual test execution results while the latter can contain extra metadata
     /// about the results.  For example whether it was cached, or had diagnostic, output, etc ...
     /// </remarks>

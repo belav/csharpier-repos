@@ -431,7 +431,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         }
 
         /// <summary>
-        /// Intended behavior: this event, E, explicitly implements an interface event, IE, 
+        /// Intended behavior: this event, E, explicitly implements an interface event, IE,
         /// if E.add explicitly implements IE.add and E.remove explicitly implements IE.remove.
         /// </summary>
         public override ImmutableArray<EventSymbol> ExplicitInterfaceImplementations

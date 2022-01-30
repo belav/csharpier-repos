@@ -18,13 +18,13 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// Manages anonymous types created on module level. All requests for anonymous type symbols 
+    /// Manages anonymous types created on module level. All requests for anonymous type symbols
     /// go via the instance of this class, the symbol will be either created or returned from cache.
     /// </summary>
     internal sealed partial class AnonymousTypeManager
     {
         /// <summary>
-        /// Cache of created anonymous type templates used as an implementation of anonymous 
+        /// Cache of created anonymous type templates used as an implementation of anonymous
         /// types in emit phase.
         /// </summary>
         private ConcurrentDictionary<
@@ -280,8 +280,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Given anonymous type provided constructs an implementation type symbol to be used in emit phase; 
-        /// if the anonymous type has at least one field the implementation type symbol will be created based on 
+        /// Given anonymous type provided constructs an implementation type symbol to be used in emit phase;
+        /// if the anonymous type has at least one field the implementation type symbol will be created based on
         /// a generic type template generated for each 'unique' anonymous type structure, otherwise the template
         /// type will be non-generic.
         /// </summary>
@@ -684,7 +684,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             throw ExceptionUtilities.Unreachable;
         }
 
-        /// <summary> 
+        /// <summary>
         /// Comparator being used for stable ordering in anonymous type indices.
         /// </summary>
         private sealed class AnonymousTypeComparer : IComparer<AnonymousTypeTemplateSymbol>

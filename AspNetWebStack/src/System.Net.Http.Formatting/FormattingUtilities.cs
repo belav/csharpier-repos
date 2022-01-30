@@ -134,7 +134,7 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Creates an empty <see cref="HttpContentHeaders"/> instance. The only way is to get it from a dummy 
+        /// Creates an empty <see cref="HttpContentHeaders"/> instance. The only way is to get it from a dummy
         /// <see cref="HttpContent"/> instance.
         /// </summary>
         /// <returns>The created instance.</returns>

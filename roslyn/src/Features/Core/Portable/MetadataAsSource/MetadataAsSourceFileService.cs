@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
     internal class MetadataAsSourceFileService : IMetadataAsSourceFileService
     {
         /// <summary>
-        /// A lock to guard parallel accesses to this type. In practice, we presume that it's not 
-        /// an important scenario that we can be generating multiple documents in parallel, and so 
+        /// A lock to guard parallel accesses to this type. In practice, we presume that it's not
+        /// an important scenario that we can be generating multiple documents in parallel, and so
         /// we simply take this lock around all public entrypoints to enforce sequential access.
         /// </summary>
         private readonly SemaphoreSlim _gate = new(initialCount: 1);

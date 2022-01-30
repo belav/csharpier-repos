@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.Rebuild
         }
 
         /// <summary>
-        /// Attempts to get an option value. Returns false if the option value does not 
+        /// Attempts to get an option value. Returns false if the option value does not
         /// exist OR if it exists more than once
         /// </summary>
         public bool TryGetUniqueOption(string optionName, [NotNullWhen(true)] out string? value)

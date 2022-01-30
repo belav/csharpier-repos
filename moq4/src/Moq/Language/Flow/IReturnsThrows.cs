@@ -6,8 +6,8 @@ using System.ComponentModel;
 namespace Moq.Language.Flow
 {
     /// <summary>
-	/// Implements the fluent API.
-	/// </summary>
+    /// Implements the fluent API.
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IReturnsThrows<TMock, TResult>
         : IReturns<TMock, TResult>,
@@ -15,8 +15,8 @@ namespace Moq.Language.Flow
           IFluentInterface where TMock : class { }
 
     /// <summary>
-	/// Implements the fluent API.
-	/// </summary>
+    /// Implements the fluent API.
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IReturnsThrowsGetter<TMock, TProperty>
         : IReturnsGetter<TMock, TProperty>,

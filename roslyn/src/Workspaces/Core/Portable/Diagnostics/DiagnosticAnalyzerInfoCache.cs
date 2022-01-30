@@ -14,19 +14,19 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
-    /// Provides and caches information about diagnostic analyzers such as <see cref="AnalyzerReference"/>, 
+    /// Provides and caches information about diagnostic analyzers such as <see cref="AnalyzerReference"/>,
     /// <see cref="DiagnosticAnalyzer"/> instance, <see cref="DiagnosticDescriptor"/>s.
     /// Thread-safe.
     /// </summary>
     internal sealed partial class DiagnosticAnalyzerInfoCache
     {
         /// <summary>
-        /// Supported descriptors of each <see cref="DiagnosticAnalyzer"/>. 
+        /// Supported descriptors of each <see cref="DiagnosticAnalyzer"/>.
         /// </summary>
         /// <remarks>
         /// Holds on <see cref="DiagnosticAnalyzer"/> instances weakly so that we don't keep analyzers coming from package references alive.
         /// They need to be released when the project stops referencing the analyzer.
-        /// 
+        ///
         /// The purpose of this map is to avoid multiple calls to <see cref="DiagnosticAnalyzer.SupportedDiagnostics"/> that might return different values
         /// (they should not but we need a guarantee to function correctly).
         /// </remarks>

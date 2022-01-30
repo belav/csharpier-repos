@@ -100,19 +100,19 @@ namespace System.Web.Helpers.Test
             //Vanilla theme
             /*
              * <Chart Palette="SemiTransparent" BorderColor="#000" BorderWidth="2" BorderlineDashStyle="Solid">
-                <ChartAreas>
-                    <ChartArea _Template_="All" Name="Default">
-                            <AxisX>
-                                <MinorGrid Enabled="False" />
-                                <MajorGrid Enabled="False" />
-                            </AxisX>
-                            <AxisY>
-                                <MajorGrid Enabled="False" />
-                                <MinorGrid Enabled="False" />
-                            </AxisY>
-                    </ChartArea>
-                </ChartAreas>
-                </Chart>
+             <ChartAreas>
+             <ChartArea _Template_="All" Name="Default">
+             <AxisX>
+             <MinorGrid Enabled="False" />
+             <MajorGrid Enabled="False" />
+             </AxisX>
+             <AxisY>
+             <MajorGrid Enabled="False" />
+             <MinorGrid Enabled="False" />
+             </AxisY>
+             </ChartArea>
+             </ChartAreas>
+             </Chart>
              */
             var chart = new Chart(
                 GetContext(),
@@ -140,19 +140,19 @@ namespace System.Web.Helpers.Test
             //Vanilla theme
             /*
              * <Chart Palette="SemiTransparent" BorderColor="#000" BorderWidth="2" BorderlineDashStyle="Solid">
-                <ChartAreas>
-                    <ChartArea _Template_="All" Name="Default">
-                            <AxisX>
-                                <MinorGrid Enabled="False" />
-                                <MajorGrid Enabled="False" />
-                            </AxisX>
-                            <AxisY>
-                                <MajorGrid Enabled="False" />
-                                <MinorGrid Enabled="False" />
-                            </AxisY>
-                    </ChartArea>
-                </ChartAreas>
-                </Chart>
+             <ChartAreas>
+             <ChartArea _Template_="All" Name="Default">
+             <AxisX>
+             <MinorGrid Enabled="False" />
+             <MajorGrid Enabled="False" />
+             </AxisX>
+             <AxisY>
+             <MajorGrid Enabled="False" />
+             <MinorGrid Enabled="False" />
+             </AxisY>
+             </ChartArea>
+             </ChartAreas>
+             </Chart>
              */
             var template = WriteTemplate(
                 @"<Chart BorderlineDashStyle=""DashDot""><Legends><Legend BackColor=""Red"" /></Legends></Chart>"

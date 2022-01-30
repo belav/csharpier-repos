@@ -21,7 +21,7 @@ public class PerfNotIf
                 notIf(m_i);
                 int t2 = GetTickCount();
                 System.out.println("Time for not & if:\t" + (t2-t1) + " ms");
-        */
+                */
         /* SMC */
         int t1 = Environment.TickCount;
         notIf(m_i);

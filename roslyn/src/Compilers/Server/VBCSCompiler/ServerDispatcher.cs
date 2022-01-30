@@ -282,7 +282,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         }
 
         /// <summary>
-        /// Checks the completed connection objects and updates the server state based on their 
+        /// Checks the completed connection objects and updates the server state based on their
         /// results.
         /// </summary>
         private void HandleCompletedConnections()

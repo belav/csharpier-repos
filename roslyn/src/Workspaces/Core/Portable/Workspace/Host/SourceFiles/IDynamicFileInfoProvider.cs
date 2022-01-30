@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Host
 {
     /// <summary>
     /// Provider for the <see cref="DynamicFileInfo"/>
-    /// 
+    ///
     /// implementer of this service should be pure free-thread meaning it can't switch to UI thread underneath.
     /// otherwise, we can get into dead lock if we wait for the dynamic file info from UI thread
     /// </summary>

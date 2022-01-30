@@ -15,10 +15,10 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     /// <summary>
     /// This EventSource exposes our events to ETW.
     /// RoslynEventSource GUID is {bf965e67-c7fb-5c5b-d98f-cdf68f8154c2}.
-    /// 
+    ///
     /// When updating this class, use the following to also update Main\Source\Test\Performance\Log\RoslynEventSourceParser.cs:
     /// Main\Tools\Source\TraceParserGen\bin\Debug\TraceParserGen.exe Microsoft.CodeAnalysis.Workspaces.dll -eventsource:RoslynEventSource
-    /// 
+    ///
     /// Use this command to register the ETW manifest on any machine where you need to decode events in xperf/etlstackbrowse:
     /// "\\clrmain\tools\managed\etw\eventRegister\bin\Debug\eventRegister.exe" Microsoft.CodeAnalysis.Workspaces.dll
     /// </summary>

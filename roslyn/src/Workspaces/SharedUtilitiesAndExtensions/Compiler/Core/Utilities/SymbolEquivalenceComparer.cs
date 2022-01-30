@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
     /// equivalent if the above hold, even if one type has different members than the other.  Note:
     /// type parameters, and signature parameters are not considered 'children' when comparing
     /// symbols.
-    /// 
+    ///
     /// Options are provided to tweak the above slightly.  For example, by default, symbols are
     /// equivalent only if they come from the same assembly or different assemblies of the same simple name.
     /// However, one can ask if two symbols are equivalent even if their assemblies differ.
@@ -229,7 +229,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// <summary>
         /// Compares given symbols <paramref name="x"/> and <paramref name="y"/> for equivalence and populates <paramref name="equivalentTypesWithDifferingAssemblies"/>
         /// with equivalent non-nested named type key-value pairs that are contained in different assemblies.
-        /// These equivalent named type key-value pairs represent possibly equivalent forwarded types, but this API doesn't perform any type forwarding equivalence checks. 
+        /// These equivalent named type key-value pairs represent possibly equivalent forwarded types, but this API doesn't perform any type forwarding equivalence checks.
         /// </summary>
         /// <remarks>This API is only supported for <see cref="SymbolEquivalenceComparer.IgnoreAssembliesInstance"/>.</remarks>
         public bool Equals(

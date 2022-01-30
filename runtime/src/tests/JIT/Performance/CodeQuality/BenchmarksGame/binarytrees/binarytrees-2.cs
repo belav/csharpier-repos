@@ -7,11 +7,11 @@
 // Best-scoring single-threaded C# .NET Core version as of 2017-09-01
 
 /* The Computer Language Benchmarks Game
-   http://benchmarksgame.alioth.debian.org/ 
-
-   contributed by Marek Safar 
-   *reset* 
-*/
+   http://benchmarksgame.alioth.debian.org/
+   
+   contributed by Marek Safar
+   *reset*
+   */
 
 using System;
 

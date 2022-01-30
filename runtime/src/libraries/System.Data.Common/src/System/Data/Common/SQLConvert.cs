@@ -416,10 +416,10 @@ namespace System.Data.Common
                     return (SqlConvert.ConvertToSqlString(value));
                 /*            case StorageType.SqlXml:
                                 if (DataStorage.IsObjectNull(value)) {
-                                    return SqlXml.Null;
+                                return SqlXml.Null;
                                 }
                                 goto default;
-                */
+                                */
                 default: // destination is CLR
                     if ((DBNull.Value == value) || (null == value))
                     {

@@ -62,7 +62,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             /// <summary>
             /// Index in <see cref="_nodes"/> of the parent Node of this Node.
-            /// Value will be <see cref="RootNodeParentIndex"/> if this is the 
+            /// Value will be <see cref="RootNodeParentIndex"/> if this is the
             /// Node corresponding to the root symbol.
             /// </summary>
             public readonly int ParentIndex;
@@ -87,9 +87,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private readonly struct ParameterTypeInfo
         {
             /// <summary>
-            /// This is the type name of the parameter when <see cref="IsComplexType"/> is false. 
+            /// This is the type name of the parameter when <see cref="IsComplexType"/> is false.
             /// For array types, this is just the elemtent type name.
-            /// e.g. `int` for `int[][,]` 
+            /// e.g. `int` for `int[][,]`
             /// </summary>
             public readonly string Name;
 
@@ -97,17 +97,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             /// Indicate if the type of parameter is any kind of array.
             /// This is relevant for both simple and complex types. For example:
             /// - array of simple type like int[], int[][], int[][,], etc. are all ultimately represented as "int[]" in index.
-            /// - array of complex type like T[], T[][], etc are all represented as "[]" in index, 
+            /// - array of complex type like T[], T[][], etc are all represented as "[]" in index,
             ///   in contrast to just "" for non-array types.
             /// </summary>
             public readonly bool IsArray;
 
             /// <summary>
-            /// Similar to <see cref="SyntaxTreeIndex.ExtensionMethodInfo"/>, we divide extension methods into simple 
-            /// and complex categories for filtering purpose. Whether a method is simple is determined based on if we 
+            /// Similar to <see cref="SyntaxTreeIndex.ExtensionMethodInfo"/>, we divide extension methods into simple
+            /// and complex categories for filtering purpose. Whether a method is simple is determined based on if we
             /// can determine it's receiver type easily with a pure text matching. For complex methods, we will need to
             /// rely on symbol to decide if it's feasible.
-            /// 
+            ///
             /// Simple types include:
             /// - Primitive types
             /// - Types which is not a generic method parameter
@@ -127,7 +127,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public readonly struct ExtensionMethodInfo
         {
             /// <summary>
-            /// Name of the extension method. 
+            /// Name of the extension method.
             /// This can be used to retrive corresponding symbols via <see cref="INamespaceOrTypeSymbol.GetMembers(string)"/>
             /// </summary>
             public readonly string Name;

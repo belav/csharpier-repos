@@ -227,7 +227,7 @@ public static class PollyHttpClientBuilderExtensions
     /// <para>
     /// The policy created by <paramref name="configurePolicy"/> will be cached indefinitely per named client. Policies
     /// are generally designed to act as singletons, and can be shared when appropriate. To share a policy across multiple
-    /// named clients, first create the policy and then pass it to multiple calls to 
+    /// named clients, first create the policy and then pass it to multiple calls to
     /// <see cref="AddPolicyHandler(IHttpClientBuilder, IAsyncPolicy{HttpResponseMessage})"/> as desired.
     /// </para>
     /// </remarks>

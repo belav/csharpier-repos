@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 public class Tests
 {
     /*
-	 * These tests exercise the search order associated with the different charset values.
-	 */
+     * These tests exercise the search order associated with the different charset values.
+     */
 
     /* This should call NameManglingAnsi */
     [DllImport("libtest", CharSet = CharSet.Ansi)]

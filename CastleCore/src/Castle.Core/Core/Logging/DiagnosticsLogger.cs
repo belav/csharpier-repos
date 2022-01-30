@@ -19,8 +19,8 @@ namespace Castle.Core.Logging
     using System.Globalization;
 
     /// <summary>
-	///   The Logger using standard Diagnostics namespace.
-	/// </summary>
+    ///   The Logger using standard Diagnostics namespace.
+    /// </summary>
 #if FEATURE_SERIALIZATION
     [Serializable]
 #endif
@@ -32,16 +32,16 @@ namespace Castle.Core.Logging
         private EventLog eventLog;
 
         /// <summary>
-		///   Creates a logger based on <see cref = "EventLog" />.
-		/// </summary>
-		/// <param name = "logName"><see cref = "EventLog.Log" /></param>
+        ///   Creates a logger based on <see cref = "EventLog" />.
+        /// </summary>
+        /// <param name = "logName"><see cref = "EventLog.Log" /></param>
         public DiagnosticsLogger(string logName) : this(logName, "default") { }
 
         /// <summary>
-		///   Creates a logger based on <see cref = "EventLog" />.
-		/// </summary>
-		/// <param name = "logName"><see cref = "EventLog.Log" /></param>
-		/// <param name = "source"><see cref = "EventLog.Source" /></param>
+        ///   Creates a logger based on <see cref = "EventLog" />.
+        /// </summary>
+        /// <param name = "logName"><see cref = "EventLog.Log" /></param>
+        /// <param name = "source"><see cref = "EventLog.Source" /></param>
         public DiagnosticsLogger(string logName, string source) : base(LoggerLevel.Trace)
         {
             // Create the source, if it does not already exist.
@@ -55,11 +55,11 @@ namespace Castle.Core.Logging
         }
 
         /// <summary>
-		///   Creates a logger based on <see cref = "EventLog" />.
-		/// </summary>
-		/// <param name = "logName"><see cref = "EventLog.Log" /></param>
-		/// <param name = "machineName"><see cref = "EventLog.MachineName" /></param>
-		/// <param name = "source"><see cref = "EventLog.Source" /></param>
+        ///   Creates a logger based on <see cref = "EventLog" />.
+        /// </summary>
+        /// <param name = "logName"><see cref = "EventLog.Log" /></param>
+        /// <param name = "machineName"><see cref = "EventLog.MachineName" /></param>
+        /// <param name = "source"><see cref = "EventLog.Source" /></param>
         public DiagnosticsLogger(string logName, string machineName, string source)
         {
             // Create the source, if it does not already exist.

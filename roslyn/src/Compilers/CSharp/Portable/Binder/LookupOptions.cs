@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Options that can be used to modify the symbol lookup mechanism. 
+    /// Options that can be used to modify the symbol lookup mechanism.
     /// </summary>
     /// <remarks>
     /// Multiple options can be combined together.  LookupOptions.AreValid checks for valid combinations.
@@ -114,7 +114,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <remarks>
         /// Some checks made here:
-        /// 
+        ///
         /// - Default is valid.
         /// - If LabelsOnly is set, it must be the only option.
         /// - If one of MustBeInstance or MustNotBeInstance are set, the other one must not be set.

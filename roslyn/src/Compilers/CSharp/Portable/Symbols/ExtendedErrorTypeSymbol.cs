@@ -254,18 +254,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// For example, we might want to know whether (we believe) the error type was supposed to be an
         /// interface, so that we can put it in a derived type's interface list, rather than in the base
         /// type slot.
-        /// 
-        /// Sometimes we will return the original definition of the intended symbol.  For example, if we see 
-        /// <![CDATA[IGoo<int>]]> and we have an IGoo with a different arity or accessibility 
-        /// (e.g. <![CDATA[IGoo<int>]]> was constructed from an error symbol based on <![CDATA[IGoo<T>]]>), 
+        ///
+        /// Sometimes we will return the original definition of the intended symbol.  For example, if we see
+        /// <![CDATA[IGoo<int>]]> and we have an IGoo with a different arity or accessibility
+        /// (e.g. <![CDATA[IGoo<int>]]> was constructed from an error symbol based on <![CDATA[IGoo<T>]]>),
         /// then we'll return <![CDATA[IGoo<T>]]>, rather than trying to construct a corresponding closed
         /// type (which may not be difficult/possible in the case of nested types or mismatched arities).
-        /// 
+        ///
         /// NOTE: Any non-null type symbol returned is guaranteed not to be an error type.
         /// </summary>
         /// <remarks>
         /// TypeSymbolExtensions.GetNonErrorGuess is a more discoverable version of this functionality.
-        /// However, the real definition is in this class so that it can access the private field 
+        /// However, the real definition is in this class so that it can access the private field
         /// nonErrorGuessType.
         /// </remarks>
         internal static TypeSymbol? ExtractNonErrorType(TypeSymbol? oldSymbol)

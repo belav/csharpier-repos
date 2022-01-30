@@ -163,7 +163,7 @@ namespace Microsoft.CodeAnalysis
         /// Aliases for the metadata reference. Empty if the reference has no aliases.
         /// </summary>
         /// <remarks>
-        /// In C# these aliases can be used in "extern alias" syntax to disambiguate type names. 
+        /// In C# these aliases can be used in "extern alias" syntax to disambiguate type names.
         /// </remarks>
         public ImmutableArray<string> Aliases
         {

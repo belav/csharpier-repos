@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis
         private const int InitialGlobalVersion = 10000;
 
         /// <summary>
-        /// global counter to avoid collision within same session. 
+        /// global counter to avoid collision within same session.
         /// it starts with a big initial number just for a clarity in debugging
         /// </summary>
         private static int s_globalVersion = InitialGlobalVersion;

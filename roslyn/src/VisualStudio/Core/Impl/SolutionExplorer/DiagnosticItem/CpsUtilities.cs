@@ -18,17 +18,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         /// cannot be parsed.</returns>
         /// <remarks>
         /// The canonical name takes the following form:
-        /// 
+        ///
         ///   [{path to project directory}\]{target framework}\analyzerdependency\{path to assembly}
-        ///   
+        ///
         /// e.g.:
-        /// 
+        ///
         ///   C:\projects\solutions\MyProj\netstandard2.0\analyzerdependency\C:\users\me\.packages\somePackage\lib\someAnalyzer.dll
-        ///   
+        ///
         /// This method exists solely to extract out the "path to assembly" part, i.e.
         /// "C:\users\me\.packages\somePackage\lib\someAnalyzer.dll". We don't need the
         /// other parts.
-        /// 
+        ///
         /// Note that the path to the project directory is optional.
         /// </remarks>
         public static string? ExtractAnalyzerFilePath(

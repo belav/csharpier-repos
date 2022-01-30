@@ -21,7 +21,7 @@ namespace System.Web.WebPages.Administration.PackageManager
         private static readonly string[] _sourceFileExtensions = new[] { ".cs", ".vb" };
 
         /// <summary>
-        /// Keys taken from the 4.0 RedistList. 
+        /// Keys taken from the 4.0 RedistList.
         /// </summary>
         private static readonly string[] _knownPublicKeys = new[]
         {
@@ -135,7 +135,7 @@ namespace System.Web.WebPages.Administration.PackageManager
         }
 
         /// <summary>
-        /// Uses ResolveAssemblyReference to calculate a full name from a partial assembly name. 
+        /// Uses ResolveAssemblyReference to calculate a full name from a partial assembly name.
         /// </summary>
         [SuppressMessage(
             "Microsoft.Design",

@@ -676,7 +676,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         }
 
         /// <summary>
-        /// IL type explicitly overrides a class (vs interface) method.  
+        /// IL type explicitly overrides a class (vs interface) method.
         /// ExplicitInterfaceImplementations should be empty.
         /// </summary>
         [Fact]

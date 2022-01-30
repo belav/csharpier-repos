@@ -1078,7 +1078,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Determines if this method is a valid target for UnmanagedCallersOnly, reporting an error in the given diagnostic
-        /// bag if it is not null. <paramref name="location"/> and <paramref name="diagnostics"/> should both be null, or 
+        /// bag if it is not null. <paramref name="location"/> and <paramref name="diagnostics"/> should both be null, or
         /// neither should be null. If an error would be reported (whether or not diagnostics is null), true is returned.
         /// </summary>
         internal bool CheckAndReportValidUnmanagedCallersOnlyTarget(

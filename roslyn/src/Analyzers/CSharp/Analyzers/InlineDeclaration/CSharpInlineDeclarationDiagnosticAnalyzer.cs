@@ -19,15 +19,15 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
 {
     /// <summary>
     /// Looks for code of the form:
-    /// 
+    ///
     ///     int i;
     ///     if (int.TryParse(s, out i)) { }
-    ///     
+    ///
     /// And offers to convert it to:
-    /// 
+    ///
     ///     if (int.TryParse(s, out var i)) { }   or
     ///     if (int.TryParse(s, out int i)) { }   or
-    /// 
+    ///
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpInlineDeclarationDiagnosticAnalyzer

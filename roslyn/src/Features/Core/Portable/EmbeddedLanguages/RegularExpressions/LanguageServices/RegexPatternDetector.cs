@@ -42,12 +42,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
 
         /// <summary>
         /// Helps match patterns of the form: language=regex,option1,option2,option3
-        /// 
+        ///
         /// All matching is case insensitive, with spaces allowed between the punctuation.
         /// 'regex' or 'regexp' are both allowed.  Option values will be or'ed together
         /// to produce final options value.  If an unknown option is encountered, processing
         /// will stop with whatever value has accumulated so far.
-        /// 
+        ///
         /// Option names are the values from the <see cref="RegexOptions"/> enum.
         /// </summary>
         private static readonly Regex s_languageCommentDetector =
@@ -223,7 +223,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
 
         /// <summary>
         /// Finds public, static methods in <see cref="Regex"/> that have a parameter called
-        /// 'pattern'.  These are helpers (like <see cref="Regex.Replace(string, string, string)"/> 
+        /// 'pattern'.  These are helpers (like <see cref="Regex.Replace(string, string, string)"/>
         /// where at least one (but not necessarily more) of the parameters should be treated as a
         /// pattern.
         /// </summary>

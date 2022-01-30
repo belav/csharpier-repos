@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     /// <summary>
     /// this lets us have isolated workspace services between solutions such as option services.
-    /// 
+    ///
     /// otherwise, mutating service in one service call such as changing options, can affect result of other service call
     /// </summary>
     internal class TemporaryWorkspace : Workspace

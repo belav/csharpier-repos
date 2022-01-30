@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
         /// <summary>
         /// Shutting down the server is an inherently racy operation.  The server can be started or stopped by
         /// external parties at any time.
-        /// 
+        ///
         /// This function will return success if at any time in the function the server is determined to no longer
         /// be running.
         /// </summary>
@@ -377,7 +377,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
         }
 
         /// <summary>
-        /// Attempt to connect to the server and return a null <see cref="NamedPipeClientStream"/> if connection 
+        /// Attempt to connect to the server and return a null <see cref="NamedPipeClientStream"/> if connection
         /// failed. This method will throw on cancellation.
         /// </summary>
         internal static async Task<NamedPipeClientStream?> TryConnectToServerAsync(
@@ -467,8 +467,8 @@ namespace Microsoft.CodeAnalysis.CommandLine
         }
 
         /// <summary>
-        /// This will attempt to start a compiler server process using the executable inside the 
-        /// directory <paramref name="clientDirectory"/>. This returns "true" if starting the 
+        /// This will attempt to start a compiler server process using the executable inside the
+        /// directory <paramref name="clientDirectory"/>. This returns "true" if starting the
         /// compiler server process was successful, it does not state whether the server successfully
         /// started or not (it could crash on startup).
         /// </summary>
@@ -647,7 +647,7 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
         /// <summary>
         /// Gets the value of the temporary path for the current environment assuming the working directory
-        /// is <paramref name="workingDir"/>.  This function must emulate <see cref="Path.GetTempPath"/> as 
+        /// is <paramref name="workingDir"/>.  This function must emulate <see cref="Path.GetTempPath"/> as
         /// closely as possible.
         /// </summary>
         internal static string? GetTempPath(string? workingDir)

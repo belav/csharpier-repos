@@ -18,11 +18,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
     /// Indexed type parameters are used in place of type parameters for method signatures.  There is
-    /// a unique mapping from index to a single IndexedTypeParameterSymbol.  
-    /// 
+    /// a unique mapping from index to a single IndexedTypeParameterSymbol.
+    ///
     /// They don't have a containing symbol or locations.
-    /// 
-    /// They do not have constraints, variance, or attributes. 
+    ///
+    /// They do not have constraints, variance, or attributes.
     /// </summary>
     internal sealed class IndexedTypeParameterSymbol : TypeParameterSymbol
     {

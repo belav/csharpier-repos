@@ -376,44 +376,44 @@ namespace System.Data.Common
 
         /*
                 typedef ULONGLONG           DBLENGTH;
-
+                
                 // Offset within a rowset
                 typedef LONGLONG                DBROWOFFSET;
-
+                
                 // Number of rows
                 typedef LONGLONG                DBROWCOUNT;
-
+                
                 typedef ULONGLONG           DBCOUNTITEM;
-
+                
                 // Ordinal (column number, etc.)
                 typedef ULONGLONG           DBORDINAL;
-
+                
                 typedef LONGLONG                DB_LORDINAL;
-
+                
                 // Bookmarks
                 typedef ULONGLONG           DBBKMARK;
                 // Offset in the buffer
-
+                
                 typedef ULONGLONG           DBBYTEOFFSET;
                 // Reference count of each row/accessor  handle
-
+                
                 typedef ULONG               DBREFCOUNT;
-
+                
                 // Parameters
                 typedef ULONGLONG           DB_UPARAMS;
-
+                
                 typedef LONGLONG                DB_LPARAMS;
-
+                
                 // hash values corresponding to the elements (bookmarks)
                 typedef DWORDLONG           DBHASHVALUE;
-
+                
                 // For reserve
                 typedef DWORDLONG           DB_DWRESERVE;
-
+                
                 typedef LONGLONG                DB_LRESERVE;
-
+                
                 typedef ULONGLONG           DB_URESERVE;
-        */
+                */
 
         [
             ComImport,
@@ -429,12 +429,12 @@ namespace System.Data.Common
 
             /*[local]
             HRESULT CreateAccessor(
-                [in] DBACCESSORFLAGS dwAccessorFlags,
-                [in] DBCOUNTITEM cBindings,
-                [in, size_is(cBindings)] const DBBINDING rgBindings[],
-                [in] DBLENGTH cbRowSize,
-                [out] HACCESSOR * phAccessor,
-                [out, size_is(cBindings)] DBBINDSTATUS rgStatus[]
+            [in] DBACCESSORFLAGS dwAccessorFlags,
+            [in] DBCOUNTITEM cBindings,
+            [in, size_is(cBindings)] const DBBINDING rgBindings[],
+            [in] DBLENGTH cbRowSize,
+            [out] HACCESSOR * phAccessor,
+            [out, size_is(cBindings)] DBBINDSTATUS rgStatus[]
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult CreateAccessor(
@@ -454,8 +454,8 @@ namespace System.Data.Common
 
             /*[local]
             HRESULT ReleaseAccessor(
-                [in] HACCESSOR hAccessor,
-                [in, out, unique] DBREFCOUNT * pcRefCount
+            [in] HACCESSOR hAccessor,
+            [in, out, unique] DBREFCOUNT * pcRefCount
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult ReleaseAccessor(
@@ -478,8 +478,8 @@ namespace System.Data.Common
 
             /*[local]
             HRESULT ReleaseChapter(
-                [in] HCHAPTER hChapter,
-                [out] DBREFCOUNT * pcRefCount
+            [in] HCHAPTER hChapter,
+            [out] DBREFCOUNT * pcRefCount
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult ReleaseChapter(
@@ -498,9 +498,9 @@ namespace System.Data.Common
         {
             /*[local]
             HRESULT GetColumnInfo(
-                [in, out] DBORDINAL * pcColumns,
-                [out, size_is(,(ULONG)*pcColumns)] DBCOLUMNINFO ** prgInfo,
-                [out] OLECHAR ** ppStringsBuffer
+            [in, out] DBORDINAL * pcColumns,
+            [out, size_is(,(ULONG)*pcColumns)] DBCOLUMNINFO ** prgInfo,
+            [out] OLECHAR ** ppStringsBuffer
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetColumnInfo(
@@ -523,8 +523,8 @@ namespace System.Data.Common
         {
             /*[local]
             HRESULT GetAvailableColumns(
-                [in, out] DBORDINAL * pcOptColumns,
-                [out, size_is(,(ULONG)*pcOptColumns)] DBID ** prgOptColumns
+            [in, out] DBORDINAL * pcOptColumns,
+            [out, size_is(,(ULONG)*pcOptColumns)] DBID ** prgOptColumns
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetAvailableColumns(
@@ -534,13 +534,13 @@ namespace System.Data.Common
 
             /*[local]
             HRESULT GetColumnsRowset(
-                [in] IUnknown * pUnkOuter,
-                [in] DBORDINAL cOptColumns,
-                [in, size_is((ULONG)cOptColumns)] const DBID rgOptColumns[],
-                [in] REFIID riid,
-                [in] ULONG cPropertySets,
-                [in, out, size_is((ULONG)cPropertySets)] DBPROPSET rgPropertySets[],
-                [out, iid_is(riid)] IUnknown ** ppColRowset
+            [in] IUnknown * pUnkOuter,
+            [in] DBORDINAL cOptColumns,
+            [in, size_is((ULONG)cOptColumns)] const DBID rgOptColumns[],
+            [in] REFIID riid,
+            [in] ULONG cPropertySets,
+            [in, out, size_is((ULONG)cPropertySets)] DBPROPSET rgPropertySets[],
+            [out, iid_is(riid)] IUnknown ** ppColRowset
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetColumnsRowset(
@@ -564,7 +564,7 @@ namespace System.Data.Common
         {
             /*[local]
             HRESULT Prepare(
-                [in] ULONG cExpectedRuns
+            [in] ULONG cExpectedRuns
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult Prepare([In] int cExpectedRuns);
@@ -583,10 +583,10 @@ namespace System.Data.Common
         {
             /*[local]
             HRESULT GetProperties(
-                [in] const ULONG cPropertyIDSets,
-                [in, size_is(cPropertyIDSets)] const DBPROPIDSET rgPropertyIDSets[],
-                [in, out] ULONG * pcPropertySets,
-                [out, size_is(,*pcPropertySets)] DBPROPSET ** prgPropertySets
+            [in] const ULONG cPropertyIDSets,
+            [in, size_is(cPropertyIDSets)] const DBPROPIDSET rgPropertyIDSets[],
+            [in, out] ULONG * pcPropertySets,
+            [out, size_is(,*pcPropertySets)] DBPROPSET ** prgPropertySets
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetProperties(
@@ -598,8 +598,8 @@ namespace System.Data.Common
 
             /*[local]
             HRESULT SetProperties(
-                [in] ULONG cPropertySets,
-                [in, out, unique, size_is(cPropertySets)] DBPROPSET rgPropertySets[]
+            [in] ULONG cPropertySets,
+            [in, out, unique, size_is(cPropertySets)] DBPROPSET rgPropertySets[]
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult SetProperties(
@@ -624,11 +624,11 @@ namespace System.Data.Common
 
             /*[local]
             HRESULT Execute(
-                [in] IUnknown * pUnkOuter,
-                [in] REFIID riid,
-                [in, out] DBPARAMS * pParams,
-                [out] DBROWCOUNT * pcRowsAffected,
-                [out, iid_is(riid)] IUnknown ** ppRowset
+            [in] IUnknown * pUnkOuter,
+            [in] REFIID riid,
+            [in, out] DBPARAMS * pParams,
+            [out] DBROWCOUNT * pcRowsAffected,
+            [out, iid_is(riid)] IUnknown ** ppRowset
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult Execute(
@@ -649,8 +649,8 @@ namespace System.Data.Common
 
             /*[local]
             HRESULT SetCommandText(
-                [in] REFGUID rguidDialect,
-                [in, unique] LPCOLESTR pwszCommand
+            [in] REFGUID rguidDialect,
+            [in, unique] LPCOLESTR pwszCommand
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult SetCommandText(
@@ -677,9 +677,9 @@ namespace System.Data.Common
 
             /*[local]
             HRESULT SetParameterInfo(
-                [in] DB_UPARAMS cParams,
-                [in, unique, size_is((ULONG)cParams)] const DB_UPARAMS rgParamOrdinals[],
-                [in, unique, size_is((ULONG)cParams)] const DBPARAMBINDINFO rgParamBindInfo[]
+            [in] DB_UPARAMS cParams,
+            [in, unique, size_is((ULONG)cParams)] const DB_UPARAMS rgParamOrdinals[],
+            [in, unique, size_is((ULONG)cParams)] const DBPARAMBINDINFO rgParamBindInfo[]
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult SetParameterInfo(
@@ -707,7 +707,7 @@ namespace System.Data.Common
         {
             /*[local]
             HRESULT    GetKeywords(
-                [out] LPOLESTR * ppwszKeywords
+            [out] LPOLESTR * ppwszKeywords
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetKeywords(
@@ -716,11 +716,11 @@ namespace System.Data.Common
 
             /*[local]
             HRESULT GetLiteralInfo(
-                [in] ULONG cLiterals,
-                [in, size_is(cLiterals)] const DBLITERAL rgLiterals[],
-                [in, out] ULONG * pcLiteralInfo,
-                [out, size_is(,*pcLiteralInfo)] DBLITERALINFO ** prgLiteralInfo,
-                [out] OLECHAR ** ppCharBuffer
+            [in] ULONG cLiterals,
+            [in, size_is(cLiterals)] const DBLITERAL rgLiterals[],
+            [in, out] ULONG * pcLiteralInfo,
+            [out, size_is(,*pcLiteralInfo)] DBLITERALINFO ** prgLiteralInfo,
+            [out] OLECHAR ** ppCharBuffer
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetLiteralInfo(
@@ -742,10 +742,10 @@ namespace System.Data.Common
         {
             /*[local]
             HRESULT GetProperties(
-                [in] const ULONG cPropertyIDSets,
-                [in, size_is(cPropertyIDSets)] const DBPROPIDSET rgPropertyIDSets[],
-                [in, out] ULONG * pcPropertySets,
-                [out, size_is(,*pcPropertySets)] DBPROPSET ** prgPropertySets
+            [in] const ULONG cPropertyIDSets,
+            [in, size_is(cPropertyIDSets)] const DBPROPIDSET rgPropertyIDSets[],
+            [in, out] ULONG * pcPropertySets,
+            [out, size_is(,*pcPropertySets)] DBPROPSET ** prgPropertySets
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetProperties(
@@ -781,14 +781,14 @@ namespace System.Data.Common
         {
             /*[local]
             HRESULT GetRowset(
-                [in] IUnknown * pUnkOuter,
-                [in] REFGUID rguidSchema,
-                [in] ULONG cRestrictions,
-                [in, size_is(cRestrictions)] const VARIANT rgRestrictions[],
-                [in] REFIID riid,
-                [in] ULONG cPropertySets,
-                [in, out, unique, size_is(cPropertySets)] DBPROPSET rgPropertySets[],
-                [out, iid_is(riid)] IUnknown ** ppRowset
+            [in] IUnknown * pUnkOuter,
+            [in] REFGUID rguidSchema,
+            [in] ULONG cRestrictions,
+            [in, size_is(cRestrictions)] const VARIANT rgRestrictions[],
+            [in] REFIID riid,
+            [in] ULONG cPropertySets,
+            [in, out, unique, size_is(cPropertySets)] DBPROPSET rgPropertySets[],
+            [out, iid_is(riid)] IUnknown ** ppRowset
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetRowset(
@@ -804,9 +804,9 @@ namespace System.Data.Common
 
             /*[local]
             HRESULT GetSchemas(
-                [in, out] ULONG * pcSchemas,
-                [out, size_is(,*pcSchemas)] GUID ** prgSchemas,
-                [out, size_is(,*pcSchemas)] ULONG ** prgRestrictionSupport
+            [in, out] ULONG * pcSchemas,
+            [out, size_is(,*pcSchemas)] GUID ** prgSchemas,
+            [out, size_is(,*pcSchemas)] ULONG ** prgRestrictionSupport
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetSchemas(
@@ -926,11 +926,11 @@ namespace System.Data.Common
         {
             /*[local]
             HRESULT GetResult(
-                [in] IUnknown * pUnkOuter,
-                [in] DBRESULTFLAG lResultFlag,
-                [in] REFIID riid,
-                [out] DBROWCOUNT * pcRowsAffected,
-                [out, iid_is(riid)] IUnknown ** ppRowset
+            [in] IUnknown * pUnkOuter,
+            [in] DBRESULTFLAG lResultFlag,
+            [in] REFIID riid,
+            [out] DBROWCOUNT * pcRowsAffected,
+            [out, iid_is(riid)] IUnknown ** ppRowset
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetResult(
@@ -1012,7 +1012,7 @@ namespace System.Data.Common
                 [in] HROW hRow,
                 [in] HACCESSOR hAccessor,
                 [out] void * pData
-            );*/
+                );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetData(
                 [In] IntPtr hRow,
@@ -1026,7 +1026,7 @@ namespace System.Data.Common
                 [in] DBROWCOUNT cRows,
                 [out] DBCOUNTITEM * pcRowsObtained,
                 [out, size_is(,cRows)] HROW ** prghRows
-            );*/
+                );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetNextRows(
                 [In] IntPtr hChapter,
@@ -1042,7 +1042,7 @@ namespace System.Data.Common
                 [in, size_is(cRows)] DBROWOPTIONS rgRowOptions[],
                 [out, size_is(cRows)] DBREFCOUNT rgRefCounts[],
                 [out, size_is(cRows)] DBROWSTATUS rgRowStatus[]
-            );*/
+                );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult ReleaseRows(
                 [In] IntPtr cRows,
@@ -1076,10 +1076,10 @@ namespace System.Data.Common
         {
             /*[local]
             HRESULT GetProperties(
-                [in] const ULONG cPropertyIDSets,
-                [in, size_is(cPropertyIDSets)] const DBPROPIDSET rgPropertyIDSets[],
-                [in, out] ULONG * pcPropertySets,
-                [out, size_is(,*pcPropertySets)] DBPROPSET ** prgPropertySets
+            [in] const ULONG cPropertyIDSets,
+            [in, size_is(cPropertyIDSets)] const DBPROPIDSET rgPropertyIDSets[],
+            [in, out] ULONG * pcPropertySets,
+            [out, size_is(,*pcPropertySets)] DBPROPSET ** prgPropertySets
             );*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetProperties(

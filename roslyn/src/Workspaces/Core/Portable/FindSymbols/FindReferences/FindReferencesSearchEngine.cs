@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler;
 
         /// <summary>
-        /// Mapping from symbols (unified across metadata/retargeting) and the set of symbols that was produced for 
+        /// Mapping from symbols (unified across metadata/retargeting) and the set of symbols that was produced for
         /// them in the case of linked files across projects.  This allows references to be found to any of the unified
         /// symbols, while the user only gets a single reported group back that corresponds to that entire set.
         /// </summary>

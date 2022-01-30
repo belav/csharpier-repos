@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
 
         /// <summary>
         /// This will run all provided code cleaners in an order that is given to the method.
-        /// 
+        ///
         /// This will do cleanups that don't require any semantic information
         /// </summary>
         Task<SyntaxNode> CleanupAsync(

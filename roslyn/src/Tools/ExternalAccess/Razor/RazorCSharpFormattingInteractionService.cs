@@ -53,7 +53,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         }
 
         /// <summary>
-        /// Returns the text changes necessary to format the document after the user enters a 
+        /// Returns the text changes necessary to format the document after the user enters a
         /// character.  The position provided is the position of the caret in the document after
         /// the character been inserted into the document.
         /// </summary>

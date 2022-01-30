@@ -40,7 +40,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
         ///     ...
         ///     counter++;
         ///  }
-        ///  
+        ///
         ///  Output:
         ///  counter += queryGenerated.Count();
         protected override StatementSyntax CreateDefaultStatement(

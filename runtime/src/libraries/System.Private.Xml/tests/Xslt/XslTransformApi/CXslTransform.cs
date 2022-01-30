@@ -114,18 +114,18 @@ namespace System.Xml.Tests
         {
             /*try
             {
-#pragma warning disable 0618
-                new XslTransform().Load((IXPathNavigable)null, (XmlResolver)null, (Evidence)null);
-#pragma warning restore 0618
+            #pragma warning disable 0618
+            new XslTransform().Load((IXPathNavigable)null, (XmlResolver)null, (Evidence)null);
+            #pragma warning restore 0618
             }
             catch (ArgumentNullException)
             {
-                return;
+            return;
             }
             catch (Exception e)
             {
-                _output.WriteLine(e.ToString());
-                _output.WriteLine("Did not throw ArgumentNullException");
+            _output.WriteLine(e.ToString());
+            _output.WriteLine("Did not throw ArgumentNullException");
             }
             Assert.True(false);*/
         }
@@ -136,18 +136,18 @@ namespace System.Xml.Tests
         {
             /*try
             {
-#pragma warning disable 0618
-                new XslTransform().Load((XmlReader)null, (XmlResolver)null, (Evidence)null);
-#pragma warning restore 0618
+            #pragma warning disable 0618
+            new XslTransform().Load((XmlReader)null, (XmlResolver)null, (Evidence)null);
+            #pragma warning restore 0618
             }
             catch (ArgumentNullException)
             {
-                return;
+            return;
             }
             catch (Exception e)
             {
-                _output.WriteLine(e.ToString());
-                _output.WriteLine("Did not throw ArgumentNullException");
+            _output.WriteLine(e.ToString());
+            _output.WriteLine("Did not throw ArgumentNullException");
             }
             Assert.True(false);*/
         }

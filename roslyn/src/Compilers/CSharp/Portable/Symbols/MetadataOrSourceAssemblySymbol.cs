@@ -201,7 +201,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private Symbol[] _lazySpecialTypeMembers;
 
         /// <summary>
-        /// Lookup member declaration in predefined CorLib type in this Assembly. Only valid if this 
+        /// Lookup member declaration in predefined CorLib type in this Assembly. Only valid if this
         /// assembly is the Cor Library
         /// </summary>
         internal override Symbol GetDeclaredSpecialTypeMember(SpecialMember member)

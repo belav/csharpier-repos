@@ -7,7 +7,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
     +---------------------------------------------------------------+
     |                   Header Block Fragment (*)                 ...
     +---------------------------------------------------------------+
-*/
+    */
 internal partial class Http2Frame
 {
     public Http2ContinuationFrameFlags ContinuationFlags
