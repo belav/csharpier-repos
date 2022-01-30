@@ -17,19 +17,19 @@ namespace Castle.Components.DictionaryAdapter
     using System.Collections;
 
     /// <summary>
-	/// Defines the contract for retrieving dictionary values.
-	/// </summary>
+    /// Defines the contract for retrieving dictionary values.
+    /// </summary>
     public interface IDictionaryPropertyGetter : IDictionaryBehavior
     {
         /// <summary>
-		/// Gets the effective dictionary value.
-		/// </summary>
-		/// <param name="dictionaryAdapter">The dictionary adapter.</param>
-		/// <param name="key">The key.</param>
-		/// <param name="storedValue">The stored value.</param>
-		/// <param name="property">The property.</param>
-		/// <param name="ifExists">true if return only existing.</param>
-		/// <returns>The effective property value.</returns>
+        /// Gets the effective dictionary value.
+        /// </summary>
+        /// <param name="dictionaryAdapter">The dictionary adapter.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="storedValue">The stored value.</param>
+        /// <param name="property">The property.</param>
+        /// <param name="ifExists">true if return only existing.</param>
+        /// <returns>The effective property value.</returns>
         object GetPropertyValue(
             IDictionaryAdapter dictionaryAdapter,
             string key,

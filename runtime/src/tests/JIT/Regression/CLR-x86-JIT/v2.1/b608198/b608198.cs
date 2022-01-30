@@ -3,9 +3,9 @@
 //
 
 /*
- QFE regression TC for AV while optimizing away basic blocks that 
+ QFE regression TC for AV while optimizing away basic blocks that
  are not used which contain switch statements.
-*/
+ */
 
 class TEST
 {

@@ -4615,8 +4615,8 @@ class Test
 
         /// <summary>
         /// Override generic method with different type parameter letter
-        ///  - public virtual void Method&lt;TMethod&gt;(TOuter modopt(IsConst)[] modopt(IsConst) x, 
-        ///                                        TInner modopt(IsConst)[] modopt(IsConst) y, 
+        ///  - public virtual void Method&lt;TMethod&gt;(TOuter modopt(IsConst)[] modopt(IsConst) x,
+        ///                                        TInner modopt(IsConst)[] modopt(IsConst) y,
         ///                                        TMethod modopt(IsConst)[] modopt(IsConst) z);
         /// </summary>
         [Fact]

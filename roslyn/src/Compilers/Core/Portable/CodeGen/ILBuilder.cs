@@ -48,16 +48,16 @@ namespace Microsoft.CodeAnalysis.CodeGen
         // sequence point references absolute IL offset via IL marker
         public ArrayBuilder<RawSequencePoint> SeqPointsOpt;
 
-        /// <summary> 
+        /// <summary>
         /// In some cases we have to get a final IL offset during emit phase, for example for
-        /// proper emitting sequence points. The problem is that before the builder is realized we 
-        /// don't know the actual IL offset, but only {block/offset-in-the-block} pair. 
-        /// 
-        /// Thus, whenever we need to mark some IL position we allocate a new marker id, store it 
+        /// proper emitting sequence points. The problem is that before the builder is realized we
+        /// don't know the actual IL offset, but only {block/offset-in-the-block} pair.
+        ///
+        /// Thus, whenever we need to mark some IL position we allocate a new marker id, store it
         /// in allocatedILMarkers and reference this IL marker in the entity requiring the IL offset.
-        /// 
+        ///
         /// IL markers will be 'materialized' when the builder is realized; the resulting offsets
-        /// will be put into allocatedILMarkers array. Note that only markers from reachable blocks 
+        /// will be put into allocatedILMarkers array. Note that only markers from reachable blocks
         /// are materialized, the rest will have offset -1.
         /// </summary>
         private ArrayBuilder<ILMarker> _allocatedILMarkers;
@@ -263,12 +263,12 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// <summary>
         /// IL opcodes emitted by this builder.
         /// This includes branch instructions that end blocks except if they are fall-through NOPs.
-        /// 
-        /// This count allows compilers to see if emitting a particular statement/expression 
+        ///
+        /// This count allows compilers to see if emitting a particular statement/expression
         /// actually produced any instructions.
-        /// 
-        /// Example: a label will not result in any code so when emitting debugging information 
-        ///          an extra NOP may be needed if we want to decorate the label with sequence point. 
+        ///
+        /// Example: a label will not result in any code so when emitting debugging information
+        ///          an extra NOP may be needed if we want to decorate the label with sequence point.
         /// </summary>
         internal int InstructionsEmitted => _emitState.InstructionsEmitted;
 
@@ -827,11 +827,11 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// <summary>
         /// Returns true if any branches were optimized (that does not include shortening)
         /// We need this because optimizing a branch may result in unreachable code that needs to be eliminated.
-        /// 
+        ///
         /// === Example:
-        /// 
+        ///
         /// x = 1;
-        /// 
+        ///
         /// if (blah)
         /// {
         ///     global = 1;
@@ -840,27 +840,27 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// {
         ///     throw null;
         /// }
-        /// 
+        ///
         /// return x;
-        /// 
+        ///
         /// === rewrites into
-        /// 
+        ///
         /// push 1;
-        /// 
+        ///
         /// if (blah)
         /// {
         ///     global = 1;
-        ///     ret; 
+        ///     ret;
         /// }
         /// else
         /// {
         ///     throw null;
         /// }
-        /// 
-        /// // this ret unreachable now! 
+        ///
+        /// // this ret unreachable now!
         /// // even worse - empty stack is assumed thus the ret is illegal.
-        /// ret;    
-        /// 
+        /// ret;
+        ///
         /// </summary>
         private bool ComputeOffsetsAndAdjustBranches()
         {
@@ -1090,16 +1090,16 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         /// <summary>
         /// Defines a hidden sequence point.
-        /// The effect of this is that debugger will not associate following code 
+        /// The effect of this is that debugger will not associate following code
         /// with any source (until it sees a lexically following sequence point).
-        /// 
+        ///
         /// This is used for synthetic code that is reachable through labels.
-        /// 
+        ///
         /// If such code is not separated from previous sequence point by the means of a hidden sequence point
         /// It looks as a part of the statement that previous sequence point specifies.
         /// As a result, when user steps through the code and goes through a jump to such label,
         /// it will appear as if the jump landed at the beginning of the previous statement.
-        /// 
+        ///
         /// NOTE: Also inserted as the first statement of a method that would not otherwise have a leading
         /// sequence point so that step-into will find the method body.
         /// </summary>

@@ -99,12 +99,12 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
         }
 
         /// <summary>
-        /// Try to get the node that can be used to trigger the refactoring based on current cursor position. 
+        /// Try to get the node that can be used to trigger the refactoring based on current cursor position.
         /// </summary>
         /// <returns>
-        /// (1) a node of type <typeparamref name="TNamespaceDeclarationSyntax"/> node, if cursor in the name and it's the 
+        /// (1) a node of type <typeparamref name="TNamespaceDeclarationSyntax"/> node, if cursor in the name and it's the
         /// only namespace declaration in the document.
-        /// (2) a node of type <typeparamref name="TCompilationUnitSyntax"/> node, if the cursor is in the name of first 
+        /// (2) a node of type <typeparamref name="TCompilationUnitSyntax"/> node, if the cursor is in the name of first
         /// declaration in global namespace and there's no namespace declaration in this document.
         /// (3) otherwise, null.
         /// </returns>

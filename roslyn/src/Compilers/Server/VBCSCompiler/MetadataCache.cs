@@ -102,7 +102,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         /// that can be used as the key to a dictionary.
         /// If a file hasn't changed name or timestamp, we assume
         /// it is unchanged.
-        /// 
+        ///
         /// Returns null if the file doesn't exist or otherwise can't be accessed.
         /// </summary>
         private FileKey? GetUniqueFileKey(string filePath)

@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Substitutes part of key with another string.
-	/// </summary>
+    /// Substitutes part of key with another string.
+    /// </summary>
     [AttributeUsage(
         AttributeTargets.Interface | AttributeTargets.Property,
         AllowMultiple = true,
@@ -30,10 +30,10 @@ namespace Castle.Components.DictionaryAdapter
         private readonly string newValue;
 
         /// <summary>
-		/// Initializes a new instance of the <see cref="KeySubstitutionAttribute"/> class.
-		/// </summary>
-		/// <param name="oldValue">The old value.</param>
-		/// <param name="newValue">The new value.</param>
+        /// Initializes a new instance of the <see cref="KeySubstitutionAttribute"/> class.
+        /// </summary>
+        /// <param name="oldValue">The old value.</param>
+        /// <param name="newValue">The new value.</param>
         public KeySubstitutionAttribute(string oldValue, string newValue)
         {
             this.oldValue = oldValue;

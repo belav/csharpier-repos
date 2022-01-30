@@ -20,30 +20,30 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
     /// <code>
     ///     . name (arglist) remainder
     /// </code>
-    /// 
+    ///
     /// So, if there are two or more of these like:
-    /// 
+    ///
     /// <code>
     ///     . name1 (arglist1) remainder1 . name2 (arglist2) remainder2
     /// </code>
-    /// 
+    ///
     /// Then this will be wrapped such that the dots align like so:
-    /// 
+    ///
     /// <code>
     ///     . name1 (arglist1) remainder1
     ///     . name2 (arglist2) remainder2
     /// </code>
-    /// 
+    ///
     /// Note: for the sake of simplicity, (arglist) is used both for the argument list of
     /// an InvocationExpression and an ElementAccessExpression.
-    /// 
+    ///
     /// 'remainder' is all the postfix expression that can follow <c>. name (arglist)</c>.  i.e.
     /// member-access expressions, conditional-access expressions, etc.  Effectively, anything
     /// the language allows at this point as long as it doesn't start another 'chunk' itself.
-    /// 
+    ///
     /// This approach gives an intuitive wrapping algorithm that matches the common way
     /// many wrap dotted invocations, while also effectively not limiting the wrapper to
-    /// only simple forms like <c>.a(...).b(...).c(...)</c>.  
+    /// only simple forms like <c>.a(...).b(...).c(...)</c>.
     /// </summary>
     internal abstract partial class AbstractChainedExpressionWrapper<
         TNameSyntax,
@@ -222,7 +222,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
 
         /// <summary>
         /// Looks for the next sequence of <c>. Name (ArgList)</c>.  Note, except for the first
-        /// chunk, this cannot be of the form <c>? . Name (ArgList)</c> as we do not want to 
+        /// chunk, this cannot be of the form <c>? . Name (ArgList)</c> as we do not want to
         /// wrap before a dot in a <c>?.</c> form.  This doesn't matter for the first chunk as
         /// we won't be wrapping that one.
         /// </summary>
@@ -311,7 +311,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
         }
 
         /// <summary>
-        /// Walks down <paramref name="node"/> decomposing it into the individual tokens and nodes we want to look for chunks in. 
+        /// Walks down <paramref name="node"/> decomposing it into the individual tokens and nodes we want to look for chunks in.
         /// </summary>
         private void Decompose(SyntaxNode node, ArrayBuilder<SyntaxNodeOrToken> pieces)
         {

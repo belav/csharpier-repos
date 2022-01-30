@@ -9,7 +9,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
     +-+-------------+-----------------------------------------------+
     |   Weight (8)  |
     +-+-------------+
-*/
+    */
 internal partial class Http2Frame
 {
     public int PriorityStreamDependency { get; set; }

@@ -428,11 +428,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// "DefineConstants" property.  It worked fine in the IDE, because it
         /// effectively munged up the string so that it ended up being valid for
         /// the compiler.  We do the equivalent munging here now.
-        /// 
+        ///
         /// Basically, we take the incoming string, and split it on comma/semicolon/space.
         /// Then we look at the resulting list of strings, and remove any that are
         /// illegal identifiers, and pass the remaining ones through to the compiler.
-        /// 
+        ///
         /// Note that CSharp doesn't support assigning a value to the constants ... in
         /// other words, a constant is either defined or not defined ... it can't have
         /// an actual value.
@@ -494,7 +494,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         ///
         /// It returns true if everything went according to plan.  It returns false if the
         /// host compiler had a problem with one of the parameters that was passed in.
-        /// 
+        ///
         /// This method also sets the "this.HostCompilerSupportsAllParameters" property
         /// accordingly.
         ///
@@ -993,7 +993,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
         /// <summary>
         /// This method will get called during Execute() if a host object has been passed into the Csc
-        /// task.  Returns true if the compilation succeeded, otherwise false.  
+        /// task.  Returns true if the compilation succeeded, otherwise false.
         /// </summary>
         /// <owner>RGoel</owner>
         protected override bool CallHostObjectToExecute()

@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 {
     /// <summary>
     /// Diagnostic Analyzer Engine V2
-    /// 
+    ///
     /// This one follows pattern compiler has set for diagnostic analyzer.
     /// </summary>
     internal partial class DiagnosticIncrementalAnalyzer : IIncrementalAnalyzer2

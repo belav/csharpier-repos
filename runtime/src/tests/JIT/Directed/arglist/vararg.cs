@@ -158,13 +158,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -193,13 +193,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
+        ///
         /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -228,13 +228,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -263,13 +263,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -298,13 +298,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -324,13 +324,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -350,13 +350,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
+        ///
         /// Do a quick check on the value returned, and return whether they are
         /// equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -376,13 +376,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -402,13 +402,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
+        ///
         /// Do a quick check on the value returned, and return whether they are
         /// equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -444,13 +444,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -489,13 +489,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
+        ///
         /// Do a quick check on the value returned, and return whether they are
         /// equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -524,13 +524,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -564,18 +564,18 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
+        ///
         /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// Notes:
-        /// 
+        ///
         /// This is a particularily interesting test case because on every platform it
         /// will force spilling locals to the stack instead of just passing in registers.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -641,18 +641,18 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// Notes:
-        /// 
+        ///
         /// This is a particularily interesting test case because on every platform it
         /// will force spilling locals to the stack instead of just passing in registers.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -718,18 +718,18 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
+        ///
         /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// Notes:
-        /// 
+        ///
         /// This is a particularily interesting test case because on every platform it
         /// will force spilling locals to the stack instead of just passing in registers.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -795,18 +795,18 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
+        ///
         /// Do a quick check on the value returned, and return whether they are
         /// equal.
-        /// 
+        ///
         /// Notes:
-        /// 
+        ///
         /// This is a particularily interesting test case because on every platform it
         /// will force spilling locals to the stack instead of just passing in registers.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -872,9 +872,9 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// This function will test passing struct through varargs.
-        /// 
+        ///
         /// </summary>
         /// <returns>bool</returns>
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -912,7 +912,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructs
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestPassingEightByteStructs()
@@ -969,7 +969,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructs
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestPassingSixteenByteStructs()
@@ -1034,7 +1034,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructs
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestPassingTwentyFourByteStructs()
@@ -1085,7 +1085,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructs
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestPassingThirtyTwoByteStructs()
@@ -1127,7 +1127,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructs
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestMany16ByteStructs()
@@ -1154,7 +1154,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructs
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestFour16ByteStructs()
@@ -1192,7 +1192,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructs
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestMany32ByteStructs()
@@ -1224,13 +1224,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1259,13 +1259,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1294,13 +1294,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1329,13 +1329,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1364,13 +1364,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1393,13 +1393,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1422,13 +1422,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1451,13 +1451,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
+        ///
         /// Do a quick check on the value returned, and return whether they are
         /// equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1480,13 +1480,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1525,13 +1525,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1570,13 +1570,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1605,13 +1605,13 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1645,18 +1645,18 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// Notes:
-        /// 
+        ///
         /// This is a particularily interesting test case because on every platform it
         /// will force spilling locals to the stack instead of just passing in registers.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1722,18 +1722,18 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// Notes:
-        /// 
+        ///
         /// This is a particularily interesting test case because on every platform it
         /// will force spilling locals to the stack instead of just passing in registers.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1799,18 +1799,18 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// Notes:
-        /// 
+        ///
         /// This is a particularily interesting test case because on every platform it
         /// will force spilling locals to the stack instead of just passing in registers.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1876,18 +1876,18 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// The callee will simply loop over the arguments, compute the sum
         /// then return the value.
-        /// 
-        /// Do a quick check on the value returned, and return whether they 
+        ///
+        /// Do a quick check on the value returned, and return whether they
         /// are equal.
-        /// 
+        ///
         /// Notes:
-        /// 
+        ///
         /// This is a particularily interesting test case because on every platform it
         /// will force spilling locals to the stack instead of just passing in registers.
-        /// 
+        ///
         /// </summary>
         /// <param name="expectedValues"></param>
         /// <returns>bool</returns>
@@ -1953,9 +1953,9 @@ namespace NativeVarargTest
 
         /// <summary>
         /// Given an input set create an arglist to pass to a vararg callee.
-        /// 
+        ///
         /// This function will test passing struct through varargs.
-        /// 
+        ///
         /// </summary>
         /// <returns>bool</returns>
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1993,7 +1993,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructsManaged
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestPassingEightByteStructsManaged()
@@ -2062,7 +2062,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructsManaged
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestPassingSixteenByteStructsManaged()
@@ -2137,7 +2137,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructsManaged
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestPassingThirtyTwoByteStructsManaged()
@@ -2184,7 +2184,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructsManaged
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestMany16ByteStructsManaged()
@@ -2213,7 +2213,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructsManaged
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestFour16ByteStructsManaged()
@@ -2253,7 +2253,7 @@ namespace NativeVarargTest
 
         /// <summary>
         /// This is a helper for TestPassingStructsManaged
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int TestMany32ByteStructsManaged()
@@ -2286,7 +2286,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingIntsNoVarargsManaged()
@@ -2311,7 +2311,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingLongsNoVarargsManaged()
@@ -2336,7 +2336,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingFloatsNoVarargsManaged()
@@ -2361,7 +2361,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingDoublesNoVarargsManaged()
@@ -2386,7 +2386,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingIntAndFloatsNoVarargsManaged()
@@ -2420,7 +2420,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingFloatsAndIntNoVarargsManaged()
@@ -2454,7 +2454,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingIntAndDoublesNoVarargsManaged()
@@ -2488,7 +2488,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingDoublesAndIntNoVarargsManaged()
@@ -2522,7 +2522,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingLongAndFloatsNoVarargsManaged()
@@ -2556,7 +2556,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingFloatsAndlongNoVarargsManaged()
@@ -2590,7 +2590,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassinglongAndDoublesNoVarargsManaged()
@@ -2624,7 +2624,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingDoublesAndlongNoVarargsManaged()
@@ -2658,7 +2658,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingTwoIntStructsNoVarargsManaged()
@@ -2725,7 +2725,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingFourIntStructsNoVarargsManaged()
@@ -2812,7 +2812,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingTwoLongStructsNoVarargsManaged()
@@ -2879,7 +2879,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingTwoLongStructsWithIntAndLongNoVarargsManaged()
@@ -2948,7 +2948,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingTwoLongStructsAndIntNoVarargsManaged()
@@ -3016,7 +3016,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingFourLongStructsNoVarargsManaged()
@@ -3103,7 +3103,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingTwoFloatStructsNoVarargsManaged()
@@ -3170,7 +3170,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingFourFloatStructsNoVarargsManaged()
@@ -3257,7 +3257,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingTwoDoubleStructsNoVarargsManaged()
@@ -3324,7 +3324,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingTwoLongStructsAndFloatNoVarargsManaged()
@@ -3392,7 +3392,7 @@ namespace NativeVarargTest
         /// Test passing using the vararg calling convention; however, not passing
         /// and varargs. This is to assure that the non-variadic arguments
         /// are passing correctly.
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingFourDoubleStructsNoVarargsManaged()
@@ -3478,7 +3478,7 @@ namespace NativeVarargTest
         /// <summary>
         /// Test passing using the regular calling convention ten eight byte
         /// structs
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingTenEightBytes()
@@ -3606,7 +3606,7 @@ namespace NativeVarargTest
         /// <summary>
         /// Test passing using the regular calling convention ten sixteen byte
         /// structs
-        /// 
+        ///
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool TestPassingTenSixteenBytes()

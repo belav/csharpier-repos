@@ -16,8 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     ///     - rewritten bound node created by the <see cref="LocalRewriter"/> for the original node.
     /// The APIs are expected to return new state of the rewritten node, after they apply appropriate
     /// modifications, if any.
-    /// 
-    /// The base class provides default implementation for all APIs, which simply returns the rewritten node. 
+    ///
+    /// The base class provides default implementation for all APIs, which simply returns the rewritten node.
     /// </summary>
     internal class Instrumenter
     {

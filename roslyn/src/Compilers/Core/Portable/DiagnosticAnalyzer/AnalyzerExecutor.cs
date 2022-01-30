@@ -109,7 +109,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Optional delegate which is invoked when an analyzer throws an exception as an exception filter.
         /// Delegate can do custom tasks such as crash hosting process to create a dump.
         /// </param>
-        /// <param name="isCompilerAnalyzer">Delegate to determine if the given analyzer is compiler analyzer. 
+        /// <param name="isCompilerAnalyzer">Delegate to determine if the given analyzer is compiler analyzer.
         /// We need to special case the compiler analyzer at few places for performance reasons.</param>
         /// <param name="analyzerManager">Analyzer manager to fetch supported diagnostics.</param>
         /// <param name="getAnalyzerGate">

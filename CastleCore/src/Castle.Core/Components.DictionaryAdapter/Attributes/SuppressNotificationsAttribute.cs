@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Suppress property change notifications.
-	/// </summary>
+    /// Suppress property change notifications.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class SuppressNotificationsAttribute
         : DictionaryBehaviorAttribute,

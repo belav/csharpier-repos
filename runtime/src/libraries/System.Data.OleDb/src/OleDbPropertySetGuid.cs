@@ -323,42 +323,42 @@ namespace System.Data.OleDb
 
         /*
         internal static string GetTextFromValue(Guid guid) {
-            string value = ConvertToString(guid);
-            if (null == value) {
-                value = "{" + guid.ToString("D", CultureInfo.InvariantCulture) + "}";
-            }
-            return value;
+        string value = ConvertToString(guid);
+        if (null == value) {
+        value = "{" + guid.ToString("D", CultureInfo.InvariantCulture) + "}";
         }
-
+        return value;
+        }
+        
         internal static string ConvertToString(Guid guid) {
-            if (guid == OleDbPropertySetGuid.DBInit) { return "DBInit"; }
-            if (guid == OleDbPropertySetGuid.Rowset) { return "Rowset"; }
-            if (guid == OleDbPropertySetGuid.DataSource) { return "DataSource"; }
-            if (guid == OleDbPropertySetGuid.DataSourceInfo) { return "DataSourceInfo"; }
-            if (guid == OleDbPropertySetGuid.PropertiesInError) { return "PropertiesInError"; }
-
-            if (guid == OleDbPropertySetGuid.View) { return "View"; }
-            if (guid == OleDbPropertySetGuid.Trustee) { return "Trustee"; }
-            if (guid == OleDbPropertySetGuid.Column) { return "Column"; }
-            if (guid == OleDbPropertySetGuid.Index) { return "Index"; }
-            if (guid == OleDbPropertySetGuid.Table) { return "Table"; }
-            if (guid == OleDbPropertySetGuid.Session) { return "Session"; }
-            if (guid == OleDbPropertySetGuid.Stream) { return "Stream"; }
-
-            if (guid == OleDbPropertySetGuid.ColumnAll) { return "ColumnAll"; }
-            if (guid == OleDbPropertySetGuid.IndexAll) { return "IndexAll"; }
-            if (guid == OleDbPropertySetGuid.TableAll) { return "TableAll"; }
-            if (guid == OleDbPropertySetGuid.TrusteeAll) { return "TrusteeAll"; }
-            if (guid == OleDbPropertySetGuid.ConstraintAll) { return "ConstraintAll"; }
-            if (guid == OleDbPropertySetGuid.DataSourceAll) { return "DataSourceAll"; }
-            if (guid == OleDbPropertySetGuid.DataSourceInfoAll) { return "DataSourceInfoAll"; }
-            if (guid == OleDbPropertySetGuid.RowsetAll) { return "RowsetAll"; }
-            if (guid == OleDbPropertySetGuid.SessionAll) { return "SessionAll"; }
-            if (guid == OleDbPropertySetGuid.DBInitAll) { return "DBInitAll"; }
-            if (guid == OleDbPropertySetGuid.ViewAll) { return "ViewAll"; }
-            if (guid == OleDbPropertySetGuid.StreamAll) { return "StreamAll"; }
-
-            return null;
+        if (guid == OleDbPropertySetGuid.DBInit) { return "DBInit"; }
+        if (guid == OleDbPropertySetGuid.Rowset) { return "Rowset"; }
+        if (guid == OleDbPropertySetGuid.DataSource) { return "DataSource"; }
+        if (guid == OleDbPropertySetGuid.DataSourceInfo) { return "DataSourceInfo"; }
+        if (guid == OleDbPropertySetGuid.PropertiesInError) { return "PropertiesInError"; }
+        
+        if (guid == OleDbPropertySetGuid.View) { return "View"; }
+        if (guid == OleDbPropertySetGuid.Trustee) { return "Trustee"; }
+        if (guid == OleDbPropertySetGuid.Column) { return "Column"; }
+        if (guid == OleDbPropertySetGuid.Index) { return "Index"; }
+        if (guid == OleDbPropertySetGuid.Table) { return "Table"; }
+        if (guid == OleDbPropertySetGuid.Session) { return "Session"; }
+        if (guid == OleDbPropertySetGuid.Stream) { return "Stream"; }
+        
+        if (guid == OleDbPropertySetGuid.ColumnAll) { return "ColumnAll"; }
+        if (guid == OleDbPropertySetGuid.IndexAll) { return "IndexAll"; }
+        if (guid == OleDbPropertySetGuid.TableAll) { return "TableAll"; }
+        if (guid == OleDbPropertySetGuid.TrusteeAll) { return "TrusteeAll"; }
+        if (guid == OleDbPropertySetGuid.ConstraintAll) { return "ConstraintAll"; }
+        if (guid == OleDbPropertySetGuid.DataSourceAll) { return "DataSourceAll"; }
+        if (guid == OleDbPropertySetGuid.DataSourceInfoAll) { return "DataSourceInfoAll"; }
+        if (guid == OleDbPropertySetGuid.RowsetAll) { return "RowsetAll"; }
+        if (guid == OleDbPropertySetGuid.SessionAll) { return "SessionAll"; }
+        if (guid == OleDbPropertySetGuid.DBInitAll) { return "DBInitAll"; }
+        if (guid == OleDbPropertySetGuid.ViewAll) { return "ViewAll"; }
+        if (guid == OleDbPropertySetGuid.StreamAll) { return "StreamAll"; }
+        
+        return null;
         }
         */
     }

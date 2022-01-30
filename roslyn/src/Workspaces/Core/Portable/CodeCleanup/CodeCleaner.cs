@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
     {
         /// <summary>
         /// Return default code cleaners for a given document.
-        /// 
+        ///
         /// This can be modified and given to the Cleanup method to provide different cleaners.
         /// </summary>
         public static ImmutableArray<ICodeCleanupProvider> GetDefaultProviders(Document document)

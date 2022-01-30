@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis
             RemappedAfterHidden,
 
             /// <summary>
-            /// Used in C# and VB for spans that are inside of <c>#line hidden</c> (C#) or outside of <c>#ExternalSource</c> (VB) 
+            /// Used in C# and VB for spans that are inside of <c>#line hidden</c> (C#) or outside of <c>#ExternalSource</c> (VB)
             /// directives
             /// </summary>
             Hidden

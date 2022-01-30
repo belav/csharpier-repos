@@ -89,13 +89,13 @@ namespace Microsoft.CodeAnalysis
         new ITypeSymbol OriginalDefinition { get; }
 
         /// <summary>
-        /// An enumerated value that identifies certain 'special' types such as <see cref="System.Object"/>. 
+        /// An enumerated value that identifies certain 'special' types such as <see cref="System.Object"/>.
         /// Returns <see cref="Microsoft.CodeAnalysis.SpecialType.None"/> if the type is not special.
         /// </summary>
         SpecialType SpecialType { get; }
 
         /// <summary>
-        /// Returns the corresponding symbol in this type or a base type that implements 
+        /// Returns the corresponding symbol in this type or a base type that implements
         /// interfaceMember (either implicitly or explicitly), or null if no such symbol exists
         /// (which might be either because this type doesn't implement the container of
         /// interfaceMember, or this type doesn't supply a member that successfully implements

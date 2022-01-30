@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
     internal sealed partial class AsynchronousOperationListener
     {
         /// <summary>
-        /// Stores the source information for an <see cref="IAsyncToken"/> value.  Helpful when 
+        /// Stores the source information for an <see cref="IAsyncToken"/> value.  Helpful when
         /// tracking down tokens which aren't properly disposed.
         /// </summary>
         internal sealed class DiagnosticAsyncToken : AsyncToken

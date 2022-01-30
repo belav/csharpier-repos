@@ -271,24 +271,24 @@ namespace System
 
             /* For debugging
             public override string ToString () {
-                var sb = new StringBuilder ();
-                sb.Append (Names [0]);
-                if (TypeArguments != null) {
-                    sb.Append ("[");
-                    for (int i = 0; i < TypeArguments.Count; ++i) {
-                        if (TypeArguments [i].AssemblyName != null)
-                            sb.Append ('[');
-                        sb.Append (TypeArguments [i].ToString ());
-                        if (TypeArguments [i].AssemblyName != null)
-                            sb.Append (']');
-                        if (i < TypeArguments.Count - 1)
-                            sb.Append (", ");
-                    }
-                    sb.Append ("]");
-                }
-                if (AssemblyName != null)
-                    sb.Append ($", {AssemblyName}");
-                return sb.ToString ();
+            var sb = new StringBuilder ();
+            sb.Append (Names [0]);
+            if (TypeArguments != null) {
+            sb.Append ("[");
+            for (int i = 0; i < TypeArguments.Count; ++i) {
+            if (TypeArguments [i].AssemblyName != null)
+            sb.Append ('[');
+            sb.Append (TypeArguments [i].ToString ());
+            if (TypeArguments [i].AssemblyName != null)
+            sb.Append (']');
+            if (i < TypeArguments.Count - 1)
+            sb.Append (", ");
+            }
+            sb.Append ("]");
+            }
+            if (AssemblyName != null)
+            sb.Append ($", {AssemblyName}");
+            return sb.ToString ();
             }
             */
         }

@@ -84,7 +84,7 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// </summary>
         /// <remarks>
         /// The array may contain both resolved and unresolved references (<see cref="UnresolvedMetadataReference"/>).
-        /// Unresolved references are resolved when the script is about to be executed 
+        /// Unresolved references are resolved when the script is about to be executed
         /// (<see cref="Script.RunAsync(object, CancellationToken)"/>.
         /// Any resolution errors are reported at that point through <see cref="CompilationErrorException"/>.
         /// </remarks>

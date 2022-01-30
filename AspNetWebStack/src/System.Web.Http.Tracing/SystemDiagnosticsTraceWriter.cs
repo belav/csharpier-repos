@@ -77,7 +77,7 @@ namespace System.Web.Http.Tracing
         /// traces will be sent.
         /// </summary>
         /// <value>
-        /// This property allows a custom <see cref="TraceSource"/> 
+        /// This property allows a custom <see cref="TraceSource"/>
         /// to be used when writing the traces.
         /// This allows an application to configure and use its
         /// own <see cref="TraceSource"/> other than the default
@@ -91,7 +91,7 @@ namespace System.Web.Http.Tracing
         /// Writes a trace to <see cref="System.Diagnostics.Trace"/> if the
         /// <paramref name="level"/> is greater than or equal <see cref="MinimumLevel"/>.
         /// </summary>
-        /// <param name="request">The <see cref="HttpRequestMessage"/> associated with this trace. 
+        /// <param name="request">The <see cref="HttpRequestMessage"/> associated with this trace.
         /// It may be <c>null</c> but the resulting trace will contain no correlation ID.</param>
         /// <param name="category">The category for the trace. This can be any user-defined
         /// value. It is not interpreted by this implementation but is written to the trace.</param>
@@ -142,7 +142,7 @@ namespace System.Web.Http.Tracing
         /// a single string containing comma-separated name-value pairs
         /// for each <see cref="TraceRecord"/> property.
         /// </summary>
-        /// <param name="traceRecord">The <see cref="TraceRecord"/> from which 
+        /// <param name="traceRecord">The <see cref="TraceRecord"/> from which
         /// to produce the result.</param>
         /// <returns>A string containing comma-separated name-value pairs.</returns>
         public virtual string Format(TraceRecord traceRecord)
@@ -238,7 +238,7 @@ namespace System.Web.Http.Tracing
         /// either the initial receipt of the incoming request or the final send
         /// of the response, depending on <see cref="TraceKind"/>.
         /// </summary>
-        /// <param name="traceRecord">The <see cref="TraceRecord"/> from which to 
+        /// <param name="traceRecord">The <see cref="TraceRecord"/> from which to
         /// produce the result.</param>
         /// <returns>A string containing comma-separated name-value pairs.</returns>
         public virtual string FormatRequestEnvelope(TraceRecord traceRecord)

@@ -15,25 +15,25 @@ public class PulseTest
         for (int i = 0; i < 100; ++i)
         {
             /*
-			 * Start a thread going.
-			 */
+             * Start a thread going.
+             */
             PulseTest pulseTest = new PulseTest();
             pulseTest.threadNum = ++lastThreadNum;
             Thread sysThread = new Thread(pulseTest.ThreadMain);
 
             /*
-			 * Block thread from doing anything.
-			 */
+             * Block thread from doing anything.
+             */
             Monitor.Enter(pulseTest.theLock);
 
             /*
-			 * Now start it.
-			 */
+             * Now start it.
+             */
             sysThread.Start();
 
             /*
-			 * Wait for pulsetest thread to call Monitor.Wait().
-			 */
+             * Wait for pulsetest thread to call Monitor.Wait().
+             */
             while (!pulseTest.startedUp)
             {
                 pulseTest.Message("Main", "waiting");
@@ -43,14 +43,14 @@ public class PulseTest
             Monitor.Exit(pulseTest.theLock);
 
             /*
-			 * Whilst it is sitting in Monitor.Wait, kill it off.
-			 *
-			 * Without the patch, the wait event sits in mon->wait_list,
-			 * even as the mon struct gets recycled onto monitor_freelist.
-			 *
-			 * With the patch, the event is unlinked when the mon struct
-			 * gets recycled.
-			 */
+             * Whilst it is sitting in Monitor.Wait, kill it off.
+             *
+             * Without the patch, the wait event sits in mon->wait_list,
+             * even as the mon struct gets recycled onto monitor_freelist.
+             *
+             * With the patch, the event is unlinked when the mon struct
+             * gets recycled.
+             */
             pulseTest.Message("Main", "disposing");
             sysThread.Abort();
             sysThread.Join();
@@ -68,10 +68,10 @@ public class PulseTest
             Message("ThreadMain", "waiting");
 
             /*
-			 * This puts an event onto mon->wait_list.
-			 * Then Main() does a sysThread.Abort() and
-			 * the event is left on mon->wait_list.
-			 */
+             * This puts an event onto mon->wait_list.
+             * Then Main() does a sysThread.Abort() and
+             * the event is left on mon->wait_list.
+             */
             Monitor.Wait(theLock);
             Message("ThreadMain", "woken");
         }

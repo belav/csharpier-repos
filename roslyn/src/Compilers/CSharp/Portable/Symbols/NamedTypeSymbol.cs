@@ -48,12 +48,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns the type parameters that this type has. If this is a non-generic type,
-        /// returns an empty ImmutableArray.  
+        /// returns an empty ImmutableArray.
         /// </summary>
         public abstract ImmutableArray<TypeParameterSymbol> TypeParameters { get; }
 
         /// <summary>
-        /// Returns the type arguments that have been substituted for the type parameters. 
+        /// Returns the type arguments that have been substituted for the type parameters.
         /// If nothing has been substituted for a give type parameters,
         /// then the type parameter itself is consider the type argument.
         /// </summary>
@@ -141,8 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns true and a string from the first GuidAttribute on the type, 
-        /// the string might be null or an invalid guid representation. False, 
+        /// Returns true and a string from the first GuidAttribute on the type,
+        /// the string might be null or an invalid guid representation. False,
         /// if there is no GuidAttribute with string argument.
         /// </summary>
         internal virtual bool GetGuidString(out string guidString)
@@ -428,7 +428,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal abstract AttributeUsageInfo GetAttributeUsageInfo();
 
         /// <summary>
-        /// Returns true if the type is a Script class. 
+        /// Returns true if the type is a Script class.
         /// It might be an interactive submission class or a Script class in a csx file.
         /// </summary>
         public virtual bool IsScriptClass
@@ -1573,7 +1573,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal abstract TypeLayout Layout { get; }
 
         /// <summary>
-        /// The default charset used for type marshalling. 
+        /// The default charset used for type marshalling.
         /// Can be changed via <see cref="DefaultCharSetAttribute"/> applied on the containing module.
         /// </summary>
         protected CharSet DefaultMarshallingCharSet
@@ -1642,8 +1642,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal abstract bool IsInterface { get; }
 
         /// <summary>
-        /// Verify if the given type can be used to back a tuple type 
-        /// and return cardinality of that tuple type in <paramref name="tupleCardinality"/>. 
+        /// Verify if the given type can be used to back a tuple type
+        /// and return cardinality of that tuple type in <paramref name="tupleCardinality"/>.
         /// </summary>
         /// <param name="tupleCardinality">If method returns true, contains cardinality of the compatible tuple type.</param>
         /// <returns></returns>

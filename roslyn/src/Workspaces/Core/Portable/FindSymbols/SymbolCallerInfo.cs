@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     /// does not go through any other symbols in the inheritance hierarchy of CalledSymbol, while an
     /// indirect call does go through the inheritance hierarchy.  For example, calls through a base
     /// member that this symbol overrides, or through an interface member that this symbol
-    /// implements will be considered 'indirect'. 
+    /// implements will be considered 'indirect'.
     /// </summary>
     public struct SymbolCallerInfo
     {

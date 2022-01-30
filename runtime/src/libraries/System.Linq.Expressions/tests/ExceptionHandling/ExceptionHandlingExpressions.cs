@@ -1186,24 +1186,24 @@ namespace System.Linq.Expressions.Tests
 
             /*
             Comparable to:
-
+            
             try
             {
-                try
-                {
-                    sb.Append("A");
-                    throw new TestException();
-                }
-                finally
-                {
-                    sb.Append("B");
-                }
+            try
+            {
+            sb.Append("A");
+            throw new TestException();
+            }
+            finally
+            {
+            sb.Append("B");
+            }
             }
             catch (TestException) when (sb.Append("C") != null)
             {
-                sb.Append("D");
+            sb.Append("D");
             }
-
+            
             The filter should execute on the first pass, so the result should be "ACBD".
             */
 

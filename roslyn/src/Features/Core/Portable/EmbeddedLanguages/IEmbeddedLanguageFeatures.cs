@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
         /// <summary>
         /// Completion provider that can provide completion items for this
         /// specific embedded language.
-        /// 
+        ///
         /// <see cref="AbstractAggregateEmbeddedLanguageCompletionProvider"/> will aggregate all these
         /// individual providers and expose them as one single completion provider to
         /// the rest of Roslyn.

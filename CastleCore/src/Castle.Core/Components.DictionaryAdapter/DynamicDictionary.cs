@@ -20,9 +20,9 @@ namespace Castle.Components.DictionaryAdapter
     using System.Linq;
 
     /// <summary>
-	/// Wraps a <see cref="IDictionary"/> with a dynamic object to expose a bit better looking API.
-	/// The implementation is trivial and assumes keys are <see cref="string"/>s.
-	/// </summary>
+    /// Wraps a <see cref="IDictionary"/> with a dynamic object to expose a bit better looking API.
+    /// The implementation is trivial and assumes keys are <see cref="string"/>s.
+    /// </summary>
     public class DynamicDictionary : DynamicObject
     {
         private readonly IDictionary dictionary;

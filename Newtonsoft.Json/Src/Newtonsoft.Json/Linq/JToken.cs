@@ -261,7 +261,7 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// Gets the path of the JSON token. 
+        /// Gets the path of the JSON token.
         /// </summary>
         public string Path
         {

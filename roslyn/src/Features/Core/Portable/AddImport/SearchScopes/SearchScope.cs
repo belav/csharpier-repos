@@ -17,9 +17,9 @@ namespace Microsoft.CodeAnalysis.AddImport
     {
         /// <summary>
         /// SearchScope is used to control where the <see cref="AbstractAddImportFeatureService{TSimpleNameSyntax}"/>
-        /// searches.  We search different scopes in different ways.  For example we use 
+        /// searches.  We search different scopes in different ways.  For example we use
         /// SymbolTreeInfos to search unreferenced projects and metadata dlls.  However,
-        /// for the current project we're editing we defer to the compiler to do the 
+        /// for the current project we're editing we defer to the compiler to do the
         /// search.
         /// </summary>
         private abstract class SearchScope

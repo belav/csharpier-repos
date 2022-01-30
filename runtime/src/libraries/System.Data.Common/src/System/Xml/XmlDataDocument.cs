@@ -3157,25 +3157,25 @@ namespace System.Xml
 
         /*
         internal static bool IsWhiteSpace(char ch) {
-            switch ( ch ) {
-                case '\u0009' :
-                case '\u000a' :
-                case '\u000d' :
-                case '\u0020' :
-                    return true;
-                default :
-                    return false;
-            }
+        switch ( ch ) {
+        case '\u0009' :
+        case '\u000a' :
+        case '\u000d' :
+        case '\u0020' :
+        return true;
+        default :
+        return false;
         }
-
+        }
+        
         internal static bool IsOnlyWhitespace( string str ) {
-            if (str != null) {
-                for (int index = 0; index < str.Length; index ++) {
-                    if (! IsWhiteSpace(str[index]))
-                        return false;
-                }
-            }
-            return true;
+        if (str != null) {
+        for (int index = 0; index < str.Length; index ++) {
+        if (! IsWhiteSpace(str[index]))
+        return false;
+        }
+        }
+        return true;
         }
         */
         [UnconditionalSuppressMessage(

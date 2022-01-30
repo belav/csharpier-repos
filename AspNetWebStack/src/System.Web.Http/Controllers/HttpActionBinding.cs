@@ -13,10 +13,10 @@ using System.Web.Http.Metadata;
 namespace System.Web.Http.Controllers
 {
     /// <summary>
-    /// This describes *how* the binding will happen. Does not actually bind. 
-    /// This is static for a given action descriptor and can be reused across requests. 
-    /// This may be a nice thing to log. Or set a breakpoint after we create and preview what's about to happen. 
-    /// In theory, this could be precompiled for each Action descriptor.  
+    /// This describes *how* the binding will happen. Does not actually bind.
+    /// This is static for a given action descriptor and can be reused across requests.
+    /// This may be a nice thing to log. Or set a breakpoint after we create and preview what's about to happen.
+    /// In theory, this could be precompiled for each Action descriptor.
     /// </summary>
     public class HttpActionBinding
     {
@@ -37,7 +37,7 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Back pointer to the action this binding is for. 
+        /// Back pointer to the action this binding is for.
         /// This can also provide the Type[], string[] names for the parameters.
         /// </summary>
         public HttpActionDescriptor ActionDescriptor
@@ -54,7 +54,7 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Specifies synchronous bindings for each parameter.This is a parallel array to the ActionDescriptor's parameter array. 
+        /// Specifies synchronous bindings for each parameter.This is a parallel array to the ActionDescriptor's parameter array.
         /// </summary>
         [SuppressMessage(
             "Microsoft.Performance",

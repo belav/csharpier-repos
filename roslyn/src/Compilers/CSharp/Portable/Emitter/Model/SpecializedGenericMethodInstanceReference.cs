@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 {
     /// <summary>
     /// Represents a generic method of a generic type instantiation, closed over type parameters.
-    /// e.g. 
+    /// e.g.
     /// A{T}.M{S}()
     /// A.B{T}.C.M{S}()
     /// </summary>

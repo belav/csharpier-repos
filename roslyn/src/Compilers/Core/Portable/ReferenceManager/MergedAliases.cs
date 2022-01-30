@@ -17,17 +17,17 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Adds aliases of a specified reference to the merged set of aliases.
         /// Consider the following special cases:
-        /// 
-        /// o {} + {} = {} 
+        ///
+        /// o {} + {} = {}
         ///   If neither reference has any aliases then the result has no aliases.
-        /// 
+        ///
         /// o {A} + {} = {A, global}
         ///   {} + {A} = {A, global}
-        ///   
-        ///   If one and only one of the references has aliases we add the global alias since the 
-        ///   referenced declarations should now be accessible both via existing aliases 
+        ///
+        ///   If one and only one of the references has aliases we add the global alias since the
+        ///   referenced declarations should now be accessible both via existing aliases
         ///   as well as unqualified.
-        ///   
+        ///
         /// o {A, A} + {A, B, B} = {A, A, B, B}
         ///   We preserve dups in each alias array, but avoid making more dups when merging.
         /// </summary>

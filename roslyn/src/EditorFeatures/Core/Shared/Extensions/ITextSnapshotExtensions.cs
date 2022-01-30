@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         /// <summary>
         /// Get <see cref="Document"/> from <see cref="Text.Extensions.GetOpenDocumentInCurrentContextWithChanges(ITextSnapshot)"/>
         /// once <see cref="IWorkspaceStatusService.WaitUntilFullyLoadedAsync(CancellationToken)"/> returns
-        /// 
-        /// for synchronous code path, make sure to use synchronous version 
+        ///
+        /// for synchronous code path, make sure to use synchronous version
         /// <see cref="GetFullyLoadedOpenDocumentInCurrentContextWithChanges(ITextSnapshot, IUIThreadOperationContext, IThreadingContext)"/>.
         /// otherwise, one can get into a deadlock
         /// </summary>

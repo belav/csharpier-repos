@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis
         RefKind RefKind { get; }
 
         /// <summary>
-        /// Returns true if the parameter was declared as a parameter array. 
+        /// Returns true if the parameter was declared as a parameter array.
         /// </summary>
         bool IsParams { get; }
 
@@ -76,7 +76,7 @@ namespace Microsoft.CodeAnalysis
         bool HasExplicitDefaultValue { get; }
 
         /// <summary>
-        /// Returns the default value of the parameter. 
+        /// Returns the default value of the parameter.
         /// </summary>
         /// <remarks>
         /// Returns null if the parameter type is a struct and the default value of the parameter

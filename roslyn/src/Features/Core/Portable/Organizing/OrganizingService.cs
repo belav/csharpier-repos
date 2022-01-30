@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Organizing
     {
         /// <summary>
         /// Organize the whole document.
-        /// 
+        ///
         /// Optionally you can provide your own organizers. otherwise, default will be used.
         /// </summary>
         public static Task<Document> OrganizeAsync(

@@ -22,8 +22,8 @@ namespace Castle.Components.DictionaryAdapter
     using System.Text;
 
     /// <summary>
-	/// Identifies a property should be represented as a delimited string value.
-	/// </summary>
+    /// Identifies a property should be represented as a delimited string value.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class StringListAttribute
         : DictionaryBehaviorAttribute,
@@ -36,8 +36,8 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Gets the separator.
-		/// </summary>
+        /// Gets the separator.
+        /// </summary>
         public char Separator { get; set; }
 
 		#region IDictionaryPropertyGetter

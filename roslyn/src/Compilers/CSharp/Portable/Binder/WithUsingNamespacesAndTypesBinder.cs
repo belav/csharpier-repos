@@ -41,7 +41,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// the current imports.
         /// </summary>
         /// <param name="name">The metadata name of the (potentially) forwarded type, without qualifiers.</param>
-        /// <param name="qualifierOpt">Will be used to return the namespace of the found forwarder, 
+        /// <param name="qualifierOpt">Will be used to return the namespace of the found forwarder,
         /// if any.</param>
         /// <param name="diagnostics">Will be used to report non-fatal errors during look up.</param>
         /// <param name="location">Location to report errors on.</param>

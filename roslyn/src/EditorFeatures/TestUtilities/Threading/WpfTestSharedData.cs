@@ -17,8 +17,8 @@ namespace Roslyn.Test.Utilities
         internal static readonly WpfTestSharedData Instance = new WpfTestSharedData();
 
         /// <summary>
-        /// Holds the last 10 test cases executed: more recent test cases will occur later in the 
-        /// list. Useful for debugging deadlocks that occur because state leak between runs. 
+        /// Holds the last 10 test cases executed: more recent test cases will occur later in the
+        /// list. Useful for debugging deadlocks that occur because state leak between runs.
         /// </summary>
         private readonly List<string> _recentTestCases = new List<string>();
 

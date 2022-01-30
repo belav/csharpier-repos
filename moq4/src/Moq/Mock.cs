@@ -15,9 +15,9 @@ using Moq.Properties;
 namespace Moq
 {
     /// <summary>
-	///   Base class for mocks and static helper class with methods that apply to mocked objects,
-	///   such as <see cref="Get"/> to retrieve a <see cref="Mock{T}"/> from an object instance.
-	/// </summary>
+    ///   Base class for mocks and static helper class with methods that apply to mocked objects,
+    ///   such as <see cref="Get"/> to retrieve a <see cref="Mock{T}"/> from an object instance.
+    /// </summary>
     public abstract partial class Mock : IFluentInterface
     {
         internal static readonly MethodInfo GetMethod = typeof(Mock).GetMethod(
@@ -26,36 +26,36 @@ namespace Moq
         );
 
         /// <summary>
-		///   Initializes a new instance of the <see cref="Mock"/> class.
-		/// </summary>
+        ///   Initializes a new instance of the <see cref="Mock"/> class.
+        /// </summary>
         protected Mock() { }
 
         /// <summary>
-		///   Retrieves the mock object for the given object instance.
-		/// </summary>
-		/// <param name="mocked">The instance of the mocked object.</param>
-		/// <typeparam name="T">
-		///   Type of the mock to retrieve.
-		///   Can be omitted as it's inferred from the object instance passed in as the <paramref name="mocked"/> instance.
-		/// </typeparam>
-		/// <returns>The mock associated with the mocked object.</returns>
-		/// <exception cref="ArgumentException">The received <paramref name="mocked"/> instance was not created by Moq.</exception>
-		/// <example group="advanced">
-		///   The following example shows how to add a new setup to an object instance
-		///   which is not the original <see cref="Mock{T}"/> but rather the object associated with it:
-		///   <code>
-		///     // Typed instance, not the mock, is retrieved from some test API.
-		///     HttpContextBase context = GetMockContext();
-		///
-		///     // context.Request is the typed object from the "real" API
-		///     // so in order to add a setup to it, we need to get
-		///     // the mock that "owns" it
-		///     Mock&lt;HttpRequestBase&gt; request = Mock.Get(context.Request);
-		///
-		///     request.Setup(req => req.AppRelativeCurrentExecutionFilePath)
-		///            .Returns(tempUrl);
-		///   </code>
-		/// </example>
+        ///   Retrieves the mock object for the given object instance.
+        /// </summary>
+        /// <param name="mocked">The instance of the mocked object.</param>
+        /// <typeparam name="T">
+        ///   Type of the mock to retrieve.
+        ///   Can be omitted as it's inferred from the object instance passed in as the <paramref name="mocked"/> instance.
+        /// </typeparam>
+        /// <returns>The mock associated with the mocked object.</returns>
+        /// <exception cref="ArgumentException">The received <paramref name="mocked"/> instance was not created by Moq.</exception>
+        /// <example group="advanced">
+        ///   The following example shows how to add a new setup to an object instance
+        ///   which is not the original <see cref="Mock{T}"/> but rather the object associated with it:
+        ///   <code>
+        ///     // Typed instance, not the mock, is retrieved from some test API.
+        ///     HttpContextBase context = GetMockContext();
+        ///
+        ///     // context.Request is the typed object from the "real" API
+        ///     // so in order to add a setup to it, we need to get
+        ///     // the mock that "owns" it
+        ///     Mock&lt;HttpRequestBase&gt; request = Mock.Get(context.Request);
+        ///
+        ///     request.Setup(req => req.AppRelativeCurrentExecutionFilePath)
+        ///            .Returns(tempUrl);
+        ///   </code>
+        /// </example>
         public static Mock<T> Get<T>(T mocked) where T : class
         {
             if (mocked is IMocked<T> mockedOfT)
@@ -114,9 +114,9 @@ namespace Moq
         }
 
         /// <summary>
-		///   Verifies that all verifiable expectations have been met.
-		/// </summary>
-		/// <exception cref="MockException">Not all verifiable expectations were met.</exception>
+        ///   Verifies that all verifiable expectations have been met.
+        /// </summary>
+        /// <exception cref="MockException">Not all verifiable expectations were met.</exception>
         public static void Verify(params Mock[] mocks)
         {
             foreach (var mock in mocks)
@@ -126,9 +126,9 @@ namespace Moq
         }
 
         /// <summary>
-		///   Verifies all expectations regardless of whether they have been flagged as verifiable.
-		/// </summary>
-		/// <exception cref="MockException">At least one expectation was not met.</exception>
+        ///   Verifies all expectations regardless of whether they have been flagged as verifiable.
+        /// </summary>
+        /// <exception cref="MockException">At least one expectation was not met.</exception>
         public static void VerifyAll(params Mock[] mocks)
         {
             foreach (var mock in mocks)
@@ -138,29 +138,29 @@ namespace Moq
         }
 
         /// <summary>
-		/// Gets the interfaces additionally implemented by the mock object.
-		/// </summary>
-		/// <remarks>
-		/// This list may be modified by calls to <see cref="As{TInterface}"/> up until the first call to <see cref="Object"/>.
-		/// </remarks>
+        /// Gets the interfaces additionally implemented by the mock object.
+        /// </summary>
+        /// <remarks>
+        /// This list may be modified by calls to <see cref="As{TInterface}"/> up until the first call to <see cref="Object"/>.
+        /// </remarks>
         internal abstract List<Type> AdditionalInterfaces { get; }
 
         /// <summary>
-		///   Behavior of the mock, according to the value set in the constructor.
-		/// </summary>
+        ///   Behavior of the mock, according to the value set in the constructor.
+        /// </summary>
         public abstract MockBehavior Behavior { get; }
 
         /// <summary>
-		///   Whether the base member virtual implementation will be called for mocked classes if no setup is matched.
-		///   Defaults to <see langword="false"/>.
-		/// </summary>
+        ///   Whether the base member virtual implementation will be called for mocked classes if no setup is matched.
+        ///   Defaults to <see langword="false"/>.
+        /// </summary>
         public abstract bool CallBase { get; set; }
 
         internal abstract object[] ConstructorArguments { get; }
 
         /// <summary>
-		///   Specifies the behavior to use when returning default values for unexpected invocations on loose mocks.
-		/// </summary>
+        ///   Specifies the behavior to use when returning default values for unexpected invocations on loose mocks.
+        /// </summary>
         public DefaultValue DefaultValue
         {
             get { return this.DefaultValueProvider.Kind; }
@@ -178,109 +178,109 @@ namespace Moq
         internal abstract EventHandlerCollection EventHandlers { get; }
 
         /// <summary>
-		///   Gets the mocked object instance.
-		/// </summary>
+        ///   Gets the mocked object instance.
+        /// </summary>
         public object Object => this.OnGetObject();
 
         /// <summary>
-		///   Gets the interfaces directly inherited from the mocked type (<see cref="MockedType"/>).
-		/// </summary>
+        ///   Gets the interfaces directly inherited from the mocked type (<see cref="MockedType"/>).
+        /// </summary>
         internal abstract Type[] InheritedInterfaces { get; }
 
         internal abstract bool IsObjectInitialized { get; }
 
         /// <summary>
-		/// Gets list of invocations which have been performed on this mock.
-		/// </summary>
+        /// Gets list of invocations which have been performed on this mock.
+        /// </summary>
         public IInvocationList Invocations => MutableInvocations;
 
         internal abstract InvocationCollection MutableInvocations { get; }
 
         /// <summary>
-		///   Returns the mocked object value.
-		/// </summary>
+        ///   Returns the mocked object value.
+        /// </summary>
         protected abstract object OnGetObject();
 
         /// <summary>
-		/// Retrieves the type of the mocked object, its generic type argument.
-		/// This is used in the auto-mocking of hierarchy access.
-		/// </summary>
+        /// Retrieves the type of the mocked object, its generic type argument.
+        /// This is used in the auto-mocking of hierarchy access.
+        /// </summary>
         internal abstract Type MockedType { get; }
 
         /// <summary>
-		/// Gets or sets the <see cref="Moq.DefaultValueProvider"/> instance that will be used
-		/// e. g. to produce default return values for unexpected invocations.
-		/// </summary>
+        /// Gets or sets the <see cref="Moq.DefaultValueProvider"/> instance that will be used
+        /// e. g. to produce default return values for unexpected invocations.
+        /// </summary>
         public abstract DefaultValueProvider DefaultValueProvider { get; set; }
 
         /// <summary>
-		/// The <see cref="Moq.DefaultValueProvider"/> used to initialize automatically stubbed properties.
-		/// It is equal to the value of <see cref="DefaultValueProvider"/> at the time when
-		/// <see cref="SetupAllProperties"/> was last called.
-		/// </summary>
+        /// The <see cref="Moq.DefaultValueProvider"/> used to initialize automatically stubbed properties.
+        /// It is equal to the value of <see cref="DefaultValueProvider"/> at the time when
+        /// <see cref="SetupAllProperties"/> was last called.
+        /// </summary>
         internal abstract DefaultValueProvider AutoSetupPropertiesDefaultValueProvider { get; set; }
 
         internal abstract SetupCollection MutableSetups { get; }
 
         /// <summary>
-		///   Gets the setups that have been configured on this mock,
-		///   in chronological order (that is, oldest setup first, most recent setup last).
-		/// </summary>
+        ///   Gets the setups that have been configured on this mock,
+        ///   in chronological order (that is, oldest setup first, most recent setup last).
+        /// </summary>
         public ISetupList Setups => this.MutableSetups;
 
         /// <summary>
-		/// A set of switches that influence how this mock will operate.
-		/// You can opt in or out of certain features via this property.
-		/// </summary>
+        /// A set of switches that influence how this mock will operate.
+        /// You can opt in or out of certain features via this property.
+        /// </summary>
         public abstract Switches Switches { get; set; }
 
 		#region Verify
 
         /// <summary>
-		///   Verifies that all verifiable expectations have been met.
-		/// </summary>
-		/// <exception cref="MockException">Not all verifiable expectations were met.</exception>
-		/// <example group="verification">
-		///   This example sets up an expectation and marks it as verifiable.
-		///   After the mock is used, a <c>Verify()</c> call is issued on the mock
-		///   to ensure the method in the setup was invoked:
-		///   <code>
-		///     var mock = new Mock&lt;IWarehouse&gt;();
-		///     this.Setup(x =&gt; x.HasInventory(TALISKER, 50))
-		///         .Returns(true)
-		///         .Verifiable();
-		///
-		///     ...
-		///
-		///     // Will throw if the test code did not call HasInventory.
-		///     this.Verify();
-		///   </code>
-		/// </example>
+        ///   Verifies that all verifiable expectations have been met.
+        /// </summary>
+        /// <exception cref="MockException">Not all verifiable expectations were met.</exception>
+        /// <example group="verification">
+        ///   This example sets up an expectation and marks it as verifiable.
+        ///   After the mock is used, a <c>Verify()</c> call is issued on the mock
+        ///   to ensure the method in the setup was invoked:
+        ///   <code>
+        ///     var mock = new Mock&lt;IWarehouse&gt;();
+        ///     this.Setup(x =&gt; x.HasInventory(TALISKER, 50))
+        ///         .Returns(true)
+        ///         .Verifiable();
+        ///
+        ///     ...
+        ///
+        ///     // Will throw if the test code did not call HasInventory.
+        ///     this.Verify();
+        ///   </code>
+        /// </example>
         public void Verify()
         {
             this.Verify(setup => setup.IsVerifiable, verifiedMocks: new HashSet<Mock>());
         }
 
         /// <summary>
-		///   Verifies all expectations regardless of whether they have been flagged as verifiable.
-		/// </summary>
-		/// <exception cref="MockException">At least one expectation was not met.</exception>
-		/// <example>
-		///   This example sets up an expectation without marking it as verifiable.
-		///   After the mock is used, a <see cref="VerifyAll"/> call is issued on the mock
-		///   to ensure that all expectations are met:
-		///   <code>
-		///     var mock = new Mock&lt;IWarehouse&gt;();
-		///     this.Setup(x =&gt; x.HasInventory(TALISKER, 50))
-		///         .Returns(true);
-		///
-		///     ...
-		///
-		///     // Will throw if the test code did not call HasInventory,
-		///     // even though that expectation was not marked as verifiable.
-		///     mock.VerifyAll();
-		///   </code>
-		/// </example>
+        ///   Verifies all expectations regardless of whether they have been flagged as verifiable.
+        /// </summary>
+        /// <exception cref="MockException">At least one expectation was not met.</exception>
+        /// <example>
+        ///   This example sets up an expectation without marking it as verifiable.
+        ///   After the mock is used, a <see cref="VerifyAll"/> call is issued on the mock
+        ///   to ensure that all expectations are met:
+        ///   <code>
+        ///     var mock = new Mock&lt;IWarehouse&gt;();
+        ///     this.Setup(x =&gt; x.HasInventory(TALISKER, 50))
+        ///         .Returns(true);
+        ///
+        ///     ...
+        ///
+        ///     // Will throw if the test code did not call HasInventory,
+        ///     // even though that expectation was not marked as verifiable.
+        ///     mock.VerifyAll();
+        ///   </code>
+        /// </example>
         public void VerifyAll()
         {
             this.Verify(setup => true, verifiedMocks: new HashSet<Mock>());
@@ -899,21 +899,21 @@ namespace Moq
 		#region As<TInterface>
 
         /// <summary>
-		///   Adds an interface implementation to the mock, allowing setups to be specified for it.
-		/// </summary>
-		/// <remarks>
-		///   This method can only be called before the first use of the mock <see cref="Object"/> property,
-		///   at which point the runtime type has already been generated and no more interfaces can be added to it.
-		///   <para>
-		///     Also, <typeparamref name="TInterface"/> must be an interface and not a class,
-		///     which must be specified when creating the mock instead.
-		///   </para>
-		/// </remarks>
-		/// <typeparam name="TInterface">Type of interface to cast the mock to.</typeparam>
-		/// <exception cref="ArgumentException">The <typeparamref name="TInterface"/> specified is not an interface.</exception>
-		/// <exception cref="InvalidOperationException">
-		///   The mock type has already been generated by accessing the <see cref="Object"/> property.
-		/// </exception>
+        ///   Adds an interface implementation to the mock, allowing setups to be specified for it.
+        /// </summary>
+        /// <remarks>
+        ///   This method can only be called before the first use of the mock <see cref="Object"/> property,
+        ///   at which point the runtime type has already been generated and no more interfaces can be added to it.
+        ///   <para>
+        ///     Also, <typeparamref name="TInterface"/> must be an interface and not a class,
+        ///     which must be specified when creating the mock instead.
+        ///   </para>
+        /// </remarks>
+        /// <typeparam name="TInterface">Type of interface to cast the mock to.</typeparam>
+        /// <exception cref="ArgumentException">The <typeparamref name="TInterface"/> specified is not an interface.</exception>
+        /// <exception cref="InvalidOperationException">
+        ///   The mock type has already been generated by accessing the <see cref="Object"/> property.
+        /// </exception>
         public abstract Mock<TInterface> As<TInterface>() where TInterface : class;
 
         internal bool ImplementsInterface(Type interfaceType)
@@ -929,13 +929,13 @@ namespace Moq
         internal abstract Dictionary<Type, object> ConfiguredDefaultValues { get; }
 
         /// <summary>
-		/// Defines the default return value for all mocked methods or properties with return type <typeparamref name= "TReturn" />.
-		/// </summary>
-		/// <typeparam name="TReturn">The return type for which to define a default value.</typeparam>
-		/// <param name="value">The default return value.</param>
-		/// <remarks>
-		/// Default return value is respected only when there is no matching setup for a method call.
-		/// </remarks>
+        /// Defines the default return value for all mocked methods or properties with return type <typeparamref name= "TReturn" />.
+        /// </summary>
+        /// <typeparam name="TReturn">The return type for which to define a default value.</typeparam>
+        /// <param name="value">The default return value.</param>
+        /// <remarks>
+        /// Default return value is respected only when there is no matching setup for a method call.
+        /// </remarks>
         public void SetReturnsDefault<TReturn>(TReturn value)
         {
             this.ConfiguredDefaultValues[typeof(TReturn)] = value;

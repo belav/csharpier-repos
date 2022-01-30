@@ -221,7 +221,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Get the symbol that logically contains this symbol. 
+        /// Get the symbol that logically contains this symbol.
         /// </summary>
         public override Symbol? ContainingSymbol
         {
@@ -262,7 +262,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns the type arguments that have been substituted for the type parameters. 
+        /// Returns the type arguments that have been substituted for the type parameters.
         /// If nothing has been substituted for a give type parameters,
         /// then the type parameter itself is consider the type argument.
         /// </summary>
@@ -273,7 +273,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns the type parameters that this type has. If this is a non-generic type,
-        /// returns an empty ImmutableArray.  
+        /// returns an empty ImmutableArray.
         /// </summary>
         public override ImmutableArray<TypeParameterSymbol> TypeParameters
         {

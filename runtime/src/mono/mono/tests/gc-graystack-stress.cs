@@ -26,11 +26,11 @@ class Program
     }
 
     /**
-	 * Usage : width [depth [collections]]
-	 *  - width : trigger the overflow
-	 *  - depth : modify the cost difference of the overflow
-	 *  - collections : # of collections to perform
-	 */
+     * Usage : width [depth [collections]]
+     *  - width : trigger the overflow
+     *  - depth : modify the cost difference of the overflow
+     *  - collections : # of collections to perform
+     */
     public static void Main(String[] args)
     {
         int width = 125;

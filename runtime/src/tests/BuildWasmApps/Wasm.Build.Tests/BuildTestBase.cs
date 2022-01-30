@@ -102,14 +102,14 @@ namespace Wasm.Build.Tests
 
         /*
          * TODO:
-            - AOT modes
-                - llvmonly
-                - aotinterp
-                    - skipped assemblies should get have their pinvoke/icall stuff scanned
-
-            - only buildNative
-            - aot but no wrapper - check that AppBundle wasn't generated
-        */
+         - AOT modes
+         - llvmonly
+         - aotinterp
+         - skipped assemblies should get have their pinvoke/icall stuff scanned
+         
+         - only buildNative
+         - aot but no wrapper - check that AppBundle wasn't generated
+         */
 
         public static IEnumerable<IEnumerable<object?>> ConfigWithAOTData(
             bool aot,

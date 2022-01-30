@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis
             None,
 
             /// <summary>
-            /// This form of signing occurs in memory using the <see cref="PEBuilder"/> APIs. This is the default 
+            /// This form of signing occurs in memory using the <see cref="PEBuilder"/> APIs. This is the default
             /// form of signing and will be used when a strong name key is provided in a file on disk.
             /// </summary>
             SignedWithBuilder,
@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// This form of signing occurs using the <see cref="IClrStrongName"/> COM APIs. This form of signing
             /// requires the unsigned PE to be written to disk before it can be signed (typically by writing it
-            /// out to the %TEMP% folder). This signing is used when the key in a key container, the signing 
-            /// requires a counter signature or customers opted in via the UseLegacyStrongNameProvider feature 
+            /// out to the %TEMP% folder). This signing is used when the key in a key container, the signing
+            /// requires a counter signature or customers opted in via the UseLegacyStrongNameProvider feature
             /// flag.
             /// </summary>
             SignedWithFile,
@@ -50,9 +50,9 @@ namespace Microsoft.CodeAnalysis
             private (Stream tempStream, string tempFilePath)? _tempInfo;
 
             /// <summary>
-            /// The <see cref="Stream"/> that is being emitted into. This value should _never_ be 
+            /// The <see cref="Stream"/> that is being emitted into. This value should _never_ be
             /// disposed. It is either returned from the <see cref="EmitStreamProvider"/> instance in
-            /// which case it is owned by that. Or it is just an alias for the value that is stored 
+            /// which case it is owned by that. Or it is just an alias for the value that is stored
             /// in <see cref="_tempInfo"/> in which case it will be disposed from there.
             /// </summary>
             private Stream? _stream;

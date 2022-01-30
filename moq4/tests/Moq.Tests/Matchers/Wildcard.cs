@@ -10,8 +10,8 @@ namespace Moq.Tests.Matchers.Wildcard
     using static AutoIsAny; // note using static to simplify syntax
 
     /// <summary>
-	/// Helper class provided by user
-	/// </summary>
+    /// Helper class provided by user
+    /// </summary>
     public abstract class AutoIsAny
     {
         public static AnyValue _
@@ -25,9 +25,9 @@ namespace Moq.Tests.Matchers.Wildcard
     }
 
     /// <summary>
-	/// Helper class provided by user. Interfaces implemented via IDE auto explicit interface implementation
-	/// or Roslyn analyzer/code fix.
-	/// </summary>
+    /// Helper class provided by user. Interfaces implemented via IDE auto explicit interface implementation
+    /// or Roslyn analyzer/code fix.
+    /// </summary>
     public class AnyValue : ISomeService
     {
         int ISomeService.Calc(int a, int b, int c, int d)
@@ -130,8 +130,8 @@ namespace Moq.Tests.Matchers.Wildcard
     }
 
     /// <summary>
-	/// Example enum
-	/// </summary>
+    /// Example enum
+    /// </summary>
     public enum GearId
     {
         Reverse,
@@ -140,8 +140,8 @@ namespace Moq.Tests.Matchers.Wildcard
     }
 
     /// <summary>
-	/// Example interface
-	/// </summary>
+    /// Example interface
+    /// </summary>
     public interface ISomeService
     {
         int Echo(int a);
@@ -153,8 +153,8 @@ namespace Moq.Tests.Matchers.Wildcard
     }
 
     /// <summary>
-	/// just a class that implements interface
-	/// </summary>
+    /// just a class that implements interface
+    /// </summary>
     public class SomeService : ISomeService
     {
         public int Calc(int a, int b, int c, int d)

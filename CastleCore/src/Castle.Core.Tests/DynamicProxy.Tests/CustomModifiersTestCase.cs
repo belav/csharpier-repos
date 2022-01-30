@@ -107,10 +107,10 @@ namespace Castle.DynamicProxy.Tests
                 .Concat(AsModreqOnReturnTypeNames);
 
         /// <summary>
-		/// Emits types as specified by `this.modopts` and stores the dynamic assembly to disk.
-		/// The generated types are added to the `this.generatedTypes` dictionary for reference
-		/// in unit tests.
-		/// </summary>
+        /// Emits types as specified by `this.modopts` and stores the dynamic assembly to disk.
+        /// The generated types are added to the `this.generatedTypes` dictionary for reference
+        /// in unit tests.
+        /// </summary>
         [OneTimeSetUp]
         public void GenerateTypes()
         {
@@ -164,9 +164,9 @@ namespace Castle.DynamicProxy.Tests
         }
 
         /// <summary>
-		/// This test checks whether reflection correctly reports back the modopts on
-		/// the parameter type in the generated types.
-		/// </summary>
+        /// This test checks whether reflection correctly reports back the modopts on
+        /// the parameter type in the generated types.
+        /// </summary>
         [TestCaseSource(nameof(AsModoptOnParamTypeNames))]
         [Platform(
             Exclude = "Mono",
@@ -204,9 +204,9 @@ namespace Castle.DynamicProxy.Tests
         }
 
         /// <summary>
-		/// This test checks whether reflection correctly reports back the modreqs on
-		/// the parameter type in the generated types.
-		/// </summary>
+        /// This test checks whether reflection correctly reports back the modreqs on
+        /// the parameter type in the generated types.
+        /// </summary>
         [TestCaseSource(nameof(AsModreqOnParamTypeNames))]
         [Platform(
             Exclude = "Mono",
@@ -235,9 +235,9 @@ namespace Castle.DynamicProxy.Tests
         }
 
         /// <summary>
-		/// This test checks whether reflection correctly reports back the modopts on
-		/// the parameter type in the generated types.
-		/// </summary>
+        /// This test checks whether reflection correctly reports back the modopts on
+        /// the parameter type in the generated types.
+        /// </summary>
         [TestCaseSource(nameof(AsModoptOnReturnTypeNames))]
         public void ReflectionReturnsCorrectModoptOnReturnTypeForGeneratedType(string typeName)
         {
@@ -262,9 +262,9 @@ namespace Castle.DynamicProxy.Tests
         }
 
         /// <summary>
-		/// This test checks whether reflection correctly reports back the modopts on
-		/// the return type in the generated types.
-		/// </summary>
+        /// This test checks whether reflection correctly reports back the modopts on
+        /// the return type in the generated types.
+        /// </summary>
         [TestCaseSource(nameof(AsModreqOnReturnTypeNames))]
         public void ReflectionReturnsCorrectModreqOnReturnTypeForGeneratedType(string typeName)
         {
@@ -289,10 +289,10 @@ namespace Castle.DynamicProxy.Tests
         }
 
         /// <summary>
-		/// This test checks whether Castle can generate proxies for types having a method
-		/// whose signature contains certain combinations of modopts or modreqs either on
-		/// the parameter type or on the return type.
-		/// </summary>
+        /// This test checks whether Castle can generate proxies for types having a method
+        /// whose signature contains certain combinations of modopts or modreqs either on
+        /// the parameter type or on the return type.
+        /// </summary>
         [TestCaseSource(nameof(AllTypeNames))]
         public void CanGenerateProxyOfTypeWithCustomModifiers(string typeName)
         {

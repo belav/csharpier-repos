@@ -52,9 +52,9 @@ class C : B
             mi_RetCode = 0;
 
         /*  FldAsmInst = 100;
-  if(FldAsmInst != 100)
-    mi_RetCode = 0;
-  */
+        if(FldAsmInst != 100)
+        mi_RetCode = 0;
+        */
         FldFoaInst = 100;
         if (FldFoaInst != 100)
             mi_RetCode = 0;
@@ -72,9 +72,9 @@ class C : B
             mi_RetCode = 0;
 
         /*  FldAsmStat = 100;
-  if(FldAsmStat != 100)
-    mi_RetCode = 0;
-  */
+        if(FldAsmStat != 100)
+        mi_RetCode = 0;
+        */
         FldFoaStat = 100;
         if (FldFoaStat != 100)
             mi_RetCode = 0;
@@ -90,8 +90,8 @@ class C : B
             mi_RetCode = 0;
 
         /*  if(MethAsmInst() != 100)
-    mi_RetCode = 0;
-  */
+        mi_RetCode = 0;
+        */
         if (MethFoaInst() != 100)
             mi_RetCode = 0;
 
@@ -106,8 +106,8 @@ class C : B
             mi_RetCode = 0;
 
         /*  if(MethAsmStat() != 100)
-    mi_RetCode = 0;
-  */
+        mi_RetCode = 0;
+        */
         if (MethFoaStat() != 100)
             mi_RetCode = 0;
 
@@ -122,8 +122,8 @@ class C : B
             mi_RetCode = 0;
 
         /*  if(MethAsmVirt() != 100)
-    mi_RetCode = 0;
-  */
+        mi_RetCode = 0;
+        */
         if (MethFoaVirt() != 100)
             mi_RetCode = 0;
 

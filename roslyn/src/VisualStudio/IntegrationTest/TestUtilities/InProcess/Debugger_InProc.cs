@@ -11,7 +11,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
     internal class Debugger_InProc : InProcComponent
     {
         /// <summary>
-        /// HResult for "Operation Not Supported" when raising commands. 
+        /// HResult for "Operation Not Supported" when raising commands.
         /// </summary>
         private const uint OperationNotSupportedHResult = 0x8971003c;
 

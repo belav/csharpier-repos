@@ -11,8 +11,8 @@ namespace System.CommandLine
     /// Represents the main action that the application performs.
     /// </summary>
     /// <remarks>
-    /// Use the RootCommand object without any subcommands for applications that perform one action. Add subcommands 
-    /// to the root for applications that require actions identified by specific strings. For example, `dir` does not 
+    /// Use the RootCommand object without any subcommands for applications that perform one action. Add subcommands
+    /// to the root for applications that require actions identified by specific strings. For example, `dir` does not
     /// use any subcommands. See <see cref="Command"/> for applications with multiple actions.
     /// </remarks>
     public class RootCommand : Command

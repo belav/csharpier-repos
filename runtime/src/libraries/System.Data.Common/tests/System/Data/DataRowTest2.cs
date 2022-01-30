@@ -813,10 +813,10 @@ namespace System.Data.Tests
                 // Teting: DataRow.GetParentRows_D_D ,DataRowVersion.Proposed
                 drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"],"",DataViewRowState.ModifiedCurrent);
                 //drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"],"",DataViewRowState.ModifiedOriginal );
-
+                
                 drArrResult = drChild.GetParentRows("Parent-Child",DataRowVersion.Proposed  );
                 Assert.Equal(drArrExcepted,  drArrResult);
-            */
+                */
         }
 
         [Fact]

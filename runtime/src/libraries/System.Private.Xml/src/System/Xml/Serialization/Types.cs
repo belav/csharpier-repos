@@ -1689,9 +1689,9 @@ namespace System.Xml.Serialization
 
         /*
         static string GetHash(string str) {
-            MD5 md5 = MD5.Create();
-            string hash = Convert.ToBase64String(md5.ComputeHash(Encoding.UTF8.GetBytes(str)), 0, 6).Replace("+", "_P").Replace("/", "_S");
-            return hash;
+        MD5 md5 = MD5.Create();
+        string hash = Convert.ToBase64String(md5.ComputeHash(Encoding.UTF8.GetBytes(str)), 0, 6).Replace("+", "_P").Replace("/", "_S");
+        return hash;
         }
         */
 
@@ -1721,8 +1721,8 @@ namespace System.Xml.Serialization
                 }
                 /*
                 if (ns.Length > 0) {
-                    typeName.Append('_');
-                    typeName.Append(GetHash(ns.ToString()));
+                typeName.Append('_');
+                typeName.Append(GetHash(ns.ToString()));
                 }
                 */
                 return typeName.ToString();

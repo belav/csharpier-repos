@@ -6,66 +6,66 @@ using System;
 public struct A
 {
     /*public int Test(B b){
-  int mi_RetCode = 100;
-
-  /////////////////////////////////
-  // Test instance field access
-  b.FldPubInst = 100;
-  if(b.FldPubInst != 100)
+    int mi_RetCode = 100;
+    
+    /////////////////////////////////
+    // Test instance field access
+    b.FldPubInst = 100;
+    if(b.FldPubInst != 100)
     mi_RetCode = 0;
-
-  //@csharp - Note that C# will not compile an illegal access of b.FldPrivInst
-  //So there is no negative test here, it should be covered elsewhere and
-  //should throw a FielAccessException within the runtime.  (IL sources is
-  //the most logical, only?, choice)
-
-  //@csharp - C# Won't compile illegal family access from non-family members
-
-  b.FldAsmInst = 100;
-  if(b.FldAsmInst != 100)
+    
+    //@csharp - Note that C# will not compile an illegal access of b.FldPrivInst
+    //So there is no negative test here, it should be covered elsewhere and
+    //should throw a FielAccessException within the runtime.  (IL sources is
+    //the most logical, only?, choice)
+    
+    //@csharp - C# Won't compile illegal family access from non-family members
+    
+    b.FldAsmInst = 100;
+    if(b.FldAsmInst != 100)
     mi_RetCode = 0;
-
-  /////////////////////////////////
-  // Test static field access
-  B.FldPubStat = 100;
-  if(B.FldPubStat != 100)
+    
+    /////////////////////////////////
+    // Test static field access
+    B.FldPubStat = 100;
+    if(B.FldPubStat != 100)
     mi_RetCode = 0;
-
-  //@csharp - Again, note C# won't do private field access
-
-  //@csharp - C# Won't compile illegal family access from non-family members
-
-  B.FldAsmStat = 100;
-  if(B.FldAsmStat != 100)
+    
+    //@csharp - Again, note C# won't do private field access
+    
+    //@csharp - C# Won't compile illegal family access from non-family members
+    
+    B.FldAsmStat = 100;
+    if(B.FldAsmStat != 100)
     mi_RetCode = 0;
-
-  /////////////////////////////////
-  // Test instance b.Method access  
-  if(b.MethPubInst() != 100)
+    
+    /////////////////////////////////
+    // Test instance b.Method access
+    if(b.MethPubInst() != 100)
     mi_RetCode = 0;
-
-  //@csharp - C# won't do private b.Method access
-
-  //@csharp - C# Won't compile illegal family access from non-family members
-
-  if(b.MethAsmInst() != 100)
+    
+    //@csharp - C# won't do private b.Method access
+    
+    //@csharp - C# Won't compile illegal family access from non-family members
+    
+    if(b.MethAsmInst() != 100)
     mi_RetCode = 0;
-
-  /////////////////////////////////
-  // Test static b.Method access
-  if(B.MethPubStat() != 100)
+    
+    /////////////////////////////////
+    // Test static b.Method access
+    if(B.MethPubStat() != 100)
     mi_RetCode = 0;
-
-  //@csharp - C# won't do private b.Method access
-
-  //@csharp - C# Won't compile illegal family access from non-family members
-
-  if(B.MethAsmStat() != 100)
+    
+    //@csharp - C# won't do private b.Method access
+    
+    //@csharp - C# Won't compile illegal family access from non-family members
+    
+    if(B.MethAsmStat() != 100)
     mi_RetCode = 0;
-
-  return mi_RetCode;
-}
-*/
+    
+    return mi_RetCode;
+    }
+    */
     //////////////////////////////
     // Instance Fields
     public int FldPubInst;

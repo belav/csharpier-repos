@@ -490,9 +490,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
         }
 
         /// <summary>
-        /// Given a span, find the first and last line that are part of the span.  NOTE: If the 
-        /// span ends in column zero, we back up to the previous line, to handle the case where 
-        /// the user used shift + down to select a bunch of lines.  They probably don't want the 
+        /// Given a span, find the first and last line that are part of the span.  NOTE: If the
+        /// span ends in column zero, we back up to the previous line, to handle the case where
+        /// the user used shift + down to select a bunch of lines.  They probably don't want the
         /// last line commented in that case.
         /// </summary>
         private static (ITextSnapshotLine firstLine, ITextSnapshotLine lastLine) DetermineFirstAndLastLine(

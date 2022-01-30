@@ -5020,7 +5020,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// If this binder owns the scope that can declare extern aliases, a set of declared aliases should be returned (even if empty).
-        /// Otherwise, a default instance should be returned. 
+        /// Otherwise, a default instance should be returned.
         /// </summary>
         internal virtual ImmutableArray<AliasAndExternAliasDirective> ExternAliases
         {
@@ -5029,7 +5029,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// If this binder owns the scope that can declare using aliases, a set of declared aliases should be returned (even if empty).
-        /// Otherwise, a default instance should be returned. 
+        /// Otherwise, a default instance should be returned.
         /// Note, only aliases syntactically declared within the enclosing declaration are included. For example, global aliases
         /// declared in a different compilation units are not included.
         /// </summary>

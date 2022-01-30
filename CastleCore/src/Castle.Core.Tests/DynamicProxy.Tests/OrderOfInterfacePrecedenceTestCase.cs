@@ -22,8 +22,8 @@ namespace Castle.DynamicProxy.Tests
     using NUnit.Framework;
 
     /// <summary>
-	/// See http://support.castleproject.org/projects/DYNPROXY/issues/view/DYNPROXY-ISSUE-96 for details
-	/// </summary>
+    /// See http://support.castleproject.org/projects/DYNPROXY/issues/view/DYNPROXY-ISSUE-96 for details
+    /// </summary>
     [TestFixture]
     public class OrderOfInterfacePrecedenceTestCase : BasePEVerifyTestCase
     {

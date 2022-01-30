@@ -196,12 +196,12 @@ namespace StressAllocator
             /*
             lock (objLock)
             {
-                Console.WriteLine("Created object with: ");
-                Console.WriteLine("datasize= " + size);
-                Console.WriteLine("lifetime= " + lifeSpan);
-                Console.WriteLine("pinned= " + pin);
+            Console.WriteLine("Created object with: ");
+            Console.WriteLine("datasize= " + size);
+            Console.WriteLine("lifetime= " + lifeSpan);
+            Console.WriteLine("pinned= " + pin);
             }
-             */
+            */
 
             WR_All.Add(myNewObject);
 
@@ -211,22 +211,22 @@ namespace StressAllocator
         /*
         static void AddReference(ObjectWrapper parent, ObjectWrapper child)
         {
-            //find an empty position to add a reference in the parent
-            //else use a random position
-            int position = GetRandomNumber(maxRef);
-            for (int i = 0; i < maxRef; i++)
-            {
-                if (parent.objRef[i] == null)
-                {
-                    position = i;
-                    break;
-                }
-            }
-
-            parent.objRef[position] = child;
-
+        //find an empty position to add a reference in the parent
+        //else use a random position
+        int position = GetRandomNumber(maxRef);
+        for (int i = 0; i < maxRef; i++)
+        {
+        if (parent.objRef[i] == null)
+        {
+        position = i;
+        break;
         }
-         * */
+        }
+        
+        parent.objRef[position] = child;
+        
+        }
+        * */
 
         public static int Main(string[] args)
         {
@@ -823,27 +823,27 @@ namespace StressAllocator
                 /////////////////////////// Collection definition
                 public interface ObjCollection
                 {
-                    void Init(int numberOfObjects);
-                    ObjectWrapper GetObjectAt(int index);
-                    void SetObjectAt(ObjectWrapper o, int index);
-
-                    bool AccessObjectAt(int index);
-
-                    int Count
-                    {
-                        get;
-                    }
-                    int Size
-                    {
-                        get;
-                    }
-                    //One pass through the collection, updates objects'age and removes expired ones
-                    void UpdateObjectsAge(long elapsedMsec);
-                    void RemoveExpiredObjects();
-
+                void Init(int numberOfObjects);
+                ObjectWrapper GetObjectAt(int index);
+                void SetObjectAt(ObjectWrapper o, int index);
+                
+                bool AccessObjectAt(int index);
+                
+                int Count
+                {
+                get;
                 }
-
-         * */
+                int Size
+                {
+                get;
+                }
+                //One pass through the collection, updates objects'age and removes expired ones
+                void UpdateObjectsAge(long elapsedMsec);
+                void RemoveExpiredObjects();
+                
+                }
+                
+                * */
         public class ObjArray
         {
             private ObjectWrapper[] _array;

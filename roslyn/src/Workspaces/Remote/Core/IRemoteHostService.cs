@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
         /// <summary>
         /// This is only for debugging
-        /// 
+        ///
         /// this lets remote side to set same logging options as VS side
         /// </summary>
         void SetLoggingFunctionIds(

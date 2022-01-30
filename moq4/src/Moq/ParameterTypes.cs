@@ -9,8 +9,8 @@ using System.Reflection;
 namespace Moq
 {
     /// <summary>
-	///   Allocation-free adapter type for treating a `ParameterInfo[]` array like a `Type[]` array.
-	/// </summary>
+    ///   Allocation-free adapter type for treating a `ParameterInfo[]` array like a `Type[]` array.
+    /// </summary>
     internal readonly struct ParameterTypes : IReadOnlyList<Type>
     {
         private readonly ParameterInfo[] parameters;

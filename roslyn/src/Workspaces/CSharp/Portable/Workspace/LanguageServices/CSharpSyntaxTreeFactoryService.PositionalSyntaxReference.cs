@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private partial class CSharpSyntaxTreeFactoryService
         {
             /// <summary>
-            /// Represents a syntax reference that doesn't actually hold onto the 
+            /// Represents a syntax reference that doesn't actually hold onto the
             /// referenced node.  Instead, enough data is held onto so that the node
             /// can be recovered and returned if necessary.
             /// </summary>

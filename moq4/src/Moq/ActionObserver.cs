@@ -19,12 +19,12 @@ using TypeNameFormatter;
 namespace Moq
 {
     /// <summary>
-	///   <see cref="ActionObserver"/> is a kind of <see cref="ExpressionReconstructor"/> that works by
-	///   applying a <see cref="Action{T}"/> delegate to a light-weight proxy that records the invocation
-	///   happening to it, and auto-generates the same kind of recording proxy for its return value.
-	///   That way, a chain of invocation records is generated from which a LINQ expression tree can be
-	///   reconstructed.
-	/// </summary>
+    ///   <see cref="ActionObserver"/> is a kind of <see cref="ExpressionReconstructor"/> that works by
+    ///   applying a <see cref="Action{T}"/> delegate to a light-weight proxy that records the invocation
+    ///   happening to it, and auto-generates the same kind of recording proxy for its return value.
+    ///   That way, a chain of invocation records is generated from which a LINQ expression tree can be
+    ///   reconstructed.
+    /// </summary>
     internal sealed class ActionObserver : ExpressionReconstructor
     {
         public override Expression<Action<T>> ReconstructExpression<T>(

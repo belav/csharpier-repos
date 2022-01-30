@@ -912,7 +912,7 @@ namespace System.Xml.Xsl.Xslt
             Default values for method="xml" :   version="1.0"   indent="no"     media-type="text/xml"
             Default values for method="html":   version="4.0"   indent="yes"    media-type="text/html"
             Default values for method="text":                                   media-type="text/plain"
-        */
+            */
         private void ProcessOutputSettings()
         {
             Output output = _compiler.Output;

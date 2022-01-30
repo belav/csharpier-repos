@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-/* 
+/*
 JIT JitDebuggable=0 JitDebugInfo=1
 d:\com99\src\jit\il\dll\..\scopeinfo.cpp, Line 582 : Assertion failed 'lclVar->lvTracked' in 'Test.AA.Method1(int,int,byref):int'
 */

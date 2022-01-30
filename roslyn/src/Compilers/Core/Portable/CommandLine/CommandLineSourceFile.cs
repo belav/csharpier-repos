@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis
         /// Resolved absolute path of the source file (does not contain wildcards).
         /// </summary>
         /// <remarks>
-        /// Although this path is absolute it may not be normalized. That is, it may contain ".." and "." in the middle. 
+        /// Although this path is absolute it may not be normalized. That is, it may contain ".." and "." in the middle.
         /// </remarks>
         public string Path { get; }
 

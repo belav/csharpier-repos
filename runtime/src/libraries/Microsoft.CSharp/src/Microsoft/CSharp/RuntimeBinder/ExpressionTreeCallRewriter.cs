@@ -232,14 +232,14 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             /*
              * // Do we need to do this?
-            Expression e = (body as ExpressionExpr).Expression;
-            if (e.Type.IsValueType)
-            {
-                // If we have a value type, convert it to object so that boxing
-                // can happen.
-
-                e = Expression.Convert(body.Expression, typeof(object));
-            }
+             Expression e = (body as ExpressionExpr).Expression;
+             if (e.Type.IsValueType)
+             {
+             // If we have a value type, convert it to object so that boxing
+             // can happen.
+             
+             e = Expression.Convert(body.Expression, typeof(object));
+             }
              * */
         }
 

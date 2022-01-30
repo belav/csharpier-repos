@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
     {
         /// <summary>
         /// The parent namespace. There is always one, Global namespace contains all
-        /// top level namespaces. 
+        /// top level namespaces.
         /// </summary>
         /// <remarks></remarks>
         private readonly PENamespaceSymbol _containingNamespaceSymbol;
@@ -34,15 +34,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private readonly string _name;
 
         /// <summary>
-        /// The sequence of groups of TypeDef row ids for types contained within the namespace, 
-        /// recursively including those from nested namespaces. The row ids are grouped by the 
-        /// fully-qualified namespace name case-sensitively. There could be multiple groups 
-        /// for each fully-qualified namespace name. The groups are sorted by their 
-        /// key in case-sensitive manner. Empty string is used as namespace name for types 
-        /// immediately contained within Global namespace. Therefore, all types in this namespace, if any, 
+        /// The sequence of groups of TypeDef row ids for types contained within the namespace,
+        /// recursively including those from nested namespaces. The row ids are grouped by the
+        /// fully-qualified namespace name case-sensitively. There could be multiple groups
+        /// for each fully-qualified namespace name. The groups are sorted by their
+        /// key in case-sensitive manner. Empty string is used as namespace name for types
+        /// immediately contained within Global namespace. Therefore, all types in this namespace, if any,
         /// will be in several first IGroupings.
-        /// 
-        /// This member is initialized by constructor and is cleared in EnsureAllMembersLoaded 
+        ///
+        /// This member is initialized by constructor and is cleared in EnsureAllMembersLoaded
         /// as soon as symbols for children are created.
         /// </summary>
         /// <remarks></remarks>
@@ -58,12 +58,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         /// Containing namespace.
         /// </param>
         /// <param name="typesByNS">
-        /// The sequence of groups of TypeDef row ids for types contained within the namespace, 
-        /// recursively including those from nested namespaces. The row ids are grouped by the 
-        /// fully-qualified namespace name case-sensitively. There could be multiple groups 
-        /// for each fully-qualified namespace name. The groups are sorted by their 
-        /// key in case-sensitive manner. Empty string is used as namespace name for types 
-        /// immediately contained within Global namespace. Therefore, all types in this namespace, if any, 
+        /// The sequence of groups of TypeDef row ids for types contained within the namespace,
+        /// recursively including those from nested namespaces. The row ids are grouped by the
+        /// fully-qualified namespace name case-sensitively. There could be multiple groups
+        /// for each fully-qualified namespace name. The groups are sorted by their
+        /// key in case-sensitive manner. Empty string is used as namespace name for types
+        /// immediately contained within Global namespace. Therefore, all types in this namespace, if any,
         /// will be in several first IGroupings.
         /// </param>
         internal PENestedNamespaceSymbol(

@@ -9,7 +9,7 @@ using System;
 namespace Microsoft.CodeAnalysis.Emit
 {
     /// <summary>
-    /// Describes a symbol edit between two compilations. 
+    /// Describes a symbol edit between two compilations.
     /// For example, an addition of a method, an update of a method, removal of a type, etc.
     /// </summary>
     public readonly struct SemanticEdit : IEquatable<SemanticEdit>
@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.Emit
         public ISymbol? NewSymbol { get; }
 
         /// <summary>
-        /// A map from syntax node in the later compilation to syntax node in the previous compilation, 
-        /// or null if <see cref="PreserveLocalVariables"/> is false and the map is not needed or 
+        /// A map from syntax node in the later compilation to syntax node in the previous compilation,
+        /// or null if <see cref="PreserveLocalVariables"/> is false and the map is not needed or
         /// the source of the current method is the same as the source of the previous method.
         /// </summary>
         /// <remarks>
@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis.Emit
         /// The symbol from the later compilation, or null if the edit represents a deletion.
         /// </param>
         /// <param name="syntaxMap">
-        /// A map from syntax node in the later compilation to syntax node in the previous compilation, 
-        /// or null if <paramref name="preserveLocalVariables"/> is false and the map is not needed or 
+        /// A map from syntax node in the later compilation to syntax node in the previous compilation,
+        /// or null if <paramref name="preserveLocalVariables"/> is false and the map is not needed or
         /// the source of the current method is the same as the source of the previous method.
         /// </param>
         /// <param name="preserveLocalVariables">

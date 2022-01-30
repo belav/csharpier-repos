@@ -18,10 +18,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
     /// <summary>
     /// This class represents the view model for a <see cref="CodeStyleOption{T}"/>
     /// that binds to the codestyle options UI.  Note that the T here is expected to be an enum
-    /// type.  
-    /// 
+    /// type.
+    ///
     /// Important.  The order of the previews and preferences provided should match the order
-    /// of enum members of T.  
+    /// of enum members of T.
     /// </summary>
     internal class EnumCodeStyleOptionViewModel<T> : AbstractCodeStyleOptionViewModel
         where T : struct

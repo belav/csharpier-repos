@@ -10,7 +10,7 @@ using System.Diagnostics;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Represents a reference to another C# compilation. 
+    /// Represents a reference to another C# compilation.
     /// </summary>
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
     internal sealed class CSharpCompilationReference : CompilationReference

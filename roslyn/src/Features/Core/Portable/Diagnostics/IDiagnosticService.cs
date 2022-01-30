@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         /// <summary>
         /// Event to get notified as new diagnostics are discovered by IDiagnosticUpdateSource
-        /// 
+        ///
         /// Notifications for this event are serialized to preserve order.
         /// However, individual event notifications may occur on any thread.
         /// </summary>

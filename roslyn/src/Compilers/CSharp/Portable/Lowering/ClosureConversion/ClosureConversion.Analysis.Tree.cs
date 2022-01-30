@@ -90,7 +90,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 /// <summary>
-                /// Is it safe to move any of the variables declared in this scope to the parent scope, 
+                /// Is it safe to move any of the variables declared in this scope to the parent scope,
                 /// or would doing so change the meaning of the program?
                 /// </summary>
                 public bool CanMergeWithParent { get; internal set; } = true;
@@ -266,23 +266,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// visits the bound tree and translates information from the bound tree about
             /// variable scope, declared variables, and variable captures into the resulting
             /// <see cref="Scope"/> tree.
-            /// 
+            ///
             /// At the same time it sets <see cref="Scope.CanMergeWithParent"/>
-            /// for each Scope. This is done by looking for <see cref="BoundGotoStatement"/>s 
-            /// and <see cref="BoundConditionalGoto"/>s that jump from a point 
+            /// for each Scope. This is done by looking for <see cref="BoundGotoStatement"/>s
+            /// and <see cref="BoundConditionalGoto"/>s that jump from a point
             /// after the beginning of a <see cref="Scope"/>, to a <see cref="BoundLabelStatement"/>
             /// before the start of the scope, but after the start of <see cref="Scope.Parent"/>.
-            /// 
+            ///
             /// All loops have been converted to gotos and labels by this stage,
             /// so we do not have to visit them to do so. Similarly all <see cref="BoundLabeledStatement"/>s
-            /// have been converted to <see cref="BoundLabelStatement"/>s, so we do not have to 
+            /// have been converted to <see cref="BoundLabelStatement"/>s, so we do not have to
             /// visit them.
             /// </summary>
             private class ScopeTreeBuilder
                 : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
             {
                 /// <summary>
-                /// Do not set this directly, except when setting the root scope. 
+                /// Do not set this directly, except when setting the root scope.
                 /// Instead use <see cref="PopScope"/> or <see cref="CreateAndPushScope"/>.
                 /// </summary>
                 private Scope _currentScope;
@@ -341,10 +341,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 >.GetInstance();
 
                 /// <summary>
-                /// Contains a list of the labels visited so far for each scope. 
+                /// Contains a list of the labels visited so far for each scope.
                 /// The outer ArrayBuilder is a stack representing the chain of scopes from the root scope to the current scope,
                 /// and for each item on the stack, the ArrayBuilder is the list of the labels visited so far for the scope.
-                /// 
+                ///
                 /// Used by <see cref="CreateAndPushScope"/> to determine which labels a new child scope appears after.
                 /// </summary>
                 private readonly ArrayBuilder<ArrayBuilder<LabelSymbol>> _labelsInScope =
@@ -558,7 +558,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 /// <summary>
                 /// This is where we calculate <see cref="Scope.CanMergeWithParent"/>.
-                /// <see cref="Scope.CanMergeWithParent"/> is always true unless we jump from after 
+                /// <see cref="Scope.CanMergeWithParent"/> is always true unless we jump from after
                 /// the beginning of a scope, to a point in between the beginning of the parent scope, and the beginning of the scope
                 /// </summary>
                 /// <param name="jumpTarget"></param>

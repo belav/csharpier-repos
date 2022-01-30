@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         ///         the name of the file containing the entrypoint;
         ///      b) otherwise, the assembly name is derived from the name of the first input
         ///         file.
-        /// 
+        ///
         /// Since we don't know which method is the entrypoint until well after the
         /// SourceAssemblySymbol is created, in case 2a, its name will not reflect the
         /// name of the file containing the entrypoint.  We leave it to our caller to

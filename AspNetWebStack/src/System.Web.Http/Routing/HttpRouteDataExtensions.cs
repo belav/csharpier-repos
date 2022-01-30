@@ -9,7 +9,7 @@ namespace System.Web.Http.Routing
     public static class HttpRouteDataExtensions
     {
         /// <summary>
-        /// Remove all optional parameters that do not have a value from the route data. 
+        /// Remove all optional parameters that do not have a value from the route data.
         /// </summary>
         /// <param name="routeData">route data, to be mutated in-place.</param>
         public static void RemoveOptionalRoutingParameters(this IHttpRouteData routeData)
@@ -54,7 +54,7 @@ namespace System.Web.Http.Routing
         }
 
         /// <summary>
-        /// If a route is really a union of other routes, return the set of sub routes. 
+        /// If a route is really a union of other routes, return the set of sub routes.
         /// </summary>
         /// <param name="routeData">a union route data</param>
         /// <returns>set of sub soutes contained within this route</returns>

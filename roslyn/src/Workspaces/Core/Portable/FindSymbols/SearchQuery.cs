@@ -11,11 +11,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 {
     internal class SearchQuery : IDisposable
     {
-        /// <summary>The name being searched for.  Is null in the case of custom predicate searching..  But 
+        /// <summary>The name being searched for.  Is null in the case of custom predicate searching..  But
         /// can be used for faster index based searching when it is available.</summary>
         public readonly string Name;
 
-        ///<summary>The kind of search this is.  Faster index-based searching can be used if the 
+        ///<summary>The kind of search this is.  Faster index-based searching can be used if the
         /// SearchKind is not <see cref="SearchKind.Custom"/>.</summary>
         public readonly SearchKind Kind;
 

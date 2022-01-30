@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <summary>
         /// Convert a task item metadata to bool. Throw an exception if the string is badly formed and can't
         /// be converted.
-        /// 
+        ///
         /// If the metadata is not found, then set metadataFound to false and then return false.
         /// </summary>
         /// <param name="item">The item that contains the metadata.</param>
@@ -63,7 +63,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         }
 
         /// <summary>
-        /// Converts a string to a bool.  We consider "true/false", "on/off", and 
+        /// Converts a string to a bool.  We consider "true/false", "on/off", and
         /// "yes/no" to be valid boolean representations in the XML.
         /// </summary>
         /// <param name="parameterValue">The string to convert.</param>

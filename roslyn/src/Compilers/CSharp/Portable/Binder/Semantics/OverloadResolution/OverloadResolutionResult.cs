@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// Summarizes the results of an overload resolution analysis, as described in section 7.5 of
     /// the language specification. Describes whether overload resolution succeeded, and which
     /// method was selected if overload resolution succeeded, as well as detailed information about
-    /// each method that was considered. 
+    /// each method that was considered.
     /// </summary>
     internal class OverloadResolutionResult<TMember> where TMember : Symbol
     {
@@ -182,7 +182,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// gradually disqualifies them.  Therefore, our strategy will be to perform our checks in the
         /// reverse order - the farther a candidate got through the process without being flagged, the
         /// "better" it was.
-        /// 
+        ///
         /// Note that "final validation" is performed after overload resolution,
         /// so final validation errors are not seen here. Final validation errors include
         /// violations of constraints on method type parameters, static/instance mismatches,

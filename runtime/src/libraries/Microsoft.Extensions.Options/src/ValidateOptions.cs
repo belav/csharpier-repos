@@ -65,7 +65,7 @@ namespace Microsoft.Extensions.Options
     /// <summary>
     /// Implementation of <see cref="IValidateOptions{TOptions}"/>
     /// </summary>
-        /// <typeparam name="TOptions">The options type to validate.</typeparam>
+    /// <typeparam name="TOptions">The options type to validate.</typeparam>
     /// <typeparam name="TDep">Dependency type.</typeparam>
     public class ValidateOptions<TOptions, TDep> : IValidateOptions<TOptions> where TOptions : class
     {
@@ -135,7 +135,7 @@ namespace Microsoft.Extensions.Options
     /// <summary>
     /// Implementation of <see cref="IValidateOptions{TOptions}"/>
     /// </summary>
-        /// <typeparam name="TOptions">The options type to validate.</typeparam>
+    /// <typeparam name="TOptions">The options type to validate.</typeparam>
     /// <typeparam name="TDep1">First dependency type.</typeparam>
     /// <typeparam name="TDep2">Second dependency type.</typeparam>
     public class ValidateOptions<TOptions, TDep1, TDep2> : IValidateOptions<TOptions>
@@ -215,7 +215,7 @@ namespace Microsoft.Extensions.Options
     /// <summary>
     /// Implementation of <see cref="IValidateOptions{TOptions}"/>
     /// </summary>
-        /// <typeparam name="TOptions">The options type to validate.</typeparam>
+    /// <typeparam name="TOptions">The options type to validate.</typeparam>
     /// <typeparam name="TDep1">First dependency type.</typeparam>
     /// <typeparam name="TDep2">Second dependency type.</typeparam>
     /// <typeparam name="TDep3">Third dependency type.</typeparam>
@@ -304,7 +304,7 @@ namespace Microsoft.Extensions.Options
     /// <summary>
     /// Implementation of <see cref="IValidateOptions{TOptions}"/>
     /// </summary>
-        /// <typeparam name="TOptions">The options type to validate.</typeparam>
+    /// <typeparam name="TOptions">The options type to validate.</typeparam>
     /// <typeparam name="TDep1">First dependency type.</typeparam>
     /// <typeparam name="TDep2">Second dependency type.</typeparam>
     /// <typeparam name="TDep3">Third dependency type.</typeparam>
@@ -412,7 +412,7 @@ namespace Microsoft.Extensions.Options
     /// <summary>
     /// Implementation of <see cref="IValidateOptions{TOptions}"/>
     /// </summary>
-        /// <typeparam name="TOptions">The options type to validate.</typeparam>
+    /// <typeparam name="TOptions">The options type to validate.</typeparam>
     /// <typeparam name="TDep1">First dependency type.</typeparam>
     /// <typeparam name="TDep2">Second dependency type.</typeparam>
     /// <typeparam name="TDep3">Third dependency type.</typeparam>

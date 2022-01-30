@@ -206,7 +206,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             }
 
             /// <summary>
-            /// A shutdown request should not abort an existing compilation.  It should be allowed to run to 
+            /// A shutdown request should not abort an existing compilation.  It should be allowed to run to
             /// completion.
             /// </summary>
             [Fact]

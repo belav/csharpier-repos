@@ -10,9 +10,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     /// <summary>
     /// Defines a provider to create instances of <see cref="IRequestHandler"/>.
-    /// New handler instances are created for each LSP server and re-created whenever the 
+    /// New handler instances are created for each LSP server and re-created whenever the
     /// server restarts.
-    /// 
+    ///
     /// Each <see cref="AbstractRequestHandlerProvider"/> can create multiple <see cref="IRequestHandler"/>
     /// instances in order to share state between different LSP methods.
     /// E.g. completion requests can share a cache with completion resolve requests for the same LSP server.

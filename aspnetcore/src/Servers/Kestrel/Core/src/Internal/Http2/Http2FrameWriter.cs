@@ -189,7 +189,7 @@ internal class Http2FrameWriter
         +---------------------------------------------------------------+
         |                           Padding (*)                       ...
         +---------------------------------------------------------------+
-    */
+        */
     public void WriteResponseHeaders(
         int streamId,
         int statusCode,
@@ -423,7 +423,7 @@ internal class Http2FrameWriter
         +---------------------------------------------------------------+
         |                           Padding (*)                       ...
         +---------------------------------------------------------------+
-    */
+        */
     private void WriteDataUnsynchronized(
         int streamId,
         in ReadOnlySequence<byte> data,
@@ -618,7 +618,7 @@ internal class Http2FrameWriter
         +-+-------------------------------------------------------------+
         |R|              Window Size Increment (31)                     |
         +-+-------------------------------------------------------------+
-    */
+        */
     public ValueTask<FlushResult> WriteWindowUpdateAsync(int streamId, int sizeIncrement)
     {
         lock (_writeLock)
@@ -641,7 +641,7 @@ internal class Http2FrameWriter
         +---------------------------------------------------------------+
         |                        Error Code (32)                        |
         +---------------------------------------------------------------+
-    */
+        */
     public ValueTask<FlushResult> WriteRstStreamAsync(int streamId, Http2ErrorCode errorCode)
     {
         lock (_writeLock)
@@ -668,7 +668,7 @@ internal class Http2FrameWriter
         +-------------------------------+-------------------------------+
         |                        Value (32)                             |
         +---------------------------------------------------------------+
-    */
+        */
     public ValueTask<FlushResult> WriteSettingsAsync(List<Http2PeerSetting> settings)
     {
         lock (_writeLock)
@@ -723,7 +723,7 @@ internal class Http2FrameWriter
         |                      Opaque Data (64)                         |
         |                                                               |
         +---------------------------------------------------------------+
-    */
+        */
     public ValueTask<FlushResult> WritePingAsync(
         Http2PingFrameFlags flags,
         in ReadOnlySequence<byte> payload
@@ -756,7 +756,7 @@ internal class Http2FrameWriter
         +---------------------------------------------------------------+
         |                  Additional Debug Data (*)                    | (not implemented)
         +---------------------------------------------------------------+
-    */
+        */
     public ValueTask<FlushResult> WriteGoAwayAsync(int lastStreamId, Http2ErrorCode errorCode)
     {
         lock (_writeLock)
@@ -798,7 +798,7 @@ internal class Http2FrameWriter
         +=+=============================================================+
         |                   Frame Payload (0...)                      ...
         +---------------------------------------------------------------+
-    */
+        */
     internal static void WriteHeader(Http2Frame frame, PipeWriter output)
     {
         var buffer = output.GetSpan(Http2FrameReader.HeaderLength);

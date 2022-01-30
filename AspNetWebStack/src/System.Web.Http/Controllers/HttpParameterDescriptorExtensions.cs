@@ -11,7 +11,7 @@ namespace System.Web.Http.Controllers
 {
     /// <summary>
     /// Convenience helpers to easily create specific types of parameter bindings
-    /// These provide a direct programmatic counterpart to the <see cref="ParameterBindingAttribute"/> attributes. 
+    /// These provide a direct programmatic counterpart to the <see cref="ParameterBindingAttribute"/> attributes.
     /// </summary>
     public static class ParameterBindingExtensions
     {
@@ -58,7 +58,7 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Bind the parameter using the given model binder. 
+        /// Bind the parameter using the given model binder.
         /// </summary>
         /// <param name="parameter">parameter to provide binding for.</param>
         /// <param name="binder">model binder to use on parameter</param>
@@ -129,7 +129,7 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Bind the parameter from the body using the formatters from the configuration. 
+        /// Bind the parameter from the body using the formatters from the configuration.
         /// This is like having a [FromBody] attribute on the parameter
         /// </summary>
         /// <param name="parameter">parameter to provide binding for.</param>
@@ -174,7 +174,7 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Bind this parameter from the body using the supplied set of formatters and validator. 
+        /// Bind this parameter from the body using the supplied set of formatters and validator.
         /// </summary>
         /// <param name="parameter">parameter to provide binding for.</param>
         /// <param name="formatters">formatters to choose from when binding the body</param>

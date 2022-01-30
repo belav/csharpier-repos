@@ -725,7 +725,7 @@ class C<T>
 
         /// <summary>
         /// Warnings reported for all nonviable, "missing main" error reported.
-        /// Dev10: reports a warning for instance Main(bool) but that's seems to be a bug 
+        /// Dev10: reports a warning for instance Main(bool) but that's seems to be a bug
         /// since the warning is not reported when main type name is not specified.
         /// </summary>
         [Fact]

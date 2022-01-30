@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Wrapping
     /// Base type for the C# and VB wrapping refactorings.  The only responsibility of this type is
     /// to walk up the tree at the position the user is at, seeing if any node above the user can be
     /// wrapped by any provided <see cref="ISyntaxWrapper"/>s.
-    /// 
+    ///
     /// Once we get any wrapping actions, we stop looking further.  This keeps the refactorings
     /// scoped as closely as possible to where the user is, as well as preventing overloading of the
     /// lightbulb with too many actions.

@@ -120,10 +120,10 @@ public class Startup
                 o =>
                 {
                     /*
-                o.ClientId = Configuration["oidc:clientid"];
-                o.ClientSecret = Configuration["oidc:clientsecret"]; // for code flow
-                o.Authority = Configuration["oidc:authority"];
-                */
+                    o.ClientId = Configuration["oidc:clientid"];
+                    o.ClientSecret = Configuration["oidc:clientsecret"]; // for code flow
+                    o.Authority = Configuration["oidc:authority"];
+                    */
                     // https://github.com/IdentityServer/IdentityServer4.Demo/blob/master/src/IdentityServer4Demo/Config.cs
                     o.ClientId = "hybrid";
                     o.ClientSecret = "secret"; // for code flow

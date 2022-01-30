@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Identifies a property should be represented as a nested component.
-	/// </summary>
+    /// Identifies a property should be represented as a nested component.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class ComponentAttribute
         : DictionaryBehaviorAttribute,
@@ -27,8 +27,8 @@ namespace Castle.Components.DictionaryAdapter
           IDictionaryPropertySetter
     {
         /// <summary>
-		/// Applies no prefix.
-		/// </summary>
+        /// Applies no prefix.
+        /// </summary>
         public bool NoPrefix
         {
             get { return Prefix == ""; }
@@ -42,9 +42,9 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         /// <summary>
-		/// Gets or sets the prefix.
-		/// </summary>
-		/// <value>The prefix.</value>
+        /// Gets or sets the prefix.
+        /// </summary>
+        /// <value>The prefix.</value>
         public string Prefix { get; set; }
 
 		#region IDictionaryKeyBuilder Members

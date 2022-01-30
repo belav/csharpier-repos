@@ -180,8 +180,8 @@ namespace System.Security.Cryptography.Xml.Tests
             /* looks curious? but the element does not look to
                be appended to the document.
                Just commented out since it is not fixed.
-            Assert.AreEqual (String.Empty, el1.OwnerDocument.OuterXml);
-            */
+               Assert.AreEqual (String.Empty, el1.OwnerDocument.OuterXml);
+               */
         }
 
         [Fact]

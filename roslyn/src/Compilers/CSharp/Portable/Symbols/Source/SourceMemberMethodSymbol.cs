@@ -679,7 +679,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Overridden by <see cref="SourceOrdinaryMethodSymbol"/>, 
+        /// Overridden by <see cref="SourceOrdinaryMethodSymbol"/>,
         /// which might return locations of partial methods.
         /// </summary>
         public override ImmutableArray<Location> Locations

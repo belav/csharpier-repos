@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 /*
 ** This program was translated to C# and adapted for xunit-performance.
-** New variants of several tests were added to compare class versus 
+** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
 
@@ -23,7 +23,7 @@
 ** are error-free.  Consequently, McGraw-HIll and BYTE Magazine make
 ** no claims in regard to the fitness of the source code, executable
 ** code, and documentation of the BYTEmark.
-** 
+**
 ** Furthermore, BYTE Magazine, McGraw-Hill, and all employees
 ** of McGraw-Hill cannot be held responsible for any damages resulting
 ** from the use of this code or the results obtained from using
@@ -475,22 +475,22 @@ public class Neural : NNetStruct
     public static void  display_output(int patt)
     {
     int             i;
-
-        fprintf(outfile,"\n Iteration # %d",iteration_count);
-        fprintf(outfile,"\n Desired Output:  ");
-
-        for (i=0; i<OUT_SIZE; i++)
-        {
-            fprintf(outfile,"%6.3f  ",out_pats[patt][i]);
-        }
-        fprintf(outfile,"\n Actual Output:   ");
-
-        for (i=0; i<OUT_SIZE; i++)
-        {
-            fprintf(outfile,"%6.3f  ",out_out[i]);
-        }
-        fprintf(outfile,"\n");
-        return;
+    
+    fprintf(outfile,"\n Iteration # %d",iteration_count);
+    fprintf(outfile,"\n Desired Output:  ");
+    
+    for (i=0; i<OUT_SIZE; i++)
+    {
+    fprintf(outfile,"%6.3f  ",out_pats[patt][i]);
+    }
+    fprintf(outfile,"\n Actual Output:   ");
+    
+    for (i=0; i<OUT_SIZE; i++)
+    {
+    fprintf(outfile,"%6.3f  ",out_out[i]);
+    }
+    fprintf(outfile,"\n");
+    return;
     }
     */
 
@@ -754,10 +754,10 @@ public class Neural : NNetStruct
         {
             /*      printf("\n Error pattern %d:   Worst: %8.3f; Average: %8.3f",
                   i+1,tot_out_error[i], avg_out_error[i]);
-                fprintf(outfile,
-                 "\n Error pattern %d:   Worst: %8.3f; Average: %8.3f",
-                 i+1,tot_out_error[i]);
-            */
+                  fprintf(outfile,
+                  "\n Error pattern %d:   Worst: %8.3f; Average: %8.3f",
+                  i+1,tot_out_error[i]);
+                  */
 
             if (worst_error >= STOP)
                 result = F;
@@ -771,10 +771,10 @@ public class Neural : NNetStruct
 #if DEBUG
         /* printf("\n Error this pass thru data:   Worst: %8.3f; Average: %8.3f",
          worst_error,average_error);
-        */
+         */
         /* fprintf(outfile,
          "\n Error this pass thru data:   Worst: %8.3f; Average: %8.3f",
-          worst_error, average_error); */
+         worst_error, average_error); */
 #endif
 
         return (result);
@@ -865,21 +865,21 @@ public class Neural : NNetStruct
     /* static void display_mid_wts()
     {
     int             neurode, weight, row, col;
-
+    
     fprintf(outfile,"\n Weights of Middle Layer neurodes:");
-
+    
     for (neurode=0; neurode<MID_SIZE; neurode++)
     {
-        fprintf(outfile,"\n  Mid Neurode # %d",neurode);
-        for (row=0; row<IN_Y_SIZE; row++)
-        {
-            fprintf(outfile,"\n ");
-            for (col=0; col<IN_X_SIZE; col++)
-            {
-                weight = IN_X_SIZE * row + col;
-                fprintf(outfile," %8.3f ", mid_wts[neurode,weight]);
-            }
-        }
+    fprintf(outfile,"\n  Mid Neurode # %d",neurode);
+    for (row=0; row<IN_Y_SIZE; row++)
+    {
+    fprintf(outfile,"\n ");
+    for (col=0; col<IN_X_SIZE; col++)
+    {
+    weight = IN_X_SIZE * row + col;
+    fprintf(outfile," %8.3f ", mid_wts[neurode,weight]);
+    }
+    }
     }
     return;
     }
@@ -894,18 +894,18 @@ public class Neural : NNetStruct
     /* void  display_out_wts()
     {
     int             neurode, weight;
-
-        fprintf(outfile,"\n Weights of Output Layer neurodes:");
-
-        for (neurode=0; neurode<OUT_SIZE; neurode++)
-        {
-            fprintf(outfile,"\n  Out Neurode # %d \n",neurode);
-            for (weight=0; weight<MID_SIZE; weight++)
-            {
-                fprintf(outfile," %8.3f ", out_wts[neurode,weight]);
-            }
-        }
-        return;
+    
+    fprintf(outfile,"\n Weights of Output Layer neurodes:");
+    
+    for (neurode=0; neurode<OUT_SIZE; neurode++)
+    {
+    fprintf(outfile,"\n  Out Neurode # %d \n",neurode);
+    for (weight=0; weight<MID_SIZE; weight++)
+    {
+    fprintf(outfile," %8.3f ", out_wts[neurode,weight]);
+    }
+    }
+    return;
     }
     */
 }

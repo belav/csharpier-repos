@@ -197,9 +197,9 @@ namespace Moq
         }
 
         /// <summary>
-		/// Ensures the given <paramref name="value"/> is not null.
-		/// Throws <see cref="ArgumentNullException"/> otherwise.
-		/// </summary>
+        /// Ensures the given <paramref name="value"/> is not null.
+        /// Throws <see cref="ArgumentNullException"/> otherwise.
+        /// </summary>
         public static void NotNull(object value, string paramName)
         {
             if (value == null)
@@ -209,10 +209,10 @@ namespace Moq
         }
 
         /// <summary>
-		/// Ensures the given string <paramref name="value"/> is not null or empty.
-		/// Throws <see cref="ArgumentNullException"/> in the first case, or 
-		/// <see cref="ArgumentException"/> in the latter.
-		/// </summary>
+        /// Ensures the given string <paramref name="value"/> is not null or empty.
+        /// Throws <see cref="ArgumentNullException"/> in the first case, or
+        /// <see cref="ArgumentException"/> in the latter.
+        /// </summary>
         public static void NotNullOrEmpty(string value, string paramName)
         {
             if (value == null)

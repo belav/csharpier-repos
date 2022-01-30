@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis
         where TMethodSymbol : class, IMethodSymbolInternal
     {
         /// <summary>
-        /// Maps an async/iterator method to the synthesized state machine type that implements the method. 
+        /// Maps an async/iterator method to the synthesized state machine type that implements the method.
         /// </summary>
         private Dictionary<TMethodSymbol, TNamedTypeSymbol>? _lazyStateMachineTypes;
 

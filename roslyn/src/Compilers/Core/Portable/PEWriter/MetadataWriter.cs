@@ -44,7 +44,7 @@ namespace Microsoft.Cci
         /// member ref names, type def (full) names, type ref (full) names, exported type
         /// (full) names, parameter names, manifest resource names, and unmanaged method names
         /// (ImplMap table).
-        /// 
+        ///
         /// See CLI Part II, section 22.
         /// </remarks>
         internal const int NameLengthLimit = 1024 - 1; //MAX_CLASS_NAME = 1024 in dev11
@@ -55,13 +55,13 @@ namespace Microsoft.Cci
         /// </summary>
         /// <remarks>
         /// Used for file names, module names, and module ref names.
-        /// 
+        ///
         /// See CLI Part II, section 22.
         /// </remarks>
         internal const int PathLengthLimit = 260 - 1; //MAX_PATH = 1024 in dev11
 
         /// <summary>
-        /// This is the maximum length of a string in the PDB, assuming it is in UTF-8 format 
+        /// This is the maximum length of a string in the PDB, assuming it is in UTF-8 format
         /// and not (yet) null-terminated.
         /// </summary>
         /// <remarks>
@@ -236,7 +236,7 @@ namespace Microsoft.Cci
         protected abstract MethodDefinitionHandle GetMethodDefinitionHandle(IMethodDefinition def);
 
         /// <summary>
-        /// The method definition corresponding to full metadata method handle. 
+        /// The method definition corresponding to full metadata method handle.
         /// Deltas are only required to support indexing into current generation.
         /// </summary>
         protected abstract IMethodDefinition GetMethodDef(MethodDefinitionHandle handle);
@@ -1509,7 +1509,7 @@ namespace Microsoft.Cci
         }
 
         /// <summary>
-        /// The Microsoft CLR requires that {namespace} + "." + {name} fit in MAX_CLASS_NAME 
+        /// The Microsoft CLR requires that {namespace} + "." + {name} fit in MAX_CLASS_NAME
         /// (even though the name and namespace are stored separately in the Microsoft
         /// implementation).  Note that the namespace name of a nested type is always blank
         /// (since comes from the container).

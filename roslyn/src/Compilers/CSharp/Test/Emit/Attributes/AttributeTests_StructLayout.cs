@@ -346,11 +346,11 @@ public class C5 { }
 
         /// <summary>
         /// CLI spec (22.8 ClassLayout):
-        ///  "A type has layout if it is marked SequentialLayout or ExplicitLayout. 
-        ///   If any type within an inheritance chain has layout, then so shall all its base classes, 
-        ///   up to the one that descends immediately from System.ValueType (if it exists in the type's hierarchy); 
+        ///  "A type has layout if it is marked SequentialLayout or ExplicitLayout.
+        ///   If any type within an inheritance chain has layout, then so shall all its base classes,
+        ///   up to the one that descends immediately from System.ValueType (if it exists in the type's hierarchy);
         ///   otherwise, from System.Object."
-        ///   
+        ///
         /// But this rule is only enforced by the loader, not by the compiler.
         /// TODO: should we report an error?
         /// </summary>

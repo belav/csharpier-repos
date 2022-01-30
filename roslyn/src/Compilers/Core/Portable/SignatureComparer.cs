@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.RuntimeMembers
 {
     /// <summary>
-    /// Helper class to match signatures in format of 
+    /// Helper class to match signatures in format of
     /// MemberDescriptor.Signature to members.
     /// </summary>
     internal abstract class SignatureComparer<
@@ -163,9 +163,9 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
         }
 
         /// <summary>
-        /// Does pretty much the same thing as MetadataDecoder.DecodeType only instead of 
+        /// Does pretty much the same thing as MetadataDecoder.DecodeType only instead of
         /// producing a type symbol it compares encoded type to the target.
-        /// 
+        ///
         /// Signature should be in format described in MemberDescriptor.
         /// </summary>
         private bool MatchType(TypeSymbol? type, ImmutableArray<byte> signature, ref int position)

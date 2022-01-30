@@ -49,11 +49,11 @@ using System.Runtime.ConstrainedExecution;
 /*
   Problems addressed by the CriticalHandle class:
   1) Critical finalization - ensure we never leak OS resources in SQL.  Done
-     without running truly arbitrary & unbounded amounts of managed code.
+  without running truly arbitrary & unbounded amounts of managed code.
   2) Reduced graph promotion - during finalization, keep object graph small
   3) GC.KeepAlive behavior - P/Invoke vs. finalizer thread race condition (HandleRef)
   4) Enforcement of the above via the type system - Don't use IntPtr anymore.
-
+  
   Subclasses of CriticalHandle will implement the ReleaseHandle
   abstract method used to execute any code required to free the
   handle. This method will be prepared as a constrained execution
@@ -65,53 +65,53 @@ using System.Runtime.ConstrainedExecution;
   CER spec for more details). In particular, any sub-methods you call
   should be decorated with a reliability contract of the appropriate
   level. In most cases this should be:
-    ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
-
+  ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+  
   Subclasses must also implement the IsInvalid property so that the
   infrastructure can tell when critical finalization is actually required.
   Again, this method is prepared ahead of time. It's envisioned that direct
   subclasses of CriticalHandle will provide an IsInvalid implementation that suits
   the general type of handle they support (null is invalid, -1 is invalid etc.)
   and then these classes will be further derived for specific handle types.
-
+  
   Most classes using CriticalHandle should not provide a finalizer.  If they do
   need to do so (ie, for flushing out file buffers, needing to write some data
   back into memory, etc), then they can provide a finalizer that will be
   guaranteed to run before the CriticalHandle's critical finalizer.
-
+  
   Subclasses are expected to be written as follows:
-
+  
   internal sealed MyCriticalHandleSubclass : CriticalHandle {
-      // Called by P/Invoke when returning CriticalHandles
-      private MyCriticalHandleSubclass() : base(IntPtr.Zero)
-      {
-      }
-
-      // Do not provide a finalizer - CriticalHandle's critical finalizer will
-      // call ReleaseHandle for you.
-
-      public override bool IsInvalid {
-          get { return handle == IntPtr.Zero; }
-      }
-
-      [DllImport(Interop.Libraries.Kernel32), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-      private static extern bool CloseHandle(IntPtr handle);
-
-      override protected bool ReleaseHandle()
-      {
-          return CloseHandle(handle);
-      }
+  // Called by P/Invoke when returning CriticalHandles
+  private MyCriticalHandleSubclass() : base(IntPtr.Zero)
+  {
   }
-
+  
+  // Do not provide a finalizer - CriticalHandle's critical finalizer will
+  // call ReleaseHandle for you.
+  
+  public override bool IsInvalid {
+  get { return handle == IntPtr.Zero; }
+  }
+  
+  [DllImport(Interop.Libraries.Kernel32), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+  private static extern bool CloseHandle(IntPtr handle);
+  
+  override protected bool ReleaseHandle()
+  {
+  return CloseHandle(handle);
+  }
+  }
+  
   Then elsewhere to create one of these CriticalHandles, define a method
   with the following type of signature (CreateFile follows this model).
   Note that when returning a CriticalHandle like this, P/Invoke will call your
   classes default constructor.
-
-      [DllImport(Interop.Libraries.Kernel32)]
-      private static extern MyCriticalHandleSubclass CreateHandle(int someState);
-
- */
+  
+  [DllImport(Interop.Libraries.Kernel32)]
+  private static extern MyCriticalHandleSubclass CreateHandle(int someState);
+  
+  */
 
 namespace System.Runtime.InteropServices
 {

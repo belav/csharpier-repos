@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// it surrounds this context location. If no part surrounds this location then a part is
         /// preferred if it comes from the same SyntaxTree as this location.  If there is no
         /// such part, then any part may be used for generation.
-        /// 
+        ///
         /// This option is not necessary if <see cref="AfterThisLocation"/> or <see cref="BeforeThisLocation"/> are
         /// provided.
         /// </summary>
@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// A hint to the code generation service to specify where the generated code should be
         /// placed.  Code will be generated after this location if the location is valid in the type
         /// or symbol being generated into, and it is possible to generate the code after it.
-        /// 
+        ///
         /// If this option is provided, neither <see cref="ContextLocation"/> nor <see cref="BeforeThisLocation"/> are
         /// needed.
         /// </summary>
@@ -43,8 +43,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// <summary>
         /// A hint to the code generation service to specify where the generated code should be
         /// placed.  Code will be generated before this location if the location is valid in the type
-        /// or symbol being generated into, and it is possible to generate the code after it. 
-        /// 
+        /// or symbol being generated into, and it is possible to generate the code after it.
+        ///
         /// If this option is provided, neither <see cref="ContextLocation"/> nor <see cref="AfterThisLocation"/> are
         /// needed.
         /// </summary>
@@ -75,7 +75,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         /// into a single declaration with a dotted name.  False if the nesting should be preserved
         /// and each namespace declaration should be nested and should only have a single non-dotted
         /// name.
-        /// 
+        ///
         /// Merging can only occur if the namespace only contains a single member that is also a
         /// namespace.
         /// </summary>

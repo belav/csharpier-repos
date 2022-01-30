@@ -110,7 +110,7 @@ class C
         }
 
         /// <summary>
-        /// The baseline metadata might have more references than the current compilation. 
+        /// The baseline metadata might have more references than the current compilation.
         /// References that aren't found in the compilation are treated as missing.
         /// </summary>
         [ConditionalFact(

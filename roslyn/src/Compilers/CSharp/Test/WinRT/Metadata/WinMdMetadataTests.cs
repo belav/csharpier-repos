@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         /// <summary>
         /// Make sure that the members of a function are forwarded to their appropriate types.
         /// We do this by checking that the first parameter of
-        /// Windows.UI.Text.ITextRange.SetPoint(Point p...) gets forwarded to the 
+        /// Windows.UI.Text.ITextRange.SetPoint(Point p...) gets forwarded to the
         /// System.Runtime.WindowsRuntime assembly.
         /// </summary>
         [Fact]

@@ -179,11 +179,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the string representation of the tokens in this list, not including 
+        /// Returns the string representation of the tokens in this list, not including
         /// the first token's leading trivia and the last token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The string representation of the tokens in this list, not including 
+        /// The string representation of the tokens in this list, not including
         /// the first token's leading trivia and the last token's trailing trivia.
         /// </returns>
         public override string ToString()
@@ -192,11 +192,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the full string representation of the tokens in this list including 
+        /// Returns the full string representation of the tokens in this list including
         /// the first token's leading trivia and the last token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The full string representation of the tokens in this list including 
+        /// The full string representation of the tokens in this list including
         /// the first token's leading trivia and the last token's trailing trivia.
         /// </returns>
         public string ToFullString()

@@ -184,7 +184,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// <param name="dependency">Assembly identity.</param>
         /// <param name="path">Assembly location.</param>
         /// <remarks>
-        /// Associates a full assembly name with its location. The association is used when an assembly 
+        /// Associates a full assembly name with its location. The association is used when an assembly
         /// is being loaded and its name needs to be resolved to a location.
         /// </remarks>
         /// <exception cref="ArgumentNullException"><paramref name="dependency"/> is null.</exception>
@@ -213,7 +213,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// <param name="dependency">Assembly identity.</param>
         /// <exception cref="ArgumentNullException"><paramref name="dependency"/> is null.</exception>
         /// <remarks>
-        /// When another in-memory assembly references the <paramref name="dependency"/> the loader 
+        /// When another in-memory assembly references the <paramref name="dependency"/> the loader
         /// responds with the specified dependency if the assembly identity matches the requested one.
         /// </remarks>
         public void RegisterDependency(Assembly dependency)

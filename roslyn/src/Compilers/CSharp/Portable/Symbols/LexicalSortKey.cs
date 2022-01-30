@@ -10,7 +10,7 @@ using System.Threading;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// A structure used to lexically order symbols. For performance, it's important that this be 
+    /// A structure used to lexically order symbols. For performance, it's important that this be
     /// a STRUCTURE, and be able to be returned from a symbol without doing any additional allocations (even
     /// if nothing is cached yet).
     /// </summary>

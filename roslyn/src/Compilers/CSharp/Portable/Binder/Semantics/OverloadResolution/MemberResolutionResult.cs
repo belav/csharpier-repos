@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// The least overridden member that is accessible from the call site that performed overload resolution. 
+        /// The least overridden member that is accessible from the call site that performed overload resolution.
         /// Typically a virtual or abstract method (but not necessarily).
         /// </summary>
         /// <remarks>

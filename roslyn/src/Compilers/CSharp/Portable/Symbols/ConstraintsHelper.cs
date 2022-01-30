@@ -41,7 +41,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// Helper methods for generic type parameter constraints. There are two sets of methods: one
     /// set for resolving constraint "bounds" (that is, determining the effective base type, interface set,
     /// etc.), and another set for checking for constraint violations in type and method references.
-    /// 
+    ///
     /// Bounds are resolved by calling one of the ResolveBounds overloads. Typically bounds are
     /// resolved by each TypeParameterSymbol at, or before, one of the corresponding properties
     /// (BaseType, Interfaces, etc.) is accessed. Resolving bounds may result in errors (cycles,
@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// errors as declaration errors or use-site errors (depending on whether the type parameter
     /// was from source or metadata) and to ensure bounds are resolved for source type parameters
     /// even if the corresponding properties are never accessed directly.
-    /// 
+    ///
     /// Constraints are checked by calling one of the CheckConstraints or CheckAllConstraints
     /// overloads for any generic type or method reference from source. In some circumstances,
     /// references are checked at the time the generic type or generic method is bound and constructed
@@ -1179,7 +1179,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <param name="nullabilityDiagnosticsBuilderOpt">Nullability warnings.</param>
         /// <param name="skipParameters">Parameters to skip.</param>
         /// <param name="useSiteDiagnosticsBuilder"/>
-        /// <param name="ignoreTypeConstraintsDependentOnTypeParametersOpt">If an original form of a type constraint 
+        /// <param name="ignoreTypeConstraintsDependentOnTypeParametersOpt">If an original form of a type constraint
         /// depends on a type parameter from this set, do not verify this type constraint.</param>
         /// <returns>True if the constraints were satisfied, false otherwise.</returns>
         public static bool CheckConstraints(

@@ -19,7 +19,7 @@ namespace Roslyn.Utilities
             ///<summary>How many child edges this node has.</summary>
             public readonly int EdgeCount;
 
-            ///<summary>Where the first edge can be found in <see cref="_edges"/>.  The edges 
+            ///<summary>Where the first edge can be found in <see cref="_edges"/>.  The edges
             ///are in the range _edges[FirstEdgeIndex, FirstEdgeIndex + EdgeCount)
             ///</summary>
             public readonly int FirstEdgeIndex;

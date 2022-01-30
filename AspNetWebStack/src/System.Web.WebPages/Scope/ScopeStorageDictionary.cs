@@ -28,7 +28,7 @@ namespace System.Web.WebPages.Scope
         /// </summary>
         /// <param name="baseScope">The base scope.</param>
         /// <param name="backingStore">
-        /// The dictionary to use as a storage. Since the dictionary would be used as-is, we expect the implementer to 
+        /// The dictionary to use as a storage. Since the dictionary would be used as-is, we expect the implementer to
         /// use the same key-value comparison logic as we do here.
         /// </param>
         internal ScopeStorageDictionary(

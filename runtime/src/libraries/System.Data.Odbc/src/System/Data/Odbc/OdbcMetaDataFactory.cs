@@ -825,9 +825,9 @@ namespace System.Data.Odbc
                         break;
                     /* COLLATE is new in ODBC 3.0 and GroupByBehavior does not have a value for it.
                                             case ODBC32.SQL_GROUP_BY.COLLATE:
-                                                groupByBehavior = Common.GroupByBehavior.Unknown;
-                                                break;
-                        */
+                                            groupByBehavior = Common.GroupByBehavior.Unknown;
+                                            break;
+                                            */
                 }
             }
 

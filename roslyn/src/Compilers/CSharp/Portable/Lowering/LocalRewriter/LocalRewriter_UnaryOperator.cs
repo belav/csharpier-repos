@@ -561,7 +561,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// chosen increment/decrement operator is modelled as a static method on a type T,
         /// which takes a value of type T and returns the result of incrementing or decrementing
         /// that value.
-        /// 
+        ///
         /// x++
         ///     X temp = x
         ///     x = (X)(T.Increment((T)temp))
@@ -578,16 +578,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///     X temp = (X)(T.Decrement((T)x))
         ///     x = temp
         ///     return temp
-        /// 
-        /// Note: 
+        ///
+        /// Note:
         /// Dev11 implements dynamic prefix operators incorrectly.
-        /// 
+        ///
         ///   result = ++x.P  is emitted as  result = SetMember{"P"}(t, UnaryOperation{Inc}(GetMember{"P"}(x)))
-        /// 
+        ///
         /// The difference is that Dev11 relies on SetMember returning the same value as it was given as an argument.
         /// Failing to do so changes the semantics of ++/-- operator which is undesirable. We emit the same pattern for
         /// both dynamic and static operators.
-        ///    
+        ///
         /// For example, we might have a class X with user-defined implicit conversions
         /// to and from short, but no user-defined increment or decrement operators. We
         /// would bind x++ as "X temp = x; x = (X)(short)((int)(short)temp + 1); return temp;"

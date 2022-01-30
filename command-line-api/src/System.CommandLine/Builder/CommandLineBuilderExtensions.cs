@@ -163,12 +163,12 @@ namespace System.CommandLine.Builder
         /// <returns>The same instance of <see cref="CommandLineBuilder"/>.</returns>
         /// <remarks>
         /// POSIX conventions recommend that single-character options be allowed to be specified together after a single <c>-</c> prefix. When <see cref="EnablePosixBundling"/> is set to <see langword="true"/>, the following command lines are equivalent:
-        /// 
+        ///
         /// <code>
         ///     &gt; myapp -a -b -c
         ///     &gt; myapp -abc
         /// </code>
-        /// 
+        ///
         /// If an argument is provided after an option bundle, it applies to the last option in the bundle. When <see cref="EnablePosixBundling"/> is set to <see langword="true"/>, all of the following command lines are equivalent:
         /// <code>
         ///     &gt; myapp -a -b -c arg

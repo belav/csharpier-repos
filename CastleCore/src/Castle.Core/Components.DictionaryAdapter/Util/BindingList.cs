@@ -20,47 +20,47 @@ namespace Castle.Components.DictionaryAdapter
     using SCM = System.ComponentModel;
 
     /// <summary>
-	///   Provides a generic collection that supports data binding.
-	/// </summary>
-	/// <remarks>
-	///   This class wraps the CLR <see cref="System.ComponentModel.BindingList{T}"/>
-	///   in order to implement the Castle-specific <see cref="IBindingList{T}"/>.
-	/// </remarks>
-	/// <typeparam name="T">The type of elements in the list.</typeparam>
+    ///   Provides a generic collection that supports data binding.
+    /// </summary>
+    /// <remarks>
+    ///   This class wraps the CLR <see cref="System.ComponentModel.BindingList{T}"/>
+    ///   in order to implement the Castle-specific <see cref="IBindingList{T}"/>.
+    /// </remarks>
+    /// <typeparam name="T">The type of elements in the list.</typeparam>
     public class BindingList<T> : IBindingList<T>, IList
     {
         private readonly SCM.BindingList<T> list;
 
         /// <summary>
-		///   Initializes a new instance of the <see cref="BindingList{T}"/> class
-		///   using default values.
-		/// </summary>
+        ///   Initializes a new instance of the <see cref="BindingList{T}"/> class
+        ///   using default values.
+        /// </summary>
         public BindingList()
         {
             this.list = new SCM.BindingList<T>();
         }
 
         /// <summary>
-		///   Initializes a new instance of the <see cref="BindingList{T}"/> class
-		///   with the specified list.
-		/// </summary>
-		/// <param name="list">
-		///   An <see cref="IList{T}"/> of items
-		///   to be contained in the <see cref="BindingList{T}"/>.
-		/// </param>
+        ///   Initializes a new instance of the <see cref="BindingList{T}"/> class
+        ///   with the specified list.
+        /// </summary>
+        /// <param name="list">
+        ///   An <see cref="IList{T}"/> of items
+        ///   to be contained in the <see cref="BindingList{T}"/>.
+        /// </param>
         public BindingList(IList<T> list)
         {
             this.list = new SCM.BindingList<T>(list);
         }
 
         /// <summary>
-		///   Initializes a new instance of the <see cref="BindingList{T}"/> class
-		///   wrapping the specified <see cref="System.ComponentModel.BindingList{T}"/> instance.
-		/// </summary>
-		/// <param name="list">
-		///   A <see cref="System.ComponentModel.BindingList{T}"/>
-		///   to be wrapped by the <see cref="BindingList{T}"/>.
-		/// </param>
+        ///   Initializes a new instance of the <see cref="BindingList{T}"/> class
+        ///   wrapping the specified <see cref="System.ComponentModel.BindingList{T}"/> instance.
+        /// </summary>
+        /// <param name="list">
+        ///   A <see cref="System.ComponentModel.BindingList{T}"/>
+        ///   to be wrapped by the <see cref="BindingList{T}"/>.
+        /// </param>
         public BindingList(SCM.BindingList<T> list)
         {
             if (list == null)

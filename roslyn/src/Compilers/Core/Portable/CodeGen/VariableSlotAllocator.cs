@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         public abstract int PreviousHoistedLocalSlotCount { get; }
 
         /// <summary>
-        /// Returns true and an index of a slot that stores an awaiter of a specified type in the previous generation, if any. 
+        /// Returns true and an index of a slot that stores an awaiter of a specified type in the previous generation, if any.
         /// </summary>
         public abstract bool TryGetPreviousAwaiterSlotIndex(
             Cci.ITypeReference currentType,

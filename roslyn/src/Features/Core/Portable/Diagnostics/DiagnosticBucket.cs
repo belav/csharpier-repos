@@ -9,7 +9,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     internal readonly struct DiagnosticBucket
     {
         /// <summary>
-        /// The identity of bucket group. 
+        /// The identity of bucket group.
         /// </summary>
         public readonly object Id;
 

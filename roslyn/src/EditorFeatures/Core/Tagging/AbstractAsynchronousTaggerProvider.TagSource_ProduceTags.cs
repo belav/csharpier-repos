@@ -253,7 +253,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             /// Called on the foreground thread.  Passed a boolean to say if we're computing the
             /// initial set of tags or not.  If we're computing the initial set of tags, we lower
             /// all our delays so that we can get results to the screen as quickly as possible.
-            /// 
+            ///
             /// This gives a good experience when a document is opened as the document appears
             /// complete almost immediately.  Once open though, our normal delays come into play
             /// so as to not cause a flashy experience.

@@ -699,13 +699,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         }
 
         /// <summary>
-        /// Intended behavior: this property, P, explicitly implements an interface property, IP, 
+        /// Intended behavior: this property, P, explicitly implements an interface property, IP,
         /// if any of the following is true:
-        /// 
+        ///
         /// 1) P.get explicitly implements IP.get and P.set explicitly implements IP.set
         /// 2) P.get explicitly implements IP.get and there is no IP.set
         /// 3) P.set explicitly implements IP.set and there is no IP.get
-        /// 
+        ///
         /// Extra or missing accessors will not result in errors, P will simply not report that
         /// it explicitly implements IP.
         /// </summary>

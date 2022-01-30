@@ -268,7 +268,7 @@ namespace System.CommandLine.Help
         ) => command.Options.Where(x => !x.IsHidden).Select(x => GetTwoColumnRow(x, parseResult));
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="command">The command to get argument help items for.</param>
         /// <param name="parseResult">A parse result providing context for help formatting.</param>

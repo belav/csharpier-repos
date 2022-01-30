@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis
         /// in PDB file size.
         ///
         /// Chosen as the point at which we start to see > 10% blob size reduction using all
-        /// current source files in corefx and roslyn as sample data. 
+        /// current source files in corefx and roslyn as sample data.
         /// </summary>
         internal const int CompressionThreshold = 200;
 
@@ -75,7 +75,7 @@ namespace Microsoft.CodeAnalysis
         /// contract is that you can pass EmbeddedText instances to Emit.
         /// It just so happened that doing this up-front was most practical
         /// and efficient, but we don't want to be tied to it.
-        /// 
+        ///
         /// For efficiency, the format of this blob is exactly as it is written
         /// to the PDB,which prevents extra copies being made during emit.
         ///

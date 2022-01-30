@@ -22,7 +22,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
     /// <summary>
-    /// Provides completion for uncommon unnamed symbols, like conversions, indexer and operators.  These completion 
+    /// Provides completion for uncommon unnamed symbols, like conversions, indexer and operators.  These completion
     /// items will be brought up with <c>dot</c> like normal, but will end up inserting more than just a name into
     /// the editor.  For example, committing a conversion will insert the conversion prior to the expression being
     /// dotted off of.

@@ -49,20 +49,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         /*
           
-        private void FinishLoad()
-        {
-            // Check that the set of analyzers is complete and consistent.
-            GetAnalyzerDependencyCheckingService()?.ReanalyzeSolutionForConflicts();
-        }
-
-        private AnalyzerDependencyCheckingService GetAnalyzerDependencyCheckingService()
-        {
-            var componentModel = (IComponentModel)_serviceProvider.GetService(typeof(SComponentModel));
-
-            return componentModel.GetService<AnalyzerDependencyCheckingService>();
-        }
-
-        */
+          private void FinishLoad()
+          {
+          // Check that the set of analyzers is complete and consistent.
+          GetAnalyzerDependencyCheckingService()?.ReanalyzeSolutionForConflicts();
+          }
+          
+          private AnalyzerDependencyCheckingService GetAnalyzerDependencyCheckingService()
+          {
+          var componentModel = (IComponentModel)_serviceProvider.GetService(typeof(SComponentModel));
+          
+          return componentModel.GetService<AnalyzerDependencyCheckingService>();
+          }
+          
+          */
 
         public ProjectId GetOrCreateProjectIdForPath(string filePath, string projectDisplayName)
         {

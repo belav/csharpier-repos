@@ -7,9 +7,9 @@ using System.Threading;
 namespace InterlockedTest
 {
     /// <summary>
-	/// Summary description for Class1.
-	/// </summary>
-	///
+    /// Summary description for Class1.
+    /// </summary>
+    ///
     class LongTest
     {
         long sharedValue;
@@ -145,9 +145,9 @@ namespace InterlockedTest
     }
 
     /// <summary>
-	/// Summary description for Class1.
-	/// </summary>
-	///
+    /// Summary description for Class1.
+    /// </summary>
+    ///
     class IntTest
     {
         int sharedValue;

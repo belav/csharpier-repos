@@ -696,20 +696,20 @@ namespace System.Net
             // Set of safe chars, from RFC 1738.4 minus '+'
             /*
             if (ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch >= '0' && ch <= '9')
-                return true;
-
+            return true;
+            
             switch (ch)
             {
-                case '-':
-                case '_':
-                case '.':
-                case '!':
-                case '*':
-                case '(':
-                case ')':
-                    return true;
+            case '-':
+            case '_':
+            case '.':
+            case '!':
+            case '*':
+            case '(':
+            case ')':
+            return true;
             }
-
+            
             return false;
             */
             // Optimized version of the above:

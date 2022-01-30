@@ -13,17 +13,17 @@ namespace System.Security.Cryptography
         public sealed partial class RSACng : RSA
         {
             /// <summary>
-        ///     Create an RSACng algorithm with a random 2048 bit key pair.
-        /// </summary>
+            ///     Create an RSACng algorithm with a random 2048 bit key pair.
+            /// </summary>
             public RSACng() : this(2048) { }
 
             /// <summary>
-        ///     Creates a new RSACng object that will use a randomly generated key of the specified size.
-        ///     Valid key sizes range from 512 to 16384 bits, in increments of 64 bits. It is suggested that a
-        ///     minimum size of 2048 bits be used for all keys.
-        /// </summary>
-        /// <param name="keySize">Size of the key to generate, in bits.</param>
-        /// <exception cref="CryptographicException">if <paramref name="keySize" /> is not valid</exception>
+            ///     Creates a new RSACng object that will use a randomly generated key of the specified size.
+            ///     Valid key sizes range from 512 to 16384 bits, in increments of 64 bits. It is suggested that a
+            ///     minimum size of 2048 bits be used for all keys.
+            /// </summary>
+            /// <param name="keySize">Size of the key to generate, in bits.</param>
+            /// <exception cref="CryptographicException">if <paramref name="keySize" /> is not valid</exception>
             public RSACng(int keySize)
             {
                 // Set the property directly so that it gets validated against LegalKeySizes.

@@ -7,10 +7,10 @@ namespace DefaultNamespace
 
     /*************************************************************/
     /* test: MulDimJagAry.cs
-/* Purpose: Test GC with Multiple dimentions array
-/* Coverage: int[][], Object[][], Object[][][], Variant[][][],
-/*           take Mul_Dimention array as function argument.
-/*************************************************************/
+    /* Purpose: Test GC with Multiple dimentions array
+    /* Coverage: int[][], Object[][], Object[][][], Variant[][][],
+    /*           take Mul_Dimention array as function argument.
+    /*************************************************************/
 
 
     class MulDimJagAry

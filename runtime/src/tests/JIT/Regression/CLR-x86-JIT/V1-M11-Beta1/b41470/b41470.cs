@@ -66,7 +66,7 @@ namespace Test
 }
 /*
 ---------------------------
-Assert Failure (PID 856, Thread 1076/434)        
+Assert Failure (PID 856, Thread 1076/434)
 ---------------------------
 conv >= 0
 
@@ -81,6 +81,6 @@ Image:
 D:\bugs\bug.exe
 
 ---------------------------
-Abort   Retry   Ignore   
+Abort   Retry   Ignore
 ---------------------------
 */

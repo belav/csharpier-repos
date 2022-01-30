@@ -276,8 +276,8 @@ namespace Benchstone.BenchF
             rx1 = 64.0;
 
             /*
-         *     end of initialization -- begin timing
-         */
+            *     end of initialization -- begin timing
+            */
 
             /* loop 1      hydro excerpt */
 

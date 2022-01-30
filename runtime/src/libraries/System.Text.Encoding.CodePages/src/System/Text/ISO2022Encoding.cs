@@ -271,7 +271,7 @@ namespace System.Text
                 /*              case 50227:
                                     iCount = GetBytesCP50227CN( chars, charCount, bytes, byteCount, encoder );
                                     break;
-                */
+                                    */
                 case 52936:
                     iCount = GetBytesCP52936(chars, charCount, bytes, byteCount, encoder);
                     break;

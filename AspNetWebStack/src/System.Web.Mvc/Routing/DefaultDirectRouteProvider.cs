@@ -13,7 +13,7 @@ namespace System.Web.Mvc.Routing
     public class DefaultDirectRouteProvider : IDirectRouteProvider
     {
         /// <summary>
-        /// Gets direct routes for the given controller descriptor and action descriptors based on 
+        /// Gets direct routes for the given controller descriptor and action descriptors based on
         /// <see cref="IDirectRouteFactory"/> attributes.
         /// </summary>
         /// <param name="controllerDescriptor">The controller descriptor.</param>
@@ -21,11 +21,11 @@ namespace System.Web.Mvc.Routing
         /// <param name="constraintResolver">The constraint resolver.</param>
         /// <returns>A set of route entries.</returns>
         /// <remarks>
-        /// The implementation returns route entries for the given controller and actions. 
-        /// 
+        /// The implementation returns route entries for the given controller and actions.
+        ///
         /// Any actions that have associated <see cref="IDirectRouteFactory"/> instances will produce route
         /// entries that route direct to those actions.
-        /// 
+        ///
         /// Any actions that do not have an associated <see cref="IDirectRouteFactory"/> instances will be
         /// associated with the controller. If the controller has any associated <see cref="IDirectRouteProvider"/>
         /// instances, then route entries will be created for the controller and associated actions.

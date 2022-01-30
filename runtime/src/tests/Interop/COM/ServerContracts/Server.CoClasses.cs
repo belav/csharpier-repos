@@ -10,7 +10,7 @@ namespace Server.Contract.Servers
     using System.Runtime.InteropServices;
 
     /// <summary>
-    /// Managed definition of CoClass 
+    /// Managed definition of CoClass
     /// </summary>
     [ComImport]
     [CoClass(typeof(NumericTestingClass))]
@@ -25,7 +25,7 @@ namespace Server.Contract.Servers
     internal class NumericTestingClass { }
 
     /// <summary>
-    /// Managed definition of CoClass 
+    /// Managed definition of CoClass
     /// </summary>
     [ComImport]
     [CoClass(typeof(ArrayTestingClass))]
@@ -40,7 +40,7 @@ namespace Server.Contract.Servers
     internal class ArrayTestingClass { }
 
     /// <summary>
-    /// Managed definition of CoClass 
+    /// Managed definition of CoClass
     /// </summary>
     [ComImport]
     [CoClass(typeof(StringTestingClass))]
@@ -55,7 +55,7 @@ namespace Server.Contract.Servers
     internal class StringTestingClass { }
 
     /// <summary>
-    /// Managed definition of CoClass 
+    /// Managed definition of CoClass
     /// </summary>
     [ComImport]
     [CoClass(typeof(ErrorMarshalTestingClass))]
@@ -70,7 +70,7 @@ namespace Server.Contract.Servers
     internal class ErrorMarshalTestingClass { }
 
     /// <summary>
-    /// Managed definition of CoClass 
+    /// Managed definition of CoClass
     /// </summary>
     [ComImport]
     [CoClass(typeof(DispatchTestingClass))]
@@ -85,7 +85,7 @@ namespace Server.Contract.Servers
     internal class DispatchTestingClass { }
 
     /// <summary>
-    /// Managed definition of CoClass 
+    /// Managed definition of CoClass
     /// </summary>
     [ComImport]
     [CoClass(typeof(AggregationTestingClass))]
@@ -100,7 +100,7 @@ namespace Server.Contract.Servers
     internal class AggregationTestingClass { }
 
     /// <summary>
-    /// Managed definition of CoClass 
+    /// Managed definition of CoClass
     /// </summary>
     [ComImport]
     [CoClass(typeof(ColorTestingClass))]
@@ -130,7 +130,7 @@ namespace Server.Contract.Servers
     internal class LicenseTestingClass { }
 
     /** Implement when main line C# compiler supports default interfaces.
-
+    
     /// <summary>
     /// Managed definition of CoClass
     /// </summary>
@@ -140,7 +140,7 @@ namespace Server.Contract.Servers
     internal interface DefaultInterfaceTesting : Server.Contract.IDefaultInterfaceTesting
     {
     }
-
+    
     /// <summary>
     /// Managed activation for CoClass
     /// </summary>
@@ -149,7 +149,7 @@ namespace Server.Contract.Servers
     internal class DefaultInterfaceTestingClass
     {
     }
-*/
+    */
 
     /// <summary>
     /// Managed definition of CoClass

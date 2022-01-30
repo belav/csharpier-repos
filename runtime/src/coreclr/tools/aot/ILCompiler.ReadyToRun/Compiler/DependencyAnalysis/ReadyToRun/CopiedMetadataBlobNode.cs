@@ -13,7 +13,7 @@ using Debug = System.Diagnostics.Debug;
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
     /// <summary>
-    /// Copies the metadata blob from input MSIL assembly to output ready-to-run image, fixing up Rvas to 
+    /// Copies the metadata blob from input MSIL assembly to output ready-to-run image, fixing up Rvas to
     /// method IL bodies and FieldRvas.
     /// </summary>
     public class CopiedMetadataBlobNode : ObjectNode, ISymbolDefinitionNode

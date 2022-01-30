@@ -4,7 +4,7 @@
 namespace System.Threading.Tasks
 {
     /// <summary>
-    /// Helpers for safely using Task libraries. 
+    /// Helpers for safely using Task libraries.
     /// </summary>
     internal static class TaskHelpers
     {
@@ -33,7 +33,7 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Returns a completed task that has no result. 
+        /// Returns a completed task that has no result.
         /// </summary>
         internal static Task Completed()
         {

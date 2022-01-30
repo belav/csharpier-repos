@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             /*
                 csharp_style_var_elsewhere
                 csharp_style_var_for_built_in_types
-                csharp_style_var_when_type_is_apparent                
-             */
+                csharp_style_var_when_type_is_apparent
+                */
             return new Tuple<DiagnosticAnalyzer, IConfigurationFixProvider>(
                 new CSharpUseExplicitTypeDiagnosticAnalyzer(),
                 new ConfigureCodeStyleOptionCodeFixProvider()

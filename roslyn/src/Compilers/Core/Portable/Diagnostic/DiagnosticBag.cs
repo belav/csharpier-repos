@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis
     /// and also get all the diagnostics out of the bag (the bag implements
     /// IEnumerable&lt;Diagnostics&gt;. Once added, diagnostics cannot be removed, and no ordering
     /// is guaranteed.
-    /// 
+    ///
     /// It is ok to Add diagnostics to the same bag concurrently on multiple threads.
     /// It is NOT ok to Add concurrently with Clear or Free operations.
     /// </summary>
@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// Resolves any lazy diagnostics in the bag.
-        /// 
+        ///
         /// Generally, this should only be called by the creator (modulo pooling) of the bag (i.e. don't use bags to communicate -
         /// if you need more info, pass more info).
         /// </remarks>
@@ -86,7 +86,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// Does not resolve any lazy diagnostics in the bag.
-        /// 
+        ///
         /// Generally, this should only be called by the creator (modulo pooling) of the bag (i.e. don't use bags to communicate -
         /// if you need more info, pass more info).
         /// </remarks>
@@ -285,7 +285,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Get the underlying concurrent storage, creating it on demand if needed.
         /// NOTE: Concurrent Adding to the bag is supported, but concurrent Clearing is not.
-        ///       If one thread adds to the bug while another clears it, the scenario is 
+        ///       If one thread adds to the bug while another clears it, the scenario is
         ///       broken and we cannot do anything about it here.
         /// </summary>
         private ConcurrentQueue<Diagnostic> Bag
@@ -305,7 +305,7 @@ namespace Microsoft.CodeAnalysis
 
         // clears the bag.
         /// NOTE: Concurrent Adding to the bag is supported, but concurrent Clearing is not.
-        ///       If one thread adds to the bug while another clears it, the scenario is 
+        ///       If one thread adds to the bug while another clears it, the scenario is
         ///       broken and we cannot do anything about it here.
         internal void Clear()
         {

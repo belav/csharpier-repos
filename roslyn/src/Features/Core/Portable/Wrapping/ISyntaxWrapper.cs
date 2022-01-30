@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Wrapping
     internal interface ISyntaxWrapper
     {
         /// <summary>
-        /// Returns the <see cref="ICodeActionComputer"/> that produces wrapping code actions for the  
+        /// Returns the <see cref="ICodeActionComputer"/> that produces wrapping code actions for the
         /// node passed in.  Returns <see langword="null"/> if this Wrapper cannot wrap this node.
         /// </summary>
         Task<ICodeActionComputer> TryCreateComputerAsync(

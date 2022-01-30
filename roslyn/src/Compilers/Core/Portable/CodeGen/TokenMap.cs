@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 {
     /// <summary>
     /// Handles storage of items referenced via tokens in metadata (strings or Symbols).
-    /// When items are stored they are uniquely "associated" with fake token, which is basically 
+    /// When items are stored they are uniquely "associated" with fake token, which is basically
     /// a sequential number.
     /// IL gen will use these fake tokens during codegen and later, when actual token values are known
     /// the method bodies will be patched.

@@ -42,24 +42,24 @@ namespace Castle.Services.Logging.Log4netIntegration
         }
 
         /// <summary>
-		///   Exposes the Global Context of the extended logger.
-		/// </summary>
+        ///   Exposes the Global Context of the extended logger.
+        /// </summary>
         public IContextProperties GlobalProperties
         {
             get { return globalContextProperties; }
         }
 
         /// <summary>
-		///   Exposes the Thread Context of the extended logger.
-		/// </summary>
+        ///   Exposes the Thread Context of the extended logger.
+        /// </summary>
         public IContextProperties ThreadProperties
         {
             get { return threadContextProperties; }
         }
 
         /// <summary>
-		///   Exposes the Thread Stack of the extended logger.
-		/// </summary>
+        ///   Exposes the Thread Stack of the extended logger.
+        /// </summary>
         public IContextStacks ThreadStacks
         {
             get { return threadContextStacks; }

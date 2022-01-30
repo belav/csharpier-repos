@@ -6,7 +6,7 @@ using System.CommandLine.Binding;
 namespace System.CommandLine
 {
     /// <summary>
-    /// A symbol defining a named parameter and a value for that parameter. 
+    /// A symbol defining a named parameter and a value for that parameter.
     /// </summary>
     public interface IOption : IIdentifierSymbol, IValueDescriptor
     {

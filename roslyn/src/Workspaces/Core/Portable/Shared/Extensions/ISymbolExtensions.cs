@@ -38,10 +38,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         /// <summary>
-        /// Checks a given symbol for browsability based on its declaration location, attributes 
-        /// explicitly limiting browsability, and whether showing of advanced members is enabled. 
+        /// Checks a given symbol for browsability based on its declaration location, attributes
+        /// explicitly limiting browsability, and whether showing of advanced members is enabled.
         /// The optional editorBrowsableInfo parameters may be used to specify the symbols of the
-        /// constructors of the various browsability limiting attributes because finding these 
+        /// constructors of the various browsability limiting attributes because finding these
         /// repeatedly over a large list of symbols can be slow. If these are not provided,
         /// they will be found in the compilation.
         /// </summary>
@@ -586,18 +586,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 /*
                     public class Test<T> : ICloneable<Test<T>>
                     {
-                        /// <inheritdoc/>
-                        public Test<T> Clone() => new();
+                    /// <inheritdoc/>
+                    public Test<T> Clone() => new();
                     }
-
+                    
                     /// <summary>A type that has clonable instances.</summary>
                     /// <typeparam name="T">The type of instances that can be cloned.</typeparam>
                     public interface ICloneable<T>
                     {
-                        /// <summary>Clones a <typeparamref name="T"/>.</summary>
-                        public T Clone();
+                    /// <summary>Clones a <typeparamref name="T"/>.</summary>
+                    public T Clone();
                     }
-                */
+                    */
                 // Note: there is no way to cref an instantiated generic type. See https://github.com/dotnet/csharplang/issues/401
                 var typeParameterRefs = document
                     .Descendants(DocumentationCommentXmlNames.TypeParameterReferenceElementName)
@@ -833,7 +833,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         /// <summary>
         /// First, remove symbols from the set if they are overridden by other symbols in the set.
-        /// If a symbol is overridden only by symbols outside of the set, then it is not removed. 
+        /// If a symbol is overridden only by symbols outside of the set, then it is not removed.
         /// This is useful for filtering out symbols that cannot be accessed in a given context due
         /// to the existence of overriding members. Second, remove remaining symbols that are
         /// unsupported (e.g. pointer types in VB) or not editor browsable based on the EditorBrowsable

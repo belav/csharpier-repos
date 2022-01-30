@@ -13,11 +13,11 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
 {
     /// <summary>
     /// Looks for code of the form:
-    /// 
+    ///
     ///     <c>x is { a: { b: ... } }</c>
-    ///     
+    ///
     /// and converts it to:
-    /// 
+    ///
     ///     <c>x is { a.b: ... }</c>
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]

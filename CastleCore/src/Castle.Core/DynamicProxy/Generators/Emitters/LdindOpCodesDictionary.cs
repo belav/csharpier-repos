@@ -19,9 +19,9 @@ namespace Castle.DynamicProxy.Generators.Emitters
     using System.Reflection.Emit;
 
     /// <summary>
-	///   Provides appropriate Ldind.X opcode for 
-	///   the type of primitive value to be loaded indirectly.
-	/// </summary>
+    ///   Provides appropriate Ldind.X opcode for
+    ///   the type of primitive value to be loaded indirectly.
+    /// </summary>
     internal sealed class LdindOpCodesDictionary : Dictionary<Type, OpCode>
     {
         private static readonly LdindOpCodesDictionary dict = new LdindOpCodesDictionary();

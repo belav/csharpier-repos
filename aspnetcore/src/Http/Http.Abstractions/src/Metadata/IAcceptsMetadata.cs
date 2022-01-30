@@ -18,7 +18,7 @@ public interface IAcceptsMetadata
     IReadOnlyList<string> ContentTypes { get; }
 
     /// <summary>
-    /// Gets the type being read from the request. 
+    /// Gets the type being read from the request.
     /// </summary>
     Type? RequestType { get; }
 

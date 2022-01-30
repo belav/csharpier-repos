@@ -9,14 +9,14 @@ namespace Microsoft.CodeAnalysis.Precedence
     internal interface IPrecedenceService
     {
         /// <summary>
-        /// Returns the precedence of the given expression, mapped down to one of the 
+        /// Returns the precedence of the given expression, mapped down to one of the
         /// <see cref="PrecedenceKind"/> values.  The mapping is language specific.
         /// </summary>
         PrecedenceKind GetPrecedenceKind(int operatorPrecedence);
 
         /// <summary>
         /// Returns the precedence of this expression in a scale specific to a particular
-        /// language.  These values cannot be compared across languages, but relates the 
+        /// language.  These values cannot be compared across languages, but relates the
         /// precedence of expressions in the same language.  A smaller value means lower
         /// precedence.
         /// </summary>

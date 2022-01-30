@@ -17,54 +17,54 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// <para>
-    /// A <see cref="SymbolKey"/> is a lightweight identifier for a symbol that can be used to 
-    /// resolve the "same" symbol across compilations.  Different symbols have different concepts 
+    /// A <see cref="SymbolKey"/> is a lightweight identifier for a symbol that can be used to
+    /// resolve the "same" symbol across compilations.  Different symbols have different concepts
     /// of "same-ness". Same-ness is recursively defined as follows:
     /// <list type="number">
-    ///   <item>Two <see cref="IArrayTypeSymbol"/>s are the "same" if they have 
-    ///         the "same" <see cref="IArrayTypeSymbol.ElementType"/> and 
+    ///   <item>Two <see cref="IArrayTypeSymbol"/>s are the "same" if they have
+    ///         the "same" <see cref="IArrayTypeSymbol.ElementType"/> and
     ///         equal <see cref="IArrayTypeSymbol.Rank"/>.</item>
-    ///   <item>Two <see cref="IAssemblySymbol"/>s are the "same" if 
+    ///   <item>Two <see cref="IAssemblySymbol"/>s are the "same" if
     ///         they have equal <see cref="IAssemblySymbol.Identity"/>.Name</item>
-    ///   <item>Two <see cref="IEventSymbol"/>s are the "same" if they have 
-    ///         the "same" <see cref="ISymbol.ContainingType"/> and 
+    ///   <item>Two <see cref="IEventSymbol"/>s are the "same" if they have
+    ///         the "same" <see cref="ISymbol.ContainingType"/> and
     ///         equal <see cref="ISymbol.MetadataName"/>.</item>
-    ///   <item>Two <see cref="IMethodSymbol"/>s are the "same" if they have 
+    ///   <item>Two <see cref="IMethodSymbol"/>s are the "same" if they have
     ///         the "same" <see cref="ISymbol.ContainingType"/>,
     ///         equal <see cref="ISymbol.MetadataName"/>,
-    ///         equal <see cref="IMethodSymbol.Arity"/>, 
+    ///         equal <see cref="IMethodSymbol.Arity"/>,
     ///         the "same" <see cref="IMethodSymbol.TypeArguments"/>, and have
-    ///         the "same" <see cref="IParameterSymbol.Type"/>s and  
+    ///         the "same" <see cref="IParameterSymbol.Type"/>s and
     ///         equal <see cref="IParameterSymbol.RefKind"/>s.</item>
     ///   <item>Two <see cref="IModuleSymbol"/>s are the "same" if they have
     ///         the "same" <see cref="ISymbol.ContainingAssembly"/>.
     ///         <see cref="ISymbol.MetadataName"/> is not used because module identity is not important in practice.</item>
-    ///   <item>Two <see cref="INamedTypeSymbol"/>s are the "same" if they have 
+    ///   <item>Two <see cref="INamedTypeSymbol"/>s are the "same" if they have
     ///         the "same" <see cref="ISymbol.ContainingSymbol"/>,
     ///         equal <see cref="ISymbol.MetadataName"/>,
-    ///         equal <see cref="INamedTypeSymbol.Arity"/> and 
+    ///         equal <see cref="INamedTypeSymbol.Arity"/> and
     ///         the "same" <see cref="INamedTypeSymbol.TypeArguments"/>.</item>
-    ///   <item>Two <see cref="INamespaceSymbol"/>s are the "same" if they have 
+    ///   <item>Two <see cref="INamespaceSymbol"/>s are the "same" if they have
     ///         the "same" <see cref="ISymbol.ContainingSymbol"/> and
     ///         equal <see cref="ISymbol.MetadataName"/>.
     ///     If the <see cref="INamespaceSymbol"/> is the global namespace for a
     ///     compilation, then it will only match another
     ///     global namespace of another compilation.</item>
     ///   <item>Two <see cref="IParameterSymbol"/>s are the "same" if they have
-    ///         the "same" <see cref="ISymbol.ContainingSymbol"/> and 
+    ///         the "same" <see cref="ISymbol.ContainingSymbol"/> and
     ///         equal <see cref="ISymbol.MetadataName"/>.</item>
-    ///   <item>Two <see cref="IPointerTypeSymbol"/>s are the "same" if they have 
+    ///   <item>Two <see cref="IPointerTypeSymbol"/>s are the "same" if they have
     ///         the "same" <see cref="IPointerTypeSymbol.PointedAtType"/>.</item>
-    ///   <item>Two <see cref="IPropertySymbol"/>s are the "same" if they have 
-    ///         the "same" the "same" <see cref="ISymbol.ContainingType"/>, 
-    ///         the "same" <see cref="ISymbol.MetadataName"/>, and have 
-    ///         the "same" <see cref="IParameterSymbol.Type"/>s and  
+    ///   <item>Two <see cref="IPropertySymbol"/>s are the "same" if they have
+    ///         the "same" the "same" <see cref="ISymbol.ContainingType"/>,
+    ///         the "same" <see cref="ISymbol.MetadataName"/>, and have
+    ///         the "same" <see cref="IParameterSymbol.Type"/>s and
     ///         the "same" <see cref="IParameterSymbol.RefKind"/>s.</item>
     ///   <item>Two <see cref="ITypeParameterSymbol"/> are the "same" if they have
-    ///         the "same" <see cref="ISymbol.ContainingSymbol"/> and 
+    ///         the "same" <see cref="ISymbol.ContainingSymbol"/> and
     ///         the "same" <see cref="ISymbol.MetadataName"/>.</item>
     ///   <item>Two <see cref="IFieldSymbol"/>s are the "same" if they have
-    ///         the "same" <see cref="ISymbol.ContainingSymbol"/> and 
+    ///         the "same" <see cref="ISymbol.ContainingSymbol"/> and
     ///         the "same" <see cref="ISymbol.MetadataName"/>.</item>
     /// </list>
     /// </para>
@@ -106,7 +106,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Current format version.  Any time we change anything about our format, we should
         /// change this.  This will help us detect and reject any cases where a person serializes
-        /// out a SymbolKey from a previous version of Roslyn and then attempt to use it in a 
+        /// out a SymbolKey from a previous version of Roslyn and then attempt to use it in a
         /// newer version where the encoding has changed.
         /// </summary>
         internal const int FormatVersion = 1;
@@ -116,7 +116,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Constructs a new <see cref="SymbolKey"/> using the result of a previous call to
-        /// <see cref="ToString()"/> from this same session.  Instantiating with a string 
+        /// <see cref="ToString()"/> from this same session.  Instantiating with a string
         /// from any other source is not supported.
         /// </summary>
         public SymbolKey(string data) => _symbolKeyData = data ?? throw new ArgumentNullException();
@@ -133,12 +133,12 @@ namespace Microsoft.CodeAnalysis
         /// Returns an <see cref="IEqualityComparer{T}"/> that determines if two <see cref="SymbolKey"/>s
         /// represent the same effective symbol.
         /// </summary>
-        /// <param name="ignoreCase">Whether or not casing should be considered when comparing keys. 
-        /// For example, with <c>ignoreCase=true</c> then <c>X.SomeClass</c> and <c>X.Someclass</c> would be 
+        /// <param name="ignoreCase">Whether or not casing should be considered when comparing keys.
+        /// For example, with <c>ignoreCase=true</c> then <c>X.SomeClass</c> and <c>X.Someclass</c> would be
         /// considered the same effective symbol</param>
         /// <param name="ignoreAssemblyKeys">Whether or not the originating assembly of referenced
         /// symbols should be compared when determining if two symbols are effectively the same.
-        /// For example, with <c>ignoreAssemblyKeys=true</c> then an <c>X.SomeClass</c> from assembly 
+        /// For example, with <c>ignoreAssemblyKeys=true</c> then an <c>X.SomeClass</c> from assembly
         /// <c>A</c> and <c>X.SomeClass</c> from assembly <c>B</c> will be considered the same
         /// effective symbol.
         /// </param>
@@ -244,7 +244,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Tries to resolve this <see cref="SymbolKey"/> in the given 
+        /// Tries to resolve this <see cref="SymbolKey"/> in the given
         /// <paramref name="compilation"/> to a matching symbol.
         /// </summary>
         public SymbolKeyResolution Resolve(
@@ -260,8 +260,8 @@ namespace Microsoft.CodeAnalysis
         /// Returns this <see cref="SymbolKey"/> encoded as a string.  This can be persisted
         /// and used later with <see cref="SymbolKey(string)"/> to then try to resolve back
         /// to the corresponding <see cref="ISymbol"/> in a future <see cref="Compilation"/>.
-        /// 
-        /// This string form is not guaranteed to be reusable across all future versions of 
+        ///
+        /// This string form is not guaranteed to be reusable across all future versions of
         /// Roslyn.  As such it should only be used for caching data, with the knowledge that
         /// the data may need to be recomputed if the cached data can no longer be used.
         /// </summary>

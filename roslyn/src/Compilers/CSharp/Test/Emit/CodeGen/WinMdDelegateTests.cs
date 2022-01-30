@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         private delegate void VerifyType(bool isWinMd, params string[] expectedMembers);
 
         /// <summary>
-        /// When the output type is .winmdobj, delegate types shouldn't output Begin/End invoke 
+        /// When the output type is .winmdobj, delegate types shouldn't output Begin/End invoke
         /// members.
         /// </summary>
         [

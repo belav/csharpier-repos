@@ -368,13 +368,13 @@ namespace System.DirectoryServices.AccountManagement
     /******
             class SidListComparer : IComparer<SidListEntry>
             {
-              public int Compare(SidListEntry entry1, SidListEntry entry2)
-              {
-                 return ( string.Compare( entry1.sidIssuerName, entry2.sidIssuerName, true, CultureInfo.InvariantCulture));
-              }
-
+            public int Compare(SidListEntry entry1, SidListEntry entry2)
+            {
+            return ( string.Compare( entry1.sidIssuerName, entry2.sidIssuerName, true, CultureInfo.InvariantCulture));
             }
-    ********/
+            
+            }
+            ********/
     internal sealed class SidListEntry : IDisposable
     {
         public IntPtr pSid = IntPtr.Zero;

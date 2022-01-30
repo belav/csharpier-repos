@@ -22,7 +22,7 @@ using Microsoft.VisualStudio.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 {
     /// <summary>
-    /// This tagger assumes content of the buffer never get changed. 
+    /// This tagger assumes content of the buffer never get changed.
     /// and the buffer provides static classification information on the buffer content
     /// through <see cref="PredefinedPreviewTaggerKeys.StaticClassificationSpansKey" /> in the buffer property bag
     /// </summary>

@@ -54,7 +54,7 @@ namespace Test
 }
 /*
 ---------------------------
-Assert Failure (PID 1024, Thread 1564/61c)        
+Assert Failure (PID 1024, Thread 1564/61c)
 ---------------------------
 ((emitThisGCrefRegs & regMask) && (ins == INS_add)) || ((emitThisByrefRegs & regMask) && (ins == INS_add || ins == INS_sub))
 
@@ -69,6 +69,6 @@ Image:
 D:\bugs\bug.exe
 
 ---------------------------
-Abort   Retry   Ignore   
+Abort   Retry   Ignore
 ---------------------------
 */

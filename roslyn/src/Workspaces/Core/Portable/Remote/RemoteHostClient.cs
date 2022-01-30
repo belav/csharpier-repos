@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     /// <summary>
     /// This represents client in client/server model.
-    /// 
+    ///
     /// user can create a connection to communicate with the server (remote host) through this client
     /// </summary>
     internal abstract class RemoteHostClient : IDisposable

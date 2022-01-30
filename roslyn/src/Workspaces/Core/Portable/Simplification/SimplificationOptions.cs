@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Simplification
             );
 
         /// <summary>
-        /// This option influences the name reduction of members of a module in VB. If set to true, the 
+        /// This option influences the name reduction of members of a module in VB. If set to true, the
         /// name reducer will e.g. reduce Namespace.Module.Member to Namespace.Member.
         /// </summary>
         [Obsolete("This option is no longer used")]

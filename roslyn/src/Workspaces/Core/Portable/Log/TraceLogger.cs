@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Options;
 namespace Microsoft.CodeAnalysis.Internal.Log
 {
     /// <summary>
-    /// Implementation of <see cref="ILogger"/> that produce timing debug output. 
+    /// Implementation of <see cref="ILogger"/> that produce timing debug output.
     /// </summary>
     internal sealed class TraceLogger : ILogger
     {

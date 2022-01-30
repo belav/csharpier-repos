@@ -118,17 +118,17 @@ namespace Moq
         }
 
         /// <summary>
-		///   Gets the default value for the specified type. This is the Reflection counterpart of C#'s <see langword="default"/> operator.
-		/// </summary>
+        ///   Gets the default value for the specified type. This is the Reflection counterpart of C#'s <see langword="default"/> operator.
+        /// </summary>
         public static object GetDefaultValue(this Type type)
         {
             return type.IsValueType ? Activator.CreateInstance(type) : null;
         }
 
         /// <summary>
-		///   Gets the least-derived <see cref="MethodInfo"/> in the given type that provides
-		///   the implementation for the given <paramref name="method"/>.
-		/// </summary>
+        ///   Gets the least-derived <see cref="MethodInfo"/> in the given type that provides
+        ///   the implementation for the given <paramref name="method"/>.
+        /// </summary>
         public static MethodInfo GetImplementingMethod(this MethodInfo method, Type proxyType)
         {
             Debug.Assert(method != null);
@@ -233,8 +233,8 @@ namespace Moq
         }
 
         /// <summary>
-		///   Gets whether the given <paramref name="type"/> is a delegate type.
-		/// </summary>
+        ///   Gets whether the given <paramref name="type"/> is a delegate type.
+        /// </summary>
         public static bool IsDelegateType(this Type type)
         {
             Debug.Assert(type != null);
@@ -431,11 +431,11 @@ namespace Moq
         }
 
         /// <summary>
-		///   Visits all constituent parts of <paramref name="type"/>, replacing all type matchers
-		///   that match the type argument at the corresponding position in <paramref name="other"/>.
-		/// </summary>
-		/// <param name="type">The type to be matched. May be, or contain, type matchers.</param>
-		/// <param name="other">The type argument to match against <paramref name="type"/>.</param>
+        ///   Visits all constituent parts of <paramref name="type"/>, replacing all type matchers
+        ///   that match the type argument at the corresponding position in <paramref name="other"/>.
+        /// </summary>
+        /// <param name="type">The type to be matched. May be, or contain, type matchers.</param>
+        /// <param name="other">The type argument to match against <paramref name="type"/>.</param>
         public static Type SubstituteTypeMatchers(this Type type, Type other)
         {
             // If a type matcher `T` successfully matches its corresponding type `O` from `other`, `T` in `type`

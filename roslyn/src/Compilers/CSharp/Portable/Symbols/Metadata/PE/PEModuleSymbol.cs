@@ -55,7 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private const int DefaultTypeMapCapacity = 31;
 
         /// <summary>
-        /// This is a map from TypeDef handle to the target <see cref="TypeSymbol"/>. 
+        /// This is a map from TypeDef handle to the target <see cref="TypeSymbol"/>.
         /// It is used by <see cref="MetadataDecoder"/> to speed up type reference resolution
         /// for metadata coming from this module. The map is lazily populated
         /// as we load types from the module.
@@ -69,7 +69,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         );
 
         /// <summary>
-        /// This is a map from TypeRef row id to the target <see cref="TypeSymbol"/>. 
+        /// This is a map from TypeRef row id to the target <see cref="TypeSymbol"/>.
         /// It is used by <see cref="MetadataDecoder"/> to speed up type reference resolution
         /// for metadata coming from this module. The map is lazily populated
         /// by <see cref="MetadataDecoder"/> as we resolve TypeRefs from the module.

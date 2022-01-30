@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <summary>
-            /// Labels reachable from within this frame without invoking its finally. 
+            /// Labels reachable from within this frame without invoking its finally.
             /// null if there are none such labels.
             /// </summary>
             internal HashSet<LabelSymbol> Labels(BoundTryStatement statement)

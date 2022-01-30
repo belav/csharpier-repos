@@ -146,8 +146,8 @@ namespace System
                 // Ignore the target as it will be the delegate instance, though it may be a different one
                 /*
                 if (_methodPtr != d._methodPtr)
-                    return false;
-                    */
+                return false;
+                */
 
                 if (_methodPtrAux == d._methodPtrAux)
                     return true;
@@ -175,9 +175,9 @@ namespace System
             // different hashcode which is not true.
             /*
             if (_methodPtrAux == IntPtr.Zero)
-                return unchecked((int)((long)this._methodPtr));
+            return unchecked((int)((long)this._methodPtr));
             else
-                return unchecked((int)((long)this._methodPtrAux));
+            return unchecked((int)((long)this._methodPtrAux));
             */
             if (_methodPtrAux == IntPtr.Zero)
                 return (_target != null ? RuntimeHelpers.GetHashCode(_target) * 33 : 0)

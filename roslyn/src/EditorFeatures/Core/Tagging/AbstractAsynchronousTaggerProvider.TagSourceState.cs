@@ -52,7 +52,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 /// <summary>
                 /// Gets the appropriate cancellation token for this current piece of work.  This will cancel the last
-                /// piece of computation work and enqueue the next.  That behavior doesn't apply for the very first 
+                /// piece of computation work and enqueue the next.  That behavior doesn't apply for the very first
                 /// (i.e. <paramref name="initialTags"/>) tag request we make.  We don't want that to be cancellable as
                 /// we want that result to be shown as soon as possible.
                 /// </summary>

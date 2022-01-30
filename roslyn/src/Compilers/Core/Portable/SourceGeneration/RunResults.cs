@@ -119,7 +119,7 @@ namespace Microsoft.CodeAnalysis
         public ImmutableArray<GeneratedSourceResult> GeneratedSources { get; }
 
         /// <summary>
-        /// A collection of <see cref="Diagnostic"/>s reported by <see cref="Generator"/> 
+        /// A collection of <see cref="Diagnostic"/>s reported by <see cref="Generator"/>
         /// </summary>
         /// <remarks>
         /// When generation fails due to an <see cref="Exception"/> being thrown, a single diagnostic is added

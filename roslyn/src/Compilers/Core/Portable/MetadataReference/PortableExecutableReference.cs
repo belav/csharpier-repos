@@ -69,7 +69,7 @@ namespace Microsoft.CodeAnalysis
         /// Create documentation provider for the reference.
         /// </summary>
         /// <remarks>
-        /// Called when the compiler needs to read the documentation for the reference. 
+        /// Called when the compiler needs to read the documentation for the reference.
         /// This method can be called multiple times from different threads.  The result of one of the calls
         /// is cached on the reference object.
         /// </remarks>
@@ -133,7 +133,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns an instance of the reference with specified properties.
         /// </summary>
         /// <param name="properties">The new properties for the reference.</param>
-        /// <exception cref="NotSupportedException">Specified values not supported.</exception> 
+        /// <exception cref="NotSupportedException">Specified values not supported.</exception>
         /// <remarks>Only invoked if the properties changed.</remarks>
         protected abstract PortableExecutableReference WithPropertiesImpl(
             MetadataReferenceProperties properties
@@ -147,18 +147,18 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="FileNotFoundException">The metadata image is stored in a file that can't be found.</exception>
         /// <remarks>
         /// Called when the <see cref="Compilation"/> needs to read the reference metadata.
-        /// 
+        ///
         /// The listed exceptions are caught and converted to compilation diagnostics.
         /// Any other exception is considered an unexpected error in the implementation and is not caught.
         ///
         /// <see cref="Metadata"/> objects may cache information decoded from the PE image.
         /// Reusing <see cref="Metadata"/> instances across metadata references will result in better performance.
-        /// 
+        ///
         /// The calling <see cref="Compilation"/> doesn't take ownership of the <see cref="Metadata"/> objects returned by this method.
         /// The implementation needs to retrieve the object from a provider that manages their lifetime (such as metadata cache).
         /// The <see cref="Metadata"/> object is kept alive by the <see cref="Compilation"/> that called <see cref="GetMetadataNoCopy"/>
-        /// and by all compilations created from it via calls to With- factory methods on <see cref="Compilation"/>, 
-        /// other than <see cref="Compilation.WithReferences(MetadataReference[])"/> overloads. A compilation created using 
+        /// and by all compilations created from it via calls to With- factory methods on <see cref="Compilation"/>,
+        /// other than <see cref="Compilation.WithReferences(MetadataReference[])"/> overloads. A compilation created using
         /// <see cref="Compilation.WithReferences(MetadataReference[])"/> will call to <see cref="GetMetadataNoCopy"/> again.
         /// </remarks>
         protected abstract Metadata GetMetadataImpl();

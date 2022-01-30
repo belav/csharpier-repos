@@ -19,7 +19,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.Completion
 {
     /// <summary>
-    /// A per language service for constructing context dependent list of completions that 
+    /// A per language service for constructing context dependent list of completions that
     /// can be presented to a user during typing in an editor.
     /// </summary>
     public abstract class CompletionService : ILanguageService
@@ -144,7 +144,7 @@ namespace Microsoft.CodeAnalysis.Completion
         );
 
         /// <summary>
-        /// Gets the completions available at the caret position, with additional info indicates 
+        /// Gets the completions available at the caret position, with additional info indicates
         /// whether expander items are available.
         /// </summary>
         /// <remarks>
@@ -215,8 +215,8 @@ namespace Microsoft.CodeAnalysis.Completion
         /// </summary>
         /// <param name="document">The document that completion is occurring within.</param>
         /// <param name="item">The item to get the change for.</param>
-        /// <param name="commitCharacter">The typed character that caused the item to be committed. 
-        /// This character may be used as part of the change. 
+        /// <param name="commitCharacter">The typed character that caused the item to be committed.
+        /// This character may be used as part of the change.
         /// This value is null when the commit was caused by the [TAB] or [ENTER] keys.</param>
         /// <param name="cancellationToken"></param>
         public virtual Task<CompletionChange> GetChangeAsync(
@@ -235,7 +235,7 @@ namespace Microsoft.CodeAnalysis.Completion
         /// Given a list of completion items that match the current code typed by the user,
         /// returns the item that is considered the best match, and whether or not that
         /// item should be selected or not.
-        /// 
+        ///
         /// itemToFilterText provides the values that each individual completion item should
         /// be filtered against.
         /// </summary>
@@ -287,7 +287,7 @@ namespace Microsoft.CodeAnalysis.Completion
         }
 
         /// <summary>
-        /// Determine among the provided items the best match w.r.t. the given filter text, 
+        /// Determine among the provided items the best match w.r.t. the given filter text,
         /// those returned would be considered equally good candidates for selection by controller.
         /// </summary>
         internal static ImmutableArray<CompletionItem> FilterItems(

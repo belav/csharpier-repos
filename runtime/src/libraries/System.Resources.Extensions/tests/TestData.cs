@@ -334,7 +334,7 @@ namespace System.Resources.Extensions.Tests
         }
 
         /// <summary>
-        /// An approximation of ResXSerializationBinder's behavior (without retargeting) 
+        /// An approximation of ResXSerializationBinder's behavior (without retargeting)
         /// </summary>
         internal class TypeNameManglingSerializationBinder : SerializationBinder
         {

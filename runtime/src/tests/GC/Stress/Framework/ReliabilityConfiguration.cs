@@ -56,7 +56,7 @@ public enum LoggingLevels
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
 /// ReliabilityConfig is responsible for parsing the available XML configuration files (both the primary config file & the concurrent
-/// test config file.  We do not parse single test config files).  
+/// test config file.  We do not parse single test config files).
 /// </summary>
 public class ReliabilityConfig : IEnumerable, IEnumerator
 {
@@ -1469,7 +1469,7 @@ public class ReliabilityConfig : IEnumerable, IEnumerator
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// Filename processing helper functions.
     /// <summary>
-    /// given a base path & a potentially relative path we'll convert the potentially 
+    /// given a base path & a potentially relative path we'll convert the potentially
     /// </summary>
     public static string ConvertPotentiallyRelativeFilenameToFullPath(string basepath, string path)
     {

@@ -146,16 +146,16 @@ namespace Microsoft.CodeAnalysis.Emit
         }
 
         /// <summary>
-        /// Merges synthesized members generated during lowering of the current compilation with aggregate synthesized members 
+        /// Merges synthesized members generated during lowering of the current compilation with aggregate synthesized members
         /// from all previous source generations (gen >= 1).
         /// </summary>
         /// <remarks>
         /// Suppose {S -> {A, B, D}, T -> {E, F}} are all synthesized members in previous generations,
         /// and {S' -> {A', B', C}, U -> {G, H}} members are generated in the current compilation.
-        /// 
-        /// Where X matches X' via this matcher, i.e. X' is from the new compilation and 
+        ///
+        /// Where X matches X' via this matcher, i.e. X' is from the new compilation and
         /// represents the same metadata entity as X in the previous compilation.
-        /// 
+        ///
         /// Then the resulting collection shall have the following entries:
         /// {S' -> {A', B', C, D}, U -> {G, H}, T -> {E, F}}
         /// </remarks>

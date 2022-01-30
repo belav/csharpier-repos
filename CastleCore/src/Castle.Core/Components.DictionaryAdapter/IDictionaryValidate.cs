@@ -18,8 +18,8 @@ namespace Castle.Components.DictionaryAdapter
     using System.ComponentModel;
 
     /// <summary>
-	/// Contract for validating Dictionary adapter.
-	/// </summary>
+    /// Contract for validating Dictionary adapter.
+    /// </summary>
     public interface IDictionaryValidate : IDataErrorInfo
     {
         bool CanValidate { get; set; }

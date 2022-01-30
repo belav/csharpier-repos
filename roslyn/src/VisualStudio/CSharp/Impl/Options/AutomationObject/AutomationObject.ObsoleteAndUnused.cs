@@ -13,7 +13,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         /// Unused.  But kept around for back compat.  Note this option is not about
         /// turning warning into errors.  It's about an aspect of 'remove unused using'
         /// functionality we don't support anymore.  Namely whether or not 'remove unused
-        /// using' should warn if you have any build errors as that might mean we 
+        /// using' should warn if you have any build errors as that might mean we
         /// remove some usings inappropriately.
         /// </summary>
         public int WarnOnBuildErrors

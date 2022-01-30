@@ -15,9 +15,9 @@ namespace Microsoft.CodeAnalysis.LanguageServices
     /// location in code.  This is useful for features that are starting from code that doesn't bind,
     /// but would like to know type that code should be in the location that it can be found in.  For
     /// example:
-    /// 
-    ///   int i = Here(); 
-    /// 
+    ///
+    ///   int i = Here();
+    ///
     /// If 'Here()' doesn't bind, then this class can be used to say that it is currently in a
     /// location whose type has been inferred to be 'int' from the surrounding context.  Note: this
     /// is simply a best effort guess.  'byte/short/etc.' as well as any user convertible types to

@@ -371,8 +371,8 @@ namespace System.Data
             /*
             special case for OR and AND operators: we don't want to evaluate
             both right and left operands, because we can shortcut :
-                for OR  operator If one of the operands is true the result is true
-                for AND operator If one of rhe operands is flase the result is false
+            for OR  operator If one of the operands is true the result is true
+            for AND operator If one of rhe operands is flase the result is false
             CONSIDER : in the shortcut case do we want to type-check the other operand?
             */
 
@@ -1395,7 +1395,7 @@ namespace System.Data
                         /*
                         special case evaluating of the AND operator: we don't want to evaluate
                         both right and left operands, because we can shortcut :
-                            If one of the operands is flase the result is false
+                        If one of the operands is flase the result is false
                         CONSIDER : in the shortcut case do we want to type-check the other operand?
                         */
                         vLeft = BinaryNode.Eval(left, row, version, recordNos);
@@ -1455,7 +1455,7 @@ namespace System.Data
                         /*
                         special case evaluating the OR operator: we don't want to evaluate
                         both right and left operands, because we can shortcut :
-                            If one of the operands is true the result is true
+                        If one of the operands is true the result is true
                         CONSIDER : in the shortcut case do we want to type-check the other operand?
                         */
 
@@ -1494,35 +1494,35 @@ namespace System.Data
                         break;
 
                     /*  for M3, use original code , in below,  and make sure to have two different code path; increases perf
-
-                                        vLeft = BinaryNode.Eval(left, row, version, recordNos);
-                                        if (vLeft != DBNull.Value) {
-                                            if (!(vLeft is bool)) {
-                                                vRight = BinaryNode.Eval(right, row, version, recordNos);
-                                                typeMismatch = true;
-                                                break;
-                                            }
-
-                                            if ((bool)vLeft == true) {
-                                                value = true;
-                                                break;
-                                            }
-                                        }
-
-                                        vRight = BinaryNode.Eval(right, row, version, recordNos);
-                                        if (vRight == DBNull.Value)
-                                            return vLeft;
-
-                                        if (vLeft == DBNull.Value)
-                                            return vRight;
-
-                                        if (!(vRight is bool)) {
-                                            typeMismatch = true;
-                                            break;
-                                        }
-
-                                        value = (bool)vRight;
-                                        break;
+                    
+                    vLeft = BinaryNode.Eval(left, row, version, recordNos);
+                    if (vLeft != DBNull.Value) {
+                    if (!(vLeft is bool)) {
+                    vRight = BinaryNode.Eval(right, row, version, recordNos);
+                    typeMismatch = true;
+                    break;
+                    }
+                    
+                    if ((bool)vLeft == true) {
+                    value = true;
+                    break;
+                    }
+                    }
+                    
+                    vRight = BinaryNode.Eval(right, row, version, recordNos);
+                    if (vRight == DBNull.Value)
+                    return vLeft;
+                    
+                    if (vLeft == DBNull.Value)
+                    return vRight;
+                    
+                    if (!(vRight is bool)) {
+                    typeMismatch = true;
+                    break;
+                    }
+                    
+                    value = (bool)vRight;
+                    break;
                     */
 
                     case Operators.Modulo:

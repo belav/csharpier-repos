@@ -35,7 +35,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private int _pendingByte;
 
         /// <summary>
-        /// Number of bits in pending byte. Note that the trailing zero bits are not written out, 
+        /// Number of bits in pending byte. Note that the trailing zero bits are not written out,
         /// so this can be more than 7.
         /// </summary>
         private int _bits;

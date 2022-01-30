@@ -127,20 +127,20 @@ namespace Moq
         }
 
         /// <summary>
-		///   Verifies this setup and those of its inner mock (if present and known).
-		/// </summary>
-		/// <param name="recursive">
-		///   Specifies whether recursive verification should be performed.
-		/// </param>
-		/// <param name="predicate">
-		///   Specifies which setups should be verified.
-		/// </param>
-		/// <param name="verifiedMocks">
-		///   The set of mocks that have already been verified.
-		/// </param>
-		/// <exception cref="MockException">
-		///   This setup or any of its inner mock (if present and known) failed verification.
-		/// </exception>
+        ///   Verifies this setup and those of its inner mock (if present and known).
+        /// </summary>
+        /// <param name="recursive">
+        ///   Specifies whether recursive verification should be performed.
+        /// </param>
+        /// <param name="predicate">
+        ///   Specifies which setups should be verified.
+        /// </param>
+        /// <param name="verifiedMocks">
+        ///   The set of mocks that have already been verified.
+        /// </param>
+        /// <exception cref="MockException">
+        ///   This setup or any of its inner mock (if present and known) failed verification.
+        /// </exception>
         internal void Verify(
             bool recursive,
             Func<ISetup, bool> predicate,

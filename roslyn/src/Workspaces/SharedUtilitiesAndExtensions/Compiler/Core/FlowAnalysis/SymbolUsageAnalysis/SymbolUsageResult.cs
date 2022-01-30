@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
         /// </code>
         /// This map will have two entries for 'x':
         ///     1. Key = (symbol: x, write: 'int x = 0')
-        ///        Value = 'false', because value assigned to 'x' here **is never** read. 
+        ///        Value = 'false', because value assigned to 'x' here **is never** read.
         ///     2. Key = (symbol: x, write: 'x = 1')
         ///        Value = 'true', because value assigned to 'x' here **may be** read on
         ///        some control flow path.

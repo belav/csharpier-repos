@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
     /// <summary>
     /// This class provides the intermediate data passed between CodeActionsHandler, CodeActionResolveHandler,
     /// and RunCodeActionsHandler. The class provides enough information for each handler to identify the code
-    /// action that it is dealing with. The information is passed along via the Data property in LSP.VSCodeAction. 
+    /// action that it is dealing with. The information is passed along via the Data property in LSP.VSCodeAction.
     /// </summary>
     internal class CodeActionResolveData
     {

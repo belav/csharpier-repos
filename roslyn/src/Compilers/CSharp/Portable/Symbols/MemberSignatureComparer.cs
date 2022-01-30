@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </para>
     /// <para>
     /// C# 4.0 §3.6: For the purposes of signatures, the types object and dynamic are considered the
-    /// same. 
+    /// same.
     /// </para>
     /// <para>
     /// C# 4.0 §3.6: We implement the rules for ref/out by mapping both to ref. The caller (i.e.
@@ -215,7 +215,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
         /// <summary>
-        /// Same as <see cref="CSharpOverrideComparer"/> except that it pays attention to custom modifiers and return type.  
+        /// Same as <see cref="CSharpOverrideComparer"/> except that it pays attention to custom modifiers and return type.
         /// Normally, the return type isn't considered during overriding, but this comparer is actually used to find
         /// exact matches (i.e. before tie-breaking takes place amongst close matches).
         /// </summary>
@@ -250,7 +250,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
         /// <summary>
-        /// This instance is intended to reflect the definition of signature equality used by the runtime 
+        /// This instance is intended to reflect the definition of signature equality used by the runtime
         /// (<a href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-335.pdf">ECMA-335</a>, Partition I, §8.6.1.6 Signature Matching).
         /// It considers return type, name, parameters, calling convention, and custom modifiers, but ignores
         /// the difference between <see cref="RefKind.Out"/> and <see cref="RefKind.Ref"/>.

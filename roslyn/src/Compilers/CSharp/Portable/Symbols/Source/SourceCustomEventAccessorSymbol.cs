@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// This class represents an event accessor declared in source 
+    /// This class represents an event accessor declared in source
     /// (i.e. not one synthesized for a field-like event).
     /// </summary>
     /// <remarks>

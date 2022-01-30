@@ -178,13 +178,13 @@ namespace System.Reflection.PortableExecutable.Tests
         [Fact]
         public void OpenNativeImage()
         {
-            using (var reader = new PEReader(File.OpenRead(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "kernel32.dll"))))
-            {
-                Assert.False(reader.HasMetadata);
-                Assert.True(reader.PEHeaders.IsDll);
-                Assert.False(reader.PEHeaders.IsExe);
-                Assert.Throws<InvalidOperationException>(() => reader.GetMetadataReader());
-            }
+        using (var reader = new PEReader(File.OpenRead(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "kernel32.dll"))))
+        {
+        Assert.False(reader.HasMetadata);
+        Assert.True(reader.PEHeaders.IsDll);
+        Assert.False(reader.PEHeaders.IsExe);
+        Assert.Throws<InvalidOperationException>(() => reader.GetMetadataReader());
+        }
         }
         */
 

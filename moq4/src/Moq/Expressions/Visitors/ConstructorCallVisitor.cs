@@ -14,10 +14,10 @@ namespace Moq.Expressions.Visitors
     internal class ConstructorCallVisitor : ExpressionVisitor
     {
         /// <summary>
-		/// Extracts the arguments from a lambda expression that calls a constructor.
-		/// </summary>
-		/// <param name="newExpression">The constructor expression.</param>
-		/// <returns>Extracted argument values.</returns>
+        /// Extracts the arguments from a lambda expression that calls a constructor.
+        /// </summary>
+        /// <param name="newExpression">The constructor expression.</param>
+        /// <returns>Extracted argument values.</returns>
         public static object[] ExtractArgumentValues(LambdaExpression newExpression)
         {
             if (newExpression is null)

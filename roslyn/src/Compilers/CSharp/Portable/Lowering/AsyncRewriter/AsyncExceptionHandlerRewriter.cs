@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Lower a block of code by performing local rewritings. 
+        /// Lower a block of code by performing local rewritings.
         /// The goal is to not have exception handlers that contain awaits in them.
-        /// 
+        ///
         /// 1) Await containing finally blocks:
         ///     The general strategy is to rewrite await containing handlers into synthetic handlers.
         ///     Synthetic handlers are not handlers in IL sense so it is ok to have awaits in them.
@@ -80,7 +80,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///        if (ex != null) throw ex;     // unpend the exception
         ///        unpend branches/return
         ///     }
-        /// 
+        ///
         /// 2) Await containing catches:
         ///     try{
         ///         code;
@@ -88,15 +88,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///         handler;
         ///         throw;
         ///     }
-        /// 
-        /// 
+        ///
+        ///
         /// Into ===>
         ///
         ///     Object pendingException;
         ///     int pendingCatch = 0;
         ///
         ///     try{
-        ///         code; 
+        ///         code;
         ///     }catch (Exception temp){  // essentially pend the currently active exception
         ///         pendingException = temp;
         ///         pendingCatch = 1;
@@ -805,7 +805,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Analyzes method body for try blocks with awaits in finally blocks 
+        /// Analyzes method body for try blocks with awaits in finally blocks
         /// Also collects labels that such blocks contain.
         /// </summary>
         private sealed class AwaitInFinallyAnalysis : LabelCollector
@@ -852,7 +852,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <summary>
-            /// Labels reachable from within this frame without invoking its finally. 
+            /// Labels reachable from within this frame without invoking its finally.
             /// null if there are no such labels.
             /// </summary>
             internal HashSet<LabelSymbol> Labels(BoundTryStatement statement)

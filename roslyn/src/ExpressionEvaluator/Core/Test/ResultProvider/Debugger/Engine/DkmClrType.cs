@@ -26,7 +26,7 @@ namespace Microsoft.VisualStudio.Debugger.Clr
     public class DkmClrType
     {
         /// <summary>
-        /// We would accept inherited members for tests purposes comparing to <see cref="TypeHelpers.MemberBindingFlags"/> 
+        /// We would accept inherited members for tests purposes comparing to <see cref="TypeHelpers.MemberBindingFlags"/>
         /// because an actual VS <see cref="GetEvalAttributes(Type)"/> may return attributes from base types.
         /// Therefore, we do not check here for <see cref="BindingFlags.DeclaredOnly"/>.
         /// </summary>

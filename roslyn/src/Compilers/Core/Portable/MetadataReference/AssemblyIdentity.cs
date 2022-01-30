@@ -80,7 +80,7 @@ namespace Microsoft.CodeAnalysis
         /// <param name="name">The simple name of the assembly.</param>
         /// <param name="version">The version of the assembly.</param>
         /// <param name="cultureName">
-        /// The name of the culture to associate with the assembly. 
+        /// The name of the culture to associate with the assembly.
         /// Specify null, <see cref="string.Empty"/>, or "neutral" (any casing) to represent <see cref="System.Globalization.CultureInfo.InvariantCulture"/>.
         /// The name can be an arbitrary string that doesn't contain NUL character, the legality of the culture name is not validated.
         /// </param>
@@ -93,7 +93,7 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="contentType"/> is not a value of the <see cref="AssemblyContentType"/> enumeration.</exception>
         /// <exception cref="ArgumentException"><paramref name="version"/> contains values that are not greater than or equal to zero and less than or equal to ushort.MaxValue.</exception>
         /// <exception cref="ArgumentException"><paramref name="hasPublicKey"/> is true and <paramref name="publicKeyOrToken"/> is not set.</exception>
-        /// <exception cref="ArgumentException"><paramref name="hasPublicKey"/> is false and <paramref name="publicKeyOrToken"/> 
+        /// <exception cref="ArgumentException"><paramref name="hasPublicKey"/> is false and <paramref name="publicKeyOrToken"/>
         /// contains a value that is not the size of a public key token, 8 bytes.</exception>
         public AssemblyIdentity(
             string? name,
@@ -414,7 +414,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the value which specifies if the assembly is retargetable. 
+        /// Gets the value which specifies if the assembly is retargetable.
         /// </summary>
         public bool IsRetargetable
         {
@@ -526,8 +526,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns true (false) if specified assembly identities are (not) equal 
-        /// regardless of unification, retargeting or other assembly binding policies. 
+        /// Returns true (false) if specified assembly identities are (not) equal
+        /// regardless of unification, retargeting or other assembly binding policies.
         /// Returns null if these policies must be consulted to determine name equivalence.
         /// </summary>
         internal static bool? MemberwiseEqual(AssemblyIdentity x, AssemblyIdentity y)

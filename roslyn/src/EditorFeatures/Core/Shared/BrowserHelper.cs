@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared
     internal static class BrowserHelper
     {
         /// <summary>
-        /// Unique VS session id. 
+        /// Unique VS session id.
         /// Internal for testing.
         /// TODO: Revisit - static non-deterministic data https://github.com/dotnet/roslyn/issues/39415
         /// </summary>

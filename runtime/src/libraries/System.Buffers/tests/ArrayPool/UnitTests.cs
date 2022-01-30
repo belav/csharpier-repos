@@ -24,7 +24,7 @@ namespace System.Buffers.ArrayPool.Tests
 
         /*
             NOTE - due to test parallelism and sharing, use an instance pool for testing unless necessary
-        */
+            */
         [Fact]
         public static void SharedInstanceCreatesAnInstanceOnFirstCall()
         {

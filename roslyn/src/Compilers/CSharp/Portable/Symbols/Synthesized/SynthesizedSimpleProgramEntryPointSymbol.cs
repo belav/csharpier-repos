@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal sealed class SynthesizedSimpleProgramEntryPointSymbol : SourceMemberMethodSymbol
     {
         /// <summary>
-        /// The corresponding <see cref="SingleTypeDeclaration"/>. 
+        /// The corresponding <see cref="SingleTypeDeclaration"/>.
         /// </summary>
         private readonly SingleTypeDeclaration _declaration;
 

@@ -16,37 +16,37 @@ namespace Mono.Linker
         public static readonly MessageContainer Empty;
 
         /// <summary>
-		/// Optional data with a filename, line and column that triggered the
-		/// linker to output an error (or warning) message.
-		/// </summary>
+        /// Optional data with a filename, line and column that triggered the
+        /// linker to output an error (or warning) message.
+        /// </summary>
         public MessageOrigin? Origin { get; }
 
         public MessageCategory Category { get; }
 
         /// <summary>
-		/// Further categorize the message.
-		/// </summary>
+        /// Further categorize the message.
+        /// </summary>
         public string SubCategory { get; }
 
         /// <summary>
-		/// Code identifier for errors and warnings reported by the IL linker.
-		/// </summary>
+        /// Code identifier for errors and warnings reported by the IL linker.
+        /// </summary>
         public int? Code { get; }
 
         /// <summary>
-		/// User friendly text describing the error or warning.
-		/// </summary>
+        /// User friendly text describing the error or warning.
+        /// </summary>
         public string Text { get; }
 
         /// <summary>
-		/// Create an error message.
-		/// </summary>
-		/// <param name="text">Humanly readable message describing the error</param>
-		/// <param name="code">Unique error ID. Please see https://github.com/mono/linker/blob/main/docs/error-codes.md
-		/// for the list of errors and possibly add a new one</param>
-		/// <param name="subcategory">Optionally, further categorize this error</param>
-		/// <param name="origin">Filename, line, and column where the error was found</param>
-		/// <returns>New MessageContainer of 'Error' category</returns>
+        /// Create an error message.
+        /// </summary>
+        /// <param name="text">Humanly readable message describing the error</param>
+        /// <param name="code">Unique error ID. Please see https://github.com/mono/linker/blob/main/docs/error-codes.md
+        /// for the list of errors and possibly add a new one</param>
+        /// <param name="subcategory">Optionally, further categorize this error</param>
+        /// <param name="origin">Filename, line, and column where the error was found</param>
+        /// <returns>New MessageContainer of 'Error' category</returns>
         internal static MessageContainer CreateErrorMessage(
             string text,
             int code,
@@ -64,14 +64,14 @@ namespace Mono.Linker
         }
 
         /// <summary>
-		/// Create a custom error message.
-		/// </summary>
-		/// <param name="text">Humanly readable message describing the error</param>
-		/// <param name="code">A custom error ID. This code should be greater than or equal to 6001
-		/// to avoid any collisions with existing and future linker errors</param>
-		/// <param name="subcategory">Optionally, further categorize this error</param>
-		/// <param name="origin">Filename or member where the error is coming from</param>
-		/// <returns>Custom MessageContainer of 'Error' category</returns>
+        /// Create a custom error message.
+        /// </summary>
+        /// <param name="text">Humanly readable message describing the error</param>
+        /// <param name="code">A custom error ID. This code should be greater than or equal to 6001
+        /// to avoid any collisions with existing and future linker errors</param>
+        /// <param name="subcategory">Optionally, further categorize this error</param>
+        /// <param name="origin">Filename or member where the error is coming from</param>
+        /// <returns>Custom MessageContainer of 'Error' category</returns>
         public static MessageContainer CreateCustomErrorMessage(
             string text,
             int code,
@@ -96,17 +96,17 @@ namespace Mono.Linker
         }
 
         /// <summary>
-		/// Create a warning message.
-		/// </summary>
-		/// <param name="context">Context with the relevant warning suppression info.</param>
-		/// <param name="text">Humanly readable message describing the warning</param>
-		/// <param name="code">Unique warning ID. Please see https://github.com/mono/linker/blob/main/docs/error-codes.md
-		/// for the list of warnings and possibly add a new one</param>
-		/// /// <param name="origin">Filename or member where the warning is coming from</param>
-		/// <param name="subcategory">Optionally, further categorize this warning</param>
-		/// <param name="version">Optional warning version number. Versioned warnings can be controlled with the
-		/// warning wave option --warn VERSION. Unversioned warnings are unaffected by this option. </param>
-		/// <returns>New MessageContainer of 'Warning' category</returns>
+        /// Create a warning message.
+        /// </summary>
+        /// <param name="context">Context with the relevant warning suppression info.</param>
+        /// <param name="text">Humanly readable message describing the warning</param>
+        /// <param name="code">Unique warning ID. Please see https://github.com/mono/linker/blob/main/docs/error-codes.md
+        /// for the list of warnings and possibly add a new one</param>
+        /// /// <param name="origin">Filename or member where the warning is coming from</param>
+        /// <param name="subcategory">Optionally, further categorize this warning</param>
+        /// <param name="version">Optional warning version number. Versioned warnings can be controlled with the
+        /// warning wave option --warn VERSION. Unversioned warnings are unaffected by this option. </param>
+        /// <returns>New MessageContainer of 'Warning' category</returns>
         internal static MessageContainer CreateWarningMessage(
             LinkContext context,
             string text,
@@ -126,17 +126,17 @@ namespace Mono.Linker
         }
 
         /// <summary>
-		/// Create a custom warning message.
-		/// </summary>
-		/// <param name="context">Context with the relevant warning suppression info.</param>
-		/// <param name="text">Humanly readable message describing the warning</param>
-		/// <param name="code">A custom warning ID. This code should be greater than or equal to 6001
-		/// to avoid any collisions with existing and future linker warnings</param>
-		/// <param name="origin">Filename or member where the warning is coming from</param>
-		/// <param name="version">Optional warning version number. Versioned warnings can be controlled with the
-		/// warning wave option --warn VERSION. Unversioned warnings are unaffected by this option</param>
-		/// <param name="subcategory"></param>
-		/// <returns>Custom MessageContainer of 'Warning' category</returns>
+        /// Create a custom warning message.
+        /// </summary>
+        /// <param name="context">Context with the relevant warning suppression info.</param>
+        /// <param name="text">Humanly readable message describing the warning</param>
+        /// <param name="code">A custom warning ID. This code should be greater than or equal to 6001
+        /// to avoid any collisions with existing and future linker warnings</param>
+        /// <param name="origin">Filename or member where the warning is coming from</param>
+        /// <param name="version">Optional warning version number. Versioned warnings can be controlled with the
+        /// warning wave option --warn VERSION. Unversioned warnings are unaffected by this option</param>
+        /// <param name="subcategory"></param>
+        /// <returns>Custom MessageContainer of 'Warning' category</returns>
         public static MessageContainer CreateCustomWarningMessage(
             LinkContext context,
             string text,
@@ -237,20 +237,20 @@ namespace Mono.Linker
         }
 
         /// <summary>
-		/// Create a info message.
-		/// </summary>
-		/// <param name="text">Humanly readable message</param>
-		/// <returns>New MessageContainer of 'Info' category</returns>
+        /// Create a info message.
+        /// </summary>
+        /// <param name="text">Humanly readable message</param>
+        /// <returns>New MessageContainer of 'Info' category</returns>
         public static MessageContainer CreateInfoMessage(string text)
         {
             return new MessageContainer(MessageCategory.Info, text, null);
         }
 
         /// <summary>
-		/// Create a diagnostics message.
-		/// </summary>
-		/// <param name="text">Humanly readable message</param>
-		/// <returns>New MessageContainer of 'Diagnostic' category</returns>
+        /// Create a diagnostics message.
+        /// </summary>
+        /// <param name="text">Humanly readable message</param>
+        /// <returns>New MessageContainer of 'Diagnostic' category</returns>
         public static MessageContainer CreateDiagnosticMessage(string text)
         {
             return new MessageContainer(MessageCategory.Diagnostic, text, null);

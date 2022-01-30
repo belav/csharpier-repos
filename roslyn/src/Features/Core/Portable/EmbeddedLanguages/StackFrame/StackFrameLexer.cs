@@ -213,7 +213,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         /// <summary>
         /// Attempts to parse <see cref="StackFrameKind.InTrivia"/> and a path following https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file#file-and-directory-names
-        /// Uses <see cref="FileInfo"/> as a tool to determine if the path is correct for returning. 
+        /// Uses <see cref="FileInfo"/> as a tool to determine if the path is correct for returning.
         /// </summary>
         public Result<StackFrameToken> TryScanPath()
         {
@@ -273,7 +273,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         /// <summary>
         /// Returns a number token with the <see cref="StackFrameKind.LineTrivia"/> and remainging <see cref="StackFrameKind.SkippedTextTrivia"/>
-        /// attached to it. 
+        /// attached to it.
         /// </summary>
         /// <returns></returns>
         public StackFrameToken? TryScanRequiredLineNumber()

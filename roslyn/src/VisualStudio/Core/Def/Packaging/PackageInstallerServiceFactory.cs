@@ -42,9 +42,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
     /// <summary>
     /// Free threaded wrapper around the NuGet.VisualStudio STA package installer interfaces.
     /// We want to be able to make queries about packages from any thread.  For example, the
-    /// add-NuGet-reference feature wants to know what packages a project already has 
-    /// references to.  NuGet.VisualStudio provides this information, but only in a COM STA 
-    /// manner.  As we don't want our background work to bounce and block on the UI thread 
+    /// add-NuGet-reference feature wants to know what packages a project already has
+    /// references to.  NuGet.VisualStudio provides this information, but only in a COM STA
+    /// manner.  As we don't want our background work to bounce and block on the UI thread
     /// we have this helper class which queries the information on the UI thread and caches
     /// the data so it can be read from the background.
     /// </summary>

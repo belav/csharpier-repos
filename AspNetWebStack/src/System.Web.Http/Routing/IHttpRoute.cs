@@ -14,7 +14,7 @@ namespace System.Web.Http.Routing
     public interface IHttpRoute
     {
         /// <summary>
-        /// Gets the route template describing the URI pattern to match against. 
+        /// Gets the route template describing the URI pattern to match against.
         /// </summary>
         string RouteTemplate { get; }
 

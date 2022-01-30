@@ -10,7 +10,7 @@ interface I<T> {}
 [in Class_ImplicitOverrideVirtualNewslot.cs]
 class C<T> : I<T> { virtual newslot methods}
 
-class D<T> : C<T>, I<T> {virtual methods} 
+class D<T> : C<T>, I<T> {virtual methods}
 
 --> When invoking I::method<T>() we should get the most derived child's implementation.
 

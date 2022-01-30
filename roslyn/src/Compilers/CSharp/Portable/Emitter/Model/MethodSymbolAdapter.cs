@@ -654,7 +654,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// WARN WARN WARN: We won't have a final value for this until declaration
         /// diagnostics have been computed for all <see cref="SourceMemberContainerTypeSymbol"/>s, so pass
         /// ignoringInterfaceImplementationChanges: true if you need a value sooner
-        /// and aren't concerned about tweaks made to satisfy interface implementation 
+        /// and aren't concerned about tweaks made to satisfy interface implementation
         /// requirements.
         /// NOTE: Not ignoring changes can only result in a value that is more true.
         /// </summary>
@@ -697,7 +697,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// WARN WARN WARN: We won't have a final value for this until declaration
         /// diagnostics have been computed for all <see cref="SourceMemberContainerTypeSymbol"/>s, so pass
         /// ignoringInterfaceImplementationChanges: true if you need a value sooner
-        /// and aren't concerned about tweaks made to satisfy interface implementation 
+        /// and aren't concerned about tweaks made to satisfy interface implementation
         /// requirements.
         /// NOTE: Not ignoring changes can only result in a value that is more true.
         /// </summary>

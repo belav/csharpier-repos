@@ -33,11 +33,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// <summary>
         /// Entry point to the array initialization.
         /// Assumes that we have newly created array on the stack.
-        /// 
+        ///
         /// inits could be an array of values for a single dimensional array
         /// or an array (of array)+ of values for a multidimensional case
-        /// 
-        /// in either case it is expected that number of leaf values will match number 
+        ///
+        /// in either case it is expected that number of leaf values will match number
         /// of elements in the array and nesting level should match the rank of the array.
         /// </summary>
         private void EmitArrayInitializers(
@@ -113,14 +113,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         }
 
         /// <summary>
-        /// To handle array initialization of arbitrary rank it is convenient to 
+        /// To handle array initialization of arbitrary rank it is convenient to
         /// approach multidimensional initialization as a recursively nested.
-        /// 
-        /// ForAll{i, j, k} Init(i, j, k) ===> 
+        ///
+        /// ForAll{i, j, k} Init(i, j, k) ===>
         /// ForAll{i} ForAll{j, k} Init(i, j, k) ===>
         /// ForAll{i} ForAll{j} ForAll{k} Init(i, j, k)
-        /// 
-        /// This structure is used for capturing initializers of a given index and 
+        ///
+        /// This structure is used for capturing initializers of a given index and
         /// the index value itself.
         /// </summary>
         private struct IndexDesc
@@ -158,17 +158,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
         /// <summary>
         /// Emits all initializers that match indices on the stack recursively.
-        /// 
-        /// Example: 
+        ///
+        /// Example:
         ///  if array has [0..2, 0..3, 0..2] shape
         ///  and we have {1, 2} indices on the stack
-        ///  initializers for 
+        ///  initializers for
         ///              [1, 2, 0]
         ///              [1, 2, 1]
         ///              [1, 2, 2]
-        /// 
-        ///  will be emitted and the top index will be pushed off the stack 
-        ///  as at that point we would be completely done with emitting initializers 
+        ///
+        ///  will be emitted and the top index will be pushed off the stack
+        ///  as at that point we would be completely done with emitting initializers
         ///  corresponding to that index.
         /// </summary>
         private void EmitAllElementInitializersRecursive(
@@ -499,7 +499,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         }
 
         /// <summary>
-        ///  Returns a byte blob that matches serialized content of single array initializer.    
+        ///  Returns a byte blob that matches serialized content of single array initializer.
         ///  returns -1 if the initializer is null or not an array of literals
         /// </summary>
         private int TryGetRawDataForArrayInit(

@@ -509,18 +509,18 @@ internal abstract class BaseCommand : CommandLineApplication
     {
         /* Example Json content
          {
-          "Version" : "1.0",
-          "Packages"  :  {
-            "Microsoft.Azure.SignalR": "1.1.0-preview1-10442",
-            "Grpc.AspNetCore.Server": "0.1.22-pre2",
-            "Grpc.Net.ClientFactory": "0.1.22-pre2",
-            "Google.Protobuf": "3.8.0",
-            "Grpc.Tools": "1.22.0",
-            "NSwag.ApiDescription.Client": "13.0.3",
-            "Microsoft.Extensions.ApiDescription.Client": "0.3.0-preview7.19365.7",
-            "Newtonsoft.Json": "12.0.2"
-          }
-        }*/
+         "Version" : "1.0",
+         "Packages"  :  {
+         "Microsoft.Azure.SignalR": "1.1.0-preview1-10442",
+         "Grpc.AspNetCore.Server": "0.1.22-pre2",
+         "Grpc.Net.ClientFactory": "0.1.22-pre2",
+         "Google.Protobuf": "3.8.0",
+         "Grpc.Tools": "1.22.0",
+         "NSwag.ApiDescription.Client": "13.0.3",
+         "Microsoft.Extensions.ApiDescription.Client": "0.3.0-preview7.19365.7",
+         "Newtonsoft.Json": "12.0.2"
+         }
+         }*/
         try
         {
             using var packageVersionStream = await (

@@ -658,14 +658,14 @@ namespace System.Xml.Xsl.XsltOld
 
         /*
         ----------------------------------------------------------------------------
-            mapFormatToken()
-
-            Maps a token of alphanumeric characters to a numbering format ID and a
-            minimum length bound.  Tokens specify the character(s) that begins a
-            Unicode
-            numbering sequence.  For example, "i" specifies lower case roman numeral
-            numbering.  Leading "zeros" specify a minimum length to be maintained by
-            padding, if necessary.
+        mapFormatToken()
+        
+        Maps a token of alphanumeric characters to a numbering format ID and a
+        minimum length bound.  Tokens specify the character(s) that begins a
+        Unicode
+        numbering sequence.  For example, "i" specifies lower case roman numeral
+        numbering.  Leading "zeros" specify a minimum length to be maintained by
+        padding, if necessary.
         ----------------------------------------------------------------------------
         */
         private static void mapFormatToken(
@@ -821,11 +821,11 @@ namespace System.Xml.Xsl.XsltOld
 
         /*
         ----------------------------------------------------------------------------
-            parseFormat()
-
-            Parse format string into format tokens (alphanumeric) and separators
-            (non-alphanumeric).
-
+        parseFormat()
+        
+        Parse format string into format tokens (alphanumeric) and separators
+        (non-alphanumeric).
+        
         */
         [return: NotNullIfNotNull("formatString")]
         private static List<FormatInfo?>? ParseFormat(string? formatString)

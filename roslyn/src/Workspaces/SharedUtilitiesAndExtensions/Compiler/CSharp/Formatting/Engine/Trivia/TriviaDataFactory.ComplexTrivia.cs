@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 {
     internal partial class TriviaDataFactory
     {
-        /// <summary>   
+        /// <summary>
         /// represents a general trivia between two tokens. slightly more expensive than others since it
         /// needs to calculate stuff unlike other cases
         /// </summary>

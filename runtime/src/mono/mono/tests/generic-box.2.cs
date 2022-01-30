@@ -31,10 +31,10 @@ public class GenClass<T>
     }
 
     /*
-	public object boxNullableStruct (GenStruct<T>? gs) {
-		return (object)gs;
-	}
-	*/
+    public object boxNullableStruct (GenStruct<T>? gs) {
+    return (object)gs;
+    }
+    */
 }
 
 public class main
@@ -47,11 +47,11 @@ public class main
         if (!gsi.isEqualTo((GenStruct<int>)gci.boxStruct(gsi)))
             return 1;
         /*
-		if (!gsi.isEqualTo ((GenStruct<int>)gci.boxNullableStruct (gsi)))
-			return 1;
-		if (gci.boxNullableStruct (null) != null)
-			return 1;
-		*/
+        if (!gsi.isEqualTo ((GenStruct<int>)gci.boxNullableStruct (gsi)))
+        return 1;
+        if (gci.boxNullableStruct (null) != null)
+        return 1;
+        */
 
         GenClass<ClassA> gca = new GenClass<ClassA>();
         GenStruct<ClassA> gsa = new GenStruct<ClassA>(new ClassA(), 789);
@@ -59,11 +59,11 @@ public class main
         if (!gsa.isEqualTo((GenStruct<ClassA>)gca.boxStruct(gsa)))
             return 1;
         /*
-		if (!gsa.isEqualTo ((GenStruct<ClassA>)gca.boxNullableStruct (gsa)))
-			return 1;
-		if (gca.boxNullableStruct (null) != null)
-			return 1;
-		*/
+        if (!gsa.isEqualTo ((GenStruct<ClassA>)gca.boxNullableStruct (gsa)))
+        return 1;
+        if (gca.boxNullableStruct (null) != null)
+        return 1;
+        */
 
         UnboxerStruct<ClassA> us;
         Boxer<ClassA> b = new Boxer<ClassA>();

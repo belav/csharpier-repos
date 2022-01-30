@@ -22,11 +22,11 @@ namespace Moq
         private bool verified;
 
         /// <summary>
-		/// Initializes a new instance of the <see cref="Invocation"/> class.
-		/// </summary>
-		/// <param name="proxyType">The <see cref="Type"/> of the concrete proxy object on which a method is being invoked.</param>
-		/// <param name="method">The method being invoked.</param>
-		/// <param name="arguments">The arguments with which the specified <paramref name="method"/> is being invoked.</param>
+        /// Initializes a new instance of the <see cref="Invocation"/> class.
+        /// </summary>
+        /// <param name="proxyType">The <see cref="Type"/> of the concrete proxy object on which a method is being invoked.</param>
+        /// <param name="method">The method being invoked.</param>
+        /// <param name="arguments">The arguments with which the specified <paramref name="method"/> is being invoked.</param>
         protected Invocation(Type proxyType, MethodInfo method, params object[] arguments)
         {
             Debug.Assert(proxyType != null);
@@ -39,8 +39,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Gets the method of the invocation.
-		/// </summary>
+        /// Gets the method of the invocation.
+        /// </summary>
         public MethodInfo Method => this.method;
 
         public MethodInfo MethodImplementation
@@ -57,12 +57,12 @@ namespace Moq
         }
 
         /// <summary>
-		/// Gets the arguments of the invocation.
-		/// </summary>
-		/// <remarks>
-		/// Arguments may be modified. Derived classes must ensure that by-reference parameters are written back
-		/// when the invocation is ended by a call to any of the three <c>Returns</c> methods.
-		/// </remarks>
+        /// Gets the arguments of the invocation.
+        /// </summary>
+        /// <remarks>
+        /// Arguments may be modified. Derived classes must ensure that by-reference parameters are written back
+        /// when the invocation is ended by a call to any of the three <c>Returns</c> methods.
+        /// </remarks>
         public object[] Arguments => this.arguments;
 
         IReadOnlyList<object> IInvocation.Arguments => this.arguments;
@@ -109,9 +109,9 @@ namespace Moq
         public bool IsVerified => this.verified;
 
         /// <summary>
-		///   Calls the <see langword="base"/> method implementation
-		///   and returns its return value (or <see langword="null"/> for <see langword="void"/> methods).
-		/// </summary>
+        ///   Calls the <see langword="base"/> method implementation
+        ///   and returns its return value (or <see langword="null"/> for <see langword="void"/> methods).
+        /// </summary>
         protected internal abstract object CallBase();
 
         internal void MarkAsMatchedBy(Setup setup)
@@ -172,10 +172,10 @@ namespace Moq
         }
 
         /// <summary>
-		/// Internal type to mark invocation results as "exception occurred during execution". The type just
-		/// wraps the Exception so a thrown exception can be distinguished from an <see cref="System.Exception"/>
-		/// return value.
-		/// </summary>
+        /// Internal type to mark invocation results as "exception occurred during execution". The type just
+        /// wraps the Exception so a thrown exception can be distinguished from an <see cref="System.Exception"/>
+        /// return value.
+        /// </summary>
         private readonly struct ExceptionResult
         {
             public ExceptionResult(Exception exception)

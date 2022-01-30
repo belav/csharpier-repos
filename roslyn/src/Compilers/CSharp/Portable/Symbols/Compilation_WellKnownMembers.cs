@@ -68,7 +68,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Lookup member declaration in well known type used by this Compilation.
         /// </summary>
         /// <remarks>
-        /// If a well-known member of a generic type instantiation is needed use this method to get the corresponding generic definition and 
+        /// If a well-known member of a generic type instantiation is needed use this method to get the corresponding generic definition and
         /// <see cref="MethodSymbol.AsMember"/> to construct an instantiation.
         /// </remarks>
         internal Symbol? GetWellKnownTypeMember(WellKnownMember member)
@@ -502,7 +502,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Synthesizes a custom attribute. 
+        /// Synthesizes a custom attribute.
         /// Returns null if the <paramref name="constructor"/> symbol is missing,
         /// or any of the members in <paramref name="namedArguments" /> are missing.
         /// The attribute is synthesized only if present.

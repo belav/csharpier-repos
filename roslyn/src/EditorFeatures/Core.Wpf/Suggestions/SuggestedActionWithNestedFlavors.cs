@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     /// are presented as simple links, not as menu-items, in the light-bulb.  Examples of 'flavors'
     /// include 'preview changes' (for refactorings and fixes) and 'fix all in document, project, solution'
     /// (for fixes).
-    /// 
+    ///
     /// Because all derivations support 'preview changes', we bake that logic into this base type.
     /// </summary>
     internal abstract partial class SuggestedActionWithNestedFlavors

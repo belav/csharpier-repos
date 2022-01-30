@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
     internal static class ITextSnapshotLineExtensions
     {
         /// <summary>
-        /// Returns the first non-whitespace position on the given line, or null if 
+        /// Returns the first non-whitespace position on the given line, or null if
         /// the line is empty or contains only whitespace.
         /// </summary>
         public static int? GetFirstNonWhitespacePosition(this ITextSnapshotLine line)
@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
         }
 
         /// <summary>
-        /// Returns the last non-whitespace position on the given line, or null if 
+        /// Returns the last non-whitespace position on the given line, or null if
         /// the line is empty or contains only whitespace.
         /// </summary>
         public static int? GetLastNonWhitespacePosition(this ITextSnapshotLine line) =>

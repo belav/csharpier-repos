@@ -9,7 +9,7 @@ namespace Microsoft.Cci
 {
     /// <summary>
     /// A region representing an exception handler clause. The region exposes the type (catch or
-    /// finally) and the bounds of the try block and catch or finally block as needed by 
+    /// finally) and the bounds of the try block and catch or finally block as needed by
     /// </summary>
     internal abstract class ExceptionHandlerRegion
     {

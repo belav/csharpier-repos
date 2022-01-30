@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 {
     /// <summary>
     /// This subclass of MetadataDecoder is specifically for finding
-    /// method symbols corresponding to method MemberRefs.  The parent 
+    /// method symbols corresponding to method MemberRefs.  The parent
     /// implementation is unsuitable because it requires a PEMethodSymbol
     /// for context when decoding method type parameters and no such
     /// context is available because it is precisely what we are trying

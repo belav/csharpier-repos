@@ -29,21 +29,21 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Returns an array of assembly identities for assemblies referenced by this module.
-        /// Items at the same position from ReferencedAssemblies and from ReferencedAssemblySymbols 
+        /// Items at the same position from ReferencedAssemblies and from ReferencedAssemblySymbols
         /// correspond to each other.
         /// </summary>
         ImmutableArray<AssemblyIdentity> ReferencedAssemblies { get; }
 
         /// <summary>
-        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced 
-        /// by this module. Items at the same position from ReferencedAssemblies and 
+        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced
+        /// by this module. Items at the same position from ReferencedAssemblies and
         /// from ReferencedAssemblySymbols correspond to each other.
         /// </summary>
         ImmutableArray<IAssemblySymbol> ReferencedAssemblySymbols { get; }
 
         /// <summary>
         /// If this symbol represents a metadata module returns the underlying <see cref="ModuleMetadata"/>.
-        /// 
+        ///
         /// Otherwise, this returns <see langword="null"/>.
         /// </summary>
         ModuleMetadata? GetMetadata();

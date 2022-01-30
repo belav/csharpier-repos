@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis
     /// Represents metadata image reference.
     /// </summary>
     /// <remarks>
-    /// Represents a logical location of the image, not the content of the image. 
+    /// Represents a logical location of the image, not the content of the image.
     /// The content might change in time. A snapshot is taken when the compiler queries the reference for its metadata.
     /// </remarks>
     public abstract class MetadataReference
@@ -102,21 +102,21 @@ namespace Microsoft.CodeAnalysis
         /// <param name="documentation">Provides XML documentation for symbol found in the reference.</param>
         /// <param name="filePath">Optional path that describes the location of the metadata. The file doesn't need to exist on disk. The path is opaque to the compiler.</param>
         /// <remarks>
-        /// Performance considerations: 
+        /// Performance considerations:
         /// <para>
-        /// It is recommended to use <see cref="AssemblyMetadata.CreateFromImage(ImmutableArray{byte})"/> or <see cref="ModuleMetadata.CreateFromImage(ImmutableArray{byte})"/> 
+        /// It is recommended to use <see cref="AssemblyMetadata.CreateFromImage(ImmutableArray{byte})"/> or <see cref="ModuleMetadata.CreateFromImage(ImmutableArray{byte})"/>
         /// API when creating multiple references to the same metadata.
         /// Reusing <see cref="Metadata"/> object to create multiple references allows for sharing data across these references.
-        /// </para> 
+        /// </para>
         /// <para>
-        /// The method pins <paramref name="peImage"/> in managed heap. The pinned memory is released 
-        /// when the resulting reference becomes unreachable and GC collects it. To control the lifetime of the pinned memory 
-        /// deterministically use <see cref="AssemblyMetadata.CreateFromImage(ImmutableArray{byte})"/> 
-        /// to create an <see cref="IDisposable"/> metadata object and 
+        /// The method pins <paramref name="peImage"/> in managed heap. The pinned memory is released
+        /// when the resulting reference becomes unreachable and GC collects it. To control the lifetime of the pinned memory
+        /// deterministically use <see cref="AssemblyMetadata.CreateFromImage(ImmutableArray{byte})"/>
+        /// to create an <see cref="IDisposable"/> metadata object and
         /// <see cref="AssemblyMetadata.GetReference(DocumentationProvider, ImmutableArray{string}, bool, string, string)"/> to get a reference to it.
         /// </para>
         /// <para>
-        /// The method creates a reference to a single-module assembly. To create a reference to a multi-module assembly or a stand-alone module use 
+        /// The method creates a reference to a single-module assembly. To create a reference to a multi-module assembly or a stand-alone module use
         /// <see cref="ModuleMetadata.CreateFromImage(ImmutableArray{byte})"/> and <see cref="ModuleMetadata.GetReference(DocumentationProvider, string, string)"/>.
         /// </para>
         /// </remarks>
@@ -146,17 +146,17 @@ namespace Microsoft.CodeAnalysis
         /// <param name="documentation">Provides XML documentation for symbol found in the reference.</param>
         /// <param name="filePath">Optional path that describes the location of the metadata. The file doesn't need to exist on disk. The path is opaque to the compiler.</param>
         /// <remarks>
-        /// Performance considerations: 
+        /// Performance considerations:
         /// <para>
-        /// It is recommended to use <see cref="AssemblyMetadata.CreateFromImage(IEnumerable{byte})"/> or <see cref="ModuleMetadata.CreateFromImage(IEnumerable{byte})"/> 
+        /// It is recommended to use <see cref="AssemblyMetadata.CreateFromImage(IEnumerable{byte})"/> or <see cref="ModuleMetadata.CreateFromImage(IEnumerable{byte})"/>
         /// API when creating multiple references to the same metadata.
         /// Reusing <see cref="Metadata"/> object to create multiple references allows for sharing data across these references.
-        /// </para> 
+        /// </para>
         /// <para>
         /// The method makes a copy of the data and pins it. To avoid making a copy use an overload that takes an <see cref="ImmutableArray{T}"/>.
-        /// The pinned memory is released when the resulting reference becomes unreachable and GC collects it. To control the lifetime of the pinned memory 
-        /// deterministically use <see cref="AssemblyMetadata.CreateFromStream(Stream, PEStreamOptions)"/> 
-        /// to create an <see cref="IDisposable"/> metadata object and 
+        /// The pinned memory is released when the resulting reference becomes unreachable and GC collects it. To control the lifetime of the pinned memory
+        /// deterministically use <see cref="AssemblyMetadata.CreateFromStream(Stream, PEStreamOptions)"/>
+        /// to create an <see cref="IDisposable"/> metadata object and
         /// <see cref="AssemblyMetadata.GetReference(DocumentationProvider, ImmutableArray{string}, bool, string, string)"/> to get a reference to it.
         /// </para>
         /// </remarks>
@@ -179,7 +179,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a reference to a single-module assembly or a stand-alone module from data in specified stream. 
+        /// Creates a reference to a single-module assembly or a stand-alone module from data in specified stream.
         /// Reads the content of the stream into memory and closes the stream upon return.
         /// </summary>
         /// <param name="peStream">Assembly image.</param>
@@ -190,17 +190,17 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="ArgumentNullException"><paramref name="peStream"/> is null.</exception>
         /// <exception cref="IOException">An error occurred while reading the stream.</exception>
         /// <remarks>
-        /// Performance considerations: 
+        /// Performance considerations:
         /// <para>
-        /// It is recommended to use <see cref="AssemblyMetadata.CreateFromStream(Stream, PEStreamOptions)"/> or <see cref="ModuleMetadata.CreateFromStream(Stream, PEStreamOptions)"/> 
+        /// It is recommended to use <see cref="AssemblyMetadata.CreateFromStream(Stream, PEStreamOptions)"/> or <see cref="ModuleMetadata.CreateFromStream(Stream, PEStreamOptions)"/>
         /// API when creating multiple references to the same metadata.
         /// Reusing <see cref="Metadata"/> object to create multiple references allows for sharing data across these references.
-        /// </para> 
+        /// </para>
         /// <para>
-        /// The method eagerly reads the entire content of <paramref name="peStream"/> into native heap. The native memory block is released 
+        /// The method eagerly reads the entire content of <paramref name="peStream"/> into native heap. The native memory block is released
         /// when the resulting reference becomes unreachable and GC collects it. To decrease memory footprint of the reference and/or manage
-        /// the lifetime deterministically use <see cref="AssemblyMetadata.CreateFromStream(Stream, PEStreamOptions)"/> 
-        /// to create an <see cref="IDisposable"/> metadata object and 
+        /// the lifetime deterministically use <see cref="AssemblyMetadata.CreateFromStream(Stream, PEStreamOptions)"/>
+        /// to create an <see cref="IDisposable"/> metadata object and
         /// <see cref="AssemblyMetadata.GetReference(DocumentationProvider, ImmutableArray{string}, bool, string, string)"/>
         /// to get a reference to it.
         /// </para>
@@ -240,16 +240,16 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// Performance considerations:
         /// <para>
-        /// It is recommended to use <see cref="AssemblyMetadata.CreateFromFile(string)"/> or <see cref="ModuleMetadata.CreateFromFile(string)"/> 
+        /// It is recommended to use <see cref="AssemblyMetadata.CreateFromFile(string)"/> or <see cref="ModuleMetadata.CreateFromFile(string)"/>
         /// API when creating multiple references to the same file.
         /// Reusing <see cref="Metadata"/> object allows for sharing data across these references.
-        /// </para> 
+        /// </para>
         /// <para>
-        /// The method eagerly reads the entire content of the file into native heap. The native memory block is released 
+        /// The method eagerly reads the entire content of the file into native heap. The native memory block is released
         /// when the resulting reference becomes unreachable and GC collects it. To decrease memory footprint of the reference and/or manage
-        /// the lifetime deterministically use <see cref="AssemblyMetadata.CreateFromFile(string)"/> 
-        /// to create an <see cref="IDisposable"/> metadata object and 
-        /// <see cref="AssemblyMetadata.GetReference(DocumentationProvider, ImmutableArray{string}, bool, string, string)"/> 
+        /// the lifetime deterministically use <see cref="AssemblyMetadata.CreateFromFile(string)"/>
+        /// to create an <see cref="IDisposable"/> metadata object and
+        /// <see cref="AssemblyMetadata.GetReference(DocumentationProvider, ImmutableArray{string}, bool, string, string)"/>
         /// to get a reference to it.
         /// </para>
         /// </remarks>

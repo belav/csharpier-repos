@@ -3,10 +3,10 @@
 
 /**
 This testcase attempts to delete some directories in a mounted volume
- - Different drive is mounted on the current drive
- - Current drive is mounted on a different drive
- - Current drive is mounted on current directory
-   - refer to the directory in a recursive manner in addition to the normal one
+- Different drive is mounted on the current drive
+- Current drive is mounted on a different drive
+- Current drive is mounted on current directory
+- refer to the directory in a recursive manner in addition to the normal one
 **/
 using System;
 using System.IO;

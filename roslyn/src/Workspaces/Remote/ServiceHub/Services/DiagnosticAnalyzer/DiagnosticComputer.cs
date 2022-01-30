@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         /// The <see cref="CompilationWithAnalyzers"/> instance is shared between all the following document analyses modes for the project:
         ///  1. Span-based analysis for active document (lightbulb)
         ///  2. Background analysis for active and open documents.
-        ///  
+        ///
         /// NOTE: We do not re-use this cache for project analysis as it leads to significant memory increase in the OOP process,
         /// and CWT does not seem to drop entries until ForceGC happens.
         /// </summary>

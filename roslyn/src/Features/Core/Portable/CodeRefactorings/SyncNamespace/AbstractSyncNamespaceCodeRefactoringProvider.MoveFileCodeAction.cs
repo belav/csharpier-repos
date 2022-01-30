@@ -105,7 +105,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
 
             /// <summary>
             /// We try to provide additional "move file" options if we can find existing folders that matches target namespace.
-            /// For example, if the target namespace is 'DefaultNamesapce.A.B.C', and there's a folder 'ProjectRoot\A.B\' already 
+            /// For example, if the target namespace is 'DefaultNamesapce.A.B.C', and there's a folder 'ProjectRoot\A.B\' already
             /// exists, then will provide two actions, "move file to ProjectRoot\A.B\C\" and "move file to ProjectRoot\A\B\C\".
             /// </summary>
             private static ImmutableArray<ImmutableArray<string>> FindCandidateFolders(

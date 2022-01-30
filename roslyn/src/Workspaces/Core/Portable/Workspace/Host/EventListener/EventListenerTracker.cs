@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Host
 {
     /// <summary>
     /// helper type to track whether <see cref="IEventListener"/> has been initialized.
-    /// 
+    ///
     /// currently, this helper only supports services whose lifetime is same as Host (ex, VS)
     /// </summary>
     /// <typeparam name="TService">TService for <see cref="IEventListener{TService}"/></typeparam>

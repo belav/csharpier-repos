@@ -11,7 +11,7 @@ using System.Diagnostics;
 namespace Microsoft.CodeAnalysis.BuildTasks
 {
     /// <summary>
-    /// Create an RCW for the current context/apartment. 
+    /// Create an RCW for the current context/apartment.
     /// This improves performance of cross apartment calls as the CLR will only
     /// cache marshalled pointers for an RCW created in the current context.
     /// </summary>

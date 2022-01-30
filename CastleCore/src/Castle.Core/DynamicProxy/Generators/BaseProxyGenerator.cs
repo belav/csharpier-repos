@@ -31,9 +31,9 @@ namespace Castle.DynamicProxy.Generators
     using Castle.DynamicProxy.Internal;
 
     /// <summary>
-	///   Base class that exposes the common functionalities
-	///   to proxy generation.
-	/// </summary>
+    ///   Base class that exposes the common functionalities
+    ///   to proxy generation.
+    /// </summary>
     internal abstract class BaseProxyGenerator
     {
         protected readonly Type targetType;
@@ -141,8 +141,8 @@ namespace Castle.DynamicProxy.Generators
 #endif
 
         /// <summary>
-		///   It is safe to add mapping (no mapping for the interface exists)
-		/// </summary>
+        ///   It is safe to add mapping (no mapping for the interface exists)
+        /// </summary>
         protected void AddMappingNoCheck(
             Type @interface,
             ITypeContributor implementer,
@@ -357,12 +357,12 @@ namespace Castle.DynamicProxy.Generators
         }
 
         /// <summary>
-		///   Generates a parameters constructor that initializes the proxy
-		///   state with <see cref = "StandardInterceptor" /> just to make it non-null.
-		///   <para>
-		///     This constructor is important to allow proxies to be XML serializable
-		///   </para>
-		/// </summary>
+        ///   Generates a parameters constructor that initializes the proxy
+        ///   state with <see cref = "StandardInterceptor" /> just to make it non-null.
+        ///   <para>
+        ///     This constructor is important to allow proxies to be XML serializable
+        ///   </para>
+        /// </summary>
         protected void GenerateParameterlessConstructor(
             ClassEmitter emitter,
             Type baseClass,

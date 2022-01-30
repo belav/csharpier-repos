@@ -178,7 +178,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Analyze control-flow within a part of a method body. 
+        /// Analyze control-flow within a part of a method body.
         /// </summary>
         public static ControlFlowAnalysis AnalyzeControlFlow(
             this SemanticModel semanticModel,
@@ -190,7 +190,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Analyze control-flow within a part of a method body. 
+        /// Analyze control-flow within a part of a method body.
         /// </summary>
         public static ControlFlowAnalysis AnalyzeControlFlow(
             this SemanticModel semanticModel,
@@ -201,7 +201,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Analyze data-flow within a part of a method body. 
+        /// Analyze data-flow within a part of a method body.
         /// </summary>
         public static DataFlowAnalysis AnalyzeDataFlow(
             this SemanticModel semanticModel,
@@ -213,7 +213,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Analyze data-flow within a part of a method body. 
+        /// Analyze data-flow within a part of a method body.
         /// </summary>
         public static DataFlowAnalysis AnalyzeDataFlow(
             this SemanticModel semanticModel,

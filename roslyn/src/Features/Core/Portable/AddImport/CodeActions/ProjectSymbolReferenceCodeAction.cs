@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.AddImport
     {
         /// <summary>
         /// Code action for adding an import when we find a symbol in source in either our
-        /// starting project, or some other unreferenced project in the solution.  If we 
+        /// starting project, or some other unreferenced project in the solution.  If we
         /// find a source symbol in a different project, we'll also add a p2p reference when
         /// we apply the code action.
         /// </summary>

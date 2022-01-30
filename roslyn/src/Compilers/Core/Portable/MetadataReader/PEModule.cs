@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis
     internal sealed class PEModule : IDisposable
     {
         /// <summary>
-        /// We need to store reference to the module metadata to keep the metadata alive while 
+        /// We need to store reference to the module metadata to keep the metadata alive while
         /// symbols have reference to PEModule.
         /// </summary>
         private readonly ModuleMetadata _owner;
@@ -69,16 +69,16 @@ namespace Microsoft.CodeAnalysis
         private ThreeState _lazyContainsNoPiaLocalTypes;
 
         /// <summary>
-        /// If bitmap is not null, each bit indicates whether a TypeDef 
-        /// with corresponding RowId has been checked if it is a NoPia 
-        /// local type. If the bit is 1, local type will have an entry 
+        /// If bitmap is not null, each bit indicates whether a TypeDef
+        /// with corresponding RowId has been checked if it is a NoPia
+        /// local type. If the bit is 1, local type will have an entry
         /// in m_lazyTypeDefToTypeIdentifierMap.
         /// </summary>
         private int[] _lazyNoPiaLocalTypeCheckBitMap;
 
         /// <summary>
         /// For each TypeDef that has 1 in m_lazyNoPiaLocalTypeCheckBitMap,
-        /// this map stores corresponding TypeIdentifier AttributeInfo. 
+        /// this map stores corresponding TypeIdentifier AttributeInfo.
         /// </summary>
         private ConcurrentDictionary<
             TypeDefinitionHandle,
@@ -700,12 +700,12 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// The function groups types defined in the module by their fully-qualified namespace name.
         /// The case-sensitivity of the grouping depends upon the provided StringComparer.
-        /// 
-        /// The sequence is sorted by name by using provided comparer. Therefore, if there are multiple 
-        /// groups for a namespace name (e.g. because they differ in case), the groups are going to be 
-        /// adjacent to each other. 
-        /// 
-        /// Empty string is used as namespace name for types in the Global namespace. Therefore, all types 
+        ///
+        /// The sequence is sorted by name by using provided comparer. Therefore, if there are multiple
+        /// groups for a namespace name (e.g. because they differ in case), the groups are going to be
+        /// adjacent to each other.
+        ///
+        /// Empty string is used as namespace name for types in the Global namespace. Therefore, all types
         /// in the Global namespace, if any, should be in the first group (assuming a reasonable StringComparer).
         /// </summary>
         /// Comparer to sort the groups.
@@ -874,20 +874,20 @@ namespace Microsoft.CodeAnalysis
         /// These namespaces are important because we want lookups of missing forwarded types
         /// to succeed far enough that we can actually find the type forwarder and provide
         /// information about the target assembly.
-        /// 
+        ///
         /// For example, consider the following forwarded type:
-        /// 
+        ///
         /// .class extern forwarder Namespace.Type {}
-        /// 
+        ///
         /// If this type is referenced in source as "Namespace.Type", then dev10 reports
-        /// 
-        /// error CS1070: The type name 'Namespace.Name' could not be found. This type has been 
-        /// forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. 
+        ///
+        /// error CS1070: The type name 'Namespace.Name' could not be found. This type has been
+        /// forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
         /// Consider adding a reference to that assembly.
-        /// 
+        ///
         /// If we did not include "Namespace" as a child of the global namespace of this module
         /// (the forwarding module), then Roslyn would report that the type "Namespace" was not
-        /// found and say nothing about "Name" (because of the diagnostic already attached to 
+        /// found and say nothing about "Name" (because of the diagnostic already attached to
         /// the qualifier).
         /// </summary>
         /// <exception cref="BadImageFormatException">An exception from metadata reader.</exception>
@@ -2779,11 +2779,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Determine if custom attribute application is 
+        /// Determine if custom attribute application is
         /// NoPia TypeIdentifier.
         /// </summary>
         /// <returns>
-        /// An index of the target constructor signature in 
+        /// An index of the target constructor signature in
         /// signaturesOfTypeIdentifierAttribute array, -1 if
         /// this is not NoPia TypeIdentifier.
         /// </returns>
@@ -3276,8 +3276,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Given a token for a type, return the type's name and namespace.  Only works for top level types. 
-        /// namespaceHandle will be NamespaceDefinitionHandle for defs and StringHandle for refs. 
+        /// Given a token for a type, return the type's name and namespace.  Only works for top level types.
+        /// namespaceHandle will be NamespaceDefinitionHandle for defs and StringHandle for refs.
         /// </summary>
         /// <returns>True if the function successfully returns the name and namespace.</returns>
         internal bool GetAttributeNamespaceAndName(
@@ -3295,8 +3295,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Given a token for a type, return the type's name and namespace.  Only works for top level types. 
-        /// namespaceHandle will be NamespaceDefinitionHandle for defs and StringHandle for refs. 
+        /// Given a token for a type, return the type's name and namespace.  Only works for top level types.
+        /// namespaceHandle will be NamespaceDefinitionHandle for defs and StringHandle for refs.
         /// </summary>
         /// <returns>True if the function successfully returns the name and namespace.</returns>
         private static bool GetAttributeNamespaceAndName(

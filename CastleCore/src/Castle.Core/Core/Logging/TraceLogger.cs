@@ -19,21 +19,21 @@ namespace Castle.Core.Logging
     using System.Collections.Generic;
 
     /// <summary>
-	///   The TraceLogger sends all logging to the System.Diagnostics.TraceSource
-	///   built into the .net framework.
-	/// </summary>
-	/// <remarks>
-	///   Logging can be configured in the system.diagnostics configuration 
-	///   section. 
-	/// 
-	///   If logger doesn't find a source name with a full match it will
-	///   use source names which match the namespace partially. For example you can
-	///   configure from all castle components by adding a source name with the
-	///   name "Castle". 
-	/// 
-	///   If no portion of the namespace matches the source named "Default" will
-	///   be used.
-	/// </remarks>
+    ///   The TraceLogger sends all logging to the System.Diagnostics.TraceSource
+    ///   built into the .net framework.
+    /// </summary>
+    /// <remarks>
+    ///   Logging can be configured in the system.diagnostics configuration
+    ///   section.
+    ///
+    ///   If logger doesn't find a source name with a full match it will
+    ///   use source names which match the namespace partially. For example you can
+    ///   configure from all castle components by adding a source name with the
+    ///   name "Castle".
+    ///
+    ///   If no portion of the namespace matches the source named "Default" will
+    ///   be used.
+    /// </remarks>
     public class TraceLogger : LevelFilteredLogger
     {
         private static readonly Dictionary<string, TraceSource> cache = new Dictionary<
@@ -44,9 +44,9 @@ namespace Castle.Core.Logging
         private TraceSource traceSource;
 
         /// <summary>
-		/// Build a new trace logger based on the named TraceSource
-		/// </summary>
-		/// <param name="name">The name used to locate the best TraceSource. In most cases comes from the using type's fullname.</param>
+        /// Build a new trace logger based on the named TraceSource
+        /// </summary>
+        /// <param name="name">The name used to locate the best TraceSource. In most cases comes from the using type's fullname.</param>
         public TraceLogger(string name) : base(name)
         {
             Initialize();
@@ -54,11 +54,11 @@ namespace Castle.Core.Logging
         }
 
         /// <summary>
-		/// Build a new trace logger based on the named TraceSource
-		/// </summary>
-		/// <param name="name">The name used to locate the best TraceSource. In most cases comes from the using type's fullname.</param>
-		/// <param name="level">The default logging level at which this source should write messages. In almost all cases this
-		/// default value will be overridden in the config file. </param>
+        /// Build a new trace logger based on the named TraceSource
+        /// </summary>
+        /// <param name="name">The name used to locate the best TraceSource. In most cases comes from the using type's fullname.</param>
+        /// <param name="level">The default logging level at which this source should write messages. In almost all cases this
+        /// default value will be overridden in the config file. </param>
         public TraceLogger(string name, LoggerLevel level) : base(name, level)
         {
             Initialize();
@@ -66,11 +66,11 @@ namespace Castle.Core.Logging
         }
 
         /// <summary>
-		/// Create a new child logger.
-		/// The name of the child logger is [current-loggers-name].[passed-in-name]
-		/// </summary>
-		/// <param name="loggerName">The Subname of this logger.</param>
-		/// <returns>The New ILogger instance.</returns>
+        /// Create a new child logger.
+        /// The name of the child logger is [current-loggers-name].[passed-in-name]
+        /// </summary>
+        /// <param name="loggerName">The Subname of this logger.</param>
+        /// <returns>The New ILogger instance.</returns>
         public override ILogger CreateChildLogger(string loggerName)
         {
             return InternalCreateChildLogger(loggerName);

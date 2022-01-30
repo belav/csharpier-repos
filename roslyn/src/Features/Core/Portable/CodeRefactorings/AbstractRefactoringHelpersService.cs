@@ -418,14 +418,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         }
 
         /// <summary>
-        /// Extractor function that retrieves all nodes that should be considered for extraction of given current node. 
+        /// Extractor function that retrieves all nodes that should be considered for extraction of given current node.
         /// <para>
         /// The rationale is that when user selects e.g. entire local declaration statement [|var a = b;|] it is reasonable
         /// to provide refactoring for `b` node. Similarly for other types of refactorings.
         /// </para>
         /// </summary>
         /// <remark>
-        /// Should also return given node. 
+        /// Should also return given node.
         /// </remark>
         protected virtual IEnumerable<SyntaxNode> ExtractNodesSimple(
             SyntaxNode? node,

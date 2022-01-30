@@ -29,7 +29,7 @@ namespace Roslyn.Utilities
         ///
         /// 32 KB is:
         ///
-        /// * Large enough to handle 99.6% all VB and C# files in Roslyn and CoreFX 
+        /// * Large enough to handle 99.6% all VB and C# files in Roslyn and CoreFX
         ///   without allocating additional chunks.
         ///
         /// * Small enough to avoid the large object heap.

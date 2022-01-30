@@ -11,7 +11,7 @@ namespace System.Web.Mvc
     public class SelectListGroup
     {
         /// <summary>
-        /// Gets or sets a value that indicates whether this <see cref="SelectListGroup"/> is disabled. 
+        /// Gets or sets a value that indicates whether this <see cref="SelectListGroup"/> is disabled.
         /// </summary>
         public bool Disabled { get; set; }
 

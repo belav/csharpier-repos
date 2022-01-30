@@ -6,13 +6,13 @@ using System;
 
 namespace Bug565326
 {
-    /* 
+    /*
         Compile this program using "csc /o+ ".
         It should produce the following output:
         Should see this line: B will return True
         Should see this line: B will return False
         Should see this line: In E()
-    */
+        */
 
     class A
     {

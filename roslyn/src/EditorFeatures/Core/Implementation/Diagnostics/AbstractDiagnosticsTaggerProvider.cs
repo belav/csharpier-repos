@@ -27,15 +27,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
 {
     /// <summary>
     /// Diagnostics works slightly differently than the rest of the taggers.  For diagnostics,
-    /// we want to try to have an individual tagger per diagnostic producer per buffer.  
+    /// we want to try to have an individual tagger per diagnostic producer per buffer.
     /// However, the editor only allows a single tagger provider per buffer.  So in order to
     /// get the abstraction we want, we create one outer tagger provider that is associated
     /// with the buffer.  Then, under the covers, we create individual async taggers for each
-    /// diagnostic producer we hear about for that buffer.   
-    /// 
+    /// diagnostic producer we hear about for that buffer.
+    ///
     /// In essence, we have one tagger that wraps a multitude of taggers it delegates to.
     /// Each of these taggers is nicely asynchronous and properly works within the async
-    /// tagging infrastructure. 
+    /// tagging infrastructure.
     /// </summary>
     internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
         : AsynchronousTaggerProvider<TTag> where TTag : ITag
@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
         /// <summary>
         /// Keep track of the ITextSnapshot for the open Document that was used when diagnostics were
         /// produced for it.  We need that because the DiagnoticService does not keep track of this
-        /// snapshot (so as to not hold onto a lot of memory), which means when we query it for 
+        /// snapshot (so as to not hold onto a lot of memory), which means when we query it for
         /// diagnostics, we don't know how to map the span of the diagnostic to the current snapshot
         /// we're tagging.
         /// </summary>

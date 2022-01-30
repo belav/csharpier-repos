@@ -119,10 +119,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action
         ) where TLanguageKindEnum : struct;
 
-        /// <summary> 
-        /// Register an action to be executed after semantic analysis of a method body or an expression appearing outside a method body. 
-        /// A code block action reports <see cref="Diagnostic"/>s about code blocks. 
-        /// </summary> 
+        /// <summary>
+        /// Register an action to be executed after semantic analysis of a method body or an expression appearing outside a method body.
+        /// A code block action reports <see cref="Diagnostic"/>s about code blocks.
+        /// </summary>
         /// <param name="action">Action to be executed for a code block.</param>
         public abstract void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action);
 
@@ -187,10 +187,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             throw new NotImplementedException();
         }
 
-        /// <summary> 
-        /// Register an action to be executed after semantic analysis of a method body or an expression appearing outside a method body. 
-        /// An operation block action reports <see cref="Diagnostic"/>s about operation blocks. 
-        /// </summary> 
+        /// <summary>
+        /// Register an action to be executed after semantic analysis of a method body or an expression appearing outside a method body.
+        /// An operation block action reports <see cref="Diagnostic"/>s about operation blocks.
+        /// </summary>
         /// <param name="action">Action to be executed for an operation block.</param>
         public virtual void RegisterOperationBlockAction(
             Action<OperationBlockAnalysisContext> action
@@ -446,10 +446,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action
         ) where TLanguageKindEnum : struct;
 
-        /// <summary> 
-        /// Register an action to be executed at the end of semantic analysis of a method body or an expression appearing outside a method body. 
-        /// A code block action reports <see cref="Diagnostic"/>s about code blocks. 
-        /// </summary> 
+        /// <summary>
+        /// Register an action to be executed at the end of semantic analysis of a method body or an expression appearing outside a method body.
+        /// A code block action reports <see cref="Diagnostic"/>s about code blocks.
+        /// </summary>
         /// <param name="action">Action to be executed for a code block.</param>
         public abstract void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action);
 
@@ -466,10 +466,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             throw new NotImplementedException();
         }
 
-        /// <summary> 
-        /// Register an action to be executed after semantic analysis of a method body or an expression appearing outside a method body. 
-        /// An operation block action reports <see cref="Diagnostic"/>s about operation blocks. 
-        /// </summary> 
+        /// <summary>
+        /// Register an action to be executed after semantic analysis of a method body or an expression appearing outside a method body.
+        /// An operation block action reports <see cref="Diagnostic"/>s about operation blocks.
+        /// </summary>
         /// <param name="action">Action to be executed for an operation block.</param>
         public virtual void RegisterOperationBlockAction(
             Action<OperationBlockAnalysisContext> action
@@ -990,10 +990,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action
         ) where TLanguageKindEnum : struct;
 
-        /// <summary> 
-        /// Register an action to be executed after semantic analysis of a method body or an expression appearing outside a method body. 
-        /// A code block action reports <see cref="Diagnostic"/>s about code blocks. 
-        /// </summary> 
+        /// <summary>
+        /// Register an action to be executed after semantic analysis of a method body or an expression appearing outside a method body.
+        /// A code block action reports <see cref="Diagnostic"/>s about code blocks.
+        /// </summary>
         /// <param name="action">Action to be executed for a code block.</param>
         public abstract void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action);
 
@@ -1036,10 +1036,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<OperationBlockStartAnalysisContext> action
         );
 
-        /// <summary> 
-        /// Register an action to be executed after semantic analysis of a method body or an expression appearing outside a method body. 
-        /// An operation block action reports <see cref="Diagnostic"/>s about operation blocks. 
-        /// </summary> 
+        /// <summary>
+        /// Register an action to be executed after semantic analysis of a method body or an expression appearing outside a method body.
+        /// An operation block action reports <see cref="Diagnostic"/>s about operation blocks.
+        /// </summary>
         /// <param name="action">Action to be executed for an operation block.</param>
         public abstract void RegisterOperationBlockAction(
             Action<OperationBlockAnalysisContext> action

@@ -28,29 +28,29 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// <param name="debugFriendly">
         /// When set, do not perform aggressive optimizations that degrade debugging experience.
         /// In particular we do not do the following:
-        /// 
-        /// 1) Do not elide any user defined locals, even if never read from. 
+        ///
+        /// 1) Do not elide any user defined locals, even if never read from.
         ///    Example:
         ///      {
         ///        var dummy = Goo();    // should not become just "Goo"
         ///      }
-        ///        
+        ///
         ///    User might want to examine dummy in the debugger.
-        /// 
+        ///
         /// 2) Do not carry values on the stack between statements
         ///    Example:
         ///      {
         ///        var temp = Goo();
         ///        temp.ToString();       // should not become   Goo().ToString();
         ///      }
-        ///       
+        ///
         ///    User might want to examine temp in the debugger.
-        ///        
+        ///
         /// </param>
         /// <param name="stackLocals">
         /// Produced list of "ephemeral" locals.
         /// Essentially, these locals do not need to leave the evaluation stack.
-        /// As such they do not require an allocation of a local slot and 
+        /// As such they do not require an allocation of a local slot and
         /// their load/store operations are implemented trivially.
         /// </param>
         /// <returns></returns>
@@ -337,10 +337,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// when current and other use spans are regular spans we can have only 2 conflict cases:
         /// [1, 3) conflicts with [0, 2)
         /// [1, 3) conflicts with [2, 4)
-        /// 
-        /// NOTE: with regular spans, it is not possible for two spans to share an edge point 
+        ///
+        /// NOTE: with regular spans, it is not possible for two spans to share an edge point
         /// unless they belong to the same local. (because we cannot access two real locals at the same time)
-        /// 
+        ///
         /// specifically:
         /// [1, 3) does not conflict with [0, 1)   since such spans would need to belong to the same local
         /// </summary>
@@ -356,12 +356,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
         /// <summary>
         /// Dummy locals represent implicit control flow
-        /// It is not allowed for a regular local span to cross into or 
+        /// It is not allowed for a regular local span to cross into or
         /// be immediately adjacent to a dummy span.
-        /// 
+        ///
         /// specifically:
         /// [1, 3) does conflict with [0, 1)   since that would imply a value flowing into or out of a span surrounded by a branch/label
-        /// 
+        ///
         /// </summary>
         public bool ConflictsWithDummy(LocalDefUseSpan dummy)
         {

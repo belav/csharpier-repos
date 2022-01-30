@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-/*	
-Open and write to a file inside static class constructor of a class/struct (eager and beforefieldinit cases). 
+/*
+Open and write to a file inside static class constructor of a class/struct (eager and beforefieldinit cases).
 Access type's static field (which would trigger the .cctor)
 Expected: Should get no exceptions.
 

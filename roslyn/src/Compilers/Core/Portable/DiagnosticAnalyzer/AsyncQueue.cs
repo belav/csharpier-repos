@@ -52,7 +52,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Adds an element to the tail of the queue.  This method will throw if the queue 
+        /// Adds an element to the tail of the queue.  This method will throw if the queue
         /// is completed.
         /// </summary>
         /// <exception cref="InvalidOperationException">The queue is already completed.</exception>
@@ -234,7 +234,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <summary>
         /// Gets a task that transitions to a completed state when <see cref="Complete"/> or
         /// <see cref="TryComplete"/> is called.  This transition will not happen synchronously.
-        /// 
+        ///
         /// This Task will not complete until it has completed all existing values returned
         /// from <see cref="DequeueAsync"/>.
         /// </summary>
@@ -245,7 +245,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         /// <summary>
         /// Gets a task whose result is the element at the head of the queue. If the queue
-        /// is empty, the returned task waits for an element to be enqueued. If <see cref="Complete"/> 
+        /// is empty, the returned task waits for an element to be enqueued. If <see cref="Complete"/>
         /// is called before an element becomes available, the returned task is cancelled.
         /// </summary>
         [PerformanceSensitive(
@@ -281,7 +281,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         /// <summary>
         /// Gets a task whose result is the element at the head of the queue. If the queue
-        /// is empty, the returned task waits for an element to be enqueued. If <see cref="Complete"/> 
+        /// is empty, the returned task waits for an element to be enqueued. If <see cref="Complete"/>
         /// is called before an element becomes available, the returned task is completed and
         /// <see cref="Optional{T}.HasValue"/> will be <see langword="false"/>.
         /// </summary>

@@ -114,16 +114,16 @@ namespace System.DirectoryServices.ActiveDirectory
     /*
     typedef enum
     {
-        DsRole_RoleStandaloneWorkstation,
-        DsRole_RoleMemberWorkstation,
-        DsRole_RoleStandaloneServer,
-        DsRole_RoleMemberServer,
-        DsRole_RoleBackupDomainController,
-        DsRole_RolePrimaryDomainController,
-        DsRole_WorkstationWithSharedAccountDomain,
-        DsRole_ServerWithSharedAccountDomain,
-        DsRole_MemberWorkstationWithSharedAccountDomain,
-        DsRole_MemberServerWithSharedAccountDomain
+    DsRole_RoleStandaloneWorkstation,
+    DsRole_RoleMemberWorkstation,
+    DsRole_RoleStandaloneServer,
+    DsRole_RoleMemberServer,
+    DsRole_RoleBackupDomainController,
+    DsRole_RolePrimaryDomainController,
+    DsRole_WorkstationWithSharedAccountDomain,
+    DsRole_ServerWithSharedAccountDomain,
+    DsRole_MemberWorkstationWithSharedAccountDomain,
+    DsRole_MemberServerWithSharedAccountDomain
     }DSROLE_MACHINE_ROLE;
     */
 
@@ -144,10 +144,10 @@ namespace System.DirectoryServices.ActiveDirectory
     /*
     typedef enum
     {
-        DsRolePrimaryDomainInfoBasic,
-        DsRoleUpgradeStatus,
-        DsRoleOperationState,
-        DsRolePrimaryDomainInfoBasicEx
+    DsRolePrimaryDomainInfoBasic,
+    DsRoleUpgradeStatus,
+    DsRoleOperationState,
+    DsRolePrimaryDomainInfoBasicEx
     }DSROLE_PRIMARY_DOMAIN_INFO_LEVEL;
     */
 
@@ -912,9 +912,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
         /*
         DWORD DsRoleGetPrimaryDomainInformation(
-          LPCWSTR lpServer,
-          DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
-          PBYTE* Buffer
+        LPCWSTR lpServer,
+        DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
+        PBYTE* Buffer
         ); */
 
         [DllImport(
@@ -1065,7 +1065,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
         /*
         void DsRoleFreeMemory(
-          PVOID Buffer
+        PVOID Buffer
         );
         */
         [DllImport(global::Interop.Libraries.Netapi32)]

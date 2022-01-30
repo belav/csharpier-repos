@@ -81,7 +81,7 @@ namespace Microsoft.CodeAnalysis
         /// When specified, the obsolete diagnostic's <see cref="DiagnosticDescriptor.HelpLinkUri"/> will be produced
         /// by formatting this string using the <see cref="DiagnosticId"/> as the single argument.
         /// </para>
-        /// 
+        ///
         /// <example>
         /// e.g. with a <see cref="DiagnosticId"/> value <c>"TEST1"</c>,
         /// and a <see cref="UrlFormat"/> value <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/{0}/"/>,<br/>

@@ -14,10 +14,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
     /// Represents the state of compilation of one particular type.
-    /// This includes, for example, a collection of synthesized methods created during lowering. 
+    /// This includes, for example, a collection of synthesized methods created during lowering.
     /// </summary>
     /// <remarks>
-    /// WARNING: Note that the collection class is not thread-safe and will 
+    /// WARNING: Note that the collection class is not thread-safe and will
     /// need to be revised if emit phase is changed to support multithreading when
     /// translating a particular type.
     /// </remarks>
@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary> Flat array of created methods, non-empty if not-null </summary>
         private ArrayBuilder<MethodWithBody>? _synthesizedMethods;
 
-        /// <summary> 
-        /// Map of wrapper methods created for base access of base type virtual methods from 
-        /// other classes (like those created for lambdas...); actually each method symbol will 
+        /// <summary>
+        /// Map of wrapper methods created for base access of base type virtual methods from
+        /// other classes (like those created for lambdas...); actually each method symbol will
         /// only need one wrapper to call it non-virtually.
         /// </summary>
         private Dictionary<MethodSymbol, MethodSymbol>? _wrappers;
@@ -130,7 +130,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        /// <summary> 
+        /// <summary>
         /// Add a 'regular' synthesized method.
         /// </summary>
         public void AddSynthesizedMethod(MethodSymbol method, BoundStatement body)
@@ -143,11 +143,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             _synthesizedMethods.Add(new MethodWithBody(method, body, CurrentImportChain));
         }
 
-        /// <summary> 
-        /// Add a 'wrapper' synthesized method and map it to the original one so it can be reused. 
+        /// <summary>
+        /// Add a 'wrapper' synthesized method and map it to the original one so it can be reused.
         /// </summary>
         /// <remarks>
-        /// Wrapper methods are created for base access of base type virtual methods from 
+        /// Wrapper methods are created for base access of base type virtual methods from
         /// other classes (like those created for lambdas...).
         /// </remarks>
         public void AddMethodWrapper(MethodSymbol method, MethodSymbol wrapper, BoundStatement body)
@@ -168,11 +168,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             get { return _wrappers == null ? 0 : _wrappers.Count; }
         }
 
-        /// <summary> 
-        /// Get a 'wrapper' method for the original one. 
+        /// <summary>
+        /// Get a 'wrapper' method for the original one.
         /// </summary>
         /// <remarks>
-        /// Wrapper methods are created for base access of base type virtual methods from 
+        /// Wrapper methods are created for base access of base type virtual methods from
         /// other classes (like those created for lambdas...).
         /// </remarks>
         public MethodSymbol? GetMethodWrapper(MethodSymbol method)

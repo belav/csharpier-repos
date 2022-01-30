@@ -210,8 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
             /// called on the UI thread. Also, it isn't guaranteed to be stable in the case of tasks
             /// enqueuing other tasks in arbitrary orders, though it does support our common pattern of
             /// "timer task->background task->foreground task with results"
-            /// 
-            /// Use this method very judiciously.  Most of the time, we should be able to just use 
+            ///
+            /// Use this method very judiciously.  Most of the time, we should be able to just use
             /// IAsynchronousOperationListener for tests.
             /// </summary>
             public void WaitUntilCompletion()

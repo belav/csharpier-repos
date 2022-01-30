@@ -271,7 +271,7 @@ namespace TestLibrary
         }
 
         /// <summary>
-        ///     Asserts that the given async delegate throws an <see cref="Exception"/> of type <typeparam name="T" /> and <see cref="Exception.InnerException"/> 
+        ///     Asserts that the given async delegate throws an <see cref="Exception"/> of type <typeparam name="T" /> and <see cref="Exception.InnerException"/>
         ///     returns an <see cref="Exception"/> of type <typeparam name="TInner" />.
         /// </summary>
         /// <param name="action">
@@ -458,7 +458,7 @@ namespace TestLibrary
         }
 
         /// <summary>
-        /// Tests whether the expected object is equal to the actual object  and 
+        /// Tests whether the expected object is equal to the actual object  and
         /// throws an exception if it is not.
         /// </summary>
         /// <param name="notExpected">Expected object.</param>
@@ -481,7 +481,7 @@ namespace TestLibrary
         }
 
         /// <summary>
-        /// Tests whether the expected object is equal to the actual object  and 
+        /// Tests whether the expected object is equal to the actual object  and
         /// throws an exception if it is not.
         /// </summary>
         /// <param name="notExpected">Expected object.</param>
@@ -493,7 +493,7 @@ namespace TestLibrary
         }
 
         /// <summary>
-        /// Tests whether the expected object is equal to the actual object  and 
+        /// Tests whether the expected object is equal to the actual object  and
         /// throws an exception if it is not.
         /// </summary>
         /// <param name="notExpected">Expected object that we do not want it to be.</param>
@@ -515,7 +515,7 @@ namespace TestLibrary
         }
 
         /// <summary>
-        /// Tests whether the expected object is equal to the actual object  and 
+        /// Tests whether the expected object is equal to the actual object  and
         /// throws an exception if it is not.
         /// </summary>
         /// <param name="notExpected">Expected object that we do not want it to be.</param>
@@ -622,7 +622,7 @@ namespace TestLibrary
         }
 
         /// <summary>
-        /// Tests whether the two enumerables are the same length and contain the same objects (using Object.Equals()) (but not necessarily 
+        /// Tests whether the two enumerables are the same length and contain the same objects (using Object.Equals()) (but not necessarily
         /// in the same order) and throws an exception if it is not.
         /// </summary>
         /// <param name="expected">Expected enumerable.</param>
@@ -638,7 +638,7 @@ namespace TestLibrary
         }
 
         /// <summary>
-        /// Iterates through an IEnumerable to generate an array of elements. The rational for using this instead of 
+        /// Iterates through an IEnumerable to generate an array of elements. The rational for using this instead of
         /// System.Linq.ToArray is that this will not require a dependency on System.Linq.dll
         /// </summary>
         private static T[] CopyToArray<T>(IEnumerable<T> source)
@@ -894,13 +894,13 @@ namespace TestLibrary
     public enum AssertThrowsOptions
     {
         /// <summary>
-        ///     Specifies that <see cref="Assert.Throws{T}"/> should require an exact type 
+        ///     Specifies that <see cref="Assert.Throws{T}"/> should require an exact type
         ///     match when comparing the specified exception type with the throw exception.
         /// </summary>
         None = 0,
 
         /// <summary>
-        ///     Specifies that <see cref="Assert.Throws{T}"/> should not require an exact type 
+        ///     Specifies that <see cref="Assert.Throws{T}"/> should not require an exact type
         ///     match when comparing the specified exception type with the thrown exception.
         /// </summary>
         AllowDerived = 1,

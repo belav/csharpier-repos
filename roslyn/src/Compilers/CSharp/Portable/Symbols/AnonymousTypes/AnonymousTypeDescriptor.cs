@@ -21,10 +21,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public readonly ImmutableArray<AnonymousTypeField> Fields;
 
         /// <summary>
-        /// Anonymous type descriptor Key 
-        /// 
-        /// The key is to be used to separate anonymous type templates in an anonymous type symbol cache. 
-        /// The type descriptors with the same keys are supposed to map to 'the same' anonymous type 
+        /// Anonymous type descriptor Key
+        ///
+        /// The key is to be used to separate anonymous type templates in an anonymous type symbol cache.
+        /// The type descriptors with the same keys are supposed to map to 'the same' anonymous type
         /// template in terms of the same generic type being used for their implementation.
         /// </summary>
         public readonly string Key;
@@ -99,7 +99,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Creates a new anonymous type descriptor based on 'this' one, 
+        /// Creates a new anonymous type descriptor based on 'this' one,
         /// but having field types passed as an argument.
         /// </summary>
         internal AnonymousTypeDescriptor WithNewFieldsTypes(

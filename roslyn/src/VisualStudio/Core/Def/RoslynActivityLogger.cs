@@ -16,10 +16,10 @@ namespace Microsoft.VisualStudio.LanguageServices
 {
     /// <summary>
     /// Let people to inject <see cref="TraceSource"/> to monitor Roslyn activity
-    /// 
-    /// Here, we don't technically use TraceSource as it is meant to be used. but just as an easy 
+    ///
+    /// Here, we don't technically use TraceSource as it is meant to be used. but just as an easy
     /// way to log data to listeners.
-    /// 
+    ///
     /// this also involves creating string, boxing and etc. so, perf wise, it will impact VS quite a bit.
     /// this also won't collect trace from Roslyn OOP for now. only in proc activity
     /// </summary>

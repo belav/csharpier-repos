@@ -1044,7 +1044,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Gets all the attribute lists for this named type.  If <paramref name="quickAttributes"/> is provided
-        /// the attribute lists will only be returned if there is reasonable belief that 
+        /// the attribute lists will only be returned if there is reasonable belief that
         /// the type has one of the attributes specified by <paramref name="quickAttributes"/> on it.
         /// This can avoid going back to syntax if we know the type definitely doesn't have an attribute
         /// on it that could be the one specified by <paramref name="quickAttributes"/>. Pass <see langword="null"/>

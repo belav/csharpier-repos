@@ -22,7 +22,7 @@ namespace Roslyn.Test.Utilities
     public static class MetadataValidation
     {
         /// <summary>
-        /// Returns the name of the attribute class 
+        /// Returns the name of the attribute class
         /// </summary>
         internal static string GetAttributeName(
             MetadataReader metadataReader,

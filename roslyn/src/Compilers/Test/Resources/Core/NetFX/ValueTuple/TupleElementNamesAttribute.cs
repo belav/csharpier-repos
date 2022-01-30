@@ -26,7 +26,7 @@ namespace System.Runtime.CompilerServices
         /// </summary>
         /// <param name="transformNames">
         /// Specifies, in a prefix traversal of a type's
-        /// construction, which <see cref="System.ValueType"/> occurrences are meant to 
+        /// construction, which <see cref="System.ValueType"/> occurrences are meant to
         /// carry element names.
         /// </param>
         /// <remarks>

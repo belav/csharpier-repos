@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
         public readonly VirtualCharSequence VirtualChars;
 
         /// <summary>
-        /// A place for diagnostics to be stored during parsing.  Not intended to be accessed 
+        /// A place for diagnostics to be stored during parsing.  Not intended to be accessed
         /// directly.  These will be collected and aggregated into <see cref="EmbeddedSyntaxTree{TNode, TRoot, TSyntaxKind}.Diagnostics"/>
         /// </summary>
         internal readonly ImmutableArray<EmbeddedDiagnostic> Diagnostics;

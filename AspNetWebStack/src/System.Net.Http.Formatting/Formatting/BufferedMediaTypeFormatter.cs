@@ -13,7 +13,7 @@ using System.Web.Http;
 namespace System.Net.Http.Formatting
 {
     /// <summary>
-    /// Base class for writing a synchronous formatter on top of the asynchronous formatter infrastructure. 
+    /// Base class for writing a synchronous formatter on top of the asynchronous formatter infrastructure.
     /// This does not guarantee non-blocking threads. The only way to guarantee that we don't block a thread on IO is
     /// to use the asynchronous <see cref="MediaTypeFormatter"/>.
     /// </summary>

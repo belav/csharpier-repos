@@ -10,7 +10,7 @@ namespace System.Web.WebPages.TestUtils
     public static class WebUtils
     {
         /// <summary>
-        /// Creates an instance of HttpRuntime and assigns it (using magic) to the singleton instance of HttpRuntime. 
+        /// Creates an instance of HttpRuntime and assigns it (using magic) to the singleton instance of HttpRuntime.
         /// Ensure that the returned value is disposed at the end of the test.
         /// </summary>
         /// <returns>Returns an IDisposable that restores the original HttpRuntime.</returns>

@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             /// <summary>
             /// Task to compute HostSessionStartAnalysisScope for session wide analyzer actions, i.e. AnalyzerActions registered by analyzer's Initialize method.
-            /// These are run only once per every analyzer. 
+            /// These are run only once per every analyzer.
             /// </summary>
             private Task<HostSessionStartAnalysisScope>? _lazySessionScopeTask;
 

@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// Handles the initial request for code actions. Leaves the Edit and Command properties
     /// of the returned VSCodeActions blank, as these properties should be populated by the
     /// CodeActionsResolveHandler only when the user requests them.
-    /// 
+    ///
     /// TODO - This must be moved to the MS.CA.LanguageServer.Protocol project once the
     /// EditorFeatures references in <see cref="RunCodeActionHandler"/> are removed.
     /// See https://github.com/dotnet/roslyn/issues/55142

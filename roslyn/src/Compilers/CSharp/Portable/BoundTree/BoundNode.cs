@@ -86,10 +86,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Determines if a bound node, or associated syntax or type has an error (not a warning) 
+        /// Determines if a bound node, or associated syntax or type has an error (not a warning)
         /// diagnostic associated with it.
-        /// 
-        /// Typically used in the binder as a way to prevent cascading errors. 
+        ///
+        /// Typically used in the binder as a way to prevent cascading errors.
         /// In most other cases a more lightweight HasErrors should be used.
         /// </summary>
         public bool HasAnyErrors
@@ -111,7 +111,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// diagnostic associated with it. The HasError bit is initially set for a node by providing it
         /// to the node constructor. If any child nodes of a node have
         /// the HasErrors bit set, then it is automatically set to true on the parent bound node.
-        /// 
+        ///
         /// HasErrors indicates that the tree is not emittable and used to short-circuit lowering/emit stages.
         /// NOTE: not having HasErrors does not guarantee that we do not have any diagnostic associated
         ///       with corresponding syntax or type.

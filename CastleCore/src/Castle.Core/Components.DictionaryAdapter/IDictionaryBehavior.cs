@@ -15,19 +15,19 @@
 namespace Castle.Components.DictionaryAdapter
 {
     /// <summary>
-	/// Defines the contract for customizing dictionary access.
-	/// </summary>
+    /// Defines the contract for customizing dictionary access.
+    /// </summary>
     public interface IDictionaryBehavior
     {
         /// <summary>
-		/// Determines relative order to apply related behaviors.
-		/// </summary>
+        /// Determines relative order to apply related behaviors.
+        /// </summary>
         int ExecutionOrder { get; }
 
         /// <summary>
-		/// Copies the dictionary behavior.
-		/// </summary>
-		/// <returns>null if should not be copied.  Otherwise copy.</returns>
+        /// Copies the dictionary behavior.
+        /// </summary>
+        /// <returns>null if should not be copied.  Otherwise copy.</returns>
         IDictionaryBehavior Copy();
     }
 }

@@ -35,14 +35,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
                 /// </summary>
                 internal enum UnusedValuePreference
                 {
-                    // Unused values must be explicitly assigned to a local variable
-                    // that is never read/used.
-                    UnusedLocalVariable = 1,
-
-                    // Unused values must be explicitly assigned to a discard '_' variable.
-                    DiscardVariable = 2,
+                // Unused values must be explicitly assigned to a local variable
+                // that is never read/used.
+                UnusedLocalVariable = 1,
+                
+                // Unused values must be explicitly assigned to a discard '_' variable.
+                DiscardVariable = 2,
                 }
-             */
+                */
             return new Tuple<DiagnosticAnalyzer, IConfigurationFixProvider>(
                 new CSharpRemoveUnusedParametersAndValuesDiagnosticAnalyzer(),
                 new ConfigureCodeStyleOptionCodeFixProvider()

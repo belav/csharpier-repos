@@ -224,7 +224,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
 
         /// <summary>
         /// MUST BE CALLED ON UI THREAD!!!!   This method touches WPF.
-        ///  
+        ///
         /// This function is used to update invalidates spans.
         /// </summary>
         private void UpdateInvalidSpans()
@@ -263,9 +263,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
 
         /// <summary>
         /// MUST BE CALLED ON UI THREAD!!!!   This method touches WPF.
-        /// 
-        /// This is where we apply visuals to the text. 
-        /// 
+        ///
+        /// This is where we apply visuals to the text.
+        ///
         /// It happens when another region of the view becomes visible or there is a change in tags.
         /// For us the end result is the same - get tags from tagger and update visuals correspondingly.
         /// </summary>

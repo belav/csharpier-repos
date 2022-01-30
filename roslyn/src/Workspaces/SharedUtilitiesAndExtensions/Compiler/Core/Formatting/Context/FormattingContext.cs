@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Formatting
 {
     /// <summary>
-    /// this class maintain contextual information such as 
+    /// this class maintain contextual information such as
     /// indentation of current position, based token to follow in current position and etc.
     /// </summary>
     internal partial class FormattingContext

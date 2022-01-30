@@ -12,10 +12,10 @@ namespace System.Web.WebPages
     /// <summary>
     /// This class caches the result of VirtualPathProvider.FileExists for a short
     /// period of time, and recomputes it if necessary.
-    /// 
+    ///
     /// The default VPP MapPathBasedVirtualPathProvider caches the result of
     /// the FileExists call with the appropriate dependencies, so it is less
-    /// expensive on subsequent calls, but it still needs to do MapPath which can 
+    /// expensive on subsequent calls, but it still needs to do MapPath which can
     /// take quite some time.
     /// </summary>
     internal class FileExistenceCache

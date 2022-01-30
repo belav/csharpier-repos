@@ -174,7 +174,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         }
 
         /// <summary>
-        /// Creates a Task that waits for a client connection to occur and returns the connected 
+        /// Creates a Task that waits for a client connection to occur and returns the connected
         /// <see cref="NamedPipeServerStream"/> object.  Throws on any connection error.
         /// </summary>
         /// <param name="cancellationToken">Used to cancel the connection sequence.</param>

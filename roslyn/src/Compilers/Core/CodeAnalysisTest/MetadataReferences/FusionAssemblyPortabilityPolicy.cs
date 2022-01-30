@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         /// <summary>
-        /// Loads the assembly portability policy from the given path using the CLR API. 
+        /// Loads the assembly portability policy from the given path using the CLR API.
         /// If any problems are encountered by the CLR, the errors are passed through via CLR exception.
         /// Can throw IO exceptions if any are encountered during file access.
         /// </summary>

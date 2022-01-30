@@ -11,9 +11,9 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Host
 {
     /// <summary>
-    /// This class is a <see cref="ValueSource{T}"/> that holds onto a value weakly, 
+    /// This class is a <see cref="ValueSource{T}"/> that holds onto a value weakly,
     /// but can save its value and recover it on demand if needed.
-    /// 
+    ///
     /// The initial value comes from the <see cref="ValueSource{T}"/> specified in the constructor.
     /// Derived types implement SaveAsync and RecoverAsync.
     /// </summary>

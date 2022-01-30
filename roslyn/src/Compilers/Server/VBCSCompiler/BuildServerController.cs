@@ -17,7 +17,7 @@ using System.Collections.Specialized;
 namespace Microsoft.CodeAnalysis.CompilerServer
 {
     /// <summary>
-    /// Base type for the build server code.  Contains the basic logic for running the actual server, startup 
+    /// Base type for the build server code.  Contains the basic logic for running the actual server, startup
     /// and shutdown.
     /// </summary>
     internal sealed class BuildServerController

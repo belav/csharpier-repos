@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             /// <summary>
             /// Sometimes we need to know if a label is targeted by conditional branches.
-            /// For example optimizer can do optimizations of branches into outer try scopes only 
+            /// For example optimizer can do optimizations of branches into outer try scopes only
             /// if they are unconditional (because there are no conditional Leave opcodes)
             /// </summary>
             internal readonly bool targetOfConditionalBranches;

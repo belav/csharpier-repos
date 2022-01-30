@@ -27,10 +27,10 @@ namespace System.Text
             1       16      00000000 00000000 xxxxxxxx xxxxxxxx
             2       21      00000000 000xxxxx hhhhhhll llllllll
             -----   ----    -----------------------------------
-
+            
             Surrogate:
             Real Unicode value = (HighSurrogate - 0xD800) * 0x400 + (LowSurrogate - 0xDC00) + 0x10000
-        */
+            */
 
         // Used by Encoding.UTF32/BigEndianUTF32 for lazy initialization
         // The initialization code will not be run until a static member of the class is referenced

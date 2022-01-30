@@ -43,12 +43,12 @@ internal sealed class AcceptsMetadata : IAcceptsMetadata
     }
 
     /// <summary>
-    /// Gets the supported request content types. 
+    /// Gets the supported request content types.
     /// </summary>
     public IReadOnlyList<string> ContentTypes { get; }
 
     /// <summary>
-    /// Gets the type being read from the request. 
+    /// Gets the type being read from the request.
     /// </summary>
     public Type? RequestType { get; }
 

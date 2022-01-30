@@ -12,13 +12,13 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
     {
         /// <summary>
         /// Mapping from the workspace's ID for a project, to the ID we use in the DB for the project.
-        /// Kept locally so we don't have to hit the DB for the common case of trying to determine the 
+        /// Kept locally so we don't have to hit the DB for the common case of trying to determine the
         /// DB id for a project.
         /// </summary>
         private readonly ConcurrentDictionary<ProjectId, int> _projectIdToIdMap = new();
 
         /// <summary>
-        /// Given a project, and the name of a stream to read/write, gets the integral DB ID to 
+        /// Given a project, and the name of a stream to read/write, gets the integral DB ID to
         /// use to find the data inside the ProjectData table.
         /// </summary>
         private bool TryGetProjectDataId(

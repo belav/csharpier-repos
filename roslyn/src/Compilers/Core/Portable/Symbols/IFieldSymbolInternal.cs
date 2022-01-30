@@ -9,7 +9,7 @@ namespace Microsoft.CodeAnalysis.Symbols
     internal interface IFieldSymbolInternal : ISymbolInternal
     {
         /// <summary>
-        /// Returns true if this field was declared as "volatile". 
+        /// Returns true if this field was declared as "volatile".
         /// </summary>
         bool IsVolatile { get; }
     }

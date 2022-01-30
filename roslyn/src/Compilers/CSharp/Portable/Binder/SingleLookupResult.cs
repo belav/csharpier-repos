@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// Represents a result of lookup operation over a 0 or 1 symbol (as opposed to a scope). The
     /// typical use is to represent that a particular symbol is good/bad/unavailable.
-    /// 
+    ///
     /// For more explanation of Kind, Symbol, Error - see LookupResult.
     /// </summary>
     internal struct SingleLookupResult

@@ -18,8 +18,8 @@ namespace Castle.DynamicProxy.Contributors
     using Castle.DynamicProxy.Generators.Emitters;
 
     /// <summary>
-	///   Interface describing elements composing generated type
-	/// </summary>
+    ///   Interface describing elements composing generated type
+    /// </summary>
     internal interface ITypeContributor
     {
         void CollectElementsToProxy(IProxyGenerationHook hook, MetaType model);

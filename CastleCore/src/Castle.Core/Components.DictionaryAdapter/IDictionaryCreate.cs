@@ -18,8 +18,8 @@ namespace Castle.Components.DictionaryAdapter
     using System.Collections;
 
     /// <summary>
-	/// Contract for creating additional Dictionary adapters.
-	/// </summary>
+    /// Contract for creating additional Dictionary adapters.
+    /// </summary>
     public interface IDictionaryCreate
     {
         T Create<T>();

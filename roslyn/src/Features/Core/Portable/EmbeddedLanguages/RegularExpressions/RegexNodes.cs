@@ -46,9 +46,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     /// will produce an empty RegexSequence nodes, and "a|" will produce an alternation with an
     /// empty sequence on the right side.  Having a node represent the empty sequence is actually
     /// appropriate as these are legal regexes and the empty sequence represents 'a pattern
-    /// that will match any position'.  Not having a node for this would actually end up 
+    /// that will match any position'.  Not having a node for this would actually end up
     /// complicating things in terms of dealing with nulls in the tree.
-    /// 
+    ///
     /// This does not deviate from Roslyn principles.  While nodes for empty text are rare, they
     /// are allowed (for example, OmittedTypeArgument in C#).
     /// </summary>
@@ -215,7 +215,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     }
 
     /// <summary>
-    /// ```-[f-m]``` in a pattern like ```[a-z-[f-m]]```.  A subtraction must come last in a 
+    /// ```-[f-m]``` in a pattern like ```[a-z-[f-m]]```.  A subtraction must come last in a
     /// character class, and removes some range of chars from the character class built up
     /// so far.
     /// </summary>
@@ -452,7 +452,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     }
 
     /// <summary>
-    /// Base type of all regex numeric quantifier nodes.  i.e.  
+    /// Base type of all regex numeric quantifier nodes.  i.e.
     /// ```a{5}```,  ```a{5,}``` and ```a{5,10}```
     /// </summary>
     internal abstract class RegexNumericQuantifierNode : RegexQuantifierNode

@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     public sealed class ExportCodeFixProviderAttribute : ExportAttribute
     {
         /// <summary>
-        /// Optional name of the <see cref="CodeFixProvider"/>.  
+        /// Optional name of the <see cref="CodeFixProvider"/>.
         /// </summary>
         [DisallowNull]
         public string? Name { get; set; }

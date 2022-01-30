@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Identifies the dictionary adapter types.
-	/// </summary>
+    /// Identifies the dictionary adapter types.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class DictionaryAdapterAttribute : Attribute
     {

@@ -2105,20 +2105,20 @@ namespace System.Linq.Expressions.Tests
                  * needs more thought about what should happen.. these have undefined runtime behavior.
                  * results depend on whether values are in registers or locals, debug or retail etc.
                  *
-                float fmin = float.MinValue;
-                float fmax = float.MaxValue;
-                double dmin = double.MinValue;
-                double dmax = double.MaxValue;
-
-                Assert.AreEqual((uint)fmin, TestConvert<float, uint>(fmin, useInterpreter));
-                Assert.AreEqual((ulong)fmax, TestConvert<float, ulong>(fmax, useInterpreter));
-                Assert.AreEqual((uint?)fmin, TestConvert<float, uint?>(fmin, useInterpreter));
-                Assert.AreEqual((ulong?)fmax, TestConvert<float, ulong?>(fmax, useInterpreter));
-
-                Assert.AreEqual((uint)dmin, TestConvert<double, uint>(dmin, useInterpreter));
-                Assert.AreEqual((ulong)dmax, TestConvert<double, ulong>(dmax, useInterpreter));
-                Assert.AreEqual((uint?)dmin, TestConvert<double, uint?>(dmin, useInterpreter));
-                Assert.AreEqual((ulong?)dmax, TestConvert<double, ulong?>(dmax, useInterpreter));
+                 float fmin = float.MinValue;
+                 float fmax = float.MaxValue;
+                 double dmin = double.MinValue;
+                 double dmax = double.MaxValue;
+                 
+                 Assert.AreEqual((uint)fmin, TestConvert<float, uint>(fmin, useInterpreter));
+                 Assert.AreEqual((ulong)fmax, TestConvert<float, ulong>(fmax, useInterpreter));
+                 Assert.AreEqual((uint?)fmin, TestConvert<float, uint?>(fmin, useInterpreter));
+                 Assert.AreEqual((ulong?)fmax, TestConvert<float, ulong?>(fmax, useInterpreter));
+                 
+                 Assert.AreEqual((uint)dmin, TestConvert<double, uint>(dmin, useInterpreter));
+                 Assert.AreEqual((ulong)dmax, TestConvert<double, ulong>(dmax, useInterpreter));
+                 Assert.AreEqual((uint?)dmin, TestConvert<double, uint?>(dmin, useInterpreter));
+                 Assert.AreEqual((ulong?)dmax, TestConvert<double, ulong?>(dmax, useInterpreter));
                  */
 
                 Assert.Equal(

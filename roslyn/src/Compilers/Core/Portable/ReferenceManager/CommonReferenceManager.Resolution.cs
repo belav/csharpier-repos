@@ -105,7 +105,7 @@ namespace Microsoft.CodeAnalysis
                 || _mergedReferencesOpt.IsDefault;
 
             /// <summary>
-            /// Aliases that should be applied to the referenced assembly. 
+            /// Aliases that should be applied to the referenced assembly.
             /// Empty array means {"global"} (all namespaces and types in the global namespace of the assembly are accessible without qualification).
             /// Null if not applicable (the reference only has recursive aliases).
             /// </summary>
@@ -119,7 +119,7 @@ namespace Microsoft.CodeAnalysis
             }
 
             /// <summary>
-            /// Aliases that should be applied recursively to all dependent assemblies. 
+            /// Aliases that should be applied recursively to all dependent assemblies.
             /// Empty array means {"global"} (all namespaces and types in the global namespace of the assembly are accessible without qualification).
             /// Null if not applicable (the reference only has simple aliases).
             /// </summary>
@@ -824,7 +824,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns null if an assembly of an equivalent identity has not been added previously, otherwise returns the reference that added it.
         /// Two identities are considered equivalent if
-        /// - both assembly names are strong (have keys) and are either equal or FX unified 
+        /// - both assembly names are strong (have keys) and are either equal or FX unified
         /// - both assembly names are weak (no keys) and have the same simple name.
         /// </summary>
         private MetadataReference? TryAddAssembly(

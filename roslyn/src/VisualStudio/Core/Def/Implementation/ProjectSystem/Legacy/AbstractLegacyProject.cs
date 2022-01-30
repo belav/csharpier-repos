@@ -484,7 +484,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
 
         /// <summary>
         /// Get the value of "rootnamespace" property of the project ("" if not defined, which means global namespace),
-        /// or null if it is unknown or not applicable. 
+        /// or null if it is unknown or not applicable.
         /// </summary>
         /// <remarks>
         /// This property has different meaning between C# and VB, each project type can decide how to interpret the value.

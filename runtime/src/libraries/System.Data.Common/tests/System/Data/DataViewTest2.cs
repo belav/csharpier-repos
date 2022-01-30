@@ -733,7 +733,7 @@ namespace System.Data.Tests
                 None            None. 0
                 OriginalRows    Original rows including unchanged and deleted rows. 42
                 Unchanged       An unchanged row. 2
-             */
+                */
 
             DataTable dt = DataProvider.CreateParentDataTable();
 
@@ -786,9 +786,9 @@ namespace System.Data.Tests
                     //---------- OriginalRows --------
                     dv.RowStateFilter = DataViewRowState.OriginalRows ;
                     drResult = GetResultRows(dt,DataRowState.Unchanged | DataRowState.Deleted );
-                        // OriginalRows
-                        Assert.Equal(true , CompareSortedRowsByParentId(dv,drResult));
-            */
+                    // OriginalRows
+                    Assert.Equal(true , CompareSortedRowsByParentId(dv,drResult));
+                    */
         }
 
         private DataRow[] GetResultRows(DataTable dt, DataRowState State)

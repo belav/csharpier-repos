@@ -19,7 +19,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
     /// <summary>
     /// Creates batch scopes for projects based on IVsSolutionEvents. This is useful for projects types that don't otherwise have
     /// good batching concepts.
-    /// </summary> 
+    /// </summary>
     /// <remarks>All members of this class are affinitized to the UI thread.</remarks>
     [Export(typeof(SolutionEventsBatchScopeCreator))]
     internal sealed class SolutionEventsBatchScopeCreator : ForegroundThreadAffinitizedObject

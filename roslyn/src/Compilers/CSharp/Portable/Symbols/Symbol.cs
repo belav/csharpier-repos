@@ -23,7 +23,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// The base class for all symbols (namespaces, classes, method, parameters, etc.) that are 
+    /// The base class for all symbols (namespaces, classes, method, parameters, etc.) that are
     /// exposed by the compiler.
     /// </summary>
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
@@ -97,7 +97,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public abstract SymbolKind Kind { get; }
 
         /// <summary>
-        /// Get the symbol that logically contains this symbol. 
+        /// Get the symbol that logically contains this symbol.
         /// </summary>
         public abstract Symbol ContainingSymbol { get; }
 
@@ -181,7 +181,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <remarks>
         /// We're going through the containing module, rather than the containing assembly,
         /// because of /addmodule (symbols in such modules should return null).
-        /// 
+        ///
         /// Remarks, not "ContainingCompilation" because it isn't transitive.
         /// </remarks>
         internal virtual CSharpCompilation DeclaringCompilation
@@ -319,7 +319,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Get the syntax node(s) where this symbol was declared in source. Some symbols (for
         /// example, partial classes) may be defined in more than one location. This property should
         /// return one or more syntax nodes only if the symbol was declared in source code and also
-        /// was not implicitly declared (see the <see cref="IsImplicitlyDeclared"/> property). 
+        /// was not implicitly declared (see the <see cref="IsImplicitlyDeclared"/> property).
         /// </para>
         /// <para>
         /// Note that for namespace symbol, the declaring syntax might be declaring a nested
@@ -339,7 +339,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         public abstract ImmutableArray<SyntaxReference> DeclaringSyntaxReferences { get; }
 
         /// <summary>
-        /// Helper for implementing <see cref="DeclaringSyntaxReferences"/> for derived classes that store a location but not a 
+        /// Helper for implementing <see cref="DeclaringSyntaxReferences"/> for derived classes that store a location but not a
         /// <see cref="CSharpSyntaxNode"/> or <see cref="SyntaxReference"/>.
         /// </summary>
         internal static ImmutableArray<SyntaxReference> GetDeclaringSyntaxReferenceHelper<TNode>(
@@ -453,19 +453,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         public abstract bool IsSealed { get; }
 
         /// <summary>
-        /// Returns true if this symbol has external implementation; i.e., declared with the 
-        /// <c>extern</c> modifier. 
+        /// Returns true if this symbol has external implementation; i.e., declared with the
+        /// <c>extern</c> modifier.
         /// </summary>
         public abstract bool IsExtern { get; }
 
         /// <summary>
         /// Returns true if this symbol was automatically created by the compiler, and does not
-        /// have an explicit corresponding source code declaration.  
-        /// 
+        /// have an explicit corresponding source code declaration.
+        ///
         /// This is intended for symbols that are ordinary symbols in the language sense,
         /// and may be used by code, but that are simply declared implicitly rather than
         /// with explicit language syntax.
-        /// 
+        ///
         /// Examples include (this list is not exhaustive):
         ///   the default constructor for a class or struct that is created if one is not provided,
         ///   the BeginInvoke/Invoke/EndInvoke methods for a delegate,
@@ -787,8 +787,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <remarks>
         /// <para>
-        /// Unfortunately, when determining overriding/hiding/implementation relationships, we don't 
-        /// have the "current" compilation available.  We could, but that would clutter up the API 
+        /// Unfortunately, when determining overriding/hiding/implementation relationships, we don't
+        /// have the "current" compilation available.  We could, but that would clutter up the API
         /// without providing much benefit.  As a compromise, we consider all compilations "current".
         /// </para>
         /// <para>
@@ -971,7 +971,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Return error code that has highest priority while calculating use site error for this symbol. 
+        /// Return error code that has highest priority while calculating use site error for this symbol.
         /// Supposed to be ErrorCode, but it causes inconsistent accessibility error.
         /// </summary>
         protected virtual int HighestPriorityUseSiteError
@@ -981,15 +981,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Indicates that this symbol uses metadata that cannot be supported by the language.
-        /// 
+        ///
         /// Examples include:
         ///    - Pointer types in VB
         ///    - ByRef return type
         ///    - Required custom modifiers
-        ///    
+        ///
         /// This is distinguished from, for example, references to metadata symbols defined in assemblies that weren't referenced.
         /// Symbols where this returns true can never be used successfully, and thus should never appear in any IDE feature.
-        /// 
+        ///
         /// This is set for metadata symbols, as follows:
         /// Type - if a type is unsupported (e.g., a pointer type, etc.)
         /// Method - parameter or return type is unsupported
@@ -1074,11 +1074,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Reports specified use-site diagnostic to given diagnostic bag. 
+        /// Reports specified use-site diagnostic to given diagnostic bag.
         /// </summary>
         /// <remarks>
-        /// This method should be the only method adding use-site diagnostics to a diagnostic bag. 
-        /// It performs additional adjustments of the location for unification related diagnostics and 
+        /// This method should be the only method adding use-site diagnostics to a diagnostic bag.
+        /// It performs additional adjustments of the location for unification related diagnostics and
         /// may be the place where to add more use-site location post-processing.
         /// </remarks>
         /// <returns>True if the diagnostic has error severity.</returns>
@@ -1439,7 +1439,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         #endregion
 
         /// <summary>
-        /// True if this symbol has been marked with the <see cref="ObsoleteAttribute"/> attribute. 
+        /// True if this symbol has been marked with the <see cref="ObsoleteAttribute"/> attribute.
         /// This property returns <see cref="ThreeState.Unknown"/> if the <see cref="ObsoleteAttribute"/> attribute hasn't been cracked yet.
         /// </summary>
         internal ThreeState ObsoleteState
@@ -1475,8 +1475,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal abstract ObsoleteAttributeData ObsoleteAttributeData { get; }
 
         /// <summary>
-        /// Returns true and a <see cref="string"/> from the first <see cref="GuidAttribute"/> on the symbol, 
-        /// the string might be null or an invalid guid representation. False, 
+        /// Returns true and a <see cref="string"/> from the first <see cref="GuidAttribute"/> on the symbol,
+        /// the string might be null or an invalid guid representation. False,
         /// if there is no <see cref="GuidAttribute"/> with string argument.
         /// </summary>
         internal bool GetGuidStringDefaultImplementation(out string guidString)

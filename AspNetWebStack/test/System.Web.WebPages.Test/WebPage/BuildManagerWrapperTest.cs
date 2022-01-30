@@ -246,7 +246,7 @@ namespace System.Web.WebPages.Test
         }
 
         /// <remarks>
-        /// This method adds items to HttpRuntime.Cache. 
+        /// This method adds items to HttpRuntime.Cache.
         /// </summary>
         [Fact]
         public void ExistsInPrecompiledReturnsFalseIfExtensionIsUnsupported()

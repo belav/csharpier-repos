@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis
     /// decl-table which is safe and cheap to hold onto long term.  When some downstream consumer of this
     /// metadata-reference then needs to get xml-doc comments, it will resolve a doc-comment-id against this
     /// decl-only-compilation.  Resolution is very cheap, only causing the necessary symbols referenced directly
-    /// in the ID to be created.  As downstream consumers are only likely to resolve a small handful of these 
-    /// symbols in practice, this should not be expensive to hold onto.  Importantly, semantic models and 
+    /// in the ID to be created.  As downstream consumers are only likely to resolve a small handful of these
+    /// symbols in practice, this should not be expensive to hold onto.  Importantly, semantic models and
     /// complex method binding/caching should never really happen with this compilation.
     /// </summary>
     internal class DeferredDocumentationProvider : DocumentationProvider

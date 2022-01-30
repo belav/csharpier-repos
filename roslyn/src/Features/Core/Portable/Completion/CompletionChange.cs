@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Completion
 
         /// <summary>
         /// Individual smaller text changes that are more fine grained than the total <see cref="TextChange"/> value.
-        /// This can be useful for host that do not support diffing changes to find minimal edits.  Even if this is 
+        /// This can be useful for host that do not support diffing changes to find minimal edits.  Even if this is
         /// provided, <see cref="TextChange"/> must still be provided as well.
         /// </summary>
         public ImmutableArray<TextChange> TextChanges { get; }
@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis.Completion
 
         /// <summary>
         /// True if the changes include the typed character that caused the <see cref="CompletionItem"/>
-        /// to be committed.  If false the completion host will determine if and where the commit 
+        /// to be committed.  If false the completion host will determine if and where the commit
         /// character is inserted into the document.
         /// </summary>
         public bool IncludesCommitCharacter { get; }

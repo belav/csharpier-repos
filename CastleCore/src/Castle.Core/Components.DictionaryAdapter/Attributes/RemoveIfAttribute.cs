@@ -20,8 +20,8 @@ namespace Castle.Components.DictionaryAdapter
     using System.Reflection;
 
     /// <summary>
-	/// Removes a property if matches value.
-	/// </summary>
+    /// Removes a property if matches value.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = true)]
     public class RemoveIfAttribute : DictionaryBehaviorAttribute, IDictionaryPropertySetter
     {

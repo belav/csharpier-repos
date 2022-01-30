@@ -20,109 +20,109 @@ namespace Castle.Components.DictionaryAdapter
     using System.Collections.Specialized;
 
     /// <summary>
-	/// Defines the contract for building typed dictionary adapters.
-	/// </summary>
+    /// Defines the contract for building typed dictionary adapters.
+    /// </summary>
     public interface IDictionaryAdapterFactory
     {
         /// <summary>
-		/// Gets a typed adapter bound to the <see cref="IDictionary"/>.
-		/// </summary>
-		/// <typeparam name="T">The typed interface.</typeparam>
-		/// <param name="dictionary">The underlying source of properties.</param>
-		/// <returns>An implementation of the typed interface bound to the dictionary.</returns>
-		/// <remarks>
-		/// The type represented by T must be an interface with properties.
-		/// </remarks>
+        /// Gets a typed adapter bound to the <see cref="IDictionary"/>.
+        /// </summary>
+        /// <typeparam name="T">The typed interface.</typeparam>
+        /// <param name="dictionary">The underlying source of properties.</param>
+        /// <returns>An implementation of the typed interface bound to the dictionary.</returns>
+        /// <remarks>
+        /// The type represented by T must be an interface with properties.
+        /// </remarks>
         T GetAdapter<T>(IDictionary dictionary);
 
         /// <summary>
-		/// Gets a typed adapter bound to the <see cref="IDictionary"/>.
-		/// </summary>
-		/// <param name="type">The typed interface.</param>
-		/// <param name="dictionary">The underlying source of properties.</param>
-		/// <returns>An implementation of the typed interface bound to the dictionary.</returns>
-		/// <remarks>
-		/// The type represented by T must be an interface with properties.
-		/// </remarks>
+        /// Gets a typed adapter bound to the <see cref="IDictionary"/>.
+        /// </summary>
+        /// <param name="type">The typed interface.</param>
+        /// <param name="dictionary">The underlying source of properties.</param>
+        /// <returns>An implementation of the typed interface bound to the dictionary.</returns>
+        /// <remarks>
+        /// The type represented by T must be an interface with properties.
+        /// </remarks>
         object GetAdapter(Type type, IDictionary dictionary);
 
         /// <summary>
-		/// Gets a typed adapter bound to the <see cref="IDictionary"/>.
-		/// </summary>
-		/// <param name="type">The typed interface.</param>
-		/// <param name="dictionary">The underlying source of properties.</param>
-		/// <param name="descriptor">The property descriptor.</param>
-		/// <returns>An implementation of the typed interface bound to the dictionary.</returns>
-		/// <remarks>
-		/// The type represented by T must be an interface with properties.
-		/// </remarks>
+        /// Gets a typed adapter bound to the <see cref="IDictionary"/>.
+        /// </summary>
+        /// <param name="type">The typed interface.</param>
+        /// <param name="dictionary">The underlying source of properties.</param>
+        /// <param name="descriptor">The property descriptor.</param>
+        /// <returns>An implementation of the typed interface bound to the dictionary.</returns>
+        /// <remarks>
+        /// The type represented by T must be an interface with properties.
+        /// </remarks>
         object GetAdapter(Type type, IDictionary dictionary, PropertyDescriptor descriptor);
 
         /// <summary>
-		/// Gets a typed adapter bound to the <see cref="NameValueCollection"/>.
-		/// </summary>
-		/// <typeparam name="T">The typed interface.</typeparam>
-		/// <param name="nameValues">The underlying source of properties.</param>
-		/// <returns>An implementation of the typed interface bound to the namedValues.</returns>
-		/// <remarks>
-		/// The type represented by T must be an interface with properties.
-		/// </remarks>
+        /// Gets a typed adapter bound to the <see cref="NameValueCollection"/>.
+        /// </summary>
+        /// <typeparam name="T">The typed interface.</typeparam>
+        /// <param name="nameValues">The underlying source of properties.</param>
+        /// <returns>An implementation of the typed interface bound to the namedValues.</returns>
+        /// <remarks>
+        /// The type represented by T must be an interface with properties.
+        /// </remarks>
         T GetAdapter<T>(NameValueCollection nameValues);
 
         /// <summary>
-		/// Gets a typed adapter bound to the <see cref="NameValueCollection"/>.
-		/// </summary>
-		/// <param name="type">The typed interface.</param>
-		/// <param name="nameValues">The underlying source of properties.</param>
-		/// <returns>An implementation of the typed interface bound to the namedValues.</returns>
-		/// <remarks>
-		/// The type represented by T must be an interface with properties.
-		/// </remarks>
+        /// Gets a typed adapter bound to the <see cref="NameValueCollection"/>.
+        /// </summary>
+        /// <param name="type">The typed interface.</param>
+        /// <param name="nameValues">The underlying source of properties.</param>
+        /// <returns>An implementation of the typed interface bound to the namedValues.</returns>
+        /// <remarks>
+        /// The type represented by T must be an interface with properties.
+        /// </remarks>
         object GetAdapter(Type type, NameValueCollection nameValues);
 
         /// <summary>
-		/// Gets a typed adapter bound to the <see cref="System.Xml.XmlNode"/>.
-		/// </summary>
-		/// <typeparam name="T">The typed interface.</typeparam>
-		/// <param name="xmlNode">The underlying source of properties.</param>
-		/// <returns>An implementation of the typed interface bound to the <see cref="System.Xml.XmlNode"/>.</returns>
-		/// <remarks>
-		/// The type represented by T must be an interface with properties.
-		/// </remarks>
+        /// Gets a typed adapter bound to the <see cref="System.Xml.XmlNode"/>.
+        /// </summary>
+        /// <typeparam name="T">The typed interface.</typeparam>
+        /// <param name="xmlNode">The underlying source of properties.</param>
+        /// <returns>An implementation of the typed interface bound to the <see cref="System.Xml.XmlNode"/>.</returns>
+        /// <remarks>
+        /// The type represented by T must be an interface with properties.
+        /// </remarks>
         T GetAdapter<T>(System.Xml.XmlNode xmlNode);
 
         /// <summary>
-		/// Gets a typed adapter bound to the <see cref="System.Xml.XmlNode"/>.
-		/// </summary>
-		/// <param name="type">The typed interface.</param>
-		/// <param name="xmlNode">The underlying source of properties.</param>
-		/// <returns>An implementation of the typed interface bound to the <see cref="System.Xml.XmlNode"/>.</returns>
-		/// <remarks>
-		/// The type represented by T must be an interface with properties.
-		/// </remarks>
+        /// Gets a typed adapter bound to the <see cref="System.Xml.XmlNode"/>.
+        /// </summary>
+        /// <param name="type">The typed interface.</param>
+        /// <param name="xmlNode">The underlying source of properties.</param>
+        /// <returns>An implementation of the typed interface bound to the <see cref="System.Xml.XmlNode"/>.</returns>
+        /// <remarks>
+        /// The type represented by T must be an interface with properties.
+        /// </remarks>
         object GetAdapter(Type type, System.Xml.XmlNode xmlNode);
 
         /// <summary>
-		/// Gets the <see cref="DictionaryAdapterMeta"/> associated with the type.
-		/// </summary>
-		/// <param name="type">The typed interface.</param>
-		/// <returns>The adapter meta-data.</returns>
+        /// Gets the <see cref="DictionaryAdapterMeta"/> associated with the type.
+        /// </summary>
+        /// <param name="type">The typed interface.</param>
+        /// <returns>The adapter meta-data.</returns>
         DictionaryAdapterMeta GetAdapterMeta(Type type);
 
         /// <summary>
-		/// Gets the <see cref="DictionaryAdapterMeta"/> associated with the type.
-		/// </summary>
-		/// <param name="type">The typed interface.</param>
-		/// <param name="descriptor">The property descriptor.</param>
-		/// <returns>The adapter meta-data.</returns>
+        /// Gets the <see cref="DictionaryAdapterMeta"/> associated with the type.
+        /// </summary>
+        /// <param name="type">The typed interface.</param>
+        /// <param name="descriptor">The property descriptor.</param>
+        /// <returns>The adapter meta-data.</returns>
         DictionaryAdapterMeta GetAdapterMeta(Type type, PropertyDescriptor descriptor);
 
         /// <summary>
-		/// Gets the <see cref="DictionaryAdapterMeta"/> associated with the type.
-		/// </summary>
-		/// <param name="type">The typed interface.</param>
-		/// <param name="other">Another <see cref="DictionaryAdapterMeta"/> from which to copy behaviors.</param>
-		/// <returns>The adapter meta-data.</returns>
+        /// Gets the <see cref="DictionaryAdapterMeta"/> associated with the type.
+        /// </summary>
+        /// <param name="type">The typed interface.</param>
+        /// <param name="other">Another <see cref="DictionaryAdapterMeta"/> from which to copy behaviors.</param>
+        /// <returns>The adapter meta-data.</returns>
         DictionaryAdapterMeta GetAdapterMeta(Type type, DictionaryAdapterMeta other);
     }
 }

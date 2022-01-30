@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal static class ObsoleteAttributeHelpers
     {
         /// <summary>
-        /// Initialize the ObsoleteAttributeData by fetching attributes and decoding ObsoleteAttributeData. This can be 
+        /// Initialize the ObsoleteAttributeData by fetching attributes and decoding ObsoleteAttributeData. This can be
         /// done for Metadata symbol easily whereas trying to do this for source symbols could result in cycles.
         /// </summary>
         internal static void InitializeObsoleteDataFromMetadata(
@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Get the ObsoleteAttributeData by fetching attributes and decoding ObsoleteAttributeData. This can be 
+        /// Get the ObsoleteAttributeData by fetching attributes and decoding ObsoleteAttributeData. This can be
         /// done for Metadata symbol easily whereas trying to do this for source symbols could result in cycles.
         /// </summary>
         internal static ObsoleteAttributeData GetObsoleteDataFromMetadata(

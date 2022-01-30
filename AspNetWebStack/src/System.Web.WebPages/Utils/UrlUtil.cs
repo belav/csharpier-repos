@@ -258,12 +258,12 @@ namespace System.Web.WebPages
         /// <remarks>
         /// If a type is a displayable type, then we format values of that type as part of the Url Path. If not, then
         /// we attempt to create a RouteValueDictionary, and encode the value as key-value pairs in the query string.
-        /// 
+        ///
         /// We determine if a type is displayable by whether or not it implements any interfaces. The built-in simple
-        /// types like Int32 implement IFormattable, which will be used to convert it to a string. 
-        /// 
-        /// Primarily we do this check to allow anonymous types to represent key-value pairs (anonymous types don't 
-        /// implement any interfaces). 
+        /// types like Int32 implement IFormattable, which will be used to convert it to a string.
+        ///
+        /// Primarily we do this check to allow anonymous types to represent key-value pairs (anonymous types don't
+        /// implement any interfaces).
         /// </remarks>
         private static bool IsDisplayableType(Type t)
         {

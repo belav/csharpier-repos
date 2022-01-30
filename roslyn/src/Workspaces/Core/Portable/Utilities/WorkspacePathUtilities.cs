@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Utilities
         /// <summary>
         /// Returns true if a type name matches a document name. We use
         /// case insensitive matching to determine this match so that files
-        /// "a.cs" and "A.cs" both match a class called "A" 
+        /// "a.cs" and "A.cs" both match a class called "A"
         /// </summary>
         public static bool TypeNameMatchesDocumentName(Document document, string typeName) =>
             GetTypeNameFromDocumentName(document)?.Equals(

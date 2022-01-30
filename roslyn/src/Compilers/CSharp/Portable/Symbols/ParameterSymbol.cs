@@ -77,8 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Returns the marshalling type of this parameter, or 0 if marshalling information isn't available.
         /// </summary>
         /// <remarks>
-        /// By default this information is extracted from <see cref="MarshallingInformation"/> if available. 
-        /// Since the compiler does only need to know the marshalling type of symbols that aren't emitted 
+        /// By default this information is extracted from <see cref="MarshallingInformation"/> if available.
+        /// Since the compiler does only need to know the marshalling type of symbols that aren't emitted
         /// PE symbols just decode the type from metadata and don't provide full marshalling information.
         /// </remarks>
         internal virtual UnmanagedType MarshallingType
@@ -123,7 +123,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Returns true if the parameter is semantically optional.
         /// </summary>
         /// <remarks>
-        /// True if and only if the parameter has a default argument syntax, 
+        /// True if and only if the parameter has a default argument syntax,
         /// or the parameter is not a params-array and Optional metadata flag is set.
         /// </remarks>
         public bool IsOptional
@@ -174,15 +174,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns true if the parameter explicitly specifies a default value to be passed
-        /// when no value is provided as an argument to a call. 
+        /// when no value is provided as an argument to a call.
         /// </summary>
         /// <remarks>
-        /// True if the parameter has a default argument syntax, 
-        /// or the parameter is from source and <see cref="DefaultParameterValueAttribute"/> is applied, 
+        /// True if the parameter has a default argument syntax,
+        /// or the parameter is from source and <see cref="DefaultParameterValueAttribute"/> is applied,
         /// or the parameter is from metadata and HasDefault metadata flag is set. See
         /// <see cref="IsOptional"/> to determine if the parameter will be considered optional by
         /// overload resolution.
-        /// 
+        ///
         /// The default value can be obtained with <see cref="ExplicitDefaultValue"/> property.
         /// </remarks>
         public bool HasExplicitDefaultValue
@@ -209,7 +209,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <remarks>
         /// If the parameter type is a struct and the default value of the parameter
-        /// is the default value of the struct type or of type parameter type which is 
+        /// is the default value of the struct type or of type parameter type which is
         /// not known to be a referenced type, then this property will return null.
         /// </remarks>
         /// <exception cref="InvalidOperationException">The parameter has no default value.</exception>
@@ -229,10 +229,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
 #nullable enable
         /// <summary>
-        /// Returns the default value constant of the parameter, 
-        /// or null if the parameter doesn't have a default value or 
+        /// Returns the default value constant of the parameter,
+        /// or null if the parameter doesn't have a default value or
         /// the parameter type is a struct and the default value of the parameter
-        /// is the default value of the struct type or of type parameter type which is 
+        /// is the default value of the struct type or of type parameter type which is
         /// not known to be a referenced type.
         /// </summary>
         /// <remarks>
@@ -252,7 +252,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Implements visitor pattern. 
+        /// Implements visitor pattern.
         /// </summary>
         internal override TResult Accept<TArgument, TResult>(
             CSharpSymbolVisitor<TArgument, TResult> visitor,
@@ -332,8 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns true if this symbol has external implementation; i.e., declared with the 
-        /// "extern" modifier. 
+        /// Returns true if this symbol has external implementation; i.e., declared with the
+        /// "extern" modifier.
         /// </summary>
         public override bool IsExtern
         {

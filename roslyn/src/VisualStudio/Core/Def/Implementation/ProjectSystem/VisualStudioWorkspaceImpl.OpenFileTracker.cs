@@ -84,7 +84,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             /// for a few documents, but is not wise during solution load when you have potentially thousands of files. In that
             /// case, we can just enumerate all open files and check if we know about them, on the assumption the number of
             /// open files is far less than the number of total files.
-            /// 
+            ///
             /// This cutoff of 10 was chosen arbitrarily and with no evidence whatsoever.</remarks>
             private const int CutoffForCheckingAllRunningDocumentTableDocuments = 10;
 

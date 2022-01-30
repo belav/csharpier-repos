@@ -28,12 +28,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CompleteStatement
         protected abstract TestWorkspace CreateTestWorkspace(string code);
 
         /// <summary>
-        /// Verify that typing a semicolon at the location in <paramref name="initialMarkup"/> 
-        /// marked with 
+        /// Verify that typing a semicolon at the location in <paramref name="initialMarkup"/>
+        /// marked with
         ///     - <c>$$</c> for caret position
         ///     - or, <c>[|</c> and <c>|]</c> for selected span
-        /// does not perform any special "complete statement" operations, e.g. inserting missing 
-        /// delimiters or moving the caret prior to the semicolon character insertion. In other words, 
+        /// does not perform any special "complete statement" operations, e.g. inserting missing
+        /// delimiters or moving the caret prior to the semicolon character insertion. In other words,
         /// statement completion does not impact typing behavior for the case.
         /// </summary>
         protected void VerifyNoSpecialSemicolonHandling(string initialMarkup)

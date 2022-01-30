@@ -121,10 +121,10 @@ namespace Microsoft.CodeAnalysis
         /// Determines if a <see cref="ReadOnlySpan{Char}"/> is equal to the provided option name
         /// </summary>
         /// <remarks>
-        /// Prefer this over the Equals methods on <see cref="ReadOnlySpan{Char}"/>. The 
+        /// Prefer this over the Equals methods on <see cref="ReadOnlySpan{Char}"/>. The
         /// <see cref="StringComparison.InvariantCultureIgnoreCase"/> implementation allocates a <see cref="String"/>.
         /// The 99% case here is that we are dealing with an ASCII string that matches the input hence
-        /// it's worth special casing that here and falling back to the more complicated comparison 
+        /// it's worth special casing that here and falling back to the more complicated comparison
         /// when dealing with non-ASCII input
         /// </remarks>
         internal static bool IsOptionName(string optionName, ReadOnlySpan<char> value)
@@ -1039,7 +1039,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// See <see cref="CommandLineUtilities.SplitCommandLineIntoArguments(string, bool)"/> 
+        /// See <see cref="CommandLineUtilities.SplitCommandLineIntoArguments(string, bool)"/>
         /// </summary>
         public static IEnumerable<string> SplitCommandLineIntoArguments(
             string commandLine,
@@ -1057,9 +1057,9 @@ namespace Microsoft.CodeAnalysis
         /// compat behavior with the native compiler.
         /// </summary>
         /// <remarks>
-        /// Mimics the function RemoveQuotes from the native C# compiler.  The native VB equivalent of this 
-        /// function is called RemoveQuotesAndSlashes.  It has virtually the same behavior except for a few 
-        /// quirks in error cases.  
+        /// Mimics the function RemoveQuotes from the native C# compiler.  The native VB equivalent of this
+        /// function is called RemoveQuotesAndSlashes.  It has virtually the same behavior except for a few
+        /// quirks in error cases.
         /// </remarks>
         [return: NotNullIfNotNull(parameterName: "arg")]
         internal static string? RemoveQuotesAndSlashes(string? arg) =>

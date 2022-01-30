@@ -47,7 +47,7 @@ namespace System.Web.Mvc
 
         /// <summary>
         /// Represents a replaceable dependency resolver providing services.
-        /// By default, it uses the <see cref="DependencyResolver.CurrentCache"/>. 
+        /// By default, it uses the <see cref="DependencyResolver.CurrentCache"/>.
         /// </summary>
         public IDependencyResolver Resolver
         {

@@ -420,12 +420,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// <summary>
         /// An error/warning directive tells the compiler to indicate a syntactic error/warning
         /// at the current location.
-        /// 
+        ///
         /// Format: #error Error message string
         /// Resulting message: from the first non-whitespace character after the directive
         /// keyword until the end of the directive (aka EOD) at the line break or EOF.
         /// Resulting span: [first non-whitespace char, EOD)
-        /// 
+        ///
         /// Examples (pipes indicate span):
         /// #error |goo|
         /// #error  |goo|

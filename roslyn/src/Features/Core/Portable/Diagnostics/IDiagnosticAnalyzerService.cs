@@ -108,7 +108,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         ///
         /// It will return true if it was able to return all up-to-date diagnostics.
         ///  otherwise, false indicating there are some missing diagnostics in the diagnostic list
-        ///  
+        ///
         /// This API will only force complete analyzers that support span based analysis, i.e. compiler analyzer and
         /// <see cref="IBuiltInAnalyzer"/>s that support <see cref="DiagnosticAnalyzerCategory.SemanticSpanAnalysis"/>.
         /// For the rest of the analyzers, it will only return diagnostics if the analyzer has already been executed.

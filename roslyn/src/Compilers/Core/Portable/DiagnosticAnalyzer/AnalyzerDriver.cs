@@ -43,12 +43,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private readonly Func<SyntaxTree, CancellationToken, bool> _isGeneratedCode;
 
         /// <summary>
-        /// Set of diagnostic suppressions that are suppressed via analyzer suppression actions. 
+        /// Set of diagnostic suppressions that are suppressed via analyzer suppression actions.
         /// </summary>
         private readonly ConcurrentSet<Suppression>? _programmaticSuppressions;
 
         /// <summary>
-        /// Set of diagnostics that have already been processed for application of programmatic suppressions. 
+        /// Set of diagnostics that have already been processed for application of programmatic suppressions.
         /// </summary>
         private readonly ConcurrentSet<Diagnostic>? _diagnosticsProcessedForProgrammaticSuppressions;
 
@@ -98,7 +98,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private ImmutableHashSet<DiagnosticAnalyzer>? _lazyUnsuppressedAnalyzers;
 
         /// <summary>
-        /// Unsuppressed analyzers that need to be executed. 
+        /// Unsuppressed analyzers that need to be executed.
         /// </summary>
         protected ImmutableHashSet<DiagnosticAnalyzer> UnsuppressedAnalyzers
         {
@@ -165,7 +165,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics;
 
         /// <summary>
-        /// Map from non-concurrent analyzers to the gate guarding callback into the analyzer. 
+        /// Map from non-concurrent analyzers to the gate guarding callback into the analyzer.
         /// </summary>
         private ImmutableSegmentedDictionary<
             DiagnosticAnalyzer,
@@ -186,7 +186,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         > _lazyGeneratedCodeAnalysisFlagsMap;
 
         /// <summary>
-        /// Map from analyzers to their <see cref="GeneratedCodeAnalysisFlags"/> setting. 
+        /// Map from analyzers to their <see cref="GeneratedCodeAnalysisFlags"/> setting.
         /// </summary>
         private ImmutableSegmentedDictionary<
             DiagnosticAnalyzer,
@@ -209,7 +209,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private ImmutableHashSet<DiagnosticAnalyzer>? _lazyNonConfigurableAnalyzers;
 
         /// <summary>
-        /// Set of unsuppressed analyzers that report non-configurable diagnostics that cannot be suppressed with end user configuration. 
+        /// Set of unsuppressed analyzers that report non-configurable diagnostics that cannot be suppressed with end user configuration.
         /// </summary>
         private ImmutableHashSet<DiagnosticAnalyzer> NonConfigurableAnalyzers
         {
@@ -223,7 +223,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private ImmutableHashSet<DiagnosticAnalyzer>? _lazySymbolStartAnalyzers;
 
         /// <summary>
-        /// Set of analyzers that have registered symbol start analyzer actions. 
+        /// Set of analyzers that have registered symbol start analyzer actions.
         /// </summary>
         private ImmutableHashSet<DiagnosticAnalyzer> SymbolStartAnalyzers
         {
@@ -1068,7 +1068,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Create an <see cref="AnalyzerDriver"/> and attach it to the given compilation. 
+        /// Create an <see cref="AnalyzerDriver"/> and attach it to the given compilation.
         /// </summary>
         /// <param name="compilation">The compilation to which the new driver should be attached.</param>
         /// <param name="analyzers">The set of analyzers to include in the analysis.</param>

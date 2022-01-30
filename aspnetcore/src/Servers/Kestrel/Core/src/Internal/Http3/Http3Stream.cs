@@ -312,7 +312,7 @@ internal abstract partial class Http3Stream
            (i.e., any intermediary not acting as a tunnel) MUST NOT forward a
            malformed request or response. Malformed requests or responses that
            are detected MUST be treated as a stream error of type H3_MESSAGE_ERROR.
-
+           
            For malformed requests, a server MAY send an HTTP response prior to
            closing or resetting the stream.  Clients MUST NOT accept a malformed
            response.  Note that these requirements are intended to protect

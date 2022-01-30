@@ -43,15 +43,15 @@ public class Tests
                         // http://bugzilla.ximian.com/show_bug.cgi?id=68552
 
                         /*
-						try {
-						}
-						catch {}
-						try {
-							throw new DivideByZeroException ();
-						}
-						catch (Exception) {
-						}
-						*/
+                        try {
+                        }
+                        catch {}
+                        try {
+                        throw new DivideByZeroException ();
+                        }
+                        catch (Exception) {
+                        }
+                        */
                         result |= 32;
 
                         // Check that the exception is properly rethrown

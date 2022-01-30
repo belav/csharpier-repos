@@ -19,11 +19,11 @@ namespace Microsoft.CodeAnalysis.Rename
     public static partial class Renamer
     {
         /// <summary>
-        /// Action that will sync the namespace of the document to match the folders property 
+        /// Action that will sync the namespace of the document to match the folders property
         /// of that document, similar to if a user performed the "Sync Namespace" code refactoring.
-        /// 
+        ///
         /// For example, if a document is moved from "Bat/Bar/Baz" folder structure to "Bat/Bar/Baz/Bat" and contains
-        /// a namespace definition of Bat.Bar.Baz in the document, then it would update that definition to 
+        /// a namespace definition of Bat.Bar.Baz in the document, then it would update that definition to
         /// Bat.Bar.Baz.Bat and update the solution to reflect these changes. Uses <see cref="IChangeNamespaceService"/>
         /// </summary>
         internal sealed class SyncNamespaceDocumentAction : RenameDocumentAction

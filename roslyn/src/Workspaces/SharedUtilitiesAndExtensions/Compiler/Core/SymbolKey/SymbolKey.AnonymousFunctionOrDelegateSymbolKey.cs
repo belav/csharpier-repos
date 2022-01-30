@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis
     {
         /// <summary>
         /// Anonymous functions and anonymous-delegates (the special VB synthesized delegate types),
-        /// only come into existence when someone has explicitly written a lambda in their source 
+        /// only come into existence when someone has explicitly written a lambda in their source
         /// code. So to appropriately round-trip this symbol we store the location that the lambda
         /// was at so that we can find the symbol again when we resolve the key.
         /// </summary>

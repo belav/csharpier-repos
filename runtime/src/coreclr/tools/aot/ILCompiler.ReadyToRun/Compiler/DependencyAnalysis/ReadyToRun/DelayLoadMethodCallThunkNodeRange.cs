@@ -12,7 +12,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     /// <summary>
     /// Provides an ISymbolNode for the R2R header table to relocate against when looking up the delay load method call thunks.
     /// They are emitted in a contiguous run of object nodes. This symbol is used in the object writer to represent the range
-    /// of bytes containing all the thunks. 
+    /// of bytes containing all the thunks.
     /// </summary>
     public class DelayLoadMethodCallThunkNodeRange
         : DependencyNodeCore<NodeFactory>,

@@ -229,7 +229,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Returned bound expression is guaranteed to have a non-null type, except when <paramref name="expr"/> is an unbound lambda.
         /// If <paramref name="expr"/> already has errors and meets the above type requirements, then it is returned unchanged.
         /// Otherwise, if <paramref name="expr"/> is a BoundBadExpression, then it is updated with the <paramref name="resultKind"/> and non-null type.
-        /// Otherwise, a new <see cref="BoundBadExpression"/> wrapping <paramref name="expr"/> is returned. 
+        /// Otherwise, a new <see cref="BoundBadExpression"/> wrapping <paramref name="expr"/> is returned.
         /// </summary>
         /// <remarks>
         /// Returned expression need not be a <see cref="BoundBadExpression"/>, but is guaranteed to have HasErrors set to true.
@@ -3741,8 +3741,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// This implements the casting behavior described in section 6.2.3 of the spec:
-        /// 
-        /// - If the nullable conversion is from S to T?, the conversion is evaluated as the underlying conversion 
+        ///
+        /// - If the nullable conversion is from S to T?, the conversion is evaluated as the underlying conversion
         ///   from S to T followed by a wrapping from T to T?.
         ///
         /// This particular check is done in the binder because it involves conversion processing rules (like overflow
@@ -5601,8 +5601,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Bind the (implicit or explicit) constructor initializer of a constructor symbol (in source).
         /// </summary>
         /// <param name="initializerArgumentListOpt">
-        /// Null for implicit, 
-        /// <see cref="ConstructorInitializerSyntax.ArgumentList"/>, or 
+        /// Null for implicit,
+        /// <see cref="ConstructorInitializerSyntax.ArgumentList"/>, or
         /// <see cref="PrimaryConstructorBaseTypeSyntax.ArgumentList"/> for explicit.</param>
         /// <param name="constructor">Constructor containing the initializer.</param>
         /// <param name="diagnostics">Accumulates errors (e.g. unable to find constructor to invoke).</param>

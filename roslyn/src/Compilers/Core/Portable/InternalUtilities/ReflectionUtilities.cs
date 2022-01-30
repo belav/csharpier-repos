@@ -40,7 +40,7 @@ namespace Roslyn.Utilities
 
         /// <summary>
         /// Find a <see cref="Type"/> instance by first probing the contract name and then the name as it
-        /// would exist in mscorlib.  This helps satisfy both the CoreCLR and Desktop scenarios. 
+        /// would exist in mscorlib.  This helps satisfy both the CoreCLR and Desktop scenarios.
         /// </summary>
         public static Type? GetTypeFromEither(string contractName, string desktopName)
         {

@@ -83,9 +83,9 @@ namespace RunTests
     {
         /// <summary>
         /// This is a test class inserted into assemblies to guard against a .NET desktop bug.  The tests
-        /// inside of it counteract the underlying issue.  If this test is included in any assembly it 
+        /// inside of it counteract the underlying issue.  If this test is included in any assembly it
         /// must be added to every partition to ensure the work around is present
-        /// 
+        ///
         /// https://github.com/dotnet/corefx/issues/3793
         /// https://github.com/dotnet/roslyn/issues/8936
         /// </summary>

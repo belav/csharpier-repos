@@ -38,13 +38,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         IEnumerable<SyntaxNode> GetAttributeArgumentNodes(SyntaxNode parent);
 
         /// <summary>
-        /// Retrieves the Inherits nodes (i.e. VB Inherits statements) parented 
+        /// Retrieves the Inherits nodes (i.e. VB Inherits statements) parented
         /// or owned by the given node.
         /// </summary>
         IEnumerable<SyntaxNode> GetInheritsNodes(SyntaxNode parent);
 
         /// <summary>
-        /// Retrieves the Implements nodes (i.e. VB Implements statements) parented 
+        /// Retrieves the Implements nodes (i.e. VB Implements statements) parented
         /// or owned by the given node.
         /// </summary>
         IEnumerable<SyntaxNode> GetImplementsNodes(SyntaxNode parent);

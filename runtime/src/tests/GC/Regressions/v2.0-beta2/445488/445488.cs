@@ -89,7 +89,7 @@ Abort   Retry   Ignore
 Ignoring the asserts generates the AV from the bug report:
 
 
- # ChildEBP RetAddr
+# ChildEBP RetAddr
 00 0012d250 5e24645f mscorwks!DbgAssertDialog+0x394
 01 0012d618 5dcedf7c mscorwks!CHECK::Trigger+0x2df
 02 0012d800 5dcedb2d mscorwks!CLRVectoredExceptionHandlerPhase2+0x33c

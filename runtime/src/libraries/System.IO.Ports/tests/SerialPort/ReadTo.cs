@@ -108,9 +108,9 @@ namespace System.IO.Ports.Tests
         /*
         public void UTF7Encoding()
         {
-            VerifyRead(new System.Text.UTF7Encoding(), GenRandomNewLine(false));
+        VerifyRead(new System.Text.UTF7Encoding(), GenRandomNewLine(false));
         }
-    */
+        */
 
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
         public void UTF8Encoding()
@@ -962,13 +962,13 @@ namespace System.IO.Ports.Tests
             /*
                     if (!retValue)
                     {
-                        Debug.WriteLine("\nstrToWrite = ");
-                        TCSupport.PrintChars(strToWrite.ToCharArray());
-
-                        Debug.WriteLine("\nnewLine = ");
-                        TCSupport.PrintChars(newLine.ToCharArray());
+                    Debug.WriteLine("\nstrToWrite = ");
+                    TCSupport.PrintChars(strToWrite.ToCharArray());
+                    
+                    Debug.WriteLine("\nnewLine = ");
+                    TCSupport.PrintChars(newLine.ToCharArray());
                     }
-            */
+                    */
         }
 
         private void VerifyReadToWithWriteLine(Encoding encoding, string newLine)

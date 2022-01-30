@@ -66,7 +66,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             /// <summary>
             /// <para>Gets specified metadata from the cache, or retrieves metadata from given <paramref name="metadataSource"/>
             /// and adds it to the cache if it's not there yet.</para>
-            /// 
+            ///
             /// <para><paramref name="metadataSource"/> is expected to to provide metadata at least until this method returns.</para>
             /// </summary>
             /// <returns>

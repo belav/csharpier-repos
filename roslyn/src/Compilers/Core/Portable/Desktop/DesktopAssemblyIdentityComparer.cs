@@ -62,7 +62,7 @@ namespace Microsoft.CodeAnalysis
         ///    </runtime>
         /// </configuration>
         /// ]]>
-        /// 
+        ///
         /// Keeps the stream open.
         /// </remarks>
         public static DesktopAssemblyIdentityComparer LoadFromXml(Stream input)

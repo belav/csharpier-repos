@@ -22,9 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// diagnostics. We shouldn't return from ForceComplete (i.e. indicate that diagnostics are
         /// available) until this is equal to <see cref="CompletionPart.All"/>, except that when completing
         /// with a given position, we might not complete <see cref="CompletionPart"/>.Member*.
-        /// 
-        /// Since completeParts is used as a flag indicating completion of other assignments 
-        /// it must be volatile to ensure the read is not reordered/optimized to happen 
+        ///
+        /// Since completeParts is used as a flag indicating completion of other assignments
+        /// it must be volatile to ensure the read is not reordered/optimized to happen
         /// before the writes.
         /// </summary>
         private volatile int _completeParts;
@@ -35,8 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Used to force (source) symbols to a given state of completion when the only potential remaining 
-        /// part is attributes. This does force the invariant on the caller that the implementation of 
+        /// Used to force (source) symbols to a given state of completion when the only potential remaining
+        /// part is attributes. This does force the invariant on the caller that the implementation of
         /// of <see cref="Symbol.GetAttributes"/> will set the part <see cref="CompletionPart.Attributes"/> on
         /// the thread that actually completes the loading of attributes. Failure to do so will potentially
         /// result in a deadlock.

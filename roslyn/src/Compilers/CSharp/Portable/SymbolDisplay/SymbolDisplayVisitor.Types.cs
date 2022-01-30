@@ -560,7 +560,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Returns true if tuple type syntax can be used to refer to the tuple type without loss of information.
-        /// For example, it cannot be used when extension tuple is using non-default friendly names. 
+        /// For example, it cannot be used when extension tuple is using non-default friendly names.
         /// </summary>
         /// <param name="tupleSymbol"></param>
         /// <returns></returns>

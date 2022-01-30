@@ -13,11 +13,11 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Represents subsystem version, see /subsystemversion command line 
+    /// Represents subsystem version, see /subsystemversion command line
     /// option for details and valid values.
-    /// 
+    ///
     /// The following table lists common subsystem versions of Windows.
-    /// 
+    ///
     /// Windows version             Subsystem version
     ///   - Windows 2000                5.00
     ///   - Windows XP                  5.01
@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis
         public static SubsystemVersion Windows2000 => new SubsystemVersion(5, 0);
 
         /// <summary>
-        /// Subsystem version: Windows XP 
+        /// Subsystem version: Windows XP
         /// </summary>
         public static SubsystemVersion WindowsXP => new SubsystemVersion(5, 1);
 

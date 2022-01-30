@@ -13,14 +13,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
     /// This type is responsible for adding debugging sequence points for the executable code.
-    /// It can be combined with other <see cref="Instrumenter"/>s. Usually, this class should be 
+    /// It can be combined with other <see cref="Instrumenter"/>s. Usually, this class should be
     /// the root of the chain in order to ensure sound debugging experience for the instrumented code.
     /// In other words, sequence points are typically applied after all other changes.
     /// </summary>
     internal partial class DebugInfoInjector : CompoundInstrumenter
     {
         /// <summary>
-        /// A singleton object that performs only one type of instrumentation - addition of debugging sequence points. 
+        /// A singleton object that performs only one type of instrumentation - addition of debugging sequence points.
         /// </summary>
         public static readonly DebugInfoInjector Singleton = new DebugInfoInjector(
             Instrumenter.NoOp
@@ -304,7 +304,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Add sequence point |here|:
-        /// 
+        ///
         /// foreach (Type var in |expr|) { }
         /// </summary>
         /// <remarks>
@@ -340,7 +340,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Add sequence point |here|:
-        /// 
+        ///
         /// |foreach| (Type var in expr) { }
         /// </summary>
         /// <remarks>
@@ -376,7 +376,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Add sequence point |here|:
-        /// 
+        ///
         /// foreach (|Type var| in expr) { }
         /// </summary>
         /// <remarks>

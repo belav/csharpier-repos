@@ -78,7 +78,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Module's ordinal within containing assembly's Modules array.
         /// 0 - for a source module, etc.
-        /// -1 - for a module that doesn't have containing assembly, or has it, but is not part of Modules array. 
+        /// -1 - for a module that doesn't have containing assembly, or has it, but is not part of Modules array.
         /// </summary>
         internal abstract int Ordinal { get; }
 
@@ -169,7 +169,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns an array of assembly identities for assemblies referenced by this module.
-        /// Items at the same position from ReferencedAssemblies and from ReferencedAssemblySymbols 
+        /// Items at the same position from ReferencedAssemblies and from ReferencedAssemblySymbols
         /// correspond to each other.
         /// </summary>
         public ImmutableArray<AssemblyIdentity> ReferencedAssemblies
@@ -179,17 +179,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns an array of assembly identities for assemblies referenced by this module.
-        /// Items at the same position from GetReferencedAssemblies and from GetReferencedAssemblySymbols 
+        /// Items at the same position from GetReferencedAssemblies and from GetReferencedAssemblySymbols
         /// should correspond to each other.
-        /// 
+        ///
         /// The array and its content is provided by ReferenceManager and must not be modified.
         /// </summary>
         /// <returns></returns>
         internal abstract ImmutableArray<AssemblyIdentity> GetReferencedAssemblies(); // TODO: Remove this method and make ReferencedAssemblies property abstract instead.
 
         /// <summary>
-        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced 
-        /// by this module. Items at the same position from ReferencedAssemblies and 
+        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced
+        /// by this module. Items at the same position from ReferencedAssemblies and
         /// from ReferencedAssemblySymbols correspond to each other.
         /// </summary>
         public ImmutableArray<AssemblySymbol> ReferencedAssemblySymbols
@@ -198,12 +198,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced 
-        /// by this module. Items at the same position from GetReferencedAssemblies and 
-        /// from GetReferencedAssemblySymbols should correspond to each other. If reference is 
+        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced
+        /// by this module. Items at the same position from GetReferencedAssemblies and
+        /// from GetReferencedAssemblySymbols should correspond to each other. If reference is
         /// not resolved by compiler, GetReferencedAssemblySymbols returns MissingAssemblySymbol in the
         /// corresponding item.
-        /// 
+        ///
         /// The array and its content is provided by ReferenceManager and must not be modified.
         /// </summary>
         internal abstract ImmutableArray<AssemblySymbol> GetReferencedAssemblySymbols(); // TODO: Remove this method and make ReferencedAssemblySymbols property abstract instead.
@@ -228,14 +228,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// A helper method for ReferenceManager to set assembly identities for assemblies 
+        /// A helper method for ReferenceManager to set assembly identities for assemblies
         /// referenced by this module and corresponding AssemblySymbols.
         /// </summary>
         /// <param name="moduleReferences">A description of the assemblies referenced by this module.</param>
         /// <param name="originatingSourceAssemblyDebugOnly">
         /// Source assembly that triggered creation of this module symbol.
         /// For debug purposes only, this assembly symbol should not be persisted within
-        /// this module symbol because the module can be shared across multiple source 
+        /// this module symbol because the module can be shared across multiple source
         /// assemblies. This method will only be called for the first one.
         /// </param>
         internal abstract void SetReferences(
@@ -248,14 +248,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal abstract bool HasUnifiedReferences { get; }
 
-        /// <summary> 
-        /// Returns a unification use-site error (if any) for a symbol contained in this module 
+        /// <summary>
+        /// Returns a unification use-site error (if any) for a symbol contained in this module
         /// that is referring to a specified <paramref name="dependentType"/>.
-        /// </summary> 
-        /// <remarks> 
-        /// If an assembly referenced by this module isn't exactly matching any reference given to compilation 
-        /// the Assembly Manager might decide to use another reference if it matches except for version 
-        /// (it unifies the version with the existing reference).  
+        /// </summary>
+        /// <remarks>
+        /// If an assembly referenced by this module isn't exactly matching any reference given to compilation
+        /// the Assembly Manager might decide to use another reference if it matches except for version
+        /// (it unifies the version with the existing reference).
         /// </remarks>
         internal abstract bool GetUnificationUseSiteDiagnostic(
             ref DiagnosticInfo result,
@@ -382,7 +382,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// If this symbol represents a metadata module returns the underlying <see cref="ModuleMetadata"/>.
-        /// 
+        ///
         /// Otherwise, this returns <see langword="null"/>.
         /// </summary>
         public abstract ModuleMetadata GetMetadata();

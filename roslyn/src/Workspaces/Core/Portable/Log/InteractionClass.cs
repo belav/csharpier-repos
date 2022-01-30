@@ -9,10 +9,10 @@ using System;
 namespace Microsoft.CodeAnalysis.Internal.Log
 {
     /// <summary>
-    /// An interaction class defines how much time is expected to reach a time point, the response 
+    /// An interaction class defines how much time is expected to reach a time point, the response
     /// time point being the most commonly used. The interaction classes correspond to human perception,
-    /// so, for example, all interactions in the Fast class are perceived as fast and roughly feel like 
-    /// they have the same performance. By defining these interaction classes, we can describe 
+    /// so, for example, all interactions in the Fast class are perceived as fast and roughly feel like
+    /// they have the same performance. By defining these interaction classes, we can describe
     /// performance using adjectives that have a precise, consistent meaning.
     /// </summary>
     internal enum InteractionClass

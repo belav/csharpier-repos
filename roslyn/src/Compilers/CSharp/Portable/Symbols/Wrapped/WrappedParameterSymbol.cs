@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
     /// Represents a parameter that is based on another parameter.
-    /// When inheriting from this class, one shouldn't assume that 
+    /// When inheriting from this class, one shouldn't assume that
     /// the default behavior it has is appropriate for every case.
     /// That behavior should be carefully reviewed and derived type
     /// should override behavior as appropriate.

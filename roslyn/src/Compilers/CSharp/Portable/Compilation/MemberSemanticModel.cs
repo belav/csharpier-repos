@@ -108,7 +108,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// The member symbol 
+        /// The member symbol
         /// </summary>
         internal Symbol MemberSymbol
         {
@@ -2127,7 +2127,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// This overload exists for callers who already have a node in hand 
+        /// This overload exists for callers who already have a node in hand
         /// and don't want to search through the tree.
         /// </summary>
         private Binder GetEnclosingBinderInternal(CSharpSyntaxNode node, int position)
@@ -2522,7 +2522,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <remarks>
         /// CONSIDER: can this share code with MemberSemanticModel.GetEnclosingBinder?
-        /// 
+        ///
         /// Returned binder doesn't need to have <see cref="BinderFlags.SemanticModel"/> set - the caller will add it.
         /// </remarks>
         private static Binder GetLambdaEnclosingBinder(
@@ -3039,16 +3039,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// The incremental binder is used when binding statements. Whenever a statement
-        /// is bound, it checks the bound node cache to see if that statement was bound, 
-        /// and returns it instead of rebinding it. 
-        /// 
+        /// is bound, it checks the bound node cache to see if that statement was bound,
+        /// and returns it instead of rebinding it.
+        ///
         /// For example, we might have:
         ///    while (x > goo())
         ///    {
         ///      y = y * x;
         ///      z = z + y;
         ///    }
-        /// 
+        ///
         /// We might first get semantic info about "z", and thus bind just the statement
         /// "z = z + y". Later, we might bind the entire While block. While binding the while
         /// block, we can reuse the binding we did of "z = z + y".

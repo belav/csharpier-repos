@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         /// <summary>
         /// Checks if this brace completion service should be the service used to provide brace completions at
         /// the specified position with the specified opening brace.
-        /// 
+        ///
         /// Only one implementation of <see cref="IBraceCompletionService"/> should return true
         /// for a given brace, opening position, and document.  Only that service will be asked
         /// for brace completion results.

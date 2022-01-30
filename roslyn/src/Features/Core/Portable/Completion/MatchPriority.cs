@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         /// <summary>
         /// The matching algorithm should give this item no special treatment.
-        /// 
+        ///
         /// Ordinary <see cref="CompletionProvider"/>s typically specify this.
         /// </summary>
         public static readonly int Default = 0;
@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// The matching algorithm will tend to prefer this item unless
         /// a dramatically better text-based match is available.
-        /// 
-        /// With no filter text, this item (or the first item alphabetically 
+        ///
+        /// With no filter text, this item (or the first item alphabetically
         /// with this priority) should always be selected.
         ///
         /// This is used for specific IDE scenarios like "Object creation preselection"

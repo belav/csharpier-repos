@@ -13,10 +13,10 @@ namespace Moq.Tests
     public class CSharpCompilerExpressionsFixture
     {
         /// <summary>
-		///   Documents some cases that can lead to the C# compiler introducing / not introducing
-		///   `<see cref="ExpressionType.Convert"/>` nodes in <see cref="Expression"/>s. These
-		///   tests are here to guide us when deciding whether we should add/remove such nodes.
-		/// </summary>
+        ///   Documents some cases that can lead to the C# compiler introducing / not introducing
+        ///   `<see cref="ExpressionType.Convert"/>` nodes in <see cref="Expression"/>s. These
+        ///   tests are here to guide us when deciding whether we should add/remove such nodes.
+        /// </summary>
         public class Convert_nodes
         {
             [Fact]

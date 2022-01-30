@@ -3,9 +3,9 @@
 /// <license>
 /// This is a port of the SciMark2a Java Benchmark to C# by
 /// Chris Re (cmr28@cornell.edu) and Werner Vogels (vogels@cs.cornell.edu)
-/// 
+///
 /// For details on the original authors see http://math.nist.gov/scimark2
-/// 
+///
 /// This software is likely to burn your processor, bitflip your memory chips
 /// anihilate your screen and corrupt all your disks, so you it at your
 /// own risk.
@@ -24,8 +24,8 @@ namespace SciMark2
         public static double num_flops(int N, int nz, int num_iterations)
         {
             /* Note that if nz does not divide N evenly, then the
-			actual number of nonzeros used is adjusted slightly.
-			*/
+            actual number of nonzeros used is adjusted slightly.
+            */
             int actual_nz = (nz / N) * N;
             return ((double)actual_nz) * 2.0 * ((double)num_iterations);
         }

@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// The compiler needs to take advantage of features on named pipes which require target framework
-    /// specific APIs. This class is meant to provide a simple, universal interface on top of the 
+    /// specific APIs. This class is meant to provide a simple, universal interface on top of the
     /// multi-targeting code that is needed here.
     /// </summary>
     internal static class NamedPipeUtil
@@ -56,9 +56,9 @@ namespace Microsoft.CodeAnalysis
             );
 
         /// <summary>
-        /// Does the client of "pipeStream" have the same identity and elevation as we do? The <see cref="CreateClient"/> and 
-        /// <see cref="CreateServer(string, PipeDirection?)" /> methods will already guarantee that the identity of the client and server are the 
-        /// same. This method is attempting to validate that the elevation level is the same between both ends of the 
+        /// Does the client of "pipeStream" have the same identity and elevation as we do? The <see cref="CreateClient"/> and
+        /// <see cref="CreateServer(string, PipeDirection?)" /> methods will already guarantee that the identity of the client and server are the
+        /// same. This method is attempting to validate that the elevation level is the same between both ends of the
         /// named pipe (want to disallow low priv session sending compilation requests to an elevated one).
         /// </summary>
         internal static bool CheckClientElevationMatches(NamedPipeServerStream pipeStream)
@@ -122,7 +122,7 @@ namespace Microsoft.CodeAnalysis
         const int s_currentUserOnlyValue = 0x20000000;
 
         /// <summary>
-        /// Mono supports CurrentUserOnly even though it's not exposed on the reference assemblies for net472. This 
+        /// Mono supports CurrentUserOnly even though it's not exposed on the reference assemblies for net472. This
         /// must be used because ACL security does not work.
         /// </summary>
         private static readonly PipeOptions CurrentUserOption = PlatformInformation.IsRunningOnMono

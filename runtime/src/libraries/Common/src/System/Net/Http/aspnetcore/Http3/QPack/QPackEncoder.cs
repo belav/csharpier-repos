@@ -492,13 +492,13 @@ namespace System.Net.Http.QPack
 
         /*
          *     0   1   2   3   4   5   6   7
-               +---+---+---+---+---+---+---+---+
-               |   Required Insert Count (8+)  |
-               +---+---------------------------+
-               | S |      Delta Base (7+)      |
-               +---+---------------------------+
-               |      Compressed Headers     ...
-               +-------------------------------+
+         +---+---+---+---+---+---+---+---+
+         |   Required Insert Count (8+)  |
+         +---+---------------------------+
+         | S |      Delta Base (7+)      |
+         +---+---------------------------+
+         |      Compressed Headers     ...
+         +-------------------------------+
          *
          */
         private static bool EncodeHeaderBlockPrefix(Span<byte> destination, out int bytesWritten)

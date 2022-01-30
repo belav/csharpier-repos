@@ -551,7 +551,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Represents SZARRAY - zero-based one-dimensional array 
+        /// Represents SZARRAY - zero-based one-dimensional array
         /// </summary>
         private sealed class SZArray : ArrayTypeSymbol
         {
@@ -585,7 +585,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             /// <summary>
             /// SZArray is an array type encoded in metadata with ELEMENT_TYPE_SZARRAY (always single-dim array with 0 lower bound).
-            /// Non-SZArray type is encoded in metadata with ELEMENT_TYPE_ARRAY and with optional sizes and lower bounds. Even though 
+            /// Non-SZArray type is encoded in metadata with ELEMENT_TYPE_ARRAY and with optional sizes and lower bounds. Even though
             /// non-SZArray can also be a single-dim array with 0 lower bound, the encoding of these types in metadata is distinct.
             /// </summary>
             public override bool IsSZArray

@@ -23,12 +23,12 @@ namespace Castle.DynamicProxy
     using System.Runtime.CompilerServices;
 
     /// <summary>
-	/// Encapsulates the information needed to build an attribute.
-	/// </summary>
-	/// <remarks>
-	/// Arrays passed to this class as constructor arguments or property or field values become owned by this class.
-	/// They should not be mutated after creation.
-	/// </remarks>
+    /// Encapsulates the information needed to build an attribute.
+    /// </summary>
+    /// <remarks>
+    /// Arrays passed to this class as constructor arguments or property or field values become owned by this class.
+    /// They should not be mutated after creation.
+    /// </remarks>
     public class CustomAttributeInfo : IEquatable<CustomAttributeInfo>
     {
         // Cached empty arrays to avoid unnecessary allocations

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editing
 {
     /// <summary>
-    /// An editor for making changes to a syntax tree. 
+    /// An editor for making changes to a syntax tree.
     /// </summary>
     public class SyntaxEditor
     {
@@ -127,7 +127,7 @@ namespace Microsoft.CodeAnalysis.Editing
         /// Replace the specified node with a node produced by the function.
         /// </summary>
         /// <param name="node">The node to replace that already exists in the tree.</param>
-        /// <param name="computeReplacement">A function that computes a replacement node. 
+        /// <param name="computeReplacement">A function that computes a replacement node.
         /// The node passed into the compute function includes changes from prior edits. It will not appear as a descendant of the original root.</param>
         public void ReplaceNode(
             SyntaxNode node,

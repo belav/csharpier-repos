@@ -27,14 +27,14 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// <para>The <see cref="TagSource"/> is the core part of our asynchronous
         /// tagging infrastructure. It is the coordinator between <see cref="ProduceTagsAsync(TaggerContext{TTag}, CancellationToken)"/>s,
         /// <see cref="ITaggerEventSource"/>s, and <see cref="ITagger{T}"/>s.</para>
-        /// 
+        ///
         /// <para>The <see cref="TagSource"/> is the type that actually owns the
         /// list of cached tags. When an <see cref="ITaggerEventSource"/> says tags need to be  recomputed,
         /// the tag source starts the computation and calls <see cref="ProduceTagsAsync(TaggerContext{TTag}, CancellationToken)"/> to build
-        /// the new list of tags. When that's done, the tags are stored in <see cref="CachedTagTrees"/>. The 
-        /// tagger, when asked for tags from the editor, then returns the tags that are stored in 
+        /// the new list of tags. When that's done, the tags are stored in <see cref="CachedTagTrees"/>. The
+        /// tagger, when asked for tags from the editor, then returns the tags that are stored in
         /// <see cref="CachedTagTrees"/></para>
-        /// 
+        ///
         /// <para>There is a one-to-many relationship between <see cref="TagSource"/>s
         /// and <see cref="ITagger{T}"/>s. Special cases, like reference highlighting (which processes multiple
         /// subject buffers at once) have their own providers and tag source derivations.</para>
@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             /// <summary>
             /// If we get more than this many differences, then we just issue it as a single change
             /// notification.  The number has been completely made up without any data to support it.
-            /// 
+            ///
             /// Internal for testing purposes.
             /// </summary>
             private const int CoalesceDifferenceCount = 10;
@@ -98,7 +98,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             private object? _state_doNotAccessDirecty;
 
             /// <summary>
-            /// Keep track of if we are processing the first <see cref="ITagger{T}.GetTags"/> request.  If our provider returns 
+            /// Keep track of if we are processing the first <see cref="ITagger{T}.GetTags"/> request.  If our provider returns
             /// <see langword="true"/> for <see cref="AbstractAsynchronousTaggerProvider{TTag}.ComputeInitialTagsSynchronously"/>,
             /// then we'll want to synchronously block then and only then for tags.
             /// </summary>

@@ -379,7 +379,7 @@ public class FastTailCallCandidates
     /// </summary>
     /// <remarks>
     ///
-    /// The callee has 6 int register arguments on x64 linux. 
+    /// The callee has 6 int register arguments on x64 linux.
     /// With 8 * 8 (64) bytes stack size
     ///
     /// Return 100 is a pass.
@@ -617,8 +617,8 @@ public class FastTailCallCandidates
     /// caller has 8 register arguments and 32 bytes of stack space
     /// callee has 8 register arguments and 16 bytes of stack space
     ///
-    /// Arm64 can fast tail call while x64 linux will not. 
-    /// Note that this is due to a bug in LowerFastTailCall that assumes 
+    /// Arm64 can fast tail call while x64 linux will not.
+    /// Note that this is due to a bug in LowerFastTailCall that assumes
     /// nCallerArgs <= nCalleeArgs
     ///
     /// Return 100 is a pass.
@@ -723,7 +723,7 @@ public class FastTailCallCandidates
     }
 
     /// <summary>
-    /// Possible to fast tail call on all targets. See 
+    /// Possible to fast tail call on all targets. See
     /// CallerHFaCaseCalleeStackArgs for info.
     /// </summary>
     /// <remarks>

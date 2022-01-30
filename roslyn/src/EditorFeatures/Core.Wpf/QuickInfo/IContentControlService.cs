@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
         /// <summary>
         /// get <see cref="DisposableToolTip"/> /> from the given <paramref name="textBuffer"/>'s <paramref name="contentSpan"/>
         /// based on given <paramref name="baseDocument"/>
-        /// 
+        ///
         /// tooltip will show embedded textview which shows code from the content span of the text buffer with the context of the
         /// base document
         /// </summary>
@@ -40,7 +40,7 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
 
         /// <summary>
         /// get <see cref="DisposableToolTip"/> /> from the given <paramref name="textBuffer"/>
-        /// 
+        ///
         /// tooltip will show embedded textview with whole content from the buffer. if the buffer has associated tags
         /// in its property bag, it will be picked up by taggers associated with the tooltip
         /// </summary>
@@ -51,7 +51,7 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
 
         /// <summary>
         /// attach <see cref="DisposableToolTip"/> to the given <paramref name="element"/>
-        /// 
+        ///
         /// this will lazily create the tooltip and dispose it properly when it goes away
         /// </summary>
         void AttachToolTipToControl(

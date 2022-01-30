@@ -437,7 +437,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Return error code that has highest priority while calculating use site error for this symbol. 
+        /// Return error code that has highest priority while calculating use site error for this symbol.
         /// </summary>
         protected override int HighestPriorityUseSiteError
         {

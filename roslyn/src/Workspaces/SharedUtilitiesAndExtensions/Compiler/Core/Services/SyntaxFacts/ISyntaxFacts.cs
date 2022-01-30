@@ -23,15 +23,15 @@ namespace Microsoft.CodeAnalysis.LanguageServices
     /// fashion over the languages. Helpers in this type should only be one of the following forms:
     /// <list type="bullet">
     /// <item>
-    /// 'IsXXX' where 'XXX' exactly matches one of the same named syntax (node, token, trivia, list, etc.) constructs that 
-    /// both C# and VB have. For example 'IsSimpleName' to correspond to C# and VB's SimpleNameSyntax node.  These 'checking' 
+    /// 'IsXXX' where 'XXX' exactly matches one of the same named syntax (node, token, trivia, list, etc.) constructs that
+    /// both C# and VB have. For example 'IsSimpleName' to correspond to C# and VB's SimpleNameSyntax node.  These 'checking'
     /// methods should never fail.  For non leaf node types this should be implemented as a typecheck ('is' in C#, 'typeof ... is'
-    /// in VB).  For leaf nodes, this should be implemented by deffering to <see cref="ISyntaxKinds"/> to check against the 
+    /// in VB).  For leaf nodes, this should be implemented by deffering to <see cref="ISyntaxKinds"/> to check against the
     /// raw kind of the node.
     /// </item>
     /// <item>
     /// 'GetPartsOfXXX(SyntaxNode node, out SyntaxNode/SyntaxToken part1, ...)' where 'XXX' one of the same named Syntax constructs
-    /// that both C# and VB have, and where the returned parts correspond to the members those nodes have in common across the 
+    /// that both C# and VB have, and where the returned parts correspond to the members those nodes have in common across the
     /// languages.  For example 'GetPartsOfQualifiedName(SyntaxNode node, out SyntaxNode left, out SyntaxToken dotToken, out SyntaxNode right)'
     /// VB.  These functions should throw if passed a node that the corresponding 'IsXXX' did not return <see langword="true"/> for.
     /// For nodes that only have a single child, 'GetPartsOfXXX' is not not needed and can be replaced with the easier to use
@@ -55,7 +55,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
     /// <list type="bullet">
     /// <item>
     /// Functions that attempt to blur the lines between similar constructs in the same language.  For example, a QualifiedName
-    /// is not the same as a MemberAccessExpression (despite A.B being representable as either depending on context). 
+    /// is not the same as a MemberAccessExpression (despite A.B being representable as either depending on context).
     /// Features that need to handle both should make it clear that they are doing so, showing that they're doing the right
     /// thing for the contexts each can arise in (for the above example in 'type' vs 'expression' contexts).
     /// </item>
@@ -83,7 +83,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
     /// </list>
     /// </summary>
     /// <remarks>
-    /// Many helpers in this type currently violate the above 'dos' and 'do nots'.  They should be removed and either 
+    /// Many helpers in this type currently violate the above 'dos' and 'do nots'.  They should be removed and either
     /// inlined directly into the feature that needs if (if only a single feature), or moved into a dedicated service
     /// for that purpose if needed by multiple features.
     /// </remarks>

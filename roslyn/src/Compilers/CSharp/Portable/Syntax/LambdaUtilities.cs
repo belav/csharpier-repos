@@ -235,16 +235,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// 1) select/group-by expression is the same identifier as the "source" identifier and
         /// 2) at least one Where or OrderBy clause but no other clause is present in the contained query body or
         ///    the expression in question is a group-by expression and the body has no clause
-        /// 
+        ///
         /// do not translate into lambdas.
         /// By "source" identifier we mean the identifier specified in the from clause that initiates the query or the query continuation that includes the body.
-        /// 
+        ///
         /// The above condition can be derived from the language specification (chapter 7.16.2) as follows:
         /// - In order for 7.16.2.5 "Select clauses" to be applicable the following conditions must hold:
         ///   - There has to be at least one clause in the body, otherwise the query is reduced into a final form by 7.16.2.3 "Degenerate query expressions".
         ///   - Only where and order-by clauses may be present in the query body, otherwise a transformation in 7.16.2.4 "From, let, where, join and orderby clauses"
         ///     produces pattern that doesn't match the requirements of 7.16.2.5.
-        ///   
+        ///
         /// - In order for 7.16.2.6 "Groupby clauses" to be applicable the following conditions must hold:
         ///   - Only where and order-by clauses may be present in the query body, otherwise a transformation in 7.16.2.4 "From, let, where, join and orderby clauses"
         ///     produces pattern that doesn't match the requirements of 7.16.2.5.
@@ -308,7 +308,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <remarks>
         /// In C# lambda bodies are expressions or block statements. In both cases it's a single node.
-        /// In VB a lambda body might be a sequence of nodes (statements). 
+        /// In VB a lambda body might be a sequence of nodes (statements).
         /// We define this function to minimize differences between C# and VB implementation.
         /// </remarks>
         public static bool IsLambdaBodyStatementOrExpression(SyntaxNode node)
@@ -423,7 +423,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// "Pair lambda" is a synthesized lambda that creates an instance of an anonymous type representing a pair of values. 
+        /// "Pair lambda" is a synthesized lambda that creates an instance of an anonymous type representing a pair of values.
         /// </summary>
         internal static bool IsQueryPairLambda(SyntaxNode syntax)
         {
@@ -526,7 +526,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Given a node that represents a variable declaration, lambda or a closure scope return the position to be used to calculate 
+        /// Given a node that represents a variable declaration, lambda or a closure scope return the position to be used to calculate
         /// the node's syntax offset with respect to its containing member.
         /// </summary>
         internal static int GetDeclaratorPosition(SyntaxNode node)

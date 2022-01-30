@@ -743,10 +743,10 @@ namespace System.Web.Util
                 // this optimization is temp disable as it doesn't work for some encodings
                 /*
                                 if (_numBytes == 0 && ((b & 0x80) == 0)) {
-                                    AddChar((char)b);
+                                AddChar((char)b);
                                 }
                                 else
-                */
+                                */
                 {
                     if (_byteBuffer == null)
                     {

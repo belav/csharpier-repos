@@ -61,7 +61,7 @@ namespace Microsoft.CodeAnalysis.AddImport
 
         /// <summary>
         /// Gets data for how to fix a particular <see cref="Diagnostic" /> id within the specified Document.
-        /// Similar to <see cref="GetFixesAsync(Document, TextSpan, string, int, bool, ISymbolSearchService, bool, ImmutableArray{PackageSource}, CancellationToken)"/> 
+        /// Similar to <see cref="GetFixesAsync(Document, TextSpan, string, int, bool, ISymbolSearchService, bool, ImmutableArray{PackageSource}, CancellationToken)"/>
         /// except it only returns fix data when there is a single using fix for a given span
         /// </summary>
         Task<ImmutableArray<AddImportFixData>> GetUniqueFixesAsync(

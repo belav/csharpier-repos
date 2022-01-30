@@ -25,10 +25,10 @@ namespace Microsoft.CodeAnalysis
         /// that they need.
         ///
         /// Note: this facility does not extend to getting the version as well.  That's because the
-        /// version of a document depends on both the current source contents and the contents from 
+        /// version of a document depends on both the current source contents and the contents from
         /// the previous version of the document.  (i.e. if the contents are the same, then we will
         /// preserve the same version, otherwise we'll move the version forward).  Because determining
-        /// the version depends on comparing text, and because getting the old text may block, we 
+        /// the version depends on comparing text, and because getting the old text may block, we
         /// do not have the ability to know the version of the document up front, and instead can
         /// only retrieve is asynchronously through <see cref="TextAndVersionSource"/>.
         /// </summary>

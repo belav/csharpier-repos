@@ -18,24 +18,24 @@ namespace System.IO.ManualTests
         public static void Throw_FileStreamDispose_WhenRemoteMountRunsOutOfSpace()
         {
             /*
-
+            
             Example of mounting a remote folder using sshfs and two Linux machines:
-
+            
             In remote machine:
-                - Install openssh-server.
-                - Create an ext4 partition of 1 MB size.
-                
+            - Install openssh-server.
+            - Create an ext4 partition of 1 MB size.
+            
             In local machine:
-                - Install sshfs and openssh-client.
-                - Create a local folder inside the current user's home, named "mountedremote":
-                    $ mkdir ~/mountedremote
-                - Mount the remote folder into "mountedremote":
-                    $ sudo sshfs -o allow_other,default_permissions remoteuser@xxx.xxx.xxx.xxx:/home/remoteuser/share /home/localuser/mountedremote
-                - Set the environment variable MANUAL_TESTS=1
-                - Run this manual test.
-                - Expect the exception.
-                - Unmount the folder:
-                    $ fusermount -u ~/mountedremote
+            - Install sshfs and openssh-client.
+            - Create a local folder inside the current user's home, named "mountedremote":
+            $ mkdir ~/mountedremote
+            - Mount the remote folder into "mountedremote":
+            $ sudo sshfs -o allow_other,default_permissions remoteuser@xxx.xxx.xxx.xxx:/home/remoteuser/share /home/localuser/mountedremote
+            - Set the environment variable MANUAL_TESTS=1
+            - Run this manual test.
+            - Expect the exception.
+            - Unmount the folder:
+            $ fusermount -u ~/mountedremote
             */
 
             string mountedPath = $"{Environment.GetEnvironmentVariable("HOME")}/mountedremote";
@@ -92,14 +92,14 @@ namespace System.IO.ManualTests
             // (unless we're root) and should skip silently
 
             /* This test requires an EXFAT partition. That can be created in memory like this:
-
+            
             sudo mkdir /mnt/ramdisk
             sudo mount -t ramfs ramfs /mnt/ramdisk
             sudo dd if=/dev/zero of=/mnt/ramdisk/exfat.image bs=1M count=512
             sudo mkfs.exfat /mnt/ramdisk/exfat.image
             sudo mkdir /mnt/exfatrd
             sudo mount -o loop /mnt/ramdisk/exfat.image /mnt/exfatrd
-
+            
             */
 
             File.WriteAllText("/mnt/exfatrd/1", "content");
@@ -115,18 +115,18 @@ namespace System.IO.ManualTests
         {
             /* This test verifies that Position is not altered when SetLength fails when a "disk out of space" error occurs.
              
-                Setup environment to have a drive with less than 1k available space:
-                - Create an 8mb fixed size VHD.
-                    - Open Computer Management -> Storage -> Disk Management
-                    - Follow these instructions:
-                      https://docs.microsoft.com/en-us/windows-server/storage/disk-management/manage-virtual-hard-disks
-
-                - Restrict the space available in the VHD.
-                    - Create a 512 bytes quota in the VHD created above using cmd:
-                      fsutil quota modify E: 512 512 SYSTEM
-                      fsutil quota modify E: 512 512 YourUser
-
-                - Run the test. If configured correctly, the SetLength operation should fail at least once.
+             Setup environment to have a drive with less than 1k available space:
+             - Create an 8mb fixed size VHD.
+             - Open Computer Management -> Storage -> Disk Management
+             - Follow these instructions:
+             https://docs.microsoft.com/en-us/windows-server/storage/disk-management/manage-virtual-hard-disks
+             
+             - Restrict the space available in the VHD.
+             - Create a 512 bytes quota in the VHD created above using cmd:
+             fsutil quota modify E: 512 512 SYSTEM
+             fsutil quota modify E: 512 512 YourUser
+             
+             - Run the test. If configured correctly, the SetLength operation should fail at least once.
              */
 
             using FileStream fs = File.Open("E:/dummy_file.txt", FileMode.OpenOrCreate);

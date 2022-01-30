@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     /// <summary>
     /// Handle a completion resolve request to add description.
-    /// 
+    ///
     /// TODO - This must be moved to the MS.CA.LanguageServer.Protocol project once the
     /// references to VS icon types and classified text runs are removed.
     /// See https://github.com/dotnet/roslyn/issues/55142

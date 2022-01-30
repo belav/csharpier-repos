@@ -69,7 +69,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     /// Base class for all name nodes
     /// </summary>
     /// <remarks>
-    /// All of these are <see cref="StackFrameTypeNode" />. If a node requires an identifier or name that 
+    /// All of these are <see cref="StackFrameTypeNode" />. If a node requires an identifier or name that
     /// is not a type then it should use <see cref="StackFrameToken"/> with <see cref="StackFrameKind.IdentifierToken"/>
     /// directly.
     /// </remarks>
@@ -150,7 +150,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     }
 
     /// <summary>
-    /// An identifier with an arity, such as "MyNamespace.MyClass`1" 
+    /// An identifier with an arity, such as "MyNamespace.MyClass`1"
     /// </summary>
     internal sealed class StackFrameGenericNameNode : StackFrameSimpleNameNode
     {
@@ -204,7 +204,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         /// Each unique array identifier for the type
         /// string[,][]
         ///        ^--- First array expression = "[,]"
-        ///           ^- Second array expression = "[]" 
+        ///           ^- Second array expression = "[]"
         /// </summary>
         public ImmutableArray<StackFrameArrayRankSpecifier> ArrayExpressions;
 
@@ -273,15 +273,15 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     }
 
     /// <summary>
-    /// The type argument list for a method declaration. 
-    /// 
+    /// The type argument list for a method declaration.
+    ///
     /// <code>
-    /// Ex: MyType.MyMethod[T, U, V](T t, U u, V v) 
-    ///                    ^-----------------------  "[" = Open Token 
+    /// Ex: MyType.MyMethod[T, U, V](T t, U u, V v)
+    ///                    ^-----------------------  "[" = Open Token
     ///                     ^------^   ------------  "T, U, V" = SeparatedStackFrameNodeList&lt;StackFrameTypeArgumentNode&gt;
     ///                             ^--------------  "]" = Close Token
     /// </code>
-    /// 
+    ///
     /// </summary>
     internal sealed class StackFrameTypeArgumentList : StackFrameNode
     {

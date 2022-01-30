@@ -11,16 +11,16 @@ namespace ILCompiler.DependencyAnalysisFramework
     /// <summary>
     /// Implement a dependency analysis framework. This works much like a Garbage Collector's mark algorithm
     /// in that it finds a set of nodes from an initial root set.
-    /// 
+    ///
     /// However, in contrast to a typical GC in addition to simple edges from a node, there may also
     /// be conditional edges where a node has a dependency if some other specific node exists in the
     /// graph, and dynamic edges in which a node has a dependency if some other node exists in the graph,
     /// but what that other node might be is not known until it may exist in the graph.
-    /// 
+    ///
     /// This analyzer also attempts to maintain a serialized state of why nodes are in the graph
     /// with strings describing the reason a given node was added to the graph. The degree of logging
     /// is configurable via the MarkStrategy
-    /// 
+    ///
     /// </summary>
     public sealed class DependencyAnalyzer<MarkStrategy, DependencyContextType>
         : DependencyAnalyzerBase<DependencyContextType>

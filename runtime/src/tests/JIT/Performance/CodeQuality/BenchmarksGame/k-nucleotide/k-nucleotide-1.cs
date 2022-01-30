@@ -8,9 +8,9 @@
 
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
- *
- * byte processing version using C# *3.0 idioms by Robert F. Tobler
- */
+   *
+   * byte processing version using C# *3.0 idioms by Robert F. Tobler
+   */
 
 using System;
 using System.IO;

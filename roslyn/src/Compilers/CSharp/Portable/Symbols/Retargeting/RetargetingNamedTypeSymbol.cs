@@ -20,8 +20,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 {
     /// <summary>
-    /// Represents a type of a RetargetingModuleSymbol. Essentially this is a wrapper around 
-    /// another NamedTypeSymbol that is responsible for retargeting referenced symbols from one assembly to another. 
+    /// Represents a type of a RetargetingModuleSymbol. Essentially this is a wrapper around
+    /// another NamedTypeSymbol that is responsible for retargeting referenced symbols from one assembly to another.
     /// It can retarget symbols for multiple assemblies at the same time.
     /// </summary>
     internal sealed class RetargetingNamedTypeSymbol : WrappedNamedTypeSymbol

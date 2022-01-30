@@ -382,13 +382,13 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
                 /*
                     Here we have the following values:
-
+                    
                     curOffs      ...    the code offset of the call
                     regMask      ...    mask of live pointer register variables
                     argMask      ...    bitmask of pushed pointer arguments
                     byrefRegMask ...    byref qualifier for regMask
                     byrefArgMask ...    byrer qualifier for argMask
-                */
+                    */
                 transition = new GcTransitionCall(
                     (int)curOffs,
                     Header.EbpFrame,

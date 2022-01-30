@@ -18,13 +18,13 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Remote
 {
     /// <summary>
-    /// Base type with servicehub helper methods. this is not tied to how Roslyn OOP works. 
-    /// 
+    /// Base type with servicehub helper methods. this is not tied to how Roslyn OOP works.
+    ///
     /// any type that derived from this type is supposed to be an entry point for servicehub services.
-    /// name of the type should match one appears in GenerateServiceHubConfigurationFiles.targets 
+    /// name of the type should match one appears in GenerateServiceHubConfigurationFiles.targets
     /// and signature of either its constructor or static CreateAsync must follow the convension
     /// ctor(Stream stream, IServiceProvider serviceProvider).
-    /// 
+    ///
     /// see servicehub detail from VSIDE onenote
     /// https://microsoft.sharepoint.com/teams/DD_VSIDE
     /// </summary>

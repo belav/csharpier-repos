@@ -8,19 +8,19 @@ using System.Linq.Expressions;
 namespace Moq
 {
     /// <summary>
-	/// Provides partial evaluation of subtrees, whenever they can be evaluated locally.
-	/// </summary>
-	/// <author>Matt Warren: http://blogs.msdn.com/mattwar</author>
-	/// <contributor>Documented by InSTEDD: http://www.instedd.org</contributor>
+    /// Provides partial evaluation of subtrees, whenever they can be evaluated locally.
+    /// </summary>
+    /// <author>Matt Warren: http://blogs.msdn.com/mattwar</author>
+    /// <contributor>Documented by InSTEDD: http://www.instedd.org</contributor>
     internal static class Evaluator
     {
         /// <summary>
-		/// Performs evaluation and replacement of independent sub-trees
-		/// </summary>
-		/// <param name="expression">The root of the expression tree.</param>
-		/// <param name="fnCanBeEvaluated">A function that decides whether a given expression
-		/// node can be part of the local function.</param>
-		/// <returns>A new tree with sub-trees evaluated and replaced.</returns>
+        /// Performs evaluation and replacement of independent sub-trees
+        /// </summary>
+        /// <param name="expression">The root of the expression tree.</param>
+        /// <param name="fnCanBeEvaluated">A function that decides whether a given expression
+        /// node can be part of the local function.</param>
+        /// <returns>A new tree with sub-trees evaluated and replaced.</returns>
         public static Expression PartialEval(
             Expression expression,
             Func<Expression, bool> fnCanBeEvaluated
@@ -32,10 +32,10 @@ namespace Moq
         }
 
         /// <summary>
-		/// Performs evaluation and replacement of independent sub-trees
-		/// </summary>
-		/// <param name="expression">The root of the expression tree.</param>
-		/// <returns>A new tree with sub-trees evaluated and replaced.</returns>
+        /// Performs evaluation and replacement of independent sub-trees
+        /// </summary>
+        /// <param name="expression">The root of the expression tree.</param>
+        /// <returns>A new tree with sub-trees evaluated and replaced.</returns>
         public static Expression PartialEval(Expression expression)
         {
             return PartialEval(
@@ -45,8 +45,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Evaluates and replaces sub-trees when first candidate is reached (top-down)
-		/// </summary>
+        /// Evaluates and replaces sub-trees when first candidate is reached (top-down)
+        /// </summary>
         private class SubtreeEvaluator : ExpressionVisitor
         {
             private HashSet<Expression> candidates;
@@ -87,9 +87,9 @@ namespace Moq
         }
 
         /// <summary>
-		/// Performs bottom-up analysis to determine which nodes can possibly
-		/// be part of an evaluated sub-tree.
-		/// </summary>
+        /// Performs bottom-up analysis to determine which nodes can possibly
+        /// be part of an evaluated sub-tree.
+        /// </summary>
         private class Nominator : ExpressionVisitor
         {
             private Func<Expression, bool> fnCanBeEvaluated;

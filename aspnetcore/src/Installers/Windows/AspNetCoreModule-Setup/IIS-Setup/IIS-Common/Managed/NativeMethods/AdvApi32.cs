@@ -79,7 +79,7 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
         TokenRestrictedSids,
 
         /// <summary>
-        /// The buffer receives a DWORD value that indicates the Terminal Services session identifier that is associated with the token. 
+        /// The buffer receives a DWORD value that indicates the Terminal Services session identifier that is associated with the token.
         /// </summary>
         TokenSessionId,
 
@@ -104,7 +104,7 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
         TokenAuditPolicy,
 
         /// <summary>
-        /// The buffer receives a TOKEN_ORIGIN value. 
+        /// The buffer receives a TOKEN_ORIGIN value.
         /// </summary>
         TokenOrigin,
 
@@ -144,7 +144,7 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
         TokenVirtualizationEnabled,
 
         /// <summary>
-        /// The buffer receives a TOKEN_MANDATORY_LABEL structure that specifies the token's integrity level. 
+        /// The buffer receives a TOKEN_MANDATORY_LABEL structure that specifies the token's integrity level.
         /// </summary>
         TokenIntegrityLevel,
 

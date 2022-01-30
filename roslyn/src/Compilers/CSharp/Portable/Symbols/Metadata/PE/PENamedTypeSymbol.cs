@@ -56,13 +56,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private ImmutableArray<Symbol> _lazyMembersInDeclarationOrder;
 
         /// <summary>
-        /// A map of members immediately contained within this type 
+        /// A map of members immediately contained within this type
         /// grouped by their name (case-sensitively).
         /// </summary>
         private Dictionary<string, ImmutableArray<Symbol>> _lazyMembersByName;
 
         /// <summary>
-        /// A map of types immediately contained within this type 
+        /// A map of types immediately contained within this type
         /// grouped by their name (case-sensitively).
         /// </summary>
         private Dictionary<string, ImmutableArray<PENamedTypeSymbol>> _lazyNestedTypes;
@@ -139,7 +139,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private class UncommonProperties
         {
             /// <summary>
-            /// Need to import them for an enum from a linked assembly, when we are embedding it. These symbols are not included into lazyMembersInDeclarationOrder.  
+            /// Need to import them for an enum from a linked assembly, when we are embedding it. These symbols are not included into lazyMembersInDeclarationOrder.
             /// </summary>
             internal ImmutableArray<PEFieldSymbol> lazyInstanceEnumFields;
             internal NamedTypeSymbol lazyEnumUnderlyingType;

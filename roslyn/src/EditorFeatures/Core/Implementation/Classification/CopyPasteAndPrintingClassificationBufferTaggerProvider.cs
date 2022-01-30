@@ -15,10 +15,10 @@ using Microsoft.VisualStudio.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 {
     /// <summary>
-    /// This is the tagger we use for buffer classification scenarios.  It is only used for 
+    /// This is the tagger we use for buffer classification scenarios.  It is only used for
     /// IAccurateTagger scenarios.  Namely: Copy/Paste and Printing.  We use an 'Accurate' buffer
     /// tagger since these features need to get classification tags for the entire file.
-    /// 
+    ///
     /// i.e. if you're printing, you want semantic classification even for code that's not in view.
     /// The same applies to copy/pasting.
     /// </summary>

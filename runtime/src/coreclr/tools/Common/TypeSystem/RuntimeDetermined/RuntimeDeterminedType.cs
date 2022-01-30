@@ -17,11 +17,11 @@ namespace Internal.TypeSystem
     /// The use of runtime determined types is limited to the dependency analysis and to communicating
     /// with the codegen backend during shared generic code generation. They should not show up within
     /// the system otherwise.
-    /// 
+    ///
     /// Runtime determined types behave mostly like the canonical type they are wrapping. Most of the overrides
     /// this type implements will forward the implementation to the <see cref="_rawCanonType"/>'s
     /// implementation.
-    /// 
+    ///
     /// Runtime determined types also behave like signature variables in the sense that they allow being
     /// substituted during signature instantiation.
     /// </remarks>

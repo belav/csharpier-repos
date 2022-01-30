@@ -19,16 +19,16 @@ namespace Moq
     internal static partial class ExpressionExtensions
     {
         /// <summary>
-		///   Wraps this <paramref name="expression"/> in a <see cref="ExpressionType.Convert"/> node if needed.
-		/// </summary>
-		/// <param name="expression">The <see cref="Expression"/> which should be wrapped.</param>
-		/// <param name="type">The <see cref="Type"/> with which to make the <paramref name="expression"/> compatible.</param>
-		/// <remarks>
-		///   LINQ expression trees generally enforce type compatibility rules that are stricter than
-		///   the assignment-compatibility used by e.g. <see cref="Type.IsAssignableFrom(Type)"/>. For
-		///   example, while <see langword="int"/> is assignable-to <see langword="object"/>, you
-		///   will need a conversion in a LINQ expression tree to model the value-type boxing operation.
-		/// </remarks>
+        ///   Wraps this <paramref name="expression"/> in a <see cref="ExpressionType.Convert"/> node if needed.
+        /// </summary>
+        /// <param name="expression">The <see cref="Expression"/> which should be wrapped.</param>
+        /// <param name="type">The <see cref="Type"/> with which to make the <paramref name="expression"/> compatible.</param>
+        /// <remarks>
+        ///   LINQ expression trees generally enforce type compatibility rules that are stricter than
+        ///   the assignment-compatibility used by e.g. <see cref="Type.IsAssignableFrom(Type)"/>. For
+        ///   example, while <see langword="int"/> is assignable-to <see langword="object"/>, you
+        ///   will need a conversion in a LINQ expression tree to model the value-type boxing operation.
+        /// </remarks>
         internal static Expression ConvertIfNeeded(this Expression expression, Type type)
         {
             if (expression.Type == type)
@@ -86,8 +86,8 @@ namespace Moq
         }
 
         /// <summary>
-		///   Checks whether the given expression <paramref name="e"/> can be split by <see cref="Split"/>.
-		/// </summary>
+        ///   Checks whether the given expression <paramref name="e"/> can be split by <see cref="Split"/>.
+        /// </summary>
         public static bool CanSplit(this Expression e)
         {
             switch (e.NodeType)
@@ -127,22 +127,22 @@ namespace Moq
         }
 
         /// <summary>
-		///   Splits an expression such as `<c>m => m.A.B(x).C[y] = z</c>` into a chain of parts
-		///   that can be set up one at a time:
-		///   <list>
-		///     <item>`<c>m => m.A</c>`</item>,
-		///     <item>`<c>... => ....B(x)</c>`</item>,
-		///     <item>`<c>... => ....C</c>`</item>,
-		///     <item>`<c>... => ...[y] = z</c>`</item>.
-		///   </list>
-		///   <para>
-		///     The split points are chosen such that each part has exactly one associated
-		///     <see cref="MethodInfo"/> and optionally some argument expressions.
-		///   </para>
-		/// </summary>
-		/// <exception cref="ArgumentException">
-		///   It was not possible to completely split up the expression.
-		/// </exception>
+        ///   Splits an expression such as `<c>m => m.A.B(x).C[y] = z</c>` into a chain of parts
+        ///   that can be set up one at a time:
+        ///   <list>
+        ///     <item>`<c>m => m.A</c>`</item>,
+        ///     <item>`<c>... => ....B(x)</c>`</item>,
+        ///     <item>`<c>... => ....C</c>`</item>,
+        ///     <item>`<c>... => ...[y] = z</c>`</item>.
+        ///   </list>
+        ///   <para>
+        ///     The split points are chosen such that each part has exactly one associated
+        ///     <see cref="MethodInfo"/> and optionally some argument expressions.
+        ///   </para>
+        /// </summary>
+        /// <exception cref="ArgumentException">
+        ///   It was not possible to completely split up the expression.
+        /// </exception>
         internal static Stack<MethodExpectation> Split(
             this LambdaExpression expression,
             bool allowNonOverridableLastProperty = false
@@ -474,8 +474,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Converts the body of the lambda expression into the <see cref="PropertyInfo"/> referenced by it.
-		/// </summary>
+        /// Converts the body of the lambda expression into the <see cref="PropertyInfo"/> referenced by it.
+        /// </summary>
         public static PropertyInfo ToPropertyInfo(this LambdaExpression expression)
         {
             if (expression.Body is MemberExpression prop)
@@ -493,8 +493,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Checks whether the body of the lambda expression is a property access.
-		/// </summary>
+        /// Checks whether the body of the lambda expression is a property access.
+        /// </summary>
         public static bool IsProperty(this LambdaExpression expression)
         {
             Debug.Assert(expression != null);
@@ -504,8 +504,8 @@ namespace Moq
         }
 
         /// <summary>
-		///   Checks whether the body of the lambda expression is a indexer access.
-		/// </summary>
+        ///   Checks whether the body of the lambda expression is a indexer access.
+        /// </summary>
         public static bool IsPropertyIndexer(this LambdaExpression expression)
         {
             Debug.Assert(expression != null);
@@ -559,9 +559,9 @@ namespace Moq
         }
 
         /// <devdoc>
-		/// TODO: remove this code when https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=331583 
-		/// is fixed.
-		/// </devdoc>
+        /// TODO: remove this code when https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=331583
+        /// is fixed.
+        /// </devdoc>
         public static string ToStringFixed(this Expression expression)
         {
             return new StringBuilder().AppendExpression(expression).ToString();

@@ -188,7 +188,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         /// <summary>
         /// Get unique ID per given data such as DiagnosticUpdatedArgs or TodoUpdatedArgs.
-        /// Data contains multiple items belong to one logical chunk. and the Id represents this particular 
+        /// Data contains multiple items belong to one logical chunk. and the Id represents this particular
         /// chunk of the data
         /// </summary>
         public abstract object GetItemKey(TData data);
@@ -200,7 +200,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         /// <summary>
         /// Get unique ID for given data that will be used to find data whose items needed to be merged together.
-        /// 
+        ///
         /// for example, for linked files, data that belong to same physical file will be gathered and items that belong to
         /// those data will be de-duplicated.
         /// </summary>

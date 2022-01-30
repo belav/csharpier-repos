@@ -20,17 +20,17 @@ namespace System.Data.Common
 #if DEBUG
         /*private const string ConnectionStringPatternV1 =
              "[\\s;]*"
-            +"(?<key>([^=\\s]|\\s+[^=\\s]|\\s+==|==)+)"
-            +   "\\s*=(?!=)\\s*"
-            +"(?<value>("
-            +   "(" + "\"" + "([^\"]|\"\")*" + "\"" + ")"
-            +   "|"
-            +   "(" + "'" + "([^']|'')*" + "'" + ")"
-            +   "|"
-            +   "(" + "(?![\"'])" + "([^\\s;]|\\s+[^\\s;])*" + "(?<![\"'])" + ")"
-            + "))"
-            + "[\\s;]*"
-        ;*/
+             +"(?<key>([^=\\s]|\\s+[^=\\s]|\\s+==|==)+)"
+             +   "\\s*=(?!=)\\s*"
+             +"(?<value>("
+             +   "(" + "\"" + "([^\"]|\"\")*" + "\"" + ")"
+             +   "|"
+             +   "(" + "'" + "([^']|'')*" + "'" + ")"
+             +   "|"
+             +   "(" + "(?![\"'])" + "([^\\s;]|\\s+[^\\s;])*" + "(?<![\"'])" + ")"
+             + "))"
+             + "[\\s;]*"
+             ;*/
         private const string ConnectionStringPattern = // may not contain embedded null except trailing last value
             "([\\s;]*" // leading whitespace and extra semicolons
             + "(?![\\s;])" // key does not start with space or semicolon

@@ -200,8 +200,8 @@ namespace Castle.DynamicProxy.Tests
         }
 
         /// <summary>
-		/// See http://support.castleproject.org/browse/DYNPROXY-43
-		/// </summary>
+        /// See http://support.castleproject.org/browse/DYNPROXY-43
+        /// </summary>
         [Test]
         public void MethodParamNamesAreReplicated()
         {

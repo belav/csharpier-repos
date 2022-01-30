@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 {
     /// <summary>
     /// Represents a method of a generic type instantiation.
-    /// e.g. 
+    /// e.g.
     /// A{int}.M()
     /// A.B{int}.C.M()
     /// </summary>

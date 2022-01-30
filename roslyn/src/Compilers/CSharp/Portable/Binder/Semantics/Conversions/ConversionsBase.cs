@@ -293,7 +293,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Determines if the source expression of given type is convertible to the destination type via
         /// any built-in or user-defined conversion.
-        /// 
+        ///
         /// This helper is used in rare cases involving synthesized expressions where we know the type of an expression, but do not have the actual expression.
         /// The reason for this helper (as opposed to ClassifyConversionFromType) is that conversions from expressions could be different
         /// from conversions from type. For example expressions of dynamic type are implicitly convertable to any type, while dynamic type itself is not.
@@ -478,9 +478,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// It is rare but possible for a source expression to be convertible to a destination type
         /// by both an implicit user-defined conversion and a built-in explicit conversion.
         /// In that circumstance, this method classifies the conversion as the built-in conversion.
-        /// 
+        ///
         /// An implicit conversion exists from an expression of a dynamic type to any type.
-        /// An explicit conversion exists from a dynamic type to any type. 
+        /// An explicit conversion exists from a dynamic type to any type.
         /// When casting we prefer the explicit conversion.
         /// </remarks>
         private Conversion ClassifyConversionFromExpressionForCast(
@@ -2202,7 +2202,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns false if source type can be nullable at the same time when destination type can be not nullable, 
+        /// Returns false if source type can be nullable at the same time when destination type can be not nullable,
         /// including the case of type parameters that by themselves can represent nullable and not nullable reference types.
         /// When either type has no nullability information (oblivious), this method returns true.
         /// </summary>

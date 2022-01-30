@@ -8,7 +8,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {
     /// <summary>
     /// provides info on the given file
-    /// 
+    ///
     /// this will be used to provide dynamic content such as generated content from cshtml to workspace
     /// we acquire this from <see cref="IDynamicFileInfoProvider"/> exposed from external components such as razor for cshtml
     /// </summary>

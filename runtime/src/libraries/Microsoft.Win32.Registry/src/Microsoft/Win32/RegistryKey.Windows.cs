@@ -14,7 +14,7 @@ using System.Security;
   Eventually we will want to add support for NT's transactions to our
   RegistryKey API's.  When we do this, here's
   the list of API's we need to make transaction-aware:
-
+  
   RegCreateKeyEx
   RegDeleteKey
   RegDeleteValue
@@ -24,11 +24,11 @@ using System.Security;
   RegQueryInfoKey
   RegQueryValueEx
   RegSetValueEx
-
+  
   We can ignore RegConnectRegistry (remote registry access doesn't yet have
   transaction support) and RegFlushKey.  RegCloseKey doesn't require any
   additional work.
- */
+  */
 
 /*
   Note on ACL support:
@@ -36,7 +36,7 @@ using System.Security;
   registry key, then the ACL only gets checked when you construct handles to
   them.  So if you set an ACL to deny read access to yourself, you'll still be
   able to read with that handle, but not with new handles.
-
+  
   Another peculiarity is a Terminal Server app compatibility hack.  The OS
   will second guess your attempt to open a handle sometimes.  If a certain
   combination of Terminal Server app compat registry keys are set, then the
@@ -45,13 +45,13 @@ using System.Security;
   may not be able to read or write to a registry key.  It's very strange.  But
   the real test of these handles is attempting to read or set a value in an
   affected registry key.
-
+  
   For reference, at least two registry keys must be set to particular values
   for this behavior:
   HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\RegistryExtensionFlags, the least significant bit must be 1.
   HKLM\SYSTEM\CurrentControlSet\Control\TerminalServer\TSAppCompat must be 1
   There might possibly be an interaction with yet a third registry key as well.
-*/
+  */
 
 namespace Microsoft.Win32
 {

@@ -17,31 +17,31 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Assigns a prefix to the keyed properties of an interface.
-	/// </summary>
-	/// <remarks>
-	/// Key prefixes are not inherited by sub-interfaces.
-	/// </remarks>
+    /// Assigns a prefix to the keyed properties of an interface.
+    /// </summary>
+    /// <remarks>
+    /// Key prefixes are not inherited by sub-interfaces.
+    /// </remarks>
     [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
     public class KeyPrefixAttribute : DictionaryBehaviorAttribute, IDictionaryKeyBuilder
     {
         /// <summary>
-		/// Initializes a default instance of the <see cref="KeyPrefixAttribute"/> class.
-		/// </summary>
+        /// Initializes a default instance of the <see cref="KeyPrefixAttribute"/> class.
+        /// </summary>
         public KeyPrefixAttribute() { }
 
         /// <summary>
-		/// Initializes a new instance of the <see cref="KeyPrefixAttribute"/> class.
-		/// </summary>
-		/// <param name="keyPrefix">The prefix for the keyed properties of the interface.</param>
+        /// Initializes a new instance of the <see cref="KeyPrefixAttribute"/> class.
+        /// </summary>
+        /// <param name="keyPrefix">The prefix for the keyed properties of the interface.</param>
         public KeyPrefixAttribute(string keyPrefix)
         {
             this.KeyPrefix = keyPrefix;
         }
 
         /// <summary>
-		/// Gets the prefix key added to the properties of the interface.
-		/// </summary>
+        /// Gets the prefix key added to the properties of the interface.
+        /// </summary>
         public string KeyPrefix { get; set; }
 
         string IDictionaryKeyBuilder.GetKey(

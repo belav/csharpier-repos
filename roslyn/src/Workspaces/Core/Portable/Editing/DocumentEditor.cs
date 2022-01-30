@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Microsoft.CodeAnalysis.Editing
 {
     /// <summary>
-    /// An editor for making changes to a document's syntax tree. 
+    /// An editor for making changes to a document's syntax tree.
     /// </summary>
     public class DocumentEditor : SyntaxEditor
     {

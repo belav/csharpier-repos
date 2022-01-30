@@ -14,7 +14,7 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Resolves relative path and returns absolute path.
         /// The method depends only on values of its parameters and their implementation (for fileExists).
-        /// It doesn't itself depend on the state of the current process (namely on the current drive directories) or 
+        /// It doesn't itself depend on the state of the current process (namely on the current drive directories) or
         /// the state of file system.
         /// </summary>
         /// <param name="path">
@@ -24,7 +24,7 @@ namespace Roslyn.Utilities
         /// Base file path to resolve CWD-relative paths against. Null if not available.
         /// </param>
         /// <param name="baseDirectory">
-        /// Base directory to resolve CWD-relative paths against if <paramref name="basePath"/> isn't specified. 
+        /// Base directory to resolve CWD-relative paths against if <paramref name="basePath"/> isn't specified.
         /// Must be absolute path.
         /// Null if not available.
         /// </param>

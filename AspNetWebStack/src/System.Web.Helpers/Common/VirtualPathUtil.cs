@@ -12,7 +12,7 @@ namespace System.Web.Helpers
     internal static class VirtualPathUtil
     {
         /// <summary>
-        /// Resolves and maps a path (physical or virtual) to a physical path on the server. 
+        /// Resolves and maps a path (physical or virtual) to a physical path on the server.
         /// </summary>
         /// <param name="httpContext">The <see cref="HttpContextBase"/>.</param>
         /// <param name="path">Either a physical rooted path or a virtual path to be mapped.

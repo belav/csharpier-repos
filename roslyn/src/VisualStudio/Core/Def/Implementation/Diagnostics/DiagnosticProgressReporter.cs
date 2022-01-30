@@ -109,7 +109,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
         /// <summary>
         /// Retrieve and throttle solution crawler events to be sent to the progress reporter UI.
-        /// 
+        ///
         /// there is no concurrent call to this method since ISolutionCrawlerProgressReporter will serialize all
         /// events to preserve event ordering
         /// </summary>

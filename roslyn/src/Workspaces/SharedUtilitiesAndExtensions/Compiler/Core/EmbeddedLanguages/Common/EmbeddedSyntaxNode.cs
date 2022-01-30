@@ -10,15 +10,15 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
 {
     /// <summary>
-    /// Root of the embedded language syntax hierarchy.  EmbeddedSyntaxNodes are very similar to 
+    /// Root of the embedded language syntax hierarchy.  EmbeddedSyntaxNodes are very similar to
     /// Roslyn Red-Nodes in concept, though there are differences for ease of implementation.
-    /// 
+    ///
     /// Similarities:
     /// 1. Fully representative of the original source.  All source VirtualChars are contained
     ///    in the Regex nodes.
     /// 2. Specific types for Nodes, Tokens and Trivia.
     /// 3. Uniform ways of deconstructing Nodes (i.e. ChildCount + ChildAt).
-    /// 
+    ///
     /// Differences:
     /// Note: these differences are not required, and can be changed if felt to be valuable.
     /// 1. No parent pointers.  These have not been needed yet.
@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
     ///    be acquired from the VirtualChars contained within those constructs.  This does mean that
     ///    an empty node (for example, an empty RegexSequenceNode) effect has no way to simply ascertain
     ///    its location.  So far that hasn't been a problem.
-    /// 4. No null nodes.  Haven't been needed so far, and it keeps things extremely simple.  For 
+    /// 4. No null nodes.  Haven't been needed so far, and it keeps things extremely simple.  For
     ///    example where Roslyn might have chosen an optional null child, the Regex hierarchy just
     ///    has multiple nodes.  For example there are distinct nodes to represent the very similar
     ///    {a}   {a,}    {a,b}    constructs.

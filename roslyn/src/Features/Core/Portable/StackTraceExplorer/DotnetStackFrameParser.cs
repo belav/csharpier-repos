@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         /// Tries to parse a StackFrame following convention from Environment.StackTrace
         /// https://docs.microsoft.com/en-us/dotnet/api/system.environment.stacktrace has
         /// details on output format and expected strings
-        /// 
+        ///
         /// Example:
         /// at ConsoleApp4.MyClass.M() in C:\repos\ConsoleApp4\ConsoleApp4\Program.cs:line 26
         /// </summary>

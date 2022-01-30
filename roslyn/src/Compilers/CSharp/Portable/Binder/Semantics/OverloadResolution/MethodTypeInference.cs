@@ -22,7 +22,7 @@ and takes place before the overload resolution step of the invocation. When a
 particular method group is specified in a method invocation, and no type arguments
 are specified as part of the method invocation, type inference is applied to each
 generic method in the method group. If type inference succeeds, then the inferred
-type arguments are used to determine the types of formal parameters for subsequent 
+type arguments are used to determine the types of formal parameters for subsequent
 overload resolution. If overload resolution chooses a generic method as the one to
 invoke then the inferred type arguments are used as the actual type arguments for the
 invocation. If type inference for a particular method fails, that method does not

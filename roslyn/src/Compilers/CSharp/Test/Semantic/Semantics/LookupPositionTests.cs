@@ -2466,13 +2466,13 @@ record C(int X)
 
         /// <summary>
         /// Given a program, calls LookupNames at each character position and verifies the results.
-        /// 
+        ///
         /// The input program is broken into regions using backticks, which will be removed before
         /// compilation.  The first region runs from the beginning of the string (inclusive) to the
         /// first backtick (exclusive).  The second region runs from the first backtick (exclusive)
         /// to the second backtick (exclusive).  The last region runs from the last backtick
         /// (exclusive) to one character past the end of the string (i.e. EOF) (inclusive).
-        /// 
+        ///
         /// For each region of the program, a list of expected names must be provided.  This method
         /// will assert if any region contains different names than expected.
         /// </summary>

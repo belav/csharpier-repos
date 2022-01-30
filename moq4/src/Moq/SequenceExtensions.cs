@@ -10,14 +10,14 @@ using Moq.Language;
 namespace Moq
 {
     /// <summary>
-	/// Helper for sequencing return values in the same method.
-	/// </summary>
+    /// Helper for sequencing return values in the same method.
+    /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static partial class SequenceExtensions
     {
         /// <summary>
-		/// Return a sequence of tasks, once per call.
-		/// </summary>
+        /// Return a sequence of tasks, once per call.
+        /// </summary>
         public static ISetupSequentialResult<Task<TResult>> ReturnsAsync<TResult>(
             this ISetupSequentialResult<Task<TResult>> setup,
             TResult value
@@ -27,8 +27,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Return a sequence of tasks, once per call.
-		/// </summary>
+        /// Return a sequence of tasks, once per call.
+        /// </summary>
         public static ISetupSequentialResult<Task<TResult>> ReturnsAsync<TResult>(
             this ISetupSequentialResult<Task<TResult>> setup,
             Func<TResult> valueFunction
@@ -38,8 +38,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Return a sequence of tasks, once per call.
-		/// </summary>
+        /// Return a sequence of tasks, once per call.
+        /// </summary>
         public static ISetupSequentialResult<ValueTask<TResult>> ReturnsAsync<TResult>(
             this ISetupSequentialResult<ValueTask<TResult>> setup,
             TResult value
@@ -49,8 +49,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Return a sequence of tasks, once per call.
-		/// </summary>
+        /// Return a sequence of tasks, once per call.
+        /// </summary>
         public static ISetupSequentialResult<ValueTask<TResult>> ReturnsAsync<TResult>(
             this ISetupSequentialResult<ValueTask<TResult>> setup,
             Func<TResult> valueFunction
@@ -60,8 +60,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Return a sequence of tasks, once per call.
-		/// </summary>
+        /// Return a sequence of tasks, once per call.
+        /// </summary>
         public static ISetupSequentialResult<Task> PassAsync(
             this ISetupSequentialResult<Task> setup
         )
@@ -70,8 +70,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Return a sequence of tasks, once per call.
-		/// </summary>
+        /// Return a sequence of tasks, once per call.
+        /// </summary>
         public static ISetupSequentialResult<ValueTask> PassAsync(
             this ISetupSequentialResult<ValueTask> setup
         )
@@ -80,8 +80,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Throws a sequence of exceptions, once per call.
-		/// </summary>
+        /// Throws a sequence of exceptions, once per call.
+        /// </summary>
         public static ISetupSequentialResult<Task<TResult>> ThrowsAsync<TResult>(
             this ISetupSequentialResult<Task<TResult>> setup,
             Exception exception
@@ -98,8 +98,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Throws a sequence of exceptions, once per call.
-		/// </summary>
+        /// Throws a sequence of exceptions, once per call.
+        /// </summary>
         public static ISetupSequentialResult<ValueTask<TResult>> ThrowsAsync<TResult>(
             this ISetupSequentialResult<ValueTask<TResult>> setup,
             Exception exception
@@ -116,8 +116,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Throws a sequence of exceptions, once per call.
-		/// </summary>
+        /// Throws a sequence of exceptions, once per call.
+        /// </summary>
         public static ISetupSequentialResult<Task> ThrowsAsync(
             this ISetupSequentialResult<Task> setup,
             Exception exception
@@ -134,8 +134,8 @@ namespace Moq
         }
 
         /// <summary>
-		/// Throws a sequence of exceptions, once per call.
-		/// </summary>
+        /// Throws a sequence of exceptions, once per call.
+        /// </summary>
         public static ISetupSequentialResult<ValueTask> ThrowsAsync(
             this ISetupSequentialResult<ValueTask> setup,
             Exception exception

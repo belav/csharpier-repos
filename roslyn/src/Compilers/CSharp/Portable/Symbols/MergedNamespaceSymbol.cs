@@ -22,11 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// A MergedNamespaceSymbol represents a namespace that merges the contents of two or more other
     /// namespaces. Any sub-namespaces with the same names are also merged if they have two or more
     /// instances.
-    /// 
+    ///
     /// Merged namespaces are used to merge the symbols from multiple metadata modules and the
     /// source "module" into a single symbol tree that represents all the available symbols. The
     /// compiler resolves names against this merged set of symbols.
-    /// 
+    ///
     /// Typically there will not be very many merged namespaces in a Compilation: only the root
     /// namespaces and namespaces that are used in multiple referenced modules. (Microsoft, System,
     /// System.Xml, System.Diagnostics, System.Threading, ...)

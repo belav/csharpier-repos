@@ -5,12 +5,12 @@ using System;
 /*
 public interface IFinalize
 {
-    ~IFinalize();
+~IFinalize();
 }
 
 public class Finalize : IFinalize
 {
-    ~Finalize(){ Console.WriteLine("IFinalize");}
+~Finalize(){ Console.WriteLine("IFinalize");}
 }
 */
 //Test cases:

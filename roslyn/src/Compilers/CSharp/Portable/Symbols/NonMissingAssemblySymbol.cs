@@ -24,11 +24,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         /// <summary>
         /// This is a cache similar to the one used by MetaImport::GetTypeByName
-        /// in native compiler. The difference is that native compiler pre-populates 
+        /// in native compiler. The difference is that native compiler pre-populates
         /// the cache when it loads types. Here we are populating the cache only
-        /// with things we looked for, so that next time we are looking for the same 
-        /// thing, the lookup is fast. This cache also takes care of TypeForwarders. 
-        /// Gives about 8% win on subsequent lookups in some scenarios.     
+        /// with things we looked for, so that next time we are looking for the same
+        /// thing, the lookup is fast. This cache also takes care of TypeForwarders.
+        /// Gives about 8% win on subsequent lookups in some scenarios.
         /// </summary>
         /// <remarks></remarks>
         private readonly ConcurrentDictionary<
@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Gets the merged root namespace that contains all namespaces and types defined in the modules
-        /// of this assembly. If there is just one module in this assembly, this property just returns the 
+        /// of this assembly. If there is just one module in this assembly, this property just returns the
         /// GlobalNamespace of that module.
         /// </summary>
         public sealed override NamespaceSymbol GlobalNamespace

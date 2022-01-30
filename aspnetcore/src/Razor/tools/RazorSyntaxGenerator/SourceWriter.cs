@@ -132,7 +132,7 @@ internal class SourceWriter : AbstractFileWriter
             WriteLine("    {");
             if (node.Name == "DirectiveTriviaSyntax")
             {
-                WriteLine("      _flags |= NodeFlags.ContainsDirectives;");
+            WriteLine("      _flags |= NodeFlags.ContainsDirectives;");
             }
             WriteLine("    }"); */
 
@@ -228,9 +228,9 @@ internal class SourceWriter : AbstractFileWriter
             // write constructor with async
             WriteLine();
             Write("    internal {0}(SyntaxKind kind", node.Name);
-
+            
             WriteGreenNodeConstructorArgs(nodeFields, valueFields);
-
+            
             WriteLine(", SyntaxFactoryContext context)");
             WriteLine("        : base(kind)");
             WriteLine("    {");
@@ -923,13 +923,13 @@ internal class SourceWriter : AbstractFileWriter
             //SyntaxNode cached = SyntaxNodeCache.TryGetNode(SyntaxKind.IdentifierName, identifier, this.context, out hash);
             if (withSyntaxFactoryContext)
             {
-                Write("      var cached = CSharpSyntaxNodeCache.TryGetNode((int)");
+            Write("      var cached = CSharpSyntaxNodeCache.TryGetNode((int)");
             }
             else
             {
-                Write("      var cached = SyntaxNodeCache.TryGetNode((int)");
+            Write("      var cached = SyntaxNodeCache.TryGetNode((int)");
             }
-
+            
             WriteCtorArgList(nd, withSyntaxFactoryContext, valueFields, nodeFields);
             WriteLine(", out hash);");
             //    if (cached != null) return (IdentifierNameSyntax)cached;
@@ -1285,18 +1285,18 @@ internal class SourceWriter : AbstractFileWriter
                 /* Remove
                 else if (field.Type == "SyntaxList<SyntaxToken>")
                 {
-                    WriteComment(field.PropertyComment, "    ");
-                    WriteLine("    {0} {1}SyntaxTokenList {2} ", "public", OverrideOrNewModifier(field), field.Name);
-                    WriteLine("    {");
-                    WriteLine("        get");
-                    WriteLine("        {");
-                    WriteLine("            var slot = Green.GetSlot({0});", i);
-                    WriteLine("            if (slot != null)");
-                    WriteLine("                return new SyntaxTokenList(this, slot, {0}, {1});", GetChildPosition(i), GetChildIndex(i));
-                    WriteLine();
-                    WriteLine("            return default(SyntaxTokenList);");
-                    WriteLine("        }");
-                    WriteLine("    }");
+                WriteComment(field.PropertyComment, "    ");
+                WriteLine("    {0} {1}SyntaxTokenList {2} ", "public", OverrideOrNewModifier(field), field.Name);
+                WriteLine("    {");
+                WriteLine("        get");
+                WriteLine("        {");
+                WriteLine("            var slot = Green.GetSlot({0});", i);
+                WriteLine("            if (slot != null)");
+                WriteLine("                return new SyntaxTokenList(this, slot, {0}, {1});", GetChildPosition(i), GetChildIndex(i));
+                WriteLine();
+                WriteLine("            return default(SyntaxTokenList);");
+                WriteLine("        }");
+                WriteLine("    }");
                 } */
                 //else
                 //{

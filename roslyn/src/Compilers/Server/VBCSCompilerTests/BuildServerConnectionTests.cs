@@ -89,7 +89,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         }
 
         /// <summary>
-        /// Simulate the case where the server process crashes or hangs on startup 
+        /// Simulate the case where the server process crashes or hangs on startup
         /// and make sure the client properly fails
         /// </summary>
         [Fact]

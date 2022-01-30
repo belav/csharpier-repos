@@ -27,17 +27,17 @@ namespace Microsoft.DiaSymReader
 
         /// <summary>
         /// Writes the PDB data to specified stream. Once called no more changes to the data can be made using this writer.
-        /// May be called multiple times. Always writes the same data. 
+        /// May be called multiple times. Always writes the same data.
         /// </summary>
         /// <param name="stream">Stream to write PDB data to.</param>
         /// <exception cref="SymUnmanagedWriterException">Error occurred while writing data to the stream.</exception>
         public abstract void WriteTo(Stream stream);
 
         /// <summary>
-        /// The capacity of document table. 
+        /// The capacity of document table.
         /// </summary>
         /// <remarks>
-        /// Whenever a document is defined an entry is added to this table. 
+        /// Whenever a document is defined an entry is added to this table.
         /// If the number of documents is known upfront setting this value may reduce memory consumption.
         /// </remarks>
         public abstract int DocumentTableCapacity { get; set; }

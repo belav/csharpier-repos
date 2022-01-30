@@ -271,11 +271,11 @@ namespace System.Data.OleDb
             OleDbCommand cmd = Connection.CreateCommand();
             cmd.Transaction = this;
             return cmd;
-        }
-
-        IDbCommand IDbTransaction.CreateCommand() {
+            }
+            
+            IDbCommand IDbTransaction.CreateCommand() {
             return CreateCommand();
-        }*/
+            }*/
 
         protected override void Dispose(bool disposing)
         {

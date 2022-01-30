@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// The line is located before any #line directive and there is at least one #line directive present in this syntax tree.
         /// This enum value is used for C# only to enable the consumer to define how to interpret the lines before the first
-        /// line directive. 
+        /// line directive.
         /// </summary>
         BeforeFirstLineDirective = 0,
 

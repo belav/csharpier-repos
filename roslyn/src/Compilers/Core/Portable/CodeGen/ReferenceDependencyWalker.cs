@@ -11,9 +11,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
     /// <summary>
     /// Some features of the compiler (such as anonymous types, pay-as-you-go, NoPIA, ...)
     /// rely on all referenced symbols to go through translate mechanism. Because by default
-    /// symbol translator does not translate some of indirectly referenced symbols, such as 
+    /// symbol translator does not translate some of indirectly referenced symbols, such as
     /// type argument, we have to force translation here
-    /// 
+    ///
     /// This class provides unified implementation for this functionality.
     /// </summary>
     internal static class ReferenceDependencyWalker

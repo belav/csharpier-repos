@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Used by the DocumentationCommentCompiler(s) to check doc comments for XML parse errors.
     /// As a performance optimization, this class tries to re-use the same underlying <see cref="XmlReader"/> instance
-    /// when possible. 
+    /// when possible.
     /// </summary>
     internal partial class XmlDocumentationCommentTextReader
     {

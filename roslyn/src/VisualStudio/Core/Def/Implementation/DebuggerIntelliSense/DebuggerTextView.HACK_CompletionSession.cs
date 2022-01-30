@@ -72,18 +72,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
         /// are unaware of any sessions and don't pass us any commands other than typechar. To determine
         /// whether to pass commands or non, the shims simply verify that they have a pointer to an
         /// ICompletionSession. We will use reflection to place an ICompletionSession in the field.
-        /// 
+        ///
         /// Furthermore, Dev11's debugger intellisense does not pass commands on to SignatureHelp at
         /// all. It's therefore impossible to use the arrow keys to navigate overloads, etc. If we give
         /// the CompletionSessionShim an ICompletionSession, though, we still get the commands and our
         /// command handlers can deal with them appropriately. To get commands when only our
-        /// SignatureHelp is up, we still must provide an ICompletionSession, which this class provides. 
+        /// SignatureHelp is up, we still must provide an ICompletionSession, which this class provides.
         /// Note: Any calls to methods in this class will throw, since the completion shims should not
         /// be doing anything.
-        /// 
+        ///
         /// We also include a counter so that we can null out the field when all of our sessions have
         /// actually ended.
-        /// 
+        ///
         /// See CEditCtlStatementCompletion::HandleKeyDown for more information
         /// </remarks>
         internal class HACK_CompletionSession : ICompletionSession

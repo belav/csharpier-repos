@@ -26,14 +26,14 @@ namespace Microsoft.CodeAnalysis.CodeStyle
     /// <summary>
     /// Represents a code style option and an associated notification option.  Supports
     /// being instantiated with T as a <see cref="bool"/> or an <c>enum type</c>.
-    /// 
+    ///
     /// CodeStyleOption also has some basic support for migration a <see cref="bool"/> option
     /// forward to an <c>enum type</c> option.  Specifically, if a previously serialized
-    /// bool-CodeStyleOption is then deserialized into an enum-CodeStyleOption then 'false' 
+    /// bool-CodeStyleOption is then deserialized into an enum-CodeStyleOption then 'false'
     /// values will be migrated to have the 0-value of the enum, and 'true' values will be
     /// migrated to have the 1-value of the enum.
-    /// 
-    /// Similarly, enum-type code options will serialize out in a way that is compatible with 
+    ///
+    /// Similarly, enum-type code options will serialize out in a way that is compatible with
     /// hosts that expect the value to be a boolean.  Specifically, if the enum value is 0 or 1
     /// then those values will write back as false/true.
     /// </summary>

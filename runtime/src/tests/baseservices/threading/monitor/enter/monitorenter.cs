@@ -175,7 +175,7 @@ class MonEnterTests
     /// </summary>
     /// <param name="obj">The object to lock</param>
     /// <param name="spins">How many times to spin while holding the lock</param>
-    /// <param name="run">A lock acquisition scenario to perform under contention (will be passed 
+    /// <param name="run">A lock acquisition scenario to perform under contention (will be passed
     ///     <paramref name="obj"/> as the object to be locked)</param>
     void RunWithContention(object obj, int spins, Action<object> run)
     {
@@ -248,10 +248,10 @@ class MonEnterTests
     /// <summary>
     /// Runs all tests under each SyncBlk variation
     /// </summary>
-    /// <param name="lockIsHeld">Whether to expect that the lock is being held (experiencing 
+    /// <param name="lockIsHeld">Whether to expect that the lock is being held (experiencing
     /// contention) while each lock attempt is performed</param>
-    /// <param name="scenario">A lock contention scenario to run under each SyncBlk scenario.  Is 
-    /// passed an object that may or may not have a SyncBlk, and a lock acquisition scenario to run 
+    /// <param name="scenario">A lock contention scenario to run under each SyncBlk scenario.  Is
+    /// passed an object that may or may not have a SyncBlk, and a lock acquisition scenario to run
     /// under that level of contention</param>
     void SyncBlkVariants(LockIsHeld lockIsHeld, Action<object, Action<object>> scenario)
     {

@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
     /// <summary>
     /// The singular completion provider that will hook into completion and will
     /// provide all completions across all embedded languages.
-    /// 
+    ///
     /// Completions for an individual language are provided by
     /// <see cref="IEmbeddedLanguageFeatures.CompletionProvider"/>.
     /// </summary>

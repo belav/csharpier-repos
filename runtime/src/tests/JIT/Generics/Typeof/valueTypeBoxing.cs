@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-/* Unboxing where a parameter is types as System.ValueType, or System.Enum, and then is unboxed to its scalar type 
+/* Unboxing where a parameter is types as System.ValueType, or System.Enum, and then is unboxed to its scalar type
  */
 using System;
 using System.Reflection;
@@ -170,7 +170,7 @@ struct mainMethod
     )
     {
         /*
-int tmp = 1;
+        int tmp = 1;
         printCount(ref DSS.ds_count, ds, dsm);
         printCount(ref CSS.cs_count, cs, csm);
         printCount(ref D.d_count, d, dm);
@@ -181,8 +181,8 @@ int tmp = 1;
         //printCount(ref B.b_count, b, bm);
         //printCount(ref A.a_count, a, am);
         //printCount(ref x_actual, x, xm);
-
-*/
+        
+        */
         checkCount(ref DSS.ds_count, ds, dsm);
         checkCount(ref CSS.cs_count, cs, csm);
         checkCount(ref D.d_count, d, dm);

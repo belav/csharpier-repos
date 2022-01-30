@@ -210,7 +210,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
         }
 
         /// <remarks>
-        /// If there are type arguments on either side of assignment, we match type names instead of type equality 
+        /// If there are type arguments on either side of assignment, we match type names instead of type equality
         /// to account for inferred generic type arguments.
         /// e.g: Tuple.Create(0, true) returns Tuple&lt;X,y&gt; which isn't the same as type Tuple.
         /// otherwise, we match for type equivalence

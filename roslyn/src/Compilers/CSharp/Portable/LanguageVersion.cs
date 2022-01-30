@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// C# language version 3
         /// </summary>
-        /// <remarks> 
+        /// <remarks>
         /// Features: LINQ.
         /// </remarks>
         CSharp3 = 3,
@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// C# language version 4
         /// </summary>
-        /// <remarks> 
+        /// <remarks>
         /// Features: dynamic.
         /// </remarks>
         CSharp4 = 4,
@@ -40,7 +40,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// C# language version 5
         /// </summary>
-        /// <remarks> 
+        /// <remarks>
         /// Features: async, caller info attributes.
         /// </remarks>
         CSharp5 = 5,

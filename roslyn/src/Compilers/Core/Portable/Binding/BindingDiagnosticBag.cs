@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// This is base class for a bag used to accumulate information while binding is performed.
-    /// Including diagnostic messages and dependencies in the form of "used" assemblies. 
+    /// Including diagnostic messages and dependencies in the form of "used" assemblies.
     /// </summary>
     internal abstract class BindingDiagnosticBag
     {

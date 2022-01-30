@@ -2963,7 +2963,7 @@ namespace System.Management
                     * the ID positional qualifier. We do this in the class because
                     * we cannot be sure that the qualifier will be propagated to
                     * the instance.
-                */
+                    */
 
                 status = outParamsClass.BeginEnumeration_(
                     (int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_NONSYSTEM_ONLY

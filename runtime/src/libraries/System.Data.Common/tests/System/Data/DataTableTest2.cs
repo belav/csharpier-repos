@@ -1385,11 +1385,11 @@ namespace System.Data.Tests
             /*
             al.Clear();
             foreach (DataRow dr in ds.Tables[0].Rows)
-                if (dr.IsNull("ParentBool") || (bool)dr["ParentBool"])
-                    al.Add(dr);
-                // Select_S - IsNull(ParentBool,true)
-                drSelect = ds.Tables[0].Select("IsNull(ParentBool,true) ");
-                Assert.Equal (al.ToArray(), drSelect);
+            if (dr.IsNull("ParentBool") || (bool)dr["ParentBool"])
+            al.Add(dr);
+            // Select_S - IsNull(ParentBool,true)
+            drSelect = ds.Tables[0].Select("IsNull(ParentBool,true) ");
+            Assert.Equal (al.ToArray(), drSelect);
             */
             //-------------------------------------------------------------
             al.Clear();
@@ -2127,8 +2127,8 @@ namespace System.Data.Tests
             table1.PrimaryKey = new DataColumn[] {table1.Columns[0]};
             table3 = table1.Clone ();
             try {
-                table3.Merge(table2);
-Assert.False(true);
+            table3.Merge(table2);
+            Assert.False(true);
             } catch (DataException e) {}
             */
 

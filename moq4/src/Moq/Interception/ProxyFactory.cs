@@ -9,8 +9,8 @@ namespace Moq
     internal abstract class ProxyFactory
     {
         /// <summary>
-		/// Gets the global <see cref="ProxyFactory"/> instance used by Moq.
-		/// </summary>
+        /// Gets the global <see cref="ProxyFactory"/> instance used by Moq.
+        /// </summary>
         public static ProxyFactory Instance { get; } = new CastleProxyFactory();
 
         public abstract object CreateProxy(

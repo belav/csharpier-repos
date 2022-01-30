@@ -25,7 +25,7 @@ internal partial class SolutionState
     /// Specifically, in a cross language case we will build a skeleton ref for the referenced project and have the
     /// referrer use that to understand its semantics.
     /// <para/>
-    /// This approach works, but has the caveat that live cross-language semantics are only possible when the 
+    /// This approach works, but has the caveat that live cross-language semantics are only possible when the
     /// skeleton assembly can be built.  This should always be the case for correct code, but it may not be the
     /// case for code with errors depending on if the respective language compiler is resilient to those errors or not.
     /// In that case though where the skeleton cannot be built, this type provides mechanisms to fallback to the last
@@ -38,7 +38,7 @@ internal partial class SolutionState
     /// for a project. As long as the <see cref="Project.GetDependentSemanticVersionAsync"/> for that project
     /// is the same, then all the references of it can be reused.  When an <see cref="ICompilationTracker"/> forks
     /// itself, it  will also <see cref="Clone"/> this, allowing previously computed references to be used by later forks.
-    /// However, this means that later forks (esp. ones that fail to produce a skeleton, or which produce a skeleton for 
+    /// However, this means that later forks (esp. ones that fail to produce a skeleton, or which produce a skeleton for
     /// different semantics) will not leak backward to a prior <see cref="ProjectState"/>, causing it to see a view of the world
     /// inapplicable to its current snapshot.
     /// </summary>
@@ -54,7 +54,7 @@ internal partial class SolutionState
         private readonly SemaphoreSlim _emitGate = new(initialCount: 1);
 
         /// <summary>
-        /// Lock around <see cref="_version"/> and <see cref="_skeletonReferenceSet"/> to ensure they are updated/read 
+        /// Lock around <see cref="_version"/> and <see cref="_skeletonReferenceSet"/> to ensure they are updated/read
         /// in an atomic fashion.
         /// </summary>
         private readonly object _stateGate = new();
@@ -301,7 +301,7 @@ internal partial class SolutionState
             private readonly DeferredDocumentationProvider _documentationProvider;
 
             /// <summary>
-            /// Use WeakReference so we don't keep MetadataReference's alive if they are not being consumed. 
+            /// Use WeakReference so we don't keep MetadataReference's alive if they are not being consumed.
             /// Note: if the weak-reference is actually <see langword="null"/> (not that it points to null),
             /// that means we know we were unable to generate a reference for those properties, and future
             /// calls can early exit.

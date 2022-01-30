@@ -38,7 +38,7 @@ namespace Microsoft.AspNet.Facebook
         public AuthorizationContext FilterContext { get; set; }
 
         /// <summary>
-        /// The entire list of missing permissions for the current page, including <see cref="DeclinedPermissions"/> and 
+        /// The entire list of missing permissions for the current page, including <see cref="DeclinedPermissions"/> and
         /// <see cref="SkippedPermissions"/>.
         /// </summary>
         /// <remarks>

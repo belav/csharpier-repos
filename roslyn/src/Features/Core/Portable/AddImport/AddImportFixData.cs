@@ -67,7 +67,7 @@ namespace Microsoft.CodeAnalysis.AddImport
         public readonly ProjectId PortableExecutableReferenceProjectId;
 
         /// <summary>
-        /// If we want to add a <see cref="PortableExecutableReference"/> metadata reference, this 
+        /// If we want to add a <see cref="PortableExecutableReference"/> metadata reference, this
         /// is the <see cref="PortableExecutableReference.FilePath"/> for it.
         /// </summary>
         [DataMember(Order = 7)]

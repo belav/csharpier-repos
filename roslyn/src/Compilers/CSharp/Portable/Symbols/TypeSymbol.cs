@@ -176,7 +176,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Gets the BaseType of this type. If the base type could not be determined, then 
+        /// Gets the BaseType of this type. If the base type could not be determined, then
         /// an instance of ErrorType is returned. If this kind of type does not have a base type
         /// (for example, interfaces), null is returned. Also the special class System.Object
         /// always has a BaseType of null.
@@ -327,7 +327,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <param name="t2">The other type.</param>
         /// <param name="compareKind">
-        /// What kind of comparison to use? 
+        /// What kind of comparison to use?
         /// You can ignore custom modifiers, ignore the distinction between object and dynamic, or ignore tuple element names differences.
         /// </param>
         /// <returns>True if the types are equivalent.</returns>
@@ -505,7 +505,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns the corresponding symbol in this type or a base type that implements 
+        /// Returns the corresponding symbol in this type or a base type that implements
         /// interfaceMember (either implicitly or explicitly), or null if no such symbol exists
         /// (which might be either because this type doesn't implement the container of
         /// interfaceMember, or this type doesn't supply a member that successfully implements
@@ -591,7 +591,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         #region Use-Site Diagnostics
 
         /// <summary>
-        /// Return error code that has highest priority while calculating use site error for this symbol. 
+        /// Return error code that has highest priority while calculating use site error for this symbol.
         /// </summary>
         protected override int HighestPriorityUseSiteError
         {
@@ -635,8 +635,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal virtual bool IsNativeIntegerType => false;
 
         /// <summary>
-        /// Verify if the given type is a tuple of a given cardinality, or can be used to back a tuple type 
-        /// with the given cardinality. 
+        /// Verify if the given type is a tuple of a given cardinality, or can be used to back a tuple type
+        /// with the given cardinality.
         /// </summary>
         internal bool IsTupleTypeOfCardinality(int targetCardinality)
         {
@@ -812,7 +812,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <param name="ignoreImplementationInInterfacesIfResultIsNotReady">
         /// The process of looking up an implementation for an accessor can involve figuring out how corresponding event/property is implemented,
         /// <see cref="CheckForImplementationOfCorrespondingPropertyOrEvent"/>. And the process of looking up an implementation for a property can
-        /// involve figuring out how corresponding accessors are implemented, <see cref="FindMostSpecificImplementationInInterfaces"/>. This can 
+        /// involve figuring out how corresponding accessors are implemented, <see cref="FindMostSpecificImplementationInInterfaces"/>. This can
         /// lead to cycles, which could be avoided if we ignore the presence of implementations in interfaces for the purpose of
         /// <see cref="CheckForImplementationOfCorrespondingPropertyOrEvent"/>. Fortunately, logic in it allows us to ignore the presence of
         /// implementations in interfaces and we use that.
@@ -823,7 +823,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// in interfaces into account and then cached.
         /// This means that:
         ///  - A symbol from an interface can still be returned even when <paramref name="ignoreImplementationInInterfacesIfResultIsNotReady"/> is true.
-        ///    A subsequent call with <paramref name="ignoreImplementationInInterfacesIfResultIsNotReady"/> false will return the same value. 
+        ///    A subsequent call with <paramref name="ignoreImplementationInInterfacesIfResultIsNotReady"/> false will return the same value.
         ///  - If symbol from a non-interface is returned when <paramref name="ignoreImplementationInInterfacesIfResultIsNotReady"/> is true. A subsequent
         ///    call with <paramref name="ignoreImplementationInInterfacesIfResultIsNotReady"/> false will return the same value.
         ///  - If no symbol is returned for <paramref name="ignoreImplementationInInterfacesIfResultIsNotReady"/> true. A subsequent call with
@@ -1408,8 +1408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// One implementation M1 is considered more specific than another implementation M2 
-        /// if M1 is declared on interface T1, M2 is declared on interface T2, and 
+        /// One implementation M1 is considered more specific than another implementation M2
+        /// if M1 is declared on interface T1, M2 is declared on interface T2, and
         /// T1 contains T2 among its direct or indirect interfaces.
         /// </summary>
         private static Symbol FindMostSpecificImplementationInBases(
@@ -1791,10 +1791,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Since dev11 didn't expose a symbol API, it had the luxury of being able to accept a base class's claim that 
+        /// Since dev11 didn't expose a symbol API, it had the luxury of being able to accept a base class's claim that
         /// it implements an interface.  Roslyn, on the other hand, needs to be able to point to an implementing symbol
         /// for each interface member.
-        /// 
+        ///
         /// DevDiv #718115 was triggered by some unusual metadata in a Microsoft reference assembly (Silverlight System.Windows.dll).
         /// The issue was that a type explicitly implemented the accessors of an interface event, but did not tie them together with
         /// an event declaration.  To make matters worse, it declared its own protected event with the same name as the interface
@@ -1802,7 +1802,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// for the interface event, it found the protected event and reported an appropriate diagnostic.  What it should have done
         /// (and does do now) is recognize that no event associated with the accessors explicitly implementing the interface accessors
         /// and returned null.
-        /// 
+        ///
         /// We resolved this issue by introducing a new step into the interface mapping algorithm: after failing to find an explicit
         /// implementation in a type, but before searching for an implicit implementation in that type, check for an explicit implementation
         /// of an associated accessor.  If there is such an implementation, then immediately return the associated property or event,
@@ -1932,7 +1932,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// then prefer it to our current result if:
         ///   1) our current result is null; or
         ///   2) our current result is on the same type.
-        ///   
+        ///
         /// If there is no corresponding accessor on the implementation of the corresponding interface
         /// property/event and we found an accessor, then the accessor we found is invalid, so clear it.
         /// </summary>
@@ -2901,7 +2901,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// list) is in source, then we can ignore custom modifiers in/on the property
         /// type because they will be copied into the bridge property that explicitly
         /// implements the interface property (or they would be, if we created such
-        /// a bridge property).  Bridge *methods* (not properties) are inserted in 
+        /// a bridge property).  Bridge *methods* (not properties) are inserted in
         /// SourceMemberContainerTypeSymbol.SynthesizeInterfaceMemberImplementation.
         ///
         /// CONSIDER: The spec for interface mapping (13.4.4) could be interpreted to mean that this
@@ -3000,7 +3000,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
 #nullable enable
         /// <summary>
-        /// If implementation of an interface method <paramref name="interfaceMethod"/> will be accompanied with 
+        /// If implementation of an interface method <paramref name="interfaceMethod"/> will be accompanied with
         /// a MethodImpl entry in metadata, information about which isn't already exposed through
         /// <see cref="MethodSymbol.ExplicitInterfaceImplementations"/> API, this method returns the "Body" part
         /// of the MethodImpl entry, i.e. the method that implements the <paramref name="interfaceMethod"/>.
@@ -3058,13 +3058,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns information about interface method implementations that will be accompanied with 
+        /// Returns information about interface method implementations that will be accompanied with
         /// MethodImpl entries in metadata, information about which isn't already exposed through
         /// <see cref="MethodSymbol.ExplicitInterfaceImplementations"/> API. The "Body" is the method that
-        /// implements the interface method "Implemented". 
+        /// implements the interface method "Implemented".
         /// Some of the MethodImpl entries could require synthetic forwarding methods. In such cases,
         /// the "Body" is the method that the language considers to implement the interface method,
-        /// the "Implemented", rather than the forwarding method. In other words, it is the method that 
+        /// the "Implemented", rather than the forwarding method. In other words, it is the method that
         /// the forwarding method forwards to.
         /// </summary>
         internal abstract IEnumerable<(MethodSymbol Body, MethodSymbol Implemented)> SynthesizedInterfaceMethodImpls();

@@ -1453,7 +1453,7 @@ public class Q
         }
 
         /// <summary>
-        /// Although the CLR considers all WinRT references equivalent the Dev11 C# and VB compilers still 
+        /// Although the CLR considers all WinRT references equivalent the Dev11 C# and VB compilers still
         /// compare their identities as if they were regular managed dlls.
         /// </summary>
         [Fact]
@@ -1496,7 +1496,7 @@ public class Q
         }
 
         /// <summary>
-        /// Although the CLR considers all WinRT references equivalent the Dev11 C# and VB compilers still 
+        /// Although the CLR considers all WinRT references equivalent the Dev11 C# and VB compilers still
         /// compare their identities as if they were regular managed dlls.
         /// </summary>
         [Fact]
@@ -1530,7 +1530,7 @@ public class Q
         }
 
         /// <summary>
-        /// Although the CLR considers all WinRT references equivalent the Dev11 C# and VB compilers still 
+        /// Although the CLR considers all WinRT references equivalent the Dev11 C# and VB compilers still
         /// compare their identities as if they were regular managed dlls.
         /// </summary>
         [Fact]

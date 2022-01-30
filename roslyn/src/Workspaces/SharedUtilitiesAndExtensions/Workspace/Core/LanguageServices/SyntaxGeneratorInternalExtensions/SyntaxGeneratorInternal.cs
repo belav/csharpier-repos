@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Editing
 {
     /// <summary>
     /// Internal extensions to <see cref="SyntaxGenerator"/>.
-    /// 
+    ///
     /// This interface is available in the shared CodeStyle and Workspaces layer to allow
     /// sharing internal generator methods between them. Once the methods are ready to be
     /// made public APIs, they can be moved to <see cref="SyntaxGenerator"/>.
@@ -75,7 +75,7 @@ namespace Microsoft.CodeAnalysis.Editing
 
         /// <summary>
         /// <see langword="true"/> if the language requires a "TypeExpression"
-        /// (including <see langword="var"/>) to be stated when making a 
+        /// (including <see langword="var"/>) to be stated when making a
         /// <see cref="LocalDeclarationStatement(SyntaxNode, SyntaxToken, SyntaxNode, bool)"/>.
         /// <see langword="false"/> if the language allows the type node to be entirely elided.
         /// </summary>

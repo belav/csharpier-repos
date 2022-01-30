@@ -1410,10 +1410,10 @@ unsafe class C
             /*
             unsafe class C
             {
-                void M()
-                {
-                    byte *ptr = null;
-                }
+            void M()
+            {
+            byte *ptr = null;
+            }
             }
             */
             var rootExpr = "ptr";
@@ -1434,10 +1434,10 @@ unsafe class C
             /*
             unsafe class C
             {
-                void M()
-                {
-                    byte *ptr = <invalid address>;
-                }
+            void M()
+            {
+            byte *ptr = <invalid address>;
+            }
             }
             */
             var rootExpr = "ptr";
@@ -2858,10 +2858,10 @@ class E : System.Exception
         {
             /*
             var source =
-@"class C
-{
-    string str;
-}";
+            @"class C
+            {
+            string str;
+            }";
             */
             using (new EnsureEnglishUICulture())
             {

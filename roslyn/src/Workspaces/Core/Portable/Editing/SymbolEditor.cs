@@ -565,7 +565,7 @@ namespace Microsoft.CodeAnalysis.Editing
         }
 
         /// <summary>
-        /// Enables editing all the symbol's declarations. 
+        /// Enables editing all the symbol's declarations.
         /// Partial types and methods may have more than one declaration.
         /// </summary>
         /// <param name="symbol">The symbol to be edited.</param>
@@ -631,7 +631,7 @@ namespace Microsoft.CodeAnalysis.Editing
         }
 
         /// <summary>
-        /// Enables editing all the symbol's declarations. 
+        /// Enables editing all the symbol's declarations.
         /// Partial types and methods may have more than one declaration.
         /// </summary>
         /// <param name="symbol">The symbol to be edited.</param>

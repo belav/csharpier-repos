@@ -97,7 +97,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         /// <summary>
         /// Starting at the given item, walks up the tree to find the item representing the project root.
-        /// If the item is located under a target-framwork specific node, the corresponding 
+        /// If the item is located under a target-framwork specific node, the corresponding
         /// TargetFrameworkMoniker will be found as well.
         /// </summary>
         private static IVsHierarchyItem? FindProjectRootItem(

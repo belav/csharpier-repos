@@ -3,13 +3,13 @@
 
 /*
 A test to make sure that calls to finally for nonlocal exits are
-done outside of trybody 
-    try {
-        goto nonlocal_exit;
-    } finally {
-        throw; // if the finally is being called from trybody, the finally will be executed 
-           // multiple times
-    }
+done outside of trybody
+try {
+goto nonlocal_exit;
+} finally {
+throw; // if the finally is being called from trybody, the finally will be executed
+// multiple times
+}
 */
 using System;
 

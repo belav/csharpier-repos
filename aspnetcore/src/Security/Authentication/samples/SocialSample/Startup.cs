@@ -107,7 +107,7 @@ public class Startup
             /* Azure AD app model v2 has restrictions that prevent the use of plain HTTP for redirect URLs.
                Therefore, to authenticate through microsoft accounts, try out the sample using the following URL:
                https://localhost:44318/
-            */
+               */
             // You must first create an app with Microsoft Account and add its ID and Secret to your user-secrets.
             // https://azure.microsoft.com/en-us/documentation/articles/active-directory-v2-app-registration/
             // https://apps.dev.microsoft.com/

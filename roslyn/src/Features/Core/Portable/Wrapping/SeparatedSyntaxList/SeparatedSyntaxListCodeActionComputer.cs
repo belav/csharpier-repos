@@ -33,12 +33,12 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             /// <summary>
             /// The indentation string necessary to indent an item in a list such that the start of
             /// that item will exact start at the end of the open-token for the containing list. i.e.
-            /// 
+            ///
             ///     void Goobar(
             ///                 ^
             ///                 |
-            /// 
-            /// This is the indentation we want when we're aligning wrapped items with the first item 
+            ///
+            /// This is the indentation we want when we're aligning wrapped items with the first item
             /// in the list.
             /// </summary>
             private readonly SyntaxTrivia _afterOpenTokenIndentationTrivia;
@@ -46,7 +46,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             /// <summary>
             /// Indentation amount for any items that have been wrapped to a new line.  Valid if we're
             /// not aligning with the first item. i.e.
-            /// 
+            ///
             ///     void Goobar(
             ///         ^
             ///         |

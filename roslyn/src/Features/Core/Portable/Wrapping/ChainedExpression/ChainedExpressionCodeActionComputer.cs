@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
         /// 2. wrap-long. The same as '1', except a chunk will only be wrapped
         ///    if it would go past the preferred wrapping column.
         /// 3. Unwrap.  All the chunks will be placed on a single line.
-        /// 
+        ///
         /// Note: These three options are always computed and returned.  The caller
         /// is the one that ends up eliminating any if they would be redundant.  i.e.
         /// if wrap-long produces the same results as wrap-each, then the caller will
@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
         {
             /// <summary>
             /// The chunks to normalize and wrap.  The first chunk will be normalized,
-            /// but not wrapped.  Successive chunks will be normalized and wrapped 
+            /// but not wrapped.  Successive chunks will be normalized and wrapped
             /// appropriately depending on if this is wrap-each or wrap-long.
             /// </summary>
             private readonly ImmutableArray<ImmutableArray<SyntaxNodeOrToken>> _chunks;
@@ -57,7 +57,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             private readonly SyntaxTriviaList _newlineBeforeOperatorTrivia;
 
             /// <summary>
-            /// The indent trivia to insert if we are trying to align wrapped chunks with the 
+            /// The indent trivia to insert if we are trying to align wrapped chunks with the
             /// first period of the original chunk.
             /// </summary>
             private readonly SyntaxTriviaList _firstPeriodIndentationTrivia;

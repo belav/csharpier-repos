@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis
         public readonly ImmutableArray<TAssemblySymbol> Symbols;
 
         /// <summary>
-        /// A subset of <see cref="Symbols"/> that correspond to references with non-matching (unified) 
+        /// A subset of <see cref="Symbols"/> that correspond to references with non-matching (unified)
         /// version along with unification details.
         /// </summary>
         public readonly ImmutableArray<UnifiedAssembly<TAssemblySymbol>> UnifiedAssemblies;

@@ -25,18 +25,18 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         /// True if anonymous functions in this language have signatures that include named
         /// parameters that can be referenced later on when the function is invoked.  Or, if the
         /// anonymous function is simply a signature that will be assigned to a delegate, and the
-        /// delegate's parameter names are used when invoking.  
-        /// 
-        /// For example, in VB one can do this: 
-        /// 
+        /// delegate's parameter names are used when invoking.
+        ///
+        /// For example, in VB one can do this:
+        ///
         /// dim v = Sub(x as Integer) Blah()
         /// v(x:=4)
-        /// 
+        ///
         /// However, in C# that would need to be:
-        /// 
+        ///
         /// Action&lt;int&gt; v = (int x) => Blah();
         /// v(obj:=4)
-        /// 
+        ///
         /// Note that in VB one can access 'x' outside of the declaration of the anonymous type.
         /// While in C# 'x' can only be accessed within the anonymous type.
         /// </summary>

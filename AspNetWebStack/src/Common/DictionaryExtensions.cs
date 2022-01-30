@@ -62,7 +62,7 @@ namespace System.Collections.Generic
 
         /// <summary>
         /// Gets the value of <typeparamref name="T"/> associated with the specified key or <c>default</c> value if
-        /// either the key is not present or the value is not of type <typeparamref name="T"/>. 
+        /// either the key is not present or the value is not of type <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the value associated with the specified key.</typeparam>
         /// <param name="collection">The <see cref="IDictionary{TKey,TValue}"/> instance where <c>TValue</c> is <c>object</c>.</param>

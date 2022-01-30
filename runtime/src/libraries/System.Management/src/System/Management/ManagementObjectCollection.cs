@@ -585,8 +585,8 @@ namespace System.Management
                              * Dispose() call in the foreach implementation itself.
                              *
                              *                              //Release the COM object (so that the user doesn't have to)
-                                                            Dispose();
-                            */
+                             Dispose();
+                             */
                             return false;
                         }
                     }

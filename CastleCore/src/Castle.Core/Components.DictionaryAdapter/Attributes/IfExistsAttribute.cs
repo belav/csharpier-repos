@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Suppresses any on-demand behaviors.
-	/// </summary>
+    /// Suppresses any on-demand behaviors.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class IfExistsAttribute : Attribute { }
 }

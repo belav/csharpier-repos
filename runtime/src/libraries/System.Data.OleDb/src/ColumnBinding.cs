@@ -939,7 +939,7 @@ namespace System.Data.OleDb
 
             /* pending breaking change approval
             if (_precision < ((System.Data.SqlTypes.SqlDecimal) value).Precision) {
-                throw ADP.ParameterValueOutOfRange(value);
+            throw ADP.ParameterValueOutOfRange(value);
             }
             */
 
@@ -1170,7 +1170,7 @@ namespace System.Data.OleDb
 
             /* pending breaking change approval
             if (_precision < ((System.Data.SqlTypes.SqlDecimal) value).Precision) {
-                throw ADP.ParameterValueOutOfRange(value);
+            throw ADP.ParameterValueOutOfRange(value);
             }
             */
 

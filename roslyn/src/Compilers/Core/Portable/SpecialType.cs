@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis
     /// Specifies the Ids of special runtime types.
     /// </summary>
     /// <remarks>
-    /// Only types explicitly mentioned in "Co-located core types" spec 
+    /// Only types explicitly mentioned in "Co-located core types" spec
     /// (https://github.com/dotnet/roslyn/blob/main/docs/compilers/Co-located%20core%20types.md)
     /// can be in this enum.
     /// The following things should be in sync:

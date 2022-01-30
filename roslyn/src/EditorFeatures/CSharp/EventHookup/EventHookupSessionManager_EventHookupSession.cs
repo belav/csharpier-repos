@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
     {
         /// <summary>
         /// A session begins when an '=' is typed after a '+' and requires determining whether the
-        /// += is being used to add an event handler to an event. If it is, then we also determine 
+        /// += is being used to add an event handler to an event. If it is, then we also determine
         /// a candidate name for the event handler.
         /// </summary>
         internal class EventHookupSession : ForegroundThreadAffinitizedObject
@@ -322,8 +322,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             /// <summary>
             /// Take another look at the LHS of the += node -- we need to figure out a default name
             /// for the event handler, and that's usually based on the object (which is usually a
-            /// field of 'this', but not always) to which the event belongs. So, if the event is 
-            /// something like 'button1.Click' or 'this.listBox1.Select', we want the names 
+            /// field of 'this', but not always) to which the event belongs. So, if the event is
+            /// something like 'button1.Click' or 'this.listBox1.Select', we want the names
             /// 'button1' and 'listBox1' respectively. If the field belongs to 'this', then we use
             /// the name of this class, as we do if we can't make any sense out of the parse tree.
             /// </summary>

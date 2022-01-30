@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     /// Represents a group of <see cref="ISymbol"/>s that should be treated as a single entity for
     /// the purposes of presentation in a Find UI.  For example, when a symbol is defined in a file
     /// that is linked into multiple project contexts, there will be several unique symbols created
-    /// that we search for.  Placing these in a group allows the final consumer to know that these 
+    /// that we search for.  Placing these in a group allows the final consumer to know that these
     /// symbols can be merged together.
     /// </summary>
     internal class SymbolGroup : IEquatable<SymbolGroup>

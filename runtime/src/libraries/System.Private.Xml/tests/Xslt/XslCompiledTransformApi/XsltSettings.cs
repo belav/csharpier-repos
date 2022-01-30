@@ -159,7 +159,7 @@ namespace System.Xml.Tests
          * enable all disable document()
          * enable all disable none
          * enable all disable all
-
+         
          */
         [Theory]
         public void XsltSettings1_1(
@@ -238,7 +238,7 @@ namespace System.Xml.Tests
          * enable all disable document()
          * enable all disable none
          * enable all disable all
-
+         
          */
         [Theory]
         public void XsltSettings1_2(

@@ -8,7 +8,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Formatting.Rules
 {
     /// <summary>
-    /// preserve relative spaces between anchor token and first tokens on lines within the given text span 
+    /// preserve relative spaces between anchor token and first tokens on lines within the given text span
     /// as long as it doesn't have explicit line operations associated with them
     /// </summary>
     internal sealed class AnchorIndentationOperation

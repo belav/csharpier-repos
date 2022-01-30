@@ -14,13 +14,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
     /// <summary>
     /// Special formatting rule that will convert a conditional expression into the following
     /// form if it has the <see cref="SpecializedFormattingAnnotation"/> on it:
-    /// 
+    ///
     /// <code>
     ///     var v = expr
     ///         ? whenTrue
     ///         : whenFalse
     /// </code>
-    /// 
+    ///
     /// i.e. both branches will be on a newline, indented once from the parent indentation.
     /// </summary>
     internal class MultiLineConditionalExpressionFormattingRule : AbstractFormattingRule

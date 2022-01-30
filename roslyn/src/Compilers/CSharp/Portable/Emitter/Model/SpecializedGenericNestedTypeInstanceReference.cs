@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 {
     /// <summary>
     /// Represents a reference to an instantiation of a generic type nested in an instantiation of another generic type.
-    /// e.g. 
+    /// e.g.
     /// A{int}.B{string}
     /// A.B{int}.C.D{string}
     /// </summary>

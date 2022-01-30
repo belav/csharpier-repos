@@ -80,9 +80,9 @@ namespace GCSimulator
     }
 
     /// <summary>
-    /// we might want to implement a different strategy that decide the life time of the object based on the time 
+    /// we might want to implement a different strategy that decide the life time of the object based on the time
     /// elapsed since the last object access.
-    /// 
+    ///
     /// </summary>
     class TimeBasedLifeTimeStrategy : LifeTimeStrategy
     {

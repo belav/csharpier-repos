@@ -33,30 +33,30 @@ namespace Castle.DynamicProxy
         > internalsVisibleToDynamicProxy = new SynchronizedDictionary<Assembly, bool>();
 
         /// <summary>
-		///   Creates a delegate of the specified type to a suitable `Invoke` method
-		///   on the given <paramref name="proxy"/> instance.
-		/// </summary>
-		/// <param name="proxy">The proxy instance to which the delegate should be bound.</param>
-		/// <typeparam name="TDelegate">The type of delegate that should be created.</typeparam>
-		/// <exception cref="MissingMethodException">
-		///   The <paramref name="proxy"/> does not have an `Invoke` method that is compatible with
-		///   the requested <typeparamref name="TDelegate"/> type.
-		/// </exception>
+        ///   Creates a delegate of the specified type to a suitable `Invoke` method
+        ///   on the given <paramref name="proxy"/> instance.
+        /// </summary>
+        /// <param name="proxy">The proxy instance to which the delegate should be bound.</param>
+        /// <typeparam name="TDelegate">The type of delegate that should be created.</typeparam>
+        /// <exception cref="MissingMethodException">
+        ///   The <paramref name="proxy"/> does not have an `Invoke` method that is compatible with
+        ///   the requested <typeparamref name="TDelegate"/> type.
+        /// </exception>
         public static TDelegate CreateDelegateToMixin<TDelegate>(object proxy)
         {
             return (TDelegate)(object)CreateDelegateToMixin(proxy, typeof(TDelegate));
         }
 
         /// <summary>
-		///   Creates a delegate of the specified type to a suitable `Invoke` method
-		///   on the given <paramref name="proxy"/> instance.
-		/// </summary>
-		/// <param name="proxy">The proxy instance to which the delegate should be bound.</param>
-		/// <param name="delegateType">The type of delegate that should be created.</param>
-		/// <exception cref="MissingMethodException">
-		///   The <paramref name="proxy"/> does not have an `Invoke` method that is compatible with
-		///   the requested <paramref name="delegateType"/>.
-		/// </exception>
+        ///   Creates a delegate of the specified type to a suitable `Invoke` method
+        ///   on the given <paramref name="proxy"/> instance.
+        /// </summary>
+        /// <param name="proxy">The proxy instance to which the delegate should be bound.</param>
+        /// <param name="delegateType">The type of delegate that should be created.</param>
+        /// <exception cref="MissingMethodException">
+        ///   The <paramref name="proxy"/> does not have an `Invoke` method that is compatible with
+        ///   the requested <paramref name="delegateType"/>.
+        /// </exception>
         public static Delegate CreateDelegateToMixin(object proxy, Type delegateType)
         {
             if (proxy == null)
@@ -131,19 +131,19 @@ namespace Castle.DynamicProxy
         }
 
         /// <summary>
-		/// Checks whether the specified method is accessible to DynamicProxy.</summary>
-		/// <param name="method">The method to check.</param>
-		/// <returns><c>true</c> if the method is accessible to DynamicProxy, <c>false</c> otherwise.</returns>
+        /// Checks whether the specified method is accessible to DynamicProxy.</summary>
+        /// <param name="method">The method to check.</param>
+        /// <returns><c>true</c> if the method is accessible to DynamicProxy, <c>false</c> otherwise.</returns>
         public static bool IsAccessible(MethodBase method)
         {
             return IsAccessibleMethod(method) && IsAccessibleType(method.DeclaringType);
         }
 
         /// <summary>
-		/// Checks whether the specified method is accessible to DynamicProxy.</summary>
-		/// <param name="method">The method to check.</param>
-		/// <param name="message">If the method is accessible to DynamicProxy, <c>null</c>; otherwise, an explanation of why the method is not accessible.</param>
-		/// <returns><c>true</c> if the method is accessible to DynamicProxy, <c>false</c> otherwise.</returns>
+        /// Checks whether the specified method is accessible to DynamicProxy.</summary>
+        /// <param name="method">The method to check.</param>
+        /// <param name="message">If the method is accessible to DynamicProxy, <c>null</c>; otherwise, an explanation of why the method is not accessible.</param>
+        /// <returns><c>true</c> if the method is accessible to DynamicProxy, <c>false</c> otherwise.</returns>
         public static bool IsAccessible(MethodBase method, out string message)
         {
             if (IsAccessible(method))
@@ -157,18 +157,18 @@ namespace Castle.DynamicProxy
         }
 
         /// <summary>
-		/// Checks whether the specified type is accessible to DynamicProxy.</summary>
-		/// <param name="type">The type to check.</param>
-		/// <returns><c>true</c> if the type is accessible to DynamicProxy, <c>false</c> otherwise.</returns>
+        /// Checks whether the specified type is accessible to DynamicProxy.</summary>
+        /// <param name="type">The type to check.</param>
+        /// <returns><c>true</c> if the type is accessible to DynamicProxy, <c>false</c> otherwise.</returns>
         public static bool IsAccessible(Type type)
         {
             return IsAccessibleType(type);
         }
 
         /// <summary>
-		///   Determines whether this assembly has internals visible to DynamicProxy.
-		/// </summary>
-		/// <param name="asm">The assembly to inspect.</param>
+        ///   Determines whether this assembly has internals visible to DynamicProxy.
+        /// </summary>
+        /// <param name="asm">The assembly to inspect.</param>
         internal static bool AreInternalsVisibleToDynamicProxy(Assembly asm)
         {
             return internalsVisibleToDynamicProxy.GetOrAdd(
@@ -205,11 +205,11 @@ namespace Castle.DynamicProxy
         }
 
         /// <summary>
-		///   Checks whether the specified method is accessible to DynamicProxy.
-		///   Unlike with <see cref="IsAccessible(MethodBase)"/>, the declaring type's accessibility is ignored.
-		/// </summary>
-		/// <param name = "method">The method to check.</param>
-		/// <returns><c>true</c> if the method is accessible to DynamicProxy, <c>false</c> otherwise.</returns>
+        ///   Checks whether the specified method is accessible to DynamicProxy.
+        ///   Unlike with <see cref="IsAccessible(MethodBase)"/>, the declaring type's accessibility is ignored.
+        /// </summary>
+        /// <param name = "method">The method to check.</param>
+        /// <returns><c>true</c> if the method is accessible to DynamicProxy, <c>false</c> otherwise.</returns>
         internal static bool IsAccessibleMethod(MethodBase method)
         {
             if (method.IsPublic || method.IsFamily || method.IsFamilyOrAssembly)
@@ -226,12 +226,12 @@ namespace Castle.DynamicProxy
         }
 
         /// <summary>
-		///   Determines whether the specified method is internal.
-		/// </summary>
-		/// <param name = "method">The method.</param>
-		/// <returns>
-		///   <c>true</c> if the specified method is internal; otherwise, <c>false</c>.
-		/// </returns>
+        ///   Determines whether the specified method is internal.
+        /// </summary>
+        /// <param name = "method">The method.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified method is internal; otherwise, <c>false</c>.
+        /// </returns>
         internal static bool IsInternal(MethodBase method)
         {
             return method.IsAssembly || (method.IsFamilyAndAssembly && !method.IsFamilyOrAssembly);

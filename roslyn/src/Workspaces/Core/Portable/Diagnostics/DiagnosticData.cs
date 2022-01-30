@@ -138,7 +138,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         /// <summary>
         /// Get <see cref="TextSpan"/> if it exists, throws otherwise.
-        /// 
+        ///
         /// Some diagnostic data such as those created from build have original line/column but not <see cref="TextSpan"/>.
         /// In those cases use <see cref="GetTextSpan(DiagnosticDataLocation, SourceText)"/> method instead to calculate span from original line/column.
         /// </summary>

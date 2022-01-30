@@ -52,8 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
     /// constructors.  Parameters for the constructor will be picked in a manner similar to Generate-
     /// Method.  However, this type will also attempt to hook up those parameters to existing fields
     /// and properties, or pass them to a this/base constructor if available.
-    /// 
-    /// Importantly, this type is not responsible for generating constructors for a type based on 
+    ///
+    /// Importantly, this type is not responsible for generating constructors for a type based on
     /// the user selecting some fields/properties of that type.  Nor is it responsible for generating
     /// derived class constructors for all unmatched base class constructors in a type hierarchy.
     /// </summary>

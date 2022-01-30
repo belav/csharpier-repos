@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Packages up the various parts returned when resolving a method group. 
+    /// Packages up the various parts returned when resolving a method group.
     /// </summary>
     internal struct MethodGroupResolution
     {

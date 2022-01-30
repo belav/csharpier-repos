@@ -719,7 +719,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
 
             /// <summary>
-            /// Add strings represent complex types (i.e. "" for non-array types and "[]" for array types) to the receiver type, 
+            /// Add strings represent complex types (i.e. "" for non-array types and "[]" for array types) to the receiver type,
             /// so we would include in the filter info about extension methods with complex receiver type.
             /// </summary>
             private static ImmutableArray<string> AddComplexTypes(

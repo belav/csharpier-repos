@@ -36,21 +36,21 @@ namespace Roslyn.Utilities
 
         /// <summary>
         /// Map of serialized object's reference ids.  The object-reference-map uses reference equality
-        /// for performance.  While the string-reference-map uses value-equality for greater cache hits 
+        /// for performance.  While the string-reference-map uses value-equality for greater cache hits
         /// and reuse.
-        /// 
+        ///
         /// These are not readonly because they're structs and we mutate them.
-        /// 
-        /// When we write out objects/strings we give each successive, unique, item a monotonically 
-        /// increasing integral ID starting at 0.  I.e. the first object gets ID-0, the next gets 
+        ///
+        /// When we write out objects/strings we give each successive, unique, item a monotonically
+        /// increasing integral ID starting at 0.  I.e. the first object gets ID-0, the next gets
         /// ID-1 and so on and so forth.  We do *not* include these IDs with the object when it is
         /// written out.  We only include the ID if we hit the object *again* while writing.
-        /// 
-        /// During reading, the reader knows to give each object it reads the same monotonically 
+        ///
+        /// During reading, the reader knows to give each object it reads the same monotonically
         /// increasing integral value.  i.e. the first object it reads is put into an array at position
         /// 0, the next at position 1, and so on.  Then, when the reader reads in an object-reference
         /// it can just retrieved it directly from that array.
-        /// 
+        ///
         /// In other words, writing and reading take advantage of the fact that they know they will
         /// write and read objects in the exact same order.  So they only need the IDs for references
         /// and not the objects themselves because the ID is inferred from the order the object is
@@ -61,8 +61,8 @@ namespace Roslyn.Utilities
 
         /// <summary>
         /// Copy of the global binder data that maps from Types to the appropriate reading-function
-        /// for that type.  Types register functions directly with <see cref="ObjectBinder"/>, but 
-        /// that means that <see cref="ObjectBinder"/> is both static and locked.  This gives us 
+        /// for that type.  Types register functions directly with <see cref="ObjectBinder"/>, but
+        /// that means that <see cref="ObjectBinder"/> is both static and locked.  This gives us
         /// local copy we can work with without needing to worry about anyone else mutating.
         /// </summary>
         private readonly ObjectBinderSnapshot _binderSnapshot;
@@ -1045,7 +1045,7 @@ namespace Roslyn.Utilities
         }
 
         /// <summary>
-        /// byte marker mask for encoding compressed uint 
+        /// byte marker mask for encoding compressed uint
         /// </summary>
         internal const byte ByteMarkerMask = 3 << 6;
 

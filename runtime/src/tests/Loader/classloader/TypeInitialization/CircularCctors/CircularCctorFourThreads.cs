@@ -6,7 +6,7 @@
 /*
 A --> B --> C --> D --> E --> A
 4 threads:
-Thread T1 starts initialization at A 
+Thread T1 starts initialization at A
 Thread T2 starts initialization at C
 Thread T3 starts initialization at D
 Thread T4 starts initialization at E

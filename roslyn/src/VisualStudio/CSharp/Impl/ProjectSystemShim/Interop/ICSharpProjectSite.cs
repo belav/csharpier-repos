@@ -155,7 +155,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         /// <param name="filename">The filename to add a reference to.</param>
         /// <param name="project">If the reference being added is a project reference, then this is a non-null string
         /// that defines this uniquely.</param>
-        /// <param name="optionID">A CompilerOption enumeration indicating whether the reference is a regular reference 
+        /// <param name="optionID">A CompilerOption enumeration indicating whether the reference is a regular reference
         /// (OPTID_IMPORTS) or the one that needs to be embedded into the target assembly
         /// (OPTID_IMPORTSUSINGNOPIA).</param>
         [PreserveSig]

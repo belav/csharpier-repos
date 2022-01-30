@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
     /// <summary>
-    /// Creates services on the first connection of an applicable subject buffer to an IWpfTextView. 
+    /// Creates services on the first connection of an applicable subject buffer to an IWpfTextView.
     /// This ensures the services are available by the time an open document or the interactive window needs them.
     /// </summary>
     internal abstract class AbstractCreateServicesOnTextViewConnection

@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         );
 
         /// <summary>
-        /// Given a SyntaxNode for which we want to reorder parameters/arguments, find the 
+        /// Given a SyntaxNode for which we want to reorder parameters/arguments, find the
         /// SyntaxNode of a kind where we know how to reorder parameters/arguments.
         /// </summary>
         public abstract SyntaxNode? FindNodeToUpdate(Document document, SyntaxNode node);

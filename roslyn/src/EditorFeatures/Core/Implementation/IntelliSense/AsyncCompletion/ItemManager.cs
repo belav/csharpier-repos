@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
     internal class ItemManager : IAsyncCompletionItemManager
     {
         /// <summary>
-        /// Used for filtering non-Roslyn data only. 
+        /// Used for filtering non-Roslyn data only.
         /// </summary>
         private readonly CompletionHelper _defaultCompletionHelper;
 

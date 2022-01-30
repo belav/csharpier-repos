@@ -396,17 +396,17 @@ namespace Microsoft.CodeAnalysis
                 /* write resource header.
                 struct RESOURCEHEADER
                 {
-                    DWORD DataSize;
-                    DWORD HeaderSize;
-                    WORD Magic1;
-                    WORD Type;
-                    WORD Magic2;
-                    WORD Name;
-                    DWORD DataVersion;
-                    WORD MemoryFlags;
-                    WORD LanguageId;
-                    DWORD Version;
-                    DWORD Characteristics;
+                DWORD DataSize;
+                DWORD HeaderSize;
+                WORD Magic1;
+                WORD Type;
+                WORD Magic2;
+                WORD Name;
+                DWORD DataVersion;
+                WORD MemoryFlags;
+                WORD LanguageId;
+                DWORD Version;
+                DWORD Characteristics;
                 };
                 */
 
@@ -434,22 +434,22 @@ namespace Microsoft.CodeAnalysis
             
             struct ICONDIR
             {
-                WORD           idReserved;   // Reserved (must be 0)
-                WORD           idType;       // Resource Type (1 for icons)
-                WORD           idCount;      // How many images?
-                ICONDIRENTRY   idEntries[1]; // An entry for each image (idCount of 'em)
+            WORD           idReserved;   // Reserved (must be 0)
+            WORD           idType;       // Resource Type (1 for icons)
+            WORD           idCount;      // How many images?
+            ICONDIRENTRY   idEntries[1]; // An entry for each image (idCount of 'em)
             }/
-             
+            
             struct ICONRESDIR
             {
-                BYTE Width;        // = ICONDIRENTRY.bWidth;
-                BYTE Height;       // = ICONDIRENTRY.bHeight;
-                BYTE ColorCount;   // = ICONDIRENTRY.bColorCount;
-                BYTE reserved;     // = ICONDIRENTRY.bReserved;
-                WORD Planes;       // = ICONDIRENTRY.wPlanes;
-                WORD BitCount;     // = ICONDIRENTRY.wBitCount;
-                DWORD BytesInRes;   // = ICONDIRENTRY.dwBytesInRes;
-                WORD IconId;       // = RESOURCEHEADER.Name
+            BYTE Width;        // = ICONDIRENTRY.bWidth;
+            BYTE Height;       // = ICONDIRENTRY.bHeight;
+            BYTE ColorCount;   // = ICONDIRENTRY.bColorCount;
+            BYTE reserved;     // = ICONDIRENTRY.bReserved;
+            WORD Planes;       // = ICONDIRENTRY.wPlanes;
+            WORD BitCount;     // = ICONDIRENTRY.wBitCount;
+            DWORD BytesInRes;   // = ICONDIRENTRY.dwBytesInRes;
+            WORD IconId;       // = RESOURCEHEADER.Name
             };
             */
 
@@ -496,31 +496,31 @@ namespace Microsoft.CodeAnalysis
 
         /*
          * Dev10 alink had the following fallback behavior.
-                private uint[] FileVersion
-                {
-                    get
-                    {
-                        if (fileVersionContents != null)
-                            return fileVersionContents;
-                        else
-                        {
-                            System.Diagnostics.Debug.Assert(assemblyVersionContents != null);
-                            return assemblyVersionContents;
-                        }
-                    }
-                }
-
-                private uint[] ProductVersion
-                {
-                    get
-                    {
-                        if (productVersionContents != null)
-                            return productVersionContents;
-                        else
-                            return this.FileVersion;
-                    }
-                }
-                */
+         private uint[] FileVersion
+         {
+         get
+         {
+         if (fileVersionContents != null)
+         return fileVersionContents;
+         else
+         {
+         System.Diagnostics.Debug.Assert(assemblyVersionContents != null);
+         return assemblyVersionContents;
+         }
+         }
+         }
+         
+         private uint[] ProductVersion
+         {
+         get
+         {
+         if (productVersionContents != null)
+         return productVersionContents;
+         else
+         return this.FileVersion;
+         }
+         }
+         */
 
         internal static void AppendVersionToResourceStream(
             Stream resStream,
@@ -876,38 +876,38 @@ namespace Microsoft.CodeAnalysis
             {
                 /*
                     must be assumed to start on a 32-bit boundary.
-                 * 
-                 * the sub-elements of the VS_VERSIONINFO consist of a header (3 WORDS) a string
-                 * and then beginning on the next 32-bit boundary, the elements children
-                 
+                    *
+                    * the sub-elements of the VS_VERSIONINFO consist of a header (3 WORDS) a string
+                    * and then beginning on the next 32-bit boundary, the elements children
+                    
                     struct VS_VERSIONINFO
                     {
-                        WORD cbRootBlock;                                     // size of whole resource
-                        WORD cbRootValue;                                     // size of VS_FIXEDFILEINFO structure
-                        WORD fRootText;                                       // root is text?
-                        WCHAR szRootKey[KEYSIZE("VS_VERSION_INFO")];          // Holds "VS_VERSION_INFO"
-                        VS_FIXEDFILEINFO vsFixed;                             // fixed information.
-                          WORD cbVarBlock;                                      //   size of VarFileInfo block
-                          WORD cbVarValue;                                      //   always 0
-                          WORD fVarText;                                        //   VarFileInfo is text?
-                          WCHAR szVarKey[KEYSIZE("VarFileInfo")];               //   Holds "VarFileInfo"
-                            WORD cbTransBlock;                                    //     size of Translation block
-                            WORD cbTransValue;                                    //     size of Translation value
-                            WORD fTransText;                                      //     Translation is text?
-                            WCHAR szTransKey[KEYSIZE("Translation")];             //     Holds "Translation"
-                              WORD langid;                                          //     language id
-                              WORD codepage;                                        //     codepage id
-                          WORD cbStringBlock;                                   //   size of StringFileInfo block
-                          WORD cbStringValue;                                   //   always 0
-                          WORD fStringText;                                     //   StringFileInfo is text?
-                          WCHAR szStringKey[KEYSIZE("StringFileInfo")];         //   Holds "StringFileInfo"
-                            WORD cbLangCpBlock;                                   //     size of language/codepage block
-                            WORD cbLangCpValue;                                   //     always 0
-                            WORD fLangCpText;                                     //     LangCp is text?
-                            WCHAR szLangCpKey[KEYSIZE("12345678")];               //     Holds hex version of language/codepage
-                        // followed by strings
+                    WORD cbRootBlock;                                     // size of whole resource
+                    WORD cbRootValue;                                     // size of VS_FIXEDFILEINFO structure
+                    WORD fRootText;                                       // root is text?
+                    WCHAR szRootKey[KEYSIZE("VS_VERSION_INFO")];          // Holds "VS_VERSION_INFO"
+                    VS_FIXEDFILEINFO vsFixed;                             // fixed information.
+                    WORD cbVarBlock;                                      //   size of VarFileInfo block
+                    WORD cbVarValue;                                      //   always 0
+                    WORD fVarText;                                        //   VarFileInfo is text?
+                    WCHAR szVarKey[KEYSIZE("VarFileInfo")];               //   Holds "VarFileInfo"
+                    WORD cbTransBlock;                                    //     size of Translation block
+                    WORD cbTransValue;                                    //     size of Translation value
+                    WORD fTransText;                                      //     Translation is text?
+                    WCHAR szTransKey[KEYSIZE("Translation")];             //     Holds "Translation"
+                    WORD langid;                                          //     language id
+                    WORD codepage;                                        //     codepage id
+                    WORD cbStringBlock;                                   //   size of StringFileInfo block
+                    WORD cbStringValue;                                   //   always 0
+                    WORD fStringText;                                     //   StringFileInfo is text?
+                    WCHAR szStringKey[KEYSIZE("StringFileInfo")];         //   Holds "StringFileInfo"
+                    WORD cbLangCpBlock;                                   //     size of language/codepage block
+                    WORD cbLangCpValue;                                   //     always 0
+                    WORD fLangCpText;                                     //     LangCp is text?
+                    WCHAR szLangCpKey[KEYSIZE("12345678")];               //     Holds hex version of language/codepage
+                    // followed by strings
                     };
-                */
+                    */
 
                 var debugPos = writer.BaseStream.Position;
                 var dataSize = GetDataSize();

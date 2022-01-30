@@ -10,13 +10,13 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
 {
     /// <summary>
-    /// Represents a prepared sqlite statement.  <see cref="SqlStatement"/>s can be 
-    /// <see cref="Step"/>ed (i.e. executed).  Executing a statement can result in 
+    /// Represents a prepared sqlite statement.  <see cref="SqlStatement"/>s can be
+    /// <see cref="Step"/>ed (i.e. executed).  Executing a statement can result in
     /// either <see cref="Result.DONE"/> if the command completed and produced no
     /// value, or <see cref="Result.ROW"/> if it evaluated out to a sql row that can
     /// then be queried.
     /// <para>
-    /// If a statement is parameterized then parameters can be provided by the 
+    /// If a statement is parameterized then parameters can be provided by the
     /// BindXXX overloads.  Bind is 1-based (to match sqlite).</para>
     /// <para>
     /// When done executing a statement, the statement should be <see cref="Reset"/>.

@@ -150,11 +150,11 @@ namespace Moq.Linq
         }
 
         /// <summary>
-		///   Converts a taken-apart binary expression such as `m.A.B` (==) `x` to
-		///   `Mocks.SetupReturns(Mock.Get(m), m' => m'.A.B, (object)x)`.
-		/// </summary>
-		/// <param name="left">Body of the expression to set up.</param>
-		/// <param name="right">Return value to be configured for <paramref name="left"/>.</param>
+        ///   Converts a taken-apart binary expression such as `m.A.B` (==) `x` to
+        ///   `Mocks.SetupReturns(Mock.Get(m), m' => m'.A.B, (object)x)`.
+        /// </summary>
+        /// <param name="left">Body of the expression to set up.</param>
+        /// <param name="right">Return value to be configured for <paramref name="left"/>.</param>
         private static Expression ConvertToSetupReturns(Expression left, Expression right)
         {
             var v = new ReplaceMockObjectWithParameter();
@@ -172,9 +172,9 @@ namespace Moq.Linq
         }
 
         /// <summary>
-		///   Locates the root mock object in a setup expression (which is usually, but not always, a <see cref="ParameterExpression"/>),
-		///   stores a reference to it, and finally replaces it with a new <see cref="ParameterExpression"/>.
-		/// </summary>
+        ///   Locates the root mock object in a setup expression (which is usually, but not always, a <see cref="ParameterExpression"/>),
+        ///   stores a reference to it, and finally replaces it with a new <see cref="ParameterExpression"/>.
+        /// </summary>
         private sealed class ReplaceMockObjectWithParameter : ExpressionVisitor
         {
             private Expression mockObject;

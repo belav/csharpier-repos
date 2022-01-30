@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal partial class DocumentationCommentCompiler : CSharpSymbolVisitor
     {
         /// <summary>
-        /// Walks a DocumentationCommentTriviaSyntax, binding the semantically meaningful parts 
+        /// Walks a DocumentationCommentTriviaSyntax, binding the semantically meaningful parts
         /// to produce diagnostics and to replace source crefs with documentation comment IDs.
         /// </summary>
         private class DocumentationCommentWalker : CSharpSyntaxWalker

@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Navigation
             CancellationToken cancellationToken = default
         );
 
-        /// <returns>True if the navigation was handled, indicating that the caller should not 
+        /// <returns>True if the navigation was handled, indicating that the caller should not
         /// perform the navigation.</returns>
         Task<bool> TrySymbolNavigationNotifyAsync(
             ISymbol symbol,

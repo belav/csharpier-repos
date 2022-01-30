@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// The .Cast&lt;T&gt;() operation generated from the query range variable's type restriction,
-        /// or null if the type restriction isn't specified. 
+        /// or null if the type restriction isn't specified.
         /// </summary>
         /// <remarks>
         /// The operation, when present is implemented via <see cref="IMethodSymbol"/>.
@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// The operation (e.g. Select(), Where(), etc) that implements the given clause.
         /// </summary>
         /// <remarks>
-        /// The clause can be implemented via <see cref="IMethodSymbol"/>, or 
+        /// The clause can be implemented via <see cref="IMethodSymbol"/>, or
         /// <see cref="IFieldSymbol"/> or <see cref="IPropertySymbol"/> that return a delegate.
         /// If it is an extension method, it is returned in reduced form.
         /// </remarks>

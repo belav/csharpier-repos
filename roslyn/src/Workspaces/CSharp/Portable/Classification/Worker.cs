@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
     /// <summary>
     /// Worker is an utility class that can classify a list of tokens or a tree within a
     /// requested span The implementation is generic and can produce any kind of classification
-    /// artifacts T T is normally either ClassificationSpan or a Tuple (for testing purposes) 
+    /// artifacts T T is normally either ClassificationSpan or a Tuple (for testing purposes)
     /// and constructed via provided factory.
     /// </summary>
     internal partial class Worker

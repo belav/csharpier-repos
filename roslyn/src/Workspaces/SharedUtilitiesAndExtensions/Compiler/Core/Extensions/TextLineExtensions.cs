@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         /// <summary>
-        /// Returns the first non-whitespace position on the given line, or null if 
+        /// Returns the first non-whitespace position on the given line, or null if
         /// the line is empty or contains only whitespace.
         /// </summary>
         public static int? GetFirstNonWhitespacePosition(this TextLine line)

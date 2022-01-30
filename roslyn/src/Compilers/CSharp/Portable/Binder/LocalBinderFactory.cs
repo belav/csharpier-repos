@@ -18,14 +18,14 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// The LocalBinderFactory is used to build up the map of all Binders within a method body, and the associated
     /// CSharpSyntaxNode. To do so it traverses all the statements, handling blocks and other
     /// statements that create scopes. For efficiency reasons, it does not traverse into all
-    /// expressions. This means that blocks within lambdas and queries are not created. 
-    /// Blocks within lambdas are bound by their own LocalBinderFactory when they are 
+    /// expressions. This means that blocks within lambdas and queries are not created.
+    /// Blocks within lambdas are bound by their own LocalBinderFactory when they are
     /// analyzed.
     ///
-    /// For reasons of lifetime management, this type is distinct from the BinderFactory 
+    /// For reasons of lifetime management, this type is distinct from the BinderFactory
     /// which also creates a map from CSharpSyntaxNode to Binder. That type owns it's binders
     /// and that type's lifetime is that of the compilation. Therefore we do not store
-    /// binders local to method bodies in that type's cache. 
+    /// binders local to method bodies in that type's cache.
     /// </summary>
     internal sealed class LocalBinderFactory : CSharpSyntaxWalker
     {
@@ -838,10 +838,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Some statements by default do not introduce its own scope for locals. 
-        /// For example: Expression Statement, Return Statement, etc. However, 
-        /// when a statement like that is an embedded statement (like IfStatementSyntax.Statement), 
-        /// then it should introduce a scope for locals declared within it. 
+        /// Some statements by default do not introduce its own scope for locals.
+        /// For example: Expression Statement, Return Statement, etc. However,
+        /// when a statement like that is an embedded statement (like IfStatementSyntax.Statement),
+        /// then it should introduce a scope for locals declared within it.
         /// Here we are detecting such statements and creating a binder that should own the scope.
         /// </summary>
         private Binder GetBinderForPossibleEmbeddedStatement(

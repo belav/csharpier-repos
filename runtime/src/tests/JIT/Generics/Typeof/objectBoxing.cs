@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-/* unboxing where a parameter is types as object and then is unboxed to its scalar type 
+/* unboxing where a parameter is types as object and then is unboxed to its scalar type
  */
 using System;
 using System.Reflection;
@@ -244,8 +244,8 @@ class mainMethod
         printCount(ref B.b_count, b, bm);
         printCount(ref A.a_count, a, am);
         printCount(ref x_actual, x, xm);
-
-*/
+        
+        */
         checkCount(ref DS.ds_count, ds, dsm);
         checkCount(ref CS.cs_count, cs, csm);
         checkCount(ref D.d_count, d, dm);

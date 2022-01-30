@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         }
 
         /// <summary>
-        /// internal status of result. more fine grained reason why it is failed. 
+        /// internal status of result. more fine grained reason why it is failed.
         /// </summary>
         internal OperationStatusFlag Status { get; }
     }

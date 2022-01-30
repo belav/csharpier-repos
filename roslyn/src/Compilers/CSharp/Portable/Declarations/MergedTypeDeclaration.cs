@@ -43,7 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Returns the original syntax nodes for this type declaration across all its parts.  If
         /// <paramref name="quickAttributes"/> is provided, attributes will not be returned if it
-        /// is certain there are none that could match the request.  This prevents going back to 
+        /// is certain there are none that could match the request.  This prevents going back to
         /// source unnecessarily.
         /// </summary>
         public ImmutableArray<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations(

@@ -10,7 +10,7 @@ using System.ComponentModel.Composition;
 namespace Microsoft.CodeAnalysis.Editor.Tags
 {
     /// <summary>
-    /// Use this attribute to declare an <see cref="IImageMonikerService"/> implementation 
+    /// Use this attribute to declare an <see cref="IImageMonikerService"/> implementation
     /// so that it can be discovered by the host.
     /// </summary>
     [MetadataAttribute]
@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tags
     public sealed class ExportImageMonikerServiceAttribute : ExportAttribute
     {
         /// <summary>
-        /// The name of the <see cref="IImageMonikerService"/>.  
+        /// The name of the <see cref="IImageMonikerService"/>.
         /// </summary>
         public string Name { get; set; }
 

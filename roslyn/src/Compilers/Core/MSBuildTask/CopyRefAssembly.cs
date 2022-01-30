@@ -10,7 +10,7 @@ using Microsoft.Build.Utilities;
 namespace Microsoft.CodeAnalysis.BuildTasks
 {
     /// <summary>
-    /// By default, this task copies the source over to the destination. 
+    /// By default, this task copies the source over to the destination.
     /// But if we're able to check that they are identical, the destination is left untouched.
     /// </summary>
     public sealed class CopyRefAssembly : Task

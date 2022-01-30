@@ -53,7 +53,7 @@ namespace Microsoft.CodeAnalysis
         protected internal abstract ImmutableArray<TypedConstant> CommonConstructorArguments { get; }
 
         /// <summary>
-        /// Named (property value) arguments on the attribute. 
+        /// Named (property value) arguments on the attribute.
         /// </summary>
         public ImmutableArray<KeyValuePair<string, TypedConstant>> NamedArguments
         {

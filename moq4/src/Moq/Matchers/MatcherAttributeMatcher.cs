@@ -11,23 +11,23 @@ using System.Reflection;
 namespace Moq.Matchers
 {
     /// <summary>
-	/// Matcher to treat static functions as matchers.
-	/// 
-	/// mock.Setup(x => x.StringMethod(A.MagicString()));
-	/// 
-	/// public static class A 
-	/// {
-	///     [Matcher]
-	///     public static string MagicString() { return null; }
-	///     public static bool MagicString(string arg)
-	///     {
-	///         return arg == "magic";
-	///     }
-	/// }
-	/// 
-	/// Will succeed if: mock.Object.StringMethod("magic");
-	/// and fail with any other call.
-	/// </summary>
+    /// Matcher to treat static functions as matchers.
+    ///
+    /// mock.Setup(x => x.StringMethod(A.MagicString()));
+    ///
+    /// public static class A
+    /// {
+    ///     [Matcher]
+    ///     public static string MagicString() { return null; }
+    ///     public static bool MagicString(string arg)
+    ///     {
+    ///         return arg == "magic";
+    ///     }
+    /// }
+    ///
+    /// Will succeed if: mock.Object.StringMethod("magic");
+    /// and fail with any other call.
+    /// </summary>
     internal class MatcherAttributeMatcher : IMatcher
     {
         private MethodInfo validatorMethod;

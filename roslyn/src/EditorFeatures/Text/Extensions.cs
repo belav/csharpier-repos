@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Text
 
         /// <summary>
         /// Returns the <see cref="ITextSnapshot"/> behind this <see cref="SourceText"/>, or null if it wasn't created from one.
-        /// 
+        ///
         /// Note that multiple <see cref="ITextSnapshot"/>s may map to the same <see cref="SourceText"/> instance if it's
         /// <see cref="ITextVersion.ReiteratedVersionNumber" /> doesn't change.
         /// </summary>
@@ -96,7 +96,7 @@ namespace Microsoft.CodeAnalysis.Text
 
         /// <summary>
         /// Gets the <see cref="Document"/>s from the corresponding <see cref="Workspace.CurrentSolution"/> that are associated with the <see cref="ITextBuffer"/>.
-        /// There may be multiple <see cref="Document"/>s associated with the buffer if it is linked into multiple projects or is part of a Shared Project. 
+        /// There may be multiple <see cref="Document"/>s associated with the buffer if it is linked into multiple projects or is part of a Shared Project.
         /// </summary>
         public static IEnumerable<Document> GetRelatedDocuments(this ITextBuffer buffer) =>
             buffer.AsTextContainer().GetRelatedDocuments();

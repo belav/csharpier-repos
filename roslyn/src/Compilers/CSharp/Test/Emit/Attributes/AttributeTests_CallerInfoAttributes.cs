@@ -6772,7 +6772,7 @@ public class Goo : I1
         /// <summary>
         /// DELIBERATE SPEC VIOLATION: The C# spec currently requires to provide caller information only in explicit invocations and query expressions.
         /// We also provide caller information to an invocation of an <c>Add</c> method generated for an element-initializer in a collection-initializer
-        /// to match the native compiler behavior and user requests. 
+        /// to match the native compiler behavior and user requests.
         /// </summary>
         [WorkItem(991476, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/991476")]
         [WorkItem(171, "CodePlex")]

@@ -13,7 +13,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
     public class AutomationElementHelper
     {
         /// <summary>
-        /// Finds the automation element by <paramref name="elementName"/> and clicks on it asynchronously. 
+        /// Finds the automation element by <paramref name="elementName"/> and clicks on it asynchronously.
         /// <paramref name="elementName"/> should be set to true if performing a recursive search.
         /// </summary>
         public static async Task ClickAutomationElementAsync(
@@ -42,7 +42,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         }
 
         /// <summary>
-        /// Finds the automation element by <paramref name="elementName"/>. 
+        /// Finds the automation element by <paramref name="elementName"/>.
         /// <paramref name="elementName"/> should be set to true if performing a recursive search.
         /// </summary>
         /// <returns>The task referrign to the element finding.</returns>

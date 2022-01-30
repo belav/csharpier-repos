@@ -20,7 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         /// </summary>
         /// <param name="hierarchyItem">An <see cref="IVsHierarchyItem"/> for the project root.</param>
         /// <param name="targetFrameworkMoniker">An optional string representing a TargetFrameworkMoniker.
-        /// This is only useful in multi-targeting scenarios where there may be multiple Roslyn projects 
+        /// This is only useful in multi-targeting scenarios where there may be multiple Roslyn projects
         /// (one per target framework) for a single project on disk.</param>
         /// <param name="projectId">The <see cref="ProjectId"/> of the found project, if any.</param>
         /// <returns>True if the desired project was found; false otherwise.</returns>

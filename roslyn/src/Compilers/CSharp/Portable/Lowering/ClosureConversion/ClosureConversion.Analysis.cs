@@ -141,7 +141,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// Must be called only after <see cref="NestedFunction.CapturedEnvironments"/>
             /// has been calculated.
             ///
-            /// Finds the most optimal capture environment to place a closure in. 
+            /// Finds the most optimal capture environment to place a closure in.
             /// This roughly corresponds to the 'highest' Scope in the tree where all
             /// the captured variables for this closure are in scope. This minimizes
             /// the number of indirections we may have to traverse to access captured
@@ -473,10 +473,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             /// <summary>
             /// Must be called only after <see cref="MakeAndAssignEnvironments"/> and <see cref="ComputeLambdaScopesAndFrameCaptures"/>.
-            /// 
+            ///
             /// In order to reduce allocations, merge environments into a parent environment when it is safe to do so.
             /// This must be done whilst preserving semantics.
-            /// 
+            ///
             /// We also have to make sure not to extend the life of any variable.
             /// This means that we can only merge an environment into its parent if exactly the same closures directly or indirectly reference both environments.
             /// </summary>

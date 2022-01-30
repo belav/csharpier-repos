@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the <see cref="ITypeSymbol"/> of the constant, 
+        /// Returns the <see cref="ITypeSymbol"/> of the constant,
         /// or null if the type can't be determined (error).
         /// </summary>
         public ITypeSymbol? Type
@@ -103,7 +103,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// The value for a <see cref="TypedConstant"/> array. 
+        /// The value for a <see cref="TypedConstant"/> array.
         /// </summary>
         public ImmutableArray<TypedConstant> Values
         {

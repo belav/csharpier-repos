@@ -421,8 +421,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         /// <summary>
-        /// Returns true if the binaryExpression consists of an expression that can never be negative, 
-        /// such as length or unsigned numeric types, being compared to zero with greater than, 
+        /// Returns true if the binaryExpression consists of an expression that can never be negative,
+        /// such as length or unsigned numeric types, being compared to zero with greater than,
         /// less than, or equals relational operator.
         /// </summary>
         public static bool IsSpecialCaseBinaryExpression(

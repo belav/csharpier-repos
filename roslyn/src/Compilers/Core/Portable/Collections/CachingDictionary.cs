@@ -19,12 +19,12 @@ namespace Microsoft.CodeAnalysis.Collections
     /// fast. Internally a ConcurrentDictionary is used to cache lookup results. The client provides
     /// two delegates to perform lookups: One that maps a key to a IEnumerable of values, and one
     /// that provides all keys.
-    /// 
+    ///
     /// The client must provide an IEqualityComparer used for comparing keys. Failed lookups are
     /// cached, but that has the disadvantage that every different failed lookup will consume a
     /// small amount of extra memory. However, that memory can be reclaimed by forcing a full
     /// population of the cache.
-    /// 
+    ///
     /// Thread safe.
     /// </summary>
     internal class CachingDictionary<TKey, TElement> where TKey : notnull
@@ -72,7 +72,7 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Get the values associated with a key. 
+        /// Get the values associated with a key.
         /// </summary>
         /// <param name="key">Key to look up.</param>
         /// <returns>All values associated with key. Returns an empty IEnumerable if
@@ -256,7 +256,7 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Fully populate the underlying dictionary. Once this returns, the dictionary is guaranteed 
+        /// Fully populate the underlying dictionary. Once this returns, the dictionary is guaranteed
         /// to have every key in it.
         /// </summary>
         private IDictionary<TKey, ImmutableArray<TElement>> EnsureFullyPopulated()

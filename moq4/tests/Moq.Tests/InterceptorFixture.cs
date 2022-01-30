@@ -10,8 +10,8 @@ namespace Moq.Tests
     public class InterceptorFixture
     {
         /// <summary>
-		///   These tests document which methods can be intercepted (i.e. seen) by <see cref="IInterceptor"/>s.
-		/// </summary>
+        ///   These tests document which methods can be intercepted (i.e. seen) by <see cref="IInterceptor"/>s.
+        /// </summary>
         public class Method_interceptability
         {
             [Theory]

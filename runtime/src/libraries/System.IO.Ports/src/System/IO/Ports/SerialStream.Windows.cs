@@ -2267,15 +2267,15 @@ namespace System.IO.Ports
                       // reason to create a synchronization primitive here.  Fixing
                       // this will save us some perf, assuming we can correctly
                       // initialize the ManualResetEvent.
-                    if (_waitHandle == null) {
-                        ManualResetEvent mre = new ManualResetEvent(false);
-                        if (_overlapped != null && _overlapped->EventHandle != IntPtr.Zero)
-                            mre.Handle = _overlapped->EventHandle;
-                        if (_isComplete)
-                            mre.Set();
-                        _waitHandle = mre;
-                    }
-                    */
+                      if (_waitHandle == null) {
+                      ManualResetEvent mre = new ManualResetEvent(false);
+                      if (_overlapped != null && _overlapped->EventHandle != IntPtr.Zero)
+                      mre.Handle = _overlapped->EventHandle;
+                      if (_isComplete)
+                      mre.Set();
+                      _waitHandle = mre;
+                      }
+                      */
                     return _waitHandle;
                 }
             }

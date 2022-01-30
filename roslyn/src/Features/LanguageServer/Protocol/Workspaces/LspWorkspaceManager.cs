@@ -61,7 +61,7 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
     /// Stores the current source text for each URI that is being tracked by LSP.
     /// Each time an LSP text sync notification comes in, this source text is updated to match.
     /// Used as the backing implementation for the <see cref="IDocumentChangeTracker"/>.
-    /// 
+    ///
     /// Note that the text here is tracked regardless of whether or not we found a matching roslyn document
     /// for the URI.
     /// </summary>
@@ -425,7 +425,7 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, IDisposable
 
     /// <summary>
     /// Looks for document(s - e.g. linked docs) from a single solution matching the input URI in the set of passed in solutions.
-    /// 
+    ///
     /// Client name is used in razor cases to filter out non-razor documents.  However once we switch fully over to pull
     /// diagnostics, the client should only ever ask the razor server about razor documents, so we may be able to remove it here.
     /// </summary>

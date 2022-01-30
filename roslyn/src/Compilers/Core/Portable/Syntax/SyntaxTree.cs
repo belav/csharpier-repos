@@ -39,18 +39,18 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// If this syntax tree is not associated with a file, this value can be empty.
         /// The path shall not be null.
-        /// 
+        ///
         /// The file doesn't need to exist on disk. The path is opaque to the compiler.
-        /// The only requirement on the path format is that the implementations of 
-        /// <see cref="SourceReferenceResolver"/>, <see cref="XmlReferenceResolver"/> and <see cref="MetadataReferenceResolver"/> 
+        /// The only requirement on the path format is that the implementations of
+        /// <see cref="SourceReferenceResolver"/>, <see cref="XmlReferenceResolver"/> and <see cref="MetadataReferenceResolver"/>
         /// passed to the compilation that contains the tree understand it.
-        /// 
+        ///
         /// Clients must also not assume that the values of this property are unique
         /// within a Compilation.
-        /// 
+        ///
         /// The path is used as follows:
         ///    - When debug information is emitted, this path is embedded in the debug information.
-        ///    - When resolving and normalizing relative paths in #r, #load, #line/#ExternalSource, 
+        ///    - When resolving and normalizing relative paths in #r, #load, #line/#ExternalSource,
         ///      #pragma checksum, #ExternalChecksum directives, XML doc comment include elements, etc.
         /// </remarks>
         public abstract string FilePath { get; }
@@ -167,7 +167,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Create a new syntax tree based off this tree using a new source text.
-        /// 
+        ///
         /// If the new source text is a minor change from the current source text an incremental
         /// parse will occur reusing most of the current syntax tree internal data.  Otherwise, a
         /// full parse will occur using the new source text.
@@ -206,7 +206,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Gets a list of all the diagnostics in either the sub tree that has the specified node as its root or
-        /// associated with the token and its related trivia. 
+        /// associated with the token and its related trivia.
         /// This method does not filter diagnostics based on #pragmas and compiler options
         /// like nowarn, warnaserror etc.
         /// </summary>
@@ -227,17 +227,17 @@ namespace Microsoft.CodeAnalysis
         );
 
         /// <summary>
-        /// Gets the location in terms of path, line and column after applying source line mapping directives 
-        /// (<c>#line</c> in C# or <c>#ExternalSource</c> in VB). 
+        /// Gets the location in terms of path, line and column after applying source line mapping directives
+        /// (<c>#line</c> in C# or <c>#ExternalSource</c> in VB).
         /// </summary>
         /// <param name="span">Span within the tree.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>
         /// A valid <see cref="FileLinePositionSpan"/> that contains path, line and column information.
-        /// 
+        ///
         /// If the location path is mapped the resulting path is the path specified in the corresponding <c>#line</c>,
         /// otherwise it's <see cref="FilePath"/>.
-        /// 
+        ///
         /// A location path is considered mapped if it is preceded by a line mapping directive that
         /// either specifies an explicit file path or is <c>#line default</c>.
         /// </returns>
@@ -274,13 +274,13 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets a FileLinePositionSpan for a TextSpan and the information whether this span is considered to be hidden or not. 
+        /// Gets a FileLinePositionSpan for a TextSpan and the information whether this span is considered to be hidden or not.
         /// FileLinePositionSpans are used primarily for diagnostics and source locations.
         /// This method combines a call to GetLineSpan and IsHiddenPosition.
         /// </summary>
         /// <param name="span"></param>
         /// <param name="isHiddenPosition">Returns a boolean indicating whether this span is considered hidden or not.</param>
-        /// <remarks>This function is being called only in the context of sequence point creation and therefore interprets the 
+        /// <remarks>This function is being called only in the context of sequence point creation and therefore interprets the
         /// LineVisibility accordingly (BeforeFirstRemappingDirective -> Visible).</remarks>
         internal virtual FileLinePositionSpan GetMappedLineSpanAndVisibility(
             TextSpan span,
@@ -292,13 +292,13 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns a path for particular location in source that is presented to the user. 
+        /// Returns a path for particular location in source that is presented to the user.
         /// </summary>
         /// <remarks>
-        /// Used for implementation of <see cref="System.Runtime.CompilerServices.CallerFilePathAttribute"/> 
+        /// Used for implementation of <see cref="System.Runtime.CompilerServices.CallerFilePathAttribute"/>
         /// or for embedding source paths in error messages.
-        /// 
-        /// Unlike Dev12 we do account for #line and #ExternalSource directives when determining value for 
+        ///
+        /// Unlike Dev12 we do account for #line and #ExternalSource directives when determining value for
         /// <see cref="System.Runtime.CompilerServices.CallerFilePathAttribute"/>.
         /// </remarks>
         internal string GetDisplayPath(TextSpan span, SourceReferenceResolver? resolver)
@@ -316,13 +316,13 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns a line number for particular location in source that is presented to the user. 
+        /// Returns a line number for particular location in source that is presented to the user.
         /// </summary>
         /// <remarks>
-        /// Used for implementation of <see cref="System.Runtime.CompilerServices.CallerLineNumberAttribute"/> 
+        /// Used for implementation of <see cref="System.Runtime.CompilerServices.CallerLineNumberAttribute"/>
         /// or for embedding source line numbers in error messages.
-        /// 
-        /// Unlike Dev12 we do account for #line and #ExternalSource directives when determining value for 
+        ///
+        /// Unlike Dev12 we do account for #line and #ExternalSource directives when determining value for
         /// <see cref="System.Runtime.CompilerServices.CallerLineNumberAttribute"/>.
         /// </remarks>
         internal int GetDisplayLineNumber(TextSpan span)
@@ -354,7 +354,7 @@ namespace Microsoft.CodeAnalysis
         /// <param name="tree">The tree to compare against.</param>
         /// <param name="topLevel"> If true then the trees are equivalent if the contained nodes and tokens declaring
         /// metadata visible symbolic information are equivalent, ignoring any differences of nodes inside method bodies
-        /// or initializer expressions, otherwise all nodes and tokens must be equivalent. 
+        /// or initializer expressions, otherwise all nodes and tokens must be equivalent.
         /// </param>
         public abstract bool IsEquivalentTo(SyntaxTree tree, bool topLevel = false);
 

@@ -81,7 +81,7 @@ class Driver
             if (collected != total)
             {
                 /* Not all finalizer finished, before returning from WaitForPendingFinalizers. Or not all objects
-				 * have been garbage collected; this might be due to false pinning */
+                 * have been garbage collected; this might be due to false pinning */
                 Console.Write(
                     String.Format("[{0}] Finalized {1} of {2} objects\n", i, collected, total)
                 );

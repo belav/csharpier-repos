@@ -63,7 +63,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         }
 
         /// <summary>
-        /// Given an editor-config code-style-option, gives back the core value part of the 
+        /// Given an editor-config code-style-option, gives back the core value part of the
         /// option.  For example, if the option is "true:error" or "true" then "true" will be returned
         /// in <paramref name="value"/>.
         /// </summary>
@@ -79,7 +79,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             );
 
         /// <summary>
-        /// Given an editor-config code-style-option, gives back the constituent parts of the 
+        /// Given an editor-config code-style-option, gives back the constituent parts of the
         /// option.  For example, if the option is "true:error" then "true" will be returned
         /// in <paramref name="value"/> and <see cref="NotificationOption2.Error"/> will be returned
         /// in <paramref name="notification"/>.  Note that users are allowed to not provide

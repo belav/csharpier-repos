@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         public int StartLine { get; }
 
         /// <summary>
-        /// Zero-based integer for the starting source column. If column information is missing (e.g. language service doesn't support it), 
+        /// Zero-based integer for the starting source column. If column information is missing (e.g. language service doesn't support it),
         /// this value should be treated as -1.
         /// </summary>
         [DataMember(Name = "startColumn")]
@@ -71,7 +71,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         public int EndLine { get; }
 
         /// <summary>
-        /// Zero-based integer for the ending source column. If column information is missing (e.g. language service doesn't support it), 
+        /// Zero-based integer for the ending source column. If column information is missing (e.g. language service doesn't support it),
         /// this value should be treated as -1.
         /// </summary>
         [DataMember(Name = "endColumn")]

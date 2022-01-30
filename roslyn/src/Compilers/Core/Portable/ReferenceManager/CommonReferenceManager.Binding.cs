@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis
         ///
         /// The first element (index==0) of the assemblies array represents the assembly being built.
         /// One can think about the rest of the items in assemblies array as assembly references given to the compiler to
-        /// build executable for the assembly being built. 
+        /// build executable for the assembly being built.
         /// </summary>
         /// <param name="compilation">Compilation.</param>
         /// <param name="explicitAssemblies">
@@ -62,7 +62,7 @@ namespace Microsoft.CodeAnalysis
         /// Maps indices of implicitly resolved references to the corresponding indices of resolved assemblies in <paramref name="allAssemblies"/> (explicit + implicit).
         /// </param>
         /// <param name="implicitReferenceResolutions">
-        /// Map of implicit reference resolutions performed in the preceding script compilation. 
+        /// Map of implicit reference resolutions performed in the preceding script compilation.
         /// Output contains additional implicit resolutions performed during binding of this script compilation references.
         /// </param>
         /// <param name="resolutionDiagnostics">
@@ -78,13 +78,13 @@ namespace Microsoft.CodeAnalysis
         /// An array of <see cref="BoundInputAssembly"/> structures describing the result. It has the same amount of items as
         /// the input assemblies array, <see cref="BoundInputAssembly"/> for each input AssemblyData object resides
         /// at the same position.
-        /// 
+        ///
         /// Each <see cref="BoundInputAssembly"/> contains the following data:
-        /// 
-        /// -    Suitable AssemblySymbol instance for the corresponding assembly, 
+        ///
+        /// -    Suitable AssemblySymbol instance for the corresponding assembly,
         ///     null reference if none is available/found. Always null for the first element, which corresponds to the assembly being built.
         ///
-        /// -    Result of resolving assembly references of the corresponding assembly 
+        /// -    Result of resolving assembly references of the corresponding assembly
         ///     against provided set of assembly definitions. Essentially, this is an array returned by
         ///     <see cref="AssemblyData.BindAssemblyReferences(ImmutableArray{AssemblyData}, AssemblyIdentityComparer)"/> method.
         /// </return>
@@ -605,29 +605,29 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Resolve <paramref name="referenceIdentity"/> using a given <paramref name="resolver"/>.
-        /// 
+        ///
         /// We make sure not to query the resolver for the same identity multiple times (across submissions).
-        /// Doing so ensures that we don't create multiple assembly symbols within the same chain of script compilations 
+        /// Doing so ensures that we don't create multiple assembly symbols within the same chain of script compilations
         /// for the same implicitly resolved identity. Failure to do so results in cast errors like "can't convert T to T".
-        /// 
+        ///
         /// The method only records successful resolution results by updating <paramref name="implicitReferenceResolutions"/>.
         /// Failures are only recorded after all resolution attempts have been completed.
-        /// 
+        ///
         /// This approach addresses the following scenario. Consider a script:
         /// <code>
         ///   #r "dir1\a.dll"
         ///   #r "dir2\b.dll"
         /// </code>
-        /// where both a.dll and b.dll reference x.dll, which is present only in dir2. Let's assume the resolver first 
+        /// where both a.dll and b.dll reference x.dll, which is present only in dir2. Let's assume the resolver first
         /// attempts to resolve "x" referenced from "dir1\a.dll". The resolver may fail to find the dependency if it only
         /// looks up the directory containing the referencing assembly (dir1). If we recorded and this failure immediately
-        /// we would not call the resolver to resolve "x" within the context of "dir2\b.dll" (or any other referencing assembly). 
-        /// 
-        /// This behavior would ensure consistency and if the types from x.dll do leak thru to the script compilation, but it 
+        /// we would not call the resolver to resolve "x" within the context of "dir2\b.dll" (or any other referencing assembly).
+        ///
+        /// This behavior would ensure consistency and if the types from x.dll do leak thru to the script compilation, but it
         /// would result in a missing assembly error. By recording the failure after all resolution attempts are complete
         /// we also achieve a consistent behavior but are able to bind the reference to "x.dll". Besides, this approach
         /// also avoids dependency on the order in which we evaluate the assembly references in the scenario above.
-        /// In general, the result of the resolution may still depend on the order of #r - if there are different assemblies 
+        /// In general, the result of the resolution may still depend on the order of #r - if there are different assemblies
         /// of the same identity in different directories.
         /// </summary>
         private bool TryResolveMissingReference(
@@ -1275,9 +1275,9 @@ namespace Microsoft.CodeAnalysis
         // https://github.com/dotnet/roslyn/issues/40751 It should not be necessary to annotate this method to annotate overrides
         /// <summary>
         /// Compute AssemblySymbols referenced by the input AssemblySymbol and fill in <paramref name="referencedAssemblySymbols"/> with the result.
-        /// The AssemblySymbols must correspond 
-        /// to the AssemblyNames returned by AssemblyData.AssemblyReferences property. If reference is not 
-        /// resolved, null reference should be returned in the corresponding item. 
+        /// The AssemblySymbols must correspond
+        /// to the AssemblyNames returned by AssemblyData.AssemblyReferences property. If reference is not
+        /// resolved, null reference should be returned in the corresponding item.
         /// </summary>
         /// <param name="assemblySymbol">The target AssemblySymbol instance.</param>
         /// <param name="referencedAssemblySymbols">A list which will be filled in with
@@ -1291,7 +1291,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Return collection of assemblies involved in canonical type resolution of
-        /// NoPia local types defined within target assembly. In other words, all 
+        /// NoPia local types defined within target assembly. In other words, all
         /// references used by previous compilation referencing the target assembly.
         /// </summary>
         protected abstract ImmutableArray<TAssemblySymbol> GetNoPiaResolutionAssemblies(

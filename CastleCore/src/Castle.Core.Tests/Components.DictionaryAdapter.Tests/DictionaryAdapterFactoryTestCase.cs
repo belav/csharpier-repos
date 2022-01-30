@@ -1107,8 +1107,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
         }
 
         /// <summary>
-		/// Test that a SuppressNotificationsBlock suppresses notification events which the rollback which CancelEdit does generates.
-		/// </summary>
+        /// Test that a SuppressNotificationsBlock suppresses notification events which the rollback which CancelEdit does generates.
+        /// </summary>
         [Test]
         public void WillNotRaisePropertyChangedEventWhenCancelEditingAndSupressingNotifications()
         {

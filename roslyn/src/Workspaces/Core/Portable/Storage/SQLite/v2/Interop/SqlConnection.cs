@@ -19,12 +19,12 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
     /// <summary>
     /// Encapsulates a connection to a sqlite database.  On construction an attempt will be made
     /// to open the DB if it exists, or create it if it does not.
-    /// 
+    ///
     /// Connections are considered relatively heavyweight and are pooled until the <see cref="SQLitePersistentStorage"/>
     /// is <see cref="SQLitePersistentStorage.Dispose"/>d.  Connections can be used by different threads,
     /// but only as long as they are used by one thread at a time.  They are not safe for concurrent
     /// use by several threads.
-    /// 
+    ///
     /// <see cref="SqlStatement"/>s can be created through the user of <see cref="GetResettableStatement"/>.
     /// These statements are cached for the lifetime of the connection and are only finalized
     /// (i.e. destroyed) when the connection is closed.
@@ -78,7 +78,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
 
         /// <summary>
         /// Whether or not we're in a transaction.  We currently don't supported nested transactions.
-        /// If we want that, we can achieve it through sqlite "save points".  However, that's adds a 
+        /// If we want that, we can achieve it through sqlite "save points".  However, that's adds a
         /// lot of complexity that is nice to avoid.
         /// </summary>
         public bool IsInTransaction { get; private set; }

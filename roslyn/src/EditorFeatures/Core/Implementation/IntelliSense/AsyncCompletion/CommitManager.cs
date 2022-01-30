@@ -71,8 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         /// <summary>
         /// The method performs a preliminarily filtering of commit availability.
         /// In case of a doubt, it should respond with true.
-        /// We will be able to cancel later in 
-        /// <see cref="TryCommit(IAsyncCompletionSession, ITextBuffer, VSCompletionItem, char, CancellationToken)"/> 
+        /// We will be able to cancel later in
+        /// <see cref="TryCommit(IAsyncCompletionSession, ITextBuffer, VSCompletionItem, char, CancellationToken)"/>
         /// based on <see cref="VSCompletionItem"/> item, e.g. based on <see cref="CompletionItemRules"/>.
         /// </summary>
         public bool ShouldCommitCompletion(

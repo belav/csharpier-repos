@@ -22,8 +22,8 @@ using Moq.Properties;
 namespace Moq
 {
     /// <summary>
-	/// An implementation of <see cref="ProxyFactory"/> that is based on Castle DynamicProxy.
-	/// </summary>
+    /// An implementation of <see cref="ProxyFactory"/> that is based on Castle DynamicProxy.
+    /// </summary>
     internal sealed class CastleProxyFactory : ProxyFactory
     {
         private ProxyGenerationOptions generationOptions;
@@ -213,9 +213,9 @@ namespace Moq
         }
 
         /// <summary>
-		///   Attempts to find the most specific override for the given method <paramref name="declaration"/>
-		///   in the type chains (base class, interfaces) of the given <paramref name="proxyType"/>.
-		/// </summary>
+        ///   Attempts to find the most specific override for the given method <paramref name="declaration"/>
+        ///   in the type chains (base class, interfaces) of the given <paramref name="proxyType"/>.
+        /// </summary>
         public static MethodInfo FindMostSpecificOverride(MethodInfo declaration, Type proxyType)
         {
             return mostSpecificOverrides.GetOrAdd(
@@ -327,9 +327,9 @@ namespace Moq
         }
 
         /// <summary>
-		///   Performs a non-virtual (non-polymorphic) call to the given <paramref name="method"/>
-		///   using the specified object <paramref name="instance"/> and <paramref name="arguments"/>.
-		/// </summary>
+        ///   Performs a non-virtual (non-polymorphic) call to the given <paramref name="method"/>
+        ///   using the specified object <paramref name="instance"/> and <paramref name="arguments"/>.
+        /// </summary>
         public static object DynamicInvokeNonVirtually(
             MethodInfo method,
             object instance,
@@ -453,10 +453,10 @@ namespace Moq
 #endif
 
         /// <summary>
-		/// This hook tells Castle DynamicProxy to proxy the default methods it suggests,
-		/// plus some of the methods defined by <see cref="object"/>, e.g. so we can intercept
-		/// <see cref="object.ToString()"/> and give mocks useful default names.
-		/// </summary>
+        /// This hook tells Castle DynamicProxy to proxy the default methods it suggests,
+        /// plus some of the methods defined by <see cref="object"/>, e.g. so we can intercept
+        /// <see cref="object.ToString()"/> and give mocks useful default names.
+        /// </summary>
         private sealed class IncludeObjectMethodsHook : AllMethodsHook
         {
             public override bool ShouldInterceptMethod(Type type, MethodInfo method)

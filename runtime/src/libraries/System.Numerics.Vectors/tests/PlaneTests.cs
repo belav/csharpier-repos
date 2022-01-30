@@ -361,10 +361,10 @@ namespace System.Numerics.Tests
         [Fact]
         public unsafe void PlaneSizeofTest()
         {
-            Assert.Equal(16, sizeof(Plane));
-            Assert.Equal(32, sizeof(Plane_2x));
-            Assert.Equal(20, sizeof(PlanePlusFloat));
-            Assert.Equal(40, sizeof(PlanePlusFloat_2x));
+        Assert.Equal(16, sizeof(Plane));
+        Assert.Equal(32, sizeof(Plane_2x));
+        Assert.Equal(20, sizeof(PlanePlusFloat));
+        Assert.Equal(40, sizeof(PlanePlusFloat_2x));
         }
         */
 

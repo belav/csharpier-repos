@@ -306,7 +306,7 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 
         /// <summary>
         /// Formats the span between the opening and closing points, options permitting.
-        /// Returns the text changes that should be applied to the input document to 
+        /// Returns the text changes that should be applied to the input document to
         /// get the formatted text and the end of the close curly brace in the formatted text.
         /// </summary>
         private static async Task<(ImmutableArray<TextChange> textChanges, int finalCurlyBraceEnd)> FormatTrackingSpanAsync(

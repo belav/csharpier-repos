@@ -19,9 +19,9 @@ namespace Castle.DynamicProxy.Generators.Emitters
     using System.Reflection.Emit;
 
     /// <summary>
-	///   Provides appropriate Stind.X opcode 
-	///   for the type of primitive value to be stored indirectly.
-	/// </summary>
+    ///   Provides appropriate Stind.X opcode
+    ///   for the type of primitive value to be stored indirectly.
+    /// </summary>
     internal sealed class StindOpCodesDictionary : Dictionary<Type, OpCode>
     {
         private static readonly StindOpCodesDictionary dict = new StindOpCodesDictionary();

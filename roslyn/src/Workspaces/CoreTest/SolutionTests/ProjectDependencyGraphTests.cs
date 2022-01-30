@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         }
 
         /// <summary>
-        /// Verifies that <see cref="ProjectDependencyGraph.GetTopologicallySortedProjects(CancellationToken)"/> 
+        /// Verifies that <see cref="ProjectDependencyGraph.GetTopologicallySortedProjects(CancellationToken)"/>
         /// returns one of the correct results.
         /// </summary>
         /// <param name="solution"></param>

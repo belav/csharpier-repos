@@ -8,11 +8,11 @@
 
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
-
+   
    contributed by Isaac Gouy, transliterated from Oleg Mazurov's Java program
    concurrency fix and minor improvements by Peperud
    parallel and small optimisations by Anthony Lloyd
-*/
+   */
 
 using System;
 using System.Threading;

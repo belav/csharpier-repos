@@ -39,7 +39,7 @@ namespace System.Web.Mvc.Async
         }
 
         /// <summary>
-        /// Determines if we should bind "Foo" to FooAsync/FooCompleted pattern. 
+        /// Determines if we should bind "Foo" to FooAsync/FooCompleted pattern.
         /// </summary>
         /// <param name="controllerType"></param>
         /// <returns></returns>

@@ -11,9 +11,9 @@ public class FinalizerException
     static IntPtr aptr;
 
     /*
-	 * We allocate the exception object deep down the stack so
-	 * that it doesn't get pinned.
-	 */
+     * We allocate the exception object deep down the stack so
+     * that it doesn't get pinned.
+     */
     public static unsafe void MakeException(int depth)
     {
         // Avoid tail calls

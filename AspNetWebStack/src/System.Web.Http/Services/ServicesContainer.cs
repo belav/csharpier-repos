@@ -43,14 +43,14 @@ namespace System.Web.Http.Controllers
         protected virtual void ResetCache(Type serviceType) { }
 
         /// <summary>
-        /// Determine whether the service type should be fetched with GetService or GetServices. 
+        /// Determine whether the service type should be fetched with GetService or GetServices.
         /// </summary>
         /// <param name="serviceType">type of service to query</param>
         /// <returns>true iff the service is singular. </returns>
         public abstract bool IsSingleService(Type serviceType);
 
         /// <summary>
-        /// Adds a service to the end of services list for the given service type. 
+        /// Adds a service to the end of services list for the given service type.
         /// </summary>
         /// <param name="serviceType">The service type.</param>
         /// <param name="service">The service instance.</param>
@@ -71,7 +71,7 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Removes all the service instances of the given service type. 
+        /// Removes all the service instances of the given service type.
         /// </summary>
         /// <param name="serviceType">The service type to clear from the services list.</param>
         public virtual void Clear(Type serviceType)
@@ -274,7 +274,7 @@ namespace System.Web.Http.Controllers
 
         /// <summary>
         /// Replaces all existing services for the given service type with the given
-        /// service instance. This works for both singular and plural services. 
+        /// service instance. This works for both singular and plural services.
         /// </summary>
         /// <param name="serviceType">The service type.</param>
         /// <param name="service">The service instance.</param>

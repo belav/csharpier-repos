@@ -13,7 +13,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
     {
         /// <summary>
         /// This method will retry the asynchronous action represented by <paramref name="action"/>,
-        /// waiting for <paramref name="delay"/> time after each retry. If a given retry returns a value 
+        /// waiting for <paramref name="delay"/> time after each retry. If a given retry returns a value
         /// other than the default value of <typeparamref name="T"/>, this value is returned.
         /// </summary>
         /// <param name="action">the asynchronous action to retry</param>

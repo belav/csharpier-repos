@@ -1347,7 +1347,7 @@ class B : A
         }
 
         /// <summary>
-        /// Allow locals with optional custom modifiers. 
+        /// Allow locals with optional custom modifiers.
         /// </summary>
         /// <remarks>
         /// The custom modifiers are not copied to the corresponding

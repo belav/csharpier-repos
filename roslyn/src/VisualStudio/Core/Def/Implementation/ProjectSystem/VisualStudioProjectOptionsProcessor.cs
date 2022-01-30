@@ -286,7 +286,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         ) => compilationOptions;
 
         /// <summary>
-        /// Override by derived classes to provide a hook to modify a <see cref="ParseOptions"/> with any host-provided values that didn't come from 
+        /// Override by derived classes to provide a hook to modify a <see cref="ParseOptions"/> with any host-provided values that didn't come from
         /// the command line string.
         /// </summary>
         protected virtual ParseOptions ComputeParseOptionsWithHostValues(

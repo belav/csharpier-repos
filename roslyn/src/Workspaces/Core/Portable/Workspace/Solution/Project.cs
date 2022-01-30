@@ -87,13 +87,13 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// The default namespace of the project ("" if not defined, which means global namespace),
-        /// or null if it is unknown or not applicable. 
+        /// or null if it is unknown or not applicable.
         /// </summary>
         /// <remarks>
-        /// Right now VB doesn't have the concept of "default namespace". But we conjure one in workspace 
-        /// by assigning the value of the project's root namespace to it. So various feature can choose to 
+        /// Right now VB doesn't have the concept of "default namespace". But we conjure one in workspace
+        /// by assigning the value of the project's root namespace to it. So various feature can choose to
         /// use it for their own purpose.
-        /// In the future, we might consider officially exposing "default namespace" for VB project 
+        /// In the future, we might consider officially exposing "default namespace" for VB project
         /// (e.g. through a "defaultnamespace" msbuild property)
         /// </remarks>
         public string? DefaultNamespace => _projectState.DefaultNamespace;
@@ -101,7 +101,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// <see langword="true"/> if this <see cref="Project"/> supports providing data through the
         /// <see cref="GetCompilationAsync(CancellationToken)"/> method.
-        /// 
+        ///
         /// If <see langword="false"/> then <see cref="GetCompilationAsync(CancellationToken)"/> method will return <see langword="null"/> instead.
         /// </summary>
         public bool SupportsCompilation =>
@@ -142,7 +142,7 @@ namespace Microsoft.CodeAnalysis
             );
 
         /// <summary>
-        /// The list of all other projects that this project references, including projects that 
+        /// The list of all other projects that this project references, including projects that
         /// are not part of the solution.
         /// </summary>
         public IReadOnlyList<ProjectReference> AllProjectReferences =>
@@ -626,7 +626,7 @@ namespace Microsoft.CodeAnalysis
         ) => _projectState.GetSemanticVersionAsync(cancellationToken);
 
         /// <summary>
-        /// Calculates a checksum that contains a project's checksum along with a checksum for each of the project's 
+        /// Calculates a checksum that contains a project's checksum along with a checksum for each of the project's
         /// transitive dependencies.
         /// </summary>
         /// <remarks>
@@ -639,15 +639,15 @@ namespace Microsoft.CodeAnalysis
         ///    <item>Project properties in referenced projects</item>
         /// </list>
         /// are reflected in the metadata we keep so that comparing solutions accurately tells us when we need to recompute
-        /// semantic work.   
-        /// 
+        /// semantic work.
+        ///
         /// <para>This method of checking for changes has a few important properties that differentiate it from other methods of determining project version.
         /// <list type="bullet">
         ///    <item>Changes to methods inside the current project will be reflected to compute updated diagnostics.
         ///        <see cref="Project.GetDependentSemanticVersionAsync(CancellationToken)"/> does not change as it only returns top level changes.</item>
         ///    <item>Reloading a project without making any changes will re-use cached diagnostics.
         ///        <see cref="Project.GetDependentSemanticVersionAsync(CancellationToken)"/> changes as the project is removed, then added resulting in a version change.</item>
-        /// </list>   
+        /// </list>
         /// </para>
         /// </remarks>
         internal Task<Checksum> GetDependentChecksumAsync(CancellationToken cancellationToken) =>
@@ -700,7 +700,7 @@ namespace Microsoft.CodeAnalysis
             this.Solution.RemoveProjectReference(this.Id, projectReference).GetProject(this.Id)!;
 
         /// <summary>
-        /// Creates a new instance of this project updated to replace existing project references 
+        /// Creates a new instance of this project updated to replace existing project references
         /// with the specified ones.
         /// </summary>
         public Project WithProjectReferences(IEnumerable<ProjectReference> projectReferences) =>
@@ -736,7 +736,7 @@ namespace Microsoft.CodeAnalysis
                 .GetProject(this.Id)!;
 
         /// <summary>
-        /// Creates a new instance of this project updated to include the specified analyzer reference 
+        /// Creates a new instance of this project updated to include the specified analyzer reference
         /// in addition to already existing ones.
         /// </summary>
         public Project AddAnalyzerReference(AnalyzerReference analyzerReference) =>
@@ -756,7 +756,7 @@ namespace Microsoft.CodeAnalysis
             this.Solution.RemoveAnalyzerReference(this.Id, analyzerReference).GetProject(this.Id)!;
 
         /// <summary>
-        /// Creates a new instance of this project updated to replace existing analyzer references 
+        /// Creates a new instance of this project updated to replace existing analyzer references
         /// with the specified ones.
         /// </summary>
         public Project WithAnalyzerReferences(IEnumerable<AnalyzerReference> analyzerReferencs) =>

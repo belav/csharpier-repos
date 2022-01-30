@@ -3,7 +3,7 @@
 
 /*
 
-A .cctor has only one chance to run in any appdomain. 
+A .cctor has only one chance to run in any appdomain.
 If it fails, the 2nd time we try to access a static field we check if .cctor has been run. And it has, but failed so we fail again.
 
 Test_CctorThrowMethodAccess throws an exception inside .cctor.
@@ -73,16 +73,16 @@ public struct D
 // TEST5
 // instance method trigger (for this null pointer)
 public class E
-{	
-	static E()
-	{
-		Console.WriteLine("In E.cctor");
-		
-		throw new Exception();
-	}
+{
+static E()
+{
+Console.WriteLine("In E.cctor");
 
-	public void methE()
-	{}
+throw new Exception();
+}
+
+public void methE()
+{}
 }
 */
 

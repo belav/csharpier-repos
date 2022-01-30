@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis
         private const string VTableGapMethodNamePrefix = "_VtblGap";
 
         /// <summary>
-        /// Returns true if the nested type should be imported. 
+        /// Returns true if the nested type should be imported.
         /// </summary>
         public static bool ShouldImportNestedType(
             this PEModule module,

@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis
                 public readonly GeneratorDriver? Driver;
 
                 /// <summary>
-                /// Whether the generated documents in <see cref="Documents"/> are final and should not be regenerated. 
+                /// Whether the generated documents in <see cref="Documents"/> are final and should not be regenerated.
                 /// It's important that once we've ran generators once we don't want to run them again. Once we've ran
                 /// them the first time, those syntax trees are visible from other parts of the Workspaces model; if we
                 /// run them a second time we'd end up with new trees which would confuse our snapshot model -- once the

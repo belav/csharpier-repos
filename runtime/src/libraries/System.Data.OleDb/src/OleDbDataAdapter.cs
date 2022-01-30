@@ -223,13 +223,13 @@ namespace System.Data.OleDb
             /*
             IntPtr adodbptr = ADP.PtrZero;
             try { // generate a new COM Callable Wrapper around the user object so they can't ReleaseComObject on us.
-                adodbptr = Marshal.GetIUnknownForObject(adodb);
-                adodb = System.Runtime.Remoting.Services.EnterpriseServicesHelper.WrapIUnknownWithComObject(adodbptr);
+            adodbptr = Marshal.GetIUnknownForObject(adodb);
+            adodb = System.Runtime.Remoting.Services.EnterpriseServicesHelper.WrapIUnknownWithComObject(adodbptr);
             }
             finally {
-                if (ADP.PtrZero != adodbptr) {
-                    Marshal.Release(adodbptr);
-                }
+            if (ADP.PtrZero != adodbptr) {
+            Marshal.Release(adodbptr);
+            }
             }
             */
 

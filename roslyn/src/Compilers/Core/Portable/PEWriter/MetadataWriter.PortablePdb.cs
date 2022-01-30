@@ -999,7 +999,7 @@ namespace Microsoft.Cci
         private const int CompilationOptionsSchemaVersion = 2;
 
         /// <summary>
-        /// Capture the set of compilation options to allow a compilation 
+        /// Capture the set of compilation options to allow a compilation
         /// to be reconstructed from the pdb
         /// </summary>
         private void EmbedCompilationOptions(CommonPEModuleBuilder module)

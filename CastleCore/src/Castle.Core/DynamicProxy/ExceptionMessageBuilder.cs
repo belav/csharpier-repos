@@ -24,10 +24,10 @@ namespace Castle.DynamicProxy
     internal static class ExceptionMessageBuilder
     {
         /// <summary>
-		/// Provides instructions that a user could follow to make a type or method in <paramref name="targetAssembly"/>
-		/// visible to DynamicProxy.</summary>
-		/// <param name="targetAssembly">The assembly containing the type or method.</param>
-		/// <returns>Instructions that a user could follow to make a type or method visible to DynamicProxy.</returns>
+        /// Provides instructions that a user could follow to make a type or method in <paramref name="targetAssembly"/>
+        /// visible to DynamicProxy.</summary>
+        /// <param name="targetAssembly">The assembly containing the type or method.</param>
+        /// <returns>Instructions that a user could follow to make a type or method visible to DynamicProxy.</returns>
         internal static string CreateInstructionsToMakeVisible(Assembly targetAssembly)
         {
             string strongNamedOrNotIndicator = " not"; // assume not strong-named
@@ -62,11 +62,11 @@ namespace Castle.DynamicProxy
         }
 
         /// <summary>
-		/// Creates a message to inform clients that a proxy couldn't be created due to reliance on an
-		/// inaccessible type (perhaps itself).
-		/// </summary>
-		/// <param name="inaccessibleType">the inaccessible type that prevents proxy creation</param>
-		/// <param name="typeToProxy">the type that couldn't be proxied</param>
+        /// Creates a message to inform clients that a proxy couldn't be created due to reliance on an
+        /// inaccessible type (perhaps itself).
+        /// </summary>
+        /// <param name="inaccessibleType">the inaccessible type that prevents proxy creation</param>
+        /// <param name="typeToProxy">the type that couldn't be proxied</param>
         public static string CreateMessageForInaccessibleType(
             Type inaccessibleType,
             Type typeToProxy

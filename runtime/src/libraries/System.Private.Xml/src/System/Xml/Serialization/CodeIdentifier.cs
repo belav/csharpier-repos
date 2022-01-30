@@ -271,7 +271,7 @@ namespace System.Xml.Serialization
 
         /*
         internal static string GetTypeName(string name, CodeDomProvider codeProvider) {
-            return codeProvider.GetTypeOutput(new CodeTypeReference(name));
+        return codeProvider.GetTypeOutput(new CodeTypeReference(name));
         }
         */
 

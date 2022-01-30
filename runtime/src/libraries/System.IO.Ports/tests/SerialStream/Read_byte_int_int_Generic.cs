@@ -230,7 +230,7 @@ namespace System.IO.Ports.Tests
                 var actualBytes = new byte[numRndBytesPairty + 1];
 
                 /* 1 Additional character gets added to the input buffer when the parity error occurs on the last byte of a stream
-           We are verifying that besides this everything gets read in correctly. See NDP Whidbey: 24216 for more info on this */
+                We are verifying that besides this everything gets read in correctly. See NDP Whidbey: 24216 for more info on this */
                 Debug.WriteLine(
                     "Verifying default ParityReplace byte with a parity errro on the last byte"
                 );

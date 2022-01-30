@@ -11,8 +11,8 @@ using Moq.Properties;
 namespace Moq
 {
     /// <summary>
-	///   Defines the number of invocations allowed by a mocked method.
-	/// </summary>
+    ///   Defines the number of invocations allowed by a mocked method.
+    /// </summary>
     public readonly struct Times : IEquatable<Times>
     {
         private readonly int from;
@@ -27,8 +27,8 @@ namespace Moq
         }
 
         /// <summary>Deconstructs this instance.</summary>
-		/// <param name="from">This output parameter will receive the minimum required number of calls satisfying this instance (i.e. the lower inclusive bound).</param>
-		/// <param name="to">This output parameter will receive the maximum allowed number of calls satisfying this instance (i.e. the upper inclusive bound).</param>
+        /// <param name="from">This output parameter will receive the minimum required number of calls satisfying this instance (i.e. the lower inclusive bound).</param>
+        /// <param name="to">This output parameter will receive the maximum allowed number of calls satisfying this instance (i.e. the upper inclusive bound).</param>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public void Deconstruct(out int from, out int to)
         {
@@ -53,11 +53,11 @@ namespace Moq
         }
 
         /// <summary>
-		///   Specifies that a mocked method should be invoked <paramref name="callCount"/> times
-		///   as minimum.
-		/// </summary>
-		/// <param name="callCount">The minimum number of times.</param>
-		/// <returns>An object defining the allowed number of invocations.</returns>
+        ///   Specifies that a mocked method should be invoked <paramref name="callCount"/> times
+        ///   as minimum.
+        /// </summary>
+        /// <param name="callCount">The minimum number of times.</param>
+        /// <returns>An object defining the allowed number of invocations.</returns>
         public static Times AtLeast(int callCount)
         {
             if (callCount < 1)
@@ -69,20 +69,20 @@ namespace Moq
         }
 
         /// <summary>
-		///   Specifies that a mocked method should be invoked one time as minimum.
-		/// </summary>
-		/// <returns>An object defining the allowed number of invocations.</returns>
+        ///   Specifies that a mocked method should be invoked one time as minimum.
+        /// </summary>
+        /// <returns>An object defining the allowed number of invocations.</returns>
         public static Times AtLeastOnce()
         {
             return new Times(Kind.AtLeastOnce, 1, int.MaxValue);
         }
 
         /// <summary>
-		///   Specifies that a mocked method should be invoked <paramref name="callCount"/> times
-		///   as maximum.
-		/// </summary>
-		/// <param name="callCount">The maximum number of times.</param>
-		/// <returns>An object defining the allowed number of invocations.</returns>
+        ///   Specifies that a mocked method should be invoked <paramref name="callCount"/> times
+        ///   as maximum.
+        /// </summary>
+        /// <param name="callCount">The maximum number of times.</param>
+        /// <returns>An object defining the allowed number of invocations.</returns>
         public static Times AtMost(int callCount)
         {
             if (callCount < 0)
@@ -94,22 +94,22 @@ namespace Moq
         }
 
         /// <summary>
-		///   Specifies that a mocked method should be invoked one time as maximum.
-		/// </summary>
-		/// <returns>An object defining the allowed number of invocations.</returns>
+        ///   Specifies that a mocked method should be invoked one time as maximum.
+        /// </summary>
+        /// <returns>An object defining the allowed number of invocations.</returns>
         public static Times AtMostOnce()
         {
             return new Times(Kind.AtMostOnce, 0, 1);
         }
 
         /// <summary>
-		///   Specifies that a mocked method should be invoked between
-		///   <paramref name="callCountFrom"/> and <paramref name="callCountTo"/> times.
-		/// </summary>
-		/// <param name="callCountFrom">The minimum number of times.</param>
-		/// <param name="callCountTo">The maximum number of times.</param>
-		/// <param name="rangeKind">The kind of range. See <see cref="Range"/>.</param>
-		/// <returns>An object defining the allowed number of invocations.</returns>
+        ///   Specifies that a mocked method should be invoked between
+        ///   <paramref name="callCountFrom"/> and <paramref name="callCountTo"/> times.
+        /// </summary>
+        /// <param name="callCountFrom">The minimum number of times.</param>
+        /// <param name="callCountTo">The maximum number of times.</param>
+        /// <param name="rangeKind">The kind of range. See <see cref="Range"/>.</param>
+        /// <returns>An object defining the allowed number of invocations.</returns>
         public static Times Between(int callCountFrom, int callCountTo, Range rangeKind)
         {
             if (rangeKind == Range.Exclusive)
@@ -136,11 +136,11 @@ namespace Moq
         }
 
         /// <summary>
-		///   Specifies that a mocked method should be invoked exactly
-		///   <paramref name="callCount"/> times.
-		/// </summary>
-		/// <param name="callCount">The times that a method or property can be called.</param>
-		/// <returns>An object defining the allowed number of invocations.</returns>
+        ///   Specifies that a mocked method should be invoked exactly
+        ///   <paramref name="callCount"/> times.
+        /// </summary>
+        /// <param name="callCount">The times that a method or property can be called.</param>
+        /// <returns>An object defining the allowed number of invocations.</returns>
         public static Times Exactly(int callCount)
         {
             if (callCount < 0)
@@ -152,31 +152,31 @@ namespace Moq
         }
 
         /// <summary>
-		///   Specifies that a mocked method should not be invoked.
-		/// </summary>
-		/// <returns>An object defining the allowed number of invocations.</returns>
+        ///   Specifies that a mocked method should not be invoked.
+        /// </summary>
+        /// <returns>An object defining the allowed number of invocations.</returns>
         public static Times Never()
         {
             return new Times(Kind.Never, 0, 0);
         }
 
         /// <summary>
-		///   Specifies that a mocked method should be invoked exactly one time.
-		/// </summary>
-		/// <returns>An object defining the allowed number of invocations.</returns>
+        ///   Specifies that a mocked method should be invoked exactly one time.
+        /// </summary>
+        /// <returns>An object defining the allowed number of invocations.</returns>
         public static Times Once()
         {
             return new Times(Kind.Once, 1, 1);
         }
 
         /// <summary>
-		///   Returns a value indicating whether this instance is equal to a specified <see cref="Times"/> value.
-		/// </summary>
-		/// <param name="other">A <see cref="Times"/> value to compare to this instance.</param>
-		/// <returns>
-		///   <see langword="true"/> if <paramref name="other"/> has the same value as this instance;
-		///   otherwise, <see langword="false"/>.
-		/// </returns>
+        ///   Returns a value indicating whether this instance is equal to a specified <see cref="Times"/> value.
+        /// </summary>
+        /// <param name="other">A <see cref="Times"/> value to compare to this instance.</param>
+        /// <returns>
+        ///   <see langword="true"/> if <paramref name="other"/> has the same value as this instance;
+        ///   otherwise, <see langword="false"/>.
+        /// </returns>
         public bool Equals(Times other)
         {
             var (from, to) = this;
@@ -185,25 +185,25 @@ namespace Moq
         }
 
         /// <summary>
-		///   Returns a value indicating whether this instance is equal to a specified <see cref="Times"/> value.
-		/// </summary>
-		/// <param name="obj">An object to compare to this instance.</param>
-		/// <returns>
-		///   <see langword="true"/> if <paramref name="obj"/> has the same value as this instance;
-		///   otherwise, <see langword="false"/>.
-		/// </returns>
+        ///   Returns a value indicating whether this instance is equal to a specified <see cref="Times"/> value.
+        /// </summary>
+        /// <param name="obj">An object to compare to this instance.</param>
+        /// <returns>
+        ///   <see langword="true"/> if <paramref name="obj"/> has the same value as this instance;
+        ///   otherwise, <see langword="false"/>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             return obj is Times other && this.Equals(other);
         }
 
         /// <summary>
-		///   Returns a hash code for this instance.
-		/// </summary>
-		/// <returns>
-		///  A hash code for this instance, suitable for use in hashing algorithms
-		///  and data structures like a hash table.
-		/// </returns>
+        ///   Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        ///  A hash code for this instance, suitable for use in hashing algorithms
+        ///  and data structures like a hash table.
+        /// </returns>
         public override int GetHashCode()
         {
             var (from, to) = this;
@@ -211,28 +211,28 @@ namespace Moq
         }
 
         /// <summary>
-		///   Determines whether two specified <see cref="Times"/> objects have the same value.
-		/// </summary>
-		/// <param name="left">The first <see cref="Times"/>.</param>
-		/// <param name="right">The second <see cref="Times"/>.</param>
-		/// <returns>
-		///   <see langword="true"/> if <paramref name="left"/> has the same value as <paramref name="right"/>;
-		///   otherwise, <see langword="false"/>.
-		/// </returns>
+        ///   Determines whether two specified <see cref="Times"/> objects have the same value.
+        /// </summary>
+        /// <param name="left">The first <see cref="Times"/>.</param>
+        /// <param name="right">The second <see cref="Times"/>.</param>
+        /// <returns>
+        ///   <see langword="true"/> if <paramref name="left"/> has the same value as <paramref name="right"/>;
+        ///   otherwise, <see langword="false"/>.
+        /// </returns>
         public static bool operator ==(Times left, Times right)
         {
             return left.Equals(right);
         }
 
         /// <summary>
-		///   Determines whether two specified <see cref="Times"/> objects have different values.
-		/// </summary>
-		/// <param name="left">The first <see cref="Times"/>.</param>
-		/// <param name="right">The second <see cref="Times"/>.</param>
-		/// <returns>
-		///   <see langword="true"/> if the value of <paramref name="left"/> is different from
-		///   <paramref name="right"/>'s; otherwise, <see langword="false"/>.
-		/// </returns>
+        ///   Determines whether two specified <see cref="Times"/> objects have different values.
+        /// </summary>
+        /// <param name="left">The first <see cref="Times"/>.</param>
+        /// <param name="right">The second <see cref="Times"/>.</param>
+        /// <returns>
+        ///   <see langword="true"/> if the value of <paramref name="left"/> is different from
+        ///   <paramref name="right"/>'s; otherwise, <see langword="false"/>.
+        /// </returns>
         public static bool operator !=(Times left, Times right)
         {
             return !left.Equals(right);
@@ -284,13 +284,13 @@ namespace Moq
         }
 
         /// <summary>
-		///   Checks whether the specified number of invocations matches the constraint described by this instance.
-		/// </summary>
-		/// <param name="count">The number of invocations to check.</param>
-		/// <returns>
-		///   <see langword="true"/> if <paramref name="count"/> matches the constraint described by this instance;
-		///   otherwise, <see langword="false"/>.
-		/// </returns>
+        ///   Checks whether the specified number of invocations matches the constraint described by this instance.
+        /// </summary>
+        /// <param name="count">The number of invocations to check.</param>
+        /// <returns>
+        ///   <see langword="true"/> if <paramref name="count"/> matches the constraint described by this instance;
+        ///   otherwise, <see langword="false"/>.
+        /// </returns>
         public bool Validate(int count)
         {
             var (from, to) = this;

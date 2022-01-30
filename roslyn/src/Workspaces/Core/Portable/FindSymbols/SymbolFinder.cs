@@ -128,7 +128,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         /// <summary>
-        /// Finds the definition symbol declared in source code for a corresponding reference symbol. 
+        /// Finds the definition symbol declared in source code for a corresponding reference symbol.
         /// Returns null if no such symbol can be found in the specified solution.
         /// </summary>
         public static Task<ISymbol?> FindSourceDefinitionAsync(
@@ -231,10 +231,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         /// <summary>
         /// Finds symbols in the given compilation that are similar to the specified symbol.
-        /// 
-        /// A found symbol may be the exact same symbol instance if the compilation is the origin of the specified symbol, 
+        ///
+        /// A found symbol may be the exact same symbol instance if the compilation is the origin of the specified symbol,
         /// or it may be a different symbol instance if the compilation is not the originating compilation.
-        /// 
+        ///
         /// Multiple symbols may be returned if there are ambiguous matches.
         /// No symbols may be returned if the compilation does not define or have access to a similar symbol.
         /// </summary>

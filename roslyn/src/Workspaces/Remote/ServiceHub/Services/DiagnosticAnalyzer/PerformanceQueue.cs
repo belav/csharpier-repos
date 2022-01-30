@@ -124,7 +124,7 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         private class Snapshot
         {
             /// <summary>
-            /// Raw performance data. 
+            /// Raw performance data.
             /// Keyed by analyzer unique number got from AnalyzerNumberAssigner.
             /// Value is delta (TimeSpan - minSpan) among span in this snapshot
             /// </summary>

@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis
     internal partial class CommonReferenceManager<TCompilation, TAssemblySymbol>
     {
         /// <summary>
-        /// Result of binding an AssemblyRef to an AssemblyDef. 
+        /// Result of binding an AssemblyRef to an AssemblyDef.
         /// </summary>
         [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
         internal readonly struct AssemblyReferenceBinding
@@ -69,7 +69,7 @@ namespace Microsoft.CodeAnalysis
             ///  0 if the reference is equivalent to the definition.
             /// -1 if version of the matched definition is lower than version of the reference, but the reference otherwise matches the definition.
             /// +1 if version of the matched definition is higher than version of the reference, but the reference otherwise matches the definition.
-            ///   
+            ///
             /// Undefined unless <see cref="IsBound"/> is true.
             /// </summary>
             internal int VersionDifference

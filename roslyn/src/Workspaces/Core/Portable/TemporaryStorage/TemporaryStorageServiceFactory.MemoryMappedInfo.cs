@@ -15,9 +15,9 @@ namespace Microsoft.CodeAnalysis.Host
     internal partial class TemporaryStorageServiceFactory
     {
         /// <summary>
-        /// Our own abstraction on top of memory map file so that we can have shared views over mmf files. 
+        /// Our own abstraction on top of memory map file so that we can have shared views over mmf files.
         /// Otherwise, each view has minimum size of 64K due to requirement forced by windows.
-        /// 
+        ///
         /// most of our view will have short lifetime, but there are cases where view might live a bit longer such as
         /// metadata dll shadow copy. shared view will help those cases.
         /// </summary>

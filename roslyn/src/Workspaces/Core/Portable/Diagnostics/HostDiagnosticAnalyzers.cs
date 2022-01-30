@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         /// <summary>
         /// Key is <see cref="AnalyzerReference.Id"/>.
-        /// 
+        ///
         /// We use the key to de-duplicate analyzer references if they are referenced from multiple places.
         /// </summary>
         private readonly ImmutableDictionary<object, AnalyzerReference> _hostAnalyzerReferencesMap;
@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <summary>
         /// Key is the language the <see cref="DiagnosticAnalyzer"/> supports and key for the second map is analyzer reference identity and
         /// <see cref="DiagnosticAnalyzer"/> for that assembly reference.
-        /// 
+        ///
         /// Entry will be lazily filled in.
         /// </summary>
         private readonly ConcurrentDictionary<
@@ -34,9 +34,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         /// <summary>
         /// Key is <see cref="AnalyzerReference.Id"/>.
-        /// 
+        ///
         /// Value is set of <see cref="DiagnosticAnalyzer"/> that belong to the <see cref="AnalyzerReference"/>.
-        /// 
+        ///
         /// We populate it lazily. otherwise, we will bring in all analyzers preemptively
         /// </summary>
         private readonly Lazy<

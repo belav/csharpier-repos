@@ -105,7 +105,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <remarks>
         /// Guaranteed not to return null.
-        /// 
+        ///
         /// CONSIDER: As in dev11, we don't handle ambiguity at this level.  Hypothetically,
         /// we could just pick one, though an "ideal" solution would probably involve a search
         /// down all ambiguous branches.

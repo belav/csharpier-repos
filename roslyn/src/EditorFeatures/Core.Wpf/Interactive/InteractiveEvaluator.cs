@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
         #region UI Thread only
 
         /// <remarks>
-        /// Submission buffers in the order they were submitted. 
+        /// Submission buffers in the order they were submitted.
         /// Includes both command buffers as well as language buffers.
         /// Does not include the current buffer unless it has been submitted.
         /// </remarks>

@@ -1196,7 +1196,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
     ///     </ParameterGroup>
     /// </UsingTask>
     /// </code>
-    /// 
+    ///
     /// You can specify the parameters the task should have via a <c>ParameterGroup</c>
     /// These should match the task you are replacing.
     /// </remarks>

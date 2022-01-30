@@ -151,9 +151,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             }
 
             /// <summary>
-            /// The map that captures information about what assembly should be retargeted 
+            /// The map that captures information about what assembly should be retargeted
             /// to what assembly. Key is the AssemblySymbol referenced by the underlying module,
-            /// value is the corresponding AssemblySymbol referenced by the retargeting module, and 
+            /// value is the corresponding AssemblySymbol referenced by the retargeting module, and
             /// corresponding retargeting map for symbols.
             /// </summary>
             private Dictionary<AssemblySymbol, DestinationData> RetargetingAssemblyMap
@@ -779,8 +779,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             }
 
             /// <summary>
-            /// Perform a check whether the type or at least one of its generic arguments 
-            /// is an explicitly defined local type. The check is performed recursively. 
+            /// Perform a check whether the type or at least one of its generic arguments
+            /// is an explicitly defined local type. The check is performed recursively.
             /// </summary>
             private bool IsOrClosedOverAnExplicitLocalType(TypeSymbol symbol)
             {

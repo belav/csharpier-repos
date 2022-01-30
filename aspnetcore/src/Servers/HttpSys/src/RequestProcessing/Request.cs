@@ -431,12 +431,12 @@ internal sealed class Request
     /* TODO: https://github.com/aspnet/WebListener/issues/231
     private byte[] GetProvidedTokenBindingId()
     {
-        return _providedTokenBindingId;
+    return _providedTokenBindingId;
     }
-
+    
     private byte[] GetReferredTokenBindingId()
     {
-        return _referredTokenBindingId;
+    return _referredTokenBindingId;
     }
     */
     // Only call from the constructor so we can directly access the native request blob.
@@ -452,16 +452,16 @@ internal sealed class Request
     /*
     private unsafe void GetTlsTokenBindingInfo()
     {
-        var nativeRequest = (HttpApi.HTTP_REQUEST_V2*)_nativeRequestContext.RequestBlob;
-        for (int i = 0; i < nativeRequest->RequestInfoCount; i++)
-        {
-            var pThisInfo = &nativeRequest->pRequestInfo[i];
-            if (pThisInfo->InfoType == HttpApi.HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeSslTokenBinding)
-            {
-                var pTokenBindingInfo = (HttpApi.HTTP_REQUEST_TOKEN_BINDING_INFO*)pThisInfo->pInfo;
-                _providedTokenBindingId = TokenBindingUtil.GetProvidedTokenIdFromBindingInfo(pTokenBindingInfo, out _referredTokenBindingId);
-            }
-        }
+    var nativeRequest = (HttpApi.HTTP_REQUEST_V2*)_nativeRequestContext.RequestBlob;
+    for (int i = 0; i < nativeRequest->RequestInfoCount; i++)
+    {
+    var pThisInfo = &nativeRequest->pRequestInfo[i];
+    if (pThisInfo->InfoType == HttpApi.HTTP_REQUEST_INFO_TYPE.HttpRequestInfoTypeSslTokenBinding)
+    {
+    var pTokenBindingInfo = (HttpApi.HTTP_REQUEST_TOKEN_BINDING_INFO*)pThisInfo->pInfo;
+    _providedTokenBindingId = TokenBindingUtil.GetProvidedTokenIdFromBindingInfo(pTokenBindingInfo, out _referredTokenBindingId);
+    }
+    }
     }
     */
     internal uint GetChunks(

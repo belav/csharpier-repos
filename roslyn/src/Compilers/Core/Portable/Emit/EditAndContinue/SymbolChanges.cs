@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.Emit
         private readonly DefinitionMap _definitionMap;
 
         /// <summary>
-        /// Contains all symbols explicitly updated/added to the source and 
-        /// their containing types and namespaces. 
+        /// Contains all symbols explicitly updated/added to the source and
+        /// their containing types and namespaces.
         /// </summary>
         private readonly IReadOnlyDictionary<ISymbol, SymbolChange> _changes;
 
@@ -52,7 +52,7 @@ namespace Microsoft.CodeAnalysis.Emit
         }
 
         /// <summary>
-        /// True if the symbol is a source symbol added during EnC session. 
+        /// True if the symbol is a source symbol added during EnC session.
         /// The symbol may be declared in any source compilation in the current solution.
         /// </summary>
         public bool IsAdded(ISymbol symbol)
@@ -269,8 +269,8 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <summary>
         /// Calculate the set of changes up to top-level types. The result
         /// will be used as a filter when traversing the module.
-        /// 
-        /// Note that these changes only include user-defined source symbols, not synthesized symbols since those will be 
+        ///
+        /// Note that these changes only include user-defined source symbols, not synthesized symbols since those will be
         /// generated during lowering of the changed user-defined symbols.
         /// </summary>
         private static void CalculateChanges(

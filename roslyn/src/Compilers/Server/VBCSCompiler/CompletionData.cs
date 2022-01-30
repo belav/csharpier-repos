@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         /// The request contained an error that should cause the server to shutdown. This can happen for cases
         /// like:
         ///    - server state is invalid because of a collision between analyzer assemblies
-        ///    - client disconnected during build which is a treated as Ctrl-C event that should bring down 
+        ///    - client disconnected during build which is a treated as Ctrl-C event that should bring down
         ///      the server.
         /// </summary>
         RequestError,

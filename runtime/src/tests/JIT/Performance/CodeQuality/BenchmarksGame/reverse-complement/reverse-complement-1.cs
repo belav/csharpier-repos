@@ -8,9 +8,9 @@
 
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
-
+   
    contributed by Robert F. Tobler to process large blocks of byte arrays
-*/
+   */
 
 using System;
 using System.IO;

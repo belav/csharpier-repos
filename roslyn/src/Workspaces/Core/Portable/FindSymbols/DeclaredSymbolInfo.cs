@@ -53,9 +53,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public readonly string NameSuffix;
 
         /// <summary>
-        /// Container of the symbol that can be shown in a final presentation layer. 
-        /// For example, the container of a type "KeyValuePair" might be 
-        /// "System.Collections.Generic.Dictionary&lt;TKey, TValue&gt;".  This can 
+        /// Container of the symbol that can be shown in a final presentation layer.
+        /// For example, the container of a type "KeyValuePair" might be
+        /// "System.Collections.Generic.Dictionary&lt;TKey, TValue&gt;".  This can
         /// then be shown with something like "type System.Collections.Generic.Dictionary&lt;TKey, TValue&gt;"
         /// to indicate where the symbol is located.
         /// </summary>
@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         /// <summary>
         /// Dotted container name of the symbol, used for pattern matching.  For example
-        /// The fully qualified container of a type "KeyValuePair" would be 
+        /// The fully qualified container of a type "KeyValuePair" would be
         /// "System.Collections.Generic.Dictionary" (note the lack of type parameters).
         /// This way someone can search for "D.KVP" and have the "D" part of the pattern
         /// match against this.  This should not be shown in a presentation layer.

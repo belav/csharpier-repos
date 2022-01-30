@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
     public class EndToEndTests : EmitMetadataTestBase
     {
         /// <summary>
-        /// These tests are very sensitive to stack size hence we use a fresh thread to ensure there 
-        /// is a consistent stack size for them to execute in. 
+        /// These tests are very sensitive to stack size hence we use a fresh thread to ensure there
+        /// is a consistent stack size for them to execute in.
         /// </summary>
         /// <param name="action"></param>
         private static void RunInThread(Action action)

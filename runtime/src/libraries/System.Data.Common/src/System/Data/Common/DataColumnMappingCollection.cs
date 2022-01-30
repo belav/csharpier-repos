@@ -142,7 +142,7 @@ namespace System.Data.Common
 
         /*/// <include file='doc\DataColumnMappingCollection.uex' path='docs/doc[@for="DataColumnMappingCollection.AddCloneOfRange"]/*' />
         public void AddCloneOfRange(IEnumerable values) {
-            AddEnumerableRange(values, true);
+        AddEnumerableRange(values, true);
         }*/
 
         private void AddEnumerableRange(IEnumerable values, bool doClone)

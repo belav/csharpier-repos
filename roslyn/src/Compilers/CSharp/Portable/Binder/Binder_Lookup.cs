@@ -477,11 +477,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// We start with the current submission class and walk the submission chain back to the first submission.
         /// The search has two phases
         /// 1) We are looking for any symbol matching the given name, arity, and options. If we don't find any the search is over.
-        ///    If we find and overloadable symbol(s) (a method or an indexer) we start looking for overloads of this kind 
+        ///    If we find and overloadable symbol(s) (a method or an indexer) we start looking for overloads of this kind
         ///    (lookingForOverloadsOfKind) of symbol in phase 2.
-        /// 2) If a visited submission contains a matching member of a kind different from lookingForOverloadsOfKind we stop 
+        /// 2) If a visited submission contains a matching member of a kind different from lookingForOverloadsOfKind we stop
         ///    looking further. Otherwise, if we find viable overload(s) we add them into the result.
-        ///    
+        ///
         /// Note that indexers are not supported in script but we deal with them here to handle errors.
         /// </remarks>
         protected void LookupMembersInSubmissions(
@@ -833,7 +833,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///     (1) With the provided name
         ///     (2) With an Attribute suffix added to the provided name
         /// Lookup with Attribute suffix is performed only if LookupOptions.VerbatimAttributeName is not set.
-        /// 
+        ///
         /// If either lookup is ambiguous, we return the corresponding result with ambiguous symbols.
         /// Else if exactly one result is single viable attribute type, we return that result.
         /// Otherwise, we return a non-viable result with LookupResult.NotAnAttributeType or an empty result.

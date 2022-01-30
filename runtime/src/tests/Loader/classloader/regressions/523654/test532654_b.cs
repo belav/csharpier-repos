@@ -12,7 +12,7 @@ didn't find it so create a new MethodDesc (MD)
 add it to the hash table
 release the lock
 
-But the problem with this is that during creation of MethodDesc we were looking at the type handle and 
+But the problem with this is that during creation of MethodDesc we were looking at the type handle and
 calling managed code while holding the lock and that could potentially lead to a deadlock.
 
 After the fix we do the following:
@@ -29,7 +29,7 @@ If not there, add it to the hash table
 Otherwise the MethodDesc is already in there
 release the lock
 
-There was a concern about race conditions for the scenario where we don't find the MD the first time 
+There was a concern about race conditions for the scenario where we don't find the MD the first time
 but find it the 2nd time.
 This test calls the same method from 10 threads so that we would hit this scenario. But this code path
 is only hit non-deterministically some of the time.

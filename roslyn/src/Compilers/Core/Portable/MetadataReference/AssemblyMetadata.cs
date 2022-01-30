@@ -264,7 +264,7 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// The resulting copy shares the metadata images and metadata information read from them with the original.
         /// It doesn't own the underlying metadata images and is not responsible for its disposal.
-        /// 
+        ///
         /// This is used, for example, when a metadata cache needs to return the cached metadata to its users
         /// while keeping the ownership of the cached metadata object.
         /// </remarks>

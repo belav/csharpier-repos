@@ -24,22 +24,22 @@ namespace Castle.DynamicProxy
     using Castle.DynamicProxy.Generators;
 
     /// <summary>
-	///   Default implementation of <see cref = "IProxyBuilder" /> interface producing in-memory proxy assemblies.
-	/// </summary>
+    ///   Default implementation of <see cref = "IProxyBuilder" /> interface producing in-memory proxy assemblies.
+    /// </summary>
     public class DefaultProxyBuilder : IProxyBuilder
     {
         private readonly ModuleScope scope;
         private ILogger logger = NullLogger.Instance;
 
         /// <summary>
-		///   Initializes a new instance of the <see cref = "DefaultProxyBuilder" /> class with new <see cref = "ModuleScope" />.
-		/// </summary>
+        ///   Initializes a new instance of the <see cref = "DefaultProxyBuilder" /> class with new <see cref = "ModuleScope" />.
+        /// </summary>
         public DefaultProxyBuilder() : this(new ModuleScope()) { }
 
         /// <summary>
-		///   Initializes a new instance of the <see cref = "DefaultProxyBuilder" /> class.
-		/// </summary>
-		/// <param name = "scope">The module scope for generated proxy types.</param>
+        ///   Initializes a new instance of the <see cref = "DefaultProxyBuilder" /> class.
+        /// </summary>
+        /// <param name = "scope">The module scope for generated proxy types.</param>
         public DefaultProxyBuilder(ModuleScope scope)
         {
             this.scope = scope;

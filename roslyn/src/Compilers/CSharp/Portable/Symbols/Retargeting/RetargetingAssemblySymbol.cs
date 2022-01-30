@@ -22,15 +22,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 {
     /// <summary>
     /// Essentially this is a wrapper around another AssemblySymbol that is responsible for retargeting
-    /// symbols from one assembly to another. It can retarget symbols for multiple assemblies at the same time. 
-    /// 
-    /// For example, compilation C1 references v1 of Lib.dll and compilation C2 references C1 and v2 of Lib.dll. 
-    /// In this case, in context of C2, all types from v1 of Lib.dll leaking through C1 (through method 
-    /// signatures, etc.) must be retargeted to the types from v2 of Lib.dll. This is what 
-    /// RetargetingAssemblySymbol is responsible for. In the example above, modules in C2 do not 
-    /// reference C1.m_AssemblySymbol, but reference a special RetargetingAssemblySymbol created for 
+    /// symbols from one assembly to another. It can retarget symbols for multiple assemblies at the same time.
+    ///
+    /// For example, compilation C1 references v1 of Lib.dll and compilation C2 references C1 and v2 of Lib.dll.
+    /// In this case, in context of C2, all types from v1 of Lib.dll leaking through C1 (through method
+    /// signatures, etc.) must be retargeted to the types from v2 of Lib.dll. This is what
+    /// RetargetingAssemblySymbol is responsible for. In the example above, modules in C2 do not
+    /// reference C1.m_AssemblySymbol, but reference a special RetargetingAssemblySymbol created for
     /// C1 by ReferenceManager.
-    /// 
+    ///
     /// Here is how retargeting is implemented in general:
     /// - Symbols from underlying assembly are substituted with retargeting symbols.
     /// - Symbols from referenced assemblies that can be reused as is (i.e. doesn't have to be retargeted) are
@@ -47,23 +47,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         /// <summary>
         /// The list of contained ModuleSymbol objects. First item in the list
-        /// is RetargetingModuleSymbol that wraps corresponding SourceModuleSymbol 
-        /// from underlyingAssembly.Modules list, the rest are PEModuleSymbols for 
+        /// is RetargetingModuleSymbol that wraps corresponding SourceModuleSymbol
+        /// from underlyingAssembly.Modules list, the rest are PEModuleSymbols for
         /// added modules.
         /// </summary>
         private readonly ImmutableArray<ModuleSymbol> _modules;
 
         /// <summary>
         /// An array of assemblies involved in canonical type resolution of
-        /// NoPia local types defined within this assembly. In other words, all 
+        /// NoPia local types defined within this assembly. In other words, all
         /// references used by a compilation referencing this assembly.
         /// The array and its content is provided by ReferenceManager and must not be modified.
         /// </summary>
         private ImmutableArray<AssemblySymbol> _noPiaResolutionAssemblies;
 
         /// <summary>
-        /// An array of assemblies referenced by this assembly, which are linked (/l-ed) by 
-        /// each compilation that is using this AssemblySymbol as a reference. 
+        /// An array of assemblies referenced by this assembly, which are linked (/l-ed) by
+        /// each compilation that is using this AssemblySymbol as a reference.
         /// If this AssemblySymbol is linked too, it will be in this array too.
         /// The array and its content is provided by ReferenceManager and must not be modified.
         /// </summary>

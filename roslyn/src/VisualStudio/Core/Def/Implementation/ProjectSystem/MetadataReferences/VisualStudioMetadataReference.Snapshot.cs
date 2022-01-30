@@ -26,11 +26,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         /// </summary>
         /// <remarks>
         /// The compiler observes the metadata content a reference refers to by calling <see cref="PortableExecutableReference.GetMetadataImpl()"/>
-        /// and the observed metadata is memoized by the compilation. However we drop compilations to decrease memory consumption. 
+        /// and the observed metadata is memoized by the compilation. However we drop compilations to decrease memory consumption.
         /// When the compilation is recreated for a solution the compiler asks for metadata again and we need to provide the original content,
         /// not read the file again. Therefore we need to save the timestamp on the <see cref="Snapshot"/>.
-        /// 
-        /// When the VS observes a change in a metadata reference file the project version is advanced and a new instance of 
+        ///
+        /// When the VS observes a change in a metadata reference file the project version is advanced and a new instance of
         /// <see cref="Snapshot"/> is created for the corresponding reference.
         /// </remarks>
         [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]

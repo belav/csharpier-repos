@@ -771,7 +771,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Determined which conversion to a predefined type is better relative to a given type. It is
             assumed that the given type is implicitly convertible to both of the predefined types
             (possibly via a user defined conversion, method group conversion, etc).
-        ***************************************************************************************************/
+            ***************************************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private BetterType WhichTypeIsBetter(
             PredefinedType pt1,
@@ -810,7 +810,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Determined which conversion is better relative to a given type. It is assumed that the given type
             (or its associated expression) is implicitly convertible to both of the types (possibly via
             a user defined conversion, method group conversion, etc).
-        ***************************************************************************************************/
+            ***************************************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private BetterType WhichTypeIsBetter(CType type1, CType type2, CType typeGiven)
         {
@@ -1224,43 +1224,43 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         /***************************************************************************************************
             Binds a user-defined conversion. The parameters to this procedure are the same as
             BindImplicitConversion, except the last: implicitOnly - only consider implicit conversions.
-
+            
             This is a helper routine for BindImplicitConversion and BindExplicitConversion.
-
+            
             It's non trivial to get this right in the presence of generics. e.g.
-
-                class D<B,C> {
-                    static implicit operator B (D<B,C> x) { ... }
-                }
-
-                class E<A> : D<List<A>, A> { }
-
-                E<int> x;
-                List<int> y = x;
-
+            
+            class D<B,C> {
+            static implicit operator B (D<B,C> x) { ... }
+            }
+            
+            class E<A> : D<List<A>, A> { }
+            
+            E<int> x;
+            List<int> y = x;
+            
             The locals below would have the following values:
-
-                typeList->sym: D<List<A>, A>
-                typeCur: E<int>
-                typeConv = subst(typeList->sym, typeCur)
-                         = subst(D<List<!0>, !0>, <int>) = D<List<int>, int>
-
-                retType: B
-                typeTo = subst(retType, typeConv)
-                       = subst(!0, <List<int>, int>) = List<int>
-                params->Item(0): D<B,C>
-                typeFrom = subst(params->Item(0), typeConv)
-                         = subst(D<!0,!1>, <List<int>, int>)
-                         = D<List<int>, int> = typeConv
-
+            
+            typeList->sym: D<List<A>, A>
+            typeCur: E<int>
+            typeConv = subst(typeList->sym, typeCur)
+            = subst(D<List<!0>, !0>, <int>) = D<List<int>, int>
+            
+            retType: B
+            typeTo = subst(retType, typeConv)
+            = subst(!0, <List<int>, int>) = List<int>
+            params->Item(0): D<B,C>
+            typeFrom = subst(params->Item(0), typeConv)
+            = subst(D<!0,!1>, <List<int>, int>)
+            = D<List<int>, int> = typeConv
+            
             For lifting over nullable:
             * Look in the most base types for the conversions (not in System.Nullable).
             * We only lift if both the source type and destination type are nullable and the input
-              or output of the conversion is not a nullable.
+            or output of the conversion is not a nullable.
             * When we lift we count the number of types (0, 1, 2) that need to be lifted.
-              A conversion that needs fewer lifts is better than one that requires more (if the lifted
-              forms have identical signatures).
-        ***************************************************************************************************/
+            A conversion that needs fewer lifts is better than one that requires more (if the lifted
+            forms have identical signatures).
+            ***************************************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private bool bindUserDefinedConversion(
             Expr exprSrc,
@@ -2133,21 +2133,21 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             standard implicit conversion from base to type(1|2). If fImplicit(1|2) is false there should
             be a standard explicit conversion from base to type(1|2). The partial ordering used is as
             follows:
-
+            
             * If exactly one of fImplicit(1|2) is true then the corresponding type is closer.
             * Otherwise if there is a standard implicit conversion in neither direction or both directions
-              then neither is closer.
+            then neither is closer.
             * Otherwise if both of fImplicit(1|2) are true:
-                * If there is a standard implicit conversion from type(1|2) to type(2|1) then type(1|2)
-                  is closer.
-                * Otherwise neither is closer.
+            * If there is a standard implicit conversion from type(1|2) to type(2|1) then type(1|2)
+            is closer.
+            * Otherwise neither is closer.
             * Otherwise both of fImplicit(1|2) are false and:
-                * If there is a standard implicit conversion from type(1|2) to type(2|1) then type(2|1)
-                  is closer.
-                * Otherwise neither is closer.
-
+            * If there is a standard implicit conversion from type(1|2) to type(2|1) then type(2|1)
+            is closer.
+            * Otherwise neither is closer.
+            
             The return value is -1 if type1 is closer, +1 if type2 is closer and 0 if neither is closer.
-        ***************************************************************************************************/
+            ***************************************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private int CompareSrcTypesBased(CType type1, bool fImplicit1, CType type2, bool fImplicit2)
         {
@@ -2167,21 +2167,21 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             standard implicit conversion from type(1|2) to base. If fImplicit(1|2) is false there should
             be a standard explicit conversion from type(1|2) to base. The partial ordering used is as
             follows:
-
+            
             * If exactly one of fImplicit(1|2) is true then the corresponding type is closer.
             * Otherwise if there is a standard implicit conversion in neither direction or both directions
-              then neither is closer.
+            then neither is closer.
             * Otherwise if both of fImplicit(1|2) are true:
-                * If there is a standard implicit conversion from type(1|2) to type(2|1) then type(2|1)
-                  is closer.
-                * Otherwise neither is closer.
+            * If there is a standard implicit conversion from type(1|2) to type(2|1) then type(2|1)
+            is closer.
+            * Otherwise neither is closer.
             * Otherwise both of fImplicit(1|2) are false and:
-                * If there is a standard implicit conversion from type(1|2) to type(2|1) then type(1|2)
-                  is closer.
-                * Otherwise neither is closer.
-
+            * If there is a standard implicit conversion from type(1|2) to type(2|1) then type(1|2)
+            is closer.
+            * Otherwise neither is closer.
+            
             The return value is -1 if type1 is closer, +1 if type2 is closer and 0 if neither is closer.
-        ***************************************************************************************************/
+            ***************************************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private int CompareDstTypesBased(CType type1, bool fImplicit1, CType type2, bool fImplicit2)
         {

@@ -16,14 +16,14 @@ using E = System.Linq.Expressions.Expression;
 namespace Moq
 {
     /// <summary>
-	///   An <see cref="Expectation"/> that is bound to a single, specific method.
-	///   <para>
-	///     <see cref="MethodExpectation.Expression"/> has the general form
-	///     <c>`mock => mock.Method(...arguments)`</c>. Because the method and arguments are frequently needed,
-	///     they are cached in <see cref="MethodExpectation.Method"/> and <see cref="MethodExpectation.Arguments"/>
-	///     for faster access.
-	///   </para>
-	/// </summary>
+    ///   An <see cref="Expectation"/> that is bound to a single, specific method.
+    ///   <para>
+    ///     <see cref="MethodExpectation.Expression"/> has the general form
+    ///     <c>`mock => mock.Method(...arguments)`</c>. Because the method and arguments are frequently needed,
+    ///     they are cached in <see cref="MethodExpectation.Method"/> and <see cref="MethodExpectation.Arguments"/>
+    ///     for faster access.
+    ///   </para>
+    /// </summary>
     internal sealed class MethodExpectation : Expectation
     {
         public static MethodExpectation CreateFrom(Invocation invocation)

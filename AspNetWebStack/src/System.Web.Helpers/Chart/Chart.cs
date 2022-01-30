@@ -59,13 +59,13 @@ namespace System.Web.Helpers
         /// <param name="theme">String containing chart theme definition. Chart's theme defines properties like colors, positions, etc.
         /// This parameter is primarily meant for one of the predefined Chart themes, however any valid chart theme is acceptable.</param>
         /// <param name="themePath">Path to a file containing definition of chart theme, default is none.</param>
-        /// <remarks>Both the theme and themePath parameters can be specified. In this case, the Chart class applies the theme xml first 
+        /// <remarks>Both the theme and themePath parameters can be specified. In this case, the Chart class applies the theme xml first
         /// followed by the content of file at themePath.
         /// </remarks>
         /// <example>
         /// Chart(100, 100, theme: ChartTheme.Blue)
         /// Chart(100, 100, theme: ChartTheme.Vanilla, themePath: "my-theme.xml")
-        /// Chart(100, 100, theme: ".... definition inline ...." ) 
+        /// Chart(100, 100, theme: ".... definition inline ...." )
         /// Chart(100, 100, themePath: "my-theme.xml")
         /// Any valid theme definition can be used as content of the file specified in themePath
         /// </example>
@@ -823,7 +823,7 @@ namespace System.Web.Helpers
 
         /// <summary>
         /// Method to convert a string to a ChartImageFormat.
-        /// The chart image needs to be normalized to allow for alternate names such as 'jpg', 'xpng' etc 
+        /// The chart image needs to be normalized to allow for alternate names such as 'jpg', 'xpng' etc
         /// to be mapped to their appropriate ChartImageFormat.
         /// </summary>
         private static ChartImageFormat ConvertStringToChartImageFormat(string format)

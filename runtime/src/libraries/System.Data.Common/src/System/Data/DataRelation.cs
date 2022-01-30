@@ -7,8 +7,8 @@ Rules for Multiple Nested Parent, enforce following constraints
 1) At all times, only 1(ONE) FK can be NON-Null in a row.
 2) NULL FK values are not associated with PARENT(x), even if PK is NULL in Parent
 3) Enforce <rule 1> when
-        a) Any FK value is changed
-        b) A relation created that result in Multiple Nested Child
+a) Any FK value is changed
+b) A relation created that result in Multiple Nested Child
 
 WriteXml
 
@@ -577,7 +577,7 @@ namespace System.Data
           3. Empty (Form = unqualified case)
           However, Schema does not allow (3) to be a global element and multiple nested child has to be a global element.
           Therefore we'll reduce case (3) to (2) if all parents have same namespace else throw.
-         ********************/
+          ********************/
 
         /// <summary>
         /// Gets or sets a value indicating whether relations are nested.

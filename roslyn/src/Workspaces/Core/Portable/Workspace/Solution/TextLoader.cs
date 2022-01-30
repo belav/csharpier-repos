@@ -178,8 +178,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a <see cref="TextLoader"/> from a <see cref="SourceTextContainer"/> and version. 
-        /// 
+        /// Creates a <see cref="TextLoader"/> from a <see cref="SourceTextContainer"/> and version.
+        ///
         /// The text obtained from the loader will be the current text of the container at the time
         /// the loader is accessed.
         /// </summary>

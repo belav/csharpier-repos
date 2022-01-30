@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     ///    modifiers.  In this case, we explicitly implement the interface methods
     ///    and have (all) implementations delegate to the source method.
     /// 2) A non-virtual, non-source method in a base type is implicitly implementing
-    ///    an interface method.  Since we can't change the "virtualness" of the 
+    ///    an interface method.  Since we can't change the "virtualness" of the
     ///    non-source method, we introduce an explicit implementation that delegates
     ///    to it instead.
     /// </summary>

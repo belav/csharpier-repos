@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
     public sealed class ExportCodeRefactoringProviderAttribute : ExportAttribute
     {
         /// <summary>
-        /// The name of the <see cref="CodeRefactoringProvider"/>.  
+        /// The name of the <see cref="CodeRefactoringProvider"/>.
         /// </summary>
         [DisallowNull]
         public string? Name { get; set; }

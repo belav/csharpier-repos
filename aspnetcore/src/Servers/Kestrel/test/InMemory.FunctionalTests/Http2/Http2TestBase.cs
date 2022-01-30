@@ -642,7 +642,7 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         +---------------------------------------------------------------+
         |                           Padding (*)                       ...
         +---------------------------------------------------------------+
-    */
+        */
     protected Task SendHeadersWithPaddingAsync(
         int streamId,
         IEnumerable<KeyValuePair<string, string>> headers,
@@ -700,7 +700,7 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         +-+-------------+-----------------------------------------------+
         |                   Header Block Fragment (*)                 ...
         +---------------------------------------------------------------+
-    */
+        */
     protected Task SendHeadersWithPriorityAsync(
         int streamId,
         IEnumerable<KeyValuePair<string, string>> headers,
@@ -759,7 +759,7 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         +---------------------------------------------------------------+
         |                           Padding (*)                       ...
         +---------------------------------------------------------------+
-    */
+        */
     protected Task SendHeadersWithPaddingAndPriorityAsync(
         int streamId,
         IEnumerable<KeyValuePair<string, string>> headers,
@@ -1217,7 +1217,7 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         +-+-------------+-----------------------------------------------+
         |   Weight (8)  |
         +-+-------------+
-    */
+        */
     protected Task SendPriorityAsync(int streamId, int streamDependency = 0)
     {
         var outputWriter = _pair.Application.Output;
@@ -1252,7 +1252,7 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         +---------------------------------------------------------------+
         |                        Error Code (32)                        |
         +---------------------------------------------------------------+
-    */
+        */
     protected Task SendRstStreamAsync(int streamId)
     {
         var outputWriter = _pair.Application.Output;

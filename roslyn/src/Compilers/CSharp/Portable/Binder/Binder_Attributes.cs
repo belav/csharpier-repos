@@ -848,12 +848,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Gets the rewritten attribute constructor arguments, i.e. the arguments
         /// are in the order of parameters, which may differ from the source
         /// if named constructor arguments are used.
-        /// 
+        ///
         /// For example:
         ///     void Goo(int x, int y, int z, int w = 3);
-        /// 
+        ///
         ///     Goo(0, z: 2, y: 1);
-        ///     
+        ///
         ///     Arguments returned: 0, 1, 2, 3
         /// </summary>
         /// <returns>Rewritten attribute constructor arguments</returns>

@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis
     /// single <see cref="ISymbol"/> then that will be returned in <see cref="Symbol"/>.  Otherwise, if the key resolves
     /// to multiple symbols (which can happen in error scenarios), then <see cref="CandidateSymbols"/> and <see
     /// cref="CandidateReason"/> will be returned.
-    /// 
+    ///
     /// If no symbol can be found <see cref="Symbol"/> will be <c>null</c> and <see cref="CandidateSymbols"/>
     /// will be empty.
     /// </summary>

@@ -62,7 +62,7 @@ namespace Microsoft.CodeAnalysis.Completion
 
         /// <summary>
         /// The span of the syntax element associated with this item.
-        /// 
+        ///
         /// The span identifies the text in the document that is used to filter the initial list presented to the user,
         /// and typically represents the region of the document that will be changed if this item is committed.
         /// </summary>
@@ -100,8 +100,8 @@ namespace Microsoft.CodeAnalysis.Completion
         public bool IsComplexTextEdit { get; }
 
         /// <summary>
-        /// The name of the <see cref="CompletionProvider"/> that created this 
-        /// <see cref="CompletionItem"/>. Not available to clients. Only used by 
+        /// The name of the <see cref="CompletionProvider"/> that created this
+        /// <see cref="CompletionItem"/>. Not available to clients. Only used by
         /// the Completion subsystem itself for things like getting description text
         /// and making additional change during commit.
         /// </summary>

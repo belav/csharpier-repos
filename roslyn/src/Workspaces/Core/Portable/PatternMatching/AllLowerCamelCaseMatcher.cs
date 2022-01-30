@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// <summary>
         /// Encapsulated matches responsible for matching an all lowercase pattern against
         /// a candidate using CamelCase matching. i.e. this code is responsible for finding the
-        /// match between "cofipro" and "CodeFixProvider". 
+        /// match between "cofipro" and "CodeFixProvider".
         /// </summary>
         private readonly struct AllLowerCamelCaseMatcher
         {
@@ -42,7 +42,7 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             }
 
             /// <summary>
-            /// Returns null if no match was found, 1 if a contiguous match was found, 2 if a 
+            /// Returns null if no match was found, 1 if a contiguous match was found, 2 if a
             /// match as found that starts at the beginning of the candidate, and 3 if a contiguous
             /// match was found that starts at the beginning of the candidate.
             /// </summary>
@@ -266,9 +266,9 @@ namespace Microsoft.CodeAnalysis.PatternMatching
 
             /// <summary>
             /// Updates the currently stored 'best result' if the current result is better.
-            /// Returns 'true' if no further work is required and we can break early, or 
+            /// Returns 'true' if no further work is required and we can break early, or
             /// 'false' if we need to keep on going.
-            /// 
+            ///
             /// If 'weight' is better than 'bestWeight' and matchSpanToAdd is not null, then
             /// matchSpanToAdd will be added to matchedSpansInReverse.
             /// </summary>

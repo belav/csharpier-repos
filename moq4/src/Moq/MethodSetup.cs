@@ -7,8 +7,8 @@ using System.Reflection;
 namespace Moq
 {
     /// <summary>
-	///   Abstract base class for setups that target a single, specific method.
-	/// </summary>
+    ///   Abstract base class for setups that target a single, specific method.
+    /// </summary>
     internal abstract class MethodSetup : Setup
     {
         protected MethodSetup(

@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         ) => _solutionAccessor.WriteStreamAsync(name, stream, checksum, cancellationToken);
 
         /// <summary>
-        /// <see cref="Accessor{TKey, TWriteQueueKey, TDatabaseId}"/> responsible for storing and 
-        /// retrieving data from <see cref="SolutionDataTableName"/>.  Note that with the Solution 
+        /// <see cref="Accessor{TKey, TWriteQueueKey, TDatabaseId}"/> responsible for storing and
+        /// retrieving data from <see cref="SolutionDataTableName"/>.  Note that with the Solution
         /// table there is no need for key->id translation.  i.e. the key acts as the ID itself.
         /// </summary>
         private class SolutionAccessor : Accessor<string, string, string>

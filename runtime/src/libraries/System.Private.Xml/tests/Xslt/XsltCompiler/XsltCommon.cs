@@ -18,13 +18,13 @@ namespace XmlCoreTest.Common
     /*************************************************
     author alexkr
     date   12/14/2005
-
+    
     This class contains common static methods used to verify the results of an XSLT data-driven test.
     It contains the following methods:
-        CompareXml         - used to compare two XML outputs, captured as files, using XmlDiff.
-        CompareChecksum    - used to compare two non-XML outputs, captured as files, using a Checksum calculation.
-        CompareException   - used to compare two Exceptions, or the meta-data of two Exceptions, using an Exception wrapper class.
-
+    CompareXml         - used to compare two XML outputs, captured as files, using XmlDiff.
+    CompareChecksum    - used to compare two non-XML outputs, captured as files, using a Checksum calculation.
+    CompareException   - used to compare two Exceptions, or the meta-data of two Exceptions, using an Exception wrapper class.
+    
     ************************************************/
 
     public class XsltVerificationLibrary
@@ -489,7 +489,7 @@ namespace XmlCoreTest.Common
     The messages can be written to the final log file using WriteOutputFileToLog() by your driver code
     if there is a variation failure, or just discarded when a test passes to keep results.log files
     within a managable size on disk.
-
+    
     As an example, using this method reduced the size of the XSLT V2 log file from 3MB per run to around 300k.
     ************************************************/
 
@@ -616,20 +616,20 @@ namespace XmlCoreTest.Common
     /*************************************************
     author alexkr
     date   12/12/2005
-
+    
     This class is used to compare expected exceptions with actual exceptions in the CompareException
     method, used by the XSLT V2 data driven driver.
-
+    
     Its use is somewhat subtle, so please read all comments, understand the Equals method, and ask for
     introduction before you use it in any new code, or modify existing code. Why? There are many
     assumptions made when using this class. Here are some...
-
-       Non-Xml Exceptions are always compared by type, and must never have ExceptionResourceId or ExceptionMessage attributes in a control file.
-       Xml Exceptions can be either ExceptionId only, ExceptionId and ExceptionMessage for all Xml_UserException exceptions, or ExceptionId and ExceptionResourceId for all non-Xml_UserExceptions
-       Never have both ExceptionResourceId AND ExceptionMessage attributes set for the same Exception meta-data. The behavior is undefined.
-       Xml Exceptions that are Xml_UserExceptions and include a MessageFragment will only be compared in ENU runs. Globalized runs resort to Type comparison (ExceptionId) only.
-       Xml Exceptions that are non-Xml_UserExceptions and include an ExceptionResourceId will be compared for all runs.
-
+    
+    Non-Xml Exceptions are always compared by type, and must never have ExceptionResourceId or ExceptionMessage attributes in a control file.
+    Xml Exceptions can be either ExceptionId only, ExceptionId and ExceptionMessage for all Xml_UserException exceptions, or ExceptionId and ExceptionResourceId for all non-Xml_UserExceptions
+    Never have both ExceptionResourceId AND ExceptionMessage attributes set for the same Exception meta-data. The behavior is undefined.
+    Xml Exceptions that are Xml_UserExceptions and include a MessageFragment will only be compared in ENU runs. Globalized runs resort to Type comparison (ExceptionId) only.
+    Xml Exceptions that are non-Xml_UserExceptions and include an ExceptionResourceId will be compared for all runs.
+    
     **************************************************/
 
     public class XsltRuntimeException

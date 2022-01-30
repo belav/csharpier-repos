@@ -20,10 +20,10 @@ namespace Microsoft.CodeAnalysis
         /// This indicates that friend access should be granted for the purposes of error recovery,
         /// but the program is wrong.
         ///
-        /// That's because this indicates that a strong-named assembly has referred to a weak-named assembly 
-        /// which has extended friend access to the strong-named assembly. This will ultimately 
-        /// result in an error because strong-named assemblies may not refer to weak-named assemblies. 
-        /// In Roslyn we give a new error, CS7029, before emit time. In the dev10 compiler we error at 
+        /// That's because this indicates that a strong-named assembly has referred to a weak-named assembly
+        /// which has extended friend access to the strong-named assembly. This will ultimately
+        /// result in an error because strong-named assemblies may not refer to weak-named assemblies.
+        /// In Roslyn we give a new error, CS7029, before emit time. In the dev10 compiler we error at
         /// emit time.
         /// </summary>
         OneSignedOneNot,
@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis
         PublicKeyDoesntMatch,
 
         /// <summary>
-        /// This indicates that friend access should not be granted because the other assembly 
+        /// This indicates that friend access should not be granted because the other assembly
         /// does not name this assembly as a friend in any way whatsoever.
         /// </summary>
         NoRelationshipClaimed

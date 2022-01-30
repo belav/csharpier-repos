@@ -353,7 +353,7 @@ namespace Microsoft.CodeAnalysis.Shared
         }
 
         /// <summary>
-        /// Determines whether two span sets are the same. 
+        /// Determines whether two span sets are the same.
         /// </summary>
         /// <param name="left">The first set.</param>
         /// <param name="right">The second set.</param>

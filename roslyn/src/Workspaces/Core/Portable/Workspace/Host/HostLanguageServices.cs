@@ -22,14 +22,14 @@ namespace Microsoft.CodeAnalysis.Host
         public abstract string Language { get; }
 
         /// <summary>
-        /// Gets a language specific service provided by the host identified by the service type. 
+        /// Gets a language specific service provided by the host identified by the service type.
         /// If the host does not provide the service, this method returns null.
         /// </summary>
         public abstract TLanguageService? GetService<TLanguageService>()
             where TLanguageService : ILanguageService;
 
         /// <summary>
-        /// Gets a language specific service provided by the host identified by the service type. 
+        /// Gets a language specific service provided by the host identified by the service type.
         /// If the host does not provide the service, this method returns throws <see cref="InvalidOperationException"/>.
         /// </summary>
         public TLanguageService GetRequiredService<TLanguageService>()

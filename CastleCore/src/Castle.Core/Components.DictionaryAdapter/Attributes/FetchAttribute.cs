@@ -17,27 +17,27 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Identifies an interface or property to be pre-fetched.
-	/// </summary>
+    /// Identifies an interface or property to be pre-fetched.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = false)]
     public class FetchAttribute : Attribute
     {
         /// <summary>
-		/// Instructs fetching to occur.
-		/// </summary>
+        /// Instructs fetching to occur.
+        /// </summary>
         public FetchAttribute() : this(true) { }
 
         /// <summary>
-		/// Instructs fetching according to <paramref name="fetch"/>
-		/// </summary>
+        /// Instructs fetching according to <paramref name="fetch"/>
+        /// </summary>
         public FetchAttribute(bool fetch)
         {
             Fetch = fetch;
         }
 
         /// <summary>
-		/// Gets whether or not fetching should occur.
-		/// </summary>
+        /// Gets whether or not fetching should occur.
+        /// </summary>
         public bool Fetch { get; private set; }
     }
 }

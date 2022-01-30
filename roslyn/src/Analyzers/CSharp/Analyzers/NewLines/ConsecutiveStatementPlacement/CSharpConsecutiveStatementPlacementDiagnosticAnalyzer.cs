@@ -17,16 +17,16 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveStatementPlacement
     /// }
     /// NextStatement();
     /// </code>
-    /// 
+    ///
     /// And requires it to be of the form:
     /// <code>
     /// if (cond)
     /// {
     /// }
-    /// 
+    ///
     /// NextStatement();
     /// </code>
-    /// 
+    ///
     /// Specifically, all blocks followed by another statement must have a blank line between them.
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]

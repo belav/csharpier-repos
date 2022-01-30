@@ -826,7 +826,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         /// <summary>
-        /// These aren't acceptable in place of ASCII quotation marks in XML, 
+        /// These aren't acceptable in place of ASCII quotation marks in XML,
         /// but we want to consume them (and produce an appropriate error) if
         /// they occur in a place where a quotation mark is legal.
         /// </summary>
@@ -1101,13 +1101,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// ACASEY: This grammar is derived from the behavior and sources of the native compiler.
         /// Tokens start with underscores (I've cheated for _PredefinedTypeToken, which is not actually a
         /// SyntaxKind), "*" indicates "0 or more", "?" indicates "0 or 1", and parentheses are for grouping.
-        /// 
+        ///
         /// Cref	 			= CrefType _DotToken CrefMember
         /// 					| CrefType
         /// 					| CrefMember
         ///                     | CrefFirstType _OpenParenToken CrefParameterList? _CloseParenToken
         /// CrefName			= _IdentifierToken (_LessThanToken _IdentifierToken (_CommaToken _IdentifierToken)* _GreaterThanToken)?
-        /// CrefFirstType 		= ((_IdentifierToken _ColonColonToken)? CrefName) 
+        /// CrefFirstType 		= ((_IdentifierToken _ColonColonToken)? CrefName)
         ///                     | _PredefinedTypeToken
         /// CrefType 			= CrefFirstType (_DotToken CrefName)*
         /// CrefMember 			= CrefName (_OpenParenToken CrefParameterList? _CloseParenToken)?

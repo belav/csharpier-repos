@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Remote
     /// Wraps calls from a remote brokered service back to the client or to an in-proc brokered service.
     /// The purpose of this type is to handle exceptions thrown by the underlying remoting infrastructure
     /// in manner that's compatible with our exception handling policies.
-    /// 
+    ///
     /// TODO: This wrapper might not be needed once https://github.com/microsoft/vs-streamjsonrpc/issues/246 is fixed.
     /// </summary>
     internal readonly struct RemoteCallback<T> where T : class

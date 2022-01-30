@@ -287,19 +287,19 @@ namespace System.DirectoryServices.AccountManagement
                 // These methods implement the logic shared by all the get/set accessors for the internal properties
                 T HandleGet<T>(ref T currentValue, string name)
                 {
-                    // Check that we actually support this propery in our store
-                    //this.owningPrincipal.CheckSupportedProperty(name);
-
-                    return currentValue;
+                // Check that we actually support this propery in our store
+                //this.owningPrincipal.CheckSupportedProperty(name);
+                
+                return currentValue;
                 }
-
+                
                 void HandleSet<T>(ref T currentValue, T newValue, ref bool changed, string name)
                 {
-                    // Check that we actually support this propery in our store
-                    //this.owningPrincipal.CheckSupportedProperty(name);
-
-                    currentValue = newValue;
-                    changed = true;
+                // Check that we actually support this propery in our store
+                //this.owningPrincipal.CheckSupportedProperty(name);
+                
+                currentValue = newValue;
+                changed = true;
                 }
                 */
 

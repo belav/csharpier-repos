@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     /// <summary>
     /// A service which enables searching for packages matching certain criteria.
     /// It works against a <see cref="Microsoft.CodeAnalysis.Elfie"/> database to find results.
-    /// 
+    ///
     /// This implementation also spawns a task which will attempt to keep that database up to
     /// date by downloading patches on a daily basis.
     /// </summary>
@@ -567,7 +567,7 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
 
             /// <summary>
             /// Creates a database instance with the bytes passed in.  If creating the database succeeds,
-            /// then it will be set as the current in memory version.  In the case of failure (which 
+            /// then it will be set as the current in memory version.  In the case of failure (which
             /// indicates that our data is corrupt), the exception will bubble up and must be appropriately
             /// dealt with by the caller.
             /// </summary>

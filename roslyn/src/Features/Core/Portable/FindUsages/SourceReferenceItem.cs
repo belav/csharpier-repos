@@ -9,7 +9,7 @@ using System.Collections.Immutable;
 namespace Microsoft.CodeAnalysis.FindUsages
 {
     /// <summary>
-    /// Information about a symbol's reference that can be used for display and 
+    /// Information about a symbol's reference that can be used for display and
     /// navigation in an editor.
     /// </summary>
     internal sealed class SourceReferenceItem

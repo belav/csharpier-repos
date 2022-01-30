@@ -582,9 +582,9 @@ namespace System.Xml.Xsl.Xslt
 
         /*
         protected override XslFlags VisitKey(Key node) {
-            // @match and @use do not affect any flags
-            //ProcessPattern(node.Match);
-            //ProcessExpr(node.Use);
+        // @match and @use do not affect any flags
+        //ProcessPattern(node.Match);
+        //ProcessExpr(node.Use);
         }
         */
 

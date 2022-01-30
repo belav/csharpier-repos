@@ -108,7 +108,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         }
 
         /// <summary>
-        /// Given a list of symbols, and a mapping from each symbol to its original SemanticModel, 
+        /// Given a list of symbols, and a mapping from each symbol to its original SemanticModel,
         /// creates the list of completion items for them.
         /// </summary>
         private ImmutableArray<CompletionItem> CreateItems(

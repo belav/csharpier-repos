@@ -8,7 +8,7 @@ using System.Diagnostics;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Compares assembly identities. 
+    /// Compares assembly identities.
     /// Derived types may implement platform specific unification and portability policies.
     /// </summary>
     public class AssemblyIdentityComparer

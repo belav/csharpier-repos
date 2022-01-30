@@ -70,7 +70,7 @@ public class Program
         /* This issue is caused by CSE and trying to pull a typecheck out of a loop.
          * We used to do this incorrectly and this could allow a type to call methods
          * from it's "cousin" types...
-         * 
+         *
          * This example will AV...
          * */
         x64_JIT_Bug(new MyDerived());

@@ -382,9 +382,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <summary>
         /// Since an active statement represents a range between two sequence points and its span is associated with the first of these sequence points,
         /// we decide whether the active statement is relevant within given span by checking whether its start location is within that span.
-        /// An active statement may overlap a span even if its starting location is not in the span, but such active statement is not relevant 
+        /// An active statement may overlap a span even if its starting location is not in the span, but such active statement is not relevant
         /// for analysis of code within the given span.
-        /// 
+        ///
         /// Assumes that <paramref name="spans"/> are sorted by their start position.
         /// </summary>
         internal static Range GetSpansStartingInSpan<TElement, TPosition>(

@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
         /// <summary>
         /// Raised when solution crawler progress changed
-        /// 
-        /// Notifications for this event are serialized to preserve order. 
+        ///
+        /// Notifications for this event are serialized to preserve order.
         /// However, individual event notifications may occur on any thread.
         /// </summary>
         event EventHandler<ProgressData> ProgressChanged;
@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         public ProgressStatus Status { get; }
 
         /// <summary>
-        /// number of pending work item in the queue. 
+        /// number of pending work item in the queue.
         /// null means N/A for the associated <see cref="Status"/>
         /// </summary>
         public int? PendingItemCount { get; }

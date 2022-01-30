@@ -2841,7 +2841,7 @@ namespace System.Data.Odbc
                     /*
                         string msg = "Unexpected failure of SQLSpecialColumns. Code = " + Command.GetDiagSqlState();
                         Debug.Assert (false, msg);
-                    */
+                        */
                 }
             }
             finally

@@ -116,7 +116,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         }
 
         /// <summary>
-        /// Emits updates for all projects that differ between the given <paramref name="solution"/> snapshot and the one given to the previous successful call 
+        /// Emits updates for all projects that differ between the given <paramref name="solution"/> snapshot and the one given to the previous successful call
         /// where <paramref name="commitUpdates"/> was `true` or the one passed to <see cref="StartSessionAsync(Solution, ImmutableArray{string}, CancellationToken)"/>
         /// for the first invocation.
         /// </summary>

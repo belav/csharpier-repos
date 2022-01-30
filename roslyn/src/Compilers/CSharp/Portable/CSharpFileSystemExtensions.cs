@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Also embedded in the output file.  Null to forego PDB generation.
         /// </param>
         /// <param name="xmlDocumentationPath">Path of the file to which the compilation's XML documentation will be written.  Null to forego XML generation.</param>
-        /// <param name="win32ResourcesPath">Path of the file from which the compilation's Win32 resources will be read (in RES format).  
+        /// <param name="win32ResourcesPath">Path of the file from which the compilation's Win32 resources will be read (in RES format).
         /// Null to indicate that there are none.</param>
         /// <param name="manifestResources">List of the compilation's managed resources.  Null to indicate that there are none.</param>
         /// <param name="cancellationToken">To cancel the emit process.</param>

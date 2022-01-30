@@ -35,7 +35,7 @@ namespace System.Xml.Xsl.XPath
 
         /*  ----------------------------------------------------------------------------
             IXPathEnvironment interface
-        */
+            */
         QilNode IFocus.GetCurrent()
         {
             return GetCurrentNode();

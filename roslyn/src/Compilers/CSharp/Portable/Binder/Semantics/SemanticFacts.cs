@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Checks if 'symbol' is accessible from within assembly 'within'.  
+        /// Checks if 'symbol' is accessible from within assembly 'within'.
         /// </summary>
         public static bool IsSymbolAccessible(Symbol symbol, AssemblySymbol within)
         {

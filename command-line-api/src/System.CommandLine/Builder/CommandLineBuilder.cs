@@ -40,7 +40,7 @@ namespace System.CommandLine.Builder
         public bool EnableLegacyDoubleDashBehavior { get; set; }
 
         /// <summary>
-        /// Configures the parser's handling of response files. When enabled, a command line token beginning with <c>@</c> that is a valid file path will be expanded as though inserted into the command line. 
+        /// Configures the parser's handling of response files. When enabled, a command line token beginning with <c>@</c> that is a valid file path will be expanded as though inserted into the command line.
         /// </summary>
         public ResponseFileHandling ResponseFileHandling { get; set; }
 

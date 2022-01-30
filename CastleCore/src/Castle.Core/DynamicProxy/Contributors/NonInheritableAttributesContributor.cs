@@ -21,8 +21,8 @@ namespace Castle.DynamicProxy.Contributors
     using Castle.DynamicProxy.Internal;
 
     /// <summary>
-	///   Reproduces the proxied type's non-inheritable custom attributes on the proxy type.
-	/// </summary>
+    ///   Reproduces the proxied type's non-inheritable custom attributes on the proxy type.
+    /// </summary>
     internal sealed class NonInheritableAttributesContributor : ITypeContributor
     {
         private readonly Type targetType;

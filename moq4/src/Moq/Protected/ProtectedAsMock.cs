@@ -266,8 +266,8 @@ namespace Moq.Protected
         }
 
         /// <summary>
-		/// <see cref="ExpressionVisitor"/> used to replace occurrences of `TAnalog.Member` sub-expressions with `T.Member`.
-		/// </summary>
+        /// <see cref="ExpressionVisitor"/> used to replace occurrences of `TAnalog.Member` sub-expressions with `T.Member`.
+        /// </summary>
         private sealed class DuckReplacer : ExpressionVisitor
         {
             private Type duckType;

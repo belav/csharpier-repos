@@ -52,7 +52,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 {
     /// <summary>
     /// Constructs and caches already created pseudo-methods.
-    /// Every compiled module is supposed to have one of this, created lazily 
+    /// Every compiled module is supposed to have one of this, created lazily
     /// (multidimensional arrays are not common).
     /// </summary>
     internal class ArrayMethods
@@ -143,7 +143,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         /// <summary>
-        /// "newobj ArrayConstructor"  is equivalent of "newarr ElementType" 
+        /// "newobj ArrayConstructor"  is equivalent of "newarr ElementType"
         /// when working with multidimensional arrays
         /// </summary>
         private sealed class ArrayConstructor : ArrayMethod
@@ -157,7 +157,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         /// <summary>
-        /// "call ArrayGet"  is equivalent of "ldelem ElementType" 
+        /// "call ArrayGet"  is equivalent of "ldelem ElementType"
         /// when working with multidimensional arrays
         /// </summary>
         private sealed class ArrayGet : ArrayMethod
@@ -171,7 +171,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         /// <summary>
-        /// "call ArrayAddress"  is equivalent of "ldelema ElementType" 
+        /// "call ArrayAddress"  is equivalent of "ldelema ElementType"
         /// when working with multidimensional arrays
         /// </summary>
         private sealed class ArrayAddress : ArrayMethod
@@ -187,7 +187,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         /// <summary>
-        /// "call ArraySet"  is equivalent of "stelem ElementType" 
+        /// "call ArraySet"  is equivalent of "stelem ElementType"
         /// when working with multidimensional arrays
         /// </summary>
         private sealed class ArraySet : ArrayMethod
@@ -217,8 +217,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
     /// <summary>
     /// Represents a parameter in an array pseudo-method.
-    /// 
-    /// NOTE: It appears that only number of indices is used for verification, 
+    ///
+    /// NOTE: It appears that only number of indices is used for verification,
     /// types just have to be Int32.
     /// Even though actual arguments can be native ints.
     /// </summary>
@@ -272,8 +272,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
     /// <summary>
     /// Represents the "value" parameter of the Set pseudo-method.
-    /// 
-    /// NOTE: unlike index parameters, type of the value parameter must match 
+    ///
+    /// NOTE: unlike index parameters, type of the value parameter must match
     /// the actual element type.
     /// </summary>
     internal sealed class ArraySetValueParameterInfo : ArrayMethodParameterInfo

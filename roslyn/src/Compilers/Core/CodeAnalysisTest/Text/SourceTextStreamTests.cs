@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Text
         );
 
         /// <summary>
-        /// In the case the destination buffer is of insufficient length to store the reading of a single 
+        /// In the case the destination buffer is of insufficient length to store the reading of a single
         /// character we will throw.  Returning 0 is not correct here as that indicates end of stream
         /// not insufficient space in destination buffer.
         /// </summary>

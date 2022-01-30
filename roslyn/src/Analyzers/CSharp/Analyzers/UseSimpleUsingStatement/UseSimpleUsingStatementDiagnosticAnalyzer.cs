@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
     ///     {
     ///     }
     ///     ```
-    /// 
+    ///
     /// And offers to convert it to:
     ///
     ///     ```c#
@@ -34,14 +34,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
     ///     ```
     ///
     /// (this of course works in the case where there is only one using).
-    /// 
+    ///
     /// A few design decisions:
-    ///     
+    ///
     /// 1. We only offer this if the entire group of usings in a nested stack can be
     ///    converted.  We don't want to take a nice uniform group and break it into
-    ///    a combination of using-statements and using-declarations.  That may feel 
+    ///    a combination of using-statements and using-declarations.  That may feel
     ///    less pleasant to the user than just staying uniform.
-    /// 
+    ///
     /// 2. We're conservative about converting.  Because `using`s may be critical for
     ///    program correctness, we only convert when we're absolutely *certain* that
     ///    semantics will not change.

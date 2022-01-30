@@ -2577,7 +2577,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// This function provides a false sense of security, it is likely going to surprise you when the requested member is missing.
-        /// Recommendation: Do not use, use <see cref="TryGetNullableMethod"/> instead! 
+        /// Recommendation: Do not use, use <see cref="TryGetNullableMethod"/> instead!
         /// If used, a unit-test with a missing member is absolutely a must have.
         /// </summary>
         private MethodSymbol UnsafeGetNullableMethod(
@@ -2597,7 +2597,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// This function provides a false sense of security, it is likely going to surprise you when the requested member is missing.
-        /// Recommendation: Do not use, use <see cref="TryGetNullableMethod"/> instead! 
+        /// Recommendation: Do not use, use <see cref="TryGetNullableMethod"/> instead!
         /// If used, a unit-test with a missing member is absolutely a must have.
         /// </summary>
         private static MethodSymbol UnsafeGetNullableMethod(
@@ -3134,10 +3134,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// This rather confusing method tries to reproduce the functionality of ExpressionBinder::bindPtrAddMul and
-        /// ExpressionBinder::bindPtrMul.  The basic idea is that we have a numeric expression, x, and a pointer type, 
+        /// ExpressionBinder::bindPtrMul.  The basic idea is that we have a numeric expression, x, and a pointer type,
         /// T*, and we want to multiply x by sizeof(T).  Unfortunately, we need to stick in some conversions to make
         /// everything work.
-        /// 
+        ///
         ///   1) If x is an int, then convert it to an IntPtr (i.e. a native int).  Dev10 offers no explanation (ExpressionBinder::bindPtrMul).
         ///   2) Do overload resolution based on the (possibly converted) type of X and int (the type of sizeof(T)).
         ///   3) If the result type of the chosen multiplication operator is signed, convert the product to IntPtr;

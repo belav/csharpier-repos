@@ -57,7 +57,7 @@ namespace RunTests
         public TimeSpan? Timeout { get; set; }
 
         /// <summary>
-        /// Retry tests on failure 
+        /// Retry tests on failure
         /// </summary>
         public bool Retry { get; set; }
 

@@ -21,8 +21,8 @@ namespace Castle.DynamicProxy.Contributors
     using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 
     /// <summary>
-	///   Adds an implementation for <see cref="IProxyTargetAccessor"/> to the proxy type.
-	/// </summary>
+    ///   Adds an implementation for <see cref="IProxyTargetAccessor"/> to the proxy type.
+    /// </summary>
     internal sealed class ProxyTargetAccessorContributor : ITypeContributor
     {
         private readonly Func<Reference> getTargetReference;

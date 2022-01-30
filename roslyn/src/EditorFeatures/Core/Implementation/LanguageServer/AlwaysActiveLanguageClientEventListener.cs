@@ -86,7 +86,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         }
 
         /// <summary>
-        /// The <see cref="ILanguageClientBroker.LoadAsync(ILanguageClientMetadata, ILanguageClient)"/> 
+        /// The <see cref="ILanguageClientBroker.LoadAsync(ILanguageClientMetadata, ILanguageClient)"/>
         /// requires that we pass the <see cref="ILanguageClientMetadata"/> along with the language client instance.
         /// The implementation of <see cref="ILanguageClientMetadata"/> is not public, so have to re-implement.
         /// https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1043922 tracking to remove this.

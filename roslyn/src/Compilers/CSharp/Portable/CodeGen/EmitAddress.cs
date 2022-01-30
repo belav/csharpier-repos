@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
     internal partial class CodeGenerator
     {
         /// <summary>
-        /// Emits address as in &amp; 
-        /// 
+        /// Emits address as in &amp;
+        ///
         /// May introduce a temp which it will return. (otherwise returns null)
         /// </summary>
         private LocalDefinition EmitAddress(BoundExpression expression, AddressKind addressKind)
@@ -345,9 +345,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
         /// <summary>
         /// Emits address of a temp.
-        /// Used in cases where taking address directly is not possible 
+        /// Used in cases where taking address directly is not possible
         /// (typically because expression does not have a home)
-        /// 
+        ///
         /// Introduce a temp which it will return.
         /// </summary>
         private LocalDefinition EmitAddressOfTempClone(BoundExpression expression)
@@ -533,13 +533,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         }
 
         /// <summary>
-        /// Emits receiver in a form that allows member accesses ( O or &amp; ). 
-        /// For verifier-reference types it is the actual reference. 
+        /// Emits receiver in a form that allows member accesses ( O or &amp; ).
+        /// For verifier-reference types it is the actual reference.
         /// For the value types it is an address of the receiver.
-        /// For generic types it is either a boxed receiver or the address of the receiver with readonly intent. 
-        /// 
+        /// For generic types it is either a boxed receiver or the address of the receiver with readonly intent.
+        ///
         /// addressKind - kind of address that is needed in case if receiver is not a reference type.
-        /// 
+        ///
         /// May introduce a temp which it will return. (otherwise returns null)
         /// </summary>
         private LocalDefinition EmitReceiverRef(BoundExpression receiver, AddressKind addressKind)

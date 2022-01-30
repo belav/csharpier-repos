@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// invalid or not present character was asked for. Due to perf concerns, things
         /// like nullable or out variables are not viable. Instead we need to choose a
         /// char value which can never be legal.
-        /// 
+        ///
         /// In .NET, all characters are represented in 16 bits using the UTF-16 encoding.
         /// Fortunately for us, there are a variety of different bit patterns which
         /// are *not* legal UTF-16 characters. 0xffff (char.MaxValue) is one of these
@@ -234,7 +234,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// <summary>
         /// After reading <see cref=" InvalidCharacter"/>, a consumer can determine
         /// if the InvalidCharacter was in the user's source or a sentinel.
-        /// 
+        ///
         /// Comments and string literals are allowed to contain any Unicode character.
         /// </summary>
         /// <returns></returns>
@@ -265,7 +265,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// Grab the next character and advance the position.
         /// </summary>
         /// <returns>
-        /// The next character, <see cref="InvalidCharacter" /> if there were no characters 
+        /// The next character, <see cref="InvalidCharacter" /> if there were no characters
         /// remaining.
         /// </returns>
         public char NextChar()
@@ -279,7 +279,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         /// <summary>
-        /// Gets the next character if there are any characters in the 
+        /// Gets the next character if there are any characters in the
         /// SourceText. May advance the window if we are at the end.
         /// </summary>
         /// <returns>

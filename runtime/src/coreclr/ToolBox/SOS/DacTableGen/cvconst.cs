@@ -704,8 +704,8 @@ namespace Dia
         // Register Set for Motorola/IBM PowerPC
 
         /*
-    ** PowerPC General Registers ( User Level )
-    */
+        ** PowerPC General Registers ( User Level )
+        */
         CV_PPC_GPR0 = 1,
         CV_PPC_GPR1 = 2,
         CV_PPC_GPR2 = 3,
@@ -740,8 +740,8 @@ namespace Dia
         CV_PPC_GPR31 = 32,
 
         /*
-    ** PowerPC Condition Register ( User Level )
-    */
+        ** PowerPC Condition Register ( User Level )
+        */
         CV_PPC_CR = 33,
         CV_PPC_CR0 = 34,
         CV_PPC_CR1 = 35,
@@ -753,8 +753,8 @@ namespace Dia
         CV_PPC_CR7 = 41,
 
         /*
-    ** PowerPC Floating Point Registers ( User Level )
-    */
+        ** PowerPC Floating Point Registers ( User Level )
+        */
         CV_PPC_FPR0 = 42,
         CV_PPC_FPR1 = 43,
         CV_PPC_FPR2 = 44,
@@ -789,18 +789,18 @@ namespace Dia
         CV_PPC_FPR31 = 73,
 
         /*
-    ** PowerPC Floating Point Status and Control Register ( User Level )
-    */
+        ** PowerPC Floating Point Status and Control Register ( User Level )
+        */
         CV_PPC_FPSCR = 74,
 
         /*
-    ** PowerPC Machine State Register ( Supervisor Level )
-    */
+        ** PowerPC Machine State Register ( Supervisor Level )
+        */
         CV_PPC_MSR = 75,
 
         /*
-    ** PowerPC Segment Registers ( Supervisor Level )
-    */
+        ** PowerPC Segment Registers ( Supervisor Level )
+        */
         CV_PPC_SR0 = 76,
         CV_PPC_SR1 = 77,
         CV_PPC_SR2 = 78,
@@ -819,14 +819,14 @@ namespace Dia
         CV_PPC_SR15 = 91,
 
         /*
-    ** For all of the special purpose registers add 100 to the SPR# that the
-    ** Motorola/IBM documentation gives with the exception of any imaginary
-    ** registers.
-    */
+        ** For all of the special purpose registers add 100 to the SPR# that the
+        ** Motorola/IBM documentation gives with the exception of any imaginary
+        ** registers.
+        */
 
         /*
-    ** PowerPC Special Purpose Registers ( User Level )
-    */
+        ** PowerPC Special Purpose Registers ( User Level )
+        */
         CV_PPC_PC = 99, // PC (imaginary register)
         CV_PPC_MQ = 100, // MPC601
         CV_PPC_XER = 101,
@@ -838,8 +838,8 @@ namespace Dia
         CV_PPC_COUNT = 111, // part of XER (internal to the debugger only)
 
         /*
-    ** PowerPC Special Purpose Registers ( Supervisor Level )
-    */
+        ** PowerPC Special Purpose Registers ( Supervisor Level )
+        */
         CV_PPC_DSISR = 118,
         CV_PPC_DAR = 119,
         CV_PPC_DEC = 122,
@@ -871,12 +871,12 @@ namespace Dia
         CV_PPC_DBAT3L = 643,
 
         /*
-    ** PowerPC Special Purpose Registers Implementation Dependent ( Supervisor Level )
-    */
+        ** PowerPC Special Purpose Registers Implementation Dependent ( Supervisor Level )
+        */
 
         /*
-    ** Doesn't appear that IBM/Motorola has finished defining these.
-    */
+        ** Doesn't appear that IBM/Motorola has finished defining these.
+        */
 
         CV_PPC_PMR0 = 1044, // MPC620,
         CV_PPC_PMR1 = 1045, // MPC620,

@@ -345,8 +345,8 @@ namespace Microsoft.CodeAnalysis.Completion
 
         /// <summary>
         /// Returns a document with frozen partial semantic unless we already have a complete compilation available.
-        /// Getting full semantic could be costly in certains scenarios and would cause significant delay in completion. 
-        /// In most cases we'd still end up with complete document, but we'd consider it an acceptable trade-off even when 
+        /// Getting full semantic could be costly in certains scenarios and would cause significant delay in completion.
+        /// In most cases we'd still end up with complete document, but we'd consider it an acceptable trade-off even when
         /// we get into this transient state.
         /// </summary>
         private async Task<(Document document, SemanticModel? semanticModel)> GetDocumentWithFrozenPartialSemanticsAsync(

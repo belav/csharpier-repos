@@ -10,7 +10,7 @@ namespace ServerSimulator
 {
     /// <summary>
     /// This is modeled after a server executing requests
-    /// which pin some of their newly allocated objects. 
+    /// which pin some of their newly allocated objects.
     /// </summary>
     internal static class ServerSimulator
     {

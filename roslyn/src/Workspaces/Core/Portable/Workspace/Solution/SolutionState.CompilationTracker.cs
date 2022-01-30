@@ -1303,7 +1303,7 @@ namespace Microsoft.CodeAnalysis
 
             /// <summary>
             /// Attempts to get (without waiting) a metadata reference to a possibly in progress
-            /// compilation. Only actual compilation references are returned. Could potentially 
+            /// compilation. Only actual compilation references are returned. Could potentially
             /// return null if nothing can be provided.
             /// </summary>
             public CompilationReference? GetPartialMetadataReference(

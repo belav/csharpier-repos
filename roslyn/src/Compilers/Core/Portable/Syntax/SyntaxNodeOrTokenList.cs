@@ -97,7 +97,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the <see cref="SyntaxNodeOrToken"/> at the specified index. 
+        /// Gets the <see cref="SyntaxNodeOrToken"/> at the specified index.
         /// </summary>
         /// <exception cref="IndexOutOfRangeException"><paramref name="index"/> is out of range.</exception>
         public SyntaxNodeOrToken this[int index]
@@ -148,11 +148,11 @@ namespace Microsoft.CodeAnalysis
         public TextSpan Span => _node?.Span ?? default(TextSpan);
 
         /// <summary>
-        /// Returns the string representation of the nodes and tokens in this list, not including the first node or token's leading trivia 
+        /// Returns the string representation of the nodes and tokens in this list, not including the first node or token's leading trivia
         /// and the last node or token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The string representation of the nodes and tokens in this list, not including the first node or token's leading trivia 
+        /// The string representation of the nodes and tokens in this list, not including the first node or token's leading trivia
         /// and the last node or token's trailing trivia.
         /// </returns>
         public override string ToString()
@@ -161,11 +161,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the full string representation of the nodes and tokens in this list including the first node or token's leading trivia 
+        /// Returns the full string representation of the nodes and tokens in this list including the first node or token's leading trivia
         /// and the last node or token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The full string representation of the nodes and tokens in this list including the first node or token's leading trivia 
+        /// The full string representation of the nodes and tokens in this list including the first node or token's leading trivia
         /// and the last node or token's trailing trivia.
         /// </returns>
         public string ToFullString()
@@ -497,7 +497,7 @@ namespace Microsoft.CodeAnalysis
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {

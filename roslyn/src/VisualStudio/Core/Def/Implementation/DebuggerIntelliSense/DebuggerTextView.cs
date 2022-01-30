@@ -54,18 +54,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
         /// <summary>
         /// We basically replace the innerTextView's BufferGraph with our own custom projection graph
         /// that projects the immediate window contents into a context buffer:
-        /// 
+        ///
         ///             (1)
         ///         (2)     (5)
         ///         (3)     (6)
         ///         (4)
         /// (1) Top level projection buffer - the subject buffer used by intellisense
-        /// (2/3) Currently a double projection buffer combo that elides away the ? in the immediate window, and may add some 
+        /// (2/3) Currently a double projection buffer combo that elides away the ? in the immediate window, and may add some
         ///       boilerplate code to force an expression context.
         /// (4) innerTextView.TextBuffer, what the user actually sees in the watch/immediate windows
         /// (5) A read-only projection of (6)
         /// (6) The context buffer which is typically a source file
-        /// 
+        ///
         /// </summary>
         public IBufferGraph BufferGraph { get; }
 

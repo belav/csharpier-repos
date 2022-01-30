@@ -202,7 +202,7 @@ namespace Microsoft.DiaSymReader
         #region ISymUnmanagedWriter5
 
         /// <summary>
-        /// Open a special custom data section to emit token to source span mapping information into. 
+        /// Open a special custom data section to emit token to source span mapping information into.
         /// Opening this section while a method is already open or vice versa is an error.
         /// </summary>
         void OpenMapTokensToSourceSpans();
@@ -214,7 +214,7 @@ namespace Microsoft.DiaSymReader
         void CloseMapTokensToSourceSpans();
 
         /// <summary>
-        /// Maps the given metadata token to the given source line span in the specified source file. 
+        /// Maps the given metadata token to the given source line span in the specified source file.
         /// Must be called between calls to <see cref="OpenMapTokensToSourceSpans"/> and <see cref="CloseMapTokensToSourceSpans"/>.
         /// </summary>
         void MapTokenToSourceSpan(
@@ -282,7 +282,7 @@ namespace Microsoft.DiaSymReader
         private readonly long _longValue;
 
         /// <summary>
-        /// This field determines the size of the struct 
+        /// This field determines the size of the struct
         /// (16 bytes on 32-bit platforms, 24 bytes on 64-bit platforms).
         /// </summary>
         [FieldOffset(8)]

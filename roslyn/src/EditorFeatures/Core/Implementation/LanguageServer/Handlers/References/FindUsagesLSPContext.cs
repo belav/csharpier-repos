@@ -52,7 +52,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
 
         /// <summary>
         /// Set of the locations we've found references at.  We may end up with multiple references
-        /// being reported for the same location.  For example, this can happen in multi-targetting 
+        /// being reported for the same location.  For example, this can happen in multi-targetting
         /// scenarios when there are symbols in files linked into multiple projects.  Those symbols
         /// may have references that themselves are in linked locations, leading to multiple references
         /// found at different virtual locations that the user considers at the same physical location.

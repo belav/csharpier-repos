@@ -100,7 +100,7 @@ namespace Microsoft.CodeAnalysis
             _additionalSources.Add(hintName, sourceText);
 
         /// <summary>
-        /// Adds a <see cref="Diagnostic"/> to the users compilation 
+        /// Adds a <see cref="Diagnostic"/> to the users compilation
         /// </summary>
         /// <param name="diagnostic">The diagnostic that should be added to the compilation</param>
         /// <remarks>
@@ -147,14 +147,14 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// This method allows generators to be 'syntax aware'. Before each generation the <paramref name="receiverCreator"/> will be invoked to create
-        /// an instance of <see cref="ISyntaxReceiver"/>. This receiver will have its <see cref="ISyntaxReceiver.OnVisitSyntaxNode(SyntaxNode)"/> 
+        /// an instance of <see cref="ISyntaxReceiver"/>. This receiver will have its <see cref="ISyntaxReceiver.OnVisitSyntaxNode(SyntaxNode)"/>
         /// invoked for each syntax node in the compilation, allowing the receiver to build up information about the compilation before generation occurs.
-        /// 
+        ///
         /// During <see cref="ISourceGenerator.Execute(GeneratorExecutionContext)"/> the generator can obtain the <see cref="ISyntaxReceiver"/> instance that was
         /// created by accessing the <see cref="GeneratorExecutionContext.SyntaxReceiver"/> property. Any information that was collected by the receiver can be
         /// used to generate the final output.
-        /// 
-        /// A new instance of <see cref="ISyntaxReceiver"/> is created per-generation, meaning there is no need to manage the lifetime of the 
+        ///
+        /// A new instance of <see cref="ISyntaxReceiver"/> is created per-generation, meaning there is no need to manage the lifetime of the
         /// receiver or its contents.
         /// </remarks>
         /// <param name="receiverCreator">A <see cref="SyntaxReceiverCreator"/> that can be invoked to create an instance of <see cref="ISyntaxReceiver"/></param>
@@ -174,14 +174,14 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// This method allows generators to be 'syntax aware'. Before each generation the <paramref name="receiverCreator"/> will be invoked to create
-        /// an instance of <see cref="ISyntaxContextReceiver"/>. This receiver will have its <see cref="ISyntaxContextReceiver.OnVisitSyntaxNode(GeneratorSyntaxContext)"/> 
+        /// an instance of <see cref="ISyntaxContextReceiver"/>. This receiver will have its <see cref="ISyntaxContextReceiver.OnVisitSyntaxNode(GeneratorSyntaxContext)"/>
         /// invoked for each syntax node in the compilation, allowing the receiver to build up information about the compilation before generation occurs.
-        /// 
+        ///
         /// During <see cref="ISourceGenerator.Execute(GeneratorExecutionContext)"/> the generator can obtain the <see cref="ISyntaxContextReceiver"/> instance that was
         /// created by accessing the <see cref="GeneratorExecutionContext.SyntaxContextReceiver"/> property. Any information that was collected by the receiver can be
         /// used to generate the final output.
-        /// 
-        /// A new instance of <see cref="ISyntaxContextReceiver"/> is created prior to every call to <see cref="ISourceGenerator.Execute(GeneratorExecutionContext)"/>, 
+        ///
+        /// A new instance of <see cref="ISyntaxContextReceiver"/> is created prior to every call to <see cref="ISourceGenerator.Execute(GeneratorExecutionContext)"/>,
         /// meaning there is no need to manage the lifetime of the receiver or its contents.
         /// </remarks>
         /// <param name="receiverCreator">A <see cref="SyntaxContextReceiverCreator"/> that can be invoked to create an instance of <see cref="ISyntaxContextReceiver"/></param>
@@ -201,11 +201,11 @@ namespace Microsoft.CodeAnalysis
         /// This method allows a generator to opt-in to an extra phase in the generator lifecycle called PostInitialization. After being initialized
         /// any generators that have opted in will have their provided callback invoked with a <see cref="GeneratorPostInitializationContext"/> instance
         /// that can be used to alter the compilation that is provided to subsequent generator phases.
-        /// 
+        ///
         /// For example a generator may choose to add sources during PostInitialization. These will be added to the compilation before execution and
         /// will be visited by a registered <see cref="ISyntaxReceiver"/> and available for semantic analysis as part of the <see cref="GeneratorExecutionContext.Compilation"/>
-        /// 
-        /// Note that any sources added during PostInitialization <i>will</i> be visible to the later phases of other generators operating on the compilation. 
+        ///
+        /// Note that any sources added during PostInitialization <i>will</i> be visible to the later phases of other generators operating on the compilation.
         /// </remarks>
         /// <param name="callback">An <see cref="Action{T}"/> that accepts a <see cref="GeneratorPostInitializationContext"/> that will be invoked after initialization.</param>
         public void RegisterForPostInitialization(

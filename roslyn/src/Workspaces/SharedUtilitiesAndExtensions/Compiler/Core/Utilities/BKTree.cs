@@ -16,11 +16,11 @@ namespace Roslyn.Utilities
     /// the 'SpellChecker' type instead.
     ///
     /// An implementation of a Burkhard-Keller tree.  Introduced in:
-    /// 
+    ///
     /// 'Some approaches to best-match file searching.'
     /// Communications of the ACM CACM
-    /// Volume 16 Issue 4, April 1973 
-    /// Pages 230-236 
+    /// Volume 16 Issue 4, April 1973
+    /// Pages 230-236
     /// http://dl.acm.org/citation.cfm?doid=362003.362025
     /// </summary>
     internal partial class BKTree

@@ -12,8 +12,8 @@ using Microsoft.CodeAnalysis.CSharp.Emit;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 {
     /// <summary>
-    /// Represents a parameter of a RetargetingMethodSymbol. Essentially this is a wrapper around 
-    /// another ParameterSymbol that is responsible for retargeting symbols from one assembly to another. 
+    /// Represents a parameter of a RetargetingMethodSymbol. Essentially this is a wrapper around
+    /// another ParameterSymbol that is responsible for retargeting symbols from one assembly to another.
     /// It can retarget symbols for multiple assemblies at the same time.
     /// </summary>
     internal abstract class RetargetingParameterSymbol : WrappedParameterSymbol

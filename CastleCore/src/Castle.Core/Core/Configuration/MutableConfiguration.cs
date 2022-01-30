@@ -22,9 +22,9 @@ namespace Castle.Core.Configuration
     public class MutableConfiguration : AbstractConfiguration
     {
         /// <summary>
-		/// Initializes a new instance of the <see cref="MutableConfiguration"/> class.
-		/// </summary>
-		/// <param name="name">The name.</param>
+        /// Initializes a new instance of the <see cref="MutableConfiguration"/> class.
+        /// </summary>
+        /// <param name="name">The name.</param>
         public MutableConfiguration(string name) : this(name, null) { }
 
         public MutableConfiguration(string name, string value)
@@ -34,11 +34,11 @@ namespace Castle.Core.Configuration
         }
 
         /// <summary>
-		/// Gets the value of <see cref="IConfiguration"/>.
-		/// </summary>
-		/// <value>
-		/// The Value of the <see cref="IConfiguration"/>.
-		/// </value>
+        /// Gets the value of <see cref="IConfiguration"/>.
+        /// </summary>
+        /// <value>
+        /// The Value of the <see cref="IConfiguration"/>.
+        /// </value>
         public new string Value
         {
             get { return base.Value; }

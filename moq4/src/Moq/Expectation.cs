@@ -9,9 +9,9 @@ using Moq.Async;
 namespace Moq
 {
     /// <summary>
-	///   Represents a set (or the "shape") of invocations
-	///   against which concrete <see cref="Invocation"/>s can be matched.
-	/// </summary>
+    ///   Represents a set (or the "shape") of invocations
+    ///   against which concrete <see cref="Invocation"/>s can be matched.
+    /// </summary>
     internal abstract class Expectation : IEquatable<Expectation>
     {
         public abstract LambdaExpression Expression { get; }

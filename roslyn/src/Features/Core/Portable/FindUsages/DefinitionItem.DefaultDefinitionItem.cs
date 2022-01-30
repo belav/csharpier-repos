@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
     internal partial class DefinitionItem
     {
         /// <summary>
-        /// Implementation of a <see cref="DefinitionItem"/> that sits on top of a 
+        /// Implementation of a <see cref="DefinitionItem"/> that sits on top of a
         /// <see cref="DocumentSpan"/>.
         /// </summary>
         // internal for testing purposes.

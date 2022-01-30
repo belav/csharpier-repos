@@ -223,40 +223,40 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             }
 
             /// <summary>
-            /// For the trampoline case, it goes through the invocations and adds an argument which is a 
+            /// For the trampoline case, it goes through the invocations and adds an argument which is a
             /// call to the extracted method.
             /// Introduces a new method overload or new trampoline method.
             /// Updates the original method site with a newly introduced parameter.
-            /// 
+            ///
             /// ****Trampoline Example:****
             /// public void M(int x, int y)
             /// {
             ///     int f = [|x * y|];
             ///     Console.WriteLine(f);
             /// }
-            /// 
+            ///
             /// public void InvokeMethod()
             /// {
             ///     M(5, 6);
             /// }
-            /// 
+            ///
             /// ---------------------------------------------------->
-            /// 
+            ///
             /// public int GetF(int x, int y) // Generated method
             /// {
             ///     return x * y;
             /// }
-            /// 
+            ///
             /// public void M(int x, int y, int f)
             /// {
             ///     Console.WriteLine(f);
             /// }
-            /// 
+            ///
             /// public void InvokeMethod()
             /// {
             ///     M(5, 6, GetF(5, 6)); //Fills in with call to generated method
             /// }
-            /// 
+            ///
             /// -----------------------------------------------------------------------
             /// ****Overload Example:****
             /// public void M(int x, int y)
@@ -264,24 +264,24 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             ///     int f = [|x * y|];
             ///     Console.WriteLine(f);
             /// }
-            /// 
+            ///
             /// public void InvokeMethod()
             /// {
             ///     M(5, 6);
             /// }
-            /// 
+            ///
             /// ---------------------------------------------------->
-            /// 
+            ///
             /// public void M(int x, int y) // Generated overload
             /// {
             ///     M(x, y, x * y)
             /// }
-            /// 
+            ///
             /// public void M(int x, int y, int f)
             /// {
             ///     Console.WriteLine(f);
             /// }
-            /// 
+            ///
             /// public void InvokeMethod()
             /// {
             ///     M(5, 6);
@@ -547,14 +547,14 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             /// {
             ///     int f = [|x * y|];
             /// }
-            /// 
+            ///
             /// ---------------------------------------------------->
-            /// 
+            ///
             /// public int GetF(int x, int y)
             /// {
             ///     return x * y;
             /// }
-            /// 
+            ///
             /// public void M(int x, int y)
             /// {
             ///     int f = x * y;
@@ -586,20 +586,20 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             /// <summary>
             /// Generates a method declaration containing a call to the method that introduced the parameter.
             /// Example:
-            /// 
+            ///
             /// ***This is an intermediary step in which the original function has not be updated yet
             /// public void M(int x, int y)
             /// {
             ///     int f = [|x * y|];
             /// }
-            /// 
+            ///
             /// ---------------------------------------------------->
-            /// 
+            ///
             /// public void M(int x, int y) // Generated overload
             /// {
             ///     M(x, y, x * y);
             /// }
-            /// 
+            ///
             /// public void M(int x, int y) // Original function (which will be mutated in a later step)
             /// {
             ///     int f = x * y;
@@ -681,24 +681,24 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             /// <summary>
             /// This method goes through all the invocation sites and adds a new argument with the expression to be added.
             /// It also introduces a parameter at the original method site.
-            /// 
+            ///
             /// Example:
             /// public void M(int x, int y)
             /// {
             ///     int f = [|x * y|];
             /// }
-            /// 
+            ///
             /// public void InvokeMethod()
             /// {
             ///     M(5, 6);
             /// }
-            /// 
+            ///
             /// ---------------------------------------------------->
-            /// 
+            ///
             /// public void M(int x, int y, int f) // parameter gets introduced
             /// {
             /// }
-            /// 
+            ///
             /// public void InvokeMethod()
             /// {
             ///     M(5, 6, 5 * 6); // argument gets added to callsite

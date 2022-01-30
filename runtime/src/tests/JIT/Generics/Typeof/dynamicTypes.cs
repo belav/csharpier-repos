@@ -7,26 +7,26 @@
 1.	if(y.GetType() == typeof(x)) do something;
 2.	if(y is x) do something;
 3.	x z = y as x;
-                if(z != null) do something;
+if(z != null) do something;
 4.	if(y.GetType() == typeof(x)) static cast y as x;
 5.	if(y is x) static cast y as x;
 6.	x z = y as x;
-                if(z != null) static cast y as x;
+if(z != null) static cast y as x;
 
 where x can take the following values (whenever applicable):
 
-                x is X< X<double> >
-                x is X< X<string> >
-                x is X< X<int> >
-                x is X<double>
-                x is X<string>
-                x is X<int>
-                x is A
-                x is B
-                x is C
-                x is D
-                x is CS
-                x is DS
+x is X< X<double> >
+x is X< X<string> >
+x is X< X<int> >
+x is X<double>
+x is X<string>
+x is X<int>
+x is A
+x is B
+x is C
+x is D
+x is CS
+x is DS
 
 where the above classes have the following relationships:
 
@@ -37,7 +37,7 @@ class C : A
 class D : B
 sealed class CS : A
 sealed class DS : B
- */
+*/
 
 using System;
 using System.Reflection;
@@ -51,26 +51,26 @@ class X<T>
     {
         /*                switch(typeof(T))
                 {
-                case int: 
-                        x_count*= 2;
-                        break;
-                case string: 
-                        x_count*= 3;
-                        break;
+                case int:
+                x_count*= 2;
+                break;
+                case string:
+                x_count*= 3;
+                break;
                 case double:
-                        x_count*= 5;
-                        break;
+                x_count*= 5;
+                break;
                 case void:
-                        x_count*= 7;
-                        break;
+                x_count*= 7;
+                break;
                 case X<T>:
-                        x_count*= 11;
-                        break;
-			    case X<X<T>>:
-                        x_count*= 13;
-                        break;
+                x_count*= 11;
+                break;
+                case X<X<T>>:
+                x_count*= 13;
+                break;
                 }
-*/
+                */
         if (typeof(T) == typeof(int))
             x_count *= 2;
         else if (typeof(T) == typeof(string))

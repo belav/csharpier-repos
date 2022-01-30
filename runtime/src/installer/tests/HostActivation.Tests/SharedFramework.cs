@@ -102,7 +102,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
          *     "rollForwardOnNoCandidateFx": {rollFwdOnNoCandidateFx} <-- only if rollFwdOnNoCandidateFx is defined
          *   }
          * }
-        */
+         */
         public static void SetRuntimeConfigJson(
             string destFile,
             string version,
@@ -239,28 +239,28 @@ namespace Microsoft.DotNet.CoreSetup.Test
             // Create the deps.json. Generated file (example)
             /*
                 {
-                  "runtimeTarget": {
-                    "name": "UberFx"
-                  },
-                  "targets": {
-                    "UberFx": {
-                      "System.Collections.Immutable/1.0.0": {
-                        "dependencies": {}
-                        "runtime": {
-                          "System.Collections.Immutable.dll": {}
-                        }
-                      }
-                    }
-                  },
-                  "libraries": {
-                    "System.Collections.Immutable/1.0.0": {
-                      "type": "assemblyreference",
-                      "serviceable": false,
-                      "sha512": ""
-                    }
-                  }
+                "runtimeTarget": {
+                "name": "UberFx"
+                },
+                "targets": {
+                "UberFx": {
+                "System.Collections.Immutable/1.0.0": {
+                "dependencies": {}
+                "runtime": {
+                "System.Collections.Immutable.dll": {}
                 }
-             */
+                }
+                }
+                },
+                "libraries": {
+                "System.Collections.Immutable/1.0.0": {
+                "type": "assemblyreference",
+                "serviceable": false,
+                "sha512": ""
+                }
+                }
+                }
+                */
 
             if (versionInfo == null)
             {

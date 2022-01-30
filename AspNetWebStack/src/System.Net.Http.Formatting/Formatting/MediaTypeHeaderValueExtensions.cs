@@ -17,8 +17,8 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Determines whether two <see cref="MediaTypeHeaderValue"/> instances match. The instance
         /// <paramref name="mediaType1"/> is said to match <paramref name="mediaType2"/> if and only if
-        /// <paramref name="mediaType1"/> is a strict subset of the values and parameters of <paramref name="mediaType2"/>. 
-        /// That is, if the media type and media type parameters of <paramref name="mediaType1"/> are all present 
+        /// <paramref name="mediaType1"/> is a strict subset of the values and parameters of <paramref name="mediaType2"/>.
+        /// That is, if the media type and media type parameters of <paramref name="mediaType1"/> are all present
         /// and match those of <paramref name="mediaType2"/> then it is a match even though <paramref name="mediaType2"/> may have additional
         /// parameters.
         /// </summary>
@@ -37,8 +37,8 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Determines whether two <see cref="MediaTypeHeaderValue"/> instances match. The instance
         /// <paramref name="mediaType1"/> is said to match <paramref name="mediaType2"/> if and only if
-        /// <paramref name="mediaType1"/> is a strict subset of the values and parameters of <paramref name="mediaType2"/>. 
-        /// That is, if the media type and media type parameters of <paramref name="mediaType1"/> are all present 
+        /// <paramref name="mediaType1"/> is a strict subset of the values and parameters of <paramref name="mediaType2"/>.
+        /// That is, if the media type and media type parameters of <paramref name="mediaType1"/> are all present
         /// and match those of <paramref name="mediaType2"/> then it is a match even though <paramref name="mediaType2"/> may have additional
         /// parameters.
         /// </summary>

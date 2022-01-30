@@ -369,8 +369,8 @@ public class Tests
     }
 
     /*
-	 * Test custom marshaller class not implementing ICustomMarshaler
-	 */
+     * Test custom marshaller class not implementing ICustomMarshaler
+     */
 
     public class Marshal2 { }
 
@@ -400,8 +400,8 @@ public class Tests
     }
 
     /*
-	 * Test custom marshaller class missing GetInstance method
-	 */
+     * Test custom marshaller class missing GetInstance method
+     */
 
     public class Marshal3 : ICustomMarshaler
     {

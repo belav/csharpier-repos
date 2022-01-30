@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// This implementation of <see cref="Compilation.EmitStreamProvider"/> will delay the creation
         /// of the PE / PDB file until the compiler determines the compilation has succeeded.  This prevents
-        /// the compiler from deleting output from the previous compilation when a new compilation 
+        /// the compiler from deleting output from the previous compilation when a new compilation
         /// fails. The <see cref="Close"/> method must be called to retrieve all diagnostics.
         /// </summary>
         private sealed class CompilerEmitStreamProvider : Compilation.EmitStreamProvider

@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Assigns a specific dictionary key.
-	/// </summary>
+    /// Assigns a specific dictionary key.
+    /// </summary>
     public abstract class DictionaryBehaviorAttribute : Attribute, IDictionaryBehavior
     {
         public const int FirstExecutionOrder = 0;

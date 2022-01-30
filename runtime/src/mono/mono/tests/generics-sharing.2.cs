@@ -169,10 +169,10 @@ namespace GenericSharingTest
         public GenB<GenB<T>>[] newArrNested()
         {
             /*
-		GenB<GenB<T>>[] arr = null;
-		for (int i = 0; i < 10000000; ++i)
-			arr = new GenB<GenB<T>> [3];
-		*/
+            GenB<GenB<T>>[] arr = null;
+            for (int i = 0; i < 10000000; ++i)
+            arr = new GenB<GenB<T>> [3];
+            */
             return new GenB<GenB<T>>[3];
         }
 

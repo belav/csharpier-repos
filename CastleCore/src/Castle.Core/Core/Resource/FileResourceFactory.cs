@@ -17,8 +17,8 @@ namespace Castle.Core.Resource
     using System;
 
     /// <summary>
-	/// 
-	/// </summary>
+    ///
+    /// </summary>
     public class FileResourceFactory : IResourceFactory
     {
         public FileResourceFactory() { }

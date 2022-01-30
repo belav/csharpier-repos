@@ -10,8 +10,8 @@ using System.Web.Http;
 namespace System.Net.Http.Formatting.Parsers
 {
     /// <summary>
-    /// Buffer-oriented RFC 5322 style Internet Message Format parser which can be used to pass header 
-    /// fields used in HTTP and MIME message entities. 
+    /// Buffer-oriented RFC 5322 style Internet Message Format parser which can be used to pass header
+    /// fields used in HTTP and MIME message entities.
     /// </summary>
     internal class InternetMessageFormatHeaderParser
     {
@@ -82,7 +82,7 @@ namespace System.Net.Http.Formatting.Parsers
 
         /// <summary>
         /// Parse a buffer of RFC 5322 style header fields and add them to the <see cref="HttpHeaders"/> collection.
-        /// Bytes are parsed in a consuming manner from the beginning of the buffer meaning that the same bytes can not be 
+        /// Bytes are parsed in a consuming manner from the beginning of the buffer meaning that the same bytes can not be
         /// present in the buffer.
         /// </summary>
         /// <param name="buffer">Request buffer from where request is read</param>
@@ -324,7 +324,7 @@ namespace System.Net.Http.Formatting.Parsers
         }
 
         /// <summary>
-        /// Maintains information about the current header field being parsed. 
+        /// Maintains information about the current header field being parsed.
         /// </summary>
         private class CurrentHeaderFieldStore
         {

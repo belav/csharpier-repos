@@ -1755,7 +1755,7 @@ internal partial class Http2Connection
            request or response.  Malformed requests or responses that are
            detected MUST be treated as a stream error (Section 5.4.2) of type
            PROTOCOL_ERROR.
-
+           
            For malformed requests, a server MAY send an HTTP response prior to
            closing or resetting the stream.  Clients MUST NOT accept a malformed
            response.  Note that these requirements are intended to protect

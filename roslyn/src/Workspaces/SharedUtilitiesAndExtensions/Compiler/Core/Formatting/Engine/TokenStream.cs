@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Formatting
 {
     /// <summary>
     /// This class takes care of tokens consumed in the formatting engine.
-    /// 
+    ///
     /// It will maintain information changed compared to original token information. and answers
     /// information about tokens.
     /// </summary>
@@ -291,7 +291,7 @@ namespace Microsoft.CodeAnalysis.Formatting
         }
 
         /// <summary>
-        /// Get column of the token 
+        /// Get column of the token
         /// * column means text position on a line where all tabs are converted to spaces that first position on a line becomes 0
         /// </summary>
         private int GetColumn(

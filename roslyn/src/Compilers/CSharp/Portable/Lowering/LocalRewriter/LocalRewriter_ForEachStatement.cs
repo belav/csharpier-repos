@@ -715,15 +715,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Lower a foreach loop that will enumerate a collection via indexing.
-        /// 
+        ///
         /// <![CDATA[
-        /// 
+        ///
         /// Indexable a = x;
         /// for (int p = 0; p < a.Length; p = p + 1) {
         ///     V v = (V)a[p];   /* OR */   (D1 d1, ...) = (V)a[p];
         ///     // body
         /// }
-        /// 
+        ///
         /// ]]>
         /// </summary>
         /// <remarks>
@@ -976,7 +976,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Lower a foreach loop that will enumerate a single-dimensional array.
-        /// 
+        ///
         /// A[] a = x;
         /// for (int p = 0; p &lt; a.Length; p = p + 1) {
         ///     V v = (V)a[p];   /* OR */   (D1 d1, ...) = (V)a[p];
@@ -984,9 +984,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// }
         /// </summary>
         /// <remarks>
-        /// We will follow Dev10 in diverging from the C# 4 spec by ignoring Array's 
+        /// We will follow Dev10 in diverging from the C# 4 spec by ignoring Array's
         /// implementation of IEnumerable and just indexing into its elements.
-        /// 
+        ///
         /// NOTE: We're assuming that sequence points have already been generated.
         /// Otherwise, lowering to for-loops would generated spurious ones.
         /// </remarks>
@@ -1134,7 +1134,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Lower a foreach loop that will enumerate a multi-dimensional array.
-        /// 
+        ///
         /// A[...] a = x;
         /// int q_0 = a.GetUpperBound(0), q_1 = a.GetUpperBound(1), ...;
         /// for (int p_0 = a.GetLowerBound(0); p_0 &lt;= q_0; p_0 = p_0 + 1)
@@ -1146,9 +1146,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         ///             }
         /// </summary>
         /// <remarks>
-        /// We will follow Dev10 in diverging from the C# 4 spec by ignoring Array's 
+        /// We will follow Dev10 in diverging from the C# 4 spec by ignoring Array's
         /// implementation of IEnumerable and just indexing into its elements.
-        /// 
+        ///
         /// NOTE: We're assuming that sequence points have already been generated.
         /// Otherwise, lowering to nested for-loops would generated spurious ones.
         /// </remarks>
@@ -1547,7 +1547,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// still-true:
         /// /* body */
         /// goto still-true;
-        /// ]]> 
+        /// ]]>
         /// </summary>
         private BoundStatement MakeWhileTrueLoop(BoundForEachStatement loop, BoundBlock body)
         {

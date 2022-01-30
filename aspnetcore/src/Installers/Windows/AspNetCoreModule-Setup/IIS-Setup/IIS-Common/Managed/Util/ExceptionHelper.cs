@@ -14,7 +14,7 @@ namespace Microsoft.WebMatrix.Utility
         private const int PublicKeyTokenLength = 8;
 
         /// <summary>
-        /// This will return a list of assemblies that are present in the call stack for 
+        /// This will return a list of assemblies that are present in the call stack for
         /// the input exception. The list CAN have duplicates.
         /// </summary>
         /// <param name="exception"></param>

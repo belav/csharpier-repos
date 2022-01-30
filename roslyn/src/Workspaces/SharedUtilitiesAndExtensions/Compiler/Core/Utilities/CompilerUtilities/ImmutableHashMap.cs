@@ -1130,7 +1130,7 @@ namespace Roslyn.Collections.Immutable
             /// </summary>
             private KeyValuePair<TKey, TValue>[]? _contents;
 
-            /// <summary>   
+            /// <summary>
             /// Initializes a new instance of the <see cref="DebuggerProxy"/> class.
             /// </summary>
             /// <param name="map">The collection to display in the debugger</param>

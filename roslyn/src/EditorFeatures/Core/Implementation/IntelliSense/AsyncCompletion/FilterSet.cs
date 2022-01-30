@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
     /// <summary>
     /// Provides an efficient way to compute a set of completion filters associated with a collection of completion items.
     /// Presence of expander and filter in the set have different meanings. Set contains a filter means the filter is
-    /// available but unselected, whereas it means available and selected for an expander. Note that even though VS supports 
+    /// available but unselected, whereas it means available and selected for an expander. Note that even though VS supports
     /// having multiple expanders, we only support one.
     /// </summary>
     internal sealed class FilterSet

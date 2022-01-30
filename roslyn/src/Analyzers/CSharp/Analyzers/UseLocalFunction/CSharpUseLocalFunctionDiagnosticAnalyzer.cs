@@ -19,22 +19,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
 {
     /// <summary>
     /// Looks for code of the form:
-    /// 
+    ///
     ///     Func&lt;int, int&gt; fib = n =>
     ///     {
     ///         if (n &lt;= 2)
     ///             return 1
-    ///             
+    ///
     ///         return fib(n - 1) + fib(n - 2);
     ///     }
-    ///     
+    ///
     /// and converts it to:
-    /// 
+    ///
     ///     int fib(int n)
     ///     {
     ///         if (n &lt;= 2)
     ///             return 1
-    ///             
+    ///
     ///         return fib(n - 1) + fib(n - 2);
     ///     }
     /// </summary>

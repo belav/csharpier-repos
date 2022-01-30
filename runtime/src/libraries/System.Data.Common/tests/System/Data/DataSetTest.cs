@@ -507,31 +507,31 @@ namespace System.Data.Tests
         [Fact]
         public void WriteDiffReadAutoWriteSchema ()
         {
-            DataSet ds = new DataSet ();
-            ds.Tables.Add ("Table1");
-            ds.Tables.Add ("Table2");
-            ds.Tables [0].Columns.Add ("Column1_1");
-            ds.Tables [0].Columns.Add ("Column1_2");
-            ds.Tables [0].Columns.Add ("Column1_3");
-            ds.Tables [1].Columns.Add ("Column2_1");
-            ds.Tables [1].Columns.Add ("Column2_2");
-            ds.Tables [1].Columns.Add ("Column2_3");
-            ds.Tables [0].Rows.Add (new object [] {"ppp", "www", "xxx"});
-
-            // save as diffgram
-            StringWriter sw = new StringWriter ();
-            ds.WriteXml (sw, XmlWriteMode.DiffGram);
-            string xml = sw.ToString ();
-            string result = new StreamReader ("Test/System.Data/DataSetReadXmlTest1.xml", Encoding.ASCII).ReadToEnd ();
-            Assert.Equal (result, xml);
-
-            // load diffgram above
-            ds.ReadXml (new StringReader (sw.ToString ()));
-            sw = new StringWriter ();
-            ds.WriteXml (sw, XmlWriteMode.WriteSchema);
-            xml = sw.ToString ();
-            result = new StreamReader ("Test/System.Data/DataSetReadXmlTest2.xml", Encoding.ASCII).ReadToEnd ();
-            Assert.Equal (result, xml);
+        DataSet ds = new DataSet ();
+        ds.Tables.Add ("Table1");
+        ds.Tables.Add ("Table2");
+        ds.Tables [0].Columns.Add ("Column1_1");
+        ds.Tables [0].Columns.Add ("Column1_2");
+        ds.Tables [0].Columns.Add ("Column1_3");
+        ds.Tables [1].Columns.Add ("Column2_1");
+        ds.Tables [1].Columns.Add ("Column2_2");
+        ds.Tables [1].Columns.Add ("Column2_3");
+        ds.Tables [0].Rows.Add (new object [] {"ppp", "www", "xxx"});
+        
+        // save as diffgram
+        StringWriter sw = new StringWriter ();
+        ds.WriteXml (sw, XmlWriteMode.DiffGram);
+        string xml = sw.ToString ();
+        string result = new StreamReader ("Test/System.Data/DataSetReadXmlTest1.xml", Encoding.ASCII).ReadToEnd ();
+        Assert.Equal (result, xml);
+        
+        // load diffgram above
+        ds.ReadXml (new StringReader (sw.ToString ()));
+        sw = new StringWriter ();
+        ds.WriteXml (sw, XmlWriteMode.WriteSchema);
+        xml = sw.ToString ();
+        result = new StreamReader ("Test/System.Data/DataSetReadXmlTest2.xml", Encoding.ASCII).ReadToEnd ();
+        Assert.Equal (result, xml);
         }
         */
 

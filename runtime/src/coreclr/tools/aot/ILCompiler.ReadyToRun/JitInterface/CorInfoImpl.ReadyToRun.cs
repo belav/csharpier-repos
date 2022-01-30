@@ -2202,7 +2202,7 @@ namespace Internal.JitInterface
                 ** matching the CoreCLR algorithm (MethodTableBuilder).
                 if (MethodInSystemVersionBubble(callerMethod) && MethodInSystemVersionBubble(targetMethod))
                 {
-                    pResult->kind = CORINFO_CALL_KIND.CORINFO_VIRTUALCALL_VTABLE;
+                pResult->kind = CORINFO_CALL_KIND.CORINFO_VIRTUALCALL_VTABLE;
                 }
                 */
             }

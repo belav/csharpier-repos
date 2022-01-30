@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly SyntaxTree _syntaxTree;
 
         /// <summary>
-        /// Note, the name of this field could be somewhat confusing because it is also 
+        /// Note, the name of this field could be somewhat confusing because it is also
         /// used to store models for attributes and default parameter values, which are
         /// not members.
         /// </summary>
@@ -2623,7 +2623,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Given a using declaration get the corresponding symbol for the using alias that was introduced.  
+        /// Given a using declaration get the corresponding symbol for the using alias that was introduced.
         /// </summary>
         /// <param name="declarationSyntax"></param>
         /// <param name="cancellationToken">The cancellation token.</param>

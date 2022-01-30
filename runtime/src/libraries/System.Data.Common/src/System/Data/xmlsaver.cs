@@ -433,10 +433,10 @@ namespace System.Data
         {
             /*
                         if (_ds != null)
-                            rootSchema.SetAttribute(Keywords.XSDID, XmlConvert.EncodeLocalName(_ds.DataSetName));
+                        rootSchema.SetAttribute(Keywords.XSDID, XmlConvert.EncodeLocalName(_ds.DataSetName));
                         else
-                            rootSchema.SetAttribute(Keywords.XSDID, XmlConvert.EncodeLocalName("NewDataSet"));
-            */
+                        rootSchema.SetAttribute(Keywords.XSDID, XmlConvert.EncodeLocalName("NewDataSet"));
+                        */
 
 
             if (!string.IsNullOrEmpty(targetNamespace))

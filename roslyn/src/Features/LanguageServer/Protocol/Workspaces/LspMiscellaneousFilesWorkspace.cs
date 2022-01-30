@@ -20,9 +20,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
     /// <summary>
     /// Defines a default workspace for opened LSP files that are not found in any
     /// workspace registered by the <see cref="LspWorkspaceRegistrationService"/>.
-    /// If a document added here is subsequently found in a registered workspace, 
+    /// If a document added here is subsequently found in a registered workspace,
     /// the document is removed from this workspace.
-    /// 
+    ///
     /// Future work for this workspace includes supporting basic metadata references (mscorlib, System dlls, etc),
     /// but that is dependent on having a x-plat mechanism for retrieving those references from the framework / sdk.
     /// </summary>
@@ -55,7 +55,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
         /// <summary>
         /// Takes in a file URI and text and creates a misc project and document for the file.
-        /// 
+        ///
         /// Calls to this method and <see cref="TryRemoveMiscellaneousDocument(Uri)"/> are made
         /// from LSP text sync request handling which do not run concurrently.
         /// </summary>
@@ -93,7 +93,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
         /// <summary>
         /// Removes a document with the matching file path from this workspace.
-        /// 
+        ///
         /// Calls to this method and <see cref="AddMiscellaneousDocument(Uri, SourceText)"/> are made
         /// from LSP text sync request handling which do not run concurrently.
         /// </summary>

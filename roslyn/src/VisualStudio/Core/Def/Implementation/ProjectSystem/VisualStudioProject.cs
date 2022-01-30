@@ -511,10 +511,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         /// The default namespace of the project.
         /// </summary>
         /// <remarks>
-        /// In C#, this is defined as the value of "rootnamespace" msbuild property. Right now VB doesn't 
+        /// In C#, this is defined as the value of "rootnamespace" msbuild property. Right now VB doesn't
         /// have the concept of "default namespace", but we conjure one in workspace by assigning the value
         /// of the project's root namespace to it. So various features can choose to use it for their own purpose.
-        /// 
+        ///
         /// In the future, we might consider officially exposing "default namespace" for VB project
         /// (e.g.through a "defaultnamespace" msbuild property)
         /// </remarks>
@@ -530,8 +530,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         }
 
         /// <summary>
-        /// The max language version supported for this project, if applicable. Useful to help indicate what 
-        /// language version features should be suggested to a user, as well as if they can be upgraded. 
+        /// The max language version supported for this project, if applicable. Useful to help indicate what
+        /// language version features should be suggested to a user, as well as if they can be upgraded.
         /// </summary>
         internal string? MaxLangVersion
         {

@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
         string FilePath { get; }
 
         /// <summary>
-        /// The error message produced when a failure occurred attempting to access the project file. 
+        /// The error message produced when a failure occurred attempting to access the project file.
         /// If a failure occurred the project file info will be inaccessible.
         /// </summary>
         DiagnosticLog Log { get; }

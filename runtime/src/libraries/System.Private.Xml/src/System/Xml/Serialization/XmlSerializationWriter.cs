@@ -2362,17 +2362,17 @@ namespace System.Xml.Serialization
 
         /*
         Exception GetReflectionVariableException(string typeFullName, string memberName){
-            string key;
-            if (memberName == null)
-                key = typeFullName;
-            else
-                key = memberName+":"+typeFullName;
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            foreach (object varAvail in reflectionVariables.Keys){
-                sb.Append(varAvail.ToString());
-                sb.Append("\n");
-            }
-            return new Exception("No reflection variable for " + key + "\nAvailable keys\n"+sb.ToString());
+        string key;
+        if (memberName == null)
+        key = typeFullName;
+        else
+        key = memberName+":"+typeFullName;
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        foreach (object varAvail in reflectionVariables.Keys){
+        sb.Append(varAvail.ToString());
+        sb.Append("\n");
+        }
+        return new Exception("No reflection variable for " + key + "\nAvailable keys\n"+sb.ToString());
         }*/
 
         internal string GetStringForEnumMember(

@@ -1506,7 +1506,7 @@ namespace System.Data.Common
                 p = command.CreateParameter();
                 /*if (null == p) {
                     // CONSIDER: throw exception
-                }*/
+                    }*/
             }
             Debug.Assert(null != p, "null CreateParameter");
             return p;
@@ -1577,7 +1577,7 @@ namespace System.Data.Common
                 command = select.Connection!.CreateCommand();
                 /*if (null == command) {
                     // CONSIDER: throw exception
-                }*/
+                    }*/
 
                 // the following properties are only initialized when the object is created
                 // all other properites are reinitialized on every row

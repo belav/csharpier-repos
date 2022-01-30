@@ -57,7 +57,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         /// <summary>
         /// To avoid accessing metadata/symbol readers that have been disposed,
-        /// read lock is acquired before every operation that may access a baseline module/symbol reader 
+        /// read lock is acquired before every operation that may access a baseline module/symbol reader
         /// and write lock when the baseline readers are being disposed.
         /// </summary>
         private readonly ReaderWriterLockSlim _baselineAccessLock = new();
@@ -1147,11 +1147,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// Called by the debugger to determine whether a non-leaf active statement is in an exception region,
         /// so it can determine whether the active statement can be remapped. This only happens when the EnC is about to apply changes.
         /// If the debugger determines we can remap active statements, the application of changes proceeds.
-        /// 
+        ///
         /// TODO: remove (https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1310859)
         /// </summary>
         /// <returns>
-        /// True if the instruction is located within an exception region, false if it is not, null if the instruction isn't an active statement in a changed method 
+        /// True if the instruction is located within an exception region, false if it is not, null if the instruction isn't an active statement in a changed method
         /// or the exception regions can't be determined.
         /// </returns>
         public async ValueTask<bool?> IsActiveStatementInExceptionRegionAsync(

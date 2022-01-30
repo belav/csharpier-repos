@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
     /// to a single underlying tuple type, System.ValueTuple. Since the
     /// names aren't part of the underlying tuple type they have to be
     /// recorded somewhere else.
-    /// 
+    ///
     /// Roslyn records tuple names in an attribute: the
     /// TupleElementNamesAttribute. The attribute contains a single string
     /// array which records the names of the tuple elements in a pre-order
@@ -26,32 +26,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
     /// <see cref="DecodeTupleTypesIfApplicable(TypeSymbol, EntityHandle, PEModuleSymbol)"/>
     /// can be used to extract tuple names and types from metadata and create
     /// a <see cref="NamedTypeSymbol"/> with attached names.
-    /// 
+    ///
     /// <example>
     /// For instance, a method returning a tuple
-    /// 
+    ///
     /// <code>
     ///     (int x, int y) M() { ... }
     /// </code>
     ///
     /// will be encoded using an attribute on the return type as follows
-    /// 
+    ///
     /// <code>
     ///     [return: TupleElementNamesAttribute(new[] { "x", "y" })]
     ///     System.ValueTuple&lt;int, int&gt; M() { ... }
     /// </code>
     /// </example>
-    /// 
+    ///
     /// <example>
     /// For nested type parameters, we expand the tuple names in a pre-order
     /// traversal:
-    /// 
+    ///
     /// <code>
     ///     class C : BaseType&lt;((int e1, int e2) e3, int e4)&lt; { ... }
     /// </code>
     ///
     /// becomes
-    /// 
+    ///
     /// <code>
     ///     [TupleElementNamesAttribute(new[] { "e3", "e4", "e1", "e2" });
     ///     class C : BaseType&lt;System.ValueTuple&lt;

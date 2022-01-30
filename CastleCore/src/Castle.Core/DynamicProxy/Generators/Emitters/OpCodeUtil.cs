@@ -21,10 +21,10 @@ namespace Castle.DynamicProxy.Generators.Emitters
     internal abstract class OpCodeUtil
     {
         /// <summary>
-		///   Emits a load indirect opcode of the appropriate type for a value or object reference.
-		///   Pops a pointer off the evaluation stack, dereferences it and loads
-		///   a value of the specified type.
-		/// </summary>
+        ///   Emits a load indirect opcode of the appropriate type for a value or object reference.
+        ///   Pops a pointer off the evaluation stack, dereferences it and loads
+        ///   a value of the specified type.
+        /// </summary>
         public static void EmitLoadIndirectOpCodeForType(ILGenerator gen, Type type)
         {
             if (type.IsEnum)
@@ -65,9 +65,9 @@ namespace Castle.DynamicProxy.Generators.Emitters
         }
 
         /// <summary>
-		///   Emits a load opcode of the appropriate kind for the constant default value of a
-		///   type, such as 0 for value types and null for reference types.
-		/// </summary>
+        ///   Emits a load opcode of the appropriate kind for the constant default value of a
+        ///   type, such as 0 for value types and null for reference types.
+        /// </summary>
         public static void EmitLoadOpCodeForDefaultValueOfType(ILGenerator gen, Type type)
         {
             if (type.IsPrimitive)
@@ -103,10 +103,10 @@ namespace Castle.DynamicProxy.Generators.Emitters
         }
 
         /// <summary>
-		///   Emits a store indirectopcode of the appropriate type for a value or object reference.
-		///   Pops a value of the specified type and a pointer off the evaluation stack, and
-		///   stores the value.
-		/// </summary>
+        ///   Emits a store indirectopcode of the appropriate type for a value or object reference.
+        ///   Pops a value of the specified type and a pointer off the evaluation stack, and
+        ///   stores the value.
+        /// </summary>
         public static void EmitStoreIndirectOpCodeForType(ILGenerator gen, Type type)
         {
             if (type.IsEnum)

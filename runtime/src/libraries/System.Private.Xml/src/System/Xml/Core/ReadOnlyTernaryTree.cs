@@ -64,10 +64,10 @@ namespace System.Xml
 
         /*  ----------------------------------------------------------------------------
             findStringI()
-
+            
             Find a Unicode string in the ternary tree and return the data byte it's
             mapped to.  Find is case-insensitive.
-        */
+            */
         public byte FindCaseInsensitiveString(string stringToFind)
         {
             //Debug.Assert(wszFind != null && wszFind.Length != 0);

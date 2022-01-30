@@ -9,7 +9,7 @@ using System.Linq;
 namespace System.CommandLine
 {
     /// <summary>
-    /// A symbol defining a named parameter and a value for that parameter. 
+    /// A symbol defining a named parameter and a value for that parameter.
     /// </summary>
     /// <seealso cref="System.CommandLine.IdentifierSymbol" />
     /// <seealso cref="System.CommandLine.IOption" />

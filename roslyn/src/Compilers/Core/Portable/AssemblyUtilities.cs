@@ -22,7 +22,7 @@ namespace Roslyn.Utilities
         /// <remarks>
         /// Dependencies are identified by simply checking the name of an assembly
         /// reference against a file name; if they match the file is considered a
-        /// dependency. Other factors, such as version, culture, public key, etc., 
+        /// dependency. Other factors, such as version, culture, public key, etc.,
         /// are not considered, and so the returned collection may include items that
         /// cannot in fact satisfy the original assembly's dependencies.
         /// </remarks>

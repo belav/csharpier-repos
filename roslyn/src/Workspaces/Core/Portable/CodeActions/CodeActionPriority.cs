@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CodeActions
     /// and low priority items do not.
     /// </summary>
     /// <remarks>
-    /// If <see cref="CodeActionPriority.High"/> is used, the feature that specifies that value should 
+    /// If <see cref="CodeActionPriority.High"/> is used, the feature that specifies that value should
     /// implement and return <see cref="CodeActionRequestPriority.High"/> for <see cref="IBuiltInAnalyzer.RequestPriority"/>,
     /// <see cref="T:Microsoft.CodeAnalysis.CodeFixes.CodeFixProvider.RequestPriority"/> and
     /// <see cref="T:Microsoft.CodeAnalysis.CodeRefactorings.CodeRefactoringProvider.RequestPriority"/>. This

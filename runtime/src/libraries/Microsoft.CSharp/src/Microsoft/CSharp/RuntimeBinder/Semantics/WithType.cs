@@ -8,18 +8,18 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     /*
     // ===========================================================================
-       Defines structs that package an aggregate member together with
-       generic type argument information.
+    Defines structs that package an aggregate member together with
+    generic type argument information.
     // ===========================================================================*/
     /******************************************************************************
         SymWithType and its cousins. These package an aggregate member (field,
         prop, event, or meth) together with the particular instantiation of the
         aggregate (the AggregateType).
-
+        
         The default constructor does nothing so these are not safe to use
         uninitialized. Note that when they are used as member of an EXPR they
         are automatically zero filled by newExpr.
-    ******************************************************************************/
+        ******************************************************************************/
     internal class SymWithType
     {
         private AggregateType _ats;
@@ -187,11 +187,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         the method type arguments. Properties will never have type args, but
         methods and properties share a lot of code so it's convenient to allow
         both here.
-
+        
         The default constructor does nothing so these are not safe to use
         uninitialized. Note that when they are used as member of an EXPR they
         are automatically zero filled by newExpr.
-    ******************************************************************************/
+        ******************************************************************************/
 
     internal class MethPropWithInst : MethPropWithType
     {

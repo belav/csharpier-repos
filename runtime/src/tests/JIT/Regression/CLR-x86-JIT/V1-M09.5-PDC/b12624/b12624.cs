@@ -113,48 +113,48 @@ namespace DefaultNamespace
             public X4 X5_D;
             public X4 X5_E;
             public X4 X5_F;
-        */
+            */
     }
 
     /*
     public struct X6
     {
-        public X5 X6_0;
-        public X5 X6_1;
-        public X5 X6_2;
-        public X5 X6_3;
-        public X5 X6_4;       // ldfld  with NULL object
-        public X5 X6_5;
-        public X5 X6_6;
-        public X5 X6_7;
-        public X5 X6_8;
-        public X5 X6_9;
-        public X5 X6_A;
-        public X5 X6_B;
-        public X5 X6_C;
-        public X5 X6_D;
-        public X5 X6_E;
-        public X5 X6_F;
+    public X5 X6_0;
+    public X5 X6_1;
+    public X5 X6_2;
+    public X5 X6_3;
+    public X5 X6_4;       // ldfld  with NULL object
+    public X5 X6_5;
+    public X5 X6_6;
+    public X5 X6_7;
+    public X5 X6_8;
+    public X5 X6_9;
+    public X5 X6_A;
+    public X5 X6_B;
+    public X5 X6_C;
+    public X5 X6_D;
+    public X5 X6_E;
+    public X5 X6_F;
     }
-
+    
     public struct X7
     {
-        public X6 X7_0;
-        public X6 X7_1;
-        public X6 X7_2;
-        public X6 X7_3;
-        public X6 X7_4;
-        public X6 X7_5;
-        public X6 X7_6;
-        public X6 X7_7;
-        public X6 X7_8;
-        public X6 X7_9;
-        public X6 X7_A;
-        public X6 X7_B;
-        public X6 X7_C;
-        public X6 X7_D;
-        public X6 X7_E;
-        public X6 X7_F;
+    public X6 X7_0;
+    public X6 X7_1;
+    public X6 X7_2;
+    public X6 X7_3;
+    public X6 X7_4;
+    public X6 X7_5;
+    public X6 X7_6;
+    public X6 X7_7;
+    public X6 X7_8;
+    public X6 X7_9;
+    public X6 X7_A;
+    public X6 X7_B;
+    public X6 X7_C;
+    public X6 X7_D;
+    public X6 X7_E;
+    public X6 X7_F;
     }
     */
 

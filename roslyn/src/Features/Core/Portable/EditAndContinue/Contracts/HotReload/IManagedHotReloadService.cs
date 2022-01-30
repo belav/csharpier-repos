@@ -60,7 +60,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// </summary>
         /// <param name="cancellation">Cancellation token.</param>
         /// <returns>
-        /// Returns an array of identifiers. If different agents have different capabilities, it's up to the manager 
+        /// Returns an array of identifiers. If different agents have different capabilities, it's up to the manager
         /// to merge them and present unified set of capabilities to the language service.
         /// The merging policy is entirely dependent on how the manager applies changes to multiple runtimes.
         /// </returns>

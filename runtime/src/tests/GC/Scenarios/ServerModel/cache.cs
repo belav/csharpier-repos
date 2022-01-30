@@ -6,7 +6,7 @@ using System;
 namespace ServerSimulator
 {
     /// <summary>
-    /// This class simulates a cache of user-defined size filled with 
+    /// This class simulates a cache of user-defined size filled with
     /// arrays of objects of user-defined size, replacing them using either a FIFO or random algorithm
     /// </summary>
     internal sealed class Cache

@@ -18,7 +18,7 @@ namespace Roslyn.Test.Performance.Utilities
     public static class RuntimeSettings
     {
         /// <summary>
-        /// Used as a pseudo-return value for tests to send test objects 
+        /// Used as a pseudo-return value for tests to send test objects
         /// back to the runner.
         /// </summary>
         public static PerfTest[] ResultTests = null;
@@ -192,9 +192,9 @@ namespace Roslyn.Test.Performance.Utilities
         }
 
         /// <summary>
-        /// Shells out and returns the string gathered from the stdout of the 
+        /// Shells out and returns the string gathered from the stdout of the
         /// executing process.
-        /// 
+        ///
         /// Throws an exception if the process fails.
         /// </summary>
         public static string StdoutFrom(
@@ -242,8 +242,8 @@ namespace Roslyn.Test.Performance.Utilities
         }
 
         /// <summary>
-        /// Either runs the provided tests, or schedules them to be run by the 
-        /// runner. 
+        /// Either runs the provided tests, or schedules them to be run by the
+        /// runner.
         /// </summary>
         public static void TestThisPlease(params PerfTest[] tests)
         {

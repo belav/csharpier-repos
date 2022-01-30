@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Contract for manipulating the Dictionary adapter.
-	/// </summary>
+    /// Contract for manipulating the Dictionary adapter.
+    /// </summary>
     public interface IDictionaryAdapter
         : IDictionaryEdit,
           IDictionaryNotify,

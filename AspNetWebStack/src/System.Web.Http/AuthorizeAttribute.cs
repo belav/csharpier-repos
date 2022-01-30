@@ -85,7 +85,7 @@ namespace System.Web.Http
         /// <summary>
         /// Determines whether access for this particular request is authorized. This method uses the user <see cref="IPrincipal"/>
         /// returned via <see cref="HttpRequestContext.Principal"/>. Authorization is denied if the user is not authenticated,
-        /// the user is not in the authorized group of <see cref="Users"/> (if defined), or if the user is not in any of the authorized 
+        /// the user is not in the authorized group of <see cref="Users"/> (if defined), or if the user is not in any of the authorized
         /// <see cref="Roles"/> (if defined).
         /// </summary>
         /// <param name="actionContext">The context.</param>
@@ -126,7 +126,7 @@ namespace System.Web.Http
         /// - the user is not authenticated,
         /// - the user is authenticated but is not in the authorized group of <see cref="Users"/> (if defined), or if the user
         /// is not in any of the authorized <see cref="Roles"/> (if defined).
-        /// 
+        ///
         /// If authorization is denied then this method will invoke <see cref="HandleUnauthorizedRequest(HttpActionContext)"/> to process the unauthorized request.
         /// </summary>
         /// <remarks>You can use <see cref="AllowAnonymousAttribute"/> to cause authorization checks to be skipped for a particular

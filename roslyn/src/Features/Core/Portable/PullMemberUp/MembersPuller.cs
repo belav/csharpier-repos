@@ -517,7 +517,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
 
         /// <summary>
         /// In the case where we have leading whitespace in front of the first member and there are no imports, adding imports
-        /// moves that trivia to above the import (and sometimes removes it entirely if the import is later removed). 
+        /// moves that trivia to above the import (and sometimes removes it entirely if the import is later removed).
         /// So, we want to cache the trivia before, delete it, then add it back in after the imports are added.
         /// </summary>
         private static SyntaxTriviaList GetLeadingTriviaBeforeFirstMember(

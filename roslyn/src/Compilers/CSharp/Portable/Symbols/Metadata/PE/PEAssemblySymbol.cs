@@ -39,15 +39,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         /// <summary>
         /// An array of assemblies involved in canonical type resolution of
-        /// NoPia local types defined within this assembly. In other words, all 
+        /// NoPia local types defined within this assembly. In other words, all
         /// references used by a compilation referencing this assembly.
         /// The array and its content is provided by ReferenceManager and must not be modified.
         /// </summary>
         private ImmutableArray<AssemblySymbol> _noPiaResolutionAssemblies;
 
         /// <summary>
-        /// An array of assemblies referenced by this assembly, which are linked (/l-ed) by 
-        /// each compilation that is using this AssemblySymbol as a reference. 
+        /// An array of assemblies referenced by this assembly, which are linked (/l-ed) by
+        /// each compilation that is using this AssemblySymbol as a reference.
         /// If this AssemblySymbol is linked too, it will be in this array too.
         /// The array and its content is provided by ReferenceManager and must not be modified.
         /// </summary>

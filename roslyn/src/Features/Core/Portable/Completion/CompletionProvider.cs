@@ -67,7 +67,7 @@ namespace Microsoft.CodeAnalysis.Completion
 
         /// <summary>
         /// This allows Completion Providers that indicated they were triggered textually to use syntax to
-        /// confirm they are really triggered, or decide they are not actually triggered and should become 
+        /// confirm they are really triggered, or decide they are not actually triggered and should become
         /// an augmenting provider instead.
         /// </summary>
         internal virtual async Task<bool> IsSyntacticTriggerCharacterAsync(

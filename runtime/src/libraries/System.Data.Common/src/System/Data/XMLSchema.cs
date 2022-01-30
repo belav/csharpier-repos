@@ -1171,7 +1171,7 @@ namespace System.Data
                 /*
                 HandleParticle(ct.CompiledParticle, table, tableChildren, isBase);
                 foreach (XmlSchemaAttribute s in ct.Attributes){
-                    HandleAttributeColumn(s, table, isBase);
+                HandleAttributeColumn(s, table, isBase);
                 }
                 */
 
@@ -1434,12 +1434,12 @@ namespace System.Data
 
         /*
         <key name="fk">
-            <selector>../Customers</selector>
-            <field>ID</field>
+        <selector>../Customers</selector>
+        <field>ID</field>
         </key>
         <keyref refer="fk">
-            <selector>.</selector>
-            <field>CustID</field>
+        <selector>.</selector>
+        <field>CustID</field>
         </keyref>
         */
 
@@ -1873,8 +1873,8 @@ namespace System.Data
 
             /*
                         if (xmlContent == XmlContent.Mixed) {
-                            string textColumn = GenUniqueColumnName(table.TableName+ "_Text", table);
-                            table.XmlText = new DataColumn(textColumn, typeof(string), null, MappingType.Text);
+                        string textColumn = GenUniqueColumnName(table.TableName+ "_Text", table);
+                        table.XmlText = new DataColumn(textColumn, typeof(string), null, MappingType.Text);
                         } */
 
             SetProperties(table, node.UnhandledAttributes);
@@ -1897,12 +1897,12 @@ namespace System.Data
                             HandleConstraint(key);
                         /*                     if (GetTableNamespace(key) != null) {
                                                     if (GetTableNamespace(key) == table.Namespace)
-                                                        HandleConstraint(key);
-                                                }
-                                                else {
                                                     HandleConstraint(key);
-                                                }
-                        */
+                                                    }
+                                                    else {
+                                                    HandleConstraint(key);
+                                                    }
+                                                    */
                     }
                 }
             }
@@ -2158,11 +2158,11 @@ namespace System.Data
 
         /*  later we may need such a function
                 private Boolean IsUDSimpleType(string qname) {
-                    if (udSimpleTypes == null)
-                        return false;
-                    return (udSimpleTypes.Contains(qname));
+                if (udSimpleTypes == null)
+                return false;
+                return (udSimpleTypes.Contains(qname));
                 }
-        */
+                */
         internal static bool IsXsdType(string name)
         {
 #if DEBUG

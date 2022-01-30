@@ -388,7 +388,7 @@ namespace System.Data.Tests
             DataRow[] arr = ds1.Tables[1].Select("ChildId is null");
             /*foreach (DataRow dr in arr)
                     {
-                        Assert.Null(dr["ChildId"]);
+                    Assert.Null(dr["ChildId"]);
                     }*/
 
             Assert.Equal(4, arr.Length);
@@ -574,9 +574,9 @@ namespace System.Data.Tests
 
                     ds.Tables[0].Rows[0]["ParentId"] = 5;
                     /*ds.Tables[0].AcceptChanges();
-                ds.Tables[1].AcceptChanges();
-                //Checking the table
-                Compare(ds.Tables[1].Select("ParentId=8").Length ,0);*/
+                    ds.Tables[1].AcceptChanges();
+                    //Checking the table
+                    Compare(ds.Tables[1].Select("ParentId=8").Length ,0);*/
                 }
             );
         }

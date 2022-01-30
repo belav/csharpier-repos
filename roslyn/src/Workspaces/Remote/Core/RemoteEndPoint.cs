@@ -461,7 +461,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
         /// <summary>
         /// Handle disconnection event, so that we detect disconnection as soon as it happens
-        /// without waiting for the next failing remote call. The remote call may not happen 
+        /// without waiting for the next failing remote call. The remote call may not happen
         /// if there is an issue with the connection. E.g. the client end point might not receive
         /// a callback from server, or the server end point might not receive a call from client.
         /// </summary>

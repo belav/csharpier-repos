@@ -18,8 +18,8 @@ namespace Castle.Components.DictionaryAdapter
     using System.ComponentModel;
 
     /// <summary>
-	/// Contract for editing the Dictionary adapter.
-	/// </summary>
+    /// Contract for editing the Dictionary adapter.
+    /// </summary>
     public interface IDictionaryEdit : IEditableObject, IRevertibleChangeTracking
     {
         bool CanEdit { get; }

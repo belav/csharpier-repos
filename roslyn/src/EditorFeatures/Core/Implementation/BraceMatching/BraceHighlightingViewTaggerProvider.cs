@@ -134,14 +134,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
         /// Given code like   ()^()  (where ^ is the caret position), returns the two pairs of
         /// matching braces on the left and the right of the position.  Note: a brace matching
         /// pair is only returned if the position is on the left-side of hte start brace, or the
-        /// right side of end brace.  So, for example, if you have (^()), then only the inner 
+        /// right side of end brace.  So, for example, if you have (^()), then only the inner
         /// braces are returned as the position is not on the right-side of the outer braces.
-        /// 
+        ///
         /// This function also works for multi-character braces i.e.  ([  ])   In this case,
-        /// the rule is that the position has to be on the left side of the start brace, or 
+        /// the rule is that the position has to be on the left side of the start brace, or
         /// inside the start brace (but not at the end).  So,    ^([   ])  will return this
         /// as a brace match, as will  (^[    ]).  But   ([^   ])  will not.
-        /// 
+        ///
         /// The same goes for the braces on the the left of the caret.  i.e.:   ([   ])^
         /// will return the braces on the left, as will   ([   ]^).  But   ([   ^]) will not.
         /// </summary>

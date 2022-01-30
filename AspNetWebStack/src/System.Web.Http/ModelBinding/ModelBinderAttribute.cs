@@ -14,9 +14,9 @@ using System.Web.Http.ValueProviders;
 namespace System.Web.Http.ModelBinding
 {
     /// <summary>
-    /// Specify this parameter uses a model binder. This can optionally specify the specific model binder and 
-    /// value providers that drive that model binder. 
-    /// Derived attributes may provide convenience settings for the model binder or value provider. 
+    /// Specify this parameter uses a model binder. This can optionally specify the specific model binder and
+    /// value providers that drive that model binder.
+    /// Derived attributes may provide convenience settings for the model binder or value provider.
     /// </summary>
     [SuppressMessage(
         "Microsoft.Design",
@@ -43,9 +43,9 @@ namespace System.Web.Http.ModelBinding
         }
 
         /// <summary>
-        /// Sets the type of the model binder. 
-        /// This type must be a subclass of <see cref="ModelBinderProvider"/>  or <see cref="IModelBinder"/>      
-        /// If null, uses the default from the configuration. 
+        /// Sets the type of the model binder.
+        /// This type must be a subclass of <see cref="ModelBinderProvider"/>  or <see cref="IModelBinder"/>
+        /// If null, uses the default from the configuration.
         /// </summary>
         public Type BinderType { get; set; }
 

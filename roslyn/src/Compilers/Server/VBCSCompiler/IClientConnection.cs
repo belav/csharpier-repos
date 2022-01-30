@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
 {
     /// <summary>
     /// Abstraction over the connection to the client process.   This hides underlying connection
-    /// to facilitate better testing. 
+    /// to facilitate better testing.
     /// </summary>
     internal interface IClientConnection : IDisposable
     {
@@ -45,14 +45,14 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         void BeginListening();
 
         /// <summary>
-        /// Returns a <see cref="Task"/> that completes when a new <see cref="IClientConnection"/> is 
+        /// Returns a <see cref="Task"/> that completes when a new <see cref="IClientConnection"/> is
         /// received. If this is called after <see cref="EndListening"/> is called then an exception
         /// will be thrown.
         /// </summary>
         Task<IClientConnection> GetNextClientConnectionAsync();
 
         /// <summary>
-        /// Stop accepting new connections. It will also ensure that the last return from 
+        /// Stop accepting new connections. It will also ensure that the last return from
         /// <see cref="GetNextClientConnectionAsync"/> is either already in a completed state, or has scheduled an
         /// operation which will transition the task to a completed state.
         /// </summary>

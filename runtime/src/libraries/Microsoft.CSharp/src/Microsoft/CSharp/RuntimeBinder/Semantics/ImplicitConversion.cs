@@ -261,40 +261,40 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             /***************************************************************************************************
                 Called by BindImplicitConversion when the destination type is Nullable<T>. The following
                 conversions are handled by this method:
-
+                
                 * For S in { object, ValueType, interfaces implemented by underlying type} there is an explicit
-                  unboxing conversion S => T?
+                unboxing conversion S => T?
                 * System.Enum => T? there is an unboxing conversion if T is an enum type
                 * null => T? implemented as default(T?)
-
+                
                 * Implicit T?* => T?+ implemented by either wrapping or calling GetValueOrDefault the
-                  appropriate number of times.
+                appropriate number of times.
                 * If imp/exp S => T then imp/exp S => T?+ implemented by converting to T then wrapping the
-                  appropriate number of times.
+                appropriate number of times.
                 * If imp/exp S => T then imp/exp S?+ => T?+ implemented by calling GetValueOrDefault (m-1) times
-                  then calling HasValue, producing a null if it returns false, otherwise calling Value,
-                  converting to T then wrapping the appropriate number of times.
-
+                then calling HasValue, producing a null if it returns false, otherwise calling Value,
+                converting to T then wrapping the appropriate number of times.
+                
                 The 3 rules above can be summarized with the following recursive rules:
-
+                
                 * If imp/exp S => T? then imp/exp S? => T? implemented as
-                  qs.HasValue ? (T?)(qs.Value) : default(T?)
+                qs.HasValue ? (T?)(qs.Value) : default(T?)
                 * If imp/exp S => T then imp/exp S => T? implemented as new T?((T)s)
-
+                
                 This method also handles calling bindUserDefinedConverion. This method does NOT handle
                 the following conversions:
-
+                
                 * Implicit boxing conversion from S? to { object, ValueType, Enum, ifaces implemented by S }. (Handled by BindImplicitConversion.)
                 * If imp/exp S => T then explicit S?+ => T implemented by calling Value the appropriate number
-                  of times. (Handled by BindExplicitConversion.)
-
+                of times. (Handled by BindExplicitConversion.)
+                
                 The recursive equivalent is:
-
+                
                 * If imp/exp S => T and T is not nullable then explicit S? => T implemented as qs.Value
-
+                
                 Some nullable conversion are NOT standard conversions. In particular, if S => T is implicit
                 then S? => T is not standard. Similarly if S => T is not implicit then S => T? is not standard.
-            ***************************************************************************************************/
+                ***************************************************************************************************/
             [RequiresUnreferencedCode(Binder.TrimmerWarning)]
             private bool BindNubConversion(NullableType nubDst)
             {

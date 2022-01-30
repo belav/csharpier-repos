@@ -1635,7 +1635,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// If an expression node that declares synthesized short-lived locals (currently only sequence) contains
         /// a spill sequence (from an await or switch expression), these locals become long-lived since their
         /// values may be read by code that follows. We promote these variables to long-lived of kind
-        /// <see cref="SynthesizedLocalKind.Spill"/>. 
+        /// <see cref="SynthesizedLocalKind.Spill"/>.
         /// </summary>
         private void PromoteAndAddLocals(
             BoundSpillSequenceBuilder builder,

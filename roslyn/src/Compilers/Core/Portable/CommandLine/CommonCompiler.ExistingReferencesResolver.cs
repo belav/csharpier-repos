@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis
     {
         /// <summary>
         /// Looks for metadata references among the assembly file references given to the compilation when constructed.
-        /// When scripts are included into a project we don't want #r's to reference other assemblies than those 
+        /// When scripts are included into a project we don't want #r's to reference other assemblies than those
         /// specified explicitly in the project references.
         /// </summary>
         internal sealed class ExistingReferencesResolver

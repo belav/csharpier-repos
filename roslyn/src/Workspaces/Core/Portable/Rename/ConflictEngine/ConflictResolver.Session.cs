@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
     internal static partial class ConflictResolver
     {
         /// <summary>
-        /// Helper class to track the state necessary for finding/resolving conflicts in a 
+        /// Helper class to track the state necessary for finding/resolving conflicts in a
         /// rename session.
         /// </summary>
         private class Session
@@ -427,7 +427,7 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 #endif
 
             /// <summary>
-            /// Find conflicts in the new solution 
+            /// Find conflicts in the new solution
             /// </summary>
             private async Task<bool> IdentifyConflictsAsync(
                 HashSet<DocumentId> documentIdsForConflictResolution,
@@ -750,7 +750,7 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             }
 
             /// <summary>
-            /// Gets the list of the nodes that were annotated for a conflict check 
+            /// Gets the list of the nodes that were annotated for a conflict check
             /// </summary>
             private IEnumerable<(SyntaxNodeOrToken syntax, RenameActionAnnotation annotation)> GetNodesOrTokensToCheckForConflicts(
                 SyntaxNode syntaxRoot

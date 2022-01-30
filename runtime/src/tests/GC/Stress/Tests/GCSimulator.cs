@@ -41,7 +41,7 @@ namespace GCSimulator
     /// implementation.
     /// The only restriction on the ObjectContainer is that the objects contained in it must implement
     /// LifeTime interface.
-    /// Right now we have a simple array container as a stock implementation for that. for more information 
+    /// Right now we have a simple array container as a stock implementation for that. for more information
     /// see code:#ArrayContainer
     /// </summary>
     /// <param name="o"></param>
@@ -333,9 +333,9 @@ namespace GCSimulator
     }
 
     /// <summary>
-    /// we might want to implement a different strategy that decide the life time of the object based on the time 
+    /// we might want to implement a different strategy that decide the life time of the object based on the time
     /// elapsed since the last object access.
-    /// 
+    ///
     /// </summary>
     internal class TimeBasedLifeTimeStrategy : LifeTimeStrategy
     {

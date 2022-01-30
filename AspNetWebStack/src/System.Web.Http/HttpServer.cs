@@ -17,7 +17,7 @@ using System.Web.Http.Properties;
 namespace System.Web.Http
 {
     /// <summary>
-    /// Defines an implementation of an <see cref="HttpMessageHandler"/> which dispatches an 
+    /// Defines an implementation of an <see cref="HttpMessageHandler"/> which dispatches an
     /// incoming <see cref="HttpRequestMessage"/> and creates an <see cref="HttpResponseMessage"/> as a result.
     /// </summary>
     public class HttpServer : DelegatingHandler

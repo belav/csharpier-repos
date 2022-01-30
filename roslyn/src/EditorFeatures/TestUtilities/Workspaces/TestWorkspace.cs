@@ -478,25 +478,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             OnDocumentContextUpdated(documentId);
 
         /// <summary>
-        /// Creates a TestHostDocument backed by a projection buffer. The surface buffer is 
+        /// Creates a TestHostDocument backed by a projection buffer. The surface buffer is
         /// described by a markup string with {|name:|} style pointers to annotated spans that can
         /// be found in one of a set of provided documents. Unnamed spans in the documents (which
         /// must have both endpoints inside an annotated spans) and in the surface buffer markup are
         /// mapped and included in the resulting document.
-        /// 
+        ///
         /// If the markup string has the caret indicator "$$", then the caret will be placed at the
         /// corresponding position. If it does not, then the first span mapped into the projection
         /// buffer that contains the caret from its document is used.
         ///
         /// The result is a new TestHostDocument backed by a projection buffer including tracking
         /// spans from any number of documents and inert text from the markup itself.
-        /// 
+        ///
         /// As an example, consider surface buffer markup
         ///  ABC [|DEF|] [|GHI[|JKL|]|]{|S1:|} [|MNO{|S2:|}PQR S$$TU|] {|S4:|}{|S5:|}{|S3:|}
-        ///  
+        ///
         /// This contains 4 unnamed spans and references to 5 spans that should be found and
         /// included. Consider an included base document created from the following markup:
-        /// 
+        ///
         ///  public class C
         ///  {
         ///      public void M1()
@@ -507,25 +507,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         ///          int z = {|S3:123|} + {|S4:456|} + {|S5:789|};
         ///      }
         ///  }
-        /// 
+        ///
         /// The resulting projection buffer (with unnamed span markup preserved) would look like:
         ///  ABC [|DEF|] [|GHI[|JKL|]|]int [|abc[|d$$ef|]|] = goo; [|MNOint [|def|] = goo;PQR S$$TU|] 456789123
-        /// 
-        /// The union of unnamed spans from the surface buffer markup and each of the projected 
+        ///
+        /// The union of unnamed spans from the surface buffer markup and each of the projected
         /// spans is sorted as it would have been sorted by MarkupTestFile had it parsed the entire
         /// projection buffer as one file, which it would do in a stack-based manner. In our example,
         /// the order of the unnamed spans would be as follows:
-        /// 
+        ///
         ///  ABC [|DEF|] [|GHI[|JKL|]|]int [|abc[|d$$ef|]|] = goo; [|MNOint [|def|] = goo;PQR S$$TU|] 456789123
         ///       -----1       -----2            -------4                    -----6
         ///               ------------3     --------------5         --------------------------------7
         /// </summary>
-        /// <param name="markup">Describes the surface buffer, and contains a mix of inert text, 
-        /// named spans and unnamed spans. Any named spans must contain only the name portion 
-        /// (e.g. {|Span1:|} which must match the name of a span in one of the baseDocuments. 
+        /// <param name="markup">Describes the surface buffer, and contains a mix of inert text,
+        /// named spans and unnamed spans. Any named spans must contain only the name portion
+        /// (e.g. {|Span1:|} which must match the name of a span in one of the baseDocuments.
         /// Annotated spans cannot be nested but they can be adjacent, in which case order will be
         /// preserved. The markup may also contain the caret indicator.</param>
-        /// <param name="baseDocuments">The set of documents from which the projection buffer 
+        /// <param name="baseDocuments">The set of documents from which the projection buffer
         /// document will be composed.</param>
         /// <returns></returns>
         public TestHostDocument CreateProjectionBufferDocument(

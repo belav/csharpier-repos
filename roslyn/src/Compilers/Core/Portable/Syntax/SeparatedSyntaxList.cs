@@ -149,11 +149,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the string representation of the nodes in this list including separators but not including 
+        /// Returns the string representation of the nodes in this list including separators but not including
         /// the first node's leading trivia and the last node or token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The string representation of the nodes in this list including separators but not including 
+        /// The string representation of the nodes in this list including separators but not including
         /// the first node's leading trivia and the last node or token's trailing trivia.
         /// </returns>
         public override string ToString()
@@ -162,7 +162,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the full string representation of the nodes in this list including separators, 
+        /// Returns the full string representation of the nodes in this list including separators,
         /// the first node's leading trivia, and the last node or token's trailing trivia.
         /// </summary>
         /// <returns>

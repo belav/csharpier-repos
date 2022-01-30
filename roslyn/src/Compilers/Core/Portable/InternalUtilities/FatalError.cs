@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
 #pragma warning restore IDE0052
 
         /// <summary>
-        /// Set by the host to a fail fast trigger, 
+        /// Set by the host to a fail fast trigger,
         /// if the host desires to crash the process on a fatal exception.
         /// </summary>
         [DisallowNull]
@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         }
 
         /// <summary>
-        /// Set by the host to a fail fast trigger, 
+        /// Set by the host to a fail fast trigger,
         /// if the host desires to NOT crash the process on a non fatal exception.
         /// </summary>
         [DisallowNull]

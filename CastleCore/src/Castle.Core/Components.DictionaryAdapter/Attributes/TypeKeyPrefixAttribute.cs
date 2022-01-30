@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter
     using System;
 
     /// <summary>
-	/// Assigns a prefix to the keyed properties using the interface name.
-	/// </summary>
+    /// Assigns a prefix to the keyed properties using the interface name.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = true)]
     public class TypeKeyPrefixAttribute : DictionaryBehaviorAttribute, IDictionaryKeyBuilder
     {
