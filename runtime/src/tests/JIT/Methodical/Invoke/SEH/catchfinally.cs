@@ -75,9 +75,7 @@ namespace JitTest
                         }
                     }
                 }
-                catch (NullReferenceException)
-                {
-                }
+                catch (NullReferenceException) { }
                 return ret;
             }
             return recurseLevel == 0;

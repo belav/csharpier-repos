@@ -9,12 +9,18 @@ internal class NullableTest
 {
     private static bool BoxUnboxToNQ(ValueType o)
     {
-        return Helper.Compare((ImplementOneInterfaceGen<int>)o, Helper.Create(default(ImplementOneInterfaceGen<int>)));
+        return Helper.Compare(
+            (ImplementOneInterfaceGen<int>)o,
+            Helper.Create(default(ImplementOneInterfaceGen<int>))
+        );
     }
 
     private static bool BoxUnboxToQ(ValueType o)
     {
-        return Helper.Compare((ImplementOneInterfaceGen<int>?)o, Helper.Create(default(ImplementOneInterfaceGen<int>)));
+        return Helper.Compare(
+            (ImplementOneInterfaceGen<int>?)o,
+            Helper.Create(default(ImplementOneInterfaceGen<int>))
+        );
     }
 
     private static int Main()
@@ -27,5 +33,3 @@ internal class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

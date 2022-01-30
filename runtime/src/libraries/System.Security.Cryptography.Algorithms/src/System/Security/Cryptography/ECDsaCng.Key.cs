@@ -12,7 +12,8 @@ namespace System.Security.Cryptography
         {
             private readonly ECCngKey _key = new ECCngKey(AlgorithmName.ECDsa, nameof(ECDsa));
 
-            private string? GetCurveName(out string? oidValue) => _key.GetCurveName(KeySize, out oidValue);
+            private string? GetCurveName(out string? oidValue) =>
+                _key.GetCurveName(KeySize, out oidValue);
 
             public override void GenerateKey(ECCurve curve)
             {
@@ -20,7 +21,8 @@ namespace System.Security.Cryptography
                 ForceSetKeySize(_key.KeySize);
             }
 
-            private SafeNCryptKeyHandle GetDuplicatedKeyHandle() => _key.GetDuplicatedKeyHandle(KeySize);
+            private SafeNCryptKeyHandle GetDuplicatedKeyHandle() =>
+                _key.GetDuplicatedKeyHandle(KeySize);
 
             private void DisposeKey() => _key.DisposeKey();
         }

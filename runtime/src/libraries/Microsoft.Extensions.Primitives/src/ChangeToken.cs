@@ -18,7 +18,10 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="changeTokenProducer">Produces the change token.</param>
         /// <param name="changeTokenConsumer">Action called when the token changes.</param>
         /// <returns></returns>
-        public static IDisposable OnChange(Func<IChangeToken?> changeTokenProducer, Action changeTokenConsumer)
+        public static IDisposable OnChange(
+            Func<IChangeToken?> changeTokenProducer,
+            Action changeTokenConsumer
+        )
         {
             if (changeTokenProducer == null)
             {
@@ -29,7 +32,11 @@ namespace Microsoft.Extensions.Primitives
                 throw new ArgumentNullException(nameof(changeTokenConsumer));
             }
 
-            return new ChangeTokenRegistration<Action>(changeTokenProducer, callback => callback(), changeTokenConsumer);
+            return new ChangeTokenRegistration<Action>(
+                changeTokenProducer,
+                callback => callback(),
+                changeTokenConsumer
+            );
         }
 
         /// <summary>
@@ -39,7 +46,11 @@ namespace Microsoft.Extensions.Primitives
         /// <param name="changeTokenConsumer">Action called when the token changes.</param>
         /// <param name="state">state for the consumer.</param>
         /// <returns></returns>
-        public static IDisposable OnChange<TState>(Func<IChangeToken?> changeTokenProducer, Action<TState> changeTokenConsumer, TState state)
+        public static IDisposable OnChange<TState>(
+            Func<IChangeToken?> changeTokenProducer,
+            Action<TState> changeTokenConsumer,
+            TState state
+        )
         {
             if (changeTokenProducer == null)
             {
@@ -50,7 +61,11 @@ namespace Microsoft.Extensions.Primitives
                 throw new ArgumentNullException(nameof(changeTokenConsumer));
             }
 
-            return new ChangeTokenRegistration<TState>(changeTokenProducer, changeTokenConsumer, state);
+            return new ChangeTokenRegistration<TState>(
+                changeTokenProducer,
+                changeTokenConsumer,
+                state
+            );
         }
 
         private sealed class ChangeTokenRegistration<TState> : IDisposable
@@ -62,7 +77,11 @@ namespace Microsoft.Extensions.Primitives
 
             private static readonly NoopDisposable _disposedSentinel = new NoopDisposable();
 
-            public ChangeTokenRegistration(Func<IChangeToken?> changeTokenProducer, Action<TState> changeTokenConsumer, TState state)
+            public ChangeTokenRegistration(
+                Func<IChangeToken?> changeTokenProducer,
+                Action<TState> changeTokenConsumer,
+                TState state
+            )
             {
                 _changeTokenProducer = changeTokenProducer;
                 _changeTokenConsumer = changeTokenConsumer;
@@ -100,7 +119,10 @@ namespace Microsoft.Extensions.Primitives
                     return;
                 }
 
-                IDisposable registraton = token.RegisterChangeCallback(s => ((ChangeTokenRegistration<TState>?)s)!.OnChangeTokenFired(), this);
+                IDisposable registraton = token.RegisterChangeCallback(
+                    s => ((ChangeTokenRegistration<TState>?)s)!.OnChangeTokenFired(),
+                    this
+                );
 
                 SetDisposable(registraton);
             }
@@ -120,7 +142,11 @@ namespace Microsoft.Extensions.Primitives
                 }
 
                 // Otherwise, try to update the disposable
-                IDisposable? previous = Interlocked.CompareExchange(ref _disposable, disposable, current);
+                IDisposable? previous = Interlocked.CompareExchange(
+                    ref _disposable,
+                    disposable,
+                    current
+                );
 
                 if (previous == _disposedSentinel)
                 {
@@ -147,9 +173,7 @@ namespace Microsoft.Extensions.Primitives
 
             private sealed class NoopDisposable : IDisposable
             {
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
             }
         }
     }

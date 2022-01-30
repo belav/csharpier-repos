@@ -14,8 +14,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests
         /// <summary>
         /// DFS search to find the first node of a given type.
         /// </summary>
-        internal static T FindFirstNodeOfType<T>(this SyntaxNode node)
-            where T : SyntaxNode
+        internal static T FindFirstNodeOfType<T>(this SyntaxNode node) where T : SyntaxNode
         {
             if (node is T)
             {
@@ -34,19 +33,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests
             return null;
         }
 
-        internal static T DigToFirstNodeOfType<T>(this SyntaxNode node)
-            where T : SyntaxNode
+        internal static T DigToFirstNodeOfType<T>(this SyntaxNode node) where T : SyntaxNode
         {
             return node.ChildNodes().OfType<T>().First();
         }
 
-        internal static T DigToFirstNodeOfType<T>(this SyntaxTree syntaxTree)
-            where T : SyntaxNode
+        internal static T DigToFirstNodeOfType<T>(this SyntaxTree syntaxTree) where T : SyntaxNode
         {
             return syntaxTree.GetRoot().DigToFirstNodeOfType<T>();
         }
 
-        internal static TypeDeclarationSyntax DigToFirstTypeDeclaration(this SyntaxTree syntaxTree)
-            => (syntaxTree.GetRoot() as CompilationUnitSyntax).Members.OfType<TypeDeclarationSyntax>().First();
+        internal static TypeDeclarationSyntax DigToFirstTypeDeclaration(
+            this SyntaxTree syntaxTree
+        ) =>
+            (syntaxTree.GetRoot() as CompilationUnitSyntax).Members
+                .OfType<TypeDeclarationSyntax>()
+                .First();
     }
 }

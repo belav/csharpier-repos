@@ -28,10 +28,9 @@ namespace Microsoft.CodeAnalysis.Storage
             FilePath = filePath;
         }
 
-        public static SolutionKey ToSolutionKey(Solution solution)
-            => ToSolutionKey(solution.State);
+        public static SolutionKey ToSolutionKey(Solution solution) => ToSolutionKey(solution.State);
 
-        public static SolutionKey ToSolutionKey(SolutionState solutionState)
-            => new(solutionState.Id, solutionState.FilePath);
+        public static SolutionKey ToSolutionKey(SolutionState solutionState) =>
+            new(solutionState.Id, solutionState.FilePath);
     }
 }

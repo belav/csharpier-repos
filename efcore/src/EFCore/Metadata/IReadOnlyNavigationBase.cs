@@ -36,12 +36,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets a value indicating whether this navigation should be eager loaded by default.
         /// </summary>
-        bool IsEagerLoaded
-            => (bool?)this[CoreAnnotationNames.EagerLoaded] ?? false;
+        bool IsEagerLoaded => (bool?)this[CoreAnnotationNames.EagerLoaded] ?? false;
 
         /// <inheritdoc />
         // TODO: Remove when #3864 is implemented
-        bool IReadOnlyPropertyBase.IsShadowProperty()
-            => this.GetIdentifyingMemberInfo() == null;
+        bool IReadOnlyPropertyBase.IsShadowProperty() => this.GetIdentifyingMemberInfo() == null;
     }
 }

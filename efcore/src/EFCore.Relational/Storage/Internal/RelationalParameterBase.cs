@@ -49,7 +49,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void AddDbParameter(DbCommand command, IReadOnlyDictionary<string, object?> parameterValues)
+        public virtual void AddDbParameter(
+            DbCommand command,
+            IReadOnlyDictionary<string, object?> parameterValues
+        )
         {
             if (parameterValues.TryGetValue(InvariantName, out var parameterValue))
             {
@@ -58,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             else
             {
                 throw new InvalidOperationException(
-                    RelationalStrings.MissingParameterValue(InvariantName));
+                    RelationalStrings.MissingParameterValue(InvariantName)
+                );
             }
         }
     }

@@ -28,20 +28,27 @@ namespace Microsoft.CodeAnalysis.LanguageServer
     /// </summary>
     internal class LspMiscellaneousFilesWorkspace : Workspace
     {
-        private static readonly LanguageInformation s_csharpLanguageInformation = new(LanguageNames.CSharp, ".csx");
-        private static readonly LanguageInformation s_vbLanguageInformation = new(LanguageNames.VisualBasic, ".vbx");
+        private static readonly LanguageInformation s_csharpLanguageInformation =
+            new(LanguageNames.CSharp, ".csx");
+        private static readonly LanguageInformation s_vbLanguageInformation =
+            new(LanguageNames.VisualBasic, ".vbx");
 
-        private static readonly Dictionary<string, LanguageInformation> s_extensionToLanguageInformation = new()
-        {
-            { ".cs", s_csharpLanguageInformation },
-            { ".csx", s_csharpLanguageInformation },
-            { ".vb", s_vbLanguageInformation },
-            { ".vbx", s_vbLanguageInformation },
-        };
+        private static readonly Dictionary<
+            string,
+            LanguageInformation
+        > s_extensionToLanguageInformation =
+            new()
+            {
+                { ".cs", s_csharpLanguageInformation },
+                { ".csx", s_csharpLanguageInformation },
+                { ".vb", s_vbLanguageInformation },
+                { ".vbx", s_vbLanguageInformation },
+            };
 
         private readonly ILspLogger _logger;
 
-        public LspMiscellaneousFilesWorkspace(ILspLogger logger) : base(MefHostServices.DefaultHost, WorkspaceKind.MiscellaneousFiles)
+        public LspMiscellaneousFilesWorkspace(ILspLogger logger)
+            : base(MefHostServices.DefaultHost, WorkspaceKind.MiscellaneousFiles)
         {
             _logger = logger;
         }
@@ -55,16 +62,29 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         public Document? AddMiscellaneousDocument(Uri uri, SourceText documentText)
         {
             var uriAbsolutePath = uri.AbsolutePath;
-            if (!s_extensionToLanguageInformation.TryGetValue(Path.GetExtension(uriAbsolutePath), out var languageInformation))
+            if (
+                !s_extensionToLanguageInformation.TryGetValue(
+                    Path.GetExtension(uriAbsolutePath),
+                    out var languageInformation
+                )
+            )
             {
                 // Only log here since throwing here could take down the LSP server.
-                _logger.TraceError($"Could not find language information for {uri} with absolute path {uriAbsolutePath}");
+                _logger.TraceError(
+                    $"Could not find language information for {uri} with absolute path {uriAbsolutePath}"
+                );
                 return null;
             }
 
             var sourceTextLoader = new SourceTextLoader(documentText, uriAbsolutePath);
 
-            var projectInfo = MiscellaneousFileUtilities.CreateMiscellaneousProjectInfoForDocument(uri.AbsolutePath, sourceTextLoader, languageInformation, Services, ImmutableArray<MetadataReference>.Empty);
+            var projectInfo = MiscellaneousFileUtilities.CreateMiscellaneousProjectInfoForDocument(
+                uri.AbsolutePath,
+                sourceTextLoader,
+                languageInformation,
+                Services,
+                ImmutableArray<MetadataReference>.Empty
+            );
             OnProjectAdded(projectInfo);
 
             var id = projectInfo.Documents.Single().Id;
@@ -82,7 +102,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             var uriAbsolutePath = uri.AbsolutePath;
 
             // We only add misc files to this workspace using the absolute file path.
-            var matchingDocument = CurrentSolution.GetDocumentIdsWithFilePath(uriAbsolutePath).SingleOrDefault();
+            var matchingDocument = CurrentSolution
+                .GetDocumentIdsWithFilePath(uriAbsolutePath)
+                .SingleOrDefault();
             if (matchingDocument != null)
             {
                 OnDocumentRemoved(matchingDocument);
@@ -105,8 +127,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 _fileUri = fileUri;
             }
 
-            public override Task<TextAndVersion> LoadTextAndVersionAsync(Workspace workspace, DocumentId documentId, CancellationToken cancellationToken)
-                => Task.FromResult(TextAndVersion.Create(_sourceText, VersionStamp.Create(), _fileUri));
+            public override Task<TextAndVersion> LoadTextAndVersionAsync(
+                Workspace workspace,
+                DocumentId documentId,
+                CancellationToken cancellationToken
+            ) =>
+                Task.FromResult(
+                    TextAndVersion.Create(_sourceText, VersionStamp.Create(), _fileUri)
+                );
         }
     }
 }

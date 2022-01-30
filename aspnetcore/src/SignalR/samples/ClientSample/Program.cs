@@ -14,7 +14,9 @@ public class Program
     {
         if (args.Contains("--debug"))
         {
-            Console.WriteLine($"Ready for debugger to attach. Process ID: {Process.GetCurrentProcess().Id}");
+            Console.WriteLine(
+                $"Ready for debugger to attach. Process ID: {Process.GetCurrentProcess().Id}"
+            );
             Console.Write("Press ENTER to Continue");
             Console.ReadLine();
             args = args.Except(new[] { "--debug" }).ToArray();
@@ -29,23 +31,30 @@ public class Program
         StreamingSample.Register(app);
         UploadSample.Register(app);
 
-        app.Command("help", cmd =>
-        {
-            cmd.Description = "Get help for the application, or a specific command";
-
-            var commandArgument = cmd.Argument("<COMMAND>", "The command to get help for");
-            cmd.OnExecute(() =>
+        app.Command(
+            "help",
+            cmd =>
             {
-                app.ShowHelp(commandArgument.Value);
-                return 0;
-            });
-        });
+                cmd.Description = "Get help for the application, or a specific command";
 
-        app.OnExecute(() =>
-        {
-            app.ShowHelp();
-            return 0;
-        });
+                var commandArgument = cmd.Argument("<COMMAND>", "The command to get help for");
+                cmd.OnExecute(
+                    () =>
+                    {
+                        app.ShowHelp(commandArgument.Value);
+                        return 0;
+                    }
+                );
+            }
+        );
+
+        app.OnExecute(
+            () =>
+            {
+                app.ShowHelp();
+                return 0;
+            }
+        );
 
         app.Execute(args);
     }

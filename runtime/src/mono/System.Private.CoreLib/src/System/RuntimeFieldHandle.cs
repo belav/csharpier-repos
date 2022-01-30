@@ -29,10 +29,7 @@ namespace System
 
         public IntPtr Value
         {
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         internal bool IsNullHandle()
@@ -71,16 +68,34 @@ namespace System
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void SetValueInternal(FieldInfo fi, object? obj, object? value);
 
-        internal static void SetValue(RuntimeFieldInfo field, object? obj, object? value, RuntimeType? fieldType, FieldAttributes fieldAttr, RuntimeType? declaringType, ref bool domainInitialized)
+        internal static void SetValue(
+            RuntimeFieldInfo field,
+            object? obj,
+            object? value,
+            RuntimeType? fieldType,
+            FieldAttributes fieldAttr,
+            RuntimeType? declaringType,
+            ref bool domainInitialized
+        )
         {
             SetValueInternal(field, obj, value);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern unsafe object GetValueDirect(RuntimeFieldInfo field, RuntimeType fieldType, void* pTypedRef, RuntimeType? contextType);
+        internal static extern unsafe object GetValueDirect(
+            RuntimeFieldInfo field,
+            RuntimeType fieldType,
+            void* pTypedRef,
+            RuntimeType? contextType
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern unsafe void SetValueDirect(RuntimeFieldInfo field, RuntimeType fieldType, void* pTypedRef, object value, RuntimeType? contextType);
+        internal static extern unsafe void SetValueDirect(
+            RuntimeFieldInfo field,
+            RuntimeType fieldType,
+            void* pTypedRef,
+            object value,
+            RuntimeType? contextType
+        );
     }
-
 }

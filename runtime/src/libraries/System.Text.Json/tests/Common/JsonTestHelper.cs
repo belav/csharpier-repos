@@ -84,8 +84,8 @@ namespace System.Text.Json
 
         private static readonly Regex s_stripWhitespace = new Regex(@"\s+", RegexOptions.Compiled);
 
-        public static string StripWhitespace(this string value)
-            => s_stripWhitespace.Replace(value, string.Empty);
+        public static string StripWhitespace(this string value) =>
+            s_stripWhitespace.Replace(value, string.Empty);
 
         internal static List<Order> PopulateLargeObject(int size)
         {
@@ -133,7 +133,8 @@ namespace System.Text.Json
                             EstimatedDelivery = new DateTime(),
                             Tracking = new Uri("http://TestShipCompany.test/track/123" + i),
                             CarrierName = "TestShipCompany",
-                            HandlingInstruction = "Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats",
+                            HandlingInstruction =
+                                "Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats",
                             CurrentStatus = "Out for delivery",
                             IsDangerous = false
                         }
@@ -142,14 +143,8 @@ namespace System.Text.Json
                     Cancelled = false,
                     IsGift = i % 2 == 0,
                     IsGPickUp = i % 5 == 0,
-                    ShippingAddress = new Address()
-                    {
-                        City = "Redmond"
-                    },
-                    PickupAddress = new Address
-                    {
-                        City = "Bellevue"
-                    },
+                    ShippingAddress = new Address() { City = "Redmond" },
+                    PickupAddress = new Address { City = "Bellevue" },
                     Coupon = SampleEnumInt64.Max,
                     UserInteractions = new List<Comment>
                     {
@@ -173,7 +168,8 @@ namespace System.Text.Json
                                 IsEmployee = false
                             },
                             Title = "Green Field",
-                            Message = "Down, down, down. Would the fall never come to an end! 'I wonder how many miles I've fallen by this time. I think-' (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a very good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) '-yes, that's about the right distance-but then I wonder what Latitude or Longitude I've got to",
+                            Message =
+                                "Down, down, down. Would the fall never come to an end! 'I wonder how many miles I've fallen by this time. I think-' (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a very good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) '-yes, that's about the right distance-but then I wonder what Latitude or Longitude I've got to",
                             Responses = new List<Comment>()
                         }
                     },
@@ -205,7 +201,8 @@ namespace System.Text.Json
                         SKU = "LL123" + j,
                         Brand = new TestClassWithInitializedProperties(),
                         ProductCategory = new SimpleTestClassWithNonGenericCollectionWrappers(),
-                        Description = "Down, down, down. Would the fall never come to an end! 'I wonder how many miles I've fallen by this time. I think-' (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a very good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) '-yes, that's about the right distance-but then I wonder what Latitude or Longitude I've got to",
+                        Description =
+                            "Down, down, down. Would the fall never come to an end! 'I wonder how many miles I've fallen by this time. I think-' (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a very good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) '-yes, that's about the right distance-but then I wonder what Latitude or Longitude I've got to",
                         Created = new DateTime(2000, 10, 12),
                         Title = "Surface Pro 6 for Business - 512GB",
                         Price = new Price(),
@@ -237,7 +234,6 @@ namespace System.Text.Json
                     List<Review> reviews = new List<Review>();
                     for (int k = 0; k < i % 3; k++)
                     {
-
                         Review review = new Review
                         {
                             Customer = new User
@@ -255,7 +251,11 @@ namespace System.Text.Json
                             Stars = j + k,
                             Title = $"Title {i}{j}{k}",
                             Comment = "",
-                            Images = new List<Uri> { new Uri($"http://dotnet.test/link/images/image/{k}"), new Uri($"http://dotnet.test/link/images/image/{j}") },
+                            Images = new List<Uri>
+                            {
+                                new Uri($"http://dotnet.test/link/images/image/{k}"),
+                                new Uri($"http://dotnet.test/link/images/image/{j}")
+                            },
                             ReviewId = i + j + k
                         };
                         reviews.Add(review);

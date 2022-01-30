@@ -13,7 +13,11 @@ namespace System.Net
     {
         // Event ids are defined in NetEventSource.Common.cs.
 
-        [Event(EnumerateSecurityPackagesId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            EnumerateSecurityPackagesId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         public void EnumerateSecurityPackages(string? securityPackage)
         {
             if (IsEnabled())
@@ -22,7 +26,11 @@ namespace System.Net
             }
         }
 
-        [Event(SspiPackageNotFoundId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
+        [Event(
+            SspiPackageNotFoundId,
+            Keywords = Keywords.Default,
+            Level = EventLevel.Informational
+        )]
         public void SspiPackageNotFound(string packageName)
         {
             if (IsEnabled())

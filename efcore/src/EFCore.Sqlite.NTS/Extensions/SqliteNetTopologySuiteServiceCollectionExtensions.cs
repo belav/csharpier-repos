@@ -27,13 +27,20 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="serviceCollection">The <see cref="IServiceCollection" /> to add services to.</param>
         /// <returns>The same service collection so that multiple calls can be chained.</returns>
         public static IServiceCollection AddEntityFrameworkSqliteNetTopologySuite(
-            this IServiceCollection serviceCollection)
+            this IServiceCollection serviceCollection
+        )
         {
             serviceCollection.TryAddSingleton(NtsGeometryServices.Instance);
 
             new EntityFrameworkRelationalServicesBuilder(serviceCollection)
-                .TryAdd<IRelationalTypeMappingSourcePlugin, SqliteNetTopologySuiteTypeMappingSourcePlugin>()
-                .TryAdd<IMethodCallTranslatorPlugin, SqliteNetTopologySuiteMethodCallTranslatorPlugin>()
+                .TryAdd<
+                    IRelationalTypeMappingSourcePlugin,
+                    SqliteNetTopologySuiteTypeMappingSourcePlugin
+                >()
+                .TryAdd<
+                    IMethodCallTranslatorPlugin,
+                    SqliteNetTopologySuiteMethodCallTranslatorPlugin
+                >()
                 .TryAdd<IMemberTranslatorPlugin, SqliteNetTopologySuiteMemberTranslatorPlugin>();
 
             return serviceCollection;

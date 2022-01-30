@@ -21,7 +21,9 @@ public class CacheHeaderTests
         using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
         using var server = host.GetTestServer();
 
-        HttpResponseMessage response = await server.CreateClient().GetAsync("http://localhost/SubFolder/extra.xml");
+        HttpResponseMessage response = await server
+            .CreateClient()
+            .GetAsync("http://localhost/SubFolder/extra.xml");
         Assert.NotNull(response.Headers.ETag);
         Assert.NotNull(response.Headers.ETag.Tag);
     }
@@ -32,8 +34,12 @@ public class CacheHeaderTests
         using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
         using var server = host.GetTestServer();
 
-        HttpResponseMessage response1 = await server.CreateClient().GetAsync("http://localhost/SubFolder/extra.xml");
-        HttpResponseMessage response2 = await server.CreateClient().GetAsync("http://localhost/SubFolder/extra.xml");
+        HttpResponseMessage response1 = await server
+            .CreateClient()
+            .GetAsync("http://localhost/SubFolder/extra.xml");
+        HttpResponseMessage response2 = await server
+            .CreateClient()
+            .GetAsync("http://localhost/SubFolder/extra.xml");
         Assert.Equal(response2.Headers.ETag, response1.Headers.ETag);
     }
 
@@ -63,7 +69,9 @@ public class CacheHeaderTests
     {
         using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
         using var server = host.GetTestServer();
-        HttpResponseMessage original = await server.CreateClient().GetAsync("http://localhost/SubFolder/extra.xml");
+        HttpResponseMessage original = await server
+            .CreateClient()
+            .GetAsync("http://localhost/SubFolder/extra.xml");
 
         var req = new HttpRequestMessage(method, "http://localhost/SubFolder/extra.xml");
         req.Headers.Add("If-Match", original.Headers.ETag.ToString());
@@ -115,7 +123,9 @@ public class CacheHeaderTests
     {
         using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
         using var server = host.GetTestServer();
-        HttpResponseMessage resp1 = await server.CreateClient().GetAsync("http://localhost/SubFolder/extra.xml");
+        HttpResponseMessage resp1 = await server
+            .CreateClient()
+            .GetAsync("http://localhost/SubFolder/extra.xml");
 
         var req2 = new HttpRequestMessage(method, "http://localhost/SubFolder/extra.xml");
         req2.Headers.Add("If-None-Match", resp1.Headers.ETag.ToString());
@@ -129,7 +139,9 @@ public class CacheHeaderTests
     {
         using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
         using var server = host.GetTestServer();
-        HttpResponseMessage resp1 = await server.CreateClient().GetAsync("http://localhost/SubFolder/extra.xml");
+        HttpResponseMessage resp1 = await server
+            .CreateClient()
+            .GetAsync("http://localhost/SubFolder/extra.xml");
 
         var req2 = new HttpRequestMessage(method, "http://localhost/SubFolder/extra.xml");
         req2.Headers.Add("If-None-Match", "*");
@@ -143,7 +155,9 @@ public class CacheHeaderTests
     {
         using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
         using var server = host.GetTestServer();
-        HttpResponseMessage resp1 = await server.CreateClient().GetAsync("http://localhost/SubFolder/extra.xml");
+        HttpResponseMessage resp1 = await server
+            .CreateClient()
+            .GetAsync("http://localhost/SubFolder/extra.xml");
 
         var req2 = new HttpRequestMessage(method, "http://localhost/SubFolder/extra.xml");
         req2.Headers.Add("If-None-Match", resp1.Headers.ETag.ToString());
@@ -168,8 +182,9 @@ public class CacheHeaderTests
         using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
         using var server = host.GetTestServer();
 
-        HttpResponseMessage response = await server.CreateClient().SendAsync(
-            new HttpRequestMessage(method, "http://localhost/SubFolder/extra.xml"));
+        HttpResponseMessage response = await server
+            .CreateClient()
+            .SendAsync(new HttpRequestMessage(method, "http://localhost/SubFolder/extra.xml"));
 
         Assert.NotNull(response.Content.Headers.LastModified);
         // Verify that DateTimeOffset is UTC
@@ -203,7 +218,6 @@ public class CacheHeaderTests
 
         Assert.Equal(HttpStatusCode.NotModified, resp2.StatusCode);
     }
-
 
     [Theory]
     [MemberData(nameof(SupportedMethods))]
@@ -348,16 +362,19 @@ public class CacheHeaderTests
 
         var formats = new[]
         {
-                "ddd, dd MMM yyyy HH:mm:ss 'GMT'",
-                "dddd, dd-MMM-yy HH:mm:ss 'GMT'",
-                "ddd MMM  d HH:mm:ss yyyy"
-            };
+            "ddd, dd MMM yyyy HH:mm:ss 'GMT'",
+            "dddd, dd-MMM-yy HH:mm:ss 'GMT'",
+            "ddd MMM  d HH:mm:ss yyyy"
+        };
 
         foreach (var format in formats)
         {
             HttpResponseMessage res2 = await server
                 .CreateRequest("/SubFolder/extra.xml")
-                .AddHeader("If-Modified-Since", DateTimeOffset.UtcNow.ToString(format, CultureInfo.InvariantCulture))
+                .AddHeader(
+                    "If-Modified-Since",
+                    DateTimeOffset.UtcNow.ToString(format, CultureInfo.InvariantCulture)
+                )
                 .SendAsync(method.Method);
 
             Assert.Equal(HttpStatusCode.NotModified, res2.StatusCode);
@@ -432,19 +449,16 @@ public class CacheHeaderTests
         Assert.Equal(HttpStatusCode.PreconditionFailed, res2.StatusCode);
     }
 
+    public static IEnumerable<object[]> SupportedMethods =>
+        new[] { new[] { HttpMethod.Get }, new[] { HttpMethod.Head } };
 
-    public static IEnumerable<object[]> SupportedMethods => new[]
-    {
-            new [] { HttpMethod.Get },
-            new [] { HttpMethod.Head }
-        };
-
-    public static IEnumerable<object[]> UnsupportedMethods => new[]
-    {
-            new [] { HttpMethod.Post },
-            new [] { HttpMethod.Put },
-            new [] { HttpMethod.Options },
-            new [] { HttpMethod.Trace },
-            new [] { new HttpMethod("VERB") }
+    public static IEnumerable<object[]> UnsupportedMethods =>
+        new[]
+        {
+            new[] { HttpMethod.Post },
+            new[] { HttpMethod.Put },
+            new[] { HttpMethod.Options },
+            new[] { HttpMethod.Trace },
+            new[] { new HttpMethod("VERB") }
         };
 }

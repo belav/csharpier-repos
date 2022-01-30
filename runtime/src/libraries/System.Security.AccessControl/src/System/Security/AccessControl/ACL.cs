@@ -56,8 +56,7 @@ namespace System.Security.AccessControl
         {
             get
             {
-                if (_current == -1 ||
-                    _current >= _acl.Count)
+                if (_current == -1 || _current >= _acl.Count)
                 {
                     throw new InvalidOperationException(SR.Arg_InvalidOperationException);
                 }
@@ -86,13 +85,11 @@ namespace System.Security.AccessControl
         #endregion
     }
 
-
     public abstract class GenericAcl : ICollection
     {
         #region Constructors
 
-        protected GenericAcl()
-        { }
+        protected GenericAcl() { }
 
         #endregion
 
@@ -181,11 +178,17 @@ namespace System.Security.AccessControl
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             else if (array.Length - index < Count)
             {
-                throw new ArgumentOutOfRangeException(nameof(array), SR.ArgumentOutOfRange_ArrayTooSmall);
+                throw new ArgumentOutOfRangeException(
+                    nameof(array),
+                    SR.ArgumentOutOfRange_ArrayTooSmall
+                );
             }
 
             for (int i = 0; i < Count; i++)
@@ -228,7 +231,6 @@ namespace System.Security.AccessControl
         #endregion
     }
 
-
     public sealed class RawAcl : GenericAcl
     {
         #region Private Members
@@ -240,7 +242,13 @@ namespace System.Security.AccessControl
 
         #region Private Methods
 
-        private static void VerifyHeader(byte[] binaryForm, int offset, out byte revision, out int count, out int length)
+        private static void VerifyHeader(
+            byte[] binaryForm,
+            int offset,
+            out byte revision,
+            out int count,
+            out int length
+        )
         {
             if (binaryForm == null)
             {
@@ -253,7 +261,10 @@ namespace System.Security.AccessControl
                 // Offset must not be negative
                 //
 
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (binaryForm.Length - offset < HeaderLength)
@@ -281,9 +292,12 @@ namespace System.Security.AccessControl
 
             return;
 
-        InvalidParameter:
+            InvalidParameter:
 
-            throw new ArgumentOutOfRangeException(nameof(binaryForm), SR.ArgumentOutOfRange_ArrayTooSmall);
+            throw new ArgumentOutOfRangeException(
+                nameof(binaryForm),
+                SR.ArgumentOutOfRange_ArrayTooSmall
+            );
         }
 
         private void MarshalHeader(byte[] binaryForm, int offset)
@@ -294,7 +308,10 @@ namespace System.Security.AccessControl
             }
             else if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             else if (BinaryLength > MaxBinaryLength)
             {
@@ -302,7 +319,10 @@ namespace System.Security.AccessControl
             }
             else if (binaryForm.Length - offset < BinaryLength)
             {
-                throw new ArgumentOutOfRangeException(nameof(binaryForm), SR.ArgumentOutOfRange_ArrayTooSmall);
+                throw new ArgumentOutOfRangeException(
+                    nameof(binaryForm),
+                    SR.ArgumentOutOfRange_ArrayTooSmall
+                );
             }
 
             binaryForm[offset + 0] = Revision;
@@ -318,7 +338,8 @@ namespace System.Security.AccessControl
         [MemberNotNull(nameof(_aces))]
         internal void SetBinaryForm(byte[] binaryForm, int offset)
         {
-            int count, length;
+            int count,
+                length;
 
             //
             // Verify the header and extract interesting header info
@@ -349,7 +370,10 @@ namespace System.Security.AccessControl
                     // The ACE was too long - it would overflow the ACL maximum length
                     //
 
-                    throw new ArgumentException(SR.ArgumentException_InvalidAclBinaryForm, nameof(binaryForm));
+                    throw new ArgumentException(
+                        SR.ArgumentException_InvalidAclBinaryForm,
+                        nameof(binaryForm)
+                    );
                 }
 
                 _aces.Add(ace);
@@ -398,11 +422,12 @@ namespace System.Security.AccessControl
 
             return;
 
-        InvalidParameter:
+            InvalidParameter:
 
             throw new ArgumentException(
                 SR.ArgumentException_InvalidAclBinaryForm,
-                nameof(binaryForm));
+                nameof(binaryForm)
+            );
         }
 
         #endregion
@@ -413,8 +438,7 @@ namespace System.Security.AccessControl
         // Creates an empty ACL
         //
 
-        public RawAcl(byte revision, int capacity)
-            : base()
+        public RawAcl(byte revision, int capacity) : base()
         {
             _revision = revision;
             _aces = new List<GenericAce>(capacity);
@@ -424,8 +448,7 @@ namespace System.Security.AccessControl
         // Creates an ACL from its binary representation
         //
 
-        public RawAcl(byte[] binaryForm, int offset)
-            : base()
+        public RawAcl(byte[] binaryForm, int offset) : base()
         {
             SetBinaryForm(binaryForm, offset);
         }
@@ -524,11 +547,7 @@ namespace System.Security.AccessControl
 
         public override GenericAce this[int index]
         {
-            get
-            {
-                return _aces[index];
-            }
-
+            get { return _aces[index]; }
             set
             {
                 if (value == null)
@@ -551,7 +570,10 @@ namespace System.Security.AccessControl
                     throw new InvalidOperationException();
                 }
 
-                int newBinaryLength = BinaryLength - (index < _aces.Count ? _aces[index].BinaryLength : 0) + value.BinaryLength;
+                int newBinaryLength =
+                    BinaryLength
+                    - (index < _aces.Count ? _aces[index].BinaryLength : 0)
+                    + value.BinaryLength;
 
                 if (newBinaryLength > MaxBinaryLength)
                 {
@@ -593,34 +615,33 @@ namespace System.Security.AccessControl
         #endregion
     }
 
-
     public abstract class CommonAcl : GenericAcl
     {
         #region Add/Remove Logic Support
 
         [Flags]
-        private enum AF    // ACE flags
+        private enum AF // ACE flags
         {
-            CI = 0x8,     // container inherit
-            OI = 0x4,     // object inherit
-            IO = 0x2,     // inherit only
-            NP = 0x1,     // no propagate inherit
+            CI = 0x8, // container inherit
+            OI = 0x4, // object inherit
+            IO = 0x2, // inherit only
+            NP = 0x1, // no propagate inherit
             Invalid = NP, // not a valid combination of flags
         }
 
         [Flags]
-        private enum PM    // Propagation matrix
+        private enum PM // Propagation matrix
         {
-            F = 0x10,     // folder
-            CF = 0x08,    // child folder
-            CO = 0x04,    // child object
-            GF = 0x02,    // grandchild folder
-            GO = 0x01,    // grandchild object
+            F = 0x10, // folder
+            CF = 0x08, // child folder
+            CO = 0x04, // child object
+            GF = 0x02, // grandchild folder
+            GO = 0x01, // grandchild object
             Invalid = GO, // not a valid combination of flags
         }
 
-        private static readonly PM[] s_AFtoPM = CreateAFtoPMConversionMatrix();    // AceFlags-to-Propagation conversion matrix
-        private static readonly AF[] s_PMtoAF = CreatePMtoAFConversionMatrix();    // Propagation-to-AceFlags conversion matrix
+        private static readonly PM[] s_AFtoPM = CreateAFtoPMConversionMatrix(); // AceFlags-to-Propagation conversion matrix
+        private static readonly AF[] s_PMtoAF = CreatePMtoAFConversionMatrix(); // Propagation-to-AceFlags conversion matrix
 
         private static PM[] CreateAFtoPMConversionMatrix()
         {
@@ -637,19 +658,19 @@ namespace System.Security.AccessControl
             // Important: Not all combinations of inheritance bits are valid
             //
 
-            afToPm[(int)(   0   |   0   |   0   |   0   )] = PM.F |   0   |   0   |   0   |     0;
-            afToPm[(int)(   0   | AF.OI |   0   |   0   )] = PM.F |   0   | PM.CO |   0   | PM.GO;
-            afToPm[(int)(   0   | AF.OI |   0   | AF.NP )] = PM.F |   0   | PM.CO |   0   |     0;
-            afToPm[(int)(   0   | AF.OI | AF.IO |   0   )] =   0  |   0   | PM.CO |   0   | PM.GO;
-            afToPm[(int)(   0   | AF.OI | AF.IO | AF.NP )] =   0  |   0   | PM.CO |   0   |     0;
-            afToPm[(int)( AF.CI |   0   |   0   |   0   )] = PM.F | PM.CF |   0   | PM.GF |     0;
-            afToPm[(int)( AF.CI |   0   |   0   | AF.NP )] = PM.F | PM.CF |   0   |   0   |     0;
-            afToPm[(int)( AF.CI |   0   | AF.IO |   0   )] =   0  | PM.CF |   0   | PM.GF |     0;
-            afToPm[(int)( AF.CI |   0   | AF.IO | AF.NP )] =   0  | PM.CF |   0   |   0   |     0;
-            afToPm[(int)( AF.CI | AF.OI |   0   |   0   )] = PM.F | PM.CF | PM.CO | PM.GF | PM.GO;
-            afToPm[(int)( AF.CI | AF.OI |   0   | AF.NP )] = PM.F | PM.CF | PM.CO |   0   |     0;
-            afToPm[(int)( AF.CI | AF.OI | AF.IO |   0   )] =   0  | PM.CF | PM.CO | PM.GF | PM.GO;
-            afToPm[(int)( AF.CI | AF.OI | AF.IO | AF.NP )] =   0  | PM.CF | PM.CO |   0   |     0;
+            afToPm[(int)(0 | 0 | 0 | 0)] = PM.F | 0 | 0 | 0 | 0;
+            afToPm[(int)(0 | AF.OI | 0 | 0)] = PM.F | 0 | PM.CO | 0 | PM.GO;
+            afToPm[(int)(0 | AF.OI | 0 | AF.NP)] = PM.F | 0 | PM.CO | 0 | 0;
+            afToPm[(int)(0 | AF.OI | AF.IO | 0)] = 0 | 0 | PM.CO | 0 | PM.GO;
+            afToPm[(int)(0 | AF.OI | AF.IO | AF.NP)] = 0 | 0 | PM.CO | 0 | 0;
+            afToPm[(int)(AF.CI | 0 | 0 | 0)] = PM.F | PM.CF | 0 | PM.GF | 0;
+            afToPm[(int)(AF.CI | 0 | 0 | AF.NP)] = PM.F | PM.CF | 0 | 0 | 0;
+            afToPm[(int)(AF.CI | 0 | AF.IO | 0)] = 0 | PM.CF | 0 | PM.GF | 0;
+            afToPm[(int)(AF.CI | 0 | AF.IO | AF.NP)] = 0 | PM.CF | 0 | 0 | 0;
+            afToPm[(int)(AF.CI | AF.OI | 0 | 0)] = PM.F | PM.CF | PM.CO | PM.GF | PM.GO;
+            afToPm[(int)(AF.CI | AF.OI | 0 | AF.NP)] = PM.F | PM.CF | PM.CO | 0 | 0;
+            afToPm[(int)(AF.CI | AF.OI | AF.IO | 0)] = 0 | PM.CF | PM.CO | PM.GF | PM.GO;
+            afToPm[(int)(AF.CI | AF.OI | AF.IO | AF.NP)] = 0 | PM.CF | PM.CO | 0 | 0;
 
             return afToPm;
         }
@@ -670,19 +691,19 @@ namespace System.Security.AccessControl
             // the four ACE inheritance bits
             //
 
-            pmToAf[(int)( PM.F |   0   |   0   |   0   |   0   )] =    0   |   0   |   0   |     0;
-            pmToAf[(int)( PM.F |   0   | PM.CO |   0   | PM.GO )] =    0   | AF.OI |   0   |     0;
-            pmToAf[(int)( PM.F |   0   | PM.CO |   0   |   0   )] =    0   | AF.OI |   0   | AF.NP;
-            pmToAf[(int)(   0  |   0   | PM.CO |   0   | PM.GO )] =    0   | AF.OI | AF.IO |     0;
-            pmToAf[(int)(   0  |   0   | PM.CO |   0   |   0   )] =    0   | AF.OI | AF.IO | AF.NP;
-            pmToAf[(int)( PM.F | PM.CF |   0   | PM.GF |   0   )] =  AF.CI |   0   |   0   |     0;
-            pmToAf[(int)( PM.F | PM.CF |   0   |   0   |   0   )] =  AF.CI |   0   |   0   | AF.NP;
-            pmToAf[(int)(   0  | PM.CF |   0   | PM.GF |   0   )] =  AF.CI |   0   | AF.IO |     0;
-            pmToAf[(int)(   0  | PM.CF |   0   |   0   |   0   )] =  AF.CI |   0   | AF.IO | AF.NP;
-            pmToAf[(int)( PM.F | PM.CF | PM.CO | PM.GF | PM.GO )] =  AF.CI | AF.OI |   0   |     0;
-            pmToAf[(int)( PM.F | PM.CF | PM.CO |   0   |   0   )] =  AF.CI | AF.OI |   0   | AF.NP;
-            pmToAf[(int)(   0  | PM.CF | PM.CO | PM.GF | PM.GO )] =  AF.CI | AF.OI | AF.IO |     0;
-            pmToAf[(int)(   0  | PM.CF | PM.CO |   0   |   0   )] =  AF.CI | AF.OI | AF.IO | AF.NP;
+            pmToAf[(int)(PM.F | 0 | 0 | 0 | 0)] = 0 | 0 | 0 | 0;
+            pmToAf[(int)(PM.F | 0 | PM.CO | 0 | PM.GO)] = 0 | AF.OI | 0 | 0;
+            pmToAf[(int)(PM.F | 0 | PM.CO | 0 | 0)] = 0 | AF.OI | 0 | AF.NP;
+            pmToAf[(int)(0 | 0 | PM.CO | 0 | PM.GO)] = 0 | AF.OI | AF.IO | 0;
+            pmToAf[(int)(0 | 0 | PM.CO | 0 | 0)] = 0 | AF.OI | AF.IO | AF.NP;
+            pmToAf[(int)(PM.F | PM.CF | 0 | PM.GF | 0)] = AF.CI | 0 | 0 | 0;
+            pmToAf[(int)(PM.F | PM.CF | 0 | 0 | 0)] = AF.CI | 0 | 0 | AF.NP;
+            pmToAf[(int)(0 | PM.CF | 0 | PM.GF | 0)] = AF.CI | 0 | AF.IO | 0;
+            pmToAf[(int)(0 | PM.CF | 0 | 0 | 0)] = AF.CI | 0 | AF.IO | AF.NP;
+            pmToAf[(int)(PM.F | PM.CF | PM.CO | PM.GF | PM.GO)] = AF.CI | AF.OI | 0 | 0;
+            pmToAf[(int)(PM.F | PM.CF | PM.CO | 0 | 0)] = AF.CI | AF.OI | 0 | AF.NP;
+            pmToAf[(int)(0 | PM.CF | PM.CO | PM.GF | PM.GO)] = AF.CI | AF.OI | AF.IO | 0;
+            pmToAf[(int)(0 | PM.CF | PM.CO | 0 | 0)] = AF.CI | AF.OI | AF.IO | AF.NP;
 
             return pmToAf;
         }
@@ -761,7 +782,12 @@ namespace System.Security.AccessControl
         // Implements the merge of inheritance bits during the 'ADD' operation
         //
 
-        private static bool MergeInheritanceBits(AceFlags left, AceFlags right, bool isDS, out AceFlags result)
+        private static bool MergeInheritanceBits(
+            AceFlags left,
+            AceFlags right,
+            bool isDS,
+            out AceFlags result
+        )
         {
             result = 0;
 
@@ -790,7 +816,13 @@ namespace System.Security.AccessControl
             }
         }
 
-        private static bool RemoveInheritanceBits(AceFlags existing, AceFlags remove, bool isDS, out AceFlags result, out bool total)
+        private static bool RemoveInheritanceBits(
+            AceFlags existing,
+            AceFlags remove,
+            bool isDS,
+            out AceFlags result,
+            out bool total
+        )
         {
             result = 0;
             total = false;
@@ -807,7 +839,10 @@ namespace System.Security.AccessControl
             }
 
             PM resultPM;
-            unchecked { resultPM = leftPM & ~rightPM; }
+            unchecked
+            {
+                resultPM = leftPM & ~rightPM;
+            }
 
             //
             // If the resulting propagation matrix is zero,
@@ -896,23 +931,23 @@ namespace System.Security.AccessControl
 
                 result = 2 * ushort.MaxValue + ace._indexInAcl;
             }
-            else if (type == AceType.AccessDenied ||
-                type == AceType.AccessDeniedCallback)
+            else if (type == AceType.AccessDenied || type == AceType.AccessDeniedCallback)
             {
                 result = 0;
             }
-            else if (type == AceType.AccessDeniedObject ||
-                type == AceType.AccessDeniedCallbackObject)
+            else if (
+                type == AceType.AccessDeniedObject || type == AceType.AccessDeniedCallbackObject
+            )
             {
                 result = 1;
             }
-            else if (type == AceType.AccessAllowed ||
-                type == AceType.AccessAllowedCallback)
+            else if (type == AceType.AccessAllowed || type == AceType.AccessAllowedCallback)
             {
                 result = 2;
             }
-            else if (type == AceType.AccessAllowedObject ||
-                type == AceType.AccessAllowedCallbackObject)
+            else if (
+                type == AceType.AccessAllowedObject || type == AceType.AccessAllowedCallbackObject
+            )
             {
                 result = 3;
             }
@@ -949,17 +984,21 @@ namespace System.Security.AccessControl
             {
                 result = 2 * ushort.MaxValue + ace._indexInAcl;
             }
-            else if (type == AceType.SystemAudit ||
-                type == AceType.SystemAlarm ||
-                type == AceType.SystemAuditCallback ||
-                type == AceType.SystemAlarmCallback)
+            else if (
+                type == AceType.SystemAudit
+                || type == AceType.SystemAlarm
+                || type == AceType.SystemAuditCallback
+                || type == AceType.SystemAlarmCallback
+            )
             {
                 result = 0;
             }
-            else if (type == AceType.SystemAuditObject ||
-                type == AceType.SystemAlarmObject ||
-                type == AceType.SystemAuditCallbackObject ||
-                type == AceType.SystemAlarmCallbackObject)
+            else if (
+                type == AceType.SystemAuditObject
+                || type == AceType.SystemAlarmObject
+                || type == AceType.SystemAuditCallbackObject
+                || type == AceType.SystemAlarmCallbackObject
+            )
             {
                 result = 1;
             }
@@ -1007,7 +1046,8 @@ namespace System.Security.AccessControl
         private void QuickSort(int left, int right, bool isDacl)
         {
             GenericAce pivot;
-            int leftHold, rightHold;
+            int leftHold,
+                rightHold;
             int pivotIndex;
 
             if (left >= right)
@@ -1024,7 +1064,10 @@ namespace System.Security.AccessControl
             while (left < right)
             {
                 // while (( _acl[right] >= pivot ) && ( left < right ))
-                while ((ComparisonResult.LessThan != CompareAces(_acl[right], pivot, isDacl)) && (left < right))
+                while (
+                    (ComparisonResult.LessThan != CompareAces(_acl[right], pivot, isDacl))
+                    && (left < right)
+                )
                 {
                     right--;
                 }
@@ -1036,7 +1079,10 @@ namespace System.Security.AccessControl
                 }
 
                 // while (( _acl[left] <= pivot ) && ( left < right ))
-                while ((ComparisonResult.GreaterThan != CompareAces(_acl[left], pivot, isDacl)) && (left < right))
+                while (
+                    (ComparisonResult.GreaterThan != CompareAces(_acl[left], pivot, isDacl))
+                    && (left < right)
+                )
                 {
                     left++;
                 }
@@ -1072,15 +1118,13 @@ namespace System.Security.AccessControl
 
         private bool InspectAce(ref GenericAce ace, bool isDacl)
         {
-            const AceFlags AuditFlags =
-                AceFlags.SuccessfulAccess |
-                AceFlags.FailedAccess;
+            const AceFlags AuditFlags = AceFlags.SuccessfulAccess | AceFlags.FailedAccess;
 
             const AceFlags InheritFlags =
-                AceFlags.ObjectInherit |
-                AceFlags.ContainerInherit |
-                AceFlags.NoPropagateInherit |
-                AceFlags.InheritOnly;
+                AceFlags.ObjectInherit
+                | AceFlags.ContainerInherit
+                | AceFlags.NoPropagateInherit
+                | AceFlags.InheritOnly;
 
             //
             // Any ACE without at least one bit set in the access mask can be removed
@@ -1114,7 +1158,10 @@ namespace System.Security.AccessControl
 
                 if ((ace.AceFlags & InheritFlags) != 0)
                 {
-                    unchecked { ace.AceFlags &= ~InheritFlags; }
+                    unchecked
+                    {
+                        ace.AceFlags &= ~InheritFlags;
+                    }
                 }
             }
             else
@@ -1124,9 +1171,11 @@ namespace System.Security.AccessControl
                 // the InheritOnly bit is meaningless and the entire ACE can be removed.
                 //
 
-                if (((ace.AceFlags & AceFlags.InheritOnly) != 0) &&
-                    ((ace.AceFlags & AceFlags.ContainerInherit) == 0) &&
-                    ((ace.AceFlags & AceFlags.ObjectInherit) == 0))
+                if (
+                    ((ace.AceFlags & AceFlags.InheritOnly) != 0)
+                    && ((ace.AceFlags & AceFlags.ContainerInherit) == 0)
+                    && ((ace.AceFlags & AceFlags.ObjectInherit) == 0)
+                )
                 {
                     return false;
                 }
@@ -1135,11 +1184,16 @@ namespace System.Security.AccessControl
                 // Without either "container inherit" or "object inherit" to go with it,
                 // the NoPropagateInherit bit is meaningless and can be turned off.
                 //
-                if (((ace.AceFlags & AceFlags.NoPropagateInherit) != 0) &&
-                    ((ace.AceFlags & AceFlags.ContainerInherit) == 0) &&
-                    ((ace.AceFlags & AceFlags.ObjectInherit) == 0))
+                if (
+                    ((ace.AceFlags & AceFlags.NoPropagateInherit) != 0)
+                    && ((ace.AceFlags & AceFlags.ContainerInherit) == 0)
+                    && ((ace.AceFlags & AceFlags.ObjectInherit) == 0)
+                )
                 {
-                    unchecked { ace.AceFlags &= ~AceFlags.NoPropagateInherit; }
+                    unchecked
+                    {
+                        ace.AceFlags &= ~AceFlags.NoPropagateInherit;
+                    }
                 }
             }
 
@@ -1151,7 +1205,10 @@ namespace System.Security.AccessControl
                 // There is no place for audit flags on a DACL
                 //
 
-                unchecked { ace.AceFlags &= ~AuditFlags; }
+                unchecked
+                {
+                    ace.AceFlags &= ~AuditFlags;
+                }
 
                 if (qualifiedAce != null)
                 {
@@ -1159,8 +1216,10 @@ namespace System.Security.AccessControl
                     // Qualified ACEs in a DACL must be allow or deny ACEs
                     //
 
-                    if (qualifiedAce.AceQualifier != AceQualifier.AccessAllowed &&
-                        qualifiedAce.AceQualifier != AceQualifier.AccessDenied)
+                    if (
+                        qualifiedAce.AceQualifier != AceQualifier.AccessAllowed
+                        && qualifiedAce.AceQualifier != AceQualifier.AccessDenied
+                    )
                     {
                         return false;
                     }
@@ -1265,9 +1324,15 @@ namespace System.Security.AccessControl
         // This method determines whether the object type and inherited object type from the original ace
         // should be retained or not based on access mask and aceflags for a given split
         //
-        private void GetObjectTypesForSplit(ObjectAce originalAce, int accessMask, AceFlags aceFlags, out ObjectAceFlags objectFlags, out Guid objectType, out Guid inheritedObjectType)
+        private void GetObjectTypesForSplit(
+            ObjectAce originalAce,
+            int accessMask,
+            AceFlags aceFlags,
+            out ObjectAceFlags objectFlags,
+            out Guid objectType,
+            out Guid inheritedObjectType
+        )
         {
-
             objectFlags = 0;
             objectType = Guid.Empty;
             inheritedObjectType = Guid.Empty;
@@ -1289,22 +1354,26 @@ namespace System.Security.AccessControl
             {
                 // keep the original ace's object flags and object type
                 inheritedObjectType = originalAce.InheritedObjectAceType;
-                objectFlags |= originalAce.ObjectAceFlags & ObjectAceFlags.InheritedObjectAceTypePresent;
+                objectFlags |=
+                    originalAce.ObjectAceFlags & ObjectAceFlags.InheritedObjectAceTypePresent;
             }
         }
 
         private bool ObjectTypesMatch(QualifiedAce ace, QualifiedAce newAce)
         {
             Guid objectType = (ace is ObjectAce) ? ((ObjectAce)ace).ObjectAceType : Guid.Empty;
-            Guid newObjectType = (newAce is ObjectAce) ? ((ObjectAce)newAce).ObjectAceType : Guid.Empty;
+            Guid newObjectType =
+                (newAce is ObjectAce) ? ((ObjectAce)newAce).ObjectAceType : Guid.Empty;
 
             return objectType.Equals(newObjectType);
         }
 
         private bool InheritedObjectTypesMatch(QualifiedAce ace, QualifiedAce newAce)
         {
-            Guid inheritedObjectType = (ace is ObjectAce) ? ((ObjectAce)ace).InheritedObjectAceType : Guid.Empty;
-            Guid newInheritedObjectType = (newAce is ObjectAce) ? ((ObjectAce)newAce).InheritedObjectAceType : Guid.Empty;
+            Guid inheritedObjectType =
+                (ace is ObjectAce) ? ((ObjectAce)ace).InheritedObjectAceType : Guid.Empty;
+            Guid newInheritedObjectType =
+                (newAce is ObjectAce) ? ((ObjectAce)newAce).InheritedObjectAceType : Guid.Empty;
 
             return inheritedObjectType.Equals(newInheritedObjectType);
         }
@@ -1324,9 +1393,14 @@ namespace System.Security.AccessControl
                 return true;
             }
 
-            ObjectAceFlags objectFlags = (ace is ObjectAce) ? ((ObjectAce)ace).ObjectAceFlags : ObjectAceFlags.None;
-            if (((ace.AccessMask & newAce.AccessMask & ObjectAce.AccessMaskWithObjectType) == (newAce.AccessMask & ObjectAce.AccessMaskWithObjectType)) &&
-                 ((objectFlags & ObjectAceFlags.ObjectAceTypePresent) == 0))
+            ObjectAceFlags objectFlags =
+                (ace is ObjectAce) ? ((ObjectAce)ace).ObjectAceFlags : ObjectAceFlags.None;
+            if (
+                (
+                    (ace.AccessMask & newAce.AccessMask & ObjectAce.AccessMaskWithObjectType)
+                    == (newAce.AccessMask & ObjectAce.AccessMaskWithObjectType)
+                ) && ((objectFlags & ObjectAceFlags.ObjectAceTypePresent) == 0)
+            )
             {
                 // case 2
                 return true;
@@ -1350,7 +1424,8 @@ namespace System.Security.AccessControl
                 return true;
             }
 
-            ObjectAceFlags objectFlags = (ace is ObjectAce) ? ((ObjectAce)ace).ObjectAceFlags : ObjectAceFlags.None;
+            ObjectAceFlags objectFlags =
+                (ace is ObjectAce) ? ((ObjectAce)ace).ObjectAceFlags : ObjectAceFlags.None;
             if ((objectFlags & ObjectAceFlags.InheritedObjectAceTypePresent) == 0)
             {
                 // case 2
@@ -1359,18 +1434,25 @@ namespace System.Security.AccessControl
                 // This method is called only when the access masks of the two aces are already confirmed to be exact matches
                 // therefore the second condition of case 2 is already verified
                 //
-                Debug.Assert((ace.AccessMask & newAce.AccessMask) == newAce.AccessMask, "AceFlagsAreMergeable:: AccessMask of existing ace does not contain all access bits of new ace.");
+                Debug.Assert(
+                    (ace.AccessMask & newAce.AccessMask) == newAce.AccessMask,
+                    "AceFlagsAreMergeable:: AccessMask of existing ace does not contain all access bits of new ace."
+                );
                 return true;
             }
 
             return false;
         }
 
-        private bool GetAccessMaskForRemoval(QualifiedAce ace, ObjectAceFlags objectFlags, Guid objectType, ref int accessMask)
+        private bool GetAccessMaskForRemoval(
+            QualifiedAce ace,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            ref int accessMask
+        )
         {
             if ((ace.AccessMask & accessMask & ObjectAce.AccessMaskWithObjectType) != 0)
             {
-
                 //
                 // If the aces have access bits in common which refer to object types
                 // then we follow these rules:
@@ -1392,8 +1474,10 @@ namespace System.Security.AccessControl
                     // if what we are trying to remove has an object type
                     // but the existing ace does not then this is an invalid case
                     //
-                    if (((objectFlags & ObjectAceFlags.ObjectAceTypePresent) != 0) &&
-                        ((objectAce.ObjectAceFlags & ObjectAceFlags.ObjectAceTypePresent) == 0))
+                    if (
+                        ((objectFlags & ObjectAceFlags.ObjectAceTypePresent) != 0)
+                        && ((objectAce.ObjectAceFlags & ObjectAceFlags.ObjectAceTypePresent) == 0)
+                    )
                     {
                         return false;
                     }
@@ -1403,8 +1487,9 @@ namespace System.Security.AccessControl
                     // if object types match (since at this point we have ensured that both have object types present)
                     // then we have common access bits with object type
                     //
-                    commonAccessBitsWithObjectTypeExist = ((objectFlags & ObjectAceFlags.ObjectAceTypePresent) == 0) ||
-                                                                                    objectAce.ObjectTypesMatch(objectFlags, objectType);
+                    commonAccessBitsWithObjectTypeExist =
+                        ((objectFlags & ObjectAceFlags.ObjectAceTypePresent) == 0)
+                        || objectAce.ObjectTypesMatch(objectFlags, objectType);
                     if (!commonAccessBitsWithObjectTypeExist)
                     {
                         accessMask &= ~ObjectAce.AccessMaskWithObjectType;
@@ -1419,14 +1504,20 @@ namespace System.Security.AccessControl
             }
 
             return true;
-
         }
 
-        private bool GetInheritanceFlagsForRemoval(QualifiedAce ace, ObjectAceFlags objectFlags, Guid inheritedObjectType, ref AceFlags aceFlags)
+        private bool GetInheritanceFlagsForRemoval(
+            QualifiedAce ace,
+            ObjectAceFlags objectFlags,
+            Guid inheritedObjectType,
+            ref AceFlags aceFlags
+        )
         {
-            if (((ace.AceFlags & AceFlags.ContainerInherit) != 0) && ((aceFlags & AceFlags.ContainerInherit) != 0))
+            if (
+                ((ace.AceFlags & AceFlags.ContainerInherit) != 0)
+                && ((aceFlags & AceFlags.ContainerInherit) != 0)
+            )
             {
-
                 //
                 // If the aces have inheritance bits in common
                 // then we follow these rules:
@@ -1448,8 +1539,15 @@ namespace System.Security.AccessControl
                     // if what we are trying to remove has an inherited object type
                     // but the existing ace does not then this is an invalid case
                     //
-                    if (((objectFlags & ObjectAceFlags.InheritedObjectAceTypePresent) != 0) &&
-                        ((objectAce.ObjectAceFlags & ObjectAceFlags.InheritedObjectAceTypePresent) == 0))
+                    if (
+                        ((objectFlags & ObjectAceFlags.InheritedObjectAceTypePresent) != 0)
+                        && (
+                            (
+                                objectAce.ObjectAceFlags
+                                & ObjectAceFlags.InheritedObjectAceTypePresent
+                            ) == 0
+                        )
+                    )
                     {
                         return false;
                     }
@@ -1458,8 +1556,9 @@ namespace System.Security.AccessControl
                     // if what we are trying to remove has no inherited object type or
                     // if inherited object types match then we have common inheritance flags
                     //
-                    commonInheritanceFlagsExist = ((objectFlags & ObjectAceFlags.InheritedObjectAceTypePresent) == 0) ||
-                                                                       objectAce.InheritedObjectTypesMatch(objectFlags, inheritedObjectType);
+                    commonInheritanceFlagsExist =
+                        ((objectFlags & ObjectAceFlags.InheritedObjectAceTypePresent) == 0)
+                        || objectAce.InheritedObjectTypesMatch(objectFlags, inheritedObjectType);
                     if (!commonInheritanceFlagsExist)
                     {
                         aceFlags &= ~AceFlags.InheritanceFlags;
@@ -1474,7 +1573,6 @@ namespace System.Security.AccessControl
             }
 
             return true;
-
         }
 
         private static bool AceOpaquesMatch(QualifiedAce ace, QualifiedAce newAce)
@@ -1601,21 +1699,22 @@ namespace System.Security.AccessControl
                 }
             }
 
-
-
             //
             // Stage 2: Audit flags can be combined if the rest of the
             //          flags (both access mask and inheritance) match
             //
 
-            if (((ace.AceFlags & AceFlags.InheritanceFlags) == (newAce.AceFlags & AceFlags.InheritanceFlags)) &&
-                (ace.AccessMask == newAce.AccessMask))
+            if (
+                (
+                    (ace.AceFlags & AceFlags.InheritanceFlags)
+                    == (newAce.AceFlags & AceFlags.InheritanceFlags)
+                ) && (ace.AccessMask == newAce.AccessMask)
+            )
             {
                 if ((ace is ObjectAce) || (newAce is ObjectAce))
                 {
                     // for object aces we need to match the inherited object types (for inheritance flags equality) and object type (for access mask equality) as well
-                    if (InheritedObjectTypesMatch(ace, newAce) &&
-                        (ObjectTypesMatch(ace, newAce)))
+                    if (InheritedObjectTypesMatch(ace, newAce) && (ObjectTypesMatch(ace, newAce)))
                     {
                         ace.AceFlags |= (newAce.AceFlags & AceFlags.AuditFlags);
                         return true;
@@ -1626,7 +1725,6 @@ namespace System.Security.AccessControl
                     ace.AceFlags |= (newAce.AceFlags & AceFlags.AuditFlags);
                     return true;
                 }
-
             }
 
             //
@@ -1634,8 +1732,10 @@ namespace System.Security.AccessControl
             //          provided access mask and audit bits are the same
             //
 
-            if (((ace.AceFlags & AceFlags.AuditFlags) == (newAce.AceFlags & AceFlags.AuditFlags)) &&
-                (ace.AccessMask == newAce.AccessMask))
+            if (
+                ((ace.AceFlags & AceFlags.AuditFlags) == (newAce.AceFlags & AceFlags.AuditFlags))
+                && (ace.AccessMask == newAce.AccessMask)
+            )
             {
                 AceFlags merged;
 
@@ -1647,10 +1747,12 @@ namespace System.Security.AccessControl
                 {
                     // object types need to match (for access mask equality) and inheritance flags need additional DS specific logic
                     // to check whether they can be merged
-                    if ((ObjectTypesMatch(ace, newAce)) &&
-                         (AceFlagsAreMergeable(ace, newAce)))
+                    if ((ObjectTypesMatch(ace, newAce)) && (AceFlagsAreMergeable(ace, newAce)))
                     {
-                        if (true == MergeInheritanceBits(ace.AceFlags, newAce.AceFlags, IsDS, out merged))
+                        if (
+                            true
+                            == MergeInheritanceBits(ace.AceFlags, newAce.AceFlags, IsDS, out merged)
+                        )
                         {
                             ace.AceFlags = (merged | (ace.AceFlags & AceFlags.AuditFlags));
                             return true;
@@ -1659,13 +1761,15 @@ namespace System.Security.AccessControl
                 }
                 else
                 {
-                    if (true == MergeInheritanceBits(ace.AceFlags, newAce.AceFlags, IsDS, out merged))
+                    if (
+                        true
+                        == MergeInheritanceBits(ace.AceFlags, newAce.AceFlags, IsDS, out merged)
+                    )
                     {
                         ace.AceFlags = (merged | (ace.AceFlags & AceFlags.AuditFlags));
                         return true;
                     }
                 }
-
             }
 
             return false;
@@ -1733,7 +1837,10 @@ namespace System.Security.AccessControl
                             // Only allow and deny ACEs are allowed here
                             //
 
-                            Debug.Assert(false, "Audit and alarm ACEs must have been stripped by remove-meaningless logic");
+                            Debug.Assert(
+                                false,
+                                "Audit and alarm ACEs must have been stripped by remove-meaningless logic"
+                            );
                             return false;
                         }
                     }
@@ -1800,8 +1907,10 @@ namespace System.Security.AccessControl
                             return false;
                         }
 
-                        if (qualifiedAce.AceQualifier == AceQualifier.SystemAudit ||
-                            qualifiedAce.AceQualifier == AceQualifier.SystemAlarm)
+                        if (
+                            qualifiedAce.AceQualifier == AceQualifier.SystemAudit
+                            || qualifiedAce.AceQualifier == AceQualifier.SystemAlarm
+                        )
                         {
                             aceStage = Explicit;
                         }
@@ -1811,7 +1920,10 @@ namespace System.Security.AccessControl
                             // Only audit and alarm ACEs are allowed here
                             //
 
-                            Debug.Assert(false, "Allow and deny ACEs must have been stripped by remove-meaningless logic");
+                            Debug.Assert(
+                                false,
+                                "Allow and deny ACEs must have been stripped by remove-meaningless logic"
+                            );
                             return false;
                         }
                     }
@@ -1834,7 +1946,9 @@ namespace System.Security.AccessControl
         {
             if (!_isCanonical)
             {
-                throw new InvalidOperationException(SR.InvalidOperation_ModificationOfNonCanonicalAcl);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ModificationOfNonCanonicalAcl
+                );
             }
         }
 
@@ -1846,8 +1960,7 @@ namespace System.Security.AccessControl
         // Creates an empty ACL
         //
 
-        internal CommonAcl(bool isContainer, bool isDS, byte revision, int capacity)
-            : base()
+        internal CommonAcl(bool isContainer, bool isDS, byte revision, int capacity) : base()
         {
             _isContainer = isContainer;
             _isDS = isDS;
@@ -1946,16 +2059,19 @@ namespace System.Security.AccessControl
 
         internal void CheckAccessType(AccessControlType accessType)
         {
-            if (accessType != AccessControlType.Allow &&
-                accessType != AccessControlType.Deny)
+            if (accessType != AccessControlType.Allow && accessType != AccessControlType.Deny)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(accessType),
-                    SR.ArgumentOutOfRange_Enum);
+                    SR.ArgumentOutOfRange_Enum
+                );
             }
         }
 
-        internal void CheckFlags(InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags)
+        internal void CheckFlags(
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags
+        )
         {
             if (IsContainer)
             {
@@ -1963,25 +2079,24 @@ namespace System.Security.AccessControl
                 // Supplying propagation flags without inheritance flags is illegal
                 //
 
-                if (inheritanceFlags == InheritanceFlags.None &&
-                    propagationFlags != PropagationFlags.None)
+                if (
+                    inheritanceFlags == InheritanceFlags.None
+                    && propagationFlags != PropagationFlags.None
+                )
                 {
                     throw new ArgumentException(
                         SR.Argument_InvalidAnyFlag,
-                        nameof(propagationFlags));
+                        nameof(propagationFlags)
+                    );
                 }
             }
             else if (inheritanceFlags != InheritanceFlags.None)
             {
-                throw new ArgumentException(
-                    SR.Argument_InvalidAnyFlag,
-                    nameof(inheritanceFlags));
+                throw new ArgumentException(SR.Argument_InvalidAnyFlag, nameof(inheritanceFlags));
             }
             else if (propagationFlags != PropagationFlags.None)
             {
-                throw new ArgumentException(
-                    SR.Argument_InvalidAnyFlag,
-                    nameof(propagationFlags));
+                throw new ArgumentException(SR.Argument_InvalidAnyFlag, nameof(propagationFlags));
             }
 
             return;
@@ -1991,7 +2106,15 @@ namespace System.Security.AccessControl
         // Helper function behind all the AddXXX methods for qualified aces
         //
 
-        internal void AddQualifiedAce(SecurityIdentifier sid, AceQualifier qualifier, int accessMask, AceFlags flags, ObjectAceFlags objectFlags, Guid objectType, Guid inheritedObjectType)
+        internal void AddQualifiedAce(
+            SecurityIdentifier sid,
+            AceQualifier qualifier,
+            int accessMask,
+            AceFlags flags,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             if (sid == null)
             {
@@ -2002,19 +2125,14 @@ namespace System.Security.AccessControl
 
             bool aceMerged = false; // if still false after all attempts to merge, create new entry
 
-            if (qualifier == AceQualifier.SystemAudit &&
-                ((flags & AceFlags.AuditFlags) == 0))
+            if (qualifier == AceQualifier.SystemAudit && ((flags & AceFlags.AuditFlags) == 0))
             {
-                throw new ArgumentException(
-                    SR.Arg_EnumAtLeastOneFlag,
-                    nameof(flags));
+                throw new ArgumentException(SR.Arg_EnumAtLeastOneFlag, nameof(flags));
             }
 
             if (accessMask == 0)
             {
-                throw new ArgumentException(
-                    SR.Argument_ArgumentZero,
-                    nameof(accessMask));
+                throw new ArgumentException(SR.Argument_ArgumentZero, nameof(accessMask));
             }
 
             GenericAce newAce;
@@ -2025,7 +2143,17 @@ namespace System.Security.AccessControl
             }
             else
             {
-                newAce = new ObjectAce(flags, qualifier, accessMask, sid, objectFlags, objectType, inheritedObjectType, false, null);
+                newAce = new ObjectAce(
+                    flags,
+                    qualifier,
+                    accessMask,
+                    sid,
+                    objectFlags,
+                    objectType,
+                    inheritedObjectType,
+                    false,
+                    null
+                );
             }
 
             //
@@ -2074,26 +2202,29 @@ namespace System.Security.AccessControl
         // Helper function behind all the SetXXX methods
         //
 
-        internal void SetQualifiedAce(SecurityIdentifier sid, AceQualifier qualifier, int accessMask, AceFlags flags, ObjectAceFlags objectFlags, Guid objectType, Guid inheritedObjectType)
+        internal void SetQualifiedAce(
+            SecurityIdentifier sid,
+            AceQualifier qualifier,
+            int accessMask,
+            AceFlags flags,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             if (sid == null)
             {
                 throw new ArgumentNullException(nameof(sid));
             }
 
-            if (qualifier == AceQualifier.SystemAudit &&
-                ((flags & AceFlags.AuditFlags) == 0))
+            if (qualifier == AceQualifier.SystemAudit && ((flags & AceFlags.AuditFlags) == 0))
             {
-                throw new ArgumentException(
-                    SR.Arg_EnumAtLeastOneFlag,
-                    nameof(flags));
+                throw new ArgumentException(SR.Arg_EnumAtLeastOneFlag, nameof(flags));
             }
 
             if (accessMask == 0)
             {
-                throw new ArgumentException(
-                    SR.Argument_ArgumentZero,
-                    nameof(accessMask));
+                throw new ArgumentException(SR.Argument_ArgumentZero, nameof(accessMask));
             }
 
             ThrowIfNotCanonical();
@@ -2106,7 +2237,17 @@ namespace System.Security.AccessControl
             }
             else
             {
-                newAce = new ObjectAce(flags, qualifier, accessMask, sid, objectFlags, objectType, inheritedObjectType, false, null);
+                newAce = new ObjectAce(
+                    flags,
+                    qualifier,
+                    accessMask,
+                    sid,
+                    objectFlags,
+                    objectType,
+                    inheritedObjectType,
+                    false,
+                    null
+                );
             }
 
             //
@@ -2185,21 +2326,25 @@ namespace System.Security.AccessControl
         // Helper function behind all the RemoveXXX methods
         //
 
-        internal bool RemoveQualifiedAces(SecurityIdentifier sid, AceQualifier qualifier, int accessMask, AceFlags flags, bool saclSemantics, ObjectAceFlags objectFlags, Guid objectType, Guid inheritedObjectType)
+        internal bool RemoveQualifiedAces(
+            SecurityIdentifier sid,
+            AceQualifier qualifier,
+            int accessMask,
+            AceFlags flags,
+            bool saclSemantics,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             if (accessMask == 0)
             {
-                throw new ArgumentException(
-                    SR.Argument_ArgumentZero,
-                    nameof(accessMask));
+                throw new ArgumentException(SR.Argument_ArgumentZero, nameof(accessMask));
             }
 
-            if (qualifier == AceQualifier.SystemAudit &&
-                ((flags & AceFlags.AuditFlags) == 0))
+            if (qualifier == AceQualifier.SystemAudit && ((flags & AceFlags.AuditFlags) == 0))
             {
-                throw new ArgumentException(
-                    SR.Arg_EnumAtLeastOneFlag,
-                    nameof(flags));
+                throw new ArgumentException(SR.Arg_EnumAtLeastOneFlag, nameof(flags));
             }
 
             if (sid == null)
@@ -2208,7 +2353,6 @@ namespace System.Security.AccessControl
             }
 
             ThrowIfNotCanonical();
-
 
             //
             // Two passes are made.
@@ -2237,7 +2381,7 @@ namespace System.Security.AccessControl
             byte[] recovery = new byte[BinaryLength];
             GetBinaryForm(recovery, 0);
 
-        MakeAnotherPass:
+            MakeAnotherPass:
 
             try
             {
@@ -2297,7 +2441,12 @@ namespace System.Security.AccessControl
                         // the object types are different in which case they are really not common bits.
                         //
                         accessMask = originalAccessMask;
-                        bool objectTypesConflict = !GetAccessMaskForRemoval(ace, objectFlags, objectType, ref accessMask);
+                        bool objectTypesConflict = !GetAccessMaskForRemoval(
+                            ace,
+                            objectFlags,
+                            objectType,
+                            ref accessMask
+                        );
 
                         // if the access masks have nothing in common, skip
                         if ((ace.AccessMask & accessMask) == 0)
@@ -2314,10 +2463,25 @@ namespace System.Security.AccessControl
                         // the inherited object types are different the inheritance may not be common.
                         //
                         flags = originalFlags;
-                        bool inheritedObjectTypesConflict = !GetInheritanceFlagsForRemoval(ace, objectFlags, inheritedObjectType, ref flags);
+                        bool inheritedObjectTypesConflict = !GetInheritanceFlagsForRemoval(
+                            ace,
+                            objectFlags,
+                            inheritedObjectType,
+                            ref flags
+                        );
 
-                        if ((((ace.AceFlags & AceFlags.ContainerInherit) == 0) && ((flags & AceFlags.ContainerInherit) != 0) && ((flags & AceFlags.InheritOnly) != 0)) ||
-                             (((flags & AceFlags.ContainerInherit) == 0) && ((ace.AceFlags & AceFlags.ContainerInherit) != 0) && ((ace.AceFlags & AceFlags.InheritOnly) != 0)))
+                        if (
+                            (
+                                ((ace.AceFlags & AceFlags.ContainerInherit) == 0)
+                                && ((flags & AceFlags.ContainerInherit) != 0)
+                                && ((flags & AceFlags.InheritOnly) != 0)
+                            )
+                            || (
+                                ((flags & AceFlags.ContainerInherit) == 0)
+                                && ((ace.AceFlags & AceFlags.ContainerInherit) != 0)
+                                && ((ace.AceFlags & AceFlags.InheritOnly) != 0)
+                            )
+                        )
                         {
                             // if one ace applies only to self and the other only to children/descendents we have nothing in common
                             continue;
@@ -2327,7 +2491,11 @@ namespace System.Security.AccessControl
                         // if the ace being removed referred only to child types and child types among existing ace and
                         // ace being removed are not common then there is nothing in common between these aces (skip)
                         //
-                        if (((originalFlags & AceFlags.ContainerInherit) != 0) && ((originalFlags & AceFlags.InheritOnly) != 0) && ((flags & AceFlags.ContainerInherit) == 0))
+                        if (
+                            ((originalFlags & AceFlags.ContainerInherit) != 0)
+                            && ((originalFlags & AceFlags.InheritOnly) != 0)
+                            && ((flags & AceFlags.ContainerInherit) == 0)
+                        )
                         {
                             continue;
                         }
@@ -2355,8 +2523,7 @@ namespace System.Security.AccessControl
                     // skip the whole exercise
                     //
 
-                    if (saclSemantics &&
-                        ((ace.AceFlags & flags & AceFlags.AuditFlags) == 0))
+                    if (saclSemantics && ((ace.AceFlags & flags & AceFlags.AuditFlags) == 0))
                     {
                         continue;
                     }
@@ -2433,14 +2600,26 @@ namespace System.Security.AccessControl
                     //
 
                     ps_AceFlags = ace.AceFlags;
-                    unchecked { ps_AccessMask = ace.AccessMask & ~accessMask; }
+                    unchecked
+                    {
+                        ps_AccessMask = ace.AccessMask & ~accessMask;
+                    }
 
                     if (ace is ObjectAce oAce)
                     {
                         //
                         // determine what should be the object/inherited object types on the permission split
                         //
-                        GetObjectTypesForSplit(oAce, ps_AccessMask /* access mask for this split */, ps_AceFlags /* flags remain the same */, out ps_ObjectAceFlags, out ps_ObjectAceType, out ps_InheritedObjectAceType);
+                        GetObjectTypesForSplit(
+                            oAce,
+                            ps_AccessMask /* access mask for this split */
+                            ,
+                            ps_AceFlags /* flags remain the same */
+                            ,
+                            out ps_ObjectAceFlags,
+                            out ps_ObjectAceType,
+                            out ps_InheritedObjectAceType
+                        );
                     }
 
                     //
@@ -2455,7 +2634,10 @@ namespace System.Security.AccessControl
                         // This case will be handled later
                         //
 
-                        unchecked { as_AceFlags = ace.AceFlags & ~(flags & AceFlags.AuditFlags); }
+                        unchecked
+                        {
+                            as_AceFlags = ace.AceFlags & ~(flags & AceFlags.AuditFlags);
+                        }
 
                         //
                         // The result of this evaluation is guaranteed
@@ -2469,7 +2651,16 @@ namespace System.Security.AccessControl
                             //
                             // determine what should be the object/inherited object types on the audit split
                             //
-                            GetObjectTypesForSplit(objAce, as_AccessMask /* access mask for this split */, as_AceFlags /* flags remain the same for inheritance */, out as_ObjectAceFlags, out as_ObjectAceType, out as_InheritedObjectAceType);
+                            GetObjectTypesForSplit(
+                                objAce,
+                                as_AccessMask /* access mask for this split */
+                                ,
+                                as_AceFlags /* flags remain the same for inheritance */
+                                ,
+                                out as_ObjectAceFlags,
+                                out as_ObjectAceType,
+                                out as_InheritedObjectAceType
+                            );
                         }
                     }
 
@@ -2477,9 +2668,10 @@ namespace System.Security.AccessControl
                     // Finally, compute the merge split
                     //
 
-                    ms_AceFlags = (ace.AceFlags & AceFlags.InheritanceFlags) | (flags & ace.AceFlags & AceFlags.AuditFlags);
+                    ms_AceFlags =
+                        (ace.AceFlags & AceFlags.InheritanceFlags)
+                        | (flags & ace.AceFlags & AceFlags.AuditFlags);
                     ms_AccessMask = (ace.AccessMask & accessMask);
-
 
                     //
                     // Now is the time to obtain the result of applying the remove
@@ -2488,10 +2680,18 @@ namespace System.Security.AccessControl
                     // produced no auditing flags
                     //
 
-                    if (!saclSemantics ||
-                        ((ms_AceFlags & AceFlags.AuditFlags) != 0))
+                    if (!saclSemantics || ((ms_AceFlags & AceFlags.AuditFlags) != 0))
                     {
-                        if (false == RemoveInheritanceBits(ms_AceFlags, flags, IsDS, out mergeResultFlags, out mergeRemoveTotal))
+                        if (
+                            false
+                            == RemoveInheritanceBits(
+                                ms_AceFlags,
+                                flags,
+                                IsDS,
+                                out mergeResultFlags,
+                                out mergeRemoveTotal
+                            )
+                        )
                         {
                             removePossible = false;
                             break;
@@ -2506,7 +2706,16 @@ namespace System.Security.AccessControl
                                 //
                                 // determine what should be the object/inherited object types on the merge split
                                 //
-                                GetObjectTypesForSplit(objAce, ms_AccessMask /* access mask for this split */, mergeResultFlags /* flags for this split */, out ms_ObjectAceFlags, out ms_ObjectAceType, out ms_InheritedObjectAceType);
+                                GetObjectTypesForSplit(
+                                    objAce,
+                                    ms_AccessMask /* access mask for this split */
+                                    ,
+                                    mergeResultFlags /* flags for this split */
+                                    ,
+                                    out ms_ObjectAceFlags,
+                                    out ms_ObjectAceType,
+                                    out ms_InheritedObjectAceType
+                                );
                             }
                         }
                     }
@@ -2529,14 +2738,31 @@ namespace System.Security.AccessControl
 
                         if (ps_AccessMask != 0)
                         {
-                            if ((ace is ObjectAce) &&
-                                ((((ObjectAce)ace).ObjectAceFlags & ObjectAceFlags.ObjectAceTypePresent) != 0) &&
-                                     ((ps_ObjectAceFlags & ObjectAceFlags.ObjectAceTypePresent) == 0))
+                            if (
+                                (ace is ObjectAce)
+                                && (
+                                    (
+                                        ((ObjectAce)ace).ObjectAceFlags
+                                        & ObjectAceFlags.ObjectAceTypePresent
+                                    ) != 0
+                                )
+                                && ((ps_ObjectAceFlags & ObjectAceFlags.ObjectAceTypePresent) == 0)
+                            )
                             {
                                 ObjectAce newObjectAce;
 
                                 _acl.RemoveAce(i);
-                                newObjectAce = new ObjectAce(ps_AceFlags, qualifier, ps_AccessMask, ace.SecurityIdentifier, ps_ObjectAceFlags, ps_ObjectAceType, ps_InheritedObjectAceType, false, null);
+                                newObjectAce = new ObjectAce(
+                                    ps_AceFlags,
+                                    qualifier,
+                                    ps_AccessMask,
+                                    ace.SecurityIdentifier,
+                                    ps_ObjectAceFlags,
+                                    ps_ObjectAceType,
+                                    ps_InheritedObjectAceType,
+                                    false,
+                                    null
+                                );
                                 _acl.InsertAce(i, newObjectAce);
                             }
                             else
@@ -2566,12 +2792,29 @@ namespace System.Security.AccessControl
                         {
                             if (ace is CommonAce)
                             {
-                                newAce = new CommonAce(as_AceFlags, qualifier, as_AccessMask, ace.SecurityIdentifier, false, null);
+                                newAce = new CommonAce(
+                                    as_AceFlags,
+                                    qualifier,
+                                    as_AccessMask,
+                                    ace.SecurityIdentifier,
+                                    false,
+                                    null
+                                );
                             }
                             else
                             {
                                 // object ace
-                                newAce = new ObjectAce(as_AceFlags, qualifier, as_AccessMask, ace.SecurityIdentifier, as_ObjectAceFlags, as_ObjectAceType, as_InheritedObjectAceType, false, null);
+                                newAce = new ObjectAce(
+                                    as_AceFlags,
+                                    qualifier,
+                                    as_AccessMask,
+                                    ace.SecurityIdentifier,
+                                    as_ObjectAceFlags,
+                                    as_ObjectAceType,
+                                    as_InheritedObjectAceType,
+                                    false,
+                                    null
+                                );
                             }
 
                             i++; // so it's not considered again
@@ -2587,12 +2830,29 @@ namespace System.Security.AccessControl
                         {
                             if (ace is CommonAce)
                             {
-                                newAce = new CommonAce(mergeResultFlags, qualifier, ms_AccessMask, ace.SecurityIdentifier, false, null);
+                                newAce = new CommonAce(
+                                    mergeResultFlags,
+                                    qualifier,
+                                    ms_AccessMask,
+                                    ace.SecurityIdentifier,
+                                    false,
+                                    null
+                                );
                             }
                             else
                             {
                                 // object ace
-                                newAce = new ObjectAce(mergeResultFlags, qualifier, ms_AccessMask, ace.SecurityIdentifier, ms_ObjectAceFlags, ms_ObjectAceType, ms_InheritedObjectAceType, false, null);
+                                newAce = new ObjectAce(
+                                    mergeResultFlags,
+                                    qualifier,
+                                    ms_AccessMask,
+                                    ace.SecurityIdentifier,
+                                    ms_ObjectAceFlags,
+                                    ms_ObjectAceType,
+                                    ms_InheritedObjectAceType,
+                                    false,
+                                    null
+                                );
                             }
 
                             i++; // so it's not considered again
@@ -2628,21 +2888,24 @@ namespace System.Security.AccessControl
             return removePossible;
         }
 
-        internal void RemoveQualifiedAcesSpecific(SecurityIdentifier sid, AceQualifier qualifier, int accessMask, AceFlags flags, ObjectAceFlags objectFlags, Guid objectType, Guid inheritedObjectType)
+        internal void RemoveQualifiedAcesSpecific(
+            SecurityIdentifier sid,
+            AceQualifier qualifier,
+            int accessMask,
+            AceFlags flags,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             if (accessMask == 0)
             {
-                throw new ArgumentException(
-                    SR.Argument_ArgumentZero,
-                    nameof(accessMask));
+                throw new ArgumentException(SR.Argument_ArgumentZero, nameof(accessMask));
             }
 
-            if (qualifier == AceQualifier.SystemAudit &&
-                ((flags & AceFlags.AuditFlags) == 0))
+            if (qualifier == AceQualifier.SystemAudit && ((flags & AceFlags.AuditFlags) == 0))
             {
-                throw new ArgumentException(
-                    SR.Arg_EnumAtLeastOneFlag,
-                    nameof(flags));
+                throw new ArgumentException(SR.Arg_EnumAtLeastOneFlag, nameof(flags));
             }
 
             if (sid == null)
@@ -2723,8 +2986,15 @@ namespace System.Security.AccessControl
                         // both are object aces, so must match in object type and inherited object type
                         //
 
-                        if ((!objectAce.ObjectTypesMatch(objectFlags, objectType))
-                            || (!objectAce.InheritedObjectTypesMatch(objectFlags, inheritedObjectType)))
+                        if (
+                            (!objectAce.ObjectTypesMatch(objectFlags, objectType))
+                            || (
+                                !objectAce.InheritedObjectTypesMatch(
+                                    objectFlags,
+                                    inheritedObjectType
+                                )
+                            )
+                        )
                         {
                             continue;
                         }
@@ -2746,9 +3016,7 @@ namespace System.Security.AccessControl
             OnAclModificationTried();
         }
 
-        internal virtual void OnAclModificationTried()
-        {
-        }
+        internal virtual void OnAclModificationTried() { }
         #endregion
 
         #region Public Properties
@@ -2834,11 +3102,7 @@ namespace System.Security.AccessControl
                 CanonicalizeIfNecessary();
                 return _acl[index].Copy();
             }
-
-            set
-            {
-                throw new NotSupportedException(SR.NotSupported_SetMethod);
-            }
+            set { throw new NotSupportedException(SR.NotSupported_SetMethod); }
         }
 
         public void RemoveInheritedAces()
@@ -2908,7 +3172,6 @@ namespace System.Security.AccessControl
         #endregion
     }
 
-
     public sealed class SystemAcl : CommonAcl
     {
         #region Constructors
@@ -2918,14 +3181,10 @@ namespace System.Security.AccessControl
         //
 
         public SystemAcl(bool isContainer, bool isDS, int capacity)
-            : this(isContainer, isDS, isDS ? AclRevisionDS : AclRevision, capacity)
-        {
-        }
+            : this(isContainer, isDS, isDS ? AclRevisionDS : AclRevision, capacity) { }
 
         public SystemAcl(bool isContainer, bool isDS, byte revision, int capacity)
-            : base(isContainer, isDS, revision, capacity)
-        {
-        }
+            : base(isContainer, isDS, revision, capacity) { }
 
         //
         // Creates an ACL from a given raw ACL
@@ -2933,9 +3192,7 @@ namespace System.Security.AccessControl
         //
 
         public SystemAcl(bool isContainer, bool isDS, RawAcl rawAcl)
-            : this(isContainer, isDS, rawAcl, false)
-        {
-        }
+            : this(isContainer, isDS, rawAcl, false) { }
 
         //
         // Internal version - if 'trusted' is true,
@@ -2943,122 +3200,288 @@ namespace System.Security.AccessControl
         //
 
         internal SystemAcl(bool isContainer, bool isDS, RawAcl rawAcl, bool trusted)
-            : base(isContainer, isDS, rawAcl, trusted, false)
-        {
-        }
+            : base(isContainer, isDS, rawAcl, trusted, false) { }
 
         #endregion
 
         #region Public Methods
 
-        public void AddAudit(AuditFlags auditFlags, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags)
+        public void AddAudit(
+            AuditFlags auditFlags,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags
+        )
         {
             CheckFlags(inheritanceFlags, propagationFlags);
-            AddQualifiedAce(sid, AceQualifier.SystemAudit, accessMask, GenericAce.AceFlagsFromAuditFlags(auditFlags) | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+            AddQualifiedAce(
+                sid,
+                AceQualifier.SystemAudit,
+                accessMask,
+                GenericAce.AceFlagsFromAuditFlags(auditFlags)
+                    | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                ObjectAceFlags.None,
+                Guid.Empty,
+                Guid.Empty
+            );
         }
 
-        public void SetAudit(AuditFlags auditFlags, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags)
+        public void SetAudit(
+            AuditFlags auditFlags,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags
+        )
         {
             CheckFlags(inheritanceFlags, propagationFlags);
-            SetQualifiedAce(sid, AceQualifier.SystemAudit, accessMask, GenericAce.AceFlagsFromAuditFlags(auditFlags) | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+            SetQualifiedAce(
+                sid,
+                AceQualifier.SystemAudit,
+                accessMask,
+                GenericAce.AceFlagsFromAuditFlags(auditFlags)
+                    | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                ObjectAceFlags.None,
+                Guid.Empty,
+                Guid.Empty
+            );
         }
 
-        public bool RemoveAudit(AuditFlags auditFlags, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags)
+        public bool RemoveAudit(
+            AuditFlags auditFlags,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags
+        )
         {
-            return RemoveQualifiedAces(sid, AceQualifier.SystemAudit, accessMask, GenericAce.AceFlagsFromAuditFlags(auditFlags) | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), true, ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+            return RemoveQualifiedAces(
+                sid,
+                AceQualifier.SystemAudit,
+                accessMask,
+                GenericAce.AceFlagsFromAuditFlags(auditFlags)
+                    | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                true,
+                ObjectAceFlags.None,
+                Guid.Empty,
+                Guid.Empty
+            );
         }
 
-        public void RemoveAuditSpecific(AuditFlags auditFlags, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags)
+        public void RemoveAuditSpecific(
+            AuditFlags auditFlags,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags
+        )
         {
-            RemoveQualifiedAcesSpecific(sid, AceQualifier.SystemAudit, accessMask, GenericAce.AceFlagsFromAuditFlags(auditFlags) | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+            RemoveQualifiedAcesSpecific(
+                sid,
+                AceQualifier.SystemAudit,
+                accessMask,
+                GenericAce.AceFlagsFromAuditFlags(auditFlags)
+                    | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                ObjectAceFlags.None,
+                Guid.Empty,
+                Guid.Empty
+            );
         }
 
         public void AddAudit(SecurityIdentifier sid, ObjectAuditRule rule)
         {
-            AddAudit(rule.AuditFlags, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
+            AddAudit(
+                rule.AuditFlags,
+                sid,
+                rule.AccessMask,
+                rule.InheritanceFlags,
+                rule.PropagationFlags,
+                rule.ObjectFlags,
+                rule.ObjectType,
+                rule.InheritedObjectType
+            );
         }
 
-        public void AddAudit(AuditFlags auditFlags, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, ObjectAceFlags objectFlags, Guid objectType, Guid inheritedObjectType)
+        public void AddAudit(
+            AuditFlags auditFlags,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             //
             // This is valid only for DS Acls
             //
             if (!IsDS)
             {
-                throw new InvalidOperationException(
-                    SR.InvalidOperation_OnlyValidForDS);
+                throw new InvalidOperationException(SR.InvalidOperation_OnlyValidForDS);
             }
 
             CheckFlags(inheritanceFlags, propagationFlags);
-            AddQualifiedAce(sid, AceQualifier.SystemAudit, accessMask, GenericAce.AceFlagsFromAuditFlags(auditFlags) | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), objectFlags, objectType, inheritedObjectType);
+            AddQualifiedAce(
+                sid,
+                AceQualifier.SystemAudit,
+                accessMask,
+                GenericAce.AceFlagsFromAuditFlags(auditFlags)
+                    | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                objectFlags,
+                objectType,
+                inheritedObjectType
+            );
         }
 
         public void SetAudit(SecurityIdentifier sid, ObjectAuditRule rule)
         {
-            SetAudit(rule.AuditFlags, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
+            SetAudit(
+                rule.AuditFlags,
+                sid,
+                rule.AccessMask,
+                rule.InheritanceFlags,
+                rule.PropagationFlags,
+                rule.ObjectFlags,
+                rule.ObjectType,
+                rule.InheritedObjectType
+            );
         }
 
-        public void SetAudit(AuditFlags auditFlags, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, ObjectAceFlags objectFlags, Guid objectType, Guid inheritedObjectType)
+        public void SetAudit(
+            AuditFlags auditFlags,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             //
             // This is valid only for DS Acls
             //
             if (!IsDS)
             {
-                throw new InvalidOperationException(
-                    SR.InvalidOperation_OnlyValidForDS);
+                throw new InvalidOperationException(SR.InvalidOperation_OnlyValidForDS);
             }
 
             CheckFlags(inheritanceFlags, propagationFlags);
-            SetQualifiedAce(sid, AceQualifier.SystemAudit, accessMask, GenericAce.AceFlagsFromAuditFlags(auditFlags) | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), objectFlags, objectType, inheritedObjectType);
+            SetQualifiedAce(
+                sid,
+                AceQualifier.SystemAudit,
+                accessMask,
+                GenericAce.AceFlagsFromAuditFlags(auditFlags)
+                    | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                objectFlags,
+                objectType,
+                inheritedObjectType
+            );
         }
 
         public bool RemoveAudit(SecurityIdentifier sid, ObjectAuditRule rule)
         {
-            return RemoveAudit(rule.AuditFlags, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
+            return RemoveAudit(
+                rule.AuditFlags,
+                sid,
+                rule.AccessMask,
+                rule.InheritanceFlags,
+                rule.PropagationFlags,
+                rule.ObjectFlags,
+                rule.ObjectType,
+                rule.InheritedObjectType
+            );
         }
 
-        public bool RemoveAudit(AuditFlags auditFlags, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, ObjectAceFlags objectFlags, Guid objectType, Guid inheritedObjectType)
+        public bool RemoveAudit(
+            AuditFlags auditFlags,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             //
             // This is valid only for DS Acls
             //
             if (!IsDS)
             {
-                throw new InvalidOperationException(
-                    SR.InvalidOperation_OnlyValidForDS);
+                throw new InvalidOperationException(SR.InvalidOperation_OnlyValidForDS);
             }
 
-            return RemoveQualifiedAces(sid, AceQualifier.SystemAudit, accessMask, GenericAce.AceFlagsFromAuditFlags(auditFlags) | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), true, objectFlags, objectType, inheritedObjectType);
+            return RemoveQualifiedAces(
+                sid,
+                AceQualifier.SystemAudit,
+                accessMask,
+                GenericAce.AceFlagsFromAuditFlags(auditFlags)
+                    | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                true,
+                objectFlags,
+                objectType,
+                inheritedObjectType
+            );
         }
 
         public void RemoveAuditSpecific(SecurityIdentifier sid, ObjectAuditRule rule)
         {
-            RemoveAuditSpecific(rule.AuditFlags, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
+            RemoveAuditSpecific(
+                rule.AuditFlags,
+                sid,
+                rule.AccessMask,
+                rule.InheritanceFlags,
+                rule.PropagationFlags,
+                rule.ObjectFlags,
+                rule.ObjectType,
+                rule.InheritedObjectType
+            );
         }
 
-        public void RemoveAuditSpecific(AuditFlags auditFlags, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, ObjectAceFlags objectFlags, Guid objectType, Guid inheritedObjectType)
+        public void RemoveAuditSpecific(
+            AuditFlags auditFlags,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             //
             // This is valid only for DS Acls
             //
             if (!IsDS)
             {
-                throw new InvalidOperationException(
-                    SR.InvalidOperation_OnlyValidForDS);
+                throw new InvalidOperationException(SR.InvalidOperation_OnlyValidForDS);
             }
 
-            RemoveQualifiedAcesSpecific(sid, AceQualifier.SystemAudit, accessMask, GenericAce.AceFlagsFromAuditFlags(auditFlags) | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), objectFlags, objectType, inheritedObjectType);
+            RemoveQualifiedAcesSpecific(
+                sid,
+                AceQualifier.SystemAudit,
+                accessMask,
+                GenericAce.AceFlagsFromAuditFlags(auditFlags)
+                    | GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                objectFlags,
+                objectType,
+                inheritedObjectType
+            );
         }
 
         #endregion
     }
 
-
     public sealed class DiscretionaryAcl : CommonAcl
     {
         #region
-        private static readonly SecurityIdentifier _sidEveryone = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+        private static readonly SecurityIdentifier _sidEveryone = new SecurityIdentifier(
+            WellKnownSidType.WorldSid,
+            null
+        );
         private bool everyOneFullAccessForNullDacl;
         #endregion
 
@@ -3069,14 +3492,10 @@ namespace System.Security.AccessControl
         //
 
         public DiscretionaryAcl(bool isContainer, bool isDS, int capacity)
-            : this(isContainer, isDS, isDS ? AclRevisionDS : AclRevision, capacity)
-        {
-        }
+            : this(isContainer, isDS, isDS ? AclRevisionDS : AclRevision, capacity) { }
 
         public DiscretionaryAcl(bool isContainer, bool isDS, byte revision, int capacity)
-            : base(isContainer, isDS, revision, capacity)
-        {
-        }
+            : base(isContainer, isDS, revision, capacity) { }
 
         //
         // Creates an ACL from a given raw ACL
@@ -3084,9 +3503,7 @@ namespace System.Security.AccessControl
         //
 
         public DiscretionaryAcl(bool isContainer, bool isDS, RawAcl? rawAcl)
-            : this(isContainer, isDS, rawAcl, false)
-        {
-        }
+            : this(isContainer, isDS, rawAcl, false) { }
 
         //
         // Internal version - if 'trusted' is true,
@@ -3094,128 +3511,322 @@ namespace System.Security.AccessControl
         //
 
         internal DiscretionaryAcl(bool isContainer, bool isDS, RawAcl? rawAcl, bool trusted)
-            : base(isContainer, isDS, rawAcl == null ? new RawAcl(isDS ? AclRevisionDS : AclRevision, 0) : rawAcl, trusted, true)
-        {
-        }
+            : base(
+                isContainer,
+                isDS,
+                rawAcl == null ? new RawAcl(isDS ? AclRevisionDS : AclRevision, 0) : rawAcl,
+                trusted,
+                true
+            ) { }
 
         #endregion
 
         #region Public Methods
 
-        public void AddAccess(AccessControlType accessType, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags)
+        public void AddAccess(
+            AccessControlType accessType,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags
+        )
         {
             CheckAccessType(accessType);
             CheckFlags(inheritanceFlags, propagationFlags);
             everyOneFullAccessForNullDacl = false;
-            AddQualifiedAce(sid, accessType == AccessControlType.Allow ? AceQualifier.AccessAllowed : AceQualifier.AccessDenied, accessMask, GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+            AddQualifiedAce(
+                sid,
+                accessType == AccessControlType.Allow
+                  ? AceQualifier.AccessAllowed
+                  : AceQualifier.AccessDenied,
+                accessMask,
+                GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                ObjectAceFlags.None,
+                Guid.Empty,
+                Guid.Empty
+            );
         }
 
-        public void SetAccess(AccessControlType accessType, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags)
+        public void SetAccess(
+            AccessControlType accessType,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags
+        )
         {
             CheckAccessType(accessType);
             CheckFlags(inheritanceFlags, propagationFlags);
             everyOneFullAccessForNullDacl = false;
-            SetQualifiedAce(sid, accessType == AccessControlType.Allow ? AceQualifier.AccessAllowed : AceQualifier.AccessDenied, accessMask, GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+            SetQualifiedAce(
+                sid,
+                accessType == AccessControlType.Allow
+                  ? AceQualifier.AccessAllowed
+                  : AceQualifier.AccessDenied,
+                accessMask,
+                GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                ObjectAceFlags.None,
+                Guid.Empty,
+                Guid.Empty
+            );
         }
 
-        public bool RemoveAccess(AccessControlType accessType, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags)
+        public bool RemoveAccess(
+            AccessControlType accessType,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags
+        )
         {
             CheckAccessType(accessType);
             everyOneFullAccessForNullDacl = false;
-            return RemoveQualifiedAces(sid, accessType == AccessControlType.Allow ? AceQualifier.AccessAllowed : AceQualifier.AccessDenied, accessMask, GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), false, ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+            return RemoveQualifiedAces(
+                sid,
+                accessType == AccessControlType.Allow
+                  ? AceQualifier.AccessAllowed
+                  : AceQualifier.AccessDenied,
+                accessMask,
+                GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                false,
+                ObjectAceFlags.None,
+                Guid.Empty,
+                Guid.Empty
+            );
         }
 
-        public void RemoveAccessSpecific(AccessControlType accessType, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags)
+        public void RemoveAccessSpecific(
+            AccessControlType accessType,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags
+        )
         {
             CheckAccessType(accessType);
             everyOneFullAccessForNullDacl = false;
-            RemoveQualifiedAcesSpecific(sid, accessType == AccessControlType.Allow ? AceQualifier.AccessAllowed : AceQualifier.AccessDenied, accessMask, GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), ObjectAceFlags.None, Guid.Empty, Guid.Empty);
+            RemoveQualifiedAcesSpecific(
+                sid,
+                accessType == AccessControlType.Allow
+                  ? AceQualifier.AccessAllowed
+                  : AceQualifier.AccessDenied,
+                accessMask,
+                GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                ObjectAceFlags.None,
+                Guid.Empty,
+                Guid.Empty
+            );
         }
 
-        public void AddAccess(AccessControlType accessType, SecurityIdentifier sid, ObjectAccessRule rule)
+        public void AddAccess(
+            AccessControlType accessType,
+            SecurityIdentifier sid,
+            ObjectAccessRule rule
+        )
         {
-            AddAccess(accessType, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
+            AddAccess(
+                accessType,
+                sid,
+                rule.AccessMask,
+                rule.InheritanceFlags,
+                rule.PropagationFlags,
+                rule.ObjectFlags,
+                rule.ObjectType,
+                rule.InheritedObjectType
+            );
         }
 
-        public void AddAccess(AccessControlType accessType, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, ObjectAceFlags objectFlags, Guid objectType, Guid inheritedObjectType)
+        public void AddAccess(
+            AccessControlType accessType,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             //
             // This is valid only for DS Acls
             //
             if (!IsDS)
             {
-                throw new InvalidOperationException(
-                    SR.InvalidOperation_OnlyValidForDS);
+                throw new InvalidOperationException(SR.InvalidOperation_OnlyValidForDS);
             }
 
             CheckAccessType(accessType);
             CheckFlags(inheritanceFlags, propagationFlags);
             everyOneFullAccessForNullDacl = false;
-            AddQualifiedAce(sid, accessType == AccessControlType.Allow ? AceQualifier.AccessAllowed : AceQualifier.AccessDenied, accessMask, GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), objectFlags, objectType, inheritedObjectType);
+            AddQualifiedAce(
+                sid,
+                accessType == AccessControlType.Allow
+                  ? AceQualifier.AccessAllowed
+                  : AceQualifier.AccessDenied,
+                accessMask,
+                GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                objectFlags,
+                objectType,
+                inheritedObjectType
+            );
         }
 
-        public void SetAccess(AccessControlType accessType, SecurityIdentifier sid, ObjectAccessRule rule)
+        public void SetAccess(
+            AccessControlType accessType,
+            SecurityIdentifier sid,
+            ObjectAccessRule rule
+        )
         {
-            SetAccess(accessType, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
+            SetAccess(
+                accessType,
+                sid,
+                rule.AccessMask,
+                rule.InheritanceFlags,
+                rule.PropagationFlags,
+                rule.ObjectFlags,
+                rule.ObjectType,
+                rule.InheritedObjectType
+            );
         }
 
-        public void SetAccess(AccessControlType accessType, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, ObjectAceFlags objectFlags, Guid objectType, Guid inheritedObjectType)
+        public void SetAccess(
+            AccessControlType accessType,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             //
             // This is valid only for DS Acls
             //
             if (!IsDS)
             {
-                throw new InvalidOperationException(
-                    SR.InvalidOperation_OnlyValidForDS);
+                throw new InvalidOperationException(SR.InvalidOperation_OnlyValidForDS);
             }
 
             CheckAccessType(accessType);
             CheckFlags(inheritanceFlags, propagationFlags);
             everyOneFullAccessForNullDacl = false;
-            SetQualifiedAce(sid, accessType == AccessControlType.Allow ? AceQualifier.AccessAllowed : AceQualifier.AccessDenied, accessMask, GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), objectFlags, objectType, inheritedObjectType);
+            SetQualifiedAce(
+                sid,
+                accessType == AccessControlType.Allow
+                  ? AceQualifier.AccessAllowed
+                  : AceQualifier.AccessDenied,
+                accessMask,
+                GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                objectFlags,
+                objectType,
+                inheritedObjectType
+            );
         }
 
-        public bool RemoveAccess(AccessControlType accessType, SecurityIdentifier sid, ObjectAccessRule rule)
+        public bool RemoveAccess(
+            AccessControlType accessType,
+            SecurityIdentifier sid,
+            ObjectAccessRule rule
+        )
         {
-            return RemoveAccess(accessType, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
+            return RemoveAccess(
+                accessType,
+                sid,
+                rule.AccessMask,
+                rule.InheritanceFlags,
+                rule.PropagationFlags,
+                rule.ObjectFlags,
+                rule.ObjectType,
+                rule.InheritedObjectType
+            );
         }
 
-        public bool RemoveAccess(AccessControlType accessType, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, ObjectAceFlags objectFlags, Guid objectType, Guid inheritedObjectType)
+        public bool RemoveAccess(
+            AccessControlType accessType,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             //
             // This is valid only for DS Acls
             //
             if (!IsDS)
             {
-                throw new InvalidOperationException(
-                    SR.InvalidOperation_OnlyValidForDS);
+                throw new InvalidOperationException(SR.InvalidOperation_OnlyValidForDS);
             }
 
             CheckAccessType(accessType);
             everyOneFullAccessForNullDacl = false;
-            return RemoveQualifiedAces(sid, accessType == AccessControlType.Allow ? AceQualifier.AccessAllowed : AceQualifier.AccessDenied, accessMask, GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), false, objectFlags, objectType, inheritedObjectType);
+            return RemoveQualifiedAces(
+                sid,
+                accessType == AccessControlType.Allow
+                  ? AceQualifier.AccessAllowed
+                  : AceQualifier.AccessDenied,
+                accessMask,
+                GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                false,
+                objectFlags,
+                objectType,
+                inheritedObjectType
+            );
         }
 
-        public void RemoveAccessSpecific(AccessControlType accessType, SecurityIdentifier sid, ObjectAccessRule rule)
+        public void RemoveAccessSpecific(
+            AccessControlType accessType,
+            SecurityIdentifier sid,
+            ObjectAccessRule rule
+        )
         {
-            RemoveAccessSpecific(accessType, sid, rule.AccessMask, rule.InheritanceFlags, rule.PropagationFlags, rule.ObjectFlags, rule.ObjectType, rule.InheritedObjectType);
+            RemoveAccessSpecific(
+                accessType,
+                sid,
+                rule.AccessMask,
+                rule.InheritanceFlags,
+                rule.PropagationFlags,
+                rule.ObjectFlags,
+                rule.ObjectType,
+                rule.InheritedObjectType
+            );
         }
 
-        public void RemoveAccessSpecific(AccessControlType accessType, SecurityIdentifier sid, int accessMask, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, ObjectAceFlags objectFlags, Guid objectType, Guid inheritedObjectType)
+        public void RemoveAccessSpecific(
+            AccessControlType accessType,
+            SecurityIdentifier sid,
+            int accessMask,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            ObjectAceFlags objectFlags,
+            Guid objectType,
+            Guid inheritedObjectType
+        )
         {
             //
             // This is valid only for DS Acls
             //
             if (!IsDS)
             {
-                throw new InvalidOperationException(
-                    SR.InvalidOperation_OnlyValidForDS);
+                throw new InvalidOperationException(SR.InvalidOperation_OnlyValidForDS);
             }
 
             CheckAccessType(accessType);
             everyOneFullAccessForNullDacl = false;
-            RemoveQualifiedAcesSpecific(sid, accessType == AccessControlType.Allow ? AceQualifier.AccessAllowed : AceQualifier.AccessDenied, accessMask, GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags), objectFlags, objectType, inheritedObjectType);
+            RemoveQualifiedAcesSpecific(
+                sid,
+                accessType == AccessControlType.Allow
+                  ? AceQualifier.AccessAllowed
+                  : AceQualifier.AccessDenied,
+                accessMask,
+                GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
+                objectFlags,
+                objectType,
+                inheritedObjectType
+            );
         }
 
         #endregion
@@ -3258,8 +3869,11 @@ namespace System.Security.AccessControl
                 AccessControlType.Allow,
                 _sidEveryone,
                 -1,
-                isContainer ? (InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit) : InheritanceFlags.None,
-                PropagationFlags.None);
+                isContainer
+                  ? (InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit)
+                  : InheritanceFlags.None,
+                PropagationFlags.None
+            );
 
             dcl.everyOneFullAccessForNullDacl = true;
             return dcl;

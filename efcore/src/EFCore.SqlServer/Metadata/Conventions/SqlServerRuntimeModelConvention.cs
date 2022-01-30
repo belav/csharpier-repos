@@ -26,10 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
         public SqlServerRuntimeModelConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies, relationalDependencies)
-        {
-        }
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies, relationalDependencies) { }
 
         /// <summary>
         ///     Updates the model annotations that will be set on the read-only object.
@@ -42,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IModel model,
             RuntimeModel runtimeModel,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessModelAnnotations(annotations, model, runtimeModel, runtime);
 
@@ -67,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IProperty property,
             RuntimeProperty runtimeProperty,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessPropertyAnnotations(annotations, property, runtimeProperty, runtime);
 
@@ -79,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 if (!annotations.ContainsKey(SqlServerAnnotationNames.ValueGenerationStrategy))
                 {
-                    annotations[SqlServerAnnotationNames.ValueGenerationStrategy] = property.GetValueGenerationStrategy();
+                    annotations[SqlServerAnnotationNames.ValueGenerationStrategy] =
+                        property.GetValueGenerationStrategy();
                 }
             }
         }
@@ -95,7 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             Dictionary<string, object?> annotations,
             IIndex index,
             RuntimeIndex runtimeIndex,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessIndexAnnotations(annotations, index, runtimeIndex, runtime);
 
@@ -119,7 +121,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IDictionary<string, object?> annotations,
             IKey key,
             RuntimeKey runtimeKey,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessKeyAnnotations(annotations, key, runtimeKey, runtime);
 
@@ -140,7 +143,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IDictionary<string, object?> annotations,
             IEntityType entityType,
             RuntimeEntityType runtimeEntityType,
-            bool runtime)
+            bool runtime
+        )
         {
             base.ProcessEntityTypeAnnotations(annotations, entityType, runtimeEntityType, runtime);
 

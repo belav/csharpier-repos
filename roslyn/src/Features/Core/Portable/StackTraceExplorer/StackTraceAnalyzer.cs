@@ -12,26 +12,32 @@ using System.Threading.Tasks;
 namespace Microsoft.CodeAnalysis.StackTraceExplorer
 {
     internal static class StackTraceAnalyzer
-
     {
         /// <summary>
         /// List of parsers to use. Order is important because
         /// take the result from the first parser that returns 
         /// success.
         /// </summary>
-        private static readonly ImmutableArray<IStackFrameParser> Parsers = ImmutableArray.Create<IStackFrameParser>(
-            new DotnetStackFrameParser(),
-            new VSDebugCallstackParser(),
-            new DefaultStackParser()
-        );
+        private static readonly ImmutableArray<IStackFrameParser> Parsers =
+            ImmutableArray.Create<IStackFrameParser>(
+                new DotnetStackFrameParser(),
+                new VSDebugCallstackParser(),
+                new DefaultStackParser()
+            );
 
-        internal static Task<StackTraceAnalysisResult> AnalyzeAsync(string callstack, CancellationToken cancellationToken)
+        internal static Task<StackTraceAnalysisResult> AnalyzeAsync(
+            string callstack,
+            CancellationToken cancellationToken
+        )
         {
             var parsedFrames = Parse(callstack, cancellationToken);
             return Task.FromResult(new StackTraceAnalysisResult(parsedFrames.ToImmutableArray()));
         }
 
-        private static IEnumerable<ParsedFrame> Parse(string callstack, CancellationToken cancellationToken)
+        private static IEnumerable<ParsedFrame> Parse(
+            string callstack,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var line in SplitLines(callstack))
             {
@@ -55,7 +61,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         private static IEnumerable<string> SplitLines(string callstack)
         {
             // if the callstack comes from ActivityLog.xml it has been
-            // encoding to be passed over HTTP. This should only decode 
+            // encoding to be passed over HTTP. This should only decode
             // specific characters like "&gt;" and "&lt;" to their "normal"
             // equivalents ">" and "<" so we can parse correctly
             callstack = WebUtility.HtmlDecode(callstack);

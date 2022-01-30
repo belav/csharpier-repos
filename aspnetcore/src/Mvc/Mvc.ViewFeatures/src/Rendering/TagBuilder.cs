@@ -257,8 +257,10 @@ public class TagBuilder : IHtmlContent
             foreach (var attribute in Attributes)
             {
                 var key = attribute.Key;
-                if (string.Equals(key, "id", StringComparison.OrdinalIgnoreCase) &&
-                    string.IsNullOrEmpty(attribute.Value))
+                if (
+                    string.Equals(key, "id", StringComparison.OrdinalIgnoreCase)
+                    && string.IsNullOrEmpty(attribute.Value)
+                )
                 {
                     continue;
                 }
@@ -323,7 +325,10 @@ public class TagBuilder : IHtmlContent
     /// <typeparam name="TValue">The value type.</typeparam>
     /// <param name="attributes">The attributes.</param>
     /// <param name="replaceExisting">Whether to replace existing attributes.</param>
-    public void MergeAttributes<TKey, TValue>(IDictionary<TKey, TValue?> attributes, bool replaceExisting)
+    public void MergeAttributes<TKey, TValue>(
+        IDictionary<TKey, TValue?> attributes,
+        bool replaceExisting
+    )
     {
         // Perf: Avoid allocating enumerator for `attributes` if possible
         if (attributes != null && attributes.Count > 0)
@@ -375,13 +380,15 @@ public class TagBuilder : IHtmlContent
     /// Returns an <see cref="IHtmlContent"/> that renders the self-closing tag.
     /// </summary>
     /// <returns>An <see cref="IHtmlContent"/> that renders the self-closing tag.</returns>
-    public IHtmlContent RenderSelfClosingTag() => new RenderTagHtmlContent(this, TagRenderMode.SelfClosing);
+    public IHtmlContent RenderSelfClosingTag() =>
+        new RenderTagHtmlContent(this, TagRenderMode.SelfClosing);
 
     private static void WriteTo(
         TagBuilder tagBuilder,
         TextWriter writer,
         HtmlEncoder encoder,
-        TagRenderMode tagRenderMode)
+        TagRenderMode tagRenderMode
+    )
     {
         switch (tagRenderMode)
         {
@@ -453,7 +460,11 @@ public class TagBuilder : IHtmlContent
 
         public static bool IsValidIdCharacter(char testChar)
         {
-            return (IsAsciiLetter(testChar) || IsAsciiDigit(testChar) || IsAllowableSpecialCharacter(testChar));
+            return (
+                IsAsciiLetter(testChar)
+                || IsAsciiDigit(testChar)
+                || IsAllowableSpecialCharacter(testChar)
+            );
         }
 
         private static bool IsAsciiDigit(char testChar)

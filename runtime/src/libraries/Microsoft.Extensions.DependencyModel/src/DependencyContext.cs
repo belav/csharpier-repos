@@ -11,16 +11,20 @@ namespace Microsoft.Extensions.DependencyModel
 {
     public class DependencyContext
     {
-
-        [UnconditionalSuppressMessage("SingleFile", "IL3002:Avoid calling members marked with 'RequiresAssemblyFilesAttribute' when publishing as a single-file",
-            Justification = "The annotation should be on the static constructor but is Compiler Generated, annotating the caller Default method instead")]
+        [UnconditionalSuppressMessage(
+            "SingleFile",
+            "IL3002:Avoid calling members marked with 'RequiresAssemblyFilesAttribute' when publishing as a single-file",
+            Justification = "The annotation should be on the static constructor but is Compiler Generated, annotating the caller Default method instead"
+        )]
         private static readonly Lazy<DependencyContext?> _defaultContext = new(LoadDefault);
 
-        public DependencyContext(TargetInfo target,
+        public DependencyContext(
+            TargetInfo target,
             CompilationOptions compilationOptions,
             IEnumerable<CompilationLibrary> compileLibraries,
             IEnumerable<RuntimeLibrary> runtimeLibraries,
-            IEnumerable<RuntimeFallbacks> runtimeGraph)
+            IEnumerable<RuntimeFallbacks> runtimeGraph
+        )
         {
             if (target == null)
             {
@@ -50,7 +54,9 @@ namespace Microsoft.Extensions.DependencyModel
             RuntimeGraph = runtimeGraph.ToArray();
         }
 
-        [RequiresAssemblyFiles("DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case.")]
+        [RequiresAssemblyFiles(
+            "DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case."
+        )]
         public static DependencyContext? Default => _defaultContext.Value;
 
         public TargetInfo Target { get; }
@@ -73,13 +79,21 @@ namespace Microsoft.Extensions.DependencyModel
             return new DependencyContext(
                 Target,
                 CompilationOptions,
-                CompileLibraries.Union(other.CompileLibraries, new LibraryMergeEqualityComparer<CompilationLibrary>()),
-                RuntimeLibraries.Union(other.RuntimeLibraries, new LibraryMergeEqualityComparer<RuntimeLibrary>()),
+                CompileLibraries.Union(
+                    other.CompileLibraries,
+                    new LibraryMergeEqualityComparer<CompilationLibrary>()
+                ),
+                RuntimeLibraries.Union(
+                    other.RuntimeLibraries,
+                    new LibraryMergeEqualityComparer<RuntimeLibrary>()
+                ),
                 RuntimeGraph.Union(other.RuntimeGraph)
-                );
+            );
         }
 
-        [RequiresAssemblyFiles("DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case.")]
+        [RequiresAssemblyFiles(
+            "DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case."
+        )]
         private static DependencyContext? LoadDefault()
         {
             var entryAssembly = Assembly.GetEntryAssembly();
@@ -91,13 +105,16 @@ namespace Microsoft.Extensions.DependencyModel
             return Load(entryAssembly);
         }
 
-        [RequiresAssemblyFiles("DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case.")]
+        [RequiresAssemblyFiles(
+            "DependencyContext for an assembly from a application published as single-file is not supported. The method will return null. Make sure the calling code can handle this case."
+        )]
         public static DependencyContext? Load(Assembly assembly)
         {
             return DependencyContextLoader.Default.Load(assembly);
         }
 
-        private sealed class LibraryMergeEqualityComparer<T> : IEqualityComparer<T> where T : Library
+        private sealed class LibraryMergeEqualityComparer<T> : IEqualityComparer<T>
+            where T : Library
         {
             public bool Equals(T? x, T? y)
             {

@@ -8,8 +8,6 @@ namespace System.Web.Http.Tracing
     public class TraceLevelHelperTest : EnumHelperTestBase<TraceLevel>
     {
         public TraceLevelHelperTest()
-            : base(TraceLevelHelper.IsDefined, TraceLevelHelper.Validate, (TraceLevel)999)
-        {
-        }
+            : base(TraceLevelHelper.IsDefined, TraceLevelHelper.Validate, (TraceLevel)999) { }
     }
 }

@@ -39,7 +39,9 @@ public class TestPlatformHelperTest
     }
 
     [ConditionalFact]
-    [FrameworkSkipCondition(RuntimeFrameworks.CLR | RuntimeFrameworks.CoreCLR | RuntimeFrameworks.None)]
+    [FrameworkSkipCondition(
+        RuntimeFrameworks.CLR | RuntimeFrameworks.CoreCLR | RuntimeFrameworks.None
+    )]
     public void IsMono_TrueOnMono()
     {
         Assert.True(TestPlatformHelper.IsMono);

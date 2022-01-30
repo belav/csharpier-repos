@@ -19,10 +19,7 @@ public class FormFileModelBinderTest
     public async Task FormFileModelBinder_SingleFile_BindSuccessful()
     {
         // Arrange
-        var formFiles = new FormFileCollection
-            {
-                GetMockFormFile("file", "file1.txt")
-            };
+        var formFiles = new FormFileCollection { GetMockFormFile("file", "file1.txt") };
         var httpContext = GetMockHttpContext(GetMockFormCollection(formFiles));
         var bindingContext = GetBindingContext(typeof(IEnumerable<IFormFile>), httpContext);
         var binder = new FormFileModelBinder(NullLoggerFactory.Instance);
@@ -43,10 +40,7 @@ public class FormFileModelBinderTest
     public async Task FormFileModelBinder_SingleFileAtTopLevel_BindSuccessfully_WithEmptyModelName()
     {
         // Arrange
-        var formFiles = new FormFileCollection
-            {
-                GetMockFormFile("file", "file1.txt")
-            };
+        var formFiles = new FormFileCollection { GetMockFormFile("file", "file1.txt") };
 
         var httpContext = GetMockHttpContext(GetMockFormCollection(formFiles));
         var binder = new FormFileModelBinder(NullLoggerFactory.Instance);
@@ -58,7 +52,8 @@ public class FormFileModelBinderTest
             Mock.Of<IValueProvider>(),
             new EmptyModelMetadataProvider().GetMetadataForType(typeof(IFormFile)),
             bindingInfo: null,
-            modelName: "file");
+            modelName: "file"
+        );
         bindingContext.ModelName = string.Empty;
 
         // Act
@@ -78,10 +73,7 @@ public class FormFileModelBinderTest
     {
         // Arrange
         const string propertyName = nameof(NestedFormFiles.Files);
-        var formFiles = new FormFileCollection
-            {
-                GetMockFormFile($"{propertyName}", "file1.txt")
-            };
+        var formFiles = new FormFileCollection { GetMockFormFile($"{propertyName}", "file1.txt") };
 
         var httpContext = GetMockHttpContext(GetMockFormCollection(formFiles));
         var binder = new FormFileModelBinder(NullLoggerFactory.Instance);
@@ -90,13 +82,15 @@ public class FormFileModelBinderTest
         var propertyInfo = typeof(NestedFormFiles).GetProperty(propertyName);
         var metadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
             propertyInfo,
-            propertyInfo.PropertyType);
+            propertyInfo.PropertyType
+        );
         var bindingContext = DefaultModelBindingContext.CreateBindingContext(
             new ActionContext { HttpContext = httpContext },
             Mock.Of<IValueProvider>(),
             metadata,
             bindingInfo: null,
-            modelName: "FileList");
+            modelName: "FileList"
+        );
         bindingContext.IsTopLevelObject = false;
         bindingContext.Model = new FileList();
         bindingContext.ModelName = propertyName;
@@ -119,9 +113,9 @@ public class FormFileModelBinderTest
         // Arrange
         const string propertyName = nameof(NestedFormFiles.Files);
         var formFiles = new FormFileCollection
-            {
-                GetMockFormFile($"FileList.{propertyName}", "file1.txt")
-            };
+        {
+            GetMockFormFile($"FileList.{propertyName}", "file1.txt")
+        };
 
         var httpContext = GetMockHttpContext(GetMockFormCollection(formFiles));
         var binder = new FormFileModelBinder(NullLoggerFactory.Instance);
@@ -132,13 +126,15 @@ public class FormFileModelBinderTest
         var propertyInfo = typeof(NestedFormFiles).GetProperty(propertyName);
         var metadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
             propertyInfo,
-            propertyInfo.PropertyType);
+            propertyInfo.PropertyType
+        );
         var bindingContext = DefaultModelBindingContext.CreateBindingContext(
             new ActionContext { HttpContext = httpContext },
             Mock.Of<IValueProvider>(),
             metadata,
             bindingInfo: null,
-            modelName: "FileList");
+            modelName: "FileList"
+        );
         bindingContext.IsTopLevelObject = false;
         bindingContext.Model = new FileList();
         bindingContext.ModelName = propertyName;
@@ -159,10 +155,7 @@ public class FormFileModelBinderTest
     public async Task FormFileModelBinder_SingleFileWithinTopLevelDictionary_BindSuccessfully()
     {
         // Arrange
-        var formFiles = new FormFileCollection
-            {
-                GetMockFormFile("[myFile]", "file1.txt")
-            };
+        var formFiles = new FormFileCollection { GetMockFormFile("[myFile]", "file1.txt") };
 
         var httpContext = GetMockHttpContext(GetMockFormCollection(formFiles));
         var binder = new FormFileModelBinder(NullLoggerFactory.Instance);
@@ -173,7 +166,8 @@ public class FormFileModelBinderTest
             Mock.Of<IValueProvider>(),
             new EmptyModelMetadataProvider().GetMetadataForType(typeof(IFormFile)),
             bindingInfo: null,
-            modelName: "FileDictionary");
+            modelName: "FileDictionary"
+        );
         bindingContext.IsTopLevelObject = false;
         bindingContext.ModelName = "[myFile]";
 
@@ -194,9 +188,9 @@ public class FormFileModelBinderTest
     {
         // Arrange
         var formFiles = new FormFileCollection
-            {
-                GetMockFormFile("FileDictionary[myFile]", "file1.txt")
-            };
+        {
+            GetMockFormFile("FileDictionary[myFile]", "file1.txt")
+        };
 
         var httpContext = GetMockHttpContext(GetMockFormCollection(formFiles));
         var binder = new FormFileModelBinder(NullLoggerFactory.Instance);
@@ -209,7 +203,8 @@ public class FormFileModelBinderTest
             Mock.Of<IValueProvider>(),
             new EmptyModelMetadataProvider().GetMetadataForType(typeof(IFormFile)),
             bindingInfo: null,
-            modelName: "FileDictionary");
+            modelName: "FileDictionary"
+        );
         bindingContext.IsTopLevelObject = false;
         bindingContext.ModelName = "[myFile]";
 
@@ -314,10 +309,7 @@ public class FormFileModelBinderTest
     public async Task FormFileModelBinder_ReturnsFailedResult_WhenNamesDoNotMatch()
     {
         // Arrange
-        var formFiles = new FormFileCollection
-            {
-                GetMockFormFile("different name", "file1.txt")
-            };
+        var formFiles = new FormFileCollection { GetMockFormFile("different name", "file1.txt") };
         var httpContext = GetMockHttpContext(GetMockFormCollection(formFiles));
         var bindingContext = GetBindingContext(typeof(IFormFile), httpContext);
         var binder = new FormFileModelBinder(NullLoggerFactory.Instance);
@@ -333,14 +325,17 @@ public class FormFileModelBinderTest
     [Theory]
     [InlineData(true, "FieldName")]
     [InlineData(false, "ModelName")]
-    public async Task FormFileModelBinder_UsesFieldNameForTopLevelObject(bool isTopLevel, string expected)
+    public async Task FormFileModelBinder_UsesFieldNameForTopLevelObject(
+        bool isTopLevel,
+        string expected
+    )
     {
         // Arrange
         var formFiles = new FormFileCollection
-            {
-                GetMockFormFile("FieldName", "file1.txt"),
-                GetMockFormFile("ModelName", "file1.txt")
-            };
+        {
+            GetMockFormFile("FieldName", "file1.txt"),
+            GetMockFormFile("ModelName", "file1.txt")
+        };
         var httpContext = GetMockHttpContext(GetMockFormCollection(formFiles));
 
         var bindingContext = GetBindingContext(typeof(IFormFile), httpContext);
@@ -364,10 +359,7 @@ public class FormFileModelBinderTest
     public async Task FormFileModelBinder_ReturnsFailedResult_WithEmptyContentDisposition()
     {
         // Arrange
-        var formFiles = new FormFileCollection
-            {
-                new Mock<IFormFile>().Object
-            };
+        var formFiles = new FormFileCollection { new Mock<IFormFile>().Object };
         var httpContext = GetMockHttpContext(GetMockFormCollection(formFiles));
         var bindingContext = GetBindingContext(typeof(IFormFile), httpContext);
         var binder = new FormFileModelBinder(NullLoggerFactory.Instance);
@@ -384,10 +376,7 @@ public class FormFileModelBinderTest
     public async Task FormFileModelBinder_ReturnsFailedResult_WithNoFileNameAndZeroLength()
     {
         // Arrange
-        var formFiles = new FormFileCollection
-            {
-                GetMockFormFile("file", "")
-            };
+        var formFiles = new FormFileCollection { GetMockFormFile("file", "") };
         var httpContext = GetMockHttpContext(GetMockFormCollection(formFiles));
         var bindingContext = GetBindingContext(typeof(IFormFile), httpContext);
         var binder = new FormFileModelBinder(NullLoggerFactory.Instance);
@@ -434,7 +423,9 @@ public class FormFileModelBinderTest
         Assert.Null(bindingContext.Result.Model);
     }
 
-    private static DefaultModelBindingContext GetBindingContextForReadOnlyArray(HttpContext httpContext)
+    private static DefaultModelBindingContext GetBindingContextForReadOnlyArray(
+        HttpContext httpContext
+    )
     {
         var metadataProvider = new TestModelMetadataProvider();
         metadataProvider
@@ -442,12 +433,16 @@ public class FormFileModelBinderTest
             .BindingDetails(bd => bd.BindingSource = BindingSource.Header);
         var metadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithReadOnlyArray),
-            nameof(ModelWithReadOnlyArray.ArrayProperty));
+            nameof(ModelWithReadOnlyArray.ArrayProperty)
+        );
 
         return GetBindingContext(metadata, httpContext);
     }
 
-    private static DefaultModelBindingContext GetBindingContext(Type modelType, HttpContext httpContext)
+    private static DefaultModelBindingContext GetBindingContext(
+        Type modelType,
+        HttpContext httpContext
+    )
     {
         var metadataProvider = new EmptyModelMetadataProvider();
         var metadata = metadataProvider.GetMetadataForType(modelType);
@@ -457,14 +452,12 @@ public class FormFileModelBinderTest
 
     private static DefaultModelBindingContext GetBindingContext(
         ModelMetadata metadata,
-        HttpContext httpContext)
+        HttpContext httpContext
+    )
     {
         var bindingContext = new DefaultModelBindingContext
         {
-            ActionContext = new ActionContext()
-            {
-                HttpContext = httpContext,
-            },
+            ActionContext = new ActionContext() { HttpContext = httpContext, },
             ModelMetadata = metadata,
             ModelName = "file",
             ModelState = new ModelStateDictionary(),
@@ -477,7 +470,8 @@ public class FormFileModelBinderTest
     private static HttpContext GetMockHttpContext(IFormCollection formCollection)
     {
         var httpContext = new Mock<HttpContext>();
-        httpContext.Setup(h => h.Request.ReadFormAsync(It.IsAny<CancellationToken>()))
+        httpContext
+            .Setup(h => h.Request.ReadFormAsync(It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(formCollection));
         httpContext.Setup(h => h.Request.HasFormContentType).Returns(true);
         return httpContext.Object;
@@ -486,10 +480,10 @@ public class FormFileModelBinderTest
     private static FormFileCollection GetTwoFiles()
     {
         var formFiles = new FormFileCollection
-            {
-                GetMockFormFile("file", "file1.txt"),
-                GetMockFormFile("file", "file2.txt"),
-            };
+        {
+            GetMockFormFile("file", "file1.txt"),
+            GetMockFormFile("file", "file2.txt"),
+        };
 
         return formFiles;
     }
@@ -515,9 +509,7 @@ public class FormFileModelBinderTest
         public IFormFile[] ArrayProperty { get; }
     }
 
-    private class FileList : List<IFormFile>
-    {
-    }
+    private class FileList : List<IFormFile> { }
 
     private class NestedFormFiles
     {

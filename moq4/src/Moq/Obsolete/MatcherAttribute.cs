@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	/// Marks a method as a matcher, which allows complete replacement 
 	/// of the built-in <see cref="It"/> class with your own argument 
 	/// matching rules.
@@ -121,10 +121,8 @@ namespace Moq
 	/// // use mock, invoke Save, and have the matcher filter.
 	/// </code>
 	/// </example>
-	[AttributeUsage(AttributeTargets.Method, Inherited = true)]
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	[Obsolete("This feature has been deprecated in favor of `Match.Create`.")]
-	public sealed class MatcherAttribute : Attribute
-	{
-	}
+    [AttributeUsage(AttributeTargets.Method, Inherited = true)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [Obsolete("This feature has been deprecated in favor of `Match.Create`.")]
+    public sealed class MatcherAttribute : Attribute { }
 }

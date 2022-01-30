@@ -18,8 +18,10 @@ namespace System.Xml.Schema
             set { _baseTypeName = (value == null ? XmlQualifiedName.Empty : value); }
         }
 
-        [XmlElement("attribute", typeof(XmlSchemaAttribute)),
-         XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))]
+        [
+            XmlElement("attribute", typeof(XmlSchemaAttribute)),
+            XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))
+        ]
         public XmlSchemaObjectCollection Attributes
         {
             get { return _attributes; }

@@ -15,40 +15,56 @@ internal static partial class Interop
             ref byte key,
             int keyLength,
             ref byte iv,
-            int enc);
+            int enc
+        );
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherCreatePartial")]
-        internal static partial SafeEvpCipherCtxHandle EvpCipherCreatePartial(
-            IntPtr cipher);
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_EvpCipherCreatePartial"
+        )]
+        internal static partial SafeEvpCipherCtxHandle EvpCipherCreatePartial(IntPtr cipher);
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherSetKeyAndIV")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_EvpCipherSetKeyAndIV"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static partial bool EvpCipherSetKeyAndIV(
             SafeEvpCipherCtxHandle ctx,
             ref byte key,
             ref byte iv,
-            EvpCipherDirection direction);
+            EvpCipherDirection direction
+        );
 
         internal static void EvpCipherSetKeyAndIV(
             SafeEvpCipherCtxHandle ctx,
             ReadOnlySpan<byte> key,
             ReadOnlySpan<byte> iv,
-            EvpCipherDirection direction)
+            EvpCipherDirection direction
+        )
         {
-            if (!EvpCipherSetKeyAndIV(
-                ctx,
-                ref MemoryMarshal.GetReference(key),
-                ref MemoryMarshal.GetReference(iv),
-                direction))
+            if (
+                !EvpCipherSetKeyAndIV(
+                    ctx,
+                    ref MemoryMarshal.GetReference(key),
+                    ref MemoryMarshal.GetReference(iv),
+                    direction
+                )
+            )
             {
                 throw CreateOpenSslCryptographicException();
             }
         }
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherSetGcmNonceLength")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_EvpCipherSetGcmNonceLength"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static partial bool CryptoNative_EvpCipherSetGcmNonceLength(
-            SafeEvpCipherCtxHandle ctx, int nonceLength);
+            SafeEvpCipherCtxHandle ctx,
+            int nonceLength
+        );
 
         internal static void EvpCipherSetGcmNonceLength(SafeEvpCipherCtxHandle ctx, int nonceLength)
         {
@@ -58,10 +74,15 @@ internal static partial class Interop
             }
         }
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherSetCcmNonceLength")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_EvpCipherSetCcmNonceLength"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static partial bool CryptoNative_EvpCipherSetCcmNonceLength(
-            SafeEvpCipherCtxHandle ctx, int nonceLength);
+            SafeEvpCipherCtxHandle ctx,
+            int nonceLength
+        );
 
         internal static void EvpCipherSetCcmNonceLength(SafeEvpCipherCtxHandle ctx, int nonceLength)
         {
@@ -78,7 +99,10 @@ internal static partial class Interop
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvpCipherReset(SafeEvpCipherCtxHandle ctx);
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherCtxSetPadding")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_EvpCipherCtxSetPadding"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvpCipherCtxSetPadding(SafeEvpCipherCtxHandle x, int padding);
 
@@ -89,20 +113,23 @@ internal static partial class Interop
             ref byte output,
             out int outl,
             ref byte input,
-            int inl);
+            int inl
+        );
 
         internal static bool EvpCipherUpdate(
             SafeEvpCipherCtxHandle ctx,
             Span<byte> output,
             out int bytesWritten,
-            ReadOnlySpan<byte> input)
+            ReadOnlySpan<byte> input
+        )
         {
             return EvpCipherUpdate(
                 ctx,
                 ref MemoryMarshal.GetReference(output),
                 out bytesWritten,
                 ref MemoryMarshal.GetReference(input),
-                input.Length);
+                input.Length
+            );
         }
 
         internal static void EvpCipherSetInputLength(SafeEvpCipherCtxHandle ctx, int inputLength)
@@ -119,12 +146,14 @@ internal static partial class Interop
         private static partial bool EvpCipherFinalEx(
             SafeEvpCipherCtxHandle ctx,
             ref byte outm,
-            out int outl);
+            out int outl
+        );
 
         internal static bool EvpCipherFinalEx(
             SafeEvpCipherCtxHandle ctx,
             Span<byte> output,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             return EvpCipherFinalEx(ctx, ref MemoryMarshal.GetReference(output), out bytesWritten);
         }
@@ -134,7 +163,8 @@ internal static partial class Interop
         private static partial bool EvpCipherGetGcmTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
-            int tagLength);
+            int tagLength
+        );
 
         internal static void EvpCipherGetGcmTag(SafeEvpCipherCtxHandle ctx, Span<byte> tag)
         {
@@ -144,12 +174,16 @@ internal static partial class Interop
             }
         }
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherGetAeadTag")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_EvpCipherGetAeadTag"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static partial bool EvpCipherGetAeadTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
-            int tagLength);
+            int tagLength
+        );
 
         internal static void EvpCipherGetAeadTag(SafeEvpCipherCtxHandle ctx, Span<byte> tag)
         {
@@ -164,7 +198,8 @@ internal static partial class Interop
         private static partial bool EvpCipherSetGcmTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
-            int tagLength);
+            int tagLength
+        );
 
         internal static void EvpCipherSetGcmTag(SafeEvpCipherCtxHandle ctx, ReadOnlySpan<byte> tag)
         {
@@ -174,12 +209,16 @@ internal static partial class Interop
             }
         }
 
-        [GeneratedDllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpCipherSetAeadTag")]
+        [GeneratedDllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_EvpCipherSetAeadTag"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static partial bool EvpCipherSetAeadTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
-            int tagLength);
+            int tagLength
+        );
 
         internal static void EvpCipherSetAeadTag(SafeEvpCipherCtxHandle ctx, ReadOnlySpan<byte> tag)
         {
@@ -194,7 +233,8 @@ internal static partial class Interop
         private static partial bool EvpCipherGetCcmTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
-            int tagLength);
+            int tagLength
+        );
 
         internal static void EvpCipherGetCcmTag(SafeEvpCipherCtxHandle ctx, Span<byte> tag)
         {
@@ -209,7 +249,8 @@ internal static partial class Interop
         private static partial bool EvpCipherSetCcmTag(
             SafeEvpCipherCtxHandle ctx,
             ref byte tag,
-            int tagLength);
+            int tagLength
+        );
 
         internal static void EvpCipherSetCcmTag(SafeEvpCipherCtxHandle ctx, ReadOnlySpan<byte> tag)
         {

@@ -5,14 +5,13 @@
 namespace Test
 {
     using System;
+
     public class AA
     {
         static void Method1(bool param1)
         {
             long local5 = 0;
-            do
-            {
-            } while (param1);
+            do { } while (param1);
 
             try
             {
@@ -26,6 +25,7 @@ namespace Test
                 }
             }
         }
+
         static int Main()
         {
             try

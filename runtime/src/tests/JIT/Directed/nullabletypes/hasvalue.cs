@@ -8,13 +8,16 @@
 
 using System;
 
-
 interface BaseInter { }
+
 interface GenInter<T> { }
 
 struct Struct { }
+
 struct ImplStruct : BaseInter { }
+
 struct OpenGenImplStruct<T> : GenInter<T> { }
+
 struct CloseGenImplStruct : GenInter<int> { }
 
 class Foo { }
@@ -54,7 +57,6 @@ class NullableTest2
     static ImplStruct? imps = new ImplStruct();
     static OpenGenImplStruct<Foo>? genfoo = new OpenGenImplStruct<Foo>();
     static CloseGenImplStruct? genint = new CloseGenImplStruct();
-
 
     public static void Run()
     {

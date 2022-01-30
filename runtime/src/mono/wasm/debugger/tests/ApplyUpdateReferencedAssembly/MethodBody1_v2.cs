@@ -5,8 +5,9 @@ using System;
 
 namespace ApplyUpdateReferencedAssembly
 {
-    public class MethodBody1 {
-        public static string StaticMethod1 ()
+    public class MethodBody1
+    {
+        public static string StaticMethod1()
         {
             Console.WriteLine("v2");
             bool c = true;
@@ -15,8 +16,10 @@ namespace ApplyUpdateReferencedAssembly
         }
     }
 
-    public class MethodBody2 {
-        public static string StaticMethod1 () {
+    public class MethodBody2
+    {
+        public static string StaticMethod1()
+        {
             Console.WriteLine("original");
             int a = 10;
             Debugger.Break();
@@ -24,8 +27,10 @@ namespace ApplyUpdateReferencedAssembly
         }
     }
 
-    public class MethodBody3 {
-        public static string StaticMethod3 () {
+    public class MethodBody3
+    {
+        public static string StaticMethod3()
+        {
             bool c = true;
             int d = 10;
             int e = 20;
@@ -34,8 +39,8 @@ namespace ApplyUpdateReferencedAssembly
         }
     }
 
-    public class MethodBody4 {
-        public static void StaticMethod4 () {
-        }
+    public class MethodBody4
+    {
+        public static void StaticMethod4() { }
     }
 }

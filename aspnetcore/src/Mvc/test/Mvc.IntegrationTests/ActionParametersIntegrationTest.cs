@@ -46,10 +46,12 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(Person3)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+            }
+        );
 
         var modelState = testContext.ModelState;
         var model = new Person3();
@@ -92,10 +94,12 @@ public class ActionParameterIntegrationTest
             Name = "prefix",
             ParameterType = typeof(Person6)
         };
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+            }
+        );
 
         var modelState = testContext.ModelState;
 
@@ -139,10 +143,12 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(Person4)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+            }
+        );
 
         var modelState = testContext.ModelState;
         var model = new Person4();
@@ -187,10 +193,12 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(Person5)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+            }
+        );
 
         var modelState = testContext.ModelState;
         // Act
@@ -220,17 +228,16 @@ public class ActionParameterIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Address",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "prefix"
-            },
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
             ParameterType = typeof(Person3)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+            }
+        );
 
         var modelState = testContext.ModelState;
 
@@ -265,16 +272,15 @@ public class ActionParameterIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Address",
-            BindingInfo = new BindingInfo
-            {
-                BinderModelName = "prefix"
-            },
+            BindingInfo = new BindingInfo { BinderModelName = "prefix" },
             ParameterType = typeof(Person6)
         };
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+            }
+        );
 
         var modelState = testContext.ModelState;
 
@@ -311,17 +317,16 @@ public class ActionParameterIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Address",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "prefix"
-            },
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
             ParameterType = typeof(Person4)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+            }
+        );
 
         var modelState = testContext.ModelState;
 
@@ -356,17 +361,16 @@ public class ActionParameterIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Address",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "prefix"
-            },
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
             ParameterType = typeof(Person5)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+            }
+        );
 
         var modelState = testContext.ModelState;
 
@@ -394,29 +398,33 @@ public class ActionParameterIntegrationTest
         // Arrange
         var parameterType = typeof(Class1);
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = parameterType
-        };
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("Name", "James").Add("Property1.City", "Seattle");
-        });
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString
+                    .Create("Name", "James")
+                    .Add("Property1.City", "Seattle");
+            }
+        );
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => parameterBinder.BindModelAsync(parameter, testContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
-                "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or " +
-                "value types and must have a parameterless constructor. Record types must have a single primary constructor. " +
-                "Alternatively, set the '{1}' property to a non-null value in the '{2}' constructor.",
+                "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or "
+                    + "value types and must have a parameterless constructor. Record types must have a single primary constructor. "
+                    + "Alternatively, set the '{1}' property to a non-null value in the '{2}' constructor.",
                 typeof(ClassWithNoDefaultConstructor).FullName,
                 nameof(Class1.Property1),
-                typeof(Class1).FullName),
-            exception.Message);
+                typeof(Class1).FullName
+            ),
+            exception.Message
+        );
     }
 
     public record ActionParameter_DefaultValueConstructor(string Name = "test", int Age = 23);
@@ -427,15 +435,13 @@ public class ActionParameterIntegrationTest
         // Arrange
         var parameterType = typeof(ActionParameter_DefaultValueConstructor);
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = parameterType
-        };
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("Name", "James");
-        });
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create("Name", "James");
+            }
+        );
         var modelState = testContext.ModelState;
 
         // Act
@@ -455,35 +461,40 @@ public class ActionParameterIntegrationTest
         // Arrange
         var parameterType = typeof(Class1);
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = parameterType
-        };
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("Name", "James").Add("Property1.City", "Seattle");
-        }, updateOptions: options =>
-        {
-            options.ModelBinderProviders.RemoveType<ComplexObjectModelBinderProvider>();
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString
+                    .Create("Name", "James")
+                    .Add("Property1.City", "Seattle");
+            },
+            updateOptions: options =>
+            {
+                options.ModelBinderProviders.RemoveType<ComplexObjectModelBinderProvider>();
 #pragma warning disable CS0618 // Type or member is obsolete
                 options.ModelBinderProviders.Add(new ComplexTypeModelBinderProvider());
 #pragma warning restore CS0618 // Type or member is obsolete
-            });
+            }
+        );
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => parameterBinder.BindModelAsync(parameter, testContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
-                "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or " +
-                "value types and must have a parameterless constructor. Alternatively, set the '{1}' property to" +
-                " a non-null value in the '{2}' constructor.",
+                "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or "
+                    + "value types and must have a parameterless constructor. Alternatively, set the '{1}' property to"
+                    + " a non-null value in the '{2}' constructor.",
                 typeof(ClassWithNoDefaultConstructor).FullName,
                 nameof(Class1.Property1),
-                typeof(Class1).FullName),
-            exception.Message);
+                typeof(Class1).FullName
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -492,22 +503,22 @@ public class ActionParameterIntegrationTest
         // Arrange
         var parameterType = typeof(PointStruct);
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-        var parameter = new ParameterDescriptor()
-        {
-            ParameterType = parameterType,
-            Name = "p"
-        };
+        var parameter = new ParameterDescriptor() { ParameterType = parameterType, Name = "p" };
         var testContext = ModelBindingTestHelper.GetTestContext();
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => parameterBinder.BindModelAsync(parameter, testContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
-                "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or " +
-                "value types and must have a parameterless constructor. Record types must have a single primary constructor.",
-                typeof(PointStruct).FullName),
-            exception.Message);
+                "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or "
+                    + "value types and must have a parameterless constructor. Record types must have a single primary constructor.",
+                typeof(PointStruct).FullName
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -523,21 +534,30 @@ public class ActionParameterIntegrationTest
         var testContext = ModelBindingTestHelper.GetTestContext();
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => parameterBinder.BindModelAsync(parameter, testContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
-                "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or " +
-                "value types and must have a parameterless constructor. Record types must have a single primary constructor.",
-                typeof(AbstractClassWithNoDefaultConstructor).FullName),
-            exception.Message);
+                "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or "
+                    + "value types and must have a parameterless constructor. Record types must have a single primary constructor.",
+                typeof(AbstractClassWithNoDefaultConstructor).FullName
+            ),
+            exception.Message
+        );
     }
 
     public class ActionParameter_MultipleConstructorsWithDefaultValues_NoParameterlessConstructorModel
     {
-        public ActionParameter_MultipleConstructorsWithDefaultValues_NoParameterlessConstructorModel(string name = "default-name") => (Name) = (name);
+        public ActionParameter_MultipleConstructorsWithDefaultValues_NoParameterlessConstructorModel(
+            string name = "default-name"
+        ) => (Name) = (name);
 
-        public ActionParameter_MultipleConstructorsWithDefaultValues_NoParameterlessConstructorModel(string name, int age) => (Name, Age) = (name, age);
+        public ActionParameter_MultipleConstructorsWithDefaultValues_NoParameterlessConstructorModel(
+            string name,
+            int age
+        ) => (Name, Age) = (name, age);
 
         public string Name { get; init; }
 
@@ -548,28 +568,31 @@ public class ActionParameterIntegrationTest
     public async Task ActionParameter_MultipleConstructorsWithDefaultValues_NoParameterlessConstructor_Throws()
     {
         // Arrange
-        var parameterType = typeof(ActionParameter_MultipleConstructorsWithDefaultValues_NoParameterlessConstructorModel);
+        var parameterType =
+            typeof(ActionParameter_MultipleConstructorsWithDefaultValues_NoParameterlessConstructorModel);
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = parameterType
-        };
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("Name", "James");
-        });
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create("Name", "James");
+            }
+        );
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => parameterBinder.BindModelAsync(parameter, testContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
-                "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or " +
-                "value types and must have a parameterless constructor. Record types must have a single primary constructor.",
-                typeof(ActionParameter_MultipleConstructorsWithDefaultValues_NoParameterlessConstructorModel).FullName),
-            exception.Message);
+                "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or "
+                    + "value types and must have a parameterless constructor. Record types must have a single primary constructor.",
+                typeof(ActionParameter_MultipleConstructorsWithDefaultValues_NoParameterlessConstructorModel).FullName
+            ),
+            exception.Message
+        );
     }
 
     public record ActionParameter_RecordTypeWithMultipleConstructors(string Name, int Age)
@@ -583,26 +606,28 @@ public class ActionParameterIntegrationTest
         // Arrange
         var parameterType = typeof(ActionParameter_RecordTypeWithMultipleConstructors);
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = parameterType
-        };
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create("Name", "James").Add("Age", "29");
-        });
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create("Name", "James").Add("Age", "29");
+            }
+        );
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => parameterBinder.BindModelAsync(parameter, testContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
-                "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or " +
-                "value types and must have a parameterless constructor. Record types must have a single primary constructor.",
-                typeof(ActionParameter_RecordTypeWithMultipleConstructors).FullName),
-            exception.Message);
+                "Could not create an instance of type '{0}'. Model bound complex types must not be abstract or "
+                    + "value types and must have a parameterless constructor. Record types must have a single primary constructor.",
+                typeof(ActionParameter_RecordTypeWithMultipleConstructors).FullName
+            ),
+            exception.Message
+        );
     }
 
     [Fact]
@@ -613,7 +638,8 @@ public class ActionParameterIntegrationTest
         var modelState = testContext.ModelState;
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
             testContext.MvcOptions,
-            new CustomComplexTypeModelBinderProvider());
+            new CustomComplexTypeModelBinderProvider()
+        );
 
         var parameter = new ParameterDescriptor
         {
@@ -647,22 +673,26 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(int)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create(parameter.Name, "123");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create(parameter.Name, "123");
+            }
+        );
 
         var modelState = testContext.ModelState;
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-        var modelMetadata = modelMetadataProvider
-            .GetMetadataForParameter(BindingAndValidationController.BindNeverParamInfo);
+        var modelMetadata = modelMetadataProvider.GetMetadataForParameter(
+            BindingAndValidationController.BindNeverParamInfo
+        );
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(
             parameter,
             testContext,
             modelMetadataProvider,
-            modelMetadata);
+            modelMetadata
+        );
 
         // Assert
         Assert.False(modelBindingResult.IsModelSet);
@@ -680,22 +710,29 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(ModelWithIValidatableObject)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create(nameof(ModelWithIValidatableObject.FirstName), "TestName");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create(
+                    nameof(ModelWithIValidatableObject.FirstName),
+                    "TestName"
+                );
+            }
+        );
 
         var modelState = testContext.ModelState;
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-        var modelMetadata = modelMetadataProvider
-            .GetMetadataForParameter(ParameterWithValidateNever.ValidateNeverParameterInfo);
+        var modelMetadata = modelMetadataProvider.GetMetadataForParameter(
+            ParameterWithValidateNever.ValidateNeverParameterInfo
+        );
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(
             parameter,
             testContext,
             modelMetadataProvider,
-            modelMetadata);
+            modelMetadata
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -722,25 +759,32 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(int)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            if (input.HasValue)
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
             {
-                request.QueryString = QueryString.Create(parameter.Name, input.Value.ToString(CultureInfo.InvariantCulture));
+                if (input.HasValue)
+                {
+                    request.QueryString = QueryString.Create(
+                        parameter.Name,
+                        input.Value.ToString(CultureInfo.InvariantCulture)
+                    );
+                }
             }
-        });
+        );
 
         var modelState = testContext.ModelState;
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-        var modelMetadata = modelMetadataProvider
-            .GetMetadataForParameter(BindingAndValidationController.BindRequiredParamInfo);
+        var modelMetadata = modelMetadataProvider.GetMetadataForParameter(
+            BindingAndValidationController.BindRequiredParamInfo
+        );
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(
             parameter,
             testContext,
             modelMetadataProvider,
-            modelMetadata);
+            modelMetadata
+        );
 
         // Assert
         Assert.Equal(input.HasValue, modelBindingResult.IsModelSet);
@@ -764,7 +808,8 @@ public class ActionParameterIntegrationTest
         string paramName,
         string input,
         bool isValid,
-        string displayName = null)
+        string displayName = null
+    )
     {
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
@@ -775,25 +820,27 @@ public class ActionParameterIntegrationTest
             ParameterType = parameterInfo.ParameterType
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            if (input != null)
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
             {
-                request.QueryString = QueryString.Create(parameter.Name, input);
+                if (input != null)
+                {
+                    request.QueryString = QueryString.Create(parameter.Name, input);
+                }
             }
-        });
+        );
 
         var modelState = testContext.ModelState;
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-        var modelMetadata = modelMetadataProvider
-            .GetMetadataForParameter(parameterInfo);
+        var modelMetadata = modelMetadataProvider.GetMetadataForParameter(parameterInfo);
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(
             parameter,
             testContext,
             modelMetadataProvider,
-            modelMetadata);
+            modelMetadata
+        );
 
         // Assert
         Assert.Equal(input != null, modelBindingResult.IsModelSet);
@@ -820,22 +867,27 @@ public class ActionParameterIntegrationTest
             ParameterType = parameterInfo.ParameterType,
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            request.QueryString = QueryString.Create(nameof(ModelWithIValidatableObject.FirstName), "Billy");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                request.QueryString = QueryString.Create(
+                    nameof(ModelWithIValidatableObject.FirstName),
+                    "Billy"
+                );
+            }
+        );
 
         var modelState = testContext.ModelState;
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-        var modelMetadata = modelMetadataProvider
-            .GetMetadataForParameter(parameterInfo);
+        var modelMetadata = modelMetadataProvider.GetMetadataForParameter(parameterInfo);
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(
             parameter,
             testContext,
             modelMetadataProvider,
-            modelMetadata);
+            modelMetadata
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet, "model is set");
@@ -864,23 +916,28 @@ public class ActionParameterIntegrationTest
             ParameterType = parameterInfo.ParameterType,
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(request =>
-        {
-            var key = ModelNames.CreatePropertyModelName(parameter.Name, nameof(ModelWithIValidatableObject.FirstName));
-            request.QueryString = QueryString.Create(key, "Billy");
-        });
+        var testContext = ModelBindingTestHelper.GetTestContext(
+            request =>
+            {
+                var key = ModelNames.CreatePropertyModelName(
+                    parameter.Name,
+                    nameof(ModelWithIValidatableObject.FirstName)
+                );
+                request.QueryString = QueryString.Create(key, "Billy");
+            }
+        );
 
         var modelState = testContext.ModelState;
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-        var modelMetadata = modelMetadataProvider
-            .GetMetadataForParameter(parameterInfo);
+        var modelMetadata = modelMetadataProvider.GetMetadataForParameter(parameterInfo);
 
         // Act
         var modelBindingResult = await parameterBinder.BindModelAsync(
             parameter,
             testContext,
             modelMetadataProvider,
-            modelMetadata);
+            modelMetadata
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet, "model is set");
@@ -891,7 +948,12 @@ public class ActionParameterIntegrationTest
         var message = entry.Errors.Single().ErrorMessage;
         Assert.Equal("Not valid.", message);
 
-        entry = modelState[ModelNames.CreatePropertyModelName(parameter.Name, nameof(ModelWithIValidatableObject.FirstName))];
+        entry = modelState[
+            ModelNames.CreatePropertyModelName(
+                parameter.Name,
+                nameof(ModelWithIValidatableObject.FirstName)
+            )
+        ];
         Assert.NotNull(entry);
         message = entry.Errors.Single().ErrorMessage;
         Assert.Equal("FirstName Not valid.", message);
@@ -904,7 +966,10 @@ public class ActionParameterIntegrationTest
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             yield return new ValidationResult("Not valid.");
-            yield return new ValidationResult("FirstName Not valid.", new string[] { nameof(FirstName) });
+            yield return new ValidationResult(
+                "FirstName Not valid.",
+                new string[] { nameof(FirstName) }
+            );
         }
     }
 
@@ -915,6 +980,7 @@ public class ActionParameterIntegrationTest
             X = x;
             Y = y;
         }
+
         public double X { get; }
         public double Y { get; }
     }
@@ -931,6 +997,7 @@ public class ActionParameterIntegrationTest
         {
             Id = id;
         }
+
         public string City { get; set; }
         public int Id { get; }
     }
@@ -939,10 +1006,7 @@ public class ActionParameterIntegrationTest
     {
         private readonly string _name;
 
-        public AbstractClassWithNoDefaultConstructor()
-            : this("James")
-        {
-        }
+        public AbstractClassWithNoDefaultConstructor() : this("James") { }
 
         public AbstractClassWithNoDefaultConstructor(string name)
         {
@@ -958,21 +1022,20 @@ public class ActionParameterIntegrationTest
             [BindNever] int bindNeverParam,
             [BindRequired] int bindRequiredParam,
             [Required, StringLength(3)] string requiredAndStringLengthParam,
-            [Display(Name = "My Display Name"), StringLength(3)] string displayNameStringLengthParam,
-            ModelWithIValidatableObject validatableObject)
-        {
-        }
+            [Display(Name = "My Display Name"), StringLength(3)]
+                string displayNameStringLengthParam,
+            ModelWithIValidatableObject validatableObject
+        ) { }
 
-        private static MethodInfo MyActionMethodInfo
-            => typeof(BindingAndValidationController).GetMethod(nameof(MyAction));
+        private static MethodInfo MyActionMethodInfo =>
+            typeof(BindingAndValidationController).GetMethod(nameof(MyAction));
 
-        public static ParameterInfo BindNeverParamInfo
-            => MyActionMethodInfo.GetParameters()[0];
+        public static ParameterInfo BindNeverParamInfo => MyActionMethodInfo.GetParameters()[0];
 
-        public static ParameterInfo BindRequiredParamInfo
-            => MyActionMethodInfo.GetParameters()[1];
+        public static ParameterInfo BindRequiredParamInfo => MyActionMethodInfo.GetParameters()[1];
 
-        public static ParameterInfo ValidatableObjectParameterInfo => MyActionMethodInfo.GetParameters()[4];
+        public static ParameterInfo ValidatableObjectParameterInfo =>
+            MyActionMethodInfo.GetParameters()[4];
 
         public static ParameterInfo GetParameterInfo(string parameterName)
         {
@@ -984,18 +1047,18 @@ public class ActionParameterIntegrationTest
 
     private class ParameterWithValidateNever
     {
-        public void MyAction([Required] string Name, [ValidateNever] ModelWithIValidatableObject validatableObject)
-        {
-        }
+        public void MyAction(
+            [Required] string Name,
+            [ValidateNever] ModelWithIValidatableObject validatableObject
+        ) { }
 
-        private static MethodInfo MyActionMethodInfo
-            => typeof(ParameterWithValidateNever).GetMethod(nameof(MyAction));
+        private static MethodInfo MyActionMethodInfo =>
+            typeof(ParameterWithValidateNever).GetMethod(nameof(MyAction));
 
-        public static ParameterInfo NameParameterInfo
-            => MyActionMethodInfo.GetParameters()[0];
+        public static ParameterInfo NameParameterInfo => MyActionMethodInfo.GetParameters()[0];
 
-        public static ParameterInfo ValidateNeverParameterInfo
-            => MyActionMethodInfo.GetParameters()[1];
+        public static ParameterInfo ValidateNeverParameterInfo =>
+            MyActionMethodInfo.GetParameters()[1];
 
         public static ParameterInfo GetParameterInfo(string parameterName)
         {
@@ -1009,10 +1072,7 @@ public class ActionParameterIntegrationTest
     {
         private readonly ICollection<T> _original;
 
-        public CustomReadOnlyCollection()
-            : this(new List<T>())
-        {
-        }
+        public CustomReadOnlyCollection() : this(new List<T>()) { }
 
         public CustomReadOnlyCollection(ICollection<T> original)
         {
@@ -1074,10 +1134,9 @@ public class ActionParameterIntegrationTest
     private class CustomComplexTypeModelBinder : ComplexTypeModelBinder
 #pragma warning restore CS0618 // Type or member is obsolete
     {
-        public CustomComplexTypeModelBinder(IDictionary<ModelMetadata, IModelBinder> propertyBinders)
-            : base(propertyBinders, NullLoggerFactory.Instance)
-        {
-        }
+        public CustomComplexTypeModelBinder(
+            IDictionary<ModelMetadata, IModelBinder> propertyBinders
+        ) : base(propertyBinders, NullLoggerFactory.Instance) { }
 
         protected override object CreateModel(ModelBindingContext bindingContext)
         {

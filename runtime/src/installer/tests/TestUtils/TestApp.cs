@@ -18,15 +18,13 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public string AssemblyName { get; }
 
-        public TestApp(string basePath, string assemblyName = null)
-            : base(basePath)
+        public TestApp(string basePath, string assemblyName = null) : base(basePath)
         {
             AssemblyName = assemblyName ?? Name;
             LoadAssets();
         }
 
-        public TestApp(TestApp source)
-            : base(source)
+        public TestApp(TestApp source) : base(source)
         {
             AssemblyName = source.AssemblyName;
             LoadAssets();
@@ -46,13 +44,27 @@ namespace Microsoft.DotNet.CoreSetup.Test
         private void LoadAssets()
         {
             AppDll = Path.Combine(Location, $"{AssemblyName}.dll");
-            AppExe = Path.Combine(Location, RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform(AssemblyName));
+            AppExe = Path.Combine(
+                Location,
+                RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform(AssemblyName)
+            );
             DepsJson = Path.Combine(Location, $"{AssemblyName}.deps.json");
             RuntimeConfigJson = Path.Combine(Location, $"{AssemblyName}.runtimeconfig.json");
             RuntimeDevConfigJson = Path.Combine(Location, $"{AssemblyName}.runtimeconfig.dev.json");
-            HostPolicyDll = Path.Combine(Location, RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostpolicy"));
-            HostFxrDll = Path.Combine(Location, RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostfxr"));
-            CoreClrDll = Path.Combine(Location, RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("coreclr"));
+            HostPolicyDll = Path.Combine(
+                Location,
+                RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform(
+                    "hostpolicy"
+                )
+            );
+            HostFxrDll = Path.Combine(
+                Location,
+                RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostfxr")
+            );
+            CoreClrDll = Path.Combine(
+                Location,
+                RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("coreclr")
+            );
         }
     }
 }

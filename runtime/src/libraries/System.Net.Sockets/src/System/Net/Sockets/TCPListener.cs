@@ -22,21 +22,27 @@ namespace System.Net.Sockets
         // Initializes a new instance of the TcpListener class with the specified local end point.
         public TcpListener(IPEndPoint localEP)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, localEP);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, localEP);
 
             if (localEP == null)
             {
                 throw new ArgumentNullException(nameof(localEP));
             }
             _serverSocketEP = localEP;
-            _serverSocket = new Socket(_serverSocketEP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            _serverSocket = new Socket(
+                _serverSocketEP.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
         }
 
         // Initializes a new instance of the TcpListener class that listens to the specified IP address
         // and port.
         public TcpListener(IPAddress localaddr, int port)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, localaddr);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, localaddr);
 
             if (localaddr == null)
             {
@@ -48,11 +54,17 @@ namespace System.Net.Sockets
             }
 
             _serverSocketEP = new IPEndPoint(localaddr, port);
-            _serverSocket = new Socket(_serverSocketEP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            _serverSocket = new Socket(
+                _serverSocketEP.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
         }
 
         // Initiailizes a new instance of the TcpListener class that listens on the specified port.
-        [Obsolete("This constructor has been deprecated. Use TcpListener(IPAddress localaddr, int port) instead.")]
+        [Obsolete(
+            "This constructor has been deprecated. Use TcpListener(IPAddress localaddr, int port) instead."
+        )]
         public TcpListener(int port)
         {
             if (!TcpValidationHelpers.ValidatePortNumber(port))
@@ -61,7 +73,11 @@ namespace System.Net.Sockets
             }
 
             _serverSocketEP = new IPEndPoint(IPAddress.Any, port);
-            _serverSocket = new Socket(_serverSocketEP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            _serverSocket = new Socket(
+                _serverSocketEP.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
         }
 
         // Used by the class to provide the underlying network socket.
@@ -78,26 +94,22 @@ namespace System.Net.Sockets
         // and started listening.
         protected bool Active
         {
-            get
-            {
-                return _active;
-            }
+            get { return _active; }
         }
 
         // Gets the m_Active EndPoint for the local listener socket.
         public EndPoint LocalEndpoint
         {
-            get
-            {
-                return _active ? _serverSocket!.LocalEndPoint! : _serverSocketEP;
-            }
+            get { return _active ? _serverSocket!.LocalEndPoint! : _serverSocketEP; }
         }
 
         public bool ExclusiveAddressUse
         {
             get
             {
-                return _serverSocket != null ? _serverSocket.ExclusiveAddressUse : _exclusiveAddressUse;
+                return _serverSocket != null
+                  ? _serverSocket.ExclusiveAddressUse
+                  : _exclusiveAddressUse;
             }
             set
             {
@@ -221,7 +233,8 @@ namespace System.Net.Sockets
         public TcpClient EndAcceptTcpClient(IAsyncResult asyncResult) =>
             EndAcceptCore<TcpClient>(asyncResult);
 
-        public Task<Socket> AcceptSocketAsync() => AcceptSocketAsync(CancellationToken.None).AsTask();
+        public Task<Socket> AcceptSocketAsync() =>
+            AcceptSocketAsync(CancellationToken.None).AsTask();
 
         public ValueTask<Socket> AcceptSocketAsync(CancellationToken cancellationToken)
         {
@@ -233,7 +246,8 @@ namespace System.Net.Sockets
             return _serverSocket!.AcceptAsync(cancellationToken);
         }
 
-        public Task<TcpClient> AcceptTcpClientAsync() => AcceptTcpClientAsync(CancellationToken.None).AsTask();
+        public Task<TcpClient> AcceptTcpClientAsync() =>
+            AcceptTcpClientAsync(CancellationToken.None).AsTask();
 
         public ValueTask<TcpClient> AcceptTcpClientAsync(CancellationToken cancellationToken)
         {
@@ -268,12 +282,18 @@ namespace System.Net.Sockets
         }
 
         [SupportedOSPlatform("windows")]
-        private void SetIPProtectionLevel(bool allowed)
-            => _serverSocket!.SetIPProtectionLevel(allowed ? IPProtectionLevel.Unrestricted : IPProtectionLevel.EdgeRestricted);
+        private void SetIPProtectionLevel(bool allowed) =>
+            _serverSocket!.SetIPProtectionLevel(
+                allowed ? IPProtectionLevel.Unrestricted : IPProtectionLevel.EdgeRestricted
+            );
 
         private void CreateNewSocketIfNeeded()
         {
-            _serverSocket ??= new Socket(_serverSocketEP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            _serverSocket ??= new Socket(
+                _serverSocketEP.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
 
             if (_exclusiveAddressUse)
             {

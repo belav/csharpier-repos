@@ -15,6 +15,7 @@ namespace AutoMapper.Configuration
         /// <param name="sourceMembersPath">Property name referencing the source member to map against. Or a dot separated member path.</param>
         void MapFrom(string sourceMembersPath);
     }
+
     public interface ICtorParamConfigurationExpression<TSource> : ICtorParamConfigurationExpression
     {
         /// <summary>
@@ -31,18 +32,24 @@ namespace AutoMapper.Configuration
         /// <param name="resolver">Custom func</param>
         void MapFrom<TMember>(Func<TSource, ResolutionContext, TMember> resolver);
     }
+
     public interface ICtorParameterConfiguration
     {
         string CtorParamName { get; }
         void Configure(TypeMap typeMap);
     }
+
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public class CtorParamConfigurationExpression<TSource, TDestination> : ICtorParamConfigurationExpression<TSource>, ICtorParameterConfiguration
+    public class CtorParamConfigurationExpression<TSource, TDestination>
+        : ICtorParamConfigurationExpression<TSource>,
+          ICtorParameterConfiguration
     {
         public string CtorParamName { get; }
         public Type SourceType { get; }
 
-        private readonly List<Action<ConstructorParameterMap>> _ctorParamActions = new List<Action<ConstructorParameterMap>>();
+        private readonly List<Action<ConstructorParameterMap>> _ctorParamActions = new List<
+            Action<ConstructorParameterMap>
+        >();
 
         public CtorParamConfigurationExpression(string ctorParamName, Type sourceType)
         {
@@ -55,7 +62,9 @@ namespace AutoMapper.Configuration
 
         public void MapFrom<TMember>(Func<TSource, ResolutionContext, TMember> resolver)
         {
-            Expression<Func<TSource, TDestination, TMember, ResolutionContext, TMember>> resolverExpression = (src, dest, destMember, ctxt) => resolver(src, ctxt);
+            Expression<
+                Func<TSource, TDestination, TMember, ResolutionContext, TMember>
+            > resolverExpression = (src, dest, destMember, ctxt) => resolver(src, ctxt);
             _ctorParamActions.Add(cpm => cpm.CustomMapFunction = resolverExpression);
         }
 
@@ -70,12 +79,16 @@ namespace AutoMapper.Configuration
             var ctorParams = typeMap.ConstructorMap?.CtorParams;
             if (ctorParams == null)
             {
-                throw new AutoMapperConfigurationException($"The type {typeMap.DestinationType.Name} does not have a constructor.\n{typeMap.DestinationType.FullName}");
+                throw new AutoMapperConfigurationException(
+                    $"The type {typeMap.DestinationType.Name} does not have a constructor.\n{typeMap.DestinationType.FullName}"
+                );
             }
             var parameter = ctorParams.SingleOrDefault(p => p.Parameter.Name == CtorParamName);
             if (parameter == null)
             {
-                throw new AutoMapperConfigurationException($"{typeMap.DestinationType.Name} does not have a constructor with a parameter named '{CtorParamName}'.\n{typeMap.DestinationType.FullName}");
+                throw new AutoMapperConfigurationException(
+                    $"{typeMap.DestinationType.Name} does not have a constructor with a parameter named '{CtorParamName}'.\n{typeMap.DestinationType.FullName}"
+                );
             }
             foreach (var action in _ctorParamActions)
             {

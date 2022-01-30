@@ -39,8 +39,10 @@ namespace AnalyzerRunner
         internal readonly string LogFileName;
         internal readonly string ProfileRoot;
 
-        internal BackgroundAnalysisScope AnalysisScope
-            => FullSolutionAnalysis ? BackgroundAnalysisScope.FullSolution : BackgroundAnalysisScope.Default;
+        internal BackgroundAnalysisScope AnalysisScope =>
+            FullSolutionAnalysis
+                ? BackgroundAnalysisScope.FullSolution
+                : BackgroundAnalysisScope.Default;
 
         public Options(
             string analyzerPath,
@@ -54,27 +56,29 @@ namespace AnalyzerRunner
             int iterations,
             bool usePersistentStorage,
             bool fullSolutionAnalysis,
-            ImmutableArray<string> incrementalAnalyzerNames)
-            : this(analyzerPath,
-                  solutionPath,
-                  analyzerIds,
-                  refactoringNodes,
-                  runConcurrent,
-                  reportSuppressedDiagnostics,
-                  applyChanges,
-                  showStats: false,
-                  showCompilerDiagnostics: false,
-                  useAll,
-                  iterations,
-                  testDocuments: false,
-                  testDocumentMatch: _ => false,
-                  testDocumentIterations: 0,
-                  logFileName: null,
-                  profileRoot: null,
-                  usePersistentStorage,
-                  fullSolutionAnalysis,
-                  incrementalAnalyzerNames)
-        { }
+            ImmutableArray<string> incrementalAnalyzerNames
+        )
+            : this(
+                analyzerPath,
+                solutionPath,
+                analyzerIds,
+                refactoringNodes,
+                runConcurrent,
+                reportSuppressedDiagnostics,
+                applyChanges,
+                showStats: false,
+                showCompilerDiagnostics: false,
+                useAll,
+                iterations,
+                testDocuments: false,
+                testDocumentMatch: _ => false,
+                testDocumentIterations: 0,
+                logFileName: null,
+                profileRoot: null,
+                usePersistentStorage,
+                fullSolutionAnalysis,
+                incrementalAnalyzerNames
+            ) { }
 
         internal Options(
             string analyzerPath,
@@ -95,7 +99,8 @@ namespace AnalyzerRunner
             string profileRoot,
             bool usePersistentStorage,
             bool fullSolutionAnalysis,
-            ImmutableArray<string> incrementalAnalyzerNames)
+            ImmutableArray<string> incrementalAnalyzerNames
+        )
         {
             AnalyzerPath = analyzerPath;
             SolutionPath = solutionPath;
@@ -144,7 +149,10 @@ namespace AnalyzerRunner
             while (i < args.Length)
             {
                 var arg = args[i++];
-                string ReadValue() => (i < args.Length) ? args[i++] : throw new InvalidDataException($"Missing value for option {arg}");
+                string ReadValue() =>
+                    (i < args.Length)
+                        ? args[i++]
+                        : throw new InvalidDataException($"Missing value for option {arg}");
 
                 switch (arg)
                 {
@@ -165,7 +173,10 @@ namespace AnalyzerRunner
                         break;
                     case var _ when arg.StartsWith("/editperf:"):
                         testDocuments = true;
-                        var expression = new Regex(arg.Substring("/editperf:".Length), RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                        var expression = new Regex(
+                            arg.Substring("/editperf:".Length),
+                            RegexOptions.Compiled | RegexOptions.IgnoreCase
+                        );
                         testDocumentMatch = documentPath => expression.IsMatch(documentPath);
                         break;
                     case var _ when arg.StartsWith("/edititer:"):
@@ -212,9 +223,13 @@ namespace AnalyzerRunner
                         }
                         else
                         {
-                            throw new InvalidDataException((arg.StartsWith("/", StringComparison.Ordinal) ?
-                             "Unrecognized option " + arg :
-                             "Unrecognized parameter " + arg));
+                            throw new InvalidDataException(
+                                (
+                                    arg.StartsWith("/", StringComparison.Ordinal)
+                                      ? "Unrecognized option " + arg
+                                      : "Unrecognized parameter " + arg
+                                )
+                            );
                         }
                         break;
                 }
@@ -249,7 +264,8 @@ namespace AnalyzerRunner
                 profileRoot: profileRoot,
                 usePersistentStorage: usePersistentStorage,
                 fullSolutionAnalysis: fullSolutionAnalysis,
-                incrementalAnalyzerNames: incrementalAnalyzerNames.ToImmutable());
+                incrementalAnalyzerNames: incrementalAnalyzerNames.ToImmutable()
+            );
         }
     }
 }

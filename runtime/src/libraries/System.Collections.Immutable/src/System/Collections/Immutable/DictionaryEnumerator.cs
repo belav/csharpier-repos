@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 namespace System.Collections.Immutable
 {
-    internal sealed class DictionaryEnumerator<TKey, TValue> : IDictionaryEnumerator where TKey : notnull
+    internal sealed class DictionaryEnumerator<TKey, TValue> : IDictionaryEnumerator
+        where TKey : notnull
     {
         private readonly IEnumerator<KeyValuePair<TKey, TValue>> _inner;
 

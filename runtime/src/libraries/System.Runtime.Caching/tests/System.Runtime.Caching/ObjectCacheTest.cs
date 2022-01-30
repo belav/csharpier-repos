@@ -47,16 +47,25 @@ namespace MonoTests.System.Runtime.Caching
 
             ret = poker.Add(null, null);
             Assert.True(ret);
-            Assert.Equal("AddOrGetExisting (CacheItem value, CacheItemPolicy policy)", poker.MethodCalled);
+            Assert.Equal(
+                "AddOrGetExisting (CacheItem value, CacheItemPolicy policy)",
+                poker.MethodCalled
+            );
 
             var item = new CacheItem("key", 1234);
             ret = poker.Add(item, null);
             Assert.True(ret);
-            Assert.Equal("AddOrGetExisting (CacheItem value, CacheItemPolicy policy)", poker.MethodCalled);
+            Assert.Equal(
+                "AddOrGetExisting (CacheItem value, CacheItemPolicy policy)",
+                poker.MethodCalled
+            );
 
             ret = poker.Add(item, null);
             Assert.False(ret);
-            Assert.Equal("AddOrGetExisting (CacheItem value, CacheItemPolicy policy)", poker.MethodCalled);
+            Assert.Equal(
+                "AddOrGetExisting (CacheItem value, CacheItemPolicy policy)",
+                poker.MethodCalled
+            );
         }
 
         [Fact]
@@ -67,15 +76,24 @@ namespace MonoTests.System.Runtime.Caching
 
             ret = poker.Add(null, null, null, null);
             Assert.True(ret);
-            Assert.Equal("AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)", poker.MethodCalled);
+            Assert.Equal(
+                "AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)",
+                poker.MethodCalled
+            );
 
             ret = poker.Add("key", 1234, null, null);
             Assert.True(ret);
-            Assert.Equal("AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)", poker.MethodCalled);
+            Assert.Equal(
+                "AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)",
+                poker.MethodCalled
+            );
 
             ret = poker.Add("key", 1234, null, null);
             Assert.False(ret);
-            Assert.Equal("AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)", poker.MethodCalled);
+            Assert.Equal(
+                "AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)",
+                poker.MethodCalled
+            );
         }
 
         [Fact]
@@ -86,15 +104,24 @@ namespace MonoTests.System.Runtime.Caching
 
             ret = poker.Add(null, null, DateTimeOffset.Now, null);
             Assert.True(ret);
-            Assert.Equal("AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)", poker.MethodCalled);
+            Assert.Equal(
+                "AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)",
+                poker.MethodCalled
+            );
 
             ret = poker.Add("key", 1234, DateTimeOffset.Now, null);
             Assert.True(ret);
-            Assert.Equal("AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)", poker.MethodCalled);
+            Assert.Equal(
+                "AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)",
+                poker.MethodCalled
+            );
 
             ret = poker.Add("key", 1234, DateTimeOffset.Now, null);
             Assert.False(ret);
-            Assert.Equal("AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)", poker.MethodCalled);
+            Assert.Equal(
+                "AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)",
+                poker.MethodCalled
+            );
         }
 
         [Fact]
@@ -105,7 +132,10 @@ namespace MonoTests.System.Runtime.Caching
             IDictionary<string, object> values = poker.GetValues(null, (string[])null);
             Assert.NotNull(values);
             Assert.Equal(0, values.Count);
-            Assert.Equal("IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)", poker.MethodCalled);
+            Assert.Equal(
+                "IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)",
+                poker.MethodCalled
+            );
 
             poker.Add("key1", 1, null);
             poker.Add("key2", 2, null);
@@ -114,12 +144,18 @@ namespace MonoTests.System.Runtime.Caching
             values = poker.GetValues(new string[] { "key1", "key2", "key3" });
             Assert.NotNull(values);
             Assert.Equal(3, values.Count);
-            Assert.Equal("IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)", poker.MethodCalled);
+            Assert.Equal(
+                "IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)",
+                poker.MethodCalled
+            );
 
             values = poker.GetValues(new string[] { "key1", "key22", "key3" });
             Assert.NotNull(values);
             Assert.Equal(2, values.Count);
-            Assert.Equal("IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)", poker.MethodCalled);
+            Assert.Equal(
+                "IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)",
+                poker.MethodCalled
+            );
         }
 
         [Fact]

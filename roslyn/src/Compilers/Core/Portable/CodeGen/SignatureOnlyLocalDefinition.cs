@@ -80,7 +80,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public byte[] Signature => _signature;
 
-        public LocalSlotDebugInfo SlotInfo
-            => new LocalSlotDebugInfo(SynthesizedLocalKind.EmitterTemp, LocalDebugId.None);
+        public LocalSlotDebugInfo SlotInfo =>
+            new LocalSlotDebugInfo(SynthesizedLocalKind.EmitterTemp, LocalDebugId.None);
     }
 }

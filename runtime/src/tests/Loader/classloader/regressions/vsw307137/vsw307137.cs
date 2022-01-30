@@ -39,27 +39,26 @@ using System;
 
 unsafe struct S
 {
-	fixed bool b[3];
+    fixed bool b[3];
 }
 
 public class Test
-{	
-	public static int  Main()
-	{
-		try
-		{
-			#pragma warning disable 219
-			S s = new S();
-			#pragma warning restore 219
-			
-			Console.WriteLine("PASS");
-			return 100;
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine("Caught unexpected excpetion: " + e);
-			return 101;
-		}
-	}
+{
+    public static int Main()
+    {
+        try
+        {
+#pragma warning disable 219
+            S s = new S();
+#pragma warning restore 219
 
+            Console.WriteLine("PASS");
+            return 100;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Caught unexpected excpetion: " + e);
+            return 101;
+        }
+    }
 }

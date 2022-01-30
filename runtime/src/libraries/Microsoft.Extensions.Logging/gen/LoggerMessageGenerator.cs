@@ -26,20 +26,30 @@ namespace Microsoft.Extensions.Logging.Generators
         [ExcludeFromCodeCoverage]
         public void Execute(GeneratorExecutionContext context)
         {
-            if (context.SyntaxReceiver is not SyntaxReceiver receiver || receiver.ClassDeclarations.Count == 0)
+            if (
+                context.SyntaxReceiver is not SyntaxReceiver receiver
+                || receiver.ClassDeclarations.Count == 0
+            )
             {
                 // nothing to do yet
                 return;
             }
 
-            var p = new Parser(context.Compilation, context.ReportDiagnostic, context.CancellationToken);
+            var p = new Parser(
+                context.Compilation,
+                context.ReportDiagnostic,
+                context.CancellationToken
+            );
             IReadOnlyList<LoggerClass> logClasses = p.GetLogClasses(receiver.ClassDeclarations);
             if (logClasses.Count > 0)
             {
                 var e = new Emitter();
                 string result = e.Emit(logClasses, context.CancellationToken);
-    
-                context.AddSource(nameof(LoggerMessageGenerator), SourceText.From(result, Encoding.UTF8));
+
+                context.AddSource(
+                    nameof(LoggerMessageGenerator),
+                    SourceText.From(result, Encoding.UTF8)
+                );
             }
         }
 
@@ -51,7 +61,7 @@ namespace Microsoft.Extensions.Logging.Generators
                 return new SyntaxReceiver();
             }
 
-            public List<ClassDeclarationSyntax> ClassDeclarations { get; } = new ();
+            public List<ClassDeclarationSyntax> ClassDeclarations { get; } = new();
 
             public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
             {

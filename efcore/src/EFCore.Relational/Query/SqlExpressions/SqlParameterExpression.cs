@@ -21,8 +21,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         private readonly ParameterExpression _parameterExpression;
         private readonly string _name;
 
-        internal SqlParameterExpression(ParameterExpression parameterExpression, RelationalTypeMapping? typeMapping)
-            : base(parameterExpression.Type.UnwrapNullableType(), typeMapping)
+        internal SqlParameterExpression(
+            ParameterExpression parameterExpression,
+            RelationalTypeMapping? typeMapping
+        ) : base(parameterExpression.Type.UnwrapNullableType(), typeMapping)
         {
             Check.DebugAssert(parameterExpression.Name != null, "Parameter must have name.");
 
@@ -34,8 +36,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <summary>
         ///     The name of the parameter.
         /// </summary>
-        public string Name
-            => _name;
+        public string Name => _name;
 
         /// <summary>
         ///     The bool value indicating if this parameter can have null values.
@@ -47,30 +48,29 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// </summary>
         /// <param name="typeMapping">A relational type mapping to apply.</param>
         /// <returns>A new expression which has supplied type mapping.</returns>
-        public SqlExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping)
-            => new SqlParameterExpression(_parameterExpression, typeMapping);
+        public SqlExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping) =>
+            new SqlParameterExpression(_parameterExpression, typeMapping);
 
         /// <inheritdoc />
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => this;
+        protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
         /// <inheritdoc />
-        protected override void Print(ExpressionPrinter expressionPrinter)
-            => expressionPrinter.Append("@" + _parameterExpression.Name);
+        protected override void Print(ExpressionPrinter expressionPrinter) =>
+            expressionPrinter.Append("@" + _parameterExpression.Name);
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is SqlParameterExpression sqlParameterExpression
-                    && Equals(sqlParameterExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is SqlParameterExpression sqlParameterExpression
+                    && Equals(sqlParameterExpression)
+            );
 
-        private bool Equals(SqlParameterExpression sqlParameterExpression)
-            => base.Equals(sqlParameterExpression)
-                && Name == sqlParameterExpression.Name;
+        private bool Equals(SqlParameterExpression sqlParameterExpression) =>
+            base.Equals(sqlParameterExpression) && Name == sqlParameterExpression.Name;
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Name);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Name);
     }
 }

@@ -21,8 +21,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
         {
             public ImmutableArray<ColorTheme> Themes { get; }
 
-            public ColorScheme(ImmutableArray<ColorTheme> themes)
-                => Themes = themes;
+            public ColorScheme(ImmutableArray<ColorTheme> themes) => Themes = themes;
         }
 
         /// <summary>
@@ -64,7 +63,13 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             public __VSCOLORTYPE ForegroundType { get; }
             public uint? Foreground { get; }
 
-            public ColorItem(string name, __VSCOLORTYPE backgroundType, uint? background, __VSCOLORTYPE foregroundType, uint? foreground)
+            public ColorItem(
+                string name,
+                __VSCOLORTYPE backgroundType,
+                uint? background,
+                __VSCOLORTYPE foregroundType,
+                uint? foreground
+            )
             {
                 Name = name;
 

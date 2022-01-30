@@ -6,17 +6,17 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class TypeUnloadedException : SystemException
     {
-        public TypeUnloadedException()
-            : base(SR.Arg_TypeUnloadedException)
+        public TypeUnloadedException() : base(SR.Arg_TypeUnloadedException)
         {
             HResult = HResults.COR_E_TYPEUNLOADED;
         }
 
-        public TypeUnloadedException(string? message)
-            : base(message)
+        public TypeUnloadedException(string? message) : base(message)
         {
             HResult = HResults.COR_E_TYPEUNLOADED;
         }
@@ -28,8 +28,6 @@ namespace System
         }
 
         protected TypeUnloadedException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

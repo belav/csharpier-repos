@@ -17,7 +17,10 @@ namespace System
         private const string InitializeMethodName = "Initialize";
         private const string DisallowedSimpleAssemblyNameSuffix = ".dll";
 
-        private static bool IsSupported => AppContext.TryGetSwitch("System.StartupHookProvider.IsSupported", out bool isSupported) ? isSupported : true;
+        private static bool IsSupported =>
+            AppContext.TryGetSwitch("System.StartupHookProvider.IsSupported", out bool isSupported)
+              ? isSupported
+              : true;
 
         private struct StartupHookNameOrPath
         {
@@ -44,17 +47,19 @@ namespace System
                 return;
             }
 
-            ReadOnlySpan<char> disallowedSimpleAssemblyNameChars = stackalloc char[4]
-            {
-                Path.DirectorySeparatorChar,
-                Path.AltDirectorySeparatorChar,
-                ' ',
-                ','
-            };
+            ReadOnlySpan<char> disallowedSimpleAssemblyNameChars =
+                stackalloc char[4] {
+                    Path.DirectorySeparatorChar,
+                    Path.AltDirectorySeparatorChar,
+                    ' ',
+                    ','
+                };
 
             // Parse startup hooks variable
             string[] startupHookParts = startupHooksVariable.Split(Path.PathSeparator);
-            StartupHookNameOrPath[] startupHooks = new StartupHookNameOrPath[startupHookParts.Length];
+            StartupHookNameOrPath[] startupHooks = new StartupHookNameOrPath[
+                startupHookParts.Length
+            ];
             for (int i = 0; i < startupHookParts.Length; i++)
             {
                 string startupHookPart = startupHookParts[i];
@@ -77,13 +82,28 @@ namespace System
                     {
                         if (startupHookPart.Contains(disallowedSimpleAssemblyNameChars[j]))
                         {
-                            throw new ArgumentException(SR.Format(SR.Argument_InvalidStartupHookSimpleAssemblyName, startupHookPart));
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.Argument_InvalidStartupHookSimpleAssemblyName,
+                                    startupHookPart
+                                )
+                            );
                         }
                     }
 
-                    if (startupHookPart.EndsWith(DisallowedSimpleAssemblyNameSuffix, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        startupHookPart.EndsWith(
+                            DisallowedSimpleAssemblyNameSuffix,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
-                        throw new ArgumentException(SR.Format(SR.Argument_InvalidStartupHookSimpleAssemblyName, startupHookPart));
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Argument_InvalidStartupHookSimpleAssemblyName,
+                                startupHookPart
+                            )
+                        );
                     }
 
                     try
@@ -93,7 +113,13 @@ namespace System
                     }
                     catch (Exception assemblyNameException)
                     {
-                        throw new ArgumentException(SR.Format(SR.Argument_InvalidStartupHookSimpleAssemblyName, startupHookPart), assemblyNameException);
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Argument_InvalidStartupHookSimpleAssemblyName,
+                                startupHookPart
+                            ),
+                            assemblyNameException
+                        );
                     }
                 }
             }
@@ -107,8 +133,10 @@ namespace System
 
         // Load the specified assembly, and call the specified type's
         // "static void Initialize()" method.
-        [RequiresUnreferencedCode("The StartupHookSupport feature switch has been enabled for this app which is being trimmed. " +
-            "Startup hook code is not observable by the trimmer and so required assemblies, types and members may be removed")]
+        [RequiresUnreferencedCode(
+            "The StartupHookSupport feature switch has been enabled for this app which is being trimmed. "
+                + "Startup hook code is not observable by the trimmer and so required assemblies, types and members may be removed"
+        )]
         private static void CallStartupHook(StartupHookNameOrPath startupHook)
         {
             Assembly assembly;
@@ -122,7 +150,9 @@ namespace System
                 else if (startupHook.AssemblyName != null)
                 {
                     Debug.Assert(startupHook.AssemblyName != null);
-                    assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(startupHook.AssemblyName);
+                    assembly = AssemblyLoadContext.Default.LoadFromAssemblyName(
+                        startupHook.AssemblyName
+                    );
                 }
                 else
                 {
@@ -133,19 +163,25 @@ namespace System
             catch (Exception assemblyLoadException)
             {
                 throw new ArgumentException(
-                    SR.Format(SR.Argument_StartupHookAssemblyLoadFailed, startupHook.Path ?? startupHook.AssemblyName!.ToString()),
-                    assemblyLoadException);
+                    SR.Format(
+                        SR.Argument_StartupHookAssemblyLoadFailed,
+                        startupHook.Path ?? startupHook.AssemblyName!.ToString()
+                    ),
+                    assemblyLoadException
+                );
             }
 
             Debug.Assert(assembly != null);
             Type type = assembly.GetType(StartupHookTypeName, throwOnError: true)!;
 
             // Look for a static method without any parameters
-            MethodInfo? initializeMethod = type.GetMethod(InitializeMethodName,
-                                                         BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static,
-                                                         null, // use default binder
-                                                         Type.EmptyTypes, // parameters
-                                                         null); // no parameter modifiers
+            MethodInfo? initializeMethod = type.GetMethod(
+                InitializeMethodName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static,
+                null, // use default binder
+                Type.EmptyTypes, // parameters
+                null
+            ); // no parameter modifiers
 
             bool wrongSignature = false;
             if (initializeMethod == null)
@@ -157,9 +193,13 @@ namespace System
                 {
                     // This could find zero, one, or multiple methods
                     // with the correct name.
-                    initializeMethod = type.GetMethod(InitializeMethodName,
-                                                      BindingFlags.Public | BindingFlags.NonPublic |
-                                                      BindingFlags.Static | BindingFlags.Instance);
+                    initializeMethod = type.GetMethod(
+                        InitializeMethodName,
+                        BindingFlags.Public
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Static
+                            | BindingFlags.Instance
+                    );
                 }
                 catch (AmbiguousMatchException)
                 {
@@ -185,15 +225,21 @@ namespace System
 
             if (wrongSignature)
             {
-                throw new ArgumentException(SR.Format(SR.Argument_InvalidStartupHookSignature,
-                                                      StartupHookTypeName + Type.Delimiter + InitializeMethodName,
-                                                      startupHook.Path ?? startupHook.AssemblyName.ToString()));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_InvalidStartupHookSignature,
+                        StartupHookTypeName + Type.Delimiter + InitializeMethodName,
+                        startupHook.Path ?? startupHook.AssemblyName.ToString()
+                    )
+                );
             }
 
-            Debug.Assert(initializeMethod != null &&
-                         initializeMethod.IsStatic &&
-                         initializeMethod.ReturnType == typeof(void) &&
-                         initializeMethod.GetParameters().Length == 0);
+            Debug.Assert(
+                initializeMethod != null
+                    && initializeMethod.IsStatic
+                    && initializeMethod.ReturnType == typeof(void)
+                    && initializeMethod.GetParameters().Length == 0
+            );
 
             initializeMethod.Invoke(null, null);
         }

@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void EqualConstant()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -40,18 +40,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             compilation.VerifyDiagnostics(
                 // (11,13): error CS0152: The switch statement contains multiple cases with the label value '1'
                 //             case 1: // error: duplicate case label
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case 1:").WithArguments("1").WithLocation(11, 13),
+                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case 1:")
+                    .WithArguments("1")
+                    .WithLocation(11, 13),
                 // (10,17): warning CS0162: Unreachable code detected
                 //                 break; // warning: unreachable (1)
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(10, 17)
-                );
+            );
         }
 
         [Fact]
         public void EqualConstant02()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main(string[] args)
     {
@@ -70,14 +72,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case 1 when true: // error: subsumed
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "1").WithLocation(9, 18)
-                );
+            );
         }
 
         [Fact]
         public void UnEqualConstant()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -100,14 +102,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // (8,17): warning CS0162: Unreachable code detected
                 //                 break; // warning: unreachable code (impossible given the value)
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(8, 17)
-                );
+            );
         }
 
         [Fact]
         public void SimpleSubsumption01()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -132,18 +134,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "null").WithLocation(11, 18),
                 // (10,13): error CS0163: Control cannot fall through from one case label ('case "goo":') to another
                 //             case "goo": ; // error: subsumed by previous case
-                Diagnostic(ErrorCode.ERR_SwitchFallThrough, @"case ""goo"":").WithArguments("case \"goo\":").WithLocation(10, 13),
+                Diagnostic(ErrorCode.ERR_SwitchFallThrough, @"case ""goo"":")
+                    .WithArguments("case \"goo\":")
+                    .WithLocation(10, 13),
                 // (11,13): error CS8070: Control cannot fall out of switch from final case label ('case null:')
                 //             case null: ; // error: subsumed by previous case
-                Diagnostic(ErrorCode.ERR_SwitchFallOut, "case null:").WithArguments("case null:").WithLocation(11, 13)
-                );
+                Diagnostic(ErrorCode.ERR_SwitchFallOut, "case null:")
+                    .WithArguments("case null:")
+                    .WithLocation(11, 13)
+            );
         }
 
         [Fact]
         public void SimpleSubsumption02()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -162,15 +168,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             compilation.VerifyDiagnostics(
                 // (10,18): error CS0029: Cannot implicitly convert type 'string' to 'bool'
                 //             case "goo": // wrong type
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""goo""").WithArguments("string", "bool").WithLocation(10, 18)
-                );
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""goo""")
+                    .WithArguments("string", "bool")
+                    .WithLocation(10, 18)
+            );
         }
 
         [Fact]
         public void SimpleSubsumption03()
         {
             var source =
-@"using System;
+                @"using System;
 public class X
 {
     public static void Main()
@@ -191,14 +199,14 @@ public class X
                 // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case string s: // error: subsumed by previous case
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "string s").WithLocation(11, 18)
-                );
+            );
         }
 
         [Fact]
         public void SimpleSubsumption04()
         {
             var source =
-@"using System.Collections;
+                @"using System.Collections;
 using System.Collections.Generic;
 public class X
 {
@@ -214,19 +222,23 @@ public class X
         }
     }
 }";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.DebugExe);
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                options: TestOptions.DebugExe
+            );
             compilation.VerifyDiagnostics(
                 // (12,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case IEnumerable<string> i: // error: subsumed by previous case
-                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "IEnumerable<string> i").WithLocation(12, 18)
-                );
+                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "IEnumerable<string> i")
+                    .WithLocation(12, 18)
+            );
         }
 
         [Fact]
         public void SimpleSubsumption05()
         {
             var source =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 public class X : List<string>
 {
     public static void Main()
@@ -241,20 +253,23 @@ public class X : List<string>
         }
     }
 }";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.DebugExe);
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                options: TestOptions.DebugExe
+            );
             Assert.True(compilation.GetDiagnostics().HasAnyErrors());
             compilation.VerifyDiagnostics(
                 // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case X list: // error: subsumed by previous case
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "X list").WithLocation(11, 18)
-                );
+            );
         }
 
         [Fact]
         public void JointSubsumption01()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -274,14 +289,14 @@ public class X : List<string>
                 // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case var x: // error: subsumed
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "var x").WithLocation(11, 18)
-                );
+            );
         }
 
         [Fact]
         public void JointSubsumption02()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -301,14 +316,14 @@ public class X : List<string>
                 // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case var x: // error: subsumed by previous cases
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "var x").WithLocation(11, 18)
-                );
+            );
         }
 
         [Fact]
         public void JointSubsumption02b()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -324,15 +339,14 @@ public class X : List<string>
     }
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
         }
 
         [Fact]
         public void TypeMismatch()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -348,15 +362,17 @@ public class X : List<string>
             compilation.VerifyDiagnostics(
                 // (8,18): error CS8121: An expression of type 'string' cannot be handled by a pattern of type 'int'.
                 //             case int i: // error: type mismatch.
-                Diagnostic(ErrorCode.ERR_PatternWrongType, "int").WithArguments("string", "int").WithLocation(8, 18)
-                );
+                Diagnostic(ErrorCode.ERR_PatternWrongType, "int")
+                    .WithArguments("string", "int")
+                    .WithLocation(8, 18)
+            );
         }
 
         [Fact]
         public void JointNonSubsumption02()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -398,7 +414,7 @@ public class X : List<string>
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"True
+                @"True
 False
 null";
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -408,7 +424,7 @@ null";
         public void NullMismatch01()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -426,15 +442,17 @@ null";
             compilation.VerifyDiagnostics(
                 // (10,18): error CS0037: Cannot convert null to 'bool' because it is a non-nullable value type
                 //             case null: // error: impossible given the type
-                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null").WithArguments("bool").WithLocation(10, 18)
-                );
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("bool")
+                    .WithLocation(10, 18)
+            );
         }
 
         [Fact, WorkItem(10632, "https://github.com/dotnet/roslyn/issues/10632")]
         public void TypeMismatch01()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -452,15 +470,17 @@ null";
             compilation.VerifyDiagnostics(
                 // (10,18): error CS0029: Cannot implicitly convert type 'int' to 'bool'
                 //             case 3: // error: impossible given the type
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "3").WithArguments("int", "bool").WithLocation(10, 18)
-                );
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "3")
+                    .WithArguments("int", "bool")
+                    .WithLocation(10, 18)
+            );
         }
 
         [Fact, WorkItem(10601, "https://github.com/dotnet/roslyn/issues/10601")]
         public void ValueMismatch01()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -478,15 +498,17 @@ null";
             compilation.VerifyDiagnostics(
                 // (10,18): error CS0031: Constant value '1000' cannot be converted to a 'byte'
                 //             case 1000: // error: impossible given the type
-                Diagnostic(ErrorCode.ERR_ConstOutOfRange, "1000").WithArguments("1000", "byte").WithLocation(10, 18)
-                );
+                Diagnostic(ErrorCode.ERR_ConstOutOfRange, "1000")
+                    .WithArguments("1000", "byte")
+                    .WithLocation(10, 18)
+            );
         }
 
         [Fact]
         public void Subsumption01()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main(string[] args)
     {
@@ -504,14 +526,14 @@ null";
                 // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case 11: // error: subsumed
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "11").WithLocation(9, 18)
-                );
+            );
         }
 
         [Fact]
         public void Subsumption02()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main(string[] args)
     {
@@ -535,14 +557,14 @@ null";
                 // (13,17): warning CS0162: Unreachable code detected
                 //                 break; // unreachable because a single case handles all input
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(13, 17)
-                );
+            );
         }
 
         [Fact]
         public void Subsumption03()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main(string[] args)
     {
@@ -558,14 +580,14 @@ null";
                 // (8,17): warning CS0162: Unreachable code detected
                 //                 break; // unreachable
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(8, 17)
-                );
+            );
         }
 
         [Fact]
         public void Subsumption04()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main(string[] args)
     {
@@ -581,14 +603,14 @@ null";
                 // (8,17): warning CS0162: Unreachable code detected
                 //                 break; // unreachable
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(8, 17)
-                );
+            );
         }
 
         [Fact]
         public void Subsumption04b()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main(string[] args)
     {
@@ -604,14 +626,14 @@ null";
                 // (8,17): warning CS0162: Unreachable code detected
                 //                 break; // unreachable
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(8, 17)
-                );
+            );
         }
 
         [Fact]
         public void Subsumption05()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main(string[] args)
     {
@@ -627,14 +649,14 @@ null";
                 // (8,17): warning CS0162: Unreachable code detected
                 //                 break; // unreachable
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(8, 17)
-                );
+            );
         }
 
         [Fact]
         public void Subsumption06()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main(string[] args)
     {
@@ -646,15 +668,14 @@ null";
     }
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
         }
 
         [Fact]
         public void Subsumption07()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main(string[] args)
     {
@@ -666,15 +687,14 @@ null";
     }
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
         }
 
         [Fact]
         public void Subsumption08()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main(string[] args)
     {
@@ -695,7 +715,7 @@ null";
                 // (8,17): warning CS0162: Unreachable code detected
                 //                 break; // unreachable
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(8, 17)
-                );
+            );
         }
 
         [Fact]
@@ -703,7 +723,7 @@ null";
         public void Subsumption09()
         {
             var source =
-@"using System;
+                @"using System;
 public class X
 {
     public static void Main()
@@ -837,7 +857,10 @@ class Derived : Base, I2
 {
 }
 ";
-            var compilation = CreateCompilation(new[] { source, _iTupleSource }, options: TestOptions.DebugExe);
+            var compilation = CreateCompilation(
+                new[] { source, _iTupleSource },
+                options: TestOptions.DebugExe
+            );
             compilation.VerifyDiagnostics(
                 // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case Derived s: // 1
@@ -853,29 +876,34 @@ class Derived : Base, I2
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "int and 1").WithLocation(34, 18),
                 // (41,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case ValueType and int and 1: // 5
-                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "ValueType and int and 1").WithLocation(41, 18),
+                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "ValueType and int and 1")
+                    .WithLocation(41, 18),
                 // (49,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case Derived s: // 6
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "Derived s").WithLocation(49, 18),
                 // (61,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case Derived { F1: 1 } s: // 7
-                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "Derived { F1: 1 } s").WithLocation(61, 18),
+                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "Derived { F1: 1 } s")
+                    .WithLocation(61, 18),
                 // (73,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case Derived { P1: 1 } s: // 8
-                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "Derived { P1: 1 } s").WithLocation(73, 18),
+                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "Derived { P1: 1 } s")
+                    .WithLocation(73, 18),
                 // (85,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case Derived(1, _) s: // 9
-                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "Derived(1, _) s").WithLocation(85, 18),
+                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "Derived(1, _) s")
+                    .WithLocation(85, 18),
                 // (95,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case Derived { F3: (1, _) } s: // 10
-                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "Derived { F3: (1, _) } s").WithLocation(95, 18),
+                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "Derived { F3: (1, _) } s")
+                    .WithLocation(95, 18),
                 // (103,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case Base and I2: // 11
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "Base and I2").WithLocation(103, 18),
                 // (111,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case I2 and Base: // 12
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "I2 and Base").WithLocation(111, 18)
-                );
+            );
         }
 
         [Fact]
@@ -883,7 +911,7 @@ class Derived : Base, I2
         public void Subsumption10()
         {
             var source =
-@"
+                @"
 using System;
 public class C {
     public void M1(object o) {
@@ -901,7 +929,7 @@ public class C {
                 // (8,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case int:
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "int").WithLocation(8, 18)
-                );
+            );
         }
 
         [Fact]
@@ -909,7 +937,7 @@ public class C {
         public void Subsumption11()
         {
             var source =
-@"using System;
+                @"using System;
 public class X
 {
     public static void Main()
@@ -929,14 +957,14 @@ public class X
                 // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case string s: // error: subsumed by previous case
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "string s").WithLocation(11, 18)
-                );
+            );
         }
 
         [Fact]
         public void EqualConstant03()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -951,15 +979,14 @@ public class X
     }
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
         }
 
         [Fact]
         public void CascadedUnreachableDiagnostic()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -974,15 +1001,25 @@ public class X
         }
     }
 }";
-            CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular6).VerifyDiagnostics(
-                // (10,18): error CS0029: Cannot implicitly convert type 'string' to 'bool'
-                //             case "goo": // wrong type
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""goo""").WithArguments("string", "bool").WithLocation(11, 18)
+            CreateCompilation(
+                    source,
+                    options: TestOptions.DebugExe,
+                    parseOptions: TestOptions.Regular6
+                )
+                .VerifyDiagnostics(
+                    // (10,18): error CS0029: Cannot implicitly convert type 'string' to 'bool'
+                    //             case "goo": // wrong type
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""goo""")
+                        .WithArguments("string", "bool")
+                        .WithLocation(11, 18)
                 );
-            CreateCompilation(source, options: TestOptions.DebugExe).VerifyDiagnostics(
-                // (10,18): error CS0029: Cannot implicitly convert type 'string' to 'bool'
-                //             case "goo": // wrong type
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""goo""").WithArguments("string", "bool").WithLocation(11, 18)
+            CreateCompilation(source, options: TestOptions.DebugExe)
+                .VerifyDiagnostics(
+                    // (10,18): error CS0029: Cannot implicitly convert type 'string' to 'bool'
+                    //             case "goo": // wrong type
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""goo""")
+                        .WithArguments("string", "bool")
+                        .WithLocation(11, 18)
                 );
         }
 
@@ -990,7 +1027,7 @@ public class X
         public void EnumConversions01()
         {
             var source =
-@"enum Color { Red=0, Blue=1, Green=2, Mauve=3 }
+                @"enum Color { Red=0, Blue=1, Green=2, Mauve=3 }
 
 class Program
 {
@@ -1012,45 +1049,71 @@ class Program
         }
     }
 }";
-            CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular6).VerifyDiagnostics(
-                // (18,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
-                //             case Color x when false:
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "case Color x when false:").WithArguments("pattern matching", "7.0").WithLocation(18, 13),
-                // (11,17): warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
-                //                 goto case 1; // warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
-                Diagnostic(ErrorCode.WRN_GotoCaseShouldConvert, "goto case 1;").WithArguments("Color").WithLocation(11, 17),
-                // (14,18): error CS0266: Cannot implicitly convert type 'int' to 'Color'. An explicit conversion exists (are you missing a cast?)
-                //             case 2:          // error CS0266: Cannot implicitly convert type 'int' to 'Color'. An explicit conversion exists (are you missing a cast?)
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "2").WithArguments("int", "Color").WithLocation(14, 18),
-                // (15,17): warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
-                //                 goto case 3; // warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
-                Diagnostic(ErrorCode.WRN_GotoCaseShouldConvert, "goto case 3;").WithArguments("Color").WithLocation(15, 17),
-                // (15,17): error CS0159: No such label 'case 3:' within the scope of the goto statement
-                //                 goto case 3; // warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
-                Diagnostic(ErrorCode.ERR_LabelNotFound, "goto case 3;").WithArguments("case 3:").WithLocation(15, 17)
+            CreateCompilation(
+                    source,
+                    options: TestOptions.DebugExe,
+                    parseOptions: TestOptions.Regular6
+                )
+                .VerifyDiagnostics(
+                    // (18,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
+                    //             case Color x when false:
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                            "case Color x when false:"
+                        )
+                        .WithArguments("pattern matching", "7.0")
+                        .WithLocation(18, 13),
+                    // (11,17): warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
+                    //                 goto case 1; // warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
+                    Diagnostic(ErrorCode.WRN_GotoCaseShouldConvert, "goto case 1;")
+                        .WithArguments("Color")
+                        .WithLocation(11, 17),
+                    // (14,18): error CS0266: Cannot implicitly convert type 'int' to 'Color'. An explicit conversion exists (are you missing a cast?)
+                    //             case 2:          // error CS0266: Cannot implicitly convert type 'int' to 'Color'. An explicit conversion exists (are you missing a cast?)
+                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "2")
+                        .WithArguments("int", "Color")
+                        .WithLocation(14, 18),
+                    // (15,17): warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
+                    //                 goto case 3; // warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
+                    Diagnostic(ErrorCode.WRN_GotoCaseShouldConvert, "goto case 3;")
+                        .WithArguments("Color")
+                        .WithLocation(15, 17),
+                    // (15,17): error CS0159: No such label 'case 3:' within the scope of the goto statement
+                    //                 goto case 3; // warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
+                    Diagnostic(ErrorCode.ERR_LabelNotFound, "goto case 3;")
+                        .WithArguments("case 3:")
+                        .WithLocation(15, 17)
                 );
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
                 // (11,17): warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
                 //                 goto case 1; // warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
-                Diagnostic(ErrorCode.WRN_GotoCaseShouldConvert, "goto case 1;").WithArguments("Color").WithLocation(11, 17),
+                Diagnostic(ErrorCode.WRN_GotoCaseShouldConvert, "goto case 1;")
+                    .WithArguments("Color")
+                    .WithLocation(11, 17),
                 // (14,18): error CS0266: Cannot implicitly convert type 'int' to 'Color'. An explicit conversion exists (are you missing a cast?)
                 //             case 2:          // error CS0266: Cannot implicitly convert type 'int' to 'Color'. An explicit conversion exists (are you missing a cast?)
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "2").WithArguments("int", "Color").WithLocation(14, 18),
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "2")
+                    .WithArguments("int", "Color")
+                    .WithLocation(14, 18),
                 // (15,17): warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
                 //                 goto case 3; // warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
-                Diagnostic(ErrorCode.WRN_GotoCaseShouldConvert, "goto case 3;").WithArguments("Color").WithLocation(15, 17),
+                Diagnostic(ErrorCode.WRN_GotoCaseShouldConvert, "goto case 3;")
+                    .WithArguments("Color")
+                    .WithLocation(15, 17),
                 // (15,17): error CS0159: No such label 'case 3:' within the scope of the goto statement
                 //                 goto case 3; // warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
-                Diagnostic(ErrorCode.ERR_LabelNotFound, "goto case 3;").WithArguments("case 3:").WithLocation(15, 17)
-                );
+                Diagnostic(ErrorCode.ERR_LabelNotFound, "goto case 3;")
+                    .WithArguments("case 3:")
+                    .WithLocation(15, 17)
+            );
         }
 
         [Fact]
         public void EnumConversions02()
         {
             var source =
-@"using System;
+                @"using System;
 
 enum Color { Red=0, Blue=1, Green=2, Mauve=3 }
 
@@ -1079,8 +1142,10 @@ class Program
             compilation.VerifyDiagnostics(
                 // (17,17): warning CS0469: The 'goto case' value is not implicitly convertible to type 'Color'
                 //                 goto case 1;
-                Diagnostic(ErrorCode.WRN_GotoCaseShouldConvert, "goto case 1;").WithArguments("Color").WithLocation(17, 17)
-                );
+                Diagnostic(ErrorCode.WRN_GotoCaseShouldConvert, "goto case 1;")
+                    .WithArguments("Color")
+                    .WithLocation(17, 17)
+            );
             var expectedOutput = @"done";
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
@@ -1100,7 +1165,7 @@ class Program
             // evaluating the when condition. If it fails we branch back into the decision tree. If
             // it succeeds we branch to the user-written body of the switch block.
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1125,7 +1190,7 @@ class Program
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"1
+                @"1
 sasquatch";
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
@@ -1134,7 +1199,7 @@ sasquatch";
         public void WhenClause02()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1216,7 +1281,7 @@ class Program
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-$@"0.0d !
+                $@"0.0d !
 0.0d !
 double {2.1}
 1.0d !
@@ -1241,7 +1306,7 @@ null";
         public void DuplicateDouble()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -1348,36 +1413,52 @@ null";
             compilation.VerifyDiagnostics(
                 // (13,13): error CS0152: The switch statement contains multiple cases with the label value '1.01'
                 //             case 1.01: // duplicate
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case 1.01:").WithArguments(1.01.ToString()).WithLocation(13, 13),
+                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case 1.01:")
+                    .WithArguments(1.01.ToString())
+                    .WithLocation(13, 13),
                 // (34,13): error CS0152: The switch statement contains multiple cases with the label value '0'
                 //             case -0.0: // duplicate
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case -0.0:").WithArguments((-0.0).ToString()).WithLocation(34, 13),
+                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case -0.0:")
+                    .WithArguments((-0.0).ToString())
+                    .WithLocation(34, 13),
                 // (35,13): error CS0152: The switch statement contains multiple cases with the label value 'NaN'
                 //             case -double.NaN: // duplicate
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case -double.NaN:").WithArguments((-double.NaN).ToString()).WithLocation(35, 13),
+                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case -double.NaN:")
+                    .WithArguments((-double.NaN).ToString())
+                    .WithLocation(35, 13),
                 // (46,13): error CS0152: The switch statement contains multiple cases with the label value '1.01'
                 //             case 1.01f: // duplicate
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case 1.01f:").WithArguments(1.01f.ToString()).WithLocation(46, 13),
+                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case 1.01f:")
+                    .WithArguments(1.01f.ToString())
+                    .WithLocation(46, 13),
                 // (67,13): error CS0152: The switch statement contains multiple cases with the label value '0'
                 //             case -0.0f: // duplicate
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case -0.0f:").WithArguments((-0.0f).ToString()).WithLocation(67, 13),
+                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case -0.0f:")
+                    .WithArguments((-0.0f).ToString())
+                    .WithLocation(67, 13),
                 // (68,13): error CS0152: The switch statement contains multiple cases with the label value 'NaN'
                 //             case -float.NaN: // duplicate
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case -float.NaN:").WithArguments((-float.NaN).ToString()).WithLocation(68, 13),
+                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case -float.NaN:")
+                    .WithArguments((-float.NaN).ToString())
+                    .WithLocation(68, 13),
                 // (78,13): error CS0152: The switch statement contains multiple cases with the label value '1.01'
                 //             case 1.01m: // duplicate
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case 1.01m:").WithArguments(1.01m.ToString()).WithLocation(78, 13),
+                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case 1.01m:")
+                    .WithArguments(1.01m.ToString())
+                    .WithLocation(78, 13),
                 // (99,13): error CS0152: The switch statement contains multiple cases with the label value '0.0'
                 //             case -0.0m: // duplicate
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case -0.0m:").WithArguments((-0.0m).ToString()).WithLocation(99, 13)
-                );
+                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case -0.0m:")
+                    .WithArguments((-0.0m).ToString())
+                    .WithLocation(99, 13)
+            );
         }
 
         [Fact]
         public void NanValuesAreEqual()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1419,7 +1500,7 @@ class Program
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"zero
+                @"zero
 zero
 double.NaN
 double.NaN
@@ -1431,7 +1512,7 @@ float.NaN";
         public void EnumAndUnderlyingType()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1477,7 +1558,7 @@ public enum EnumA
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"0
+                @"0
 0L
 (byte)0
 EnumA.ValueA
@@ -1489,7 +1570,7 @@ Default";
         public void InferenceInSwitch()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -1511,13 +1592,29 @@ public class X
             var compilation = CreateCompilation(source);
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
-            var sRef = tree.GetCompilationUnitRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(n => n.ToString() == "s").Single();
+            var sRef = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(n => n.ToString() == "s")
+                .Single();
             Assert.Equal("System.String", model.GetTypeInfo(sRef).Type.ToTestDisplayString());
-            var iRef = tree.GetCompilationUnitRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(n => n.ToString() == "i").Single();
+            var iRef = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(n => n.ToString() == "i")
+                .Single();
             Assert.Equal("System.Object", model.GetTypeInfo(iRef).Type.ToTestDisplayString());
-            var s2Ref = tree.GetCompilationUnitRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(n => n.ToString() == "s2").Single();
+            var s2Ref = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(n => n.ToString() == "s2")
+                .Single();
             Assert.Equal("System.String", model.GetTypeInfo(s2Ref).Type.ToTestDisplayString());
-            var i2Ref = tree.GetCompilationUnitRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(n => n.ToString() == "i2").Single();
+            var i2Ref = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(n => n.ToString() == "i2")
+                .Single();
             Assert.Equal("System.Object", model.GetTypeInfo(i2Ref).Type.ToTestDisplayString());
         }
 
@@ -1525,7 +1622,7 @@ public class X
         public void CodeGenSwitchInLoop()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1556,8 +1653,7 @@ class Program
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
-            var expectedOutput =
-@"True";
+            var expectedOutput = @"True";
             var comp = CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
 
@@ -1565,7 +1661,7 @@ class Program
         public void ConditionalPatternsCannotSubsume()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main(string[] args)
     {
@@ -1589,14 +1685,14 @@ class Program
                 // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case bool b: throw null; // error: bool already handled by previous cases.
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "bool b").WithLocation(11, 18)
-                );
+            );
         }
 
         [Fact, WorkItem(273713, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=273713")]
         public void ExplicitTupleConversion_Crash()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main(string[] args)
     {
@@ -1628,7 +1724,7 @@ class Program
         public void TupleInPattern()
         {
             var source =
-@"namespace System
+                @"namespace System
 {
     public struct ValueTuple<T1, T2>
     {
@@ -1684,139 +1780,231 @@ class Program
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugDll, parseOptions: TestOptions.Regular8);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugDll,
+                parseOptions: TestOptions.Regular8
+            );
             compilation.VerifyDiagnostics(
                 // (21,19): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             case (int, int):
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int").WithArguments("type pattern", "9.0").WithLocation(21, 19),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(21, 19),
                 // (21,24): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             case (int, int):
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int").WithArguments("type pattern", "9.0").WithLocation(21, 24),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(21, 24),
                 // (23,19): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             case (int, int) z:
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int").WithArguments("type pattern", "9.0").WithLocation(23, 19),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(23, 19),
                 // (23,24): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             case (int, int) z:
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int").WithArguments("type pattern", "9.0").WithLocation(23, 24),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(23, 24),
                 // (25,19): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             case (long, long) d:
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "long").WithArguments("type pattern", "9.0").WithLocation(25, 19),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "long")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(25, 19),
                 // (25,25): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             case (long, long) d:
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "long").WithArguments("type pattern", "9.0").WithLocation(25, 25),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "long")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(25, 25),
                 // (30,19): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             case (int, int) z:
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int").WithArguments("type pattern", "9.0").WithLocation(30, 19),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(30, 19),
                 // (30,24): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             case (int, int) z:
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int").WithArguments("type pattern", "9.0").WithLocation(30, 24),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(30, 24),
                 // (32,19): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             case (long, long) d:
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "long").WithArguments("type pattern", "9.0").WithLocation(32, 19),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "long")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(32, 19),
                 // (32,25): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             case (long, long) d:
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "long").WithArguments("type pattern", "9.0").WithLocation(32, 25),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "long")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(32, 25),
                 // (43,23): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             if (o is (int, int)) {}
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int").WithArguments("type pattern", "9.0").WithLocation(43, 23),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(43, 23),
                 // (43,28): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             if (o is (int, int)) {}
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int").WithArguments("type pattern", "9.0").WithLocation(43, 28),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(43, 28),
                 // (45,23): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             if (o is (int, int) z) {}
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int").WithArguments("type pattern", "9.0").WithLocation(45, 23),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(45, 23),
                 // (45,28): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //             if (o is (int, int) z) {}
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int").WithArguments("type pattern", "9.0").WithLocation(45, 28),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "int")
+                    .WithArguments("type pattern", "9.0")
+                    .WithLocation(45, 28),
                 // (21,18): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             case (int, int):
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int, int)").WithArguments("object", "2").WithLocation(21, 18),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int, int)")
+                    .WithArguments("object", "2")
+                    .WithLocation(21, 18),
                 // (22,18): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             case (int x, int y):
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(int x, int y)").WithArguments("object", "Deconstruct").WithLocation(22, 18),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(int x, int y)")
+                    .WithArguments("object", "Deconstruct")
+                    .WithLocation(22, 18),
                 // (22,18): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             case (int x, int y):
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int x, int y)").WithArguments("object", "2").WithLocation(22, 18),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int x, int y)")
+                    .WithArguments("object", "2")
+                    .WithLocation(22, 18),
                 // (23,18): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             case (int, int) z:
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int, int)").WithArguments("object", "2").WithLocation(23, 18),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int, int)")
+                    .WithArguments("object", "2")
+                    .WithLocation(23, 18),
                 // (24,18): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             case (int a, int b) c:
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(int a, int b)").WithArguments("object", "Deconstruct").WithLocation(24, 18),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(int a, int b)")
+                    .WithArguments("object", "Deconstruct")
+                    .WithLocation(24, 18),
                 // (24,18): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             case (int a, int b) c:
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int a, int b)").WithArguments("object", "2").WithLocation(24, 18),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int a, int b)")
+                    .WithArguments("object", "2")
+                    .WithLocation(24, 18),
                 // (25,18): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             case (long, long) d:
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(long, long)").WithArguments("object", "2").WithLocation(25, 18),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(long, long)")
+                    .WithArguments("object", "2")
+                    .WithLocation(25, 18),
                 // (30,18): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             case (int, int) z:
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int, int)").WithArguments("object", "2").WithLocation(30, 18),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int, int)")
+                    .WithArguments("object", "2")
+                    .WithLocation(30, 18),
                 // (32,18): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             case (long, long) d:
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(long, long)").WithArguments("object", "2").WithLocation(32, 18),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(long, long)")
+                    .WithArguments("object", "2")
+                    .WithLocation(32, 18),
                 // (37,18): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             case (System.Int32, System.Int32) z:
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(System.Int32, System.Int32)").WithArguments("object", "Deconstruct").WithLocation(37, 18),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(System.Int32, System.Int32)")
+                    .WithArguments("object", "Deconstruct")
+                    .WithLocation(37, 18),
                 // (37,18): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             case (System.Int32, System.Int32) z:
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(System.Int32, System.Int32)").WithArguments("object", "2").WithLocation(37, 18),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(System.Int32, System.Int32)")
+                    .WithArguments("object", "2")
+                    .WithLocation(37, 18),
                 // (39,18): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             case (System.Int64, System.Int64) d:
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(System.Int64, System.Int64)").WithArguments("object", "Deconstruct").WithLocation(39, 18),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(System.Int64, System.Int64)")
+                    .WithArguments("object", "Deconstruct")
+                    .WithLocation(39, 18),
                 // (39,18): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             case (System.Int64, System.Int64) d:
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(System.Int64, System.Int64)").WithArguments("object", "2").WithLocation(39, 18),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(System.Int64, System.Int64)")
+                    .WithArguments("object", "2")
+                    .WithLocation(39, 18),
                 // (43,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             if (o is (int, int)) {}
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int, int)").WithArguments("object", "2").WithLocation(43, 22),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int, int)")
+                    .WithArguments("object", "2")
+                    .WithLocation(43, 22),
                 // (44,22): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             if (o is (int x, int y)) {}
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(int x, int y)").WithArguments("object", "Deconstruct").WithLocation(44, 22),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(int x, int y)")
+                    .WithArguments("object", "Deconstruct")
+                    .WithLocation(44, 22),
                 // (44,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             if (o is (int x, int y)) {}
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int x, int y)").WithArguments("object", "2").WithLocation(44, 22),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int x, int y)")
+                    .WithArguments("object", "2")
+                    .WithLocation(44, 22),
                 // (45,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             if (o is (int, int) z) {}
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int, int)").WithArguments("object", "2").WithLocation(45, 22),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int, int)")
+                    .WithArguments("object", "2")
+                    .WithLocation(45, 22),
                 // (46,22): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             if (o is (int a, int b) c) {}
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(int a, int b)").WithArguments("object", "Deconstruct").WithLocation(46, 22),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(int a, int b)")
+                    .WithArguments("object", "Deconstruct")
+                    .WithLocation(46, 22),
                 // (46,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             if (o is (int a, int b) c) {}
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int a, int b)").WithArguments("object", "2").WithLocation(46, 22),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int a, int b)")
+                    .WithArguments("object", "2")
+                    .WithLocation(46, 22),
                 // (49,22): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             if (o is (System.Int32, System.Int32)) {}
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(System.Int32, System.Int32)").WithArguments("object", "Deconstruct").WithLocation(49, 22),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(System.Int32, System.Int32)")
+                    .WithArguments("object", "Deconstruct")
+                    .WithLocation(49, 22),
                 // (49,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             if (o is (System.Int32, System.Int32)) {}
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(System.Int32, System.Int32)").WithArguments("object", "2").WithLocation(49, 22),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(System.Int32, System.Int32)")
+                    .WithArguments("object", "2")
+                    .WithLocation(49, 22),
                 // (50,22): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             if (o is (System.Int32 x, System.Int32 y)) {}
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(System.Int32 x, System.Int32 y)").WithArguments("object", "Deconstruct").WithLocation(50, 22),
+                Diagnostic(
+                        ErrorCode.ERR_NoSuchMemberOrExtension,
+                        "(System.Int32 x, System.Int32 y)"
+                    )
+                    .WithArguments("object", "Deconstruct")
+                    .WithLocation(50, 22),
                 // (50,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             if (o is (System.Int32 x, System.Int32 y)) {}
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(System.Int32 x, System.Int32 y)").WithArguments("object", "2").WithLocation(50, 22),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(System.Int32 x, System.Int32 y)")
+                    .WithArguments("object", "2")
+                    .WithLocation(50, 22),
                 // (51,22): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             if (o is (System.Int32, System.Int32) z) {}
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(System.Int32, System.Int32)").WithArguments("object", "Deconstruct").WithLocation(51, 22),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(System.Int32, System.Int32)")
+                    .WithArguments("object", "Deconstruct")
+                    .WithLocation(51, 22),
                 // (51,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             if (o is (System.Int32, System.Int32) z) {}
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(System.Int32, System.Int32)").WithArguments("object", "2").WithLocation(51, 22),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(System.Int32, System.Int32)")
+                    .WithArguments("object", "2")
+                    .WithLocation(51, 22),
                 // (52,22): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             if (o is (System.Int32 a, System.Int32 b) c) {}
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(System.Int32 a, System.Int32 b)").WithArguments("object", "Deconstruct").WithLocation(52, 22),
+                Diagnostic(
+                        ErrorCode.ERR_NoSuchMemberOrExtension,
+                        "(System.Int32 a, System.Int32 b)"
+                    )
+                    .WithArguments("object", "Deconstruct")
+                    .WithLocation(52, 22),
                 // (52,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             if (o is (System.Int32 a, System.Int32 b) c) {}
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(System.Int32 a, System.Int32 b)").WithArguments("object", "2").WithLocation(52, 22)
-                );
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(System.Int32 a, System.Int32 b)")
+                    .WithArguments("object", "2")
+                    .WithLocation(52, 22)
+            );
         }
 
         [Fact, WorkItem(273713, "https://devdiv.visualstudio.com/DevDiv/_workitems?id=273713")]
         public void PointerConversion_Crash()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main(string[] args)
     {
@@ -1847,7 +2035,7 @@ class Program
         public void ExpressionVariableInCase_1()
         {
             string source =
-@"
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -1861,16 +2049,23 @@ class Program
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
             // The point of this test is that it should not crash.
             compilation.VerifyDiagnostics(
                 // (8,18): error CS0150: A constant value is expected
                 //             case new object() is int x1:
-                Diagnostic(ErrorCode.ERR_ConstantExpected, "new object() is int x1").WithLocation(8, 18),
+                Diagnostic(ErrorCode.ERR_ConstantExpected, "new object() is int x1")
+                    .WithLocation(8, 18),
                 // (9,42): error CS0165: Use of unassigned local variable 'x1'
                 //                 System.Console.WriteLine(x1);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x1").WithArguments("x1").WithLocation(9, 42)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(9, 42)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -1883,7 +2078,7 @@ class Program
         public void ExpressionVariableInCase_2()
         {
             string source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1896,16 +2091,24 @@ class Program
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
             // The point of this test is that it should not crash.
             compilation.VerifyDiagnostics(
                 // (7,18): error CS1525: Invalid expression term 'is'
                 //             case is EnvDTE.Project x1:
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "is").WithArguments("is").WithLocation(7, 18),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "is")
+                    .WithArguments("is")
+                    .WithLocation(7, 18),
                 // (7,21): error CS0246: The type or namespace name 'EnvDTE' could not be found (are you missing a using directive or an assembly reference?)
                 //             case is EnvDTE.Project x1:
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "EnvDTE").WithArguments("EnvDTE").WithLocation(7, 21)
-                );
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "EnvDTE")
+                    .WithArguments("EnvDTE")
+                    .WithLocation(7, 21)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -1918,7 +2121,7 @@ class Program
         public void PatternSwitchInLocalFunctionInGenericMethod()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -1945,7 +2148,7 @@ class Program
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"True
+                @"True
 False
 True
 False";
@@ -1959,7 +2162,7 @@ False";
             // so that it is not affected by subsequent assignment to a variable appearing
             // in the switch expression.
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -1985,7 +2188,7 @@ class Program
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"2
+                @"2
 3
 4
 Correct
@@ -1997,7 +2200,7 @@ Correct
         public void ParenthesizedGuardClause()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main(string[] args)
     {
@@ -2027,16 +2230,19 @@ class Rectangle
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
-            CompileAndVerify(compilation, expectedOutput: @"other
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"other
 S 1
-R 1 2");
+R 1 2"
+            );
         }
 
         [Fact, WorkItem(14721, "https://github.com/dotnet/roslyn/issues/14721")]
         public void NullTest_Crash()
         {
             var source =
-@"using System;
+                @"using System;
 
 static class Program {
     static void Test(object o) {
@@ -2058,9 +2264,11 @@ static class Program {
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
-            CompileAndVerify(compilation, expectedOutput:
-@"not null
-null");
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"not null
+null"
+            );
         }
 
         [Fact]
@@ -2068,7 +2276,7 @@ null");
         public void SwitchSectionWithLambda_01()
         {
             var source =
-@"
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2096,7 +2304,7 @@ class A{}
         public void SwitchSectionWithLambda_02()
         {
             var source =
-@"
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -2134,15 +2342,17 @@ class Program
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
-            var comp = CompileAndVerify(compilation, expectedOutput:
-@"case 1: 1
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"case 1: 1
 case 2: 2
 case 1: 3
 case 2: 4
 3
 4
 3
-4");
+4"
+            );
         }
 
         [Fact]
@@ -2150,7 +2360,7 @@ case 2: 4
         public void SwitchSectionWithYield_01()
         {
             var source =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -2196,15 +2406,17 @@ class Program
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
-            var comp = CompileAndVerify(compilation, expectedOutput:
-@"case 1: 1
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"case 1: 1
 case 2: 2
 case 1: 3
 case 2: 4
 3
 4
 3
-4");
+4"
+            );
         }
 
         [Fact]
@@ -2212,7 +2424,7 @@ case 2: 4
         public void SwitchSectionWithYield_02()
         {
             var source =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -2252,15 +2464,17 @@ class Program
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
-            var comp = CompileAndVerify(compilation, expectedOutput:
-@"case 1: 1
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"case 1: 1
 1
 case 2: 2
 2
 case 1: 3
 3
 case 2: 4
-4");
+4"
+            );
         }
 
         [Fact]
@@ -2268,7 +2482,7 @@ case 2: 4
         public void SwitchSectionWithYield_03()
         {
             var source =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -2310,8 +2524,9 @@ class Program
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
-            var comp = CompileAndVerify(compilation, expectedOutput:
-@"case 1: 1
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"case 1: 1
 1
 case 2: 2
 2
@@ -2319,7 +2534,8 @@ case 1: 3
 3
 case 2: 4
 4
-5");
+5"
+            );
         }
 
         [Fact]
@@ -2327,7 +2543,7 @@ case 2: 4
         public void SwitchSectionWithYield_04()
         {
             var source =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -2359,9 +2575,11 @@ class Program
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
-            var comp = CompileAndVerify(compilation, expectedOutput:
-@"case: 3
-3");
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"case: 3
+3"
+            );
         }
 
         [Fact]
@@ -2369,7 +2587,7 @@ class Program
         public void SwitchSectionWithAwait_01()
         {
             var source =
-@"
+                @"
 using System.Threading.Tasks;
 
 class Program
@@ -2421,10 +2639,14 @@ class Program
 }
 ";
             // Use a compilation profile that supports Task<T>.
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.DebugExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.DebugExe
+            );
             compilation.VerifyDiagnostics();
-            var comp = CompileAndVerify(compilation, expectedOutput:
-@"case 1: 1
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"case 1: 1
 case 2: 2
 case 1: 3
 case 2: 4
@@ -2432,7 +2654,8 @@ case 2: 4
 4
 3
 4
-5");
+5"
+            );
         }
 
         [Fact]
@@ -2440,7 +2663,7 @@ case 2: 4
         public void SwitchSectionWithAwait_02()
         {
             var source =
-@"
+                @"
 using System.Threading.Tasks;
 
 class Program
@@ -2486,10 +2709,14 @@ class Program
 }
 ";
             // Use a compilation profile that supports Task<T>.
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.DebugExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.DebugExe
+            );
             compilation.VerifyDiagnostics();
-            var comp = CompileAndVerify(compilation, expectedOutput:
-@"case 1: 1
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"case 1: 1
 1
 case 2: 2
 2
@@ -2497,7 +2724,8 @@ case 1: 3
 3
 case 2: 4
 4
-5");
+5"
+            );
         }
 
         [Fact]
@@ -2505,7 +2733,7 @@ case 2: 4
         public void SwitchSectionWithAwait_03()
         {
             var source =
-@"
+                @"
 using System.Threading.Tasks;
 
 class Program
@@ -2546,10 +2774,14 @@ class Program
 }
 ";
             // Use a compilation profile that supports Task<T>.
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             compilation.VerifyDiagnostics();
-            var comp = CompileAndVerify(compilation, expectedOutput:
-@"case 1: 1
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"case 1: 1
 1
 case 2: 2
 2
@@ -2557,7 +2789,8 @@ case 1: 3
 3
 case 2: 4
 4
-5");
+5"
+            );
         }
 
         [Fact]
@@ -2565,7 +2798,7 @@ case 2: 4
         public void SwitchSectionWithAwait_04()
         {
             var source =
-@"
+                @"
 using System.Threading.Tasks;
 
 class Program
@@ -2602,11 +2835,16 @@ class Program
 }
 ";
             // Use a compilation profile that supports Task<T>.
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             compilation.VerifyDiagnostics();
-            var comp = CompileAndVerify(compilation, expectedOutput:
-@"case: 3
-3");
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"case: 3
+3"
+            );
         }
 
         [Fact]
@@ -2615,7 +2853,7 @@ class Program
         public void SwitchAwaitGenericsAndOptimization()
         {
             var source =
-@"
+                @"
 using System.Threading.Tasks;
 
 class Test
@@ -2639,15 +2877,21 @@ class Test
 }
 ";
             // Use a compilation profile that supports Task<T>.
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             compilation.VerifyDiagnostics(
                 // (12,38): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
                 //     public static async Task<string> SendMessageAsync<T>(object response)
-                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "SendMessageAsync").WithLocation(12, 38)
-                );
-            var comp = CompileAndVerify(compilation, expectedOutput:
-@"T
-default");
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "SendMessageAsync")
+                    .WithLocation(12, 38)
+            );
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"T
+default"
+            );
         }
 
         [Fact]
@@ -2656,7 +2900,7 @@ default");
         public void SwitchLambdaGenericsAndOptimization()
         {
             var source =
-@"
+                @"
 class Test
 {
     static void Main()
@@ -2684,9 +2928,11 @@ class Test
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
-            var comp = CompileAndVerify(compilation, expectedOutput:
-@"T
-default");
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"T
+default"
+            );
         }
 
         [Fact]
@@ -2695,7 +2941,7 @@ default");
         public void SwitchIteratorGenericsAndOptimization()
         {
             var source =
-@"
+                @"
 class Test
 {
     static void Main()
@@ -2726,9 +2972,11 @@ class Test
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
-            var comp = CompileAndVerify(compilation, expectedOutput:
-@"T
-default");
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"T
+default"
+            );
         }
 
         [Fact]
@@ -2736,7 +2984,7 @@ default");
         public void TupleNameDifferences_01()
         {
             var source =
-@"
+                @"
 using System.Collections.Generic;
 
 class Program
@@ -2758,8 +3006,9 @@ class Program
             compilation.VerifyDiagnostics(
                 // (13,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case List<(int z, int w)> list2: // subsumed
-                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "List<(int z, int w)> list2").WithLocation(13, 18)
-                );
+                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "List<(int z, int w)> list2")
+                    .WithLocation(13, 18)
+            );
         }
 
         [Fact]
@@ -2767,7 +3016,7 @@ class Program
         public void TupleNameDifferences_02()
         {
             var source =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2786,8 +3035,7 @@ class Program
 }
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"pass");
         }
 
@@ -2796,7 +3044,7 @@ class Program
         public void TupleNameDifferences_03()
         {
             var source =
-@"
+                @"
 using System;
 
 class Program
@@ -2814,8 +3062,7 @@ class Program
 }
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"pass");
         }
 
@@ -2824,7 +3071,7 @@ class Program
         public void TupleNameDifferences_04()
         {
             var source =
-@"
+                @"
 using System;
 
 class Program
@@ -2842,8 +3089,7 @@ class Program
 }
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"1");
         }
 
@@ -2852,7 +3098,7 @@ class Program
         public void TupleNameDifferences_05()
         {
             var source =
-@"
+                @"
 using System;
 
 class Program
@@ -2875,7 +3121,7 @@ class Program
                 // (13,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case var x:
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "var x").WithLocation(13, 18)
-                );
+            );
         }
 
         [Fact]
@@ -2883,7 +3129,7 @@ class Program
         public void DynamicDifferences_01()
         {
             var source =
-@"
+                @"
 using System.Collections.Generic;
 
 class Program
@@ -2905,8 +3151,9 @@ class Program
             compilation.VerifyDiagnostics(
                 // (13,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case List<dynamic> list2: // subsumed
-                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "List<dynamic> list2").WithLocation(13, 18)
-                );
+                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "List<dynamic> list2")
+                    .WithLocation(13, 18)
+            );
         }
 
         [Fact]
@@ -2914,7 +3161,7 @@ class Program
         public void DynamicDifferences_02()
         {
             var source =
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -2933,8 +3180,7 @@ class Program
 }
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"pass");
         }
 
@@ -2943,7 +3189,7 @@ class Program
         public void Dynamic_01()
         {
             var source =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -2971,7 +3217,7 @@ class Program
                 // (12,18): error CS8330: It is not legal to use the type 'dynamic' in a pattern.
                 //         if (d is dynamic y) {} // error 2
                 Diagnostic(ErrorCode.ERR_PatternDynamicType, "dynamic").WithLocation(12, 18)
-                );
+            );
         }
 
         [Fact]
@@ -2979,7 +3225,7 @@ class Program
         public void Dynamic_02()
         {
             var source =
-@"
+                @"
 class Program
 {
     static void Main()
@@ -3045,15 +3291,17 @@ class Program
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "int y").WithLocation(30, 18),
                 // (37,13): error CS0152: The switch statement contains multiple cases with the label value 'null'
                 //             case (string)null: // error: subsumed
-                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case (string)null:").WithArguments("null").WithLocation(37, 13)
-                );
+                Diagnostic(ErrorCode.ERR_DuplicateCaseLabel, "case (string)null:")
+                    .WithArguments("null")
+                    .WithLocation(37, 13)
+            );
         }
 
         [Fact]
         public void SubsumedCasesAreUnreachable_01()
         {
             var source =
-@"
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3090,14 +3338,14 @@ class Program
                 // (19,17): warning CS0162: Unreachable code detected
                 //                 break; // unreachable, because `var i` would catch all
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(19, 17)
-                );
+            );
         }
 
         [Fact]
         public void SwitchTuple()
         {
             var source =
-@"
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3118,18 +3366,19 @@ class Program
             compilation.VerifyDiagnostics(
                 // (10,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case System.ValueTuple<int, int> x: // error: subsumed
-                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "System.ValueTuple<int, int> x").WithLocation(10, 18),
+                Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "System.ValueTuple<int, int> x")
+                    .WithLocation(10, 18),
                 // (13,17): warning CS0162: Unreachable code detected
                 //                 break; // unreachable because a single case handles all input
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(13, 17)
-               );
+            );
         }
 
         [Fact]
         public void ByValueThenByTypeTwice()
         {
             var source =
-@"
+                @"
 class Program
 {
     static bool b = false;
@@ -3152,7 +3401,10 @@ class Program
 }
 ";
             var compilation = CreateCompilationWithMscorlib40(
-                source, options: TestOptions.ReleaseExe, references: new[] { SystemRuntimeFacadeRef, ValueTupleRef });
+                source,
+                options: TestOptions.ReleaseExe,
+                references: new[] { SystemRuntimeFacadeRef, ValueTupleRef }
+            );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: "Main");
         }
@@ -3161,7 +3413,7 @@ class Program
         public void AsyncGenericPatternCrash()
         {
             var source =
-@"
+                @"
 using System.Threading.Tasks;
 
 static class Ex
@@ -3182,17 +3434,26 @@ static class Ex
 ";
             // Use a compilation profile that supports Task<T>.
             var compilation = CreateCompilationWithMscorlib45(
-                source, options: TestOptions.ReleaseDll.WithOptimizationLevel(OptimizationLevel.Release), references: new[] { SystemCoreRef, CSharpRef });
+                source,
+                options: TestOptions.ReleaseDll.WithOptimizationLevel(OptimizationLevel.Release),
+                references: new[] { SystemCoreRef, CSharpRef }
+            );
             compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation);
         }
 
-        [Fact, WorkItem(388743, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?_a=edit&id=388743")]
+        [
+            Fact,
+            WorkItem(
+                388743,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?_a=edit&id=388743"
+            )
+        ]
         public void SemanticModelForBrokenSwitch_01()
         {
             // a syntax error that happens to look like a pattern switch if you squint
             var source =
-@"class Sample
+                @"class Sample
 {
     void M()
     {
@@ -3205,45 +3466,72 @@ static class Ex
         var y = q/*BIND*/;
     }
 }";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll, parseOptions: TestOptions.Regular6);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.Regular6
+            );
             compilation.VerifyDiagnostics(
                 // (8,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
                 //             case
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, @"case
+                Diagnostic(
+                        ErrorCode.ERR_FeatureNotAvailableInVersion6,
+                        @"case
 
-        var q ").WithArguments("pattern matching", "7.0").WithLocation(8, 13),
+        var q "
+                    )
+                    .WithArguments("pattern matching", "7.0")
+                    .WithLocation(8, 13),
                 // (10,15): error CS1003: Syntax error, ':' expected
                 //         var q = 3;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=").WithArguments(":", "=").WithLocation(10, 15),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=")
+                    .WithArguments(":", "=")
+                    .WithLocation(10, 15),
                 // (10,15): error CS1525: Invalid expression term '='
                 //         var q = 3;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=").WithArguments("=").WithLocation(10, 15),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=")
+                    .WithArguments("=")
+                    .WithLocation(10, 15),
                 // (13,2): error CS1513: } expected
                 // }
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(13, 2),
                 // (8,13): error CS8070: Control cannot fall out of switch from final case label ('case
                 //             case
-                Diagnostic(ErrorCode.ERR_SwitchFallOut, @"case
+                Diagnostic(
+                        ErrorCode.ERR_SwitchFallOut,
+                        @"case
 
-        var q ").WithArguments(@"case
+        var q "
+                    )
+                    .WithArguments(
+                        @"case
 
-        var q ").WithLocation(8, 13)
-                );
+        var q "
+                    )
+                    .WithLocation(8, 13)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var node = tree.GetRoot().DescendantNodes()
+            var node = tree.GetRoot()
+                .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Where(n => n.Identifier.ValueText == "q" && n.ToFullString().Contains("/*BIND*/"))
                 .Single();
             var type = model.GetTypeInfo(node);
         }
 
-        [Fact, WorkItem(388743, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?_a=edit&id=388743")]
+        [
+            Fact,
+            WorkItem(
+                388743,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?_a=edit&id=388743"
+            )
+        ]
         public void SemanticModelForBrokenSwitch_02()
         {
             // a simple legal pattern switch but run in language version 6
             var source =
-@"class Sample
+                @"class Sample
 {
     void M()
     {
@@ -3255,15 +3543,22 @@ static class Ex
         }
     }
 }";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll, parseOptions: TestOptions.Regular6);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.Regular6
+            );
             compilation.VerifyDiagnostics(
                 // (7,13): error CS8059: Feature 'pattern matching' is not available in C# 6. Please use language version 7.0 or greater.
                 //             case var q:
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "case var q:").WithArguments("pattern matching", "7.0").WithLocation(7, 13)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "case var q:")
+                    .WithArguments("pattern matching", "7.0")
+                    .WithLocation(7, 13)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var node = tree.GetRoot().DescendantNodes()
+            var node = tree.GetRoot()
+                .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Where(n => n.Identifier.ValueText == "q" && n.ToFullString().Contains("/*BIND*/"))
                 .Single();
@@ -3277,7 +3572,7 @@ static class Ex
         public void NameofInWhenClause()
         {
             var source =
-@"struct Outer
+                @"struct Outer
 {
     struct S
     {
@@ -3299,15 +3594,14 @@ static class Ex
 }
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
-            compilation.VerifyEmitDiagnostics(
-                );
+            compilation.VerifyEmitDiagnostics();
         }
 
         [Fact, WorkItem(20210, "https://github.com/dotnet/roslyn/issues/20210")]
         public void SwitchOnNull_20210()
         {
             var source =
-@"class Sample
+                @"class Sample
 {
     void M()
     {
@@ -3398,14 +3692,14 @@ static class Ex
                 // (49,16): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //           case false:    // error: subsumed (12 of 12)
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "false").WithLocation(49, 16)
-                );
+            );
         }
 
         [Fact, WorkItem(47164, "https://github.com/dotnet/roslyn/issues/47164")]
         public void MultipleWhenClausesToFailure_01()
         {
             var source =
-@"class Sample
+                @"class Sample
 {
     void M(int q)
     {
@@ -3423,15 +3717,17 @@ static class Ex
             compilation.VerifyEmitDiagnostics(
                 // (5,15): warning CS8846: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered. However, a pattern with a 'when' clause might successfully match this value.
                 //         _ = q switch
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen, "switch").WithArguments("0").WithLocation(5, 15)
-                );
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen, "switch")
+                    .WithArguments("0")
+                    .WithLocation(5, 15)
+            );
         }
 
         [Fact, WorkItem(47164, "https://github.com/dotnet/roslyn/issues/47164")]
         public void MultipleWhenClausesToFailure_02()
         {
             var source =
-@"class Sample
+                @"class Sample
 {
     void M(int q)
     {
@@ -3448,15 +3744,17 @@ static class Ex
             compilation.VerifyEmitDiagnostics(
                 // (5,15): warning CS8846: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered. However, a pattern with a 'when' clause might successfully match this value.
                 //         _ = q switch
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen, "switch").WithArguments("0").WithLocation(5, 15)
-                );
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen, "switch")
+                    .WithArguments("0")
+                    .WithLocation(5, 15)
+            );
         }
 
         [Fact, WorkItem(47164, "https://github.com/dotnet/roslyn/issues/47164")]
         public void MultipleWhenClausesToFailure_03()
         {
             var source =
-@"class Sample
+                @"class Sample
 {
     void M(int q)
     {
@@ -3475,15 +3773,17 @@ static class Ex
             compilation.VerifyEmitDiagnostics(
                 // (5,15): warning CS8846: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered. However, a pattern with a 'when' clause might successfully match this value.
                 //         _ = q switch
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen, "switch").WithArguments("0").WithLocation(5, 15)
-                );
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen, "switch")
+                    .WithArguments("0")
+                    .WithLocation(5, 15)
+            );
         }
 
         [Fact]
         public void MultiplePathsToState_01()
         {
             var source =
-@"class Sample
+                @"class Sample
 {
     void M(int a, int b)
     {
@@ -3502,14 +3802,14 @@ static class Ex
     }
 }";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
-            compilation.VerifyEmitDiagnostics(
-                );
+            compilation.VerifyEmitDiagnostics();
         }
 
         [Fact, WorkItem(51930, "https://github.com/dotnet/roslyn/issues/51930")]
         public void AssignSwitchToRefReturningMethod()
         {
-            var source = @"
+            var source =
+                @"
 GetRef() = 1 switch { _ => await System.Threading.Tasks.Task.FromResult(1) };
 ref int GetRef() => throw null;";
 
@@ -3517,7 +3817,9 @@ ref int GetRef() => throw null;";
             comp.VerifyEmitDiagnostics(
                 // (2,1): error CS8178: 'await' cannot be used in an expression containing a call to 'Program.<<Main>$>g__GetRef|0_0()' because it returns by reference
                 // GetRef() = 1 switch { _ => await System.Threading.Tasks.Task.FromResult(1) };
-                Diagnostic(ErrorCode.ERR_RefReturningCallAndAwait, "GetRef()").WithArguments("Program.<<Main>$>g__GetRef|0_0()").WithLocation(2, 1)
+                Diagnostic(ErrorCode.ERR_RefReturningCallAndAwait, "GetRef()")
+                    .WithArguments("Program.<<Main>$>g__GetRef|0_0()")
+                    .WithLocation(2, 1)
             );
         }
     }

@@ -28,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// <param name="csharpDependencies">The dependencies.</param>
         public CSharpMigrationsGenerator(
             MigrationsCodeGeneratorDependencies dependencies,
-            CSharpMigrationsGeneratorDependencies csharpDependencies)
-            : base(dependencies)
+            CSharpMigrationsGeneratorDependencies csharpDependencies
+        ) : base(dependencies)
         {
             CSharpDependencies = csharpDependencies;
         }
@@ -39,22 +39,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
         /// </summary>
         protected virtual CSharpMigrationsGeneratorDependencies CSharpDependencies { get; }
 
-        private ICSharpHelper Code
-            => CSharpDependencies.CSharpHelper;
+        private ICSharpHelper Code => CSharpDependencies.CSharpHelper;
 
         /// <summary>
         ///     Gets the file extension code files should use.
         /// </summary>
         /// <value> The file extension. </value>
-        public override string FileExtension
-            => ".cs";
+        public override string FileExtension => ".cs";
 
         /// <summary>
         ///     Gets the programming language supported by this service.
         /// </summary>
         /// <value> The language. </value>
-        public override string Language
-            => "C#";
+        public override string Language => "C#";
 
         /// <summary>
         ///     Generates the migration code.
@@ -68,34 +65,33 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string? migrationNamespace,
             string migrationName,
             IReadOnlyList<MigrationOperation> upOperations,
-            IReadOnlyList<MigrationOperation> downOperations)
+            IReadOnlyList<MigrationOperation> downOperations
+        )
         {
             var builder = new IndentedStringBuilder();
             var namespaces = new List<string> { "Microsoft.EntityFrameworkCore.Migrations" };
             namespaces.AddRange(GetNamespaces(upOperations.Concat(downOperations)));
             foreach (var n in namespaces.OrderBy(x => x, new NamespaceComparer()).Distinct())
             {
-                builder
-                    .Append("using ")
-                    .Append(n)
-                    .AppendLine(";");
+                builder.Append("using ").Append(n).AppendLine(";");
             }
 
-            builder
-                .AppendLine()
-                .AppendLine("#nullable disable");
+            builder.AppendLine().AppendLine("#nullable disable");
 
             if (!string.IsNullOrEmpty(migrationNamespace))
             {
                 builder
                     .AppendLine()
-                    .Append("namespace ").AppendLine(Code.Namespace(migrationNamespace))
+                    .Append("namespace ")
+                    .AppendLine(Code.Namespace(migrationNamespace))
                     .AppendLine("{")
                     .IncrementIndent();
             }
 
             builder
-                .Append("public partial class ").Append(Code.Identifier(migrationName)).AppendLine(" : Migration")
+                .Append("public partial class ")
+                .Append(Code.Identifier(migrationName))
+                .AppendLine(" : Migration")
                 .AppendLine("{");
             using (builder.Indent())
             {
@@ -104,7 +100,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     .AppendLine("{");
                 using (builder.Indent())
                 {
-                    CSharpDependencies.CSharpMigrationOperationGenerator.Generate("migrationBuilder", upOperations, builder);
+                    CSharpDependencies.CSharpMigrationOperationGenerator.Generate(
+                        "migrationBuilder",
+                        upOperations,
+                        builder
+                    );
                 }
 
                 builder
@@ -115,21 +115,21 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     .AppendLine("{");
                 using (builder.Indent())
                 {
-                    CSharpDependencies.CSharpMigrationOperationGenerator.Generate("migrationBuilder", downOperations, builder);
+                    CSharpDependencies.CSharpMigrationOperationGenerator.Generate(
+                        "migrationBuilder",
+                        downOperations,
+                        builder
+                    );
                 }
 
-                builder
-                    .AppendLine()
-                    .AppendLine("}");
+                builder.AppendLine().AppendLine("}");
             }
 
             builder.AppendLine("}");
 
             if (!string.IsNullOrEmpty(migrationNamespace))
             {
-                builder
-                    .DecrementIndent()
-                    .AppendLine("}");
+                builder.DecrementIndent().AppendLine("}");
             }
 
             return builder.ToString();
@@ -154,7 +154,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             Type contextType,
             string migrationName,
             string migrationId,
-            IModel targetModel)
+            IModel targetModel
+        )
         {
             var builder = new IndentedStringBuilder();
             AppendAutoGeneratedTag(builder);
@@ -173,34 +174,37 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             namespaces.AddRange(GetNamespaces(targetModel));
             foreach (var n in namespaces.OrderBy(x => x, new NamespaceComparer()).Distinct())
             {
-                builder
-                    .Append("using ")
-                    .Append(n)
-                    .AppendLine(";");
+                builder.Append("using ").Append(n).AppendLine(";");
             }
 
-            builder
-                .AppendLine()
-                .AppendLine("#nullable disable");
+            builder.AppendLine().AppendLine("#nullable disable");
 
             if (!string.IsNullOrEmpty(migrationNamespace))
             {
                 builder
                     .AppendLine()
-                    .Append("namespace ").AppendLine(Code.Namespace(migrationNamespace))
+                    .Append("namespace ")
+                    .AppendLine(Code.Namespace(migrationNamespace))
                     .AppendLine("{")
                     .IncrementIndent();
             }
 
             builder
-                .Append("[DbContext(typeof(").Append(Code.Reference(contextType)).AppendLine("))]")
-                .Append("[Migration(").Append(Code.Literal(migrationId)).AppendLine(")]")
-                .Append("partial class ").AppendLine(Code.Identifier(migrationName))
+                .Append("[DbContext(typeof(")
+                .Append(Code.Reference(contextType))
+                .AppendLine("))]")
+                .Append("[Migration(")
+                .Append(Code.Literal(migrationId))
+                .AppendLine(")]")
+                .Append("partial class ")
+                .AppendLine(Code.Identifier(migrationName))
                 .AppendLine("{");
             using (builder.Indent())
             {
                 builder
-                    .AppendLine("protected override void BuildTargetModel(ModelBuilder modelBuilder)")
+                    .AppendLine(
+                        "protected override void BuildTargetModel(ModelBuilder modelBuilder)"
+                    )
                     .AppendLine("{")
                     .DecrementIndent()
                     .DecrementIndent()
@@ -210,7 +214,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 using (builder.Indent())
                 {
                     // TODO: Optimize. This is repeated below
-                    CSharpDependencies.CSharpSnapshotGenerator.Generate("modelBuilder", targetModel, builder);
+                    CSharpDependencies.CSharpSnapshotGenerator.Generate(
+                        "modelBuilder",
+                        targetModel,
+                        builder
+                    );
                 }
 
                 builder
@@ -226,9 +234,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             if (!string.IsNullOrEmpty(migrationNamespace))
             {
-                builder
-                    .DecrementIndent()
-                    .AppendLine("}");
+                builder.DecrementIndent().AppendLine("}");
             }
 
             return builder.ToString();
@@ -246,7 +252,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string? modelSnapshotNamespace,
             Type contextType,
             string modelSnapshotName,
-            IModel model)
+            IModel model
+        )
         {
             var builder = new IndentedStringBuilder();
             AppendAutoGeneratedTag(builder);
@@ -264,28 +271,28 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             namespaces.AddRange(GetNamespaces(model));
             foreach (var n in namespaces.OrderBy(x => x, new NamespaceComparer()).Distinct())
             {
-                builder
-                    .Append("using ")
-                    .Append(n)
-                    .AppendLine(";");
+                builder.Append("using ").Append(n).AppendLine(";");
             }
 
-            builder
-                .AppendLine()
-                .AppendLine("#nullable disable");
+            builder.AppendLine().AppendLine("#nullable disable");
 
             if (!string.IsNullOrEmpty(modelSnapshotNamespace))
             {
                 builder
                     .AppendLine()
-                    .Append("namespace ").AppendLine(Code.Namespace(modelSnapshotNamespace))
+                    .Append("namespace ")
+                    .AppendLine(Code.Namespace(modelSnapshotNamespace))
                     .AppendLine("{")
                     .IncrementIndent();
             }
 
             builder
-                .Append("[DbContext(typeof(").Append(Code.Reference(contextType)).AppendLine("))]")
-                .Append("partial class ").Append(Code.Identifier(modelSnapshotName)).AppendLine(" : ModelSnapshot")
+                .Append("[DbContext(typeof(")
+                .Append(Code.Reference(contextType))
+                .AppendLine("))]")
+                .Append("partial class ")
+                .Append(Code.Identifier(modelSnapshotName))
+                .AppendLine(" : ModelSnapshot")
                 .AppendLine("{");
             using (builder.Indent())
             {
@@ -299,7 +306,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     .IncrementIndent();
                 using (builder.Indent())
                 {
-                    CSharpDependencies.CSharpSnapshotGenerator.Generate("modelBuilder", model, builder);
+                    CSharpDependencies.CSharpSnapshotGenerator.Generate(
+                        "modelBuilder",
+                        model,
+                        builder
+                    );
                 }
 
                 builder
@@ -315,9 +326,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             if (!string.IsNullOrEmpty(modelSnapshotNamespace))
             {
-                builder
-                    .DecrementIndent()
-                    .AppendLine("}");
+                builder.DecrementIndent().AppendLine("}");
             }
 
             return builder.ToString();

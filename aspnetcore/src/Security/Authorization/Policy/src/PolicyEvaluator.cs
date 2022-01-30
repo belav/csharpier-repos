@@ -33,7 +33,10 @@ public class PolicyEvaluator : IPolicyEvaluator
     /// <param name="policy">The <see cref="AuthorizationPolicy"/>.</param>
     /// <param name="context">The <see cref="HttpContext"/>.</param>
     /// <returns><see cref="AuthenticateResult.Success"/> unless all schemes specified by <see cref="AuthorizationPolicy.AuthenticationSchemes"/> failed to authenticate.  </returns>
-    public virtual async Task<AuthenticateResult> AuthenticateAsync(AuthorizationPolicy policy, HttpContext context)
+    public virtual async Task<AuthenticateResult> AuthenticateAsync(
+        AuthorizationPolicy policy,
+        HttpContext context
+    )
     {
         if (policy.AuthenticationSchemes != null && policy.AuthenticationSchemes.Count > 0)
         {
@@ -44,7 +47,10 @@ public class PolicyEvaluator : IPolicyEvaluator
                 var result = await context.AuthenticateAsync(scheme);
                 if (result != null && result.Succeeded)
                 {
-                    newPrincipal = SecurityHelper.MergeUserPrincipal(newPrincipal, result.Principal);
+                    newPrincipal = SecurityHelper.MergeUserPrincipal(
+                        newPrincipal,
+                        result.Principal
+                    );
 
                     if (minExpiresUtc is null || result.Properties?.ExpiresUtc < minExpiresUtc)
                     {
@@ -56,7 +62,10 @@ public class PolicyEvaluator : IPolicyEvaluator
             if (newPrincipal != null)
             {
                 context.User = newPrincipal;
-                var ticket = new AuthenticationTicket(newPrincipal, string.Join(";", policy.AuthenticationSchemes));
+                var ticket = new AuthenticationTicket(
+                    newPrincipal,
+                    string.Join(";", policy.AuthenticationSchemes)
+                );
                 // ExpiresUtc is the easiest property to reason about when dealing with multiple schemes
                 // SignalR will use this property to evaluate auth expiration for long running connections
                 ticket.Properties.ExpiresUtc = minExpiresUtc;
@@ -70,13 +79,14 @@ public class PolicyEvaluator : IPolicyEvaluator
         }
 
         // No modifications made to the HttpContext so let's use the existing result if it exists
-        return context.Features.Get<IAuthenticateResultFeature>()?.AuthenticateResult ?? DefaultAuthenticateResult(context);
+        return context.Features.Get<IAuthenticateResultFeature>()?.AuthenticateResult
+            ?? DefaultAuthenticateResult(context);
 
         static AuthenticateResult DefaultAuthenticateResult(HttpContext context)
         {
             return (context.User?.Identity?.IsAuthenticated ?? false)
-                ? AuthenticateResult.Success(new AuthenticationTicket(context.User, "context.User"))
-                : AuthenticateResult.NoResult();
+              ? AuthenticateResult.Success(new AuthenticationTicket(context.User, "context.User"))
+              : AuthenticateResult.NoResult();
         }
     }
 
@@ -93,7 +103,12 @@ public class PolicyEvaluator : IPolicyEvaluator
     /// <returns>Returns <see cref="PolicyAuthorizationResult.Success"/> if authorization succeeds.
     /// Otherwise returns <see cref="PolicyAuthorizationResult.Forbid(AuthorizationFailure)"/> if <see cref="AuthenticateResult.Succeeded"/>, otherwise
     /// returns  <see cref="PolicyAuthorizationResult.Challenge"/></returns>
-    public virtual async Task<PolicyAuthorizationResult> AuthorizeAsync(AuthorizationPolicy policy, AuthenticateResult authenticationResult, HttpContext context, object? resource)
+    public virtual async Task<PolicyAuthorizationResult> AuthorizeAsync(
+        AuthorizationPolicy policy,
+        AuthenticateResult authenticationResult,
+        HttpContext context,
+        object? resource
+    )
     {
         if (policy == null)
         {
@@ -108,7 +123,7 @@ public class PolicyEvaluator : IPolicyEvaluator
 
         // If authentication was successful, return forbidden, otherwise challenge
         return (authenticationResult.Succeeded)
-            ? PolicyAuthorizationResult.Forbid(result.Failure)
-            : PolicyAuthorizationResult.Challenge();
+          ? PolicyAuthorizationResult.Forbid(result.Failure)
+          : PolicyAuthorizationResult.Challenge();
     }
 }

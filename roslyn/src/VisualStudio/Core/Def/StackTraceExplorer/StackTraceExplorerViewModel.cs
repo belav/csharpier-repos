@@ -50,7 +50,13 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
 
         public string InstructionText => ServicesVSResources.Paste_valid_stack_trace;
 
-        public StackTraceExplorerViewModel(IThreadingContext threadingContext, Workspace workspace, ClassificationTypeMap classificationTypeMap, IClassificationFormatMap formatMap, IStreamingFindUsagesPresenter streamingFindUsagesPresenter)
+        public StackTraceExplorerViewModel(
+            IThreadingContext threadingContext,
+            Workspace workspace,
+            ClassificationTypeMap classificationTypeMap,
+            IClassificationFormatMap formatMap,
+            IStreamingFindUsagesPresenter streamingFindUsagesPresenter
+        )
         {
             _threadingContext = threadingContext;
             _workspace = workspace;
@@ -63,7 +69,10 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             Frames.CollectionChanged += CallstackLines_CollectionChanged;
         }
 
-        private void CallstackLines_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void CallstackLines_CollectionChanged(
+            object sender,
+            System.Collections.Specialized.NotifyCollectionChangedEventArgs e
+        )
         {
             NotifyPropertyChanged(nameof(IsListVisible));
             NotifyPropertyChanged(nameof(IsInstructionTextVisible));
@@ -91,36 +100,50 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
 
         internal void OnPaste(string text)
         {
-            System.Threading.Tasks.Task.Run(async () =>
-            {
-                try
+            System.Threading.Tasks.Task.Run(
+                async () =>
                 {
-                    var result = await StackTraceAnalyzer.AnalyzeAsync(text, _threadingContext.DisposalToken).ConfigureAwait(false);
-                    var viewModels = result.ParsedFrames.Select(l => GetViewModel(l));
-
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-
-                    Selection = null;
-                    Frames.Clear();
-
-                    foreach (var vm in viewModels)
+                    try
                     {
-                        Frames.Add(vm);
+                        var result = await StackTraceAnalyzer
+                            .AnalyzeAsync(text, _threadingContext.DisposalToken)
+                            .ConfigureAwait(false);
+                        var viewModels = result.ParsedFrames.Select(l => GetViewModel(l));
+
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+
+                        Selection = null;
+                        Frames.Clear();
+
+                        foreach (var vm in viewModels)
+                        {
+                            Frames.Add(vm);
+                        }
                     }
-                }
-                finally
-                {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                    IsLoading = false;
-                }
-            }, _threadingContext.DisposalToken);
+                    finally
+                    {
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                        IsLoading = false;
+                    }
+                },
+                _threadingContext.DisposalToken
+            );
         }
 
-        private FrameViewModel GetViewModel(ParsedFrame frame)
-            => frame switch
+        private FrameViewModel GetViewModel(ParsedFrame frame) =>
+            frame switch
             {
-                IgnoredFrame ignoredFrame => new IgnoredFrameViewModel(ignoredFrame, _formatMap, _classificationTypeMap),
-                ParsedStackFrame stackFrame => new StackFrameViewModel(stackFrame, _threadingContext, _workspace, _formatMap, _classificationTypeMap, _streamingFindUsagesPresenter),
+                IgnoredFrame ignoredFrame
+                  => new IgnoredFrameViewModel(ignoredFrame, _formatMap, _classificationTypeMap),
+                ParsedStackFrame stackFrame
+                  => new StackFrameViewModel(
+                      stackFrame,
+                      _threadingContext,
+                      _workspace,
+                      _formatMap,
+                      _classificationTypeMap,
+                      _streamingFindUsagesPresenter
+                  ),
                 _ => throw ExceptionUtilities.UnexpectedValue(frame)
             };
     }

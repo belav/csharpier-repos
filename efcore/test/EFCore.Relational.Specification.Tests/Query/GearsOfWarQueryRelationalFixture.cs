@@ -74,19 +74,20 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             foreach (var shadowPropertyMappingElement in base.GetShadowPropertyMappings())
             {
-                discriminatorMapping.Add(shadowPropertyMappingElement.Key, shadowPropertyMappingElement.Value);
+                discriminatorMapping.Add(
+                    shadowPropertyMappingElement.Key,
+                    shadowPropertyMappingElement.Value
+                );
             }
 
             return discriminatorMapping;
         }
 
-        public new RelationalTestStore TestStore
-            => (RelationalTestStore)base.TestStore;
+        public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-        protected override bool ShouldLogCategory(string logCategory)
-            => logCategory == DbLoggerCategory.Query.Name;
+        protected override bool ShouldLogCategory(string logCategory) =>
+            logCategory == DbLoggerCategory.Query.Name;
     }
 }

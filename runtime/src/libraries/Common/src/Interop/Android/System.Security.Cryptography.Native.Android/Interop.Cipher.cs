@@ -16,40 +16,56 @@ internal static partial class Interop
             ref byte key,
             int keyLength,
             ref byte iv,
-            int enc);
+            int enc
+        );
 
-        [DllImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_CipherCreatePartial")]
-        internal static extern SafeEvpCipherCtxHandle EvpCipherCreatePartial(
-            IntPtr cipher);
+        [DllImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_CipherCreatePartial"
+        )]
+        internal static extern SafeEvpCipherCtxHandle EvpCipherCreatePartial(IntPtr cipher);
 
-        [DllImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_CipherSetKeyAndIV")]
+        [DllImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_CipherSetKeyAndIV"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool EvpCipherSetKeyAndIV(
             SafeEvpCipherCtxHandle ctx,
             ref byte key,
             ref byte iv,
-            EvpCipherDirection direction);
+            EvpCipherDirection direction
+        );
 
         internal static void EvpCipherSetKeyAndIV(
             SafeEvpCipherCtxHandle ctx,
             ReadOnlySpan<byte> key,
             ReadOnlySpan<byte> iv,
-            EvpCipherDirection direction)
+            EvpCipherDirection direction
+        )
         {
-            if (!EvpCipherSetKeyAndIV(
-                ctx,
-                ref MemoryMarshal.GetReference(key),
-                ref MemoryMarshal.GetReference(iv),
-                direction))
+            if (
+                !EvpCipherSetKeyAndIV(
+                    ctx,
+                    ref MemoryMarshal.GetReference(key),
+                    ref MemoryMarshal.GetReference(iv),
+                    direction
+                )
+            )
             {
                 throw new CryptographicException();
             }
         }
 
-        [DllImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_CipherSetNonceLength")]
+        [DllImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_CipherSetNonceLength"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool AndroidCryptoNative_CipherSetNonceLength(
-            SafeEvpCipherCtxHandle ctx, int nonceLength);
+            SafeEvpCipherCtxHandle ctx,
+            int nonceLength
+        );
 
         internal static void CipherSetNonceLength(SafeEvpCipherCtxHandle ctx, int nonceLength)
         {
@@ -66,7 +82,10 @@ internal static partial class Interop
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool EvpCipherReset(SafeEvpCipherCtxHandle ctx);
 
-        [DllImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_CipherCtxSetPadding")]
+        [DllImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_CipherCtxSetPadding"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool EvpCipherCtxSetPadding(SafeEvpCipherCtxHandle x, int padding);
 
@@ -77,37 +96,39 @@ internal static partial class Interop
             ref byte @out,
             out int outl,
             ref byte @in,
-            int inl);
+            int inl
+        );
 
         internal static bool EvpCipherUpdate(
             SafeEvpCipherCtxHandle ctx,
             Span<byte> output,
             out int bytesWritten,
-            ReadOnlySpan<byte> input)
+            ReadOnlySpan<byte> input
+        )
         {
             return EvpCipherUpdate(
                 ctx,
                 ref MemoryMarshal.GetReference(output),
                 out bytesWritten,
                 ref MemoryMarshal.GetReference(input),
-                input.Length);
+                input.Length
+            );
         }
 
-        [DllImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_CipherUpdateAAD")]
+        [DllImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_CipherUpdateAAD"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool CipherUpdateAAD(
             SafeEvpCipherCtxHandle ctx,
             ref byte @in,
-            int inl);
+            int inl
+        );
 
-        internal static void CipherUpdateAAD(
-            SafeEvpCipherCtxHandle ctx,
-            ReadOnlySpan<byte> input)
+        internal static void CipherUpdateAAD(SafeEvpCipherCtxHandle ctx, ReadOnlySpan<byte> input)
         {
-            if (!CipherUpdateAAD(
-                ctx,
-                ref MemoryMarshal.GetReference(input),
-                input.Length))
+            if (!CipherUpdateAAD(ctx, ref MemoryMarshal.GetReference(input), input.Length))
             {
                 throw new CryptographicException();
             }
@@ -118,23 +139,29 @@ internal static partial class Interop
         private static extern bool EvpCipherFinalEx(
             SafeEvpCipherCtxHandle ctx,
             ref byte outm,
-            out int outl);
+            out int outl
+        );
 
         internal static bool EvpCipherFinalEx(
             SafeEvpCipherCtxHandle ctx,
             Span<byte> output,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             return EvpCipherFinalEx(ctx, ref MemoryMarshal.GetReference(output), out bytesWritten);
         }
 
-        [DllImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_CipherSetTagLength")]
+        [DllImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_CipherSetTagLength"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool CipherSetTagLength(
-            SafeEvpCipherCtxHandle ctx,
-            int tagLength);
+        internal static extern bool CipherSetTagLength(SafeEvpCipherCtxHandle ctx, int tagLength);
 
-        [DllImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_CipherIsSupported")]
+        [DllImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_CipherIsSupported"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool CipherIsSupported(IntPtr cipher);
 
@@ -219,7 +246,10 @@ internal static partial class Interop
         [DllImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_RC2Ecb")]
         internal static extern IntPtr EvpRC2Ecb();
 
-        [DllImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_ChaCha20Poly1305")]
+        [DllImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_ChaCha20Poly1305"
+        )]
         internal static extern IntPtr EvpChaCha20Poly1305();
 
         internal enum EvpCipherDirection : int

@@ -21,19 +21,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
     /// Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.dll and
     /// Microsoft.VisualStudio.Shell.TreeNavigation.GraphProvider.dll.
     /// </summary>
-    internal abstract class BaseItem :
-        LocalizableProperties,
-        ITreeDisplayItem,
-        IInteractionPatternProvider,
-        IInvocationPattern,
-        IContextMenuPattern,
-        INotifyPropertyChanged,
-        IDragDropSourcePattern,
-        IBrowsablePattern,
-        ISupportDisposalNotification,
-        IPrioritizedComparable
+    internal abstract class BaseItem
+        : LocalizableProperties,
+          ITreeDisplayItem,
+          IInteractionPatternProvider,
+          IInvocationPattern,
+          IContextMenuPattern,
+          INotifyPropertyChanged,
+          IDragDropSourcePattern,
+          IBrowsablePattern,
+          ISupportDisposalNotification,
+          IPrioritizedComparable
     {
-        public virtual event PropertyChangedEventHandler PropertyChanged { add { } remove { } }
+        public virtual event PropertyChangedEventHandler PropertyChanged
+        {
+            add { }
+            remove { }
+        }
 
         private readonly string _name;
 
@@ -62,7 +66,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public ImageSource? StateIcon => null;
         public virtual ImageMoniker StateIconMoniker => default;
         public string? StateToolTipText => null;
+
         public override string ToString() => Text;
+
         public string Text => _name;
         public object? ToolTipContent => null;
         public string ToolTipText => _name;

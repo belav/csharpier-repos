@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
 
         internal static Symbol GetCommand()
         {
-            var command = new Command("analyzers", Resources.Run_3rd_party_analyzers__and_apply_fixes)
+            var command = new Command(
+                "analyzers",
+                Resources.Run_3rd_party_analyzers__and_apply_fixes
+            )
             {
                 DiagnosticsOption,
                 SeverityOption,
@@ -32,25 +35,41 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
             {
                 var parseResult = context.ParseResult;
                 var formatOptions = parseResult.ParseVerbosityOption(FormatOptions.Instance);
-                var logger = context.Console.SetupLogging(minimalLogLevel: formatOptions.LogLevel, minimalErrorLevel: LogLevel.Warning);
+                var logger = context.Console.SetupLogging(
+                    minimalLogLevel: formatOptions.LogLevel,
+                    minimalErrorLevel: LogLevel.Warning
+                );
                 formatOptions = parseResult.ParseCommonOptions(formatOptions, logger);
                 formatOptions = parseResult.ParseWorkspaceOptions(formatOptions);
 
-                if (parseResult.HasOption(SeverityOption) &&
-                    parseResult.ValueForOption(SeverityOption) is string { Length: > 0 } analyzerSeverity)
+                if (
+                    parseResult.HasOption(SeverityOption)
+                    && parseResult.ValueForOption(SeverityOption)
+                        is string { Length: > 0 } analyzerSeverity
+                )
                 {
-                    formatOptions = formatOptions with { AnalyzerSeverity = GetSeverity(analyzerSeverity) };
+                    formatOptions = formatOptions with
+                    {
+                        AnalyzerSeverity = GetSeverity(analyzerSeverity)
+                    };
                 }
 
-                if (parseResult.HasOption(DiagnosticsOption) &&
-                    parseResult.ValueForOption(DiagnosticsOption) is string[] { Length: > 0 } diagnostics)
+                if (
+                    parseResult.HasOption(DiagnosticsOption)
+                    && parseResult.ValueForOption(DiagnosticsOption)
+                        is string[] { Length: > 0 } diagnostics
+                )
                 {
-                    formatOptions = formatOptions with { Diagnostics = diagnostics.ToImmutableHashSet() };
+                    formatOptions = formatOptions with
+                    {
+                        Diagnostics = diagnostics.ToImmutableHashSet()
+                    };
                 }
 
                 formatOptions = formatOptions with { FixCategory = FixCategory.Analyzers };
 
-                return await FormatAsync(formatOptions, logger, context.GetCancellationToken()).ConfigureAwait(false);
+                return await FormatAsync(formatOptions, logger, context.GetCancellationToken())
+                    .ConfigureAwait(false);
             }
         }
     }

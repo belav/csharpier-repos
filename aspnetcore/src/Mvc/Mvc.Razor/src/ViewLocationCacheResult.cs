@@ -19,7 +19,8 @@ internal class ViewLocationCacheResult
     /// <param name="viewStarts"><see cref="ViewLocationCacheItem"/>s for applicable _ViewStarts.</param>
     public ViewLocationCacheResult(
         ViewLocationCacheItem view,
-        IReadOnlyList<ViewLocationCacheItem> viewStarts)
+        IReadOnlyList<ViewLocationCacheItem> viewStarts
+    )
     {
         if (viewStarts == null)
         {

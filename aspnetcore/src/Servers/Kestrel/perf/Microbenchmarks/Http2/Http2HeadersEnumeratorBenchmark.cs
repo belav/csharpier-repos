@@ -41,10 +41,22 @@ public class Http2HeadersEnumeratorBenchmark
         _unknownSingleValueResponseHeaders.Append("Four", "Value");
 
         _unknownMultipleValueResponseHeaders = new HttpResponseHeaders();
-        _unknownMultipleValueResponseHeaders.Append("One", new StringValues(new[] { "One", "Two" }));
-        _unknownMultipleValueResponseHeaders.Append("Two", new StringValues(new[] { "One", "Two" }));
-        _unknownMultipleValueResponseHeaders.Append("Three", new StringValues(new[] { "One", "Two" }));
-        _unknownMultipleValueResponseHeaders.Append("Four", new StringValues(new[] { "One", "Two" }));
+        _unknownMultipleValueResponseHeaders.Append(
+            "One",
+            new StringValues(new[] { "One", "Two" })
+        );
+        _unknownMultipleValueResponseHeaders.Append(
+            "Two",
+            new StringValues(new[] { "One", "Two" })
+        );
+        _unknownMultipleValueResponseHeaders.Append(
+            "Three",
+            new StringValues(new[] { "One", "Two" })
+        );
+        _unknownMultipleValueResponseHeaders.Append(
+            "Four",
+            new StringValues(new[] { "One", "Two" })
+        );
 
         _enumerator = new Http2HeadersEnumerator();
     }
@@ -54,9 +66,7 @@ public class Http2HeadersEnumeratorBenchmark
     {
         _enumerator.Initialize(_knownSingleValueResponseHeaders);
 
-        if (_enumerator.MoveNext())
-        {
-        }
+        if (_enumerator.MoveNext()) { }
     }
 
     [Benchmark]
@@ -64,9 +74,7 @@ public class Http2HeadersEnumeratorBenchmark
     {
         _enumerator.Initialize(_knownMultipleValueResponseHeaders);
 
-        if (_enumerator.MoveNext())
-        {
-        }
+        if (_enumerator.MoveNext()) { }
     }
 
     [Benchmark]
@@ -74,9 +82,7 @@ public class Http2HeadersEnumeratorBenchmark
     {
         _enumerator.Initialize(_unknownSingleValueResponseHeaders);
 
-        if (_enumerator.MoveNext())
-        {
-        }
+        if (_enumerator.MoveNext()) { }
     }
 
     [Benchmark]
@@ -84,8 +90,6 @@ public class Http2HeadersEnumeratorBenchmark
     {
         _enumerator.Initialize(_unknownMultipleValueResponseHeaders);
 
-        if (_enumerator.MoveNext())
-        {
-        }
+        if (_enumerator.MoveNext()) { }
     }
 }

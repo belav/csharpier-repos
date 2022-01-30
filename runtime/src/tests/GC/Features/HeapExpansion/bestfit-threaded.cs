@@ -12,10 +12,9 @@ public class one_pass
 {
     public Random r = new Random(request.RandomSeed);
 
-[SecuritySafeCritical]
-public one_pass ()
+    [SecuritySafeCritical]
+    public one_pass()
     {
-
         int n_requests = 1200;
         int allocation_volume = 100000;
         float survival_rate = 0.6f;
@@ -27,25 +26,25 @@ public one_pass ()
         while (true)
         {
             total_reqs++;
-            int i = r.Next (0, n_requests);
-            if (requests [i] != null)
+            int i = r.Next(0, n_requests);
+            if (requests[i] != null)
             {
-                requests [i].retire();
+                requests[i].retire();
             }
             else
             {
                 inst_requests++;
             }
-            requests [i] = new request (allocation_volume, survival_rate);
+            requests[i] = new request(allocation_volume, survival_rate);
 
             if (inst_requests == n_requests)
             {
                 if (nreqs_to_steady == 0)
                 {
                     nreqs_to_steady = total_reqs;
-                    Console.WriteLine ("took {0} iteration to reach steady state",
-                                       nreqs_to_steady);
-                } else if (total_reqs == steady_state_factor*nreqs_to_steady)
+                    Console.WriteLine("took {0} iteration to reach steady state", nreqs_to_steady);
+                }
+                else if (total_reqs == steady_state_factor * nreqs_to_steady)
                 {
                     break;
                 }
@@ -56,10 +55,8 @@ public one_pass ()
         {
             requests[i].retire();
         }
-
     }
 }
-
 
 public class request
 {
@@ -68,54 +65,53 @@ public class request
     public Random r = new Random(request.RandomSeed);
 
     [SecuritySafeCritical]
-    public request (int alloc_volume, float surv_fraction)
+    public request(int alloc_volume, float surv_fraction)
     {
-        survivors = new Object [1 + (int)(alloc_volume*surv_fraction)/100];
+        survivors = new Object[1 + (int)(alloc_volume * surv_fraction) / 100];
         int i = 0;
         int volume = 0;
         //allocate half of the request size.
-        while (volume < alloc_volume/2)
+        while (volume < alloc_volume / 2)
         {
-            int alloc_surv = r.Next (100, 2000 + 2*i);
+            int alloc_surv = r.Next(100, 2000 + 2 * i);
             //Console.WriteLine ("alloc_surv {0}", alloc_surv);
             int alloc = (int)(alloc_surv / surv_fraction) - alloc_surv;
             //Console.WriteLine ("alloc {0}", alloc);
             int j = 0;
             while (j < alloc)
             {
-                int s = r.Next (10, 200+2*j);
+                int s = r.Next(10, 200 + 2 * j);
 
-                Object x = new byte [s];
-                j+=s;
+                Object x = new byte[s];
+                j += s;
             }
-            survivors [i] = new byte [alloc_surv];
+            survivors[i] = new byte[alloc_surv];
             i++;
             volume += alloc_surv + alloc;
         }
         //allocate one pinned buffer
-        pin = GCHandle.Alloc (new byte [100], GCHandleType.Pinned);
+        pin = GCHandle.Alloc(new byte[100], GCHandleType.Pinned);
         //allocate the rest of the request
         while (volume < alloc_volume)
         {
-            int alloc_surv = r.Next (100, 2000 + 2*i);
+            int alloc_surv = r.Next(100, 2000 + 2 * i);
             //Console.WriteLine ("alloc_surv {0}", alloc_surv);
             int alloc = (int)(alloc_surv / surv_fraction) - alloc_surv;
             //Console.WriteLine ("alloc {0}", alloc);
 
-            survivors [i] = new byte [alloc_surv];
+            survivors[i] = new byte[alloc_surv];
 
             int j = 0;
             while (j < alloc)
             {
-                int s = r.Next (10, 200+2*j);
+                int s = r.Next(10, 200 + 2 * j);
 
-                Object x = new byte [s];
-                j+=s;
+                Object x = new byte[s];
+                j += s;
             }
             i++;
             volume += alloc_surv + alloc;
         }
-
     }
 
     [SecuritySafeCritical]
@@ -132,11 +128,9 @@ public class request
 
     static public int RandomSeed;
 
-    static public int Main (String[] args)
+    static public int Main(String[] args)
     {
-
         int numThreads = 0;
-
 
         switch (args.Length)
         {
@@ -152,7 +146,7 @@ public class request
                 {
                     goto default;
                 }
-                if (args.Length==2)
+                if (args.Length == 2)
                 {
                     if (!Int32.TryParse(args[1], out RandomSeed))
                     {
@@ -169,10 +163,10 @@ public class request
                 return 1;
         }
 
-        Console.WriteLine("Using random seed: {0}", RandomSeed );
+        Console.WriteLine("Using random seed: {0}", RandomSeed);
 
         Console.WriteLine("Starting Threads...");
-/*        Thread[] threads = new Thread[numThreads];
+        /*        Thread[] threads = new Thread[numThreads];
         for (int i=0; i<threads.Length; i++)
         {
             threads[i] = new Thread(new ThreadStart(delegate{ one_pass r = new one_pass();  }));
@@ -185,10 +179,8 @@ public class request
             threads[i].Join();
         }
 */
-new one_pass();
+        new one_pass();
         Console.WriteLine("Test Passed");
         return 100;
     }
 }
-
-

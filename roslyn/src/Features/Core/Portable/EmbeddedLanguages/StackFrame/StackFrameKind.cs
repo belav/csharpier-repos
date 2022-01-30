@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         ArrayExpression,
         FileInformation,
 
-        // Tokens 
+        // Tokens
         EndOfFrame,
         AmpersandToken,
         OpenBracketToken,

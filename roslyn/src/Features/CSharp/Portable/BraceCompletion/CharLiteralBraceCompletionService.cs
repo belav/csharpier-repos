@@ -17,19 +17,21 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CharLiteralBraceCompletionService()
-        {
-        }
+        public CharLiteralBraceCompletionService() { }
 
         protected override char OpeningBrace => SingleQuote.OpenCharacter;
 
         protected override char ClosingBrace => SingleQuote.CloseCharacter;
 
-        public override Task<bool> AllowOverTypeAsync(BraceCompletionContext braceCompletionContext, CancellationToken cancellationToken)
-            => AllowOverTypeWithValidClosingTokenAsync(braceCompletionContext, cancellationToken);
+        public override Task<bool> AllowOverTypeAsync(
+            BraceCompletionContext braceCompletionContext,
+            CancellationToken cancellationToken
+        ) => AllowOverTypeWithValidClosingTokenAsync(braceCompletionContext, cancellationToken);
 
-        protected override bool IsValidOpeningBraceToken(SyntaxToken token) => token.IsKind(SyntaxKind.CharacterLiteralToken);
+        protected override bool IsValidOpeningBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.CharacterLiteralToken);
 
-        protected override bool IsValidClosingBraceToken(SyntaxToken token) => token.IsKind(SyntaxKind.CharacterLiteralToken);
+        protected override bool IsValidClosingBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.CharacterLiteralToken);
     }
 }

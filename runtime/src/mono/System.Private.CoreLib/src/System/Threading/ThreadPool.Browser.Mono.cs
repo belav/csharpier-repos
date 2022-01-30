@@ -13,9 +13,7 @@ namespace System.Threading
     [UnsupportedOSPlatform("browser")]
     public sealed class RegisteredWaitHandle : MarshalByRefObject
     {
-        internal RegisteredWaitHandle()
-        {
-        }
+        internal RegisteredWaitHandle() { }
 
         public bool Unregister(WaitHandle? waitObject)
         {
@@ -80,31 +78,31 @@ namespace System.Threading
             QueueCallback();
         }
 
-        internal static void NotifyWorkItemProgress()
-        {
-        }
+        internal static void NotifyWorkItemProgress() { }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool NotifyWorkItemComplete(object? threadLocalCompletionCountObject, int currentTimeMs)
+        internal static bool NotifyWorkItemComplete(
+            object? threadLocalCompletionCountObject,
+            int currentTimeMs
+        )
         {
             return true;
         }
 
         internal static bool NotifyThreadBlocked() => false;
 
-        internal static void NotifyThreadUnblocked()
-        {
-        }
+        internal static void NotifyThreadUnblocked() { }
 
         internal static object? GetOrCreateThreadLocalCompletionCountObject() => null;
 
         private static RegisteredWaitHandle RegisterWaitForSingleObject(
-             WaitHandle? waitObject,
-             WaitOrTimerCallback? callBack,
-             object? state,
-             uint millisecondsTimeOutInterval,
-             bool executeOnlyOnce,
-             bool flowExecutionContext)
+            WaitHandle? waitObject,
+            WaitOrTimerCallback? callBack,
+            object? state,
+            uint millisecondsTimeOutInterval,
+            bool executeOnlyOnce,
+            bool flowExecutionContext
+        )
         {
             throw new PlatformNotSupportedException();
         }

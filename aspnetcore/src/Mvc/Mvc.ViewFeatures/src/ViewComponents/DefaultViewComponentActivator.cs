@@ -48,14 +48,18 @@ internal class DefaultViewComponentActivator : IViewComponentActivator
 
         if (componentType == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(context.ViewComponentDescriptor.TypeInfo),
-                nameof(context.ViewComponentDescriptor)));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(context.ViewComponentDescriptor.TypeInfo),
+                    nameof(context.ViewComponentDescriptor)
+                )
+            );
         }
 
         var viewComponent = _typeActivatorCache.CreateInstance<object>(
             context.ViewContext.HttpContext.RequestServices,
-            context.ViewComponentDescriptor.TypeInfo.AsType());
+            context.ViewComponentDescriptor.TypeInfo.AsType()
+        );
 
         return viewComponent;
     }

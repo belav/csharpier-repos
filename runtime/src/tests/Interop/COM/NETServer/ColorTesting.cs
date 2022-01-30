@@ -9,7 +9,8 @@ using System.Runtime.InteropServices;
 [Guid(Server.Contract.Guids.ColorTesting)]
 public class ColorTesting : Server.Contract.IColorTesting
 {
-    public bool AreColorsEqual(Color managed, int native) => ColorTranslator.ToOle(managed) == native;
+    public bool AreColorsEqual(Color managed, int native) =>
+        ColorTranslator.ToOle(managed) == native;
 
     public Color GetRed() => Color.Red;
 }

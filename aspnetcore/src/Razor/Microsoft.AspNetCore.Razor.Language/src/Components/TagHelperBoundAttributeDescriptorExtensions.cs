@@ -10,9 +10,8 @@ internal static class TagHelperBoundAttributeDescriptorExtensions
     public static bool IsDelegateProperty(this BoundAttributeDescriptor attribute)
     {
         var key = ComponentMetadata.Component.DelegateSignatureKey;
-        return
-            attribute.Metadata.TryGetValue(key, out var value) &&
-            string.Equals(value, bool.TrueString);
+        return attribute.Metadata.TryGetValue(key, out var value)
+            && string.Equals(value, bool.TrueString);
     }
 
     /// <summary>
@@ -24,38 +23,39 @@ internal static class TagHelperBoundAttributeDescriptorExtensions
     public static bool IsEventCallbackProperty(this BoundAttributeDescriptor attribute)
     {
         var key = ComponentMetadata.Component.EventCallbackKey;
-        return
-            attribute.Metadata.TryGetValue(key, out var value) &&
-            string.Equals(value, bool.TrueString);
+        return attribute.Metadata.TryGetValue(key, out var value)
+            && string.Equals(value, bool.TrueString);
     }
 
     public static bool IsGenericTypedProperty(this BoundAttributeDescriptor attribute)
     {
-        return
-            attribute.Metadata.TryGetValue(ComponentMetadata.Component.GenericTypedKey, out var value) &&
-            string.Equals(value, bool.TrueString);
+        return attribute.Metadata.TryGetValue(
+                ComponentMetadata.Component.GenericTypedKey,
+                out var value
+            ) && string.Equals(value, bool.TrueString);
     }
 
     public static bool IsTypeParameterProperty(this BoundAttributeDescriptor attribute)
     {
-        return
-           attribute.Metadata.TryGetValue(ComponentMetadata.Component.TypeParameterKey, out var value) &&
-           string.Equals(value, bool.TrueString);
+        return attribute.Metadata.TryGetValue(
+                ComponentMetadata.Component.TypeParameterKey,
+                out var value
+            ) && string.Equals(value, bool.TrueString);
     }
 
     public static bool IsCascadingTypeParameterProperty(this BoundAttributeDescriptor attribute)
     {
-        return
-          attribute.Metadata.TryGetValue(ComponentMetadata.Component.TypeParameterIsCascadingKey, out var value) &&
-          string.Equals(value, bool.TrueString);
+        return attribute.Metadata.TryGetValue(
+                ComponentMetadata.Component.TypeParameterIsCascadingKey,
+                out var value
+            ) && string.Equals(value, bool.TrueString);
     }
 
     public static bool IsWeaklyTyped(this BoundAttributeDescriptor attribute)
     {
         var key = ComponentMetadata.Component.WeaklyTypedKey;
-        return
-            attribute.Metadata.TryGetValue(key, out var value) &&
-            string.Equals(value, bool.TrueString);
+        return attribute.Metadata.TryGetValue(key, out var value)
+            && string.Equals(value, bool.TrueString);
     }
 
     /// <summary>
@@ -67,9 +67,8 @@ internal static class TagHelperBoundAttributeDescriptorExtensions
     public static bool IsChildContentProperty(this BoundAttributeDescriptor attribute)
     {
         var key = ComponentMetadata.Component.ChildContentKey;
-        return
-            attribute.Metadata.TryGetValue(key, out var value) &&
-            string.Equals(value, bool.TrueString);
+        return attribute.Metadata.TryGetValue(key, out var value)
+            && string.Equals(value, bool.TrueString);
     }
 
     /// <summary>
@@ -81,9 +80,8 @@ internal static class TagHelperBoundAttributeDescriptorExtensions
     public static bool IsChildContentProperty(this BoundAttributeDescriptorBuilder attribute)
     {
         var key = ComponentMetadata.Component.ChildContentKey;
-        return
-            attribute.Metadata.TryGetValue(key, out var value) &&
-            string.Equals(value, bool.TrueString);
+        return attribute.Metadata.TryGetValue(key, out var value)
+            && string.Equals(value, bool.TrueString);
     }
 
     /// <summary>
@@ -94,8 +92,12 @@ internal static class TagHelperBoundAttributeDescriptorExtensions
     /// <returns>Returns <c>true</c> if the property is parameterized child content, otherwise <c>false</c>.</returns>
     public static bool IsParameterizedChildContentProperty(this BoundAttributeDescriptor attribute)
     {
-        return attribute.IsChildContentProperty() &&
-            !string.Equals(attribute.TypeName, ComponentsApi.RenderFragment.FullTypeName, StringComparison.Ordinal);
+        return attribute.IsChildContentProperty()
+            && !string.Equals(
+                attribute.TypeName,
+                ComponentsApi.RenderFragment.FullTypeName,
+                StringComparison.Ordinal
+            );
     }
 
     /// <summary>
@@ -104,10 +106,16 @@ internal static class TagHelperBoundAttributeDescriptorExtensions
     /// </summary>
     /// <param name="attribute">The <see cref="BoundAttributeDescriptor"/>.</param>
     /// <returns>Returns <c>true</c> if the property is parameterized child content, otherwise <c>false</c>.</returns>
-    public static bool IsParameterizedChildContentProperty(this BoundAttributeDescriptorBuilder attribute)
+    public static bool IsParameterizedChildContentProperty(
+        this BoundAttributeDescriptorBuilder attribute
+    )
     {
-        return attribute.IsChildContentProperty() &&
-            !string.Equals(attribute.TypeName, ComponentsApi.RenderFragment.FullTypeName, StringComparison.Ordinal);
+        return attribute.IsChildContentProperty()
+            && !string.Equals(
+                attribute.TypeName,
+                ComponentsApi.RenderFragment.FullTypeName,
+                StringComparison.Ordinal
+            );
     }
 
     /// <summary>
@@ -122,8 +130,7 @@ internal static class TagHelperBoundAttributeDescriptorExtensions
     public static bool IsChildContentParameterNameProperty(this BoundAttributeDescriptor attribute)
     {
         var key = ComponentMetadata.Component.ChildContentParameterNameKey;
-        return
-            attribute.Metadata.TryGetValue(key, out var value) &&
-            string.Equals(value, bool.TrueString);
+        return attribute.Metadata.TryGetValue(key, out var value)
+            && string.Equals(value, bool.TrueString);
     }
 }

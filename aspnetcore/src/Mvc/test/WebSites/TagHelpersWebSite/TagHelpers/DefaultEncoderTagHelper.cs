@@ -17,9 +17,7 @@ public class DefaultEncoderTagHelper : TagHelper
     {
         var defaultContent = await output.GetChildContentAsync();
 
-        output.Content
-            .SetHtmlContent("Default encoder: ")
-            .AppendHtml(defaultContent);
+        output.Content.SetHtmlContent("Default encoder: ").AppendHtml(defaultContent);
         output.TagName = "pre";
     }
 }

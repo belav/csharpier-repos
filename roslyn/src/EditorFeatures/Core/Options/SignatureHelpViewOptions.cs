@@ -16,15 +16,14 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SignatureHelpViewOptions()
-        {
-        }
+        public SignatureHelpViewOptions() { }
 
-        ImmutableArray<IOption> IOptionProvider.Options { get; } = ImmutableArray.Create<IOption>(
-            ShowSignatureHelp);
+        ImmutableArray<IOption> IOptionProvider.Options { get; } =
+            ImmutableArray.Create<IOption>(ShowSignatureHelp);
 
         private const string FeatureName = "SignatureHelpOptions";
 
-        public static readonly PerLanguageOption2<bool> ShowSignatureHelp = new(FeatureName, nameof(ShowSignatureHelp), defaultValue: true);
+        public static readonly PerLanguageOption2<bool> ShowSignatureHelp =
+            new(FeatureName, nameof(ShowSignatureHelp), defaultValue: true);
     }
 }

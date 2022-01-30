@@ -12,11 +12,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 {
     internal sealed class MetadataUnifyingEquivalenceComparer : IEqualityComparer<ISymbol>
     {
-        public static readonly IEqualityComparer<ISymbol> Instance = new MetadataUnifyingEquivalenceComparer();
+        public static readonly IEqualityComparer<ISymbol> Instance =
+            new MetadataUnifyingEquivalenceComparer();
 
-        private MetadataUnifyingEquivalenceComparer()
-        {
-        }
+        private MetadataUnifyingEquivalenceComparer() { }
 
         public bool Equals(ISymbol x, ISymbol y)
         {
@@ -49,7 +48,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
         }
 
-        private static bool IsInSource(ISymbol symbol)
-            => symbol.Locations.Any(l => l.IsInSource);
+        private static bool IsInSource(ISymbol symbol) => symbol.Locations.Any(l => l.IsInSource);
     }
 }

@@ -11,7 +11,8 @@ namespace System.IO
     // (and optionally Flush), as well as any additional ctor/Dispose logic necessary.
     internal abstract class ConsoleStream : Stream
     {
-        private bool _canRead, _canWrite;
+        private bool _canRead,
+            _canWrite;
 
         internal ConsoleStream(FileAccess access)
         {
@@ -26,7 +27,8 @@ namespace System.IO
             Write(new ReadOnlySpan<byte>(buffer, offset, count));
         }
 
-        public override void WriteByte(byte value) => Write(MemoryMarshal.CreateReadOnlySpan(ref value, 1));
+        public override void WriteByte(byte value) =>
+            Write(MemoryMarshal.CreateReadOnlySpan(ref value, 1));
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -64,12 +66,14 @@ namespace System.IO
 
         public override void Flush()
         {
-            if (!CanWrite) throw Error.GetWriteNotSupported();
+            if (!CanWrite)
+                throw Error.GetWriteNotSupported();
         }
 
         public sealed override void SetLength(long value) => throw Error.GetSeekNotSupported();
 
-        public sealed override long Seek(long offset, SeekOrigin origin) => throw Error.GetSeekNotSupported();
+        public sealed override long Seek(long offset, SeekOrigin origin) =>
+            throw Error.GetSeekNotSupported();
 
         protected void ValidateRead(byte[] buffer, int offset, int count)
         {

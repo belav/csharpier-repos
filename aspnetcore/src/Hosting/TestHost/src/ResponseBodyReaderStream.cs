@@ -54,12 +54,19 @@ internal class ResponseBodyReaderStream : Stream
 
     public override void Flush() => throw new NotSupportedException();
 
-    public override Task FlushAsync(CancellationToken cancellationToken) => throw new NotSupportedException();
+    public override Task FlushAsync(CancellationToken cancellationToken) =>
+        throw new NotSupportedException();
 
     // Write with count 0 will still trigger OnFirstWrite
-    public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+    public override void Write(byte[] buffer, int offset, int count) =>
+        throw new NotSupportedException();
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) => throw new NotSupportedException();
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    ) => throw new NotSupportedException();
 
     #endregion NotSupported
 
@@ -68,7 +75,12 @@ internal class ResponseBodyReaderStream : Stream
         return ReadAsync(buffer, offset, count, CancellationToken.None).GetAwaiter().GetResult();
     }
 
-    public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override async Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         VerifyBuffer(buffer, offset, count);
         CheckAborted();

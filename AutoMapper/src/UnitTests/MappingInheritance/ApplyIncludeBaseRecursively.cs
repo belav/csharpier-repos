@@ -13,6 +13,7 @@ namespace AutoMapper.UnitTests.MappingInheritance
         {
             public string Property1 { get; set; }
         }
+
         public class SubBaseEntity : BaseEntity { }
 
         public class SpecificEntity : SubBaseEntity
@@ -25,22 +26,26 @@ namespace AutoMapper.UnitTests.MappingInheritance
             public string Property2 { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<BaseEntity, ViewModel>()
-                .ForMember(vm => vm.Property2, opt => opt.MapFrom(e => e.Property1));
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<BaseEntity, ViewModel>()
+                        .ForMember(vm => vm.Property2, opt => opt.MapFrom(e => e.Property1));
 
-            cfg.CreateMap<SubBaseEntity, ViewModel>()
-                .IncludeBase<BaseEntity, ViewModel>();
+                    cfg.CreateMap<SubBaseEntity, ViewModel>().IncludeBase<BaseEntity, ViewModel>();
 
-            cfg.CreateMap<SpecificEntity, ViewModel>()
-                .IncludeBase<SubBaseEntity, ViewModel>()
-                .ForMember(vm => vm.Property2, opt => opt.Condition(e => e.Map));
-        });
+                    cfg.CreateMap<SpecificEntity, ViewModel>()
+                        .IncludeBase<SubBaseEntity, ViewModel>()
+                        .ForMember(vm => vm.Property2, opt => opt.Condition(e => e.Map));
+                }
+            );
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<ViewModel>(new SpecificEntity{ Map = true, Property1 = "Test" });
+            _destination = Mapper.Map<ViewModel>(
+                new SpecificEntity { Map = true, Property1 = "Test" }
+            );
         }
 
         [Fact]

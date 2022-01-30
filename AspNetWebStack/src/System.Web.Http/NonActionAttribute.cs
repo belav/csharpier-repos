@@ -11,7 +11,5 @@ namespace System.Web.Http
     /// The method will not be considered an action.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public sealed class NonActionAttribute : Attribute
-    {
-    }
+    public sealed class NonActionAttribute : Attribute { }
 }

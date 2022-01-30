@@ -19,7 +19,8 @@ public class DoubleRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatc
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {
@@ -51,7 +52,8 @@ public class DoubleRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatc
             valueString,
             NumberStyles.Float | NumberStyles.AllowThousands,
             CultureInfo.InvariantCulture,
-            out _);
+            out _
+        );
     }
 
     bool IParameterLiteralNodeMatchingPolicy.MatchesLiteral(string parameterName, string literal)

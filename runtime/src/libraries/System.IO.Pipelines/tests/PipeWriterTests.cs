@@ -12,9 +12,7 @@ namespace System.IO.Pipelines.Tests
 {
     public class PipeWriterTests : PipeTest
     {
-        public PipeWriterTests() : base(0, 0)
-        {
-        }
+        public PipeWriterTests() : base(0, 0) { }
 
         private byte[] Read()
         {
@@ -172,7 +170,9 @@ namespace System.IO.Pipelines.Tests
         public void ThrowsOnAdvanceOverMemorySize()
         {
             Memory<byte> buffer = Pipe.Writer.GetMemory(1);
-            Assert.Throws<ArgumentOutOfRangeException>(() => Pipe.Writer.Advance(buffer.Length + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Pipe.Writer.Advance(buffer.Length + 1)
+            );
         }
 
         [Fact]
@@ -235,11 +235,13 @@ namespace System.IO.Pipelines.Tests
             var pipe = new Pipe();
             pipe.Reader.Complete();
 
-            var task = Task.Run(async () =>
-            {
-                await Task.Delay(10);
-                pipe.Writer.Complete();
-            });
+            var task = Task.Run(
+                async () =>
+                {
+                    await Task.Delay(10);
+                    pipe.Writer.Complete();
+                }
+            );
 
             try
             {

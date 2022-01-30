@@ -4,7 +4,6 @@
 
 using System;
 
-
 // sizeof converted to I8 and used with arithmetic operations
 
 namespace JitTest

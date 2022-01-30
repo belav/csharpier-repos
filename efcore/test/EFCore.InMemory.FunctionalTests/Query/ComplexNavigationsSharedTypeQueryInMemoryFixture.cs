@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class ComplexNavigationsSharedTypeQueryInMemoryFixture : ComplexNavigationsSharedTypeQueryFixtureBase
+    public class ComplexNavigationsSharedTypeQueryInMemoryFixture
+        : ComplexNavigationsSharedTypeQueryFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
     }
 }

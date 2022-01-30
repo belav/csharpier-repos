@@ -72,8 +72,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <remarks>
         ///     This method is generally used to get last memberInfo to generate an alias for projection.
         /// </remarks>
-        public MemberInfo? Last
-            => _memberChain.LastOrDefault();
+        public MemberInfo? Last => _memberChain.LastOrDefault();
 
         /// <inheritdoc />
         [DebuggerStepThrough]
@@ -91,10 +90,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        public override bool Equals(object? obj)
-            => obj != null
-                && (obj is ProjectionMember projectionMember
-                    && Equals(projectionMember));
+        public override bool Equals(object? obj) =>
+            obj != null && (obj is ProjectionMember projectionMember && Equals(projectionMember));
 
         private bool Equals(ProjectionMember other)
         {
@@ -115,9 +112,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public override string ToString()
-            => _memberChain.Any()
-                ? string.Join(".", _memberChain.Select(mi => mi.Name))
-                : "EmptyProjectionMember";
+        public override string ToString() =>
+            _memberChain.Any()
+              ? string.Join(".", _memberChain.Select(mi => mi.Name))
+              : "EmptyProjectionMember";
     }
 }

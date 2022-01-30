@@ -13,9 +13,7 @@ namespace System.CommandLine
     /// </summary>
     /// <seealso cref="System.CommandLine.IdentifierSymbol" />
     /// <seealso cref="System.CommandLine.IOption" />
-    public class Option :
-        IdentifierSymbol,
-        IOption
+    public class Option : IdentifierSymbol, IOption
     {
         private string? _name;
         private protected readonly HashSet<string> _unprefixedAliases = new();
@@ -33,10 +31,8 @@ namespace System.CommandLine
             string? description = null,
             Type? argumentType = null,
             Func<object?>? getDefaultValue = null,
-            IArgumentArity? arity = null)
-            : this(name, description, CreateArgument(argumentType, getDefaultValue, arity))
-        {
-        }
+            IArgumentArity? arity = null
+        ) : this(name, description, CreateArgument(argumentType, getDefaultValue, arity)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Option"/> class.
@@ -51,15 +47,10 @@ namespace System.CommandLine
             string? description = null,
             Type? argumentType = null,
             Func<object?>? getDefaultValue = null,
-            IArgumentArity? arity = null)
-            : this(aliases, description, CreateArgument(argumentType, getDefaultValue, arity))
-        { }
+            IArgumentArity? arity = null
+        ) : this(aliases, description, CreateArgument(argumentType, getDefaultValue, arity)) { }
 
-        internal Option(
-            string name,
-            string? description,
-            Argument? argument)
-            : base(description)
+        internal Option(string name, string? description, Argument? argument) : base(description)
         {
             if (name is null)
             {
@@ -76,10 +67,7 @@ namespace System.CommandLine
             }
         }
 
-        internal Option(
-            string[] aliases,
-            string? description,
-            Argument? argument)
+        internal Option(string[] aliases, string? description, Argument? argument)
             : base(description)
         {
             if (aliases is null)
@@ -89,7 +77,10 @@ namespace System.CommandLine
 
             if (aliases.Length == 0)
             {
-                throw new ArgumentException("An option must have at least one alias.", nameof(aliases));
+                throw new ArgumentException(
+                    "An option must have at least one alias.",
+                    nameof(aliases)
+                );
             }
 
             for (var i = 0; i < aliases.Length; i++)
@@ -104,11 +95,13 @@ namespace System.CommandLine
             }
         }
 
-        private static Argument? CreateArgument(Type? argumentType, Func<object?>? getDefaultValue, IArgumentArity? arity)
+        private static Argument? CreateArgument(
+            Type? argumentType,
+            Func<object?>? getDefaultValue,
+            IArgumentArity? arity
+        )
         {
-            if (argumentType is null &&
-                getDefaultValue is null &&
-                arity is null)
+            if (argumentType is null && getDefaultValue is null && arity is null)
             {
                 return null;
             }
@@ -141,7 +134,10 @@ namespace System.CommandLine
                         return none;
 
                     default:
-                        DebugAssert.ThrowIf(Children.Arguments.Count > 1, $"Unexpected number of option arguments: {Children.Arguments.Count}");
+                        DebugAssert.ThrowIf(
+                            Children.Arguments.Count > 1,
+                            $"Unexpected number of option arguments: {Children.Arguments.Count}"
+                        );
                         return Children.Arguments[0];
                 }
             }
@@ -171,7 +167,7 @@ namespace System.CommandLine
                 {
                     Argument.ValueType = typeof(string);
                 }
-                
+
                 Argument.Arity = value;
             }
         }
@@ -216,14 +212,16 @@ namespace System.CommandLine
         /// Adds a validator that will be called when the option is matched by the parser.
         /// </summary>
         /// <param name="validate">A <see cref="ValidateSymbolResult{OptionResult}"/> delegate used to validate the <see cref="OptionResult"/> produced during parsing.</param>
-        public void AddValidator(ValidateSymbolResult<OptionResult> validate) => Validators.Add(validate);
+        public void AddValidator(ValidateSymbolResult<OptionResult> validate) =>
+            Validators.Add(validate);
 
         /// <summary>
         /// Indicates whether a given alias exists on the option, regardless of its prefix.
         /// </summary>
         /// <param name="alias">The alias, which can include a prefix.</param>
         /// <returns><see langword="true"/> if the alias exists; otherwise, <see langword="false"/>.</returns>
-        public bool HasAliasIgnoringPrefix(string alias) => _unprefixedAliases.Contains(alias.RemovePrefix());
+        public bool HasAliasIgnoringPrefix(string alias) =>
+            _unprefixedAliases.Contains(alias.RemovePrefix());
 
         private protected override void RemoveAlias(string alias)
         {
@@ -236,8 +234,7 @@ namespace System.CommandLine
         /// Sets the default value for the option.
         /// </summary>
         /// <param name="value">The default value for the option.</param>
-        public void SetDefaultValue(object? value) =>
-            Argument.SetDefaultValue(value);
+        public void SetDefaultValue(object? value) => Argument.SetDefaultValue(value);
 
         /// <summary>
         /// Sets a delegate to invoke when the default value for the option is required.
@@ -252,8 +249,7 @@ namespace System.CommandLine
         /// <inheritdoc/>
         public bool AllowMultipleArgumentsPerToken { get; set; }
 
-        internal bool IsGreedy => Arity.MinimumNumberOfValues > 0 &&
-                                  ValueType != typeof(bool);
+        internal bool IsGreedy => Arity.MinimumNumberOfValues > 0 && ValueType != typeof(bool);
 
         /// <summary>
         /// Indicates whether the option is required when its parent command is invoked.
@@ -278,10 +274,7 @@ namespace System.CommandLine
             {
                 if (_name is null)
                 {
-                    _name = Aliases
-                            .OrderBy(a => a.Length)
-                            .Last()
-                            .RemovePrefix();
+                    _name = Aliases.OrderBy(a => a.Length).Last().RemovePrefix();
                 }
 
                 return _name;

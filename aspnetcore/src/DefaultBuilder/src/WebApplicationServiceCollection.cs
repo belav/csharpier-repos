@@ -109,7 +109,9 @@ internal sealed class WebApplicationServiceCollection : IServiceCollection
     {
         if (IsReadOnly)
         {
-            throw new InvalidOperationException("Cannot modify ServiceCollection after application is built.");
+            throw new InvalidOperationException(
+                "Cannot modify ServiceCollection after application is built."
+            );
         }
     }
 }

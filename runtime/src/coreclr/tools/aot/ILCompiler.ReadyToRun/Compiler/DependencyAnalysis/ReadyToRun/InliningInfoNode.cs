@@ -21,8 +21,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     {
         private readonly EcmaModule _module;
 
-        public InliningInfoNode(TargetDetails target, EcmaModule module)
-            : base(target)
+        public InliningInfoNode(TargetDetails target, EcmaModule module) : base(target)
         {
             _module = module;
         }
@@ -38,13 +37,26 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
-            Dictionary<EcmaMethod, HashSet<EcmaMethod>> inlineeToInliners = new Dictionary<EcmaMethod, HashSet<EcmaMethod>>();
+            Dictionary<EcmaMethod, HashSet<EcmaMethod>> inlineeToInliners = new Dictionary<
+                EcmaMethod,
+                HashSet<EcmaMethod>
+            >();
 
             // Build a map from inlinee to the list of inliners
             // We are only interested in the generic definitions of these.
-            foreach (MethodWithGCInfo methodNode in factory.EnumerateCompiledMethods(_module, CompiledMethodCategory.All))
+            foreach (
+                MethodWithGCInfo methodNode in factory.EnumerateCompiledMethods(
+                    _module,
+                    CompiledMethodCategory.All
+                )
+            )
             {
                 MethodDesc[] inlinees = methodNode.InlinedMethods;
                 MethodDesc inliner = methodNode.Method;
@@ -72,7 +84,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         continue;
                     }
 
-                    if (!inlineeToInliners.TryGetValue(ecmaInlineeDefinition, out HashSet<EcmaMethod> inliners))
+                    if (
+                        !inlineeToInliners.TryGetValue(
+                            ecmaInlineeDefinition,
+                            out HashSet<EcmaMethod> inliners
+                        )
+                    )
                     {
                         inliners = new HashSet<EcmaMethod>();
                         inlineeToInliners.Add(ecmaInlineeDefinition, inliners);
@@ -104,29 +121,37 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 var sig = new VertexSequence();
 
                 bool isForeignInlinee = inlinee.Module != _module;
-                sig.Append(new UnsignedConstant((uint)(inlineeRid << 1 | (isForeignInlinee ? 1 : 0))));
+                sig.Append(
+                    new UnsignedConstant((uint)(inlineeRid << 1 | (isForeignInlinee ? 1 : 0)))
+                );
                 if (isForeignInlinee)
                 {
-                    sig.Append(new UnsignedConstant((uint)factory.ManifestMetadataTable.ModuleToIndex(inlinee.Module)));
+                    sig.Append(
+                        new UnsignedConstant(
+                            (uint)factory.ManifestMetadataTable.ModuleToIndex(inlinee.Module)
+                        )
+                    );
                 }
 
                 List<EcmaMethod> sortedInliners = new List<EcmaMethod>(inlineeWithInliners.Value);
-                sortedInliners.MergeSort((a, b) =>
-                {
-                    if (a == b)
-                        return 0;
+                sortedInliners.MergeSort(
+                    (a, b) =>
+                    {
+                        if (a == b)
+                            return 0;
 
-                    int aRid = MetadataTokens.GetRowNumber(a.Handle);
-                    int bRid = MetadataTokens.GetRowNumber(b.Handle);
-                    if (aRid < bRid)
-                        return -1;
-                    else if (aRid > bRid)
-                        return 1;
+                        int aRid = MetadataTokens.GetRowNumber(a.Handle);
+                        int bRid = MetadataTokens.GetRowNumber(b.Handle);
+                        if (aRid < bRid)
+                            return -1;
+                        else if (aRid > bRid)
+                            return 1;
 
-                    int result = a.Module.CompareTo(b.Module);
-                    Debug.Assert(result != 0);
-                    return result;
-                });
+                        int result = a.Module.CompareTo(b.Module);
+                        Debug.Assert(result != 0);
+                        return result;
+                    }
+                );
 
                 int baseRid = 0;
                 foreach (EcmaMethod inliner in sortedInliners)
@@ -136,10 +161,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     baseRid = inlinerRid;
                     Debug.Assert(ridDelta >= 0);
                     bool isForeignInliner = inliner.Module != _module;
-                    sig.Append(new UnsignedConstant((uint)(ridDelta << 1 | (isForeignInliner ? 1 : 0))));
+                    sig.Append(
+                        new UnsignedConstant((uint)(ridDelta << 1 | (isForeignInliner ? 1 : 0)))
+                    );
                     if (isForeignInliner)
                     {
-                        sig.Append(new UnsignedConstant((uint)factory.ManifestMetadataTable.ModuleToIndex(inliner.Module)));
+                        sig.Append(
+                            new UnsignedConstant(
+                                (uint)factory.ManifestMetadataTable.ModuleToIndex(inliner.Module)
+                            )
+                        );
                     }
                 }
 
@@ -153,13 +184,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 data: writerContent.ToArray(),
                 relocs: null,
                 alignment: 8,
-                definedSymbols: new ISymbolDefinitionNode[] { this });
+                definedSymbols: new ISymbolDefinitionNode[] { this }
+            );
         }
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
             InliningInfoNode otherInliningInfo = (InliningInfoNode)other;
-            return _module.Assembly.GetName().Name.CompareTo(otherInliningInfo._module.Assembly.GetName().Name);
+            return _module.Assembly
+                .GetName()
+                .Name.CompareTo(otherInliningInfo._module.Assembly.GetName().Name);
         }
 
         public override int ClassCode => -87382891;

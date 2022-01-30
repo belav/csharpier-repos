@@ -11,4 +11,6 @@
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.ValueTuple<,,,,,,>))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.ValueTuple<,,,,,,,>))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.TupleExtensions))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.CompilerServices.TupleElementNamesAttribute))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.CompilerServices.TupleElementNamesAttribute)
+)]

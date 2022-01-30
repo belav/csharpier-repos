@@ -47,18 +47,24 @@ namespace System.Text.Tests
                 bytes[i] = (byte)i;
             }
 
-            AssertExtensions.Throws<ArgumentException>("chars", () =>
-            {
-                decoder.GetChars(bytes, 0, bytes.Length, chars, chars.Length - 1, false);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                "chars",
+                () =>
+                {
+                    decoder.GetChars(bytes, 0, bytes.Length, chars, chars.Length - 1, false);
+                }
+            );
             decoder.Reset();
 
             decoder.GetChars(bytes, 0, bytes.Length, chars, 0, false);
 
-            AssertExtensions.Throws<ArgumentException>("chars", () =>
-            {
-                decoder.GetChars(bytes, 0, bytes.Length, chars, chars.Length - 1, true);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                "chars",
+                () =>
+                {
+                    decoder.GetChars(bytes, 0, bytes.Length, chars, chars.Length - 1, true);
+                }
+            );
             decoder.Reset();
             decoder.GetChars(bytes, 0, bytes.Length, chars, 0, true);
         }

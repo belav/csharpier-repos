@@ -8,7 +8,10 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Initialization
 {
     public class InitializationSqlServerTests : InitializationTests
     {
-        protected override AdventureWorksContextBase CreateContext() => AdventureWorksSqlServerFixture.CreateContext();
-        protected override ConventionSet CreateConventionSet() => SqlServerConventionSetBuilder.Build();
+        protected override AdventureWorksContextBase CreateContext() =>
+            AdventureWorksSqlServerFixture.CreateContext();
+
+        protected override ConventionSet CreateConventionSet() =>
+            SqlServerConventionSetBuilder.Build();
     }
 }

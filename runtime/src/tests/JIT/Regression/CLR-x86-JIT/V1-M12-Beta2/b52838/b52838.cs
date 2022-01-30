@@ -5,15 +5,21 @@
 namespace Test
 {
     using System;
+
     class CC
     {
         static sbyte m_sb;
+
         static void Finally() { }
+
         static void Main1()
         {
             try
             {
-                while (checked(m_sb == m_sb)) { throw new Exception(); }
+                while (checked(m_sb == m_sb))
+                {
+                    throw new Exception();
+                }
                 try
                 {
                     return;
@@ -28,6 +34,7 @@ namespace Test
                 Finally();
             }
         }
+
         static int Main()
         {
             try

@@ -64,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             string partitionKey,
             int? analyticalTTL,
             int? defaultTTL,
-            ThroughputProperties? throughput)
+            ThroughputProperties? throughput
+        )
         {
             Id = containerId;
             PartitionKey = partitionKey;
@@ -84,7 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             out string partitionKey,
             out int? analyticalTTL,
             out int? defaultTTL,
-            out ThroughputProperties? throughput)
+            out ThroughputProperties? throughput
+        )
         {
             containerId = Id;
             partitionKey = PartitionKey;

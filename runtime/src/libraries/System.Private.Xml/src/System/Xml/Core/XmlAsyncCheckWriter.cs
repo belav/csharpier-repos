@@ -13,10 +13,7 @@ namespace System.Xml
 
         internal XmlWriter CoreWriter
         {
-            get
-            {
-                return _coreWriter;
-            }
+            get { return _coreWriter; }
         }
 
         public XmlAsyncCheckWriter(XmlWriter writer)
@@ -368,7 +365,12 @@ namespace System.Xml
             return task;
         }
 
-        public override Task WriteDocTypeAsync(string name, string? pubid, string? sysid, string? subset)
+        public override Task WriteDocTypeAsync(
+            string name,
+            string? pubid,
+            string? sysid,
+            string? subset
+        )
         {
             CheckAsync();
             var task = _coreWriter.WriteDocTypeAsync(name, pubid, sysid, subset);
@@ -400,7 +402,11 @@ namespace System.Xml
             return task;
         }
 
-        protected internal override Task WriteStartAttributeAsync(string? prefix, string localName, string? ns)
+        protected internal override Task WriteStartAttributeAsync(
+            string? prefix,
+            string localName,
+            string? ns
+        )
         {
             CheckAsync();
             var task = _coreWriter.WriteStartAttributeAsync(prefix, localName, ns);

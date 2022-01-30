@@ -16,6 +16,7 @@ namespace DefaultNamespace
             int iVal2 = 3;
             Console.WriteLine(Math.Min(iVal1, iVal2));
         }
+
         public static int Main(String[] args)
         {
             Bug oCbTest = new Bug();

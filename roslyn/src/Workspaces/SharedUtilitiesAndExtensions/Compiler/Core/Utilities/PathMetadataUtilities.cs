@@ -23,9 +23,15 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// 
         /// Returns null if the folders contain parts that are invalid identifiers for a namespace.
         /// </summary>
-        public static string? TryBuildNamespaceFromFolders(IEnumerable<string> folders, ISyntaxFacts syntaxFacts, string? rootNamespace = null)
+        public static string? TryBuildNamespaceFromFolders(
+            IEnumerable<string> folders,
+            ISyntaxFacts syntaxFacts,
+            string? rootNamespace = null
+        )
         {
-            var parts = folders.SelectMany(folder => folder.Split(NamespaceSeparatorArray)).SelectAsArray(syntaxFacts.EscapeIdentifier);
+            var parts = folders
+                .SelectMany(folder => folder.Split(NamespaceSeparatorArray))
+                .SelectAsArray(syntaxFacts.EscapeIdentifier);
 
             if (parts.IsDefaultOrEmpty)
             {
@@ -33,8 +39,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
 
             var constructedNamespace = parts.All(syntaxFacts.IsValidIdentifier)
-                ? string.Join(".", parts)
-                : null;
+              ? string.Join(".", parts)
+              : null;
 
             if (constructedNamespace is null)
             {
@@ -49,20 +55,29 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return $"{rootNamespace}.{constructedNamespace}";
         }
 
-        public static ImmutableArray<string> BuildFoldersFromNamespace(string? @namespace, string? rootNamespace = null)
+        public static ImmutableArray<string> BuildFoldersFromNamespace(
+            string? @namespace,
+            string? rootNamespace = null
+        )
         {
             if (@namespace is null || @namespace == rootNamespace)
             {
                 return ImmutableArray<string>.Empty;
             }
 
-            if (rootNamespace is not null && @namespace.StartsWith(rootNamespace + ".", StringComparison.OrdinalIgnoreCase))
+            if (
+                rootNamespace is not null
+                && @namespace.StartsWith(rootNamespace + ".", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 // Add 1 to get rid of the starting "." as well
                 @namespace = @namespace.Substring(rootNamespace.Length + 1);
             }
 
-            var parts = @namespace.Split(NamespaceSeparatorArray, options: StringSplitOptions.RemoveEmptyEntries);
+            var parts = @namespace.Split(
+                NamespaceSeparatorArray,
+                options: StringSplitOptions.RemoveEmptyEntries
+            );
             return parts.ToImmutableArray();
         }
     }

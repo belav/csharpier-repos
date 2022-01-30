@@ -12,8 +12,7 @@ namespace DllImportGenerator.IntegrationTests
     {
         public partial class NativeExportsSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
         {
-            private NativeExportsSafeHandle() : base(ownsHandle: true)
-            { }
+            private NativeExportsSafeHandle() : base(ownsHandle: true) { }
 
             protected override bool ReleaseHandle()
             {
@@ -24,7 +23,6 @@ namespace DllImportGenerator.IntegrationTests
 
             public static NativeExportsSafeHandle CreateNewHandle() => AllocateHandle();
 
-            
             [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "alloc_handle")]
             private static partial NativeExportsSafeHandle AllocateHandle();
         }
@@ -36,15 +34,18 @@ namespace DllImportGenerator.IntegrationTests
         public static partial void AllocateHandle(out NativeExportsSafeHandle handle);
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "release_handle")]
-        [return:MarshalAs(UnmanagedType.I1)]
+        [return: MarshalAs(UnmanagedType.I1)]
         private static partial bool ReleaseHandle(nint handle);
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "is_handle_alive")]
-        [return:MarshalAs(UnmanagedType.I1)]
+        [return: MarshalAs(UnmanagedType.I1)]
         public static partial bool IsHandleAlive(NativeExportsSafeHandle handle);
 
         [GeneratedDllImport(NativeExportsNE_Binary, EntryPoint = "modify_handle")]
-        public static partial void ModifyHandle(ref NativeExportsSafeHandle handle, [MarshalAs(UnmanagedType.I1)] bool newHandle);
+        public static partial void ModifyHandle(
+            ref NativeExportsSafeHandle handle,
+            [MarshalAs(UnmanagedType.I1)] bool newHandle
+        );
     }
 
     public class SafeHandleTests
@@ -60,7 +61,8 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public void ReturnValue_CreatesSafeHandle_DirectConstructorCall()
         {
-            using NativeExportsNE.NativeExportsSafeHandle handle = NativeExportsNE.NativeExportsSafeHandle.CreateNewHandle();
+            using NativeExportsNE.NativeExportsSafeHandle handle =
+                NativeExportsNE.NativeExportsSafeHandle.CreateNewHandle();
             Assert.False(handle.IsClosed);
             Assert.False(handle.IsInvalid);
         }
@@ -85,7 +87,8 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public void ByRefSameValue_UsesSameHandleInstance()
         {
-            using NativeExportsNE.NativeExportsSafeHandle handleToDispose = NativeExportsNE.AllocateHandle();
+            using NativeExportsNE.NativeExportsSafeHandle handleToDispose =
+                NativeExportsNE.AllocateHandle();
             NativeExportsNE.NativeExportsSafeHandle handle = handleToDispose;
             NativeExportsNE.ModifyHandle(ref handle, newHandle: false);
             Assert.Same(handleToDispose, handle);
@@ -94,7 +97,8 @@ namespace DllImportGenerator.IntegrationTests
         [Fact]
         public void ByRefDifferentValue_UsesNewHandleInstance()
         {
-            using NativeExportsNE.NativeExportsSafeHandle handleToDispose = NativeExportsNE.AllocateHandle();
+            using NativeExportsNE.NativeExportsSafeHandle handleToDispose =
+                NativeExportsNE.AllocateHandle();
             NativeExportsNE.NativeExportsSafeHandle handle = handleToDispose;
             NativeExportsNE.ModifyHandle(ref handle, newHandle: true);
             Assert.NotSame(handleToDispose, handle);

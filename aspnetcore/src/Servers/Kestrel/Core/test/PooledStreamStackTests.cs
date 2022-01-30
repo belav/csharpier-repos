@@ -95,12 +95,13 @@ public class PooledStreamStackTests
 
     private static Http2Stream<HttpContext> CreateStream(int streamId, long expirationTicks)
     {
-        var context = new Http2StreamContext
-        (
+        var context = new Http2StreamContext(
             connectionId: "TestConnectionId",
             protocols: HttpProtocols.Http2,
             altSvcHeader: null,
-            serviceContext: TestContextFactory.CreateServiceContext(serverOptions: new KestrelServerOptions()),
+            serviceContext: TestContextFactory.CreateServiceContext(
+                serverOptions: new KestrelServerOptions()
+            ),
             connectionFeatures: new FeatureCollection(),
             memoryPool: MemoryPool<byte>.Shared,
             localEndPoint: null,

@@ -18,7 +18,10 @@ public class ConfigurationController : ControllerBase
     [HttpGet("/_configuration/{clientId}")]
     public IActionResult GetClientParameters(string clientId)
     {
-        var parameters = _clientRequestParametersProvider.GetClientParameters(HttpContext, clientId);
+        var parameters = _clientRequestParametersProvider.GetClientParameters(
+            HttpContext,
+            clientId
+        );
         if (parameters == null)
         {
             return BadRequest($"Parameters for client '{clientId}' not found.");

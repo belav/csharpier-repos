@@ -1,4 +1,3 @@
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -9,6 +8,7 @@ using System.Security.Authentication;
 using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
+
 #pragma warning disable IDE0044 // Add readonly modifier. We don't want to modify these interop types
 
 internal static unsafe class HttpApiTypes
@@ -389,26 +389,26 @@ internal static unsafe class HttpApiTypes
 
     internal static readonly string?[] HttpVerbs = new string?[]
     {
-                null,
-                "Unknown",
-                "Invalid",
-                HttpMethods.Options,
-                HttpMethods.Get,
-                HttpMethods.Head,
-                HttpMethods.Post,
-                HttpMethods.Put,
-                HttpMethods.Delete,
-                HttpMethods.Trace,
-                HttpMethods.Connect,
-                "TRACK",
-                "MOVE",
-                "COPY",
-                "PROPFIND",
-                "PROPPATCH",
-                "MKCOL",
-                "LOCK",
-                "UNLOCK",
-                "SEARCH",
+        null,
+        "Unknown",
+        "Invalid",
+        HttpMethods.Options,
+        HttpMethods.Get,
+        HttpMethods.Head,
+        HttpMethods.Post,
+        HttpMethods.Put,
+        HttpMethods.Delete,
+        HttpMethods.Trace,
+        HttpMethods.Connect,
+        "TRACK",
+        "MOVE",
+        "COPY",
+        "PROPFIND",
+        "PROPPATCH",
+        "MKCOL",
+        "LOCK",
+        "UNLOCK",
+        "SEARCH",
     };
 
     internal enum HTTP_DATA_CHUNK_TYPE : int
@@ -686,45 +686,46 @@ internal static unsafe class HttpApiTypes
     {
         private static readonly string[] _strings =
         {
-                    "Cache-Control",
-                    "Connection",
-                    "Date",
-                    "Keep-Alive",
-                    "Pragma",
-                    "Trailer",
-                    "Transfer-Encoding",
-                    "Upgrade",
-                    "Via",
-                    "Warning",
-
-                    "Allow",
-                    "Content-Length",
-                    "Content-Type",
-                    "Content-Encoding",
-                    "Content-Language",
-                    "Content-Location",
-                    "Content-MD5",
-                    "Content-Range",
-                    "Expires",
-                    "Last-Modified",
-
-                    "Accept-Ranges",
-                    "Age",
-                    "ETag",
-                    "Location",
-                    "Proxy-Authenticate",
-                    "Retry-After",
-                    "Server",
-                    "Set-Cookie",
-                    "Vary",
-                    "WWW-Authenticate",
-                };
+            "Cache-Control",
+            "Connection",
+            "Date",
+            "Keep-Alive",
+            "Pragma",
+            "Trailer",
+            "Transfer-Encoding",
+            "Upgrade",
+            "Via",
+            "Warning",
+            "Allow",
+            "Content-Length",
+            "Content-Type",
+            "Content-Encoding",
+            "Content-Language",
+            "Content-Location",
+            "Content-MD5",
+            "Content-Range",
+            "Expires",
+            "Last-Modified",
+            "Accept-Ranges",
+            "Age",
+            "ETag",
+            "Location",
+            "Proxy-Authenticate",
+            "Retry-After",
+            "Server",
+            "Set-Cookie",
+            "Vary",
+            "WWW-Authenticate",
+        };
 
         private static readonly Dictionary<string, int> _lookupTable = CreateLookupTable();
 
         private static Dictionary<string, int> CreateLookupTable()
         {
-            Dictionary<string, int> lookupTable = new Dictionary<string, int>((int)Enum.HttpHeaderResponseMaximum, StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, int> lookupTable = new Dictionary<string, int>(
+                (int)Enum.HttpHeaderResponseMaximum,
+                StringComparer.OrdinalIgnoreCase
+            );
             for (int i = 0; i < (int)Enum.HttpHeaderResponseMaximum; i++)
             {
                 lookupTable.Add(_strings[i], i);
@@ -740,43 +741,40 @@ internal static unsafe class HttpApiTypes
 
         internal enum Enum
         {
-            HttpHeaderCacheControl = 0,    // general-header [section 4.5]
-            HttpHeaderConnection = 1,    // general-header [section 4.5]
-            HttpHeaderDate = 2,    // general-header [section 4.5]
-            HttpHeaderKeepAlive = 3,    // general-header [not in rfc]
-            HttpHeaderPragma = 4,    // general-header [section 4.5]
-            HttpHeaderTrailer = 5,    // general-header [section 4.5]
-            HttpHeaderTransferEncoding = 6,    // general-header [section 4.5]
-            HttpHeaderUpgrade = 7,    // general-header [section 4.5]
-            HttpHeaderVia = 8,    // general-header [section 4.5]
-            HttpHeaderWarning = 9,    // general-header [section 4.5]
-
-            HttpHeaderAllow = 10,   // entity-header  [section 7.1]
-            HttpHeaderContentLength = 11,   // entity-header  [section 7.1]
-            HttpHeaderContentType = 12,   // entity-header  [section 7.1]
-            HttpHeaderContentEncoding = 13,   // entity-header  [section 7.1]
-            HttpHeaderContentLanguage = 14,   // entity-header  [section 7.1]
-            HttpHeaderContentLocation = 15,   // entity-header  [section 7.1]
-            HttpHeaderContentMd5 = 16,   // entity-header  [section 7.1]
-            HttpHeaderContentRange = 17,   // entity-header  [section 7.1]
-            HttpHeaderExpires = 18,   // entity-header  [section 7.1]
-            HttpHeaderLastModified = 19,   // entity-header  [section 7.1]
+            HttpHeaderCacheControl = 0, // general-header [section 4.5]
+            HttpHeaderConnection = 1, // general-header [section 4.5]
+            HttpHeaderDate = 2, // general-header [section 4.5]
+            HttpHeaderKeepAlive = 3, // general-header [not in rfc]
+            HttpHeaderPragma = 4, // general-header [section 4.5]
+            HttpHeaderTrailer = 5, // general-header [section 4.5]
+            HttpHeaderTransferEncoding = 6, // general-header [section 4.5]
+            HttpHeaderUpgrade = 7, // general-header [section 4.5]
+            HttpHeaderVia = 8, // general-header [section 4.5]
+            HttpHeaderWarning = 9, // general-header [section 4.5]
+            HttpHeaderAllow = 10, // entity-header  [section 7.1]
+            HttpHeaderContentLength = 11, // entity-header  [section 7.1]
+            HttpHeaderContentType = 12, // entity-header  [section 7.1]
+            HttpHeaderContentEncoding = 13, // entity-header  [section 7.1]
+            HttpHeaderContentLanguage = 14, // entity-header  [section 7.1]
+            HttpHeaderContentLocation = 15, // entity-header  [section 7.1]
+            HttpHeaderContentMd5 = 16, // entity-header  [section 7.1]
+            HttpHeaderContentRange = 17, // entity-header  [section 7.1]
+            HttpHeaderExpires = 18, // entity-header  [section 7.1]
+            HttpHeaderLastModified = 19, // entity-header  [section 7.1]
 
             // Response Headers
 
-            HttpHeaderAcceptRanges = 20,   // response-header [section 6.2]
-            HttpHeaderAge = 21,   // response-header [section 6.2]
-            HttpHeaderEtag = 22,   // response-header [section 6.2]
-            HttpHeaderLocation = 23,   // response-header [section 6.2]
-            HttpHeaderProxyAuthenticate = 24,   // response-header [section 6.2]
-            HttpHeaderRetryAfter = 25,   // response-header [section 6.2]
-            HttpHeaderServer = 26,   // response-header [section 6.2]
-            HttpHeaderSetCookie = 27,   // response-header [not in rfc]
-            HttpHeaderVary = 28,   // response-header [section 6.2]
-            HttpHeaderWwwAuthenticate = 29,   // response-header [section 6.2]
-
+            HttpHeaderAcceptRanges = 20, // response-header [section 6.2]
+            HttpHeaderAge = 21, // response-header [section 6.2]
+            HttpHeaderEtag = 22, // response-header [section 6.2]
+            HttpHeaderLocation = 23, // response-header [section 6.2]
+            HttpHeaderProxyAuthenticate = 24, // response-header [section 6.2]
+            HttpHeaderRetryAfter = 25, // response-header [section 6.2]
+            HttpHeaderServer = 26, // response-header [section 6.2]
+            HttpHeaderSetCookie = 27, // response-header [not in rfc]
+            HttpHeaderVary = 28, // response-header [section 6.2]
+            HttpHeaderWwwAuthenticate = 29, // response-header [section 6.2]
             HttpHeaderResponseMaximum = 30,
-
             HttpHeaderMaximum = 41
         }
     }

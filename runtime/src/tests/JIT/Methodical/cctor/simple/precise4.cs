@@ -4,10 +4,12 @@
 // static field
 
 using System;
+
 internal class measure
 {
     public static int a = 0xCC;
 }
+
 internal class test
 {
     public static byte b = 0xC;

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             /// </summary>
             public OperationBlockAnalyzerStateData OperationBlockAnalysisState { get; }
 
-            public static new readonly DeclarationAnalyzerStateData FullyProcessedInstance = CreateFullyProcessedInstance();
+            public static new readonly DeclarationAnalyzerStateData FullyProcessedInstance =
+                CreateFullyProcessedInstance();
 
             public DeclarationAnalyzerStateData()
             {
@@ -118,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <summary>
         /// Stores the partial analysis state for code block actions or operation block actions executed on the declaration.
         /// </summary>
-        internal abstract class BlockAnalyzerStateData<TBlockAction, TNodeStateData> : AnalyzerStateData
+        internal abstract class BlockAnalyzerStateData<TBlockAction, TNodeStateData>
+            : AnalyzerStateData
             where TBlockAction : AnalyzerAction
             where TNodeStateData : AnalyzerStateData, new()
         {
@@ -152,15 +154,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <summary>
         /// Stores the partial analysis state for code block actions executed on the declaration.
         /// </summary>
-        internal sealed class CodeBlockAnalyzerStateData : BlockAnalyzerStateData<CodeBlockAnalyzerAction, SyntaxNodeAnalyzerStateData>
-        {
-        }
+        internal sealed class CodeBlockAnalyzerStateData
+            : BlockAnalyzerStateData<CodeBlockAnalyzerAction, SyntaxNodeAnalyzerStateData> { }
 
         /// <summary>
         /// Stores the partial analysis state for operation block actions executed on the declaration.
         /// </summary>
-        internal sealed class OperationBlockAnalyzerStateData : BlockAnalyzerStateData<OperationBlockAnalyzerAction, OperationAnalyzerStateData>
-        {
-        }
+        internal sealed class OperationBlockAnalyzerStateData
+            : BlockAnalyzerStateData<OperationBlockAnalyzerAction, OperationAnalyzerStateData> { }
     }
 }

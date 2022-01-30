@@ -7,37 +7,37 @@ using System.Linq;
 
 namespace Moq
 {
-	internal readonly struct ImmutablePopOnlyStack<T>
-	{
-		private readonly T[] items;
-		private readonly int index;
+    internal readonly struct ImmutablePopOnlyStack<T>
+    {
+        private readonly T[] items;
+        private readonly int index;
 
-		public ImmutablePopOnlyStack(IEnumerable<T> items)
-		{
-			Debug.Assert(items != null);
+        public ImmutablePopOnlyStack(IEnumerable<T> items)
+        {
+            Debug.Assert(items != null);
 
-			this.items = items.ToArray();
-			this.index = 0;
-		}
+            this.items = items.ToArray();
+            this.index = 0;
+        }
 
-		private ImmutablePopOnlyStack(T[] items, int index)
-		{
-			Debug.Assert(items != null);
-			Debug.Assert(0 <= index && index <= items.Length);
+        private ImmutablePopOnlyStack(T[] items, int index)
+        {
+            Debug.Assert(items != null);
+            Debug.Assert(0 <= index && index <= items.Length);
 
-			this.items = items;
-			this.index = index;
-		}
+            this.items = items;
+            this.index = index;
+        }
 
-		public bool Empty => this.index == this.items.Length;
+        public bool Empty => this.index == this.items.Length;
 
-		public T Pop(out ImmutablePopOnlyStack<T> stackBelowTop)
-		{
-			Debug.Assert(this.index < this.items.Length);
+        public T Pop(out ImmutablePopOnlyStack<T> stackBelowTop)
+        {
+            Debug.Assert(this.index < this.items.Length);
 
-			var top = this.items[this.index];
-			stackBelowTop = new ImmutablePopOnlyStack<T>(this.items, this.index + 1);
-			return top;
-		}
-	}
+            var top = this.items[this.index];
+            stackBelowTop = new ImmutablePopOnlyStack<T>(this.items, this.index + 1);
+            return top;
+        }
+    }
 }

@@ -8,12 +8,14 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindJoinQueryInMemoryTest : NorthwindJoinQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
+    public class NorthwindJoinQueryInMemoryTest
+        : NorthwindJoinQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
     {
         public NorthwindJoinQueryInMemoryTest(
             NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
 #pragma warning disable IDE0060 // Remove unused parameter
-            ITestOutputHelper testOutputHelper)
+            ITestOutputHelper testOutputHelper
+        )
 #pragma warning restore IDE0060 // Remove unused parameter
             : base(fixture)
         {

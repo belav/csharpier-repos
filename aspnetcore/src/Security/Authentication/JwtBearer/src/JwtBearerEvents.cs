@@ -14,7 +14,8 @@ public class JwtBearerEvents
     /// <summary>
     /// Invoked if authentication fails during request processing. The exceptions will be re-thrown after this event unless suppressed.
     /// </summary>
-    public Func<AuthenticationFailedContext, Task> OnAuthenticationFailed { get; set; } = context => Task.CompletedTask;
+    public Func<AuthenticationFailedContext, Task> OnAuthenticationFailed { get; set; } =
+        context => Task.CompletedTask;
 
     /// <summary>
     /// Invoked if Authorization fails and results in a Forbidden response.
@@ -24,22 +25,26 @@ public class JwtBearerEvents
     /// <summary>
     /// Invoked when a protocol message is first received.
     /// </summary>
-    public Func<MessageReceivedContext, Task> OnMessageReceived { get; set; } = context => Task.CompletedTask;
+    public Func<MessageReceivedContext, Task> OnMessageReceived { get; set; } =
+        context => Task.CompletedTask;
 
     /// <summary>
     /// Invoked after the security token has passed validation and a ClaimsIdentity has been generated.
     /// </summary>
-    public Func<TokenValidatedContext, Task> OnTokenValidated { get; set; } = context => Task.CompletedTask;
+    public Func<TokenValidatedContext, Task> OnTokenValidated { get; set; } =
+        context => Task.CompletedTask;
 
     /// <summary>
     /// Invoked before a challenge is sent back to the caller.
     /// </summary>
-    public Func<JwtBearerChallengeContext, Task> OnChallenge { get; set; } = context => Task.CompletedTask;
+    public Func<JwtBearerChallengeContext, Task> OnChallenge { get; set; } =
+        context => Task.CompletedTask;
 
     /// <summary>
     /// Invoked if exceptions are thrown during request processing. The exceptions will be re-thrown after this event unless suppressed.
     /// </summary>
-    public virtual Task AuthenticationFailed(AuthenticationFailedContext context) => OnAuthenticationFailed(context);
+    public virtual Task AuthenticationFailed(AuthenticationFailedContext context) =>
+        OnAuthenticationFailed(context);
 
     /// <summary>
     /// Invoked if Authorization fails and results in a Forbidden response
@@ -49,7 +54,8 @@ public class JwtBearerEvents
     /// <summary>
     /// Invoked when a protocol message is first received.
     /// </summary>
-    public virtual Task MessageReceived(MessageReceivedContext context) => OnMessageReceived(context);
+    public virtual Task MessageReceived(MessageReceivedContext context) =>
+        OnMessageReceived(context);
 
     /// <summary>
     /// Invoked after the security token has passed validation and a ClaimsIdentity has been generated.

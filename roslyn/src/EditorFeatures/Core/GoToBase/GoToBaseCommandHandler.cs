@@ -24,18 +24,18 @@ namespace Microsoft.CodeAnalysis.Editor.GoToBase
     [Export(typeof(VSCommanding.ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(PredefinedCommandHandlerNames.GoToBase)]
-    internal class GoToBaseCommandHandler : AbstractGoToCommandHandler<IGoToBaseService, GoToBaseCommandArgs>
+    internal class GoToBaseCommandHandler
+        : AbstractGoToCommandHandler<IGoToBaseService, GoToBaseCommandArgs>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public GoToBaseCommandHandler(
             IThreadingContext threadingContext,
-            IStreamingFindUsagesPresenter streamingPresenter) : base(threadingContext, streamingPresenter)
-        {
-        }
+            IStreamingFindUsagesPresenter streamingPresenter
+        ) : base(threadingContext, streamingPresenter) { }
 
-        protected override IGoToBaseService GetService(Document document)
-            => document?.GetLanguageService<IGoToBaseService>();
+        protected override IGoToBaseService GetService(Document document) =>
+            document?.GetLanguageService<IGoToBaseService>();
 
         public override string DisplayName => EditorFeaturesResources.Go_To_Base;
 
@@ -43,7 +43,12 @@ namespace Microsoft.CodeAnalysis.Editor.GoToBase
 
         protected override FunctionId FunctionId => FunctionId.CommandHandler_GoToBase;
 
-        protected override Task FindActionAsync(IGoToBaseService service, Document document, int caretPosition, IFindUsagesContext context, CancellationToken cancellationToken)
-            => service.FindBasesAsync(document, caretPosition, context, cancellationToken);
+        protected override Task FindActionAsync(
+            IGoToBaseService service,
+            Document document,
+            int caretPosition,
+            IFindUsagesContext context,
+            CancellationToken cancellationToken
+        ) => service.FindBasesAsync(document, caretPosition, context, cancellationToken);
     }
 }

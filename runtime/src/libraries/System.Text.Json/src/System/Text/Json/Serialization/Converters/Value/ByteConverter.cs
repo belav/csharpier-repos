@@ -10,7 +10,11 @@ namespace System.Text.Json.Serialization.Converters
             IsInternalConverterForNumberType = true;
         }
 
-        public override byte Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override byte Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return reader.GetByte();
         }
@@ -20,19 +24,35 @@ namespace System.Text.Json.Serialization.Converters
             writer.WriteNumberValue(value);
         }
 
-        internal override byte ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal override byte ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return reader.GetByteWithQuotes();
         }
 
-        internal override void WriteAsPropertyNameCore(Utf8JsonWriter writer, byte value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            byte value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
             writer.WritePropertyName(value);
         }
 
-        internal override byte ReadNumberWithCustomHandling(ref Utf8JsonReader reader, JsonNumberHandling handling, JsonSerializerOptions options)
+        internal override byte ReadNumberWithCustomHandling(
+            ref Utf8JsonReader reader,
+            JsonNumberHandling handling,
+            JsonSerializerOptions options
+        )
         {
-            if (reader.TokenType == JsonTokenType.String && (JsonNumberHandling.AllowReadingFromString & handling) != 0)
+            if (
+                reader.TokenType == JsonTokenType.String
+                && (JsonNumberHandling.AllowReadingFromString & handling) != 0
+            )
             {
                 return reader.GetByteWithQuotes();
             }
@@ -40,7 +60,11 @@ namespace System.Text.Json.Serialization.Converters
             return reader.GetByte();
         }
 
-        internal override void WriteNumberWithCustomHandling(Utf8JsonWriter writer, byte value, JsonNumberHandling handling)
+        internal override void WriteNumberWithCustomHandling(
+            Utf8JsonWriter writer,
+            byte value,
+            JsonNumberHandling handling
+        )
         {
             if ((JsonNumberHandling.WriteAsString & handling) != 0)
             {

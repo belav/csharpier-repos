@@ -35,6 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         IReadOnlyList<MigrationCommand> Generate(
             IReadOnlyList<MigrationOperation> operations,
             IModel? model = null,
-            MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default);
+            MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
+        );
     }
 }

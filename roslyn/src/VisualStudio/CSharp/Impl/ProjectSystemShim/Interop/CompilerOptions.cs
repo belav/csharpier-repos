@@ -16,11 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         OPTID_OPTIMIZATIONS,
         OPTID_IMPORTS,
         OPTID_INTERNALTESTS = 8,
-
         OPTID_MODULES = 18,
-
         OPTID_NOWARNLIST = 20,
-
         OPTID_XML_DOCFILE = 24,
         OPTID_CHECKED,
         OPTID_UNSAFE,
@@ -37,14 +34,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         OPTID_PLATFORM,
         OPTID_MODULEASSEMBLY,
         OPTID_MANIFESTFILE,
-
         OPTID_IMPORTSUSINGNOPIA = 41,
         OPTID_FUSIONCONFIG,
         OPTID_HIGHENTROPYASLR,
         OPTID_SUBSYSTEMVERSION,
-
         OPTID_WARNNOTASERRORLIST,
-
         LARGEST_OPTION_ID
     }
 }

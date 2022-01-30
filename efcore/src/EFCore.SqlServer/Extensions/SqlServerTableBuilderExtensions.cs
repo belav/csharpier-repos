@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>An object that can be used to configure the temporal table.</returns>
         public static TemporalTableBuilder IsTemporal(
             this TableBuilder tableBuilder,
-            bool temporal = true)
+            bool temporal = true
+        )
         {
             tableBuilder.Metadata.SetIsTemporal(temporal);
 
@@ -43,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static TableBuilder IsTemporal(
             this TableBuilder tableBuilder,
-            Action<TemporalTableBuilder> buildAction)
+            Action<TemporalTableBuilder> buildAction
+        )
         {
             tableBuilder.Metadata.SetIsTemporal(true);
 
@@ -65,8 +67,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>An object that can be used to configure the temporal table.</returns>
         public static TemporalTableBuilder<TEntity> IsTemporal<TEntity>(
             this TableBuilder<TEntity> tableBuilder,
-            bool temporal = true)
-            where TEntity : class
+            bool temporal = true
+        ) where TEntity : class
         {
             tableBuilder.Metadata.SetIsTemporal(temporal);
 
@@ -86,8 +88,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The same builder instance so that multiple calls can be chained.</returns>
         public static TableBuilder<TEntity> IsTemporal<TEntity>(
             this TableBuilder<TEntity> tableBuilder,
-            Action<TemporalTableBuilder<TEntity>> buildAction)
-            where TEntity : class
+            Action<TemporalTableBuilder<TEntity>> buildAction
+        ) where TEntity : class
         {
             tableBuilder.Metadata.SetIsTemporal(true);
             buildAction(new TemporalTableBuilder<TEntity>(tableBuilder.Metadata));

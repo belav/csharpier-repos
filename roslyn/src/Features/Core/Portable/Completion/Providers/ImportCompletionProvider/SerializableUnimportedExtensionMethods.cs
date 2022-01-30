@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<SerializableImportCompletionItem> completionItems,
             bool isPartialResult,
             int getSymbolsTicks,
-            int createItemsTicks)
+            int createItemsTicks
+        )
         {
             CompletionItems = completionItems;
             IsPartialResult = isPartialResult;

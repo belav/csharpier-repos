@@ -2,15 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-	
+
 public interface IA
 {
-   void methodIA();
+    void methodIA();
 }
 
-	
 public interface IB<t>
 {
-   void methodIB();
+    void methodIB();
 }
-

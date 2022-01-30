@@ -20,7 +20,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             var paramContains = new List<string> { "1", "2", "three" };
             var paramEnd = "end";
 
-            var segment = new WildcardPathSegment(paramBegin, paramContains, paramEnd, comparisonType);
+            var segment = new WildcardPathSegment(
+                paramBegin,
+                paramContains,
+                paramEnd,
+                comparisonType
+            );
 
             Assert.Equal(paramBegin, segment.BeginsWith);
             Assert.Equal<string>(paramContains, segment.Contains);
@@ -34,7 +39,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             var wildcardPathSegment = (WildcardPathSegment)segment;
             Assert.True(
                 wildcardPathSegment.Match(testSample),
-                string.Format("[TestSample: {0}] [Wildcard: {1}]", testSample, Serialize(wildcardPathSegment)));
+                string.Format(
+                    "[TestSample: {0}] [Wildcard: {1}]",
+                    testSample,
+                    Serialize(wildcardPathSegment)
+                )
+            );
         }
 
         [Theory]
@@ -44,7 +54,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             var wildcardPathSegment = (WildcardPathSegment)segment;
             Assert.False(
                 wildcardPathSegment.Match(testSample),
-                string.Format("[TestSample: {0}] [Wildcard: {1}]", testSample, Serialize(wildcardPathSegment)));
+                string.Format(
+                    "[TestSample: {0}] [Wildcard: {1}]",
+                    testSample,
+                    Serialize(wildcardPathSegment)
+                )
+            );
         }
 
         [Theory]
@@ -54,7 +69,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             var wildcardPathSegment = (WildcardPathSegment)segment;
             Assert.True(
                 wildcardPathSegment.Match(testSample),
-                string.Format("[TestSample: {0}] [Wildcard: {1}]", testSample, Serialize(wildcardPathSegment)));
+                string.Format(
+                    "[TestSample: {0}] [Wildcard: {1}]",
+                    testSample,
+                    Serialize(wildcardPathSegment)
+                )
+            );
         }
 
         [Theory]
@@ -64,7 +84,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             var wildcardPathSegment = (WildcardPathSegment)segment;
             Assert.False(
                 wildcardPathSegment.Match(testSample),
-                string.Format("[TestSample: {0}] [Wildcard: {1}]", testSample, Serialize(wildcardPathSegment)));
+                string.Format(
+                    "[TestSample: {0}] [Wildcard: {1}]",
+                    testSample,
+                    Serialize(wildcardPathSegment)
+                )
+            );
         }
 
         public static IEnumerable<object[]> GetPositiveOrdinalIgnoreCaseDataSample()
@@ -76,11 +101,46 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             yield return WrapResult(StringComparison.OrdinalIgnoreCase, "aacc", "a", "c");
             yield return WrapResult(StringComparison.OrdinalIgnoreCase, "aacc", "aa", "c");
             yield return WrapResult(StringComparison.OrdinalIgnoreCase, "acc", "ac", "c");
-            yield return WrapResult(StringComparison.OrdinalIgnoreCase, "abcdefgh", "ab", "cd", "ef", "gh");
-            yield return WrapResult(StringComparison.OrdinalIgnoreCase, "abCDEfgh", "ab", "cd", "ef", "gh");
-            yield return WrapResult(StringComparison.OrdinalIgnoreCase, "ab123cd321ef123gh", "ab", "cd", "ef", "gh");
-            yield return WrapResult(StringComparison.OrdinalIgnoreCase, "abcd321ef123gh", "ab", "cd", "ef", "gh");
-            yield return WrapResult(StringComparison.OrdinalIgnoreCase, "ababcd321ef123gh", "ab", "cd", "ef", "gh");
+            yield return WrapResult(
+                StringComparison.OrdinalIgnoreCase,
+                "abcdefgh",
+                "ab",
+                "cd",
+                "ef",
+                "gh"
+            );
+            yield return WrapResult(
+                StringComparison.OrdinalIgnoreCase,
+                "abCDEfgh",
+                "ab",
+                "cd",
+                "ef",
+                "gh"
+            );
+            yield return WrapResult(
+                StringComparison.OrdinalIgnoreCase,
+                "ab123cd321ef123gh",
+                "ab",
+                "cd",
+                "ef",
+                "gh"
+            );
+            yield return WrapResult(
+                StringComparison.OrdinalIgnoreCase,
+                "abcd321ef123gh",
+                "ab",
+                "cd",
+                "ef",
+                "gh"
+            );
+            yield return WrapResult(
+                StringComparison.OrdinalIgnoreCase,
+                "ababcd321ef123gh",
+                "ab",
+                "cd",
+                "ef",
+                "gh"
+            );
         }
 
         public static IEnumerable<object[]> GetNegativeOrdinalIgnoreCaseDataSample()
@@ -108,11 +168,46 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             yield return WrapResult(StringComparison.Ordinal, "aAcc", "aA", "c");
             yield return WrapResult(StringComparison.Ordinal, "acc", "ac", "c");
             yield return WrapResult(StringComparison.Ordinal, "abcDefgh", "ab", "cD", "ef", "gh");
-            yield return WrapResult(StringComparison.Ordinal, "aB123cd321ef123gh", "aB", "cd", "ef", "gh");
-            yield return WrapResult(StringComparison.Ordinal, "abcd321ef123gh", "ab", "cd", "ef", "gh");
-            yield return WrapResult(StringComparison.Ordinal, "ababcdCD321ef123gh", "ab", "cd", "ef", "gh");
-            yield return WrapResult(StringComparison.Ordinal, "ababcdCD321ef123gh", "ab", "CD", "ef", "gh");
-            yield return WrapResult(StringComparison.Ordinal, "ababcd321eF123gh", "ab", "cd", "eF", "gh");
+            yield return WrapResult(
+                StringComparison.Ordinal,
+                "aB123cd321ef123gh",
+                "aB",
+                "cd",
+                "ef",
+                "gh"
+            );
+            yield return WrapResult(
+                StringComparison.Ordinal,
+                "abcd321ef123gh",
+                "ab",
+                "cd",
+                "ef",
+                "gh"
+            );
+            yield return WrapResult(
+                StringComparison.Ordinal,
+                "ababcdCD321ef123gh",
+                "ab",
+                "cd",
+                "ef",
+                "gh"
+            );
+            yield return WrapResult(
+                StringComparison.Ordinal,
+                "ababcdCD321ef123gh",
+                "ab",
+                "CD",
+                "ef",
+                "gh"
+            );
+            yield return WrapResult(
+                StringComparison.Ordinal,
+                "ababcd321eF123gh",
+                "ab",
+                "cd",
+                "eF",
+                "gh"
+            );
         }
 
         public static IEnumerable<object[]> GetNegativeOrdinalDataSample()
@@ -135,32 +230,68 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternSegments
             yield return WrapResult(StringComparison.Ordinal, "aacc", "aA", "c");
             yield return WrapResult(StringComparison.Ordinal, "acc", "aC", "c");
             yield return WrapResult(StringComparison.Ordinal, "abcDefgh", "ab", "cd", "ef", "gh");
-            yield return WrapResult(StringComparison.Ordinal, "aB123cd321ef123gh", "aB", "cd", "EF", "gh");
-            yield return WrapResult(StringComparison.Ordinal, "abcd321ef123gh", "ab", "cd", "efF", "gh");
-            yield return WrapResult(StringComparison.Ordinal, "ababcdCD321ef123gh", "AB", "cd", "ef", "gh");
-            yield return WrapResult(StringComparison.Ordinal, "ababcdCD321ef123gh", "ab", "CD", "EF", "gh");
+            yield return WrapResult(
+                StringComparison.Ordinal,
+                "aB123cd321ef123gh",
+                "aB",
+                "cd",
+                "EF",
+                "gh"
+            );
+            yield return WrapResult(
+                StringComparison.Ordinal,
+                "abcd321ef123gh",
+                "ab",
+                "cd",
+                "efF",
+                "gh"
+            );
+            yield return WrapResult(
+                StringComparison.Ordinal,
+                "ababcdCD321ef123gh",
+                "AB",
+                "cd",
+                "ef",
+                "gh"
+            );
+            yield return WrapResult(
+                StringComparison.Ordinal,
+                "ababcdCD321ef123gh",
+                "ab",
+                "CD",
+                "EF",
+                "gh"
+            );
         }
 
         private static object[] WrapResult(StringComparison comparisonType, params string[] values)
         {
             if (values == null || values.Length < 3)
             {
-                throw new InvalidOperationException("At least three values are required to create a data sample");
+                throw new InvalidOperationException(
+                    "At least three values are required to create a data sample"
+                );
             }
 
             var beginWith = values[1];
             var endWith = values[values.Length - 1];
             var contains = values.Skip(2).Take(values.Length - 3);
 
-            return new object[] { values[0], new WildcardPathSegment(beginWith, contains.ToList(), endWith, comparisonType) };
+            return new object[]
+            {
+                values[0],
+                new WildcardPathSegment(beginWith, contains.ToList(), endWith, comparisonType)
+            };
         }
 
         private static string Serialize(WildcardPathSegment segment)
         {
-            return string.Format("{0}:{1}:{2}",
+            return string.Format(
+                "{0}:{1}:{2}",
                 segment.BeginsWith,
                 string.Join(",", segment.Contains.ToArray()),
-                segment.EndsWith);
+                segment.EndsWith
+            );
         }
     }
 }

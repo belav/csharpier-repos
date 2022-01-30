@@ -13,7 +13,10 @@ namespace System.Reflection.Internal
     /// </summary>
     internal static class EnumerableExtensions
     {
-        public static T? FirstOrDefault<T>(this ImmutableArray<T> collection, Func<T, bool> predicate)
+        public static T? FirstOrDefault<T>(
+            this ImmutableArray<T> collection,
+            Func<T, bool> predicate
+        )
         {
             foreach (var item in collection)
             {
@@ -27,7 +30,10 @@ namespace System.Reflection.Internal
         }
 
         // used only in debugger display so we needn't get fancy with optimizations.
-        public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        public static IEnumerable<TResult> Select<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult> selector
+        )
         {
             foreach (var item in source)
             {
@@ -51,18 +57,21 @@ namespace System.Reflection.Internal
             for (int i = 0; i < map.Length; i++)
                 map[i] = i;
 
-            Array.Sort(map, (int left, int right) =>
-            {
-                if (left == right)
-                    return 0;
-
-                int result = comparison(source[left], source[right]);
-                if (result == 0)
+            Array.Sort(
+                map,
+                (int left, int right) =>
                 {
-                    return left - right;
+                    if (left == right)
+                        return 0;
+
+                    int result = comparison(source[left], source[right]);
+                    if (result == 0)
+                    {
+                        return left - right;
+                    }
+                    return result;
                 }
-                return result;
-            });
+            );
 
             foreach (int index in map)
             {

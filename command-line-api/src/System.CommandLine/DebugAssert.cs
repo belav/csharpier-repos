@@ -15,7 +15,7 @@ namespace System.CommandLine
                 Throw(message);
             }
         }
-        
+
         [Conditional("DEBUG")]
         public static void Throw(string message)
         {

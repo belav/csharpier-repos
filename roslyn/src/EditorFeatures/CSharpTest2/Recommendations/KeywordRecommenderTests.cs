@@ -16,26 +16,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 {
     public class KeywordRecommenderTests : RecommenderTests
     {
-        private static readonly Dictionary<SyntaxKind, AbstractSyntacticSingleKeywordRecommender> s_recommenderMap =
-            new Dictionary<SyntaxKind, AbstractSyntacticSingleKeywordRecommender>(SyntaxFacts.EqualityComparer);
+        private static readonly Dictionary<
+            SyntaxKind,
+            AbstractSyntacticSingleKeywordRecommender
+        > s_recommenderMap = new Dictionary<SyntaxKind, AbstractSyntacticSingleKeywordRecommender>(
+            SyntaxFacts.EqualityComparer
+        );
 
         static KeywordRecommenderTests()
         {
-            foreach (var recommenderType in typeof(AbstractSyntacticSingleKeywordRecommender).Assembly.GetTypes())
+            foreach (
+                var recommenderType in typeof(AbstractSyntacticSingleKeywordRecommender).Assembly.GetTypes()
+            )
             {
                 if (recommenderType.IsSubclassOf(typeof(AbstractSyntacticSingleKeywordRecommender)))
                 {
                     try
                     {
                         var recommender = Activator.CreateInstance(recommenderType);
-                        var field = recommenderType.GetField(nameof(AbstractSyntacticSingleKeywordRecommender.KeywordKind), BindingFlags.Public | BindingFlags.Instance);
+                        var field = recommenderType.GetField(
+                            nameof(AbstractSyntacticSingleKeywordRecommender.KeywordKind),
+                            BindingFlags.Public | BindingFlags.Instance
+                        );
                         var kind = (SyntaxKind)field.GetValue(recommender);
 
-                        s_recommenderMap.Add(kind, (AbstractSyntacticSingleKeywordRecommender)recommender);
+                        s_recommenderMap.Add(
+                            kind,
+                            (AbstractSyntacticSingleKeywordRecommender)recommender
+                        );
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
             }
         }
@@ -52,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             s_recommenderMap.TryGetValue(kind, out var recommender);
             Assert.NotNull(recommender);
 
-            this.RecommendKeywordsAsync = (position, context) => Task.FromResult(recommender.GetTestAccessor().RecommendKeywords(position, context));
+            this.RecommendKeywordsAsync = (position, context) =>
+                Task.FromResult(recommender.GetTestAccessor().RecommendKeywords(position, context));
         }
     }
 }

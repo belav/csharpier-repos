@@ -41,7 +41,8 @@ public static class DeveloperExceptionPageExtensions
     /// </remarks>
     public static IApplicationBuilder UseDeveloperExceptionPage(
         this IApplicationBuilder app,
-        DeveloperExceptionPageOptions options)
+        DeveloperExceptionPageOptions options
+    )
     {
         if (app == null)
         {

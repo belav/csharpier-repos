@@ -18,14 +18,20 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void FinalReleaseComObject_NullObject_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("o", () => Marshal.FinalReleaseComObject(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "o",
+                () => Marshal.FinalReleaseComObject(null)
+            );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void FinalReleaseComObject_NonComObject_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("o", () => Marshal.FinalReleaseComObject(10));
+            AssertExtensions.Throws<ArgumentException>(
+                "o",
+                () => Marshal.FinalReleaseComObject(10)
+            );
         }
     }
 }

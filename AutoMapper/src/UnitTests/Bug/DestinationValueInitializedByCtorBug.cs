@@ -17,30 +17,37 @@ namespace AutoMapper.UnitTests.Bug
                 /* Remove the line below and the mapping works correctly*/
                 this.Tag = new TagDto() { Name = Guid.NewGuid().ToString() };
             }
+
             public string Name { get; set; }
             public TagDto Tag { get; set; }
         }
+
         public class TagDto
         {
             public string Name { get; set; }
             public bool IsTrue { get; set; }
         }
+
         public class ItemToMap
         {
             public string Name { get; set; }
             public Tag Tag { get; set; }
         }
+
         public class Tag
         {
             public string Name { get; set; }
             public bool IsTrue { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<ItemToMap, ItemToMapDto>();
-            cfg.CreateMap<Tag, TagDto>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<ItemToMap, ItemToMapDto>();
+                    cfg.CreateMap<Tag, TagDto>();
+                }
+            );
 
         [Fact]
         public void Should_map_all_null_values_to_its_substitute()
@@ -51,15 +58,13 @@ namespace AutoMapper.UnitTests.Bug
 
             for (int i = 0; i < 10; i++)
             {
-                entities.Add(new ItemToMap()
-                {
-                    Name = Guid.NewGuid().ToString(),
-                    Tag = tag,
-                });
+                entities.Add(new ItemToMap() { Name = Guid.NewGuid().ToString(), Tag = tag, });
             }
 
             Mapper.Map<List<ItemToMap>, List<ItemToMapDto>>(entities);
-            typeof(AutoMapperMappingException).ShouldNotBeThrownBy(() => Mapper.Map<List<ItemToMap>, List<ItemToMapDto>>(entities));
+            typeof(AutoMapperMappingException).ShouldNotBeThrownBy(
+                () => Mapper.Map<List<ItemToMap>, List<ItemToMapDto>>(entities)
+            );
         }
     }
 }

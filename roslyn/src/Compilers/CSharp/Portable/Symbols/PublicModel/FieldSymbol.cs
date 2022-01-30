@@ -25,10 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ISymbol IFieldSymbol.AssociatedSymbol
         {
-            get
-            {
-                return _underlying.AssociatedSymbol.GetPublicSymbol();
-            }
+            get { return _underlying.AssociatedSymbol.GetPublicSymbol(); }
         }
 
         ITypeSymbol IFieldSymbol.Type
@@ -37,14 +34,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 if (_lazyType is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyType, _underlying.TypeWithAnnotations.GetPublicSymbol(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyType,
+                        _underlying.TypeWithAnnotations.GetPublicSymbol(),
+                        null
+                    );
                 }
 
                 return _lazyType;
             }
         }
 
-        CodeAnalysis.NullableAnnotation IFieldSymbol.NullableAnnotation => _underlying.TypeWithAnnotations.ToPublicAnnotation();
+        CodeAnalysis.NullableAnnotation IFieldSymbol.NullableAnnotation =>
+            _underlying.TypeWithAnnotations.ToPublicAnnotation();
 
         ImmutableArray<CustomModifier> IFieldSymbol.CustomModifiers
         {
@@ -53,26 +55,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         IFieldSymbol IFieldSymbol.OriginalDefinition
         {
-            get
-            {
-                return _underlying.OriginalDefinition.GetPublicSymbol();
-            }
+            get { return _underlying.OriginalDefinition.GetPublicSymbol(); }
         }
 
         IFieldSymbol IFieldSymbol.CorrespondingTupleField
         {
-            get
-            {
-                return _underlying.CorrespondingTupleField.GetPublicSymbol();
-            }
+            get { return _underlying.CorrespondingTupleField.GetPublicSymbol(); }
         }
 
         bool IFieldSymbol.IsExplicitlyNamedTupleElement
         {
-            get
-            {
-                return _underlying.IsExplicitlyNamedTupleElement;
-            }
+            get { return _underlying.IsExplicitlyNamedTupleElement; }
         }
 
         bool IFieldSymbol.IsConst => _underlying.IsConst;

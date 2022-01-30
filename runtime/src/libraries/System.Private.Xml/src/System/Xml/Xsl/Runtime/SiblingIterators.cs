@@ -48,7 +48,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Iterate over child following-sibling nodes.  This is a simple variation on the ContentMergeIterator, so use containment
     /// to reuse its code (can't use inheritance with structures).
@@ -86,7 +85,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Iterate over all preceding nodes according to XPath preceding axis rules, returning nodes in reverse
     /// document order.
@@ -123,7 +121,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Iterate over all preceding-sibling content nodes in document order.
     /// </summary>
@@ -131,8 +128,10 @@ namespace System.Xml.Xsl.Runtime
     public struct PrecedingSiblingDocOrderIterator
     {
         private XmlNavigatorFilter _filter;
-        private XPathNavigator _navCurrent, _navEnd;
-        private bool _needFirst, _useCompPos;
+        private XPathNavigator _navCurrent,
+            _navEnd;
+        private bool _needFirst,
+            _useCompPos;
 
         /// <summary>
         /// Initialize the PrecedingSiblingDocOrderIterator.

@@ -30,10 +30,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class NullableGuidCountingJsonTextWriter : JsonTextWriter
     {
-        public NullableGuidCountingJsonTextWriter(TextWriter textWriter)
-            : base(textWriter)
-        {
-        }
+        public NullableGuidCountingJsonTextWriter(TextWriter textWriter) : base(textWriter) { }
 
         public int NullableGuidCount { get; private set; }
 

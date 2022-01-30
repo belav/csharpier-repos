@@ -9,7 +9,14 @@ internal static partial class Interop
 {
     internal static partial class Crypt32
     {
-        [GeneratedDllImport(Libraries.Crypt32, EntryPoint = "CertDuplicateCertificateContext", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static partial SafeCertContextHandleWithKeyContainerDeletion CertDuplicateCertificateContextWithKeyContainerDeletion(IntPtr pCertContext);
+        [GeneratedDllImport(
+            Libraries.Crypt32,
+            EntryPoint = "CertDuplicateCertificateContext",
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
+        internal static partial SafeCertContextHandleWithKeyContainerDeletion CertDuplicateCertificateContextWithKeyContainerDeletion(
+            IntPtr pCertContext
+        );
     }
 }

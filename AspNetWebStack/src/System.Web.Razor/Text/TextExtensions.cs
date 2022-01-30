@@ -13,7 +13,11 @@ namespace System.Web.Razor.Text
             self.Position += characters;
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The consumer is expected to dispose this object")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The consumer is expected to dispose this object"
+        )]
         public static ITextDocument ToDocument(this ITextBuffer self)
         {
             ITextDocument ret = self as ITextDocument;
@@ -27,10 +31,12 @@ namespace System.Web.Razor.Text
         public static LookaheadToken BeginLookahead(this ITextBuffer self)
         {
             int start = self.Position;
-            return new LookaheadToken(() =>
-            {
-                self.Position = start;
-            });
+            return new LookaheadToken(
+                () =>
+                {
+                    self.Position = start;
+                }
+            );
         }
 
         public static string ReadToEnd(this ITextBuffer self)

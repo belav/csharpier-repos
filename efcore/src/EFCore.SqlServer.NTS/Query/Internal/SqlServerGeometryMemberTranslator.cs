@@ -21,30 +21,74 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerGeometryMemberTranslator : IMemberTranslator
     {
-        private static readonly IDictionary<MemberInfo, string> _memberToFunctionName = new Dictionary<MemberInfo, string>
-        {
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Area)), "STArea" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Dimension)), "STDimension" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.GeometryType)), "STGeometryType" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.IsEmpty)), "STIsEmpty" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.IsValid)), "STIsValid" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Length)), "STLength" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.NumGeometries)), "STNumGeometries" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.NumPoints)), "STNumPoints" }
-        };
+        private static readonly IDictionary<MemberInfo, string> _memberToFunctionName =
+            new Dictionary<MemberInfo, string>
+            {
+                { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Area)), "STArea" },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Dimension)),
+                    "STDimension"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.GeometryType)),
+                    "STGeometryType"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.IsEmpty)),
+                    "STIsEmpty"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.IsValid)),
+                    "STIsValid"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Length)),
+                    "STLength"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.NumGeometries)),
+                    "STNumGeometries"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.NumPoints)),
+                    "STNumPoints"
+                }
+            };
 
-        private static readonly IDictionary<MemberInfo, string> _geometryMemberToFunctionName = new Dictionary<MemberInfo, string>
-        {
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Boundary)), "STBoundary" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Centroid)), "STCentroid" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Envelope)), "STEnvelope" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.InteriorPoint)), "STPointOnSurface" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.IsSimple)), "STIsSimple" },
-            { typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.PointOnSurface)), "STPointOnSurface" }
-        };
+        private static readonly IDictionary<MemberInfo, string> _geometryMemberToFunctionName =
+            new Dictionary<MemberInfo, string>
+            {
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Boundary)),
+                    "STBoundary"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Centroid)),
+                    "STCentroid"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.Envelope)),
+                    "STEnvelope"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.InteriorPoint)),
+                    "STPointOnSurface"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.IsSimple)),
+                    "STIsSimple"
+                },
+                {
+                    typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.PointOnSurface)),
+                    "STPointOnSurface"
+                }
+            };
 
-        private static readonly MemberInfo _ogcGeometryType = typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.OgcGeometryType));
-        private static readonly MemberInfo _srid = typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.SRID));
+        private static readonly MemberInfo _ogcGeometryType =
+            typeof(Geometry).GetRequiredRuntimeProperty(nameof(Geometry.OgcGeometryType));
+        private static readonly MemberInfo _srid = typeof(Geometry).GetRequiredRuntimeProperty(
+            nameof(Geometry.SRID)
+        );
 
         private readonly IRelationalTypeMappingSource _typeMappingSource;
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -57,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerGeometryMemberTranslator(
             IRelationalTypeMappingSource typeMappingSource,
-            ISqlExpressionFactory sqlExpressionFactory)
+            ISqlExpressionFactory sqlExpressionFactory
+        )
         {
             _typeMappingSource = typeMappingSource;
             _sqlExpressionFactory = sqlExpressionFactory;
@@ -73,20 +118,33 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             if (typeof(Geometry).IsAssignableFrom(member.DeclaringType))
             {
-                Check.DebugAssert(instance!.TypeMapping != null, "Instance must have typeMapping assigned.");
+                Check.DebugAssert(
+                    instance!.TypeMapping != null,
+                    "Instance must have typeMapping assigned."
+                );
                 var storeType = instance.TypeMapping.StoreType;
-                var isGeography = string.Equals(storeType, "geography", StringComparison.OrdinalIgnoreCase);
+                var isGeography = string.Equals(
+                    storeType,
+                    "geography",
+                    StringComparison.OrdinalIgnoreCase
+                );
 
-                if (_memberToFunctionName.TryGetValue(member, out var functionName)
-                    || (!isGeography && _geometryMemberToFunctionName.TryGetValue(member, out functionName)))
+                if (
+                    _memberToFunctionName.TryGetValue(member, out var functionName)
+                    || (
+                        !isGeography
+                        && _geometryMemberToFunctionName.TryGetValue(member, out functionName)
+                    )
+                )
                 {
                     var resultTypeMapping = typeof(Geometry).IsAssignableFrom(returnType)
-                        ? _typeMappingSource.FindMapping(returnType, storeType)
-                        : _typeMappingSource.FindMapping(returnType);
+                      ? _typeMappingSource.FindMapping(returnType, storeType)
+                      : _typeMappingSource.FindMapping(returnType);
 
                     return _sqlExpressionFactory.Function(
                         instance,
@@ -96,40 +154,64 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         instancePropagatesNullability: true,
                         argumentsPropagateNullability: Array.Empty<bool>(),
                         returnType,
-                        resultTypeMapping);
+                        resultTypeMapping
+                    );
                 }
 
                 if (Equals(member, _ogcGeometryType))
                 {
                     var whenClauses = new List<CaseWhenClause>
                     {
-                        new(_sqlExpressionFactory.Constant("Point"), _sqlExpressionFactory.Constant(OgcGeometryType.Point)),
-                        new(_sqlExpressionFactory.Constant("LineString"), _sqlExpressionFactory.Constant(OgcGeometryType.LineString)),
-                        new(_sqlExpressionFactory.Constant("Polygon"), _sqlExpressionFactory.Constant(OgcGeometryType.Polygon)),
-                        new(_sqlExpressionFactory.Constant("MultiPoint"), _sqlExpressionFactory.Constant(OgcGeometryType.MultiPoint)),
+                        new(
+                            _sqlExpressionFactory.Constant("Point"),
+                            _sqlExpressionFactory.Constant(OgcGeometryType.Point)
+                        ),
+                        new(
+                            _sqlExpressionFactory.Constant("LineString"),
+                            _sqlExpressionFactory.Constant(OgcGeometryType.LineString)
+                        ),
+                        new(
+                            _sqlExpressionFactory.Constant("Polygon"),
+                            _sqlExpressionFactory.Constant(OgcGeometryType.Polygon)
+                        ),
+                        new(
+                            _sqlExpressionFactory.Constant("MultiPoint"),
+                            _sqlExpressionFactory.Constant(OgcGeometryType.MultiPoint)
+                        ),
                         new(
                             _sqlExpressionFactory.Constant("MultiLineString"),
-                            _sqlExpressionFactory.Constant(OgcGeometryType.MultiLineString)),
-                        new(_sqlExpressionFactory.Constant("MultiPolygon"), _sqlExpressionFactory.Constant(OgcGeometryType.MultiPolygon)),
+                            _sqlExpressionFactory.Constant(OgcGeometryType.MultiLineString)
+                        ),
+                        new(
+                            _sqlExpressionFactory.Constant("MultiPolygon"),
+                            _sqlExpressionFactory.Constant(OgcGeometryType.MultiPolygon)
+                        ),
                         new(
                             _sqlExpressionFactory.Constant("GeometryCollection"),
-                            _sqlExpressionFactory.Constant(OgcGeometryType.GeometryCollection)),
+                            _sqlExpressionFactory.Constant(OgcGeometryType.GeometryCollection)
+                        ),
                         new(
                             _sqlExpressionFactory.Constant("CircularString"),
-                            _sqlExpressionFactory.Constant(OgcGeometryType.CircularString)),
+                            _sqlExpressionFactory.Constant(OgcGeometryType.CircularString)
+                        ),
                         new(
                             _sqlExpressionFactory.Constant("CompoundCurve"),
-                            _sqlExpressionFactory.Constant(OgcGeometryType.CompoundCurve)),
+                            _sqlExpressionFactory.Constant(OgcGeometryType.CompoundCurve)
+                        ),
                         new(
                             _sqlExpressionFactory.Constant("CurvePolygon"),
-                            _sqlExpressionFactory.Constant(OgcGeometryType.CurvePolygon))
+                            _sqlExpressionFactory.Constant(OgcGeometryType.CurvePolygon)
+                        )
                     };
 
                     if (isGeography)
                     {
                         whenClauses.Add(
                             new CaseWhenClause(
-                                _sqlExpressionFactory.Constant("FullGlobe"), _sqlExpressionFactory.Constant((OgcGeometryType)126)));
+                                _sqlExpressionFactory.Constant("FullGlobe"),
+                                _sqlExpressionFactory.Constant((OgcGeometryType)126)
+                            )
+                        );
                     }
 
                     return _sqlExpressionFactory.Case(
@@ -140,9 +222,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             nullable: true,
                             instancePropagatesNullability: true,
                             argumentsPropagateNullability: Array.Empty<bool>(),
-                            typeof(string)),
+                            typeof(string)
+                        ),
                         whenClauses,
-                        null);
+                        null
+                    );
                 }
 
                 if (Equals(member, _srid))
@@ -152,7 +236,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         "STSrid",
                         nullable: true,
                         instancePropagatesNullability: true,
-                        returnType);
+                        returnType
+                    );
                 }
             }
 

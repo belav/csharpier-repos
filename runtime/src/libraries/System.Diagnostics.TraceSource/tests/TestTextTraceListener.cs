@@ -23,7 +23,10 @@ namespace System.Diagnostics.TraceSourceTests
         /// <summary>
         /// Gets the number of times Write() was called for test assertions.
         /// </summary>
-        public int WriteCount { get { return _writeCount; } }
+        public int WriteCount
+        {
+            get { return _writeCount; }
+        }
 
         public string Output
         {
@@ -39,13 +42,15 @@ namespace System.Diagnostics.TraceSourceTests
         public override void Write(string message)
         {
             _writeCount++;
-            if (NeedIndent) WriteIndent();
+            if (NeedIndent)
+                WriteIndent();
             _writer.Write(message);
         }
 
         public override void WriteLine(string message)
         {
-            if (NeedIndent) WriteIndent();
+            if (NeedIndent)
+                WriteIndent();
             Write(message);
             _writer.WriteLine();
             NeedIndent = true;

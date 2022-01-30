@@ -21,11 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
         public virtual DatabaseOperation OldDatabase { get; } = new CreateDatabaseOperation();
 
         /// <inheritdoc />
-        IMutableAnnotatable IAlterMigrationOperation.OldAnnotations
-            => OldDatabase;
+        IMutableAnnotatable IAlterMigrationOperation.OldAnnotations => OldDatabase;
 
-        private sealed class CreateDatabaseOperation : DatabaseOperation
-        {
-        }
+        private sealed class CreateDatabaseOperation : DatabaseOperation { }
     }
 }

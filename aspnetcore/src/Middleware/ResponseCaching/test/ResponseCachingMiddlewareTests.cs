@@ -21,7 +21,11 @@ public class ResponseCachingMiddlewareTests
     {
         var cache = new TestResponseCache();
         var sink = new TestSink();
-        var middleware = TestUtils.CreateTestMiddleware(testSink: sink, cache: cache, keyProvider: new TestResponseCachingKeyProvider());
+        var middleware = TestUtils.CreateTestMiddleware(
+            testSink: sink,
+            cache: cache,
+            keyProvider: new TestResponseCachingKeyProvider()
+        );
         var context = TestUtils.CreateTestContext();
         context.HttpContext.Request.Headers.CacheControl = new CacheControlHeaderValue()
         {
@@ -30,9 +34,7 @@ public class ResponseCachingMiddlewareTests
 
         Assert.True(await middleware.TryServeFromCacheAsync(context));
         Assert.Equal(StatusCodes.Status504GatewayTimeout, context.HttpContext.Response.StatusCode);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.GatewayTimeoutServed);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.GatewayTimeoutServed);
     }
 
     [Fact]
@@ -40,14 +42,16 @@ public class ResponseCachingMiddlewareTests
     {
         var cache = new TestResponseCache();
         var sink = new TestSink();
-        var middleware = TestUtils.CreateTestMiddleware(testSink: sink, cache: cache, keyProvider: new TestResponseCachingKeyProvider("BaseKey"));
+        var middleware = TestUtils.CreateTestMiddleware(
+            testSink: sink,
+            cache: cache,
+            keyProvider: new TestResponseCachingKeyProvider("BaseKey")
+        );
         var context = TestUtils.CreateTestContext();
 
         Assert.False(await middleware.TryServeFromCacheAsync(context));
         Assert.Equal(1, cache.GetCount);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.NoResponseServed);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.NoResponseServed);
     }
 
     [Fact]
@@ -55,7 +59,11 @@ public class ResponseCachingMiddlewareTests
     {
         var cache = new TestResponseCache();
         var sink = new TestSink();
-        var middleware = TestUtils.CreateTestMiddleware(testSink: sink, cache: cache, keyProvider: new TestResponseCachingKeyProvider("BaseKey"));
+        var middleware = TestUtils.CreateTestMiddleware(
+            testSink: sink,
+            cache: cache,
+            keyProvider: new TestResponseCachingKeyProvider("BaseKey")
+        );
         var context = TestUtils.CreateTestContext();
 
         cache.Set(
@@ -65,13 +73,12 @@ public class ResponseCachingMiddlewareTests
                 Headers = new HeaderDictionary(),
                 Body = new CachedResponseBody(new List<byte[]>(0), 0)
             },
-            TimeSpan.Zero);
+            TimeSpan.Zero
+        );
 
         Assert.True(await middleware.TryServeFromCacheAsync(context));
         Assert.Equal(1, cache.GetCount);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.CachedResponseServed);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.CachedResponseServed);
     }
 
     [Fact]
@@ -79,7 +86,11 @@ public class ResponseCachingMiddlewareTests
     {
         var cache = new TestResponseCache();
         var sink = new TestSink();
-        var middleware = TestUtils.CreateTestMiddleware(testSink: sink, cache: cache, keyProvider: new TestResponseCachingKeyProvider("BaseKey"));
+        var middleware = TestUtils.CreateTestMiddleware(
+            testSink: sink,
+            cache: cache,
+            keyProvider: new TestResponseCachingKeyProvider("BaseKey")
+        );
         var context = TestUtils.CreateTestContext();
 
         context.HttpContext.Response.Headers["MyHeader"] = "OldValue";
@@ -87,20 +98,16 @@ public class ResponseCachingMiddlewareTests
             "BaseKey",
             new CachedResponse()
             {
-                Headers = new HeaderDictionary()
-                {
-                        { "MyHeader", "NewValue" }
-                },
+                Headers = new HeaderDictionary() { { "MyHeader", "NewValue" } },
                 Body = new CachedResponseBody(new List<byte[]>(0), 0)
             },
-            TimeSpan.Zero);
+            TimeSpan.Zero
+        );
 
         Assert.True(await middleware.TryServeFromCacheAsync(context));
         Assert.Equal("NewValue", context.HttpContext.Response.Headers["MyHeader"]);
         Assert.Equal(1, cache.GetCount);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.CachedResponseServed);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.CachedResponseServed);
     }
 
     [Fact]
@@ -108,19 +115,18 @@ public class ResponseCachingMiddlewareTests
     {
         var cache = new TestResponseCache();
         var sink = new TestSink();
-        var middleware = TestUtils.CreateTestMiddleware(testSink: sink, cache: cache, keyProvider: new TestResponseCachingKeyProvider("BaseKey", "VaryKey"));
+        var middleware = TestUtils.CreateTestMiddleware(
+            testSink: sink,
+            cache: cache,
+            keyProvider: new TestResponseCachingKeyProvider("BaseKey", "VaryKey")
+        );
         var context = TestUtils.CreateTestContext();
 
-        cache.Set(
-            "BaseKey",
-            new CachedVaryByRules(),
-            TimeSpan.Zero);
+        cache.Set("BaseKey", new CachedVaryByRules(), TimeSpan.Zero);
 
         Assert.False(await middleware.TryServeFromCacheAsync(context));
         Assert.Equal(2, cache.GetCount);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.NoResponseServed);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.NoResponseServed);
     }
 
     [Fact]
@@ -128,13 +134,17 @@ public class ResponseCachingMiddlewareTests
     {
         var cache = new TestResponseCache();
         var sink = new TestSink();
-        var middleware = TestUtils.CreateTestMiddleware(testSink: sink, cache: cache, keyProvider: new TestResponseCachingKeyProvider("BaseKey", new[] { "VaryKey", "VaryKey2" }));
+        var middleware = TestUtils.CreateTestMiddleware(
+            testSink: sink,
+            cache: cache,
+            keyProvider: new TestResponseCachingKeyProvider(
+                "BaseKey",
+                new[] { "VaryKey", "VaryKey2" }
+            )
+        );
         var context = TestUtils.CreateTestContext();
 
-        cache.Set(
-            "BaseKey",
-            new CachedVaryByRules(),
-            TimeSpan.Zero);
+        cache.Set("BaseKey", new CachedVaryByRules(), TimeSpan.Zero);
         cache.Set(
             "BaseKeyVaryKey2",
             new CachedResponse()
@@ -142,13 +152,12 @@ public class ResponseCachingMiddlewareTests
                 Headers = new HeaderDictionary(),
                 Body = new CachedResponseBody(new List<byte[]>(0), 0)
             },
-            TimeSpan.Zero);
+            TimeSpan.Zero
+        );
 
         Assert.True(await middleware.TryServeFromCacheAsync(context));
         Assert.Equal(3, cache.GetCount);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.CachedResponseServed);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.CachedResponseServed);
     }
 
     [Fact]
@@ -156,23 +165,23 @@ public class ResponseCachingMiddlewareTests
     {
         var cache = new TestResponseCache();
         var sink = new TestSink();
-        var middleware = TestUtils.CreateTestMiddleware(testSink: sink, cache: cache, keyProvider: new TestResponseCachingKeyProvider("BaseKey"));
+        var middleware = TestUtils.CreateTestMiddleware(
+            testSink: sink,
+            cache: cache,
+            keyProvider: new TestResponseCachingKeyProvider("BaseKey")
+        );
         var context = TestUtils.CreateTestContext();
         context.HttpContext.Request.Headers.IfNoneMatch = "*";
 
         cache.Set(
             "BaseKey",
-            new CachedResponse()
-            {
-                Body = new CachedResponseBody(new List<byte[]>(0), 0)
-            },
-            TimeSpan.Zero);
+            new CachedResponse() { Body = new CachedResponseBody(new List<byte[]>(0), 0) },
+            TimeSpan.Zero
+        );
 
         Assert.True(await middleware.TryServeFromCacheAsync(context));
         Assert.Equal(1, cache.GetCount);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.NotModifiedServed);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.NotModifiedServed);
     }
 
     [Fact]
@@ -197,7 +206,9 @@ public class ResponseCachingMiddlewareTests
         context.HttpContext.Request.Headers.IfModifiedSince = HeaderUtilities.FormatDate(utcNow);
 
         // Verify modifications in the past succeeds
-        context.CachedResponseHeaders[HeaderNames.Date] = HeaderUtilities.FormatDate(utcNow - TimeSpan.FromSeconds(10));
+        context.CachedResponseHeaders[HeaderNames.Date] = HeaderUtilities.FormatDate(
+            utcNow - TimeSpan.FromSeconds(10)
+        );
         Assert.True(ResponseCachingMiddleware.ContentIsNotModified(context));
         Assert.Single(sink.Writes);
 
@@ -207,14 +218,17 @@ public class ResponseCachingMiddlewareTests
         Assert.Equal(2, sink.Writes.Count);
 
         // Verify modifications in the future fails
-        context.CachedResponseHeaders[HeaderNames.Date] = HeaderUtilities.FormatDate(utcNow + TimeSpan.FromSeconds(10));
+        context.CachedResponseHeaders[HeaderNames.Date] = HeaderUtilities.FormatDate(
+            utcNow + TimeSpan.FromSeconds(10)
+        );
         Assert.False(ResponseCachingMiddleware.ContentIsNotModified(context));
 
         // Verify logging
         TestUtils.AssertLoggedMessages(
             sink.Writes,
             LoggedMessage.NotModifiedIfModifiedSinceSatisfied,
-            LoggedMessage.NotModifiedIfModifiedSinceSatisfied);
+            LoggedMessage.NotModifiedIfModifiedSinceSatisfied
+        );
     }
 
     [Fact]
@@ -228,27 +242,40 @@ public class ResponseCachingMiddlewareTests
         context.HttpContext.Request.Headers.IfModifiedSince = HeaderUtilities.FormatDate(utcNow);
 
         // Verify modifications in the past succeeds
-        context.CachedResponseHeaders[HeaderNames.Date] = HeaderUtilities.FormatDate(utcNow + TimeSpan.FromSeconds(10));
-        context.CachedResponseHeaders[HeaderNames.LastModified] = HeaderUtilities.FormatDate(utcNow - TimeSpan.FromSeconds(10));
+        context.CachedResponseHeaders[HeaderNames.Date] = HeaderUtilities.FormatDate(
+            utcNow + TimeSpan.FromSeconds(10)
+        );
+        context.CachedResponseHeaders[HeaderNames.LastModified] = HeaderUtilities.FormatDate(
+            utcNow - TimeSpan.FromSeconds(10)
+        );
         Assert.True(ResponseCachingMiddleware.ContentIsNotModified(context));
         Assert.Single(sink.Writes);
 
         // Verify modifications at present
-        context.CachedResponseHeaders[HeaderNames.Date] = HeaderUtilities.FormatDate(utcNow + TimeSpan.FromSeconds(10));
-        context.CachedResponseHeaders[HeaderNames.LastModified] = HeaderUtilities.FormatDate(utcNow);
+        context.CachedResponseHeaders[HeaderNames.Date] = HeaderUtilities.FormatDate(
+            utcNow + TimeSpan.FromSeconds(10)
+        );
+        context.CachedResponseHeaders[HeaderNames.LastModified] = HeaderUtilities.FormatDate(
+            utcNow
+        );
         Assert.True(ResponseCachingMiddleware.ContentIsNotModified(context));
         Assert.Equal(2, sink.Writes.Count);
 
         // Verify modifications in the future fails
-        context.CachedResponseHeaders[HeaderNames.Date] = HeaderUtilities.FormatDate(utcNow - TimeSpan.FromSeconds(10));
-        context.CachedResponseHeaders[HeaderNames.LastModified] = HeaderUtilities.FormatDate(utcNow + TimeSpan.FromSeconds(10));
+        context.CachedResponseHeaders[HeaderNames.Date] = HeaderUtilities.FormatDate(
+            utcNow - TimeSpan.FromSeconds(10)
+        );
+        context.CachedResponseHeaders[HeaderNames.LastModified] = HeaderUtilities.FormatDate(
+            utcNow + TimeSpan.FromSeconds(10)
+        );
         Assert.False(ResponseCachingMiddleware.ContentIsNotModified(context));
 
         // Verify logging
         TestUtils.AssertLoggedMessages(
             sink.Writes,
             LoggedMessage.NotModifiedIfModifiedSinceSatisfied,
-            LoggedMessage.NotModifiedIfModifiedSinceSatisfied);
+            LoggedMessage.NotModifiedIfModifiedSinceSatisfied
+        );
     }
 
     [Fact]
@@ -261,13 +288,13 @@ public class ResponseCachingMiddlewareTests
 
         // This would fail the IfModifiedSince checks
         context.HttpContext.Request.Headers.IfModifiedSince = HeaderUtilities.FormatDate(utcNow);
-        context.CachedResponseHeaders[HeaderNames.LastModified] = HeaderUtilities.FormatDate(utcNow + TimeSpan.FromSeconds(10));
+        context.CachedResponseHeaders[HeaderNames.LastModified] = HeaderUtilities.FormatDate(
+            utcNow + TimeSpan.FromSeconds(10)
+        );
 
         context.HttpContext.Request.Headers.IfNoneMatch = EntityTagHeaderValue.Any.ToString();
         Assert.True(ResponseCachingMiddleware.ContentIsNotModified(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.NotModifiedIfNoneMatchStar);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.NotModifiedIfNoneMatchStar);
     }
 
     [Fact]
@@ -280,7 +307,9 @@ public class ResponseCachingMiddlewareTests
 
         // This would pass the IfModifiedSince checks
         context.HttpContext.Request.Headers.IfModifiedSince = HeaderUtilities.FormatDate(utcNow);
-        context.CachedResponseHeaders[HeaderNames.LastModified] = HeaderUtilities.FormatDate(utcNow - TimeSpan.FromSeconds(10));
+        context.CachedResponseHeaders[HeaderNames.LastModified] = HeaderUtilities.FormatDate(
+            utcNow - TimeSpan.FromSeconds(10)
+        );
 
         context.HttpContext.Request.Headers.IfNoneMatch = "\"E1\"";
         Assert.False(ResponseCachingMiddleware.ContentIsNotModified(context));
@@ -304,18 +333,24 @@ public class ResponseCachingMiddlewareTests
         get
         {
             return new TheoryData<EntityTagHeaderValue, EntityTagHeaderValue>
+            {
+                { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"") },
+                { new EntityTagHeaderValue("\"tag\"", true), new EntityTagHeaderValue("\"tag\"") },
+                { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"", true) },
                 {
-                    { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"") },
-                    { new EntityTagHeaderValue("\"tag\"", true), new EntityTagHeaderValue("\"tag\"") },
-                    { new EntityTagHeaderValue("\"tag\""), new EntityTagHeaderValue("\"tag\"", true) },
-                    { new EntityTagHeaderValue("\"tag\"", true), new EntityTagHeaderValue("\"tag\"", true) }
-                };
+                    new EntityTagHeaderValue("\"tag\"", true),
+                    new EntityTagHeaderValue("\"tag\"", true)
+                }
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(EquivalentWeakETags))]
-    public void ContentIsNotModified_IfNoneMatch_ExplicitWithMatch_True(EntityTagHeaderValue responseETag, EntityTagHeaderValue requestETag)
+    public void ContentIsNotModified_IfNoneMatch_ExplicitWithMatch_True(
+        EntityTagHeaderValue responseETag,
+        EntityTagHeaderValue requestETag
+    )
     {
         var sink = new TestSink();
         var context = TestUtils.CreateTestContext(sink);
@@ -324,9 +359,7 @@ public class ResponseCachingMiddlewareTests
         context.HttpContext.Request.Headers.IfNoneMatch = requestETag.ToString();
 
         Assert.True(ResponseCachingMiddleware.ContentIsNotModified(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.NotModifiedIfNoneMatchMatched);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.NotModifiedIfNoneMatchMatched);
     }
 
     [Fact]
@@ -349,25 +382,23 @@ public class ResponseCachingMiddlewareTests
         var context = TestUtils.CreateTestContext(sink);
         context.CachedResponseHeaders = new HeaderDictionary();
         context.CachedResponseHeaders[HeaderNames.ETag] = "\"E2\"";
-        context.HttpContext.Request.Headers.IfNoneMatch = new string[] { "\"E0\", \"E1\"", "\"E1\", \"E2\"" };
+        context.HttpContext.Request.Headers.IfNoneMatch = new string[]
+        {
+            "\"E0\", \"E1\"",
+            "\"E1\", \"E2\""
+        };
 
         Assert.True(ResponseCachingMiddleware.ContentIsNotModified(context));
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.NotModifiedIfNoneMatchMatched);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.NotModifiedIfNoneMatchMatched);
     }
 
     [Fact]
     public void StartResponsegAsync_IfAllowResponseCaptureIsTrue_SetsResponseTime()
     {
-        var clock = new TestClock
-        {
-            UtcNow = DateTimeOffset.UtcNow
-        };
-        var middleware = TestUtils.CreateTestMiddleware(options: new ResponseCachingOptions
-        {
-            SystemClock = clock
-        });
+        var clock = new TestClock { UtcNow = DateTimeOffset.UtcNow };
+        var middleware = TestUtils.CreateTestMiddleware(
+            options: new ResponseCachingOptions { SystemClock = clock }
+        );
         var context = TestUtils.CreateTestContext();
         context.ResponseTime = null;
 
@@ -379,14 +410,10 @@ public class ResponseCachingMiddlewareTests
     [Fact]
     public void StartResponseAsync_IfAllowResponseCaptureIsTrue_SetsResponseTimeOnlyOnce()
     {
-        var clock = new TestClock
-        {
-            UtcNow = DateTimeOffset.UtcNow
-        };
-        var middleware = TestUtils.CreateTestMiddleware(options: new ResponseCachingOptions
-        {
-            SystemClock = clock
-        });
+        var clock = new TestClock { UtcNow = DateTimeOffset.UtcNow };
+        var middleware = TestUtils.CreateTestMiddleware(
+            options: new ResponseCachingOptions { SystemClock = clock }
+        );
         var context = TestUtils.CreateTestContext();
         var initialTime = clock.UtcNow;
         context.ResponseTime = null;
@@ -405,7 +432,10 @@ public class ResponseCachingMiddlewareTests
     public void FinalizeCacheHeadersAsync_UpdateShouldCacheResponse_IfResponseCacheable()
     {
         var sink = new TestSink();
-        var middleware = TestUtils.CreateTestMiddleware(testSink: sink, policyProvider: new ResponseCachingPolicyProvider());
+        var middleware = TestUtils.CreateTestMiddleware(
+            testSink: sink,
+            policyProvider: new ResponseCachingPolicyProvider()
+        );
         var context = TestUtils.CreateTestContext();
 
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
@@ -425,7 +455,10 @@ public class ResponseCachingMiddlewareTests
     public void FinalizeCacheHeadersAsync_DoNotUpdateShouldCacheResponse_IfResponseIsNotCacheable()
     {
         var sink = new TestSink();
-        var middleware = TestUtils.CreateTestMiddleware(testSink: sink, policyProvider: new ResponseCachingPolicyProvider());
+        var middleware = TestUtils.CreateTestMiddleware(
+            testSink: sink,
+            policyProvider: new ResponseCachingPolicyProvider()
+        );
         var context = TestUtils.CreateTestContext();
 
         middleware.ShimResponseStream(context);
@@ -452,19 +485,18 @@ public class ResponseCachingMiddlewareTests
     [Fact]
     public void FinalizeCacheHeadersAsync_ResponseValidity_UseExpiryIfAvailable()
     {
-        var clock = new TestClock
-        {
-            UtcNow = DateTimeOffset.MinValue
-        };
+        var clock = new TestClock { UtcNow = DateTimeOffset.MinValue };
         var sink = new TestSink();
-        var middleware = TestUtils.CreateTestMiddleware(testSink: sink, options: new ResponseCachingOptions
-        {
-            SystemClock = clock
-        });
+        var middleware = TestUtils.CreateTestMiddleware(
+            testSink: sink,
+            options: new ResponseCachingOptions { SystemClock = clock }
+        );
         var context = TestUtils.CreateTestContext();
 
         context.ResponseTime = clock.UtcNow;
-        context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(clock.UtcNow + TimeSpan.FromSeconds(11));
+        context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(
+            clock.UtcNow + TimeSpan.FromSeconds(11)
+        );
 
         middleware.FinalizeCacheHeaders(context);
 
@@ -475,15 +507,12 @@ public class ResponseCachingMiddlewareTests
     [Fact]
     public void FinalizeCacheHeadersAsync_ResponseValidity_UseMaxAgeIfAvailable()
     {
-        var clock = new TestClock
-        {
-            UtcNow = DateTimeOffset.UtcNow
-        };
+        var clock = new TestClock { UtcNow = DateTimeOffset.UtcNow };
         var sink = new TestSink();
-        var middleware = TestUtils.CreateTestMiddleware(testSink: sink, options: new ResponseCachingOptions
-        {
-            SystemClock = clock
-        });
+        var middleware = TestUtils.CreateTestMiddleware(
+            testSink: sink,
+            options: new ResponseCachingOptions { SystemClock = clock }
+        );
         var context = TestUtils.CreateTestContext();
 
         context.ResponseTime = clock.UtcNow;
@@ -492,7 +521,9 @@ public class ResponseCachingMiddlewareTests
             MaxAge = TimeSpan.FromSeconds(12)
         }.ToString();
 
-        context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(clock.UtcNow + TimeSpan.FromSeconds(11));
+        context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(
+            clock.UtcNow + TimeSpan.FromSeconds(11)
+        );
 
         middleware.FinalizeCacheHeaders(context);
 
@@ -503,15 +534,12 @@ public class ResponseCachingMiddlewareTests
     [Fact]
     public void FinalizeCacheHeadersAsync_ResponseValidity_UseSharedMaxAgeIfAvailable()
     {
-        var clock = new TestClock
-        {
-            UtcNow = DateTimeOffset.UtcNow
-        };
+        var clock = new TestClock { UtcNow = DateTimeOffset.UtcNow };
         var sink = new TestSink();
-        var middleware = TestUtils.CreateTestMiddleware(testSink: sink, options: new ResponseCachingOptions
-        {
-            SystemClock = clock
-        });
+        var middleware = TestUtils.CreateTestMiddleware(
+            testSink: sink,
+            options: new ResponseCachingOptions { SystemClock = clock }
+        );
         var context = TestUtils.CreateTestContext();
 
         context.ResponseTime = clock.UtcNow;
@@ -520,7 +548,9 @@ public class ResponseCachingMiddlewareTests
             MaxAge = TimeSpan.FromSeconds(12),
             SharedMaxAge = TimeSpan.FromSeconds(13)
         }.ToString();
-        context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(clock.UtcNow + TimeSpan.FromSeconds(11));
+        context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(
+            clock.UtcNow + TimeSpan.FromSeconds(11)
+        );
 
         middleware.FinalizeCacheHeaders(context);
 
@@ -536,11 +566,15 @@ public class ResponseCachingMiddlewareTests
         var middleware = TestUtils.CreateTestMiddleware(testSink: sink, cache: cache);
         var context = TestUtils.CreateTestContext();
 
-        context.HttpContext.Response.Headers.Vary = new StringValues(new[] { "headerA", "HEADERB", "HEADERc" });
-        context.HttpContext.Features.Set<IResponseCachingFeature>(new ResponseCachingFeature()
-        {
-            VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
-        });
+        context.HttpContext.Response.Headers.Vary = new StringValues(
+            new[] { "headerA", "HEADERB", "HEADERc" }
+        );
+        context.HttpContext.Features.Set<IResponseCachingFeature>(
+            new ResponseCachingFeature()
+            {
+                VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
+            }
+        );
         var cachedVaryByRules = new CachedVaryByRules()
         {
             Headers = new StringValues(new[] { "HeaderA", "HeaderB" }),
@@ -552,9 +586,7 @@ public class ResponseCachingMiddlewareTests
 
         Assert.Equal(1, cache.SetCount);
         Assert.NotSame(cachedVaryByRules, context.CachedVaryByRules);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.VaryByRulesUpdated);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.VaryByRulesUpdated);
     }
 
     [Fact]
@@ -565,11 +597,15 @@ public class ResponseCachingMiddlewareTests
         var middleware = TestUtils.CreateTestMiddleware(testSink: sink, cache: cache);
         var context = TestUtils.CreateTestContext();
 
-        context.HttpContext.Response.Headers.Vary = new StringValues(new[] { "headerA", "HEADERB" });
-        context.HttpContext.Features.Set<IResponseCachingFeature>(new ResponseCachingFeature()
-        {
-            VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
-        });
+        context.HttpContext.Response.Headers.Vary = new StringValues(
+            new[] { "headerA", "HEADERB" }
+        );
+        context.HttpContext.Features.Set<IResponseCachingFeature>(
+            new ResponseCachingFeature()
+            {
+                VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
+            }
+        );
         var cachedVaryByRules = new CachedVaryByRules()
         {
             VaryByKeyPrefix = FastGuid.NewGuid().IdString,
@@ -583,9 +619,7 @@ public class ResponseCachingMiddlewareTests
         // An update to the cache is always made but the entry should be the same
         Assert.Equal(1, cache.SetCount);
         Assert.Same(cachedVaryByRules, context.CachedVaryByRules);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.VaryByRulesUpdated);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.VaryByRulesUpdated);
     }
 
     public static TheoryData<StringValues> NullOrEmptyVaryRules
@@ -593,22 +627,24 @@ public class ResponseCachingMiddlewareTests
         get
         {
             return new TheoryData<StringValues>
-                {
-                    default(StringValues),
-                    StringValues.Empty,
-                    new StringValues((string)null),
-                    new StringValues(string.Empty),
-                    new StringValues((string[])null),
-                    new StringValues(new string[0]),
-                    new StringValues(new string[] { null }),
-                    new StringValues(new string[] { string.Empty })
-                };
+            {
+                default(StringValues),
+                StringValues.Empty,
+                new StringValues((string)null),
+                new StringValues(string.Empty),
+                new StringValues((string[])null),
+                new StringValues(new string[0]),
+                new StringValues(new string[] { null }),
+                new StringValues(new string[] { string.Empty })
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(NullOrEmptyVaryRules))]
-    public void FinalizeCacheHeadersAsync_UpdateCachedVaryByRules_NullOrEmptyRules(StringValues vary)
+    public void FinalizeCacheHeadersAsync_UpdateCachedVaryByRules_NullOrEmptyRules(
+        StringValues vary
+    )
     {
         var cache = new TestResponseCache();
         var sink = new TestSink();
@@ -616,10 +652,9 @@ public class ResponseCachingMiddlewareTests
         var context = TestUtils.CreateTestContext();
 
         context.HttpContext.Response.Headers.Vary = vary;
-        context.HttpContext.Features.Set<IResponseCachingFeature>(new ResponseCachingFeature()
-        {
-            VaryByQueryKeys = vary
-        });
+        context.HttpContext.Features.Set<IResponseCachingFeature>(
+            new ResponseCachingFeature() { VaryByQueryKeys = vary }
+        );
 
         middleware.FinalizeCacheHeaders(context);
 
@@ -691,10 +726,11 @@ public class ResponseCachingMiddlewareTests
 
         middleware.FinalizeCacheHeaders(context);
 
-        Assert.Equal(new StringValues(new[] { "HEADERA", "HEADERB" }), context.CachedVaryByRules.Headers);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.VaryByRulesUpdated);
+        Assert.Equal(
+            new StringValues(new[] { "HEADERA", "HEADERB" }),
+            context.CachedVaryByRules.Headers
+        );
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.VaryByRulesUpdated);
     }
 
     [Fact]
@@ -718,9 +754,7 @@ public class ResponseCachingMiddlewareTests
         middleware.FinalizeCacheBody(context);
 
         Assert.Equal(1, cache.SetCount);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ResponseCached);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ResponseCached);
     }
 
     [Theory]
@@ -749,13 +783,16 @@ public class ResponseCachingMiddlewareTests
         Assert.Equal(0, cache.SetCount);
         TestUtils.AssertLoggedMessages(
             sink.Writes,
-            LoggedMessage.ResponseContentLengthMismatchNotCached);
+            LoggedMessage.ResponseContentLengthMismatchNotCached
+        );
     }
 
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public async Task FinalizeCacheBody_RequestHead_Cache_IfContentLengthPresent_AndBodyAbsentOrOfSameLength(bool includeBody)
+    public async Task FinalizeCacheBody_RequestHead_Cache_IfContentLengthPresent_AndBodyAbsentOrOfSameLength(
+        bool includeBody
+    )
     {
         var cache = new TestResponseCache();
         var sink = new TestSink();
@@ -780,9 +817,7 @@ public class ResponseCachingMiddlewareTests
         middleware.FinalizeCacheBody(context);
 
         Assert.Equal(1, cache.SetCount);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ResponseCached);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ResponseCached);
     }
 
     [Fact]
@@ -798,19 +833,14 @@ public class ResponseCachingMiddlewareTests
 
         await context.HttpContext.Response.WriteAsync(new string('0', 10));
 
-        context.CachedResponse = new CachedResponse()
-        {
-            Headers = new HeaderDictionary()
-        };
+        context.CachedResponse = new CachedResponse() { Headers = new HeaderDictionary() };
         context.BaseKey = "BaseKey";
         context.CachedResponseValidFor = TimeSpan.FromSeconds(10);
 
         middleware.FinalizeCacheBody(context);
 
         Assert.Equal(1, cache.SetCount);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ResponseCached);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ResponseCached);
     }
 
     [Fact]
@@ -828,9 +858,7 @@ public class ResponseCachingMiddlewareTests
         middleware.FinalizeCacheBody(context);
 
         Assert.Equal(0, cache.SetCount);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ResponseNotCached);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ResponseNotCached);
     }
 
     [Fact]
@@ -850,9 +878,7 @@ public class ResponseCachingMiddlewareTests
         middleware.FinalizeCacheBody(context);
 
         Assert.Equal(0, cache.SetCount);
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ResponseNotCached);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ResponseNotCached);
     }
 
     [Fact]
@@ -862,10 +888,10 @@ public class ResponseCachingMiddlewareTests
         var middleware = TestUtils.CreateTestMiddleware(
             testSink: sink,
             keyProvider: new TestResponseCachingKeyProvider("BaseKey"),
-            cache: new MemoryResponseCache(new MemoryCache(new MemoryCacheOptions
-            {
-                SizeLimit = 100
-            })));
+            cache: new MemoryResponseCache(
+                new MemoryCache(new MemoryCacheOptions { SizeLimit = 100 })
+            )
+        );
         var context = TestUtils.CreateTestContext();
 
         context.ShouldCacheResponse = true;
@@ -879,9 +905,7 @@ public class ResponseCachingMiddlewareTests
         middleware.FinalizeCacheBody(context);
 
         // The response cached message will be logged but the adding of the entry will no-op
-        TestUtils.AssertLoggedMessages(
-            sink.Writes,
-            LoggedMessage.ResponseCached);
+        TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ResponseCached);
 
         // The entry cannot be retrieved
         Assert.False(await middleware.TryServeFromCacheAsync(context));
@@ -896,7 +920,9 @@ public class ResponseCachingMiddlewareTests
         ResponseCachingMiddleware.AddResponseCachingFeature(httpContext);
 
         // Should throw
-        Assert.ThrowsAny<InvalidOperationException>(() => ResponseCachingMiddleware.AddResponseCachingFeature(httpContext));
+        Assert.ThrowsAny<InvalidOperationException>(
+            () => ResponseCachingMiddleware.AddResponseCachingFeature(httpContext)
+        );
     }
 
     private class FakeResponseFeature : HttpResponseFeature
@@ -914,20 +940,27 @@ public class ResponseCachingMiddlewareTests
     [InlineData(true, false, true)]
     [InlineData(true, true, false)]
     [InlineData(true, true, true)]
-    public async Task Invoke_AddsResponseCachingFeature_Always(bool allowResponseCaching, bool allowCacheLookup, bool allowCacheStorage)
+    public async Task Invoke_AddsResponseCachingFeature_Always(
+        bool allowResponseCaching,
+        bool allowCacheLookup,
+        bool allowCacheStorage
+    )
     {
         var responseCachingFeatureAdded = false;
-        var middleware = TestUtils.CreateTestMiddleware(next: httpContext =>
-        {
-            responseCachingFeatureAdded = httpContext.Features.Get<IResponseCachingFeature>() != null;
-            return Task.CompletedTask;
-        },
-        policyProvider: new TestResponseCachingPolicyProvider
-        {
-            AttemptResponseCachingValue = allowResponseCaching,
-            AllowCacheLookupValue = allowCacheLookup,
-            AllowCacheStorageValue = allowCacheStorage
-        });
+        var middleware = TestUtils.CreateTestMiddleware(
+            next: httpContext =>
+            {
+                responseCachingFeatureAdded =
+                    httpContext.Features.Get<IResponseCachingFeature>() != null;
+                return Task.CompletedTask;
+            },
+            policyProvider: new TestResponseCachingPolicyProvider
+            {
+                AttemptResponseCachingValue = allowResponseCaching,
+                AllowCacheLookupValue = allowCacheLookup,
+                AllowCacheStorageValue = allowCacheStorage
+            }
+        );
 
         var context = new DefaultHttpContext();
         context.Features.Set<IHttpResponseFeature>(new FakeResponseFeature());
@@ -942,7 +975,9 @@ public class ResponseCachingMiddlewareTests
         var uppercaseStrings = new StringValues(new[] { "STRINGA", "STRINGB" });
         var lowercaseStrings = new StringValues(new[] { "stringA", "stringB" });
 
-        var normalizedStrings = ResponseCachingMiddleware.GetOrderCasingNormalizedStringValues(lowercaseStrings);
+        var normalizedStrings = ResponseCachingMiddleware.GetOrderCasingNormalizedStringValues(
+            lowercaseStrings
+        );
 
         Assert.Equal(uppercaseStrings, normalizedStrings);
     }
@@ -953,7 +988,9 @@ public class ResponseCachingMiddlewareTests
         var orderedStrings = new StringValues(new[] { "STRINGA", "STRINGB" });
         var reverseOrderStrings = new StringValues(new[] { "STRINGB", "STRINGA" });
 
-        var normalizedStrings = ResponseCachingMiddleware.GetOrderCasingNormalizedStringValues(reverseOrderStrings);
+        var normalizedStrings = ResponseCachingMiddleware.GetOrderCasingNormalizedStringValues(
+            reverseOrderStrings
+        );
 
         Assert.Equal(orderedStrings, normalizedStrings);
     }
@@ -963,7 +1000,9 @@ public class ResponseCachingMiddlewareTests
     {
         var originalStrings = new StringValues(new[] { "STRINGA, STRINGB" });
 
-        var normalizedStrings = ResponseCachingMiddleware.GetOrderCasingNormalizedStringValues(originalStrings);
+        var normalizedStrings = ResponseCachingMiddleware.GetOrderCasingNormalizedStringValues(
+            originalStrings
+        );
 
         Assert.Equal(originalStrings, normalizedStrings);
     }

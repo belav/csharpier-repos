@@ -18,12 +18,19 @@ namespace System.Threading
             {
                 get
                 {
-                    if (!Interop.Kernel32.GetSystemTimes(out long idleTime, out long kernelTime, out long userTime))
+                    if (
+                        !Interop.Kernel32.GetSystemTimes(
+                            out long idleTime,
+                            out long kernelTime,
+                            out long userTime
+                        )
+                    )
                     {
                         return 0;
                     }
 
-                    long cpuTotalTime = ((long)userTime - _userTime) + ((long)kernelTime - _kernelTime);
+                    long cpuTotalTime =
+                        ((long)userTime - _userTime) + ((long)kernelTime - _kernelTime);
                     long cpuBusyTime = cpuTotalTime - ((long)idleTime - _idleTime);
 
                     _kernelTime = (long)kernelTime;

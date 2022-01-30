@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure;
 /// which requires at least one instance of the specified claim type, and, if allowed values are specified,
 /// the claim value must be any of the allowed values.
 /// </summary>
-public class ClaimsAuthorizationRequirement : AuthorizationHandler<ClaimsAuthorizationRequirement>, IAuthorizationRequirement
+public class ClaimsAuthorizationRequirement
+    : AuthorizationHandler<ClaimsAuthorizationRequirement>,
+      IAuthorizationRequirement
 {
     /// <summary>
     /// Creates a new instance of <see cref="ClaimsAuthorizationRequirement"/>.
@@ -49,19 +51,35 @@ public class ClaimsAuthorizationRequirement : AuthorizationHandler<ClaimsAuthori
     /// </summary>
     /// <param name="context">The authorization context.</param>
     /// <param name="requirement">The requirement to evaluate.</param>
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ClaimsAuthorizationRequirement requirement)
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        ClaimsAuthorizationRequirement requirement
+    )
     {
         if (context.User != null)
         {
             var found = false;
             if (requirement.AllowedValues == null || !requirement.AllowedValues.Any())
             {
-                found = context.User.Claims.Any(c => string.Equals(c.Type, requirement.ClaimType, StringComparison.OrdinalIgnoreCase));
+                found = context.User.Claims.Any(
+                    c =>
+                        string.Equals(
+                            c.Type,
+                            requirement.ClaimType,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                );
             }
             else
             {
-                found = context.User.Claims.Any(c => string.Equals(c.Type, requirement.ClaimType, StringComparison.OrdinalIgnoreCase)
-                                                    && requirement.AllowedValues.Contains(c.Value, StringComparer.Ordinal));
+                found = context.User.Claims.Any(
+                    c =>
+                        string.Equals(
+                            c.Type,
+                            requirement.ClaimType,
+                            StringComparison.OrdinalIgnoreCase
+                        ) && requirement.AllowedValues.Contains(c.Value, StringComparer.Ordinal)
+                );
             }
             if (found)
             {
@@ -74,9 +92,10 @@ public class ClaimsAuthorizationRequirement : AuthorizationHandler<ClaimsAuthori
     /// <inheritdoc />
     public override string ToString()
     {
-        var value = (AllowedValues == null || !AllowedValues.Any())
-            ? string.Empty
-            : $" and Claim.Value is one of the following values: ({string.Join("|", AllowedValues)})";
+        var value =
+            (AllowedValues == null || !AllowedValues.Any())
+                ? string.Empty
+                : $" and Claim.Value is one of the following values: ({string.Join("|", AllowedValues)})";
 
         return $"{nameof(ClaimsAuthorizationRequirement)}:Claim.Type={ClaimType}{value}";
     }

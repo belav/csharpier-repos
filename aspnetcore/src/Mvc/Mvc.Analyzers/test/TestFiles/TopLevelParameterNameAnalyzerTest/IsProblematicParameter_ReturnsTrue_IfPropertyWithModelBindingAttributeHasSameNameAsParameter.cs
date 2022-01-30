@@ -8,6 +8,7 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFi
         public string Different { get; set; }
 
         public void ActionMethod(
-            IsProblematicParameter_ReturnsTrue_IfPropertyWithModelBindingAttributeHasSameNameAsParameter model) { }
+            IsProblematicParameter_ReturnsTrue_IfPropertyWithModelBindingAttributeHasSameNameAsParameter model
+        ) { }
     }
 }

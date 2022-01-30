@@ -26,8 +26,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FixMultipleOccurrencesService(IAsynchronousOperationListenerProvider listenerProvider)
-            => listenerProvider.GetListener(FeatureAttribute.LightBulb);
+        public FixMultipleOccurrencesService(
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) => listenerProvider.GetListener(FeatureAttribute.LightBulb);
 
         public Solution GetFix(
             ImmutableDictionary<Document, ImmutableArray<Diagnostic>> diagnosticsToFix,
@@ -37,14 +38,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             string equivalenceKey,
             string waitDialogTitle,
             string waitDialogMessage,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var fixMultipleState = FixAllState.Create(
-                fixAllProvider, diagnosticsToFix, fixProvider, equivalenceKey);
+                fixAllProvider,
+                diagnosticsToFix,
+                fixProvider,
+                equivalenceKey
+            );
 
             return GetFixedSolution(
-                fixMultipleState, workspace, waitDialogTitle,
-                waitDialogMessage, cancellationToken);
+                fixMultipleState,
+                workspace,
+                waitDialogTitle,
+                waitDialogMessage,
+                cancellationToken
+            );
         }
 
         public Solution GetFix(
@@ -55,14 +65,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             string equivalenceKey,
             string waitDialogTitle,
             string waitDialogMessage,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var fixMultipleState = FixAllState.Create(
-                fixAllProvider, diagnosticsToFix, fixProvider, equivalenceKey);
+                fixAllProvider,
+                diagnosticsToFix,
+                fixProvider,
+                equivalenceKey
+            );
 
             return GetFixedSolution(
-                fixMultipleState, workspace, waitDialogTitle,
-                waitDialogMessage, cancellationToken);
+                fixMultipleState,
+                workspace,
+                waitDialogTitle,
+                waitDialogMessage,
+                cancellationToken
+            );
         }
 
         private static Solution GetFixedSolution(
@@ -70,19 +89,30 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             Workspace workspace,
             string title,
             string waitDialogMessage,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var fixMultipleCodeAction = new FixMultipleCodeAction(
-                fixAllState, title, waitDialogMessage);
+                fixAllState,
+                title,
+                waitDialogMessage
+            );
 
             Solution newSolution = null;
             var extensionManager = workspace.Services.GetService<IExtensionManager>();
-            extensionManager.PerformAction(fixAllState.FixAllProvider, () =>
-            {
-                // We don't need to post process changes here as the inner code action created for Fix multiple code fix already executes.
-                newSolution = fixMultipleCodeAction.GetChangedSolutionInternalAsync(
-                    postProcessChanges: false, cancellationToken: cancellationToken).WaitAndGetResult(cancellationToken);
-            });
+            extensionManager.PerformAction(
+                fixAllState.FixAllProvider,
+                () =>
+                {
+                    // We don't need to post process changes here as the inner code action created for Fix multiple code fix already executes.
+                    newSolution = fixMultipleCodeAction
+                        .GetChangedSolutionInternalAsync(
+                            postProcessChanges: false,
+                            cancellationToken: cancellationToken
+                        )
+                        .WaitAndGetResult(cancellationToken);
+                }
+            );
 
             return newSolution;
         }

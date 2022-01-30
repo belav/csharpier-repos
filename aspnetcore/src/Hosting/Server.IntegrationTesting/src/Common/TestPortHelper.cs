@@ -22,7 +22,9 @@ public static class TestPortHelper
     // is bound once and never released.
     public static int GetNextPort()
     {
-        using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+        using (
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+        )
         {
             socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
             return ((IPEndPoint)socket.LocalEndPoint).Port;
@@ -35,7 +37,9 @@ public static class TestPortHelper
     public static int GetNextSSLPort()
     {
         var next = 44300;
-        using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+        using (
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+        )
         {
             while (true)
             {

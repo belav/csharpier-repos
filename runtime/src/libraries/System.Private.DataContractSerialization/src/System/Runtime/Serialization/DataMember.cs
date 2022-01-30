@@ -23,102 +23,72 @@ namespace System.Runtime.Serialization
 
         internal MemberInfo MemberInfo
         {
-            get
-            { return _helper.MemberInfo; }
+            get { return _helper.MemberInfo; }
         }
 
         public string Name
         {
-            get
-            { return _helper.Name; }
-
-            set
-            { _helper.Name = value; }
+            get { return _helper.Name; }
+            set { _helper.Name = value; }
         }
 
         public int Order
         {
-            get
-            { return _helper.Order; }
-
-            set
-            { _helper.Order = value; }
+            get { return _helper.Order; }
+            set { _helper.Order = value; }
         }
 
         public bool IsRequired
         {
-            get
-            { return _helper.IsRequired; }
-
-            set
-            { _helper.IsRequired = value; }
+            get { return _helper.IsRequired; }
+            set { _helper.IsRequired = value; }
         }
 
         public bool EmitDefaultValue
         {
-            get
-            { return _helper.EmitDefaultValue; }
-
-            set
-            { _helper.EmitDefaultValue = value; }
+            get { return _helper.EmitDefaultValue; }
+            set { _helper.EmitDefaultValue = value; }
         }
 
         public bool IsNullable
         {
-            get
-            { return _helper.IsNullable; }
-
-            set
-            { _helper.IsNullable = value; }
+            get { return _helper.IsNullable; }
+            set { _helper.IsNullable = value; }
         }
 
         public bool IsGetOnlyCollection
         {
-            get
-            { return _helper.IsGetOnlyCollection; }
-
-            set
-            { _helper.IsGetOnlyCollection = value; }
+            get { return _helper.IsGetOnlyCollection; }
+            set { _helper.IsGetOnlyCollection = value; }
         }
 
         internal Type MemberType
         {
-            get
-            { return _helper.MemberType; }
+            get { return _helper.MemberType; }
         }
 
         internal DataContract MemberTypeContract
         {
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-            get
-            { return _helper.MemberTypeContract; }
+            get { return _helper.MemberTypeContract; }
         }
 
         internal PrimitiveDataContract? MemberPrimitiveContract
         {
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-            get
-            {
-                return _helper.MemberPrimitiveContract;
-            }
+            get { return _helper.MemberPrimitiveContract; }
         }
 
         public bool HasConflictingNameAndType
         {
-            get
-            { return _helper.HasConflictingNameAndType; }
-
-            set
-            { _helper.HasConflictingNameAndType = value; }
+            get { return _helper.HasConflictingNameAndType; }
+            set { _helper.HasConflictingNameAndType = value; }
         }
 
         internal DataMember? ConflictingMember
         {
-            get
-            { return _helper.ConflictingMember; }
-
-            set
-            { _helper.ConflictingMember = value; }
+            get { return _helper.ConflictingMember; }
+            set { _helper.ConflictingMember = value; }
         }
 
         private FastInvokerBuilder.Getter? _getter;
@@ -238,7 +208,12 @@ namespace System.Runtime.Serialization
                     {
                         if (this.IsGetOnlyCollection)
                         {
-                            _memberTypeContract = DataContract.GetGetOnlyCollectionDataContract(DataContract.GetId(MemberType.TypeHandle), MemberType.TypeHandle, MemberType, SerializationMode.SharedContract);
+                            _memberTypeContract = DataContract.GetGetOnlyCollectionDataContract(
+                                DataContract.GetId(MemberType.TypeHandle),
+                                MemberType.TypeHandle,
+                                MemberType,
+                                SerializationMode.SharedContract
+                            );
                         }
                         else
                         {
@@ -248,10 +223,7 @@ namespace System.Runtime.Serialization
 
                     return _memberTypeContract;
                 }
-                set
-                {
-                    _memberTypeContract = value;
-                }
+                set { _memberTypeContract = value; }
             }
 
             internal bool HasConflictingNameAndType
@@ -275,7 +247,9 @@ namespace System.Runtime.Serialization
                 {
                     if (_memberPrimitiveContract == PrimitiveDataContract.NullContract)
                     {
-                        _memberPrimitiveContract = PrimitiveDataContract.GetPrimitiveDataContract(MemberType);
+                        _memberPrimitiveContract = PrimitiveDataContract.GetPrimitiveDataContract(
+                            MemberType
+                        );
                     }
 
                     return _memberPrimitiveContract;
@@ -302,7 +276,8 @@ namespace System.Runtime.Serialization
                 MethodInfo? getMethod = property.GetMethod;
                 if (getMethod != null)
                 {
-                    return DataContract.MethodRequiresMemberAccess(getMethod) || !DataContract.IsTypeVisible(property.PropertyType);
+                    return DataContract.MethodRequiresMemberAccess(getMethod)
+                        || !DataContract.IsTypeVisible(property.PropertyType);
                 }
             }
             return false;
@@ -327,7 +302,8 @@ namespace System.Runtime.Serialization
                 MethodInfo? setMethod = property.SetMethod;
                 if (setMethod != null)
                 {
-                    return DataContract.MethodRequiresMemberAccess(setMethod) || !DataContract.IsTypeVisible(property.PropertyType);
+                    return DataContract.MethodRequiresMemberAccess(setMethod)
+                        || !DataContract.IsTypeVisible(property.PropertyType);
                 }
             }
             return false;

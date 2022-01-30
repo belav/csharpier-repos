@@ -18,10 +18,7 @@ namespace Microsoft.Extensions.Options.Tests
         public void CanSupportDefaultName()
         {
             var services = new ServiceCollection();
-            var dic = new Dictionary<string, string>
-            {
-                { "Message", "!" },
-            };
+            var dic = new Dictionary<string, string> { { "Message", "!" }, };
             var config = new ConfigurationBuilder().AddInMemoryCollection(dic).Build();
 
             var builder = services.AddOptions<FakeOptions>();
@@ -41,10 +38,7 @@ namespace Microsoft.Extensions.Options.Tests
         public void CanSupportNamedOptions()
         {
             var services = new ServiceCollection();
-            var dic = new Dictionary<string, string>
-            {
-                { "Message", "!" },
-            };
+            var dic = new Dictionary<string, string> { { "Message", "!" }, };
             var config = new ConfigurationBuilder().AddInMemoryCollection(dic).Build();
 
             var builder1 = services.AddOptions<FakeOptions>("1");
@@ -83,7 +77,6 @@ namespace Microsoft.Extensions.Options.Tests
             Assert.Equal("ABCDE", factory.Create("1").Message);
         }
 
-
         public class SomeService
         {
             public SomeService(string stuff) => Stuff = stuff;
@@ -114,8 +107,12 @@ namespace Microsoft.Extensions.Options.Tests
         {
             var someService = new SomeService("Something");
             var services = new ServiceCollection().AddOptions().AddSingleton(someService);
-            services.AddOptions<FakeOptions>().Configure<SomeService>((o, s) => o.Message = s.Stuff);
-            services.AddOptions<FakeOptions>("named").Configure<SomeService>((o, s) => o.Message = "named " + s.Stuff);
+            services
+                .AddOptions<FakeOptions>()
+                .Configure<SomeService>((o, s) => o.Message = s.Stuff);
+            services
+                .AddOptions<FakeOptions>("named")
+                .Configure<SomeService>((o, s) => o.Message = "named " + s.Stuff);
 
             var sp = services.BuildServiceProvider();
             var factory = sp.GetRequiredService<IOptionsFactory<FakeOptions>>();
@@ -136,11 +133,52 @@ namespace Microsoft.Extensions.Options.Tests
                 .AddSingleton<Counter>()
                 .AddTransient<SomeCounterConsumer>();
             services.AddOptions<FakeOptions>().Configure(o => o.Message = "none");
-            services.AddOptions<FakeOptions>("1dep").Configure<SomeCounterConsumer>((o, s) => o.Message = s.Current + "");
-            services.AddOptions<FakeOptions>("2dep").Configure<SomeCounterConsumer, SomeCounterConsumer>((o, s, s2) => o.Message = s.Current + " " + s2.Current);
-            services.AddOptions<FakeOptions>("3dep").Configure<SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer>((o, s, s2, s3) => o.Message = s.Current + " " + s2.Current + " " + s3.Current);
-            services.AddOptions<FakeOptions>("4dep").Configure<SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer>((o, s, s2, s3, s4) => o.Message = s.Current + " " + s2.Current + " " + s3.Current + " " + s4.Current);
-            services.AddOptions<FakeOptions>("5dep").Configure<SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer>((o, s, s2, s3, s4, s5) => o.Message = s.Current + " " + s2.Current + " " + s3.Current + " " + s4.Current + " " + s5.Current);
+            services
+                .AddOptions<FakeOptions>("1dep")
+                .Configure<SomeCounterConsumer>((o, s) => o.Message = s.Current + "");
+            services
+                .AddOptions<FakeOptions>("2dep")
+                .Configure<SomeCounterConsumer, SomeCounterConsumer>(
+                    (o, s, s2) => o.Message = s.Current + " " + s2.Current
+                );
+            services
+                .AddOptions<FakeOptions>("3dep")
+                .Configure<SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer>(
+                    (o, s, s2, s3) => o.Message = s.Current + " " + s2.Current + " " + s3.Current
+                );
+            services
+                .AddOptions<FakeOptions>("4dep")
+                .Configure<
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer
+                >(
+                    (o, s, s2, s3, s4) =>
+                        o.Message =
+                            s.Current + " " + s2.Current + " " + s3.Current + " " + s4.Current
+                );
+            services
+                .AddOptions<FakeOptions>("5dep")
+                .Configure<
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer
+                >(
+                    (o, s, s2, s3, s4, s5) =>
+                        o.Message =
+                            s.Current
+                            + " "
+                            + s2.Current
+                            + " "
+                            + s3.Current
+                            + " "
+                            + s4.Current
+                            + " "
+                            + s5.Current
+                );
 
             var sp = services.BuildServiceProvider();
             var factory = sp.GetRequiredService<IOptionsFactory<FakeOptions>>();
@@ -156,7 +194,10 @@ namespace Microsoft.Extensions.Options.Tests
             Assert.Equal("0", factory.Create("1dep").Message);
 
             // New factory will reexecute
-            Assert.Equal("15", sp.GetRequiredService<IOptionsFactory<FakeOptions>>().Create("1dep").Message);
+            Assert.Equal(
+                "15",
+                sp.GetRequiredService<IOptionsFactory<FakeOptions>>().Create("1dep").Message
+            );
         }
 
         [Fact]
@@ -167,11 +208,52 @@ namespace Microsoft.Extensions.Options.Tests
                 .AddTransient<SomeCounterConsumer>();
             services.ConfigureAll<FakeOptions>(o => o.Message = "Override");
             services.AddOptions<FakeOptions>().PostConfigure(o => o.Message = "none");
-            services.AddOptions<FakeOptions>("1dep").PostConfigure<SomeCounterConsumer>((o, s) => o.Message = s.Current + "");
-            services.AddOptions<FakeOptions>("2dep").PostConfigure<SomeCounterConsumer, SomeCounterConsumer>((o, s, s2) => o.Message = s.Current + " " + s2.Current);
-            services.AddOptions<FakeOptions>("3dep").PostConfigure<SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer>((o, s, s2, s3) => o.Message = s.Current + " " + s2.Current + " " + s3.Current);
-            services.AddOptions<FakeOptions>("4dep").PostConfigure<SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer>((o, s, s2, s3, s4) => o.Message = s.Current + " " + s2.Current + " " + s3.Current + " " + s4.Current);
-            services.AddOptions<FakeOptions>("5dep").PostConfigure<SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer>((o, s, s2, s3, s4, s5) => o.Message = s.Current + " " + s2.Current + " " + s3.Current + " " + s4.Current + " " + s5.Current);
+            services
+                .AddOptions<FakeOptions>("1dep")
+                .PostConfigure<SomeCounterConsumer>((o, s) => o.Message = s.Current + "");
+            services
+                .AddOptions<FakeOptions>("2dep")
+                .PostConfigure<SomeCounterConsumer, SomeCounterConsumer>(
+                    (o, s, s2) => o.Message = s.Current + " " + s2.Current
+                );
+            services
+                .AddOptions<FakeOptions>("3dep")
+                .PostConfigure<SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer>(
+                    (o, s, s2, s3) => o.Message = s.Current + " " + s2.Current + " " + s3.Current
+                );
+            services
+                .AddOptions<FakeOptions>("4dep")
+                .PostConfigure<
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer
+                >(
+                    (o, s, s2, s3, s4) =>
+                        o.Message =
+                            s.Current + " " + s2.Current + " " + s3.Current + " " + s4.Current
+                );
+            services
+                .AddOptions<FakeOptions>("5dep")
+                .PostConfigure<
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer
+                >(
+                    (o, s, s2, s3, s4, s5) =>
+                        o.Message =
+                            s.Current
+                            + " "
+                            + s2.Current
+                            + " "
+                            + s3.Current
+                            + " "
+                            + s4.Current
+                            + " "
+                            + s5.Current
+                );
 
             var sp = services.BuildServiceProvider();
             var factory = sp.GetRequiredService<IOptionsFactory<FakeOptions>>();
@@ -187,7 +269,10 @@ namespace Microsoft.Extensions.Options.Tests
             Assert.Equal("0", factory.Create("1dep").Message);
 
             // New factory will reexecute
-            Assert.Equal("15", sp.GetRequiredService<IOptionsFactory<FakeOptions>>().Create("1dep").Message);
+            Assert.Equal(
+                "15",
+                sp.GetRequiredService<IOptionsFactory<FakeOptions>>().Create("1dep").Message
+            );
         }
 
         [Fact]
@@ -195,7 +280,11 @@ namespace Microsoft.Extensions.Options.Tests
         {
             var someService = new SomeService("Something");
             var services = new ServiceCollection().AddSingleton(someService);
-            services.AddOptions<FakeOptions>().Configure<IServiceProvider>((o, s) => o.Message = s.GetRequiredService<SomeService>().Stuff);
+            services
+                .AddOptions<FakeOptions>()
+                .Configure<IServiceProvider>(
+                    (o, s) => o.Message = s.GetRequiredService<SomeService>().Stuff
+                );
 
             var sp = services.BuildServiceProvider();
             var factory = sp.GetRequiredService<IOptionsFactory<FakeOptions>>();
@@ -208,12 +297,14 @@ namespace Microsoft.Extensions.Options.Tests
         [InlineData("InternalSetter")]
         public void CanBindToNonPublicProperties(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" }, };
             var services = new ServiceCollection();
-            services.AddOptions<ComplexOptions>().Bind(new ConfigurationBuilder().AddInMemoryCollection(dic).Build(), o => o.BindNonPublicProperties = true);
+            services
+                .AddOptions<ComplexOptions>()
+                .Bind(
+                    new ConfigurationBuilder().AddInMemoryCollection(dic).Build(),
+                    o => o.BindNonPublicProperties = true
+                );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptions<ComplexOptions>>().Value;
             Assert.Equal("stuff", options.GetType().GetProperty(property).GetValue(options));
@@ -225,12 +316,14 @@ namespace Microsoft.Extensions.Options.Tests
         [InlineData("InternalSetter")]
         public void CanNamedBindToNonPublicProperties(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" }, };
             var services = new ServiceCollection();
-            services.AddOptions<ComplexOptions>("named").Bind(new ConfigurationBuilder().AddInMemoryCollection(dic).Build(), o => o.BindNonPublicProperties = true);
+            services
+                .AddOptions<ComplexOptions>("named")
+                .Bind(
+                    new ConfigurationBuilder().AddInMemoryCollection(dic).Build(),
+                    o => o.BindNonPublicProperties = true
+                );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("named");
             Assert.Equal("stuff", options.GetType().GetProperty(property).GetValue(options));
@@ -240,29 +333,37 @@ namespace Microsoft.Extensions.Options.Tests
         public void CanValidateOptionsWithCustomError()
         {
             var services = new ServiceCollection();
-            services.AddOptions<ComplexOptions>()
+            services
+                .AddOptions<ComplexOptions>()
                 .Configure(o => o.Boolean = false)
                 .Validate(o => o.Boolean, "Boolean must be true.");
-            services.AddOptions<ComplexOptions>("named")
+            services
+                .AddOptions<ComplexOptions>("named")
                 .Configure(o => o.Boolean = true)
                 .Validate(o => !o.Boolean, "named Boolean must be false.");
             var sp = services.BuildServiceProvider();
-            var error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptions<ComplexOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<ComplexOptions>>().Value
+            );
             ValidateFailure<ComplexOptions>(error, Options.DefaultName, 1, "Boolean must be true.");
-            error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("named"));
+            error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("named")
+            );
             ValidateFailure<ComplexOptions>(error, "named", 1, "named Boolean must be false.");
         }
-
 
         [Fact]
         public void CanValidateOptionsWithDefaultError()
         {
             var services = new ServiceCollection();
-            services.AddOptions<ComplexOptions>()
+            services
+                .AddOptions<ComplexOptions>()
                 .Configure(o => o.Boolean = false)
                 .Validate(o => o.Boolean);
             var sp = services.BuildServiceProvider();
-            var error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptions<ComplexOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<ComplexOptions>>().Value
+            );
             ValidateFailure<ComplexOptions>(error);
         }
 
@@ -270,38 +371,60 @@ namespace Microsoft.Extensions.Options.Tests
         public void CanValidateOptionsWithMultipleDefaultErrors()
         {
             var services = new ServiceCollection();
-            services.AddOptions<ComplexOptions>()
-                .Configure(o =>
-                {
-                    o.Boolean = false;
-                    o.Integer = 11;
-                })
+            services
+                .AddOptions<ComplexOptions>()
+                .Configure(
+                    o =>
+                    {
+                        o.Boolean = false;
+                        o.Integer = 11;
+                    }
+                )
                 .Validate(o => o.Boolean)
                 .Validate(o => o.Integer > 12);
 
             var sp = services.BuildServiceProvider();
-            var error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptions<ComplexOptions>>().Value);
-            ValidateFailure<ComplexOptions>(error, Options.DefaultName, 2, "A validation error has occurred.");
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<ComplexOptions>>().Value
+            );
+            ValidateFailure<ComplexOptions>(
+                error,
+                Options.DefaultName,
+                2,
+                "A validation error has occurred."
+            );
         }
 
         [Fact]
         public void CanValidateOptionsWithMixedOverloads()
         {
             var services = new ServiceCollection();
-            services.AddOptions<ComplexOptions>()
-                .Configure(o =>
-                {
-                    o.Boolean = false;
-                    o.Integer = 11;
-                    o.Virtual = "wut";
-                })
+            services
+                .AddOptions<ComplexOptions>()
+                .Configure(
+                    o =>
+                    {
+                        o.Boolean = false;
+                        o.Integer = 11;
+                        o.Virtual = "wut";
+                    }
+                )
                 .Validate(o => o.Boolean)
                 .Validate(o => o.Virtual == null, "Virtual")
                 .Validate(o => o.Integer > 12, "Integer");
 
             var sp = services.BuildServiceProvider();
-            var error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptions<ComplexOptions>>().Value);
-            ValidateFailure<ComplexOptions>(error, Options.DefaultName, 3, "A validation error has occurred.", "Virtual", "Integer");
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<ComplexOptions>>().Value
+            );
+            ValidateFailure<ComplexOptions>(
+                error,
+                Options.DefaultName,
+                3,
+                "A validation error has occurred.",
+                "Virtual",
+                "Integer"
+            );
         }
 
         public class BadValidator : IValidateOptions<FakeOptions>
@@ -318,12 +441,17 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection().AddOptions();
             services.AddSingleton<IValidateOptions<FakeOptions>, BadValidator>();
             var sp = services.BuildServiceProvider();
-            var error = Assert.Throws<NotImplementedException>(() => sp.GetRequiredService<IOptions<FakeOptions>>().Value);
+            var error = Assert.Throws<NotImplementedException>(
+                () => sp.GetRequiredService<IOptions<FakeOptions>>().Value
+            );
         }
 
-        private class MultiOptionValidator : IValidateOptions<ComplexOptions>, IValidateOptions<FakeOptions>
+        private class MultiOptionValidator
+            : IValidateOptions<ComplexOptions>,
+              IValidateOptions<FakeOptions>
         {
             private readonly string _allowed;
+
             public MultiOptionValidator(string allowed) => _allowed = allowed;
 
             public ValidateOptionsResult Validate(string name, ComplexOptions options)
@@ -349,20 +477,22 @@ namespace Microsoft.Extensions.Options.Tests
         public void CanValidateMultipleOptionsWithOneValidator()
         {
             var services = new ServiceCollection();
-            services.AddOptions<ComplexOptions>()
-                .Configure(o => o.Virtual = "wut");
-            services.AddOptions<FakeOptions>("fake")
-                .Configure(o => o.Message = "real");
+            services.AddOptions<ComplexOptions>().Configure(o => o.Virtual = "wut");
+            services.AddOptions<FakeOptions>("fake").Configure(o => o.Message = "real");
 
             var validator = new MultiOptionValidator("real");
             services.AddSingleton<IValidateOptions<ComplexOptions>>(validator);
             services.AddSingleton<IValidateOptions<FakeOptions>>(validator);
 
             var sp = services.BuildServiceProvider();
-            var error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptions<ComplexOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<ComplexOptions>>().Value
+            );
             ValidateFailure<ComplexOptions>(error, Options.DefaultName, 1, "Virtual != real");
 
-            error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptions<FakeOptions>>().Value);
+            error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<FakeOptions>>().Value
+            );
             ValidateFailure<FakeOptions>(error, Options.DefaultName, 1, "Message != real");
 
             var fake = sp.GetRequiredService<IOptionsMonitor<FakeOptions>>().Get("fake");
@@ -372,6 +502,7 @@ namespace Microsoft.Extensions.Options.Tests
         private class DependencyValidator : IValidateOptions<ComplexOptions>
         {
             private readonly string _allowed;
+
             public DependencyValidator(IOptions<FakeOptions> _fake)
             {
                 _allowed = _fake.Value.Message;
@@ -387,7 +518,12 @@ namespace Microsoft.Extensions.Options.Tests
             }
         }
 
-        private void ValidateFailure<TOptions>(OptionsValidationException e, string name = "", int count = 1, params string[] errorsToMatch)
+        private void ValidateFailure<TOptions>(
+            OptionsValidationException e,
+            string name = "",
+            int count = 1,
+            params string[] errorsToMatch
+        )
         {
             Assert.Equal(typeof(TOptions), e.OptionsType);
             Assert.Equal(name, e.OptionsName);
@@ -399,7 +535,10 @@ namespace Microsoft.Extensions.Options.Tests
             // Check for the error in any of the failures
             foreach (var error in errorsToMatch)
             {
-                Assert.True(e.Failures.FirstOrDefault(f => f.Contains(error)) != null, "Did not find: " + error);
+                Assert.True(
+                    e.Failures.FirstOrDefault(f => f.Contains(error)) != null,
+                    "Did not find: " + error
+                );
             }
             Assert.Equal(e.Message, String.Join("; ", e.Failures));
         }
@@ -408,25 +547,29 @@ namespace Microsoft.Extensions.Options.Tests
         public void CanValidateOptionsThatDependOnOptions()
         {
             var services = new ServiceCollection();
-            services.AddOptions<ComplexOptions>()
-                .Configure(o => o.Virtual = "default");
-            services.AddOptions<ComplexOptions>("yes")
-                .Configure(o => o.Virtual = "target");
-            services.AddOptions<ComplexOptions>("no")
-                .Configure(o => o.Virtual = "no");
-            services.AddOptions<FakeOptions>()
-                .Configure(o => o.Message = "target");
+            services.AddOptions<ComplexOptions>().Configure(o => o.Virtual = "default");
+            services.AddOptions<ComplexOptions>("yes").Configure(o => o.Virtual = "target");
+            services.AddOptions<ComplexOptions>("no").Configure(o => o.Virtual = "no");
+            services.AddOptions<FakeOptions>().Configure(o => o.Message = "target");
             services.AddSingleton<IValidateOptions<ComplexOptions>, DependencyValidator>();
 
             var sp = services.BuildServiceProvider();
 
-            var error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptions<ComplexOptions>>().Value);
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<ComplexOptions>>().Value
+            );
             ValidateFailure<ComplexOptions>(error, Options.DefaultName, 1, "Virtual != target");
 
-            error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get(Options.DefaultName));
+            error = Assert.Throws<OptionsValidationException>(
+                () =>
+                    sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>()
+                        .Get(Options.DefaultName)
+            );
             ValidateFailure<ComplexOptions>(error, Options.DefaultName, 1, "Virtual != target");
 
-            error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("no"));
+            error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("no")
+            );
             ValidateFailure<ComplexOptions>(error, "no", 1, "Virtual != target");
 
             var op = sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("yes");
@@ -440,18 +583,55 @@ namespace Microsoft.Extensions.Options.Tests
                 .AddSingleton<Counter>()
                 .AddTransient<SomeCounterConsumer>();
             services.AddOptions<FakeOptions>().Configure(o => o.Message = "default");
-            services.AddOptions<FakeOptions>("0dep").Configure(o => o.Message = "Foo")
+            services
+                .AddOptions<FakeOptions>("0dep")
+                .Configure(o => o.Message = "Foo")
                 .Validate(o => o.Message == "Foo");
-            services.AddOptions<FakeOptions>("1dep").Configure(o => o.Message = "Foo 0")
-                .Validate<SomeCounterConsumer>((o, s1) => o.Message == $"Foo {s1.Current}", "Custom failure message");
-            services.AddOptions<FakeOptions>("2dep").Configure(o => o.Message = "Foo 1 2")
-                .Validate<SomeCounterConsumer, SomeCounterConsumer>((o, s1, s2) => o.Message == $"Foo {s1.Current} {s2.Current}");
-            services.AddOptions<FakeOptions>("3dep").Configure(o => o.Message = "Foo 3 4 5")
-                .Validate<SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer>((o, s1, s2, s3) => o.Message == $"Foo {s1.Current} {s2.Current} {s3.Current}");
-            services.AddOptions<FakeOptions>("4dep").Configure(o => o.Message = "Foo 6 7 8 9")
-                .Validate<SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer>((o, s1, s2, s3, s4) => o.Message == $"Foo {s1.Current} {s2.Current} {s3.Current} {s4.Current}");
-            services.AddOptions<FakeOptions>("5dep").Configure(o => o.Message = "Foo 10 11 12 13 14")
-                .Validate<SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer>((o, s1, s2, s3, s4, s5) => o.Message == $"Foo {s1.Current} {s2.Current} {s3.Current} {s4.Current} {s5.Current}");
+            services
+                .AddOptions<FakeOptions>("1dep")
+                .Configure(o => o.Message = "Foo 0")
+                .Validate<SomeCounterConsumer>(
+                    (o, s1) => o.Message == $"Foo {s1.Current}",
+                    "Custom failure message"
+                );
+            services
+                .AddOptions<FakeOptions>("2dep")
+                .Configure(o => o.Message = "Foo 1 2")
+                .Validate<SomeCounterConsumer, SomeCounterConsumer>(
+                    (o, s1, s2) => o.Message == $"Foo {s1.Current} {s2.Current}"
+                );
+            services
+                .AddOptions<FakeOptions>("3dep")
+                .Configure(o => o.Message = "Foo 3 4 5")
+                .Validate<SomeCounterConsumer, SomeCounterConsumer, SomeCounterConsumer>(
+                    (o, s1, s2, s3) => o.Message == $"Foo {s1.Current} {s2.Current} {s3.Current}"
+                );
+            services
+                .AddOptions<FakeOptions>("4dep")
+                .Configure(o => o.Message = "Foo 6 7 8 9")
+                .Validate<
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer
+                >(
+                    (o, s1, s2, s3, s4) =>
+                        o.Message == $"Foo {s1.Current} {s2.Current} {s3.Current} {s4.Current}"
+                );
+            services
+                .AddOptions<FakeOptions>("5dep")
+                .Configure(o => o.Message = "Foo 10 11 12 13 14")
+                .Validate<
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer,
+                    SomeCounterConsumer
+                >(
+                    (o, s1, s2, s3, s4, s5) =>
+                        o.Message
+                        == $"Foo {s1.Current} {s2.Current} {s3.Current} {s4.Current} {s5.Current}"
+                );
 
             var sp = services.BuildServiceProvider();
             var factory = sp.GetRequiredService<IOptionsFactory<FakeOptions>>();
@@ -487,9 +667,15 @@ namespace Microsoft.Extensions.Options.Tests
 
         public class StartupValidationOptions
         {
-            private Dictionary<Type, IList<string>> _targets = new Dictionary<Type, IList<string>>();
+            private Dictionary<Type, IList<string>> _targets = new Dictionary<
+                Type,
+                IList<string>
+            >();
 
-            public IDictionary<Type, IList<string>> ValidationTargets { get => _targets; }
+            public IDictionary<Type, IList<string>> ValidationTargets
+            {
+                get => _targets;
+            }
 
             public void Validate<TOptions>(string name) where TOptions : class
             {
@@ -500,7 +686,8 @@ namespace Microsoft.Extensions.Options.Tests
                 _targets[typeof(TOptions)].Add(name ?? Options.DefaultName);
             }
 
-            public void Validate<TOptions>() where TOptions : class => Validate<TOptions>(Options.DefaultName);
+            public void Validate<TOptions>() where TOptions : class =>
+                Validate<TOptions>(Options.DefaultName);
         }
 
         public class OptionsStartupValidator : IStartupValidator
@@ -508,7 +695,10 @@ namespace Microsoft.Extensions.Options.Tests
             private IServiceProvider _services;
             private StartupValidationOptions _options;
 
-            public OptionsStartupValidator(IOptions<StartupValidationOptions> options, IServiceProvider services)
+            public OptionsStartupValidator(
+                IOptions<StartupValidationOptions> options,
+                IServiceProvider services
+            )
             {
                 _services = services;
                 _options = options.Value;
@@ -545,13 +735,16 @@ namespace Microsoft.Extensions.Options.Tests
         public void CanValidateOptionsEagerly()
         {
             var services = new ServiceCollection();
-            services.AddOptions<ComplexOptions>()
-                .Configure(o =>
-                {
-                    o.Boolean = false;
-                    o.Integer = 11;
-                    o.Virtual = "wut";
-                })
+            services
+                .AddOptions<ComplexOptions>()
+                .Configure(
+                    o =>
+                    {
+                        o.Boolean = false;
+                        o.Integer = 11;
+                        o.Virtual = "wut";
+                    }
+                )
                 .Validate(o => o.Boolean)
                 .Validate(o => o.Virtual == null, "Virtual")
                 .Validate(o => o.Integer > 12, "Integer");
@@ -563,25 +756,45 @@ namespace Microsoft.Extensions.Options.Tests
 
             var startupValidator = sp.GetRequiredService<IStartupValidator>();
 
-            var error = Assert.Throws<OptionsValidationException>(() => startupValidator.Validate());
-            ValidateFailure<ComplexOptions>(error, Options.DefaultName, 3, "A validation error has occurred.", "Virtual", "Integer");
+            var error = Assert.Throws<OptionsValidationException>(
+                () => startupValidator.Validate()
+            );
+            ValidateFailure<ComplexOptions>(
+                error,
+                Options.DefaultName,
+                3,
+                "A validation error has occurred.",
+                "Virtual",
+                "Integer"
+            );
         }
 
-        [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+        [AttributeUsage(
+            AttributeTargets.Field | AttributeTargets.Property,
+            AllowMultiple = false,
+            Inherited = true
+        )]
         public class FromAttribute : ValidationAttribute
         {
             public string Accepted { get; set; }
 
-            public override bool IsValid(object value)
-                => value == null || value.ToString() == Accepted;
+            public override bool IsValid(object value) =>
+                value == null || value.ToString() == Accepted;
         }
 
-        [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+        [AttributeUsage(
+            AttributeTargets.Field | AttributeTargets.Property,
+            AllowMultiple = false,
+            Inherited = true
+        )]
         public class DepValidator : ValidationAttribute
         {
             public string Target { get; set; }
 
-            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            protected override ValidationResult IsValid(
+                object value,
+                ValidationContext validationContext
+            )
             {
                 object instance = validationContext.ObjectInstance;
                 Type type = instance.GetType();
@@ -618,156 +831,224 @@ namespace Microsoft.Extensions.Options.Tests
         public void CanValidateDataAnnotations()
         {
             var services = new ServiceCollection();
-            services.AddOptions<AnnotatedOptions>()
-                .Configure(o =>
-                {
-                    o.StringLength = "111111";
-                    o.IntRange = 10;
-                    o.Custom = "nowhere";
-                    o.Dep1 = "Not dep2";
-                })
+            services
+                .AddOptions<AnnotatedOptions>()
+                .Configure(
+                    o =>
+                    {
+                        o.StringLength = "111111";
+                        o.IntRange = 10;
+                        o.Custom = "nowhere";
+                        o.Dep1 = "Not dep2";
+                    }
+                )
                 .ValidateDataAnnotations();
 
             var sp = services.BuildServiceProvider();
 
-            var error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value);
-            ValidateFailure<AnnotatedOptions>(error, Options.DefaultName, 5,
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value
+            );
+            ValidateFailure<AnnotatedOptions>(
+                error,
+                Options.DefaultName,
+                5,
                 "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Required' with the error: 'The Required field is required.'.",
                 "DataAnnotation validation failed for 'AnnotatedOptions' members: 'StringLength' with the error: 'Too long.'.",
                 "DataAnnotation validation failed for 'AnnotatedOptions' members: 'IntRange' with the error: 'Out of range.'.",
                 "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Custom' with the error: 'The field Custom is invalid.'.",
-                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Dep1,Dep2' with the error: 'Dep1 != Dep2'.");
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Dep1,Dep2' with the error: 'Dep1 != Dep2'."
+            );
         }
 
         [Fact]
         public void CanValidateMixDataAnnotations()
         {
             var services = new ServiceCollection();
-            services.AddOptions<AnnotatedOptions>()
-                .Configure(o =>
-                {
-                    o.StringLength = "111111";
-                    o.IntRange = 10;
-                    o.Custom = "nowhere";
-                    o.Dep1 = "Not dep2";
-                })
+            services
+                .AddOptions<AnnotatedOptions>()
+                .Configure(
+                    o =>
+                    {
+                        o.StringLength = "111111";
+                        o.IntRange = 10;
+                        o.Custom = "nowhere";
+                        o.Dep1 = "Not dep2";
+                    }
+                )
                 .ValidateDataAnnotations()
                 .Validate(o => o.Custom != "nowhere", "I don't want to go to nowhere!");
 
             var sp = services.BuildServiceProvider();
 
-            var error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value);
-            ValidateFailure<AnnotatedOptions>(error, Options.DefaultName, 6,
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value
+            );
+            ValidateFailure<AnnotatedOptions>(
+                error,
+                Options.DefaultName,
+                6,
                 "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Required' with the error: 'The Required field is required.'.",
                 "DataAnnotation validation failed for 'AnnotatedOptions' members: 'StringLength' with the error: 'Too long.'.",
                 "DataAnnotation validation failed for 'AnnotatedOptions' members: 'IntRange' with the error: 'Out of range.'.",
                 "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Custom' with the error: 'The field Custom is invalid.'.",
                 "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Dep1,Dep2' with the error: 'Dep1 != Dep2'.",
-                "I don't want to go to nowhere!");
+                "I don't want to go to nowhere!"
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void ValidateOnStart_CallValidateDataAnnotations_ValidationSuccessful()
         {
             var services = new ServiceCollection();
-            services.AddOptions<AnnotatedOptions>()
-                    .Configure(o =>
+            services
+                .AddOptions<AnnotatedOptions>()
+                .Configure(
+                    o =>
                     {
                         o.StringLength = "111111";
                         o.IntRange = 10;
                         o.Custom = "nowhere";
                         o.Dep1 = "Not dep2";
-                    })
-                    .ValidateDataAnnotations()
-                    .ValidateOnStart();
+                    }
+                )
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
 
             var sp = services.BuildServiceProvider();
 
-            var error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value);
-            ValidateFailure<AnnotatedOptions>(error, Options.DefaultName, 5,
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Required' with the error: 'The Required field is required.'.",
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'StringLength' with the error: 'Too long.'.",
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'IntRange' with the error: 'Out of range.'.",
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Custom' with the error: 'The field Custom is invalid.'.",
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Dep1,Dep2' with the error: 'Dep1 != Dep2'.");
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value
+            );
+            ValidateFailure<AnnotatedOptions>(
+                error,
+                Options.DefaultName,
+                5,
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Required' with the error: 'The Required field is required.'.",
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'StringLength' with the error: 'Too long.'.",
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'IntRange' with the error: 'Out of range.'.",
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Custom' with the error: 'The field Custom is invalid.'.",
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Dep1,Dep2' with the error: 'Dep1 != Dep2'."
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void ValidateOnStart_CallValidateAndValidateDataAnnotations_FailuresCaughtFromBothValidateAndValidateDataAnnotations()
         {
             var services = new ServiceCollection();
 
-            services.AddOptions<AnnotatedOptions>()
-                    .Configure(o =>
+            services
+                .AddOptions<AnnotatedOptions>()
+                .Configure(
+                    o =>
                     {
                         o.StringLength = "111111";
                         o.IntRange = 10;
                         o.Custom = "nowhere";
                         o.Dep1 = "Not dep2";
-                    })
-                    .ValidateDataAnnotations()
-                    .Validate(o => o.Custom != "nowhere", "I don't want to go to nowhere!")
-                    .ValidateOnStart();
+                    }
+                )
+                .ValidateDataAnnotations()
+                .Validate(o => o.Custom != "nowhere", "I don't want to go to nowhere!")
+                .ValidateOnStart();
 
             var sp = services.BuildServiceProvider();
 
-            var error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value);
-            ValidateFailure<AnnotatedOptions>(error, Options.DefaultName, 6,
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Required' with the error: 'The Required field is required.'.",
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'StringLength' with the error: 'Too long.'.",
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'IntRange' with the error: 'Out of range.'.",
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Custom' with the error: 'The field Custom is invalid.'.",
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Dep1,Dep2' with the error: 'Dep1 != Dep2'.",
-                    "I don't want to go to nowhere!");
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value
+            );
+            ValidateFailure<AnnotatedOptions>(
+                error,
+                Options.DefaultName,
+                6,
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Required' with the error: 'The Required field is required.'.",
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'StringLength' with the error: 'Too long.'.",
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'IntRange' with the error: 'Out of range.'.",
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Custom' with the error: 'The field Custom is invalid.'.",
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Dep1,Dep2' with the error: 'Dep1 != Dep2'.",
+                "I don't want to go to nowhere!"
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void ValidateOnStart_CallValidateOnStartFirst_ValidatesFailuresCorrectly()
         {
             var services = new ServiceCollection();
 
-            services.AddOptions<AnnotatedOptions>()
-                    .ValidateOnStart()
-                    .Configure(o =>
+            services
+                .AddOptions<AnnotatedOptions>()
+                .ValidateOnStart()
+                .Configure(
+                    o =>
                     {
                         o.StringLength = "111111";
                         o.IntRange = 10;
                         o.Custom = "nowhere";
                         o.Dep1 = "Not dep2";
-                    })
-                    .ValidateDataAnnotations()
-                    .Validate(o => o.Custom != "nowhere", "I don't want to go to nowhere!");
+                    }
+                )
+                .ValidateDataAnnotations()
+                .Validate(o => o.Custom != "nowhere", "I don't want to go to nowhere!");
 
             var sp = services.BuildServiceProvider();
 
-            var error = Assert.Throws<OptionsValidationException>(() => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value);
-            ValidateFailure<AnnotatedOptions>(error, Options.DefaultName, 6,
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Required' with the error: 'The Required field is required.'.",
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'StringLength' with the error: 'Too long.'.",
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'IntRange' with the error: 'Out of range.'.",
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Custom' with the error: 'The field Custom is invalid.'.",
-                    "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Dep1,Dep2' with the error: 'Dep1 != Dep2'.",
-                    "I don't want to go to nowhere!");
+            var error = Assert.Throws<OptionsValidationException>(
+                () => sp.GetRequiredService<IOptions<AnnotatedOptions>>().Value
+            );
+            ValidateFailure<AnnotatedOptions>(
+                error,
+                Options.DefaultName,
+                6,
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Required' with the error: 'The Required field is required.'.",
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'StringLength' with the error: 'Too long.'.",
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'IntRange' with the error: 'Out of range.'.",
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Custom' with the error: 'The field Custom is invalid.'.",
+                "DataAnnotation validation failed for 'AnnotatedOptions' members: 'Dep1,Dep2' with the error: 'Dep1 != Dep2'.",
+                "I don't want to go to nowhere!"
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void ValidateOnStart_ConfigureBasedOnDataAnnotationRestrictions_ValidationSuccessful()
         {
             var services = new ServiceCollection();
-            services.AddOptions<AnnotatedOptions>()
-                .Configure(o =>
-                {
-                    o.Required = "required";
-                    o.StringLength = "1111";
-                    o.IntRange = 0;
-                    o.Custom = "USA";
-                    o.Dep1 = "dep";
-                    o.Dep2 = "dep";
-                })
+            services
+                .AddOptions<AnnotatedOptions>()
+                .Configure(
+                    o =>
+                    {
+                        o.Required = "required";
+                        o.StringLength = "1111";
+                        o.IntRange = 0;
+                        o.Custom = "USA";
+                        o.Dep1 = "dep";
+                        o.Dep2 = "dep";
+                    }
+                )
                 .ValidateDataAnnotations()
                 .ValidateOnStart()
                 .Validate(o => o.Custom != "nowhere", "I don't want to go to nowhere!");

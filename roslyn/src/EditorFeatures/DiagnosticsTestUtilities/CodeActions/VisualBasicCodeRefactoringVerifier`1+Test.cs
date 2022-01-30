@@ -31,7 +31,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 // reasonable TLS protocol version for outgoing connections.
 #pragma warning disable CA5364 // Do Not Use Deprecated Security Protocols
 #pragma warning disable CS0618 // Type or member is obsolete
-                if (ServicePointManager.SecurityProtocol == (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls))
+                if (
+                    ServicePointManager.SecurityProtocol
+                    == (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls)
+                )
 #pragma warning restore CS0618 // Type or member is obsolete
 #pragma warning restore CA5364 // Do Not Use Deprecated Security Protocols
                 {
@@ -43,13 +46,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             {
                 _sharedState = new SharedVerifierState(this, DefaultFileExt);
 
-                SolutionTransforms.Add((solution, projectId) =>
-                {
-                    var parseOptions = (VisualBasicParseOptions)solution.GetProject(projectId)!.ParseOptions!;
-                    solution = solution.WithProjectParseOptions(projectId, parseOptions.WithLanguageVersion(LanguageVersion));
+                SolutionTransforms.Add(
+                    (solution, projectId) =>
+                    {
+                        var parseOptions = (VisualBasicParseOptions)solution.GetProject(
+                            projectId
+                        )!.ParseOptions!;
+                        solution = solution.WithProjectParseOptions(
+                            projectId,
+                            parseOptions.WithLanguageVersion(LanguageVersion)
+                        );
 
-                    return solution;
-                });
+                        return solution;
+                    }
+                );
             }
 
             /// <summary>
@@ -75,8 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             }
 
 #if !CODE_STYLE
-            protected override AnalyzerOptions GetAnalyzerOptions(Project project)
-                => new WorkspaceAnalyzerOptions(base.GetAnalyzerOptions(project), project.Solution);
+            protected override AnalyzerOptions GetAnalyzerOptions(Project project) =>
+                new WorkspaceAnalyzerOptions(base.GetAnalyzerOptions(project), project.Solution);
 #endif
         }
     }

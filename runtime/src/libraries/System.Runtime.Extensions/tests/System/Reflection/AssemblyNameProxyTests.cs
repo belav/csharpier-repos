@@ -17,12 +17,24 @@ namespace System.Reflection.Tests
         public static void GetAssemblyName_AssemblyNameProxy()
         {
             AssemblyNameProxy anp = new AssemblyNameProxy();
-            AssertExtensions.Throws<ArgumentNullException>("assemblyFile", () => anp.GetAssemblyName(null));
-            AssertExtensions.Throws<ArgumentException>("path", null, () => anp.GetAssemblyName(string.Empty));
-            Assert.Throws<FileNotFoundException>(() => anp.GetAssemblyName(Guid.NewGuid().ToString("N")));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "assemblyFile",
+                () => anp.GetAssemblyName(null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "path",
+                null,
+                () => anp.GetAssemblyName(string.Empty)
+            );
+            Assert.Throws<FileNotFoundException>(
+                () => anp.GetAssemblyName(Guid.NewGuid().ToString("N"))
+            );
 
             Assembly a = typeof(AssemblyNameProxyTests).Assembly;
-            Assert.Equal(new AssemblyName(a.FullName).ToString(), anp.GetAssemblyName(Path.GetFullPath(a.Location)).ToString());
+            Assert.Equal(
+                new AssemblyName(a.FullName).ToString(),
+                anp.GetAssemblyName(Path.GetFullPath(a.Location)).ToString()
+            );
         }
     }
 }

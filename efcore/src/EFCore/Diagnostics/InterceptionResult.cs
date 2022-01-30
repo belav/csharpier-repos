@@ -25,11 +25,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     Creates a new <see cref="InterceptionResult" /> instance indicating that
         ///     execution should be suppressed.
         /// </summary>
-        public static InterceptionResult Suppress()
-            => new(true);
+        public static InterceptionResult Suppress() => new(true);
 
-        private InterceptionResult(bool suppress)
-            => IsSuppressed = suppress;
+        private InterceptionResult(bool suppress) => IsSuppressed = suppress;
 
         /// <summary>
         ///     If true, then interception is suppressed.

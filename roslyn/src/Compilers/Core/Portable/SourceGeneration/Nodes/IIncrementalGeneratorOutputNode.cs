@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis
     {
         IncrementalGeneratorOutputKind Kind { get; }
 
-        void AppendOutputs(IncrementalExecutionContext context, CancellationToken cancellationToken);
+        void AppendOutputs(
+            IncrementalExecutionContext context,
+            CancellationToken cancellationToken
+        );
     }
 
     /// <summary>

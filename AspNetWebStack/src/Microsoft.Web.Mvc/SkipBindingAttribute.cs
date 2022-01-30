@@ -18,7 +18,10 @@ namespace Microsoft.Web.Mvc
 
         private class NullBinder : IModelBinder
         {
-            public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+            public object BindModel(
+                ControllerContext controllerContext,
+                ModelBindingContext bindingContext
+            )
             {
                 return null;
             }

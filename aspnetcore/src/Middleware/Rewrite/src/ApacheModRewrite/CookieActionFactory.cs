@@ -38,7 +38,11 @@ internal class CookieActionFactory
             if (flagValue[i] == separator)
             {
                 var length = i - start;
-                SetActionOption(flagValue.Substring(start, length).Trim(), currentField, ref action);
+                SetActionOption(
+                    flagValue.Substring(start, length).Trim(),
+                    currentField,
+                    ref action
+                );
 
                 currentField++;
                 start = i + 1;
@@ -47,7 +51,11 @@ internal class CookieActionFactory
 
         if (i != start)
         {
-            SetActionOption(flagValue.Substring(start).Trim(new[] { ' ', separator }), currentField, ref action);
+            SetActionOption(
+                flagValue.Substring(start).Trim(new[] { ' ', separator }),
+                currentField,
+                ref action
+            );
         }
 
         if (currentField < Fields.Domain)
@@ -58,7 +66,11 @@ internal class CookieActionFactory
         return action!;
     }
 
-    private static void SetActionOption(string value, Fields tokenType, ref ChangeCookieAction? action)
+    private static void SetActionOption(
+        string value,
+        Fields tokenType,
+        ref ChangeCookieAction? action
+    )
     {
         Debug.Assert(action != null || tokenType == Fields.Name);
 
@@ -73,9 +85,7 @@ internal class CookieActionFactory
             case Fields.Domain:
                 // despite what spec says, an empty domain field is allowed in mod_rewrite
                 // by specifying NAME:VALUE:;
-                action!.Domain = string.IsNullOrEmpty(value) || value == ";"
-                    ? null
-                    : value;
+                action!.Domain = string.IsNullOrEmpty(value) || value == ";" ? null : value;
                 break;
             case Fields.Lifetime:
                 if (string.IsNullOrEmpty(value))
@@ -84,7 +94,14 @@ internal class CookieActionFactory
                 }
 
                 uint minutes;
-                if (!uint.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out minutes))
+                if (
+                    !uint.TryParse(
+                        value,
+                        NumberStyles.Any,
+                        CultureInfo.InvariantCulture,
+                        out minutes
+                    )
+                )
                 {
                     throw new FormatException(Resources.FormatError_CouldNotParseInteger(value));
                 }
@@ -95,12 +112,14 @@ internal class CookieActionFactory
                 action!.Path = value;
                 break;
             case Fields.Secure:
-                action!.Secure = "secure".Equals(value, StringComparison.OrdinalIgnoreCase)
+                action!.Secure =
+                    "secure".Equals(value, StringComparison.OrdinalIgnoreCase)
                     || "true".Equals(value, StringComparison.OrdinalIgnoreCase)
                     || value == "1";
                 break;
             case Fields.HttpOnly:
-                action!.HttpOnly = "httponly".Equals(value, StringComparison.OrdinalIgnoreCase)
+                action!.HttpOnly =
+                    "httponly".Equals(value, StringComparison.OrdinalIgnoreCase)
                     || "true".Equals(value, StringComparison.OrdinalIgnoreCase)
                     || value == "1";
                 break;

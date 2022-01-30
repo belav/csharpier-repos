@@ -30,7 +30,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
                 if (0 != (arg.eaf & ErrArgFlags.NoStr))
                     continue;
 
-
                 if (!builder.ErrArgToString(out prgpsz[ppsz], arg, out bool fUserStrings))
                 {
                     if (arg.eak == ErrArgKind.Int)
@@ -68,7 +67,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
                         continue;
 
                     ErrArg arg = args[prgiarg[i]];
-                    Debug.Assert(0 != (arg.eaf & ErrArgFlags.Unique) && 0 == (arg.eaf & ErrArgFlags.NoStr));
+                    Debug.Assert(
+                        0 != (arg.eaf & ErrArgFlags.Unique) && 0 == (arg.eaf & ErrArgFlags.NoStr)
+                    );
 
                     Symbol sym = null;
                     CType pType = null;
@@ -112,7 +113,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
                         }
 
                         ErrArg arg2 = args[prgiarg[j]];
-                        Debug.Assert(0 != (arg2.eaf & ErrArgFlags.Unique) && 0 == (arg2.eaf & ErrArgFlags.NoStr));
+                        Debug.Assert(
+                            0 != (arg2.eaf & ErrArgFlags.Unique)
+                                && 0 == (arg2.eaf & ErrArgFlags.NoStr)
+                        );
 
                         Symbol sym2 = null;
                         CType pType2 = null;
@@ -139,7 +143,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
                         if (sym2 == sym && pType2 == pType && !fMunge)
                             continue;
 
-
                         prgpszNew[j] = prgpsz[j];
 
                         fMunge = true;
@@ -154,7 +157,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Errors
                 prgpsz = prgpszNew;
             }
 
-            return new RuntimeBinderException(string.Format(CultureInfo.InvariantCulture, ErrorFacts.GetMessage(id), prgpsz));
+            return new RuntimeBinderException(
+                string.Format(CultureInfo.InvariantCulture, ErrorFacts.GetMessage(id), prgpsz)
+            );
         }
     }
 }

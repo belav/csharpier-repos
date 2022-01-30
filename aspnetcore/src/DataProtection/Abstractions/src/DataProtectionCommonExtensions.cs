@@ -26,7 +26,10 @@ public static class DataProtectionCommonExtensions
     /// <see cref="IDataProtectionProvider.CreateProtector(string)"/>. See that method's
     /// documentation for more information.
     /// </remarks>
-    public static IDataProtector CreateProtector(this IDataProtectionProvider provider, IEnumerable<string> purposes)
+    public static IDataProtector CreateProtector(
+        this IDataProtectionProvider provider,
+        IEnumerable<string> purposes
+    )
     {
         if (provider == null)
         {
@@ -44,15 +47,23 @@ public static class DataProtectionCommonExtensions
         {
             if (purpose == null)
             {
-                throw new ArgumentException(Resources.DataProtectionExtensions_NullPurposesCollection, nameof(purposes));
+                throw new ArgumentException(
+                    Resources.DataProtectionExtensions_NullPurposesCollection,
+                    nameof(purposes)
+                );
             }
-            retVal = retVal.CreateProtector(purpose) ?? CryptoUtil.Fail<IDataProtector>("CreateProtector returned null.");
+            retVal =
+                retVal.CreateProtector(purpose)
+                ?? CryptoUtil.Fail<IDataProtector>("CreateProtector returned null.");
             collectionIsEmpty = false;
         }
 
         if (collectionIsEmpty)
         {
-            throw new ArgumentException(Resources.DataProtectionExtensions_NullPurposesCollection, nameof(purposes));
+            throw new ArgumentException(
+                Resources.DataProtectionExtensions_NullPurposesCollection,
+                nameof(purposes)
+            );
         }
 
         Debug.Assert(retVal is IDataProtector); // CreateProtector is supposed to return an instance of this interface
@@ -72,7 +83,11 @@ public static class DataProtectionCommonExtensions
     /// <see cref="IDataProtectionProvider.CreateProtector(string)"/>. See that method's
     /// documentation for more information.
     /// </remarks>
-    public static IDataProtector CreateProtector(this IDataProtectionProvider provider, string purpose, params string[] subPurposes)
+    public static IDataProtector CreateProtector(
+        this IDataProtectionProvider provider,
+        string purpose,
+        params string[] subPurposes
+    )
     {
         if (provider == null)
         {
@@ -111,10 +126,16 @@ public static class DataProtectionCommonExtensions
 
         // We have our own implementation of GetRequiredService<T> since we don't want to
         // take a dependency on DependencyInjection.Interfaces.
-        var provider = (IDataProtectionProvider?)services.GetService(typeof(IDataProtectionProvider));
+        var provider = (IDataProtectionProvider?)services.GetService(
+            typeof(IDataProtectionProvider)
+        );
         if (provider == null)
         {
-            throw new InvalidOperationException(Resources.FormatDataProtectionExtensions_NoService(typeof(IDataProtectionProvider).FullName));
+            throw new InvalidOperationException(
+                Resources.FormatDataProtectionExtensions_NoService(
+                    typeof(IDataProtectionProvider).FullName
+                )
+            );
         }
         return provider;
     }
@@ -132,7 +153,10 @@ public static class DataProtectionCommonExtensions
     /// then <see cref="CreateProtector(IDataProtectionProvider, IEnumerable{string})"/>. See those methods'
     /// documentation for more information.
     /// </remarks>
-    public static IDataProtector GetDataProtector(this IServiceProvider services, IEnumerable<string> purposes)
+    public static IDataProtector GetDataProtector(
+        this IServiceProvider services,
+        IEnumerable<string> purposes
+    )
     {
         if (services == null)
         {
@@ -161,7 +185,11 @@ public static class DataProtectionCommonExtensions
     /// then <see cref="CreateProtector(IDataProtectionProvider, string, string[])"/>. See those methods'
     /// documentation for more information.
     /// </remarks>
-    public static IDataProtector GetDataProtector(this IServiceProvider services, string purpose, params string[] subPurposes)
+    public static IDataProtector GetDataProtector(
+        this IServiceProvider services,
+        string purpose,
+        params string[] subPurposes
+    )
     {
         if (services == null)
         {

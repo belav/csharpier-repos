@@ -39,7 +39,8 @@ namespace System.Data.OleDb
             _dbcolumns = new tagDBCOLUMNACCESS[count];
         }
 
-        internal Bindings(OleDbParameter[] parameters, int collectionChangeID) : this(parameters.Length)
+        internal Bindings(OleDbParameter[] parameters, int collectionChangeID)
+            : this(parameters.Length)
         {
             _bindInfo = new tagDBPARAMBINDINFO[parameters.Length];
             _parameters = parameters;
@@ -47,7 +48,8 @@ namespace System.Data.OleDb
             _ifIRowsetElseIRow = true;
         }
 
-        internal Bindings(OleDbDataReader dataReader, bool ifIRowsetElseIRow, int count) : this(count)
+        internal Bindings(OleDbDataReader dataReader, bool ifIRowsetElseIRow, int count)
+            : this(count)
         {
             _dataReader = dataReader;
             _ifIRowsetElseIRow = ifIRowsetElseIRow;
@@ -100,18 +102,12 @@ namespace System.Data.OleDb
         internal IntPtr DataSourceType
         {
             //get { return _bindInfo[_index].pwszDataSourceType; }
-            set
-            {
-                _bindInfo![_index].pwszDataSourceType = value;
-            }
+            set { _bindInfo![_index].pwszDataSourceType = value; }
         }
         internal IntPtr Name
         {
             //get { return _bindInfo[_index].pwszName; }
-            set
-            {
-                _bindInfo![_index].pwszName = value;
-            }
+            set { _bindInfo![_index].pwszName = value; }
         }
         internal IntPtr ParamSize
         {
@@ -123,18 +119,12 @@ namespace System.Data.OleDb
                 }
                 return IntPtr.Zero;
             }
-            set
-            {
-                _bindInfo![_index].ulParamSize = value;
-            }
+            set { _bindInfo![_index].ulParamSize = value; }
         }
         internal int Flags
         {
             //get { return _bindInfo[_index].dwFlag; }
-            set
-            {
-                _bindInfo![_index].dwFlags = value;
-            }
+            set { _bindInfo![_index].dwFlags = value; }
         }
 
         // tagDBBINDING member access
@@ -142,10 +132,7 @@ namespace System.Data.OleDb
         internal IntPtr Ordinal
         { // iOrdinal
             //get { return _dbbindings[_index].iOrdinal.ToInt32(); }
-            set
-            {
-                _dbbindings[_index].iOrdinal = value;
-            }
+            set { _dbbindings[_index].iOrdinal = value; }
         }
 #if DEBUG
         /*internal int ValueOffset { // obValue
@@ -186,13 +173,13 @@ namespace System.Data.OleDb
 
                 switch (DbType)
                 {
-                    case (NativeDBType.BSTR):  // ADP.PtrSize
+                    case (NativeDBType.BSTR): // ADP.PtrSize
                     case (NativeDBType.HCHAPTER): // ADP.PtrSize
                     case (NativeDBType.PROPVARIANT): // sizeof(PROPVARIANT)
                     case (NativeDBType.VARIANT): // 16 or 24 (8 + ADP.PtrSize *2)
                     case (NativeDBType.BYREF | NativeDBType.BYTES): // ADP.PtrSize
                     case (NativeDBType.BYREF | NativeDBType.WSTR): // ADP.PtrSize
-                                                                   // allocate extra space to cache original value for disposal
+                        // allocate extra space to cache original value for disposal
                         _dataBufferSize += System.Data.OleDb.RowBinding.AlignDataSize(value * 2);
                         _needToReset = true;
                         break;
@@ -246,15 +233,31 @@ namespace System.Data.OleDb
             }
         }
 
-        internal int AllocateForAccessor(OleDbDataReader? dataReader, int indexStart, int indexForAccessor)
+        internal int AllocateForAccessor(
+            OleDbDataReader? dataReader,
+            int indexStart,
+            int indexForAccessor
+        )
         {
             Debug.Assert(null == _rowBinding, "row binding already allocated");
             Debug.Assert(null == _columnBindings, "column bindings already allocated");
 
-            RowBinding rowBinding = System.Data.OleDb.RowBinding.CreateBuffer(_count, _dataBufferSize, _needToReset);
+            RowBinding rowBinding = System.Data.OleDb.RowBinding.CreateBuffer(
+                _count,
+                _dataBufferSize,
+                _needToReset
+            );
             _rowBinding = rowBinding;
 
-            ColumnBinding[] columnBindings = rowBinding.SetBindings(dataReader, this, indexStart, indexForAccessor, _parameters, _dbbindings, _ifIRowsetElseIRow);
+            ColumnBinding[] columnBindings = rowBinding.SetBindings(
+                dataReader,
+                this,
+                indexStart,
+                indexForAccessor,
+                _parameters,
+                _dbbindings,
+                _ifIRowsetElseIRow
+            );
             Debug.Assert(null != columnBindings, "null column bindings");
             _columnBindings = columnBindings;
 
@@ -263,7 +266,9 @@ namespace System.Data.OleDb
                 Debug.Assert(columnBindings.Length == _dbcolumns.Length, "length mismatch");
                 for (int i = 0; i < columnBindings.Length; ++i)
                 {
-                    _dbcolumns[i].pData = rowBinding.DangerousGetDataPtr(columnBindings[i].ValueOffset); // We are simply pointing at a location later in the buffer, so we're OK to not addref the buffer.
+                    _dbcolumns[i].pData = rowBinding.DangerousGetDataPtr(
+                        columnBindings[i].ValueOffset
+                    ); // We are simply pointing at a location later in the buffer, so we're OK to not addref the buffer.
                 }
             }
 
@@ -322,7 +327,13 @@ namespace System.Data.OleDb
             Debug.Assert(null != _parameters, "null parameters");
 
             ColumnBinding[] columnBindings = this.ColumnBindings();
-            if (!ForceRebind && ((collection.ChangeID == _collectionChangeID) && (_parameters.Length == collection.Count)))
+            if (
+                !ForceRebind
+                && (
+                    (collection.ChangeID == _collectionChangeID)
+                    && (_parameters.Length == collection.Count)
+                )
+            )
             {
                 for (int i = 0; i < columnBindings.Length; ++i)
                 {

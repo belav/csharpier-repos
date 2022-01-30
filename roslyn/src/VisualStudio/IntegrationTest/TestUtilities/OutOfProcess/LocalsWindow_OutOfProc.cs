@@ -12,7 +12,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         private readonly LocalsWindow_InProc _localsWindowInProc;
 
-        public LocalsWindow_OutOfProc(VisualStudioInstance visualStudioInstance) : base(visualStudioInstance)
+        public LocalsWindow_OutOfProc(VisualStudioInstance visualStudioInstance)
+            : base(visualStudioInstance)
         {
             _localsWindowInProc = CreateInProcComponent<LocalsWindow_InProc>(visualStudioInstance);
             Verify = new Verifier(this);

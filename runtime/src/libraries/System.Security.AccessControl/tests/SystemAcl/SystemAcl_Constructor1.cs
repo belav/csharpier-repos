@@ -9,16 +9,16 @@ namespace System.Security.AccessControl.Tests
 {
     public partial class SystemAcl_Constructor1
     {
-       public static IEnumerable<object[]> SystemAcl_Constructor1_TestData()
-       {
-           yield return new object[] { false, false, 0 };
-           yield return new object[] { false, true, 0 };
-           yield return new object[] { true, false, 0 };
-           yield return new object[] { true, true, 0 };
-           yield return new object[] { false, false, 1 };
-           yield return new object[] { false, true, 1 };
-           yield return new object[] { true, false, 1 };
-           yield return new object[] { true, true, 1 };
+        public static IEnumerable<object[]> SystemAcl_Constructor1_TestData()
+        {
+            yield return new object[] { false, false, 0 };
+            yield return new object[] { false, true, 0 };
+            yield return new object[] { true, false, 0 };
+            yield return new object[] { true, true, 0 };
+            yield return new object[] { false, false, 1 };
+            yield return new object[] { false, true, 1 };
+            yield return new object[] { true, false, 1 };
+            yield return new object[] { true, true, 1 };
         }
 
         [Fact]
@@ -40,12 +40,14 @@ namespace System.Security.AccessControl.Tests
 
             systemAcl = new SystemAcl(isContainer, isDS, capacity);
             rawAcl = new RawAcl(isDS ? GenericAcl.AclRevisionDS : GenericAcl.AclRevision, capacity);
-            if (isContainer == systemAcl.IsContainer &&
-                isDS == systemAcl.IsDS &&
-                (isDS ? GenericAcl.AclRevisionDS : GenericAcl.AclRevision) == systemAcl.Revision &&
-                0 == systemAcl.Count &&
-                8 == systemAcl.BinaryLength &&
-                true == systemAcl.IsCanonical)
+            if (
+                isContainer == systemAcl.IsContainer
+                && isDS == systemAcl.IsDS
+                && (isDS ? GenericAcl.AclRevisionDS : GenericAcl.AclRevision) == systemAcl.Revision
+                && 0 == systemAcl.Count
+                && 8 == systemAcl.BinaryLength
+                && true == systemAcl.IsCanonical
+            )
             {
                 sAclBinaryForm = new byte[systemAcl.BinaryLength];
                 rAclBinaryForm = new byte[rawAcl.BinaryLength];

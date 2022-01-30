@@ -56,8 +56,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         /// of the above. Complexity is minimized as reading can be done just by examining both DBs
         /// in the same way. It's not as simple as '1' but it's much simpler than '3'.
         /// </summary>
-        public static string GetName(this Database database)
-            => database switch
+        public static string GetName(this Database database) =>
+            database switch
             {
                 Database.Main => "main",
                 Database.WriteCache => "writecache",

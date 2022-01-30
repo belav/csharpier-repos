@@ -26,7 +26,10 @@ namespace System.Text.RegularExpressions
         {
             if ((uint)startat > (uint)input.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startat, ExceptionResource.BeginIndexNotNegative);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.startat,
+                    ExceptionResource.BeginIndexNotNegative
+                );
             }
 
             _regex = regex;
@@ -164,8 +167,7 @@ namespace System.Text.RegularExpressions
         int IList.Add(object? value) =>
             throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
 
-        void IList.Clear() =>
-            throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
+        void IList.Clear() => throw new NotSupportedException(SR.NotSupported_ReadOnlyCollection);
 
         bool IList.Contains(object? value) =>
             value is Match && ((ICollection<Match>)this).Contains((Match)value);

@@ -18,7 +18,10 @@ public class ValidationAttributeAdapterProvider : IValidationAttributeAdapterPro
     /// <param name="attribute">The attribute to create an adapter for.</param>
     /// <param name="stringLocalizer">The localizer to provide to the adapter.</param>
     /// <returns>An <see cref="IAttributeAdapter"/> for the given attribute.</returns>
-    public IAttributeAdapter? GetAttributeAdapter(ValidationAttribute attribute, IStringLocalizer? stringLocalizer)
+    public IAttributeAdapter? GetAttributeAdapter(
+        ValidationAttribute attribute,
+        IStringLocalizer? stringLocalizer
+    )
     {
         if (attribute == null)
         {
@@ -29,7 +32,10 @@ public class ValidationAttributeAdapterProvider : IValidationAttributeAdapterPro
 
         if (typeof(RegularExpressionAttribute).IsAssignableFrom(type))
         {
-            return new RegularExpressionAttributeAdapter((RegularExpressionAttribute)attribute, stringLocalizer);
+            return new RegularExpressionAttributeAdapter(
+                (RegularExpressionAttribute)attribute,
+                stringLocalizer
+            );
         }
         else if (typeof(MaxLengthAttribute).IsAssignableFrom(type))
         {
@@ -49,11 +55,18 @@ public class ValidationAttributeAdapterProvider : IValidationAttributeAdapterPro
         }
         else if (typeof(CreditCardAttribute).IsAssignableFrom(type))
         {
-            return new DataTypeAttributeAdapter((DataTypeAttribute)attribute, "data-val-creditcard", stringLocalizer);
+            return new DataTypeAttributeAdapter(
+                (DataTypeAttribute)attribute,
+                "data-val-creditcard",
+                stringLocalizer
+            );
         }
         else if (typeof(StringLengthAttribute).IsAssignableFrom(type))
         {
-            return new StringLengthAttributeAdapter((StringLengthAttribute)attribute, stringLocalizer);
+            return new StringLengthAttributeAdapter(
+                (StringLengthAttribute)attribute,
+                stringLocalizer
+            );
         }
         else if (typeof(RangeAttribute).IsAssignableFrom(type))
         {
@@ -61,19 +74,34 @@ public class ValidationAttributeAdapterProvider : IValidationAttributeAdapterPro
         }
         else if (typeof(EmailAddressAttribute).IsAssignableFrom(type))
         {
-            return new DataTypeAttributeAdapter((DataTypeAttribute)attribute, "data-val-email", stringLocalizer);
+            return new DataTypeAttributeAdapter(
+                (DataTypeAttribute)attribute,
+                "data-val-email",
+                stringLocalizer
+            );
         }
         else if (typeof(PhoneAttribute).IsAssignableFrom(type))
         {
-            return new DataTypeAttributeAdapter((DataTypeAttribute)attribute, "data-val-phone", stringLocalizer);
+            return new DataTypeAttributeAdapter(
+                (DataTypeAttribute)attribute,
+                "data-val-phone",
+                stringLocalizer
+            );
         }
         else if (typeof(UrlAttribute).IsAssignableFrom(type))
         {
-            return new DataTypeAttributeAdapter((DataTypeAttribute)attribute, "data-val-url", stringLocalizer);
+            return new DataTypeAttributeAdapter(
+                (DataTypeAttribute)attribute,
+                "data-val-url",
+                stringLocalizer
+            );
         }
         else if (typeof(FileExtensionsAttribute).IsAssignableFrom(type))
         {
-            return new FileExtensionsAttributeAdapter((FileExtensionsAttribute)attribute, stringLocalizer);
+            return new FileExtensionsAttributeAdapter(
+                (FileExtensionsAttribute)attribute,
+                stringLocalizer
+            );
         }
         else
         {

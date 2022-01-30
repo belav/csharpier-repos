@@ -7,35 +7,33 @@ using System;
 public struct VT
 {
     public sbyte[,] sbyte2darr;
-    public sbyte[, ,] sbyte3darr;
+    public sbyte[,,] sbyte3darr;
     public sbyte[,] sbyte2darr_b;
-    public sbyte[, ,] sbyte3darr_b;
+    public sbyte[,,] sbyte3darr_b;
 }
 
 public class CL
 {
     public sbyte[,] sbyte2darr = { { 0, 1 }, { 0, 0 } };
-    public sbyte[, ,] sbyte3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    public sbyte[,,] sbyte3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
     public sbyte[,] sbyte2darr_b = { { 0, 49 }, { 0, 0 } };
-    public sbyte[, ,] sbyte3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    public sbyte[,,] sbyte3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
 }
 
 public class sbyteMDArrTest
 {
-
     static sbyte[,] sbyte2darr = { { 0, 1 }, { 0, 0 } };
-    static sbyte[, ,] sbyte3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static sbyte[,,] sbyte3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
     static sbyte[,] sbyte2darr_b = { { 0, 49 }, { 0, 0 } };
-    static sbyte[, ,] sbyte3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    static sbyte[,,] sbyte3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
 
     static sbyte[][,] ja1 = new sbyte[2][,];
-    static sbyte[][, ,] ja2 = new sbyte[2][, ,];
+    static sbyte[][,,] ja2 = new sbyte[2][,,];
     static sbyte[][,] ja1_b = new sbyte[2][,];
-    static sbyte[][, ,] ja2_b = new sbyte[2][, ,];
+    static sbyte[][,,] ja2_b = new sbyte[2][,,];
 
     public static int Main()
     {
-
         bool pass = true;
 
         VT vt1;
@@ -1168,5 +1166,4 @@ public class sbyteMDArrTest
 
 
     }
-
 };

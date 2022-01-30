@@ -14,11 +14,8 @@ namespace System
             if (value == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
 
-            return SpanHelpers.IndexOf(
-                ref _firstChar,
-                Length,
-                ref value._firstChar,
-                value.Length) >= 0;
+            return SpanHelpers.IndexOf(ref _firstChar, Length, ref value._firstChar, value.Length)
+                >= 0;
         }
 
         public bool Contains(string value, StringComparison comparisonType)
@@ -51,32 +48,54 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.IndexOf(this, value, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CultureInfo.CurrentCulture.CompareInfo.IndexOf(
+                        this,
+                        value,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.IndexOf(this, value, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CompareInfo.Invariant.IndexOf(
+                        this,
+                        value,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.Ordinal:
                     return IndexOf(value);
 
                 case StringComparison.OrdinalIgnoreCase:
-                    return CompareInfo.Invariant.IndexOf(this, value, CompareOptions.OrdinalIgnoreCase);
+                    return CompareInfo.Invariant.IndexOf(
+                        this,
+                        value,
+                        CompareOptions.OrdinalIgnoreCase
+                    );
 
                 default:
-                    throw new ArgumentException(SR.NotSupported_StringComparison, nameof(comparisonType));
+                    throw new ArgumentException(
+                        SR.NotSupported_StringComparison,
+                        nameof(comparisonType)
+                    );
             }
         }
 
         public unsafe int IndexOf(char value, int startIndex, int count)
         {
             if ((uint)startIndex > (uint)Length)
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_Index);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.ArgumentOutOfRange_Index
+                );
 
             if ((uint)count > (uint)(Length - startIndex))
                 throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_Count);
 
-            int result = SpanHelpers.IndexOf(ref Unsafe.Add(ref _firstChar, startIndex), value, count);
+            int result = SpanHelpers.IndexOf(
+                ref Unsafe.Add(ref _firstChar, startIndex),
+                value,
+                count
+            );
 
             return result == -1 ? result : result + startIndex;
         }
@@ -100,7 +119,10 @@ namespace System
                 throw new ArgumentNullException(nameof(anyOf));
 
             if ((uint)startIndex > (uint)Length)
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_Index);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.ArgumentOutOfRange_Index
+                );
 
             if ((uint)count > (uint)(Length - startIndex))
                 throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_Count);
@@ -108,7 +130,10 @@ namespace System
             if (anyOf.Length > 0 && anyOf.Length <= 5)
             {
                 // The ReadOnlySpan.IndexOfAny extension is vectorized for values of 1 - 5 in length
-                int result = new ReadOnlySpan<char>(ref Unsafe.Add(ref _firstChar, startIndex), count).IndexOfAny(anyOf);
+                int result = new ReadOnlySpan<char>(
+                    ref Unsafe.Add(ref _firstChar, startIndex),
+                    count
+                ).IndexOfAny(anyOf);
                 return result == -1 ? result : result + startIndex;
             }
             else if (anyOf.Length > 5)
@@ -138,9 +163,11 @@ namespace System
                 {
                     int thisChar = *pCh;
 
-                    if (IsCharBitSet(charMap, (byte)thisChar) &&
-                        IsCharBitSet(charMap, (byte)(thisChar >> 8)) &&
-                        ArrayContains((char)thisChar, anyOf))
+                    if (
+                        IsCharBitSet(charMap, (byte)thisChar)
+                        && IsCharBitSet(charMap, (byte)(thisChar >> 8))
+                        && ArrayContains((char)thisChar, anyOf)
+                    )
                     {
                         return (int)(pCh - pChars);
                     }
@@ -167,7 +194,10 @@ namespace System
         // in each byte in the character is used to index into this map to get the
         // right block, the value of the remaining 5 msb are used as the bit position
         // inside this block.
-        private static unsafe void InitializeProbabilisticMap(uint* charMap, ReadOnlySpan<char> anyOf)
+        private static unsafe void InitializeProbabilisticMap(
+            uint* charMap,
+            ReadOnlySpan<char> anyOf
+        )
         {
             bool hasAscii = false;
             uint* charMapLocal = charMap; // https://github.com/dotnet/runtime/issues/9040
@@ -212,15 +242,19 @@ namespace System
 
         private static unsafe bool IsCharBitSet(uint* charMap, byte value)
         {
-            return (charMap[(uint)value & PROBABILISTICMAP_BLOCK_INDEX_MASK] & (1u << (value >> PROBABILISTICMAP_BLOCK_INDEX_SHIFT))) != 0;
+            return (
+                    charMap[(uint)value & PROBABILISTICMAP_BLOCK_INDEX_MASK]
+                    & (1u << (value >> PROBABILISTICMAP_BLOCK_INDEX_SHIFT))
+                ) != 0;
         }
 
         private static unsafe void SetCharBit(uint* charMap, byte value)
         {
-            charMap[(uint)value & PROBABILISTICMAP_BLOCK_INDEX_MASK] |= 1u << (value >> PROBABILISTICMAP_BLOCK_INDEX_SHIFT);
+            charMap[(uint)value & PROBABILISTICMAP_BLOCK_INDEX_MASK] |=
+                1u << (value >> PROBABILISTICMAP_BLOCK_INDEX_SHIFT);
         }
 
-       /*
+        /*
         * IndexOf, LastIndexOf, Contains, StartsWith, and EndsWith
         * ========================================================
         *
@@ -338,20 +372,41 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.IndexOf(this, value, startIndex, count, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CultureInfo.CurrentCulture.CompareInfo.IndexOf(
+                        this,
+                        value,
+                        startIndex,
+                        count,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.IndexOf(this, value, startIndex, count, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CompareInfo.Invariant.IndexOf(
+                        this,
+                        value,
+                        startIndex,
+                        count,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.Ordinal:
                 case StringComparison.OrdinalIgnoreCase:
-                    return Ordinal.IndexOf(this, value, startIndex, count, comparisonType == StringComparison.OrdinalIgnoreCase);
+                    return Ordinal.IndexOf(
+                        this,
+                        value,
+                        startIndex,
+                        count,
+                        comparisonType == StringComparison.OrdinalIgnoreCase
+                    );
 
                 default:
                     throw (value is null)
                         ? new ArgumentNullException(nameof(value))
-                        : new ArgumentException(SR.NotSupported_StringComparison, nameof(comparisonType));
+                        : new ArgumentException(
+                              SR.NotSupported_StringComparison,
+                              nameof(comparisonType)
+                          );
             }
         }
 
@@ -360,7 +415,8 @@ namespace System
         // The character at position startIndex is included in the search.  startIndex is the larger
         // index within the string.
         //
-        public int LastIndexOf(char value) => SpanHelpers.LastIndexOf(ref _firstChar, value, Length);
+        public int LastIndexOf(char value) =>
+            SpanHelpers.LastIndexOf(ref _firstChar, value, Length);
 
         public int LastIndexOf(char value, int startIndex)
         {
@@ -373,13 +429,20 @@ namespace System
                 return -1;
 
             if ((uint)startIndex >= (uint)Length)
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_Index);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.ArgumentOutOfRange_Index
+                );
 
             if ((uint)count > (uint)startIndex + 1)
                 throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_Count);
 
             int startSearchAt = startIndex + 1 - count;
-            int result = SpanHelpers.LastIndexOf(ref Unsafe.Add(ref _firstChar, startSearchAt), value, count);
+            int result = SpanHelpers.LastIndexOf(
+                ref Unsafe.Add(ref _firstChar, startSearchAt),
+                value,
+                count
+            );
 
             return result == -1 ? result : result + startSearchAt;
         }
@@ -409,7 +472,10 @@ namespace System
 
             if ((uint)startIndex >= (uint)Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_Index);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.ArgumentOutOfRange_Index
+                );
             }
 
             if ((count < 0) || ((count - 1) > startIndex))
@@ -447,9 +513,11 @@ namespace System
                 {
                     int thisChar = *pCh;
 
-                    if (IsCharBitSet(charMap, (byte)thisChar) &&
-                        IsCharBitSet(charMap, (byte)(thisChar >> 8)) &&
-                        ArrayContains((char)thisChar, anyOf))
+                    if (
+                        IsCharBitSet(charMap, (byte)thisChar)
+                        && IsCharBitSet(charMap, (byte)(thisChar >> 8))
+                        && ArrayContains((char)thisChar, anyOf)
+                    )
                     {
                         return (int)(pCh - pChars);
                     }
@@ -469,7 +537,12 @@ namespace System
         //
         public int LastIndexOf(string value)
         {
-            return LastIndexOf(value, this.Length - 1, this.Length, StringComparison.CurrentCulture);
+            return LastIndexOf(
+                value,
+                this.Length - 1,
+                this.Length,
+                StringComparison.CurrentCulture
+            );
         }
 
         public int LastIndexOf(string value, int startIndex)
@@ -492,7 +565,12 @@ namespace System
             return LastIndexOf(value, startIndex, startIndex + 1, comparisonType);
         }
 
-        public int LastIndexOf(string value, int startIndex, int count, StringComparison comparisonType)
+        public int LastIndexOf(
+            string value,
+            int startIndex,
+            int count,
+            StringComparison comparisonType
+        )
         {
             // Parameter checking will be done by CompareInfo.LastIndexOf.
 
@@ -500,20 +578,41 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.LastIndexOf(this, value, startIndex, count, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CultureInfo.CurrentCulture.CompareInfo.LastIndexOf(
+                        this,
+                        value,
+                        startIndex,
+                        count,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.LastIndexOf(this, value, startIndex, count, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return CompareInfo.Invariant.LastIndexOf(
+                        this,
+                        value,
+                        startIndex,
+                        count,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.Ordinal:
                 case StringComparison.OrdinalIgnoreCase:
-                    return CompareInfo.Invariant.LastIndexOf(this, value, startIndex, count, GetCompareOptionsFromOrdinalStringComparison(comparisonType));
+                    return CompareInfo.Invariant.LastIndexOf(
+                        this,
+                        value,
+                        startIndex,
+                        count,
+                        GetCompareOptionsFromOrdinalStringComparison(comparisonType)
+                    );
 
                 default:
                     throw (value is null)
                         ? new ArgumentNullException(nameof(value))
-                        : new ArgumentException(SR.NotSupported_StringComparison, nameof(comparisonType));
+                        : new ArgumentException(
+                              SR.NotSupported_StringComparison,
+                              nameof(comparisonType)
+                          );
             }
         }
 

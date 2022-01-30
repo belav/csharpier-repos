@@ -12,11 +12,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 {
     public partial class InvokeDelegateWithConditionalAccessTests
     {
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)
+        ]
         public async Task TestFixAllInDocument1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     System.Action a;
 
@@ -35,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
         }
     }
 }",
-@"class C
+                @"class C
 {
     System.Action a;
 
@@ -45,14 +48,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
         a?.Invoke();
     }
-}");
+}"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)
+        ]
         public async Task TestFixAllInDocument2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     System.Action a;
 
@@ -71,7 +78,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
         }
     }
 }",
-@"class C
+                @"class C
 {
     System.Action a;
 
@@ -81,14 +88,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
         a?.Invoke();
     }
-}");
+}"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)
+        ]
         public async Task TestFixAllInDocument3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     System.Action a;
 
@@ -107,7 +118,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
         }
     }
 }",
-@"class C
+                @"class C
 {
     System.Action a;
 
@@ -117,14 +128,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
         a?.Invoke();
     }
-}");
+}"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)
+        ]
         public async Task TestFixAllInDocument4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     System.Action a;
 
@@ -143,7 +158,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
         }
     }
 }",
-@"class C
+                @"class C
 {
     System.Action a;
 
@@ -153,14 +168,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
         a?.Invoke();
     }
-}");
+}"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)
+        ]
         public async Task TestFixAllInDocument5()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     System.Action a;
 
@@ -179,7 +198,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
         }
     }
 }",
-@"class C
+                @"class C
 {
     System.Action a;
 
@@ -189,14 +208,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
         a?.Invoke();
     }
-}");
+}"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)
+        ]
         public async Task TestFixAllInDocument6()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     System.Action a;
 
@@ -215,7 +238,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
         }
     }
 }",
-@"class C
+                @"class C
 {
     System.Action a;
 
@@ -225,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
         a?.Invoke();
     }
-}");
+}"
+            );
         }
     }
 }

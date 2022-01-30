@@ -42,8 +42,16 @@ public class ViewResultExecutor : ViewExecutor, IActionResultExecutor<ViewResult
         ITempDataDictionaryFactory tempDataFactory,
         DiagnosticListener diagnosticListener,
         ILoggerFactory loggerFactory,
-        IModelMetadataProvider modelMetadataProvider)
-        : base(viewOptions, writerFactory, viewEngine, tempDataFactory, diagnosticListener, modelMetadataProvider)
+        IModelMetadataProvider modelMetadataProvider
+    )
+        : base(
+            viewOptions,
+            writerFactory,
+            viewEngine,
+            tempDataFactory,
+            diagnosticListener,
+            modelMetadataProvider
+        )
     {
         if (loggerFactory == null)
         {
@@ -82,7 +90,11 @@ public class ViewResultExecutor : ViewExecutor, IActionResultExecutor<ViewResult
 
         var stopwatch = ValueStopwatch.StartNew();
 
-        var result = viewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: true);
+        var result = viewEngine.GetView(
+            executingFilePath: null,
+            viewPath: viewName,
+            isMainPage: true
+        );
         var originalResult = result;
         if (!result.Success)
         {
@@ -126,7 +138,12 @@ public class ViewResultExecutor : ViewExecutor, IActionResultExecutor<ViewResult
         return result;
     }
 
-    private void OutputDiagnostics(ActionContext actionContext, ViewResult viewResult, string viewName, ViewEngineResult result)
+    private void OutputDiagnostics(
+        ActionContext actionContext,
+        ViewResult viewResult,
+        string viewName,
+        ViewEngineResult result
+    )
     {
         if (result.Success)
         {
@@ -135,7 +152,8 @@ public class ViewResultExecutor : ViewExecutor, IActionResultExecutor<ViewResult
                 isMainPage: true,
                 viewResult,
                 viewName,
-                view: result.View);
+                view: result.View
+            );
         }
         else
         {
@@ -144,7 +162,8 @@ public class ViewResultExecutor : ViewExecutor, IActionResultExecutor<ViewResult
                 isMainPage: true,
                 viewResult,
                 viewName,
-                searchedLocations: result.SearchedLocations);
+                searchedLocations: result.SearchedLocations
+            );
         }
     }
 
@@ -175,7 +194,8 @@ public class ViewResultExecutor : ViewExecutor, IActionResultExecutor<ViewResult
                 result.ViewData,
                 result.TempData,
                 result.ContentType,
-                result.StatusCode);
+                result.StatusCode
+            );
         }
 
         Logger.ViewResultExecuted(viewEngineResult.ViewName, stopwatch.GetElapsedTime());
@@ -195,8 +215,10 @@ public class ViewResultExecutor : ViewExecutor, IActionResultExecutor<ViewResult
 
         var actionDescriptor = context.ActionDescriptor;
         string? normalizedValue = null;
-        if (actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value) &&
-            !string.IsNullOrEmpty(value))
+        if (
+            actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value)
+            && !string.IsNullOrEmpty(value)
+        )
         {
             normalizedValue = value;
         }

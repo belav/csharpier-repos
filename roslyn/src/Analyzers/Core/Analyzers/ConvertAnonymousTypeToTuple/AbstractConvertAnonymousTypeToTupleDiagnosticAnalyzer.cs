@@ -10,34 +10,47 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
 {
     internal abstract class AbstractConvertAnonymousTypeToTupleDiagnosticAnalyzer<
         TSyntaxKind,
-        TAnonymousObjectCreationExpressionSyntax>
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        TAnonymousObjectCreationExpressionSyntax
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TAnonymousObjectCreationExpressionSyntax : SyntaxNode
     {
         private readonly ISyntaxKinds _syntaxKinds;
 
         protected AbstractConvertAnonymousTypeToTupleDiagnosticAnalyzer(ISyntaxKinds syntaxKinds)
-            : base(IDEDiagnosticIds.ConvertAnonymousTypeToTupleDiagnosticId,
-                   EnforceOnBuildValues.ConvertAnonymousTypeToTuple,
-                   option: null,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Convert_to_tuple), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   new LocalizableResourceString(nameof(AnalyzersResources.Convert_to_tuple), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   // This analyzer is not configurable.  The intent is just to act as a refactoring, just benefiting from fix-all
-                   configurable: false)
+            : base(
+                IDEDiagnosticIds.ConvertAnonymousTypeToTupleDiagnosticId,
+                EnforceOnBuildValues.ConvertAnonymousTypeToTuple,
+                option: null,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Convert_to_tuple),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Convert_to_tuple),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                // This analyzer is not configurable.  The intent is just to act as a refactoring, just benefiting from fix-all
+                configurable: false
+            )
         {
             _syntaxKinds = syntaxKinds;
         }
 
-        protected abstract int GetInitializerCount(TAnonymousObjectCreationExpressionSyntax anonymousType);
+        protected abstract int GetInitializerCount(
+            TAnonymousObjectCreationExpressionSyntax anonymousType
+        );
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(
                 AnalyzeSyntax,
-                _syntaxKinds.Convert<TSyntaxKind>(_syntaxKinds.AnonymousObjectCreationExpression));
+                _syntaxKinds.Convert<TSyntaxKind>(_syntaxKinds.AnonymousObjectCreationExpression)
+            );
 
         // Analysis is trivial.  All anonymous types with more than two fields are marked as being
         // convertible to a tuple.
@@ -51,8 +64,13 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToTuple
 
             context.ReportDiagnostic(
                 DiagnosticHelper.Create(
-                    Descriptor, context.Node.GetFirstToken().GetLocation(), ReportDiagnostic.Hidden,
-                    additionalLocations: null, properties: null));
+                    Descriptor,
+                    context.Node.GetFirstToken().GetLocation(),
+                    ReportDiagnostic.Hidden,
+                    additionalLocations: null,
+                    properties: null
+                )
+            );
         }
     }
 }

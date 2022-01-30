@@ -75,9 +75,12 @@ namespace System.Drawing.Printing
         /// </summary>
         public override string ToString()
         {
-            if (this == Default) return "Default";
-            else if (this == False) return "False";
-            else return "True";
+            if (this == Default)
+                return "Default";
+            else if (this == False)
+                return "False";
+            else
+                return "True";
         }
     }
 }

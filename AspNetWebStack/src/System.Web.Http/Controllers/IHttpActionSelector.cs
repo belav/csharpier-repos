@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Linq;
+
 namespace System.Web.Http.Controllers
 {
     public interface IHttpActionSelector
@@ -19,6 +20,8 @@ namespace System.Web.Http.Controllers
         /// </summary>
         /// <param name="controllerDescriptor">The controller descriptor.</param>
         /// <returns>A map of <see cref="HttpActionDescriptor"/> that the selector can select, or null if the selector does not have a well-defined mapping of <see cref="HttpActionDescriptor"/>.</returns>
-        ILookup<string, HttpActionDescriptor> GetActionMapping(HttpControllerDescriptor controllerDescriptor);
+        ILookup<string, HttpActionDescriptor> GetActionMapping(
+            HttpControllerDescriptor controllerDescriptor
+        );
     }
 }

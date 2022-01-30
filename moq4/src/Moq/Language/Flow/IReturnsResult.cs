@@ -5,11 +5,14 @@ using System.ComponentModel;
 
 namespace Moq.Language.Flow
 {
-	/// <summary>
+    /// <summary>
 	/// Implements the fluent API.
 	/// </summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public interface IReturnsResult<TMock> : ICallback, IOccurrence, IRaise<TMock>, IVerifies, IFluentInterface
-	{
-	}
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface IReturnsResult<TMock>
+        : ICallback,
+          IOccurrence,
+          IRaise<TMock>,
+          IVerifies,
+          IFluentInterface { }
 }

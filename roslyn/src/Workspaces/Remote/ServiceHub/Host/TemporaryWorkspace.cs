@@ -15,12 +15,18 @@ namespace Microsoft.CodeAnalysis.Remote
     /// </summary>
     internal class TemporaryWorkspace : Workspace
     {
-        public TemporaryWorkspace(HostServices hostServices, string? workspaceKind, SolutionInfo solutionInfo, SerializableOptionSet options)
-            : base(hostServices, workspaceKind)
+        public TemporaryWorkspace(
+            HostServices hostServices,
+            string? workspaceKind,
+            SolutionInfo solutionInfo,
+            SerializableOptionSet options
+        ) : base(hostServices, workspaceKind)
         {
             SetOptions(Options.WithChangedOption(CacheOptions.RecoverableTreeLengthThreshold, 0));
 
-            var documentOptionsProviderFactories = ((IMefHostExportProvider)Services.HostServices).GetExports<IDocumentOptionsProviderFactory, OrderableMetadata>();
+            var documentOptionsProviderFactories = (
+                (IMefHostExportProvider)Services.HostServices
+            ).GetExports<IDocumentOptionsProviderFactory, OrderableMetadata>();
 
             RegisterDocumentOptionProviders(documentOptionsProviderFactories);
 

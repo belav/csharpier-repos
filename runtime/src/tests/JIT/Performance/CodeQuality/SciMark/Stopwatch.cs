@@ -25,7 +25,7 @@ namespace SciMark2
     /// <version> 
     /// 14 October 1997, revised 1999-04-24
     /// </version>
-    /// 
+    ///
     public class Stopwatch
     {
         private bool _running;

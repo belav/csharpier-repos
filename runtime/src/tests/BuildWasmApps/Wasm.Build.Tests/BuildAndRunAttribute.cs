@@ -22,24 +22,35 @@ namespace Wasm.Build.Tests
     {
         private readonly IEnumerable<object?[]> _data;
 
-        public BuildAndRunAttribute(BuildArgs buildArgs, RunHost host = RunHost.All, params object?[] parameters)
+        public BuildAndRunAttribute(
+            BuildArgs buildArgs,
+            RunHost host = RunHost.All,
+            params object?[] parameters
+        )
         {
-            _data = new IEnumerable<object?>[]
-                    {
-                        new object?[] { buildArgs }.AsEnumerable(),
-                    }
-                    .AsEnumerable()
-                    .Multiply(parameters)
-                    .WithRunHosts(host)
-                    .UnwrapItemsAsArrays().ToList().Dump();
+            _data = new IEnumerable<object?>[] { new object?[] { buildArgs }.AsEnumerable(), }
+                .AsEnumerable()
+                .Multiply(parameters)
+                .WithRunHosts(host)
+                .UnwrapItemsAsArrays()
+                .ToList()
+                .Dump();
         }
 
-        public BuildAndRunAttribute(bool aot=false, RunHost host = RunHost.All, string? config=null, params object?[] parameters)
+        public BuildAndRunAttribute(
+            bool aot = false,
+            RunHost host = RunHost.All,
+            string? config = null,
+            params object?[] parameters
+        )
         {
-            _data = BuildTestBase.ConfigWithAOTData(aot, config)
-                    .Multiply(parameters)
-                    .WithRunHosts(host)
-                    .UnwrapItemsAsArrays().ToList().Dump();
+            _data = BuildTestBase
+                .ConfigWithAOTData(aot, config)
+                .Multiply(parameters)
+                .WithRunHosts(host)
+                .UnwrapItemsAsArrays()
+                .ToList()
+                .Dump();
         }
 
         public override IEnumerable<object?[]> GetData(MethodInfo testMethod) => _data;

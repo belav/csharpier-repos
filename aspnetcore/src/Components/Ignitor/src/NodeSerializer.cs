@@ -63,37 +63,37 @@ internal static class NodeSerializer
             switch (node)
             {
                 case ComponentNode componentNode:
-                    {
-                        SerializeComponent(componentNode);
-                        break;
-                    }
+                {
+                    SerializeComponent(componentNode);
+                    break;
+                }
                 case ElementNode elementNode:
-                    {
-                        SerializeElement(elementNode);
-                        break;
-                    }
+                {
+                    SerializeElement(elementNode);
+                    break;
+                }
                 case TextNode textNode:
-                    {
-                        SerializeTextNode(textNode);
-                        break;
-                    }
+                {
+                    SerializeTextNode(textNode);
+                    break;
+                }
                 case MarkupNode markupNode:
-                    {
-                        SerializeMarkupNode(markupNode);
-                        break;
-                    }
+                {
+                    SerializeMarkupNode(markupNode);
+                    break;
+                }
                 case ContainerNode containerNode:
-                    {
-                        SerializeChildren(containerNode);
-                        break;
-                    }
+                {
+                    SerializeChildren(containerNode);
+                    break;
+                }
                 default:
-                    {
-                        Write("--- UNKNOWN (");
-                        Write(node.GetType().ToString());
-                        WriteLine(") ---");
-                        break;
-                    }
+                {
+                    Write("--- UNKNOWN (");
+                    Write(node.GetType().ToString());
+                    WriteLine(") ---");
+                    break;
+                }
             }
         }
 

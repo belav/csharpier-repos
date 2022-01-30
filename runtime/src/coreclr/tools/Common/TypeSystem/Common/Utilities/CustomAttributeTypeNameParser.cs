@@ -21,7 +21,12 @@ namespace Internal.TypeSystem
         /// The type name string should be in the 'SerString' format as defined by the ECMA-335 standard.
         /// This is the inverse of what <see cref="CustomAttributeTypeNameFormatter"/> does.
         /// </summary>
-        public static TypeDesc GetTypeByCustomAttributeTypeName(this ModuleDesc module, string name, bool throwIfNotFound = true, Func<string, ModuleDesc, bool, MetadataType> resolver = null)
+        public static TypeDesc GetTypeByCustomAttributeTypeName(
+            this ModuleDesc module,
+            string name,
+            bool throwIfNotFound = true,
+            Func<string, ModuleDesc, bool, MetadataType> resolver = null
+        )
         {
             TypeDesc loadedType;
 
@@ -73,18 +78,30 @@ namespace Internal.TypeSystem
                 if (homeModule == null)
                     return null;
             }
-            MetadataType typeDef = resolver != null ? resolver(genericTypeDefName.ToString(), homeModule, throwIfNotFound) :
-                ResolveCustomAttributeTypeDefinitionName(genericTypeDefName.ToString(), homeModule, throwIfNotFound);
+            MetadataType typeDef =
+                resolver != null
+                    ? resolver(genericTypeDefName.ToString(), homeModule, throwIfNotFound)
+                    : ResolveCustomAttributeTypeDefinitionName(
+                          genericTypeDefName.ToString(),
+                          homeModule,
+                          throwIfNotFound
+                      );
             if (typeDef == null)
                 return null;
 
             ArrayBuilder<TypeDesc> genericArgs = new ArrayBuilder<TypeDesc>();
 
             // Followed by generic instantiation parameters (but check for the array case)
-            if (ch < nameEnd && ch.Current == '[' && (ch + 1) < nameEnd && (ch + 1).Current != ']' && (ch + 1).Current != ',')
+            if (
+                ch < nameEnd
+                && ch.Current == '['
+                && (ch + 1) < nameEnd
+                && (ch + 1).Current != ']'
+                && (ch + 1).Current != ','
+            )
             {
                 ch++; // truncate the '['
-                var genericInstantiationEnd = ch + ReadTypeArgument(ch, nameEnd, true);  // find the end of the instantiation list
+                var genericInstantiationEnd = ch + ReadTypeArgument(ch, nameEnd, true); // find the end of the instantiation list
                 while (ch < genericInstantiationEnd)
                 {
                     if (ch.Current == ',')
@@ -106,7 +123,11 @@ namespace Internal.TypeSystem
                         ch += argLen;
                     }
 
-                    TypeDesc argType = module.GetTypeByCustomAttributeTypeName(typeArgName, throwIfNotFound, resolver);
+                    TypeDesc argType = module.GetTypeByCustomAttributeTypeName(
+                        typeArgName,
+                        throwIfNotFound,
+                        resolver
+                    );
                     if (argType == null)
                         return null;
                     genericArgs.Add(argType);
@@ -191,8 +212,11 @@ namespace Internal.TypeSystem
             return loadedType;
         }
 
-
-        public static MetadataType ResolveCustomAttributeTypeDefinitionName(string name, ModuleDesc module, bool throwIfNotFound)
+        public static MetadataType ResolveCustomAttributeTypeDefinitionName(
+            string name,
+            ModuleDesc module,
+            bool throwIfNotFound
+        )
         {
             MetadataType containingType = null;
             StringBuilder typeName = new StringBuilder(name.Length);
@@ -231,8 +255,11 @@ namespace Internal.TypeSystem
                         if (containingType == null)
                         {
                             if (throwIfNotFound)
-                                ThrowHelper.ThrowTypeLoadException(typeName.ToString(), outerType.Module);
-                            
+                                ThrowHelper.ThrowTypeLoadException(
+                                    typeName.ToString(),
+                                    outerType.Module
+                                );
+
                             return null;
                         }
                     }
@@ -261,7 +288,11 @@ namespace Internal.TypeSystem
             return module.GetType(typeName.ToString(), throwIfNotFound);
         }
 
-        private static MetadataType GetType(this ModuleDesc module, string fullName, bool throwIfNotFound = true)
+        private static MetadataType GetType(
+            this ModuleDesc module,
+            string fullName,
+            bool throwIfNotFound = true
+        )
         {
             string namespaceName;
             string typeName;
@@ -324,7 +355,11 @@ namespace Internal.TypeSystem
             return result;
         }
 
-        private static int ReadTypeArgument(StringIterator strBegin, StringIterator strEnd, bool ignoreComma)
+        private static int ReadTypeArgument(
+            StringIterator strBegin,
+            StringIterator strEnd,
+            bool ignoreComma
+        )
         {
             int level = 0;
             int length = 0;
@@ -381,10 +416,7 @@ namespace Internal.TypeSystem
 
             public char Current
             {
-                get
-                {
-                    return _string[_index];
-                }
+                get { return _string[_index]; }
             }
 
             public StringIterator(string s, int index)
@@ -400,7 +432,7 @@ namespace Internal.TypeSystem
                 return it1._string.Substring(it1._index, it2._index - it1._index);
             }
 
-            public static StringIterator operator++(StringIterator it)
+            public static StringIterator operator ++(StringIterator it)
             {
                 return new StringIterator(it._string, ++it._index);
             }
@@ -417,17 +449,17 @@ namespace Internal.TypeSystem
                 return it1._index > it2._index;
             }
 
-            public static StringIterator operator+(StringIterator it, int val)
+            public static StringIterator operator +(StringIterator it, int val)
             {
                 return new StringIterator(it._string, it._index + val);
             }
 
-            public static StringIterator operator-(StringIterator it, int val)
+            public static StringIterator operator -(StringIterator it, int val)
             {
                 return new StringIterator(it._string, it._index - val);
             }
 
-            public static bool operator==(StringIterator it1, StringIterator it2)
+            public static bool operator ==(StringIterator it1, StringIterator it2)
             {
                 Debug.Assert(Object.ReferenceEquals(it1._string, it2._string));
                 return it1._index == it2._index;

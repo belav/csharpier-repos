@@ -12,10 +12,10 @@ namespace Wasm.Build.Tests
 {
     public class NativeBuildTests : BuildTestBase
     {
-        public NativeBuildTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+        public NativeBuildTests(
+            ITestOutputHelper output,
+            SharedBuildPerTestClassFixture buildContext
+        ) : base(output, buildContext) { }
 
         // TODO:     - check dotnet.wasm, js have changed
         //           - icall? pinvoke?
@@ -29,16 +29,27 @@ namespace Wasm.Build.Tests
             string projectName = $"simple_native_build_{buildArgs.Config}_{buildArgs.AOT}";
 
             buildArgs = buildArgs with { ProjectName = projectName };
-            buildArgs = ExpandBuildArgs(buildArgs, extraProperties: "<WasmBuildNative>true</WasmBuildNative>");
+            buildArgs = ExpandBuildArgs(
+                buildArgs,
+                extraProperties: "<WasmBuildNative>true</WasmBuildNative>"
+            );
 
-            BuildProject(buildArgs,
-                        initProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
-                        dotnetWasmFromRuntimePack: false,
-                        id: id);
+            BuildProject(
+                buildArgs,
+                initProject: () =>
+                    File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
+                dotnetWasmFromRuntimePack: false,
+                id: id
+            );
 
-            RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 42,
-                        test: output => {},
-                        host: host, id: id);
+            RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 42,
+                test: output => { },
+                host: host,
+                id: id
+            );
         }
 
         [Theory]
@@ -46,21 +57,32 @@ namespace Wasm.Build.Tests
         public void MonoAOTCross_WorksWithNoTrimming(BuildArgs buildArgs, string id)
         {
             // stop once `mono-aot-cross` part of the build is done
-            string target = @"<Target Name=""StopAfterWasmAOT"" AfterTargets=""_WasmAotCompileApp"">
+            string target =
+                @"<Target Name=""StopAfterWasmAOT"" AfterTargets=""_WasmAotCompileApp"">
                 <Error Text=""Stopping after AOT"" Condition=""'$(WasmBuildingForNestedPublish)' == 'true'"" />
             </Target>";
 
             string projectName = $"mono_aot_cross_{buildArgs.Config}_{buildArgs.AOT}";
 
-            buildArgs = buildArgs with { ProjectName = projectName, ExtraBuildArgs = "-p:PublishTrimmed=false -v:n" };
-            buildArgs = ExpandBuildArgs(buildArgs, extraProperties: "<WasmBuildNative>true</WasmBuildNative>", insertAtEnd: target);
+            buildArgs = buildArgs with
+            {
+                ProjectName = projectName,
+                ExtraBuildArgs = "-p:PublishTrimmed=false -v:n"
+            };
+            buildArgs = ExpandBuildArgs(
+                buildArgs,
+                extraProperties: "<WasmBuildNative>true</WasmBuildNative>",
+                insertAtEnd: target
+            );
 
             (_, string output) = BuildProject(
-                                    buildArgs,
-                                    initProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
-                                    dotnetWasmFromRuntimePack: false,
-                                    id: id,
-                                    expectSuccess: false);
+                buildArgs,
+                initProject: () =>
+                    File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
+                dotnetWasmFromRuntimePack: false,
+                id: id,
+                expectSuccess: false
+            );
 
             Assert.Contains("Stopping after AOT", output);
         }
@@ -69,7 +91,8 @@ namespace Wasm.Build.Tests
         [BuildAndRun(host: RunHost.None, aot: true)]
         public void IntermediateBitcodeToObjectFilesAreNotLLVMIR(BuildArgs buildArgs, string id)
         {
-            string printFileTypeTarget = @"
+            string printFileTypeTarget =
+                @"
                 <Target Name=""PrintIntermediateFileType"" AfterTargets=""WasmNestedPublishApp"">
                     <Exec Command=""wasm-dis $(_WasmIntermediateOutputPath)System.Private.CoreLib.dll.o -o $(_WasmIntermediateOutputPath)wasm-dis-out.txt""
                           EnvironmentVariables=""@(EmscriptenEnvVars)""
@@ -88,14 +111,19 @@ namespace Wasm.Build.Tests
             buildArgs = buildArgs with { ProjectName = projectName };
             buildArgs = ExpandBuildArgs(buildArgs, insertAtEnd: printFileTypeTarget);
 
-            (_, string output) = BuildProject(buildArgs,
-                                    initProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
-                                    dotnetWasmFromRuntimePack: false,
-                                    id: id);
+            (_, string output) = BuildProject(
+                buildArgs,
+                initProject: () =>
+                    File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
+                dotnetWasmFromRuntimePack: false,
+                id: id
+            );
 
             if (!output.Contains("** wasm-dis exit code: 0"))
-                throw new XunitException($"Expected to successfully run wasm-dis on System.Private.CoreLib.dll.o ."
-                                            + " It might fail if it was incorrectly compiled to a bitcode file, instead of wasm.");
+                throw new XunitException(
+                    $"Expected to successfully run wasm-dis on System.Private.CoreLib.dll.o ."
+                        + " It might fail if it was incorrectly compiled to a bitcode file, instead of wasm."
+                );
         }
 
         [ConditionalTheory(typeof(BuildTestBase), nameof(IsUsingWorkloads))]
@@ -108,23 +136,28 @@ namespace Wasm.Build.Tests
 
             // We don't want to emcc compile, and link ~180 assemblies!
             // So, stop once `mono-aot-cross` part of the build is done
-            string target = @"<Target Name=""StopAfterWasmAOT"" AfterTargets=""_WasmAotCompileApp"">
+            string target =
+                @"<Target Name=""StopAfterWasmAOT"" AfterTargets=""_WasmAotCompileApp"">
                 <Error Text=""Stopping after AOT"" Condition=""'$(WasmBuildingForNestedPublish)' == 'true'"" />
             </Target>
             ";
-            AddItemsPropertiesToProject(Path.Combine(_projectDir!, $"{id}.csproj"),
-                                        extraItems: null,
-                                        extraProperties: null,
-                                        atTheEnd: target);
+            AddItemsPropertiesToProject(
+                Path.Combine(_projectDir!, $"{id}.csproj"),
+                extraItems: null,
+                extraProperties: null,
+                atTheEnd: target
+            );
 
             string publishLogPath = Path.Combine(s_buildEnv.LogRootPath, id, $"{id}.binlog");
             CommandResult res = new DotNetCommand(s_buildEnv)
-                                        .WithWorkingDirectory(_projectDir!)
-                                        .ExecuteWithCapturedOutput("publish",
-                                                                   $"-bl:{publishLogPath}",
-                                                                   "-p:RunAOTCompilation=true",
-                                                                   "-p:PublishTrimmed=false",
-                                                                   $"-p:Configuration={config}");
+                .WithWorkingDirectory(_projectDir!)
+                .ExecuteWithCapturedOutput(
+                    "publish",
+                    $"-bl:{publishLogPath}",
+                    "-p:RunAOTCompilation=true",
+                    "-p:PublishTrimmed=false",
+                    $"-p:Configuration={config}"
+                );
 
             Assert.True(res.ExitCode != 0, "Expected publish to fail");
             Assert.Contains("Stopping after AOT", res.Output);

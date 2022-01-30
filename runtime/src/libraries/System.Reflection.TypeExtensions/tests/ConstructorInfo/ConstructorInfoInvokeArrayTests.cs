@@ -18,7 +18,9 @@ namespace System.Reflection.Tests
             int[] blength = new int[] { -100, -9, -1 };
             for (int j = 0; j < blength.Length; j++)
             {
-                Assert.Throws<OverflowException>(() => constructor.Invoke(new object[] { blength[j] }));
+                Assert.Throws<OverflowException>(
+                    () => constructor.Invoke(new object[] { blength[j] })
+                );
             }
 
             int[] glength = new int[] { 0, 1, 2, 3, 5, 10, 99, 65535 };
@@ -48,17 +50,22 @@ namespace System.Reflection.Tests
                 switch (constructors[i].GetParameters().Length)
                 {
                     case 1:
+
                         {
                             int[] invalidLengths = new int[] { -100, -9, -1 };
                             for (int j = 0; j < invalidLengths.Length; j++)
                             {
-                                Assert.Throws<OverflowException>(() => constructors[i].Invoke(new object[] { invalidLengths[j] }));
+                                Assert.Throws<OverflowException>(
+                                    () => constructors[i].Invoke(new object[] { invalidLengths[j] })
+                                );
                             }
 
                             int[] validLengths = new int[] { 0, 1, 2, 3, 5, 10, 99 };
                             for (int j = 0; j < validLengths.Length; j++)
                             {
-                                char[] arr = (char[])constructors[i].Invoke(new object[] { validLengths[j] });
+                                char[] arr = (char[])constructors[i].Invoke(
+                                    new object[] { validLengths[j] }
+                                );
                                 Assert.Equal(0, arr.GetLowerBound(0));
                                 Assert.Equal(validLengths[j] - 1, arr.GetUpperBound(0));
                                 Assert.Equal(validLengths[j], arr.Length);
@@ -66,6 +73,7 @@ namespace System.Reflection.Tests
                         }
                         break;
                     case 2:
+
                         {
                             int[] invalidLowerBounds = new int[] { -20, 0, 20 };
                             if (!PlatformDetection.IsNonZeroLowerBoundArraySupported)
@@ -75,7 +83,16 @@ namespace System.Reflection.Tests
                             int[] invalidLengths = new int[] { -100, -9, -1 };
                             for (int j = 0; j < invalidLengths.Length; j++)
                             {
-                                Assert.Throws<OverflowException>(() => constructors[i].Invoke(new object[] { invalidLowerBounds[j], invalidLengths[j] }));
+                                Assert.Throws<OverflowException>(
+                                    () =>
+                                        constructors[i].Invoke(
+                                            new object[]
+                                            {
+                                                invalidLowerBounds[j],
+                                                invalidLengths[j]
+                                            }
+                                        )
+                                );
                             }
 
                             int[] validLowerBounds = new int[] { 0, 1, -1, 2, -3, 5, -10, 99, 100 };
@@ -86,10 +103,18 @@ namespace System.Reflection.Tests
                             int[] validLengths = new int[] { 0, 1, 3, 2, 3, 5, 10, 99, 0 };
                             for (int j = 0; j < validLengths.Length; j++)
                             {
-                                object o = constructors[i].Invoke(new object[] { validLowerBounds[j], validLengths[j] });
+                                object o = constructors[i].Invoke(
+                                    new object[] { validLowerBounds[j], validLengths[j] }
+                                );
 
-                                Assert.Equal(validLowerBounds[j], (int)getLowerBound.Invoke(o, new object[] { 0 }));
-                                Assert.Equal(validLowerBounds[j] + validLengths[j] - 1, (int)getUpperBound.Invoke(o, new object[] { 0 }));
+                                Assert.Equal(
+                                    validLowerBounds[j],
+                                    (int)getLowerBound.Invoke(o, new object[] { 0 })
+                                );
+                                Assert.Equal(
+                                    validLowerBounds[j] + validLengths[j] - 1,
+                                    (int)getUpperBound.Invoke(o, new object[] { 0 })
+                                );
                                 Assert.Equal(validLengths[j], (int)getLength.GetValue(o, null));
                             }
                         }
@@ -111,13 +136,19 @@ namespace System.Reflection.Tests
                 switch (constructors[i].GetParameters().Length)
                 {
                     case 2:
+
                         {
                             int[] invalidLengths1 = new int[] { -11, -10, 0, 10 };
                             int[] invalidLengths2 = new int[] { -33, 0, -20, -33 };
 
                             for (int j = 0; j < invalidLengths1.Length; j++)
                             {
-                                Assert.Throws<OverflowException>(() => constructors[i].Invoke(new object[] { invalidLengths1[j], invalidLengths2[j] }));
+                                Assert.Throws<OverflowException>(
+                                    () =>
+                                        constructors[i].Invoke(
+                                            new object[] { invalidLengths1[j], invalidLengths2[j] }
+                                        )
+                                );
                             }
 
                             int[] validLengths1 = new int[] { 0, 0, 1, 1, 2, 1, 2, 10, 17, 99 };
@@ -125,7 +156,9 @@ namespace System.Reflection.Tests
 
                             for (int j = 0; j < validLengths1.Length; j++)
                             {
-                                int[,] arr = (int[,])constructors[i].Invoke(new object[] { validLengths1[j], validLengths2[j] });
+                                int[,] arr = (int[,])constructors[i].Invoke(
+                                    new object[] { validLengths1[j], validLengths2[j] }
+                                );
                                 Assert.Equal(0, arr.GetLowerBound(0));
                                 Assert.Equal(validLengths1[j] - 1, arr.GetUpperBound(0));
                                 Assert.Equal(0, arr.GetLowerBound(1));
@@ -136,6 +169,7 @@ namespace System.Reflection.Tests
 
                         break;
                     case 4:
+
                         {
                             int[] invalidLowerBounds1 = new int[] { 10, -10, 20 };
                             int[] invalidLowerBounds2 = new int[] { -10, 10, 0 };
@@ -150,7 +184,18 @@ namespace System.Reflection.Tests
 
                             for (int j = 0; j < invalidLengths3.Length; j++)
                             {
-                                Assert.Throws<OverflowException>(() => constructors[i].Invoke(new object[] { invalidLowerBounds1[j], invalidLengths3[j], invalidLowerBounds2[j], invalidLengths4[j] }));
+                                Assert.Throws<OverflowException>(
+                                    () =>
+                                        constructors[i].Invoke(
+                                            new object[]
+                                            {
+                                                invalidLowerBounds1[j],
+                                                invalidLengths3[j],
+                                                invalidLowerBounds2[j],
+                                                invalidLengths4[j]
+                                            }
+                                        )
+                                );
                             }
 
                             int baseNum = 3;
@@ -185,17 +230,55 @@ namespace System.Reflection.Tests
 
                             for (int j = 0; j < validLengths1.Length; j++)
                             {
-                                int[,] arr = (int[,])constructors[i].Invoke(new object[] { validLowerBounds1[j], validLengths1[j], validLowerBounds2[j], validLengths2[j] });
+                                int[,] arr = (int[,])constructors[i].Invoke(
+                                    new object[]
+                                    {
+                                        validLowerBounds1[j],
+                                        validLengths1[j],
+                                        validLowerBounds2[j],
+                                        validLengths2[j]
+                                    }
+                                );
                                 Assert.Equal(validLowerBounds1[j], arr.GetLowerBound(0));
-                                Assert.Equal(validLowerBounds1[j] + validLengths1[j] - 1, arr.GetUpperBound(0));
+                                Assert.Equal(
+                                    validLowerBounds1[j] + validLengths1[j] - 1,
+                                    arr.GetUpperBound(0)
+                                );
                                 Assert.Equal(validLowerBounds2[j], arr.GetLowerBound(1));
-                                Assert.Equal(validLowerBounds2[j] + validLengths2[j] - 1, arr.GetUpperBound(1));
+                                Assert.Equal(
+                                    validLowerBounds2[j] + validLengths2[j] - 1,
+                                    arr.GetUpperBound(1)
+                                );
                                 Assert.Equal(validLengths1[j] * validLengths2[j], arr.Length);
                             }
 
                             // Lower can be < 0
-                            validLowerBounds1 = new int[] { 10, 10, 65535, 40, 0, -10, -10, -20, -40, 0 };
-                            validLowerBounds2 = new int[] { 5, 99, -100, 30, 4, -5, 99, 100, -30, 0 };
+                            validLowerBounds1 = new int[]
+                            {
+                                10,
+                                10,
+                                65535,
+                                40,
+                                0,
+                                -10,
+                                -10,
+                                -20,
+                                -40,
+                                0
+                            };
+                            validLowerBounds2 = new int[]
+                            {
+                                5,
+                                99,
+                                -100,
+                                30,
+                                4,
+                                -5,
+                                99,
+                                100,
+                                -30,
+                                0
+                            };
                             validLengths1 = new int[] { 1, 200, 2, 40, 0, 1, 200, 2, 40, 65535 };
                             validLengths2 = new int[] { 5, 10, 1, 0, 4, 5, 65535, 1, 0, 4 };
 
@@ -207,11 +290,25 @@ namespace System.Reflection.Tests
 
                             for (int j = 0; j < validLengths1.Length; j++)
                             {
-                                int[,] arr = (int[,])constructors[i].Invoke(new object[] { validLowerBounds1[j], validLengths1[j], validLowerBounds2[j], validLengths2[j] });
+                                int[,] arr = (int[,])constructors[i].Invoke(
+                                    new object[]
+                                    {
+                                        validLowerBounds1[j],
+                                        validLengths1[j],
+                                        validLowerBounds2[j],
+                                        validLengths2[j]
+                                    }
+                                );
                                 Assert.Equal(validLowerBounds1[j], arr.GetLowerBound(0));
-                                Assert.Equal(validLowerBounds1[j] + validLengths1[j] - 1, arr.GetUpperBound(0));
+                                Assert.Equal(
+                                    validLowerBounds1[j] + validLengths1[j] - 1,
+                                    arr.GetUpperBound(0)
+                                );
                                 Assert.Equal(validLowerBounds2[j], arr.GetLowerBound(1));
-                                Assert.Equal(validLowerBounds2[j] + validLengths2[j] - 1, arr.GetUpperBound(1));
+                                Assert.Equal(
+                                    validLowerBounds2[j] + validLengths2[j] - 1,
+                                    arr.GetUpperBound(1)
+                                );
                                 Assert.Equal(validLengths1[j] * validLengths2[j], arr.Length);
                             }
                         }
@@ -219,6 +316,7 @@ namespace System.Reflection.Tests
                 }
             }
         }
+
         [Fact]
         [ActiveIssue("https://github.com/mono/mono/issues/15318", TestRuntimes.Mono)]
         public void Invoke_LargeDimensionalArrayConstructor()
@@ -226,7 +324,9 @@ namespace System.Reflection.Tests
             Type type = Type.GetType("System.Type[,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,]");
             ConstructorInfo[] cia = TypeExtensions.GetConstructors(type);
             Assert.Equal(2, cia.Length);
-            Assert.Throws<TypeLoadException>(() => Type.GetType("System.Type[,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,]"));
+            Assert.Throws<TypeLoadException>(
+                () => Type.GetType("System.Type[,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,]")
+            );
         }
 
         [Fact]
@@ -241,17 +341,22 @@ namespace System.Reflection.Tests
                 switch (constructors[i].GetParameters().Length)
                 {
                     case 1:
+
                         {
                             int[] invalidLengths = new int[] { -11, -10, -99 };
                             for (int j = 0; j < invalidLengths.Length; j++)
                             {
-                                Assert.Throws<OverflowException>(() => constructors[i].Invoke(new object[] { invalidLengths[j] }));
+                                Assert.Throws<OverflowException>(
+                                    () => constructors[i].Invoke(new object[] { invalidLengths[j] })
+                                );
                             }
 
                             int[] validLengths = new int[] { 0, 1, 2, 10, 17, 99 };
                             for (int j = 0; j < validLengths.Length; j++)
                             {
-                                string[][] arr = (string[][])constructors[i].Invoke(new object[] { validLengths[j] });
+                                string[][] arr = (string[][])constructors[i].Invoke(
+                                    new object[] { validLengths[j] }
+                                );
                                 Assert.Equal(0, arr.GetLowerBound(0));
                                 Assert.Equal(validLengths[j] - 1, arr.GetUpperBound(0));
                                 Assert.Equal(validLengths[j], arr.Length);
@@ -259,19 +364,40 @@ namespace System.Reflection.Tests
                         }
                         break;
                     case 2:
+
                         {
                             int[] invalidLengths1 = new int[] { -11, -10, 10, 1 };
                             int[] invalidLengths2 = new int[] { -33, 0, -33, -1 };
                             for (int j = 0; j < invalidLengths1.Length; j++)
                             {
-                                Assert.Throws<OverflowException>(() => constructors[i].Invoke(new object[] { invalidLengths1[j], invalidLengths2[j] }));
+                                Assert.Throws<OverflowException>(
+                                    () =>
+                                        constructors[i].Invoke(
+                                            new object[] { invalidLengths1[j], invalidLengths2[j] }
+                                        )
+                                );
                             }
 
                             int[] validLengths1 = new int[] { 0, 0, 0, 1, 1, 2, 1, 2, 10, 17, 500 };
-                            int[] validLengths2 = new int[] { -33, 0, 1, 0, 1, 1, 2, 2, 110, 5, 100 };
+                            int[] validLengths2 = new int[]
+                            {
+                                -33,
+                                0,
+                                1,
+                                0,
+                                1,
+                                1,
+                                2,
+                                2,
+                                110,
+                                5,
+                                100
+                            };
                             for (int j = 0; j < validLengths1.Length; j++)
                             {
-                                string[][] arr = (string[][])constructors[i].Invoke(new object[] { validLengths1[j], validLengths2[j] });
+                                string[][] arr = (string[][])constructors[i].Invoke(
+                                    new object[] { validLengths1[j], validLengths2[j] }
+                                );
                                 Assert.Equal(0, arr.GetLowerBound(0));
                                 Assert.Equal(validLengths1[j] - 1, arr.GetUpperBound(0));
                                 Assert.Equal(validLengths1[j], arr.Length);

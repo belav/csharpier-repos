@@ -34,7 +34,7 @@ public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBas
     }
 
 #if GENERATE_BASELINES
-        protected bool GenerateBaselines { get; } = true;
+    protected bool GenerateBaselines { get; } = true;
 #else
     protected bool GenerateBaselines { get; } = false;
 #endif
@@ -54,7 +54,10 @@ public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBas
     [Fact]
     public void GenerateBaselinesMustBeFalse()
     {
-        Assert.False(GenerateBaselines, "GenerateBaselines should be set back to false before you check in!");
+        Assert.False(
+            GenerateBaselines,
+            "GenerateBaselines should be set back to false before you check in!"
+        );
     }
 
     protected void AssertDocumentNodeMatchesBaseline(RazorCodeDocument codeDocument)
@@ -78,7 +81,9 @@ public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBas
         }
 
         // Normalize newlines by splitting into an array.
-        var baseline = irFile.ReadAllText().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        var baseline = irFile
+            .ReadAllText()
+            .Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
         IntermediateNodeVerifier.Verify(document, baseline);
     }
 
@@ -101,7 +106,10 @@ public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBas
             Directory.CreateDirectory(Path.GetDirectoryName(baselineFullPath));
             WriteBaseline(actualCode, baselineFullPath);
 
-            var baselineDiagnosticsFullPath = Path.Combine(TestProjectRoot, baselineDiagnosticsFilePath);
+            var baselineDiagnosticsFullPath = Path.Combine(
+                TestProjectRoot,
+                baselineDiagnosticsFilePath
+            );
             var lines = document.Diagnostics.Select(RazorDiagnosticSerializer.Serialize).ToArray();
             if (lines.Any())
             {
@@ -142,7 +150,9 @@ public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBas
             baselineDiagnostics = diagnosticsFile.ReadAllText();
         }
 
-        var actualDiagnostics = string.Concat(document.Diagnostics.Select(d => RazorDiagnosticSerializer.Serialize(d) + "\r\n"));
+        var actualDiagnostics = string.Concat(
+            document.Diagnostics.Select(d => RazorDiagnosticSerializer.Serialize(d) + "\r\n")
+        );
         Assert.Equal(baselineDiagnostics, actualDiagnostics);
 
         var baselineMappings = string.Empty;
@@ -172,8 +182,10 @@ public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBas
                 var foundMatchingPragma = false;
                 foreach (var linePragma in linePragmas)
                 {
-                    if (sourceMapping.OriginalSpan.LineIndex >= linePragma.StartLineIndex &&
-                        sourceMapping.OriginalSpan.LineIndex <= linePragma.EndLineIndex)
+                    if (
+                        sourceMapping.OriginalSpan.LineIndex >= linePragma.StartLineIndex
+                        && sourceMapping.OriginalSpan.LineIndex <= linePragma.EndLineIndex
+                    )
                     {
                         // Found a match.
                         foundMatchingPragma = true;
@@ -181,12 +193,14 @@ public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBas
                     }
                 }
 
-                Assert.True(foundMatchingPragma, $"No line pragma found for code at line {sourceMapping.OriginalSpan.LineIndex + 1}.");
+                Assert.True(
+                    foundMatchingPragma,
+                    $"No line pragma found for code at line {sourceMapping.OriginalSpan.LineIndex + 1}."
+                );
             }
         }
         else
         {
-
             var syntaxTree = codeDocument.GetSyntaxTree();
             var sourceBuffer = new char[syntaxTree.Source.Length];
             syntaxTree.Source.CopyTo(0, sourceBuffer, 0, syntaxTree.Source.Length);
@@ -194,16 +208,23 @@ public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBas
             var classifiedSpans = syntaxTree.GetClassifiedSpans();
             foreach (var classifiedSpan in classifiedSpans)
             {
-                var content = sourceContent.Substring(classifiedSpan.Span.AbsoluteIndex, classifiedSpan.Span.Length);
-                if (!string.IsNullOrWhiteSpace(content) &&
-                    classifiedSpan.BlockKind != BlockKindInternal.Directive &&
-                    classifiedSpan.SpanKind == SpanKindInternal.Code)
+                var content = sourceContent.Substring(
+                    classifiedSpan.Span.AbsoluteIndex,
+                    classifiedSpan.Span.Length
+                );
+                if (
+                    !string.IsNullOrWhiteSpace(content)
+                    && classifiedSpan.BlockKind != BlockKindInternal.Directive
+                    && classifiedSpan.SpanKind == SpanKindInternal.Code
+                )
                 {
                     var foundMatchingPragma = false;
                     foreach (var linePragma in linePragmas)
                     {
-                        if (classifiedSpan.Span.LineIndex >= linePragma.StartLineIndex &&
-                            classifiedSpan.Span.LineIndex <= linePragma.EndLineIndex)
+                        if (
+                            classifiedSpan.Span.LineIndex >= linePragma.StartLineIndex
+                            && classifiedSpan.Span.LineIndex <= linePragma.EndLineIndex
+                        )
                         {
                             // Found a match.
                             foundMatchingPragma = true;
@@ -211,7 +232,10 @@ public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBas
                         }
                     }
 
-                    Assert.True(foundMatchingPragma, $"No line pragma found for code '{content}' at line {classifiedSpan.Span.LineIndex + 1}.");
+                    Assert.True(
+                        foundMatchingPragma,
+                        $"No line pragma found for code '{content}' at line {classifiedSpan.Span.LineIndex + 1}."
+                    );
                 }
             }
         }
@@ -230,7 +254,8 @@ public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBas
         }
 
         var lastSlash = codeDocument.Source.FilePath.LastIndexOfAny(new[] { '/', '\\' });
-        var fileName = lastSlash == -1 ? null : codeDocument.Source.FilePath.Substring(lastSlash + 1);
+        var fileName =
+            lastSlash == -1 ? null : codeDocument.Source.FilePath.Substring(lastSlash + 1);
         if (string.IsNullOrEmpty(fileName))
         {
             var message = "Integration tests require a filename";
@@ -239,7 +264,8 @@ public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBas
 
         if (DirectoryPath == null)
         {
-            var message = $"{nameof(AssertDocumentNodeMatchesBaseline)} should only be called from an integration test..";
+            var message =
+                $"{nameof(AssertDocumentNodeMatchesBaseline)} should only be called from an integration test..";
             throw new InvalidOperationException(message);
         }
 

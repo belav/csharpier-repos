@@ -20,12 +20,15 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             ModelCodeGenerationOptions options,
             Action<ScaffoldedModel> assertScaffold,
             Action<IModel> assertModel,
-            bool skipBuild = false)
+            bool skipBuild = false
+        )
         {
             var designServices = new ServiceCollection();
             AddModelServices(designServices);
 
-            var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder(customServices: designServices);
+            var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder(
+                customServices: designServices
+            );
             modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
             buildModel(modelBuilder);
 
@@ -34,16 +37,15 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             var services = CreateServices();
             AddScaffoldingServices(services);
 
-            var generator = services.BuildServiceProvider(validateScopes: true)
+            var generator = services
+                .BuildServiceProvider(validateScopes: true)
                 .GetRequiredService<IModelCodeGenerator>();
 
             options.ModelNamespace ??= "TestNamespace";
             options.ContextName = "TestDbContext";
             options.ConnectionString = "Initial Catalog=TestDatabase";
 
-            var scaffoldedModel = generator.GenerateModel(
-                model,
-                options);
+            var scaffoldedModel = generator.GenerateModel(model, options);
             assertScaffold(scaffoldedModel);
 
             var build = new BuildSource
@@ -55,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     BuildReference.ByName("Microsoft.EntityFrameworkCore.Relational"),
                     BuildReference.ByName("Microsoft.EntityFrameworkCore.SqlServer")
                 },
-                Sources = new[] { scaffoldedModel.ContextFile }.Concat(scaffoldedModel.AdditionalFiles)
+                Sources = new[] { scaffoldedModel.ContextFile }
+                    .Concat(scaffoldedModel.AdditionalFiles)
                     .ToDictionary(f => f.Path, f => f.Code),
                 NullableReferenceTypes = options.UseNullableReferenceTypes
             };
@@ -69,8 +72,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     var contextNamespace = options.ContextNamespace ?? options.ModelNamespace;
                     var context = (DbContext)assembly.CreateInstance(
                         !string.IsNullOrEmpty(contextNamespace)
-                            ? contextNamespace + "." + options.ContextName
-                            : options.ContextName);
+                          ? contextNamespace + "." + options.ContextName
+                          : options.ContextName
+                    );
 
                     var compiledModel = context.GetService<IDesignTimeModel>().Model;
                     assertModel(compiledModel);
@@ -82,22 +86,20 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             var testAssembly = typeof(ModelCodeGeneratorTestBase).Assembly;
             var reporter = new TestOperationReporter();
-            var services = new DesignTimeServicesBuilder(testAssembly, testAssembly, reporter, new string[0])
-                .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer");
+            var services = new DesignTimeServicesBuilder(
+                testAssembly,
+                testAssembly,
+                reporter,
+                new string[0]
+            ).CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer");
             return services;
         }
 
-        protected virtual void AddModelServices(IServiceCollection services)
-        {
-        }
+        protected virtual void AddModelServices(IServiceCollection services) { }
 
-        protected virtual void AddScaffoldingServices(IServiceCollection services)
-        {
-        }
+        protected virtual void AddScaffoldingServices(IServiceCollection services) { }
 
-        protected static void AssertFileContents(
-            string expectedCode,
-            ScaffoldedFile file)
-            => Assert.Equal(expectedCode, file.Code, ignoreLineEndingDifferences: true);
+        protected static void AssertFileContents(string expectedCode, ScaffoldedFile file) =>
+            Assert.Equal(expectedCode, file.Code, ignoreLineEndingDifferences: true);
     }
 }

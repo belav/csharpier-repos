@@ -13,7 +13,11 @@ namespace System.Net.Connections.Tests
         public Func<IConnectionProperties> OnConnectionProperties { get; set; }
         public Func<EndPoint> OnLocalEndPoint { get; set; }
         public Func<EndPoint> OnRemoteEndPoint { get; set; }
-        public Func<ConnectionCloseMethod, CancellationToken, ValueTask> OnCloseAsyncCore { get; set; }
+        public Func<
+            ConnectionCloseMethod,
+            CancellationToken,
+            ValueTask
+        > OnCloseAsyncCore { get; set; }
         public Func<IDuplexPipe> OnCreatePipe { get; set; }
         public Func<Stream> OnCreateStream { get; set; }
 
@@ -23,11 +27,15 @@ namespace System.Net.Connections.Tests
 
         public override EndPoint RemoteEndPoint => OnRemoteEndPoint();
 
-        protected override ValueTask CloseAsyncCore(ConnectionCloseMethod method, CancellationToken cancellationToken) =>
-            OnCloseAsyncCore(method, cancellationToken);
+        protected override ValueTask CloseAsyncCore(
+            ConnectionCloseMethod method,
+            CancellationToken cancellationToken
+        ) => OnCloseAsyncCore(method, cancellationToken);
 
-        protected override IDuplexPipe CreatePipe() => OnCreatePipe != null ? OnCreatePipe() : base.CreatePipe();
+        protected override IDuplexPipe CreatePipe() =>
+            OnCreatePipe != null ? OnCreatePipe() : base.CreatePipe();
 
-        protected override Stream CreateStream() => OnCreateStream != null ? OnCreateStream() : base.CreateStream();
+        protected override Stream CreateStream() =>
+            OnCreateStream != null ? OnCreateStream() : base.CreateStream();
     }
 }

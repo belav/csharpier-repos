@@ -20,8 +20,7 @@ public class SignInResultTest
         // Arrange
         var principal = new ClaimsPrincipal();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignInAsync(It.IsAny<HttpContext>(), "", principal, null))
+        auth.Setup(c => c.SignInAsync(It.IsAny<HttpContext>(), "", principal, null))
             .Returns(Task.CompletedTask)
             .Verifiable();
 
@@ -41,8 +40,7 @@ public class SignInResultTest
         // Arrange
         var principal = new ClaimsPrincipal();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignInAsync(It.IsAny<HttpContext>(), null, principal, null))
+        auth.Setup(c => c.SignInAsync(It.IsAny<HttpContext>(), null, principal, null))
             .Returns(Task.CompletedTask)
             .Verifiable();
         var httpContext = GetHttpContext(auth.Object);
@@ -62,8 +60,9 @@ public class SignInResultTest
         var principal = new ClaimsPrincipal();
         var authProperties = new AuthenticationProperties();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignInAsync(It.IsAny<HttpContext>(), "Scheme1", principal, authProperties))
+        auth.Setup(
+                c => c.SignInAsync(It.IsAny<HttpContext>(), "Scheme1", principal, authProperties)
+            )
             .Returns(Task.CompletedTask)
             .Verifiable();
         var httpContext = GetHttpContext(auth.Object);
@@ -79,9 +78,7 @@ public class SignInResultTest
     private static DefaultHttpContext GetHttpContext(IAuthenticationService auth)
     {
         var httpContext = new DefaultHttpContext();
-        httpContext.RequestServices = CreateServices()
-            .AddSingleton(auth)
-            .BuildServiceProvider();
+        httpContext.RequestServices = CreateServices().AddSingleton(auth).BuildServiceProvider();
         return httpContext;
     }
 

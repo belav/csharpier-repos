@@ -16,9 +16,7 @@ internal sealed class SocketSender : SocketAwaitableEventArgs
 {
     private List<ArraySegment<byte>>? _bufferList;
 
-    public SocketSender(PipeScheduler scheduler) : base(scheduler)
-    {
-    }
+    public SocketSender(PipeScheduler scheduler) : base(scheduler) { }
 
     public ValueTask<int> SendAsync(Socket socket, in ReadOnlySequence<byte> buffers)
     {
@@ -37,9 +35,9 @@ internal sealed class SocketSender : SocketAwaitableEventArgs
         var bytesTransferred = BytesTransferred;
         var error = SocketError;
 
-        return error == SocketError.Success ?
-            new ValueTask<int>(bytesTransferred) :
-           ValueTask.FromException<int>(CreateException(error));
+        return error == SocketError.Success
+          ? new ValueTask<int>(bytesTransferred)
+          : ValueTask.FromException<int>(CreateException(error));
     }
 
     public void Reset()
@@ -71,9 +69,9 @@ internal sealed class SocketSender : SocketAwaitableEventArgs
         var bytesTransferred = BytesTransferred;
         var error = SocketError;
 
-        return error == SocketError.Success ?
-            new ValueTask<int>(bytesTransferred) :
-           ValueTask.FromException<int>(CreateException(error));
+        return error == SocketError.Success
+          ? new ValueTask<int>(bytesTransferred)
+          : ValueTask.FromException<int>(CreateException(error));
     }
 
     private void SetBufferList(in ReadOnlySequence<byte> buffer)

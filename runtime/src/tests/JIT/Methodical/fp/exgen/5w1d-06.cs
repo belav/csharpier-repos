@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal class testout1
 {
     private static double[,,] s_arr3d_0 = new double[5, 6, 4];
     private static double[,] s_arr2d_0 = new double[3, 6];
-
 
     public static int Func_0()
     {

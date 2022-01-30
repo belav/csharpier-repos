@@ -10,29 +10,32 @@ using Microsoft.CodeAnalysis.LanguageServices;
 
 namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
 {
-    internal class CSharpSelectedMembers : AbstractSelectedMembers<
-        MemberDeclarationSyntax,
-        FieldDeclarationSyntax,
-        PropertyDeclarationSyntax,
-        TypeDeclarationSyntax,
-        VariableDeclaratorSyntax>
+    internal class CSharpSelectedMembers
+        : AbstractSelectedMembers<
+              MemberDeclarationSyntax,
+              FieldDeclarationSyntax,
+              PropertyDeclarationSyntax,
+              TypeDeclarationSyntax,
+              VariableDeclaratorSyntax
+          >
     {
         public static readonly CSharpSelectedMembers Instance = new();
 
-        private CSharpSelectedMembers()
-        {
-        }
+        private CSharpSelectedMembers() { }
 
-        protected override IEnumerable<VariableDeclaratorSyntax> GetAllDeclarators(FieldDeclarationSyntax field)
-            => field.Declaration.Variables;
+        protected override IEnumerable<VariableDeclaratorSyntax> GetAllDeclarators(
+            FieldDeclarationSyntax field
+        ) => field.Declaration.Variables;
 
-        protected override SyntaxList<MemberDeclarationSyntax> GetMembers(TypeDeclarationSyntax containingType)
-            => containingType.Members;
+        protected override SyntaxList<MemberDeclarationSyntax> GetMembers(
+            TypeDeclarationSyntax containingType
+        ) => containingType.Members;
 
-        protected override SyntaxToken GetPropertyIdentifier(PropertyDeclarationSyntax declarator)
-            => declarator.Identifier;
+        protected override SyntaxToken GetPropertyIdentifier(
+            PropertyDeclarationSyntax declarator
+        ) => declarator.Identifier;
 
-        protected override SyntaxToken GetVariableIdentifier(VariableDeclaratorSyntax declarator)
-            => declarator.Identifier;
+        protected override SyntaxToken GetVariableIdentifier(VariableDeclaratorSyntax declarator) =>
+            declarator.Identifier;
     }
 }

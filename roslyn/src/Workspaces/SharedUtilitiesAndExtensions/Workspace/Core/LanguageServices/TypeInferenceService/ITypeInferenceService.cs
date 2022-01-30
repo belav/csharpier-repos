@@ -26,11 +26,31 @@ namespace Microsoft.CodeAnalysis.LanguageServices
     /// </summary>
     internal interface ITypeInferenceService : ILanguageService
     {
-        ImmutableArray<ITypeSymbol> InferTypes(SemanticModel semanticModel, SyntaxNode expression, string nameOpt, CancellationToken cancellationToken);
-        ImmutableArray<ITypeSymbol> InferTypes(SemanticModel semanticModel, int position, string nameOpt, CancellationToken cancellationToken);
+        ImmutableArray<ITypeSymbol> InferTypes(
+            SemanticModel semanticModel,
+            SyntaxNode expression,
+            string nameOpt,
+            CancellationToken cancellationToken
+        );
+        ImmutableArray<ITypeSymbol> InferTypes(
+            SemanticModel semanticModel,
+            int position,
+            string nameOpt,
+            CancellationToken cancellationToken
+        );
 
-        ImmutableArray<TypeInferenceInfo> GetTypeInferenceInfo(SemanticModel semanticModel, int position, string nameOpt, CancellationToken cancellationToken);
-        ImmutableArray<TypeInferenceInfo> GetTypeInferenceInfo(SemanticModel semanticModel, SyntaxNode expression, string nameOpt, CancellationToken cancellationToken);
+        ImmutableArray<TypeInferenceInfo> GetTypeInferenceInfo(
+            SemanticModel semanticModel,
+            int position,
+            string nameOpt,
+            CancellationToken cancellationToken
+        );
+        ImmutableArray<TypeInferenceInfo> GetTypeInferenceInfo(
+            SemanticModel semanticModel,
+            SyntaxNode expression,
+            string nameOpt,
+            CancellationToken cancellationToken
+        );
     }
 
     internal struct TypeInferenceInfo

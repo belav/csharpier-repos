@@ -15,13 +15,15 @@ namespace System.Web.Http
         /// <summary>
         /// Optional Parameter
         /// </summary>
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes", Justification = "This type is immutable.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+            Justification = "This type is immutable."
+        )]
         public static readonly RouteParameter Optional = new RouteParameter();
 
         // singleton constructor
-        private RouteParameter()
-        {
-        }
+        private RouteParameter() { }
 
         /// <summary>
         /// Returns a <see cref="System.String"/> that represents this instance.

@@ -79,9 +79,14 @@ namespace System.Drawing.Printing
             set
             {
                 if (value < 0)
-                    throw new ArgumentException(SR.Format(SR.InvalidLowBoundArgumentEx,
-                                                             nameof(value), value.ToString(CultureInfo.CurrentCulture),
-                                                             (0).ToString(CultureInfo.CurrentCulture)));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.InvalidLowBoundArgumentEx,
+                            nameof(value),
+                            value.ToString(CultureInfo.CurrentCulture),
+                            (0).ToString(CultureInfo.CurrentCulture)
+                        )
+                    );
                 /*
                     We shouldnt allow copies to be set since the copies can be a large number
                     and can be reflected in PrintDialog. So for the Copies property,
@@ -103,7 +108,8 @@ namespace System.Drawing.Printing
                 if (!_collate.IsDefault)
                     return (bool)_collate;
                 else
-                    return GetModeField(ModeField.Collate, SafeNativeMethods.DMCOLLATE_FALSE) == SafeNativeMethods.DMCOLLATE_TRUE;
+                    return GetModeField(ModeField.Collate, SafeNativeMethods.DMCOLLATE_FALSE)
+                        == SafeNativeMethods.DMCOLLATE_TRUE;
             }
             set { _collate = value; }
         }
@@ -141,7 +147,11 @@ namespace System.Drawing.Printing
             {
                 if (value < Duplex.Default || value > Duplex.Horizontal)
                 {
-                    throw new InvalidEnumArgumentException(nameof(value), unchecked((int)value), typeof(Duplex));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        unchecked((int)value),
+                        typeof(Duplex)
+                    );
                 }
 
                 _duplex = value;
@@ -157,14 +167,17 @@ namespace System.Drawing.Printing
             set
             {
                 if (value < 0)
-                    throw new ArgumentException(SR.Format(SR.InvalidLowBoundArgumentEx,
-                                                             nameof(value), value.ToString(CultureInfo.CurrentCulture),
-                                                             (0).ToString(CultureInfo.CurrentCulture)));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.InvalidLowBoundArgumentEx,
+                            nameof(value),
+                            value.ToString(CultureInfo.CurrentCulture),
+                            (0).ToString(CultureInfo.CurrentCulture)
+                        )
+                    );
                 _fromPage = value;
             }
         }
-
-
 
         /// <summary>
         /// Gets the names of all printers installed on the machine.
@@ -188,12 +201,28 @@ namespace System.Drawing.Printing
 
                 int bufferSize;
                 int count;
-                Interop.Winspool.EnumPrinters(SafeNativeMethods.PRINTER_ENUM_LOCAL | SafeNativeMethods.PRINTER_ENUM_CONNECTIONS, null, Level, IntPtr.Zero, 0, out bufferSize, out count);
+                Interop.Winspool.EnumPrinters(
+                    SafeNativeMethods.PRINTER_ENUM_LOCAL
+                        | SafeNativeMethods.PRINTER_ENUM_CONNECTIONS,
+                    null,
+                    Level,
+                    IntPtr.Zero,
+                    0,
+                    out bufferSize,
+                    out count
+                );
 
                 IntPtr buffer = Marshal.AllocCoTaskMem(bufferSize);
-                int returnCode = Interop.Winspool.EnumPrinters(SafeNativeMethods.PRINTER_ENUM_LOCAL | SafeNativeMethods.PRINTER_ENUM_CONNECTIONS,
-                                                        null, Level, buffer,
-                                                        bufferSize, out bufferSize, out count);
+                int returnCode = Interop.Winspool.EnumPrinters(
+                    SafeNativeMethods.PRINTER_ENUM_LOCAL
+                        | SafeNativeMethods.PRINTER_ENUM_CONNECTIONS,
+                    null,
+                    Level,
+                    buffer,
+                    bufferSize,
+                    out bufferSize,
+                    out count
+                );
                 var array = new string[count];
 
                 if (returnCode == 0)
@@ -206,7 +235,9 @@ namespace System.Drawing.Printing
                 {
                     // The printer name is at offset 0
                     //
-                    IntPtr namePointer = (IntPtr)Marshal.ReadIntPtr((IntPtr)(checked((long)buffer + i * sizeofstruct)));
+                    IntPtr namePointer = (IntPtr)Marshal.ReadIntPtr(
+                        (IntPtr)(checked((long)buffer + i * sizeofstruct))
+                    );
                     array[i] = Marshal.PtrToStringAuto(namePointer)!;
                 }
 
@@ -221,10 +252,7 @@ namespace System.Drawing.Printing
         /// </summary>
         public bool IsDefaultPrinter
         {
-            get
-            {
-                return (_printerName == null || _printerName == GetDefaultPrinterName());
-            }
+            get { return (_printerName == null || _printerName == GetDefaultPrinterName()); }
         }
 
         /// <summary>
@@ -234,7 +262,10 @@ namespace System.Drawing.Printing
         {
             get
             {
-                return GetDeviceCaps(Interop.Gdi32.DeviceCapability.TECHNOLOGY, Interop.Gdi32.DeviceTechnology.DT_RASPRINTER) == Interop.Gdi32.DeviceTechnology.DT_PLOTTER;
+                return GetDeviceCaps(
+                        Interop.Gdi32.DeviceCapability.TECHNOLOGY,
+                        Interop.Gdi32.DeviceTechnology.DT_RASPRINTER
+                    ) == Interop.Gdi32.DeviceTechnology.DT_PLOTTER;
             }
         }
 
@@ -243,10 +274,7 @@ namespace System.Drawing.Printing
         /// </summary>
         public bool IsValid
         {
-            get
-            {
-                return DeviceCapabilities(SafeNativeMethods.DC_COPIES, IntPtr.Zero, -1) != -1;
-            }
+            get { return DeviceCapabilities(SafeNativeMethods.DC_COPIES, IntPtr.Zero, -1) != -1; }
         }
 
         /// <summary>
@@ -274,9 +302,14 @@ namespace System.Drawing.Printing
             set
             {
                 if (value < 0)
-                    throw new ArgumentException(SR.Format(SR.InvalidLowBoundArgumentEx,
-                                                             nameof(value), value.ToString(CultureInfo.CurrentCulture),
-                                                             (0).ToString(CultureInfo.CurrentCulture)));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.InvalidLowBoundArgumentEx,
+                            nameof(value),
+                            value.ToString(CultureInfo.CurrentCulture),
+                            (0).ToString(CultureInfo.CurrentCulture)
+                        )
+                    );
                 _maxPage = value;
             }
         }
@@ -290,23 +323,22 @@ namespace System.Drawing.Printing
             set
             {
                 if (value < 0)
-                    throw new ArgumentException(SR.Format(SR.InvalidLowBoundArgumentEx,
-                                                             nameof(value), value.ToString(CultureInfo.CurrentCulture),
-                                                             (0).ToString(CultureInfo.CurrentCulture)));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.InvalidLowBoundArgumentEx,
+                            nameof(value),
+                            value.ToString(CultureInfo.CurrentCulture),
+                            (0).ToString(CultureInfo.CurrentCulture)
+                        )
+                    );
                 _minPage = value;
             }
         }
 
         internal string OutputPort
         {
-            get
-            {
-                return _outputPort;
-            }
-            set
-            {
-                _outputPort = value;
-            }
+            get { return _outputPort; }
+            set { _outputPort = value; }
         }
 
         /// <summary>
@@ -352,15 +384,8 @@ namespace System.Drawing.Printing
         /// </summary>
         internal bool PrintDialogDisplayed
         {
-            get
-            {
-                return _printDialogDisplayed;
-            }
-
-            set
-            {
-                _printDialogDisplayed = value;
-            }
+            get { return _printDialogDisplayed; }
+            set { _printDialogDisplayed = value; }
         }
 
         /// <summary>
@@ -372,7 +397,11 @@ namespace System.Drawing.Printing
             set
             {
                 if (!Enum.IsDefined(typeof(PrintRange), value))
-                    throw new InvalidEnumArgumentException(nameof(value), unchecked((int)value), typeof(PrintRange));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        unchecked((int)value),
+                        typeof(PrintRange)
+                    );
 
                 _printRange = value;
             }
@@ -383,14 +412,8 @@ namespace System.Drawing.Printing
         /// </summary>
         public bool PrintToFile
         {
-            get
-            {
-                return _printToFile;
-            }
-            set
-            {
-                _printToFile = value;
-            }
+            get { return _printToFile; }
+            set { _printToFile = value; }
         }
 
         /// <summary>
@@ -398,15 +421,8 @@ namespace System.Drawing.Printing
         /// </summary>
         public string PrinterName
         {
-            get
-            {
-                return PrinterNameInternal;
-            }
-
-            set
-            {
-                PrinterNameInternal = value;
-            }
+            get { return PrinterNameInternal; }
+            set { PrinterNameInternal = value; }
         }
 
         private string PrinterNameInternal
@@ -447,13 +463,23 @@ namespace System.Drawing.Printing
             bool isDirectPrintingSupported = false;
             if (imageFormat.Equals(ImageFormat.Jpeg) || imageFormat.Equals(ImageFormat.Png))
             {
-                int nEscape = imageFormat.Equals(ImageFormat.Jpeg) ? Interop.Gdi32.CHECKJPEGFORMAT : Interop.Gdi32.CHECKPNGFORMAT;
+                int nEscape = imageFormat.Equals(ImageFormat.Jpeg)
+                  ? Interop.Gdi32.CHECKJPEGFORMAT
+                  : Interop.Gdi32.CHECKPNGFORMAT;
                 int outData = 0;
                 DeviceContext dc = CreateInformationContext(DefaultPageSettings);
                 HandleRef hdc = new HandleRef(dc, dc.Hdc);
                 try
                 {
-                    isDirectPrintingSupported = Interop.Gdi32.ExtEscape(hdc, Interop.Gdi32.QUERYESCSUPPORT, sizeof(int), ref nEscape, 0, out outData) > 0;
+                    isDirectPrintingSupported =
+                        Interop.Gdi32.ExtEscape(
+                            hdc,
+                            Interop.Gdi32.QUERYESCSUPPORT,
+                            sizeof(int),
+                            ref nEscape,
+                            0,
+                            out outData
+                        ) > 0;
                 }
                 finally
                 {
@@ -482,18 +508,37 @@ namespace System.Drawing.Printing
 
                     byte[] pvImage = stream.ToArray();
 
-                    int nEscape = image.RawFormat.Equals(ImageFormat.Jpeg) ? Interop.Gdi32.CHECKJPEGFORMAT : Interop.Gdi32.CHECKPNGFORMAT;
+                    int nEscape = image.RawFormat.Equals(ImageFormat.Jpeg)
+                      ? Interop.Gdi32.CHECKJPEGFORMAT
+                      : Interop.Gdi32.CHECKPNGFORMAT;
                     int outData = 0;
 
                     DeviceContext dc = CreateInformationContext(DefaultPageSettings);
                     HandleRef hdc = new HandleRef(dc, dc.Hdc);
                     try
                     {
-                        bool querySupported = Interop.Gdi32.ExtEscape(hdc, Interop.Gdi32.QUERYESCSUPPORT, sizeof(int), ref nEscape, 0, out outData) > 0;
+                        bool querySupported =
+                            Interop.Gdi32.ExtEscape(
+                                hdc,
+                                Interop.Gdi32.QUERYESCSUPPORT,
+                                sizeof(int),
+                                ref nEscape,
+                                0,
+                                out outData
+                            ) > 0;
                         if (querySupported)
                         {
-                            isDirectPrintingSupported = (Interop.Gdi32.ExtEscape(hdc, nEscape, pvImage.Length, pvImage, sizeof(int), out outData) > 0)
-                                                        && (outData == 1);
+                            isDirectPrintingSupported =
+                                (
+                                    Interop.Gdi32.ExtEscape(
+                                        hdc,
+                                        nEscape,
+                                        pvImage.Length,
+                                        pvImage,
+                                        sizeof(int),
+                                        out outData
+                                    ) > 0
+                                ) && (outData == 1);
                         }
                     }
                     finally
@@ -519,9 +564,10 @@ namespace System.Drawing.Printing
                 // If the printer supports color printing, the return value is 1; otherwise, the return value is zero.
                 // The pointerToBuffer parameter is not used.
                 return DeviceCapabilities(
-                    capability: SafeNativeMethods.DC_COLORDEVICE,
-                    pointerToBuffer: IntPtr.Zero,
-                    defaultValue: 0) == 1;
+                        capability: SafeNativeMethods.DC_COLORDEVICE,
+                        pointerToBuffer: IntPtr.Zero,
+                        defaultValue: 0
+                    ) == 1;
             }
         }
 
@@ -534,9 +580,14 @@ namespace System.Drawing.Printing
             set
             {
                 if (value < 0)
-                    throw new ArgumentException(SR.Format(SR.InvalidLowBoundArgumentEx,
-                                                             nameof(value), value.ToString(CultureInfo.CurrentCulture),
-                                                             (0).ToString(CultureInfo.CurrentCulture)));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.InvalidLowBoundArgumentEx,
+                            nameof(value),
+                            value.ToString(CultureInfo.CurrentCulture),
+                            (0).ToString(CultureInfo.CurrentCulture)
+                        )
+                    );
                 _toPage = value;
             }
         }
@@ -550,6 +601,7 @@ namespace System.Drawing.Printing
             clone._printDialogDisplayed = false;
             return clone;
         }
+
         // what is done in copytohdevmode cannot give unwanted access AllPrinting permission
         internal DeviceContext CreateDeviceContext(PageSettings pageSettings)
         {
@@ -572,7 +624,12 @@ namespace System.Drawing.Printing
         internal DeviceContext CreateDeviceContext(IntPtr hdevmode)
         {
             IntPtr modePointer = Interop.Kernel32.GlobalLock(hdevmode);
-            DeviceContext dc = DeviceContext.CreateDC(DriverName, PrinterNameInternal, fileName:null, modePointer);
+            DeviceContext dc = DeviceContext.CreateDC(
+                DriverName,
+                PrinterNameInternal,
+                fileName: null,
+                modePointer
+            );
             Interop.Kernel32.GlobalUnlock(hdevmode);
             return dc;
         }
@@ -601,7 +658,12 @@ namespace System.Drawing.Printing
         internal DeviceContext CreateInformationContext(IntPtr hdevmode)
         {
             IntPtr modePointer = Interop.Kernel32.GlobalLock(hdevmode);
-            DeviceContext dc = DeviceContext.CreateIC(DriverName, PrinterNameInternal, fileName:null, modePointer);
+            DeviceContext dc = DeviceContext.CreateIC(
+                DriverName,
+                PrinterNameInternal,
+                fileName: null,
+                modePointer
+            );
             Interop.Kernel32.GlobalUnlock(hdevmode);
             return dc;
         }
@@ -617,8 +679,14 @@ namespace System.Drawing.Printing
             Graphics g = CreateMeasurementGraphics();
             if (honorOriginAtMargins)
             {
-                g.TranslateTransform(-_defaultPageSettings.HardMarginX, -_defaultPageSettings.HardMarginY);
-                g.TranslateTransform(_defaultPageSettings.Margins.Left, _defaultPageSettings.Margins.Top);
+                g.TranslateTransform(
+                    -_defaultPageSettings.HardMarginX,
+                    -_defaultPageSettings.HardMarginY
+                );
+                g.TranslateTransform(
+                    _defaultPageSettings.Margins.Left,
+                    _defaultPageSettings.Margins.Top
+                );
             }
             return g;
         }
@@ -633,7 +701,10 @@ namespace System.Drawing.Printing
         }
 
         //whatever the call stack calling HardMarginX and HardMarginY here is safe
-        public Graphics CreateMeasurementGraphics(PageSettings pageSettings, bool honorOriginAtMargins)
+        public Graphics CreateMeasurementGraphics(
+            PageSettings pageSettings,
+            bool honorOriginAtMargins
+        )
         {
             Graphics g = CreateMeasurementGraphics();
             if (honorOriginAtMargins)
@@ -643,7 +714,6 @@ namespace System.Drawing.Printing
             }
             return g;
         }
-
 
         // Create a PRINTDLG with a few useful defaults.
         // Try to keep this consistent with PrintDialog.CreatePRINTDLG.
@@ -672,7 +742,6 @@ namespace System.Drawing.Printing
             data.hSetupTemplate = IntPtr.Zero;
             return data;
         }
-
 
         // Create a PRINTDLG with a few useful defaults.
         // Try to keep this consistent with PrintDialog.CreatePRINTDLG.
@@ -711,10 +780,20 @@ namespace System.Drawing.Printing
 
         // We pass PrinterName in as a parameter rather than computing it ourselves because it's expensive to compute.
         // We need to pass IntPtr.Zero since passing HDevMode is non-performant.
-        private static int FastDeviceCapabilities(short capability, IntPtr pointerToBuffer, int defaultValue, string printerName)
+        private static int FastDeviceCapabilities(
+            short capability,
+            IntPtr pointerToBuffer,
+            int defaultValue,
+            string printerName
+        )
         {
-            int result = Interop.Winspool.DeviceCapabilities(printerName, GetOutputPort(),
-                                                          capability, pointerToBuffer, IntPtr.Zero);
+            int result = Interop.Winspool.DeviceCapabilities(
+                printerName,
+                GetOutputPort(),
+                capability,
+                pointerToBuffer,
+                IntPtr.Zero
+            );
             if (result == -1)
                 return defaultValue;
             return result;
@@ -772,7 +851,6 @@ namespace System.Drawing.Printing
                 return name;
             }
         }
-
 
         // Called by get_OutputPort
         private static string GetOutputPort()
@@ -859,12 +937,22 @@ namespace System.Drawing.Printing
         private IntPtr GetHdevmodeInternal(string printer)
         {
             // Create DEVMODE
-            int modeSize = Interop.Winspool.DocumentProperties(NativeMethods.NullHandleRef, NativeMethods.NullHandleRef, printer, IntPtr.Zero, NativeMethods.NullHandleRef, 0);
+            int modeSize = Interop.Winspool.DocumentProperties(
+                NativeMethods.NullHandleRef,
+                NativeMethods.NullHandleRef,
+                printer,
+                IntPtr.Zero,
+                NativeMethods.NullHandleRef,
+                0
+            );
             if (modeSize < 1)
             {
                 throw new InvalidPrinterException(this);
             }
-            IntPtr handle = Interop.Kernel32.GlobalAlloc(SafeNativeMethods.GMEM_MOVEABLE, (uint)modeSize); // cannot be <0 anyway
+            IntPtr handle = Interop.Kernel32.GlobalAlloc(
+                SafeNativeMethods.GMEM_MOVEABLE,
+                (uint)modeSize
+            ); // cannot be <0 anyway
             IntPtr pointer = Interop.Kernel32.GlobalLock(handle);
 
             //Get the DevMode only if its not cached....
@@ -874,15 +962,24 @@ namespace System.Drawing.Printing
             }
             else
             {
-                int returnCode = Interop.Winspool.DocumentProperties(NativeMethods.NullHandleRef, NativeMethods.NullHandleRef, printer, pointer, NativeMethods.NullHandleRef, SafeNativeMethods.DM_OUT_BUFFER);
+                int returnCode = Interop.Winspool.DocumentProperties(
+                    NativeMethods.NullHandleRef,
+                    NativeMethods.NullHandleRef,
+                    printer,
+                    pointer,
+                    NativeMethods.NullHandleRef,
+                    SafeNativeMethods.DM_OUT_BUFFER
+                );
                 if (returnCode < 0)
                 {
                     throw new Win32Exception();
                 }
             }
 
-            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(pointer, typeof(Interop.Gdi32.DEVMODE))!;
-
+            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
+                pointer,
+                typeof(Interop.Gdi32.DEVMODE)
+            )!;
 
             if (_extrainfo != null)
             {
@@ -909,19 +1006,29 @@ namespace System.Drawing.Printing
             if ((mode.dmFields & SafeNativeMethods.DM_COLLATE) == SafeNativeMethods.DM_COLLATE)
             {
                 if (_collate.IsNotDefault)
-                    mode.dmCollate = (short)(((bool)_collate) ? SafeNativeMethods.DMCOLLATE_TRUE : SafeNativeMethods.DMCOLLATE_FALSE);
+                    mode.dmCollate = (short)(
+                        ((bool)_collate)
+                            ? SafeNativeMethods.DMCOLLATE_TRUE
+                            : SafeNativeMethods.DMCOLLATE_FALSE
+                    );
             }
 
             Marshal.StructureToPtr(mode, pointer, false);
 
-            int retCode = Interop.Winspool.DocumentProperties(NativeMethods.NullHandleRef, NativeMethods.NullHandleRef, printer, pointer, pointer, SafeNativeMethods.DM_IN_BUFFER | SafeNativeMethods.DM_OUT_BUFFER);
+            int retCode = Interop.Winspool.DocumentProperties(
+                NativeMethods.NullHandleRef,
+                NativeMethods.NullHandleRef,
+                printer,
+                pointer,
+                pointer,
+                SafeNativeMethods.DM_IN_BUFFER | SafeNativeMethods.DM_OUT_BUFFER
+            );
             if (retCode < 0)
             {
                 Interop.Kernel32.GlobalFree(handle);
                 Interop.Kernel32.GlobalUnlock(handle);
                 return IntPtr.Zero;
             }
-
 
             Interop.Kernel32.GlobalUnlock(handle);
             return handle;
@@ -950,7 +1057,7 @@ namespace System.Drawing.Printing
         public IntPtr GetHdevnames()
         {
             string printerName = PrinterName; // the PrinterName property is slow when using the default printer
-            string driver = DriverName;  // make sure we are writing out exactly the same string as we got the length of
+            string driver = DriverName; // make sure we are writing out exactly the same string as we got the length of
             string outPort = OutputPort;
 
             // Create DEVNAMES structure
@@ -959,8 +1066,13 @@ namespace System.Drawing.Printing
 
             // 8 = size of fixed portion of DEVNAMES
             short offset = (short)(8 / Marshal.SystemDefaultCharSize); // Offsets are in characters, not bytes
-            uint namesSize = (uint)checked(Marshal.SystemDefaultCharSize * (offset + namesCharacters)); // always >0
-            IntPtr handle = Interop.Kernel32.GlobalAlloc(SafeNativeMethods.GMEM_MOVEABLE | SafeNativeMethods.GMEM_ZEROINIT, namesSize);
+            uint namesSize = (uint)checked(
+                Marshal.SystemDefaultCharSize * (offset + namesCharacters)
+            ); // always >0
+            IntPtr handle = Interop.Kernel32.GlobalAlloc(
+                SafeNativeMethods.GMEM_MOVEABLE | SafeNativeMethods.GMEM_ZEROINIT,
+                namesSize
+            );
             IntPtr namesPointer = Interop.Kernel32.GlobalLock(handle);
 
             Marshal.WriteInt16(namesPointer, offset); // wDriverOffset
@@ -1001,7 +1113,10 @@ namespace System.Drawing.Printing
                 }
 
                 IntPtr modePointer = Interop.Kernel32.GlobalLock(new HandleRef(this, modeHandle));
-                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))!;
+                Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
+                    modePointer,
+                    typeof(Interop.Gdi32.DEVMODE)
+                )!;
                 switch (field)
                 {
                     case ModeField.Orientation:
@@ -1061,27 +1176,46 @@ namespace System.Drawing.Printing
         {
             string printerName = PrinterName; //  this is quite expensive if PrinterName is left default
 
-            int count = FastDeviceCapabilities(SafeNativeMethods.DC_PAPERNAMES, IntPtr.Zero, -1, printerName);
+            int count = FastDeviceCapabilities(
+                SafeNativeMethods.DC_PAPERNAMES,
+                IntPtr.Zero,
+                -1,
+                printerName
+            );
             if (count == -1)
                 return Array.Empty<PaperSize>();
             int stringSize = Marshal.SystemDefaultCharSize * 64;
             IntPtr namesBuffer = Marshal.AllocCoTaskMem(checked(stringSize * count));
             FastDeviceCapabilities(SafeNativeMethods.DC_PAPERNAMES, namesBuffer, -1, printerName);
 
-            Debug.Assert(FastDeviceCapabilities(SafeNativeMethods.DC_PAPERS, IntPtr.Zero, -1, printerName) == count,
-                         "Not the same number of paper kinds as paper names?");
+            Debug.Assert(
+                FastDeviceCapabilities(SafeNativeMethods.DC_PAPERS, IntPtr.Zero, -1, printerName)
+                    == count,
+                "Not the same number of paper kinds as paper names?"
+            );
             IntPtr kindsBuffer = Marshal.AllocCoTaskMem(2 * count);
             FastDeviceCapabilities(SafeNativeMethods.DC_PAPERS, kindsBuffer, -1, printerName);
 
-            Debug.Assert(FastDeviceCapabilities(SafeNativeMethods.DC_PAPERSIZE, IntPtr.Zero, -1, printerName) == count,
-                         "Not the same number of paper kinds as paper names?");
+            Debug.Assert(
+                FastDeviceCapabilities(SafeNativeMethods.DC_PAPERSIZE, IntPtr.Zero, -1, printerName)
+                    == count,
+                "Not the same number of paper kinds as paper names?"
+            );
             IntPtr dimensionsBuffer = Marshal.AllocCoTaskMem(8 * count);
-            FastDeviceCapabilities(SafeNativeMethods.DC_PAPERSIZE, dimensionsBuffer, -1, printerName);
+            FastDeviceCapabilities(
+                SafeNativeMethods.DC_PAPERSIZE,
+                dimensionsBuffer,
+                -1,
+                printerName
+            );
 
             PaperSize[] result = new PaperSize[count];
             for (int i = 0; i < count; i++)
             {
-                string name = Marshal.PtrToStringAuto((IntPtr)(checked((long)namesBuffer + stringSize * i)), 64)!;
+                string name = Marshal.PtrToStringAuto(
+                    (IntPtr)(checked((long)namesBuffer + stringSize * i)),
+                    64
+                )!;
                 int index = name.IndexOf('\0');
                 if (index > -1)
                 {
@@ -1089,10 +1223,23 @@ namespace System.Drawing.Printing
                 }
                 short kind = Marshal.ReadInt16((IntPtr)(checked((long)kindsBuffer + i * 2)));
                 int width = Marshal.ReadInt32((IntPtr)(checked((long)dimensionsBuffer + i * 8)));
-                int height = Marshal.ReadInt32((IntPtr)(checked((long)dimensionsBuffer + i * 8 + 4)));
-                result[i] = new PaperSize((PaperKind)kind, name,
-                                          PrinterUnitConvert.Convert(width, PrinterUnit.TenthsOfAMillimeter, PrinterUnit.Display),
-                                          PrinterUnitConvert.Convert(height, PrinterUnit.TenthsOfAMillimeter, PrinterUnit.Display));
+                int height = Marshal.ReadInt32(
+                    (IntPtr)(checked((long)dimensionsBuffer + i * 8 + 4))
+                );
+                result[i] = new PaperSize(
+                    (PaperKind)kind,
+                    name,
+                    PrinterUnitConvert.Convert(
+                        width,
+                        PrinterUnit.TenthsOfAMillimeter,
+                        PrinterUnit.Display
+                    ),
+                    PrinterUnitConvert.Convert(
+                        height,
+                        PrinterUnit.TenthsOfAMillimeter,
+                        PrinterUnit.Display
+                    )
+                );
             }
 
             Marshal.FreeCoTaskMem(namesBuffer);
@@ -1105,7 +1252,12 @@ namespace System.Drawing.Printing
         {
             string printerName = PrinterName; //  this is quite expensive if PrinterName is left default
 
-            int count = FastDeviceCapabilities(SafeNativeMethods.DC_BINNAMES, IntPtr.Zero, -1, printerName);
+            int count = FastDeviceCapabilities(
+                SafeNativeMethods.DC_BINNAMES,
+                IntPtr.Zero,
+                -1,
+                printerName
+            );
             if (count == -1)
                 return Array.Empty<PaperSource>();
 
@@ -1115,15 +1267,21 @@ namespace System.Drawing.Printing
             IntPtr namesBuffer = Marshal.AllocCoTaskMem(checked(stringSize * count));
             FastDeviceCapabilities(SafeNativeMethods.DC_BINNAMES, namesBuffer, -1, printerName);
 
-            Debug.Assert(FastDeviceCapabilities(SafeNativeMethods.DC_BINS, IntPtr.Zero, -1, printerName) == count,
-                         "Not the same number of bin kinds as bin names?");
+            Debug.Assert(
+                FastDeviceCapabilities(SafeNativeMethods.DC_BINS, IntPtr.Zero, -1, printerName)
+                    == count,
+                "Not the same number of bin kinds as bin names?"
+            );
             IntPtr kindsBuffer = Marshal.AllocCoTaskMem(2 * count);
             FastDeviceCapabilities(SafeNativeMethods.DC_BINS, kindsBuffer, -1, printerName);
 
             PaperSource[] result = new PaperSource[count];
             for (int i = 0; i < count; i++)
             {
-                string name = Marshal.PtrToStringAuto((IntPtr)(checked((long)namesBuffer + stringSize * i)), 24)!;
+                string name = Marshal.PtrToStringAuto(
+                    (IntPtr)(checked((long)namesBuffer + stringSize * i)),
+                    24
+                )!;
                 int index = name.IndexOf('\0');
                 if (index > -1)
                 {
@@ -1144,7 +1302,12 @@ namespace System.Drawing.Printing
             string printerName = PrinterName; //  this is quite expensive if PrinterName is left default
             PrinterResolution[] result;
 
-            int count = FastDeviceCapabilities(SafeNativeMethods.DC_ENUMRESOLUTIONS, IntPtr.Zero, -1, printerName);
+            int count = FastDeviceCapabilities(
+                SafeNativeMethods.DC_ENUMRESOLUTIONS,
+                IntPtr.Zero,
+                -1,
+                printerName
+            );
             if (count == -1)
             {
                 //Just return the standard values if custom resolutions are absent ....
@@ -1180,7 +1343,10 @@ namespace System.Drawing.Printing
         // names is pointer to DEVNAMES
         private static string ReadOneDEVNAME(IntPtr pDevnames, int slot)
         {
-            int offset = checked(Marshal.SystemDefaultCharSize * Marshal.ReadInt16((IntPtr)(checked((long)pDevnames + slot * 2))));
+            int offset = checked(
+                Marshal.SystemDefaultCharSize
+                * Marshal.ReadInt16((IntPtr)(checked((long)pDevnames + slot * 2)))
+            );
             string result = Marshal.PtrToStringAuto((IntPtr)(checked((long)pDevnames + offset)))!;
             return result;
         }
@@ -1194,7 +1360,10 @@ namespace System.Drawing.Printing
                 throw new ArgumentException(SR.Format(SR.InvalidPrinterHandle, hdevmode));
 
             IntPtr pointer = Interop.Kernel32.GlobalLock(hdevmode);
-            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(pointer, typeof(Interop.Gdi32.DEVMODE))!;
+            Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)Marshal.PtrToStructure(
+                pointer,
+                typeof(Interop.Gdi32.DEVMODE)
+            )!;
 
             //Copy entire public devmode as a byte array...
             _devmodebytes = mode.dmSize;
@@ -1209,7 +1378,12 @@ namespace System.Drawing.Printing
             if (_extrabytes > 0)
             {
                 _extrainfo = new byte[_extrabytes];
-                Marshal.Copy((IntPtr)(checked((long)pointer + (long)mode.dmSize)), _extrainfo, 0, _extrabytes);
+                Marshal.Copy(
+                    (IntPtr)(checked((long)pointer + (long)mode.dmSize)),
+                    _extrainfo,
+                    0,
+                    _extrabytes
+                );
             }
 
             if ((mode.dmFields & SafeNativeMethods.DM_COPIES) == SafeNativeMethods.DM_COPIES)
@@ -1259,14 +1433,22 @@ namespace System.Drawing.Printing
             string printerName = PrinterName;
             return "[PrinterSettings "
                 + printerName
-                + " Copies=" + Copies.ToString(CultureInfo.InvariantCulture)
-                + " Collate=" + Collate.ToString(CultureInfo.InvariantCulture)
-                + " Duplex=" + Duplex.ToString()
-                + " FromPage=" + FromPage.ToString(CultureInfo.InvariantCulture)
-                + " LandscapeAngle=" + LandscapeAngle.ToString(CultureInfo.InvariantCulture)
-                + " MaximumCopies=" + MaximumCopies.ToString(CultureInfo.InvariantCulture)
-                + " OutputPort=" + OutputPort.ToString(CultureInfo.InvariantCulture)
-                + " ToPage=" + ToPage.ToString(CultureInfo.InvariantCulture)
+                + " Copies="
+                + Copies.ToString(CultureInfo.InvariantCulture)
+                + " Collate="
+                + Collate.ToString(CultureInfo.InvariantCulture)
+                + " Duplex="
+                + Duplex.ToString()
+                + " FromPage="
+                + FromPage.ToString(CultureInfo.InvariantCulture)
+                + " LandscapeAngle="
+                + LandscapeAngle.ToString(CultureInfo.InvariantCulture)
+                + " MaximumCopies="
+                + MaximumCopies.ToString(CultureInfo.InvariantCulture)
+                + " OutputPort="
+                + OutputPort.ToString(CultureInfo.InvariantCulture)
+                + " ToPage="
+                + ToPage.ToString(CultureInfo.InvariantCulture)
                 + "]";
         }
 
@@ -1275,7 +1457,9 @@ namespace System.Drawing.Printing
         {
             if (str == null)
                 str = "";
-            IntPtr address = (IntPtr)(checked((long)bufferStart + index * Marshal.SystemDefaultCharSize));
+            IntPtr address = (IntPtr)(
+                checked((long)bufferStart + index * Marshal.SystemDefaultCharSize)
+            );
 
             char[] data = str.ToCharArray();
             Marshal.Copy(data, 0, address, data.Length);
@@ -1304,10 +1488,7 @@ namespace System.Drawing.Printing
             /// </summary>
             public int Count
             {
-                get
-                {
-                    return _array.Length;
-                }
+                get { return _array.Length; }
             }
 
             /// <summary>
@@ -1315,10 +1496,7 @@ namespace System.Drawing.Printing
             /// </summary>
             public virtual PaperSize this[int index]
             {
-                get
-                {
-                    return _array[index];
-                }
+                get { return _array[index]; }
             }
 
             public IEnumerator GetEnumerator()
@@ -1328,27 +1506,17 @@ namespace System.Drawing.Printing
 
             int ICollection.Count
             {
-                get
-                {
-                    return Count;
-                }
+                get { return Count; }
             }
-
 
             bool ICollection.IsSynchronized
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             object ICollection.SyncRoot
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
 
             void ICollection.CopyTo(Array array, int index)
@@ -1366,9 +1534,7 @@ namespace System.Drawing.Printing
                 return GetEnumerator();
             }
 
-            [
-                EditorBrowsable(EditorBrowsableState.Never)
-            ]
+            [EditorBrowsable(EditorBrowsableState.Never)]
             public int Add(PaperSize paperSize)
             {
                 PaperSize[] newArray = new PaperSize[Count + 1];
@@ -1396,10 +1562,7 @@ namespace System.Drawing.Printing
             /// </summary>
             public int Count
             {
-                get
-                {
-                    return _array.Length;
-                }
+                get { return _array.Length; }
             }
 
             /// <summary>
@@ -1407,10 +1570,7 @@ namespace System.Drawing.Printing
             /// </summary>
             public virtual PaperSource this[int index]
             {
-                get
-                {
-                    return _array[index];
-                }
+                get { return _array[index]; }
             }
 
             public IEnumerator GetEnumerator()
@@ -1420,27 +1580,17 @@ namespace System.Drawing.Printing
 
             int ICollection.Count
             {
-                get
-                {
-                    return Count;
-                }
+                get { return Count; }
             }
-
 
             bool ICollection.IsSynchronized
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             object ICollection.SyncRoot
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
 
             void ICollection.CopyTo(Array array, int index)
@@ -1486,10 +1636,7 @@ namespace System.Drawing.Printing
             /// </summary>
             public int Count
             {
-                get
-                {
-                    return _array.Length;
-                }
+                get { return _array.Length; }
             }
 
             /// <summary>
@@ -1497,10 +1644,7 @@ namespace System.Drawing.Printing
             /// </summary>
             public virtual PrinterResolution this[int index]
             {
-                get
-                {
-                    return _array[index];
-                }
+                get { return _array[index]; }
             }
 
             public IEnumerator GetEnumerator()
@@ -1510,26 +1654,17 @@ namespace System.Drawing.Printing
 
             int ICollection.Count
             {
-                get
-                {
-                    return Count;
-                }
+                get { return Count; }
             }
 
             bool ICollection.IsSynchronized
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             object ICollection.SyncRoot
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
 
             void ICollection.CopyTo(Array array, int index)
@@ -1575,10 +1710,7 @@ namespace System.Drawing.Printing
             /// </summary>
             public int Count
             {
-                get
-                {
-                    return _array.Length;
-                }
+                get { return _array.Length; }
             }
 
             /// <summary>
@@ -1586,10 +1718,7 @@ namespace System.Drawing.Printing
             /// </summary>
             public virtual string this[int index]
             {
-                get
-                {
-                    return _array[index];
-                }
+                get { return _array[index]; }
             }
 
             public IEnumerator GetEnumerator()
@@ -1599,33 +1728,23 @@ namespace System.Drawing.Printing
 
             int ICollection.Count
             {
-                get
-                {
-                    return Count;
-                }
+                get { return Count; }
             }
 
             bool ICollection.IsSynchronized
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             object ICollection.SyncRoot
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
 
             void ICollection.CopyTo(Array array, int index)
             {
                 Array.Copy(_array, index, array, 0, _array.Length);
             }
-
 
             public void CopyTo(string[] strings, int index)
             {
@@ -1637,9 +1756,7 @@ namespace System.Drawing.Printing
                 return GetEnumerator();
             }
 
-            [
-                EditorBrowsable(EditorBrowsableState.Never)
-            ]
+            [EditorBrowsable(EditorBrowsableState.Never)]
             public int Add(string value)
             {
                 string[] newArray = new string[Count + 1];

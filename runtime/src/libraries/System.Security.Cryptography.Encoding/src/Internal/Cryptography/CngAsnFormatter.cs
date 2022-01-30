@@ -22,7 +22,9 @@ namespace Internal.Cryptography
                 oidValue = oid.Value;
             }
 
-            int dwFormatStrType = multiLine ? Interop.Crypt32.CRYPT_FORMAT_STR_MULTI_LINE : Interop.Crypt32.CRYPT_FORMAT_STR_NONE;
+            int dwFormatStrType = multiLine
+                ? Interop.Crypt32.CRYPT_FORMAT_STR_MULTI_LINE
+                : Interop.Crypt32.CRYPT_FORMAT_STR_NONE;
             int cbFormat = 0;
             const int X509_ASN_ENCODING = 0x00000001;
             unsafe
@@ -31,15 +33,40 @@ namespace Internal.Cryptography
                 char[]? pooledarray = null;
                 try
                 {
-                    if (Interop.Crypt32.CryptFormatObject(X509_ASN_ENCODING, 0, dwFormatStrType, IntPtr.Zero, (byte*)oidValuePtr, rawData, rawData.Length, null, ref cbFormat))
+                    if (
+                        Interop.Crypt32.CryptFormatObject(
+                            X509_ASN_ENCODING,
+                            0,
+                            dwFormatStrType,
+                            IntPtr.Zero,
+                            (byte*)oidValuePtr,
+                            rawData,
+                            rawData.Length,
+                            null,
+                            ref cbFormat
+                        )
+                    )
                     {
                         int charLength = (cbFormat + 1) / 2;
-                        Span<char> buffer = charLength <= 256 ?
-                            stackalloc char[256] :
-                            (pooledarray = ArrayPool<char>.Shared.Rent(charLength));
+                        Span<char> buffer =
+                            charLength <= 256
+                                ? stackalloc char[256]
+                                : (pooledarray = ArrayPool<char>.Shared.Rent(charLength));
                         fixed (char* bufferPtr = buffer)
                         {
-                            if (Interop.Crypt32.CryptFormatObject(X509_ASN_ENCODING, 0, dwFormatStrType, IntPtr.Zero, (byte*)oidValuePtr, rawData, rawData.Length, bufferPtr, ref cbFormat))
+                            if (
+                                Interop.Crypt32.CryptFormatObject(
+                                    X509_ASN_ENCODING,
+                                    0,
+                                    dwFormatStrType,
+                                    IntPtr.Zero,
+                                    (byte*)oidValuePtr,
+                                    rawData,
+                                    rawData.Length,
+                                    bufferPtr,
+                                    ref cbFormat
+                                )
+                            )
                             {
                                 return new string(bufferPtr);
                             }

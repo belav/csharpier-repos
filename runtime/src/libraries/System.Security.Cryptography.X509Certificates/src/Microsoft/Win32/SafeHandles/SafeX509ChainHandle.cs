@@ -13,14 +13,16 @@ namespace Microsoft.Win32.SafeHandles
         /// <summary>
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeX509ChainHandle" />.
         /// </summary>
-        public SafeX509ChainHandle()
-            : base(true)
-        {
-        }
+        public SafeX509ChainHandle() : base(true) { }
 
         internal static SafeX509ChainHandle InvalidHandle
         {
-            get { return SafeHandleCache<SafeX509ChainHandle>.GetInvalidHandle(() => new SafeX509ChainHandle()); }
+            get
+            {
+                return SafeHandleCache<SafeX509ChainHandle>.GetInvalidHandle(
+                    () => new SafeX509ChainHandle()
+                );
+            }
         }
 
         protected override bool ReleaseHandle()

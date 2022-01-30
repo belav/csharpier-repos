@@ -21,15 +21,18 @@ app.MapGet("/ok-object", () => Ok(new Person("John", 42)));
 
 app.MapGet("/accepted-object", () => Accepted("/ok-object", new Person("John", 42)));
 
-app.MapGet("/many-results", (int id) =>
-{
-    if (id == -1)
+app.MapGet(
+    "/many-results",
+    (int id) =>
     {
-        return NotFound();
-    }
+        if (id == -1)
+        {
+            return NotFound();
+        }
 
-    return Redirect("/json", permanent: true);
-});
+        return Redirect("/json", permanent: true);
+    }
+);
 
 app.MapGet("/problem", () => Results.Problem("Some problem"));
 
@@ -53,7 +56,5 @@ public class MyController : ControllerBase
 
 namespace SimpleWebSiteWithWebApplicationBuilder
 {
-    public partial class Program
-    {
-    }
+    public partial class Program { }
 }

@@ -23,10 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public PhysicalAddressToStringConverter()
-            : this(null)
-        {
-        }
+        public PhysicalAddressToStringConverter() : this(null) { }
 
         /// <summary>
         ///     Creates a new instance of this converter.
@@ -39,23 +36,23 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public PhysicalAddressToStringConverter(ConverterMappingHints? mappingHints)
-            : base(
-                ToString(),
-                ToPhysicalAddress(),
-                _defaultHints.With(mappingHints))
-        {
-        }
+            : base(ToString(), ToPhysicalAddress(), _defaultHints.With(mappingHints)) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(PhysicalAddress), typeof(string), i => new PhysicalAddressToStringConverter(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(PhysicalAddress),
+                typeof(string),
+                i => new PhysicalAddressToStringConverter(i.MappingHints),
+                _defaultHints
+            );
 
-        private new static Expression<Func<PhysicalAddress?, string?>> ToString()
-            => v => v!.ToString();
+        private new static Expression<Func<PhysicalAddress?, string?>> ToString() =>
+            v => v!.ToString();
 
-        private static Expression<Func<string?, PhysicalAddress?>> ToPhysicalAddress()
-            => v => PhysicalAddress.Parse(v!);
+        private static Expression<Func<string?, PhysicalAddress?>> ToPhysicalAddress() =>
+            v => PhysicalAddress.Parse(v!);
     }
 }

@@ -9,22 +9,29 @@ using Xunit;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore
 {
-    public abstract class ConcurrencyDetectorEnabledRelationalTestBase<TFixture> : ConcurrencyDetectorEnabledTestBase<TFixture>
+    public abstract class ConcurrencyDetectorEnabledRelationalTestBase<TFixture>
+        : ConcurrencyDetectorEnabledTestBase<TFixture>
         where TFixture : ConcurrencyDetectorTestBase<TFixture>.ConcurrencyDetectorFixtureBase, new()
     {
-        protected ConcurrencyDetectorEnabledRelationalTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        protected ConcurrencyDetectorEnabledRelationalTestBase(TFixture fixture) : base(fixture) { }
 
-        protected string NormalizeDelimitersInRawString(string sql)
-            => (Fixture.TestStore as RelationalTestStore)?.NormalizeDelimitersInRawString(sql) ?? sql;
+        protected string NormalizeDelimitersInRawString(string sql) =>
+            (Fixture.TestStore as RelationalTestStore)?.NormalizeDelimitersInRawString(sql) ?? sql;
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual Task FromSql(bool async)
-            => ConcurrencyDetectorTest(async c => async
-                ? await c.Products.FromSqlRaw(NormalizeDelimitersInRawString("select * from [Products]")).ToListAsync()
-                : c.Products.FromSqlRaw(NormalizeDelimitersInRawString("select * from [Products]")).ToList());
+        public virtual Task FromSql(bool async) =>
+            ConcurrencyDetectorTest(
+                async c =>
+                    async
+                        ? await c.Products
+                              .FromSqlRaw(
+                                  NormalizeDelimitersInRawString("select * from [Products]")
+                              )
+                              .ToListAsync()
+                        : c.Products
+                          .FromSqlRaw(NormalizeDelimitersInRawString("select * from [Products]"))
+                          .ToList()
+            );
     }
 }

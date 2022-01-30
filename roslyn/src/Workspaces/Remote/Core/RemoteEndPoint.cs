@@ -25,14 +25,14 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         private const string UnexpectedExceptionLogMessage = "Unexpected exception from JSON-RPC";
 
-        private static readonly JsonRpcTargetOptions s_jsonRpcTargetOptions = new JsonRpcTargetOptions()
-        {
-            // Do not allow JSON-RPC to automatically subscribe to events and remote their calls.
-            NotifyClientOfEvents = false,
-
-            // Only allow public methods (may be on internal types) to be invoked remotely.
-            AllowNonPublicInvocation = false
-        };
+        private static readonly JsonRpcTargetOptions s_jsonRpcTargetOptions =
+            new JsonRpcTargetOptions()
+            {
+                // Do not allow JSON-RPC to automatically subscribe to events and remote their calls.
+                NotifyClientOfEvents = false,
+                // Only allow public methods (may be on internal types) to be invoked remotely.
+                AllowNonPublicInvocation = false
+            };
 
         private static int s_id;
 
@@ -46,7 +46,12 @@ namespace Microsoft.CodeAnalysis.Remote
         public event Action<JsonRpcDisconnectedEventArgs>? Disconnected;
         public event Action<Exception>? UnexpectedExceptionThrown;
 
-        public RemoteEndPoint(Stream stream, TraceSource logger, object? incomingCallTarget, IEnumerable<JsonConverter>? jsonConverters = null)
+        public RemoteEndPoint(
+            Stream stream,
+            TraceSource logger,
+            object? incomingCallTarget,
+            IEnumerable<JsonConverter>? jsonConverters = null
+        )
         {
             RoslynDebug.Assert(stream != null);
             RoslynDebug.Assert(logger != null);
@@ -87,8 +92,7 @@ namespace Microsoft.CodeAnalysis.Remote
             _startedListening = true;
         }
 
-        public bool IsDisposed
-            => _rpc.IsDisposed;
+        public bool IsDisposed => _rpc.IsDisposed;
 
         public void Dispose()
         {
@@ -96,7 +100,11 @@ namespace Microsoft.CodeAnalysis.Remote
             _rpc.Dispose();
         }
 
-        public async Task InvokeAsync(string targetName, IReadOnlyList<object?> arguments, CancellationToken cancellationToken)
+        public async Task InvokeAsync(
+            string targetName,
+            IReadOnlyList<object?> arguments,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(_startedListening);
 
@@ -105,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
             try
             {
-                await _rpc.InvokeWithCancellationAsync(targetName, arguments, cancellationToken).ConfigureAwait(false);
+                await _rpc.InvokeWithCancellationAsync(targetName, arguments, cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch (Exception ex) when (!logError || ReportUnlessCanceled(ex, cancellationToken))
             {
@@ -117,7 +126,11 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        public async Task TryInvokeAsync(string targetName, IReadOnlyList<object?> arguments, CancellationToken cancellationToken)
+        public async Task TryInvokeAsync(
+            string targetName,
+            IReadOnlyList<object?> arguments,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(_startedListening);
 
@@ -128,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
             try
             {
-                await _rpc.InvokeWithCancellationAsync(targetName, arguments, cancellationToken).ConfigureAwait(false);
+                await _rpc.InvokeWithCancellationAsync(targetName, arguments, cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch
             {
@@ -136,7 +150,11 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        public async Task<T> InvokeAsync<T>(string targetName, IReadOnlyList<object?> arguments, CancellationToken cancellationToken)
+        public async Task<T> InvokeAsync<T>(
+            string targetName,
+            IReadOnlyList<object?> arguments,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(_startedListening);
 
@@ -145,7 +163,12 @@ namespace Microsoft.CodeAnalysis.Remote
 
             try
             {
-                return await _rpc.InvokeWithCancellationAsync<T>(targetName, arguments, cancellationToken).ConfigureAwait(false);
+                return await _rpc.InvokeWithCancellationAsync<T>(
+                        targetName,
+                        arguments,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             catch (Exception ex) when (!logError || ReportUnlessCanceled(ex, cancellationToken))
             {
@@ -165,7 +188,12 @@ namespace Microsoft.CodeAnalysis.Remote
         /// <see cref="WriteDataToNamedPipeAsync{TData}(string, TData, Func{Stream, TData, CancellationToken, Task}, CancellationToken)"/>
         /// to write the data to the pipe stream.
         /// </summary>
-        public async Task<T> InvokeAsync<T>(string targetName, IReadOnlyList<object?> arguments, Func<Stream, CancellationToken, Task<T>> dataReader, CancellationToken cancellationToken)
+        public async Task<T> InvokeAsync<T>(
+            string targetName,
+            IReadOnlyList<object?> arguments,
+            Func<Stream, CancellationToken, Task<T>> dataReader,
+            CancellationToken cancellationToken
+        )
         {
             const int BufferSize = 12 * 1024;
 
@@ -181,27 +209,42 @@ namespace Microsoft.CodeAnalysis.Remote
 
             var pipeName = Guid.NewGuid().ToString();
 
-            var pipe = new NamedPipeServerStream(pipeName, PipeDirection.In, maxNumberOfServerInstances: 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
+            var pipe = new NamedPipeServerStream(
+                pipeName,
+                PipeDirection.In,
+                maxNumberOfServerInstances: 1,
+                PipeTransmissionMode.Byte,
+                PipeOptions.Asynchronous
+            );
 
             try
             {
                 // send request to asset source
-                var task = _rpc.InvokeWithCancellationAsync(targetName, arguments.Concat(pipeName).ToArray(), cancellationToken);
+                var task = _rpc.InvokeWithCancellationAsync(
+                    targetName,
+                    arguments.Concat(pipeName).ToArray(),
+                    cancellationToken
+                );
 
                 // if invoke throws an exception, make sure we raise cancellation.
                 readerCancellationSource.CancelOnAbnormalCompletion(task);
 
-                var task2 = Task.Run(async () =>
-                {
-                    // Transfer ownership of the pipe to BufferedStream, it will dispose it:
-                    using var stream = new BufferedStream(pipe, BufferSize);
+                var task2 = Task.Run(
+                    async () =>
+                    {
+                        // Transfer ownership of the pipe to BufferedStream, it will dispose it:
+                        using var stream = new BufferedStream(pipe, BufferSize);
 
-                    // wait for asset source to respond
-                    await pipe.WaitForConnectionAsync(readerCancellationSource.Token).ConfigureAwait(false);
+                        // wait for asset source to respond
+                        await pipe.WaitForConnectionAsync(readerCancellationSource.Token)
+                            .ConfigureAwait(false);
 
-                    // run user task with direct stream
-                    return await dataReader(stream, readerCancellationSource.Token).ConfigureAwait(false);
-                }, readerCancellationSource.Token);
+                        // run user task with direct stream
+                        return await dataReader(stream, readerCancellationSource.Token)
+                            .ConfigureAwait(false);
+                    },
+                    readerCancellationSource.Token
+                );
 
                 // Wait for all tasks to finish. If we return while one of the tasks is still in flight, the task would
                 // operate as a fire-and-forget operation where the caller might release state objects still in use by
@@ -211,11 +254,14 @@ namespace Microsoft.CodeAnalysis.Remote
                 Debug.Assert(task2.Status == TaskStatus.RanToCompletion);
                 return task2.Result;
             }
-            catch (Exception ex) when (!logError || ReportUnlessCanceled(ex, readerCancellationSource.Token, cancellationToken))
+            catch (Exception ex)
+                when (!logError
+                    || ReportUnlessCanceled(ex, readerCancellationSource.Token, cancellationToken)
+                )
             {
                 // Remote call may fail with different exception even when our cancellation token is signaled
                 // (e.g. on shutdown if the connection is dropped).
-                // It's important to use cancelationToken here rather than linked token as there is a slight 
+                // It's important to use cancelationToken here rather than linked token as there is a slight
                 // delay in between linked token being signaled and cancellation token being signaled.
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -223,15 +269,33 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        public static Task WriteDataToNamedPipeAsync<TData>(string pipeName, TData data, Func<ObjectWriter, TData, CancellationToken, Task> dataWriter, CancellationToken cancellationToken)
-            => WriteDataToNamedPipeAsync(pipeName, data,
+        public static Task WriteDataToNamedPipeAsync<TData>(
+            string pipeName,
+            TData data,
+            Func<ObjectWriter, TData, CancellationToken, Task> dataWriter,
+            CancellationToken cancellationToken
+        ) =>
+            WriteDataToNamedPipeAsync(
+                pipeName,
+                data,
                 async (stream, data, cancellationToken) =>
                 {
-                    using var objectWriter = new ObjectWriter(stream, leaveOpen: true, cancellationToken);
+                    using var objectWriter = new ObjectWriter(
+                        stream,
+                        leaveOpen: true,
+                        cancellationToken
+                    );
                     await dataWriter(objectWriter, data, cancellationToken).ConfigureAwait(false);
-                }, cancellationToken);
+                },
+                cancellationToken
+            );
 
-        public static async Task WriteDataToNamedPipeAsync<TData>(string pipeName, TData data, Func<Stream, TData, CancellationToken, Task> dataWriter, CancellationToken cancellationToken)
+        public static async Task WriteDataToNamedPipeAsync<TData>(
+            string pipeName,
+            TData data,
+            Func<Stream, TData, CancellationToken, Task> dataWriter,
+            CancellationToken cancellationToken
+        )
         {
             const int BufferSize = 4 * 1024;
 
@@ -266,7 +330,10 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        private static async Task ConnectPipeAsync(NamedPipeClientStream pipe, CancellationToken cancellationToken)
+        private static async Task ConnectPipeAsync(
+            NamedPipeClientStream pipe,
+            CancellationToken cancellationToken
+        )
         {
             const int ConnectWithoutTimeout = 1;
             const int MaxRetryAttemptsForFileNotFoundException = 3;
@@ -297,7 +364,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     // Ignore and retry.
                 }
-                catch (FileNotFoundException) when (retryCount < MaxRetryAttemptsForFileNotFoundException)
+                catch (FileNotFoundException)
+                    when (retryCount < MaxRetryAttemptsForFileNotFoundException)
                 {
                     // Ignore and retry
                     retryCount++;
@@ -308,11 +376,15 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        private static bool ReportUnlessCanceled(Exception ex, CancellationToken linkedCancellationToken, CancellationToken cancellationToken)
+        private static bool ReportUnlessCanceled(
+            Exception ex,
+            CancellationToken linkedCancellationToken,
+            CancellationToken cancellationToken
+        )
         {
             // check whether we are in cancellation mode
 
-            // things are either cancelled by us (cancellationToken) or cancelled by OOP (linkedCancellationToken). 
+            // things are either cancelled by us (cancellationToken) or cancelled by OOP (linkedCancellationToken).
             // "cancelled by us" means operation user invoked is cancelled by another user action such as explicit cancel, or typing.
             // "cancelled by OOP" means operation user invoked is cancelled due to issue on OOP such as user killed OOP process.
 
@@ -351,7 +423,10 @@ namespace Microsoft.CodeAnalysis.Remote
             FatalError.ReportAndCatch(exception);
         }
 
-        private SoftCrashException CreateSoftCrashException(Exception ex, CancellationToken cancellationToken)
+        private SoftCrashException CreateSoftCrashException(
+            Exception ex,
+            CancellationToken cancellationToken
+        )
         {
             // TODO: revisit https://github.com/dotnet/roslyn/issues/40476
             // We are getting unexpected exception from service hub. Rather than doing hard crash on unexpected exception,
@@ -367,14 +442,20 @@ namespace Microsoft.CodeAnalysis.Remote
         private void LogError(string message)
         {
             var currentProcess = Process.GetCurrentProcess();
-            _logger.TraceEvent(TraceEventType.Error, _id, $" [{currentProcess.ProcessName}:{currentProcess.Id}] {message}");
+            _logger.TraceEvent(
+                TraceEventType.Error,
+                _id,
+                $" [{currentProcess.ProcessName}:{currentProcess.Id}] {message}"
+            );
         }
 
         private void LogDisconnectInfo(JsonRpcDisconnectedEventArgs? e)
         {
             if (e != null)
             {
-                LogError($@"Stream disconnected unexpectedly:  {e.Reason}, '{e.Description}', Exception: {e.Exception?.Message}");
+                LogError(
+                    $@"Stream disconnected unexpectedly:  {e.Reason}, '{e.Description}', Exception: {e.Exception?.Message}"
+                );
             }
         }
 
@@ -389,8 +470,10 @@ namespace Microsoft.CodeAnalysis.Remote
             _disconnectedReason = e;
 
             // Don't log info in cases that are common - such as if we dispose the connection or the remote host process shuts down.
-            if (e.Reason != DisconnectedReason.LocallyDisposed &&
-                e.Reason != DisconnectedReason.RemotePartyTerminated)
+            if (
+                e.Reason != DisconnectedReason.LocallyDisposed
+                && e.Reason != DisconnectedReason.RemotePartyTerminated
+            )
             {
                 LogDisconnectInfo(e);
             }

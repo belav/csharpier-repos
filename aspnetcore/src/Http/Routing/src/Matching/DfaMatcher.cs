@@ -19,7 +19,12 @@ internal sealed partial class DfaMatcher : Matcher
     private readonly int _maxSegmentCount;
     private readonly bool _isDefaultEndpointSelector;
 
-    public DfaMatcher(ILogger<DfaMatcher> logger, EndpointSelector selector, DfaState[] states, int maxSegmentCount)
+    public DfaMatcher(
+        ILogger<DfaMatcher> logger,
+        EndpointSelector selector,
+        DfaState[] states,
+        int maxSegmentCount
+    )
     {
         _logger = logger;
         _selector = selector;
@@ -148,7 +153,15 @@ internal sealed partial class DfaMatcher : Matcher
             if ((flags & Candidate.CandidateFlags.HasComplexSegments) != 0)
             {
                 state.Values ??= new RouteValueDictionary();
-                if (!ProcessComplexSegments(candidate.Endpoint, candidate.ComplexSegments, path, segments, state.Values))
+                if (
+                    !ProcessComplexSegments(
+                        candidate.Endpoint,
+                        candidate.ComplexSegments,
+                        path,
+                        segments,
+                        state.Values
+                    )
+                )
                 {
                     CandidateSet.SetValidity(ref state, false);
                     isMatch = false;
@@ -158,7 +171,14 @@ internal sealed partial class DfaMatcher : Matcher
             if ((flags & Candidate.CandidateFlags.HasConstraints) != 0)
             {
                 state.Values ??= new RouteValueDictionary();
-                if (!ProcessConstraints(candidate.Endpoint, candidate.Constraints, httpContext, state.Values))
+                if (
+                    !ProcessConstraints(
+                        candidate.Endpoint,
+                        candidate.Constraints,
+                        httpContext,
+                        state.Values
+                    )
+                )
                 {
                     CandidateSet.SetValidity(ref state, false);
                     isMatch = false;
@@ -194,13 +214,18 @@ internal sealed partial class DfaMatcher : Matcher
             return _selector.SelectAsync(httpContext, new CandidateSet(candidateState));
         }
 
-        return SelectEndpointWithPoliciesAsync(httpContext, policies, new CandidateSet(candidateState));
+        return SelectEndpointWithPoliciesAsync(
+            httpContext,
+            policies,
+            new CandidateSet(candidateState)
+        );
     }
 
     internal (Candidate[] candidates, IEndpointSelectorPolicy[] policies) FindCandidateSet(
         HttpContext httpContext,
         string path,
-        ReadOnlySpan<PathSegment> segments)
+        ReadOnlySpan<PathSegment> segments
+    )
     {
         var states = _states;
 
@@ -226,7 +251,8 @@ internal sealed partial class DfaMatcher : Matcher
         KeyValuePair<string, object?>[] slots,
         (string parameterName, int segmentIndex, int slotIndex)[] captures,
         string path,
-        ReadOnlySpan<PathSegment> segments)
+        ReadOnlySpan<PathSegment> segments
+    )
     {
         for (var i = 0; i < captures.Length; i++)
         {
@@ -239,7 +265,8 @@ internal sealed partial class DfaMatcher : Matcher
                 {
                     slots[slotIndex] = new KeyValuePair<string, object?>(
                         parameterName,
-                        path.Substring(segment.Start, segment.Length));
+                        path.Substring(segment.Start, segment.Length)
+                    );
                 }
             }
         }
@@ -249,7 +276,8 @@ internal sealed partial class DfaMatcher : Matcher
         KeyValuePair<string, object?>[] slots,
         in (string parameterName, int segmentIndex, int slotIndex) catchAll,
         string path,
-        ReadOnlySpan<PathSegment> segments)
+        ReadOnlySpan<PathSegment> segments
+    )
     {
         // Read segmentIndex to local both to skip double read from stack value
         // and to use the same in-bounds validated variable to access the array.
@@ -259,7 +287,8 @@ internal sealed partial class DfaMatcher : Matcher
             var segment = segments[segmentIndex];
             slots[catchAll.slotIndex] = new KeyValuePair<string, object?>(
                 catchAll.parameterName,
-                path.Substring(segment.Start));
+                path.Substring(segment.Start)
+            );
         }
     }
 
@@ -268,7 +297,8 @@ internal sealed partial class DfaMatcher : Matcher
         (RoutePatternPathSegment pathSegment, int segmentIndex)[] complexSegments,
         string path,
         ReadOnlySpan<PathSegment> segments,
-        RouteValueDictionary values)
+        RouteValueDictionary values
+    )
     {
         for (var i = 0; i < complexSegments.Length; i++)
         {
@@ -289,14 +319,30 @@ internal sealed partial class DfaMatcher : Matcher
         Endpoint endpoint,
         KeyValuePair<string, IRouteConstraint>[] constraints,
         HttpContext httpContext,
-        RouteValueDictionary values)
+        RouteValueDictionary values
+    )
     {
         for (var i = 0; i < constraints.Length; i++)
         {
             var constraint = constraints[i];
-            if (!constraint.Value.Match(httpContext, NullRouter.Instance, constraint.Key, values, RouteDirection.IncomingRequest))
+            if (
+                !constraint.Value.Match(
+                    httpContext,
+                    NullRouter.Instance,
+                    constraint.Key,
+                    values,
+                    RouteDirection.IncomingRequest
+                )
+            )
             {
-                Log.CandidateRejectedByConstraint(_logger, httpContext.Request.Path, endpoint, constraint.Key, constraint.Value, values[constraint.Key]);
+                Log.CandidateRejectedByConstraint(
+                    _logger,
+                    httpContext.Request.Path,
+                    endpoint,
+                    constraint.Key,
+                    constraint.Value,
+                    values[constraint.Key]
+                );
                 return false;
             }
         }
@@ -307,7 +353,8 @@ internal sealed partial class DfaMatcher : Matcher
     private async Task SelectEndpointWithPoliciesAsync(
         HttpContext httpContext,
         IEndpointSelectorPolicy[] policies,
-        CandidateSet candidateSet)
+        CandidateSet candidateSet
+    )
     {
         for (var i = 0; i < policies.Length; i++)
         {
@@ -325,52 +372,108 @@ internal sealed partial class DfaMatcher : Matcher
 
     private static partial class Log
     {
-        [LoggerMessage(1000, LogLevel.Debug,
+        [LoggerMessage(
+            1000,
+            LogLevel.Debug,
             "No candidates found for the request path '{Path}'",
             EventName = "CandidatesNotFound",
-            SkipEnabledCheck = true)]
+            SkipEnabledCheck = true
+        )]
         public static partial void CandidatesNotFound(ILogger logger, string path);
 
-        public static void CandidatesFound(ILogger logger, string path, Candidate[] candidates)
-            => CandidatesFound(logger, candidates.Length, path);
+        public static void CandidatesFound(ILogger logger, string path, Candidate[] candidates) =>
+            CandidatesFound(logger, candidates.Length, path);
 
-        [LoggerMessage(1001, LogLevel.Debug,
+        [LoggerMessage(
+            1001,
+            LogLevel.Debug,
             "{CandidateCount} candidate(s) found for the request path '{Path}'",
             EventName = "CandidatesFound",
-            SkipEnabledCheck = true)]
-        private static partial void CandidatesFound(ILogger logger, int candidateCount, string path);
+            SkipEnabledCheck = true
+        )]
+        private static partial void CandidatesFound(
+            ILogger logger,
+            int candidateCount,
+            string path
+        );
 
-        public static void CandidateRejectedByComplexSegment(ILogger logger, string path, Endpoint endpoint, RoutePatternPathSegment segment)
+        public static void CandidateRejectedByComplexSegment(
+            ILogger logger,
+            string path,
+            Endpoint endpoint,
+            RoutePatternPathSegment segment
+        )
         {
             // This should return a real pattern since we're processing complex segments.... but just in case.
             if (logger.IsEnabled(LogLevel.Debug))
             {
                 var routePattern = GetRoutePattern(endpoint);
-                CandidateRejectedByComplexSegment(logger, endpoint.DisplayName, routePattern, segment.DebuggerToString(), path);
+                CandidateRejectedByComplexSegment(
+                    logger,
+                    endpoint.DisplayName,
+                    routePattern,
+                    segment.DebuggerToString(),
+                    path
+                );
             }
         }
 
-        [LoggerMessage(1002, LogLevel.Debug,
+        [LoggerMessage(
+            1002,
+            LogLevel.Debug,
             "Endpoint '{Endpoint}' with route pattern '{RoutePattern}' was rejected by complex segment '{Segment}' for the request path '{Path}'",
             EventName = "CandidateRejectedByComplexSegment",
-            SkipEnabledCheck = true)]
-        private static partial void CandidateRejectedByComplexSegment(ILogger logger, string? endpoint, string routePattern, string segment, string path);
+            SkipEnabledCheck = true
+        )]
+        private static partial void CandidateRejectedByComplexSegment(
+            ILogger logger,
+            string? endpoint,
+            string routePattern,
+            string segment,
+            string path
+        );
 
-        public static void CandidateRejectedByConstraint(ILogger logger, string path, Endpoint endpoint, string constraintName, IRouteConstraint constraint, object? value)
+        public static void CandidateRejectedByConstraint(
+            ILogger logger,
+            string path,
+            Endpoint endpoint,
+            string constraintName,
+            IRouteConstraint constraint,
+            object? value
+        )
         {
             // This should return a real pattern since we're processing constraints.... but just in case.
             if (logger.IsEnabled(LogLevel.Debug))
             {
                 var routePattern = GetRoutePattern(endpoint);
-                CandidateRejectedByConstraint(logger, endpoint.DisplayName, routePattern, constraintName, constraint.ToString(), value, path);
+                CandidateRejectedByConstraint(
+                    logger,
+                    endpoint.DisplayName,
+                    routePattern,
+                    constraintName,
+                    constraint.ToString(),
+                    value,
+                    path
+                );
             }
         }
 
-        [LoggerMessage(1003, LogLevel.Debug,
+        [LoggerMessage(
+            1003,
+            LogLevel.Debug,
             "Endpoint '{Endpoint}' with route pattern '{RoutePattern}' was rejected by constraint '{ConstraintName}':'{Constraint}' with value '{RouteValue}' for the request path '{Path}'",
             EventName = "CandidateRejectedByConstraint",
-            SkipEnabledCheck = true)]
-        private static partial void CandidateRejectedByConstraint(ILogger logger, string? endpoint, string routePattern, string constraintName, string? constraint, object? routeValue, string path);
+            SkipEnabledCheck = true
+        )]
+        private static partial void CandidateRejectedByConstraint(
+            ILogger logger,
+            string? endpoint,
+            string routePattern,
+            string constraintName,
+            string? constraint,
+            object? routeValue,
+            string path
+        );
 
         public static void CandidateNotValid(ILogger logger, string path, Endpoint endpoint)
         {
@@ -382,11 +485,19 @@ internal sealed partial class DfaMatcher : Matcher
             }
         }
 
-        [LoggerMessage(1004, LogLevel.Debug,
+        [LoggerMessage(
+            1004,
+            LogLevel.Debug,
             "Endpoint '{Endpoint}' with route pattern '{RoutePattern}' is not valid for the request path '{Path}'",
             EventName = "CandidateNotValid",
-            SkipEnabledCheck = true)]
-        private static partial void CandidateNotValid(ILogger logger, string? endpoint, string routePattern, string path);
+            SkipEnabledCheck = true
+        )]
+        private static partial void CandidateNotValid(
+            ILogger logger,
+            string? endpoint,
+            string routePattern,
+            string path
+        );
 
         public static void CandidateValid(ILogger logger, string path, Endpoint endpoint)
         {
@@ -398,11 +509,19 @@ internal sealed partial class DfaMatcher : Matcher
             }
         }
 
-        [LoggerMessage(1005, LogLevel.Debug,
+        [LoggerMessage(
+            1005,
+            LogLevel.Debug,
             "Endpoint '{Endpoint}' with route pattern '{RoutePattern}' is valid for the request path '{Path}'",
             EventName = "CandidateValid",
-            SkipEnabledCheck = true)]
-        private static partial void CandidateValid(ILogger logger, string? endpoint, string routePattern, string path);
+            SkipEnabledCheck = true
+        )]
+        private static partial void CandidateValid(
+            ILogger logger,
+            string? endpoint,
+            string routePattern,
+            string path
+        );
 
         private static string GetRoutePattern(Endpoint endpoint)
         {

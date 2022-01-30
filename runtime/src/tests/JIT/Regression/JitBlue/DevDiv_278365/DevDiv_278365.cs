@@ -28,9 +28,9 @@ internal class Program
         else
         {
             return 100;
-        }        
+        }
     }
-	
+
     private static int Main(string[] args)
     {
         try
@@ -38,9 +38,7 @@ internal class Program
             if (Bar() != 100)
                 return 0;
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) { }
 
         Console.WriteLine("Pass");
         return 100;

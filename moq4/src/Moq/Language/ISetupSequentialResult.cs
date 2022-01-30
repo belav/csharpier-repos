@@ -6,44 +6,45 @@ using System.ComponentModel;
 
 namespace Moq.Language
 {
-	/// <summary>
+    /// <summary>
 	/// Language for ReturnSequence
 	/// </summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public interface ISetupSequentialResult<TResult>
-	{
-		// would be nice to Mixin somehow the IReturn and IThrows with
-		// another ReturnType
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public interface ISetupSequentialResult<TResult>
+    {
+        // would be nice to Mixin somehow the IReturn and IThrows with
+        // another ReturnType
 
-		/// <summary>
+        /// <summary>
 		/// Returns value
 		/// </summary>
-		ISetupSequentialResult<TResult> Returns(TResult value);
+        ISetupSequentialResult<TResult> Returns(TResult value);
 
-		/// <summary>
+        /// <summary>
 		/// Uses delegate to get return value
 		/// </summary>
-		/// <param name="valueFunction">The function that will calculate the return value.</param> 
-		ISetupSequentialResult<TResult> Returns(Func<TResult> valueFunction);
+		/// <param name="valueFunction">The function that will calculate the return value.</param>
+        ISetupSequentialResult<TResult> Returns(Func<TResult> valueFunction);
 
-		/// <summary>
+        /// <summary>
 		/// Throws an exception
 		/// </summary>
-		ISetupSequentialResult<TResult> Throws(Exception exception);
+        ISetupSequentialResult<TResult> Throws(Exception exception);
 
-		/// <summary>
+        /// <summary>
 		/// Throws an exception
 		/// </summary>
-		ISetupSequentialResult<TResult> Throws<TException>() where TException : Exception, new();
+        ISetupSequentialResult<TResult> Throws<TException>() where TException : Exception, new();
 
-		/// <summary>
+        /// <summary>
 		/// Uses delegate to throws an exception
 		/// </summary>
-		ISetupSequentialResult<TResult> Throws<TException>(Func<TException> exceptionFunction) where TException : Exception;
+        ISetupSequentialResult<TResult> Throws<TException>(Func<TException> exceptionFunction)
+            where TException : Exception;
 
-		/// <summary>
+        /// <summary>
 		/// Calls original method
 		/// </summary>
-		ISetupSequentialResult<TResult> CallBase();
-	}
+        ISetupSequentialResult<TResult> CallBase();
+    }
 }

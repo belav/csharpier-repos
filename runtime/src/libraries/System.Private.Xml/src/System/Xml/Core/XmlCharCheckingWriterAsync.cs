@@ -17,7 +17,12 @@ namespace System.Xml
     //
     internal sealed partial class XmlCharCheckingWriter : XmlWrappingWriter
     {
-        public override Task WriteDocTypeAsync(string name, string? pubid, string? sysid, string? subset)
+        public override Task WriteDocTypeAsync(
+            string name,
+            string? pubid,
+            string? sysid,
+            string? subset
+        )
         {
             if (_checkNames)
             {
@@ -75,7 +80,11 @@ namespace System.Xml
             return writer.WriteStartElementAsync(prefix, localName, ns);
         }
 
-        protected internal override Task WriteStartAttributeAsync(string? prefix, string localName, string? ns)
+        protected internal override Task WriteStartAttributeAsync(
+            string? prefix,
+            string localName,
+            string? ns
+        )
         {
             if (_checkNames)
             {
@@ -182,7 +191,12 @@ namespace System.Xml
                 int i;
                 if ((i = XmlCharType.IsOnlyWhitespaceWithPos(ws)) != -1)
                 {
-                    throw new ArgumentException(SR.Format(SR.Xml_InvalidWhitespaceCharacter, XmlException.BuildCharExceptionArgs(ws, i)));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.Xml_InvalidWhitespaceCharacter,
+                            XmlException.BuildCharExceptionArgs(ws, i)
+                        )
+                    );
                 }
             }
 

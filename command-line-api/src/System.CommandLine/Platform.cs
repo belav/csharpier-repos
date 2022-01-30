@@ -15,7 +15,6 @@
                         var check = Console.IsOutputRedirected;
                         _isConsoleRedirectionCheckSupported = true;
                     }
-
                     catch (PlatformNotSupportedException)
                     {
                         _isConsoleRedirectionCheckSupported = false;

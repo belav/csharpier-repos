@@ -28,21 +28,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 if (_lazyType is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyType, _underlying.TypeWithAnnotations.GetPublicSymbol(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyType,
+                        _underlying.TypeWithAnnotations.GetPublicSymbol(),
+                        null
+                    );
                 }
 
                 return _lazyType;
             }
         }
 
-        CodeAnalysis.NullableAnnotation ILocalSymbol.NullableAnnotation => _underlying.TypeWithAnnotations.ToPublicAnnotation();
+        CodeAnalysis.NullableAnnotation ILocalSymbol.NullableAnnotation =>
+            _underlying.TypeWithAnnotations.ToPublicAnnotation();
 
         bool ILocalSymbol.IsFunctionValue
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         bool ILocalSymbol.IsConst => _underlying.IsConst;

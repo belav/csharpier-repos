@@ -11,14 +11,18 @@ namespace System.Web.WebPages
         private readonly ValidationAttribute _attribute;
         private readonly ModelClientValidationRule _clientValidationRule;
 
-        public ValidationAttributeAdapter(ValidationAttribute attribute, string errorMessage, ModelClientValidationRule clientValidationRule)
-            :
-                this(attribute, errorMessage, clientValidationRule, useUnvalidatedValues: false)
-        {
-        }
+        public ValidationAttributeAdapter(
+            ValidationAttribute attribute,
+            string errorMessage,
+            ModelClientValidationRule clientValidationRule
+        ) : this(attribute, errorMessage, clientValidationRule, useUnvalidatedValues: false) { }
 
-        public ValidationAttributeAdapter(ValidationAttribute attribute, string errorMessage, ModelClientValidationRule clientValidationRule, bool useUnvalidatedValues)
-            : base(errorMessage, useUnvalidatedValues)
+        public ValidationAttributeAdapter(
+            ValidationAttribute attribute,
+            string errorMessage,
+            ModelClientValidationRule clientValidationRule,
+            bool useUnvalidatedValues
+        ) : base(errorMessage, useUnvalidatedValues)
         {
             _attribute = attribute;
             _clientValidationRule = clientValidationRule;

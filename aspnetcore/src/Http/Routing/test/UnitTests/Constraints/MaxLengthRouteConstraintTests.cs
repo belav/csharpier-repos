@@ -14,7 +14,11 @@ public class MaxLengthRouteConstraintTests
     [InlineData(3, "12", true)]
     [InlineData(3, "123", true)]
     [InlineData(3, "1234", false)]
-    public void MaxLengthRouteConstraint_ApplyConstraint(int min, string parameterValue, bool expected)
+    public void MaxLengthRouteConstraint_ApplyConstraint(
+        int min,
+        string parameterValue,
+        bool expected
+    )
     {
         // Arrange
         var constraint = new MaxLengthRouteConstraint(min);
@@ -37,6 +41,7 @@ public class MaxLengthRouteConstraintTests
             () => new MaxLengthRouteConstraint(-1),
             "maxLength",
             expectedMessage,
-            -1);
+            -1
+        );
     }
 }

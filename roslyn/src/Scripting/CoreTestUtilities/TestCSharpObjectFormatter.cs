@@ -17,7 +17,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
         private readonly int _maximumLineLength;
         private readonly CultureInfo _cultureInfo;
 
-        public TestCSharpObjectFormatter(bool includeCodePoints = false, bool quoteStringsAndCharacters = true, int maximumLineLength = int.MaxValue, CultureInfo cultureInfo = null)
+        public TestCSharpObjectFormatter(
+            bool includeCodePoints = false,
+            bool quoteStringsAndCharacters = true,
+            int maximumLineLength = int.MaxValue,
+            CultureInfo cultureInfo = null
+        )
         {
             _includeCodePoints = includeCodePoints;
             _quoteStringsAndCharacters = quoteStringsAndCharacters;
@@ -31,14 +36,18 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
                 newLine: Environment.NewLine,
                 ellipsis: printOptions.Ellipsis,
                 maximumLineLength: _maximumLineLength,
-                maximumOutputLength: printOptions.MaximumOutputLength);
+                maximumOutputLength: printOptions.MaximumOutputLength
+            );
 
-        protected override CommonPrimitiveFormatterOptions GetPrimitiveOptions(PrintOptions printOptions) =>
+        protected override CommonPrimitiveFormatterOptions GetPrimitiveOptions(
+            PrintOptions printOptions
+        ) =>
             new CommonPrimitiveFormatterOptions(
                 numberRadix: printOptions.NumberRadix,
                 includeCodePoints: _includeCodePoints,
                 escapeNonPrintableCharacters: printOptions.EscapeNonPrintableCharacters,
                 quoteStringsAndCharacters: _quoteStringsAndCharacters,
-                cultureInfo: _cultureInfo);
+                cultureInfo: _cultureInfo
+            );
     }
 }

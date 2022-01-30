@@ -41,7 +41,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             Resolver = resolver;
         }
 
-        private SignatureContext(EcmaModule globalContext, EcmaModule localContext, ModuleTokenResolver resolver)
+        private SignatureContext(
+            EcmaModule globalContext,
+            EcmaModule localContext,
+            ModuleTokenResolver resolver
+        )
         {
             GlobalContext = globalContext;
             LocalContext = localContext;
@@ -55,7 +59,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public EcmaModule GetTargetModule(TypeDesc type)
         {
-            if (type.IsPrimitive || type.IsString || type.IsObject || type.IsWellKnownType(WellKnownType.TypedReference))
+            if (
+                type.IsPrimitive
+                || type.IsString
+                || type.IsObject
+                || type.IsWellKnownType(WellKnownType.TypedReference)
+            )
             {
                 return LocalContext;
             }
@@ -88,8 +97,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public bool Equals(SignatureContext other)
         {
-            return GlobalContext == other.GlobalContext
-                && LocalContext == other.LocalContext;
+            return GlobalContext == other.GlobalContext && LocalContext == other.LocalContext;
         }
 
         public override bool Equals(object obj)
@@ -106,7 +114,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (GlobalContext == null || other.GlobalContext == null)
             {
-                return (GlobalContext != null ? 1 : other.GlobalContext != null ? -1 : 0);
+                return (
+                    GlobalContext != null
+                        ? 1
+                        : other.GlobalContext != null
+                            ? -1
+                            : 0
+                );
             }
 
             int result = GlobalContext.CompareTo(other.GlobalContext);
@@ -115,7 +129,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             if (LocalContext == null || other.LocalContext == null)
             {
-                return (LocalContext != null ? 1 : other.LocalContext != null ? -1 : 0);
+                return (
+                    LocalContext != null
+                        ? 1
+                        : other.LocalContext != null
+                            ? -1
+                            : 0
+                );
             }
 
             return LocalContext.CompareTo(other.LocalContext);

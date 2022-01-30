@@ -13,7 +13,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <summary>
 /// Specifies the parameters necessary for setting appropriate headers in response caching.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public class ResponseCacheAttribute : Attribute, IFilterFactory, IOrderedFilter
 {
     // A nullable-int cannot be used as an Attribute parameter.
@@ -90,7 +94,9 @@ public class ResponseCacheAttribute : Attribute, IFilterFactory, IOrderedFilter
             options.CacheProfiles.TryGetValue(CacheProfileName, out selectedProfile);
             if (selectedProfile == null)
             {
-                throw new InvalidOperationException(Resources.FormatCacheProfileNotFound(CacheProfileName));
+                throw new InvalidOperationException(
+                    Resources.FormatCacheProfileNotFound(CacheProfileName)
+                );
             }
         }
 

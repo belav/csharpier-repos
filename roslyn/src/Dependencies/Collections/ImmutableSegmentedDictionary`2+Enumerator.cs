@@ -42,7 +42,10 @@ namespace Microsoft.CodeAnalysis.Collections
 
             public KeyValuePair<TKey, TValue> Current => _enumerator.Current;
 
-            object IEnumerator.Current => _returnType == ReturnType.DictionaryEntry ? ((IDictionaryEnumerator)this).Entry : Current;
+            object IEnumerator.Current =>
+                _returnType == ReturnType.DictionaryEntry
+                    ? ((IDictionaryEnumerator)this).Entry
+                    : Current;
 
             DictionaryEntry IDictionaryEnumerator.Entry => new(Current.Key, Current.Value);
 
@@ -50,11 +53,9 @@ namespace Microsoft.CodeAnalysis.Collections
 
             object? IDictionaryEnumerator.Value => Current.Value;
 
-            public void Dispose()
-                => _enumerator.Dispose();
+            public void Dispose() => _enumerator.Dispose();
 
-            public bool MoveNext()
-                => _enumerator.MoveNext();
+            public bool MoveNext() => _enumerator.MoveNext();
 
             public void Reset()
             {

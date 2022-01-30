@@ -33,18 +33,18 @@ namespace Prog
 
         public void ServiceCallbackOnPositionAvailable(Object state, bool timedOut)
         {
-
             if (this.sessionRegisteredWait == null)
             {
                 this.sessionNotification.Reset();
                 this.sessionRegisteredWait.Unregister(null);
 
-                this.sessionRegisteredWait =
-                        ThreadPool.RegisterWaitForSingleObject(this.sessionNotification,
-                                                                ServiceCallbackOnPositionAvailable,
-                                                                this,   /* object state */
-                                                                -1,     /* INFINITE */
-                                                                true    /* ExecuteOnlyOnce */);
+                this.sessionRegisteredWait = ThreadPool.RegisterWaitForSingleObject(
+                    this.sessionNotification,
+                    ServiceCallbackOnPositionAvailable,
+                    this, /* object state */
+                    -1, /* INFINITE */
+                    true /* ExecuteOnlyOnce */
+                );
             }
 
             Console.WriteLine("callback running");
@@ -59,13 +59,14 @@ namespace Prog
         public void register()
         {
             this.sessionNotification = new ManualResetEvent(false);
-      
+
             this.sessionRegisteredWait = ThreadPool.RegisterWaitForSingleObject(
-                                                            this.sessionNotification,
-                                                            ServiceCallbackOnPositionAvailable,
-                                                            this,   /* object state */
-                                                            -1,     /* INFINITE */
-                                                            true    /* ExecuteOnlyOnce */);
+                this.sessionNotification,
+                ServiceCallbackOnPositionAvailable,
+                this, /* object state */
+                -1, /* INFINITE */
+                true /* ExecuteOnlyOnce */
+            );
         }
 
         public void unregister()

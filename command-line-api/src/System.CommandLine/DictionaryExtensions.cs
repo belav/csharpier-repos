@@ -7,7 +7,8 @@ namespace System.CommandLine
         public static TValue GetOrAdd<TKey, TValue>(
             this IDictionary<TKey, TValue> source,
             TKey key,
-            Func<TKey, TValue> create)
+            Func<TKey, TValue> create
+        )
         {
             if (source.TryGetValue(key, out TValue value))
             {
@@ -26,7 +27,8 @@ namespace System.CommandLine
         public static bool TryAdd<TKey, TValue>(
             this IDictionary<TKey, TValue> source,
             TKey key,
-            TValue value)
+            TValue value
+        )
         {
             if (source.ContainsKey(key))
             {

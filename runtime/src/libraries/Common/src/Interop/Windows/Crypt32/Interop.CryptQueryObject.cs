@@ -22,7 +22,7 @@ internal static partial class Interop
             out SafeCertStoreHandle phCertStore,
             out SafeCryptMsgHandle phMsg,
             out SafeCertContextHandle ppvContext
-            );
+        );
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static unsafe partial bool CryptQueryObject(
@@ -37,7 +37,7 @@ internal static partial class Interop
             IntPtr phCertStore,
             IntPtr phMsg,
             IntPtr ppvContext
-            );
+        );
 
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static unsafe partial bool CryptQueryObject(
@@ -52,6 +52,6 @@ internal static partial class Interop
             out SafeCertStoreHandle phCertStore,
             IntPtr phMsg,
             IntPtr ppvContext
-            );
+        );
     }
 }

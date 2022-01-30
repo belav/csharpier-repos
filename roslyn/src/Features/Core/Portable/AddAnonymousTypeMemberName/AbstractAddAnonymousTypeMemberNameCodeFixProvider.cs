@@ -19,20 +19,25 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
     internal abstract class AbstractAddAnonymousTypeMemberNameCodeFixProvider<
         TExpressionSyntax,
         TAnonymousObjectInitializer,
-        TAnonymousObjectMemberDeclaratorSyntax>
-        : SyntaxEditorBasedCodeFixProvider
+        TAnonymousObjectMemberDeclaratorSyntax
+    > : SyntaxEditorBasedCodeFixProvider
         where TExpressionSyntax : SyntaxNode
         where TAnonymousObjectInitializer : SyntaxNode
         where TAnonymousObjectMemberDeclaratorSyntax : SyntaxNode
     {
-        protected AbstractAddAnonymousTypeMemberNameCodeFixProvider()
-        {
-        }
+        protected AbstractAddAnonymousTypeMemberNameCodeFixProvider() { }
 
         protected abstract bool HasName(TAnonymousObjectMemberDeclaratorSyntax declarator);
-        protected abstract TExpressionSyntax GetExpression(TAnonymousObjectMemberDeclaratorSyntax declarator);
-        protected abstract TAnonymousObjectMemberDeclaratorSyntax WithName(TAnonymousObjectMemberDeclaratorSyntax declarator, SyntaxToken name);
-        protected abstract IEnumerable<string> GetAnonymousObjectMemberNames(TAnonymousObjectInitializer initializer);
+        protected abstract TExpressionSyntax GetExpression(
+            TAnonymousObjectMemberDeclaratorSyntax declarator
+        );
+        protected abstract TAnonymousObjectMemberDeclaratorSyntax WithName(
+            TAnonymousObjectMemberDeclaratorSyntax declarator,
+            SyntaxToken name
+        );
+        protected abstract IEnumerable<string> GetAnonymousObjectMemberNames(
+            TAnonymousObjectInitializer initializer
+        );
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
@@ -42,7 +47,8 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
             var cancellationToken = context.CancellationToken;
 
             var diagnostic = context.Diagnostics[0];
-            var declarator = await GetMemberDeclaratorAsync(document, diagnostic, cancellationToken).ConfigureAwait(false);
+            var declarator = await GetMemberDeclaratorAsync(document, diagnostic, cancellationToken)
+                .ConfigureAwait(false);
             if (declarator == null)
             {
                 return;
@@ -50,14 +56,20 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
 
             context.RegisterCodeFix(
                 new MyCodeAction(c => FixAsync(document, diagnostic, c)),
-                context.Diagnostics);
+                context.Diagnostics
+            );
         }
 
         private async Task<TAnonymousObjectMemberDeclaratorSyntax?> GetMemberDeclaratorAsync(
-            Document document, Diagnostic diagnostic, CancellationToken cancellationToken)
+            Document document,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
             var span = diagnostic.Location.SourceSpan;
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var node = root.FindNode(span, getInnermostNodeForTie: true) as TExpressionSyntax;
             if (node?.Span != span)
             {
@@ -84,34 +96,56 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             // If we're only introducing one name, then add the rename annotation to
             // it so the user can pick a better name if they want.
             var annotation = diagnostics.Length == 1 ? RenameAnnotation.Create() : null;
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             foreach (var diagnostic in diagnostics)
             {
                 await FixOneAsync(
-                    document, semanticModel, diagnostic,
-                    editor, annotation, cancellationToken).ConfigureAwait(false);
+                        document,
+                        semanticModel,
+                        diagnostic,
+                        editor,
+                        annotation,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
         private async Task FixOneAsync(
-            Document document, SemanticModel semanticModel, Diagnostic diagnostic,
-            SyntaxEditor editor, SyntaxAnnotation? annotation, CancellationToken cancellationToken)
+            Document document,
+            SemanticModel semanticModel,
+            Diagnostic diagnostic,
+            SyntaxEditor editor,
+            SyntaxAnnotation? annotation,
+            CancellationToken cancellationToken
+        )
         {
-            var declarator = await GetMemberDeclaratorAsync(document, diagnostic, cancellationToken).ConfigureAwait(false);
+            var declarator = await GetMemberDeclaratorAsync(document, diagnostic, cancellationToken)
+                .ConfigureAwait(false);
             if (declarator == null)
             {
                 return;
             }
 
             var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
-            var name = semanticFacts.GenerateNameForExpression(semanticModel, GetExpression(declarator), capitalize: true, cancellationToken);
+            var name = semanticFacts.GenerateNameForExpression(
+                semanticModel,
+                GetExpression(declarator),
+                capitalize: true,
+                cancellationToken
+            );
             if (string.IsNullOrEmpty(name))
             {
                 return;
@@ -123,10 +157,15 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
                 (current, generator) =>
                 {
                     var currentDeclarator = (TAnonymousObjectMemberDeclaratorSyntax)current;
-                    var initializer = (TAnonymousObjectInitializer)currentDeclarator.GetRequiredParent();
+                    var initializer =
+                        (TAnonymousObjectInitializer)currentDeclarator.GetRequiredParent();
                     var existingNames = GetAnonymousObjectMemberNames(initializer);
                     var anonymousType = current.Parent;
-                    var uniqueName = NameGenerator.EnsureUniqueness(name, existingNames, syntaxFacts.IsCaseSensitive);
+                    var uniqueName = NameGenerator.EnsureUniqueness(
+                        name,
+                        existingNames,
+                        syntaxFacts.IsCaseSensitive
+                    );
 
                     var nameToken = generator.Identifier(uniqueName);
                     if (annotation != null)
@@ -135,15 +174,18 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
                     }
 
                     return WithName(currentDeclarator, nameToken);
-                });
+                }
+            );
         }
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(FeaturesResources.Add_member_name, createChangedDocument, nameof(FeaturesResources.Add_member_name))
-            {
-            }
+                : base(
+                    FeaturesResources.Add_member_name,
+                    createChangedDocument,
+                    nameof(FeaturesResources.Add_member_name)
+                ) { }
         }
     }
 }

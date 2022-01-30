@@ -11,6 +11,7 @@ namespace System.Reflection.Tests
     {
         public int* field;
         public char* Property { get; set; }
+
         public void Method(byte* ptr, int expected)
         {
             Assert.Equal(expected, unchecked((int)ptr));
@@ -31,37 +32,49 @@ namespace System.Reflection.Tests
         [Fact]
         public void Box_TypeNull()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("type", () =>
-            {
-                Pointer.Box((void*)0, null);
-            });
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () =>
+                {
+                    Pointer.Box((void*)0, null);
+                }
+            );
         }
 
         [Fact]
         public void Box_NonPointerType()
         {
-            AssertExtensions.Throws<ArgumentException>("ptr", () =>
-            {
-                Pointer.Box((void*)0, typeof(int));
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                "ptr",
+                () =>
+                {
+                    Pointer.Box((void*)0, typeof(int));
+                }
+            );
         }
 
         [Fact]
         public void Unbox_Null()
         {
-            AssertExtensions.Throws<ArgumentException>("ptr", () =>
-            {
-                Pointer.Unbox(null);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                "ptr",
+                () =>
+                {
+                    Pointer.Unbox(null);
+                }
+            );
         }
 
         [Fact]
         public void Unbox_NotPointer()
         {
-            AssertExtensions.Throws<ArgumentException>("ptr", () =>
-            {
-                Pointer.Unbox(new object());
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                "ptr",
+                () =>
+                {
+                    Pointer.Unbox(new object());
+                }
+            );
         }
 
         [Theory]
@@ -118,10 +131,13 @@ namespace System.Reflection.Tests
         {
             var obj = new PointerHolder();
             FieldInfo field = typeof(PointerHolder).GetField("field");
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                field.SetValue(obj, Pointer.Box(unchecked((void*)value), typeof(long*)));
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    field.SetValue(obj, Pointer.Box(unchecked((void*)value), typeof(long*)));
+                }
+            );
         }
 
         [Theory]
@@ -163,10 +179,13 @@ namespace System.Reflection.Tests
         {
             var obj = new PointerHolder();
             PropertyInfo property = typeof(PointerHolder).GetProperty("Property");
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                property.SetValue(obj, Pointer.Box(unchecked((void*)value), typeof(long*)));
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    property.SetValue(obj, Pointer.Box(unchecked((void*)value), typeof(long*)));
+                }
+            );
         }
 
         [Theory]
@@ -189,7 +208,10 @@ namespace System.Reflection.Tests
         {
             var obj = new PointerHolder();
             MethodInfo method = typeof(PointerHolder).GetMethod("Method");
-            method.Invoke(obj, new[] { Pointer.Box(unchecked((void*)value), typeof(byte*)), value });
+            method.Invoke(
+                obj,
+                new[] { Pointer.Box(unchecked((void*)value), typeof(byte*)), value }
+            );
         }
 
         [Fact]
@@ -215,10 +237,16 @@ namespace System.Reflection.Tests
         {
             var obj = new PointerHolder();
             MethodInfo method = typeof(PointerHolder).GetMethod("Method");
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                method.Invoke(obj, new[] { Pointer.Box(unchecked((void*)value), typeof(long*)), value });
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    method.Invoke(
+                        obj,
+                        new[] { Pointer.Box(unchecked((void*)value), typeof(long*)), value }
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -265,10 +293,13 @@ namespace System.Reflection.Tests
         {
             var obj = new PointerHolder();
             MethodDelegate d = obj.Method;
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                d.DynamicInvoke(Pointer.Box(unchecked((void*)value), typeof(long*)), value);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    d.DynamicInvoke(Pointer.Box(unchecked((void*)value), typeof(long*)), value);
+                }
+            );
         }
 
         [Theory]

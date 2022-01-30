@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
     /// </summary>
     [ExportLspRequestHandlerProvider(StringConstants.XamlLanguageName), Shared]
     [ProvidesMethod(LSP.Methods.TextDocumentCompletionResolveName)]
-    internal class CompletionResolveHandler : AbstractStatelessRequestHandler<LSP.CompletionItem, LSP.CompletionItem>
+    internal class CompletionResolveHandler
+        : AbstractStatelessRequestHandler<LSP.CompletionItem, LSP.CompletionItem>
     {
         public override string Method => LSP.Methods.TextDocumentCompletionResolveName;
 
@@ -36,13 +37,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CompletionResolveHandler()
-        {
-        }
+        public CompletionResolveHandler() { }
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(CompletionItem request) => null;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(CompletionItem request) =>
+            null;
 
-        public override async Task<LSP.CompletionItem> HandleRequestAsync(LSP.CompletionItem completionItem, RequestContext context, CancellationToken cancellationToken)
+        public override async Task<LSP.CompletionItem> HandleRequestAsync(
+            LSP.CompletionItem completionItem,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(context.Solution);
 
@@ -62,24 +66,47 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return completionItem;
             }
 
-            var documentId = DocumentId.CreateFromSerialized(ProjectId.CreateFromSerialized(data.ProjectGuid), data.DocumentGuid);
-            var document = context.Solution.GetDocument(documentId) ?? context.Solution.GetAdditionalDocument(documentId);
+            var documentId = DocumentId.CreateFromSerialized(
+                ProjectId.CreateFromSerialized(data.ProjectGuid),
+                data.DocumentGuid
+            );
+            var document =
+                context.Solution.GetDocument(documentId)
+                ?? context.Solution.GetAdditionalDocument(documentId);
             if (document == null)
             {
                 return completionItem;
             }
 
-            var offset = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(data.Position), cancellationToken).ConfigureAwait(false);
-            var completionService = document.Project.LanguageServices.GetRequiredService<IXamlCompletionService>();
-            var symbol = await completionService.GetSymbolAsync(new XamlCompletionContext(document, offset), completionItem.Label, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var offset = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(data.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var completionService =
+                document.Project.LanguageServices.GetRequiredService<IXamlCompletionService>();
+            var symbol = await completionService
+                .GetSymbolAsync(
+                    new XamlCompletionContext(document, offset),
+                    completionItem.Label,
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
             if (symbol == null)
             {
                 return completionItem;
             }
 
-            var description = await symbol.GetDescriptionAsync(document, cancellationToken).ConfigureAwait(false);
+            var description = await symbol
+                .GetDescriptionAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
-            vsCompletionItem.Description = new ClassifiedTextElement(description.Select(tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)));
+            vsCompletionItem.Description = new ClassifiedTextElement(
+                description.Select(
+                    tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)
+                )
+            );
             return vsCompletionItem;
         }
     }

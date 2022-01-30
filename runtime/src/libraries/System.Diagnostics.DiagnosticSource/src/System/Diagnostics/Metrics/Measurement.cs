@@ -10,7 +10,7 @@ namespace System.Diagnostics.Metrics
     /// with the associated tags.
     /// </summary>
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
-        [System.Security.SecuritySafeCriticalAttribute]
+    [System.Security.SecuritySafeCriticalAttribute]
 #endif
     public readonly struct Measurement<T> where T : struct
     {
@@ -79,6 +79,11 @@ namespace System.Diagnostics.Metrics
         public T Value { get; }
 
         // Private helper to copy IEnumerable to array. We have it to avoid adding dependencies on System.Linq
-        private static KeyValuePair<string, object?>[] ToArray(IEnumerable<KeyValuePair<string, object?>>? tags) => tags is null ? Instrument.EmptyTags : new List<KeyValuePair<string, object?>>(tags).ToArray();
+        private static KeyValuePair<string, object?>[] ToArray(
+            IEnumerable<KeyValuePair<string, object?>>? tags
+        ) =>
+            tags is null
+                ? Instrument.EmptyTags
+                : new List<KeyValuePair<string, object?>>(tags).ToArray();
     }
 }

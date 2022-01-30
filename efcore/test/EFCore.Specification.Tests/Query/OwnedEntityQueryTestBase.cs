@@ -13,53 +13,59 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
     {
-        public static IEnumerable<object[]> IsAsyncData = new[] { new object[] { false }, new object[] { true } };
+        public static IEnumerable<object[]> IsAsyncData = new[]
+        {
+            new object[] { false },
+            new object[] { true }
+        };
 
         protected override string StoreName => "OwnedEntityQueryTests";
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual async Task Multiple_single_result_in_projection_containing_owned_types(bool async)
+        public virtual async Task Multiple_single_result_in_projection_containing_owned_types(
+            bool async
+        )
         {
             var contextFactory = await InitializeAsync<Context20277>();
 
             using (var context = contextFactory.CreateContext())
             {
-                var query = context.Entities.AsNoTracking().Select(e => new
-                {
-                    Id = e.Id,
-                    FirstChild = e.Children
-                    .Where(c => c.Type == 1)
-                    .AsQueryable()
-                    .Select(_project)
-                    .FirstOrDefault(),
+                var query = context.Entities
+                    .AsNoTracking()
+                    .Select(
+                        e =>
+                            new
+                            {
+                                Id = e.Id,
+                                FirstChild = e.Children
+                                    .Where(c => c.Type == 1)
+                                    .AsQueryable()
+                                    .Select(_project)
+                                    .FirstOrDefault(),
+                                SecondChild = e.Children
+                                    .Where(c => c.Type == 2)
+                                    .AsQueryable()
+                                    .Select(_project)
+                                    .FirstOrDefault(),
+                            }
+                    );
 
-                    SecondChild = e.Children
-                    .Where(c => c.Type == 2)
-                    .AsQueryable()
-                    .Select(_project)
-                    .FirstOrDefault(),
-                });
-
-                var result = async
-                    ? await query.ToListAsync()
-                    : query.ToList();
+                var result = async ? await query.ToListAsync() : query.ToList();
             }
         }
 
-        private static readonly Expression<Func<Child20277, object>> _project = x => new
-        {
-            x.Id,
-            x.Owned, // Comment this line for success
-            x.Type,
-        };
+        private static readonly Expression<Func<Child20277, object>> _project = x =>
+            new
+            {
+                x.Id,
+                x.Owned, // Comment this line for success
+                x.Type,
+            };
 
         protected class Context20277 : DbContext
         {
-            public Context20277(DbContextOptions options)
-                   : base(options)
-            {
-            }
+            public Context20277(DbContextOptions options) : base(options) { }
 
             public DbSet<Entity20277> Entities => Set<Entity20277>();
 
@@ -67,13 +73,18 @@ namespace Microsoft.EntityFrameworkCore
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<Entity20277>(cfg =>
-                {
-                    cfg.OwnsMany(e => e.Children, inner =>
+                modelBuilder.Entity<Entity20277>(
+                    cfg =>
                     {
-                        inner.OwnsOne(e => e.Owned);
-                    });
-                });
+                        cfg.OwnsMany(
+                            e => e.Children,
+                            inner =>
+                            {
+                                inner.OwnsOne(e => e.Owned);
+                            }
+                        );
+                    }
+                );
             }
         }
 
@@ -104,11 +115,18 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = contextFactory.CreateContext())
             {
-                var results = await context.Contacts.Select(contact => new ContactDto22089()
-                {
-                    Id = contact.Id,
-                    Names = contact.Names.Select(name => new NameDto22089() { }).ToArray()
-                }).ToListAsync();
+                var results = await context.Contacts
+                    .Select(
+                        contact =>
+                            new ContactDto22089()
+                            {
+                                Id = contact.Id,
+                                Names = contact.Names
+                                    .Select(name => new NameDto22089() { })
+                                    .ToArray()
+                            }
+                    )
+                    .ToListAsync();
             }
         }
 
@@ -138,17 +156,19 @@ namespace Microsoft.EntityFrameworkCore
 
         protected class SomeDbContext22089 : DbContext
         {
-            public SomeDbContext22089(DbContextOptions options)
-                      : base(options)
-            {
-            }
+            public SomeDbContext22089(DbContextOptions options) : base(options) { }
 
             public DbSet<Contact22089> Contacts { get; set; }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 modelBuilder.Entity<Contact22089>().HasKey(c => c.Id);
-                modelBuilder.Entity<Contact22089>().OwnsMany(c => c.Names, names => names.WithOwner().HasForeignKey(n => n.ContactId));
+                modelBuilder
+                    .Entity<Contact22089>()
+                    .OwnsMany(
+                        c => c.Names,
+                        names => names.WithOwner().HasForeignKey(n => n.ContactId)
+                    );
             }
         }
 
@@ -159,40 +179,47 @@ namespace Microsoft.EntityFrameworkCore
             var contextFactory = await InitializeAsync<MyContext24133>();
 
             using var context = contextFactory.CreateContext();
-            var query = context.Set<Blog24133>()
-                .Select(b => new BlogDto24133
-                {
-                    Id = b.Id,
-                    TotalComments = b.Posts.Sum(p => p.CommentsCount),
-                    Posts = b.Posts.Select(p => new PostDto24133
-                    {
-                        Title = p.Title,
-                        CommentsCount = p.CommentsCount
-                    })
-                });
+            var query = context
+                .Set<Blog24133>()
+                .Select(
+                    b =>
+                        new BlogDto24133
+                        {
+                            Id = b.Id,
+                            TotalComments = b.Posts.Sum(p => p.CommentsCount),
+                            Posts = b.Posts.Select(
+                                p =>
+                                    new PostDto24133
+                                    {
+                                        Title = p.Title,
+                                        CommentsCount = p.CommentsCount
+                                    }
+                            )
+                        }
+                );
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
         }
 
         protected class MyContext24133 : DbContext
         {
-            public MyContext24133(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public MyContext24133(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Blog24133>(blog =>
-                {
-                    blog.OwnsMany(b => b.Posts, p =>
+                modelBuilder.Entity<Blog24133>(
+                    blog =>
                     {
-                        p.WithOwner().HasForeignKey("BlogId");
-                        p.Property("BlogId").HasMaxLength(40);
-                    });
-                });
+                        blog.OwnsMany(
+                            b => b.Posts,
+                            p =>
+                            {
+                                p.WithOwner().HasForeignKey("BlogId");
+                                p.Property("BlogId").HasMaxLength(40);
+                            }
+                        );
+                    }
+                );
             }
         }
 
@@ -201,15 +228,14 @@ namespace Microsoft.EntityFrameworkCore
             public int Id { get; private set; }
 
             private List<Post24133> _posts = new();
+
             public static Blog24133 Create(IEnumerable<Post24133> posts)
             {
-                return new Blog24133
-                {
-                    _posts = posts.ToList()
-                };
+                return new Blog24133 { _posts = posts.ToList() };
             }
 
-            public IReadOnlyCollection<Post24133> Posts => new ReadOnlyCollection<Post24133>(_posts);
+            public IReadOnlyCollection<Post24133> Posts =>
+                new ReadOnlyCollection<Post24133>(_posts);
         }
 
         protected class Post24133
@@ -233,20 +259,27 @@ namespace Microsoft.EntityFrameworkCore
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
-        public virtual async Task Projecting_correlated_collection_property_for_owned_entity(bool async)
+        public virtual async Task Projecting_correlated_collection_property_for_owned_entity(
+            bool async
+        )
         {
             var contextFactory = await InitializeAsync<MyContext18582>(seed: c => c.Seed());
 
             using var context = contextFactory.CreateContext();
-            var query = context.Warehouses.Select(x => new WarehouseModel
-            {
-                WarehouseCode = x.WarehouseCode,
-                DestinationCountryCodes = x.DestinationCountries.Select(c => c.CountryCode).ToArray()
-            }).AsNoTracking();
+            var query = context.Warehouses
+                .Select(
+                    x =>
+                        new WarehouseModel
+                        {
+                            WarehouseCode = x.WarehouseCode,
+                            DestinationCountryCodes = x.DestinationCountries
+                                .Select(c => c.CountryCode)
+                                .ToArray()
+                        }
+                )
+                .AsNoTracking();
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             var warehouseModel = Assert.Single(result);
             Assert.Equal("W001", warehouseModel.WarehouseCode);
@@ -255,31 +288,31 @@ namespace Microsoft.EntityFrameworkCore
 
         protected class MyContext18582 : DbContext
         {
-            public MyContext18582(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public MyContext18582(DbContextOptions options) : base(options) { }
 
             public DbSet<Warehouse> Warehouses { get; set; }
 
             public void Seed()
             {
-                Add(new Warehouse
-                {
-                    WarehouseCode = "W001",
-                    DestinationCountries =
+                Add(
+                    new Warehouse
                     {
-                        new WarehouseDestinationCountry { Id = "1", CountryCode = "US" },
-                        new WarehouseDestinationCountry { Id = "2", CountryCode = "CA" }
+                        WarehouseCode = "W001",
+                        DestinationCountries =
+                        {
+                            new WarehouseDestinationCountry { Id = "1", CountryCode = "US" },
+                            new WarehouseDestinationCountry { Id = "2", CountryCode = "CA" }
+                        }
                     }
-                });
+                );
 
                 SaveChanges();
             }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Warehouse>()
+                modelBuilder
+                    .Entity<Warehouse>()
                     .OwnsMany(x => x.DestinationCountries)
                     .WithOwner()
                     .HasForeignKey(x => x.WarehouseCode)
@@ -291,7 +324,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             public int Id { get; set; }
             public string WarehouseCode { get; set; }
-            public ICollection<WarehouseDestinationCountry> DestinationCountries { get; set; } = new HashSet<WarehouseDestinationCountry>();
+            public ICollection<WarehouseDestinationCountry> DestinationCountries { get; set; } =
+                new HashSet<WarehouseDestinationCountry>();
         }
 
         protected class WarehouseDestinationCountry
@@ -307,6 +341,5 @@ namespace Microsoft.EntityFrameworkCore
 
             public ICollection<string> DestinationCountryCodes { get; set; }
         }
-
     }
 }

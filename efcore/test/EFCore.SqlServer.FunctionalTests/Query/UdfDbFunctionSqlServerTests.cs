@@ -8,7 +8,8 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class UdfDbFunctionSqlServerTests : UdfDbFunctionTestBase<UdfDbFunctionSqlServerTests.SqlServer>
+    public class UdfDbFunctionSqlServerTests
+        : UdfDbFunctionTestBase<UdfDbFunctionSqlServerTests.SqlServer>
     {
         public UdfDbFunctionSqlServerTests(SqlServer fixture, ITestOutputHelper testOutputHelper)
             : base(fixture)
@@ -28,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             AssertSql(
                 @"SELECT COUNT(*)
 FROM [Customers] AS [c]
-WHERE IsDate([c].[FirstName]) = CAST(0 AS bit)");
+WHERE IsDate([c].[FirstName]) = CAST(0 AS bit)"
+            );
         }
 
         public override void Scalar_Function_With_Translator_Translates_Static()
@@ -40,7 +42,8 @@ WHERE IsDate([c].[FirstName]) = CAST(0 AS bit)");
 
 SELECT TOP(2) len([c].[LastName])
 FROM [Customers] AS [c]
-WHERE [c].[Id] = @__customerId_0");
+WHERE [c].[Id] = @__customerId_0"
+            );
         }
 
         public override void Scalar_Function_Constant_Parameter_Static()
@@ -51,7 +54,8 @@ WHERE [c].[Id] = @__customerId_0");
                 @"@__customerId_0='1'
 
 SELECT [dbo].[CustomerOrderCount](@__customerId_0)
-FROM [Customers] AS [c]");
+FROM [Customers] AS [c]"
+            );
         }
 
         public override void Scalar_Function_Anonymous_Type_Select_Correlated_Static()
@@ -61,7 +65,8 @@ FROM [Customers] AS [c]");
             AssertSql(
                 @"SELECT TOP(2) [c].[LastName], [dbo].[CustomerOrderCount]([c].[Id]) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = 1");
+WHERE [c].[Id] = 1"
+            );
         }
 
         public override void Scalar_Function_Anonymous_Type_Select_Not_Correlated_Static()
@@ -71,7 +76,8 @@ WHERE [c].[Id] = 1");
             AssertSql(
                 @"SELECT TOP(2) [c].[LastName], [dbo].[CustomerOrderCount](1) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = 1");
+WHERE [c].[Id] = 1"
+            );
         }
 
         public override void Scalar_Function_Anonymous_Type_Select_Parameter_Static()
@@ -83,7 +89,8 @@ WHERE [c].[Id] = 1");
 
 SELECT TOP(2) [c].[LastName], [dbo].[CustomerOrderCount](@__customerId_0) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = @__customerId_0");
+WHERE [c].[Id] = @__customerId_0"
+            );
         }
 
         public override void Scalar_Function_Anonymous_Type_Select_Nested_Static()
@@ -96,7 +103,8 @@ WHERE [c].[Id] = @__customerId_0");
 
 SELECT TOP(2) [c].[LastName], [dbo].[StarValue](@__starCount_1, [dbo].[CustomerOrderCount](@__customerId_0)) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = @__customerId_0");
+WHERE [c].[Id] = @__customerId_0"
+            );
         }
 
         public override void Scalar_Function_Where_Correlated_Static()
@@ -106,7 +114,8 @@ WHERE [c].[Id] = @__customerId_0");
             AssertSql(
                 @"SELECT LOWER(CONVERT(varchar(11), [c].[Id]))
 FROM [Customers] AS [c]
-WHERE [dbo].[IsTopCustomer]([c].[Id]) = CAST(1 AS bit)");
+WHERE [dbo].[IsTopCustomer]([c].[Id]) = CAST(1 AS bit)"
+            );
         }
 
         public override void Scalar_Function_Where_Not_Correlated_Static()
@@ -118,7 +127,8 @@ WHERE [dbo].[IsTopCustomer]([c].[Id]) = CAST(1 AS bit)");
 
 SELECT TOP(2) [c].[Id]
 FROM [Customers] AS [c]
-WHERE [dbo].[GetCustomerWithMostOrdersAfterDate](@__startDate_0) = [c].[Id]");
+WHERE [dbo].[GetCustomerWithMostOrdersAfterDate](@__startDate_0) = [c].[Id]"
+            );
         }
 
         public override void Scalar_Function_Where_Parameter_Static()
@@ -130,7 +140,8 @@ WHERE [dbo].[GetCustomerWithMostOrdersAfterDate](@__startDate_0) = [c].[Id]");
 
 SELECT TOP(2) [c].[Id]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = [dbo].[GetCustomerWithMostOrdersAfterDate]([dbo].[GetReportingPeriodStartDate](@__period_0))");
+WHERE [c].[Id] = [dbo].[GetCustomerWithMostOrdersAfterDate]([dbo].[GetReportingPeriodStartDate](@__period_0))"
+            );
         }
 
         public override void Scalar_Function_Where_Nested_Static()
@@ -140,7 +151,8 @@ WHERE [c].[Id] = [dbo].[GetCustomerWithMostOrdersAfterDate]([dbo].[GetReportingP
             AssertSql(
                 @"SELECT TOP(2) [c].[Id]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = [dbo].[GetCustomerWithMostOrdersAfterDate]([dbo].[GetReportingPeriodStartDate](0))");
+WHERE [c].[Id] = [dbo].[GetCustomerWithMostOrdersAfterDate]([dbo].[GetReportingPeriodStartDate](0))"
+            );
         }
 
         public override void Scalar_Function_Let_Correlated_Static()
@@ -150,7 +162,8 @@ WHERE [c].[Id] = [dbo].[GetCustomerWithMostOrdersAfterDate]([dbo].[GetReportingP
             AssertSql(
                 @"SELECT TOP(2) [c].[LastName], [dbo].[CustomerOrderCount]([c].[Id]) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = 2");
+WHERE [c].[Id] = 2"
+            );
         }
 
         public override void Scalar_Function_Let_Not_Correlated_Static()
@@ -160,7 +173,8 @@ WHERE [c].[Id] = 2");
             AssertSql(
                 @"SELECT TOP(2) [c].[LastName], [dbo].[CustomerOrderCount](2) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = 2");
+WHERE [c].[Id] = 2"
+            );
         }
 
         public override void Scalar_Function_Let_Not_Parameter_Static()
@@ -172,7 +186,8 @@ WHERE [c].[Id] = 2");
 
 SELECT TOP(2) [c].[LastName], [dbo].[CustomerOrderCount](@__customerId_0) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = @__customerId_0");
+WHERE [c].[Id] = @__customerId_0"
+            );
         }
 
         public override void Scalar_Function_Let_Nested_Static()
@@ -185,7 +200,8 @@ WHERE [c].[Id] = @__customerId_0");
 
 SELECT TOP(2) [c].[LastName], [dbo].[StarValue](@__starCount_0, [dbo].[CustomerOrderCount](@__customerId_1)) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = @__customerId_1");
+WHERE [c].[Id] = @__customerId_1"
+            );
         }
 
         public override void Scalar_Nested_Function_Unwind_Client_Eval_Select_Static()
@@ -195,7 +211,8 @@ WHERE [c].[Id] = @__customerId_1");
             AssertSql(
                 @"SELECT [c].[Id]
 FROM [Customers] AS [c]
-ORDER BY [c].[Id]");
+ORDER BY [c].[Id]"
+            );
         }
 
         public override void Scalar_Nested_Function_UDF_BCL_Static()
@@ -205,7 +222,8 @@ ORDER BY [c].[Id]");
             AssertSql(
                 @"SELECT TOP(2) [c].[Id]
 FROM [Customers] AS [c]
-WHERE 3 = [dbo].[CustomerOrderCount](ABS([c].[Id]))");
+WHERE 3 = [dbo].[CustomerOrderCount](ABS([c].[Id]))"
+            );
         }
 
         public override void Nullable_navigation_property_access_preserves_schema_for_sql_function()
@@ -216,7 +234,8 @@ WHERE 3 = [dbo].[CustomerOrderCount](ABS([c].[Id]))");
                 @"SELECT TOP(1) [dbo].[IdentityString]([c].[FirstName])
 FROM [Orders] AS [o]
 INNER JOIN [Customers] AS [c] ON [o].[CustomerId] = [c].[Id]
-ORDER BY [o].[Id]");
+ORDER BY [o].[Id]"
+            );
         }
 
         public override void Compare_function_without_null_propagation_to_null()
@@ -227,7 +246,8 @@ ORDER BY [o].[Id]");
                 @"SELECT [c].[Id], [c].[FirstName], [c].[LastName]
 FROM [Customers] AS [c]
 WHERE [dbo].[IdentityString]([c].[FirstName]) IS NOT NULL
-ORDER BY [c].[Id]");
+ORDER BY [c].[Id]"
+            );
         }
 
         public override void Compare_function_with_null_propagation_to_null()
@@ -238,7 +258,8 @@ ORDER BY [c].[Id]");
                 @"SELECT [c].[Id], [c].[FirstName], [c].[LastName]
 FROM [Customers] AS [c]
 WHERE [c].[FirstName] IS NOT NULL
-ORDER BY [c].[Id]");
+ORDER BY [c].[Id]"
+            );
         }
 
         public override void Compare_non_nullable_function_to_null_gets_optimized()
@@ -248,7 +269,8 @@ ORDER BY [c].[Id]");
             AssertSql(
                 @"SELECT [c].[Id], [c].[FirstName], [c].[LastName]
 FROM [Customers] AS [c]
-ORDER BY [c].[Id]");
+ORDER BY [c].[Id]"
+            );
         }
 
         public override void Compare_functions_returning_int_that_take_nullable_param_which_propagates_null()
@@ -259,7 +281,8 @@ ORDER BY [c].[Id]");
                 @"SELECT [c].[Id], [c].[FirstName], [c].[LastName]
 FROM [Customers] AS [c]
 WHERE (([dbo].[StringLength]([c].[FirstName]) <> [dbo].[StringLength]([c].[LastName])) OR ([c].[FirstName] IS NULL OR [c].[LastName] IS NULL)) AND ([c].[FirstName] IS NOT NULL OR [c].[LastName] IS NOT NULL)
-ORDER BY [c].[Id]");
+ORDER BY [c].[Id]"
+            );
         }
 
         public override void Scalar_Function_SqlFragment_Static()
@@ -269,7 +292,8 @@ ORDER BY [c].[Id]");
             AssertSql(
                 @"SELECT COUNT(*)
 FROM [Customers] AS [c]
-WHERE [c].[LastName] = 'Two'");
+WHERE [c].[LastName] = 'Two'"
+            );
         }
 
         public override void Scalar_Function_with_InExpression_translation()
@@ -279,7 +303,8 @@ WHERE [c].[LastName] = 'Two'");
             AssertSql(
                 @"SELECT [c].[Id], [c].[FirstName], [c].[LastName]
 FROM [Customers] AS [c]
-WHERE SUBSTRING([c].[FirstName], 0 + 1, 1) IN (N'A', N'B', N'C')");
+WHERE SUBSTRING([c].[FirstName], 0 + 1, 1) IN (N'A', N'B', N'C')"
+            );
         }
 
         public override void Scalar_Function_with_nested_InExpression_translation()
@@ -292,7 +317,8 @@ FROM [Customers] AS [c]
 WHERE CASE
     WHEN SUBSTRING([c].[FirstName], 0 + 1, 1) IN (N'A', N'B', N'C') AND SUBSTRING([c].[FirstName], 0 + 1, 1) IS NOT NULL THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
-END IN (CAST(1 AS bit), CAST(0 AS bit))");
+END IN (CAST(1 AS bit), CAST(0 AS bit))"
+            );
         }
 
         #endregion
@@ -306,7 +332,8 @@ END IN (CAST(1 AS bit), CAST(0 AS bit))");
             AssertSql(
                 @"SELECT TOP(2) [dbo].[StarValue](4, [c].[Id]) AS [Id], [dbo].[DollarValue](2, [c].[LastName]) AS [LastName]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = 1");
+WHERE [c].[Id] = 1"
+            );
         }
 
         public override void Scalar_Function_Extension_Method_Instance()
@@ -316,7 +343,8 @@ WHERE [c].[Id] = 1");
             AssertSql(
                 @"SELECT COUNT(*)
 FROM [Customers] AS [c]
-WHERE IsDate([c].[FirstName]) = CAST(0 AS bit)");
+WHERE IsDate([c].[FirstName]) = CAST(0 AS bit)"
+            );
         }
 
         public override void Scalar_Function_With_Translator_Translates_Instance()
@@ -328,7 +356,8 @@ WHERE IsDate([c].[FirstName]) = CAST(0 AS bit)");
 
 SELECT TOP(2) len([c].[LastName])
 FROM [Customers] AS [c]
-WHERE [c].[Id] = @__customerId_0");
+WHERE [c].[Id] = @__customerId_0"
+            );
         }
 
         public override void Scalar_Function_Constant_Parameter_Instance()
@@ -339,7 +368,8 @@ WHERE [c].[Id] = @__customerId_0");
                 @"@__customerId_1='1'
 
 SELECT [dbo].[CustomerOrderCount](@__customerId_1)
-FROM [Customers] AS [c]");
+FROM [Customers] AS [c]"
+            );
         }
 
         public override void Scalar_Function_Anonymous_Type_Select_Correlated_Instance()
@@ -349,7 +379,8 @@ FROM [Customers] AS [c]");
             AssertSql(
                 @"SELECT TOP(2) [c].[LastName], [dbo].[CustomerOrderCount]([c].[Id]) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = 1");
+WHERE [c].[Id] = 1"
+            );
         }
 
         public override void Scalar_Function_Anonymous_Type_Select_Not_Correlated_Instance()
@@ -359,7 +390,8 @@ WHERE [c].[Id] = 1");
             AssertSql(
                 @"SELECT TOP(2) [c].[LastName], [dbo].[CustomerOrderCount](1) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = 1");
+WHERE [c].[Id] = 1"
+            );
         }
 
         public override void Scalar_Function_Anonymous_Type_Select_Parameter_Instance()
@@ -371,7 +403,8 @@ WHERE [c].[Id] = 1");
 
 SELECT TOP(2) [c].[LastName], [dbo].[CustomerOrderCount](@__customerId_0) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = @__customerId_0");
+WHERE [c].[Id] = @__customerId_0"
+            );
         }
 
         public override void Scalar_Function_Anonymous_Type_Select_Nested_Instance()
@@ -384,7 +417,8 @@ WHERE [c].[Id] = @__customerId_0");
 
 SELECT TOP(2) [c].[LastName], [dbo].[StarValue](@__starCount_2, [dbo].[CustomerOrderCount](@__customerId_0)) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = @__customerId_0");
+WHERE [c].[Id] = @__customerId_0"
+            );
         }
 
         public override void Scalar_Function_Where_Correlated_Instance()
@@ -394,7 +428,8 @@ WHERE [c].[Id] = @__customerId_0");
             AssertSql(
                 @"SELECT LOWER(CONVERT(varchar(11), [c].[Id]))
 FROM [Customers] AS [c]
-WHERE [dbo].[IsTopCustomer]([c].[Id]) = CAST(1 AS bit)");
+WHERE [dbo].[IsTopCustomer]([c].[Id]) = CAST(1 AS bit)"
+            );
         }
 
         public override void Scalar_Function_Where_Not_Correlated_Instance()
@@ -406,7 +441,8 @@ WHERE [dbo].[IsTopCustomer]([c].[Id]) = CAST(1 AS bit)");
 
 SELECT TOP(2) [c].[Id]
 FROM [Customers] AS [c]
-WHERE [dbo].[GetCustomerWithMostOrdersAfterDate](@__startDate_1) = [c].[Id]");
+WHERE [dbo].[GetCustomerWithMostOrdersAfterDate](@__startDate_1) = [c].[Id]"
+            );
         }
 
         public override void Scalar_Function_Where_Parameter_Instance()
@@ -418,7 +454,8 @@ WHERE [dbo].[GetCustomerWithMostOrdersAfterDate](@__startDate_1) = [c].[Id]");
 
 SELECT TOP(2) [c].[Id]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = [dbo].[GetCustomerWithMostOrdersAfterDate]([dbo].[GetReportingPeriodStartDate](@__period_1))");
+WHERE [c].[Id] = [dbo].[GetCustomerWithMostOrdersAfterDate]([dbo].[GetReportingPeriodStartDate](@__period_1))"
+            );
         }
 
         public override void Scalar_Function_Where_Nested_Instance()
@@ -428,7 +465,8 @@ WHERE [c].[Id] = [dbo].[GetCustomerWithMostOrdersAfterDate]([dbo].[GetReportingP
             AssertSql(
                 @"SELECT TOP(2) [c].[Id]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = [dbo].[GetCustomerWithMostOrdersAfterDate]([dbo].[GetReportingPeriodStartDate](0))");
+WHERE [c].[Id] = [dbo].[GetCustomerWithMostOrdersAfterDate]([dbo].[GetReportingPeriodStartDate](0))"
+            );
         }
 
         public override void Scalar_Function_Let_Correlated_Instance()
@@ -438,7 +476,8 @@ WHERE [c].[Id] = [dbo].[GetCustomerWithMostOrdersAfterDate]([dbo].[GetReportingP
             AssertSql(
                 @"SELECT TOP(2) [c].[LastName], [dbo].[CustomerOrderCount]([c].[Id]) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = 2");
+WHERE [c].[Id] = 2"
+            );
         }
 
         public override void Scalar_Function_Let_Not_Correlated_Instance()
@@ -448,7 +487,8 @@ WHERE [c].[Id] = 2");
             AssertSql(
                 @"SELECT TOP(2) [c].[LastName], [dbo].[CustomerOrderCount](2) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = 2");
+WHERE [c].[Id] = 2"
+            );
         }
 
         public override void Scalar_Function_Let_Not_Parameter_Instance()
@@ -460,7 +500,8 @@ WHERE [c].[Id] = 2");
 
 SELECT TOP(2) [c].[LastName], [dbo].[CustomerOrderCount](@__customerId_1) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = @__customerId_1");
+WHERE [c].[Id] = @__customerId_1"
+            );
         }
 
         public override void Scalar_Function_Let_Nested_Instance()
@@ -473,7 +514,8 @@ WHERE [c].[Id] = @__customerId_1");
 
 SELECT TOP(2) [c].[LastName], [dbo].[StarValue](@__starCount_1, [dbo].[CustomerOrderCount](@__customerId_2)) AS [OrderCount]
 FROM [Customers] AS [c]
-WHERE [c].[Id] = @__customerId_2");
+WHERE [c].[Id] = @__customerId_2"
+            );
         }
 
         public override void Scalar_Nested_Function_Unwind_Client_Eval_Select_Instance()
@@ -483,7 +525,8 @@ WHERE [c].[Id] = @__customerId_2");
             AssertSql(
                 @"SELECT [c].[Id]
 FROM [Customers] AS [c]
-ORDER BY [c].[Id]");
+ORDER BY [c].[Id]"
+            );
         }
 
         public override void Scalar_Nested_Function_BCL_UDF_Instance()
@@ -493,7 +536,8 @@ ORDER BY [c].[Id]");
             AssertSql(
                 @"SELECT TOP(2) [c].[Id]
 FROM [Customers] AS [c]
-WHERE 3 = ABS([dbo].[CustomerOrderCount]([c].[Id]))");
+WHERE 3 = ABS([dbo].[CustomerOrderCount]([c].[Id]))"
+            );
         }
 
         public override void Scalar_Nested_Function_UDF_BCL_Instance()
@@ -503,7 +547,8 @@ WHERE 3 = ABS([dbo].[CustomerOrderCount]([c].[Id]))");
             AssertSql(
                 @"SELECT TOP(2) [c].[Id]
 FROM [Customers] AS [c]
-WHERE 3 = [dbo].[CustomerOrderCount](ABS([c].[Id]))");
+WHERE 3 = [dbo].[CustomerOrderCount](ABS([c].[Id]))"
+            );
         }
 
         #endregion
@@ -519,7 +564,8 @@ WHERE 3 = [dbo].[CustomerOrderCount](ABS([c].[Id]))");
             AssertSql(
                 @"SELECT [g].[AmountSold], [g].[ProductId]
 FROM [dbo].[GetTopTwoSellingProducts]() AS [g]
-ORDER BY [g].[ProductId]");
+ORDER BY [g].[ProductId]"
+            );
         }
 
         public override void QF_Stand_Alone_Parameter()
@@ -531,7 +577,8 @@ ORDER BY [g].[ProductId]");
 
 SELECT [g].[Count], [g].[CustomerId], [g].[Year]
 FROM [dbo].[GetCustomerOrderCountByYear](@__customerId_1) AS [g]
-ORDER BY [g].[Count] DESC");
+ORDER BY [g].[Count] DESC"
+            );
         }
 
         public override void QF_CrossApply_Correlated_Select_Anonymous()
@@ -542,7 +589,8 @@ ORDER BY [g].[Count] DESC");
                 @"SELECT [c].[Id], [c].[LastName], [g].[Year], [g].[Count]
 FROM [Customers] AS [c]
 CROSS APPLY [dbo].[GetCustomerOrderCountByYear]([c].[Id]) AS [g]
-ORDER BY [c].[Id], [g].[Year]");
+ORDER BY [c].[Id], [g].[Year]"
+            );
         }
 
         public override void QF_CrossApply_Correlated_Select_QF_Type()
@@ -553,15 +601,15 @@ ORDER BY [c].[Id], [g].[Year]");
                 @"SELECT [g].[Count], [g].[CustomerId], [g].[Year]
 FROM [Customers] AS [c]
 CROSS APPLY [dbo].[GetCustomerOrderCountByYear]([c].[Id]) AS [g]
-ORDER BY [g].[Year]");
+ORDER BY [g].[Year]"
+            );
         }
 
         public override void QF_Select_Direct_In_Anonymous_distinct()
         {
             base.QF_Select_Direct_In_Anonymous_distinct();
 
-            AssertSql(
-                @"");
+            AssertSql(@"");
         }
 
         public override void QF_Select_Correlated_Direct_With_Function_Query_Parameter_Correlated_In_Anonymous()
@@ -573,7 +621,8 @@ ORDER BY [g].[Year]");
 FROM [Customers] AS [c]
 OUTER APPLY [dbo].[GetOrdersWithMultipleProducts]([dbo].[AddValues]([c].[Id], 1)) AS [g]
 WHERE [c].[Id] = 1
-ORDER BY [c].[Id]");
+ORDER BY [c].[Id]"
+            );
         }
 
         public override void QF_Select_Correlated_Subquery_In_Anonymous()
@@ -588,7 +637,8 @@ OUTER APPLY (
     FROM [dbo].[GetOrdersWithMultipleProducts]([c].[Id]) AS [g]
     WHERE DATEPART(day, [g].[OrderDate]) = 21
 ) AS [t]
-ORDER BY [c].[Id]");
+ORDER BY [c].[Id]"
+            );
         }
 
         public override void QF_Select_Correlated_Subquery_In_Anonymous_Nested_With_QF()
@@ -602,7 +652,8 @@ INNER JOIN (
     SELECT [g].[OrderId]
     FROM [Customers] AS [c]
     CROSS APPLY [dbo].[GetOrdersWithMultipleProducts]([c].[Id]) AS [g]
-) AS [t] ON [o].[Id] = [t].[OrderId]");
+) AS [t] ON [o].[Id] = [t].[OrderId]"
+            );
         }
 
         public override void QF_Correlated_Select_In_Anonymous()
@@ -613,7 +664,8 @@ INNER JOIN (
                 @"SELECT [c].[Id], [c].[LastName], [g].[OrderId], [g].[CustomerId], [g].[OrderDate]
 FROM [Customers] AS [c]
 OUTER APPLY [dbo].[GetOrdersWithMultipleProducts]([c].[Id]) AS [g]
-ORDER BY [c].[Id]");
+ORDER BY [c].[Id]"
+            );
         }
 
         public override void QF_CrossApply_Correlated_Select_Result()
@@ -624,7 +676,8 @@ ORDER BY [c].[Id]");
                 @"SELECT [g].[Count], [g].[CustomerId], [g].[Year]
 FROM [Customers] AS [c]
 CROSS APPLY [dbo].[GetCustomerOrderCountByYear]([c].[Id]) AS [g]
-ORDER BY [g].[Count] DESC, [g].[Year] DESC");
+ORDER BY [g].[Count] DESC, [g].[Year] DESC"
+            );
         }
 
         public override void QF_CrossJoin_Not_Correlated()
@@ -636,7 +689,8 @@ ORDER BY [g].[Count] DESC, [g].[Year] DESC");
 FROM [Customers] AS [c]
 CROSS JOIN [dbo].[GetCustomerOrderCountByYear](2) AS [g]
 WHERE [c].[Id] = 2
-ORDER BY [g].[Count]");
+ORDER BY [g].[Count]"
+            );
         }
 
         public override void QF_CrossJoin_Parameter()
@@ -650,7 +704,8 @@ SELECT [c].[Id], [c].[LastName], [g].[Year], [g].[Count]
 FROM [Customers] AS [c]
 CROSS JOIN [dbo].[GetCustomerOrderCountByYear](@__custId_1) AS [g]
 WHERE [c].[Id] = @__custId_1
-ORDER BY [g].[Count]");
+ORDER BY [g].[Count]"
+            );
         }
 
         public override void QF_Join()
@@ -661,7 +716,8 @@ ORDER BY [g].[Count]");
                 @"SELECT [p].[Id], [p].[Name], [g].[AmountSold]
 FROM [Products] AS [p]
 INNER JOIN [dbo].[GetTopTwoSellingProducts]() AS [g] ON [p].[Id] = [g].[ProductId]
-ORDER BY [p].[Id]");
+ORDER BY [p].[Id]"
+            );
         }
 
         public override void QF_LeftJoin_Select_Anonymous()
@@ -672,7 +728,8 @@ ORDER BY [p].[Id]");
                 @"SELECT [p].[Id], [p].[Name], [g].[AmountSold]
 FROM [Products] AS [p]
 LEFT JOIN [dbo].[GetTopTwoSellingProducts]() AS [g] ON [p].[Id] = [g].[ProductId]
-ORDER BY [p].[Id] DESC");
+ORDER BY [p].[Id] DESC"
+            );
         }
 
         public override void QF_LeftJoin_Select_Result()
@@ -683,7 +740,8 @@ ORDER BY [p].[Id] DESC");
                 @"SELECT [g].[AmountSold], [g].[ProductId]
 FROM [Products] AS [p]
 LEFT JOIN [dbo].[GetTopTwoSellingProducts]() AS [g] ON [p].[Id] = [g].[ProductId]
-ORDER BY [p].[Id] DESC");
+ORDER BY [p].[Id] DESC"
+            );
         }
 
         public override void QF_OuterApply_Correlated_Select_QF()
@@ -694,7 +752,8 @@ ORDER BY [p].[Id] DESC");
                 @"SELECT [g].[Count], [g].[CustomerId], [g].[Year]
 FROM [Customers] AS [c]
 OUTER APPLY [dbo].[GetCustomerOrderCountByYear]([c].[Id]) AS [g]
-ORDER BY [c].[Id], [g].[Year]");
+ORDER BY [c].[Id], [g].[Year]"
+            );
         }
 
         public override void QF_OuterApply_Correlated_Select_Entity()
@@ -706,7 +765,8 @@ ORDER BY [c].[Id], [g].[Year]");
 FROM [Customers] AS [c]
 OUTER APPLY [dbo].[GetCustomerOrderCountByYear]([c].[Id]) AS [g]
 WHERE [g].[Year] = 2000
-ORDER BY [c].[Id], [g].[Year]");
+ORDER BY [c].[Id], [g].[Year]"
+            );
         }
 
         public override void QF_OuterApply_Correlated_Select_Anonymous()
@@ -717,7 +777,8 @@ ORDER BY [c].[Id], [g].[Year]");
                 @"SELECT [c].[Id], [c].[LastName], [g].[Year], [g].[Count]
 FROM [Customers] AS [c]
 OUTER APPLY [dbo].[GetCustomerOrderCountByYear]([c].[Id]) AS [g]
-ORDER BY [c].[Id], [g].[Year]");
+ORDER BY [c].[Id], [g].[Year]"
+            );
         }
 
         public override void QF_Nested()
@@ -731,7 +792,8 @@ SELECT [c].[Id], [c].[LastName], [g].[Year], [g].[Count]
 FROM [Customers] AS [c]
 CROSS JOIN [dbo].[GetCustomerOrderCountByYear]([dbo].[AddValues](1, 1)) AS [g]
 WHERE [c].[Id] = @__custId_1
-ORDER BY [g].[Year]");
+ORDER BY [g].[Year]"
+            );
         }
 
         public override void QF_Correlated_Nested_Func_Call()
@@ -744,7 +806,8 @@ ORDER BY [g].[Year]");
 SELECT [c].[Id], [g].[Count], [g].[Year]
 FROM [Customers] AS [c]
 CROSS APPLY [dbo].[GetCustomerOrderCountByYear]([dbo].[AddValues]([c].[Id], 1)) AS [g]
-WHERE [c].[Id] = @__custId_1");
+WHERE [c].[Id] = @__custId_1"
+            );
         }
 
         public override void QF_Correlated_Func_Call_With_Navigation()
@@ -759,7 +822,8 @@ OUTER APPLY (
     FROM [dbo].[GetOrdersWithMultipleProducts]([c].[Id]) AS [g]
     INNER JOIN [Customers] AS [c0] ON [g].[CustomerId] = [c0].[Id]
 ) AS [t]
-ORDER BY [c].[Id], [t].[OrderId]");
+ORDER BY [c].[Id], [t].[OrderId]"
+            );
         }
 
         public override void DbSet_mapped_to_function()
@@ -769,7 +833,8 @@ ORDER BY [c].[Id], [t].[OrderId]");
             AssertSql(
                 @"SELECT [g].[AmountSold], [g].[ProductId]
 FROM [dbo].[GetTopTwoSellingProducts]() AS [g]
-ORDER BY [g].[ProductId]");
+ORDER BY [g].[ProductId]"
+            );
         }
 
         public override void TVF_backing_entity_type_mapped_to_view()
@@ -779,7 +844,8 @@ ORDER BY [g].[ProductId]");
             AssertSql(
                 @"SELECT [c].[Id], [c].[FirstName], [c].[LastName]
 FROM [Customers] AS [c]
-ORDER BY [c].[FirstName]");
+ORDER BY [c].[FirstName]"
+            );
         }
 
         public override void Udf_with_argument_being_comparison_to_null_parameter()
@@ -793,7 +859,8 @@ CROSS APPLY [dbo].[GetCustomerOrderCountByYearOnlyFrom2000]([c].[Id], CASE
     WHEN [c].[LastName] IS NOT NULL THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END) AS [g]
-ORDER BY [g].[Year]");
+ORDER BY [g].[Year]"
+            );
         }
 
         public override void Udf_with_argument_being_comparison_of_nullable_columns()
@@ -807,7 +874,8 @@ CROSS APPLY [dbo].[GetCustomerOrderCountByYearOnlyFrom2000](1, CASE
     WHEN (([a].[City] = [a].[State]) AND ([a].[City] IS NOT NULL AND [a].[State] IS NOT NULL)) OR ([a].[City] IS NULL AND [a].[State] IS NULL) THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END) AS [g]
-ORDER BY [a].[Id], [g].[Year]");
+ORDER BY [a].[Id], [g].[Year]"
+            );
         }
 
         #endregion
@@ -821,8 +889,8 @@ ORDER BY [a].[Id], [g].[Year]");
         {
             protected override string StoreName { get; } = "UDFDbFunctionSqlServerTests";
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerTestStoreFactory.Instance;
 
             protected override void Seed(DbContext context)
             {
@@ -834,7 +902,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                     as
                                                     begin
                                                         return (select count(id) from orders where customerId = @customerId);
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function[dbo].[StarValue] (@starCount int, @value nvarchar(max))
@@ -842,7 +911,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                         as
                                                         begin
                                                     return replicate('*', @starCount) + @value
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function[dbo].[DollarValue] (@starCount int, @value nvarchar(max))
@@ -850,7 +920,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                         as
                                                         begin
                                                     return replicate('$', @starCount) + @value
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].[GetReportingPeriodStartDate] (@period int)
@@ -858,7 +929,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                     as
                                                     begin
                                                         return '1998-01-01'
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].[GetCustomerWithMostOrdersAfterDate] (@searchDate Date)
@@ -870,7 +942,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                                 where orderDate > @searchDate
                                                                 group by CustomerId
                                                                 order by count(id) desc)
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].[IsTopCustomer] (@customerId int)
@@ -881,7 +954,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                             return 1
 
                                                         return 0
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].[IdentityString] (@s nvarchar(max))
@@ -889,7 +963,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                     as
                                                     begin
                                                         return @s;
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].[IdentityStringPropagatesNull] (@s nvarchar(max))
@@ -897,7 +972,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                     as
                                                     begin
                                                         return @s;
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].[IdentityStringNonNullable] (@s nvarchar(max))
@@ -905,7 +981,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                     as
                                                     begin
                                                         return COALESCE(@s, 'NULL');
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].[IdentityStringNonNullableFluent] (@s nvarchar(max))
@@ -913,7 +990,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                     as
                                                     begin
                                                         return COALESCE(@s, 'NULL');
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].[StringLength] (@s nvarchar(max))
@@ -921,7 +999,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                     as
                                                     begin
                                                         return LEN(@s);
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].GetCustomerOrderCountByYear(@customerId int)
@@ -941,7 +1020,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                         order by year(orderDate)
 
                                                         return
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].GetCustomerOrderCountByYearOnlyFrom2000(@customerId int, @onlyFrom2000 bit)
@@ -961,7 +1041,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                         order by year(orderDate)
 
                                                         return
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].GetTopTwoSellingProducts()
@@ -979,7 +1060,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                         order by totalSold desc
 
                                                         return
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].GetTopSellingProductsForCustomer(@customerId int)
@@ -998,7 +1080,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                         group by ProductID
 
                                                         return
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].GetOrdersWithMultipleProducts(@customerId int)
@@ -1019,7 +1102,8 @@ ORDER BY [a].[Id], [g].[Year]");
                                                         having count(productId) > 1
 
                                                         return
-                                                    end");
+                                                    end"
+                );
 
                 context.Database.ExecuteSqlRaw(
                     @"create function [dbo].[AddValues] (@a int, @b int)
@@ -1027,13 +1111,14 @@ ORDER BY [a].[Id], [g].[Year]");
                                                     as
                                                     begin
                                                         return @a + @b;
-                                                    end");
+                                                    end"
+                );
 
                 context.SaveChanges();
             }
         }
 
-        public void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        public void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
     }
 }

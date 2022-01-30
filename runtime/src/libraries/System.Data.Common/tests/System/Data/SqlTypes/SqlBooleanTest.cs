@@ -101,7 +101,6 @@ namespace System.Data.Tests.SqlTypes
             sqlResult = SqlBoolean.NotEquals(_sqlFalse, _sqlTrue);
             Assert.True(sqlResult.Value);
 
-
             // true != true
             sqlResult = SqlBoolean.NotEquals(_sqlTrue, _sqlTrue);
             Assert.False(sqlResult.Value);
@@ -158,7 +157,6 @@ namespace System.Data.Tests.SqlTypes
             sqlResult = SqlBoolean.Or(_sqlFalse, sqlFalse2);
             Assert.False(sqlResult.Value);
         }
-
 
         //  Parse
         [Fact]
@@ -227,7 +225,6 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void CompareTo()
         {
-
             Assert.True((_sqlTrue.CompareTo(SqlBoolean.Null) > 0));
             Assert.True((_sqlTrue.CompareTo(_sqlFalse) > 0));
             Assert.True((_sqlFalse.CompareTo(_sqlTrue) < 0));
@@ -535,7 +532,6 @@ namespace System.Data.Tests.SqlTypes
             sqlResult = ~_sqlFalse;
             Assert.True(sqlResult.Value);
         }
-
 
         // true operator
         [Fact]
@@ -845,6 +841,7 @@ namespace System.Data.Tests.SqlTypes
         {
             Assert.Equal((byte)0, SqlBoolean.Zero.ByteValue);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {

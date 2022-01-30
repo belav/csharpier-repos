@@ -42,7 +42,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.NotNull(((WithLazyLoader)instance1).LazyLoader);
             Assert.IsType<WithLazyLoader>(instance2);
             Assert.NotSame(instance1, instance2);
-            Assert.NotSame(((WithLazyLoader)instance1).LazyLoader, ((WithLazyLoader)instance2).LazyLoader);
+            Assert.NotSame(
+                ((WithLazyLoader)instance1).LazyLoader,
+                ((WithLazyLoader)instance2).LazyLoader
+            );
         }
 
         [ConditionalFact]
@@ -59,7 +62,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.NotNull(((WithLazyLoaderDelegate)instance1).LazyLoader);
             Assert.IsType<WithLazyLoaderDelegate>(instance2);
             Assert.NotSame(instance1, instance2);
-            Assert.NotSame(((WithLazyLoaderDelegate)instance1).LazyLoader, ((WithLazyLoaderDelegate)instance2).LazyLoader);
+            Assert.NotSame(
+                ((WithLazyLoaderDelegate)instance1).LazyLoader,
+                ((WithLazyLoaderDelegate)instance2).LazyLoader
+            );
         }
 
         [ConditionalFact]
@@ -76,7 +82,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.NotNull(((WithEntityType)instance1).EntityType);
             Assert.IsType<WithEntityType>(instance2);
             Assert.NotSame(instance1, instance2);
-            Assert.Same(((WithEntityType)instance1).EntityType, ((WithEntityType)instance2).EntityType);
+            Assert.Same(
+                ((WithEntityType)instance1).EntityType,
+                ((WithEntityType)instance2).EntityType
+            );
         }
 
         [ConditionalFact]
@@ -110,7 +119,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.NotNull(((WithServiceAndWithProperties)instance1).LazyLoader);
             Assert.IsType<WithServiceAndWithProperties>(instance2);
             Assert.NotSame(instance1, instance2);
-            Assert.NotSame(((WithServiceAndWithProperties)instance1).LazyLoader, ((WithServiceAndWithProperties)instance2).LazyLoader);
+            Assert.NotSame(
+                ((WithServiceAndWithProperties)instance1).LazyLoader,
+                ((WithServiceAndWithProperties)instance2).LazyLoader
+            );
         }
 
         [ConditionalFact]
@@ -138,13 +150,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(
                 CoreStrings.NoParameterlessConstructor(nameof(WithProperties)),
                 Assert.Throws<InvalidOperationException>(
-                    () => entityType.GetInstanceFactory()).Message);
+                    () => entityType.GetInstanceFactory()
+                ).Message
+            );
         }
 
         private class FactoryContext : DbContext
         {
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) =>
+                optionsBuilder
                     .UseInMemoryDatabase(nameof(FactoryContext))
                     .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider);
 
@@ -163,37 +179,30 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
         private class Parameterless
         {
-            private Parameterless()
-            {
-            }
+            private Parameterless() { }
 
             public int Id { get; set; }
         }
 
         private class WithProperties
         {
-            public WithProperties(int id)
-                => Id = id;
+            public WithProperties(int id) => Id = id;
 
             public int Id { get; set; }
         }
 
         private class ParameterlessAndWithProperties
         {
-            public ParameterlessAndWithProperties()
-            {
-            }
+            public ParameterlessAndWithProperties() { }
 
-            public ParameterlessAndWithProperties(int id)
-                => Id = id;
+            public ParameterlessAndWithProperties(int id) => Id = id;
 
             public int Id { get; set; }
         }
 
         private class WithLazyLoader
         {
-            public WithLazyLoader(ILazyLoader lazyLoader)
-                => LazyLoader = lazyLoader;
+            public WithLazyLoader(ILazyLoader lazyLoader) => LazyLoader = lazyLoader;
 
             public int Id { get; set; }
             public ILazyLoader LazyLoader { get; }
@@ -201,8 +210,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
         private class WithLazyLoaderDelegate
         {
-            public WithLazyLoaderDelegate(Action<object, string> lazyLoader)
-                => LazyLoader = lazyLoader;
+            public WithLazyLoaderDelegate(Action<object, string> lazyLoader) =>
+                LazyLoader = lazyLoader;
 
             public int Id { get; set; }
             public Action<object, string> LazyLoader { get; }
@@ -210,8 +219,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
         private class WithEntityType
         {
-            public WithEntityType(IEntityType entityType)
-                => EntityType = entityType;
+            public WithEntityType(IEntityType entityType) => EntityType = entityType;
 
             public int Id { get; set; }
             public IEntityType EntityType { get; }
@@ -219,8 +227,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
         private class WithContext
         {
-            public WithContext(DbContext context)
-                => Context = context;
+            public WithContext(DbContext context) => Context = context;
 
             public int Id { get; set; }
             public DbContext Context { get; }
@@ -228,12 +235,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
         private class WithServiceAndWithProperties
         {
-            public WithServiceAndWithProperties(ILazyLoader lazyLoader)
-                => LazyLoader = lazyLoader;
+            public WithServiceAndWithProperties(ILazyLoader lazyLoader) => LazyLoader = lazyLoader;
 
             public WithServiceAndWithProperties(ILazyLoader lazyLoader, int id)
-                : this(lazyLoader)
-                => Id = id;
+                : this(lazyLoader) => Id = id;
 
             public ILazyLoader LazyLoader { get; }
             public int Id { get; set; }

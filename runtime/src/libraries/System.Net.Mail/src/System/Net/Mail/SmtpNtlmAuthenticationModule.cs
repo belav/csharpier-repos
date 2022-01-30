@@ -8,13 +8,20 @@ namespace System.Net.Mail
 {
     internal sealed class SmtpNtlmAuthenticationModule : ISmtpAuthenticationModule
     {
-        private readonly Dictionary<object, NTAuthentication> _sessions = new Dictionary<object, NTAuthentication>();
+        private readonly Dictionary<object, NTAuthentication> _sessions = new Dictionary<
+            object,
+            NTAuthentication
+        >();
 
-        internal SmtpNtlmAuthenticationModule()
-        {
-        }
+        internal SmtpNtlmAuthenticationModule() { }
 
-        public Authorization? Authenticate(string? challenge, NetworkCredential? credential, object sessionCookie, string? spn, ChannelBinding? channelBindingToken)
+        public Authorization? Authenticate(
+            string? challenge,
+            NetworkCredential? credential,
+            object sessionCookie,
+            string? spn,
+            ChannelBinding? channelBindingToken
+        )
         {
             try
             {
@@ -28,10 +35,14 @@ namespace System.Net.Mail
                             return null;
                         }
 
-                        _sessions[sessionCookie] =
-                            clientContext =
-                            new NTAuthentication(false, "Ntlm", credential, spn, ContextFlagsPal.Connection, channelBindingToken);
-
+                        _sessions[sessionCookie] = clientContext = new NTAuthentication(
+                            false,
+                            "Ntlm",
+                            credential,
+                            spn,
+                            ContextFlagsPal.Connection,
+                            channelBindingToken
+                        );
                     }
 
                     string? resp = clientContext.GetOutgoingBlob(challenge);
@@ -56,10 +67,7 @@ namespace System.Net.Mail
 
         public string AuthenticationType
         {
-            get
-            {
-                return "ntlm";
-            }
+            get { return "ntlm"; }
         }
 
         public void CloseContext(object sessionCookie)

@@ -8,7 +8,10 @@ namespace Internal.CommandLine
 {
     internal static class ArgumentLexer
     {
-        public static IReadOnlyList<ArgumentToken> Lex(IEnumerable<string> args, Func<string, IEnumerable<string>> responseFileReader = null)
+        public static IReadOnlyList<ArgumentToken> Lex(
+            IEnumerable<string> args,
+            Func<string, IEnumerable<string>> responseFileReader = null
+        )
         {
             var result = new List<ArgumentToken>();
 
@@ -108,7 +111,10 @@ namespace Internal.CommandLine
             return result.ToArray();
         }
 
-        private static IEnumerable<string> ExpandResponseFiles(IEnumerable<string> args, Func<string, IEnumerable<string>> responseFileReader)
+        private static IEnumerable<string> ExpandResponseFiles(
+            IEnumerable<string> args,
+            Func<string, IEnumerable<string>> responseFileReader
+        )
         {
             foreach (var arg in args)
             {
@@ -141,9 +147,7 @@ namespace Internal.CommandLine
 
         private static bool IsOptionBundle(ArgumentToken token)
         {
-            return token.IsOption &&
-                   token.Modifier == @"-" &&
-                   token.Name.Length > 1;
+            return token.IsOption && token.Modifier == @"-" && token.Name.Length > 1;
         }
 
         private static void ExpandOptionBundle(IList<ArgumentToken> receiver, int index)
@@ -162,11 +166,16 @@ namespace Internal.CommandLine
 
         private static bool TryExtractOption(string text, out string modifier, out string remainder)
         {
-            return TryExtractOption(text, @"--", out modifier, out remainder) ||
-                   TryExtractOption(text, @"-", out modifier, out remainder);
+            return TryExtractOption(text, @"--", out modifier, out remainder)
+                || TryExtractOption(text, @"-", out modifier, out remainder);
         }
 
-        private static bool TryExtractOption(string text, string prefix, out string modifier, out string remainder)
+        private static bool TryExtractOption(
+            string text,
+            string prefix,
+            out string modifier,
+            out string remainder
+        )
         {
             if (text.StartsWith(prefix))
             {

@@ -8,28 +8,39 @@ using System.Reflection;
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	///   Setup used by <see cref="Mock.SetupAllProperties(Mock)"/> for property setters.
 	/// </summary>
-	internal sealed class StubbedPropertySetterSetup : Setup
-	{
-		private Action<object> setter;
+    internal sealed class StubbedPropertySetterSetup : Setup
+    {
+        private Action<object> setter;
 
-		public StubbedPropertySetterSetup(Mock mock, LambdaExpression originalExpression, MethodInfo method, Action<object> setter)
-			: base(originalExpression: null, mock, new InvocationShape(originalExpression, method, new Expression[] { It.IsAny(method.GetParameterTypes().Last()) }))
-		{
-			this.setter = setter;
+        public StubbedPropertySetterSetup(
+            Mock mock,
+            LambdaExpression originalExpression,
+            MethodInfo method,
+            Action<object> setter
+        )
+            : base(
+                originalExpression: null,
+                mock,
+                new InvocationShape(
+                    originalExpression,
+                    method,
+                    new Expression[] { It.IsAny(method.GetParameterTypes().Last()) }
+                )
+            )
+        {
+            this.setter = setter;
 
-			this.MarkAsVerifiable();
-		}
+            this.MarkAsVerifiable();
+        }
 
-		protected override void ExecuteCore(Invocation invocation)
-		{
-			this.setter.Invoke(invocation.Arguments[0]);
-		}
+        protected override void ExecuteCore(Invocation invocation)
+        {
+            this.setter.Invoke(invocation.Arguments[0]);
+        }
 
-		protected override void VerifySelf()
-		{
-		}
-	}
+        protected override void VerifySelf() { }
+    }
 }

@@ -13,7 +13,7 @@ namespace System.Drawing
         public const int MAX_PATH = 260;
         internal const int SM_REMOTESESSION = 0x1000;
 
-        internal const int  DIB_RGB_COLORS = 0;
+        internal const int DIB_RGB_COLORS = 0;
         internal const int BI_BITFIELDS = 3;
         internal const int BI_RGB = 0;
 

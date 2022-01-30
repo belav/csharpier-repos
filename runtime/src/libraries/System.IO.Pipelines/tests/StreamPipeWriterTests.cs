@@ -35,7 +35,10 @@ namespace System.IO.Pipelines.Tests
         {
             byte[] bytes = Encoding.ASCII.GetBytes("Hello World");
             var stream = new MemoryStream();
-            PipeWriter writer = PipeWriter.Create(stream, new StreamPipeWriterOptions(leaveOpen: true));
+            PipeWriter writer = PipeWriter.Create(
+                stream,
+                new StreamPipeWriterOptions(leaveOpen: true)
+            );
 
             bytes.AsSpan().CopyTo(writer.GetSpan(bytes.Length));
             writer.Advance(bytes.Length);
@@ -54,7 +57,10 @@ namespace System.IO.Pipelines.Tests
         {
             byte[] bytes = Encoding.ASCII.GetBytes("Hello World");
             var stream = new MemoryStream();
-            PipeWriter writer = PipeWriter.Create(stream, new StreamPipeWriterOptions(leaveOpen: true));
+            PipeWriter writer = PipeWriter.Create(
+                stream,
+                new StreamPipeWriterOptions(leaveOpen: true)
+            );
 
             bytes.AsSpan().CopyTo(writer.GetSpan(bytes.Length));
             writer.Advance(bytes.Length);
@@ -73,7 +79,10 @@ namespace System.IO.Pipelines.Tests
         {
             byte[] bytes = Encoding.ASCII.GetBytes("Hello World");
             var stream = new MemoryStream();
-            PipeWriter writer = PipeWriter.Create(stream, new StreamPipeWriterOptions(leaveOpen: true));
+            PipeWriter writer = PipeWriter.Create(
+                stream,
+                new StreamPipeWriterOptions(leaveOpen: true)
+            );
 
             bytes.AsSpan().CopyTo(writer.GetSpan(bytes.Length));
             writer.Advance(bytes.Length);
@@ -90,7 +99,10 @@ namespace System.IO.Pipelines.Tests
         {
             byte[] bytes = Encoding.ASCII.GetBytes("Hello World");
             var stream = new MemoryStream();
-            PipeWriter writer = PipeWriter.Create(stream, new StreamPipeWriterOptions(leaveOpen: true));
+            PipeWriter writer = PipeWriter.Create(
+                stream,
+                new StreamPipeWriterOptions(leaveOpen: true)
+            );
 
             bytes.AsSpan().CopyTo(writer.GetSpan(bytes.Length));
             writer.Advance(bytes.Length);
@@ -107,7 +119,10 @@ namespace System.IO.Pipelines.Tests
         {
             byte[] bytes = Encoding.ASCII.GetBytes("Hello World");
             var stream = new MemoryStream();
-            PipeWriter writer = PipeWriter.Create(stream, new StreamPipeWriterOptions(leaveOpen: true));
+            PipeWriter writer = PipeWriter.Create(
+                stream,
+                new StreamPipeWriterOptions(leaveOpen: true)
+            );
 
             await writer.FlushAsync();
             bytes.AsSpan().CopyTo(writer.GetSpan(bytes.Length));
@@ -238,8 +253,7 @@ namespace System.IO.Pipelines.Tests
                 Encoding.ASCII.GetBytes("World"),
                 Encoding.ASCII.GetBytes("This"),
                 Encoding.ASCII.GetBytes("Works"),
-            }.
-            ToArray();
+            }.ToArray();
 
             Task readsTask = DoReadsAsync(pipe.Reader, data);
             Task writesTask = DoWritesAsync(writer, data);
@@ -400,7 +414,9 @@ namespace System.IO.Pipelines.Tests
                 Assert.Equal(3, pool.CurrentlyRentedBlocks);
                 Assert.Equal(0, pool.DisposedBlocks);
 
-                await Assert.ThrowsAsync<InvalidOperationException>(async () => await writer.FlushAsync());
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    async () => await writer.FlushAsync()
+                );
 
                 Assert.Equal(2, pool.CurrentlyRentedBlocks);
                 Assert.Equal(1, pool.DisposedBlocks);
@@ -502,8 +518,12 @@ namespace System.IO.Pipelines.Tests
         [Fact]
         public void InvalidMinimumBufferSize_ThrowsArgException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new StreamPipeWriterOptions(minimumBufferSize: 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new StreamPipeWriterOptions(minimumBufferSize: -2));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new StreamPipeWriterOptions(minimumBufferSize: 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new StreamPipeWriterOptions(minimumBufferSize: -2)
+            );
         }
 
         [Fact]
@@ -520,7 +540,11 @@ namespace System.IO.Pipelines.Tests
         {
             using (var pool = new TestMemoryPool())
             {
-                var options = new StreamPipeWriterOptions(pool: pool, minimumBufferSize: 1234, leaveOpen: true);
+                var options = new StreamPipeWriterOptions(
+                    pool: pool,
+                    minimumBufferSize: 1234,
+                    leaveOpen: true
+                );
                 Assert.Same(pool, options.Pool);
                 Assert.Equal(1234, options.MinimumBufferSize);
                 Assert.True(options.LeaveOpen);
@@ -578,7 +602,13 @@ namespace System.IO.Pipelines.Tests
             bool fired = false;
             PipeWriter writer = PipeWriter.Create(Stream.Null);
 #pragma warning disable CS0618 // Type or member is obsolete
-            writer.OnReaderCompleted((_, __) => { fired = true; }, null);
+            writer.OnReaderCompleted(
+                (_, __) =>
+                {
+                    fired = true;
+                },
+                null
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
             writer.Complete();
             Assert.False(fired);
@@ -588,7 +618,10 @@ namespace System.IO.Pipelines.Tests
         public void LeaveUnderlyingStreamOpen()
         {
             var stream = new MemoryStream();
-            PipeWriter writer = PipeWriter.Create(stream, new StreamPipeWriterOptions(leaveOpen: true));
+            PipeWriter writer = PipeWriter.Create(
+                stream,
+                new StreamPipeWriterOptions(leaveOpen: true)
+            );
 
             writer.Complete();
 
@@ -600,7 +633,9 @@ namespace System.IO.Pipelines.Tests
         {
             PipeWriter writer = PipeWriter.Create(new ThrowsOperationCanceledExceptionStream());
 
-            await Assert.ThrowsAsync<OperationCanceledException>(async () => await writer.WriteAsync(new byte[1]));
+            await Assert.ThrowsAsync<OperationCanceledException>(
+                async () => await writer.WriteAsync(new byte[1])
+            );
         }
 
         [Fact]
@@ -629,7 +664,12 @@ namespace System.IO.Pipelines.Tests
                 throw new OperationCanceledException();
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 throw new OperationCanceledException();
             }
@@ -640,7 +680,10 @@ namespace System.IO.Pipelines.Tests
             }
 
 #if NETCOREAPP
-            public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+            public override ValueTask WriteAsync(
+                ReadOnlyMemory<byte> buffer,
+                CancellationToken cancellationToken = default
+            )
             {
                 throw new OperationCanceledException();
             }

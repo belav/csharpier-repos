@@ -18,15 +18,20 @@ namespace Roslyn.Utilities
             TimeSpan delay,
             Func<CancellationToken, ValueTask> processBatchAsync,
             IAsynchronousOperationListener asyncListener,
-            CancellationToken cancellationToken)
-            : base(delay, Convert(processBatchAsync), EqualityComparer<VoidResult>.Default, asyncListener, cancellationToken)
-        {
-        }
+            CancellationToken cancellationToken
+        )
+            : base(
+                delay,
+                Convert(processBatchAsync),
+                EqualityComparer<VoidResult>.Default,
+                asyncListener,
+                cancellationToken
+            ) { }
 
-        private static Func<ImmutableArray<VoidResult>, CancellationToken, ValueTask> Convert(Func<CancellationToken, ValueTask> processBatchAsync)
-            => (items, ct) => processBatchAsync(ct);
+        private static Func<ImmutableArray<VoidResult>, CancellationToken, ValueTask> Convert(
+            Func<CancellationToken, ValueTask> processBatchAsync
+        ) => (items, ct) => processBatchAsync(ct);
 
-        public void AddWork()
-            => base.AddWork(default(VoidResult));
+        public void AddWork() => base.AddWork(default(VoidResult));
     }
 }

@@ -14,122 +14,115 @@ Expected: Should return the same exception.
 
 using System;
 
-
-public class A 
+public class A
 {
-	public static int i;
-	
-	static A()
-	{
-		Console.WriteLine("In A.cctor");
+    public static int i;
 
-		A.i = 5;
-		
-		throw new Exception();
-	}
+    static A()
+    {
+        Console.WriteLine("In A.cctor");
+
+        A.i = 5;
+
+        throw new Exception();
+    }
 }
 
-
-public struct B 
+public struct B
 {
-	public static int i;
-	
-	static B()
-	{
-		Console.WriteLine("In B.cctor");
+    public static int i;
 
-		B.i = 5;
-		
-		throw new Exception();
-	}
+    static B()
+    {
+        Console.WriteLine("In B.cctor");
+
+        B.i = 5;
+
+        throw new Exception();
+    }
 }
-
 
 public class Test_CctorThrowStaticField
-{	
-	public static int Main()
-	{ 
-		bool result = true;
-		
-		try
-		{
-			Console.WriteLine("Accessing class's static field");
-			Console.WriteLine("A.i: " +A.i);
-			Console.WriteLine("Did not catch expected TypeInitializationException exception");
-			result = false;
-		}
-		catch (TypeInitializationException)
-		{
-			Console.WriteLine("Caught expected exception 1st time");
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine("Caught unexpected exception 1st time: " + e);
-			result = false;
-		}
+{
+    public static int Main()
+    {
+        bool result = true;
 
+        try
+        {
+            Console.WriteLine("Accessing class's static field");
+            Console.WriteLine("A.i: " + A.i);
+            Console.WriteLine("Did not catch expected TypeInitializationException exception");
+            result = false;
+        }
+        catch (TypeInitializationException)
+        {
+            Console.WriteLine("Caught expected exception 1st time");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Caught unexpected exception 1st time: " + e);
+            result = false;
+        }
 
-		try
-		{
-			Console.WriteLine("A.i: " +A.i);
-			Console.WriteLine("Did not catch expected TypeInitializationException exception");
-			result = false;
-		}
-		catch (TypeInitializationException)
-		{
-			Console.WriteLine("Caught expected exception 2nd time\n");
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine("Caught unexpected exception 2nd time: " + e);
-			result = false;
-		}
+        try
+        {
+            Console.WriteLine("A.i: " + A.i);
+            Console.WriteLine("Did not catch expected TypeInitializationException exception");
+            result = false;
+        }
+        catch (TypeInitializationException)
+        {
+            Console.WriteLine("Caught expected exception 2nd time\n");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Caught unexpected exception 2nd time: " + e);
+            result = false;
+        }
 
+        Console.WriteLine("Accessing struct's static field");
+        try
+        {
+            Console.WriteLine("B.i: " + B.i);
+            Console.WriteLine("Did not catch expected TypeInitializationException exception");
+            result = false;
+        }
+        catch (TypeInitializationException)
+        {
+            Console.WriteLine("Caught expected exception 1st time");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Caught unexpected exception 1st time: " + e);
+            result = false;
+        }
 
-		Console.WriteLine("Accessing struct's static field");
-		try
-		{
-			Console.WriteLine("B.i: " +B.i);
-			Console.WriteLine("Did not catch expected TypeInitializationException exception");
-			result = false;
-		}
-		catch (TypeInitializationException)
-		{
-			Console.WriteLine("Caught expected exception 1st time");
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine("Caught unexpected exception 1st time: " + e);
-			result = false;
-		}
+        try
+        {
+            Console.WriteLine("B.i: " + B.i);
+            Console.WriteLine("Did not catch expected TypeInitializationException exception");
+            result = false;
+        }
+        catch (TypeInitializationException)
+        {
+            Console.WriteLine("Caught expected exception 2nd time\n");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Caught unexpected exception 2nd time: " + e);
+            result = false;
+        }
 
-
-		try
-		{
-			Console.WriteLine("B.i: " +B.i);
-			Console.WriteLine("Did not catch expected TypeInitializationException exception");
-			result = false;
-		}
-		catch (TypeInitializationException)
-		{
-			Console.WriteLine("Caught expected exception 2nd time\n");
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine("Caught unexpected exception 2nd time: " + e);
-			result = false;
-		}
-
-		if (result)
-		{
-			Console.WriteLine("PASS");
-			return 100;
-		}
-		else
-		{
-			Console.WriteLine("FAIL");
-			return 101;
-		}
-		
-	}
+        if (result)
+        {
+            Console.WriteLine("PASS");
+            return 100;
+        }
+        else
+        {
+            Console.WriteLine("FAIL");
+            return 101;
+        }
+    }
 }
