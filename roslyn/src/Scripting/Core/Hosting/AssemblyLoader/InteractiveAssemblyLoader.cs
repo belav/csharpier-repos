@@ -118,10 +118,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             _loadedAssembliesBySimpleName = new Dictionary<string, List<LoadedAssemblyInfo>>(
                 AssemblyIdentityComparer.SimpleNameComparer
             );
-            _dependenciesWithLocationBySimpleName = new Dictionary<
-                string,
-                List<AssemblyIdentityAndLocation>
-            >();
+            _dependenciesWithLocationBySimpleName =
+                new Dictionary<string, List<AssemblyIdentityAndLocation>>();
 
             _runtimeAssemblyLoader = AssemblyLoaderImpl.Create(this);
         }

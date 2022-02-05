@@ -170,10 +170,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
                     lock (_gate)
                     {
                         if (_sharedTestGeneratorReferences == null)
-                            _sharedTestGeneratorReferences = new ConcurrentDictionary<
-                                Guid,
-                                TestGeneratorReference
-                            >();
+                            _sharedTestGeneratorReferences =
+                                new ConcurrentDictionary<Guid, TestGeneratorReference>();
 
                         return _sharedTestGeneratorReferences;
                     }

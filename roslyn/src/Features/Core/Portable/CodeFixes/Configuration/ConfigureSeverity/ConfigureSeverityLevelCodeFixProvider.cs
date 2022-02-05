@@ -76,10 +76,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureSeverity
         )
         {
             var result = ArrayBuilder<CodeFix>.GetInstance();
-            var analyzerDiagnosticsByCategory = new SortedDictionary<
-                string,
-                ArrayBuilder<Diagnostic>
-            >();
+            var analyzerDiagnosticsByCategory =
+                new SortedDictionary<string, ArrayBuilder<Diagnostic>>();
             using var disposer = ArrayBuilder<Diagnostic>.GetInstance(out var analyzerDiagnostics);
             foreach (var diagnostic in diagnostics)
             {

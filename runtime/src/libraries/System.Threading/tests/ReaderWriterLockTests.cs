@@ -916,10 +916,8 @@ namespace System.Threading.Tests
                 Dictionary<TestReaderWriterLock, int> threadReaderLevels = t_readerLevels;
                 if (threadReaderLevels == null)
                 {
-                    t_readerLevels = threadReaderLevels = new Dictionary<
-                        TestReaderWriterLock,
-                        int
-                    >();
+                    t_readerLevels = threadReaderLevels =
+                        new Dictionary<TestReaderWriterLock, int>();
                 }
                 return threadReaderLevels;
             }

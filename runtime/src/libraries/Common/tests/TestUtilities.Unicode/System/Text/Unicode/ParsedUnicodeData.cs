@@ -194,10 +194,8 @@ namespace System.Text.Unicode
             GraphemeClusterBreakProperty
         > ProcessGraphemeClusterBreakAndEmojiDataFiles()
         {
-            Dictionary<int, GraphemeClusterBreakProperty> dict = new Dictionary<
-                int,
-                GraphemeClusterBreakProperty
-            >();
+            Dictionary<int, GraphemeClusterBreakProperty> dict =
+                new Dictionary<int, GraphemeClusterBreakProperty>();
 
             foreach (
                 string resourceName in new[]
@@ -287,10 +285,8 @@ namespace System.Text.Unicode
             using Stream stream = Resources.OpenResource(Resources.UnicodeData);
             using StreamReader reader = new StreamReader(stream);
 
-            Dictionary<int, UnicodeDataFileEntry> dict = new Dictionary<
-                int,
-                UnicodeDataFileEntry
-            >();
+            Dictionary<int, UnicodeDataFileEntry> dict =
+                new Dictionary<int, UnicodeDataFileEntry>();
 
             string thisLine;
             while ((thisLine = reader.ReadLine()) != null)

@@ -44,10 +44,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     new ISymbolDefinitionNode[] { this }
                 );
 
-            Dictionary<EcmaMethod, HashSet<EcmaMethod>> inlineeToInliners = new Dictionary<
-                EcmaMethod,
-                HashSet<EcmaMethod>
-            >();
+            Dictionary<EcmaMethod, HashSet<EcmaMethod>> inlineeToInliners =
+                new Dictionary<EcmaMethod, HashSet<EcmaMethod>>();
 
             // Build a map from inlinee to the list of inliners
             // We are only interested in the generic definitions of these.

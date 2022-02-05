@@ -18,15 +18,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         MetadataBuilder _metadataBuilder;
         BlobBuilder _ilBuilder;
         MethodBodyStreamEncoder _methodBodyStream;
-        Dictionary<IAssemblyDesc, AssemblyReferenceHandle> _assemblyRefs = new Dictionary<
-            IAssemblyDesc,
-            AssemblyReferenceHandle
-        >();
+        Dictionary<IAssemblyDesc, AssemblyReferenceHandle> _assemblyRefs =
+            new Dictionary<IAssemblyDesc, AssemblyReferenceHandle>();
         Dictionary<TypeDesc, EntityHandle> _typeRefs = new Dictionary<TypeDesc, EntityHandle>();
-        Dictionary<MethodDesc, EntityHandle> _methodRefs = new Dictionary<
-            MethodDesc,
-            EntityHandle
-        >();
+        Dictionary<MethodDesc, EntityHandle> _methodRefs =
+            new Dictionary<MethodDesc, EntityHandle>();
         Blob _mvidFixup;
         BlobHandle _noArgsVoidReturnStaticMethodSigHandle;
 

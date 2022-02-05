@@ -15,10 +15,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
     {
         AssemblyName _name;
         List<TypeRefTypeSystemType> _types = new List<TypeRefTypeSystemType>();
-        Dictionary<string, TypeRefTypeSystemType> _nonNamespacedTypes = new Dictionary<
-            string,
-            TypeRefTypeSystemType
-        >();
+        Dictionary<string, TypeRefTypeSystemType> _nonNamespacedTypes =
+            new Dictionary<string, TypeRefTypeSystemType>();
         Dictionary<string, Dictionary<string, TypeRefTypeSystemType>> _namespacedTypes =
             new Dictionary<string, Dictionary<string, TypeRefTypeSystemType>>();
 

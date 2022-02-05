@@ -12,10 +12,8 @@ namespace Microsoft.Extensions.Localization;
 /// </summary>
 public class ResourceNamesCache : IResourceNamesCache
 {
-    private readonly ConcurrentDictionary<string, IList<string>?> _cache = new ConcurrentDictionary<
-        string,
-        IList<string>?
-    >();
+    private readonly ConcurrentDictionary<string, IList<string>?> _cache =
+        new ConcurrentDictionary<string, IList<string>?>();
 
     /// <summary>
     /// Creates a new <see cref="ResourceNamesCache" />

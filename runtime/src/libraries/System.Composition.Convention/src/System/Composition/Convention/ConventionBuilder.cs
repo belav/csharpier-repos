@@ -19,14 +19,10 @@ namespace System.Composition.Convention
         private readonly List<PartConventionBuilder> _conventions =
             new List<PartConventionBuilder>();
 
-        private readonly Dictionary<MemberInfo, List<Attribute>> _memberInfos = new Dictionary<
-            MemberInfo,
-            List<Attribute>
-        >();
-        private readonly Dictionary<ParameterInfo, List<Attribute>> _parameters = new Dictionary<
-            ParameterInfo,
-            List<Attribute>
-        >();
+        private readonly Dictionary<MemberInfo, List<Attribute>> _memberInfos =
+            new Dictionary<MemberInfo, List<Attribute>>();
+        private readonly Dictionary<ParameterInfo, List<Attribute>> _parameters =
+            new Dictionary<ParameterInfo, List<Attribute>>();
 
         /// <summary>
         /// Construct a new <see cref="ConventionBuilder"/>.

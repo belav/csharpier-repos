@@ -745,12 +745,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(!attributeDataArray.Contains((attr) => attr != null));
 
             var earlyBinder = new EarlyWellKnownAttributeBinder(binders[0]);
-            var arguments = new EarlyDecodeWellKnownAttributeArguments<
-                EarlyWellKnownAttributeBinder,
-                NamedTypeSymbol,
-                AttributeSyntax,
-                AttributeLocation
-            >();
+            var arguments =
+                new EarlyDecodeWellKnownAttributeArguments<
+                    EarlyWellKnownAttributeBinder,
+                    NamedTypeSymbol,
+                    AttributeSyntax,
+                    AttributeLocation
+                >();
             arguments.SymbolPart = symbolPart;
 
             for (int i = 0; i < boundAttributeTypes.Length; i++)
@@ -830,11 +831,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             int totalAttributesCount = boundAttributes.Length;
             HashSet<NamedTypeSymbol> uniqueAttributeTypes = new HashSet<NamedTypeSymbol>();
-            var arguments = new DecodeWellKnownAttributeArguments<
-                AttributeSyntax,
-                CSharpAttributeData,
-                AttributeLocation
-            >();
+            var arguments =
+                new DecodeWellKnownAttributeArguments<
+                    AttributeSyntax,
+                    CSharpAttributeData,
+                    AttributeLocation
+                >();
             arguments.Diagnostics = diagnostics;
             arguments.AttributesCount = totalAttributesCount;
             arguments.SymbolPart = symbolPart;

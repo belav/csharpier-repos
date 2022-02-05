@@ -67,10 +67,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 Dictionary<
                                     ILocalSymbol,
                                     HashSet<INamedTypeSymbol>
-                                > localsSourceTypes = new Dictionary<
-                                    ILocalSymbol,
-                                    HashSet<INamedTypeSymbol>
-                                >();
+                                > localsSourceTypes =
+                                    new Dictionary<ILocalSymbol, HashSet<INamedTypeSymbol>>();
 
                                 // Track explicit assignments.
                                 operationBlockContext.RegisterOperationAction(

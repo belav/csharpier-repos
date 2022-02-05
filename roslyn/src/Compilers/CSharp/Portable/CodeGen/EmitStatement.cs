@@ -1798,10 +1798,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 var labelClones = _labelClones;
                 if (labelClones == null)
                 {
-                    _labelClones = labelClones = new Dictionary<
-                        LabelSymbol,
-                        GeneratedLabelSymbol
-                    >();
+                    _labelClones = labelClones =
+                        new Dictionary<LabelSymbol, GeneratedLabelSymbol>();
                 }
 
                 GeneratedLabelSymbol clone;

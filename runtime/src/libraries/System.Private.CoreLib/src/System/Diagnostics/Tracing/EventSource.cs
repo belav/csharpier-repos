@@ -5355,10 +5355,8 @@ namespace System.Diagnostics.Tracing
             {
                 Debug.Assert(s_EventSources != null);
                 // Get all listeners
-                Dictionary<EventListener, bool> allListeners = new Dictionary<
-                    EventListener,
-                    bool
-                >();
+                Dictionary<EventListener, bool> allListeners =
+                    new Dictionary<EventListener, bool>();
                 EventListener? cur = s_Listeners;
                 while (cur != null)
                 {

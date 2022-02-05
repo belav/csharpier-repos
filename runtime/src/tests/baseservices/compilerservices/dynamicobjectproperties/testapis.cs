@@ -170,10 +170,8 @@ public class Driver<K, V>
 
     public Dictionary<string, string> g_stringDict = new Dictionary<string, string>();
     public Dictionary<RefX1<int>, string> g_refIntDict = new Dictionary<RefX1<int>, string>();
-    public Dictionary<RefX1<string>, string> g_refStringDict = new Dictionary<
-        RefX1<string>,
-        string
-    >();
+    public Dictionary<RefX1<string>, string> g_refStringDict =
+        new Dictionary<RefX1<string>, string>();
 
     public void GenerateValuesForStringKeys(string[] stringArr)
     {
@@ -466,10 +464,8 @@ public class NegativeTestCases
 {
     public static void NoDefaulConstructor()
     {
-        ConditionalWeakTable<string, NoDefaultConstructor> tbl = new ConditionalWeakTable<
-            string,
-            NoDefaultConstructor
-        >();
+        ConditionalWeakTable<string, NoDefaultConstructor> tbl =
+            new ConditionalWeakTable<string, NoDefaultConstructor>();
 
         try
         {

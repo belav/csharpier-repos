@@ -343,10 +343,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     MetadataNode,
                     MetadataNode
                 >.GetInstance();
-                _extensionMethodToParameterTypeInfo = new MultiDictionary<
-                    MetadataNode,
-                    ParameterTypeInfo
-                >();
+                _extensionMethodToParameterTypeInfo =
+                    new MultiDictionary<MetadataNode, ParameterTypeInfo>();
                 _rootNode = MetadataNode.Allocate(name: "");
             }
 

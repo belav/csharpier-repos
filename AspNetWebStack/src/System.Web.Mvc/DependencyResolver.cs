@@ -162,10 +162,8 @@ namespace System.Web.Mvc
         /// </remarks>
         private sealed class CacheDependencyResolver : IDependencyResolver
         {
-            private readonly ConcurrentDictionary<Type, object> _cache = new ConcurrentDictionary<
-                Type,
-                object
-            >();
+            private readonly ConcurrentDictionary<Type, object> _cache =
+                new ConcurrentDictionary<Type, object>();
             private readonly ConcurrentDictionary<Type, IEnumerable<object>> _cacheMultiple =
                 new ConcurrentDictionary<Type, IEnumerable<object>>();
             private readonly Func<Type, object> _getServiceDelegate;

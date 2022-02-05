@@ -804,9 +804,10 @@ namespace Microsoft.CodeAnalysis
             //   Key - contains simple name of a child namespace.
             //   Value – contains a sequence similar to the one passed to this function, but
             //           calculated for the child namespace.
-            var nestedNamespaces = new List<
-                KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>
-            >();
+            var nestedNamespaces =
+                new List<
+                    KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>
+                >();
             bool possiblyHavePairsWithDuplicateKey = false;
 
             var enumerator = typesByNS.GetEnumerator();
@@ -882,9 +883,8 @@ namespace Microsoft.CodeAnalysis
                                 );
                             }
 
-                            typesInLastChildNamespace = new List<
-                                IGrouping<string, TypeDefinitionHandle>
-                            >();
+                            typesInLastChildNamespace =
+                                new List<IGrouping<string, TypeDefinitionHandle>>();
                             lastChildNamespaceName = childNamespaceName;
                             Debug.Assert((object)lastChildNamespaceName != null);
 

@@ -9,10 +9,8 @@ namespace System.Xml.Schema
 
     public class XmlSchemaObjectTable
     {
-        private readonly Dictionary<XmlQualifiedName, XmlSchemaObject> _table = new Dictionary<
-            XmlQualifiedName,
-            XmlSchemaObject
-        >();
+        private readonly Dictionary<XmlQualifiedName, XmlSchemaObject> _table =
+            new Dictionary<XmlQualifiedName, XmlSchemaObject>();
         private readonly List<XmlSchemaObjectEntry> _entries = new List<XmlSchemaObjectEntry>();
 
         internal XmlSchemaObjectTable() { }

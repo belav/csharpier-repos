@@ -65,10 +65,8 @@ namespace System.Reflection.Metadata.Tests
             mdtNestedClass = 0x29000000,
         }
 
-        private static readonly Dictionary<byte[], GCHandle> s_peImages = new Dictionary<
-            byte[],
-            GCHandle
-        >();
+        private static readonly Dictionary<byte[], GCHandle> s_peImages =
+            new Dictionary<byte[], GCHandle>();
 
         internal static unsafe MetadataReader GetMetadataReader(
             byte[] peImage,

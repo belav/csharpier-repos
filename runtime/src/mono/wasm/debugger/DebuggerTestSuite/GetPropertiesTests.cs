@@ -22,14 +22,15 @@ namespace DebuggerTests
             bool
         > ClassGetPropertiesTestData(bool is_async)
         {
-            var data = new TheoryData<
-                string,
-                bool?,
-                bool?,
-                string[],
-                Dictionary<string, (JObject, bool)>,
-                bool
-            >();
+            var data =
+                new TheoryData<
+                    string,
+                    bool?,
+                    bool?,
+                    string[],
+                    Dictionary<string, (JObject, bool)>,
+                    bool
+                >();
 
             var type_name = "DerivedClass";
             var all_props = new Dictionary<string, (JObject, bool)>()
@@ -147,14 +148,15 @@ namespace DebuggerTests
             bool
         > StructGetPropertiesTestData(bool is_async)
         {
-            var data = new TheoryData<
-                string,
-                bool?,
-                bool?,
-                string[],
-                Dictionary<string, (JObject, bool)>,
-                bool
-            >();
+            var data =
+                new TheoryData<
+                    string,
+                    bool?,
+                    bool?,
+                    string[],
+                    Dictionary<string, (JObject, bool)>,
+                    bool
+                >();
 
             var type_name = "CloneableStruct";
             var all_props = new Dictionary<string, (JObject, bool)>()

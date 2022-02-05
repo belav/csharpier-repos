@@ -20,10 +20,8 @@ namespace ILVerify
     /// </summary>
     public abstract class ResolverBase : IResolver
     {
-        private readonly Dictionary<string, PEReader> _resolverCache = new Dictionary<
-            string,
-            PEReader
-        >();
+        private readonly Dictionary<string, PEReader> _resolverCache =
+            new Dictionary<string, PEReader>();
 
         public PEReader Resolve(string simpleName)
         {

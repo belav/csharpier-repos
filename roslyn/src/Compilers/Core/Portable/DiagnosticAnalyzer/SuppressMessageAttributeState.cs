@@ -48,10 +48,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private readonly Dictionary<
                 ISymbol,
                 Dictionary<string, SuppressMessageInfo>
-            > _globalSymbolSuppressions = new Dictionary<
-                ISymbol,
-                Dictionary<string, SuppressMessageInfo>
-            >();
+            > _globalSymbolSuppressions =
+                new Dictionary<ISymbol, Dictionary<string, SuppressMessageInfo>>();
 
             public void AddCompilationWideSuppression(SuppressMessageInfo info)
             {
@@ -122,10 +120,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal SuppressMessageAttributeState(Compilation compilation)
         {
             _compilation = compilation;
-            _localSuppressionsBySymbol = new ConcurrentDictionary<
-                ISymbol,
-                ImmutableDictionary<string, SuppressMessageInfo>
-            >();
+            _localSuppressionsBySymbol =
+                new ConcurrentDictionary<
+                    ISymbol,
+                    ImmutableDictionary<string, SuppressMessageInfo>
+                >();
         }
 
         public Diagnostic ApplySourceSuppressions(Diagnostic diagnostic)

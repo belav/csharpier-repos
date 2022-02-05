@@ -53,10 +53,8 @@ namespace System.Xml.Xsl.Xslt
 
         public Dictionary<QilName, VarPar> AllGlobalVarPars = new Dictionary<QilName, VarPar>();
         public Dictionary<QilName, Template> NamedTemplates = new Dictionary<QilName, Template>();
-        public Dictionary<QilName, AttributeSet> AttributeSets = new Dictionary<
-            QilName,
-            AttributeSet
-        >();
+        public Dictionary<QilName, AttributeSet> AttributeSets =
+            new Dictionary<QilName, AttributeSet>();
         public Dictionary<string, NsAlias> NsAliases = new Dictionary<string, NsAlias>();
 
         private readonly Dictionary<string, int> _moduleOrder = new Dictionary<string, int>();

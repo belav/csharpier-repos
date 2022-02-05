@@ -23,10 +23,8 @@ namespace CoreXml.Test.XLinq
     {
         public class NSStack
         {
-            private Dictionary<int, Dictionary<string, string>> _nsStack = new Dictionary<
-                int,
-                Dictionary<string, string>
-            >();
+            private Dictionary<int, Dictionary<string, string>> _nsStack =
+                new Dictionary<int, Dictionary<string, string>>();
 
             public NSStack()
             {

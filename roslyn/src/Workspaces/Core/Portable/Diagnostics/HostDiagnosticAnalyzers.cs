@@ -76,10 +76,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             );
 
             _compilerDiagnosticAnalyzerMap = ImmutableDictionary<string, DiagnosticAnalyzer>.Empty;
-            _skippedHostAnalyzers = new ConditionalWeakTable<
-                IReadOnlyList<AnalyzerReference>,
-                StrongBox<ImmutableDictionary<string, SkippedHostAnalyzersInfo>>
-            >();
+            _skippedHostAnalyzers =
+                new ConditionalWeakTable<
+                    IReadOnlyList<AnalyzerReference>,
+                    StrongBox<ImmutableDictionary<string, SkippedHostAnalyzersInfo>>
+                >();
         }
 
         /// <summary>

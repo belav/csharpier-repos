@@ -65,10 +65,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             CirculationGraph graph = new CirculationGraph();
 
             // Map each concrete block T to a pair of Nodes and an Edge in the circulation graph: entrance, exit, and backedge.
-            Dictionary<T, (Node entrance, Node exit, Edge back)> abstractNodeMap = new Dictionary<
-                T,
-                (Node entrance, Node exit, Edge back)
-            >();
+            Dictionary<T, (Node entrance, Node exit, Edge back)> abstractNodeMap =
+                new Dictionary<T, (Node entrance, Node exit, Edge back)>();
 
             // Create privileged nodes source and target that will be connected to induce flow.
             Node source = new Node();

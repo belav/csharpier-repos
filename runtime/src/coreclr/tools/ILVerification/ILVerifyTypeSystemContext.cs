@@ -23,10 +23,8 @@ namespace ILVerify
         private MetadataVirtualMethodAlgorithm _metadataVirtualMethodAlgorithm =
             new MetadataVirtualMethodAlgorithm();
 
-        private readonly Dictionary<PEReader, EcmaModule> _modulesCache = new Dictionary<
-            PEReader,
-            EcmaModule
-        >();
+        private readonly Dictionary<PEReader, EcmaModule> _modulesCache =
+            new Dictionary<PEReader, EcmaModule>();
 
         public ILVerifyTypeSystemContext(IResolver resolver)
         {

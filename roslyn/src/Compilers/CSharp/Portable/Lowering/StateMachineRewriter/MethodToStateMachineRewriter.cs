@@ -70,10 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Note that there is a dispatch occurring at every try-finally statement, so this
         /// variable takes on a new set of values inside each try block.
         /// </summary>
-        private Dictionary<LabelSymbol, List<int>> _dispatches = new Dictionary<
-            LabelSymbol,
-            List<int>
-        >();
+        private Dictionary<LabelSymbol, List<int>> _dispatches =
+            new Dictionary<LabelSymbol, List<int>>();
 
         /// <summary>
         /// A try block might have no state (transitions) within it, in which case it does not need

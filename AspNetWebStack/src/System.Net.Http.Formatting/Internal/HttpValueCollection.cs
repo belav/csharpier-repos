@@ -39,9 +39,8 @@ namespace System.Net.Http.Formatting.Internal
         internal readonly HashSet<string> Names = new HashSet<string>(
             StringComparer.OrdinalIgnoreCase
         );
-        internal readonly List<KeyValuePair<string, string>> List = new List<
-            KeyValuePair<string, string>
-        >();
+        internal readonly List<KeyValuePair<string, string>> List =
+            new List<KeyValuePair<string, string>>();
 
         /// <summary>
         /// Creates a new <see cref="System.Net.Http.Formatting.HttpValueCollection"/> instance

@@ -65,10 +65,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             public IReadOnlyList<Import> ReferencedImports => _imports;
             List<long> _longs = new List<long>();
             List<Import> _imports = new List<Import>();
-            Dictionary<TypeSystemEntityOrUnknown, int> _typeConversions = new Dictionary<
-                TypeSystemEntityOrUnknown,
-                int
-            >();
+            Dictionary<TypeSystemEntityOrUnknown, int> _typeConversions =
+                new Dictionary<TypeSystemEntityOrUnknown, int>();
             int _unknownTypesFound = 0;
             CompilationModuleGroup _compilationGroup;
             ReadyToRunSymbolNodeFactory _symbolFactory;

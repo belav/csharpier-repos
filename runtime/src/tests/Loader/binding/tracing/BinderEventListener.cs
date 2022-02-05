@@ -165,10 +165,8 @@ namespace BinderTracingTests
         private const EventKeywords AssemblyLoaderKeyword = (EventKeywords)0x4;
 
         private readonly object eventsLock = new object();
-        private readonly Dictionary<Guid, BindOperation> bindOperations = new Dictionary<
-            Guid,
-            BindOperation
-        >();
+        private readonly Dictionary<Guid, BindOperation> bindOperations =
+            new Dictionary<Guid, BindOperation>();
         private readonly string[] loadsToTrack;
 
         public BinderEventListener(string[] loadsToTrack, bool log = false)

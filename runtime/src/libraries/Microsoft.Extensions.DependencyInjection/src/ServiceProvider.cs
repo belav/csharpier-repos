@@ -53,10 +53,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Root = new ServiceProviderEngineScope(this, isRootScope: true);
             _engine = GetEngine();
             _createServiceAccessor = CreateServiceAccessor;
-            _realizedServices = new ConcurrentDictionary<
-                Type,
-                Func<ServiceProviderEngineScope, object>
-            >();
+            _realizedServices =
+                new ConcurrentDictionary<Type, Func<ServiceProviderEngineScope, object>>();
 
             CallSiteFactory = new CallSiteFactory(serviceDescriptors);
             // The list of built in services that aren't part of the list of service descriptors

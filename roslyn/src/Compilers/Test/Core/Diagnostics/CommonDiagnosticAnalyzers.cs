@@ -2469,10 +2469,8 @@ namespace Microsoft.CodeAnalysis
             {
                 var diagnostics = new ConcurrentBag<Diagnostic>();
                 var symbolsEnded = new ConcurrentSet<ISymbol>();
-                var seenOperationContainers = new ConcurrentDictionary<
-                    OperationAnalysisContext,
-                    ISet<ISymbol>
-                >();
+                var seenOperationContainers =
+                    new ConcurrentDictionary<OperationAnalysisContext, ISet<ISymbol>>();
 
                 if (_topLevelAction)
                 {

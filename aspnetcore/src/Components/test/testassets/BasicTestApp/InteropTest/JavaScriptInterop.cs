@@ -11,10 +11,8 @@ namespace BasicTestApp.InteropTest;
 
 public class JavaScriptInterop
 {
-    public static ConcurrentDictionary<string, object[]> Invocations = new ConcurrentDictionary<
-        string,
-        object[]
-    >();
+    public static ConcurrentDictionary<string, object[]> Invocations =
+        new ConcurrentDictionary<string, object[]>();
 
     [JSInvokable]
     public static void ThrowException() =>

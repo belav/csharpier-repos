@@ -14,10 +14,8 @@ namespace System.Text
             string,
             int
         >(StringComparer.OrdinalIgnoreCase);
-        private static readonly Dictionary<int, string> s_codePageToWebNameCache = new Dictionary<
-            int,
-            string
-        >();
+        private static readonly Dictionary<int, string> s_codePageToWebNameCache =
+            new Dictionary<int, string>();
         private static readonly Dictionary<int, string> s_codePageToEnglishNameCache =
             new Dictionary<int, string>();
         private static readonly ReaderWriterLockSlim s_cacheLock = new ReaderWriterLockSlim();

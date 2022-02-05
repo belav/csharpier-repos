@@ -68,10 +68,8 @@ namespace ILCompiler
         )
         {
             var resolvedProfileData = new Dictionary<MethodDesc, Dictionary<MethodDesc, int>>();
-            Dictionary<string, MethodDesc> nameToMethodDescMap = new Dictionary<
-                string,
-                MethodDesc
-            >();
+            Dictionary<string, MethodDesc> nameToMethodDescMap =
+                new Dictionary<string, MethodDesc>();
 
             foreach (var keyAndMethods in profileData)
             {
@@ -307,10 +305,8 @@ namespace ILCompiler
             string jsonProfileFile
         )
         {
-            Dictionary<string, Dictionary<string, int>> profileData = new Dictionary<
-                string,
-                Dictionary<string, int>
-            >();
+            Dictionary<string, Dictionary<string, int>> profileData =
+                new Dictionary<string, Dictionary<string, int>>();
 
             using (StreamReader stream = File.OpenText(jsonProfileFile))
             using (JsonDocument document = JsonDocument.Parse(stream.BaseStream))

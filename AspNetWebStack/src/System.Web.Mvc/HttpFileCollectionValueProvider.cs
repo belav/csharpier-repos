@@ -29,9 +29,8 @@ namespace System.Web.Mvc
             }
 
             // build up the 1:many file mapping
-            List<KeyValuePair<string, HttpPostedFileBase>> mapping = new List<
-                KeyValuePair<string, HttpPostedFileBase>
-            >();
+            List<KeyValuePair<string, HttpPostedFileBase>> mapping =
+                new List<KeyValuePair<string, HttpPostedFileBase>>();
             string[] allKeys = files.AllKeys;
             for (int i = 0; i < files.Count; i++)
             {

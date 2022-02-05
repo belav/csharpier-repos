@@ -11,10 +11,8 @@ namespace System.Web.Mvc
     public abstract class CachedAssociatedMetadataProvider<TModelMetadata>
         : AssociatedMetadataProvider where TModelMetadata : ModelMetadata
     {
-        private static ConcurrentDictionary<Type, string> _typeIds = new ConcurrentDictionary<
-            Type,
-            string
-        >();
+        private static ConcurrentDictionary<Type, string> _typeIds =
+            new ConcurrentDictionary<Type, string>();
         private string _cacheKeyPrefix;
         private CacheItemPolicy _cacheItemPolicy = new CacheItemPolicy
         {

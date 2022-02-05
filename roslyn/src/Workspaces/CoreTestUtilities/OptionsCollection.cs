@@ -16,10 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 {
     internal sealed class OptionsCollection : IReadOnlyCollection<KeyValuePair<OptionKey2, object?>>
     {
-        private readonly Dictionary<OptionKey2, object?> _options = new Dictionary<
-            OptionKey2,
-            object?
-        >();
+        private readonly Dictionary<OptionKey2, object?> _options =
+            new Dictionary<OptionKey2, object?>();
         private readonly string _languageName;
 
         public OptionsCollection(string languageName)

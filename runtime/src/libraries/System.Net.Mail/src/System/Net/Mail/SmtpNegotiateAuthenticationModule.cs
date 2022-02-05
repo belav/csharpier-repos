@@ -9,10 +9,8 @@ namespace System.Net.Mail
 {
     internal sealed class SmtpNegotiateAuthenticationModule : ISmtpAuthenticationModule
     {
-        private readonly Dictionary<object, NTAuthentication> _sessions = new Dictionary<
-            object,
-            NTAuthentication
-        >();
+        private readonly Dictionary<object, NTAuthentication> _sessions =
+            new Dictionary<object, NTAuthentication>();
 
         internal SmtpNegotiateAuthenticationModule() { }
 

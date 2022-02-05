@@ -68,10 +68,8 @@ namespace System.Web.Http.Validation.Providers
         {
             // Arrange
             var provider = new DataAnnotationsModelValidatorProvider();
-            provider.AttributeFactories = new Dictionary<
-                Type,
-                DataAnnotationsModelValidationFactory
-            >();
+            provider.AttributeFactories =
+                new Dictionary<Type, DataAnnotationsModelValidationFactory>();
 
             // Act
             provider.RegisterAdapter(
@@ -139,10 +137,8 @@ namespace System.Web.Http.Validation.Providers
         {
             // Arrange
             var provider = new DataAnnotationsModelValidatorProvider();
-            provider.AttributeFactories = new Dictionary<
-                Type,
-                DataAnnotationsModelValidationFactory
-            >();
+            provider.AttributeFactories =
+                new Dictionary<Type, DataAnnotationsModelValidationFactory>();
             DataAnnotationsModelValidationFactory factory = delegate
             {
                 return null;
@@ -304,10 +300,8 @@ namespace System.Web.Http.Validation.Providers
         {
             // Arrange
             var provider = new DataAnnotationsModelValidatorProvider();
-            provider.ValidatableFactories = new Dictionary<
-                Type,
-                DataAnnotationsValidatableObjectAdapterFactory
-            >();
+            provider.ValidatableFactories =
+                new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
             IValidatableObject validatable = new Mock<IValidatableObject>().Object;
 
             // Act
@@ -382,10 +376,8 @@ namespace System.Web.Http.Validation.Providers
         {
             // Arrange
             var provider = new DataAnnotationsModelValidatorProvider();
-            provider.ValidatableFactories = new Dictionary<
-                Type,
-                DataAnnotationsValidatableObjectAdapterFactory
-            >();
+            provider.ValidatableFactories =
+                new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
             DataAnnotationsValidatableObjectAdapterFactory factory = delegate
             {
                 return null;

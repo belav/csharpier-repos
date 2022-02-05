@@ -23,10 +23,8 @@ namespace ILCompiler.IBC
             _partialNGen = partialNGen;
         }
 
-        private readonly Dictionary<MethodDesc, MethodProfileData> _methodData = new Dictionary<
-            MethodDesc,
-            MethodProfileData
-        >();
+        private readonly Dictionary<MethodDesc, MethodProfileData> _methodData =
+            new Dictionary<MethodDesc, MethodProfileData>();
         private readonly bool _partialNGen;
 
         public override bool PartialNGen

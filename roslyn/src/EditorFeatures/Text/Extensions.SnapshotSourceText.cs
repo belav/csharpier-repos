@@ -81,10 +81,8 @@ namespace Microsoft.CodeAnalysis.Text
             private static readonly ConditionalWeakTable<
                 ITextImage,
                 WeakReference<ITextSnapshot>
-            > s_textImageToEditorSnapshotMap = new ConditionalWeakTable<
-                ITextImage,
-                WeakReference<ITextSnapshot>
-            >();
+            > s_textImageToEditorSnapshotMap =
+                new ConditionalWeakTable<ITextImage, WeakReference<ITextSnapshot>>();
 
             public static SourceText From(
                 ITextBufferCloneService? textBufferCloneService,

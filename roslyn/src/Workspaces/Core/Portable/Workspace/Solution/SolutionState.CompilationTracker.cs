@@ -981,10 +981,8 @@ namespace Microsoft.CodeAnalysis
                     var hasSuccessfullyLoaded = this.ProjectState.HasAllInformation;
 
                     var newReferences = new List<MetadataReference>();
-                    var metadataReferenceToProjectId = new Dictionary<
-                        MetadataReference,
-                        ProjectId
-                    >();
+                    var metadataReferenceToProjectId =
+                        new Dictionary<MetadataReference, ProjectId>();
                     newReferences.AddRange(this.ProjectState.MetadataReferences);
 
                     foreach (var projectReference in this.ProjectState.ProjectReferences)

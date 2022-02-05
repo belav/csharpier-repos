@@ -33,14 +33,10 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
         public RenamedSpansTracker()
         {
-            _documentToComplexifiedSpansMap = new Dictionary<
-                DocumentId,
-                List<MutableComplexifiedSpan>
-            >();
-            _documentToModifiedSpansMap = new Dictionary<
-                DocumentId,
-                List<(TextSpan oldSpan, TextSpan newSpan)>
-            >();
+            _documentToComplexifiedSpansMap =
+                new Dictionary<DocumentId, List<MutableComplexifiedSpan>>();
+            _documentToModifiedSpansMap =
+                new Dictionary<DocumentId, List<(TextSpan oldSpan, TextSpan newSpan)>>();
         }
 
         internal bool IsDocumentChanged(DocumentId documentId) =>

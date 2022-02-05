@@ -43,10 +43,8 @@ namespace System.Collections.Immutable
                 Dictionary<Type, object>? typesToStacks = AllocFreeConcurrentStack.t_stacks;
                 if (typesToStacks == null)
                 {
-                    AllocFreeConcurrentStack.t_stacks = typesToStacks = new Dictionary<
-                        Type,
-                        object
-                    >();
+                    AllocFreeConcurrentStack.t_stacks = typesToStacks =
+                        new Dictionary<Type, object>();
                 }
 
                 // Get the stack that corresponds to the T

@@ -66,10 +66,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 analyzerInfoCache,
                 analyzerService.Listener
             );
-            _projectCompilationsWithAnalyzers = new ConditionalWeakTable<
-                Project,
-                CompilationWithAnalyzers?
-            >();
+            _projectCompilationsWithAnalyzers =
+                new ConditionalWeakTable<Project, CompilationWithAnalyzers?>();
         }
 
         internal DiagnosticAnalyzerInfoCache DiagnosticAnalyzerInfoCache =>

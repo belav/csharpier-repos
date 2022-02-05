@@ -11,9 +11,8 @@ namespace ILCompiler.DependencyAnalysis
     class DeferredTillPhaseNode : DependencyNodeCore<NodeFactory>
     {
         private readonly int _phase;
-        private readonly List<DependencyNodeCore<NodeFactory>> _dependencies = new List<
-            DependencyNodeCore<NodeFactory>
-        >();
+        private readonly List<DependencyNodeCore<NodeFactory>> _dependencies =
+            new List<DependencyNodeCore<NodeFactory>>();
         private bool _dependenciesNoLongerMutable;
 
         public DeferredTillPhaseNode(int phase)

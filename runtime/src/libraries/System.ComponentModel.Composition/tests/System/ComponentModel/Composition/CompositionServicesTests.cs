@@ -48,10 +48,8 @@ namespace System.ComponentModel.Composition
         [Description("Verifies CompositionServices.GetDefaultContractName method.")]
         public void GetDefaultContractNameTest()
         {
-            ExpectationCollection<Type, string> expectations = new ExpectationCollection<
-                Type,
-                string
-            >();
+            ExpectationCollection<Type, string> expectations =
+                new ExpectationCollection<Type, string>();
 
             expectations.Add(typeof(string), "System.String");
             expectations.Add(typeof(int?), "System.Nullable(System.Int32)");

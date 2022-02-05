@@ -28,10 +28,8 @@ namespace System.Net.Http
         private const int LargeProxyConfigBoundary = 8;
 
         // Value is the Environment.TickCount64 to remove the proxy from the failure list.
-        private readonly ConcurrentDictionary<Uri, long> _failedProxies = new ConcurrentDictionary<
-            Uri,
-            long
-        >();
+        private readonly ConcurrentDictionary<Uri, long> _failedProxies =
+            new ConcurrentDictionary<Uri, long>();
 
         // When Environment.TickCount64 >= _nextFlushTicks, cause a flush.
         private long _nextFlushTicks = Environment.TickCount64 + FlushFailuresTimerInMilliseconds;

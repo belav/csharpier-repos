@@ -53,10 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionContext<IConventionModelBuilder> context
         )
         {
-            var tableToEntityTypes = new Dictionary<
-                (string Name, string? Schema),
-                List<IConventionEntityType>
-            >();
+            var tableToEntityTypes =
+                new Dictionary<(string Name, string? Schema), List<IConventionEntityType>>();
             foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
             {
                 var tableName = entityType.GetTableName();
@@ -119,10 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         {
                             if (entityTypesMissingConcurrencyColumn == null)
                             {
-                                entityTypesMissingConcurrencyColumn = new Dictionary<
-                                    IConventionEntityType,
-                                    IReadOnlyProperty
-                                >();
+                                entityTypesMissingConcurrencyColumn =
+                                    new Dictionary<IConventionEntityType, IReadOnlyProperty>();
                             }
 
                             // store the entity type which is missing the

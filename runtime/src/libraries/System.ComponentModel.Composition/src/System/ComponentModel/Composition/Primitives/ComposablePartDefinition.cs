@@ -130,9 +130,8 @@ namespace System.ComponentModel.Composition.Primitives
                     {
                         if (multipleExports == null)
                         {
-                            multipleExports = new List<
-                                Tuple<ComposablePartDefinition, ExportDefinition>
-                            >();
+                            multipleExports =
+                                new List<Tuple<ComposablePartDefinition, ExportDefinition>>();
                             multipleExports.Add(singleExport);
                         }
                         multipleExports.Add(

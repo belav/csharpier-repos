@@ -119,15 +119,11 @@ namespace System.DirectoryServices.AccountManagement
             Hashtable mappingTableByLDAP = new Hashtable();
             Hashtable mappingTableByPropertyFull = new Hashtable();
 
-            Dictionary<string, string[]> propertyNameToLdapAttr = new Dictionary<
-                string,
-                string[]
-            >();
+            Dictionary<string, string[]> propertyNameToLdapAttr =
+                new Dictionary<string, string[]>();
 
-            Dictionary<Type, StringCollection> TypeToLdapDict = new Dictionary<
-                Type,
-                StringCollection
-            >();
+            Dictionary<Type, StringCollection> TypeToLdapDict =
+                new Dictionary<Type, StringCollection>();
 
             for (int i = 0; i < s_propertyMappingTableRaw.GetLength(0); i++)
             {

@@ -579,10 +579,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         {
             EnsureEntrypointRuntimeFunctionToReadyToRunMethodDict();
 
-            Dictionary<TMethod, ReadyToRunMethod> customMethods = new Dictionary<
-                TMethod,
-                ReadyToRunMethod
-            >();
+            Dictionary<TMethod, ReadyToRunMethod> customMethods =
+                new Dictionary<TMethod, ReadyToRunMethod>();
             if (
                 ReadyToRunHeader.Sections.TryGetValue(
                     ReadyToRunSectionType.RuntimeFunctions,

@@ -19,10 +19,8 @@ public sealed class EditContext
     // error state. If you give us an unrecognized FieldIdentifier, that just means we
     // didn't yet track any state for it, so we behave as if it's in the default state
     // (valid and unmodified).
-    private readonly Dictionary<FieldIdentifier, FieldState> _fieldStates = new Dictionary<
-        FieldIdentifier,
-        FieldState
-    >();
+    private readonly Dictionary<FieldIdentifier, FieldState> _fieldStates =
+        new Dictionary<FieldIdentifier, FieldState>();
 
     /// <summary>
     /// Constructs an instance of <see cref="EditContext"/>.

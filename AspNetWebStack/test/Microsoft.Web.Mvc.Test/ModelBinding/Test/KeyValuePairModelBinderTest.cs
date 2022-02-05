@@ -28,10 +28,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ValueProvider = new SimpleValueProvider()
             };
 
-            KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<
-                int,
-                string
-            >();
+            KeyValuePairModelBinder<int, string> binder =
+                new KeyValuePairModelBinder<int, string>();
 
             // Act
             bool retVal = binder.BindModel(controllerContext, bindingContext);
@@ -76,10 +74,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 true /* suppressPrefixCheck */
             );
 
-            KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<
-                int,
-                string
-            >();
+            KeyValuePairModelBinder<int, string> binder =
+                new KeyValuePairModelBinder<int, string>();
 
             // Act
             bool retVal = binder.BindModel(controllerContext, bindingContext);
@@ -144,10 +140,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 true /* suppressPrefixCheck */
             );
 
-            KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<
-                int,
-                string
-            >();
+            KeyValuePairModelBinder<int, string> binder =
+                new KeyValuePairModelBinder<int, string>();
 
             // Act
             bool retVal = binder.BindModel(controllerContext, bindingContext);

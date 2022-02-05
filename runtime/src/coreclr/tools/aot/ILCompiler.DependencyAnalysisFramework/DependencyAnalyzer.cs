@@ -31,20 +31,16 @@ namespace ILCompiler.DependencyAnalysisFramework
         private IComparer<DependencyNodeCore<DependencyContextType>> _resultSorter = null;
 
         private RandomInsertStack<DependencyNodeCore<DependencyContextType>> _markStack;
-        private List<DependencyNodeCore<DependencyContextType>> _markedNodes = new List<
-            DependencyNodeCore<DependencyContextType>
-        >();
+        private List<DependencyNodeCore<DependencyContextType>> _markedNodes =
+            new List<DependencyNodeCore<DependencyContextType>>();
         private ImmutableArray<DependencyNodeCore<DependencyContextType>> _markedNodesFinal;
-        private List<DependencyNodeCore<DependencyContextType>> _rootNodes = new List<
-            DependencyNodeCore<DependencyContextType>
-        >();
+        private List<DependencyNodeCore<DependencyContextType>> _rootNodes =
+            new List<DependencyNodeCore<DependencyContextType>>();
         private Dictionary<
             int,
             List<DependencyNodeCore<DependencyContextType>>
-        > _deferredStaticDependencies = new Dictionary<
-            int,
-            List<DependencyNodeCore<DependencyContextType>>
-        >();
+        > _deferredStaticDependencies =
+            new Dictionary<int, List<DependencyNodeCore<DependencyContextType>>>();
         private List<DependencyNodeCore<DependencyContextType>> _dynamicDependencyInterestingList =
             new List<DependencyNodeCore<DependencyContextType>>();
         private List<DynamicDependencyNode> _markedNodesWithDynamicDependencies =
@@ -54,10 +50,11 @@ namespace ILCompiler.DependencyAnalysisFramework
         private Dictionary<
             DependencyNodeCore<DependencyContextType>,
             HashSet<DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry>
-        > _conditional_dependency_store = new Dictionary<
-            DependencyNodeCore<DependencyContextType>,
-            HashSet<DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry>
-        >();
+        > _conditional_dependency_store =
+            new Dictionary<
+                DependencyNodeCore<DependencyContextType>,
+                HashSet<DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry>
+            >();
         private bool _markingCompleted = false;
 
         private class RandomInsertStack<T>
@@ -315,9 +312,8 @@ namespace ILCompiler.DependencyAnalysisFramework
                     )
                 )
                 {
-                    deferredPerPhaseDependencies = new List<
-                        DependencyNodeCore<DependencyContextType>
-                    >();
+                    deferredPerPhaseDependencies =
+                        new List<DependencyNodeCore<DependencyContextType>>();
                     _deferredStaticDependencies.Add(dependencyPhase, deferredPerPhaseDependencies);
                 }
                 deferredPerPhaseDependencies.Add(node);

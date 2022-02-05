@@ -60,10 +60,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         private readonly ConcurrentDictionary<
             int,
             InstrumentationPayloadRootField
-        > _instrumentationPayloadRootFields = new ConcurrentDictionary<
-            int,
-            InstrumentationPayloadRootField
-        >();
+        > _instrumentationPayloadRootFields =
+            new ConcurrentDictionary<int, InstrumentationPayloadRootField>();
 
         // synthesized methods
         private ImmutableArray<Cci.IMethodDefinition> _orderedSynthesizedMethods;

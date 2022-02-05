@@ -22,10 +22,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
           IMetadataStringDecoderProvider
     {
         PEReader[] _refReaders;
-        Dictionary<string, TypeRefTypeSystemModule> _typeRefModules = new Dictionary<
-            string,
-            TypeRefTypeSystemModule
-        >();
+        Dictionary<string, TypeRefTypeSystemModule> _typeRefModules =
+            new Dictionary<string, TypeRefTypeSystemModule>();
 
         class PEInfo
         {

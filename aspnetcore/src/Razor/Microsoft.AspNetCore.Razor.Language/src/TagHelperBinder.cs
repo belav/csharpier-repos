@@ -136,10 +136,11 @@ internal sealed class TagHelperBinder
             {
                 if (applicableDescriptorMappings == null)
                 {
-                    applicableDescriptorMappings = new Dictionary<
-                        TagHelperDescriptor,
-                        IReadOnlyList<TagMatchingRuleDescriptor>
-                    >();
+                    applicableDescriptorMappings =
+                        new Dictionary<
+                            TagHelperDescriptor,
+                            IReadOnlyList<TagMatchingRuleDescriptor>
+                        >();
                 }
 
                 applicableDescriptorMappings[descriptor] = applicableRules;

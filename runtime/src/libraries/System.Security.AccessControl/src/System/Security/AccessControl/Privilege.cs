@@ -24,10 +24,8 @@ namespace System.Security.AccessControl
     {
         [ThreadStatic]
         private static TlsContents? t_tlsSlotData;
-        private static readonly Dictionary<Luid, string> privileges = new Dictionary<
-            Luid,
-            string
-        >();
+        private static readonly Dictionary<Luid, string> privileges =
+            new Dictionary<Luid, string>();
         private static readonly Dictionary<string, Luid> luids = new Dictionary<string, Luid>();
         private static readonly ReaderWriterLockSlim privilegeLock = new ReaderWriterLockSlim(
             LockRecursionPolicy.SupportsRecursion

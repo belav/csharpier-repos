@@ -14,32 +14,27 @@ namespace System.Web.Mvc
         private static readonly ConcurrentDictionary<
             MethodInfo,
             ReadOnlyCollection<ActionMethodSelectorAttribute>
-        > _actionMethodSelectorAttributeCache = new ConcurrentDictionary<
-            MethodInfo,
-            ReadOnlyCollection<ActionMethodSelectorAttribute>
-        >();
+        > _actionMethodSelectorAttributeCache =
+            new ConcurrentDictionary<
+                MethodInfo,
+                ReadOnlyCollection<ActionMethodSelectorAttribute>
+            >();
         private static readonly ConcurrentDictionary<
             MethodInfo,
             ReadOnlyCollection<ActionNameSelectorAttribute>
-        > _actionNameSelectorAttributeCache = new ConcurrentDictionary<
-            MethodInfo,
-            ReadOnlyCollection<ActionNameSelectorAttribute>
-        >();
+        > _actionNameSelectorAttributeCache =
+            new ConcurrentDictionary<MethodInfo, ReadOnlyCollection<ActionNameSelectorAttribute>>();
         private static readonly ConcurrentDictionary<
             MethodInfo,
             ReadOnlyCollection<FilterAttribute>
-        > _methodFilterAttributeCache = new ConcurrentDictionary<
-            MethodInfo,
-            ReadOnlyCollection<FilterAttribute>
-        >();
+        > _methodFilterAttributeCache =
+            new ConcurrentDictionary<MethodInfo, ReadOnlyCollection<FilterAttribute>>();
 
         private static readonly ConcurrentDictionary<
             Type,
             ReadOnlyCollection<FilterAttribute>
-        > _typeFilterAttributeCache = new ConcurrentDictionary<
-            Type,
-            ReadOnlyCollection<FilterAttribute>
-        >();
+        > _typeFilterAttributeCache =
+            new ConcurrentDictionary<Type, ReadOnlyCollection<FilterAttribute>>();
 
         public static ReadOnlyCollection<FilterAttribute> GetTypeFilterAttributes(Type type)
         {

@@ -711,10 +711,8 @@ namespace System.Diagnostics.Tests
 
                             // Issue all requests simultaneously
                             HttpClient httpClient = new HttpClient();
-                            Dictionary<Uri, Task<HttpResponseMessage>> tasks = new Dictionary<
-                                Uri,
-                                Task<HttpResponseMessage>
-                            >();
+                            Dictionary<Uri, Task<HttpResponseMessage>> tasks =
+                                new Dictionary<Uri, Task<HttpResponseMessage>>();
 
                             CancellationTokenSource cts = new CancellationTokenSource(
                                 TimeSpan.FromSeconds(10)

@@ -10,10 +10,8 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn;
 
 public class AutobahnExpectations
 {
-    private readonly Dictionary<string, Expectation> _expectations = new Dictionary<
-        string,
-        Expectation
-    >();
+    private readonly Dictionary<string, Expectation> _expectations =
+        new Dictionary<string, Expectation>();
     public bool Ssl { get; }
     public ServerType Server { get; }
     public string Environment { get; }

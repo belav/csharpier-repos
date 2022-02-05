@@ -164,10 +164,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             private readonly IDictionary<
                 ParameterExpression,
                 IDictionary<IProperty, int>
-            > _materializationContextBindings = new Dictionary<
-                ParameterExpression,
-                IDictionary<IProperty, int>
-            >();
+            > _materializationContextBindings =
+                new Dictionary<ParameterExpression, IDictionary<IProperty, int>>();
 
             private readonly IDictionary<
                 ParameterExpression,

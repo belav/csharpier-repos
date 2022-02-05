@@ -42,10 +42,8 @@ namespace Newtonsoft.Json.Schema
     internal class JsonSchemaModelBuilder
     {
         private JsonSchemaNodeCollection _nodes = new JsonSchemaNodeCollection();
-        private Dictionary<JsonSchemaNode, JsonSchemaModel> _nodeModels = new Dictionary<
-            JsonSchemaNode,
-            JsonSchemaModel
-        >();
+        private Dictionary<JsonSchemaNode, JsonSchemaModel> _nodeModels =
+            new Dictionary<JsonSchemaNode, JsonSchemaModel>();
         private JsonSchemaNode _node;
 
         public JsonSchemaModel Build(JsonSchema schema)

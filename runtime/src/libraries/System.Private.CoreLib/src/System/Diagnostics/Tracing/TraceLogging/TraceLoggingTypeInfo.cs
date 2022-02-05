@@ -162,10 +162,8 @@ namespace System.Diagnostics.Tracing
 #endif
         public static TraceLoggingTypeInfo GetInstance(Type type, List<Type>? recursionCheck)
         {
-            Dictionary<Type, TraceLoggingTypeInfo> cache = threadCache ??= new Dictionary<
-                Type,
-                TraceLoggingTypeInfo
-            >();
+            Dictionary<Type, TraceLoggingTypeInfo> cache = threadCache ??=
+                new Dictionary<Type, TraceLoggingTypeInfo>();
 
             if (!cache.TryGetValue(type, out TraceLoggingTypeInfo? instance))
             {

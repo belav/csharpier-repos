@@ -25,10 +25,8 @@ namespace System.Collections.Immutable
         /// <summary>
         /// An empty immutable dictionary with default equality comparers.
         /// </summary>
-        public static readonly ImmutableDictionary<TKey, TValue> Empty = new ImmutableDictionary<
-            TKey,
-            TValue
-        >();
+        public static readonly ImmutableDictionary<TKey, TValue> Empty =
+            new ImmutableDictionary<TKey, TValue>();
 
         /// <summary>
         /// The singleton delegate that freezes the contents of hash buckets when the root of the data structure is frozen.

@@ -810,9 +810,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                             var node = element.LookupNode();
                             if (node != null)
                             {
-                                elementAndPaths ??= new List<
-                                    ValueTuple<AbstractKeyedCodeElement, SyntaxPath>
-                                >();
+                                elementAndPaths ??=
+                                    new List<ValueTuple<AbstractKeyedCodeElement, SyntaxPath>>();
                                 elementAndPaths.Add(
                                     ValueTuple.Create(element, new SyntaxPath(node))
                                 );

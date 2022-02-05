@@ -26,10 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal readonly ImmutableArray<AnonymousTypePropertySymbol> Properties;
 
             /// <summary> Maps member names to symbol(s) </summary>
-            private readonly MultiDictionary<string, Symbol> _nameToSymbols = new MultiDictionary<
-                string,
-                Symbol
-            >();
+            private readonly MultiDictionary<string, Symbol> _nameToSymbols =
+                new MultiDictionary<string, Symbol>();
 
             internal AnonymousTypePublicSymbol(
                 AnonymousTypeManager manager,

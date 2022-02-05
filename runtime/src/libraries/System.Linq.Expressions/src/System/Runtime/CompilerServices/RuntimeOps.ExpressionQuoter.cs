@@ -71,9 +71,8 @@ namespace System.Runtime.CompilerServices
             // A stack of variables that are defined in nested scopes. We search
             // this first when resolving a variable in case a nested scope shadows
             // one of our variable instances.
-            private readonly Stack<HashSet<ParameterExpression>> _shadowedVars = new Stack<
-                HashSet<ParameterExpression>
-            >();
+            private readonly Stack<HashSet<ParameterExpression>> _shadowedVars =
+                new Stack<HashSet<ParameterExpression>>();
 
             internal ExpressionQuoter(HoistedLocals scope, object[] locals)
             {

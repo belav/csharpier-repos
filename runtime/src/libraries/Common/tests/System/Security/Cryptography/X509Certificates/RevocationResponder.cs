@@ -17,15 +17,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
 
         private readonly HttpListener _listener;
 
-        private readonly Dictionary<string, CertificateAuthority> _aiaPaths = new Dictionary<
-            string,
-            CertificateAuthority
-        >();
+        private readonly Dictionary<string, CertificateAuthority> _aiaPaths =
+            new Dictionary<string, CertificateAuthority>();
 
-        private readonly Dictionary<string, CertificateAuthority> _crlPaths = new Dictionary<
-            string,
-            CertificateAuthority
-        >();
+        private readonly Dictionary<string, CertificateAuthority> _crlPaths =
+            new Dictionary<string, CertificateAuthority>();
 
         private readonly List<(string, CertificateAuthority)> _ocspAuthorities =
             new List<(string, CertificateAuthority)>();

@@ -69,10 +69,8 @@ namespace Program
 
     public class WindowlessControl
     {
-        internal readonly Dictionary<object, object> _AttachedProperties = new Dictionary<
-            object,
-            object
-        >();
+        internal readonly Dictionary<object, object> _AttachedProperties =
+            new Dictionary<object, object>();
 
         public void SetAttachedProperty<T>(AttachedProperty<T> prop, T val)
         {

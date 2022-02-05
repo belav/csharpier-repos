@@ -38,9 +38,8 @@ namespace System.ComponentModel.Composition
             contractName = null;
             requiredMetadata = null;
 
-            List<KeyValuePair<string, Type>> requiredMetadataList = new List<
-                KeyValuePair<string, Type>
-            >();
+            List<KeyValuePair<string, Type>> requiredMetadataList =
+                new List<KeyValuePair<string, Type>>();
             foreach (Expression expression in SplitConstraintBody(constraint.Body))
             {
                 // First try to parse as a contract, if we don't have one already

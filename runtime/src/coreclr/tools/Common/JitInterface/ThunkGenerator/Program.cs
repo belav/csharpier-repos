@@ -197,14 +197,10 @@ namespace Thunkerator
 
         static IEnumerable<FunctionDecl> ParseInput(TextReader tr)
         {
-            Dictionary<string, TypeReplacement> ThunkReturnTypes = new Dictionary<
-                string,
-                TypeReplacement
-            >();
-            Dictionary<string, TypeReplacement> ThunkTypes = new Dictionary<
-                string,
-                TypeReplacement
-            >();
+            Dictionary<string, TypeReplacement> ThunkReturnTypes =
+                new Dictionary<string, TypeReplacement>();
+            Dictionary<string, TypeReplacement> ThunkTypes =
+                new Dictionary<string, TypeReplacement>();
             ParseMode currentParseMode = ParseMode.FUNCTIONS;
             ParseMode oldParseMode = ParseMode.FUNCTIONS;
             List<FunctionDecl> functions = new List<FunctionDecl>();

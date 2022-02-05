@@ -15,10 +15,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         private readonly Dictionary<
             ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>,
             List<GlobalNodeKey>
-        > _nodeKeysMap = new Dictionary<
-            ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>,
-            List<GlobalNodeKey>
-        >();
+        > _nodeKeysMap =
+            new Dictionary<
+                ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>,
+                List<GlobalNodeKey>
+            >();
 
         public NodeKeyValidation() { }
 

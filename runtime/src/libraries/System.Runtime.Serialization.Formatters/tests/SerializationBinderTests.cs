@@ -43,9 +43,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
         private class TrackAllBindToTypes : SerializationBinder
         {
-            public readonly List<KeyValuePair<string, string>> Binds = new List<
-                KeyValuePair<string, string>
-            >();
+            public readonly List<KeyValuePair<string, string>> Binds =
+                new List<KeyValuePair<string, string>>();
 
             public override Type BindToType(string assemblyName, string typeName)
             {

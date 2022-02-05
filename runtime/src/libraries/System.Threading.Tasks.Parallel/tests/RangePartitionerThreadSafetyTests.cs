@@ -27,9 +27,8 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void IntPartitionerThreadSafety()
         {
-            ConcurrentBag<OrderablePartitioner<Tuple<int, int>>> bag = new ConcurrentBag<
-                OrderablePartitioner<Tuple<int, int>>
-            >();
+            ConcurrentBag<OrderablePartitioner<Tuple<int, int>>> bag =
+                new ConcurrentBag<OrderablePartitioner<Tuple<int, int>>>();
 
             Parallel.Invoke(
                 () => bag.Add(Partitioner.Create(0, 1000)),
@@ -67,9 +66,8 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void LongPartitionerThreadSafety()
         {
-            ConcurrentBag<OrderablePartitioner<Tuple<long, long>>> bag = new ConcurrentBag<
-                OrderablePartitioner<Tuple<long, long>>
-            >();
+            ConcurrentBag<OrderablePartitioner<Tuple<long, long>>> bag =
+                new ConcurrentBag<OrderablePartitioner<Tuple<long, long>>>();
 
             Parallel.Invoke(
                 () => bag.Add(Partitioner.Create((long)0, (long)1000)),

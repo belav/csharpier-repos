@@ -54,10 +54,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             var symbolSpecifications = ArrayBuilder<SymbolSpecification>.GetInstance();
             var namingStyles = ArrayBuilder<NamingStyle>.GetInstance();
             var namingRules = ArrayBuilder<SerializableNamingRule>.GetInstance();
-            var ruleNames = new Dictionary<
-                (Guid symbolSpecificationID, Guid namingStyleID, ReportDiagnostic enforcementLevel),
-                string
-            >();
+            var ruleNames =
+                new Dictionary<
+                    (Guid symbolSpecificationID, Guid namingStyleID, ReportDiagnostic enforcementLevel),
+                    string
+                >();
 
             var trimmedDictionary = TrimDictionary(allRawConventions);
 

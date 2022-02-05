@@ -441,10 +441,8 @@ internal class TestResponseCachingKeyProvider : IResponseCachingKeyProvider
 
 internal class TestResponseCache : IResponseCache
 {
-    private readonly IDictionary<string, IResponseCacheEntry> _storage = new Dictionary<
-        string,
-        IResponseCacheEntry
-    >();
+    private readonly IDictionary<string, IResponseCacheEntry> _storage =
+        new Dictionary<string, IResponseCacheEntry>();
     public int GetCount { get; private set; }
     public int SetCount { get; private set; }
 

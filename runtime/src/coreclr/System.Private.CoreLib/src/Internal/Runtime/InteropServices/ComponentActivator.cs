@@ -17,10 +17,8 @@ namespace Internal.Runtime.InteropServices
         > s_assemblyLoadContexts = new Dictionary<string, IsolatedComponentLoadContext>(
             StringComparer.InvariantCulture
         );
-        private static readonly Dictionary<IntPtr, Delegate> s_delegates = new Dictionary<
-            IntPtr,
-            Delegate
-        >();
+        private static readonly Dictionary<IntPtr, Delegate> s_delegates =
+            new Dictionary<IntPtr, Delegate>();
 
         public delegate int ComponentEntryPoint(IntPtr args, int sizeBytes);
 

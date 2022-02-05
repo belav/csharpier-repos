@@ -3263,9 +3263,8 @@ namespace System.Net.Http.Functional.Tests
                     .ConfigureAwait(false);
                 Assert.Equal(MaxConcurrentStreams, acceptedStreamIds.Count);
 
-                List<Task<HttpResponseMessage>> connection1SendTasks = new List<
-                    Task<HttpResponseMessage>
-                >();
+                List<Task<HttpResponseMessage>> connection1SendTasks =
+                    new List<Task<HttpResponseMessage>>();
                 Http2LoopbackConnection connection1 = await PrepareConnection(
                         server,
                         client,

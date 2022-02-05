@@ -78,10 +78,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
                     progressTracker.AddItems(projectsToFix.Length);
 
-                    var diagnostics = new ConcurrentDictionary<
-                        ProjectId,
-                        ImmutableArray<Diagnostic>
-                    >();
+                    var diagnostics =
+                        new ConcurrentDictionary<ProjectId, ImmutableArray<Diagnostic>>();
                     using (
                         var _ = ArrayBuilder<Task>.GetInstance(projectsToFix.Length, out var tasks)
                     )

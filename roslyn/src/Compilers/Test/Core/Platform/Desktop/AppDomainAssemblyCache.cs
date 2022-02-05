@@ -26,14 +26,10 @@ namespace Roslyn.Test.Utilities.Desktop
         private static readonly object s_guard = new object();
 
         // The key is the manifest module MVID, which is unique for each distinct assembly.
-        private readonly Dictionary<Guid, Assembly> _assemblyCache = new Dictionary<
-            Guid,
-            Assembly
-        >();
-        private readonly Dictionary<Guid, Assembly> _reflectionOnlyAssemblyCache = new Dictionary<
-            Guid,
-            Assembly
-        >();
+        private readonly Dictionary<Guid, Assembly> _assemblyCache =
+            new Dictionary<Guid, Assembly>();
+        private readonly Dictionary<Guid, Assembly> _reflectionOnlyAssemblyCache =
+            new Dictionary<Guid, Assembly>();
 
         internal static AppDomainAssemblyCache GetOrCreate()
         {

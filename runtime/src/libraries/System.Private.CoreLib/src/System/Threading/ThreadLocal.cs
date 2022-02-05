@@ -673,10 +673,8 @@ namespace System.Threading
             private volatile int _idsThatDoNotTrackAllValues;
 
             // Stores IDs that are used, and if each ID tracksAllValues or not.
-            private readonly Dictionary<int, bool> _usedIdToTracksAllValuesMap = new Dictionary<
-                int,
-                bool
-            >();
+            private readonly Dictionary<int, bool> _usedIdToTracksAllValuesMap =
+                new Dictionary<int, bool>();
 
             // Stores IDs that were previously used and are now free to reuse. Additionally, the object is also used as a lock
             // for the IdManager.

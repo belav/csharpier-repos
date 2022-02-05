@@ -161,10 +161,8 @@ class Driver
         return 0;
     }
 
-    static ConditionalWeakTable<Toggleref, object> cwt = new ConditionalWeakTable<
-        Toggleref,
-        object
-    >();
+    static ConditionalWeakTable<Toggleref, object> cwt =
+        new ConditionalWeakTable<Toggleref, object>();
     static WeakReference<object> root_value,
         child_value;
     static object a_val,

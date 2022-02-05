@@ -210,10 +210,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 throw new ArgumentNullException(nameof(members));
             }
 
-            Dictionary<LazyMemberInfo, MemberInfo[]> membersTable = new Dictionary<
-                LazyMemberInfo,
-                MemberInfo[]
-            >();
+            Dictionary<LazyMemberInfo, MemberInfo[]> membersTable =
+                new Dictionary<LazyMemberInfo, MemberInfo[]>();
             Dictionary<int, MemberInfo> specializedPartMembers = new Dictionary<int, MemberInfo>();
 
             Type closedGenericPartType = GetPartType();
@@ -283,10 +281,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             if (parameters != null)
             {
-                Dictionary<Lazy<ParameterInfo>, ParameterInfo> parametersTable = new Dictionary<
-                    Lazy<ParameterInfo>,
-                    ParameterInfo
-                >();
+                Dictionary<Lazy<ParameterInfo>, ParameterInfo> parametersTable =
+                    new Dictionary<Lazy<ParameterInfo>, ParameterInfo>();
                 // GENTODO - error case
                 ParameterInfo[] constructorParameters = GetConstructor()!.GetParameters();
                 foreach (var lazyParameter in parameters)

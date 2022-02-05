@@ -32,10 +32,8 @@ namespace Castle.DynamicProxy.Tests
         public void NullReferenceProxyDeserializationTest()
         {
             ProxyGenerator generator = new ProxyGenerator();
-            Dictionary<ClassOverridingEqualsAndGetHashCode, string> theInstances = new Dictionary<
-                ClassOverridingEqualsAndGetHashCode,
-                string
-            >();
+            Dictionary<ClassOverridingEqualsAndGetHashCode, string> theInstances =
+                new Dictionary<ClassOverridingEqualsAndGetHashCode, string>();
             ClassOverridingEqualsAndGetHashCode c =
                 (ClassOverridingEqualsAndGetHashCode)generator.CreateClassProxy(
                     typeof(ClassOverridingEqualsAndGetHashCode)
@@ -55,10 +53,8 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void DictionaryDeserializationWithoutProxyTest()
         {
-            Dictionary<ClassOverridingEqualsAndGetHashCode, string> theInstances = new Dictionary<
-                ClassOverridingEqualsAndGetHashCode,
-                string
-            >();
+            Dictionary<ClassOverridingEqualsAndGetHashCode, string> theInstances =
+                new Dictionary<ClassOverridingEqualsAndGetHashCode, string>();
 
             for (int i = 0; i < 50; i++)
             {
@@ -80,10 +76,8 @@ namespace Castle.DynamicProxy.Tests
         public void DictionaryDeserializationWithProxyTest()
         {
             ProxyGenerator generator = new ProxyGenerator();
-            Dictionary<ClassOverridingEqualsAndGetHashCode, string> theInstances = new Dictionary<
-                ClassOverridingEqualsAndGetHashCode,
-                string
-            >();
+            Dictionary<ClassOverridingEqualsAndGetHashCode, string> theInstances =
+                new Dictionary<ClassOverridingEqualsAndGetHashCode, string>();
 
             for (int i = 0; i < 50; i++)
             {

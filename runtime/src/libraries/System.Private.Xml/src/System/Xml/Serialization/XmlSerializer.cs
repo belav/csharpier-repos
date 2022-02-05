@@ -164,9 +164,8 @@ namespace System.Xml.Serialization
 
         private static readonly ContextAwareTables<
             Dictionary<XmlSerializerMappingKey, XmlSerializer>
-        > s_xmlSerializerTable = new ContextAwareTables<
-            Dictionary<XmlSerializerMappingKey, XmlSerializer>
-        >();
+        > s_xmlSerializerTable =
+            new ContextAwareTables<Dictionary<XmlSerializerMappingKey, XmlSerializer>>();
 
         protected XmlSerializer() { }
 

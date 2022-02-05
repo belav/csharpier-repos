@@ -19,10 +19,8 @@ namespace Microsoft.WebAssembly.Diagnostics
     {
         private TaskCompletionSource<bool> side_exception = new TaskCompletionSource<bool>();
         private TaskCompletionSource client_initiated_close = new TaskCompletionSource();
-        private Dictionary<MessageId, TaskCompletionSource<Result>> pending_cmds = new Dictionary<
-            MessageId,
-            TaskCompletionSource<Result>
-        >();
+        private Dictionary<MessageId, TaskCompletionSource<Result>> pending_cmds =
+            new Dictionary<MessageId, TaskCompletionSource<Result>>();
         private ClientWebSocket browser;
         private WebSocket ide;
         private int next_cmd_id;

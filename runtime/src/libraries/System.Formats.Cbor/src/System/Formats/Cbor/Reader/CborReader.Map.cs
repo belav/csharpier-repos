@@ -221,9 +221,8 @@ namespace System.Formats.Cbor
         {
             if (allocation != null)
             {
-                _pooledKeyEncodingRangeAllocations ??= new Stack<
-                    HashSet<(int Offset, int Length)>
-                >();
+                _pooledKeyEncodingRangeAllocations ??=
+                    new Stack<HashSet<(int Offset, int Length)>>();
                 _pooledKeyEncodingRangeAllocations.Push(allocation);
             }
         }

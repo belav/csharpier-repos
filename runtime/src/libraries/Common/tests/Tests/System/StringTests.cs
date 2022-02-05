@@ -7531,9 +7531,8 @@ namespace System.Tests
 
         private static IEnumerable<object[]> ToLower_Culture_TestData()
         {
-            List<Tuple<char, char, CultureInfo>> tuples = new List<
-                Tuple<char, char, CultureInfo>
-            >();
+            List<Tuple<char, char, CultureInfo>> tuples =
+                new List<Tuple<char, char, CultureInfo>>();
 
             // Android has different results w/ tr-TR
             // See https://github.com/dotnet/runtime/issues/60568

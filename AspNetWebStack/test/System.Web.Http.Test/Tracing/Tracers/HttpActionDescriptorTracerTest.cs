@@ -155,10 +155,8 @@ namespace System.Web.Http.Tracing.Tracers
         public void Properties_Calls_Inner()
         {
             // Arrange
-            ConcurrentDictionary<object, object> properties = new ConcurrentDictionary<
-                object,
-                object
-            >();
+            ConcurrentDictionary<object, object> properties =
+                new ConcurrentDictionary<object, object>();
             HttpControllerDescriptor controllerDescriptor =
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();

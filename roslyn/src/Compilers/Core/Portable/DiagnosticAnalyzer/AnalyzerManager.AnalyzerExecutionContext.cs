@@ -156,10 +156,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 lock (_gate)
                 {
-                    _lazySymbolScopeTasks ??= new Dictionary<
-                        ISymbol,
-                        Task<HostSymbolStartAnalysisScope>
-                    >();
+                    _lazySymbolScopeTasks ??=
+                        new Dictionary<ISymbol, Task<HostSymbolStartAnalysisScope>>();
                     if (!_lazySymbolScopeTasks.TryGetValue(symbol, out var symbolScopeTask))
                     {
                         symbolScopeTask = Task.Run(
@@ -187,10 +185,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             var dependentSymbols = getDependentSymbols();
                             lock (_gate)
                             {
-                                _lazyPendingMemberSymbolsMap ??= new Dictionary<
-                                    ISymbol,
-                                    HashSet<ISymbol>?
-                                >();
+                                _lazyPendingMemberSymbolsMap ??=
+                                    new Dictionary<ISymbol, HashSet<ISymbol>?>();
 
                                 // Guard against entry added from another thread.
                                 VerifyNewEntryForPendingMemberSymbolsMap(symbol, dependentSymbols);
@@ -553,10 +549,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 SymbolDeclaredCompilationEvent symbolDeclaredEvent
             )
             {
-                _lazyPendingSymbolEndActionsMap ??= new Dictionary<
-                    ISymbol,
-                    (ImmutableArray<SymbolEndAnalyzerAction>, SymbolDeclaredCompilationEvent)
-                >();
+                _lazyPendingSymbolEndActionsMap ??=
+                    new Dictionary<
+                        ISymbol,
+                        (ImmutableArray<SymbolEndAnalyzerAction>, SymbolDeclaredCompilationEvent)
+                    >();
                 _lazyPendingSymbolEndActionsMap[symbol] = (symbolEndActions, symbolDeclaredEvent);
             }
 

@@ -16,10 +16,8 @@ namespace System.Net
             new Dictionary<HttpListenerContext, HttpListenerContext>();
         private List<HttpListenerContext> _contextQueue = new List<HttpListenerContext>();
         private List<ListenerAsyncResult> _asyncWaitQueue = new List<ListenerAsyncResult>();
-        private Dictionary<HttpConnection, HttpConnection> _connections = new Dictionary<
-            HttpConnection,
-            HttpConnection
-        >();
+        private Dictionary<HttpConnection, HttpConnection> _connections =
+            new Dictionary<HttpConnection, HttpConnection>();
         private bool _unsafeConnectionNtlmAuthentication;
 
         public HttpListenerTimeoutManager TimeoutManager

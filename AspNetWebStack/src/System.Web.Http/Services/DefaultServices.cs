@@ -69,26 +69,18 @@ namespace System.Web.Http.Services
     )]
     public class DefaultServices : ServicesContainer
     {
-        private ConcurrentDictionary<Type, object[]> _cacheMulti = new ConcurrentDictionary<
-            Type,
-            object[]
-        >();
-        private ConcurrentDictionary<Type, object> _cacheSingle = new ConcurrentDictionary<
-            Type,
-            object
-        >();
+        private ConcurrentDictionary<Type, object[]> _cacheMulti =
+            new ConcurrentDictionary<Type, object[]>();
+        private ConcurrentDictionary<Type, object> _cacheSingle =
+            new ConcurrentDictionary<Type, object>();
         private readonly HttpConfiguration _configuration;
 
         // Mutation operations delegate (throw if applied to wrong set)
-        private readonly Dictionary<Type, object> _defaultServicesSingle = new Dictionary<
-            Type,
-            object
-        >();
+        private readonly Dictionary<Type, object> _defaultServicesSingle =
+            new Dictionary<Type, object>();
 
-        private readonly Dictionary<Type, List<object>> _defaultServicesMulti = new Dictionary<
-            Type,
-            List<object>
-        >();
+        private readonly Dictionary<Type, List<object>> _defaultServicesMulti =
+            new Dictionary<Type, List<object>>();
         private IDependencyResolver _lastKnownDependencyResolver;
         private readonly HashSet<Type> _serviceTypesSingle;
         private readonly HashSet<Type> _serviceTypesMulti;

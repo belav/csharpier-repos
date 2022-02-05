@@ -222,10 +222,11 @@ namespace System.Composition.Convention
                                 Delegate importDelegate = lambdaExpression.Compile();
                                 if (_importBuilders == null)
                                 {
-                                    _importBuilders = new Dictionary<
-                                        ParameterInfo,
-                                        Action<ImportConventionBuilder>
-                                    >();
+                                    _importBuilders =
+                                        new Dictionary<
+                                            ParameterInfo,
+                                            Action<ImportConventionBuilder>
+                                        >();
                                 }
                                 _importBuilders.Add(
                                     parameterInfos[index],

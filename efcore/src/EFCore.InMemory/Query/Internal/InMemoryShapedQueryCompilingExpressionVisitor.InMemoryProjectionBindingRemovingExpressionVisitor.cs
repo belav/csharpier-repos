@@ -21,10 +21,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             private readonly IDictionary<
                 ParameterExpression,
                 (IDictionary<IProperty, int> IndexMap, ParameterExpression valueBuffer)
-            > _materializationContextBindings = new Dictionary<
-                ParameterExpression,
-                (IDictionary<IProperty, int> IndexMap, ParameterExpression valueBuffer)
-            >();
+            > _materializationContextBindings =
+                new Dictionary<
+                    ParameterExpression,
+                    (IDictionary<IProperty, int> IndexMap, ParameterExpression valueBuffer)
+                >();
 
             protected override Expression VisitBinary(BinaryExpression binaryExpression)
             {

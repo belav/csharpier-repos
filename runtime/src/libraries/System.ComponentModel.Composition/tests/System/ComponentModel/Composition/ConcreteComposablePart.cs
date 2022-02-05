@@ -12,10 +12,8 @@ namespace System.ComponentModel.Composition
     {
         private readonly List<Export> _exports = new List<Export>();
         private readonly List<ImportDefinition> _imports = new List<ImportDefinition>();
-        private readonly IDictionary<string, IEnumerable<Export>> _setImports = new Dictionary<
-            string,
-            IEnumerable<Export>
-        >();
+        private readonly IDictionary<string, IEnumerable<Export>> _setImports =
+            new Dictionary<string, IEnumerable<Export>>();
         private static IDictionary<string, object> EmptyMetadata = new Dictionary<string, object>();
 
         public ConcreteComposablePart() { }

@@ -836,10 +836,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public class GuidReferenceResolver : ReferenceResolver
         {
-            private readonly IDictionary<Guid, PersonReference> _people = new Dictionary<
-                Guid,
-                PersonReference
-            >();
+            private readonly IDictionary<Guid, PersonReference> _people =
+                new Dictionary<Guid, PersonReference>();
 
             public override object ResolveReference(string referenceId)
             {

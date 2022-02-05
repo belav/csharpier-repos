@@ -49,10 +49,8 @@ namespace System.DirectoryServices.AccountManagement
 
     internal sealed class ExtensionCache
     {
-        private readonly Dictionary<string, ExtensionCacheValue> _cache = new Dictionary<
-            string,
-            ExtensionCacheValue
-        >();
+        private readonly Dictionary<string, ExtensionCacheValue> _cache =
+            new Dictionary<string, ExtensionCacheValue>();
 
         internal ExtensionCache() { }
 

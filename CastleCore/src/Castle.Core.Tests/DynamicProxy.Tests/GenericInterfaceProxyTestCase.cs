@@ -343,9 +343,8 @@ namespace Castle.DynamicProxy.Tests
         public void MethodInfoClosedInGenIfcGenMethodRefTypeWithTarget()
         {
             var interceptor = new KeepDataInterceptor();
-            GenInterfaceWithGenMethods<List<object>> target = new GenInterfaceWithGenMethodsImpl<
-                List<object>
-            >();
+            GenInterfaceWithGenMethods<List<object>> target =
+                new GenInterfaceWithGenMethodsImpl<List<object>>();
             var proxy = generator.CreateInterfaceProxyWithTarget(target, interceptor);
 
             proxy.DoSomething(1, null);
@@ -433,9 +432,8 @@ namespace Castle.DynamicProxy.Tests
         public void MethodInfoClosedInGenIfcNongenMethodRefTypeWithTarget()
         {
             var interceptor = new KeepDataInterceptor();
-            IGenInterfaceHierarchyBase<List<object>> target = new GenInterfaceHierarchy<
-                List<object>
-            >();
+            IGenInterfaceHierarchyBase<List<object>> target =
+                new GenInterfaceHierarchy<List<object>>();
             var proxy = generator.CreateInterfaceProxyWithTarget(target, interceptor);
 
             proxy.Add(null);

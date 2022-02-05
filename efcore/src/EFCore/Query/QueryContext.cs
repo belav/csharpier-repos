@@ -30,10 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     /// </remarks>
     public abstract class QueryContext : IParameterValues
     {
-        private readonly IDictionary<string, object?> _parameterValues = new Dictionary<
-            string,
-            object?
-        >();
+        private readonly IDictionary<string, object?> _parameterValues =
+            new Dictionary<string, object?>();
         private IStateManager? _stateManager;
 
         /// <summary>

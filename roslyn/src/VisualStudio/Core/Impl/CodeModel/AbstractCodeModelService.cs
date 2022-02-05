@@ -41,10 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         private readonly ConditionalWeakTable<
             SyntaxTree,
             IBidirectionalMap<SyntaxNodeKey, SyntaxNode>
-        > _treeToNodeKeyMaps = new ConditionalWeakTable<
-            SyntaxTree,
-            IBidirectionalMap<SyntaxNodeKey, SyntaxNode>
-        >();
+        > _treeToNodeKeyMaps =
+            new ConditionalWeakTable<SyntaxTree, IBidirectionalMap<SyntaxNodeKey, SyntaxNode>>();
 
         protected readonly ISyntaxFactsService SyntaxFactsService;
 

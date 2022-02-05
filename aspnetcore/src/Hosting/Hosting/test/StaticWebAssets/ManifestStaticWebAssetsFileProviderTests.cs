@@ -896,10 +896,8 @@ public class ManifestStaticWebAssetsFileProviderTest
         };
         manifest.Root = new()
         {
-            Children = new Dictionary<
-                string,
-                ManifestStaticWebAssetFileProvider.StaticWebAssetNode
-            >(),
+            Children =
+                new Dictionary<string, ManifestStaticWebAssetFileProvider.StaticWebAssetNode>(),
             Patterns = new[]
             {
                 new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern

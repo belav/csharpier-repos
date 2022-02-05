@@ -414,10 +414,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             CancellationToken cancellationToken
         )
         {
-            var documentIdToChangedDocuments = new ConcurrentDictionary<
-                DocumentId,
-                ConcurrentBag<(CodeAction, Document)>
-            >();
+            var documentIdToChangedDocuments =
+                new ConcurrentDictionary<DocumentId, ConcurrentBag<(CodeAction, Document)>>();
 
             // Process all code actions in parallel to find all the documents that are changed.
             // For each changed document, also keep track of the associated code action that

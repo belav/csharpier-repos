@@ -83,10 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             public DateTime ConvertedComingOut { get; set; }
         }
 
-        private static readonly ValueConverter<uint, int> _uIntToInt = new CastingConverter<
-            uint,
-            int
-        >();
+        private static readonly ValueConverter<uint, int> _uIntToInt =
+            new CastingConverter<uint, int>();
 
         [ConditionalFact]
         public void Can_access_raw_converters()

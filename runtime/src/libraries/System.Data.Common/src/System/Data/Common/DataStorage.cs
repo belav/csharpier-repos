@@ -128,10 +128,8 @@ namespace System.Data.Common
         private static readonly ConcurrentDictionary<
             Type,
             Tuple<bool, bool, bool, bool>
-        > s_typeImplementsInterface = new ConcurrentDictionary<
-            Type,
-            Tuple<bool, bool, bool, bool>
-        >();
+        > s_typeImplementsInterface =
+            new ConcurrentDictionary<Type, Tuple<bool, bool, bool, bool>>();
 
         protected DataStorage(
             DataColumn column,

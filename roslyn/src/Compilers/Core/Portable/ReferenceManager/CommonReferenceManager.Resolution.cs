@@ -1044,10 +1044,8 @@ namespace Microsoft.CodeAnalysis
 
                     if (localBoundReferenceDirectives == null)
                     {
-                        localBoundReferenceDirectives = new Dictionary<
-                            (string, string),
-                            MetadataReference
-                        >();
+                        localBoundReferenceDirectives =
+                            new Dictionary<(string, string), MetadataReference>();
                         referenceDirectiveLocationsBuilder = ArrayBuilder<Location>.GetInstance();
                     }
 

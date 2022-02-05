@@ -170,10 +170,8 @@ namespace ILCompiler
                     ),
                 };
 
-                Dictionary<TypeDefinitionHandle, OffsetsForType> typeOffsets = new Dictionary<
-                    TypeDefinitionHandle,
-                    OffsetsForType
-                >();
+                Dictionary<TypeDefinitionHandle, OffsetsForType> typeOffsets =
+                    new Dictionary<TypeDefinitionHandle, OffsetsForType>();
 
                 foreach (
                     TypeDefinitionHandle typeDefHandle in module.MetadataReader.TypeDefinitions

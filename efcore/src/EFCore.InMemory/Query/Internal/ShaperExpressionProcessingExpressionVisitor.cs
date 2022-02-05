@@ -19,10 +19,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         private readonly InMemoryQueryExpression? _queryExpression;
         private readonly ParameterExpression _valueBufferParameter;
 
-        private readonly IDictionary<Expression, ParameterExpression> _mapping = new Dictionary<
-            Expression,
-            ParameterExpression
-        >();
+        private readonly IDictionary<Expression, ParameterExpression> _mapping =
+            new Dictionary<Expression, ParameterExpression>();
         private readonly List<ParameterExpression> _variables = new();
         private readonly List<Expression> _expressions = new();
 

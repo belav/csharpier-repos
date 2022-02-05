@@ -27,10 +27,8 @@ namespace Internal.Runtime.InteropServices
         > s_assemblyLoadContexts = new Dictionary<string, IsolatedComponentLoadContext>(
             StringComparer.InvariantCulture
         );
-        private static readonly Dictionary<IntPtr, Delegate> s_delegates = new Dictionary<
-            IntPtr,
-            Delegate
-        >();
+        private static readonly Dictionary<IntPtr, Delegate> s_delegates =
+            new Dictionary<IntPtr, Delegate>();
 
         // Use a value defined in https://github.com/dotnet/runtime/blob/main/docs/design/features/host-error-codes.md
         // To indicate the specific error when IsSupported is false

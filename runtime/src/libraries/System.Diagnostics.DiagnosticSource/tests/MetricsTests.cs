@@ -1884,10 +1884,8 @@ namespace System.Diagnostics.Metrics.Tests
                             meters[i] = new Meter("SerializedEventsTest" + i);
                         }
 
-                        Dictionary<Instrument, bool> instruments = new Dictionary<
-                            Instrument,
-                            bool
-                        >();
+                        Dictionary<Instrument, bool> instruments =
+                            new Dictionary<Instrument, bool>();
 
                         MeterListener listener = new MeterListener()
                         {
@@ -2298,9 +2296,8 @@ namespace System.Diagnostics.Metrics.Tests
                 }
             };
 
-            List<KeyValuePair<string, object?>> expectedTags = new List<
-                KeyValuePair<string, object?>
-            >();
+            List<KeyValuePair<string, object?>> expectedTags =
+                new List<KeyValuePair<string, object?>>();
             T expectedValue = default;
             int counter = 0;
 

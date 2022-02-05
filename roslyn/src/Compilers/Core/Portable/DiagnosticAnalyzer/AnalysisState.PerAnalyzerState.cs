@@ -51,10 +51,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 _gate = new object();
                 _pendingEvents = new Dictionary<CompilationEvent, AnalyzerStateData?>();
                 _pendingSymbols = new Dictionary<ISymbol, AnalyzerStateData?>();
-                _pendingDeclarations = new Dictionary<
-                    ISymbol,
-                    Dictionary<int, DeclarationAnalyzerStateData>?
-                >();
+                _pendingDeclarations =
+                    new Dictionary<ISymbol, Dictionary<int, DeclarationAnalyzerStateData>?>();
 
                 _analyzerStateDataPool = analyzerStateDataPool;
                 _declarationAnalyzerStateDataPool = declarationAnalyzerStateDataPool;
@@ -576,10 +574,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         )
                         {
                             needsAnalysis = true;
-                            _lazyPendingSymbolEndAnalyses ??= new Dictionary<
-                                ISymbol,
-                                AnalyzerStateData?
-                            >();
+                            _lazyPendingSymbolEndAnalyses ??=
+                                new Dictionary<ISymbol, AnalyzerStateData?>();
                             _lazyPendingSymbolEndAnalyses[symbol] = null;
                         }
 
@@ -600,10 +596,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 : 0;
                         if (fileCount > 0)
                         {
-                            _lazyFilesWithAnalysisData = new Dictionary<
-                                SourceOrAdditionalFile,
-                                AnalyzerStateData
-                            >();
+                            _lazyFilesWithAnalysisData =
+                                new Dictionary<SourceOrAdditionalFile, AnalyzerStateData>();
                             _pendingSyntaxAnalysisFilesCount = fileCount;
                         }
 

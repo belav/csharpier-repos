@@ -396,14 +396,10 @@ namespace ILCompiler
             return mangledName;
         }
 
-        private Dictionary<MethodDesc, Utf8String> _mangledMethodNames = new Dictionary<
-            MethodDesc,
-            Utf8String
-        >();
-        private Dictionary<MethodDesc, Utf8String> _unqualifiedMangledMethodNames = new Dictionary<
-            MethodDesc,
-            Utf8String
-        >();
+        private Dictionary<MethodDesc, Utf8String> _mangledMethodNames =
+            new Dictionary<MethodDesc, Utf8String>();
+        private Dictionary<MethodDesc, Utf8String> _unqualifiedMangledMethodNames =
+            new Dictionary<MethodDesc, Utf8String>();
 
         public override Utf8String GetMangledMethodName(MethodDesc method)
         {
@@ -623,10 +619,8 @@ namespace ILCompiler
             return utf8MangledName;
         }
 
-        private Dictionary<FieldDesc, Utf8String> _mangledFieldNames = new Dictionary<
-            FieldDesc,
-            Utf8String
-        >();
+        private Dictionary<FieldDesc, Utf8String> _mangledFieldNames =
+            new Dictionary<FieldDesc, Utf8String>();
 
         public override Utf8String GetMangledFieldName(FieldDesc field)
         {
@@ -689,10 +683,8 @@ namespace ILCompiler
             return utf8MangledName;
         }
 
-        private Dictionary<string, string> _mangledStringLiterals = new Dictionary<
-            string,
-            string
-        >();
+        private Dictionary<string, string> _mangledStringLiterals =
+            new Dictionary<string, string>();
 
         public override string GetMangledStringName(string literal)
         {

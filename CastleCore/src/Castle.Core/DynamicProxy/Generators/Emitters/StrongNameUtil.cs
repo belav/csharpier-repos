@@ -21,10 +21,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
 
     internal static class StrongNameUtil
     {
-        private static readonly IDictionary<Assembly, bool> signedAssemblyCache = new Dictionary<
-            Assembly,
-            bool
-        >();
+        private static readonly IDictionary<Assembly, bool> signedAssemblyCache =
+            new Dictionary<Assembly, bool>();
         private static readonly object lockObject = new object();
 
         public static bool IsAssemblySigned(this Assembly assembly)

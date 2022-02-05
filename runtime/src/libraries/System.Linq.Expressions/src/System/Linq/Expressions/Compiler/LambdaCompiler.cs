@@ -45,10 +45,8 @@ namespace System.Linq.Expressions.Compiler
         private LabelScopeInfo _labelBlock = new LabelScopeInfo(null, LabelScopeKind.Lambda);
 
         // Mapping of labels used for "long" jumps (jumping out and into blocks)
-        private readonly Dictionary<LabelTarget, LabelInfo> _labelInfo = new Dictionary<
-            LabelTarget,
-            LabelInfo
-        >();
+        private readonly Dictionary<LabelTarget, LabelInfo> _labelInfo =
+            new Dictionary<LabelTarget, LabelInfo>();
 
         // The currently active variable scope
         private CompilerScope _scope;
@@ -63,10 +61,8 @@ namespace System.Linq.Expressions.Compiler
         private readonly BoundConstants _boundConstants;
 
         // Free list of locals, so we reuse them rather than creating new ones
-        private readonly KeyedStack<Type, LocalBuilder> _freeLocals = new KeyedStack<
-            Type,
-            LocalBuilder
-        >();
+        private readonly KeyedStack<Type, LocalBuilder> _freeLocals =
+            new KeyedStack<Type, LocalBuilder>();
 
         /// <summary>
         /// Creates a lambda compiler that will compile to a dynamic method

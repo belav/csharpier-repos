@@ -26,10 +26,8 @@ public class DiagnosticProject
 
     private static readonly ICompilationAssemblyResolver _assemblyResolver =
         new AppBaseCompilationAssemblyResolver();
-    private static readonly Dictionary<Assembly, Solution> _solutionCache = new Dictionary<
-        Assembly,
-        Solution
-    >();
+    private static readonly Dictionary<Assembly, Solution> _solutionCache =
+        new Dictionary<Assembly, Solution>();
 
     public static Project Create(Assembly testAssembly, string[] sources)
     {

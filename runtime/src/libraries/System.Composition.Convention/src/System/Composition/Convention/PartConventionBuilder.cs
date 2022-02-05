@@ -52,15 +52,20 @@ namespace System.Composition.Convention
             SelectType = selectType;
             _typeExportBuilders = new List<ExportConventionBuilder>();
             _constructorImportBuilders = new List<ImportConventionBuilder>();
-            _propertyExports = new List<
-                Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ExportConventionBuilder>, Type>
-            >();
-            _propertyImports = new List<
-                Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ImportConventionBuilder>>
-            >();
-            _interfaceExports = new List<
-                Tuple<Predicate<Type>, Action<Type, ExportConventionBuilder>>
-            >();
+            _propertyExports =
+                new List<
+                    Tuple<
+                        Predicate<PropertyInfo>,
+                        Action<PropertyInfo, ExportConventionBuilder>,
+                        Type
+                    >
+                >();
+            _propertyImports =
+                new List<
+                    Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ImportConventionBuilder>>
+                >();
+            _interfaceExports =
+                new List<Tuple<Predicate<Type>, Action<Type, ExportConventionBuilder>>>();
             _methodImportsSatisfiedNotifications = new List<Predicate<MethodInfo>>();
         }
 

@@ -118,10 +118,8 @@ namespace System.Runtime.Serialization
         private Stack<object> _blockStack = null!; // initialized in BeginMethod
         private Label _methodEndLabel;
 
-        private readonly Dictionary<LocalBuilder, string> _localNames = new Dictionary<
-            LocalBuilder,
-            string
-        >();
+        private readonly Dictionary<LocalBuilder, string> _localNames =
+            new Dictionary<LocalBuilder, string>();
 
         private enum CodeGenTrace
         {

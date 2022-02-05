@@ -148,10 +148,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void CreateOrReplaceDictionary_OriginalModelImmutable_CreatesNewInstance()
         {
             // Arrange
-            ReadOnlyDictionary<string, string> originalModel = new ReadOnlyDictionary<
-                string,
-                string
-            >();
+            ReadOnlyDictionary<string, string> originalModel =
+                new ReadOnlyDictionary<string, string>();
 
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {

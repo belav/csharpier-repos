@@ -25,10 +25,8 @@ namespace System.Net.Http.Formatting
     /// </summary>
     public class XmlMediaTypeFormatter : MediaTypeFormatter
     {
-        private ConcurrentDictionary<Type, object> _serializerCache = new ConcurrentDictionary<
-            Type,
-            object
-        >();
+        private ConcurrentDictionary<Type, object> _serializerCache =
+            new ConcurrentDictionary<Type, object>();
         private XmlDictionaryReaderQuotas _readerQuotas =
             FormattingUtilities.CreateDefaultReaderQuotas();
 

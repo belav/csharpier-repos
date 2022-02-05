@@ -1357,14 +1357,10 @@ namespace SerializationTestTypes
 
     public class PrimitiveDataContract : DataContract
     {
-        static Dictionary<Type, PrimitiveDataContract> typeToContract = new Dictionary<
-            Type,
-            PrimitiveDataContract
-        >();
-        static Dictionary<XmlQualifiedName, PrimitiveDataContract> nameToContract = new Dictionary<
-            XmlQualifiedName,
-            PrimitiveDataContract
-        >();
+        static Dictionary<Type, PrimitiveDataContract> typeToContract =
+            new Dictionary<Type, PrimitiveDataContract>();
+        static Dictionary<XmlQualifiedName, PrimitiveDataContract> nameToContract =
+            new Dictionary<XmlQualifiedName, PrimitiveDataContract>();
         static PrimitiveDataContract objectContract = new PrimitiveDataContract(typeof(object));
 
         static PrimitiveDataContract()

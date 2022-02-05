@@ -50,10 +50,8 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         private const string FloatText = "123.123";
         private static readonly char[] FloatChars = FloatText.ToCharArray();
 
-        private static readonly Dictionary<string, object> NormalDictionary = new Dictionary<
-            string,
-            object
-        >();
+        private static readonly Dictionary<string, object> NormalDictionary =
+            new Dictionary<string, object>();
 
         private static readonly ConcurrentDictionary<string, object> ConcurrentDictionary =
             new ConcurrentDictionary<string, object>();

@@ -19,10 +19,8 @@ namespace System.Xml.Serialization
     {
         private readonly TypeScope _typeScope;
         private readonly Dictionary<Type, TypeModel> _models = new Dictionary<Type, TypeModel>();
-        private readonly Dictionary<Type, TypeModel> _arrayModels = new Dictionary<
-            Type,
-            TypeModel
-        >();
+        private readonly Dictionary<Type, TypeModel> _arrayModels =
+            new Dictionary<Type, TypeModel>();
 
         internal ModelScope(TypeScope typeScope)
         {

@@ -313,10 +313,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Dictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>.Builder>? allDiagnostics;
                 if (!lazyLocalDiagnostics.TryGetValue(key, out allDiagnostics))
                 {
-                    allDiagnostics = new Dictionary<
-                        DiagnosticAnalyzer,
-                        ImmutableArray<Diagnostic>.Builder
-                    >();
+                    allDiagnostics =
+                        new Dictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>.Builder>();
                     lazyLocalDiagnostics[key] = allDiagnostics;
                 }
 

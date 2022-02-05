@@ -72,12 +72,10 @@ internal partial class RequestContext
 
     private Fields _initializedFields;
 
-    private List<Tuple<Func<object, Task>, object>>? _onStartingActions = new List<
-        Tuple<Func<object, Task>, object>
-    >();
-    private List<Tuple<Func<object, Task>, object>>? _onCompletedActions = new List<
-        Tuple<Func<object, Task>, object>
-    >();
+    private List<Tuple<Func<object, Task>, object>>? _onStartingActions =
+        new List<Tuple<Func<object, Task>, object>>();
+    private List<Tuple<Func<object, Task>, object>>? _onCompletedActions =
+        new List<Tuple<Func<object, Task>, object>>();
     private bool _responseStarted;
     private bool _completed;
 

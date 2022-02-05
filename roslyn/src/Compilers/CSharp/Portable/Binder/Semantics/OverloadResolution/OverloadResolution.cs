@@ -860,10 +860,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         > PartitionMembersByContainingType<TMember>(ArrayBuilder<TMember> members)
             where TMember : Symbol
         {
-            Dictionary<NamedTypeSymbol, ArrayBuilder<TMember>> containingTypeMap = new Dictionary<
-                NamedTypeSymbol,
-                ArrayBuilder<TMember>
-            >();
+            Dictionary<NamedTypeSymbol, ArrayBuilder<TMember>> containingTypeMap =
+                new Dictionary<NamedTypeSymbol, ArrayBuilder<TMember>>();
             for (int i = 0; i < members.Count; i++)
             {
                 TMember member = members[i];

@@ -29,12 +29,10 @@ namespace DependencyLogViewer
 
         public readonly int Index;
         public readonly string Name;
-        public readonly List<KeyValuePair<Node, string>> Dependencies = new List<
-            KeyValuePair<Node, string>
-        >();
-        public readonly List<KeyValuePair<Node, string>> Dependents = new List<
-            KeyValuePair<Node, string>
-        >();
+        public readonly List<KeyValuePair<Node, string>> Dependencies =
+            new List<KeyValuePair<Node, string>>();
+        public readonly List<KeyValuePair<Node, string>> Dependents =
+            new List<KeyValuePair<Node, string>>();
     }
 
     public class Graph

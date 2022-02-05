@@ -36,10 +36,8 @@ namespace Castle.Core.Logging
     /// </remarks>
     public class TraceLogger : LevelFilteredLogger
     {
-        private static readonly Dictionary<string, TraceSource> cache = new Dictionary<
-            string,
-            TraceSource
-        >();
+        private static readonly Dictionary<string, TraceSource> cache =
+            new Dictionary<string, TraceSource>();
 
         private TraceSource traceSource;
 

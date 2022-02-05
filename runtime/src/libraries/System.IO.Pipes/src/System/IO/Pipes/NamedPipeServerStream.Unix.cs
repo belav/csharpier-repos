@@ -285,10 +285,8 @@ namespace System.IO.Pipes
         private sealed class SharedServer
         {
             /// <summary>Path to shared instance mapping.</summary>
-            private static readonly Dictionary<string, SharedServer> s_servers = new Dictionary<
-                string,
-                SharedServer
-            >();
+            private static readonly Dictionary<string, SharedServer> s_servers =
+                new Dictionary<string, SharedServer>();
 
             /// <summary>The pipe name for this instance.</summary>
             internal string PipeName { get; }

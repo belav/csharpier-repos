@@ -877,10 +877,8 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
             List<GcTransition> transitions
         )
         {
-            Dictionary<int, List<BaseGcTransition>> updatedTransitions = new Dictionary<
-                int,
-                List<BaseGcTransition>
-            >();
+            Dictionary<int, List<BaseGcTransition>> updatedTransitions =
+                new Dictionary<int, List<BaseGcTransition>>();
             int cumInterruptibleLength = 0; // the sum of the lengths of all preceeding interruptible ranges
             using (
                 IEnumerator<InterruptibleRange> interruptibleRangesIter =

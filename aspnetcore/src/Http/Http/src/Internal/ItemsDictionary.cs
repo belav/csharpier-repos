@@ -158,10 +158,8 @@ internal class ItemsDictionary : IDictionary<object, object?>
     private static class EmptyDictionary
     {
         // In own class so only initalized if CopyTo is called on an empty ItemsDictionary
-        public static readonly IDictionary<object, object?> Dictionary = new Dictionary<
-            object,
-            object?
-        >();
+        public static readonly IDictionary<object, object?> Dictionary =
+            new Dictionary<object, object?>();
         public static ICollection<KeyValuePair<object, object?>> Collection => Dictionary;
     }
 }

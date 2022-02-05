@@ -23,10 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters;
 public class XmlSerializerInputFormatter : TextInputFormatter, IInputFormatterExceptionPolicy
 {
     private const int DefaultMemoryThreshold = 1024 * 30;
-    private readonly ConcurrentDictionary<Type, object> _serializerCache = new ConcurrentDictionary<
-        Type,
-        object
-    >();
+    private readonly ConcurrentDictionary<Type, object> _serializerCache =
+        new ConcurrentDictionary<Type, object>();
     private readonly XmlDictionaryReaderQuotas _readerQuotas =
         FormattingUtilities.GetDefaultXmlReaderQuotas();
     private readonly MvcOptions _options;

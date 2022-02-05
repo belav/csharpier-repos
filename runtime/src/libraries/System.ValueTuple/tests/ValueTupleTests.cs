@@ -420,18 +420,19 @@ namespace System.Tests
                 TimeSpan
             > ValueTupleDriverA;
             //ValueTuple-0
-            ValueTupleDriverA = new ValueTupleTestDriver<
-                short,
-                int,
-                long,
-                string,
-                char,
-                float,
-                double,
-                DateTime,
-                ValueTuple<bool, object>,
-                TimeSpan
-            >();
+            ValueTupleDriverA =
+                new ValueTupleTestDriver<
+                    short,
+                    int,
+                    long,
+                    string,
+                    char,
+                    float,
+                    double,
+                    DateTime,
+                    ValueTuple<bool, object>,
+                    TimeSpan
+                >();
             ValueTupleDriverA.TestConstructor();
 
             //ValueTuple-1
@@ -618,18 +619,19 @@ namespace System.Tests
                 TimeSpan
             > ValueTupleDriverA;
             //ValueTuple-0
-            ValueTupleDriverA = new ValueTupleTestDriver<
-                short,
-                int,
-                long,
-                string,
-                char,
-                float,
-                double,
-                DateTime,
-                ValueTuple<bool, object>,
-                TimeSpan
-            >();
+            ValueTupleDriverA =
+                new ValueTupleTestDriver<
+                    short,
+                    int,
+                    long,
+                    string,
+                    char,
+                    float,
+                    double,
+                    DateTime,
+                    ValueTuple<bool, object>,
+                    TimeSpan
+                >();
             ValueTupleDriverA.TestToString("()");
 
             //ValueTuple-1
@@ -840,30 +842,32 @@ namespace System.Tests
                 ValueTupleDriverC,
                 ValueTupleDriverD;
             //ValueTuple-0
-            ValueTupleDriverA = new ValueTupleTestDriver<
-                short,
-                int,
-                long,
-                string,
-                char,
-                float,
-                double,
-                DateTime,
-                ValueTuple<bool, object>,
-                TimeSpan
-            >();
-            ValueTupleDriverB = new ValueTupleTestDriver<
-                short,
-                int,
-                long,
-                string,
-                char,
-                float,
-                double,
-                DateTime,
-                ValueTuple<bool, object>,
-                TimeSpan
-            >();
+            ValueTupleDriverA =
+                new ValueTupleTestDriver<
+                    short,
+                    int,
+                    long,
+                    string,
+                    char,
+                    float,
+                    double,
+                    DateTime,
+                    ValueTuple<bool, object>,
+                    TimeSpan
+                >();
+            ValueTupleDriverB =
+                new ValueTupleTestDriver<
+                    short,
+                    int,
+                    long,
+                    string,
+                    char,
+                    float,
+                    double,
+                    DateTime,
+                    ValueTuple<bool, object>,
+                    TimeSpan
+                >();
             ValueTupleDriverD = new ValueTupleTestDriver<
                 short,
                 int,
@@ -1452,30 +1456,32 @@ namespace System.Tests
                 ValueTupleDriverB,
                 ValueTupleDriverC;
             //ValueTuple-0
-            ValueTupleDriverA = new ValueTupleTestDriver<
-                short,
-                int,
-                long,
-                string,
-                char,
-                float,
-                double,
-                DateTime,
-                ValueTuple<bool, object>,
-                TimeSpan
-            >();
-            ValueTupleDriverB = new ValueTupleTestDriver<
-                short,
-                int,
-                long,
-                string,
-                char,
-                float,
-                double,
-                DateTime,
-                ValueTuple<bool, object>,
-                TimeSpan
-            >();
+            ValueTupleDriverA =
+                new ValueTupleTestDriver<
+                    short,
+                    int,
+                    long,
+                    string,
+                    char,
+                    float,
+                    double,
+                    DateTime,
+                    ValueTuple<bool, object>,
+                    TimeSpan
+                >();
+            ValueTupleDriverB =
+                new ValueTupleTestDriver<
+                    short,
+                    int,
+                    long,
+                    string,
+                    char,
+                    float,
+                    double,
+                    DateTime,
+                    ValueTuple<bool, object>,
+                    TimeSpan
+                >();
             ValueTupleDriverA.TestCompareTo(ValueTupleDriverB, 0, 0);
 
             //ValueTuple-1
@@ -1869,18 +1875,19 @@ namespace System.Tests
                 TimeSpan
             > ValueTupleDriverA;
             //ValueTuple-0
-            ValueTupleDriverA = new ValueTupleTestDriver<
-                short,
-                int,
-                long,
-                string,
-                char,
-                float,
-                double,
-                DateTime,
-                bool,
-                TimeSpan
-            >();
+            ValueTupleDriverA =
+                new ValueTupleTestDriver<
+                    short,
+                    int,
+                    long,
+                    string,
+                    char,
+                    float,
+                    double,
+                    DateTime,
+                    bool,
+                    TimeSpan
+                >();
             ValueTupleDriverA.TestNotEqual();
 
             //ValueTuple-1
@@ -2041,18 +2048,19 @@ namespace System.Tests
             > ValueTupleDriverA;
 
             //ValueTuple-0
-            ValueTupleDriverA = new ValueTupleTestDriver<
-                short,
-                int,
-                long,
-                string,
-                char,
-                float,
-                double,
-                DateTime,
-                bool,
-                TimeSpan
-            >();
+            ValueTupleDriverA =
+                new ValueTupleTestDriver<
+                    short,
+                    int,
+                    long,
+                    string,
+                    char,
+                    float,
+                    double,
+                    DateTime,
+                    bool,
+                    TimeSpan
+                >();
             ValueTupleDriverA.TestCompareToThrows();
 
             //ValueTuple-1

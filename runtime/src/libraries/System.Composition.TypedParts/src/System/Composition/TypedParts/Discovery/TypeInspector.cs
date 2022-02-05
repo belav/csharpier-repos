@@ -13,10 +13,8 @@ namespace System.Composition.TypedParts.Discovery
 {
     internal sealed class TypeInspector
     {
-        private static readonly IDictionary<string, object> s_noMetadata = new Dictionary<
-            string,
-            object
-        >();
+        private static readonly IDictionary<string, object> s_noMetadata =
+            new Dictionary<string, object>();
 
         private readonly ActivationFeature[] _activationFeatures;
         private readonly AttributedModelProvider _attributeContext;

@@ -56,10 +56,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         internal DiagnosticAnalyzerInfoCache()
         {
-            _descriptorsInfo = new ConditionalWeakTable<
-                DiagnosticAnalyzer,
-                DiagnosticDescriptorsInfo
-            >();
+            _descriptorsInfo =
+                new ConditionalWeakTable<DiagnosticAnalyzer, DiagnosticDescriptorsInfo>();
         }
 
         /// <summary>

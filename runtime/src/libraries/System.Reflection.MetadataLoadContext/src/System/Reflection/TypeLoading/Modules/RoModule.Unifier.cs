@@ -82,9 +82,7 @@ namespace System.Reflection.TypeLoading
         private readonly ConcurrentDictionary<
             RoConstructedGenericType.Key,
             RoConstructedGenericType
-        > _constructedGenericTypeDict = new ConcurrentDictionary<
-            RoConstructedGenericType.Key,
-            RoConstructedGenericType
-        >();
+        > _constructedGenericTypeDict =
+            new ConcurrentDictionary<RoConstructedGenericType.Key, RoConstructedGenericType>();
     }
 }

@@ -330,10 +330,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     )
                 )
                 {
-                    var runtimePropertyOverrides = new SortedDictionary<
-                        StoreObjectIdentifier,
-                        object
-                    >();
+                    var runtimePropertyOverrides =
+                        new SortedDictionary<StoreObjectIdentifier, object>();
                     foreach (
                         var overridesPair in (SortedDictionary<
                             StoreObjectIdentifier,

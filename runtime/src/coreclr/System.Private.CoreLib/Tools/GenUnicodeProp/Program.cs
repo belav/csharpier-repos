@@ -35,14 +35,10 @@ namespace GenUnicodeProp
             Console.WriteLine();
 
             Console.WriteLine("Initializing maps...");
-            Dictionary<CategoryCasingInfo, byte> categoryCasingMap = new Dictionary<
-                CategoryCasingInfo,
-                byte
-            >();
-            Dictionary<NumericGraphemeInfo, byte> numericGraphemeMap = new Dictionary<
-                NumericGraphemeInfo,
-                byte
-            >();
+            Dictionary<CategoryCasingInfo, byte> categoryCasingMap =
+                new Dictionary<CategoryCasingInfo, byte>();
+            Dictionary<NumericGraphemeInfo, byte> numericGraphemeMap =
+                new Dictionary<NumericGraphemeInfo, byte>();
 
             // Next, iterate though all assigned code points, populating
             // the category casing & numeric grapheme maps. Also put the

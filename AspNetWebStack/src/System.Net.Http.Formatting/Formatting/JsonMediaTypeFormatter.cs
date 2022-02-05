@@ -34,10 +34,8 @@ namespace System.Net.Http.Formatting
         private ConcurrentDictionary<
             Type,
             DataContractJsonSerializer
-        > _dataContractSerializerCache = new ConcurrentDictionary<
-            Type,
-            DataContractJsonSerializer
-        >();
+        > _dataContractSerializerCache =
+            new ConcurrentDictionary<Type, DataContractJsonSerializer>();
         private XmlDictionaryReaderQuotas _readerQuotas =
             FormattingUtilities.CreateDefaultReaderQuotas();
         private RequestHeaderMapping _requestHeaderMapping;

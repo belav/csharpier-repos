@@ -329,9 +329,8 @@ namespace System.Threading.Tasks.Tests
         //keeps track of how many enumerators are created
         //in case of an exception in parallel foreach
         //the enumerators should be disposed
-        private ConcurrentBag<UserActionEnumerator<T>> _allEnumerators = new ConcurrentBag<
-            UserActionEnumerator<T>
-        >();
+        private ConcurrentBag<UserActionEnumerator<T>> _allEnumerators =
+            new ConcurrentBag<UserActionEnumerator<T>>();
 
         //called in the beginning of enumerator Move Next
         private Action<int> _moveNextAction = null;

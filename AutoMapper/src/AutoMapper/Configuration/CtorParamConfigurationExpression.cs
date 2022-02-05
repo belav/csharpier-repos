@@ -47,9 +47,8 @@ namespace AutoMapper.Configuration
         public string CtorParamName { get; }
         public Type SourceType { get; }
 
-        private readonly List<Action<ConstructorParameterMap>> _ctorParamActions = new List<
-            Action<ConstructorParameterMap>
-        >();
+        private readonly List<Action<ConstructorParameterMap>> _ctorParamActions =
+            new List<Action<ConstructorParameterMap>>();
 
         public CtorParamConfigurationExpression(string ctorParamName, Type sourceType)
         {

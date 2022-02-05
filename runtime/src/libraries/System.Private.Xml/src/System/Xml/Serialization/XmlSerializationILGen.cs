@@ -15,16 +15,12 @@ namespace System.Xml.Serialization
     internal class XmlSerializationILGen
     {
         private int _nextMethodNumber;
-        private readonly Dictionary<TypeMapping, string> _methodNames = new Dictionary<
-            TypeMapping,
-            string
-        >();
+        private readonly Dictionary<TypeMapping, string> _methodNames =
+            new Dictionary<TypeMapping, string>();
 
         // Lookup name->created Method
-        private readonly Dictionary<string, MethodBuilderInfo> _methodBuilders = new Dictionary<
-            string,
-            MethodBuilderInfo
-        >();
+        private readonly Dictionary<string, MethodBuilderInfo> _methodBuilders =
+            new Dictionary<string, MethodBuilderInfo>();
 
         // Lookup name->created Type
         internal Dictionary<string, Type> CreatedTypes = new Dictionary<string, Type>();
@@ -111,10 +107,8 @@ namespace System.Xml.Serialization
             get { return _typeAttributes; }
         }
 
-        private static readonly Dictionary<string, Regex> s_regexs = new Dictionary<
-            string,
-            Regex
-        >();
+        private static readonly Dictionary<string, Regex> s_regexs =
+            new Dictionary<string, Regex>();
 
         internal static Regex NewRegex(string pattern)
         {

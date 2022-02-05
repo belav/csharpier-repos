@@ -419,9 +419,8 @@ namespace System.Diagnostics.Tracing
                 ref liveSessionList
             );
 
-            List<KeyValuePair<SessionInfo, bool>> changedSessionList = new List<
-                KeyValuePair<SessionInfo, bool>
-            >();
+            List<KeyValuePair<SessionInfo, bool>> changedSessionList =
+                new List<KeyValuePair<SessionInfo, bool>>();
 
             // first look for sessions that have gone away (or have changed)
             // (present in the m_liveSessions but not in the new liveSessionList)

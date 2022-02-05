@@ -501,10 +501,8 @@ namespace ILCompiler.DependencyAnalysis
             return _fieldBaseOffsetCache.GetOrAdd(typeDesc);
         }
 
-        private NodeCache<MethodAndCallSite, ISymbolNode> _interfaceDispatchCells = new NodeCache<
-            MethodAndCallSite,
-            ISymbolNode
-        >();
+        private NodeCache<MethodAndCallSite, ISymbolNode> _interfaceDispatchCells =
+            new NodeCache<MethodAndCallSite, ISymbolNode>();
 
         public ISymbolNode InterfaceDispatchCell(MethodWithToken method, MethodDesc callingMethod)
         {
@@ -512,10 +510,8 @@ namespace ILCompiler.DependencyAnalysis
             return _interfaceDispatchCells.GetOrAdd(cellKey);
         }
 
-        private NodeCache<TypeAndMethod, ISymbolNode> _delegateCtors = new NodeCache<
-            TypeAndMethod,
-            ISymbolNode
-        >();
+        private NodeCache<TypeAndMethod, ISymbolNode> _delegateCtors =
+            new NodeCache<TypeAndMethod, ISymbolNode>();
 
         public ISymbolNode DelegateCtor(TypeDesc delegateType, MethodWithToken method)
         {
@@ -821,10 +817,8 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        private NodeCache<PInvokeTargetKey, ISymbolNode> _pInvokeTargetNodes = new NodeCache<
-            PInvokeTargetKey,
-            ISymbolNode
-        >();
+        private NodeCache<PInvokeTargetKey, ISymbolNode> _pInvokeTargetNodes =
+            new NodeCache<PInvokeTargetKey, ISymbolNode>();
 
         public ISymbolNode GetIndirectPInvokeTargetNode(MethodWithToken methodWithToken)
         {

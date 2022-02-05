@@ -82,10 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         )
         {
             var entityType = entityTypeBuilder.Metadata;
-            var relationshipCandidates = new Dictionary<
-                IConventionEntityType,
-                RelationshipCandidate
-            >();
+            var relationshipCandidates =
+                new Dictionary<IConventionEntityType, RelationshipCandidate>();
             var ownership = entityType.FindOwnership();
             if (ownership == null && entityType.IsOwned())
             {

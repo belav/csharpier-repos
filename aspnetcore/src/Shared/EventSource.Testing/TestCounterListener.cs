@@ -10,10 +10,8 @@ namespace Microsoft.AspNetCore.Internal;
 
 internal class TestCounterListener : EventListener
 {
-    private readonly Dictionary<string, Channel<double>> _counters = new Dictionary<
-        string,
-        Channel<double>
-    >();
+    private readonly Dictionary<string, Channel<double>> _counters =
+        new Dictionary<string, Channel<double>>();
 
     /// <summary>
     /// Creates a new TestCounterListener.

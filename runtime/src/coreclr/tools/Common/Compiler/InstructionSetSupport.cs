@@ -157,10 +157,8 @@ namespace ILCompiler
             Dictionary<string, InstructionSet>
         > ComputeInstructionSetSupport()
         {
-            var supportMatrix = new Dictionary<
-                TargetArchitecture,
-                Dictionary<string, InstructionSet>
-            >();
+            var supportMatrix =
+                new Dictionary<TargetArchitecture, Dictionary<string, InstructionSet>>();
             foreach (TargetArchitecture arch in Enum.GetValues(typeof(TargetArchitecture)))
             {
                 supportMatrix[arch] = ComputeInstructSetSupportForArch(arch);

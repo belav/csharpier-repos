@@ -30,14 +30,10 @@ namespace System.ComponentModel.Composition.Registration
         private readonly Lock _lock = new Lock();
         private readonly List<PartBuilder> _conventions = new List<PartBuilder>();
 
-        private readonly Dictionary<MemberInfo, List<Attribute>> _memberInfos = new Dictionary<
-            MemberInfo,
-            List<Attribute>
-        >();
-        private readonly Dictionary<ParameterInfo, List<Attribute>> _parameters = new Dictionary<
-            ParameterInfo,
-            List<Attribute>
-        >();
+        private readonly Dictionary<MemberInfo, List<Attribute>> _memberInfos =
+            new Dictionary<MemberInfo, List<Attribute>>();
+        private readonly Dictionary<ParameterInfo, List<Attribute>> _parameters =
+            new Dictionary<ParameterInfo, List<Attribute>>();
 
         public RegistrationBuilder() : base(s_inner) { }
 

@@ -29,10 +29,8 @@ namespace System.Runtime.Serialization
         private XmlDictionaryString _ns;
 
         // this the global dictionary for data contracts introduced for multi-file.
-        private static readonly Dictionary<Type, DataContract> s_dataContracts = new Dictionary<
-            Type,
-            DataContract
-        >();
+        private static readonly Dictionary<Type, DataContract> s_dataContracts =
+            new Dictionary<Type, DataContract>();
 
         internal const string SerializerTrimmerWarning =
             "Data Contract Serialization and Deserialization might require types that cannot be statically analyzed. Make sure all of the "

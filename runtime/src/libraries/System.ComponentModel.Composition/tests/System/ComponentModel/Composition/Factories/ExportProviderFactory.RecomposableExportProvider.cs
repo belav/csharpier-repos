@@ -13,10 +13,8 @@ namespace System.ComponentModel.Composition.Factories
     {
         public class RecomposableExportProvider : ExportProvider
         {
-            public static Dictionary<string, object> EmptyMetadataDictionary = new Dictionary<
-                string,
-                object
-            >();
+            public static Dictionary<string, object> EmptyMetadataDictionary =
+                new Dictionary<string, object>();
             public List<Export> _exports = new List<Export>();
 
             public void AddExport(string contractName, object value)

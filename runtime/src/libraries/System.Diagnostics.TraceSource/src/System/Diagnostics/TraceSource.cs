@@ -11,9 +11,8 @@ namespace System.Diagnostics
 {
     public class TraceSource
     {
-        private static readonly List<WeakReference<TraceSource>> s_tracesources = new List<
-            WeakReference<TraceSource>
-        >();
+        private static readonly List<WeakReference<TraceSource>> s_tracesources =
+            new List<WeakReference<TraceSource>>();
         private static int s_LastCollectionCount;
 
         private volatile SourceSwitch? _internalSwitch;

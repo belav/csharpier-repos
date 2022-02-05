@@ -320,10 +320,8 @@ namespace System.Dynamic.Tests
         private class IndexableObject : DynamicObject
         {
             Dictionary<int, int> _oneDimension = new Dictionary<int, int>();
-            Dictionary<Tuple<int, int>, string> _twoDimensions = new Dictionary<
-                Tuple<int, int>,
-                string
-            >();
+            Dictionary<Tuple<int, int>, string> _twoDimensions =
+                new Dictionary<Tuple<int, int>, string>();
 
             public override bool TryGetIndex(
                 GetIndexBinder binder,

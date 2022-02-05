@@ -20,10 +20,8 @@ namespace AnalyzerRunner
             string,
             Assembly
         >(StringComparer.OrdinalIgnoreCase);
-        private static readonly Dictionary<string, Assembly> s_namesToAssemblies = new Dictionary<
-            string,
-            Assembly
-        >();
+        private static readonly Dictionary<string, Assembly> s_namesToAssemblies =
+            new Dictionary<string, Assembly>();
 
         private static readonly object s_guard = new object();
         private static readonly string[] s_extensions = new[] { "ni.dll", "ni.exe", "dll", "exe" };

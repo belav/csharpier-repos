@@ -84,10 +84,11 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
     private readonly Dictionary<
         CSharpKeyword,
         Action<SyntaxListBuilder<RazorSyntaxNode>, CSharpTransitionSyntax>
-    > _keywordParserMap = new Dictionary<
-        CSharpKeyword,
-        Action<SyntaxListBuilder<RazorSyntaxNode>, CSharpTransitionSyntax>
-    >();
+    > _keywordParserMap =
+        new Dictionary<
+            CSharpKeyword,
+            Action<SyntaxListBuilder<RazorSyntaxNode>, CSharpTransitionSyntax>
+        >();
     private readonly Dictionary<
         string,
         Action<SyntaxListBuilder<RazorSyntaxNode>, CSharpTransitionSyntax>

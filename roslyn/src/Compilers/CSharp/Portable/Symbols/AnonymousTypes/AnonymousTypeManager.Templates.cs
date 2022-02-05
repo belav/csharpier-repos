@@ -560,10 +560,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CodeAnalysis.Emit.SynthesizedDelegateValue
         > GetSynthesizedDelegates()
         {
-            var result = new Dictionary<
-                CodeAnalysis.Emit.SynthesizedDelegateKey,
-                CodeAnalysis.Emit.SynthesizedDelegateValue
-            >();
+            var result =
+                new Dictionary<
+                    CodeAnalysis.Emit.SynthesizedDelegateKey,
+                    CodeAnalysis.Emit.SynthesizedDelegateValue
+                >();
             var synthesizedDelegates = ArrayBuilder<SynthesizedDelegateSymbol>.GetInstance();
             GetCreatedSynthesizedDelegates(synthesizedDelegates);
             foreach (var delegateSymbol in synthesizedDelegates)
@@ -583,10 +584,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Microsoft.CodeAnalysis.Emit.AnonymousTypeValue
         > GetAnonymousTypeMap()
         {
-            var result = new Dictionary<
-                Microsoft.CodeAnalysis.Emit.AnonymousTypeKey,
-                Microsoft.CodeAnalysis.Emit.AnonymousTypeValue
-            >();
+            var result =
+                new Dictionary<
+                    Microsoft.CodeAnalysis.Emit.AnonymousTypeKey,
+                    Microsoft.CodeAnalysis.Emit.AnonymousTypeValue
+                >();
             var templates = ArrayBuilder<AnonymousTypeTemplateSymbol>.GetInstance();
             // Get anonymous types but not synthesized delegates. (Delegate types are
             // not reused across generations since reuse would add complexity (such

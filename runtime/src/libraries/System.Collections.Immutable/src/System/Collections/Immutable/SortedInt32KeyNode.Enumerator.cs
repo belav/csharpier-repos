@@ -33,10 +33,11 @@ namespace System.Collections.Immutable
             private static readonly SecureObjectPool<
                 Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>,
                 Enumerator
-            > s_enumeratingStacks = new SecureObjectPool<
-                Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>,
-                Enumerator
-            >();
+            > s_enumeratingStacks =
+                new SecureObjectPool<
+                    Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>,
+                    Enumerator
+                >();
 
             /// <summary>
             /// A unique ID for this instance of this enumerator.

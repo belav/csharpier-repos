@@ -23,14 +23,10 @@ namespace DebuggerTests
 
         private const int DefaultTestTimeoutMs = 1 * 60 * 1000;
 
-        Dictionary<string, TaskCompletionSource<JObject>> notifications = new Dictionary<
-            string,
-            TaskCompletionSource<JObject>
-        >();
-        Dictionary<string, Func<JObject, CancellationToken, Task>> eventListeners = new Dictionary<
-            string,
-            Func<JObject, CancellationToken, Task>
-        >();
+        Dictionary<string, TaskCompletionSource<JObject>> notifications =
+            new Dictionary<string, TaskCompletionSource<JObject>>();
+        Dictionary<string, Func<JObject, CancellationToken, Task>> eventListeners =
+            new Dictionary<string, Func<JObject, CancellationToken, Task>>();
 
         public const string PAUSE = "pause";
         public const string READY = "ready";

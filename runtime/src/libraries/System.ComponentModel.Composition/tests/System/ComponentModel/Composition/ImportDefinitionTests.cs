@@ -201,10 +201,8 @@ namespace System.ComponentModel.Composition
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void ToString_ValueAsConstraintArgument_ShouldReturnConstraintProperty()
         {
-            var expectations = new ExpectationCollection<
-                Expression<Func<ExportDefinition, bool>>,
-                string
-            >();
+            var expectations =
+                new ExpectationCollection<Expression<Func<ExportDefinition, bool>>, string>();
             expectations.Add(
                 d => d.ContractName == "ContractName",
                 @"d.ContractName ==? ""ContractName"""
@@ -237,10 +235,8 @@ namespace System.ComponentModel.Composition
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void ToString_DerivedImportDefinition_ShouldReturnOverriddenConstraintProperty()
         {
-            var expectations = new ExpectationCollection<
-                Expression<Func<ExportDefinition, bool>>,
-                string
-            >();
+            var expectations =
+                new ExpectationCollection<Expression<Func<ExportDefinition, bool>>, string>();
             expectations.Add(
                 d => d.ContractName == "ContractName",
                 @"d.ContractName ==? ""ContractName"""

@@ -175,10 +175,8 @@ namespace System.Runtime.Serialization
             {
                 Type type = this.UnderlyingType;
                 FieldInfo[] fields = type.GetFields(BindingFlags.Static | BindingFlags.Public);
-                Dictionary<string, DataMember> memberValuesTable = new Dictionary<
-                    string,
-                    DataMember
-                >();
+                Dictionary<string, DataMember> memberValuesTable =
+                    new Dictionary<string, DataMember>();
                 List<DataMember> tempMembers = new List<DataMember>(fields.Length);
                 List<long> tempValues = new List<long>(fields.Length);
 

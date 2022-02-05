@@ -914,10 +914,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var inverseNavigations = GetInverseNavigations(targetEntityType);
             if (inverseNavigations == null)
             {
-                inverseNavigations = new Dictionary<
-                    string,
-                    (MemberInfo, List<(MemberInfo, IConventionEntityType)>)
-                >();
+                inverseNavigations =
+                    new Dictionary<
+                        string,
+                        (MemberInfo, List<(MemberInfo, IConventionEntityType)>)
+                    >();
                 SetInverseNavigations(targetEntityType.Builder, inverseNavigations);
             }
 

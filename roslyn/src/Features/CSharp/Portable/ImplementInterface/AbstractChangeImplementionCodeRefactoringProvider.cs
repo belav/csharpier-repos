@@ -303,10 +303,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
 
             // Now, bucket all the implemented members by which document they appear in.
             // That way, we can update all the members in a specific document in bulk.
-            var documentToImplDeclarations = new OrderedMultiDictionary<
-                Document,
-                (SyntaxNode, SetWithInsertionOrder<ISymbol>)
-            >();
+            var documentToImplDeclarations =
+                new OrderedMultiDictionary<
+                    Document,
+                    (SyntaxNode, SetWithInsertionOrder<ISymbol>)
+                >();
             foreach (var (implMember, interfaceMembers) in implMemberToInterfaceMembers)
             {
                 foreach (var syntaxRef in implMember.DeclaringSyntaxReferences)

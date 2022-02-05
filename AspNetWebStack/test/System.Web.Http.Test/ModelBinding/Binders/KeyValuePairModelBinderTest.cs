@@ -17,10 +17,8 @@ namespace System.Web.Http.ModelBinding.Binders
         public void BindModel_MissingKey_ReturnsFalse()
         {
             // Arrange
-            KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<
-                int,
-                string
-            >();
+            KeyValuePairModelBinder<int, string> binder =
+                new KeyValuePairModelBinder<int, string>();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
@@ -77,10 +75,8 @@ namespace System.Web.Http.ModelBinding.Binders
                         return true;
                     }
                 );
-            KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<
-                int,
-                string
-            >();
+            KeyValuePairModelBinder<int, string> binder =
+                new KeyValuePairModelBinder<int, string>();
 
             // Act
             bool retVal = binder.BindModel(context, bindingContext);
@@ -143,10 +139,8 @@ namespace System.Web.Http.ModelBinding.Binders
                         return true;
                     }
                 );
-            KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<
-                int,
-                string
-            >();
+            KeyValuePairModelBinder<int, string> binder =
+                new KeyValuePairModelBinder<int, string>();
 
             // Act
             bool retVal = binder.BindModel(context, bindingContext);

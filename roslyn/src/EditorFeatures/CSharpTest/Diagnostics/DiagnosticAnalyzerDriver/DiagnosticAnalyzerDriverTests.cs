@@ -1236,10 +1236,8 @@ class C
 
         private abstract class AbstractNugetOrVsixSuppressor : DiagnosticSuppressor
         {
-            private readonly Dictionary<string, SuppressionDescriptor> mapping = new Dictionary<
-                string,
-                SuppressionDescriptor
-            >();
+            private readonly Dictionary<string, SuppressionDescriptor> mapping =
+                new Dictionary<string, SuppressionDescriptor>();
 
             protected AbstractNugetOrVsixSuppressor(
                 string analyzerName,

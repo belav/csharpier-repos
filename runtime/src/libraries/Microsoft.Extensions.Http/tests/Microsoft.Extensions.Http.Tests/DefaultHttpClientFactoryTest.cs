@@ -633,10 +633,11 @@ namespace Microsoft.Extensions.Http
                 IEnumerable<IHttpMessageHandlerBuilderFilter> filters
             ) : base(services, scopeFactory, loggerFactory, optionsMonitor, filters)
             {
-                ActiveEntryState = new Dictionary<
-                    ActiveHandlerTrackingEntry,
-                    (TaskCompletionSource<ActiveHandlerTrackingEntry>, Task)
-                >();
+                ActiveEntryState =
+                    new Dictionary<
+                        ActiveHandlerTrackingEntry,
+                        (TaskCompletionSource<ActiveHandlerTrackingEntry>, Task)
+                    >();
                 CleanupTimerStarted = new ManualResetEventSlim(initialState: false);
             }
 

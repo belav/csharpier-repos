@@ -50,10 +50,8 @@ namespace System.Web.Http.Validation.Providers
         internal Dictionary<
             Type,
             DataAnnotationsValidatableObjectAdapterFactory
-        > ValidatableFactories = new Dictionary<
-            Type,
-            DataAnnotationsValidatableObjectAdapterFactory
-        >();
+        > ValidatableFactories =
+            new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
 
         protected override IEnumerable<ModelValidator> GetValidators(
             ModelMetadata metadata,

@@ -132,10 +132,8 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        Dictionary<string, NodeInfo> _previouslyWrittenNodeNames = new Dictionary<
-            string,
-            NodeInfo
-        >();
+        Dictionary<string, NodeInfo> _previouslyWrittenNodeNames =
+            new Dictionary<string, NodeInfo>();
 #endif
 
         public ReadyToRunObjectWriter(

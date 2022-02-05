@@ -284,10 +284,8 @@ namespace System.IO
             /// names, so the watch descriptor in an event must be used to look up the associated
             /// directory path in order to convert the relative filename into a full path.
             /// </summary>
-            private readonly Dictionary<int, WatchedDirectory> _wdToPathMap = new Dictionary<
-                int,
-                WatchedDirectory
-            >();
+            private readonly Dictionary<int, WatchedDirectory> _wdToPathMap =
+                new Dictionary<int, WatchedDirectory>();
 
             /// <summary>
             /// Maximum length of a name returned from inotify event.

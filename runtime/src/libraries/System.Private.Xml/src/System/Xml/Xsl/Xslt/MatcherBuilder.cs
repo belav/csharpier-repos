@@ -268,10 +268,8 @@ namespace System.Xml.Xsl.Xslt
 
     internal sealed class PatternBag
     {
-        public Dictionary<QilName, List<Pattern>> FixedNamePatterns = new Dictionary<
-            QilName,
-            List<Pattern>
-        >();
+        public Dictionary<QilName, List<Pattern>> FixedNamePatterns =
+            new Dictionary<QilName, List<Pattern>>();
         public List<QilName> FixedNamePatternsNames = new List<QilName>(); // Needed only to guarantee a stable order
         public List<Pattern> NonFixedNamePatterns = new List<Pattern>();
 

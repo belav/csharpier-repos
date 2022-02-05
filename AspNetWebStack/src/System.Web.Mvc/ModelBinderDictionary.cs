@@ -10,10 +10,8 @@ namespace System.Web.Mvc
 {
     public class ModelBinderDictionary : IDictionary<Type, IModelBinder>
     {
-        private readonly Dictionary<Type, IModelBinder> _innerDictionary = new Dictionary<
-            Type,
-            IModelBinder
-        >();
+        private readonly Dictionary<Type, IModelBinder> _innerDictionary =
+            new Dictionary<Type, IModelBinder>();
         private IModelBinder _defaultBinder;
         private ModelBinderProviderCollection _modelBinderProviders;
 

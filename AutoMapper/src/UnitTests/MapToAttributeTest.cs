@@ -40,10 +40,8 @@ namespace AutoMapper.UnitTests
     public class SourceToDestinationNameMapperAttributesMember : ISourceToDestinationNameMapper
     {
         private static readonly SourceMember[] Empty = new SourceMember[0];
-        private readonly Dictionary<TypeDetails, SourceMember[]> _allSourceMembers = new Dictionary<
-            TypeDetails,
-            SourceMember[]
-        >();
+        private readonly Dictionary<TypeDetails, SourceMember[]> _allSourceMembers =
+            new Dictionary<TypeDetails, SourceMember[]>();
 
         public MemberInfo GetMatchingMemberInfo(
             TypeDetails sourceTypeDetails,

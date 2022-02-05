@@ -278,10 +278,8 @@ namespace System.Collections.ObjectModel.Tests
             ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
                 dummyExpectedDict
             );
-            IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
-                int,
-                string
-            >();
+            IReadOnlyDictionary_T_Test<int, string> helper =
+                new IReadOnlyDictionary_T_Test<int, string>();
             IDictionary<int, string> dictAsIDictionary = dictionary;
 
             Assert.Throws<NotSupportedException>(

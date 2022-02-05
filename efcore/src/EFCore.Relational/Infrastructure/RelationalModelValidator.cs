@@ -378,10 +378,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     continue;
                 }
 
-                var principalEntityTypesMap = new Dictionary<
-                    IEntityType,
-                    (List<IEntityType> EntityTypes, bool Optional)
-                >();
+                var principalEntityTypesMap =
+                    new Dictionary<IEntityType, (List<IEntityType> EntityTypes, bool Optional)>();
                 foreach (var entityType in mappedTypes)
                 {
                     if (entityType.BaseType != null || entityType.FindPrimaryKey() == null)

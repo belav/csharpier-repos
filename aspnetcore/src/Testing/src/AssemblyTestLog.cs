@@ -29,10 +29,8 @@ public class AssemblyTestLog : IDisposable
     private static readonly int MaxPathLength = GetMaxPathLength();
 
     private static readonly object _lock = new object();
-    private static readonly Dictionary<Assembly, AssemblyTestLog> _logs = new Dictionary<
-        Assembly,
-        AssemblyTestLog
-    >();
+    private static readonly Dictionary<Assembly, AssemblyTestLog> _logs =
+        new Dictionary<Assembly, AssemblyTestLog>();
 
     private readonly ILoggerFactory _globalLoggerFactory;
     private readonly ILogger _globalLogger;

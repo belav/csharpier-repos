@@ -374,9 +374,8 @@ namespace Tests.Integration
         [Export]
         class Tree : IDisposable
         {
-            private List<ExportLifetimeContext<Apple>> grownApples = new List<
-                ExportLifetimeContext<Apple>
-            >();
+            private List<ExportLifetimeContext<Apple>> grownApples =
+                new List<ExportLifetimeContext<Apple>>();
 
             [Import]
             private ExportFactory<Apple> AppleFactory { get; set; }

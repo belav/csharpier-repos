@@ -235,14 +235,10 @@ namespace BenchmarkConsoleApplication
             ExcludeTagList = new List<string>()
         };
 
-        public Dictionary<string, BenchmarkSuite> BenchmarkSuiteTable = new Dictionary<
-            string,
-            BenchmarkSuite
-        >();
-        public Dictionary<string, BenchmarkTagSet> BenchmarkTagSetTable = new Dictionary<
-            string,
-            BenchmarkTagSet
-        >();
+        public Dictionary<string, BenchmarkSuite> BenchmarkSuiteTable =
+            new Dictionary<string, BenchmarkSuite>();
+        public Dictionary<string, BenchmarkTagSet> BenchmarkTagSetTable =
+            new Dictionary<string, BenchmarkTagSet>();
         public List<Benchmark> BenchmarkList = new List<Benchmark>();
         public List<Benchmark> SelectedBenchmarkList = new List<Benchmark>();
         public List<Results> ResultsList = new List<Results>();

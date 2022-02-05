@@ -50,10 +50,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                     // State map for fields:
                     //  'isCandidate' : Indicates whether the field is a candidate to be made readonly based on it's options.
                     //  'written'     : Indicates if there are any writes to the field outside the constructor and field initializer.
-                    var fieldStateMap = new ConcurrentDictionary<
-                        IFieldSymbol,
-                        (bool isCandidate, bool written)
-                    >();
+                    var fieldStateMap =
+                        new ConcurrentDictionary<IFieldSymbol, (bool isCandidate, bool written)>();
 
                     var threadStaticAttribute =
                         compilationStartContext.Compilation.ThreadStaticAttributeType();
