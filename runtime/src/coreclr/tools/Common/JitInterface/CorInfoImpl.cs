@@ -70,10 +70,8 @@ namespace Internal.JitInterface
             public HRESULT hr;
         }
 
-        Dictionary<MethodDesc, PgoInstrumentationResults> _pgoResults = new Dictionary<
-            MethodDesc,
-            PgoInstrumentationResults
-        >();
+        Dictionary<MethodDesc, PgoInstrumentationResults> _pgoResults =
+            new Dictionary<MethodDesc, PgoInstrumentationResults>();
 
         [DllImport(JitLibrary)]
         private extern static IntPtr jitStartup(IntPtr host);
@@ -2536,10 +2534,8 @@ namespace Internal.JitInterface
             return alignment;
         }
 
-        private Dictionary<DefType, bool> _doubleAlignHeuristicCache = new Dictionary<
-            DefType,
-            bool
-        >();
+        private Dictionary<DefType, bool> _doubleAlignHeuristicCache =
+            new Dictionary<DefType, bool>();
 
         //*******************************************************************************
         //
@@ -3761,10 +3757,8 @@ namespace Internal.JitInterface
             throw new NotImplementedException("getInlinedCallFrameVptr");
         }
 
-        private Dictionary<CorInfoHelpFunc, ISymbolNode> _helperCache = new Dictionary<
-            CorInfoHelpFunc,
-            ISymbolNode
-        >();
+        private Dictionary<CorInfoHelpFunc, ISymbolNode> _helperCache =
+            new Dictionary<CorInfoHelpFunc, ISymbolNode>();
 
         private void* getHelperFtn(CorInfoHelpFunc ftnNum, ref void* ppIndirection)
         {

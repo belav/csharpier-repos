@@ -39,10 +39,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             {
                 if (!_map.TryGetValue(documentId, out var secondMap))
                 {
-                    secondMap = new Dictionary<
-                        object,
-                        WeakReference<AbstractTableEntriesSnapshot<TItem>>
-                    >();
+                    secondMap =
+                        new Dictionary<
+                            object,
+                            WeakReference<AbstractTableEntriesSnapshot<TItem>>
+                        >();
                     _map.Add(documentId, secondMap);
                 }
 

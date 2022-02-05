@@ -206,10 +206,8 @@ namespace Moq
         static CastleProxyFactory()
         {
             mostSpecificOverrides = new ConcurrentDictionary<Pair<MethodInfo, Type>, MethodInfo>();
-            nonVirtualInvocationThunks = new ConcurrentDictionary<
-                MethodInfo,
-                Func<object, object[], object>
-            >();
+            nonVirtualInvocationThunks =
+                new ConcurrentDictionary<MethodInfo, Func<object, object[], object>>();
         }
 
         /// <summary>

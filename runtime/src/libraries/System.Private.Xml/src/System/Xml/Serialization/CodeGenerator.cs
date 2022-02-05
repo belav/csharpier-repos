@@ -193,10 +193,8 @@ namespace System.Xml.Serialization
             get { return retLabel; }
         }
 
-        private readonly Dictionary<Type, LocalBuilder> _tmpLocals = new Dictionary<
-            Type,
-            LocalBuilder
-        >();
+        private readonly Dictionary<Type, LocalBuilder> _tmpLocals =
+            new Dictionary<Type, LocalBuilder>();
 
         internal LocalBuilder GetTempLocal(Type type)
         {

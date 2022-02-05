@@ -1036,9 +1036,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             DateTime dateTime = new DateTime(2000, 12, 1, 23, 1, 1, DateTimeKind.Utc);
 
-            List<KeyValuePair<string, WagePerson>> list = new List<
-                KeyValuePair<string, WagePerson>
-            >();
+            List<KeyValuePair<string, WagePerson>> list =
+                new List<KeyValuePair<string, WagePerson>>();
             list.Add(
                 new KeyValuePair<string, WagePerson>(
                     "key1",
@@ -2109,10 +2108,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             string json;
 
-            GenericClass<GenericItem<string>, string> foo1 = new GenericClass<
-                GenericItem<string>,
-                string
-            >();
+            GenericClass<GenericItem<string>, string> foo1 =
+                new GenericClass<GenericItem<string>, string>();
             foo1.Items.Add(new GenericItem<string> { Value = "Hello" });
 
             json = JsonConvert.SerializeObject(new { selectList = foo1 });

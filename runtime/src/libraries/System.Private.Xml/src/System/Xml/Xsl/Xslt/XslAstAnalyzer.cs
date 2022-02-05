@@ -38,23 +38,17 @@ namespace System.Xml.Xsl.Xslt
         // 0/1     - for-each depth
         private Graph<ProtoTemplate>? _revCall0Graph = new Graph<ProtoTemplate>();
         private Graph<ProtoTemplate>? _revCall1Graph = new Graph<ProtoTemplate>();
-        private Dictionary<Template, Stylesheet>? _fwdApplyImportsGraph = new Dictionary<
-            Template,
-            Stylesheet
-        >();
-        private Dictionary<QilName, List<ProtoTemplate>>? _revApplyTemplatesGraph = new Dictionary<
-            QilName,
-            List<ProtoTemplate>
-        >();
+        private Dictionary<Template, Stylesheet>? _fwdApplyImportsGraph =
+            new Dictionary<Template, Stylesheet>();
+        private Dictionary<QilName, List<ProtoTemplate>>? _revApplyTemplatesGraph =
+            new Dictionary<QilName, List<ProtoTemplate>>();
 
         // Data flow graph
         private Graph<VarPar>? _dataFlow = new Graph<VarPar>();
 
         // Mapping (mode, param name) -> helper vertex in data flow graph
-        private readonly Dictionary<ModeName, VarPar> _applyTemplatesParams = new Dictionary<
-            ModeName,
-            VarPar
-        >();
+        private readonly Dictionary<ModeName, VarPar> _applyTemplatesParams =
+            new Dictionary<ModeName, VarPar>();
 
         // ---------------------------------- Graph<V> ----------------------------------
         /// <summary>

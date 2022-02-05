@@ -772,10 +772,8 @@ namespace SerializationTestTypes
     {
         public static Dictionary<DataContract, List<RefData>> GetReferenceCounts(object data)
         {
-            Dictionary<DataContract, List<RefData>> nonRefdValues = new Dictionary<
-                DataContract,
-                List<RefData>
-            >();
+            Dictionary<DataContract, List<RefData>> nonRefdValues =
+                new Dictionary<DataContract, List<RefData>>();
             return GetReferenceCounts(data, ref nonRefdValues);
         }
 
@@ -784,10 +782,8 @@ namespace SerializationTestTypes
             ref Dictionary<DataContract, List<RefData>> nonRefdValues
         )
         {
-            Dictionary<DataContract, List<RefData>> alreadyRefdValues = new Dictionary<
-                DataContract,
-                List<RefData>
-            >();
+            Dictionary<DataContract, List<RefData>> alreadyRefdValues =
+                new Dictionary<DataContract, List<RefData>>();
             Type type = data.GetType();
             DataContract dataContract = DataContract.GetDataContract(
                 type,

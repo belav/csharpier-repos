@@ -121,10 +121,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
             PollForChanges = pollForChanges;
             _filters = filters;
 
-            PollingChangeTokens = new ConcurrentDictionary<
-                IPollingChangeToken,
-                IPollingChangeToken
-            >();
+            PollingChangeTokens =
+                new ConcurrentDictionary<IPollingChangeToken, IPollingChangeToken>();
             _timerFactory = () =>
                 NonCapturingTimer.Create(
                     RaiseChangeEvents,

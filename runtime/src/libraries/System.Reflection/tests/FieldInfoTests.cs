@@ -924,9 +924,8 @@ namespace System.Reflection.Tests
             g_object
         };
 
-        public static FI_GenericClass<FI_GenericClass<object>> g_g_object = new FI_GenericClass<
-            FI_GenericClass<object>
-        >();
+        public static FI_GenericClass<FI_GenericClass<object>> g_g_object =
+            new FI_GenericClass<FI_GenericClass<object>>();
         public static FI_GenericClassField<FI_GenericClass<object>> pfg_g_object =
             new FI_GenericClassField<FI_GenericClass<object>>();
         public static FI_StaticGenericField<FI_GenericClass<object>> sfg_g_object =

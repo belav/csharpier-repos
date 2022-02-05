@@ -77,10 +77,11 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         public ExpressionResolverBuilder(ServiceProvider serviceProvider)
         {
             _rootScope = serviceProvider.Root;
-            _scopeResolverCache = new ConcurrentDictionary<
-                ServiceCacheKey,
-                Func<ServiceProviderEngineScope, object>
-            >();
+            _scopeResolverCache =
+                new ConcurrentDictionary<
+                    ServiceCacheKey,
+                    Func<ServiceProviderEngineScope, object>
+                >();
             _buildTypeDelegate = (key, cs) => BuildNoCache(cs);
         }
 

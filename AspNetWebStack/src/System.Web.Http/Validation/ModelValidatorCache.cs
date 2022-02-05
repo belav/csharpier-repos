@@ -17,10 +17,8 @@ namespace System.Web.Http.Validation
         private ConcurrentDictionary<
             EfficientTypePropertyKey<Type, string>,
             ModelValidator[]
-        > _validatorCache = new ConcurrentDictionary<
-            EfficientTypePropertyKey<Type, string>,
-            ModelValidator[]
-        >();
+        > _validatorCache =
+            new ConcurrentDictionary<EfficientTypePropertyKey<Type, string>, ModelValidator[]>();
         private Lazy<IEnumerable<ModelValidatorProvider>> _validatorProviders;
 
         public ModelValidatorCache(Lazy<IEnumerable<ModelValidatorProvider>> validatorProviders)

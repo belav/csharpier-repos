@@ -73,10 +73,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 CancellationToken cancellationToken
             )
             {
-                var classesThatMayDeriveFromSystemObject = new MultiDictionary<
-                    Document,
-                    DeclaredSymbolInfo
-                >();
+                var classesThatMayDeriveFromSystemObject =
+                    new MultiDictionary<Document, DeclaredSymbolInfo>();
                 var valueTypes = new MultiDictionary<Document, DeclaredSymbolInfo>();
                 var enums = new MultiDictionary<Document, DeclaredSymbolInfo>();
                 var delegates = new MultiDictionary<Document, DeclaredSymbolInfo>();

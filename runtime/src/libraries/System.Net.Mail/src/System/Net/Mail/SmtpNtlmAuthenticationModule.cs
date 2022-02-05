@@ -8,10 +8,8 @@ namespace System.Net.Mail
 {
     internal sealed class SmtpNtlmAuthenticationModule : ISmtpAuthenticationModule
     {
-        private readonly Dictionary<object, NTAuthentication> _sessions = new Dictionary<
-            object,
-            NTAuthentication
-        >();
+        private readonly Dictionary<object, NTAuthentication> _sessions =
+            new Dictionary<object, NTAuthentication>();
 
         internal SmtpNtlmAuthenticationModule() { }
 

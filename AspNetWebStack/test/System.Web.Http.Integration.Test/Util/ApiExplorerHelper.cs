@@ -66,10 +66,8 @@ namespace System.Web.Http.ApiExplorer
             params Type[] controllerTypes
         )
         {
-            Dictionary<string, HttpControllerDescriptor> controllerMapping = new Dictionary<
-                string,
-                HttpControllerDescriptor
-            >();
+            Dictionary<string, HttpControllerDescriptor> controllerMapping =
+                new Dictionary<string, HttpControllerDescriptor>();
             foreach (Type controllerType in controllerTypes)
             {
                 string controllerName = controllerType.Name.Substring(

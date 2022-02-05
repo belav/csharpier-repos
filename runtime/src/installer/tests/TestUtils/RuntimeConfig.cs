@@ -109,9 +109,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         private readonly string _path;
         private readonly List<Framework> _frameworks = new List<Framework>();
         private readonly List<Framework> _includedFrameworks = new List<Framework>();
-        private readonly List<Tuple<string, string>> _properties = new List<
-            Tuple<string, string>
-        >();
+        private readonly List<Tuple<string, string>> _properties =
+            new List<Tuple<string, string>>();
 
         /// <summary>
         /// Creates new runtime config - overwrites existing file on Save if any.

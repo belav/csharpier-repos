@@ -24,21 +24,15 @@ namespace Microsoft.AspNetCore.Components.RenderTree;
 public abstract partial class Renderer : IDisposable, IAsyncDisposable
 {
     private readonly IServiceProvider _serviceProvider;
-    private readonly Dictionary<int, ComponentState> _componentStateById = new Dictionary<
-        int,
-        ComponentState
-    >();
+    private readonly Dictionary<int, ComponentState> _componentStateById =
+        new Dictionary<int, ComponentState>();
     private readonly Dictionary<IComponent, ComponentState> _componentStateByComponent =
         new Dictionary<IComponent, ComponentState>();
     private readonly RenderBatchBuilder _batchBuilder = new RenderBatchBuilder();
-    private readonly Dictionary<ulong, EventCallback> _eventBindings = new Dictionary<
-        ulong,
-        EventCallback
-    >();
-    private readonly Dictionary<ulong, ulong> _eventHandlerIdReplacements = new Dictionary<
-        ulong,
-        ulong
-    >();
+    private readonly Dictionary<ulong, EventCallback> _eventBindings =
+        new Dictionary<ulong, EventCallback>();
+    private readonly Dictionary<ulong, ulong> _eventHandlerIdReplacements =
+        new Dictionary<ulong, ulong>();
     private readonly ILogger<Renderer> _logger;
     private readonly ComponentFactory _componentFactory;
     private Dictionary<int, ParameterView>? _rootComponentsLatestParameters;

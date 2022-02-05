@@ -193,10 +193,8 @@ namespace System.ComponentModel.Composition.Hosting
                 {
                     if (_importedDisposableExports == null)
                     {
-                        _importedDisposableExports = new Dictionary<
-                            ImportDefinition,
-                            List<IDisposable>
-                        >();
+                        _importedDisposableExports =
+                            new Dictionary<ImportDefinition, List<IDisposable>>();
                     }
                     _importedDisposableExports[import] = disposableExports;
                 }

@@ -414,9 +414,8 @@ namespace System.Collections.Concurrent.Tests
         private class DisposeTrackingEnumerable<T> : IEnumerable<T>
         {
             protected IEnumerable<T> m_data;
-            List<DisposeTrackingEnumerator<T>> s_enumerators = new List<
-                DisposeTrackingEnumerator<T>
-            >();
+            List<DisposeTrackingEnumerator<T>> s_enumerators =
+                new List<DisposeTrackingEnumerator<T>>();
 
             public DisposeTrackingEnumerable(IEnumerable<T> enumerable)
             {

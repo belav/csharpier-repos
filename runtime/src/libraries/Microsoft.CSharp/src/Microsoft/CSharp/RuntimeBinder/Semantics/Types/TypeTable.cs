@@ -53,10 +53,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private static readonly Dictionary<
             KeyPair<AggregateSymbol, KeyPair<AggregateType, TypeArray>>,
             AggregateType
-        > s_aggregateTable = new Dictionary<
-            KeyPair<AggregateSymbol, KeyPair<AggregateType, TypeArray>>,
-            AggregateType
-        >();
+        > s_aggregateTable =
+            new Dictionary<
+                KeyPair<AggregateSymbol, KeyPair<AggregateType, TypeArray>>,
+                AggregateType
+            >();
 
         private static readonly Dictionary<KeyPair<CType, int>, ArrayType> s_arrayTable =
             new Dictionary<KeyPair<CType, int>, ArrayType>();
@@ -67,14 +68,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         > s_parameterModifierTable = new Dictionary<KeyPair<CType, bool>, ParameterModifierType>();
 
         // One way hashes
-        private static readonly Dictionary<CType, PointerType> s_pointerTable = new Dictionary<
-            CType,
-            PointerType
-        >();
-        private static readonly Dictionary<CType, NullableType> s_nullableTable = new Dictionary<
-            CType,
-            NullableType
-        >();
+        private static readonly Dictionary<CType, PointerType> s_pointerTable =
+            new Dictionary<CType, PointerType>();
+        private static readonly Dictionary<CType, NullableType> s_nullableTable =
+            new Dictionary<CType, NullableType>();
 
         private static KeyPair<TKey1, TKey2> MakeKey<TKey1, TKey2>(TKey1 key1, TKey2 key2) =>
             new KeyPair<TKey1, TKey2>(key1, key2);

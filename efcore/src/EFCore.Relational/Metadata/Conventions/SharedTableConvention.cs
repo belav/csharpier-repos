@@ -51,10 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         )
         {
             var maxLength = modelBuilder.Metadata.GetMaxIdentifierLength();
-            var tables = new Dictionary<
-                (string TableName, string? Schema),
-                List<IConventionEntityType>
-            >();
+            var tables =
+                new Dictionary<(string TableName, string? Schema), List<IConventionEntityType>>();
 
             TryUniquifyTableNames(modelBuilder.Metadata, tables, maxLength);
 
@@ -164,10 +162,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                     if (!clashingTables.TryGetValue(table, out var clashingSubTables))
                     {
-                        clashingSubTables = new Dictionary<
-                            (string Name, string? Schema),
-                            List<IConventionEntityType>
-                        >();
+                        clashingSubTables =
+                            new Dictionary<
+                                (string Name, string? Schema),
+                                List<IConventionEntityType>
+                            >();
                         clashingTables[table] = clashingSubTables;
                     }
 

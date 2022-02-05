@@ -485,10 +485,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         _lazyTreesWithHiddenRegionsMap = TreatAllCodeAsNonGeneratedCode
                             ? null
                             : new ConcurrentDictionary<SyntaxTree, bool>();
-                        _lazySuppressedAnalyzersForTreeMap = new ConcurrentDictionary<
-                            SyntaxTree,
-                            ImmutableHashSet<DiagnosticAnalyzer>
-                        >();
+                        _lazySuppressedAnalyzersForTreeMap =
+                            new ConcurrentDictionary<
+                                SyntaxTree,
+                                ImmutableHashSet<DiagnosticAnalyzer>
+                            >();
                         _lazyGeneratedCodeAttribute =
                             analyzerExecutor.Compilation?.GetTypeByMetadataName(
                                 "System.CodeDom.Compiler.GeneratedCodeAttribute"
@@ -516,10 +517,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                         if (this.AnalyzerActions.SymbolStartActionsCount > 0)
                         {
-                            _lazyPerSymbolAnalyzerActionsCache = new ConcurrentDictionary<
-                                (INamespaceOrTypeSymbol, DiagnosticAnalyzer),
-                                IGroupedAnalyzerActions
-                            >();
+                            _lazyPerSymbolAnalyzerActionsCache =
+                                new ConcurrentDictionary<
+                                    (INamespaceOrTypeSymbol, DiagnosticAnalyzer),
+                                    IGroupedAnalyzerActions
+                                >();
                         }
                     },
                     cancellationToken

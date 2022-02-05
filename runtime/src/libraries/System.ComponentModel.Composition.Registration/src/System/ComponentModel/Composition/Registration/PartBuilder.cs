@@ -48,12 +48,14 @@ namespace System.ComponentModel.Composition.Registration
             _creationPolicy = CreationPolicy.Any;
             _typeExportBuilders = new List<ExportBuilder>();
             _constructorImportBuilders = new List<ImportBuilder>();
-            _propertyExports = new List<
-                Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ExportBuilder>, Type>
-            >();
-            _propertyImports = new List<
-                Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ImportBuilder>, Type>
-            >();
+            _propertyExports =
+                new List<
+                    Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ExportBuilder>, Type>
+                >();
+            _propertyImports =
+                new List<
+                    Tuple<Predicate<PropertyInfo>, Action<PropertyInfo, ImportBuilder>, Type>
+                >();
             _interfaceExports = new List<Tuple<Predicate<Type>, Action<Type, ExportBuilder>>>();
         }
 

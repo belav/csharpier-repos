@@ -438,11 +438,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
         public static void ForStatement_MultipleParameters()
         {
             // ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclass.genclass006.genclass006
-            MemberClassMultipleParams<int, string, Test> mc = new MemberClassMultipleParams<
-                int,
-                string,
-                Test
-            >();
+            MemberClassMultipleParams<int, string, Test> mc =
+                new MemberClassMultipleParams<int, string, Test>();
             dynamic dy = mc;
             string u = null;
             Test v = null;

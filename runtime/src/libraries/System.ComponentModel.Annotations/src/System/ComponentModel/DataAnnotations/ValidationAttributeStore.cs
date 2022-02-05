@@ -19,10 +19,8 @@ namespace System.ComponentModel.DataAnnotations
     /// </remarks>
     internal sealed class ValidationAttributeStore
     {
-        private readonly Dictionary<Type, TypeStoreItem> _typeStoreItems = new Dictionary<
-            Type,
-            TypeStoreItem
-        >();
+        private readonly Dictionary<Type, TypeStoreItem> _typeStoreItems =
+            new Dictionary<Type, TypeStoreItem>();
 
         /// <summary>
         ///     Gets the singleton <see cref="ValidationAttributeStore" />

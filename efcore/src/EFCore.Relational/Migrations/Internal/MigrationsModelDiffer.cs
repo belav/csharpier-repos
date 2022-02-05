@@ -2019,13 +2019,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 return null;
             }
 
-            var keyMapping = new Dictionary<
-                IEntityType,
-                Dictionary<
-                    (IKey, ITable),
-                    List<(IProperty Property, ValueConverter? SourceConverter, ValueConverter? TargetConverter)>
-                >
-            >();
+            var keyMapping =
+                new Dictionary<
+                    IEntityType,
+                    Dictionary<
+                        (IKey, ITable),
+                        List<(IProperty Property, ValueConverter? SourceConverter, ValueConverter? TargetConverter)>
+                    >
+                >();
             foreach (var sourceEntityType in source.Model.GetEntityTypes())
             {
                 foreach (var sourceTableMapping in sourceEntityType.GetTableMappings())
@@ -3073,14 +3074,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         /// </summary>
         protected class DiffContext
         {
-            private readonly IDictionary<object, object> _targetToSource = new Dictionary<
-                object,
-                object
-            >();
-            private readonly IDictionary<object, object> _sourceToTarget = new Dictionary<
-                object,
-                object
-            >();
+            private readonly IDictionary<object, object> _targetToSource =
+                new Dictionary<object, object>();
+            private readonly IDictionary<object, object> _sourceToTarget =
+                new Dictionary<object, object>();
 
             private readonly IDictionary<ITable, CreateTableOperation> _createTableOperations =
                 new Dictionary<ITable, CreateTableOperation>();

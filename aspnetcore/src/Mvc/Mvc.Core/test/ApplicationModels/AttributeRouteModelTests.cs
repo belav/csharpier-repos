@@ -567,11 +567,8 @@ public class AttributeRouteModelTests
         get
         {
             // AttributeRoute on the controller, attribute route on the action, expected combined attribute route.
-            var data = new TheoryData<
-                AttributeRouteModel,
-                AttributeRouteModel,
-                AttributeRouteModel
-            >();
+            var data =
+                new TheoryData<AttributeRouteModel, AttributeRouteModel, AttributeRouteModel>();
             data.Add(null, Create("Index"), Create("Index"));
             data.Add(Create(null), Create("Index"), Create("Index"));
             data.Add(Create("Home"), null, Create("Home"));

@@ -89,10 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         // the current set of frame pointers in scope.  Each is either a local variable (where introduced),
         // or the "this" parameter when at the top level.  Keys in this map are never constructed types.
-        private readonly Dictionary<NamedTypeSymbol, Symbol> _framePointers = new Dictionary<
-            NamedTypeSymbol,
-            Symbol
-        >();
+        private readonly Dictionary<NamedTypeSymbol, Symbol> _framePointers =
+            new Dictionary<NamedTypeSymbol, Symbol>();
 
         // The set of original locals that should be assigned to proxies
         // if lifted. This is useful for the expression evaluator where

@@ -126,10 +126,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var snippetsSupported =
                 context.ClientCapabilities.TextDocument?.Completion?.CompletionItem?.SnippetSupport
                 ?? false;
-            var commitCharactersRuleCache = new Dictionary<
-                ImmutableArray<CharacterSetModificationRule>,
-                ImmutableArray<string>
-            >();
+            var commitCharactersRuleCache =
+                new Dictionary<
+                    ImmutableArray<CharacterSetModificationRule>,
+                    ImmutableArray<string>
+                >();
 
             // Cache the completion list so we can avoid recomputation in the resolve handler
             var resultId = _completionListCache.UpdateCache(request.TextDocument, list);

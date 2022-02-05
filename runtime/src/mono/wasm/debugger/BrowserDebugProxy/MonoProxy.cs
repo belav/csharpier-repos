@@ -22,10 +22,8 @@ namespace Microsoft.WebAssembly.Diagnostics
         private IList<string> urlSymbolServerList;
         private static HttpClient client = new HttpClient();
         private HashSet<SessionId> sessions = new HashSet<SessionId>();
-        private Dictionary<SessionId, ExecutionContext> contexts = new Dictionary<
-            SessionId,
-            ExecutionContext
-        >();
+        private Dictionary<SessionId, ExecutionContext> contexts =
+            new Dictionary<SessionId, ExecutionContext>();
         private const string sPauseOnUncaught = "pause_on_uncaught";
         private const string sPauseOnCaught = "pause_on_caught";
 

@@ -259,10 +259,8 @@ namespace R2RDump
     class R2RDump
     {
         private readonly DumpOptions _options;
-        private readonly Dictionary<ReadyToRunSectionType, bool> _selectedSections = new Dictionary<
-            ReadyToRunSectionType,
-            bool
-        >();
+        private readonly Dictionary<ReadyToRunSectionType, bool> _selectedSections =
+            new Dictionary<ReadyToRunSectionType, bool>();
         private readonly Encoding _encoding;
         private readonly TextWriter _writer;
         private Dumper _dumper;

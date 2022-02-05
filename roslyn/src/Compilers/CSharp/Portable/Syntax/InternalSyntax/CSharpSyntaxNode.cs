@@ -280,10 +280,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         private static readonly ConditionalWeakTable<
             SyntaxNode,
             Dictionary<CodeAnalysis.SyntaxTrivia, WeakReference<SyntaxNode>>
-        > s_structuresTable = new ConditionalWeakTable<
-            SyntaxNode,
-            Dictionary<CodeAnalysis.SyntaxTrivia, WeakReference<SyntaxNode>>
-        >();
+        > s_structuresTable =
+            new ConditionalWeakTable<
+                SyntaxNode,
+                Dictionary<CodeAnalysis.SyntaxTrivia, WeakReference<SyntaxNode>>
+            >();
 
         /// <summary>
         /// Gets the syntax node represented the structure of this trivia, if any. The HasStructure property can be used to

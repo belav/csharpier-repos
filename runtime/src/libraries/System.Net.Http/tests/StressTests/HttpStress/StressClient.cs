@@ -279,10 +279,11 @@ namespace HttpStress
             public StressFailureType(string errorText)
             {
                 ErrorText = errorText;
-                Failures = new Dictionary<
-                    int,
-                    List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>
-                >();
+                Failures =
+                    new Dictionary<
+                        int,
+                        List<(DateTime timestamp, TimeSpan duration, bool isCancelled)>
+                    >();
             }
 
             public int FailureCount => Failures.Values.Select(x => x.Count).Sum();

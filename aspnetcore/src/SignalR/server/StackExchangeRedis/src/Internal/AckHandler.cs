@@ -11,10 +11,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal;
 
 internal class AckHandler : IDisposable
 {
-    private readonly ConcurrentDictionary<int, AckInfo> _acks = new ConcurrentDictionary<
-        int,
-        AckInfo
-    >();
+    private readonly ConcurrentDictionary<int, AckInfo> _acks =
+        new ConcurrentDictionary<int, AckInfo>();
     private readonly Timer _timer;
     private readonly long _ackThreshold = (long)TimeSpan.FromSeconds(30).TotalMilliseconds;
     private readonly TimeSpan _ackInterval = TimeSpan.FromSeconds(5);

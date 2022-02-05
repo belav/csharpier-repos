@@ -83,10 +83,8 @@ namespace System.Web.Helpers
         {
             // todo: extract well defined subset for special use?
 
-            IDictionary<string, string> serverVariablesResult = new SortedDictionary<
-                string,
-                string
-            >();
+            IDictionary<string, string> serverVariablesResult =
+                new SortedDictionary<string, string>();
             NameValueCollection serverVariables;
 
             // todo: better way to deal with security; query config for trust level?

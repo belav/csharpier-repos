@@ -300,9 +300,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     {
                         if (multipleExports == null)
                         {
-                            multipleExports = new List<
-                                Tuple<ComposablePartDefinition, ExportDefinition>
-                            >();
+                            multipleExports =
+                                new List<Tuple<ComposablePartDefinition, ExportDefinition>>();
                             multipleExports.Add(singleExport);
                         }
                         multipleExports.Add(

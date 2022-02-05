@@ -127,10 +127,8 @@ namespace System.ComponentModel.Composition
     [Export]
     public class TypeDescriptorServices
     {
-        Dictionary<Type, TypeDescriptionProvider> providers = new Dictionary<
-            Type,
-            TypeDescriptionProvider
-        >();
+        Dictionary<Type, TypeDescriptionProvider> providers =
+            new Dictionary<Type, TypeDescriptionProvider>();
 
         internal Dictionary<Type, TypeDescriptionProvider> Providers
         {
@@ -172,10 +170,8 @@ namespace System.ComponentModel.Composition
     public static class MetadataStore
     {
         public static CompositionContainer Container { get; set; }
-        static Dictionary<Type, TypeDescriptionProvider> registeredRedirect = new Dictionary<
-            Type,
-            TypeDescriptionProvider
-        >();
+        static Dictionary<Type, TypeDescriptionProvider> registeredRedirect =
+            new Dictionary<Type, TypeDescriptionProvider>();
 
         public static void AddAttribute(
             Type target,

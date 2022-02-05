@@ -447,10 +447,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private readonly ConcurrentDictionary<
             DiagnosticAnalyzer,
             GeneratedCodeAnalysisFlags
-        > _generatedCodeConfigurationMap = new ConcurrentDictionary<
-            DiagnosticAnalyzer,
-            GeneratedCodeAnalysisFlags
-        >();
+        > _generatedCodeConfigurationMap =
+            new ConcurrentDictionary<DiagnosticAnalyzer, GeneratedCodeAnalysisFlags>();
 
         public bool IsConcurrentAnalyzer(DiagnosticAnalyzer analyzer)
         {
@@ -622,10 +620,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private readonly ConcurrentDictionary<
             DiagnosticAnalyzer,
             StrongBox<AnalyzerActions>
-        > _analyzerActions = new ConcurrentDictionary<
-            DiagnosticAnalyzer,
-            StrongBox<AnalyzerActions>
-        >();
+        > _analyzerActions =
+            new ConcurrentDictionary<DiagnosticAnalyzer, StrongBox<AnalyzerActions>>();
 
         public virtual AnalyzerActions GetAnalyzerActions(DiagnosticAnalyzer analyzer)
         {

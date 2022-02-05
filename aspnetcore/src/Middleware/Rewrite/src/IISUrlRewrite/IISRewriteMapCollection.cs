@@ -8,10 +8,8 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
 internal class IISRewriteMapCollection : IEnumerable<IISRewriteMap>
 {
-    private readonly Dictionary<string, IISRewriteMap> _rewriteMaps = new Dictionary<
-        string,
-        IISRewriteMap
-    >();
+    private readonly Dictionary<string, IISRewriteMap> _rewriteMaps =
+        new Dictionary<string, IISRewriteMap>();
 
     public void Add(IISRewriteMap rewriteMap)
     {

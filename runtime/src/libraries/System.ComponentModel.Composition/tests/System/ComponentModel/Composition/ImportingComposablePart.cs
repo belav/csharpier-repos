@@ -13,10 +13,8 @@ namespace System.ComponentModel.Composition
     {
         private readonly List<ImportDefinition> _importDefinitions = new List<ImportDefinition>();
         private readonly List<ExportDefinition> _exportDefinitions = new List<ExportDefinition>();
-        private Dictionary<ImportDefinition, object> _importValues = new Dictionary<
-            ImportDefinition,
-            object
-        >();
+        private Dictionary<ImportDefinition, object> _importValues =
+            new Dictionary<ImportDefinition, object>();
 
         public ImportingComposablePart(
             ImportCardinality cardinality,

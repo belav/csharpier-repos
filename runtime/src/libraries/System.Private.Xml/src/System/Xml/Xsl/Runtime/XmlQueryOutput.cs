@@ -53,10 +53,8 @@ namespace System.Xml.Xsl.Runtime
         private Stack<string> _stkNames; // Keep stack of name parts computed during StartElement
         private XPathNodeType _rootType; // NodeType of the root of the tree
 
-        private readonly Dictionary<string, string> _usedPrefixes = new Dictionary<
-            string,
-            string
-        >(); //The prefies that used in the current scope
+        private readonly Dictionary<string, string> _usedPrefixes =
+            new Dictionary<string, string>(); //The prefies that used in the current scope
 
         /// <summary>
         /// This constructor is internal so that external users cannot construct it (and therefore we do not have to test it separately).

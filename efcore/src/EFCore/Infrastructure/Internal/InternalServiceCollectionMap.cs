@@ -18,10 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
     /// </summary>
     public class InternalServiceCollectionMap : IInternalServiceCollectionMap
     {
-        private readonly IDictionary<Type, IList<int>> _serviceMap = new Dictionary<
-            Type,
-            IList<int>
-        >();
+        private readonly IDictionary<Type, IList<int>> _serviceMap =
+            new Dictionary<Type, IList<int>>();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

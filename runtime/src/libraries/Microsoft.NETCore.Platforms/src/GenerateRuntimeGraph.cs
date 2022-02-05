@@ -341,10 +341,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             RuntimeGraph graph
         )
         {
-            Dictionary<string, IEnumerable<string>> compatibilityMap = new Dictionary<
-                string,
-                IEnumerable<string>
-            >();
+            Dictionary<string, IEnumerable<string>> compatibilityMap =
+                new Dictionary<string, IEnumerable<string>>();
 
             foreach (var rid in graph.Runtimes.Keys.OrderBy(rid => rid, StringComparer.Ordinal))
             {

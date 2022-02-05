@@ -78,10 +78,8 @@ namespace R2RTest
 
             foreach (CompilerRunner runner in _compilerRunners)
             {
-                allMethodsPerModulePerCompiler[(int)runner.Index] = new Dictionary<
-                    string,
-                    HashSet<string>
-                >();
+                allMethodsPerModulePerCompiler[(int)runner.Index] =
+                    new Dictionary<string, HashSet<string>>();
             }
 
             foreach (BuildFolder folder in FoldersToBuild)
@@ -93,10 +91,8 @@ namespace R2RTest
                     ];
                     foreach (CompilerRunner runner in _compilerRunners)
                     {
-                        appMethodsPerModulePerCompiler[(int)runner.Index] = new Dictionary<
-                            string,
-                            HashSet<string>
-                        >();
+                        appMethodsPerModulePerCompiler[(int)runner.Index] =
+                            new Dictionary<string, HashSet<string>>();
                         folder.AddModuleToJittedMethodsMapping(
                             allMethodsPerModulePerCompiler[(int)runner.Index],
                             exeIndex,

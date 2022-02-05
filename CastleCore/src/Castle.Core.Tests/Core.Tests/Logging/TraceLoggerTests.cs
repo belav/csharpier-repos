@@ -127,10 +127,8 @@ namespace Castle.Core.Logging.Tests
                 traceName = initializationData;
             }
 
-            static Dictionary<string, StringBuilder> traces = new Dictionary<
-                string,
-                StringBuilder
-            >();
+            static Dictionary<string, StringBuilder> traces =
+                new Dictionary<string, StringBuilder>();
             readonly string traceName;
 
             StringBuilder GetStringBuilder()

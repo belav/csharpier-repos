@@ -291,10 +291,8 @@ namespace ILCompiler
                     instructionSetParams.Add(instructionSet);
                 }
 
-                Dictionary<string, bool> instructionSetSpecification = new Dictionary<
-                    string,
-                    bool
-                >();
+                Dictionary<string, bool> instructionSetSpecification =
+                    new Dictionary<string, bool>();
                 foreach (string instructionSetSpecifier in instructionSetParams)
                 {
                     string instructionSet = instructionSetSpecifier.Substring(

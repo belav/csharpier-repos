@@ -21,15 +21,11 @@ namespace System.Text.Json.Tests
     {
         private static readonly byte[] Utf8Bom = { 0xEF, 0xBB, 0xBF };
 
-        private static readonly Dictionary<TestCaseType, string> s_expectedConcat = new Dictionary<
-            TestCaseType,
-            string
-        >();
+        private static readonly Dictionary<TestCaseType, string> s_expectedConcat =
+            new Dictionary<TestCaseType, string>();
 
-        private static readonly Dictionary<TestCaseType, string> s_compactJson = new Dictionary<
-            TestCaseType,
-            string
-        >();
+        private static readonly Dictionary<TestCaseType, string> s_compactJson =
+            new Dictionary<TestCaseType, string>();
 
         public static IEnumerable<object[]> BadBOMCases { get; } =
             new object[][]

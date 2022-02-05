@@ -39,10 +39,8 @@ namespace System.Web.Mvc.ExpressionUtil
             private static readonly ConcurrentDictionary<
                 ExpressionFingerprintChain,
                 Hoisted<TIn, TOut>
-            > _fingerprintedCache = new ConcurrentDictionary<
-                ExpressionFingerprintChain,
-                Hoisted<TIn, TOut>
-            >();
+            > _fingerprintedCache =
+                new ConcurrentDictionary<ExpressionFingerprintChain, Hoisted<TIn, TOut>>();
 
             public static Func<TIn, TOut> Compile(Expression<Func<TIn, TOut>> expr)
             {

@@ -46,14 +46,12 @@ namespace System.Threading.Tasks.Test
         private long _startIndex = 0; // start index for the loop
 
         // Hold list of actions to be performed
-        private List<Action<long, ParallelLoopState>> _actions = new List<
-            Action<long, ParallelLoopState>
-        >();
+        private List<Action<long, ParallelLoopState>> _actions =
+            new List<Action<long, ParallelLoopState>>();
 
         // Hold list of verification
-        private Queue<Action<ParallelLoopResult?>> _verifications = new Queue<
-            Action<ParallelLoopResult?>
-        >();
+        private Queue<Action<ParallelLoopResult?>> _verifications =
+            new Queue<Action<ParallelLoopResult?>>();
 
         private volatile bool _isStopped = false; // Flag to indicate that we called Stop() on the Parallel state
         private long? _lowestBreakIter = null; // LowestBreakIteration value holder, null indicates that Break hasn't been called

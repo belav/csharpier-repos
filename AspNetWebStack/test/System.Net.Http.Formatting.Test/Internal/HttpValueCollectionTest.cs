@@ -59,10 +59,8 @@ namespace System.Net.Http.Internal
             {
                 get
                 {
-                    TheoryDataSet<HttpValueCollection, string> dataSet = new TheoryDataSet<
-                        HttpValueCollection,
-                        string
-                    >();
+                    TheoryDataSet<HttpValueCollection, string> dataSet =
+                        new TheoryDataSet<HttpValueCollection, string>();
 
                     var hvc1 = CreateInstance();
                     hvc1.Add(null, null);

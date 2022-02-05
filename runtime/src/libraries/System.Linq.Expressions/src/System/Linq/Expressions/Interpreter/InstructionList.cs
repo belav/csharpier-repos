@@ -283,14 +283,10 @@ namespace System.Linq.Expressions.Interpreter
         internal Instruction GetInstruction(int index) => _instructions[index];
 
 #if STATS
-        private static Dictionary<string, int> _executedInstructions = new Dictionary<
-            string,
-            int
-        >();
-        private static Dictionary<string, Dictionary<object, bool>> _instances = new Dictionary<
-            string,
-            Dictionary<object, bool>
-        >();
+        private static Dictionary<string, int> _executedInstructions =
+            new Dictionary<string, int>();
+        private static Dictionary<string, Dictionary<object, bool>> _instances =
+            new Dictionary<string, Dictionary<object, bool>>();
 
         static InstructionList()
         {
@@ -965,10 +961,8 @@ namespace System.Linq.Expressions.Interpreter
 
         #region Fields and Methods
 
-        private static readonly Dictionary<FieldInfo, Instruction> s_loadFields = new Dictionary<
-            FieldInfo,
-            Instruction
-        >();
+        private static readonly Dictionary<FieldInfo, Instruction> s_loadFields =
+            new Dictionary<FieldInfo, Instruction>();
 
         public void EmitLoadField(FieldInfo field)
         {

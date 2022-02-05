@@ -13,10 +13,8 @@ namespace System.Linq.Expressions.Compiler
         where TValue : class
         where TKey : notnull
     {
-        private readonly Dictionary<TKey, Stack<TValue>> _data = new Dictionary<
-            TKey,
-            Stack<TValue>
-        >();
+        private readonly Dictionary<TKey, Stack<TValue>> _data =
+            new Dictionary<TKey, Stack<TValue>>();
 
         internal void Push(TKey key, TValue value)
         {

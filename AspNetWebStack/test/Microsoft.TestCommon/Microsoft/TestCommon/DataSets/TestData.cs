@@ -333,10 +333,8 @@ namespace Microsoft.TestCommon
             }
 
             this.Type = type;
-            this.registeredTestDataVariations = new Dictionary<
-                TestDataVariations,
-                TestDataVariationProvider
-            >();
+            this.registeredTestDataVariations =
+                new Dictionary<TestDataVariations, TestDataVariationProvider>();
         }
 
         /// <summary>

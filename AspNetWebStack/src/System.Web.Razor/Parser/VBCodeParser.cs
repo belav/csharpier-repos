@@ -43,10 +43,8 @@ namespace System.Web.Razor.Parser
             "sessionstate"
         };
 
-        private Dictionary<VBKeyword, Func<bool>> _keywordHandlers = new Dictionary<
-            VBKeyword,
-            Func<bool>
-        >();
+        private Dictionary<VBKeyword, Func<bool>> _keywordHandlers =
+            new Dictionary<VBKeyword, Func<bool>>();
         private Dictionary<string, Func<bool>> _directiveHandlers = new Dictionary<
             string,
             Func<bool>

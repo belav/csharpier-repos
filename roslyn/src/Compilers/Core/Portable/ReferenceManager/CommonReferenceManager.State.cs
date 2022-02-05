@@ -549,10 +549,11 @@ namespace Microsoft.CodeAnalysis
                     if (!referenceMap[i].MergedReferences.IsEmpty)
                     {
                         (
-                            mergedAssemblyReferencesMapOpt ??= new Dictionary<
-                                MetadataReference,
-                                ImmutableArray<MetadataReference>
-                            >()
+                            mergedAssemblyReferencesMapOpt ??=
+                                new Dictionary<
+                                    MetadataReference,
+                                    ImmutableArray<MetadataReference>
+                                >()
                         ).Add(reference, referenceMap[i].MergedReferences);
                     }
 

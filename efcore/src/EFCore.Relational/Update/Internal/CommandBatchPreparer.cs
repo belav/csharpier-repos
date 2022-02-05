@@ -206,10 +206,11 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                     {
                         if (sharedTablesCommandsMap == null)
                         {
-                            sharedTablesCommandsMap = new Dictionary<
-                                (string, string?),
-                                SharedTableEntryMap<IModificationCommand>
-                            >();
+                            sharedTablesCommandsMap =
+                                new Dictionary<
+                                    (string, string?),
+                                    SharedTableEntryMap<IModificationCommand>
+                                >();
                         }
 
                         var tableKey = (table.Name, table.Schema);
@@ -559,10 +560,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             Multigraph<IReadOnlyModificationCommand, IAnnotatable> commandGraph
         )
         {
-            var predecessorsMap = new Dictionary<
-                IKeyValueIndex,
-                List<IReadOnlyModificationCommand>
-            >();
+            var predecessorsMap =
+                new Dictionary<IKeyValueIndex, List<IReadOnlyModificationCommand>>();
             foreach (var command in commandGraph.Vertices)
             {
                 if (
@@ -807,10 +806,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                 IIndex,
                 Dictionary<object[], IReadOnlyModificationCommand>
             >? indexPredecessorsMap = null;
-            var keyPredecessorsMap = new Dictionary<
-                (IKey, IKeyValueIndex),
-                List<IReadOnlyModificationCommand>
-            >();
+            var keyPredecessorsMap =
+                new Dictionary<(IKey, IKeyValueIndex), List<IReadOnlyModificationCommand>>();
             foreach (var command in commandGraph.Vertices)
             {
                 if (
@@ -838,10 +835,11 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                         var valueFactory = index.GetNullableValueFactory<object[]>();
                         if (valueFactory.TryCreateFromOriginalValues(entry, out var indexValue))
                         {
-                            indexPredecessorsMap ??= new Dictionary<
-                                IIndex,
-                                Dictionary<object[], IReadOnlyModificationCommand>
-                            >();
+                            indexPredecessorsMap ??=
+                                new Dictionary<
+                                    IIndex,
+                                    Dictionary<object[], IReadOnlyModificationCommand>
+                                >();
                             if (
                                 !indexPredecessorsMap.TryGetValue(
                                     index,
@@ -983,10 +981,11 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             Multigraph<IReadOnlyModificationCommand, IAnnotatable> modificationCommandGraph
         )
         {
-            var deletedDictionary = new Dictionary<
-                (string, string?),
-                (List<IReadOnlyModificationCommand> List, bool EdgesAdded)
-            >();
+            var deletedDictionary =
+                new Dictionary<
+                    (string, string?),
+                    (List<IReadOnlyModificationCommand> List, bool EdgesAdded)
+                >();
 
             foreach (var command in modificationCommandGraph.Vertices)
             {

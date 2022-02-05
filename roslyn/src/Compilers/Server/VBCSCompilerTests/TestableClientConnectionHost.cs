@@ -15,9 +15,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
     {
         private readonly object _guard = new object();
         private TaskCompletionSource<IClientConnection>? _finalTaskCompletionSource;
-        private readonly Queue<Func<Task<IClientConnection>>> _waitingTasks = new Queue<
-            Func<Task<IClientConnection>>
-        >();
+        private readonly Queue<Func<Task<IClientConnection>>> _waitingTasks =
+            new Queue<Func<Task<IClientConnection>>>();
 
         public bool IsListening { get; set; }
 

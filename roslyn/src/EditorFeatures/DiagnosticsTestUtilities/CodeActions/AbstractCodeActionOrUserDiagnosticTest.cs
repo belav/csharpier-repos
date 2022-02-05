@@ -1134,10 +1134,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 return;
             }
 
-            var diagnosticsAndEquivalenceKeyToTitleMap = new Dictionary<
-                (Diagnostic diagnostic, string equivalenceKey),
-                string
-            >();
+            var diagnosticsAndEquivalenceKeyToTitleMap =
+                new Dictionary<(Diagnostic diagnostic, string equivalenceKey), string>();
             foreach (var fix in fixes)
             {
                 VerifyCodeAction(

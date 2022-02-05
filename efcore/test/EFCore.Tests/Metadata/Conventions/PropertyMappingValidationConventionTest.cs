@@ -275,10 +275,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected virtual Action<Model> CreatePropertyMappingValidator()
         {
             var validator = CreateModelValidator();
-            var logger = new TestLogger<
-                DbLoggerCategory.Model.Validation,
-                TestLoggingDefinitions
-            >();
+            var logger =
+                new TestLogger<DbLoggerCategory.Model.Validation, TestLoggingDefinitions>();
 
             var validatePropertyMappingMethod = typeof(ModelValidator)
                 .GetRuntimeMethods()

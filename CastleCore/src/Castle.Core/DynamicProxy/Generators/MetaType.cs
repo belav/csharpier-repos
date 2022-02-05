@@ -23,10 +23,8 @@ namespace Castle.DynamicProxy.Generators
             new MetaTypeElementCollection<MetaEvent>();
         private readonly MetaTypeElementCollection<MetaMethod> methods =
             new MetaTypeElementCollection<MetaMethod>();
-        private readonly Dictionary<MethodInfo, MetaMethod> methodsIndex = new Dictionary<
-            MethodInfo,
-            MetaMethod
-        >();
+        private readonly Dictionary<MethodInfo, MetaMethod> methodsIndex =
+            new Dictionary<MethodInfo, MetaMethod>();
         private readonly MetaTypeElementCollection<MetaProperty> properties =
             new MetaTypeElementCollection<MetaProperty>();
 

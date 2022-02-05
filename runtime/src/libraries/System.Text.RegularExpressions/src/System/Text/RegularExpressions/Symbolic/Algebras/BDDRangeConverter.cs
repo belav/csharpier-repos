@@ -14,10 +14,8 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>
         /// Cache for all range conversions. Having this cache is required to avoid exponential running time.
         /// </summary>
-        private readonly Dictionary<BDD, (uint, uint)[]> _rangeCache = new Dictionary<
-            BDD,
-            (uint, uint)[]
-        >();
+        private readonly Dictionary<BDD, (uint, uint)[]> _rangeCache =
+            new Dictionary<BDD, (uint, uint)[]>();
 
         private BDDRangeConverter() { }
 

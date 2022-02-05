@@ -142,10 +142,8 @@ namespace Internal.CommandLine
                 }
 
                 HashSet<string> inputOptionNames = new HashSet<string>(inputOptions);
-                Dictionary<string, string> inputToReproPackageFileName = new Dictionary<
-                    string,
-                    string
-                >();
+                Dictionary<string, string> inputToReproPackageFileName =
+                    new Dictionary<string, string>();
 
                 List<string> rspFile = new List<string>();
                 foreach (var option in argSyntax.GetOptions())
@@ -161,10 +159,8 @@ namespace Internal.CommandLine
                         {
                             if (inputOptionNames.Contains(option.GetDisplayName()))
                             {
-                                Dictionary<string, string> dictionary = new Dictionary<
-                                    string,
-                                    string
-                                >();
+                                Dictionary<string, string> dictionary =
+                                    new Dictionary<string, string>();
                                 foreach (string optInList in (IEnumerable)option.Value)
                                 {
                                     Helpers.AppendExpandedPaths(dictionary, optInList, false);

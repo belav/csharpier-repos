@@ -33,10 +33,8 @@ namespace System.Composition.TypedParts.Discovery
         private ConstructorInfo _constructor;
         private CompositeActivator _partActivator;
 
-        private static readonly IDictionary<string, object> s_noMetadata = new Dictionary<
-            string,
-            object
-        >();
+        private static readonly IDictionary<string, object> s_noMetadata =
+            new Dictionary<string, object>();
         private static readonly MethodInfo s_activatorInvoke = typeof(CompositeActivator)
             .GetTypeInfo()
             .GetDeclaredMethod("Invoke");

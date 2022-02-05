@@ -59,10 +59,8 @@ namespace System.Data.ProviderBase
             // HybridDictionary does not create any sub-objects until add
             // so it is safe to use for non-pooled connection as long as
             // we check _poolGroupOptions first
-            _poolCollection = new ConcurrentDictionary<
-                DbConnectionPoolIdentity,
-                DbConnectionPool
-            >();
+            _poolCollection =
+                new ConcurrentDictionary<DbConnectionPoolIdentity, DbConnectionPool>();
             _state = PoolGroupStateActive;
         }
 
@@ -108,10 +106,8 @@ namespace System.Data.ProviderBase
                 if (!_poolCollection.IsEmpty)
                 {
                     oldPoolCollection = _poolCollection;
-                    _poolCollection = new ConcurrentDictionary<
-                        DbConnectionPoolIdentity,
-                        DbConnectionPool
-                    >();
+                    _poolCollection =
+                        new ConcurrentDictionary<DbConnectionPoolIdentity, DbConnectionPool>();
                 }
             }
 
@@ -257,10 +253,8 @@ namespace System.Data.ProviderBase
             {
                 if (!_poolCollection.IsEmpty)
                 {
-                    var newPoolCollection = new ConcurrentDictionary<
-                        DbConnectionPoolIdentity,
-                        DbConnectionPool
-                    >();
+                    var newPoolCollection =
+                        new ConcurrentDictionary<DbConnectionPoolIdentity, DbConnectionPool>();
 
                     foreach (var entry in _poolCollection)
                     {

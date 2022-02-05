@@ -419,10 +419,8 @@ namespace ILCompiler
                 {
                     if (_typeRefsInCompilationModuleSet == null)
                     {
-                        var typeRefsInCompilationModuleSet = new Dictionary<
-                            TypeDesc,
-                            ModuleToken
-                        >();
+                        var typeRefsInCompilationModuleSet =
+                            new Dictionary<TypeDesc, ModuleToken>();
 
                         foreach (var module in _compilationModuleSet)
                         {

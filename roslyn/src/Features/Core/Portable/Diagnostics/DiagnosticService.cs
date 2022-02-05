@@ -64,10 +64,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             );
 
             _gate = new object();
-            _map = new Dictionary<
-                IDiagnosticUpdateSource,
-                Dictionary<Workspace, Dictionary<object, Data>>
-            >();
+            _map =
+                new Dictionary<
+                    IDiagnosticUpdateSource,
+                    Dictionary<Workspace, Dictionary<object, Data>>
+                >();
 
             _eventListenerTracker = new EventListenerTracker<IDiagnosticService>(
                 eventListeners,

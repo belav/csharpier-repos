@@ -9,10 +9,8 @@ namespace System.CodeDom.Compiler
 {
     public sealed class CompilerInfo
     {
-        internal readonly IDictionary<string, string> _providerOptions = new Dictionary<
-            string,
-            string
-        >();
+        internal readonly IDictionary<string, string> _providerOptions =
+            new Dictionary<string, string>();
         internal string _codeDomProviderTypeName; // This can never by null
         internal CompilerParameters _compilerParams; // This can never by null
         internal string[] _compilerLanguages; // This can never by null

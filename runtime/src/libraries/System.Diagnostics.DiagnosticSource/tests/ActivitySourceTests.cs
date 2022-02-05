@@ -635,9 +635,8 @@ namespace System.Diagnostics.Tests
                             )
                         );
 
-                        List<KeyValuePair<string, object>> attributes = new List<
-                            KeyValuePair<string, object>
-                        >();
+                        List<KeyValuePair<string, object>> attributes =
+                            new List<KeyValuePair<string, object>>();
                         attributes.Add(new KeyValuePair<string, object>("tag1", "tagValue1"));
                         attributes.Add(new KeyValuePair<string, object>("tag2", "tagValue2"));
                         attributes.Add(new KeyValuePair<string, object>("tag3", "tagValue3"));

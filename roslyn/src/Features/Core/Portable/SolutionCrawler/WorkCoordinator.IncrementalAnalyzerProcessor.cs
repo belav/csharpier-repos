@@ -563,10 +563,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         > analyzerProviders
                     )
                     {
-                        _analyzerMap = new Dictionary<
-                            Workspace,
-                            ImmutableArray<(IIncrementalAnalyzer analyzer, bool highPriorityForActiveFile)>
-                        >();
+                        _analyzerMap =
+                            new Dictionary<
+                                Workspace,
+                                ImmutableArray<(IIncrementalAnalyzer analyzer, bool highPriorityForActiveFile)>
+                            >();
                         _analyzerProviders = analyzerProviders.ToList();
                     }
 

@@ -11,10 +11,8 @@ namespace System.Web.Mvc
     )]
     public class ModelClientValidationRule
     {
-        private readonly Dictionary<string, object> _validationParameters = new Dictionary<
-            string,
-            object
-        >();
+        private readonly Dictionary<string, object> _validationParameters =
+            new Dictionary<string, object>();
         private string _validationType;
 
         public string ErrorMessage { get; set; }

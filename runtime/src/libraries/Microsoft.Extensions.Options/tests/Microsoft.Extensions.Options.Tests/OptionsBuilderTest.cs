@@ -667,10 +667,8 @@ namespace Microsoft.Extensions.Options.Tests
 
         public class StartupValidationOptions
         {
-            private Dictionary<Type, IList<string>> _targets = new Dictionary<
-                Type,
-                IList<string>
-            >();
+            private Dictionary<Type, IList<string>> _targets =
+                new Dictionary<Type, IList<string>>();
 
             public IDictionary<Type, IList<string>> ValidationTargets
             {

@@ -127,10 +127,11 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 .SelectAsArray(d => GetContainer(root, d.Location.SourceSpan))
                 .WhereAsArray(t => t.container != null);
 
-            var result = new MultiDictionary<
-                SyntaxNode,
-                (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol>)
-            >();
+            var result =
+                new MultiDictionary<
+                    SyntaxNode,
+                    (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol>)
+                >();
             foreach (var group in containersAndLocations.GroupBy(t => t.container))
             {
                 var container = group.Key;

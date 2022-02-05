@@ -179,12 +179,13 @@ public class SelectTagHelperTest
                 { "__multiple", "multiple" },
             };
 
-            var theoryData = new TheoryData<
-                IEnumerable<SelectListItem>,
-                string,
-                string,
-                IEnumerable<SelectListItem>
-            >();
+            var theoryData =
+                new TheoryData<
+                    IEnumerable<SelectListItem>,
+                    string,
+                    string,
+                    IEnumerable<SelectListItem>
+                >();
             foreach (var items in itemsData)
             {
                 foreach (var attribute in attributeData)

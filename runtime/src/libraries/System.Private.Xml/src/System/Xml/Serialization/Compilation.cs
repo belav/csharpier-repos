@@ -924,17 +924,13 @@ namespace System.Xml.Serialization
 
     internal sealed class TempAssemblyCache
     {
-        private Dictionary<TempAssemblyCacheKey, TempAssembly> _fastCache = new Dictionary<
-            TempAssemblyCacheKey,
-            TempAssembly
-        >();
+        private Dictionary<TempAssemblyCacheKey, TempAssembly> _fastCache =
+            new Dictionary<TempAssemblyCacheKey, TempAssembly>();
         private ConditionalWeakTable<
             Assembly,
             Dictionary<TempAssemblyCacheKey, TempAssembly>
-        > _collectibleCaches = new ConditionalWeakTable<
-            Assembly,
-            Dictionary<TempAssemblyCacheKey, TempAssembly>
-        >();
+        > _collectibleCaches =
+            new ConditionalWeakTable<Assembly, Dictionary<TempAssemblyCacheKey, TempAssembly>>();
 
         internal TempAssembly? this[string? ns, Type t]
         {

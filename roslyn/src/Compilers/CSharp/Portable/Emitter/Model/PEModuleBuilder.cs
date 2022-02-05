@@ -39,10 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         protected readonly ConcurrentDictionary<
             Symbol,
             Cci.IModuleReference
-        > AssemblyOrModuleSymbolToModuleRefMap = new ConcurrentDictionary<
-            Symbol,
-            Cci.IModuleReference
-        >();
+        > AssemblyOrModuleSymbolToModuleRefMap =
+            new ConcurrentDictionary<Symbol, Cci.IModuleReference>();
         private readonly ConcurrentDictionary<Symbol, object> _genericInstanceMap =
             new ConcurrentDictionary<Symbol, object>(
                 Symbols.SymbolEqualityComparer.ConsiderEverything

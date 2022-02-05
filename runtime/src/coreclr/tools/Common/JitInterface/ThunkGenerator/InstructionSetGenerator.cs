@@ -95,22 +95,16 @@ namespace Thunkerator
 
         List<InstructionSetInfo> _instructionSets = new List<InstructionSetInfo>();
         List<InstructionSetImplication> _implications = new List<InstructionSetImplication>();
-        Dictionary<string, HashSet<string>> _64bitVariants = new Dictionary<
-            string,
-            HashSet<string>
-        >();
+        Dictionary<string, HashSet<string>> _64bitVariants =
+            new Dictionary<string, HashSet<string>>();
         SortedDictionary<string, int> _r2rNamesByName = new SortedDictionary<string, int>();
         SortedDictionary<int, string> _r2rNamesByNumber = new SortedDictionary<int, string>();
         SortedSet<string> _architectures = new SortedSet<string>();
-        Dictionary<string, List<string>> _architectureJitNames = new Dictionary<
-            string,
-            List<string>
-        >();
+        Dictionary<string, List<string>> _architectureJitNames =
+            new Dictionary<string, List<string>>();
         HashSet<string> _64BitArchitectures = new HashSet<string>();
-        Dictionary<string, string> _64BitVariantArchitectureJitNameSuffix = new Dictionary<
-            string,
-            string
-        >();
+        Dictionary<string, string> _64BitVariantArchitectureJitNameSuffix =
+            new Dictionary<string, string>();
 
         void ArchitectureEncountered(string arch)
         {

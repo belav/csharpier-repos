@@ -111,10 +111,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     string,
                     ImmutableArray<ProjectInfo>
                 >(PathUtilities.Comparer);
-                _projectIdToProjectReferencesMap = new Dictionary<
-                    ProjectId,
-                    List<ProjectReference>
-                >();
+                _projectIdToProjectReferencesMap =
+                    new Dictionary<ProjectId, List<ProjectReference>>();
             }
 
             private async Task<TResult> DoOperationAndReportProgressAsync<TResult>(

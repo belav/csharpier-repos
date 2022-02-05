@@ -170,10 +170,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 Task<(DocumentId, (SyntaxNode? node, SourceText? text))>
             >.GetInstance(out var tasks);
 
-            var docIdToNewRootOrText = new Dictionary<
-                DocumentId,
-                (SyntaxNode? node, SourceText? text)
-            >();
+            var docIdToNewRootOrText =
+                new Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)>();
             if (!diagnostics.IsEmpty)
             {
                 // Then, once we've got the diagnostics, bucket them by document and the process all documents in

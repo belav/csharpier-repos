@@ -115,18 +115,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             public readonly string AssemblyName;
         }
 
-        private readonly Dictionary<long, MethodDescInfo> _methods = new Dictionary<
-            long,
-            MethodDescInfo
-        >();
-        private readonly Dictionary<long, TypeHandleInfo> _types = new Dictionary<
-            long,
-            TypeHandleInfo
-        >();
-        private readonly Dictionary<long, ModuleDescInfo> _modules = new Dictionary<
-            long,
-            ModuleDescInfo
-        >();
+        private readonly Dictionary<long, MethodDescInfo> _methods =
+            new Dictionary<long, MethodDescInfo>();
+        private readonly Dictionary<long, TypeHandleInfo> _types =
+            new Dictionary<long, TypeHandleInfo>();
+        private readonly Dictionary<long, ModuleDescInfo> _modules =
+            new Dictionary<long, ModuleDescInfo>();
         private readonly object _lock = new object();
         private readonly int s_bulkTypeEvents = 0;
         private readonly int s_bulkTypeTypes = 0;
@@ -293,10 +287,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             }
 
             Dictionary<long, int> assemblyToCLRInstanceIDMap = new Dictionary<long, int>();
-            Dictionary<long, string> assemblyToFullyQualifiedAssemblyName = new Dictionary<
-                long,
-                string
-            >();
+            Dictionary<long, string> assemblyToFullyQualifiedAssemblyName =
+                new Dictionary<long, string>();
             foreach (
                 var assemblyLoadTrace in _traceProcess.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>()
             )

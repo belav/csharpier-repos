@@ -62,10 +62,8 @@ namespace System.Web.Mvc
         internal static Dictionary<
             Type,
             DataAnnotationsValidatableObjectAdapterFactory
-        > ValidatableFactories = new Dictionary<
-            Type,
-            DataAnnotationsValidatableObjectAdapterFactory
-        >();
+        > ValidatableFactories =
+            new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
 
         public static bool AddImplicitRequiredAttributeForValueTypes
         {

@@ -17,10 +17,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         : TestDiagnosticAnalyzer<TLanguageKindEnum> where TLanguageKindEnum : struct
     {
         private readonly AnalyzerOptions _expectedOptions;
-        private readonly Dictionary<string, AnalyzerOptions> _mismatchedOptions = new Dictionary<
-            string,
-            AnalyzerOptions
-        >();
+        private readonly Dictionary<string, AnalyzerOptions> _mismatchedOptions =
+            new Dictionary<string, AnalyzerOptions>();
 
         public OptionsDiagnosticAnalyzer(AnalyzerOptions expectedOptions)
         {

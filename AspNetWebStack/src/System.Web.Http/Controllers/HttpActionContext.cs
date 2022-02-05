@@ -13,10 +13,8 @@ namespace System.Web.Http.Controllers
     public class HttpActionContext
     {
         private readonly ModelStateDictionary _modelState = new ModelStateDictionary();
-        private readonly Dictionary<string, object> _operationArguments = new Dictionary<
-            string,
-            object
-        >();
+        private readonly Dictionary<string, object> _operationArguments =
+            new Dictionary<string, object>();
         private HttpActionDescriptor _actionDescriptor;
         private HttpControllerContext _controllerContext;
 

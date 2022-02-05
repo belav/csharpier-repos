@@ -14,10 +14,8 @@ namespace System.Runtime.Loader.Tests
 {
     public class SatelliteAssembliesTestsFixture
     {
-        public Dictionary<string, AssemblyLoadContext> contexts = new Dictionary<
-            string,
-            AssemblyLoadContext
-        >();
+        public Dictionary<string, AssemblyLoadContext> contexts =
+            new Dictionary<string, AssemblyLoadContext>();
 
         public SatelliteAssembliesTestsFixture()
         {

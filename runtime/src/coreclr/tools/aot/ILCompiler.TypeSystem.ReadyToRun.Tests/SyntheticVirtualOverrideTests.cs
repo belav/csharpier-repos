@@ -152,14 +152,10 @@ namespace TypeSystemTests
 
         private class SyntheticVirtualOverrideTypeSystemContext : TestTypeSystemContext
         {
-            private Dictionary<TypeDesc, MethodDesc> _getHashCodeMethods = new Dictionary<
-                TypeDesc,
-                MethodDesc
-            >();
-            private Dictionary<TypeDesc, MethodDesc> _equalsMethods = new Dictionary<
-                TypeDesc,
-                MethodDesc
-            >();
+            private Dictionary<TypeDesc, MethodDesc> _getHashCodeMethods =
+                new Dictionary<TypeDesc, MethodDesc>();
+            private Dictionary<TypeDesc, MethodDesc> _equalsMethods =
+                new Dictionary<TypeDesc, MethodDesc>();
 
             public SyntheticVirtualOverrideTypeSystemContext() : base(TargetArchitecture.Unknown)
             { }

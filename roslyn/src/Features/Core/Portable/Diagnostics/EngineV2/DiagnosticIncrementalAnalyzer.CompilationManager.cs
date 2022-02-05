@@ -89,10 +89,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             // we create new conditional weak table every time, it turns out
             // only way to clear ConditionalWeakTable is re-creating it.
             // also, conditional weak table has a leak - https://github.com/dotnet/coreclr/issues/665
-            _projectCompilationsWithAnalyzers = new ConditionalWeakTable<
-                Project,
-                CompilationWithAnalyzers?
-            >();
+            _projectCompilationsWithAnalyzers =
+                new ConditionalWeakTable<Project, CompilationWithAnalyzers?>();
         }
 
         [Conditional("DEBUG")]

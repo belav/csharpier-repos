@@ -54,10 +54,8 @@ namespace System.Xml.Xsl.Xslt
 
         internal sealed class TrimSafeDictionary
         {
-            private readonly Dictionary<string, Type?> _backingDictionary = new Dictionary<
-                string,
-                Type?
-            >();
+            private readonly Dictionary<string, Type?> _backingDictionary =
+                new Dictionary<string, Type?>();
 
             public Type? this[string key]
             {

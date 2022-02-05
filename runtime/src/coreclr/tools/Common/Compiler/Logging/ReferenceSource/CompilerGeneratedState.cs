@@ -19,10 +19,8 @@ namespace Mono.Linker
         public CompilerGeneratedState(LinkContext context)
         {
             _context = context;
-            _compilerGeneratedTypeToUserCodeMethod = new Dictionary<
-                TypeDefinition,
-                MethodDefinition
-            >();
+            _compilerGeneratedTypeToUserCodeMethod =
+                new Dictionary<TypeDefinition, MethodDefinition>();
             _typesWithPopulatedCache = new HashSet<TypeDefinition>();
         }
 

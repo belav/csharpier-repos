@@ -77,10 +77,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     internal sealed class IDispatchComObject : ComObject, IDynamicMetaObjectProvider
     {
         private ComTypeDesc _comTypeDesc;
-        private static readonly Dictionary<Guid, ComTypeDesc> s_cacheComTypeDesc = new Dictionary<
-            Guid,
-            ComTypeDesc
-        >();
+        private static readonly Dictionary<Guid, ComTypeDesc> s_cacheComTypeDesc =
+            new Dictionary<Guid, ComTypeDesc>();
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         internal IDispatchComObject(IDispatch rcw) : base(rcw)

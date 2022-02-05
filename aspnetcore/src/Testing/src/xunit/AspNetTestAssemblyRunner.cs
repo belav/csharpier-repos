@@ -14,10 +14,8 @@ namespace Microsoft.AspNetCore.Testing;
 
 public class AspNetTestAssemblyRunner : XunitTestAssemblyRunner
 {
-    private readonly Dictionary<Type, object> _assemblyFixtureMappings = new Dictionary<
-        Type,
-        object
-    >();
+    private readonly Dictionary<Type, object> _assemblyFixtureMappings =
+        new Dictionary<Type, object>();
 
     public AspNetTestAssemblyRunner(
         ITestAssembly testAssembly,

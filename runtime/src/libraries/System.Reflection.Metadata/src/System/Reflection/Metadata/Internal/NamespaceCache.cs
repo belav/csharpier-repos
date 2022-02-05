@@ -114,10 +114,8 @@ namespace System.Reflection.Metadata.Ecma335
                     return;
                 }
 
-                var namespaceBuilderTable = new Dictionary<
-                    NamespaceDefinitionHandle,
-                    NamespaceDataBuilder
-                >();
+                var namespaceBuilderTable =
+                    new Dictionary<NamespaceDefinitionHandle, NamespaceDataBuilder>();
 
                 // Make sure to add entry for root namespace. The root namespace is special in that even
                 // though it might not have types of its own it always has an equivalent representation
@@ -192,9 +190,10 @@ namespace System.Reflection.Metadata.Ecma335
 
                     if (remaps == null)
                     {
-                        remaps = new List<
-                            KeyValuePair<NamespaceDefinitionHandle, NamespaceDataBuilder>
-                        >();
+                        remaps =
+                            new List<
+                                KeyValuePair<NamespaceDefinitionHandle, NamespaceDataBuilder>
+                            >();
                     }
                     remaps.Add(
                         new KeyValuePair<NamespaceDefinitionHandle, NamespaceDataBuilder>(

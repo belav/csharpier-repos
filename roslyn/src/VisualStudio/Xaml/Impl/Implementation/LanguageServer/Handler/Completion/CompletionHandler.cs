@@ -91,10 +91,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return null;
             }
 
-            var commitCharactersCache = new Dictionary<
-                XamlCompletionKind,
-                ImmutableArray<VSInternalCommitCharacter>
-            >();
+            var commitCharactersCache =
+                new Dictionary<XamlCompletionKind, ImmutableArray<VSInternalCommitCharacter>>();
             return new VSInternalCompletionList
             {
                 Items = completionResult.Completions

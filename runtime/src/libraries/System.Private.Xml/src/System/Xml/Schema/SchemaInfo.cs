@@ -37,10 +37,8 @@ namespace System.Xml.Schema
         private bool _hasNonCDataAttributes;
         private bool _hasDefaultAttributes;
 
-        private readonly Dictionary<string, bool> _targetNamespaces = new Dictionary<
-            string,
-            bool
-        >();
+        private readonly Dictionary<string, bool> _targetNamespaces =
+            new Dictionary<string, bool>();
         private readonly Dictionary<XmlQualifiedName, SchemaAttDef> _attributeDecls =
             new Dictionary<XmlQualifiedName, SchemaAttDef>();
         private int _errorCount;

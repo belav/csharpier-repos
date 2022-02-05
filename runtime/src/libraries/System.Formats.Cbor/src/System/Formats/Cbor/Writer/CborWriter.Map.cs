@@ -261,9 +261,8 @@ namespace System.Formats.Cbor
         {
             if (_keyValuePairEncodingRanges != null)
             {
-                _pooledKeyValuePairEncodingRangeLists ??= new Stack<
-                    List<KeyValuePairEncodingRange>
-                >();
+                _pooledKeyValuePairEncodingRangeLists ??=
+                    new Stack<List<KeyValuePairEncodingRange>>();
                 _pooledKeyValuePairEncodingRangeLists.Push(_keyValuePairEncodingRanges);
                 _keyValuePairEncodingRanges = null;
             }

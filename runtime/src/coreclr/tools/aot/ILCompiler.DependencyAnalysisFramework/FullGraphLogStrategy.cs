@@ -136,12 +136,13 @@ namespace ILCompiler.DependencyAnalysisFramework
             IDependencyAnalyzerLogNodeVisitor<DependencyContextType> logNodeVisitor
         )
         {
-            var combinedNodesReported = new HashSet<
-                Tuple<
-                    DependencyNodeCore<DependencyContextType>,
-                    DependencyNodeCore<DependencyContextType>
-                >
-            >();
+            var combinedNodesReported =
+                new HashSet<
+                    Tuple<
+                        DependencyNodeCore<DependencyContextType>,
+                        DependencyNodeCore<DependencyContextType>
+                    >
+                >();
 
             if (_reasonStringOnlyNodes != null)
             {

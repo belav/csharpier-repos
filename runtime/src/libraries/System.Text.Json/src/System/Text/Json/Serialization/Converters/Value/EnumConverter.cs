@@ -392,10 +392,8 @@ namespace System.Text.Json.Serialization.Converters
                         );
                     }
 
-                    _dictionaryKeyPolicyCache ??= new ConcurrentDictionary<
-                        ulong,
-                        JsonEncodedText
-                    >();
+                    _dictionaryKeyPolicyCache ??=
+                        new ConcurrentDictionary<ulong, JsonEncodedText>();
 
                     if (_dictionaryKeyPolicyCache.Count < NameCacheSizeSoftLimit)
                     {

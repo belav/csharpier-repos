@@ -274,9 +274,8 @@ namespace Chaos
             A0A3A4<A0A3>.VerifyA0A3A4Static();
             A0A3A4<A0A4<A0A0>> v49 = new A0A3A4<A0A4<A0A0>>();
             v49.VerifyA0A3A4NotInlinedGeneric<A0A4<A0A0>>();
-            A0A3A4<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>> v50 = new A0A3A4<
-                A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>
-            >();
+            A0A3A4<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>> v50 =
+                new A0A3A4<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>();
             v50.VerifyA0A3A4NotInlined();
             A0A0A1A1<
                 A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>
@@ -289,9 +288,8 @@ namespace Chaos
             A0A0A1A1<A0A0A0A0<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>> v51 =
                 new A0A0A1A1<A0A0A0A0<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>>();
             v51.VerifyA0A0A1A1NotInlinedGeneric<A0A4<A0A0>>();
-            A0A0A1A1<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>> v52 = new A0A0A1A1<
-                A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>
-            >();
+            A0A0A1A1<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>> v52 =
+                new A0A0A1A1<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>();
             v52.VerifyA0A0A1A1NotInlined();
         }
     }
@@ -578,9 +576,8 @@ namespace Chaos
             A0A3A4<A0A3A4<A0A0A0<A0A3A4<A0A0A3<A0A0A1>>>>>.VerifyA0A3A4Static();
             A0A3A4<A0A0A0A0<A0A0A1>> v49 = new A0A3A4<A0A0A0A0<A0A0A1>>();
             v49.VerifyA0A3A4NotInlinedGeneric<A0A1A2<A0A3A4<A0A0A3<A0A0A1>>>>();
-            A0A3A4<A0A4<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>> v50 = new A0A3A4<
-                A0A4<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>
-            >();
+            A0A3A4<A0A4<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>> v50 =
+                new A0A3A4<A0A4<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>();
             v50.VerifyA0A3A4NotInlined();
             A0A0A1A1<A0A1A2<A0A3A4<A0A0A3<A0A0A1>>>>.VerifyA0A0A1A1NotInlinedGenericStatic<A0>();
             A0A0A1A1<A0A4<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>.VerifyA0A0A1A1NotInlinedStatic();
@@ -588,13 +585,11 @@ namespace Chaos
                 A0A4<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>
             >();
             A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>.VerifyA0A0A1A1Static();
-            A0A0A1A1<A0A1A2<A0A3A4<A0A0A3<A0A0A1>>>> v51 = new A0A0A1A1<
-                A0A1A2<A0A3A4<A0A0A3<A0A0A1>>>
-            >();
+            A0A0A1A1<A0A1A2<A0A3A4<A0A0A3<A0A0A1>>>> v51 =
+                new A0A0A1A1<A0A1A2<A0A3A4<A0A0A3<A0A0A1>>>>();
             v51.VerifyA0A0A1A1NotInlinedGeneric<A0A0A1>();
-            A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>> v52 = new A0A0A1A1<
-                A0A1<A0A3A4<A0A0A3<A0A0A1>>>
-            >();
+            A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>> v52 =
+                new A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>();
             v52.VerifyA0A0A1A1NotInlined();
         }
     }
@@ -858,9 +853,8 @@ namespace Chaos
                     >
                 >
             >();
-            A0A0A0<A0A0A0<A0A1A2<A0A0A0<A0A1A2<A0A0>>>>> v26 = new A0A0A0<
-                A0A0A0<A0A1A2<A0A0A0<A0A1A2<A0A0>>>>
-            >();
+            A0A0A0<A0A0A0<A0A1A2<A0A0A0<A0A1A2<A0A0>>>>> v26 =
+                new A0A0A0<A0A0A0<A0A1A2<A0A0A0<A0A1A2<A0A0>>>>>();
             v26.VerifyA0A0A0NotInlined();
             IA2 i27 = (
                 (IA2)(
@@ -930,13 +924,16 @@ namespace Chaos
                         A0A0A3<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>
                     >
                 >
-            > v37 = new A0A1A2<
-                A0A0A0A0<
-                    A0A0A3<
-                        A0A0A3<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>
+            > v37 =
+                new A0A1A2<
+                    A0A0A0A0<
+                        A0A0A3<
+                            A0A0A3<
+                                A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>
+                            >
+                        >
                     >
-                >
-            >();
+                >();
             v37.VerifyA0A1A2NotInlinedGeneric<A0A0A3<A0A0A0<A0A1A2<A0A0>>>>();
             A0A1A2<
                 A0A0A1A1<
@@ -948,17 +945,20 @@ namespace Chaos
                         >
                     >
                 >
-            > v38 = new A0A1A2<
-                A0A0A1A1<
-                    A0A4<
-                        A0A0A3<
+            > v38 =
+                new A0A1A2<
+                    A0A0A1A1<
+                        A0A4<
                             A0A0A3<
-                                A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>
+                                A0A0A3<
+                                    A0A0A0<
+                                        A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>
+                                    >
+                                >
                             >
                         >
                     >
-                >
-            >();
+                >();
             v38.VerifyA0A1A2NotInlined();
             IA2 i39 = (
                 (IA2)(
@@ -1072,17 +1072,20 @@ namespace Chaos
                         >
                     >
                 >
-            > v47 = new A0A0A3<
-                A0A1<
-                    A0A4<
-                        A0A0A3<
+            > v47 =
+                new A0A0A3<
+                    A0A1<
+                        A0A4<
                             A0A0A3<
-                                A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>
+                                A0A0A3<
+                                    A0A0A0<
+                                        A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>
+                                    >
+                                >
                             >
                         >
                     >
-                >
-            >();
+                >();
             v47.VerifyA0A0A3NotInlinedGeneric<A0A0A1>();
             A0A0A3<
                 A0A0A3<
@@ -1098,21 +1101,24 @@ namespace Chaos
                         >
                     >
                 >
-            > v48 = new A0A0A3<
-                A0A0A3<
-                    A0A1<
-                        A0A4<
-                            A0A0A3<
+            > v48 =
+                new A0A0A3<
+                    A0A0A3<
+                        A0A1<
+                            A0A4<
                                 A0A0A3<
-                                    A0A0A0<
-                                        A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>
+                                    A0A0A3<
+                                        A0A0A0<
+                                            A0A0A0A0<
+                                                A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>
+                                            >
+                                        >
                                     >
                                 >
                             >
                         >
                     >
-                >
-            >();
+                >();
             v48.VerifyA0A0A3NotInlined();
             A0A3A4<
                 A0A1<
@@ -1146,17 +1152,20 @@ namespace Chaos
                         >
                     >
                 >
-            > v51 = new A0A0A1A1<
-                A0A1<
-                    A0A4<
-                        A0A0A3<
+            > v51 =
+                new A0A0A1A1<
+                    A0A1<
+                        A0A4<
                             A0A0A3<
-                                A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>
+                                A0A0A3<
+                                    A0A0A0<
+                                        A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>
+                                    >
+                                >
                             >
                         >
                     >
-                >
-            >();
+                >();
             v51.VerifyA0A0A1A1NotInlinedGeneric<A0>();
             A0A0A1A1<A0A1A2<A0A3>> v52 = new A0A0A1A1<A0A1A2<A0A3>>();
             v52.VerifyA0A0A1A1NotInlined();
@@ -1286,9 +1295,8 @@ namespace Chaos
             A0A0A0<A0A0A1>.VerifyA0A0A0Static();
             A0A0A0<A0A3A4<A0A1<A0>>> v25 = new A0A0A0<A0A3A4<A0A1<A0>>>();
             v25.VerifyA0A0A0NotInlinedGeneric<A0A3A4<A0A1<A0>>>();
-            A0A0A0<A0A0A3<A0A1A2<A0A3A4<A0A4<A0A0A1>>>>> v26 = new A0A0A0<
-                A0A0A3<A0A1A2<A0A3A4<A0A4<A0A0A1>>>>
-            >();
+            A0A0A0<A0A0A3<A0A1A2<A0A3A4<A0A4<A0A0A1>>>>> v26 =
+                new A0A0A0<A0A0A3<A0A1A2<A0A3A4<A0A4<A0A0A1>>>>>();
             v26.VerifyA0A0A0NotInlined();
             IA2 i27 = ((IA2)(new A0A0A0<A0A0>()));
             i27.VerifyInterfaceIA2();
@@ -1334,9 +1342,8 @@ namespace Chaos
             A0A0A0A0<A0A0A1A1<A0A0A1>>.VerifyA0A0A0A0NotInlinedStatic();
             A0A0A0A0<A0>.VerifyA0A0A0A0GenericStatic<A0A1<A0A0A1>>();
             A0A0A0A0<A0A3A4<A0A1<A0>>>.VerifyA0A0A0A0Static();
-            A0A0A0A0<A0A0A3<A0A1A2<A0A3A4<A0A4<A0A0A1>>>>> v41 = new A0A0A0A0<
-                A0A0A3<A0A1A2<A0A3A4<A0A4<A0A0A1>>>>
-            >();
+            A0A0A0A0<A0A0A3<A0A1A2<A0A3A4<A0A4<A0A0A1>>>>> v41 =
+                new A0A0A0A0<A0A0A3<A0A1A2<A0A3A4<A0A4<A0A0A1>>>>>();
             v41.VerifyA0A0A0A0NotInlinedGeneric<A0A0A0<A0A0A0<A0A0>>>();
             A0A0A0A0<A0A4<A0A3>> v42 = new A0A0A0A0<A0A4<A0A3>>();
             v42.VerifyA0A0A0A0NotInlined();
@@ -1553,9 +1560,8 @@ namespace Chaos
             A0A0A0<A0A4<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>.VerifyA0A0A0Static();
             A0A0A0<A0A0> v25 = new A0A0A0<A0A0>();
             v25.VerifyA0A0A0NotInlinedGeneric<A0A0A0A0<A0A0A1>>();
-            A0A0A0<A0A1A2<A0A3A4<A0A0A3<A0A0A1>>>> v26 = new A0A0A0<
-                A0A1A2<A0A3A4<A0A0A3<A0A0A1>>>
-            >();
+            A0A0A0<A0A1A2<A0A3A4<A0A0A3<A0A0A1>>>> v26 =
+                new A0A0A0<A0A1A2<A0A3A4<A0A0A3<A0A0A1>>>>();
             v26.VerifyA0A0A0NotInlined();
             IA2 i27 = ((IA2)(new A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>()));
             i27.VerifyInterfaceIA2();
@@ -1591,13 +1597,11 @@ namespace Chaos
             A0A1A2<A0A0A0<A0A3>>.VerifyA0A1A2NotInlinedStatic();
             A0A1A2<A0A0A3<A0A0>>.VerifyA0A1A2GenericStatic<A0A0A3<A0A0>>();
             A0A1A2<A0A1A2<A0A0A3<A0A0>>>.VerifyA0A1A2Static();
-            A0A1A2<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>> v37 = new A0A1A2<
-                A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>
-            >();
+            A0A1A2<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>> v37 =
+                new A0A1A2<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>();
             v37.VerifyA0A1A2NotInlinedGeneric<A0A4<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>();
-            A0A1A2<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>> v38 = new A0A1A2<
-                A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>
-            >();
+            A0A1A2<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>> v38 =
+                new A0A1A2<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>();
             v38.VerifyA0A1A2NotInlined();
             IA2 i39 = ((IA2)(new A0A1A2<A0A1<A0A3A4<A0A4<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>()));
             i39.VerifyInterfaceIA2();
@@ -1621,9 +1625,8 @@ namespace Chaos
             A0A4<A0A0A0<A0A3>>.VerifyA0A4NotInlinedStatic();
             A0A4<A0A0A0<A0A3>>.VerifyA0A4GenericStatic<A0A0A3<A0A0>>();
             A0A4<A0A0>.VerifyA0A4Static();
-            A0A4<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>> v45 = new A0A4<
-                A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>
-            >();
+            A0A4<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>> v45 =
+                new A0A4<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>();
             v45.VerifyA0A4NotInlinedGeneric<A0A1A2<A0A0A0A0<A0A0A1>>>();
             A0A4<A0A0A1> v46 = new A0A4<A0A0A1>();
             v46.VerifyA0A4NotInlined();
@@ -1657,9 +1660,8 @@ namespace Chaos
             A0A0A1A1<A0A0A1>.VerifyA0A0A1A1NotInlinedStatic();
             A0A0A1A1<A0A0A1A1<A0A0A1>>.VerifyA0A0A1A1GenericStatic<A0A0A1>();
             A0A0A1A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>.VerifyA0A0A1A1Static();
-            A0A0A1A1<A0A3A4<A0A1A2<A0A0A0A0<A0A0A1>>>> v51 = new A0A0A1A1<
-                A0A3A4<A0A1A2<A0A0A0A0<A0A0A1>>>
-            >();
+            A0A0A1A1<A0A3A4<A0A1A2<A0A0A0A0<A0A0A1>>>> v51 =
+                new A0A0A1A1<A0A3A4<A0A1A2<A0A0A0A0<A0A0A1>>>>();
             v51.VerifyA0A0A1A1NotInlinedGeneric<A0A0A1>();
             A0A0A1A1<A0A0A1> v52 = new A0A0A1A1<A0A0A1>();
             v52.VerifyA0A0A1A1NotInlined();
@@ -1794,9 +1796,8 @@ namespace Chaos
             A0A1<A0A0>.VerifyA0A1Static();
             A0A1<A0A0A3<A0A3>> v21 = new A0A1<A0A0A3<A0A3>>();
             v21.VerifyA0A1NotInlinedGeneric<A0A3>();
-            A0A1<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>> v22 = new A0A1<
-                A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>
-            >();
+            A0A1<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>> v22 =
+                new A0A1<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>();
             v22.VerifyA0A1NotInlined();
             IA2 i23 = ((IA2)(new A0A1<A0A0A0<A0A0A0<A0A0>>>()));
             i23.VerifyInterfaceIA2();
@@ -1858,9 +1859,8 @@ namespace Chaos
             A0A0A0A0<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>.VerifyA0A0A0A0NotInlinedStatic();
             A0A0A0A0<A0A1<A0A0A1>>.VerifyA0A0A0A0GenericStatic<A0A4<A0A0A0<A0A0A0<A0A0>>>>();
             A0A0A0A0<A0A0A0A0<A0A1<A0A0A1>>>.VerifyA0A0A0A0Static();
-            A0A0A0A0<A0A1A2<A0A4<A0A0A0<A0A0A0<A0A0>>>>> v41 = new A0A0A0A0<
-                A0A1A2<A0A4<A0A0A0<A0A0A0<A0A0>>>>
-            >();
+            A0A0A0A0<A0A1A2<A0A4<A0A0A0<A0A0A0<A0A0>>>>> v41 =
+                new A0A0A0A0<A0A1A2<A0A4<A0A0A0<A0A0A0<A0A0>>>>>();
             v41.VerifyA0A0A0A0NotInlinedGeneric<A0A0A0A0<A0A1A2<A0A4<A0A0A0<A0A0A0<A0A0>>>>>>();
             A0A0A0A0<A0A0A3<A0A3>> v42 = new A0A0A0A0<A0A0A3<A0A3>>();
             v42.VerifyA0A0A0A0NotInlined();
@@ -1884,17 +1884,15 @@ namespace Chaos
             A0A0A3<A0A0A0A0<A0A0A3<A0A3>>>.VerifyA0A0A3Static();
             A0A0A3<A0A0A1> v47 = new A0A0A3<A0A0A1>();
             v47.VerifyA0A0A3NotInlinedGeneric<A0A0A0A0<A0A0A3<A0A3>>>();
-            A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>> v48 = new A0A0A3<
-                A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>
-            >();
+            A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>> v48 =
+                new A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>();
             v48.VerifyA0A0A3NotInlined();
             A0A3A4<A0A0A1>.VerifyA0A3A4NotInlinedGenericStatic<A0A0A0A0<A0A0A3<A0A3>>>();
             A0A3A4<A0A1A2<A0A4<A0A0A0<A0A0A0<A0A0>>>>>.VerifyA0A3A4NotInlinedStatic();
             A0A3A4<A0A4<A0A0A1>>.VerifyA0A3A4GenericStatic<A0A0A0A0<A0A0A3<A0A3>>>();
             A0A3A4<A0A3A4<A0A4<A0A0A1>>>.VerifyA0A3A4Static();
-            A0A3A4<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>> v49 = new A0A3A4<
-                A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>
-            >();
+            A0A3A4<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>> v49 =
+                new A0A3A4<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>();
             v49.VerifyA0A3A4NotInlinedGeneric<A0A0A0<A0A0A1>>();
             A0A3A4<A0A4<A0A0A1>> v50 = new A0A3A4<A0A4<A0A0A1>>();
             v50.VerifyA0A3A4NotInlined();
@@ -1906,9 +1904,8 @@ namespace Chaos
             A0A0A1A1<A0A0A0A0<A0A0A3<A0A3>>>.VerifyA0A0A1A1Static();
             A0A0A1A1<A0A0A1> v51 = new A0A0A1A1<A0A0A1>();
             v51.VerifyA0A0A1A1NotInlinedGeneric<A0A0A0A0<A0A0A3<A0A3>>>();
-            A0A0A1A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>> v52 = new A0A0A1A1<
-                A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>
-            >();
+            A0A0A1A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>> v52 =
+                new A0A0A1A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>();
             v52.VerifyA0A0A1A1NotInlined();
         }
     }
@@ -1960,18 +1957,22 @@ namespace Chaos
                         >
                     >
                 >
-            > v6 = new A0A1A2<
-                A0A4<
-                    A0A0A3<
+            > v6 =
+                new A0A1A2<
+                    A0A4<
                         A0A0A3<
-                            A0A1<
-                                A0A4<
-                                    A0A0A3<
+                            A0A0A3<
+                                A0A1<
+                                    A0A4<
                                         A0A0A3<
-                                            A0A0A0<
-                                                A0A0A0A0<
-                                                    A0A1<
-                                                        A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>
+                                            A0A0A3<
+                                                A0A0A0<
+                                                    A0A0A0A0<
+                                                        A0A1<
+                                                            A0A0A3<
+                                                                A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>
+                                                            >
+                                                        >
                                                     >
                                                 >
                                             >
@@ -1981,8 +1982,7 @@ namespace Chaos
                             >
                         >
                     >
-                >
-            >();
+                >();
             v6.CreateAllTypesA0A1A2();
             A0A0A0A0<A0A0> v7 = new A0A0A0A0<A0A0>();
             v7.CreateAllTypesA0A0A0A0();
@@ -2128,9 +2128,8 @@ namespace Chaos
             >.VerifyA0A1NotInlinedStatic();
             A0A1<A0A1A2<A0A1A2<A0A0>>>.VerifyA0A1GenericStatic<A0A3>();
             A0A1<A0>.VerifyA0A1Static();
-            A0A1<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>> v21 = new A0A1<
-                A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>
-            >();
+            A0A1<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>> v21 =
+                new A0A1<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>();
             v21.VerifyA0A1NotInlinedGeneric<A0A0A1A1<A0A4<A0A0A0<A0A0>>>>();
             A0A1<A0A3> v22 = new A0A1<A0A3>();
             v22.VerifyA0A1NotInlined();
@@ -2203,9 +2202,10 @@ namespace Chaos
             v41.VerifyA0A0A0A0NotInlinedGeneric<A0A0>();
             A0A0A0A0<
                 A0A0A0A0<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>
-            > v42 = new A0A0A0A0<
-                A0A0A0A0<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>
-            >();
+            > v42 =
+                new A0A0A0A0<
+                    A0A0A0A0<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>
+                >();
             v42.VerifyA0A0A0A0NotInlined();
             IA2 i43 = ((IA2)(new A0A0A0A0<A0A0A1>()));
             i43.VerifyInterfaceIA2();
@@ -2234,9 +2234,10 @@ namespace Chaos
             >();
             A0A0A3<
                 A0A0A3<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>
-            > v48 = new A0A0A3<
-                A0A0A3<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>
-            >();
+            > v48 =
+                new A0A0A3<
+                    A0A0A3<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>
+                >();
             v48.VerifyA0A0A3NotInlined();
             A0A3A4<A0A4<A0A3>>.VerifyA0A3A4NotInlinedGenericStatic<A0A1A2<A0A0>>();
             A0A3A4<A0A0A1A1<A0A4<A0A0A0<A0A0>>>>.VerifyA0A3A4NotInlinedStatic();
@@ -2384,9 +2385,8 @@ namespace Chaos
             A0A1<A0A1<A0A0>>.VerifyA0A1Static();
             A0A1<A0A0A0A0<A0A0A3<A0A3>>> v21 = new A0A1<A0A0A0A0<A0A0A3<A0A3>>>();
             v21.VerifyA0A1NotInlinedGeneric<A0A0A1>();
-            A0A1<A0A0A1A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>> v22 = new A0A1<
-                A0A0A1A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>
-            >();
+            A0A1<A0A0A1A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>> v22 =
+                new A0A1<A0A0A1A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>();
             v22.VerifyA0A1NotInlined();
             IA2 i23 = ((IA2)(new A0A1<A0A0A0<A0A0A1>>()));
             i23.VerifyInterfaceIA2();
@@ -2398,9 +2398,8 @@ namespace Chaos
             A0A0A0<A0A0A0A0<A0A0A3<A0A3>>>.VerifyA0A0A0NotInlinedStatic();
             A0A0A0<A0A0A0<A0A0A0A0<A0A0A3<A0A3>>>>.VerifyA0A0A0GenericStatic<A0A4<A0A0A1>>();
             A0A0A0<A0A1A2<A0A4<A0A0A0<A0A0A0<A0A0>>>>>.VerifyA0A0A0Static();
-            A0A0A0<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>> v25 = new A0A0A0<
-                A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>
-            >();
+            A0A0A0<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>> v25 =
+                new A0A0A0<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>();
             v25.VerifyA0A0A0NotInlinedGeneric<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>();
             A0A0A0<A0A3A4<A0A4<A0A0A1>>> v26 = new A0A0A0<A0A3A4<A0A4<A0A0A1>>>();
             v26.VerifyA0A0A0NotInlined();
@@ -2442,9 +2441,8 @@ namespace Chaos
             A0A1A2<A0A0A1>.VerifyA0A1A2Static();
             A0A1A2<A0> v37 = new A0A1A2<A0>();
             v37.VerifyA0A1A2NotInlinedGeneric<A0A0A1>();
-            A0A1A2<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>> v38 = new A0A1A2<
-                A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>
-            >();
+            A0A1A2<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>> v38 =
+                new A0A1A2<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>();
             v38.VerifyA0A1A2NotInlined();
             IA2 i39 = ((IA2)(new A0A1A2<A0A0>()));
             i39.VerifyInterfaceIA2();
@@ -2476,9 +2474,8 @@ namespace Chaos
             A0A4<A0A1A2<A0A1A2<A0A0>>>.VerifyA0A4NotInlinedStatic();
             A0A4<A0A1A2<A0A1A2<A0A0>>>.VerifyA0A4GenericStatic<A0A4<A0A1A2<A0A1A2<A0A0>>>>();
             A0A4<A0A0A1A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>.VerifyA0A4Static();
-            A0A4<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>> v45 = new A0A4<
-                A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>
-            >();
+            A0A4<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>> v45 =
+                new A0A4<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>();
             v45.VerifyA0A4NotInlinedGeneric<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>();
             A0A4<A0A0A0<A0A0>> v46 = new A0A4<A0A0A0<A0A0>>();
             v46.VerifyA0A4NotInlined();
@@ -2502,9 +2499,8 @@ namespace Chaos
             A0A3A4<
                 A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>
             >.VerifyA0A3A4Static();
-            A0A3A4<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>> v49 = new A0A3A4<
-                A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>
-            >();
+            A0A3A4<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>> v49 =
+                new A0A3A4<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>();
             v49.VerifyA0A3A4NotInlinedGeneric<A0A1A2<A0A1A2<A0A0>>>();
             A0A3A4<A0A3> v50 = new A0A3A4<A0A3>();
             v50.VerifyA0A3A4NotInlined();
@@ -2718,16 +2714,20 @@ namespace Chaos
                         >
                     >
                 >
-            > v26 = new A0A0A0<
-                A0A0A3<
+            > v26 =
+                new A0A0A0<
                     A0A0A3<
-                        A0A1<
-                            A0A4<
-                                A0A0A3<
+                        A0A0A3<
+                            A0A1<
+                                A0A4<
                                     A0A0A3<
-                                        A0A0A0<
-                                            A0A0A0A0<
-                                                A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>
+                                        A0A0A3<
+                                            A0A0A0<
+                                                A0A0A0A0<
+                                                    A0A1<
+                                                        A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>
+                                                    >
+                                                >
                                             >
                                         >
                                     >
@@ -2735,8 +2735,7 @@ namespace Chaos
                             >
                         >
                     >
-                >
-            >();
+                >();
             v26.VerifyA0A0A0NotInlined();
             IA2 i27 = ((IA2)(new A0A0A0<A0A0>()));
             i27.VerifyInterfaceIA2();
@@ -2840,16 +2839,20 @@ namespace Chaos
                         >
                     >
                 >
-            > v46 = new A0A4<
-                A0A0A3<
+            > v46 =
+                new A0A4<
                     A0A0A3<
-                        A0A1<
-                            A0A4<
-                                A0A0A3<
+                        A0A0A3<
+                            A0A1<
+                                A0A4<
                                     A0A0A3<
-                                        A0A0A0<
-                                            A0A0A0A0<
-                                                A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>
+                                        A0A0A3<
+                                            A0A0A0<
+                                                A0A0A0A0<
+                                                    A0A1<
+                                                        A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>
+                                                    >
+                                                >
                                             >
                                         >
                                     >
@@ -2857,8 +2860,7 @@ namespace Chaos
                             >
                         >
                     >
-                >
-            >();
+                >();
             v46.VerifyA0A4NotInlined();
             A0A0A3<A0>.VerifyA0A0A3NotInlinedGenericStatic<A0A0A1A1<A0A1A2<A0A3>>>();
             A0A0A3<A0A1<A0A4<A0A0A1>>>.VerifyA0A0A3NotInlinedStatic();
@@ -2924,18 +2926,22 @@ namespace Chaos
                         >
                     >
                 >
-            > v51 = new A0A0A1A1<
-                A0A4<
-                    A0A0A3<
+            > v51 =
+                new A0A0A1A1<
+                    A0A4<
                         A0A0A3<
-                            A0A1<
-                                A0A4<
-                                    A0A0A3<
+                            A0A0A3<
+                                A0A1<
+                                    A0A4<
                                         A0A0A3<
-                                            A0A0A0<
-                                                A0A0A0A0<
-                                                    A0A1<
-                                                        A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>
+                                            A0A0A3<
+                                                A0A0A0<
+                                                    A0A0A0A0<
+                                                        A0A1<
+                                                            A0A0A3<
+                                                                A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>
+                                                            >
+                                                        >
                                                     >
                                                 >
                                             >
@@ -2945,8 +2951,7 @@ namespace Chaos
                             >
                         >
                     >
-                >
-            >();
+                >();
             v51.VerifyA0A0A1A1NotInlinedGeneric<A0A3A4<A0A0A1A1<A0A1A2<A0A3>>>>();
             A0A0A1A1<A0A0A0<A0A0A0A0<A0A0>>> v52 = new A0A0A1A1<A0A0A0<A0A0A0A0<A0A0>>>();
             v52.VerifyA0A0A1A1NotInlined();
@@ -3084,9 +3089,8 @@ namespace Chaos
             A0A1<
                 A0A0A1A1<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>
             >.VerifyA0A1Static();
-            A0A1<A0A0A1A1<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>> v21 = new A0A1<
-                A0A0A1A1<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>
-            >();
+            A0A1<A0A0A1A1<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>> v21 =
+                new A0A1<A0A0A1A1<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>>();
             v21.VerifyA0A1NotInlinedGeneric<
                 A0A0A0A0<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>
             >();
@@ -3105,9 +3109,8 @@ namespace Chaos
                 A0A0A0<A0A0A0<A0A3A4<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>>>
             >();
             A0A0A0<A0A0A1>.VerifyA0A0A0Static();
-            A0A0A0<A0A3A4<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>> v25 = new A0A0A0<
-                A0A3A4<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>
-            >();
+            A0A0A0<A0A3A4<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>> v25 =
+                new A0A0A0<A0A3A4<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>>();
             v25.VerifyA0A0A0NotInlinedGeneric<A0A0>();
             A0A0A0<A0A0A1> v26 = new A0A0A0<A0A0A1>();
             v26.VerifyA0A0A0NotInlined();
@@ -3153,9 +3156,8 @@ namespace Chaos
             v37.VerifyA0A1A2NotInlinedGeneric<
                 A0A0A3<A0A0A0A0<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>>
             >();
-            A0A1A2<A0A1<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>> v38 = new A0A1A2<
-                A0A1<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>
-            >();
+            A0A1A2<A0A1<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>> v38 =
+                new A0A1A2<A0A1<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>>();
             v38.VerifyA0A1A2NotInlined();
             IA2 i39 = ((IA2)(new A0A1A2<A0A0A0<A0A1A2<A0A0A3<A0A0A1>>>>()));
             i39.VerifyInterfaceIA2();
@@ -3177,9 +3179,8 @@ namespace Chaos
                 A0A1A2<A0A0A0A0<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>>
             >();
             A0A0A0A0<A0A1<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>>.VerifyA0A0A0A0Static();
-            A0A0A0A0<A0A3A4<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>> v41 = new A0A0A0A0<
-                A0A3A4<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>
-            >();
+            A0A0A0A0<A0A3A4<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>> v41 =
+                new A0A0A0A0<A0A3A4<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>>();
             v41.VerifyA0A0A0A0NotInlinedGeneric<A0A0A1>();
             A0A0A0A0<A0A1A2<A0A0A0A0<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>>> v42 =
                 new A0A0A0A0<
@@ -3219,9 +3220,8 @@ namespace Chaos
             A0A0A3<A0A0A0<A0A1A2<A0A0A3<A0A0A1>>>>.VerifyA0A0A3NotInlinedStatic();
             A0A0A3<A0A3>.VerifyA0A0A3GenericStatic<A0A0A1>();
             A0A0A3<A0A1<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>>.VerifyA0A0A3Static();
-            A0A0A3<A0A0A0<A0A1A2<A0A0A3<A0A0A1>>>> v47 = new A0A0A3<
-                A0A0A0<A0A1A2<A0A0A3<A0A0A1>>>
-            >();
+            A0A0A3<A0A0A0<A0A1A2<A0A0A3<A0A0A1>>>> v47 =
+                new A0A0A3<A0A0A0<A0A1A2<A0A0A3<A0A0A1>>>>();
             v47.VerifyA0A0A3NotInlinedGeneric<
                 A0A0A1A1<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>
             >();
@@ -3247,15 +3247,13 @@ namespace Chaos
                 A0A0A0<A0A1A2<A0A0A3<A0A0A1>>>
             >();
             A0A0A1A1<A0A3A4<A0A4<A0A0A1>>>.VerifyA0A0A1A1Static();
-            A0A0A1A1<A0A0A0<A0A1A2<A0A0A3<A0A0A1>>>> v51 = new A0A0A1A1<
-                A0A0A0<A0A1A2<A0A0A3<A0A0A1>>>
-            >();
+            A0A0A1A1<A0A0A0<A0A1A2<A0A0A3<A0A0A1>>>> v51 =
+                new A0A0A1A1<A0A0A0<A0A1A2<A0A0A3<A0A0A1>>>>();
             v51.VerifyA0A0A1A1NotInlinedGeneric<
                 A0A1A2<A0A0A0A0<A0A1<A0A0A0A0<A0A0A1A1<A0A1<A0A3A4<A0A0A3<A0A0A1>>>>>>>>
             >();
-            A0A0A1A1<A0A1<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>> v52 = new A0A0A1A1<
-                A0A1<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>
-            >();
+            A0A0A1A1<A0A1<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>> v52 =
+                new A0A0A1A1<A0A1<A0A0A0<A0A1A2<A0A0A0A0<A0A0A1>>>>>();
             v52.VerifyA0A0A1A1NotInlined();
         }
     }
@@ -3731,9 +3729,12 @@ namespace Chaos
             v45.VerifyA0A4NotInlinedGeneric<A0A4<A0>>();
             A0A4<
                 A0A0A3<A0A0A3<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>>
-            > v46 = new A0A4<
-                A0A0A3<A0A0A3<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>>
-            >();
+            > v46 =
+                new A0A4<
+                    A0A0A3<
+                        A0A0A3<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>
+                    >
+                >();
             v46.VerifyA0A4NotInlined();
             A0A0A3<A0>.VerifyA0A0A3NotInlinedGenericStatic<A0A0A0<A0A1A2<A0A0>>>();
             A0A0A3<
@@ -3771,13 +3772,16 @@ namespace Chaos
                         A0A0A3<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>
                     >
                 >
-            > v52 = new A0A0A1A1<
-                A0A4<
-                    A0A0A3<
-                        A0A0A3<A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>>
+            > v52 =
+                new A0A0A1A1<
+                    A0A4<
+                        A0A0A3<
+                            A0A0A3<
+                                A0A0A0<A0A0A0A0<A0A1<A0A0A3<A0A0A1A1<A0A0A0A0<A0A3A4<A0A1<A0>>>>>>>>
+                            >
+                        >
                     >
-                >
-            >();
+                >();
             v52.VerifyA0A0A1A1NotInlined();
         }
     }

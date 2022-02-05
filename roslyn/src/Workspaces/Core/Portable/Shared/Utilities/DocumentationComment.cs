@@ -340,10 +340,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                                 (
                                     _exceptionTextBuilders
                                     ?? (
-                                        _exceptionTextBuilders = new Dictionary<
-                                            string,
-                                            ImmutableArray<string>.Builder
-                                        >()
+                                        _exceptionTextBuilders =
+                                            new Dictionary<string, ImmutableArray<string>.Builder>()
                                     )
                                 ).Add(type, ImmutableArray.CreateBuilder<string>());
                             }

@@ -189,12 +189,13 @@ namespace ILCompiler.DependencyAnalysisFramework
                 DependencyNodeCore<DependencyContextType>,
                 DependencyNodeCore<DependencyContextType>
             >
-        > _combinedNodesEdgeVisited = new HashSet<
-            Tuple<
-                DependencyNodeCore<DependencyContextType>,
-                DependencyNodeCore<DependencyContextType>
-            >
-        >();
+        > _combinedNodesEdgeVisited =
+            new HashSet<
+                Tuple<
+                    DependencyNodeCore<DependencyContextType>,
+                    DependencyNodeCore<DependencyContextType>
+                >
+            >();
 
         void IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>.VisitEdge(
             DependencyNodeCore<DependencyContextType> nodeDepender,

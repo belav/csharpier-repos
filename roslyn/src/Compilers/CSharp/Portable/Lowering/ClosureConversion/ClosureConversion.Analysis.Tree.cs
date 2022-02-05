@@ -298,10 +298,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 /// is used when recording captured variables as we must know what the lifetime
                 /// of a captured variable is to determine the lifetime of its capture environment.
                 /// </summary>
-                private readonly SmallDictionary<Symbol, Scope> _localToScope = new SmallDictionary<
-                    Symbol,
-                    Scope
-                >();
+                private readonly SmallDictionary<Symbol, Scope> _localToScope =
+                    new SmallDictionary<Symbol, Scope>();
 
 #if DEBUG
                 /// <summary>

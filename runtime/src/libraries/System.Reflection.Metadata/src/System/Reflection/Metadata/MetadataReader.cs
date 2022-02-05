@@ -2007,10 +2007,11 @@ namespace System.Reflection.Metadata
 
         private void InitializeNestedTypesMap()
         {
-            var groupedNestedTypes = new Dictionary<
-                TypeDefinitionHandle,
-                ImmutableArray<TypeDefinitionHandle>.Builder
-            >();
+            var groupedNestedTypes =
+                new Dictionary<
+                    TypeDefinitionHandle,
+                    ImmutableArray<TypeDefinitionHandle>.Builder
+                >();
 
             int numberOfNestedTypes = NestedClassTable.NumberOfRows;
             ImmutableArray<TypeDefinitionHandle>.Builder? builder = null;
@@ -2040,10 +2041,8 @@ namespace System.Reflection.Metadata
                 builder.Add(NestedClassTable.GetNestedClass(i));
             }
 
-            var nestedTypesMap = new Dictionary<
-                TypeDefinitionHandle,
-                ImmutableArray<TypeDefinitionHandle>
-            >();
+            var nestedTypesMap =
+                new Dictionary<TypeDefinitionHandle, ImmutableArray<TypeDefinitionHandle>>();
             foreach (var group in groupedNestedTypes)
             {
                 nestedTypesMap.Add(group.Key, group.Value.ToImmutable());

@@ -263,10 +263,8 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void TryParseConstraint_ContractNameOperatorEqualsAsConstraintArgument_CanParse()
         {
-            var expectations = new ExpectationCollection<
-                Expression<Func<ExportDefinition, bool>>,
-                string
-            >();
+            var expectations =
+                new ExpectationCollection<Expression<Func<ExportDefinition, bool>>, string>();
             expectations.Add(item => item.ContractName == "", "");
             expectations.Add(item => item.ContractName == " ", " ");
             expectations.Add(item => item.ContractName == "   ", "   ");
@@ -295,10 +293,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void TryParseConstraint_MetadataContainsKeyAsConstraintArgument_CanParse()
         {
-            var expectations = new ExpectationCollection<
-                Expression<Func<ExportDefinition, bool>>,
-                Dictionary<string, Type>
-            >();
+            var expectations =
+                new ExpectationCollection<
+                    Expression<Func<ExportDefinition, bool>>,
+                    Dictionary<string, Type>
+                >();
             expectations.Add(
                 item => typeof(string).IsInstanceOfType(item.Metadata[""]),
                 new Dictionary<string, Type> { { "", typeof(string) } }
@@ -343,10 +342,11 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void TryParseConstraint_ContractNameOperatorEqualsAndMetadataContainsKeyAsConstraintArgumen_CanParse()
         {
-            var expectations = new ExpectationCollection<
-                Expression<Func<ExportDefinition, bool>>,
-                KeyValuePair<string, Type>[]
-            >();
+            var expectations =
+                new ExpectationCollection<
+                    Expression<Func<ExportDefinition, bool>>,
+                    KeyValuePair<string, Type>[]
+                >();
             expectations.Add(
                 item =>
                     item.ContractName == "ContractName"
@@ -408,10 +408,8 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void TryParseConstraint_ContractNameReverseOperatorEqualsAsConstraintArgument_CanParse()
         {
-            var expectations = new ExpectationCollection<
-                Expression<Func<ExportDefinition, bool>>,
-                string
-            >();
+            var expectations =
+                new ExpectationCollection<Expression<Func<ExportDefinition, bool>>, string>();
             expectations.Add(item => "" == item.ContractName, "");
             expectations.Add(item => " " == item.ContractName, " ");
             expectations.Add(item => "   " == item.ContractName, "   ");

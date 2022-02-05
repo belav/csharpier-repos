@@ -91,9 +91,8 @@ namespace System.Web.Helpers.Claims
 
         private static Func<IIdentity, ClaimsIdentity>[] GetDefaultConverters()
         {
-            List<Func<IIdentity, ClaimsIdentity>> converters = new List<
-                Func<IIdentity, ClaimsIdentity>
-            >();
+            List<Func<IIdentity, ClaimsIdentity>> converters =
+                new List<Func<IIdentity, ClaimsIdentity>>();
 
             // WIF SDK is only available in full trust scenarios
             if (AppDomain.CurrentDomain.IsHomogenous && AppDomain.CurrentDomain.IsFullyTrusted)

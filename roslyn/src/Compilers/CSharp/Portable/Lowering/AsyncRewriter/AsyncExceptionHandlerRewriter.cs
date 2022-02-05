@@ -877,10 +877,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var labelsInInterestingTry = _labelsInInterestingTry;
                     if (labelsInInterestingTry == null)
                     {
-                        _labelsInInterestingTry = labelsInInterestingTry = new Dictionary<
-                            BoundTryStatement,
-                            HashSet<LabelSymbol>
-                        >();
+                        _labelsInInterestingTry = labelsInInterestingTry =
+                            new Dictionary<BoundTryStatement, HashSet<LabelSymbol>>();
                     }
 
                     labelsInInterestingTry.Add(node, currentLabels);

@@ -400,10 +400,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 var tsc = new TypeRefTypeSystem.TypeRefTypeSystemContext(mibcReaders);
 
                 bool partialNgen = false;
-                Dictionary<MethodDesc, MethodProfileData> mergedProfileData = new Dictionary<
-                    MethodDesc,
-                    MethodProfileData
-                >();
+                Dictionary<MethodDesc, MethodProfileData> mergedProfileData =
+                    new Dictionary<MethodDesc, MethodProfileData>();
                 for (int i = 0; i < mibcReaders.Length; i++)
                 {
                     var peReader = mibcReaders[i];
@@ -1782,10 +1780,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     }
                 }
 
-                Dictionary<MethodDesc, MethodChunks> instrumentationDataByMethod = new Dictionary<
-                    MethodDesc,
-                    MethodChunks
-                >();
+                Dictionary<MethodDesc, MethodChunks> instrumentationDataByMethod =
+                    new Dictionary<MethodDesc, MethodChunks>();
 
                 foreach (
                     var e in p.EventsInProcess.ByEventType<JitInstrumentationDataVerboseTraceData>()
@@ -1847,18 +1843,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     }
                 }
 
-                Dictionary<MethodDesc, SampleProfile> sampleProfiles = new Dictionary<
-                    MethodDesc,
-                    SampleProfile
-                >();
+                Dictionary<MethodDesc, SampleProfile> sampleProfiles =
+                    new Dictionary<MethodDesc, SampleProfile>();
                 if (commandLineOptions.Spgo)
                 {
                     MethodMemoryMap mmap = GetMethodMemMap();
                     Dictionary<MethodDesc, MethodIL> ils = new Dictionary<MethodDesc, MethodIL>();
-                    Dictionary<MethodDesc, FlowGraph> flowGraphs = new Dictionary<
-                        MethodDesc,
-                        FlowGraph
-                    >();
+                    Dictionary<MethodDesc, FlowGraph> flowGraphs =
+                        new Dictionary<MethodDesc, FlowGraph>();
 
                     MethodIL GetMethodIL(MethodDesc desc)
                     {
@@ -1943,10 +1935,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         // That is, if we first see a branch from A -> B followed by a branch from C -> D, then we can conclude that the CPU executed
                         // code from B -> C. We call this a 'run' and collect each run and its multiplicity.
                         // Later, we will find all IL offsets on this path and assign samples to the distinct basic blocks corresponding to those IL offsets.
-                        Dictionary<(ulong startRun, ulong endRun), long> runs = new Dictionary<
-                            (ulong startRun, ulong endRun),
-                            long
-                        >();
+                        Dictionary<(ulong startRun, ulong endRun), long> runs =
+                            new Dictionary<(ulong startRun, ulong endRun), long>();
                         List<(ulong start, ulong end)> lbrRuns =
                             new List<(ulong start, ulong end)>();
                         LbrEntry64[] lbr64Arr = null;

@@ -759,10 +759,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             IList<int> projectionBufferSpanStartingPositions
         )
         {
-            var tempMappedMarkupSpans = new Dictionary<
-                string,
-                PooledObjects.ArrayBuilder<TextSpan>
-            >();
+            var tempMappedMarkupSpans =
+                new Dictionary<string, PooledObjects.ArrayBuilder<TextSpan>>();
 
             foreach (var key in markupSpans.Keys)
             {

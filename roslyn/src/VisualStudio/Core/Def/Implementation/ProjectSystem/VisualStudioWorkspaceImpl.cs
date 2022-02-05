@@ -841,10 +841,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 MultiDictionary<string, (TextChange TextChange, ProjectId ProjectId)>
             > GetMappedTextChanges(SolutionChanges solutionChanges)
             {
-                var filePathToMappedTextChanges = new MultiDictionary<
-                    string,
-                    (TextChange TextChange, ProjectId ProjectId)
-                >();
+                var filePathToMappedTextChanges =
+                    new MultiDictionary<string, (TextChange TextChange, ProjectId ProjectId)>();
                 foreach (var projectChanges in solutionChanges.GetProjectChanges())
                 {
                     foreach (var changedDocumentId in projectChanges.GetChangedDocuments())

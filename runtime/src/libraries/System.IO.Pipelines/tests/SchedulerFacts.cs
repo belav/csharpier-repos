@@ -583,9 +583,8 @@ namespace System.IO.Pipelines.Tests
 
         private sealed class CustomSynchronizationContext : SynchronizationContext
         {
-            public List<Tuple<SendOrPostCallback, object>> Callbacks = new List<
-                Tuple<SendOrPostCallback, object>
-            >();
+            public List<Tuple<SendOrPostCallback, object>> Callbacks =
+                new List<Tuple<SendOrPostCallback, object>>();
 
             public override void Post(SendOrPostCallback d, object state)
             {

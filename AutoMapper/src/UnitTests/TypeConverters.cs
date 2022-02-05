@@ -199,10 +199,8 @@ namespace AutoMapper.UnitTests.CustomMapping
         private class DictionaryConverter<TKey, TValue>
             : ITypeConverter<IDictionary<TKey, TValue>, IDictionary<TKey, TValue>>
         {
-            public static readonly IDictionary<TKey, TValue> Instance = new Dictionary<
-                TKey,
-                TValue
-            >();
+            public static readonly IDictionary<TKey, TValue> Instance =
+                new Dictionary<TKey, TValue>();
 
             public IDictionary<TKey, TValue> Convert(
                 IDictionary<TKey, TValue> source,

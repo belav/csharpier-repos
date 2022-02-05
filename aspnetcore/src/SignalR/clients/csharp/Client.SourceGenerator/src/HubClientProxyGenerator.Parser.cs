@@ -300,10 +300,8 @@ internal partial class HubClientProxyGenerator
             sourceGenerationSpec.SetterProviderParameterName =
                 registerCallbackProviderMethodSymbol.Parameters[1].Name;
 
-            var providerSymbols = new Dictionary<
-                string,
-                (ITypeSymbol, MemberAccessExpressionSyntax)
-            >();
+            var providerSymbols =
+                new Dictionary<string, (ITypeSymbol, MemberAccessExpressionSyntax)>();
 
             // Go thru candidates and filter further
             foreach (var memberAccess in syntaxList)

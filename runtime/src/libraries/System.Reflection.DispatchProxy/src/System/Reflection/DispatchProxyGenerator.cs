@@ -60,10 +60,8 @@ namespace System.Reflection
         private static readonly Dictionary<
             Type,
             Dictionary<Type, GeneratedTypeInfo>
-        > s_baseTypeAndInterfaceToGeneratedProxyType = new Dictionary<
-            Type,
-            Dictionary<Type, GeneratedTypeInfo>
-        >();
+        > s_baseTypeAndInterfaceToGeneratedProxyType =
+            new Dictionary<Type, Dictionary<Type, GeneratedTypeInfo>>();
         private static readonly ProxyAssembly s_proxyAssembly = new ProxyAssembly();
         private static readonly MethodInfo s_dispatchProxyInvokeMethod =
             typeof(DispatchProxy).GetMethod(

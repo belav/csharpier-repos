@@ -37,10 +37,8 @@ public class F<FTParam> where FTParam : class
 {
     private readonly HashSet<Type> componentTypes = new HashSet<Type>();
 
-    private readonly Dictionary<Type, Func<FTParam>> componentFactories = new Dictionary<
-        Type,
-        Func<FTParam>
-    >();
+    private readonly Dictionary<Type, Func<FTParam>> componentFactories =
+        new Dictionary<Type, Func<FTParam>>();
 
     public void Register<FRegMethodParamHaha>() // F<C<B>>.Register<D>
         where FRegMethodParamHaha : class, FTParam, new() { }

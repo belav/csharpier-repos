@@ -458,9 +458,8 @@ namespace AnalyzerRunner
 
             for (var i = 0; i < options.Iterations; i++)
             {
-                var projectDiagnosticTasks = new List<
-                    KeyValuePair<ProjectId, Task<AnalysisResult>>
-                >();
+                var projectDiagnosticTasks =
+                    new List<KeyValuePair<ProjectId, Task<AnalysisResult>>>();
 
                 // Make sure we analyze the projects in parallel
                 foreach (var project in solution.Projects)
@@ -590,10 +589,8 @@ namespace AnalyzerRunner
                 return;
             }
 
-            var telemetryInfoDictionary = new Dictionary<
-                DiagnosticAnalyzer,
-                AnalyzerTelemetryInfo
-            >();
+            var telemetryInfoDictionary =
+                new Dictionary<DiagnosticAnalyzer, AnalyzerTelemetryInfo>();
             foreach (var analysisResult in dictionary.Values)
             {
                 foreach (var pair in analysisResult.AnalyzerTelemetryInfo)

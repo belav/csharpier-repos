@@ -13,10 +13,8 @@ namespace Microsoft.AspNetCore.Components.Forms;
 public sealed class ValidationMessageStore
 {
     private readonly EditContext _editContext;
-    private readonly Dictionary<FieldIdentifier, List<string>> _messages = new Dictionary<
-        FieldIdentifier,
-        List<string>
-    >();
+    private readonly Dictionary<FieldIdentifier, List<string>> _messages =
+        new Dictionary<FieldIdentifier, List<string>>();
 
     /// <summary>
     /// Creates an instance of <see cref="ValidationMessageStore"/>.

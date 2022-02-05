@@ -3343,10 +3343,8 @@ namespace ns1
                                 if (dtu.Count == 0)
                                 {
                                     v3 = v2;
-                                    Dictionary<List<UU>, List<VV>> duuvv = new Dictionary<
-                                        List<UU>,
-                                        List<VV>
-                                    >();
+                                    Dictionary<List<UU>, List<VV>> duuvv =
+                                        new Dictionary<List<UU>, List<VV>>();
                                     if (ltt.Count >= 0)
                                     {
                                         v3 = aaa.Equals(bb);

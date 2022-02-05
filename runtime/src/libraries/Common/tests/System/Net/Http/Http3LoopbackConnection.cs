@@ -35,10 +35,8 @@ namespace System.Net.Test.Common
         private readonly QuicConnection _connection;
 
         // This is specifically request streams, not control streams
-        private readonly Dictionary<int, Http3LoopbackStream> _openStreams = new Dictionary<
-            int,
-            Http3LoopbackStream
-        >();
+        private readonly Dictionary<int, Http3LoopbackStream> _openStreams =
+            new Dictionary<int, Http3LoopbackStream>();
 
         private Http3LoopbackStream _currentStream;
 

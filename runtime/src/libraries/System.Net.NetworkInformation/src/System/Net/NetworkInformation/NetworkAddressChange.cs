@@ -12,19 +12,15 @@ namespace System.Net.NetworkInformation
         private static readonly Dictionary<
             NetworkAddressChangedEventHandler,
             ExecutionContext?
-        > s_addressChangedSubscribers = new Dictionary<
-            NetworkAddressChangedEventHandler,
-            ExecutionContext?
-        >();
+        > s_addressChangedSubscribers =
+            new Dictionary<NetworkAddressChangedEventHandler, ExecutionContext?>();
 
         // The list of current availability-changed subscribers.
         private static readonly Dictionary<
             NetworkAvailabilityChangedEventHandler,
             ExecutionContext?
-        > s_availabilityChangedSubscribers = new Dictionary<
-            NetworkAvailabilityChangedEventHandler,
-            ExecutionContext?
-        >();
+        > s_availabilityChangedSubscribers =
+            new Dictionary<NetworkAvailabilityChangedEventHandler, ExecutionContext?>();
 
         private static readonly NetworkAvailabilityEventArgs s_availableEventArgs =
             new NetworkAvailabilityEventArgs(isAvailable: true);

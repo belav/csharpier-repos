@@ -244,10 +244,8 @@ namespace ILCompiler
                 return methodsToPlace;
             }
 
-            Dictionary<MethodDesc, MethodWithGCInfo> methodMap = new Dictionary<
-                MethodDesc,
-                MethodWithGCInfo
-            >();
+            Dictionary<MethodDesc, MethodWithGCInfo> methodMap =
+                new Dictionary<MethodDesc, MethodWithGCInfo>();
             foreach (MethodWithGCInfo methodWithGCInfo in methodsToPlace)
             {
                 methodMap.Add(methodWithGCInfo.Method, methodWithGCInfo);

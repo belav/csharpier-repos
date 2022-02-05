@@ -147,10 +147,8 @@ namespace System.ComponentModel.Composition.Registration
 
                                 if (_importBuilders == null)
                                 {
-                                    _importBuilders = new Dictionary<
-                                        ParameterInfo,
-                                        Action<ImportBuilder>
-                                    >();
+                                    _importBuilders =
+                                        new Dictionary<ParameterInfo, Action<ImportBuilder>>();
                                 }
 
                                 _importBuilders.Add(

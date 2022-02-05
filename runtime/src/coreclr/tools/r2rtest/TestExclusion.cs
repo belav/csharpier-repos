@@ -161,10 +161,8 @@ namespace R2RTest
 
             if (options.IssuesPath != null)
             {
-                Dictionary<string, List<TestExclusion>> exclusionsByCondition = new Dictionary<
-                    string,
-                    List<TestExclusion>
-                >();
+                Dictionary<string, List<TestExclusion>> exclusionsByCondition =
+                    new Dictionary<string, List<TestExclusion>>();
 
                 foreach (FileInfo issuesProject in options.IssuesPath)
                 {

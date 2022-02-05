@@ -243,10 +243,8 @@ public class TestRedisServer
     private readonly ConcurrentDictionary<
         RedisChannel,
         List<(int, Action<RedisChannel, RedisValue>)>
-    > _subscriptions = new ConcurrentDictionary<
-        RedisChannel,
-        List<(int, Action<RedisChannel, RedisValue>)>
-    >();
+    > _subscriptions =
+        new ConcurrentDictionary<RedisChannel, List<(int, Action<RedisChannel, RedisValue>)>>();
 
     public long Publish(
         RedisChannel channel,

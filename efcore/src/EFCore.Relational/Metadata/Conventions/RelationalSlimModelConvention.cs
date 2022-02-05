@@ -364,10 +364,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     )
                 )
                 {
-                    var slimPropertyOverrides = new SortedDictionary<
-                        StoreObjectIdentifier,
-                        IRelationalPropertyOverrides
-                    >();
+                    var slimPropertyOverrides =
+                        new SortedDictionary<StoreObjectIdentifier, IRelationalPropertyOverrides>();
                     foreach (
                         var overridesPair in (SortedDictionary<
                             StoreObjectIdentifier,

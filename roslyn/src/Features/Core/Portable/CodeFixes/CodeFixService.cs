@@ -135,14 +135,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 GetFixerPriorityPerLanguageMap(fixersPerLanguageMap, workspace);
 
             // Per-project fixers
-            _projectFixersMap = new ConditionalWeakTable<
-                IReadOnlyList<AnalyzerReference>,
-                ImmutableDictionary<string, List<CodeFixProvider>>
-            >();
-            _analyzerReferenceToFixersMap = new ConditionalWeakTable<
-                AnalyzerReference,
-                ProjectCodeFixProvider
-            >();
+            _projectFixersMap =
+                new ConditionalWeakTable<
+                    IReadOnlyList<AnalyzerReference>,
+                    ImmutableDictionary<string, List<CodeFixProvider>>
+                >();
+            _analyzerReferenceToFixersMap =
+                new ConditionalWeakTable<AnalyzerReference, ProjectCodeFixProvider>();
             _createProjectCodeFixProvider = new ConditionalWeakTable<
                 AnalyzerReference,
                 ProjectCodeFixProvider
@@ -598,18 +597,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             // Ensure that no diagnostic has registered code actions from different code fix providers with same equivalance key.
             // This prevents duplicate registered code actions from NuGet and VSIX code fix providers.
             // See https://github.com/dotnet/roslyn/issues/18818 for details.
-            var uniqueDiagosticToEquivalenceKeysMap = new Dictionary<
-                Diagnostic,
-                PooledHashSet<string?>
-            >();
+            var uniqueDiagosticToEquivalenceKeysMap =
+                new Dictionary<Diagnostic, PooledHashSet<string?>>();
 
             // NOTE: For backward compatibility, we allow multiple registered code actions from the same code fix provider
             // to have the same equivalence key. See https://github.com/dotnet/roslyn/issues/44553 for details.
             // To ensure this, we track the fixer that first registered a code action to fix a diagnostic with a specific equivalence key.
-            var diagnosticAndEquivalenceKeyToFixersMap = new Dictionary<
-                (Diagnostic diagnostic, string? equivalenceKey),
-                CodeFixProvider
-            >();
+            var diagnosticAndEquivalenceKeyToFixersMap =
+                new Dictionary<(Diagnostic diagnostic, string? equivalenceKey), CodeFixProvider>();
 
             try
             {

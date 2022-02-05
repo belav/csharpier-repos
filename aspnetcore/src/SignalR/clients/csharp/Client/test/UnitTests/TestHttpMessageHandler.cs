@@ -23,9 +23,8 @@ public class TestHttpMessageHandler : HttpMessageHandler
     private RequestDelegate _app;
     private readonly ILogger _logger;
 
-    private readonly List<Func<RequestDelegate, RequestDelegate>> _middleware = new List<
-        Func<RequestDelegate, RequestDelegate>
-    >();
+    private readonly List<Func<RequestDelegate, RequestDelegate>> _middleware =
+        new List<Func<RequestDelegate, RequestDelegate>>();
 
     public bool Disposed { get; private set; }
 

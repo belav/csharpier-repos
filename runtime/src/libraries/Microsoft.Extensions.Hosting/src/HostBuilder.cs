@@ -21,9 +21,8 @@ namespace Microsoft.Extensions.Hosting
     /// </summary>
     public partial class HostBuilder : IHostBuilder
     {
-        private List<Action<IConfigurationBuilder>> _configureHostConfigActions = new List<
-            Action<IConfigurationBuilder>
-        >();
+        private List<Action<IConfigurationBuilder>> _configureHostConfigActions =
+            new List<Action<IConfigurationBuilder>>();
         private List<Action<HostBuilderContext, IConfigurationBuilder>> _configureAppConfigActions =
             new List<Action<HostBuilderContext, IConfigurationBuilder>>();
         private List<Action<HostBuilderContext, IServiceCollection>> _configureServicesActions =

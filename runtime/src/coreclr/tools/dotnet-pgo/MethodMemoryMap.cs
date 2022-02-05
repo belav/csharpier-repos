@@ -55,10 +55,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         {
             // Capture the addresses of jitted code
             List<MemoryRegionInfo> infos = new List<MemoryRegionInfo>();
-            Dictionary<JittedID, MemoryRegionInfo> info = new Dictionary<
-                JittedID,
-                MemoryRegionInfo
-            >();
+            Dictionary<JittedID, MemoryRegionInfo> info =
+                new Dictionary<JittedID, MemoryRegionInfo>();
             foreach (var e in p.EventsInProcess.ByEventType<MethodLoadUnloadTraceData>())
             {
                 if (e.ClrInstanceID != clrInstanceID)

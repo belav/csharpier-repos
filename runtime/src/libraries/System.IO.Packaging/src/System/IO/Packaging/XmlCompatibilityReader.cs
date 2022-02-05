@@ -1980,15 +1980,11 @@ namespace System.IO.Packaging
         private string? _currentName; // for Save/Restore ReaderPosition
         private readonly IsXmlNamespaceSupportedCallback? _namespaceCallback;
         private Dictionary<string, object?>? _knownNamespaces;
-        private readonly Dictionary<string, string> _namespaceMap = new Dictionary<
-            string,
-            string
-        >();
+        private readonly Dictionary<string, string> _namespaceMap =
+            new Dictionary<string, string>();
         private Dictionary<string, object?>? _subsumingNamespaces;
-        private readonly Dictionary<string, HandleElementCallback> _elementHandler = new Dictionary<
-            string,
-            HandleElementCallback
-        >();
+        private readonly Dictionary<string, HandleElementCallback> _elementHandler =
+            new Dictionary<string, HandleElementCallback>();
         private readonly Dictionary<string, HandleAttributeCallback> _attributeHandler =
             new Dictionary<string, HandleAttributeCallback>();
         private int _depthOffset; // offset for Depth method, to account for elements that should be ignored by client

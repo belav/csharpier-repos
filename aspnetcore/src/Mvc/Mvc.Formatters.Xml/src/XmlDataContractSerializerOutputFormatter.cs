@@ -26,10 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters;
 /// </summary>
 public class XmlDataContractSerializerOutputFormatter : TextOutputFormatter
 {
-    private readonly ConcurrentDictionary<Type, object> _serializerCache = new ConcurrentDictionary<
-        Type,
-        object
-    >();
+    private readonly ConcurrentDictionary<Type, object> _serializerCache =
+        new ConcurrentDictionary<Type, object>();
     private readonly ILogger _logger;
     private DataContractSerializerSettings _serializerSettings;
     private MvcOptions? _mvcOptions;

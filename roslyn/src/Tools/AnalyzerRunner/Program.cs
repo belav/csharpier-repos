@@ -164,10 +164,11 @@ namespace AnalyzerRunner
                 )
                 .ToList();
 
-            var diagnosticStatistics = new Dictionary<
-                string,
-                (string description, DiagnosticSeverity severity, int count)
-            >();
+            var diagnosticStatistics =
+                new Dictionary<
+                    string,
+                    (string description, DiagnosticSeverity severity, int count)
+                >();
             foreach (var project in projects)
             {
                 var compilation = await project

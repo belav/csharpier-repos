@@ -31,10 +31,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             public List<ElementAccessExpressionSyntax> elementAccess =
                 new List<ElementAccessExpressionSyntax>();
             public List<object> argValues = new List<object>();
-            public Dictionary<string, JObject> memberAccessValues = new Dictionary<
-                string,
-                JObject
-            >();
+            public Dictionary<string, JObject> memberAccessValues =
+                new Dictionary<string, JObject>();
             private int visitCount;
             public bool hasMethodCalls;
             public bool hasElementAccesses;

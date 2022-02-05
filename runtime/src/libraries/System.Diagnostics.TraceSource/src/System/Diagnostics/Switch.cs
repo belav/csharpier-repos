@@ -27,9 +27,8 @@ namespace System.Diagnostics
         private readonly string _defaultValue;
         private object? _initializedLock;
 
-        private static readonly List<WeakReference<Switch>> s_switches = new List<
-            WeakReference<Switch>
-        >();
+        private static readonly List<WeakReference<Switch>> s_switches =
+            new List<WeakReference<Switch>>();
         private static int s_LastCollectionCount;
         private StringDictionary? _attributes;
 

@@ -43,10 +43,8 @@ public class DefaultViewComponentFactory : IViewComponentFactory
                 CreateActivateInfo
             );
 
-        _injectActions = new ConcurrentDictionary<
-            Type,
-            PropertyActivator<ViewComponentContext>[]
-        >();
+        _injectActions =
+            new ConcurrentDictionary<Type, PropertyActivator<ViewComponentContext>[]>();
     }
 
     /// <inheritdoc />

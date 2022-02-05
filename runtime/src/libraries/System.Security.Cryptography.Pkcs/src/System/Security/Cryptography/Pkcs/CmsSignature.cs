@@ -12,10 +12,8 @@ namespace System.Security.Cryptography.Pkcs
 {
     internal abstract partial class CmsSignature
     {
-        private static readonly Dictionary<string, CmsSignature> s_lookup = new Dictionary<
-            string,
-            CmsSignature
-        >();
+        private static readonly Dictionary<string, CmsSignature> s_lookup =
+            new Dictionary<string, CmsSignature>();
 
         static CmsSignature()
         {

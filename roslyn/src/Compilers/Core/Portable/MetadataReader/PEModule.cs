@@ -724,10 +724,8 @@ namespace Microsoft.CodeAnalysis
             // merged, even if they are equal according to the provided comparer.  This improves the error
             // experience because types retain their exact namespaces.
 
-            Dictionary<string, ArrayBuilder<TypeDefinitionHandle>> namespaces = new Dictionary<
-                string,
-                ArrayBuilder<TypeDefinitionHandle>
-            >();
+            Dictionary<string, ArrayBuilder<TypeDefinitionHandle>> namespaces =
+                new Dictionary<string, ArrayBuilder<TypeDefinitionHandle>>();
 
             GetTypeNamespaceNamesOrThrow(namespaces);
             GetForwardedTypeNamespaceNamesOrThrow(namespaces);
@@ -4048,10 +4046,8 @@ namespace Microsoft.CodeAnalysis
         {
             if (_lazyForwardedTypesToAssemblyIndexMap == null)
             {
-                var typesToAssemblyIndexMap = new Dictionary<
-                    string,
-                    (int FirstIndex, int SecondIndex)
-                >();
+                var typesToAssemblyIndexMap =
+                    new Dictionary<string, (int FirstIndex, int SecondIndex)>();
 
                 try
                 {

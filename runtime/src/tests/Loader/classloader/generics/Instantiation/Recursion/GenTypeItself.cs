@@ -88,8 +88,8 @@ public class Test_GenTypeItself
                     >
                 >
             >
-        > obj = new MyClass<
-            MyClass<
+        > obj =
+            new MyClass<
                 MyClass<
                     MyClass<
                         MyClass<
@@ -125,7 +125,9 @@ public class Test_GenTypeItself
                                                                                                                                                 MyClass<
                                                                                                                                                     MyClass<
                                                                                                                                                         MyClass<
-                                                                                                                                                            MyClass<int>
+                                                                                                                                                            MyClass<
+                                                                                                                                                                MyClass<int>
+                                                                                                                                                            >
                                                                                                                                                         >
                                                                                                                                                     >
                                                                                                                                                 >
@@ -161,8 +163,7 @@ public class Test_GenTypeItself
                         >
                     >
                 >
-            >
-        >();
+            >();
 
         Console.WriteLine("PASS");
         return 100;

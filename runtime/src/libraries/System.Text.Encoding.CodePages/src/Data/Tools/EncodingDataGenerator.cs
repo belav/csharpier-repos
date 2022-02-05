@@ -341,10 +341,8 @@ namespace EncodingDataGenerator
 
         private Dictionary<ushort, KeyValuePair<string, string>> ParsePreferredNames(string path)
         {
-            Dictionary<ushort, KeyValuePair<string, string>> preferredNames = new Dictionary<
-                ushort,
-                KeyValuePair<string, string>
-            >();
+            Dictionary<ushort, KeyValuePair<string, string>> preferredNames =
+                new Dictionary<ushort, KeyValuePair<string, string>>();
 
             foreach (var line in DelimitedFileRows(path, 3))
             {

@@ -40,10 +40,8 @@ namespace System.Web.Razor.Parser
         };
 
         private Dictionary<string, Action> _directiveParsers = new Dictionary<string, Action>();
-        private Dictionary<CSharpKeyword, Action<bool>> _keywordParsers = new Dictionary<
-            CSharpKeyword,
-            Action<bool>
-        >();
+        private Dictionary<CSharpKeyword, Action<bool>> _keywordParsers =
+            new Dictionary<CSharpKeyword, Action<bool>>();
 
         public CSharpCodeParser()
         {

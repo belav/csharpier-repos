@@ -47,10 +47,8 @@ namespace ABIStress
 
     internal partial class Program
     {
-        private static Dictionary<int, Callee> s_instantiatingStubCallees = new Dictionary<
-            int,
-            Callee
-        >();
+        private static Dictionary<int, Callee> s_instantiatingStubCallees =
+            new Dictionary<int, Callee>();
         private static volatile ModuleBuilder s_stubTypesModule = null;
         private static int s_stubTypesCreated = 0;
 

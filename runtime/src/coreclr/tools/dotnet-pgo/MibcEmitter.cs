@@ -351,10 +351,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 System.Collections.Immutable.ImmutableArray.Create<byte>(moduleBytes)
             );
             var profileData = MIbcProfileParser.ParseMIbcFile(tsc, peReader, null, null);
-            Dictionary<MethodDesc, MethodProfileData> mibcDict = new Dictionary<
-                MethodDesc,
-                MethodProfileData
-            >();
+            Dictionary<MethodDesc, MethodProfileData> mibcDict =
+                new Dictionary<MethodDesc, MethodProfileData>();
 
             foreach (var mibcData in profileData.GetAllMethodProfileData())
             {

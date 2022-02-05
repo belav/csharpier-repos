@@ -1648,11 +1648,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // Get unique source assembly attributes.
             HashSet<CSharpAttributeData> uniqueAttributes = GetUniqueSourceAssemblyAttributes();
 
-            var arguments = new DecodeWellKnownAttributeArguments<
-                AttributeSyntax,
-                CSharpAttributeData,
-                AttributeLocation
-            >();
+            var arguments =
+                new DecodeWellKnownAttributeArguments<
+                    AttributeSyntax,
+                    CSharpAttributeData,
+                    AttributeLocation
+                >();
             arguments.AttributesCount = netModuleAttributesCount;
             arguments.Diagnostics = diagnostics;
             arguments.SymbolPart = AttributeLocation.None;

@@ -11,10 +11,8 @@ public class FormatterResolver
 {
     private readonly IServiceProvider _serviceProvider;
 
-    private readonly Dictionary<string, Dictionary<Type, Type>> _formatters = new Dictionary<
-        string,
-        Dictionary<Type, Type>
-    >();
+    private readonly Dictionary<string, Dictionary<Type, Type>> _formatters =
+        new Dictionary<string, Dictionary<Type, Type>>();
 
     public FormatterResolver(IServiceProvider serviceProvider)
     {

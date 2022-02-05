@@ -180,10 +180,11 @@ namespace System.Runtime.Caching
                 }
                 if (_fields._dependents == null)
                 {
-                    _fields._dependents = new Dictionary<
-                        MemoryCacheEntryChangeMonitor,
-                        MemoryCacheEntryChangeMonitor
-                    >();
+                    _fields._dependents =
+                        new Dictionary<
+                            MemoryCacheEntryChangeMonitor,
+                            MemoryCacheEntryChangeMonitor
+                        >();
                 }
                 _fields._dependents[dependent] = dependent;
             }

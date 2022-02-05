@@ -166,10 +166,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
             /// We record the first kind of this in this dictionary with a non-null Id, and the second kind with a null ID. We could conceptually store
             /// two dictionaries for this, but that will add memory pressure and also limit the catching of mistakes if people cross these two APIs.
             /// </remarks>
-            private readonly Dictionary<string, Id<Vertex>?> _edgeKindToVertexId = new Dictionary<
-                string,
-                Id<Vertex>?
-            >();
+            private readonly Dictionary<string, Id<Vertex>?> _edgeKindToVertexId =
+                new Dictionary<string, Id<Vertex>?>();
 
             public TrackedResultSet(Id<ResultSet> id)
             {

@@ -34,9 +34,8 @@ namespace System.Threading.Channels
         private readonly Deque<AsyncOperation<T>> _blockedReaders = new Deque<AsyncOperation<T>>();
 
         /// <summary>Writers waiting to write to the channel.</summary>
-        private readonly Deque<VoidAsyncOperationWithData<T>> _blockedWriters = new Deque<
-            VoidAsyncOperationWithData<T>
-        >();
+        private readonly Deque<VoidAsyncOperationWithData<T>> _blockedWriters =
+            new Deque<VoidAsyncOperationWithData<T>>();
 
         /// <summary>Linked list of WaitToReadAsync waiters.</summary>
         private AsyncOperation<bool>? _waitingReadersTail;

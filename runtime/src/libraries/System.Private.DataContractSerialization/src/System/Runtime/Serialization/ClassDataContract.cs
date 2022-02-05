@@ -1118,10 +1118,8 @@ namespace System.Runtime.Serialization
                 Type type = this.UnderlyingType;
                 EnsureIsReferenceImported(type);
                 List<DataMember> tempMembers = new List<DataMember>();
-                Dictionary<string, DataMember> memberNamesTable = new Dictionary<
-                    string,
-                    DataMember
-                >();
+                Dictionary<string, DataMember> memberNamesTable =
+                    new Dictionary<string, DataMember>();
 
                 MemberInfo[] memberInfos;
 

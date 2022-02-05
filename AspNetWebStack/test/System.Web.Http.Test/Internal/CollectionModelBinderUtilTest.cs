@@ -149,10 +149,8 @@ namespace System.Web.Http.Internal
         public void CreateOrReplaceDictionary_OriginalModelImmutable_CreatesNewInstance()
         {
             // Arrange
-            ReadOnlyDictionary<string, string> originalModel = new ReadOnlyDictionary<
-                string,
-                string
-            >();
+            ReadOnlyDictionary<string, string> originalModel =
+                new ReadOnlyDictionary<string, string>();
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {

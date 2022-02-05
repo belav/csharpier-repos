@@ -14,10 +14,8 @@ namespace Templates.Test.Helpers;
 
 public class ProjectFactoryFixture : IDisposable
 {
-    private readonly ConcurrentDictionary<string, Project> _projects = new ConcurrentDictionary<
-        string,
-        Project
-    >();
+    private readonly ConcurrentDictionary<string, Project> _projects =
+        new ConcurrentDictionary<string, Project>();
 
     public IMessageSink DiagnosticsMessageSink { get; }
 

@@ -547,10 +547,8 @@ namespace SerializationTestTypes
     public class CustomGenericContainerPrivateType2
     {
         [DataMember]
-        private CustomGeneric2<PrivateDC, PrivateDC> _data1 = new CustomGeneric2<
-            PrivateDC,
-            PrivateDC
-        >();
+        private CustomGeneric2<PrivateDC, PrivateDC> _data1 =
+            new CustomGeneric2<PrivateDC, PrivateDC>();
     }
 
     [DataContract(IsReference = true)]
@@ -565,10 +563,8 @@ namespace SerializationTestTypes
     public class CustomGenericContainerPrivateType4
     {
         [DataMember]
-        private CustomGeneric2<PublicDC, PublicDCClassPrivateDM> _data1 = new CustomGeneric2<
-            PublicDC,
-            PublicDCClassPrivateDM
-        >();
+        private CustomGeneric2<PublicDC, PublicDCClassPrivateDM> _data1 =
+            new CustomGeneric2<PublicDC, PublicDCClassPrivateDM>();
     }
 
     [DataContract(IsReference = true)]
@@ -597,10 +593,8 @@ namespace SerializationTestTypes
     public class CustomGenericContainerPublicType4
     {
         [DataMember]
-        public CustomGeneric2<PublicDC, PublicDCClassPublicDM> data1 = new CustomGeneric2<
-            PublicDC,
-            PublicDCClassPublicDM
-        >();
+        public CustomGeneric2<PublicDC, PublicDCClassPublicDM> data1 =
+            new CustomGeneric2<PublicDC, PublicDCClassPublicDM>();
     }
 
     [DataContract(IsReference = true)]
@@ -4149,10 +4143,8 @@ namespace SerializationTestTypes
     public class DCDictionaryMixedKTContainer4
     {
         [DataMember]
-        public Dictionary<PublicDCDerivedPublic, PublicDC> DictData = new Dictionary<
-            PublicDCDerivedPublic,
-            PublicDC
-        >();
+        public Dictionary<PublicDCDerivedPublic, PublicDC> DictData =
+            new Dictionary<PublicDCDerivedPublic, PublicDC>();
 
         public DCDictionaryMixedKTContainer4()
         {
@@ -4164,10 +4156,8 @@ namespace SerializationTestTypes
     public class DCDictionaryMixedKTContainer5
     {
         [DataMember]
-        private Dictionary<PublicDCDerivedPrivate, PublicDC> _dictData = new Dictionary<
-            PublicDCDerivedPrivate,
-            PublicDC
-        >();
+        private Dictionary<PublicDCDerivedPrivate, PublicDC> _dictData =
+            new Dictionary<PublicDCDerivedPrivate, PublicDC>();
 
         public DCDictionaryMixedKTContainer5()
         {
@@ -4179,10 +4169,8 @@ namespace SerializationTestTypes
     public class DCDictionaryMixedKTContainer6
     {
         [DataMember]
-        private Dictionary<PublicDCDerivedPublic, PrivateDC> _dictData = new Dictionary<
-            PublicDCDerivedPublic,
-            PrivateDC
-        >();
+        private Dictionary<PublicDCDerivedPublic, PrivateDC> _dictData =
+            new Dictionary<PublicDCDerivedPublic, PrivateDC>();
 
         public DCDictionaryMixedKTContainer6()
         {
@@ -4194,10 +4182,8 @@ namespace SerializationTestTypes
     public class DCDictionaryMixedKTContainer7
     {
         [DataMember]
-        private Dictionary<PublicDCDerivedPrivate, PrivateDC> _dictData = new Dictionary<
-            PublicDCDerivedPrivate,
-            PrivateDC
-        >();
+        private Dictionary<PublicDCDerivedPrivate, PrivateDC> _dictData =
+            new Dictionary<PublicDCDerivedPrivate, PrivateDC>();
 
         public DCDictionaryMixedKTContainer7()
         {
@@ -4209,10 +4195,8 @@ namespace SerializationTestTypes
     public class DCDictionaryMixedKTContainer8
     {
         [DataMember]
-        public Dictionary<PublicDCDerivedPublic, PublicDCDerivedPublic> DictData = new Dictionary<
-            PublicDCDerivedPublic,
-            PublicDCDerivedPublic
-        >();
+        public Dictionary<PublicDCDerivedPublic, PublicDCDerivedPublic> DictData =
+            new Dictionary<PublicDCDerivedPublic, PublicDCDerivedPublic>();
 
         public DCDictionaryMixedKTContainer8()
         {
@@ -4266,10 +4250,11 @@ namespace SerializationTestTypes
         private Dictionary<
             PublicDCClassPrivateDM,
             PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM
-        > _dictData = new Dictionary<
-            PublicDCClassPrivateDM,
-            PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM
-        >();
+        > _dictData =
+            new Dictionary<
+                PublicDCClassPrivateDM,
+                PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM
+            >();
 
         public DCDictionaryMixedKTContainer12()
         {
@@ -4298,10 +4283,8 @@ namespace SerializationTestTypes
         private Dictionary<
             PrivateIXmlSerializables,
             PrivateDefaultCtorIXmlSerializables
-        > _dictData = new Dictionary<
-            PrivateIXmlSerializables,
-            PrivateDefaultCtorIXmlSerializables
-        >();
+        > _dictData =
+            new Dictionary<PrivateIXmlSerializables, PrivateDefaultCtorIXmlSerializables>();
 
         public DCDictionaryMixedKTContainer14()
         {
@@ -6258,10 +6241,8 @@ namespace SerializationTestTypes
         public List<DateTimeOffset> lDTO = new List<DateTimeOffset>();
 
         [DataMember]
-        public Dictionary<DateTimeOffset, DateTimeOffset> dictDTO = new Dictionary<
-            DateTimeOffset,
-            DateTimeOffset
-        >();
+        public Dictionary<DateTimeOffset, DateTimeOffset> dictDTO =
+            new Dictionary<DateTimeOffset, DateTimeOffset>();
 
         [DataMember]
         public DateTimeOffset[] arrayDTO;

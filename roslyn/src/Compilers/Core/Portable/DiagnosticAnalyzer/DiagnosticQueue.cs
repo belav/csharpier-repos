@@ -168,10 +168,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 lock (_gate)
                 {
-                    lazyDiagnosticsMap ??= new Dictionary<
-                        DiagnosticAnalyzer,
-                        SimpleDiagnosticQueue
-                    >();
+                    lazyDiagnosticsMap ??=
+                        new Dictionary<DiagnosticAnalyzer, SimpleDiagnosticQueue>();
                     EnqueueCore_NoLock(lazyDiagnosticsMap, diagnostic, analyzer);
                 }
             }

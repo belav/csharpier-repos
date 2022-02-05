@@ -10,10 +10,8 @@ namespace System.Xml.Schema
 
     internal sealed class SchemaElementDecl : SchemaDeclBase, IDtdAttributeListInfo
     {
-        private readonly Dictionary<XmlQualifiedName, SchemaAttDef> _attdefs = new Dictionary<
-            XmlQualifiedName,
-            SchemaAttDef
-        >();
+        private readonly Dictionary<XmlQualifiedName, SchemaAttDef> _attdefs =
+            new Dictionary<XmlQualifiedName, SchemaAttDef>();
         private List<IDtdDefaultAttributeInfo>? _defaultAttdefs;
         private bool _isIdDeclared;
         private bool _hasNonCDataAttribute;

@@ -25,10 +25,8 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
         private readonly ConcurrentDictionary<
             DocumentId,
             (string? category, VersionStamp projectVersion)
-        > _documentToLastReportedInformation = new ConcurrentDictionary<
-            DocumentId,
-            (string? category, VersionStamp projectVersion)
-        >();
+        > _documentToLastReportedInformation =
+            new ConcurrentDictionary<DocumentId, (string? category, VersionStamp projectVersion)>();
 
         protected AbstractDesignerAttributeIncrementalAnalyzer() { }
 

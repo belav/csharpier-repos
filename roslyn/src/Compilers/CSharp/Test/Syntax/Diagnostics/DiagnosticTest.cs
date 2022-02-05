@@ -513,10 +513,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_VolatileByRef, "i").WithArguments("C.i")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(
                 MessageProvider.Instance.GetIdForErrorCode(420),
                 ReportDiagnostic.Suppress
@@ -578,10 +576,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "j").WithArguments("j")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(
                 MessageProvider.Instance.GetIdForErrorCode(168),
                 ReportDiagnostic.Suppress
@@ -657,10 +653,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "z").WithArguments("z")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -722,10 +716,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y").WithArguments("y")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -792,10 +784,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "z").WithArguments("z")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -862,10 +852,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "z").WithArguments("z")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -934,10 +922,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y").WithArguments("y")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -1006,10 +992,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y").WithArguments("y")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -1085,10 +1069,8 @@ public class C
                         .WithLocation(10, 13)
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -1189,10 +1171,8 @@ public class C
                         .WithLocation(12, 13)
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -1297,10 +1277,8 @@ public class C
                         .WithLocation(10, 13)
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -1388,10 +1366,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "z").WithArguments("z")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -1455,10 +1431,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "z").WithArguments("z")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -1523,10 +1497,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "z").WithArguments("z")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -1585,10 +1557,8 @@ public class C
             CSharpCompilationOptions commonoption = TestOptions.ReleaseExe;
             CreateCompilation(text, options: commonoption).VerifyDiagnostics();
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option).VerifyDiagnostics();
@@ -1711,10 +1681,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "z").WithArguments("z")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -1797,10 +1765,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "z").WithArguments("z")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -1859,10 +1825,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "z").WithArguments("z")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -1929,10 +1893,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "z").WithArguments("z")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -1988,10 +1950,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVar, "z").WithArguments("z")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -2033,10 +1993,8 @@ public class C
             CSharpCompilationOptions commonoption = TestOptions.ReleaseExe;
             CreateCompilation(text, options: commonoption).VerifyDiagnostics();
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option).VerifyDiagnostics();
@@ -2072,10 +2030,8 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y").WithArguments("y")
                 );
 
-            IDictionary<string, ReportDiagnostic> warnings = new Dictionary<
-                string,
-                ReportDiagnostic
-            >();
+            IDictionary<string, ReportDiagnostic> warnings =
+                new Dictionary<string, ReportDiagnostic>();
             warnings.Add(MessageProvider.Instance.GetIdForErrorCode(168), ReportDiagnostic.Error);
             CSharpCompilationOptions option = commonoption.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
