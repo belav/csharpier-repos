@@ -1,3 +1,21 @@
+# crazy recursion
+/runtime/src/libraries/System.Security.Cryptography.Pkcs/tests/SignedCms/SignedDocuments.cs
+/runtime/src/libraries/System.Text.Encoding.CodePages/src/System/Text/EncodingTable.Data.cs
+/runtime/src/tests/JIT/jit64/opt/cse/HugeArray.cs
+/runtime/src/tests/JIT/jit64/opt/cse/HugeArray1.cs
+/runtime/src/tests/JIT/jit64/opt/cse/hugeexpr1.cs
+/runtime/src/tests/JIT/jit64/opt/cse/HugeField1.cs
+/runtime/src/tests/JIT/jit64/opt/cse/HugeField2.cs
+/runtime/src/tests/JIT/jit64/opt/cse/hugeSimpleExpr1.cs
+/runtime/src/tests/JIT/jit64/opt/rngchk/RngchkStress2.cs
+/runtime/src/tests/JIT/Methodical/largeframes/skip2/skippage2.cs
+/runtime/src/tests/JIT/Methodical/largeframes/skip6/skippage6.cs
+/runtime/src/tests/JIT/Performance/CodeQuality/Bytemark/neural-dat.cs
+/runtime/src/tests/JIT/Regression/JitBlue/GitHub_10215/GitHub_10215.cs
+/runtime/src/tests/Loader/classloader/generics/Instantiation/Nesting/NestedGenericClasses.cs
+/runtime/src/tests/Loader/classloader/generics/Instantiation/Nesting/NestedGenericStructs.cs
+/runtime/src/tests/Loader/classloader/generics/Instantiation/Nesting/NestedGenericTypesMix.cs
+
 # missing ) inside in #if
 /aspnetcore/src/Http/Routing/src/Matching/ILEmitTrieFactory.cs
 
